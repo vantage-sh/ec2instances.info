@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<title>Amazon EC2 Instance Comparison</title>
+  	<link rel="stylesheet" href="default.css" type="text/css">
+  </head>
+
+  <body>
+    <h1>Amazon EC2 Instance Comparison</h1>
+
+    <p>
+      This is just a sortable table displaying all the Amazon EC2 <a href="http://aws.amazon.com/ec2/instance-types/" target="_blank">instance type</a> and <a href="http://aws.amazon.com/ec2/pricing/" target="_blank">pricing</a> information so its easier to compare them. It's <a href="http://powdahound.com/2011/03/hosting-a-static-site-on-amazon-s3-ec2instances-info" target="_blank">hosted on S3</a>.
+    </p>
+
+    <p style="text-align: right">
+      Region:
+      <select id="region">
+        <option value="us-east">US East</option>
+      </select>
+      Costs:
+      <select id="cost">
+        <option value="hour">Hourly</option>
+        <option value="day">Daily</option>
+        <option value="week">Weekly</option>
+        <option value="month">Monthly</option>
+        <option value="year">Yearly</option>
+      </select>
+    </p>
+
+    <table cellspacing="0" class="tablesorter">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Memory</th>
+          <th><abbr title="One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.">Compute Units</abbr></th>
+          <th>Storage</th>
+          <th>Platform</th>
+          <th>I/O Perf</th>
+          <th>API Name</th>
+          <th>Linux cost</th>
+          <th>Windows cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="even">
+          <td>Standard Small</td>
+          <td>1.7 GB</td>
+          <td>1 (1 core x 1 unit)</td>
+          <td>160 GB</td>
+          <td>32-bit</td>
+          <td>Moderate</td>
+          <td>m1.small</td>
+          <td class="cost" hour_cost="0.085">$0.085 per hour</td>
+          <td class="cost" hour_cost="0.12">$0.12 per hour</td>
+        </tr>
+        <tr>
+          <td>Standard Large</td>
+          <td>7.5 GB</td>
+          <td>4 (2 cores x 2 units)</td>
+          <td>850 GB</td>
+          <td>64-bit</td>
+          <td>High</td>
+          <td>m1.large</td>
+          <td class="cost" hour_cost="0.34">$0.34 per hour</td>
+          <td class="cost" hour_cost="0.48">$0.48 per hour</td>
+        </tr>
+        <tr class="even">
+          <td>Standard Extra Large</td>
+          <td>15 GB</td>
+          <td>8 (4 cores x 2 units)</td>
+          <td>1690 GB</td>
+          <td>64-bit</td>
+          <td>High</td>
+          <td>m1.xlarge</td>
+          <td class="cost" hour_cost="0.68">$0.68 per hour</td>
+          <td class="cost" hour_cost="0.96">$0.96 per hour</td>
+        </tr>
+        <tr>
+          <td>Micro</td>
+          <td>0.6 GB</td>
+          <td>2 (only for short bursts)</td>
+          <td>EBS only</td>
+          <td>32/64-bit</td>
+          <td>Low</td>
+          <td>t1.micro</td>
+          <td class="cost" hour_cost="0.02">$0.02 per hour</td>
+          <td class="cost" hour_cost="0.03">$0.03 per hour</td>
+        </tr>
+        <tr>
+          <td>High-Memory Extra Large</td>
+          <td>17.1 GB</td>
+          <td>6.5 (2 cores x 3.25 units)</td>
+          <td>420 GB</td>
+          <td>64-bit</td>
+          <td>Moderate</td>
+          <td>m2.xlarge</td>
+          <td class="cost" hour_cost="0.50">$0.50 per hour</td>
+          <td class="cost" hour_cost="0.62">$0.62 per hour</td>
+        </tr>
+        <tr>
+          <td>High-Memory Double Extra Large</td>
+          <td>34.2 GB</td>
+          <td>13 (4 cores x 3.25 units)</td>
+          <td>850 GB</td>
+          <td>64-bit</td>
+          <td>High</td>
+          <td>m2.2xlarge</td>
+          <td class="cost" hour_cost="1.00">$1.00 per hour</td>
+          <td class="cost" hour_cost="1.24">$1.24 per hour</td>
+        </tr>
+        <tr>
+          <td>High-Memory Quadruple Extra Large</td>
+          <td>68.4 GB</td>
+          <td>26 (8 cores x 3.25 units)</td>
+          <td>1690 GB</td>
+          <td>64-bit</td>
+          <td>High</td>
+          <td>m2.4xlarge</td>
+          <td class="cost" hour_cost="2.00">$2.00 per hour</td>
+          <td class="cost" hour_cost="2.48">$2.48 per hour</td>
+        </tr>
+        <tr>
+          <td>High-CPU Medium</td>
+          <td>1.7 GB</td>
+          <td>5 (2 cores x 2.5 units)</td>
+          <td>350 GB</td>
+          <td>32-bit</td>
+          <td>Moderate</td>
+          <td>c1.medium</td>
+          <td class="cost" hour_cost="0.17">$0.17 per hour</td>
+          <td class="cost" hour_cost="0.29">$0.29 per hour</td>
+        </tr>
+        <tr>
+          <td>High-CPU Extra Large</td>
+          <td>7 GB</td>
+          <td>20 (8 cores x 2.5 units)</td>
+          <td>1690 GB</td>
+          <td>64-bit</td>
+          <td>High</td>
+          <td>c1.xlarge</td>
+          <td class="cost" hour_cost="0.68">$0.68 per hour</td>
+          <td class="cost" hour_cost="1.16">$1.16 per hour</td>
+        </tr>
+        <tr>
+          <td>Cluster Compute Quadruple Extra Large</td>
+          <td>23 GB</td>
+          <td>33.5 (2 x Intel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</td>
+          <td>1690 GB</td>
+          <td>64-bit</td>
+          <td><abbr title="10 Gigabit Ethernet">Very High</abbr></td>
+          <td>cc1.4xlarge</td>
+          <td class="cost" hour_cost="1.60">$1.60 per hour</td>
+          <td>N/A</td>
+        </tr>
+        <tr>
+          <td>Cluster GPU Quadruple Extra Large</td>
+          <td>22 GB</td>
+          <td>33.5 (2 x Intel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</td>
+          <td>1690 GB</td>
+          <td>64-bit</td>
+          <td><abbr title="10 Gigabit Ethernet">Very High</abbr></td>
+          <td>cg1.4xlarge</td>
+          <td class="cost" hour_cost="2.10">$2.10 per hour</td>
+          <td>N/A</td>
+        </tr>
+      </tbody>
+    </table>
+
+  <div id="footer">
+    Made by <a href="http://twitter.com/powdahound">@powdahound</a>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="jquery.tablesorter.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="default.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-4372467-3']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+  </body>
+</html>
