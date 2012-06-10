@@ -44,24 +44,45 @@ $(function() {
   });
 });
 
-$('#cost').bind('change', function(e) {
-  var selected = $('#cost option:selected').val();
-  var hour_multipliers = {
-    'hour': 1,
-    'day': 24,
-    'week': (7*24),
-    'month': (24*30),
-    'year': (365*24)
-  };
-  var multiplier = hour_multipliers[selected];
-  var per_hour;
-  var per_time;
+// set up on-load defaults and lookup tables
+window.ec2pricing = {
+  cost_unit: 'hour',
+  region: 'us_east',
+  hour_multipliers: {
+    hour: 1,
+    day: 24,
+    week: (7*24),
+    month: (24*30),
+    year: (365*24)
+  }
+}
+
+function updatePrices() {
+  var multiplier = ec2pricing.hour_multipliers[ec2pricing.cost_unit];
+  var per_hour, per_time;
   $.each($('td.cost'), function(i, elem) {
     elem = $(elem);
-    per_time = elem.attr('hour_cost');
-    if (selected != 'hour') {
-      per_time = (per_time * multiplier).toFixed(2);
+    per_time = elem.attr(ec2pricing.region);
+    if(per_time) {
+      if (ec2pricing.cost_unit != 'hour') {
+        per_time = (per_time * multiplier).toFixed(2);
+      }
+      elem.text('$' + per_time + ' per ' + ec2pricing.cost_unit);
+      elem.parent().removeClass('unavailable');
+    } else {
+      elem.text('N/A');
+      elem.parent().addClass('unavailable');
     }
-    elem.text('$' + per_time + ' per ' + selected);
+    
   });
+};
+
+$('#cost').bind('change', function(e) {
+  ec2pricing.cost_unit = $('#cost option:selected').val();
+  updatePrices();
+});
+
+$('#region').bind('change', function(e) {
+  ec2pricing.region = $('#region option:selected').val();
+  updatePrices();
 });

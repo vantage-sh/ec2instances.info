@@ -18,7 +18,13 @@
     <p style="text-align: right">
       Region:
       <select id="region">
-        <option value="us-east">US East</option>
+        <option value="us-east">US East (Virginia)</option>
+        <option value="us-west-1">US West (Northern California)</option>
+        <option value="us-west-2">US West (Oregon)</option>
+        <option value="eu-west">EU West (Ireland)</option>
+        <option value="ap-southeast">Asia-Pacific (Singapore)</option>
+        <option value="ap-northeast">Asia-Pacific (Tokyo)</option>
+        <option value="sa-east">South America (Sao Paulo)</option>
       </select>
       Costs:
       <select id="cost">
@@ -53,8 +59,8 @@
           <td>32/64-bit</td>
           <td>Moderate</td>
           <td>m1.small</td>
-          <td class="cost" hour_cost="0.08">$0.08 per hour</td>
-          <td class="cost" hour_cost="0.115">$0.115 per hour</td>
+          <td class="cost" us-east="0.08" us-west-1="0.09"  us-west-2="0.08" eu-west="0.09" ap-southeast="0.09"  ap-northeast="0.092" sa-east="0.115">$0.08 per hour</td>
+          <td class="cost" us-east="0.115" us-west-1="0.125"  us-west-2="0.115" eu-west="0.115" ap-southeast="0.115"  ap-northeast="0.115" sa-east="0.150">$0.115 per hour</td>
         </tr>
         <tr>
           <td>Standard Medium</td>
@@ -64,8 +70,8 @@
           <td>32/64-bit</td>
           <td>Moderate</td>
           <td>m1.medium</td>
-          <td class="cost" hour_cost="0.16">$0.16 per hour</td>
-          <td class="cost" hour_cost="0.23">$0.23 per hour</td>
+          <td class="cost" us-east="0.16" us-west-1="0.18"  us-west-2="0.16" eu-west="0.18" ap-southeast="0.18"  ap-northeast="0.184" sa-east="0.23">$0.16 per hour</td>
+          <td class="cost" us-east="0.23" us-west-1="0.25"  us-west-2="0.23" eu-west="0.23" ap-southeast="0.23"  ap-northeast="0.23" sa-east="0.3">$0.23 per hour</td>
           <td></td>
         </tr>
         <tr>
@@ -76,8 +82,8 @@
           <td>64-bit</td>
           <td>High</td>
           <td>m1.large</td>
-          <td class="cost" hour_cost="0.32">$0.32 per hour</td>
-          <td class="cost" hour_cost="0.46">$0.46 per hour</td>
+          <td class="cost" us-east="0.32" us-west-1="0.36"  us-west-2="0.32" eu-west="0.36" ap-southeast="0.36"  ap-northeast="0.368" sa-east="0.46">$0.32 per hour</td>
+          <td class="cost" us-east="0.46" us-west-1="0.5"  us-west-2="0.46" eu-west="0.46" ap-southeast="0.46"  ap-northeast="0.46" sa-east="0.6">$0.46 per hour</td>
         </tr>
         <tr class="even">
           <td>Standard Extra Large</td>
@@ -87,8 +93,8 @@
           <td>64-bit</td>
           <td>High</td>
           <td>m1.xlarge</td>
-          <td class="cost" hour_cost="0.64">$0.64 per hour</td>
-          <td class="cost" hour_cost="0.92">$0.92 per hour</td>
+          <td class="cost" us-east="0.64" us-west-1="0.72"  us-west-2="0.64" eu-west="0.72" ap-southeast="0.72"  ap-northeast="0.736" sa-east="0.92">$0.64 per hour</td>
+          <td class="cost" us-east="0.92" us-west-1="1"  us-west-2="0.92" eu-west="0.92" ap-southeast="0.92"  ap-northeast="0.92" sa-east="1.2">$0.92 per hour</td>
         </tr>
         <tr>
           <td>Micro</td>
@@ -98,8 +104,8 @@
           <td>32/64-bit</td>
           <td>Low</td>
           <td>t1.micro</td>
-          <td class="cost" hour_cost="0.02">$0.02 per hour</td>
-          <td class="cost" hour_cost="0.03">$0.03 per hour</td>
+          <td class="cost" us-east="0.02" us-west-1="0.025"  us-west-2="0.02" eu-west="0.025" ap-southeast="0.025"  ap-northeast="0.027" sa-east="0.027">$0.02 per hour</td>
+          <td class="cost" us-east="0.03" us-west-1="0.035"  us-west-2="0.03" eu-west="0.035" ap-southeast="0.035"  ap-northeast="0.035" sa-east="0.037">$0.03 per hour</td>
         </tr>
         <tr>
           <td>High-Memory Extra Large</td>
@@ -109,8 +115,8 @@
           <td>64-bit</td>
           <td>Moderate</td>
           <td>m2.xlarge</td>
-          <td class="cost" hour_cost="0.45">$0.45 per hour</td>
-          <td class="cost" hour_cost="0.57">$0.57 per hour</td>
+          <td class="cost" us-east="0.45" us-west-1="0.506"  us-west-2="0.45" eu-west="0.506" ap-southeast="0.506"  ap-northeast="0.518" sa-east="0.68">$0.45 per hour</td>
+          <td class="cost" us-east="0.57" us-west-1="0.626"  us-west-2="0.57" eu-west="0.570" ap-southeast="0.570"  ap-northeast="0.570" sa-east="0.8">$0.57 per hour</td>
         </tr>
         <tr>
           <td>High-Memory Double Extra Large</td>
@@ -120,8 +126,8 @@
           <td>64-bit</td>
           <td>High</td>
           <td>m2.2xlarge</td>
-          <td class="cost" hour_cost="0.90">$0.90 per hour</td>
-          <td class="cost" hour_cost="1.14">$1.14 per hour</td>
+          <td class="cost" us-east="0.90" us-west-1="1.012"  us-west-2="0.90" eu-west="1.012" ap-southeast="1.012"  ap-northeast="1.036" sa-east="1.36">$0.90 per hour</td>
+          <td class="cost" us-east="1.14" us-west-1="1.252"  us-west-2="1.14" eu-west="1.140" ap-southeast="1.140"  ap-northeast="1.140" sa-east="1.6">$1.14 per hour</td>
         </tr>
         <tr>
           <td>High-Memory Quadruple Extra Large</td>
@@ -131,8 +137,8 @@
           <td>64-bit</td>
           <td>High</td>
           <td>m2.4xlarge</td>
-          <td class="cost" hour_cost="1.80">$1.80 per hour</td>
-          <td class="cost" hour_cost="2.28">$2.28 per hour</td>
+          <td class="cost" us-east="1.80" us-west-1="2.024"  us-west-2="1.80" eu-west="2.024" ap-southeast="2.024"  ap-northeast="2.072" sa-east="2.72">$1.80 per hour</td>
+          <td class="cost" us-east="2.28" us-west-1="2.504"  us-west-2="2.28" eu-west="2.280" ap-southeast="2.280"  ap-northeast="2.280" sa-east="3.2">$2.28 per hour</td>
         </tr>
         <tr>
           <td>High-CPU Medium</td>
@@ -142,8 +148,8 @@
           <td>32/64-bit</td>
           <td>Moderate</td>
           <td>c1.medium</td>
-          <td class="cost" hour_cost="0.165">$0.165 per hour</td>
-          <td class="cost" hour_cost="0.285">$0.285 per hour</td>
+          <td class="cost" us-east="0.165" us-west-1="0.186"  us-west-2="0.165" eu-west="0.186" ap-southeast="0.186"  ap-northeast="0.190" sa-east="0.23">$0.165 per hour</td>
+          <td class="cost" us-east="0.285" us-west-1="0.306"  us-west-2="0.285" eu-west="0.285" ap-southeast="0.285"  ap-northeast="0.285" sa-east="0.35">$0.285 per hour</td>
         </tr>
         <tr>
           <td>High-CPU Extra Large</td>
@@ -153,8 +159,8 @@
           <td>64-bit</td>
           <td>High</td>
           <td>c1.xlarge</td>
-          <td class="cost" hour_cost="0.66">$0.66 per hour</td>
-          <td class="cost" hour_cost="1.14">$1.14 per hour</td>
+          <td class="cost" us-east="0.66" us-west-1="0.744"  us-west-2="0.66" eu-west="0.744" ap-southeast="0.744"  ap-northeast="0.760" sa-east="0.92">$0.66 per hour</td>
+          <td class="cost" us-east="1.14" us-west-1="1.224"  us-west-2="1.14" eu-west="1.140" ap-southeast="1.140"  ap-northeast="1.140" sa-east="1.4">$1.14 per hour</td>
         </tr>
         <tr>
           <td>Cluster Compute Quadruple Extra Large</td>
@@ -164,8 +170,8 @@
           <td>64-bit</td>
           <td><abbr title="10 Gigabit Ethernet">Very High</abbr></td>
           <td>cc1.4xlarge</td>
-          <td class="cost" hour_cost="1.30">$1.30 per hour</td>
-          <td class="cost" hour_cost="1.61">$1.61 per hour</td>
+          <td class="cost" us-east="1.30">$1.30 per hour</td>
+          <td class="cost" us-east="1.61">$1.61 per hour</td>
         </tr>
         <tr>
           <td>Cluster Compute Eight Extra Large</td>
@@ -175,8 +181,8 @@
           <td>64-bit</td>
           <td><abbr title="10 Gigabit Ethernet">Very High</abbr></td>
           <td>cc2.8xlarge</td>
-          <td class="cost" hour_cost="2.40">$2.40 per hour</td>
-          <td class="cost" hour_cost="2.97">$2.97 per hour</td>
+          <td class="cost" us-east="2.40">$2.40 per hour</td>
+          <td class="cost" us-east="2.97">$2.97 per hour</td>
         </tr>
         <tr>
           <td>Cluster GPU Quadruple Extra Large</td>
@@ -186,8 +192,8 @@
           <td>64-bit</td>
           <td><abbr title="10 Gigabit Ethernet">Very High</abbr></td>
           <td>cg1.4xlarge</td>
-          <td class="cost" hour_cost="2.10">$2.10 per hour</td>
-          <td class="cost" hour_cost="2.60">$2.60 per hour</td>
+          <td class="cost" us-east="2.10">$2.10 per hour</td>
+          <td class="cost" us-east="2.60">$2.60 per hour</td>
         </tr>
       </tbody>
     </table>
