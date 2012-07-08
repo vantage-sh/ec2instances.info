@@ -3,7 +3,7 @@
 
 <html lang="en">
   <head>
-  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   	<title>Amazon EC2 Instance Comparison</title>
   	<link rel="stylesheet" href="default.css" type="text/css">
   </head>
@@ -39,6 +39,7 @@
           <th>Storage</th>
           <th>Platform</th>
           <th>I/O Perf</th>
+          <th><abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr></th>
           <th>API Name</th>
           <th>Linux cost</th>
           <th>Windows cost</th>
@@ -52,6 +53,7 @@
           <td style="text-align: right;">160 GB</td>
           <td style="text-align: right;">32/64-bit</td>
           <td>Moderate</td>
+          <td>8</td>
           <td>m1.small</td>
           <td class="cost" hour_cost="0.08">$0.08 per hour</td>
           <td class="cost" hour_cost="0.115">$0.115 per hour</td>
@@ -63,6 +65,7 @@
           <td style="text-align: right;">410 GB</td>
           <td style="text-align: right;">32/64-bit</td>
           <td>Moderate</td>
+          <td>12</td>
           <td>m1.medium</td>
           <td class="cost" hour_cost="0.16">$0.16 per hour</td>
           <td class="cost" hour_cost="0.23">$0.23 per hour</td>
@@ -75,6 +78,7 @@
           <td style="text-align: right;">850 GB (2 x 420 GB)</td>
           <td style="text-align: right;">64-bit</td>
           <td>High</td>
+          <td>30</td>
           <td>m1.large</td>
           <td class="cost" hour_cost="0.32">$0.32 per hour</td>
           <td class="cost" hour_cost="0.46">$0.46 per hour</td>
@@ -86,6 +90,7 @@
           <td style="text-align: right;">1690 GB (4 x 420 GB)</td>
           <td style="text-align: right;">64-bit</td>
           <td>High</td>
+          <td>60</td>
           <td>m1.xlarge</td>
           <td class="cost" hour_cost="0.64">$0.64 per hour</td>
           <td class="cost" hour_cost="0.92">$0.92 per hour</td>
@@ -97,6 +102,7 @@
           <td style="text-align: right;">0 GB (EBS only)</td>
           <td style="text-align: right;">32/64-bit</td>
           <td>Low</td>
+          <td>1</td>
           <td>t1.micro</td>
           <td class="cost" hour_cost="0.02">$0.02 per hour</td>
           <td class="cost" hour_cost="0.03">$0.03 per hour</td>
@@ -108,6 +114,7 @@
           <td style="text-align: right;">420 GB</td>
           <td style="text-align: right;">64-bit</td>
           <td>Moderate</td>
+          <td>60</td>
           <td>m2.xlarge</td>
           <td class="cost" hour_cost="0.45">$0.45 per hour</td>
           <td class="cost" hour_cost="0.57">$0.57 per hour</td>
@@ -119,6 +126,7 @@
           <td style="text-align: right;">850 GB</td>
           <td style="text-align: right;">64-bit</td>
           <td>High</td>
+          <td>120</td>
           <td>m2.2xlarge</td>
           <td class="cost" hour_cost="0.90">$0.90 per hour</td>
           <td class="cost" hour_cost="1.14">$1.14 per hour</td>
@@ -130,6 +138,7 @@
           <td style="text-align: right;">1690 GB (2 x 840 GB)</td>
           <td style="text-align: right;">64-bit</td>
           <td>High</td>
+          <td>240</td>
           <td>m2.4xlarge</td>
           <td class="cost" hour_cost="1.80">$1.80 per hour</td>
           <td class="cost" hour_cost="2.28">$2.28 per hour</td>
@@ -141,6 +150,7 @@
           <td style="text-align: right;">350 GB</td>
           <td style="text-align: right;">32/64-bit</td>
           <td>Moderate</td>
+          <td>12</td>
           <td>c1.medium</td>
           <td class="cost" hour_cost="0.165">$0.165 per hour</td>
           <td class="cost" hour_cost="0.285">$0.285 per hour</td>
@@ -152,6 +162,7 @@
           <td style="text-align: right;">1690 GB (4 x 420 GB)</td>
           <td style="text-align: right;">64-bit</td>
           <td>High</td>
+          <td>60</td>
           <td>c1.xlarge</td>
           <td class="cost" hour_cost="0.66">$0.66 per hour</td>
           <td class="cost" hour_cost="1.14">$1.14 per hour</td>
@@ -163,6 +174,7 @@
           <td style="text-align: right;">1690 GB (2 x 840 GB)</td>
           <td style="text-align: right;">64-bit</td>
           <td><abbr title="10 Gigabit Ethernet">Very High</abbr></td>
+          <td>1</td>
           <td>cc1.4xlarge</td>
           <td class="cost" hour_cost="1.30">$1.30 per hour</td>
           <td class="cost" hour_cost="1.61">$1.61 per hour</td>
@@ -174,6 +186,7 @@
           <td style="text-align: right;">3370 GB (4 x 840 GB)</td>
           <td style="text-align: right;">64-bit</td>
           <td><abbr title="10 Gigabit Ethernet">Very High</abbr></td>
+          <td>240</td>
           <td>cc2.8xlarge</td>
           <td class="cost" hour_cost="2.40">$2.40 per hour</td>
           <td class="cost" hour_cost="2.97">$2.97 per hour</td>
@@ -185,6 +198,7 @@
           <td style="text-align: right;">1690 GB (2 x 840 GB)</td>
           <td style="text-align: right;">64-bit</td>
           <td><abbr title="10 Gigabit Ethernet">Very High</abbr></td>
+          <td>1</td>
           <td>cg1.4xlarge</td>
           <td class="cost" hour_cost="2.10">$2.10 per hour</td>
           <td class="cost" hour_cost="2.60">$2.60 per hour</td>
