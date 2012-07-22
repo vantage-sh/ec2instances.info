@@ -18,7 +18,13 @@
     <p style="text-align: right">
       Region:
       <select id="region">
-        <option value="us-east">US East</option>
+        <option value="us-east">US East (Virginia)</option>
+        <option value="us-west-1">US West (Northern California)</option>
+        <option value="us-west-2">US West (Oregon)</option>
+        <option value="eu-west">EU West (Ireland)</option>
+        <option value="ap-southeast">Asia-Pacific (Singapore)</option>
+        <option value="ap-northeast">Asia-Pacific (Tokyo)</option>
+        <option value="sa-east">South America (Sao Paulo)</option>
       </select>
       Costs:
       <select id="cost">
@@ -46,7 +52,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="even">
+        <tr api-name="m1.small" class="even">
           <td>Standard Small</td>
           <td style="text-align: right;">1.70 GB</td>
           <td>1 (1 core x 1 unit)</td>
@@ -55,10 +61,10 @@
           <td>Moderate</td>
           <td>8</td>
           <td>m1.small</td>
-          <td class="cost" hour_cost="0.08">$0.08 per hour</td>
-          <td class="cost" hour_cost="0.115">$0.115 per hour</td>
+          <td class="cost" os-type="linux">$0.08 per hour</td>
+          <td class="cost" os-type="windows">$0.115 per hour</td>
         </tr>
-        <tr>
+        <tr api-name="m1.medium">
           <td>Standard Medium</td>
           <td style="text-align: right;">3.75 GB</td>
           <td>2 (1 core x 2 units)</td>
@@ -67,11 +73,11 @@
           <td>Moderate</td>
           <td>12</td>
           <td>m1.medium</td>
-          <td class="cost" hour_cost="0.16">$0.16 per hour</td>
-          <td class="cost" hour_cost="0.23">$0.23 per hour</td>
+          <td class="cost" os-type="linux">$0.16 per hour</td>
+          <td class="cost" os-type="windows">$0.23 per hour</td>
           <td></td>
         </tr>
-        <tr>
+        <tr api-name="m1.large">
           <td>Standard Large</td>
           <td style="text-align: right;">7.50 GB</td>
           <td>4 (2 cores x 2 units)</td>
@@ -80,10 +86,10 @@
           <td>High</td>
           <td>30</td>
           <td>m1.large</td>
-          <td class="cost" hour_cost="0.32">$0.32 per hour</td>
-          <td class="cost" hour_cost="0.46">$0.46 per hour</td>
+          <td class="cost" os-type="linux">$0.32 per hour</td>
+          <td class="cost" os-type="windows">$0.46 per hour</td>
         </tr>
-        <tr class="even">
+        <tr api-name="m1.xlarge" class="even">
           <td>Standard Extra Large</td>
           <td style="text-align: right;">15.00 GB</td>
           <td>8 (4 cores x 2 units)</td>
@@ -92,10 +98,10 @@
           <td>High</td>
           <td>60</td>
           <td>m1.xlarge</td>
-          <td class="cost" hour_cost="0.64">$0.64 per hour</td>
-          <td class="cost" hour_cost="0.92">$0.92 per hour</td>
+          <td class="cost" os-type="linux">$0.64 per hour</td>
+          <td class="cost" os-type="windows">$0.92 per hour</td>
         </tr>
-        <tr>
+        <tr api-name="t1.micro">
           <td>Micro</td>
           <td style="text-align: right;">0.60 GB</td>
           <td>2 (only for short bursts)</td>
@@ -104,10 +110,10 @@
           <td>Low</td>
           <td>1</td>
           <td>t1.micro</td>
-          <td class="cost" hour_cost="0.02">$0.02 per hour</td>
-          <td class="cost" hour_cost="0.03">$0.03 per hour</td>
+          <td class="cost" os-type="linux">$0.02 per hour</td>
+          <td class="cost" os-type="windows">$0.03 per hour</td>
         </tr>
-        <tr>
+        <tr api-name="m2.xlarge">
           <td>High-Memory Extra Large</td>
           <td style="text-align: right;">17.10 GB</td>
           <td>6.5 (2 cores x 3.25 units)</td>
@@ -116,10 +122,10 @@
           <td>Moderate</td>
           <td>60</td>
           <td>m2.xlarge</td>
-          <td class="cost" hour_cost="0.45">$0.45 per hour</td>
-          <td class="cost" hour_cost="0.57">$0.57 per hour</td>
+          <td class="cost" os-type="linux">$0.45 per hour</td>
+          <td class="cost" os-type="windows">$0.57 per hour</td>
         </tr>
-        <tr>
+        <tr api-name="m2.2xlarge">
           <td>High-Memory Double Extra Large</td>
           <td style="text-align: right;">34.20 GB</td>
           <td>13 (4 cores x 3.25 units)</td>
@@ -128,10 +134,10 @@
           <td>High</td>
           <td>120</td>
           <td>m2.2xlarge</td>
-          <td class="cost" hour_cost="0.90">$0.90 per hour</td>
-          <td class="cost" hour_cost="1.14">$1.14 per hour</td>
+          <td class="cost" os-type="linux">$0.90 per hour</td>
+          <td class="cost" os-type="windows">$1.14 per hour</td>
         </tr>
-        <tr>
+        <tr api-name="m2.4xlarge">
           <td>High-Memory Quadruple Extra Large</td>
           <td style="text-align: right;">68.40 GB</td>
           <td>26 (8 cores x 3.25 units)</td>
@@ -140,10 +146,10 @@
           <td>High</td>
           <td>240</td>
           <td>m2.4xlarge</td>
-          <td class="cost" hour_cost="1.80">$1.80 per hour</td>
-          <td class="cost" hour_cost="2.28">$2.28 per hour</td>
+          <td class="cost" os-type="linux">$1.80 per hour</td>
+          <td class="cost" os-type="windows">$2.28 per hour</td>
         </tr>
-        <tr>
+        <tr api-name="c1.medium">
           <td>High-CPU Medium</td>
           <td style="text-align: right;">1.70 GB</td>
           <td>5 (2 cores x 2.5 units)</td>
@@ -152,10 +158,10 @@
           <td>Moderate</td>
           <td>12</td>
           <td>c1.medium</td>
-          <td class="cost" hour_cost="0.165">$0.165 per hour</td>
-          <td class="cost" hour_cost="0.285">$0.285 per hour</td>
+          <td class="cost" os-type="linux">$0.165 per hour</td>
+          <td class="cost" os-type="windows">$0.285 per hour</td>
         </tr>
-        <tr>
+        <tr api-name="c1.xlarge">
           <td>High-CPU Extra Large</td>
           <td style="text-align: right;">7.00 GB</td>
           <td>20 (8 cores x 2.5 units)</td>
@@ -164,10 +170,10 @@
           <td>High</td>
           <td>60</td>
           <td>c1.xlarge</td>
-          <td class="cost" hour_cost="0.66">$0.66 per hour</td>
-          <td class="cost" hour_cost="1.14">$1.14 per hour</td>
+          <td class="cost" os-type="linux">$0.66 per hour</td>
+          <td class="cost" os-type="windows">$1.14 per hour</td>
         </tr>
-        <tr>
+        <tr api-name="cc1.4xlarge">
           <td>Cluster Compute Quadruple Extra Large</td>
           <td style="text-align: right;">23.00 GB</td>
           <td>33.5 (2 x Intel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</td>
@@ -176,10 +182,10 @@
           <td><abbr title="10 Gigabit Ethernet">Very High</abbr></td>
           <td>1</td>
           <td>cc1.4xlarge</td>
-          <td class="cost" hour_cost="1.30">$1.30 per hour</td>
-          <td class="cost" hour_cost="1.61">$1.61 per hour</td>
+          <td class="cost" os-type="linux">$1.30 per hour</td>
+          <td class="cost" os-type="windows">$1.61 per hour</td>
         </tr>
-        <tr>
+        <tr api-name="cc2.8xlarge">
           <td>Cluster Compute Eight Extra Large</td>
           <td style="text-align: right;">60.50 GB</td>
           <td>88 (2 x Intel <abbr title="Eight-core Sandy Bridge architecture">Xeon E5-2670</abbr>)</td>
@@ -188,10 +194,10 @@
           <td><abbr title="10 Gigabit Ethernet">Very High</abbr></td>
           <td>240</td>
           <td>cc2.8xlarge</td>
-          <td class="cost" hour_cost="2.40">$2.40 per hour</td>
-          <td class="cost" hour_cost="2.97">$2.97 per hour</td>
+          <td class="cost" os-type="linux">$2.40 per hour</td>
+          <td class="cost" os-type="windows">$2.97 per hour</td>
         </tr>
-        <tr>
+        <tr api-name="cg1.4xlarge">
           <td>Cluster GPU Quadruple Extra Large</td>
           <td style="text-align: right;">22.00 GB</td>
           <td>33.5 (2 x Intel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</td>
@@ -200,8 +206,8 @@
           <td><abbr title="10 Gigabit Ethernet">Very High</abbr></td>
           <td>1</td>
           <td>cg1.4xlarge</td>
-          <td class="cost" hour_cost="2.10">$2.10 per hour</td>
-          <td class="cost" hour_cost="2.60">$2.60 per hour</td>
+          <td class="cost" os-type="linux">$2.10 per hour</td>
+          <td class="cost" os-type="windows">$2.60 per hour</td>
         </tr>
         <tr>
           <td>High I/O Quadruple Extra Large</td>

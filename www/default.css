@@ -69,3 +69,7 @@ table.tablesorter thead tr .headerSortDown,
 table.tablesorter thead tr .headerSortUp {
 background-color: #8dbdd8;
 }
+
+table.tablesorter tbody tr.unavailable td {
+  color: #8A8A8A;
+}
