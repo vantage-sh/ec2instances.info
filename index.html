@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Amazon EC2 Instance Comparison</title>
-    <link rel="stylesheet" href="default.css" type="text/css">
+    <link rel="stylesheet" href="css/default.css" type="text/css">
   </head>
 
   <body>
@@ -15,7 +15,7 @@
       A sortable table displaying all the Amazon EC2 <a href="http://aws.amazon.com/ec2/instance-types/" target="_blank">instance type</a> and <a href="http://aws.amazon.com/ec2/pricing/" target="_blank">pricing</a> information so its easier to make comparisons. It's <a href="http://powdahound.com/2011/03/hosting-a-static-site-on-amazon-s3-ec2instances-info" target="_blank">hosted on S3</a> and awaiting your improvements <a href="https://github.com/powdahound/ec2instances.info" target="_blank">on GitHub</a>.
     </p>
 
-    <p style="text-align: right">
+    <p style="text-align: right" id="selectors">
       Region:
       <select id="region">
         <option value="us-east">US East</option>
@@ -46,7 +46,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="even">
+        <tr class="even" id="m1small">
           <td>Standard Small</td>
           <td style="text-align: right;">1.70 GB</td>
           <td>1 (1 core x 1 unit)</td>
@@ -58,7 +58,7 @@
           <td class="cost" hour_cost="0.08">$0.08 per hour</td>
           <td class="cost" hour_cost="0.115">$0.115 per hour</td>
         </tr>
-        <tr>
+        <tr id="m1medium">
           <td>Standard Medium</td>
           <td style="text-align: right;">3.75 GB</td>
           <td>2 (1 core x 2 units)</td>
@@ -71,7 +71,7 @@
           <td class="cost" hour_cost="0.23">$0.23 per hour</td>
           <td></td>
         </tr>
-        <tr>
+        <tr id="m1large">
           <td>Standard Large</td>
           <td style="text-align: right;">7.50 GB</td>
           <td>4 (2 cores x 2 units)</td>
@@ -83,7 +83,7 @@
           <td class="cost" hour_cost="0.32">$0.32 per hour</td>
           <td class="cost" hour_cost="0.46">$0.46 per hour</td>
         </tr>
-        <tr class="even">
+        <tr class="even" id="m1xlarge">
           <td>Standard Extra Large</td>
           <td style="text-align: right;">15.00 GB</td>
           <td>8 (4 cores x 2 units)</td>
@@ -95,7 +95,7 @@
           <td class="cost" hour_cost="0.64">$0.64 per hour</td>
           <td class="cost" hour_cost="0.92">$0.92 per hour</td>
         </tr>
-        <tr>
+        <tr id="t1micro">
           <td>Micro</td>
           <td style="text-align: right;">0.60 GB</td>
           <td>2 (only for short bursts)</td>
@@ -107,7 +107,7 @@
           <td class="cost" hour_cost="0.02">$0.02 per hour</td>
           <td class="cost" hour_cost="0.03">$0.03 per hour</td>
         </tr>
-        <tr>
+        <tr id="m2xlarge">
           <td>High-Memory Extra Large</td>
           <td style="text-align: right;">17.10 GB</td>
           <td>6.5 (2 cores x 3.25 units)</td>
@@ -119,7 +119,7 @@
           <td class="cost" hour_cost="0.45">$0.45 per hour</td>
           <td class="cost" hour_cost="0.57">$0.57 per hour</td>
         </tr>
-        <tr>
+        <tr id="m22xlarge" data-name="">
           <td>High-Memory Double Extra Large</td>
           <td style="text-align: right;">34.20 GB</td>
           <td>13 (4 cores x 3.25 units)</td>
@@ -131,7 +131,7 @@
           <td class="cost" hour_cost="0.90">$0.90 per hour</td>
           <td class="cost" hour_cost="1.14">$1.14 per hour</td>
         </tr>
-        <tr>
+        <tr id="m24xlarge" data-name="">
           <td>High-Memory Quadruple Extra Large</td>
           <td style="text-align: right;">68.40 GB</td>
           <td>26 (8 cores x 3.25 units)</td>
@@ -143,7 +143,7 @@
           <td class="cost" hour_cost="1.80">$1.80 per hour</td>
           <td class="cost" hour_cost="2.28">$2.28 per hour</td>
         </tr>
-        <tr>
+        <tr id="c1medium" data-name="">
           <td>High-CPU Medium</td>
           <td style="text-align: right;">1.70 GB</td>
           <td>5 (2 cores x 2.5 units)</td>
@@ -155,7 +155,7 @@
           <td class="cost" hour_cost="0.165">$0.165 per hour</td>
           <td class="cost" hour_cost="0.285">$0.285 per hour</td>
         </tr>
-        <tr>
+        <tr id="c1xlarge" data-name="">
           <td>High-CPU Extra Large</td>
           <td style="text-align: right;">7.00 GB</td>
           <td>20 (8 cores x 2.5 units)</td>
@@ -167,7 +167,7 @@
           <td class="cost" hour_cost="0.66">$0.66 per hour</td>
           <td class="cost" hour_cost="1.14">$1.14 per hour</td>
         </tr>
-        <tr>
+        <tr id="cc14xlarge" data-name="">
           <td>Cluster Compute Quadruple Extra Large</td>
           <td style="text-align: right;">23.00 GB</td>
           <td>33.5 (2 x Intel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</td>
@@ -179,7 +179,7 @@
           <td class="cost" hour_cost="1.30">$1.30 per hour</td>
           <td class="cost" hour_cost="1.61">$1.61 per hour</td>
         </tr>
-        <tr>
+        <tr id="cc28xlarge" data-name="">
           <td>Cluster Compute Eight Extra Large</td>
           <td style="text-align: right;">60.50 GB</td>
           <td>88 (2 x Intel <abbr title="Eight-core Sandy Bridge architecture">Xeon E5-2670</abbr>)</td>
@@ -191,7 +191,7 @@
           <td class="cost" hour_cost="2.40">$2.40 per hour</td>
           <td class="cost" hour_cost="2.97">$2.97 per hour</td>
         </tr>
-        <tr>
+        <tr id="cg14xlarge" data-name="">
           <td>Cluster GPU Quadruple Extra Large</td>
           <td style="text-align: right;">22.00 GB</td>
           <td>33.5 (2 x Intel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</td>
@@ -203,7 +203,7 @@
           <td class="cost" hour_cost="2.10">$2.10 per hour</td>
           <td class="cost" hour_cost="2.60">$2.60 per hour</td>
         </tr>
-        <tr>
+        <tr id="hi14xlarge" data-name="High I/O Quadruple Extra Large">
           <td>High I/O Quadruple Extra Large</td>
           <td style="text-align: right;">60.50 GB</td>
           <td>35 (2 x Intel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</td>
@@ -219,15 +219,16 @@
     </table>
 
   <div id="footer">
-    Made by <a href="http://twitter.com/powdahound" target="_blank">@powdahound</a> /
-    <a href="https://github.com/powdahound/ec2instances.info" target="_blank">Fork on GitHub</a>
+    Made by <a href="http://twitter.com/powdahound" target="_blank">@powdahound</a>, Forked by <a href="http://twitter.com/bruntonspall">bruntonspall</a> /
+    <a href="https://github.com/bruntonspall/ec2instances.info" target="_blank">Fork on GitHub</a>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="jquery.tablesorter.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="default.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/jquery.tablesorter.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/default.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/tim-lite.min.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript">
     var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-4372467-3']);
+    _gaq.push(['_setAccount', 'UA-34151400-1']);
     _gaq.push(['_trackPageview']);
     (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

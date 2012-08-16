@@ -65,3 +65,29 @@ $('#cost').bind('change', function(e) {
     elem.text('$' + per_time + ' per ' + selected);
   });
 });
+
+/* Add Facility to filter the list of instance types */
+$(function(){
+  var ids = $('.tablesorter tbody tr').map(
+    function(){
+      return {
+        id:$(this).attr('id')||"",
+        name:$(this).children('td').first().text()||""
+      };
+    }
+  );
+  var types = $("<select  multiple='multiple'></select>");
+  $.each(
+    ids,function(i,el){
+      types.append(tim('<option value="{{id}}">{{name}}</option>',el));
+    }
+  );
+  $('#selectors').append(types);
+  $('#selectors').change(function(){
+    $('.tablesorter tbody tr').hide();
+    types.find('option:selected').each(function(){
+      var selected = $(this).val();
+      $('#'+selected).show();
+    });
+  });
+});
