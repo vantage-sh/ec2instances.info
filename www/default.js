@@ -1,67 +1,85 @@
+function change_cost(duration) {
+  // update menu text
+  var first = duration.charAt(0).toUpperCase();
+  var text = first + duration.substr(1);
+  $("#cost-dropdown .dropdown-toggle .text").text("Cost: "+text);
+
+  // update selected menu option
+  $('#cost-dropdown li a').each(function(i, e) {
+    e = $(e);
+    if (e.attr('duration') == duration) {
+      e.parent().addClass('active');
+    } else {
+      e.parent().removeClass('active');
+    }
+  });
+
+  var hour_multipliers = {
+    "hourly": 1,
+    "daily": 24,
+    "weekly": (7*24),
+    "monthly": (24*30),
+    "yearly": (365*24)
+  };
+  var multiplier = hour_multipliers[duration];
+  var per_time;
+  $.each($("td.cost"), function(i, elem) {
+    elem = $(elem);
+    per_time = elem.attr("hour_cost");
+    per_time = (per_time * multiplier).toFixed(2);
+    elem.text("$" + per_time + " " + duration);
+  });
+
+}
+
 // add parser through the tablesorter addParser method 
 $.tablesorter.addParser({ 
     // set a unique id 
-    id: 'ioperf', 
+    id: "ioperf", 
     is: function(s) { return false; }, 
     format: function(s) { 
         // format your data for normalization 
-        if (s == 'Low') {
+        if (s == "Low") {
           return 0;
-        } else if (s == 'Moderate') {
+        } else if (s == "Moderate") {
           return 1;
-        } else if (s == 'High') {
+        } else if (s == "High") {
           return 2;
         } else {
           return 3;
         }
     }, 
     // set type, either numeric or text 
-    type: 'numeric' 
+    type: "numeric" 
 });
 
 $(function() {
-  $('.tablesorter').tablesorter({
+  $(".tablesorter").tablesorter({
     headers: {
       /* memory */
       1: {
-        sorter: 'digit'
+        sorter: "digit"
       },
       /* compute units */
       2: {
-        sorter: 'digit'
+        sorter: "digit"
       },
       /* storage */
       3: {
-        sorter: 'digit'
+        sorter: "digit"
       },
       /* i/o perf */
       5: {
-        sorter: 'ioperf'
+        sorter: "ioperf"
       }
     },
     // sortList: [[0,1]],
-    widgets: ['zebra']
+    widgets: ["zebra"]
   });
+  
+  change_cost('hourly');
 });
 
-$('#cost').bind('change', function(e) {
-  var selected = $('#cost option:selected').val();
-  var hour_multipliers = {
-    'hour': 1,
-    'day': 24,
-    'week': (7*24),
-    'month': (24*30),
-    'year': (365*24)
-  };
-  var multiplier = hour_multipliers[selected];
-  var per_hour;
-  var per_time;
-  $.each($('td.cost'), function(i, elem) {
-    elem = $(elem);
-    per_time = elem.attr('hour_cost');
-    if (selected != 'hour') {
-      per_time = (per_time * multiplier).toFixed(2);
-    }
-    elem.text('$' + per_time + ' per ' + selected);
-  });
+$("#cost-dropdown li").bind("click", function(e) {
+  change_cost(e.target.getAttribute("duration"));
 });

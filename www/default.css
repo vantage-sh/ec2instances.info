@@ -1,22 +1,7 @@
-* {
-  font-family: verdana;
-}
 body {
-  margin: 8px 10px;
+  padding: 5px 20px;
 }
-p, td, th {
-  font-size: 12px;
-}
-h1 {
-  margin-top: 0;
-  font-size: 26px;
-}
-h2 {
-  font-size: 18px;
-}
-abbr {
-  border-bottom: 1px dotted #ccc;
-}
+
 #footer {
   position: absolute;
   bottom: 10px;

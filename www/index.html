@@ -1,34 +1,47 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Amazon EC2 Instance Comparison</title>
-    <link rel="stylesheet" href="default.css" type="text/css">
+    <link rel="stylesheet" href="default.css" media="screen">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" media="screen">
   </head>
 
   <body>
-    <h1>Amazon EC2 Instance Comparison</h1>
+    <div class="page-header">
+      <h1>EC2Instances.info <small>Easy Amazon EC2 Instance Comparison</small></h1>
+    </div>
 
     <p>
       A sortable table displaying all the Amazon EC2 <a href="http://aws.amazon.com/ec2/instance-types/" target="_blank">instance type</a> and <a href="http://aws.amazon.com/ec2/pricing/" target="_blank">pricing</a> information so its easier to make comparisons. It's <a href="http://powdahound.com/2011/03/hosting-a-static-site-on-amazon-s3-ec2instances-info" target="_blank">hosted on S3</a> and awaiting your improvements <a href="https://github.com/powdahound/ec2instances.info" target="_blank">on GitHub</a>.
     </p>
 
-    <p style="text-align: right">
-      Region:
-      <select id="region">
-        <option value="us-east">US East</option>
-      </select>
-      Costs:
-      <select id="cost">
-        <option value="hour">Hourly</option>
-        <option value="day">Daily</option>
-        <option value="week">Weekly</option>
-        <option value="month">Monthly</option>
-        <option value="year">Yearly</option>
-      </select>
-    </p>
+    <div>
+      <div class="btn-group">
+        <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+          Region: US East
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="javascript:;">US East</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group" id="cost-dropdown">
+        <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+          <span class="text"></span>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="javascript:;" duration="hourly">Hourly</a></li>
+          <li><a href="javascript:;" duration="daily">Daily</a></li>
+          <li><a href="javascript:;" duration="weekly">Weekly</a></li>
+          <li><a href="javascript:;" duration="monthly">Monthly</a></li>
+          <li><a href="javascript:;" duration="yearly">Yearly</a></li>
+        </ul>
+      </div>
+    </div>
 
     <table cellspacing="0" class="tablesorter">
       <thead>
@@ -246,7 +259,8 @@
     Made by <a href="http://twitter.com/powdahound" target="_blank">@powdahound</a> /
     <a href="https://github.com/powdahound/ec2instances.info" target="_blank">Fork on GitHub</a>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="jquery.tablesorter.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="default.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript">
