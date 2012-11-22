@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <table cellspacing="0" class="tablesorter">
+    <table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">
       <thead>
         <tr>
           <th>Name</th>
@@ -51,7 +51,7 @@
           <th><abbr title="One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.">Compute Units</abbr></th>
           <th>Storage</th>
           <th>Platform</th>
-          <th>I/O Perf</th>
+          <th class="ioperf">I/O Perf</th>
           <th><abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr></th>
           <th>API Name</th>
           <th>Linux cost</th>
@@ -59,13 +59,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="even">
+        <tr>
           <td>Standard Small</td>
           <td style="text-align: right;">1.70 GB</td>
           <td>1 (1 core x 1 unit)</td>
           <td style="text-align: right;">160 GB</td>
           <td style="text-align: right;">32/64-bit</td>
-          <td>Moderate</td>
+          <td><span sort="1"><span sort="1">Moderate</span></span></td>
           <td>8</td>
           <td>m1.small</td>
           <td class="cost" hour_cost="0.065">$0.065 per hour</td>
@@ -77,12 +77,11 @@
           <td>2 (1 core x 2 units)</td>
           <td style="text-align: right;">410 GB</td>
           <td style="text-align: right;">32/64-bit</td>
-          <td>Moderate</td>
+          <td><span sort="1">Moderate</span></td>
           <td>12</td>
           <td>m1.medium</td>
           <td class="cost" hour_cost="0.13">$0.13 per hour</td>
           <td class="cost" hour_cost="0.23">$0.23 per hour</td>
-          <td></td>
         </tr>
         <tr>
           <td>Standard Large</td>
@@ -90,19 +89,19 @@
           <td>4 (2 cores x 2 units)</td>
           <td style="text-align: right;">850 GB (2 x 420 GB)</td>
           <td style="text-align: right;">64-bit</td>
-          <td>High (EBS Optimized)</td>
+          <td><span sort="3">High (EBS Optimized)</span></td>
           <td>30</td>
           <td>m1.large</td>
           <td class="cost" hour_cost="0.26">$0.26 per hour</td>
           <td class="cost" hour_cost="0.46">$0.46 per hour</td>
         </tr>
-        <tr class="even">
+        <tr>
           <td>Standard Extra Large</td>
           <td style="text-align: right;">15.00 GB</td>
           <td>8 (4 cores x 2 units)</td>
           <td style="text-align: right;">1690 GB (4 x 420 GB)</td>
           <td style="text-align: right;">64-bit</td>
-          <td>High (EBS Optimized)</td>
+          <td><span sort="3">High (EBS Optimized)</span></td>
           <td>60</td>
           <td>m1.xlarge</td>
           <td class="cost" hour_cost="0.52">$0.52 per hour</td>
@@ -114,7 +113,7 @@
           <td>2 (only for short bursts)</td>
           <td style="text-align: right;">0 GB (EBS only)</td>
           <td style="text-align: right;">32/64-bit</td>
-          <td>Low</td>
+          <td><span sort="0">Low</span></td>
           <td>1</td>
           <td>t1.micro</td>
           <td class="cost" hour_cost="0.02">$0.02 per hour</td>
@@ -126,7 +125,7 @@
           <td>6.5 (2 cores x 3.25 units)</td>
           <td style="text-align: right;">420 GB</td>
           <td style="text-align: right;">64-bit</td>
-          <td>Moderate</td>
+          <td><span sort="1">Moderate</span></td>
           <td>60</td>
           <td>m2.xlarge</td>
           <td class="cost" hour_cost="0.45">$0.45 per hour</td>
@@ -138,7 +137,7 @@
           <td>13 (4 cores x 3.25 units)</td>
           <td style="text-align: right;">850 GB</td>
           <td style="text-align: right;">64-bit</td>
-          <td>High</td>
+          <td><span sort="2">High</span></td>
           <td>120</td>
           <td>m2.2xlarge</td>
           <td class="cost" hour_cost="0.90">$0.90 per hour</td>
@@ -150,7 +149,7 @@
           <td>26 (8 cores x 3.25 units)</td>
           <td style="text-align: right;">1690 GB (2 x 840 GB)</td>
           <td style="text-align: right;">64-bit</td>
-          <td>High (EBS Optimized)</td>
+          <td><span sort="3">High (EBS Optimized)</span></td>
           <td>240</td>
           <td>m2.4xlarge</td>
           <td class="cost" hour_cost="1.80">$1.80 per hour</td>
@@ -162,7 +161,7 @@
           <td>13 (4 cores x 3.25 units)</td>
           <td style="text-align: right;">0 GB (EBS only)</td>
           <td style="text-align: right;">64-bit</td>
-          <td>Moderate</td>
+          <td><span sort="1">Moderate</span></td>
           <td>60</td>
           <td>m3.xlarge</td>
           <td class="cost" hour_cost="0.58">$0.58 per hour</td>
@@ -174,7 +173,7 @@
           <td>26 (8 cores x 3.25 units)</td>
           <td style="text-align: right;">0 GB (EBS only)</td>
           <td style="text-align: right;">64-bit</td>
-          <td>High</td>
+          <td><span sort="2">High</span></td>
           <td>120</td>
           <td>m3.2xlarge</td>
           <td class="cost" hour_cost="1.16">$1.16 per hour</td>
@@ -186,7 +185,7 @@
           <td>5 (2 cores x 2.5 units)</td>
           <td style="text-align: right;">350 GB</td>
           <td style="text-align: right;">32/64-bit</td>
-          <td>Moderate</td>
+          <td><span sort="1">Moderate</span></td>
           <td>12</td>
           <td>c1.medium</td>
           <td class="cost" hour_cost="0.165">$0.165 per hour</td>
@@ -198,7 +197,7 @@
           <td>20 (8 cores x 2.5 units)</td>
           <td style="text-align: right;">1690 GB (4 x 420 GB)</td>
           <td style="text-align: right;">64-bit</td>
-          <td>High</td>
+          <td><span sort="2">High</span></td>
           <td>60</td>
           <td>c1.xlarge</td>
           <td class="cost" hour_cost="0.66">$0.66 per hour</td>
@@ -210,7 +209,7 @@
           <td>33.5 (2 x Intel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</td>
           <td style="text-align: right;">1690 GB (2 x 840 GB)</td>
           <td style="text-align: right;">64-bit</td>
-          <td><abbr title="10 Gigabit Ethernet">Very High</abbr></td>
+          <td><span sort="4"><abbr title="10 Gigabit Ethernet">Very High</abbr></sort></td>
           <td>1</td>
           <td>cc1.4xlarge</td>
           <td class="cost" hour_cost="1.30">$1.30 per hour</td>
@@ -222,7 +221,7 @@
           <td>88 (2 x Intel <abbr title="Eight-core Sandy Bridge architecture">Xeon E5-2670</abbr>)</td>
           <td style="text-align: right;">3370 GB (4 x 840 GB)</td>
           <td style="text-align: right;">64-bit</td>
-          <td><abbr title="10 Gigabit Ethernet">Very High</abbr></td>
+          <td><span sort="4"><abbr title="10 Gigabit Ethernet">Very High</abbr></sort></td>
           <td>240</td>
           <td>cc2.8xlarge</td>
           <td class="cost" hour_cost="2.40">$2.40 per hour</td>
@@ -234,7 +233,7 @@
           <td>33.5 (2 x Intel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</td>
           <td style="text-align: right;">1690 GB (2 x 840 GB)</td>
           <td style="text-align: right;">64-bit</td>
-          <td><abbr title="10 Gigabit Ethernet">Very High</abbr></td>
+          <td><span sort="4"><abbr title="10 Gigabit Ethernet">Very High</abbr></sort></td>
           <td>1</td>
           <td>cg1.4xlarge</td>
           <td class="cost" hour_cost="2.10">$2.10 per hour</td>
@@ -246,7 +245,7 @@
           <td>35 (2 x Intel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</td>
           <td style="text-align: right;">2048 GB (2 x 1024 GB SSD)</td>
           <td style="text-align: right;">64-bit</td>
-          <td><abbr title="10 Gigabit Ethernet">Very High</abbr></td>
+          <td><span sort="4"><abbr title="10 Gigabit Ethernet">Very High</abbr></sort></td>
           <td>1</td>
           <td>hi1.4xlarge</td>
           <td class="cost" hour_cost="3.10">$3.10 per hour</td>
@@ -255,23 +254,25 @@
       </tbody>
     </table>
 
-  <div id="footer">
-    Made by <a href="http://twitter.com/powdahound" target="_blank">@powdahound</a> /
-    <a href="https://github.com/powdahound/ec2instances.info" target="_blank">Fork on GitHub</a>
-  </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="jquery.tablesorter.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="default.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-4372467-3']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+    <div id="footer">
+      Made by <a href="http://twitter.com/powdahound" target="_blank">@powdahound</a> /
+      <a href="https://github.com/powdahound/ec2instances.info" target="_blank">Fork on GitHub</a>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+    <script src="default.js" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-4372467-3']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
   </body>
 </html>

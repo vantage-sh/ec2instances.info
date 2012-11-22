@@ -32,54 +32,49 @@ function change_cost(duration) {
 
 }
 
-// add parser through the tablesorter addParser method 
-$.tablesorter.addParser({ 
-    // set a unique id 
-    id: "ioperf", 
-    is: function(s) { return false; }, 
-    format: function(s) { 
-        // format your data for normalization 
-        if (s == "Low") {
-          return 0;
-        } else if (s == "Moderate") {
-          return 1;
-        } else if (s == "High") {
-          return 2;
-        } else {
-          return 3;
-        }
-    }, 
-    // set type, either numeric or text 
-    type: "numeric" 
-});
-
 $(function() {
-  $(".tablesorter").tablesorter({
-    headers: {
-      /* memory */
-      1: {
-        sorter: "digit"
-      },
-      /* compute units */
-      2: {
-        sorter: "digit"
-      },
-      /* storage */
-      3: {
-        sorter: "digit"
-      },
-      /* i/o perf */
-      5: {
-        sorter: "ioperf"
-      }
-    },
-    // sortList: [[0,1]],
-    widgets: ["zebra"]
+  $(document).ready(function() {
+    $('#data').dataTable({
+      "bPaginate": false,
+      "bFilter": false,
+      "bInfo": false,
+      "aoColumnDefs": [
+        {
+          "aTargets": ["ioperf"],
+          "sType": "span-sort"
+        }
+      ]
+    });
   });
-  
+
+  $.extend($.fn.dataTableExt.oStdClasses, {
+    "sWrapper": "dataTables_wrapper form-inline"
+  });
+
   change_cost('hourly');
 });
 
 $("#cost-dropdown li").bind("click", function(e) {
   change_cost(e.target.getAttribute("duration"));
+});
+
+// sorting for IO perf column
+// http://datatables.net/plug-ins/sorting#hidden_title
+jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+  "span-sort-pre": function(elem) {
+    var matches = elem.match(/sort="(.*?)"/);
+    if (matches) {
+      console.log(elem + " - " + parseInt(matches[1], 10));
+      return parseInt(matches[1], 10);
+    }
+    return 0;
+  },
+  
+  "span-sort-asc": function(a, b) {
+    return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+  },
+
+  "span-sort-desc": function(a, b) {
+    return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+  }
 });
