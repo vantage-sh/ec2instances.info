@@ -11,6 +11,10 @@ body {
   margin-top: 20px;
 }
 
+#data td {
+  font-size: 13px;
+}
+
 #data td.name {
   text-align: left;
 }
