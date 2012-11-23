@@ -1,3 +1,5 @@
+var current_cost_duration = null;
+
 function change_cost(duration) {
   // update menu text
   var first = duration.charAt(0).toUpperCase();
@@ -30,6 +32,7 @@ function change_cost(duration) {
     elem.text("$" + per_time + " " + duration);
   });
 
+  current_cost_duration = duration;
 }
 
 $(function() {
@@ -42,7 +45,13 @@ $(function() {
           "aTargets": ["memory", "computeunits", "storage", "ioperf"],
           "sType": "span-sort"
         }
-      ]
+      ],
+      "fnDrawCallback": function() {
+        // Whenever the table is drawn, update the costs. This is necessary
+        // because the cost duration may have changed while a filter was being
+        // used and so some rows will need updating.
+        change_cost(current_cost_duration);
+      }
     });
   });
 
