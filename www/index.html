@@ -49,7 +49,7 @@
           </th>
           <th class="storage">Storage</th>
           <th class="architecture">Architecture</th>
-          <th class="ioperf">I/O Perf</th>
+          <th class="ioperf">I/O Performance</th>
           <th class="maxips">
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
@@ -60,7 +60,7 @@
       </thead>
       <tbody>
         <tr>
-          <td class="name">Standard Small</td>
+          <td class="name">M1 Small</td>
           <td class="memory"><span sort="1.7">1.70 GB</span></td>
           <td class="computeunits"><span sort="1">1 (1 core x 1 unit)</span></td>
           <td class="storage"><span sort="60">60 GB</span></td>
@@ -72,7 +72,7 @@
           <td class="cost" hour_cost="0.115">$0.115 per hour</td>
         </tr>
         <tr>
-          <td class="name">Standard Medium</td>
+          <td class="name">M1 Medium</td>
           <td class="memory"><span sort="3.75">3.75 GB</span></td>
           <td class="computeunits"><span sort="2">2 (1 core x 2 units)</span></td>
           <td class="storage"><span sort="410">410 GB</span></td>
@@ -84,24 +84,24 @@
           <td class="cost" hour_cost="0.23">$0.23 per hour</td>
         </tr>
         <tr>
-          <td class="name">Standard Large</td>
+          <td class="name">M1 Large</td>
           <td class="memory"><span sort="7.5">7.50 GB</span></td>
           <td class="computeunits"><span sort="4">4 (2 cores x 2 units)</span></td>
-          <td class="storage"><span sort="850">850 GB (2 x 420 GB)</span></td>
+          <td class="storage"><span sort="850">850 GB (2x420 GB)</span></td>
           <td class="architecture">64-bit</td>
-          <td class="ioperf"><span sort="3">High (EBS Optimized)</span></td>
+          <td class="ioperf"><span sort="3">High / <abbr title="EBS-Optimized available">500 Mbps</abbr></span></td>
           <td class="maxips">30</td>
           <td class="apiname">m1.large</td>
           <td class="cost" hour_cost="0.26">$0.26 per hour</td>
           <td class="cost" hour_cost="0.46">$0.46 per hour</td>
         </tr>
         <tr>
-          <td class="name">Standard Extra Large</td>
+          <td class="name">M1 Extra Large</td>
           <td class="memory"><span sort="15">15.00 GB</span></td>
           <td class="computeunits"><span sort="8">8 (4 cores x 2 units)</span></td>
-          <td class="storage"><span sort="1690">1690 GB (4 x 420 GB)</span></td>
+          <td class="storage"><span sort="1690">1690 GB (4x420 GB)</span></td>
           <td class="architecture">64-bit</td>
-          <td class="ioperf"><span sort="3">High (EBS Optimized)</span></td>
+          <td class="ioperf"><span sort="3">High / <abbr title="EBS-Optimized available">1000 Mbps</abbr></span></td>
           <td class="maxips">60</td>
           <td class="apiname">m1.xlarge</td>
           <td class="cost" hour_cost="0.52">$0.52 per hour</td>
@@ -147,16 +147,16 @@
           <td class="name">High-Memory Quadruple Extra Large</td>
           <td class="memory"><span sort="68.4">68.40 GB</span></td>
           <td class="computeunits"><span sort="26">26 (8 cores x 3.25 units)</span></td>
-          <td class="storage"><span sort="1690">1690 GB (2 x 840 GB)</span></td>
+          <td class="storage"><span sort="1690">1690 GB (2x840 GB)</span></td>
           <td class="architecture">64-bit</td>
-          <td class="ioperf"><span sort="3">High (EBS Optimized)</span></td>
+          <td class="ioperf"><span sort="3">High / <abbr title="EBS-Optimized available">1000 Mbps</abbr></span></td>
           <td class="maxips">240</td>
           <td class="apiname">m2.4xlarge</td>
           <td class="cost" hour_cost="1.80">$1.80 per hour</td>
           <td class="cost" hour_cost="2.28">$2.28 per hour</td>
         </tr>
         <tr>
-          <td class="name">2nd Gen Standard Extra Large</td>
+          <td class="name">M3 Extra Large</td>
           <td class="memory"><span sort="15">15.00 GB</span></td>
           <td class="computeunits"><span sort="13">13 (4 cores x 3.25 units)</span></td>
           <td class="storage"><span sort="0">0 GB (EBS only)</span></td>
@@ -168,7 +168,7 @@
           <td class="cost" hour_cost="0.98">$0.98 per hour</td>
         </tr>
         <tr>
-          <td class="name">2nd Gen Standard Double Extra Large</td>
+          <td class="name">M3 Double Extra Large</td>
           <td class="memory"><span sort="30">30.00 GB</span></td>
           <td class="computeunits"><span sort="26">26 (8 cores x 3.25 units)</span></td>
           <td class="storage"><span sort="0">0 GB (EBS only)</span></td>
@@ -195,7 +195,7 @@
           <td class="name">High-CPU Extra Large</td>
           <td class="memory"><span sort="7">7.00 GB</span></td>
           <td class="computeunits"><span sort="20">20 (8 cores x 2.5 units)</span></td>
-          <td class="storage"><span sort="1690">1690 GB (4 x 420 GB)</span></td>
+          <td class="storage"><span sort="1690">1690 GB (4x420 GB)</span></td>
           <td class="architecture">64-bit</td>
           <td class="ioperf"><span sort="2">High</span></td>
           <td class="maxips">60</td>
@@ -206,8 +206,8 @@
         <tr>
           <td class="name">Cluster Compute Quadruple Extra Large</td>
           <td class="memory"><span sort="23">23.00 GB</span></td>
-          <td class="computeunits"><span sort="33.5">33.5 (2 x Intel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</span></td>
-          <td class="storage"><span sort="1690">1690 GB (2 x 840 GB)</span></td>
+          <td class="computeunits"><span sort="33.5">33.5 (2xIntel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</span></td>
+          <td class="storage"><span sort="1690">1690 GB (2x840 GB)</span></td>
           <td class="architecture">64-bit</td>
           <td class="ioperf"><span sort="4"><abbr title="10 Gigabit Ethernet">Very High</abbr></sort></td>
           <td class="maxips">1</td>
@@ -218,8 +218,8 @@
         <tr>
           <td class="name">Cluster Compute Eight Extra Large</td>
           <td class="memory"><span sort="60.5">60.50 GB</span></td>
-          <td class="computeunits"><span sort="88">88 (2 x Intel <abbr title="Eight-core Sandy Bridge architecture">Xeon E5-2670</abbr>)</span></td>
-          <td class="storage"><span sort="3370">3370 GB (4 x 840 GB)</span></td>
+          <td class="computeunits"><span sort="88">88 (2xIntel <abbr title="Eight-core Sandy Bridge architecture">Xeon E5-2670</abbr>)</span></td>
+          <td class="storage"><span sort="3370">3370 GB (4x840 GB)</span></td>
           <td class="architecture">64-bit</td>
           <td class="ioperf"><span sort="4"><abbr title="10 Gigabit Ethernet">Very High</abbr></sort></td>
           <td class="maxips">240</td>
@@ -230,8 +230,8 @@
         <tr>
           <td class="name">Cluster GPU Quadruple Extra Large</td>
           <td class="memory"><span sort="22">22.00 GB</span></td>
-          <td class="computeunits"><span sort="33.5">33.5 (2 x Intel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</span></td>
-          <td class="storage"><span sort="1690">1690 GB (2 x 840 GB)</span></td>
+          <td class="computeunits"><span sort="33.5">33.5 (2xIntel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</span></td>
+          <td class="storage"><span sort="1690">1690 GB (2x840 GB)</span></td>
           <td class="architecture">64-bit</td>
           <td class="ioperf"><span sort="4"><abbr title="10 Gigabit Ethernet">Very High</abbr></sort></td>
           <td class="maxips">1</td>
@@ -242,8 +242,8 @@
         <tr>
           <td class="name">High I/O Quadruple Extra Large</td>
           <td class="memory"><span sort="60.5">60.50 GB</span></td>
-          <td class="computeunits"><span sort="35">35 (2 x Intel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</span></td>
-          <td class="storage"><span sort="2048">2048 GB (2 x 1024 GB SSD)</span></td>
+          <td class="computeunits"><span sort="35">35 (2xIntel <abbr title="Quad-core Nehalem architecture">Xeon X5570</abbr>)</span></td>
+          <td class="storage"><span sort="2048">2048 GB (2x1024 GB SSD)</span></td>
           <td class="architecture">64-bit</td>
           <td class="ioperf"><span sort="4"><abbr title="10 Gigabit Ethernet">Very High</abbr></sort></td>
           <td class="maxips">1</td>
