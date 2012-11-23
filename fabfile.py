@@ -29,7 +29,8 @@ def deploy(root_dir='www'):
             print '%s -> %s/%s' % (local_path, bucket_name, remote_path)
             k = Key(bucket)
             k.key = remote_path
-            headers = {}
+            headers = {
+                "Cache-Control": "max-age=86400, must-revalidate"}
             k.set_contents_from_filename(local_path, headers=headers,
                                          policy='public-read')
 
