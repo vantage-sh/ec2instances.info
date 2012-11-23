@@ -12,12 +12,48 @@ body {
   color: #333;
 }
 
-/* DataTables: http://datatables.net/blog/Twitter_Bootstrap_2 */
-
-table.table {
+#data {
   margin-top: 15px;
 }
 
+#data td.name {
+  text-align: left;
+}
+
+#data td.memory {
+  text-align: right;
+}
+
+#data td.computeunits {
+  text-align: left;
+}
+
+#data td.storage {
+  text-align: right;
+}
+
+#data td.architecture {
+  text-align: right;
+}
+
+#data td.ioperf {
+  text-align: left;
+}
+
+#data td.maxips {
+  text-align: right;
+}
+
+#data td.apiname {
+  text-align: left;
+}
+
+/* Bootstrap overrides */
+.dropdown-menu .active a {
+  color: #fff !important;
+}
+
+/* DataTables: http://datatables.net/blog/Twitter_Bootstrap_2 */
 table.table thead .sorting,
 table.table thead .sorting_asc,
 table.table thead .sorting_desc,

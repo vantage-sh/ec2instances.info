@@ -40,7 +40,7 @@ $(function() {
       "bInfo": false,
       "aoColumnDefs": [
         {
-          "aTargets": ["ioperf"],
+          "aTargets": ["memory", "computeunits", "storage", "ioperf"],
           "sType": "span-sort"
         }
       ]
