@@ -2,18 +2,13 @@ body {
   padding: 5px 20px;
 }
 
-#footer {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-}
-#footer, #footer a {
-  font-size: 10px;
-  color: #333;
+.dataTables_filter {
+  float: right;
 }
 
 #data {
-  margin-top: 15px;
+  clear: both;
+  margin-top: 20px;
 }
 
 #data td.name {

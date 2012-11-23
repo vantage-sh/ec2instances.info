@@ -36,7 +36,6 @@ $(function() {
   $(document).ready(function() {
     $('#data').dataTable({
       "bPaginate": false,
-      "bFilter": false,
       "bInfo": false,
       "aoColumnDefs": [
         {
