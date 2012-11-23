@@ -57,18 +57,17 @@ $("#cost-dropdown li").bind("click", function(e) {
   change_cost(e.target.getAttribute("duration"));
 });
 
-// sorting for IO perf column
+// sorting for colums with more complex data
 // http://datatables.net/plug-ins/sorting#hidden_title
 jQuery.extend(jQuery.fn.dataTableExt.oSort, {
   "span-sort-pre": function(elem) {
     var matches = elem.match(/sort="(.*?)"/);
     if (matches) {
-      console.log(elem + " - " + parseInt(matches[1], 10));
       return parseInt(matches[1], 10);
     }
     return 0;
   },
-  
+
   "span-sort-asc": function(a, b) {
     return ((a < b) ? -1 : ((a > b) ? 1 : 0));
   },
