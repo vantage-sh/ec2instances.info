@@ -35,6 +35,18 @@ function change_cost(duration) {
   current_cost_duration = duration;
 }
 
+function column_toggle_setup() {
+  // get column headings, add to filter button
+  $.each($("#data thead tr th"), function(i, elem) {
+    $("#filter-dropdown ul").append("<li class=\"active\"><a href=\"javascript:;\" onclick=\"fnShowHide("+i+");\">"+elem.innerText+"</a></li>");
+  });
+
+  // toggle column buttons
+  $("#filter-dropdown ul.dropdown-menu li").bind("click", function(e) {
+    $(this).toggleClass("active");
+  });
+}
+
 $(function() {
   $(document).ready(function() {
     $('#data').dataTable({
@@ -60,6 +72,8 @@ $(function() {
   });
 
   change_cost('hourly');
+
+  column_toggle_setup();
 });
 
 $("#cost-dropdown li").bind("click", function(e) {
@@ -85,3 +99,10 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
     return ((a < b) ? 1 : ((a > b) ? -1 : 0));
   }
 });
+
+// toggle columns
+function fnShowHide(iCol) {
+  var oTable = $('#data').dataTable();
+  var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
+  oTable.fnSetColumnVis( iCol, bVis ? false : true );
+}
