@@ -74,6 +74,12 @@ $(function() {
   change_cost('hourly');
 
   column_toggle_setup();
+  
+  $('abbr').tooltip({ 
+    placement: function(tt, el) { 
+      return (this.$element.parents('thead').length) ? 'top' : 'right';
+    }
+  });
 });
 
 $("#cost-dropdown li").bind("click", function(e) {
