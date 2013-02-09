@@ -80,6 +80,13 @@ $(function() {
   change_cost('hourly');
 
   setup_column_toggle();
+
+  // enable bootstrap tooltips
+  $('abbr').tooltip({ 
+    placement: function(tt, el) { 
+      return (this.$element.parents('thead').length) ? 'top' : 'right';
+    }
+  });
 });
 
 $("#cost-dropdown li").bind("click", function(e) {
