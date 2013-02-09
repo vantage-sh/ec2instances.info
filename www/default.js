@@ -35,15 +35,21 @@ function change_cost(duration) {
   current_cost_duration = duration;
 }
 
-function column_toggle_setup() {
+function setup_column_toggle() {
   // get column headings, add to filter button
   $.each($("#data thead tr th"), function(i, elem) {
-    $("#filter-dropdown ul").append("<li class=\"active\"><a href=\"javascript:;\" onclick=\"fnShowHide("+i+");\">"+elem.innerText+"</a></li>");
-  });
-
-  // toggle column buttons
-  $("#filter-dropdown ul.dropdown-menu li").bind("click", function(e) {
-    $(this).toggleClass("active");
+    $("#filter-dropdown ul").append(
+      $('<li>', {class: "active"}).append(
+        $('<a>', {href: "javascript:;"})
+          .text($(elem).text())
+          .click(function(e) {
+            toggle_column(i);
+            $(this).parent().toggleClass("active");
+            $(this).blur(); // prevent focus style from sticking in Firefox
+            e.stopPropagation(); // keep dropdown menu open
+          })
+      )
+    );
   });
 }
 
@@ -73,7 +79,7 @@ $(function() {
 
   change_cost('hourly');
 
-  column_toggle_setup();
+  setup_column_toggle();
 });
 
 $("#cost-dropdown li").bind("click", function(e) {
@@ -101,8 +107,8 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
 });
 
 // toggle columns
-function fnShowHide(iCol) {
-  var oTable = $('#data').dataTable();
-  var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
-  oTable.fnSetColumnVis( iCol, bVis ? false : true );
+function toggle_column(col_index) {
+  var table = $('#data').dataTable();
+  var is_visible = table.fnSettings().aoColumns[col_index].bVisible;
+  table.fnSetColumnVis(col_index, is_visible ? false : true);
 }
