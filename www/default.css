@@ -52,6 +52,11 @@ body {
   color: #fff !important;
 }
 
+.dropdown-menu li > a:hover {
+  background: #0044cc !important;
+}
+
+
 /* DataTables: http://datatables.net/blog/Twitter_Bootstrap_2 */
 table.table thead .sorting,
 table.table thead .sorting_asc,
