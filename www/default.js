@@ -58,6 +58,7 @@ $(function() {
     $('#data').dataTable({
       "bPaginate": false,
       "bInfo": false,
+      "bStateSave": true,
       "aoColumnDefs": [
         {
           "aTargets": ["memory", "computeunits", "storage", "ioperf"],
