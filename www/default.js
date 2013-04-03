@@ -65,6 +65,10 @@ $(function() {
           "sType": "span-sort"
         }
       ],
+      // default sort by linux cost
+      "aaSorting": [
+        [ 8, "asc" ]
+      ],
       "fnDrawCallback": function() {
         // Whenever the table is drawn, update the costs. This is necessary
         // because the cost duration may have changed while a filter was being
