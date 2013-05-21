@@ -1,3 +1,5 @@
+// Costing factors.
+// @see update_cost.
 var current_cost_duration = null;
 var current_region = null;
 
@@ -12,6 +14,15 @@ var regions = {
     "multiplier" : 1.1
   }
 }
+
+// Cost multiplers against hourly costs.
+var hour_multipliers = {
+  "hourly": 1,
+  "daily": 24,
+  "weekly": (7*24),
+  "monthly": (24*30),
+  "yearly": (365*24)
+};
 
 function change_cost(duration) {
   // update menu text
@@ -28,24 +39,9 @@ function change_cost(duration) {
       e.parent().removeClass('active');
     }
   });
-
-  var hour_multipliers = {
-    "hourly": 1,
-    "daily": 24,
-    "weekly": (7*24),
-    "monthly": (24*30),
-    "yearly": (365*24)
-  };
-  var multiplier = hour_multipliers[duration];
-  var per_time;
-  $.each($("td.cost"), function(i, elem) {
-    elem = $(elem);
-    per_time = elem.attr("hour_cost");
-    per_time = (per_time * multiplier).toFixed(2);
-    elem.text("$" + per_time + " " + duration);
-  });
-
+  // Update the current costing duration and update the costs.
   current_cost_duration = duration;
+  update_cost();
 }
 
 /**
@@ -53,9 +49,35 @@ function change_cost(duration) {
  */
 function change_region(elem) {
   // Region object.
-  var region = regions[$('a', elem).attr('region')];
+  current_region = regions[$('a', elem).attr('region')];
   // Change region name text displayed to the user.
-  $(region_text).text(region.name);
+  $(region_text).text(current_region.name);
+
+  // Go ahead and update the table.
+  update_cost();
+}
+
+/**
+ * Update the cost in the table, based on the following factors:
+ *  - period: hourly, daily, weekly, monthly.
+ *  - region: US East, US West, etc.
+ */
+function update_cost() {
+  // Multipler based on selected time.
+  var time_factor = hour_multipliers[current_cost_duration];
+  // Multiplier based on selected region.
+  var region_factor = 1;
+  // Per-cell hourly cost, for use in the loop.
+  var base_hourly_cost, cost = 0;
+
+  // Iterate through the table, updating the cost.
+  $('td.cost').each(function(index) {
+    var cell = $(this);
+    base_hourly_cost = cell.attr('hour_cost');
+    cost = base_hourly_cost * time_factor * region_factor;
+    console.log('Base cost: ' + base_hourly_cost + ' Cost: ' + cost);
+    cell.text('$' + cost.toFixed(2) + ' ' + current_cost_duration);
+  });
 }
 
 function setup_column_toggle() {
