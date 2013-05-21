@@ -48,8 +48,11 @@ function change_cost(duration) {
  * Callback for change of "Region" dropdown.
  */
 function change_region(elem) {
-  // Region object.
+  // Get the region name.
   current_region = $('a', elem).attr('region');
+  // Highlight the chosen region.
+  $('#region-dropdown li').removeClass('active');
+  $(elem).addClass('active');
   // Change region name text displayed to the user.
   $(region_text).text(regions[current_region].name);
   // Go ahead and update the table.
