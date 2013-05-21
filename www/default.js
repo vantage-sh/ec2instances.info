@@ -11,7 +11,7 @@ var regions = {
   },
   "eu-west" : {
     "name" : "EU West",
-    "multiplier" : 1.1
+    "multiplier" : 1.08
   }
 }
 
