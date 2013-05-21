@@ -14,13 +14,15 @@
     </div>
 
     <div class="pull-left">
-      <div class="btn-group">
+      <div class="btn-group" id="region-dropdown">
         <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
-          <i class="icon-globe icon-white"></i> Region: US East
+          <i class="icon-globe icon-white"></i>
+          <span class="text">Region: <span class="region-name">US East</span></span>
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <li><a href="javascript:;">US East</a></li>
+          <li><a href="javascript:;" region="us-east">US East</a></li>
+          <li><a href="javascript:;" region="eu-west">EU West</a></li>
         </ul>
       </div>
 

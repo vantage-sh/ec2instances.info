@@ -1,4 +1,17 @@
 var current_cost_duration = null;
+var current_region = null;
+
+// Regions and their cost multiplier.
+var regions = {
+  "us-east" : {
+    "name" : "US East",
+    "multipler" : 1
+  },
+  "eu-west" : {
+    "name" : "EU West",
+    "multiplier" : 1.1
+  }
+}
 
 function change_cost(duration) {
   // update menu text
@@ -33,6 +46,16 @@ function change_cost(duration) {
   });
 
   current_cost_duration = duration;
+}
+
+/**
+ * Callback for change of "Region" dropdown.
+ */
+function change_region(elem) {
+  // Region object.
+  var region = regions[$('a', elem).attr('region')];
+  // Change region name text displayed to the user.
+  $(region_text).text(region.name);
 }
 
 function setup_column_toggle() {
@@ -97,6 +120,12 @@ $(function() {
 $("#cost-dropdown li").bind("click", function(e) {
   change_cost(e.target.getAttribute("duration"));
 });
+
+// Change the region on click.
+$('#region-dropdown li').on("click", function(){change_region(this)});
+
+// Create a reference to the region text element.
+var region_text = $('#region-dropdown span.region-name');
 
 // sorting for colums with more complex data
 // http://datatables.net/plug-ins/sorting#hidden_title
