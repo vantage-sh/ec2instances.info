@@ -7,7 +7,7 @@ var current_region = null;
 var regions = {
   "us-east" : {
     "name" : "US East",
-    "multipler" : 1
+    "multiplier" : 1
   },
   "eu-west" : {
     "name" : "EU West",
@@ -49,10 +49,9 @@ function change_cost(duration) {
  */
 function change_region(elem) {
   // Region object.
-  current_region = regions[$('a', elem).attr('region')];
+  current_region = $('a', elem).attr('region');
   // Change region name text displayed to the user.
-  $(region_text).text(current_region.name);
-
+  $(region_text).text(regions[current_region].name);
   // Go ahead and update the table.
   update_cost();
 }
@@ -66,16 +65,17 @@ function update_cost() {
   // Multipler based on selected time.
   var time_factor = hour_multipliers[current_cost_duration];
   // Multiplier based on selected region.
-  var region_factor = 1;
+  var region_factor = regions[current_region].multiplier;
   // Per-cell hourly cost, for use in the loop.
   var base_hourly_cost, cost = 0;
 
   // Iterate through the table, updating the cost.
   $('td.cost').each(function(index) {
     var cell = $(this);
+    // Base costs are provided hourly - use this as the basis for calculations,
     base_hourly_cost = cell.attr('hour_cost');
     cost = base_hourly_cost * time_factor * region_factor;
-    console.log('Base cost: ' + base_hourly_cost + ' Cost: ' + cost);
+    //console.log('Base cost: ' + base_hourly_cost + ' Cost: ' + cost);
     cell.text('$' + cost.toFixed(2) + ' ' + current_cost_duration);
   });
 }
@@ -127,7 +127,11 @@ $(function() {
     "sWrapper": "dataTables_wrapper form-inline"
   });
 
-  change_cost('hourly');
+  // Set up some defaults for costings. @todo - Cookie these for users.
+  current_cost_duration = 'hourly';
+  current_region = 'us-east';
+  // Update the table.
+  update_cost();
 
   setup_column_toggle();
 
