@@ -78,7 +78,7 @@ $(function() {
         // because the cost duration may have changed while a filter was being
         // used and so some rows will need updating.
         change_cost(current_cost_duration);
-      } 
+      }
     });
   });
 
