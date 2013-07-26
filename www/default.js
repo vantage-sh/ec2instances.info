@@ -59,6 +59,10 @@ $(function() {
       "bPaginate": false,
       "bInfo": false,
       "bStateSave": true,
+      "oSearch": {
+        "bRegex" : true,
+        "bSmart": false
+      },
       "aoColumnDefs": [
         {
           "aTargets": ["memory", "computeunits", "storage", "ioperf"],
