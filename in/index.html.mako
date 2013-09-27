@@ -1,3 +1,6 @@
+<%!
+   import json
+%>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -14,13 +17,21 @@
     </div>
 
     <div class="pull-left">
-      <div class="btn-group">
+      <div class="btn-group" id='region-dropdown'>
         <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
-          <i class="icon-globe icon-white"></i> Region: US East
+          <i class="icon-globe icon-white"></i>
+          Region: <span class="text">Region: US East</span>
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <li><a href="javascript:;">US East</a></li>
+          <li><a href="javascript:;" data-region='us-east-1'>US East</a></li>
+          <li><a href="javascript:;" data-region='us-west-1'>US West (Northern California)</a></li>
+          <li><a href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
+          <li><a href="javascript:;" data-region='sa-east-1'>South America</a></li>
+          <li><a href="javascript:;" data-region='eu-west-1'>EU (Ireland)</a></li>
+          <li><a href="javascript:;" data-region='ap-southeast-1'>Asia-Pacific (Singapore)</a></li>
+          <li><a href="javascript:;" data-region='ap-southeast-2'>Asia-Pacific (Sydney)</a></li>
+          <li><a href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
         </ul>
       </div>
 
@@ -71,7 +82,7 @@
       </thead>
       <tbody>
 % for inst in instances:
-        <tr>
+        <tr class='instance'>
           <td class="name">${inst['pretty_name']}</td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GB</span></td>
           <td class="computeunits">
@@ -123,9 +134,12 @@
           </td>
           <td class="maxips">${inst['vpc']['max_enis'] * inst['vpc']['ips_per_eni']}</td>
           <td class="apiname">${inst['instance_type']}</td>
-          <% pricing = inst['pricing']['us-east-1'] %>
-          <td class="cost" hour_cost="${pricing['linux']}">\$${pricing['linux']} per hour</td>
-          <td class="cost" hour_cost="${pricing['mswin']}">\$${pricing['mswin']} per hour</td>
+          <td class="cost" data-pricing='${json.dumps({r:p['linux'] for r,p in inst['pricing'].iteritems()}) | h}'>
+            $${inst['pricing']['us-east-1']['linux']} per hour
+          </td>
+          <td class="cost" data-pricing='${json.dumps({r:p['mswin'] for r,p in inst['pricing'].iteritems()}) | h}'>
+            $${inst['pricing']['us-east-1']['mswin']} per hour
+          </td>
         </tr>
 % endfor
       </tbody>

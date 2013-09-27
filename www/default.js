@@ -1,4 +1,5 @@
-var current_cost_duration = null;
+var current_cost_duration = 'hourly';
+var current_region = 'us-east-1';
 
 function change_cost(duration) {
   // update menu text
@@ -27,12 +28,32 @@ function change_cost(duration) {
   var per_time;
   $.each($("td.cost"), function(i, elem) {
     elem = $(elem);
-    per_time = elem.attr("hour_cost");
-    per_time = (per_time * multiplier).toFixed(2);
-    elem.text("$" + per_time + " " + duration);
+    per_time = elem.data("pricing")[current_region];
+    if (per_time) {
+      per_time = (per_time * multiplier).toFixed(2);
+      elem.text("$" + per_time + " " + duration);
+    } else {
+      elem.text("unavailable");
+    }
   });
 
   current_cost_duration = duration;
+}
+
+function change_region(region) {
+  current_region = region;
+  var region_name = null;
+  $('#region-dropdown li a').each(function(i, e) {
+    e = $(e);
+    if (e.data('region') === region) {
+      e.parent().addClass('active');
+      region_name = e.text();
+    } else {
+      e.parent().removeClass('active');
+    }
+  });
+  $("#region-dropdown .dropdown-toggle .text").text(region_name);
+  change_cost(current_cost_duration);
 }
 
 function setup_column_toggle() {
@@ -86,6 +107,7 @@ $(function() {
     "sWrapper": "dataTables_wrapper form-inline"
   });
 
+  change_region('us-east-1');
   change_cost('hourly');
 
   setup_column_toggle();
@@ -100,6 +122,10 @@ $(function() {
 
 $("#cost-dropdown li").bind("click", function(e) {
   change_cost(e.target.getAttribute("duration"));
+});
+
+$("#region-dropdown li").bind("click", function(e) {
+  change_region($(e.target).data('region'));
 });
 
 // sorting for colums with more complex data
