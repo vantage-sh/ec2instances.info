@@ -78,7 +78,17 @@
             % if inst['instance_type'] == 't1.micro':
             <span sort="2">2 (only for short bursts)</span>
             % else:
-            <span sort="${inst['ECU']}">${"%g" % (inst['ECU'],)} (${inst['vCPU']} core x ${"%g" % (inst['ECU']/inst['vCPU'],)} unit)</span>
+            <span sort="${inst['ECU']}">${"%g" % (inst['ECU'],)}
+              % if 'cpu_details' in inst:
+                (${inst['cpu_details']['cpus']} x
+                 <abbr title='${inst['cpu_details']['note']}'>
+                   ${inst['cpu_details']['type']}
+                 </abbr>
+                 )
+              % else:
+              (${inst['vCPU']} core x ${"%g" % (inst['ECU']/inst['vCPU'],)} unit)
+              % endif
+            </span>
             % endif
           </td>
           <td class="storage">

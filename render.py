@@ -54,9 +54,30 @@ def network_sort(inst):
         sort += 1
     return sort
 
+def add_cpu_detail(i):
+    if i['instance_type'] in ('cc1.4xlarge', 'cg1.4xlarge'):
+        i['cpu_details'] = {
+            'cpus': 2,
+            'type': 'Xeon X5570',
+            'note': 'Quad-core Nehalem architecture'
+            }
+    elif i['instance_type'] in ('hi1.4xlarge', 'hs1.8xlarge'):
+        i['cpu_details'] = {
+            'cpus': 2,
+            'type': 'Xeon E5-2650',
+            'note': 'Eight-core Sandy Bridge architecture'
+            }
+    elif i['instance_type'] in ('cc2.8xlarge', 'cr1.8xlarge'):
+        i['cpu_details'] = {
+            'cpus': 2,
+            'type': 'Xeon E5-2670',
+            'note': 'Eight-core Sandy Bridge architecture'
+            }
+
 def add_render_info(i):
     i['network_sort'] = network_sort(i)
     i['pretty_name'] = pretty_name(i)
+    add_cpu_detail(i)
 
 def render(src, dst):
     template = mako.template.Template(filename=src)
