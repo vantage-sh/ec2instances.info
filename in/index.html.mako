@@ -121,7 +121,7 @@
               % endif
             </span>
           </td>
-          <td class="maxips">1</td>
+          <td class="maxips">${inst['vpc']['max_enis'] * inst['vpc']['ips_per_eni']}</td>
           <td class="apiname">${inst['instance_type']}</td>
           <% pricing = inst['pricing']['us-east-1'] %>
           <td class="cost" hour_cost="${pricing['linux']}">\$${pricing['linux']} per hour</td>

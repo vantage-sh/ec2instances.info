@@ -45,6 +45,10 @@
         "linux": "0.065"
       }
     },
+    "vpc": {
+      "ips_per_eni": 4,
+      "max_enis": 2
+    },
     "memory": 1.7,
     "arch": [
       "i386",
@@ -96,6 +100,10 @@
         "mswin": "0.182",
         "linux": "0.130"
       }
+    },
+    "vpc": {
+      "ips_per_eni": 6,
+      "max_enis": 2
     },
     "memory": 3.75,
     "arch": [
@@ -149,6 +157,10 @@
         "linux": "0.260"
       }
     },
+    "vpc": {
+      "ips_per_eni": 10,
+      "max_enis": 3
+    },
     "memory": 7.5,
     "arch": [
       "x86_64"
@@ -200,6 +212,10 @@
         "linux": "0.520"
       }
     },
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
     "memory": 15.0,
     "arch": [
       "x86_64"
@@ -247,6 +263,10 @@
         "linux": "0.550"
       }
     },
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
     "memory": 15.0,
     "arch": [
       "x86_64"
@@ -293,6 +313,10 @@
         "mswin": "1.560",
         "linux": "1.100"
       }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 4
     },
     "memory": 30.0,
     "arch": [
@@ -344,6 +368,10 @@
         "mswin": "0.225",
         "linux": "0.165"
       }
+    },
+    "vpc": {
+      "ips_per_eni": 6,
+      "max_enis": 2
     },
     "memory": 1.7,
     "arch": [
@@ -397,6 +425,10 @@
         "linux": "0.660"
       }
     },
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
     "memory": 7.0,
     "arch": [
       "x86_64"
@@ -431,6 +463,10 @@
         "mswin": "2.970",
         "linux": "2.700"
       }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
     },
     "memory": 60.5,
     "arch": [
@@ -483,6 +519,10 @@
         "linux": "0.460"
       }
     },
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
     "memory": 17.1,
     "arch": [
       "x86_64"
@@ -533,6 +573,10 @@
         "mswin": "1.020",
         "linux": "0.920"
       }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 4
     },
     "memory": 34.2,
     "arch": [
@@ -585,6 +629,10 @@
         "linux": "1.840"
       }
     },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
     "memory": 68.4,
     "arch": [
       "x86_64"
@@ -619,6 +667,10 @@
         "mswin": "3.831",
         "linux": "3.750"
       }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
     },
     "memory": 244.0,
     "arch": [
@@ -655,6 +707,10 @@
         "linux": "3.410"
       }
     },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
     "memory": 60.5,
     "arch": [
       "x86_64"
@@ -689,6 +745,10 @@
         "mswin": "4.931",
         "linux": "4.900"
       }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
     },
     "memory": 117.0,
     "arch": [
@@ -737,6 +797,10 @@
         "linux": "0.020"
       }
     },
+    "vpc": {
+      "ips_per_eni": 2,
+      "max_enis": 2
+    },
     "memory": 0.615,
     "arch": [
       "i386",
@@ -768,6 +832,10 @@
         "mswin": "2.60",
         "linux": "2.36"
       }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
     },
     "memory": 22.5,
     "arch": [

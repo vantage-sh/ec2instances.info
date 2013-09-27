@@ -15,7 +15,8 @@ class Instance(object):
                  memory=self.memory,
                  ebs_optimized=self.ebs_optimized,
                  network_performance=self.network_performance,
-                 pricing=self.pricing)
+                 pricing=self.pricing,
+                 vpc=self.vpc)
         if self.ebs_only:
             d['storage'] = None
         else:
@@ -139,11 +140,28 @@ def add_pricing_data(instances):
         i.pricing = {}
     add_pricing(by_type, pricing)
 
+def add_eni_info(instances):
+    eni_url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html"
+    tree = etree.parse(urllib2.urlopen(eni_url), etree.HTMLParser())
+    table = tree.xpath('//div[@id="divContent"]/div[@class="section"]//table[.//code[contains(., "cc2.8xlarge")]]')[0]
+    rows = table.xpath('.//tr[./td]')
+    by_type = {i.instance_type:i for i in instances}
+
+    for r in rows:
+        instance_type = etree.tostring(r[0], method='text').strip()
+        max_enis = int(etree.tostring(r[1], method='text').strip())
+        ip_per_eni = int(etree.tostring(r[2], method='text').strip())
+        by_type[instance_type].vpc = {
+            'max_enis': max_enis,
+            'ips_per_eni': ip_per_eni
+            }
+
 if __name__ == '__main__':
     print "Parsing instance types..."
     all_instances = scrape_instances()
     print "Parsing pricing info..."
     add_pricing_data(all_instances)
+    add_eni_info(all_instances)
     with open('www/instances.json', 'w') as f:
         json.dump([i.to_dict() for i in all_instances],
                   f,
