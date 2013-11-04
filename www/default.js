@@ -21,7 +21,7 @@ function change_cost(duration) {
     "daily": 24,
     "weekly": (7*24),
     "monthly": (24*30),
-    "yearly": (365*24)
+    "annually": (365*24)
   };
   var multiplier = hour_multipliers[duration];
   var per_time;
