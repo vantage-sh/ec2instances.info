@@ -1,0 +1,11 @@
+type:
+  -
+    name: Hourly
+  -
+    name: Daily
+  -
+    name: Weekly
+  -
+    name: Monthly
+  -
+    name: Yearly

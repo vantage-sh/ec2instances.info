@@ -1,0 +1,404 @@
+region:
+  -
+    name: US East - Virginia
+    initial_class: show
+    header:
+      - &name
+          name: Name
+      - &mem
+          name: Memory
+      - &cu
+          name: Compute Units
+          abbr: One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.
+      - &store
+          name: Storage
+      - &arch
+          name: Architecture
+      - &ioperf
+          name: I/O Performance
+      - &maxip
+          name: Max IPs
+          abbr: Adding additional IPs requires launching the instance in a VPC.
+      - &apiname
+          name: API Name
+      - &lc
+          name: Linux Cost
+      - &wc
+          name: Windows Cost
+    instance:
+      - &Micro
+          name: Micro
+          memory: { value: 0.60 GB, sort: 0.6 }
+          computeunits: { value: 2 (only for short bursts), abbr: ~, sort: 2 }
+          storage: { value: 0 GB (EBS only), sort: 0 }
+          architecture: 32/64-bit
+          ioperf: { value: Low, abbr: ~, sort: 0 }
+          maxips: 1
+          apiname: t1.micro
+          linux_cost: { value: $0.02 per hour, hour_cost: 0.02 }
+          win_cost: { value: $0.02 per hour, hour_cost: 0.02 }
+      - &M1S
+          name: M1 Small
+          memory: { value: 1.70 GB, sort: 1.7 }
+          computeunits: { value: 1 (1 core x 1 unit), abbr: ~, sort: 1 }
+          storage: { value: 160 GB, sort: 160 }
+          architecture: 32/64-bit
+          ioperf: { value: Moderate, abbr: ~, sort: 0 }
+          maxips: 8
+          apiname: m1.small
+          linux_cost: { value: $0.06 per hour, hour_cost: 0.06 }
+          win_cost: { value: $0.091 per hour, hour_cost: 0.091 }
+      - &M1M
+          name: M1 Medium
+          memory: { value: 3.75 GB, sort: 3.75 }
+          computeunits: { value: 2 (1 core x 2 units), abbr: ~, sort: 2 }
+          storage: { value: 410 GB, sort: 410 }
+          architecture: 32/64-bit
+          ioperf: { value: Moderate, abbr: ~, sort: 0 }
+          maxips: 12
+          apiname: m1.medium
+          linux_cost: { value: $0.12 per hour, hour_cost: 0.12 }
+          win_cost: { value: $0.182 per hour, hour_cost: 0.182 }
+      - &M1L
+          name: M1 Large
+          memory: { value: 7.50 GB, sort: 7.5 }
+          computeunits: { value: 4 (2 cores x 2 units), abbr: ~, sort: 4 }
+          storage: { value: 850 GB (2x420 GB), sort: 850 }
+          architecture: 64-bit
+          ioperf: { value: High / 500 Mbps, abbr: EBS-Optimized available, sort: 0 }
+          maxips: 30
+          apiname: m1.large
+          linux_cost: { value: $0.24 per hour, hour_cost: 0.24 }
+          win_cost: { value: $0.364 per hour, hour_cost: 0.364 }
+      - &M1EL
+          name: M1 Extra Large
+          memory: { value: 15.00 GB, sort: 15 }
+          computeunits: { value: 8 (4 cores x 2 units), abbr: ~, sort: 8 }
+          storage: { value: 1690 GB (4x420 GB), sort: 1690 }
+          architecture: 64-bit
+          ioperf: { value: High / 1000 Mbps, abbr: EBS-Optimized available, sort: 0 }
+          maxips: 60
+          apiname: m1.xlarge
+          linux_cost: { value: $0.48 per hour, hour_cost: 0.48 }
+          win_cost: { value: $0.728 per hour, hour_cost: 0.728 }
+      - &HMEL
+          name: High-Memory Extra Large
+          memory: { value: 17.10 GB, sort: 17.10 }
+          computeunits: { value: 6.5 (2 cores x 3.25 units), abbr: ~, sort: 6.5 }
+          storage: { value: 420 GB, sort: 420 }
+          architecture: 64-bit
+          ioperf: { value: Moderate, abbr: ~, sort: 0 }
+          maxips: 60
+          apiname: m2.xlarge
+          linux_cost: { value: $0.41 per hour, hour_cost: 0.41 }
+          win_cost: { value: $0.51 per hour, hour_cost: 0.51 }
+      - &HMDEL
+          name: High-Memory Double Extra Large
+          memory: { value: 34.20 GB, sort: 34.2 }
+          computeunits: { value: 13 (4 cores x 3.25 units), abbr: ~, sort: 13 }
+          storage: { value: 850 GB, sort: 850 }
+          architecture: 64-bit
+          ioperf: { value: High, abbr: ~, sort: 0 }
+          maxips: 120
+          apiname: m2.2xlarge
+          linux_cost: { value: $0.82 per hour, hour_cost: 0.82 }
+          win_cost: { value: $1.02 per hour, hour_cost: 1.02 }
+      - &HMQEL
+          name: High-Memory Quadruple Extra Large
+          memory: { value: 68.40 GB, sort: 68.4 }
+          computeunits: { value: 26 (8 cores x 3.25 units), abbr: ~, sort: 26 }
+          storage: { value: 1690 GB (2x840 GB), sort: 1690 }
+          architecture: 64-bit
+          ioperf: { value: High / 1000 Mbps, abbr: EBS-Optimized available, sort: 0 }
+          maxips: 240
+          apiname: m2.4xlarge
+          linux_cost: { value: $1.64 per hour, hour_cost: 1.64 }
+          win_cost: { value: $2.04 per hour, hour_cost: 2.04 }
+      - &M3EL
+          name: M3 Extra Large
+          memory: { value: 15.00 GB, sort: 15 }
+          computeunits: { value: 13 (4 cores x 3.25 units), abbr: ~, sort: 13 }
+          storage: { value: 0 GB (EBS only), sort: 0 }
+          architecture: 64-bit
+          ioperf: { value: Moderate / 500 Mbps, abbr: EBS-Optimized available, sort: 0 }
+          maxips: 60
+          apiname: m3.xlarge
+          linux_cost: { value: $0.50 per hour, hour_cost: 0.50  }
+          win_cost: { value: $0.78 per hour, hour_cost: 0.78 }
+      - &M3DEL
+          name: M3 Double Extra Large
+          memory: { value: 30.00 GB, sort: 30 }
+          computeunits: { value: 26 (8 cores x 3.25 units), abbr: ~, sort: 26 }
+          storage: { value: 0 GB (EBS only), sort: 0 }
+          architecture: 64-bit
+          ioperf: { value: High / 1000 Mbps, abbr: EBS-Optimized available, sort: 0 }
+          maxips: 120
+          apiname: m3.2xlarge
+          linux_cost: { value: $1.00 per hour, hour_cost: 1.00 }
+          win_cost: { value: $1.56 per hour, hour_cost: 1.56 }
+      - &HCM
+          name: High-CPU Medium
+          memory: { value: 1.70 GB, sort: 1.7 }
+          computeunits: { value: 5 (2 cores x 2.5 units), abbr: ~, sort: 5 }
+          storage: { value: 350 GB, sort: 350 }
+          architecture: 32/64-bit
+          ioperf: { value: Moderate, abbr: ~, sort: 0 }
+          maxips: 12
+          apiname: c1.medium
+          linux_cost: { value: $0.145 per hour, hour_cost: 0.145 }
+          win_cost: { value: $0.225 per hour, hour_cost: 0.225 }
+      - &HCEL
+          name: High-CPU Extra Large
+          memory: { value: 7.00 GB, sort: 7.0 }
+          computeunits: { value: 20 (8 cores x 2.5 units), abbr: ~, sort: 20 }
+          storage: { value: 1690 GB (4x420 GB), sort: 1690 }
+          architecture: 64-bit
+          ioperf: { value: High / 1000 Mbps, abbr: EBS-Optimized available, sort: 0 }
+          maxips: 60
+          apiname: c1.xlarge
+          linux_cost: { value: $0.58 per hour, hour_cost: 0.58 }
+          win_cost: { value: $0.90 per hour, hour_cost: 0.90 }
+      - &CCQEL
+          name: Cluster Compute Quadruple Extra Large
+          memory: { value: 23.00 GB, sort: 23 }
+          computeunits: { value: 33.5 (2 x Intel Xeon X5570), abbr: Quad-core Nehalem architecture, sort: 33.5 }
+          storage: { value: 1690 GB (2x840 GB), sort: 1690 }
+          architecture: 64-bit
+          ioperf: { value: Very High, abbr: 10 Gigabit Ethernet, sort: 0 }
+          maxips: 1
+          apiname: cc1.4xlarge
+          linux_cost: { value: $1.30 per hour, hour_cost: 1.30 }
+          win_cost: { value: $1.61 per hour, hour_cost: 1.61 }
+      - &CCEEL
+          name: Cluster Compute Eight Extra Large
+          memory: { value: 60.50 GB, sort: 60.5 }
+          computeunits: { value: 88 (2 x Intel Xeon E5-2670), abbr: Eight-core Sandy Bridge architecture, sort: 88 }
+          storage: { value: 3370 GB (4x840 GB), sort: 3370 }
+          architecture: 64-bit
+          ioperf: { value: Very High, abbr: 10 Gigabit Ethernet, sort: 0 }
+          maxips: 240
+          apiname: cc2.8xlarge
+          linux_cost: { value: $2.40 per hour, hour_cost: 2.40 }
+          win_cost: { value: $2.97 per hour, hour_cost: 2.97 }
+      - &CGQEL
+          name: Cluster GPU Quadruple Extra Large
+          memory: { value: 22.00 GB, sort: 22 }
+          computeunits: { value: 33.5 (2 x Intel Xeon X5570), abbr: Quad-core Nehalem architecture, sort: 33.5 }
+          storage: { value: 1690 GB (2x840 GB), sort: 1690 }
+          architecture: 64-bit
+          ioperf: { value: Very High, abbr: 10 Gigabit Ethernet, sort: 0 }
+          maxips: 1
+          apiname: cg1.4xlarge
+          linux_cost: { value: $2.10 per hour, hour_cost: 2.10 }
+          win_cost: { value: $2.60 per hour, hour_cost: 2.60 }
+      - &HIOQEL
+          name: High I/O Quadruple Extra Large
+          memory: { value: 60.50 GB, sort: 60.5 }
+          computeunits: { value: 35 (8 cores + 8 hyperthreads), abbr: ~, sort: 35 }
+          storage: { value: 2048 GB (2x1024 GB SSD), sort: 2048 }
+          architecture: 64-bit
+          ioperf: { value: Very High, abbr: 10 Gigabit Ethernet, sort: 0 }
+          maxips: 1
+          apiname: hi1.4xlarge
+          linux_cost: { value: $3.10 per hour, hour_cost: 3.10 }
+          win_cost: { value: $3.58 per hour, hour_cost: 3.58 }
+      - &HSEEL
+          name: High Storage Eight Extra Large
+          memory: { value: 117.00 GB, sort: 117 }
+          computeunits: { value: 35 (8 cores + 8 hyperthreads), abbr: ~, sort: 35 }
+          storage: { value: 48 TB (24x2 TB), sort: 49152 }
+          architecture: 64-bit
+          ioperf: { value: Very High, abbr: 10 Gigabit Ethernet, sort: 0 }
+          maxips: 1
+          apiname: hs1.8xlarge
+          linux_cost: { value: $4.600 per hour, hour_cost: 4.600 }
+          win_cost: { value: $4.931 per hour, hour_cost: 4.931 }
+      - &HMCEEL
+          name: High Memory Cluster Eight Extra Large
+          memory: { value: 244.00 GB, sort: 244 }
+          computeunits: { value: 88 (2 x Intel Xeon E5-2670), abbr: 'Eight-core. Intel Turbo, NUMA', sort: 88 }
+          storage: { value: 240 GB SSD, sort: 240 }
+          architecture: 64-bit
+          ioperf: { value: Very High, abbr: 10 Gigabit Ethernet, sort: 0 }
+          maxips: 1
+          apiname: cr1.8xlarge
+          linux_cost: { value: $3.500 per hour, hour_cost: 3.500 }
+          win_cost: { value: $3.831 per hour, hour_cost: 3.831 }
+  -
+    name: US West - Oregon
+    initial_class: hide
+    header:
+      - *name
+      - *mem
+      - *cu
+      - *store
+      - *arch
+      - *ioperf
+      - *maxip
+      - *apiname
+      - *lc
+      - *wc
+    instance:
+      - *Micro
+      - *M1S
+      - *M1M
+      - *M1L
+      - *M1EL
+      - *HMEL
+      - *HMDEL
+      - *HMQEL
+      - *M3EL
+      - *M3DEL
+      - *HCM
+      - *HCEL
+      - *CCEEL
+      - *HIOQEL
+      - *HSEEL
+      - *HMCEEL
+  -
+    name: US West - California
+    initial_class: hide
+    header:
+      - *name
+      - *mem
+      - *cu
+      - *store
+      - *arch
+      - *ioperf
+      - *maxip
+      - *apiname
+      - *lc
+      - *wc
+    instance:
+      -
+          name: Micro
+          memory: { value: 0.60 GB, sort: 0.6 }
+          computeunits: { value: 2 (only for short bursts), abbr: ~, sort: 2 }
+          storage: { value: 0 GB (EBS only), sort: 0 }
+          architecture: 32/64-bit
+          ioperf: { value: Low, abbr: ~, sort: 0 }
+          maxips: 1
+          apiname: t1.micro
+          linux_cost: { value: $0.025 per hour, hour_cost: 0.025 }
+          win_cost: { value: $0.035 per hour, hour_cost: 0.035 }
+      -
+          name: M1 Small
+          memory: { value: 1.70 GB, sort: 1.7 }
+          computeunits: { value: 1 (1 core x 1 unit), abbr: ~, sort: 1 }
+          storage: { value: 160 GB, sort: 160 }
+          architecture: 32/64-bit
+          ioperf: { value: Moderate, abbr: ~, sort: 0 }
+          maxips: 8
+          apiname: m1.small
+          linux_cost: { value: $0.065 per hour, hour_cost: 0.065 }
+          win_cost: { value: $0.096 per hour, hour_cost: 0.096 }
+      -
+          name: M1 Medium
+          memory: { value: 3.75 GB, sort: 3.75 }
+          computeunits: { value: 2 (1 core x 2 units), abbr: ~, sort: 2 }
+          storage: { value: 410 GB, sort: 410 }
+          architecture: 32/64-bit
+          ioperf: { value: Moderate, abbr: ~, sort: 0 }
+          maxips: 12
+          apiname: m1.medium
+          linux_cost: { value: $0.13 per hour, hour_cost: 0.13 }
+          win_cost: { value: $0.192 per hour, hour_cost: 0.192 }
+      -
+          name: M1 Large
+          memory: { value: 7.50 GB, sort: 7.5 }
+          computeunits: { value: 4 (2 cores x 2 units), abbr: ~, sort: 4 }
+          storage: { value: 850 GB (2x420 GB), sort: 850 }
+          architecture: 64-bit
+          ioperf: { value: High / 500 Mbps, abbr: EBS-Optimized available, sort: 0 }
+          maxips: 30
+          apiname: m1.large
+          linux_cost: { value: $0.26 per hour, hour_cost: 0.26 }
+          win_cost: { value: $0.384 per hour, hour_cost: 0.384 }
+      -
+          name: M1 Extra Large
+          memory: { value: 15.00 GB, sort: 15 }
+          computeunits: { value: 8 (4 cores x 2 units), abbr: ~, sort: 8 }
+          storage: { value: 1690 GB (4x420 GB), sort: 1690 }
+          architecture: 64-bit
+          ioperf: { value: High / 1000 Mbps, abbr: EBS-Optimized available, sort: 0 }
+          maxips: 60
+          apiname: m1.xlarge
+          linux_cost: { value: $0.52 per hour, hour_cost: 0.52 }
+          win_cost: { value: $0.768 per hour, hour_cost: 0.768 }
+      -
+          name: High-Memory Extra Large
+          memory: { value: 17.10 GB, sort: 17.10 }
+          computeunits: { value: 6.5 (2 cores x 3.25 units), abbr: ~, sort: 6.5 }
+          storage: { value: 420 GB, sort: 420 }
+          architecture: 64-bit
+          ioperf: { value: Moderate, abbr: ~, sort: 0 }
+          maxips: 60
+          apiname: m2.xlarge
+          linux_cost: { value: $0.46 per hour, hour_cost: 0.46 }
+          win_cost: { value: $0.56 per hour, hour_cost: 0.56 }
+      -
+          name: High-Memory Double Extra Large
+          memory: { value: 34.20 GB, sort: 34.2 }
+          computeunits: { value: 13 (4 cores x 3.25 units), abbr: ~, sort: 13 }
+          storage: { value: 850 GB, sort: 850 }
+          architecture: 64-bit
+          ioperf: { value: High, abbr: ~, sort: 0 }
+          maxips: 120
+          apiname: m2.2xlarge
+          linux_cost: { value: $0.92 per hour, hour_cost: 0.92 }
+          win_cost: { value: $1.12 per hour, hour_cost: 1.12 }
+      -
+          name: High-Memory Quadruple Extra Large
+          memory: { value: 68.40 GB, sort: 68.4 }
+          computeunits: { value: 26 (8 cores x 3.25 units), abbr: ~, sort: 26 }
+          storage: { value: 1690 GB (2x840 GB), sort: 1690 }
+          architecture: 64-bit
+          ioperf: { value: High / 1000 Mbps, abbr: EBS-Optimized available, sort: 0 }
+          maxips: 240
+          apiname: m2.4xlarge
+          linux_cost: { value: $1.84 per hour, hour_cost: 1.84 }
+          win_cost: { value: $2.24 per hour, hour_cost: 2.24 }
+      -
+          name: M3 Extra Large
+          memory: { value: 15.00 GB, sort: 15 }
+          computeunits: { value: 13 (4 cores x 3.25 units), abbr: ~, sort: 13 }
+          storage: { value: 0 GB (EBS only), sort: 0 }
+          architecture: 64-bit
+          ioperf: { value: Moderate / 500 Mbps, abbr: EBS-Optimized available, sort: 0 }
+          maxips: 60
+          apiname: m3.xlarge
+          linux_cost: { value: $0.55 per hour, hour_cost: 0.55  }
+          win_cost: { value: $0.83 per hour, hour_cost: 0.83 }
+      -
+          name: M3 Double Extra Large
+          memory: { value: 30.00 GB, sort: 30 }
+          computeunits: { value: 26 (8 cores x 3.25 units), abbr: ~, sort: 26 }
+          storage: { value: 0 GB (EBS only), sort: 0 }
+          architecture: 64-bit
+          ioperf: { value: High / 1000 Mbps, abbr: EBS-Optimized available, sort: 0 }
+          maxips: 120
+          apiname: m3.2xlarge
+          linux_cost: { value: $1.10 per hour, hour_cost: 1.10 }
+          win_cost: { value: $1.66 per hour, hour_cost: 1.66 }
+      -
+          name: High-CPU Medium
+          memory: { value: 1.70 GB, sort: 1.7 }
+          computeunits: { value: 5 (2 cores x 2.5 units), abbr: ~, sort: 5 }
+          storage: { value: 350 GB, sort: 350 }
+          architecture: 32/64-bit
+          ioperf: { value: Moderate, abbr: ~, sort: 0 }
+          maxips: 12
+          apiname: c1.medium
+          linux_cost: { value: $0.165 per hour, hour_cost: 0.165 }
+          win_cost: { value: $0.245 per hour, hour_cost: 0.245 }
+      -
+          name: High-CPU Extra Large
+          memory: { value: 7.00 GB, sort: 7.0 }
+          computeunits: { value: 20 (8 cores x 2.5 units), abbr: ~, sort: 20 }
+          storage: { value: 1690 GB (4x420 GB), sort: 1690 }
+          architecture: 64-bit
+          ioperf: { value: High / 1000 Mbps, abbr: EBS-Optimized available, sort: 0 }
+          maxips: 60
+          apiname: c1.xlarge
+          linux_cost: { value: $0.66 per hour, hour_cost: 0.66 }
+          win_cost: { value: $0.98 per hour, hour_cost: 0.98 }

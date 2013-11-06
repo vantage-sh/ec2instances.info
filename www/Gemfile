@@ -1,0 +1,15 @@
+# If you have OpenSSL installed, we recommend updating
+# the following line to use "https"
+source 'https://rubygems.org'
+
+gem "middleman", "~>3.0.13"
+gem "middleman-favicon-maker"
+gem "middleman-minify-html"
+gem "middleman-livereload"
+gem "middleman-deploy"
+gem "susy", "~>1.0.5"
+gem "redcarpet"
+gem "middleman-sync", "~> 3.0.9"
+gem "middleman-smusher"
+
+#gem 'coffee-filter' # Coffeescript filter for HAML

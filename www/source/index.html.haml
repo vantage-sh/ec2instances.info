@@ -1,0 +1,61 @@
+%div{:class => 'pull-left'}
+  %div{:class => 'btn-group', :id => 'region-dropdown'}
+    %a{:class => 'btn dropdown-toggle btn-primary', 'data-toggle' => 'dropdown', :href => '#'}
+      %i{:class => 'icon-globe icon-white'}
+      %span{:class => 'text'}
+      %span{:class => 'caret'}
+    %ul{:class => 'dropdown-menu', :role => 'menu'}
+      - data.ec2.region.each do |item|
+        %li
+          %a{:href => 'javascript:;', :region => item.name}=item.name
+  %div{:class => 'btn-group', :id => 'cost-dropdown'}
+    %a{:class => 'btn dropdown-toggle btn-primary', 'data-toggle' => 'dropdown', :href => '#'}
+      %i{:class => 'icon-shopping-cart icon-white'}
+      %span{:class => 'text'}
+      %span{:class => 'caret'}
+    %ul{:class => 'dropdown-menu', :role => 'menu'}
+      - data.timeframe.type.each do |item|
+        %li
+          %a{:href => 'javascript:;', :duration => item.name.downcase}=item.name
+  %div{:class => 'btn-group', :id => 'filter-dropdown'}
+    %a{:class => 'btn dropdown-toggle btn-primary', 'data-toggle' => 'dropdown', :href => '#'}
+      %i{:class => 'icon-filter icon-white'}
+      %span{:class => 'caret'}
+    %ul{:class => 'dropdown-menu', :role => 'menu'}
+
+- data.ec2.region.each do |item|
+  %div{:id => item.name.downcase.gsub(/\s+/, ''), :class => item.initial_class}
+    %table{:name => item.name.downcase.gsub(/\s+/, ''), :class => 'data table table-bordered table-hover table-condensed', :cellspacing => '0'}
+      %thead
+        %tr{:role => 'row'}
+          - item.header.each do |header|
+            %th{:class => header.name.downcase.gsub(/\s+/, '')}
+              - if header['abbr'].nil?
+                = header.name
+              - else
+                %abbr{'data-original-title' => header['abbr']}= header.name
+        %tbody
+          - item.instance.each do |instance|
+            %tr
+              %td{:class => 'name'}= instance.name
+              %td{:class => 'memory'}
+                %span{:sort => instance.memory['sort']}=instance.memory['value']
+              %td{:class => 'computeunits'}
+                %span{:sort => instance.computeunits['sort'], :abbr => instance.computeunits['abbr']}
+                  - if instance.computeunits['abbr'].nil?
+                    = instance.computeunits['value']
+                  - else
+                    %abbr{'data-original-title' => instance.computeunits['abbr']}= instance.computeunits['value']
+              %td{:class => 'storage'}
+                %span{:sort => instance.storage['sort']}=instance.storage['value']
+              %td{:class => 'architecture'}=instance.architecture
+              %td{:class => 'ioperf'}
+                %span{:sort => instance.ioperf['sort']}
+                  - if instance.ioperf['abbr'].nil?
+                    = instance.ioperf['value']
+                  - else
+                    %abbr{'data-original-title' => instance.ioperf['abbr']}= instance.ioperf['value']
+              %td{:class => 'maxips'}=instance.maxips
+              %td{:class => 'apiname'}=instance.apiname
+              %td{:class => 'cost', :hour_cost => instance.linux_cost['hour_cost']}=instance.linux_cost['value']
+              %td{:class => 'cost', :hour_cost => instance.win_cost['hour_cost']}=instance.win_cost['value']

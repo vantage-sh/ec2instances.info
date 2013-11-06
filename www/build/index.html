@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<html class='no-js'>
+  <head>
+    <meta charset='utf-8'>
+    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
+    <title>Set your site title in /helpers/site_helpers.rb</title>
+    <meta content='Set your site description in /helpers/site_helpers.rb' name='description'>
+    <meta content='width=device-width' name='viewport'>
+    <script src="javascripts/vendor/modernizr-2.6.1.min.js" type="text/javascript"></script>
+    <link href="stylesheets/site.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/_vendor/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <!--[if lt IE 7]> <p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p> <![endif]-->
+    <div class='page-header'>
+      <h1>EC2Instances.info <small>Easy Amazon EC2 Instance Comparison</small></h1>
+    </div>
+    <div class='main' role='main'>
+      <div class='pull-left'>
+        <div class='btn-group' id='region-dropdown'>
+          <a class='btn dropdown-toggle btn-primary' data-toggle='dropdown' href='#'>
+            <i class='icon-globe icon-white'></i>
+            <span class='text'></span>
+            <span class='caret'></span>
+          </a>
+          <ul class='dropdown-menu' role='menu'>
+            <li>
+              <a href='javascript:;' region='US East - Virginia'>US East - Virginia</a>
+            </li>
+            <li>
+              <a href='javascript:;' region='US West - Oregon'>US West - Oregon</a>
+            </li>
+            <li>
+              <a href='javascript:;' region='US West - California'>US West - California</a>
+            </li>
+          </ul>
+        </div>
+        <div class='btn-group' id='cost-dropdown'>
+          <a class='btn dropdown-toggle btn-primary' data-toggle='dropdown' href='#'>
+            <i class='icon-shopping-cart icon-white'></i>
+            <span class='text'></span>
+            <span class='caret'></span>
+          </a>
+          <ul class='dropdown-menu' role='menu'>
+            <li>
+              <a duration='hourly' href='javascript:;'>Hourly</a>
+            </li>
+            <li>
+              <a duration='daily' href='javascript:;'>Daily</a>
+            </li>
+            <li>
+              <a duration='weekly' href='javascript:;'>Weekly</a>
+            </li>
+            <li>
+              <a duration='monthly' href='javascript:;'>Monthly</a>
+            </li>
+            <li>
+              <a duration='yearly' href='javascript:;'>Yearly</a>
+            </li>
+          </ul>
+        </div>
+        <div class='btn-group' id='filter-dropdown'>
+          <a class='btn dropdown-toggle btn-primary' data-toggle='dropdown' href='#'>
+            <i class='icon-filter icon-white'></i>
+            <span class='caret'></span>
+          </a>
+          <ul class='dropdown-menu' role='menu'></ul>
+        </div>
+      </div>
+      <div class='show' id='useast-virginia'>
+        <table cellspacing='0' class='data table table-bordered table-hover table-condensed' name='useast-virginia'>
+          <thead>
+            <tr role='row'>
+              <th class='name'>
+                Name
+              </th>
+              <th class='memory'>
+                Memory
+              </th>
+              <th class='computeunits'>
+                <abbr data-original-title='One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.'>Compute Units</abbr>
+              </th>
+              <th class='storage'>
+                Storage
+              </th>
+              <th class='architecture'>
+                Architecture
+              </th>
+              <th class='i/operformance'>
+                I/O Performance
+              </th>
+              <th class='maxips'>
+                <abbr data-original-title='Adding additional IPs requires launching the instance in a VPC.'>Max IPs</abbr>
+              </th>
+              <th class='apiname'>
+                API Name
+              </th>
+              <th class='linuxcost'>
+                Linux Cost
+              </th>
+              <th class='windowscost'>
+                Windows Cost
+              </th>
+            </tr>
+            <tbody>
+              <tr>
+                <td class='name'>Micro</td>
+                <td class='memory'>
+                  <span sort='0.6'>0.60 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='2'>
+                    2 (only for short bursts)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='0'>0 GB (EBS only)</span>
+                </td>
+                <td class='architecture'>32/64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    Low
+                  </span>
+                </td>
+                <td class='maxips'>1</td>
+                <td class='apiname'>t1.micro</td>
+                <td class='cost' hour_cost='0.02'>$0.02 per hour</td>
+                <td class='cost' hour_cost='0.02'>$0.02 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M1 Small</td>
+                <td class='memory'>
+                  <span sort='1.7'>1.70 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='1'>
+                    1 (1 core x 1 unit)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='160'>160 GB</span>
+                </td>
+                <td class='architecture'>32/64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    Moderate
+                  </span>
+                </td>
+                <td class='maxips'>8</td>
+                <td class='apiname'>m1.small</td>
+                <td class='cost' hour_cost='0.06'>$0.06 per hour</td>
+                <td class='cost' hour_cost='0.091'>$0.091 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M1 Medium</td>
+                <td class='memory'>
+                  <span sort='3.75'>3.75 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='2'>
+                    2 (1 core x 2 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='410'>410 GB</span>
+                </td>
+                <td class='architecture'>32/64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    Moderate
+                  </span>
+                </td>
+                <td class='maxips'>12</td>
+                <td class='apiname'>m1.medium</td>
+                <td class='cost' hour_cost='0.12'>$0.12 per hour</td>
+                <td class='cost' hour_cost='0.182'>$0.182 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M1 Large</td>
+                <td class='memory'>
+                  <span sort='7.5'>7.50 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='4'>
+                    4 (2 cores x 2 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='850'>850 GB (2x420 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>High / 500 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>30</td>
+                <td class='apiname'>m1.large</td>
+                <td class='cost' hour_cost='0.24'>$0.24 per hour</td>
+                <td class='cost' hour_cost='0.364'>$0.364 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M1 Extra Large</td>
+                <td class='memory'>
+                  <span sort='15'>15.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='8'>
+                    8 (4 cores x 2 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='1690'>1690 GB (4x420 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>High / 1000 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>60</td>
+                <td class='apiname'>m1.xlarge</td>
+                <td class='cost' hour_cost='0.48'>$0.48 per hour</td>
+                <td class='cost' hour_cost='0.728'>$0.728 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High-Memory Extra Large</td>
+                <td class='memory'>
+                  <span sort='17.1'>17.10 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='6.5'>
+                    6.5 (2 cores x 3.25 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='420'>420 GB</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    Moderate
+                  </span>
+                </td>
+                <td class='maxips'>60</td>
+                <td class='apiname'>m2.xlarge</td>
+                <td class='cost' hour_cost='0.41'>$0.41 per hour</td>
+                <td class='cost' hour_cost='0.51'>$0.51 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High-Memory Double Extra Large</td>
+                <td class='memory'>
+                  <span sort='34.2'>34.20 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='13'>
+                    13 (4 cores x 3.25 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='850'>850 GB</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    High
+                  </span>
+                </td>
+                <td class='maxips'>120</td>
+                <td class='apiname'>m2.2xlarge</td>
+                <td class='cost' hour_cost='0.82'>$0.82 per hour</td>
+                <td class='cost' hour_cost='1.02'>$1.02 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High-Memory Quadruple Extra Large</td>
+                <td class='memory'>
+                  <span sort='68.4'>68.40 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='26'>
+                    26 (8 cores x 3.25 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='1690'>1690 GB (2x840 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>High / 1000 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>240</td>
+                <td class='apiname'>m2.4xlarge</td>
+                <td class='cost' hour_cost='1.64'>$1.64 per hour</td>
+                <td class='cost' hour_cost='2.04'>$2.04 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M3 Extra Large</td>
+                <td class='memory'>
+                  <span sort='15'>15.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='13'>
+                    13 (4 cores x 3.25 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='0'>0 GB (EBS only)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>Moderate / 500 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>60</td>
+                <td class='apiname'>m3.xlarge</td>
+                <td class='cost' hour_cost='0.5'>$0.50 per hour</td>
+                <td class='cost' hour_cost='0.78'>$0.78 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M3 Double Extra Large</td>
+                <td class='memory'>
+                  <span sort='30'>30.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='26'>
+                    26 (8 cores x 3.25 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='0'>0 GB (EBS only)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>High / 1000 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>120</td>
+                <td class='apiname'>m3.2xlarge</td>
+                <td class='cost' hour_cost='1.0'>$1.00 per hour</td>
+                <td class='cost' hour_cost='1.56'>$1.56 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High-CPU Medium</td>
+                <td class='memory'>
+                  <span sort='1.7'>1.70 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='5'>
+                    5 (2 cores x 2.5 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='350'>350 GB</span>
+                </td>
+                <td class='architecture'>32/64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    Moderate
+                  </span>
+                </td>
+                <td class='maxips'>12</td>
+                <td class='apiname'>c1.medium</td>
+                <td class='cost' hour_cost='0.145'>$0.145 per hour</td>
+                <td class='cost' hour_cost='0.225'>$0.225 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High-CPU Extra Large</td>
+                <td class='memory'>
+                  <span sort='7.0'>7.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='20'>
+                    20 (8 cores x 2.5 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='1690'>1690 GB (4x420 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>High / 1000 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>60</td>
+                <td class='apiname'>c1.xlarge</td>
+                <td class='cost' hour_cost='0.58'>$0.58 per hour</td>
+                <td class='cost' hour_cost='0.9'>$0.90 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>Cluster Compute Quadruple Extra Large</td>
+                <td class='memory'>
+                  <span sort='23'>23.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span abbr='Quad-core Nehalem architecture' sort='33.5'>
+                    <abbr data-original-title='Quad-core Nehalem architecture'>33.5 (2 x Intel Xeon X5570)</abbr>
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='1690'>1690 GB (2x840 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='10 Gigabit Ethernet'>Very High</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>1</td>
+                <td class='apiname'>cc1.4xlarge</td>
+                <td class='cost' hour_cost='1.3'>$1.30 per hour</td>
+                <td class='cost' hour_cost='1.61'>$1.61 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>Cluster Compute Eight Extra Large</td>
+                <td class='memory'>
+                  <span sort='60.5'>60.50 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span abbr='Eight-core Sandy Bridge architecture' sort='88'>
+                    <abbr data-original-title='Eight-core Sandy Bridge architecture'>88 (2 x Intel Xeon E5-2670)</abbr>
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='3370'>3370 GB (4x840 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='10 Gigabit Ethernet'>Very High</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>240</td>
+                <td class='apiname'>cc2.8xlarge</td>
+                <td class='cost' hour_cost='2.4'>$2.40 per hour</td>
+                <td class='cost' hour_cost='2.97'>$2.97 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>Cluster GPU Quadruple Extra Large</td>
+                <td class='memory'>
+                  <span sort='22'>22.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span abbr='Quad-core Nehalem architecture' sort='33.5'>
+                    <abbr data-original-title='Quad-core Nehalem architecture'>33.5 (2 x Intel Xeon X5570)</abbr>
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='1690'>1690 GB (2x840 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='10 Gigabit Ethernet'>Very High</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>1</td>
+                <td class='apiname'>cg1.4xlarge</td>
+                <td class='cost' hour_cost='2.1'>$2.10 per hour</td>
+                <td class='cost' hour_cost='2.6'>$2.60 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High I/O Quadruple Extra Large</td>
+                <td class='memory'>
+                  <span sort='60.5'>60.50 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='35'>
+                    35 (8 cores + 8 hyperthreads)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='2048'>2048 GB (2x1024 GB SSD)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='10 Gigabit Ethernet'>Very High</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>1</td>
+                <td class='apiname'>hi1.4xlarge</td>
+                <td class='cost' hour_cost='3.1'>$3.10 per hour</td>
+                <td class='cost' hour_cost='3.58'>$3.58 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High Storage Eight Extra Large</td>
+                <td class='memory'>
+                  <span sort='117'>117.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='35'>
+                    35 (8 cores + 8 hyperthreads)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='49152'>48 TB (24x2 TB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='10 Gigabit Ethernet'>Very High</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>1</td>
+                <td class='apiname'>hs1.8xlarge</td>
+                <td class='cost' hour_cost='4.6'>$4.600 per hour</td>
+                <td class='cost' hour_cost='4.931'>$4.931 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High Memory Cluster Eight Extra Large</td>
+                <td class='memory'>
+                  <span sort='244'>244.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span abbr='Eight-core. Intel Turbo, NUMA' sort='88'>
+                    <abbr data-original-title='Eight-core. Intel Turbo, NUMA'>88 (2 x Intel Xeon E5-2670)</abbr>
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='240'>240 GB SSD</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='10 Gigabit Ethernet'>Very High</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>1</td>
+                <td class='apiname'>cr1.8xlarge</td>
+                <td class='cost' hour_cost='3.5'>$3.500 per hour</td>
+                <td class='cost' hour_cost='3.831'>$3.831 per hour</td>
+              </tr>
+            </tbody>
+          </thead>
+        </table>
+      </div>
+      <div class='hide' id='uswest-oregon'>
+        <table cellspacing='0' class='data table table-bordered table-hover table-condensed' name='uswest-oregon'>
+          <thead>
+            <tr role='row'>
+              <th class='name'>
+                Name
+              </th>
+              <th class='memory'>
+                Memory
+              </th>
+              <th class='computeunits'>
+                <abbr data-original-title='One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.'>Compute Units</abbr>
+              </th>
+              <th class='storage'>
+                Storage
+              </th>
+              <th class='architecture'>
+                Architecture
+              </th>
+              <th class='i/operformance'>
+                I/O Performance
+              </th>
+              <th class='maxips'>
+                <abbr data-original-title='Adding additional IPs requires launching the instance in a VPC.'>Max IPs</abbr>
+              </th>
+              <th class='apiname'>
+                API Name
+              </th>
+              <th class='linuxcost'>
+                Linux Cost
+              </th>
+              <th class='windowscost'>
+                Windows Cost
+              </th>
+            </tr>
+            <tbody>
+              <tr>
+                <td class='name'>Micro</td>
+                <td class='memory'>
+                  <span sort='0.6'>0.60 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='2'>
+                    2 (only for short bursts)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='0'>0 GB (EBS only)</span>
+                </td>
+                <td class='architecture'>32/64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    Low
+                  </span>
+                </td>
+                <td class='maxips'>1</td>
+                <td class='apiname'>t1.micro</td>
+                <td class='cost' hour_cost='0.02'>$0.02 per hour</td>
+                <td class='cost' hour_cost='0.02'>$0.02 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M1 Small</td>
+                <td class='memory'>
+                  <span sort='1.7'>1.70 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='1'>
+                    1 (1 core x 1 unit)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='160'>160 GB</span>
+                </td>
+                <td class='architecture'>32/64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    Moderate
+                  </span>
+                </td>
+                <td class='maxips'>8</td>
+                <td class='apiname'>m1.small</td>
+                <td class='cost' hour_cost='0.06'>$0.06 per hour</td>
+                <td class='cost' hour_cost='0.091'>$0.091 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M1 Medium</td>
+                <td class='memory'>
+                  <span sort='3.75'>3.75 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='2'>
+                    2 (1 core x 2 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='410'>410 GB</span>
+                </td>
+                <td class='architecture'>32/64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    Moderate
+                  </span>
+                </td>
+                <td class='maxips'>12</td>
+                <td class='apiname'>m1.medium</td>
+                <td class='cost' hour_cost='0.12'>$0.12 per hour</td>
+                <td class='cost' hour_cost='0.182'>$0.182 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M1 Large</td>
+                <td class='memory'>
+                  <span sort='7.5'>7.50 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='4'>
+                    4 (2 cores x 2 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='850'>850 GB (2x420 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>High / 500 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>30</td>
+                <td class='apiname'>m1.large</td>
+                <td class='cost' hour_cost='0.24'>$0.24 per hour</td>
+                <td class='cost' hour_cost='0.364'>$0.364 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M1 Extra Large</td>
+                <td class='memory'>
+                  <span sort='15'>15.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='8'>
+                    8 (4 cores x 2 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='1690'>1690 GB (4x420 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>High / 1000 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>60</td>
+                <td class='apiname'>m1.xlarge</td>
+                <td class='cost' hour_cost='0.48'>$0.48 per hour</td>
+                <td class='cost' hour_cost='0.728'>$0.728 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High-Memory Extra Large</td>
+                <td class='memory'>
+                  <span sort='17.1'>17.10 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='6.5'>
+                    6.5 (2 cores x 3.25 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='420'>420 GB</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    Moderate
+                  </span>
+                </td>
+                <td class='maxips'>60</td>
+                <td class='apiname'>m2.xlarge</td>
+                <td class='cost' hour_cost='0.41'>$0.41 per hour</td>
+                <td class='cost' hour_cost='0.51'>$0.51 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High-Memory Double Extra Large</td>
+                <td class='memory'>
+                  <span sort='34.2'>34.20 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='13'>
+                    13 (4 cores x 3.25 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='850'>850 GB</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    High
+                  </span>
+                </td>
+                <td class='maxips'>120</td>
+                <td class='apiname'>m2.2xlarge</td>
+                <td class='cost' hour_cost='0.82'>$0.82 per hour</td>
+                <td class='cost' hour_cost='1.02'>$1.02 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High-Memory Quadruple Extra Large</td>
+                <td class='memory'>
+                  <span sort='68.4'>68.40 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='26'>
+                    26 (8 cores x 3.25 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='1690'>1690 GB (2x840 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>High / 1000 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>240</td>
+                <td class='apiname'>m2.4xlarge</td>
+                <td class='cost' hour_cost='1.64'>$1.64 per hour</td>
+                <td class='cost' hour_cost='2.04'>$2.04 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M3 Extra Large</td>
+                <td class='memory'>
+                  <span sort='15'>15.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='13'>
+                    13 (4 cores x 3.25 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='0'>0 GB (EBS only)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>Moderate / 500 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>60</td>
+                <td class='apiname'>m3.xlarge</td>
+                <td class='cost' hour_cost='0.5'>$0.50 per hour</td>
+                <td class='cost' hour_cost='0.78'>$0.78 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M3 Double Extra Large</td>
+                <td class='memory'>
+                  <span sort='30'>30.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='26'>
+                    26 (8 cores x 3.25 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='0'>0 GB (EBS only)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>High / 1000 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>120</td>
+                <td class='apiname'>m3.2xlarge</td>
+                <td class='cost' hour_cost='1.0'>$1.00 per hour</td>
+                <td class='cost' hour_cost='1.56'>$1.56 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High-CPU Medium</td>
+                <td class='memory'>
+                  <span sort='1.7'>1.70 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='5'>
+                    5 (2 cores x 2.5 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='350'>350 GB</span>
+                </td>
+                <td class='architecture'>32/64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    Moderate
+                  </span>
+                </td>
+                <td class='maxips'>12</td>
+                <td class='apiname'>c1.medium</td>
+                <td class='cost' hour_cost='0.145'>$0.145 per hour</td>
+                <td class='cost' hour_cost='0.225'>$0.225 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High-CPU Extra Large</td>
+                <td class='memory'>
+                  <span sort='7.0'>7.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='20'>
+                    20 (8 cores x 2.5 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='1690'>1690 GB (4x420 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>High / 1000 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>60</td>
+                <td class='apiname'>c1.xlarge</td>
+                <td class='cost' hour_cost='0.58'>$0.58 per hour</td>
+                <td class='cost' hour_cost='0.9'>$0.90 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>Cluster Compute Eight Extra Large</td>
+                <td class='memory'>
+                  <span sort='60.5'>60.50 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span abbr='Eight-core Sandy Bridge architecture' sort='88'>
+                    <abbr data-original-title='Eight-core Sandy Bridge architecture'>88 (2 x Intel Xeon E5-2670)</abbr>
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='3370'>3370 GB (4x840 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='10 Gigabit Ethernet'>Very High</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>240</td>
+                <td class='apiname'>cc2.8xlarge</td>
+                <td class='cost' hour_cost='2.4'>$2.40 per hour</td>
+                <td class='cost' hour_cost='2.97'>$2.97 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High I/O Quadruple Extra Large</td>
+                <td class='memory'>
+                  <span sort='60.5'>60.50 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='35'>
+                    35 (8 cores + 8 hyperthreads)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='2048'>2048 GB (2x1024 GB SSD)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='10 Gigabit Ethernet'>Very High</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>1</td>
+                <td class='apiname'>hi1.4xlarge</td>
+                <td class='cost' hour_cost='3.1'>$3.10 per hour</td>
+                <td class='cost' hour_cost='3.58'>$3.58 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High Storage Eight Extra Large</td>
+                <td class='memory'>
+                  <span sort='117'>117.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='35'>
+                    35 (8 cores + 8 hyperthreads)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='49152'>48 TB (24x2 TB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='10 Gigabit Ethernet'>Very High</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>1</td>
+                <td class='apiname'>hs1.8xlarge</td>
+                <td class='cost' hour_cost='4.6'>$4.600 per hour</td>
+                <td class='cost' hour_cost='4.931'>$4.931 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High Memory Cluster Eight Extra Large</td>
+                <td class='memory'>
+                  <span sort='244'>244.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span abbr='Eight-core. Intel Turbo, NUMA' sort='88'>
+                    <abbr data-original-title='Eight-core. Intel Turbo, NUMA'>88 (2 x Intel Xeon E5-2670)</abbr>
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='240'>240 GB SSD</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='10 Gigabit Ethernet'>Very High</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>1</td>
+                <td class='apiname'>cr1.8xlarge</td>
+                <td class='cost' hour_cost='3.5'>$3.500 per hour</td>
+                <td class='cost' hour_cost='3.831'>$3.831 per hour</td>
+              </tr>
+            </tbody>
+          </thead>
+        </table>
+      </div>
+      <div class='hide' id='uswest-california'>
+        <table cellspacing='0' class='data table table-bordered table-hover table-condensed' name='uswest-california'>
+          <thead>
+            <tr role='row'>
+              <th class='name'>
+                Name
+              </th>
+              <th class='memory'>
+                Memory
+              </th>
+              <th class='computeunits'>
+                <abbr data-original-title='One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.'>Compute Units</abbr>
+              </th>
+              <th class='storage'>
+                Storage
+              </th>
+              <th class='architecture'>
+                Architecture
+              </th>
+              <th class='i/operformance'>
+                I/O Performance
+              </th>
+              <th class='maxips'>
+                <abbr data-original-title='Adding additional IPs requires launching the instance in a VPC.'>Max IPs</abbr>
+              </th>
+              <th class='apiname'>
+                API Name
+              </th>
+              <th class='linuxcost'>
+                Linux Cost
+              </th>
+              <th class='windowscost'>
+                Windows Cost
+              </th>
+            </tr>
+            <tbody>
+              <tr>
+                <td class='name'>Micro</td>
+                <td class='memory'>
+                  <span sort='0.6'>0.60 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='2'>
+                    2 (only for short bursts)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='0'>0 GB (EBS only)</span>
+                </td>
+                <td class='architecture'>32/64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    Low
+                  </span>
+                </td>
+                <td class='maxips'>1</td>
+                <td class='apiname'>t1.micro</td>
+                <td class='cost' hour_cost='0.025'>$0.025 per hour</td>
+                <td class='cost' hour_cost='0.035'>$0.035 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M1 Small</td>
+                <td class='memory'>
+                  <span sort='1.7'>1.70 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='1'>
+                    1 (1 core x 1 unit)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='160'>160 GB</span>
+                </td>
+                <td class='architecture'>32/64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    Moderate
+                  </span>
+                </td>
+                <td class='maxips'>8</td>
+                <td class='apiname'>m1.small</td>
+                <td class='cost' hour_cost='0.065'>$0.065 per hour</td>
+                <td class='cost' hour_cost='0.096'>$0.096 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M1 Medium</td>
+                <td class='memory'>
+                  <span sort='3.75'>3.75 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='2'>
+                    2 (1 core x 2 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='410'>410 GB</span>
+                </td>
+                <td class='architecture'>32/64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    Moderate
+                  </span>
+                </td>
+                <td class='maxips'>12</td>
+                <td class='apiname'>m1.medium</td>
+                <td class='cost' hour_cost='0.13'>$0.13 per hour</td>
+                <td class='cost' hour_cost='0.192'>$0.192 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M1 Large</td>
+                <td class='memory'>
+                  <span sort='7.5'>7.50 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='4'>
+                    4 (2 cores x 2 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='850'>850 GB (2x420 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>High / 500 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>30</td>
+                <td class='apiname'>m1.large</td>
+                <td class='cost' hour_cost='0.26'>$0.26 per hour</td>
+                <td class='cost' hour_cost='0.384'>$0.384 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M1 Extra Large</td>
+                <td class='memory'>
+                  <span sort='15'>15.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='8'>
+                    8 (4 cores x 2 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='1690'>1690 GB (4x420 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>High / 1000 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>60</td>
+                <td class='apiname'>m1.xlarge</td>
+                <td class='cost' hour_cost='0.52'>$0.52 per hour</td>
+                <td class='cost' hour_cost='0.768'>$0.768 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High-Memory Extra Large</td>
+                <td class='memory'>
+                  <span sort='17.1'>17.10 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='6.5'>
+                    6.5 (2 cores x 3.25 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='420'>420 GB</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    Moderate
+                  </span>
+                </td>
+                <td class='maxips'>60</td>
+                <td class='apiname'>m2.xlarge</td>
+                <td class='cost' hour_cost='0.46'>$0.46 per hour</td>
+                <td class='cost' hour_cost='0.56'>$0.56 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High-Memory Double Extra Large</td>
+                <td class='memory'>
+                  <span sort='34.2'>34.20 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='13'>
+                    13 (4 cores x 3.25 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='850'>850 GB</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    High
+                  </span>
+                </td>
+                <td class='maxips'>120</td>
+                <td class='apiname'>m2.2xlarge</td>
+                <td class='cost' hour_cost='0.92'>$0.92 per hour</td>
+                <td class='cost' hour_cost='1.12'>$1.12 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High-Memory Quadruple Extra Large</td>
+                <td class='memory'>
+                  <span sort='68.4'>68.40 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='26'>
+                    26 (8 cores x 3.25 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='1690'>1690 GB (2x840 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>High / 1000 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>240</td>
+                <td class='apiname'>m2.4xlarge</td>
+                <td class='cost' hour_cost='1.84'>$1.84 per hour</td>
+                <td class='cost' hour_cost='2.24'>$2.24 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M3 Extra Large</td>
+                <td class='memory'>
+                  <span sort='15'>15.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='13'>
+                    13 (4 cores x 3.25 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='0'>0 GB (EBS only)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>Moderate / 500 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>60</td>
+                <td class='apiname'>m3.xlarge</td>
+                <td class='cost' hour_cost='0.55'>$0.55 per hour</td>
+                <td class='cost' hour_cost='0.83'>$0.83 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>M3 Double Extra Large</td>
+                <td class='memory'>
+                  <span sort='30'>30.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='26'>
+                    26 (8 cores x 3.25 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='0'>0 GB (EBS only)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>High / 1000 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>120</td>
+                <td class='apiname'>m3.2xlarge</td>
+                <td class='cost' hour_cost='1.1'>$1.10 per hour</td>
+                <td class='cost' hour_cost='1.66'>$1.66 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High-CPU Medium</td>
+                <td class='memory'>
+                  <span sort='1.7'>1.70 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='5'>
+                    5 (2 cores x 2.5 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='350'>350 GB</span>
+                </td>
+                <td class='architecture'>32/64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    Moderate
+                  </span>
+                </td>
+                <td class='maxips'>12</td>
+                <td class='apiname'>c1.medium</td>
+                <td class='cost' hour_cost='0.165'>$0.165 per hour</td>
+                <td class='cost' hour_cost='0.245'>$0.245 per hour</td>
+              </tr>
+              <tr>
+                <td class='name'>High-CPU Extra Large</td>
+                <td class='memory'>
+                  <span sort='7.0'>7.00 GB</span>
+                </td>
+                <td class='computeunits'>
+                  <span sort='20'>
+                    20 (8 cores x 2.5 units)
+                  </span>
+                </td>
+                <td class='storage'>
+                  <span sort='1690'>1690 GB (4x420 GB)</span>
+                </td>
+                <td class='architecture'>64-bit</td>
+                <td class='ioperf'>
+                  <span sort='0'>
+                    <abbr data-original-title='EBS-Optimized available'>High / 1000 Mbps</abbr>
+                  </span>
+                </td>
+                <td class='maxips'>60</td>
+                <td class='apiname'>c1.xlarge</td>
+                <td class='cost' hour_cost='0.66'>$0.66 per hour</td>
+                <td class='cost' hour_cost='0.98'>$0.98 per hour</td>
+              </tr>
+            </tbody>
+          </thead>
+        </table>
+      </div>
+    </div>
+    <div class='well'>
+      <p>This site was created out of frustration while trying to compare EC2 instances using Amazon's <a href="http://aws.amazon.com/ec2/instance-types/" target="_blank">instance type</a> and <a href="http://aws.amazon.com/ec2/pricing/" target="_blank">pricing</a> pages.</p>
+      <p>It was started by <a href="http://twitter.com/powdahound" target="_blank">@powdahound</a>, contributed to by <a href="https://github.com/powdahound/ec2instances.info/contributors" target="_blank">many</a>, is <a href="http://powdahound.com/2011/03/hosting-a-static-site-on-amazon-s3-ec2instances-info" target="_blank">hosted on S3</a>, and awaits your improvements <a href="https://github.com/powdahound/ec2instances.info" target="_blank">on GitHub</a>.</p>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+    <script>
+      window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.8.3.min.js"><\/script>')
+    </script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script>
+      window.jQuery || document.write('<script src="javascripts/vendor/jquery.dataTables.min.js"><\/script>')
+    </script>
+    <script>
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+    <script src="javascripts/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="javascripts/default.js" type="text/javascript"></script>
+  </body>
+</html>
