@@ -141,8 +141,8 @@
           <td class="cost" data-pricing='${json.dumps({r:p['linux'] for r,p in inst['pricing'].iteritems()}) | h}'>
             $${inst['pricing']['us-east-1']['linux']} per hour
           </td>
-          <td class="cost" data-pricing='${json.dumps({r:p['mswin'] for r,p in inst['pricing'].iteritems()}) | h}'>
-            $${inst['pricing']['us-east-1']['mswin']} per hour
+          <td class="cost" data-pricing='${json.dumps({r:p.get('mswin', 0) for r,p in inst['pricing'].iteritems()}) | h}'>
+            $${inst['pricing']['us-east-1'].get('mswin', 0)} per hour
           </td>
         </tr>
 % endfor

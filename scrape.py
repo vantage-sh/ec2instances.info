@@ -115,19 +115,21 @@ def add_pricing(imap, data):
                 if i_type == 'cc2.4xlarge': continue
                 assert i_type in imap, "Unknown instance size: %s" % (i_type, )
                 inst = imap[i_type]
-                inst.pricing[region] = {}
+                inst.pricing.setdefault(region, {})
                 print "%s/%s" % (region, i_type)
                 for col in i_spec['valueColumns']:
                     inst.pricing[region][col['name']] = col['prices']['USD']
 
 def add_pricing_data(instances):
-    pricing_url = 'http://aws.amazon.com/ec2/pricing/pricing-on-demand-instances.json'
-    pricing = json.loads(urllib2.urlopen(pricing_url).read())
-
-    by_type = {i.instance_type:i for i in instances}
     for i in instances:
         i.pricing = {}
-    add_pricing(by_type, pricing)
+    by_type = {i.instance_type:i for i in instances}
+
+    for platform in ['linux', 'mswin']:
+        pricing_url = 'http://aws.amazon.com/ec2/pricing/json/%s-od.json' % (platform,)
+        pricing = json.loads(urllib2.urlopen(pricing_url).read())
+
+        add_pricing(by_type, pricing)
 
 def add_eni_info(instances):
     eni_url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html"
