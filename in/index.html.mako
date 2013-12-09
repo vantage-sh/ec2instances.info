@@ -132,7 +132,11 @@
               % endif
             </span>
           </td>
+          % if inst['vpc']:
           <td class="maxips">${inst['vpc']['max_enis'] * inst['vpc']['ips_per_eni']}</td>
+          % else:
+          <td class="maxips">N/A</td>
+          % endif
           <td class="apiname">${inst['instance_type']}</td>
           <td class="cost" data-pricing='${json.dumps({r:p['linux'] for r,p in inst['pricing'].iteritems()}) | h}'>
             $${inst['pricing']['us-east-1']['linux']} per hour

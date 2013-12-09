@@ -5,7 +5,8 @@ import json
 
 class Instance(object):
     def __init__(self):
-        pass
+        self.vpc = None
+
     def to_dict(self):
         d = dict(family=self.family,
                  instance_type=self.instance_type,
