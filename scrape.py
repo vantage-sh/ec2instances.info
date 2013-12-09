@@ -85,19 +85,7 @@ def transform_size(size):
     return 'large'
 
 def convert_to_type(typ, size):
-    type_map = {
-        'stdODI': 'm1',
-        'secgenstdODI': 'm3',
-        'uODI': 't1',
-        'hiMemODI': 'm2',
-        'hiCPUODI': 'c1',
-        'clusterComputeI': 'cc2',
-        'clusterHiMemODI': 'cr1',
-        'clusterGPUI': 'cg1',
-        'hiIoODI': 'hi1',
-        'hiStoreODI': 'hs1',
-        }
-    return type_map[typ] + "." + transform_size(size)
+    return size
 
 def transform_region(reg):
     region_map = {
