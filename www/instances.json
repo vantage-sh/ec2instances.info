@@ -5,8 +5,8 @@
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
-      "devices": 1,
-      "size": 80
+      "devices": 2,
+      "size": 40
     },
     "network_performance": "Moderate",
     "instance_type": "m3.xlarge",
@@ -60,8 +60,8 @@
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
-      "devices": 1,
-      "size": 160
+      "devices": 2,
+      "size": 80
     },
     "network_performance": "High",
     "instance_type": "m3.2xlarge",
@@ -1048,7 +1048,7 @@
         "linux": "0.938"
       },
       "eu-west-1": {
-        "mswin": "1.169",
+        "mswin": "0.973",
         "linux": "0.938"
       }
     },
@@ -1099,7 +1099,7 @@
         "linux": "1.876"
       },
       "eu-west-1": {
-        "mswin": "2.337",
+        "mswin": "1.946",
         "linux": "1.876"
       }
     },
@@ -1150,7 +1150,7 @@
         "linux": "3.751"
       },
       "eu-west-1": {
-        "mswin": "4.674",
+        "mswin": "3.891",
         "linux": "3.751"
       }
     },
@@ -1201,7 +1201,7 @@
         "linux": "7.502"
       },
       "eu-west-1": {
-        "mswin": "9.348",
+        "mswin": "7.782",
         "linux": "7.502"
       }
     },
