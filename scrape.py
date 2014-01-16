@@ -142,6 +142,9 @@ def add_eni_info(instances):
         instance_type = etree.tostring(r[0], method='text').strip()
         max_enis = int(etree.tostring(r[1], method='text').strip())
         ip_per_eni = int(etree.tostring(r[2], method='text').strip())
+        if instance_type not in by_type:
+            print "Unknown instance type: " + instance_type
+            continue
         by_type[instance_type].vpc = {
             'max_enis': max_enis,
             'ips_per_eni': ip_per_eni
