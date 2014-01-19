@@ -26,46 +26,51 @@ class Instance(object):
                                 size=self.drive_size)
         return d
 
+def totext(elt):
+    s = etree.tostring(elt, method='text', encoding='unicode').strip()
+    return re.sub(r'\*\d$', '', s)
+
 def parse_instance(tr):
     i = Instance()
     cols = tr.xpath('td')
     assert len(cols) == 9, "Expected 9 columns in the table!"
-    i.family = cols[0].text.strip()
-    i.instance_type = cols[1].text.strip()
-    archs = etree.tostring(cols[2], method='text').strip()
+    i.family = totext(cols[0])
+    i.instance_type = totext(cols[1])
+    archs = totext(cols[2])
     i.arch = []
     if '32-bit' in archs:
         i.arch.append('i386')
     if '64-bit' in archs:
         i.arch.append('x86_64')
     assert i.arch, "No archs detected: %s" % (archs,)
-    i.vCPU = int(cols[3].text.strip())
-    ecu = cols[4].text.strip()
+    i.vCPU = int(totext(cols[3]))
+    ecu = totext(cols[4])
     if ecu == 'Variable':
         i.ECU = None
     else:
-        i.ECU  = float(cols[4].text.strip())
-    i.memory = float(cols[5].text.strip())
-    storage = cols[6].text.strip()
+        i.ECU  = float(ecu)
+    i.memory = float(totext(cols[5]))
+    storage = totext(cols[6])
     m = re.search(r'(\d+)\s*x\s*([0-9,]+)?', storage)
     i.ssd = False
     if m:
         i.ebs_only = False
         i.num_drives = int(m.group(1))
         i.drive_size = int(m.group(2).replace(',', ''))
-        i.ssd = 'SSD' in etree.tostring(cols[6], method='text')
+        i.ssd = 'SSD' in totext(cols[6])
     else:
         assert storage == 'EBS only', "Unrecognized storage spec: %s" % (storage,)
         i.ebs_only = True
-    i.ebs_optimized = tr[7].text.strip().lower() == 'yes'
-    i.network_performance = tr[8].text.strip()
+    i.ebs_optimized = totext(cols[7]).lower()  == 'yes'
+    i.network_performance = totext(cols[8])
     print "Parsed %s..." % (i.instance_type)
     return i
 
 def scrape_instances():
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/instance-types/"), etree.HTMLParser())
     details = tree.xpath('//table')[0]
-    rows = details.xpath('tr')
+    rows = details.xpath('tbody/tr')[1:]
+    assert len(rows) > 0, "Didn't find any table rows."
     return [parse_instance(r) for r in rows]
 
 def transform_size(size):
