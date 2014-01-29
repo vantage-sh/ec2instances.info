@@ -149,10 +149,18 @@
           % endif
           <td class="apiname">${inst['instance_type']}</td>
           <td class="cost" data-pricing='${json.dumps({r:p['linux'] for r,p in inst['pricing'].iteritems()}) | h}'>
+            % if 'us-east-1' in inst['pricing']:
             $${inst['pricing']['us-east-1']['linux']} per hour
+            % else:
+            unavailable
+            % endif
           </td>
           <td class="cost" data-pricing='${json.dumps({r:p.get('mswin', 0) for r,p in inst['pricing'].iteritems()}) | h}'>
+            % if 'us-east-1' in inst['pricing']:
             $${inst['pricing']['us-east-1'].get('mswin', 0)} per hour
+            % else:
+            unavailable
+            % endif
           </td>
         </tr>
 % endfor

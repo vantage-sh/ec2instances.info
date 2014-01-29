@@ -1,6 +1,50 @@
 [
   {
     "family": "General purpose",
+    "vCPU": 1,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 1,
+      "size": 4
+    },
+    "network_performance": "Moderate",
+    "instance_type": "m3.medium",
+    "ECU": 3.0,
+    "pricing": {},
+    "vpc": {
+      "ips_per_eni": 6,
+      "max_enis": 2
+    },
+    "memory": 3.75,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "General purpose",
+    "vCPU": 2,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 1,
+      "size": 32
+    },
+    "network_performance": "Moderate",
+    "instance_type": "m3.large",
+    "ECU": 6.5,
+    "pricing": {},
+    "vpc": {
+      "ips_per_eni": 10,
+      "max_enis": 3
+    },
+    "memory": 7.5,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "General purpose",
     "vCPU": 4,
     "ebs_optimized": true,
     "storage": {
