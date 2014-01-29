@@ -1,0 +1,1399 @@
+[
+  {
+    "family": "General purpose",
+    "vCPU": 1,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 1,
+      "size": 4
+    },
+    "network_performance": "Moderate",
+    "instance_type": "m3.medium",
+    "ECU": 3.0,
+    "pricing": {},
+    "vpc": {
+      "ips_per_eni": 6,
+      "max_enis": 2
+    },
+    "memory": 3.75,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "General purpose",
+    "vCPU": 2,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 1,
+      "size": 32
+    },
+    "network_performance": "Moderate",
+    "instance_type": "m3.large",
+    "ECU": 6.5,
+    "pricing": {},
+    "vpc": {
+      "ips_per_eni": 10,
+      "max_enis": 3
+    },
+    "memory": 7.5,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "General purpose",
+    "vCPU": 4,
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 40
+    },
+    "network_performance": "Moderate",
+    "instance_type": "m3.xlarge",
+    "ECU": 13.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "0.702",
+        "linux": "0.450"
+      },
+      "ap-northeast-1": {
+        "mswin": "0.882",
+        "linux": "0.684"
+      },
+      "sa-east-1": {
+        "mswin": "0.864",
+        "linux": "0.612"
+      },
+      "ap-southeast-1": {
+        "mswin": "0.882",
+        "linux": "0.630"
+      },
+      "ap-southeast-2": {
+        "mswin": "0.882",
+        "linux": "0.630"
+      },
+      "us-west-2": {
+        "mswin": "0.702",
+        "linux": "0.450"
+      },
+      "us-west-1": {
+        "mswin": "0.747",
+        "linux": "0.495"
+      },
+      "eu-west-1": {
+        "mswin": "0.702",
+        "linux": "0.495"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
+    "memory": 15.0,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "General purpose",
+    "vCPU": 8,
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 80
+    },
+    "network_performance": "High",
+    "instance_type": "m3.2xlarge",
+    "ECU": 26.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "1.404",
+        "linux": "0.900"
+      },
+      "ap-northeast-1": {
+        "mswin": "1.764",
+        "linux": "1.368"
+      },
+      "sa-east-1": {
+        "mswin": "1.728",
+        "linux": "1.224"
+      },
+      "ap-southeast-1": {
+        "mswin": "1.764",
+        "linux": "1.260"
+      },
+      "ap-southeast-2": {
+        "mswin": "1.764",
+        "linux": "1.260"
+      },
+      "us-west-2": {
+        "mswin": "1.404",
+        "linux": "0.900"
+      },
+      "us-west-1": {
+        "mswin": "1.494",
+        "linux": "0.990"
+      },
+      "eu-west-1": {
+        "mswin": "1.404",
+        "linux": "0.990"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 4
+    },
+    "memory": 30.0,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "General purpose",
+    "vCPU": 1,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": false,
+      "devices": 1,
+      "size": 160
+    },
+    "network_performance": "Low",
+    "instance_type": "m1.small",
+    "ECU": 1.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "0.091",
+        "linux": "0.060"
+      },
+      "ap-northeast-1": {
+        "mswin": "0.115",
+        "linux": "0.088"
+      },
+      "sa-east-1": {
+        "mswin": "0.111",
+        "linux": "0.080"
+      },
+      "ap-southeast-1": {
+        "mswin": "0.115",
+        "linux": "0.080"
+      },
+      "ap-southeast-2": {
+        "mswin": "0.115",
+        "linux": "0.080"
+      },
+      "us-west-2": {
+        "mswin": "0.091",
+        "linux": "0.060"
+      },
+      "us-west-1": {
+        "mswin": "0.096",
+        "linux": "0.065"
+      },
+      "eu-west-1": {
+        "mswin": "0.091",
+        "linux": "0.065"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 4,
+      "max_enis": 2
+    },
+    "memory": 1.7,
+    "arch": [
+      "i386",
+      "x86_64"
+    ]
+  },
+  {
+    "family": "General purpose",
+    "vCPU": 1,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": false,
+      "devices": 1,
+      "size": 410
+    },
+    "network_performance": "Moderate",
+    "instance_type": "m1.medium",
+    "ECU": 2.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "0.182",
+        "linux": "0.120"
+      },
+      "ap-northeast-1": {
+        "mswin": "0.230",
+        "linux": "0.175"
+      },
+      "sa-east-1": {
+        "mswin": "0.222",
+        "linux": "0.160"
+      },
+      "ap-southeast-1": {
+        "mswin": "0.230",
+        "linux": "0.160"
+      },
+      "ap-southeast-2": {
+        "mswin": "0.230",
+        "linux": "0.160"
+      },
+      "us-west-2": {
+        "mswin": "0.182",
+        "linux": "0.120"
+      },
+      "us-west-1": {
+        "mswin": "0.192",
+        "linux": "0.130"
+      },
+      "eu-west-1": {
+        "mswin": "0.182",
+        "linux": "0.130"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 6,
+      "max_enis": 2
+    },
+    "memory": 3.75,
+    "arch": [
+      "i386",
+      "x86_64"
+    ]
+  },
+  {
+    "family": "General purpose",
+    "vCPU": 2,
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 2,
+      "size": 420
+    },
+    "network_performance": "Moderate",
+    "instance_type": "m1.large",
+    "ECU": 4.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "0.364",
+        "linux": "0.240"
+      },
+      "ap-northeast-1": {
+        "mswin": "0.460",
+        "linux": "0.350"
+      },
+      "sa-east-1": {
+        "mswin": "0.444",
+        "linux": "0.320"
+      },
+      "ap-southeast-1": {
+        "mswin": "0.460",
+        "linux": "0.320"
+      },
+      "ap-southeast-2": {
+        "mswin": "0.460",
+        "linux": "0.320"
+      },
+      "us-west-2": {
+        "mswin": "0.364",
+        "linux": "0.240"
+      },
+      "us-west-1": {
+        "mswin": "0.384",
+        "linux": "0.260"
+      },
+      "eu-west-1": {
+        "mswin": "0.364",
+        "linux": "0.260"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 10,
+      "max_enis": 3
+    },
+    "memory": 7.5,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "General purpose",
+    "vCPU": 4,
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 4,
+      "size": 420
+    },
+    "network_performance": "High",
+    "instance_type": "m1.xlarge",
+    "ECU": 8.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "0.728",
+        "linux": "0.480"
+      },
+      "ap-northeast-1": {
+        "mswin": "0.920",
+        "linux": "0.700"
+      },
+      "sa-east-1": {
+        "mswin": "0.888",
+        "linux": "0.640"
+      },
+      "ap-southeast-1": {
+        "mswin": "0.920",
+        "linux": "0.640"
+      },
+      "ap-southeast-2": {
+        "mswin": "0.920",
+        "linux": "0.640"
+      },
+      "us-west-2": {
+        "mswin": "0.728",
+        "linux": "0.480"
+      },
+      "us-west-1": {
+        "mswin": "0.768",
+        "linux": "0.520"
+      },
+      "eu-west-1": {
+        "mswin": "0.728",
+        "linux": "0.520"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
+    "memory": 15.0,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Compute optimized",
+    "vCPU": 2,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 16
+    },
+    "network_performance": "Moderate",
+    "instance_type": "c3.large",
+    "ECU": 7.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "0.233",
+        "linux": "0.150"
+      },
+      "ap-northeast-1": {
+        "mswin": "0.295",
+        "linux": "0.192"
+      },
+      "ap-southeast-1": {
+        "mswin": "0.295",
+        "linux": "0.189"
+      },
+      "ap-southeast-2": {
+        "mswin": "0.295",
+        "linux": "0.189"
+      },
+      "us-west-2": {
+        "mswin": "0.233",
+        "linux": "0.150"
+      },
+      "us-west-1": {
+        "mswin": "0.233",
+        "linux": "0.171"
+      },
+      "eu-west-1": {
+        "mswin": "0.233",
+        "linux": "0.171"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 10,
+      "max_enis": 3
+    },
+    "memory": 3.75,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Compute optimized",
+    "vCPU": 4,
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 40
+    },
+    "network_performance": "Moderate",
+    "instance_type": "c3.xlarge",
+    "ECU": 14.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "0.466",
+        "linux": "0.300"
+      },
+      "ap-northeast-1": {
+        "mswin": "0.590",
+        "linux": "0.383"
+      },
+      "ap-southeast-1": {
+        "mswin": "0.590",
+        "linux": "0.378"
+      },
+      "ap-southeast-2": {
+        "mswin": "0.590",
+        "linux": "0.378"
+      },
+      "us-west-2": {
+        "mswin": "0.466",
+        "linux": "0.300"
+      },
+      "us-west-1": {
+        "mswin": "0.466",
+        "linux": "0.342"
+      },
+      "eu-west-1": {
+        "mswin": "0.466",
+        "linux": "0.342"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
+    "memory": 7.5,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Compute optimized",
+    "vCPU": 8,
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 80
+    },
+    "network_performance": "High",
+    "instance_type": "c3.2xlarge",
+    "ECU": 28.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "0.932",
+        "linux": "0.600"
+      },
+      "ap-northeast-1": {
+        "mswin": "1.180",
+        "linux": "0.766"
+      },
+      "ap-southeast-1": {
+        "mswin": "1.180",
+        "linux": "0.756"
+      },
+      "ap-southeast-2": {
+        "mswin": "1.180",
+        "linux": "0.756"
+      },
+      "us-west-2": {
+        "mswin": "0.932",
+        "linux": "0.600"
+      },
+      "us-west-1": {
+        "mswin": "0.932",
+        "linux": "0.683"
+      },
+      "eu-west-1": {
+        "mswin": "0.932",
+        "linux": "0.683"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
+    "memory": 15.0,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Compute optimized",
+    "vCPU": 16,
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 160
+    },
+    "network_performance": "High",
+    "instance_type": "c3.4xlarge",
+    "ECU": 55.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "1.864",
+        "linux": "1.200"
+      },
+      "ap-northeast-1": {
+        "mswin": "2.360",
+        "linux": "1.532"
+      },
+      "ap-southeast-1": {
+        "mswin": "2.360",
+        "linux": "1.512"
+      },
+      "ap-southeast-2": {
+        "mswin": "2.360",
+        "linux": "1.512"
+      },
+      "us-west-2": {
+        "mswin": "1.864",
+        "linux": "1.200"
+      },
+      "us-west-1": {
+        "mswin": "1.864",
+        "linux": "1.366"
+      },
+      "eu-west-1": {
+        "mswin": "1.864",
+        "linux": "1.366"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "memory": 30.0,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Compute optimized",
+    "vCPU": 32,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 320
+    },
+    "network_performance": "10 Gigabit",
+    "instance_type": "c3.8xlarge",
+    "ECU": 108.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "3.728",
+        "linux": "2.400"
+      },
+      "ap-northeast-1": {
+        "mswin": "4.720",
+        "linux": "3.064"
+      },
+      "ap-southeast-1": {
+        "mswin": "4.720",
+        "linux": "3.024"
+      },
+      "ap-southeast-2": {
+        "mswin": "4.720",
+        "linux": "3.024"
+      },
+      "us-west-2": {
+        "mswin": "3.728",
+        "linux": "2.400"
+      },
+      "us-west-1": {
+        "mswin": "3.728",
+        "linux": "2.732"
+      },
+      "eu-west-1": {
+        "mswin": "3.728",
+        "linux": "2.732"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "memory": 60.0,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Compute optimized",
+    "vCPU": 2,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": false,
+      "devices": 1,
+      "size": 350
+    },
+    "network_performance": "Moderate",
+    "instance_type": "c1.medium",
+    "ECU": 5.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "0.225",
+        "linux": "0.145"
+      },
+      "ap-northeast-1": {
+        "mswin": "0.285",
+        "linux": "0.185"
+      },
+      "sa-east-1": {
+        "mswin": "0.280",
+        "linux": "0.200"
+      },
+      "ap-southeast-1": {
+        "mswin": "0.285",
+        "linux": "0.183"
+      },
+      "ap-southeast-2": {
+        "mswin": "0.285",
+        "linux": "0.183"
+      },
+      "us-west-2": {
+        "mswin": "0.225",
+        "linux": "0.145"
+      },
+      "us-west-1": {
+        "mswin": "0.245",
+        "linux": "0.165"
+      },
+      "eu-west-1": {
+        "mswin": "0.225",
+        "linux": "0.165"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 6,
+      "max_enis": 2
+    },
+    "memory": 1.7,
+    "arch": [
+      "i386",
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Compute optimized",
+    "vCPU": 8,
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 4,
+      "size": 420
+    },
+    "network_performance": "High",
+    "instance_type": "c1.xlarge",
+    "ECU": 20.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "0.900",
+        "linux": "0.580"
+      },
+      "ap-northeast-1": {
+        "mswin": "1.140",
+        "linux": "0.740"
+      },
+      "sa-east-1": {
+        "mswin": "1.120",
+        "linux": "0.800"
+      },
+      "ap-southeast-1": {
+        "mswin": "1.140",
+        "linux": "0.730"
+      },
+      "ap-southeast-2": {
+        "mswin": "1.140",
+        "linux": "0.730"
+      },
+      "us-west-2": {
+        "mswin": "0.900",
+        "linux": "0.580"
+      },
+      "us-west-1": {
+        "mswin": "0.980",
+        "linux": "0.660"
+      },
+      "eu-west-1": {
+        "mswin": "0.900",
+        "linux": "0.660"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
+    "memory": 7.0,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Compute optimized",
+    "vCPU": 32,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": false,
+      "devices": 4,
+      "size": 840
+    },
+    "network_performance": "10 Gigabit",
+    "instance_type": "cc2.8xlarge",
+    "ECU": 88.0,
+    "pricing": {
+      "us-west-2": {
+        "mswin": "2.970",
+        "linux": "2.400"
+      },
+      "us-east-1": {
+        "mswin": "2.970",
+        "linux": "2.400"
+      },
+      "ap-northeast-1": {
+        "mswin": "3.530",
+        "linux": "2.960"
+      },
+      "eu-west-1": {
+        "mswin": "2.970",
+        "linux": "2.700"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "memory": 60.5,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "GPU instances",
+    "vCPU": 8,
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 1,
+      "size": 60
+    },
+    "network_performance": "High",
+    "instance_type": "g2.2xlarge",
+    "ECU": 26.0,
+    "pricing": {
+      "us-west-2": {
+        "mswin": "0.767",
+        "linux": "0.650"
+      },
+      "us-east-1": {
+        "mswin": "0.767",
+        "linux": "0.650"
+      },
+      "us-west-1": {
+        "mswin": "0.819",
+        "linux": "0.702"
+      },
+      "eu-west-1": {
+        "mswin": "0.767",
+        "linux": "0.702"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
+    "memory": 15.0,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "GPU instances",
+    "vCPU": 16,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": false,
+      "devices": 2,
+      "size": 840
+    },
+    "network_performance": "10 Gigabit",
+    "instance_type": "cg1.4xlarge",
+    "ECU": 33.5,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "2.600",
+        "linux": "2.100"
+      },
+      "eu-west-1": {
+        "mswin": "2.600",
+        "linux": "2.36"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "memory": 22.5,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Memory optimized",
+    "vCPU": 2,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": false,
+      "devices": 1,
+      "size": 420
+    },
+    "network_performance": "Moderate",
+    "instance_type": "m2.xlarge",
+    "ECU": 6.5,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "0.510",
+        "linux": "0.410"
+      },
+      "ap-northeast-1": {
+        "mswin": "0.570",
+        "linux": "0.505"
+      },
+      "sa-east-1": {
+        "mswin": "0.640",
+        "linux": "0.540"
+      },
+      "ap-southeast-1": {
+        "mswin": "0.570",
+        "linux": "0.495"
+      },
+      "ap-southeast-2": {
+        "mswin": "0.570",
+        "linux": "0.495"
+      },
+      "us-west-2": {
+        "mswin": "0.510",
+        "linux": "0.410"
+      },
+      "us-west-1": {
+        "mswin": "0.560",
+        "linux": "0.460"
+      },
+      "eu-west-1": {
+        "mswin": "0.510",
+        "linux": "0.460"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
+    "memory": 17.1,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Memory optimized",
+    "vCPU": 4,
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 1,
+      "size": 850
+    },
+    "network_performance": "Moderate",
+    "instance_type": "m2.2xlarge",
+    "ECU": 13.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "1.020",
+        "linux": "0.820"
+      },
+      "ap-northeast-1": {
+        "mswin": "1.140",
+        "linux": "1.010"
+      },
+      "sa-east-1": {
+        "mswin": "1.280",
+        "linux": "1.080"
+      },
+      "ap-southeast-1": {
+        "mswin": "1.140",
+        "linux": "0.990"
+      },
+      "ap-southeast-2": {
+        "mswin": "1.140",
+        "linux": "0.990"
+      },
+      "us-west-2": {
+        "mswin": "1.020",
+        "linux": "0.820"
+      },
+      "us-west-1": {
+        "mswin": "1.120",
+        "linux": "0.920"
+      },
+      "eu-west-1": {
+        "mswin": "1.020",
+        "linux": "0.920"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 4
+    },
+    "memory": 34.2,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Memory optimized",
+    "vCPU": 8,
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 2,
+      "size": 840
+    },
+    "network_performance": "High",
+    "instance_type": "m2.4xlarge",
+    "ECU": 26.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "2.040",
+        "linux": "1.640"
+      },
+      "ap-northeast-1": {
+        "mswin": "2.280",
+        "linux": "2.020"
+      },
+      "sa-east-1": {
+        "mswin": "2.560",
+        "linux": "2.160"
+      },
+      "ap-southeast-1": {
+        "mswin": "2.280",
+        "linux": "1.980"
+      },
+      "ap-southeast-2": {
+        "mswin": "2.280",
+        "linux": "1.980"
+      },
+      "us-west-2": {
+        "mswin": "2.040",
+        "linux": "1.640"
+      },
+      "us-west-1": {
+        "mswin": "2.240",
+        "linux": "1.840"
+      },
+      "eu-west-1": {
+        "mswin": "2.040",
+        "linux": "1.840"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "memory": 68.4,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Memory optimized",
+    "vCPU": 32,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 120
+    },
+    "network_performance": "10 Gigabit",
+    "instance_type": "cr1.8xlarge",
+    "ECU": 88.0,
+    "pricing": {
+      "us-west-2": {
+        "mswin": "3.831",
+        "linux": "3.500"
+      },
+      "us-east-1": {
+        "mswin": "3.831",
+        "linux": "3.500"
+      },
+      "ap-northeast-1": {
+        "mswin": "4.641",
+        "linux": "4.310"
+      },
+      "eu-west-1": {
+        "mswin": "3.831",
+        "linux": "3.750"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "memory": 244.0,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Storage optimized",
+    "vCPU": 4,
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 1,
+      "size": 800
+    },
+    "network_performance": "Moderate",
+    "instance_type": "i2.xlarge",
+    "ECU": 14.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "0.973",
+        "linux": "0.853"
+      },
+      "ap-northeast-1": {
+        "mswin": "1.169",
+        "linux": "1.051"
+      },
+      "ap-southeast-1": {
+        "mswin": "1.169",
+        "linux": "1.018"
+      },
+      "ap-southeast-2": {
+        "mswin": "1.169",
+        "linux": "1.018"
+      },
+      "us-west-2": {
+        "mswin": "0.973",
+        "linux": "0.853"
+      },
+      "us-west-1": {
+        "mswin": "1.058",
+        "linux": "0.938"
+      },
+      "eu-west-1": {
+        "mswin": "0.973",
+        "linux": "0.938"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
+    "memory": 30.5,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Storage optimized",
+    "vCPU": 8,
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 800
+    },
+    "network_performance": "High",
+    "instance_type": "i2.2xlarge",
+    "ECU": 27.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "1.946",
+        "linux": "1.705"
+      },
+      "ap-northeast-1": {
+        "mswin": "2.337",
+        "linux": "2.101"
+      },
+      "ap-southeast-1": {
+        "mswin": "2.337",
+        "linux": "2.035"
+      },
+      "ap-southeast-2": {
+        "mswin": "2.337",
+        "linux": "2.035"
+      },
+      "us-west-2": {
+        "mswin": "1.946",
+        "linux": "1.705"
+      },
+      "us-west-1": {
+        "mswin": "2.116",
+        "linux": "1.876"
+      },
+      "eu-west-1": {
+        "mswin": "1.946",
+        "linux": "1.876"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
+    "memory": 61.0,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Storage optimized",
+    "vCPU": 16,
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 4,
+      "size": 800
+    },
+    "network_performance": "High",
+    "instance_type": "i2.4xlarge",
+    "ECU": 53.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "3.891",
+        "linux": "3.410"
+      },
+      "ap-northeast-1": {
+        "mswin": "4.674",
+        "linux": "4.202"
+      },
+      "ap-southeast-1": {
+        "mswin": "4.674",
+        "linux": "4.070"
+      },
+      "ap-southeast-2": {
+        "mswin": "4.674",
+        "linux": "4.070"
+      },
+      "us-west-2": {
+        "mswin": "3.891",
+        "linux": "3.410"
+      },
+      "us-west-1": {
+        "mswin": "4.232",
+        "linux": "3.751"
+      },
+      "eu-west-1": {
+        "mswin": "3.891",
+        "linux": "3.751"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "memory": 122.0,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Storage optimized",
+    "vCPU": 32,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 8,
+      "size": 800
+    },
+    "network_performance": "10 Gigabit",
+    "instance_type": "i2.8xlarge",
+    "ECU": 104.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "7.782",
+        "linux": "6.820"
+      },
+      "ap-northeast-1": {
+        "mswin": "9.348",
+        "linux": "8.404"
+      },
+      "ap-southeast-1": {
+        "mswin": "9.348",
+        "linux": "8.140"
+      },
+      "ap-southeast-2": {
+        "mswin": "9.348",
+        "linux": "8.140"
+      },
+      "us-west-2": {
+        "mswin": "7.782",
+        "linux": "6.820"
+      },
+      "us-west-1": {
+        "mswin": "8.464",
+        "linux": "7.502"
+      },
+      "eu-west-1": {
+        "mswin": "7.782",
+        "linux": "7.502"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "memory": 244.0,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Storage optimized",
+    "vCPU": 16,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": false,
+      "devices": 24,
+      "size": 2048
+    },
+    "network_performance": "10 Gigabit",
+    "instance_type": "hs1.8xlarge",
+    "ECU": 35.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "4.931",
+        "linux": "4.600"
+      },
+      "ap-northeast-1": {
+        "mswin": "6.000",
+        "linux": "5.670"
+      },
+      "ap-southeast-1": {
+        "mswin": "5.901",
+        "linux": "5.570"
+      },
+      "ap-southeast-2": {
+        "mswin": "5.901",
+        "linux": "5.570"
+      },
+      "us-west-2": {
+        "mswin": "4.931",
+        "linux": "4.600"
+      },
+      "eu-west-1": {
+        "mswin": "4.931",
+        "linux": "4.900"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "memory": 117.0,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Storage optimized",
+    "vCPU": 16,
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 1024
+    },
+    "network_performance": "10 Gigabit",
+    "instance_type": "hi1.4xlarge",
+    "ECU": 35.0,
+    "pricing": {
+      "us-west-2": {
+        "mswin": "3.580",
+        "linux": "3.100"
+      },
+      "us-east-1": {
+        "mswin": "3.580",
+        "linux": "3.100"
+      },
+      "ap-northeast-1": {
+        "mswin": "3.870",
+        "linux": "3.440"
+      },
+      "eu-west-1": {
+        "mswin": "3.580",
+        "linux": "3.100"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "memory": 60.5,
+    "arch": [
+      "x86_64"
+    ]
+  },
+  {
+    "family": "Micro instances",
+    "vCPU": 1,
+    "ebs_optimized": false,
+    "storage": null,
+    "network_performance": "Very Low",
+    "instance_type": "t1.micro",
+    "ECU": null,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "0.020",
+        "linux": "0.020"
+      },
+      "ap-northeast-1": {
+        "mswin": "0.035",
+        "linux": "0.027"
+      },
+      "sa-east-1": {
+        "mswin": "0.037",
+        "linux": "0.027"
+      },
+      "ap-southeast-1": {
+        "mswin": "0.020",
+        "linux": "0.020"
+      },
+      "ap-southeast-2": {
+        "mswin": "0.020",
+        "linux": "0.020"
+      },
+      "us-west-2": {
+        "mswin": "0.020",
+        "linux": "0.020"
+      },
+      "us-west-1": {
+        "mswin": "0.035",
+        "linux": "0.025"
+      },
+      "eu-west-1": {
+        "mswin": "0.035",
+        "linux": "0.020"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 2,
+      "max_enis": 2
+    },
+    "memory": 0.615,
+    "arch": [
+      "i386",
+      "x86_64"
+    ]
+  }
+]
