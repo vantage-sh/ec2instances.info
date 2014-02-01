@@ -11,7 +11,40 @@
     "network_performance": "Moderate",
     "instance_type": "m3.medium",
     "ECU": 3.0,
-    "pricing": {},
+    "pricing": {
+      "us-east-1": {
+        "mswin": "0.176",
+        "linux": "0.113"
+      },
+      "ap-northeast-1": {
+        "mswin": "0.221",
+        "linux": "0.171"
+      },
+      "sa-east-1": {
+        "mswin": "0.216",
+        "linux": "0.153"
+      },
+      "ap-southeast-1": {
+        "mswin": "0.221",
+        "linux": "0.158"
+      },
+      "ap-southeast-2": {
+        "mswin": "0.221",
+        "linux": "0.158"
+      },
+      "us-west-2": {
+        "mswin": "0.176",
+        "linux": "0.113"
+      },
+      "us-west-1": {
+        "mswin": "0.187",
+        "linux": "0.124"
+      },
+      "eu-west-1": {
+        "mswin": "0.176",
+        "linux": "0.124"
+      }
+    },
     "vpc": {
       "ips_per_eni": 6,
       "max_enis": 2
@@ -33,7 +66,40 @@
     "network_performance": "Moderate",
     "instance_type": "m3.large",
     "ECU": 6.5,
-    "pricing": {},
+    "pricing": {
+      "us-east-1": {
+        "mswin": "0.351",
+        "linux": "0.225"
+      },
+      "ap-northeast-1": {
+        "mswin": "0.441",
+        "linux": "0.342"
+      },
+      "sa-east-1": {
+        "mswin": "0.432",
+        "linux": "0.306"
+      },
+      "ap-southeast-1": {
+        "mswin": "0.441",
+        "linux": "0.315"
+      },
+      "ap-southeast-2": {
+        "mswin": "0.441",
+        "linux": "0.315"
+      },
+      "us-west-2": {
+        "mswin": "0.351",
+        "linux": "0.225"
+      },
+      "us-west-1": {
+        "mswin": "0.374",
+        "linux": "0.248"
+      },
+      "eu-west-1": {
+        "mswin": "0.351",
+        "linux": "0.248"
+      }
+    },
     "vpc": {
       "ips_per_eni": 10,
       "max_enis": 3
