@@ -79,17 +79,20 @@ def add_render_info(i):
     i['pretty_name'] = pretty_name(i)
     add_cpu_detail(i)
 
-def render(src, dst):
-    template = mako.template.Template(filename=src)
-    with open('www/instances.json') as f:
+def render(data_file, template_file, destination_file):
+    """Build the HTML content from scraped data"""
+    template = mako.template.Template(filename=template_file)
+    print "Loading data from %s..." % data_file
+    with open(data_file) as f:
         instances = json.load(f)
     for i in instances:
         add_render_info(i)
-    with open(dst, 'w') as fh:
+    print "Rendering to %s..." % destination_file
+    with open(destination_file, 'w') as fh:
         try:
             fh.write(template.render(instances=instances))
         except:
             print mako.exceptions.text_error_template().render()
 
 if __name__ == '__main__':
-    render('in/index.html.mako', 'www/index.html')
+    render('www/instances.json', 'in/index.html.mako', 'www/index.html')

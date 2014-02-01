@@ -155,14 +155,18 @@ def add_eni_info(instances):
             'ips_per_eni': ip_per_eni
             }
 
-if __name__ == '__main__':
+def scrape(data_file):
+    """Scrape AWS to get instance data"""
     print "Parsing instance types..."
     all_instances = scrape_instances()
     print "Parsing pricing info..."
     add_pricing_data(all_instances)
     add_eni_info(all_instances)
-    with open('www/instances.json', 'w') as f:
+    with open(data_file, 'w') as f:
         json.dump([i.to_dict() for i in all_instances],
                   f,
                   indent=2,
                   separators=(',', ': '))
+
+if __name__ == '__main__':
+    scrape('www/instances.json')

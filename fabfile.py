@@ -6,19 +6,42 @@
 import os
 from boto import connect_s3
 from boto.s3.key import Key
-from fabric.api import abort
+from fabric.api import abort, task
 from fabric.contrib.console import confirm
+from render import render
+from scrape import scrape
 
-bucket_name = 'www.ec2instances.info'
+BUCKET_NAME = 'www.ec2instances.info'
 
-def create_bucket():
+@task
+def build():
+    """Scrape AWS sources for data and build the site"""
+    data_file = 'www/instances.json'
+    scrape(data_file)
+    render(data_file, 'in/index.html.mako', 'www/index.html')
+
+@task
+def bucket_create():
+    """Creates the S3 bucket used to host the site"""
     conn = connect_s3()
-    bucket = conn.create_bucket(bucket_name, policy='public-read')
+    bucket = conn.create_bucket(BUCKET_NAME, policy='public-read')
     bucket.configure_website('index.html', 'error.html')
+    print 'Bucket %r created.' % BUCKET_NAME
 
-def deploy(root_dir='www'):
+@task
+def bucket_delete():
+    """Deletes the S3 bucket used to host the site"""
+    if not confirm("Are you sure you want to delete the bucket %r?" % BUCKET_NAME):
+        abort('Aborting at user request.')
     conn = connect_s3()
-    bucket = conn.get_bucket(bucket_name)
+    conn.delete_bucket(BUCKET_NAME)
+    print 'Bucket %r deleted.' % BUCKET_NAME
+
+@task
+def deploy(root_dir='www'):
+    """Deploy current content"""
+    conn = connect_s3()
+    bucket = conn.get_bucket(BUCKET_NAME)
 
     for root, dirs, files in os.walk(root_dir):
         for name in files:
@@ -26,7 +49,7 @@ def deploy(root_dir='www'):
                 continue
             local_path = os.path.join(root, name)
             remote_path = local_path[len(root_dir)+1:]
-            print '%s -> %s/%s' % (local_path, bucket_name, remote_path)
+            print '%s -> %s/%s' % (local_path, BUCKET_NAME, remote_path)
             k = Key(bucket)
             k.key = remote_path
             headers = {
@@ -34,11 +57,8 @@ def deploy(root_dir='www'):
             k.set_contents_from_filename(local_path, headers=headers,
                                          policy='public-read')
 
-def delete():
-    if not confirm("Are you sure you want to delete the bucket %r?"
-            % bucket_name):
-        abort('Aborting at user request.')
-    conn = connect_s3()
-    conn.delete_bucket(bucket_name)
-    print 'Bucket %r deleted.' % bucket_name
-
+@task(default=True)
+def update():
+    """Build and deploy the site"""
+    build()
+    deploy()
