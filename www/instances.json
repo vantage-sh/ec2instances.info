@@ -118,7 +118,7 @@
       "devices": 2,
       "size": 40
     },
-    "network_performance": "Moderate",
+    "network_performance": "High",
     "instance_type": "m3.xlarge",
     "ECU": 13.0,
     "pricing": {
@@ -866,6 +866,10 @@
       "us-east-1": {
         "mswin": "0.767",
         "linux": "0.650"
+      },
+      "ap-northeast-1": {
+        "mswin": "1.060",
+        "linux": "0.943"
       },
       "us-west-1": {
         "mswin": "0.819",
