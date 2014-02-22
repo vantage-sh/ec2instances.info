@@ -101,6 +101,39 @@ $(function() {
         change_cost(current_cost_duration);
       }
     });
+
+    // process URL settings
+    url_settings = get_url_parameters();
+    for (var key in url_settings) {
+      switch(key) {
+        case 'region':
+          change_region(url_settings['region']);
+          break;
+        case 'cost':
+          change_cost(url_settings['cost']);
+          break;
+        case 'filter':
+          $('#data').dataTable().fnFilter(url_settings['filter']);
+          break;
+      }
+    }
+
+    $('#url-button').click(function() {
+      var settings = {
+          filter: $('#data').dataTable().fnSettings().
+              oPreviousSearch['sSearch'],
+          region: current_region,
+          cost: current_cost_duration
+        };
+      var url = location.origin + location.pathname + '?';
+      var parameters = [];
+      for (var setting in settings) {
+        if (settings[setting] !== undefined) {
+          parameters.push(setting + '=' + settings[setting]);
+        }
+      }
+      $('#share_url').val(url + parameters.join('&'));
+    });
   });
 
   $.extend($.fn.dataTableExt.oStdClasses, {
@@ -153,4 +186,15 @@ function toggle_column(col_index) {
   var table = $('#data').dataTable();
   var is_visible = table.fnSettings().aoColumns[col_index].bVisible;
   table.fnSetColumnVis(col_index, is_visible ? false : true);
+}
+
+// retrieve all the parameters from the location string
+function get_url_parameters() {
+  var params = location.search.slice(1).split('&');
+  var settings = {};
+  params.forEach(function(param) {
+    settings[param.split('=')[0]] = param.split('=')[1];
+  });
+
+  return settings;
 }

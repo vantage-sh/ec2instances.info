@@ -56,6 +56,11 @@ body {
   background: #0044cc !important;
 }
 
+.share-url {
+  text-align: left;
+  margin-left: 5px;
+  margin-bottom: 0px !important;
+}
 
 /* DataTables: http://datatables.net/blog/Twitter_Bootstrap_2 */
 table.table thead .sorting,
