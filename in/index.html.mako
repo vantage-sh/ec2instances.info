@@ -72,7 +72,7 @@
 
       <div class="btn-group" id="url-button">
         <a class="btn btn-primary" href="#">Generate URL</a>
-        <input class="share-url" type='url' id='share_url' readonly="readonly">
+        <input class="share-url" type="url" id="share_url">
       </div>
 
     </div>
