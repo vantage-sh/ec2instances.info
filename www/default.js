@@ -38,6 +38,7 @@ function change_cost(duration) {
   });
 
   current_cost_duration = duration;
+  maybe_update_url()
 }
 
 function change_region(region) {
@@ -74,8 +75,41 @@ function setup_column_toggle() {
   });
 }
 
+function url_for_selections() {
+  var settings = {
+    filter: $('#data').dataTable().fnSettings().
+      oPreviousSearch['sSearch'],
+    region: current_region,
+    cost: current_cost_duration
+  };
+  if (settings.filter == '') delete settings.filter
+  if (settings.region == 'us-east-1') delete settings.region;
+  if (settings.cost == 'hourly') delete settings.cost;
+  var url = location.origin + location.pathname;
+  var parameters = [];
+  for (var setting in settings) {
+    if (settings[setting] !== undefined) {
+      parameters.push(setting + '=' + settings[setting]);
+    }
+  }
+  if (parameters.length > 0)
+    url = url + '?' + parameters.join('&');
+  return url;
+}
+
+function maybe_update_url() {
+  if (!history.replaceState)
+    return
+  var url = url_for_selections();
+  if (document.location == url)
+    return;
+
+  history.replaceState(null, '', url);
+}
+
 $(function() {
   $(document).ready(function() {
+    console.log("document.ready...");
     $('#data').dataTable({
       "bPaginate": false,
       "bInfo": false,
@@ -103,7 +137,7 @@ $(function() {
     });
 
     // process URL settings
-    url_settings = get_url_parameters();
+    var url_settings = get_url_parameters();
     for (var key in url_settings) {
       switch(key) {
         case 'region':
@@ -119,29 +153,17 @@ $(function() {
     }
 
     $('#url-button').click(function() {
-      var settings = {
-          filter: $('#data').dataTable().fnSettings().
-              oPreviousSearch['sSearch'],
-          region: current_region,
-          cost: current_cost_duration
-        };
-      var url = location.origin + location.pathname + '?';
-      var parameters = [];
-      for (var setting in settings) {
-        if (settings[setting] !== undefined) {
-          parameters.push(setting + '=' + settings[setting]);
-        }
-      }
-      $('#share_url').val(url + parameters.join('&'));
+      $('#share_url').val(url_for_selections());
+      return false;
     });
+
+    change_region('us-east-1');
+    change_cost('hourly');
   });
 
   $.extend($.fn.dataTableExt.oStdClasses, {
     "sWrapper": "dataTables_wrapper form-inline"
   });
-
-  change_region('us-east-1');
-  change_cost('hourly');
 
   setup_column_toggle();
 
