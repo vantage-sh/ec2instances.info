@@ -109,7 +109,6 @@ function maybe_update_url() {
 
 $(function() {
   $(document).ready(function() {
-    console.log("document.ready...");
     $('#data').dataTable({
       "bPaginate": false,
       "bInfo": false,
