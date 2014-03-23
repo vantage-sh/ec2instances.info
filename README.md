@@ -9,7 +9,7 @@ I was sick of comparing EC2 instance metrics and pricing on Amazon's site so I m
 2. `cd ec2instances.info/`
 3. `pip install -r requirements.txt`
 4. `fab build`
-5. Open `www/index.html` in your browser
+5. `fab preview`
 
 
 ### Requirements
