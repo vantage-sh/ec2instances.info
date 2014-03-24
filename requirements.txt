@@ -1,0 +1,4 @@
+fabric
+boto
+mako
+lxml

@@ -4,6 +4,8 @@
 # as explained in: http://boto.s3.amazonaws.com/s3_tut.html
 
 import os
+import webbrowser
+
 from boto import connect_s3
 from boto.s3.key import Key
 from fabric.api import abort, task
@@ -13,12 +15,20 @@ from scrape import scrape
 
 BUCKET_NAME = 'www.ec2instances.info'
 
+abspath = lambda filename: os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                                        filename)
+
 @task
 def build():
     """Scrape AWS sources for data and build the site"""
     data_file = 'www/instances.json'
     scrape(data_file)
     render(data_file, 'in/index.html.mako', 'www/index.html')
+
+@task
+def preview():
+    url = 'file://localhost/%s' % (abspath('www/index.html'))
+    webbrowser.open(url, new=2)
 
 @task
 def bucket_create():
