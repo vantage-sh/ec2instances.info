@@ -1,6 +1,7 @@
 import mako.template
 import mako.exceptions
 import json
+import datetime
 
 
 def pretty_name(inst):
@@ -88,9 +89,10 @@ def render(data_file, template_file, destination_file):
     for i in instances:
         add_render_info(i)
     print "Rendering to %s..." % destination_file
+    generated_at = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')
     with open(destination_file, 'w') as fh:
         try:
-            fh.write(template.render(instances=instances))
+            fh.write(template.render(instances=instances, generated_at=generated_at))
         except:
             print mako.exceptions.text_error_template().render()
 
