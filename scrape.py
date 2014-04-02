@@ -118,6 +118,8 @@ def add_pricing(imap, data):
                 # As best I can tell, this type doesn't exist, but is
                 # in the pricing charts anyways.
                 if i_type == 'cc2.4xlarge': continue
+                # r3 instances aren't available yet
+                if i_type.startswith('r3.'): continue
                 assert i_type in imap, "Unknown instance size: %s" % (i_type, )
                 inst = imap[i_type]
                 inst.pricing.setdefault(region, {})
