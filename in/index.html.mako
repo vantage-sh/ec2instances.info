@@ -26,6 +26,11 @@
       <h1>EC2Instances.info <small>Easy Amazon EC2 Instance Comparison</small></h1>
     </div>
 
+    <div class="alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Warning!</strong> Some information on this page is outdated. Please see <a href="https://github.com/powdahound/ec2instances.info/issues/75">this issue</a> for more detail.
+    </div>
+
     <div class="pull-left">
       <div class="btn-group" id='region-dropdown'>
         <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
