@@ -22,7 +22,10 @@ abspath = lambda filename: os.path.join(os.path.abspath(os.path.dirname(__file__
 def build():
     """Scrape AWS sources for data and build the site"""
     data_file = 'www/instances.json'
-    scrape(data_file)
+    try:
+        scrape(data_file)
+    except Exception, e:
+        print "ERROR: Unable to scrape site data: %s" % e
     render(data_file, 'in/index.html.mako', 'www/index.html')
 
 @task
