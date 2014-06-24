@@ -7,6 +7,8 @@ import json
 class Instance(object):
     def __init__(self):
         self.vpc = None
+        self.arch = ['x86_64']
+        self.ECU = 0
 
     def to_dict(self):
         d = dict(family=self.family,
@@ -32,11 +34,10 @@ def totext(elt):
     s = etree.tostring(elt, method='text', encoding='unicode').strip()
     return re.sub(r'\*\d$', '', s)
 
-
-def parse_instance(tr):
+def parse_prev_generation_instance(tr):
     i = Instance()
     cols = tr.xpath('td')
-    assert len(cols) == 9, "Expected 9 columns in the table!"
+    assert len(cols) == 8, "Expected 8 columns in the table, but got %d" % len(cols)
     i.family = totext(cols[0])
     i.instance_type = totext(cols[1])
     archs = totext(cols[2])
@@ -47,35 +48,63 @@ def parse_instance(tr):
         i.arch.append('x86_64')
     assert i.arch, "No archs detected: %s" % (archs,)
     i.vCPU = int(totext(cols[3]))
-    ecu = totext(cols[4])
-    if ecu == 'Variable':
-        i.ECU = None
-    else:
-        i.ECU = float(ecu)
-    i.memory = float(totext(cols[5]))
-    storage = totext(cols[6])
+    i.memory = float(totext(cols[4]))
+    storage = totext(cols[5])
     m = re.search(r'(\d+)\s*x\s*([0-9,]+)?', storage)
     i.ssd = False
     if m:
         i.ebs_only = False
         i.num_drives = int(m.group(1))
         i.drive_size = int(m.group(2).replace(',', ''))
-        i.ssd = 'SSD' in totext(cols[6])
+        i.ssd = 'SSD' in totext(cols[5])
     else:
-        assert storage == 'EBS only', "Unrecognized storage spec: %s" % (storage,)
+        assert storage == 'EBS Only', "Unrecognized storage spec: %s" % (storage,)
         i.ebs_only = True
-    i.ebs_optimized = totext(cols[7]).lower() == 'yes'
-    i.network_performance = totext(cols[8])
+    i.ebs_optimized = totext(cols[6]).lower() == 'yes'
+    i.network_performance = totext(cols[7])
+    print "Parsed %s..." % (i.instance_type)
+    return i
+
+
+def parse_instance(tr):
+    i = Instance()
+    cols = tr.xpath('td')
+    assert len(cols) == 12, "Expected 12 columns in the table, but got %d" % len(cols)
+    i.family = "Unknown" # totext(cols[0])
+    i.instance_type = totext(cols[0])
+    i.vCPU = int(totext(cols[1]))
+    i.memory = float(totext(cols[2]))
+    storage = totext(cols[3])
+    m = re.search(r'(\d+)\s*x\s*([0-9,]+)?', storage)
+    i.ssd = False
+    if m:
+        i.ebs_only = False
+        i.num_drives = int(m.group(1))
+        i.drive_size = int(m.group(2).replace(',', ''))
+        i.ssd = 'SSD' in totext(cols[3])
+    else:
+        assert storage == 'EBS Only', "Unrecognized storage spec: %s" % (storage,)
+        i.ebs_only = True
+    i.ebs_optimized = totext(cols[10]).lower() == 'yes'
+    i.network_performance = totext(cols[4])
     print "Parsed %s..." % (i.instance_type)
     return i
 
 
 def scrape_instances():
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/instance-types/"), etree.HTMLParser())
-    details = tree.xpath('//table')[0]
+    details = tree.xpath('//table')[7]
     rows = details.xpath('tbody/tr')[1:]
     assert len(rows) > 0, "Didn't find any table rows."
-    return [parse_instance(r) for r in rows]
+    current_gen = [parse_instance(r) for r in rows]
+
+    tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/previous-generation/"), etree.HTMLParser())
+    details = tree.xpath('//table')[4]
+    rows = details.xpath('tbody/tr')[1:]
+    assert len(rows) > 0, "Didn't find any table rows."
+    prev_gen = [parse_prev_generation_instance(r) for r in rows]
+
+    return prev_gen + current_gen
 
 
 def transform_size(size):
@@ -94,10 +123,6 @@ def transform_size(size):
             return str(xs) + 'xlarge'
     assert size == 'lg', "Unable to parse size: %s" % (size,)
     return 'large'
-
-
-def convert_to_type(typ, size):
-    return size
 
 
 def transform_region(reg):
@@ -121,7 +146,7 @@ def add_pricing(imap, data):
         for t_spec in region_spec['instanceTypes']:
             typename = t_spec['type']
             for i_spec in t_spec['sizes']:
-                i_type = convert_to_type(typename, i_spec['size'])
+                i_type = i_spec['size']
                 # As best I can tell, this type doesn't exist, but is
                 # in the pricing charts anyways.
                 if i_type == 'cc2.4xlarge':
@@ -133,6 +158,13 @@ def add_pricing(imap, data):
                 for col in i_spec['valueColumns']:
                     inst.pricing[region][col['name']] = col['prices']['USD']
 
+                # ECU is only available here
+                ecu = i_spec['ECU']
+                if ecu == 'variable':
+                    inst.ECU = None
+                else:
+                    inst.ECU = float(ecu)
+
 
 def add_pricing_data(instances):
     for i in instances:
@@ -140,9 +172,16 @@ def add_pricing_data(instances):
     by_type = {i.instance_type: i for i in instances}
 
     for platform in ['linux', 'mswin']:
+        # current generation
         pricing_url = 'http://aws.amazon.com/ec2/pricing/json/%s-od.json' % (platform,)
         pricing = json.loads(urllib2.urlopen(pricing_url).read())
+        add_pricing(by_type, pricing)
 
+        # previous generation
+        pricing_url = 'http://a0.awsstatic.com/pricing/1/ec2/previous-generation/%s-od.min.js' % (platform,)
+        jsonp_string = urllib2.urlopen(pricing_url).read()
+        json_string = re.sub(r"(\w+):", r'"\1":', jsonp_string[jsonp_string.index('callback(') + 9 : -2]) # convert into valid json
+        pricing = json.loads(json_string)
         add_pricing(by_type, pricing)
 
 

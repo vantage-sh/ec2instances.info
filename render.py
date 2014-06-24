@@ -10,14 +10,19 @@ def pretty_name(inst):
     short  = pieces[1]
     family_names = {
         't1': '',
-        'm2': 'High-Memory',
-        'c1': 'High-CPU',
+        'r3': 'R3 High-Memory',
+        'c3': 'C3 High-CPU',
+        'm3': 'M3 General Purpose',
+        'i3': 'I3 High I/O',
         'cc1': 'Cluster Compute',
         'cg1': 'Cluster GPU',
         'cc2': 'Cluster Compute',
-        'hi1': 'High I/O',
         'cr1': 'High Memory Cluster',
-        'hs1': 'High Storage'
+        'hs1': 'High Storage',
+        'c1' : 'C1 High-CPU',
+        'hi1': 'HI1. High I/O',
+        'm2' : 'M2 High Memory',
+        'm1' : 'M1 General Purpose'
         }
     prefix = family_names.get(family, family.upper())
     extra = None
@@ -50,6 +55,8 @@ def network_sort(inst):
         sort = 3
     elif perf == '10 Gigabit':
         sort = 4
+    else:  ## unknown value
+        sort = 5
     sort *= 2
     if inst['ebs_optimized']:
         sort += 1
