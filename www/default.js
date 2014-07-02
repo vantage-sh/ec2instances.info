@@ -30,7 +30,7 @@ function change_cost(duration) {
     elem = $(elem);
     per_time = elem.data("pricing")[current_region];
     if (per_time) {
-      per_time = (per_time * multiplier).toFixed(2);
+      per_time = (per_time * multiplier).toFixed(3);
       elem.text("$" + per_time + " " + duration);
     } else {
       elem.text("unavailable");
@@ -73,6 +73,7 @@ function setup_column_toggle() {
       )
     );
   });
+
 }
 
 function url_for_selections() {
