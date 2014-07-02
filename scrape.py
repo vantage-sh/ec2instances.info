@@ -140,7 +140,7 @@ def transform_region(reg):
     return base + "-" + num
 
 
-def add_pricing(imap, data):
+def add_pricing(imap, data, platform):
     for region_spec in data['config']['regions']:
         region = transform_region(region_spec['region'])
         for t_spec in region_spec['instanceTypes']:
@@ -156,7 +156,7 @@ def add_pricing(imap, data):
                 inst.pricing.setdefault(region, {})
                 print "%s/%s" % (region, i_type)
                 for col in i_spec['valueColumns']:
-                    inst.pricing[region][col['name']] = col['prices']['USD']
+                    inst.pricing[region][platform] = col['prices']['USD']
 
                 # ECU is only available here
                 ecu = i_spec['ECU']
@@ -175,14 +175,14 @@ def add_pricing_data(instances):
         # current generation
         pricing_url = 'http://aws.amazon.com/ec2/pricing/json/%s-od.json' % (platform,)
         pricing = json.loads(urllib2.urlopen(pricing_url).read())
-        add_pricing(by_type, pricing)
+        add_pricing(by_type, pricing, platform)
 
         # previous generation
         pricing_url = 'http://a0.awsstatic.com/pricing/1/ec2/previous-generation/%s-od.min.js' % (platform,)
         jsonp_string = urllib2.urlopen(pricing_url).read()
         json_string = re.sub(r"(\w+):", r'"\1":', jsonp_string[jsonp_string.index('callback(') + 9 : -2]) # convert into valid json
         pricing = json.loads(json_string)
-        add_pricing(by_type, pricing)
+        add_pricing(by_type, pricing, platform)
 
 
 def add_eni_info(instances):
