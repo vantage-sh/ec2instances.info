@@ -107,8 +107,8 @@
           <td class="name">${inst['pretty_name']}</td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GB</span></td>
           <td class="computeunits">
-            % if inst['instance_type'] == 't1.micro':
-            <span sort="2">2 (only for short bursts)</span>
+            % if inst['ECU'] == 0 :
+            <span sort="0">Burstable</span>
             % else:
             <span sort="${inst['ECU']}">${"%g" % (inst['ECU'],)}
               % if 'cpu_details' in inst:

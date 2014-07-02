@@ -9,7 +9,6 @@ def pretty_name(inst):
     family = pieces[0]
     short  = pieces[1]
     family_names = {
-        't1': '',
         'r3': 'R3 High-Memory',
         'c3': 'C3 High-CPU',
         'm3': 'M3 General Purpose',

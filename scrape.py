@@ -99,7 +99,7 @@ def scrape_instances():
     current_gen = [parse_instance(r) for r in rows]
 
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/previous-generation/"), etree.HTMLParser())
-    details = tree.xpath('//table')[4]
+    details = tree.xpath('//table')[5]
     rows = details.xpath('tbody/tr')[1:]
     assert len(rows) > 0, "Didn't find any table rows."
     prev_gen = [parse_prev_generation_instance(r) for r in rows]
@@ -161,7 +161,7 @@ def add_pricing(imap, data):
                 # ECU is only available here
                 ecu = i_spec['ECU']
                 if ecu == 'variable':
-                    inst.ECU = None
+                    inst.ECU = 0
                 else:
                     inst.ECU = float(ecu)
 
