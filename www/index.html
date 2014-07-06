@@ -24,10 +24,12 @@
       <h1>EC2Instances.info <small>Easy Amazon EC2 Instance Comparison</small></h1>
     </div>
 
+    <!--
     <div class="alert">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <strong>Warning!</strong> Some information on this page is outdated. Please see <a href="https://github.com/powdahound/ec2instances.info/issues/75">this issue</a> for more detail.
     </div>
+    -->
 
     <div class="pull-left">
       <div class="btn-group" id='region-dropdown'>
@@ -100,138 +102,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr class='instance' id="m3.medium">
-          <td class="name">M3 Medium</td>
-          <td class="memory"><span sort="3.75">3.75 GB</span></td>
-          <td class="computeunits">
-            <span sort="3.0">3
-              (1 core x 3 unit)
-            </span>
-          </td>
-          <td class="storage">
-            
-            <span sort="4">
-              4 GB
-              SSD
-            </span>
-          </td>
-          <td class="architecture">
-            64-bit
-          </td>
-          <td class="ioperf">
-            <span sort="4">
-              Moderate
-            </span>
-          </td>
-          <td class="maxips">12</td>
-          <td class="apiname">m3.medium</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.113&#34;, &#34;ap-northeast-1&#34;: &#34;0.171&#34;, &#34;sa-east-1&#34;: &#34;0.153&#34;, &#34;ap-southeast-1&#34;: &#34;0.158&#34;, &#34;ap-southeast-2&#34;: &#34;0.158&#34;, &#34;us-west-2&#34;: &#34;0.113&#34;, &#34;us-west-1&#34;: &#34;0.124&#34;, &#34;eu-west-1&#34;: &#34;0.124&#34;}'>
-            $0.113 per hour
-          </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.176&#34;, &#34;ap-northeast-1&#34;: &#34;0.221&#34;, &#34;sa-east-1&#34;: &#34;0.216&#34;, &#34;ap-southeast-1&#34;: &#34;0.221&#34;, &#34;ap-southeast-2&#34;: &#34;0.221&#34;, &#34;us-west-2&#34;: &#34;0.176&#34;, &#34;us-west-1&#34;: &#34;0.187&#34;, &#34;eu-west-1&#34;: &#34;0.176&#34;}'>
-            $0.176 per hour
-          </td>
-        </tr>
-        <tr class='instance' id="m3.large">
-          <td class="name">M3 Large</td>
-          <td class="memory"><span sort="7.5">7.5 GB</span></td>
-          <td class="computeunits">
-            <span sort="6.5">6.5
-              (2 core x 3.25 unit)
-            </span>
-          </td>
-          <td class="storage">
-            
-            <span sort="32">
-              32 GB
-              SSD
-            </span>
-          </td>
-          <td class="architecture">
-            64-bit
-          </td>
-          <td class="ioperf">
-            <span sort="4">
-              Moderate
-            </span>
-          </td>
-          <td class="maxips">30</td>
-          <td class="apiname">m3.large</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.225&#34;, &#34;ap-northeast-1&#34;: &#34;0.342&#34;, &#34;sa-east-1&#34;: &#34;0.306&#34;, &#34;ap-southeast-1&#34;: &#34;0.315&#34;, &#34;ap-southeast-2&#34;: &#34;0.315&#34;, &#34;us-west-2&#34;: &#34;0.225&#34;, &#34;us-west-1&#34;: &#34;0.248&#34;, &#34;eu-west-1&#34;: &#34;0.248&#34;}'>
-            $0.225 per hour
-          </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.351&#34;, &#34;ap-northeast-1&#34;: &#34;0.441&#34;, &#34;sa-east-1&#34;: &#34;0.432&#34;, &#34;ap-southeast-1&#34;: &#34;0.441&#34;, &#34;ap-southeast-2&#34;: &#34;0.441&#34;, &#34;us-west-2&#34;: &#34;0.351&#34;, &#34;us-west-1&#34;: &#34;0.374&#34;, &#34;eu-west-1&#34;: &#34;0.351&#34;}'>
-            $0.351 per hour
-          </td>
-        </tr>
-        <tr class='instance' id="m3.xlarge">
-          <td class="name">M3 Extra Large</td>
-          <td class="memory"><span sort="15.0">15.0 GB</span></td>
-          <td class="computeunits">
-            <span sort="13.0">13
-              (4 core x 3.25 unit)
-            </span>
-          </td>
-          <td class="storage">
-            
-            <span sort="80">
-              80 GB
-              (2 * 40 GB SSD)
-            </span>
-          </td>
-          <td class="architecture">
-            64-bit
-          </td>
-          <td class="ioperf">
-            <span sort="7">
-              High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
-            </span>
-          </td>
-          <td class="maxips">60</td>
-          <td class="apiname">m3.xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.450&#34;, &#34;ap-northeast-1&#34;: &#34;0.684&#34;, &#34;sa-east-1&#34;: &#34;0.612&#34;, &#34;ap-southeast-1&#34;: &#34;0.630&#34;, &#34;ap-southeast-2&#34;: &#34;0.630&#34;, &#34;us-west-2&#34;: &#34;0.450&#34;, &#34;us-west-1&#34;: &#34;0.495&#34;, &#34;eu-west-1&#34;: &#34;0.495&#34;}'>
-            $0.450 per hour
-          </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.702&#34;, &#34;ap-northeast-1&#34;: &#34;0.882&#34;, &#34;sa-east-1&#34;: &#34;0.864&#34;, &#34;ap-southeast-1&#34;: &#34;0.882&#34;, &#34;ap-southeast-2&#34;: &#34;0.882&#34;, &#34;us-west-2&#34;: &#34;0.702&#34;, &#34;us-west-1&#34;: &#34;0.747&#34;, &#34;eu-west-1&#34;: &#34;0.702&#34;}'>
-            $0.702 per hour
-          </td>
-        </tr>
-        <tr class='instance' id="m3.2xlarge">
-          <td class="name">M3 Double Extra Large</td>
-          <td class="memory"><span sort="30.0">30.0 GB</span></td>
-          <td class="computeunits">
-            <span sort="26.0">26
-              (8 core x 3.25 unit)
-            </span>
-          </td>
-          <td class="storage">
-            
-            <span sort="160">
-              160 GB
-              (2 * 80 GB SSD)
-            </span>
-          </td>
-          <td class="architecture">
-            64-bit
-          </td>
-          <td class="ioperf">
-            <span sort="7">
-              High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
-            </span>
-          </td>
-          <td class="maxips">120</td>
-          <td class="apiname">m3.2xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.900&#34;, &#34;ap-northeast-1&#34;: &#34;1.368&#34;, &#34;sa-east-1&#34;: &#34;1.224&#34;, &#34;ap-southeast-1&#34;: &#34;1.260&#34;, &#34;ap-southeast-2&#34;: &#34;1.260&#34;, &#34;us-west-2&#34;: &#34;0.900&#34;, &#34;us-west-1&#34;: &#34;0.990&#34;, &#34;eu-west-1&#34;: &#34;0.990&#34;}'>
-            $0.900 per hour
-          </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.404&#34;, &#34;ap-northeast-1&#34;: &#34;1.764&#34;, &#34;sa-east-1&#34;: &#34;1.728&#34;, &#34;ap-southeast-1&#34;: &#34;1.764&#34;, &#34;ap-southeast-2&#34;: &#34;1.764&#34;, &#34;us-west-2&#34;: &#34;1.404&#34;, &#34;us-west-1&#34;: &#34;1.494&#34;, &#34;eu-west-1&#34;: &#34;1.404&#34;}'>
-            $1.404 per hour
-          </td>
-        </tr>
         <tr class='instance' id="m1.small">
-          <td class="name">M1 Small</td>
+          <td class="name">M1 General Purpose Small</td>
           <td class="memory"><span sort="1.7">1.7 GB</span></td>
           <td class="computeunits">
             <span sort="1.0">1
@@ -255,15 +127,15 @@
           </td>
           <td class="maxips">8</td>
           <td class="apiname">m1.small</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.060&#34;, &#34;ap-northeast-1&#34;: &#34;0.088&#34;, &#34;sa-east-1&#34;: &#34;0.080&#34;, &#34;ap-southeast-1&#34;: &#34;0.080&#34;, &#34;ap-southeast-2&#34;: &#34;0.080&#34;, &#34;us-west-2&#34;: &#34;0.060&#34;, &#34;us-west-1&#34;: &#34;0.065&#34;, &#34;eu-west-1&#34;: &#34;0.065&#34;}'>
-            $0.060 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.044&#34;, &#34;ap-northeast-1&#34;: &#34;0.061&#34;, &#34;sa-east-1&#34;: &#34;0.058&#34;, &#34;ap-southeast-1&#34;: &#34;0.058&#34;, &#34;ap-southeast-2&#34;: &#34;0.058&#34;, &#34;us-west-2&#34;: &#34;0.044&#34;, &#34;us-west-1&#34;: &#34;0.047&#34;, &#34;eu-west-1&#34;: &#34;0.047&#34;}'>
+                 $0.044 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.091&#34;, &#34;ap-northeast-1&#34;: &#34;0.115&#34;, &#34;sa-east-1&#34;: &#34;0.111&#34;, &#34;ap-southeast-1&#34;: &#34;0.115&#34;, &#34;ap-southeast-2&#34;: &#34;0.115&#34;, &#34;us-west-2&#34;: &#34;0.091&#34;, &#34;us-west-1&#34;: &#34;0.096&#34;, &#34;eu-west-1&#34;: &#34;0.091&#34;}'>
-            $0.091 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.075&#34;, &#34;ap-northeast-1&#34;: &#34;0.088&#34;, &#34;sa-east-1&#34;: &#34;0.089&#34;, &#34;ap-southeast-1&#34;: &#34;0.093&#34;, &#34;ap-southeast-2&#34;: &#34;0.093&#34;, &#34;us-west-2&#34;: &#34;0.075&#34;, &#34;us-west-1&#34;: &#34;0.078&#34;, &#34;eu-west-1&#34;: &#34;0.075&#34;}'>
+                $0.075 per hour
           </td>
         </tr>
         <tr class='instance' id="m1.medium">
-          <td class="name">M1 Medium</td>
+          <td class="name">M1 General Purpose Medium</td>
           <td class="memory"><span sort="3.75">3.75 GB</span></td>
           <td class="computeunits">
             <span sort="2.0">2
@@ -287,15 +159,15 @@
           </td>
           <td class="maxips">12</td>
           <td class="apiname">m1.medium</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.120&#34;, &#34;ap-northeast-1&#34;: &#34;0.175&#34;, &#34;sa-east-1&#34;: &#34;0.160&#34;, &#34;ap-southeast-1&#34;: &#34;0.160&#34;, &#34;ap-southeast-2&#34;: &#34;0.160&#34;, &#34;us-west-2&#34;: &#34;0.120&#34;, &#34;us-west-1&#34;: &#34;0.130&#34;, &#34;eu-west-1&#34;: &#34;0.130&#34;}'>
-            $0.120 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.087&#34;, &#34;ap-northeast-1&#34;: &#34;0.122&#34;, &#34;sa-east-1&#34;: &#34;0.117&#34;, &#34;ap-southeast-1&#34;: &#34;0.117&#34;, &#34;ap-southeast-2&#34;: &#34;0.117&#34;, &#34;us-west-2&#34;: &#34;0.087&#34;, &#34;us-west-1&#34;: &#34;0.095&#34;, &#34;eu-west-1&#34;: &#34;0.095&#34;}'>
+                 $0.087 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.182&#34;, &#34;ap-northeast-1&#34;: &#34;0.230&#34;, &#34;sa-east-1&#34;: &#34;0.222&#34;, &#34;ap-southeast-1&#34;: &#34;0.230&#34;, &#34;ap-southeast-2&#34;: &#34;0.230&#34;, &#34;us-west-2&#34;: &#34;0.182&#34;, &#34;us-west-1&#34;: &#34;0.192&#34;, &#34;eu-west-1&#34;: &#34;0.182&#34;}'>
-            $0.182 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.149&#34;, &#34;ap-northeast-1&#34;: &#34;0.177&#34;, &#34;sa-east-1&#34;: &#34;0.179&#34;, &#34;ap-southeast-1&#34;: &#34;0.187&#34;, &#34;ap-southeast-2&#34;: &#34;0.187&#34;, &#34;us-west-2&#34;: &#34;0.149&#34;, &#34;us-west-1&#34;: &#34;0.157&#34;, &#34;eu-west-1&#34;: &#34;0.149&#34;}'>
+                $0.149 per hour
           </td>
         </tr>
         <tr class='instance' id="m1.large">
-          <td class="name">M1 Large</td>
+          <td class="name">M1 General Purpose Large</td>
           <td class="memory"><span sort="7.5">7.5 GB</span></td>
           <td class="computeunits">
             <span sort="4.0">4
@@ -320,15 +192,15 @@
           </td>
           <td class="maxips">30</td>
           <td class="apiname">m1.large</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.240&#34;, &#34;ap-northeast-1&#34;: &#34;0.350&#34;, &#34;sa-east-1&#34;: &#34;0.320&#34;, &#34;ap-southeast-1&#34;: &#34;0.320&#34;, &#34;ap-southeast-2&#34;: &#34;0.320&#34;, &#34;us-west-2&#34;: &#34;0.240&#34;, &#34;us-west-1&#34;: &#34;0.260&#34;, &#34;eu-west-1&#34;: &#34;0.260&#34;}'>
-            $0.240 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.175&#34;, &#34;ap-northeast-1&#34;: &#34;0.243&#34;, &#34;sa-east-1&#34;: &#34;0.233&#34;, &#34;ap-southeast-1&#34;: &#34;0.233&#34;, &#34;ap-southeast-2&#34;: &#34;0.233&#34;, &#34;us-west-2&#34;: &#34;0.175&#34;, &#34;us-west-1&#34;: &#34;0.190&#34;, &#34;eu-west-1&#34;: &#34;0.190&#34;}'>
+                 $0.175 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.364&#34;, &#34;ap-northeast-1&#34;: &#34;0.460&#34;, &#34;sa-east-1&#34;: &#34;0.444&#34;, &#34;ap-southeast-1&#34;: &#34;0.460&#34;, &#34;ap-southeast-2&#34;: &#34;0.460&#34;, &#34;us-west-2&#34;: &#34;0.364&#34;, &#34;us-west-1&#34;: &#34;0.384&#34;, &#34;eu-west-1&#34;: &#34;0.364&#34;}'>
-            $0.364 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.299&#34;, &#34;ap-northeast-1&#34;: &#34;0.353&#34;, &#34;sa-east-1&#34;: &#34;0.357&#34;, &#34;ap-southeast-1&#34;: &#34;0.373&#34;, &#34;ap-southeast-2&#34;: &#34;0.373&#34;, &#34;us-west-2&#34;: &#34;0.299&#34;, &#34;us-west-1&#34;: &#34;0.314&#34;, &#34;eu-west-1&#34;: &#34;0.299&#34;}'>
+                $0.299 per hour
           </td>
         </tr>
         <tr class='instance' id="m1.xlarge">
-          <td class="name">M1 Extra Large</td>
+          <td class="name">M1 General Purpose Extra Large</td>
           <td class="memory"><span sort="15.0">15.0 GB</span></td>
           <td class="computeunits">
             <span sort="8.0">8
@@ -353,178 +225,15 @@
           </td>
           <td class="maxips">60</td>
           <td class="apiname">m1.xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.480&#34;, &#34;ap-northeast-1&#34;: &#34;0.700&#34;, &#34;sa-east-1&#34;: &#34;0.640&#34;, &#34;ap-southeast-1&#34;: &#34;0.640&#34;, &#34;ap-southeast-2&#34;: &#34;0.640&#34;, &#34;us-west-2&#34;: &#34;0.480&#34;, &#34;us-west-1&#34;: &#34;0.520&#34;, &#34;eu-west-1&#34;: &#34;0.520&#34;}'>
-            $0.480 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.350&#34;, &#34;ap-northeast-1&#34;: &#34;0.486&#34;, &#34;sa-east-1&#34;: &#34;0.467&#34;, &#34;ap-southeast-1&#34;: &#34;0.467&#34;, &#34;ap-southeast-2&#34;: &#34;0.467&#34;, &#34;us-west-2&#34;: &#34;0.350&#34;, &#34;us-west-1&#34;: &#34;0.379&#34;, &#34;eu-west-1&#34;: &#34;0.379&#34;}'>
+                 $0.350 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.728&#34;, &#34;ap-northeast-1&#34;: &#34;0.920&#34;, &#34;sa-east-1&#34;: &#34;0.888&#34;, &#34;ap-southeast-1&#34;: &#34;0.920&#34;, &#34;ap-southeast-2&#34;: &#34;0.920&#34;, &#34;us-west-2&#34;: &#34;0.728&#34;, &#34;us-west-1&#34;: &#34;0.768&#34;, &#34;eu-west-1&#34;: &#34;0.728&#34;}'>
-            $0.728 per hour
-          </td>
-        </tr>
-        <tr class='instance' id="c3.large">
-          <td class="name">C3 Large</td>
-          <td class="memory"><span sort="3.75">3.75 GB</span></td>
-          <td class="computeunits">
-            <span sort="7.0">7
-              (2 core x 3.5 unit)
-            </span>
-          </td>
-          <td class="storage">
-            
-            <span sort="32">
-              32 GB
-              (2 * 16 GB SSD)
-            </span>
-          </td>
-          <td class="architecture">
-            64-bit
-          </td>
-          <td class="ioperf">
-            <span sort="4">
-              Moderate
-            </span>
-          </td>
-          <td class="maxips">30</td>
-          <td class="apiname">c3.large</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.150&#34;, &#34;ap-northeast-1&#34;: &#34;0.192&#34;, &#34;ap-southeast-1&#34;: &#34;0.189&#34;, &#34;ap-southeast-2&#34;: &#34;0.189&#34;, &#34;us-west-2&#34;: &#34;0.150&#34;, &#34;us-west-1&#34;: &#34;0.171&#34;, &#34;eu-west-1&#34;: &#34;0.171&#34;}'>
-            $0.150 per hour
-          </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.233&#34;, &#34;ap-northeast-1&#34;: &#34;0.295&#34;, &#34;ap-southeast-1&#34;: &#34;0.295&#34;, &#34;ap-southeast-2&#34;: &#34;0.295&#34;, &#34;us-west-2&#34;: &#34;0.233&#34;, &#34;us-west-1&#34;: &#34;0.233&#34;, &#34;eu-west-1&#34;: &#34;0.233&#34;}'>
-            $0.233 per hour
-          </td>
-        </tr>
-        <tr class='instance' id="c3.xlarge">
-          <td class="name">C3 Extra Large</td>
-          <td class="memory"><span sort="7.5">7.5 GB</span></td>
-          <td class="computeunits">
-            <span sort="14.0">14
-              (4 core x 3.5 unit)
-            </span>
-          </td>
-          <td class="storage">
-            
-            <span sort="80">
-              80 GB
-              (2 * 40 GB SSD)
-            </span>
-          </td>
-          <td class="architecture">
-            64-bit
-          </td>
-          <td class="ioperf">
-            <span sort="5">
-              Moderate
-               / <abbr title="EBS-Optimized available">500 Mbps</abbr>
-            </span>
-          </td>
-          <td class="maxips">60</td>
-          <td class="apiname">c3.xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.300&#34;, &#34;ap-northeast-1&#34;: &#34;0.383&#34;, &#34;ap-southeast-1&#34;: &#34;0.378&#34;, &#34;ap-southeast-2&#34;: &#34;0.378&#34;, &#34;us-west-2&#34;: &#34;0.300&#34;, &#34;us-west-1&#34;: &#34;0.342&#34;, &#34;eu-west-1&#34;: &#34;0.342&#34;}'>
-            $0.300 per hour
-          </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.466&#34;, &#34;ap-northeast-1&#34;: &#34;0.590&#34;, &#34;ap-southeast-1&#34;: &#34;0.590&#34;, &#34;ap-southeast-2&#34;: &#34;0.590&#34;, &#34;us-west-2&#34;: &#34;0.466&#34;, &#34;us-west-1&#34;: &#34;0.466&#34;, &#34;eu-west-1&#34;: &#34;0.466&#34;}'>
-            $0.466 per hour
-          </td>
-        </tr>
-        <tr class='instance' id="c3.2xlarge">
-          <td class="name">C3 Double Extra Large</td>
-          <td class="memory"><span sort="15.0">15.0 GB</span></td>
-          <td class="computeunits">
-            <span sort="28.0">28
-              (8 core x 3.5 unit)
-            </span>
-          </td>
-          <td class="storage">
-            
-            <span sort="160">
-              160 GB
-              (2 * 80 GB SSD)
-            </span>
-          </td>
-          <td class="architecture">
-            64-bit
-          </td>
-          <td class="ioperf">
-            <span sort="7">
-              High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
-            </span>
-          </td>
-          <td class="maxips">60</td>
-          <td class="apiname">c3.2xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.600&#34;, &#34;ap-northeast-1&#34;: &#34;0.766&#34;, &#34;ap-southeast-1&#34;: &#34;0.756&#34;, &#34;ap-southeast-2&#34;: &#34;0.756&#34;, &#34;us-west-2&#34;: &#34;0.600&#34;, &#34;us-west-1&#34;: &#34;0.683&#34;, &#34;eu-west-1&#34;: &#34;0.683&#34;}'>
-            $0.600 per hour
-          </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.932&#34;, &#34;ap-northeast-1&#34;: &#34;1.180&#34;, &#34;ap-southeast-1&#34;: &#34;1.180&#34;, &#34;ap-southeast-2&#34;: &#34;1.180&#34;, &#34;us-west-2&#34;: &#34;0.932&#34;, &#34;us-west-1&#34;: &#34;0.932&#34;, &#34;eu-west-1&#34;: &#34;0.932&#34;}'>
-            $0.932 per hour
-          </td>
-        </tr>
-        <tr class='instance' id="c3.4xlarge">
-          <td class="name">C3 Quadruple Extra Large</td>
-          <td class="memory"><span sort="30.0">30.0 GB</span></td>
-          <td class="computeunits">
-            <span sort="55.0">55
-              (16 core x 3.4375 unit)
-            </span>
-          </td>
-          <td class="storage">
-            
-            <span sort="320">
-              320 GB
-              (2 * 160 GB SSD)
-            </span>
-          </td>
-          <td class="architecture">
-            64-bit
-          </td>
-          <td class="ioperf">
-            <span sort="7">
-              High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
-            </span>
-          </td>
-          <td class="maxips">240</td>
-          <td class="apiname">c3.4xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.200&#34;, &#34;ap-northeast-1&#34;: &#34;1.532&#34;, &#34;ap-southeast-1&#34;: &#34;1.512&#34;, &#34;ap-southeast-2&#34;: &#34;1.512&#34;, &#34;us-west-2&#34;: &#34;1.200&#34;, &#34;us-west-1&#34;: &#34;1.366&#34;, &#34;eu-west-1&#34;: &#34;1.366&#34;}'>
-            $1.200 per hour
-          </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.864&#34;, &#34;ap-northeast-1&#34;: &#34;2.360&#34;, &#34;ap-southeast-1&#34;: &#34;2.360&#34;, &#34;ap-southeast-2&#34;: &#34;2.360&#34;, &#34;us-west-2&#34;: &#34;1.864&#34;, &#34;us-west-1&#34;: &#34;1.864&#34;, &#34;eu-west-1&#34;: &#34;1.864&#34;}'>
-            $1.864 per hour
-          </td>
-        </tr>
-        <tr class='instance' id="c3.8xlarge">
-          <td class="name">C3 Eight Extra Large</td>
-          <td class="memory"><span sort="60.0">60.0 GB</span></td>
-          <td class="computeunits">
-            <span sort="108.0">108
-              (32 core x 3.375 unit)
-            </span>
-          </td>
-          <td class="storage">
-            
-            <span sort="640">
-              640 GB
-              (2 * 320 GB SSD)
-            </span>
-          </td>
-          <td class="architecture">
-            64-bit
-          </td>
-          <td class="ioperf">
-            <span sort="8">
-              10 Gigabit
-            </span>
-          </td>
-          <td class="maxips">240</td>
-          <td class="apiname">c3.8xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;2.400&#34;, &#34;ap-northeast-1&#34;: &#34;3.064&#34;, &#34;ap-southeast-1&#34;: &#34;3.024&#34;, &#34;ap-southeast-2&#34;: &#34;3.024&#34;, &#34;us-west-2&#34;: &#34;2.400&#34;, &#34;us-west-1&#34;: &#34;2.732&#34;, &#34;eu-west-1&#34;: &#34;2.732&#34;}'>
-            $2.400 per hour
-          </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;3.728&#34;, &#34;ap-northeast-1&#34;: &#34;4.720&#34;, &#34;ap-southeast-1&#34;: &#34;4.720&#34;, &#34;ap-southeast-2&#34;: &#34;4.720&#34;, &#34;us-west-2&#34;: &#34;3.728&#34;, &#34;us-west-1&#34;: &#34;3.728&#34;, &#34;eu-west-1&#34;: &#34;3.728&#34;}'>
-            $3.728 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.598&#34;, &#34;ap-northeast-1&#34;: &#34;0.706&#34;, &#34;sa-east-1&#34;: &#34;0.715&#34;, &#34;ap-southeast-1&#34;: &#34;0.747&#34;, &#34;ap-southeast-2&#34;: &#34;0.747&#34;, &#34;us-west-2&#34;: &#34;0.598&#34;, &#34;us-west-1&#34;: &#34;0.627&#34;, &#34;eu-west-1&#34;: &#34;0.598&#34;}'>
+                $0.598 per hour
           </td>
         </tr>
         <tr class='instance' id="c1.medium">
-          <td class="name">High-CPU Medium</td>
+          <td class="name">C1 High-CPU Medium</td>
           <td class="memory"><span sort="1.7">1.7 GB</span></td>
           <td class="computeunits">
             <span sort="5.0">5
@@ -548,15 +257,15 @@
           </td>
           <td class="maxips">12</td>
           <td class="apiname">c1.medium</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.145&#34;, &#34;ap-northeast-1&#34;: &#34;0.185&#34;, &#34;sa-east-1&#34;: &#34;0.200&#34;, &#34;ap-southeast-1&#34;: &#34;0.183&#34;, &#34;ap-southeast-2&#34;: &#34;0.183&#34;, &#34;us-west-2&#34;: &#34;0.145&#34;, &#34;us-west-1&#34;: &#34;0.165&#34;, &#34;eu-west-1&#34;: &#34;0.165&#34;}'>
-            $0.145 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.130&#34;, &#34;ap-northeast-1&#34;: &#34;0.158&#34;, &#34;sa-east-1&#34;: &#34;0.179&#34;, &#34;ap-southeast-1&#34;: &#34;0.164&#34;, &#34;ap-southeast-2&#34;: &#34;0.164&#34;, &#34;us-west-2&#34;: &#34;0.130&#34;, &#34;us-west-1&#34;: &#34;0.148&#34;, &#34;eu-west-1&#34;: &#34;0.148&#34;}'>
+                 $0.130 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.225&#34;, &#34;ap-northeast-1&#34;: &#34;0.285&#34;, &#34;sa-east-1&#34;: &#34;0.280&#34;, &#34;ap-southeast-1&#34;: &#34;0.285&#34;, &#34;ap-southeast-2&#34;: &#34;0.285&#34;, &#34;us-west-2&#34;: &#34;0.225&#34;, &#34;us-west-1&#34;: &#34;0.245&#34;, &#34;eu-west-1&#34;: &#34;0.225&#34;}'>
-            $0.225 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.210&#34;, &#34;ap-northeast-1&#34;: &#34;0.258&#34;, &#34;sa-east-1&#34;: &#34;0.259&#34;, &#34;ap-southeast-1&#34;: &#34;0.266&#34;, &#34;ap-southeast-2&#34;: &#34;0.266&#34;, &#34;us-west-2&#34;: &#34;0.210&#34;, &#34;us-west-1&#34;: &#34;0.228&#34;, &#34;eu-west-1&#34;: &#34;0.210&#34;}'>
+                $0.210 per hour
           </td>
         </tr>
         <tr class='instance' id="c1.xlarge">
-          <td class="name">High-CPU Extra Large</td>
+          <td class="name">C1 High-CPU Extra Large</td>
           <td class="memory"><span sort="7.0">7.0 GB</span></td>
           <td class="computeunits">
             <span sort="20.0">20
@@ -581,11 +290,11 @@
           </td>
           <td class="maxips">60</td>
           <td class="apiname">c1.xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.580&#34;, &#34;ap-northeast-1&#34;: &#34;0.740&#34;, &#34;sa-east-1&#34;: &#34;0.800&#34;, &#34;ap-southeast-1&#34;: &#34;0.730&#34;, &#34;ap-southeast-2&#34;: &#34;0.730&#34;, &#34;us-west-2&#34;: &#34;0.580&#34;, &#34;us-west-1&#34;: &#34;0.660&#34;, &#34;eu-west-1&#34;: &#34;0.660&#34;}'>
-            $0.580 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.520&#34;, &#34;ap-northeast-1&#34;: &#34;0.632&#34;, &#34;sa-east-1&#34;: &#34;0.718&#34;, &#34;ap-southeast-1&#34;: &#34;0.655&#34;, &#34;ap-southeast-2&#34;: &#34;0.655&#34;, &#34;us-west-2&#34;: &#34;0.520&#34;, &#34;us-west-1&#34;: &#34;0.592&#34;, &#34;eu-west-1&#34;: &#34;0.592&#34;}'>
+                 $0.520 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.900&#34;, &#34;ap-northeast-1&#34;: &#34;1.140&#34;, &#34;sa-east-1&#34;: &#34;1.120&#34;, &#34;ap-southeast-1&#34;: &#34;1.140&#34;, &#34;ap-southeast-2&#34;: &#34;1.140&#34;, &#34;us-west-2&#34;: &#34;0.900&#34;, &#34;us-west-1&#34;: &#34;0.980&#34;, &#34;eu-west-1&#34;: &#34;0.900&#34;}'>
-            $0.900 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.840&#34;, &#34;ap-northeast-1&#34;: &#34;1.032&#34;, &#34;sa-east-1&#34;: &#34;1.038&#34;, &#34;ap-southeast-1&#34;: &#34;1.065&#34;, &#34;ap-southeast-2&#34;: &#34;1.065&#34;, &#34;us-west-2&#34;: &#34;0.840&#34;, &#34;us-west-1&#34;: &#34;0.912&#34;, &#34;eu-west-1&#34;: &#34;0.840&#34;}'>
+                $0.840 per hour
           </td>
         </tr>
         <tr class='instance' id="cc2.8xlarge">
@@ -617,44 +326,11 @@
           </td>
           <td class="maxips">240</td>
           <td class="apiname">cc2.8xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;2.400&#34;, &#34;us-east-1&#34;: &#34;2.400&#34;, &#34;ap-northeast-1&#34;: &#34;2.960&#34;, &#34;eu-west-1&#34;: &#34;2.700&#34;}'>
-            $2.400 per hour
+          <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;2.000&#34;, &#34;us-east-1&#34;: &#34;2.000&#34;, &#34;ap-northeast-1&#34;: &#34;2.349&#34;, &#34;eu-west-1&#34;: &#34;2.250&#34;}'>
+                 $2.000 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;2.970&#34;, &#34;us-east-1&#34;: &#34;2.970&#34;, &#34;ap-northeast-1&#34;: &#34;3.530&#34;, &#34;eu-west-1&#34;: &#34;2.970&#34;}'>
-            $2.970 per hour
-          </td>
-        </tr>
-        <tr class='instance' id="g2.2xlarge">
-          <td class="name">G2 Double Extra Large</td>
-          <td class="memory"><span sort="15.0">15.0 GB</span></td>
-          <td class="computeunits">
-            <span sort="26.0">26
-              (8 core x 3.25 unit)
-            </span>
-          </td>
-          <td class="storage">
-            
-            <span sort="60">
-              60 GB
-              SSD
-            </span>
-          </td>
-          <td class="architecture">
-            64-bit
-          </td>
-          <td class="ioperf">
-            <span sort="7">
-              High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
-            </span>
-          </td>
-          <td class="maxips">60</td>
-          <td class="apiname">g2.2xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;0.650&#34;, &#34;us-east-1&#34;: &#34;0.650&#34;, &#34;ap-northeast-1&#34;: &#34;0.943&#34;, &#34;us-west-1&#34;: &#34;0.702&#34;, &#34;eu-west-1&#34;: &#34;0.702&#34;}'>
-            $0.650 per hour
-          </td>
-          <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;0.767&#34;, &#34;us-east-1&#34;: &#34;0.767&#34;, &#34;ap-northeast-1&#34;: &#34;1.060&#34;, &#34;us-west-1&#34;: &#34;0.819&#34;, &#34;eu-west-1&#34;: &#34;0.767&#34;}'>
-            $0.767 per hour
+          <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;2.570&#34;, &#34;us-east-1&#34;: &#34;2.570&#34;, &#34;ap-northeast-1&#34;: &#34;2.919&#34;, &#34;eu-west-1&#34;: &#34;2.570&#34;}'>
+                $2.570 per hour
           </td>
         </tr>
         <tr class='instance' id="cg1.4xlarge">
@@ -686,15 +362,15 @@
           </td>
           <td class="maxips">240</td>
           <td class="apiname">cg1.4xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;2.100&#34;, &#34;eu-west-1&#34;: &#34;2.36&#34;}'>
-            $2.100 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;2.100&#34;, &#34;eu-west-1&#34;: &#34;2.360&#34;}'>
+                 $2.100 per hour
           </td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;2.600&#34;, &#34;eu-west-1&#34;: &#34;2.600&#34;}'>
-            $2.600 per hour
+                $2.600 per hour
           </td>
         </tr>
         <tr class='instance' id="m2.xlarge">
-          <td class="name">High-Memory Extra Large</td>
+          <td class="name">M2 High Memory Extra Large</td>
           <td class="memory"><span sort="17.1">17.1 GB</span></td>
           <td class="computeunits">
             <span sort="6.5">6.5
@@ -718,15 +394,15 @@
           </td>
           <td class="maxips">60</td>
           <td class="apiname">m2.xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.410&#34;, &#34;ap-northeast-1&#34;: &#34;0.505&#34;, &#34;sa-east-1&#34;: &#34;0.540&#34;, &#34;ap-southeast-1&#34;: &#34;0.495&#34;, &#34;ap-southeast-2&#34;: &#34;0.495&#34;, &#34;us-west-2&#34;: &#34;0.410&#34;, &#34;us-west-1&#34;: &#34;0.460&#34;, &#34;eu-west-1&#34;: &#34;0.460&#34;}'>
-            $0.410 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.245&#34;, &#34;ap-northeast-1&#34;: &#34;0.287&#34;, &#34;sa-east-1&#34;: &#34;0.323&#34;, &#34;ap-southeast-1&#34;: &#34;0.296&#34;, &#34;ap-southeast-2&#34;: &#34;0.296&#34;, &#34;us-west-2&#34;: &#34;0.245&#34;, &#34;us-west-1&#34;: &#34;0.275&#34;, &#34;eu-west-1&#34;: &#34;0.275&#34;}'>
+                 $0.245 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.510&#34;, &#34;ap-northeast-1&#34;: &#34;0.570&#34;, &#34;sa-east-1&#34;: &#34;0.640&#34;, &#34;ap-southeast-1&#34;: &#34;0.570&#34;, &#34;ap-southeast-2&#34;: &#34;0.570&#34;, &#34;us-west-2&#34;: &#34;0.510&#34;, &#34;us-west-1&#34;: &#34;0.560&#34;, &#34;eu-west-1&#34;: &#34;0.510&#34;}'>
-            $0.510 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.345&#34;, &#34;ap-northeast-1&#34;: &#34;0.352&#34;, &#34;sa-east-1&#34;: &#34;0.423&#34;, &#34;ap-southeast-1&#34;: &#34;0.371&#34;, &#34;ap-southeast-2&#34;: &#34;0.371&#34;, &#34;us-west-2&#34;: &#34;0.345&#34;, &#34;us-west-1&#34;: &#34;0.375&#34;, &#34;eu-west-1&#34;: &#34;0.345&#34;}'>
+                $0.345 per hour
           </td>
         </tr>
         <tr class='instance' id="m2.2xlarge">
-          <td class="name">High-Memory Double Extra Large</td>
+          <td class="name">M2 High Memory Double Extra Large</td>
           <td class="memory"><span sort="34.2">34.2 GB</span></td>
           <td class="computeunits">
             <span sort="13.0">13
@@ -751,15 +427,15 @@
           </td>
           <td class="maxips">120</td>
           <td class="apiname">m2.2xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.820&#34;, &#34;ap-northeast-1&#34;: &#34;1.010&#34;, &#34;sa-east-1&#34;: &#34;1.080&#34;, &#34;ap-southeast-1&#34;: &#34;0.990&#34;, &#34;ap-southeast-2&#34;: &#34;0.990&#34;, &#34;us-west-2&#34;: &#34;0.820&#34;, &#34;us-west-1&#34;: &#34;0.920&#34;, &#34;eu-west-1&#34;: &#34;0.920&#34;}'>
-            $0.820 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.490&#34;, &#34;ap-northeast-1&#34;: &#34;0.575&#34;, &#34;sa-east-1&#34;: &#34;0.645&#34;, &#34;ap-southeast-1&#34;: &#34;0.592&#34;, &#34;ap-southeast-2&#34;: &#34;0.592&#34;, &#34;us-west-2&#34;: &#34;0.490&#34;, &#34;us-west-1&#34;: &#34;0.550&#34;, &#34;eu-west-1&#34;: &#34;0.550&#34;}'>
+                 $0.490 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.020&#34;, &#34;ap-northeast-1&#34;: &#34;1.140&#34;, &#34;sa-east-1&#34;: &#34;1.280&#34;, &#34;ap-southeast-1&#34;: &#34;1.140&#34;, &#34;ap-southeast-2&#34;: &#34;1.140&#34;, &#34;us-west-2&#34;: &#34;1.020&#34;, &#34;us-west-1&#34;: &#34;1.120&#34;, &#34;eu-west-1&#34;: &#34;1.020&#34;}'>
-            $1.020 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.690&#34;, &#34;ap-northeast-1&#34;: &#34;0.705&#34;, &#34;sa-east-1&#34;: &#34;0.845&#34;, &#34;ap-southeast-1&#34;: &#34;0.742&#34;, &#34;ap-southeast-2&#34;: &#34;0.742&#34;, &#34;us-west-2&#34;: &#34;0.690&#34;, &#34;us-west-1&#34;: &#34;0.750&#34;, &#34;eu-west-1&#34;: &#34;0.690&#34;}'>
+                $0.690 per hour
           </td>
         </tr>
         <tr class='instance' id="m2.4xlarge">
-          <td class="name">High-Memory Quadruple Extra Large</td>
+          <td class="name">M2 High Memory Quadruple Extra Large</td>
           <td class="memory"><span sort="68.4">68.4 GB</span></td>
           <td class="computeunits">
             <span sort="26.0">26
@@ -784,11 +460,11 @@
           </td>
           <td class="maxips">240</td>
           <td class="apiname">m2.4xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.640&#34;, &#34;ap-northeast-1&#34;: &#34;2.020&#34;, &#34;sa-east-1&#34;: &#34;2.160&#34;, &#34;ap-southeast-1&#34;: &#34;1.980&#34;, &#34;ap-southeast-2&#34;: &#34;1.980&#34;, &#34;us-west-2&#34;: &#34;1.640&#34;, &#34;us-west-1&#34;: &#34;1.840&#34;, &#34;eu-west-1&#34;: &#34;1.840&#34;}'>
-            $1.640 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.980&#34;, &#34;ap-northeast-1&#34;: &#34;1.150&#34;, &#34;sa-east-1&#34;: &#34;1.291&#34;, &#34;ap-southeast-1&#34;: &#34;1.183&#34;, &#34;ap-southeast-2&#34;: &#34;1.183&#34;, &#34;us-west-2&#34;: &#34;0.980&#34;, &#34;us-west-1&#34;: &#34;1.100&#34;, &#34;eu-west-1&#34;: &#34;1.100&#34;}'>
+                 $0.980 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;2.040&#34;, &#34;ap-northeast-1&#34;: &#34;2.280&#34;, &#34;sa-east-1&#34;: &#34;2.560&#34;, &#34;ap-southeast-1&#34;: &#34;2.280&#34;, &#34;ap-southeast-2&#34;: &#34;2.280&#34;, &#34;us-west-2&#34;: &#34;2.040&#34;, &#34;us-west-1&#34;: &#34;2.240&#34;, &#34;eu-west-1&#34;: &#34;2.040&#34;}'>
-            $2.040 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.380&#34;, &#34;ap-northeast-1&#34;: &#34;1.410&#34;, &#34;sa-east-1&#34;: &#34;1.691&#34;, &#34;ap-southeast-1&#34;: &#34;1.483&#34;, &#34;ap-southeast-2&#34;: &#34;1.483&#34;, &#34;us-west-2&#34;: &#34;1.380&#34;, &#34;us-west-1&#34;: &#34;1.500&#34;, &#34;eu-west-1&#34;: &#34;1.380&#34;}'>
+                $1.380 per hour
           </td>
         </tr>
         <tr class='instance' id="cr1.8xlarge">
@@ -820,11 +496,644 @@
           </td>
           <td class="maxips">240</td>
           <td class="apiname">cr1.8xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;3.500&#34;, &#34;us-east-1&#34;: &#34;3.500&#34;, &#34;ap-northeast-1&#34;: &#34;4.310&#34;, &#34;eu-west-1&#34;: &#34;3.750&#34;}'>
-            $3.500 per hour
+          <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;3.500&#34;, &#34;us-east-1&#34;: &#34;3.500&#34;, &#34;ap-northeast-1&#34;: &#34;4.105&#34;, &#34;eu-west-1&#34;: &#34;3.750&#34;}'>
+                 $3.500 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;3.831&#34;, &#34;us-east-1&#34;: &#34;3.831&#34;, &#34;ap-northeast-1&#34;: &#34;4.641&#34;, &#34;eu-west-1&#34;: &#34;3.831&#34;}'>
-            $3.831 per hour
+          <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;3.831&#34;, &#34;us-east-1&#34;: &#34;3.831&#34;, &#34;ap-northeast-1&#34;: &#34;4.420&#34;, &#34;eu-west-1&#34;: &#34;3.831&#34;}'>
+                $3.831 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="hi1.4xlarge">
+          <td class="name">HI1. High I/O Quadruple Extra Large</td>
+          <td class="memory"><span sort="60.5">60.5 GB</span></td>
+          <td class="computeunits">
+            <span sort="35.0">35
+                (2 x
+                 <abbr title='Eight-core Sandy Bridge architecture'>
+                   Xeon E5-2650
+                 </abbr>
+                 )
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="2048">
+              2048 GB
+              (2 * 1024 GB SSD)
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="8">
+              10 Gigabit
+            </span>
+          </td>
+          <td class="maxips">240</td>
+          <td class="apiname">hi1.4xlarge</td>
+          <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;3.100&#34;, &#34;us-east-1&#34;: &#34;3.100&#34;, &#34;ap-northeast-1&#34;: &#34;3.276&#34;, &#34;eu-west-1&#34;: &#34;3.100&#34;}'>
+                 $3.100 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;3.580&#34;, &#34;us-east-1&#34;: &#34;3.580&#34;, &#34;ap-northeast-1&#34;: &#34;3.686&#34;, &#34;eu-west-1&#34;: &#34;3.580&#34;}'>
+                $3.580 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="t1.micro">
+          <td class="name">T1 Micro</td>
+          <td class="memory"><span sort="0.613">0.613 GB</span></td>
+          <td class="computeunits">
+            <span sort="0">Burstable</span>
+          </td>
+          <td class="storage">
+            
+            <span sort="0">0 GB (EBS only)</span>
+          </td>
+          <td class="architecture">
+            32/64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="0">
+              Very Low
+            </span>
+          </td>
+          <td class="maxips">4</td>
+          <td class="apiname">t1.micro</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.020&#34;, &#34;ap-northeast-1&#34;: &#34;0.026&#34;, &#34;sa-east-1&#34;: &#34;0.027&#34;, &#34;ap-southeast-1&#34;: &#34;0.020&#34;, &#34;ap-southeast-2&#34;: &#34;0.020&#34;, &#34;us-west-2&#34;: &#34;0.020&#34;, &#34;us-west-1&#34;: &#34;0.025&#34;, &#34;eu-west-1&#34;: &#34;0.020&#34;}'>
+                 $0.020 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.020&#34;, &#34;ap-northeast-1&#34;: &#34;0.033&#34;, &#34;sa-east-1&#34;: &#34;0.037&#34;, &#34;ap-southeast-1&#34;: &#34;0.020&#34;, &#34;ap-southeast-2&#34;: &#34;0.020&#34;, &#34;us-west-2&#34;: &#34;0.020&#34;, &#34;us-west-1&#34;: &#34;0.035&#34;, &#34;eu-west-1&#34;: &#34;0.020&#34;}'>
+                $0.020 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="t2.micro">
+          <td class="name">T2 Micro</td>
+          <td class="memory"><span sort="1.0">1.0 GB</span></td>
+          <td class="computeunits">
+            <span sort="0">Burstable</span>
+          </td>
+          <td class="storage">
+            
+            <span sort="0">0 GB (EBS only)</span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="10">
+              Low to Moderate
+            </span>
+          </td>
+          <td class="maxips">4</td>
+          <td class="apiname">t2.micro</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.013&#34;, &#34;ap-northeast-1&#34;: &#34;0.020&#34;, &#34;sa-east-1&#34;: &#34;0.027&#34;, &#34;ap-southeast-1&#34;: &#34;0.020&#34;, &#34;ap-southeast-2&#34;: &#34;0.020&#34;, &#34;us-west-2&#34;: &#34;0.013&#34;, &#34;us-west-1&#34;: &#34;0.017&#34;, &#34;eu-west-1&#34;: &#34;0.014&#34;}'>
+                 $0.013 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.018&#34;, &#34;ap-northeast-1&#34;: &#34;0.025&#34;, &#34;sa-east-1&#34;: &#34;0.032&#34;, &#34;ap-southeast-1&#34;: &#34;0.020&#34;, &#34;ap-southeast-2&#34;: &#34;0.020&#34;, &#34;us-west-2&#34;: &#34;0.018&#34;, &#34;us-west-1&#34;: &#34;0.022&#34;, &#34;eu-west-1&#34;: &#34;0.019&#34;}'>
+                $0.018 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="t2.small">
+          <td class="name">T2 Small</td>
+          <td class="memory"><span sort="2.0">2.0 GB</span></td>
+          <td class="computeunits">
+            <span sort="0">Burstable</span>
+          </td>
+          <td class="storage">
+            
+            <span sort="0">0 GB (EBS only)</span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="10">
+              Low to Moderate
+            </span>
+          </td>
+          <td class="maxips">8</td>
+          <td class="apiname">t2.small</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.026&#34;, &#34;ap-northeast-1&#34;: &#34;0.040&#34;, &#34;sa-east-1&#34;: &#34;0.054&#34;, &#34;ap-southeast-1&#34;: &#34;0.040&#34;, &#34;ap-southeast-2&#34;: &#34;0.040&#34;, &#34;us-west-2&#34;: &#34;0.026&#34;, &#34;us-west-1&#34;: &#34;0.034&#34;, &#34;eu-west-1&#34;: &#34;0.028&#34;}'>
+                 $0.026 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.036&#34;, &#34;ap-northeast-1&#34;: &#34;0.050&#34;, &#34;sa-east-1&#34;: &#34;0.064&#34;, &#34;ap-southeast-1&#34;: &#34;0.050&#34;, &#34;ap-southeast-2&#34;: &#34;0.050&#34;, &#34;us-west-2&#34;: &#34;0.036&#34;, &#34;us-west-1&#34;: &#34;0.044&#34;, &#34;eu-west-1&#34;: &#34;0.038&#34;}'>
+                $0.036 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="t2.medium">
+          <td class="name">T2 Medium</td>
+          <td class="memory"><span sort="4.0">4.0 GB</span></td>
+          <td class="computeunits">
+            <span sort="0">Burstable</span>
+          </td>
+          <td class="storage">
+            
+            <span sort="0">0 GB (EBS only)</span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="10">
+              Low to Moderate
+            </span>
+          </td>
+          <td class="maxips">18</td>
+          <td class="apiname">t2.medium</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.052&#34;, &#34;ap-northeast-1&#34;: &#34;0.080&#34;, &#34;sa-east-1&#34;: &#34;0.108&#34;, &#34;ap-southeast-1&#34;: &#34;0.080&#34;, &#34;ap-southeast-2&#34;: &#34;0.080&#34;, &#34;us-west-2&#34;: &#34;0.052&#34;, &#34;us-west-1&#34;: &#34;0.068&#34;, &#34;eu-west-1&#34;: &#34;0.056&#34;}'>
+                 $0.052 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.072&#34;, &#34;ap-northeast-1&#34;: &#34;0.100&#34;, &#34;sa-east-1&#34;: &#34;0.128&#34;, &#34;ap-southeast-1&#34;: &#34;0.100&#34;, &#34;ap-southeast-2&#34;: &#34;0.100&#34;, &#34;us-west-2&#34;: &#34;0.072&#34;, &#34;us-west-1&#34;: &#34;0.088&#34;, &#34;eu-west-1&#34;: &#34;0.076&#34;}'>
+                $0.072 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="m3.medium">
+          <td class="name">M3 General Purpose Medium</td>
+          <td class="memory"><span sort="3.75">3.75 GB</span></td>
+          <td class="computeunits">
+            <span sort="3.0">3
+              (1 core x 3 unit)
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="4">
+              4 GB
+              SSD
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="4">
+              Moderate
+            </span>
+          </td>
+          <td class="maxips">12</td>
+          <td class="apiname">m3.medium</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.070&#34;, &#34;ap-northeast-1&#34;: &#34;0.101&#34;, &#34;sa-east-1&#34;: &#34;0.095&#34;, &#34;ap-southeast-1&#34;: &#34;0.098&#34;, &#34;ap-southeast-2&#34;: &#34;0.098&#34;, &#34;us-west-2&#34;: &#34;0.070&#34;, &#34;us-west-1&#34;: &#34;0.077&#34;, &#34;eu-west-1&#34;: &#34;0.077&#34;}'>
+                 $0.070 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.133&#34;, &#34;ap-northeast-1&#34;: &#34;0.151&#34;, &#34;sa-east-1&#34;: &#34;0.158&#34;, &#34;ap-southeast-1&#34;: &#34;0.161&#34;, &#34;ap-southeast-2&#34;: &#34;0.161&#34;, &#34;us-west-2&#34;: &#34;0.133&#34;, &#34;us-west-1&#34;: &#34;0.140&#34;, &#34;eu-west-1&#34;: &#34;0.133&#34;}'>
+                $0.133 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="m3.large">
+          <td class="name">M3 General Purpose Large</td>
+          <td class="memory"><span sort="7.5">7.5 GB</span></td>
+          <td class="computeunits">
+            <span sort="6.5">6.5
+              (2 core x 3.25 unit)
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="32">
+              32 GB
+              SSD
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="4">
+              Moderate
+            </span>
+          </td>
+          <td class="maxips">30</td>
+          <td class="apiname">m3.large</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.140&#34;, &#34;ap-northeast-1&#34;: &#34;0.203&#34;, &#34;sa-east-1&#34;: &#34;0.190&#34;, &#34;ap-southeast-1&#34;: &#34;0.196&#34;, &#34;ap-southeast-2&#34;: &#34;0.196&#34;, &#34;us-west-2&#34;: &#34;0.140&#34;, &#34;us-west-1&#34;: &#34;0.154&#34;, &#34;eu-west-1&#34;: &#34;0.154&#34;}'>
+                 $0.140 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.266&#34;, &#34;ap-northeast-1&#34;: &#34;0.302&#34;, &#34;sa-east-1&#34;: &#34;0.316&#34;, &#34;ap-southeast-1&#34;: &#34;0.322&#34;, &#34;ap-southeast-2&#34;: &#34;0.322&#34;, &#34;us-west-2&#34;: &#34;0.266&#34;, &#34;us-west-1&#34;: &#34;0.280&#34;, &#34;eu-west-1&#34;: &#34;0.266&#34;}'>
+                $0.266 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="m3.xlarge">
+          <td class="name">M3 General Purpose Extra Large</td>
+          <td class="memory"><span sort="15.0">15.0 GB</span></td>
+          <td class="computeunits">
+            <span sort="13.0">13
+              (4 core x 3.25 unit)
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="80">
+              80 GB
+              (2 * 40 GB SSD)
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="7">
+              High
+               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="maxips">60</td>
+          <td class="apiname">m3.xlarge</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.280&#34;, &#34;ap-northeast-1&#34;: &#34;0.405&#34;, &#34;sa-east-1&#34;: &#34;0.381&#34;, &#34;ap-southeast-1&#34;: &#34;0.392&#34;, &#34;ap-southeast-2&#34;: &#34;0.392&#34;, &#34;us-west-2&#34;: &#34;0.280&#34;, &#34;us-west-1&#34;: &#34;0.308&#34;, &#34;eu-west-1&#34;: &#34;0.308&#34;}'>
+                 $0.280 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.532&#34;, &#34;ap-northeast-1&#34;: &#34;0.603&#34;, &#34;sa-east-1&#34;: &#34;0.633&#34;, &#34;ap-southeast-1&#34;: &#34;0.644&#34;, &#34;ap-southeast-2&#34;: &#34;0.644&#34;, &#34;us-west-2&#34;: &#34;0.532&#34;, &#34;us-west-1&#34;: &#34;0.560&#34;, &#34;eu-west-1&#34;: &#34;0.532&#34;}'>
+                $0.532 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="m3.2xlarge">
+          <td class="name">M3 General Purpose Double Extra Large</td>
+          <td class="memory"><span sort="30.0">30.0 GB</span></td>
+          <td class="computeunits">
+            <span sort="26.0">26
+              (8 core x 3.25 unit)
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="160">
+              160 GB
+              (2 * 80 GB SSD)
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="7">
+              High
+               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="maxips">120</td>
+          <td class="apiname">m3.2xlarge</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.560&#34;, &#34;ap-northeast-1&#34;: &#34;0.810&#34;, &#34;sa-east-1&#34;: &#34;0.761&#34;, &#34;ap-southeast-1&#34;: &#34;0.784&#34;, &#34;ap-southeast-2&#34;: &#34;0.784&#34;, &#34;us-west-2&#34;: &#34;0.560&#34;, &#34;us-west-1&#34;: &#34;0.616&#34;, &#34;eu-west-1&#34;: &#34;0.616&#34;}'>
+                 $0.560 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.064&#34;, &#34;ap-northeast-1&#34;: &#34;1.206&#34;, &#34;sa-east-1&#34;: &#34;1.265&#34;, &#34;ap-southeast-1&#34;: &#34;1.288&#34;, &#34;ap-southeast-2&#34;: &#34;1.288&#34;, &#34;us-west-2&#34;: &#34;1.064&#34;, &#34;us-west-1&#34;: &#34;1.120&#34;, &#34;eu-west-1&#34;: &#34;1.064&#34;}'>
+                $1.064 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="c3.large">
+          <td class="name">C3 High-CPU Large</td>
+          <td class="memory"><span sort="3.75">3.75 GB</span></td>
+          <td class="computeunits">
+            <span sort="7.0">7
+              (2 core x 3.5 unit)
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="32">
+              32 GB
+              (2 * 16 GB SSD)
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="4">
+              Moderate
+            </span>
+          </td>
+          <td class="maxips">30</td>
+          <td class="apiname">c3.large</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.105&#34;, &#34;ap-northeast-1&#34;: &#34;0.128&#34;, &#34;sa-east-1&#34;: &#34;0.163&#34;, &#34;ap-southeast-1&#34;: &#34;0.132&#34;, &#34;ap-southeast-2&#34;: &#34;0.132&#34;, &#34;us-west-2&#34;: &#34;0.105&#34;, &#34;us-west-1&#34;: &#34;0.120&#34;, &#34;eu-west-1&#34;: &#34;0.120&#34;}'>
+                 $0.105 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.188&#34;, &#34;ap-northeast-1&#34;: &#34;0.231&#34;, &#34;sa-east-1&#34;: &#34;0.246&#34;, &#34;ap-southeast-1&#34;: &#34;0.238&#34;, &#34;ap-southeast-2&#34;: &#34;0.238&#34;, &#34;us-west-2&#34;: &#34;0.188&#34;, &#34;us-west-1&#34;: &#34;0.188&#34;, &#34;eu-west-1&#34;: &#34;0.188&#34;}'>
+                $0.188 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="c3.xlarge">
+          <td class="name">C3 High-CPU Extra Large</td>
+          <td class="memory"><span sort="7.5">7.5 GB</span></td>
+          <td class="computeunits">
+            <span sort="14.0">14
+              (4 core x 3.5 unit)
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="80">
+              80 GB
+              (2 * 40 GB SSD)
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="5">
+              Moderate
+               / <abbr title="EBS-Optimized available">500 Mbps</abbr>
+            </span>
+          </td>
+          <td class="maxips">60</td>
+          <td class="apiname">c3.xlarge</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.210&#34;, &#34;ap-northeast-1&#34;: &#34;0.255&#34;, &#34;sa-east-1&#34;: &#34;0.325&#34;, &#34;ap-southeast-1&#34;: &#34;0.265&#34;, &#34;ap-southeast-2&#34;: &#34;0.265&#34;, &#34;us-west-2&#34;: &#34;0.210&#34;, &#34;us-west-1&#34;: &#34;0.239&#34;, &#34;eu-west-1&#34;: &#34;0.239&#34;}'>
+                 $0.210 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.376&#34;, &#34;ap-northeast-1&#34;: &#34;0.462&#34;, &#34;sa-east-1&#34;: &#34;0.491&#34;, &#34;ap-southeast-1&#34;: &#34;0.477&#34;, &#34;ap-southeast-2&#34;: &#34;0.477&#34;, &#34;us-west-2&#34;: &#34;0.376&#34;, &#34;us-west-1&#34;: &#34;0.376&#34;, &#34;eu-west-1&#34;: &#34;0.376&#34;}'>
+                $0.376 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="c3.2xlarge">
+          <td class="name">C3 High-CPU Double Extra Large</td>
+          <td class="memory"><span sort="15.0">15.0 GB</span></td>
+          <td class="computeunits">
+            <span sort="28.0">28
+              (8 core x 3.5 unit)
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="160">
+              160 GB
+              (2 * 80 GB SSD)
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="7">
+              High
+               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="maxips">60</td>
+          <td class="apiname">c3.2xlarge</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.420&#34;, &#34;ap-northeast-1&#34;: &#34;0.511&#34;, &#34;sa-east-1&#34;: &#34;0.650&#34;, &#34;ap-southeast-1&#34;: &#34;0.529&#34;, &#34;ap-southeast-2&#34;: &#34;0.529&#34;, &#34;us-west-2&#34;: &#34;0.420&#34;, &#34;us-west-1&#34;: &#34;0.478&#34;, &#34;eu-west-1&#34;: &#34;0.478&#34;}'>
+                 $0.420 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.752&#34;, &#34;ap-northeast-1&#34;: &#34;0.925&#34;, &#34;sa-east-1&#34;: &#34;0.982&#34;, &#34;ap-southeast-1&#34;: &#34;0.953&#34;, &#34;ap-southeast-2&#34;: &#34;0.953&#34;, &#34;us-west-2&#34;: &#34;0.752&#34;, &#34;us-west-1&#34;: &#34;0.752&#34;, &#34;eu-west-1&#34;: &#34;0.752&#34;}'>
+                $0.752 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="c3.4xlarge">
+          <td class="name">C3 High-CPU Quadruple Extra Large</td>
+          <td class="memory"><span sort="30.0">30.0 GB</span></td>
+          <td class="computeunits">
+            <span sort="55.0">55
+              (16 core x 3.4375 unit)
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="320">
+              320 GB
+              (2 * 160 GB SSD)
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="7">
+              High
+               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="maxips">240</td>
+          <td class="apiname">c3.4xlarge</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.840&#34;, &#34;ap-northeast-1&#34;: &#34;1.021&#34;, &#34;sa-east-1&#34;: &#34;1.300&#34;, &#34;ap-southeast-1&#34;: &#34;1.058&#34;, &#34;ap-southeast-2&#34;: &#34;1.058&#34;, &#34;us-west-2&#34;: &#34;0.840&#34;, &#34;us-west-1&#34;: &#34;0.956&#34;, &#34;eu-west-1&#34;: &#34;0.956&#34;}'>
+                 $0.840 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.504&#34;, &#34;ap-northeast-1&#34;: &#34;1.849&#34;, &#34;sa-east-1&#34;: &#34;1.964&#34;, &#34;ap-southeast-1&#34;: &#34;1.906&#34;, &#34;ap-southeast-2&#34;: &#34;1.906&#34;, &#34;us-west-2&#34;: &#34;1.504&#34;, &#34;us-west-1&#34;: &#34;1.504&#34;, &#34;eu-west-1&#34;: &#34;1.504&#34;}'>
+                $1.504 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="c3.8xlarge">
+          <td class="name">C3 High-CPU Eight Extra Large</td>
+          <td class="memory"><span sort="60.0">60.0 GB</span></td>
+          <td class="computeunits">
+            <span sort="108.0">108
+              (32 core x 3.375 unit)
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="640">
+              640 GB
+              (2 * 320 GB SSD)
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="8">
+              10 Gigabit
+            </span>
+          </td>
+          <td class="maxips">240</td>
+          <td class="apiname">c3.8xlarge</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.680&#34;, &#34;ap-northeast-1&#34;: &#34;2.043&#34;, &#34;sa-east-1&#34;: &#34;2.600&#34;, &#34;ap-southeast-1&#34;: &#34;2.117&#34;, &#34;ap-southeast-2&#34;: &#34;2.117&#34;, &#34;us-west-2&#34;: &#34;1.680&#34;, &#34;us-west-1&#34;: &#34;1.912&#34;, &#34;eu-west-1&#34;: &#34;1.912&#34;}'>
+                 $1.680 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;3.008&#34;, &#34;ap-northeast-1&#34;: &#34;3.699&#34;, &#34;sa-east-1&#34;: &#34;3.928&#34;, &#34;ap-southeast-1&#34;: &#34;3.813&#34;, &#34;ap-southeast-2&#34;: &#34;3.813&#34;, &#34;us-west-2&#34;: &#34;3.008&#34;, &#34;us-west-1&#34;: &#34;3.008&#34;, &#34;eu-west-1&#34;: &#34;3.008&#34;}'>
+                $3.008 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="g2.2xlarge">
+          <td class="name">G2 Double Extra Large</td>
+          <td class="memory"><span sort="15.0">15.0 GB</span></td>
+          <td class="computeunits">
+            <span sort="26.0">26
+              (8 core x 3.25 unit)
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="60">
+              60 GB
+              SSD
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="7">
+              High
+               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="maxips">60</td>
+          <td class="apiname">g2.2xlarge</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.650&#34;, &#34;ap-northeast-1&#34;: &#34;0.898&#34;, &#34;ap-southeast-1&#34;: &#34;1.000&#34;, &#34;ap-southeast-2&#34;: &#34;0.898&#34;, &#34;us-west-2&#34;: &#34;0.650&#34;, &#34;us-west-1&#34;: &#34;0.702&#34;, &#34;eu-west-1&#34;: &#34;0.702&#34;}'>
+                 $0.650 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.767&#34;, &#34;ap-northeast-1&#34;: &#34;1.010&#34;, &#34;ap-southeast-1&#34;: &#34;1.160&#34;, &#34;ap-southeast-2&#34;: &#34;1.058&#34;, &#34;us-west-2&#34;: &#34;0.767&#34;, &#34;us-west-1&#34;: &#34;0.819&#34;, &#34;eu-west-1&#34;: &#34;0.767&#34;}'>
+                $0.767 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="r3.large">
+          <td class="name">R3 High-Memory Large</td>
+          <td class="memory"><span sort="15.25">15.25 GB</span></td>
+          <td class="computeunits">
+            <span sort="6.5">6.5
+              (2 core x 3.25 unit)
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="32">
+              32 GB
+              SSD
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="4">
+              Moderate
+            </span>
+          </td>
+          <td class="maxips">30</td>
+          <td class="apiname">r3.large</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.175&#34;, &#34;ap-northeast-1&#34;: &#34;0.210&#34;, &#34;ap-southeast-1&#34;: &#34;0.210&#34;, &#34;ap-southeast-2&#34;: &#34;0.210&#34;, &#34;us-west-2&#34;: &#34;0.175&#34;, &#34;us-west-1&#34;: &#34;0.195&#34;, &#34;eu-west-1&#34;: &#34;0.195&#34;}'>
+                 $0.175 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.300&#34;, &#34;ap-northeast-1&#34;: &#34;0.310&#34;, &#34;ap-southeast-1&#34;: &#34;0.323&#34;, &#34;ap-southeast-2&#34;: &#34;0.323&#34;, &#34;us-west-2&#34;: &#34;0.300&#34;, &#34;us-west-1&#34;: &#34;0.330&#34;, &#34;eu-west-1&#34;: &#34;0.300&#34;}'>
+                $0.300 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="r3.xlarge">
+          <td class="name">R3 High-Memory Extra Large</td>
+          <td class="memory"><span sort="30.5">30.5 GB</span></td>
+          <td class="computeunits">
+            <span sort="13.0">13
+              (4 core x 3.25 unit)
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="80">
+              80 GB
+              SSD
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="5">
+              Moderate
+               / <abbr title="EBS-Optimized available">500 Mbps</abbr>
+            </span>
+          </td>
+          <td class="maxips">60</td>
+          <td class="apiname">r3.xlarge</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.350&#34;, &#34;ap-northeast-1&#34;: &#34;0.420&#34;, &#34;ap-southeast-1&#34;: &#34;0.420&#34;, &#34;ap-southeast-2&#34;: &#34;0.420&#34;, &#34;us-west-2&#34;: &#34;0.350&#34;, &#34;us-west-1&#34;: &#34;0.390&#34;, &#34;eu-west-1&#34;: &#34;0.390&#34;}'>
+                 $0.350 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.600&#34;, &#34;ap-northeast-1&#34;: &#34;0.620&#34;, &#34;ap-southeast-1&#34;: &#34;0.646&#34;, &#34;ap-southeast-2&#34;: &#34;0.646&#34;, &#34;us-west-2&#34;: &#34;0.600&#34;, &#34;us-west-1&#34;: &#34;0.652&#34;, &#34;eu-west-1&#34;: &#34;0.600&#34;}'>
+                $0.600 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="r3.2xlarge">
+          <td class="name">R3 High-Memory Double Extra Large</td>
+          <td class="memory"><span sort="61.0">61.0 GB</span></td>
+          <td class="computeunits">
+            <span sort="26.0">26
+              (8 core x 3.25 unit)
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="160">
+              160 GB
+              SSD
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="7">
+              High
+               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="maxips">60</td>
+          <td class="apiname">r3.2xlarge</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.700&#34;, &#34;ap-northeast-1&#34;: &#34;0.840&#34;, &#34;ap-southeast-1&#34;: &#34;0.840&#34;, &#34;ap-southeast-2&#34;: &#34;0.840&#34;, &#34;us-west-2&#34;: &#34;0.700&#34;, &#34;us-west-1&#34;: &#34;0.780&#34;, &#34;eu-west-1&#34;: &#34;0.780&#34;}'>
+                 $0.700 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.080&#34;, &#34;ap-northeast-1&#34;: &#34;1.219&#34;, &#34;ap-southeast-1&#34;: &#34;1.292&#34;, &#34;ap-southeast-2&#34;: &#34;1.292&#34;, &#34;us-west-2&#34;: &#34;1.080&#34;, &#34;us-west-1&#34;: &#34;1.173&#34;, &#34;eu-west-1&#34;: &#34;1.080&#34;}'>
+                $1.080 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="r3.4xlarge">
+          <td class="name">R3 High-Memory Quadruple Extra Large</td>
+          <td class="memory"><span sort="122.0">122.0 GB</span></td>
+          <td class="computeunits">
+            <span sort="52.0">52
+              (16 core x 3.25 unit)
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="320">
+              320 GB
+              SSD
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="7">
+              High
+               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="maxips">240</td>
+          <td class="apiname">r3.4xlarge</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.400&#34;, &#34;ap-northeast-1&#34;: &#34;1.680&#34;, &#34;ap-southeast-1&#34;: &#34;1.680&#34;, &#34;ap-southeast-2&#34;: &#34;1.680&#34;, &#34;us-west-2&#34;: &#34;1.400&#34;, &#34;us-west-1&#34;: &#34;1.560&#34;, &#34;eu-west-1&#34;: &#34;1.560&#34;}'>
+                 $1.400 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.944&#34;, &#34;ap-northeast-1&#34;: &#34;2.276&#34;, &#34;ap-southeast-1&#34;: &#34;2.447&#34;, &#34;ap-southeast-2&#34;: &#34;2.447&#34;, &#34;us-west-2&#34;: &#34;1.944&#34;, &#34;us-west-1&#34;: &#34;2.111&#34;, &#34;eu-west-1&#34;: &#34;1.944&#34;}'>
+                $1.944 per hour
+          </td>
+        </tr>
+        <tr class='instance' id="r3.8xlarge">
+          <td class="name">R3 High-Memory Eight Extra Large</td>
+          <td class="memory"><span sort="244.0">244.0 GB</span></td>
+          <td class="computeunits">
+            <span sort="104.0">104
+              (32 core x 3.25 unit)
+            </span>
+          </td>
+          <td class="storage">
+            
+            <span sort="640">
+              640 GB
+              (2 * 320 GB SSD)
+            </span>
+          </td>
+          <td class="architecture">
+            64-bit
+          </td>
+          <td class="ioperf">
+            <span sort="8">
+              10 Gigabit
+            </span>
+          </td>
+          <td class="maxips">240</td>
+          <td class="apiname">r3.8xlarge</td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;2.800&#34;, &#34;ap-northeast-1&#34;: &#34;3.360&#34;, &#34;ap-southeast-1&#34;: &#34;3.360&#34;, &#34;ap-southeast-2&#34;: &#34;3.360&#34;, &#34;us-west-2&#34;: &#34;2.800&#34;, &#34;us-west-1&#34;: &#34;3.120&#34;, &#34;eu-west-1&#34;: &#34;3.120&#34;}'>
+                 $2.800 per hour
+          </td>
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;3.500&#34;, &#34;ap-northeast-1&#34;: &#34;4.250&#34;, &#34;ap-southeast-1&#34;: &#34;4.600&#34;, &#34;ap-southeast-2&#34;: &#34;4.600&#34;, &#34;us-west-2&#34;: &#34;3.500&#34;, &#34;us-west-1&#34;: &#34;3.800&#34;, &#34;eu-west-1&#34;: &#34;3.500&#34;}'>
+                $3.500 per hour
           </td>
         </tr>
         <tr class='instance' id="i2.xlarge">
@@ -853,11 +1162,11 @@
           </td>
           <td class="maxips">60</td>
           <td class="apiname">i2.xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.853&#34;, &#34;ap-northeast-1&#34;: &#34;1.051&#34;, &#34;ap-southeast-1&#34;: &#34;1.018&#34;, &#34;ap-southeast-2&#34;: &#34;1.018&#34;, &#34;us-west-2&#34;: &#34;0.853&#34;, &#34;us-west-1&#34;: &#34;0.938&#34;, &#34;eu-west-1&#34;: &#34;0.938&#34;}'>
-            $0.853 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.853&#34;, &#34;ap-northeast-1&#34;: &#34;1.001&#34;, &#34;ap-southeast-1&#34;: &#34;1.018&#34;, &#34;ap-southeast-2&#34;: &#34;1.018&#34;, &#34;us-west-2&#34;: &#34;0.853&#34;, &#34;us-west-1&#34;: &#34;0.938&#34;, &#34;eu-west-1&#34;: &#34;0.938&#34;}'>
+                 $0.853 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.973&#34;, &#34;ap-northeast-1&#34;: &#34;1.169&#34;, &#34;ap-southeast-1&#34;: &#34;1.169&#34;, &#34;ap-southeast-2&#34;: &#34;1.169&#34;, &#34;us-west-2&#34;: &#34;0.973&#34;, &#34;us-west-1&#34;: &#34;1.058&#34;, &#34;eu-west-1&#34;: &#34;0.973&#34;}'>
-            $0.973 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.973&#34;, &#34;ap-northeast-1&#34;: &#34;1.113&#34;, &#34;ap-southeast-1&#34;: &#34;1.169&#34;, &#34;ap-southeast-2&#34;: &#34;1.169&#34;, &#34;us-west-2&#34;: &#34;0.973&#34;, &#34;us-west-1&#34;: &#34;1.058&#34;, &#34;eu-west-1&#34;: &#34;0.973&#34;}'>
+                $0.973 per hour
           </td>
         </tr>
         <tr class='instance' id="i2.2xlarge">
@@ -886,11 +1195,11 @@
           </td>
           <td class="maxips">60</td>
           <td class="apiname">i2.2xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.705&#34;, &#34;ap-northeast-1&#34;: &#34;2.101&#34;, &#34;ap-southeast-1&#34;: &#34;2.035&#34;, &#34;ap-southeast-2&#34;: &#34;2.035&#34;, &#34;us-west-2&#34;: &#34;1.705&#34;, &#34;us-west-1&#34;: &#34;1.876&#34;, &#34;eu-west-1&#34;: &#34;1.876&#34;}'>
-            $1.705 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.705&#34;, &#34;ap-northeast-1&#34;: &#34;2.001&#34;, &#34;ap-southeast-1&#34;: &#34;2.035&#34;, &#34;ap-southeast-2&#34;: &#34;2.035&#34;, &#34;us-west-2&#34;: &#34;1.705&#34;, &#34;us-west-1&#34;: &#34;1.876&#34;, &#34;eu-west-1&#34;: &#34;1.876&#34;}'>
+                 $1.705 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.946&#34;, &#34;ap-northeast-1&#34;: &#34;2.337&#34;, &#34;ap-southeast-1&#34;: &#34;2.337&#34;, &#34;ap-southeast-2&#34;: &#34;2.337&#34;, &#34;us-west-2&#34;: &#34;1.946&#34;, &#34;us-west-1&#34;: &#34;2.116&#34;, &#34;eu-west-1&#34;: &#34;1.946&#34;}'>
-            $1.946 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.946&#34;, &#34;ap-northeast-1&#34;: &#34;2.226&#34;, &#34;ap-southeast-1&#34;: &#34;2.337&#34;, &#34;ap-southeast-2&#34;: &#34;2.337&#34;, &#34;us-west-2&#34;: &#34;1.946&#34;, &#34;us-west-1&#34;: &#34;2.116&#34;, &#34;eu-west-1&#34;: &#34;1.946&#34;}'>
+                $1.946 per hour
           </td>
         </tr>
         <tr class='instance' id="i2.4xlarge">
@@ -919,11 +1228,11 @@
           </td>
           <td class="maxips">240</td>
           <td class="apiname">i2.4xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;3.410&#34;, &#34;ap-northeast-1&#34;: &#34;4.202&#34;, &#34;ap-southeast-1&#34;: &#34;4.070&#34;, &#34;ap-southeast-2&#34;: &#34;4.070&#34;, &#34;us-west-2&#34;: &#34;3.410&#34;, &#34;us-west-1&#34;: &#34;3.751&#34;, &#34;eu-west-1&#34;: &#34;3.751&#34;}'>
-            $3.410 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;3.410&#34;, &#34;ap-northeast-1&#34;: &#34;4.002&#34;, &#34;ap-southeast-1&#34;: &#34;4.070&#34;, &#34;ap-southeast-2&#34;: &#34;4.070&#34;, &#34;us-west-2&#34;: &#34;3.410&#34;, &#34;us-west-1&#34;: &#34;3.751&#34;, &#34;eu-west-1&#34;: &#34;3.751&#34;}'>
+                 $3.410 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;3.891&#34;, &#34;ap-northeast-1&#34;: &#34;4.674&#34;, &#34;ap-southeast-1&#34;: &#34;4.674&#34;, &#34;ap-southeast-2&#34;: &#34;4.674&#34;, &#34;us-west-2&#34;: &#34;3.891&#34;, &#34;us-west-1&#34;: &#34;4.232&#34;, &#34;eu-west-1&#34;: &#34;3.891&#34;}'>
-            $3.891 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;3.891&#34;, &#34;ap-northeast-1&#34;: &#34;4.451&#34;, &#34;ap-southeast-1&#34;: &#34;4.674&#34;, &#34;ap-southeast-2&#34;: &#34;4.674&#34;, &#34;us-west-2&#34;: &#34;3.891&#34;, &#34;us-west-1&#34;: &#34;4.232&#34;, &#34;eu-west-1&#34;: &#34;3.891&#34;}'>
+                $3.891 per hour
           </td>
         </tr>
         <tr class='instance' id="i2.8xlarge">
@@ -951,11 +1260,11 @@
           </td>
           <td class="maxips">240</td>
           <td class="apiname">i2.8xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;6.820&#34;, &#34;ap-northeast-1&#34;: &#34;8.404&#34;, &#34;ap-southeast-1&#34;: &#34;8.140&#34;, &#34;ap-southeast-2&#34;: &#34;8.140&#34;, &#34;us-west-2&#34;: &#34;6.820&#34;, &#34;us-west-1&#34;: &#34;7.502&#34;, &#34;eu-west-1&#34;: &#34;7.502&#34;}'>
-            $6.820 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;6.820&#34;, &#34;ap-northeast-1&#34;: &#34;8.004&#34;, &#34;ap-southeast-1&#34;: &#34;8.140&#34;, &#34;ap-southeast-2&#34;: &#34;8.140&#34;, &#34;us-west-2&#34;: &#34;6.820&#34;, &#34;us-west-1&#34;: &#34;7.502&#34;, &#34;eu-west-1&#34;: &#34;7.502&#34;}'>
+                 $6.820 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;7.782&#34;, &#34;ap-northeast-1&#34;: &#34;9.348&#34;, &#34;ap-southeast-1&#34;: &#34;9.348&#34;, &#34;ap-southeast-2&#34;: &#34;9.348&#34;, &#34;us-west-2&#34;: &#34;7.782&#34;, &#34;us-west-1&#34;: &#34;8.464&#34;, &#34;eu-west-1&#34;: &#34;7.782&#34;}'>
-            $7.782 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;7.782&#34;, &#34;ap-northeast-1&#34;: &#34;8.903&#34;, &#34;ap-southeast-1&#34;: &#34;9.348&#34;, &#34;ap-southeast-2&#34;: &#34;9.348&#34;, &#34;us-west-2&#34;: &#34;7.782&#34;, &#34;us-west-1&#34;: &#34;8.464&#34;, &#34;eu-west-1&#34;: &#34;7.782&#34;}'>
+                $7.782 per hour
           </td>
         </tr>
         <tr class='instance' id="hs1.8xlarge">
@@ -981,80 +1290,17 @@
             64-bit
           </td>
           <td class="ioperf">
-            <span sort="8">
-              10 Gigabit
+            <span sort="10">
+              10 Gibabit
             </span>
           </td>
           <td class="maxips">240</td>
           <td class="apiname">hs1.8xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;4.600&#34;, &#34;ap-northeast-1&#34;: &#34;5.670&#34;, &#34;ap-southeast-1&#34;: &#34;5.570&#34;, &#34;ap-southeast-2&#34;: &#34;5.570&#34;, &#34;us-west-2&#34;: &#34;4.600&#34;, &#34;eu-west-1&#34;: &#34;4.900&#34;}'>
-            $4.600 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;4.600&#34;, &#34;ap-northeast-1&#34;: &#34;5.400&#34;, &#34;ap-southeast-1&#34;: &#34;5.570&#34;, &#34;ap-southeast-2&#34;: &#34;5.570&#34;, &#34;us-west-2&#34;: &#34;4.600&#34;, &#34;eu-west-1&#34;: &#34;4.900&#34;}'>
+                 $4.600 per hour
           </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;4.931&#34;, &#34;ap-northeast-1&#34;: &#34;6.000&#34;, &#34;ap-southeast-1&#34;: &#34;5.901&#34;, &#34;ap-southeast-2&#34;: &#34;5.901&#34;, &#34;us-west-2&#34;: &#34;4.931&#34;, &#34;eu-west-1&#34;: &#34;4.931&#34;}'>
-            $4.931 per hour
-          </td>
-        </tr>
-        <tr class='instance' id="hi1.4xlarge">
-          <td class="name">High I/O Quadruple Extra Large</td>
-          <td class="memory"><span sort="60.5">60.5 GB</span></td>
-          <td class="computeunits">
-            <span sort="35.0">35
-                (2 x
-                 <abbr title='Eight-core Sandy Bridge architecture'>
-                   Xeon E5-2650
-                 </abbr>
-                 )
-            </span>
-          </td>
-          <td class="storage">
-            
-            <span sort="2048">
-              2048 GB
-              (2 * 1024 GB SSD)
-            </span>
-          </td>
-          <td class="architecture">
-            64-bit
-          </td>
-          <td class="ioperf">
-            <span sort="8">
-              10 Gigabit
-            </span>
-          </td>
-          <td class="maxips">240</td>
-          <td class="apiname">hi1.4xlarge</td>
-          <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;3.100&#34;, &#34;us-east-1&#34;: &#34;3.100&#34;, &#34;ap-northeast-1&#34;: &#34;3.440&#34;, &#34;eu-west-1&#34;: &#34;3.100&#34;}'>
-            $3.100 per hour
-          </td>
-          <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;3.580&#34;, &#34;us-east-1&#34;: &#34;3.580&#34;, &#34;ap-northeast-1&#34;: &#34;3.870&#34;, &#34;eu-west-1&#34;: &#34;3.580&#34;}'>
-            $3.580 per hour
-          </td>
-        </tr>
-        <tr class='instance' id="t1.micro">
-          <td class="name">Micro</td>
-          <td class="memory"><span sort="0.615">0.615 GB</span></td>
-          <td class="computeunits">
-            <span sort="2">2 (only for short bursts)</span>
-          </td>
-          <td class="storage">
-            
-            <span sort="0">0 GB (EBS only)</span>
-          </td>
-          <td class="architecture">
-            32/64-bit
-          </td>
-          <td class="ioperf">
-            <span sort="0">
-              Very Low
-            </span>
-          </td>
-          <td class="maxips">4</td>
-          <td class="apiname">t1.micro</td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.020&#34;, &#34;ap-northeast-1&#34;: &#34;0.027&#34;, &#34;sa-east-1&#34;: &#34;0.027&#34;, &#34;ap-southeast-1&#34;: &#34;0.020&#34;, &#34;ap-southeast-2&#34;: &#34;0.020&#34;, &#34;us-west-2&#34;: &#34;0.020&#34;, &#34;us-west-1&#34;: &#34;0.025&#34;, &#34;eu-west-1&#34;: &#34;0.020&#34;}'>
-            $0.020 per hour
-          </td>
-          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.020&#34;, &#34;ap-northeast-1&#34;: &#34;0.035&#34;, &#34;sa-east-1&#34;: &#34;0.037&#34;, &#34;ap-southeast-1&#34;: &#34;0.020&#34;, &#34;ap-southeast-2&#34;: &#34;0.020&#34;, &#34;us-west-2&#34;: &#34;0.020&#34;, &#34;us-west-1&#34;: &#34;0.035&#34;, &#34;eu-west-1&#34;: &#34;0.035&#34;}'>
-            $0.020 per hour
+          <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;4.931&#34;, &#34;ap-northeast-1&#34;: &#34;5.714&#34;, &#34;ap-southeast-1&#34;: &#34;5.901&#34;, &#34;ap-southeast-2&#34;: &#34;5.901&#34;, &#34;us-west-2&#34;: &#34;4.931&#34;, &#34;eu-west-1&#34;: &#34;4.931&#34;}'>
+                $4.931 per hour
           </td>
         </tr>
       </tbody>
@@ -1065,7 +1311,7 @@
       <p>It was started by <a href="http://twitter.com/powdahound" target="_blank">@powdahound</a>, contributed to by <a href="https://github.com/powdahound/ec2instances.info/contributors" target="_blank">many</a>, is <a href="http://powdahound.com/2011/03/hosting-a-static-site-on-amazon-s3-ec2instances-info" target="_blank">hosted on S3</a>, and awaits your improvements <a href="https://github.com/powdahound/ec2instances.info" target="_blank">on GitHub</a>.</p>
     </div>
     <div class="well-small">
-      <p class="small">Generated at: 2014-04-20 22:08:03 UTC</p>
+      <p class="small">Generated at: 2014-07-06 21:07:23 UTC</p>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
