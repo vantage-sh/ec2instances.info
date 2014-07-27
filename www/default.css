@@ -6,9 +6,12 @@ body {
   float: right;
 }
 
+#filters {
+  height: 50px;
+}
+
 #data {
   clear: both;
-  margin-top: 20px;
 }
 
 #data td {

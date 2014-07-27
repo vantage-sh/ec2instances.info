@@ -33,7 +33,7 @@
     </div>
     -->
 
-    <div class="pull-left">
+    <div class="pull-left" id="filters">
       <div class="btn-group" id='region-dropdown'>
         <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
           <i class="icon-globe icon-white"></i>
