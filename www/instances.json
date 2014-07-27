@@ -1864,7 +1864,7 @@
       "devices": 24,
       "size": 2048
     },
-    "network_performance": "10 Gibabit",
+    "network_performance": "10 Gigabit",
     "instance_type": "hs1.8xlarge",
     "ECU": 35.0,
     "pricing": {
