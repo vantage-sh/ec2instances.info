@@ -29,7 +29,7 @@ function change_cost(duration) {
   $.each($("td.cost"), function(i, elem) {
     elem = $(elem);
     per_time = elem.data("pricing")[current_region];
-    if (per_time) {
+    if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(3);
       elem.text("$" + per_time + " " + duration);
     } else {
