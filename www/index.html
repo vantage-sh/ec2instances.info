@@ -96,6 +96,9 @@
           <th class="maxips">
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
+          <th class="ebsopt">
+            <abbr title="Enabling EBS optimization results in slightly higher hourly costs.">EBS-optimized?</abbr>
+          </th>
           <th class="apiname">API Name</th>
           <th class="cost">Linux cost</th>
           <th class="cost">Windows cost</th>
@@ -126,6 +129,7 @@
             </span>
           </td>
           <td class="maxips">8</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">m1.small</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.044&#34;, &#34;ap-northeast-1&#34;: &#34;0.061&#34;, &#34;sa-east-1&#34;: &#34;0.058&#34;, &#34;ap-southeast-1&#34;: &#34;0.058&#34;, &#34;ap-southeast-2&#34;: &#34;0.058&#34;, &#34;us-west-2&#34;: &#34;0.044&#34;, &#34;us-west-1&#34;: &#34;0.047&#34;, &#34;eu-west-1&#34;: &#34;0.047&#34;}'>
                  $0.044 per hour
@@ -158,6 +162,7 @@
             </span>
           </td>
           <td class="maxips">12</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">m1.medium</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.087&#34;, &#34;ap-northeast-1&#34;: &#34;0.122&#34;, &#34;sa-east-1&#34;: &#34;0.117&#34;, &#34;ap-southeast-1&#34;: &#34;0.117&#34;, &#34;ap-southeast-2&#34;: &#34;0.117&#34;, &#34;us-west-2&#34;: &#34;0.087&#34;, &#34;us-west-1&#34;: &#34;0.095&#34;, &#34;eu-west-1&#34;: &#34;0.095&#34;}'>
                  $0.087 per hour
@@ -191,6 +196,7 @@
             </span>
           </td>
           <td class="maxips">30</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">m1.large</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.175&#34;, &#34;ap-northeast-1&#34;: &#34;0.243&#34;, &#34;sa-east-1&#34;: &#34;0.233&#34;, &#34;ap-southeast-1&#34;: &#34;0.233&#34;, &#34;ap-southeast-2&#34;: &#34;0.233&#34;, &#34;us-west-2&#34;: &#34;0.175&#34;, &#34;us-west-1&#34;: &#34;0.190&#34;, &#34;eu-west-1&#34;: &#34;0.190&#34;}'>
                  $0.175 per hour
@@ -224,6 +230,7 @@
             </span>
           </td>
           <td class="maxips">60</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">m1.xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.350&#34;, &#34;ap-northeast-1&#34;: &#34;0.486&#34;, &#34;sa-east-1&#34;: &#34;0.467&#34;, &#34;ap-southeast-1&#34;: &#34;0.467&#34;, &#34;ap-southeast-2&#34;: &#34;0.467&#34;, &#34;us-west-2&#34;: &#34;0.350&#34;, &#34;us-west-1&#34;: &#34;0.379&#34;, &#34;eu-west-1&#34;: &#34;0.379&#34;}'>
                  $0.350 per hour
@@ -256,6 +263,7 @@
             </span>
           </td>
           <td class="maxips">12</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">c1.medium</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.130&#34;, &#34;ap-northeast-1&#34;: &#34;0.158&#34;, &#34;sa-east-1&#34;: &#34;0.179&#34;, &#34;ap-southeast-1&#34;: &#34;0.164&#34;, &#34;ap-southeast-2&#34;: &#34;0.164&#34;, &#34;us-west-2&#34;: &#34;0.130&#34;, &#34;us-west-1&#34;: &#34;0.148&#34;, &#34;eu-west-1&#34;: &#34;0.148&#34;}'>
                  $0.130 per hour
@@ -289,6 +297,7 @@
             </span>
           </td>
           <td class="maxips">60</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">c1.xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.520&#34;, &#34;ap-northeast-1&#34;: &#34;0.632&#34;, &#34;sa-east-1&#34;: &#34;0.718&#34;, &#34;ap-southeast-1&#34;: &#34;0.655&#34;, &#34;ap-southeast-2&#34;: &#34;0.655&#34;, &#34;us-west-2&#34;: &#34;0.520&#34;, &#34;us-west-1&#34;: &#34;0.592&#34;, &#34;eu-west-1&#34;: &#34;0.592&#34;}'>
                  $0.520 per hour
@@ -325,6 +334,7 @@
             </span>
           </td>
           <td class="maxips">240</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">cc2.8xlarge</td>
           <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;2.000&#34;, &#34;us-east-1&#34;: &#34;2.000&#34;, &#34;ap-northeast-1&#34;: &#34;2.349&#34;, &#34;eu-west-1&#34;: &#34;2.250&#34;}'>
                  $2.000 per hour
@@ -361,6 +371,7 @@
             </span>
           </td>
           <td class="maxips">240</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">cg1.4xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;2.100&#34;, &#34;eu-west-1&#34;: &#34;2.360&#34;}'>
                  $2.100 per hour
@@ -393,6 +404,7 @@
             </span>
           </td>
           <td class="maxips">60</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">m2.xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.245&#34;, &#34;ap-northeast-1&#34;: &#34;0.287&#34;, &#34;sa-east-1&#34;: &#34;0.323&#34;, &#34;ap-southeast-1&#34;: &#34;0.296&#34;, &#34;ap-southeast-2&#34;: &#34;0.296&#34;, &#34;us-west-2&#34;: &#34;0.245&#34;, &#34;us-west-1&#34;: &#34;0.275&#34;, &#34;eu-west-1&#34;: &#34;0.275&#34;}'>
                  $0.245 per hour
@@ -426,6 +438,7 @@
             </span>
           </td>
           <td class="maxips">120</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">m2.2xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.490&#34;, &#34;ap-northeast-1&#34;: &#34;0.575&#34;, &#34;sa-east-1&#34;: &#34;0.645&#34;, &#34;ap-southeast-1&#34;: &#34;0.592&#34;, &#34;ap-southeast-2&#34;: &#34;0.592&#34;, &#34;us-west-2&#34;: &#34;0.490&#34;, &#34;us-west-1&#34;: &#34;0.550&#34;, &#34;eu-west-1&#34;: &#34;0.550&#34;}'>
                  $0.490 per hour
@@ -459,6 +472,7 @@
             </span>
           </td>
           <td class="maxips">240</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">m2.4xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.980&#34;, &#34;ap-northeast-1&#34;: &#34;1.150&#34;, &#34;sa-east-1&#34;: &#34;1.291&#34;, &#34;ap-southeast-1&#34;: &#34;1.183&#34;, &#34;ap-southeast-2&#34;: &#34;1.183&#34;, &#34;us-west-2&#34;: &#34;0.980&#34;, &#34;us-west-1&#34;: &#34;1.100&#34;, &#34;eu-west-1&#34;: &#34;1.100&#34;}'>
                  $0.980 per hour
@@ -495,6 +509,7 @@
             </span>
           </td>
           <td class="maxips">240</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">cr1.8xlarge</td>
           <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;3.500&#34;, &#34;us-east-1&#34;: &#34;3.500&#34;, &#34;ap-northeast-1&#34;: &#34;4.105&#34;, &#34;eu-west-1&#34;: &#34;3.750&#34;}'>
                  $3.500 per hour
@@ -531,6 +546,7 @@
             </span>
           </td>
           <td class="maxips">240</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">hi1.4xlarge</td>
           <td class="cost" data-pricing='{&#34;us-west-2&#34;: &#34;3.100&#34;, &#34;us-east-1&#34;: &#34;3.100&#34;, &#34;ap-northeast-1&#34;: &#34;3.276&#34;, &#34;eu-west-1&#34;: &#34;3.100&#34;}'>
                  $3.100 per hour
@@ -558,6 +574,7 @@
             </span>
           </td>
           <td class="maxips">4</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">t1.micro</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.020&#34;, &#34;ap-northeast-1&#34;: &#34;0.026&#34;, &#34;sa-east-1&#34;: &#34;0.027&#34;, &#34;ap-southeast-1&#34;: &#34;0.020&#34;, &#34;ap-southeast-2&#34;: &#34;0.020&#34;, &#34;us-west-2&#34;: &#34;0.020&#34;, &#34;us-west-1&#34;: &#34;0.025&#34;, &#34;eu-west-1&#34;: &#34;0.020&#34;}'>
                  $0.020 per hour
@@ -585,6 +602,7 @@
             </span>
           </td>
           <td class="maxips">4</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">t2.micro</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.013&#34;, &#34;ap-northeast-1&#34;: &#34;0.020&#34;, &#34;sa-east-1&#34;: &#34;0.027&#34;, &#34;ap-southeast-1&#34;: &#34;0.020&#34;, &#34;ap-southeast-2&#34;: &#34;0.020&#34;, &#34;us-west-2&#34;: &#34;0.013&#34;, &#34;us-west-1&#34;: &#34;0.017&#34;, &#34;eu-west-1&#34;: &#34;0.014&#34;}'>
                  $0.013 per hour
@@ -612,6 +630,7 @@
             </span>
           </td>
           <td class="maxips">8</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">t2.small</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.026&#34;, &#34;ap-northeast-1&#34;: &#34;0.040&#34;, &#34;sa-east-1&#34;: &#34;0.054&#34;, &#34;ap-southeast-1&#34;: &#34;0.040&#34;, &#34;ap-southeast-2&#34;: &#34;0.040&#34;, &#34;us-west-2&#34;: &#34;0.026&#34;, &#34;us-west-1&#34;: &#34;0.034&#34;, &#34;eu-west-1&#34;: &#34;0.028&#34;}'>
                  $0.026 per hour
@@ -639,6 +658,7 @@
             </span>
           </td>
           <td class="maxips">18</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">t2.medium</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.052&#34;, &#34;ap-northeast-1&#34;: &#34;0.080&#34;, &#34;sa-east-1&#34;: &#34;0.108&#34;, &#34;ap-southeast-1&#34;: &#34;0.080&#34;, &#34;ap-southeast-2&#34;: &#34;0.080&#34;, &#34;us-west-2&#34;: &#34;0.052&#34;, &#34;us-west-1&#34;: &#34;0.068&#34;, &#34;eu-west-1&#34;: &#34;0.056&#34;}'>
                  $0.052 per hour
@@ -671,6 +691,7 @@
             </span>
           </td>
           <td class="maxips">12</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">m3.medium</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.070&#34;, &#34;ap-northeast-1&#34;: &#34;0.101&#34;, &#34;sa-east-1&#34;: &#34;0.095&#34;, &#34;ap-southeast-1&#34;: &#34;0.098&#34;, &#34;ap-southeast-2&#34;: &#34;0.098&#34;, &#34;us-west-2&#34;: &#34;0.070&#34;, &#34;us-west-1&#34;: &#34;0.077&#34;, &#34;eu-west-1&#34;: &#34;0.077&#34;}'>
                  $0.070 per hour
@@ -703,6 +724,7 @@
             </span>
           </td>
           <td class="maxips">30</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">m3.large</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.140&#34;, &#34;ap-northeast-1&#34;: &#34;0.203&#34;, &#34;sa-east-1&#34;: &#34;0.190&#34;, &#34;ap-southeast-1&#34;: &#34;0.196&#34;, &#34;ap-southeast-2&#34;: &#34;0.196&#34;, &#34;us-west-2&#34;: &#34;0.140&#34;, &#34;us-west-1&#34;: &#34;0.154&#34;, &#34;eu-west-1&#34;: &#34;0.154&#34;}'>
                  $0.140 per hour
@@ -736,6 +758,7 @@
             </span>
           </td>
           <td class="maxips">60</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">m3.xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.280&#34;, &#34;ap-northeast-1&#34;: &#34;0.405&#34;, &#34;sa-east-1&#34;: &#34;0.381&#34;, &#34;ap-southeast-1&#34;: &#34;0.392&#34;, &#34;ap-southeast-2&#34;: &#34;0.392&#34;, &#34;us-west-2&#34;: &#34;0.280&#34;, &#34;us-west-1&#34;: &#34;0.308&#34;, &#34;eu-west-1&#34;: &#34;0.308&#34;}'>
                  $0.280 per hour
@@ -769,6 +792,7 @@
             </span>
           </td>
           <td class="maxips">120</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">m3.2xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.560&#34;, &#34;ap-northeast-1&#34;: &#34;0.810&#34;, &#34;sa-east-1&#34;: &#34;0.761&#34;, &#34;ap-southeast-1&#34;: &#34;0.784&#34;, &#34;ap-southeast-2&#34;: &#34;0.784&#34;, &#34;us-west-2&#34;: &#34;0.560&#34;, &#34;us-west-1&#34;: &#34;0.616&#34;, &#34;eu-west-1&#34;: &#34;0.616&#34;}'>
                  $0.560 per hour
@@ -801,6 +825,7 @@
             </span>
           </td>
           <td class="maxips">30</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">c3.large</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.105&#34;, &#34;ap-northeast-1&#34;: &#34;0.128&#34;, &#34;sa-east-1&#34;: &#34;0.163&#34;, &#34;ap-southeast-1&#34;: &#34;0.132&#34;, &#34;ap-southeast-2&#34;: &#34;0.132&#34;, &#34;us-west-2&#34;: &#34;0.105&#34;, &#34;us-west-1&#34;: &#34;0.120&#34;, &#34;eu-west-1&#34;: &#34;0.120&#34;}'>
                  $0.105 per hour
@@ -834,6 +859,7 @@
             </span>
           </td>
           <td class="maxips">60</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">c3.xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.210&#34;, &#34;ap-northeast-1&#34;: &#34;0.255&#34;, &#34;sa-east-1&#34;: &#34;0.325&#34;, &#34;ap-southeast-1&#34;: &#34;0.265&#34;, &#34;ap-southeast-2&#34;: &#34;0.265&#34;, &#34;us-west-2&#34;: &#34;0.210&#34;, &#34;us-west-1&#34;: &#34;0.239&#34;, &#34;eu-west-1&#34;: &#34;0.239&#34;}'>
                  $0.210 per hour
@@ -867,6 +893,7 @@
             </span>
           </td>
           <td class="maxips">60</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">c3.2xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.420&#34;, &#34;ap-northeast-1&#34;: &#34;0.511&#34;, &#34;sa-east-1&#34;: &#34;0.650&#34;, &#34;ap-southeast-1&#34;: &#34;0.529&#34;, &#34;ap-southeast-2&#34;: &#34;0.529&#34;, &#34;us-west-2&#34;: &#34;0.420&#34;, &#34;us-west-1&#34;: &#34;0.478&#34;, &#34;eu-west-1&#34;: &#34;0.478&#34;}'>
                  $0.420 per hour
@@ -900,6 +927,7 @@
             </span>
           </td>
           <td class="maxips">240</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">c3.4xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.840&#34;, &#34;ap-northeast-1&#34;: &#34;1.021&#34;, &#34;sa-east-1&#34;: &#34;1.300&#34;, &#34;ap-southeast-1&#34;: &#34;1.058&#34;, &#34;ap-southeast-2&#34;: &#34;1.058&#34;, &#34;us-west-2&#34;: &#34;0.840&#34;, &#34;us-west-1&#34;: &#34;0.956&#34;, &#34;eu-west-1&#34;: &#34;0.956&#34;}'>
                  $0.840 per hour
@@ -932,6 +960,7 @@
             </span>
           </td>
           <td class="maxips">240</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">c3.8xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.680&#34;, &#34;ap-northeast-1&#34;: &#34;2.043&#34;, &#34;sa-east-1&#34;: &#34;2.600&#34;, &#34;ap-southeast-1&#34;: &#34;2.117&#34;, &#34;ap-southeast-2&#34;: &#34;2.117&#34;, &#34;us-west-2&#34;: &#34;1.680&#34;, &#34;us-west-1&#34;: &#34;1.912&#34;, &#34;eu-west-1&#34;: &#34;1.912&#34;}'>
                  $1.680 per hour
@@ -965,6 +994,7 @@
             </span>
           </td>
           <td class="maxips">60</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">g2.2xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.650&#34;, &#34;ap-northeast-1&#34;: &#34;0.898&#34;, &#34;ap-southeast-1&#34;: &#34;1.000&#34;, &#34;ap-southeast-2&#34;: &#34;0.898&#34;, &#34;us-west-2&#34;: &#34;0.650&#34;, &#34;us-west-1&#34;: &#34;0.702&#34;, &#34;eu-west-1&#34;: &#34;0.702&#34;}'>
                  $0.650 per hour
@@ -997,6 +1027,7 @@
             </span>
           </td>
           <td class="maxips">30</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">r3.large</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.175&#34;, &#34;ap-northeast-1&#34;: &#34;0.210&#34;, &#34;ap-southeast-1&#34;: &#34;0.210&#34;, &#34;ap-southeast-2&#34;: &#34;0.210&#34;, &#34;us-west-2&#34;: &#34;0.175&#34;, &#34;us-west-1&#34;: &#34;0.195&#34;, &#34;eu-west-1&#34;: &#34;0.195&#34;}'>
                  $0.175 per hour
@@ -1030,6 +1061,7 @@
             </span>
           </td>
           <td class="maxips">60</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">r3.xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.350&#34;, &#34;ap-northeast-1&#34;: &#34;0.420&#34;, &#34;ap-southeast-1&#34;: &#34;0.420&#34;, &#34;ap-southeast-2&#34;: &#34;0.420&#34;, &#34;us-west-2&#34;: &#34;0.350&#34;, &#34;us-west-1&#34;: &#34;0.390&#34;, &#34;eu-west-1&#34;: &#34;0.390&#34;}'>
                  $0.350 per hour
@@ -1063,6 +1095,7 @@
             </span>
           </td>
           <td class="maxips">60</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">r3.2xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.700&#34;, &#34;ap-northeast-1&#34;: &#34;0.840&#34;, &#34;ap-southeast-1&#34;: &#34;0.840&#34;, &#34;ap-southeast-2&#34;: &#34;0.840&#34;, &#34;us-west-2&#34;: &#34;0.700&#34;, &#34;us-west-1&#34;: &#34;0.780&#34;, &#34;eu-west-1&#34;: &#34;0.780&#34;}'>
                  $0.700 per hour
@@ -1096,6 +1129,7 @@
             </span>
           </td>
           <td class="maxips">240</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">r3.4xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.400&#34;, &#34;ap-northeast-1&#34;: &#34;1.680&#34;, &#34;ap-southeast-1&#34;: &#34;1.680&#34;, &#34;ap-southeast-2&#34;: &#34;1.680&#34;, &#34;us-west-2&#34;: &#34;1.400&#34;, &#34;us-west-1&#34;: &#34;1.560&#34;, &#34;eu-west-1&#34;: &#34;1.560&#34;}'>
                  $1.400 per hour
@@ -1128,6 +1162,7 @@
             </span>
           </td>
           <td class="maxips">240</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">r3.8xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;2.800&#34;, &#34;ap-northeast-1&#34;: &#34;3.360&#34;, &#34;ap-southeast-1&#34;: &#34;3.360&#34;, &#34;ap-southeast-2&#34;: &#34;3.360&#34;, &#34;us-west-2&#34;: &#34;2.800&#34;, &#34;us-west-1&#34;: &#34;3.120&#34;, &#34;eu-west-1&#34;: &#34;3.120&#34;}'>
                  $2.800 per hour
@@ -1161,6 +1196,7 @@
             </span>
           </td>
           <td class="maxips">60</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">i2.xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;0.853&#34;, &#34;ap-northeast-1&#34;: &#34;1.001&#34;, &#34;ap-southeast-1&#34;: &#34;1.018&#34;, &#34;ap-southeast-2&#34;: &#34;1.018&#34;, &#34;us-west-2&#34;: &#34;0.853&#34;, &#34;us-west-1&#34;: &#34;0.938&#34;, &#34;eu-west-1&#34;: &#34;0.938&#34;}'>
                  $0.853 per hour
@@ -1194,6 +1230,7 @@
             </span>
           </td>
           <td class="maxips">60</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">i2.2xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;1.705&#34;, &#34;ap-northeast-1&#34;: &#34;2.001&#34;, &#34;ap-southeast-1&#34;: &#34;2.035&#34;, &#34;ap-southeast-2&#34;: &#34;2.035&#34;, &#34;us-west-2&#34;: &#34;1.705&#34;, &#34;us-west-1&#34;: &#34;1.876&#34;, &#34;eu-west-1&#34;: &#34;1.876&#34;}'>
                  $1.705 per hour
@@ -1227,6 +1264,7 @@
             </span>
           </td>
           <td class="maxips">240</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">i2.4xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;3.410&#34;, &#34;ap-northeast-1&#34;: &#34;4.002&#34;, &#34;ap-southeast-1&#34;: &#34;4.070&#34;, &#34;ap-southeast-2&#34;: &#34;4.070&#34;, &#34;us-west-2&#34;: &#34;3.410&#34;, &#34;us-west-1&#34;: &#34;3.751&#34;, &#34;eu-west-1&#34;: &#34;3.751&#34;}'>
                  $3.410 per hour
@@ -1259,6 +1297,7 @@
             </span>
           </td>
           <td class="maxips">240</td>
+          <td class="ebsopt">No</td>
           <td class="apiname">i2.8xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;6.820&#34;, &#34;ap-northeast-1&#34;: &#34;8.004&#34;, &#34;ap-southeast-1&#34;: &#34;8.140&#34;, &#34;ap-southeast-2&#34;: &#34;8.140&#34;, &#34;us-west-2&#34;: &#34;6.820&#34;, &#34;us-west-1&#34;: &#34;7.502&#34;, &#34;eu-west-1&#34;: &#34;7.502&#34;}'>
                  $6.820 per hour
@@ -1295,6 +1334,7 @@
             </span>
           </td>
           <td class="maxips">240</td>
+          <td class="ebsopt">Yes</td>
           <td class="apiname">hs1.8xlarge</td>
           <td class="cost" data-pricing='{&#34;us-east-1&#34;: &#34;4.600&#34;, &#34;ap-northeast-1&#34;: &#34;5.400&#34;, &#34;ap-southeast-1&#34;: &#34;5.570&#34;, &#34;ap-southeast-2&#34;: &#34;5.570&#34;, &#34;us-west-2&#34;: &#34;4.600&#34;, &#34;eu-west-1&#34;: &#34;4.900&#34;}'>
                  $4.600 per hour
