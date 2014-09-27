@@ -1,6 +1,13 @@
 var current_cost_duration = 'hourly';
 var current_region = 'us-east-1';
 
+
+$(function() {
+    $('#data tr').click(function() {
+        $(this).toggleClass('highlight')
+    });
+});
+
 function change_cost(duration) {
   // update menu text
   var first = duration.charAt(0).toUpperCase();
