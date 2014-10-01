@@ -106,7 +106,10 @@
       <tbody>
 % for inst in instances:
         <tr class='instance' id="${inst['instance_type']}">
-          <td class="name">${inst['pretty_name']}</td>
+          <td class="name">
+            ${inst['pretty_name']}
+            <span class="instance-name">${inst['instance_type']}</span>
+          </td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GB</span></td>
           <td class="computeunits">
             % if inst['ECU'] == 0 :

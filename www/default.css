@@ -22,6 +22,13 @@ body {
   text-align: left;
 }
 
+#data td.name span.instance-name {
+  font-style: italic;
+  white-space: nowrap;
+  font-size: 75%;
+  color: #bbb;
+}
+
 #data td.memory {
   text-align: right;
 }
