@@ -128,6 +128,7 @@ def transform_size(size):
 def transform_region(reg):
     region_map = {
         'eu-ireland': 'eu-west-1',
+        'eu-frankfurt': 'eu-central-1',
         'apac-sin': 'ap-southeast-1',
         'apac-syd': 'ap-southeast-2',
         'apac-tokyo': 'ap-northeast-1'}
