@@ -72,6 +72,8 @@ def parse_instance(tr):
     assert len(cols) == 12, "Expected 12 columns in the table, but got %d" % len(cols)
     i.family = "Unknown" # totext(cols[0])
     i.instance_type = totext(cols[0])
+    if i.instance_type in ('t2.micro', 't2.small'):
+        i.arch.append('i386')
     i.vCPU = int(totext(cols[1]))
     i.memory = float(totext(cols[2]))
     storage = totext(cols[3])
