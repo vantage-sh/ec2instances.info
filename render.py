@@ -44,18 +44,18 @@ def pretty_name(inst):
 
 def network_sort(inst):
     perf = inst['network_performance']
-    if perf == 'Very Low':
-        sort = 0
-    elif perf == 'Low':
-        sort = 1
-    elif perf == 'Moderate':
-        sort = 2
-    elif perf == 'High':
-        sort = 3
-    elif perf == '10 Gigabit':
-        sort = 4
-    else:  ## unknown value
-        sort = 5
+    network_rank = [
+        'Very Low',
+        'Low',
+        'Low to Moderate',
+        'Moderate',
+        'High',
+        '10 Gigabit'
+        ]
+    try:
+        sort = network_rank.index(perf)
+    except ValueError:
+        sort = len(network_rank)
     sort *= 2
     if inst['ebs_optimized']:
         sort += 1
