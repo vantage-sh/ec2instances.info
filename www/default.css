@@ -14,6 +14,15 @@ body {
   clear: both;
 }
 
+#data tr {
+    background-color:white;
+    cursor:pointer;
+}
+
+#data tr.highlight, #data tr.highlight:hover {
+    background-color:#D3FFFF;
+}
+
 #data td {
   font-size: 13px;
 }
