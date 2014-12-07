@@ -3,7 +3,7 @@ var current_region = 'us-east-1';
 
 
 $(function() {
-    $('#data tr').click(function() {
+    $('#data tbody tr').click(function() {
         $(this).toggleClass('highlight')
     });
 });
