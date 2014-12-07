@@ -102,6 +102,8 @@
           <th class="apiname">API Name</th>
           <th class="cost">Linux cost</th>
           <th class="cost">Windows cost</th>
+          <th class="cost">Windows SQL Web cost</th>
+          <th class="cost">Windows SQL Std cost</th>
         </tr>
       </thead>
       <tbody>
@@ -162,20 +164,16 @@
           <td class="maxips">N/A</td>
           % endif
           <td class="apiname">${inst['instance_type']}</td>
-          <td class="cost" data-pricing='${json.dumps({r:p.get('linux', p.get('os',0)) for r,p in inst['pricing'].iteritems()}) | h}'>
-            % if 'us-east-1' in inst['pricing']:
-                 $${inst['pricing']['us-east-1'].get('linux', inst['pricing']['us-east-1'].get('os',0))} per hour
+
+    % for platform in ['linux', 'mswin', 'mswinSQLWeb', 'mswinSQL']:
+          <td class="cost" data-pricing='${json.dumps({r:p.get(platform, p.get('os',0)) for r,p in inst['pricing'].iteritems()}) | h}'>
+            % if 'us-east-1' in inst['pricing'] and inst['pricing']['us-east-1'][platform] != "N/A":
+                 $${inst['pricing']['us-east-1'][platform]} per hour
             % else:
             unavailable
             % endif
           </td>
-          <td class="cost" data-pricing='${json.dumps({r:p.get('mswin', p.get('os',0)) for r,p in inst['pricing'].iteritems()}) | h}'>
-            % if 'us-east-1' in inst['pricing']:
-                $${inst['pricing']['us-east-1'].get('mswin', inst['pricing']['us-east-1'].get('os',0))} per hour
-            % else:
-            unavailable
-            % endif
-          </td>
+    % endfor
         </tr>
 % endfor
       </tbody>

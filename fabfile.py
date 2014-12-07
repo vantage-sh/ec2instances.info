@@ -26,7 +26,12 @@ def build():
         scrape(data_file)
     except Exception, e:
         print "ERROR: Unable to scrape site data: %s" % e
-    render(data_file, 'in/index.html.mako', 'www/index.html')
+    render_html()
+
+@task
+def render_html():
+    """Render HTML but do not update data from Amazon"""
+    render('www/instances.json', 'in/index.html.mako', 'www/index.html')
 
 @task
 def preview():

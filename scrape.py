@@ -172,7 +172,7 @@ def add_pricing_data(instances):
         i.pricing = {}
     by_type = {i.instance_type: i for i in instances}
 
-    for platform in ['linux', 'mswin']:
+    for platform in ['linux', 'mswin', 'mswinSQL', 'mswinSQLWeb']:
         # current generation
         pricing_url = 'http://aws.amazon.com/ec2/pricing/json/%s-od.json' % (platform,)
         pricing = json.loads(urllib2.urlopen(pricing_url).read())
