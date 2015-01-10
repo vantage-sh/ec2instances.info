@@ -9,6 +9,7 @@
       "size": 160
     },
     "network_performance": "Low",
+    "enhanced_networking": false,
     "instance_type": "m1.small",
     "ECU": 1.0,
     "pricing": {
@@ -81,6 +82,7 @@
       "size": 410
     },
     "network_performance": "Moderate",
+    "enhanced_networking": false,
     "instance_type": "m1.medium",
     "ECU": 2.0,
     "pricing": {
@@ -153,6 +155,7 @@
       "size": 420
     },
     "network_performance": "Moderate",
+    "enhanced_networking": false,
     "instance_type": "m1.large",
     "ECU": 4.0,
     "pricing": {
@@ -224,6 +227,7 @@
       "size": 420
     },
     "network_performance": "High",
+    "enhanced_networking": false,
     "instance_type": "m1.xlarge",
     "ECU": 8.0,
     "pricing": {
@@ -295,6 +299,7 @@
       "size": 350
     },
     "network_performance": "Moderate",
+    "enhanced_networking": false,
     "instance_type": "c1.medium",
     "ECU": 5.0,
     "pricing": {
@@ -367,6 +372,7 @@
       "size": 420
     },
     "network_performance": "High",
+    "enhanced_networking": false,
     "instance_type": "c1.xlarge",
     "ECU": 20.0,
     "pricing": {
@@ -438,6 +444,7 @@
       "size": 840
     },
     "network_performance": "10 Gigabit",
+    "enhanced_networking": false,
     "instance_type": "cc2.8xlarge",
     "ECU": 88.0,
     "pricing": {
@@ -485,6 +492,7 @@
       "size": 840
     },
     "network_performance": "10 Gigabit",
+    "enhanced_networking": false,
     "instance_type": "cg1.4xlarge",
     "ECU": 33.5,
     "pricing": {
@@ -520,6 +528,7 @@
       "size": 420
     },
     "network_performance": "Moderate",
+    "enhanced_networking": false,
     "instance_type": "m2.xlarge",
     "ECU": 6.5,
     "pricing": {
@@ -591,6 +600,7 @@
       "size": 850
     },
     "network_performance": "Moderate",
+    "enhanced_networking": false,
     "instance_type": "m2.2xlarge",
     "ECU": 13.0,
     "pricing": {
@@ -662,6 +672,7 @@
       "size": 840
     },
     "network_performance": "High",
+    "enhanced_networking": false,
     "instance_type": "m2.4xlarge",
     "ECU": 26.0,
     "pricing": {
@@ -733,6 +744,7 @@
       "size": 120
     },
     "network_performance": "10 Gigabit",
+    "enhanced_networking": false,
     "instance_type": "cr1.8xlarge",
     "ECU": 88.0,
     "pricing": {
@@ -780,6 +792,7 @@
       "size": 1024
     },
     "network_performance": "10 Gigabit",
+    "enhanced_networking": false,
     "instance_type": "hi1.4xlarge",
     "ECU": 35.0,
     "pricing": {
@@ -823,6 +836,7 @@
     "ebs_optimized": false,
     "storage": null,
     "network_performance": "Very Low",
+    "enhanced_networking": false,
     "instance_type": "t1.micro",
     "ECU": 0,
     "pricing": {
@@ -891,6 +905,7 @@
     "ebs_optimized": false,
     "storage": null,
     "network_performance": "Low to Moderate",
+    "enhanced_networking": false,
     "instance_type": "t2.micro",
     "ECU": 0,
     "pricing": {
@@ -971,6 +986,7 @@
     "ebs_optimized": false,
     "storage": null,
     "network_performance": "Low to Moderate",
+    "enhanced_networking": false,
     "instance_type": "t2.small",
     "ECU": 0,
     "pricing": {
@@ -1051,6 +1067,7 @@
     "ebs_optimized": false,
     "storage": null,
     "network_performance": "Low to Moderate",
+    "enhanced_networking": false,
     "instance_type": "t2.medium",
     "ECU": 0,
     "pricing": {
@@ -1134,6 +1151,7 @@
       "size": 4
     },
     "network_performance": "Moderate",
+    "enhanced_networking": false,
     "instance_type": "m3.medium",
     "ECU": 3.0,
     "pricing": {
@@ -1217,6 +1235,7 @@
       "size": 32
     },
     "network_performance": "Moderate",
+    "enhanced_networking": false,
     "instance_type": "m3.large",
     "ECU": 6.5,
     "pricing": {
@@ -1300,6 +1319,7 @@
       "size": 40
     },
     "network_performance": "High",
+    "enhanced_networking": false,
     "instance_type": "m3.xlarge",
     "ECU": 13.0,
     "pricing": {
@@ -1383,6 +1403,7 @@
       "size": 80
     },
     "network_performance": "High",
+    "enhanced_networking": false,
     "instance_type": "m3.2xlarge",
     "ECU": 26.0,
     "pricing": {
@@ -1466,6 +1487,7 @@
       "size": 16
     },
     "network_performance": "Moderate",
+    "enhanced_networking": true,
     "instance_type": "c3.large",
     "ECU": 7.0,
     "pricing": {
@@ -1548,6 +1570,7 @@
       "size": 40
     },
     "network_performance": "Moderate",
+    "enhanced_networking": true,
     "instance_type": "c3.xlarge",
     "ECU": 14.0,
     "pricing": {
@@ -1631,6 +1654,7 @@
       "size": 80
     },
     "network_performance": "High",
+    "enhanced_networking": true,
     "instance_type": "c3.2xlarge",
     "ECU": 28.0,
     "pricing": {
@@ -1714,6 +1738,7 @@
       "size": 160
     },
     "network_performance": "High",
+    "enhanced_networking": true,
     "instance_type": "c3.4xlarge",
     "ECU": 55.0,
     "pricing": {
@@ -1797,6 +1822,7 @@
       "size": 320
     },
     "network_performance": "10 Gigabit",
+    "enhanced_networking": true,
     "instance_type": "c3.8xlarge",
     "ECU": 108.0,
     "pricing": {
@@ -1880,6 +1906,7 @@
       "size": 60
     },
     "network_performance": "High",
+    "enhanced_networking": false,
     "instance_type": "g2.2xlarge",
     "ECU": 26.0,
     "pricing": {
@@ -1957,6 +1984,7 @@
       "size": 32
     },
     "network_performance": "Moderate",
+    "enhanced_networking": true,
     "instance_type": "r3.large",
     "ECU": 6.5,
     "pricing": {
@@ -2034,6 +2062,7 @@
       "size": 80
     },
     "network_performance": "Moderate",
+    "enhanced_networking": true,
     "instance_type": "r3.xlarge",
     "ECU": 13.0,
     "pricing": {
@@ -2111,6 +2140,7 @@
       "size": 160
     },
     "network_performance": "High",
+    "enhanced_networking": true,
     "instance_type": "r3.2xlarge",
     "ECU": 26.0,
     "pricing": {
@@ -2188,6 +2218,7 @@
       "size": 320
     },
     "network_performance": "High",
+    "enhanced_networking": true,
     "instance_type": "r3.4xlarge",
     "ECU": 52.0,
     "pricing": {
@@ -2265,6 +2296,7 @@
       "size": 320
     },
     "network_performance": "10 Gigabit",
+    "enhanced_networking": true,
     "instance_type": "r3.8xlarge",
     "ECU": 104.0,
     "pricing": {
@@ -2342,6 +2374,7 @@
       "size": 800
     },
     "network_performance": "Moderate",
+    "enhanced_networking": true,
     "instance_type": "i2.xlarge",
     "ECU": 14.0,
     "pricing": {
@@ -2419,6 +2452,7 @@
       "size": 800
     },
     "network_performance": "High",
+    "enhanced_networking": true,
     "instance_type": "i2.2xlarge",
     "ECU": 27.0,
     "pricing": {
@@ -2496,6 +2530,7 @@
       "size": 800
     },
     "network_performance": "High",
+    "enhanced_networking": true,
     "instance_type": "i2.4xlarge",
     "ECU": 53.0,
     "pricing": {
@@ -2573,6 +2608,7 @@
       "size": 800
     },
     "network_performance": "10 Gigabit",
+    "enhanced_networking": true,
     "instance_type": "i2.8xlarge",
     "ECU": 104.0,
     "pricing": {
@@ -2650,6 +2686,7 @@
       "size": 2000
     },
     "network_performance": "10 Gigabit",
+    "enhanced_networking": false,
     "instance_type": "hs1.8xlarge",
     "ECU": 35.0,
     "pricing": {
