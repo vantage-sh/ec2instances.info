@@ -1,7 +1,8 @@
 [
   {
-    "family": "General Purpose",
     "vCPU": 1,
+    "family": "General Purpose",
+    "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -48,6 +49,12 @@
         "mswin": "0.075",
         "linux": "0.044"
       },
+      "us-gov-west-1": {
+        "mswinSQLWeb": "0.159",
+        "mswinSQL": "0.653",
+        "mswin": "0.084",
+        "linux": "0.053"
+      },
       "us-west-1": {
         "mswinSQLWeb": "0.147",
         "mswinSQL": "0.639",
@@ -72,8 +79,9 @@
     ]
   },
   {
-    "family": "General purpose",
     "vCPU": 1,
+    "family": "General purpose",
+    "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -120,6 +128,12 @@
         "mswin": "0.149",
         "linux": "0.087"
       },
+      "us-gov-west-1": {
+        "mswinSQLWeb": "0.279",
+        "mswinSQL": "0.792",
+        "mswin": "0.168",
+        "linux": "0.106"
+      },
       "us-west-1": {
         "mswinSQLWeb": "0.255",
         "mswinSQL": "0.764",
@@ -144,8 +158,9 @@
     ]
   },
   {
-    "family": "General purpose",
     "vCPU": 2,
+    "family": "General purpose",
+    "enhanced_networking": false,
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -192,6 +207,12 @@
         "mswin": "0.299",
         "linux": "0.175"
       },
+      "us-gov-west-1": {
+        "mswinSQLWeb": "0.517",
+        "mswinSQL": "1.049",
+        "mswin": "0.335",
+        "linux": "0.211"
+      },
       "us-west-1": {
         "mswinSQLWeb": "0.470",
         "mswinSQL": "0.994",
@@ -215,8 +236,9 @@
     ]
   },
   {
-    "family": "General purpose",
     "vCPU": 4,
+    "family": "General purpose",
+    "enhanced_networking": false,
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -263,6 +285,12 @@
         "mswin": "0.598",
         "linux": "0.350"
       },
+      "us-gov-west-1": {
+        "mswinSQLWeb": "0.995",
+        "mswinSQL": "1.545",
+        "mswin": "0.671",
+        "linux": "0.423"
+      },
       "us-west-1": {
         "mswinSQLWeb": "0.899",
         "mswinSQL": "1.438",
@@ -286,8 +314,9 @@
     ]
   },
   {
-    "family": "Compute optimized",
     "vCPU": 2,
+    "family": "Compute optimized",
+    "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -334,6 +363,11 @@
         "mswin": "0.210",
         "linux": "0.130"
       },
+      "us-gov-west-1": {
+        "mswinSQLWeb": "0.366",
+        "mswin": "0.237",
+        "linux": "0.157"
+      },
       "us-west-1": {
         "mswinSQLWeb": "0.329",
         "mswinSQL": "N/A",
@@ -358,8 +392,9 @@
     ]
   },
   {
-    "family": "Compute optimized",
     "vCPU": 8,
+    "family": "Compute optimized",
+    "enhanced_networking": false,
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -406,6 +441,12 @@
         "mswin": "0.840",
         "linux": "0.520"
       },
+      "us-gov-west-1": {
+        "mswinSQLWeb": "1.384",
+        "mswinSQL": "2.331",
+        "mswin": "0.948",
+        "linux": "0.628"
+      },
       "us-west-1": {
         "mswinSQLWeb": "1.236",
         "mswinSQL": "2.206",
@@ -429,8 +470,9 @@
     ]
   },
   {
-    "family": "Compute optimized",
     "vCPU": 32,
+    "family": "Compute optimized",
+    "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -459,6 +501,12 @@
         "mswin": "2.919",
         "linux": "2.349"
       },
+      "us-gov-west-1": {
+        "mswinSQLWeb": "2.775",
+        "mswinSQL": "4.900",
+        "mswin": "2.570",
+        "linux": "2.250"
+      },
       "eu-west-1": {
         "mswinSQLWeb": "2.775",
         "mswinSQL": "4.850",
@@ -476,8 +524,9 @@
     ]
   },
   {
-    "family": "GPU instances",
     "vCPU": 16,
+    "family": "GPU instances",
+    "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -511,8 +560,9 @@
     ]
   },
   {
-    "family": "Memory optimized",
     "vCPU": 2,
+    "family": "Memory optimized",
+    "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -559,6 +609,12 @@
         "mswin": "0.345",
         "linux": "0.245"
       },
+      "us-gov-west-1": {
+        "mswinSQLWeb": "0.533",
+        "mswinSQL": "1.204",
+        "mswin": "0.393",
+        "linux": "0.293"
+      },
       "us-west-1": {
         "mswinSQLWeb": "0.481",
         "mswinSQL": "1.140",
@@ -582,8 +638,9 @@
     ]
   },
   {
-    "family": "Memory optimized",
     "vCPU": 4,
+    "family": "Memory optimized",
+    "enhanced_networking": false,
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -630,6 +687,12 @@
         "mswin": "0.690",
         "linux": "0.490"
       },
+      "us-gov-west-1": {
+        "mswinSQLWeb": "1.026",
+        "mswinSQL": "1.705",
+        "mswin": "0.786",
+        "linux": "0.586"
+      },
       "us-west-1": {
         "mswinSQLWeb": "0.922",
         "mswinSQL": "1.589",
@@ -653,8 +716,9 @@
     ]
   },
   {
-    "family": "Memory optimized",
     "vCPU": 8,
+    "family": "Memory optimized",
+    "enhanced_networking": false,
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -701,6 +765,12 @@
         "mswin": "1.380",
         "linux": "0.980"
       },
+      "us-gov-west-1": {
+        "mswinSQLWeb": "2.051",
+        "mswinSQL": "3.408",
+        "mswin": "1.571",
+        "linux": "1.171"
+      },
       "us-west-1": {
         "mswinSQLWeb": "1.844",
         "mswinSQL": "3.178",
@@ -724,8 +794,9 @@
     ]
   },
   {
-    "family": "Memory optimized",
     "vCPU": 32,
+    "family": "Memory optimized",
+    "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -771,8 +842,9 @@
     ]
   },
   {
-    "family": "Storage optimized",
     "vCPU": 16,
+    "family": "Storage optimized",
+    "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -818,8 +890,9 @@
     ]
   },
   {
-    "family": "Micro",
     "vCPU": 1,
+    "family": "Micro",
+    "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": null,
     "network_performance": "Very Low",
@@ -862,6 +935,11 @@
         "mswin": "0.020",
         "linux": "0.020"
       },
+      "us-gov-west-1": {
+        "mswinSQLWeb": "0.074",
+        "mswin": "0.025",
+        "linux": "0.024"
+      },
       "us-west-1": {
         "mswinSQLWeb": "0.075",
         "mswinSQL": "N/A",
@@ -886,8 +964,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 1,
+    "family": "General purpose",
+    "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": null,
     "network_performance": "Low to Moderate",
@@ -932,7 +1011,6 @@
       },
       "us-gov-west-1": {
         "mswinSQLWeb": "0.071",
-        "mswinSQL": "N/A",
         "mswin": "0.021",
         "linux": "0.015"
       },
@@ -966,8 +1044,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 1,
+    "family": "General purpose",
+    "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": null,
     "network_performance": "Low to Moderate",
@@ -1012,7 +1091,6 @@
       },
       "us-gov-west-1": {
         "mswinSQLWeb": "0.141",
-        "mswinSQL": "N/A",
         "mswin": "0.041",
         "linux": "0.031"
       },
@@ -1046,8 +1124,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 2,
+    "family": "General purpose",
+    "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": null,
     "network_performance": "Low to Moderate",
@@ -1092,7 +1171,6 @@
       },
       "us-gov-west-1": {
         "mswinSQLWeb": "0.282",
-        "mswinSQL": "N/A",
         "mswin": "0.082",
         "linux": "0.062"
       },
@@ -1125,8 +1203,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 1,
+    "family": "General purpose",
+    "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -1175,7 +1254,6 @@
       },
       "us-gov-west-1": {
         "mswinSQLWeb": "0.222",
-        "mswinSQL": "N/A",
         "mswin": "0.147",
         "linux": "0.084"
       },
@@ -1208,8 +1286,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 2,
+    "family": "General purpose",
+    "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -1291,8 +1370,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 4,
+    "family": "General purpose",
+    "enhanced_networking": false,
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -1374,8 +1454,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 8,
+    "family": "General purpose",
+    "enhanced_networking": false,
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -1457,8 +1538,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 2,
+    "family": "Compute optimized",
+    "enhanced_networking": true,
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -1506,7 +1588,6 @@
       },
       "us-gov-west-1": {
         "mswinSQLWeb": "0.292",
-        "mswinSQL": "N/A",
         "mswin": "0.209",
         "linux": "0.126"
       },
@@ -1539,8 +1620,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 4,
+    "family": "Compute optimized",
+    "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -1622,8 +1704,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 8,
+    "family": "Compute optimized",
+    "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -1705,8 +1788,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 16,
+    "family": "Compute optimized",
+    "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -1788,8 +1872,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 32,
+    "family": "Compute optimized",
+    "enhanced_networking": true,
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -1871,8 +1956,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 8,
+    "family": "GPU instances",
+    "enhanced_networking": false,
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -1913,12 +1999,6 @@
         "mswin": "0.767",
         "linux": "0.650"
       },
-      "us-gov-west-1": {
-        "mswinSQLWeb": "N/A",
-        "mswinSQL": "N/A",
-        "mswin": "N/A",
-        "linux": "N/A"
-      },
       "us-west-1": {
         "mswinSQLWeb": "1.009",
         "mswinSQL": "3.868",
@@ -1948,8 +2028,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 2,
+    "family": "Memory optimized",
+    "enhanced_networking": true,
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -2025,8 +2106,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 4,
+    "family": "Memory optimized",
+    "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -2102,8 +2184,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 8,
+    "family": "Memory optimized",
+    "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -2179,8 +2262,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 16,
+    "family": "Memory optimized",
+    "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -2256,8 +2340,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 32,
+    "family": "Memory optimized",
+    "enhanced_networking": true,
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -2333,8 +2418,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 4,
+    "family": "Storage optimized",
+    "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -2410,8 +2496,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 8,
+    "family": "Storage optimized",
+    "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -2487,8 +2574,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 16,
+    "family": "Storage optimized",
+    "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -2564,8 +2652,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 32,
+    "family": "Storage optimized",
+    "enhanced_networking": true,
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -2641,8 +2730,9 @@
     ]
   },
   {
-    "family": "Unknown",
     "vCPU": 16,
+    "family": "Storage optimized",
+    "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
