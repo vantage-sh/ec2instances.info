@@ -68,12 +68,13 @@ def parse_prev_generation_instance(tr):
     return i
 
 
-def parse_instance(tr):
+def parse_instance(tr, inst2family):
     i = Instance()
     cols = tr.xpath('td')
     assert len(cols) == 12, "Expected 12 columns in the table, but got %d" % len(cols)
-    i.family = "Unknown" # totext(cols[0])
+    #i.family = "Unknown" # totext(cols[0])
     i.instance_type = totext(cols[0])
+    i.family = inst2family.get(i.instance_type, "Unknown")
     # Some t2 instances support 32-bit arch
     # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html#resize-limitations
     if i.instance_type in ('t2.micro', 't2.small'):
@@ -97,13 +98,34 @@ def parse_instance(tr):
     print "Parsed %s..." % (i.instance_type)
     return i
 
+def _rindex_family(inst2family, details):
+    rows = details.xpath('tbody/tr')[0:]
+    for r in rows:
+        cols = r.xpath('td')
+        for i in totext(cols[1]).split('|'):
+            i = i.strip()
+            inst2family[i] = totext(cols[0])
+
+def scrape_families():
+    inst2family = dict()
+    tree = etree.parse(urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html"), etree.HTMLParser())
+    details = tree.xpath('//table')[3]
+    hdrs = details.xpath('thead/tr')[0]
+    if totext(hdrs[0]).lower() == 'instance family' and 'current generation' in totext(hdrs[1]).lower():
+       _rindex_family(inst2family, details)
+    details = tree.xpath('//table')[4]
+    hdrs = details.xpath('thead/tr')[0]
+    if totext(hdrs[0]).lower() == 'instance family' and 'previous generation' in totext(hdrs[1]).lower():
+       _rindex_family(inst2family, details)
+    return inst2family
 
 def scrape_instances():
+    inst2family = scrape_families()
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/instance-types/"), etree.HTMLParser())
     details = tree.xpath('//table')[7]
     rows = details.xpath('tbody/tr')[1:]
     assert len(rows) > 0, "Didn't find any table rows."
-    current_gen = [parse_instance(r) for r in rows]
+    current_gen = [parse_instance(r, inst2family) for r in rows]
 
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/previous-generation/"), etree.HTMLParser())
     details = tree.xpath('//table')[5]

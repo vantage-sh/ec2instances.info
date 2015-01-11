@@ -965,7 +965,7 @@
   },
   {
     "vCPU": 1,
-    "family": "Unknown",
+    "family": "General purpose",
     "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": null,
@@ -1045,7 +1045,7 @@
   },
   {
     "vCPU": 1,
-    "family": "Unknown",
+    "family": "General purpose",
     "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": null,
@@ -1125,7 +1125,7 @@
   },
   {
     "vCPU": 2,
-    "family": "Unknown",
+    "family": "General purpose",
     "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": null,
@@ -1204,7 +1204,7 @@
   },
   {
     "vCPU": 1,
-    "family": "Unknown",
+    "family": "General purpose",
     "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": {
@@ -1287,7 +1287,7 @@
   },
   {
     "vCPU": 2,
-    "family": "Unknown",
+    "family": "General purpose",
     "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": {
@@ -1371,7 +1371,7 @@
   },
   {
     "vCPU": 4,
-    "family": "Unknown",
+    "family": "General purpose",
     "enhanced_networking": false,
     "ebs_optimized": true,
     "storage": {
@@ -1455,7 +1455,7 @@
   },
   {
     "vCPU": 8,
-    "family": "Unknown",
+    "family": "General purpose",
     "enhanced_networking": false,
     "ebs_optimized": true,
     "storage": {
@@ -1539,7 +1539,7 @@
   },
   {
     "vCPU": 2,
-    "family": "Unknown",
+    "family": "Compute optimized",
     "enhanced_networking": true,
     "ebs_optimized": false,
     "storage": {
@@ -1621,7 +1621,7 @@
   },
   {
     "vCPU": 4,
-    "family": "Unknown",
+    "family": "Compute optimized",
     "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
@@ -1705,7 +1705,7 @@
   },
   {
     "vCPU": 8,
-    "family": "Unknown",
+    "family": "Compute optimized",
     "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
@@ -1789,7 +1789,7 @@
   },
   {
     "vCPU": 16,
-    "family": "Unknown",
+    "family": "Compute optimized",
     "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
@@ -1873,7 +1873,7 @@
   },
   {
     "vCPU": 32,
-    "family": "Unknown",
+    "family": "Compute optimized",
     "enhanced_networking": true,
     "ebs_optimized": false,
     "storage": {
@@ -1957,7 +1957,7 @@
   },
   {
     "vCPU": 8,
-    "family": "Unknown",
+    "family": "GPU instances",
     "enhanced_networking": false,
     "ebs_optimized": true,
     "storage": {
@@ -2029,7 +2029,7 @@
   },
   {
     "vCPU": 2,
-    "family": "Unknown",
+    "family": "Memory optimized",
     "enhanced_networking": true,
     "ebs_optimized": false,
     "storage": {
@@ -2107,7 +2107,7 @@
   },
   {
     "vCPU": 4,
-    "family": "Unknown",
+    "family": "Memory optimized",
     "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
@@ -2185,7 +2185,7 @@
   },
   {
     "vCPU": 8,
-    "family": "Unknown",
+    "family": "Memory optimized",
     "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
@@ -2263,7 +2263,7 @@
   },
   {
     "vCPU": 16,
-    "family": "Unknown",
+    "family": "Memory optimized",
     "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
@@ -2341,7 +2341,7 @@
   },
   {
     "vCPU": 32,
-    "family": "Unknown",
+    "family": "Memory optimized",
     "enhanced_networking": true,
     "ebs_optimized": false,
     "storage": {
@@ -2419,7 +2419,7 @@
   },
   {
     "vCPU": 4,
-    "family": "Unknown",
+    "family": "Storage optimized",
     "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
@@ -2497,7 +2497,7 @@
   },
   {
     "vCPU": 8,
-    "family": "Unknown",
+    "family": "Storage optimized",
     "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
@@ -2575,7 +2575,7 @@
   },
   {
     "vCPU": 16,
-    "family": "Unknown",
+    "family": "Storage optimized",
     "enhanced_networking": true,
     "ebs_optimized": true,
     "storage": {
@@ -2653,7 +2653,7 @@
   },
   {
     "vCPU": 32,
-    "family": "Unknown",
+    "family": "Storage optimized",
     "enhanced_networking": true,
     "ebs_optimized": false,
     "storage": {
@@ -2731,7 +2731,7 @@
   },
   {
     "vCPU": 16,
-    "family": "Unknown",
+    "family": "Storage optimized",
     "enhanced_networking": false,
     "ebs_optimized": false,
     "storage": {
