@@ -19,6 +19,7 @@ class Instance(object):
                  memory=self.memory,
                  ebs_optimized=self.ebs_optimized,
                  network_performance=self.network_performance,
+                 enhanced_networking=self.enhanced_networking,
                  pricing=self.pricing,
                  vpc=self.vpc)
         if self.ebs_only:
@@ -62,6 +63,7 @@ def parse_prev_generation_instance(tr):
         i.ebs_only = True
     i.ebs_optimized = totext(cols[6]).lower() == 'yes'
     i.network_performance = totext(cols[7])
+    i.enhanced_networking = False
     print "Parsed %s..." % (i.instance_type)
     return i
 
@@ -91,6 +93,7 @@ def parse_instance(tr):
         i.ebs_only = True
     i.ebs_optimized = totext(cols[10]).lower() == 'yes'
     i.network_performance = totext(cols[4])
+    i.enhanced_networking = totext(cols[11]).lower() == 'yes'
     print "Parsed %s..." % (i.instance_type)
     return i
 
