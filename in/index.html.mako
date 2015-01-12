@@ -167,7 +167,7 @@
 
     % for platform in ['linux', 'mswin', 'mswinSQLWeb', 'mswinSQL']:
           <td class="cost" data-pricing='${json.dumps({r:p.get(platform, p.get('os',0)) for r,p in inst['pricing'].iteritems()}) | h}'>
-            % if 'us-east-1' in inst['pricing'] and inst['pricing']['us-east-1'][platform] != "N/A":
+            % if inst['pricing'].get('us-east-1', {}).get(platform, 'N/A') != "N/A":
                  $${inst['pricing']['us-east-1'][platform]} per hour
             % else:
             unavailable
