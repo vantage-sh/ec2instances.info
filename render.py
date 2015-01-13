@@ -11,6 +11,7 @@ def pretty_name(inst):
     family_names = {
         'r3': 'R3 High-Memory',
         'c3': 'C3 High-CPU',
+        'c4': 'C4 High-CPU',
         'm3': 'M3 General Purpose',
         'i3': 'I3 High I/O',
         'cc1': 'Cluster Compute',
