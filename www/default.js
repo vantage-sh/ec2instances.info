@@ -1,11 +1,51 @@
 var current_cost_duration = 'hourly';
 var current_region = 'us-east-1';
+var data_table = null;
 
+function init_data_table() {
+  data_table = $('#data').DataTable({
+    "bPaginate": false,
+    "bInfo": false,
+    "bStateSave": true,
+    "oSearch": {
+      "bRegex" : true,
+      "bSmart": false
+    },
+    "aoColumnDefs": [
+      {
+        "aTargets": ["memory", "computeunits", "storage", "ioperf"],
+        "sType": "span-sort"
+      }
+    ],
+    // default sort by linux cost
+    "aaSorting": [
+      [ 8, "asc" ]
+    ],
+    'initComplete': function() {
+      // fire event in separate context so that calls to get_data_table()
+      // receive the cached object.
+      setTimeout(function() {
+        on_data_table_initialized();
+      }, 0);
+    },
+    'drawCallback': function() {
+      // abort if initialization hasn't finished yet (initial draw)
+      if (data_table === null) {
+        return;
+      }
 
-$(function() {
-    $('#data tbody tr').click(function() {
-        $(this).toggleClass('highlight')
-    });
+      // Whenever the table is drawn, update the costs. This is necessary
+      // because the cost duration may have changed while a filter was being
+      // used and so some rows will need updating.
+      change_cost(current_cost_duration);
+    }
+  });
+
+  return data_table;
+}
+
+$(document).ready(function() {
+  init_data_table();
 });
 
 function change_cost(duration) {
@@ -45,7 +85,7 @@ function change_cost(duration) {
   });
 
   current_cost_duration = duration;
-  maybe_update_url()
+  maybe_update_url();
 }
 
 function change_region(region) {
@@ -65,28 +105,28 @@ function change_region(region) {
 }
 
 function setup_column_toggle() {
-  // get column headings, add to filter button
-  $.each($("#data thead tr th"), function(i, elem) {
+  $.each(data_table.columns().indexes(), function(i, idx) {
+    var column = data_table.column(idx);
     $("#filter-dropdown ul").append(
-      $('<li>', {class: "active"}).append(
+      $('<li>')
+      .toggleClass('active', column.visible())
+      .append(
         $('<a>', {href: "javascript:;"})
-          .text($(elem).text())
-          .click(function(e) {
-            toggle_column(i);
-            $(this).parent().toggleClass("active");
-            $(this).blur(); // prevent focus style from sticking in Firefox
-            e.stopPropagation(); // keep dropdown menu open
-          })
+        .text($(column.header()).text())
+        .click(function(e) {
+          toggle_column(i);
+          $(this).parent().toggleClass("active");
+          $(this).blur(); // prevent focus style from sticking in Firefox
+          e.stopPropagation(); // keep dropdown menu open
+        })
       )
     );
   });
-
 }
 
 function url_for_selections() {
   var settings = {
-    filter: $('#data').dataTable().fnSettings().
-      oPreviousSearch['sSearch'],
+    filter: data_table.settings()[0].oPreviousSearch['sSearch'],
     region: current_region,
     cost: current_cost_duration
   };
@@ -115,58 +155,34 @@ function maybe_update_url() {
   history.replaceState(null, '', url);
 }
 
-$(function() {
-  $(document).ready(function() {
-    $('#data').dataTable({
-      "bPaginate": false,
-      "bInfo": false,
-      "bStateSave": true,
-      "oSearch": {
-        "bRegex" : true,
-        "bSmart": false
-      },
-      "aoColumnDefs": [
-        {
-          "aTargets": ["memory", "computeunits", "storage", "ioperf"],
-          "sType": "span-sort"
-        }
-      ],
-      // default sort by linux cost
-      "aaSorting": [
-        [ 8, "asc" ]
-      ],
-      "fnDrawCallback": function() {
-        // Whenever the table is drawn, update the costs. This is necessary
-        // because the cost duration may have changed while a filter was being
-        // used and so some rows will need updating.
-        change_cost(current_cost_duration);
-      }
-    });
-
-    // process URL settings
-    var url_settings = get_url_parameters();
-    for (var key in url_settings) {
-      switch(key) {
-        case 'region':
-          change_region(url_settings['region']);
-          break;
-        case 'cost':
-          change_cost(url_settings['cost']);
-          break;
-        case 'filter':
-          $('#data').dataTable().fnFilter(url_settings['filter']);
-          break;
-      }
+function on_data_table_initialized() {
+  // process URL settings
+  var url_settings = get_url_parameters();
+  for (var key in url_settings) {
+    switch(key) {
+      case 'region':
+        change_region(url_settings['region']);
+        break;
+      case 'cost':
+        change_cost(url_settings['cost']);
+        break;
+      case 'filter':
+        data_table.filter(url_settings['filter']);
+        break;
     }
+  }
 
-    $('#url-button').click(function() {
-      $('#share_url').val(url_for_selections());
-      return false;
-    });
-
-    change_region('us-east-1');
-    change_cost('hourly');
+  $('#data tbody tr').click(function() {
+    $(this).toggleClass('highlight')
   });
+
+  $('#url-button').click(function() {
+    $('#share_url').val(url_for_selections());
+    return false;
+  });
+
+  change_region('us-east-1');
+  change_cost('hourly');
 
   $.extend($.fn.dataTableExt.oStdClasses, {
     "sWrapper": "dataTables_wrapper form-inline"
@@ -175,20 +191,20 @@ $(function() {
   setup_column_toggle();
 
   // enable bootstrap tooltips
-  $('abbr').tooltip({ 
-    placement: function(tt, el) { 
+  $('abbr').tooltip({
+    placement: function(tt, el) {
       return (this.$element.parents('thead').length) ? 'top' : 'right';
     }
   });
-});
 
-$("#cost-dropdown li").bind("click", function(e) {
-  change_cost(e.target.getAttribute("duration"));
-});
+  $("#cost-dropdown li").bind("click", function(e) {
+    change_cost(e.target.getAttribute("duration"));
+  });
 
-$("#region-dropdown li").bind("click", function(e) {
-  change_region($(e.target).data('region'));
-});
+  $("#region-dropdown li").bind("click", function(e) {
+    change_region($(e.target).data('region'));
+  });
+}
 
 // sorting for colums with more complex data
 // http://datatables.net/plug-ins/sorting#hidden_title
@@ -212,9 +228,8 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
 
 // toggle columns
 function toggle_column(col_index) {
-  var table = $('#data').dataTable();
-  var is_visible = table.fnSettings().aoColumns[col_index].bVisible;
-  table.fnSetColumnVis(col_index, is_visible ? false : true);
+  var is_visible = data_table.column(col_index).visible();
+  data_table.column(col_index).visible(is_visible ? false : true);
 }
 
 // retrieve all the parameters from the location string
