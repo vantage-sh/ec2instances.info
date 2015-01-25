@@ -95,7 +95,7 @@
             <abbr title="One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.">Compute Units</abbr>
           </th>
           <th class="storage">Storage</th>
-          <th class="architecture">Architecture</th>
+          <th class="architecture">Arch</th>
           <th class="ioperf">I/O Performance</th>
           <th class="maxips">
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
