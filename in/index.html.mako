@@ -71,6 +71,7 @@
       <div class="btn-group" id="filter-dropdown">
         <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
           <i class="icon-filter icon-white"></i>
+          Columns
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" role="menu">
