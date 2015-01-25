@@ -99,3 +99,7 @@ table.table thead .sorting_desc { background: url('datatables/images/sort_desc.p
 
 table.table thead .sorting_asc_disabled { background: url('datatables/images/sort_asc_disabled.png') no-repeat center right; }
 table.table thead .sorting_desc_disabled { background: url('datatables/images/sort_desc_disabled.png') no-repeat center right; }
+
+input[type=search] {
+  margin-left: 5px;
+}
