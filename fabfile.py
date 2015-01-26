@@ -7,6 +7,7 @@ import os
 import webbrowser
 
 from boto import connect_s3
+from boto.s3.connection import OrdinaryCallingFormat
 from boto.s3.key import Key
 from fabric.api import abort, task
 from fabric.contrib.console import confirm
@@ -14,6 +15,10 @@ from render import render
 from scrape import scrape
 
 BUCKET_NAME = 'www.ec2instances.info'
+
+# Work around https://github.com/boto/boto/issues/2836 by explicitly setting
+# the calling_format.
+BUCKET_CALLING_FORMAT = OrdinaryCallingFormat()
 
 abspath = lambda filename: os.path.join(os.path.abspath(os.path.dirname(__file__)),
                                         filename)
@@ -41,7 +46,7 @@ def preview():
 @task
 def bucket_create():
     """Creates the S3 bucket used to host the site"""
-    conn = connect_s3()
+    conn = connect_s3(calling_format=BUCKET_CALLING_FORMAT)
     bucket = conn.create_bucket(BUCKET_NAME, policy='public-read')
     bucket.configure_website('index.html', 'error.html')
     print 'Bucket %r created.' % BUCKET_NAME
@@ -51,14 +56,14 @@ def bucket_delete():
     """Deletes the S3 bucket used to host the site"""
     if not confirm("Are you sure you want to delete the bucket %r?" % BUCKET_NAME):
         abort('Aborting at user request.')
-    conn = connect_s3()
+    conn = connect_s3(calling_format=BUCKET_CALLING_FORMAT)
     conn.delete_bucket(BUCKET_NAME)
     print 'Bucket %r deleted.' % BUCKET_NAME
 
 @task
 def deploy(root_dir='www'):
     """Deploy current content"""
-    conn = connect_s3()
+    conn = connect_s3(calling_format=BUCKET_CALLING_FORMAT)
     bucket = conn.get_bucket(BUCKET_NAME)
 
     for root, dirs, files in os.walk(root_dir):
