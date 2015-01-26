@@ -19,3 +19,6 @@ I was sick of comparing EC2 instance metrics and pricing on Amazon's site so I m
 - [Boto](http://boto.readthedocs.org/en/latest/)
 - [Mako](http://www.makotemplates.org/)
 - [lxml](http://lxml.de/)
+
+### Deployed to ec2instances.info by Travis CI
+[![Build Status](https://travis-ci.org/powdahound/ec2instances.info.svg)](https://travis-ci.org/powdahound/ec2instances.info)
