@@ -92,8 +92,10 @@
           <th class="name">Name</th>
           <th class="memory">Memory</th>
           <th class="computeunits">
-            <abbr title="One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.">Compute Units</abbr>
+            <abbr title="One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.">Compute Units (ECU)</abbr>
           </th>
+          <th class="cores">Cores</th>
+          <th class="coreunits">ECU per Core</th>
           <th class="storage">Storage</th>
           <th class="architecture">Arch</th>
           <th class="ioperf">I/O Performance</th>
@@ -113,21 +115,21 @@
           <td class="name">${inst['pretty_name']}</td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GB</span></td>
           <td class="computeunits">
-            % if inst['ECU'] == 0 :
-            <span sort="0">Burstable</span>
-            % else:
-            <span sort="${inst['ECU']}">${"%g" % (inst['ECU'],)}
+            <span sort="${inst['ECU']}">${"%g" % (inst['ECU'],)} units</span>
+            % if inst.get('burstable'):
+             (<a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a>)
+            % endif
+          </td>
+          <td class="cores">
+            <span sort="${inst['vCPU']}">
+              ${inst['vCPU']} cores
               % if 'cpu_details' in inst:
-                (${inst['cpu_details']['cpus']} x
-                 <abbr title='${inst['cpu_details']['note']}'>
-                   ${inst['cpu_details']['type']}
-                 </abbr>
-                 )
-              % else:
-              (${inst['vCPU']} core x ${"%g" % (inst['ECU']/inst['vCPU'],)} unit)
+                (${inst['cpu_details']['cpus']} x <abbr title='${inst['cpu_details']['note']}'>${inst['cpu_details']['type']}</abbr>)
               % endif
             </span>
-            % endif
+          </td>
+          <td class="coreunits">
+            <span sort="${inst['ECU_per_core']}">${"%.4g" % inst['ECU_per_core']} units</span>
           </td>
           <td class="storage">
             <% storage = inst['storage'] %>

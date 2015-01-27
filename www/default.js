@@ -13,7 +13,7 @@ function init_data_table() {
     },
     "aoColumnDefs": [
       {
-        "aTargets": ["memory", "computeunits", "storage", "ioperf"],
+        "aTargets": ["memory", "computeunits", "cores", "coreunits", "storage", "ioperf"],
         "sType": "span-sort"
       }
     ],
