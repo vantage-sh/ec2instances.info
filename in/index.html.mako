@@ -102,6 +102,7 @@
           <th class="maxips">
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
+          <th class="enhanced-networking">Enhanced Networking</th>
           <th class="apiname">API Name</th>
           <th class="cost">Linux cost</th>
           <th class="cost">Windows cost</th>
@@ -161,11 +162,16 @@
               % endif
             </span>
           </td>
-          % if inst['vpc']:
-          <td class="maxips">${inst['vpc']['max_enis'] * inst['vpc']['ips_per_eni']}</td>
-          % else:
-          <td class="maxips">N/A</td>
-          % endif
+          <td class="maxips">
+            % if inst['vpc']:
+              ${inst['vpc']['max_enis'] * inst['vpc']['ips_per_eni']}
+            % else:
+              N/A
+            % endif
+          </td>
+          <td class="enhanced-networking">
+            ${'Yes' if inst['enhanced_networking'] else 'No'}
+          </td>
           <td class="apiname">${inst['instance_type']}</td>
 
     % for platform in ['linux', 'mswin', 'mswinSQLWeb', 'mswinSQL']:
