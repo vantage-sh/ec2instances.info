@@ -95,7 +95,7 @@
             <abbr title="One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.">Compute Units (ECU)</abbr>
           </th>
           <th class="cores">Cores</th>
-          <th class="coreunits">ECU per Core</th>
+          <th class="ecu-per-core">ECU per Core</th>
           <th class="storage">Storage</th>
           <th class="architecture">Arch</th>
           <th class="ioperf">I/O Performance</th>
@@ -105,9 +105,9 @@
           <th class="enhanced-networking">Enhanced Networking</th>
           <th class="apiname">API Name</th>
           <th class="cost">Linux cost</th>
-          <th class="cost">Windows cost</th>
-          <th class="cost">Windows SQL Web cost</th>
-          <th class="cost">Windows SQL Std cost</th>
+          <th class="cost-mswin">Windows cost</th>
+          <th class="cost-mswinSQLWeb">Windows SQL Web cost</th>
+          <th class="cost-mswinSQL">Windows SQL Std cost</th>
         </tr>
       </thead>
       <tbody>
@@ -129,7 +129,7 @@
               % endif
             </span>
           </td>
-          <td class="coreunits">
+          <td class="ecu-per-core">
             <span sort="${inst['ECU_per_core']}">${"%.4g" % inst['ECU_per_core']} units</span>
           </td>
           <td class="storage">
@@ -175,7 +175,7 @@
           <td class="apiname">${inst['instance_type']}</td>
 
     % for platform in ['linux', 'mswin', 'mswinSQLWeb', 'mswinSQL']:
-          <td class="cost" data-pricing='${json.dumps({r:p.get(platform, p.get('os',0)) for r,p in inst['pricing'].iteritems()}) | h}'>
+          <td class="cost-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',0)) for r,p in inst['pricing'].iteritems()}) | h}'>
             % if inst['pricing'].get('us-east-1', {}).get(platform, 'N/A') != "N/A":
                  $${inst['pricing']['us-east-1'][platform]} per hour
             % else:

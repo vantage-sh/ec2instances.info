@@ -15,6 +15,10 @@ function init_data_table() {
       {
         "aTargets": ["memory", "computeunits", "cores", "coreunits", "storage", "ioperf"],
         "sType": "span-sort"
+      },
+      {
+        "aTargets": ["ecu-per-core", "enhanced-networking", "maxips", "cost-mswinSQLWeb", "cost-mswinSQL"],
+        "bVisible": false
       }
     ],
     // default sort by linux cost
