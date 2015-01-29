@@ -108,3 +108,9 @@ table.table thead .sorting_desc_disabled { background: url('datatables/images/so
 input[type=search] {
   margin-left: 5px;
 }
+
+/* Bootstrap overrides *******************************************************/
+.tooltip-inner {
+  /* let text wrap in tooltips */
+  white-space: pre-wrap;
+}
