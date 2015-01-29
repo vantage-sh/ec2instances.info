@@ -90,6 +90,7 @@
       <thead>
         <tr>
           <th class="name">Name</th>
+          <th class="apiname">API Name</th>
           <th class="memory">Memory</th>
           <th class="computeunits">
             <abbr title="One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.">Compute Units (ECU)</abbr>
@@ -103,7 +104,6 @@
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
           <th class="enhanced-networking">Enhanced Networking</th>
-          <th class="apiname">API Name</th>
           <th class="cost">Linux cost</th>
           <th class="cost-mswin">Windows cost</th>
           <th class="cost-mswinSQLWeb">Windows SQL Web cost</th>
@@ -114,6 +114,7 @@
 % for inst in instances:
         <tr class='instance' id="${inst['instance_type']}">
           <td class="name">${inst['pretty_name']}</td>
+          <td class="apiname">${inst['instance_type']}</td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GB</span></td>
           <td class="computeunits">
             <span sort="${inst['ECU']}">${"%g" % (inst['ECU'],)} units</span>
@@ -172,7 +173,6 @@
           <td class="enhanced-networking">
             ${'Yes' if inst['enhanced_networking'] else 'No'}
           </td>
-          <td class="apiname">${inst['instance_type']}</td>
 
     % for platform in ['linux', 'mswin', 'mswinSQLWeb', 'mswinSQL']:
           <td class="cost-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',0)) for r,p in inst['pricing'].iteritems()}) | h}'>
