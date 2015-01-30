@@ -195,7 +195,7 @@ def add_pricing(imap, data, platform):
                     inst.ECU = float(ecu)
 
 
-def add_pricing_data(instances):
+def add_pricing_info(instances):
     for i in instances:
         i.pricing = {}
     by_type = {i.instance_type: i for i in instances}
@@ -238,7 +238,7 @@ def scrape(data_file):
     print "Parsing instance types..."
     all_instances = scrape_instances()
     print "Parsing pricing info..."
-    add_pricing_data(all_instances)
+    add_pricing_info(all_instances)
     add_eni_info(all_instances)
     with open(data_file, 'w') as f:
         json.dump([i.to_dict() for i in all_instances],
