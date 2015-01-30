@@ -176,7 +176,7 @@
           </td>
 
     % for platform in ['linux', 'mswin', 'mswinSQLWeb', 'mswinSQL']:
-          <td class="cost-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',0)) for r,p in inst['pricing'].iteritems()}) | h}'>
+          <td class="cost cost-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',0)) for r,p in inst['pricing'].iteritems()}) | h}'>
             % if inst['pricing'].get('us-east-1', {}).get(platform, 'N/A') != "N/A":
                  $${inst['pricing']['us-east-1'][platform]} per hour
             % else:

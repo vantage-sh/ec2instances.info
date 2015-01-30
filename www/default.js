@@ -41,7 +41,7 @@ function init_data_table() {
       // Whenever the table is drawn, update the costs. This is necessary
       // because the cost duration may have changed while a filter was being
       // used and so some rows will need updating.
-      change_cost(current_cost_duration);
+      redraw_costs();
     }
   });
 
@@ -105,6 +105,12 @@ function change_region(region) {
     }
   });
   $("#region-dropdown .dropdown-toggle .text").text(region_name);
+  change_cost(current_cost_duration);
+}
+
+// Update all visible costs to the current duration.
+// Called after new columns or rows are shown as their costs may be inaccurate.
+function redraw_costs() {
   change_cost(current_cost_duration);
 }
 
@@ -234,6 +240,7 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
 function toggle_column(col_index) {
   var is_visible = data_table.column(col_index).visible();
   data_table.column(col_index).visible(is_visible ? false : true);
+  redraw_costs();
 }
 
 // retrieve all the parameters from the location string
