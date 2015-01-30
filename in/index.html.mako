@@ -104,6 +104,7 @@
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
           <th class="enhanced-networking">Enhanced Networking</th>
+          <th class="linux-virtualization">Linux Virtualization</th>
           <th class="cost">Linux cost</th>
           <th class="cost-mswin">Windows cost</th>
           <th class="cost-mswinSQLWeb">Windows SQL Web cost</th>
@@ -174,7 +175,13 @@
           <td class="enhanced-networking">
             ${'Yes' if inst['enhanced_networking'] else 'No'}
           </td>
-
+          <td class="linux-virtualization">
+            % if inst['linux_virtualization_types']:
+            ${', '.join(inst['linux_virtualization_types'])}
+            % else:
+            Unknown
+            % endif
+          </td>
     % for platform in ['linux', 'mswin', 'mswinSQLWeb', 'mswinSQL']:
           <td class="cost cost-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',0)) for r,p in inst['pricing'].iteritems()}) | h}'>
             % if inst['pricing'].get('us-east-1', {}).get(platform, 'N/A') != "N/A":

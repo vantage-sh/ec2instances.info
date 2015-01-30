@@ -17,7 +17,7 @@ function init_data_table() {
         "sType": "span-sort"
       },
       {
-        "aTargets": ["ecu-per-core", "enhanced-networking", "maxips", "cost-mswinSQLWeb", "cost-mswinSQL"],
+        "aTargets": ["ecu-per-core", "enhanced-networking", "maxips", "linux-virtualization", "cost-mswinSQLWeb", "cost-mswinSQL"],
         "bVisible": false
       }
     ],
