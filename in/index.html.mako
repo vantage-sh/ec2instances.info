@@ -125,11 +125,7 @@
           </td>
           <td class="cores">
             <span sort="${inst['vCPU']}">
-              % if 'cpu_details' in inst:
-                <abbr title='${inst['cpu_details']['cpus']} x ${inst['cpu_details']['type']} - ${inst['cpu_details']['note']}'>${inst['vCPU']} cores</abbr>
-              % else:
               ${inst['vCPU']} cores
-              % endif
             </span>
           </td>
           <td class="ecu-per-core">
