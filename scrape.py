@@ -23,7 +23,8 @@ class Instance(object):
                  enhanced_networking=self.enhanced_networking,
                  pricing=self.pricing,
                  vpc=self.vpc,
-                 linux_virtualization_types=self.linux_virtualization_types)
+                 linux_virtualization_types=self.linux_virtualization_types,
+                 generation=self.generation)
         if self.ebs_only:
             d['storage'] = None
         else:
@@ -67,6 +68,7 @@ def parse_prev_generation_instance(tr):
     i.ebs_optimized = totext(cols[6]).lower() == 'yes'
     i.network_performance = totext(cols[7])
     i.enhanced_networking = False
+    i.generation = 'previous'
     # print "Parsed %s..." % (i.instance_type)
     return i
 
@@ -97,6 +99,7 @@ def parse_instance(tr, inst2family):
     i.ebs_optimized = totext(cols[10]).lower() == 'yes'
     i.network_performance = totext(cols[4])
     i.enhanced_networking = totext(cols[11]).lower() == 'yes'
+    i.generation = 'current'
     # print "Parsed %s..." % (i.instance_type)
     return i
 

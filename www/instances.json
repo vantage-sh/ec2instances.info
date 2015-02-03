@@ -1,11 +1,9 @@
 [
   {
-    "vCPU": 1,
     "family": "General Purpose",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "vCPU": 1,
+    "generation": "previous",
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -79,15 +77,16 @@
     "arch": [
       "i386",
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "PV"
     ]
   },
   {
-    "vCPU": 1,
     "family": "General purpose",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "vCPU": 1,
+    "generation": "previous",
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -161,15 +160,16 @@
     "arch": [
       "i386",
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "PV"
     ]
   },
   {
-    "vCPU": 2,
     "family": "General purpose",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "vCPU": 2,
+    "generation": "previous",
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -242,15 +242,16 @@
     "memory": 7.5,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "PV"
     ]
   },
   {
-    "vCPU": 4,
     "family": "General purpose",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "vCPU": 4,
+    "generation": "previous",
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -323,15 +324,16 @@
     "memory": 15.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "PV"
     ]
   },
   {
-    "vCPU": 2,
     "family": "Compute optimized",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "vCPU": 2,
+    "generation": "previous",
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -404,15 +406,16 @@
     "arch": [
       "i386",
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "PV"
     ]
   },
   {
-    "vCPU": 8,
     "family": "Compute optimized",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "vCPU": 8,
+    "generation": "previous",
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -485,15 +488,16 @@
     "memory": 7.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "PV"
     ]
   },
   {
-    "vCPU": 32,
     "family": "Compute optimized",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 32,
+    "generation": "previous",
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -542,13 +546,16 @@
     "memory": 60.5,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 16,
     "family": "GPU instances",
     "enhanced_networking": false,
-    "linux_virtualization_types": [],
+    "vCPU": 16,
+    "generation": "previous",
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -579,15 +586,14 @@
     "memory": 22.5,
     "arch": [
       "x86_64"
-    ]
+    ],
+    "linux_virtualization_types": []
   },
   {
-    "vCPU": 2,
     "family": "Memory optimized",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "vCPU": 2,
+    "generation": "previous",
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -660,15 +666,16 @@
     "memory": 17.1,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "PV"
     ]
   },
   {
-    "vCPU": 4,
     "family": "Memory optimized",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "vCPU": 4,
+    "generation": "previous",
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -741,15 +748,16 @@
     "memory": 34.2,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "PV"
     ]
   },
   {
-    "vCPU": 8,
     "family": "Memory optimized",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "vCPU": 8,
+    "generation": "previous",
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -822,15 +830,16 @@
     "memory": 68.4,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "PV"
     ]
   },
   {
-    "vCPU": 32,
     "family": "Memory optimized",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 32,
+    "generation": "previous",
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -873,16 +882,16 @@
     "memory": 244.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 16,
     "family": "Storage optimized",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "HVM",
-      "PV"
-    ],
+    "vCPU": 16,
+    "generation": "previous",
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -925,15 +934,17 @@
     "memory": 60.5,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM",
+      "PV"
     ]
   },
   {
-    "vCPU": 1,
     "family": "Micro",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "vCPU": 1,
+    "generation": "previous",
     "ebs_optimized": false,
     "storage": null,
     "network_performance": "Very Low",
@@ -1002,15 +1013,16 @@
     "arch": [
       "i386",
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "PV"
     ]
   },
   {
-    "vCPU": 1,
     "family": "General purpose",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 1,
+    "generation": "current",
     "ebs_optimized": false,
     "storage": null,
     "network_performance": "Low to Moderate",
@@ -1076,15 +1088,16 @@
     "arch": [
       "x86_64",
       "i386"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 1,
     "family": "General purpose",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 1,
+    "generation": "current",
     "ebs_optimized": false,
     "storage": null,
     "network_performance": "Low to Moderate",
@@ -1150,15 +1163,16 @@
     "arch": [
       "x86_64",
       "i386"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 2,
     "family": "General purpose",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 2,
+    "generation": "current",
     "ebs_optimized": false,
     "storage": null,
     "network_performance": "Low to Moderate",
@@ -1223,16 +1237,16 @@
     "memory": 4.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 1,
     "family": "General purpose",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "HVM",
-      "PV"
-    ],
+    "vCPU": 1,
+    "generation": "current",
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -1309,16 +1323,17 @@
     "memory": 3.75,
     "arch": [
       "x86_64"
-    ]
-  },
-  {
-    "vCPU": 2,
-    "family": "General purpose",
-    "enhanced_networking": false,
+    ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ],
+    ]
+  },
+  {
+    "family": "General purpose",
+    "enhanced_networking": false,
+    "vCPU": 2,
+    "generation": "current",
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -1397,16 +1412,17 @@
     "memory": 7.5,
     "arch": [
       "x86_64"
-    ]
-  },
-  {
-    "vCPU": 4,
-    "family": "General purpose",
-    "enhanced_networking": false,
+    ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ],
+    ]
+  },
+  {
+    "family": "General purpose",
+    "enhanced_networking": false,
+    "vCPU": 4,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -1485,16 +1501,17 @@
     "memory": 15.0,
     "arch": [
       "x86_64"
-    ]
-  },
-  {
-    "vCPU": 8,
-    "family": "General purpose",
-    "enhanced_networking": false,
+    ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ],
+    ]
+  },
+  {
+    "family": "General purpose",
+    "enhanced_networking": false,
+    "vCPU": 8,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -1573,15 +1590,17 @@
     "memory": 30.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM",
+      "PV"
     ]
   },
   {
-    "vCPU": 2,
     "family": "Compute optimized",
     "enhanced_networking": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 2,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": null,
     "network_performance": "Moderate",
@@ -1638,15 +1657,16 @@
     "memory": 3.75,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 4,
     "family": "Compute optimized",
     "enhanced_networking": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 4,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": null,
     "network_performance": "High",
@@ -1703,15 +1723,16 @@
     "memory": 7.5,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 8,
     "family": "Compute optimized",
     "enhanced_networking": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 8,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": null,
     "network_performance": "High",
@@ -1768,15 +1789,16 @@
     "memory": 15.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 16,
     "family": "Compute optimized",
     "enhanced_networking": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 16,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": null,
     "network_performance": "High",
@@ -1833,15 +1855,16 @@
     "memory": 30.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 36,
     "family": "Compute optimized",
     "enhanced_networking": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 36,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": null,
     "network_performance": "10 Gigabit",
@@ -1898,16 +1921,16 @@
     "memory": 60.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 2,
     "family": "Compute optimized",
     "enhanced_networking": true,
-    "linux_virtualization_types": [
-      "HVM",
-      "PV"
-    ],
+    "vCPU": 2,
+    "generation": "current",
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -1983,16 +2006,17 @@
     "memory": 3.75,
     "arch": [
       "x86_64"
-    ]
-  },
-  {
-    "vCPU": 4,
-    "family": "Compute optimized",
-    "enhanced_networking": true,
+    ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ],
+    ]
+  },
+  {
+    "family": "Compute optimized",
+    "enhanced_networking": true,
+    "vCPU": 4,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -2071,16 +2095,17 @@
     "memory": 7.5,
     "arch": [
       "x86_64"
-    ]
-  },
-  {
-    "vCPU": 8,
-    "family": "Compute optimized",
-    "enhanced_networking": true,
+    ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ],
+    ]
+  },
+  {
+    "family": "Compute optimized",
+    "enhanced_networking": true,
+    "vCPU": 8,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -2159,16 +2184,17 @@
     "memory": 15.0,
     "arch": [
       "x86_64"
-    ]
-  },
-  {
-    "vCPU": 16,
-    "family": "Compute optimized",
-    "enhanced_networking": true,
+    ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ],
+    ]
+  },
+  {
+    "family": "Compute optimized",
+    "enhanced_networking": true,
+    "vCPU": 16,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -2247,16 +2273,17 @@
     "memory": 30.0,
     "arch": [
       "x86_64"
-    ]
-  },
-  {
-    "vCPU": 32,
-    "family": "Compute optimized",
-    "enhanced_networking": true,
+    ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ],
+    ]
+  },
+  {
+    "family": "Compute optimized",
+    "enhanced_networking": true,
+    "vCPU": 32,
+    "generation": "current",
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -2335,15 +2362,17 @@
     "memory": 60.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM",
+      "PV"
     ]
   },
   {
-    "vCPU": 8,
     "family": "GPU instances",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "HVM (Graphics)"
-    ],
+    "vCPU": 8,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -2407,15 +2436,16 @@
     "memory": 15.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM (Graphics)"
     ]
   },
   {
-    "vCPU": 2,
     "family": "Memory optimized",
     "enhanced_networking": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 2,
+    "generation": "current",
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -2488,15 +2518,16 @@
     "memory": 15.25,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 4,
     "family": "Memory optimized",
     "enhanced_networking": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 4,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -2569,15 +2600,16 @@
     "memory": 30.5,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 8,
     "family": "Memory optimized",
     "enhanced_networking": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 8,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -2650,15 +2682,16 @@
     "memory": 61.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 16,
     "family": "Memory optimized",
     "enhanced_networking": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 16,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -2731,15 +2764,16 @@
     "memory": 122.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 32,
     "family": "Memory optimized",
     "enhanced_networking": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 32,
+    "generation": "current",
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -2812,15 +2846,16 @@
     "memory": 244.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 4,
     "family": "Storage optimized",
     "enhanced_networking": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 4,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -2893,15 +2928,16 @@
     "memory": 30.5,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 8,
     "family": "Storage optimized",
     "enhanced_networking": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 8,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -2974,15 +3010,16 @@
     "memory": 61.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 16,
     "family": "Storage optimized",
     "enhanced_networking": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 16,
+    "generation": "current",
     "ebs_optimized": true,
     "storage": {
       "ssd": true,
@@ -3055,15 +3092,16 @@
     "memory": 122.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 32,
     "family": "Storage optimized",
     "enhanced_networking": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "vCPU": 32,
+    "generation": "current",
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -3136,16 +3174,16 @@
     "memory": 244.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   },
   {
-    "vCPU": 16,
     "family": "Storage optimized",
     "enhanced_networking": false,
-    "linux_virtualization_types": [
-      "HVM",
-      "PV"
-    ],
+    "vCPU": 16,
+    "generation": "current",
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -3209,6 +3247,10 @@
     "memory": 117.0,
     "arch": [
       "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM",
+      "PV"
     ]
   }
 ]
