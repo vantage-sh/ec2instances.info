@@ -14,7 +14,6 @@ def pretty_name(inst):
         'c4': 'C4 High-CPU',
         'm3': 'M3 General Purpose',
         'i3': 'I3 High I/O',
-        'cc1': 'Cluster Compute',
         'cg1': 'Cluster GPU',
         'cc2': 'Cluster Compute',
         'cr1': 'High Memory Cluster',
@@ -67,7 +66,7 @@ def add_cpu_detail(i):
     if i['instance_type'] in ('t1.micro', 't2.micro', 't2.small', 't2.medium'):
         i['burstable'] = True
         i['ECU'] = i['vCPU']  # a reasonable ECU to display
-    if i['instance_type'] in ('cc1.4xlarge', 'cg1.4xlarge'):
+    if i['instance_type'] in ('cg1.4xlarge'):
         i['vCPU'] = 8
         i['cpu_details'] = {
             'cpus': 2,
@@ -82,7 +81,7 @@ def add_cpu_detail(i):
             'note': 'Eight-core Sandy Bridge architecture'
             }
     elif i['instance_type'] in ('cc2.8xlarge', 'cr1.8xlarge'):
-        i['vCPU'] = 16
+        i['vCPU'] = 32
         i['cpu_details'] = {
             'cpus': 2,
             'type': 'Xeon E5-2670',
