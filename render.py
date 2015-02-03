@@ -66,27 +66,6 @@ def add_cpu_detail(i):
     if i['instance_type'] in ('t1.micro', 't2.micro', 't2.small', 't2.medium'):
         i['burstable'] = True
         i['ECU'] = i['vCPU']  # a reasonable ECU to display
-    if i['instance_type'] in ('cg1.4xlarge'):
-        i['vCPU'] = 8
-        i['cpu_details'] = {
-            'cpus': 2,
-            'type': 'Xeon X5570',
-            'note': 'Quad-core Nehalem architecture'
-            }
-    elif i['instance_type'] in ('hi1.4xlarge', 'hs1.8xlarge'):
-        i['vCPU'] = 16
-        i['cpu_details'] = {
-            'cpus': 2,
-            'type': 'Xeon E5-2650',
-            'note': 'Eight-core Sandy Bridge architecture'
-            }
-    elif i['instance_type'] in ('cc2.8xlarge', 'cr1.8xlarge'):
-        i['vCPU'] = 32
-        i['cpu_details'] = {
-            'cpus': 2,
-            'type': 'Xeon E5-2670',
-            'note': 'Eight-core Sandy Bridge architecture'
-            }
     i['ECU_per_core'] = i['ECU'] / i['vCPU']
 
 def add_render_info(i):
