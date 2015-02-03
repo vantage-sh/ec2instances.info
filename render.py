@@ -81,7 +81,7 @@ def add_cpu_detail(i):
             'note': 'Eight-core Sandy Bridge architecture'
             }
     elif i['instance_type'] in ('cc2.8xlarge', 'cr1.8xlarge'):
-        i['vCPU'] = 16
+        i['vCPU'] = 32
         i['cpu_details'] = {
             'cpus': 2,
             'type': 'Xeon E5-2670',
