@@ -23,7 +23,7 @@ function init_data_table() {
     ],
     // default sort by linux cost
     "aaSorting": [
-      [ 8, "asc" ]
+      [ 9, "asc" ]
     ],
     'initComplete': function() {
       // fire event in separate context so that calls to get_data_table()
