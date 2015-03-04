@@ -89,6 +89,7 @@
     <table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">
       <thead>
         <tr>
+          <th class="family">Family</th>
           <th class="name">Name</th>
           <th class="apiname">API Name</th>
           <th class="memory">Memory</th>
@@ -99,7 +100,8 @@
           <th class="ecu-per-core">ECU per Core</th>
           <th class="storage">Storage</th>
           <th class="architecture">Arch</th>
-          <th class="ioperf">I/O Performance</th>
+          <th class="ioperf">Networking Performance</th>
+          <th class="ebs_throughput"><abbr title="Dedicated EBS throughput when launched as an EBS-optimized instance">EBS Throughput</abbr></th>
           <th class="maxips">
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
@@ -114,8 +116,9 @@
       <tbody>
 % for inst in instances:
         <tr class='instance' id="${inst['instance_type']}">
+          <td class="family">${inst['family']}</td>
           <td class="name">${inst['pretty_name']}</td>
-          <td class="apiname">${inst['instance_type']}</td>
+          <td class="apiname"><span sort="${inst['instance_type_sort']}">${inst['instance_type']}</span></td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GB</span></td>
           <td class="computeunits">
             <span sort="${inst['ECU']}">${"%g" % (inst['ECU'],)} units</span>
@@ -156,11 +159,9 @@
           <td class="ioperf">
             <span sort="${inst['network_sort']}">
               ${inst['network_performance']}
-              % if inst['ebs_optimized']:
-               / <abbr title="EBS-Optimized available">${500 if inst['network_performance'] == 'Moderate' else 1000} Mbps</abbr>
-              % endif
             </span>
           </td>
+          <td class="ebs_throughput"><span sort="${str(inst['ebs_throughput']).zfill(4)}">${"{} Mbps".format(inst['ebs_throughput']) if inst['ebs_throughput'] else 'N/A'}</span></td>
           <td class="maxips">
             % if inst['vpc']:
               ${inst['vpc']['max_enis'] * inst['vpc']['ips_per_eni']}
