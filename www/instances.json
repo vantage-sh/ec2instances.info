@@ -902,12 +902,6 @@
     "instance_type": "hi1.4xlarge",
     "ECU": 35.0,
     "pricing": {
-      "us-west-2": {
-        "mswinSQLWeb": "3.660",
-        "mswinSQL": "4.607",
-        "mswin": "3.580",
-        "linux": "3.100"
-      },
       "us-east-1": {
         "mswinSQLWeb": "3.660",
         "mswinSQL": "4.607",
@@ -919,6 +913,41 @@
         "mswinSQL": "6.829",
         "mswin": "3.686",
         "linux": "3.276"
+      },
+      "sa-east-1": {
+        "mswinSQLWeb": "N/A",
+        "mswinSQL": "N/A",
+        "mswin": "N/A",
+        "linux": "N/A"
+      },
+      "ap-southeast-1": {
+        "mswinSQLWeb": "N/A",
+        "mswinSQL": "N/A",
+        "mswin": "N/A",
+        "linux": "N/A"
+      },
+      "ap-southeast-2": {
+        "mswinSQLWeb": "N/A",
+        "mswinSQL": "N/A",
+        "mswin": "N/A",
+        "linux": "N/A"
+      },
+      "us-west-2": {
+        "mswinSQLWeb": "3.660",
+        "mswinSQL": "4.607",
+        "mswin": "3.580",
+        "linux": "3.100"
+      },
+      "us-gov-west-1": {
+        "mswinSQLWeb": "N/A",
+        "mswin": "N/A",
+        "linux": "N/A"
+      },
+      "us-west-1": {
+        "mswinSQLWeb": "N/A",
+        "mswinSQL": "N/A",
+        "mswin": "N/A",
+        "linux": "N/A"
       },
       "eu-west-1": {
         "mswinSQLWeb": "3.660",
@@ -932,6 +961,88 @@
       "max_enis": 8
     },
     "memory": 60.5,
+    "arch": [
+      "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM",
+      "PV"
+    ]
+  },
+  {
+    "family": "Storage optimized",
+    "enhanced_networking": false,
+    "vCPU": 17,
+    "generation": "previous",
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": false,
+      "devices": 24,
+      "size": 2000
+    },
+    "network_performance": "10 Gigabit",
+    "instance_type": "hs1.8xlarge",
+    "ECU": 35.0,
+    "pricing": {
+      "us-east-1": {
+        "mswinSQLWeb": "5.144",
+        "mswinSQL": "8.350",
+        "mswin": "4.931",
+        "linux": "4.600"
+      },
+      "ap-northeast-1": {
+        "mswinSQLWeb": "5.917",
+        "mswinSQL": "8.970",
+        "mswin": "5.714",
+        "linux": "5.400"
+      },
+      "sa-east-1": {
+        "mswinSQLWeb": "N/A",
+        "mswinSQL": "N/A",
+        "mswin": "N/A",
+        "linux": "N/A"
+      },
+      "ap-southeast-1": {
+        "mswinSQLWeb": "6.114",
+        "mswinSQL": "9.320",
+        "mswin": "5.901",
+        "linux": "5.570"
+      },
+      "ap-southeast-2": {
+        "mswinSQLWeb": "6.114",
+        "mswinSQL": "9.320",
+        "mswin": "5.901",
+        "linux": "5.570"
+      },
+      "us-west-2": {
+        "mswinSQLWeb": "5.144",
+        "mswinSQL": "8.350",
+        "mswin": "4.931",
+        "linux": "4.600"
+      },
+      "us-gov-west-1": {
+        "mswinSQLWeb": "6.339",
+        "mswin": "6.126",
+        "linux": "5.520"
+      },
+      "us-west-1": {
+        "mswinSQLWeb": "N/A",
+        "mswinSQL": "N/A",
+        "mswin": "N/A",
+        "linux": "N/A"
+      },
+      "eu-west-1": {
+        "mswinSQLWeb": "5.144",
+        "mswinSQL": "8.350",
+        "mswin": "4.931",
+        "linux": "4.900"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "memory": 117.0,
     "arch": [
       "x86_64"
     ],
@@ -1643,6 +1754,12 @@
         "mswin": "0.221",
         "linux": "0.138"
       },
+      "eu-central-1": {
+        "mswinSQLWeb": "0.456",
+        "mswinSQL": "1.448",
+        "mswin": "0.231",
+        "linux": "0.148"
+      },
       "eu-west-1": {
         "mswinSQLWeb": "0.440",
         "mswinSQL": "1.432",
@@ -1708,6 +1825,12 @@
         "mswinSQL": "1.739",
         "mswin": "0.442",
         "linux": "0.276"
+      },
+      "eu-central-1": {
+        "mswinSQLWeb": "0.863",
+        "mswinSQL": "1.759",
+        "mswin": "0.462",
+        "linux": "0.296"
       },
       "eu-west-1": {
         "mswinSQLWeb": "0.831",
@@ -1775,6 +1898,12 @@
         "mswin": "0.884",
         "linux": "0.552"
       },
+      "eu-central-1": {
+        "mswinSQLWeb": "1.789",
+        "mswinSQL": "3.497",
+        "mswin": "0.924",
+        "linux": "0.592"
+      },
       "eu-west-1": {
         "mswinSQLWeb": "1.725",
         "mswinSQL": "3.433",
@@ -1841,6 +1970,12 @@
         "mswin": "1.768",
         "linux": "1.104"
       },
+      "eu-central-1": {
+        "mswinSQLWeb": "2.535",
+        "mswinSQL": "5.884",
+        "mswin": "1.848",
+        "linux": "1.184"
+      },
       "eu-west-1": {
         "mswinSQLWeb": "2.407",
         "mswinSQL": "5.756",
@@ -1906,6 +2041,12 @@
         "mswinSQL": "13.018",
         "mswin": "3.536",
         "linux": "2.208"
+      },
+      "eu-central-1": {
+        "mswinSQLWeb": "4.878",
+        "mswinSQL": "13.178",
+        "mswin": "3.696",
+        "linux": "2.368"
       },
       "eu-west-1": {
         "mswinSQLWeb": "4.622",
@@ -3181,76 +3322,226 @@
   },
   {
     "family": "Storage optimized",
-    "enhanced_networking": false,
-    "vCPU": 16,
+    "enhanced_networking": true,
+    "vCPU": 4,
     "generation": "current",
-    "ebs_optimized": false,
+    "ebs_optimized": true,
     "storage": {
       "ssd": false,
-      "devices": 24,
+      "devices": 3,
       "size": 2000
     },
-    "network_performance": "10 Gigabit",
-    "instance_type": "hs1.8xlarge",
-    "ECU": 35.0,
+    "network_performance": "Moderate",
+    "instance_type": "d2.xlarge",
+    "ECU": 14.0,
     "pricing": {
       "us-east-1": {
-        "mswinSQLWeb": "5.144",
-        "mswinSQL": "8.350",
-        "mswin": "4.931",
-        "linux": "4.600"
+        "mswin": "0.821",
+        "linux": "0.690"
       },
       "ap-northeast-1": {
-        "mswinSQLWeb": "5.917",
-        "mswinSQL": "8.970",
-        "mswin": "5.714",
-        "linux": "5.400"
+        "mswin": "0.975",
+        "linux": "0.844"
       },
       "ap-southeast-1": {
-        "mswinSQLWeb": "6.114",
-        "mswinSQL": "9.320",
-        "mswin": "5.901",
-        "linux": "5.570"
+        "mswin": "1.001",
+        "linux": "0.870"
       },
       "ap-southeast-2": {
-        "mswinSQLWeb": "6.114",
-        "mswinSQL": "9.320",
-        "mswin": "5.901",
-        "linux": "5.570"
+        "mswin": "1.001",
+        "linux": "0.870"
       },
       "us-west-2": {
-        "mswinSQLWeb": "5.144",
-        "mswinSQL": "8.350",
-        "mswin": "4.931",
-        "linux": "4.600"
-      },
-      "us-gov-west-1": {
-        "mswinSQLWeb": "6.339",
-        "mswinSQL": "9.270",
-        "mswin": "6.126",
-        "linux": "5.520"
+        "mswin": "0.821",
+        "linux": "0.690"
       },
       "eu-central-1": {
-        "linux": null
+        "mswin": "0.925",
+        "linux": "0.794"
       },
       "eu-west-1": {
-        "mswinSQLWeb": "5.144",
-        "mswinSQL": "8.350",
-        "mswin": "4.931",
-        "linux": "4.900"
+        "mswin": "0.866",
+        "linux": "0.735"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
+    "memory": 30.5,
+    "arch": [
+      "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
+    ]
+  },
+  {
+    "family": "Storage optimized",
+    "enhanced_networking": true,
+    "vCPU": 8,
+    "generation": "current",
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 6,
+      "size": 2000
+    },
+    "network_performance": "High",
+    "instance_type": "d2.2xlarge",
+    "ECU": 28.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "1.601",
+        "linux": "1.380"
+      },
+      "ap-northeast-1": {
+        "mswin": "1.909",
+        "linux": "1.688"
+      },
+      "ap-southeast-1": {
+        "mswin": "1.961",
+        "linux": "1.740"
+      },
+      "ap-southeast-2": {
+        "mswin": "1.961",
+        "linux": "1.740"
+      },
+      "us-west-2": {
+        "mswin": "1.601",
+        "linux": "1.380"
+      },
+      "eu-central-1": {
+        "mswin": "1.809",
+        "linux": "1.588"
+      },
+      "eu-west-1": {
+        "mswin": "1.691",
+        "linux": "1.470"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
+    "memory": 61.0,
+    "arch": [
+      "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
+    ]
+  },
+  {
+    "family": "Storage optimized",
+    "enhanced_networking": true,
+    "vCPU": 16,
+    "generation": "current",
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 12,
+      "size": 2000
+    },
+    "network_performance": "High",
+    "instance_type": "d2.4xlarge",
+    "ECU": 56.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "3.062",
+        "linux": "2.760"
+      },
+      "ap-northeast-1": {
+        "mswin": "3.678",
+        "linux": "3.376"
+      },
+      "ap-southeast-1": {
+        "mswin": "3.782",
+        "linux": "3.480"
+      },
+      "ap-southeast-2": {
+        "mswin": "3.782",
+        "linux": "3.480"
+      },
+      "us-west-2": {
+        "mswin": "3.062",
+        "linux": "2.760"
+      },
+      "eu-central-1": {
+        "mswin": "3.478",
+        "linux": "3.176"
+      },
+      "eu-west-1": {
+        "mswin": "3.242",
+        "linux": "2.940"
       }
     },
     "vpc": {
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 117.0,
+    "memory": 122.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
-      "HVM",
-      "PV"
+      "HVM"
+    ]
+  },
+  {
+    "family": "Storage optimized",
+    "enhanced_networking": true,
+    "vCPU": 36,
+    "generation": "current",
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 24,
+      "size": 2000
+    },
+    "network_performance": "10 Gigabit",
+    "instance_type": "d2.8xlarge",
+    "ECU": 116.0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "6.198",
+        "linux": "5.520"
+      },
+      "ap-northeast-1": {
+        "mswin": "7.430",
+        "linux": "6.752"
+      },
+      "ap-southeast-1": {
+        "mswin": "7.638",
+        "linux": "6.960"
+      },
+      "ap-southeast-2": {
+        "mswin": "7.638",
+        "linux": "6.960"
+      },
+      "us-west-2": {
+        "mswin": "6.198",
+        "linux": "5.520"
+      },
+      "eu-central-1": {
+        "mswin": "7.030",
+        "linux": "6.352"
+      },
+      "eu-west-1": {
+        "mswin": "6.558",
+        "linux": "5.880"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "memory": 244.0,
+    "arch": [
+      "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
     ]
   }
 ]
