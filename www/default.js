@@ -13,17 +13,17 @@ function init_data_table() {
     },
     "aoColumnDefs": [
       {
-        "aTargets": ["memory", "computeunits", "cores", "coreunits", "storage", "ebs-throughput", "ebs-iops", "ioperf"],
+        "aTargets": ["memory", "computeunits", "cores", "coreunits", "storage", "ebs-throughput", "ebs-iops", "networkperf"],
         "sType": "span-sort"
       },
       {
-        "aTargets": ["ecu-per-core", "enhanced-networking", "maxips", "linux-virtualization", "cost-mswinSQLWeb", "cost-mswinSQL"],
+        "aTargets": ["ecu-per-core", "enhanced-networking", "maxips", "linux-virtualization", "cost-mswinSQLWeb", "cost-mswinSQL", "ebs-throughput", "ebs-iops"],
         "bVisible": false
       }
     ],
     // default sort by linux cost
     "aaSorting": [
-      [ 9, "asc" ]
+      [ 14, "asc" ]
     ],
     'initComplete': function() {
       // fire event in separate context so that calls to get_data_table()

@@ -99,7 +99,7 @@
           <th class="ecu-per-core">ECU per Core</th>
           <th class="storage">Storage</th>
           <th class="architecture">Arch</th>
-          <th class="ioperf">I/O Performance</th>
+          <th class="networkperf">Network Performance</th>
           <th class="ebs-throughput">EBS Optimized Throughput (Mbps)</th>
           <th class="ebs-iops">Max EBS Optimized 16K IOPS</th>
           <th class="maxips">
@@ -155,7 +155,7 @@
             64-bit
             % endif
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="${inst['network_sort']}">
               ${inst['network_performance']}
             </span>
