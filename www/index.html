@@ -97,7 +97,9 @@
           <th class="ecu-per-core">ECU per Core</th>
           <th class="storage">Storage</th>
           <th class="architecture">Arch</th>
-          <th class="ioperf">I/O Performance</th>
+          <th class="networkperf">Network Performance</th>
+          <th class="ebs-throughput">EBS Optimized Throughput (Mbps)</th>
+          <th class="ebs-iops">Max EBS Optimized 16K IOPS</th>
           <th class="maxips">
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
@@ -135,9 +137,19 @@
           <td class="architecture">
             32/64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="2">
               Low
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -187,9 +199,19 @@
           <td class="architecture">
             32/64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="6">
               Moderate
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -239,10 +261,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="7">
               Moderate
-               / <abbr title="EBS-Optimized available">500 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="500">
+              500
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="4000">
+              4000
             </span>
           </td>
           <td class="maxips">
@@ -292,10 +323,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="1000">
+              1000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="8000">
+              8000
             </span>
           </td>
           <td class="maxips">
@@ -345,9 +385,19 @@
           <td class="architecture">
             32/64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="6">
               Moderate
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -397,10 +447,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="1000">
+              1000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="8000">
+              8000
             </span>
           </td>
           <td class="maxips">
@@ -450,9 +509,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="10">
               10 Gigabit
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -502,9 +571,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="10">
               10 Gigabit
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -554,9 +633,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="6">
               Moderate
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -606,10 +695,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="7">
               Moderate
-               / <abbr title="EBS-Optimized available">500 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="500">
+              500
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="4000">
+              4000
             </span>
           </td>
           <td class="maxips">
@@ -659,10 +757,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="1000">
+              1000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="8000">
+              8000
             </span>
           </td>
           <td class="maxips">
@@ -712,9 +819,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="10">
               10 Gigabit
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -764,9 +881,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="10">
               10 Gigabit
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -816,9 +943,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="10">
               10 Gigabit
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -866,9 +1003,19 @@
           <td class="architecture">
             32/64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="0">
               Very Low
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -916,9 +1063,19 @@
           <td class="architecture">
             32/64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="4">
               Low to Moderate
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -966,9 +1123,19 @@
           <td class="architecture">
             32/64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="4">
               Low to Moderate
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -1016,9 +1183,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="4">
               Low to Moderate
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -1068,9 +1245,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="6">
               Moderate
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -1120,9 +1307,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="6">
               Moderate
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -1172,10 +1369,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="500">
+              500
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="4000">
+              4000
             </span>
           </td>
           <td class="maxips">
@@ -1225,10 +1431,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="1000">
+              1000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="8000">
+              8000
             </span>
           </td>
           <td class="maxips">
@@ -1275,10 +1490,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="7">
               Moderate
-               / <abbr title="EBS-Optimized available">500 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="500">
+              500
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="4000">
+              4000
             </span>
           </td>
           <td class="maxips">
@@ -1325,10 +1549,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="750">
+              750
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="6000">
+              6000
             </span>
           </td>
           <td class="maxips">
@@ -1375,10 +1608,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="1000">
+              1000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="8000">
+              8000
             </span>
           </td>
           <td class="maxips">
@@ -1425,10 +1667,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="2000">
+              2000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="16000">
+              16000
             </span>
           </td>
           <td class="maxips">
@@ -1475,10 +1726,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="11">
               10 Gigabit
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="4000">
+              4000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="32000">
+              32000
             </span>
           </td>
           <td class="maxips">
@@ -1528,9 +1788,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="6">
               Moderate
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -1580,10 +1850,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="7">
               Moderate
-               / <abbr title="EBS-Optimized available">500 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="500">
+              500
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="4000">
+              4000
             </span>
           </td>
           <td class="maxips">
@@ -1633,10 +1912,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="1000">
+              1000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="8000">
+              8000
             </span>
           </td>
           <td class="maxips">
@@ -1686,10 +1974,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="2000">
+              2000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="16000">
+              16000
             </span>
           </td>
           <td class="maxips">
@@ -1739,9 +2036,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="10">
               10 Gigabit
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -1791,10 +2098,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="1000">
+              1000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="8000">
+              8000
             </span>
           </td>
           <td class="maxips">
@@ -1844,9 +2160,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="6">
               Moderate
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -1896,10 +2222,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="7">
               Moderate
-               / <abbr title="EBS-Optimized available">500 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="500">
+              500
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="4000">
+              4000
             </span>
           </td>
           <td class="maxips">
@@ -1949,10 +2284,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="1000">
+              1000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="8000">
+              8000
             </span>
           </td>
           <td class="maxips">
@@ -2002,10 +2346,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="2000">
+              2000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="16000">
+              16000
             </span>
           </td>
           <td class="maxips">
@@ -2055,9 +2408,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="10">
               10 Gigabit
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -2107,10 +2470,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="7">
               Moderate
-               / <abbr title="EBS-Optimized available">500 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="500">
+              500
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="4000">
+              4000
             </span>
           </td>
           <td class="maxips">
@@ -2160,10 +2532,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="1000">
+              1000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="8000">
+              8000
             </span>
           </td>
           <td class="maxips">
@@ -2213,10 +2594,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="2000">
+              2000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="16000">
+              16000
             </span>
           </td>
           <td class="maxips">
@@ -2266,9 +2656,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="10">
               10 Gigabit
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="0">
+              0
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="0">
+              0
             </span>
           </td>
           <td class="maxips">
@@ -2318,10 +2718,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="7">
               Moderate
-               / <abbr title="EBS-Optimized available">500 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="750">
+              750
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="6000">
+              6000
             </span>
           </td>
           <td class="maxips">
@@ -2371,10 +2780,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="1000">
+              1000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="8000">
+              8000
             </span>
           </td>
           <td class="maxips">
@@ -2424,10 +2842,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="9">
               High
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="2000">
+              2000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="16000">
+              16000
             </span>
           </td>
           <td class="maxips">
@@ -2477,10 +2904,19 @@
           <td class="architecture">
             64-bit
           </td>
-          <td class="ioperf">
+          <td class="networkperf">
             <span sort="11">
               10 Gigabit
-               / <abbr title="EBS-Optimized available">1000 Mbps</abbr>
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="4000">
+              4000
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="32000">
+              32000
             </span>
           </td>
           <td class="maxips">
@@ -2513,7 +2949,7 @@
       <p>It was started by <a href="http://twitter.com/powdahound" target="_blank">@powdahound</a>, contributed to by <a href="https://github.com/powdahound/ec2instances.info/contributors" target="_blank">many</a>, is <a href="http://powdahound.com/2011/03/hosting-a-static-site-on-amazon-s3-ec2instances-info" target="_blank">hosted on S3</a>, and awaits your improvements <a href="https://github.com/powdahound/ec2instances.info" target="_blank">on GitHub</a>.</p>
     </div>
     <div class="well-small">
-      <p class="small">Generated at: 2015-03-31 17:40:58 UTC</p>
+      <p class="small">Generated at: 2015-04-02 13:37:50 UTC</p>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
