@@ -3,14 +3,16 @@
     "family": "General Purpose",
     "enhanced_networking": false,
     "vCPU": 1,
-    "generation": "previous",
-    "ebs_optimized": false,
     "storage": {
       "ssd": false,
       "devices": 1,
       "size": 160
     },
+    "generation": "previous",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "Low",
+    "ebs_throughput": null,
     "instance_type": "m1.small",
     "ECU": 1.0,
     "pricing": {
@@ -86,14 +88,16 @@
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 1,
-    "generation": "previous",
-    "ebs_optimized": false,
     "storage": {
       "ssd": false,
       "devices": 1,
       "size": 410
     },
+    "generation": "previous",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "Moderate",
+    "ebs_throughput": null,
     "instance_type": "m1.medium",
     "ECU": 2.0,
     "pricing": {
@@ -169,14 +173,16 @@
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 2,
-    "generation": "previous",
-    "ebs_optimized": true,
     "storage": {
       "ssd": false,
       "devices": 2,
       "size": 420
     },
+    "generation": "previous",
+    "ebs_optimized": true,
+    "ebs_iops": 4000,
     "network_performance": "Moderate",
+    "ebs_throughput": 500,
     "instance_type": "m1.large",
     "ECU": 4.0,
     "pricing": {
@@ -251,14 +257,16 @@
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 4,
-    "generation": "previous",
-    "ebs_optimized": true,
     "storage": {
       "ssd": false,
       "devices": 4,
       "size": 420
     },
+    "generation": "previous",
+    "ebs_optimized": true,
+    "ebs_iops": 8000,
     "network_performance": "High",
+    "ebs_throughput": 1000,
     "instance_type": "m1.xlarge",
     "ECU": 8.0,
     "pricing": {
@@ -333,14 +341,16 @@
     "family": "Compute optimized",
     "enhanced_networking": false,
     "vCPU": 2,
-    "generation": "previous",
-    "ebs_optimized": false,
     "storage": {
       "ssd": false,
       "devices": 1,
       "size": 350
     },
+    "generation": "previous",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "Moderate",
+    "ebs_throughput": null,
     "instance_type": "c1.medium",
     "ECU": 5.0,
     "pricing": {
@@ -415,14 +425,16 @@
     "family": "Compute optimized",
     "enhanced_networking": false,
     "vCPU": 8,
-    "generation": "previous",
-    "ebs_optimized": true,
     "storage": {
       "ssd": false,
       "devices": 4,
       "size": 420
     },
+    "generation": "previous",
+    "ebs_optimized": true,
+    "ebs_iops": 8000,
     "network_performance": "High",
+    "ebs_throughput": 1000,
     "instance_type": "c1.xlarge",
     "ECU": 20.0,
     "pricing": {
@@ -497,14 +509,16 @@
     "family": "Compute optimized",
     "enhanced_networking": false,
     "vCPU": 32,
-    "generation": "previous",
-    "ebs_optimized": false,
     "storage": {
       "ssd": false,
       "devices": 4,
       "size": 840
     },
+    "generation": "previous",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "10 Gigabit",
+    "ebs_throughput": null,
     "instance_type": "cc2.8xlarge",
     "ECU": 88.0,
     "pricing": {
@@ -555,14 +569,16 @@
     "family": "GPU instances",
     "enhanced_networking": false,
     "vCPU": 16,
-    "generation": "previous",
-    "ebs_optimized": false,
     "storage": {
       "ssd": false,
       "devices": 2,
       "size": 840
     },
+    "generation": "previous",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "10 Gigabit",
+    "ebs_throughput": null,
     "instance_type": "cg1.4xlarge",
     "ECU": 33.5,
     "pricing": {
@@ -593,14 +609,16 @@
     "family": "Memory optimized",
     "enhanced_networking": false,
     "vCPU": 2,
-    "generation": "previous",
-    "ebs_optimized": false,
     "storage": {
       "ssd": false,
       "devices": 1,
       "size": 420
     },
+    "generation": "previous",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "Moderate",
+    "ebs_throughput": null,
     "instance_type": "m2.xlarge",
     "ECU": 6.5,
     "pricing": {
@@ -675,14 +693,16 @@
     "family": "Memory optimized",
     "enhanced_networking": false,
     "vCPU": 4,
-    "generation": "previous",
-    "ebs_optimized": true,
     "storage": {
       "ssd": false,
       "devices": 1,
       "size": 850
     },
+    "generation": "previous",
+    "ebs_optimized": true,
+    "ebs_iops": 4000,
     "network_performance": "Moderate",
+    "ebs_throughput": 500,
     "instance_type": "m2.2xlarge",
     "ECU": 13.0,
     "pricing": {
@@ -757,14 +777,16 @@
     "family": "Memory optimized",
     "enhanced_networking": false,
     "vCPU": 8,
-    "generation": "previous",
-    "ebs_optimized": true,
     "storage": {
       "ssd": false,
       "devices": 2,
       "size": 840
     },
+    "generation": "previous",
+    "ebs_optimized": true,
+    "ebs_iops": 8000,
     "network_performance": "High",
+    "ebs_throughput": 1000,
     "instance_type": "m2.4xlarge",
     "ECU": 26.0,
     "pricing": {
@@ -839,14 +861,16 @@
     "family": "Memory optimized",
     "enhanced_networking": false,
     "vCPU": 32,
-    "generation": "previous",
-    "ebs_optimized": false,
     "storage": {
       "ssd": true,
       "devices": 2,
       "size": 120
     },
+    "generation": "previous",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "10 Gigabit",
+    "ebs_throughput": null,
     "instance_type": "cr1.8xlarge",
     "ECU": 88.0,
     "pricing": {
@@ -891,14 +915,16 @@
     "family": "Storage optimized",
     "enhanced_networking": false,
     "vCPU": 16,
-    "generation": "previous",
-    "ebs_optimized": false,
     "storage": {
       "ssd": true,
       "devices": 2,
       "size": 1024
     },
+    "generation": "previous",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "10 Gigabit",
+    "ebs_throughput": null,
     "instance_type": "hi1.4xlarge",
     "ECU": 35.0,
     "pricing": {
@@ -973,14 +999,16 @@
     "family": "Storage optimized",
     "enhanced_networking": false,
     "vCPU": 17,
-    "generation": "previous",
-    "ebs_optimized": false,
     "storage": {
       "ssd": false,
       "devices": 24,
       "size": 2000
     },
+    "generation": "previous",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "10 Gigabit",
+    "ebs_throughput": null,
     "instance_type": "hs1.8xlarge",
     "ECU": 35.0,
     "pricing": {
@@ -1055,10 +1083,12 @@
     "family": "Micro",
     "enhanced_networking": false,
     "vCPU": 1,
+    "storage": null,
     "generation": "previous",
     "ebs_optimized": false,
-    "storage": null,
+    "ebs_iops": null,
     "network_performance": "Very Low",
+    "ebs_throughput": null,
     "instance_type": "t1.micro",
     "ECU": 0,
     "pricing": {
@@ -1133,10 +1163,12 @@
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 1,
+    "storage": null,
     "generation": "current",
     "ebs_optimized": false,
-    "storage": null,
+    "ebs_iops": null,
     "network_performance": "Low to Moderate",
+    "ebs_throughput": null,
     "instance_type": "t2.micro",
     "ECU": 0,
     "pricing": {
@@ -1208,10 +1240,12 @@
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 1,
+    "storage": null,
     "generation": "current",
     "ebs_optimized": false,
-    "storage": null,
+    "ebs_iops": null,
     "network_performance": "Low to Moderate",
+    "ebs_throughput": null,
     "instance_type": "t2.small",
     "ECU": 0,
     "pricing": {
@@ -1283,10 +1317,12 @@
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 2,
+    "storage": null,
     "generation": "current",
     "ebs_optimized": false,
-    "storage": null,
+    "ebs_iops": null,
     "network_performance": "Low to Moderate",
+    "ebs_throughput": null,
     "instance_type": "t2.medium",
     "ECU": 0,
     "pricing": {
@@ -1357,14 +1393,16 @@
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 1,
-    "generation": "current",
-    "ebs_optimized": false,
     "storage": {
       "ssd": true,
       "devices": 1,
       "size": 4
     },
+    "generation": "current",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "Moderate",
+    "ebs_throughput": null,
     "instance_type": "m3.medium",
     "ECU": 3.0,
     "pricing": {
@@ -1444,14 +1482,16 @@
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 2,
-    "generation": "current",
-    "ebs_optimized": false,
     "storage": {
       "ssd": true,
       "devices": 1,
       "size": 32
     },
+    "generation": "current",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "Moderate",
+    "ebs_throughput": null,
     "instance_type": "m3.large",
     "ECU": 6.5,
     "pricing": {
@@ -1533,14 +1573,16 @@
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 4,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": true,
       "devices": 2,
       "size": 40
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 4000,
     "network_performance": "High",
+    "ebs_throughput": 500,
     "instance_type": "m3.xlarge",
     "ECU": 13.0,
     "pricing": {
@@ -1622,14 +1664,16 @@
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 8,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": true,
       "devices": 2,
       "size": 80
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 8000,
     "network_performance": "High",
+    "ebs_throughput": 1000,
     "instance_type": "m3.2xlarge",
     "ECU": 26.0,
     "pricing": {
@@ -1711,10 +1755,12 @@
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 2,
+    "storage": null,
     "generation": "current",
     "ebs_optimized": true,
-    "storage": null,
+    "ebs_iops": 4000,
     "network_performance": "Moderate",
+    "ebs_throughput": 500,
     "instance_type": "c4.large",
     "ECU": 8.0,
     "pricing": {
@@ -1783,10 +1829,12 @@
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 4,
+    "storage": null,
     "generation": "current",
     "ebs_optimized": true,
-    "storage": null,
+    "ebs_iops": 6000,
     "network_performance": "High",
+    "ebs_throughput": 750,
     "instance_type": "c4.xlarge",
     "ECU": 16.0,
     "pricing": {
@@ -1855,10 +1903,12 @@
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 8,
+    "storage": null,
     "generation": "current",
     "ebs_optimized": true,
-    "storage": null,
+    "ebs_iops": 8000,
     "network_performance": "High",
+    "ebs_throughput": 1000,
     "instance_type": "c4.2xlarge",
     "ECU": 31.0,
     "pricing": {
@@ -1927,10 +1977,12 @@
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 16,
+    "storage": null,
     "generation": "current",
     "ebs_optimized": true,
-    "storage": null,
+    "ebs_iops": 16000,
     "network_performance": "High",
+    "ebs_throughput": 2000,
     "instance_type": "c4.4xlarge",
     "ECU": 62.0,
     "pricing": {
@@ -1999,10 +2051,12 @@
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 36,
+    "storage": null,
     "generation": "current",
     "ebs_optimized": true,
-    "storage": null,
+    "ebs_iops": 32000,
     "network_performance": "10 Gigabit",
+    "ebs_throughput": 4000,
     "instance_type": "c4.8xlarge",
     "ECU": 132.0,
     "pricing": {
@@ -2071,14 +2125,16 @@
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 2,
-    "generation": "current",
-    "ebs_optimized": false,
     "storage": {
       "ssd": true,
       "devices": 2,
       "size": 16
     },
+    "generation": "current",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "Moderate",
+    "ebs_throughput": null,
     "instance_type": "c3.large",
     "ECU": 7.0,
     "pricing": {
@@ -2157,14 +2213,16 @@
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 4,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": true,
       "devices": 2,
       "size": 40
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 4000,
     "network_performance": "Moderate",
+    "ebs_throughput": 500,
     "instance_type": "c3.xlarge",
     "ECU": 14.0,
     "pricing": {
@@ -2246,14 +2304,16 @@
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 8,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": true,
       "devices": 2,
       "size": 80
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 8000,
     "network_performance": "High",
+    "ebs_throughput": 1000,
     "instance_type": "c3.2xlarge",
     "ECU": 28.0,
     "pricing": {
@@ -2335,14 +2395,16 @@
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 16,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": true,
       "devices": 2,
       "size": 160
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 16000,
     "network_performance": "High",
+    "ebs_throughput": 2000,
     "instance_type": "c3.4xlarge",
     "ECU": 55.0,
     "pricing": {
@@ -2424,14 +2486,16 @@
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 32,
-    "generation": "current",
-    "ebs_optimized": false,
     "storage": {
       "ssd": true,
       "devices": 2,
       "size": 320
     },
+    "generation": "current",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "10 Gigabit",
+    "ebs_throughput": null,
     "instance_type": "c3.8xlarge",
     "ECU": 108.0,
     "pricing": {
@@ -2513,14 +2577,16 @@
     "family": "GPU instances",
     "enhanced_networking": false,
     "vCPU": 8,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": true,
       "devices": 1,
       "size": 60
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 8000,
     "network_performance": "High",
+    "ebs_throughput": 1000,
     "instance_type": "g2.2xlarge",
     "ECU": 26.0,
     "pricing": {
@@ -2586,14 +2652,16 @@
     "family": "Memory optimized",
     "enhanced_networking": true,
     "vCPU": 2,
-    "generation": "current",
-    "ebs_optimized": false,
     "storage": {
       "ssd": true,
       "devices": 1,
       "size": 32
     },
+    "generation": "current",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "Moderate",
+    "ebs_throughput": null,
     "instance_type": "r3.large",
     "ECU": 6.5,
     "pricing": {
@@ -2668,14 +2736,16 @@
     "family": "Memory optimized",
     "enhanced_networking": true,
     "vCPU": 4,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": true,
       "devices": 1,
       "size": 80
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 4000,
     "network_performance": "Moderate",
+    "ebs_throughput": 500,
     "instance_type": "r3.xlarge",
     "ECU": 13.0,
     "pricing": {
@@ -2750,14 +2820,16 @@
     "family": "Memory optimized",
     "enhanced_networking": true,
     "vCPU": 8,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": true,
       "devices": 1,
       "size": 160
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 8000,
     "network_performance": "High",
+    "ebs_throughput": 1000,
     "instance_type": "r3.2xlarge",
     "ECU": 26.0,
     "pricing": {
@@ -2832,14 +2904,16 @@
     "family": "Memory optimized",
     "enhanced_networking": true,
     "vCPU": 16,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": true,
       "devices": 1,
       "size": 320
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 16000,
     "network_performance": "High",
+    "ebs_throughput": 2000,
     "instance_type": "r3.4xlarge",
     "ECU": 52.0,
     "pricing": {
@@ -2914,14 +2988,16 @@
     "family": "Memory optimized",
     "enhanced_networking": true,
     "vCPU": 32,
-    "generation": "current",
-    "ebs_optimized": false,
     "storage": {
       "ssd": true,
       "devices": 2,
       "size": 320
     },
+    "generation": "current",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "10 Gigabit",
+    "ebs_throughput": null,
     "instance_type": "r3.8xlarge",
     "ECU": 104.0,
     "pricing": {
@@ -2996,14 +3072,16 @@
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 4,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": true,
       "devices": 1,
       "size": 800
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 4000,
     "network_performance": "Moderate",
+    "ebs_throughput": 500,
     "instance_type": "i2.xlarge",
     "ECU": 14.0,
     "pricing": {
@@ -3078,14 +3156,16 @@
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 8,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": true,
       "devices": 2,
       "size": 800
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 8000,
     "network_performance": "High",
+    "ebs_throughput": 1000,
     "instance_type": "i2.2xlarge",
     "ECU": 27.0,
     "pricing": {
@@ -3160,14 +3240,16 @@
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 16,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": true,
       "devices": 4,
       "size": 800
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 16000,
     "network_performance": "High",
+    "ebs_throughput": 2000,
     "instance_type": "i2.4xlarge",
     "ECU": 53.0,
     "pricing": {
@@ -3242,14 +3324,16 @@
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 32,
-    "generation": "current",
-    "ebs_optimized": false,
     "storage": {
       "ssd": true,
       "devices": 8,
       "size": 800
     },
+    "generation": "current",
+    "ebs_optimized": false,
+    "ebs_iops": null,
     "network_performance": "10 Gigabit",
+    "ebs_throughput": null,
     "instance_type": "i2.8xlarge",
     "ECU": 104.0,
     "pricing": {
@@ -3324,14 +3408,16 @@
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 4,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": false,
       "devices": 3,
       "size": 2000
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 6000,
     "network_performance": "Moderate",
+    "ebs_throughput": 750,
     "instance_type": "d2.xlarge",
     "ECU": 14.0,
     "pricing": {
@@ -3380,14 +3466,16 @@
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 8,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": false,
       "devices": 6,
       "size": 2000
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 8000,
     "network_performance": "High",
+    "ebs_throughput": 1000,
     "instance_type": "d2.2xlarge",
     "ECU": 28.0,
     "pricing": {
@@ -3436,14 +3524,16 @@
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 16,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": false,
       "devices": 12,
       "size": 2000
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 16000,
     "network_performance": "High",
+    "ebs_throughput": 2000,
     "instance_type": "d2.4xlarge",
     "ECU": 56.0,
     "pricing": {
@@ -3492,14 +3582,16 @@
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 36,
-    "generation": "current",
-    "ebs_optimized": true,
     "storage": {
       "ssd": false,
       "devices": 24,
       "size": 2000
     },
+    "generation": "current",
+    "ebs_optimized": true,
+    "ebs_iops": 32000,
     "network_performance": "10 Gigabit",
+    "ebs_throughput": 4000,
     "instance_type": "d2.8xlarge",
     "ECU": 116.0,
     "pricing": {
