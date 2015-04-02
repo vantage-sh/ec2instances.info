@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from lxml import etree
 import urllib2
 import re
@@ -10,6 +11,8 @@ class Instance(object):
         self.arch = ['x86_64']
         self.ECU = 0
         self.linux_virtualization_types = []
+        self.ebs_throughput = 0
+        self.ebs_iops = 0
 
     def to_dict(self):
         d = dict(family=self.family,
@@ -19,6 +22,8 @@ class Instance(object):
                  ECU=self.ECU,
                  memory=self.memory,
                  ebs_optimized=self.ebs_optimized,
+                 ebs_throughput=self.ebs_throughput,
+                 ebs_iops=self.ebs_iops,
                  network_performance=self.network_performance,
                  enhanced_networking=self.enhanced_networking,
                  pricing=self.pricing,
@@ -242,6 +247,26 @@ def add_eni_info(instances):
             'ips_per_eni': ip_per_eni}
 
 
+def add_ebs_info(instances):
+    ebs_url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html"
+    tree = etree.parse(urllib2.urlopen(ebs_url), etree.HTMLParser())
+    table = tree.xpath('//table')[3]
+    rows = table.xpath('tbody/tr')
+    by_type = {i.instance_type: i for i in instances}
+
+    for row in rows:
+        cols = row.xpath('td')
+        instance_type = totext(cols[0]).split(' ')[0]
+        ebs_throughput = int(totext(cols[1]).strip().replace(',', ''))
+        ebs_iops = int(totext(cols[2]).strip().replace(',', ''))
+        if instance_type not in by_type:
+            print "Unknown instance type: " + instance_type
+            continue
+        by_type[instance_type].ebs_throughput = ebs_throughput
+        by_type[instance_type].ebs_iops = ebs_iops
+
+
+
 def add_linux_ami_info(instances):
     """Add information about which virtualization options are supported.
 
@@ -287,6 +312,8 @@ def scrape(data_file):
     add_pricing_info(all_instances)
     print "Parsing ENI info..."
     add_eni_info(all_instances)
+    print "Parsing EBS info..."
+    add_ebs_info(all_instances)
     print "Parsing Linux AMI info..."
     add_linux_ami_info(all_instances)
     with open(data_file, 'w') as f:
