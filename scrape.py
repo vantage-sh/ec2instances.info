@@ -14,11 +14,13 @@ class Instance(object):
     def to_dict(self):
         d = dict(family=self.family,
                  instance_type=self.instance_type,
+                 instance_type_sort=self.get_instance_type_sort(),
                  arch=self.arch,
                  vCPU=self.vCPU,
                  ECU=self.ECU,
                  memory=self.memory,
                  ebs_optimized=self.ebs_optimized,
+                 ebs_throughput=self.ebs_throughput,
                  network_performance=self.network_performance,
                  enhanced_networking=self.enhanced_networking,
                  pricing=self.pricing,
@@ -33,6 +35,35 @@ class Instance(object):
                                 size=self.drive_size)
         return d
 
+    APINAME_FAMILY_SORT = [
+        't1', 't2',
+        'm1', 'm2', 'm3',
+        'c1', 'c3', 'c4',
+        'r3',
+        'cc2',
+        'cg1',
+        'cr1',
+        'g2',
+        'hi1',
+        'hs1',
+        'i2',
+    ]
+
+    APINAME_SIZE_SORT = [
+        'micro',
+        'small',
+        'medium',
+        'large',
+        'xlarge',
+        '2xlarge',
+        '4xlarge',
+        '8xlarge',
+    ]
+
+    def get_instance_type_sort(self):
+        apiname_fam, apiname_sz = self.instance_type.split(".")
+        return "{}.{}".format(self.APINAME_FAMILY_SORT.index(apiname_fam),
+                              self.APINAME_SIZE_SORT.index(apiname_sz))
 
 def totext(elt):
     s = etree.tostring(elt, method='text', encoding='unicode').strip()
@@ -278,6 +309,26 @@ def add_linux_ami_info(instances):
             if i_family_id == family_id:
                 i.linux_virtualization_types = supported_types
 
+def add_ebs_throughput(instances):
+    ebs_url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html"
+    tree = etree.parse(urllib2.urlopen(ebs_url), etree.HTMLParser())
+    table = tree.xpath('//div[@class="informaltable"]/table')[0]
+    rows = table.xpath('.//tr[./td]')
+    by_type = {i.instance_type: i for i in instances}
+
+    seen_types = set()
+    for r in rows:
+        instance_type = etree.tostring(r[0], method='text').split()[0].strip()
+        ebs_throughput = int(etree.tostring(r[1], method='text').strip().replace(",", ""))
+        if instance_type not in by_type:
+            print "Unknown instance type: " + instance_type
+            continue
+        by_type[instance_type].ebs_throughput = ebs_throughput
+        seen_types.add(instance_type)
+    for each in set(by_type).difference(seen_types):
+        by_type[each].ebs_throughput = 0
+
+
 
 def scrape(data_file):
     """Scrape AWS to get instance data"""
@@ -289,6 +340,8 @@ def scrape(data_file):
     add_eni_info(all_instances)
     print "Parsing Linux AMI info..."
     add_linux_ami_info(all_instances)
+    print "Parsing EBS throughput..."
+    add_ebs_throughput(all_instances)
     with open(data_file, 'w') as f:
         json.dump([i.to_dict() for i in all_instances],
                   f,
