@@ -100,6 +100,8 @@
           <th class="storage">Storage</th>
           <th class="architecture">Arch</th>
           <th class="ioperf">I/O Performance</th>
+          <th class="ebs-throughput">EBS Optimized Throughput (Mbps)</th>
+          <th class="ebs-iops">Max EBS Optimized 16K IOPS</th>
           <th class="maxips">
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
@@ -156,9 +158,16 @@
           <td class="ioperf">
             <span sort="${inst['network_sort']}">
               ${inst['network_performance']}
-              % if inst['ebs_optimized']:
-               / <abbr title="EBS-Optimized available">${500 if inst['network_performance'] == 'Moderate' else 1000} Mbps</abbr>
-              % endif
+            </span>
+          </td>
+          <td class="ebs-throughput">
+            <span sort="${inst['ebs_throughput']}">
+              ${inst['ebs_throughput']}
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="${inst['ebs_iops']}">
+              ${inst['ebs_iops']}
             </span>
           </td>
           <td class="maxips">
