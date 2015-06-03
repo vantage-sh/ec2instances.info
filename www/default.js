@@ -13,11 +13,11 @@ function init_data_table() {
     },
     "aoColumnDefs": [
       {
-        "aTargets": ["memory", "computeunits", "cores", "coreunits", "storage", "ebs-throughput", "ebs-iops", "networkperf"],
+        "aTargets": ["memory", "computeunits", "cores", "coreunits", "storage", "ebs-throughput", "ebs-iops", "networkperf", "max_bandwidth"],
         "sType": "span-sort"
       },
       {
-        "aTargets": ["ecu-per-core", "enhanced-networking", "maxips", "linux-virtualization", "cost-mswinSQLWeb", "cost-mswinSQL", "ebs-throughput", "ebs-iops"],
+        "aTargets": ["ecu-per-core", "enhanced-networking", "maxips", "linux-virtualization", "cost-mswinSQLWeb", "cost-mswinSQL", "ebs-throughput", "ebs-iops", "max_bandwidth"],
         "bVisible": false
       }
     ],

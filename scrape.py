@@ -13,6 +13,7 @@ class Instance(object):
         self.linux_virtualization_types = []
         self.ebs_throughput = 0
         self.ebs_iops = 0
+        self.max_bandwidth = 0
 
     def to_dict(self):
         d = dict(family=self.family,
@@ -24,6 +25,7 @@ class Instance(object):
                  ebs_optimized=self.ebs_optimized,
                  ebs_throughput=self.ebs_throughput,
                  ebs_iops=self.ebs_iops,
+                 max_bandwidth=self.max_bandwidth,
                  network_performance=self.network_performance,
                  enhanced_networking=self.enhanced_networking,
                  pricing=self.pricing,
@@ -259,12 +261,13 @@ def add_ebs_info(instances):
         instance_type = totext(cols[0]).split(' ')[0]
         ebs_throughput = int(totext(cols[1]).strip().replace(',', ''))
         ebs_iops = int(totext(cols[2]).strip().replace(',', ''))
+        max_bandwidth = float(totext(cols[3]).strip().replace(',', ''))
         if instance_type not in by_type:
             print "Unknown instance type: " + instance_type
             continue
         by_type[instance_type].ebs_throughput = ebs_throughput
         by_type[instance_type].ebs_iops = ebs_iops
-
+        by_type[instance_type].max_bandwidth = max_bandwidth
 
 
 def add_linux_ami_info(instances):

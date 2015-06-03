@@ -100,6 +100,7 @@
           <th class="storage">Storage</th>
           <th class="architecture">Arch</th>
           <th class="networkperf">Network Performance</th>
+          <th class="max_bandwidth">Max Bandwidth (MB/s)</th>
           <th class="ebs-throughput">EBS Optimized Throughput (Mbps)</th>
           <th class="ebs-iops">Max EBS Optimized 16K IOPS</th>
           <th class="maxips">
@@ -159,6 +160,15 @@
             <span sort="${inst['network_sort']}">
               ${inst['network_performance']}
             </span>
+          </td>
+          <td class="max_bandwidth">
+            % if not inst['max_bandwidth']:
+            <span sort="0">N/A</span>
+            % else:
+            <span sort="${inst['max_bandwidth']}">
+              ${inst['max_bandwidth']}
+            </span>
+            % endif
           </td>
           <td class="ebs-throughput">
             <span sort="${inst['ebs_throughput']}">
