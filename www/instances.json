@@ -3,18 +3,10 @@
     "family": "General Purpose",
     "enhanced_networking": false,
     "vCPU": 1,
-    "storage": {
-      "ssd": false,
-      "devices": 1,
-      "size": 160
-    },
     "generation": "previous",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "Low",
     "ebs_throughput": 0,
-    "instance_type": "m1.small",
-    "ECU": 1.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.139",
@@ -75,31 +67,32 @@
       "ips_per_eni": 4,
       "max_enis": 2
     },
-    "memory": 1.7,
     "arch": [
       "i386",
       "x86_64"
     ],
     "linux_virtualization_types": [
       "PV"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": false,
+      "devices": 1,
+      "size": 160
+    },
+    "max_bandwidth": 0,
+    "instance_type": "m1.small",
+    "ECU": 1.0,
+    "memory": 1.7
   },
   {
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 1,
-    "storage": {
-      "ssd": false,
-      "devices": 1,
-      "size": 410
-    },
     "generation": "previous",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "Moderate",
     "ebs_throughput": 0,
-    "instance_type": "m1.medium",
-    "ECU": 2.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.237",
@@ -160,31 +153,32 @@
       "ips_per_eni": 6,
       "max_enis": 2
     },
-    "memory": 3.75,
     "arch": [
       "i386",
       "x86_64"
     ],
     "linux_virtualization_types": [
       "PV"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": false,
+      "devices": 1,
+      "size": 410
+    },
+    "max_bandwidth": 0,
+    "instance_type": "m1.medium",
+    "ECU": 2.0,
+    "memory": 3.75
   },
   {
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 2,
-    "storage": {
-      "ssd": false,
-      "devices": 2,
-      "size": 420
-    },
     "generation": "previous",
-    "ebs_optimized": true,
     "ebs_iops": 4000,
     "network_performance": "Moderate",
     "ebs_throughput": 500,
-    "instance_type": "m1.large",
-    "ECU": 4.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.435",
@@ -245,30 +239,31 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
-    "memory": 7.5,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "PV"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 2,
+      "size": 420
+    },
+    "max_bandwidth": 62.5,
+    "instance_type": "m1.large",
+    "ECU": 4.0,
+    "memory": 7.5
   },
   {
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 4,
-    "storage": {
-      "ssd": false,
-      "devices": 4,
-      "size": 420
-    },
     "generation": "previous",
-    "ebs_optimized": true,
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
-    "instance_type": "m1.xlarge",
-    "ECU": 8.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.830",
@@ -329,30 +324,31 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
-    "memory": 15.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "PV"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 4,
+      "size": 420
+    },
+    "max_bandwidth": 125.0,
+    "instance_type": "m1.xlarge",
+    "ECU": 8.0,
+    "memory": 15.0
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": false,
     "vCPU": 2,
-    "storage": {
-      "ssd": false,
-      "devices": 1,
-      "size": 350
-    },
     "generation": "previous",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "Moderate",
     "ebs_throughput": 0,
-    "instance_type": "c1.medium",
-    "ECU": 5.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.310",
@@ -412,31 +408,32 @@
       "ips_per_eni": 6,
       "max_enis": 2
     },
-    "memory": 1.7,
     "arch": [
       "i386",
       "x86_64"
     ],
     "linux_virtualization_types": [
       "PV"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": false,
+      "devices": 1,
+      "size": 350
+    },
+    "max_bandwidth": 0,
+    "instance_type": "c1.medium",
+    "ECU": 5.0,
+    "memory": 1.7
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": false,
     "vCPU": 8,
-    "storage": {
-      "ssd": false,
-      "devices": 4,
-      "size": 420
-    },
     "generation": "previous",
-    "ebs_optimized": true,
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
-    "instance_type": "c1.xlarge",
-    "ECU": 20.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "1.160",
@@ -497,30 +494,31 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
-    "memory": 7.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "PV"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 4,
+      "size": 420
+    },
+    "max_bandwidth": 125.0,
+    "instance_type": "c1.xlarge",
+    "ECU": 20.0,
+    "memory": 7.0
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": false,
     "vCPU": 32,
-    "storage": {
-      "ssd": false,
-      "devices": 4,
-      "size": 840
-    },
     "generation": "previous",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
-    "instance_type": "cc2.8xlarge",
-    "ECU": 88.0,
     "pricing": {
       "us-west-2": {
         "mswinSQLWeb": "2.775",
@@ -557,30 +555,31 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 60.5,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": false,
+      "devices": 4,
+      "size": 840
+    },
+    "max_bandwidth": 0,
+    "instance_type": "cc2.8xlarge",
+    "ECU": 88.0,
+    "memory": 60.5
   },
   {
     "family": "GPU instances",
     "enhanced_networking": false,
     "vCPU": 16,
-    "storage": {
-      "ssd": false,
-      "devices": 2,
-      "size": 840
-    },
     "generation": "previous",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
-    "instance_type": "cg1.4xlarge",
-    "ECU": 33.5,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "2.703",
@@ -599,28 +598,29 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 22.5,
     "arch": [
       "x86_64"
     ],
-    "linux_virtualization_types": []
+    "linux_virtualization_types": [],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": false,
+      "devices": 2,
+      "size": 840
+    },
+    "max_bandwidth": 0,
+    "instance_type": "cg1.4xlarge",
+    "ECU": 33.5,
+    "memory": 22.5
   },
   {
     "family": "Memory optimized",
     "enhanced_networking": false,
     "vCPU": 2,
-    "storage": {
-      "ssd": false,
-      "devices": 1,
-      "size": 420
-    },
     "generation": "previous",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "Moderate",
     "ebs_throughput": 0,
-    "instance_type": "m2.xlarge",
-    "ECU": 6.5,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.445",
@@ -681,30 +681,31 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
-    "memory": 17.1,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "PV"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": false,
+      "devices": 1,
+      "size": 420
+    },
+    "max_bandwidth": 0,
+    "instance_type": "m2.xlarge",
+    "ECU": 6.5,
+    "memory": 17.1
   },
   {
     "family": "Memory optimized",
     "enhanced_networking": false,
     "vCPU": 4,
-    "storage": {
-      "ssd": false,
-      "devices": 1,
-      "size": 850
-    },
     "generation": "previous",
-    "ebs_optimized": true,
     "ebs_iops": 4000,
     "network_performance": "Moderate",
     "ebs_throughput": 500,
-    "instance_type": "m2.2xlarge",
-    "ECU": 13.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.850",
@@ -765,30 +766,31 @@
       "ips_per_eni": 30,
       "max_enis": 4
     },
-    "memory": 34.2,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "PV"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 1,
+      "size": 850
+    },
+    "max_bandwidth": 62.5,
+    "instance_type": "m2.2xlarge",
+    "ECU": 13.0,
+    "memory": 34.2
   },
   {
     "family": "Memory optimized",
     "enhanced_networking": false,
     "vCPU": 8,
-    "storage": {
-      "ssd": false,
-      "devices": 2,
-      "size": 840
-    },
     "generation": "previous",
-    "ebs_optimized": true,
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
-    "instance_type": "m2.4xlarge",
-    "ECU": 26.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "1.700",
@@ -849,30 +851,31 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 68.4,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "PV"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 2,
+      "size": 840
+    },
+    "max_bandwidth": 125.0,
+    "instance_type": "m2.4xlarge",
+    "ECU": 26.0,
+    "memory": 68.4
   },
   {
     "family": "Memory optimized",
     "enhanced_networking": false,
     "vCPU": 32,
-    "storage": {
-      "ssd": true,
-      "devices": 2,
-      "size": 120
-    },
     "generation": "previous",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
-    "instance_type": "cr1.8xlarge",
-    "ECU": 88.0,
     "pricing": {
       "us-west-2": {
         "mswinSQLWeb": "4.044",
@@ -903,30 +906,31 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 244.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 120
+    },
+    "max_bandwidth": 0,
+    "instance_type": "cr1.8xlarge",
+    "ECU": 88.0,
+    "memory": 244.0
   },
   {
     "family": "Storage optimized",
     "enhanced_networking": false,
     "vCPU": 16,
-    "storage": {
-      "ssd": true,
-      "devices": 2,
-      "size": 1024
-    },
     "generation": "previous",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
-    "instance_type": "hi1.4xlarge",
-    "ECU": 35.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "3.660",
@@ -986,31 +990,32 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 60.5,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 1024
+    },
+    "max_bandwidth": 0,
+    "instance_type": "hi1.4xlarge",
+    "ECU": 35.0,
+    "memory": 60.5
   },
   {
     "family": "Storage optimized",
     "enhanced_networking": false,
     "vCPU": 17,
-    "storage": {
-      "ssd": false,
-      "devices": 24,
-      "size": 2000
-    },
     "generation": "previous",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
-    "instance_type": "hs1.8xlarge",
-    "ECU": 35.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "5.144",
@@ -1070,27 +1075,32 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 117.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": false,
+      "devices": 24,
+      "size": 2000
+    },
+    "max_bandwidth": 0,
+    "instance_type": "hs1.8xlarge",
+    "ECU": 35.0,
+    "memory": 117.0
   },
   {
     "family": "Micro",
     "enhanced_networking": false,
     "vCPU": 1,
-    "storage": null,
     "generation": "previous",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "Very Low",
     "ebs_throughput": 0,
-    "instance_type": "t1.micro",
-    "ECU": 0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.070",
@@ -1150,27 +1160,28 @@
       "ips_per_eni": 2,
       "max_enis": 2
     },
-    "memory": 0.613,
     "arch": [
       "i386",
       "x86_64"
     ],
     "linux_virtualization_types": [
       "PV"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": null,
+    "max_bandwidth": 0,
+    "instance_type": "t1.micro",
+    "ECU": 0,
+    "memory": 0.613
   },
   {
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 1,
-    "storage": null,
     "generation": "current",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "Low to Moderate",
     "ebs_throughput": 0,
-    "instance_type": "t2.micro",
-    "ECU": 0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.068",
@@ -1227,27 +1238,28 @@
       "ips_per_eni": 2,
       "max_enis": 2
     },
-    "memory": 1.0,
     "arch": [
       "x86_64",
       "i386"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": null,
+    "max_bandwidth": 0,
+    "instance_type": "t2.micro",
+    "ECU": 0,
+    "memory": 1.0
   },
   {
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 1,
-    "storage": null,
     "generation": "current",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "Low to Moderate",
     "ebs_throughput": 0,
-    "instance_type": "t2.small",
-    "ECU": 0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.136",
@@ -1304,27 +1316,28 @@
       "ips_per_eni": 4,
       "max_enis": 2
     },
-    "memory": 2.0,
     "arch": [
       "x86_64",
       "i386"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": null,
+    "max_bandwidth": 0,
+    "instance_type": "t2.small",
+    "ECU": 0,
+    "memory": 2.0
   },
   {
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 2,
-    "storage": null,
     "generation": "current",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "Low to Moderate",
     "ebs_throughput": 0,
-    "instance_type": "t2.medium",
-    "ECU": 0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.272",
@@ -1381,30 +1394,27 @@
       "ips_per_eni": 6,
       "max_enis": 3
     },
-    "memory": 4.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": null,
+    "max_bandwidth": 0,
+    "instance_type": "t2.medium",
+    "ECU": 0,
+    "memory": 4.0
   },
   {
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 1,
-    "storage": {
-      "ssd": true,
-      "devices": 1,
-      "size": 4
-    },
     "generation": "current",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "Moderate",
     "ebs_throughput": 0,
-    "instance_type": "m3.medium",
-    "ECU": 3.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.187",
@@ -1469,31 +1479,32 @@
       "ips_per_eni": 6,
       "max_enis": 2
     },
-    "memory": 3.75,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 1,
+      "size": 4
+    },
+    "max_bandwidth": 0,
+    "instance_type": "m3.medium",
+    "ECU": 3.0,
+    "memory": 3.75
   },
   {
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 2,
-    "storage": {
-      "ssd": true,
-      "devices": 1,
-      "size": 32
-    },
     "generation": "current",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "Moderate",
     "ebs_throughput": 0,
-    "instance_type": "m3.large",
-    "ECU": 6.5,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.374",
@@ -1560,31 +1571,32 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
-    "memory": 7.5,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 1,
+      "size": 32
+    },
+    "max_bandwidth": 0,
+    "instance_type": "m3.large",
+    "ECU": 6.5,
+    "memory": 7.5
   },
   {
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 4,
-    "storage": {
-      "ssd": true,
-      "devices": 2,
-      "size": 40
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 4000,
     "network_performance": "High",
     "ebs_throughput": 500,
-    "instance_type": "m3.xlarge",
-    "ECU": 13.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.748",
@@ -1651,31 +1663,32 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
-    "memory": 15.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 40
+    },
+    "max_bandwidth": 62.5,
+    "instance_type": "m3.xlarge",
+    "ECU": 13.0,
+    "memory": 15.0
   },
   {
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 8,
-    "storage": {
-      "ssd": true,
-      "devices": 2,
-      "size": 80
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
-    "instance_type": "m3.2xlarge",
-    "ECU": 26.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "1.496",
@@ -1742,27 +1755,32 @@
       "ips_per_eni": 30,
       "max_enis": 4
     },
-    "memory": 30.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 80
+    },
+    "max_bandwidth": 125.0,
+    "instance_type": "m3.2xlarge",
+    "ECU": 26.0,
+    "memory": 30.0
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 2,
-    "storage": null,
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 4000,
     "network_performance": "Moderate",
     "ebs_throughput": 500,
-    "instance_type": "c4.large",
-    "ECU": 8.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.424",
@@ -1817,26 +1835,27 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
-    "memory": 3.75,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": null,
+    "max_bandwidth": 62.5,
+    "instance_type": "c4.large",
+    "ECU": 8.0,
+    "memory": 3.75
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 4,
-    "storage": null,
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 6000,
     "network_performance": "High",
     "ebs_throughput": 750,
-    "instance_type": "c4.xlarge",
-    "ECU": 16.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.799",
@@ -1891,26 +1910,27 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
-    "memory": 7.5,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": null,
+    "max_bandwidth": 93.75,
+    "instance_type": "c4.xlarge",
+    "ECU": 16.0,
+    "memory": 7.5
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 8,
-    "storage": null,
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
-    "instance_type": "c4.2xlarge",
-    "ECU": 31.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "1.661",
@@ -1965,26 +1985,27 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
-    "memory": 15.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": null,
+    "max_bandwidth": 125.0,
+    "instance_type": "c4.2xlarge",
+    "ECU": 31.0,
+    "memory": 15.0
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 16,
-    "storage": null,
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 16000,
     "network_performance": "High",
     "ebs_throughput": 2000,
-    "instance_type": "c4.4xlarge",
-    "ECU": 62.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "2.279",
@@ -2039,26 +2060,27 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 30.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": null,
+    "max_bandwidth": 250.0,
+    "instance_type": "c4.4xlarge",
+    "ECU": 62.0,
+    "memory": 30.0
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 36,
-    "storage": null,
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 32000,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 4000,
-    "instance_type": "c4.8xlarge",
-    "ECU": 132.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "4.366",
@@ -2113,30 +2135,27 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 60.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": null,
+    "max_bandwidth": 500.0,
+    "instance_type": "c4.8xlarge",
+    "ECU": 132.0,
+    "memory": 60.0
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 2,
-    "storage": {
-      "ssd": true,
-      "devices": 2,
-      "size": 16
-    },
     "generation": "current",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "Moderate",
     "ebs_throughput": 0,
-    "instance_type": "c3.large",
-    "ECU": 7.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.271",
@@ -2200,31 +2219,32 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
-    "memory": 3.75,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 16
+    },
+    "max_bandwidth": 0,
+    "instance_type": "c3.large",
+    "ECU": 7.0,
+    "memory": 3.75
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 4,
-    "storage": {
-      "ssd": true,
-      "devices": 2,
-      "size": 40
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 4000,
     "network_performance": "Moderate",
     "ebs_throughput": 500,
-    "instance_type": "c3.xlarge",
-    "ECU": 14.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.542",
@@ -2291,31 +2311,32 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
-    "memory": 7.5,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 40
+    },
+    "max_bandwidth": 62.5,
+    "instance_type": "c3.xlarge",
+    "ECU": 14.0,
+    "memory": 7.5
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 8,
-    "storage": {
-      "ssd": true,
-      "devices": 2,
-      "size": 80
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
-    "instance_type": "c3.2xlarge",
-    "ECU": 28.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "1.083",
@@ -2382,31 +2403,32 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
-    "memory": 15.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 80
+    },
+    "max_bandwidth": 125.0,
+    "instance_type": "c3.2xlarge",
+    "ECU": 28.0,
+    "memory": 15.0
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 16,
-    "storage": {
-      "ssd": true,
-      "devices": 2,
-      "size": 160
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 16000,
     "network_performance": "High",
     "ebs_throughput": 2000,
-    "instance_type": "c3.4xlarge",
-    "ECU": 55.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "2.166",
@@ -2473,31 +2495,32 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 30.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 160
+    },
+    "max_bandwidth": 250.0,
+    "instance_type": "c3.4xlarge",
+    "ECU": 55.0,
+    "memory": 30.0
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 32,
-    "storage": {
-      "ssd": true,
-      "devices": 2,
-      "size": 320
-    },
     "generation": "current",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
-    "instance_type": "c3.8xlarge",
-    "ECU": 108.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "4.332",
@@ -2564,31 +2587,32 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 60.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM",
       "PV"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 320
+    },
+    "max_bandwidth": 0,
+    "instance_type": "c3.8xlarge",
+    "ECU": 108.0,
+    "memory": 60.0
   },
   {
     "family": "GPU instances",
     "enhanced_networking": false,
     "vCPU": 8,
-    "storage": {
-      "ssd": true,
-      "devices": 1,
-      "size": 60
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
-    "instance_type": "g2.2xlarge",
-    "ECU": 26.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.957",
@@ -2627,7 +2651,10 @@
         "linux": "0.702"
       },
       "eu-central-1": {
-        "linux": null
+        "mswinSQLWeb": "N/A",
+        "mswinSQL": "N/A",
+        "mswin": "0.906",
+        "linux": "0.772"
       },
       "eu-west-1": {
         "mswinSQLWeb": "0.957",
@@ -2640,30 +2667,96 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
-    "memory": 15.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM (Graphics)"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 1,
+      "size": 60
+    },
+    "max_bandwidth": 125.0,
+    "instance_type": "g2.2xlarge",
+    "ECU": 26.0,
+    "memory": 15.0
+  },
+  {
+    "family": "GPU instances",
+    "enhanced_networking": false,
+    "vCPU": 32,
+    "generation": "current",
+    "ebs_iops": 0,
+    "network_performance": "10 Gigabit",
+    "ebs_throughput": 0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": "2.878",
+        "linux": "2.600"
+      },
+      "ap-northeast-1": {
+        "mswin": "3.870",
+        "linux": "3.592"
+      },
+      "ap-southeast-1": {
+        "mswin": "4.278",
+        "linux": "4.000"
+      },
+      "ap-southeast-2": {
+        "mswin": "3.870",
+        "linux": "3.592"
+      },
+      "us-west-2": {
+        "mswin": "2.878",
+        "linux": "2.600"
+      },
+      "us-west-1": {
+        "mswin": "3.086",
+        "linux": "2.808"
+      },
+      "eu-central-1": {
+        "mswinSQLWeb": "N/A",
+        "mswinSQL": "N/A",
+        "mswin": "3.366",
+        "linux": "3.088"
+      },
+      "eu-west-1": {
+        "mswin": "3.086",
+        "linux": "2.808"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "arch": [
+      "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM (Graphics)"
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 120
+    },
+    "max_bandwidth": 0,
+    "instance_type": "g2.8xlarge",
+    "ECU": 104.0,
+    "memory": 60.0
   },
   {
     "family": "Memory optimized",
     "enhanced_networking": true,
     "vCPU": 2,
-    "storage": {
-      "ssd": true,
-      "devices": 1,
-      "size": 32
-    },
     "generation": "current",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "Moderate",
     "ebs_throughput": 0,
-    "instance_type": "r3.large",
-    "ECU": 6.5,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.395",
@@ -2724,30 +2817,31 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
-    "memory": 15.25,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 1,
+      "size": 32
+    },
+    "max_bandwidth": 0,
+    "instance_type": "r3.large",
+    "ECU": 6.5,
+    "memory": 15.25
   },
   {
     "family": "Memory optimized",
     "enhanced_networking": true,
     "vCPU": 4,
-    "storage": {
-      "ssd": true,
-      "devices": 1,
-      "size": 80
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 4000,
     "network_performance": "Moderate",
     "ebs_throughput": 500,
-    "instance_type": "r3.xlarge",
-    "ECU": 13.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.755",
@@ -2808,30 +2902,31 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
-    "memory": 30.5,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 1,
+      "size": 80
+    },
+    "max_bandwidth": 62.5,
+    "instance_type": "r3.xlarge",
+    "ECU": 13.0,
+    "memory": 30.5
   },
   {
     "family": "Memory optimized",
     "enhanced_networking": true,
     "vCPU": 8,
-    "storage": {
-      "ssd": true,
-      "devices": 1,
-      "size": 160
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
-    "instance_type": "r3.2xlarge",
-    "ECU": 26.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "1.555",
@@ -2892,30 +2987,31 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
-    "memory": 61.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 1,
+      "size": 160
+    },
+    "max_bandwidth": 125.0,
+    "instance_type": "r3.2xlarge",
+    "ECU": 26.0,
+    "memory": 61.0
   },
   {
     "family": "Memory optimized",
     "enhanced_networking": true,
     "vCPU": 16,
-    "storage": {
-      "ssd": true,
-      "devices": 1,
-      "size": 320
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 16000,
     "network_performance": "High",
     "ebs_throughput": 2000,
-    "instance_type": "r3.4xlarge",
-    "ECU": 52.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "2.365",
@@ -2976,30 +3072,31 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 122.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 1,
+      "size": 320
+    },
+    "max_bandwidth": 250.0,
+    "instance_type": "r3.4xlarge",
+    "ECU": 52.0,
+    "memory": 122.0
   },
   {
     "family": "Memory optimized",
     "enhanced_networking": true,
     "vCPU": 32,
-    "storage": {
-      "ssd": true,
-      "devices": 2,
-      "size": 320
-    },
     "generation": "current",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
-    "instance_type": "r3.8xlarge",
-    "ECU": 104.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "3.995",
@@ -3060,30 +3157,31 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 244.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 320
+    },
+    "max_bandwidth": 0,
+    "instance_type": "r3.8xlarge",
+    "ECU": 104.0,
+    "memory": 244.0
   },
   {
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 4,
-    "storage": {
-      "ssd": true,
-      "devices": 1,
-      "size": 800
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 4000,
     "network_performance": "Moderate",
     "ebs_throughput": 500,
-    "instance_type": "i2.xlarge",
-    "ECU": 14.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.993",
@@ -3144,30 +3242,31 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
-    "memory": 30.5,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 1,
+      "size": 800
+    },
+    "max_bandwidth": 62.5,
+    "instance_type": "i2.xlarge",
+    "ECU": 14.0,
+    "memory": 30.5
   },
   {
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 8,
-    "storage": {
-      "ssd": true,
-      "devices": 2,
-      "size": 800
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
-    "instance_type": "i2.2xlarge",
-    "ECU": 27.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "1.986",
@@ -3228,30 +3327,31 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
-    "memory": 61.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 800
+    },
+    "max_bandwidth": 125.0,
+    "instance_type": "i2.2xlarge",
+    "ECU": 27.0,
+    "memory": 61.0
   },
   {
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 16,
-    "storage": {
-      "ssd": true,
-      "devices": 4,
-      "size": 800
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 16000,
     "network_performance": "High",
     "ebs_throughput": 2000,
-    "instance_type": "i2.4xlarge",
-    "ECU": 53.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "3.971",
@@ -3312,30 +3412,31 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 122.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 4,
+      "size": 800
+    },
+    "max_bandwidth": 250.0,
+    "instance_type": "i2.4xlarge",
+    "ECU": 53.0,
+    "memory": 122.0
   },
   {
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 32,
-    "storage": {
-      "ssd": true,
-      "devices": 8,
-      "size": 800
-    },
     "generation": "current",
-    "ebs_optimized": false,
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
-    "instance_type": "i2.8xlarge",
-    "ECU": 104.0,
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "7.942",
@@ -3396,30 +3497,31 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 244.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": false,
+    "storage": {
+      "ssd": true,
+      "devices": 8,
+      "size": 800
+    },
+    "max_bandwidth": 0,
+    "instance_type": "i2.8xlarge",
+    "ECU": 104.0,
+    "memory": 244.0
   },
   {
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 4,
-    "storage": {
-      "ssd": false,
-      "devices": 3,
-      "size": 2000
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 6000,
     "network_performance": "Moderate",
     "ebs_throughput": 750,
-    "instance_type": "d2.xlarge",
-    "ECU": 14.0,
     "pricing": {
       "us-east-1": {
         "mswin": "0.821",
@@ -3454,30 +3556,31 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
-    "memory": 30.5,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 3,
+      "size": 2000
+    },
+    "max_bandwidth": 93.75,
+    "instance_type": "d2.xlarge",
+    "ECU": 14.0,
+    "memory": 30.5
   },
   {
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 8,
-    "storage": {
-      "ssd": false,
-      "devices": 6,
-      "size": 2000
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
-    "instance_type": "d2.2xlarge",
-    "ECU": 28.0,
     "pricing": {
       "us-east-1": {
         "mswin": "1.601",
@@ -3512,30 +3615,31 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
-    "memory": 61.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 6,
+      "size": 2000
+    },
+    "max_bandwidth": 125.0,
+    "instance_type": "d2.2xlarge",
+    "ECU": 28.0,
+    "memory": 61.0
   },
   {
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 16,
-    "storage": {
-      "ssd": false,
-      "devices": 12,
-      "size": 2000
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 16000,
     "network_performance": "High",
     "ebs_throughput": 2000,
-    "instance_type": "d2.4xlarge",
-    "ECU": 56.0,
     "pricing": {
       "us-east-1": {
         "mswin": "3.062",
@@ -3570,30 +3674,31 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 122.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 12,
+      "size": 2000
+    },
+    "max_bandwidth": 250.0,
+    "instance_type": "d2.4xlarge",
+    "ECU": 56.0,
+    "memory": 122.0
   },
   {
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 36,
-    "storage": {
-      "ssd": false,
-      "devices": 24,
-      "size": 2000
-    },
     "generation": "current",
-    "ebs_optimized": true,
     "ebs_iops": 32000,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 4000,
-    "instance_type": "d2.8xlarge",
-    "ECU": 116.0,
     "pricing": {
       "us-east-1": {
         "mswin": "6.198",
@@ -3628,12 +3733,21 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
-    "memory": 244.0,
     "arch": [
       "x86_64"
     ],
     "linux_virtualization_types": [
       "HVM"
-    ]
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": false,
+      "devices": 24,
+      "size": 2000
+    },
+    "max_bandwidth": 500.0,
+    "instance_type": "d2.8xlarge",
+    "ECU": 116.0,
+    "memory": 244.0
   }
 ]
