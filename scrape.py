@@ -295,10 +295,6 @@ def add_linux_ami_info(instances):
             supported_types.append('HVM')
         if totext(r[3]) == checkmark_char:
             supported_types.append('PV')
-        # G2 instances are special. Maybe we want a separate flag here in the
-        # future? Let's see how AWS evolves...
-        if totext(r[5]) == checkmark_char:
-            supported_types.append('HVM (Graphics)')
 
         # Apply types for this instance family to all matching instances
         for i in instances:

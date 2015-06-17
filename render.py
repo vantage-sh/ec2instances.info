@@ -63,7 +63,7 @@ def network_sort(inst):
 
 def add_cpu_detail(i):
     # special burstable instances
-    if i['instance_type'] in ('t1.micro', 't2.micro', 't2.small', 't2.medium'):
+    if i['instance_type'] in ('t1.micro', 't2.micro', 't2.small', 't2.medium', 't2.large'):
         i['burstable'] = True
         i['ECU'] = i['vCPU']  # a reasonable ECU to display
     i['ECU_per_core'] = i['ECU'] / i['vCPU']
