@@ -71,9 +71,7 @@
       "i386",
       "x86_64"
     ],
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -157,9 +155,7 @@
       "i386",
       "x86_64"
     ],
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -242,9 +238,7 @@
     "arch": [
       "x86_64"
     ],
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -327,9 +321,7 @@
     "arch": [
       "x86_64"
     ],
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -352,37 +344,31 @@
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.310",
-        "mswinSQL": "N/A",
         "mswin": "0.210",
         "linux": "0.130"
       },
       "ap-northeast-1": {
         "mswinSQLWeb": "0.310",
-        "mswinSQL": "N/A",
         "mswin": "0.258",
         "linux": "0.158"
       },
       "sa-east-1": {
         "mswinSQLWeb": "0.369",
-        "mswinSQL": "N/A",
         "mswin": "0.259",
         "linux": "0.179"
       },
       "ap-southeast-1": {
         "mswinSQLWeb": "0.310",
-        "mswinSQL": "N/A",
         "mswin": "0.266",
         "linux": "0.164"
       },
       "ap-southeast-2": {
         "mswinSQLWeb": "0.310",
-        "mswinSQL": "N/A",
         "mswin": "0.266",
         "linux": "0.164"
       },
       "us-west-2": {
         "mswinSQLWeb": "0.310",
-        "mswinSQL": "N/A",
         "mswin": "0.210",
         "linux": "0.130"
       },
@@ -393,13 +379,11 @@
       },
       "us-west-1": {
         "mswinSQLWeb": "0.329",
-        "mswinSQL": "N/A",
         "mswin": "0.228",
         "linux": "0.148"
       },
       "eu-west-1": {
         "mswinSQLWeb": "0.310",
-        "mswinSQL": "N/A",
         "mswin": "0.210",
         "linux": "0.148"
       }
@@ -412,9 +396,7 @@
       "i386",
       "x86_64"
     ],
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -497,9 +479,7 @@
     "arch": [
       "x86_64"
     ],
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -558,9 +538,7 @@
     "arch": [
       "x86_64"
     ],
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -684,9 +662,7 @@
     "arch": [
       "x86_64"
     ],
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -769,9 +745,7 @@
     "arch": [
       "x86_64"
     ],
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -854,9 +828,7 @@
     "arch": [
       "x86_64"
     ],
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -909,9 +881,7 @@
     "arch": [
       "x86_64"
     ],
-    "linux_virtualization_types": [
-      "HVM"
-    ],
+    "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -932,6 +902,12 @@
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
     "pricing": {
+      "us-west-2": {
+        "mswinSQLWeb": "3.660",
+        "mswinSQL": "4.607",
+        "mswin": "3.580",
+        "linux": "3.100"
+      },
       "us-east-1": {
         "mswinSQLWeb": "3.660",
         "mswinSQL": "4.607",
@@ -943,41 +919,6 @@
         "mswinSQL": "6.829",
         "mswin": "3.686",
         "linux": "3.276"
-      },
-      "sa-east-1": {
-        "mswinSQLWeb": "N/A",
-        "mswinSQL": "N/A",
-        "mswin": "N/A",
-        "linux": "N/A"
-      },
-      "ap-southeast-1": {
-        "mswinSQLWeb": "N/A",
-        "mswinSQL": "N/A",
-        "mswin": "N/A",
-        "linux": "N/A"
-      },
-      "ap-southeast-2": {
-        "mswinSQLWeb": "N/A",
-        "mswinSQL": "N/A",
-        "mswin": "N/A",
-        "linux": "N/A"
-      },
-      "us-west-2": {
-        "mswinSQLWeb": "3.660",
-        "mswinSQL": "4.607",
-        "mswin": "3.580",
-        "linux": "3.100"
-      },
-      "us-gov-west-1": {
-        "mswinSQLWeb": "N/A",
-        "mswin": "N/A",
-        "linux": "N/A"
-      },
-      "us-west-1": {
-        "mswinSQLWeb": "N/A",
-        "mswinSQL": "N/A",
-        "mswin": "N/A",
-        "linux": "N/A"
       },
       "eu-west-1": {
         "mswinSQLWeb": "3.660",
@@ -993,10 +934,7 @@
     "arch": [
       "x86_64"
     ],
-    "linux_virtualization_types": [
-      "HVM",
-      "PV"
-    ],
+    "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -1029,12 +967,6 @@
         "mswin": "5.714",
         "linux": "5.400"
       },
-      "sa-east-1": {
-        "mswinSQLWeb": "N/A",
-        "mswinSQL": "N/A",
-        "mswin": "N/A",
-        "linux": "N/A"
-      },
       "ap-southeast-1": {
         "mswinSQLWeb": "6.114",
         "mswinSQL": "9.320",
@@ -1055,14 +987,9 @@
       },
       "us-gov-west-1": {
         "mswinSQLWeb": "6.339",
+        "mswinSQL": "9.270",
         "mswin": "6.126",
         "linux": "5.520"
-      },
-      "us-west-1": {
-        "mswinSQLWeb": "N/A",
-        "mswinSQL": "N/A",
-        "mswin": "N/A",
-        "linux": "N/A"
       },
       "eu-west-1": {
         "mswinSQLWeb": "5.144",
@@ -1078,10 +1005,7 @@
     "arch": [
       "x86_64"
     ],
-    "linux_virtualization_types": [
-      "HVM",
-      "PV"
-    ],
+    "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -1104,37 +1028,31 @@
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": "0.070",
-        "mswinSQL": "N/A",
         "mswin": "0.020",
         "linux": "0.020"
       },
       "ap-northeast-1": {
         "mswinSQLWeb": "0.077",
-        "mswinSQL": "N/A",
         "mswin": "0.033",
         "linux": "0.026"
       },
       "sa-east-1": {
         "mswinSQLWeb": "0.077",
-        "mswinSQL": "N/A",
         "mswin": "0.037",
         "linux": "0.027"
       },
       "ap-southeast-1": {
         "mswinSQLWeb": "0.075",
-        "mswinSQL": "N/A",
         "mswin": "0.020",
         "linux": "0.020"
       },
       "ap-southeast-2": {
         "mswinSQLWeb": "0.075",
-        "mswinSQL": "N/A",
         "mswin": "0.020",
         "linux": "0.020"
       },
       "us-west-2": {
         "mswinSQLWeb": "0.070",
-        "mswinSQL": "N/A",
         "mswin": "0.020",
         "linux": "0.020"
       },
@@ -1145,13 +1063,11 @@
       },
       "us-west-1": {
         "mswinSQLWeb": "0.075",
-        "mswinSQL": "N/A",
         "mswin": "0.035",
         "linux": "0.025"
       },
       "eu-west-1": {
         "mswinSQLWeb": "0.075",
-        "mswinSQL": "N/A",
         "mswin": "0.020",
         "linux": "0.020"
       }
@@ -1164,9 +1080,7 @@
       "i386",
       "x86_64"
     ],
-    "linux_virtualization_types": [
-      "PV"
-    ],
+    "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": null,
     "max_bandwidth": 0,
@@ -1406,6 +1320,83 @@
     "instance_type": "t2.medium",
     "ECU": 0,
     "memory": 4.0
+  },
+  {
+    "family": "General purpose",
+    "enhanced_networking": false,
+    "vCPU": 2,
+    "generation": "current",
+    "ebs_iops": 0,
+    "network_performance": "Low to Moderate",
+    "ebs_throughput": 0,
+    "pricing": {
+      "us-east-1": {
+        "mswinSQLWeb": "0.434",
+        "mswin": "0.134",
+        "linux": "0.104"
+      },
+      "ap-northeast-1": {
+        "mswinSQLWeb": "0.490",
+        "mswin": "0.190",
+        "linux": "0.160"
+      },
+      "sa-east-1": {
+        "mswinSQLWeb": "0.546",
+        "mswin": "0.246",
+        "linux": "0.216"
+      },
+      "ap-southeast-1": {
+        "mswinSQLWeb": "0.490",
+        "mswin": "0.190",
+        "linux": "0.160"
+      },
+      "ap-southeast-2": {
+        "mswinSQLWeb": "0.490",
+        "mswin": "0.190",
+        "linux": "0.160"
+      },
+      "us-west-2": {
+        "mswinSQLWeb": "0.434",
+        "mswin": "0.134",
+        "linux": "0.104"
+      },
+      "us-gov-west-1": {
+        "mswinSQLWeb": "0.454",
+        "mswin": "0.154",
+        "linux": "0.124"
+      },
+      "us-west-1": {
+        "mswinSQLWeb": "0.466",
+        "mswin": "0.166",
+        "linux": "0.136"
+      },
+      "eu-central-1": {
+        "mswinSQLWeb": "0.450",
+        "mswin": "0.150",
+        "linux": "0.120"
+      },
+      "eu-west-1": {
+        "mswinSQLWeb": "0.442",
+        "mswin": "0.142",
+        "linux": "0.112"
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 12,
+      "max_enis": 3
+    },
+    "arch": [
+      "x86_64"
+    ],
+    "linux_virtualization_types": [
+      "HVM"
+    ],
+    "ebs_optimized": false,
+    "storage": null,
+    "max_bandwidth": 0,
+    "instance_type": "t2.large",
+    "ECU": 0,
+    "memory": 8.0
   },
   {
     "family": "General purpose",
@@ -3044,7 +3035,7 @@
       "x86_64"
     ],
     "linux_virtualization_types": [
-      "HVM (Graphics)"
+      "HVM"
     ],
     "ebs_optimized": true,
     "storage": {
@@ -3107,7 +3098,7 @@
       "x86_64"
     ],
     "linux_virtualization_types": [
-      "HVM (Graphics)"
+      "HVM"
     ],
     "ebs_optimized": false,
     "storage": {
