@@ -52,6 +52,7 @@ $(document).ready(function() {
   init_data_table();
 });
 
+
 function change_cost(duration) {
   // update menu text
   var first = duration.charAt(0).toUpperCase();
@@ -182,8 +183,32 @@ function on_data_table_initialized() {
     }
   }
 
+  // Allow row highlighting by clicking.
   $('#data tbody tr').click(function() {
     $(this).toggleClass('highlight')
+  });
+
+  // Allow row filtering by min-value match.
+  $('[data-action=datafilter]').on('keyup', function() {
+      var all_filters = $('[data-action="datafilter"]');
+      var data_rows = $('#data tr:has(td)');
+
+      data_rows.show();
+
+      all_filters.each(function() {
+          var filter_on = $(this).data('type');
+          var filter_val = parseFloat($(this).val()) || 0;
+
+          var match_fail = data_rows.filter(function() {
+              var row_val;
+              row_val = parseFloat(
+                  $(this).find('td[class~="' + filter_on + '"] span').attr('sort')
+              );
+              return row_val < filter_val;
+          });
+
+          match_fail.hide();
+      });
   });
 
   $('#url-button').click(function() {
