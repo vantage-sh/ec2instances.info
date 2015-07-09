@@ -1,11 +1,33 @@
-var current_cost_duration = 'hourly';
-var current_region = 'us-east-1';
+var has_storage = false;
+
+if(typeof(Storage) !== 'undefined') {
+  has_storage = true;
+}
+
+var current_cost_duration = get_cache('ec2i.info:duration') || 'hourly';
+var current_region = get_cache('ec2i.info:region') || 'us-east-1';
 var data_table = null;
 
 var require = Array();
 require['memory'] = 0;
 require['computeunits'] = 0;
 require['storage'] = 0;
+
+function get_cache(key) {
+  if (has_storage) {
+    var result = localStorage.getItem(key);
+
+    if (result) {
+      return result;
+    }
+  }
+}
+
+function set_cache(key, value) {
+  if(has_storage) {
+    localStorage.setItem(key, value);
+  }
+}
 
 function init_data_table() {
   data_table = $('#data').DataTable({
@@ -94,6 +116,8 @@ function change_cost(duration) {
     }
   });
 
+  set_cache('ec2i.info:duration', duration);
+
   current_cost_duration = duration;
   maybe_update_url();
 }
@@ -111,6 +135,7 @@ function change_region(region) {
     }
   });
   $("#region-dropdown .dropdown-toggle .text").text(region_name);
+  set_cache('ec2i.info:region', region);
   change_cost(current_cost_duration);
 }
 
@@ -246,8 +271,8 @@ function on_data_table_initialized() {
     return false;
   });
 
-  change_region('us-east-1');
-  change_cost('hourly');
+  change_region(current_region);
+  change_cost(current_cost_duration);
 
   $.extend($.fn.dataTableExt.oStdClasses, {
     "sWrapper": "dataTables_wrapper form-inline"
