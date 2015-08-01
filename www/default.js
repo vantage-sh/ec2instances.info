@@ -169,13 +169,18 @@ function url_for_selections() {
 }
 
 function maybe_update_url() {
+
   if (!history.replaceState)
     return
-  var url = url_for_selections();
-  if (document.location == url)
-    return;
+  try {
+    var url = url_for_selections();
+    if (document.location == url)
+      return;
 
-  history.replaceState(null, '', url);
+    history.replaceState(null, '', url);
+  } catch(ex) {
+    // doesn't matter
+  }
 }
 
 var apply_min_values = function() {
@@ -233,16 +238,13 @@ function on_data_table_initialized() {
     }
   }
 
-  // Allow row highlighting by clicking.
-  $('#data tbody tr').click(function() {
-    $(this).toggleClass('highlight')
-  });
+  configureHighlighting();
 
   // Allow row filtering by min-value match.
   $('[data-action=datafilter]').on('keyup', apply_min_values);
 
   $('#url-button').click(function() {
-    $('#share_url').val(url_for_selections());
+    $('#share_url').val(url_for_selections()).select();
     return false;
   });
 
@@ -307,4 +309,39 @@ function get_url_parameters() {
   });
 
   return settings;
+}
+
+function configureHighlighting() {
+  var compareOn = false,
+      $compareBtn = $('.btn-compare'),
+      $rows = $('#data tbody tr');
+
+  // Allow row highlighting by clicking.
+  $rows.click(function() {
+    $(this).toggleClass('highlight');
+
+    if(!compareOn) {
+      $compareBtn.prop('disabled', !$rows.is('.highlight'));
+    }
+  });
+
+  $compareBtn.prop('disabled', true);
+  $compareBtn.text($compareBtn.data('textOff'));
+
+  $compareBtn.click(function() {
+    if(compareOn) {
+      $rows.show();
+      $compareBtn.text($compareBtn.data('textOff'))
+                 .addClass('btn-primary')
+                 .removeClass('btn-success')
+                 .prop('disabled', !$rows.is('.highlight'));
+    } else {
+      $rows.filter(':not(.highlight)').hide();
+      $compareBtn.text($compareBtn.data('textOn'))
+                 .addClass('btn-success')
+                 .removeClass('btn-primary');
+    }
+
+    compareOn = !compareOn;
+  });
 }

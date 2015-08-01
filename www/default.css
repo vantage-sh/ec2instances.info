@@ -7,7 +7,7 @@ body {
 }
 
 #filters {
-  height: 50px;
+  margin-bottom: .5em;
 }
 
 #data {

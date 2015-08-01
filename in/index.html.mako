@@ -33,71 +33,85 @@
     </div>
     -->
 
-    <div class="pull-left" id="filters">
-      <div class="btn-group" id='region-dropdown'>
-        <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
-          <i class="icon-globe icon-white"></i>
-          Region: <span class="text">Region: US East</span>
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="javascript:;" data-region='us-east-1'>US East</a></li>
-          <li><a href="javascript:;" data-region='us-west-1'>US West (Northern California)</a></li>
-          <li><a href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
-          <li><a href="javascript:;" data-region='sa-east-1'>South America</a></li>
-          <li><a href="javascript:;" data-region='eu-west-1'>EU (Ireland)</a></li>
-          <li><a href="javascript:;" data-region='eu-central-1'>EU (Frankfurt)</a></li>
-          <li><a href="javascript:;" data-region='ap-southeast-1'>Asia-Pacific (Singapore)</a></li>
-          <li><a href="javascript:;" data-region='ap-southeast-2'>Asia-Pacific (Sydney)</a></li>
-          <li><a href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
-        </ul>
-      </div>
+    <div class="row" id="filters">
+      <div class="col-sm-12">
+        <div class="btn-group" id='region-dropdown'>
+          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+            <i class="icon-globe icon-white"></i>
+            Region: <span class="text">Region: US East</span>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="javascript:;" data-region='us-east-1'>US East</a></li>
+            <li><a href="javascript:;" data-region='us-west-1'>US West (Northern California)</a></li>
+            <li><a href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
+            <li><a href="javascript:;" data-region='sa-east-1'>South America</a></li>
+            <li><a href="javascript:;" data-region='eu-west-1'>EU (Ireland)</a></li>
+            <li><a href="javascript:;" data-region='eu-central-1'>EU (Frankfurt)</a></li>
+            <li><a href="javascript:;" data-region='ap-southeast-1'>Asia-Pacific (Singapore)</a></li>
+            <li><a href="javascript:;" data-region='ap-southeast-2'>Asia-Pacific (Sydney)</a></li>
+            <li><a href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
+          </ul>
+        </div>
 
-      <div class="btn-group" id="cost-dropdown">
-        <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
-          <i class="icon-shopping-cart icon-white"></i>
-          <span class="text"></span>
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="javascript:;" duration="hourly">Hourly</a></li>
-          <li><a href="javascript:;" duration="daily">Daily</a></li>
-          <li><a href="javascript:;" duration="weekly">Weekly</a></li>
-          <li><a href="javascript:;" duration="monthly">Monthly</a></li>
-          <li><a href="javascript:;" duration="annually">Annually</a></li>
-        </ul>
-      </div>
+        <div class="btn-group" id="cost-dropdown">
+          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+            <i class="icon-shopping-cart icon-white"></i>
+            <span class="text"></span>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="javascript:;" duration="hourly">Hourly</a></li>
+            <li><a href="javascript:;" duration="daily">Daily</a></li>
+            <li><a href="javascript:;" duration="weekly">Weekly</a></li>
+            <li><a href="javascript:;" duration="monthly">Monthly</a></li>
+            <li><a href="javascript:;" duration="annually">Annually</a></li>
+          </ul>
+        </div>
 
-      <div class="btn-group" id="filter-dropdown">
-        <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
-          <i class="icon-filter icon-white"></i>
-          Columns
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <!-- table header elements inserted by js -->
-        </ul>
-      </div>
+        <div class="btn-group" id="filter-dropdown">
+          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+            <i class="icon-filter icon-white"></i>
+            Columns
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <!-- table header elements inserted by js -->
+          </ul>
+        </div>
 
-      <div class="btn-group" id="url-button">
-        <a class="btn btn-primary" href="#">Generate URL</a>
-        <input class="share-url" type="url" id="share_url">
-      </div>
+        <div class="btn-group" id="url-button">
+          <a class="btn btn-primary" href="#">Generate URL</a>
+          <input class="share-url form-control" type="url" id="share_url" style="width: 150px">
+        </div>
 
+        <button class="btn btn-primary btn-compare"
+          data-text-on="End Compare"
+          data-text-off="Compare Selected">
+          Compare Selected
+        </button>
+      </div>
     </div>
-    <div style="clear:both; float:left">
+
+    <div class="pull-left form-inline">
         <strong> Filter:</strong>
         Min Memory (GB): <input data-action="datafilter"
                                 data-type="memory"
-                                size=4 />
+                                size=4
+                                class="form-control"
+                                style="width: 45px" />
 
         Compute Units: <input data-action="datafilter"
                               data-type="computeunits"
-                              size=4 />
+                              size=4
+                              class="form-control"
+                              style="width: 45px" />
 
         Storage (GB): <input data-action="datafilter"
                              data-type="storage"
-                             size=4 />
+                             size=4
+                             class="form-control"
+                             style="width: 45px" />
     </div>
 
     <table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">
