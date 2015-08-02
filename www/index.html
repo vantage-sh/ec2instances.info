@@ -31,71 +31,85 @@
     </div>
     -->
 
-    <div class="pull-left" id="filters">
-      <div class="btn-group" id='region-dropdown'>
-        <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
-          <i class="icon-globe icon-white"></i>
-          Region: <span class="text">Region: US East</span>
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="javascript:;" data-region='us-east-1'>US East</a></li>
-          <li><a href="javascript:;" data-region='us-west-1'>US West (Northern California)</a></li>
-          <li><a href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
-          <li><a href="javascript:;" data-region='sa-east-1'>South America</a></li>
-          <li><a href="javascript:;" data-region='eu-west-1'>EU (Ireland)</a></li>
-          <li><a href="javascript:;" data-region='eu-central-1'>EU (Frankfurt)</a></li>
-          <li><a href="javascript:;" data-region='ap-southeast-1'>Asia-Pacific (Singapore)</a></li>
-          <li><a href="javascript:;" data-region='ap-southeast-2'>Asia-Pacific (Sydney)</a></li>
-          <li><a href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
-        </ul>
-      </div>
+    <div class="row" id="filters">
+      <div class="col-sm-12">
+        <div class="btn-group" id='region-dropdown'>
+          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+            <i class="icon-globe icon-white"></i>
+            Region: <span class="text">Region: US East</span>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="javascript:;" data-region='us-east-1'>US East</a></li>
+            <li><a href="javascript:;" data-region='us-west-1'>US West (Northern California)</a></li>
+            <li><a href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
+            <li><a href="javascript:;" data-region='sa-east-1'>South America</a></li>
+            <li><a href="javascript:;" data-region='eu-west-1'>EU (Ireland)</a></li>
+            <li><a href="javascript:;" data-region='eu-central-1'>EU (Frankfurt)</a></li>
+            <li><a href="javascript:;" data-region='ap-southeast-1'>Asia-Pacific (Singapore)</a></li>
+            <li><a href="javascript:;" data-region='ap-southeast-2'>Asia-Pacific (Sydney)</a></li>
+            <li><a href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
+          </ul>
+        </div>
 
-      <div class="btn-group" id="cost-dropdown">
-        <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
-          <i class="icon-shopping-cart icon-white"></i>
-          <span class="text"></span>
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="javascript:;" duration="hourly">Hourly</a></li>
-          <li><a href="javascript:;" duration="daily">Daily</a></li>
-          <li><a href="javascript:;" duration="weekly">Weekly</a></li>
-          <li><a href="javascript:;" duration="monthly">Monthly</a></li>
-          <li><a href="javascript:;" duration="annually">Annually</a></li>
-        </ul>
-      </div>
+        <div class="btn-group" id="cost-dropdown">
+          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+            <i class="icon-shopping-cart icon-white"></i>
+            <span class="text"></span>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="javascript:;" duration="hourly">Hourly</a></li>
+            <li><a href="javascript:;" duration="daily">Daily</a></li>
+            <li><a href="javascript:;" duration="weekly">Weekly</a></li>
+            <li><a href="javascript:;" duration="monthly">Monthly</a></li>
+            <li><a href="javascript:;" duration="annually">Annually</a></li>
+          </ul>
+        </div>
 
-      <div class="btn-group" id="filter-dropdown">
-        <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
-          <i class="icon-filter icon-white"></i>
-          Columns
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <!-- table header elements inserted by js -->
-        </ul>
-      </div>
+        <div class="btn-group" id="filter-dropdown">
+          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+            <i class="icon-filter icon-white"></i>
+            Columns
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <!-- table header elements inserted by js -->
+          </ul>
+        </div>
 
-      <div class="btn-group" id="url-button">
-        <a class="btn btn-primary" href="#">Generate URL</a>
-        <input class="share-url" type="url" id="share_url">
-      </div>
+        <div class="btn-group" id="url-button">
+          <a class="btn btn-primary" href="#">Generate URL</a>
+          <input class="share-url form-control" type="url" id="share_url" style="width: 150px">
+        </div>
 
+        <button class="btn btn-primary btn-compare"
+          data-text-on="End Compare"
+          data-text-off="Compare Selected">
+          Compare Selected
+        </button>
+      </div>
     </div>
-    <div style="clear:both; float:left">
+
+    <div class="pull-left form-inline">
         <strong> Filter:</strong>
         Min Memory (GB): <input data-action="datafilter"
                                 data-type="memory"
-                                size=4 />
+                                size=4
+                                class="form-control"
+                                style="width: 45px" />
 
         Compute Units: <input data-action="datafilter"
                               data-type="computeunits"
-                              size=4 />
+                              size=4
+                              class="form-control"
+                              style="width: 45px" />
 
         Storage (GB): <input data-action="datafilter"
                              data-type="storage"
-                             size=4 />
+                             size=4
+                             class="form-control"
+                             style="width: 45px" />
     </div>
 
     <table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">
@@ -311,13 +325,13 @@
           <td class="linux-virtualization">
             Unknown
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.175&#34;, &#34;ap-northeast-1&#34;: &#34;0.243&#34;, &#34;sa-east-1&#34;: &#34;0.233&#34;, &#34;ap-southeast-1&#34;: &#34;0.233&#34;, &#34;ap-southeast-2&#34;: &#34;0.233&#34;, &#34;us-west-2&#34;: &#34;0.175&#34;, &#34;us-gov-west-1&#34;: &#34;0.211&#34;, &#34;us-west-1&#34;: &#34;0.190&#34;, &#34;eu-west-1&#34;: &#34;0.190&#34;}'>
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.175&#34;, &#34;ap-northeast-1&#34;: &#34;0.243&#34;, &#34;sa-east-1&#34;: &#34;0.233&#34;, &#34;ap-southeast-1&#34;: &#34;0.233&#34;, &#34;ap-southeast-2&#34;: &#34;0.233&#34;, &#34;us-west-2&#34;: &#34;0.175&#34;, &#34;us-gov-west-1&#34;: &#34;0.211&#34;, &#34;us-west-1&#34;: &#34;0.19&#34;, &#34;eu-west-1&#34;: &#34;0.19&#34;}'>
                  $0.175 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.299&#34;, &#34;ap-northeast-1&#34;: &#34;0.353&#34;, &#34;sa-east-1&#34;: &#34;0.357&#34;, &#34;ap-southeast-1&#34;: &#34;0.373&#34;, &#34;ap-southeast-2&#34;: &#34;0.373&#34;, &#34;us-west-2&#34;: &#34;0.299&#34;, &#34;us-gov-west-1&#34;: &#34;0.335&#34;, &#34;us-west-1&#34;: &#34;0.314&#34;, &#34;eu-west-1&#34;: &#34;0.299&#34;}'>
                  $0.299 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.435&#34;, &#34;ap-northeast-1&#34;: &#34;0.435&#34;, &#34;sa-east-1&#34;: &#34;0.553&#34;, &#34;ap-southeast-1&#34;: &#34;0.435&#34;, &#34;ap-southeast-2&#34;: &#34;0.435&#34;, &#34;us-west-2&#34;: &#34;0.435&#34;, &#34;us-gov-west-1&#34;: &#34;0.517&#34;, &#34;us-west-1&#34;: &#34;0.470&#34;, &#34;eu-west-1&#34;: &#34;0.435&#34;}'>
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.435&#34;, &#34;ap-northeast-1&#34;: &#34;0.435&#34;, &#34;sa-east-1&#34;: &#34;0.553&#34;, &#34;ap-southeast-1&#34;: &#34;0.435&#34;, &#34;ap-southeast-2&#34;: &#34;0.435&#34;, &#34;us-west-2&#34;: &#34;0.435&#34;, &#34;us-gov-west-1&#34;: &#34;0.517&#34;, &#34;us-west-1&#34;: &#34;0.47&#34;, &#34;eu-west-1&#34;: &#34;0.435&#34;}'>
                  $0.435 per hour
           </td>
           <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;0.955&#34;, &#34;ap-northeast-1&#34;: &#34;1.001&#34;, &#34;sa-east-1&#34;: &#34;1.092&#34;, &#34;ap-southeast-1&#34;: &#34;0.955&#34;, &#34;ap-southeast-2&#34;: &#34;0.955&#34;, &#34;us-west-2&#34;: &#34;0.955&#34;, &#34;us-gov-west-1&#34;: &#34;1.049&#34;, &#34;us-west-1&#34;: &#34;0.994&#34;, &#34;eu-west-1&#34;: &#34;0.955&#34;}'>
@@ -378,14 +392,14 @@
           <td class="linux-virtualization">
             Unknown
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.350&#34;, &#34;ap-northeast-1&#34;: &#34;0.486&#34;, &#34;sa-east-1&#34;: &#34;0.467&#34;, &#34;ap-southeast-1&#34;: &#34;0.467&#34;, &#34;ap-southeast-2&#34;: &#34;0.467&#34;, &#34;us-west-2&#34;: &#34;0.350&#34;, &#34;us-gov-west-1&#34;: &#34;0.423&#34;, &#34;us-west-1&#34;: &#34;0.379&#34;, &#34;eu-west-1&#34;: &#34;0.379&#34;}'>
-                 $0.350 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.35&#34;, &#34;ap-northeast-1&#34;: &#34;0.486&#34;, &#34;sa-east-1&#34;: &#34;0.467&#34;, &#34;ap-southeast-1&#34;: &#34;0.467&#34;, &#34;ap-southeast-2&#34;: &#34;0.467&#34;, &#34;us-west-2&#34;: &#34;0.35&#34;, &#34;us-gov-west-1&#34;: &#34;0.423&#34;, &#34;us-west-1&#34;: &#34;0.379&#34;, &#34;eu-west-1&#34;: &#34;0.379&#34;}'>
+                 $0.35 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.598&#34;, &#34;ap-northeast-1&#34;: &#34;0.706&#34;, &#34;sa-east-1&#34;: &#34;0.715&#34;, &#34;ap-southeast-1&#34;: &#34;0.747&#34;, &#34;ap-southeast-2&#34;: &#34;0.747&#34;, &#34;us-west-2&#34;: &#34;0.598&#34;, &#34;us-gov-west-1&#34;: &#34;0.671&#34;, &#34;us-west-1&#34;: &#34;0.627&#34;, &#34;eu-west-1&#34;: &#34;0.598&#34;}'>
                  $0.598 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.830&#34;, &#34;ap-northeast-1&#34;: &#34;0.830&#34;, &#34;sa-east-1&#34;: &#34;1.067&#34;, &#34;ap-southeast-1&#34;: &#34;0.830&#34;, &#34;ap-southeast-2&#34;: &#34;0.830&#34;, &#34;us-west-2&#34;: &#34;0.830&#34;, &#34;us-gov-west-1&#34;: &#34;0.995&#34;, &#34;us-west-1&#34;: &#34;0.899&#34;, &#34;eu-west-1&#34;: &#34;0.830&#34;}'>
-                 $0.830 per hour
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.83&#34;, &#34;ap-northeast-1&#34;: &#34;0.83&#34;, &#34;sa-east-1&#34;: &#34;1.067&#34;, &#34;ap-southeast-1&#34;: &#34;0.83&#34;, &#34;ap-southeast-2&#34;: &#34;0.83&#34;, &#34;us-west-2&#34;: &#34;0.83&#34;, &#34;us-gov-west-1&#34;: &#34;0.995&#34;, &#34;us-west-1&#34;: &#34;0.899&#34;, &#34;eu-west-1&#34;: &#34;0.83&#34;}'>
+                 $0.83 per hour
           </td>
           <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;1.362&#34;, &#34;ap-northeast-1&#34;: &#34;1.435&#34;, &#34;sa-east-1&#34;: &#34;1.628&#34;, &#34;ap-southeast-1&#34;: &#34;1.362&#34;, &#34;ap-southeast-2&#34;: &#34;1.362&#34;, &#34;us-west-2&#34;: &#34;1.362&#34;, &#34;us-gov-west-1&#34;: &#34;1.545&#34;, &#34;us-west-1&#34;: &#34;1.438&#34;, &#34;eu-west-1&#34;: &#34;1.362&#34;}'>
                  $1.362 per hour
@@ -443,14 +457,14 @@
           <td class="linux-virtualization">
             Unknown
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.130&#34;, &#34;ap-northeast-1&#34;: &#34;0.158&#34;, &#34;sa-east-1&#34;: &#34;0.179&#34;, &#34;ap-southeast-1&#34;: &#34;0.164&#34;, &#34;ap-southeast-2&#34;: &#34;0.164&#34;, &#34;us-west-2&#34;: &#34;0.130&#34;, &#34;us-gov-west-1&#34;: &#34;0.157&#34;, &#34;us-west-1&#34;: &#34;0.148&#34;, &#34;eu-west-1&#34;: &#34;0.148&#34;}'>
-                 $0.130 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.13&#34;, &#34;ap-northeast-1&#34;: &#34;0.158&#34;, &#34;sa-east-1&#34;: &#34;0.179&#34;, &#34;ap-southeast-1&#34;: &#34;0.164&#34;, &#34;ap-southeast-2&#34;: &#34;0.164&#34;, &#34;us-west-2&#34;: &#34;0.13&#34;, &#34;us-gov-west-1&#34;: &#34;0.157&#34;, &#34;us-west-1&#34;: &#34;0.148&#34;, &#34;eu-west-1&#34;: &#34;0.148&#34;}'>
+                 $0.13 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.210&#34;, &#34;ap-northeast-1&#34;: &#34;0.258&#34;, &#34;sa-east-1&#34;: &#34;0.259&#34;, &#34;ap-southeast-1&#34;: &#34;0.266&#34;, &#34;ap-southeast-2&#34;: &#34;0.266&#34;, &#34;us-west-2&#34;: &#34;0.210&#34;, &#34;us-gov-west-1&#34;: &#34;0.237&#34;, &#34;us-west-1&#34;: &#34;0.228&#34;, &#34;eu-west-1&#34;: &#34;0.210&#34;}'>
-                 $0.210 per hour
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.21&#34;, &#34;ap-northeast-1&#34;: &#34;0.258&#34;, &#34;sa-east-1&#34;: &#34;0.259&#34;, &#34;ap-southeast-1&#34;: &#34;0.266&#34;, &#34;ap-southeast-2&#34;: &#34;0.266&#34;, &#34;us-west-2&#34;: &#34;0.21&#34;, &#34;us-gov-west-1&#34;: &#34;0.237&#34;, &#34;us-west-1&#34;: &#34;0.228&#34;, &#34;eu-west-1&#34;: &#34;0.21&#34;}'>
+                 $0.21 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.310&#34;, &#34;ap-northeast-1&#34;: &#34;0.310&#34;, &#34;sa-east-1&#34;: &#34;0.369&#34;, &#34;ap-southeast-1&#34;: &#34;0.310&#34;, &#34;ap-southeast-2&#34;: &#34;0.310&#34;, &#34;us-west-2&#34;: &#34;0.310&#34;, &#34;us-gov-west-1&#34;: &#34;0.366&#34;, &#34;us-west-1&#34;: &#34;0.329&#34;, &#34;eu-west-1&#34;: &#34;0.310&#34;}'>
-                 $0.310 per hour
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.31&#34;, &#34;ap-northeast-1&#34;: &#34;0.31&#34;, &#34;sa-east-1&#34;: &#34;0.369&#34;, &#34;ap-southeast-1&#34;: &#34;0.31&#34;, &#34;ap-southeast-2&#34;: &#34;0.31&#34;, &#34;us-west-2&#34;: &#34;0.31&#34;, &#34;us-gov-west-1&#34;: &#34;0.366&#34;, &#34;us-west-1&#34;: &#34;0.329&#34;, &#34;eu-west-1&#34;: &#34;0.31&#34;}'>
+                 $0.31 per hour
           </td>
           <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: 0, &#34;ap-northeast-1&#34;: 0, &#34;sa-east-1&#34;: 0, &#34;ap-southeast-1&#34;: 0, &#34;ap-southeast-2&#34;: 0, &#34;us-west-2&#34;: 0, &#34;us-gov-west-1&#34;: 0, &#34;us-west-1&#34;: 0, &#34;eu-west-1&#34;: 0}'>
             unavailable
@@ -510,16 +524,16 @@
           <td class="linux-virtualization">
             Unknown
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.520&#34;, &#34;ap-northeast-1&#34;: &#34;0.632&#34;, &#34;sa-east-1&#34;: &#34;0.718&#34;, &#34;ap-southeast-1&#34;: &#34;0.655&#34;, &#34;ap-southeast-2&#34;: &#34;0.655&#34;, &#34;us-west-2&#34;: &#34;0.520&#34;, &#34;us-gov-west-1&#34;: &#34;0.628&#34;, &#34;us-west-1&#34;: &#34;0.592&#34;, &#34;eu-west-1&#34;: &#34;0.592&#34;}'>
-                 $0.520 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.52&#34;, &#34;ap-northeast-1&#34;: &#34;0.632&#34;, &#34;sa-east-1&#34;: &#34;0.718&#34;, &#34;ap-southeast-1&#34;: &#34;0.655&#34;, &#34;ap-southeast-2&#34;: &#34;0.655&#34;, &#34;us-west-2&#34;: &#34;0.52&#34;, &#34;us-gov-west-1&#34;: &#34;0.628&#34;, &#34;us-west-1&#34;: &#34;0.592&#34;, &#34;eu-west-1&#34;: &#34;0.592&#34;}'>
+                 $0.52 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.840&#34;, &#34;ap-northeast-1&#34;: &#34;1.032&#34;, &#34;sa-east-1&#34;: &#34;1.038&#34;, &#34;ap-southeast-1&#34;: &#34;1.065&#34;, &#34;ap-southeast-2&#34;: &#34;1.065&#34;, &#34;us-west-2&#34;: &#34;0.840&#34;, &#34;us-gov-west-1&#34;: &#34;0.948&#34;, &#34;us-west-1&#34;: &#34;0.912&#34;, &#34;eu-west-1&#34;: &#34;0.840&#34;}'>
-                 $0.840 per hour
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.84&#34;, &#34;ap-northeast-1&#34;: &#34;1.032&#34;, &#34;sa-east-1&#34;: &#34;1.038&#34;, &#34;ap-southeast-1&#34;: &#34;1.065&#34;, &#34;ap-southeast-2&#34;: &#34;1.065&#34;, &#34;us-west-2&#34;: &#34;0.84&#34;, &#34;us-gov-west-1&#34;: &#34;0.948&#34;, &#34;us-west-1&#34;: &#34;0.912&#34;, &#34;eu-west-1&#34;: &#34;0.84&#34;}'>
+                 $0.84 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;1.160&#34;, &#34;ap-northeast-1&#34;: &#34;1.160&#34;, &#34;sa-east-1&#34;: &#34;1.398&#34;, &#34;ap-southeast-1&#34;: &#34;1.160&#34;, &#34;ap-southeast-2&#34;: &#34;1.160&#34;, &#34;us-west-2&#34;: &#34;1.160&#34;, &#34;us-gov-west-1&#34;: &#34;1.384&#34;, &#34;us-west-1&#34;: &#34;1.236&#34;, &#34;eu-west-1&#34;: &#34;1.160&#34;}'>
-                 $1.160 per hour
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;1.16&#34;, &#34;ap-northeast-1&#34;: &#34;1.16&#34;, &#34;sa-east-1&#34;: &#34;1.398&#34;, &#34;ap-southeast-1&#34;: &#34;1.16&#34;, &#34;ap-southeast-2&#34;: &#34;1.16&#34;, &#34;us-west-2&#34;: &#34;1.16&#34;, &#34;us-gov-west-1&#34;: &#34;1.384&#34;, &#34;us-west-1&#34;: &#34;1.236&#34;, &#34;eu-west-1&#34;: &#34;1.16&#34;}'>
+                 $1.16 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;2.124&#34;, &#34;ap-northeast-1&#34;: &#34;2.210&#34;, &#34;sa-east-1&#34;: &#34;2.378&#34;, &#34;ap-southeast-1&#34;: &#34;2.124&#34;, &#34;ap-southeast-2&#34;: &#34;2.124&#34;, &#34;us-west-2&#34;: &#34;2.124&#34;, &#34;us-gov-west-1&#34;: &#34;2.331&#34;, &#34;us-west-1&#34;: &#34;2.206&#34;, &#34;eu-west-1&#34;: &#34;2.124&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;2.124&#34;, &#34;ap-northeast-1&#34;: &#34;2.21&#34;, &#34;sa-east-1&#34;: &#34;2.378&#34;, &#34;ap-southeast-1&#34;: &#34;2.124&#34;, &#34;ap-southeast-2&#34;: &#34;2.124&#34;, &#34;us-west-2&#34;: &#34;2.124&#34;, &#34;us-gov-west-1&#34;: &#34;2.331&#34;, &#34;us-west-1&#34;: &#34;2.206&#34;, &#34;eu-west-1&#34;: &#34;2.124&#34;}'>
                  $2.124 per hour
           </td>
         </tr>
@@ -575,17 +589,17 @@
           <td class="linux-virtualization">
             Unknown
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-west-2&#34;: &#34;2.000&#34;, &#34;us-east-1&#34;: &#34;2.000&#34;, &#34;ap-northeast-1&#34;: &#34;2.349&#34;, &#34;us-gov-west-1&#34;: &#34;2.250&#34;, &#34;eu-west-1&#34;: &#34;2.250&#34;}'>
-                 $2.000 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-west-2&#34;: &#34;2&#34;, &#34;us-east-1&#34;: &#34;2&#34;, &#34;ap-northeast-1&#34;: &#34;2.349&#34;, &#34;us-gov-west-1&#34;: &#34;2.25&#34;, &#34;eu-west-1&#34;: &#34;2.25&#34;}'>
+                 $2 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-west-2&#34;: &#34;2.570&#34;, &#34;us-east-1&#34;: &#34;2.570&#34;, &#34;ap-northeast-1&#34;: &#34;2.919&#34;, &#34;us-gov-west-1&#34;: &#34;2.570&#34;, &#34;eu-west-1&#34;: &#34;2.570&#34;}'>
-                 $2.570 per hour
+          <td class="cost cost-mswin" data-pricing='{&#34;us-west-2&#34;: &#34;2.57&#34;, &#34;us-east-1&#34;: &#34;2.57&#34;, &#34;ap-northeast-1&#34;: &#34;2.919&#34;, &#34;us-gov-west-1&#34;: &#34;2.57&#34;, &#34;eu-west-1&#34;: &#34;2.57&#34;}'>
+                 $2.57 per hour
           </td>
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-west-2&#34;: &#34;2.775&#34;, &#34;us-east-1&#34;: &#34;2.775&#34;, &#34;ap-northeast-1&#34;: &#34;3.124&#34;, &#34;us-gov-west-1&#34;: &#34;2.775&#34;, &#34;eu-west-1&#34;: &#34;2.775&#34;}'>
                  $2.775 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-west-2&#34;: &#34;4.410&#34;, &#34;us-east-1&#34;: &#34;4.410&#34;, &#34;ap-northeast-1&#34;: &#34;4.733&#34;, &#34;us-gov-west-1&#34;: &#34;4.900&#34;, &#34;eu-west-1&#34;: &#34;4.850&#34;}'>
-                 $4.410 per hour
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-west-2&#34;: &#34;4.41&#34;, &#34;us-east-1&#34;: &#34;4.41&#34;, &#34;ap-northeast-1&#34;: &#34;4.733&#34;, &#34;us-gov-west-1&#34;: &#34;4.9&#34;, &#34;eu-west-1&#34;: &#34;4.85&#34;}'>
+                 $4.41 per hour
           </td>
         </tr>
         <tr class='instance' id="cg1.4xlarge">
@@ -640,17 +654,17 @@
           <td class="linux-virtualization">
             Unknown
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;2.100&#34;, &#34;eu-west-1&#34;: &#34;2.360&#34;}'>
-                 $2.100 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;2.1&#34;, &#34;eu-west-1&#34;: &#34;2.36&#34;}'>
+                 $2.1 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;2.600&#34;, &#34;eu-west-1&#34;: &#34;2.600&#34;}'>
-                 $2.600 per hour
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;2.6&#34;, &#34;eu-west-1&#34;: &#34;2.6&#34;}'>
+                 $2.6 per hour
           </td>
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;2.703&#34;, &#34;eu-west-1&#34;: &#34;2.703&#34;}'>
                  $2.703 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;3.850&#34;, &#34;eu-west-1&#34;: &#34;3.850&#34;}'>
-                 $3.850 per hour
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;3.85&#34;, &#34;eu-west-1&#34;: &#34;3.85&#34;}'>
+                 $3.85 per hour
           </td>
         </tr>
         <tr class='instance' id="m2.xlarge">
@@ -714,7 +728,7 @@
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.445&#34;, &#34;ap-northeast-1&#34;: &#34;0.445&#34;, &#34;sa-east-1&#34;: &#34;0.623&#34;, &#34;ap-southeast-1&#34;: &#34;0.445&#34;, &#34;ap-southeast-2&#34;: &#34;0.445&#34;, &#34;us-west-2&#34;: &#34;0.445&#34;, &#34;us-gov-west-1&#34;: &#34;0.533&#34;, &#34;us-west-1&#34;: &#34;0.481&#34;, &#34;eu-west-1&#34;: &#34;0.445&#34;}'>
                  $0.445 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;1.084&#34;, &#34;ap-northeast-1&#34;: &#34;1.106&#34;, &#34;sa-east-1&#34;: &#34;1.314&#34;, &#34;ap-southeast-1&#34;: &#34;1.084&#34;, &#34;ap-southeast-2&#34;: &#34;1.084&#34;, &#34;us-west-2&#34;: &#34;1.084&#34;, &#34;us-gov-west-1&#34;: &#34;1.204&#34;, &#34;us-west-1&#34;: &#34;1.140&#34;, &#34;eu-west-1&#34;: &#34;1.084&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;1.084&#34;, &#34;ap-northeast-1&#34;: &#34;1.106&#34;, &#34;sa-east-1&#34;: &#34;1.314&#34;, &#34;ap-southeast-1&#34;: &#34;1.084&#34;, &#34;ap-southeast-2&#34;: &#34;1.084&#34;, &#34;us-west-2&#34;: &#34;1.084&#34;, &#34;us-gov-west-1&#34;: &#34;1.204&#34;, &#34;us-west-1&#34;: &#34;1.14&#34;, &#34;eu-west-1&#34;: &#34;1.084&#34;}'>
                  $1.084 per hour
           </td>
         </tr>
@@ -772,14 +786,14 @@
           <td class="linux-virtualization">
             Unknown
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.490&#34;, &#34;ap-northeast-1&#34;: &#34;0.575&#34;, &#34;sa-east-1&#34;: &#34;0.645&#34;, &#34;ap-southeast-1&#34;: &#34;0.592&#34;, &#34;ap-southeast-2&#34;: &#34;0.592&#34;, &#34;us-west-2&#34;: &#34;0.490&#34;, &#34;us-gov-west-1&#34;: &#34;0.586&#34;, &#34;us-west-1&#34;: &#34;0.550&#34;, &#34;eu-west-1&#34;: &#34;0.550&#34;}'>
-                 $0.490 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.49&#34;, &#34;ap-northeast-1&#34;: &#34;0.575&#34;, &#34;sa-east-1&#34;: &#34;0.645&#34;, &#34;ap-southeast-1&#34;: &#34;0.592&#34;, &#34;ap-southeast-2&#34;: &#34;0.592&#34;, &#34;us-west-2&#34;: &#34;0.49&#34;, &#34;us-gov-west-1&#34;: &#34;0.586&#34;, &#34;us-west-1&#34;: &#34;0.55&#34;, &#34;eu-west-1&#34;: &#34;0.55&#34;}'>
+                 $0.49 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.690&#34;, &#34;ap-northeast-1&#34;: &#34;0.705&#34;, &#34;sa-east-1&#34;: &#34;0.845&#34;, &#34;ap-southeast-1&#34;: &#34;0.742&#34;, &#34;ap-southeast-2&#34;: &#34;0.742&#34;, &#34;us-west-2&#34;: &#34;0.690&#34;, &#34;us-gov-west-1&#34;: &#34;0.786&#34;, &#34;us-west-1&#34;: &#34;0.750&#34;, &#34;eu-west-1&#34;: &#34;0.690&#34;}'>
-                 $0.690 per hour
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.69&#34;, &#34;ap-northeast-1&#34;: &#34;0.705&#34;, &#34;sa-east-1&#34;: &#34;0.845&#34;, &#34;ap-southeast-1&#34;: &#34;0.742&#34;, &#34;ap-southeast-2&#34;: &#34;0.742&#34;, &#34;us-west-2&#34;: &#34;0.69&#34;, &#34;us-gov-west-1&#34;: &#34;0.786&#34;, &#34;us-west-1&#34;: &#34;0.75&#34;, &#34;eu-west-1&#34;: &#34;0.69&#34;}'>
+                 $0.69 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.850&#34;, &#34;ap-northeast-1&#34;: &#34;0.850&#34;, &#34;sa-east-1&#34;: &#34;1.205&#34;, &#34;ap-southeast-1&#34;: &#34;0.850&#34;, &#34;ap-southeast-2&#34;: &#34;0.850&#34;, &#34;us-west-2&#34;: &#34;0.850&#34;, &#34;us-gov-west-1&#34;: &#34;1.026&#34;, &#34;us-west-1&#34;: &#34;0.922&#34;, &#34;eu-west-1&#34;: &#34;0.850&#34;}'>
-                 $0.850 per hour
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.85&#34;, &#34;ap-northeast-1&#34;: &#34;0.85&#34;, &#34;sa-east-1&#34;: &#34;1.205&#34;, &#34;ap-southeast-1&#34;: &#34;0.85&#34;, &#34;ap-southeast-2&#34;: &#34;0.85&#34;, &#34;us-west-2&#34;: &#34;0.85&#34;, &#34;us-gov-west-1&#34;: &#34;1.026&#34;, &#34;us-west-1&#34;: &#34;0.922&#34;, &#34;eu-west-1&#34;: &#34;0.85&#34;}'>
+                 $0.85 per hour
           </td>
           <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;1.489&#34;, &#34;ap-northeast-1&#34;: &#34;1.558&#34;, &#34;sa-east-1&#34;: &#34;1.903&#34;, &#34;ap-southeast-1&#34;: &#34;1.654&#34;, &#34;ap-southeast-2&#34;: &#34;1.654&#34;, &#34;us-west-2&#34;: &#34;1.489&#34;, &#34;us-gov-west-1&#34;: &#34;1.705&#34;, &#34;us-west-1&#34;: &#34;1.589&#34;, &#34;eu-west-1&#34;: &#34;1.489&#34;}'>
                  $1.489 per hour
@@ -839,14 +853,14 @@
           <td class="linux-virtualization">
             Unknown
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.980&#34;, &#34;ap-northeast-1&#34;: &#34;1.150&#34;, &#34;sa-east-1&#34;: &#34;1.291&#34;, &#34;ap-southeast-1&#34;: &#34;1.183&#34;, &#34;ap-southeast-2&#34;: &#34;1.183&#34;, &#34;us-west-2&#34;: &#34;0.980&#34;, &#34;us-gov-west-1&#34;: &#34;1.171&#34;, &#34;us-west-1&#34;: &#34;1.100&#34;, &#34;eu-west-1&#34;: &#34;1.100&#34;}'>
-                 $0.980 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.98&#34;, &#34;ap-northeast-1&#34;: &#34;1.15&#34;, &#34;sa-east-1&#34;: &#34;1.291&#34;, &#34;ap-southeast-1&#34;: &#34;1.183&#34;, &#34;ap-southeast-2&#34;: &#34;1.183&#34;, &#34;us-west-2&#34;: &#34;0.98&#34;, &#34;us-gov-west-1&#34;: &#34;1.171&#34;, &#34;us-west-1&#34;: &#34;1.1&#34;, &#34;eu-west-1&#34;: &#34;1.1&#34;}'>
+                 $0.98 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;1.380&#34;, &#34;ap-northeast-1&#34;: &#34;1.410&#34;, &#34;sa-east-1&#34;: &#34;1.691&#34;, &#34;ap-southeast-1&#34;: &#34;1.483&#34;, &#34;ap-southeast-2&#34;: &#34;1.483&#34;, &#34;us-west-2&#34;: &#34;1.380&#34;, &#34;us-gov-west-1&#34;: &#34;1.571&#34;, &#34;us-west-1&#34;: &#34;1.500&#34;, &#34;eu-west-1&#34;: &#34;1.380&#34;}'>
-                 $1.380 per hour
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;1.38&#34;, &#34;ap-northeast-1&#34;: &#34;1.41&#34;, &#34;sa-east-1&#34;: &#34;1.691&#34;, &#34;ap-southeast-1&#34;: &#34;1.483&#34;, &#34;ap-southeast-2&#34;: &#34;1.483&#34;, &#34;us-west-2&#34;: &#34;1.38&#34;, &#34;us-gov-west-1&#34;: &#34;1.571&#34;, &#34;us-west-1&#34;: &#34;1.5&#34;, &#34;eu-west-1&#34;: &#34;1.38&#34;}'>
+                 $1.38 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;1.700&#34;, &#34;ap-northeast-1&#34;: &#34;1.700&#34;, &#34;sa-east-1&#34;: &#34;2.411&#34;, &#34;ap-southeast-1&#34;: &#34;1.700&#34;, &#34;ap-southeast-2&#34;: &#34;1.700&#34;, &#34;us-west-2&#34;: &#34;1.700&#34;, &#34;us-gov-west-1&#34;: &#34;2.051&#34;, &#34;us-west-1&#34;: &#34;1.844&#34;, &#34;eu-west-1&#34;: &#34;1.700&#34;}'>
-                 $1.700 per hour
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;1.7&#34;, &#34;ap-northeast-1&#34;: &#34;1.7&#34;, &#34;sa-east-1&#34;: &#34;2.411&#34;, &#34;ap-southeast-1&#34;: &#34;1.7&#34;, &#34;ap-southeast-2&#34;: &#34;1.7&#34;, &#34;us-west-2&#34;: &#34;1.7&#34;, &#34;us-gov-west-1&#34;: &#34;2.051&#34;, &#34;us-west-1&#34;: &#34;1.844&#34;, &#34;eu-west-1&#34;: &#34;1.7&#34;}'>
+                 $1.7 per hour
           </td>
           <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;2.976&#34;, &#34;ap-northeast-1&#34;: &#34;3.116&#34;, &#34;sa-east-1&#34;: &#34;3.804&#34;, &#34;ap-southeast-1&#34;: &#34;2.976&#34;, &#34;ap-southeast-2&#34;: &#34;2.976&#34;, &#34;us-west-2&#34;: &#34;2.976&#34;, &#34;us-gov-west-1&#34;: &#34;3.408&#34;, &#34;us-west-1&#34;: &#34;3.178&#34;, &#34;eu-west-1&#34;: &#34;2.976&#34;}'>
                  $2.976 per hour
@@ -904,17 +918,17 @@
           <td class="linux-virtualization">
             Unknown
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-west-2&#34;: &#34;3.500&#34;, &#34;us-east-1&#34;: &#34;3.500&#34;, &#34;ap-northeast-1&#34;: &#34;4.105&#34;, &#34;eu-west-1&#34;: &#34;3.750&#34;}'>
-                 $3.500 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-west-2&#34;: &#34;3.5&#34;, &#34;us-east-1&#34;: &#34;3.5&#34;, &#34;ap-northeast-1&#34;: &#34;4.105&#34;, &#34;eu-west-1&#34;: &#34;3.75&#34;}'>
+                 $3.5 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-west-2&#34;: &#34;3.831&#34;, &#34;us-east-1&#34;: &#34;3.831&#34;, &#34;ap-northeast-1&#34;: &#34;4.420&#34;, &#34;eu-west-1&#34;: &#34;3.831&#34;}'>
+          <td class="cost cost-mswin" data-pricing='{&#34;us-west-2&#34;: &#34;3.831&#34;, &#34;us-east-1&#34;: &#34;3.831&#34;, &#34;ap-northeast-1&#34;: &#34;4.42&#34;, &#34;eu-west-1&#34;: &#34;3.831&#34;}'>
                  $3.831 per hour
           </td>
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-west-2&#34;: &#34;4.044&#34;, &#34;us-east-1&#34;: &#34;4.044&#34;, &#34;ap-northeast-1&#34;: &#34;4.623&#34;, &#34;eu-west-1&#34;: &#34;4.044&#34;}'>
                  $4.044 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-west-2&#34;: &#34;7.250&#34;, &#34;us-east-1&#34;: &#34;7.250&#34;, &#34;ap-northeast-1&#34;: &#34;7.676&#34;, &#34;eu-west-1&#34;: &#34;7.250&#34;}'>
-                 $7.250 per hour
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-west-2&#34;: &#34;7.25&#34;, &#34;us-east-1&#34;: &#34;7.25&#34;, &#34;ap-northeast-1&#34;: &#34;7.676&#34;, &#34;eu-west-1&#34;: &#34;7.25&#34;}'>
+                 $7.25 per hour
           </td>
         </tr>
         <tr class='instance' id="hi1.4xlarge">
@@ -969,14 +983,14 @@
           <td class="linux-virtualization">
             Unknown
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-west-2&#34;: &#34;3.100&#34;, &#34;us-east-1&#34;: &#34;3.100&#34;, &#34;ap-northeast-1&#34;: &#34;3.276&#34;, &#34;eu-west-1&#34;: &#34;3.100&#34;}'>
-                 $3.100 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-west-2&#34;: &#34;3.1&#34;, &#34;us-east-1&#34;: &#34;3.1&#34;, &#34;ap-northeast-1&#34;: &#34;3.276&#34;, &#34;eu-west-1&#34;: &#34;3.1&#34;}'>
+                 $3.1 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-west-2&#34;: &#34;3.580&#34;, &#34;us-east-1&#34;: &#34;3.580&#34;, &#34;ap-northeast-1&#34;: &#34;3.686&#34;, &#34;eu-west-1&#34;: &#34;3.580&#34;}'>
-                 $3.580 per hour
+          <td class="cost cost-mswin" data-pricing='{&#34;us-west-2&#34;: &#34;3.58&#34;, &#34;us-east-1&#34;: &#34;3.58&#34;, &#34;ap-northeast-1&#34;: &#34;3.686&#34;, &#34;eu-west-1&#34;: &#34;3.58&#34;}'>
+                 $3.58 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-west-2&#34;: &#34;3.660&#34;, &#34;us-east-1&#34;: &#34;3.660&#34;, &#34;ap-northeast-1&#34;: &#34;4.084&#34;, &#34;eu-west-1&#34;: &#34;3.660&#34;}'>
-                 $3.660 per hour
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-west-2&#34;: &#34;3.66&#34;, &#34;us-east-1&#34;: &#34;3.66&#34;, &#34;ap-northeast-1&#34;: &#34;4.084&#34;, &#34;eu-west-1&#34;: &#34;3.66&#34;}'>
+                 $3.66 per hour
           </td>
           <td class="cost cost-mswinSQL" data-pricing='{&#34;us-west-2&#34;: &#34;4.607&#34;, &#34;us-east-1&#34;: &#34;4.607&#34;, &#34;ap-northeast-1&#34;: &#34;6.829&#34;, &#34;eu-west-1&#34;: &#34;4.607&#34;}'>
                  $4.607 per hour
@@ -1034,8 +1048,8 @@
           <td class="linux-virtualization">
             Unknown
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;4.600&#34;, &#34;ap-northeast-1&#34;: &#34;5.400&#34;, &#34;ap-southeast-1&#34;: &#34;5.570&#34;, &#34;ap-southeast-2&#34;: &#34;5.570&#34;, &#34;us-west-2&#34;: &#34;4.600&#34;, &#34;us-gov-west-1&#34;: &#34;5.520&#34;, &#34;eu-west-1&#34;: &#34;4.900&#34;}'>
-                 $4.600 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;4.6&#34;, &#34;ap-northeast-1&#34;: &#34;5.4&#34;, &#34;ap-southeast-1&#34;: &#34;5.57&#34;, &#34;ap-southeast-2&#34;: &#34;5.57&#34;, &#34;us-west-2&#34;: &#34;4.6&#34;, &#34;us-gov-west-1&#34;: &#34;5.52&#34;, &#34;eu-west-1&#34;: &#34;4.9&#34;}'>
+                 $4.6 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;4.931&#34;, &#34;ap-northeast-1&#34;: &#34;5.714&#34;, &#34;ap-southeast-1&#34;: &#34;5.901&#34;, &#34;ap-southeast-2&#34;: &#34;5.901&#34;, &#34;us-west-2&#34;: &#34;4.931&#34;, &#34;us-gov-west-1&#34;: &#34;6.126&#34;, &#34;eu-west-1&#34;: &#34;4.931&#34;}'>
                  $4.931 per hour
@@ -1043,8 +1057,8 @@
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;5.144&#34;, &#34;ap-northeast-1&#34;: &#34;5.917&#34;, &#34;ap-southeast-1&#34;: &#34;6.114&#34;, &#34;ap-southeast-2&#34;: &#34;6.114&#34;, &#34;us-west-2&#34;: &#34;5.144&#34;, &#34;us-gov-west-1&#34;: &#34;6.339&#34;, &#34;eu-west-1&#34;: &#34;5.144&#34;}'>
                  $5.144 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;8.350&#34;, &#34;ap-northeast-1&#34;: &#34;8.970&#34;, &#34;ap-southeast-1&#34;: &#34;9.320&#34;, &#34;ap-southeast-2&#34;: &#34;9.320&#34;, &#34;us-west-2&#34;: &#34;8.350&#34;, &#34;us-gov-west-1&#34;: &#34;9.270&#34;, &#34;eu-west-1&#34;: &#34;8.350&#34;}'>
-                 $8.350 per hour
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;8.35&#34;, &#34;ap-northeast-1&#34;: &#34;8.97&#34;, &#34;ap-southeast-1&#34;: &#34;9.32&#34;, &#34;ap-southeast-2&#34;: &#34;9.32&#34;, &#34;us-west-2&#34;: &#34;8.35&#34;, &#34;us-gov-west-1&#34;: &#34;9.27&#34;, &#34;eu-west-1&#34;: &#34;8.35&#34;}'>
+                 $8.35 per hour
           </td>
         </tr>
         <tr class='instance' id="t1.micro">
@@ -1097,14 +1111,14 @@
           <td class="linux-virtualization">
             Unknown
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.020&#34;, &#34;ap-northeast-1&#34;: &#34;0.026&#34;, &#34;sa-east-1&#34;: &#34;0.027&#34;, &#34;ap-southeast-1&#34;: &#34;0.020&#34;, &#34;ap-southeast-2&#34;: &#34;0.020&#34;, &#34;us-west-2&#34;: &#34;0.020&#34;, &#34;us-gov-west-1&#34;: &#34;0.024&#34;, &#34;us-west-1&#34;: &#34;0.025&#34;, &#34;eu-west-1&#34;: &#34;0.020&#34;}'>
-                 $0.020 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.02&#34;, &#34;ap-northeast-1&#34;: &#34;0.026&#34;, &#34;sa-east-1&#34;: &#34;0.027&#34;, &#34;ap-southeast-1&#34;: &#34;0.02&#34;, &#34;ap-southeast-2&#34;: &#34;0.02&#34;, &#34;us-west-2&#34;: &#34;0.02&#34;, &#34;us-gov-west-1&#34;: &#34;0.024&#34;, &#34;us-west-1&#34;: &#34;0.025&#34;, &#34;eu-west-1&#34;: &#34;0.02&#34;}'>
+                 $0.02 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.020&#34;, &#34;ap-northeast-1&#34;: &#34;0.033&#34;, &#34;sa-east-1&#34;: &#34;0.037&#34;, &#34;ap-southeast-1&#34;: &#34;0.020&#34;, &#34;ap-southeast-2&#34;: &#34;0.020&#34;, &#34;us-west-2&#34;: &#34;0.020&#34;, &#34;us-gov-west-1&#34;: &#34;0.025&#34;, &#34;us-west-1&#34;: &#34;0.035&#34;, &#34;eu-west-1&#34;: &#34;0.020&#34;}'>
-                 $0.020 per hour
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.02&#34;, &#34;ap-northeast-1&#34;: &#34;0.033&#34;, &#34;sa-east-1&#34;: &#34;0.037&#34;, &#34;ap-southeast-1&#34;: &#34;0.02&#34;, &#34;ap-southeast-2&#34;: &#34;0.02&#34;, &#34;us-west-2&#34;: &#34;0.02&#34;, &#34;us-gov-west-1&#34;: &#34;0.025&#34;, &#34;us-west-1&#34;: &#34;0.035&#34;, &#34;eu-west-1&#34;: &#34;0.02&#34;}'>
+                 $0.02 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.070&#34;, &#34;ap-northeast-1&#34;: &#34;0.077&#34;, &#34;sa-east-1&#34;: &#34;0.077&#34;, &#34;ap-southeast-1&#34;: &#34;0.075&#34;, &#34;ap-southeast-2&#34;: &#34;0.075&#34;, &#34;us-west-2&#34;: &#34;0.070&#34;, &#34;us-gov-west-1&#34;: &#34;0.074&#34;, &#34;us-west-1&#34;: &#34;0.075&#34;, &#34;eu-west-1&#34;: &#34;0.075&#34;}'>
-                 $0.070 per hour
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.07&#34;, &#34;ap-northeast-1&#34;: &#34;0.077&#34;, &#34;sa-east-1&#34;: &#34;0.077&#34;, &#34;ap-southeast-1&#34;: &#34;0.075&#34;, &#34;ap-southeast-2&#34;: &#34;0.075&#34;, &#34;us-west-2&#34;: &#34;0.07&#34;, &#34;us-gov-west-1&#34;: &#34;0.074&#34;, &#34;us-west-1&#34;: &#34;0.075&#34;, &#34;eu-west-1&#34;: &#34;0.075&#34;}'>
+                 $0.07 per hour
           </td>
           <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: 0, &#34;ap-northeast-1&#34;: 0, &#34;sa-east-1&#34;: 0, &#34;ap-southeast-1&#34;: 0, &#34;ap-southeast-2&#34;: 0, &#34;us-west-2&#34;: 0, &#34;us-gov-west-1&#34;: 0, &#34;us-west-1&#34;: 0, &#34;eu-west-1&#34;: 0}'>
             unavailable
@@ -1160,13 +1174,13 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.013&#34;, &#34;ap-northeast-1&#34;: &#34;0.020&#34;, &#34;sa-east-1&#34;: &#34;0.027&#34;, &#34;ap-southeast-1&#34;: &#34;0.020&#34;, &#34;ap-southeast-2&#34;: &#34;0.020&#34;, &#34;us-west-2&#34;: &#34;0.013&#34;, &#34;us-gov-west-1&#34;: &#34;0.015&#34;, &#34;us-west-1&#34;: &#34;0.017&#34;, &#34;eu-central-1&#34;: &#34;0.015&#34;, &#34;eu-west-1&#34;: &#34;0.014&#34;}'>
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.013&#34;, &#34;ap-northeast-1&#34;: &#34;0.02&#34;, &#34;sa-east-1&#34;: &#34;0.027&#34;, &#34;ap-southeast-1&#34;: &#34;0.02&#34;, &#34;ap-southeast-2&#34;: &#34;0.02&#34;, &#34;us-west-2&#34;: &#34;0.013&#34;, &#34;us-gov-west-1&#34;: &#34;0.015&#34;, &#34;us-west-1&#34;: &#34;0.017&#34;, &#34;eu-central-1&#34;: &#34;0.015&#34;, &#34;eu-west-1&#34;: &#34;0.014&#34;}'>
                  $0.013 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.018&#34;, &#34;ap-northeast-1&#34;: &#34;0.025&#34;, &#34;sa-east-1&#34;: &#34;0.032&#34;, &#34;ap-southeast-1&#34;: &#34;0.020&#34;, &#34;ap-southeast-2&#34;: &#34;0.020&#34;, &#34;us-west-2&#34;: &#34;0.018&#34;, &#34;us-gov-west-1&#34;: &#34;0.021&#34;, &#34;us-west-1&#34;: &#34;0.022&#34;, &#34;eu-central-1&#34;: &#34;0.020&#34;, &#34;eu-west-1&#34;: &#34;0.019&#34;}'>
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.018&#34;, &#34;ap-northeast-1&#34;: &#34;0.025&#34;, &#34;sa-east-1&#34;: &#34;0.032&#34;, &#34;ap-southeast-1&#34;: &#34;0.02&#34;, &#34;ap-southeast-2&#34;: &#34;0.02&#34;, &#34;us-west-2&#34;: &#34;0.018&#34;, &#34;us-gov-west-1&#34;: &#34;0.021&#34;, &#34;us-west-1&#34;: &#34;0.022&#34;, &#34;eu-central-1&#34;: &#34;0.02&#34;, &#34;eu-west-1&#34;: &#34;0.019&#34;}'>
                  $0.018 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.068&#34;, &#34;ap-northeast-1&#34;: &#34;0.075&#34;, &#34;sa-east-1&#34;: &#34;0.077&#34;, &#34;ap-southeast-1&#34;: &#34;0.075&#34;, &#34;ap-southeast-2&#34;: &#34;0.075&#34;, &#34;us-west-2&#34;: &#34;0.068&#34;, &#34;us-gov-west-1&#34;: &#34;0.071&#34;, &#34;us-west-1&#34;: &#34;0.072&#34;, &#34;eu-central-1&#34;: &#34;0.070&#34;, &#34;eu-west-1&#34;: &#34;0.069&#34;}'>
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.068&#34;, &#34;ap-northeast-1&#34;: &#34;0.075&#34;, &#34;sa-east-1&#34;: &#34;0.077&#34;, &#34;ap-southeast-1&#34;: &#34;0.075&#34;, &#34;ap-southeast-2&#34;: &#34;0.075&#34;, &#34;us-west-2&#34;: &#34;0.068&#34;, &#34;us-gov-west-1&#34;: &#34;0.071&#34;, &#34;us-west-1&#34;: &#34;0.072&#34;, &#34;eu-central-1&#34;: &#34;0.07&#34;, &#34;eu-west-1&#34;: &#34;0.069&#34;}'>
                  $0.068 per hour
           </td>
           <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: 0, &#34;ap-northeast-1&#34;: 0, &#34;sa-east-1&#34;: 0, &#34;ap-southeast-1&#34;: 0, &#34;ap-southeast-2&#34;: 0, &#34;us-west-2&#34;: 0, &#34;us-gov-west-1&#34;: 0, &#34;us-west-1&#34;: 0, &#34;eu-central-1&#34;: 0, &#34;eu-west-1&#34;: 0}'>
@@ -1223,13 +1237,13 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.026&#34;, &#34;ap-northeast-1&#34;: &#34;0.040&#34;, &#34;sa-east-1&#34;: &#34;0.054&#34;, &#34;ap-southeast-1&#34;: &#34;0.040&#34;, &#34;ap-southeast-2&#34;: &#34;0.040&#34;, &#34;us-west-2&#34;: &#34;0.026&#34;, &#34;us-gov-west-1&#34;: &#34;0.031&#34;, &#34;us-west-1&#34;: &#34;0.034&#34;, &#34;eu-central-1&#34;: &#34;0.030&#34;, &#34;eu-west-1&#34;: &#34;0.028&#34;}'>
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.026&#34;, &#34;ap-northeast-1&#34;: &#34;0.04&#34;, &#34;sa-east-1&#34;: &#34;0.054&#34;, &#34;ap-southeast-1&#34;: &#34;0.04&#34;, &#34;ap-southeast-2&#34;: &#34;0.04&#34;, &#34;us-west-2&#34;: &#34;0.026&#34;, &#34;us-gov-west-1&#34;: &#34;0.031&#34;, &#34;us-west-1&#34;: &#34;0.034&#34;, &#34;eu-central-1&#34;: &#34;0.03&#34;, &#34;eu-west-1&#34;: &#34;0.028&#34;}'>
                  $0.026 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.036&#34;, &#34;ap-northeast-1&#34;: &#34;0.050&#34;, &#34;sa-east-1&#34;: &#34;0.064&#34;, &#34;ap-southeast-1&#34;: &#34;0.050&#34;, &#34;ap-southeast-2&#34;: &#34;0.050&#34;, &#34;us-west-2&#34;: &#34;0.036&#34;, &#34;us-gov-west-1&#34;: &#34;0.041&#34;, &#34;us-west-1&#34;: &#34;0.044&#34;, &#34;eu-central-1&#34;: &#34;0.040&#34;, &#34;eu-west-1&#34;: &#34;0.038&#34;}'>
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.036&#34;, &#34;ap-northeast-1&#34;: &#34;0.05&#34;, &#34;sa-east-1&#34;: &#34;0.064&#34;, &#34;ap-southeast-1&#34;: &#34;0.05&#34;, &#34;ap-southeast-2&#34;: &#34;0.05&#34;, &#34;us-west-2&#34;: &#34;0.036&#34;, &#34;us-gov-west-1&#34;: &#34;0.041&#34;, &#34;us-west-1&#34;: &#34;0.044&#34;, &#34;eu-central-1&#34;: &#34;0.04&#34;, &#34;eu-west-1&#34;: &#34;0.038&#34;}'>
                  $0.036 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.136&#34;, &#34;ap-northeast-1&#34;: &#34;0.150&#34;, &#34;sa-east-1&#34;: &#34;0.164&#34;, &#34;ap-southeast-1&#34;: &#34;0.150&#34;, &#34;ap-southeast-2&#34;: &#34;0.150&#34;, &#34;us-west-2&#34;: &#34;0.136&#34;, &#34;us-gov-west-1&#34;: &#34;0.141&#34;, &#34;us-west-1&#34;: &#34;0.144&#34;, &#34;eu-central-1&#34;: &#34;0.140&#34;, &#34;eu-west-1&#34;: &#34;0.138&#34;}'>
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.136&#34;, &#34;ap-northeast-1&#34;: &#34;0.15&#34;, &#34;sa-east-1&#34;: &#34;0.164&#34;, &#34;ap-southeast-1&#34;: &#34;0.15&#34;, &#34;ap-southeast-2&#34;: &#34;0.15&#34;, &#34;us-west-2&#34;: &#34;0.136&#34;, &#34;us-gov-west-1&#34;: &#34;0.141&#34;, &#34;us-west-1&#34;: &#34;0.144&#34;, &#34;eu-central-1&#34;: &#34;0.14&#34;, &#34;eu-west-1&#34;: &#34;0.138&#34;}'>
                  $0.136 per hour
           </td>
           <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: 0, &#34;ap-northeast-1&#34;: 0, &#34;sa-east-1&#34;: 0, &#34;ap-southeast-1&#34;: 0, &#34;ap-southeast-2&#34;: 0, &#34;us-west-2&#34;: 0, &#34;us-gov-west-1&#34;: 0, &#34;us-west-1&#34;: 0, &#34;eu-central-1&#34;: 0, &#34;eu-west-1&#34;: 0}'>
@@ -1286,13 +1300,13 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.052&#34;, &#34;ap-northeast-1&#34;: &#34;0.080&#34;, &#34;sa-east-1&#34;: &#34;0.108&#34;, &#34;ap-southeast-1&#34;: &#34;0.080&#34;, &#34;ap-southeast-2&#34;: &#34;0.080&#34;, &#34;us-west-2&#34;: &#34;0.052&#34;, &#34;us-gov-west-1&#34;: &#34;0.062&#34;, &#34;us-west-1&#34;: &#34;0.068&#34;, &#34;eu-central-1&#34;: &#34;0.060&#34;, &#34;eu-west-1&#34;: &#34;0.056&#34;}'>
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.052&#34;, &#34;ap-northeast-1&#34;: &#34;0.08&#34;, &#34;sa-east-1&#34;: &#34;0.108&#34;, &#34;ap-southeast-1&#34;: &#34;0.08&#34;, &#34;ap-southeast-2&#34;: &#34;0.08&#34;, &#34;us-west-2&#34;: &#34;0.052&#34;, &#34;us-gov-west-1&#34;: &#34;0.062&#34;, &#34;us-west-1&#34;: &#34;0.068&#34;, &#34;eu-central-1&#34;: &#34;0.06&#34;, &#34;eu-west-1&#34;: &#34;0.056&#34;}'>
                  $0.052 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.072&#34;, &#34;ap-northeast-1&#34;: &#34;0.100&#34;, &#34;sa-east-1&#34;: &#34;0.128&#34;, &#34;ap-southeast-1&#34;: &#34;0.100&#34;, &#34;ap-southeast-2&#34;: &#34;0.100&#34;, &#34;us-west-2&#34;: &#34;0.072&#34;, &#34;us-gov-west-1&#34;: &#34;0.082&#34;, &#34;us-west-1&#34;: &#34;0.088&#34;, &#34;eu-central-1&#34;: &#34;0.080&#34;, &#34;eu-west-1&#34;: &#34;0.076&#34;}'>
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.072&#34;, &#34;ap-northeast-1&#34;: &#34;0.1&#34;, &#34;sa-east-1&#34;: &#34;0.128&#34;, &#34;ap-southeast-1&#34;: &#34;0.1&#34;, &#34;ap-southeast-2&#34;: &#34;0.1&#34;, &#34;us-west-2&#34;: &#34;0.072&#34;, &#34;us-gov-west-1&#34;: &#34;0.082&#34;, &#34;us-west-1&#34;: &#34;0.088&#34;, &#34;eu-central-1&#34;: &#34;0.08&#34;, &#34;eu-west-1&#34;: &#34;0.076&#34;}'>
                  $0.072 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.272&#34;, &#34;ap-northeast-1&#34;: &#34;0.300&#34;, &#34;sa-east-1&#34;: &#34;0.328&#34;, &#34;ap-southeast-1&#34;: &#34;0.300&#34;, &#34;ap-southeast-2&#34;: &#34;0.300&#34;, &#34;us-west-2&#34;: &#34;0.272&#34;, &#34;us-gov-west-1&#34;: &#34;0.282&#34;, &#34;us-west-1&#34;: &#34;0.288&#34;, &#34;eu-central-1&#34;: &#34;0.280&#34;, &#34;eu-west-1&#34;: &#34;0.276&#34;}'>
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.272&#34;, &#34;ap-northeast-1&#34;: &#34;0.3&#34;, &#34;sa-east-1&#34;: &#34;0.328&#34;, &#34;ap-southeast-1&#34;: &#34;0.3&#34;, &#34;ap-southeast-2&#34;: &#34;0.3&#34;, &#34;us-west-2&#34;: &#34;0.272&#34;, &#34;us-gov-west-1&#34;: &#34;0.282&#34;, &#34;us-west-1&#34;: &#34;0.288&#34;, &#34;eu-central-1&#34;: &#34;0.28&#34;, &#34;eu-west-1&#34;: &#34;0.276&#34;}'>
                  $0.272 per hour
           </td>
           <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: 0, &#34;ap-northeast-1&#34;: 0, &#34;sa-east-1&#34;: 0, &#34;ap-southeast-1&#34;: 0, &#34;ap-southeast-2&#34;: 0, &#34;us-west-2&#34;: 0, &#34;us-gov-west-1&#34;: 0, &#34;us-west-1&#34;: 0, &#34;eu-central-1&#34;: 0, &#34;eu-west-1&#34;: 0}'>
@@ -1349,13 +1363,13 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.104&#34;, &#34;ap-northeast-1&#34;: &#34;0.160&#34;, &#34;sa-east-1&#34;: &#34;0.216&#34;, &#34;ap-southeast-1&#34;: &#34;0.160&#34;, &#34;ap-southeast-2&#34;: &#34;0.160&#34;, &#34;us-west-2&#34;: &#34;0.104&#34;, &#34;us-gov-west-1&#34;: &#34;0.124&#34;, &#34;us-west-1&#34;: &#34;0.136&#34;, &#34;eu-central-1&#34;: &#34;0.120&#34;, &#34;eu-west-1&#34;: &#34;0.112&#34;}'>
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.104&#34;, &#34;ap-northeast-1&#34;: &#34;0.16&#34;, &#34;sa-east-1&#34;: &#34;0.216&#34;, &#34;ap-southeast-1&#34;: &#34;0.16&#34;, &#34;ap-southeast-2&#34;: &#34;0.16&#34;, &#34;us-west-2&#34;: &#34;0.104&#34;, &#34;us-gov-west-1&#34;: &#34;0.124&#34;, &#34;us-west-1&#34;: &#34;0.136&#34;, &#34;eu-central-1&#34;: &#34;0.12&#34;, &#34;eu-west-1&#34;: &#34;0.112&#34;}'>
                  $0.104 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.134&#34;, &#34;ap-northeast-1&#34;: &#34;0.190&#34;, &#34;sa-east-1&#34;: &#34;0.246&#34;, &#34;ap-southeast-1&#34;: &#34;0.190&#34;, &#34;ap-southeast-2&#34;: &#34;0.190&#34;, &#34;us-west-2&#34;: &#34;0.134&#34;, &#34;us-gov-west-1&#34;: &#34;0.154&#34;, &#34;us-west-1&#34;: &#34;0.166&#34;, &#34;eu-central-1&#34;: &#34;0.150&#34;, &#34;eu-west-1&#34;: &#34;0.142&#34;}'>
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.134&#34;, &#34;ap-northeast-1&#34;: &#34;0.19&#34;, &#34;sa-east-1&#34;: &#34;0.246&#34;, &#34;ap-southeast-1&#34;: &#34;0.19&#34;, &#34;ap-southeast-2&#34;: &#34;0.19&#34;, &#34;us-west-2&#34;: &#34;0.134&#34;, &#34;us-gov-west-1&#34;: &#34;0.154&#34;, &#34;us-west-1&#34;: &#34;0.166&#34;, &#34;eu-central-1&#34;: &#34;0.15&#34;, &#34;eu-west-1&#34;: &#34;0.142&#34;}'>
                  $0.134 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.434&#34;, &#34;ap-northeast-1&#34;: &#34;0.490&#34;, &#34;sa-east-1&#34;: &#34;0.546&#34;, &#34;ap-southeast-1&#34;: &#34;0.490&#34;, &#34;ap-southeast-2&#34;: &#34;0.490&#34;, &#34;us-west-2&#34;: &#34;0.434&#34;, &#34;us-gov-west-1&#34;: &#34;0.454&#34;, &#34;us-west-1&#34;: &#34;0.466&#34;, &#34;eu-central-1&#34;: &#34;0.450&#34;, &#34;eu-west-1&#34;: &#34;0.442&#34;}'>
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.434&#34;, &#34;ap-northeast-1&#34;: &#34;0.49&#34;, &#34;sa-east-1&#34;: &#34;0.546&#34;, &#34;ap-southeast-1&#34;: &#34;0.49&#34;, &#34;ap-southeast-2&#34;: &#34;0.49&#34;, &#34;us-west-2&#34;: &#34;0.434&#34;, &#34;us-gov-west-1&#34;: &#34;0.454&#34;, &#34;us-west-1&#34;: &#34;0.466&#34;, &#34;eu-central-1&#34;: &#34;0.45&#34;, &#34;eu-west-1&#34;: &#34;0.442&#34;}'>
                  $0.434 per hour
           </td>
           <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: 0, &#34;ap-northeast-1&#34;: 0, &#34;sa-east-1&#34;: 0, &#34;ap-southeast-1&#34;: 0, &#34;ap-southeast-2&#34;: 0, &#34;us-west-2&#34;: 0, &#34;us-gov-west-1&#34;: 0, &#34;us-west-1&#34;: 0, &#34;eu-central-1&#34;: 0, &#34;eu-west-1&#34;: 0}'>
@@ -1413,7 +1427,7 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.126&#34;, &#34;ap-northeast-1&#34;: &#34;0.183&#34;, &#34;ap-southeast-1&#34;: &#34;0.187&#34;, &#34;ap-southeast-2&#34;: &#34;0.177&#34;, &#34;us-west-2&#34;: &#34;0.126&#34;, &#34;us-west-1&#34;: &#34;0.147&#34;, &#34;eu-central-1&#34;: &#34;0.150&#34;, &#34;eu-west-1&#34;: &#34;0.139&#34;}'>
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.126&#34;, &#34;ap-northeast-1&#34;: &#34;0.183&#34;, &#34;ap-southeast-1&#34;: &#34;0.187&#34;, &#34;ap-southeast-2&#34;: &#34;0.177&#34;, &#34;us-west-2&#34;: &#34;0.126&#34;, &#34;us-west-1&#34;: &#34;0.147&#34;, &#34;eu-central-1&#34;: &#34;0.15&#34;, &#34;eu-west-1&#34;: &#34;0.139&#34;}'>
                  $0.126 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.252&#34;, &#34;ap-northeast-1&#34;: &#34;0.282&#34;, &#34;ap-southeast-1&#34;: &#34;0.313&#34;, &#34;ap-southeast-2&#34;: &#34;0.303&#34;, &#34;us-west-2&#34;: &#34;0.252&#34;, &#34;us-west-1&#34;: &#34;0.273&#34;, &#34;eu-central-1&#34;: &#34;0.276&#34;, &#34;eu-west-1&#34;: &#34;0.251&#34;}'>
@@ -1422,7 +1436,7 @@
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.261&#34;, &#34;ap-northeast-1&#34;: &#34;0.318&#34;, &#34;ap-southeast-1&#34;: &#34;0.322&#34;, &#34;ap-southeast-2&#34;: &#34;0.312&#34;, &#34;us-west-2&#34;: &#34;0.261&#34;, &#34;us-west-1&#34;: &#34;0.282&#34;, &#34;eu-central-1&#34;: &#34;0.285&#34;, &#34;eu-west-1&#34;: &#34;0.274&#34;}'>
                  $0.261 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;0.927&#34;, &#34;ap-northeast-1&#34;: &#34;0.984&#34;, &#34;ap-southeast-1&#34;: &#34;0.988&#34;, &#34;ap-southeast-2&#34;: &#34;0.978&#34;, &#34;us-west-2&#34;: &#34;0.927&#34;, &#34;us-west-1&#34;: &#34;0.948&#34;, &#34;eu-central-1&#34;: &#34;0.951&#34;, &#34;eu-west-1&#34;: &#34;0.940&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;0.927&#34;, &#34;ap-northeast-1&#34;: &#34;0.984&#34;, &#34;ap-southeast-1&#34;: &#34;0.988&#34;, &#34;ap-southeast-2&#34;: &#34;0.978&#34;, &#34;us-west-2&#34;: &#34;0.927&#34;, &#34;us-west-1&#34;: &#34;0.948&#34;, &#34;eu-central-1&#34;: &#34;0.951&#34;, &#34;eu-west-1&#34;: &#34;0.94&#34;}'>
                  $0.927 per hour
           </td>
         </tr>
@@ -1477,7 +1491,7 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.252&#34;, &#34;ap-northeast-1&#34;: &#34;0.366&#34;, &#34;ap-southeast-1&#34;: &#34;0.374&#34;, &#34;ap-southeast-2&#34;: &#34;0.354&#34;, &#34;us-west-2&#34;: &#34;0.252&#34;, &#34;us-west-1&#34;: &#34;0.294&#34;, &#34;eu-central-1&#34;: &#34;0.300&#34;, &#34;eu-west-1&#34;: &#34;0.278&#34;}'>
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.252&#34;, &#34;ap-northeast-1&#34;: &#34;0.366&#34;, &#34;ap-southeast-1&#34;: &#34;0.374&#34;, &#34;ap-southeast-2&#34;: &#34;0.354&#34;, &#34;us-west-2&#34;: &#34;0.252&#34;, &#34;us-west-1&#34;: &#34;0.294&#34;, &#34;eu-central-1&#34;: &#34;0.3&#34;, &#34;eu-west-1&#34;: &#34;0.278&#34;}'>
                  $0.252 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.504&#34;, &#34;ap-northeast-1&#34;: &#34;0.564&#34;, &#34;ap-southeast-1&#34;: &#34;0.626&#34;, &#34;ap-southeast-2&#34;: &#34;0.606&#34;, &#34;us-west-2&#34;: &#34;0.504&#34;, &#34;us-west-1&#34;: &#34;0.546&#34;, &#34;eu-central-1&#34;: &#34;0.552&#34;, &#34;eu-west-1&#34;: &#34;0.502&#34;}'>
@@ -1541,16 +1555,16 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.504&#34;, &#34;ap-northeast-1&#34;: &#34;0.732&#34;, &#34;ap-southeast-1&#34;: &#34;0.748&#34;, &#34;ap-southeast-2&#34;: &#34;0.708&#34;, &#34;us-west-2&#34;: &#34;0.504&#34;, &#34;us-west-1&#34;: &#34;0.588&#34;, &#34;eu-central-1&#34;: &#34;0.600&#34;, &#34;eu-west-1&#34;: &#34;0.556&#34;}'>
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.504&#34;, &#34;ap-northeast-1&#34;: &#34;0.732&#34;, &#34;ap-southeast-1&#34;: &#34;0.748&#34;, &#34;ap-southeast-2&#34;: &#34;0.708&#34;, &#34;us-west-2&#34;: &#34;0.504&#34;, &#34;us-west-1&#34;: &#34;0.588&#34;, &#34;eu-central-1&#34;: &#34;0.6&#34;, &#34;eu-west-1&#34;: &#34;0.556&#34;}'>
                  $0.504 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;1.008&#34;, &#34;ap-northeast-1&#34;: &#34;1.128&#34;, &#34;ap-southeast-1&#34;: &#34;1.252&#34;, &#34;ap-southeast-2&#34;: &#34;1.212&#34;, &#34;us-west-2&#34;: &#34;1.008&#34;, &#34;us-west-1&#34;: &#34;1.092&#34;, &#34;eu-central-1&#34;: &#34;1.104&#34;, &#34;eu-west-1&#34;: &#34;1.004&#34;}'>
                  $1.008 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.900&#34;, &#34;ap-northeast-1&#34;: &#34;1.128&#34;, &#34;ap-southeast-1&#34;: &#34;1.144&#34;, &#34;ap-southeast-2&#34;: &#34;1.104&#34;, &#34;us-west-2&#34;: &#34;0.900&#34;, &#34;us-west-1&#34;: &#34;0.984&#34;, &#34;eu-central-1&#34;: &#34;0.996&#34;, &#34;eu-west-1&#34;: &#34;0.952&#34;}'>
-                 $0.900 per hour
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.9&#34;, &#34;ap-northeast-1&#34;: &#34;1.128&#34;, &#34;ap-southeast-1&#34;: &#34;1.144&#34;, &#34;ap-southeast-2&#34;: &#34;1.104&#34;, &#34;us-west-2&#34;: &#34;0.9&#34;, &#34;us-west-1&#34;: &#34;0.984&#34;, &#34;eu-central-1&#34;: &#34;0.996&#34;, &#34;eu-west-1&#34;: &#34;0.952&#34;}'>
+                 $0.9 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;2.346&#34;, &#34;ap-northeast-1&#34;: &#34;2.574&#34;, &#34;ap-southeast-1&#34;: &#34;2.590&#34;, &#34;ap-southeast-2&#34;: &#34;2.550&#34;, &#34;us-west-2&#34;: &#34;2.346&#34;, &#34;us-west-1&#34;: &#34;2.430&#34;, &#34;eu-central-1&#34;: &#34;2.442&#34;, &#34;eu-west-1&#34;: &#34;2.398&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;2.346&#34;, &#34;ap-northeast-1&#34;: &#34;2.574&#34;, &#34;ap-southeast-1&#34;: &#34;2.59&#34;, &#34;ap-southeast-2&#34;: &#34;2.55&#34;, &#34;us-west-2&#34;: &#34;2.346&#34;, &#34;us-west-1&#34;: &#34;2.43&#34;, &#34;eu-central-1&#34;: &#34;2.442&#34;, &#34;eu-west-1&#34;: &#34;2.398&#34;}'>
                  $2.346 per hour
           </td>
         </tr>
@@ -1605,16 +1619,16 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;1.008&#34;, &#34;ap-northeast-1&#34;: &#34;1.464&#34;, &#34;ap-southeast-1&#34;: &#34;1.496&#34;, &#34;ap-southeast-2&#34;: &#34;1.416&#34;, &#34;us-west-2&#34;: &#34;1.008&#34;, &#34;us-west-1&#34;: &#34;1.176&#34;, &#34;eu-central-1&#34;: &#34;1.200&#34;, &#34;eu-west-1&#34;: &#34;1.112&#34;}'>
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;1.008&#34;, &#34;ap-northeast-1&#34;: &#34;1.464&#34;, &#34;ap-southeast-1&#34;: &#34;1.496&#34;, &#34;ap-southeast-2&#34;: &#34;1.416&#34;, &#34;us-west-2&#34;: &#34;1.008&#34;, &#34;us-west-1&#34;: &#34;1.176&#34;, &#34;eu-central-1&#34;: &#34;1.2&#34;, &#34;eu-west-1&#34;: &#34;1.112&#34;}'>
                  $1.008 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;2.016&#34;, &#34;ap-northeast-1&#34;: &#34;2.256&#34;, &#34;ap-southeast-1&#34;: &#34;2.504&#34;, &#34;ap-southeast-2&#34;: &#34;2.424&#34;, &#34;us-west-2&#34;: &#34;2.016&#34;, &#34;us-west-1&#34;: &#34;2.184&#34;, &#34;eu-central-1&#34;: &#34;2.208&#34;, &#34;eu-west-1&#34;: &#34;2.008&#34;}'>
                  $2.016 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;1.844&#34;, &#34;ap-northeast-1&#34;: &#34;2.300&#34;, &#34;ap-southeast-1&#34;: &#34;2.332&#34;, &#34;ap-southeast-2&#34;: &#34;2.252&#34;, &#34;us-west-2&#34;: &#34;1.844&#34;, &#34;us-west-1&#34;: &#34;2.012&#34;, &#34;eu-central-1&#34;: &#34;2.036&#34;, &#34;eu-west-1&#34;: &#34;1.948&#34;}'>
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;1.844&#34;, &#34;ap-northeast-1&#34;: &#34;2.3&#34;, &#34;ap-southeast-1&#34;: &#34;2.332&#34;, &#34;ap-southeast-2&#34;: &#34;2.252&#34;, &#34;us-west-2&#34;: &#34;1.844&#34;, &#34;us-west-1&#34;: &#34;2.012&#34;, &#34;eu-central-1&#34;: &#34;2.036&#34;, &#34;eu-west-1&#34;: &#34;1.948&#34;}'>
                  $1.844 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;4.644&#34;, &#34;ap-northeast-1&#34;: &#34;5.100&#34;, &#34;ap-southeast-1&#34;: &#34;5.132&#34;, &#34;ap-southeast-2&#34;: &#34;5.052&#34;, &#34;us-west-2&#34;: &#34;4.644&#34;, &#34;us-west-1&#34;: &#34;4.812&#34;, &#34;eu-central-1&#34;: &#34;4.836&#34;, &#34;eu-west-1&#34;: &#34;4.748&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;4.644&#34;, &#34;ap-northeast-1&#34;: &#34;5.1&#34;, &#34;ap-southeast-1&#34;: &#34;5.132&#34;, &#34;ap-southeast-2&#34;: &#34;5.052&#34;, &#34;us-west-2&#34;: &#34;4.644&#34;, &#34;us-west-1&#34;: &#34;4.812&#34;, &#34;eu-central-1&#34;: &#34;4.836&#34;, &#34;eu-west-1&#34;: &#34;4.748&#34;}'>
                  $4.644 per hour
           </td>
         </tr>
@@ -1669,11 +1683,11 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;2.520&#34;, &#34;ap-northeast-1&#34;: &#34;3.660&#34;, &#34;ap-southeast-1&#34;: &#34;3.740&#34;, &#34;ap-southeast-2&#34;: &#34;3.540&#34;, &#34;us-west-2&#34;: &#34;2.520&#34;, &#34;us-west-1&#34;: &#34;2.940&#34;, &#34;eu-central-1&#34;: &#34;3.000&#34;, &#34;eu-west-1&#34;: &#34;2.780&#34;}'>
-                 $2.520 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;2.52&#34;, &#34;ap-northeast-1&#34;: &#34;3.66&#34;, &#34;ap-southeast-1&#34;: &#34;3.74&#34;, &#34;ap-southeast-2&#34;: &#34;3.54&#34;, &#34;us-west-2&#34;: &#34;2.52&#34;, &#34;us-west-1&#34;: &#34;2.94&#34;, &#34;eu-central-1&#34;: &#34;3&#34;, &#34;eu-west-1&#34;: &#34;2.78&#34;}'>
+                 $2.52 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;5.040&#34;, &#34;ap-northeast-1&#34;: &#34;5.640&#34;, &#34;ap-southeast-1&#34;: &#34;6.260&#34;, &#34;ap-southeast-2&#34;: &#34;6.060&#34;, &#34;us-west-2&#34;: &#34;5.040&#34;, &#34;us-west-1&#34;: &#34;5.460&#34;, &#34;eu-central-1&#34;: &#34;5.520&#34;, &#34;eu-west-1&#34;: &#34;5.020&#34;}'>
-                 $5.040 per hour
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;5.04&#34;, &#34;ap-northeast-1&#34;: &#34;5.64&#34;, &#34;ap-southeast-1&#34;: &#34;6.26&#34;, &#34;ap-southeast-2&#34;: &#34;6.06&#34;, &#34;us-west-2&#34;: &#34;5.04&#34;, &#34;us-west-1&#34;: &#34;5.46&#34;, &#34;eu-central-1&#34;: &#34;5.52&#34;, &#34;eu-west-1&#34;: &#34;5.02&#34;}'>
+                 $5.04 per hour
           </td>
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;4.582&#34;, &#34;ap-northeast-1&#34;: &#34;5.722&#34;, &#34;ap-southeast-1&#34;: &#34;5.802&#34;, &#34;ap-southeast-2&#34;: &#34;5.602&#34;, &#34;us-west-2&#34;: &#34;4.582&#34;, &#34;us-west-1&#34;: &#34;5.002&#34;, &#34;eu-central-1&#34;: &#34;5.062&#34;, &#34;eu-west-1&#34;: &#34;4.842&#34;}'>
                  $4.582 per hour
@@ -1737,8 +1751,8 @@
           <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.067&#34;, &#34;ap-northeast-1&#34;: &#34;0.096&#34;, &#34;sa-east-1&#34;: &#34;0.095&#34;, &#34;ap-southeast-1&#34;: &#34;0.098&#34;, &#34;ap-southeast-2&#34;: &#34;0.093&#34;, &#34;us-west-2&#34;: &#34;0.067&#34;, &#34;us-gov-west-1&#34;: &#34;0.084&#34;, &#34;us-west-1&#34;: &#34;0.077&#34;, &#34;eu-central-1&#34;: &#34;0.079&#34;, &#34;eu-west-1&#34;: &#34;0.073&#34;}'>
                  $0.067 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.130&#34;, &#34;ap-northeast-1&#34;: &#34;0.146&#34;, &#34;sa-east-1&#34;: &#34;0.158&#34;, &#34;ap-southeast-1&#34;: &#34;0.161&#34;, &#34;ap-southeast-2&#34;: &#34;0.156&#34;, &#34;us-west-2&#34;: &#34;0.130&#34;, &#34;us-gov-west-1&#34;: &#34;0.147&#34;, &#34;us-west-1&#34;: &#34;0.140&#34;, &#34;eu-central-1&#34;: &#34;0.142&#34;, &#34;eu-west-1&#34;: &#34;0.129&#34;}'>
-                 $0.130 per hour
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.13&#34;, &#34;ap-northeast-1&#34;: &#34;0.146&#34;, &#34;sa-east-1&#34;: &#34;0.158&#34;, &#34;ap-southeast-1&#34;: &#34;0.161&#34;, &#34;ap-southeast-2&#34;: &#34;0.156&#34;, &#34;us-west-2&#34;: &#34;0.13&#34;, &#34;us-gov-west-1&#34;: &#34;0.147&#34;, &#34;us-west-1&#34;: &#34;0.14&#34;, &#34;eu-central-1&#34;: &#34;0.142&#34;, &#34;eu-west-1&#34;: &#34;0.129&#34;}'>
+                 $0.13 per hour
           </td>
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.184&#34;, &#34;ap-northeast-1&#34;: &#34;0.182&#34;, &#34;sa-east-1&#34;: &#34;0.235&#34;, &#34;ap-southeast-1&#34;: &#34;0.187&#34;, &#34;ap-southeast-2&#34;: &#34;0.182&#34;, &#34;us-west-2&#34;: &#34;0.184&#34;, &#34;us-gov-west-1&#34;: &#34;0.222&#34;, &#34;us-west-1&#34;: &#34;0.201&#34;, &#34;eu-central-1&#34;: &#34;0.243&#34;, &#34;eu-west-1&#34;: &#34;0.183&#34;}'>
                  $0.184 per hour
@@ -1799,16 +1813,16 @@
           <td class="linux-virtualization">
             HVM, PV
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.133&#34;, &#34;ap-northeast-1&#34;: &#34;0.193&#34;, &#34;sa-east-1&#34;: &#34;0.190&#34;, &#34;ap-southeast-1&#34;: &#34;0.196&#34;, &#34;ap-southeast-2&#34;: &#34;0.186&#34;, &#34;us-west-2&#34;: &#34;0.133&#34;, &#34;us-gov-west-1&#34;: &#34;0.168&#34;, &#34;us-west-1&#34;: &#34;0.154&#34;, &#34;eu-central-1&#34;: &#34;0.158&#34;, &#34;eu-west-1&#34;: &#34;0.146&#34;}'>
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.133&#34;, &#34;ap-northeast-1&#34;: &#34;0.193&#34;, &#34;sa-east-1&#34;: &#34;0.19&#34;, &#34;ap-southeast-1&#34;: &#34;0.196&#34;, &#34;ap-southeast-2&#34;: &#34;0.186&#34;, &#34;us-west-2&#34;: &#34;0.133&#34;, &#34;us-gov-west-1&#34;: &#34;0.168&#34;, &#34;us-west-1&#34;: &#34;0.154&#34;, &#34;eu-central-1&#34;: &#34;0.158&#34;, &#34;eu-west-1&#34;: &#34;0.146&#34;}'>
                  $0.133 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.259&#34;, &#34;ap-northeast-1&#34;: &#34;0.292&#34;, &#34;sa-east-1&#34;: &#34;0.316&#34;, &#34;ap-southeast-1&#34;: &#34;0.322&#34;, &#34;ap-southeast-2&#34;: &#34;0.312&#34;, &#34;us-west-2&#34;: &#34;0.259&#34;, &#34;us-gov-west-1&#34;: &#34;0.294&#34;, &#34;us-west-1&#34;: &#34;0.280&#34;, &#34;eu-central-1&#34;: &#34;0.284&#34;, &#34;eu-west-1&#34;: &#34;0.258&#34;}'>
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.259&#34;, &#34;ap-northeast-1&#34;: &#34;0.292&#34;, &#34;sa-east-1&#34;: &#34;0.316&#34;, &#34;ap-southeast-1&#34;: &#34;0.322&#34;, &#34;ap-southeast-2&#34;: &#34;0.312&#34;, &#34;us-west-2&#34;: &#34;0.259&#34;, &#34;us-gov-west-1&#34;: &#34;0.294&#34;, &#34;us-west-1&#34;: &#34;0.28&#34;, &#34;eu-central-1&#34;: &#34;0.284&#34;, &#34;eu-west-1&#34;: &#34;0.258&#34;}'>
                  $0.259 per hour
           </td>
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.367&#34;, &#34;ap-northeast-1&#34;: &#34;0.364&#34;, &#34;sa-east-1&#34;: &#34;0.469&#34;, &#34;ap-southeast-1&#34;: &#34;0.374&#34;, &#34;ap-southeast-2&#34;: &#34;0.364&#34;, &#34;us-west-2&#34;: &#34;0.367&#34;, &#34;us-gov-west-1&#34;: &#34;0.444&#34;, &#34;us-west-1&#34;: &#34;0.401&#34;, &#34;eu-central-1&#34;: &#34;0.466&#34;, &#34;eu-west-1&#34;: &#34;0.366&#34;}'>
                  $0.367 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;0.704&#34;, &#34;ap-northeast-1&#34;: &#34;0.706&#34;, &#34;sa-east-1&#34;: &#34;0.837&#34;, &#34;ap-southeast-1&#34;: &#34;0.711&#34;, &#34;ap-southeast-2&#34;: &#34;0.701&#34;, &#34;us-west-2&#34;: &#34;0.704&#34;, &#34;us-gov-west-1&#34;: &#34;0.798&#34;, &#34;us-west-1&#34;: &#34;0.747&#34;, &#34;eu-central-1&#34;: &#34;1.250&#34;, &#34;eu-west-1&#34;: &#34;0.703&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;0.704&#34;, &#34;ap-northeast-1&#34;: &#34;0.706&#34;, &#34;sa-east-1&#34;: &#34;0.837&#34;, &#34;ap-southeast-1&#34;: &#34;0.711&#34;, &#34;ap-southeast-2&#34;: &#34;0.701&#34;, &#34;us-west-2&#34;: &#34;0.704&#34;, &#34;us-gov-west-1&#34;: &#34;0.798&#34;, &#34;us-west-1&#34;: &#34;0.747&#34;, &#34;eu-central-1&#34;: &#34;1.25&#34;, &#34;eu-west-1&#34;: &#34;0.703&#34;}'>
                  $0.704 per hour
           </td>
         </tr>
@@ -1869,13 +1883,13 @@
           <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.266&#34;, &#34;ap-northeast-1&#34;: &#34;0.385&#34;, &#34;sa-east-1&#34;: &#34;0.381&#34;, &#34;ap-southeast-1&#34;: &#34;0.392&#34;, &#34;ap-southeast-2&#34;: &#34;0.372&#34;, &#34;us-west-2&#34;: &#34;0.266&#34;, &#34;us-gov-west-1&#34;: &#34;0.336&#34;, &#34;us-west-1&#34;: &#34;0.308&#34;, &#34;eu-central-1&#34;: &#34;0.315&#34;, &#34;eu-west-1&#34;: &#34;0.293&#34;}'>
                  $0.266 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.518&#34;, &#34;ap-northeast-1&#34;: &#34;0.583&#34;, &#34;sa-east-1&#34;: &#34;0.633&#34;, &#34;ap-southeast-1&#34;: &#34;0.644&#34;, &#34;ap-southeast-2&#34;: &#34;0.624&#34;, &#34;us-west-2&#34;: &#34;0.518&#34;, &#34;us-gov-west-1&#34;: &#34;0.588&#34;, &#34;us-west-1&#34;: &#34;0.560&#34;, &#34;eu-central-1&#34;: &#34;0.567&#34;, &#34;eu-west-1&#34;: &#34;0.517&#34;}'>
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.518&#34;, &#34;ap-northeast-1&#34;: &#34;0.583&#34;, &#34;sa-east-1&#34;: &#34;0.633&#34;, &#34;ap-southeast-1&#34;: &#34;0.644&#34;, &#34;ap-southeast-2&#34;: &#34;0.624&#34;, &#34;us-west-2&#34;: &#34;0.518&#34;, &#34;us-gov-west-1&#34;: &#34;0.588&#34;, &#34;us-west-1&#34;: &#34;0.56&#34;, &#34;eu-central-1&#34;: &#34;0.567&#34;, &#34;eu-west-1&#34;: &#34;0.517&#34;}'>
                  $0.518 per hour
           </td>
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.734&#34;, &#34;ap-northeast-1&#34;: &#34;0.728&#34;, &#34;sa-east-1&#34;: &#34;0.939&#34;, &#34;ap-southeast-1&#34;: &#34;0.748&#34;, &#34;ap-southeast-2&#34;: &#34;0.728&#34;, &#34;us-west-2&#34;: &#34;0.734&#34;, &#34;us-gov-west-1&#34;: &#34;0.887&#34;, &#34;us-west-1&#34;: &#34;0.803&#34;, &#34;eu-central-1&#34;: &#34;0.882&#34;, &#34;eu-west-1&#34;: &#34;0.733&#34;}'>
                  $0.734 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;1.266&#34;, &#34;ap-northeast-1&#34;: &#34;1.333&#34;, &#34;sa-east-1&#34;: &#34;1.507&#34;, &#34;ap-southeast-1&#34;: &#34;1.280&#34;, &#34;ap-southeast-2&#34;: &#34;1.260&#34;, &#34;us-west-2&#34;: &#34;1.266&#34;, &#34;us-gov-west-1&#34;: &#34;1.436&#34;, &#34;us-west-1&#34;: &#34;1.345&#34;, &#34;eu-central-1&#34;: &#34;1.778&#34;, &#34;eu-west-1&#34;: &#34;1.265&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;1.266&#34;, &#34;ap-northeast-1&#34;: &#34;1.333&#34;, &#34;sa-east-1&#34;: &#34;1.507&#34;, &#34;ap-southeast-1&#34;: &#34;1.28&#34;, &#34;ap-southeast-2&#34;: &#34;1.26&#34;, &#34;us-west-2&#34;: &#34;1.266&#34;, &#34;us-gov-west-1&#34;: &#34;1.436&#34;, &#34;us-west-1&#34;: &#34;1.345&#34;, &#34;eu-central-1&#34;: &#34;1.778&#34;, &#34;eu-west-1&#34;: &#34;1.265&#34;}'>
                  $1.266 per hour
           </td>
         </tr>
@@ -1933,16 +1947,16 @@
           <td class="linux-virtualization">
             HVM, PV
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.532&#34;, &#34;ap-northeast-1&#34;: &#34;0.770&#34;, &#34;sa-east-1&#34;: &#34;0.761&#34;, &#34;ap-southeast-1&#34;: &#34;0.784&#34;, &#34;ap-southeast-2&#34;: &#34;0.745&#34;, &#34;us-west-2&#34;: &#34;0.532&#34;, &#34;us-gov-west-1&#34;: &#34;0.672&#34;, &#34;us-west-1&#34;: &#34;0.616&#34;, &#34;eu-central-1&#34;: &#34;0.632&#34;, &#34;eu-west-1&#34;: &#34;0.585&#34;}'>
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.532&#34;, &#34;ap-northeast-1&#34;: &#34;0.77&#34;, &#34;sa-east-1&#34;: &#34;0.761&#34;, &#34;ap-southeast-1&#34;: &#34;0.784&#34;, &#34;ap-southeast-2&#34;: &#34;0.745&#34;, &#34;us-west-2&#34;: &#34;0.532&#34;, &#34;us-gov-west-1&#34;: &#34;0.672&#34;, &#34;us-west-1&#34;: &#34;0.616&#34;, &#34;eu-central-1&#34;: &#34;0.632&#34;, &#34;eu-west-1&#34;: &#34;0.585&#34;}'>
                  $0.532 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;1.036&#34;, &#34;ap-northeast-1&#34;: &#34;1.166&#34;, &#34;sa-east-1&#34;: &#34;1.265&#34;, &#34;ap-southeast-1&#34;: &#34;1.288&#34;, &#34;ap-southeast-2&#34;: &#34;1.249&#34;, &#34;us-west-2&#34;: &#34;1.036&#34;, &#34;us-gov-west-1&#34;: &#34;1.176&#34;, &#34;us-west-1&#34;: &#34;1.120&#34;, &#34;eu-central-1&#34;: &#34;1.136&#34;, &#34;eu-west-1&#34;: &#34;1.033&#34;}'>
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;1.036&#34;, &#34;ap-northeast-1&#34;: &#34;1.166&#34;, &#34;sa-east-1&#34;: &#34;1.265&#34;, &#34;ap-southeast-1&#34;: &#34;1.288&#34;, &#34;ap-southeast-2&#34;: &#34;1.249&#34;, &#34;us-west-2&#34;: &#34;1.036&#34;, &#34;us-gov-west-1&#34;: &#34;1.176&#34;, &#34;us-west-1&#34;: &#34;1.12&#34;, &#34;eu-central-1&#34;: &#34;1.136&#34;, &#34;eu-west-1&#34;: &#34;1.033&#34;}'>
                  $1.036 per hour
           </td>
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;1.468&#34;, &#34;ap-northeast-1&#34;: &#34;1.456&#34;, &#34;sa-east-1&#34;: &#34;1.877&#34;, &#34;ap-southeast-1&#34;: &#34;1.496&#34;, &#34;ap-southeast-2&#34;: &#34;1.457&#34;, &#34;us-west-2&#34;: &#34;1.468&#34;, &#34;us-gov-west-1&#34;: &#34;1.774&#34;, &#34;us-west-1&#34;: &#34;1.606&#34;, &#34;eu-central-1&#34;: &#34;1.829&#34;, &#34;eu-west-1&#34;: &#34;1.465&#34;}'>
                  $1.468 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;2.532&#34;, &#34;ap-northeast-1&#34;: &#34;2.665&#34;, &#34;sa-east-1&#34;: &#34;3.013&#34;, &#34;ap-southeast-1&#34;: &#34;2.560&#34;, &#34;ap-southeast-2&#34;: &#34;2.521&#34;, &#34;us-west-2&#34;: &#34;2.532&#34;, &#34;us-gov-west-1&#34;: &#34;2.871&#34;, &#34;us-west-1&#34;: &#34;2.689&#34;, &#34;eu-central-1&#34;: &#34;3.537&#34;, &#34;eu-west-1&#34;: &#34;2.529&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;2.532&#34;, &#34;ap-northeast-1&#34;: &#34;2.665&#34;, &#34;sa-east-1&#34;: &#34;3.013&#34;, &#34;ap-southeast-1&#34;: &#34;2.56&#34;, &#34;ap-southeast-2&#34;: &#34;2.521&#34;, &#34;us-west-2&#34;: &#34;2.532&#34;, &#34;us-gov-west-1&#34;: &#34;2.871&#34;, &#34;us-west-1&#34;: &#34;2.689&#34;, &#34;eu-central-1&#34;: &#34;3.537&#34;, &#34;eu-west-1&#34;: &#34;2.529&#34;}'>
                  $2.532 per hour
           </td>
         </tr>
@@ -1997,17 +2011,17 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.110&#34;, &#34;ap-northeast-1&#34;: &#34;0.140&#34;, &#34;ap-southeast-1&#34;: &#34;0.152&#34;, &#34;ap-southeast-2&#34;: &#34;0.144&#34;, &#34;us-west-2&#34;: &#34;0.110&#34;, &#34;us-west-1&#34;: &#34;0.138&#34;, &#34;eu-central-1&#34;: &#34;0.141&#34;, &#34;eu-west-1&#34;: &#34;0.125&#34;}'>
-                 $0.110 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.11&#34;, &#34;ap-northeast-1&#34;: &#34;0.14&#34;, &#34;ap-southeast-1&#34;: &#34;0.152&#34;, &#34;ap-southeast-2&#34;: &#34;0.144&#34;, &#34;us-west-2&#34;: &#34;0.11&#34;, &#34;us-west-1&#34;: &#34;0.138&#34;, &#34;eu-central-1&#34;: &#34;0.141&#34;, &#34;eu-west-1&#34;: &#34;0.125&#34;}'>
+                 $0.11 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.193&#34;, &#34;ap-northeast-1&#34;: &#34;0.240&#34;, &#34;ap-southeast-1&#34;: &#34;0.252&#34;, &#34;ap-southeast-2&#34;: &#34;0.244&#34;, &#34;us-west-2&#34;: &#34;0.193&#34;, &#34;us-west-1&#34;: &#34;0.221&#34;, &#34;eu-central-1&#34;: &#34;0.224&#34;, &#34;eu-west-1&#34;: &#34;0.208&#34;}'>
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.193&#34;, &#34;ap-northeast-1&#34;: &#34;0.24&#34;, &#34;ap-southeast-1&#34;: &#34;0.252&#34;, &#34;ap-southeast-2&#34;: &#34;0.244&#34;, &#34;us-west-2&#34;: &#34;0.193&#34;, &#34;us-west-1&#34;: &#34;0.221&#34;, &#34;eu-central-1&#34;: &#34;0.224&#34;, &#34;eu-west-1&#34;: &#34;0.208&#34;}'>
                  $0.193 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.418&#34;, &#34;ap-northeast-1&#34;: &#34;0.448&#34;, &#34;ap-southeast-1&#34;: &#34;0.460&#34;, &#34;ap-southeast-2&#34;: &#34;0.452&#34;, &#34;us-west-2&#34;: &#34;0.418&#34;, &#34;us-west-1&#34;: &#34;0.446&#34;, &#34;eu-central-1&#34;: &#34;0.449&#34;, &#34;eu-west-1&#34;: &#34;0.433&#34;}'>
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.418&#34;, &#34;ap-northeast-1&#34;: &#34;0.448&#34;, &#34;ap-southeast-1&#34;: &#34;0.46&#34;, &#34;ap-southeast-2&#34;: &#34;0.452&#34;, &#34;us-west-2&#34;: &#34;0.418&#34;, &#34;us-west-1&#34;: &#34;0.446&#34;, &#34;eu-central-1&#34;: &#34;0.449&#34;, &#34;eu-west-1&#34;: &#34;0.433&#34;}'>
                  $0.418 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;1.410&#34;, &#34;ap-northeast-1&#34;: &#34;1.440&#34;, &#34;ap-southeast-1&#34;: &#34;1.452&#34;, &#34;ap-southeast-2&#34;: &#34;1.444&#34;, &#34;us-west-2&#34;: &#34;1.410&#34;, &#34;us-west-1&#34;: &#34;1.438&#34;, &#34;eu-central-1&#34;: &#34;1.441&#34;, &#34;eu-west-1&#34;: &#34;1.425&#34;}'>
-                 $1.410 per hour
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;1.41&#34;, &#34;ap-northeast-1&#34;: &#34;1.44&#34;, &#34;ap-southeast-1&#34;: &#34;1.452&#34;, &#34;ap-southeast-2&#34;: &#34;1.444&#34;, &#34;us-west-2&#34;: &#34;1.41&#34;, &#34;us-west-1&#34;: &#34;1.438&#34;, &#34;eu-central-1&#34;: &#34;1.441&#34;, &#34;eu-west-1&#34;: &#34;1.425&#34;}'>
+                 $1.41 per hour
           </td>
         </tr>
         <tr class='instance' id="c4.xlarge">
@@ -2061,8 +2075,8 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.220&#34;, &#34;ap-northeast-1&#34;: &#34;0.279&#34;, &#34;ap-southeast-1&#34;: &#34;0.304&#34;, &#34;ap-southeast-2&#34;: &#34;0.289&#34;, &#34;us-west-2&#34;: &#34;0.220&#34;, &#34;us-west-1&#34;: &#34;0.276&#34;, &#34;eu-central-1&#34;: &#34;0.281&#34;, &#34;eu-west-1&#34;: &#34;0.251&#34;}'>
-                 $0.220 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.22&#34;, &#34;ap-northeast-1&#34;: &#34;0.279&#34;, &#34;ap-southeast-1&#34;: &#34;0.304&#34;, &#34;ap-southeast-2&#34;: &#34;0.289&#34;, &#34;us-west-2&#34;: &#34;0.22&#34;, &#34;us-west-1&#34;: &#34;0.276&#34;, &#34;eu-central-1&#34;: &#34;0.281&#34;, &#34;eu-west-1&#34;: &#34;0.251&#34;}'>
+                 $0.22 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.386&#34;, &#34;ap-northeast-1&#34;: &#34;0.478&#34;, &#34;ap-southeast-1&#34;: &#34;0.503&#34;, &#34;ap-southeast-2&#34;: &#34;0.488&#34;, &#34;us-west-2&#34;: &#34;0.386&#34;, &#34;us-west-1&#34;: &#34;0.442&#34;, &#34;eu-central-1&#34;: &#34;0.447&#34;, &#34;eu-west-1&#34;: &#34;0.417&#34;}'>
                  $0.386 per hour
@@ -2253,16 +2267,16 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;1.763&#34;, &#34;ap-northeast-1&#34;: &#34;2.234&#34;, &#34;ap-southeast-1&#34;: &#34;2.432&#34;, &#34;ap-southeast-2&#34;: &#34;2.310&#34;, &#34;us-west-2&#34;: &#34;1.763&#34;, &#34;us-west-1&#34;: &#34;2.208&#34;, &#34;eu-central-1&#34;: &#34;2.250&#34;, &#34;eu-west-1&#34;: &#34;2.006&#34;}'>
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;1.763&#34;, &#34;ap-northeast-1&#34;: &#34;2.234&#34;, &#34;ap-southeast-1&#34;: &#34;2.432&#34;, &#34;ap-southeast-2&#34;: &#34;2.31&#34;, &#34;us-west-2&#34;: &#34;1.763&#34;, &#34;us-west-1&#34;: &#34;2.208&#34;, &#34;eu-central-1&#34;: &#34;2.25&#34;, &#34;eu-west-1&#34;: &#34;2.006&#34;}'>
                  $1.763 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;3.091&#34;, &#34;ap-northeast-1&#34;: &#34;3.828&#34;, &#34;ap-southeast-1&#34;: &#34;4.026&#34;, &#34;ap-southeast-2&#34;: &#34;3.904&#34;, &#34;us-west-2&#34;: &#34;3.091&#34;, &#34;us-west-1&#34;: &#34;3.536&#34;, &#34;eu-central-1&#34;: &#34;3.578&#34;, &#34;eu-west-1&#34;: &#34;3.334&#34;}'>
                  $3.091 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;4.273&#34;, &#34;ap-northeast-1&#34;: &#34;4.744&#34;, &#34;ap-southeast-1&#34;: &#34;4.942&#34;, &#34;ap-southeast-2&#34;: &#34;4.820&#34;, &#34;us-west-2&#34;: &#34;4.273&#34;, &#34;us-west-1&#34;: &#34;4.718&#34;, &#34;eu-central-1&#34;: &#34;4.760&#34;, &#34;eu-west-1&#34;: &#34;4.516&#34;}'>
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;4.273&#34;, &#34;ap-northeast-1&#34;: &#34;4.744&#34;, &#34;ap-southeast-1&#34;: &#34;4.942&#34;, &#34;ap-southeast-2&#34;: &#34;4.82&#34;, &#34;us-west-2&#34;: &#34;4.273&#34;, &#34;us-west-1&#34;: &#34;4.718&#34;, &#34;eu-central-1&#34;: &#34;4.76&#34;, &#34;eu-west-1&#34;: &#34;4.516&#34;}'>
                  $4.273 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;12.573&#34;, &#34;ap-northeast-1&#34;: &#34;13.044&#34;, &#34;ap-southeast-1&#34;: &#34;13.242&#34;, &#34;ap-southeast-2&#34;: &#34;13.120&#34;, &#34;us-west-2&#34;: &#34;12.573&#34;, &#34;us-west-1&#34;: &#34;13.018&#34;, &#34;eu-central-1&#34;: &#34;13.060&#34;, &#34;eu-west-1&#34;: &#34;12.816&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;12.573&#34;, &#34;ap-northeast-1&#34;: &#34;13.044&#34;, &#34;ap-southeast-1&#34;: &#34;13.242&#34;, &#34;ap-southeast-2&#34;: &#34;13.12&#34;, &#34;us-west-2&#34;: &#34;12.573&#34;, &#34;us-west-1&#34;: &#34;13.018&#34;, &#34;eu-central-1&#34;: &#34;13.06&#34;, &#34;eu-west-1&#34;: &#34;12.816&#34;}'>
                  $12.573 per hour
           </td>
         </tr>
@@ -2318,7 +2332,7 @@
           <td class="linux-virtualization">
             HVM, PV
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.105&#34;, &#34;ap-northeast-1&#34;: &#34;0.128&#34;, &#34;sa-east-1&#34;: &#34;0.163&#34;, &#34;ap-southeast-1&#34;: &#34;0.132&#34;, &#34;ap-southeast-2&#34;: &#34;0.132&#34;, &#34;us-west-2&#34;: &#34;0.105&#34;, &#34;us-gov-west-1&#34;: &#34;0.126&#34;, &#34;us-west-1&#34;: &#34;0.120&#34;, &#34;eu-central-1&#34;: &#34;0.129&#34;, &#34;eu-west-1&#34;: &#34;0.120&#34;}'>
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.105&#34;, &#34;ap-northeast-1&#34;: &#34;0.128&#34;, &#34;sa-east-1&#34;: &#34;0.163&#34;, &#34;ap-southeast-1&#34;: &#34;0.132&#34;, &#34;ap-southeast-2&#34;: &#34;0.132&#34;, &#34;us-west-2&#34;: &#34;0.105&#34;, &#34;us-gov-west-1&#34;: &#34;0.126&#34;, &#34;us-west-1&#34;: &#34;0.12&#34;, &#34;eu-central-1&#34;: &#34;0.129&#34;, &#34;eu-west-1&#34;: &#34;0.12&#34;}'>
                  $0.105 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.188&#34;, &#34;ap-northeast-1&#34;: &#34;0.231&#34;, &#34;sa-east-1&#34;: &#34;0.246&#34;, &#34;ap-southeast-1&#34;: &#34;0.238&#34;, &#34;ap-southeast-2&#34;: &#34;0.238&#34;, &#34;us-west-2&#34;: &#34;0.188&#34;, &#34;us-gov-west-1&#34;: &#34;0.209&#34;, &#34;us-west-1&#34;: &#34;0.188&#34;, &#34;eu-central-1&#34;: &#34;0.212&#34;, &#34;eu-west-1&#34;: &#34;0.188&#34;}'>
@@ -2385,8 +2399,8 @@
           <td class="linux-virtualization">
             HVM, PV
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.210&#34;, &#34;ap-northeast-1&#34;: &#34;0.255&#34;, &#34;sa-east-1&#34;: &#34;0.325&#34;, &#34;ap-southeast-1&#34;: &#34;0.265&#34;, &#34;ap-southeast-2&#34;: &#34;0.265&#34;, &#34;us-west-2&#34;: &#34;0.210&#34;, &#34;us-gov-west-1&#34;: &#34;0.252&#34;, &#34;us-west-1&#34;: &#34;0.239&#34;, &#34;eu-central-1&#34;: &#34;0.258&#34;, &#34;eu-west-1&#34;: &#34;0.239&#34;}'>
-                 $0.210 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.21&#34;, &#34;ap-northeast-1&#34;: &#34;0.255&#34;, &#34;sa-east-1&#34;: &#34;0.325&#34;, &#34;ap-southeast-1&#34;: &#34;0.265&#34;, &#34;ap-southeast-2&#34;: &#34;0.265&#34;, &#34;us-west-2&#34;: &#34;0.21&#34;, &#34;us-gov-west-1&#34;: &#34;0.252&#34;, &#34;us-west-1&#34;: &#34;0.239&#34;, &#34;eu-central-1&#34;: &#34;0.258&#34;, &#34;eu-west-1&#34;: &#34;0.239&#34;}'>
+                 $0.21 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.376&#34;, &#34;ap-northeast-1&#34;: &#34;0.462&#34;, &#34;sa-east-1&#34;: &#34;0.491&#34;, &#34;ap-southeast-1&#34;: &#34;0.477&#34;, &#34;ap-southeast-2&#34;: &#34;0.477&#34;, &#34;us-west-2&#34;: &#34;0.376&#34;, &#34;us-gov-west-1&#34;: &#34;0.418&#34;, &#34;us-west-1&#34;: &#34;0.376&#34;, &#34;eu-central-1&#34;: &#34;0.424&#34;, &#34;eu-west-1&#34;: &#34;0.376&#34;}'>
                  $0.376 per hour
@@ -2452,8 +2466,8 @@
           <td class="linux-virtualization">
             HVM, PV
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.420&#34;, &#34;ap-northeast-1&#34;: &#34;0.511&#34;, &#34;sa-east-1&#34;: &#34;0.650&#34;, &#34;ap-southeast-1&#34;: &#34;0.529&#34;, &#34;ap-southeast-2&#34;: &#34;0.529&#34;, &#34;us-west-2&#34;: &#34;0.420&#34;, &#34;us-gov-west-1&#34;: &#34;0.504&#34;, &#34;us-west-1&#34;: &#34;0.478&#34;, &#34;eu-central-1&#34;: &#34;0.516&#34;, &#34;eu-west-1&#34;: &#34;0.478&#34;}'>
-                 $0.420 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.42&#34;, &#34;ap-northeast-1&#34;: &#34;0.511&#34;, &#34;sa-east-1&#34;: &#34;0.65&#34;, &#34;ap-southeast-1&#34;: &#34;0.529&#34;, &#34;ap-southeast-2&#34;: &#34;0.529&#34;, &#34;us-west-2&#34;: &#34;0.42&#34;, &#34;us-gov-west-1&#34;: &#34;0.504&#34;, &#34;us-west-1&#34;: &#34;0.478&#34;, &#34;eu-central-1&#34;: &#34;0.516&#34;, &#34;eu-west-1&#34;: &#34;0.478&#34;}'>
+                 $0.42 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.752&#34;, &#34;ap-northeast-1&#34;: &#34;0.925&#34;, &#34;sa-east-1&#34;: &#34;0.982&#34;, &#34;ap-southeast-1&#34;: &#34;0.953&#34;, &#34;ap-southeast-2&#34;: &#34;0.953&#34;, &#34;us-west-2&#34;: &#34;0.752&#34;, &#34;us-gov-west-1&#34;: &#34;0.836&#34;, &#34;us-west-1&#34;: &#34;0.752&#34;, &#34;eu-central-1&#34;: &#34;0.848&#34;, &#34;eu-west-1&#34;: &#34;0.752&#34;}'>
                  $0.752 per hour
@@ -2519,8 +2533,8 @@
           <td class="linux-virtualization">
             HVM, PV
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.840&#34;, &#34;ap-northeast-1&#34;: &#34;1.021&#34;, &#34;sa-east-1&#34;: &#34;1.300&#34;, &#34;ap-southeast-1&#34;: &#34;1.058&#34;, &#34;ap-southeast-2&#34;: &#34;1.058&#34;, &#34;us-west-2&#34;: &#34;0.840&#34;, &#34;us-gov-west-1&#34;: &#34;1.008&#34;, &#34;us-west-1&#34;: &#34;0.956&#34;, &#34;eu-central-1&#34;: &#34;1.032&#34;, &#34;eu-west-1&#34;: &#34;0.956&#34;}'>
-                 $0.840 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.84&#34;, &#34;ap-northeast-1&#34;: &#34;1.021&#34;, &#34;sa-east-1&#34;: &#34;1.3&#34;, &#34;ap-southeast-1&#34;: &#34;1.058&#34;, &#34;ap-southeast-2&#34;: &#34;1.058&#34;, &#34;us-west-2&#34;: &#34;0.84&#34;, &#34;us-gov-west-1&#34;: &#34;1.008&#34;, &#34;us-west-1&#34;: &#34;0.956&#34;, &#34;eu-central-1&#34;: &#34;1.032&#34;, &#34;eu-west-1&#34;: &#34;0.956&#34;}'>
+                 $0.84 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;1.504&#34;, &#34;ap-northeast-1&#34;: &#34;1.849&#34;, &#34;sa-east-1&#34;: &#34;1.964&#34;, &#34;ap-southeast-1&#34;: &#34;1.906&#34;, &#34;ap-southeast-2&#34;: &#34;1.906&#34;, &#34;us-west-2&#34;: &#34;1.504&#34;, &#34;us-gov-west-1&#34;: &#34;1.672&#34;, &#34;us-west-1&#34;: &#34;1.504&#34;, &#34;eu-central-1&#34;: &#34;1.696&#34;, &#34;eu-west-1&#34;: &#34;1.504&#34;}'>
                  $1.504 per hour
@@ -2528,7 +2542,7 @@
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;2.166&#34;, &#34;ap-northeast-1&#34;: &#34;2.166&#34;, &#34;sa-east-1&#34;: &#34;2.626&#34;, &#34;ap-southeast-1&#34;: &#34;2.166&#34;, &#34;ap-southeast-2&#34;: &#34;2.166&#34;, &#34;us-west-2&#34;: &#34;2.166&#34;, &#34;us-gov-west-1&#34;: &#34;2.334&#34;, &#34;us-west-1&#34;: &#34;2.166&#34;, &#34;eu-central-1&#34;: &#34;2.383&#34;, &#34;eu-west-1&#34;: &#34;2.166&#34;}'>
                  $2.166 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;4.262&#34;, &#34;ap-northeast-1&#34;: &#34;4.564&#34;, &#34;sa-east-1&#34;: &#34;5.174&#34;, &#34;ap-southeast-1&#34;: &#34;4.262&#34;, &#34;ap-southeast-2&#34;: &#34;4.262&#34;, &#34;us-west-2&#34;: &#34;4.262&#34;, &#34;us-gov-west-1&#34;: &#34;4.430&#34;, &#34;us-west-1&#34;: &#34;4.262&#34;, &#34;eu-central-1&#34;: &#34;5.589&#34;, &#34;eu-west-1&#34;: &#34;4.262&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;4.262&#34;, &#34;ap-northeast-1&#34;: &#34;4.564&#34;, &#34;sa-east-1&#34;: &#34;5.174&#34;, &#34;ap-southeast-1&#34;: &#34;4.262&#34;, &#34;ap-southeast-2&#34;: &#34;4.262&#34;, &#34;us-west-2&#34;: &#34;4.262&#34;, &#34;us-gov-west-1&#34;: &#34;4.43&#34;, &#34;us-west-1&#34;: &#34;4.262&#34;, &#34;eu-central-1&#34;: &#34;5.589&#34;, &#34;eu-west-1&#34;: &#34;4.262&#34;}'>
                  $4.262 per hour
           </td>
         </tr>
@@ -2584,8 +2598,8 @@
           <td class="linux-virtualization">
             HVM, PV
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;1.680&#34;, &#34;ap-northeast-1&#34;: &#34;2.043&#34;, &#34;sa-east-1&#34;: &#34;2.600&#34;, &#34;ap-southeast-1&#34;: &#34;2.117&#34;, &#34;ap-southeast-2&#34;: &#34;2.117&#34;, &#34;us-west-2&#34;: &#34;1.680&#34;, &#34;us-gov-west-1&#34;: &#34;2.016&#34;, &#34;us-west-1&#34;: &#34;1.912&#34;, &#34;eu-central-1&#34;: &#34;2.064&#34;, &#34;eu-west-1&#34;: &#34;1.912&#34;}'>
-                 $1.680 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;1.68&#34;, &#34;ap-northeast-1&#34;: &#34;2.043&#34;, &#34;sa-east-1&#34;: &#34;2.6&#34;, &#34;ap-southeast-1&#34;: &#34;2.117&#34;, &#34;ap-southeast-2&#34;: &#34;2.117&#34;, &#34;us-west-2&#34;: &#34;1.68&#34;, &#34;us-gov-west-1&#34;: &#34;2.016&#34;, &#34;us-west-1&#34;: &#34;1.912&#34;, &#34;eu-central-1&#34;: &#34;2.064&#34;, &#34;eu-west-1&#34;: &#34;1.912&#34;}'>
+                 $1.68 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;3.008&#34;, &#34;ap-northeast-1&#34;: &#34;3.699&#34;, &#34;sa-east-1&#34;: &#34;3.928&#34;, &#34;ap-southeast-1&#34;: &#34;3.813&#34;, &#34;ap-southeast-2&#34;: &#34;3.813&#34;, &#34;us-west-2&#34;: &#34;3.008&#34;, &#34;us-gov-west-1&#34;: &#34;3.344&#34;, &#34;us-west-1&#34;: &#34;3.008&#34;, &#34;eu-central-1&#34;: &#34;3.392&#34;, &#34;eu-west-1&#34;: &#34;3.008&#34;}'>
                  $3.008 per hour
@@ -2651,13 +2665,13 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.650&#34;, &#34;ap-northeast-1&#34;: &#34;0.898&#34;, &#34;ap-southeast-1&#34;: &#34;1.000&#34;, &#34;ap-southeast-2&#34;: &#34;0.898&#34;, &#34;us-west-2&#34;: &#34;0.650&#34;, &#34;us-west-1&#34;: &#34;0.702&#34;, &#34;eu-central-1&#34;: &#34;0.772&#34;, &#34;eu-west-1&#34;: &#34;0.702&#34;}'>
-                 $0.650 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.65&#34;, &#34;ap-northeast-1&#34;: &#34;0.898&#34;, &#34;ap-southeast-1&#34;: &#34;1&#34;, &#34;ap-southeast-2&#34;: &#34;0.898&#34;, &#34;us-west-2&#34;: &#34;0.65&#34;, &#34;us-west-1&#34;: &#34;0.702&#34;, &#34;eu-central-1&#34;: &#34;0.772&#34;, &#34;eu-west-1&#34;: &#34;0.702&#34;}'>
+                 $0.65 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.767&#34;, &#34;ap-northeast-1&#34;: &#34;1.010&#34;, &#34;ap-southeast-1&#34;: &#34;1.160&#34;, &#34;ap-southeast-2&#34;: &#34;1.058&#34;, &#34;us-west-2&#34;: &#34;0.767&#34;, &#34;us-west-1&#34;: &#34;0.819&#34;, &#34;eu-central-1&#34;: &#34;0.906&#34;, &#34;eu-west-1&#34;: &#34;0.767&#34;}'>
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.767&#34;, &#34;ap-northeast-1&#34;: &#34;1.01&#34;, &#34;ap-southeast-1&#34;: &#34;1.16&#34;, &#34;ap-southeast-2&#34;: &#34;1.058&#34;, &#34;us-west-2&#34;: &#34;0.767&#34;, &#34;us-west-1&#34;: &#34;0.819&#34;, &#34;eu-central-1&#34;: &#34;0.906&#34;, &#34;eu-west-1&#34;: &#34;0.767&#34;}'>
                  $0.767 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.957&#34;, &#34;ap-northeast-1&#34;: &#34;1.190&#34;, &#34;ap-southeast-1&#34;: &#34;1.307&#34;, &#34;ap-southeast-2&#34;: &#34;1.205&#34;, &#34;us-west-2&#34;: &#34;0.957&#34;, &#34;us-west-1&#34;: &#34;1.009&#34;, &#34;eu-central-1&#34;: 0, &#34;eu-west-1&#34;: &#34;0.957&#34;}'>
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.957&#34;, &#34;ap-northeast-1&#34;: &#34;1.19&#34;, &#34;ap-southeast-1&#34;: &#34;1.307&#34;, &#34;ap-southeast-2&#34;: &#34;1.205&#34;, &#34;us-west-2&#34;: &#34;0.957&#34;, &#34;us-west-1&#34;: &#34;1.009&#34;, &#34;eu-central-1&#34;: 0, &#34;eu-west-1&#34;: &#34;0.957&#34;}'>
                  $0.957 per hour
           </td>
           <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;3.816&#34;, &#34;ap-northeast-1&#34;: &#34;3.913&#34;, &#34;ap-southeast-1&#34;: &#34;4.166&#34;, &#34;ap-southeast-2&#34;: &#34;4.064&#34;, &#34;us-west-2&#34;: &#34;3.816&#34;, &#34;us-west-1&#34;: &#34;3.868&#34;, &#34;eu-central-1&#34;: 0, &#34;eu-west-1&#34;: &#34;3.816&#34;}'>
@@ -2716,10 +2730,10 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;2.600&#34;, &#34;ap-northeast-1&#34;: &#34;3.592&#34;, &#34;ap-southeast-1&#34;: &#34;4.000&#34;, &#34;ap-southeast-2&#34;: &#34;3.592&#34;, &#34;us-west-2&#34;: &#34;2.600&#34;, &#34;us-west-1&#34;: &#34;2.808&#34;, &#34;eu-central-1&#34;: &#34;3.088&#34;, &#34;eu-west-1&#34;: &#34;2.808&#34;}'>
-                 $2.600 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;2.6&#34;, &#34;ap-northeast-1&#34;: &#34;3.592&#34;, &#34;ap-southeast-1&#34;: &#34;4&#34;, &#34;ap-southeast-2&#34;: &#34;3.592&#34;, &#34;us-west-2&#34;: &#34;2.6&#34;, &#34;us-west-1&#34;: &#34;2.808&#34;, &#34;eu-central-1&#34;: &#34;3.088&#34;, &#34;eu-west-1&#34;: &#34;2.808&#34;}'>
+                 $2.6 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;2.878&#34;, &#34;ap-northeast-1&#34;: &#34;3.870&#34;, &#34;ap-southeast-1&#34;: &#34;4.278&#34;, &#34;ap-southeast-2&#34;: &#34;3.870&#34;, &#34;us-west-2&#34;: &#34;2.878&#34;, &#34;us-west-1&#34;: &#34;3.086&#34;, &#34;eu-central-1&#34;: &#34;3.366&#34;, &#34;eu-west-1&#34;: &#34;3.086&#34;}'>
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;2.878&#34;, &#34;ap-northeast-1&#34;: &#34;3.87&#34;, &#34;ap-southeast-1&#34;: &#34;4.278&#34;, &#34;ap-southeast-2&#34;: &#34;3.87&#34;, &#34;us-west-2&#34;: &#34;2.878&#34;, &#34;us-west-1&#34;: &#34;3.086&#34;, &#34;eu-central-1&#34;: &#34;3.366&#34;, &#34;eu-west-1&#34;: &#34;3.086&#34;}'>
                  $2.878 per hour
           </td>
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: 0, &#34;ap-northeast-1&#34;: 0, &#34;ap-southeast-1&#34;: 0, &#34;ap-southeast-2&#34;: 0, &#34;us-west-2&#34;: 0, &#34;us-west-1&#34;: 0, &#34;eu-central-1&#34;: 0, &#34;eu-west-1&#34;: 0}'>
@@ -2781,16 +2795,16 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.175&#34;, &#34;ap-northeast-1&#34;: &#34;0.210&#34;, &#34;ap-southeast-1&#34;: &#34;0.210&#34;, &#34;ap-southeast-2&#34;: &#34;0.210&#34;, &#34;us-west-2&#34;: &#34;0.175&#34;, &#34;us-gov-west-1&#34;: &#34;0.210&#34;, &#34;us-west-1&#34;: &#34;0.195&#34;, &#34;eu-central-1&#34;: &#34;0.210&#34;, &#34;eu-west-1&#34;: &#34;0.195&#34;}'>
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.175&#34;, &#34;ap-northeast-1&#34;: &#34;0.21&#34;, &#34;ap-southeast-1&#34;: &#34;0.21&#34;, &#34;ap-southeast-2&#34;: &#34;0.21&#34;, &#34;us-west-2&#34;: &#34;0.175&#34;, &#34;us-gov-west-1&#34;: &#34;0.21&#34;, &#34;us-west-1&#34;: &#34;0.195&#34;, &#34;eu-central-1&#34;: &#34;0.21&#34;, &#34;eu-west-1&#34;: &#34;0.195&#34;}'>
                  $0.175 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.300&#34;, &#34;ap-northeast-1&#34;: &#34;0.310&#34;, &#34;ap-southeast-1&#34;: &#34;0.323&#34;, &#34;ap-southeast-2&#34;: &#34;0.323&#34;, &#34;us-west-2&#34;: &#34;0.300&#34;, &#34;us-gov-west-1&#34;: &#34;0.335&#34;, &#34;us-west-1&#34;: &#34;0.330&#34;, &#34;eu-central-1&#34;: &#34;0.335&#34;, &#34;eu-west-1&#34;: &#34;0.300&#34;}'>
-                 $0.300 per hour
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.3&#34;, &#34;ap-northeast-1&#34;: &#34;0.31&#34;, &#34;ap-southeast-1&#34;: &#34;0.323&#34;, &#34;ap-southeast-2&#34;: &#34;0.323&#34;, &#34;us-west-2&#34;: &#34;0.3&#34;, &#34;us-gov-west-1&#34;: &#34;0.335&#34;, &#34;us-west-1&#34;: &#34;0.33&#34;, &#34;eu-central-1&#34;: &#34;0.335&#34;, &#34;eu-west-1&#34;: &#34;0.3&#34;}'>
+                 $0.3 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.395&#34;, &#34;ap-northeast-1&#34;: &#34;0.411&#34;, &#34;ap-southeast-1&#34;: &#34;0.430&#34;, &#34;ap-southeast-2&#34;: &#34;0.430&#34;, &#34;us-west-2&#34;: &#34;0.395&#34;, &#34;us-gov-west-1&#34;: &#34;0.430&#34;, &#34;us-west-1&#34;: &#34;0.424&#34;, &#34;eu-central-1&#34;: &#34;0.518&#34;, &#34;eu-west-1&#34;: &#34;0.395&#34;}'>
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.395&#34;, &#34;ap-northeast-1&#34;: &#34;0.411&#34;, &#34;ap-southeast-1&#34;: &#34;0.43&#34;, &#34;ap-southeast-2&#34;: &#34;0.43&#34;, &#34;us-west-2&#34;: &#34;0.395&#34;, &#34;us-gov-west-1&#34;: &#34;0.43&#34;, &#34;us-west-1&#34;: &#34;0.424&#34;, &#34;eu-central-1&#34;: &#34;0.518&#34;, &#34;eu-west-1&#34;: &#34;0.395&#34;}'>
                  $0.395 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;0.955&#34;, &#34;ap-northeast-1&#34;: &#34;0.971&#34;, &#34;ap-southeast-1&#34;: &#34;0.990&#34;, &#34;ap-southeast-2&#34;: &#34;0.990&#34;, &#34;us-west-2&#34;: &#34;0.955&#34;, &#34;us-gov-west-1&#34;: &#34;0.990&#34;, &#34;us-west-1&#34;: &#34;0.984&#34;, &#34;eu-central-1&#34;: &#34;1.302&#34;, &#34;eu-west-1&#34;: &#34;0.955&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;0.955&#34;, &#34;ap-northeast-1&#34;: &#34;0.971&#34;, &#34;ap-southeast-1&#34;: &#34;0.99&#34;, &#34;ap-southeast-2&#34;: &#34;0.99&#34;, &#34;us-west-2&#34;: &#34;0.955&#34;, &#34;us-gov-west-1&#34;: &#34;0.99&#34;, &#34;us-west-1&#34;: &#34;0.984&#34;, &#34;eu-central-1&#34;: &#34;1.302&#34;, &#34;eu-west-1&#34;: &#34;0.955&#34;}'>
                  $0.955 per hour
           </td>
         </tr>
@@ -2848,11 +2862,11 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.350&#34;, &#34;ap-northeast-1&#34;: &#34;0.420&#34;, &#34;ap-southeast-1&#34;: &#34;0.420&#34;, &#34;ap-southeast-2&#34;: &#34;0.420&#34;, &#34;us-west-2&#34;: &#34;0.350&#34;, &#34;us-gov-west-1&#34;: &#34;0.420&#34;, &#34;us-west-1&#34;: &#34;0.390&#34;, &#34;eu-central-1&#34;: &#34;0.421&#34;, &#34;eu-west-1&#34;: &#34;0.390&#34;}'>
-                 $0.350 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.35&#34;, &#34;ap-northeast-1&#34;: &#34;0.42&#34;, &#34;ap-southeast-1&#34;: &#34;0.42&#34;, &#34;ap-southeast-2&#34;: &#34;0.42&#34;, &#34;us-west-2&#34;: &#34;0.35&#34;, &#34;us-gov-west-1&#34;: &#34;0.42&#34;, &#34;us-west-1&#34;: &#34;0.39&#34;, &#34;eu-central-1&#34;: &#34;0.421&#34;, &#34;eu-west-1&#34;: &#34;0.39&#34;}'>
+                 $0.35 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.600&#34;, &#34;ap-northeast-1&#34;: &#34;0.620&#34;, &#34;ap-southeast-1&#34;: &#34;0.646&#34;, &#34;ap-southeast-2&#34;: &#34;0.646&#34;, &#34;us-west-2&#34;: &#34;0.600&#34;, &#34;us-gov-west-1&#34;: &#34;0.670&#34;, &#34;us-west-1&#34;: &#34;0.652&#34;, &#34;eu-central-1&#34;: &#34;0.671&#34;, &#34;eu-west-1&#34;: &#34;0.600&#34;}'>
-                 $0.600 per hour
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.6&#34;, &#34;ap-northeast-1&#34;: &#34;0.62&#34;, &#34;ap-southeast-1&#34;: &#34;0.646&#34;, &#34;ap-southeast-2&#34;: &#34;0.646&#34;, &#34;us-west-2&#34;: &#34;0.6&#34;, &#34;us-gov-west-1&#34;: &#34;0.67&#34;, &#34;us-west-1&#34;: &#34;0.652&#34;, &#34;eu-central-1&#34;: &#34;0.671&#34;, &#34;eu-west-1&#34;: &#34;0.6&#34;}'>
+                 $0.6 per hour
           </td>
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.755&#34;, &#34;ap-northeast-1&#34;: &#34;0.808&#34;, &#34;ap-southeast-1&#34;: &#34;0.847&#34;, &#34;ap-southeast-2&#34;: &#34;0.847&#34;, &#34;us-west-2&#34;: &#34;0.755&#34;, &#34;us-gov-west-1&#34;: &#34;0.825&#34;, &#34;us-west-1&#34;: &#34;0.806&#34;, &#34;eu-central-1&#34;: &#34;0.988&#34;, &#34;eu-west-1&#34;: &#34;0.755&#34;}'>
                  $0.755 per hour
@@ -2915,13 +2929,13 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.700&#34;, &#34;ap-northeast-1&#34;: &#34;0.840&#34;, &#34;ap-southeast-1&#34;: &#34;0.840&#34;, &#34;ap-southeast-2&#34;: &#34;0.840&#34;, &#34;us-west-2&#34;: &#34;0.700&#34;, &#34;us-gov-west-1&#34;: &#34;0.840&#34;, &#34;us-west-1&#34;: &#34;0.780&#34;, &#34;eu-central-1&#34;: &#34;0.842&#34;, &#34;eu-west-1&#34;: &#34;0.780&#34;}'>
-                 $0.700 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.7&#34;, &#34;ap-northeast-1&#34;: &#34;0.84&#34;, &#34;ap-southeast-1&#34;: &#34;0.84&#34;, &#34;ap-southeast-2&#34;: &#34;0.84&#34;, &#34;us-west-2&#34;: &#34;0.7&#34;, &#34;us-gov-west-1&#34;: &#34;0.84&#34;, &#34;us-west-1&#34;: &#34;0.78&#34;, &#34;eu-central-1&#34;: &#34;0.842&#34;, &#34;eu-west-1&#34;: &#34;0.78&#34;}'>
+                 $0.7 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;1.080&#34;, &#34;ap-northeast-1&#34;: &#34;1.219&#34;, &#34;ap-southeast-1&#34;: &#34;1.292&#34;, &#34;ap-southeast-2&#34;: &#34;1.292&#34;, &#34;us-west-2&#34;: &#34;1.080&#34;, &#34;us-gov-west-1&#34;: &#34;1.220&#34;, &#34;us-west-1&#34;: &#34;1.173&#34;, &#34;eu-central-1&#34;: &#34;1.222&#34;, &#34;eu-west-1&#34;: &#34;1.080&#34;}'>
-                 $1.080 per hour
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;1.08&#34;, &#34;ap-northeast-1&#34;: &#34;1.219&#34;, &#34;ap-southeast-1&#34;: &#34;1.292&#34;, &#34;ap-southeast-2&#34;: &#34;1.292&#34;, &#34;us-west-2&#34;: &#34;1.08&#34;, &#34;us-gov-west-1&#34;: &#34;1.22&#34;, &#34;us-west-1&#34;: &#34;1.173&#34;, &#34;eu-central-1&#34;: &#34;1.222&#34;, &#34;eu-west-1&#34;: &#34;1.08&#34;}'>
+                 $1.08 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;1.555&#34;, &#34;ap-northeast-1&#34;: &#34;1.660&#34;, &#34;ap-southeast-1&#34;: &#34;1.685&#34;, &#34;ap-southeast-2&#34;: &#34;1.685&#34;, &#34;us-west-2&#34;: &#34;1.555&#34;, &#34;us-gov-west-1&#34;: &#34;1.695&#34;, &#34;us-west-1&#34;: &#34;1.648&#34;, &#34;eu-central-1&#34;: &#34;2.039&#34;, &#34;eu-west-1&#34;: &#34;1.555&#34;}'>
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;1.555&#34;, &#34;ap-northeast-1&#34;: &#34;1.66&#34;, &#34;ap-southeast-1&#34;: &#34;1.685&#34;, &#34;ap-southeast-2&#34;: &#34;1.685&#34;, &#34;us-west-2&#34;: &#34;1.555&#34;, &#34;us-gov-west-1&#34;: &#34;1.695&#34;, &#34;us-west-1&#34;: &#34;1.648&#34;, &#34;eu-central-1&#34;: &#34;2.039&#34;, &#34;eu-west-1&#34;: &#34;1.555&#34;}'>
                  $1.555 per hour
           </td>
           <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;2.775&#34;, &#34;ap-northeast-1&#34;: &#34;2.914&#34;, &#34;ap-southeast-1&#34;: &#34;2.956&#34;, &#34;ap-southeast-2&#34;: &#34;2.956&#34;, &#34;us-west-2&#34;: &#34;2.775&#34;, &#34;us-gov-west-1&#34;: &#34;2.915&#34;, &#34;us-west-1&#34;: &#34;2.868&#34;, &#34;eu-central-1&#34;: &#34;3.747&#34;, &#34;eu-west-1&#34;: &#34;2.775&#34;}'>
@@ -2982,16 +2996,16 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;1.400&#34;, &#34;ap-northeast-1&#34;: &#34;1.680&#34;, &#34;ap-southeast-1&#34;: &#34;1.680&#34;, &#34;ap-southeast-2&#34;: &#34;1.680&#34;, &#34;us-west-2&#34;: &#34;1.400&#34;, &#34;us-gov-west-1&#34;: &#34;1.680&#34;, &#34;us-west-1&#34;: &#34;1.560&#34;, &#34;eu-central-1&#34;: &#34;1.684&#34;, &#34;eu-west-1&#34;: &#34;1.560&#34;}'>
-                 $1.400 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;1.4&#34;, &#34;ap-northeast-1&#34;: &#34;1.68&#34;, &#34;sa-east-1&#34;: &#34;2.946&#34;, &#34;ap-southeast-1&#34;: &#34;1.68&#34;, &#34;ap-southeast-2&#34;: &#34;1.68&#34;, &#34;us-west-2&#34;: &#34;1.4&#34;, &#34;us-gov-west-1&#34;: &#34;1.68&#34;, &#34;us-west-1&#34;: &#34;1.56&#34;, &#34;eu-central-1&#34;: &#34;1.684&#34;, &#34;eu-west-1&#34;: &#34;1.56&#34;}'>
+                 $1.4 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;1.944&#34;, &#34;ap-northeast-1&#34;: &#34;2.276&#34;, &#34;ap-southeast-1&#34;: &#34;2.447&#34;, &#34;ap-southeast-2&#34;: &#34;2.447&#34;, &#34;us-west-2&#34;: &#34;1.944&#34;, &#34;us-gov-west-1&#34;: &#34;2.224&#34;, &#34;us-west-1&#34;: &#34;2.111&#34;, &#34;eu-central-1&#34;: &#34;2.228&#34;, &#34;eu-west-1&#34;: &#34;1.944&#34;}'>
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;1.944&#34;, &#34;ap-northeast-1&#34;: &#34;2.276&#34;, &#34;sa-east-1&#34;: &#34;3.394&#34;, &#34;ap-southeast-1&#34;: &#34;2.447&#34;, &#34;ap-southeast-2&#34;: &#34;2.447&#34;, &#34;us-west-2&#34;: &#34;1.944&#34;, &#34;us-gov-west-1&#34;: &#34;2.224&#34;, &#34;us-west-1&#34;: &#34;2.111&#34;, &#34;eu-central-1&#34;: &#34;2.228&#34;, &#34;eu-west-1&#34;: &#34;1.944&#34;}'>
                  $1.944 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;2.365&#34;, &#34;ap-northeast-1&#34;: &#34;2.697&#34;, &#34;ap-southeast-1&#34;: &#34;2.867&#34;, &#34;ap-southeast-2&#34;: &#34;2.867&#34;, &#34;us-west-2&#34;: &#34;2.365&#34;, &#34;us-gov-west-1&#34;: &#34;2.645&#34;, &#34;us-west-1&#34;: &#34;2.532&#34;, &#34;eu-central-1&#34;: &#34;3.035&#34;, &#34;eu-west-1&#34;: &#34;2.365&#34;}'>
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;2.365&#34;, &#34;ap-northeast-1&#34;: &#34;2.697&#34;, &#34;sa-east-1&#34;: &#34;3.786&#34;, &#34;ap-southeast-1&#34;: &#34;2.867&#34;, &#34;ap-southeast-2&#34;: &#34;2.867&#34;, &#34;us-west-2&#34;: &#34;2.365&#34;, &#34;us-gov-west-1&#34;: &#34;2.645&#34;, &#34;us-west-1&#34;: &#34;2.532&#34;, &#34;eu-central-1&#34;: &#34;3.035&#34;, &#34;eu-west-1&#34;: &#34;2.365&#34;}'>
                  $2.365 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;4.655&#34;, &#34;ap-northeast-1&#34;: &#34;4.987&#34;, &#34;ap-southeast-1&#34;: &#34;5.157&#34;, &#34;ap-southeast-2&#34;: &#34;5.157&#34;, &#34;us-west-2&#34;: &#34;4.655&#34;, &#34;us-gov-west-1&#34;: &#34;4.935&#34;, &#34;us-west-1&#34;: &#34;4.822&#34;, &#34;eu-central-1&#34;: &#34;6.241&#34;, &#34;eu-west-1&#34;: &#34;4.655&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;4.655&#34;, &#34;ap-northeast-1&#34;: &#34;4.987&#34;, &#34;sa-east-1&#34;: &#34;6.582&#34;, &#34;ap-southeast-1&#34;: &#34;5.157&#34;, &#34;ap-southeast-2&#34;: &#34;5.157&#34;, &#34;us-west-2&#34;: &#34;4.655&#34;, &#34;us-gov-west-1&#34;: &#34;4.935&#34;, &#34;us-west-1&#34;: &#34;4.822&#34;, &#34;eu-central-1&#34;: &#34;6.241&#34;, &#34;eu-west-1&#34;: &#34;4.655&#34;}'>
                  $4.655 per hour
           </td>
         </tr>
@@ -3047,16 +3061,16 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;2.800&#34;, &#34;ap-northeast-1&#34;: &#34;3.360&#34;, &#34;ap-southeast-1&#34;: &#34;3.360&#34;, &#34;ap-southeast-2&#34;: &#34;3.360&#34;, &#34;us-west-2&#34;: &#34;2.800&#34;, &#34;us-gov-west-1&#34;: &#34;3.360&#34;, &#34;us-west-1&#34;: &#34;3.120&#34;, &#34;eu-central-1&#34;: &#34;3.369&#34;, &#34;eu-west-1&#34;: &#34;3.120&#34;}'>
-                 $2.800 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;2.8&#34;, &#34;ap-northeast-1&#34;: &#34;3.36&#34;, &#34;sa-east-1&#34;: &#34;5.892&#34;, &#34;ap-southeast-1&#34;: &#34;3.36&#34;, &#34;ap-southeast-2&#34;: &#34;3.36&#34;, &#34;us-west-2&#34;: &#34;2.8&#34;, &#34;us-gov-west-1&#34;: &#34;3.36&#34;, &#34;us-west-1&#34;: &#34;3.12&#34;, &#34;eu-central-1&#34;: &#34;3.369&#34;, &#34;eu-west-1&#34;: &#34;3.12&#34;}'>
+                 $2.8 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;3.500&#34;, &#34;ap-northeast-1&#34;: &#34;4.250&#34;, &#34;ap-southeast-1&#34;: &#34;4.600&#34;, &#34;ap-southeast-2&#34;: &#34;4.600&#34;, &#34;us-west-2&#34;: &#34;3.500&#34;, &#34;us-gov-west-1&#34;: &#34;4.060&#34;, &#34;us-west-1&#34;: &#34;3.800&#34;, &#34;eu-central-1&#34;: &#34;4.069&#34;, &#34;eu-west-1&#34;: &#34;3.500&#34;}'>
-                 $3.500 per hour
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;3.5&#34;, &#34;ap-northeast-1&#34;: &#34;4.25&#34;, &#34;sa-east-1&#34;: &#34;6.788&#34;, &#34;ap-southeast-1&#34;: &#34;4.6&#34;, &#34;ap-southeast-2&#34;: &#34;4.6&#34;, &#34;us-west-2&#34;: &#34;3.5&#34;, &#34;us-gov-west-1&#34;: &#34;4.06&#34;, &#34;us-west-1&#34;: &#34;3.8&#34;, &#34;eu-central-1&#34;: &#34;4.069&#34;, &#34;eu-west-1&#34;: &#34;3.5&#34;}'>
+                 $3.5 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;3.995&#34;, &#34;ap-northeast-1&#34;: &#34;4.745&#34;, &#34;ap-southeast-1&#34;: &#34;5.095&#34;, &#34;ap-southeast-2&#34;: &#34;5.095&#34;, &#34;us-west-2&#34;: &#34;3.995&#34;, &#34;us-gov-west-1&#34;: &#34;4.555&#34;, &#34;us-west-1&#34;: &#34;4.295&#34;, &#34;eu-central-1&#34;: &#34;5.042&#34;, &#34;eu-west-1&#34;: &#34;3.995&#34;}'>
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;3.995&#34;, &#34;ap-northeast-1&#34;: &#34;4.745&#34;, &#34;sa-east-1&#34;: &#34;8.052&#34;, &#34;ap-southeast-1&#34;: &#34;5.095&#34;, &#34;ap-southeast-2&#34;: &#34;5.095&#34;, &#34;us-west-2&#34;: &#34;3.995&#34;, &#34;us-gov-west-1&#34;: &#34;4.555&#34;, &#34;us-west-1&#34;: &#34;4.295&#34;, &#34;eu-central-1&#34;: &#34;5.042&#34;, &#34;eu-west-1&#34;: &#34;3.995&#34;}'>
                  $3.995 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;8.755&#34;, &#34;ap-northeast-1&#34;: &#34;9.505&#34;, &#34;ap-southeast-1&#34;: &#34;9.855&#34;, &#34;ap-southeast-2&#34;: &#34;9.855&#34;, &#34;us-west-2&#34;: &#34;8.755&#34;, &#34;us-gov-west-1&#34;: &#34;9.315&#34;, &#34;us-west-1&#34;: &#34;9.055&#34;, &#34;eu-central-1&#34;: &#34;11.706&#34;, &#34;eu-west-1&#34;: &#34;8.755&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;8.755&#34;, &#34;ap-northeast-1&#34;: &#34;9.505&#34;, &#34;sa-east-1&#34;: &#34;15.631&#34;, &#34;ap-southeast-1&#34;: &#34;9.855&#34;, &#34;ap-southeast-2&#34;: &#34;9.855&#34;, &#34;us-west-2&#34;: &#34;8.755&#34;, &#34;us-gov-west-1&#34;: &#34;9.315&#34;, &#34;us-west-1&#34;: &#34;9.055&#34;, &#34;eu-central-1&#34;: &#34;11.706&#34;, &#34;eu-west-1&#34;: &#34;8.755&#34;}'>
                  $8.755 per hour
           </td>
         </tr>
@@ -3120,11 +3134,11 @@
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.973&#34;, &#34;ap-northeast-1&#34;: &#34;1.113&#34;, &#34;ap-southeast-1&#34;: &#34;1.169&#34;, &#34;ap-southeast-2&#34;: &#34;1.169&#34;, &#34;us-west-2&#34;: &#34;0.973&#34;, &#34;us-gov-west-1&#34;: &#34;1.144&#34;, &#34;us-west-1&#34;: &#34;1.058&#34;, &#34;eu-central-1&#34;: &#34;1.133&#34;, &#34;eu-west-1&#34;: &#34;0.973&#34;}'>
                  $0.973 per hour
           </td>
-          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.993&#34;, &#34;ap-northeast-1&#34;: &#34;1.230&#34;, &#34;ap-southeast-1&#34;: &#34;1.292&#34;, &#34;ap-southeast-2&#34;: &#34;1.292&#34;, &#34;us-west-2&#34;: &#34;0.993&#34;, &#34;us-gov-west-1&#34;: &#34;1.164&#34;, &#34;us-west-1&#34;: &#34;1.078&#34;, &#34;eu-central-1&#34;: &#34;1.580&#34;, &#34;eu-west-1&#34;: &#34;0.993&#34;}'>
+          <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;0.993&#34;, &#34;ap-northeast-1&#34;: &#34;1.23&#34;, &#34;ap-southeast-1&#34;: &#34;1.292&#34;, &#34;ap-southeast-2&#34;: &#34;1.292&#34;, &#34;us-west-2&#34;: &#34;0.993&#34;, &#34;us-gov-west-1&#34;: &#34;1.164&#34;, &#34;us-west-1&#34;: &#34;1.078&#34;, &#34;eu-central-1&#34;: &#34;1.58&#34;, &#34;eu-west-1&#34;: &#34;0.993&#34;}'>
                  $0.993 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;1.230&#34;, &#34;ap-northeast-1&#34;: &#34;2.026&#34;, &#34;ap-southeast-1&#34;: &#34;2.127&#34;, &#34;ap-southeast-2&#34;: &#34;2.127&#34;, &#34;us-west-2&#34;: &#34;1.230&#34;, &#34;us-gov-west-1&#34;: &#34;1.401&#34;, &#34;us-west-1&#34;: &#34;1.315&#34;, &#34;eu-central-1&#34;: &#34;2.476&#34;, &#34;eu-west-1&#34;: &#34;1.230&#34;}'>
-                 $1.230 per hour
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;1.23&#34;, &#34;ap-northeast-1&#34;: &#34;2.026&#34;, &#34;ap-southeast-1&#34;: &#34;2.127&#34;, &#34;ap-southeast-2&#34;: &#34;2.127&#34;, &#34;us-west-2&#34;: &#34;1.23&#34;, &#34;us-gov-west-1&#34;: &#34;1.401&#34;, &#34;us-west-1&#34;: &#34;1.315&#34;, &#34;eu-central-1&#34;: &#34;2.476&#34;, &#34;eu-west-1&#34;: &#34;1.23&#34;}'>
+                 $1.23 per hour
           </td>
         </tr>
         <tr class='instance' id="i2.2xlarge">
@@ -3190,7 +3204,7 @@
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;1.986&#34;, &#34;ap-northeast-1&#34;: &#34;2.462&#34;, &#34;ap-southeast-1&#34;: &#34;2.585&#34;, &#34;ap-southeast-2&#34;: &#34;2.585&#34;, &#34;us-west-2&#34;: &#34;1.986&#34;, &#34;us-gov-west-1&#34;: &#34;2.327&#34;, &#34;us-west-1&#34;: &#34;2.156&#34;, &#34;eu-central-1&#34;: &#34;3.223&#34;, &#34;eu-west-1&#34;: &#34;1.986&#34;}'>
                  $1.986 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;2.459&#34;, &#34;ap-northeast-1&#34;: &#34;4.051&#34;, &#34;ap-southeast-1&#34;: &#34;4.254&#34;, &#34;ap-southeast-2&#34;: &#34;4.254&#34;, &#34;us-west-2&#34;: &#34;2.459&#34;, &#34;us-gov-west-1&#34;: &#34;2.800&#34;, &#34;us-west-1&#34;: &#34;2.630&#34;, &#34;eu-central-1&#34;: &#34;4.931&#34;, &#34;eu-west-1&#34;: &#34;2.459&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;2.459&#34;, &#34;ap-northeast-1&#34;: &#34;4.051&#34;, &#34;ap-southeast-1&#34;: &#34;4.254&#34;, &#34;ap-southeast-2&#34;: &#34;4.254&#34;, &#34;us-west-2&#34;: &#34;2.459&#34;, &#34;us-gov-west-1&#34;: &#34;2.8&#34;, &#34;us-west-1&#34;: &#34;2.63&#34;, &#34;eu-central-1&#34;: &#34;4.931&#34;, &#34;eu-west-1&#34;: &#34;2.459&#34;}'>
                  $2.459 per hour
           </td>
         </tr>
@@ -3248,8 +3262,8 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;3.410&#34;, &#34;ap-northeast-1&#34;: &#34;4.002&#34;, &#34;ap-southeast-1&#34;: &#34;4.070&#34;, &#34;ap-southeast-2&#34;: &#34;4.070&#34;, &#34;us-west-2&#34;: &#34;3.410&#34;, &#34;us-gov-west-1&#34;: &#34;4.092&#34;, &#34;us-west-1&#34;: &#34;3.751&#34;, &#34;eu-central-1&#34;: &#34;4.051&#34;, &#34;eu-west-1&#34;: &#34;3.751&#34;}'>
-                 $3.410 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;3.41&#34;, &#34;ap-northeast-1&#34;: &#34;4.002&#34;, &#34;ap-southeast-1&#34;: &#34;4.07&#34;, &#34;ap-southeast-2&#34;: &#34;4.07&#34;, &#34;us-west-2&#34;: &#34;3.41&#34;, &#34;us-gov-west-1&#34;: &#34;4.092&#34;, &#34;us-west-1&#34;: &#34;3.751&#34;, &#34;eu-central-1&#34;: &#34;4.051&#34;, &#34;eu-west-1&#34;: &#34;3.751&#34;}'>
+                 $3.41 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;3.891&#34;, &#34;ap-northeast-1&#34;: &#34;4.451&#34;, &#34;ap-southeast-1&#34;: &#34;4.674&#34;, &#34;ap-southeast-2&#34;: &#34;4.674&#34;, &#34;us-west-2&#34;: &#34;3.891&#34;, &#34;us-gov-west-1&#34;: &#34;4.573&#34;, &#34;us-west-1&#34;: &#34;4.232&#34;, &#34;eu-central-1&#34;: &#34;4.532&#34;, &#34;eu-west-1&#34;: &#34;3.891&#34;}'>
                  $3.891 per hour
@@ -3257,7 +3271,7 @@
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;3.971&#34;, &#34;ap-northeast-1&#34;: &#34;4.923&#34;, &#34;ap-southeast-1&#34;: &#34;5.169&#34;, &#34;ap-southeast-2&#34;: &#34;5.169&#34;, &#34;us-west-2&#34;: &#34;3.971&#34;, &#34;us-gov-west-1&#34;: &#34;4.653&#34;, &#34;us-west-1&#34;: &#34;4.312&#34;, &#34;eu-central-1&#34;: &#34;5.402&#34;, &#34;eu-west-1&#34;: &#34;3.971&#34;}'>
                  $3.971 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;4.918&#34;, &#34;ap-northeast-1&#34;: &#34;8.103&#34;, &#34;ap-southeast-1&#34;: &#34;8.508&#34;, &#34;ap-southeast-2&#34;: &#34;8.508&#34;, &#34;us-west-2&#34;: &#34;4.918&#34;, &#34;us-gov-west-1&#34;: &#34;5.600&#34;, &#34;us-west-1&#34;: &#34;5.259&#34;, &#34;eu-central-1&#34;: &#34;8.608&#34;, &#34;eu-west-1&#34;: &#34;4.918&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;4.918&#34;, &#34;ap-northeast-1&#34;: &#34;8.103&#34;, &#34;ap-southeast-1&#34;: &#34;8.508&#34;, &#34;ap-southeast-2&#34;: &#34;8.508&#34;, &#34;us-west-2&#34;: &#34;4.918&#34;, &#34;us-gov-west-1&#34;: &#34;5.6&#34;, &#34;us-west-1&#34;: &#34;5.259&#34;, &#34;eu-central-1&#34;: &#34;8.608&#34;, &#34;eu-west-1&#34;: &#34;4.918&#34;}'>
                  $4.918 per hour
           </td>
         </tr>
@@ -3313,8 +3327,8 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;6.820&#34;, &#34;ap-northeast-1&#34;: &#34;8.004&#34;, &#34;ap-southeast-1&#34;: &#34;8.140&#34;, &#34;ap-southeast-2&#34;: &#34;8.140&#34;, &#34;us-west-2&#34;: &#34;6.820&#34;, &#34;us-gov-west-1&#34;: &#34;8.184&#34;, &#34;us-west-1&#34;: &#34;7.502&#34;, &#34;eu-central-1&#34;: &#34;8.102&#34;, &#34;eu-west-1&#34;: &#34;7.502&#34;}'>
-                 $6.820 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;6.82&#34;, &#34;ap-northeast-1&#34;: &#34;8.004&#34;, &#34;ap-southeast-1&#34;: &#34;8.14&#34;, &#34;ap-southeast-2&#34;: &#34;8.14&#34;, &#34;us-west-2&#34;: &#34;6.82&#34;, &#34;us-gov-west-1&#34;: &#34;8.184&#34;, &#34;us-west-1&#34;: &#34;7.502&#34;, &#34;eu-central-1&#34;: &#34;8.102&#34;, &#34;eu-west-1&#34;: &#34;7.502&#34;}'>
+                 $6.82 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;7.782&#34;, &#34;ap-northeast-1&#34;: &#34;8.903&#34;, &#34;ap-southeast-1&#34;: &#34;9.348&#34;, &#34;ap-southeast-2&#34;: &#34;9.348&#34;, &#34;us-west-2&#34;: &#34;7.782&#34;, &#34;us-gov-west-1&#34;: &#34;9.146&#34;, &#34;us-west-1&#34;: &#34;8.464&#34;, &#34;eu-central-1&#34;: &#34;9.064&#34;, &#34;eu-west-1&#34;: &#34;7.782&#34;}'>
                  $7.782 per hour
@@ -3322,7 +3336,7 @@
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: &#34;7.942&#34;, &#34;ap-northeast-1&#34;: &#34;9.846&#34;, &#34;ap-southeast-1&#34;: &#34;10.338&#34;, &#34;ap-southeast-2&#34;: &#34;10.338&#34;, &#34;us-west-2&#34;: &#34;7.942&#34;, &#34;us-gov-west-1&#34;: &#34;9.306&#34;, &#34;us-west-1&#34;: &#34;8.624&#34;, &#34;eu-central-1&#34;: &#34;9.775&#34;, &#34;eu-west-1&#34;: &#34;7.942&#34;}'>
                  $7.942 per hour
           </td>
-          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;9.836&#34;, &#34;ap-northeast-1&#34;: &#34;16.206&#34;, &#34;ap-southeast-1&#34;: &#34;17.016&#34;, &#34;ap-southeast-2&#34;: &#34;17.016&#34;, &#34;us-west-2&#34;: &#34;9.836&#34;, &#34;us-gov-west-1&#34;: &#34;11.200&#34;, &#34;us-west-1&#34;: &#34;10.518&#34;, &#34;eu-central-1&#34;: &#34;16.439&#34;, &#34;eu-west-1&#34;: &#34;9.836&#34;}'>
+          <td class="cost cost-mswinSQL" data-pricing='{&#34;us-east-1&#34;: &#34;9.836&#34;, &#34;ap-northeast-1&#34;: &#34;16.206&#34;, &#34;ap-southeast-1&#34;: &#34;17.016&#34;, &#34;ap-southeast-2&#34;: &#34;17.016&#34;, &#34;us-west-2&#34;: &#34;9.836&#34;, &#34;us-gov-west-1&#34;: &#34;11.2&#34;, &#34;us-west-1&#34;: &#34;10.518&#34;, &#34;eu-central-1&#34;: &#34;16.439&#34;, &#34;eu-west-1&#34;: &#34;9.836&#34;}'>
                  $9.836 per hour
           </td>
         </tr>
@@ -3380,8 +3394,8 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.690&#34;, &#34;ap-northeast-1&#34;: &#34;0.844&#34;, &#34;ap-southeast-1&#34;: &#34;0.870&#34;, &#34;ap-southeast-2&#34;: &#34;0.870&#34;, &#34;us-west-2&#34;: &#34;0.690&#34;, &#34;eu-central-1&#34;: &#34;0.794&#34;, &#34;eu-west-1&#34;: &#34;0.735&#34;}'>
-                 $0.690 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;0.69&#34;, &#34;ap-northeast-1&#34;: &#34;0.844&#34;, &#34;ap-southeast-1&#34;: &#34;0.87&#34;, &#34;ap-southeast-2&#34;: &#34;0.87&#34;, &#34;us-west-2&#34;: &#34;0.69&#34;, &#34;eu-central-1&#34;: &#34;0.794&#34;, &#34;eu-west-1&#34;: &#34;0.735&#34;}'>
+                 $0.69 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;0.821&#34;, &#34;ap-northeast-1&#34;: &#34;0.975&#34;, &#34;ap-southeast-1&#34;: &#34;1.001&#34;, &#34;ap-southeast-2&#34;: &#34;1.001&#34;, &#34;us-west-2&#34;: &#34;0.821&#34;, &#34;eu-central-1&#34;: &#34;0.925&#34;, &#34;eu-west-1&#34;: &#34;0.866&#34;}'>
                  $0.821 per hour
@@ -3447,8 +3461,8 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;1.380&#34;, &#34;ap-northeast-1&#34;: &#34;1.688&#34;, &#34;ap-southeast-1&#34;: &#34;1.740&#34;, &#34;ap-southeast-2&#34;: &#34;1.740&#34;, &#34;us-west-2&#34;: &#34;1.380&#34;, &#34;eu-central-1&#34;: &#34;1.588&#34;, &#34;eu-west-1&#34;: &#34;1.470&#34;}'>
-                 $1.380 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;1.38&#34;, &#34;ap-northeast-1&#34;: &#34;1.688&#34;, &#34;ap-southeast-1&#34;: &#34;1.74&#34;, &#34;ap-southeast-2&#34;: &#34;1.74&#34;, &#34;us-west-2&#34;: &#34;1.38&#34;, &#34;eu-central-1&#34;: &#34;1.588&#34;, &#34;eu-west-1&#34;: &#34;1.47&#34;}'>
+                 $1.38 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;1.601&#34;, &#34;ap-northeast-1&#34;: &#34;1.909&#34;, &#34;ap-southeast-1&#34;: &#34;1.961&#34;, &#34;ap-southeast-2&#34;: &#34;1.961&#34;, &#34;us-west-2&#34;: &#34;1.601&#34;, &#34;eu-central-1&#34;: &#34;1.809&#34;, &#34;eu-west-1&#34;: &#34;1.691&#34;}'>
                  $1.601 per hour
@@ -3514,8 +3528,8 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;2.760&#34;, &#34;ap-northeast-1&#34;: &#34;3.376&#34;, &#34;ap-southeast-1&#34;: &#34;3.480&#34;, &#34;ap-southeast-2&#34;: &#34;3.480&#34;, &#34;us-west-2&#34;: &#34;2.760&#34;, &#34;eu-central-1&#34;: &#34;3.176&#34;, &#34;eu-west-1&#34;: &#34;2.940&#34;}'>
-                 $2.760 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;2.76&#34;, &#34;ap-northeast-1&#34;: &#34;3.376&#34;, &#34;ap-southeast-1&#34;: &#34;3.48&#34;, &#34;ap-southeast-2&#34;: &#34;3.48&#34;, &#34;us-west-2&#34;: &#34;2.76&#34;, &#34;eu-central-1&#34;: &#34;3.176&#34;, &#34;eu-west-1&#34;: &#34;2.94&#34;}'>
+                 $2.76 per hour
           </td>
           <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;3.062&#34;, &#34;ap-northeast-1&#34;: &#34;3.678&#34;, &#34;ap-southeast-1&#34;: &#34;3.782&#34;, &#34;ap-southeast-2&#34;: &#34;3.782&#34;, &#34;us-west-2&#34;: &#34;3.062&#34;, &#34;eu-central-1&#34;: &#34;3.478&#34;, &#34;eu-west-1&#34;: &#34;3.242&#34;}'>
                  $3.062 per hour
@@ -3581,10 +3595,10 @@
           <td class="linux-virtualization">
             HVM
           </td>
-          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;5.520&#34;, &#34;ap-northeast-1&#34;: &#34;6.752&#34;, &#34;ap-southeast-1&#34;: &#34;6.960&#34;, &#34;ap-southeast-2&#34;: &#34;6.960&#34;, &#34;us-west-2&#34;: &#34;5.520&#34;, &#34;eu-central-1&#34;: &#34;6.352&#34;, &#34;eu-west-1&#34;: &#34;5.880&#34;}'>
-                 $5.520 per hour
+          <td class="cost cost-linux" data-pricing='{&#34;us-east-1&#34;: &#34;5.52&#34;, &#34;ap-northeast-1&#34;: &#34;6.752&#34;, &#34;ap-southeast-1&#34;: &#34;6.96&#34;, &#34;ap-southeast-2&#34;: &#34;6.96&#34;, &#34;us-west-2&#34;: &#34;5.52&#34;, &#34;eu-central-1&#34;: &#34;6.352&#34;, &#34;eu-west-1&#34;: &#34;5.88&#34;}'>
+                 $5.52 per hour
           </td>
-          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;6.198&#34;, &#34;ap-northeast-1&#34;: &#34;7.430&#34;, &#34;ap-southeast-1&#34;: &#34;7.638&#34;, &#34;ap-southeast-2&#34;: &#34;7.638&#34;, &#34;us-west-2&#34;: &#34;6.198&#34;, &#34;eu-central-1&#34;: &#34;7.030&#34;, &#34;eu-west-1&#34;: &#34;6.558&#34;}'>
+          <td class="cost cost-mswin" data-pricing='{&#34;us-east-1&#34;: &#34;6.198&#34;, &#34;ap-northeast-1&#34;: &#34;7.43&#34;, &#34;ap-southeast-1&#34;: &#34;7.638&#34;, &#34;ap-southeast-2&#34;: &#34;7.638&#34;, &#34;us-west-2&#34;: &#34;6.198&#34;, &#34;eu-central-1&#34;: &#34;7.03&#34;, &#34;eu-west-1&#34;: &#34;6.558&#34;}'>
                  $6.198 per hour
           </td>
           <td class="cost cost-mswinSQLWeb" data-pricing='{&#34;us-east-1&#34;: 0, &#34;ap-northeast-1&#34;: 0, &#34;ap-southeast-1&#34;: 0, &#34;ap-southeast-2&#34;: 0, &#34;us-west-2&#34;: 0, &#34;eu-central-1&#34;: 0, &#34;eu-west-1&#34;: 0}'>
@@ -3602,7 +3616,7 @@
       <p>It was started by <a href="http://twitter.com/powdahound" target="_blank">@powdahound</a>, contributed to by <a href="https://github.com/powdahound/ec2instances.info/contributors" target="_blank">many</a>, is <a href="http://powdahound.com/2011/03/hosting-a-static-site-on-amazon-s3-ec2instances-info" target="_blank">hosted on S3</a>, and awaits your improvements <a href="https://github.com/powdahound/ec2instances.info" target="_blank">on GitHub</a>.</p>
     </div>
     <div class="well-small">
-      <p class="small">Generated at: 2015-06-17 14:06:39 UTC</p>
+      <p class="small">Generated at: 2015-08-02 22:22:51 UTC</p>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
