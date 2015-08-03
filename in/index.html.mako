@@ -69,6 +69,21 @@
           </ul>
         </div>
 
+        <div class="btn-group" id='reserved-term-dropdown'>
+          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+            <i class="icon-globe icon-white"></i>
+            Reserved: <span class="text">1 yr - No Upfront</span>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="javascript:;" data-reserved-term='yrTerm1.noUpfront'>1 yr - No Upfront</a></li>
+            <li><a href="javascript:;" data-reserved-term='yrTerm1.partialUpfront'>1 yr - Partial Upfront</a></li>
+            <li><a href="javascript:;" data-reserved-term='yrTerm1.allUpfront'>1 yr - Full Upfront</a></li>
+            <li><a href="javascript:;" data-reserved-term='yrTerm3.partialUpfront'>3 yr - Partial Upfront</a></li>
+            <li><a href="javascript:;" data-reserved-term='yrTerm3.allUpfront'>3 yr - Full Upfront</a></li>
+          </ul>
+        </div>
+
         <div class="btn-group" id="filter-dropdown">
           <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
             <i class="icon-filter icon-white"></i>
@@ -136,10 +151,15 @@
           </th>
           <th class="enhanced-networking">Enhanced Networking</th>
           <th class="linux-virtualization">Linux Virtualization</th>
-          <th class="cost">Linux cost</th>
-          <th class="cost-mswin">Windows cost</th>
-          <th class="cost-mswinSQLWeb">Windows SQL Web cost</th>
-          <th class="cost-mswinSQL">Windows SQL Std cost</th>
+
+          <th class="cost-ondemand-linux">Linux On Demand cost</th>
+          <th class="cost-reserved-linux">Linux Reserved cost</th>
+          <th class="cost-ondemand-mswin">Windows On Demand cost</th>
+          <th class="cost-reserved-mswin">Windows Reserved cost</th>
+          <th class="cost-ondemand-mswinSQLWeb">Windows SQL Web On Demand cost</th>
+          <th class="cost-reserved-mswinSQLWeb">Windows SQL Web Reserved cost</th>
+          <th class="cost-ondemand-mswinSQL">Windows SQL Std On Demand cost</th>
+          <th class="cost-reserved-mswinSQL">Windows SQL Std Reserved cost</th>
         </tr>
       </thead>
       <tbody>
@@ -226,11 +246,18 @@
             % endif
           </td>
     % for platform in ['linux', 'mswin', 'mswinSQLWeb', 'mswinSQL']:
-          <td class="cost cost-od-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',{})) for r,p in inst['pricing'].iteritems()}) | h}'>
-            % if inst['pricing'].get('us-east-1', {}).get(platform, 'N/A') != "N/A":
-                 $${inst['pricing']['us-east-1'][platform]} per hour
+          <td class="cost-ondemand cost-ondemand-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',{})).get('ondemand') for r,p in inst['pricing'].iteritems()}) | h}'>
+            % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
+                 $${inst['pricing']['us-east-1'][platform]['ondemand']} per hour
             % else:
             unavailable
+            % endif
+          </td>
+          <td class="cost-reserved cost-reserved-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',{})).get('reserved', {}) for r,p in inst['pricing'].iteritems()}) | h}'>
+            % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('reserved', 'N/A') != "N/A":
+                 $${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1.noUpfront']} per hour
+            % else:
+              unavailable
             % endif
           </td>
     % endfor

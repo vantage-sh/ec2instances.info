@@ -234,17 +234,15 @@ def add_reserved_pricing(imap, data, platform):
             inst.pricing[region].setdefault(platform, {})
             inst.pricing[region][platform].setdefault('reserved', {})
 
+            termPricing = {}
+
             for term in t_spec['terms']:
-
-                termPricing = {}
-
                 for po in term['purchaseOptions']:
-
                     for value in po['valueColumns']:
                         if value['name'] == 'effectiveHourly':
-                            termPricing[po['purchaseOption']] = value['prices']['USD']
+                            termPricing[term['term'] + '.' + po['purchaseOption']] = value['prices']['USD']
 
-                inst.pricing[region][platform]['reserved'][term['term']] = termPricing
+            inst.pricing[region][platform]['reserved'] = termPricing
 
 
 def add_pricing_info(instances):

@@ -1,5 +1,6 @@
 var current_cost_duration = 'hourly';
 var current_region = 'us-east-1';
+var current_reserved_term = 'yrTerm1.noUpfront';
 var data_table = null;
 
 var require = Array();
@@ -22,7 +23,7 @@ function init_data_table() {
         "sType": "span-sort"
       },
       {
-        "aTargets": ["ecu-per-core", "enhanced-networking", "maxips", "linux-virtualization", "cost-mswinSQLWeb", "cost-mswinSQL", "ebs-throughput", "ebs-iops", "max_bandwidth"],
+        "aTargets": ["ecu-per-core", "enhanced-networking", "maxips", "linux-virtualization", "cost-ondemand-mswinSQLWeb", "cost-ondemand-mswinSQL", "cost-reserved-mswinSQLWeb", "cost-reserved-mswinSQL", "ebs-throughput", "ebs-iops", "max_bandwidth"],
         "bVisible": false
       }
     ],
@@ -83,9 +84,28 @@ function change_cost(duration) {
   };
   var multiplier = hour_multipliers[duration];
   var per_time;
-  $.each($("td.cost"), function(i, elem) {
+  $.each($("td.cost-ondemand"), function(i, elem) {
     elem = $(elem);
-    per_time = elem.data("pricing")[current_region].ondemand;
+    per_time = elem.data("pricing")[current_region];
+    if (per_time && !isNaN(per_time)) {
+      per_time = (per_time * multiplier).toFixed(3);
+      elem.text("$" + per_time + " " + duration);
+    } else {
+      elem.text("unavailable");
+    }
+  });
+
+  $.each($("td.cost-reserved"), function(i, elem) {
+    elem = $(elem);
+    per_time = elem.data("pricing")[current_region];
+
+    if(!per_time) {
+      elem.text("unavailable");
+      return;
+    }
+
+    per_time = per_time[current_reserved_term];
+
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(3);
       elem.text("$" + per_time + " " + duration);
@@ -111,6 +131,19 @@ function change_region(region) {
     }
   });
   $("#region-dropdown .dropdown-toggle .text").text(region_name);
+  change_cost(current_cost_duration);
+}
+
+function change_reserved_term(term) {
+  current_reserved_term = term;
+  var $dropdown = $('#reserved-term-dropdown'),
+      $activeLink = $dropdown.find('li a[data-reserved-term="'+term+'"]'),
+      term_name = $activeLink.text();
+
+  $dropdown.find('li').removeClass('active');
+  $activeLink.closest('li').addClass('active');
+
+  $dropdown.find('.dropdown-toggle .text').text(term_name);
   change_cost(current_cost_duration);
 }
 
@@ -250,6 +283,7 @@ function on_data_table_initialized() {
 
   change_region('us-east-1');
   change_cost('hourly');
+  change_reserved_term('yrTerm1.noUpfront');
 
   $.extend($.fn.dataTableExt.oStdClasses, {
     "sWrapper": "dataTables_wrapper form-inline"
@@ -270,6 +304,10 @@ function on_data_table_initialized() {
 
   $("#region-dropdown li").bind("click", function(e) {
     change_region($(e.target).data('region'));
+  });
+
+  $("#reserved-term-dropdown li").bind("click", function(e) {
+    change_reserved_term($(e.target).data('reservedTerm'));
   });
 }
 
