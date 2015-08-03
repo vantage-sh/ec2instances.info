@@ -153,13 +153,21 @@
           <th class="linux-virtualization">Linux Virtualization</th>
 
           <th class="cost-ondemand-linux">Linux On Demand cost</th>
-          <th class="cost-reserved-linux">Linux Reserved cost</th>
+          <th class="cost-reserved-linux">
+            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux Reserved cost</abbr>
+          </th>
           <th class="cost-ondemand-mswin">Windows On Demand cost</th>
-          <th class="cost-reserved-mswin">Windows Reserved cost</th>
+          <th class="cost-reserved-mswin">
+            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows Reserved cost</abbr>
+          </th>
           <th class="cost-ondemand-mswinSQLWeb">Windows SQL Web On Demand cost</th>
-          <th class="cost-reserved-mswinSQLWeb">Windows SQL Web Reserved cost</th>
+          <th class="cost-reserved-mswinSQLWeb">
+            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows SQL Web Reserved cost</abbr>
+          </th>
           <th class="cost-ondemand-mswinSQL">Windows SQL Std On Demand cost</th>
-          <th class="cost-reserved-mswinSQL">Windows SQL Std Reserved cost</th>
+          <th class="cost-reserved-mswinSQL">
+            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows SQL Std Reserved cost</abbr>
+          </th>
         </tr>
       </thead>
       <tbody>
