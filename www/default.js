@@ -78,14 +78,14 @@ function change_cost(duration) {
     "hourly": 1,
     "daily": 24,
     "weekly": (7*24),
-    "monthly": (24*30),
+    "monthly": (30*24),
     "annually": (365*24)
   };
   var multiplier = hour_multipliers[duration];
   var per_time;
   $.each($("td.cost"), function(i, elem) {
     elem = $(elem);
-    per_time = elem.data("pricing")[current_region];
+    per_time = elem.data("pricing")[current_region].ondemand;
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(3);
       elem.text("$" + per_time + " " + duration);
