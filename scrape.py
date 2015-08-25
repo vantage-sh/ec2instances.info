@@ -185,7 +185,13 @@ def transform_region(reg):
     return base + "-" + num
 
 
-def add_pricing(imap, data, platform):
+def add_pricing(imap, data, platform, pricing_mode):
+    if pricing_mode == 'od':
+        add_ondemand_pricing(imap, data, platform)
+    elif pricing_mode == 'ri':
+        add_reserved_pricing(imap, data, platform)
+
+def add_ondemand_pricing(imap, data, platform):
     for region_spec in data['config']['regions']:
         region = transform_region(region_spec['region'])
         for t_spec in region_spec['instanceTypes']:
@@ -200,8 +206,10 @@ def add_pricing(imap, data, platform):
                 inst = imap[i_type]
                 inst.pricing.setdefault(region, {})
                 # print "%s/%s" % (region, i_type)
+
+                inst.pricing[region].setdefault(platform, {})
                 for col in i_spec['valueColumns']:
-                    inst.pricing[region][platform] = col['prices']['USD']
+                    inst.pricing[region][platform]['ondemand'] = col['prices']['USD']
 
                 # ECU is only available here
                 ecu = i_spec['ECU']
@@ -210,26 +218,82 @@ def add_pricing(imap, data, platform):
                 else:
                     inst.ECU = float(ecu)
 
+def add_reserved_pricing(imap, data, platform):
+    for region_spec in data['config']['regions']:
+        region = transform_region(region_spec['region'])
+        for t_spec in region_spec['instanceTypes']:
+            i_type = t_spec['type']
+            # As best I can tell, this type doesn't exist, but is
+            # in the pricing charts anyways.
+            if i_type == 'cc2.4xlarge':
+                continue
+            assert i_type in imap, "Unknown instance size: %s" % (i_type, )
+            inst = imap[i_type]
+            inst.pricing.setdefault(region, {})
+            # print "%s/%s" % (region, i_type)
+            inst.pricing[region].setdefault(platform, {})
+            inst.pricing[region][platform].setdefault('reserved', {})
+
+            termPricing = {}
+
+            for term in t_spec['terms']:
+                for po in term['purchaseOptions']:
+                    for value in po['valueColumns']:
+                        if value['name'] == 'effectiveHourly':
+                            termPricing[term['term'] + '.' + po['purchaseOption']] = value['prices']['USD']
+
+            inst.pricing[region][platform]['reserved'] = termPricing
+
 
 def add_pricing_info(instances):
+
+    pricing_modes = ['ri', 'od']
+
+    reserved_name_map = {
+        'linux': 'linux-unix-shared',
+        'mswin': 'windows-shared',
+        'mswinSQL': 'windows-with-sql-server-standard-shared',
+        'mswinSQLWeb': 'windows-with-sql-server-web-shared'
+    }
+
     for i in instances:
         i.pricing = {}
+
     by_type = {i.instance_type: i for i in instances}
 
+
+
     for platform in ['linux', 'mswin', 'mswinSQL', 'mswinSQLWeb']:
-        # current generation
-        pricing_url = 'http://aws.amazon.com/ec2/pricing/json/%s-od.json' % (platform,)
-        pricing = json.loads(urllib2.urlopen(pricing_url).read())
-        add_pricing(by_type, pricing, platform)
+        for pricing_mode in pricing_modes:
+            # current generation
+            if pricing_mode == 'od':
+                pricing_url = 'https://a0.awsstatic.com/pricing/1/deprecated/ec2/%s-od.json' % (platform,)
+            else:
+                pricing_url = 'http://a0.awsstatic.com/pricing/1/ec2/ri-v2/%s.min.js' % (reserved_name_map[platform],)
 
-        # previous generation
-        pricing_url = 'http://a0.awsstatic.com/pricing/1/ec2/previous-generation/%s-od.min.js' % (platform,)
-        jsonp_string = urllib2.urlopen(pricing_url).read()
-        json_string = re.sub(r"(\w+):", r'"\1":', jsonp_string[jsonp_string.index('callback(') + 9 : -2]) # convert into valid json
+
+            pricing = fetch_data(pricing_url)
+            add_pricing(by_type, pricing, platform, pricing_mode)
+
+            # previous generation
+            if pricing_mode == 'od':
+                pricing_url = 'http://a0.awsstatic.com/pricing/1/ec2/previous-generation/%s-od.min.js' % (platform,)
+            else:
+                pricing_url = 'http://a0.awsstatic.com/pricing/1/ec2/previous-generation/ri-v2/%s.min.js' % (reserved_name_map[platform],)
+
+            pricing = fetch_data(pricing_url)
+            add_pricing(by_type, pricing, platform, pricing_mode)
+
+def fetch_data(url):
+    content = urllib2.urlopen(url).read()
+    try:
+        pricing = json.loads(content)
+    except ValueError:
+        # if the data isn't compatiable JSON, try to parse as jsonP
+        json_string = re.sub(r"(\w+):", r'"\1":', content[content.index('callback(') + 9 : -2]) # convert into valid json
         pricing = json.loads(json_string)
-        add_pricing(by_type, pricing, platform)
 
-
+    return pricing
 def add_eni_info(instances):
     eni_url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html"
     tree = etree.parse(urllib2.urlopen(eni_url), etree.HTMLParser())
