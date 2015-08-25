@@ -5,6 +5,7 @@
 
 import os
 import webbrowser
+import traceback
 
 from boto import connect_s3
 from boto.s3.connection import OrdinaryCallingFormat
@@ -31,6 +32,7 @@ def build():
         scrape(data_file)
     except Exception, e:
         print "ERROR: Unable to scrape site data: %s" % e
+        print traceback.print_exc()
     render_html()
 
 @task
