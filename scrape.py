@@ -259,12 +259,14 @@ def add_ebs_info(instances):
     for row in rows:
         cols = row.xpath('td')
         instance_type = totext(cols[0]).split(' ')[0]
-        ebs_throughput = int(totext(cols[1]).strip().replace(',', ''))
-        ebs_iops = int(totext(cols[2]).strip().replace(',', ''))
-        max_bandwidth = float(totext(cols[3]).strip().replace(',', ''))
+        ebs_optimized_by_default = totext(cols[1]) == 'Yes'
+        ebs_throughput = int(totext(cols[2]).strip().replace(',', ''))
+        ebs_iops = int(totext(cols[3]).strip().replace(',', ''))
+        max_bandwidth = float(totext(cols[4]).strip().replace(',', ''))
         if instance_type not in by_type:
             print "Unknown instance type: " + instance_type
             continue
+        by_type[instance_type].ebs_optimized_by_default = ebs_optimized_by_default
         by_type[instance_type].ebs_throughput = ebs_throughput
         by_type[instance_type].ebs_iops = ebs_iops
         by_type[instance_type].max_bandwidth = max_bandwidth
