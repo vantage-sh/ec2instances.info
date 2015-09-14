@@ -123,14 +123,17 @@ def _rindex_family(inst2family, details):
 def scrape_families():
     inst2family = dict()
     tree = etree.parse(urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html"), etree.HTMLParser())
-    details = tree.xpath('//table')[2]
+    details = tree.xpath('//div[@class="informaltable"]//table')[0]
     hdrs = details.xpath('thead/tr')[0]
     if totext(hdrs[0]).lower() == 'instance family' and 'current generation' in totext(hdrs[1]).lower():
        _rindex_family(inst2family, details)
-    details = tree.xpath('//table')[3]
+
+    details = tree.xpath('//div[@class="informaltable"]//table')[1]
     hdrs = details.xpath('thead/tr')[0]
     if totext(hdrs[0]).lower() == 'instance family' and 'previous generation' in totext(hdrs[1]).lower():
        _rindex_family(inst2family, details)
+
+    assert len(inst2family) > 0, "Failed to find instance family info"
     return inst2family
 
 
@@ -294,10 +297,12 @@ def fetch_data(url):
         pricing = json.loads(json_string)
 
     return pricing
+
+
 def add_eni_info(instances):
     eni_url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html"
     tree = etree.parse(urllib2.urlopen(eni_url), etree.HTMLParser())
-    table = tree.xpath('//div[@id="divContent"]/div[@class="section"]//table[.//code[contains(., "cc2.8xlarge")]]')[0]
+    table = tree.xpath('//div[@class="informaltable"]//table')[0]
     rows = table.xpath('.//tr[./td]')
     by_type = {i.instance_type: i for i in instances}
 
@@ -316,7 +321,7 @@ def add_eni_info(instances):
 def add_ebs_info(instances):
     ebs_url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html"
     tree = etree.parse(urllib2.urlopen(ebs_url), etree.HTMLParser())
-    table = tree.xpath('//table')[3]
+    table = tree.xpath('//div[@class="informaltable"]//table')[0]
     rows = table.xpath('tbody/tr')
     by_type = {i.instance_type: i for i in instances}
 
