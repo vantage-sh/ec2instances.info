@@ -9,6 +9,7 @@
     <title>Amazon EC2 Instance Comparison</title>
     <link rel="stylesheet" href="default.css" media="screen">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" media="screen">
+    <link rel="icon" type="image/png" href="favicon.png">
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-4372467-3']);
