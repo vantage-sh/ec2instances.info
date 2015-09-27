@@ -189,6 +189,15 @@ function url_for_selections() {
   if (settings.filter == '') delete settings.filter
   if (settings.region == 'us-east-1') delete settings.region;
   if (settings.cost == 'hourly') delete settings.cost;
+
+  // selected rows
+  var selected_row_ids = $('#data tbody tr.highlight').map(function() {
+    return this.id;
+  }).get();
+  if (selected_row_ids.length > 0) {
+    settings.selected = selected_row_ids;
+  }
+
   var url = location.origin + location.pathname;
   var parameters = [];
   for (var setting in settings) {
@@ -202,13 +211,15 @@ function url_for_selections() {
 }
 
 function maybe_update_url() {
+  if (!history.replaceState) {
+    return;
+  }
 
-  if (!history.replaceState)
-    return
   try {
     var url = url_for_selections();
-    if (document.location == url)
+    if (document.location == url) {
       return;
+    }
 
     history.replaceState(null, '', url);
   } catch(ex) {
@@ -268,10 +279,17 @@ function on_data_table_initialized() {
         $('[data-action="datafilter"][data-type="storage"]').val(url_settings['min_storage']);
         apply_min_values();
         break;
+      case 'selected':
+        // apply highlight to selected rows
+        $.each(url_settings['selected'].split(','), function(_, id) {
+          id = id.replace('.', '\\.');
+          $('#'+id).addClass('highlight');
+        })
+        break;
     }
   }
 
-  configureHighlighting();
+  configure_highlighting();
 
   // Allow row filtering by min-value match.
   $('[data-action=datafilter]').on('keyup', apply_min_values);
@@ -349,7 +367,7 @@ function get_url_parameters() {
   return settings;
 }
 
-function configureHighlighting() {
+function configure_highlighting() {
   var compareOn = false,
       $compareBtn = $('.btn-compare'),
       $rows = $('#data tbody tr');
@@ -358,16 +376,18 @@ function configureHighlighting() {
   $rows.click(function() {
     $(this).toggleClass('highlight');
 
-    if(!compareOn) {
+    if (!compareOn) {
       $compareBtn.prop('disabled', !$rows.is('.highlight'));
     }
+
+    maybe_update_url();
   });
 
-  $compareBtn.prop('disabled', true);
+  $compareBtn.prop('disabled', !$($rows).is('.highlight'));
   $compareBtn.text($compareBtn.data('textOff'));
 
   $compareBtn.click(function() {
-    if(compareOn) {
+    if (compareOn) {
       $rows.show();
       $compareBtn.text($compareBtn.data('textOff'))
                  .addClass('btn-primary')
