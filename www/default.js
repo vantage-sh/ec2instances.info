@@ -1,6 +1,11 @@
-var current_cost_duration = 'hourly';
-var current_region = 'us-east-1';
-var current_reserved_term = 'yrTerm1.noUpfront';
+var default_cost_duration = 'hourly';
+var default_region = 'us-east-1';
+var default_reserved_term = 'yrTerm1.noUpfront';
+
+var current_cost_duration = default_cost_duration;
+var current_region = default_region;
+var current_reserved_term = default_reserved_term;
+
 var data_table = null;
 
 var require = Array();
@@ -180,15 +185,17 @@ function url_for_selections() {
     min_storage: require['storage'],
     filter: data_table.settings()[0].oPreviousSearch['sSearch'],
     region: current_region,
-    cost: current_cost_duration
+    cost: current_cost_duration,
+    term: current_reserved_term
   };
   if (settings.min_memory == '') delete settings.min_memory;
   if (settings.min_computeunits == '') delete settings.min_computeunits;
   if (settings.min_storage == '') delete settings.min_storage;
 
   if (settings.filter == '') delete settings.filter
-  if (settings.region == 'us-east-1') delete settings.region;
-  if (settings.cost == 'hourly') delete settings.cost;
+  if (settings.region == default_region) delete settings.region;
+  if (settings.cost == default_cost_duration) delete settings.cost;
+  if (settings.term == default_reserved_term) delete settings.term;
 
   // selected rows
   var selected_row_ids = $('#data tbody tr.highlight').map(function() {
@@ -263,6 +270,9 @@ function on_data_table_initialized() {
         break;
       case 'cost':
         current_cost_duration = url_settings['cost'];
+        break;
+      case 'term':
+        current_reserved_term = url_settings['term'];
         break;
       case 'filter':
         data_table.filter(url_settings['filter']);
