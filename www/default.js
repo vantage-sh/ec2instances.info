@@ -259,10 +259,10 @@ function on_data_table_initialized() {
   for (var key in url_settings) {
     switch(key) {
       case 'region':
-        change_region(url_settings['region']);
+        current_region = url_settings['region'];
         break;
       case 'cost':
-        change_cost(url_settings['cost']);
+        current_cost_duration = url_settings['cost'];
         break;
       case 'filter':
         data_table.filter(url_settings['filter']);
@@ -299,9 +299,9 @@ function on_data_table_initialized() {
     return false;
   });
 
-  change_region('us-east-1');
-  change_cost('hourly');
-  change_reserved_term('yrTerm1.noUpfront');
+  change_region(current_region);
+  change_cost(current_cost_duration);
+  change_reserved_term(current_reserved_term);
 
   $.extend($.fn.dataTableExt.oStdClasses, {
     "sWrapper": "dataTables_wrapper form-inline"
