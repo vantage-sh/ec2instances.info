@@ -63,7 +63,7 @@ function change_cost(duration) {
   // update menu text
   var first = duration.charAt(0).toUpperCase();
   var text = first + duration.substr(1);
-  $("#cost-dropdown .dropdown-toggle .text").text("Cost: "+text);
+  $("#cost-dropdown .dropdown-toggle .text").text(text);
 
   // update selected menu option
   $('#cost-dropdown li a').each(function(i, e) {

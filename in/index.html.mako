@@ -39,7 +39,7 @@
         <div class="btn-group" id='region-dropdown'>
           <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
             <i class="icon-globe icon-white"></i>
-            Region: <span class="text">Region: US East</span>
+            Region: <span class="text"></span>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
@@ -58,7 +58,7 @@
         <div class="btn-group" id="cost-dropdown">
           <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
             <i class="icon-shopping-cart icon-white"></i>
-            <span class="text"></span>
+            Cost: <span class="text"></span>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
