@@ -18,6 +18,10 @@ body {
   margin-bottom: 10px;
 }
 
+  #filters input {
+    width: 5rem;
+  }
+
 #data {
   margin-top: 10px;
   clear: both;

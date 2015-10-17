@@ -110,24 +110,10 @@
     </div>
 
     <div class="pull-left form-inline" id="filters">
-        <strong> Filter:</strong>
-        Min Memory (GB): <input data-action="datafilter"
-                                data-type="memory"
-                                size=4
-                                class="form-control"
-                                style="width: 45px" />
-
-        Compute Units: <input data-action="datafilter"
-                              data-type="computeunits"
-                              size=4
-                              class="form-control"
-                              style="width: 45px" />
-
-        Storage (GB): <input data-action="datafilter"
-                             data-type="storage"
-                             size=4
-                             class="form-control"
-                             style="width: 45px" />
+      <strong> Filter:</strong>
+      Min Memory (GB): <input data-action="datafilter" data-type="memory" class="form-control" />
+      Compute Units: <input data-action="datafilter" data-type="computeunits" class="form-control" />
+      Storage (GB): <input data-action="datafilter" data-type="storage" class="form-control" />
     </div>
 
     <table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">
