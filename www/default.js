@@ -304,11 +304,6 @@ function on_data_table_initialized() {
   // Allow row filtering by min-value match.
   $('[data-action=datafilter]').on('keyup', apply_min_values);
 
-  $('#url-button').click(function() {
-    $('#share_url').val(url_for_selections()).select();
-    return false;
-  });
-
   change_region(current_region);
   change_cost(current_cost_duration);
   change_reserved_term(current_reserved_term);

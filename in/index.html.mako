@@ -101,11 +101,6 @@
           </ul>
         </div>
 
-        <div class="btn-group" id="url-button">
-          <a class="btn btn-primary" href="#">Generate URL</a>
-          <input class="share-url form-control" type="url" id="share_url" style="width: 150px">
-        </div>
-
         <button class="btn btn-primary btn-compare"
           data-text-on="End Compare"
           data-text-off="Compare Selected">
