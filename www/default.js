@@ -332,6 +332,9 @@ function on_data_table_initialized() {
   $("#reserved-term-dropdown li").bind("click", function(e) {
     change_reserved_term($(e.target).data('reservedTerm'));
   });
+
+  // apply classes to search box
+  $('div.dataTables_filter input').addClass('form-control search');
 }
 
 // sorting for colums with more complex data

@@ -118,8 +118,11 @@ table.table thead .sorting_desc { background: url('datatables/images/sort_desc.p
 table.table thead .sorting_asc_disabled { background: url('datatables/images/sort_asc_disabled.png') no-repeat center right; }
 table.table thead .sorting_desc_disabled { background: url('datatables/images/sort_desc_disabled.png') no-repeat center right; }
 
-input[type=search] {
+/* This class is applied to the DataTables search box by our own code once it renders */
+input.search {
   margin-left: 5px;
+  width: 150px;
+  display: inline;
 }
 
 /* Bootstrap overrides *******************************************************/
