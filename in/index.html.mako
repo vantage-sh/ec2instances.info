@@ -22,7 +22,7 @@
     </script>
   </head>
 
-  <body>
+  <body class="ec2instances">
     <div class="page-header">
       <h1>EC2Instances.info <small>Easy Amazon EC2 Instance Comparison</small></h1>
 
@@ -39,7 +39,7 @@
     </div>
     -->
 
-    <div class="row" id="filters">
+    <div class="row" id="menu">
       <div class="col-sm-12">
         <div class="btn-group" id='region-dropdown'>
           <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
@@ -114,7 +114,7 @@
       </div>
     </div>
 
-    <div class="pull-left form-inline">
+    <div class="pull-left form-inline" id="filters">
         <strong> Filter:</strong>
         Min Memory (GB): <input data-action="datafilter"
                                 data-type="memory"

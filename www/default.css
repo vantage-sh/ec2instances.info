@@ -2,15 +2,24 @@ body {
   padding: 5px 20px;
 }
 
+.ec2instances .page-header {
+  margin-top: 0;
+}
+
 .dataTables_filter {
   float: right;
 }
 
+#menu {
+  margin-bottom: 10px;
+}
+
 #filters {
-  margin-bottom: .5em;
+  margin-bottom: 10px;
 }
 
 #data {
+  margin-top: 10px;
   clear: both;
 }
 
