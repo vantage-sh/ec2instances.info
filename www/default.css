@@ -101,6 +101,10 @@ body {
   padding: 3px 0px;
 }
 
+.well p:last-child {
+  margin-bottom: 0;
+}
+
 /* DataTables: http://datatables.net/blog/Twitter_Bootstrap_2 */
 table.table thead .sorting,
 table.table thead .sorting_asc,
