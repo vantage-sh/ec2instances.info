@@ -402,10 +402,10 @@
       "devices": 1,
       "size": 160
     },
-    "max_bandwidth": 0,
     "instance_type": "m1.small",
     "ECU": 1.0,
-    "memory": 1.7
+    "memory": 1.7,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "General purpose",
@@ -810,10 +810,10 @@
       "devices": 1,
       "size": 410
     },
-    "max_bandwidth": 0,
     "instance_type": "m1.medium",
     "ECU": 2.0,
-    "memory": 3.75
+    "memory": 3.75,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "General purpose",
@@ -1217,10 +1217,10 @@
       "devices": 2,
       "size": 420
     },
-    "max_bandwidth": 62.5,
     "instance_type": "m1.large",
     "ECU": 4.0,
-    "memory": 7.5
+    "memory": 7.5,
+    "ebs_max_bandwidth": 62.5
   },
   {
     "family": "General purpose",
@@ -1624,10 +1624,10 @@
       "devices": 4,
       "size": 420
     },
-    "max_bandwidth": 125.0,
     "instance_type": "m1.xlarge",
     "ECU": 8.0,
-    "memory": 15.0
+    "memory": 15.0,
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Compute optimized",
@@ -1942,10 +1942,10 @@
       "devices": 1,
       "size": 350
     },
-    "max_bandwidth": 0,
     "instance_type": "c1.medium",
     "ECU": 5.0,
-    "memory": 1.7
+    "memory": 1.7,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "Compute optimized",
@@ -2349,10 +2349,10 @@
       "devices": 4,
       "size": 420
     },
-    "max_bandwidth": 125.0,
     "instance_type": "c1.xlarge",
     "ECU": 20.0,
-    "memory": 7.0
+    "memory": 7.0,
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Compute optimized",
@@ -2588,10 +2588,10 @@
       "devices": 4,
       "size": 840
     },
-    "max_bandwidth": 0,
     "instance_type": "cc2.8xlarge",
     "ECU": 88.0,
-    "memory": 60.5
+    "memory": 60.5,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "GPU instances",
@@ -2645,10 +2645,10 @@
       "devices": 2,
       "size": 840
     },
-    "max_bandwidth": 0,
     "instance_type": "cg1.4xlarge",
     "ECU": 33.5,
-    "memory": 22.5
+    "memory": 22.5,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "Memory optimized",
@@ -3052,10 +3052,10 @@
       "devices": 1,
       "size": 420
     },
-    "max_bandwidth": 0,
     "instance_type": "m2.xlarge",
     "ECU": 6.5,
-    "memory": 17.1
+    "memory": 17.1,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "Memory optimized",
@@ -3459,10 +3459,10 @@
       "devices": 1,
       "size": 850
     },
-    "max_bandwidth": 62.5,
     "instance_type": "m2.2xlarge",
     "ECU": 13.0,
-    "memory": 34.2
+    "memory": 34.2,
+    "ebs_max_bandwidth": 62.5
   },
   {
     "family": "Memory optimized",
@@ -3866,10 +3866,10 @@
       "devices": 2,
       "size": 840
     },
-    "max_bandwidth": 125.0,
     "instance_type": "m2.4xlarge",
     "ECU": 26.0,
-    "memory": 68.4
+    "memory": 68.4,
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Memory optimized",
@@ -4063,10 +4063,10 @@
       "devices": 2,
       "size": 120
     },
-    "max_bandwidth": 0,
     "instance_type": "cr1.8xlarge",
     "ECU": 88.0,
-    "memory": 244.0
+    "memory": 244.0,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "Storage optimized",
@@ -4260,10 +4260,10 @@
       "devices": 2,
       "size": 1024
     },
-    "max_bandwidth": 0,
     "instance_type": "hi1.4xlarge",
     "ECU": 35.0,
-    "memory": 60.5
+    "memory": 60.5,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "Storage optimized",
@@ -4583,10 +4583,10 @@
       "devices": 24,
       "size": 2000
     },
-    "max_bandwidth": 0,
     "instance_type": "hs1.8xlarge",
     "ECU": 35.0,
-    "memory": 117.0
+    "memory": 117.0,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "Micro",
@@ -4897,10 +4897,10 @@
     "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": null,
-    "max_bandwidth": 0,
     "instance_type": "t1.micro",
     "ECU": 0,
-    "memory": 0.613
+    "memory": 0.613,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "General purpose",
@@ -5245,10 +5245,10 @@
     ],
     "ebs_optimized": false,
     "storage": null,
-    "max_bandwidth": 0,
     "instance_type": "t2.micro",
     "ECU": 0,
-    "memory": 1.0
+    "memory": 1.0,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "General purpose",
@@ -5593,10 +5593,10 @@
     ],
     "ebs_optimized": false,
     "storage": null,
-    "max_bandwidth": 0,
     "instance_type": "t2.small",
     "ECU": 0,
-    "memory": 2.0
+    "memory": 2.0,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "General purpose",
@@ -5940,10 +5940,10 @@
     ],
     "ebs_optimized": false,
     "storage": null,
-    "max_bandwidth": 0,
     "instance_type": "t2.medium",
     "ECU": 0,
-    "memory": 4.0
+    "memory": 4.0,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "General purpose",
@@ -6287,10 +6287,10 @@
     ],
     "ebs_optimized": false,
     "storage": null,
-    "max_bandwidth": 0,
     "instance_type": "t2.large",
     "ECU": 0,
-    "memory": 8.0
+    "memory": 8.0,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "General purpose",
@@ -6650,10 +6650,10 @@
     ],
     "ebs_optimized": true,
     "storage": null,
-    "max_bandwidth": 56.25,
     "instance_type": "m4.large",
     "ECU": 6.5,
-    "memory": 8.0
+    "memory": 8.0,
+    "ebs_max_bandwidth": 56.25
   },
   {
     "family": "General purpose",
@@ -7013,10 +7013,10 @@
     ],
     "ebs_optimized": true,
     "storage": null,
-    "max_bandwidth": 93.75,
     "instance_type": "m4.xlarge",
     "ECU": 13.0,
-    "memory": 16.0
+    "memory": 16.0,
+    "ebs_max_bandwidth": 93.75
   },
   {
     "family": "General purpose",
@@ -7376,10 +7376,10 @@
     ],
     "ebs_optimized": true,
     "storage": null,
-    "max_bandwidth": 125.0,
     "instance_type": "m4.2xlarge",
     "ECU": 26.0,
-    "memory": 32.0
+    "memory": 32.0,
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "General purpose",
@@ -7739,10 +7739,10 @@
     ],
     "ebs_optimized": true,
     "storage": null,
-    "max_bandwidth": 250.0,
     "instance_type": "m4.4xlarge",
     "ECU": 53.5,
-    "memory": 64.0
+    "memory": 64.0,
+    "ebs_max_bandwidth": 250.0
   },
   {
     "family": "General purpose",
@@ -8102,10 +8102,10 @@
     ],
     "ebs_optimized": true,
     "storage": null,
-    "max_bandwidth": 500.0,
     "instance_type": "m4.10xlarge",
     "ECU": 124.5,
-    "memory": 160.0
+    "memory": 160.0,
+    "ebs_max_bandwidth": 500.0
   },
   {
     "family": "General purpose",
@@ -8534,10 +8534,10 @@
       "devices": 1,
       "size": 4
     },
-    "max_bandwidth": 0,
     "instance_type": "m3.medium",
     "ECU": 3.0,
-    "memory": 3.75
+    "memory": 3.75,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "General purpose",
@@ -8986,10 +8986,10 @@
       "devices": 1,
       "size": 32
     },
-    "max_bandwidth": 0,
     "instance_type": "m3.large",
     "ECU": 6.5,
-    "memory": 7.5
+    "memory": 7.5,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "General purpose",
@@ -9438,10 +9438,10 @@
       "devices": 2,
       "size": 40
     },
-    "max_bandwidth": 62.5,
     "instance_type": "m3.xlarge",
     "ECU": 13.0,
-    "memory": 15.0
+    "memory": 15.0,
+    "ebs_max_bandwidth": 62.5
   },
   {
     "family": "General purpose",
@@ -9890,10 +9890,10 @@
       "devices": 2,
       "size": 80
     },
-    "max_bandwidth": 125.0,
     "instance_type": "m3.2xlarge",
     "ECU": 26.0,
-    "memory": 30.0
+    "memory": 30.0,
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Compute optimized",
@@ -10253,10 +10253,10 @@
     ],
     "ebs_optimized": true,
     "storage": null,
-    "max_bandwidth": 62.5,
     "instance_type": "c4.large",
     "ECU": 8.0,
-    "memory": 3.75
+    "memory": 3.75,
+    "ebs_max_bandwidth": 62.5
   },
   {
     "family": "Compute optimized",
@@ -10616,10 +10616,10 @@
     ],
     "ebs_optimized": true,
     "storage": null,
-    "max_bandwidth": 93.75,
     "instance_type": "c4.xlarge",
     "ECU": 16.0,
-    "memory": 7.5
+    "memory": 7.5,
+    "ebs_max_bandwidth": 93.75
   },
   {
     "family": "Compute optimized",
@@ -10979,10 +10979,10 @@
     ],
     "ebs_optimized": true,
     "storage": null,
-    "max_bandwidth": 125.0,
     "instance_type": "c4.2xlarge",
     "ECU": 31.0,
-    "memory": 15.0
+    "memory": 15.0,
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Compute optimized",
@@ -11342,10 +11342,10 @@
     ],
     "ebs_optimized": true,
     "storage": null,
-    "max_bandwidth": 250.0,
     "instance_type": "c4.4xlarge",
     "ECU": 62.0,
-    "memory": 30.0
+    "memory": 30.0,
+    "ebs_max_bandwidth": 250.0
   },
   {
     "family": "Compute optimized",
@@ -11705,10 +11705,10 @@
     ],
     "ebs_optimized": true,
     "storage": null,
-    "max_bandwidth": 500.0,
     "instance_type": "c4.8xlarge",
     "ECU": 132.0,
-    "memory": 60.0
+    "memory": 60.0,
+    "ebs_max_bandwidth": 500.0
   },
   {
     "family": "Compute optimized",
@@ -12127,10 +12127,10 @@
       "devices": 2,
       "size": 16
     },
-    "max_bandwidth": 0,
     "instance_type": "c3.large",
     "ECU": 7.0,
-    "memory": 3.75
+    "memory": 3.75,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "Compute optimized",
@@ -12579,10 +12579,10 @@
       "devices": 2,
       "size": 40
     },
-    "max_bandwidth": 62.5,
     "instance_type": "c3.xlarge",
     "ECU": 14.0,
-    "memory": 7.5
+    "memory": 7.5,
+    "ebs_max_bandwidth": 62.5
   },
   {
     "family": "Compute optimized",
@@ -13031,10 +13031,10 @@
       "devices": 2,
       "size": 80
     },
-    "max_bandwidth": 125.0,
     "instance_type": "c3.2xlarge",
     "ECU": 28.0,
-    "memory": 15.0
+    "memory": 15.0,
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Compute optimized",
@@ -13483,10 +13483,10 @@
       "devices": 2,
       "size": 160
     },
-    "max_bandwidth": 250.0,
     "instance_type": "c3.4xlarge",
     "ECU": 55.0,
-    "memory": 30.0
+    "memory": 30.0,
+    "ebs_max_bandwidth": 250.0
   },
   {
     "family": "Compute optimized",
@@ -13935,10 +13935,10 @@
       "devices": 2,
       "size": 320
     },
-    "max_bandwidth": 0,
     "instance_type": "c3.8xlarge",
     "ECU": 108.0,
-    "memory": 60.0
+    "memory": 60.0,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "GPU instances",
@@ -14282,10 +14282,10 @@
       "devices": 1,
       "size": 60
     },
-    "max_bandwidth": 125.0,
     "instance_type": "g2.2xlarge",
     "ECU": 26.0,
-    "memory": 15.0
+    "memory": 15.0,
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "GPU instances",
@@ -14489,10 +14489,10 @@
       "devices": 2,
       "size": 120
     },
-    "max_bandwidth": 0,
     "instance_type": "g2.8xlarge",
     "ECU": 104.0,
-    "memory": 60.0
+    "memory": 60.0,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "Memory optimized",
@@ -14898,10 +14898,10 @@
       "devices": 1,
       "size": 32
     },
-    "max_bandwidth": 0,
     "instance_type": "r3.large",
     "ECU": 6.5,
-    "memory": 15.25
+    "memory": 15.25,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "Memory optimized",
@@ -15307,10 +15307,10 @@
       "devices": 1,
       "size": 80
     },
-    "max_bandwidth": 62.5,
     "instance_type": "r3.xlarge",
     "ECU": 13.0,
-    "memory": 30.5
+    "memory": 30.5,
+    "ebs_max_bandwidth": 62.5
   },
   {
     "family": "Memory optimized",
@@ -15716,10 +15716,10 @@
       "devices": 1,
       "size": 160
     },
-    "max_bandwidth": 125.0,
     "instance_type": "r3.2xlarge",
     "ECU": 26.0,
-    "memory": 61.0
+    "memory": 61.0,
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Memory optimized",
@@ -16167,10 +16167,10 @@
       "devices": 1,
       "size": 320
     },
-    "max_bandwidth": 250.0,
     "instance_type": "r3.4xlarge",
     "ECU": 52.0,
-    "memory": 122.0
+    "memory": 122.0,
+    "ebs_max_bandwidth": 250.0
   },
   {
     "family": "Memory optimized",
@@ -16618,10 +16618,10 @@
       "devices": 2,
       "size": 320
     },
-    "max_bandwidth": 0,
     "instance_type": "r3.8xlarge",
     "ECU": 104.0,
-    "memory": 244.0
+    "memory": 244.0,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "Storage optimized",
@@ -17027,10 +17027,10 @@
       "devices": 1,
       "size": 800
     },
-    "max_bandwidth": 62.5,
     "instance_type": "i2.xlarge",
     "ECU": 14.0,
-    "memory": 30.5
+    "memory": 30.5,
+    "ebs_max_bandwidth": 62.5
   },
   {
     "family": "Storage optimized",
@@ -17436,10 +17436,10 @@
       "devices": 2,
       "size": 800
     },
-    "max_bandwidth": 125.0,
     "instance_type": "i2.2xlarge",
     "ECU": 27.0,
-    "memory": 61.0
+    "memory": 61.0,
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Storage optimized",
@@ -17845,10 +17845,10 @@
       "devices": 4,
       "size": 800
     },
-    "max_bandwidth": 250.0,
     "instance_type": "i2.4xlarge",
     "ECU": 53.0,
-    "memory": 122.0
+    "memory": 122.0,
+    "ebs_max_bandwidth": 250.0
   },
   {
     "family": "Storage optimized",
@@ -18254,10 +18254,10 @@
       "devices": 8,
       "size": 800
     },
-    "max_bandwidth": 0,
     "instance_type": "i2.8xlarge",
     "ECU": 104.0,
-    "memory": 244.0
+    "memory": 244.0,
+    "ebs_max_bandwidth": 0
   },
   {
     "family": "Storage optimized",
@@ -18439,10 +18439,10 @@
       "devices": 3,
       "size": 2000
     },
-    "max_bandwidth": 93.75,
     "instance_type": "d2.xlarge",
     "ECU": 14.0,
-    "memory": 30.5
+    "memory": 30.5,
+    "ebs_max_bandwidth": 93.75
   },
   {
     "family": "Storage optimized",
@@ -18624,10 +18624,10 @@
       "devices": 6,
       "size": 2000
     },
-    "max_bandwidth": 125.0,
     "instance_type": "d2.2xlarge",
     "ECU": 28.0,
-    "memory": 61.0
+    "memory": 61.0,
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Storage optimized",
@@ -18809,10 +18809,10 @@
       "devices": 12,
       "size": 2000
     },
-    "max_bandwidth": 250.0,
     "instance_type": "d2.4xlarge",
     "ECU": 56.0,
-    "memory": 122.0
+    "memory": 122.0,
+    "ebs_max_bandwidth": 250.0
   },
   {
     "family": "Storage optimized",
@@ -18994,9 +18994,9 @@
       "devices": 24,
       "size": 2000
     },
-    "max_bandwidth": 500.0,
     "instance_type": "d2.8xlarge",
     "ECU": 116.0,
-    "memory": 244.0
+    "memory": 244.0,
+    "ebs_max_bandwidth": 500.0
   }
 ]
