@@ -24,7 +24,7 @@ function init_data_table() {
     },
     "aoColumnDefs": [
       {
-        "aTargets": ["memory", "computeunits", "cores", "coreunits", "storage", "ebs-throughput", "ebs-iops", "networkperf", "max_bandwidth"],
+        "aTargets": ["memory", "computeunits", "cores", "coreunits", "storage", "ebs-throughput", "ebs-iops", "ebs-max-bandwidth", "networkperf"],
         "sType": "span-sort"
       },
       {
