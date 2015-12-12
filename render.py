@@ -31,6 +31,8 @@ def pretty_name(inst):
         extra = 'Quadruple'
     elif short.startswith('2x'):
         extra = 'Double'
+    elif short.startswith('10x'):
+        extra = 'Deca'
     elif short.startswith('x'):
         extra = ''
     bits = [prefix]
@@ -41,6 +43,7 @@ def pretty_name(inst):
     bits.append(short.capitalize())
 
     return ' '.join([b for b in bits if b])
+
 
 def network_sort(inst):
     perf = inst['network_performance']
@@ -61,6 +64,7 @@ def network_sort(inst):
         sort += 1
     return sort
 
+
 def add_cpu_detail(i):
     # special burstable instances
     if i['instance_type'] in ('t1.micro', 't2.micro', 't2.small', 't2.medium', 't2.large'):
@@ -68,10 +72,25 @@ def add_cpu_detail(i):
         i['ECU'] = i['vCPU']  # a reasonable ECU to display
     i['ECU_per_core'] = i['ECU'] / i['vCPU']
 
+
+def add_vpconly_detail(i):
+    # specific instances can be lanuched in VPC only
+    # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    # https://github.com/powdahound/ec2instances.info/issues/115
+    instance_types = ()
+    instance_types += ('c4.large', 'c4.xlarge', 'c4.2xlarge', 'c4.4xlarge')
+    instance_types += ('m4.large', 'm4.xlarge', 'm4.2xlarge', 'm4.4xlarge', 'm4.10xlarge')
+    instance_types += ('t2.micro', 't2.small', 't2.medium', 't2.large')
+    if i['instance_type'] in instance_types:
+        i['vpc_only'] = True
+
+
 def add_render_info(i):
     i['network_sort'] = network_sort(i)
     i['pretty_name'] = pretty_name(i)
     add_cpu_detail(i)
+    add_vpconly_detail(i)
+
 
 def render(data_file, template_file, destination_file):
     """Build the HTML content from scraped data"""
