@@ -24,26 +24,30 @@ BUCKET_CALLING_FORMAT = OrdinaryCallingFormat()
 abspath = lambda filename: os.path.join(os.path.abspath(os.path.dirname(__file__)),
                                         filename)
 
+
 @task
 def build():
     """Scrape AWS sources for data and build the site"""
     data_file = 'www/instances.json'
     try:
         scrape(data_file)
-    except Exception, e:
+    except Exception as e:
         print "ERROR: Unable to scrape site data: %s" % e
         print traceback.print_exc()
     render_html()
+
 
 @task
 def render_html():
     """Render HTML but do not update data from Amazon"""
     render('www/instances.json', 'in/index.html.mako', 'www/index.html')
 
+
 @task
 def preview():
-    url = 'file://localhost/%s' % (abspath('www/index.html'))
+    url = 'file://%s' % (abspath('www/index.html'))
     webbrowser.open(url, new=2)
+
 
 @task
 def bucket_create():
@@ -53,6 +57,7 @@ def bucket_create():
     bucket.configure_website('index.html', 'error.html')
     print 'Bucket %r created.' % BUCKET_NAME
 
+
 @task
 def bucket_delete():
     """Deletes the S3 bucket used to host the site"""
@@ -61,6 +66,7 @@ def bucket_delete():
     conn = connect_s3(calling_format=BUCKET_CALLING_FORMAT)
     conn.delete_bucket(BUCKET_NAME)
     print 'Bucket %r deleted.' % BUCKET_NAME
+
 
 @task
 def deploy(root_dir='www'):
@@ -81,6 +87,7 @@ def deploy(root_dir='www'):
                 "Cache-Control": "max-age=86400, must-revalidate"}
             k.set_contents_from_filename(local_path, headers=headers,
                                          policy='public-read')
+
 
 @task(default=True)
 def update():
