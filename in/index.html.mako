@@ -18,7 +18,7 @@
 
       <a href="https://twitter.com/share" class="twitter-share-button" data-via="powdahound"></a>
 
-      <iframe src="https://ghbtns.com/github-btn.html?user=powdahound&repo=ec2instances.info&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+      <iframe src="https://ghbtns.com/github-btn.html?user=powdahound&amp;repo=ec2instances.info&amp;type=star&amp;count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
     </div>
 
     <!--
@@ -100,9 +100,17 @@
 
     <div class="pull-left form-inline" id="filters">
       <strong> Filter:</strong>
-      Min Memory (GB): <input data-action="datafilter" data-type="memory" class="form-control" />
-      Compute Units: <input data-action="datafilter" data-type="computeunits" class="form-control" />
-      Storage (GB): <input data-action="datafilter" data-type="storage" class="form-control" />
+      Memory (GB):<input data-action="datafilter" data-type="memory" class="form-control" limiter="min" title="Minimum"/>
+      - <input data-action="datafilter" data-type="memory" class="form-control" limiter="max"  title="Maximum"/>
+
+      Compute Units: <input data-action="datafilter" data-type="computeunits" class="form-control" limiter="min"  title="Minimum"/>
+      - <input data-action="datafilter" data-type="computeunits" class="form-control" limiter="max"  title="Maximum"/>
+
+      vCpus: <input data-action="datafilter" data-type="cores" class="form-control" limiter="min"  title="Minimum"/>
+      - <input data-action="datafilter" data-type="cores" class="form-control" limiter="max"  title="Maximum"/>
+
+      Storage (GB): <input data-action="datafilter" data-type="storage" class="form-control" limiter="min"  title="Minimum"/>
+      - <input data-action="datafilter" data-type="storage" class="form-control" limiter="max"  title="Maximum"/>
     </div>
 
     <table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">
@@ -112,9 +120,14 @@
           <th class="apiname">API Name</th>
           <th class="memory">Memory</th>
           <th class="computeunits">
-            <abbr title="One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.">Compute Units (ECU)</abbr>
+            <abbr title="One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.">Compute Units (ECU)
+            </abbr>
           </th>
-          <th class="cores">Cores</th>
+          <th class="cores">
+            <abbr title="virtual CPUs, each vCPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">
+            vCPUs
+            </abbr>
+          </th>
           <th class="ecu-per-core">ECU per Core</th>
           <th class="storage">Storage</th>
           <th class="architecture">Arch</th>
