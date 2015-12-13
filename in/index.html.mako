@@ -18,7 +18,7 @@
 
       <a href="https://twitter.com/share" class="twitter-share-button" data-via="powdahound"></a>
 
-      <iframe src="https://ghbtns.com/github-btn.html?user=powdahound&repo=ec2instances.info&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+      <iframe src="https://ghbtns.com/github-btn.html?user=powdahound&amp;repo=ec2instances.info&amp;type=star&amp;count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
     </div>
 
     <!--
