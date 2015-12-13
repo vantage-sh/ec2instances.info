@@ -8,10 +8,31 @@ var current_reserved_term = default_reserved_term;
 
 var data_table = null;
 
-var require = Array();
-require['memory'] = 0;
-require['computeunits'] = 0;
-require['storage'] = 0;
+var require_min = Array();
+require_min['memory'] = 0;
+require_min['computeunits'] = 0;
+require_min['cores'] = 0;
+require_min['storage'] = 0;
+
+var require_max = Array();
+require_max['memory'] = 500;
+require_max['computeunits'] = 200;
+require_max['cores'] = 64;
+require_max['storage'] = 8000;
+
+var defaults_min = Array();
+defaults_min['memory'] = 0;
+defaults_min['computeunits'] = 0;
+defaults_min['cores'] = 0;
+defaults_min['storage'] = 0;
+
+var defaults_max = Array();
+defaults_max['memory'] = 500;
+defaults_max['computeunits'] = 200;
+defaults_max['cores'] = 64;
+defaults_max['storage'] = 8000;
+
+
 
 function init_data_table() {
   data_table = $('#data').DataTable({
@@ -179,18 +200,33 @@ function setup_column_toggle() {
 }
 
 function url_for_selections() {
+  // returns a string representing selected parameters in search boxes
   var settings = {
-    min_memory: require['memory'],
-    min_computeunits: require['computeunits'],
-    min_storage: require['storage'],
+    computeunits_min: require_min['computeunits'],
+    cores_min: require_min['cores'],
+    memory_min: require_min['memory'],
+    storage_min: require_min['storage'],
+
+    computeunits_max: require_max['computeunits'],
+    cores_max: require_max['cores'],
+    memory_max: require_max['memory'],
+    storage_max: require_max['storage'],
+
     filter: data_table.settings()[0].oPreviousSearch['sSearch'],
     region: current_region,
     cost: current_cost_duration,
     term: current_reserved_term
   };
-  if (settings.min_memory == '') delete settings.min_memory;
-  if (settings.min_computeunits == '') delete settings.min_computeunits;
-  if (settings.min_storage == '') delete settings.min_storage;
+
+  if (settings.computeunits_min == '') delete settings.computeunits_min;
+  if (settings.cores_min == '') delete settings.cores_min;
+  if (settings.memory_min == '') delete settings.memory_min;
+  if (settings.storage_min == '') delete settings.storage_min;
+
+  if (settings.computeunits_max == '') delete settings.computeunits_max;
+  if (settings.cores_max == '') delete settings.cores_max;
+  if (settings.memory_max == '') delete settings.memory_max;
+  if (settings.storage_max == '') delete settings.storage_max;
 
   if (settings.filter == '') delete settings.filter
   if (settings.region == default_region) delete settings.region;
@@ -233,7 +269,7 @@ function maybe_update_url() {
     // doesn't matter
   }
 }
-
+/*
 var apply_min_values = function() {
     var all_filters = $('[data-action="datafilter"]');
     var data_rows = $('#data tr:has(td)');
@@ -259,6 +295,59 @@ var apply_min_values = function() {
     });
     maybe_update_url();
 };
+*/
+var apply_min_max_values = function() {
+  // man, this is really ugly, but works.
+
+  // var all_filters = $('[data-action="datafilter"]');
+  var all_filters_min = $('[limiter="min"]');
+  var all_filters_max = $('[limiter="max"]');
+  var data_rows = $('#data tr:has(td)');
+
+  data_rows.show();
+
+  all_filters_min.each(function() {
+    // process rows if they are below minimum limit
+    var filter_on = $(this).data('type');
+    var filter_val = parseFloat($(this).val()) || defaults_min[filter_on];
+    //console.log("min: filter_on " + filter_on + ' ' + filter_val)
+
+    // update global variable for dynamic URL
+    require_min[filter_on] = filter_val;
+
+    var match_fail = data_rows.filter(function() {
+        var row_val;
+        row_val = parseFloat(
+            $(this).find('td[class~="' + filter_on + '"] span').attr('sort')
+            );
+        return row_val < filter_val;
+    });
+
+    match_fail.hide();
+  });
+
+  all_filters_max.each(function() {
+    // process rows if they are above maximum limit
+    var filter_on = $(this).data('type');
+    var filter_val = parseFloat($(this).val()) || defaults_max[filter_on];
+    //console.log("max: filter_on " + filter_on + ' ' + filter_val)
+
+    // update global variable for dynamic URL
+    require_max[filter_on] = filter_val;
+
+    var match_fail = data_rows.filter(function() {
+        var row_val;
+        row_val = parseFloat(
+            $(this).find('td[class~="' + filter_on + '"] span').attr('sort')
+            );
+        return row_val > filter_val;
+    });
+
+    match_fail.hide();
+  });
+
+  maybe_update_url();
+};
 
 function on_data_table_initialized() {
   // process URL settings
@@ -277,17 +366,37 @@ function on_data_table_initialized() {
       case 'filter':
         data_table.filter(url_settings['filter']);
         break;
-      case 'min_memory':
-        $('[data-action="datafilter"][data-type="memory"]').val(url_settings['min_memory']);
-        apply_min_values();
+      case 'memory_min':
+        $('[data-action="datafilter"][data-type="memory"][limiter="min"]').val(url_settings['memory_min']);
+        apply_min_max_values();
         break;
-      case 'min_computeunits':
-        $('[data-action="datafilter"][data-type="computeunits"]').val(url_settings['min_computeunits']);
-        apply_min_values();
+      case 'memory_max':
+        $('[data-action="datafilter"][data-type="memory"][limiter="max"]').val(url_settings['memory_max']);
+        apply_min_max_values();
         break;
-      case 'min_storage':
-        $('[data-action="datafilter"][data-type="storage"]').val(url_settings['min_storage']);
-        apply_min_values();
+      case 'cores_min':
+        $('[data-action="datafilter"][data-type="cores"][limiter="min"]').val(url_settings['cores_min']);
+        apply_min_max_values();
+        break;
+      case 'cores_max':
+        $('[data-action="datafilter"][data-type="cores"][limiter="max"]').val(url_settings['cores_max']);
+        apply_min_max_values();
+        break;
+      case 'computeunits_min':
+        $('[data-action="datafilter"][data-type="computeunits"][limiter="min"]').val(url_settings['computeunits_min']);
+        apply_min_max_values();
+        break;
+      case 'computeunits_max':
+        $('[data-action="datafilter"][data-type="computeunits"][limiter="max"]').val(url_settings['computeunits_max']);
+        apply_min_max_values();
+        break;
+      case 'storage_min':
+        $('[data-action="datafilter"][data-type="storage"][limiter="min"]').val(url_settings['storage_min']);
+        apply_min_max_values();
+        break;
+      case 'storage_max':
+        $('[data-action="datafilter"][data-type="storage"][limiter="max"]').val(url_settings['storage_max']);
+        apply_min_max_values();
         break;
       case 'selected':
         // apply highlight to selected rows
@@ -302,7 +411,7 @@ function on_data_table_initialized() {
   configure_highlighting();
 
   // Allow row filtering by min-value match.
-  $('[data-action=datafilter]').on('keyup', apply_min_values);
+  $('[data-action=datafilter]').on('keyup', apply_min_max_values);
 
   change_region(current_region);
   change_cost(current_cost_duration);
@@ -343,7 +452,7 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
   "span-sort-pre": function(elem) {
     var matches = elem.match(/sort="(.*?)"/);
     if (matches) {
-      return parseInt(matches[1], 10);
+      return parseFloat(matches[1]);
     }
     return 0;
   },

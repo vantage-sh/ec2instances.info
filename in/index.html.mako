@@ -100,9 +100,17 @@
 
     <div class="pull-left form-inline" id="filters">
       <strong> Filter:</strong>
-      Min Memory (GB): <input data-action="datafilter" data-type="memory" class="form-control" />
-      Compute Units: <input data-action="datafilter" data-type="computeunits" class="form-control" />
-      Storage (GB): <input data-action="datafilter" data-type="storage" class="form-control" />
+      Memory (GB):<input data-action="datafilter" data-type="memory" class="form-control" limiter="min" title="Minimum"/>
+      - <input data-action="datafilter" data-type="memory" class="form-control" limiter="max"  title="Maximum"/>
+
+      Compute Units: <input data-action="datafilter" data-type="computeunits" class="form-control" limiter="min"  title="Minimum"/>
+      - <input data-action="datafilter" data-type="computeunits" class="form-control" limiter="max"  title="Maximum"/>
+
+      vCpus: <input data-action="datafilter" data-type="cores" class="form-control" limiter="min"  title="Minimum"/>
+      - <input data-action="datafilter" data-type="cores" class="form-control" limiter="max"  title="Maximum"/>
+
+      Storage (GB): <input data-action="datafilter" data-type="storage" class="form-control" limiter="min"  title="Minimum"/>
+      - <input data-action="datafilter" data-type="storage" class="form-control" limiter="max"  title="Maximum"/>
     </div>
 
     <table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">
