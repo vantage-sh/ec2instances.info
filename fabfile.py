@@ -10,7 +10,7 @@ import traceback
 from boto import connect_s3
 from boto.s3.connection import OrdinaryCallingFormat
 from boto.s3.key import Key
-from fabric.api import abort, task
+from fabric.api import abort, task, puts
 from fabric.contrib.console import confirm
 from render import render
 from scrape import scrape
@@ -46,6 +46,8 @@ def render_html():
 @task
 def preview():
     url = 'file://%s' % (abspath('www/index.html'))
+    puts("Preview URL: {}".format(url))
+    puts("Starting web browser...")
     webbrowser.open(url, new=2)
 
 
