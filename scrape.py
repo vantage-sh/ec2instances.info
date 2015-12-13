@@ -14,6 +14,8 @@ class Instance(object):
         self.ebs_throughput = 0
         self.ebs_iops = 0
         self.ebs_max_bandwidth = 0
+        # self.hvm_only = False
+        self.vpc_only = False
 
     def to_dict(self):
         d = dict(family=self.family,
@@ -31,7 +33,8 @@ class Instance(object):
                  pricing=self.pricing,
                  vpc=self.vpc,
                  linux_virtualization_types=self.linux_virtualization_types,
-                 generation=self.generation)
+                 generation=self.generation,
+                 vpc_only=self.vpc_only)
         if self.ebs_only:
             d['storage'] = None
         else:

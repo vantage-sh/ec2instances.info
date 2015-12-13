@@ -126,6 +126,7 @@
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
           <th class="enhanced-networking">Enhanced Networking</th>
+          <th class="vpc-only">VPC Only</th>
           <th class="linux-virtualization">Linux Virtualization</th>
 
           <th class="cost-ondemand-linux">Linux On Demand cost</th>
@@ -221,6 +222,9 @@
           </td>
           <td class="enhanced-networking">
             ${'Yes' if inst['enhanced_networking'] else 'No'}
+          </td>
+          <td class="vpc-only">
+            ${'VPC only' if inst['vpc_only'] else 'VPC and EC2Classic'}
           </td>
           <td class="linux-virtualization">
             % if inst['linux_virtualization_types']:

@@ -14,14 +14,17 @@ People have suggested many neat ideas and feature requests but it remains unclea
 
 1. Clone the git repo
 2. `cd ec2instances.info/`
-3. `pip install -r requirements.txt`
-4. `fab build`
-5. `fab preview`
+3. `virtualenv env` (make sure you have virtualenv package installed)
+4. `source env/bin/activate`
+5. `pip install -r requirements.txt`
+6. `fab build`
+7. `fab preview`
+8. `deactivate` (to exit virtualenv)
 
 
 ### Requirements
 
-- Python 2.7+
+- Python 2.7+ with virtualenv
 - [Fabric](http://docs.fabfile.org/en/1.8/) 1.1+
 - [Boto](http://boto.readthedocs.org/en/latest/)
 - [Mako](http://www.makotemplates.org/)

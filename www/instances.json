@@ -395,6 +395,7 @@
       "i386",
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
@@ -803,6 +804,7 @@
       "i386",
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
@@ -1210,6 +1212,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
@@ -1617,6 +1620,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
@@ -1935,6 +1939,7 @@
       "i386",
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
@@ -2342,6 +2347,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
@@ -2581,6 +2587,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
@@ -2638,6 +2645,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
@@ -3045,6 +3053,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
@@ -3452,6 +3461,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
@@ -3859,6 +3869,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
@@ -4056,6 +4067,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
@@ -4253,6 +4265,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
@@ -4268,7 +4281,7 @@
   {
     "family": "Storage optimized",
     "enhanced_networking": false,
-    "vCPU": 17,
+    "vCPU": 16,
     "generation": "previous",
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
@@ -4576,6 +4589,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": {
@@ -4894,6 +4908,7 @@
       "i386",
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": false,
     "storage": null,
@@ -5240,6 +5255,7 @@
       "x86_64",
       "i386"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -5588,6 +5604,7 @@
       "x86_64",
       "i386"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -5935,6 +5952,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -6282,6 +6300,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -6645,6 +6664,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -7008,6 +7028,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -7371,6 +7392,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -7734,6 +7756,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -8097,6 +8120,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -8524,6 +8548,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
       "PV"
@@ -8976,6 +9001,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
       "PV"
@@ -9428,6 +9454,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
       "PV"
@@ -9880,6 +9907,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
       "PV"
@@ -10248,6 +10276,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -10611,6 +10640,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -10974,6 +11004,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -11337,6 +11368,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -11700,6 +11732,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -12117,6 +12150,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
       "PV"
@@ -12569,6 +12603,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
       "PV"
@@ -13021,6 +13056,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
       "PV"
@@ -13473,6 +13509,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
       "PV"
@@ -13925,6 +13962,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
       "PV"
@@ -14273,6 +14311,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -14480,6 +14519,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -14889,6 +14929,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -15298,6 +15339,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -15707,6 +15749,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -16158,6 +16201,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -16609,6 +16653,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -17018,6 +17063,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -17427,6 +17473,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -17836,6 +17883,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -18245,6 +18293,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -18430,6 +18479,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -18615,6 +18665,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -18800,6 +18851,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -18985,6 +19037,7 @@
     "arch": [
       "x86_64"
     ],
+    "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
     ],
