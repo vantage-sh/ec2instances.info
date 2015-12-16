@@ -12,6 +12,8 @@ People have suggested many neat ideas and feature requests but it remains unclea
 
 ### Running locally
 
+Make sure you have LibXML and Python development files.  On Ubuntu, run `sudo apt-get install python-dev libxml2-dev libxslt1-dev`.
+
 1. Clone the git repo
 2. `cd ec2instances.info/`
 3. `virtualenv env` (make sure you have virtualenv package installed)

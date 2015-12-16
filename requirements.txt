@@ -2,3 +2,4 @@ fabric
 boto
 mako
 lxml
+paramiko
