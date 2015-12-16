@@ -344,6 +344,20 @@
           "ondemand": "0.047"
         }
       },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "eu-west-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -751,6 +765,20 @@
             "yrTerm3.partialUpfront": "0.0403"
           },
           "ondemand": "0.095"
+        }
+      },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
         }
       },
       "eu-west-1": {
@@ -1162,6 +1190,20 @@
           "ondemand": "0.19"
         }
       },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "eu-west-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -1570,6 +1612,20 @@
           "ondemand": "0.379"
         }
       },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "eu-west-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -1653,6 +1709,9 @@
           },
           "ondemand": "0.31"
         },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
         "mswin": {
           "reserved": {
             "yrTerm1.noUpfront": "0.179",
@@ -1684,6 +1743,9 @@
             "yrTerm3.partialUpfront": "0.1801"
           },
           "ondemand": "0.31"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
         },
         "mswin": {
           "reserved": {
@@ -1717,6 +1779,9 @@
           },
           "ondemand": "0.369"
         },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
         "mswin": {
           "reserved": {
             "yrTerm1.noUpfront": "0.218",
@@ -1748,6 +1813,9 @@
             "yrTerm3.partialUpfront": "0.1715"
           },
           "ondemand": "0.31"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
         },
         "mswin": {
           "reserved": {
@@ -1781,6 +1849,9 @@
           },
           "ondemand": "0.31"
         },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
         "mswin": {
           "reserved": {
             "yrTerm1.noUpfront": "0.203",
@@ -1812,6 +1883,9 @@
             "yrTerm3.partialUpfront": "0.1515"
           },
           "ondemand": "0.31"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
         },
         "mswin": {
           "reserved": {
@@ -1845,6 +1919,9 @@
           },
           "ondemand": "0.366"
         },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
         "mswin": {
           "reserved": {
             "yrTerm1.noUpfront": "0.201",
@@ -1877,6 +1954,9 @@
           },
           "ondemand": "0.329"
         },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
         "mswin": {
           "reserved": {
             "yrTerm1.noUpfront": "0.203",
@@ -1898,6 +1978,20 @@
           "ondemand": "0.148"
         }
       },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "eu-west-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -1908,6 +2002,9 @@
             "yrTerm3.partialUpfront": "0.1515"
           },
           "ondemand": "0.31"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
         },
         "mswin": {
           "reserved": {
@@ -2297,6 +2394,20 @@
           "ondemand": "0.592"
         }
       },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "eu-west-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -2369,48 +2480,6 @@
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
     "pricing": {
-      "us-west-2": {
-        "mswinSQLWeb": {
-          "reserved": {
-            "yrTerm1.noUpfront": "1.437",
-            "yrTerm3.allUpfront": "0.8925",
-            "yrTerm1.allUpfront": "1.2035",
-            "yrTerm1.partialUpfront": "1.2282",
-            "yrTerm3.partialUpfront": "0.9495"
-          },
-          "ondemand": "2.775"
-        },
-        "mswinSQL": {
-          "reserved": {
-            "yrTerm1.noUpfront": "2.956",
-            "yrTerm3.allUpfront": "2.1119",
-            "yrTerm1.allUpfront": "2.476",
-            "yrTerm1.partialUpfront": "2.5266",
-            "yrTerm3.partialUpfront": "2.2467"
-          },
-          "ondemand": "4.41"
-        },
-        "mswin": {
-          "reserved": {
-            "yrTerm1.noUpfront": "1.336",
-            "yrTerm3.allUpfront": "0.8111",
-            "yrTerm1.allUpfront": "1.1189",
-            "yrTerm1.partialUpfront": "1.1418",
-            "yrTerm3.partialUpfront": "0.8629"
-          },
-          "ondemand": "2.57"
-        },
-        "linux": {
-          "reserved": {
-            "yrTerm1.noUpfront": "1.09",
-            "yrTerm3.allUpfront": "0.6137",
-            "yrTerm1.allUpfront": "0.9131",
-            "yrTerm1.partialUpfront": "0.9318",
-            "yrTerm3.partialUpfront": "0.6529"
-          },
-          "ondemand": "2"
-        }
-      },
       "us-east-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -2495,6 +2564,90 @@
           "ondemand": "2.349"
         }
       },
+      "sa-east-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "ap-southeast-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "ap-southeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "us-west-2": {
+        "mswinSQLWeb": {
+          "reserved": {
+            "yrTerm1.noUpfront": "1.437",
+            "yrTerm3.allUpfront": "0.8925",
+            "yrTerm1.allUpfront": "1.2035",
+            "yrTerm1.partialUpfront": "1.2282",
+            "yrTerm3.partialUpfront": "0.9495"
+          },
+          "ondemand": "2.775"
+        },
+        "mswinSQL": {
+          "reserved": {
+            "yrTerm1.noUpfront": "2.956",
+            "yrTerm3.allUpfront": "2.1119",
+            "yrTerm1.allUpfront": "2.476",
+            "yrTerm1.partialUpfront": "2.5266",
+            "yrTerm3.partialUpfront": "2.2467"
+          },
+          "ondemand": "4.41"
+        },
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "1.336",
+            "yrTerm3.allUpfront": "0.8111",
+            "yrTerm1.allUpfront": "1.1189",
+            "yrTerm1.partialUpfront": "1.1418",
+            "yrTerm3.partialUpfront": "0.8629"
+          },
+          "ondemand": "2.57"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "1.09",
+            "yrTerm3.allUpfront": "0.6137",
+            "yrTerm1.allUpfront": "0.9131",
+            "yrTerm1.partialUpfront": "0.9318",
+            "yrTerm3.partialUpfront": "0.6529"
+          },
+          "ondemand": "2"
+        }
+      },
       "us-gov-west-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -2535,6 +2688,34 @@
             "yrTerm3.partialUpfront": "0.9019"
           },
           "ondemand": "2.25"
+        }
+      },
+      "us-west-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
         }
       },
       "eu-west-1": {
@@ -2621,6 +2802,118 @@
         },
         "linux": {
           "ondemand": "2.1"
+        }
+      },
+      "ap-northeast-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "sa-east-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "ap-southeast-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "ap-southeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "us-west-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "us-gov-west-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "us-west-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
         }
       },
       "eu-west-1": {
@@ -3001,6 +3294,20 @@
             "yrTerm3.partialUpfront": "0.0764"
           },
           "ondemand": "0.275"
+        }
+      },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
         }
       },
       "eu-west-1": {
@@ -3411,6 +3718,20 @@
           "ondemand": "0.55"
         }
       },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "eu-west-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -3819,6 +4140,20 @@
           "ondemand": "1.1"
         }
       },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "eu-west-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -3891,48 +4226,6 @@
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
     "pricing": {
-      "us-west-2": {
-        "mswinSQLWeb": {
-          "reserved": {
-            "yrTerm1.noUpfront": "2.327",
-            "yrTerm3.allUpfront": "1.3619",
-            "yrTerm1.allUpfront": "1.9492",
-            "yrTerm1.partialUpfront": "1.9889",
-            "yrTerm3.partialUpfront": "1.4488"
-          },
-          "ondemand": "4.044"
-        },
-        "mswinSQL": {
-          "reserved": {
-            "yrTerm1.noUpfront": "6.077",
-            "yrTerm3.allUpfront": "4.375",
-            "yrTerm1.allUpfront": "5.0904",
-            "yrTerm1.partialUpfront": "5.1943",
-            "yrTerm3.partialUpfront": "4.6543"
-          },
-          "ondemand": "7.25"
-        },
-        "mswin": {
-          "reserved": {
-            "yrTerm1.noUpfront": "2.077",
-            "yrTerm3.allUpfront": "1.1609",
-            "yrTerm1.allUpfront": "1.7397",
-            "yrTerm1.partialUpfront": "1.7752",
-            "yrTerm3.partialUpfront": "1.235"
-          },
-          "ondemand": "3.831"
-        },
-        "linux": {
-          "reserved": {
-            "yrTerm1.noUpfront": "1.689",
-            "yrTerm3.allUpfront": "0.8497",
-            "yrTerm1.allUpfront": "1.4153",
-            "yrTerm1.partialUpfront": "1.4442",
-            "yrTerm3.partialUpfront": "0.904"
-          },
-          "ondemand": "3.5"
-        }
-      },
       "us-east-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -4017,6 +4310,132 @@
           "ondemand": "4.105"
         }
       },
+      "sa-east-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "ap-southeast-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "ap-southeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "us-west-2": {
+        "mswinSQLWeb": {
+          "reserved": {
+            "yrTerm1.noUpfront": "2.327",
+            "yrTerm3.allUpfront": "1.3619",
+            "yrTerm1.allUpfront": "1.9492",
+            "yrTerm1.partialUpfront": "1.9889",
+            "yrTerm3.partialUpfront": "1.4488"
+          },
+          "ondemand": "4.044"
+        },
+        "mswinSQL": {
+          "reserved": {
+            "yrTerm1.noUpfront": "6.077",
+            "yrTerm3.allUpfront": "4.375",
+            "yrTerm1.allUpfront": "5.0904",
+            "yrTerm1.partialUpfront": "5.1943",
+            "yrTerm3.partialUpfront": "4.6543"
+          },
+          "ondemand": "7.25"
+        },
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "2.077",
+            "yrTerm3.allUpfront": "1.1609",
+            "yrTerm1.allUpfront": "1.7397",
+            "yrTerm1.partialUpfront": "1.7752",
+            "yrTerm3.partialUpfront": "1.235"
+          },
+          "ondemand": "3.831"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "1.689",
+            "yrTerm3.allUpfront": "0.8497",
+            "yrTerm1.allUpfront": "1.4153",
+            "yrTerm1.partialUpfront": "1.4442",
+            "yrTerm3.partialUpfront": "0.904"
+          },
+          "ondemand": "3.5"
+        }
+      },
+      "us-gov-west-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "us-west-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "eu-west-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -4089,48 +4508,6 @@
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
     "pricing": {
-      "us-west-2": {
-        "mswinSQLWeb": {
-          "reserved": {
-            "yrTerm1.noUpfront": "2.312",
-            "yrTerm3.allUpfront": "1.3366",
-            "yrTerm1.allUpfront": "1.9365",
-            "yrTerm1.partialUpfront": "1.9758",
-            "yrTerm3.partialUpfront": "1.4219"
-          },
-          "ondemand": "3.66"
-        },
-        "mswinSQL": {
-          "reserved": {
-            "yrTerm1.noUpfront": "3.071",
-            "yrTerm3.allUpfront": "1.9472",
-            "yrTerm1.allUpfront": "2.5724",
-            "yrTerm1.partialUpfront": "2.6249",
-            "yrTerm3.partialUpfront": "2.0715"
-          },
-          "ondemand": "4.607"
-        },
-        "mswin": {
-          "reserved": {
-            "yrTerm1.noUpfront": "2.26",
-            "yrTerm3.allUpfront": "1.2963",
-            "yrTerm1.allUpfront": "1.8934",
-            "yrTerm1.partialUpfront": "1.9321",
-            "yrTerm3.partialUpfront": "1.379"
-          },
-          "ondemand": "3.58"
-        },
-        "linux": {
-          "reserved": {
-            "yrTerm1.noUpfront": "1.698",
-            "yrTerm3.allUpfront": "0.8451",
-            "yrTerm1.allUpfront": "1.4229",
-            "yrTerm1.partialUpfront": "1.4521",
-            "yrTerm3.partialUpfront": "0.899"
-          },
-          "ondemand": "3.1"
-        }
-      },
       "us-east-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -4213,6 +4590,132 @@
             "yrTerm3.partialUpfront": "1.1893"
           },
           "ondemand": "3.276"
+        }
+      },
+      "sa-east-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "ap-southeast-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "ap-southeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "us-west-2": {
+        "mswinSQLWeb": {
+          "reserved": {
+            "yrTerm1.noUpfront": "2.312",
+            "yrTerm3.allUpfront": "1.3366",
+            "yrTerm1.allUpfront": "1.9365",
+            "yrTerm1.partialUpfront": "1.9758",
+            "yrTerm3.partialUpfront": "1.4219"
+          },
+          "ondemand": "3.66"
+        },
+        "mswinSQL": {
+          "reserved": {
+            "yrTerm1.noUpfront": "3.071",
+            "yrTerm3.allUpfront": "1.9472",
+            "yrTerm1.allUpfront": "2.5724",
+            "yrTerm1.partialUpfront": "2.6249",
+            "yrTerm3.partialUpfront": "2.0715"
+          },
+          "ondemand": "4.607"
+        },
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "2.26",
+            "yrTerm3.allUpfront": "1.2963",
+            "yrTerm1.allUpfront": "1.8934",
+            "yrTerm1.partialUpfront": "1.9321",
+            "yrTerm3.partialUpfront": "1.379"
+          },
+          "ondemand": "3.58"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "1.698",
+            "yrTerm3.allUpfront": "0.8451",
+            "yrTerm1.allUpfront": "1.4229",
+            "yrTerm1.partialUpfront": "1.4521",
+            "yrTerm3.partialUpfront": "0.899"
+          },
+          "ondemand": "3.1"
+        }
+      },
+      "us-gov-west-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "us-west-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
         }
       },
       "eu-west-1": {
@@ -4369,6 +4872,20 @@
             "yrTerm3.partialUpfront": "2.0602"
           },
           "ondemand": "5.4"
+        }
+      },
+      "sa-east-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
         }
       },
       "ap-southeast-1": {
@@ -4539,6 +5056,34 @@
           "ondemand": "5.52"
         }
       },
+      "us-west-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "eu-west-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -4622,6 +5167,9 @@
           },
           "ondemand": "0.07"
         },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
         "mswin": {
           "reserved": {
             "yrTerm1.noUpfront": "0.015",
@@ -4653,6 +5201,9 @@
             "yrTerm3.partialUpfront": "0.0461"
           },
           "ondemand": "0.077"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
         },
         "mswin": {
           "reserved": {
@@ -4686,6 +5237,9 @@
           },
           "ondemand": "0.077"
         },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
         "mswin": {
           "reserved": {
             "yrTerm1.noUpfront": "0.026",
@@ -4717,6 +5271,9 @@
             "yrTerm3.partialUpfront": "0.0396"
           },
           "ondemand": "0.075"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
         },
         "mswin": {
           "reserved": {
@@ -4750,6 +5307,9 @@
           },
           "ondemand": "0.075"
         },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
         "mswin": {
           "reserved": {
             "yrTerm1.noUpfront": "0.019",
@@ -4781,6 +5341,9 @@
             "yrTerm3.partialUpfront": "0.0365"
           },
           "ondemand": "0.07"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
         },
         "mswin": {
           "reserved": {
@@ -4814,6 +5377,9 @@
           },
           "ondemand": "0.074"
         },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
         "mswin": {
           "reserved": {
             "yrTerm1.noUpfront": "0.022",
@@ -4846,6 +5412,9 @@
           },
           "ondemand": "0.075"
         },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
         "mswin": {
           "reserved": {
             "yrTerm1.noUpfront": "0.025",
@@ -4867,6 +5436,20 @@
           "ondemand": "0.025"
         }
       },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "eu-west-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -4877,6 +5460,9 @@
             "yrTerm3.partialUpfront": "0.0365"
           },
           "ondemand": "0.075"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
         },
         "mswin": {
           "reserved": {
@@ -4915,6 +5501,210 @@
     "instance_type": "t1.micro",
     "ECU": 0,
     "memory": 0.613,
+    "ebs_max_bandwidth": 0
+  },
+  {
+    "family": "General purpose",
+    "enhanced_networking": false,
+    "vCPU": 1,
+    "generation": "current",
+    "ebs_iops": 0,
+    "network_performance": "Low",
+    "ebs_throughput": 0,
+    "pricing": {
+      "us-east-1": {
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0068",
+            "yrTerm3.allUpfront": "0.0052",
+            "yrTerm1.allUpfront": "0.0067",
+            "yrTerm1.partialUpfront": "0.0067",
+            "yrTerm3.partialUpfront": "0.0054"
+          },
+          "ondemand": "0.0088"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0045",
+            "yrTerm3.allUpfront": "0.0029",
+            "yrTerm1.allUpfront": "0.0043",
+            "yrTerm1.partialUpfront": "0.0044",
+            "yrTerm3.partialUpfront": "0.0031"
+          },
+          "ondemand": "0.0065"
+        }
+      },
+      "ap-northeast-1": {
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0098",
+            "yrTerm3.allUpfront": "0.007",
+            "yrTerm1.allUpfront": "0.0096",
+            "yrTerm1.partialUpfront": "0.0097",
+            "yrTerm3.partialUpfront": "0.0073"
+          },
+          "ondemand": "0.0123"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0075",
+            "yrTerm3.allUpfront": "0.0047",
+            "yrTerm1.allUpfront": "0.0072",
+            "yrTerm1.partialUpfront": "0.0074",
+            "yrTerm3.partialUpfront": "0.005"
+          },
+          "ondemand": "0.01"
+        }
+      },
+      "sa-east-1": {
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0113",
+            "yrTerm3.allUpfront": "0.008",
+            "yrTerm1.allUpfront": "0.0102",
+            "yrTerm1.partialUpfront": "0.0102",
+            "yrTerm3.partialUpfront": "0.0084"
+          },
+          "ondemand": "0.0158"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.009",
+            "yrTerm3.allUpfront": "0.0057",
+            "yrTerm1.allUpfront": "0.0078",
+            "yrTerm1.partialUpfront": "0.0079",
+            "yrTerm3.partialUpfront": "0.0061"
+          },
+          "ondemand": "0.0135"
+        }
+      },
+      "ap-southeast-1": {
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0103",
+            "yrTerm3.allUpfront": "0.0078",
+            "yrTerm1.allUpfront": "0.0097",
+            "yrTerm1.partialUpfront": "0.0098",
+            "yrTerm3.partialUpfront": "0.0082"
+          },
+          "ondemand": "0.0123"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.008",
+            "yrTerm3.allUpfront": "0.0055",
+            "yrTerm1.allUpfront": "0.0073",
+            "yrTerm1.partialUpfront": "0.0075",
+            "yrTerm3.partialUpfront": "0.0059"
+          },
+          "ondemand": "0.01"
+        }
+      },
+      "us-west-2": {
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0068",
+            "yrTerm3.allUpfront": "0.0052",
+            "yrTerm1.allUpfront": "0.0067",
+            "yrTerm1.partialUpfront": "0.0067",
+            "yrTerm3.partialUpfront": "0.0054"
+          },
+          "ondemand": "0.0088"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0045",
+            "yrTerm3.allUpfront": "0.0029",
+            "yrTerm1.allUpfront": "0.0043",
+            "yrTerm1.partialUpfront": "0.0044",
+            "yrTerm3.partialUpfront": "0.0031"
+          },
+          "ondemand": "0.0065"
+        }
+      },
+      "us-gov-west-1": {
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0078",
+            "yrTerm3.allUpfront": "0.0056",
+            "yrTerm1.allUpfront": "0.0073",
+            "yrTerm1.partialUpfront": "0.0074",
+            "yrTerm3.partialUpfront": "0.0058"
+          },
+          "ondemand": "0.0098"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0055",
+            "yrTerm3.allUpfront": "0.0033",
+            "yrTerm1.allUpfront": "0.0049",
+            "yrTerm1.partialUpfront": "0.005",
+            "yrTerm3.partialUpfront": "0.0035"
+          },
+          "ondemand": "0.0075"
+        }
+      },
+      "us-west-1": {
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0083",
+            "yrTerm3.allUpfront": "0.0063",
+            "yrTerm1.allUpfront": "0.0081",
+            "yrTerm1.partialUpfront": "0.0082",
+            "yrTerm3.partialUpfront": "0.0065"
+          },
+          "ondemand": "0.0108"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.006",
+            "yrTerm3.allUpfront": "0.004",
+            "yrTerm1.allUpfront": "0.0057",
+            "yrTerm1.partialUpfront": "0.0059",
+            "yrTerm3.partialUpfront": "0.0042"
+          },
+          "ondemand": "0.0085"
+        }
+      },
+      "eu-west-1": {
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0073",
+            "yrTerm3.allUpfront": "0.0055",
+            "yrTerm1.allUpfront": "0.0071",
+            "yrTerm1.partialUpfront": "0.0071",
+            "yrTerm3.partialUpfront": "0.0057"
+          },
+          "ondemand": "0.0093"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.005",
+            "yrTerm3.allUpfront": "0.0032",
+            "yrTerm1.allUpfront": "0.0047",
+            "yrTerm1.partialUpfront": "0.0048",
+            "yrTerm3.partialUpfront": "0.0034"
+          },
+          "ondemand": "0.007"
+        }
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 2,
+      "max_enis": 2
+    },
+    "arch": [
+      "x86_64"
+    ],
+    "vpc_only": false,
+    "linux_virtualization_types": [
+      "HVM"
+    ],
+    "ebs_optimized": false,
+    "storage": null,
+    "instance_type": "t2.nano",
+    "ECU": 0,
+    "memory": 0.5,
     "ebs_max_bandwidth": 0
   },
   {
@@ -15866,7 +16656,7 @@
             "yrTerm1.partialUpfront": "2.508",
             "yrTerm3.partialUpfront": "1.908"
           },
-          "ondemand": "3.786"
+          "ondemand": "3.782"
         },
         "mswinSQL": {
           "reserved": {
@@ -16318,7 +17108,7 @@
             "yrTerm1.partialUpfront": "5.014",
             "yrTerm3.partialUpfront": "3.814"
           },
-          "ondemand": "8.052"
+          "ondemand": "8.053"
         },
         "mswinSQL": {
           "reserved": {
