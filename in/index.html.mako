@@ -154,9 +154,10 @@
           <td class="apiname">${inst['instance_type']}</td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GB</span></td>
           <td class="computeunits">
+            % if inst['ECU'] == 'variable':
+            <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
+            % else:
             <span sort="${inst['ECU']}">${"%g" % (inst['ECU'],)} units</span>
-            % if inst.get('burstable'):
-             (<a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a>)
             % endif
           </td>
           <td class="cores">
@@ -165,7 +166,11 @@
             </span>
           </td>
           <td class="ecu-per-core">
+            % if inst['ECU'] == 'variable':
+            <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
+            % else:
             <span sort="${inst['ECU_per_core']}">${"%.4g" % inst['ECU_per_core']} units</span>
+            % endif
           </td>
           <td class="storage">
             <% storage = inst['storage'] %>

@@ -197,6 +197,7 @@ def add_pricing(imap, data, platform, pricing_mode):
     elif pricing_mode == 'ri':
         add_reserved_pricing(imap, data, platform)
 
+
 def add_ondemand_pricing(imap, data, platform):
     for region_spec in data['config']['regions']:
         region = transform_region(region_spec['region'])
@@ -218,11 +219,12 @@ def add_ondemand_pricing(imap, data, platform):
                     inst.pricing[region][platform]['ondemand'] = col['prices']['USD']
 
                 # ECU is only available here
-                ecu = i_spec['ECU']
-                if ecu == 'variable':
-                    inst.ECU = 0
-                else:
-                    inst.ECU = float(ecu)
+                try:
+                    inst.ECU = float(i_spec['ECU'])
+                except:
+                    # these are likely instances with 'variable' ECU
+                    inst.ECU = i_spec['ECU']
+
 
 def add_reserved_pricing(imap, data, platform):
     for region_spec in data['config']['regions']:

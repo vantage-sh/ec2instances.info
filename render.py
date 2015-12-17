@@ -66,11 +66,11 @@ def network_sort(inst):
 
 
 def add_cpu_detail(i):
-    # special burstable instances
-    if i['instance_type'] in ('t1.micro', 't2.micro', 't2.small', 't2.medium', 't2.large'):
-        i['burstable'] = True
-        i['ECU'] = i['vCPU']  # a reasonable ECU to display
-    i['ECU_per_core'] = i['ECU'] / i['vCPU']
+    try:
+        i['ECU_per_core'] = i['ECU'] / i['vCPU']
+    except:
+        # these will be instances with variable/burstable ECU
+        i['ECU_per_core'] = 'unknown'
 
 
 def add_vpconly_detail(i):

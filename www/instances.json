@@ -5499,7 +5499,7 @@
     "ebs_optimized": false,
     "storage": null,
     "instance_type": "t1.micro",
-    "ECU": 0,
+    "ECU": "variable",
     "memory": 0.613,
     "ebs_max_bandwidth": 0
   },
@@ -5703,7 +5703,7 @@
     "ebs_optimized": false,
     "storage": null,
     "instance_type": "t2.nano",
-    "ECU": 0,
+    "ECU": "variable",
     "memory": 0.5,
     "ebs_max_bandwidth": 0
   },
@@ -6052,7 +6052,7 @@
     "ebs_optimized": false,
     "storage": null,
     "instance_type": "t2.micro",
-    "ECU": 0,
+    "ECU": "variable",
     "memory": 1.0,
     "ebs_max_bandwidth": 0
   },
@@ -6401,7 +6401,7 @@
     "ebs_optimized": false,
     "storage": null,
     "instance_type": "t2.small",
-    "ECU": 0,
+    "ECU": "variable",
     "memory": 2.0,
     "ebs_max_bandwidth": 0
   },
@@ -6749,7 +6749,7 @@
     "ebs_optimized": false,
     "storage": null,
     "instance_type": "t2.medium",
-    "ECU": 0,
+    "ECU": "variable",
     "memory": 4.0,
     "ebs_max_bandwidth": 0
   },
@@ -7097,7 +7097,7 @@
     "ebs_optimized": false,
     "storage": null,
     "instance_type": "t2.large",
-    "ECU": 0,
+    "ECU": "variable",
     "memory": 8.0,
     "ebs_max_bandwidth": 0
   },
