@@ -19217,6 +19217,28 @@
           "ondemand": "0.69"
         }
       },
+      "us-gov-west-1": {
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.633",
+            "yrTerm3.allUpfront": "0.387",
+            "yrTerm1.allUpfront": "0.555",
+            "yrTerm1.partialUpfront": "0.564",
+            "yrTerm3.partialUpfront": "0.402"
+          },
+          "ondemand": "0.976"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.483",
+            "yrTerm3.allUpfront": "0.237",
+            "yrTerm1.allUpfront": "0.405",
+            "yrTerm1.partialUpfront": "0.414",
+            "yrTerm3.partialUpfront": "0.252"
+          },
+          "ondemand": "0.828"
+        }
+      },
       "eu-central-1": {
         "mswin": {
           "reserved": {
@@ -19401,6 +19423,28 @@
             "yrTerm3.partialUpfront": "0.4206"
           },
           "ondemand": "1.38"
+        }
+      },
+      "us-gov-west-1": {
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "1.265",
+            "yrTerm3.allUpfront": "0.775",
+            "yrTerm1.allUpfront": "1.108",
+            "yrTerm1.partialUpfront": "1.126",
+            "yrTerm3.partialUpfront": "0.806"
+          },
+          "ondemand": "1.952"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.965",
+            "yrTerm3.allUpfront": "0.475",
+            "yrTerm1.allUpfront": "0.808",
+            "yrTerm1.partialUpfront": "0.826",
+            "yrTerm3.partialUpfront": "0.506"
+          },
+          "ondemand": "1.656"
         }
       },
       "eu-central-1": {
@@ -19589,6 +19633,28 @@
           "ondemand": "2.76"
         }
       },
+      "us-gov-west-1": {
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "2.532",
+            "yrTerm3.allUpfront": "1.548",
+            "yrTerm1.allUpfront": "2.218",
+            "yrTerm1.partialUpfront": "2.251",
+            "yrTerm3.partialUpfront": "1.609"
+          },
+          "ondemand": "3.904"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "1.932",
+            "yrTerm3.allUpfront": "0.948",
+            "yrTerm1.allUpfront": "1.618",
+            "yrTerm1.partialUpfront": "1.651",
+            "yrTerm3.partialUpfront": "1.009"
+          },
+          "ondemand": "3.312"
+        }
+      },
       "eu-central-1": {
         "mswin": {
           "reserved": {
@@ -19773,6 +19839,28 @@
             "yrTerm3.partialUpfront": "1.6823"
           },
           "ondemand": "5.52"
+        }
+      },
+      "us-gov-west-1": {
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "5.213",
+            "yrTerm3.allUpfront": "3.248",
+            "yrTerm1.allUpfront": "4.586",
+            "yrTerm1.partialUpfront": "4.652",
+            "yrTerm3.partialUpfront": "3.37"
+          },
+          "ondemand": "7.956"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "3.863",
+            "yrTerm3.allUpfront": "1.898",
+            "yrTerm1.allUpfront": "3.236",
+            "yrTerm1.partialUpfront": "3.302",
+            "yrTerm3.partialUpfront": "2.02"
+          },
+          "ondemand": "6.624"
         }
       },
       "eu-central-1": {
