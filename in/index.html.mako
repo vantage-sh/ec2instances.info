@@ -229,7 +229,7 @@
             ${'Yes' if inst['enhanced_networking'] else 'No'}
           </td>
           <td class="vpc-only">
-            ${'VPC only' if inst['vpc_only'] else 'VPC and EC2Classic'}
+            ${'Yes' if inst['vpc_only'] else 'No'}
           </td>
           <td class="linux-virtualization">
             % if inst['linux_virtualization_types']:

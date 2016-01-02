@@ -75,14 +75,11 @@ def add_cpu_detail(i):
 
 def add_vpconly_detail(i):
     # specific instances can be lanuched in VPC only
-    # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
-    # https://github.com/powdahound/ec2instances.info/issues/115
-    instance_types = ()
-    instance_types += ('c4.large', 'c4.xlarge', 'c4.2xlarge', 'c4.4xlarge')
-    instance_types += ('m4.large', 'm4.xlarge', 'm4.2xlarge', 'm4.4xlarge', 'm4.10xlarge')
-    instance_types += ('t2.micro', 't2.small', 't2.medium', 't2.large')
-    if i['instance_type'] in instance_types:
-        i['vpc_only'] = True
+    # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types
+    vpc_only_families = ('c4', 'm4', 't2')
+    for family in vpc_only_families:
+        if i['instance_type'].startswith(family):
+            i['vpc_only'] = True
 
 
 def add_render_info(i):
