@@ -3,11 +3,11 @@ import requests
 import json
 
 output_file = './www/rds.json'
-# price_index = 'https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonRDS/current/index.json'
-# index = requests.get(price_index)
-# data = index.json()
-with open('/Users/svdgraaf/Downloads/rds.json') as json_data:
-    data = json.load(json_data)
+price_index = 'https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonRDS/current/index.json'
+index = requests.get(price_index)
+data = index.json()
+# with open('/tmp/rds.json') as json_data:
+#     data = json.load(json_data)
 
 rds_instances = {}
 instances = {}
