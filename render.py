@@ -60,7 +60,7 @@ def network_sort(inst):
     except ValueError:
         sort = len(network_rank)
     sort *= 2
-    if inst['ebs_optimized']:
+    if 'ebs_optimized' in inst and inst['ebs_optimized']:
         sort += 1
     return sort
 
