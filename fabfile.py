@@ -41,6 +41,7 @@ def build():
 def render_html():
     """Render HTML but do not update data from Amazon"""
     render('www/instances.json', 'in/index.html.mako', 'www/index.html')
+    render('www/rds.json', 'in/rds.html.mako', 'www/rds.html')
 
 
 @task
