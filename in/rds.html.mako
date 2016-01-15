@@ -102,6 +102,7 @@
           <th class="apiname">API Name</th>
           <th class="memory">Memory</th>
           <th class="cores">Cores</th>
+          <th class="networkperf">Network Performance</th>
           <th class="arch">Arch</th>
           % for platform in ['Amazon Aurora', 'MariaDB', 'MySQL', 'Oracle','PostgreSQL', 'SQL Server']:
           <th class="cost-ondemand-${platform}">${platform} On Demand cost</th>
@@ -120,6 +121,11 @@
           <td class="cores">
             <span sort="${inst['vcpu']}">
               ${inst['vcpu']} cores
+            </span>
+          </td>
+          <td class="networkperf">
+            <span sort="${inst['network_sort']}">
+              ${inst['network_performance']}
             </span>
           </td>
           <td class="architecture">
