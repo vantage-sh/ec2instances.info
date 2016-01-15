@@ -63,10 +63,13 @@ for sku, offers in data['terms']['OnDemand'].iteritems():
         for key, dimension in offer['priceDimensions'].iteritems():
 
             # skip these for now
-            if any(descr in dimension['description'].lower() for descr in ['transfer', 'global', 'storage', 'iops', 'requests']):
+            if any(descr in dimension['description'].lower() for descr in ['transfer', 'global', 'storage', 'iops', 'requests', 'multi-az']):
                 continue
 
             instance = rds_instances[sku]
+            # if instance['instance_type'] == 'db.m3.medium' and instance['region'] == 'eu-west-1' and instance['database_engine'].lower() == 'mysql':
+            #     print instance['region'], dimension
+
             if instance['region'] not in instances[instance['instance_type']]['pricing']:
                 instances[instance['instance_type']]['pricing'][instance['region']] = {}
 
@@ -110,16 +113,19 @@ for sku, offers in data['terms']['Reserved'].iteritems():
             #     print dimension['pricePerUnit']['USD'], float(dimension['pricePerUnit']['USD'])
             #     print instances[instance['instance_type']]['pricing'][region][instance['database_engine']]['reserved']
 
+# print json.dumps(instances['db.m3.medium']['pricing']['eu-west-1']['MySQL'], indent=4)
+
 # Calculate all reserved effective pricings (upfront hourly + hourly price)
 for instance_type, instance in instances.iteritems():
     for region, pricing in instance['pricing'].iteritems():
         for engine, prices in pricing.iteritems():
             if 'reserved' in prices:
+                # TODO: check if the prices are actually for multi-az instances
                 reserved_prices = {
-                    'yrTerm3.partialUpfront': (prices['reserved']['yrTerm3.partialUpfront-quantity'] / 365 / 24) + prices['reserved']['yrTerm3.partialUpfront-hrs'],
-                    'yrTerm1.partialUpfront': (prices['reserved']['yrTerm1.partialUpfront-quantity'] / 365 / 24) + prices['reserved']['yrTerm1.partialUpfront-hrs'],
-                    'yrTerm3.allUpfront': (prices['reserved']['yrTerm3.allUpfront-quantity'] / 365 / 24) + prices['reserved']['yrTerm3.allUpfront-hrs'],
-                    'yrTerm1.allUpfront': (prices['reserved']['yrTerm1.allUpfront-quantity'] / 365 / 24) + prices['reserved']['yrTerm1.allUpfront-hrs'],
+                    'yrTerm3.partialUpfront': (prices['reserved']['yrTerm3.partialUpfront-quantity'] / (365 * 3) / 24 / 2) + prices['reserved']['yrTerm3.partialUpfront-hrs'],
+                    'yrTerm1.partialUpfront': (prices['reserved']['yrTerm1.partialUpfront-quantity'] / 365 / 24 / 2) + prices['reserved']['yrTerm1.partialUpfront-hrs'],
+                    'yrTerm3.allUpfront': (prices['reserved']['yrTerm3.allUpfront-quantity'] / (365 * 3) / 24 / 2) + prices['reserved']['yrTerm3.allUpfront-hrs'],
+                    'yrTerm1.allUpfront': (prices['reserved']['yrTerm1.allUpfront-quantity'] / 365 / 24 / 2) + prices['reserved']['yrTerm1.allUpfront-hrs'],
                     'yrTerm1.noUpfront': prices['reserved']['yrTerm1.noUpfront-hrs'],
                 }
                 instances[instance_type]['pricing'][region][engine]['reserved'] = reserved_prices
