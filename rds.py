@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import requests
 import json
+from json import encoder
+
 
 output_file = './www/rds.json'
 price_index = 'https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonRDS/current/index.json'
@@ -70,19 +72,15 @@ for sku, offers in data['terms']['OnDemand'].iteritems():
 reserved_mapping = {
     '3yr Partial Upfront': 'yrTerm3.partialUpfront',
     '1yr Partial Upfront': 'yrTerm1.partialUpfront',
-    '3yr All Upfront': 'yrTerm3.partialUpfront',
-    '1yr All Upfront': 'yrTerm1.partialUpfront',
+    '3yr All Upfront': 'yrTerm3.allUpfront',
+    '1yr All Upfront': 'yrTerm1.allUpfront',
     '1yr No Upfront': 'yrTerm1.noUpfront',
 }
 
-# reserved pricing
+# Parse reserved pricing
 for sku, offers in data['terms']['Reserved'].iteritems():
     for code, offer in offers.iteritems():
         for key, dimension in offer['priceDimensions'].iteritems():
-
-            # skip these for now
-            if any(descr in dimension['description'].lower() for descr in ['transfer', 'global', 'storage', 'iops', 'requests']):
-                continue
 
             instance = rds_instances[sku]
             region = rds_instances[sku]['region']
@@ -94,20 +92,24 @@ for sku, offers in data['terms']['Reserved'].iteritems():
                 instances[instance['instance_type']]['pricing'][region][instance['database_engine']]['reserved'] = {}
 
             reserved_type = "%s %s" % (offer['termAttributes']['LeaseContractLength'], offer['termAttributes']['PurchaseOption'])
-            instances[instance['instance_type']]['pricing'][region][instance['database_engine']]['reserved'][reserved_mapping[reserved_type]] = float(dimension['pricePerUnit']['USD'])
+            instances[instance['instance_type']]['pricing'][region][instance['database_engine']]['reserved']['%s-%s' % (reserved_mapping[reserved_type], dimension['unit'].lower())] = float(dimension['pricePerUnit']['USD'])
 
-            # rds_instances[sku]['pricing'][rds_instances[sku]['region']] = {
-            #     'foo': {
-            #         'ondemand': float(dimension['pricePerUnit']['USD'])
-            #     }
-            # }
-            #
-            # "yrTerm1.noUpfront": "0.094",
-            # "yrTerm3.allUpfront": "0.0623",
-            # "yrTerm1.allUpfront": "0.0783",
-            # "yrTerm1.partialUpfront": "0.08",
-            # "yrTerm3.partialUpfront": "0.0663"
+
+# Calculate all effective reserved pricings (upfront per hour + hourly price)
+for instance_type, instance in instances.iteritems():
+    for region, pricing in instance['pricing'].iteritems():
+        for engine, prices in pricing.iteritems():
+            if 'reserved' in prices:
+                reserved_prices = {
+                    'yrTerm3.partialUpfront': (prices['reserved']['yrTerm3.partialUpfront-quantity'] / 365 / 24) + prices['reserved']['yrTerm3.partialUpfront-hrs'],
+                    'yrTerm1.partialUpfront': (prices['reserved']['yrTerm1.partialUpfront-quantity'] / 365 / 24) + prices['reserved']['yrTerm1.partialUpfront-hrs'],
+                    'yrTerm3.allUpfront': (prices['reserved']['yrTerm3.allUpfront-quantity'] / 365 / 24) + prices['reserved']['yrTerm3.allUpfront-hrs'],
+                    'yrTerm1.allUpfront': (prices['reserved']['yrTerm1.allUpfront-quantity'] / 365 / 24) + prices['reserved']['yrTerm1.allUpfront-hrs'],
+                    'yrTerm1.noUpfront': prices['reserved']['yrTerm1.noUpfront-hrs'],
+                }
+                instances[instance_type]['pricing'][region][engine]['reserved'] = reserved_prices
 
 # write output to file
+encoder.FLOAT_REPR = lambda o: format(o, '.5f')
 with open(output_file, 'w') as outfile:
-    json.dump(instances.values(), outfile)
+    json.dump(instances.values(), outfile, indent=4)
