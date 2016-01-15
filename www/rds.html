@@ -100,6 +100,8 @@
           <th class="apiname">API Name</th>
           <th class="memory">Memory</th>
           <th class="storage">Storage</th>
+          <th class="ebs-throughput">EBS Throughput</th>
+          <th class="processor">Processor</th>
           <th class="cores">Cores</th>
           <th class="networkperf">Network Performance</th>
           <th class="arch">Arch</th>
@@ -134,7 +136,13 @@
           <td class="name">High Memory Cluster Eight Extra Large</td>
           <td class="apiname">db.cr1.8xl</td>
           <td class="memory"><span sort="244">244 GB</span></td>
-          <td class="storage">2 x 120 SSD</td>
+          <td class="storage">
+          
+          <span sort="0">2 x 120 SSD</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon E5-2670</td>
           <td class="cores">
             <span sort="32">
               32 cores
@@ -189,7 +197,15 @@
           <td class="name">M4 Double Extra Large</td>
           <td class="apiname">db.m4.2xlarge</td>
           <td class="memory"><span sort="32">32 GB</span></td>
-          <td class="storage">EBS Only</td>
+          <td class="storage">
+          
+          <span sort="0">0 GB (EBS only)</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="1000 Mbps">
+            1000 Mbps
+          </span>
+          <td class="processor">Intel Xeon E5-2676 v3 (Haswell)</td>
           <td class="cores">
             <span sort="8">
               8 cores
@@ -244,7 +260,13 @@
           <td class="name">T1 Micro</td>
           <td class="apiname">db.t1.micro</td>
           <td class="memory"><span sort="0.613">0.613 GB</span></td>
-          <td class="storage">EBS Only</td>
+          <td class="storage">
+          
+          <span sort="0">0 GB (EBS only)</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Variable</td>
           <td class="cores">
             <span sort="1">
               1 cores
@@ -299,7 +321,13 @@
           <td class="name">M3 General Purpose Medium</td>
           <td class="apiname">db.m3.medium</td>
           <td class="memory"><span sort="3.75">3.75 GB</span></td>
-          <td class="storage">1 x 4 SSD</td>
+          <td class="storage">
+          
+          <span sort="0">1 x 4 SSD</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge/Sandy Bridge)</td>
           <td class="cores">
             <span sort="1">
               1 cores
@@ -354,7 +382,15 @@
           <td class="name">M4 Large</td>
           <td class="apiname">db.m4.large</td>
           <td class="memory"><span sort="8">8 GB</span></td>
-          <td class="storage">EBS Only</td>
+          <td class="storage">
+          
+          <span sort="0">0 GB (EBS only)</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="450 Mbps">
+            450 Mbps
+          </span>
+          <td class="processor">Intel Xeon E5-2676 v3 (Haswell)</td>
           <td class="cores">
             <span sort="2">
               2 cores
@@ -409,7 +445,13 @@
           <td class="name">R3 High-Memory Extra Large</td>
           <td class="apiname">db.r3.xlarge</td>
           <td class="memory"><span sort="30.5">30.5 GB</span></td>
-          <td class="storage">1 x 80 SSD</td>
+          <td class="storage">
+          
+          <span sort="0">1 x 80 SSD</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge)</td>
           <td class="cores">
             <span sort="4">
               4 cores
@@ -464,7 +506,15 @@
           <td class="name">M4 Quadruple Extra Large</td>
           <td class="apiname">db.m4.4xlarge</td>
           <td class="memory"><span sort="64">64 GB</span></td>
-          <td class="storage">EBS Only</td>
+          <td class="storage">
+          
+          <span sort="0">0 GB (EBS only)</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="2000 Mbps">
+            2000 Mbps
+          </span>
+          <td class="processor">Intel Xeon E5-2676 v3 (Haswell)</td>
           <td class="cores">
             <span sort="16">
               16 cores
@@ -519,7 +569,13 @@
           <td class="name">M1 General Purpose Large</td>
           <td class="apiname">db.m1.large</td>
           <td class="memory"><span sort="7.5">7.5 GB</span></td>
-          <td class="storage">2 x 420</td>
+          <td class="storage">
+          
+          <span sort="0">2 x 420</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon Family</td>
           <td class="cores">
             <span sort="2">
               2 cores
@@ -574,7 +630,13 @@
           <td class="name">R3 High-Memory Double Extra Large</td>
           <td class="apiname">db.r3.2xlarge</td>
           <td class="memory"><span sort="61">61 GB</span></td>
-          <td class="storage">1 x 160 SSD</td>
+          <td class="storage">
+          
+          <span sort="0">1 x 160 SSD</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge)</td>
           <td class="cores">
             <span sort="8">
               8 cores
@@ -629,7 +691,15 @@
           <td class="name">M4 Extra Large</td>
           <td class="apiname">db.m4.xlarge</td>
           <td class="memory"><span sort="16">16 GB</span></td>
-          <td class="storage">EBS Only</td>
+          <td class="storage">
+          
+          <span sort="0">0 GB (EBS only)</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="750 Mbps">
+            750 Mbps
+          </span>
+          <td class="processor">Intel Xeon E5-2676 v3 (Haswell)</td>
           <td class="cores">
             <span sort="4">
               4 cores
@@ -684,7 +754,13 @@
           <td class="name">R3 High-Memory Quadruple Extra Large</td>
           <td class="apiname">db.r3.4xlarge</td>
           <td class="memory"><span sort="122">122 GB</span></td>
-          <td class="storage">1 x 320 SSD</td>
+          <td class="storage">
+          
+          <span sort="0">1 x 320 SSD</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge)</td>
           <td class="cores">
             <span sort="16">
               16 cores
@@ -739,7 +815,13 @@
           <td class="name">M3 General Purpose Extra Large</td>
           <td class="apiname">db.m3.xlarge</td>
           <td class="memory"><span sort="15">15 GB</span></td>
-          <td class="storage">2 x 40 SSD</td>
+          <td class="storage">
+          
+          <span sort="0">2 x 40 SSD</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge/Sandy Bridge)</td>
           <td class="cores">
             <span sort="4">
               4 cores
@@ -794,7 +876,13 @@
           <td class="name">M3 General Purpose Double Extra Large</td>
           <td class="apiname">db.m3.2xlarge</td>
           <td class="memory"><span sort="30">30 GB</span></td>
-          <td class="storage">2 x 80 SSD</td>
+          <td class="storage">
+          
+          <span sort="0">2 x 80 SSD</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge/Sandy Bridge)</td>
           <td class="cores">
             <span sort="8">
               8 cores
@@ -849,7 +937,13 @@
           <td class="name">M1 General Purpose Small</td>
           <td class="apiname">db.m1.small</td>
           <td class="memory"><span sort="1.7">1.7 GB</span></td>
-          <td class="storage">1 x 160</td>
+          <td class="storage">
+          
+          <span sort="0">1 x 160</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon Family</td>
           <td class="cores">
             <span sort="1">
               1 cores
@@ -904,7 +998,13 @@
           <td class="name">M1 General Purpose Medium</td>
           <td class="apiname">db.m1.medium</td>
           <td class="memory"><span sort="3.75">3.75 GB</span></td>
-          <td class="storage">1 x 410</td>
+          <td class="storage">
+          
+          <span sort="0">1 x 410</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon Family</td>
           <td class="cores">
             <span sort="1">
               1 cores
@@ -959,7 +1059,13 @@
           <td class="name">T2 Medium</td>
           <td class="apiname">db.t2.medium</td>
           <td class="memory"><span sort="4">4 GB</span></td>
-          <td class="storage">EBS Only</td>
+          <td class="storage">
+          
+          <span sort="0">0 GB (EBS only)</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon Family</td>
           <td class="cores">
             <span sort="2">
               2 cores
@@ -1014,7 +1120,13 @@
           <td class="name">M2 High Memory Double Extra Large</td>
           <td class="apiname">db.m2.2xlarge</td>
           <td class="memory"><span sort="34.2">34.2 GB</span></td>
-          <td class="storage">1 x 850</td>
+          <td class="storage">
+          
+          <span sort="0">1 x 850</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon Family</td>
           <td class="cores">
             <span sort="4">
               4 cores
@@ -1069,7 +1181,13 @@
           <td class="name">R3 High-Memory Large</td>
           <td class="apiname">db.r3.large</td>
           <td class="memory"><span sort="15.25">15.25 GB</span></td>
-          <td class="storage">1 x 32 SSD</td>
+          <td class="storage">
+          
+          <span sort="0">1 x 32 SSD</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge)</td>
           <td class="cores">
             <span sort="2">
               2 cores
@@ -1124,7 +1242,13 @@
           <td class="name">T2 Small</td>
           <td class="apiname">db.t2.small</td>
           <td class="memory"><span sort="2">2 GB</span></td>
-          <td class="storage">EBS Only</td>
+          <td class="storage">
+          
+          <span sort="0">0 GB (EBS only)</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon Family</td>
           <td class="cores">
             <span sort="1">
               1 cores
@@ -1179,7 +1303,13 @@
           <td class="name">M2 High Memory Extra Large</td>
           <td class="apiname">db.m2.xlarge</td>
           <td class="memory"><span sort="17.1">17.1 GB</span></td>
-          <td class="storage">1 x 420</td>
+          <td class="storage">
+          
+          <span sort="0">1 x 420</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon Family</td>
           <td class="cores">
             <span sort="2">
               2 cores
@@ -1234,7 +1364,13 @@
           <td class="name">T2 Large</td>
           <td class="apiname">db.t2.large</td>
           <td class="memory"><span sort="8">8 GB</span></td>
-          <td class="storage">EBS Only</td>
+          <td class="storage">
+          
+          <span sort="0">0 GB (EBS only)</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon Family</td>
           <td class="cores">
             <span sort="2">
               2 cores
@@ -1289,7 +1425,13 @@
           <td class="name">T2 Micro</td>
           <td class="apiname">db.t2.micro</td>
           <td class="memory"><span sort="1">1 GB</span></td>
-          <td class="storage">EBS Only</td>
+          <td class="storage">
+          
+          <span sort="0">0 GB (EBS only)</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon Family</td>
           <td class="cores">
             <span sort="1">
               1 cores
@@ -1344,7 +1486,15 @@
           <td class="name">M4 Deca Extra Large</td>
           <td class="apiname">db.m4.10xlarge</td>
           <td class="memory"><span sort="160">160 GB</span></td>
-          <td class="storage">EBS Only</td>
+          <td class="storage">
+          
+          <span sort="0">0 GB (EBS only)</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="4000 Mbps">
+            4000 Mbps
+          </span>
+          <td class="processor">Intel Xeon E5-2676 v3 (Haswell)</td>
           <td class="cores">
             <span sort="40">
               40 cores
@@ -1399,7 +1549,13 @@
           <td class="name">M1 General Purpose Extra Large</td>
           <td class="apiname">db.m1.xlarge</td>
           <td class="memory"><span sort="15">15 GB</span></td>
-          <td class="storage">4 x 420</td>
+          <td class="storage">
+          
+          <span sort="0">4 x 420</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon Family</td>
           <td class="cores">
             <span sort="4">
               4 cores
@@ -1454,7 +1610,13 @@
           <td class="name">M3 General Purpose Large</td>
           <td class="apiname">db.m3.large</td>
           <td class="memory"><span sort="7.5">7.5 GB</span></td>
-          <td class="storage">1 x 32 SSD</td>
+          <td class="storage">
+          
+          <span sort="0">1 x 32 SSD</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge/Sandy Bridge)</td>
           <td class="cores">
             <span sort="2">
               2 cores
@@ -1509,7 +1671,13 @@
           <td class="name">M2 High Memory Quadruple Extra Large</td>
           <td class="apiname">db.m2.4xlarge</td>
           <td class="memory"><span sort="68.4">68.4 GB</span></td>
-          <td class="storage">2 x 840</td>
+          <td class="storage">
+          
+          <span sort="0">2 x 840</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon Family</td>
           <td class="cores">
             <span sort="8">
               8 cores
@@ -1564,7 +1732,13 @@
           <td class="name">R3 High-Memory Eight Extra Large</td>
           <td class="apiname">db.r3.8xlarge</td>
           <td class="memory"><span sort="244">244 GB</span></td>
-          <td class="storage">2 x 320 SSD</td>
+          <td class="storage">
+          
+          <span sort="0">2 x 320 SSD</span>
+          </td>
+          <td class="ebs-throughput">
+          <span sort="0">N/A</span>
+          <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge)</td>
           <td class="cores">
             <span sort="32">
               32 cores
@@ -1625,7 +1799,7 @@
       </p>
       <p>
         <strong>How?</strong>
-        Data is parsed from the AWS pricing api. This was last done at 2016-01-15 16:10:30 UTC.
+        Data is parsed from the AWS pricing api. This was last done at 2016-01-15 16:19:46 UTC.
       </p>
 
     </div>
