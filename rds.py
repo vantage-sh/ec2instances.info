@@ -102,7 +102,7 @@ for sku, offers in data['terms']['Reserved'].iteritems():
             reserved_type = "%s %s" % (offer['termAttributes']['LeaseContractLength'], offer['termAttributes']['PurchaseOption'])
             instances[instance['instance_type']]['pricing'][region][instance['database_engine']]['reserved']['%s-%s' % (reserved_mapping[reserved_type], dimension['unit'].lower())] = float(dimension['pricePerUnit']['USD'])
 
-            # if instance['instance_type'] == 'db.m3.medium' and region == 'eu-west-1': # and instance['database_engine'].lower() == 'mariadb':
+            # if instance['instance_type'] == 'db.m3.medium' and region == 'eu-west-1' and instance['database_engine'].lower() == 'mysql':
             #     print offer
             #     print instance['database_engine']
             #     print dimension
@@ -124,7 +124,7 @@ for instance_type, instance in instances.iteritems():
                 }
                 instances[instance_type]['pricing'][region][engine]['reserved'] = reserved_prices
 
-# print json.dumps(instances['db.m3.medium']['pricing']['eu-west-1'], indent=4)
+# print json.dumps(instances['db.m3.medium']['pricing']['eu-west-1']['MySQL'], indent=4)
 
 # write output to file
 encoder.FLOAT_REPR = lambda o: format(o, '.5f')
