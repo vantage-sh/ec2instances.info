@@ -101,6 +101,7 @@
           <th class="name">Name</th>
           <th class="apiname">API Name</th>
           <th class="memory">Memory</th>
+          <th class="storage">Storage</th>
           <th class="cores">Cores</th>
           <th class="networkperf">Network Performance</th>
           <th class="arch">Arch</th>
@@ -118,6 +119,7 @@
           <td class="name">${inst['pretty_name']}</td>
           <td class="apiname">${inst['instance_type']}</td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GB</span></td>
+          <td class="storage">${inst['storage']}</td>
           <td class="cores">
             <span sort="${inst['vcpu']}">
               ${inst['vcpu']} cores
