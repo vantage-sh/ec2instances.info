@@ -6,8 +6,8 @@ import datetime
 
 def pretty_name(inst):
     pieces = inst['instance_type'].split('.')
-    family = pieces[0]
-    short  = pieces[1]
+    family = pieces[-2]
+    short  = pieces[-1]
     family_names = {
         'r3': 'R3 High-Memory',
         'c3': 'C3 High-CPU',
