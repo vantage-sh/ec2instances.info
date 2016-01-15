@@ -2,14 +2,19 @@
 import requests
 import json
 from json import encoder
+import sys
 
 
 output_file = './www/rds.json'
-price_index = 'https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonRDS/current/index.json'
-index = requests.get(price_index)
-data = index.json()
-# with open('/tmp/rds.json') as json_data:
-#     data = json.load(json_data)
+
+# if an argument is given, use that as the path for the json file
+if len(sys.argv) > 1:
+    with open(sys.argv[1]) as json_data:
+        data = json.load(json_data)
+else:
+    price_index = 'https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonRDS/current/index.json'
+    index = requests.get(price_index)
+    data = index.json()
 
 rds_instances = {}
 instances = {}
@@ -52,7 +57,7 @@ for sku, product in data['products'].iteritems():
             instances[attributes['instance_type']] = attributes
             instances[attributes['instance_type']]['pricing'] = {}
 
-# ondemand pricing
+# Parse ondemand pricing
 for sku, offers in data['terms']['OnDemand'].iteritems():
     for code, offer in offers.iteritems():
         for key, dimension in offer['priceDimensions'].iteritems():
@@ -85,17 +90,27 @@ for sku, offers in data['terms']['Reserved'].iteritems():
             instance = rds_instances[sku]
             region = rds_instances[sku]['region']
 
+            # create a regional hash
             if region not in instances[instance['instance_type']]['pricing']:
                 instances[instance['instance_type']]['pricing'][region] = {}
 
+            # create a reserved hash
             if 'reserved' not in instances[instance['instance_type']]['pricing'][region][instance['database_engine']]:
                 instances[instance['instance_type']]['pricing'][region][instance['database_engine']]['reserved'] = {}
 
+            # store the pricing in placeholder field
             reserved_type = "%s %s" % (offer['termAttributes']['LeaseContractLength'], offer['termAttributes']['PurchaseOption'])
             instances[instance['instance_type']]['pricing'][region][instance['database_engine']]['reserved']['%s-%s' % (reserved_mapping[reserved_type], dimension['unit'].lower())] = float(dimension['pricePerUnit']['USD'])
 
+            # if instance['instance_type'] == 'db.m3.medium' and region == 'eu-west-1': # and instance['database_engine'].lower() == 'mariadb':
+            #     print offer
+            #     print instance['database_engine']
+            #     print dimension
+            #     print reserved_type
+            #     print dimension['pricePerUnit']['USD'], float(dimension['pricePerUnit']['USD'])
+            #     print instances[instance['instance_type']]['pricing'][region][instance['database_engine']]['reserved']
 
-# Calculate all effective reserved pricings (upfront per hour + hourly price)
+# Calculate all reserved effective pricings (upfront hourly + hourly price)
 for instance_type, instance in instances.iteritems():
     for region, pricing in instance['pricing'].iteritems():
         for engine, prices in pricing.iteritems():
@@ -108,6 +123,8 @@ for instance_type, instance in instances.iteritems():
                     'yrTerm1.noUpfront': prices['reserved']['yrTerm1.noUpfront-hrs'],
                 }
                 instances[instance_type]['pricing'][region][engine]['reserved'] = reserved_prices
+
+# print json.dumps(instances['db.m3.medium']['pricing']['eu-west-1'], indent=4)
 
 # write output to file
 encoder.FLOAT_REPR = lambda o: format(o, '.5f')
