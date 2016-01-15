@@ -163,6 +163,10 @@
       <p class="bg-warning">
         <strong>Warning:</strong> This site is not maintained by or affiliated with Amazon. The data shown is not guaranteed to be accurate or current. Please <a href="http://github.com/powdahound/ec2instances.info/issues">report issues</a> you see.
       </p>
+      <p>
+        <strong>How?</strong>
+        Data is parsed from the AWS pricing api. This was last done at ${generated_at}.
+      </p>
 
     </div>
 
