@@ -125,16 +125,17 @@ def _rindex_family(inst2family, details):
 
 def scrape_families():
     inst2family = dict()
-    tree = etree.parse(urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html"), etree.HTMLParser())
+    tree = etree.parse(urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html"),
+                       etree.HTMLParser())
     details = tree.xpath('//div[@class="informaltable"]//table')[0]
     hdrs = details.xpath('thead/tr')[0]
     if totext(hdrs[0]).lower() == 'instance family' and 'current generation' in totext(hdrs[1]).lower():
-       _rindex_family(inst2family, details)
+        _rindex_family(inst2family, details)
 
     details = tree.xpath('//div[@class="informaltable"]//table')[1]
     hdrs = details.xpath('thead/tr')[0]
     if totext(hdrs[0]).lower() == 'instance family' and 'previous generation' in totext(hdrs[1]).lower():
-       _rindex_family(inst2family, details)
+        _rindex_family(inst2family, details)
 
     assert len(inst2family) > 0, "Failed to find instance family info"
     return inst2family
@@ -209,7 +210,7 @@ def add_ondemand_pricing(imap, data, platform):
                 # in the pricing charts anyways.
                 if i_type == 'cc2.4xlarge':
                     continue
-                assert i_type in imap, "Unknown instance size: %s" % (i_type, )
+                assert i_type in imap, "Unknown instance size: %s" % i_type
                 inst = imap[i_type]
                 inst.pricing.setdefault(region, {})
                 # print "%s/%s" % (region, i_type)
@@ -235,7 +236,7 @@ def add_reserved_pricing(imap, data, platform):
             # in the pricing charts anyways.
             if i_type == 'cc2.4xlarge':
                 continue
-            assert i_type in imap, "Unknown instance size: %s" % (i_type, )
+            assert i_type in imap, "Unknown instance size: %s" % i_type
             inst = imap[i_type]
             inst.pricing.setdefault(region, {})
             # print "%s/%s" % (region, i_type)
@@ -254,7 +255,6 @@ def add_reserved_pricing(imap, data, platform):
 
 
 def add_pricing_info(instances):
-
     pricing_modes = ['ri', 'od']
 
     reserved_name_map = {
@@ -269,8 +269,6 @@ def add_pricing_info(instances):
 
     by_type = {i.instance_type: i for i in instances}
 
-
-
     for platform in ['linux', 'mswin', 'mswinSQL', 'mswinSQLWeb']:
         for pricing_mode in pricing_modes:
             # current generation
@@ -279,7 +277,6 @@ def add_pricing_info(instances):
             else:
                 pricing_url = 'http://a0.awsstatic.com/pricing/1/ec2/ri-v2/%s.min.js' % (reserved_name_map[platform],)
 
-
             pricing = fetch_data(pricing_url)
             add_pricing(by_type, pricing, platform, pricing_mode)
 
@@ -287,18 +284,21 @@ def add_pricing_info(instances):
             if pricing_mode == 'od':
                 pricing_url = 'http://a0.awsstatic.com/pricing/1/ec2/previous-generation/%s-od.min.js' % (platform,)
             else:
-                pricing_url = 'http://a0.awsstatic.com/pricing/1/ec2/previous-generation/ri-v2/%s.min.js' % (reserved_name_map[platform],)
+                pricing_url = 'http://a0.awsstatic.com/pricing/1/ec2/previous-generation/ri-v2/%s.min.js' % (
+                reserved_name_map[platform],)
 
             pricing = fetch_data(pricing_url)
             add_pricing(by_type, pricing, platform, pricing_mode)
+
 
 def fetch_data(url):
     content = urllib2.urlopen(url).read()
     try:
         pricing = json.loads(content)
     except ValueError:
-        # if the data isn't compatiable JSON, try to parse as jsonP
-        json_string = re.sub(r"(\w+):", r'"\1":', content[content.index('callback(') + 9 : -2]) # convert into valid json
+        # if the data isn't compatible JSON, try to parse as jsonP
+        json_string = re.sub(r"(\w+):", r'"\1":',
+                             content[content.index('callback(') + 9: -2])  # convert into valid json
         pricing = json.loads(json_string)
 
     return pricing
@@ -396,6 +396,7 @@ def scrape(data_file):
                   f,
                   indent=2,
                   separators=(',', ': '))
+
 
 if __name__ == '__main__':
     scrape('www/instances.json')
