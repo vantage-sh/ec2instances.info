@@ -14,11 +14,18 @@
 
   <body class="ec2instances">
     <div class="page-header">
+      <span class="pull-right">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="powdahound"></a>
+        <iframe src="https://ghbtns.com/github-btn.html?user=powdahound&repo=ec2instances.info&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+      </span>
       <h1>RDSInstances.info <small>Easy Amazon RDS Instance Comparison</small></h1>
 
-      <a href="https://twitter.com/share" class="twitter-share-button" data-via="powdahound"></a>
+      <ul class="nav nav-tabs">
+        <li role="presentation"><a href="index.html">EC2</a></li>
+        <li role="presentation" class="active"><a href="rds.html">RDS</a></li>
+        <li class="pull-right label label-info">Last Update: ${generated_at}</li>
+      </ul>
 
-      <iframe src="https://ghbtns.com/github-btn.html?user=powdahound&repo=ec2instances.info&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
     </div>
 
     <div class="row" id="menu">

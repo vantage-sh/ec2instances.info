@@ -14,19 +14,23 @@
 
   <body class="ec2instances">
     <div class="page-header">
+      <span class="pull-right">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="powdahound"></a>
+        <iframe src="https://ghbtns.com/github-btn.html?user=powdahound&repo=ec2instances.info&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+      </span>
+
       <h1>EC2Instances.info <small>Easy Amazon EC2 Instance Comparison</small></h1>
 
-      <a href="https://twitter.com/share" class="twitter-share-button" data-via="powdahound"></a>
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="index.html">EC2</a></li>
+        <li role="presentation"><a href="rds.html">RDS</a></li>
+        <li class="pull-right label label-info">Last Update: ${generated_at}</li>
+      </ul>
 
-      <iframe src="https://ghbtns.com/github-btn.html?user=powdahound&repo=ec2instances.info&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+
     </div>
 
-    <!--
-    <div class="alert">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <strong>Warning!</strong> Some information on this page is outdated. Please see <a href="https://github.com/powdahound/ec2instances.info/issues/75">this issue</a> for more detail.
-    </div>
-    -->
+    <div class="clear-fix"></div>
 
     <div class="row" id="menu">
       <div class="col-sm-12">
