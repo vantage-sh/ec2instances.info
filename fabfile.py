@@ -14,6 +14,7 @@ from fabric.api import abort, task
 from fabric.contrib.console import confirm
 from render import render
 from scrape import scrape
+from rds import scrape as scrape_rds
 
 BUCKET_NAME = 'www.ec2instances.info'
 
@@ -28,14 +29,21 @@ abspath = lambda filename: os.path.join(os.path.abspath(os.path.dirname(__file__
 @task
 def build():
     """Scrape AWS sources for data and build the site"""
-    data_file = 'www/instances.json'
+    ec2_file = 'www/instances.json'
+    rds_file = 'www/rds.json'
     try:
-        scrape(data_file)
+        scrape(ec2_file)
     except Exception as e:
         print "ERROR: Unable to scrape site data: %s" % e
         print traceback.print_exc()
-    render_html()
 
+    try:
+        scrape_rds(rds_file, '/tmp/rds.json')
+    except Exception as e:
+        print "ERROR: Unable to scrape rds price data: %s" % e
+        print traceback.print_exc()
+
+    render_html()
 
 @task
 def render_html():
