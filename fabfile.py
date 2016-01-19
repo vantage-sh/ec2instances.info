@@ -38,7 +38,7 @@ def build():
         print traceback.print_exc()
 
     try:
-        scrape_rds(rds_file, '/tmp/rds.json')
+        scrape_rds(rds_file)
     except Exception as e:
         print "ERROR: Unable to scrape rds price data: %s" % e
         print traceback.print_exc()
