@@ -22,8 +22,8 @@
       <h1>EC2Instances.info <small>Easy Amazon EC2 Instance Comparison</small></h1>
 
       <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="index.html">EC2</a></li>
-        <li role="presentation"><a href="rds.html">RDS</a></li>
+        <li role="presentation" class="active"><a href="http://ec2instances.info/">EC2</a></li>
+        <li role="presentation"><a href="http://rdsinstances.info/">RDS</a></li>
         <li class="pull-right label label-info">Last Update: ${generated_at}</li>
       </ul>
 
