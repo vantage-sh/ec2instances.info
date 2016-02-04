@@ -2,7 +2,8 @@ import mako.template
 import mako.exceptions
 import json
 import datetime
-
+import plotly
+import plotly.graph_objs as go
 
 def pretty_name(inst):
     pieces = inst['instance_type'].split('.')
@@ -105,5 +106,67 @@ def render(data_file, template_file, destination_file):
         except:
             print mako.exceptions.text_error_template().render()
 
+def graph(data_file, region, os):
+    generated_at = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')
+    print "Loading data from %s..." % data_file
+    with open(data_file) as f:
+        instances = json.load(f)
+    for i in instances:
+        add_render_info(i)
+
+    #Cost per type month per unit
+    instance_type = []
+    memory = []
+    ecu = []
+    disk = []
+    price = []
+    
+    for i in instances:
+        price = float(i['pricing'][region][os]['ondemand']) * 365.0 / 12.0
+        instance_type.append(i['instance_type'])
+        memory.append(price / i['memory'])
+        if i['ECU'] == 'variable':
+            ecu.append(0)
+        else:
+            ecu.append(price / i['ECU'])
+        storage = i['storage']
+        if not storage:
+            disk.append(0)
+        else:
+            disk.append(price / ( storage['devices'] * storage['size']))
+        
+    trace1 = go.Bar(
+        x = instance_type,
+        y = ecu,
+        name = "Cost Per Month Per ECU Unit"
+    )
+
+    trace2 = go.Bar(
+        x = instance_type,
+        y = memory,
+        name = "Cost Per Month Per 1GB Memory"
+    )
+
+    trace3 = go.Bar(
+        x = instance_type,
+        y = disk,
+        name = "Cost Per Month Per 1GB Disk"
+    )
+
+    data = [trace1, trace2, trace3]
+    layout = go.Layout(
+        barmode='group',
+        title='Costings per type per month per unit for ondemand ' + os + ' in ' + region + ' (data by ec2instances.info generated at ' + generated_at + ')',
+        yaxis = dict(
+            title='USD'
+        ),
+        xaxis = dict(
+            title='Instance Type'
+        ),
+    )
+    fig = go.Figure(data=data, layout=layout)
+    plot_url = plotly.offline.plot(fig, filename='aws-costings')
+    
 if __name__ == '__main__':
     render('www/instances.json', 'in/index.html.mako', 'www/index.html')
+    graph('www/instances.json','us-east-1','linux')
