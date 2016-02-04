@@ -122,7 +122,7 @@ def graph(data_file, region, os):
     price = []
     
     for i in instances:
-        price = float(i['pricing'][region][os]['ondemand']) * 365.0 / 12.0
+        price = float(i['pricing'][region][os]['ondemand']) * 730
         instance_type.append(i['instance_type'])
         memory.append(price / i['memory'])
         if i['ECU'] == 'variable':
