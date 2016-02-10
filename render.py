@@ -1,4 +1,5 @@
 import mako.template
+import mako.lookup
 import mako.exceptions
 import json
 import datetime
@@ -91,7 +92,8 @@ def add_render_info(i):
 
 def render(data_file, template_file, destination_file):
     """Build the HTML content from scraped data"""
-    template = mako.template.Template(filename=template_file)
+    lookup = mako.lookup.TemplateLookup(directories=['.'])
+    template = mako.template.Template(filename=template_file, lookup=lookup)
     print "Loading data from %s..." % data_file
     with open(data_file) as f:
         instances = json.load(f)
