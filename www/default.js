@@ -84,7 +84,7 @@ function change_cost(duration) {
     "hourly": 1,
     "daily": 24,
     "weekly": (7*24),
-    "monthly": (30*24),
+    "monthly": (365*24/12),
     "annually": (365*24)
   };
   var multiplier = hour_multipliers[duration];
