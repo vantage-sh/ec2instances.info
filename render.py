@@ -1,4 +1,5 @@
 import mako.template
+import mako.lookup
 import mako.exceptions
 import json
 import datetime
@@ -6,8 +7,8 @@ import datetime
 
 def pretty_name(inst):
     pieces = inst['instance_type'].split('.')
-    family = pieces[0]
-    short  = pieces[1]
+    family = pieces[-2]
+    short  = pieces[-1]
     family_names = {
         'r3': 'R3 High-Memory',
         'c3': 'C3 High-CPU',
@@ -60,7 +61,7 @@ def network_sort(inst):
     except ValueError:
         sort = len(network_rank)
     sort *= 2
-    if inst['ebs_optimized']:
+    if 'ebs_optimized' in inst and inst['ebs_optimized']:
         sort += 1
     return sort
 
@@ -91,7 +92,8 @@ def add_render_info(i):
 
 def render(data_file, template_file, destination_file):
     """Build the HTML content from scraped data"""
-    template = mako.template.Template(filename=template_file)
+    lookup = mako.lookup.TemplateLookup(directories=['.'])
+    template = mako.template.Template(filename=template_file, lookup=lookup)
     print "Loading data from %s..." % data_file
     with open(data_file) as f:
         instances = json.load(f)
