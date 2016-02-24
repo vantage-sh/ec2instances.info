@@ -410,7 +410,9 @@
       "x86_64"
     ],
     "vpc_only": false,
-    "linux_virtualization_types": [],
+    "linux_virtualization_types": [
+      "PV"
+    ],
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -833,7 +835,9 @@
       "x86_64"
     ],
     "vpc_only": false,
-    "linux_virtualization_types": [],
+    "linux_virtualization_types": [
+      "PV"
+    ],
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -1255,7 +1259,9 @@
       "x86_64"
     ],
     "vpc_only": false,
-    "linux_virtualization_types": [],
+    "linux_virtualization_types": [
+      "PV"
+    ],
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -1677,7 +1683,9 @@
       "x86_64"
     ],
     "vpc_only": false,
-    "linux_virtualization_types": [],
+    "linux_virtualization_types": [
+      "PV"
+    ],
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -2037,7 +2045,9 @@
       "x86_64"
     ],
     "vpc_only": false,
-    "linux_virtualization_types": [],
+    "linux_virtualization_types": [
+      "PV"
+    ],
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -2459,7 +2469,9 @@
       "x86_64"
     ],
     "vpc_only": false,
-    "linux_virtualization_types": [],
+    "linux_virtualization_types": [
+      "PV"
+    ],
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -3361,7 +3373,9 @@
       "x86_64"
     ],
     "vpc_only": false,
-    "linux_virtualization_types": [],
+    "linux_virtualization_types": [
+      "PV"
+    ],
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -3783,7 +3797,9 @@
       "x86_64"
     ],
     "vpc_only": false,
-    "linux_virtualization_types": [],
+    "linux_virtualization_types": [
+      "PV"
+    ],
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -4205,7 +4221,9 @@
       "x86_64"
     ],
     "vpc_only": false,
-    "linux_virtualization_types": [],
+    "linux_virtualization_types": [
+      "PV"
+    ],
     "ebs_optimized": true,
     "storage": {
       "ssd": false,
@@ -5495,7 +5513,9 @@
       "x86_64"
     ],
     "vpc_only": false,
-    "linux_virtualization_types": [],
+    "linux_virtualization_types": [
+      "PV"
+    ],
     "ebs_optimized": false,
     "storage": null,
     "instance_type": "t1.micro",
