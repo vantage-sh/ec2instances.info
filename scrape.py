@@ -378,6 +378,18 @@ def add_linux_ami_info(instances):
             if i_family_id == family_id:
                 i.linux_virtualization_types = supported_types
 
+    # http://aws.amazon.com/amazon-linux-ami/instance-type-matrix/ page is
+    # missing info about both older (t1, m1, c1, m2) and newer exotic (cg1,
+    # cr1, hi1, hs1, cc2) instance type generations.
+
+    # Adding "manual" info about older generations
+    for i in instances:
+        i_family_id = i.instance_type.split('.')[0]
+        if i_family_id in ('t1', 'm1', 'm2', 'c1'):
+            if not 'PV' in i.linux_virtualization_types:
+                i.linux_virtualization_types.append('PV')
+
+
 
 def scrape(data_file):
     """Scrape AWS to get instance data"""
