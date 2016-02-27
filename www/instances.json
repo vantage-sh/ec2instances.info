@@ -7,6 +7,7 @@
     "ebs_iops": 0,
     "network_performance": "Low",
     "ebs_throughput": 0,
+    "pretty_name": "M1 General Purpose Small",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -432,6 +433,7 @@
     "ebs_iops": 0,
     "network_performance": "Moderate",
     "ebs_throughput": 0,
+    "pretty_name": "M1 General Purpose Medium",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -857,6 +859,7 @@
     "ebs_iops": 4000,
     "network_performance": "Moderate",
     "ebs_throughput": 500,
+    "pretty_name": "M1 General Purpose Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -1281,6 +1284,7 @@
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
+    "pretty_name": "M1 General Purpose Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -1705,6 +1709,7 @@
     "ebs_iops": 0,
     "network_performance": "Moderate",
     "ebs_throughput": 0,
+    "pretty_name": "C1 High-CPU Medium",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -2067,6 +2072,7 @@
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
+    "pretty_name": "C1 High-CPU Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -2491,6 +2497,7 @@
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
+    "pretty_name": "Cluster Compute Eight Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -2801,6 +2808,7 @@
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
+    "pretty_name": "Cluster GPU Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -2971,6 +2979,7 @@
     "ebs_iops": 0,
     "network_performance": "Moderate",
     "ebs_throughput": 0,
+    "pretty_name": "M2 High Memory Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -3395,6 +3404,7 @@
     "ebs_iops": 4000,
     "network_performance": "Moderate",
     "ebs_throughput": 500,
+    "pretty_name": "M2 High Memory Double Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -3819,6 +3829,7 @@
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
+    "pretty_name": "M2 High Memory Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -4243,6 +4254,7 @@
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
+    "pretty_name": "High Memory Cluster Eight Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -4525,6 +4537,7 @@
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
+    "pretty_name": "HI1. High I/O Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -4807,6 +4820,7 @@
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
+    "pretty_name": "High Storage Eight Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -5173,6 +5187,7 @@
     "ebs_iops": 0,
     "network_performance": "Very Low",
     "ebs_throughput": 0,
+    "pretty_name": "T1 Micro",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -5531,6 +5546,7 @@
     "ebs_iops": 0,
     "network_performance": "Low",
     "ebs_throughput": 0,
+    "pretty_name": "T2 Nano",
     "pricing": {
       "us-east-1": {
         "mswin": {
@@ -5738,7 +5754,7 @@
     "arch": [
       "x86_64"
     ],
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -5757,6 +5773,7 @@
     "ebs_iops": 0,
     "network_performance": "Low to Moderate",
     "ebs_throughput": 0,
+    "pretty_name": "T2 Micro",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -6119,7 +6136,7 @@
       "x86_64",
       "i386"
     ],
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -6138,6 +6155,7 @@
     "ebs_iops": 0,
     "network_performance": "Low to Moderate",
     "ebs_throughput": 0,
+    "pretty_name": "T2 Small",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -6500,7 +6518,7 @@
       "x86_64",
       "i386"
     ],
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -6519,6 +6537,7 @@
     "ebs_iops": 0,
     "network_performance": "Low to Moderate",
     "ebs_throughput": 0,
+    "pretty_name": "T2 Medium",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -6880,7 +6899,7 @@
     "arch": [
       "x86_64"
     ],
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -6899,6 +6918,7 @@
     "ebs_iops": 0,
     "network_performance": "Low to Moderate",
     "ebs_throughput": 0,
+    "pretty_name": "T2 Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -7260,7 +7280,7 @@
     "arch": [
       "x86_64"
     ],
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -7279,6 +7299,7 @@
     "ebs_iops": 3600,
     "network_performance": "Moderate",
     "ebs_throughput": 450,
+    "pretty_name": "M4 Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -7666,7 +7687,7 @@
     "arch": [
       "x86_64"
     ],
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -7685,6 +7706,7 @@
     "ebs_iops": 6000,
     "network_performance": "High",
     "ebs_throughput": 750,
+    "pretty_name": "M4 Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -8072,7 +8094,7 @@
     "arch": [
       "x86_64"
     ],
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -8091,6 +8113,7 @@
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
+    "pretty_name": "M4 Double Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -8478,7 +8501,7 @@
     "arch": [
       "x86_64"
     ],
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -8497,6 +8520,7 @@
     "ebs_iops": 16000,
     "network_performance": "High",
     "ebs_throughput": 2000,
+    "pretty_name": "M4 Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -8884,7 +8908,7 @@
     "arch": [
       "x86_64"
     ],
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -8903,6 +8927,7 @@
     "ebs_iops": 32000,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 4000,
+    "pretty_name": "M4 Deca Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -9290,7 +9315,7 @@
     "arch": [
       "x86_64"
     ],
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -9309,6 +9334,7 @@
     "ebs_iops": 0,
     "network_performance": "Moderate",
     "ebs_throughput": 0,
+    "pretty_name": "M3 General Purpose Medium",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -9742,6 +9768,7 @@
     "ebs_iops": 0,
     "network_performance": "Moderate",
     "ebs_throughput": 0,
+    "pretty_name": "M3 General Purpose Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -10195,6 +10222,7 @@
     "ebs_iops": 4000,
     "network_performance": "High",
     "ebs_throughput": 500,
+    "pretty_name": "M3 General Purpose Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -10648,6 +10676,7 @@
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
+    "pretty_name": "M3 General Purpose Double Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -11101,6 +11130,7 @@
     "ebs_iops": 4000,
     "network_performance": "Moderate",
     "ebs_throughput": 500,
+    "pretty_name": "C4 High-CPU Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -11488,7 +11518,7 @@
     "arch": [
       "x86_64"
     ],
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -11507,6 +11537,7 @@
     "ebs_iops": 6000,
     "network_performance": "High",
     "ebs_throughput": 750,
+    "pretty_name": "C4 High-CPU Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -11894,7 +11925,7 @@
     "arch": [
       "x86_64"
     ],
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -11913,6 +11944,7 @@
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
+    "pretty_name": "C4 High-CPU Double Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -12300,7 +12332,7 @@
     "arch": [
       "x86_64"
     ],
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -12319,6 +12351,7 @@
     "ebs_iops": 16000,
     "network_performance": "High",
     "ebs_throughput": 2000,
+    "pretty_name": "C4 High-CPU Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -12706,7 +12739,7 @@
     "arch": [
       "x86_64"
     ],
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -12725,6 +12758,7 @@
     "ebs_iops": 32000,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 4000,
+    "pretty_name": "C4 High-CPU Eight Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -13112,7 +13146,7 @@
     "arch": [
       "x86_64"
     ],
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
     ],
@@ -13131,6 +13165,7 @@
     "ebs_iops": 0,
     "network_performance": "Moderate",
     "ebs_throughput": 0,
+    "pretty_name": "C3 High-CPU Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -13554,6 +13589,7 @@
     "ebs_iops": 4000,
     "network_performance": "Moderate",
     "ebs_throughput": 500,
+    "pretty_name": "C3 High-CPU Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -14007,6 +14043,7 @@
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
+    "pretty_name": "C3 High-CPU Double Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -14460,6 +14497,7 @@
     "ebs_iops": 16000,
     "network_performance": "High",
     "ebs_throughput": 2000,
+    "pretty_name": "C3 High-CPU Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -14913,6 +14951,7 @@
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
+    "pretty_name": "C3 High-CPU Eight Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -15366,6 +15405,7 @@
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
+    "pretty_name": "G2 Double Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -15714,6 +15754,7 @@
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
+    "pretty_name": "G2 Eight Extra Large",
     "pricing": {
       "us-east-1": {
         "mswin": {
@@ -15922,6 +15963,7 @@
     "ebs_iops": 0,
     "network_performance": "Moderate",
     "ebs_throughput": 0,
+    "pretty_name": "R3 High-Memory Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -16374,6 +16416,7 @@
     "ebs_iops": 4000,
     "network_performance": "Moderate",
     "ebs_throughput": 500,
+    "pretty_name": "R3 High-Memory Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -16826,6 +16869,7 @@
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
+    "pretty_name": "R3 High-Memory Double Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -17278,6 +17322,7 @@
     "ebs_iops": 16000,
     "network_performance": "High",
     "ebs_throughput": 2000,
+    "pretty_name": "R3 High-Memory Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -17772,6 +17817,7 @@
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
+    "pretty_name": "R3 High-Memory Eight Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -18266,6 +18312,7 @@
     "ebs_iops": 4000,
     "network_performance": "Moderate",
     "ebs_throughput": 500,
+    "pretty_name": "I2 Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -18718,6 +18765,7 @@
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
+    "pretty_name": "I2 Double Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -19170,6 +19218,7 @@
     "ebs_iops": 16000,
     "network_performance": "High",
     "ebs_throughput": 2000,
+    "pretty_name": "I2 Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -19622,6 +19671,7 @@
     "ebs_iops": 0,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 0,
+    "pretty_name": "I2 Eight Extra Large",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
@@ -20074,6 +20124,7 @@
     "ebs_iops": 6000,
     "network_performance": "Moderate",
     "ebs_throughput": 750,
+    "pretty_name": "D2 Extra Large",
     "pricing": {
       "us-east-1": {
         "mswin": {
@@ -20304,6 +20355,7 @@
     "ebs_iops": 8000,
     "network_performance": "High",
     "ebs_throughput": 1000,
+    "pretty_name": "D2 Double Extra Large",
     "pricing": {
       "us-east-1": {
         "mswin": {
@@ -20534,6 +20586,7 @@
     "ebs_iops": 16000,
     "network_performance": "High",
     "ebs_throughput": 2000,
+    "pretty_name": "D2 Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
         "mswin": {
@@ -20764,6 +20817,7 @@
     "ebs_iops": 32000,
     "network_performance": "10 Gigabit",
     "ebs_throughput": 4000,
+    "pretty_name": "D2 Eight Extra Large",
     "pricing": {
       "us-east-1": {
         "mswin": {
