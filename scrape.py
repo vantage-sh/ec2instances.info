@@ -16,10 +16,12 @@ class Instance(object):
         self.ebs_max_bandwidth = 0
         # self.hvm_only = False
         self.vpc_only = False
+        self.pretty_name = ''
 
     def to_dict(self):
         d = dict(family=self.family,
                  instance_type=self.instance_type,
+                 pretty_name=self.pretty_name,
                  arch=self.arch,
                  vCPU=self.vCPU,
                  ECU=self.ECU,
@@ -390,6 +392,57 @@ def add_linux_ami_info(instances):
                 i.linux_virtualization_types.append('PV')
 
 
+def add_vpconly_detail(instances):
+    # specific instances can be lanuched in VPC only
+    # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types
+    vpc_only_families = ('c4', 'm4', 't2')
+    for i in instances:
+        for family in vpc_only_families:
+            if i.instance_type.startswith(family):
+                i.vpc_only = True
+
+
+def add_pretty_names(instances):
+    family_names = {
+        'r3': 'R3 High-Memory',
+        'c3': 'C3 High-CPU',
+        'c4': 'C4 High-CPU',
+        'm3': 'M3 General Purpose',
+        'i3': 'I3 High I/O',
+        'cg1': 'Cluster GPU',
+        'cc2': 'Cluster Compute',
+        'cr1': 'High Memory Cluster',
+        'hs1': 'High Storage',
+        'c1' : 'C1 High-CPU',
+        'hi1': 'HI1. High I/O',
+        'm2' : 'M2 High Memory',
+        'm1' : 'M1 General Purpose'
+        }
+    for i in instances:
+        pieces = i.instance_type.split('.')
+        family = pieces[0]
+        short  = pieces[1]
+        prefix = family_names.get(family, family.upper())
+        extra = None
+        if short.startswith('8x'):
+            extra = 'Eight'
+        elif short.startswith('4x'):
+            extra = 'Quadruple'
+        elif short.startswith('2x'):
+            extra = 'Double'
+        elif short.startswith('10x'):
+            extra = 'Deca'
+        elif short.startswith('x'):
+            extra = ''
+        bits = [prefix]
+        if extra is not None:
+            bits.extend([extra, 'Extra'])
+            short = 'Large'
+
+        bits.append(short.capitalize())
+
+        i.pretty_name = ' '.join([b for b in bits if b])
+
 
 def scrape(data_file):
     """Scrape AWS to get instance data"""
@@ -403,6 +456,10 @@ def scrape(data_file):
     add_ebs_info(all_instances)
     print "Parsing Linux AMI info..."
     add_linux_ami_info(all_instances)
+    print "Adding additional details..."
+    add_vpconly_detail(all_instances)
+    add_pretty_names(all_instances)
+
     with open(data_file, 'w') as f:
         json.dump([i.to_dict() for i in all_instances],
                   f,
