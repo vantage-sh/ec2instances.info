@@ -20,8 +20,9 @@ Make sure you have LibXML and Python development files.  On Ubuntu, run `sudo ap
 4. `source env/bin/activate`
 5. `pip install -r requirements.txt`
 6. `fab build`
-7. `fab preview`
-8. `deactivate` (to exit virtualenv)
+7. `fab serve`
+8. Browse to http://localhost:8080
+9. `deactivate` (to exit virtualenv)
 
 
 ### Requirements

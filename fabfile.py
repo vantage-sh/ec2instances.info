@@ -3,8 +3,9 @@
 #   AWS_SECRET_ACCESS_KEY
 # as explained in: http://boto.s3.amazonaws.com/s3_tut.html
 
+import SimpleHTTPServer
+import SocketServer
 import os
-import webbrowser
 import traceback
 
 from boto import connect_s3
@@ -12,9 +13,10 @@ from boto.s3.connection import OrdinaryCallingFormat
 from boto.s3.key import Key
 from fabric.api import abort, task
 from fabric.contrib.console import confirm
+
+from rds import scrape as rds_scrape
 from render import render
 from scrape import scrape
-from rds import scrape as rds_scrape
 
 BUCKET_NAME = 'www.ec2instances.info'
 
@@ -57,16 +59,20 @@ def scrape_rds():
 
 
 @task
+def serve(port=8080):
+    """Serve site contents locally for development"""
+    port = int(port)
+    os.chdir("www/")
+    httpd = SocketServer.TCPServer(("", port), SimpleHTTPServer.SimpleHTTPRequestHandler)
+    print "Serving on port {}...".format(port)
+    httpd.serve_forever()
+
+
+@task
 def render_html():
     """Render HTML but do not update data from Amazon"""
     render('www/instances.json', 'in/index.html.mako', 'www/index.html')
     render('www/rds/instances.json', 'in/rds.html.mako', 'www/rds/index.html')
-
-
-@task
-def preview():
-    url = 'file://%s' % (abspath('www/index.html'))
-    webbrowser.open(url, new=2)
 
 
 @task
