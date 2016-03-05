@@ -385,6 +385,7 @@ def add_linux_ami_info(instances):
     # cr1, hi1, hs1, cc2) instance type generations.
 
     # Adding "manual" info about older generations
+    # Some background info at https://github.com/powdahound/ec2instances.info/pull/161
     for i in instances:
         i_family_id = i.instance_type.split('.')[0]
         if i_family_id in ('cc2', 'cg1', 'hi1', 'hs1'):
