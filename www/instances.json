@@ -2788,7 +2788,9 @@
       "x86_64"
     ],
     "vpc_only": false,
-    "linux_virtualization_types": [],
+    "linux_virtualization_types": [
+      "HVM"
+    ],
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -2959,7 +2961,9 @@
       "x86_64"
     ],
     "vpc_only": false,
-    "linux_virtualization_types": [],
+    "linux_virtualization_types": [
+      "HVM"
+    ],
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
@@ -4800,7 +4804,10 @@
       "x86_64"
     ],
     "vpc_only": false,
-    "linux_virtualization_types": [],
+    "linux_virtualization_types": [
+      "HVM",
+      "PV"
+    ],
     "ebs_optimized": false,
     "storage": {
       "ssd": true,
@@ -5167,7 +5174,10 @@
       "x86_64"
     ],
     "vpc_only": false,
-    "linux_virtualization_types": [],
+    "linux_virtualization_types": [
+      "HVM",
+      "PV"
+    ],
     "ebs_optimized": false,
     "storage": {
       "ssd": false,
