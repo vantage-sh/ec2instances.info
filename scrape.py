@@ -387,7 +387,10 @@ def add_linux_ami_info(instances):
     # Adding "manual" info about older generations
     for i in instances:
         i_family_id = i.instance_type.split('.')[0]
-        if i_family_id in ('t1', 'm1', 'm2', 'c1'):
+        if i_family_id in ('cc2', 'cg1', 'hi1', 'hs1'):
+            if not 'HVM' in i.linux_virtualization_types:
+                i.linux_virtualization_types.append('HVM')
+        if i_family_id in ('t1', 'm1', 'm2', 'c1', 'hi1', 'hs1'):
             if not 'PV' in i.linux_virtualization_types:
                 i.linux_virtualization_types.append('PV')
 
