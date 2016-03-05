@@ -19,18 +19,11 @@
 
       <%block name="header"/>
 
+      <p class="pull-right label label-info">Last Update: ${generated_at}</p>
       <ul class="nav nav-tabs">
-% if self.attr.active_ == 'ec2':
-        <li role="presentation" class="active"><a href="/">EC2</a></li>
-        <li role="presentation"><a href="/rds/">RDS</a></li>
-% endif
-% if self.attr.active_ == 'rds':
-        <li role="presentation"><a href="/">EC2</a></li>
-        <li role="presentation" class="active"><a href="/rds/">RDS</a></li>
-% endif
-        <li class="pull-right label label-info">Last Update: ${generated_at}</li>
+        <li role="presentation" class="${'active' if self.attr.active_ == 'ec2' else ''}"><a href="/">EC2</a></li>
+        <li role="presentation" class="${'active' if self.attr.active_ == 'rds' else ''}"><a href="/rds/">RDS</a></li>
       </ul>
-
     </div>
 
     <div class="clear-fix"></div>
