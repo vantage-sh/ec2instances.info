@@ -4,6 +4,7 @@ body {
 
 .ec2instances .page-header {
   margin-top: 0;
+  border-bottom: 0;
 }
 
 .dataTables_filter {

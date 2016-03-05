@@ -14,6 +14,7 @@ from fabric.api import abort, task
 from fabric.contrib.console import confirm
 from render import render
 from scrape import scrape
+from rds import scrape as rds_scrape
 
 BUCKET_NAME = 'www.ec2instances.info'
 
@@ -28,19 +29,38 @@ abspath = lambda filename: os.path.join(os.path.abspath(os.path.dirname(__file__
 @task
 def build():
     """Scrape AWS sources for data and build the site"""
-    data_file = 'www/instances.json'
-    try:
-        scrape(data_file)
-    except Exception as e:
-        print "ERROR: Unable to scrape site data: %s" % e
-        print traceback.print_exc()
+    scrape_ec2()
+    scrape_rds()
     render_html()
+
+
+@task
+def scrape_ec2():
+    """Scrape EC2 data from AWS and save to local file"""
+    ec2_file = 'www/instances.json'
+    try:
+        scrape(ec2_file)
+    except Exception as e:
+        print "ERROR: Unable to scrape data: %s" % e
+        print traceback.print_exc()
+
+
+@task
+def scrape_rds():
+    """Scrape RDS data from AWS and save to local file"""
+    rds_file = 'www/rds/instances.json'
+    try:
+        rds_scrape(rds_file)
+    except Exception as e:
+        print "ERROR: Unable to scrape RDS data: %s" % e
+        print traceback.print_exc()
 
 
 @task
 def render_html():
     """Render HTML but do not update data from Amazon"""
     render('www/instances.json', 'in/index.html.mako', 'www/index.html')
+    render('www/rds/instances.json', 'in/rds.html.mako', 'www/rds/index.html')
 
 
 @task

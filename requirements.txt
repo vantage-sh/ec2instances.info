@@ -3,3 +3,4 @@ boto
 mako
 lxml
 paramiko
+requests==2.9.1
