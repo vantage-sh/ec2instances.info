@@ -135,6 +135,20 @@
           "ondemand": "0.058"
         }
       },
+      "ap-northeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "ap-southeast-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -559,6 +573,20 @@
             "yrTerm3.partialUpfront": "0.0423"
           },
           "ondemand": "0.117"
+        }
+      },
+      "ap-northeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
         }
       },
       "ap-southeast-1": {
@@ -987,6 +1015,20 @@
           "ondemand": "0.233"
         }
       },
+      "ap-northeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "ap-southeast-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -1412,6 +1454,20 @@
           "ondemand": "0.467"
         }
       },
+      "ap-northeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "ap-southeast-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -1816,6 +1872,20 @@
           "ondemand": "0.179"
         }
       },
+      "ap-northeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "ap-southeast-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -2198,6 +2268,20 @@
             "yrTerm3.partialUpfront": "0.3246"
           },
           "ondemand": "0.718"
+        }
+      },
+      "ap-northeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
         }
       },
       "ap-southeast-1": {
@@ -2597,6 +2681,20 @@
           "ondemand": "N/A"
         }
       },
+      "ap-northeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "ap-southeast-1": {
         "mswinSQLWeb": {
           "ondemand": "N/A"
@@ -2841,6 +2939,20 @@
         }
       },
       "sa-east-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "ap-northeast-2": {
         "mswinSQLWeb": {
           "ondemand": "N/A"
         },
@@ -3109,6 +3221,20 @@
             "yrTerm3.partialUpfront": "0.082"
           },
           "ondemand": "0.323"
+        }
+      },
+      "ap-northeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
         }
       },
       "ap-southeast-1": {
@@ -3536,6 +3662,20 @@
           "ondemand": "0.645"
         }
       },
+      "ap-northeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "ap-southeast-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -3961,6 +4101,20 @@
           "ondemand": "1.291"
         }
       },
+      "ap-northeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "ap-southeast-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -4358,6 +4512,20 @@
           "ondemand": "N/A"
         }
       },
+      "ap-northeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "ap-southeast-1": {
         "mswinSQLWeb": {
           "ondemand": "N/A"
@@ -4628,6 +4796,20 @@
         }
       },
       "sa-east-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "ap-northeast-2": {
         "mswinSQLWeb": {
           "ondemand": "N/A"
         },
@@ -4914,6 +5096,20 @@
         }
       },
       "sa-east-1": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
+      "ap-northeast-2": {
         "mswinSQLWeb": {
           "ondemand": "N/A"
         },
@@ -5304,6 +5500,20 @@
           "ondemand": "0.027"
         }
       },
+      "ap-northeast-2": {
+        "mswinSQLWeb": {
+          "ondemand": "N/A"
+        },
+        "mswinSQL": {
+          "ondemand": "N/A"
+        },
+        "mswin": {
+          "ondemand": "N/A"
+        },
+        "linux": {
+          "ondemand": "N/A"
+        }
+      },
       "ap-southeast-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -5624,6 +5834,28 @@
           "ondemand": "0.0135"
         }
       },
+      "ap-northeast-2": {
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0109",
+            "yrTerm3.allUpfront": "0.007",
+            "yrTerm1.allUpfront": "0.0095",
+            "yrTerm1.partialUpfront": "0.0097",
+            "yrTerm3.partialUpfront": "0.0073"
+          },
+          "ondemand": "0.012"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0086",
+            "yrTerm3.allUpfront": "0.0047",
+            "yrTerm1.allUpfront": "0.0072",
+            "yrTerm1.partialUpfront": "0.0074",
+            "yrTerm3.partialUpfront": "0.005"
+          },
+          "ondemand": "0.01"
+        }
+      },
       "ap-southeast-1": {
         "mswin": {
           "reserved": {
@@ -5646,26 +5878,26 @@
           "ondemand": "0.01"
         }
       },
-      "ap-northeast-2": {
+      "ap-southeast-2": {
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.0109",
-            "yrTerm3.allUpfront": "0.0070",
-            "yrTerm1.allUpfront": "0.0095",
-            "yrTerm1.partialUpfront": "0.0097",
-            "yrTerm3.partialUpfront": "0.0073"
+            "yrTerm1.noUpfront": "0.0103",
+            "yrTerm3.allUpfront": "0.0078",
+            "yrTerm1.allUpfront": "0.0097",
+            "yrTerm1.partialUpfront": "0.0099",
+            "yrTerm3.partialUpfront": "0.0082"
           },
-          "ondemand": "0.012"
+          "ondemand": "0.0123"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.0086",
-            "yrTerm3.allUpfront": "0.0047",
-            "yrTerm1.allUpfront": "0.0072",
-            "yrTerm1.partialUpfront": "0.0074",
-            "yrTerm3.partialUpfront": "0.0050"
+            "yrTerm1.noUpfront": "0.008",
+            "yrTerm3.allUpfront": "0.0055",
+            "yrTerm1.allUpfront": "0.0073",
+            "yrTerm1.partialUpfront": "0.0076",
+            "yrTerm3.partialUpfront": "0.0059"
           },
-          "ondemand": "0.010"
+          "ondemand": "0.01"
         }
       },
       "us-west-2": {
@@ -5732,6 +5964,28 @@
             "yrTerm3.partialUpfront": "0.0042"
           },
           "ondemand": "0.0085"
+        }
+      },
+      "eu-central-1": {
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0078",
+            "yrTerm3.allUpfront": "0.0057",
+            "yrTerm1.allUpfront": "0.0074",
+            "yrTerm1.partialUpfront": "0.0075",
+            "yrTerm3.partialUpfront": "0.0059"
+          },
+          "ondemand": "0.0098"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "0.0055",
+            "yrTerm3.allUpfront": "0.0034",
+            "yrTerm1.allUpfront": "0.005",
+            "yrTerm1.partialUpfront": "0.0052",
+            "yrTerm3.partialUpfront": "0.0036"
+          },
+          "ondemand": "0.0075"
         }
       },
       "eu-west-1": {
@@ -5888,15 +6142,15 @@
             "yrTerm3.allUpfront": "0.0644",
             "yrTerm1.allUpfront": "0.0694",
             "yrTerm1.partialUpfront": "0.0697",
-            "yrTerm3.partialUpfront": "0.0650"
+            "yrTerm3.partialUpfront": "0.065"
           },
           "ondemand": "0.075"
         },
         "mswin": {
           "reserved": {
             "yrTerm1.noUpfront": "0.0218",
-            "yrTerm3.allUpfront": "0.0140",
-            "yrTerm1.allUpfront": "0.0190",
+            "yrTerm3.allUpfront": "0.014",
+            "yrTerm1.allUpfront": "0.019",
             "yrTerm1.partialUpfront": "0.0193",
             "yrTerm3.partialUpfront": "0.0146"
           },
@@ -5908,9 +6162,9 @@
             "yrTerm3.allUpfront": "0.0094",
             "yrTerm1.allUpfront": "0.0144",
             "yrTerm1.partialUpfront": "0.0147",
-            "yrTerm3.partialUpfront": "0.0100"
+            "yrTerm3.partialUpfront": "0.01"
           },
-          "ondemand": "0.020"
+          "ondemand": "0.02"
         }
       },
       "ap-southeast-1": {
@@ -6270,15 +6524,15 @@
             "yrTerm3.allUpfront": "0.1288",
             "yrTerm1.allUpfront": "0.1388",
             "yrTerm1.partialUpfront": "0.1394",
-            "yrTerm3.partialUpfront": "0.1300"
+            "yrTerm3.partialUpfront": "0.13"
           },
-          "ondemand": "0.150"
+          "ondemand": "0.15"
         },
         "mswin": {
           "reserved": {
             "yrTerm1.noUpfront": "0.0436",
-            "yrTerm3.allUpfront": "0.0280",
-            "yrTerm1.allUpfront": "0.0380",
+            "yrTerm3.allUpfront": "0.028",
+            "yrTerm1.allUpfront": "0.038",
             "yrTerm1.partialUpfront": "0.0386",
             "yrTerm3.partialUpfront": "0.0292"
           },
@@ -6290,9 +6544,9 @@
             "yrTerm3.allUpfront": "0.0188",
             "yrTerm1.allUpfront": "0.0288",
             "yrTerm1.partialUpfront": "0.0294",
-            "yrTerm3.partialUpfront": "0.0200"
+            "yrTerm3.partialUpfront": "0.02"
           },
-          "ondemand": "0.040"
+          "ondemand": "0.04"
         }
       },
       "ap-southeast-1": {
@@ -6652,15 +6906,15 @@
             "yrTerm3.allUpfront": "0.3676",
             "yrTerm1.allUpfront": "0.3876",
             "yrTerm1.partialUpfront": "0.3888",
-            "yrTerm3.partialUpfront": "0.3700"
+            "yrTerm3.partialUpfront": "0.37"
           },
-          "ondemand": "0.410"
+          "ondemand": "0.41"
         },
         "mswin": {
           "reserved": {
             "yrTerm1.noUpfront": "0.0872",
-            "yrTerm3.allUpfront": "0.0560",
-            "yrTerm1.allUpfront": "0.0760",
+            "yrTerm3.allUpfront": "0.056",
+            "yrTerm1.allUpfront": "0.076",
             "yrTerm1.partialUpfront": "0.0772",
             "yrTerm3.partialUpfront": "0.0584"
           },
@@ -6672,9 +6926,9 @@
             "yrTerm3.allUpfront": "0.0376",
             "yrTerm1.allUpfront": "0.0576",
             "yrTerm1.partialUpfront": "0.0588",
-            "yrTerm3.partialUpfront": "0.0400"
+            "yrTerm3.partialUpfront": "0.04"
           },
-          "ondemand": "0.080"
+          "ondemand": "0.08"
         }
       },
       "ap-southeast-1": {
@@ -7035,7 +7289,7 @@
             "yrTerm1.partialUpfront": "0.6676",
             "yrTerm3.partialUpfront": "0.6301"
           },
-          "ondemand": "0.710"
+          "ondemand": "0.71"
         },
         "mswin": {
           "reserved": {
@@ -7055,7 +7309,7 @@
             "yrTerm1.partialUpfront": "0.1176",
             "yrTerm3.partialUpfront": "0.0801"
           },
-          "ondemand": "0.160"
+          "ondemand": "0.16"
         }
       },
       "ap-southeast-1": {
@@ -8248,7 +8502,7 @@
             "yrTerm1.partialUpfront": "0.3534",
             "yrTerm3.partialUpfront": "0.2565"
           },
-          "ondemand": "0.660"
+          "ondemand": "0.66"
         }
       },
       "ap-southeast-1": {
@@ -8623,7 +8877,7 @@
             "yrTerm3.allUpfront": "1.5102",
             "yrTerm1.allUpfront": "1.7216",
             "yrTerm1.partialUpfront": "1.7358",
-            "yrTerm3.partialUpfront": "1.5410"
+            "yrTerm3.partialUpfront": "1.541"
           },
           "ondemand": "2.349"
         },
@@ -8633,7 +8887,7 @@
             "yrTerm3.allUpfront": "4.0502",
             "yrTerm1.allUpfront": "4.2616",
             "yrTerm1.partialUpfront": "4.2758",
-            "yrTerm3.partialUpfront": "4.0810"
+            "yrTerm3.partialUpfront": "4.081"
           },
           "ondemand": "4.889"
         },
@@ -8643,7 +8897,7 @@
             "yrTerm3.allUpfront": "1.2182",
             "yrTerm1.allUpfront": "1.4296",
             "yrTerm1.partialUpfront": "1.4438",
-            "yrTerm3.partialUpfront": "1.2490"
+            "yrTerm3.partialUpfront": "1.249"
           },
           "ondemand": "2.057"
         },
@@ -8653,7 +8907,7 @@
             "yrTerm3.allUpfront": "0.4822",
             "yrTerm1.allUpfront": "0.6936",
             "yrTerm1.partialUpfront": "0.7078",
-            "yrTerm3.partialUpfront": "0.5130"
+            "yrTerm3.partialUpfront": "0.513"
           },
           "ondemand": "1.321"
         }
@@ -11232,7 +11486,7 @@
             "yrTerm1.noUpfront": "0.2638",
             "yrTerm3.allUpfront": "0.2265",
             "yrTerm1.allUpfront": "0.2484",
-            "yrTerm1.partialUpfront": "0.2500",
+            "yrTerm1.partialUpfront": "0.25",
             "yrTerm3.partialUpfront": "0.2302"
           },
           "ondemand": "0.289"
@@ -11242,7 +11496,7 @@
             "yrTerm1.noUpfront": "0.9238",
             "yrTerm3.allUpfront": "0.8865",
             "yrTerm1.allUpfront": "0.9084",
-            "yrTerm1.partialUpfront": "0.9100",
+            "yrTerm1.partialUpfront": "0.91",
             "yrTerm3.partialUpfront": "0.8902"
           },
           "ondemand": "0.949"
@@ -11252,7 +11506,7 @@
             "yrTerm1.noUpfront": "0.1868",
             "yrTerm3.allUpfront": "0.1495",
             "yrTerm1.allUpfront": "0.1714",
-            "yrTerm1.partialUpfront": "0.1730",
+            "yrTerm1.partialUpfront": "0.173",
             "yrTerm3.partialUpfront": "0.1532"
           },
           "ondemand": "0.212"
@@ -11262,10 +11516,10 @@
             "yrTerm1.noUpfront": "0.0948",
             "yrTerm3.allUpfront": "0.0575",
             "yrTerm1.allUpfront": "0.0794",
-            "yrTerm1.partialUpfront": "0.0810",
+            "yrTerm1.partialUpfront": "0.081",
             "yrTerm3.partialUpfront": "0.0612"
           },
-          "ondemand": "0.120"
+          "ondemand": "0.12"
         }
       },
       "ap-southeast-1": {
@@ -12893,7 +13147,7 @@
             "yrTerm1.partialUpfront": "1.3059",
             "yrTerm3.partialUpfront": "0.9792"
           },
-          "ondemand": "1.910"
+          "ondemand": "1.91"
         }
       },
       "ap-southeast-1": {
@@ -16065,8 +16319,8 @@
             "yrTerm1.noUpfront": "0.3211",
             "yrTerm3.allUpfront": "0.2536",
             "yrTerm1.allUpfront": "0.2964",
-            "yrTerm1.partialUpfront": "0.2990",
-            "yrTerm3.partialUpfront": "0.2590"
+            "yrTerm1.partialUpfront": "0.299",
+            "yrTerm3.partialUpfront": "0.259"
           },
           "ondemand": "0.369"
         },
@@ -16075,8 +16329,8 @@
             "yrTerm1.noUpfront": "0.9811",
             "yrTerm3.allUpfront": "0.9136",
             "yrTerm1.allUpfront": "0.9564",
-            "yrTerm1.partialUpfront": "0.9590",
-            "yrTerm3.partialUpfront": "0.9190"
+            "yrTerm1.partialUpfront": "0.959",
+            "yrTerm3.partialUpfront": "0.919"
           },
           "ondemand": "1.029"
         },
@@ -16085,8 +16339,8 @@
             "yrTerm1.noUpfront": "0.2441",
             "yrTerm3.allUpfront": "0.1766",
             "yrTerm1.allUpfront": "0.2194",
-            "yrTerm1.partialUpfront": "0.2220",
-            "yrTerm3.partialUpfront": "0.1820"
+            "yrTerm1.partialUpfront": "0.222",
+            "yrTerm3.partialUpfront": "0.182"
           },
           "ondemand": "0.292"
         },
@@ -16095,10 +16349,10 @@
             "yrTerm1.noUpfront": "0.1521",
             "yrTerm3.allUpfront": "0.0846",
             "yrTerm1.allUpfront": "0.1274",
-            "yrTerm1.partialUpfront": "0.1300",
-            "yrTerm3.partialUpfront": "0.0900"
+            "yrTerm1.partialUpfront": "0.13",
+            "yrTerm3.partialUpfront": "0.09"
           },
-          "ondemand": "0.200"
+          "ondemand": "0.2"
         }
       },
       "ap-southeast-1": {
@@ -16518,8 +16772,8 @@
             "yrTerm1.noUpfront": "0.5612",
             "yrTerm3.allUpfront": "0.4243",
             "yrTerm1.allUpfront": "0.5118",
-            "yrTerm1.partialUpfront": "0.5170",
-            "yrTerm3.partialUpfront": "0.4350"
+            "yrTerm1.partialUpfront": "0.517",
+            "yrTerm3.partialUpfront": "0.435"
           },
           "ondemand": "0.656"
         },
@@ -16528,8 +16782,8 @@
             "yrTerm1.noUpfront": "1.1962",
             "yrTerm3.allUpfront": "1.0593",
             "yrTerm1.allUpfront": "1.1468",
-            "yrTerm1.partialUpfront": "1.1520",
-            "yrTerm3.partialUpfront": "1.0700"
+            "yrTerm1.partialUpfront": "1.152",
+            "yrTerm3.partialUpfront": "1.07"
           },
           "ondemand": "1.291"
         },
@@ -16538,8 +16792,8 @@
             "yrTerm1.noUpfront": "0.4882",
             "yrTerm3.allUpfront": "0.3513",
             "yrTerm1.allUpfront": "0.4388",
-            "yrTerm1.partialUpfront": "0.4440",
-            "yrTerm3.partialUpfront": "0.3620"
+            "yrTerm1.partialUpfront": "0.444",
+            "yrTerm3.partialUpfront": "0.362"
           },
           "ondemand": "0.583"
         },
@@ -16548,8 +16802,8 @@
             "yrTerm1.noUpfront": "0.3042",
             "yrTerm3.allUpfront": "0.1673",
             "yrTerm1.allUpfront": "0.2548",
-            "yrTerm1.partialUpfront": "0.2600",
-            "yrTerm3.partialUpfront": "0.1780"
+            "yrTerm1.partialUpfront": "0.26",
+            "yrTerm3.partialUpfront": "0.178"
           },
           "ondemand": "0.399"
         }
@@ -16971,8 +17225,8 @@
             "yrTerm1.noUpfront": "1.1212",
             "yrTerm3.allUpfront": "0.8496",
             "yrTerm1.allUpfront": "1.0226",
-            "yrTerm1.partialUpfront": "1.0330",
-            "yrTerm3.partialUpfront": "0.8710"
+            "yrTerm1.partialUpfront": "1.033",
+            "yrTerm3.partialUpfront": "0.871"
           },
           "ondemand": "1.312"
         },
@@ -16981,8 +17235,8 @@
             "yrTerm1.noUpfront": "2.3912",
             "yrTerm3.allUpfront": "2.1196",
             "yrTerm1.allUpfront": "2.2926",
-            "yrTerm1.partialUpfront": "2.3030",
-            "yrTerm3.partialUpfront": "2.1410"
+            "yrTerm1.partialUpfront": "2.303",
+            "yrTerm3.partialUpfront": "2.141"
           },
           "ondemand": "2.582"
         },
@@ -16991,8 +17245,8 @@
             "yrTerm1.noUpfront": "0.9752",
             "yrTerm3.allUpfront": "0.7036",
             "yrTerm1.allUpfront": "0.8766",
-            "yrTerm1.partialUpfront": "0.8870",
-            "yrTerm3.partialUpfront": "0.7250"
+            "yrTerm1.partialUpfront": "0.887",
+            "yrTerm3.partialUpfront": "0.725"
           },
           "ondemand": "1.166"
         },
@@ -17001,8 +17255,8 @@
             "yrTerm1.noUpfront": "0.6072",
             "yrTerm3.allUpfront": "0.3356",
             "yrTerm1.allUpfront": "0.5086",
-            "yrTerm1.partialUpfront": "0.5190",
-            "yrTerm3.partialUpfront": "0.3570"
+            "yrTerm1.partialUpfront": "0.519",
+            "yrTerm3.partialUpfront": "0.357"
           },
           "ondemand": "0.798"
         }
@@ -17466,8 +17720,8 @@
             "yrTerm1.noUpfront": "2.2436",
             "yrTerm3.allUpfront": "1.6992",
             "yrTerm1.allUpfront": "2.0462",
-            "yrTerm1.partialUpfront": "2.0670",
-            "yrTerm3.partialUpfront": "1.7420"
+            "yrTerm1.partialUpfront": "2.067",
+            "yrTerm3.partialUpfront": "1.742"
           },
           "ondemand": "2.624"
         },
@@ -17476,8 +17730,8 @@
             "yrTerm1.noUpfront": "4.7836",
             "yrTerm3.allUpfront": "4.2392",
             "yrTerm1.allUpfront": "4.5862",
-            "yrTerm1.partialUpfront": "4.6070",
-            "yrTerm3.partialUpfront": "4.2820"
+            "yrTerm1.partialUpfront": "4.607",
+            "yrTerm3.partialUpfront": "4.282"
           },
           "ondemand": "5.164"
         },
@@ -17486,8 +17740,8 @@
             "yrTerm1.noUpfront": "1.9516",
             "yrTerm3.allUpfront": "1.4072",
             "yrTerm1.allUpfront": "1.7542",
-            "yrTerm1.partialUpfront": "1.7750",
-            "yrTerm3.partialUpfront": "1.4500"
+            "yrTerm1.partialUpfront": "1.775",
+            "yrTerm3.partialUpfront": "1.45"
           },
           "ondemand": "2.332"
         },
@@ -17496,8 +17750,8 @@
             "yrTerm1.noUpfront": "1.2156",
             "yrTerm3.allUpfront": "0.6712",
             "yrTerm1.allUpfront": "1.0182",
-            "yrTerm1.partialUpfront": "1.0390",
-            "yrTerm3.partialUpfront": "0.7140"
+            "yrTerm1.partialUpfront": "1.039",
+            "yrTerm3.partialUpfront": "0.714"
           },
           "ondemand": "1.596"
         }
@@ -17961,8 +18215,8 @@
             "yrTerm1.noUpfront": "4.4873",
             "yrTerm3.allUpfront": "3.3974",
             "yrTerm1.allUpfront": "4.0924",
-            "yrTerm1.partialUpfront": "4.1340",
-            "yrTerm3.partialUpfront": "3.4830"
+            "yrTerm1.partialUpfront": "4.134",
+            "yrTerm3.partialUpfront": "3.483"
           },
           "ondemand": "5.248"
         },
@@ -17971,8 +18225,8 @@
             "yrTerm1.noUpfront": "9.5673",
             "yrTerm3.allUpfront": "8.4774",
             "yrTerm1.allUpfront": "9.1724",
-            "yrTerm1.partialUpfront": "9.2140",
-            "yrTerm3.partialUpfront": "8.5630"
+            "yrTerm1.partialUpfront": "9.214",
+            "yrTerm3.partialUpfront": "8.563"
           },
           "ondemand": "10.328"
         },
@@ -17981,8 +18235,8 @@
             "yrTerm1.noUpfront": "3.9033",
             "yrTerm3.allUpfront": "2.8134",
             "yrTerm1.allUpfront": "3.5084",
-            "yrTerm1.partialUpfront": "3.5500",
-            "yrTerm3.partialUpfront": "2.8990"
+            "yrTerm1.partialUpfront": "3.55",
+            "yrTerm3.partialUpfront": "2.899"
           },
           "ondemand": "4.664"
         },
@@ -17991,8 +18245,8 @@
             "yrTerm1.noUpfront": "2.4313",
             "yrTerm3.allUpfront": "1.3414",
             "yrTerm1.allUpfront": "2.0364",
-            "yrTerm1.partialUpfront": "2.0780",
-            "yrTerm3.partialUpfront": "1.4270"
+            "yrTerm1.partialUpfront": "2.078",
+            "yrTerm3.partialUpfront": "1.427"
           },
           "ondemand": "3.192"
         }
@@ -19323,7 +19577,7 @@
             "yrTerm1.partialUpfront": "3.1568",
             "yrTerm3.partialUpfront": "2.3466"
           },
-          "ondemand": "5.030"
+          "ondemand": "5.03"
         },
         "mswinSQL": {
           "reserved": {
@@ -19333,7 +19587,7 @@
             "yrTerm1.partialUpfront": "5.6968",
             "yrTerm3.partialUpfront": "4.8866"
           },
-          "ondemand": "7.570"
+          "ondemand": "7.57"
         },
         "mswin": {
           "reserved": {
@@ -19776,7 +20030,7 @@
             "yrTerm1.partialUpfront": "6.3157",
             "yrTerm3.partialUpfront": "4.6934"
           },
-          "ondemand": "10.060"
+          "ondemand": "10.06"
         },
         "mswinSQL": {
           "reserved": {
@@ -19786,7 +20040,7 @@
             "yrTerm1.partialUpfront": "11.3957",
             "yrTerm3.partialUpfront": "9.7734"
           },
-          "ondemand": "15.140"
+          "ondemand": "15.14"
         },
         "mswin": {
           "reserved": {
@@ -20187,7 +20441,7 @@
             "yrTerm3.allUpfront": "0.4866",
             "yrTerm1.allUpfront": "0.6269",
             "yrTerm1.partialUpfront": "0.6359",
-            "yrTerm3.partialUpfront": "0.5060"
+            "yrTerm3.partialUpfront": "0.506"
           },
           "ondemand": "1.028"
         },
@@ -20197,7 +20451,7 @@
             "yrTerm3.allUpfront": "0.3026",
             "yrTerm1.allUpfront": "0.4429",
             "yrTerm1.partialUpfront": "0.4519",
-            "yrTerm3.partialUpfront": "0.3220"
+            "yrTerm3.partialUpfront": "0.322"
           },
           "ondemand": "0.844"
         }
@@ -20645,7 +20899,7 @@
       "ap-northeast-2": {
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "2.8510",
+            "yrTerm1.noUpfront": "2.851",
             "yrTerm3.allUpfront": "1.9466",
             "yrTerm1.allUpfront": "2.5075",
             "yrTerm1.partialUpfront": "2.5437",
@@ -20655,7 +20909,7 @@
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "2.1150",
+            "yrTerm1.noUpfront": "2.115",
             "yrTerm3.allUpfront": "1.2106",
             "yrTerm1.allUpfront": "1.7715",
             "yrTerm1.partialUpfront": "1.8077",
@@ -20878,7 +21132,7 @@
           "reserved": {
             "yrTerm1.noUpfront": "5.8859",
             "yrTerm3.allUpfront": "4.0771",
-            "yrTerm1.allUpfront": "5.1990",
+            "yrTerm1.allUpfront": "5.199",
             "yrTerm1.partialUpfront": "5.2713",
             "yrTerm3.partialUpfront": "4.2317"
           },
@@ -20888,7 +21142,7 @@
           "reserved": {
             "yrTerm1.noUpfront": "4.2299",
             "yrTerm3.allUpfront": "2.4211",
-            "yrTerm1.allUpfront": "3.5430",
+            "yrTerm1.allUpfront": "3.543",
             "yrTerm1.partialUpfront": "3.6153",
             "yrTerm3.partialUpfront": "2.5757"
           },
@@ -20968,7 +21222,7 @@
             "yrTerm3.allUpfront": "3.248",
             "yrTerm1.allUpfront": "4.586",
             "yrTerm1.partialUpfront": "4.652",
-            "yrTerm3.partialUpfront": "3.370"
+            "yrTerm3.partialUpfront": "3.37"
           },
           "ondemand": "7.956"
         },
@@ -20978,7 +21232,7 @@
             "yrTerm3.allUpfront": "1.898",
             "yrTerm1.allUpfront": "3.236",
             "yrTerm1.partialUpfront": "3.302",
-            "yrTerm3.partialUpfront": "2.020"
+            "yrTerm3.partialUpfront": "2.02"
           },
           "ondemand": "6.624"
         }
