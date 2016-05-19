@@ -146,7 +146,7 @@ def scrape_families():
 def scrape_instances():
     inst2family = scrape_families()
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/instance-types/"), etree.HTMLParser())
-    details = tree.xpath('//table')[9]
+    details = tree.xpath('//table[count(tbody/tr[1]/td)=12]')[0]
     rows = details.xpath('tbody/tr')[1:]
     assert len(rows) > 0, "Didn't find any table rows."
     current_gen = [parse_instance(r, inst2family) for r in rows]
