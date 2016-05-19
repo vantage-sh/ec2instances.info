@@ -3,6 +3,13 @@ from lxml import etree
 import urllib2
 import re
 import json
+import locale
+
+
+# Following advice from https://stackoverflow.com/a/1779324/216138
+# The locale must be installed in the system, and it must be one where ',' is
+# the thousans separator and '.' is the decimal fraction separator.
+locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 
 class Instance(object):
@@ -64,15 +71,15 @@ def parse_prev_generation_instance(tr):
     if '64-bit' in archs:
         i.arch.append('x86_64')
     assert i.arch, "No archs detected: %s" % (archs,)
-    i.vCPU = int(totext(cols[3]))
-    i.memory = float(totext(cols[4]))
+    i.vCPU = locale.atoi(totext(cols[3]))
+    i.memory = locale.atof(totext(cols[4]))
     storage = totext(cols[5])
     m = re.search(r'(\d+)\s*x\s*([0-9,]+)?', storage)
     i.ssd = False
     if m:
         i.ebs_only = False
-        i.num_drives = int(m.group(1))
-        i.drive_size = int(m.group(2).replace(',', ''))
+        i.num_drives = locale.atoi(m.group(1))
+        i.drive_size = locale.atof(m.group(2))
         i.ssd = 'SSD' in totext(cols[5])
     else:
         assert storage == 'EBS Only', "Unrecognized storage spec: %s" % (storage,)
@@ -95,15 +102,15 @@ def parse_instance(tr, inst2family):
     # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html#resize-limitations
     if i.instance_type in ('t2.micro', 't2.small'):
         i.arch.append('i386')
-    i.vCPU = int(totext(cols[1]))
-    i.memory = float(totext(cols[2]))
+    i.vCPU = locale.atoi(totext(cols[1]))
+    i.memory = locale.atof(totext(cols[2]))
     storage = totext(cols[3])
     m = re.search(r'(\d+)\s*x\s*([0-9,]+)?', storage)
     i.ssd = False
     if m:
         i.ebs_only = False
-        i.num_drives = int(m.group(1))
-        i.drive_size = int(m.group(2).replace(',', ''))
+        i.num_drives = locale.atoi(m.group(1))
+        i.drive_size = locale.atof(m.group(2))
         i.ssd = 'SSD' in totext(cols[3])
     else:
         assert storage == 'EBS Only', "Unrecognized storage spec: %s" % (storage,)
@@ -146,7 +153,7 @@ def scrape_families():
 def scrape_instances():
     inst2family = scrape_families()
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/instance-types/"), etree.HTMLParser())
-    details = tree.xpath('//table')[9]
+    details = tree.xpath('//table[count(tbody/tr[1]/td)=12]')[0]
     rows = details.xpath('tbody/tr')[1:]
     assert len(rows) > 0, "Didn't find any table rows."
     current_gen = [parse_instance(r, inst2family) for r in rows]
@@ -223,7 +230,7 @@ def add_ondemand_pricing(imap, data, platform):
 
                 # ECU is only available here
                 try:
-                    inst.ECU = float(i_spec['ECU'])
+                    inst.ECU = locale.atof(i_spec['ECU'])
                 except:
                     # these are likely instances with 'variable' ECU
                     inst.ECU = i_spec['ECU']
@@ -315,8 +322,8 @@ def add_eni_info(instances):
 
     for r in rows:
         instance_type = etree.tostring(r[0], method='text').strip()
-        max_enis = int(etree.tostring(r[1], method='text').strip())
-        ip_per_eni = int(etree.tostring(r[2], method='text').strip())
+        max_enis = locale.atoi(etree.tostring(r[1], method='text'))
+        ip_per_eni = locale.atoi(etree.tostring(r[2], method='text'))
         if instance_type not in by_type:
             print "Unknown instance type: " + instance_type
             continue
@@ -336,9 +343,9 @@ def add_ebs_info(instances):
         cols = row.xpath('td')
         instance_type = totext(cols[0]).split(' ')[0]
         ebs_optimized_by_default = totext(cols[1]) == 'Yes'
-        ebs_throughput = int(totext(cols[2]).strip().replace(',', ''))
-        ebs_iops = int(totext(cols[3]).strip().replace(',', ''))
-        ebs_max_bandwidth = float(totext(cols[4]).strip().replace(',', ''))
+        ebs_throughput = locale.atof(totext(cols[2]))
+        ebs_iops = locale.atof(totext(cols[3]))
+        ebs_max_bandwidth = locale.atof(totext(cols[4]))
         if instance_type not in by_type:
             print "Unknown instance type: " + instance_type
             continue
