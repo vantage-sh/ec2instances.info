@@ -432,7 +432,7 @@
     "storage": {
       "ssd": false,
       "devices": 1,
-      "size": 160
+      "size": 160.0
     },
     "instance_type": "m1.small",
     "ECU": 1.0,
@@ -872,7 +872,7 @@
     "storage": {
       "ssd": false,
       "devices": 1,
-      "size": 410
+      "size": 410.0
     },
     "instance_type": "m1.medium",
     "ECU": 2.0,
@@ -884,9 +884,9 @@
     "enhanced_networking": false,
     "vCPU": 2,
     "generation": "previous",
-    "ebs_iops": 4000,
+    "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 500,
+    "ebs_throughput": 62.5,
     "pretty_name": "M1 General Purpose Large",
     "pricing": {
       "us-east-1": {
@@ -1311,21 +1311,21 @@
     "storage": {
       "ssd": false,
       "devices": 2,
-      "size": 420
+      "size": 420.0
     },
     "instance_type": "m1.large",
     "ECU": 4.0,
     "memory": 7.5,
-    "ebs_max_bandwidth": 62.5
+    "ebs_max_bandwidth": 500.0
   },
   {
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 4,
     "generation": "previous",
-    "ebs_iops": 8000,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 1000,
+    "ebs_throughput": 125.0,
     "pretty_name": "M1 General Purpose Extra Large",
     "pricing": {
       "us-east-1": {
@@ -1750,12 +1750,12 @@
     "storage": {
       "ssd": false,
       "devices": 4,
-      "size": 420
+      "size": 420.0
     },
     "instance_type": "m1.xlarge",
     "ECU": 8.0,
     "memory": 15.0,
-    "ebs_max_bandwidth": 125.0
+    "ebs_max_bandwidth": 1000.0
   },
   {
     "family": "Compute optimized",
@@ -2127,7 +2127,7 @@
     "storage": {
       "ssd": false,
       "devices": 1,
-      "size": 350
+      "size": 350.0
     },
     "instance_type": "c1.medium",
     "ECU": 5.0,
@@ -2139,9 +2139,9 @@
     "enhanced_networking": false,
     "vCPU": 8,
     "generation": "previous",
-    "ebs_iops": 8000,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 1000,
+    "ebs_throughput": 125.0,
     "pretty_name": "C1 High-CPU Extra Large",
     "pricing": {
       "us-east-1": {
@@ -2566,12 +2566,12 @@
     "storage": {
       "ssd": false,
       "devices": 4,
-      "size": 420
+      "size": 420.0
     },
     "instance_type": "c1.xlarge",
     "ECU": 20.0,
     "memory": 7.0,
-    "ebs_max_bandwidth": 125.0
+    "ebs_max_bandwidth": 1000.0
   },
   {
     "family": "Compute optimized",
@@ -2893,7 +2893,7 @@
     "storage": {
       "ssd": false,
       "devices": 4,
-      "size": 840
+      "size": 840.0
     },
     "instance_type": "cc2.8xlarge",
     "ECU": 88.0,
@@ -3080,7 +3080,7 @@
     "storage": {
       "ssd": false,
       "devices": 2,
-      "size": 840
+      "size": 840.0
     },
     "instance_type": "cg1.4xlarge",
     "ECU": 33.5,
@@ -3519,7 +3519,7 @@
     "storage": {
       "ssd": false,
       "devices": 1,
-      "size": 420
+      "size": 420.0
     },
     "instance_type": "m2.xlarge",
     "ECU": 6.5,
@@ -3531,9 +3531,9 @@
     "enhanced_networking": false,
     "vCPU": 4,
     "generation": "previous",
-    "ebs_iops": 4000,
+    "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 500,
+    "ebs_throughput": 62.5,
     "pretty_name": "M2 High Memory Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -3958,21 +3958,21 @@
     "storage": {
       "ssd": false,
       "devices": 1,
-      "size": 850
+      "size": 850.0
     },
     "instance_type": "m2.2xlarge",
     "ECU": 13.0,
     "memory": 34.2,
-    "ebs_max_bandwidth": 62.5
+    "ebs_max_bandwidth": 500.0
   },
   {
     "family": "Memory optimized",
     "enhanced_networking": false,
     "vCPU": 8,
     "generation": "previous",
-    "ebs_iops": 8000,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 1000,
+    "ebs_throughput": 125.0,
     "pretty_name": "M2 High Memory Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -4397,12 +4397,12 @@
     "storage": {
       "ssd": false,
       "devices": 2,
-      "size": 840
+      "size": 840.0
     },
     "instance_type": "m2.4xlarge",
     "ECU": 26.0,
     "memory": 68.4,
-    "ebs_max_bandwidth": 125.0
+    "ebs_max_bandwidth": 1000.0
   },
   {
     "family": "Memory optimized",
@@ -4694,7 +4694,7 @@
     "storage": {
       "ssd": true,
       "devices": 2,
-      "size": 120
+      "size": 120.0
     },
     "instance_type": "cr1.8xlarge",
     "ECU": 88.0,
@@ -4994,7 +4994,7 @@
     "storage": {
       "ssd": true,
       "devices": 2,
-      "size": 1024
+      "size": 1024.0
     },
     "instance_type": "hi1.4xlarge",
     "ECU": 35.0,
@@ -5378,7 +5378,7 @@
     "storage": {
       "ssd": false,
       "devices": 24,
-      "size": 2000
+      "size": 2000.0
     },
     "instance_type": "hs1.8xlarge",
     "ECU": 35.0,
@@ -7560,9 +7560,9 @@
     "enhanced_networking": true,
     "vCPU": 2,
     "generation": "current",
-    "ebs_iops": 3600,
+    "ebs_iops": 3600.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 450,
+    "ebs_throughput": 56.25,
     "pretty_name": "M4 Large",
     "pricing": {
       "us-east-1": {
@@ -7960,16 +7960,16 @@
     "instance_type": "m4.large",
     "ECU": 6.5,
     "memory": 8.0,
-    "ebs_max_bandwidth": 56.25
+    "ebs_max_bandwidth": 450.0
   },
   {
     "family": "General purpose",
     "enhanced_networking": true,
     "vCPU": 4,
     "generation": "current",
-    "ebs_iops": 6000,
+    "ebs_iops": 6000.0,
     "network_performance": "High",
-    "ebs_throughput": 750,
+    "ebs_throughput": 93.75,
     "pretty_name": "M4 Extra Large",
     "pricing": {
       "us-east-1": {
@@ -8367,16 +8367,16 @@
     "instance_type": "m4.xlarge",
     "ECU": 13.0,
     "memory": 16.0,
-    "ebs_max_bandwidth": 93.75
+    "ebs_max_bandwidth": 750.0
   },
   {
     "family": "General purpose",
     "enhanced_networking": true,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 8000,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 1000,
+    "ebs_throughput": 125.0,
     "pretty_name": "M4 Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -8774,16 +8774,16 @@
     "instance_type": "m4.2xlarge",
     "ECU": 26.0,
     "memory": 32.0,
-    "ebs_max_bandwidth": 125.0
+    "ebs_max_bandwidth": 1000.0
   },
   {
     "family": "General purpose",
     "enhanced_networking": true,
     "vCPU": 16,
     "generation": "current",
-    "ebs_iops": 16000,
+    "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 2000,
+    "ebs_throughput": 250.0,
     "pretty_name": "M4 Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -9181,16 +9181,16 @@
     "instance_type": "m4.4xlarge",
     "ECU": 53.5,
     "memory": 64.0,
-    "ebs_max_bandwidth": 250.0
+    "ebs_max_bandwidth": 2000.0
   },
   {
     "family": "General purpose",
     "enhanced_networking": true,
     "vCPU": 40,
     "generation": "current",
-    "ebs_iops": 32000,
+    "ebs_iops": 32000.0,
     "network_performance": "10 Gigabit",
-    "ebs_throughput": 4000,
+    "ebs_throughput": 500.0,
     "pretty_name": "M4 Deca Extra Large",
     "pricing": {
       "us-east-1": {
@@ -9588,7 +9588,7 @@
     "instance_type": "m4.10xlarge",
     "ECU": 124.5,
     "memory": 160.0,
-    "ebs_max_bandwidth": 500.0
+    "ebs_max_bandwidth": 4000.0
   },
   {
     "family": "General purpose",
@@ -10017,7 +10017,7 @@
     "storage": {
       "ssd": true,
       "devices": 1,
-      "size": 4
+      "size": 4.0
     },
     "instance_type": "m3.medium",
     "ECU": 3.0,
@@ -10471,7 +10471,7 @@
     "storage": {
       "ssd": true,
       "devices": 1,
-      "size": 32
+      "size": 32.0
     },
     "instance_type": "m3.large",
     "ECU": 6.5,
@@ -10483,9 +10483,9 @@
     "enhanced_networking": false,
     "vCPU": 4,
     "generation": "current",
-    "ebs_iops": 4000,
+    "ebs_iops": 4000.0,
     "network_performance": "High",
-    "ebs_throughput": 500,
+    "ebs_throughput": 62.5,
     "pretty_name": "M3 General Purpose Extra Large",
     "pricing": {
       "us-east-1": {
@@ -10925,21 +10925,21 @@
     "storage": {
       "ssd": true,
       "devices": 2,
-      "size": 40
+      "size": 40.0
     },
     "instance_type": "m3.xlarge",
     "ECU": 13.0,
     "memory": 15.0,
-    "ebs_max_bandwidth": 62.5
+    "ebs_max_bandwidth": 500.0
   },
   {
     "family": "General purpose",
     "enhanced_networking": false,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 8000,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 1000,
+    "ebs_throughput": 125.0,
     "pretty_name": "M3 General Purpose Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -11379,21 +11379,21 @@
     "storage": {
       "ssd": true,
       "devices": 2,
-      "size": 80
+      "size": 80.0
     },
     "instance_type": "m3.2xlarge",
     "ECU": 26.0,
     "memory": 30.0,
-    "ebs_max_bandwidth": 125.0
+    "ebs_max_bandwidth": 1000.0
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 2,
     "generation": "current",
-    "ebs_iops": 4000,
+    "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 500,
+    "ebs_throughput": 62.5,
     "pretty_name": "C4 High-CPU Large",
     "pricing": {
       "us-east-1": {
@@ -11791,16 +11791,16 @@
     "instance_type": "c4.large",
     "ECU": 8.0,
     "memory": 3.75,
-    "ebs_max_bandwidth": 62.5
+    "ebs_max_bandwidth": 500.0
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 4,
     "generation": "current",
-    "ebs_iops": 6000,
+    "ebs_iops": 6000.0,
     "network_performance": "High",
-    "ebs_throughput": 750,
+    "ebs_throughput": 93.75,
     "pretty_name": "C4 High-CPU Extra Large",
     "pricing": {
       "us-east-1": {
@@ -12198,16 +12198,16 @@
     "instance_type": "c4.xlarge",
     "ECU": 16.0,
     "memory": 7.5,
-    "ebs_max_bandwidth": 93.75
+    "ebs_max_bandwidth": 750.0
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 8000,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 1000,
+    "ebs_throughput": 125.0,
     "pretty_name": "C4 High-CPU Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -12605,16 +12605,16 @@
     "instance_type": "c4.2xlarge",
     "ECU": 31.0,
     "memory": 15.0,
-    "ebs_max_bandwidth": 125.0
+    "ebs_max_bandwidth": 1000.0
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 16,
     "generation": "current",
-    "ebs_iops": 16000,
+    "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 2000,
+    "ebs_throughput": 250.0,
     "pretty_name": "C4 High-CPU Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -13012,16 +13012,16 @@
     "instance_type": "c4.4xlarge",
     "ECU": 62.0,
     "memory": 30.0,
-    "ebs_max_bandwidth": 250.0
+    "ebs_max_bandwidth": 2000.0
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 36,
     "generation": "current",
-    "ebs_iops": 32000,
+    "ebs_iops": 32000.0,
     "network_performance": "10 Gigabit",
-    "ebs_throughput": 4000,
+    "ebs_throughput": 500.0,
     "pretty_name": "C4 High-CPU Eight Extra Large",
     "pricing": {
       "us-east-1": {
@@ -13419,7 +13419,7 @@
     "instance_type": "c4.8xlarge",
     "ECU": 132.0,
     "memory": 60.0,
-    "ebs_max_bandwidth": 500.0
+    "ebs_max_bandwidth": 4000.0
   },
   {
     "family": "Compute optimized",
@@ -13838,7 +13838,7 @@
     "storage": {
       "ssd": true,
       "devices": 2,
-      "size": 16
+      "size": 16.0
     },
     "instance_type": "c3.large",
     "ECU": 7.0,
@@ -13850,9 +13850,9 @@
     "enhanced_networking": true,
     "vCPU": 4,
     "generation": "current",
-    "ebs_iops": 4000,
+    "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 500,
+    "ebs_throughput": 62.5,
     "pretty_name": "C3 High-CPU Extra Large",
     "pricing": {
       "us-east-1": {
@@ -14292,21 +14292,21 @@
     "storage": {
       "ssd": true,
       "devices": 2,
-      "size": 40
+      "size": 40.0
     },
     "instance_type": "c3.xlarge",
     "ECU": 14.0,
     "memory": 7.5,
-    "ebs_max_bandwidth": 62.5
+    "ebs_max_bandwidth": 500.0
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 8000,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 1000,
+    "ebs_throughput": 125.0,
     "pretty_name": "C3 High-CPU Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -14746,21 +14746,21 @@
     "storage": {
       "ssd": true,
       "devices": 2,
-      "size": 80
+      "size": 80.0
     },
     "instance_type": "c3.2xlarge",
     "ECU": 28.0,
     "memory": 15.0,
-    "ebs_max_bandwidth": 125.0
+    "ebs_max_bandwidth": 1000.0
   },
   {
     "family": "Compute optimized",
     "enhanced_networking": true,
     "vCPU": 16,
     "generation": "current",
-    "ebs_iops": 16000,
+    "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 2000,
+    "ebs_throughput": 250.0,
     "pretty_name": "C3 High-CPU Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -15200,12 +15200,12 @@
     "storage": {
       "ssd": true,
       "devices": 2,
-      "size": 160
+      "size": 160.0
     },
     "instance_type": "c3.4xlarge",
     "ECU": 55.0,
     "memory": 30.0,
-    "ebs_max_bandwidth": 250.0
+    "ebs_max_bandwidth": 2000.0
   },
   {
     "family": "Compute optimized",
@@ -15654,7 +15654,7 @@
     "storage": {
       "ssd": true,
       "devices": 2,
-      "size": 320
+      "size": 320.0
     },
     "instance_type": "c3.8xlarge",
     "ECU": 108.0,
@@ -15666,9 +15666,9 @@
     "enhanced_networking": false,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 8000,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 1000,
+    "ebs_throughput": 125.0,
     "pretty_name": "G2 Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -16003,12 +16003,12 @@
     "storage": {
       "ssd": true,
       "devices": 1,
-      "size": 60
+      "size": 60.0
     },
     "instance_type": "g2.2xlarge",
     "ECU": 26.0,
     "memory": 15.0,
-    "ebs_max_bandwidth": 125.0
+    "ebs_max_bandwidth": 1000.0
   },
   {
     "family": "GPU instances",
@@ -16212,11 +16212,338 @@
     "storage": {
       "ssd": true,
       "devices": 2,
-      "size": 120
+      "size": 120.0
     },
     "instance_type": "g2.8xlarge",
     "ECU": 104.0,
     "memory": 60.0,
+    "ebs_max_bandwidth": 0
+  },
+  {
+    "family": "Memory optimized",
+    "enhanced_networking": false,
+    "vCPU": 128,
+    "generation": "current",
+    "ebs_iops": 0,
+    "network_performance": "10 Gigabit",
+    "ebs_throughput": 0,
+    "pretty_name": "X1 32xlarge",
+    "pricing": {
+      "us-east-1": {
+        "mswinSQLWeb": {
+          "reserved": {
+            "yrTerm1.noUpfront": "17.700",
+            "yrTerm3.allUpfront": "12.274",
+            "yrTerm1.allUpfront": "16.213",
+            "yrTerm1.partialUpfront": "16.370",
+            "yrTerm3.partialUpfront": "12.512"
+          },
+          "ondemand": "21.880"
+        },
+        "mswinSQL": {
+          "reserved": {
+            "yrTerm1.noUpfront": "57.502",
+            "yrTerm3.allUpfront": "52.076",
+            "yrTerm1.allUpfront": "56.015",
+            "yrTerm1.partialUpfront": "56.172",
+            "yrTerm3.partialUpfront": "52.314"
+          },
+          "ondemand": "61.682"
+        },
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "15.046",
+            "yrTerm3.allUpfront": "9.620",
+            "yrTerm1.allUpfront": "13.559",
+            "yrTerm1.partialUpfront": "13.716",
+            "yrTerm3.partialUpfront": "9.858"
+          },
+          "ondemand": "19.226"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "9.158",
+            "yrTerm3.allUpfront": "3.732",
+            "yrTerm1.allUpfront": "7.671",
+            "yrTerm1.partialUpfront": "7.828",
+            "yrTerm3.partialUpfront": "3.970"
+          },
+          "ondemand": "13.338"
+        }
+      },
+      "ap-northeast-1": {
+        "mswinSQLWeb": {
+          "reserved": {
+            "yrTerm1.noUpfront": "21.822",
+            "yrTerm3.allUpfront": "13.953",
+            "yrTerm1.allUpfront": "19.665",
+            "yrTerm1.partialUpfront": "19.892",
+            "yrTerm3.partialUpfront": "14.299"
+          },
+          "ondemand": "27.883"
+        },
+        "mswinSQL": {
+          "reserved": {
+            "yrTerm1.noUpfront": "61.624",
+            "yrTerm3.allUpfront": "53.755",
+            "yrTerm1.allUpfront": "59.467",
+            "yrTerm1.partialUpfront": "59.694",
+            "yrTerm3.partialUpfront": "54.101"
+          },
+          "ondemand": "67.685"
+        },
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "19.168",
+            "yrTerm3.allUpfront": "11.299",
+            "yrTerm1.allUpfront": "17.011",
+            "yrTerm1.partialUpfront": "17.238",
+            "yrTerm3.partialUpfront": "11.645"
+          },
+          "ondemand": "25.229"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "13.280",
+            "yrTerm3.allUpfront": "5.411",
+            "yrTerm1.allUpfront": "11.123",
+            "yrTerm1.partialUpfront": "11.350",
+            "yrTerm3.partialUpfront": "5.757"
+          },
+          "ondemand": "19.341"
+        }
+      },
+      "ap-southeast-1": {
+        "mswinSQLWeb": {
+          "reserved": {
+            "yrTerm1.noUpfront": "21.822",
+            "yrTerm3.allUpfront": "13.953",
+            "yrTerm1.allUpfront": "19.665",
+            "yrTerm1.partialUpfront": "19.892",
+            "yrTerm3.partialUpfront": "14.299"
+          },
+          "ondemand": "27.883"
+        },
+        "mswinSQL": {
+          "reserved": {
+            "yrTerm1.noUpfront": "61.624",
+            "yrTerm3.allUpfront": "53.755",
+            "yrTerm1.allUpfront": "59.467",
+            "yrTerm1.partialUpfront": "59.694",
+            "yrTerm3.partialUpfront": "54.101"
+          },
+          "ondemand": "67.685"
+        },
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "19.168",
+            "yrTerm3.allUpfront": "11.299",
+            "yrTerm1.allUpfront": "17.011",
+            "yrTerm1.partialUpfront": "17.238",
+            "yrTerm3.partialUpfront": "11.645"
+          },
+          "ondemand": "25.229"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "13.280",
+            "yrTerm3.allUpfront": "5.411",
+            "yrTerm1.allUpfront": "11.123",
+            "yrTerm1.partialUpfront": "11.350",
+            "yrTerm3.partialUpfront": "5.757"
+          },
+          "ondemand": "19.341"
+        }
+      },
+      "ap-southeast-2": {
+        "mswinSQLWeb": {
+          "reserved": {
+            "yrTerm1.noUpfront": "21.822",
+            "yrTerm3.allUpfront": "13.953",
+            "yrTerm1.allUpfront": "19.665",
+            "yrTerm1.partialUpfront": "19.892",
+            "yrTerm3.partialUpfront": "14.299"
+          },
+          "ondemand": "27.883"
+        },
+        "mswinSQL": {
+          "reserved": {
+            "yrTerm1.noUpfront": "61.624",
+            "yrTerm3.allUpfront": "53.755",
+            "yrTerm1.allUpfront": "59.467",
+            "yrTerm1.partialUpfront": "59.694",
+            "yrTerm3.partialUpfront": "54.101"
+          },
+          "ondemand": "67.685"
+        },
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "19.168",
+            "yrTerm3.allUpfront": "11.299",
+            "yrTerm1.allUpfront": "17.011",
+            "yrTerm1.partialUpfront": "17.238",
+            "yrTerm3.partialUpfront": "11.645"
+          },
+          "ondemand": "25.229"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "13.280",
+            "yrTerm3.allUpfront": "5.411",
+            "yrTerm1.allUpfront": "11.123",
+            "yrTerm1.partialUpfront": "11.350",
+            "yrTerm3.partialUpfront": "5.757"
+          },
+          "ondemand": "19.341"
+        }
+      },
+      "us-west-2": {
+        "mswinSQLWeb": {
+          "reserved": {
+            "yrTerm1.noUpfront": "17.700",
+            "yrTerm3.allUpfront": "12.274",
+            "yrTerm1.allUpfront": "16.213",
+            "yrTerm1.partialUpfront": "16.370",
+            "yrTerm3.partialUpfront": "12.512"
+          },
+          "ondemand": "21.880"
+        },
+        "mswinSQL": {
+          "reserved": {
+            "yrTerm1.noUpfront": "57.502",
+            "yrTerm3.allUpfront": "52.076",
+            "yrTerm1.allUpfront": "56.015",
+            "yrTerm1.partialUpfront": "56.172",
+            "yrTerm3.partialUpfront": "52.314"
+          },
+          "ondemand": "61.682"
+        },
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "15.046",
+            "yrTerm3.allUpfront": "9.620",
+            "yrTerm1.allUpfront": "13.559",
+            "yrTerm1.partialUpfront": "13.716",
+            "yrTerm3.partialUpfront": "9.858"
+          },
+          "ondemand": "19.226"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "9.158",
+            "yrTerm3.allUpfront": "3.732",
+            "yrTerm1.allUpfront": "7.671",
+            "yrTerm1.partialUpfront": "7.828",
+            "yrTerm3.partialUpfront": "3.970"
+          },
+          "ondemand": "13.338"
+        }
+      },
+      "eu-central-1": {
+        "mswinSQLWeb": {
+          "reserved": {
+            "yrTerm1.noUpfront": "21.364",
+            "yrTerm3.allUpfront": "13.767",
+            "yrTerm1.allUpfront": "19.282",
+            "yrTerm1.partialUpfront": "19.501",
+            "yrTerm3.partialUpfront": "14.100"
+          },
+          "ondemand": "27.216"
+        },
+        "mswinSQL": {
+          "reserved": {
+            "yrTerm1.noUpfront": "61.166",
+            "yrTerm3.allUpfront": "53.569",
+            "yrTerm1.allUpfront": "59.084",
+            "yrTerm1.partialUpfront": "59.303",
+            "yrTerm3.partialUpfront": "53.902"
+          },
+          "ondemand": "67.018"
+        },
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "18.710",
+            "yrTerm3.allUpfront": "11.113",
+            "yrTerm1.allUpfront": "16.628",
+            "yrTerm1.partialUpfront": "16.847",
+            "yrTerm3.partialUpfront": "11.446"
+          },
+          "ondemand": "24.562"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "12.822",
+            "yrTerm3.allUpfront": "5.225",
+            "yrTerm1.allUpfront": "10.740",
+            "yrTerm1.partialUpfront": "10.959",
+            "yrTerm3.partialUpfront": "5.558"
+          },
+          "ondemand": "18.674"
+        }
+      },
+      "eu-west-1": {
+        "mswinSQLWeb": {
+          "reserved": {
+            "yrTerm1.noUpfront": "19.532",
+            "yrTerm3.allUpfront": "13.020",
+            "yrTerm1.allUpfront": "17.747",
+            "yrTerm1.partialUpfront": "17.935",
+            "yrTerm3.partialUpfront": "13.306"
+          },
+          "ondemand": "24.548"
+        },
+        "mswinSQL": {
+          "reserved": {
+            "yrTerm1.noUpfront": "59.334",
+            "yrTerm3.allUpfront": "52.822",
+            "yrTerm1.allUpfront": "57.549",
+            "yrTerm1.partialUpfront": "57.737",
+            "yrTerm3.partialUpfront": "53.108"
+          },
+          "ondemand": "64.350"
+        },
+        "mswin": {
+          "reserved": {
+            "yrTerm1.noUpfront": "16.878",
+            "yrTerm3.allUpfront": "10.366",
+            "yrTerm1.allUpfront": "15.093",
+            "yrTerm1.partialUpfront": "15.281",
+            "yrTerm3.partialUpfront": "10.652"
+          },
+          "ondemand": "21.894"
+        },
+        "linux": {
+          "reserved": {
+            "yrTerm1.noUpfront": "10.990",
+            "yrTerm3.allUpfront": "4.478",
+            "yrTerm1.allUpfront": "9.205",
+            "yrTerm1.partialUpfront": "9.393",
+            "yrTerm3.partialUpfront": "4.764"
+          },
+          "ondemand": "16.006"
+        }
+      }
+    },
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "arch": [
+      "x86_64"
+    ],
+    "vpc_only": false,
+    "linux_virtualization_types": [
+      "HVM"
+    ],
+    "ebs_optimized": true,
+    "storage": {
+      "ssd": true,
+      "devices": 2,
+      "size": 1920.0
+    },
+    "instance_type": "x1.32xlarge",
+    "ECU": 349.0,
+    "memory": 1952.0,
     "ebs_max_bandwidth": 0
   },
   {
@@ -16665,7 +16992,7 @@
     "storage": {
       "ssd": true,
       "devices": 1,
-      "size": 32
+      "size": 32.0
     },
     "instance_type": "r3.large",
     "ECU": 6.5,
@@ -16677,9 +17004,9 @@
     "enhanced_networking": true,
     "vCPU": 4,
     "generation": "current",
-    "ebs_iops": 4000,
+    "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 500,
+    "ebs_throughput": 62.5,
     "pretty_name": "R3 High-Memory Extra Large",
     "pricing": {
       "us-east-1": {
@@ -17118,21 +17445,21 @@
     "storage": {
       "ssd": true,
       "devices": 1,
-      "size": 80
+      "size": 80.0
     },
     "instance_type": "r3.xlarge",
     "ECU": 13.0,
     "memory": 30.5,
-    "ebs_max_bandwidth": 62.5
+    "ebs_max_bandwidth": 500.0
   },
   {
     "family": "Memory optimized",
     "enhanced_networking": true,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 8000,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 1000,
+    "ebs_throughput": 125.0,
     "pretty_name": "R3 High-Memory Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -17571,21 +17898,21 @@
     "storage": {
       "ssd": true,
       "devices": 1,
-      "size": 160
+      "size": 160.0
     },
     "instance_type": "r3.2xlarge",
     "ECU": 26.0,
     "memory": 61.0,
-    "ebs_max_bandwidth": 125.0
+    "ebs_max_bandwidth": 1000.0
   },
   {
     "family": "Memory optimized",
     "enhanced_networking": true,
     "vCPU": 16,
     "generation": "current",
-    "ebs_iops": 16000,
+    "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 2000,
+    "ebs_throughput": 250.0,
     "pretty_name": "R3 High-Memory Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -18066,12 +18393,12 @@
     "storage": {
       "ssd": true,
       "devices": 1,
-      "size": 320
+      "size": 320.0
     },
     "instance_type": "r3.4xlarge",
     "ECU": 52.0,
     "memory": 122.0,
-    "ebs_max_bandwidth": 250.0
+    "ebs_max_bandwidth": 2000.0
   },
   {
     "family": "Memory optimized",
@@ -18561,7 +18888,7 @@
     "storage": {
       "ssd": true,
       "devices": 2,
-      "size": 320
+      "size": 320.0
     },
     "instance_type": "r3.8xlarge",
     "ECU": 104.0,
@@ -18573,9 +18900,9 @@
     "enhanced_networking": true,
     "vCPU": 4,
     "generation": "current",
-    "ebs_iops": 4000,
+    "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 500,
+    "ebs_throughput": 62.5,
     "pretty_name": "I2 Extra Large",
     "pricing": {
       "us-east-1": {
@@ -19014,21 +19341,21 @@
     "storage": {
       "ssd": true,
       "devices": 1,
-      "size": 800
+      "size": 800.0
     },
     "instance_type": "i2.xlarge",
     "ECU": 14.0,
     "memory": 30.5,
-    "ebs_max_bandwidth": 62.5
+    "ebs_max_bandwidth": 500.0
   },
   {
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 8000,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 1000,
+    "ebs_throughput": 125.0,
     "pretty_name": "I2 Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -19467,21 +19794,21 @@
     "storage": {
       "ssd": true,
       "devices": 2,
-      "size": 800
+      "size": 800.0
     },
     "instance_type": "i2.2xlarge",
     "ECU": 27.0,
     "memory": 61.0,
-    "ebs_max_bandwidth": 125.0
+    "ebs_max_bandwidth": 1000.0
   },
   {
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 16,
     "generation": "current",
-    "ebs_iops": 16000,
+    "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 2000,
+    "ebs_throughput": 250.0,
     "pretty_name": "I2 Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -19920,12 +20247,12 @@
     "storage": {
       "ssd": true,
       "devices": 4,
-      "size": 800
+      "size": 800.0
     },
     "instance_type": "i2.4xlarge",
     "ECU": 53.0,
     "memory": 122.0,
-    "ebs_max_bandwidth": 250.0
+    "ebs_max_bandwidth": 2000.0
   },
   {
     "family": "Storage optimized",
@@ -20373,7 +20700,7 @@
     "storage": {
       "ssd": true,
       "devices": 8,
-      "size": 800
+      "size": 800.0
     },
     "instance_type": "i2.8xlarge",
     "ECU": 104.0,
@@ -20385,9 +20712,9 @@
     "enhanced_networking": true,
     "vCPU": 4,
     "generation": "current",
-    "ebs_iops": 6000,
+    "ebs_iops": 6000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 750,
+    "ebs_throughput": 93.75,
     "pretty_name": "D2 Extra Large",
     "pricing": {
       "us-east-1": {
@@ -20604,21 +20931,21 @@
     "storage": {
       "ssd": false,
       "devices": 3,
-      "size": 2000
+      "size": 2000.0
     },
     "instance_type": "d2.xlarge",
     "ECU": 14.0,
     "memory": 30.5,
-    "ebs_max_bandwidth": 93.75
+    "ebs_max_bandwidth": 750.0
   },
   {
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 8000,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 1000,
+    "ebs_throughput": 125.0,
     "pretty_name": "D2 Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -20835,21 +21162,21 @@
     "storage": {
       "ssd": false,
       "devices": 6,
-      "size": 2000
+      "size": 2000.0
     },
     "instance_type": "d2.2xlarge",
     "ECU": 28.0,
     "memory": 61.0,
-    "ebs_max_bandwidth": 125.0
+    "ebs_max_bandwidth": 1000.0
   },
   {
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 16,
     "generation": "current",
-    "ebs_iops": 16000,
+    "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 2000,
+    "ebs_throughput": 250.0,
     "pretty_name": "D2 Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -21066,21 +21393,21 @@
     "storage": {
       "ssd": false,
       "devices": 12,
-      "size": 2000
+      "size": 2000.0
     },
     "instance_type": "d2.4xlarge",
     "ECU": 56.0,
     "memory": 122.0,
-    "ebs_max_bandwidth": 250.0
+    "ebs_max_bandwidth": 2000.0
   },
   {
     "family": "Storage optimized",
     "enhanced_networking": true,
     "vCPU": 36,
     "generation": "current",
-    "ebs_iops": 32000,
+    "ebs_iops": 32000.0,
     "network_performance": "10 Gigabit",
-    "ebs_throughput": 4000,
+    "ebs_throughput": 500.0,
     "pretty_name": "D2 Eight Extra Large",
     "pricing": {
       "us-east-1": {
@@ -21297,11 +21624,11 @@
     "storage": {
       "ssd": false,
       "devices": 24,
-      "size": 2000
+      "size": 2000.0
     },
     "instance_type": "d2.8xlarge",
     "ECU": 116.0,
     "memory": 244.0,
-    "ebs_max_bandwidth": 500.0
+    "ebs_max_bandwidth": 4000.0
   }
 ]
