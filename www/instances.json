@@ -886,7 +886,7 @@
     "generation": "previous",
     "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 62.5,
+    "ebs_throughput": 500.0,
     "pretty_name": "M1 General Purpose Large",
     "pricing": {
       "us-east-1": {
@@ -1316,7 +1316,7 @@
     "instance_type": "m1.large",
     "ECU": 4.0,
     "memory": 7.5,
-    "ebs_max_bandwidth": 500.0
+    "ebs_max_bandwidth": 62.5
   },
   {
     "family": "General purpose",
@@ -1325,7 +1325,7 @@
     "generation": "previous",
     "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 125.0,
+    "ebs_throughput": 1000.0,
     "pretty_name": "M1 General Purpose Extra Large",
     "pricing": {
       "us-east-1": {
@@ -1755,7 +1755,7 @@
     "instance_type": "m1.xlarge",
     "ECU": 8.0,
     "memory": 15.0,
-    "ebs_max_bandwidth": 1000.0
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Compute optimized",
@@ -2141,7 +2141,7 @@
     "generation": "previous",
     "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 125.0,
+    "ebs_throughput": 1000.0,
     "pretty_name": "C1 High-CPU Extra Large",
     "pricing": {
       "us-east-1": {
@@ -2571,7 +2571,7 @@
     "instance_type": "c1.xlarge",
     "ECU": 20.0,
     "memory": 7.0,
-    "ebs_max_bandwidth": 1000.0
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Compute optimized",
@@ -3533,7 +3533,7 @@
     "generation": "previous",
     "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 62.5,
+    "ebs_throughput": 500.0,
     "pretty_name": "M2 High Memory Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -3963,7 +3963,7 @@
     "instance_type": "m2.2xlarge",
     "ECU": 13.0,
     "memory": 34.2,
-    "ebs_max_bandwidth": 500.0
+    "ebs_max_bandwidth": 62.5
   },
   {
     "family": "Memory optimized",
@@ -3972,7 +3972,7 @@
     "generation": "previous",
     "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 125.0,
+    "ebs_throughput": 1000.0,
     "pretty_name": "M2 High Memory Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -4402,7 +4402,7 @@
     "instance_type": "m2.4xlarge",
     "ECU": 26.0,
     "memory": 68.4,
-    "ebs_max_bandwidth": 1000.0
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Memory optimized",
@@ -7562,7 +7562,7 @@
     "generation": "current",
     "ebs_iops": 3600.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 56.25,
+    "ebs_throughput": 450.0,
     "pretty_name": "M4 Large",
     "pricing": {
       "us-east-1": {
@@ -7960,7 +7960,7 @@
     "instance_type": "m4.large",
     "ECU": 6.5,
     "memory": 8.0,
-    "ebs_max_bandwidth": 450.0
+    "ebs_max_bandwidth": 56.25
   },
   {
     "family": "General purpose",
@@ -7969,7 +7969,7 @@
     "generation": "current",
     "ebs_iops": 6000.0,
     "network_performance": "High",
-    "ebs_throughput": 93.75,
+    "ebs_throughput": 750.0,
     "pretty_name": "M4 Extra Large",
     "pricing": {
       "us-east-1": {
@@ -8367,7 +8367,7 @@
     "instance_type": "m4.xlarge",
     "ECU": 13.0,
     "memory": 16.0,
-    "ebs_max_bandwidth": 750.0
+    "ebs_max_bandwidth": 93.75
   },
   {
     "family": "General purpose",
@@ -8376,7 +8376,7 @@
     "generation": "current",
     "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 125.0,
+    "ebs_throughput": 1000.0,
     "pretty_name": "M4 Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -8774,7 +8774,7 @@
     "instance_type": "m4.2xlarge",
     "ECU": 26.0,
     "memory": 32.0,
-    "ebs_max_bandwidth": 1000.0
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "General purpose",
@@ -8783,7 +8783,7 @@
     "generation": "current",
     "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 250.0,
+    "ebs_throughput": 2000.0,
     "pretty_name": "M4 Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -9181,7 +9181,7 @@
     "instance_type": "m4.4xlarge",
     "ECU": 53.5,
     "memory": 64.0,
-    "ebs_max_bandwidth": 2000.0
+    "ebs_max_bandwidth": 250.0
   },
   {
     "family": "General purpose",
@@ -9190,7 +9190,7 @@
     "generation": "current",
     "ebs_iops": 32000.0,
     "network_performance": "10 Gigabit",
-    "ebs_throughput": 500.0,
+    "ebs_throughput": 4000.0,
     "pretty_name": "M4 Deca Extra Large",
     "pricing": {
       "us-east-1": {
@@ -9588,7 +9588,7 @@
     "instance_type": "m4.10xlarge",
     "ECU": 124.5,
     "memory": 160.0,
-    "ebs_max_bandwidth": 4000.0
+    "ebs_max_bandwidth": 500.0
   },
   {
     "family": "General purpose",
@@ -10485,7 +10485,7 @@
     "generation": "current",
     "ebs_iops": 4000.0,
     "network_performance": "High",
-    "ebs_throughput": 62.5,
+    "ebs_throughput": 500.0,
     "pretty_name": "M3 General Purpose Extra Large",
     "pricing": {
       "us-east-1": {
@@ -10930,7 +10930,7 @@
     "instance_type": "m3.xlarge",
     "ECU": 13.0,
     "memory": 15.0,
-    "ebs_max_bandwidth": 500.0
+    "ebs_max_bandwidth": 62.5
   },
   {
     "family": "General purpose",
@@ -10939,7 +10939,7 @@
     "generation": "current",
     "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 125.0,
+    "ebs_throughput": 1000.0,
     "pretty_name": "M3 General Purpose Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -11384,7 +11384,7 @@
     "instance_type": "m3.2xlarge",
     "ECU": 26.0,
     "memory": 30.0,
-    "ebs_max_bandwidth": 1000.0
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Compute optimized",
@@ -11393,7 +11393,7 @@
     "generation": "current",
     "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 62.5,
+    "ebs_throughput": 500.0,
     "pretty_name": "C4 High-CPU Large",
     "pricing": {
       "us-east-1": {
@@ -11791,7 +11791,7 @@
     "instance_type": "c4.large",
     "ECU": 8.0,
     "memory": 3.75,
-    "ebs_max_bandwidth": 500.0
+    "ebs_max_bandwidth": 62.5
   },
   {
     "family": "Compute optimized",
@@ -11800,7 +11800,7 @@
     "generation": "current",
     "ebs_iops": 6000.0,
     "network_performance": "High",
-    "ebs_throughput": 93.75,
+    "ebs_throughput": 750.0,
     "pretty_name": "C4 High-CPU Extra Large",
     "pricing": {
       "us-east-1": {
@@ -12198,7 +12198,7 @@
     "instance_type": "c4.xlarge",
     "ECU": 16.0,
     "memory": 7.5,
-    "ebs_max_bandwidth": 750.0
+    "ebs_max_bandwidth": 93.75
   },
   {
     "family": "Compute optimized",
@@ -12207,7 +12207,7 @@
     "generation": "current",
     "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 125.0,
+    "ebs_throughput": 1000.0,
     "pretty_name": "C4 High-CPU Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -12605,7 +12605,7 @@
     "instance_type": "c4.2xlarge",
     "ECU": 31.0,
     "memory": 15.0,
-    "ebs_max_bandwidth": 1000.0
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Compute optimized",
@@ -12614,7 +12614,7 @@
     "generation": "current",
     "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 250.0,
+    "ebs_throughput": 2000.0,
     "pretty_name": "C4 High-CPU Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -13012,7 +13012,7 @@
     "instance_type": "c4.4xlarge",
     "ECU": 62.0,
     "memory": 30.0,
-    "ebs_max_bandwidth": 2000.0
+    "ebs_max_bandwidth": 250.0
   },
   {
     "family": "Compute optimized",
@@ -13021,7 +13021,7 @@
     "generation": "current",
     "ebs_iops": 32000.0,
     "network_performance": "10 Gigabit",
-    "ebs_throughput": 500.0,
+    "ebs_throughput": 4000.0,
     "pretty_name": "C4 High-CPU Eight Extra Large",
     "pricing": {
       "us-east-1": {
@@ -13419,7 +13419,7 @@
     "instance_type": "c4.8xlarge",
     "ECU": 132.0,
     "memory": 60.0,
-    "ebs_max_bandwidth": 4000.0
+    "ebs_max_bandwidth": 500.0
   },
   {
     "family": "Compute optimized",
@@ -13852,7 +13852,7 @@
     "generation": "current",
     "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 62.5,
+    "ebs_throughput": 500.0,
     "pretty_name": "C3 High-CPU Extra Large",
     "pricing": {
       "us-east-1": {
@@ -14297,7 +14297,7 @@
     "instance_type": "c3.xlarge",
     "ECU": 14.0,
     "memory": 7.5,
-    "ebs_max_bandwidth": 500.0
+    "ebs_max_bandwidth": 62.5
   },
   {
     "family": "Compute optimized",
@@ -14306,7 +14306,7 @@
     "generation": "current",
     "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 125.0,
+    "ebs_throughput": 1000.0,
     "pretty_name": "C3 High-CPU Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -14751,7 +14751,7 @@
     "instance_type": "c3.2xlarge",
     "ECU": 28.0,
     "memory": 15.0,
-    "ebs_max_bandwidth": 1000.0
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Compute optimized",
@@ -14760,7 +14760,7 @@
     "generation": "current",
     "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 250.0,
+    "ebs_throughput": 2000.0,
     "pretty_name": "C3 High-CPU Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -15205,7 +15205,7 @@
     "instance_type": "c3.4xlarge",
     "ECU": 55.0,
     "memory": 30.0,
-    "ebs_max_bandwidth": 2000.0
+    "ebs_max_bandwidth": 250.0
   },
   {
     "family": "Compute optimized",
@@ -15668,7 +15668,7 @@
     "generation": "current",
     "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 125.0,
+    "ebs_throughput": 1000.0,
     "pretty_name": "G2 Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -16008,7 +16008,7 @@
     "instance_type": "g2.2xlarge",
     "ECU": 26.0,
     "memory": 15.0,
-    "ebs_max_bandwidth": 1000.0
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "GPU instances",
@@ -17006,7 +17006,7 @@
     "generation": "current",
     "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 62.5,
+    "ebs_throughput": 500.0,
     "pretty_name": "R3 High-Memory Extra Large",
     "pricing": {
       "us-east-1": {
@@ -17450,7 +17450,7 @@
     "instance_type": "r3.xlarge",
     "ECU": 13.0,
     "memory": 30.5,
-    "ebs_max_bandwidth": 500.0
+    "ebs_max_bandwidth": 62.5
   },
   {
     "family": "Memory optimized",
@@ -17459,7 +17459,7 @@
     "generation": "current",
     "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 125.0,
+    "ebs_throughput": 1000.0,
     "pretty_name": "R3 High-Memory Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -17903,7 +17903,7 @@
     "instance_type": "r3.2xlarge",
     "ECU": 26.0,
     "memory": 61.0,
-    "ebs_max_bandwidth": 1000.0
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Memory optimized",
@@ -17912,7 +17912,7 @@
     "generation": "current",
     "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 250.0,
+    "ebs_throughput": 2000.0,
     "pretty_name": "R3 High-Memory Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -18398,7 +18398,7 @@
     "instance_type": "r3.4xlarge",
     "ECU": 52.0,
     "memory": 122.0,
-    "ebs_max_bandwidth": 2000.0
+    "ebs_max_bandwidth": 250.0
   },
   {
     "family": "Memory optimized",
@@ -18902,7 +18902,7 @@
     "generation": "current",
     "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 62.5,
+    "ebs_throughput": 500.0,
     "pretty_name": "I2 Extra Large",
     "pricing": {
       "us-east-1": {
@@ -19346,7 +19346,7 @@
     "instance_type": "i2.xlarge",
     "ECU": 14.0,
     "memory": 30.5,
-    "ebs_max_bandwidth": 500.0
+    "ebs_max_bandwidth": 62.5
   },
   {
     "family": "Storage optimized",
@@ -19355,7 +19355,7 @@
     "generation": "current",
     "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 125.0,
+    "ebs_throughput": 1000.0,
     "pretty_name": "I2 Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -19799,7 +19799,7 @@
     "instance_type": "i2.2xlarge",
     "ECU": 27.0,
     "memory": 61.0,
-    "ebs_max_bandwidth": 1000.0
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Storage optimized",
@@ -19808,7 +19808,7 @@
     "generation": "current",
     "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 250.0,
+    "ebs_throughput": 2000.0,
     "pretty_name": "I2 Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -20252,7 +20252,7 @@
     "instance_type": "i2.4xlarge",
     "ECU": 53.0,
     "memory": 122.0,
-    "ebs_max_bandwidth": 2000.0
+    "ebs_max_bandwidth": 250.0
   },
   {
     "family": "Storage optimized",
@@ -20714,7 +20714,7 @@
     "generation": "current",
     "ebs_iops": 6000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 93.75,
+    "ebs_throughput": 750.0,
     "pretty_name": "D2 Extra Large",
     "pricing": {
       "us-east-1": {
@@ -20936,7 +20936,7 @@
     "instance_type": "d2.xlarge",
     "ECU": 14.0,
     "memory": 30.5,
-    "ebs_max_bandwidth": 750.0
+    "ebs_max_bandwidth": 93.75
   },
   {
     "family": "Storage optimized",
@@ -20945,7 +20945,7 @@
     "generation": "current",
     "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 125.0,
+    "ebs_throughput": 1000.0,
     "pretty_name": "D2 Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -21167,7 +21167,7 @@
     "instance_type": "d2.2xlarge",
     "ECU": 28.0,
     "memory": 61.0,
-    "ebs_max_bandwidth": 1000.0
+    "ebs_max_bandwidth": 125.0
   },
   {
     "family": "Storage optimized",
@@ -21176,7 +21176,7 @@
     "generation": "current",
     "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 250.0,
+    "ebs_throughput": 2000.0,
     "pretty_name": "D2 Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -21398,7 +21398,7 @@
     "instance_type": "d2.4xlarge",
     "ECU": 56.0,
     "memory": 122.0,
-    "ebs_max_bandwidth": 2000.0
+    "ebs_max_bandwidth": 250.0
   },
   {
     "family": "Storage optimized",
@@ -21407,7 +21407,7 @@
     "generation": "current",
     "ebs_iops": 32000.0,
     "network_performance": "10 Gigabit",
-    "ebs_throughput": 500.0,
+    "ebs_throughput": 4000.0,
     "pretty_name": "D2 Eight Extra Large",
     "pricing": {
       "us-east-1": {
@@ -21629,6 +21629,6 @@
     "instance_type": "d2.8xlarge",
     "ECU": 116.0,
     "memory": 244.0,
-    "ebs_max_bandwidth": 4000.0
+    "ebs_max_bandwidth": 500.0
   }
 ]

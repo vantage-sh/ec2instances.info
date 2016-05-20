@@ -343,9 +343,9 @@ def add_ebs_info(instances):
         cols = row.xpath('td')
         instance_type = totext(cols[0]).split(' ')[0]
         ebs_optimized_by_default = totext(cols[1]) == 'Yes'
-        ebs_throughput = locale.atof(totext(cols[2]))
+        ebs_max_bandwidth = locale.atof(totext(cols[2]))
         ebs_iops = locale.atof(totext(cols[3]))
-        ebs_max_bandwidth = locale.atof(totext(cols[4]))
+        ebs_throughput = locale.atof(totext(cols[4]))
         if instance_type not in by_type:
             print "Unknown instance type: " + instance_type
             continue
