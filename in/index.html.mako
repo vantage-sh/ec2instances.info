@@ -23,7 +23,7 @@
             <li><a href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
             <li><a href="javascript:;" data-region='eu-central-1'>EU (Frankfurt)</a></li>
             <li><a href="javascript:;" data-region='eu-west-1'>EU (Ireland)</a></li>
-            <li><a href="javascript:;" data-region='sa-east-1'>South America (Sao Paolo)</a></li>
+            <li><a href="javascript:;" data-region='sa-east-1'>South America (São Paulo)</a></li>
             <li><a href="javascript:;" data-region='us-east-1'>US East</a></li>
             <li><a href="javascript:;" data-region='us-west-1'>US West (Northern California)</a></li>
             <li><a href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
