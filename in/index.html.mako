@@ -110,20 +110,20 @@
           <th class="vpc-only">VPC Only</th>
           <th class="linux-virtualization">Linux Virtualization</th>
 
-          <th class="cost-ondemand-linux">Linux On Demand cost</th>
-          <th class="cost-reserved-linux">
+          <th class="cost-ondemand cost-ondemand-linux">Linux On Demand cost</th>
+          <th class="cost-reserved cost-reserved-linux">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux Reserved cost</abbr>
           </th>
-          <th class="cost-ondemand-mswin">Windows On Demand cost</th>
-          <th class="cost-reserved-mswin">
+          <th class="cost-ondemand cost-ondemand-mswin">Windows On Demand cost</th>
+          <th class="cost-reserved cost-reserved-mswin">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows Reserved cost</abbr>
           </th>
-          <th class="cost-ondemand-mswinSQLWeb">Windows SQL Web On Demand cost</th>
-          <th class="cost-reserved-mswinSQLWeb">
+          <th class="cost-ondemand cost-ondemand-mswinSQLWeb">Windows SQL Web On Demand cost</th>
+          <th class="cost-reserved cost-reserved-mswinSQLWeb">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows SQL Web Reserved cost</abbr>
           </th>
-          <th class="cost-ondemand-mswinSQL">Windows SQL Std On Demand cost</th>
-          <th class="cost-reserved-mswinSQL">
+          <th class="cost-ondemand cost-ondemand-mswinSQL">Windows SQL Std On Demand cost</th>
+          <th class="cost-reserved cost-reserved-mswinSQL">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows SQL Std Reserved cost</abbr>
           </th>
         </tr>
@@ -219,22 +219,29 @@
             Unknown
             % endif
           </td>
-    % for platform in ['linux', 'mswin', 'mswinSQLWeb', 'mswinSQL']:
+          % for platform in ['linux', 'mswin', 'mswinSQLWeb', 'mswinSQL']:
+          ## note that the contents in these cost cells are overwritten by the JS change_cost() func, but the initial
+          ## data here is used for sorting (and anyone with JS disabled...)
+          ## for more info, see https://github.com/powdahound/ec2instances.info/issues/140
           <td class="cost-ondemand cost-ondemand-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',{})).get('ondemand') for r,p in inst['pricing'].iteritems()}) | h}'>
             % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
-                 $${inst['pricing']['us-east-1'][platform]['ondemand']} per hour
+              <span sort="${inst['pricing']['us-east-1'][platform]['ondemand']}">
+                $${inst['pricing']['us-east-1'][platform]['ondemand']} hourly
+              </span>
             % else:
-            unavailable
+              <span sort="0">unavailable</span>
             % endif
           </td>
           <td class="cost-reserved cost-reserved-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',{})).get('reserved', {}) for r,p in inst['pricing'].iteritems()}) | h}'>
             % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('reserved', 'N/A') != "N/A":
-                 $${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1.noUpfront']} per hour
+              <span sort="${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1.noUpfront']}">
+                $${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1.noUpfront']} hourly
+              </span>
             % else:
-              unavailable
+              <span sort="0">unavailable</span>
             % endif
           </td>
-    % endfor
+          % endfor
         </tr>
 % endfor
       </tbody>

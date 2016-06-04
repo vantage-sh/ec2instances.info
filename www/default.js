@@ -24,11 +24,35 @@ function init_data_table() {
     },
     "aoColumnDefs": [
       {
-        "aTargets": ["memory", "computeunits", "cores", "coreunits", "storage", "ebs-throughput", "ebs-iops", "ebs-max-bandwidth", "networkperf"],
+        "aTargets": [
+          "memory",
+          "computeunits",
+          "cores",
+          "coreunits",
+          "storage",
+          "ebs-throughput",
+          "ebs-iops",
+          "ebs-max-bandwidth",
+          "networkperf",
+          "cost-ondemand",
+          "cost-reserved"
+        ],
         "sType": "span-sort"
       },
       {
-        "aTargets": ["ecu-per-core", "enhanced-networking", "maxips", "linux-virtualization", "cost-ondemand-mswinSQLWeb", "cost-ondemand-mswinSQL", "cost-reserved-mswinSQLWeb", "cost-reserved-mswinSQL", "ebs-throughput", "ebs-iops", "max_bandwidth"],
+        "aTargets": [
+          "ecu-per-core",
+          "enhanced-networking",
+          "maxips",
+          "linux-virtualization",
+          "cost-ondemand-mswinSQLWeb",
+          "cost-ondemand-mswinSQL",
+          "cost-reserved-mswinSQLWeb",
+          "cost-reserved-mswinSQL",
+          "ebs-throughput",
+          "ebs-iops",
+          "max_bandwidth"
+        ],
         "bVisible": false
       }
     ],
@@ -294,7 +318,7 @@ function on_data_table_initialized() {
         $.each(url_settings['selected'].split(','), function(_, id) {
           id = id.replace('.', '\\.');
           $('#'+id).addClass('highlight');
-        })
+        });
         break;
     }
   }

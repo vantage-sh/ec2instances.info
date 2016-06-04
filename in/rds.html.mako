@@ -97,8 +97,8 @@
           <th class="networkperf">Network Performance</th>
           <th class="arch">Arch</th>
           % for platform in ['Amazon Aurora', 'MariaDB', 'MySQL', 'Oracle','PostgreSQL', 'SQL Server']:
-          <th class="cost-ondemand-${platform}">${platform} On Demand cost</th>
-          <th class="cost-reserved-${platform}">
+          <th class="cost-ondemand cost-ondemand-${platform}">${platform} On Demand cost</th>
+          <th class="cost-reserved cost-reserved-${platform}">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>${platform} Reserved cost</abbr>
           </th>
           % endfor
@@ -145,20 +145,24 @@
             % endif
           </td>
           % for platform in ['Amazon Aurora', 'MariaDB', 'MySQL', 'Oracle','PostgreSQL', 'SQL Server']:
-                <td class="cost-ondemand cost-ondemand-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',{})).get('ondemand') for r,p in inst['pricing'].iteritems()}) | h}'>
-                  % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
-                       $${inst['pricing']['us-east-1'][platform]['ondemand']} per hour
-                  % else:
-                  unavailable
-                  % endif
-                </td>
-                <td class="cost-reserved cost-reserved-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',{})).get('reserved', {}) for r,p in inst['pricing'].iteritems()}) | h}'>
-                  % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('reserved', 'N/A') != "N/A":
-                       $${inst['pricing']['us-east-1'][platform]['reserved'].get('yrTerm1.noUpfront')} per hour
-                  % else:
-                    unavailable
-                  % endif
-                </td>
+          <td class="cost-ondemand cost-ondemand-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',{})).get('ondemand') for r,p in inst['pricing'].iteritems()}) | h}'>
+            % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
+              <span sort="${inst['pricing']['us-east-1'][platform]['ondemand']}">
+                $${inst['pricing']['us-east-1'][platform]['ondemand']} per hour
+              </span>
+            % else:
+              <span sort="0">unavailable</span>
+            % endif
+          </td>
+          <td class="cost-reserved cost-reserved-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',{})).get('reserved', {}) for r,p in inst['pricing'].iteritems()}) | h}'>
+            % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('reserved', 'N/A') != "N/A":
+              <span sort="${inst['pricing']['us-east-1'][platform]['reserved'].get('yrTerm1.noUpfront')}">
+                $${inst['pricing']['us-east-1'][platform]['reserved'].get('yrTerm1.noUpfront')} per hour
+              </span>
+            % else:
+              <span sort="0">unavailable</span>
+            % endif
+          </td>
           % endfor
         </tr>
 % endfor
