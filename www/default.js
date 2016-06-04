@@ -343,7 +343,7 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
   "span-sort-pre": function(elem) {
     var matches = elem.match(/sort="(.*?)"/);
     if (matches) {
-      return parseInt(matches[1], 10);
+      return parseFloat(matches[1]);
     }
     return 0;
   },
