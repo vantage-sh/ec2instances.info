@@ -27,8 +27,7 @@ function init_data_table() {
         "aTargets": [
           "memory",
           "computeunits",
-          "cores",
-          "coreunits",
+          "vcpus",
           "storage",
           "ebs-throughput",
           "ebs-iops",
@@ -41,7 +40,7 @@ function init_data_table() {
       },
       {
         "aTargets": [
-          "ecu-per-core",
+          "ecu-per-vcpu",
           "enhanced-networking",
           "maxips",
           "linux-virtualization",

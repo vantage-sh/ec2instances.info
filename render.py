@@ -27,10 +27,10 @@ def network_sort(inst):
 
 def add_cpu_detail(i):
     try:
-        i['ECU_per_core'] = i['ECU'] / i['vCPU']
+        i['ECU_per_vcpu'] = i['ECU'] / i['vCPU']
     except:
         # these will be instances with variable/burstable ECU
-        i['ECU_per_core'] = 'unknown'
+        i['ECU_per_vcpu'] = 'unknown'
 
 
 def add_render_info(i):

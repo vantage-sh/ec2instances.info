@@ -95,8 +95,10 @@
           <th class="computeunits">
             <abbr title="One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.">Compute Units (ECU)</abbr>
           </th>
-          <th class="cores">Cores</th>
-          <th class="ecu-per-core">ECU per Core</th>
+          <th class="vcpus">
+            <abbr title="Each virtual CPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">vCPUs</abbr>
+          </th>
+          <th class="ecu-per-vcpu">ECU per vCPU</th>
           <th class="storage">Storage</th>
           <th class="architecture">Arch</th>
           <th class="networkperf">Network Performance</th>
@@ -141,16 +143,16 @@
             <span sort="${inst['ECU']}">${"%g" % (inst['ECU'],)} units</span>
             % endif
           </td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="${inst['vCPU']}">
-              ${inst['vCPU']} cores
+              ${inst['vCPU']} vCPUs
             </span>
           </td>
-          <td class="ecu-per-core">
+          <td class="ecu-per-vcpu">
             % if inst['ECU'] == 'variable':
             <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
             % else:
-            <span sort="${inst['ECU_per_core']}">${"%.4g" % inst['ECU_per_core']} units</span>
+            <span sort="${inst['ECU_per_vcpu']}">${"%.4g" % inst['ECU_per_vcpu']} units</span>
             % endif
           </td>
           <td class="storage">

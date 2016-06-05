@@ -95,7 +95,9 @@
           <th class="storage">Storage</th>
           <th class="ebs-throughput">EBS Throughput</th>
           <th class="processor">Processor</th>
-          <th class="cores">Cores</th>
+          <th class="vcpus">
+            <abbr title="Each virtual CPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">vCPUs</abbr>
+          </th>
           <th class="networkperf">Network Performance</th>
           <th class="arch">Arch</th>
           % for platform in ['Amazon Aurora', 'MariaDB', 'MySQL', 'Oracle','PostgreSQL', 'SQL Server']:
@@ -129,9 +131,9 @@
           </span>
           % endif
           <td class="processor">${inst['physicalProcessor']}</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="${inst['vcpu']}">
-              ${inst['vcpu']} cores
+              ${inst['vcpu']} vCPUs
             </span>
           </td>
           <td class="networkperf">
