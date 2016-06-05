@@ -21,7 +21,7 @@
     <h1>RDSInstances.info <small>Easy Amazon RDS Instance Comparison</small></h1>
     
 
-      <p class="pull-right label label-info">Last Update: 2016-06-04 01:22:00 UTC</p>
+      <p class="pull-right label label-info">Last Update: 2016-06-05 18:20:31 UTC</p>
       <ul class="nav nav-tabs">
         <li role="presentation" class=""><a href="/">EC2</a></li>
         <li role="presentation" class="active"><a href="/rds/">RDS</a></li>
@@ -46,15 +46,17 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="javascript:;" data-region='us-east-1'>US East</a></li>
-            <li><a href="javascript:;" data-region='us-west-1'>US West (Northern California)</a></li>
-            <li><a href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
-            <li><a href="javascript:;" data-region='sa-east-1'>South America</a></li>
-            <li><a href="javascript:;" data-region='eu-west-1'>EU (Ireland)</a></li>
-            <li><a href="javascript:;" data-region='eu-central-1'>EU (Frankfurt)</a></li>
+            <li><a href="javascript:;" data-region='ap-northeast-2'>Asia-Pacific (Seoul)</a></li>
             <li><a href="javascript:;" data-region='ap-southeast-1'>Asia-Pacific (Singapore)</a></li>
             <li><a href="javascript:;" data-region='ap-southeast-2'>Asia-Pacific (Sydney)</a></li>
             <li><a href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
+            <li><a href="javascript:;" data-region='eu-central-1'>EU (Frankfurt)</a></li>
+            <li><a href="javascript:;" data-region='eu-west-1'>EU (Ireland)</a></li>
+            <li><a href="javascript:;" data-region='sa-east-1'>South America (S&atilde;o Paulo)</a></li>
+            <li><a href="javascript:;" data-region='us-east-1'>US East</a></li>
+            <li><a href="javascript:;" data-region='us-west-1'>US West (Northern California)</a></li>
+            <li><a href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
+
           </ul>
         </div>
 
@@ -120,7 +122,9 @@
           <th class="storage">Storage</th>
           <th class="ebs-throughput">EBS Throughput</th>
           <th class="processor">Processor</th>
-          <th class="cores">Cores</th>
+          <th class="vcpus">
+            <abbr title="Each virtual CPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">vCPUs</abbr>
+          </th>
           <th class="networkperf">Network Performance</th>
           <th class="arch">Arch</th>
           <th class="cost-ondemand cost-ondemand-Amazon Aurora">Amazon Aurora On Demand cost</th>
@@ -161,9 +165,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon E5-2670</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="32">
-              32 cores
+              32 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -230,9 +234,9 @@
             1000 Mbps
           </span>
           <td class="processor">Intel Xeon E5-2676 v3 (Haswell)</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="8">
-              8 cores
+              8 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -311,9 +315,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Variable</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="1">
-              1 cores
+              1 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -388,9 +392,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge/Sandy Bridge)</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="1">
-              1 cores
+              1 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -471,9 +475,9 @@
             450 Mbps
           </span>
           <td class="processor">Intel Xeon E5-2676 v3 (Haswell)</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="2">
-              2 cores
+              2 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -552,9 +556,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge)</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="4">
-              4 cores
+              4 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -637,9 +641,9 @@
             2000 Mbps
           </span>
           <td class="processor">Intel Xeon E5-2676 v3 (Haswell)</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="16">
-              16 cores
+              16 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -718,9 +722,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon Family</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="2">
-              2 cores
+              2 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -795,9 +799,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge)</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="8">
-              8 cores
+              8 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -880,9 +884,9 @@
             750 Mbps
           </span>
           <td class="processor">Intel Xeon E5-2676 v3 (Haswell)</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="4">
-              4 cores
+              4 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -961,9 +965,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge)</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="16">
-              16 cores
+              16 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -1044,9 +1048,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge/Sandy Bridge)</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="4">
-              4 cores
+              4 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -1125,9 +1129,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge/Sandy Bridge)</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="8">
-              8 cores
+              8 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -1204,9 +1208,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon Family</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="1">
-              1 cores
+              1 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -1281,9 +1285,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon Family</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="1">
-              1 cores
+              1 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -1358,9 +1362,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon Family</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="2">
-              2 cores
+              2 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -1439,9 +1443,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon Family</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="4">
-              4 cores
+              4 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -1516,9 +1520,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge)</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="2">
-              2 cores
+              2 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -1601,9 +1605,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon Family</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="1">
-              1 cores
+              1 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -1682,9 +1686,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon Family</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="2">
-              2 cores
+              2 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -1759,9 +1763,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon Family</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="2">
-              2 cores
+              2 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -1840,9 +1844,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon Family</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="1">
-              1 cores
+              1 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -1923,9 +1927,9 @@
             4000 Mbps
           </span>
           <td class="processor">Intel Xeon E5-2676 v3 (Haswell)</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="40">
-              40 cores
+              40 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -2000,9 +2004,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon Family</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="4">
-              4 cores
+              4 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -2077,9 +2081,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge/Sandy Bridge)</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="2">
-              2 cores
+              2 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -2156,9 +2160,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon Family</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="8">
-              8 cores
+              8 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -2233,9 +2237,9 @@
           <td class="ebs-throughput">
           <span sort="0">N/A</span>
           <td class="processor">Intel Xeon E5-2670 v2 (Ivy Bridge)</td>
-          <td class="cores">
+          <td class="vcpus">
             <span sort="32">
-              32 cores
+              32 vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -2320,7 +2324,7 @@
       </p>
       <p>
         <strong>How?</strong>
-        Data is scraped from multiple pages on the AWS site. This was last done at 2016-06-04 01:22:00 UTC.
+        Data is scraped from multiple pages on the AWS site. This was last done at 2016-06-05 18:20:31 UTC.
       </p>
 
       <p class="bg-warning">
