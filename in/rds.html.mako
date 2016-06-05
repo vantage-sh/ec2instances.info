@@ -19,15 +19,17 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="javascript:;" data-region='us-east-1'>US East</a></li>
-            <li><a href="javascript:;" data-region='us-west-1'>US West (Northern California)</a></li>
-            <li><a href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
-            <li><a href="javascript:;" data-region='sa-east-1'>South America</a></li>
-            <li><a href="javascript:;" data-region='eu-west-1'>EU (Ireland)</a></li>
-            <li><a href="javascript:;" data-region='eu-central-1'>EU (Frankfurt)</a></li>
+            <li><a href="javascript:;" data-region='ap-northeast-2'>Asia-Pacific (Seoul)</a></li>
             <li><a href="javascript:;" data-region='ap-southeast-1'>Asia-Pacific (Singapore)</a></li>
             <li><a href="javascript:;" data-region='ap-southeast-2'>Asia-Pacific (Sydney)</a></li>
             <li><a href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
+            <li><a href="javascript:;" data-region='eu-central-1'>EU (Frankfurt)</a></li>
+            <li><a href="javascript:;" data-region='eu-west-1'>EU (Ireland)</a></li>
+            <li><a href="javascript:;" data-region='sa-east-1'>South America (S&atilde;o Paulo)</a></li>
+            <li><a href="javascript:;" data-region='us-east-1'>US East</a></li>
+            <li><a href="javascript:;" data-region='us-west-1'>US West (Northern California)</a></li>
+            <li><a href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
+
           </ul>
         </div>
 
