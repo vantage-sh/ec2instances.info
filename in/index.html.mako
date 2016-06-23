@@ -102,9 +102,9 @@
           <th class="storage">Storage</th>
           <th class="architecture">Arch</th>
           <th class="networkperf">Network Performance</th>
+          <th class="ebs-max-bandwidth">EBS Optimized: Max Bandwidth</th>
           <th class="ebs-throughput">EBS Optimized: Throughput</th>
           <th class="ebs-iops">EBS Optimized: Max 16K IOPS</th>
-          <th class="ebs-max-bandwidth">EBS Optimized: Max Bandwidth</th>
           <th class="maxips">
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
@@ -182,24 +182,24 @@
               ${inst['network_performance']}
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            % if not inst['ebs_max_bandwidth']:
+            <span sort="0">N/A</span>
+            % else:
+            <span sort="${inst['ebs_max_bandwidth']}">
+              ${inst['ebs_max_bandwidth']} Mbps  <!-- Not MB/s! -->
+            </span>
+            % endif
+          </td>
           <td class="ebs-throughput">
             <span sort="${inst['ebs_throughput']}">
-              ${inst['ebs_throughput']} Mb/s <!-- Not MB/s! -->
+              ${inst['ebs_throughput']} MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="${inst['ebs_iops']}">
               ${inst['ebs_iops']} IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            % if not inst['ebs_max_bandwidth']:
-            <span sort="0">N/A</span>
-            % else:
-            <span sort="${inst['ebs_max_bandwidth']}">
-              ${inst['ebs_max_bandwidth']} MB/s
-            </span>
-            % endif
           </td>
           <td class="maxips">
             % if inst['vpc']:
