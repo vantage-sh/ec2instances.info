@@ -21,7 +21,7 @@
     <h1>EC2Instances.info <small>Easy Amazon EC2 Instance Comparison</small></h1>
     
 
-      <p class="pull-right label label-info">Last Update: 2016-06-05 18:20:31 UTC</p>
+      <p class="pull-right label label-info">Last Update: 2016-06-23 17:38:34 UTC</p>
       <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="/">EC2</a></li>
         <li role="presentation" class=""><a href="/rds/">RDS</a></li>
@@ -129,9 +129,9 @@
           <th class="storage">Storage</th>
           <th class="architecture">Arch</th>
           <th class="networkperf">Network Performance</th>
+          <th class="ebs-max-bandwidth">EBS Optimized: Max Bandwidth</th>
           <th class="ebs-throughput">EBS Optimized: Throughput</th>
           <th class="ebs-iops">EBS Optimized: Max 16K IOPS</th>
-          <th class="ebs-max-bandwidth">EBS Optimized: Max Bandwidth</th>
           <th class="maxips">
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
@@ -188,18 +188,18 @@
               Low
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               8
@@ -284,18 +284,18 @@
               Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               12
@@ -380,19 +380,19 @@
               Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="500.0">
+              500.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="4000.0">
-              4000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="62.5">
+              62.5 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="62.5">
-              62.5 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="500.0">
-              500.0 MB/s
+            <span sort="4000.0">
+              4000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -478,19 +478,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="1000.0">
+              1000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="8000.0">
-              8000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="125.0">
+              125.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="125.0">
-              125.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="1000.0">
-              1000.0 MB/s
+            <span sort="8000.0">
+              8000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -576,18 +576,18 @@
               Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               12
@@ -668,19 +668,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="1000.0">
+              1000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="8000.0">
-              8000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="125.0">
+              125.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="125.0">
-              125.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="1000.0">
-              1000.0 MB/s
+            <span sort="8000.0">
+              8000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -766,18 +766,18 @@
               10 Gigabit
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               240
@@ -862,18 +862,18 @@
               10 Gigabit
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               240
@@ -950,18 +950,18 @@
               Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               60
@@ -1046,19 +1046,19 @@
               Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="500.0">
+              500.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="4000.0">
-              4000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="62.5">
+              62.5 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="62.5">
-              62.5 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="500.0">
-              500.0 MB/s
+            <span sort="4000.0">
+              4000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -1144,19 +1144,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="1000.0">
+              1000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="8000.0">
-              8000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="125.0">
+              125.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="125.0">
-              125.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="1000.0">
-              1000.0 MB/s
+            <span sort="8000.0">
+              8000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -1242,18 +1242,18 @@
               10 Gigabit
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               240
@@ -1338,18 +1338,18 @@
               10 Gigabit
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               240
@@ -1434,18 +1434,18 @@
               10 Gigabit
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               240
@@ -1527,18 +1527,18 @@
               Very Low
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               4
@@ -1616,18 +1616,18 @@
               Low
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               4
@@ -1701,18 +1701,18 @@
               Low to Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               4
@@ -1790,18 +1790,18 @@
               Low to Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               8
@@ -1879,18 +1879,18 @@
               Low to Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               18
@@ -1968,18 +1968,18 @@
               Low to Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               36
@@ -2057,19 +2057,19 @@
               Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="450.0">
+              450.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="3600.0">
-              3600.0 Mb/s <!-- Not MB/s! -->
+            <span sort="56.25">
+              56.25 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="56.25">
-              56.25 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="450.0">
-              450.0 MB/s
+            <span sort="3600.0">
+              3600.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -2152,19 +2152,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="750.0">
+              750.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="6000.0">
-              6000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="93.75">
+              93.75 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="93.75">
-              93.75 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="750.0">
-              750.0 MB/s
+            <span sort="6000.0">
+              6000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -2247,19 +2247,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="1000.0">
+              1000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="8000.0">
-              8000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="125.0">
+              125.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="125.0">
-              125.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="1000.0">
-              1000.0 MB/s
+            <span sort="8000.0">
+              8000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -2342,19 +2342,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="2000.0">
+              2000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="16000.0">
-              16000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="250.0">
+              250.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="250.0">
-              250.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="2000.0">
-              2000.0 MB/s
+            <span sort="16000.0">
+              16000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -2437,19 +2437,19 @@
               10 Gigabit
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="4000.0">
+              4000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="32000.0">
-              32000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="500.0">
+              500.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="500.0">
-              500.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="4000.0">
-              4000.0 MB/s
+            <span sort="32000.0">
+              32000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -2535,18 +2535,18 @@
               Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               12
@@ -2631,18 +2631,18 @@
               Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               30
@@ -2727,19 +2727,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="500.0">
+              500.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="4000.0">
-              4000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="62.5">
+              62.5 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="62.5">
-              62.5 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="500.0">
-              500.0 MB/s
+            <span sort="4000.0">
+              4000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -2825,19 +2825,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="1000.0">
+              1000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="8000.0">
-              8000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="125.0">
+              125.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="125.0">
-              125.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="1000.0">
-              1000.0 MB/s
+            <span sort="8000.0">
+              8000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -2920,19 +2920,19 @@
               Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="500.0">
+              500.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="4000.0">
-              4000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="62.5">
+              62.5 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="62.5">
-              62.5 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="500.0">
-              500.0 MB/s
+            <span sort="4000.0">
+              4000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -3015,19 +3015,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="750.0">
+              750.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="6000.0">
-              6000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="93.75">
+              93.75 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="93.75">
-              93.75 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="750.0">
-              750.0 MB/s
+            <span sort="6000.0">
+              6000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -3110,19 +3110,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="1000.0">
+              1000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="8000.0">
-              8000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="125.0">
+              125.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="125.0">
-              125.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="1000.0">
-              1000.0 MB/s
+            <span sort="8000.0">
+              8000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -3205,19 +3205,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="2000.0">
+              2000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="16000.0">
-              16000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="250.0">
+              250.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="250.0">
-              250.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="2000.0">
-              2000.0 MB/s
+            <span sort="16000.0">
+              16000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -3300,19 +3300,19 @@
               10 Gigabit
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="4000.0">
+              4000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="32000.0">
-              32000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="500.0">
+              500.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="500.0">
-              500.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="4000.0">
-              4000.0 MB/s
+            <span sort="32000.0">
+              32000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -3398,18 +3398,18 @@
               Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               30
@@ -3494,19 +3494,19 @@
               Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="500.0">
+              500.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="4000.0">
-              4000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="62.5">
+              62.5 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="62.5">
-              62.5 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="500.0">
-              500.0 MB/s
+            <span sort="4000.0">
+              4000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -3592,19 +3592,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="1000.0">
+              1000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="8000.0">
-              8000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="125.0">
+              125.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="125.0">
-              125.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="1000.0">
-              1000.0 MB/s
+            <span sort="8000.0">
+              8000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -3690,19 +3690,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="2000.0">
+              2000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="16000.0">
-              16000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="250.0">
+              250.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="250.0">
-              250.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="2000.0">
-              2000.0 MB/s
+            <span sort="16000.0">
+              16000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -3788,18 +3788,18 @@
               10 Gigabit
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               240
@@ -3884,19 +3884,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="1000.0">
+              1000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="8000.0">
-              8000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="125.0">
+              125.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="125.0">
-              125.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="1000.0">
-              1000.0 MB/s
+            <span sort="8000.0">
+              8000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -3982,18 +3982,18 @@
               10 Gigabit
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               240
@@ -4070,18 +4070,18 @@
               10 Gigabit
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               240
@@ -4166,18 +4166,18 @@
               Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               30
@@ -4262,19 +4262,19 @@
               Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="500.0">
+              500.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="4000.0">
-              4000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="62.5">
+              62.5 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="62.5">
-              62.5 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="500.0">
-              500.0 MB/s
+            <span sort="4000.0">
+              4000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -4360,19 +4360,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="1000.0">
+              1000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="8000.0">
-              8000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="125.0">
+              125.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="125.0">
-              125.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="1000.0">
-              1000.0 MB/s
+            <span sort="8000.0">
+              8000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -4458,19 +4458,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="2000.0">
+              2000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="16000.0">
-              16000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="250.0">
+              250.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="250.0">
-              250.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="2000.0">
-              2000.0 MB/s
+            <span sort="16000.0">
+              16000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -4556,18 +4556,18 @@
               10 Gigabit
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               240
@@ -4652,19 +4652,19 @@
               Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="500.0">
+              500.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="4000.0">
-              4000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="62.5">
+              62.5 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="62.5">
-              62.5 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="500.0">
-              500.0 MB/s
+            <span sort="4000.0">
+              4000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -4750,19 +4750,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="1000.0">
+              1000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="8000.0">
-              8000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="125.0">
+              125.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="125.0">
-              125.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="1000.0">
-              1000.0 MB/s
+            <span sort="8000.0">
+              8000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -4848,19 +4848,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="2000.0">
+              2000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="16000.0">
-              16000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="250.0">
+              250.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="250.0">
-              250.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="2000.0">
-              2000.0 MB/s
+            <span sort="16000.0">
+              16000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -4946,18 +4946,18 @@
               10 Gigabit
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="0">N/A</span>
+          </td>
           <td class="ebs-throughput">
             <span sort="0">
-              0 Mb/s <!-- Not MB/s! -->
+              0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
             <span sort="0">
               0 IOPS
             </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="0">N/A</span>
           </td>
           <td class="maxips">
               240
@@ -5042,19 +5042,19 @@
               Moderate
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="750.0">
+              750.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="6000.0">
-              6000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="93.75">
+              93.75 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="93.75">
-              93.75 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="750.0">
-              750.0 MB/s
+            <span sort="6000.0">
+              6000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -5132,19 +5132,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="1000.0">
+              1000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="8000.0">
-              8000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="125.0">
+              125.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="125.0">
-              125.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="1000.0">
-              1000.0 MB/s
+            <span sort="8000.0">
+              8000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -5222,19 +5222,19 @@
               High
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="2000.0">
+              2000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="16000.0">
-              16000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="250.0">
+              250.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="250.0">
-              250.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="2000.0">
-              2000.0 MB/s
+            <span sort="16000.0">
+              16000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -5312,19 +5312,19 @@
               10 Gigabit
             </span>
           </td>
+          <td class="ebs-max-bandwidth">
+            <span sort="4000.0">
+              4000.0 Mbps  <!-- Not MB/s! -->
+            </span>
+          </td>
           <td class="ebs-throughput">
-            <span sort="32000.0">
-              32000.0 Mb/s <!-- Not MB/s! -->
+            <span sort="500.0">
+              500.0 MB/s
             </span>
           </td>
           <td class="ebs-iops">
-            <span sort="500.0">
-              500.0 IOPS
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            <span sort="4000.0">
-              4000.0 MB/s
+            <span sort="32000.0">
+              32000.0 IOPS
             </span>
           </td>
           <td class="maxips">
@@ -5387,7 +5387,7 @@
       </p>
       <p>
         <strong>How?</strong>
-        Data is scraped from multiple pages on the AWS site. This was last done at 2016-06-05 18:20:31 UTC.
+        Data is scraped from multiple pages on the AWS site. This was last done at 2016-06-23 17:38:34 UTC.
       </p>
 
       <p class="bg-warning">

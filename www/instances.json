@@ -884,9 +884,9 @@
     "enhanced_networking": false,
     "vCPU": 2,
     "generation": "previous",
-    "ebs_iops": 62.5,
+    "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 4000.0,
+    "ebs_throughput": 62.5,
     "pretty_name": "M1 General Purpose Large",
     "pricing": {
       "us-east-1": {
@@ -1323,9 +1323,9 @@
     "enhanced_networking": false,
     "vCPU": 4,
     "generation": "previous",
-    "ebs_iops": 125.0,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 8000.0,
+    "ebs_throughput": 125.0,
     "pretty_name": "M1 General Purpose Extra Large",
     "pricing": {
       "us-east-1": {
@@ -2139,9 +2139,9 @@
     "enhanced_networking": false,
     "vCPU": 8,
     "generation": "previous",
-    "ebs_iops": 125.0,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 8000.0,
+    "ebs_throughput": 125.0,
     "pretty_name": "C1 High-CPU Extra Large",
     "pricing": {
       "us-east-1": {
@@ -3531,9 +3531,9 @@
     "enhanced_networking": false,
     "vCPU": 4,
     "generation": "previous",
-    "ebs_iops": 62.5,
+    "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 4000.0,
+    "ebs_throughput": 62.5,
     "pretty_name": "M2 High Memory Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -3970,9 +3970,9 @@
     "enhanced_networking": false,
     "vCPU": 8,
     "generation": "previous",
-    "ebs_iops": 125.0,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 8000.0,
+    "ebs_throughput": 125.0,
     "pretty_name": "M2 High Memory Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -7560,9 +7560,9 @@
     "enhanced_networking": true,
     "vCPU": 2,
     "generation": "current",
-    "ebs_iops": 56.25,
+    "ebs_iops": 3600.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 3600.0,
+    "ebs_throughput": 56.25,
     "pretty_name": "M4 Large",
     "pricing": {
       "us-east-1": {
@@ -7967,9 +7967,9 @@
     "enhanced_networking": true,
     "vCPU": 4,
     "generation": "current",
-    "ebs_iops": 93.75,
+    "ebs_iops": 6000.0,
     "network_performance": "High",
-    "ebs_throughput": 6000.0,
+    "ebs_throughput": 93.75,
     "pretty_name": "M4 Extra Large",
     "pricing": {
       "us-east-1": {
@@ -8374,9 +8374,9 @@
     "enhanced_networking": true,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 125.0,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 8000.0,
+    "ebs_throughput": 125.0,
     "pretty_name": "M4 Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -8781,9 +8781,9 @@
     "enhanced_networking": true,
     "vCPU": 16,
     "generation": "current",
-    "ebs_iops": 250.0,
+    "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 16000.0,
+    "ebs_throughput": 250.0,
     "pretty_name": "M4 Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -9188,9 +9188,9 @@
     "enhanced_networking": true,
     "vCPU": 40,
     "generation": "current",
-    "ebs_iops": 500.0,
+    "ebs_iops": 32000.0,
     "network_performance": "10 Gigabit",
-    "ebs_throughput": 32000.0,
+    "ebs_throughput": 500.0,
     "pretty_name": "M4 Deca Extra Large",
     "pricing": {
       "us-east-1": {
@@ -10483,9 +10483,9 @@
     "enhanced_networking": false,
     "vCPU": 4,
     "generation": "current",
-    "ebs_iops": 62.5,
+    "ebs_iops": 4000.0,
     "network_performance": "High",
-    "ebs_throughput": 4000.0,
+    "ebs_throughput": 62.5,
     "pretty_name": "M3 General Purpose Extra Large",
     "pricing": {
       "us-east-1": {
@@ -10937,9 +10937,9 @@
     "enhanced_networking": false,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 125.0,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 8000.0,
+    "ebs_throughput": 125.0,
     "pretty_name": "M3 General Purpose Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -11391,9 +11391,9 @@
     "enhanced_networking": true,
     "vCPU": 2,
     "generation": "current",
-    "ebs_iops": 62.5,
+    "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 4000.0,
+    "ebs_throughput": 62.5,
     "pretty_name": "C4 High-CPU Large",
     "pricing": {
       "us-east-1": {
@@ -11798,9 +11798,9 @@
     "enhanced_networking": true,
     "vCPU": 4,
     "generation": "current",
-    "ebs_iops": 93.75,
+    "ebs_iops": 6000.0,
     "network_performance": "High",
-    "ebs_throughput": 6000.0,
+    "ebs_throughput": 93.75,
     "pretty_name": "C4 High-CPU Extra Large",
     "pricing": {
       "us-east-1": {
@@ -12205,9 +12205,9 @@
     "enhanced_networking": true,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 125.0,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 8000.0,
+    "ebs_throughput": 125.0,
     "pretty_name": "C4 High-CPU Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -12612,9 +12612,9 @@
     "enhanced_networking": true,
     "vCPU": 16,
     "generation": "current",
-    "ebs_iops": 250.0,
+    "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 16000.0,
+    "ebs_throughput": 250.0,
     "pretty_name": "C4 High-CPU Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -13019,9 +13019,9 @@
     "enhanced_networking": true,
     "vCPU": 36,
     "generation": "current",
-    "ebs_iops": 500.0,
+    "ebs_iops": 32000.0,
     "network_performance": "10 Gigabit",
-    "ebs_throughput": 32000.0,
+    "ebs_throughput": 500.0,
     "pretty_name": "C4 High-CPU Eight Extra Large",
     "pricing": {
       "us-east-1": {
@@ -13850,9 +13850,9 @@
     "enhanced_networking": true,
     "vCPU": 4,
     "generation": "current",
-    "ebs_iops": 62.5,
+    "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 4000.0,
+    "ebs_throughput": 62.5,
     "pretty_name": "C3 High-CPU Extra Large",
     "pricing": {
       "us-east-1": {
@@ -14304,9 +14304,9 @@
     "enhanced_networking": true,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 125.0,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 8000.0,
+    "ebs_throughput": 125.0,
     "pretty_name": "C3 High-CPU Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -14758,9 +14758,9 @@
     "enhanced_networking": true,
     "vCPU": 16,
     "generation": "current",
-    "ebs_iops": 250.0,
+    "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 16000.0,
+    "ebs_throughput": 250.0,
     "pretty_name": "C3 High-CPU Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -15666,9 +15666,9 @@
     "enhanced_networking": false,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 125.0,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 8000.0,
+    "ebs_throughput": 125.0,
     "pretty_name": "G2 Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -17004,9 +17004,9 @@
     "enhanced_networking": true,
     "vCPU": 4,
     "generation": "current",
-    "ebs_iops": 62.5,
+    "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 4000.0,
+    "ebs_throughput": 62.5,
     "pretty_name": "R3 High-Memory Extra Large",
     "pricing": {
       "us-east-1": {
@@ -17457,9 +17457,9 @@
     "enhanced_networking": true,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 125.0,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 8000.0,
+    "ebs_throughput": 125.0,
     "pretty_name": "R3 High-Memory Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -17910,9 +17910,9 @@
     "enhanced_networking": true,
     "vCPU": 16,
     "generation": "current",
-    "ebs_iops": 250.0,
+    "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 16000.0,
+    "ebs_throughput": 250.0,
     "pretty_name": "R3 High-Memory Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -18900,9 +18900,9 @@
     "enhanced_networking": true,
     "vCPU": 4,
     "generation": "current",
-    "ebs_iops": 62.5,
+    "ebs_iops": 4000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 4000.0,
+    "ebs_throughput": 62.5,
     "pretty_name": "I2 Extra Large",
     "pricing": {
       "us-east-1": {
@@ -19353,9 +19353,9 @@
     "enhanced_networking": true,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 125.0,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 8000.0,
+    "ebs_throughput": 125.0,
     "pretty_name": "I2 Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -19806,9 +19806,9 @@
     "enhanced_networking": true,
     "vCPU": 16,
     "generation": "current",
-    "ebs_iops": 250.0,
+    "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 16000.0,
+    "ebs_throughput": 250.0,
     "pretty_name": "I2 Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -20712,9 +20712,9 @@
     "enhanced_networking": true,
     "vCPU": 4,
     "generation": "current",
-    "ebs_iops": 93.75,
+    "ebs_iops": 6000.0,
     "network_performance": "Moderate",
-    "ebs_throughput": 6000.0,
+    "ebs_throughput": 93.75,
     "pretty_name": "D2 Extra Large",
     "pricing": {
       "us-east-1": {
@@ -20943,9 +20943,9 @@
     "enhanced_networking": true,
     "vCPU": 8,
     "generation": "current",
-    "ebs_iops": 125.0,
+    "ebs_iops": 8000.0,
     "network_performance": "High",
-    "ebs_throughput": 8000.0,
+    "ebs_throughput": 125.0,
     "pretty_name": "D2 Double Extra Large",
     "pricing": {
       "us-east-1": {
@@ -21174,9 +21174,9 @@
     "enhanced_networking": true,
     "vCPU": 16,
     "generation": "current",
-    "ebs_iops": 250.0,
+    "ebs_iops": 16000.0,
     "network_performance": "High",
-    "ebs_throughput": 16000.0,
+    "ebs_throughput": 250.0,
     "pretty_name": "D2 Quadruple Extra Large",
     "pricing": {
       "us-east-1": {
@@ -21405,9 +21405,9 @@
     "enhanced_networking": true,
     "vCPU": 36,
     "generation": "current",
-    "ebs_iops": 500.0,
+    "ebs_iops": 32000.0,
     "network_performance": "10 Gigabit",
-    "ebs_throughput": 32000.0,
+    "ebs_throughput": 500.0,
     "pretty_name": "D2 Eight Extra Large",
     "pricing": {
       "us-east-1": {
