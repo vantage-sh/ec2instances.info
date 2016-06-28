@@ -3,3 +3,5 @@
 .idea
 env
 venv
+.fab_tasks~
+.env
