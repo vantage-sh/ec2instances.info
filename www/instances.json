@@ -5981,23 +5981,23 @@
       "ap-south-1": {
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.0103 ",
-            "yrTerm3.allUpfront": "0.0073 ",
-            "yrTerm1.allUpfront": "0.0090 ",
-            "yrTerm1.partialUpfront": "0.0091 ",
-            "yrTerm3.partialUpfront": "0.0076 "
+            "yrTerm1.noUpfront": "0.0103",
+            "yrTerm3.allUpfront": "0.0073",
+            "yrTerm1.allUpfront": "0.0090",
+            "yrTerm1.partialUpfront": "0.0091",
+            "yrTerm3.partialUpfront": "0.0076"
           },
-          "ondemand": "0.0115 "
+          "ondemand": "0.0115"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.0083 ",
-            "yrTerm3.allUpfront": "0.0053 ",
-            "yrTerm1.allUpfront": "0.0070 ",
-            "yrTerm1.partialUpfront": "0.0071 ",
-            "yrTerm3.partialUpfront": "0.0056 "
+            "yrTerm1.noUpfront": "0.0083",
+            "yrTerm3.allUpfront": "0.0053",
+            "yrTerm1.allUpfront": "0.0070",
+            "yrTerm1.partialUpfront": "0.0071",
+            "yrTerm3.partialUpfront": "0.0056"
           },
-          "ondemand": "0.0095 "
+          "ondemand": "0.0095"
         }
       },
       "us-east-1": {
@@ -6274,33 +6274,33 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.072 ",
-            "yrTerm3.allUpfront": "0.066 ",
-            "yrTerm1.allUpfront": "0.069 ",
-            "yrTerm1.partialUpfront": "0.069 ",
-            "yrTerm3.partialUpfront": "0.066 "
+            "yrTerm1.noUpfront": "0.072",
+            "yrTerm3.allUpfront": "0.066",
+            "yrTerm1.allUpfront": "0.069",
+            "yrTerm1.partialUpfront": "0.069",
+            "yrTerm3.partialUpfront": "0.066"
           },
-          "ondemand": "0.074 "
+          "ondemand": "0.074"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.022 ",
-            "yrTerm3.allUpfront": "0.016 ",
-            "yrTerm1.allUpfront": "0.019 ",
-            "yrTerm1.partialUpfront": "0.019 ",
-            "yrTerm3.partialUpfront": "0.016 "
+            "yrTerm1.noUpfront": "0.022",
+            "yrTerm3.allUpfront": "0.016",
+            "yrTerm1.allUpfront": "0.019",
+            "yrTerm1.partialUpfront": "0.019",
+            "yrTerm3.partialUpfront": "0.016"
           },
-          "ondemand": "0.024 "
+          "ondemand": "0.024"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.017 ",
-            "yrTerm3.allUpfront": "0.011 ",
-            "yrTerm1.allUpfront": "0.014 ",
-            "yrTerm1.partialUpfront": "0.014 ",
-            "yrTerm3.partialUpfront": "0.011 "
+            "yrTerm1.noUpfront": "0.017",
+            "yrTerm3.allUpfront": "0.011",
+            "yrTerm1.allUpfront": "0.014",
+            "yrTerm1.partialUpfront": "0.014",
+            "yrTerm3.partialUpfront": "0.011"
           },
-          "ondemand": "0.019 "
+          "ondemand": "0.019"
         }
       },
       "us-east-1": {
@@ -6688,33 +6688,33 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.143 ",
-            "yrTerm3.allUpfront": "0.131 ",
-            "yrTerm1.allUpfront": "0.138 ",
-            "yrTerm1.partialUpfront": "0.139 ",
-            "yrTerm3.partialUpfront": "0.132 "
+            "yrTerm1.noUpfront": "0.143",
+            "yrTerm3.allUpfront": "0.131",
+            "yrTerm1.allUpfront": "0.138",
+            "yrTerm1.partialUpfront": "0.139",
+            "yrTerm3.partialUpfront": "0.132"
           },
-          "ondemand": "0.148 "
+          "ondemand": "0.148"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.042 ",
-            "yrTerm3.allUpfront": "0.030 ",
-            "yrTerm1.allUpfront": "0.037 ",
-            "yrTerm1.partialUpfront": "0.038 ",
-            "yrTerm3.partialUpfront": "0.031 "
+            "yrTerm1.noUpfront": "0.042",
+            "yrTerm3.allUpfront": "0.030",
+            "yrTerm1.allUpfront": "0.037",
+            "yrTerm1.partialUpfront": "0.038",
+            "yrTerm3.partialUpfront": "0.031"
           },
-          "ondemand": "0.047 "
+          "ondemand": "0.047"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.033 ",
-            "yrTerm3.allUpfront": "0.021 ",
-            "yrTerm1.allUpfront": "0.028 ",
-            "yrTerm1.partialUpfront": "0.029 ",
-            "yrTerm3.partialUpfront": "0.022 "
+            "yrTerm1.noUpfront": "0.033",
+            "yrTerm3.allUpfront": "0.021",
+            "yrTerm1.allUpfront": "0.028",
+            "yrTerm1.partialUpfront": "0.029",
+            "yrTerm3.partialUpfront": "0.022"
           },
-          "ondemand": "0.038 "
+          "ondemand": "0.038"
         }
       },
       "us-east-1": {
@@ -7102,33 +7102,33 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.397 ",
-            "yrTerm3.allUpfront": "0.372 ",
-            "yrTerm1.allUpfront": "0.386 ",
-            "yrTerm1.partialUpfront": "0.387 ",
-            "yrTerm3.partialUpfront": "0.375 "
+            "yrTerm1.noUpfront": "0.397",
+            "yrTerm3.allUpfront": "0.372",
+            "yrTerm1.allUpfront": "0.386",
+            "yrTerm1.partialUpfront": "0.387",
+            "yrTerm3.partialUpfront": "0.375"
           },
-          "ondemand": "0.406 "
+          "ondemand": "0.406"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.085 ",
-            "yrTerm3.allUpfront": "0.060 ",
-            "yrTerm1.allUpfront": "0.074 ",
-            "yrTerm1.partialUpfront": "0.075 ",
-            "yrTerm3.partialUpfront": "0.063 "
+            "yrTerm1.noUpfront": "0.085",
+            "yrTerm3.allUpfront": "0.060",
+            "yrTerm1.allUpfront": "0.074",
+            "yrTerm1.partialUpfront": "0.075",
+            "yrTerm3.partialUpfront": "0.063"
           },
-          "ondemand": "0.094 "
+          "ondemand": "0.094"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.067 ",
-            "yrTerm3.allUpfront": "0.042 ",
-            "yrTerm1.allUpfront": "0.056 ",
-            "yrTerm1.partialUpfront": "0.057 ",
-            "yrTerm3.partialUpfront": "0.045 "
+            "yrTerm1.noUpfront": "0.067",
+            "yrTerm3.allUpfront": "0.042",
+            "yrTerm1.allUpfront": "0.056",
+            "yrTerm1.partialUpfront": "0.057",
+            "yrTerm3.partialUpfront": "0.045"
           },
-          "ondemand": "0.076 "
+          "ondemand": "0.076"
         }
       },
       "us-east-1": {
@@ -7515,33 +7515,33 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.683 ",
-            "yrTerm3.allUpfront": "0.634 ",
-            "yrTerm1.allUpfront": "0.662 ",
-            "yrTerm1.partialUpfront": "0.664 ",
-            "yrTerm3.partialUpfront": "0.639 "
+            "yrTerm1.noUpfront": "0.683",
+            "yrTerm3.allUpfront": "0.634",
+            "yrTerm1.allUpfront": "0.662",
+            "yrTerm1.partialUpfront": "0.664",
+            "yrTerm3.partialUpfront": "0.639"
           },
-          "ondemand": "0.702 "
+          "ondemand": "0.702"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.161 ",
-            "yrTerm3.allUpfront": "0.112 ",
-            "yrTerm1.allUpfront": "0.140 ",
-            "yrTerm1.partialUpfront": "0.142 ",
-            "yrTerm3.partialUpfront": "0.117 "
+            "yrTerm1.noUpfront": "0.161",
+            "yrTerm3.allUpfront": "0.112",
+            "yrTerm1.allUpfront": "0.140",
+            "yrTerm1.partialUpfront": "0.142",
+            "yrTerm3.partialUpfront": "0.117"
           },
-          "ondemand": "0.180 "
+          "ondemand": "0.180"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.133 ",
-            "yrTerm3.allUpfront": "0.084 ",
-            "yrTerm1.allUpfront": "0.112 ",
-            "yrTerm1.partialUpfront": "0.114 ",
-            "yrTerm3.partialUpfront": "0.089 "
+            "yrTerm1.noUpfront": "0.133",
+            "yrTerm3.allUpfront": "0.084",
+            "yrTerm1.allUpfront": "0.112",
+            "yrTerm1.partialUpfront": "0.114",
+            "yrTerm3.partialUpfront": "0.089"
           },
-          "ondemand": "0.152 "
+          "ondemand": "0.152"
         }
       },
       "us-east-1": {
@@ -7928,43 +7928,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.287 ",
-            "yrTerm3.allUpfront": "0.232 ",
-            "yrTerm1.allUpfront": "0.268 ",
-            "yrTerm1.partialUpfront": "0.270 ",
-            "yrTerm3.partialUpfront": "0.236 "
+            "yrTerm1.noUpfront": "0.287",
+            "yrTerm3.allUpfront": "0.232",
+            "yrTerm1.allUpfront": "0.268",
+            "yrTerm1.partialUpfront": "0.270",
+            "yrTerm3.partialUpfront": "0.236"
           },
-          "ondemand": "0.338 "
+          "ondemand": "0.338"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.947 ",
-            "yrTerm3.allUpfront": "0.892 ",
-            "yrTerm1.allUpfront": "0.928 ",
-            "yrTerm1.partialUpfront": "0.930 ",
-            "yrTerm3.partialUpfront": "0.896 "
+            "yrTerm1.noUpfront": "0.947",
+            "yrTerm3.allUpfront": "0.892",
+            "yrTerm1.allUpfront": "0.928",
+            "yrTerm1.partialUpfront": "0.930",
+            "yrTerm3.partialUpfront": "0.896"
           },
-          "ondemand": "0.998 "
+          "ondemand": "0.998"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.210 ",
-            "yrTerm3.allUpfront": "0.155 ",
-            "yrTerm1.allUpfront": "0.191 ",
-            "yrTerm1.partialUpfront": "0.193 ",
-            "yrTerm3.partialUpfront": "0.159 "
+            "yrTerm1.noUpfront": "0.210",
+            "yrTerm3.allUpfront": "0.155",
+            "yrTerm1.allUpfront": "0.191",
+            "yrTerm1.partialUpfront": "0.193",
+            "yrTerm3.partialUpfront": "0.159"
           },
-          "ondemand": "0.261 "
+          "ondemand": "0.261"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.118 ",
-            "yrTerm3.allUpfront": "0.063 ",
-            "yrTerm1.allUpfront": "0.099 ",
-            "yrTerm1.partialUpfront": "0.101 ",
-            "yrTerm3.partialUpfront": "0.067 "
+            "yrTerm1.noUpfront": "0.118",
+            "yrTerm3.allUpfront": "0.063",
+            "yrTerm1.allUpfront": "0.099",
+            "yrTerm1.partialUpfront": "0.101",
+            "yrTerm3.partialUpfront": "0.067"
           },
-          "ondemand": "0.169 "
+          "ondemand": "0.169"
         }
       },
       "us-east-1": {
@@ -8377,43 +8377,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.493 ",
-            "yrTerm3.allUpfront": "0.382 ",
-            "yrTerm1.allUpfront": "0.455 ",
-            "yrTerm1.partialUpfront": "0.459 ",
-            "yrTerm3.partialUpfront": "0.390 "
+            "yrTerm1.noUpfront": "0.493",
+            "yrTerm3.allUpfront": "0.382",
+            "yrTerm1.allUpfront": "0.455",
+            "yrTerm1.partialUpfront": "0.459",
+            "yrTerm3.partialUpfront": "0.390"
           },
-          "ondemand": "0.594 "
+          "ondemand": "0.594"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.128 ",
-            "yrTerm3.allUpfront": "1.017 ",
-            "yrTerm1.allUpfront": "1.090 ",
-            "yrTerm1.partialUpfront": "1.094 ",
-            "yrTerm3.partialUpfront": "1.025 "
+            "yrTerm1.noUpfront": "1.128",
+            "yrTerm3.allUpfront": "1.017",
+            "yrTerm1.allUpfront": "1.090",
+            "yrTerm1.partialUpfront": "1.094",
+            "yrTerm3.partialUpfront": "1.025"
           },
-          "ondemand": "1.229 "
+          "ondemand": "1.229"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.420 ",
-            "yrTerm3.allUpfront": "0.309 ",
-            "yrTerm1.allUpfront": "0.382 ",
-            "yrTerm1.partialUpfront": "0.386 ",
-            "yrTerm3.partialUpfront": "0.317 "
+            "yrTerm1.noUpfront": "0.420",
+            "yrTerm3.allUpfront": "0.309",
+            "yrTerm1.allUpfront": "0.382",
+            "yrTerm1.partialUpfront": "0.386",
+            "yrTerm3.partialUpfront": "0.317"
           },
-          "ondemand": "0.521 "
+          "ondemand": "0.521"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.236 ",
-            "yrTerm3.allUpfront": "0.125 ",
-            "yrTerm1.allUpfront": "0.198 ",
-            "yrTerm1.partialUpfront": "0.202 ",
-            "yrTerm3.partialUpfront": "0.133 "
+            "yrTerm1.noUpfront": "0.236",
+            "yrTerm3.allUpfront": "0.125",
+            "yrTerm1.allUpfront": "0.198",
+            "yrTerm1.partialUpfront": "0.202",
+            "yrTerm3.partialUpfront": "0.133"
           },
-          "ondemand": "0.337 "
+          "ondemand": "0.337"
         }
       },
       "us-east-1": {
@@ -8826,43 +8826,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.987 ",
-            "yrTerm3.allUpfront": "0.765 ",
-            "yrTerm1.allUpfront": "0.910 ",
-            "yrTerm1.partialUpfront": "0.918 ",
-            "yrTerm3.partialUpfront": "0.781 "
+            "yrTerm1.noUpfront": "0.987",
+            "yrTerm3.allUpfront": "0.765",
+            "yrTerm1.allUpfront": "0.910",
+            "yrTerm1.partialUpfront": "0.918",
+            "yrTerm3.partialUpfront": "0.781"
           },
-          "ondemand": "1.189 "
+          "ondemand": "1.189"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "2.257 ",
-            "yrTerm3.allUpfront": "2.035 ",
-            "yrTerm1.allUpfront": "2.180 ",
-            "yrTerm1.partialUpfront": "2.188 ",
-            "yrTerm3.partialUpfront": "2.051 "
+            "yrTerm1.noUpfront": "2.257",
+            "yrTerm3.allUpfront": "2.035",
+            "yrTerm1.allUpfront": "2.180",
+            "yrTerm1.partialUpfront": "2.188",
+            "yrTerm3.partialUpfront": "2.051"
           },
-          "ondemand": "2.459 "
+          "ondemand": "2.459"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.841 ",
-            "yrTerm3.allUpfront": "0.619 ",
-            "yrTerm1.allUpfront": "0.764 ",
-            "yrTerm1.partialUpfront": "0.772 ",
-            "yrTerm3.partialUpfront": "0.635 "
+            "yrTerm1.noUpfront": "0.841",
+            "yrTerm3.allUpfront": "0.619",
+            "yrTerm1.allUpfront": "0.764",
+            "yrTerm1.partialUpfront": "0.772",
+            "yrTerm3.partialUpfront": "0.635"
           },
-          "ondemand": "1.043 "
+          "ondemand": "1.043"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.473 ",
-            "yrTerm3.allUpfront": "0.251 ",
-            "yrTerm1.allUpfront": "0.396 ",
-            "yrTerm1.partialUpfront": "0.404 ",
-            "yrTerm3.partialUpfront": "0.267 "
+            "yrTerm1.noUpfront": "0.473",
+            "yrTerm3.allUpfront": "0.251",
+            "yrTerm1.allUpfront": "0.396",
+            "yrTerm1.partialUpfront": "0.404",
+            "yrTerm3.partialUpfront": "0.267"
           },
-          "ondemand": "0.675 "
+          "ondemand": "0.675"
         }
       },
       "us-east-1": {
@@ -9275,43 +9275,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.975 ",
-            "yrTerm3.allUpfront": "1.530 ",
-            "yrTerm1.allUpfront": "1.821 ",
-            "yrTerm1.partialUpfront": "1.837 ",
-            "yrTerm3.partialUpfront": "1.562 "
+            "yrTerm1.noUpfront": "1.975",
+            "yrTerm3.allUpfront": "1.530",
+            "yrTerm1.allUpfront": "1.821",
+            "yrTerm1.partialUpfront": "1.837",
+            "yrTerm3.partialUpfront": "1.562"
           },
-          "ondemand": "2.378 "
+          "ondemand": "2.378"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "4.515 ",
-            "yrTerm3.allUpfront": "4.070 ",
-            "yrTerm1.allUpfront": "4.361 ",
-            "yrTerm1.partialUpfront": "4.377 ",
-            "yrTerm3.partialUpfront": "4.102 "
+            "yrTerm1.noUpfront": "4.515",
+            "yrTerm3.allUpfront": "4.070",
+            "yrTerm1.allUpfront": "4.361",
+            "yrTerm1.partialUpfront": "4.377",
+            "yrTerm3.partialUpfront": "4.102"
           },
-          "ondemand": "4.918 "
+          "ondemand": "4.918"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.683 ",
-            "yrTerm3.allUpfront": "1.238 ",
-            "yrTerm1.allUpfront": "1.529 ",
-            "yrTerm1.partialUpfront": "1.545 ",
-            "yrTerm3.partialUpfront": "1.270 "
+            "yrTerm1.noUpfront": "1.683",
+            "yrTerm3.allUpfront": "1.238",
+            "yrTerm1.allUpfront": "1.529",
+            "yrTerm1.partialUpfront": "1.545",
+            "yrTerm3.partialUpfront": "1.270"
           },
-          "ondemand": "2.086 "
+          "ondemand": "2.086"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.947 ",
-            "yrTerm3.allUpfront": "0.502 ",
-            "yrTerm1.allUpfront": "0.793 ",
-            "yrTerm1.partialUpfront": "0.809 ",
-            "yrTerm3.partialUpfront": "0.534 "
+            "yrTerm1.noUpfront": "0.947",
+            "yrTerm3.allUpfront": "0.502",
+            "yrTerm1.allUpfront": "0.793",
+            "yrTerm1.partialUpfront": "0.809",
+            "yrTerm3.partialUpfront": "0.534"
           },
-          "ondemand": "1.350 "
+          "ondemand": "1.350"
         }
       },
       "us-east-1": {
@@ -9724,43 +9724,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "4.935 ",
-            "yrTerm3.allUpfront": "3.825 ",
-            "yrTerm1.allUpfront": "4.551 ",
-            "yrTerm1.partialUpfront": "4.591 ",
-            "yrTerm3.partialUpfront": "3.906 "
+            "yrTerm1.noUpfront": "4.935",
+            "yrTerm3.allUpfront": "3.825",
+            "yrTerm1.allUpfront": "4.551",
+            "yrTerm1.partialUpfront": "4.591",
+            "yrTerm3.partialUpfront": "3.906"
           },
-          "ondemand": "5.945 "
+          "ondemand": "5.945"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "11.285 ",
-            "yrTerm3.allUpfront": "10.175 ",
-            "yrTerm1.allUpfront": "10.901 ",
-            "yrTerm1.partialUpfront": "10.941 ",
-            "yrTerm3.partialUpfront": "10.256 "
+            "yrTerm1.noUpfront": "11.285",
+            "yrTerm3.allUpfront": "10.175",
+            "yrTerm1.allUpfront": "10.901",
+            "yrTerm1.partialUpfront": "10.941",
+            "yrTerm3.partialUpfront": "10.256"
           },
-          "ondemand": "12.295 "
+          "ondemand": "12.295"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "4.205 ",
-            "yrTerm3.allUpfront": "3.095 ",
-            "yrTerm1.allUpfront": "3.821 ",
-            "yrTerm1.partialUpfront": "3.861 ",
-            "yrTerm3.partialUpfront": "3.176 "
+            "yrTerm1.noUpfront": "4.205",
+            "yrTerm3.allUpfront": "3.095",
+            "yrTerm1.allUpfront": "3.821",
+            "yrTerm1.partialUpfront": "3.861",
+            "yrTerm3.partialUpfront": "3.176"
           },
-          "ondemand": "5.215 "
+          "ondemand": "5.215"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "2.365 ",
-            "yrTerm3.allUpfront": "1.255 ",
-            "yrTerm1.allUpfront": "1.981 ",
-            "yrTerm1.partialUpfront": "2.021 ",
-            "yrTerm3.partialUpfront": "1.336 "
+            "yrTerm1.noUpfront": "2.365",
+            "yrTerm3.allUpfront": "1.255",
+            "yrTerm1.allUpfront": "1.981",
+            "yrTerm1.partialUpfront": "2.021",
+            "yrTerm3.partialUpfront": "1.336"
           },
-          "ondemand": "3.375 "
+          "ondemand": "3.375"
         }
       },
       "us-east-1": {
@@ -11969,43 +11969,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.273 ",
-            "yrTerm3.allUpfront": "0.227 ",
-            "yrTerm1.allUpfront": "0.256 ",
-            "yrTerm1.partialUpfront": "0.258 ",
-            "yrTerm3.partialUpfront": "0.230 "
+            "yrTerm1.noUpfront": "0.273",
+            "yrTerm3.allUpfront": "0.227",
+            "yrTerm1.allUpfront": "0.256",
+            "yrTerm1.partialUpfront": "0.258",
+            "yrTerm3.partialUpfront": "0.230"
           },
-          "ondemand": "0.306 "
+          "ondemand": "0.306"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.933 ",
-            "yrTerm3.allUpfront": "0.887 ",
-            "yrTerm1.allUpfront": "0.916 ",
-            "yrTerm1.partialUpfront": "0.918 ",
-            "yrTerm3.partialUpfront": "0.890 "
+            "yrTerm1.noUpfront": "0.933",
+            "yrTerm3.allUpfront": "0.887",
+            "yrTerm1.allUpfront": "0.916",
+            "yrTerm1.partialUpfront": "0.918",
+            "yrTerm3.partialUpfront": "0.890"
           },
-          "ondemand": "0.966 "
+          "ondemand": "0.966"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.196 ",
-            "yrTerm3.allUpfront": "0.150 ",
-            "yrTerm1.allUpfront": "0.179 ",
-            "yrTerm1.partialUpfront": "0.181 ",
-            "yrTerm3.partialUpfront": "0.153 "
+            "yrTerm1.noUpfront": "0.196",
+            "yrTerm3.allUpfront": "0.150",
+            "yrTerm1.allUpfront": "0.179",
+            "yrTerm1.partialUpfront": "0.181",
+            "yrTerm3.partialUpfront": "0.153"
           },
-          "ondemand": "0.229 "
+          "ondemand": "0.229"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.104 ",
-            "yrTerm3.allUpfront": "0.058 ",
-            "yrTerm1.allUpfront": "0.087 ",
-            "yrTerm1.partialUpfront": "0.089 ",
-            "yrTerm3.partialUpfront": "0.061 "
+            "yrTerm1.noUpfront": "0.104",
+            "yrTerm3.allUpfront": "0.058",
+            "yrTerm1.allUpfront": "0.087",
+            "yrTerm1.partialUpfront": "0.089",
+            "yrTerm3.partialUpfront": "0.061"
           },
-          "ondemand": "0.137 "
+          "ondemand": "0.137"
         }
       },
       "us-east-1": {
@@ -12418,43 +12418,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.463 ",
-            "yrTerm3.allUpfront": "0.373 ",
-            "yrTerm1.allUpfront": "0.430 ",
-            "yrTerm1.partialUpfront": "0.433 ",
-            "yrTerm3.partialUpfront": "0.381 "
+            "yrTerm1.noUpfront": "0.463",
+            "yrTerm3.allUpfront": "0.373",
+            "yrTerm1.allUpfront": "0.430",
+            "yrTerm1.partialUpfront": "0.433",
+            "yrTerm3.partialUpfront": "0.381"
           },
-          "ondemand": "0.532 "
+          "ondemand": "0.532"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.098 ",
-            "yrTerm3.allUpfront": "1.008 ",
-            "yrTerm1.allUpfront": "1.065 ",
-            "yrTerm1.partialUpfront": "1.068 ",
-            "yrTerm3.partialUpfront": "1.016 "
+            "yrTerm1.noUpfront": "1.098",
+            "yrTerm3.allUpfront": "1.008",
+            "yrTerm1.allUpfront": "1.065",
+            "yrTerm1.partialUpfront": "1.068",
+            "yrTerm3.partialUpfront": "1.016"
           },
-          "ondemand": "1.167 "
+          "ondemand": "1.167"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.390 ",
-            "yrTerm3.allUpfront": "0.300 ",
-            "yrTerm1.allUpfront": "0.357 ",
-            "yrTerm1.partialUpfront": "0.360 ",
-            "yrTerm3.partialUpfront": "0.308 "
+            "yrTerm1.noUpfront": "0.390",
+            "yrTerm3.allUpfront": "0.300",
+            "yrTerm1.allUpfront": "0.357",
+            "yrTerm1.partialUpfront": "0.360",
+            "yrTerm3.partialUpfront": "0.308"
           },
-          "ondemand": "0.459 "
+          "ondemand": "0.459"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.206 ",
-            "yrTerm3.allUpfront": "0.116 ",
-            "yrTerm1.allUpfront": "0.173 ",
-            "yrTerm1.partialUpfront": "0.176 ",
-            "yrTerm3.partialUpfront": "0.124 "
+            "yrTerm1.noUpfront": "0.206",
+            "yrTerm3.allUpfront": "0.116",
+            "yrTerm1.allUpfront": "0.173",
+            "yrTerm1.partialUpfront": "0.176",
+            "yrTerm3.partialUpfront": "0.124"
           },
-          "ondemand": "0.275 "
+          "ondemand": "0.275"
         }
       },
       "us-east-1": {
@@ -12867,43 +12867,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.926 ",
-            "yrTerm3.allUpfront": "0.745 ",
-            "yrTerm1.allUpfront": "0.859 ",
-            "yrTerm1.partialUpfront": "0.866 ",
-            "yrTerm3.partialUpfront": "0.760 "
+            "yrTerm1.noUpfront": "0.926",
+            "yrTerm3.allUpfront": "0.745",
+            "yrTerm1.allUpfront": "0.859",
+            "yrTerm1.partialUpfront": "0.866",
+            "yrTerm3.partialUpfront": "0.760"
           },
-          "ondemand": "1.063 "
+          "ondemand": "1.063"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "2.196 ",
-            "yrTerm3.allUpfront": "2.015 ",
-            "yrTerm1.allUpfront": "2.129 ",
-            "yrTerm1.partialUpfront": "2.136 ",
-            "yrTerm3.partialUpfront": "2.030 "
+            "yrTerm1.noUpfront": "2.196",
+            "yrTerm3.allUpfront": "2.015",
+            "yrTerm1.allUpfront": "2.129",
+            "yrTerm1.partialUpfront": "2.136",
+            "yrTerm3.partialUpfront": "2.030"
           },
-          "ondemand": "2.333 "
+          "ondemand": "2.333"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.780 ",
-            "yrTerm3.allUpfront": "0.599 ",
-            "yrTerm1.allUpfront": "0.713 ",
-            "yrTerm1.partialUpfront": "0.720 ",
-            "yrTerm3.partialUpfront": "0.614 "
+            "yrTerm1.noUpfront": "0.780",
+            "yrTerm3.allUpfront": "0.599",
+            "yrTerm1.allUpfront": "0.713",
+            "yrTerm1.partialUpfront": "0.720",
+            "yrTerm3.partialUpfront": "0.614"
           },
-          "ondemand": "0.917 "
+          "ondemand": "0.917"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.412 ",
-            "yrTerm3.allUpfront": "0.231 ",
-            "yrTerm1.allUpfront": "0.345 ",
-            "yrTerm1.partialUpfront": "0.352 ",
-            "yrTerm3.partialUpfront": "0.246 "
+            "yrTerm1.noUpfront": "0.412",
+            "yrTerm3.allUpfront": "0.231",
+            "yrTerm1.allUpfront": "0.345",
+            "yrTerm1.partialUpfront": "0.352",
+            "yrTerm3.partialUpfront": "0.246"
           },
-          "ondemand": "0.549 "
+          "ondemand": "0.549"
         }
       },
       "us-east-1": {
@@ -13316,43 +13316,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.852 ",
-            "yrTerm3.allUpfront": "1.490 ",
-            "yrTerm1.allUpfront": "1.718 ",
-            "yrTerm1.partialUpfront": "1.732 ",
-            "yrTerm3.partialUpfront": "1.520 "
+            "yrTerm1.noUpfront": "1.852",
+            "yrTerm3.allUpfront": "1.490",
+            "yrTerm1.allUpfront": "1.718",
+            "yrTerm1.partialUpfront": "1.732",
+            "yrTerm3.partialUpfront": "1.520"
           },
-          "ondemand": "2.125 "
+          "ondemand": "2.125"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "4.392 ",
-            "yrTerm3.allUpfront": "4.030 ",
-            "yrTerm1.allUpfront": "4.258 ",
-            "yrTerm1.partialUpfront": "4.272 ",
-            "yrTerm3.partialUpfront": "4.060 "
+            "yrTerm1.noUpfront": "4.392",
+            "yrTerm3.allUpfront": "4.030",
+            "yrTerm1.allUpfront": "4.258",
+            "yrTerm1.partialUpfront": "4.272",
+            "yrTerm3.partialUpfront": "4.060"
           },
-          "ondemand": "4.665 "
+          "ondemand": "4.665"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.560 ",
-            "yrTerm3.allUpfront": "1.198 ",
-            "yrTerm1.allUpfront": "1.426 ",
-            "yrTerm1.partialUpfront": "1.440 ",
-            "yrTerm3.partialUpfront": "1.228 "
+            "yrTerm1.noUpfront": "1.560",
+            "yrTerm3.allUpfront": "1.198",
+            "yrTerm1.allUpfront": "1.426",
+            "yrTerm1.partialUpfront": "1.440",
+            "yrTerm3.partialUpfront": "1.228"
           },
-          "ondemand": "1.833 "
+          "ondemand": "1.833"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.824 ",
-            "yrTerm3.allUpfront": "0.462 ",
-            "yrTerm1.allUpfront": "0.690 ",
-            "yrTerm1.partialUpfront": "0.704 ",
-            "yrTerm3.partialUpfront": "0.492 "
+            "yrTerm1.noUpfront": "0.824",
+            "yrTerm3.allUpfront": "0.462",
+            "yrTerm1.allUpfront": "0.690",
+            "yrTerm1.partialUpfront": "0.704",
+            "yrTerm3.partialUpfront": "0.492"
           },
-          "ondemand": "1.097 "
+          "ondemand": "1.097"
         }
       },
       "us-east-1": {
@@ -13765,43 +13765,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "3.963 ",
-            "yrTerm3.allUpfront": "3.239 ",
-            "yrTerm1.allUpfront": "3.695 ",
-            "yrTerm1.partialUpfront": "3.723 ",
-            "yrTerm3.partialUpfront": "3.298 "
+            "yrTerm1.noUpfront": "3.963",
+            "yrTerm3.allUpfront": "3.239",
+            "yrTerm1.allUpfront": "3.695",
+            "yrTerm1.partialUpfront": "3.723",
+            "yrTerm3.partialUpfront": "3.298"
           },
-          "ondemand": "4.508 "
+          "ondemand": "4.508"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "9.678 ",
-            "yrTerm3.allUpfront": "8.954 ",
-            "yrTerm1.allUpfront": "9.410 ",
-            "yrTerm1.partialUpfront": "9.438 ",
-            "yrTerm3.partialUpfront": "9.013 "
+            "yrTerm1.noUpfront": "9.678",
+            "yrTerm3.allUpfront": "8.954",
+            "yrTerm1.allUpfront": "9.410",
+            "yrTerm1.partialUpfront": "9.438",
+            "yrTerm3.partialUpfront": "9.013"
           },
-          "ondemand": "10.223 "
+          "ondemand": "10.223"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "3.306 ",
-            "yrTerm3.allUpfront": "2.582 ",
-            "yrTerm1.allUpfront": "3.038 ",
-            "yrTerm1.partialUpfront": "3.066 ",
-            "yrTerm3.partialUpfront": "2.641 "
+            "yrTerm1.noUpfront": "3.306",
+            "yrTerm3.allUpfront": "2.582",
+            "yrTerm1.allUpfront": "3.038",
+            "yrTerm1.partialUpfront": "3.066",
+            "yrTerm3.partialUpfront": "2.641"
           },
-          "ondemand": "3.851 "
+          "ondemand": "3.851"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.650 ",
-            "yrTerm3.allUpfront": "0.926 ",
-            "yrTerm1.allUpfront": "1.382 ",
-            "yrTerm1.partialUpfront": "1.410 ",
-            "yrTerm3.partialUpfront": "0.985 "
+            "yrTerm1.noUpfront": "1.650",
+            "yrTerm3.allUpfront": "0.926",
+            "yrTerm1.allUpfront": "1.382",
+            "yrTerm1.partialUpfront": "1.410",
+            "yrTerm3.partialUpfront": "0.985"
           },
-          "ondemand": "2.195 "
+          "ondemand": "2.195"
         }
       },
       "us-east-1": {
@@ -17001,306 +17001,306 @@
   },
   {
     "family": "Memory optimized",
-    "enhanced_networking": false,
+    "enhanced_networking": true,
     "vCPU": 128,
     "generation": "current",
-    "ebs_iops": 0,
-    "network_performance": "10 Gigabit",
-    "ebs_throughput": 0,
+    "ebs_iops": 65000.0,
+    "network_performance": "20 Gigabit",
+    "ebs_throughput": 1250.0,
     "pretty_name": "X1 32xlarge",
     "pricing": {
       "us-east-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "17.700 ",
-            "yrTerm3.allUpfront": "12.274 ",
-            "yrTerm1.allUpfront": "16.213 ",
-            "yrTerm1.partialUpfront": "16.370 ",
-            "yrTerm3.partialUpfront": "12.512 "
+            "yrTerm1.noUpfront": "17.700",
+            "yrTerm3.allUpfront": "12.274",
+            "yrTerm1.allUpfront": "16.213",
+            "yrTerm1.partialUpfront": "16.370",
+            "yrTerm3.partialUpfront": "12.512"
           },
-          "ondemand": "21.880 "
+          "ondemand": "21.880"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "57.502 ",
-            "yrTerm3.allUpfront": "52.076 ",
-            "yrTerm1.allUpfront": "56.015 ",
-            "yrTerm1.partialUpfront": "56.172 ",
-            "yrTerm3.partialUpfront": "52.314 "
+            "yrTerm1.noUpfront": "57.502",
+            "yrTerm3.allUpfront": "52.076",
+            "yrTerm1.allUpfront": "56.015",
+            "yrTerm1.partialUpfront": "56.172",
+            "yrTerm3.partialUpfront": "52.314"
           },
-          "ondemand": "61.682 "
+          "ondemand": "61.682"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "15.046 ",
-            "yrTerm3.allUpfront": "9.620 ",
-            "yrTerm1.allUpfront": "13.559 ",
-            "yrTerm1.partialUpfront": "13.716 ",
-            "yrTerm3.partialUpfront": "9.858 "
+            "yrTerm1.noUpfront": "15.046",
+            "yrTerm3.allUpfront": "9.620",
+            "yrTerm1.allUpfront": "13.559",
+            "yrTerm1.partialUpfront": "13.716",
+            "yrTerm3.partialUpfront": "9.858"
           },
-          "ondemand": "19.226 "
+          "ondemand": "19.226"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "9.158 ",
-            "yrTerm3.allUpfront": "3.732 ",
-            "yrTerm1.allUpfront": "7.671 ",
-            "yrTerm1.partialUpfront": "7.828 ",
-            "yrTerm3.partialUpfront": "3.970 "
+            "yrTerm1.noUpfront": "9.158",
+            "yrTerm3.allUpfront": "3.732",
+            "yrTerm1.allUpfront": "7.671",
+            "yrTerm1.partialUpfront": "7.828",
+            "yrTerm3.partialUpfront": "3.970"
           },
-          "ondemand": "13.338 "
+          "ondemand": "13.338"
         }
       },
       "ap-northeast-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "21.822 ",
-            "yrTerm3.allUpfront": "13.953 ",
-            "yrTerm1.allUpfront": "19.665 ",
-            "yrTerm1.partialUpfront": "19.892 ",
-            "yrTerm3.partialUpfront": "14.299 "
+            "yrTerm1.noUpfront": "21.822",
+            "yrTerm3.allUpfront": "13.953",
+            "yrTerm1.allUpfront": "19.665",
+            "yrTerm1.partialUpfront": "19.892",
+            "yrTerm3.partialUpfront": "14.299"
           },
-          "ondemand": "27.883 "
+          "ondemand": "27.883"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "61.624 ",
-            "yrTerm3.allUpfront": "53.755 ",
-            "yrTerm1.allUpfront": "59.467 ",
-            "yrTerm1.partialUpfront": "59.694 ",
-            "yrTerm3.partialUpfront": "54.101 "
+            "yrTerm1.noUpfront": "61.624",
+            "yrTerm3.allUpfront": "53.755",
+            "yrTerm1.allUpfront": "59.467",
+            "yrTerm1.partialUpfront": "59.694",
+            "yrTerm3.partialUpfront": "54.101"
           },
-          "ondemand": "67.685 "
+          "ondemand": "67.685"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "19.168 ",
-            "yrTerm3.allUpfront": "11.299 ",
-            "yrTerm1.allUpfront": "17.011 ",
-            "yrTerm1.partialUpfront": "17.238 ",
-            "yrTerm3.partialUpfront": "11.645 "
+            "yrTerm1.noUpfront": "19.168",
+            "yrTerm3.allUpfront": "11.299",
+            "yrTerm1.allUpfront": "17.011",
+            "yrTerm1.partialUpfront": "17.238",
+            "yrTerm3.partialUpfront": "11.645"
           },
-          "ondemand": "25.229 "
+          "ondemand": "25.229"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "13.280 ",
-            "yrTerm3.allUpfront": "5.411 ",
-            "yrTerm1.allUpfront": "11.123 ",
-            "yrTerm1.partialUpfront": "11.350 ",
-            "yrTerm3.partialUpfront": "5.757 "
+            "yrTerm1.noUpfront": "13.280",
+            "yrTerm3.allUpfront": "5.411",
+            "yrTerm1.allUpfront": "11.123",
+            "yrTerm1.partialUpfront": "11.350",
+            "yrTerm3.partialUpfront": "5.757"
           },
-          "ondemand": "19.341 "
+          "ondemand": "19.341"
         }
       },
       "ap-southeast-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "21.822 ",
-            "yrTerm3.allUpfront": "13.953 ",
-            "yrTerm1.allUpfront": "19.665 ",
-            "yrTerm1.partialUpfront": "19.892 ",
-            "yrTerm3.partialUpfront": "14.299 "
+            "yrTerm1.noUpfront": "21.822",
+            "yrTerm3.allUpfront": "13.953",
+            "yrTerm1.allUpfront": "19.665",
+            "yrTerm1.partialUpfront": "19.892",
+            "yrTerm3.partialUpfront": "14.299"
           },
-          "ondemand": "27.883 "
+          "ondemand": "27.883"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "61.624 ",
-            "yrTerm3.allUpfront": "53.755 ",
-            "yrTerm1.allUpfront": "59.467 ",
-            "yrTerm1.partialUpfront": "59.694 ",
-            "yrTerm3.partialUpfront": "54.101 "
+            "yrTerm1.noUpfront": "61.624",
+            "yrTerm3.allUpfront": "53.755",
+            "yrTerm1.allUpfront": "59.467",
+            "yrTerm1.partialUpfront": "59.694",
+            "yrTerm3.partialUpfront": "54.101"
           },
-          "ondemand": "67.685 "
+          "ondemand": "67.685"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "19.168 ",
-            "yrTerm3.allUpfront": "11.299 ",
-            "yrTerm1.allUpfront": "17.011 ",
-            "yrTerm1.partialUpfront": "17.238 ",
-            "yrTerm3.partialUpfront": "11.645 "
+            "yrTerm1.noUpfront": "19.168",
+            "yrTerm3.allUpfront": "11.299",
+            "yrTerm1.allUpfront": "17.011",
+            "yrTerm1.partialUpfront": "17.238",
+            "yrTerm3.partialUpfront": "11.645"
           },
-          "ondemand": "25.229 "
+          "ondemand": "25.229"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "13.280 ",
-            "yrTerm3.allUpfront": "5.411 ",
-            "yrTerm1.allUpfront": "11.123 ",
-            "yrTerm1.partialUpfront": "11.350 ",
-            "yrTerm3.partialUpfront": "5.757 "
+            "yrTerm1.noUpfront": "13.280",
+            "yrTerm3.allUpfront": "5.411",
+            "yrTerm1.allUpfront": "11.123",
+            "yrTerm1.partialUpfront": "11.350",
+            "yrTerm3.partialUpfront": "5.757"
           },
-          "ondemand": "19.341 "
+          "ondemand": "19.341"
         }
       },
       "ap-southeast-2": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "21.822 ",
-            "yrTerm3.allUpfront": "13.953 ",
-            "yrTerm1.allUpfront": "19.665 ",
-            "yrTerm1.partialUpfront": "19.892 ",
-            "yrTerm3.partialUpfront": "14.299 "
+            "yrTerm1.noUpfront": "21.822",
+            "yrTerm3.allUpfront": "13.953",
+            "yrTerm1.allUpfront": "19.665",
+            "yrTerm1.partialUpfront": "19.892",
+            "yrTerm3.partialUpfront": "14.299"
           },
-          "ondemand": "27.883 "
+          "ondemand": "27.883"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "61.624 ",
-            "yrTerm3.allUpfront": "53.755 ",
-            "yrTerm1.allUpfront": "59.467 ",
-            "yrTerm1.partialUpfront": "59.694 ",
-            "yrTerm3.partialUpfront": "54.101 "
+            "yrTerm1.noUpfront": "61.624",
+            "yrTerm3.allUpfront": "53.755",
+            "yrTerm1.allUpfront": "59.467",
+            "yrTerm1.partialUpfront": "59.694",
+            "yrTerm3.partialUpfront": "54.101"
           },
-          "ondemand": "67.685 "
+          "ondemand": "67.685"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "19.168 ",
-            "yrTerm3.allUpfront": "11.299 ",
-            "yrTerm1.allUpfront": "17.011 ",
-            "yrTerm1.partialUpfront": "17.238 ",
-            "yrTerm3.partialUpfront": "11.645 "
+            "yrTerm1.noUpfront": "19.168",
+            "yrTerm3.allUpfront": "11.299",
+            "yrTerm1.allUpfront": "17.011",
+            "yrTerm1.partialUpfront": "17.238",
+            "yrTerm3.partialUpfront": "11.645"
           },
-          "ondemand": "25.229 "
+          "ondemand": "25.229"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "13.280 ",
-            "yrTerm3.allUpfront": "5.411 ",
-            "yrTerm1.allUpfront": "11.123 ",
-            "yrTerm1.partialUpfront": "11.350 ",
-            "yrTerm3.partialUpfront": "5.757 "
+            "yrTerm1.noUpfront": "13.280",
+            "yrTerm3.allUpfront": "5.411",
+            "yrTerm1.allUpfront": "11.123",
+            "yrTerm1.partialUpfront": "11.350",
+            "yrTerm3.partialUpfront": "5.757"
           },
-          "ondemand": "19.341 "
+          "ondemand": "19.341"
         }
       },
       "us-west-2": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "17.700 ",
-            "yrTerm3.allUpfront": "12.274 ",
-            "yrTerm1.allUpfront": "16.213 ",
-            "yrTerm1.partialUpfront": "16.370 ",
-            "yrTerm3.partialUpfront": "12.512 "
+            "yrTerm1.noUpfront": "17.700",
+            "yrTerm3.allUpfront": "12.274",
+            "yrTerm1.allUpfront": "16.213",
+            "yrTerm1.partialUpfront": "16.370",
+            "yrTerm3.partialUpfront": "12.512"
           },
-          "ondemand": "21.880 "
+          "ondemand": "21.880"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "57.502 ",
-            "yrTerm3.allUpfront": "52.076 ",
-            "yrTerm1.allUpfront": "56.015 ",
-            "yrTerm1.partialUpfront": "56.172 ",
-            "yrTerm3.partialUpfront": "52.314 "
+            "yrTerm1.noUpfront": "57.502",
+            "yrTerm3.allUpfront": "52.076",
+            "yrTerm1.allUpfront": "56.015",
+            "yrTerm1.partialUpfront": "56.172",
+            "yrTerm3.partialUpfront": "52.314"
           },
-          "ondemand": "61.682 "
+          "ondemand": "61.682"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "15.046 ",
-            "yrTerm3.allUpfront": "9.620 ",
-            "yrTerm1.allUpfront": "13.559 ",
-            "yrTerm1.partialUpfront": "13.716 ",
-            "yrTerm3.partialUpfront": "9.858 "
+            "yrTerm1.noUpfront": "15.046",
+            "yrTerm3.allUpfront": "9.620",
+            "yrTerm1.allUpfront": "13.559",
+            "yrTerm1.partialUpfront": "13.716",
+            "yrTerm3.partialUpfront": "9.858"
           },
-          "ondemand": "19.226 "
+          "ondemand": "19.226"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "9.158 ",
-            "yrTerm3.allUpfront": "3.732 ",
-            "yrTerm1.allUpfront": "7.671 ",
-            "yrTerm1.partialUpfront": "7.828 ",
-            "yrTerm3.partialUpfront": "3.970 "
+            "yrTerm1.noUpfront": "9.158",
+            "yrTerm3.allUpfront": "3.732",
+            "yrTerm1.allUpfront": "7.671",
+            "yrTerm1.partialUpfront": "7.828",
+            "yrTerm3.partialUpfront": "3.970"
           },
-          "ondemand": "13.338 "
+          "ondemand": "13.338"
         }
       },
       "eu-central-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "21.364 ",
-            "yrTerm3.allUpfront": "13.767 ",
-            "yrTerm1.allUpfront": "19.282 ",
-            "yrTerm1.partialUpfront": "19.501 ",
-            "yrTerm3.partialUpfront": "14.100 "
+            "yrTerm1.noUpfront": "21.364",
+            "yrTerm3.allUpfront": "13.767",
+            "yrTerm1.allUpfront": "19.282",
+            "yrTerm1.partialUpfront": "19.501",
+            "yrTerm3.partialUpfront": "14.100"
           },
-          "ondemand": "27.216 "
+          "ondemand": "27.216"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "61.166 ",
-            "yrTerm3.allUpfront": "53.569 ",
-            "yrTerm1.allUpfront": "59.084 ",
-            "yrTerm1.partialUpfront": "59.303 ",
-            "yrTerm3.partialUpfront": "53.902 "
+            "yrTerm1.noUpfront": "61.166",
+            "yrTerm3.allUpfront": "53.569",
+            "yrTerm1.allUpfront": "59.084",
+            "yrTerm1.partialUpfront": "59.303",
+            "yrTerm3.partialUpfront": "53.902"
           },
-          "ondemand": "67.018 "
+          "ondemand": "67.018"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "18.710 ",
-            "yrTerm3.allUpfront": "11.113 ",
-            "yrTerm1.allUpfront": "16.628 ",
-            "yrTerm1.partialUpfront": "16.847 ",
-            "yrTerm3.partialUpfront": "11.446 "
+            "yrTerm1.noUpfront": "18.710",
+            "yrTerm3.allUpfront": "11.113",
+            "yrTerm1.allUpfront": "16.628",
+            "yrTerm1.partialUpfront": "16.847",
+            "yrTerm3.partialUpfront": "11.446"
           },
-          "ondemand": "24.562 "
+          "ondemand": "24.562"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "12.822 ",
-            "yrTerm3.allUpfront": "5.225 ",
-            "yrTerm1.allUpfront": "10.740 ",
-            "yrTerm1.partialUpfront": "10.959 ",
-            "yrTerm3.partialUpfront": "5.558 "
+            "yrTerm1.noUpfront": "12.822",
+            "yrTerm3.allUpfront": "5.225",
+            "yrTerm1.allUpfront": "10.740",
+            "yrTerm1.partialUpfront": "10.959",
+            "yrTerm3.partialUpfront": "5.558"
           },
-          "ondemand": "18.674 "
+          "ondemand": "18.674"
         }
       },
       "eu-west-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "19.532 ",
-            "yrTerm3.allUpfront": "13.020 ",
-            "yrTerm1.allUpfront": "17.747 ",
-            "yrTerm1.partialUpfront": "17.935 ",
-            "yrTerm3.partialUpfront": "13.306 "
+            "yrTerm1.noUpfront": "19.532",
+            "yrTerm3.allUpfront": "13.020",
+            "yrTerm1.allUpfront": "17.747",
+            "yrTerm1.partialUpfront": "17.935",
+            "yrTerm3.partialUpfront": "13.306"
           },
-          "ondemand": "24.548 "
+          "ondemand": "24.548"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "59.334 ",
-            "yrTerm3.allUpfront": "52.822 ",
-            "yrTerm1.allUpfront": "57.549 ",
-            "yrTerm1.partialUpfront": "57.737 ",
-            "yrTerm3.partialUpfront": "53.108 "
+            "yrTerm1.noUpfront": "59.334",
+            "yrTerm3.allUpfront": "52.822",
+            "yrTerm1.allUpfront": "57.549",
+            "yrTerm1.partialUpfront": "57.737",
+            "yrTerm3.partialUpfront": "53.108"
           },
-          "ondemand": "64.350 "
+          "ondemand": "64.350"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "16.878 ",
-            "yrTerm3.allUpfront": "10.366 ",
-            "yrTerm1.allUpfront": "15.093 ",
-            "yrTerm1.partialUpfront": "15.281 ",
-            "yrTerm3.partialUpfront": "10.652 "
+            "yrTerm1.noUpfront": "16.878",
+            "yrTerm3.allUpfront": "10.366",
+            "yrTerm1.allUpfront": "15.093",
+            "yrTerm1.partialUpfront": "15.281",
+            "yrTerm3.partialUpfront": "10.652"
           },
-          "ondemand": "21.894 "
+          "ondemand": "21.894"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "10.990 ",
-            "yrTerm3.allUpfront": "4.478 ",
-            "yrTerm1.allUpfront": "9.205 ",
-            "yrTerm1.partialUpfront": "9.393 ",
-            "yrTerm3.partialUpfront": "4.764 "
+            "yrTerm1.noUpfront": "10.990",
+            "yrTerm3.allUpfront": "4.478",
+            "yrTerm1.allUpfront": "9.205",
+            "yrTerm1.partialUpfront": "9.393",
+            "yrTerm3.partialUpfront": "4.764"
           },
-          "ondemand": "16.006 "
+          "ondemand": "16.006"
         }
       }
     },
@@ -17324,7 +17324,7 @@
     "instance_type": "x1.32xlarge",
     "ECU": 349.0,
     "memory": 1952.0,
-    "ebs_max_bandwidth": 0
+    "ebs_max_bandwidth": 10000.0
   },
   {
     "family": "Memory optimized",
@@ -17339,43 +17339,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.314 ",
-            "yrTerm3.allUpfront": "0.249 ",
-            "yrTerm1.allUpfront": "0.290 ",
-            "yrTerm1.partialUpfront": "0.293 ",
-            "yrTerm3.partialUpfront": "0.254 "
+            "yrTerm1.noUpfront": "0.314",
+            "yrTerm3.allUpfront": "0.249",
+            "yrTerm1.allUpfront": "0.290",
+            "yrTerm1.partialUpfront": "0.293",
+            "yrTerm3.partialUpfront": "0.254"
           },
-          "ondemand": "0.359 "
+          "ondemand": "0.359"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.974 ",
-            "yrTerm3.allUpfront": "0.909 ",
-            "yrTerm1.allUpfront": "0.950 ",
-            "yrTerm1.partialUpfront": "0.953 ",
-            "yrTerm3.partialUpfront": "0.914 "
+            "yrTerm1.noUpfront": "0.974",
+            "yrTerm3.allUpfront": "0.909",
+            "yrTerm1.allUpfront": "0.950",
+            "yrTerm1.partialUpfront": "0.953",
+            "yrTerm3.partialUpfront": "0.914"
           },
-          "ondemand": "1.019 "
+          "ondemand": "1.019"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.237 ",
-            "yrTerm3.allUpfront": "0.172 ",
-            "yrTerm1.allUpfront": "0.213 ",
-            "yrTerm1.partialUpfront": "0.216 ",
-            "yrTerm3.partialUpfront": "0.177 "
+            "yrTerm1.noUpfront": "0.237",
+            "yrTerm3.allUpfront": "0.172",
+            "yrTerm1.allUpfront": "0.213",
+            "yrTerm1.partialUpfront": "0.216",
+            "yrTerm3.partialUpfront": "0.177"
           },
-          "ondemand": "0.282 "
+          "ondemand": "0.282"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.145 ",
-            "yrTerm3.allUpfront": "0.080 ",
-            "yrTerm1.allUpfront": "0.121 ",
-            "yrTerm1.partialUpfront": "0.124 ",
-            "yrTerm3.partialUpfront": "0.085 "
+            "yrTerm1.noUpfront": "0.145",
+            "yrTerm3.allUpfront": "0.080",
+            "yrTerm1.allUpfront": "0.121",
+            "yrTerm1.partialUpfront": "0.124",
+            "yrTerm3.partialUpfront": "0.085"
           },
-          "ondemand": "0.190 "
+          "ondemand": "0.190"
         }
       },
       "us-east-1": {
@@ -17834,43 +17834,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.545 ",
-            "yrTerm3.allUpfront": "0.416 ",
-            "yrTerm1.allUpfront": "0.499 ",
-            "yrTerm1.partialUpfront": "0.503 ",
-            "yrTerm3.partialUpfront": "0.426 "
+            "yrTerm1.noUpfront": "0.545",
+            "yrTerm3.allUpfront": "0.416",
+            "yrTerm1.allUpfront": "0.499",
+            "yrTerm1.partialUpfront": "0.503",
+            "yrTerm3.partialUpfront": "0.426"
           },
-          "ondemand": "0.636 "
+          "ondemand": "0.636"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.180 ",
-            "yrTerm3.allUpfront": "1.051 ",
-            "yrTerm1.allUpfront": "1.134 ",
-            "yrTerm1.partialUpfront": "1.138 ",
-            "yrTerm3.partialUpfront": "1.061 "
+            "yrTerm1.noUpfront": "1.180",
+            "yrTerm3.allUpfront": "1.051",
+            "yrTerm1.allUpfront": "1.134",
+            "yrTerm1.partialUpfront": "1.138",
+            "yrTerm3.partialUpfront": "1.061"
           },
-          "ondemand": "1.271 "
+          "ondemand": "1.271"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.472 ",
-            "yrTerm3.allUpfront": "0.343 ",
-            "yrTerm1.allUpfront": "0.426 ",
-            "yrTerm1.partialUpfront": "0.430 ",
-            "yrTerm3.partialUpfront": "0.353 "
+            "yrTerm1.noUpfront": "0.472",
+            "yrTerm3.allUpfront": "0.343",
+            "yrTerm1.allUpfront": "0.426",
+            "yrTerm1.partialUpfront": "0.430",
+            "yrTerm3.partialUpfront": "0.353"
           },
-          "ondemand": "0.563 "
+          "ondemand": "0.563"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.288 ",
-            "yrTerm3.allUpfront": "0.159 ",
-            "yrTerm1.allUpfront": "0.242 ",
-            "yrTerm1.partialUpfront": "0.246 ",
-            "yrTerm3.partialUpfront": "0.169 "
+            "yrTerm1.noUpfront": "0.288",
+            "yrTerm3.allUpfront": "0.159",
+            "yrTerm1.allUpfront": "0.242",
+            "yrTerm1.partialUpfront": "0.246",
+            "yrTerm3.partialUpfront": "0.169"
           },
-          "ondemand": "0.379 "
+          "ondemand": "0.379"
         }
       },
       "us-east-1": {
@@ -18329,43 +18329,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.091 ",
-            "yrTerm3.allUpfront": "0.833 ",
-            "yrTerm1.allUpfront": "0.997 ",
-            "yrTerm1.partialUpfront": "1.007 ",
-            "yrTerm3.partialUpfront": "0.853 "
+            "yrTerm1.noUpfront": "1.091",
+            "yrTerm3.allUpfront": "0.833",
+            "yrTerm1.allUpfront": "0.997",
+            "yrTerm1.partialUpfront": "1.007",
+            "yrTerm3.partialUpfront": "0.853"
           },
-          "ondemand": "1.272 "
+          "ondemand": "1.272"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "2.361 ",
-            "yrTerm3.allUpfront": "2.103 ",
-            "yrTerm1.allUpfront": "2.267 ",
-            "yrTerm1.partialUpfront": "2.277 ",
-            "yrTerm3.partialUpfront": "2.123 "
+            "yrTerm1.noUpfront": "2.361",
+            "yrTerm3.allUpfront": "2.103",
+            "yrTerm1.allUpfront": "2.267",
+            "yrTerm1.partialUpfront": "2.277",
+            "yrTerm3.partialUpfront": "2.123"
           },
-          "ondemand": "2.542 "
+          "ondemand": "2.542"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.945 ",
-            "yrTerm3.allUpfront": "0.687 ",
-            "yrTerm1.allUpfront": "0.851 ",
-            "yrTerm1.partialUpfront": "0.861 ",
-            "yrTerm3.partialUpfront": "0.707 "
+            "yrTerm1.noUpfront": "0.945",
+            "yrTerm3.allUpfront": "0.687",
+            "yrTerm1.allUpfront": "0.851",
+            "yrTerm1.partialUpfront": "0.861",
+            "yrTerm3.partialUpfront": "0.707"
           },
-          "ondemand": "1.126 "
+          "ondemand": "1.126"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.577 ",
-            "yrTerm3.allUpfront": "0.319 ",
-            "yrTerm1.allUpfront": "0.483 ",
-            "yrTerm1.partialUpfront": "0.493 ",
-            "yrTerm3.partialUpfront": "0.339 "
+            "yrTerm1.noUpfront": "0.577",
+            "yrTerm3.allUpfront": "0.319",
+            "yrTerm1.allUpfront": "0.483",
+            "yrTerm1.partialUpfront": "0.493",
+            "yrTerm3.partialUpfront": "0.339"
           },
-          "ondemand": "0.758 "
+          "ondemand": "0.758"
         }
       },
       "us-east-1": {
@@ -18824,43 +18824,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "2.183 ",
-            "yrTerm3.allUpfront": "1.665 ",
-            "yrTerm1.allUpfront": "1.995 ",
-            "yrTerm1.partialUpfront": "2.015 ",
-            "yrTerm3.partialUpfront": "1.706 "
+            "yrTerm1.noUpfront": "2.183",
+            "yrTerm3.allUpfront": "1.665",
+            "yrTerm1.allUpfront": "1.995",
+            "yrTerm1.partialUpfront": "2.015",
+            "yrTerm3.partialUpfront": "1.706"
           },
-          "ondemand": "2.544 "
+          "ondemand": "2.544"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "4.723 ",
-            "yrTerm3.allUpfront": "4.205 ",
-            "yrTerm1.allUpfront": "4.535 ",
-            "yrTerm1.partialUpfront": "4.555 ",
-            "yrTerm3.partialUpfront": "4.246 "
+            "yrTerm1.noUpfront": "4.723",
+            "yrTerm3.allUpfront": "4.205",
+            "yrTerm1.allUpfront": "4.535",
+            "yrTerm1.partialUpfront": "4.555",
+            "yrTerm3.partialUpfront": "4.246"
           },
-          "ondemand": "5.084 "
+          "ondemand": "5.084"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.891 ",
-            "yrTerm3.allUpfront": "1.373 ",
-            "yrTerm1.allUpfront": "1.703 ",
-            "yrTerm1.partialUpfront": "1.723 ",
-            "yrTerm3.partialUpfront": "1.414 "
+            "yrTerm1.noUpfront": "1.891",
+            "yrTerm3.allUpfront": "1.373",
+            "yrTerm1.allUpfront": "1.703",
+            "yrTerm1.partialUpfront": "1.723",
+            "yrTerm3.partialUpfront": "1.414"
           },
-          "ondemand": "2.252 "
+          "ondemand": "2.252"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.155 ",
-            "yrTerm3.allUpfront": "0.637 ",
-            "yrTerm1.allUpfront": "0.967 ",
-            "yrTerm1.partialUpfront": "0.987 ",
-            "yrTerm3.partialUpfront": "0.678 "
+            "yrTerm1.noUpfront": "1.155",
+            "yrTerm3.allUpfront": "0.637",
+            "yrTerm1.allUpfront": "0.967",
+            "yrTerm1.partialUpfront": "0.987",
+            "yrTerm3.partialUpfront": "0.678"
           },
-          "ondemand": "1.516 "
+          "ondemand": "1.516"
         }
       },
       "us-east-1": {
@@ -19361,43 +19361,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "4.366 ",
-            "yrTerm3.allUpfront": "3.330 ",
-            "yrTerm1.allUpfront": "3.991 ",
-            "yrTerm1.partialUpfront": "4.030 ",
-            "yrTerm3.partialUpfront": "3.412 "
+            "yrTerm1.noUpfront": "4.366",
+            "yrTerm3.allUpfront": "3.330",
+            "yrTerm1.allUpfront": "3.991",
+            "yrTerm1.partialUpfront": "4.030",
+            "yrTerm3.partialUpfront": "3.412"
           },
-          "ondemand": "5.088 "
+          "ondemand": "5.088"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "9.446 ",
-            "yrTerm3.allUpfront": "8.410 ",
-            "yrTerm1.allUpfront": "9.071 ",
-            "yrTerm1.partialUpfront": "9.110 ",
-            "yrTerm3.partialUpfront": "8.492 "
+            "yrTerm1.noUpfront": "9.446",
+            "yrTerm3.allUpfront": "8.410",
+            "yrTerm1.allUpfront": "9.071",
+            "yrTerm1.partialUpfront": "9.110",
+            "yrTerm3.partialUpfront": "8.492"
           },
-          "ondemand": "10.168 "
+          "ondemand": "10.168"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "3.782 ",
-            "yrTerm3.allUpfront": "2.746 ",
-            "yrTerm1.allUpfront": "3.407 ",
-            "yrTerm1.partialUpfront": "3.446 ",
-            "yrTerm3.partialUpfront": "2.828 "
+            "yrTerm1.noUpfront": "3.782",
+            "yrTerm3.allUpfront": "2.746",
+            "yrTerm1.allUpfront": "3.407",
+            "yrTerm1.partialUpfront": "3.446",
+            "yrTerm3.partialUpfront": "2.828"
           },
-          "ondemand": "4.504 "
+          "ondemand": "4.504"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "2.310 ",
-            "yrTerm3.allUpfront": "1.274 ",
-            "yrTerm1.allUpfront": "1.935 ",
-            "yrTerm1.partialUpfront": "1.974 ",
-            "yrTerm3.partialUpfront": "1.356 "
+            "yrTerm1.noUpfront": "2.310",
+            "yrTerm3.allUpfront": "1.274",
+            "yrTerm1.allUpfront": "1.935",
+            "yrTerm1.partialUpfront": "1.974",
+            "yrTerm3.partialUpfront": "1.356"
           },
-          "ondemand": "3.032 "
+          "ondemand": "3.032"
         }
       },
       "us-east-1": {
@@ -19898,43 +19898,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.837 ",
-            "yrTerm3.allUpfront": "0.546 ",
-            "yrTerm1.allUpfront": "0.743 ",
-            "yrTerm1.partialUpfront": "0.753 ",
-            "yrTerm3.partialUpfront": "0.565 "
+            "yrTerm1.noUpfront": "0.837",
+            "yrTerm3.allUpfront": "0.546",
+            "yrTerm1.allUpfront": "0.743",
+            "yrTerm1.partialUpfront": "0.753",
+            "yrTerm3.partialUpfront": "0.565"
           },
-          "ondemand": "1.224 "
+          "ondemand": "1.224"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.472 ",
-            "yrTerm3.allUpfront": "1.181 ",
-            "yrTerm1.allUpfront": "1.378 ",
-            "yrTerm1.partialUpfront": "1.388 ",
-            "yrTerm3.partialUpfront": "1.200 "
+            "yrTerm1.noUpfront": "1.472",
+            "yrTerm3.allUpfront": "1.181",
+            "yrTerm1.allUpfront": "1.378",
+            "yrTerm1.partialUpfront": "1.388",
+            "yrTerm3.partialUpfront": "1.200"
           },
-          "ondemand": "1.859 "
+          "ondemand": "1.859"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.764 ",
-            "yrTerm3.allUpfront": "0.473 ",
-            "yrTerm1.allUpfront": "0.670 ",
-            "yrTerm1.partialUpfront": "0.680 ",
-            "yrTerm3.partialUpfront": "0.492 "
+            "yrTerm1.noUpfront": "0.764",
+            "yrTerm3.allUpfront": "0.473",
+            "yrTerm1.allUpfront": "0.670",
+            "yrTerm1.partialUpfront": "0.680",
+            "yrTerm3.partialUpfront": "0.492"
           },
-          "ondemand": "1.151 "
+          "ondemand": "1.151"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.580 ",
-            "yrTerm3.allUpfront": "0.289 ",
-            "yrTerm1.allUpfront": "0.486 ",
-            "yrTerm1.partialUpfront": "0.496 ",
-            "yrTerm3.partialUpfront": "0.308 "
+            "yrTerm1.noUpfront": "0.580",
+            "yrTerm3.allUpfront": "0.289",
+            "yrTerm1.allUpfront": "0.486",
+            "yrTerm1.partialUpfront": "0.496",
+            "yrTerm3.partialUpfront": "0.308"
           },
-          "ondemand": "0.967 "
+          "ondemand": "0.967"
         }
       },
       "us-east-1": {
@@ -20393,43 +20393,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.677 ",
-            "yrTerm3.allUpfront": "1.092 ",
-            "yrTerm1.allUpfront": "1.488 ",
-            "yrTerm1.partialUpfront": "1.508 ",
-            "yrTerm3.partialUpfront": "1.129 "
+            "yrTerm1.noUpfront": "1.677",
+            "yrTerm3.allUpfront": "1.092",
+            "yrTerm1.allUpfront": "1.488",
+            "yrTerm1.partialUpfront": "1.508",
+            "yrTerm3.partialUpfront": "1.129"
           },
-          "ondemand": "2.447 "
+          "ondemand": "2.447"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "2.947 ",
-            "yrTerm3.allUpfront": "2.362 ",
-            "yrTerm1.allUpfront": "2.758 ",
-            "yrTerm1.partialUpfront": "2.778 ",
-            "yrTerm3.partialUpfront": "2.399 "
+            "yrTerm1.noUpfront": "2.947",
+            "yrTerm3.allUpfront": "2.362",
+            "yrTerm1.allUpfront": "2.758",
+            "yrTerm1.partialUpfront": "2.778",
+            "yrTerm3.partialUpfront": "2.399"
           },
-          "ondemand": "3.717 "
+          "ondemand": "3.717"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.531 ",
-            "yrTerm3.allUpfront": "0.946 ",
-            "yrTerm1.allUpfront": "1.342 ",
-            "yrTerm1.partialUpfront": "1.362 ",
-            "yrTerm3.partialUpfront": "0.983 "
+            "yrTerm1.noUpfront": "1.531",
+            "yrTerm3.allUpfront": "0.946",
+            "yrTerm1.allUpfront": "1.342",
+            "yrTerm1.partialUpfront": "1.362",
+            "yrTerm3.partialUpfront": "0.983"
           },
-          "ondemand": "2.301 "
+          "ondemand": "2.301"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.163 ",
-            "yrTerm3.allUpfront": "0.578 ",
-            "yrTerm1.allUpfront": "0.974 ",
-            "yrTerm1.partialUpfront": "0.994 ",
-            "yrTerm3.partialUpfront": "0.615 "
+            "yrTerm1.noUpfront": "1.163",
+            "yrTerm3.allUpfront": "0.578",
+            "yrTerm1.allUpfront": "0.974",
+            "yrTerm1.partialUpfront": "0.994",
+            "yrTerm3.partialUpfront": "0.615"
           },
-          "ondemand": "1.933 "
+          "ondemand": "1.933"
         }
       },
       "us-east-1": {
@@ -20888,43 +20888,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "3.352 ",
-            "yrTerm3.allUpfront": "2.184 ",
-            "yrTerm1.allUpfront": "2.975 ",
-            "yrTerm1.partialUpfront": "3.014 ",
-            "yrTerm3.partialUpfront": "2.258 "
+            "yrTerm1.noUpfront": "3.352",
+            "yrTerm3.allUpfront": "2.184",
+            "yrTerm1.allUpfront": "2.975",
+            "yrTerm1.partialUpfront": "3.014",
+            "yrTerm3.partialUpfront": "2.258"
           },
-          "ondemand": "4.895 "
+          "ondemand": "4.895"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "5.892 ",
-            "yrTerm3.allUpfront": "4.724 ",
-            "yrTerm1.allUpfront": "5.515 ",
-            "yrTerm1.partialUpfront": "5.554 ",
-            "yrTerm3.partialUpfront": "4.798 "
+            "yrTerm1.noUpfront": "5.892",
+            "yrTerm3.allUpfront": "4.724",
+            "yrTerm1.allUpfront": "5.515",
+            "yrTerm1.partialUpfront": "5.554",
+            "yrTerm3.partialUpfront": "4.798"
           },
-          "ondemand": "7.435 "
+          "ondemand": "7.435"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "3.060 ",
-            "yrTerm3.allUpfront": "1.892 ",
-            "yrTerm1.allUpfront": "2.683 ",
-            "yrTerm1.partialUpfront": "2.722 ",
-            "yrTerm3.partialUpfront": "1.966 "
+            "yrTerm1.noUpfront": "3.060",
+            "yrTerm3.allUpfront": "1.892",
+            "yrTerm1.allUpfront": "2.683",
+            "yrTerm1.partialUpfront": "2.722",
+            "yrTerm3.partialUpfront": "1.966"
           },
-          "ondemand": "4.603 "
+          "ondemand": "4.603"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "2.324 ",
-            "yrTerm3.allUpfront": "1.156 ",
-            "yrTerm1.allUpfront": "1.947 ",
-            "yrTerm1.partialUpfront": "1.986 ",
-            "yrTerm3.partialUpfront": "1.230 "
+            "yrTerm1.noUpfront": "2.324",
+            "yrTerm3.allUpfront": "1.156",
+            "yrTerm1.allUpfront": "1.947",
+            "yrTerm1.partialUpfront": "1.986",
+            "yrTerm3.partialUpfront": "1.230"
           },
-          "ondemand": "3.867 "
+          "ondemand": "3.867"
         }
       },
       "us-east-1": {
@@ -21383,43 +21383,43 @@
       "ap-south-1": {
         "mswinSQLWeb": {
           "reserved": {
-            "yrTerm1.noUpfront": "6.704 ",
-            "yrTerm3.allUpfront": "4.368 ",
-            "yrTerm1.allUpfront": "5.949 ",
-            "yrTerm1.partialUpfront": "6.028 ",
-            "yrTerm3.partialUpfront": "4.516 "
+            "yrTerm1.noUpfront": "6.704",
+            "yrTerm3.allUpfront": "4.368",
+            "yrTerm1.allUpfront": "5.949",
+            "yrTerm1.partialUpfront": "6.028",
+            "yrTerm3.partialUpfront": "4.516"
           },
-          "ondemand": "9.789 "
+          "ondemand": "9.789"
         },
         "mswinSQL": {
           "reserved": {
-            "yrTerm1.noUpfront": "11.784 ",
-            "yrTerm3.allUpfront": "9.448 ",
-            "yrTerm1.allUpfront": "11.029 ",
-            "yrTerm1.partialUpfront": "11.108 ",
-            "yrTerm3.partialUpfront": "9.596 "
+            "yrTerm1.noUpfront": "11.784",
+            "yrTerm3.allUpfront": "9.448",
+            "yrTerm1.allUpfront": "11.029",
+            "yrTerm1.partialUpfront": "11.108",
+            "yrTerm3.partialUpfront": "9.596"
           },
-          "ondemand": "14.869 "
+          "ondemand": "14.869"
         },
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "6.120 ",
-            "yrTerm3.allUpfront": "3.784 ",
-            "yrTerm1.allUpfront": "5.365 ",
-            "yrTerm1.partialUpfront": "5.444 ",
-            "yrTerm3.partialUpfront": "3.932 "
+            "yrTerm1.noUpfront": "6.120",
+            "yrTerm3.allUpfront": "3.784",
+            "yrTerm1.allUpfront": "5.365",
+            "yrTerm1.partialUpfront": "5.444",
+            "yrTerm3.partialUpfront": "3.932"
           },
-          "ondemand": "9.205 "
+          "ondemand": "9.205"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "4.648 ",
-            "yrTerm3.allUpfront": "2.312 ",
-            "yrTerm1.allUpfront": "3.893 ",
-            "yrTerm1.partialUpfront": "3.972 ",
-            "yrTerm3.partialUpfront": "2.460 "
+            "yrTerm1.noUpfront": "4.648",
+            "yrTerm3.allUpfront": "2.312",
+            "yrTerm1.allUpfront": "3.893",
+            "yrTerm1.partialUpfront": "3.972",
+            "yrTerm3.partialUpfront": "2.460"
           },
-          "ondemand": "7.733 "
+          "ondemand": "7.733"
         }
       },
       "us-east-1": {
@@ -22032,23 +22032,23 @@
       "ap-south-1": {
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.672 ",
-            "yrTerm3.allUpfront": "0.463 ",
-            "yrTerm1.allUpfront": "0.592 ",
-            "yrTerm1.partialUpfront": "0.601 ",
-            "yrTerm3.partialUpfront": "0.481 "
+            "yrTerm1.noUpfront": "0.672",
+            "yrTerm3.allUpfront": "0.463",
+            "yrTerm1.allUpfront": "0.592",
+            "yrTerm1.partialUpfront": "0.601",
+            "yrTerm3.partialUpfront": "0.481"
           },
-          "ondemand": "1.011 "
+          "ondemand": "1.011"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.488 ",
-            "yrTerm3.allUpfront": "0.279 ",
-            "yrTerm1.allUpfront": "0.408 ",
-            "yrTerm1.partialUpfront": "0.417 ",
-            "yrTerm3.partialUpfront": "0.297 "
+            "yrTerm1.noUpfront": "0.488",
+            "yrTerm3.allUpfront": "0.279",
+            "yrTerm1.allUpfront": "0.408",
+            "yrTerm1.partialUpfront": "0.417",
+            "yrTerm3.partialUpfront": "0.297"
           },
-          "ondemand": "0.827 "
+          "ondemand": "0.827"
         }
       },
       "eu-central-1": {
@@ -22285,23 +22285,23 @@
       "ap-south-1": {
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.343 ",
-            "yrTerm3.allUpfront": "0.926 ",
-            "yrTerm1.allUpfront": "1.184 ",
-            "yrTerm1.partialUpfront": "1.201 ",
-            "yrTerm3.partialUpfront": "0.961 "
+            "yrTerm1.noUpfront": "1.343",
+            "yrTerm3.allUpfront": "0.926",
+            "yrTerm1.allUpfront": "1.184",
+            "yrTerm1.partialUpfront": "1.201",
+            "yrTerm3.partialUpfront": "0.961"
           },
-          "ondemand": "2.021 "
+          "ondemand": "2.021"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "0.975 ",
-            "yrTerm3.allUpfront": "0.558 ",
-            "yrTerm1.allUpfront": "0.816 ",
-            "yrTerm1.partialUpfront": "0.833 ",
-            "yrTerm3.partialUpfront": "0.593 "
+            "yrTerm1.noUpfront": "0.975",
+            "yrTerm3.allUpfront": "0.558",
+            "yrTerm1.allUpfront": "0.816",
+            "yrTerm1.partialUpfront": "0.833",
+            "yrTerm3.partialUpfront": "0.593"
           },
-          "ondemand": "1.653 "
+          "ondemand": "1.653"
         }
       },
       "eu-central-1": {
@@ -22538,23 +22538,23 @@
       "ap-south-1": {
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "2.685 ",
-            "yrTerm3.allUpfront": "1.851 ",
-            "yrTerm1.allUpfront": "2.369 ",
-            "yrTerm1.partialUpfront": "2.402 ",
-            "yrTerm3.partialUpfront": "1.923 "
+            "yrTerm1.noUpfront": "2.685",
+            "yrTerm3.allUpfront": "1.851",
+            "yrTerm1.allUpfront": "2.369",
+            "yrTerm1.partialUpfront": "2.402",
+            "yrTerm3.partialUpfront": "1.923"
           },
-          "ondemand": "4.042 "
+          "ondemand": "4.042"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "1.949 ",
-            "yrTerm3.allUpfront": "1.115 ",
-            "yrTerm1.allUpfront": "1.633 ",
-            "yrTerm1.partialUpfront": "1.666 ",
-            "yrTerm3.partialUpfront": "1.187 "
+            "yrTerm1.noUpfront": "1.949",
+            "yrTerm3.allUpfront": "1.115",
+            "yrTerm1.allUpfront": "1.633",
+            "yrTerm1.partialUpfront": "1.666",
+            "yrTerm3.partialUpfront": "1.187"
           },
-          "ondemand": "3.306 "
+          "ondemand": "3.306"
         }
       },
       "eu-central-1": {
@@ -22791,23 +22791,23 @@
       "ap-south-1": {
         "mswin": {
           "reserved": {
-            "yrTerm1.noUpfront": "5.554 ",
-            "yrTerm3.allUpfront": "3.887 ",
-            "yrTerm1.allUpfront": "4.921 ",
-            "yrTerm1.partialUpfront": "4.988 ",
-            "yrTerm3.partialUpfront": "4.029 "
+            "yrTerm1.noUpfront": "5.554",
+            "yrTerm3.allUpfront": "3.887",
+            "yrTerm1.allUpfront": "4.921",
+            "yrTerm1.partialUpfront": "4.988",
+            "yrTerm3.partialUpfront": "4.029"
           },
-          "ondemand": "8.268 "
+          "ondemand": "8.268"
         },
         "linux": {
           "reserved": {
-            "yrTerm1.noUpfront": "3.898 ",
-            "yrTerm3.allUpfront": "2.231 ",
-            "yrTerm1.allUpfront": "3.265 ",
-            "yrTerm1.partialUpfront": "3.332 ",
-            "yrTerm3.partialUpfront": "2.373 "
+            "yrTerm1.noUpfront": "3.898",
+            "yrTerm3.allUpfront": "2.231",
+            "yrTerm1.allUpfront": "3.265",
+            "yrTerm1.partialUpfront": "3.332",
+            "yrTerm3.partialUpfront": "2.373"
           },
-          "ondemand": "6.612 "
+          "ondemand": "6.612"
         }
       },
       "eu-central-1": {
