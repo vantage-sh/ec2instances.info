@@ -42,12 +42,14 @@ body {
   background-color: #D3FFFF;
 }
 
-#data th, #data td {
+#data td {
   white-space: nowrap;
 }
 
 #data th {
   background-color: #eee;
+  word-wrap: break-word;
+
 }
 
 #data td {
