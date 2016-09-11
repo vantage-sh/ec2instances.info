@@ -17,6 +17,9 @@ body {
 
 #filters {
   margin-bottom: 10px;
+  /* float so that the search input from the data table below can share the same 'row' as the filters */
+  float: left !important;
+  min-width: 600px;
 }
 
   #filters input {

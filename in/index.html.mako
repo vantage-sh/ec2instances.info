@@ -80,7 +80,7 @@
       </div>
     </div>
 
-    <div class="pull-left form-inline" id="filters">
+    <div class="form-inline" id="filters">
       <strong> Filter:</strong>
       Min Memory (GB): <input data-action="datafilter" data-type="memory" class="form-control" />
       Compute Units: <input data-action="datafilter" data-type="computeunits" class="form-control" />
