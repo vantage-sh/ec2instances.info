@@ -1,6 +1,6 @@
 var default_cost_duration = 'hourly';
 var default_region = 'us-east-1';
-var default_reserved_term = 'yrTerm1.noUpfront';
+var default_reserved_term = 'yrTerm1Standard.noUpfront';
 
 var current_cost_duration = default_cost_duration;
 var current_region = default_region;

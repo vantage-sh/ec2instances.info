@@ -53,11 +53,11 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="javascript:;" data-reserved-term='yrTerm1.noUpfront'>1 yr - No Upfront</a></li>
-            <li><a href="javascript:;" data-reserved-term='yrTerm1.partialUpfront'>1 yr - Partial Upfront</a></li>
-            <li><a href="javascript:;" data-reserved-term='yrTerm1.allUpfront'>1 yr - Full Upfront</a></li>
-            <li><a href="javascript:;" data-reserved-term='yrTerm3.partialUpfront'>3 yr - Partial Upfront</a></li>
-            <li><a href="javascript:;" data-reserved-term='yrTerm3.allUpfront'>3 yr - Full Upfront</a></li>
+            <li><a href="javascript:;" data-reserved-term='yrTerm1Standard.noUpfront'>1 yr - No Upfront</a></li>
+            <li><a href="javascript:;" data-reserved-term='yrTerm1Standard.partialUpfront'>1 yr - Partial Upfront</a></li>
+            <li><a href="javascript:;" data-reserved-term='yrTerm1Standard.allUpfront'>1 yr - Full Upfront</a></li>
+            <li><a href="javascript:;" data-reserved-term='yrTerm3Standard.partialUpfront'>3 yr - Partial Upfront</a></li>
+            <li><a href="javascript:;" data-reserved-term='yrTerm3Standard.allUpfront'>3 yr - Full Upfront</a></li>
           </ul>
         </div>
 
@@ -237,8 +237,8 @@
           </td>
           <td class="cost-reserved cost-reserved-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',{})).get('reserved', {}) for r,p in inst['pricing'].iteritems()}) | h}'>
             % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('reserved', 'N/A') != "N/A":
-              <span sort="${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1.noUpfront']}">
-                $${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1.noUpfront']} hourly
+              <span sort="${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']}">
+                $${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']} hourly
               </span>
             % else:
               <span sort="0">unavailable</span>
