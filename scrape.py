@@ -219,11 +219,9 @@ def add_ondemand_pricing(imap, data, platform):
             typename = t_spec['type']
             for i_spec in t_spec['sizes']:
                 i_type = i_spec['size']
-                # As best I can tell, this type doesn't exist, but is
-                # in the pricing charts anyways.
-                if i_type == 'cc2.4xlarge':
+                if i_type not in imap:
+                    print("ERROR: Got ondemand pricing data for unknown instance type: {}".format(i_type))
                     continue
-                assert i_type in imap, "Unknown instance size: %s" % i_type
                 inst = imap[i_type]
                 inst.pricing.setdefault(region, {})
                 # print "%s/%s" % (region, i_type)
@@ -245,11 +243,9 @@ def add_reserved_pricing(imap, data, platform):
         region = transform_region(region_spec['region'])
         for t_spec in region_spec['instanceTypes']:
             i_type = t_spec['type']
-            # As best I can tell, this type doesn't exist, but is
-            # in the pricing charts anyways.
-            if i_type == 'cc2.4xlarge':
+            if i_type not in imap:
+                print("ERROR: Got reserved pricing data for unknown instance type: {}".format(i_type))
                 continue
-            assert i_type in imap, "Unknown instance size: %s" % i_type
             inst = imap[i_type]
             inst.pricing.setdefault(region, {})
             # print "%s/%s" % (region, i_type)
