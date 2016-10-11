@@ -97,6 +97,10 @@ def parse_instance(tr, inst2family):
     cols = tr.xpath('td')
     assert len(cols) == 12, "Expected 12 columns in the table, but got %d" % len(cols)
     i.instance_type = totext(cols[0])
+    # Correct typo on AWS site (temporary fix on 2016-10-11)
+    # https://github.com/powdahound/ec2instances.info/issues/199
+    if i.instance_type == 'x1.16large':
+        i.instance_type = 'x1.16xlarge'
     i.family = inst2family.get(i.instance_type, "Unknown")
     # Some t2 instances support 32-bit arch
     # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html#resize-limitations
