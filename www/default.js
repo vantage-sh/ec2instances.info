@@ -1,17 +1,20 @@
-var default_cost_duration = 'hourly';
-var default_region = 'us-east-1';
-var default_reserved_term = 'yrTerm1Standard.noUpfront';
-
-var current_cost_duration = default_cost_duration;
-var current_region = default_region;
-var current_reserved_term = default_reserved_term;
+'use strict';
 
 var data_table = null;
 
-var require = Array();
-require['memory'] = 0;
-require['computeunits'] = 0;
-require['storage'] = 0;
+var defaults = {
+  cost_duration: 'hourly',
+  region: 'us-east-1',
+  reserved_term: 'yrTerm1Standard.noUpfront',
+  memory: 0,
+  computeunits: 0,
+  storage: 0
+};
+
+var settings = store.get('ec2_settings') || {};
+for (var key in defaults) {
+  if (settings[key] == null) settings[key] = defaults[key];
+}
 
 function init_data_table() {
   data_table = $('#data').DataTable({
@@ -76,7 +79,9 @@ function init_data_table() {
       // because the cost duration may have changed while a filter was being
       // used and so some rows will need updating.
       redraw_costs();
-    }
+    },
+    // Store filtering, sorting, etc - core datatable feature
+    'stateSave': true
   });
 
   return data_table;
@@ -114,7 +119,7 @@ function change_cost(duration) {
   var per_time;
   $.each($("td.cost-ondemand"), function(i, elem) {
     elem = $(elem);
-    per_time = elem.data("pricing")[current_region];
+    per_time = elem.data("pricing")[settings.region];
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(3);
       elem.text("$" + per_time + " " + duration);
@@ -125,14 +130,14 @@ function change_cost(duration) {
 
   $.each($("td.cost-reserved"), function(i, elem) {
     elem = $(elem);
-    per_time = elem.data("pricing")[current_region];
+    per_time = elem.data("pricing")[settings.region];
 
     if(!per_time) {
       elem.text("unavailable");
       return;
     }
 
-    per_time = per_time[current_reserved_term];
+    per_time = per_time[settings.reserved_term];
 
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(3);
@@ -142,12 +147,12 @@ function change_cost(duration) {
     }
   });
 
-  current_cost_duration = duration;
+  settings.cost_duration = duration;
   maybe_update_url();
 }
 
 function change_region(region) {
-  current_region = region;
+  settings.region = region;
   var region_name = null;
   $('#region-dropdown li a').each(function(i, e) {
     e = $(e);
@@ -159,11 +164,11 @@ function change_region(region) {
     }
   });
   $("#region-dropdown .dropdown-toggle .text").text(region_name);
-  change_cost(current_cost_duration);
+  change_cost(settings.cost_duration);
 }
 
 function change_reserved_term(term) {
-  current_reserved_term = term;
+  settings.reserved_term = term;
   var $dropdown = $('#reserved-term-dropdown'),
       $activeLink = $dropdown.find('li a[data-reserved-term="'+term+'"]'),
       term_name = $activeLink.text();
@@ -172,13 +177,13 @@ function change_reserved_term(term) {
   $activeLink.closest('li').addClass('active');
 
   $dropdown.find('.dropdown-toggle .text').text(term_name);
-  change_cost(current_cost_duration);
+  change_cost(settings.cost_duration);
 }
 
 // Update all visible costs to the current duration.
 // Called after new columns or rows are shown as their costs may be inaccurate.
 function redraw_costs() {
-  change_cost(current_cost_duration);
+  change_cost(settings.cost_duration);
 }
 
 function setup_column_toggle() {
@@ -201,24 +206,30 @@ function setup_column_toggle() {
   });
 }
 
+function setup_clear() {
+  $('.btn-clear').click(function() {
+    // Reset app.
+    settings = JSON.parse(JSON.stringify(defaults)); // clone
+    maybe_update_url();
+    store.clear();
+    data_table.state.clear();
+    window.location.reload();
+  });
+}
+
 function url_for_selections() {
   var settings = {
-    min_memory: require['memory'],
-    min_computeunits: require['computeunits'],
-    min_storage: require['storage'],
+    min_memory: settings['memory'],
+    min_computeunits: settings['computeunits'],
+    min_storage: settings['storage'],
     filter: data_table.settings()[0].oPreviousSearch['sSearch'],
-    region: current_region,
-    cost: current_cost_duration,
-    term: current_reserved_term
+    region: settings.region,
+    cost: settings.cost_duration,
+    term: settings.reserved_term
   };
-  if (settings.min_memory == '') delete settings.min_memory;
-  if (settings.min_computeunits == '') delete settings.min_computeunits;
-  if (settings.min_storage == '') delete settings.min_storage;
-
-  if (settings.filter == '') delete settings.filter
-  if (settings.region == default_region) delete settings.region;
-  if (settings.cost == default_cost_duration) delete settings.cost;
-  if (settings.term == default_reserved_term) delete settings.term;
+  for (var key in settings) {
+    if (settings[key] === '' || settings[key] == null || settings[key] === defaults[key]) delete settings[key];
+  }
 
   // selected rows
   var selected_row_ids = $('#data tbody tr.highlight').map(function() {
@@ -235,12 +246,16 @@ function url_for_selections() {
       parameters.push(setting + '=' + settings[setting]);
     }
   }
-  if (parameters.length > 0)
+  if (parameters.length > 0) {
     url = url + '?' + parameters.join('&');
+  }
   return url;
 }
 
 function maybe_update_url() {
+  // Save localstorage data as well
+  store.set('ec2_settings', settings);
+
   if (!history.replaceState) {
     return;
   }
@@ -268,7 +283,7 @@ var apply_min_values = function() {
         var filter_val = parseFloat($(this).val()) || 0;
 
         // update global variable for dynamic URL
-        require[filter_on] = filter_val;
+        settings[filter_on] = filter_val;
 
         var match_fail = data_rows.filter(function() {
             var row_val;
@@ -283,19 +298,23 @@ var apply_min_values = function() {
     maybe_update_url();
 };
 
+var app_initialized = false;
 function on_data_table_initialized() {
+  if (app_initialized) return;
+  app_initialized = true;
+
   // process URL settings
   var url_settings = get_url_parameters();
   for (var key in url_settings) {
     switch(key) {
       case 'region':
-        current_region = url_settings['region'];
+        settings.region = url_settings['region'];
         break;
       case 'cost':
-        current_cost_duration = url_settings['cost'];
+        settings.cost_duration = url_settings['cost'];
         break;
       case 'term':
-        current_reserved_term = url_settings['term'];
+        settings.reserved_term = url_settings['term'];
         break;
       case 'filter':
         data_table.filter(url_settings['filter']);
@@ -327,15 +346,17 @@ function on_data_table_initialized() {
   // Allow row filtering by min-value match.
   $('[data-action=datafilter]').on('keyup', apply_min_values);
 
-  change_region(current_region);
-  change_cost(current_cost_duration);
-  change_reserved_term(current_reserved_term);
+  change_region(settings.region);
+  change_cost(settings.cost_duration);
+  change_reserved_term(settings.reserved_term);
 
   $.extend($.fn.dataTableExt.oStdClasses, {
     "sWrapper": "dataTables_wrapper form-inline"
   });
 
   setup_column_toggle();
+
+  setup_clear();
 
   // enable bootstrap tooltips
   $('abbr').tooltip({
