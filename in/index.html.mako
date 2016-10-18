@@ -25,7 +25,8 @@
             <li><a href="javascript:;" data-region='eu-central-1'>EU (Frankfurt)</a></li>
             <li><a href="javascript:;" data-region='eu-west-1'>EU (Ireland)</a></li>
             <li><a href="javascript:;" data-region='sa-east-1'>South America (S&atilde;o Paulo)</a></li>
-            <li><a href="javascript:;" data-region='us-east-1'>US East</a></li>
+            <li><a href="javascript:;" data-region='us-east-1'>US East (N. Virginia)</a></li>
+            <li><a href="javascript:;" data-region='us-east-2'>US East (Ohio)</a></li>
             <li><a href="javascript:;" data-region='us-west-1'>US West (Northern California)</a></li>
             <li><a href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
           </ul>
