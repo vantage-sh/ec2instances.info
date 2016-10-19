@@ -1,20 +1,24 @@
 'use strict';
 
+var app_initialized = false;
 var data_table = null;
 
 var defaults = {
   cost_duration: 'hourly',
   region: 'us-east-1',
   reserved_term: 'yrTerm1Standard.noUpfront',
-  memory: 0,
-  computeunits: 0,
-  storage: 0
+  min_memory: 0,
+  min_computeunits: 0,
+  min_storage: 0
 };
 
 var settings = store.get('ec2_settings') || {};
 for (var key in defaults) {
-  if (settings[key] == null) settings[key] = defaults[key];
+  if (settings[key] === undefined) {
+    settings[key] = defaults[key];
+  }
 }
+
 
 function init_data_table() {
   data_table = $('#data').DataTable({
@@ -218,17 +222,21 @@ function setup_clear() {
 }
 
 function url_for_selections() {
-  var settings = {
-    min_memory: settings['memory'],
-    min_computeunits: settings['computeunits'],
-    min_storage: settings['storage'],
+  var params = {
+    min_memory: settings['min_memory'],
+    min_computeunits: settings['min_computeunits'],
+    min_storage: settings['min_storage'],
     filter: data_table.settings()[0].oPreviousSearch['sSearch'],
     region: settings.region,
-    cost: settings.cost_duration,
-    term: settings.reserved_term
+    cost_duration: settings.cost_duration,
+    reserved_term: settings.reserved_term
   };
-  for (var key in settings) {
-    if (settings[key] === '' || settings[key] == null || settings[key] === defaults[key]) delete settings[key];
+
+  // avoid storing empty or default values in URL
+  for (var key in params) {
+    if (params[key] === '' || params[key] == null || params[key] === defaults[key]) {
+      delete params[key];
+    }
   }
 
   // selected rows
@@ -236,14 +244,14 @@ function url_for_selections() {
     return this.id;
   }).get();
   if (selected_row_ids.length > 0) {
-    settings.selected = selected_row_ids;
+    params.selected = selected_row_ids;
   }
 
   var url = location.origin + location.pathname;
   var parameters = [];
-  for (var setting in settings) {
-    if (settings[setting] !== undefined) {
-      parameters.push(setting + '=' + settings[setting]);
+  for (var setting in params) {
+    if (params[setting] !== undefined) {
+      parameters.push(setting + '=' + params[setting]);
     }
   }
   if (parameters.length > 0) {
@@ -298,7 +306,6 @@ var apply_min_values = function() {
     maybe_update_url();
 };
 
-var app_initialized = false;
 function on_data_table_initialized() {
   if (app_initialized) return;
   app_initialized = true;
@@ -311,10 +318,10 @@ function on_data_table_initialized() {
         settings.region = url_settings['region'];
         break;
       case 'cost':
-        settings.cost_duration = url_settings['cost'];
+        settings.cost_duration = url_settings['cost_duration'];
         break;
       case 'term':
-        settings.reserved_term = url_settings['term'];
+        settings.reserved_term = url_settings['reserved_term'];
         break;
       case 'filter':
         data_table.filter(url_settings['filter']);
