@@ -214,11 +214,16 @@ function setup_clear() {
   $('.btn-clear').click(function() {
     // Reset app.
     settings = JSON.parse(JSON.stringify(defaults)); // clone
+    clear_row_selections();
     maybe_update_url();
     store.clear();
     data_table.state.clear();
     window.location.reload();
   });
+}
+
+function clear_row_selections() {
+  $('#data tbody tr').removeClass('highlight');
 }
 
 function url_for_selections() {
