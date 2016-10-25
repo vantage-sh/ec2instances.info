@@ -318,14 +318,14 @@ function on_data_table_initialized() {
   // process URL settings
   var url_settings = get_url_parameters();
   for (var key in url_settings) {
-    switch(key) {
+    switch (key) {
       case 'region':
         settings.region = url_settings['region'];
         break;
-      case 'cost':
+      case 'cost_duration':
         settings.cost_duration = url_settings['cost_duration'];
         break;
-      case 'term':
+      case 'reserved_term':
         settings.reserved_term = url_settings['reserved_term'];
         break;
       case 'filter':
@@ -422,10 +422,22 @@ function toggle_column(col_index) {
 
 // retrieve all the parameters from the location string
 function get_url_parameters() {
-  var params = location.search.slice(1).split('&');
   var settings = {};
-  params.forEach(function(param) {
-    settings[param.split('=')[0]] = param.split('=')[1];
+  if (!location.search) {
+    return settings;
+  }
+  var params = location.search.slice(1).split('&');
+  params.forEach(function (param) {
+    var parts = param.split('=');
+    var key = parts[0];
+    var val = parts[1];
+    // support legacy key names
+    if (key == 'cost') {
+      key = 'cost_duration';
+    } else if (key == 'term') {
+      key = 'reserved_term';
+    }
+    settings[key] = val;
   });
 
   return settings;
