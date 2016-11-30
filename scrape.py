@@ -109,6 +109,11 @@ def parse_instance(tr, inst2family):
     i.vCPU = locale.atoi(totext(cols[1]))
     i.memory = locale.atof(totext(cols[2]))
     storage = totext(cols[3])
+
+    # 2016-11-30: Temporary fix for inconsistent data format for f1.2xlarge
+    if storage == "480 SSD":
+        storage = "1 x 480 SSD"
+
     m = re.search(r'(\d+)\s*x\s*([0-9,]+)?', storage)
     i.ssd = False
     if m:
@@ -116,9 +121,14 @@ def parse_instance(tr, inst2family):
         i.num_drives = locale.atoi(m.group(1))
         i.drive_size = locale.atof(m.group(2))
         i.ssd = 'SSD' in totext(cols[3])
-    else:
-        assert storage == 'EBS Only', "Unrecognized storage spec: %s" % (storage,)
+    elif storage == 'EBS Only':
         i.ebs_only = True
+    elif storage == '-':
+        # Are these (r4 instances currently) EBS only? Site does not specify...
+        i.ebs_only = True
+    else:
+        print "ERROR: Unrecognized storage spec for %s: %s" % (i.instance_type, storage)
+
     i.ebs_optimized = totext(cols[10]).lower() == 'yes'
     i.network_performance = totext(cols[4])
     i.enhanced_networking = totext(cols[11]).lower() == 'yes'
