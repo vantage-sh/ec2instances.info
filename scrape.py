@@ -426,6 +426,7 @@ def add_vpconly_detail(instances):
 def add_pretty_names(instances):
     family_names = {
         'r3': 'R3 High-Memory',
+        'r4': 'R4 High-Memory',
         'c3': 'C3 High-CPU',
         'c4': 'C4 High-CPU',
         'm3': 'M3 General Purpose',
@@ -437,7 +438,9 @@ def add_pretty_names(instances):
         'c1' : 'C1 High-CPU',
         'hi1': 'HI1. High I/O',
         'm2' : 'M2 High Memory',
-        'm1' : 'M1 General Purpose'
+        'm1' : 'M1 General Purpose',
+        'p2' : 'General Purpose GPU',
+        'x1' : 'X1 Extra High-Memory'
         }
     for i in instances:
         pieces = i.instance_type.split('.')
