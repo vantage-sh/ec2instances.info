@@ -416,7 +416,7 @@ def add_linux_ami_info(instances):
 def add_vpconly_detail(instances):
     # specific instances can be lanuched in VPC only
     # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types
-    vpc_only_families = ('c4', 'm4', 't2')
+    vpc_only_families = ('c4', 'm4', 'p2', 'r4', 't2', 'x1')
     for i in instances:
         for family in vpc_only_families:
             if i.instance_type.startswith(family):
