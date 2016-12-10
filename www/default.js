@@ -228,9 +228,9 @@ function clear_row_selections() {
 
 function url_for_selections() {
   var params = {
-    min_memory: settings['min_memory'],
-    min_computeunits: settings['min_computeunits'],
-    min_storage: settings['min_storage'],
+    min_memory: settings.min_memory,
+    min_computeunits: settings.min_computeunits,
+    min_storage: settings.min_storage,
     filter: data_table.settings()[0].oPreviousSearch['sSearch'],
     region: settings.region,
     cost_duration: settings.cost_duration,
@@ -296,7 +296,7 @@ var apply_min_values = function() {
         var filter_val = parseFloat($(this).val()) || 0;
 
         // update global variable for dynamic URL
-        settings[filter_on] = filter_val;
+        settings["min_" + filter_on] = filter_val;
 
         var match_fail = data_rows.filter(function() {
             var row_val;
