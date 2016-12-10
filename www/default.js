@@ -2,6 +2,7 @@
 
 var g_app_initialized = false;
 var g_data_table = null;
+var g_settings = {};
 
 var g_settings_defaults = {
   cost_duration: 'hourly',
@@ -9,16 +10,9 @@ var g_settings_defaults = {
   reserved_term: 'yrTerm1Standard.noUpfront',
   min_memory: 0,
   min_computeunits: 0,
-  min_storage: 0
+  min_storage: 0,
+  selected: ''
 };
-
-var g_settings = store.get('ec2_settings') || {};
-for (var key in g_settings_defaults) {
-  if (g_settings[key] === undefined) {
-    g_settings[key] = g_settings_defaults[key];
-  }
-}
-
 
 function init_data_table() {
   g_data_table = $('#data').DataTable({
@@ -315,43 +309,19 @@ function on_data_table_initialized() {
   if (g_app_initialized) return;
   g_app_initialized = true;
 
-  // process URL settings
-  var url_settings = get_url_parameters();
-  for (var key in url_settings) {
-    switch (key) {
-      case 'region':
-        g_settings.region = url_settings['region'];
-        break;
-      case 'cost_duration':
-        g_settings.cost_duration = url_settings['cost_duration'];
-        break;
-      case 'reserved_term':
-        g_settings.reserved_term = url_settings['reserved_term'];
-        break;
-      case 'filter':
-        g_data_table.filter(url_settings['filter']);
-        break;
-      case 'min_memory':
-        $('[data-action="datafilter"][data-type="memory"]').val(url_settings['min_memory']);
-        apply_min_values();
-        break;
-      case 'min_computeunits':
-        $('[data-action="datafilter"][data-type="computeunits"]').val(url_settings['min_computeunits']);
-        apply_min_values();
-        break;
-      case 'min_storage':
-        $('[data-action="datafilter"][data-type="storage"]').val(url_settings['min_storage']);
-        apply_min_values();
-        break;
-      case 'selected':
-        // apply highlight to selected rows
-        $.each(url_settings['selected'].split(','), function (_, id) {
-          id = id.replace('.', '\\.');
-          $('#' + id).addClass('highlight');
-        });
-        break;
-    }
-  }
+  load_settings();
+
+  // populate filter inputs
+  $('[data-action="datafilter"][data-type="memory"]').val(g_settings['min_memory']);
+  $('[data-action="datafilter"][data-type="computeunits"]').val(g_settings['min_computeunits']);
+  $('[data-action="datafilter"][data-type="storage"]').val(g_settings['min_storage']);
+  apply_min_values();
+
+  // apply highlight to selected rows
+  $.each(g_settings.selected.split(','), function (_, id) {
+    id = id.replace('.', '\\.');
+    $('#' + id).addClass('highlight');
+  });
 
   configure_highlighting();
 
@@ -421,24 +391,34 @@ function toggle_column(col_index) {
 }
 
 // retrieve all the parameters from the location string
-function get_url_parameters() {
-  if (!location.search) {
-    // when no URL params, return global settings (possibly initialized from localstorage)
-    return g_settings;
+function load_settings() {
+  // load settings from local storage
+  g_settings = store.get('ec2_settings') || {};
+
+  if (location.search) {
+    var params = location.search.slice(1).split('&');
+    params.forEach(function (param) {
+      var parts = param.split('=');
+      var key = parts[0];
+      var val = parts[1];
+      // support legacy key names
+      if (key == 'cost') {
+        key = 'cost_duration';
+      } else if (key == 'term') {
+        key = 'reserved_term';
+      }
+      // store in global settings
+      console.log('loaded from url', key, val);
+      g_settings[key] = val;
+    });
   }
-  var params = location.search.slice(1).split('&');
-  params.forEach(function (param) {
-    var parts = param.split('=');
-    var key = parts[0];
-    var val = parts[1];
-    // support legacy key names
-    if (key == 'cost') {
-      key = 'cost_duration';
-    } else if (key == 'term') {
-      key = 'reserved_term';
+
+  // use default settings for missing values
+  for (var key in g_settings_defaults) {
+    if (g_settings[key] === undefined) {
+      g_settings[key] = g_settings_defaults[key];
     }
-    g_settings[key] = val;
-  });
+  }
 
   return g_settings;
 }
