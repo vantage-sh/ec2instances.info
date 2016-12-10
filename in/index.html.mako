@@ -22,6 +22,7 @@
             <li><a href="javascript:;" data-region='ap-southeast-1'>Asia-Pacific (Singapore)</a></li>
             <li><a href="javascript:;" data-region='ap-southeast-2'>Asia-Pacific (Sydney)</a></li>
             <li><a href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
+            <li><a href="javascript:;" data-region='ca-central-1'>Canada (Central)</a></li>
             <li><a href="javascript:;" data-region='eu-central-1'>EU (Frankfurt)</a></li>
             <li><a href="javascript:;" data-region='eu-west-1'>EU (Ireland)</a></li>
             <li><a href="javascript:;" data-region='sa-east-1'>South America (S&atilde;o Paulo)</a></li>
