@@ -422,8 +422,8 @@ function toggle_column(col_index) {
 
 // retrieve all the parameters from the location string
 function get_url_parameters() {
-  var settings = {};
   if (!location.search) {
+    // when no URL params, return global settings (possibly initialized from localstorage)
     return settings;
   }
   var params = location.search.slice(1).split('&');
