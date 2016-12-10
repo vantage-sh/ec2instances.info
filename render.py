@@ -13,8 +13,10 @@ def network_sort(inst):
         'Low to Moderate',
         'Moderate',
         'High',
-        '10 Gigabit'
-        ]
+        'Up to 10 Gigabit',
+        '10 Gigabit',
+        '20 Gigabit'
+    ]
     try:
         sort = network_rank.index(perf)
     except ValueError:
