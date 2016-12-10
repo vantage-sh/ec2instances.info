@@ -26,7 +26,7 @@ function init_data_table() {
     "bInfo": false,
     "bStateSave": true,
     "oSearch": {
-      "bRegex" : true,
+      "bRegex": true,
       "bSmart": false
     },
     "aoColumnDefs": [
@@ -64,16 +64,16 @@ function init_data_table() {
     ],
     // default sort by linux cost
     "aaSorting": [
-      [ 15, "asc" ]
+      [15, "asc"]
     ],
-    'initComplete': function() {
+    'initComplete': function () {
       // fire event in separate context so that calls to get_data_table()
       // receive the cached object.
-      setTimeout(function() {
+      setTimeout(function () {
         on_data_table_initialized();
       }, 0);
     },
-    'drawCallback': function() {
+    'drawCallback': function () {
       // abort if initialization hasn't finished yet (initial draw)
       if (data_table === null) {
         return;
@@ -91,7 +91,7 @@ function init_data_table() {
   return data_table;
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
   init_data_table();
 });
 
@@ -103,7 +103,7 @@ function change_cost(duration) {
   $("#cost-dropdown .dropdown-toggle .text").text(text);
 
   // update selected menu option
-  $('#cost-dropdown li a').each(function(i, e) {
+  $('#cost-dropdown li a').each(function (i, e) {
     e = $(e);
     if (e.attr('duration') == duration) {
       e.parent().addClass('active');
@@ -115,13 +115,13 @@ function change_cost(duration) {
   var hour_multipliers = {
     "hourly": 1,
     "daily": 24,
-    "weekly": (7*24),
-    "monthly": (365*24/12),
-    "annually": (365*24)
+    "weekly": (7 * 24),
+    "monthly": (365 * 24 / 12),
+    "annually": (365 * 24)
   };
   var multiplier = hour_multipliers[duration];
   var per_time;
-  $.each($("td.cost-ondemand"), function(i, elem) {
+  $.each($("td.cost-ondemand"), function (i, elem) {
     elem = $(elem);
     per_time = elem.data("pricing")[settings.region];
     if (per_time && !isNaN(per_time)) {
@@ -132,11 +132,11 @@ function change_cost(duration) {
     }
   });
 
-  $.each($("td.cost-reserved"), function(i, elem) {
+  $.each($("td.cost-reserved"), function (i, elem) {
     elem = $(elem);
     per_time = elem.data("pricing")[settings.region];
 
-    if(!per_time) {
+    if (!per_time) {
       elem.text("unavailable");
       return;
     }
@@ -158,7 +158,7 @@ function change_cost(duration) {
 function change_region(region) {
   settings.region = region;
   var region_name = null;
-  $('#region-dropdown li a').each(function(i, e) {
+  $('#region-dropdown li a').each(function (i, e) {
     e = $(e);
     if (e.data('region') === region) {
       e.parent().addClass('active');
@@ -174,8 +174,8 @@ function change_region(region) {
 function change_reserved_term(term) {
   settings.reserved_term = term;
   var $dropdown = $('#reserved-term-dropdown'),
-      $activeLink = $dropdown.find('li a[data-reserved-term="'+term+'"]'),
-      term_name = $activeLink.text();
+    $activeLink = $dropdown.find('li a[data-reserved-term="' + term + '"]'),
+    term_name = $activeLink.text();
 
   $dropdown.find('li').removeClass('active');
   $activeLink.closest('li').addClass('active');
@@ -191,27 +191,27 @@ function redraw_costs() {
 }
 
 function setup_column_toggle() {
-  $.each(data_table.columns().indexes(), function(i, idx) {
+  $.each(data_table.columns().indexes(), function (i, idx) {
     var column = data_table.column(idx);
     $("#filter-dropdown ul").append(
       $('<li>')
-      .toggleClass('active', column.visible())
-      .append(
-        $('<a>', {href: "javascript:;"})
-        .text($(column.header()).text())
-        .click(function(e) {
-          toggle_column(i);
-          $(this).parent().toggleClass("active");
-          $(this).blur(); // prevent focus style from sticking in Firefox
-          e.stopPropagation(); // keep dropdown menu open
-        })
-      )
+        .toggleClass('active', column.visible())
+        .append(
+          $('<a>', {href: "javascript:;"})
+            .text($(column.header()).text())
+            .click(function (e) {
+              toggle_column(i);
+              $(this).parent().toggleClass("active");
+              $(this).blur(); // prevent focus style from sticking in Firefox
+              e.stopPropagation(); // keep dropdown menu open
+            })
+        )
     );
   });
 }
 
 function setup_clear() {
-  $('.btn-clear').click(function() {
+  $('.btn-clear').click(function () {
     // Reset app.
     settings = JSON.parse(JSON.stringify(defaults)); // clone
     clear_row_selections();
@@ -245,7 +245,7 @@ function url_for_selections() {
   }
 
   // selected rows
-  var selected_row_ids = $('#data tbody tr.highlight').map(function() {
+  var selected_row_ids = $('#data tbody tr.highlight').map(function () {
     return this.id;
   }).get();
   if (selected_row_ids.length > 0) {
@@ -280,35 +280,35 @@ function maybe_update_url() {
     }
 
     history.replaceState(null, '', url);
-  } catch(ex) {
+  } catch (ex) {
     // doesn't matter
   }
 }
 
-var apply_min_values = function() {
-    var all_filters = $('[data-action="datafilter"]');
-    var data_rows = $('#data tr:has(td)');
+var apply_min_values = function () {
+  var all_filters = $('[data-action="datafilter"]');
+  var data_rows = $('#data tr:has(td)');
 
-    data_rows.show();
+  data_rows.show();
 
-    all_filters.each(function() {
-        var filter_on = $(this).data('type');
-        var filter_val = parseFloat($(this).val()) || 0;
+  all_filters.each(function () {
+    var filter_on = $(this).data('type');
+    var filter_val = parseFloat($(this).val()) || 0;
 
-        // update global variable for dynamic URL
-        settings["min_" + filter_on] = filter_val;
+    // update global variable for dynamic URL
+    settings["min_" + filter_on] = filter_val;
 
-        var match_fail = data_rows.filter(function() {
-            var row_val;
-            row_val = parseFloat(
-                $(this).find('td[class~="' + filter_on + '"] span').attr('sort')
-                );
-            return row_val < filter_val;
-        });
-
-        match_fail.hide();
+    var match_fail = data_rows.filter(function () {
+      var row_val;
+      row_val = parseFloat(
+        $(this).find('td[class~="' + filter_on + '"] span').attr('sort')
+      );
+      return row_val < filter_val;
     });
-    maybe_update_url();
+
+    match_fail.hide();
+  });
+  maybe_update_url();
 };
 
 function on_data_table_initialized() {
@@ -345,9 +345,9 @@ function on_data_table_initialized() {
         break;
       case 'selected':
         // apply highlight to selected rows
-        $.each(url_settings['selected'].split(','), function(_, id) {
+        $.each(url_settings['selected'].split(','), function (_, id) {
           id = id.replace('.', '\\.');
-          $('#'+id).addClass('highlight');
+          $('#' + id).addClass('highlight');
         });
         break;
     }
@@ -372,20 +372,20 @@ function on_data_table_initialized() {
 
   // enable bootstrap tooltips
   $('abbr').tooltip({
-    placement: function(tt, el) {
+    placement: function (tt, el) {
       return (this.$element.parents('thead').length) ? 'top' : 'right';
     }
   });
 
-  $("#cost-dropdown li").bind("click", function(e) {
+  $("#cost-dropdown li").bind("click", function (e) {
     change_cost(e.target.getAttribute("duration"));
   });
 
-  $("#region-dropdown li").bind("click", function(e) {
+  $("#region-dropdown li").bind("click", function (e) {
     change_region($(e.target).data('region'));
   });
 
-  $("#reserved-term-dropdown li").bind("click", function(e) {
+  $("#reserved-term-dropdown li").bind("click", function (e) {
     change_reserved_term($(e.target).data('reservedTerm'));
   });
 
@@ -396,7 +396,7 @@ function on_data_table_initialized() {
 // sorting for colums with more complex data
 // http://datatables.net/plug-ins/sorting#hidden_title
 jQuery.extend(jQuery.fn.dataTableExt.oSort, {
-  "span-sort-pre": function(elem) {
+  "span-sort-pre": function (elem) {
     var matches = elem.match(/sort="(.*?)"/);
     if (matches) {
       return parseFloat(matches[1]);
@@ -404,11 +404,11 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
     return 0;
   },
 
-  "span-sort-asc": function(a, b) {
+  "span-sort-asc": function (a, b) {
     return ((a < b) ? -1 : ((a > b) ? 1 : 0));
   },
 
-  "span-sort-desc": function(a, b) {
+  "span-sort-desc": function (a, b) {
     return ((a < b) ? 1 : ((a > b) ? -1 : 0));
   }
 });
@@ -445,11 +445,11 @@ function get_url_parameters() {
 
 function configure_highlighting() {
   var compareOn = false,
-      $compareBtn = $('.btn-compare'),
-      $rows = $('#data tbody tr');
+    $compareBtn = $('.btn-compare'),
+    $rows = $('#data tbody tr');
 
   // Allow row highlighting by clicking.
-  $rows.click(function() {
+  $rows.click(function () {
     $(this).toggleClass('highlight');
 
     if (!compareOn) {
@@ -462,18 +462,18 @@ function configure_highlighting() {
   $compareBtn.prop('disabled', !$($rows).is('.highlight'));
   $compareBtn.text($compareBtn.data('textOff'));
 
-  $compareBtn.click(function() {
+  $compareBtn.click(function () {
     if (compareOn) {
       $rows.show();
       $compareBtn.text($compareBtn.data('textOff'))
-                 .addClass('btn-primary')
-                 .removeClass('btn-success')
-                 .prop('disabled', !$rows.is('.highlight'));
+        .addClass('btn-primary')
+        .removeClass('btn-success')
+        .prop('disabled', !$rows.is('.highlight'));
     } else {
       $rows.filter(':not(.highlight)').hide();
       $compareBtn.text($compareBtn.data('textOn'))
-                 .addClass('btn-success')
-                 .removeClass('btn-primary');
+        .addClass('btn-success')
+        .removeClass('btn-primary');
     }
 
     compareOn = !compareOn;
