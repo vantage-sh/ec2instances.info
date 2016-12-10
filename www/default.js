@@ -1,9 +1,9 @@
 'use strict';
 
-var app_initialized = false;
-var data_table = null;
+var g_app_initialized = false;
+var g_data_table = null;
 
-var defaults = {
+var g_settings_defaults = {
   cost_duration: 'hourly',
   region: 'us-east-1',
   reserved_term: 'yrTerm1Standard.noUpfront',
@@ -12,16 +12,16 @@ var defaults = {
   min_storage: 0
 };
 
-var settings = store.get('ec2_settings') || {};
-for (var key in defaults) {
-  if (settings[key] === undefined) {
-    settings[key] = defaults[key];
+var g_settings = store.get('ec2_settings') || {};
+for (var key in g_settings_defaults) {
+  if (g_settings[key] === undefined) {
+    g_settings[key] = g_settings_defaults[key];
   }
 }
 
 
 function init_data_table() {
-  data_table = $('#data').DataTable({
+  g_data_table = $('#data').DataTable({
     "bPaginate": false,
     "bInfo": false,
     "bStateSave": true,
@@ -75,7 +75,7 @@ function init_data_table() {
     },
     'drawCallback': function () {
       // abort if initialization hasn't finished yet (initial draw)
-      if (data_table === null) {
+      if (g_data_table === null) {
         return;
       }
 
@@ -88,7 +88,7 @@ function init_data_table() {
     'stateSave': true
   });
 
-  return data_table;
+  return g_data_table;
 }
 
 $(document).ready(function () {
@@ -123,7 +123,7 @@ function change_cost(duration) {
   var per_time;
   $.each($("td.cost-ondemand"), function (i, elem) {
     elem = $(elem);
-    per_time = elem.data("pricing")[settings.region];
+    per_time = elem.data("pricing")[g_settings.region];
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(3);
       elem.text("$" + per_time + " " + duration);
@@ -134,14 +134,14 @@ function change_cost(duration) {
 
   $.each($("td.cost-reserved"), function (i, elem) {
     elem = $(elem);
-    per_time = elem.data("pricing")[settings.region];
+    per_time = elem.data("pricing")[g_settings.region];
 
     if (!per_time) {
       elem.text("unavailable");
       return;
     }
 
-    per_time = per_time[settings.reserved_term];
+    per_time = per_time[g_settings.reserved_term];
 
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(3);
@@ -151,12 +151,12 @@ function change_cost(duration) {
     }
   });
 
-  settings.cost_duration = duration;
+  g_settings.cost_duration = duration;
   maybe_update_url();
 }
 
 function change_region(region) {
-  settings.region = region;
+  g_settings.region = region;
   var region_name = null;
   $('#region-dropdown li a').each(function (i, e) {
     e = $(e);
@@ -168,11 +168,11 @@ function change_region(region) {
     }
   });
   $("#region-dropdown .dropdown-toggle .text").text(region_name);
-  change_cost(settings.cost_duration);
+  change_cost(g_settings.cost_duration);
 }
 
 function change_reserved_term(term) {
-  settings.reserved_term = term;
+  g_settings.reserved_term = term;
   var $dropdown = $('#reserved-term-dropdown'),
     $activeLink = $dropdown.find('li a[data-reserved-term="' + term + '"]'),
     term_name = $activeLink.text();
@@ -181,18 +181,18 @@ function change_reserved_term(term) {
   $activeLink.closest('li').addClass('active');
 
   $dropdown.find('.dropdown-toggle .text').text(term_name);
-  change_cost(settings.cost_duration);
+  change_cost(g_settings.cost_duration);
 }
 
 // Update all visible costs to the current duration.
 // Called after new columns or rows are shown as their costs may be inaccurate.
 function redraw_costs() {
-  change_cost(settings.cost_duration);
+  change_cost(g_settings.cost_duration);
 }
 
 function setup_column_toggle() {
-  $.each(data_table.columns().indexes(), function (i, idx) {
-    var column = data_table.column(idx);
+  $.each(g_data_table.columns().indexes(), function (i, idx) {
+    var column = g_data_table.column(idx);
     $("#filter-dropdown ul").append(
       $('<li>')
         .toggleClass('active', column.visible())
@@ -213,11 +213,11 @@ function setup_column_toggle() {
 function setup_clear() {
   $('.btn-clear').click(function () {
     // Reset app.
-    settings = JSON.parse(JSON.stringify(defaults)); // clone
+    g_settings = JSON.parse(JSON.stringify(g_settings_defaults)); // clone
     clear_row_selections();
     maybe_update_url();
     store.clear();
-    data_table.state.clear();
+    g_data_table.state.clear();
     window.location.reload();
   });
 }
@@ -228,18 +228,18 @@ function clear_row_selections() {
 
 function url_for_selections() {
   var params = {
-    min_memory: settings.min_memory,
-    min_computeunits: settings.min_computeunits,
-    min_storage: settings.min_storage,
-    filter: data_table.settings()[0].oPreviousSearch['sSearch'],
-    region: settings.region,
-    cost_duration: settings.cost_duration,
-    reserved_term: settings.reserved_term
+    min_memory: g_settings.min_memory,
+    min_computeunits: g_settings.min_computeunits,
+    min_storage: g_settings.min_storage,
+    filter: g_data_table.settings()[0].oPreviousSearch['sSearch'],
+    region: g_settings.region,
+    cost_duration: g_settings.cost_duration,
+    reserved_term: g_settings.reserved_term
   };
 
   // avoid storing empty or default values in URL
   for (var key in params) {
-    if (params[key] === '' || params[key] == null || params[key] === defaults[key]) {
+    if (params[key] === '' || params[key] == null || params[key] === g_settings_defaults[key]) {
       delete params[key];
     }
   }
@@ -267,7 +267,7 @@ function url_for_selections() {
 
 function maybe_update_url() {
   // Save localstorage data as well
-  store.set('ec2_settings', settings);
+  store.set('ec2_settings', g_settings);
 
   if (!history.replaceState) {
     return;
@@ -296,7 +296,7 @@ var apply_min_values = function () {
     var filter_val = parseFloat($(this).val()) || 0;
 
     // update global variable for dynamic URL
-    settings["min_" + filter_on] = filter_val;
+    g_settings["min_" + filter_on] = filter_val;
 
     var match_fail = data_rows.filter(function () {
       var row_val;
@@ -312,24 +312,24 @@ var apply_min_values = function () {
 };
 
 function on_data_table_initialized() {
-  if (app_initialized) return;
-  app_initialized = true;
+  if (g_app_initialized) return;
+  g_app_initialized = true;
 
   // process URL settings
   var url_settings = get_url_parameters();
   for (var key in url_settings) {
     switch (key) {
       case 'region':
-        settings.region = url_settings['region'];
+        g_settings.region = url_settings['region'];
         break;
       case 'cost_duration':
-        settings.cost_duration = url_settings['cost_duration'];
+        g_settings.cost_duration = url_settings['cost_duration'];
         break;
       case 'reserved_term':
-        settings.reserved_term = url_settings['reserved_term'];
+        g_settings.reserved_term = url_settings['reserved_term'];
         break;
       case 'filter':
-        data_table.filter(url_settings['filter']);
+        g_data_table.filter(url_settings['filter']);
         break;
       case 'min_memory':
         $('[data-action="datafilter"][data-type="memory"]').val(url_settings['min_memory']);
@@ -358,9 +358,9 @@ function on_data_table_initialized() {
   // Allow row filtering by min-value match.
   $('[data-action=datafilter]').on('keyup', apply_min_values);
 
-  change_region(settings.region);
-  change_cost(settings.cost_duration);
-  change_reserved_term(settings.reserved_term);
+  change_region(g_settings.region);
+  change_cost(g_settings.cost_duration);
+  change_reserved_term(g_settings.reserved_term);
 
   $.extend($.fn.dataTableExt.oStdClasses, {
     "sWrapper": "dataTables_wrapper form-inline"
@@ -415,8 +415,8 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
 
 // toggle columns
 function toggle_column(col_index) {
-  var is_visible = data_table.column(col_index).visible();
-  data_table.column(col_index).visible(is_visible ? false : true);
+  var is_visible = g_data_table.column(col_index).visible();
+  g_data_table.column(col_index).visible(is_visible ? false : true);
   redraw_costs();
 }
 
@@ -424,7 +424,7 @@ function toggle_column(col_index) {
 function get_url_parameters() {
   if (!location.search) {
     // when no URL params, return global settings (possibly initialized from localstorage)
-    return settings;
+    return g_settings;
   }
   var params = location.search.slice(1).split('&');
   params.forEach(function (param) {
@@ -437,10 +437,10 @@ function get_url_parameters() {
     } else if (key == 'term') {
       key = 'reserved_term';
     }
-    settings[key] = val;
+    g_settings[key] = val;
   });
 
-  return settings;
+  return g_settings;
 }
 
 function configure_highlighting() {
