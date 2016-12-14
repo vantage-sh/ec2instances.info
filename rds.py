@@ -72,6 +72,7 @@ def scrape(output_file, input_file=None):
         "Canada (Central)": 'ca-central-1',
         "EU (Frankfurt)": 'eu-central-1',
         "EU (Ireland)": 'eu-west-1',
+        "EU (London)": 'eu-west-2',
         "South America (Sao Paulo)": 'sa-east-1',
         "US East (N. Virginia)": 'us-east-1',
         "US East (Ohio)": 'us-east-2',
