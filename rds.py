@@ -19,7 +19,8 @@ def add_pretty_names(instances):
         'c1' : 'C1 High-CPU',
         'hi1': 'HI1. High I/O',
         'm2' : 'M2 High Memory',
-        'm1' : 'M1 General Purpose'
+        'm1' : 'M1 General Purpose',
+        'm4' : 'M4 General Purpose'
         }
     for k in instances:
         i = instances[k]
@@ -129,9 +130,7 @@ def scrape(output_file, input_file=None):
         '1yr Partial Upfront': 'yrTerm1.partialUpfront',
         '3yr All Upfront': 'yrTerm3.allUpfront',
         '1yr All Upfront': 'yrTerm1.allUpfront',
-        '1yr No Upfront': 'yrTerm1.noUpfront',
-        '1yr Heavy Utilization': 'fixme',
-        '1yr Medium Utilization': 'fixme',
+        '1yr No Upfront': 'yrTerm1.noUpfront'
     }
 
     # Parse reserved pricing
