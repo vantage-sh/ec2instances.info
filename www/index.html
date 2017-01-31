@@ -21,7 +21,7 @@
     <h1>EC2Instances.info <small>Easy Amazon EC2 Instance Comparison</small></h1>
     
 
-      <p class="pull-right label label-info">Last Update: 2017-01-23 21:43:49 UTC</p>
+      <p class="pull-right label label-info">Last Update: 2017-01-31 11:17:36 UTC</p>
       <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="/">EC2</a></li>
         <li role="presentation" class=""><a href="/rds/">RDS</a></li>
@@ -1513,7 +1513,7 @@
           <td class="apiname">t1.micro</td>
           <td class="memory"><span sort="0.613">0.613 GB</span></td>
           <td class="computeunits">
-            <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
+              <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
           </td>
           <td class="vcpus">
             <span sort="1">
@@ -1602,11 +1602,22 @@
           <td class="apiname">t2.nano</td>
           <td class="memory"><span sort="0.5">0.5 GB</span></td>
           <td class="computeunits">
-            <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
+              <span sort="0.05">
+                <abbr title="For T2 instances, the 100% unit represents a High Frequency Intel Xeon Processors with Turbo up to 3.3GHz.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">Base performance:
+                5%
+                </a></abbr>
+              </span>
           </td>
           <td class="vcpus">
             <span sort="1">
               1 vCPUs
+                <abbr title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">
+                for a
+                1h 12m
+                burst
+                </a></abbr>
             </span>
           </td>
           <td class="ecu-per-vcpu">
@@ -1687,11 +1698,22 @@
           <td class="apiname">t2.micro</td>
           <td class="memory"><span sort="1.0">1.0 GB</span></td>
           <td class="computeunits">
-            <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
+              <span sort="0.1">
+                <abbr title="For T2 instances, the 100% unit represents a High Frequency Intel Xeon Processors with Turbo up to 3.3GHz.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">Base performance:
+                10%
+                </a></abbr>
+              </span>
           </td>
           <td class="vcpus">
             <span sort="1">
               1 vCPUs
+                <abbr title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">
+                for a
+                2h 24m
+                burst
+                </a></abbr>
             </span>
           </td>
           <td class="ecu-per-vcpu">
@@ -1776,11 +1798,22 @@
           <td class="apiname">t2.small</td>
           <td class="memory"><span sort="2.0">2.0 GB</span></td>
           <td class="computeunits">
-            <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
+              <span sort="0.2">
+                <abbr title="For T2 instances, the 100% unit represents a High Frequency Intel Xeon Processors with Turbo up to 3.3GHz.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">Base performance:
+                20%
+                </a></abbr>
+              </span>
           </td>
           <td class="vcpus">
             <span sort="1">
               1 vCPUs
+                <abbr title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">
+                for a
+                4h 48m
+                burst
+                </a></abbr>
             </span>
           </td>
           <td class="ecu-per-vcpu">
@@ -1865,11 +1898,22 @@
           <td class="apiname">t2.medium</td>
           <td class="memory"><span sort="4.0">4.0 GB</span></td>
           <td class="computeunits">
-            <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
+              <span sort="0.4">
+                <abbr title="For T2 instances, the 100% unit represents a High Frequency Intel Xeon Processors with Turbo up to 3.3GHz.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">Base performance:
+                40%
+                </a></abbr>
+              </span>
           </td>
           <td class="vcpus">
             <span sort="2">
               2 vCPUs
+                <abbr title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">
+                for a
+                4h 48m
+                burst
+                </a></abbr>
             </span>
           </td>
           <td class="ecu-per-vcpu">
@@ -1954,11 +1998,22 @@
           <td class="apiname">t2.large</td>
           <td class="memory"><span sort="8.0">8.0 GB</span></td>
           <td class="computeunits">
-            <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
+              <span sort="0.6">
+                <abbr title="For T2 instances, the 100% unit represents a High Frequency Intel Xeon Processors with Turbo up to 3.3GHz.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">Base performance:
+                60%
+                </a></abbr>
+              </span>
           </td>
           <td class="vcpus">
             <span sort="2">
               2 vCPUs
+                <abbr title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">
+                for a
+                7h 12m
+                burst
+                </a></abbr>
             </span>
           </td>
           <td class="ecu-per-vcpu">
@@ -2043,11 +2098,22 @@
           <td class="apiname">t2.xlarge</td>
           <td class="memory"><span sort="16.0">16.0 GB</span></td>
           <td class="computeunits">
-            <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
+              <span sort="0.9">
+                <abbr title="For T2 instances, the 100% unit represents a High Frequency Intel Xeon Processors with Turbo up to 3.3GHz.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">Base performance:
+                90%
+                </a></abbr>
+              </span>
           </td>
           <td class="vcpus">
             <span sort="4">
               4 vCPUs
+                <abbr title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">
+                for a
+                5h 24m
+                burst
+                </a></abbr>
             </span>
           </td>
           <td class="ecu-per-vcpu">
@@ -2132,11 +2198,22 @@
           <td class="apiname">t2.2xlarge</td>
           <td class="memory"><span sort="32.0">32.0 GB</span></td>
           <td class="computeunits">
-            <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
+              <span sort="1.35">
+                <abbr title="For T2 instances, the 100% unit represents a High Frequency Intel Xeon Processors with Turbo up to 3.3GHz.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">Base performance:
+                135%
+                </a></abbr>
+              </span>
           </td>
           <td class="vcpus">
             <span sort="8">
               8 vCPUs
+                <abbr title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">
+                for a
+                4h 3m
+                burst
+                </a></abbr>
             </span>
           </td>
           <td class="ecu-per-vcpu">
@@ -6759,7 +6836,7 @@
       </p>
       <p>
         <strong>How?</strong>
-        Data is scraped from multiple pages on the AWS site. This was last done at 2017-01-23 21:43:49 UTC.
+        Data is scraped from multiple pages on the AWS site. This was last done at 2017-01-31 11:17:36 UTC.
       </p>
 
       <p class="bg-warning">

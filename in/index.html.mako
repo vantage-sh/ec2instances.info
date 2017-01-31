@@ -146,7 +146,16 @@
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GB</span></td>
           <td class="computeunits">
             % if inst['ECU'] == 'variable':
-            <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
+              % if inst['base_performance']:
+              <span sort="${inst['base_performance']}">
+                <abbr title="For T2 instances, the 100% unit represents a High Frequency Intel Xeon Processors with Turbo up to 3.3GHz.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">Base performance:
+                ${"%g" % (inst['base_performance'] * 100,)}%
+                </a></abbr>
+              </span>
+              % else:
+              <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
+              % endif
             % else:
             <span sort="${inst['ECU']}">${"%g" % (inst['ECU'],)} units</span>
             % endif
@@ -154,6 +163,14 @@
           <td class="vcpus">
             <span sort="${inst['vCPU']}">
               ${inst['vCPU']} vCPUs
+                % if inst['burst_minutes']:
+                <abbr title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs.">
+                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">
+                for a
+                ${"%gh %gm" % divmod(inst['burst_minutes'], 60)}
+                burst
+                </a></abbr>
+                % endif
             </span>
           </td>
           <td class="ecu-per-vcpu">
