@@ -154,7 +154,7 @@
                 </a></abbr>
               </span>
               % else:
-              <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
+              <span sort="0"><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts_micro_instances.html" target="_blank">Burstable</a></span>
               % endif
             % else:
             <span sort="${inst['ECU']}">${"%g" % (inst['ECU'],)} units</span>
