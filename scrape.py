@@ -17,6 +17,8 @@ class Instance(object):
         self.vpc = None
         self.arch = ['x86_64']
         self.ECU = 0
+        self.base_performance = None
+        self.burst_minutes = None
         self.linux_virtualization_types = []
         self.ebs_throughput = 0
         self.ebs_iops = 0
@@ -32,6 +34,8 @@ class Instance(object):
                  arch=self.arch,
                  vCPU=self.vCPU,
                  ECU=self.ECU,
+                 base_performance=self.base_performance,
+                 burst_minutes=self.burst_minutes,
                  memory=self.memory,
                  ebs_optimized=self.ebs_optimized,
                  ebs_throughput=self.ebs_throughput,
@@ -423,6 +427,22 @@ def add_vpconly_detail(instances):
                 i.vpc_only = True
 
 
+def add_t2_credits(instances):
+    tree = etree.parse(urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html"),
+                       etree.HTMLParser())
+    table = tree.xpath('//div[@class="informaltable"]//table')[0]
+    rows = table.xpath('.//tr[./td]')
+    assert len(rows) > 0, "Failed to find T2 CPU credit info"
+
+    by_type = {i.instance_type: i for i in instances}
+
+    for r in rows:
+        inst = by_type[totext(r[0])]
+        creds_per_hour = locale.atof(totext(r[2]))
+        inst.base_performance = creds_per_hour / 60
+        inst.burst_minutes = creds_per_hour * 24 / inst.vCPU
+
+
 def add_pretty_names(instances):
     family_names = {
         'r3': 'R3 High-Memory',
@@ -482,6 +502,7 @@ def scrape(data_file):
     add_linux_ami_info(all_instances)
     print "Adding additional details..."
     add_vpconly_detail(all_instances)
+    add_t2_credits(all_instances)
     add_pretty_names(all_instances)
 
     with open(data_file, 'w') as f:

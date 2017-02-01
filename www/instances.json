@@ -392,10 +392,12 @@
       "ips_per_eni": 4,
       "max_enis": 2
     },
+    "base_performance": null,
     "arch": [
       "i386",
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "PV"
@@ -804,10 +806,12 @@
       "ips_per_eni": 6,
       "max_enis": 2
     },
+    "base_performance": null,
     "arch": [
       "i386",
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "PV"
@@ -1216,9 +1220,11 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "PV"
@@ -1627,9 +1633,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "PV"
@@ -1948,10 +1956,12 @@
       "ips_per_eni": 6,
       "max_enis": 2
     },
+    "base_performance": null,
     "arch": [
       "i386",
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "PV"
@@ -2360,9 +2370,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "PV"
@@ -2603,9 +2615,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -2664,9 +2678,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -3075,9 +3091,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "PV"
@@ -3486,9 +3504,11 @@
       "ips_per_eni": 30,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "PV"
@@ -3897,9 +3917,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "PV"
@@ -4098,9 +4120,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": false,
@@ -4297,9 +4321,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
@@ -4625,9 +4651,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
@@ -4947,10 +4975,12 @@
       "ips_per_eni": 2,
       "max_enis": 2
     },
+    "base_performance": null,
     "arch": [
       "i386",
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "PV"
@@ -5397,9 +5427,11 @@
       "ips_per_eni": 2,
       "max_enis": 2
     },
+    "base_performance": 0.05,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": 72.0,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -6041,10 +6073,12 @@
       "ips_per_eni": 2,
       "max_enis": 2
     },
+    "base_performance": 0.1,
     "arch": [
       "x86_64",
       "i386"
     ],
+    "burst_minutes": 144.0,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -6686,10 +6720,12 @@
       "ips_per_eni": 4,
       "max_enis": 2
     },
+    "base_performance": 0.2,
     "arch": [
       "x86_64",
       "i386"
     ],
+    "burst_minutes": 288.0,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -7331,9 +7367,11 @@
       "ips_per_eni": 6,
       "max_enis": 3
     },
+    "base_performance": 0.4,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": 288.0,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -7975,9 +8013,11 @@
       "ips_per_eni": 12,
       "max_enis": 3
     },
+    "base_performance": 0.6,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": 432.0,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -8619,9 +8659,11 @@
       "ips_per_eni": 15,
       "max_enis": 3
     },
+    "base_performance": 0.9,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": 324.0,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -9263,9 +9305,11 @@
       "ips_per_eni": 15,
       "max_enis": 3
     },
+    "base_performance": 1.35,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": 243.0,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -10102,9 +10146,11 @@
       "ips_per_eni": 10,
       "max_enis": 2
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -10941,9 +10987,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -11780,9 +11828,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -12619,9 +12669,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -13458,9 +13510,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -14297,9 +14351,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -14840,9 +14896,11 @@
       "ips_per_eni": 6,
       "max_enis": 2
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
@@ -15414,9 +15472,11 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
@@ -15988,9 +16048,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
@@ -16562,9 +16624,11 @@
       "ips_per_eni": 30,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
@@ -17406,9 +17470,11 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -18245,9 +18311,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -19084,9 +19152,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -19923,9 +19993,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -20762,9 +20834,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -21292,9 +21366,11 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
@@ -21866,9 +21942,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
@@ -22440,9 +22518,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
@@ -23014,9 +23094,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
@@ -23588,9 +23670,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM",
@@ -23734,9 +23818,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -23875,9 +23961,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -24016,9 +24104,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -24451,9 +24541,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -24708,9 +24800,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -25443,9 +25537,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -26178,9 +26274,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -27021,9 +27119,11 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -27860,9 +27960,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -28699,9 +28801,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -29538,9 +29642,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -30377,9 +30483,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -31216,9 +31324,11 @@
       "ips_per_eni": 50,
       "max_enis": 15
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": true,
     "linux_virtualization_types": [
       "HVM"
@@ -31947,9 +32057,11 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -32682,9 +32794,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -33417,9 +33531,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -34152,9 +34268,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -34887,9 +35005,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -35568,9 +35688,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -36249,9 +36371,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -36930,9 +37054,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -37611,9 +37737,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -38036,9 +38164,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -38461,9 +38591,11 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -38886,9 +39018,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -39311,9 +39445,11 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [
       "HVM"
@@ -39340,9 +39476,11 @@
     "pretty_name": "F1 Double Extra Large",
     "pricing": {},
     "vpc": null,
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": true,
@@ -39367,9 +39505,11 @@
     "pretty_name": "F1 16xlarge",
     "pricing": {},
     "vpc": null,
+    "base_performance": null,
     "arch": [
       "x86_64"
     ],
+    "burst_minutes": null,
     "vpc_only": false,
     "linux_virtualization_types": [],
     "ebs_optimized": true,
