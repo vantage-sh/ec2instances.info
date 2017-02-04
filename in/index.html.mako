@@ -118,6 +118,7 @@
           </th>
           <th class="enhanced-networking">Enhanced Networking</th>
           <th class="vpc-only">VPC Only</th>
+          <th class="ipv6-support">IPv6 Support</th>
           <th class="linux-virtualization">Linux Virtualization</th>
 
           <th class="cost-ondemand cost-ondemand-linux">Linux On Demand cost</th>
@@ -238,6 +239,9 @@
           </td>
           <td class="vpc-only">
             ${'Yes' if inst['vpc_only'] else 'No'}
+          </td>
+          <td class="ipv6-support">
+            ${'Yes' if inst['ipv6_support'] else 'No'}
           </td>
           <td class="linux-virtualization">
             % if inst['linux_virtualization_types']:
