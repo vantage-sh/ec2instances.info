@@ -79,8 +79,17 @@ function init_data_table() {
       redraw_costs();
     },
     // Store filtering, sorting, etc - core datatable feature
-    'stateSave': true
+    'stateSave': true,
+    // Allow export to CSV
+    'buttons': ['csv']
   });
+
+  g_data_table
+    .buttons()
+    .container()
+    .find('a')
+    .addClass('btn btn-primary')
+    .appendTo($('#menu > div'));
 
   return g_data_table;
 }
