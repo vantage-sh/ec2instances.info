@@ -25,6 +25,7 @@ function init_data_table() {
     },
     "aoColumnDefs": [
       {
+        // The columns below are sorted according to the sort attr of the <span> tag within their data cells
         "aTargets": [
           "memory",
           "computeunits",
@@ -40,7 +41,10 @@ function init_data_table() {
         "sType": "span-sort"
       },
       {
+        // The columns below are hidden by default
         "aTargets": [
+          "architecture",
+          "computeunits",
           "ecu-per-vcpu",
           "enhanced-networking",
           "maxips",
@@ -51,8 +55,10 @@ function init_data_table() {
           "cost-reserved-mswinSQL",
           "ebs-throughput",
           "ebs-iops",
-          "max_bandwidth",
-          "ipv6-support"
+          "ebs-iops",
+          "ebs-max-bandwidth",
+          "ipv6-support",
+          "vpc-only"
         ],
         "bVisible": false
       }
