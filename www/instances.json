@@ -392,6 +392,7 @@
       "ips_per_eni": 4,
       "max_enis": 2
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "i386",
@@ -806,6 +807,7 @@
       "ips_per_eni": 6,
       "max_enis": 2
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "i386",
@@ -1220,6 +1222,7 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -1633,6 +1636,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -1956,6 +1960,7 @@
       "ips_per_eni": 6,
       "max_enis": 2
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "i386",
@@ -2370,6 +2375,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -2615,6 +2621,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -2678,6 +2685,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -3091,6 +3099,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -3504,6 +3513,7 @@
       "ips_per_eni": 30,
       "max_enis": 4
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -3917,6 +3927,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -4120,6 +4131,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -4321,6 +4333,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -4651,6 +4664,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -4975,6 +4989,7 @@
       "ips_per_eni": 2,
       "max_enis": 2
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "i386",
@@ -5427,6 +5442,7 @@
       "ips_per_eni": 2,
       "max_enis": 2
     },
+    "ipv6_support": true,
     "base_performance": 0.05,
     "arch": [
       "x86_64"
@@ -6073,6 +6089,7 @@
       "ips_per_eni": 2,
       "max_enis": 2
     },
+    "ipv6_support": true,
     "base_performance": 0.1,
     "arch": [
       "x86_64",
@@ -6720,6 +6737,7 @@
       "ips_per_eni": 4,
       "max_enis": 2
     },
+    "ipv6_support": true,
     "base_performance": 0.2,
     "arch": [
       "x86_64",
@@ -7367,6 +7385,7 @@
       "ips_per_eni": 6,
       "max_enis": 3
     },
+    "ipv6_support": true,
     "base_performance": 0.4,
     "arch": [
       "x86_64"
@@ -8013,6 +8032,7 @@
       "ips_per_eni": 12,
       "max_enis": 3
     },
+    "ipv6_support": true,
     "base_performance": 0.6,
     "arch": [
       "x86_64"
@@ -8659,6 +8679,7 @@
       "ips_per_eni": 15,
       "max_enis": 3
     },
+    "ipv6_support": true,
     "base_performance": 0.9,
     "arch": [
       "x86_64"
@@ -9305,6 +9326,7 @@
       "ips_per_eni": 15,
       "max_enis": 3
     },
+    "ipv6_support": true,
     "base_performance": 1.35,
     "arch": [
       "x86_64"
@@ -10146,6 +10168,7 @@
       "ips_per_eni": 10,
       "max_enis": 2
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -10987,6 +11010,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -11828,6 +11852,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -12669,6 +12694,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -13510,6 +13536,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -14351,6 +14378,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -14896,6 +14924,7 @@
       "ips_per_eni": 6,
       "max_enis": 2
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -15472,6 +15501,7 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -16048,6 +16078,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -16624,6 +16655,7 @@
       "ips_per_eni": 30,
       "max_enis": 4
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -17470,6 +17502,7 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -18311,6 +18344,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -19152,6 +19186,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -19993,6 +20028,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -20834,6 +20870,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -21366,6 +21403,7 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -21942,6 +21980,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -22518,6 +22557,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -23094,6 +23134,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -23670,6 +23711,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -23818,6 +23860,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -23961,6 +24004,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -24104,6 +24148,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -24541,6 +24586,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -24800,6 +24846,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -25537,6 +25584,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -26274,6 +26322,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -27119,6 +27168,7 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -27960,6 +28010,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -28801,6 +28852,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -29642,6 +29694,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -30483,6 +30536,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -31324,6 +31378,7 @@
       "ips_per_eni": 50,
       "max_enis": 15
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -32057,6 +32112,7 @@
       "ips_per_eni": 10,
       "max_enis": 3
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -32794,6 +32850,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -33531,6 +33588,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -34268,6 +34326,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -35005,6 +35064,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -35688,6 +35748,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -36371,6 +36432,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -37054,6 +37116,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -37737,6 +37800,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -38164,6 +38228,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -38591,6 +38656,7 @@
       "ips_per_eni": 15,
       "max_enis": 4
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -39018,6 +39084,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -39445,6 +39512,7 @@
       "ips_per_eni": 30,
       "max_enis": 8
     },
+    "ipv6_support": true,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -39476,6 +39544,7 @@
     "pretty_name": "F1 Double Extra Large",
     "pricing": {},
     "vpc": null,
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
@@ -39505,6 +39574,7 @@
     "pretty_name": "F1 16xlarge",
     "pricing": {},
     "vpc": null,
+    "ipv6_support": false,
     "base_performance": null,
     "arch": [
       "x86_64"
