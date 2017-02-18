@@ -51,7 +51,8 @@ function init_data_table() {
           "cost-reserved-mswinSQL",
           "ebs-throughput",
           "ebs-iops",
-          "max_bandwidth"
+          "max_bandwidth",
+          "ipv6-support"
         ],
         "bVisible": false
       }

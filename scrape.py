@@ -25,6 +25,7 @@ class Instance(object):
         self.ebs_max_bandwidth = 0
         # self.hvm_only = False
         self.vpc_only = False
+        self.ipv6_support = False
         self.pretty_name = ''
 
     def to_dict(self):
@@ -47,7 +48,8 @@ class Instance(object):
                  vpc=self.vpc,
                  linux_virtualization_types=self.linux_virtualization_types,
                  generation=self.generation,
-                 vpc_only=self.vpc_only)
+                 vpc_only=self.vpc_only,
+                 ipv6_support=self.ipv6_support)
         if self.ebs_only:
             d['storage'] = None
         else:
@@ -149,8 +151,17 @@ def _rindex_family(inst2family, details):
             i = i.strip()
             inst2family[i] = totext(cols[0])
 
+def ipv6_support(details, types):
+    rows = details.xpath('tbody/tr')[0:]
+    for r in rows:
+        cols = r.xpath('td')
+        if totext(cols[7]).lower() == 'yes':
+            family = totext(cols[0]).lower()+"."
+            for i in types:
+                if i.instance_type.startswith(family):
+                    i.ipv6_support = True
 
-def scrape_families():
+def scrape_instances():
     inst2family = dict()
     tree = etree.parse(urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html"),
                        etree.HTMLParser())
@@ -158,18 +169,13 @@ def scrape_families():
     hdrs = details.xpath('thead/tr')[0]
     if totext(hdrs[0]).lower() == 'instance family' and 'current generation' in totext(hdrs[1]).lower():
         _rindex_family(inst2family, details)
-
     details = tree.xpath('//div[@class="informaltable"]//table')[1]
     hdrs = details.xpath('thead/tr')[0]
     if totext(hdrs[0]).lower() == 'instance family' and 'previous generation' in totext(hdrs[1]).lower():
         _rindex_family(inst2family, details)
-
     assert len(inst2family) > 0, "Failed to find instance family info"
-    return inst2family
+    ipv6_details = tree.xpath('//div[@class="informaltable"]//table')[2]
 
-
-def scrape_instances():
-    inst2family = scrape_families()
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/instance-types/"), etree.HTMLParser())
     details = tree.xpath('//table[count(tbody/tr[1]/td)=12]')[0]
     rows = details.xpath('tbody/tr')[1:]
@@ -182,7 +188,12 @@ def scrape_instances():
     assert len(rows) > 0, "Didn't find any table rows."
     prev_gen = [parse_prev_generation_instance(r) for r in rows]
 
-    return prev_gen + current_gen
+    all_gen = prev_gen + current_gen
+    hdrs = ipv6_details.xpath('thead/tr')[0]
+    if totext(hdrs[0]).lower() == '' and 'ipv6 support' in totext(hdrs[7]).lower():
+        ipv6_support(ipv6_details, all_gen)
+
+    return all_gen
 
 
 def transform_size(size):
