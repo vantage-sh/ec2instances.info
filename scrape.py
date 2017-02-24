@@ -107,6 +107,12 @@ def parse_instance(tr, inst2family):
     # https://github.com/powdahound/ec2instances.info/issues/199
     if i.instance_type == 'x1.16large':
         i.instance_type = 'x1.16xlarge'
+    # Correct typo on AWS site (temporary fix on 2017-02-23)
+    # https://github.com/powdahound/ec2instances.info/issues/227    
+    if i.instance_type == 'i3.4xlxarge':
+        i.instance_type = 'i3.4xlarge'
+    if i.instance_type == 'i3.16large':
+        i.instance_type = 'i3.16xlarge'
     i.family = inst2family.get(i.instance_type, "Unknown")
     # Some t2 instances support 32-bit arch
     # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html#resize-limitations
@@ -183,7 +189,7 @@ def scrape_instances():
     current_gen = [parse_instance(r, inst2family) for r in rows]
 
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/previous-generation/"), etree.HTMLParser())
-    details = tree.xpath('//table')[6]
+    details = tree.xpath('//table')[7]
     rows = details.xpath('tbody/tr')[1:]
     assert len(rows) > 0, "Didn't find any table rows."
     prev_gen = [parse_prev_generation_instance(r) for r in rows]
@@ -349,6 +355,10 @@ def add_eni_info(instances):
         instance_type = etree.tostring(r[0], method='text').strip()
         max_enis = locale.atoi(etree.tostring(r[1], method='text'))
         ip_per_eni = locale.atoi(etree.tostring(r[2], method='text'))
+        # Correct typo on AWS site (temporary fix on 2017-02-23)
+        # https://github.com/powdahound/ec2instances.info/issues/227    
+        if instance_type == 'i316xlarge':
+            instance_type = 'i3.16xlarge'
         if instance_type not in by_type:
             print "Unknown instance type: " + instance_type
             continue
