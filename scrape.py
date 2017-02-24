@@ -108,7 +108,7 @@ def parse_instance(tr, inst2family):
     if i.instance_type == 'x1.16large':
         i.instance_type = 'x1.16xlarge'
     # Correct typo on AWS site (temporary fix on 2017-02-23)
-    # https://github.com/powdahound/ec2instances.info/issues/227    
+    # https://github.com/powdahound/ec2instances.info/issues/227
     if i.instance_type == 'i3.4xlxarge':
         i.instance_type = 'i3.4xlarge'
     if i.instance_type == 'i3.16large':
@@ -356,7 +356,7 @@ def add_eni_info(instances):
         max_enis = locale.atoi(etree.tostring(r[1], method='text'))
         ip_per_eni = locale.atoi(etree.tostring(r[2], method='text'))
         # Correct typo on AWS site (temporary fix on 2017-02-23)
-        # https://github.com/powdahound/ec2instances.info/issues/227    
+        # https://github.com/powdahound/ec2instances.info/issues/227
         if instance_type == 'i316xlarge':
             instance_type = 'i3.16xlarge'
         if instance_type not in by_type:
@@ -441,7 +441,7 @@ def add_linux_ami_info(instances):
 def add_vpconly_detail(instances):
     # specific instances can be lanuched in VPC only
     # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types
-    vpc_only_families = ('c4', 'm4', 'p2', 'r4', 't2', 'x1')
+    vpc_only_families = ('c4', 'i3', 'm4', 'p2', 'r4', 't2', 'x1')
     for i in instances:
         for family in vpc_only_families:
             if i.instance_type.startswith(family):
