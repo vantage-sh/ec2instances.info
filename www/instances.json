@@ -38652,7 +38652,7 @@
       "x86_64"
     ],
     "burst_minutes": null,
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
@@ -39496,7 +39496,7 @@
       "x86_64"
     ],
     "burst_minutes": null,
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
@@ -40340,7 +40340,7 @@
       "x86_64"
     ],
     "burst_minutes": null,
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
@@ -41184,7 +41184,7 @@
       "x86_64"
     ],
     "burst_minutes": null,
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
@@ -42028,7 +42028,7 @@
       "x86_64"
     ],
     "burst_minutes": null,
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
@@ -42872,7 +42872,7 @@
       "x86_64"
     ],
     "burst_minutes": null,
-    "vpc_only": false,
+    "vpc_only": true,
     "linux_virtualization_types": [],
     "ebs_optimized": true,
     "storage": {
