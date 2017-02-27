@@ -870,6 +870,7 @@
           },
           "ondemand": "0.299"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.097",
@@ -912,6 +913,7 @@
           },
           "ondemand": "0.353"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.131",
@@ -954,6 +956,7 @@
           },
           "ondemand": "0.357"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.116",
@@ -996,6 +999,7 @@
           },
           "ondemand": "0.373"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.131",
@@ -1038,6 +1042,7 @@
           },
           "ondemand": "0.373"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.131",
@@ -1080,6 +1085,7 @@
           },
           "ondemand": "0.299"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.097",
@@ -1122,6 +1128,7 @@
           },
           "ondemand": "0.335"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.111",
@@ -1164,6 +1171,7 @@
           },
           "ondemand": "0.314"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.120",
@@ -1206,6 +1214,7 @@
           },
           "ondemand": "0.299"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.120",
@@ -1284,6 +1293,7 @@
           },
           "ondemand": "0.598"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.195",
@@ -1326,6 +1336,7 @@
           },
           "ondemand": "0.706"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.261",
@@ -1368,6 +1379,7 @@
           },
           "ondemand": "0.715"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.232",
@@ -1410,6 +1422,7 @@
           },
           "ondemand": "0.747"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.262",
@@ -1452,6 +1465,7 @@
           },
           "ondemand": "0.747"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.262",
@@ -1494,6 +1508,7 @@
           },
           "ondemand": "0.598"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.195",
@@ -1536,6 +1551,7 @@
           },
           "ondemand": "0.671"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.222",
@@ -1578,6 +1594,7 @@
           },
           "ondemand": "0.627"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.240",
@@ -1620,6 +1637,7 @@
           },
           "ondemand": "0.598"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.240",
@@ -2023,6 +2041,7 @@
           },
           "ondemand": "0.84"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.315",
@@ -2065,6 +2084,7 @@
           },
           "ondemand": "1.032"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.435",
@@ -2107,6 +2127,7 @@
           },
           "ondemand": "1.038"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.446",
@@ -2149,6 +2170,7 @@
           },
           "ondemand": "1.065"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.422",
@@ -2191,6 +2213,7 @@
           },
           "ondemand": "1.065"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.422",
@@ -2233,6 +2256,7 @@
           },
           "ondemand": "0.84"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.315",
@@ -2317,6 +2341,7 @@
           },
           "ondemand": "0.912"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.390",
@@ -2359,6 +2384,7 @@
           },
           "ondemand": "0.84"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.390",
@@ -3161,6 +3187,7 @@
           },
           "ondemand": "0.69"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.190",
@@ -3203,6 +3230,7 @@
           },
           "ondemand": "0.705"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.260",
@@ -3245,6 +3273,7 @@
           },
           "ondemand": "0.845"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.222",
@@ -3287,6 +3316,7 @@
           },
           "ondemand": "0.742"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.255",
@@ -3329,6 +3359,7 @@
           },
           "ondemand": "0.742"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.255",
@@ -3371,6 +3402,7 @@
           },
           "ondemand": "0.69"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.190",
@@ -3413,6 +3445,7 @@
           },
           "ondemand": "0.786"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.235",
@@ -3455,6 +3488,7 @@
           },
           "ondemand": "0.75"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.230",
@@ -3497,6 +3531,7 @@
           },
           "ondemand": "0.69"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.230",
@@ -3575,6 +3610,7 @@
           },
           "ondemand": "1.38"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.379",
@@ -3617,6 +3653,7 @@
           },
           "ondemand": "1.41"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.518",
@@ -3659,6 +3696,7 @@
           },
           "ondemand": "1.691"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.444",
@@ -3701,6 +3739,7 @@
           },
           "ondemand": "1.483"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.511",
@@ -3743,6 +3782,7 @@
           },
           "ondemand": "1.483"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.511",
@@ -3785,6 +3825,7 @@
           },
           "ondemand": "1.38"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.379",
@@ -3827,6 +3868,7 @@
           },
           "ondemand": "1.571"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.469",
@@ -3869,6 +3911,7 @@
           },
           "ondemand": "1.5"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.461",
@@ -3911,6 +3954,7 @@
           },
           "ondemand": "1.38"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm1Standard.partialUpfront": "0.461",
@@ -4200,6 +4244,7 @@
           },
           "ondemand": "1.151"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.437",
@@ -4254,6 +4299,7 @@
           },
           "ondemand": "0.973"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.320",
@@ -4308,6 +4354,7 @@
           },
           "ondemand": "0.973"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.320",
@@ -4362,6 +4409,7 @@
           },
           "ondemand": "1.113"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.470",
@@ -4416,6 +4464,7 @@
           },
           "ondemand": "1.185"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.470",
@@ -4470,6 +4519,7 @@
           },
           "ondemand": "1.169"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.460",
@@ -4524,6 +4574,7 @@
           },
           "ondemand": "1.169"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.460",
@@ -4578,6 +4629,7 @@
           },
           "ondemand": "0.973"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.320",
@@ -4632,6 +4684,7 @@
           },
           "ondemand": "1.144"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.384",
@@ -4686,6 +4739,7 @@
           },
           "ondemand": "1.058"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.389",
@@ -4740,6 +4794,7 @@
           },
           "ondemand": "1.133"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.420",
@@ -4794,6 +4849,7 @@
           },
           "ondemand": "0.973"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.389",
@@ -4884,6 +4940,7 @@
           },
           "ondemand": "2.301"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.877",
@@ -4938,6 +4995,7 @@
           },
           "ondemand": "1.946"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.641",
@@ -4992,6 +5050,7 @@
           },
           "ondemand": "1.946"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.641",
@@ -5046,6 +5105,7 @@
           },
           "ondemand": "2.226"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.940",
@@ -5100,6 +5160,7 @@
           },
           "ondemand": "2.369"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.940",
@@ -5154,6 +5215,7 @@
           },
           "ondemand": "2.337"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.923",
@@ -5208,6 +5270,7 @@
           },
           "ondemand": "2.337"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.923",
@@ -5262,6 +5325,7 @@
           },
           "ondemand": "1.946"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.641",
@@ -5316,6 +5380,7 @@
           },
           "ondemand": "2.287"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.769",
@@ -5370,6 +5435,7 @@
           },
           "ondemand": "2.116"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.777",
@@ -5424,6 +5490,7 @@
           },
           "ondemand": "2.267"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.840",
@@ -5478,6 +5545,7 @@
           },
           "ondemand": "1.946"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.777",
@@ -5568,6 +5636,7 @@
           },
           "ondemand": "4.603"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.752",
@@ -5622,6 +5691,7 @@
           },
           "ondemand": "3.891"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.281",
@@ -5676,6 +5746,7 @@
           },
           "ondemand": "3.891"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.281",
@@ -5730,6 +5801,7 @@
           },
           "ondemand": "4.451"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.878",
@@ -5784,6 +5856,7 @@
           },
           "ondemand": "4.738"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.878",
@@ -5838,6 +5911,7 @@
           },
           "ondemand": "4.674"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.844",
@@ -5892,6 +5966,7 @@
           },
           "ondemand": "4.674"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.844",
@@ -5946,6 +6021,7 @@
           },
           "ondemand": "3.891"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.281",
@@ -6000,6 +6076,7 @@
           },
           "ondemand": "4.573"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.537",
@@ -6054,6 +6131,7 @@
           },
           "ondemand": "4.232"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.554",
@@ -6108,6 +6186,7 @@
           },
           "ondemand": "4.532"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.678",
@@ -6162,6 +6241,7 @@
           },
           "ondemand": "3.891"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.554",
@@ -12129,6 +12209,7 @@
           },
           "ondemand": "0.224"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.069",
@@ -12183,6 +12264,7 @@
           },
           "ondemand": "0.203"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.056",
@@ -12237,6 +12319,7 @@
           },
           "ondemand": "0.203"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.056",
@@ -12291,6 +12374,7 @@
           },
           "ondemand": "0.231"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.078",
@@ -12345,6 +12429,7 @@
           },
           "ondemand": "0.263"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.082",
@@ -12399,6 +12484,7 @@
           },
           "ondemand": "0.224"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.067",
@@ -12453,6 +12539,7 @@
           },
           "ondemand": "0.229"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.070",
@@ -12507,6 +12594,7 @@
           },
           "ondemand": "0.211"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.061",
@@ -12561,6 +12649,7 @@
           },
           "ondemand": "0.229"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.076",
@@ -12615,6 +12704,7 @@
           },
           "ondemand": "0.203"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.056",
@@ -12723,6 +12813,7 @@
           },
           "ondemand": "0.221"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.077",
@@ -12777,6 +12868,7 @@
           },
           "ondemand": "0.224"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.074",
@@ -12831,6 +12923,7 @@
           },
           "ondemand": "0.211"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.068",
@@ -12885,6 +12978,7 @@
           },
           "ondemand": "0.217"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.071",
@@ -12971,6 +13065,7 @@
           },
           "ondemand": "0.447"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.140",
@@ -13025,6 +13120,7 @@
           },
           "ondemand": "0.404"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.111",
@@ -13079,6 +13175,7 @@
           },
           "ondemand": "0.404"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.111",
@@ -13133,6 +13230,7 @@
           },
           "ondemand": "0.462"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.156",
@@ -13187,6 +13285,7 @@
           },
           "ondemand": "0.527"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.165",
@@ -13241,6 +13340,7 @@
           },
           "ondemand": "0.449"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.132",
@@ -13295,6 +13395,7 @@
           },
           "ondemand": "0.455"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.140",
@@ -13349,6 +13450,7 @@
           },
           "ondemand": "0.421"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.123",
@@ -13403,6 +13505,7 @@
           },
           "ondemand": "0.458"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.153",
@@ -13457,6 +13560,7 @@
           },
           "ondemand": "0.404"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.111",
@@ -13565,6 +13669,7 @@
           },
           "ondemand": "0.44"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.155",
@@ -13619,6 +13724,7 @@
           },
           "ondemand": "0.446"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.148",
@@ -13673,6 +13779,7 @@
           },
           "ondemand": "0.422"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.136",
@@ -13727,6 +13834,7 @@
           },
           "ondemand": "0.434"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.143",
@@ -13813,6 +13921,7 @@
           },
           "ondemand": "0.895"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.278",
@@ -13867,6 +13976,7 @@
           },
           "ondemand": "0.809"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.223",
@@ -13921,6 +14031,7 @@
           },
           "ondemand": "0.809"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.223",
@@ -13975,6 +14086,7 @@
           },
           "ondemand": "0.924"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.312",
@@ -14029,6 +14141,7 @@
           },
           "ondemand": "1.053"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.329",
@@ -14083,6 +14196,7 @@
           },
           "ondemand": "0.896"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.265",
@@ -14137,6 +14251,7 @@
           },
           "ondemand": "0.911"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.282",
@@ -14191,6 +14306,7 @@
           },
           "ondemand": "0.842"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.246",
@@ -14245,6 +14361,7 @@
           },
           "ondemand": "0.916"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.304",
@@ -14299,6 +14416,7 @@
           },
           "ondemand": "0.809"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.223",
@@ -14407,6 +14525,7 @@
           },
           "ondemand": "0.881"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.308",
@@ -14461,6 +14580,7 @@
           },
           "ondemand": "0.891"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.295",
@@ -14515,6 +14635,7 @@
           },
           "ondemand": "0.843"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.272",
@@ -14569,6 +14690,7 @@
           },
           "ondemand": "0.867"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.285",
@@ -14655,6 +14777,7 @@
           },
           "ondemand": "1.789"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.556",
@@ -14709,6 +14832,7 @@
           },
           "ondemand": "1.618"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.446",
@@ -14763,6 +14887,7 @@
           },
           "ondemand": "1.618"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.446",
@@ -14817,6 +14942,7 @@
           },
           "ondemand": "1.849"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.624",
@@ -14871,6 +14997,7 @@
           },
           "ondemand": "2.106"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.658",
@@ -14925,6 +15052,7 @@
           },
           "ondemand": "1.793"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.531",
@@ -14979,6 +15107,7 @@
           },
           "ondemand": "1.822"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.563",
@@ -15033,6 +15162,7 @@
           },
           "ondemand": "1.684"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.491",
@@ -15087,6 +15217,7 @@
           },
           "ondemand": "1.832"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.610",
@@ -15141,6 +15272,7 @@
           },
           "ondemand": "1.618"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.446",
@@ -15249,6 +15381,7 @@
           },
           "ondemand": "1.761"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.616",
@@ -15303,6 +15436,7 @@
           },
           "ondemand": "1.782"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.591",
@@ -15357,6 +15491,7 @@
           },
           "ondemand": "1.686"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.544",
@@ -15411,6 +15546,7 @@
           },
           "ondemand": "1.734"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.570",
@@ -15497,6 +15633,7 @@
           },
           "ondemand": "4.473"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.390",
@@ -15551,6 +15688,7 @@
           },
           "ondemand": "4.045"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.116",
@@ -15605,6 +15743,7 @@
           },
           "ondemand": "4.045"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.116",
@@ -15659,6 +15798,7 @@
           },
           "ondemand": "4.622"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.561",
@@ -15713,6 +15853,7 @@
           },
           "ondemand": "5.265"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.645",
@@ -15767,6 +15908,7 @@
           },
           "ondemand": "4.482"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.327",
@@ -15821,6 +15963,7 @@
           },
           "ondemand": "4.555"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.408",
@@ -15875,6 +16018,7 @@
           },
           "ondemand": "4.21"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.227",
@@ -15929,6 +16073,7 @@
           },
           "ondemand": "4.58"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.524",
@@ -15983,6 +16128,7 @@
           },
           "ondemand": "4.045"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.116",
@@ -16091,6 +16237,7 @@
           },
           "ondemand": "4.404"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.538",
@@ -16145,6 +16292,7 @@
           },
           "ondemand": "4.455"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.478",
@@ -16199,6 +16347,7 @@
           },
           "ondemand": "4.217"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.357",
@@ -16253,6 +16402,7 @@
           },
           "ondemand": "4.336"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.425",
@@ -16447,6 +16597,7 @@
           },
           "ondemand": "6.471"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.786",
@@ -16717,6 +16868,7 @@
           },
           "ondemand": "6.736"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.965",
@@ -17095,6 +17247,7 @@
           },
           "ondemand": "6.937"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "2.280",
@@ -18309,6 +18462,7 @@
           },
           "ondemand": "0.518"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.147",
@@ -18363,6 +18517,7 @@
           },
           "ondemand": "0.583"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.196",
@@ -18417,6 +18572,7 @@
           },
           "ondemand": "0.633"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.183",
@@ -18430,6 +18586,9 @@
           },
           "ondemand": "0.381"
         }
+      },
+      "ap-northeast-2": {
+        "ebs": "0.025"
       },
       "ap-southeast-1": {
         "mswinSQLWeb": {
@@ -18471,6 +18630,7 @@
           },
           "ondemand": "0.644"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.208",
@@ -18525,6 +18685,7 @@
           },
           "ondemand": "0.624"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.198",
@@ -18579,6 +18740,7 @@
           },
           "ondemand": "0.518"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.147",
@@ -18633,6 +18795,7 @@
           },
           "ondemand": "0.588"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.179",
@@ -18687,6 +18850,7 @@
           },
           "ondemand": "0.56"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.189",
@@ -18741,6 +18905,7 @@
           },
           "ondemand": "0.567"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.194",
@@ -18795,6 +18960,7 @@
           },
           "ondemand": "0.517"
         },
+        "ebs": "0.025",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.179",
@@ -18886,6 +19052,7 @@
           },
           "ondemand": "1.036"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.292",
@@ -18940,6 +19107,7 @@
           },
           "ondemand": "1.166"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.392",
@@ -18994,6 +19162,7 @@
           },
           "ondemand": "1.265"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.366",
@@ -19007,6 +19176,9 @@
           },
           "ondemand": "0.761"
         }
+      },
+      "ap-northeast-2": {
+        "ebs": "0.05"
       },
       "ap-southeast-1": {
         "mswinSQLWeb": {
@@ -19048,6 +19220,7 @@
           },
           "ondemand": "1.288"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.416",
@@ -19102,6 +19275,7 @@
           },
           "ondemand": "1.249"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.395",
@@ -19156,6 +19330,7 @@
           },
           "ondemand": "1.036"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.292",
@@ -19210,6 +19385,7 @@
           },
           "ondemand": "1.176"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.359",
@@ -19264,6 +19440,7 @@
           },
           "ondemand": "1.12"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.379",
@@ -19318,6 +19495,7 @@
           },
           "ondemand": "1.136"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.387",
@@ -19372,6 +19550,7 @@
           },
           "ondemand": "1.033"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.358",
@@ -19463,6 +19642,7 @@
           },
           "ondemand": "0.202"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.063",
@@ -19517,6 +19697,7 @@
           },
           "ondemand": "0.192"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.053",
@@ -19571,6 +19752,7 @@
           },
           "ondemand": "0.192"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.053",
@@ -19625,6 +19807,7 @@
           },
           "ondemand": "0.218"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.076",
@@ -19679,6 +19862,7 @@
           },
           "ondemand": "0.247"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.093",
@@ -19733,6 +19917,7 @@
           },
           "ondemand": "0.206"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.065",
@@ -19787,6 +19972,7 @@
           },
           "ondemand": "0.207"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.067",
@@ -19841,6 +20027,7 @@
           },
           "ondemand": "0.202"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.061",
@@ -19895,6 +20082,7 @@
           },
           "ondemand": "0.222"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.070",
@@ -19949,6 +20137,7 @@
           },
           "ondemand": "0.192"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.053",
@@ -20057,6 +20246,7 @@
           },
           "ondemand": "0.216"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.071",
@@ -20111,6 +20301,7 @@
           },
           "ondemand": "0.206"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.067",
@@ -20165,6 +20356,7 @@
           },
           "ondemand": "0.205"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.066",
@@ -20219,6 +20411,7 @@
           },
           "ondemand": "0.211"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.068",
@@ -20305,6 +20498,7 @@
           },
           "ondemand": "0.404"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.124",
@@ -20359,6 +20553,7 @@
           },
           "ondemand": "0.383"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.107",
@@ -20413,6 +20608,7 @@
           },
           "ondemand": "0.383"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.107",
@@ -20467,6 +20663,7 @@
           },
           "ondemand": "0.436"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.152",
@@ -20521,6 +20718,7 @@
           },
           "ondemand": "0.493"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.185",
@@ -20575,6 +20773,7 @@
           },
           "ondemand": "0.411"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.130",
@@ -20629,6 +20828,7 @@
           },
           "ondemand": "0.415"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.131",
@@ -20683,6 +20883,7 @@
           },
           "ondemand": "0.402"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.123",
@@ -20737,6 +20938,7 @@
           },
           "ondemand": "0.445"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.140",
@@ -20791,6 +20993,7 @@
           },
           "ondemand": "0.383"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.107",
@@ -20899,6 +21102,7 @@
           },
           "ondemand": "0.433"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.144",
@@ -20953,6 +21157,7 @@
           },
           "ondemand": "0.411"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.131",
@@ -21007,6 +21212,7 @@
           },
           "ondemand": "0.41"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.131",
@@ -21061,6 +21267,7 @@
           },
           "ondemand": "0.421"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.137",
@@ -21147,6 +21354,7 @@
           },
           "ondemand": "0.807"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.248",
@@ -21201,6 +21409,7 @@
           },
           "ondemand": "0.766"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.213",
@@ -21255,6 +21464,7 @@
           },
           "ondemand": "0.766"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.213",
@@ -21309,6 +21519,7 @@
           },
           "ondemand": "0.872"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.304",
@@ -21363,6 +21574,7 @@
           },
           "ondemand": "0.986"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.370",
@@ -21417,6 +21629,7 @@
           },
           "ondemand": "0.822"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.259",
@@ -21471,6 +21684,7 @@
           },
           "ondemand": "0.83"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.262",
@@ -21525,6 +21739,7 @@
           },
           "ondemand": "0.806"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.248",
@@ -21579,6 +21794,7 @@
           },
           "ondemand": "0.89"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.280",
@@ -21633,6 +21849,7 @@
           },
           "ondemand": "0.766"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.213",
@@ -21741,6 +21958,7 @@
           },
           "ondemand": "0.866"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.286",
@@ -21795,6 +22013,7 @@
           },
           "ondemand": "0.822"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.264",
@@ -21849,6 +22068,7 @@
           },
           "ondemand": "0.821"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.260",
@@ -21903,6 +22123,7 @@
           },
           "ondemand": "0.844"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.273",
@@ -21989,6 +22210,7 @@
           },
           "ondemand": "1.614"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.497",
@@ -22043,6 +22265,7 @@
           },
           "ondemand": "1.532"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.426",
@@ -22097,6 +22320,7 @@
           },
           "ondemand": "1.532"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.426",
@@ -22151,6 +22375,7 @@
           },
           "ondemand": "1.744"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.608",
@@ -22205,6 +22430,7 @@
           },
           "ondemand": "1.971"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.740",
@@ -22259,6 +22485,7 @@
           },
           "ondemand": "1.643"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.518",
@@ -22313,6 +22540,7 @@
           },
           "ondemand": "1.66"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.523",
@@ -22367,6 +22595,7 @@
           },
           "ondemand": "1.612"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.495",
@@ -22421,6 +22650,7 @@
           },
           "ondemand": "1.778"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.559",
@@ -22475,6 +22705,7 @@
           },
           "ondemand": "1.532"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.426",
@@ -22583,6 +22814,7 @@
           },
           "ondemand": "1.733"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.573",
@@ -22637,6 +22869,7 @@
           },
           "ondemand": "1.645"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.527",
@@ -22691,6 +22924,7 @@
           },
           "ondemand": "1.641"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.521",
@@ -22745,6 +22979,7 @@
           },
           "ondemand": "1.686"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.547",
@@ -22831,6 +23066,7 @@
           },
           "ondemand": "3.412"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.995",
@@ -22885,6 +23121,7 @@
           },
           "ondemand": "3.091"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.852",
@@ -22939,6 +23176,7 @@
           },
           "ondemand": "3.091"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.852",
@@ -22993,6 +23231,7 @@
           },
           "ondemand": "3.672"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.215",
@@ -23047,6 +23286,7 @@
           },
           "ondemand": "4.126"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.479",
@@ -23101,6 +23341,7 @@
           },
           "ondemand": "3.471"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.037",
@@ -23155,6 +23396,7 @@
           },
           "ondemand": "3.504"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.047",
@@ -23209,6 +23451,7 @@
           },
           "ondemand": "3.406"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.989",
@@ -23263,6 +23506,7 @@
           },
           "ondemand": "3.741"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.120",
@@ -23317,6 +23561,7 @@
           },
           "ondemand": "3.091"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.852",
@@ -23425,6 +23670,7 @@
           },
           "ondemand": "3.536"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.146",
@@ -23479,6 +23725,7 @@
           },
           "ondemand": "3.473"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.056",
@@ -23533,6 +23780,7 @@
           },
           "ondemand": "3.334"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.040",
@@ -23587,6 +23835,7 @@
           },
           "ondemand": "3.558"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.093",
@@ -24211,6 +24460,7 @@
           },
           "ondemand": "0.376"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.112",
@@ -24265,6 +24515,7 @@
           },
           "ondemand": "0.462"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.155",
@@ -24319,6 +24570,7 @@
           },
           "ondemand": "0.491"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.195",
@@ -24332,6 +24584,9 @@
           },
           "ondemand": "0.325"
         }
+      },
+      "ap-northeast-2": {
+        "ebs": "0.02"
       },
       "ap-southeast-1": {
         "mswinSQLWeb": {
@@ -24373,6 +24628,7 @@
           },
           "ondemand": "0.477"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.149",
@@ -24427,6 +24683,7 @@
           },
           "ondemand": "0.477"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.149",
@@ -24481,6 +24738,7 @@
           },
           "ondemand": "0.376"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.112",
@@ -24535,6 +24793,7 @@
           },
           "ondemand": "0.418"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.135",
@@ -24589,6 +24848,7 @@
           },
           "ondemand": "0.376"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.139",
@@ -24643,6 +24903,7 @@
           },
           "ondemand": "0.424"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.150",
@@ -24697,6 +24958,7 @@
           },
           "ondemand": "0.376"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.139",
@@ -24788,6 +25050,7 @@
           },
           "ondemand": "0.752"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.223",
@@ -24842,6 +25105,7 @@
           },
           "ondemand": "0.925"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.309",
@@ -24896,6 +25160,7 @@
           },
           "ondemand": "0.982"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.389",
@@ -24909,6 +25174,9 @@
           },
           "ondemand": "0.65"
         }
+      },
+      "ap-northeast-2": {
+        "ebs": "0.05"
       },
       "ap-southeast-1": {
         "mswinSQLWeb": {
@@ -24950,6 +25218,7 @@
           },
           "ondemand": "0.953"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.300",
@@ -25004,6 +25273,7 @@
           },
           "ondemand": "0.953"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.300",
@@ -25058,6 +25328,7 @@
           },
           "ondemand": "0.752"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.223",
@@ -25112,6 +25383,7 @@
           },
           "ondemand": "0.836"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.268",
@@ -25166,6 +25438,7 @@
           },
           "ondemand": "0.752"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.277",
@@ -25220,6 +25493,7 @@
           },
           "ondemand": "0.848"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.299",
@@ -25274,6 +25548,7 @@
           },
           "ondemand": "0.752"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.277",
@@ -25365,6 +25640,7 @@
           },
           "ondemand": "1.504"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.447",
@@ -25419,6 +25695,7 @@
           },
           "ondemand": "1.849"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.618",
@@ -25473,6 +25750,7 @@
           },
           "ondemand": "1.964"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.779",
@@ -25486,6 +25764,9 @@
           },
           "ondemand": "1.3"
         }
+      },
+      "ap-northeast-2": {
+        "ebs": "0.10"
       },
       "ap-southeast-1": {
         "mswinSQLWeb": {
@@ -25527,6 +25808,7 @@
           },
           "ondemand": "1.906"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.599",
@@ -25581,6 +25863,7 @@
           },
           "ondemand": "1.906"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.599",
@@ -25635,6 +25918,7 @@
           },
           "ondemand": "1.504"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.447",
@@ -25689,6 +25973,7 @@
           },
           "ondemand": "1.672"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.536",
@@ -25743,6 +26028,7 @@
           },
           "ondemand": "1.504"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.554",
@@ -25797,6 +26083,7 @@
           },
           "ondemand": "1.696"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.598",
@@ -25851,6 +26138,7 @@
           },
           "ondemand": "1.504"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.554",
@@ -26951,6 +27239,7 @@
           },
           "ondemand": "0.767"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.357",
@@ -27019,6 +27308,9 @@
           "ondemand": "0.898"
         }
       },
+      "ap-northeast-2": {
+        "ebs": "0.05"
+      },
       "ap-southeast-1": {
         "mswinSQLWeb": {
           "reserved": {
@@ -27059,6 +27351,7 @@
           },
           "ondemand": "1.16"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.632",
@@ -27167,6 +27460,7 @@
           },
           "ondemand": "0.767"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.357",
@@ -27221,6 +27515,7 @@
           },
           "ondemand": "0.819"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.388",
@@ -27249,6 +27544,7 @@
           },
           "ondemand": "0.906"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.426",
@@ -27303,6 +27599,7 @@
           },
           "ondemand": "0.767"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.388",
@@ -27707,6 +28004,7 @@
           },
           "ondemand": "9.613"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "3.452",
@@ -27923,6 +28221,7 @@
           },
           "ondemand": "10.28"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "3.797",
@@ -28301,6 +28600,7 @@
           },
           "ondemand": "11.347"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "4.350",
@@ -28445,6 +28745,7 @@
           },
           "ondemand": "19.226"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "6.904",
@@ -28661,6 +28962,7 @@
           },
           "ondemand": "20.56"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "7.595",
@@ -29039,6 +29341,7 @@
           },
           "ondemand": "22.694"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "8.699",
@@ -29237,6 +29540,7 @@
           },
           "ondemand": "0.225"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.070",
@@ -30079,6 +30383,7 @@
           },
           "ondemand": "0.45"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.141",
@@ -30921,6 +31226,7 @@
           },
           "ondemand": "0.9"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.282",
@@ -31763,6 +32069,7 @@
           },
           "ondemand": "1.8"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.563",
@@ -32605,6 +32912,7 @@
           },
           "ondemand": "3.6"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.126",
@@ -33447,6 +33755,7 @@
           },
           "ondemand": "7.2"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "2.252",
@@ -34919,6 +35228,7 @@
           },
           "ondemand": "0.563"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.218",
@@ -34973,6 +35283,7 @@
           },
           "ondemand": "0.583"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.159",
@@ -35027,6 +35338,7 @@
           },
           "ondemand": "0.583"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.159",
@@ -35081,6 +35393,7 @@
           },
           "ondemand": "0.599"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.229",
@@ -35135,6 +35448,7 @@
           },
           "ondemand": "0.884"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.402",
@@ -35189,6 +35503,7 @@
           },
           "ondemand": "0.583"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.229",
@@ -35243,6 +35558,7 @@
           },
           "ondemand": "0.625"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.229",
@@ -35297,6 +35613,7 @@
           },
           "ondemand": "0.625"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.229",
@@ -35351,6 +35668,7 @@
           },
           "ondemand": "0.583"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.159",
@@ -35405,6 +35723,7 @@
           },
           "ondemand": "0.649"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.190",
@@ -35459,6 +35778,7 @@
           },
           "ondemand": "0.633"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.205",
@@ -35513,6 +35833,7 @@
           },
           "ondemand": "0.65"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.222",
@@ -35567,6 +35888,7 @@
           },
           "ondemand": "0.581"
         },
+        "ebs": "0.02",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.205",
@@ -35657,6 +35979,7 @@
           },
           "ondemand": "1.126"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.435",
@@ -35711,6 +36034,7 @@
           },
           "ondemand": "1.045"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.317",
@@ -35765,6 +36089,7 @@
           },
           "ondemand": "1.045"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.317",
@@ -35819,6 +36144,7 @@
           },
           "ondemand": "1.177"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.458",
@@ -35873,6 +36199,7 @@
           },
           "ondemand": "1.767"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.805",
@@ -35927,6 +36254,7 @@
           },
           "ondemand": "1.166"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.458",
@@ -35981,6 +36309,7 @@
           },
           "ondemand": "1.25"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.458",
@@ -36035,6 +36364,7 @@
           },
           "ondemand": "1.25"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.458",
@@ -36089,6 +36419,7 @@
           },
           "ondemand": "1.045"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.317",
@@ -36143,6 +36474,7 @@
           },
           "ondemand": "1.178"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.381",
@@ -36197,6 +36529,7 @@
           },
           "ondemand": "1.134"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.411",
@@ -36251,6 +36584,7 @@
           },
           "ondemand": "1.18"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.444",
@@ -36305,6 +36639,7 @@
           },
           "ondemand": "1.08"
         },
+        "ebs": "0.05",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.411",
@@ -36395,6 +36730,7 @@
           },
           "ondemand": "2.252"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.870",
@@ -36449,6 +36785,7 @@
           },
           "ondemand": "1.944"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.635",
@@ -36503,6 +36840,7 @@
           },
           "ondemand": "1.944"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.635",
@@ -36557,6 +36895,7 @@
           },
           "ondemand": "2.276"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.916",
@@ -36611,6 +36950,7 @@
           },
           "ondemand": "3.394"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.609",
@@ -36665,6 +37005,7 @@
           },
           "ondemand": "2.332"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.916",
@@ -36719,6 +37060,7 @@
           },
           "ondemand": "2.363"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.916",
@@ -36773,6 +37115,7 @@
           },
           "ondemand": "2.363"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.916",
@@ -36827,6 +37170,7 @@
           },
           "ondemand": "1.944"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.635",
@@ -36881,6 +37225,7 @@
           },
           "ondemand": "2.224"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.762",
@@ -36935,6 +37280,7 @@
           },
           "ondemand": "2.111"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.822",
@@ -36989,6 +37335,7 @@
           },
           "ondemand": "2.228"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.888",
@@ -37043,6 +37390,7 @@
           },
           "ondemand": "1.944"
         },
+        "ebs": "0.10",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.822",
@@ -42909,6 +43257,7 @@
           },
           "ondemand": "1.011"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.367",
@@ -42937,6 +43286,7 @@
           },
           "ondemand": "0.821"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.303",
@@ -42965,6 +43315,7 @@
           },
           "ondemand": "0.821"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.303",
@@ -42993,6 +43344,7 @@
           },
           "ondemand": "0.975"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.399",
@@ -43021,6 +43373,7 @@
           },
           "ondemand": "1.028"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.399",
@@ -43049,6 +43402,7 @@
           },
           "ondemand": "1.001"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.387",
@@ -43077,6 +43431,7 @@
           },
           "ondemand": "0.943"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.334",
@@ -43105,6 +43460,7 @@
           },
           "ondemand": "1.001"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.387",
@@ -43133,6 +43489,7 @@
           },
           "ondemand": "0.821"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.303",
@@ -43189,6 +43546,7 @@
           },
           "ondemand": "0.965"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.371",
@@ -43217,6 +43575,7 @@
           },
           "ondemand": "0.925"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.364",
@@ -43245,6 +43604,7 @@
           },
           "ondemand": "0.866"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.337",
@@ -43273,6 +43633,7 @@
           },
           "ondemand": "0.956"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.354",
@@ -43337,6 +43698,7 @@
           },
           "ondemand": "2.021"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.734",
@@ -43365,6 +43727,7 @@
           },
           "ondemand": "1.601"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.607",
@@ -43393,6 +43756,7 @@
           },
           "ondemand": "1.601"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.607",
@@ -43421,6 +43785,7 @@
           },
           "ondemand": "1.909"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.797",
@@ -43449,6 +43814,7 @@
           },
           "ondemand": "2.056"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.797",
@@ -43477,6 +43843,7 @@
           },
           "ondemand": "1.961"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.773",
@@ -43505,6 +43872,7 @@
           },
           "ondemand": "1.886"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.667",
@@ -43533,6 +43901,7 @@
           },
           "ondemand": "1.961"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.773",
@@ -43561,6 +43930,7 @@
           },
           "ondemand": "1.601"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.607",
@@ -43617,6 +43987,7 @@
           },
           "ondemand": "1.931"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.741",
@@ -43645,6 +44016,7 @@
           },
           "ondemand": "1.809"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.727",
@@ -43673,6 +44045,7 @@
           },
           "ondemand": "1.691"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.674",
@@ -43701,6 +44074,7 @@
           },
           "ondemand": "1.912"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "0.707",
@@ -43765,6 +44139,7 @@
           },
           "ondemand": "4.042"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.470",
@@ -43793,6 +44168,7 @@
           },
           "ondemand": "3.062"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.213",
@@ -43821,6 +44197,7 @@
           },
           "ondemand": "3.062"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.213",
@@ -43849,6 +44226,7 @@
           },
           "ondemand": "3.678"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.595",
@@ -43877,6 +44255,7 @@
           },
           "ondemand": "4.112"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.594",
@@ -43905,6 +44284,7 @@
           },
           "ondemand": "3.782"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.547",
@@ -43933,6 +44313,7 @@
           },
           "ondemand": "3.772"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.335",
@@ -43961,6 +44342,7 @@
           },
           "ondemand": "3.782"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.547",
@@ -43989,6 +44371,7 @@
           },
           "ondemand": "3.062"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.213",
@@ -44045,6 +44428,7 @@
           },
           "ondemand": "3.861"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.481",
@@ -44073,6 +44457,7 @@
           },
           "ondemand": "3.478"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.454",
@@ -44101,6 +44486,7 @@
           },
           "ondemand": "3.242"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.347",
@@ -44129,6 +44515,7 @@
           },
           "ondemand": "3.823"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "1.415",
@@ -44193,6 +44580,7 @@
           },
           "ondemand": "8.268"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "2.939",
@@ -44221,6 +44609,7 @@
           },
           "ondemand": "6.198"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "2.426",
@@ -44249,6 +44638,7 @@
           },
           "ondemand": "6.198"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "2.426",
@@ -44277,6 +44667,7 @@
           },
           "ondemand": "7.43"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "3.189",
@@ -44305,6 +44696,7 @@
           },
           "ondemand": "8.408"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "3.189",
@@ -44333,6 +44725,7 @@
           },
           "ondemand": "7.638"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "3.094",
@@ -44361,6 +44754,7 @@
           },
           "ondemand": "7.728"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "2.669",
@@ -44389,6 +44783,7 @@
           },
           "ondemand": "7.638"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "3.094",
@@ -44417,6 +44812,7 @@
           },
           "ondemand": "6.198"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "2.426",
@@ -44473,6 +44869,7 @@
           },
           "ondemand": "7.906"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "2.964",
@@ -44501,6 +44898,7 @@
           },
           "ondemand": "7.03"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "2.909",
@@ -44529,6 +44927,7 @@
           },
           "ondemand": "6.558"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "2.694",
@@ -44557,6 +44956,7 @@
           },
           "ondemand": "7.83"
         },
+        "ebs": "0.00",
         "linux": {
           "reserved": {
             "yrTerm3Convertible.allUpfront": "2.829",

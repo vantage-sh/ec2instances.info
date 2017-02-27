@@ -137,6 +137,9 @@
           <th class="cost-reserved cost-reserved-mswinSQL">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows SQL Std Reserved cost</abbr>
           </th>
+          <th class="cost-ebs-optimized">
+            <abbr title='Some instance types are charged additionally when configured for optimized EBS usage'>EBS Optimized surcharge</abbr>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -273,6 +276,19 @@
             % endif
           </td>
           % endfor
+          <td class="cost-ebs-optimized" data-pricing='${json.dumps({r:p.get('ebs', {}) for r,p in inst['pricing'].iteritems()}) | h}'>
+           % if inst['ebs_max_bandwidth']:
+              % if inst['pricing'].get('us-east-1', {}).get('ebs', 'N/A') != "N/A":
+                <span sort="${inst['pricing']['us-east-1']['ebs']}">
+                  $${inst['pricing']['us-east-1']['ebs']} hourly
+                </span>
+              % else:
+                <span sort="0">0</span>
+              % endif
+            % else:
+              <span sort="0">N/A</span>
+            % endif
+          </td>
         </tr>
 % endfor
       </tbody>
