@@ -36,7 +36,8 @@ function init_data_table() {
           "ebs-max-bandwidth",
           "networkperf",
           "cost-ondemand",
-          "cost-reserved"
+          "cost-reserved",
+          "cost-ebs-optimized",
         ],
         "sType": "span-sort"
       },
@@ -57,6 +58,7 @@ function init_data_table() {
           "ebs-iops",
           "ebs-iops",
           "ebs-max-bandwidth",
+          "cost-ebs-optimized",
           "ipv6-support",
           "vpc-only"
         ],
@@ -153,6 +155,17 @@ function change_cost(duration) {
 
     per_time = per_time[g_settings.reserved_term];
 
+    if (per_time && !isNaN(per_time)) {
+      per_time = (per_time * multiplier).toFixed(3);
+      elem.text("$" + per_time + " " + duration);
+    } else {
+      elem.text("unavailable");
+    }
+  });
+
+  $.each($("td.cost-ebs-optimized"), function (i, elem) {
+    elem = $(elem);
+    per_time = elem.data("pricing")[g_settings.region];
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(3);
       elem.text("$" + per_time + " " + duration);

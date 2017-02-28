@@ -293,6 +293,22 @@ def add_reserved_pricing(imap, data, platform):
 
             inst.pricing[region][platform]['reserved'] = termPricing
 
+def add_ebs_pricing(imap, data):
+    for region_spec in data['config']['regions']:
+        region = transform_region(region_spec['region'])
+        for t_spec in region_spec['instanceTypes']:
+            typename = t_spec['type']
+            for i_spec in t_spec['sizes']:
+                i_type = i_spec['size']
+                if i_type not in imap:
+                    print("ERROR: Got EBS pricing data for unknown instance type: {}".format(i_type))
+                    continue
+                inst = imap[i_type]
+                inst.pricing.setdefault(region, {})
+                # print "%s/%s" % (region, i_type)
+
+                for col in i_spec['valueColumns']:
+                    inst.pricing[region]['ebs'] = col['prices']['USD']
 
 def add_pricing_info(instances):
     pricing_modes = ['ri', 'od']
@@ -329,6 +345,11 @@ def add_pricing_info(instances):
 
             pricing = fetch_data(pricing_url)
             add_pricing(by_type, pricing, platform, pricing_mode)
+
+    # EBS cost surcharge as per https://aws.amazon.com/ec2/pricing/on-demand/#EBS-Optimized_Instances
+    ebs_pricing_url = 'https://a0.awsstatic.com/pricing/1/ec2/pricing-ebs-optimized-instances.min.js'
+    pricing = fetch_data(ebs_pricing_url)
+    add_ebs_pricing(by_type, pricing)
 
 
 def fetch_data(url):
