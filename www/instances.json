@@ -4883,7 +4883,7 @@
     "storage": {
       "ssd": false,
       "devices": 1,
-      "size": 1800.0
+      "size": 800.0
     },
     "instance_type": "i2.xlarge",
     "ECU": 14.0,
