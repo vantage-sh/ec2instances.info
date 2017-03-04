@@ -9,7 +9,7 @@ var g_settings_defaults = {
   region: 'us-east-1',
   reserved_term: 'yrTerm1Standard.noUpfront',
   min_memory: 0,
-  min_computeunits: 0,
+  min_vcpus: 0,
   min_storage: 0,
   selected: ''
 };
@@ -253,7 +253,7 @@ function clear_row_selections() {
 function url_for_selections() {
   var params = {
     min_memory: g_settings.min_memory,
-    min_computeunits: g_settings.min_computeunits,
+    min_vcpus: g_settings.min_vcpus,
     min_storage: g_settings.min_storage,
     filter: g_data_table.settings()[0].oPreviousSearch['sSearch'],
     region: g_settings.region,
@@ -343,7 +343,7 @@ function on_data_table_initialized() {
 
   // populate filter inputs
   $('[data-action="datafilter"][data-type="memory"]').val(g_settings['min_memory']);
-  $('[data-action="datafilter"][data-type="computeunits"]').val(g_settings['min_computeunits']);
+  $('[data-action="datafilter"][data-type="vcpus"]').val(g_settings['min_vcpus']);
   $('[data-action="datafilter"][data-type="storage"]').val(g_settings['min_storage']);
   apply_min_values();
 

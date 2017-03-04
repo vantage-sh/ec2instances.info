@@ -92,6 +92,7 @@
     <div class="pull-left form-inline" id="filters">
       <strong> Filter:</strong>
       Min Memory (GB): <input data-action="datafilter" data-type="memory" class="form-control" />
+      Min vCPUs: <input data-action="datafilter" data-type="vcpus" class="form-control" />
     </div>
 
     <table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">

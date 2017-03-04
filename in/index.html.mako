@@ -90,8 +90,8 @@
     <div class="form-inline" id="filters">
       <strong> Filter:</strong>
       Min Memory (GB): <input data-action="datafilter" data-type="memory" class="form-control" />
-      Compute Units: <input data-action="datafilter" data-type="computeunits" class="form-control" />
-      Storage (GB): <input data-action="datafilter" data-type="storage" class="form-control" />
+      Min vCPUs: <input data-action="datafilter" data-type="vcpus" class="form-control" />
+      Min Storage (GB): <input data-action="datafilter" data-type="storage" class="form-control" />
     </div>
 
     <table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">
