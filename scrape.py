@@ -26,6 +26,7 @@ class Instance(object):
         # self.hvm_only = False
         self.vpc_only = False
         self.ipv6_support = False
+        self.placement_group_support = False
         self.pretty_name = ''
 
     def to_dict(self):
@@ -44,6 +45,7 @@ class Instance(object):
                  ebs_max_bandwidth=self.ebs_max_bandwidth,
                  network_performance=self.network_performance,
                  enhanced_networking=self.enhanced_networking,
+                 placement_group_support=self.placement_group_support,
                  pricing=self.pricing,
                  vpc=self.vpc,
                  linux_virtualization_types=self.linux_virtualization_types,
@@ -157,10 +159,15 @@ def _rindex_family(inst2family, details):
             i = i.strip()
             inst2family[i] = totext(cols[0])
 
-def ipv6_support(details, types):
+def feature_support(details, types):
     rows = details.xpath('tbody/tr')[0:]
     for r in rows:
         cols = r.xpath('td')
+        if totext(cols[4]).lower() == 'yes':
+            family = totext(cols[0]).lower()+"."
+            for i in types:
+                if i.instance_type.startswith(family):
+                    i.placement_group_support = True
         if totext(cols[7]).lower() == 'yes':
             family = totext(cols[0]).lower()+"."
             for i in types:
@@ -180,7 +187,7 @@ def scrape_instances():
     if totext(hdrs[0]).lower() == 'instance family' and 'previous generation' in totext(hdrs[1]).lower():
         _rindex_family(inst2family, details)
     assert len(inst2family) > 0, "Failed to find instance family info"
-    ipv6_details = tree.xpath('//div[@class="informaltable"]//table')[2]
+    features_details = tree.xpath('//div[@class="informaltable"]//table')[2]
 
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/instance-types/"), etree.HTMLParser())
     details = tree.xpath('//table[count(tbody/tr[1]/td)=12]')[0]
@@ -195,10 +202,9 @@ def scrape_instances():
     prev_gen = [parse_prev_generation_instance(r) for r in rows]
 
     all_gen = prev_gen + current_gen
-    hdrs = ipv6_details.xpath('thead/tr')[0]
+    hdrs = features_details.xpath('thead/tr')[0]
     if totext(hdrs[0]).lower() == '' and 'ipv6 support' in totext(hdrs[7]).lower():
-        ipv6_support(ipv6_details, all_gen)
-
+        feature_support(features_details, all_gen)
     return all_gen
 
 
@@ -551,6 +557,7 @@ def scrape(data_file):
         json.dump([i.to_dict() for i in all_instances],
                   f,
                   indent=2,
+                  sort_keys=True,
                   separators=(',', ': '))
 
 
