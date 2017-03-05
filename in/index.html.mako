@@ -107,13 +107,14 @@
             <abbr title="Each virtual CPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">vCPUs</abbr>
           </th>
           <th class="ecu-per-vcpu">ECU per vCPU</th>
-          <th class="storage">Storage</th>
+          <th class="storage">Instance Storage</th>
+          <th class="warmed-up">Instance Storage: already warmed-up</th>
+          <th class="trim-support">Instance Storage: SSD TRIM Support</th>
           <th class="architecture">Arch</th>
           <th class="networkperf">Network Performance</th>
           <th class="ebs-max-bandwidth">EBS Optimized: Max Bandwidth</th>
           <th class="ebs-throughput">EBS Optimized: Throughput</th>
           <th class="ebs-iops">EBS Optimized: Max 16K IOPS</th>
-          <th class="trim-support">TRIM Support</th>
           <th class="maxips">
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
@@ -189,18 +190,34 @@
           <td class="storage">
             <% storage = inst['storage'] %>
             % if not storage:
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
             % else:
             <span sort="${storage['devices']*storage['size']}">
               ${storage['devices']*storage['size']} GB
               % if storage['devices'] > 1:
-              (${storage['devices']} * ${storage['size']} GB${" SSD" if storage['ssd'] else ''})
+              (${storage['devices']} * ${storage['size']} GB ${"NVMe " if storage['nvme_ssd'] else ''}${"SSD" if storage['ssd'] else 'HDD'})
               % else:
-              ${"SSD" if storage['ssd'] else ''}
+              ${"NVMe " if storage['nvme_ssd'] else ''}${"SSD" if storage['ssd'] else 'HDD'}
               % endif
+              ${"+ 900MB swap" if storage['includes_swap_partition'] else ''}
             </span>
             % endif
           </td>
+          <td class="warmed-up">
+            % if inst['storage']:
+                ${"No" if inst['storage']['storage_needs_initialization'] else 'Yes'}
+            % else:
+                N/A
+            % endif
+          </td>
+          <td class="trim-support">
+            % if inst['storage'] and inst['storage']['ssd'] :
+                ${"Yes" if inst['storage']['trim_support'] else 'No'}
+            % else:
+                N/A
+            % endif
+          </td>
+
           <td class="architecture">
             % if 'i386' in inst['arch']:
             32/64-bit
@@ -231,9 +248,6 @@
             <span sort="${inst['ebs_iops']}">
               ${inst['ebs_iops']} IOPS
             </span>
-          </td>
-          <td class="trim-support">
-            ${'Yes' if inst['trim_support'] else 'No'}
           </td>
           <td class="maxips">
             % if inst['vpc']:

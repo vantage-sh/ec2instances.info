@@ -20,6 +20,7 @@ class Instance(object):
         self.base_performance = None
         self.burst_minutes = None
         self.linux_virtualization_types = []
+        self.ebs_only=True
         self.ebs_throughput = 0
         self.ebs_iops = 0
         self.ebs_max_bandwidth = 0
@@ -27,6 +28,12 @@ class Instance(object):
         self.vpc_only = False
         self.ipv6_support = False
         self.trim_support = False
+        self.ssd = False
+        self.devices = 0
+        self.size = 0
+        self.nvme_ssd = False
+        self.storage_needs_initialization = False
+        self.includes_swap_partition = False
         self.placement_group_support = False
         self.pretty_name = ''
 
@@ -52,12 +59,15 @@ class Instance(object):
                  linux_virtualization_types=self.linux_virtualization_types,
                  generation=self.generation,
                  vpc_only=self.vpc_only,
-                 trim_support=self.trim_support,
                  ipv6_support=self.ipv6_support)
         if self.ebs_only:
             d['storage'] = None
         else:
             d['storage'] = dict(ssd=self.ssd,
+                                trim_support=self.trim_support,
+                                nvme_ssd=self.nvme_ssd,
+                                storage_needs_initialization=self.storage_needs_initialization,
+                                includes_swap_partition=self.includes_swap_partition,
                                 devices=self.num_drives,
                                 size=self.drive_size)
         return d
@@ -83,17 +93,6 @@ def parse_prev_generation_instance(tr):
     assert i.arch, "No archs detected: %s" % (archs,)
     i.vCPU = locale.atoi(totext(cols[3]))
     i.memory = locale.atof(totext(cols[4]))
-    storage = totext(cols[5])
-    m = re.search(r'(\d+)\s*x\s*([0-9,]+)?', storage)
-    i.ssd = False
-    if m:
-        i.ebs_only = False
-        i.num_drives = locale.atoi(m.group(1))
-        i.drive_size = locale.atof(m.group(2))
-        i.ssd = 'SSD' in totext(cols[5])
-    else:
-        assert storage == 'EBS Only', "Unrecognized storage spec: %s" % (storage,)
-        i.ebs_only = True
     i.ebs_optimized = totext(cols[6]).lower() == 'yes'
     i.network_performance = totext(cols[7])
     i.enhanced_networking = False
@@ -124,27 +123,6 @@ def parse_instance(tr, inst2family):
         i.arch.append('i386')
     i.vCPU = locale.atoi(totext(cols[1]))
     i.memory = locale.atof(totext(cols[2]))
-    storage = totext(cols[3])
-
-    # 2016-11-30: Temporary fix for inconsistent data format for f1.2xlarge
-    if storage == "480 SSD":
-        storage = "1 x 480 SSD"
-
-    m = re.search(r'(\d+)\s*x\s*([0-9,]+)?', storage)
-    i.ssd = False
-    if m:
-        i.ebs_only = False
-        i.num_drives = locale.atoi(m.group(1))
-        i.drive_size = locale.atof(m.group(2))
-        i.ssd = 'SSD' in totext(cols[3])
-    elif storage == 'EBS Only':
-        i.ebs_only = True
-    elif storage == '-':
-        # Are these (r4 instances currently) EBS only? Site does not specify...
-        i.ebs_only = True
-    else:
-        print "ERROR: Unrecognized storage spec for %s: %s" % (i.instance_type, storage)
-
     i.ebs_optimized = totext(cols[10]).lower() == 'yes'
     i.network_performance = totext(cols[4])
     i.enhanced_networking = totext(cols[11]).lower() == 'yes'
@@ -477,15 +455,43 @@ def add_vpconly_detail(instances):
                 i.vpc_only = True
 
 
-def add_trim_support_detail(instances):
-    # specific instances support the TRIM command for instance store SSDs
-    # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#InstanceStoreTrimSupport
-    trim_supported_families = ('i2', 'i3', 'r3')
-    for i in instances:
-        for family in trim_supported_families:
-            if i.instance_type.startswith(family):
-                i.trim_support = True
+def add_instance_storage_details(instances):
+    """Add information about instance storage features."""
 
+    url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html"
+    tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
+    table = tree.xpath('//div[@class="informaltable-contents"]/table')[0]
+    rows = table.xpath('.//tr[./td]')
+
+    checkmark_char = u'\u2714'
+    dagger_char = u'\u2020'
+
+    for r in rows:
+        columns = r.xpath('.//td')
+
+        (instance_type,
+         storage_volumes,
+         storage_type,
+         needs_initialization,
+         trim_support) = tuple(totext(i) for i in columns)
+
+        if instance_type is None:
+            continue
+
+        for i in instances:
+            if i.instance_type == instance_type:
+                i.ebs_only = True
+
+                m = re.search(r'(\d+)\s*x\s*([0-9,]+)?', storage_volumes)
+                if m:
+                    i.ebs_only = False
+                    i.num_drives = locale.atoi(m.group(1))
+                    i.drive_size = locale.atoi(m.group(2))
+                    i.ssd = 'SSD' in storage_type
+                    i.nvme_ssd = 'NVMe' in storage_type
+                    i.trim_support = checkmark_char in trim_support
+                    i.storage_needs_initialization = checkmark_char in needs_initialization
+                    i.includes_swap_partition = dagger_char in storage_volumes
 
 def add_t2_credits(instances):
     tree = etree.parse(urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html"),
@@ -560,10 +566,13 @@ def scrape(data_file):
     add_ebs_info(all_instances)
     print "Parsing Linux AMI info..."
     add_linux_ami_info(all_instances)
-    print "Adding additional details..."
+    print "Parsing VPC-only info..."
     add_vpconly_detail(all_instances)
-    add_trim_support_detail(all_instances)
+    print "Parsing local instance storage..."
+    add_instance_storage_details(all_instances)
+    print "Parsing burstable instance credits..."
     add_t2_credits(all_instances)
+    print "Parsing instance names..."
     add_pretty_names(all_instances)
 
     with open(data_file, 'w') as f:
