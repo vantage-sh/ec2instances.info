@@ -26,6 +26,7 @@ class Instance(object):
         # self.hvm_only = False
         self.vpc_only = False
         self.ipv6_support = False
+        self.trim_support = False
         self.placement_group_support = False
         self.pretty_name = ''
 
@@ -51,6 +52,7 @@ class Instance(object):
                  linux_virtualization_types=self.linux_virtualization_types,
                  generation=self.generation,
                  vpc_only=self.vpc_only,
+                 trim_support=self.trim_support,
                  ipv6_support=self.ipv6_support)
         if self.ebs_only:
             d['storage'] = None
@@ -475,6 +477,16 @@ def add_vpconly_detail(instances):
                 i.vpc_only = True
 
 
+def add_trim_support_detail(instances):
+    # specific instances support the TRIM command for instance store SSDs
+    # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#InstanceStoreTrimSupport
+    trim_supported_families = ('i2', 'i3', 'r3')
+    for i in instances:
+        for family in trim_supported_families:
+            if i.instance_type.startswith(family):
+                i.trim_support = True
+
+
 def add_t2_credits(instances):
     tree = etree.parse(urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html"),
                        etree.HTMLParser())
@@ -550,6 +562,7 @@ def scrape(data_file):
     add_linux_ami_info(all_instances)
     print "Adding additional details..."
     add_vpconly_detail(all_instances)
+    add_trim_support_detail(all_instances)
     add_t2_credits(all_instances)
     add_pretty_names(all_instances)
 

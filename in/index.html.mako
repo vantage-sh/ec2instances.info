@@ -113,6 +113,7 @@
           <th class="ebs-max-bandwidth">EBS Optimized: Max Bandwidth</th>
           <th class="ebs-throughput">EBS Optimized: Throughput</th>
           <th class="ebs-iops">EBS Optimized: Max 16K IOPS</th>
+          <th class="trim-support">TRIM Support</th>
           <th class="maxips">
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
@@ -230,6 +231,9 @@
             <span sort="${inst['ebs_iops']}">
               ${inst['ebs_iops']} IOPS
             </span>
+          </td>
+          <td class="trim-support">
+            ${'Yes' if inst['trim_support'] else 'No'}
           </td>
           <td class="maxips">
             % if inst['vpc']:
