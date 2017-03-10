@@ -59,6 +59,8 @@ function init_data_table() {
           "ebs-iops",
           "ebs-max-bandwidth",
           "cost-ebs-optimized",
+          "trim-support",
+          "warmed-up",
           "ipv6-support",
           "placement-group-support",
           "vpc-only"
