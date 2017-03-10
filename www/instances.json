@@ -405,8 +405,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 160.0,
-      "ssd": false
+      "includes_swap_partition": true,
+      "nvme_ssd": false,
+      "size": 160,
+      "ssd": false,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 1,
     "vpc": {
@@ -821,8 +825,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 410.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 410,
+      "ssd": false,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 1,
     "vpc": {
@@ -1245,8 +1253,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 420.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 420,
+      "ssd": false,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 2,
     "vpc": {
@@ -1669,8 +1681,12 @@
     },
     "storage": {
       "devices": 4,
-      "size": 420.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 420,
+      "ssd": false,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 4,
     "vpc": {
@@ -1995,8 +2011,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 350.0,
-      "ssd": false
+      "includes_swap_partition": true,
+      "nvme_ssd": false,
+      "size": 350,
+      "ssd": false,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 2,
     "vpc": {
@@ -2418,8 +2438,12 @@
     },
     "storage": {
       "devices": 4,
-      "size": 420.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 420,
+      "ssd": false,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 8,
     "vpc": {
@@ -2665,8 +2689,12 @@
     },
     "storage": {
       "devices": 4,
-      "size": 840.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 840,
+      "ssd": false,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 32,
     "vpc": {
@@ -2730,8 +2758,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 840.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 840,
+      "ssd": false,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 16,
     "vpc": {
@@ -3145,8 +3177,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 420.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 420,
+      "ssd": false,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 2,
     "vpc": {
@@ -3569,8 +3605,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 850.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 850,
+      "ssd": false,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 4,
     "vpc": {
@@ -3993,8 +4033,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 840.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 840,
+      "ssd": false,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 8,
     "vpc": {
@@ -4196,8 +4240,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 120.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 120,
+      "ssd": true,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 32,
     "vpc": {
@@ -4893,8 +4941,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 800.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 800,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
     },
     "vCPU": 4,
     "vpc": {
@@ -5590,8 +5642,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 800.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 800,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
     },
     "vCPU": 8,
     "vpc": {
@@ -6287,8 +6343,12 @@
     },
     "storage": {
       "devices": 4,
-      "size": 800.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 800,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
     },
     "vCPU": 16,
     "vpc": {
@@ -6972,8 +7032,12 @@
     },
     "storage": {
       "devices": 8,
-      "size": 800.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 800,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
     },
     "vCPU": 32,
     "vpc": {
@@ -7178,8 +7242,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 1024.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 1024,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": false
     },
     "vCPU": 16,
     "vpc": {
@@ -7510,8 +7578,12 @@
     },
     "storage": {
       "devices": 24,
-      "size": 2000.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 2000,
+      "ssd": false,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 16,
     "vpc": {
@@ -17858,8 +17930,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 4.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 4,
+      "ssd": true,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 1,
     "vpc": {
@@ -18436,8 +18512,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 32.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 32,
+      "ssd": true,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 2,
     "vpc": {
@@ -19027,8 +19107,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 40.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 40,
+      "ssd": true,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 4,
     "vpc": {
@@ -19618,8 +19702,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 80.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 80,
+      "ssd": true,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 8,
     "vpc": {
@@ -24442,8 +24530,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 16.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 16,
+      "ssd": true,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 2,
     "vpc": {
@@ -25033,8 +25125,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 40.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 40,
+      "ssd": true,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 4,
     "vpc": {
@@ -25624,8 +25720,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 80.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 80,
+      "ssd": true,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 8,
     "vpc": {
@@ -26215,8 +26315,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 160.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 160,
+      "ssd": true,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 16,
     "vpc": {
@@ -26793,8 +26897,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 320.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 320,
+      "ssd": true,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 32,
     "vpc": {
@@ -27680,8 +27788,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 60.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 60,
+      "ssd": true,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 8,
     "vpc": {
@@ -27941,8 +28053,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 120.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 120,
+      "ssd": true,
+      "storage_needs_initialization": true,
+      "trim_support": false
     },
     "vCPU": 32,
     "vpc": {
@@ -28683,8 +28799,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 1920.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 1920,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": false
     },
     "vCPU": 64,
     "vpc": {
@@ -29425,8 +29545,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 1920.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 1920,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": false
     },
     "vCPU": 128,
     "vpc": {
@@ -35228,8 +35352,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 32.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 32,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
     },
     "vCPU": 2,
     "vpc": {
@@ -35980,8 +36108,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 80.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 80,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
     },
     "vCPU": 4,
     "vpc": {
@@ -36732,8 +36864,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 160.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 160,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
     },
     "vCPU": 8,
     "vpc": {
@@ -37484,8 +37620,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 320.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 320,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
     },
     "vCPU": 16,
     "vpc": {
@@ -38223,8 +38363,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 320.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 320,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
     },
     "vCPU": 32,
     "vpc": {
@@ -39068,8 +39212,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 475.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": true,
+      "size": 475,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
     },
     "vCPU": 2,
     "vpc": {
@@ -39913,8 +40061,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 950.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": true,
+      "size": 950,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
     },
     "vCPU": 4,
     "vpc": {
@@ -40758,8 +40910,12 @@
     },
     "storage": {
       "devices": 1,
-      "size": 1900.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": true,
+      "size": 1900,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
     },
     "vCPU": 8,
     "vpc": {
@@ -41603,8 +41759,12 @@
     },
     "storage": {
       "devices": 2,
-      "size": 1900.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": true,
+      "size": 1900,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
     },
     "vCPU": 16,
     "vpc": {
@@ -42448,8 +42608,12 @@
     },
     "storage": {
       "devices": 4,
-      "size": 1900.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": true,
+      "size": 1900,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
     },
     "vCPU": 32,
     "vpc": {
@@ -43293,8 +43457,12 @@
     },
     "storage": {
       "devices": 8,
-      "size": 1900.0,
-      "ssd": true
+      "includes_swap_partition": false,
+      "nvme_ssd": true,
+      "size": 1900,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
     },
     "vCPU": 64,
     "vpc": {
@@ -43735,8 +43903,12 @@
     },
     "storage": {
       "devices": 3,
-      "size": 2000.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 2000,
+      "ssd": false,
+      "storage_needs_initialization": false,
+      "trim_support": false
     },
     "vCPU": 4,
     "vpc": {
@@ -44177,8 +44349,12 @@
     },
     "storage": {
       "devices": 6,
-      "size": 2000.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 2000,
+      "ssd": false,
+      "storage_needs_initialization": false,
+      "trim_support": false
     },
     "vCPU": 8,
     "vpc": {
@@ -44619,8 +44795,12 @@
     },
     "storage": {
       "devices": 12,
-      "size": 2000.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 2000,
+      "ssd": false,
+      "storage_needs_initialization": false,
+      "trim_support": false
     },
     "vCPU": 16,
     "vpc": {
@@ -45061,8 +45241,12 @@
     },
     "storage": {
       "devices": 24,
-      "size": 2000.0,
-      "ssd": false
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 2000,
+      "ssd": false,
+      "storage_needs_initialization": false,
+      "trim_support": false
     },
     "vCPU": 36,
     "vpc": {
@@ -45093,11 +45277,7 @@
     "placement_group_support": false,
     "pretty_name": "F1 Double Extra Large",
     "pricing": {},
-    "storage": {
-      "devices": 1,
-      "size": 480.0,
-      "ssd": true
-    },
+    "storage": null,
     "vCPU": 8,
     "vpc": null,
     "vpc_only": false
@@ -45124,11 +45304,7 @@
     "placement_group_support": false,
     "pretty_name": "F1 16xlarge",
     "pricing": {},
-    "storage": {
-      "devices": 4,
-      "size": 960.0,
-      "ssd": false
-    },
+    "storage": null,
     "vCPU": 64,
     "vpc": null,
     "vpc_only": false

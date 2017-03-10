@@ -21,7 +21,7 @@
     <h1>EC2Instances.info <small>Easy Amazon EC2 Instance Comparison</small></h1>
     
 
-      <p class="pull-right label label-info">Last Update: 2017-03-04 22:51:51 UTC</p>
+      <p class="pull-right label label-info">Last Update: 2017-03-10 15:45:20 UTC</p>
       <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="/">EC2</a></li>
         <li role="presentation" class=""><a href="/rds/">RDS</a></li>
@@ -134,7 +134,9 @@
             <abbr title="Each virtual CPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">vCPUs</abbr>
           </th>
           <th class="ecu-per-vcpu">ECU per vCPU</th>
-          <th class="storage">Storage</th>
+          <th class="storage">Instance Storage</th>
+          <th class="warmed-up">Instance Storage: already warmed-up</th>
+          <th class="trim-support">Instance Storage: SSD TRIM Support</th>
           <th class="architecture">Arch</th>
           <th class="networkperf">Network Performance</th>
           <th class="ebs-max-bandwidth">EBS Optimized: Max Bandwidth</th>
@@ -188,11 +190,19 @@
           </td>
           <td class="storage">
             
-            <span sort="160.0">
-              160.0 GB
-              
+            <span sort="160">
+              160 GB
+              HDD
+              + 900MB swap
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             32/64-bit
           </td>
@@ -293,11 +303,19 @@
           </td>
           <td class="storage">
             
-            <span sort="410.0">
-              410.0 GB
+            <span sort="410">
+              410 GB
+              HDD
               
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             32/64-bit
           </td>
@@ -398,11 +416,19 @@
           </td>
           <td class="storage">
             
-            <span sort="840.0">
-              840.0 GB
-              (2 * 420.0 GB)
+            <span sort="840">
+              840 GB
+              (2 * 420 GB HDD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -507,11 +533,19 @@
           </td>
           <td class="storage">
             
-            <span sort="1680.0">
-              1680.0 GB
-              (4 * 420.0 GB)
+            <span sort="1680">
+              1680 GB
+              (4 * 420 GB HDD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -616,11 +650,19 @@
           </td>
           <td class="storage">
             
-            <span sort="350.0">
-              350.0 GB
-              
+            <span sort="350">
+              350 GB
+              HDD
+              + 900MB swap
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             32/64-bit
           </td>
@@ -717,11 +759,19 @@
           </td>
           <td class="storage">
             
-            <span sort="1680.0">
-              1680.0 GB
-              (4 * 420.0 GB)
+            <span sort="1680">
+              1680 GB
+              (4 * 420 GB HDD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -826,11 +876,19 @@
           </td>
           <td class="storage">
             
-            <span sort="3360.0">
-              3360.0 GB
-              (4 * 840.0 GB)
+            <span sort="3360">
+              3360 GB
+              (4 * 840 GB HDD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -931,11 +989,19 @@
           </td>
           <td class="storage">
             
-            <span sort="1680.0">
-              1680.0 GB
-              (2 * 840.0 GB)
+            <span sort="1680">
+              1680 GB
+              (2 * 840 GB HDD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -1028,11 +1094,19 @@
           </td>
           <td class="storage">
             
-            <span sort="420.0">
-              420.0 GB
+            <span sort="420">
+              420 GB
+              HDD
               
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -1133,11 +1207,19 @@
           </td>
           <td class="storage">
             
-            <span sort="850.0">
-              850.0 GB
+            <span sort="850">
+              850 GB
+              HDD
               
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -1242,11 +1324,19 @@
           </td>
           <td class="storage">
             
-            <span sort="1680.0">
-              1680.0 GB
-              (2 * 840.0 GB)
+            <span sort="1680">
+              1680 GB
+              (2 * 840 GB HDD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -1351,11 +1441,19 @@
           </td>
           <td class="storage">
             
-            <span sort="240.0">
-              240.0 GB
-              (2 * 120.0 GB SSD)
+            <span sort="240">
+              240 GB
+              (2 * 120 GB SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                No
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -1456,11 +1554,19 @@
           </td>
           <td class="storage">
             
-            <span sort="800.0">
-              800.0 GB
+            <span sort="800">
+              800 GB
+              SSD
               
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                Yes
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -1565,11 +1671,19 @@
           </td>
           <td class="storage">
             
-            <span sort="1600.0">
-              1600.0 GB
-              (2 * 800.0 GB)
+            <span sort="1600">
+              1600 GB
+              (2 * 800 GB SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                Yes
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -1674,11 +1788,19 @@
           </td>
           <td class="storage">
             
-            <span sort="3200.0">
-              3200.0 GB
-              (4 * 800.0 GB)
+            <span sort="3200">
+              3200 GB
+              (4 * 800 GB SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                Yes
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -1783,11 +1905,19 @@
           </td>
           <td class="storage">
             
-            <span sort="6400.0">
-              6400.0 GB
-              (8 * 800.0 GB)
+            <span sort="6400">
+              6400 GB
+              (8 * 800 GB SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                Yes
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -1888,11 +2018,19 @@
           </td>
           <td class="storage">
             
-            <span sort="2048.0">
-              2048.0 GB
-              (2 * 1024.0 GB SSD)
+            <span sort="2048">
+              2048 GB
+              (2 * 1024 GB SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                No
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -1993,11 +2131,19 @@
           </td>
           <td class="storage">
             
-            <span sort="48000.0">
-              48000.0 GB
-              (24 * 2000.0 GB)
+            <span sort="48000">
+              48000 GB
+              (24 * 2000 GB HDD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -2098,8 +2244,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             32/64-bit
           </td>
@@ -2207,8 +2360,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -2312,8 +2472,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             32/64-bit
           </td>
@@ -2421,8 +2588,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             32/64-bit
           </td>
@@ -2530,8 +2704,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -2639,8 +2820,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -2748,8 +2936,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -2857,8 +3052,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -2955,8 +3157,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -3061,8 +3270,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -3167,8 +3383,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -3273,8 +3496,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -3379,8 +3609,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -3485,8 +3722,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -3589,11 +3833,19 @@
           </td>
           <td class="storage">
             
-            <span sort="4.0">
-              4.0 GB
+            <span sort="4">
+              4 GB
               SSD
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                No
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -3694,11 +3946,19 @@
           </td>
           <td class="storage">
             
-            <span sort="32.0">
-              32.0 GB
+            <span sort="32">
+              32 GB
               SSD
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                No
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -3799,11 +4059,19 @@
           </td>
           <td class="storage">
             
-            <span sort="80.0">
-              80.0 GB
-              (2 * 40.0 GB SSD)
+            <span sort="80">
+              80 GB
+              (2 * 40 GB SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                No
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -3908,11 +4176,19 @@
           </td>
           <td class="storage">
             
-            <span sort="160.0">
-              160.0 GB
-              (2 * 80.0 GB SSD)
+            <span sort="160">
+              160 GB
+              (2 * 80 GB SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                No
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -4017,8 +4293,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -4123,8 +4406,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -4229,8 +4519,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -4335,8 +4632,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -4441,8 +4745,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -4547,11 +4858,19 @@
           </td>
           <td class="storage">
             
-            <span sort="32.0">
-              32.0 GB
-              (2 * 16.0 GB SSD)
+            <span sort="32">
+              32 GB
+              (2 * 16 GB SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                No
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -4652,11 +4971,19 @@
           </td>
           <td class="storage">
             
-            <span sort="80.0">
-              80.0 GB
-              (2 * 40.0 GB SSD)
+            <span sort="80">
+              80 GB
+              (2 * 40 GB SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                No
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -4761,11 +5088,19 @@
           </td>
           <td class="storage">
             
-            <span sort="160.0">
-              160.0 GB
-              (2 * 80.0 GB SSD)
+            <span sort="160">
+              160 GB
+              (2 * 80 GB SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                No
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -4870,11 +5205,19 @@
           </td>
           <td class="storage">
             
-            <span sort="320.0">
-              320.0 GB
-              (2 * 160.0 GB SSD)
+            <span sort="320">
+              320 GB
+              (2 * 160 GB SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                No
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -4979,11 +5322,19 @@
           </td>
           <td class="storage">
             
-            <span sort="640.0">
-              640.0 GB
-              (2 * 320.0 GB SSD)
+            <span sort="640">
+              640 GB
+              (2 * 320 GB SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                No
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -5084,8 +5435,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -5180,8 +5538,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -5276,8 +5641,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -5372,11 +5744,19 @@
           </td>
           <td class="storage">
             
-            <span sort="60.0">
-              60.0 GB
+            <span sort="60">
+              60 GB
               SSD
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                No
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -5481,11 +5861,19 @@
           </td>
           <td class="storage">
             
-            <span sort="240.0">
-              240.0 GB
-              (2 * 120.0 GB SSD)
+            <span sort="240">
+              240 GB
+              (2 * 120 GB SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                No
+          </td>
+          <td class="trim-support">
+                No
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -5578,11 +5966,19 @@
           </td>
           <td class="storage">
             
-            <span sort="1920.0">
-              1920.0 GB
+            <span sort="1920">
+              1920 GB
               SSD
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                No
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -5685,11 +6081,19 @@
           </td>
           <td class="storage">
             
-            <span sort="3840.0">
-              3840.0 GB
-              (2 * 1920.0 GB SSD)
+            <span sort="3840">
+              3840 GB
+              (2 * 1920 GB SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                No
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -5792,8 +6196,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -5896,8 +6307,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -6000,8 +6418,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -6104,8 +6529,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -6208,8 +6640,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -6312,8 +6751,15 @@
           </td>
           <td class="storage">
             
-            <span sort="0">0 GB (EBS only)</span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -6416,11 +6862,19 @@
           </td>
           <td class="storage">
             
-            <span sort="32.0">
-              32.0 GB
+            <span sort="32">
+              32 GB
               SSD
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                Yes
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -6521,11 +6975,19 @@
           </td>
           <td class="storage">
             
-            <span sort="80.0">
-              80.0 GB
+            <span sort="80">
+              80 GB
               SSD
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                Yes
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -6630,11 +7092,19 @@
           </td>
           <td class="storage">
             
-            <span sort="160.0">
-              160.0 GB
+            <span sort="160">
+              160 GB
               SSD
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                Yes
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -6739,11 +7209,19 @@
           </td>
           <td class="storage">
             
-            <span sort="320.0">
-              320.0 GB
+            <span sort="320">
+              320 GB
               SSD
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                Yes
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -6848,11 +7326,19 @@
           </td>
           <td class="storage">
             
-            <span sort="640.0">
-              640.0 GB
-              (2 * 320.0 GB SSD)
+            <span sort="640">
+              640 GB
+              (2 * 320 GB SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                Yes
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -6953,11 +7439,19 @@
           </td>
           <td class="storage">
             
-            <span sort="475.0">
-              475.0 GB
-              SSD
+            <span sort="475">
+              475 GB
+              NVMe SSD
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                Yes
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -7060,11 +7554,19 @@
           </td>
           <td class="storage">
             
-            <span sort="950.0">
-              950.0 GB
-              SSD
+            <span sort="950">
+              950 GB
+              NVMe SSD
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                Yes
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -7167,11 +7669,19 @@
           </td>
           <td class="storage">
             
-            <span sort="1900.0">
-              1900.0 GB
-              SSD
+            <span sort="1900">
+              1900 GB
+              NVMe SSD
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                Yes
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -7274,11 +7784,19 @@
           </td>
           <td class="storage">
             
-            <span sort="3800.0">
-              3800.0 GB
-              (2 * 1900.0 GB SSD)
+            <span sort="3800">
+              3800 GB
+              (2 * 1900 GB NVMe SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                Yes
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -7381,11 +7899,19 @@
           </td>
           <td class="storage">
             
-            <span sort="7600.0">
-              7600.0 GB
-              (4 * 1900.0 GB SSD)
+            <span sort="7600">
+              7600 GB
+              (4 * 1900 GB NVMe SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                Yes
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -7488,11 +8014,19 @@
           </td>
           <td class="storage">
             
-            <span sort="15200.0">
-              15200.0 GB
-              (8 * 1900.0 GB SSD)
+            <span sort="15200">
+              15200 GB
+              (8 * 1900 GB NVMe SSD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                Yes
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -7595,11 +8129,19 @@
           </td>
           <td class="storage">
             
-            <span sort="6000.0">
-              6000.0 GB
-              (3 * 2000.0 GB)
+            <span sort="6000">
+              6000 GB
+              (3 * 2000 GB HDD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -7696,11 +8238,19 @@
           </td>
           <td class="storage">
             
-            <span sort="12000.0">
-              12000.0 GB
-              (6 * 2000.0 GB)
+            <span sort="12000">
+              12000 GB
+              (6 * 2000 GB HDD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -7797,11 +8347,19 @@
           </td>
           <td class="storage">
             
-            <span sort="24000.0">
-              24000.0 GB
-              (12 * 2000.0 GB)
+            <span sort="24000">
+              24000 GB
+              (12 * 2000 GB HDD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -7898,11 +8456,19 @@
           </td>
           <td class="storage">
             
-            <span sort="48000.0">
-              48000.0 GB
-              (24 * 2000.0 GB)
+            <span sort="48000">
+              48000 GB
+              (24 * 2000 GB HDD)
+              
             </span>
           </td>
+          <td class="warmed-up">
+                Yes
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -7999,11 +8565,15 @@
           </td>
           <td class="storage">
             
-            <span sort="480.0">
-              480.0 GB
-              SSD
-            </span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -8088,11 +8658,15 @@
           </td>
           <td class="storage">
             
-            <span sort="3840.0">
-              3840.0 GB
-              (4 * 960.0 GB)
-            </span>
+            <span sort="0">EBS only</span>
           </td>
+          <td class="warmed-up">
+                N/A
+          </td>
+          <td class="trim-support">
+                N/A
+          </td>
+
           <td class="architecture">
             64-bit
           </td>
@@ -8175,7 +8749,7 @@
       </p>
       <p>
         <strong>How?</strong>
-        Data is scraped from multiple pages on the AWS site. This was last done at 2017-03-04 22:51:51 UTC.
+        Data is scraped from multiple pages on the AWS site. This was last done at 2017-03-10 15:45:20 UTC.
       </p>
 
       <p class="bg-warning">
