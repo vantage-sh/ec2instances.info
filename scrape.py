@@ -378,10 +378,13 @@ def add_ebs_info(instances):
     ebs_url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html"
     tree = etree.parse(urllib2.urlopen(ebs_url), etree.HTMLParser())
     table = tree.xpath('//div[@class="informaltable"]//table')[0]
-    rows = table.xpath('tbody/tr')
+    rows = table.xpath('tr')
     by_type = {i.instance_type: i for i in instances}
 
     for row in rows:
+        if row.xpath('th'):
+            continue
+
         cols = row.xpath('td')
         instance_type = totext(cols[0]).split(' ')[0]
         ebs_optimized_by_default = totext(cols[1]) == 'Yes'
@@ -503,10 +506,11 @@ def add_t2_credits(instances):
     by_type = {i.instance_type: i for i in instances}
 
     for r in rows:
-        inst = by_type[totext(r[0])]
-        creds_per_hour = locale.atof(totext(r[2]))
-        inst.base_performance = creds_per_hour / 60
-        inst.burst_minutes = creds_per_hour * 24 / inst.vCPU
+        if len(r) > 1:
+            inst = by_type[totext(r[0])]
+            creds_per_hour = locale.atof(totext(r[2]))
+            inst.base_performance = creds_per_hour / 60
+            inst.burst_minutes = creds_per_hour * 24 / inst.vCPU
 
 
 def add_pretty_names(instances):
