@@ -132,17 +132,17 @@ def parse_instance(tr, inst2family):
 
 
 def _rindex_family(inst2family, details):
-    rows = details.xpath('tbody/tr')[0:]
+    rows = details.xpath('tr')[0:]
     for r in rows:
-        cols = r.xpath('td')
+        cols = r.xpath('th') or r.xpath('td')
         for i in totext(cols[1]).split('|'):
             i = i.strip()
             inst2family[i] = totext(cols[0])
 
 def feature_support(details, types):
-    rows = details.xpath('tbody/tr')[0:]
+    rows = details.xpath('tr')[0:]
     for r in rows:
-        cols = r.xpath('td')
+        cols = r.xpath('th') or r.xpath('td')
         if totext(cols[4]).lower() == 'yes':
             family = totext(cols[0]).lower()+"."
             for i in types:
@@ -159,11 +159,11 @@ def scrape_instances():
     tree = etree.parse(urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html"),
                        etree.HTMLParser())
     details = tree.xpath('//div[@class="informaltable"]//table')[0]
-    hdrs = details.xpath('thead/tr')[0]
+    hdrs = details.xpath('tr')[0]
     if totext(hdrs[0]).lower() == 'instance family' and 'current generation' in totext(hdrs[1]).lower():
         _rindex_family(inst2family, details)
     details = tree.xpath('//div[@class="informaltable"]//table')[1]
-    hdrs = details.xpath('thead/tr')[0]
+    hdrs = details.xpath('tr')[0]
     if totext(hdrs[0]).lower() == 'instance family' and 'previous generation' in totext(hdrs[1]).lower():
         _rindex_family(inst2family, details)
     assert len(inst2family) > 0, "Failed to find instance family info"
@@ -182,7 +182,7 @@ def scrape_instances():
     prev_gen = [parse_prev_generation_instance(r) for r in rows]
 
     all_gen = prev_gen + current_gen
-    hdrs = features_details.xpath('thead/tr')[0]
+    hdrs = features_details.xpath('tr')[0]
     if totext(hdrs[0]).lower() == '' and 'ipv6 support' in totext(hdrs[7]).lower():
         feature_support(features_details, all_gen)
     return all_gen
