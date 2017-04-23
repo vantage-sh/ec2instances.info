@@ -164,20 +164,21 @@ def feature_support(details, types):
                 if i.instance_type.startswith(family):
                     i.ipv6_support = True
 
+
 def scrape_instances():
     inst2family = dict()
     tree = etree.parse(urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html"),
                        etree.HTMLParser())
-    details = tree.xpath('//div[@class="informaltable"]//table')[0]
+    details = tree.xpath('//div[@class="table-contents"]//table')[0]
     hdrs = details.xpath('tr')[0]
     if totext(hdrs[0]).lower() == 'instance family' and 'current generation' in totext(hdrs[1]).lower():
         _rindex_family(inst2family, details)
-    details = tree.xpath('//div[@class="informaltable"]//table')[1]
+    details = tree.xpath('//div[@class="table-contents"]//table')[1]
     hdrs = details.xpath('tr')[0]
     if totext(hdrs[0]).lower() == 'instance family' and 'previous generation' in totext(hdrs[1]).lower():
         _rindex_family(inst2family, details)
     assert len(inst2family) > 0, "Failed to find instance family info"
-    features_details = tree.xpath('//div[@class="informaltable"]//table')[2]
+    features_details = tree.xpath('//div[@class="table-contents"]//table')[2]
 
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/instance-types/"), etree.HTMLParser())
     details = tree.xpath('//table[count(tbody/tr[1]/td)=12]')[0]
