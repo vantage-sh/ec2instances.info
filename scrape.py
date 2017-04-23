@@ -117,9 +117,19 @@ def parse_instance(tr, inst2family):
     if i.instance_type == 'i3.16large':
         i.instance_type = 'i3.16xlarge'
     i.family = inst2family.get(i.instance_type, "Unknown")
-    # Some t2 instances support 32-bit arch
+    # Some instances support 32-bit arch
     # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html#resize-limitations
-    if i.instance_type in ('t2.micro', 't2.small'):
+    supports_32bit = (
+        't2.nano',
+        't2.micro',
+        't2.small',
+        't2.medium',
+        'c3.large',
+        't1.micro',
+        'm1.small',
+        'm1.medium',
+        'c1.medium')
+    if i.instance_type in supports_32bit:
         i.arch.append('i386')
     i.vCPU = locale.atoi(totext(cols[1]))
     i.memory = locale.atof(totext(cols[2]))
