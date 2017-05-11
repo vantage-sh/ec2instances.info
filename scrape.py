@@ -388,7 +388,7 @@ def add_eni_info(instances):
 def add_ebs_info(instances):
     ebs_url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html"
     tree = etree.parse(urllib2.urlopen(ebs_url), etree.HTMLParser())
-    table = tree.xpath('//div[@class="informaltable"]//table')[0]
+    table = tree.xpath('//div[@class="table-contents"]//table')[0]
     rows = table.xpath('tr')
     by_type = {i.instance_type: i for i in instances}
 
