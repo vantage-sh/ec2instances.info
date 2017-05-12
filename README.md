@@ -47,7 +47,7 @@ Also this image can be found at quay.io/ssro/ec2instances.info
 
 To use this instead of building your own:
 
-`docker run -d --name some-container -p 8080:8080 quay.io/ssro/ec2instances`
+`docker run -d --name some-container -p 8080:8080 quay.io/ssro/ec2instances.info`
 
 Update files as described at step 5.
 
