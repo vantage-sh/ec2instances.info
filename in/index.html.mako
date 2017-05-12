@@ -107,6 +107,8 @@
           <th class="vcpus">
             <abbr title="Each virtual CPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">vCPUs</abbr>
           </th>
+          <th class="gpus">GPUs</th>
+          <th class="fpgas">FPGAs</th>
           <th class="ecu-per-vcpu">ECU per vCPU</th>
           <th class="storage">Instance Storage</th>
           <th class="warmed-up">Instance Storage: already warmed-up</th>
@@ -181,6 +183,8 @@
                 % endif
             </span>
           </td>
+          <td class="gpus">${inst['GPU']}</td>
+          <td class="fpga">${inst['FPGA']}</td>
           <td class="ecu-per-vcpu">
             % if inst['ECU'] == 'variable':
             <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
