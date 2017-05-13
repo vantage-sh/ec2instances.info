@@ -41,7 +41,7 @@ To build a docker image follow these steps:
 2. `cd ec2instances.info`
 3. `docker build -t ec2instances.info .`
 4. Start a container `docker run -d --name some-container -p 8080:8080 ec2instances.info`
-5. Update files `docker exec -it some-container bash "fab build"`
+5. Update files `docker exec -it some-container bash -c "fab build"`
 
 Also this image can be found at quay.io/ssro/ec2instances.info
 
