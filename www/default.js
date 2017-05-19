@@ -47,6 +47,8 @@ function init_data_table() {
           "architecture",
           "computeunits",
           "ecu-per-vcpu",
+          "gpus",
+          "fpgas",
           "enhanced-networking",
           "maxips",
           "linux-virtualization",

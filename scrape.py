@@ -24,6 +24,7 @@ class Instance(object):
         self.ebs_throughput = 0
         self.ebs_iops = 0
         self.ebs_max_bandwidth = 0
+        self.ebs_optimized = False
         # self.hvm_only = False
         self.vpc_only = False
         self.ipv6_support = False
@@ -36,6 +37,13 @@ class Instance(object):
         self.includes_swap_partition = False
         self.placement_group_support = False
         self.pretty_name = ''
+        self.vCPU = 0
+        self.GPU = 0
+        self.FPGA = 0
+        self.instance_type = ''
+        self.family = ''
+        self.memory = 0
+        self.pricing = {}
 
     def to_dict(self):
         d = dict(family=self.family,
@@ -43,6 +51,8 @@ class Instance(object):
                  pretty_name=self.pretty_name,
                  arch=self.arch,
                  vCPU=self.vCPU,
+                 GPU=self.GPU,
+                 FPGA=self.FPGA,
                  ECU=self.ECU,
                  base_performance=self.base_performance,
                  burst_minutes=self.burst_minutes,
@@ -165,6 +175,24 @@ def feature_support(details, types):
                     i.ipv6_support = True
 
 
+def parse_gpus(tr, by_type):
+    cols = tr.xpath('td')
+    instance_type = totext(cols[0])
+    instance = by_type.get(instance_type, None)
+    if instance is None:
+        return
+    instance.GPU = totext(cols[1])
+
+
+def parse_instance_fpgas(tr, by_type):
+    cols = tr.xpath('td')
+    instance_type = totext(cols[0])
+    instance = by_type.get(instance_type, None)
+    if instance is None:
+        return
+    instance.FPGA = totext(cols[1])
+
+
 def scrape_instances():
     inst2family = dict()
     tree = etree.parse(urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html"),
@@ -185,6 +213,25 @@ def scrape_instances():
     rows = details.xpath('tbody/tr')[1:]
     assert len(rows) > 0, "Didn't find any table rows."
     current_gen = [parse_instance(r, inst2family) for r in rows]
+
+    details = tree.xpath("//table")[8]
+    rows = details.xpath('tbody/tr')[1:]
+    assert len(rows) > 0, "Didn't find any p2 class GPU rows"
+    by_type = {i.instance_type: i for i in current_gen}
+    for r in rows:
+        parse_gpus(r, by_type)
+
+    details = tree.xpath("//table")[9]
+    rows = details.xpath('tbody/tr')[1:]
+    assert len(rows) > 0, "Didn't find any g2 class GPU rows"
+    for r in rows:
+        parse_gpus(r, by_type)
+
+    details = tree.xpath("//table")[10]
+    rows = details.xpath('tbody/tr')[1:]
+    assert len(rows) > 0, "Didn't find any f1 FPGA rows"
+    for r in rows:
+        parse_instance_fpgas(r, by_type)
 
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/previous-generation/"), etree.HTMLParser())
     details = tree.xpath('//table')[7]
