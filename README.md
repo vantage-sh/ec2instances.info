@@ -33,5 +33,25 @@ Make sure you have LibXML and Python development files.  On Ubuntu, run `sudo ap
 - [Mako](http://www.makotemplates.org/)
 - [lxml](http://lxml.de/)
 
+### Docker
+
+To build a docker image follow these steps:
+
+1. Clone the git repo
+2. `cd ec2instances.info`
+3. `docker build -t ec2instances.info .`
+4. Start a container `docker run -d --name some-container -p 8080:8080 ec2instances.info`
+5. Update files `docker exec -it some-container bash -c "fab build"`
+
+Also this image can be found at quay.io/ssro/ec2instances.info
+
+To use this instead of building your own:
+
+`docker run -d --name some-container -p 8080:8080 quay.io/ssro/ec2instances.info`
+
+Update files as described at step 5.
+
+
 ### Deployed to ec2instances.info by Travis CI
 [![Build Status](https://travis-ci.org/powdahound/ec2instances.info.svg)](https://travis-ci.org/powdahound/ec2instances.info)
+
