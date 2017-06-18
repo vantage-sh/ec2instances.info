@@ -290,7 +290,7 @@
                 $${inst['pricing']['us-east-1'][platform]['ondemand']} hourly
               </span>
             % else:
-              <span sort="0">unavailable</span>
+              <span sort="999999">unavailable</span>
             % endif
           </td>
           <td class="cost-reserved cost-reserved-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',{})).get('reserved', {}) for r,p in inst['pricing'].iteritems()}) | h}'>
@@ -299,7 +299,7 @@
                 $${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']} hourly
               </span>
             % else:
-              <span sort="0">unavailable</span>
+              <span sort="999999">unavailable</span>
             % endif
           </td>
           % endfor
@@ -313,7 +313,7 @@
                 <span sort="0">0</span>
               % endif
             % else:
-              <span sort="0">N/A</span>
+              <span sort="999999">unavailable</span>
             % endif
           </td>
         </tr>

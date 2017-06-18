@@ -145,7 +145,7 @@ function change_cost(duration) {
       per_time = (per_time * multiplier).toFixed(3);
       elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
     } else {
-      elem.html('<span sort="0">unavailable</span>');
+      elem.html('<span sort="999999">unavailable</span>');
     }
   });
 
@@ -154,7 +154,7 @@ function change_cost(duration) {
     per_time = elem.data("pricing")[g_settings.region];
 
     if (!per_time) {
-      elem.html('<span sort="0">unavailable</span>');
+      elem.html('<span sort="999999">unavailable</span>');
       return;
     }
 
@@ -164,7 +164,7 @@ function change_cost(duration) {
       per_time = (per_time * multiplier).toFixed(3);
       elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
     } else {
-      elem.html('<span sort="0">unavailable</span>');
+      elem.html('<span sort="999999">unavailable</span>');
     }
   });
 
@@ -175,7 +175,7 @@ function change_cost(duration) {
       per_time = (per_time * multiplier).toFixed(3);
       elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
     } else {
-      elem.html('<span sort="0">unavailable</span>');
+      elem.html('<span sort="999999">unavailable</span>');
     }
   });
 
