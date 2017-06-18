@@ -27992,6 +27992,36 @@
     "placement_group_support": true,
     "pretty_name": "General Purpose GPU Extra Large",
     "pricing": {
+      "ap-northeast-1": {
+        "linux": {
+          "ondemand": "1.542",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.008",
+            "yrTerm1Standard.noUpfront": "1.080",
+            "yrTerm1Standard.partialUpfront": "1.028",
+            "yrTerm3Convertible.allUpfront": "0.857",
+            "yrTerm3Convertible.noUpfront": "0.945",
+            "yrTerm3Convertible.partialUpfront": "0.874",
+            "yrTerm3Standard.allUpfront": "0.715",
+            "yrTerm3Standard.noUpfront": "0.822",
+            "yrTerm3Standard.partialUpfront": "0.760"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.726",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.192",
+            "yrTerm1Standard.noUpfront": "1.264",
+            "yrTerm1Standard.partialUpfront": "1.212",
+            "yrTerm3Convertible.allUpfront": "1.041",
+            "yrTerm3Convertible.noUpfront": "1.129",
+            "yrTerm3Convertible.partialUpfront": "1.058",
+            "yrTerm3Standard.allUpfront": "0.899",
+            "yrTerm3Standard.noUpfront": "1.006",
+            "yrTerm3Standard.partialUpfront": "0.944"
+          }
+        }
+      },
       "ap-northeast-2": {
         "linux": {
           "ondemand": "1.465",
@@ -28019,6 +28049,36 @@
             "yrTerm3Standard.allUpfront": "0.863",
             "yrTerm3Standard.noUpfront": "0.964",
             "yrTerm3Standard.partialUpfront": "0.906"
+          }
+        }
+      },
+      "ap-southeast-2": {
+        "linux": {
+          "ondemand": "1.542",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.008",
+            "yrTerm1Standard.noUpfront": "1.080",
+            "yrTerm1Standard.partialUpfront": "1.028",
+            "yrTerm3Convertible.allUpfront": "0.857",
+            "yrTerm3Convertible.noUpfront": "0.945",
+            "yrTerm3Convertible.partialUpfront": "0.874",
+            "yrTerm3Standard.allUpfront": "0.715",
+            "yrTerm3Standard.noUpfront": "0.822",
+            "yrTerm3Standard.partialUpfront": "0.760"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.726",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.192",
+            "yrTerm1Standard.noUpfront": "1.264",
+            "yrTerm1Standard.partialUpfront": "1.212",
+            "yrTerm3Convertible.allUpfront": "1.041",
+            "yrTerm3Convertible.noUpfront": "1.129",
+            "yrTerm3Convertible.partialUpfront": "1.058",
+            "yrTerm3Standard.allUpfront": "0.899",
+            "yrTerm3Standard.noUpfront": "1.006",
+            "yrTerm3Standard.partialUpfront": "0.944"
           }
         }
       },
@@ -28207,6 +28267,36 @@
     "placement_group_support": true,
     "pretty_name": "General Purpose GPU Eight Extra Large",
     "pricing": {
+      "ap-northeast-1": {
+        "linux": {
+          "ondemand": "12.336",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "8.066",
+            "yrTerm1Standard.noUpfront": "8.642",
+            "yrTerm1Standard.partialUpfront": "8.230",
+            "yrTerm3Convertible.allUpfront": "6.859",
+            "yrTerm3Convertible.noUpfront": "7.559",
+            "yrTerm3Convertible.partialUpfront": "7.000",
+            "yrTerm3Standard.allUpfront": "5.721",
+            "yrTerm3Standard.noUpfront": "6.573",
+            "yrTerm3Standard.partialUpfront": "6.086"
+          }
+        },
+        "mswin": {
+          "ondemand": "13.808",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "9.538",
+            "yrTerm1Standard.noUpfront": "10.114",
+            "yrTerm1Standard.partialUpfront": "9.702",
+            "yrTerm3Convertible.allUpfront": "8.331",
+            "yrTerm3Convertible.noUpfront": "9.031",
+            "yrTerm3Convertible.partialUpfront": "8.472",
+            "yrTerm3Standard.allUpfront": "7.193",
+            "yrTerm3Standard.noUpfront": "8.045",
+            "yrTerm3Standard.partialUpfront": "7.558"
+          }
+        }
+      },
       "ap-northeast-2": {
         "linux": {
           "ondemand": "11.72",
@@ -28234,6 +28324,36 @@
             "yrTerm3Standard.allUpfront": "6.907",
             "yrTerm3Standard.noUpfront": "7.710",
             "yrTerm3Standard.partialUpfront": "7.254"
+          }
+        }
+      },
+      "ap-southeast-2": {
+        "linux": {
+          "ondemand": "12.336",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "8.066",
+            "yrTerm1Standard.noUpfront": "8.642",
+            "yrTerm1Standard.partialUpfront": "8.230",
+            "yrTerm3Convertible.allUpfront": "6.859",
+            "yrTerm3Convertible.noUpfront": "7.559",
+            "yrTerm3Convertible.partialUpfront": "7.000",
+            "yrTerm3Standard.allUpfront": "5.721",
+            "yrTerm3Standard.noUpfront": "6.573",
+            "yrTerm3Standard.partialUpfront": "6.086"
+          }
+        },
+        "mswin": {
+          "ondemand": "13.808",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "9.538",
+            "yrTerm1Standard.noUpfront": "10.114",
+            "yrTerm1Standard.partialUpfront": "9.702",
+            "yrTerm3Convertible.allUpfront": "8.331",
+            "yrTerm3Convertible.noUpfront": "9.031",
+            "yrTerm3Convertible.partialUpfront": "8.472",
+            "yrTerm3Standard.allUpfront": "7.193",
+            "yrTerm3Standard.noUpfront": "8.045",
+            "yrTerm3Standard.partialUpfront": "7.558"
           }
         }
       },
@@ -28422,6 +28542,36 @@
     "placement_group_support": true,
     "pretty_name": "General Purpose GPU 16xlarge",
     "pricing": {
+      "ap-northeast-1": {
+        "linux": {
+          "ondemand": "24.672",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "16.132",
+            "yrTerm1Standard.noUpfront": "17.284",
+            "yrTerm1Standard.partialUpfront": "16.460",
+            "yrTerm3Convertible.allUpfront": "13.719",
+            "yrTerm3Convertible.noUpfront": "15.119",
+            "yrTerm3Convertible.partialUpfront": "13.998",
+            "yrTerm3Standard.allUpfront": "11.442",
+            "yrTerm3Standard.noUpfront": "13.147",
+            "yrTerm3Standard.partialUpfront": "12.172"
+          }
+        },
+        "mswin": {
+          "ondemand": "27.616",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "19.076",
+            "yrTerm1Standard.noUpfront": "20.228",
+            "yrTerm1Standard.partialUpfront": "19.404",
+            "yrTerm3Convertible.allUpfront": "16.663",
+            "yrTerm3Convertible.noUpfront": "18.063",
+            "yrTerm3Convertible.partialUpfront": "16.942",
+            "yrTerm3Standard.allUpfront": "14.386",
+            "yrTerm3Standard.noUpfront": "16.091",
+            "yrTerm3Standard.partialUpfront": "15.116"
+          }
+        }
+      },
       "ap-northeast-2": {
         "linux": {
           "ondemand": "23.44",
@@ -28449,6 +28599,36 @@
             "yrTerm3Standard.allUpfront": "13.815",
             "yrTerm3Standard.noUpfront": "15.420",
             "yrTerm3Standard.partialUpfront": "14.508"
+          }
+        }
+      },
+      "ap-southeast-2": {
+        "linux": {
+          "ondemand": "24.672",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "16.132",
+            "yrTerm1Standard.noUpfront": "17.284",
+            "yrTerm1Standard.partialUpfront": "16.460",
+            "yrTerm3Convertible.allUpfront": "13.719",
+            "yrTerm3Convertible.noUpfront": "15.119",
+            "yrTerm3Convertible.partialUpfront": "13.998",
+            "yrTerm3Standard.allUpfront": "11.442",
+            "yrTerm3Standard.noUpfront": "13.147",
+            "yrTerm3Standard.partialUpfront": "12.172"
+          }
+        },
+        "mswin": {
+          "ondemand": "27.616",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "19.076",
+            "yrTerm1Standard.noUpfront": "20.228",
+            "yrTerm1Standard.partialUpfront": "19.404",
+            "yrTerm3Convertible.allUpfront": "16.663",
+            "yrTerm3Convertible.noUpfront": "18.063",
+            "yrTerm3Convertible.partialUpfront": "16.942",
+            "yrTerm3Standard.allUpfront": "14.386",
+            "yrTerm3Standard.noUpfront": "16.091",
+            "yrTerm3Standard.partialUpfront": "15.116"
           }
         }
       },
@@ -30946,9 +31126,9 @@
     "base_performance": null,
     "burst_minutes": null,
     "ebs_iops": 3000.0,
-    "ebs_max_bandwidth": 400.0,
+    "ebs_max_bandwidth": 437.0,
     "ebs_optimized": true,
-    "ebs_throughput": 50.0,
+    "ebs_throughput": 54.0,
     "enhanced_networking": true,
     "family": "Memory optimized",
     "generation": "current",
@@ -31852,9 +32032,9 @@
     "base_performance": null,
     "burst_minutes": null,
     "ebs_iops": 6000.0,
-    "ebs_max_bandwidth": 800.0,
+    "ebs_max_bandwidth": 875.0,
     "ebs_optimized": true,
-    "ebs_throughput": 100.0,
+    "ebs_throughput": 109.0,
     "enhanced_networking": true,
     "family": "Memory optimized",
     "generation": "current",
@@ -32758,9 +32938,9 @@
     "base_performance": null,
     "burst_minutes": null,
     "ebs_iops": 12000.0,
-    "ebs_max_bandwidth": 1600.0,
+    "ebs_max_bandwidth": 1750.0,
     "ebs_optimized": true,
-    "ebs_throughput": 200.0,
+    "ebs_throughput": 218.0,
     "enhanced_networking": true,
     "family": "Memory optimized",
     "generation": "current",
@@ -33663,10 +33843,10 @@
     ],
     "base_performance": null,
     "burst_minutes": null,
-    "ebs_iops": 16000.0,
-    "ebs_max_bandwidth": 3000.0,
+    "ebs_iops": 18750.0,
+    "ebs_max_bandwidth": 3500.0,
     "ebs_optimized": true,
-    "ebs_throughput": 375.0,
+    "ebs_throughput": 437.0,
     "enhanced_networking": true,
     "family": "Memory optimized",
     "generation": "current",
@@ -34569,10 +34749,10 @@
     ],
     "base_performance": null,
     "burst_minutes": null,
-    "ebs_iops": 32000.0,
-    "ebs_max_bandwidth": 6000.0,
+    "ebs_iops": 37500.0,
+    "ebs_max_bandwidth": 7000.0,
     "ebs_optimized": true,
-    "ebs_throughput": 750.0,
+    "ebs_throughput": 875.0,
     "enhanced_networking": true,
     "family": "Memory optimized",
     "generation": "current",
@@ -35475,10 +35655,10 @@
     ],
     "base_performance": null,
     "burst_minutes": null,
-    "ebs_iops": 65000.0,
-    "ebs_max_bandwidth": 12000.0,
+    "ebs_iops": 75000.0,
+    "ebs_max_bandwidth": 14000.0,
     "ebs_optimized": true,
-    "ebs_throughput": 1500.0,
+    "ebs_throughput": 1750.0,
     "enhanced_networking": true,
     "family": "Memory optimized",
     "generation": "current",
