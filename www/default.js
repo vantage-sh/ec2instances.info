@@ -143,11 +143,9 @@ function change_cost(duration) {
     per_time = elem.data("pricing")[g_settings.region];
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(3);
-      elem.empty();
-      elem.append('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
     } else {
-        elem.empty();
-        elem.append('<span sort="0">unavailable</span>');
+      elem.html('<span sort="0">unavailable</span>');
     }
   });
 
@@ -156,8 +154,7 @@ function change_cost(duration) {
     per_time = elem.data("pricing")[g_settings.region];
 
     if (!per_time) {
-      elem.empty();
-      elem.append('<span sort="0">unavailable</span>');
+      elem.html('<span sort="0">unavailable</span>');
       return;
     }
 
@@ -165,11 +162,9 @@ function change_cost(duration) {
 
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(3);
-      elem.empty();
-      elem.append('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
     } else {
-      elem.empty();
-      elem.append('<span sort="0">unavailable</span>');
+      elem.html('<span sort="0">unavailable</span>');
     }
   });
 
@@ -178,11 +173,9 @@ function change_cost(duration) {
     per_time = elem.data("pricing")[g_settings.region];
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(3);
-      elem.empty();
-      elem.append('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
     } else {
-      elem.empty();
-      elem.append('<span sort="0">unavailable</span>');
+      elem.html('<span sort="0">unavailable</span>');
     }
   });
 
@@ -204,6 +197,8 @@ function change_region(region) {
   });
   $("#region-dropdown .dropdown-toggle .text").text(region_name);
   change_cost(g_settings.cost_duration);
+
+  // redraw table to pick up on new sort values
   g_data_table.rows().invalidate().draw();
 }
 
