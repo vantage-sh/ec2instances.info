@@ -521,7 +521,7 @@ def add_instance_storage_details(instances):
 
     url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html"
     tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
-    table = tree.xpath('//div[@class="informaltable-contents"]/table')[0]
+    table = tree.xpath('//div[@class="table-contents"]/table')[0]
     rows = table.xpath('.//tr[./td]')
 
     checkmark_char = u'\u2714'
