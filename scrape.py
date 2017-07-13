@@ -412,7 +412,7 @@ def fetch_data(url):
 def add_eni_info(instances):
     eni_url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html"
     tree = etree.parse(urllib2.urlopen(eni_url), etree.HTMLParser())
-    table = tree.xpath('//div[@class="informaltable"]//table')[0]
+    table = tree.xpath('//div[@class="table-contents"]//table')[0]
     rows = table.xpath('.//tr[./td]')
     by_type = {i.instance_type: i for i in instances}
 
@@ -554,10 +554,11 @@ def add_instance_storage_details(instances):
                     i.storage_needs_initialization = checkmark_char in needs_initialization
                     i.includes_swap_partition = dagger_char in storage_volumes
 
+
 def add_t2_credits(instances):
     tree = etree.parse(urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html"),
                        etree.HTMLParser())
-    table = tree.xpath('//div[@class="informaltable"]//table')[0]
+    table = tree.xpath('//div[@class="table-contents"]//table')[0]
     rows = table.xpath('.//tr[./td]')
     assert len(rows) > 0, "Failed to find T2 CPU credit info"
 
