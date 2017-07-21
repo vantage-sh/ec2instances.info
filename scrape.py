@@ -82,6 +82,9 @@ class Instance(object):
                                 size=self.drive_size)
         return d
 
+    def __repr__(self):
+        return "<Instance {}>".format(self.instance_type)
+
 
 def totext(elt):
     s = etree.tostring(elt, method='text', encoding='unicode').strip()
@@ -208,11 +211,12 @@ def scrape_instances():
     assert len(inst2family) > 0, "Failed to find instance family info"
     features_details = tree.xpath('//div[@class="table-contents"]//table')[2]
 
+    current_gen = []
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/instance-types/"), etree.HTMLParser())
-    details = tree.xpath('//table[count(tbody/tr[1]/td)=12]')[0]
-    rows = details.xpath('tbody/tr')[1:]
-    assert len(rows) > 0, "Didn't find any table rows."
-    current_gen = [parse_instance(r, inst2family) for r in rows]
+    details_tables = tree.xpath('//table[count(tbody/tr[1]/td)=12]')
+    for details in details_tables:
+        rows = details.xpath('tbody/tr')[1:]
+        current_gen.extend([parse_instance(r, inst2family) for r in rows])
 
     details = tree.xpath("//table")[8]
     rows = details.xpath('tbody/tr')[1:]
@@ -234,7 +238,7 @@ def scrape_instances():
         parse_instance_fpgas(r, by_type)
 
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/previous-generation/"), etree.HTMLParser())
-    details = tree.xpath('//table')[7]
+    details = tree.xpath('//table')[8]
     rows = details.xpath('tbody/tr')[1:]
     assert len(rows) > 0, "Didn't find any table rows."
     prev_gen = [parse_prev_generation_instance(r) for r in rows]

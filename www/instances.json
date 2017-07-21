@@ -2718,6 +2718,727 @@
     "vpc_only": false
   },
   {
+    "ECU": 26.0,
+    "FPGA": 0,
+    "GPU": 0,
+    "arch": [
+      "x86_64"
+    ],
+    "base_performance": null,
+    "burst_minutes": null,
+    "ebs_iops": 8000.0,
+    "ebs_max_bandwidth": 1000.0,
+    "ebs_optimized": false,
+    "ebs_throughput": 125.0,
+    "enhanced_networking": false,
+    "family": "GPU Optimized",
+    "generation": "previous",
+    "instance_type": "g2.2xlarge",
+    "ipv6_support": false,
+    "linux_virtualization_types": [],
+    "memory": 15.0,
+    "network_performance": "",
+    "placement_group_support": true,
+    "pretty_name": "G2 Double Extra Large",
+    "pricing": {
+      "ap-northeast-1": {
+        "linux": {
+          "ondemand": "0.898",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.587",
+            "yrTerm1Standard.noUpfront": "0.678",
+            "yrTerm1Standard.partialUpfront": "0.599",
+            "yrTerm3Convertible.allUpfront": "0.528",
+            "yrTerm3Convertible.noUpfront": "0.610",
+            "yrTerm3Convertible.partialUpfront": "0.539",
+            "yrTerm3Standard.allUpfront": "0.417",
+            "yrTerm3Standard.partialUpfront": "0.443"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.01",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.696",
+            "yrTerm1Standard.noUpfront": "0.831",
+            "yrTerm1Standard.partialUpfront": "0.710",
+            "yrTerm3Convertible.allUpfront": "0.637",
+            "yrTerm3Convertible.noUpfront": "0.763",
+            "yrTerm3Convertible.partialUpfront": "0.650",
+            "yrTerm3Standard.allUpfront": "0.521",
+            "yrTerm3Standard.partialUpfront": "0.555"
+          }
+        },
+        "mswinSQL": {
+          "ondemand": "3.913",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "3.203",
+            "yrTerm1Standard.noUpfront": "3.824",
+            "yrTerm1Standard.partialUpfront": "3.268",
+            "yrTerm3Convertible.allUpfront": "3.144",
+            "yrTerm3Convertible.noUpfront": "3.756",
+            "yrTerm3Convertible.partialUpfront": "3.208",
+            "yrTerm3Standard.allUpfront": "2.726",
+            "yrTerm3Standard.partialUpfront": "2.900"
+          }
+        },
+        "mswinSQLWeb": {
+          "ondemand": "1.19",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.826",
+            "yrTerm1Standard.noUpfront": "0.986",
+            "yrTerm1Standard.partialUpfront": "0.843",
+            "yrTerm3Convertible.allUpfront": "0.767",
+            "yrTerm3Convertible.noUpfront": "0.918",
+            "yrTerm3Convertible.partialUpfront": "0.783",
+            "yrTerm3Standard.allUpfront": "0.587",
+            "yrTerm3Standard.partialUpfront": "0.625"
+          }
+        }
+      },
+      "ap-northeast-2": {
+        "ebs": "0.05"
+      },
+      "ap-southeast-1": {
+        "ebs": "0.05",
+        "linux": {
+          "ondemand": "1",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.702",
+            "yrTerm1Standard.noUpfront": "0.772",
+            "yrTerm1Standard.partialUpfront": "0.716",
+            "yrTerm3Convertible.allUpfront": "0.632",
+            "yrTerm3Convertible.noUpfront": "0.695",
+            "yrTerm3Convertible.partialUpfront": "0.645",
+            "yrTerm3Standard.allUpfront": "0.464",
+            "yrTerm3Standard.partialUpfront": "0.494"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.16",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.868",
+            "yrTerm1Standard.noUpfront": "1.036",
+            "yrTerm1Standard.partialUpfront": "0.886",
+            "yrTerm3Convertible.allUpfront": "0.798",
+            "yrTerm3Convertible.noUpfront": "0.959",
+            "yrTerm3Convertible.partialUpfront": "0.814",
+            "yrTerm3Standard.allUpfront": "0.574",
+            "yrTerm3Standard.partialUpfront": "0.611"
+          }
+        },
+        "mswinSQL": {
+          "ondemand": "4.166",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "3.933",
+            "yrTerm1Standard.noUpfront": "4.064",
+            "yrTerm1Standard.partialUpfront": "4.013",
+            "yrTerm3Convertible.allUpfront": "3.863",
+            "yrTerm3Convertible.noUpfront": "3.987",
+            "yrTerm3Convertible.partialUpfront": "3.942",
+            "yrTerm3Standard.allUpfront": "2.889",
+            "yrTerm3Standard.partialUpfront": "3.074"
+          }
+        },
+        "mswinSQLWeb": {
+          "ondemand": "1.307",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.974",
+            "yrTerm1Standard.noUpfront": "1.162",
+            "yrTerm1Standard.partialUpfront": "0.993",
+            "yrTerm3Convertible.allUpfront": "0.903",
+            "yrTerm3Convertible.noUpfront": "1.085",
+            "yrTerm3Convertible.partialUpfront": "0.922",
+            "yrTerm3Standard.allUpfront": "0.644",
+            "yrTerm3Standard.partialUpfront": "0.685"
+          }
+        }
+      },
+      "ap-southeast-2": {
+        "linux": {
+          "ondemand": "0.898",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.587",
+            "yrTerm1Standard.noUpfront": "0.678",
+            "yrTerm1Standard.partialUpfront": "0.599",
+            "yrTerm3Convertible.allUpfront": "0.528",
+            "yrTerm3Convertible.noUpfront": "0.610",
+            "yrTerm3Convertible.partialUpfront": "0.539",
+            "yrTerm3Standard.allUpfront": "0.417",
+            "yrTerm3Standard.partialUpfront": "0.443"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.058",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.741",
+            "yrTerm1Standard.noUpfront": "0.885",
+            "yrTerm1Standard.partialUpfront": "0.756",
+            "yrTerm3Convertible.allUpfront": "0.683",
+            "yrTerm3Convertible.noUpfront": "0.817",
+            "yrTerm3Convertible.partialUpfront": "0.697",
+            "yrTerm3Standard.allUpfront": "0.526",
+            "yrTerm3Standard.partialUpfront": "0.560"
+          }
+        },
+        "mswinSQL": {
+          "ondemand": "4.064",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "3.882",
+            "yrTerm1Standard.noUpfront": "3.996",
+            "yrTerm1Standard.partialUpfront": "3.961",
+            "yrTerm3Convertible.allUpfront": "3.824",
+            "yrTerm3Convertible.noUpfront": "3.928",
+            "yrTerm3Convertible.partialUpfront": "3.902",
+            "yrTerm3Standard.allUpfront": "2.842",
+            "yrTerm3Standard.partialUpfront": "3.023"
+          }
+        },
+        "mswinSQLWeb": {
+          "ondemand": "1.205",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.839",
+            "yrTerm1Standard.noUpfront": "1.002",
+            "yrTerm1Standard.partialUpfront": "0.856",
+            "yrTerm3Convertible.allUpfront": "0.781",
+            "yrTerm3Convertible.noUpfront": "0.934",
+            "yrTerm3Convertible.partialUpfront": "0.797",
+            "yrTerm3Standard.allUpfront": "0.596",
+            "yrTerm3Standard.partialUpfront": "0.634"
+          }
+        }
+      },
+      "eu-central-1": {
+        "ebs": "0.05",
+        "linux": {
+          "ondemand": "0.772",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.474",
+            "yrTerm1Standard.noUpfront": "0.565",
+            "yrTerm1Standard.partialUpfront": "0.484",
+            "yrTerm3Convertible.allUpfront": "0.426",
+            "yrTerm3Convertible.noUpfront": "0.509",
+            "yrTerm3Convertible.partialUpfront": "0.435",
+            "yrTerm3Standard.allUpfront": "0.336",
+            "yrTerm3Standard.partialUpfront": "0.357"
+          }
+        },
+        "mswin": {
+          "ondemand": "0.906",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.543",
+            "yrTerm1Standard.noUpfront": "0.649",
+            "yrTerm1Standard.partialUpfront": "0.554",
+            "yrTerm3Convertible.allUpfront": "0.496",
+            "yrTerm3Convertible.noUpfront": "0.593",
+            "yrTerm3Convertible.partialUpfront": "0.506",
+            "yrTerm3Standard.allUpfront": "0.402",
+            "yrTerm3Standard.partialUpfront": "0.428"
+          }
+        }
+      },
+      "eu-west-1": {
+        "ebs": "0.05",
+        "linux": {
+          "ondemand": "0.702",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.431",
+            "yrTerm1Standard.noUpfront": "0.514",
+            "yrTerm1Standard.partialUpfront": "0.439",
+            "yrTerm3Convertible.allUpfront": "0.388",
+            "yrTerm3Convertible.noUpfront": "0.463",
+            "yrTerm3Convertible.partialUpfront": "0.395",
+            "yrTerm3Standard.allUpfront": "0.305",
+            "yrTerm3Standard.partialUpfront": "0.325"
+          }
+        },
+        "mswin": {
+          "ondemand": "0.767",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.512",
+            "yrTerm1Standard.noUpfront": "0.611",
+            "yrTerm1Standard.partialUpfront": "0.523",
+            "yrTerm3Convertible.allUpfront": "0.469",
+            "yrTerm3Convertible.noUpfront": "0.560",
+            "yrTerm3Convertible.partialUpfront": "0.479",
+            "yrTerm3Standard.allUpfront": "0.389",
+            "yrTerm3Standard.partialUpfront": "0.414"
+          }
+        },
+        "mswinSQL": {
+          "ondemand": "3.816",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "3.144",
+            "yrTerm1Standard.noUpfront": "3.754",
+            "yrTerm1Standard.partialUpfront": "3.208",
+            "yrTerm3Convertible.allUpfront": "3.101",
+            "yrTerm3Convertible.noUpfront": "3.703",
+            "yrTerm3Convertible.partialUpfront": "3.164",
+            "yrTerm3Standard.allUpfront": "2.707",
+            "yrTerm3Standard.partialUpfront": "2.880"
+          }
+        },
+        "mswinSQLWeb": {
+          "ondemand": "0.957",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.649",
+            "yrTerm1Standard.noUpfront": "0.775",
+            "yrTerm1Standard.partialUpfront": "0.663",
+            "yrTerm3Convertible.allUpfront": "0.606",
+            "yrTerm3Convertible.noUpfront": "0.724",
+            "yrTerm3Convertible.partialUpfront": "0.619",
+            "yrTerm3Standard.allUpfront": "0.461",
+            "yrTerm3Standard.partialUpfront": "0.490"
+          }
+        }
+      },
+      "us-east-1": {
+        "ebs": "0.05",
+        "linux": {
+          "ondemand": "0.65",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.397",
+            "yrTerm1Standard.noUpfront": "0.474",
+            "yrTerm1Standard.partialUpfront": "0.405",
+            "yrTerm3Convertible.allUpfront": "0.357",
+            "yrTerm3Convertible.noUpfront": "0.427",
+            "yrTerm3Convertible.partialUpfront": "0.365",
+            "yrTerm3Standard.allUpfront": "0.282",
+            "yrTerm3Standard.partialUpfront": "0.300"
+          }
+        },
+        "mswin": {
+          "ondemand": "0.767",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.512",
+            "yrTerm1Standard.noUpfront": "0.611",
+            "yrTerm1Standard.partialUpfront": "0.523",
+            "yrTerm3Convertible.allUpfront": "0.472",
+            "yrTerm3Convertible.noUpfront": "0.564",
+            "yrTerm3Convertible.partialUpfront": "0.482",
+            "yrTerm3Standard.allUpfront": "0.392",
+            "yrTerm3Standard.partialUpfront": "0.417"
+          }
+        },
+        "mswinSQL": {
+          "ondemand": "3.816",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "3.144",
+            "yrTerm1Standard.noUpfront": "3.754",
+            "yrTerm1Standard.partialUpfront": "3.208",
+            "yrTerm3Convertible.allUpfront": "3.104",
+            "yrTerm3Convertible.noUpfront": "3.707",
+            "yrTerm3Convertible.partialUpfront": "3.168",
+            "yrTerm3Standard.allUpfront": "2.707",
+            "yrTerm3Standard.partialUpfront": "2.880"
+          }
+        },
+        "mswinSQLWeb": {
+          "ondemand": "0.957",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.649",
+            "yrTerm1Standard.noUpfront": "0.775",
+            "yrTerm1Standard.partialUpfront": "0.663",
+            "yrTerm3Convertible.allUpfront": "0.610",
+            "yrTerm3Convertible.noUpfront": "0.728",
+            "yrTerm3Convertible.partialUpfront": "0.622",
+            "yrTerm3Standard.allUpfront": "0.461",
+            "yrTerm3Standard.partialUpfront": "0.490"
+          }
+        }
+      },
+      "us-west-1": {
+        "ebs": "0.05",
+        "linux": {
+          "ondemand": "0.702",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.431",
+            "yrTerm1Standard.noUpfront": "0.514",
+            "yrTerm1Standard.partialUpfront": "0.439",
+            "yrTerm3Convertible.allUpfront": "0.388",
+            "yrTerm3Convertible.noUpfront": "0.463",
+            "yrTerm3Convertible.partialUpfront": "0.395",
+            "yrTerm3Standard.allUpfront": "0.305",
+            "yrTerm3Standard.partialUpfront": "0.325"
+          }
+        },
+        "mswin": {
+          "ondemand": "0.819",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.545",
+            "yrTerm1Standard.noUpfront": "0.651",
+            "yrTerm1Standard.partialUpfront": "0.556",
+            "yrTerm3Convertible.allUpfront": "0.502",
+            "yrTerm3Convertible.noUpfront": "0.600",
+            "yrTerm3Convertible.partialUpfront": "0.512",
+            "yrTerm3Standard.allUpfront": "0.416",
+            "yrTerm3Standard.partialUpfront": "0.442"
+          }
+        },
+        "mswinSQL": {
+          "ondemand": "3.868",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "3.177",
+            "yrTerm1Standard.noUpfront": "3.793",
+            "yrTerm1Standard.partialUpfront": "3.242",
+            "yrTerm3Convertible.allUpfront": "3.134",
+            "yrTerm3Convertible.noUpfront": "3.742",
+            "yrTerm3Convertible.partialUpfront": "3.198",
+            "yrTerm3Standard.allUpfront": "2.730",
+            "yrTerm3Standard.partialUpfront": "2.904"
+          }
+        },
+        "mswinSQLWeb": {
+          "ondemand": "1.009",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.683",
+            "yrTerm1Standard.noUpfront": "0.816",
+            "yrTerm1Standard.partialUpfront": "0.697",
+            "yrTerm3Convertible.allUpfront": "0.640",
+            "yrTerm3Convertible.noUpfront": "0.765",
+            "yrTerm3Convertible.partialUpfront": "0.653",
+            "yrTerm3Standard.allUpfront": "0.485",
+            "yrTerm3Standard.partialUpfront": "0.516"
+          }
+        }
+      },
+      "us-west-2": {
+        "ebs": "0.05",
+        "linux": {
+          "ondemand": "0.65",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.397",
+            "yrTerm1Standard.noUpfront": "0.474",
+            "yrTerm1Standard.partialUpfront": "0.405",
+            "yrTerm3Convertible.allUpfront": "0.357",
+            "yrTerm3Convertible.noUpfront": "0.427",
+            "yrTerm3Convertible.partialUpfront": "0.365",
+            "yrTerm3Standard.allUpfront": "0.282",
+            "yrTerm3Standard.partialUpfront": "0.300"
+          }
+        },
+        "mswin": {
+          "ondemand": "0.767",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.512",
+            "yrTerm1Standard.noUpfront": "0.611",
+            "yrTerm1Standard.partialUpfront": "0.523",
+            "yrTerm3Convertible.allUpfront": "0.472",
+            "yrTerm3Convertible.noUpfront": "0.564",
+            "yrTerm3Convertible.partialUpfront": "0.482",
+            "yrTerm3Standard.allUpfront": "0.392",
+            "yrTerm3Standard.partialUpfront": "0.417"
+          }
+        },
+        "mswinSQL": {
+          "ondemand": "3.816",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "3.144",
+            "yrTerm1Standard.noUpfront": "3.754",
+            "yrTerm1Standard.partialUpfront": "3.208",
+            "yrTerm3Convertible.allUpfront": "3.104",
+            "yrTerm3Convertible.noUpfront": "3.707",
+            "yrTerm3Convertible.partialUpfront": "3.168",
+            "yrTerm3Standard.allUpfront": "2.707",
+            "yrTerm3Standard.partialUpfront": "2.880"
+          }
+        },
+        "mswinSQLWeb": {
+          "ondemand": "0.957",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.649",
+            "yrTerm1Standard.noUpfront": "0.775",
+            "yrTerm1Standard.partialUpfront": "0.663",
+            "yrTerm3Convertible.allUpfront": "0.610",
+            "yrTerm3Convertible.noUpfront": "0.728",
+            "yrTerm3Convertible.partialUpfront": "0.622",
+            "yrTerm3Standard.allUpfront": "0.461",
+            "yrTerm3Standard.partialUpfront": "0.490"
+          }
+        }
+      }
+    },
+    "storage": {
+      "devices": 1,
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 60,
+      "ssd": true,
+      "storage_needs_initialization": true,
+      "trim_support": false
+    },
+    "vCPU": 8,
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
+    "vpc_only": false
+  },
+  {
+    "ECU": 104.0,
+    "FPGA": 0,
+    "GPU": 0,
+    "arch": [
+      "x86_64"
+    ],
+    "base_performance": null,
+    "burst_minutes": null,
+    "ebs_iops": 0,
+    "ebs_max_bandwidth": 0,
+    "ebs_optimized": false,
+    "ebs_throughput": 0,
+    "enhanced_networking": false,
+    "family": "GPU Optimized",
+    "generation": "previous",
+    "instance_type": "g2.8xlarge",
+    "ipv6_support": false,
+    "linux_virtualization_types": [],
+    "memory": 60.0,
+    "network_performance": "",
+    "placement_group_support": true,
+    "pretty_name": "G2 Eight Extra Large",
+    "pricing": {
+      "ap-northeast-1": {
+        "linux": {
+          "ondemand": "3.592",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "2.347",
+            "yrTerm1Standard.noUpfront": "2.712",
+            "yrTerm1Standard.partialUpfront": "2.395",
+            "yrTerm3Convertible.allUpfront": "2.112",
+            "yrTerm3Convertible.noUpfront": "2.441",
+            "yrTerm3Convertible.partialUpfront": "2.156",
+            "yrTerm3Standard.allUpfront": "1.667",
+            "yrTerm3Standard.partialUpfront": "1.773"
+          }
+        },
+        "mswin": {
+          "ondemand": "3.87",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "2.417",
+            "yrTerm1Standard.noUpfront": "2.795",
+            "yrTerm1Standard.partialUpfront": "2.466",
+            "yrTerm3Convertible.allUpfront": "2.182",
+            "yrTerm3Convertible.noUpfront": "2.524",
+            "yrTerm3Convertible.partialUpfront": "2.227",
+            "yrTerm3Standard.allUpfront": "1.732",
+            "yrTerm3Standard.partialUpfront": "1.844"
+          }
+        }
+      },
+      "ap-southeast-1": {
+        "linux": {
+          "ondemand": "4",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "2.808",
+            "yrTerm1Standard.noUpfront": "3.088",
+            "yrTerm1Standard.partialUpfront": "2.866",
+            "yrTerm3Convertible.allUpfront": "2.527",
+            "yrTerm3Convertible.noUpfront": "2.779",
+            "yrTerm3Convertible.partialUpfront": "2.579",
+            "yrTerm3Standard.allUpfront": "1.857",
+            "yrTerm3Standard.partialUpfront": "1.975"
+          }
+        },
+        "mswin": {
+          "ondemand": "4.278",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "2.878",
+            "yrTerm1Standard.noUpfront": "3.171",
+            "yrTerm1Standard.partialUpfront": "2.937",
+            "yrTerm3Convertible.allUpfront": "2.597",
+            "yrTerm3Convertible.noUpfront": "2.862",
+            "yrTerm3Convertible.partialUpfront": "2.650",
+            "yrTerm3Standard.allUpfront": "1.923",
+            "yrTerm3Standard.partialUpfront": "2.046"
+          }
+        }
+      },
+      "ap-southeast-2": {
+        "linux": {
+          "ondemand": "3.592",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "2.347",
+            "yrTerm1Standard.noUpfront": "2.712",
+            "yrTerm1Standard.partialUpfront": "2.395",
+            "yrTerm3Convertible.allUpfront": "2.112",
+            "yrTerm3Convertible.noUpfront": "2.441",
+            "yrTerm3Convertible.partialUpfront": "2.156",
+            "yrTerm3Standard.allUpfront": "1.667",
+            "yrTerm3Standard.partialUpfront": "1.773"
+          }
+        },
+        "mswin": {
+          "ondemand": "3.87",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "2.417",
+            "yrTerm1Standard.noUpfront": "2.795",
+            "yrTerm1Standard.partialUpfront": "2.466",
+            "yrTerm3Convertible.allUpfront": "2.182",
+            "yrTerm3Convertible.noUpfront": "2.524",
+            "yrTerm3Convertible.partialUpfront": "2.227",
+            "yrTerm3Standard.allUpfront": "1.732",
+            "yrTerm3Standard.partialUpfront": "1.844"
+          }
+        }
+      },
+      "eu-central-1": {
+        "linux": {
+          "ondemand": "3.088",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.895",
+            "yrTerm1Standard.noUpfront": "2.260",
+            "yrTerm1Standard.partialUpfront": "1.935",
+            "yrTerm3Convertible.allUpfront": "1.705",
+            "yrTerm3Convertible.noUpfront": "2.034",
+            "yrTerm3Convertible.partialUpfront": "1.741",
+            "yrTerm3Standard.allUpfront": "1.342",
+            "yrTerm3Standard.partialUpfront": "1.426"
+          }
+        },
+        "mswin": {
+          "ondemand": "3.366",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.966",
+            "yrTerm1Standard.noUpfront": "2.347",
+            "yrTerm1Standard.partialUpfront": "2.006",
+            "yrTerm3Convertible.allUpfront": "1.776",
+            "yrTerm3Convertible.noUpfront": "2.121",
+            "yrTerm3Convertible.partialUpfront": "1.812",
+            "yrTerm3Standard.allUpfront": "1.407",
+            "yrTerm3Standard.partialUpfront": "1.498"
+          }
+        }
+      },
+      "eu-west-1": {
+        "linux": {
+          "ondemand": "2.808",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.722",
+            "yrTerm1Standard.noUpfront": "2.056",
+            "yrTerm1Standard.partialUpfront": "1.758",
+            "yrTerm3Convertible.allUpfront": "1.550",
+            "yrTerm3Convertible.noUpfront": "1.850",
+            "yrTerm3Convertible.partialUpfront": "1.582",
+            "yrTerm3Standard.allUpfront": "1.220",
+            "yrTerm3Standard.partialUpfront": "1.298"
+          }
+        },
+        "mswin": {
+          "ondemand": "3.086",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.792",
+            "yrTerm1Standard.noUpfront": "2.139",
+            "yrTerm1Standard.partialUpfront": "1.829",
+            "yrTerm3Convertible.allUpfront": "1.620",
+            "yrTerm3Convertible.noUpfront": "1.934",
+            "yrTerm3Convertible.partialUpfront": "1.653",
+            "yrTerm3Standard.allUpfront": "1.286",
+            "yrTerm3Standard.partialUpfront": "1.369"
+          }
+        }
+      },
+      "us-east-1": {
+        "linux": {
+          "ondemand": "2.6",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.588",
+            "yrTerm1Standard.noUpfront": "1.896",
+            "yrTerm1Standard.partialUpfront": "1.621",
+            "yrTerm3Convertible.allUpfront": "1.429",
+            "yrTerm3Convertible.noUpfront": "1.706",
+            "yrTerm3Convertible.partialUpfront": "1.459",
+            "yrTerm3Standard.allUpfront": "1.128",
+            "yrTerm3Standard.partialUpfront": "1.200"
+          }
+        },
+        "mswin": {
+          "ondemand": "2.878",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.658",
+            "yrTerm1Standard.noUpfront": "1.979",
+            "yrTerm1Standard.partialUpfront": "1.692",
+            "yrTerm3Convertible.allUpfront": "1.499",
+            "yrTerm3Convertible.noUpfront": "1.790",
+            "yrTerm3Convertible.partialUpfront": "1.530",
+            "yrTerm3Standard.allUpfront": "1.194",
+            "yrTerm3Standard.partialUpfront": "1.271"
+          }
+        }
+      },
+      "us-west-1": {
+        "linux": {
+          "ondemand": "2.808",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.722",
+            "yrTerm1Standard.noUpfront": "2.056",
+            "yrTerm1Standard.partialUpfront": "1.758",
+            "yrTerm3Convertible.allUpfront": "1.550",
+            "yrTerm3Convertible.noUpfront": "1.850",
+            "yrTerm3Convertible.partialUpfront": "1.582",
+            "yrTerm3Standard.allUpfront": "1.220",
+            "yrTerm3Standard.partialUpfront": "1.298"
+          }
+        },
+        "mswin": {
+          "ondemand": "3.086",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.792",
+            "yrTerm1Standard.noUpfront": "2.139",
+            "yrTerm1Standard.partialUpfront": "1.829",
+            "yrTerm3Convertible.allUpfront": "1.620",
+            "yrTerm3Convertible.noUpfront": "1.934",
+            "yrTerm3Convertible.partialUpfront": "1.653",
+            "yrTerm3Standard.allUpfront": "1.286",
+            "yrTerm3Standard.partialUpfront": "1.369"
+          }
+        }
+      },
+      "us-west-2": {
+        "linux": {
+          "ondemand": "2.6",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.588",
+            "yrTerm1Standard.noUpfront": "1.896",
+            "yrTerm1Standard.partialUpfront": "1.621",
+            "yrTerm3Convertible.allUpfront": "1.429",
+            "yrTerm3Convertible.noUpfront": "1.706",
+            "yrTerm3Convertible.partialUpfront": "1.459",
+            "yrTerm3Standard.allUpfront": "1.128",
+            "yrTerm3Standard.partialUpfront": "1.200"
+          }
+        },
+        "mswin": {
+          "ondemand": "2.878",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.658",
+            "yrTerm1Standard.noUpfront": "1.979",
+            "yrTerm1Standard.partialUpfront": "1.692",
+            "yrTerm3Convertible.allUpfront": "1.499",
+            "yrTerm3Convertible.noUpfront": "1.790",
+            "yrTerm3Convertible.partialUpfront": "1.530",
+            "yrTerm3Standard.allUpfront": "1.194",
+            "yrTerm3Standard.partialUpfront": "1.271"
+          }
+        }
+      }
+    },
+    "storage": {
+      "devices": 2,
+      "includes_swap_partition": false,
+      "nvme_ssd": false,
+      "size": 120,
+      "ssd": true,
+      "storage_needs_initialization": true,
+      "trim_support": false
+    },
+    "vCPU": 32,
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "vpc_only": false
+  },
+  {
     "ECU": 33.5,
     "FPGA": 0,
     "GPU": 0,
@@ -12668,7 +13389,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.461",
+          "ondemand": "0.701",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.653",
             "yrTerm1Standard.noUpfront": "0.659",
@@ -12727,7 +13448,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.455",
+          "ondemand": "0.695",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.641",
             "yrTerm1Standard.noUpfront": "0.646",
@@ -12786,7 +13507,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.455",
+          "ondemand": "0.695",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.644",
             "yrTerm1Standard.noUpfront": "0.649",
@@ -12845,7 +13566,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.457",
+          "ondemand": "0.697",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.645",
             "yrTerm1Standard.noUpfront": "0.650",
@@ -12904,7 +13625,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.457",
+          "ondemand": "0.697",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.650",
             "yrTerm1Standard.noUpfront": "0.656",
@@ -12963,7 +13684,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.443",
+          "ondemand": "0.683",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.636",
             "yrTerm1Standard.noUpfront": "0.640",
@@ -13022,7 +13743,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.452",
+          "ondemand": "0.692",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.648",
             "yrTerm1Standard.noUpfront": "0.654",
@@ -13081,7 +13802,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.443",
+          "ondemand": "0.683",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.643",
             "yrTerm1Standard.noUpfront": "0.648",
@@ -13140,7 +13861,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.448",
+          "ondemand": "0.688",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.646",
             "yrTerm1Standard.noUpfront": "0.651",
@@ -13199,7 +13920,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.491",
+          "ondemand": "0.731",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.656",
             "yrTerm1Standard.noUpfront": "0.662",
@@ -13258,7 +13979,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.432",
+          "ondemand": "0.672",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.630",
             "yrTerm1Standard.noUpfront": "0.634",
@@ -13317,7 +14038,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.432",
+          "ondemand": "0.672",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.630",
             "yrTerm1Standard.noUpfront": "0.634",
@@ -13375,7 +14096,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.458",
+          "ondemand": "0.698",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.650",
             "yrTerm1Standard.noUpfront": "0.656",
@@ -13434,7 +14155,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.449",
+          "ondemand": "0.689",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.651",
             "yrTerm1Standard.noUpfront": "0.657",
@@ -13493,7 +14214,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.432",
+          "ondemand": "0.672",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.630",
             "yrTerm1Standard.noUpfront": "0.634",
@@ -27967,1556 +28688,6 @@
     "vpc_only": false
   },
   {
-    "ECU": 12.0,
-    "FPGA": 0,
-    "GPU": "1",
-    "arch": [
-      "x86_64"
-    ],
-    "base_performance": null,
-    "burst_minutes": null,
-    "ebs_iops": 6000.0,
-    "ebs_max_bandwidth": 750.0,
-    "ebs_optimized": true,
-    "ebs_throughput": 93.75,
-    "enhanced_networking": true,
-    "family": "Accelerated computing",
-    "generation": "current",
-    "instance_type": "p2.xlarge",
-    "ipv6_support": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
-    "memory": 61.0,
-    "network_performance": "High",
-    "placement_group_support": true,
-    "pretty_name": "General Purpose GPU Extra Large",
-    "pricing": {
-      "ap-northeast-1": {
-        "linux": {
-          "ondemand": "1.542",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.008",
-            "yrTerm1Standard.noUpfront": "1.080",
-            "yrTerm1Standard.partialUpfront": "1.028",
-            "yrTerm3Convertible.allUpfront": "0.857",
-            "yrTerm3Convertible.noUpfront": "0.945",
-            "yrTerm3Convertible.partialUpfront": "0.874",
-            "yrTerm3Standard.allUpfront": "0.715",
-            "yrTerm3Standard.noUpfront": "0.822",
-            "yrTerm3Standard.partialUpfront": "0.760"
-          }
-        },
-        "mswin": {
-          "ondemand": "1.726",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.192",
-            "yrTerm1Standard.noUpfront": "1.264",
-            "yrTerm1Standard.partialUpfront": "1.212",
-            "yrTerm3Convertible.allUpfront": "1.041",
-            "yrTerm3Convertible.noUpfront": "1.129",
-            "yrTerm3Convertible.partialUpfront": "1.058",
-            "yrTerm3Standard.allUpfront": "0.899",
-            "yrTerm3Standard.noUpfront": "1.006",
-            "yrTerm3Standard.partialUpfront": "0.944"
-          }
-        }
-      },
-      "ap-northeast-2": {
-        "linux": {
-          "ondemand": "1.465",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.958",
-            "yrTerm1Standard.noUpfront": "1.027",
-            "yrTerm1Standard.partialUpfront": "0.978",
-            "yrTerm3Convertible.allUpfront": "0.814",
-            "yrTerm3Convertible.noUpfront": "0.897",
-            "yrTerm3Convertible.partialUpfront": "0.830",
-            "yrTerm3Standard.allUpfront": "0.679",
-            "yrTerm3Standard.noUpfront": "0.780",
-            "yrTerm3Standard.partialUpfront": "0.722"
-          }
-        },
-        "mswin": {
-          "ondemand": "1.649",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.142",
-            "yrTerm1Standard.noUpfront": "1.211",
-            "yrTerm1Standard.partialUpfront": "1.162",
-            "yrTerm3Convertible.allUpfront": "0.998",
-            "yrTerm3Convertible.noUpfront": "1.081",
-            "yrTerm3Convertible.partialUpfront": "1.014",
-            "yrTerm3Standard.allUpfront": "0.863",
-            "yrTerm3Standard.noUpfront": "0.964",
-            "yrTerm3Standard.partialUpfront": "0.906"
-          }
-        }
-      },
-      "ap-southeast-2": {
-        "linux": {
-          "ondemand": "1.542",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.008",
-            "yrTerm1Standard.noUpfront": "1.080",
-            "yrTerm1Standard.partialUpfront": "1.028",
-            "yrTerm3Convertible.allUpfront": "0.857",
-            "yrTerm3Convertible.noUpfront": "0.945",
-            "yrTerm3Convertible.partialUpfront": "0.874",
-            "yrTerm3Standard.allUpfront": "0.715",
-            "yrTerm3Standard.noUpfront": "0.822",
-            "yrTerm3Standard.partialUpfront": "0.760"
-          }
-        },
-        "mswin": {
-          "ondemand": "1.726",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.192",
-            "yrTerm1Standard.noUpfront": "1.264",
-            "yrTerm1Standard.partialUpfront": "1.212",
-            "yrTerm3Convertible.allUpfront": "1.041",
-            "yrTerm3Convertible.noUpfront": "1.129",
-            "yrTerm3Convertible.partialUpfront": "1.058",
-            "yrTerm3Standard.allUpfront": "0.899",
-            "yrTerm3Standard.noUpfront": "1.006",
-            "yrTerm3Standard.partialUpfront": "0.944"
-          }
-        }
-      },
-      "eu-west-1": {
-        "linux": {
-          "ondemand": "0.972",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.621",
-            "yrTerm1Standard.noUpfront": "0.669",
-            "yrTerm1Standard.partialUpfront": "0.634",
-            "yrTerm3Convertible.allUpfront": "0.518",
-            "yrTerm3Convertible.noUpfront": "0.571",
-            "yrTerm3Convertible.partialUpfront": "0.530",
-            "yrTerm3Standard.allUpfront": "0.432",
-            "yrTerm3Standard.noUpfront": "0.497",
-            "yrTerm3Standard.partialUpfront": "0.460"
-          }
-        },
-        "mswin": {
-          "ondemand": "1.156",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.805",
-            "yrTerm1Standard.noUpfront": "0.853",
-            "yrTerm1Standard.partialUpfront": "0.818",
-            "yrTerm3Convertible.allUpfront": "0.702",
-            "yrTerm3Convertible.noUpfront": "0.755",
-            "yrTerm3Convertible.partialUpfront": "0.714",
-            "yrTerm3Standard.allUpfront": "0.616",
-            "yrTerm3Standard.noUpfront": "0.681",
-            "yrTerm3Standard.partialUpfront": "0.644"
-          }
-        }
-      },
-      "us-east-1": {
-        "linux": {
-          "ondemand": "0.9",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.573",
-            "yrTerm1Standard.noUpfront": "0.614",
-            "yrTerm1Standard.partialUpfront": "0.585",
-            "yrTerm3Convertible.allUpfront": "0.479",
-            "yrTerm3Convertible.noUpfront": "0.528",
-            "yrTerm3Convertible.partialUpfront": "0.488",
-            "yrTerm3Standard.allUpfront": "0.399",
-            "yrTerm3Standard.noUpfront": "0.459",
-            "yrTerm3Standard.partialUpfront": "0.425"
-          }
-        },
-        "mswin": {
-          "ondemand": "1.084",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.757",
-            "yrTerm1Standard.noUpfront": "0.798",
-            "yrTerm1Standard.partialUpfront": "0.769",
-            "yrTerm3Convertible.allUpfront": "0.663",
-            "yrTerm3Convertible.noUpfront": "0.712",
-            "yrTerm3Convertible.partialUpfront": "0.672",
-            "yrTerm3Standard.allUpfront": "0.584",
-            "yrTerm3Standard.noUpfront": "0.643",
-            "yrTerm3Standard.partialUpfront": "0.609"
-          }
-        }
-      },
-      "us-east-2": {
-        "linux": {
-          "ondemand": "0.9",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.573",
-            "yrTerm1Standard.noUpfront": "0.614",
-            "yrTerm1Standard.partialUpfront": "0.585",
-            "yrTerm3Convertible.allUpfront": "0.479",
-            "yrTerm3Convertible.noUpfront": "0.528",
-            "yrTerm3Convertible.partialUpfront": "0.488",
-            "yrTerm3Standard.allUpfront": "0.399",
-            "yrTerm3Standard.noUpfront": "0.459",
-            "yrTerm3Standard.partialUpfront": "0.425"
-          }
-        },
-        "mswin": {
-          "ondemand": "1.084",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.757",
-            "yrTerm1Standard.noUpfront": "0.798",
-            "yrTerm1Standard.partialUpfront": "0.769",
-            "yrTerm3Convertible.allUpfront": "0.663",
-            "yrTerm3Convertible.noUpfront": "0.712",
-            "yrTerm3Convertible.partialUpfront": "0.672",
-            "yrTerm3Standard.allUpfront": "0.584",
-            "yrTerm3Standard.noUpfront": "0.643",
-            "yrTerm3Standard.partialUpfront": "0.609"
-          }
-        }
-      },
-      "us-gov-west-1": {
-        "linux": {
-          "ondemand": "1.08",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.688",
-            "yrTerm1Standard.noUpfront": "0.737",
-            "yrTerm1Standard.partialUpfront": "0.702",
-            "yrTerm3Convertible.allUpfront": "0.575",
-            "yrTerm3Convertible.noUpfront": "0.633",
-            "yrTerm3Convertible.partialUpfront": "0.586",
-            "yrTerm3Standard.allUpfront": "0.479",
-            "yrTerm3Standard.noUpfront": "0.551",
-            "yrTerm3Standard.partialUpfront": "0.510"
-          }
-        },
-        "mswin": {
-          "ondemand": "1.264",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.872",
-            "yrTerm1Standard.noUpfront": "0.921",
-            "yrTerm1Standard.partialUpfront": "0.886",
-            "yrTerm3Convertible.allUpfront": "0.759",
-            "yrTerm3Convertible.noUpfront": "0.817",
-            "yrTerm3Convertible.partialUpfront": "0.770",
-            "yrTerm3Standard.allUpfront": "0.663",
-            "yrTerm3Standard.noUpfront": "0.735",
-            "yrTerm3Standard.partialUpfront": "0.694"
-          }
-        }
-      },
-      "us-west-2": {
-        "linux": {
-          "ondemand": "0.9",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.573",
-            "yrTerm1Standard.noUpfront": "0.614",
-            "yrTerm1Standard.partialUpfront": "0.585",
-            "yrTerm3Convertible.allUpfront": "0.479",
-            "yrTerm3Convertible.noUpfront": "0.528",
-            "yrTerm3Convertible.partialUpfront": "0.488",
-            "yrTerm3Standard.allUpfront": "0.399",
-            "yrTerm3Standard.noUpfront": "0.459",
-            "yrTerm3Standard.partialUpfront": "0.425"
-          }
-        },
-        "mswin": {
-          "ondemand": "1.084",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.757",
-            "yrTerm1Standard.noUpfront": "0.798",
-            "yrTerm1Standard.partialUpfront": "0.769",
-            "yrTerm3Convertible.allUpfront": "0.663",
-            "yrTerm3Convertible.noUpfront": "0.712",
-            "yrTerm3Convertible.partialUpfront": "0.672",
-            "yrTerm3Standard.allUpfront": "0.584",
-            "yrTerm3Standard.noUpfront": "0.643",
-            "yrTerm3Standard.partialUpfront": "0.609"
-          }
-        }
-      }
-    },
-    "storage": null,
-    "vCPU": 4,
-    "vpc": {
-      "ips_per_eni": 15,
-      "max_enis": 4
-    },
-    "vpc_only": true
-  },
-  {
-    "ECU": 94.0,
-    "FPGA": 0,
-    "GPU": "8",
-    "arch": [
-      "x86_64"
-    ],
-    "base_performance": null,
-    "burst_minutes": null,
-    "ebs_iops": 32500.0,
-    "ebs_max_bandwidth": 5000.0,
-    "ebs_optimized": true,
-    "ebs_throughput": 625.0,
-    "enhanced_networking": true,
-    "family": "Accelerated computing",
-    "generation": "current",
-    "instance_type": "p2.8xlarge",
-    "ipv6_support": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
-    "memory": 488.0,
-    "network_performance": "10 Gigabit",
-    "placement_group_support": true,
-    "pretty_name": "General Purpose GPU Eight Extra Large",
-    "pricing": {
-      "ap-northeast-1": {
-        "linux": {
-          "ondemand": "12.336",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "8.066",
-            "yrTerm1Standard.noUpfront": "8.642",
-            "yrTerm1Standard.partialUpfront": "8.230",
-            "yrTerm3Convertible.allUpfront": "6.859",
-            "yrTerm3Convertible.noUpfront": "7.559",
-            "yrTerm3Convertible.partialUpfront": "7.000",
-            "yrTerm3Standard.allUpfront": "5.721",
-            "yrTerm3Standard.noUpfront": "6.573",
-            "yrTerm3Standard.partialUpfront": "6.086"
-          }
-        },
-        "mswin": {
-          "ondemand": "13.808",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "9.538",
-            "yrTerm1Standard.noUpfront": "10.114",
-            "yrTerm1Standard.partialUpfront": "9.702",
-            "yrTerm3Convertible.allUpfront": "8.331",
-            "yrTerm3Convertible.noUpfront": "9.031",
-            "yrTerm3Convertible.partialUpfront": "8.472",
-            "yrTerm3Standard.allUpfront": "7.193",
-            "yrTerm3Standard.noUpfront": "8.045",
-            "yrTerm3Standard.partialUpfront": "7.558"
-          }
-        }
-      },
-      "ap-northeast-2": {
-        "linux": {
-          "ondemand": "11.72",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "7.662",
-            "yrTerm1Standard.noUpfront": "8.215",
-            "yrTerm1Standard.partialUpfront": "7.818",
-            "yrTerm3Convertible.allUpfront": "6.510",
-            "yrTerm3Convertible.noUpfront": "7.174",
-            "yrTerm3Convertible.partialUpfront": "6.642",
-            "yrTerm3Standard.allUpfront": "5.435",
-            "yrTerm3Standard.noUpfront": "6.238",
-            "yrTerm3Standard.partialUpfront": "5.782"
-          }
-        },
-        "mswin": {
-          "ondemand": "13.192",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "9.134",
-            "yrTerm1Standard.noUpfront": "9.687",
-            "yrTerm1Standard.partialUpfront": "9.290",
-            "yrTerm3Convertible.allUpfront": "7.982",
-            "yrTerm3Convertible.noUpfront": "8.646",
-            "yrTerm3Convertible.partialUpfront": "8.114",
-            "yrTerm3Standard.allUpfront": "6.907",
-            "yrTerm3Standard.noUpfront": "7.710",
-            "yrTerm3Standard.partialUpfront": "7.254"
-          }
-        }
-      },
-      "ap-southeast-2": {
-        "linux": {
-          "ondemand": "12.336",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "8.066",
-            "yrTerm1Standard.noUpfront": "8.642",
-            "yrTerm1Standard.partialUpfront": "8.230",
-            "yrTerm3Convertible.allUpfront": "6.859",
-            "yrTerm3Convertible.noUpfront": "7.559",
-            "yrTerm3Convertible.partialUpfront": "7.000",
-            "yrTerm3Standard.allUpfront": "5.721",
-            "yrTerm3Standard.noUpfront": "6.573",
-            "yrTerm3Standard.partialUpfront": "6.086"
-          }
-        },
-        "mswin": {
-          "ondemand": "13.808",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "9.538",
-            "yrTerm1Standard.noUpfront": "10.114",
-            "yrTerm1Standard.partialUpfront": "9.702",
-            "yrTerm3Convertible.allUpfront": "8.331",
-            "yrTerm3Convertible.noUpfront": "9.031",
-            "yrTerm3Convertible.partialUpfront": "8.472",
-            "yrTerm3Standard.allUpfront": "7.193",
-            "yrTerm3Standard.noUpfront": "8.045",
-            "yrTerm3Standard.partialUpfront": "7.558"
-          }
-        }
-      },
-      "eu-west-1": {
-        "linux": {
-          "ondemand": "7.776",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "4.971",
-            "yrTerm1Standard.noUpfront": "5.350",
-            "yrTerm1Standard.partialUpfront": "5.072",
-            "yrTerm3Convertible.allUpfront": "4.147",
-            "yrTerm3Convertible.noUpfront": "4.571",
-            "yrTerm3Convertible.partialUpfront": "4.232",
-            "yrTerm3Standard.allUpfront": "3.459",
-            "yrTerm3Standard.noUpfront": "3.974",
-            "yrTerm3Standard.partialUpfront": "3.680"
-          }
-        },
-        "mswin": {
-          "ondemand": "9.248",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "6.443",
-            "yrTerm1Standard.noUpfront": "6.822",
-            "yrTerm1Standard.partialUpfront": "6.544",
-            "yrTerm3Convertible.allUpfront": "5.619",
-            "yrTerm3Convertible.noUpfront": "6.043",
-            "yrTerm3Convertible.partialUpfront": "5.704",
-            "yrTerm3Standard.allUpfront": "4.931",
-            "yrTerm3Standard.noUpfront": "5.446",
-            "yrTerm3Standard.partialUpfront": "5.152"
-          }
-        }
-      },
-      "us-east-1": {
-        "linux": {
-          "ondemand": "7.2",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "4.586",
-            "yrTerm1Standard.noUpfront": "4.914",
-            "yrTerm1Standard.partialUpfront": "4.680",
-            "yrTerm3Convertible.allUpfront": "3.832",
-            "yrTerm3Convertible.noUpfront": "4.223",
-            "yrTerm3Convertible.partialUpfront": "3.910",
-            "yrTerm3Standard.allUpfront": "3.196",
-            "yrTerm3Standard.noUpfront": "3.672",
-            "yrTerm3Standard.partialUpfront": "3.400"
-          }
-        },
-        "mswin": {
-          "ondemand": "8.672",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "6.058",
-            "yrTerm1Standard.noUpfront": "6.386",
-            "yrTerm1Standard.partialUpfront": "6.152",
-            "yrTerm3Convertible.allUpfront": "5.304",
-            "yrTerm3Convertible.noUpfront": "5.695",
-            "yrTerm3Convertible.partialUpfront": "5.382",
-            "yrTerm3Standard.allUpfront": "4.668",
-            "yrTerm3Standard.noUpfront": "5.144",
-            "yrTerm3Standard.partialUpfront": "4.872"
-          }
-        }
-      },
-      "us-east-2": {
-        "linux": {
-          "ondemand": "7.2",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "4.586",
-            "yrTerm1Standard.noUpfront": "4.914",
-            "yrTerm1Standard.partialUpfront": "4.680",
-            "yrTerm3Convertible.allUpfront": "3.832",
-            "yrTerm3Convertible.noUpfront": "4.223",
-            "yrTerm3Convertible.partialUpfront": "3.910",
-            "yrTerm3Standard.allUpfront": "3.196",
-            "yrTerm3Standard.noUpfront": "3.672",
-            "yrTerm3Standard.partialUpfront": "3.400"
-          }
-        },
-        "mswin": {
-          "ondemand": "8.672",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "6.058",
-            "yrTerm1Standard.noUpfront": "6.386",
-            "yrTerm1Standard.partialUpfront": "6.152",
-            "yrTerm3Convertible.allUpfront": "5.304",
-            "yrTerm3Convertible.noUpfront": "5.695",
-            "yrTerm3Convertible.partialUpfront": "5.382",
-            "yrTerm3Standard.allUpfront": "4.668",
-            "yrTerm3Standard.noUpfront": "5.144",
-            "yrTerm3Standard.partialUpfront": "4.872"
-          }
-        }
-      },
-      "us-gov-west-1": {
-        "linux": {
-          "ondemand": "8.64",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "5.504",
-            "yrTerm1Standard.noUpfront": "5.897",
-            "yrTerm1Standard.partialUpfront": "5.616",
-            "yrTerm3Convertible.allUpfront": "4.598",
-            "yrTerm3Convertible.noUpfront": "5.067",
-            "yrTerm3Convertible.partialUpfront": "4.692",
-            "yrTerm3Standard.allUpfront": "3.835",
-            "yrTerm3Standard.noUpfront": "4.406",
-            "yrTerm3Standard.partialUpfront": "4.080"
-          }
-        },
-        "mswin": {
-          "ondemand": "10.112",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "6.976",
-            "yrTerm1Standard.noUpfront": "7.369",
-            "yrTerm1Standard.partialUpfront": "7.088",
-            "yrTerm3Convertible.allUpfront": "6.070",
-            "yrTerm3Convertible.noUpfront": "6.539",
-            "yrTerm3Convertible.partialUpfront": "6.164",
-            "yrTerm3Standard.allUpfront": "5.307",
-            "yrTerm3Standard.noUpfront": "5.878",
-            "yrTerm3Standard.partialUpfront": "5.552"
-          }
-        }
-      },
-      "us-west-2": {
-        "linux": {
-          "ondemand": "7.2",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "4.586",
-            "yrTerm1Standard.noUpfront": "4.914",
-            "yrTerm1Standard.partialUpfront": "4.680",
-            "yrTerm3Convertible.allUpfront": "3.832",
-            "yrTerm3Convertible.noUpfront": "4.223",
-            "yrTerm3Convertible.partialUpfront": "3.910",
-            "yrTerm3Standard.allUpfront": "3.196",
-            "yrTerm3Standard.noUpfront": "3.672",
-            "yrTerm3Standard.partialUpfront": "3.400"
-          }
-        },
-        "mswin": {
-          "ondemand": "8.672",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "6.058",
-            "yrTerm1Standard.noUpfront": "6.386",
-            "yrTerm1Standard.partialUpfront": "6.152",
-            "yrTerm3Convertible.allUpfront": "5.304",
-            "yrTerm3Convertible.noUpfront": "5.695",
-            "yrTerm3Convertible.partialUpfront": "5.382",
-            "yrTerm3Standard.allUpfront": "4.668",
-            "yrTerm3Standard.noUpfront": "5.144",
-            "yrTerm3Standard.partialUpfront": "4.872"
-          }
-        }
-      }
-    },
-    "storage": null,
-    "vCPU": 32,
-    "vpc": {
-      "ips_per_eni": 30,
-      "max_enis": 8
-    },
-    "vpc_only": true
-  },
-  {
-    "ECU": 188.0,
-    "FPGA": 0,
-    "GPU": "16",
-    "arch": [
-      "x86_64"
-    ],
-    "base_performance": null,
-    "burst_minutes": null,
-    "ebs_iops": 65000.0,
-    "ebs_max_bandwidth": 10000.0,
-    "ebs_optimized": true,
-    "ebs_throughput": 1250.0,
-    "enhanced_networking": true,
-    "family": "Accelerated computing",
-    "generation": "current",
-    "instance_type": "p2.16xlarge",
-    "ipv6_support": true,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
-    "memory": 732.0,
-    "network_performance": "20 Gigabit",
-    "placement_group_support": true,
-    "pretty_name": "General Purpose GPU 16xlarge",
-    "pricing": {
-      "ap-northeast-1": {
-        "linux": {
-          "ondemand": "24.672",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "16.132",
-            "yrTerm1Standard.noUpfront": "17.284",
-            "yrTerm1Standard.partialUpfront": "16.460",
-            "yrTerm3Convertible.allUpfront": "13.719",
-            "yrTerm3Convertible.noUpfront": "15.119",
-            "yrTerm3Convertible.partialUpfront": "13.998",
-            "yrTerm3Standard.allUpfront": "11.442",
-            "yrTerm3Standard.noUpfront": "13.147",
-            "yrTerm3Standard.partialUpfront": "12.172"
-          }
-        },
-        "mswin": {
-          "ondemand": "27.616",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "19.076",
-            "yrTerm1Standard.noUpfront": "20.228",
-            "yrTerm1Standard.partialUpfront": "19.404",
-            "yrTerm3Convertible.allUpfront": "16.663",
-            "yrTerm3Convertible.noUpfront": "18.063",
-            "yrTerm3Convertible.partialUpfront": "16.942",
-            "yrTerm3Standard.allUpfront": "14.386",
-            "yrTerm3Standard.noUpfront": "16.091",
-            "yrTerm3Standard.partialUpfront": "15.116"
-          }
-        }
-      },
-      "ap-northeast-2": {
-        "linux": {
-          "ondemand": "23.44",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "15.324",
-            "yrTerm1Standard.noUpfront": "16.430",
-            "yrTerm1Standard.partialUpfront": "15.636",
-            "yrTerm3Convertible.allUpfront": "13.019",
-            "yrTerm3Convertible.noUpfront": "14.348",
-            "yrTerm3Convertible.partialUpfront": "13.284",
-            "yrTerm3Standard.allUpfront": "10.871",
-            "yrTerm3Standard.noUpfront": "12.476",
-            "yrTerm3Standard.partialUpfront": "11.564"
-          }
-        },
-        "mswin": {
-          "ondemand": "26.384",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "18.268",
-            "yrTerm1Standard.noUpfront": "19.374",
-            "yrTerm1Standard.partialUpfront": "18.580",
-            "yrTerm3Convertible.allUpfront": "15.963",
-            "yrTerm3Convertible.noUpfront": "17.292",
-            "yrTerm3Convertible.partialUpfront": "16.228",
-            "yrTerm3Standard.allUpfront": "13.815",
-            "yrTerm3Standard.noUpfront": "15.420",
-            "yrTerm3Standard.partialUpfront": "14.508"
-          }
-        }
-      },
-      "ap-southeast-2": {
-        "linux": {
-          "ondemand": "24.672",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "16.132",
-            "yrTerm1Standard.noUpfront": "17.284",
-            "yrTerm1Standard.partialUpfront": "16.460",
-            "yrTerm3Convertible.allUpfront": "13.719",
-            "yrTerm3Convertible.noUpfront": "15.119",
-            "yrTerm3Convertible.partialUpfront": "13.998",
-            "yrTerm3Standard.allUpfront": "11.442",
-            "yrTerm3Standard.noUpfront": "13.147",
-            "yrTerm3Standard.partialUpfront": "12.172"
-          }
-        },
-        "mswin": {
-          "ondemand": "27.616",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "19.076",
-            "yrTerm1Standard.noUpfront": "20.228",
-            "yrTerm1Standard.partialUpfront": "19.404",
-            "yrTerm3Convertible.allUpfront": "16.663",
-            "yrTerm3Convertible.noUpfront": "18.063",
-            "yrTerm3Convertible.partialUpfront": "16.942",
-            "yrTerm3Standard.allUpfront": "14.386",
-            "yrTerm3Standard.noUpfront": "16.091",
-            "yrTerm3Standard.partialUpfront": "15.116"
-          }
-        }
-      },
-      "eu-west-1": {
-        "linux": {
-          "ondemand": "15.552",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "9.941",
-            "yrTerm1Standard.noUpfront": "10.700",
-            "yrTerm1Standard.partialUpfront": "10.144",
-            "yrTerm3Convertible.allUpfront": "8.295",
-            "yrTerm3Convertible.noUpfront": "9.141",
-            "yrTerm3Convertible.partialUpfront": "8.464",
-            "yrTerm3Standard.allUpfront": "6.918",
-            "yrTerm3Standard.noUpfront": "7.949",
-            "yrTerm3Standard.partialUpfront": "7.360"
-          }
-        },
-        "mswin": {
-          "ondemand": "18.496",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "12.885",
-            "yrTerm1Standard.noUpfront": "13.644",
-            "yrTerm1Standard.partialUpfront": "13.088",
-            "yrTerm3Convertible.allUpfront": "11.239",
-            "yrTerm3Convertible.noUpfront": "12.085",
-            "yrTerm3Convertible.partialUpfront": "11.408",
-            "yrTerm3Standard.allUpfront": "9.862",
-            "yrTerm3Standard.noUpfront": "10.893",
-            "yrTerm3Standard.partialUpfront": "10.304"
-          }
-        }
-      },
-      "us-east-1": {
-        "linux": {
-          "ondemand": "14.4",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "9.173",
-            "yrTerm1Standard.noUpfront": "9.828",
-            "yrTerm1Standard.partialUpfront": "9.360",
-            "yrTerm3Convertible.allUpfront": "7.664",
-            "yrTerm3Convertible.noUpfront": "8.446",
-            "yrTerm3Convertible.partialUpfront": "7.820",
-            "yrTerm3Standard.allUpfront": "6.392",
-            "yrTerm3Standard.noUpfront": "7.344",
-            "yrTerm3Standard.partialUpfront": "6.800"
-          }
-        },
-        "mswin": {
-          "ondemand": "17.344",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "12.117",
-            "yrTerm1Standard.noUpfront": "12.772",
-            "yrTerm1Standard.partialUpfront": "12.304",
-            "yrTerm3Convertible.allUpfront": "10.608",
-            "yrTerm3Convertible.noUpfront": "11.390",
-            "yrTerm3Convertible.partialUpfront": "10.764",
-            "yrTerm3Standard.allUpfront": "9.336",
-            "yrTerm3Standard.noUpfront": "10.288",
-            "yrTerm3Standard.partialUpfront": "9.744"
-          }
-        }
-      },
-      "us-east-2": {
-        "linux": {
-          "ondemand": "14.4",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "9.173",
-            "yrTerm1Standard.noUpfront": "9.828",
-            "yrTerm1Standard.partialUpfront": "9.360",
-            "yrTerm3Convertible.allUpfront": "7.664",
-            "yrTerm3Convertible.noUpfront": "8.446",
-            "yrTerm3Convertible.partialUpfront": "7.820",
-            "yrTerm3Standard.allUpfront": "6.392",
-            "yrTerm3Standard.noUpfront": "7.344",
-            "yrTerm3Standard.partialUpfront": "6.800"
-          }
-        },
-        "mswin": {
-          "ondemand": "17.344",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "12.117",
-            "yrTerm1Standard.noUpfront": "12.772",
-            "yrTerm1Standard.partialUpfront": "12.304",
-            "yrTerm3Convertible.allUpfront": "10.608",
-            "yrTerm3Convertible.noUpfront": "11.390",
-            "yrTerm3Convertible.partialUpfront": "10.764",
-            "yrTerm3Standard.allUpfront": "9.336",
-            "yrTerm3Standard.noUpfront": "10.288",
-            "yrTerm3Standard.partialUpfront": "9.744"
-          }
-        }
-      },
-      "us-gov-west-1": {
-        "linux": {
-          "ondemand": "17.28",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "11.007",
-            "yrTerm1Standard.noUpfront": "11.794",
-            "yrTerm1Standard.partialUpfront": "11.232",
-            "yrTerm3Convertible.allUpfront": "9.196",
-            "yrTerm3Convertible.noUpfront": "10.135",
-            "yrTerm3Convertible.partialUpfront": "9.384",
-            "yrTerm3Standard.allUpfront": "7.670",
-            "yrTerm3Standard.noUpfront": "8.813",
-            "yrTerm3Standard.partialUpfront": "8.160"
-          }
-        },
-        "mswin": {
-          "ondemand": "20.224",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "13.951",
-            "yrTerm1Standard.noUpfront": "14.738",
-            "yrTerm1Standard.partialUpfront": "14.176",
-            "yrTerm3Convertible.allUpfront": "12.140",
-            "yrTerm3Convertible.noUpfront": "13.079",
-            "yrTerm3Convertible.partialUpfront": "12.328",
-            "yrTerm3Standard.allUpfront": "10.614",
-            "yrTerm3Standard.noUpfront": "11.757",
-            "yrTerm3Standard.partialUpfront": "11.104"
-          }
-        }
-      },
-      "us-west-2": {
-        "linux": {
-          "ondemand": "14.4",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "9.173",
-            "yrTerm1Standard.noUpfront": "9.828",
-            "yrTerm1Standard.partialUpfront": "9.360",
-            "yrTerm3Convertible.allUpfront": "7.664",
-            "yrTerm3Convertible.noUpfront": "8.446",
-            "yrTerm3Convertible.partialUpfront": "7.820",
-            "yrTerm3Standard.allUpfront": "6.392",
-            "yrTerm3Standard.noUpfront": "7.344",
-            "yrTerm3Standard.partialUpfront": "6.800"
-          }
-        },
-        "mswin": {
-          "ondemand": "17.344",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "12.117",
-            "yrTerm1Standard.noUpfront": "12.772",
-            "yrTerm1Standard.partialUpfront": "12.304",
-            "yrTerm3Convertible.allUpfront": "10.608",
-            "yrTerm3Convertible.noUpfront": "11.390",
-            "yrTerm3Convertible.partialUpfront": "10.764",
-            "yrTerm3Standard.allUpfront": "9.336",
-            "yrTerm3Standard.noUpfront": "10.288",
-            "yrTerm3Standard.partialUpfront": "9.744"
-          }
-        }
-      }
-    },
-    "storage": null,
-    "vCPU": 64,
-    "vpc": {
-      "ips_per_eni": 30,
-      "max_enis": 8
-    },
-    "vpc_only": true
-  },
-  {
-    "ECU": 26.0,
-    "FPGA": 0,
-    "GPU": "1",
-    "arch": [
-      "x86_64"
-    ],
-    "base_performance": null,
-    "burst_minutes": null,
-    "ebs_iops": 8000.0,
-    "ebs_max_bandwidth": 1000.0,
-    "ebs_optimized": true,
-    "ebs_throughput": 125.0,
-    "enhanced_networking": false,
-    "family": "Accelerated computing",
-    "generation": "current",
-    "instance_type": "g2.2xlarge",
-    "ipv6_support": false,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
-    "memory": 15.0,
-    "network_performance": "High",
-    "placement_group_support": true,
-    "pretty_name": "G2 Double Extra Large",
-    "pricing": {
-      "ap-northeast-1": {
-        "linux": {
-          "ondemand": "0.898",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.587",
-            "yrTerm1Standard.noUpfront": "0.678",
-            "yrTerm1Standard.partialUpfront": "0.599",
-            "yrTerm3Convertible.allUpfront": "0.528",
-            "yrTerm3Convertible.noUpfront": "0.610",
-            "yrTerm3Convertible.partialUpfront": "0.539",
-            "yrTerm3Standard.allUpfront": "0.417",
-            "yrTerm3Standard.partialUpfront": "0.443"
-          }
-        },
-        "mswin": {
-          "ondemand": "1.01",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.696",
-            "yrTerm1Standard.noUpfront": "0.831",
-            "yrTerm1Standard.partialUpfront": "0.710",
-            "yrTerm3Convertible.allUpfront": "0.637",
-            "yrTerm3Convertible.noUpfront": "0.763",
-            "yrTerm3Convertible.partialUpfront": "0.650",
-            "yrTerm3Standard.allUpfront": "0.521",
-            "yrTerm3Standard.partialUpfront": "0.555"
-          }
-        },
-        "mswinSQL": {
-          "ondemand": "3.913",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "3.203",
-            "yrTerm1Standard.noUpfront": "3.824",
-            "yrTerm1Standard.partialUpfront": "3.268",
-            "yrTerm3Convertible.allUpfront": "3.144",
-            "yrTerm3Convertible.noUpfront": "3.756",
-            "yrTerm3Convertible.partialUpfront": "3.208",
-            "yrTerm3Standard.allUpfront": "2.726",
-            "yrTerm3Standard.partialUpfront": "2.900"
-          }
-        },
-        "mswinSQLWeb": {
-          "ondemand": "1.19",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.826",
-            "yrTerm1Standard.noUpfront": "0.986",
-            "yrTerm1Standard.partialUpfront": "0.843",
-            "yrTerm3Convertible.allUpfront": "0.767",
-            "yrTerm3Convertible.noUpfront": "0.918",
-            "yrTerm3Convertible.partialUpfront": "0.783",
-            "yrTerm3Standard.allUpfront": "0.587",
-            "yrTerm3Standard.partialUpfront": "0.625"
-          }
-        }
-      },
-      "ap-northeast-2": {
-        "ebs": "0.05"
-      },
-      "ap-southeast-1": {
-        "ebs": "0.05",
-        "linux": {
-          "ondemand": "1",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.702",
-            "yrTerm1Standard.noUpfront": "0.772",
-            "yrTerm1Standard.partialUpfront": "0.716",
-            "yrTerm3Convertible.allUpfront": "0.632",
-            "yrTerm3Convertible.noUpfront": "0.695",
-            "yrTerm3Convertible.partialUpfront": "0.645",
-            "yrTerm3Standard.allUpfront": "0.464",
-            "yrTerm3Standard.partialUpfront": "0.494"
-          }
-        },
-        "mswin": {
-          "ondemand": "1.16",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.868",
-            "yrTerm1Standard.noUpfront": "1.036",
-            "yrTerm1Standard.partialUpfront": "0.886",
-            "yrTerm3Convertible.allUpfront": "0.798",
-            "yrTerm3Convertible.noUpfront": "0.959",
-            "yrTerm3Convertible.partialUpfront": "0.814",
-            "yrTerm3Standard.allUpfront": "0.574",
-            "yrTerm3Standard.partialUpfront": "0.611"
-          }
-        },
-        "mswinSQL": {
-          "ondemand": "4.166",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "3.933",
-            "yrTerm1Standard.noUpfront": "4.064",
-            "yrTerm1Standard.partialUpfront": "4.013",
-            "yrTerm3Convertible.allUpfront": "3.863",
-            "yrTerm3Convertible.noUpfront": "3.987",
-            "yrTerm3Convertible.partialUpfront": "3.942",
-            "yrTerm3Standard.allUpfront": "2.889",
-            "yrTerm3Standard.partialUpfront": "3.074"
-          }
-        },
-        "mswinSQLWeb": {
-          "ondemand": "1.307",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.974",
-            "yrTerm1Standard.noUpfront": "1.162",
-            "yrTerm1Standard.partialUpfront": "0.993",
-            "yrTerm3Convertible.allUpfront": "0.903",
-            "yrTerm3Convertible.noUpfront": "1.085",
-            "yrTerm3Convertible.partialUpfront": "0.922",
-            "yrTerm3Standard.allUpfront": "0.644",
-            "yrTerm3Standard.partialUpfront": "0.685"
-          }
-        }
-      },
-      "ap-southeast-2": {
-        "linux": {
-          "ondemand": "0.898",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.587",
-            "yrTerm1Standard.noUpfront": "0.678",
-            "yrTerm1Standard.partialUpfront": "0.599",
-            "yrTerm3Convertible.allUpfront": "0.528",
-            "yrTerm3Convertible.noUpfront": "0.610",
-            "yrTerm3Convertible.partialUpfront": "0.539",
-            "yrTerm3Standard.allUpfront": "0.417",
-            "yrTerm3Standard.partialUpfront": "0.443"
-          }
-        },
-        "mswin": {
-          "ondemand": "1.058",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.741",
-            "yrTerm1Standard.noUpfront": "0.885",
-            "yrTerm1Standard.partialUpfront": "0.756",
-            "yrTerm3Convertible.allUpfront": "0.683",
-            "yrTerm3Convertible.noUpfront": "0.817",
-            "yrTerm3Convertible.partialUpfront": "0.697",
-            "yrTerm3Standard.allUpfront": "0.526",
-            "yrTerm3Standard.partialUpfront": "0.560"
-          }
-        },
-        "mswinSQL": {
-          "ondemand": "4.064",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "3.882",
-            "yrTerm1Standard.noUpfront": "3.996",
-            "yrTerm1Standard.partialUpfront": "3.961",
-            "yrTerm3Convertible.allUpfront": "3.824",
-            "yrTerm3Convertible.noUpfront": "3.928",
-            "yrTerm3Convertible.partialUpfront": "3.902",
-            "yrTerm3Standard.allUpfront": "2.842",
-            "yrTerm3Standard.partialUpfront": "3.023"
-          }
-        },
-        "mswinSQLWeb": {
-          "ondemand": "1.205",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.839",
-            "yrTerm1Standard.noUpfront": "1.002",
-            "yrTerm1Standard.partialUpfront": "0.856",
-            "yrTerm3Convertible.allUpfront": "0.781",
-            "yrTerm3Convertible.noUpfront": "0.934",
-            "yrTerm3Convertible.partialUpfront": "0.797",
-            "yrTerm3Standard.allUpfront": "0.596",
-            "yrTerm3Standard.partialUpfront": "0.634"
-          }
-        }
-      },
-      "eu-central-1": {
-        "ebs": "0.05",
-        "linux": {
-          "ondemand": "0.772",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.474",
-            "yrTerm1Standard.noUpfront": "0.565",
-            "yrTerm1Standard.partialUpfront": "0.484",
-            "yrTerm3Convertible.allUpfront": "0.426",
-            "yrTerm3Convertible.noUpfront": "0.509",
-            "yrTerm3Convertible.partialUpfront": "0.435",
-            "yrTerm3Standard.allUpfront": "0.336",
-            "yrTerm3Standard.partialUpfront": "0.357"
-          }
-        },
-        "mswin": {
-          "ondemand": "0.906",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.543",
-            "yrTerm1Standard.noUpfront": "0.649",
-            "yrTerm1Standard.partialUpfront": "0.554",
-            "yrTerm3Convertible.allUpfront": "0.496",
-            "yrTerm3Convertible.noUpfront": "0.593",
-            "yrTerm3Convertible.partialUpfront": "0.506",
-            "yrTerm3Standard.allUpfront": "0.402",
-            "yrTerm3Standard.partialUpfront": "0.428"
-          }
-        }
-      },
-      "eu-west-1": {
-        "ebs": "0.05",
-        "linux": {
-          "ondemand": "0.702",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.431",
-            "yrTerm1Standard.noUpfront": "0.514",
-            "yrTerm1Standard.partialUpfront": "0.439",
-            "yrTerm3Convertible.allUpfront": "0.388",
-            "yrTerm3Convertible.noUpfront": "0.463",
-            "yrTerm3Convertible.partialUpfront": "0.395",
-            "yrTerm3Standard.allUpfront": "0.305",
-            "yrTerm3Standard.partialUpfront": "0.325"
-          }
-        },
-        "mswin": {
-          "ondemand": "0.767",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.512",
-            "yrTerm1Standard.noUpfront": "0.611",
-            "yrTerm1Standard.partialUpfront": "0.523",
-            "yrTerm3Convertible.allUpfront": "0.469",
-            "yrTerm3Convertible.noUpfront": "0.560",
-            "yrTerm3Convertible.partialUpfront": "0.479",
-            "yrTerm3Standard.allUpfront": "0.389",
-            "yrTerm3Standard.partialUpfront": "0.414"
-          }
-        },
-        "mswinSQL": {
-          "ondemand": "3.816",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "3.144",
-            "yrTerm1Standard.noUpfront": "3.754",
-            "yrTerm1Standard.partialUpfront": "3.208",
-            "yrTerm3Convertible.allUpfront": "3.101",
-            "yrTerm3Convertible.noUpfront": "3.703",
-            "yrTerm3Convertible.partialUpfront": "3.164",
-            "yrTerm3Standard.allUpfront": "2.707",
-            "yrTerm3Standard.partialUpfront": "2.880"
-          }
-        },
-        "mswinSQLWeb": {
-          "ondemand": "0.957",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.649",
-            "yrTerm1Standard.noUpfront": "0.775",
-            "yrTerm1Standard.partialUpfront": "0.663",
-            "yrTerm3Convertible.allUpfront": "0.606",
-            "yrTerm3Convertible.noUpfront": "0.724",
-            "yrTerm3Convertible.partialUpfront": "0.619",
-            "yrTerm3Standard.allUpfront": "0.461",
-            "yrTerm3Standard.partialUpfront": "0.490"
-          }
-        }
-      },
-      "us-east-1": {
-        "ebs": "0.05",
-        "linux": {
-          "ondemand": "0.65",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.397",
-            "yrTerm1Standard.noUpfront": "0.474",
-            "yrTerm1Standard.partialUpfront": "0.405",
-            "yrTerm3Convertible.allUpfront": "0.357",
-            "yrTerm3Convertible.noUpfront": "0.427",
-            "yrTerm3Convertible.partialUpfront": "0.365",
-            "yrTerm3Standard.allUpfront": "0.282",
-            "yrTerm3Standard.partialUpfront": "0.300"
-          }
-        },
-        "mswin": {
-          "ondemand": "0.767",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.512",
-            "yrTerm1Standard.noUpfront": "0.611",
-            "yrTerm1Standard.partialUpfront": "0.523",
-            "yrTerm3Convertible.allUpfront": "0.472",
-            "yrTerm3Convertible.noUpfront": "0.564",
-            "yrTerm3Convertible.partialUpfront": "0.482",
-            "yrTerm3Standard.allUpfront": "0.392",
-            "yrTerm3Standard.partialUpfront": "0.417"
-          }
-        },
-        "mswinSQL": {
-          "ondemand": "3.816",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "3.144",
-            "yrTerm1Standard.noUpfront": "3.754",
-            "yrTerm1Standard.partialUpfront": "3.208",
-            "yrTerm3Convertible.allUpfront": "3.104",
-            "yrTerm3Convertible.noUpfront": "3.707",
-            "yrTerm3Convertible.partialUpfront": "3.168",
-            "yrTerm3Standard.allUpfront": "2.707",
-            "yrTerm3Standard.partialUpfront": "2.880"
-          }
-        },
-        "mswinSQLWeb": {
-          "ondemand": "0.957",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.649",
-            "yrTerm1Standard.noUpfront": "0.775",
-            "yrTerm1Standard.partialUpfront": "0.663",
-            "yrTerm3Convertible.allUpfront": "0.610",
-            "yrTerm3Convertible.noUpfront": "0.728",
-            "yrTerm3Convertible.partialUpfront": "0.622",
-            "yrTerm3Standard.allUpfront": "0.461",
-            "yrTerm3Standard.partialUpfront": "0.490"
-          }
-        }
-      },
-      "us-west-1": {
-        "ebs": "0.05",
-        "linux": {
-          "ondemand": "0.702",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.431",
-            "yrTerm1Standard.noUpfront": "0.514",
-            "yrTerm1Standard.partialUpfront": "0.439",
-            "yrTerm3Convertible.allUpfront": "0.388",
-            "yrTerm3Convertible.noUpfront": "0.463",
-            "yrTerm3Convertible.partialUpfront": "0.395",
-            "yrTerm3Standard.allUpfront": "0.305",
-            "yrTerm3Standard.partialUpfront": "0.325"
-          }
-        },
-        "mswin": {
-          "ondemand": "0.819",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.545",
-            "yrTerm1Standard.noUpfront": "0.651",
-            "yrTerm1Standard.partialUpfront": "0.556",
-            "yrTerm3Convertible.allUpfront": "0.502",
-            "yrTerm3Convertible.noUpfront": "0.600",
-            "yrTerm3Convertible.partialUpfront": "0.512",
-            "yrTerm3Standard.allUpfront": "0.416",
-            "yrTerm3Standard.partialUpfront": "0.442"
-          }
-        },
-        "mswinSQL": {
-          "ondemand": "3.868",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "3.177",
-            "yrTerm1Standard.noUpfront": "3.793",
-            "yrTerm1Standard.partialUpfront": "3.242",
-            "yrTerm3Convertible.allUpfront": "3.134",
-            "yrTerm3Convertible.noUpfront": "3.742",
-            "yrTerm3Convertible.partialUpfront": "3.198",
-            "yrTerm3Standard.allUpfront": "2.730",
-            "yrTerm3Standard.partialUpfront": "2.904"
-          }
-        },
-        "mswinSQLWeb": {
-          "ondemand": "1.009",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.683",
-            "yrTerm1Standard.noUpfront": "0.816",
-            "yrTerm1Standard.partialUpfront": "0.697",
-            "yrTerm3Convertible.allUpfront": "0.640",
-            "yrTerm3Convertible.noUpfront": "0.765",
-            "yrTerm3Convertible.partialUpfront": "0.653",
-            "yrTerm3Standard.allUpfront": "0.485",
-            "yrTerm3Standard.partialUpfront": "0.516"
-          }
-        }
-      },
-      "us-west-2": {
-        "ebs": "0.05",
-        "linux": {
-          "ondemand": "0.65",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.397",
-            "yrTerm1Standard.noUpfront": "0.474",
-            "yrTerm1Standard.partialUpfront": "0.405",
-            "yrTerm3Convertible.allUpfront": "0.357",
-            "yrTerm3Convertible.noUpfront": "0.427",
-            "yrTerm3Convertible.partialUpfront": "0.365",
-            "yrTerm3Standard.allUpfront": "0.282",
-            "yrTerm3Standard.partialUpfront": "0.300"
-          }
-        },
-        "mswin": {
-          "ondemand": "0.767",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.512",
-            "yrTerm1Standard.noUpfront": "0.611",
-            "yrTerm1Standard.partialUpfront": "0.523",
-            "yrTerm3Convertible.allUpfront": "0.472",
-            "yrTerm3Convertible.noUpfront": "0.564",
-            "yrTerm3Convertible.partialUpfront": "0.482",
-            "yrTerm3Standard.allUpfront": "0.392",
-            "yrTerm3Standard.partialUpfront": "0.417"
-          }
-        },
-        "mswinSQL": {
-          "ondemand": "3.816",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "3.144",
-            "yrTerm1Standard.noUpfront": "3.754",
-            "yrTerm1Standard.partialUpfront": "3.208",
-            "yrTerm3Convertible.allUpfront": "3.104",
-            "yrTerm3Convertible.noUpfront": "3.707",
-            "yrTerm3Convertible.partialUpfront": "3.168",
-            "yrTerm3Standard.allUpfront": "2.707",
-            "yrTerm3Standard.partialUpfront": "2.880"
-          }
-        },
-        "mswinSQLWeb": {
-          "ondemand": "0.957",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "0.649",
-            "yrTerm1Standard.noUpfront": "0.775",
-            "yrTerm1Standard.partialUpfront": "0.663",
-            "yrTerm3Convertible.allUpfront": "0.610",
-            "yrTerm3Convertible.noUpfront": "0.728",
-            "yrTerm3Convertible.partialUpfront": "0.622",
-            "yrTerm3Standard.allUpfront": "0.461",
-            "yrTerm3Standard.partialUpfront": "0.490"
-          }
-        }
-      }
-    },
-    "storage": {
-      "devices": 1,
-      "includes_swap_partition": false,
-      "nvme_ssd": false,
-      "size": 60,
-      "ssd": true,
-      "storage_needs_initialization": true,
-      "trim_support": false
-    },
-    "vCPU": 8,
-    "vpc": {
-      "ips_per_eni": 15,
-      "max_enis": 4
-    },
-    "vpc_only": false
-  },
-  {
-    "ECU": 104.0,
-    "FPGA": 0,
-    "GPU": "4",
-    "arch": [
-      "x86_64"
-    ],
-    "base_performance": null,
-    "burst_minutes": null,
-    "ebs_iops": 0,
-    "ebs_max_bandwidth": 0,
-    "ebs_optimized": false,
-    "ebs_throughput": 0,
-    "enhanced_networking": false,
-    "family": "Accelerated computing",
-    "generation": "current",
-    "instance_type": "g2.8xlarge",
-    "ipv6_support": false,
-    "linux_virtualization_types": [
-      "HVM"
-    ],
-    "memory": 60.0,
-    "network_performance": "High",
-    "placement_group_support": true,
-    "pretty_name": "G2 Eight Extra Large",
-    "pricing": {
-      "ap-northeast-1": {
-        "linux": {
-          "ondemand": "3.592",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "2.347",
-            "yrTerm1Standard.noUpfront": "2.712",
-            "yrTerm1Standard.partialUpfront": "2.395",
-            "yrTerm3Convertible.allUpfront": "2.112",
-            "yrTerm3Convertible.noUpfront": "2.441",
-            "yrTerm3Convertible.partialUpfront": "2.156",
-            "yrTerm3Standard.allUpfront": "1.667",
-            "yrTerm3Standard.partialUpfront": "1.773"
-          }
-        },
-        "mswin": {
-          "ondemand": "3.87",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "2.417",
-            "yrTerm1Standard.noUpfront": "2.795",
-            "yrTerm1Standard.partialUpfront": "2.466",
-            "yrTerm3Convertible.allUpfront": "2.182",
-            "yrTerm3Convertible.noUpfront": "2.524",
-            "yrTerm3Convertible.partialUpfront": "2.227",
-            "yrTerm3Standard.allUpfront": "1.732",
-            "yrTerm3Standard.partialUpfront": "1.844"
-          }
-        }
-      },
-      "ap-southeast-1": {
-        "linux": {
-          "ondemand": "4",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "2.808",
-            "yrTerm1Standard.noUpfront": "3.088",
-            "yrTerm1Standard.partialUpfront": "2.866",
-            "yrTerm3Convertible.allUpfront": "2.527",
-            "yrTerm3Convertible.noUpfront": "2.779",
-            "yrTerm3Convertible.partialUpfront": "2.579",
-            "yrTerm3Standard.allUpfront": "1.857",
-            "yrTerm3Standard.partialUpfront": "1.975"
-          }
-        },
-        "mswin": {
-          "ondemand": "4.278",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "2.878",
-            "yrTerm1Standard.noUpfront": "3.171",
-            "yrTerm1Standard.partialUpfront": "2.937",
-            "yrTerm3Convertible.allUpfront": "2.597",
-            "yrTerm3Convertible.noUpfront": "2.862",
-            "yrTerm3Convertible.partialUpfront": "2.650",
-            "yrTerm3Standard.allUpfront": "1.923",
-            "yrTerm3Standard.partialUpfront": "2.046"
-          }
-        }
-      },
-      "ap-southeast-2": {
-        "linux": {
-          "ondemand": "3.592",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "2.347",
-            "yrTerm1Standard.noUpfront": "2.712",
-            "yrTerm1Standard.partialUpfront": "2.395",
-            "yrTerm3Convertible.allUpfront": "2.112",
-            "yrTerm3Convertible.noUpfront": "2.441",
-            "yrTerm3Convertible.partialUpfront": "2.156",
-            "yrTerm3Standard.allUpfront": "1.667",
-            "yrTerm3Standard.partialUpfront": "1.773"
-          }
-        },
-        "mswin": {
-          "ondemand": "3.87",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "2.417",
-            "yrTerm1Standard.noUpfront": "2.795",
-            "yrTerm1Standard.partialUpfront": "2.466",
-            "yrTerm3Convertible.allUpfront": "2.182",
-            "yrTerm3Convertible.noUpfront": "2.524",
-            "yrTerm3Convertible.partialUpfront": "2.227",
-            "yrTerm3Standard.allUpfront": "1.732",
-            "yrTerm3Standard.partialUpfront": "1.844"
-          }
-        }
-      },
-      "eu-central-1": {
-        "linux": {
-          "ondemand": "3.088",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.895",
-            "yrTerm1Standard.noUpfront": "2.260",
-            "yrTerm1Standard.partialUpfront": "1.935",
-            "yrTerm3Convertible.allUpfront": "1.705",
-            "yrTerm3Convertible.noUpfront": "2.034",
-            "yrTerm3Convertible.partialUpfront": "1.741",
-            "yrTerm3Standard.allUpfront": "1.342",
-            "yrTerm3Standard.partialUpfront": "1.426"
-          }
-        },
-        "mswin": {
-          "ondemand": "3.366",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.966",
-            "yrTerm1Standard.noUpfront": "2.347",
-            "yrTerm1Standard.partialUpfront": "2.006",
-            "yrTerm3Convertible.allUpfront": "1.776",
-            "yrTerm3Convertible.noUpfront": "2.121",
-            "yrTerm3Convertible.partialUpfront": "1.812",
-            "yrTerm3Standard.allUpfront": "1.407",
-            "yrTerm3Standard.partialUpfront": "1.498"
-          }
-        }
-      },
-      "eu-west-1": {
-        "linux": {
-          "ondemand": "2.808",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.722",
-            "yrTerm1Standard.noUpfront": "2.056",
-            "yrTerm1Standard.partialUpfront": "1.758",
-            "yrTerm3Convertible.allUpfront": "1.550",
-            "yrTerm3Convertible.noUpfront": "1.850",
-            "yrTerm3Convertible.partialUpfront": "1.582",
-            "yrTerm3Standard.allUpfront": "1.220",
-            "yrTerm3Standard.partialUpfront": "1.298"
-          }
-        },
-        "mswin": {
-          "ondemand": "3.086",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.792",
-            "yrTerm1Standard.noUpfront": "2.139",
-            "yrTerm1Standard.partialUpfront": "1.829",
-            "yrTerm3Convertible.allUpfront": "1.620",
-            "yrTerm3Convertible.noUpfront": "1.934",
-            "yrTerm3Convertible.partialUpfront": "1.653",
-            "yrTerm3Standard.allUpfront": "1.286",
-            "yrTerm3Standard.partialUpfront": "1.369"
-          }
-        }
-      },
-      "us-east-1": {
-        "linux": {
-          "ondemand": "2.6",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.588",
-            "yrTerm1Standard.noUpfront": "1.896",
-            "yrTerm1Standard.partialUpfront": "1.621",
-            "yrTerm3Convertible.allUpfront": "1.429",
-            "yrTerm3Convertible.noUpfront": "1.706",
-            "yrTerm3Convertible.partialUpfront": "1.459",
-            "yrTerm3Standard.allUpfront": "1.128",
-            "yrTerm3Standard.partialUpfront": "1.200"
-          }
-        },
-        "mswin": {
-          "ondemand": "2.878",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.658",
-            "yrTerm1Standard.noUpfront": "1.979",
-            "yrTerm1Standard.partialUpfront": "1.692",
-            "yrTerm3Convertible.allUpfront": "1.499",
-            "yrTerm3Convertible.noUpfront": "1.790",
-            "yrTerm3Convertible.partialUpfront": "1.530",
-            "yrTerm3Standard.allUpfront": "1.194",
-            "yrTerm3Standard.partialUpfront": "1.271"
-          }
-        }
-      },
-      "us-west-1": {
-        "linux": {
-          "ondemand": "2.808",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.722",
-            "yrTerm1Standard.noUpfront": "2.056",
-            "yrTerm1Standard.partialUpfront": "1.758",
-            "yrTerm3Convertible.allUpfront": "1.550",
-            "yrTerm3Convertible.noUpfront": "1.850",
-            "yrTerm3Convertible.partialUpfront": "1.582",
-            "yrTerm3Standard.allUpfront": "1.220",
-            "yrTerm3Standard.partialUpfront": "1.298"
-          }
-        },
-        "mswin": {
-          "ondemand": "3.086",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.792",
-            "yrTerm1Standard.noUpfront": "2.139",
-            "yrTerm1Standard.partialUpfront": "1.829",
-            "yrTerm3Convertible.allUpfront": "1.620",
-            "yrTerm3Convertible.noUpfront": "1.934",
-            "yrTerm3Convertible.partialUpfront": "1.653",
-            "yrTerm3Standard.allUpfront": "1.286",
-            "yrTerm3Standard.partialUpfront": "1.369"
-          }
-        }
-      },
-      "us-west-2": {
-        "linux": {
-          "ondemand": "2.6",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.588",
-            "yrTerm1Standard.noUpfront": "1.896",
-            "yrTerm1Standard.partialUpfront": "1.621",
-            "yrTerm3Convertible.allUpfront": "1.429",
-            "yrTerm3Convertible.noUpfront": "1.706",
-            "yrTerm3Convertible.partialUpfront": "1.459",
-            "yrTerm3Standard.allUpfront": "1.128",
-            "yrTerm3Standard.partialUpfront": "1.200"
-          }
-        },
-        "mswin": {
-          "ondemand": "2.878",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.658",
-            "yrTerm1Standard.noUpfront": "1.979",
-            "yrTerm1Standard.partialUpfront": "1.692",
-            "yrTerm3Convertible.allUpfront": "1.499",
-            "yrTerm3Convertible.noUpfront": "1.790",
-            "yrTerm3Convertible.partialUpfront": "1.530",
-            "yrTerm3Standard.allUpfront": "1.194",
-            "yrTerm3Standard.partialUpfront": "1.271"
-          }
-        }
-      }
-    },
-    "storage": {
-      "devices": 2,
-      "includes_swap_partition": false,
-      "nvme_ssd": false,
-      "size": 120,
-      "ssd": true,
-      "storage_needs_initialization": true,
-      "trim_support": false
-    },
-    "vCPU": 32,
-    "vpc": {
-      "ips_per_eni": 30,
-      "max_enis": 8
-    },
-    "vpc_only": false
-  },
-  {
     "ECU": 174.5,
     "FPGA": 0,
     "GPU": 0,
@@ -30066,6 +29237,64 @@
           }
         }
       },
+      "sa-east-1": {
+        "linux": {
+          "ondemand": "13.005",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "7.480",
+            "yrTerm1Standard.noUpfront": "8.014",
+            "yrTerm1Standard.partialUpfront": "7.632",
+            "yrTerm3Convertible.allUpfront": "4.363",
+            "yrTerm3Convertible.noUpfront": "4.808",
+            "yrTerm3Convertible.partialUpfront": "4.452",
+            "yrTerm3Standard.allUpfront": "3.639",
+            "yrTerm3Standard.noUpfront": "4.181",
+            "yrTerm3Standard.partialUpfront": "3.872"
+          }
+        },
+        "mswin": {
+          "ondemand": "15.949",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "10.424",
+            "yrTerm1Standard.noUpfront": "10.958",
+            "yrTerm1Standard.partialUpfront": "10.576",
+            "yrTerm3Convertible.allUpfront": "7.307",
+            "yrTerm3Convertible.noUpfront": "7.752",
+            "yrTerm3Convertible.partialUpfront": "7.396",
+            "yrTerm3Standard.allUpfront": "6.583",
+            "yrTerm3Standard.noUpfront": "7.125",
+            "yrTerm3Standard.partialUpfront": "6.816"
+          }
+        },
+        "mswinSQL": {
+          "ondemand": "23.629",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "18.104",
+            "yrTerm1Standard.noUpfront": "18.638",
+            "yrTerm1Standard.partialUpfront": "18.256",
+            "yrTerm3Convertible.allUpfront": "14.987",
+            "yrTerm3Convertible.noUpfront": "15.432",
+            "yrTerm3Convertible.partialUpfront": "15.076",
+            "yrTerm3Standard.allUpfront": "14.263",
+            "yrTerm3Standard.noUpfront": "14.805",
+            "yrTerm3Standard.partialUpfront": "14.496"
+          }
+        },
+        "mswinSQLWeb": {
+          "ondemand": "17.077",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "11.552",
+            "yrTerm1Standard.noUpfront": "12.086",
+            "yrTerm1Standard.partialUpfront": "11.704",
+            "yrTerm3Convertible.allUpfront": "8.435",
+            "yrTerm3Convertible.noUpfront": "8.880",
+            "yrTerm3Convertible.partialUpfront": "8.524",
+            "yrTerm3Standard.allUpfront": "7.711",
+            "yrTerm3Standard.noUpfront": "8.253",
+            "yrTerm3Standard.partialUpfront": "7.944"
+          }
+        }
+      },
       "us-east-1": {
         "linux": {
           "ondemand": "6.669",
@@ -30318,7 +29547,7 @@
   },
   {
     "ECU": 349.0,
-    "FPGA": 0,
+    "FPGA": "128",
     "GPU": 0,
     "arch": [
       "x86_64"
@@ -30866,6 +30095,64 @@
           }
         }
       },
+      "sa-east-1": {
+        "linux": {
+          "ondemand": "26.01",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "14.960",
+            "yrTerm1Standard.noUpfront": "16.029",
+            "yrTerm1Standard.partialUpfront": "15.266",
+            "yrTerm3Convertible.allUpfront": "8.725",
+            "yrTerm3Convertible.noUpfront": "9.615",
+            "yrTerm3Convertible.partialUpfront": "8.904",
+            "yrTerm3Standard.allUpfront": "7.279",
+            "yrTerm3Standard.noUpfront": "8.363",
+            "yrTerm3Standard.partialUpfront": "7.744"
+          }
+        },
+        "mswin": {
+          "ondemand": "31.898",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "20.848",
+            "yrTerm1Standard.noUpfront": "21.917",
+            "yrTerm1Standard.partialUpfront": "21.154",
+            "yrTerm3Convertible.allUpfront": "14.613",
+            "yrTerm3Convertible.noUpfront": "15.503",
+            "yrTerm3Convertible.partialUpfront": "14.792",
+            "yrTerm3Standard.allUpfront": "13.167",
+            "yrTerm3Standard.noUpfront": "14.251",
+            "yrTerm3Standard.partialUpfront": "13.632"
+          }
+        },
+        "mswinSQL": {
+          "ondemand": "47.258",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "36.208",
+            "yrTerm1Standard.noUpfront": "37.277",
+            "yrTerm1Standard.partialUpfront": "36.514",
+            "yrTerm3Convertible.allUpfront": "29.973",
+            "yrTerm3Convertible.noUpfront": "30.863",
+            "yrTerm3Convertible.partialUpfront": "30.152",
+            "yrTerm3Standard.allUpfront": "28.527",
+            "yrTerm3Standard.noUpfront": "29.611",
+            "yrTerm3Standard.partialUpfront": "28.992"
+          }
+        },
+        "mswinSQLWeb": {
+          "ondemand": "34.154",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "23.104",
+            "yrTerm1Standard.noUpfront": "24.173",
+            "yrTerm1Standard.partialUpfront": "23.410",
+            "yrTerm3Convertible.allUpfront": "16.869",
+            "yrTerm3Convertible.noUpfront": "17.759",
+            "yrTerm3Convertible.partialUpfront": "17.048",
+            "yrTerm3Standard.allUpfront": "15.423",
+            "yrTerm3Standard.noUpfront": "16.507",
+            "yrTerm3Standard.partialUpfront": "15.888"
+          }
+        }
+      },
       "us-east-1": {
         "linux": {
           "ondemand": "13.338",
@@ -31118,8 +30405,8 @@
   },
   {
     "ECU": 7.0,
-    "FPGA": 0,
-    "GPU": 0,
+    "FPGA": "2",
+    "GPU": "2",
     "arch": [
       "x86_64"
     ],
@@ -31172,7 +30459,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.492",
+          "ondemand": "0.732",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.666",
             "yrTerm1Standard.noUpfront": "0.673",
@@ -31230,7 +30517,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.492",
+          "ondemand": "0.732",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.666",
             "yrTerm1Standard.noUpfront": "0.673",
@@ -31288,7 +30575,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.484",
+          "ondemand": "0.724",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.661",
             "yrTerm1Standard.noUpfront": "0.668",
@@ -31346,7 +30633,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.492",
+          "ondemand": "0.732",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.666",
             "yrTerm1Standard.noUpfront": "0.673",
@@ -31404,7 +30691,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.492",
+          "ondemand": "0.732",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.666",
             "yrTerm1Standard.noUpfront": "0.673",
@@ -31462,7 +30749,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.478",
+          "ondemand": "0.718",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.658",
             "yrTerm1Standard.noUpfront": "0.664",
@@ -31520,7 +30807,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.492",
+          "ondemand": "0.732",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.666",
             "yrTerm1Standard.noUpfront": "0.673",
@@ -31578,7 +30865,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.48",
+          "ondemand": "0.72",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.659",
             "yrTerm1Standard.noUpfront": "0.665",
@@ -31636,7 +30923,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.488",
+          "ondemand": "0.728",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.664",
             "yrTerm1Standard.noUpfront": "0.671",
@@ -31694,7 +30981,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.612",
+          "ondemand": "0.852",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.737",
             "yrTerm1Standard.noUpfront": "0.748",
@@ -31752,7 +31039,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.465",
+          "ondemand": "0.705",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.650",
             "yrTerm1Standard.noUpfront": "0.656",
@@ -31811,7 +31098,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.465",
+          "ondemand": "0.705",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.650",
             "yrTerm1Standard.noUpfront": "0.656",
@@ -31869,7 +31156,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.492",
+          "ondemand": "0.732",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.666",
             "yrTerm1Standard.noUpfront": "0.673",
@@ -31927,7 +31214,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.48",
+          "ondemand": "0.72",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.659",
             "yrTerm1Standard.noUpfront": "0.665",
@@ -31985,7 +31272,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "1.352",
+          "ondemand": "0.705",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.650",
             "yrTerm1Standard.noUpfront": "0.656",
@@ -32024,8 +31311,8 @@
   },
   {
     "ECU": 13.5,
-    "FPGA": 0,
-    "GPU": 0,
+    "FPGA": "4",
+    "GPU": "4",
     "arch": [
       "x86_64"
     ],
@@ -32891,7 +32178,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "1.577",
+          "ondemand": "0.93",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.821",
             "yrTerm1Standard.noUpfront": "0.832",
@@ -32930,8 +32217,8 @@
   },
   {
     "ECU": 27.0,
-    "FPGA": 0,
-    "GPU": 0,
+    "FPGA": "8",
+    "GPU": "8",
     "arch": [
       "x86_64"
     ],
@@ -33836,8 +33123,8 @@
   },
   {
     "ECU": 53.0,
-    "FPGA": 0,
-    "GPU": 0,
+    "FPGA": "16",
+    "GPU": "16",
     "arch": [
       "x86_64"
     ],
@@ -34587,7 +33874,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "1.949",
+          "ondemand": "3.936",
           "reserved": {
             "yrTerm1Standard.allUpfront": "3.409",
             "yrTerm1Standard.noUpfront": "3.462",
@@ -34703,7 +33990,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "1.843",
+          "ondemand": "3.72",
           "reserved": {
             "yrTerm1Standard.allUpfront": "3.283",
             "yrTerm1Standard.noUpfront": "3.328",
@@ -34742,8 +34029,8 @@
   },
   {
     "ECU": 99.0,
-    "FPGA": 0,
-    "GPU": 0,
+    "FPGA": "32",
+    "GPU": "32",
     "arch": [
       "x86_64"
     ],
@@ -35493,7 +34780,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "1.949",
+          "ondemand": "7.872",
           "reserved": {
             "yrTerm1Standard.allUpfront": "6.817",
             "yrTerm1Standard.noUpfront": "6.925",
@@ -35609,7 +34896,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "1.843",
+          "ondemand": "7.44",
           "reserved": {
             "yrTerm1Standard.allUpfront": "6.566",
             "yrTerm1Standard.noUpfront": "6.656",
@@ -35648,8 +34935,8 @@
   },
   {
     "ECU": 195.0,
-    "FPGA": 0,
-    "GPU": 0,
+    "FPGA": "64",
+    "GPU": "64",
     "arch": [
       "x86_64"
     ],
@@ -36515,7 +35802,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "1.904",
+          "ondemand": "14.88",
           "reserved": {
             "yrTerm1Standard.allUpfront": "13.133",
             "yrTerm1Standard.noUpfront": "13.312",
@@ -36554,8 +35841,8 @@
   },
   {
     "ECU": 6.5,
-    "FPGA": 0,
-    "GPU": 0,
+    "FPGA": "2",
+    "GPU": "2",
     "arch": [
       "x86_64"
     ],
@@ -37299,8 +36586,8 @@
   },
   {
     "ECU": 13.0,
-    "FPGA": 0,
-    "GPU": 0,
+    "FPGA": "4",
+    "GPU": "4",
     "arch": [
       "x86_64"
     ],
@@ -38057,8 +37344,8 @@
   },
   {
     "ECU": 26.0,
-    "FPGA": 0,
-    "GPU": 0,
+    "FPGA": "8",
+    "GPU": "8",
     "arch": [
       "x86_64"
     ],
@@ -38815,8 +38102,8 @@
   },
   {
     "ECU": 52.0,
-    "FPGA": 0,
-    "GPU": 0,
+    "FPGA": "16",
+    "GPU": "16",
     "arch": [
       "x86_64"
     ],
@@ -39573,8 +38860,8 @@
   },
   {
     "ECU": 104.0,
-    "FPGA": 0,
-    "GPU": 0,
+    "FPGA": "32",
+    "GPU": "32",
     "arch": [
       "x86_64"
     ],
@@ -40317,6 +39604,1558 @@
     "vpc_only": false
   },
   {
+    "ECU": 12.0,
+    "FPGA": 0,
+    "GPU": 0,
+    "arch": [
+      "x86_64"
+    ],
+    "base_performance": null,
+    "burst_minutes": null,
+    "ebs_iops": 6000.0,
+    "ebs_max_bandwidth": 750.0,
+    "ebs_optimized": true,
+    "ebs_throughput": 93.75,
+    "enhanced_networking": true,
+    "family": "Accelerated computing",
+    "generation": "current",
+    "instance_type": "p2.xlarge",
+    "ipv6_support": true,
+    "linux_virtualization_types": [
+      "HVM"
+    ],
+    "memory": 61.0,
+    "network_performance": "High",
+    "placement_group_support": true,
+    "pretty_name": "General Purpose GPU Extra Large",
+    "pricing": {
+      "ap-northeast-1": {
+        "linux": {
+          "ondemand": "1.542",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.008",
+            "yrTerm1Standard.noUpfront": "1.080",
+            "yrTerm1Standard.partialUpfront": "1.028",
+            "yrTerm3Convertible.allUpfront": "0.857",
+            "yrTerm3Convertible.noUpfront": "0.945",
+            "yrTerm3Convertible.partialUpfront": "0.874",
+            "yrTerm3Standard.allUpfront": "0.715",
+            "yrTerm3Standard.noUpfront": "0.822",
+            "yrTerm3Standard.partialUpfront": "0.760"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.726",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.192",
+            "yrTerm1Standard.noUpfront": "1.264",
+            "yrTerm1Standard.partialUpfront": "1.212",
+            "yrTerm3Convertible.allUpfront": "1.041",
+            "yrTerm3Convertible.noUpfront": "1.129",
+            "yrTerm3Convertible.partialUpfront": "1.058",
+            "yrTerm3Standard.allUpfront": "0.899",
+            "yrTerm3Standard.noUpfront": "1.006",
+            "yrTerm3Standard.partialUpfront": "0.944"
+          }
+        }
+      },
+      "ap-northeast-2": {
+        "linux": {
+          "ondemand": "1.465",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.958",
+            "yrTerm1Standard.noUpfront": "1.027",
+            "yrTerm1Standard.partialUpfront": "0.978",
+            "yrTerm3Convertible.allUpfront": "0.814",
+            "yrTerm3Convertible.noUpfront": "0.897",
+            "yrTerm3Convertible.partialUpfront": "0.830",
+            "yrTerm3Standard.allUpfront": "0.679",
+            "yrTerm3Standard.noUpfront": "0.780",
+            "yrTerm3Standard.partialUpfront": "0.722"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.649",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.142",
+            "yrTerm1Standard.noUpfront": "1.211",
+            "yrTerm1Standard.partialUpfront": "1.162",
+            "yrTerm3Convertible.allUpfront": "0.998",
+            "yrTerm3Convertible.noUpfront": "1.081",
+            "yrTerm3Convertible.partialUpfront": "1.014",
+            "yrTerm3Standard.allUpfront": "0.863",
+            "yrTerm3Standard.noUpfront": "0.964",
+            "yrTerm3Standard.partialUpfront": "0.906"
+          }
+        }
+      },
+      "ap-southeast-2": {
+        "linux": {
+          "ondemand": "1.542",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.008",
+            "yrTerm1Standard.noUpfront": "1.080",
+            "yrTerm1Standard.partialUpfront": "1.028",
+            "yrTerm3Convertible.allUpfront": "0.857",
+            "yrTerm3Convertible.noUpfront": "0.945",
+            "yrTerm3Convertible.partialUpfront": "0.874",
+            "yrTerm3Standard.allUpfront": "0.715",
+            "yrTerm3Standard.noUpfront": "0.822",
+            "yrTerm3Standard.partialUpfront": "0.760"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.726",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.192",
+            "yrTerm1Standard.noUpfront": "1.264",
+            "yrTerm1Standard.partialUpfront": "1.212",
+            "yrTerm3Convertible.allUpfront": "1.041",
+            "yrTerm3Convertible.noUpfront": "1.129",
+            "yrTerm3Convertible.partialUpfront": "1.058",
+            "yrTerm3Standard.allUpfront": "0.899",
+            "yrTerm3Standard.noUpfront": "1.006",
+            "yrTerm3Standard.partialUpfront": "0.944"
+          }
+        }
+      },
+      "eu-west-1": {
+        "linux": {
+          "ondemand": "0.972",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.621",
+            "yrTerm1Standard.noUpfront": "0.669",
+            "yrTerm1Standard.partialUpfront": "0.634",
+            "yrTerm3Convertible.allUpfront": "0.518",
+            "yrTerm3Convertible.noUpfront": "0.571",
+            "yrTerm3Convertible.partialUpfront": "0.530",
+            "yrTerm3Standard.allUpfront": "0.432",
+            "yrTerm3Standard.noUpfront": "0.497",
+            "yrTerm3Standard.partialUpfront": "0.460"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.156",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.805",
+            "yrTerm1Standard.noUpfront": "0.853",
+            "yrTerm1Standard.partialUpfront": "0.818",
+            "yrTerm3Convertible.allUpfront": "0.702",
+            "yrTerm3Convertible.noUpfront": "0.755",
+            "yrTerm3Convertible.partialUpfront": "0.714",
+            "yrTerm3Standard.allUpfront": "0.616",
+            "yrTerm3Standard.noUpfront": "0.681",
+            "yrTerm3Standard.partialUpfront": "0.644"
+          }
+        }
+      },
+      "us-east-1": {
+        "linux": {
+          "ondemand": "0.9",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.573",
+            "yrTerm1Standard.noUpfront": "0.614",
+            "yrTerm1Standard.partialUpfront": "0.585",
+            "yrTerm3Convertible.allUpfront": "0.479",
+            "yrTerm3Convertible.noUpfront": "0.528",
+            "yrTerm3Convertible.partialUpfront": "0.488",
+            "yrTerm3Standard.allUpfront": "0.399",
+            "yrTerm3Standard.noUpfront": "0.459",
+            "yrTerm3Standard.partialUpfront": "0.425"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.084",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.757",
+            "yrTerm1Standard.noUpfront": "0.798",
+            "yrTerm1Standard.partialUpfront": "0.769",
+            "yrTerm3Convertible.allUpfront": "0.663",
+            "yrTerm3Convertible.noUpfront": "0.712",
+            "yrTerm3Convertible.partialUpfront": "0.672",
+            "yrTerm3Standard.allUpfront": "0.584",
+            "yrTerm3Standard.noUpfront": "0.643",
+            "yrTerm3Standard.partialUpfront": "0.609"
+          }
+        }
+      },
+      "us-east-2": {
+        "linux": {
+          "ondemand": "0.9",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.573",
+            "yrTerm1Standard.noUpfront": "0.614",
+            "yrTerm1Standard.partialUpfront": "0.585",
+            "yrTerm3Convertible.allUpfront": "0.479",
+            "yrTerm3Convertible.noUpfront": "0.528",
+            "yrTerm3Convertible.partialUpfront": "0.488",
+            "yrTerm3Standard.allUpfront": "0.399",
+            "yrTerm3Standard.noUpfront": "0.459",
+            "yrTerm3Standard.partialUpfront": "0.425"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.084",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.757",
+            "yrTerm1Standard.noUpfront": "0.798",
+            "yrTerm1Standard.partialUpfront": "0.769",
+            "yrTerm3Convertible.allUpfront": "0.663",
+            "yrTerm3Convertible.noUpfront": "0.712",
+            "yrTerm3Convertible.partialUpfront": "0.672",
+            "yrTerm3Standard.allUpfront": "0.584",
+            "yrTerm3Standard.noUpfront": "0.643",
+            "yrTerm3Standard.partialUpfront": "0.609"
+          }
+        }
+      },
+      "us-gov-west-1": {
+        "linux": {
+          "ondemand": "1.08",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.688",
+            "yrTerm1Standard.noUpfront": "0.737",
+            "yrTerm1Standard.partialUpfront": "0.702",
+            "yrTerm3Convertible.allUpfront": "0.575",
+            "yrTerm3Convertible.noUpfront": "0.633",
+            "yrTerm3Convertible.partialUpfront": "0.586",
+            "yrTerm3Standard.allUpfront": "0.479",
+            "yrTerm3Standard.noUpfront": "0.551",
+            "yrTerm3Standard.partialUpfront": "0.510"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.264",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.872",
+            "yrTerm1Standard.noUpfront": "0.921",
+            "yrTerm1Standard.partialUpfront": "0.886",
+            "yrTerm3Convertible.allUpfront": "0.759",
+            "yrTerm3Convertible.noUpfront": "0.817",
+            "yrTerm3Convertible.partialUpfront": "0.770",
+            "yrTerm3Standard.allUpfront": "0.663",
+            "yrTerm3Standard.noUpfront": "0.735",
+            "yrTerm3Standard.partialUpfront": "0.694"
+          }
+        }
+      },
+      "us-west-2": {
+        "linux": {
+          "ondemand": "0.9",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.573",
+            "yrTerm1Standard.noUpfront": "0.614",
+            "yrTerm1Standard.partialUpfront": "0.585",
+            "yrTerm3Convertible.allUpfront": "0.479",
+            "yrTerm3Convertible.noUpfront": "0.528",
+            "yrTerm3Convertible.partialUpfront": "0.488",
+            "yrTerm3Standard.allUpfront": "0.399",
+            "yrTerm3Standard.noUpfront": "0.459",
+            "yrTerm3Standard.partialUpfront": "0.425"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.084",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.757",
+            "yrTerm1Standard.noUpfront": "0.798",
+            "yrTerm1Standard.partialUpfront": "0.769",
+            "yrTerm3Convertible.allUpfront": "0.663",
+            "yrTerm3Convertible.noUpfront": "0.712",
+            "yrTerm3Convertible.partialUpfront": "0.672",
+            "yrTerm3Standard.allUpfront": "0.584",
+            "yrTerm3Standard.noUpfront": "0.643",
+            "yrTerm3Standard.partialUpfront": "0.609"
+          }
+        }
+      }
+    },
+    "storage": null,
+    "vCPU": 4,
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
+    "vpc_only": true
+  },
+  {
+    "ECU": 94.0,
+    "FPGA": 0,
+    "GPU": 0,
+    "arch": [
+      "x86_64"
+    ],
+    "base_performance": null,
+    "burst_minutes": null,
+    "ebs_iops": 32500.0,
+    "ebs_max_bandwidth": 5000.0,
+    "ebs_optimized": true,
+    "ebs_throughput": 625.0,
+    "enhanced_networking": true,
+    "family": "Accelerated computing",
+    "generation": "current",
+    "instance_type": "p2.8xlarge",
+    "ipv6_support": true,
+    "linux_virtualization_types": [
+      "HVM"
+    ],
+    "memory": 488.0,
+    "network_performance": "10 Gigabit",
+    "placement_group_support": true,
+    "pretty_name": "General Purpose GPU Eight Extra Large",
+    "pricing": {
+      "ap-northeast-1": {
+        "linux": {
+          "ondemand": "12.336",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "8.066",
+            "yrTerm1Standard.noUpfront": "8.642",
+            "yrTerm1Standard.partialUpfront": "8.230",
+            "yrTerm3Convertible.allUpfront": "6.859",
+            "yrTerm3Convertible.noUpfront": "7.559",
+            "yrTerm3Convertible.partialUpfront": "7.000",
+            "yrTerm3Standard.allUpfront": "5.721",
+            "yrTerm3Standard.noUpfront": "6.573",
+            "yrTerm3Standard.partialUpfront": "6.086"
+          }
+        },
+        "mswin": {
+          "ondemand": "13.808",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "9.538",
+            "yrTerm1Standard.noUpfront": "10.114",
+            "yrTerm1Standard.partialUpfront": "9.702",
+            "yrTerm3Convertible.allUpfront": "8.331",
+            "yrTerm3Convertible.noUpfront": "9.031",
+            "yrTerm3Convertible.partialUpfront": "8.472",
+            "yrTerm3Standard.allUpfront": "7.193",
+            "yrTerm3Standard.noUpfront": "8.045",
+            "yrTerm3Standard.partialUpfront": "7.558"
+          }
+        }
+      },
+      "ap-northeast-2": {
+        "linux": {
+          "ondemand": "11.72",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "7.662",
+            "yrTerm1Standard.noUpfront": "8.215",
+            "yrTerm1Standard.partialUpfront": "7.818",
+            "yrTerm3Convertible.allUpfront": "6.510",
+            "yrTerm3Convertible.noUpfront": "7.174",
+            "yrTerm3Convertible.partialUpfront": "6.642",
+            "yrTerm3Standard.allUpfront": "5.435",
+            "yrTerm3Standard.noUpfront": "6.238",
+            "yrTerm3Standard.partialUpfront": "5.782"
+          }
+        },
+        "mswin": {
+          "ondemand": "13.192",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "9.134",
+            "yrTerm1Standard.noUpfront": "9.687",
+            "yrTerm1Standard.partialUpfront": "9.290",
+            "yrTerm3Convertible.allUpfront": "7.982",
+            "yrTerm3Convertible.noUpfront": "8.646",
+            "yrTerm3Convertible.partialUpfront": "8.114",
+            "yrTerm3Standard.allUpfront": "6.907",
+            "yrTerm3Standard.noUpfront": "7.710",
+            "yrTerm3Standard.partialUpfront": "7.254"
+          }
+        }
+      },
+      "ap-southeast-2": {
+        "linux": {
+          "ondemand": "12.336",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "8.066",
+            "yrTerm1Standard.noUpfront": "8.642",
+            "yrTerm1Standard.partialUpfront": "8.230",
+            "yrTerm3Convertible.allUpfront": "6.859",
+            "yrTerm3Convertible.noUpfront": "7.559",
+            "yrTerm3Convertible.partialUpfront": "7.000",
+            "yrTerm3Standard.allUpfront": "5.721",
+            "yrTerm3Standard.noUpfront": "6.573",
+            "yrTerm3Standard.partialUpfront": "6.086"
+          }
+        },
+        "mswin": {
+          "ondemand": "13.808",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "9.538",
+            "yrTerm1Standard.noUpfront": "10.114",
+            "yrTerm1Standard.partialUpfront": "9.702",
+            "yrTerm3Convertible.allUpfront": "8.331",
+            "yrTerm3Convertible.noUpfront": "9.031",
+            "yrTerm3Convertible.partialUpfront": "8.472",
+            "yrTerm3Standard.allUpfront": "7.193",
+            "yrTerm3Standard.noUpfront": "8.045",
+            "yrTerm3Standard.partialUpfront": "7.558"
+          }
+        }
+      },
+      "eu-west-1": {
+        "linux": {
+          "ondemand": "7.776",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "4.971",
+            "yrTerm1Standard.noUpfront": "5.350",
+            "yrTerm1Standard.partialUpfront": "5.072",
+            "yrTerm3Convertible.allUpfront": "4.147",
+            "yrTerm3Convertible.noUpfront": "4.571",
+            "yrTerm3Convertible.partialUpfront": "4.232",
+            "yrTerm3Standard.allUpfront": "3.459",
+            "yrTerm3Standard.noUpfront": "3.974",
+            "yrTerm3Standard.partialUpfront": "3.680"
+          }
+        },
+        "mswin": {
+          "ondemand": "9.248",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "6.443",
+            "yrTerm1Standard.noUpfront": "6.822",
+            "yrTerm1Standard.partialUpfront": "6.544",
+            "yrTerm3Convertible.allUpfront": "5.619",
+            "yrTerm3Convertible.noUpfront": "6.043",
+            "yrTerm3Convertible.partialUpfront": "5.704",
+            "yrTerm3Standard.allUpfront": "4.931",
+            "yrTerm3Standard.noUpfront": "5.446",
+            "yrTerm3Standard.partialUpfront": "5.152"
+          }
+        }
+      },
+      "us-east-1": {
+        "linux": {
+          "ondemand": "7.2",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "4.586",
+            "yrTerm1Standard.noUpfront": "4.914",
+            "yrTerm1Standard.partialUpfront": "4.680",
+            "yrTerm3Convertible.allUpfront": "3.832",
+            "yrTerm3Convertible.noUpfront": "4.223",
+            "yrTerm3Convertible.partialUpfront": "3.910",
+            "yrTerm3Standard.allUpfront": "3.196",
+            "yrTerm3Standard.noUpfront": "3.672",
+            "yrTerm3Standard.partialUpfront": "3.400"
+          }
+        },
+        "mswin": {
+          "ondemand": "8.672",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "6.058",
+            "yrTerm1Standard.noUpfront": "6.386",
+            "yrTerm1Standard.partialUpfront": "6.152",
+            "yrTerm3Convertible.allUpfront": "5.304",
+            "yrTerm3Convertible.noUpfront": "5.695",
+            "yrTerm3Convertible.partialUpfront": "5.382",
+            "yrTerm3Standard.allUpfront": "4.668",
+            "yrTerm3Standard.noUpfront": "5.144",
+            "yrTerm3Standard.partialUpfront": "4.872"
+          }
+        }
+      },
+      "us-east-2": {
+        "linux": {
+          "ondemand": "7.2",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "4.586",
+            "yrTerm1Standard.noUpfront": "4.914",
+            "yrTerm1Standard.partialUpfront": "4.680",
+            "yrTerm3Convertible.allUpfront": "3.832",
+            "yrTerm3Convertible.noUpfront": "4.223",
+            "yrTerm3Convertible.partialUpfront": "3.910",
+            "yrTerm3Standard.allUpfront": "3.196",
+            "yrTerm3Standard.noUpfront": "3.672",
+            "yrTerm3Standard.partialUpfront": "3.400"
+          }
+        },
+        "mswin": {
+          "ondemand": "8.672",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "6.058",
+            "yrTerm1Standard.noUpfront": "6.386",
+            "yrTerm1Standard.partialUpfront": "6.152",
+            "yrTerm3Convertible.allUpfront": "5.304",
+            "yrTerm3Convertible.noUpfront": "5.695",
+            "yrTerm3Convertible.partialUpfront": "5.382",
+            "yrTerm3Standard.allUpfront": "4.668",
+            "yrTerm3Standard.noUpfront": "5.144",
+            "yrTerm3Standard.partialUpfront": "4.872"
+          }
+        }
+      },
+      "us-gov-west-1": {
+        "linux": {
+          "ondemand": "8.64",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "5.504",
+            "yrTerm1Standard.noUpfront": "5.897",
+            "yrTerm1Standard.partialUpfront": "5.616",
+            "yrTerm3Convertible.allUpfront": "4.598",
+            "yrTerm3Convertible.noUpfront": "5.067",
+            "yrTerm3Convertible.partialUpfront": "4.692",
+            "yrTerm3Standard.allUpfront": "3.835",
+            "yrTerm3Standard.noUpfront": "4.406",
+            "yrTerm3Standard.partialUpfront": "4.080"
+          }
+        },
+        "mswin": {
+          "ondemand": "10.112",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "6.976",
+            "yrTerm1Standard.noUpfront": "7.369",
+            "yrTerm1Standard.partialUpfront": "7.088",
+            "yrTerm3Convertible.allUpfront": "6.070",
+            "yrTerm3Convertible.noUpfront": "6.539",
+            "yrTerm3Convertible.partialUpfront": "6.164",
+            "yrTerm3Standard.allUpfront": "5.307",
+            "yrTerm3Standard.noUpfront": "5.878",
+            "yrTerm3Standard.partialUpfront": "5.552"
+          }
+        }
+      },
+      "us-west-2": {
+        "linux": {
+          "ondemand": "7.2",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "4.586",
+            "yrTerm1Standard.noUpfront": "4.914",
+            "yrTerm1Standard.partialUpfront": "4.680",
+            "yrTerm3Convertible.allUpfront": "3.832",
+            "yrTerm3Convertible.noUpfront": "4.223",
+            "yrTerm3Convertible.partialUpfront": "3.910",
+            "yrTerm3Standard.allUpfront": "3.196",
+            "yrTerm3Standard.noUpfront": "3.672",
+            "yrTerm3Standard.partialUpfront": "3.400"
+          }
+        },
+        "mswin": {
+          "ondemand": "8.672",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "6.058",
+            "yrTerm1Standard.noUpfront": "6.386",
+            "yrTerm1Standard.partialUpfront": "6.152",
+            "yrTerm3Convertible.allUpfront": "5.304",
+            "yrTerm3Convertible.noUpfront": "5.695",
+            "yrTerm3Convertible.partialUpfront": "5.382",
+            "yrTerm3Standard.allUpfront": "4.668",
+            "yrTerm3Standard.noUpfront": "5.144",
+            "yrTerm3Standard.partialUpfront": "4.872"
+          }
+        }
+      }
+    },
+    "storage": null,
+    "vCPU": 32,
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "vpc_only": true
+  },
+  {
+    "ECU": 188.0,
+    "FPGA": 0,
+    "GPU": 0,
+    "arch": [
+      "x86_64"
+    ],
+    "base_performance": null,
+    "burst_minutes": null,
+    "ebs_iops": 65000.0,
+    "ebs_max_bandwidth": 10000.0,
+    "ebs_optimized": true,
+    "ebs_throughput": 1250.0,
+    "enhanced_networking": true,
+    "family": "Accelerated computing",
+    "generation": "current",
+    "instance_type": "p2.16xlarge",
+    "ipv6_support": true,
+    "linux_virtualization_types": [
+      "HVM"
+    ],
+    "memory": 732.0,
+    "network_performance": "20 Gigabit",
+    "placement_group_support": true,
+    "pretty_name": "General Purpose GPU 16xlarge",
+    "pricing": {
+      "ap-northeast-1": {
+        "linux": {
+          "ondemand": "24.672",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "16.132",
+            "yrTerm1Standard.noUpfront": "17.284",
+            "yrTerm1Standard.partialUpfront": "16.460",
+            "yrTerm3Convertible.allUpfront": "13.719",
+            "yrTerm3Convertible.noUpfront": "15.119",
+            "yrTerm3Convertible.partialUpfront": "13.998",
+            "yrTerm3Standard.allUpfront": "11.442",
+            "yrTerm3Standard.noUpfront": "13.147",
+            "yrTerm3Standard.partialUpfront": "12.172"
+          }
+        },
+        "mswin": {
+          "ondemand": "27.616",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "19.076",
+            "yrTerm1Standard.noUpfront": "20.228",
+            "yrTerm1Standard.partialUpfront": "19.404",
+            "yrTerm3Convertible.allUpfront": "16.663",
+            "yrTerm3Convertible.noUpfront": "18.063",
+            "yrTerm3Convertible.partialUpfront": "16.942",
+            "yrTerm3Standard.allUpfront": "14.386",
+            "yrTerm3Standard.noUpfront": "16.091",
+            "yrTerm3Standard.partialUpfront": "15.116"
+          }
+        }
+      },
+      "ap-northeast-2": {
+        "linux": {
+          "ondemand": "23.44",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "15.324",
+            "yrTerm1Standard.noUpfront": "16.430",
+            "yrTerm1Standard.partialUpfront": "15.636",
+            "yrTerm3Convertible.allUpfront": "13.019",
+            "yrTerm3Convertible.noUpfront": "14.348",
+            "yrTerm3Convertible.partialUpfront": "13.284",
+            "yrTerm3Standard.allUpfront": "10.871",
+            "yrTerm3Standard.noUpfront": "12.476",
+            "yrTerm3Standard.partialUpfront": "11.564"
+          }
+        },
+        "mswin": {
+          "ondemand": "26.384",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "18.268",
+            "yrTerm1Standard.noUpfront": "19.374",
+            "yrTerm1Standard.partialUpfront": "18.580",
+            "yrTerm3Convertible.allUpfront": "15.963",
+            "yrTerm3Convertible.noUpfront": "17.292",
+            "yrTerm3Convertible.partialUpfront": "16.228",
+            "yrTerm3Standard.allUpfront": "13.815",
+            "yrTerm3Standard.noUpfront": "15.420",
+            "yrTerm3Standard.partialUpfront": "14.508"
+          }
+        }
+      },
+      "ap-southeast-2": {
+        "linux": {
+          "ondemand": "24.672",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "16.132",
+            "yrTerm1Standard.noUpfront": "17.284",
+            "yrTerm1Standard.partialUpfront": "16.460",
+            "yrTerm3Convertible.allUpfront": "13.719",
+            "yrTerm3Convertible.noUpfront": "15.119",
+            "yrTerm3Convertible.partialUpfront": "13.998",
+            "yrTerm3Standard.allUpfront": "11.442",
+            "yrTerm3Standard.noUpfront": "13.147",
+            "yrTerm3Standard.partialUpfront": "12.172"
+          }
+        },
+        "mswin": {
+          "ondemand": "27.616",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "19.076",
+            "yrTerm1Standard.noUpfront": "20.228",
+            "yrTerm1Standard.partialUpfront": "19.404",
+            "yrTerm3Convertible.allUpfront": "16.663",
+            "yrTerm3Convertible.noUpfront": "18.063",
+            "yrTerm3Convertible.partialUpfront": "16.942",
+            "yrTerm3Standard.allUpfront": "14.386",
+            "yrTerm3Standard.noUpfront": "16.091",
+            "yrTerm3Standard.partialUpfront": "15.116"
+          }
+        }
+      },
+      "eu-west-1": {
+        "linux": {
+          "ondemand": "15.552",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "9.941",
+            "yrTerm1Standard.noUpfront": "10.700",
+            "yrTerm1Standard.partialUpfront": "10.144",
+            "yrTerm3Convertible.allUpfront": "8.295",
+            "yrTerm3Convertible.noUpfront": "9.141",
+            "yrTerm3Convertible.partialUpfront": "8.464",
+            "yrTerm3Standard.allUpfront": "6.918",
+            "yrTerm3Standard.noUpfront": "7.949",
+            "yrTerm3Standard.partialUpfront": "7.360"
+          }
+        },
+        "mswin": {
+          "ondemand": "18.496",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "12.885",
+            "yrTerm1Standard.noUpfront": "13.644",
+            "yrTerm1Standard.partialUpfront": "13.088",
+            "yrTerm3Convertible.allUpfront": "11.239",
+            "yrTerm3Convertible.noUpfront": "12.085",
+            "yrTerm3Convertible.partialUpfront": "11.408",
+            "yrTerm3Standard.allUpfront": "9.862",
+            "yrTerm3Standard.noUpfront": "10.893",
+            "yrTerm3Standard.partialUpfront": "10.304"
+          }
+        }
+      },
+      "us-east-1": {
+        "linux": {
+          "ondemand": "14.4",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "9.173",
+            "yrTerm1Standard.noUpfront": "9.828",
+            "yrTerm1Standard.partialUpfront": "9.360",
+            "yrTerm3Convertible.allUpfront": "7.664",
+            "yrTerm3Convertible.noUpfront": "8.446",
+            "yrTerm3Convertible.partialUpfront": "7.820",
+            "yrTerm3Standard.allUpfront": "6.392",
+            "yrTerm3Standard.noUpfront": "7.344",
+            "yrTerm3Standard.partialUpfront": "6.800"
+          }
+        },
+        "mswin": {
+          "ondemand": "17.344",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "12.117",
+            "yrTerm1Standard.noUpfront": "12.772",
+            "yrTerm1Standard.partialUpfront": "12.304",
+            "yrTerm3Convertible.allUpfront": "10.608",
+            "yrTerm3Convertible.noUpfront": "11.390",
+            "yrTerm3Convertible.partialUpfront": "10.764",
+            "yrTerm3Standard.allUpfront": "9.336",
+            "yrTerm3Standard.noUpfront": "10.288",
+            "yrTerm3Standard.partialUpfront": "9.744"
+          }
+        }
+      },
+      "us-east-2": {
+        "linux": {
+          "ondemand": "14.4",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "9.173",
+            "yrTerm1Standard.noUpfront": "9.828",
+            "yrTerm1Standard.partialUpfront": "9.360",
+            "yrTerm3Convertible.allUpfront": "7.664",
+            "yrTerm3Convertible.noUpfront": "8.446",
+            "yrTerm3Convertible.partialUpfront": "7.820",
+            "yrTerm3Standard.allUpfront": "6.392",
+            "yrTerm3Standard.noUpfront": "7.344",
+            "yrTerm3Standard.partialUpfront": "6.800"
+          }
+        },
+        "mswin": {
+          "ondemand": "17.344",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "12.117",
+            "yrTerm1Standard.noUpfront": "12.772",
+            "yrTerm1Standard.partialUpfront": "12.304",
+            "yrTerm3Convertible.allUpfront": "10.608",
+            "yrTerm3Convertible.noUpfront": "11.390",
+            "yrTerm3Convertible.partialUpfront": "10.764",
+            "yrTerm3Standard.allUpfront": "9.336",
+            "yrTerm3Standard.noUpfront": "10.288",
+            "yrTerm3Standard.partialUpfront": "9.744"
+          }
+        }
+      },
+      "us-gov-west-1": {
+        "linux": {
+          "ondemand": "17.28",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "11.007",
+            "yrTerm1Standard.noUpfront": "11.794",
+            "yrTerm1Standard.partialUpfront": "11.232",
+            "yrTerm3Convertible.allUpfront": "9.196",
+            "yrTerm3Convertible.noUpfront": "10.135",
+            "yrTerm3Convertible.partialUpfront": "9.384",
+            "yrTerm3Standard.allUpfront": "7.670",
+            "yrTerm3Standard.noUpfront": "8.813",
+            "yrTerm3Standard.partialUpfront": "8.160"
+          }
+        },
+        "mswin": {
+          "ondemand": "20.224",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "13.951",
+            "yrTerm1Standard.noUpfront": "14.738",
+            "yrTerm1Standard.partialUpfront": "14.176",
+            "yrTerm3Convertible.allUpfront": "12.140",
+            "yrTerm3Convertible.noUpfront": "13.079",
+            "yrTerm3Convertible.partialUpfront": "12.328",
+            "yrTerm3Standard.allUpfront": "10.614",
+            "yrTerm3Standard.noUpfront": "11.757",
+            "yrTerm3Standard.partialUpfront": "11.104"
+          }
+        }
+      },
+      "us-west-2": {
+        "linux": {
+          "ondemand": "14.4",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "9.173",
+            "yrTerm1Standard.noUpfront": "9.828",
+            "yrTerm1Standard.partialUpfront": "9.360",
+            "yrTerm3Convertible.allUpfront": "7.664",
+            "yrTerm3Convertible.noUpfront": "8.446",
+            "yrTerm3Convertible.partialUpfront": "7.820",
+            "yrTerm3Standard.allUpfront": "6.392",
+            "yrTerm3Standard.noUpfront": "7.344",
+            "yrTerm3Standard.partialUpfront": "6.800"
+          }
+        },
+        "mswin": {
+          "ondemand": "17.344",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "12.117",
+            "yrTerm1Standard.noUpfront": "12.772",
+            "yrTerm1Standard.partialUpfront": "12.304",
+            "yrTerm3Convertible.allUpfront": "10.608",
+            "yrTerm3Convertible.noUpfront": "11.390",
+            "yrTerm3Convertible.partialUpfront": "10.764",
+            "yrTerm3Standard.allUpfront": "9.336",
+            "yrTerm3Standard.noUpfront": "10.288",
+            "yrTerm3Standard.partialUpfront": "9.744"
+          }
+        }
+      }
+    },
+    "storage": null,
+    "vCPU": 64,
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "vpc_only": true
+  },
+  {
+    "ECU": 47.0,
+    "FPGA": 0,
+    "GPU": 0,
+    "arch": [
+      "x86_64"
+    ],
+    "base_performance": null,
+    "burst_minutes": null,
+    "ebs_iops": 18750.0,
+    "ebs_max_bandwidth": 3500.0,
+    "ebs_optimized": true,
+    "ebs_throughput": 437.0,
+    "enhanced_networking": true,
+    "family": "Accelerated computing",
+    "generation": "current",
+    "instance_type": "g3.4xlarge",
+    "ipv6_support": true,
+    "linux_virtualization_types": [
+      "HVM"
+    ],
+    "memory": 122.0,
+    "network_performance": "Up to 10 Gigabit",
+    "placement_group_support": true,
+    "pretty_name": "G3 Quadruple Extra Large",
+    "pricing": {
+      "eu-west-1": {
+        "linux": {
+          "ondemand": "1.21",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.798",
+            "yrTerm1Standard.noUpfront": "0.855",
+            "yrTerm1Standard.partialUpfront": "0.814",
+            "yrTerm3Convertible.allUpfront": "0.694",
+            "yrTerm3Convertible.noUpfront": "0.765",
+            "yrTerm3Convertible.partialUpfront": "0.708",
+            "yrTerm3Standard.allUpfront": "0.579",
+            "yrTerm3Standard.partialUpfront": "0.616"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.946",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.534",
+            "yrTerm1Standard.noUpfront": "1.591",
+            "yrTerm1Standard.partialUpfront": "1.550",
+            "yrTerm3Convertible.allUpfront": "1.430",
+            "yrTerm3Convertible.noUpfront": "1.501",
+            "yrTerm3Convertible.partialUpfront": "1.444",
+            "yrTerm3Standard.allUpfront": "1.315",
+            "yrTerm3Standard.partialUpfront": "1.352"
+          }
+        }
+      },
+      "us-east-1": {
+        "linux": {
+          "ondemand": "1.14",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.726",
+            "yrTerm1Standard.noUpfront": "0.778",
+            "yrTerm1Standard.partialUpfront": "0.741",
+            "yrTerm3Convertible.allUpfront": "0.606",
+            "yrTerm3Convertible.noUpfront": "0.668",
+            "yrTerm3Convertible.partialUpfront": "0.619",
+            "yrTerm3Standard.allUpfront": "0.506",
+            "yrTerm3Standard.partialUpfront": "0.538"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.876",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.462",
+            "yrTerm1Standard.noUpfront": "1.514",
+            "yrTerm1Standard.partialUpfront": "1.477",
+            "yrTerm3Convertible.allUpfront": "1.342",
+            "yrTerm3Convertible.noUpfront": "1.404",
+            "yrTerm3Convertible.partialUpfront": "1.355",
+            "yrTerm3Standard.allUpfront": "1.242",
+            "yrTerm3Standard.partialUpfront": "1.274"
+          }
+        }
+      },
+      "us-east-2": {
+        "linux": {
+          "ondemand": "1.14",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.726",
+            "yrTerm1Standard.noUpfront": "0.778",
+            "yrTerm1Standard.partialUpfront": "0.741",
+            "yrTerm3Convertible.allUpfront": "0.606",
+            "yrTerm3Convertible.noUpfront": "0.668",
+            "yrTerm3Convertible.partialUpfront": "0.619",
+            "yrTerm3Standard.allUpfront": "0.506",
+            "yrTerm3Standard.partialUpfront": "0.538"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.876",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.462",
+            "yrTerm1Standard.noUpfront": "1.514",
+            "yrTerm1Standard.partialUpfront": "1.477",
+            "yrTerm3Convertible.allUpfront": "1.342",
+            "yrTerm3Convertible.noUpfront": "1.404",
+            "yrTerm3Convertible.partialUpfront": "1.355",
+            "yrTerm3Standard.allUpfront": "1.242",
+            "yrTerm3Standard.partialUpfront": "1.274"
+          }
+        }
+      },
+      "us-gov-west-1": {
+        "linux": {
+          "ondemand": "1.32",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.870",
+            "yrTerm1Standard.noUpfront": "0.932",
+            "yrTerm1Standard.partialUpfront": "0.888",
+            "yrTerm3Convertible.allUpfront": "0.757",
+            "yrTerm3Convertible.noUpfront": "0.835",
+            "yrTerm3Convertible.partialUpfront": "0.773",
+            "yrTerm3Standard.allUpfront": "0.632",
+            "yrTerm3Standard.partialUpfront": "0.672"
+          }
+        },
+        "mswin": {
+          "ondemand": "2.056",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.606",
+            "yrTerm1Standard.noUpfront": "1.668",
+            "yrTerm1Standard.partialUpfront": "1.624",
+            "yrTerm3Convertible.allUpfront": "1.493",
+            "yrTerm3Convertible.noUpfront": "1.571",
+            "yrTerm3Convertible.partialUpfront": "1.509",
+            "yrTerm3Standard.allUpfront": "1.368",
+            "yrTerm3Standard.partialUpfront": "1.408"
+          }
+        }
+      },
+      "us-west-1": {
+        "linux": {
+          "ondemand": "1.534",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.999",
+            "yrTerm1Standard.noUpfront": "1.070",
+            "yrTerm1Standard.partialUpfront": "1.019",
+            "yrTerm3Convertible.allUpfront": "0.867",
+            "yrTerm3Convertible.noUpfront": "0.955",
+            "yrTerm3Convertible.partialUpfront": "0.884",
+            "yrTerm3Standard.allUpfront": "0.723",
+            "yrTerm3Standard.partialUpfront": "0.769"
+          }
+        },
+        "mswin": {
+          "ondemand": "2.27",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.735",
+            "yrTerm1Standard.noUpfront": "1.806",
+            "yrTerm1Standard.partialUpfront": "1.755",
+            "yrTerm3Convertible.allUpfront": "1.603",
+            "yrTerm3Convertible.noUpfront": "1.691",
+            "yrTerm3Convertible.partialUpfront": "1.620",
+            "yrTerm3Standard.allUpfront": "1.459",
+            "yrTerm3Standard.partialUpfront": "1.505"
+          }
+        }
+      },
+      "us-west-2": {
+        "linux": {
+          "ondemand": "1.14",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "0.726",
+            "yrTerm1Standard.noUpfront": "0.778",
+            "yrTerm1Standard.partialUpfront": "0.741",
+            "yrTerm3Convertible.allUpfront": "0.606",
+            "yrTerm3Convertible.noUpfront": "0.668",
+            "yrTerm3Convertible.partialUpfront": "0.619",
+            "yrTerm3Standard.allUpfront": "0.506",
+            "yrTerm3Standard.partialUpfront": "0.538"
+          }
+        },
+        "mswin": {
+          "ondemand": "1.876",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.462",
+            "yrTerm1Standard.noUpfront": "1.514",
+            "yrTerm1Standard.partialUpfront": "1.477",
+            "yrTerm3Convertible.allUpfront": "1.342",
+            "yrTerm3Convertible.noUpfront": "1.404",
+            "yrTerm3Convertible.partialUpfront": "1.355",
+            "yrTerm3Standard.allUpfront": "1.242",
+            "yrTerm3Standard.partialUpfront": "1.274"
+          }
+        }
+      }
+    },
+    "storage": null,
+    "vCPU": 16,
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "vpc_only": false
+  },
+  {
+    "ECU": 94.0,
+    "FPGA": 0,
+    "GPU": 0,
+    "arch": [
+      "x86_64"
+    ],
+    "base_performance": null,
+    "burst_minutes": null,
+    "ebs_iops": 37500.0,
+    "ebs_max_bandwidth": 7000.0,
+    "ebs_optimized": true,
+    "ebs_throughput": 875.0,
+    "enhanced_networking": true,
+    "family": "Accelerated computing",
+    "generation": "current",
+    "instance_type": "g3.8xlarge",
+    "ipv6_support": true,
+    "linux_virtualization_types": [
+      "HVM"
+    ],
+    "memory": 244.0,
+    "network_performance": "10 Gigabit",
+    "placement_group_support": true,
+    "pretty_name": "G3 Eight Extra Large",
+    "pricing": {
+      "eu-west-1": {
+        "linux": {
+          "ondemand": "2.42",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.595",
+            "yrTerm1Standard.noUpfront": "1.709",
+            "yrTerm1Standard.partialUpfront": "1.628",
+            "yrTerm3Convertible.allUpfront": "1.389",
+            "yrTerm3Convertible.noUpfront": "1.530",
+            "yrTerm3Convertible.partialUpfront": "1.417",
+            "yrTerm3Standard.allUpfront": "1.158",
+            "yrTerm3Standard.partialUpfront": "1.232"
+          }
+        },
+        "mswin": {
+          "ondemand": "3.892",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "3.067",
+            "yrTerm1Standard.noUpfront": "3.181",
+            "yrTerm1Standard.partialUpfront": "3.100",
+            "yrTerm3Convertible.allUpfront": "2.861",
+            "yrTerm3Convertible.noUpfront": "3.002",
+            "yrTerm3Convertible.partialUpfront": "2.889",
+            "yrTerm3Standard.allUpfront": "2.630",
+            "yrTerm3Standard.partialUpfront": "2.704"
+          }
+        }
+      },
+      "us-east-1": {
+        "linux": {
+          "ondemand": "2.28",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.452",
+            "yrTerm1Standard.noUpfront": "1.556",
+            "yrTerm1Standard.partialUpfront": "1.482",
+            "yrTerm3Convertible.allUpfront": "1.213",
+            "yrTerm3Convertible.noUpfront": "1.336",
+            "yrTerm3Convertible.partialUpfront": "1.237",
+            "yrTerm3Standard.allUpfront": "1.011",
+            "yrTerm3Standard.partialUpfront": "1.076"
+          }
+        },
+        "mswin": {
+          "ondemand": "3.752",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "2.924",
+            "yrTerm1Standard.noUpfront": "3.028",
+            "yrTerm1Standard.partialUpfront": "2.954",
+            "yrTerm3Convertible.allUpfront": "2.685",
+            "yrTerm3Convertible.noUpfront": "2.808",
+            "yrTerm3Convertible.partialUpfront": "2.709",
+            "yrTerm3Standard.allUpfront": "2.483",
+            "yrTerm3Standard.partialUpfront": "2.548"
+          }
+        }
+      },
+      "us-east-2": {
+        "linux": {
+          "ondemand": "2.28",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.452",
+            "yrTerm1Standard.noUpfront": "1.556",
+            "yrTerm1Standard.partialUpfront": "1.482",
+            "yrTerm3Convertible.allUpfront": "1.213",
+            "yrTerm3Convertible.noUpfront": "1.336",
+            "yrTerm3Convertible.partialUpfront": "1.237",
+            "yrTerm3Standard.allUpfront": "1.011",
+            "yrTerm3Standard.partialUpfront": "1.076"
+          }
+        },
+        "mswin": {
+          "ondemand": "3.752",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "2.924",
+            "yrTerm1Standard.noUpfront": "3.028",
+            "yrTerm1Standard.partialUpfront": "2.954",
+            "yrTerm3Convertible.allUpfront": "2.685",
+            "yrTerm3Convertible.noUpfront": "2.808",
+            "yrTerm3Convertible.partialUpfront": "2.709",
+            "yrTerm3Standard.allUpfront": "2.483",
+            "yrTerm3Standard.partialUpfront": "2.548"
+          }
+        }
+      },
+      "us-gov-west-1": {
+        "linux": {
+          "ondemand": "2.64",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.740",
+            "yrTerm1Standard.noUpfront": "1.865",
+            "yrTerm1Standard.partialUpfront": "1.776",
+            "yrTerm3Convertible.allUpfront": "1.515",
+            "yrTerm3Convertible.noUpfront": "1.669",
+            "yrTerm3Convertible.partialUpfront": "1.546",
+            "yrTerm3Standard.allUpfront": "1.263",
+            "yrTerm3Standard.partialUpfront": "1.344"
+          }
+        },
+        "mswin": {
+          "ondemand": "4.112",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "3.212",
+            "yrTerm1Standard.noUpfront": "3.337",
+            "yrTerm1Standard.partialUpfront": "3.248",
+            "yrTerm3Convertible.allUpfront": "2.987",
+            "yrTerm3Convertible.noUpfront": "3.141",
+            "yrTerm3Convertible.partialUpfront": "3.018",
+            "yrTerm3Standard.allUpfront": "2.735",
+            "yrTerm3Standard.partialUpfront": "2.816"
+          }
+        }
+      },
+      "us-west-1": {
+        "linux": {
+          "ondemand": "3.068",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.997",
+            "yrTerm1Standard.noUpfront": "2.140",
+            "yrTerm1Standard.partialUpfront": "2.038",
+            "yrTerm3Convertible.allUpfront": "1.733",
+            "yrTerm3Convertible.noUpfront": "1.910",
+            "yrTerm3Convertible.partialUpfront": "1.769",
+            "yrTerm3Standard.allUpfront": "1.446",
+            "yrTerm3Standard.partialUpfront": "1.538"
+          }
+        },
+        "mswin": {
+          "ondemand": "4.54",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "3.469",
+            "yrTerm1Standard.noUpfront": "3.612",
+            "yrTerm1Standard.partialUpfront": "3.510",
+            "yrTerm3Convertible.allUpfront": "3.205",
+            "yrTerm3Convertible.noUpfront": "3.382",
+            "yrTerm3Convertible.partialUpfront": "3.241",
+            "yrTerm3Standard.allUpfront": "2.918",
+            "yrTerm3Standard.partialUpfront": "3.010"
+          }
+        }
+      },
+      "us-west-2": {
+        "linux": {
+          "ondemand": "2.28",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.452",
+            "yrTerm1Standard.noUpfront": "1.556",
+            "yrTerm1Standard.partialUpfront": "1.482",
+            "yrTerm3Convertible.allUpfront": "1.213",
+            "yrTerm3Convertible.noUpfront": "1.336",
+            "yrTerm3Convertible.partialUpfront": "1.237",
+            "yrTerm3Standard.allUpfront": "1.011",
+            "yrTerm3Standard.partialUpfront": "1.076"
+          }
+        },
+        "mswin": {
+          "ondemand": "3.752",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "2.924",
+            "yrTerm1Standard.noUpfront": "3.028",
+            "yrTerm1Standard.partialUpfront": "2.954",
+            "yrTerm3Convertible.allUpfront": "2.685",
+            "yrTerm3Convertible.noUpfront": "2.808",
+            "yrTerm3Convertible.partialUpfront": "2.709",
+            "yrTerm3Standard.allUpfront": "2.483",
+            "yrTerm3Standard.partialUpfront": "2.548"
+          }
+        }
+      }
+    },
+    "storage": null,
+    "vCPU": 32,
+    "vpc": {
+      "ips_per_eni": 30,
+      "max_enis": 8
+    },
+    "vpc_only": false
+  },
+  {
+    "ECU": 188.0,
+    "FPGA": 0,
+    "GPU": 0,
+    "arch": [
+      "x86_64"
+    ],
+    "base_performance": null,
+    "burst_minutes": null,
+    "ebs_iops": 75000.0,
+    "ebs_max_bandwidth": 14000.0,
+    "ebs_optimized": true,
+    "ebs_throughput": 1750.0,
+    "enhanced_networking": true,
+    "family": "Accelerated computing",
+    "generation": "current",
+    "instance_type": "g3.16xlarge",
+    "ipv6_support": true,
+    "linux_virtualization_types": [
+      "HVM"
+    ],
+    "memory": 488.0,
+    "network_performance": "20 Gigabit",
+    "placement_group_support": true,
+    "pretty_name": "G3 16xlarge",
+    "pricing": {
+      "eu-west-1": {
+        "linux": {
+          "ondemand": "4.84",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "3.191",
+            "yrTerm1Standard.noUpfront": "3.419",
+            "yrTerm1Standard.partialUpfront": "3.256",
+            "yrTerm3Convertible.allUpfront": "2.777",
+            "yrTerm3Convertible.noUpfront": "3.061",
+            "yrTerm3Convertible.partialUpfront": "2.834",
+            "yrTerm3Standard.allUpfront": "2.316",
+            "yrTerm3Standard.partialUpfront": "2.464"
+          }
+        },
+        "mswin": {
+          "ondemand": "7.784",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "6.135",
+            "yrTerm1Standard.noUpfront": "6.363",
+            "yrTerm1Standard.partialUpfront": "6.200",
+            "yrTerm3Convertible.allUpfront": "5.721",
+            "yrTerm3Convertible.noUpfront": "6.005",
+            "yrTerm3Convertible.partialUpfront": "5.778",
+            "yrTerm3Standard.allUpfront": "5.260",
+            "yrTerm3Standard.partialUpfront": "5.408"
+          }
+        }
+      },
+      "us-east-1": {
+        "linux": {
+          "ondemand": "4.56",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "2.905",
+            "yrTerm1Standard.noUpfront": "3.112",
+            "yrTerm1Standard.partialUpfront": "2.964",
+            "yrTerm3Convertible.allUpfront": "2.425",
+            "yrTerm3Convertible.noUpfront": "2.673",
+            "yrTerm3Convertible.partialUpfront": "2.475",
+            "yrTerm3Standard.allUpfront": "2.023",
+            "yrTerm3Standard.partialUpfront": "2.152"
+          }
+        },
+        "mswin": {
+          "ondemand": "7.504",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "5.849",
+            "yrTerm1Standard.noUpfront": "6.056",
+            "yrTerm1Standard.partialUpfront": "5.908",
+            "yrTerm3Convertible.allUpfront": "5.369",
+            "yrTerm3Convertible.noUpfront": "5.617",
+            "yrTerm3Convertible.partialUpfront": "5.419",
+            "yrTerm3Standard.allUpfront": "4.967",
+            "yrTerm3Standard.partialUpfront": "5.096"
+          }
+        }
+      },
+      "us-east-2": {
+        "linux": {
+          "ondemand": "4.56",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "2.905",
+            "yrTerm1Standard.noUpfront": "3.112",
+            "yrTerm1Standard.partialUpfront": "2.964",
+            "yrTerm3Convertible.allUpfront": "2.425",
+            "yrTerm3Convertible.noUpfront": "2.673",
+            "yrTerm3Convertible.partialUpfront": "2.475",
+            "yrTerm3Standard.allUpfront": "2.023",
+            "yrTerm3Standard.partialUpfront": "2.152"
+          }
+        },
+        "mswin": {
+          "ondemand": "7.504",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "5.849",
+            "yrTerm1Standard.noUpfront": "6.056",
+            "yrTerm1Standard.partialUpfront": "5.908",
+            "yrTerm3Convertible.allUpfront": "5.369",
+            "yrTerm3Convertible.noUpfront": "5.617",
+            "yrTerm3Convertible.partialUpfront": "5.419",
+            "yrTerm3Standard.allUpfront": "4.967",
+            "yrTerm3Standard.partialUpfront": "5.096"
+          }
+        }
+      },
+      "us-gov-west-1": {
+        "linux": {
+          "ondemand": "5.28",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "3.481",
+            "yrTerm1Standard.noUpfront": "3.729",
+            "yrTerm1Standard.partialUpfront": "3.552",
+            "yrTerm3Convertible.allUpfront": "3.030",
+            "yrTerm3Convertible.noUpfront": "3.339",
+            "yrTerm3Convertible.partialUpfront": "3.091",
+            "yrTerm3Standard.allUpfront": "2.527",
+            "yrTerm3Standard.partialUpfront": "2.688"
+          }
+        },
+        "mswin": {
+          "ondemand": "8.224",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "6.425",
+            "yrTerm1Standard.noUpfront": "6.673",
+            "yrTerm1Standard.partialUpfront": "6.496",
+            "yrTerm3Convertible.allUpfront": "5.974",
+            "yrTerm3Convertible.noUpfront": "6.283",
+            "yrTerm3Convertible.partialUpfront": "6.035",
+            "yrTerm3Standard.allUpfront": "5.471",
+            "yrTerm3Standard.partialUpfront": "5.632"
+          }
+        }
+      },
+      "us-west-1": {
+        "linux": {
+          "ondemand": "6.136",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "3.995",
+            "yrTerm1Standard.noUpfront": "4.280",
+            "yrTerm1Standard.partialUpfront": "4.076",
+            "yrTerm3Convertible.allUpfront": "3.467",
+            "yrTerm3Convertible.noUpfront": "3.820",
+            "yrTerm3Convertible.partialUpfront": "3.537",
+            "yrTerm3Standard.allUpfront": "2.891",
+            "yrTerm3Standard.partialUpfront": "3.076"
+          }
+        },
+        "mswin": {
+          "ondemand": "9.08",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "6.939",
+            "yrTerm1Standard.noUpfront": "7.224",
+            "yrTerm1Standard.partialUpfront": "7.020",
+            "yrTerm3Convertible.allUpfront": "6.411",
+            "yrTerm3Convertible.noUpfront": "6.764",
+            "yrTerm3Convertible.partialUpfront": "6.481",
+            "yrTerm3Standard.allUpfront": "5.835",
+            "yrTerm3Standard.partialUpfront": "6.020"
+          }
+        }
+      },
+      "us-west-2": {
+        "linux": {
+          "ondemand": "4.56",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "2.905",
+            "yrTerm1Standard.noUpfront": "3.112",
+            "yrTerm1Standard.partialUpfront": "2.964",
+            "yrTerm3Convertible.allUpfront": "2.425",
+            "yrTerm3Convertible.noUpfront": "2.673",
+            "yrTerm3Convertible.partialUpfront": "2.475",
+            "yrTerm3Standard.allUpfront": "2.023",
+            "yrTerm3Standard.partialUpfront": "2.152"
+          }
+        },
+        "mswin": {
+          "ondemand": "7.504",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "5.849",
+            "yrTerm1Standard.noUpfront": "6.056",
+            "yrTerm1Standard.partialUpfront": "5.908",
+            "yrTerm3Convertible.allUpfront": "5.369",
+            "yrTerm3Convertible.noUpfront": "5.617",
+            "yrTerm3Convertible.partialUpfront": "5.419",
+            "yrTerm3Standard.allUpfront": "4.967",
+            "yrTerm3Standard.partialUpfront": "5.096"
+          }
+        }
+      }
+    },
+    "storage": null,
+    "vCPU": 64,
+    "vpc": {
+      "ips_per_eni": 50,
+      "max_enis": 15
+    },
+    "vpc_only": false
+  },
+  {
+    "ECU": 26.0,
+    "FPGA": 0,
+    "GPU": 0,
+    "arch": [
+      "x86_64"
+    ],
+    "base_performance": null,
+    "burst_minutes": null,
+    "ebs_iops": 12000.0,
+    "ebs_max_bandwidth": 1700.0,
+    "ebs_optimized": true,
+    "ebs_throughput": 200.0,
+    "enhanced_networking": true,
+    "family": "Accelerated computing",
+    "generation": "current",
+    "instance_type": "f1.2xlarge",
+    "ipv6_support": true,
+    "linux_virtualization_types": [
+      "HVM"
+    ],
+    "memory": 122.0,
+    "network_performance": "Up to 10 Gigabit",
+    "placement_group_support": true,
+    "pretty_name": "F1 Double Extra Large",
+    "pricing": {
+      "us-east-1": {
+        "linux": {
+          "ondemand": "1.65",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "1.041",
+            "yrTerm1Standard.noUpfront": "1.116",
+            "yrTerm1Standard.partialUpfront": "1.062",
+            "yrTerm3Convertible.allUpfront": "0.859",
+            "yrTerm3Convertible.noUpfront": "0.947",
+            "yrTerm3Convertible.partialUpfront": "0.877",
+            "yrTerm3Standard.allUpfront": "0.717",
+            "yrTerm3Standard.noUpfront": "0.824",
+            "yrTerm3Standard.partialUpfront": "0.762"
+          }
+        }
+      }
+    },
+    "storage": {
+      "devices": 1,
+      "includes_swap_partition": false,
+      "nvme_ssd": true,
+      "size": 470,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
+    },
+    "vCPU": 8,
+    "vpc": {
+      "ips_per_eni": 15,
+      "max_enis": 4
+    },
+    "vpc_only": false
+  },
+  {
+    "ECU": 188.0,
+    "FPGA": 0,
+    "GPU": 0,
+    "arch": [
+      "x86_64"
+    ],
+    "base_performance": null,
+    "burst_minutes": null,
+    "ebs_iops": 75000.0,
+    "ebs_max_bandwidth": 14000.0,
+    "ebs_optimized": true,
+    "ebs_throughput": 1750.0,
+    "enhanced_networking": true,
+    "family": "Accelerated computing",
+    "generation": "current",
+    "instance_type": "f1.16xlarge",
+    "ipv6_support": true,
+    "linux_virtualization_types": [
+      "HVM"
+    ],
+    "memory": 976.0,
+    "network_performance": "20 Gigabit",
+    "placement_group_support": true,
+    "pretty_name": "F1 16xlarge",
+    "pricing": {
+      "us-east-1": {
+        "linux": {
+          "ondemand": "13.2",
+          "reserved": {
+            "yrTerm1Standard.allUpfront": "8.330",
+            "yrTerm1Standard.noUpfront": "8.925",
+            "yrTerm1Standard.partialUpfront": "8.500",
+            "yrTerm3Convertible.allUpfront": "6.875",
+            "yrTerm3Convertible.noUpfront": "7.576",
+            "yrTerm3Convertible.partialUpfront": "7.015",
+            "yrTerm3Standard.allUpfront": "5.734",
+            "yrTerm3Standard.noUpfront": "6.588",
+            "yrTerm3Standard.partialUpfront": "6.100"
+          }
+        }
+      }
+    },
+    "storage": {
+      "devices": 4,
+      "includes_swap_partition": false,
+      "nvme_ssd": true,
+      "size": 940,
+      "ssd": true,
+      "storage_needs_initialization": false,
+      "trim_support": true
+    },
+    "vCPU": 64,
+    "vpc": {
+      "ips_per_eni": 50,
+      "max_enis": 8
+    },
+    "vpc_only": false
+  },
+  {
     "ECU": 7.0,
     "FPGA": 0,
     "GPU": 0,
@@ -40370,7 +41209,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.515",
+          "ondemand": "0.755",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.688",
             "yrTerm1Standard.noUpfront": "0.696",
@@ -40428,7 +41267,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.515",
+          "ondemand": "0.755",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.688",
             "yrTerm1Standard.noUpfront": "0.696",
@@ -40486,9 +41325,9 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.509",
+          "ondemand": "0.749",
           "reserved": {
-            "yrTerm1Standard.allUpfront": "N/A",
+            "yrTerm1Standard.allUpfront": "0.686",
             "yrTerm1Standard.noUpfront": "0.694",
             "yrTerm1Standard.partialUpfront": "0.688",
             "yrTerm3Convertible.allUpfront": "0.662",
@@ -40544,7 +41383,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.519",
+          "ondemand": "0.759",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.692",
             "yrTerm1Standard.noUpfront": "0.700",
@@ -40602,7 +41441,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.519",
+          "ondemand": "0.759",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.692",
             "yrTerm1Standard.noUpfront": "0.700",
@@ -40660,7 +41499,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.504",
+          "ondemand": "0.744",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.682",
             "yrTerm1Standard.noUpfront": "0.690",
@@ -40718,7 +41557,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.518",
+          "ondemand": "0.758",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.690",
             "yrTerm1Standard.noUpfront": "0.698",
@@ -40776,7 +41615,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.504",
+          "ondemand": "0.744",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.682",
             "yrTerm1Standard.noUpfront": "0.690",
@@ -40834,7 +41673,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.513",
+          "ondemand": "0.753",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.688",
             "yrTerm1Standard.noUpfront": "0.696",
@@ -40892,7 +41731,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.618",
+          "ondemand": "0.858",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.754",
             "yrTerm1Standard.noUpfront": "0.767",
@@ -40950,7 +41789,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.488",
+          "ondemand": "0.728",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.672",
             "yrTerm1Standard.noUpfront": "0.679",
@@ -41008,7 +41847,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.488",
+          "ondemand": "0.728",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.672",
             "yrTerm1Standard.noUpfront": "0.679",
@@ -41066,7 +41905,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.52",
+          "ondemand": "0.76",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.692",
             "yrTerm1Standard.noUpfront": "0.700",
@@ -41124,7 +41963,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.504",
+          "ondemand": "0.744",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.682",
             "yrTerm1Standard.noUpfront": "0.690",
@@ -41182,7 +42021,7 @@
           }
         },
         "mswinSQL": {
-          "ondemand": "0.488",
+          "ondemand": "0.728",
           "reserved": {
             "yrTerm1Standard.allUpfront": "0.672",
             "yrTerm1Standard.noUpfront": "0.679",
@@ -47570,120 +48409,6 @@
     "vCPU": 36,
     "vpc": {
       "ips_per_eni": 30,
-      "max_enis": 8
-    },
-    "vpc_only": false
-  },
-  {
-    "ECU": 26.0,
-    "FPGA": "1",
-    "GPU": 0,
-    "arch": [
-      "x86_64"
-    ],
-    "base_performance": null,
-    "burst_minutes": null,
-    "ebs_iops": 12000.0,
-    "ebs_max_bandwidth": 1700.0,
-    "ebs_optimized": true,
-    "ebs_throughput": 200.0,
-    "enhanced_networking": true,
-    "family": "Accelerated computing",
-    "generation": "current",
-    "instance_type": "f1.2xlarge",
-    "ipv6_support": true,
-    "linux_virtualization_types": [],
-    "memory": 122.0,
-    "network_performance": "High",
-    "placement_group_support": true,
-    "pretty_name": "F1 Double Extra Large",
-    "pricing": {
-      "us-east-1": {
-        "linux": {
-          "ondemand": "1.65",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "1.041",
-            "yrTerm1Standard.noUpfront": "1.116",
-            "yrTerm1Standard.partialUpfront": "1.062",
-            "yrTerm3Convertible.allUpfront": "0.859",
-            "yrTerm3Convertible.noUpfront": "0.947",
-            "yrTerm3Convertible.partialUpfront": "0.877",
-            "yrTerm3Standard.allUpfront": "0.717",
-            "yrTerm3Standard.noUpfront": "0.824",
-            "yrTerm3Standard.partialUpfront": "0.762"
-          }
-        }
-      }
-    },
-    "storage": {
-      "devices": 1,
-      "includes_swap_partition": false,
-      "nvme_ssd": true,
-      "size": 470,
-      "ssd": true,
-      "storage_needs_initialization": false,
-      "trim_support": true
-    },
-    "vCPU": 8,
-    "vpc": {
-      "ips_per_eni": 15,
-      "max_enis": 4
-    },
-    "vpc_only": false
-  },
-  {
-    "ECU": 188.0,
-    "FPGA": "8",
-    "GPU": 0,
-    "arch": [
-      "x86_64"
-    ],
-    "base_performance": null,
-    "burst_minutes": null,
-    "ebs_iops": 75000.0,
-    "ebs_max_bandwidth": 14000.0,
-    "ebs_optimized": true,
-    "ebs_throughput": 1750.0,
-    "enhanced_networking": true,
-    "family": "Accelerated computing",
-    "generation": "current",
-    "instance_type": "f1.16xlarge",
-    "ipv6_support": true,
-    "linux_virtualization_types": [],
-    "memory": 976.0,
-    "network_performance": "High",
-    "placement_group_support": true,
-    "pretty_name": "F1 16xlarge",
-    "pricing": {
-      "us-east-1": {
-        "linux": {
-          "ondemand": "13.2",
-          "reserved": {
-            "yrTerm1Standard.allUpfront": "8.330",
-            "yrTerm1Standard.noUpfront": "8.925",
-            "yrTerm1Standard.partialUpfront": "8.500",
-            "yrTerm3Convertible.allUpfront": "6.875",
-            "yrTerm3Convertible.noUpfront": "7.576",
-            "yrTerm3Convertible.partialUpfront": "7.015",
-            "yrTerm3Standard.allUpfront": "5.734",
-            "yrTerm3Standard.noUpfront": "6.588",
-            "yrTerm3Standard.partialUpfront": "6.100"
-          }
-        }
-      }
-    },
-    "storage": {
-      "devices": 4,
-      "includes_swap_partition": false,
-      "nvme_ssd": true,
-      "size": 940,
-      "ssd": true,
-      "storage_needs_initialization": false,
-      "trim_support": true
-    },
-    "vCPU": 64,
-    "vpc": {
-      "ips_per_eni": 50,
       "max_enis": 8
     },
     "vpc_only": false
