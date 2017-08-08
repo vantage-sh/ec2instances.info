@@ -217,11 +217,12 @@ def scrape_instances():
     for details in details_tables:
         rows = details.xpath('tbody/tr')[1:]
         current_gen.extend([parse_instance(r, inst2family) for r in rows])
+    by_type = {i.instance_type: i for i in current_gen}
 
     details = tree.xpath("//table")[8]
     rows = details.xpath('tbody/tr')[1:]
     assert len(rows) > 0, "Didn't find any p2 class GPU rows"
-    by_type = {i.instance_type: i for i in current_gen}
+    assert (totext(rows[0].xpath('td')[1]) == "GPUs", "GPU column not found in table")
     for r in rows:
         parse_gpus(r, by_type)
 
