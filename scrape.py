@@ -86,11 +86,6 @@ class Instance(object):
         return "<Instance {}>".format(self.instance_type)
 
 
-def totext(elt):
-    s = etree.tostring(elt, method='text', encoding='unicode').strip()
-    return re.sub(r'\*\d$', '', s)
-
-
 def parse_prev_generation_instance(tr):
     i = Instance()
     cols = tr.xpath('td')
@@ -162,6 +157,7 @@ def _rindex_family(inst2family, details):
             i = i.strip()
             inst2family[i] = totext(cols[0])
 
+
 def feature_support(details, types):
     rows = details.xpath('tr')[0:]
     for r in rows:
@@ -219,24 +215,13 @@ def scrape_instances():
         current_gen.extend([parse_instance(r, inst2family) for r in rows])
     by_type = {i.instance_type: i for i in current_gen}
 
-    details = tree.xpath("//table")[8]
-    rows = details.xpath('tbody/tr')[1:]
-    assert len(rows) > 0, "Didn't find any p2 class GPU rows"
-    assert (totext(rows[0].xpath('td')[1]) == "GPUs", "GPU column not found in table")
-    for r in rows:
-        parse_gpus(r, by_type)
+    for t in tables_with_column(tree, "GPUs"):
+        for r in t.xpath('tbody/tr')[1:]:
+            parse_gpus(r, by_type)
 
-    details = tree.xpath("//table")[9]
-    rows = details.xpath('tbody/tr')[1:]
-    assert len(rows) > 0, "Didn't find any g2 class GPU rows"
-    for r in rows:
-        parse_gpus(r, by_type)
-
-    details = tree.xpath("//table")[10]
-    rows = details.xpath('tbody/tr')[1:]
-    assert len(rows) > 0, "Didn't find any f1 FPGA rows"
-    for r in rows:
-        parse_instance_fpgas(r, by_type)
+    for t in tables_with_column(tree, "FPGAs"):
+        for r in t.xpath('tbody/tr')[1:]:
+            parse_instance_fpgas(r, by_type)
 
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/previous-generation/"), etree.HTMLParser())
     details = tree.xpath('//table')[8]
@@ -245,10 +230,23 @@ def scrape_instances():
     prev_gen = [parse_prev_generation_instance(r) for r in rows]
 
     all_gen = prev_gen + current_gen
+
     hdrs = features_details.xpath('tr')[0]
     if totext(hdrs[0]).lower() == '' and 'ipv6 support' in totext(hdrs[7]).lower():
         feature_support(features_details, all_gen)
+
     return all_gen
+
+
+def tables_with_column(tree, column_text):
+    tables = tree.xpath("//table[.//tr[td//text()[contains(., '{}')]]]".format(column_text))
+    assert len(tables) > 0, "Found no tables with '{}' column."
+    return tables
+
+
+def totext(elt):
+    s = etree.tostring(elt, method='text', encoding='unicode').strip()
+    return re.sub(r'\*\d$', '', s)
 
 
 def transform_size(size):
