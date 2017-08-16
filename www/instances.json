@@ -28696,10 +28696,10 @@
     ],
     "base_performance": null,
     "burst_minutes": null,
-    "ebs_iops": 32500.0,
-    "ebs_max_bandwidth": 5000.0,
+    "ebs_iops": 40000.0,
+    "ebs_max_bandwidth": 7000.0,
     "ebs_optimized": true,
-    "ebs_throughput": 625.0,
+    "ebs_throughput": 875.0,
     "enhanced_networking": true,
     "family": "Memory optimized",
     "generation": "current",
@@ -29554,10 +29554,10 @@
     ],
     "base_performance": null,
     "burst_minutes": null,
-    "ebs_iops": 65000.0,
-    "ebs_max_bandwidth": 10000.0,
+    "ebs_iops": 80000.0,
+    "ebs_max_bandwidth": 14000.0,
     "ebs_optimized": true,
-    "ebs_throughput": 1250.0,
+    "ebs_throughput": 1750.0,
     "enhanced_networking": true,
     "family": "Memory optimized",
     "generation": "current",
@@ -39606,7 +39606,7 @@
   {
     "ECU": 12.0,
     "FPGA": 0,
-    "GPU": "1",
+    "GPU": 1,
     "arch": [
       "x86_64"
     ],
@@ -39881,7 +39881,7 @@
   {
     "ECU": 94.0,
     "FPGA": 0,
-    "GPU": "8",
+    "GPU": 8,
     "arch": [
       "x86_64"
     ],
@@ -40156,7 +40156,7 @@
   {
     "ECU": 188.0,
     "FPGA": 0,
-    "GPU": "16",
+    "GPU": 16,
     "arch": [
       "x86_64"
     ],
@@ -40431,7 +40431,7 @@
   {
     "ECU": 47.0,
     "FPGA": 0,
-    "GPU": "1",
+    "GPU": 1,
     "arch": [
       "x86_64"
     ],
@@ -40634,7 +40634,7 @@
   {
     "ECU": 94.0,
     "FPGA": 0,
-    "GPU": "2",
+    "GPU": 2,
     "arch": [
       "x86_64"
     ],
@@ -40837,7 +40837,7 @@
   {
     "ECU": 188.0,
     "FPGA": 0,
-    "GPU": "4",
+    "GPU": 4,
     "arch": [
       "x86_64"
     ],
