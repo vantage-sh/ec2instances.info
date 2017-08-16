@@ -180,7 +180,7 @@ def parse_gpus(tr, by_type):
     instance = by_type.get(instance_type, None)
     if instance is None:
         return
-    instance.GPU = totext(cols[1])
+    instance.GPU = locale.atoi(totext(cols[1]))
 
 
 def parse_instance_fpgas(tr, by_type):
