@@ -5,6 +5,8 @@ I was sick of comparing EC2 instance metrics and pricing on Amazon's site so I m
 
 ### Project status
 
+[![Build Status](https://travis-ci.org/powdahound/ec2instances.info.svg)](https://travis-ci.org/powdahound/ec2instances.info)
+
 I'm actively maintaining the site with the help of contributors here, but am not working on large new features.
 
 People have suggested many neat ideas and feature requests but it remains unclear how long the site will be necessary. I've heard from teams at Amazon that they use the site internally and some have mentioned that that they might be building something similar. They certainly have access to better data.
@@ -27,7 +29,7 @@ Make sure you have LibXML and Python development files.  On Ubuntu, run `sudo ap
 
 ### Requirements
 
-- Python 2.7+ with virtualenv
+- Python 2.7+ with virtualenv (not Python 3 yet due to Fabric dependency)
 - [Fabric](http://docs.fabfile.org/en/1.8/) 1.1+
 - [Boto](http://boto.readthedocs.org/en/latest/)
 - [Mako](http://www.makotemplates.org/)
@@ -50,8 +52,3 @@ To use this instead of building your own:
 `docker run -d --name some-container -p 8080:8080 quay.io/ssro/ec2instances.info`
 
 Update files as described at step 5.
-
-
-### Deployed to ec2instances.info by Travis CI
-[![Build Status](https://travis-ci.org/powdahound/ec2instances.info.svg)](https://travis-ci.org/powdahound/ec2instances.info)
-
