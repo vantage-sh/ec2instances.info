@@ -90,9 +90,9 @@
 
     <div class="form-inline" id="filters">
       <strong> Filter:</strong>
-      Min Memory (GB): <input data-action="datafilter" data-type="memory" class="form-control" />
+      Min Memory (GiB): <input data-action="datafilter" data-type="memory" class="form-control" />
       Min vCPUs: <input data-action="datafilter" data-type="vcpus" class="form-control" />
-      Min Storage (GB): <input data-action="datafilter" data-type="storage" class="form-control" />
+      Min Storage (GiB): <input data-action="datafilter" data-type="storage" class="form-control" />
     </div>
 
     <table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">
@@ -153,7 +153,7 @@
         <tr class='instance' id="${inst['instance_type']}">
           <td class="name">${inst['pretty_name']}</td>
           <td class="apiname">${inst['instance_type']}</td>
-          <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GB</span></td>
+          <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
           <td class="computeunits">
             % if inst['ECU'] == 'variable':
               % if inst['base_performance']:
@@ -198,9 +198,9 @@
             <span sort="0">EBS only</span>
             % else:
             <span sort="${storage['devices']*storage['size']}">
-              ${storage['devices']*storage['size']} GB
+              ${storage['devices']*storage['size']} GiB
               % if storage['devices'] > 1:
-              (${storage['devices']} * ${storage['size']} GB ${"NVMe " if storage['nvme_ssd'] else ''}${"SSD" if storage['ssd'] else 'HDD'})
+              (${storage['devices']} * ${storage['size']} GiB ${"NVMe " if storage['nvme_ssd'] else ''}${"SSD" if storage['ssd'] else 'HDD'})
               % else:
               ${"NVMe " if storage['nvme_ssd'] else ''}${"SSD" if storage['ssd'] else 'HDD'}
               % endif

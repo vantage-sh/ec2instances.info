@@ -91,7 +91,7 @@
 
     <div class="pull-left form-inline" id="filters">
       <strong> Filter:</strong>
-      Min Memory (GB): <input data-action="datafilter" data-type="memory" class="form-control" />
+      Min Memory (GiB): <input data-action="datafilter" data-type="memory" class="form-control" />
       Min vCPUs: <input data-action="datafilter" data-type="vcpus" class="form-control" />
     </div>
 
@@ -122,11 +122,11 @@
         <tr class='instance' id="${inst['instance_type']}">
           <td class="name">${inst['pretty_name']}</td>
           <td class="apiname">${inst['instance_type']}</td>
-          <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GB</span></td>
+          <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
           <td class="storage">
           <% storage = inst['storage'] %>
           % if storage == 'EBS Only':
-          <span sort="0">0 GB (EBS only)</span>
+          <span sort="0">0 GiB (EBS only)</span>
           % else:
           <span sort="0">${inst['storage']}</span>
           % endif
