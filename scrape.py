@@ -44,6 +44,11 @@ class Instance(object):
         self.family = ''
         self.memory = 0
         self.pricing = {}
+        self.physical_processor = None
+        self.clock_speed_ghz = None
+        self.intel_avx = None
+        self.intel_avx2 = None
+        self.intel_turbo = None
 
     def to_dict(self):
         d = dict(family=self.family,
@@ -69,7 +74,12 @@ class Instance(object):
                  linux_virtualization_types=self.linux_virtualization_types,
                  generation=self.generation,
                  vpc_only=self.vpc_only,
-                 ipv6_support=self.ipv6_support)
+                 ipv6_support=self.ipv6_support,
+                 physical_processor=self.physical_processor,
+                 clock_speed_ghz=self.clock_speed_ghz,
+                 intel_avx=self.intel_avx,
+                 intel_avx2=self.intel_avx2,
+                 intel_turbo=self.intel_turbo)
         if self.ebs_only:
             d['storage'] = None
         else:
@@ -558,6 +568,50 @@ def add_instance_storage_details(instances):
                     i.includes_swap_partition = dagger_char in storage_volumes
 
 
+def totext_recursive(node):
+    children = node.getchildren()
+    if not children:
+        return etree.tostring(node, method='text', encoding='unicode').strip()
+    # import pdb;pdb.set_trace()
+    # return '***'
+    return '/'.join([totext_recursive(x) for x in children])
+
+
+def add_cpu_details(instances):
+    def clean_output(x):
+        return {
+            '': None,
+            '-': None,
+            'Yes': True,
+            'yes': True,
+            'No': False,
+            'no': False,
+        }.get(x, x)
+
+    by_type = {i.instance_type: i for i in instances}
+    url = "https://aws.amazon.com/ec2/instance-types/#instance-type-matrix"
+    tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
+    tables = tree.xpath('//div[@class="aws-table"]//table')
+    tables = filter(lambda x: x.xpath('.//tr//td')[0].text == 'Instance Type', tables)
+    rows = [r for t in tables for r in t.xpath('.//tr') if not r[0].text == 'Instance Type']
+    for r in rows:
+        instance_type = etree.tostring(r[0], method='text').strip()
+        if instance_type == 'x1.16large':
+            instance_type = 'x1.16xlarge'
+        elif instance_type == 'i3.16large':
+            instance_type = 'i3.16xlarge'
+
+        instance = by_type.get(instance_type)
+        if not instance:
+            print "Unknown instance type: " + instance_type
+            continue
+        instance.physical_processor = clean_output(totext_recursive(r[5]))
+        instance.clock_speed_ghz = clean_output(totext_recursive(r[6]))
+        instance.intel_avx = clean_output(totext_recursive(r[7]))
+        instance.intel_avx2 = clean_output(totext_recursive(r[8]))
+        instance.intel_turbo = clean_output(totext_recursive(r[9]))
+
+
 def add_t2_credits(instances):
     tree = etree.parse(urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html"),
                        etree.HTMLParser())
@@ -640,6 +694,8 @@ def scrape(data_file):
     add_t2_credits(all_instances)
     print "Parsing instance names..."
     add_pretty_names(all_instances)
+    print "Parsing instance cpu details..."
+    add_cpu_details(all_instances)
 
     with open(data_file, 'w') as f:
         json.dump([i.to_dict() for i in all_instances],
