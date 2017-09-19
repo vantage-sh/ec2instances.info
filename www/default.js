@@ -130,6 +130,7 @@ function change_cost(duration) {
   });
 
   var hour_multipliers = {
+    "secondly": 1 / (60 * 60),
     "hourly": 1,
     "daily": 24,
     "weekly": (7 * 24),
@@ -142,7 +143,7 @@ function change_cost(duration) {
     elem = $(elem);
     per_time = elem.data("pricing")[g_settings.region];
     if (per_time && !isNaN(per_time)) {
-      per_time = (per_time * multiplier).toFixed(3);
+      per_time = (per_time * multiplier).toFixed(6);
       elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -161,7 +162,7 @@ function change_cost(duration) {
     per_time = per_time[g_settings.reserved_term];
 
     if (per_time && !isNaN(per_time)) {
-      per_time = (per_time * multiplier).toFixed(3);
+      per_time = (per_time * multiplier).toFixed(6);
       elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -172,7 +173,7 @@ function change_cost(duration) {
     elem = $(elem);
     per_time = elem.data("pricing")[g_settings.region];
     if (per_time && !isNaN(per_time)) {
-      per_time = (per_time * multiplier).toFixed(3);
+      per_time = (per_time * multiplier).toFixed(6);
       elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');

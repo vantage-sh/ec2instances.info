@@ -41,6 +41,7 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
+            <li><a href="javascript:;" duration="secondly">Secondly</a></li>
             <li><a href="javascript:;" duration="hourly">Hourly</a></li>
             <li><a href="javascript:;" duration="daily">Daily</a></li>
             <li><a href="javascript:;" duration="weekly">Weekly</a></li>
