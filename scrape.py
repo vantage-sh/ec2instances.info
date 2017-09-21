@@ -362,9 +362,12 @@ def add_pricing_info(instances):
 
     reserved_name_map = {
         'linux': 'linux-unix-shared',
+        'rhel': 'red-hat-enterprise-linux-shared',
+        'sles': 'suse-linux-shared',
         'mswin': 'windows-shared',
         'mswinSQL': 'windows-with-sql-server-standard-shared',
-        'mswinSQLWeb': 'windows-with-sql-server-web-shared'
+        'mswinSQLWeb': 'windows-with-sql-server-web-shared',
+        'mswinSQLEnterprise': 'windows-with-sql-server-enterprise-shared'
     }
 
     for i in instances:
@@ -372,7 +375,7 @@ def add_pricing_info(instances):
 
     by_type = {i.instance_type: i for i in instances}
 
-    for platform in ['linux', 'mswin', 'mswinSQL', 'mswinSQLWeb']:
+    for platform in ['linux', 'rhel', 'sles', 'mswin', 'mswinSQL', 'mswinSQLWeb', 'mswinSQLEnterprise']:
         for pricing_mode in pricing_modes:
             # current generation
             if pricing_mode == 'od':
