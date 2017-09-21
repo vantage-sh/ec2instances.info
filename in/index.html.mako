@@ -131,6 +131,14 @@
           <th class="cost-reserved cost-reserved-linux">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux Reserved cost</abbr>
           </th>
+          <th class="cost-ondemand cost-ondemand-rhel">RHEL On Demand cost</th>
+          <th class="cost-reserved cost-reserved-rhel">
+            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>RHEL Reserved cost</abbr>
+          </th>
+          <th class="cost-ondemand cost-ondemand-sles">SLES On Demand cost</th>
+          <th class="cost-reserved cost-reserved-sles">
+            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>SLES Reserved cost</abbr>
+          </th>
           <th class="cost-ondemand cost-ondemand-mswin">Windows On Demand cost</th>
           <th class="cost-reserved cost-reserved-mswin">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows Reserved cost</abbr>
@@ -142,6 +150,10 @@
           <th class="cost-ondemand cost-ondemand-mswinSQL">Windows SQL Std On Demand cost</th>
           <th class="cost-reserved cost-reserved-mswinSQL">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows SQL Std Reserved cost</abbr>
+          </th>
+          <th class="cost-ondemand cost-ondemand-mswinSQLEnterprise">Windows SQL Ent On Demand cost</th>
+          <th class="cost-reserved cost-reserved-mswinSQLEnterprise">
+            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows SQL Ent Reserved cost</abbr>
           </th>
           <th class="cost-ebs-optimized">
             <abbr title='Some instance types are charged additionally when configured for optimized EBS usage'>EBS Optimized surcharge</abbr>
@@ -280,7 +292,7 @@
             Unknown
             % endif
           </td>
-          % for platform in ['linux', 'mswin', 'mswinSQLWeb', 'mswinSQL']:
+          % for platform in ['linux', 'rhel', 'sles', 'mswin', 'mswinSQLWeb', 'mswinSQL', 'mswinSQLEnterprise']:
           ## note that the contents in these cost cells are overwritten by the JS change_cost() func, but the initial
           ## data here is used for sorting (and anyone with JS disabled...)
           ## for more info, see https://github.com/powdahound/ec2instances.info/issues/140
