@@ -110,6 +110,11 @@
           <th class="gpus">GPUs</th>
           <th class="fpgas">FPGAs</th>
           <th class="ecu-per-vcpu">ECU per vCPU</th>
+          <th class="physical_processor">Physical Processor</th>
+          <th class="clock_speed_ghz">Clock Speed(GHz)</th>
+          <th class="intel_avx">Intel AVX</th>
+          <th class="intel_avx2">Intel AVX2</th>
+          <th class="intel_turbo">Intel Turbo</th>
           <th class="storage">Instance Storage</th>
           <th class="warmed-up">Instance Storage: already warmed-up</th>
           <th class="trim-support">Instance Storage: SSD TRIM Support</th>
@@ -204,6 +209,11 @@
             <span sort="${inst['ECU_per_vcpu']}">${"%.4g" % inst['ECU_per_vcpu']} units</span>
             % endif
           </td>
+          <td class="physical_processor">${inst['physical_processor'] or ''}</td>
+          <td class="clock_speed_ghz">${inst['clock_speed_ghz'] or ''}</td>
+          <td class="intel_avx">${'Yes' if inst['intel_avx'] else ''}</td>
+          <td class="intel_avx2">${'Yes' if inst['intel_avx2'] else ''}</td>
+          <td class="intel_turbo">${'Yes' if inst['intel_turbo'] else ''}</td>
           <td class="storage">
             <% storage = inst['storage'] %>
             % if not storage:
