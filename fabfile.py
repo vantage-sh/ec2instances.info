@@ -27,6 +27,8 @@ BUCKET_CALLING_FORMAT = OrdinaryCallingFormat()
 abspath = lambda filename: os.path.join(os.path.abspath(os.path.dirname(__file__)),
                                         filename)
 
+FAB_HOST = os.getenv('FAB_HOST', '127.0.0.1')
+FAB_PORT = os.getenv('FAB_PORT', '')
 
 @task
 def build():
@@ -59,11 +61,10 @@ def scrape_rds():
 
 
 @task
-def serve(ipaddr='127.0.0.1', port=0):
+def serve():
     """Serve site contents locally for development"""
-    port = int(port)
     os.chdir("www/")
-    httpd = SocketServer.TCPServer((ipaddr, port), SimpleHTTPServer.SimpleHTTPRequestHandler)
+    httpd = SocketServer.TCPServer((FAB_HOST, int(FAB_PORT)), SimpleHTTPServer.SimpleHTTPRequestHandler)
     print "Serving on http://{}:{}".format(httpd.socket.getsockname()[0], httpd.socket.getsockname()[1])
     httpd.serve_forever()
 

@@ -2,31 +2,25 @@ FROM centos:7
 
 MAINTAINER Sebastian Sasu <sebi@nologin.ro>
 
-RUN yum -y install epel-release && yum -y update
-RUN yum -y install python-devel \
-  libxml2-devel \
-  libxslt-devel \
-  openssl-devel \
-  python2-pip \
-  gcc
+ENV PACKAGES python-devel libxml2-devel libxslt-devel openssl-devel python2-pip gcc
+
+RUN yum -y install epel-release && \
+    yum -y update && \
+    yum -y install ${PACKAGES} && \
+    yum -y clean all && \
+    rm -rf /var/tmp/* /var/cache/yum/* /root/.cache
 
 WORKDIR /opt/app
 
-COPY . /opt/app
+COPY requirements.txt .
 
-RUN sed -i 's/127\.0\.0\.1/0\.0\.0\.0/' fabfile.py && sed -i 's/port=0/port=8080/' fabfile.py
-RUN pip install -r requirements.txt && fab build
+RUN pip install -r requirements.txt
 
-RUN yum -y remove \
-  epel-release \
-  python-devel \
-  libxml2-devel \
-  libxslt-devel \
-  openssl-devel \
-  python2-pip \
-  gcc \
-  kernel-headers \
-  && yum -y clean all && rm -rf /var/tmp/* /var/cache/yum/* /root/.cache
+COPY . .
+
+ENV FAB_HOST=0.0.0.0 FAB_PORT=8080
+
+RUN fab build
 
 EXPOSE 8080
 
