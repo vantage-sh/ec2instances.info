@@ -14,9 +14,9 @@ def path(s):
 
 
 # Create the output directory
-subprocess.call(['mkdir', '-p', '{}/ec2instances/info'.format(root_dir)])
+subprocess.call(['mkdir', '-p', path('ec2instances/info')])
 # Make the project a module
-subprocess.call(['touch', '{}/ec2instances/__init__.py'.format(root_dir)])
+subprocess.call(['touch', path('ec2instances/__init__.py')])
 
 
 with open(path('ec2instances/info/__init__.py'), 'w') as output:
