@@ -6,7 +6,7 @@ from setuptools import setup
 setup(
     name='ec2instances.info',
     packages=['ec2instances.info'],
-    version='0.0.1',
+    version='0.0.2',
     description='The community-maintained dataset of ec2 instance types'
                 ' and pricing',
     author='Garret Heaton',

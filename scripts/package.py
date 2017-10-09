@@ -17,10 +17,9 @@ def path(s):
 subprocess.call(['mkdir', '-p', '{}/ec2instances/info'.format(root_dir)])
 # Make the project a module
 subprocess.call(['touch', '{}/ec2instances/__init__.py'.format(root_dir)])
-subprocess.call(['touch', '{}/ec2instances/info/__init__.py'.format(root_dir)])
 
 
-with open(path('ec2instances/info/__init__.py'), 'a') as output:
+with open(path('ec2instances/info/__init__.py'), 'w') as output:
     # Final output will look like the following, though pretty-printed:
     #
     #  ec2 = [{'instance_type': 't2.micro', ...}, ...]
@@ -35,3 +34,5 @@ with open(path('ec2instances/info/__init__.py'), 'a') as output:
     with open(path('www/rds/instances.json'), 'r') as input:
         rds = json.loads(input.read())
         output.write("rds = {}".format(pprint.pformat(rds)))
+
+    output.write("\n")
