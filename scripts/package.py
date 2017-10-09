@@ -26,8 +26,8 @@ with open(path('ec2instances/info/__init__.py'), 'w') as output:
     #  rds = [{'instance_type': 'db.t2.small', ...}, ...]
     #
     with open(path('www/instances.json'), 'r') as input:
-        rds = json.loads(input.read())
-        output.write("ec2 = {}".format(pprint.pformat(rds)))
+        ec2 = json.loads(input.read())
+        output.write("ec2 = {}".format(pprint.pformat(ec2)))
 
     output.write("\n")
 
