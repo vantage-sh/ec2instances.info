@@ -12,8 +12,5 @@ setup(
     author='Garret Heaton',
     author_email='github@garretheaton.com',
     url='https://github.com/powdahound/ec2instances.info',
-    install_requires=[],
-    extras_require=None,
-    include_package_data=True,
     license="MIT",
 )
