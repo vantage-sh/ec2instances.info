@@ -86,7 +86,13 @@ def scrape(output_file, input_file=None):
 
         if product['productFamily'] == 'Database Instance':
             # map the region
-            region = regions[product['attributes']['location']]
+            try:
+                region = regions[product['attributes']['location']]
+            except KeyError as e:
+                if product['attributes']['location'] == 'Any':
+                    region = 'us-east-1'
+                else:
+                    raise
 
             # set the attributes in line with the ec2 index
             attributes = product['attributes']
