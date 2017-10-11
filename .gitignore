@@ -1,7 +1,11 @@
 *.pyc
 *.DS_store
 .idea
+*.egg-info
 env
 venv
 .fab_tasks~
 .env
+build
+dist
+ec2instances
