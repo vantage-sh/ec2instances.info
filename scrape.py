@@ -122,7 +122,18 @@ def parse_prev_generation_instance(tr):
 def parse_instance(tr, inst2family):
     i = Instance()
     cols = tr.xpath('td')
-    assert len(cols) == 12, "Expected 12 columns in the table, but got %d" % len(cols)
+    assert (len(cols) == 12 or len(cols) == 13), "Expected 12 or 13 columns in the table, but got %d" % len(cols)
+
+    ebs_optimized_col = 10
+    enhanced_networking_col = 11
+
+    # The "Compute Optimized" group table has an extra column
+    # FIXME: This kind of complexity is not good. Should try to detect the
+    #        column contents by the names in their headers.
+    if len(cols) == 13:
+        ebs_optimized_col = 11
+        enhanced_networking_col = 12
+
     i.instance_type = totext(cols[0])
     # Correct typo on AWS site (temporary fix on 2016-10-11)
     # https://github.com/powdahound/ec2instances.info/issues/199
@@ -151,9 +162,9 @@ def parse_instance(tr, inst2family):
         i.arch.append('i386')
     i.vCPU = locale.atoi(totext(cols[1]))
     i.memory = locale.atof(totext(cols[2]))
-    i.ebs_optimized = totext(cols[10]).lower() == 'yes'
     i.network_performance = totext(cols[4])
-    i.enhanced_networking = totext(cols[11]).lower() == 'yes'
+    i.ebs_optimized = totext(cols[ebs_optimized_col]).lower() == 'yes'
+    i.enhanced_networking = totext(cols[enhanced_networking_col]).lower() == 'yes'
     i.generation = 'current'
     # print "Parsed %s..." % (i.instance_type)
     return i
@@ -219,7 +230,7 @@ def scrape_instances():
 
     current_gen = []
     tree = etree.parse(urllib2.urlopen("http://aws.amazon.com/ec2/instance-types/"), etree.HTMLParser())
-    details_tables = tree.xpath('//table[count(tbody/tr[1]/td)=12]')
+    details_tables = tree.xpath('//table[count(tbody/tr[1]/td)>=12]')
     for details in details_tables:
         rows = details.xpath('tbody/tr')[1:]
         current_gen.extend([parse_instance(r, inst2family) for r in rows])
