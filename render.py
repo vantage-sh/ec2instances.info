@@ -35,7 +35,6 @@ def add_cpu_detail(i):
         i['ECU_per_vcpu'] = 'unknown'
     if 'physical_processor' in i:
         i['physical_processor'] = (i['physical_processor'] or '').replace('*', '')
-        i['clock_speed_ghz'] = 'Yes' if i['clock_speed_ghz'] else ''
         i['intel_avx'] = 'Yes' if i['intel_avx'] else ''
         i['intel_avx2'] = 'Yes' if i['intel_avx2'] else ''
         i['intel_turbo'] = 'Yes' if i['intel_turbo'] else ''
