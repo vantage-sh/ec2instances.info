@@ -110,10 +110,7 @@ def deploy(root_dir='www'):
             print '%s -> %s/%s' % (local_path, BUCKET_NAME, remote_path)
             k = Key(bucket)
             k.key = remote_path
-            headers = {
-                "Cache-Control": "max-age=86400, must-revalidate"}
-            k.set_contents_from_filename(local_path, headers=headers,
-                                         policy='public-read')
+            k.set_contents_from_filename(local_path, policy='public-read')
 
 
 @task(default=True)
