@@ -14,41 +14,45 @@ locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 class Instance(object):
     def __init__(self):
-        self.vpc = None
         self.arch = ['x86_64']
-        self.ECU = 0
         self.base_performance = None
         self.burst_minutes = None
-        self.linux_virtualization_types = []
-        self.ebs_only=True
-        self.ebs_throughput = 0
+        self.clock_speed_ghz = None
+        self.devices = 0
+        self.drive_size = None
         self.ebs_iops = 0
         self.ebs_max_bandwidth = 0
+        self.ebs_only=True
         self.ebs_optimized = False
-        # self.hvm_only = False
-        self.vpc_only = False
-        self.ipv6_support = False
-        self.trim_support = False
-        self.ssd = False
-        self.devices = 0
-        self.size = 0
-        self.nvme_ssd = False
-        self.storage_needs_initialization = False
-        self.includes_swap_partition = False
-        self.placement_group_support = False
-        self.pretty_name = ''
-        self.vCPU = 0
-        self.GPU = 0
-        self.FPGA = 0
-        self.instance_type = ''
+        self.ebs_throughput = 0
+        self.ECU = 0
+        self.enhanced_networking = None
         self.family = ''
-        self.memory = 0
-        self.pricing = {}
-        self.physical_processor = None
-        self.clock_speed_ghz = None
+        self.FPGA = 0
+        self.generation = None
+        self.GPU = 0
+        self.includes_swap_partition = False
+        self.instance_type = ''
         self.intel_avx = None
         self.intel_avx2 = None
         self.intel_turbo = None
+        self.ipv6_support = False
+        self.linux_virtualization_types = []
+        self.memory = 0
+        self.network_performance = None
+        self.num_drives = None
+        self.nvme_ssd = False
+        self.physical_processor = None
+        self.placement_group_support = False
+        self.pretty_name = ''
+        self.pricing = {}
+        self.size = 0
+        self.ssd = False
+        self.storage_needs_initialization = False
+        self.trim_support = False
+        self.vCPU = 0
+        self.vpc = None
+        self.vpc_only = False
 
     def to_dict(self):
         d = dict(family=self.family,
@@ -361,6 +365,7 @@ def add_reserved_pricing(imap, data, platform):
 
             inst.pricing[region][platform]['reserved'] = termPricing
 
+
 def add_ebs_pricing(imap, data):
     for region_spec in data['config']['regions']:
         region = transform_region(region_spec['region'])
@@ -377,6 +382,7 @@ def add_ebs_pricing(imap, data):
 
                 for col in i_spec['valueColumns']:
                     inst.pricing[region]['ebs'] = col['prices']['USD']
+
 
 def add_pricing_info(instances):
     pricing_modes = ['ri', 'od']
@@ -452,7 +458,7 @@ def add_eni_info(instances):
         if instance_type == 'i316xlarge':
             instance_type = 'i3.16xlarge'
         if instance_type not in by_type:
-            print "Unknown instance type: " + instance_type
+            print("Unknown instance type: {}".format(instance_type))
             continue
         by_type[instance_type].vpc = {
             'max_enis': max_enis,
@@ -477,7 +483,7 @@ def add_ebs_info(instances):
         ebs_throughput = locale.atof(totext(cols[3]))
         ebs_iops = locale.atof(totext(cols[4]))
         if instance_type not in by_type:
-            print "Unknown instance type: " + instance_type
+            print("Unknown instance type: {}".format(instance_type))
             continue
         by_type[instance_type].ebs_optimized_by_default = ebs_optimized_by_default
         by_type[instance_type].ebs_throughput = ebs_throughput
@@ -608,7 +614,7 @@ def add_cpu_details(instances):
 
         instance = by_type.get(instance_type)
         if not instance:
-            print "Unknown instance type: " + instance_type
+            print("Unknown instance type: {}".format(instance_type))
             continue
         instance.physical_processor = clean_output(totext(r[5]))
         instance.clock_speed_ghz = clean_output(totext(r[6]))
@@ -682,25 +688,25 @@ def add_pretty_names(instances):
 
 def scrape(data_file):
     """Scrape AWS to get instance data"""
-    print "Parsing instance types..."
+    print("Parsing instance types...")
     all_instances = scrape_instances()
-    print "Parsing pricing info..."
+    print("Parsing pricing info...")
     add_pricing_info(all_instances)
-    print "Parsing ENI info..."
+    print("Parsing ENI info...")
     add_eni_info(all_instances)
-    print "Parsing EBS info..."
+    print("Parsing EBS info...")
     add_ebs_info(all_instances)
-    print "Parsing Linux AMI info..."
+    print("Parsing Linux AMI info...")
     add_linux_ami_info(all_instances)
-    print "Parsing VPC-only info..."
+    print("Parsing VPC-only info...")
     add_vpconly_detail(all_instances)
-    print "Parsing local instance storage..."
+    print("Parsing local instance storage...")
     add_instance_storage_details(all_instances)
-    print "Parsing burstable instance credits..."
+    print("Parsing burstable instance credits...")
     add_t2_credits(all_instances)
-    print "Parsing instance names..."
+    print("Parsing instance names...")
     add_pretty_names(all_instances)
-    print "Parsing instance cpu details..."
+    print("Parsing instance cpu details...")
     add_cpu_details(all_instances)
 
     with open(data_file, 'w') as f:
