@@ -5,7 +5,6 @@ import re
 import json
 import locale
 
-
 # Following advice from https://stackoverflow.com/a/1779324/216138
 # The locale must be installed in the system, and it must be one where ',' is
 # the thousans separator and '.' is the decimal fraction separator.
@@ -22,7 +21,7 @@ class Instance(object):
         self.drive_size = None
         self.ebs_iops = 0
         self.ebs_max_bandwidth = 0
-        self.ebs_only=True
+        self.ebs_only = True
         self.ebs_optimized = False
         self.ebs_throughput = 0
         self.ECU = 0
@@ -100,6 +99,20 @@ class Instance(object):
         return "<Instance {}>".format(self.instance_type)
 
 
+def sanitize_instance_type(instance_type):
+    """Typos and other bad data are common in the instance type colums for some reason"""
+    # Remove random whitespace
+    instance_type = re.sub(r"\s+", "", instance_type, flags=re.UNICODE)
+
+    # Correct typos
+    typo_corrections = {
+        "x1.16large": "x1.16xlarge",  # https://github.com/powdahound/ec2instances.info/issues/199
+        "i3.4xlxarge": "i3.4xlarge",  # https://github.com/powdahound/ec2instances.info/issues/227
+        "i3.16large": "i3.16xlarge",  # https://github.com/powdahound/ec2instances.info/issues/227
+    }
+    return typo_corrections.get(instance_type, instance_type)
+
+
 def parse_prev_generation_instance(tr):
     i = Instance()
     cols = tr.xpath('td')
@@ -138,17 +151,7 @@ def parse_instance(tr, inst2family):
         ebs_optimized_col = 11
         enhanced_networking_col = 12
 
-    i.instance_type = totext(cols[0])
-    # Correct typo on AWS site (temporary fix on 2016-10-11)
-    # https://github.com/powdahound/ec2instances.info/issues/199
-    if i.instance_type == 'x1.16large':
-        i.instance_type = 'x1.16xlarge'
-    # Correct typo on AWS site (temporary fix on 2017-02-23)
-    # https://github.com/powdahound/ec2instances.info/issues/227
-    if i.instance_type == 'i3.4xlxarge':
-        i.instance_type = 'i3.4xlarge'
-    if i.instance_type == 'i3.16large':
-        i.instance_type = 'i3.16xlarge'
+    i.instance_type = sanitize_instance_type(totext(cols[0]))
     i.family = inst2family.get(i.instance_type, "Unknown")
     # Some instances support 32-bit arch
     # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html#resize-limitations
@@ -164,7 +167,10 @@ def parse_instance(tr, inst2family):
         'c1.medium')
     if i.instance_type in supports_32bit:
         i.arch.append('i386')
-    i.vCPU = locale.atoi(totext(cols[1]))
+    try:
+        i.vCPU = locale.atoi(totext(cols[1]))
+    except ValueError:
+        i.vCPU = "N/A"
     i.memory = locale.atof(totext(cols[2]))
     i.network_performance = totext(cols[4])
     i.ebs_optimized = totext(cols[ebs_optimized_col]).lower() == 'yes'
@@ -188,12 +194,12 @@ def feature_support(details, types):
     for r in rows:
         cols = r.xpath('th') or r.xpath('td')
         if totext(cols[4]).lower() == 'yes':
-            family = totext(cols[0]).lower()+"."
+            family = totext(cols[0]).lower() + "."
             for i in types:
                 if i.instance_type.startswith(family):
                     i.placement_group_support = True
         if totext(cols[7]).lower() == 'yes':
-            family = totext(cols[0]).lower()+"."
+            family = totext(cols[0]).lower() + "."
             for i in types:
                 if i.instance_type.startswith(family):
                     i.ipv6_support = True
@@ -418,7 +424,7 @@ def add_pricing_info(instances):
                 pricing_url = 'http://a0.awsstatic.com/pricing/1/ec2/previous-generation/%s-od.min.js' % (platform,)
             else:
                 pricing_url = 'http://a0.awsstatic.com/pricing/1/ec2/previous-generation/ri-v2/%s.min.js' % (
-                reserved_name_map[platform],)
+                    reserved_name_map[platform],)
 
             pricing = fetch_data(pricing_url)
             add_pricing(by_type, pricing, platform, pricing_mode)
@@ -453,10 +459,6 @@ def add_eni_info(instances):
         instance_type = etree.tostring(r[0], method='text').strip()
         max_enis = locale.atoi(etree.tostring(r[1], method='text'))
         ip_per_eni = locale.atoi(etree.tostring(r[2], method='text'))
-        # Correct typo on AWS site (temporary fix on 2017-02-23)
-        # https://github.com/powdahound/ec2instances.info/issues/227
-        if instance_type == 'i316xlarge':
-            instance_type = 'i3.16xlarge'
         if instance_type not in by_type:
             print("Unknown instance type: {}".format(instance_type))
             continue
@@ -477,7 +479,12 @@ def add_ebs_info(instances):
             continue
 
         cols = row.xpath('td')
-        instance_type = totext(cols[0]).split(' ')[0]
+        # TODO: Support the asterisk, which means: "These instance types can support maximum
+        # performance for 30 minutes at least once every 24 hours. For example, c5.large
+        # instances can deliver 281 MB/s for 30 minutes at least once every 24 hours. If you
+        # have a workload that requires sustained maximum performance for longer than 30
+        # minutes, select an instance type based on the following baseline performance."
+        instance_type = sanitize_instance_type(totext(cols[0]).replace("*", ""))
         ebs_optimized_by_default = totext(cols[1]) == 'Yes'
         ebs_max_bandwidth = locale.atof(totext(cols[2]))
         ebs_throughput = locale.atof(totext(cols[3]))
@@ -542,7 +549,7 @@ def add_linux_ami_info(instances):
 def add_vpconly_detail(instances):
     # specific instances can be lanuched in VPC only
     # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types
-    vpc_only_families = ('c5', 'c4', 'f1', 'g3', 'i3', 'm4', 'p2', 'r4', 't2', 'x1')
+    vpc_only_families = ('c5', 'c4', 'f1', 'g3', 'h1', 'i3', 'm4', 'm5', 'p2', 'r4', 't2', 'x1')
     for i in instances:
         for family in vpc_only_families:
             if i.instance_type.startswith(family):
@@ -606,12 +613,7 @@ def add_cpu_details(instances):
     tables = filter(lambda x: x.xpath('.//tr//td')[0].text == 'Instance Type', tables)
     rows = [r for t in tables for r in t.xpath('.//tr') if not r[0].text == 'Instance Type']
     for r in rows:
-        instance_type = etree.tostring(r[0], method='text').strip()
-        if instance_type == 'x1.16large':
-            instance_type = 'x1.16xlarge'
-        elif instance_type == 'i3.16large':
-            instance_type = 'i3.16xlarge'
-
+        instance_type = sanitize_instance_type(etree.tostring(r[0], method='text'))
         instance = by_type.get(instance_type)
         if not instance:
             print("Unknown instance type: {}".format(instance_type))
@@ -624,8 +626,9 @@ def add_cpu_details(instances):
 
 
 def add_t2_credits(instances):
-    tree = etree.parse(urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html"),
-                       etree.HTMLParser())
+    tree = etree.parse(
+        urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-credits-baseline-concepts.html"),
+        etree.HTMLParser())
     table = tree.xpath('//div[@class="table-contents"]//table')[0]
     rows = table.xpath('.//tr[./td]')
     assert len(rows) > 0, "Failed to find T2 CPU credit info"
@@ -635,35 +638,37 @@ def add_t2_credits(instances):
     for r in rows:
         if len(r) > 1:
             inst = by_type[totext(r[0])]
-            creds_per_hour = locale.atof(totext(r[2]))
+            creds_per_hour = locale.atof(totext(r[1]))
             inst.base_performance = creds_per_hour / 60
             inst.burst_minutes = creds_per_hour * 24 / inst.vCPU
 
 
 def add_pretty_names(instances):
     family_names = {
-        'r3': 'R3 High-Memory',
-        'r4': 'R4 High-Memory',
+        'c1': 'C1 High-CPU',
         'c3': 'C3 High-CPU',
         'c4': 'C4 High-CPU',
         'c5': 'C5 High-CPU',
-        'm3': 'M3 General Purpose',
-        'i3': 'I3 High I/O',
-        'cg1': 'Cluster GPU',
         'cc2': 'Cluster Compute',
+        'cg1': 'Cluster GPU',
         'cr1': 'High Memory Cluster',
-        'hs1': 'High Storage',
-        'c1' : 'C1 High-CPU',
         'hi1': 'HI1. High I/O',
-        'm2' : 'M2 High Memory',
-        'm1' : 'M1 General Purpose',
-        'p2' : 'General Purpose GPU',
-        'x1' : 'X1 Extra High-Memory'
-        }
+        'hs1': 'High Storage',
+        'i3': 'I3 High I/O',
+        'm1': 'M1 General Purpose',
+        'm2': 'M2 High Memory',
+        'm3': 'M3 General Purpose',
+        'm4': 'M4 General Purpose',
+        'm5': 'M5 General Purpose',
+        'p2': 'General Purpose GPU',
+        'r3': 'R3 High-Memory',
+        'r4': 'R4 High-Memory',
+        'x1': 'X1 Extra High-Memory'
+    }
     for i in instances:
         pieces = i.instance_type.split('.')
         family = pieces[0]
-        short  = pieces[1]
+        short = pieces[1]
         prefix = family_names.get(family, family.upper())
         extra = None
         if short.startswith('8x'):

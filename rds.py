@@ -185,8 +185,8 @@ def scrape(output_file, input_file=None):
                         'yrTerm1.noUpfront': prices['reserved']['yrTerm1.noUpfront-hrs'],
                     }
                     instances[instance_type]['pricing'][region][engine]['reserved'] = reserved_prices
-                except Exception, e:
-                    print "ERROR: Trouble generating reserved price: {!r}".format(e)
+                except Exception as e:
+                    print("ERROR: Trouble generating RDS reserved price for {}: {!r}".format(instance_type, e))
 
     # print json.dumps(instances['db.m3.medium']['pricing']['eu-west-1']['MySQL'], indent=4)
 

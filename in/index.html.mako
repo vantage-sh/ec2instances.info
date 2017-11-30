@@ -212,6 +212,8 @@
           <td class="ecu-per-vcpu">
             % if inst['ECU'] == 'variable':
             <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
+            % elif inst['ECU_per_vcpu'] == 'unknown':
+            <span sort="0">unknown</span>
             % else:
             <span sort="${inst['ECU_per_vcpu']}">${"%.4g" % inst['ECU_per_vcpu']} units</span>
             % endif
