@@ -70,6 +70,7 @@ def scrape(output_file, input_file=None):
         "Asia Pacific (Singapore)": 'ap-southeast-1',
         "Asia Pacific (Sydney)": 'ap-southeast-2',
         "Asia Pacific (Tokyo)": 'ap-northeast-1',
+        "Asia Pacific (Osaka-Local)": 'ap-northeast-3',
         "Canada (Central)": 'ca-central-1',
         "EU (Frankfurt)": 'eu-central-1',
         "EU (Ireland)": 'eu-west-1',
@@ -85,7 +86,7 @@ def scrape(output_file, input_file=None):
     # loop through products, and only fetch available instances for now
     for sku, product in data['products'].iteritems():
 
-        if product['productFamily'] == 'Database Instance':
+        if product.get('productFamily', None) == 'Database Instance':
             # map the region
             try:
                 region = regions[product['attributes']['location']]
