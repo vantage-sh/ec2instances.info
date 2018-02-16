@@ -263,7 +263,7 @@ def scrape_instances():
     all_gen = prev_gen + current_gen
 
     hdrs = features_details.xpath('tr')[0]
-    if totext(hdrs[0]).lower() == '' and 'ipv6 support' in totext(hdrs[7]).lower():
+    if len(hdrs) > 7 and totext(hdrs[0]).lower() == '' and 'ipv6 support' in totext(hdrs[7]).lower():
         feature_support(features_details, all_gen)
 
     return all_gen
