@@ -118,7 +118,7 @@ def parse_prev_generation_instance(tr):
     cols = tr.xpath('td')
     assert len(cols) == 8, "Expected 8 columns in the table, but got %d" % len(cols)
     i.family = totext(cols[0])
-    i.instance_type = totext(cols[1])
+    i.instance_type = totext(cols[1]).strip("*")
     archs = totext(cols[2])
     i.arch = []
     if '32-bit' in archs:
