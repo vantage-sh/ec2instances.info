@@ -329,7 +329,7 @@ def add_ondemand_pricing(imap, data, platform):
             for i_spec in t_spec['sizes']:
                 i_type = i_spec['size']
                 if i_type not in imap:
-                    print("ERROR: Got ondemand pricing data for unknown instance type: {}".format(i_type))
+                    print("ERROR: Got ondemand pricing data for unknown instance type {} in region {}".format(i_type, region))
                     continue
                 inst = imap[i_type]
                 inst.pricing.setdefault(region, {})
@@ -353,7 +353,7 @@ def add_reserved_pricing(imap, data, platform):
         for t_spec in region_spec['instanceTypes']:
             i_type = t_spec['type']
             if i_type not in imap:
-                print("ERROR: Got reserved pricing data for unknown instance type: {}".format(i_type))
+                print("ERROR: Got reserved pricing data for unknown instance type {} in region {}".format(i_type, region))
                 continue
             inst = imap[i_type]
             inst.pricing.setdefault(region, {})
