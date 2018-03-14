@@ -35,7 +35,6 @@ class Instance(object):
         self.intel_avx = None
         self.intel_avx2 = None
         self.intel_turbo = None
-        self.ipv6_support = False
         self.linux_virtualization_types = []
         self.memory = 0
         self.network_performance = None
@@ -52,6 +51,23 @@ class Instance(object):
         self.vCPU = 0
         self.vpc = None
         self.vpc_only = False
+
+    def get_type_prefix(self):
+        """h1, i3, d2, etc"""
+        return self.instance_type.split(".")[0]
+
+    def get_ipv6_support(self):
+        """Fancy parsing not needed for ipv6 support.
+
+        "IPv6 is supported on all current generation instance types and the
+         C3, R3, and I2 previous generation instance types."
+         - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+
+        FIXME: This should be a @property, but this project is still Python 2. Yikes!
+
+        """
+        ipv4_only_families = ("cg1", "m1", "m3", "c1", "cc2", "g2", "m2", "cr1", "hs1", "t1")
+        return self.get_type_prefix() not in ipv4_only_families
 
     def to_dict(self):
         d = dict(family=self.family,
@@ -77,7 +93,7 @@ class Instance(object):
                  linux_virtualization_types=self.linux_virtualization_types,
                  generation=self.generation,
                  vpc_only=self.vpc_only,
-                 ipv6_support=self.ipv6_support,
+                 ipv6_support=self.get_ipv6_support(),
                  physical_processor=self.physical_processor,
                  clock_speed_ghz=self.clock_speed_ghz,
                  intel_avx=self.intel_avx,
@@ -198,11 +214,6 @@ def feature_support(details, types):
             for i in types:
                 if i.instance_type.startswith(family):
                     i.placement_group_support = True
-        if totext(cols[7]).lower() == 'yes':
-            family = totext(cols[0]).lower() + "."
-            for i in types:
-                if i.instance_type.startswith(family):
-                    i.ipv6_support = True
 
 
 def parse_gpus(tr, by_type):
@@ -263,7 +274,7 @@ def scrape_instances():
     all_gen = prev_gen + current_gen
 
     hdrs = features_details.xpath('tr')[0]
-    if totext(hdrs[0]).lower() == '' and 'ipv6 support' in totext(hdrs[7]).lower():
+    if totext(hdrs[0]).lower() == '' and 'enhanced networking' in totext(hdrs[5]).lower():
         feature_support(features_details, all_gen)
 
     return all_gen
