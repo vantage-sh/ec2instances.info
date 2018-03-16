@@ -85,6 +85,10 @@ body {
   text-align: right;
 }
 
+#data td.maxenis {
+  text-align: right;
+}
+
 #data td.apiname {
   text-align: left;
 }
