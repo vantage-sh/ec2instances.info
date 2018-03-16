@@ -56,6 +56,7 @@ function init_data_table() {
           "intel_turbo",
           "enhanced-networking",
           "maxips",
+          "maxenis",
           "linux-virtualization",
           "cost-ondemand-rhel",
           "cost-ondemand-sles",

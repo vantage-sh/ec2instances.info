@@ -134,6 +134,7 @@
           <th class="maxips">
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
+          <th class="maxenis">Max ENIs</th>
           <th class="enhanced-networking">Enhanced Networking</th>
           <th class="vpc-only">VPC Only</th>
           <th class="ipv6-support">IPv6 Support</th>
@@ -289,6 +290,13 @@
           <td class="maxips">
             % if inst['vpc']:
               ${inst['vpc']['max_enis'] * inst['vpc']['ips_per_eni']}
+            % else:
+              N/A
+            % endif
+          </td>
+          <td class="maxenis">
+            % if inst['vpc']:
+              ${inst['vpc']['max_enis']}
             % else:
               N/A
             % endif
