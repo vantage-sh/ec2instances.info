@@ -258,6 +258,7 @@ function setup_clear() {
   $('.btn-clear').click(function () {
     // Reset app.
     g_settings = JSON.parse(JSON.stringify(g_settings_defaults)); // clone
+    g_data_table.search("");
     clear_row_selections();
     maybe_update_url();
     store.clear();
@@ -365,6 +366,7 @@ function on_data_table_initialized() {
   $('[data-action="datafilter"][data-type="memory"]').val(g_settings['min_memory']);
   $('[data-action="datafilter"][data-type="vcpus"]').val(g_settings['min_vcpus']);
   $('[data-action="datafilter"][data-type="storage"]').val(g_settings['min_storage']);
+  g_data_table.search(g_settings['filter']);
   apply_min_values();
 
   // apply highlight to selected rows
@@ -458,7 +460,7 @@ function load_settings() {
         key = 'reserved_term';
       }
       // store in global settings
-      console.log('loaded from url', key, val);
+      console.log('Loaded setting from URL:', key, '=', val);
       g_settings[key] = val;
     });
   }
