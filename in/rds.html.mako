@@ -109,7 +109,7 @@
           </th>
           <th class="networkperf">Network Performance</th>
           <th class="arch">Arch</th>
-          % for platform in ['Amazon Aurora', 'MariaDB', 'MySQL', 'Oracle','PostgreSQL', 'SQL Server']:
+          % for platform in ['Aurora PostgreSQL', 'Aurora MySQL', 'MariaDB', 'MySQL', 'Oracle','PostgreSQL', 'SQL Server']:
           <th class="cost-ondemand cost-ondemand-${platform}">${platform} On Demand cost</th>
           <th class="cost-reserved cost-reserved-${platform}">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>${platform} Reserved cost</abbr>
@@ -157,7 +157,7 @@
             64-bit
             % endif
           </td>
-          % for platform in ['Amazon Aurora', 'MariaDB', 'MySQL', 'Oracle','PostgreSQL', 'SQL Server']:
+          % for platform in ['Aurora PostgreSQL', 'Aurora MySQL', 'MariaDB', 'MySQL', 'Oracle','PostgreSQL', 'SQL Server']:
           <td class="cost-ondemand cost-ondemand-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',{})).get('ondemand') for r,p in inst['pricing'].iteritems()}) | h}'>
             % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][platform]['ondemand']}">
