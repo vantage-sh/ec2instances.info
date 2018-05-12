@@ -169,6 +169,18 @@
           <th class="cost-reserved cost-reserved-mswinSQLEnterprise">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows SQL Ent Reserved cost</abbr>
           </th>
+          <th class="cost-ondemand cost-ondemand-linuxSQLWeb">Linux SQL Web On Demand cost</th>
+          <th class="cost-reserved cost-reserved-linuxSQLWeb">
+            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux SQL Web Reserved cost</abbr>
+          </th>
+          <th class="cost-ondemand cost-ondemand-linuxSQL">Linux SQL Std On Demand cost</th>
+          <th class="cost-reserved cost-reserved-linuxSQL">
+            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux SQL Std Reserved cost</abbr>
+          </th>
+          <th class="cost-ondemand cost-ondemand-linuxSQLEnterprise">Linux SQL Ent On Demand cost</th>
+          <th class="cost-reserved cost-reserved-linuxSQLEnterprise">
+            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux SQL Ent Reserved cost</abbr>
+          </th>
           <th class="cost-ebs-optimized">
             <abbr title='Some instance types are charged additionally when configured for optimized EBS usage'>EBS Optimized surcharge</abbr>
           </th>
@@ -320,7 +332,7 @@
             Unknown
             % endif
           </td>
-          % for platform in ['linux', 'rhel', 'sles', 'mswin', 'mswinSQLWeb', 'mswinSQL', 'mswinSQLEnterprise']:
+          % for platform in ['linux', 'rhel', 'sles', 'mswin', 'mswinSQLWeb', 'mswinSQL', 'mswinSQLEnterprise', 'linuxSQLWeb', 'linuxSQL', 'linuxSQLEnterprise']:
           ## note that the contents in these cost cells are overwritten by the JS change_cost() func, but the initial
           ## data here is used for sorting (and anyone with JS disabled...)
           ## for more info, see https://github.com/powdahound/ec2instances.info/issues/140
