@@ -7,7 +7,9 @@ import sys
 
 def add_pretty_names(instances):
     family_names = {
-        'r3': 'R3 High-Memory',
+        't2': 'T2 General Purpose',
+        'r3': 'R3 Memory Optimized',
+        'r4': 'R4 Memory Optimized',
         'c3': 'C3 High-CPU',
         'c4': 'C4 High-CPU',
         'm3': 'M3 General Purpose',
@@ -24,9 +26,10 @@ def add_pretty_names(instances):
         }
     for k in instances:
         i = instances[k]
+        # instance type format looks like "db.r4.large"; dropping the "db" prefix
         pieces = i['instance_type'].split('.')
-        family = pieces[0]
-        short  = pieces[1]
+        family = pieces[1]
+        short  = pieces[2]
         prefix = family_names.get(family, family.upper())
         extra = None
         if short.startswith('8x'):
@@ -37,6 +40,8 @@ def add_pretty_names(instances):
             extra = 'Double'
         elif short.startswith('10x'):
             extra = 'Deca'
+        elif short.startswith('16x'):
+            extra = 'Hexa'
         elif short.startswith('x'):
             extra = ''
         bits = [prefix]
@@ -146,6 +151,10 @@ def scrape(output_file, input_file=None):
         for code, offer in offers.iteritems():
             for key, dimension in offer['priceDimensions'].iteritems():
 
+                # skip multi-az
+                if rds_instances[sku]['deploymentOption'] != 'Single-AZ':
+                    continue
+            
                 instance = rds_instances[sku]
                 region = rds_instances[sku]['region']
 
@@ -178,12 +187,12 @@ def scrape(output_file, input_file=None):
                 if 'reserved' not in prices:
                     continue
                 try:
-                    # TODO: check if the prices are actually for multi-az instances
+                    # no multi-az here
                     reserved_prices = {
-                        'yrTerm3.partialUpfront': (prices['reserved']['yrTerm3.partialUpfront-quantity'] / (365 * 3) / 24 / 2) + prices['reserved']['yrTerm3.partialUpfront-hrs'],
-                        'yrTerm1.partialUpfront': (prices['reserved']['yrTerm1.partialUpfront-quantity'] / 365 / 24 / 2) + prices['reserved']['yrTerm1.partialUpfront-hrs'],
-                        'yrTerm3.allUpfront': (prices['reserved']['yrTerm3.allUpfront-quantity'] / (365 * 3) / 24 / 2) + prices['reserved']['yrTerm3.allUpfront-hrs'],
-                        'yrTerm1.allUpfront': (prices['reserved']['yrTerm1.allUpfront-quantity'] / 365 / 24 / 2) + prices['reserved']['yrTerm1.allUpfront-hrs'],
+                        'yrTerm3.partialUpfront': (prices['reserved']['yrTerm3.partialUpfront-quantity'] / (365 * 3) / 24) + prices['reserved']['yrTerm3.partialUpfront-hrs'],
+                        'yrTerm1.partialUpfront': (prices['reserved']['yrTerm1.partialUpfront-quantity'] / 365 / 24) + prices['reserved']['yrTerm1.partialUpfront-hrs'],
+                        'yrTerm3.allUpfront': (prices['reserved']['yrTerm3.allUpfront-quantity'] / (365 * 3) / 24) + prices['reserved']['yrTerm3.allUpfront-hrs'],
+                        'yrTerm1.allUpfront': (prices['reserved']['yrTerm1.allUpfront-quantity'] / 365 / 24) + prices['reserved']['yrTerm1.allUpfront-hrs'],
                         'yrTerm1.noUpfront': prices['reserved']['yrTerm1.noUpfront-hrs'],
                     }
                     instances[instance_type]['pricing'][region][engine]['reserved'] = reserved_prices
