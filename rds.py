@@ -40,8 +40,6 @@ def add_pretty_names(instances):
             extra = 'Double'
         elif short.startswith('10x'):
             extra = 'Deca'
-        elif short.startswith('16x'):
-            extra = 'Hexa'
         elif short.startswith('x'):
             extra = ''
         bits = [prefix]
@@ -154,7 +152,7 @@ def scrape(output_file, input_file=None):
                 # skip multi-az
                 if rds_instances[sku]['deploymentOption'] != 'Single-AZ':
                     continue
-            
+
                 instance = rds_instances[sku]
                 region = rds_instances[sku]['region']
 
