@@ -8,8 +8,6 @@
     <h1>RDSInstances.info <small>Easy Amazon RDS Instance Comparison</small></h1>
     </%block>
 
-<div class="alert alert-danger">Warning: RDS pricing information is often inaccurate. See <a href="https://github.com/powdahound/ec2instances.info/issues/314">issue #314</a>.</div>
-
     <div class="row" id="menu">
       <div class="col-sm-12">
         <div class="btn-group" id='region-dropdown'>
