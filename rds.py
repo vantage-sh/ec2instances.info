@@ -125,9 +125,10 @@ def scrape(output_file, input_file=None):
                 if any(descr in dimension['description'].lower() for descr in ['transfer', 'global', 'storage', 'iops', 'requests', 'multi-az']):
                     continue
 
-                instance = rds_instances[sku]
-                # if instance['instance_type'] == 'db.m3.medium' and instance['region'] == 'eu-west-1' and instance['database_engine'].lower() == 'mysql':
-                #     print instance['region'], dimension
+                instance = rds_instances.get(sku)
+                if not instance:
+                    print("ERROR: Instance type not found for sku={}".format(sku))
+                    continue
 
                 if instance['region'] not in instances[instance['instance_type']]['pricing']:
                     instances[instance['instance_type']]['pricing'][instance['region']] = {}
