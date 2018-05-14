@@ -411,7 +411,10 @@ def add_pricing_info(instances):
         'mswin': 'windows-shared',
         'mswinSQL': 'windows-with-sql-server-standard-shared',
         'mswinSQLWeb': 'windows-with-sql-server-web-shared',
-        'mswinSQLEnterprise': 'windows-with-sql-server-enterprise-shared'
+        'mswinSQLEnterprise': 'windows-with-sql-server-enterprise-shared',
+        'linuxSQL': 'linux-with-sql-server-standard-shared',
+        'linuxSQLWeb': 'linux-with-sql-server-web-shared',
+        'linuxSQLEnterprise':' linux-with-sql-server-enterprise-shared'
     }
 
     for i in instances:
@@ -419,7 +422,7 @@ def add_pricing_info(instances):
 
     by_type = {i.instance_type: i for i in instances}
 
-    for platform in ['linux', 'rhel', 'sles', 'mswin', 'mswinSQL', 'mswinSQLWeb', 'mswinSQLEnterprise']:
+    for platform in ['linux', 'rhel', 'sles', 'mswin', 'mswinSQL', 'mswinSQLWeb', 'mswinSQLEnterprise', 'linuxSQL', 'linuxSQLWeb', 'linuxSQLEnterprise']:
         for pricing_mode in pricing_modes:
             # current generation
             if pricing_mode == 'od':
