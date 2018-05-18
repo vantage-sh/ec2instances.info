@@ -5,7 +5,7 @@
 <%inherit file="base.mako" />
 
     <%block name="header">
-    <h1>RDSInstances.info <small>Easy Amazon RDS Instance Comparison</small></h1>
+    <h1>EC2Instances.info RDS<small>Easy Amazon RDS Instance Comparison</small></h1>
     </%block>
 
     <div class="row" id="menu">
