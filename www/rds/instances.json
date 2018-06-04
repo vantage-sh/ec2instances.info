@@ -1,5 +1,211 @@
 [
     {
+        "family": "Memory optimized", 
+        "databaseEdition": "Enterprise", 
+        "currentGeneration": "Yes", 
+        "network_performance": "25 Gigabit", 
+        "servicename": "Amazon Relational Database Service", 
+        "pricing": {
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 22.40000
+                }
+            }, 
+            "ap-northeast-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 20.14720, 
+                        "yrTerm3.allUpfront": 9.11781, 
+                        "yrTerm1.allUpfront": 18.87854, 
+                        "yrTerm1.partialUpfront": 19.18539, 
+                        "yrTerm3.partialUpfront": 9.76997
+                    }, 
+                    "ondemand": 32.51200
+                }
+            }, 
+            "ap-northeast-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 20.14720, 
+                        "yrTerm3.allUpfront": 9.11781, 
+                        "yrTerm1.allUpfront": 18.87854, 
+                        "yrTerm1.partialUpfront": 19.18539, 
+                        "yrTerm3.partialUpfront": 9.76997
+                    }, 
+                    "ondemand": 32.51200
+                }
+            }, 
+            "eu-west-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 16.66560, 
+                        "yrTerm3.allUpfront": 7.52998, 
+                        "yrTerm1.allUpfront": 15.57626, 
+                        "yrTerm1.partialUpfront": 15.88486, 
+                        "yrTerm3.partialUpfront": 8.07768
+                    }, 
+                    "ondemand": 26.88000
+                }
+            }, 
+            "ap-southeast-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 20.14720, 
+                        "yrTerm3.allUpfront": 9.08858, 
+                        "yrTerm1.allUpfront": 18.84932, 
+                        "yrTerm1.partialUpfront": 19.18539, 
+                        "yrTerm3.partialUpfront": 9.76997
+                    }, 
+                    "ondemand": 32.48640
+                }
+            }, 
+            "eu-west-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 17.51040, 
+                        "yrTerm3.allUpfront": 7.90989, 
+                        "yrTerm1.allUpfront": 16.39452, 
+                        "yrTerm1.partialUpfront": 16.67437, 
+                        "yrTerm3.partialUpfront": 8.48704
+                    }, 
+                    "ondemand": 28.23680
+                }
+            }, 
+            "ca-central-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 15.28320, 
+                        "yrTerm3.allUpfront": 6.91629, 
+                        "yrTerm1.allUpfront": 14.31963, 
+                        "yrTerm1.partialUpfront": 14.54711, 
+                        "yrTerm3.partialUpfront": 7.41367
+                    }, 
+                    "ondemand": 24.65280
+                }
+            }, 
+            "ap-southeast-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 20.14720, 
+                        "yrTerm3.allUpfront": 9.11781, 
+                        "yrTerm1.allUpfront": 18.87854, 
+                        "yrTerm1.partialUpfront": 19.18539, 
+                        "yrTerm3.partialUpfront": 9.76997
+                    }, 
+                    "ondemand": 32.51200
+                }
+            }, 
+            "us-west-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 13.90080, 
+                        "yrTerm3.allUpfront": 6.27336, 
+                        "yrTerm1.allUpfront": 13.00457, 
+                        "yrTerm1.partialUpfront": 13.20937, 
+                        "yrTerm3.partialUpfront": 6.74967
+                    }, 
+                    "ondemand": 22.40000
+                }
+            }, 
+            "us-gov-west-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 16.66560, 
+                        "yrTerm3.allUpfront": 7.52998, 
+                        "yrTerm1.allUpfront": 15.57626, 
+                        "yrTerm1.partialUpfront": 15.88486, 
+                        "yrTerm3.partialUpfront": 8.07768
+                    }, 
+                    "ondemand": 26.88000
+                }
+            }, 
+            "ap-south-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 19.14880, 
+                        "yrTerm3.allUpfront": 8.65023, 
+                        "yrTerm1.allUpfront": 17.88493, 
+                        "yrTerm1.partialUpfront": 18.23141, 
+                        "yrTerm3.partialUpfront": 9.27043
+                    }, 
+                    "ondemand": 30.87360
+                }
+            }, 
+            "eu-central-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 19.45600, 
+                        "yrTerm3.allUpfront": 8.77686, 
+                        "yrTerm1.allUpfront": 18.20639, 
+                        "yrTerm1.partialUpfront": 18.53113, 
+                        "yrTerm3.partialUpfront": 9.42516
+                    }, 
+                    "ondemand": 31.36000
+                }
+            }, 
+            "sa-east-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 27.08480, 
+                        "yrTerm3.allUpfront": 12.23501, 
+                        "yrTerm1.allUpfront": 25.33699, 
+                        "yrTerm1.partialUpfront": 25.79007, 
+                        "yrTerm3.partialUpfront": 13.10946
+                    }, 
+                    "ondemand": 43.69920
+                }
+            }, 
+            "us-east-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 13.90080, 
+                        "yrTerm3.allUpfront": 6.27336, 
+                        "yrTerm1.allUpfront": 13.00457, 
+                        "yrTerm1.partialUpfront": 13.20937, 
+                        "yrTerm3.partialUpfront": 6.74967
+                    }, 
+                    "ondemand": 22.40000
+                }
+            }, 
+            "eu-west-3": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 17.51040, 
+                        "yrTerm3.allUpfront": 7.90989, 
+                        "yrTerm1.allUpfront": 16.39452, 
+                        "yrTerm1.partialUpfront": 16.67437, 
+                        "yrTerm3.partialUpfront": 8.48704
+                    }, 
+                    "ondemand": 28.23680
+                }
+            }
+        }, 
+        "operation": "CreateDBInstance:0005", 
+        "instanceType": "db.x1.32xlarge", 
+        "vcpu": "128", 
+        "storage": "1 x 1920 SSD", 
+        "location": "Asia Pacific (Seoul)", 
+        "memory": "1952", 
+        "networkPerformance": "25 Gigabit", 
+        "usagetype": "APN2-InstanceUsage:db.x1.32xl", 
+        "normalizationSizeFactor": "256", 
+        "processorArchitecture": "64-bit", 
+        "pretty_name": "X1 32xlarge", 
+        "instanceTypeFamily": "X1e", 
+        "servicecode": "AmazonRDS", 
+        "arch": "64-bit", 
+        "database_engine": "Oracle", 
+        "instanceFamily": "Memory optimized", 
+        "locationType": "AWS Region", 
+        "region": "ap-northeast-2", 
+        "licenseModel": "Bring your own license", 
+        "instance_type": "db.x1.32xlarge", 
+        "deploymentOption": "Single-AZ", 
+        "engineCode": "5", 
+        "physicalProcessor": "Intel Xeon E7-8880 v3", 
+        "databaseEngine": "Oracle"
+    }, 
+    {
         "family": "General purpose", 
         "databaseEdition": "Standard", 
         "currentGeneration": "Yes", 
@@ -679,15 +885,35 @@
                 }
             }, 
             "us-gov-west-1": {
-                "Oracle": {
+                "PostgreSQL": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.05200, 
-                        "yrTerm3.allUpfront": 0.02808, 
-                        "yrTerm1.allUpfront": 0.04395, 
-                        "yrTerm1.partialUpfront": 0.04475, 
-                        "yrTerm3.partialUpfront": 0.02946
+                        "yrTerm1.noUpfront": 0.03400, 
+                        "yrTerm3.allUpfront": 0.01830, 
+                        "yrTerm1.allUpfront": 0.02865, 
+                        "yrTerm1.partialUpfront": 0.02893, 
+                        "yrTerm3.partialUpfront": 0.01993
                     }, 
-                    "ondemand": 0.04100
+                    "ondemand": 0.04300
+                }, 
+                "SQL Server": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.04300, 
+                        "yrTerm3.allUpfront": 0.02241, 
+                        "yrTerm1.allUpfront": 0.03619, 
+                        "yrTerm1.partialUpfront": 0.03704, 
+                        "yrTerm3.partialUpfront": 0.02391
+                    }, 
+                    "ondemand": 0.04900
+                }, 
+                "Aurora MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.04000, 
+                        "yrTerm3.allUpfront": 0.02165, 
+                        "yrTerm1.allUpfront": 0.03333, 
+                        "yrTerm1.partialUpfront": 0.03401, 
+                        "yrTerm3.partialUpfront": 0.02353
+                    }, 
+                    "ondemand": 0.04900
                 }, 
                 "MySQL": {
                     "reserved": {
@@ -699,15 +925,15 @@
                     }, 
                     "ondemand": 0.04100
                 }, 
-                "PostgreSQL": {
+                "Oracle": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.03400, 
-                        "yrTerm3.allUpfront": 0.01830, 
-                        "yrTerm1.allUpfront": 0.02865, 
-                        "yrTerm1.partialUpfront": 0.02893, 
-                        "yrTerm3.partialUpfront": 0.01993
+                        "yrTerm1.noUpfront": 0.05200, 
+                        "yrTerm3.allUpfront": 0.02808, 
+                        "yrTerm1.allUpfront": 0.04395, 
+                        "yrTerm1.partialUpfront": 0.04475, 
+                        "yrTerm3.partialUpfront": 0.02946
                     }, 
-                    "ondemand": 0.04300
+                    "ondemand": 0.04100
                 }, 
                 "MariaDB": {
                     "reserved": {
@@ -718,16 +944,6 @@
                         "yrTerm3.partialUpfront": 0.01793
                     }, 
                     "ondemand": 0.04100
-                }, 
-                "SQL Server": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.04300, 
-                        "yrTerm3.allUpfront": 0.02241, 
-                        "yrTerm1.allUpfront": 0.03619, 
-                        "yrTerm1.partialUpfront": 0.03704, 
-                        "yrTerm3.partialUpfront": 0.02391
-                    }, 
-                    "ondemand": 0.04900
                 }
             }, 
             "ap-south-1": {
@@ -1021,11 +1237,11 @@
                 }, 
                 "MariaDB": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.03460, 
-                        "yrTerm3.allUpfront": 0.02237, 
-                        "yrTerm1.allUpfront": 0.03231, 
-                        "yrTerm1.partialUpfront": 0.03294, 
-                        "yrTerm3.partialUpfront": 0.02282
+                        "yrTerm1.noUpfront": 0.02670, 
+                        "yrTerm3.allUpfront": 0.01750, 
+                        "yrTerm1.allUpfront": 0.02500, 
+                        "yrTerm1.partialUpfront": 0.02549, 
+                        "yrTerm3.partialUpfront": 0.01784
                     }, 
                     "ondemand": 0.03800
                 }
@@ -1794,15 +2010,15 @@
                     }, 
                     "ondemand": 1.84000
                 }, 
-                "MariaDB": {
+                "SQL Server": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.58600, 
-                        "yrTerm3.allUpfront": 0.33451, 
-                        "yrTerm1.allUpfront": 0.49041, 
-                        "yrTerm1.partialUpfront": 0.50002, 
-                        "yrTerm3.partialUpfront": 0.35601
+                        "yrTerm1.noUpfront": 4.55100, 
+                        "yrTerm3.allUpfront": 4.40944, 
+                        "yrTerm1.allUpfront": 4.52626, 
+                        "yrTerm1.partialUpfront": 4.53367, 
+                        "yrTerm3.partialUpfront": 4.42418
                     }, 
-                    "ondemand": 0.77200
+                    "ondemand": 4.72700
                 }, 
                 "PostgreSQL": {
                     "reserved": {
@@ -1814,15 +2030,15 @@
                     }, 
                     "ondemand": 0.80600
                 }, 
-                "SQL Server": {
+                "MariaDB": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 4.55100, 
-                        "yrTerm3.allUpfront": 4.40944, 
-                        "yrTerm1.allUpfront": 4.52626, 
-                        "yrTerm1.partialUpfront": 4.53367, 
-                        "yrTerm3.partialUpfront": 4.42418
+                        "yrTerm1.noUpfront": 0.58600, 
+                        "yrTerm3.allUpfront": 0.33451, 
+                        "yrTerm1.allUpfront": 0.49041, 
+                        "yrTerm1.partialUpfront": 0.50002, 
+                        "yrTerm3.partialUpfront": 0.35601
                     }, 
-                    "ondemand": 4.72700
+                    "ondemand": 0.77200
                 }, 
                 "MySQL": {
                     "reserved": {
@@ -2436,7 +2652,7 @@
                         "yrTerm1.partialUpfront": 1.48395, 
                         "yrTerm3.partialUpfront": 1.02905
                     }, 
-                    "ondemand": 2.28160
+                    "ondemand": 4.51200
                 }, 
                 "MariaDB": {
                     "reserved": {
@@ -2606,13 +2822,13 @@
                 }, 
                 "SQL Server": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 9.76890, 
-                        "yrTerm3.allUpfront": 8.92158, 
-                        "yrTerm1.allUpfront": 9.11769, 
-                        "yrTerm1.partialUpfront": 9.30373, 
-                        "yrTerm3.partialUpfront": 9.10363
+                        "yrTerm1.noUpfront": 2.04020, 
+                        "yrTerm3.allUpfront": 1.39258, 
+                        "yrTerm1.allUpfront": 1.90411, 
+                        "yrTerm1.partialUpfront": 1.94296, 
+                        "yrTerm3.partialUpfront": 1.42100
                     }, 
-                    "ondemand": 10.00400
+                    "ondemand": 2.90000
                 }, 
                 "Aurora PostgreSQL": {
                     "reserved": {
@@ -2666,6 +2882,39 @@
                 }
             }, 
             "us-gov-west-1": {
+                "PostgreSQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 1.52140, 
+                        "yrTerm3.allUpfront": 0.89673, 
+                        "yrTerm1.allUpfront": 1.27432, 
+                        "yrTerm1.partialUpfront": 1.30031, 
+                        "yrTerm3.partialUpfront": 0.91503
+                    }, 
+                    "ondemand": 2.40800
+                }, 
+                "SQL Server": {
+                    "ondemand": 6.34400
+                }, 
+                "Aurora MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 1.77000, 
+                        "yrTerm3.allUpfront": 1.00019, 
+                        "yrTerm1.allUpfront": 1.48185, 
+                        "yrTerm1.partialUpfront": 1.51616, 
+                        "yrTerm3.partialUpfront": 1.07212
+                    }, 
+                    "ondemand": 2.80000
+                }, 
+                "MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 1.31090, 
+                        "yrTerm3.allUpfront": 0.86100, 
+                        "yrTerm1.allUpfront": 1.22352, 
+                        "yrTerm1.partialUpfront": 1.24840, 
+                        "yrTerm3.partialUpfront": 0.87857
+                    }, 
+                    "ondemand": 2.31200
+                }, 
                 "Oracle": {
                     "reserved": {
                         "yrTerm1.noUpfront": 1.31200, 
@@ -2685,29 +2934,6 @@
                         "yrTerm3.partialUpfront": 0.87857
                     }, 
                     "ondemand": 2.31200
-                }, 
-                "PostgreSQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 1.52140, 
-                        "yrTerm3.allUpfront": 0.89673, 
-                        "yrTerm1.allUpfront": 1.27432, 
-                        "yrTerm1.partialUpfront": 1.30031, 
-                        "yrTerm3.partialUpfront": 0.91503
-                    }, 
-                    "ondemand": 2.40800
-                }, 
-                "MySQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 1.31090, 
-                        "yrTerm3.allUpfront": 0.86100, 
-                        "yrTerm1.allUpfront": 1.22352, 
-                        "yrTerm1.partialUpfront": 1.24840, 
-                        "yrTerm3.partialUpfront": 0.87857
-                    }, 
-                    "ondemand": 2.31200
-                }, 
-                "SQL Server": {
-                    "ondemand": 6.34400
                 }
             }, 
             "ap-south-1": {
@@ -4664,6 +4890,355 @@
     }, 
     {
         "family": "Memory optimized", 
+        "databaseEdition": "Enterprise", 
+        "currentGeneration": "No", 
+        "network_performance": "Moderate", 
+        "servicename": "Amazon Relational Database Service", 
+        "pricing": {
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 0.33000
+                }, 
+                "SQL Server": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.28200, 
+                        "yrTerm3.allUpfront": 0.16651, 
+                        "yrTerm1.allUpfront": 0.23596, 
+                        "yrTerm1.partialUpfront": 0.24075, 
+                        "yrTerm3.partialUpfront": 0.17711
+                    }, 
+                    "ondemand": 0.43000
+                }, 
+                "PostgreSQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.15800, 
+                        "yrTerm3.allUpfront": 0.07930, 
+                        "yrTerm1.allUpfront": 0.13231, 
+                        "yrTerm1.partialUpfront": 0.13500, 
+                        "yrTerm3.partialUpfront": 0.08436
+                    }, 
+                    "ondemand": 0.34500
+                }, 
+                "MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.15000, 
+                        "yrTerm3.allUpfront": 0.07557, 
+                        "yrTerm1.allUpfront": 0.12546, 
+                        "yrTerm1.partialUpfront": 0.12800, 
+                        "yrTerm3.partialUpfront": 0.08036
+                    }, 
+                    "ondemand": 0.33000
+                }
+            }, 
+            "ap-northeast-1": {
+                "Oracle": {
+                    "ondemand": 0.36500
+                }, 
+                "MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.19300, 
+                        "yrTerm3.allUpfront": 0.10415, 
+                        "yrTerm1.allUpfront": 0.16119, 
+                        "yrTerm1.partialUpfront": 0.16439, 
+                        "yrTerm3.partialUpfront": 0.11078
+                    }, 
+                    "ondemand": 0.36500
+                }, 
+                "PostgreSQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.20500, 
+                        "yrTerm3.allUpfront": 0.10978, 
+                        "yrTerm1.allUpfront": 0.17100, 
+                        "yrTerm1.partialUpfront": 0.17439, 
+                        "yrTerm3.partialUpfront": 0.11678
+                    }, 
+                    "ondemand": 0.36500
+                }, 
+                "SQL Server": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.34400, 
+                        "yrTerm3.allUpfront": 0.21811, 
+                        "yrTerm1.allUpfront": 0.29943, 
+                        "yrTerm1.partialUpfront": 0.30547, 
+                        "yrTerm3.partialUpfront": 0.23200
+                    }, 
+                    "ondemand": 1.24000
+                }
+            }, 
+            "sa-east-1": {
+                "Oracle": {
+                    "ondemand": 0.57500
+                }, 
+                "MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.16300, 
+                        "yrTerm3.allUpfront": 0.09684, 
+                        "yrTerm1.allUpfront": 0.13584, 
+                        "yrTerm1.partialUpfront": 0.13855, 
+                        "yrTerm3.partialUpfront": 0.10299
+                    }, 
+                    "ondemand": 0.40500
+                }, 
+                "PostgreSQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.17200, 
+                        "yrTerm3.allUpfront": 0.10152, 
+                        "yrTerm1.allUpfront": 0.14372, 
+                        "yrTerm1.partialUpfront": 0.14655, 
+                        "yrTerm3.partialUpfront": 0.10799
+                    }, 
+                    "ondemand": 0.42500
+                }, 
+                "SQL Server": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.40400, 
+                        "yrTerm3.allUpfront": 0.27028, 
+                        "yrTerm1.allUpfront": 0.42021, 
+                        "yrTerm1.partialUpfront": 0.42876, 
+                        "yrTerm3.partialUpfront": 0.28751
+                    }, 
+                    "ondemand": 0.50500
+                }
+            }, 
+            "ap-southeast-1": {
+                "Oracle": {
+                    "ondemand": 0.38000
+                }, 
+                "MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.19200, 
+                        "yrTerm3.allUpfront": 0.10259, 
+                        "yrTerm1.allUpfront": 0.16005, 
+                        "yrTerm1.partialUpfront": 0.16328, 
+                        "yrTerm3.partialUpfront": 0.10912
+                    }, 
+                    "ondemand": 0.38000
+                }, 
+                "PostgreSQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.20200, 
+                        "yrTerm3.allUpfront": 0.10822, 
+                        "yrTerm1.allUpfront": 0.16884, 
+                        "yrTerm1.partialUpfront": 0.17228, 
+                        "yrTerm3.partialUpfront": 0.11512
+                    }, 
+                    "ondemand": 0.40000
+                }, 
+                "SQL Server": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.42400, 
+                        "yrTerm3.allUpfront": 0.26762, 
+                        "yrTerm1.allUpfront": 0.37249, 
+                        "yrTerm1.partialUpfront": 0.37999, 
+                        "yrTerm3.partialUpfront": 0.28469
+                    }, 
+                    "ondemand": 0.53000
+                }
+            }, 
+            "ap-southeast-2": {
+                "Oracle": {
+                    "ondemand": 0.38000
+                }, 
+                "MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.19200, 
+                        "yrTerm3.allUpfront": 0.10259, 
+                        "yrTerm1.allUpfront": 0.16005, 
+                        "yrTerm1.partialUpfront": 0.16328, 
+                        "yrTerm3.partialUpfront": 0.10912
+                    }, 
+                    "ondemand": 0.38000
+                }, 
+                "PostgreSQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.20200, 
+                        "yrTerm3.allUpfront": 0.10822, 
+                        "yrTerm1.allUpfront": 0.16884, 
+                        "yrTerm1.partialUpfront": 0.17228, 
+                        "yrTerm3.partialUpfront": 0.11512
+                    }, 
+                    "ondemand": 0.40000
+                }, 
+                "SQL Server": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.85400, 
+                        "yrTerm3.allUpfront": 0.59151, 
+                        "yrTerm1.allUpfront": 0.71473, 
+                        "yrTerm1.partialUpfront": 0.72926, 
+                        "yrTerm3.partialUpfront": 0.62925
+                    }, 
+                    "ondemand": 1.17000
+                }
+            }, 
+            "us-west-2": {
+                "Oracle": {
+                    "ondemand": 0.33000
+                }, 
+                "MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.15000, 
+                        "yrTerm3.allUpfront": 0.07557, 
+                        "yrTerm1.allUpfront": 0.12546, 
+                        "yrTerm1.partialUpfront": 0.12800, 
+                        "yrTerm3.partialUpfront": 0.08036
+                    }, 
+                    "ondemand": 0.33000
+                }, 
+                "PostgreSQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.15800, 
+                        "yrTerm3.allUpfront": 0.07930, 
+                        "yrTerm1.allUpfront": 0.13231, 
+                        "yrTerm1.partialUpfront": 0.13500, 
+                        "yrTerm3.partialUpfront": 0.08436
+                    }, 
+                    "ondemand": 0.34500
+                }, 
+                "SQL Server": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.76100, 
+                        "yrTerm3.allUpfront": 0.52926, 
+                        "yrTerm1.allUpfront": 0.63687, 
+                        "yrTerm1.partialUpfront": 0.64986, 
+                        "yrTerm3.partialUpfront": 0.56304
+                    }, 
+                    "ondemand": 1.17000
+                }
+            }, 
+            "us-gov-west-1": {
+                "Oracle": {
+                    "ondemand": 0.37500
+                }, 
+                "SQL Server": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.80700, 
+                        "yrTerm3.allUpfront": 0.55936, 
+                        "yrTerm1.allUpfront": 0.67557, 
+                        "yrTerm1.partialUpfront": 0.68942, 
+                        "yrTerm3.partialUpfront": 0.59507
+                    }, 
+                    "ondemand": 1.29000
+                }, 
+                "PostgreSQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.18500, 
+                        "yrTerm3.allUpfront": 0.09448, 
+                        "yrTerm1.allUpfront": 0.15468, 
+                        "yrTerm1.partialUpfront": 0.15784, 
+                        "yrTerm3.partialUpfront": 0.10052
+                    }, 
+                    "ondemand": 0.39500
+                }, 
+                "MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.17500, 
+                        "yrTerm3.allUpfront": 0.08980, 
+                        "yrTerm1.allUpfront": 0.14680, 
+                        "yrTerm1.partialUpfront": 0.14984, 
+                        "yrTerm3.partialUpfront": 0.09552
+                    }, 
+                    "ondemand": 0.37500
+                }
+            }, 
+            "us-west-1": {
+                "Oracle": {
+                    "ondemand": 0.36000
+                }, 
+                "MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.17700, 
+                        "yrTerm3.allUpfront": 0.09437, 
+                        "yrTerm1.allUpfront": 0.14806, 
+                        "yrTerm1.partialUpfront": 0.15100, 
+                        "yrTerm3.partialUpfront": 0.10036
+                    }, 
+                    "ondemand": 0.36000
+                }, 
+                "PostgreSQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.18500, 
+                        "yrTerm3.allUpfront": 0.09905, 
+                        "yrTerm1.allUpfront": 0.15491, 
+                        "yrTerm1.partialUpfront": 0.15800, 
+                        "yrTerm3.partialUpfront": 0.10536
+                    }, 
+                    "ondemand": 0.37500
+                }, 
+                "SQL Server": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.84900, 
+                        "yrTerm3.allUpfront": 0.58870, 
+                        "yrTerm1.allUpfront": 0.71084, 
+                        "yrTerm1.partialUpfront": 0.72526, 
+                        "yrTerm3.partialUpfront": 0.62625
+                    }, 
+                    "ondemand": 1.22500
+                }
+            }, 
+            "eu-west-1": {
+                "Oracle": {
+                    "ondemand": 0.65600
+                }, 
+                "SQL Server": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.33600, 
+                        "yrTerm3.allUpfront": 0.21442, 
+                        "yrTerm1.allUpfront": 0.29578, 
+                        "yrTerm1.partialUpfront": 0.30175, 
+                        "yrTerm3.partialUpfront": 0.22811
+                    }, 
+                    "ondemand": 0.42000
+                }, 
+                "PostgreSQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.18500, 
+                        "yrTerm3.allUpfront": 0.10000, 
+                        "yrTerm1.allUpfront": 0.15491, 
+                        "yrTerm1.partialUpfront": 0.15800, 
+                        "yrTerm3.partialUpfront": 0.10636
+                    }, 
+                    "ondemand": 0.37900
+                }, 
+                "MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.17700, 
+                        "yrTerm3.allUpfront": 0.09528, 
+                        "yrTerm1.allUpfront": 0.14806, 
+                        "yrTerm1.partialUpfront": 0.15100, 
+                        "yrTerm3.partialUpfront": 0.10136
+                    }, 
+                    "ondemand": 0.36000
+                }
+            }
+        }, 
+        "operation": "CreateDBInstance:0009", 
+        "instanceType": "db.m2.xlarge", 
+        "vcpu": "2", 
+        "storage": "1 x 420", 
+        "location": "Asia Pacific (Sydney)", 
+        "memory": "17.1", 
+        "networkPerformance": "Moderate", 
+        "usagetype": "APS2-InstanceUsage:db.m2.xlarge", 
+        "normalizationSizeFactor": "NA", 
+        "processorArchitecture": "64-bit", 
+        "pretty_name": "M2 High Memory Extra Large", 
+        "instanceTypeFamily": "M2", 
+        "servicecode": "AmazonRDS", 
+        "arch": "64-bit", 
+        "database_engine": "SQL Server", 
+        "dedicatedEbsThroughput": "500 Mbps", 
+        "instanceFamily": "Memory optimized", 
+        "locationType": "AWS Region", 
+        "region": "ap-southeast-2", 
+        "licenseModel": "Bring your own license", 
+        "instance_type": "db.m2.xlarge", 
+        "deploymentOption": "Single-AZ", 
+        "engineCode": "9", 
+        "physicalProcessor": "Intel Xeon Family", 
+        "databaseEngine": "SQL Server"
+    }, 
+    {
+        "family": "Memory optimized", 
         "enhancedNetworkingSupported": "Yes", 
         "currentGeneration": "Yes", 
         "network_performance": "10 Gigabit", 
@@ -5412,15 +5987,28 @@
                 }
             }, 
             "us-gov-west-1": {
-                "Oracle": {
+                "PostgreSQL": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 2.96320, 
-                        "yrTerm3.allUpfront": 1.52938, 
-                        "yrTerm1.allUpfront": 2.45479, 
-                        "yrTerm1.partialUpfront": 2.49732, 
-                        "yrTerm3.partialUpfront": 1.62132
+                        "yrTerm1.noUpfront": 3.04270, 
+                        "yrTerm3.allUpfront": 1.79349, 
+                        "yrTerm1.allUpfront": 2.54863, 
+                        "yrTerm1.partialUpfront": 2.60064, 
+                        "yrTerm3.partialUpfront": 1.83003
                     }, 
-                    "ondemand": 4.62720
+                    "ondemand": 4.81600
+                }, 
+                "SQL Server": {
+                    "ondemand": 6.32800
+                }, 
+                "Aurora MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 3.54000, 
+                        "yrTerm3.allUpfront": 2.00034, 
+                        "yrTerm1.allUpfront": 2.96358, 
+                        "yrTerm1.partialUpfront": 3.03233, 
+                        "yrTerm3.partialUpfront": 2.13423
+                    }, 
+                    "ondemand": 5.60000
                 }, 
                 "MySQL": {
                     "reserved": {
@@ -5432,15 +6020,15 @@
                     }, 
                     "ondemand": 4.62400
                 }, 
-                "PostgreSQL": {
+                "Oracle": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 3.04270, 
-                        "yrTerm3.allUpfront": 1.79349, 
-                        "yrTerm1.allUpfront": 2.54863, 
-                        "yrTerm1.partialUpfront": 2.60064, 
-                        "yrTerm3.partialUpfront": 1.83003
+                        "yrTerm1.noUpfront": 2.96320, 
+                        "yrTerm3.allUpfront": 1.52938, 
+                        "yrTerm1.allUpfront": 2.45479, 
+                        "yrTerm1.partialUpfront": 2.49732, 
+                        "yrTerm3.partialUpfront": 1.62132
                     }, 
-                    "ondemand": 4.81600
+                    "ondemand": 4.62720
                 }, 
                 "MariaDB": {
                     "reserved": {
@@ -5451,9 +6039,6 @@
                         "yrTerm3.partialUpfront": 1.75718
                     }, 
                     "ondemand": 4.62400
-                }, 
-                "SQL Server": {
-                    "ondemand": 6.32800
                 }
             }, 
             "ap-south-1": {
@@ -5844,6 +6429,92 @@
         "clockSpeed": "2.3 GHz", 
         "engineCode": "4", 
         "physicalProcessor": "Intel Xeon E5-2686 v4 (Broadwell)", 
+        "databaseEngine": "Oracle"
+    }, 
+    {
+        "family": "Memory optimized", 
+        "databaseEdition": "Standard One", 
+        "currentGeneration": "Yes", 
+        "network_performance": "Up to 10 Gigabit", 
+        "servicename": "Amazon Relational Database Service", 
+        "pricing": {
+            "us-west-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.86880, 
+                        "yrTerm3.allUpfront": 0.39209, 
+                        "yrTerm1.allUpfront": 0.81279, 
+                        "yrTerm1.partialUpfront": 0.82639, 
+                        "yrTerm3.partialUpfront": 0.42045
+                    }, 
+                    "ondemand": 1.40110
+                }
+            }, 
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 1.40110
+                }
+            }, 
+            "ap-northeast-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 1.19440, 
+                        "yrTerm3.allUpfront": 0.53912, 
+                        "yrTerm1.allUpfront": 1.11689, 
+                        "yrTerm1.partialUpfront": 1.13684, 
+                        "yrTerm3.partialUpfront": 0.57769
+                    }, 
+                    "ondemand": 1.92610
+                }
+            }, 
+            "eu-west-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 1.04160, 
+                        "yrTerm3.allUpfront": 0.47032, 
+                        "yrTerm1.allUpfront": 0.97443, 
+                        "yrTerm1.partialUpfront": 0.99189, 
+                        "yrTerm3.partialUpfront": 0.50405
+                    }, 
+                    "ondemand": 1.68000
+                }
+            }, 
+            "ap-southeast-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 1.19440, 
+                        "yrTerm3.allUpfront": 0.53912, 
+                        "yrTerm1.allUpfront": 1.11689, 
+                        "yrTerm1.partialUpfront": 1.13684, 
+                        "yrTerm3.partialUpfront": 0.57769
+                    }, 
+                    "ondemand": 1.92610
+                }
+            }
+        }, 
+        "operation": "CreateDBInstance:0003", 
+        "instanceType": "db.x1e.xlarge", 
+        "vcpu": "4", 
+        "storage": "1 x 120 SSD", 
+        "location": "US East (N. Virginia)", 
+        "memory": "122", 
+        "networkPerformance": "Up to 10 Gigabit", 
+        "usagetype": "Multi-AZUsage:db.x1e.xlarge", 
+        "normalizationSizeFactor": "16", 
+        "processorArchitecture": "64-bit", 
+        "pretty_name": "X1E Extra Large", 
+        "instanceTypeFamily": "X1e", 
+        "servicecode": "AmazonRDS", 
+        "arch": "64-bit", 
+        "database_engine": "Oracle", 
+        "instanceFamily": "Memory optimized", 
+        "locationType": "AWS Region", 
+        "region": "us-east-1", 
+        "licenseModel": "Bring your own license", 
+        "instance_type": "db.x1e.xlarge", 
+        "deploymentOption": "Multi-AZ", 
+        "engineCode": "3", 
+        "physicalProcessor": "Intel Xeon E7-8880 v3", 
         "databaseEngine": "Oracle"
     }, 
     {
@@ -8527,15 +9198,15 @@
                 "Oracle": {
                     "ondemand": 0.49500
                 }, 
-                "SQL Server": {
+                "MySQL": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.69900, 
-                        "yrTerm3.allUpfront": 0.50053, 
-                        "yrTerm1.allUpfront": 0.58516, 
-                        "yrTerm1.partialUpfront": 0.59705, 
-                        "yrTerm3.partialUpfront": 0.53248
+                        "yrTerm1.noUpfront": 0.15100, 
+                        "yrTerm3.allUpfront": 0.07759, 
+                        "yrTerm1.allUpfront": 0.12580, 
+                        "yrTerm1.partialUpfront": 0.12828, 
+                        "yrTerm3.partialUpfront": 0.08254
                     }, 
-                    "ondemand": 0.96500
+                    "ondemand": 0.23000
                 }, 
                 "PostgreSQL": {
                     "reserved": {
@@ -8547,15 +9218,15 @@
                     }, 
                     "ondemand": 0.24500
                 }, 
-                "MySQL": {
+                "SQL Server": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.15100, 
-                        "yrTerm3.allUpfront": 0.07759, 
-                        "yrTerm1.allUpfront": 0.12580, 
-                        "yrTerm1.partialUpfront": 0.12828, 
-                        "yrTerm3.partialUpfront": 0.08254
+                        "yrTerm1.noUpfront": 0.69900, 
+                        "yrTerm3.allUpfront": 0.50053, 
+                        "yrTerm1.allUpfront": 0.58516, 
+                        "yrTerm1.partialUpfront": 0.59705, 
+                        "yrTerm3.partialUpfront": 0.53248
                     }, 
-                    "ondemand": 0.23000
+                    "ondemand": 0.96500
                 }
             }, 
             "us-gov-west-1": {
@@ -8895,11 +9566,11 @@
                 }, 
                 "SQL Server": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 1.00700, 
-                        "yrTerm3.allUpfront": 0.59600, 
-                        "yrTerm1.allUpfront": 0.84315, 
-                        "yrTerm1.partialUpfront": 0.86032, 
-                        "yrTerm3.partialUpfront": 0.63401
+                        "yrTerm1.noUpfront": 2.41600, 
+                        "yrTerm3.allUpfront": 1.83615, 
+                        "yrTerm1.allUpfront": 2.17329, 
+                        "yrTerm1.partialUpfront": 2.21763, 
+                        "yrTerm3.partialUpfront": 1.95333
                     }, 
                     "ondemand": 3.02000
                 }, 
@@ -10353,13 +11024,13 @@
                 }, 
                 "SQL Server": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 4.69100, 
-                        "yrTerm3.allUpfront": 3.29209, 
-                        "yrTerm1.allUpfront": 3.92922, 
-                        "yrTerm1.partialUpfront": 4.00903, 
-                        "yrTerm3.partialUpfront": 3.50215
+                        "yrTerm1.noUpfront": 9.70500, 
+                        "yrTerm3.allUpfront": 9.10259, 
+                        "yrTerm1.allUpfront": 9.48527, 
+                        "yrTerm1.partialUpfront": 9.50822, 
+                        "yrTerm3.partialUpfront": 9.15123
                     }, 
-                    "ondemand": 10.19000
+                    "ondemand": 2.66500
                 }, 
                 "Aurora MySQL": {
                     "reserved": {
@@ -11933,15 +12604,28 @@
                 }
             }, 
             "us-gov-west-1": {
-                "Oracle": {
+                "PostgreSQL": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.34480, 
-                        "yrTerm3.allUpfront": 0.21446, 
-                        "yrTerm1.allUpfront": 0.32192, 
-                        "yrTerm1.partialUpfront": 0.32878, 
-                        "yrTerm3.partialUpfront": 0.21904
+                        "yrTerm1.noUpfront": 0.19020, 
+                        "yrTerm3.allUpfront": 0.11210, 
+                        "yrTerm1.allUpfront": 0.15925, 
+                        "yrTerm1.partialUpfront": 0.16258, 
+                        "yrTerm3.partialUpfront": 0.11439
                     }, 
-                    "ondemand": 0.54720
+                    "ondemand": 0.30100
+                }, 
+                "SQL Server": {
+                    "ondemand": 0.39900
+                }, 
+                "Aurora MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.23000, 
+                        "yrTerm3.allUpfront": 0.12504, 
+                        "yrTerm1.allUpfront": 0.18527, 
+                        "yrTerm1.partialUpfront": 0.19452, 
+                        "yrTerm3.partialUpfront": 0.13651
+                    }, 
+                    "ondemand": 0.35000
                 }, 
                 "MySQL": {
                     "reserved": {
@@ -11953,15 +12637,15 @@
                     }, 
                     "ondemand": 0.28900
                 }, 
-                "PostgreSQL": {
+                "Oracle": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.19020, 
-                        "yrTerm3.allUpfront": 0.11210, 
-                        "yrTerm1.allUpfront": 0.15925, 
-                        "yrTerm1.partialUpfront": 0.16258, 
-                        "yrTerm3.partialUpfront": 0.11439
+                        "yrTerm1.noUpfront": 0.34480, 
+                        "yrTerm3.allUpfront": 0.21446, 
+                        "yrTerm1.allUpfront": 0.32192, 
+                        "yrTerm1.partialUpfront": 0.32878, 
+                        "yrTerm3.partialUpfront": 0.21904
                     }, 
-                    "ondemand": 0.30100
+                    "ondemand": 0.54720
                 }, 
                 "MariaDB": {
                     "reserved": {
@@ -11972,9 +12656,6 @@
                         "yrTerm3.partialUpfront": 0.10981
                     }, 
                     "ondemand": 0.28900
-                }, 
-                "SQL Server": {
-                    "ondemand": 0.39900
                 }
             }, 
             "ap-south-1": {
@@ -13264,9 +13945,9 @@
                 }, 
                 "SQL Server": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 1.18500, 
+                        "yrTerm1.noUpfront": 1.18600, 
                         "yrTerm3.allUpfront": 0.73368, 
-                        "yrTerm1.allUpfront": 0.99292, 
+                        "yrTerm1.allUpfront": 0.99281, 
                         "yrTerm1.partialUpfront": 1.01311, 
                         "yrTerm3.partialUpfront": 0.78049
                     }, 
@@ -13457,6 +14138,92 @@
         "engineCode": "11", 
         "physicalProcessor": "Intel Xeon E5-2670 v2 (Ivy Bridge/Sandy Bridge)", 
         "databaseEngine": "SQL Server"
+    }, 
+    {
+        "family": "Memory optimized", 
+        "databaseEdition": "Standard Two", 
+        "currentGeneration": "Yes", 
+        "network_performance": "Up to 10 Gigabit", 
+        "servicename": "Amazon Relational Database Service", 
+        "pricing": {
+            "us-west-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 3.47520, 
+                        "yrTerm3.allUpfront": 1.56834, 
+                        "yrTerm1.allUpfront": 3.25114, 
+                        "yrTerm1.partialUpfront": 3.30554, 
+                        "yrTerm3.partialUpfront": 1.68178
+                    }, 
+                    "ondemand": 5.60450
+                }
+            }, 
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 5.60450
+                }
+            }, 
+            "ap-northeast-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 4.77760, 
+                        "yrTerm3.allUpfront": 2.15647, 
+                        "yrTerm1.allUpfront": 4.46758, 
+                        "yrTerm1.partialUpfront": 4.54735, 
+                        "yrTerm3.partialUpfront": 2.31076
+                    }, 
+                    "ondemand": 7.70450
+                }
+            }, 
+            "eu-west-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 4.16640, 
+                        "yrTerm3.allUpfront": 1.88128, 
+                        "yrTerm1.allUpfront": 3.89772, 
+                        "yrTerm1.partialUpfront": 3.96756, 
+                        "yrTerm3.partialUpfront": 2.01622
+                    }, 
+                    "ondemand": 6.72000
+                }
+            }, 
+            "ap-southeast-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 4.77760, 
+                        "yrTerm3.allUpfront": 2.15647, 
+                        "yrTerm1.allUpfront": 4.46758, 
+                        "yrTerm1.partialUpfront": 4.54735, 
+                        "yrTerm3.partialUpfront": 2.31076
+                    }, 
+                    "ondemand": 7.70450
+                }
+            }
+        }, 
+        "operation": "CreateDBInstance:0019", 
+        "instanceType": "db.x1e.4xlarge", 
+        "vcpu": "16", 
+        "storage": "1 x 480 SSD", 
+        "location": "Asia Pacific (Tokyo)", 
+        "memory": "488", 
+        "networkPerformance": "Up to 10 Gigabit", 
+        "usagetype": "APN1-InstanceUsage:db.x1e.4xl", 
+        "normalizationSizeFactor": "32", 
+        "processorArchitecture": "64-bit", 
+        "pretty_name": "X1E Quadruple Extra Large", 
+        "instanceTypeFamily": "X1e", 
+        "servicecode": "AmazonRDS", 
+        "arch": "64-bit", 
+        "database_engine": "Oracle", 
+        "instanceFamily": "Memory optimized", 
+        "locationType": "AWS Region", 
+        "region": "ap-northeast-1", 
+        "licenseModel": "Bring your own license", 
+        "instance_type": "db.x1e.4xlarge", 
+        "deploymentOption": "Single-AZ", 
+        "engineCode": "19", 
+        "physicalProcessor": "Intel Xeon E7-8880 v3", 
+        "databaseEngine": "Oracle"
     }, 
     {
         "family": "General purpose", 
@@ -13944,11 +14711,11 @@
                 }, 
                 "SQL Server": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.15400, 
-                        "yrTerm3.allUpfront": 0.09471, 
-                        "yrTerm1.allUpfront": 0.12877, 
-                        "yrTerm1.partialUpfront": 0.13133, 
-                        "yrTerm3.partialUpfront": 0.10075
+                        "yrTerm1.noUpfront": 0.58600, 
+                        "yrTerm3.allUpfront": 0.43394, 
+                        "yrTerm1.allUpfront": 0.49087, 
+                        "yrTerm1.partialUpfront": 0.50078, 
+                        "yrTerm3.partialUpfront": 0.46160
                     }, 
                     "ondemand": 0.26500
                 }
@@ -14152,6 +14919,92 @@
         "deploymentOption": "Multi-AZ", 
         "engineCode": "3", 
         "physicalProcessor": "Intel Xeon Family", 
+        "databaseEngine": "Oracle"
+    }, 
+    {
+        "family": "Memory optimized", 
+        "databaseEdition": "Enterprise", 
+        "currentGeneration": "Yes", 
+        "network_performance": "25 Gigabit", 
+        "servicename": "Amazon Relational Database Service", 
+        "pricing": {
+            "us-west-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 27.80160, 
+                        "yrTerm3.allUpfront": 12.54673, 
+                        "yrTerm1.allUpfront": 26.00913, 
+                        "yrTerm1.partialUpfront": 26.44433, 
+                        "yrTerm3.partialUpfront": 13.45426
+                    }, 
+                    "ondemand": 44.83580
+                }
+            }, 
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 44.83580
+                }
+            }, 
+            "ap-northeast-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 38.22080, 
+                        "yrTerm3.allUpfront": 17.25175, 
+                        "yrTerm1.allUpfront": 35.74064, 
+                        "yrTerm1.partialUpfront": 36.37877, 
+                        "yrTerm3.partialUpfront": 18.48604
+                    }, 
+                    "ondemand": 61.63580
+                }
+            }, 
+            "eu-west-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 33.33120, 
+                        "yrTerm3.allUpfront": 15.05023, 
+                        "yrTerm1.allUpfront": 31.18174, 
+                        "yrTerm1.partialUpfront": 31.74049, 
+                        "yrTerm3.partialUpfront": 16.12975
+                    }, 
+                    "ondemand": 53.76000
+                }
+            }, 
+            "ap-southeast-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 38.22080, 
+                        "yrTerm3.allUpfront": 17.25175, 
+                        "yrTerm1.allUpfront": 35.74064, 
+                        "yrTerm1.partialUpfront": 36.37877, 
+                        "yrTerm3.partialUpfront": 18.48604
+                    }, 
+                    "ondemand": 61.63580
+                }
+            }
+        }, 
+        "operation": "CreateDBInstance:0005", 
+        "instanceType": "db.x1e.32xlarge", 
+        "vcpu": "128", 
+        "storage": "2 x 1920 SSD", 
+        "location": "EU (Ireland)", 
+        "memory": "3904", 
+        "networkPerformance": "25 Gigabit", 
+        "usagetype": "EU-Multi-AZUsage:db.x1e.32xl", 
+        "normalizationSizeFactor": "512", 
+        "processorArchitecture": "64-bit", 
+        "pretty_name": "X1E 32xlarge", 
+        "instanceTypeFamily": "X1e", 
+        "servicecode": "AmazonRDS", 
+        "arch": "64-bit", 
+        "database_engine": "Oracle", 
+        "instanceFamily": "Memory optimized", 
+        "locationType": "AWS Region", 
+        "region": "eu-west-1", 
+        "licenseModel": "Bring your own license", 
+        "instance_type": "db.x1e.32xlarge", 
+        "deploymentOption": "Multi-AZ", 
+        "engineCode": "5", 
+        "physicalProcessor": "Intel Xeon E7-8880 v3", 
         "databaseEngine": "Oracle"
     }, 
     {
@@ -14823,6 +15676,46 @@
                 }
             }, 
             "us-gov-west-1": {
+                "PostgreSQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.06800, 
+                        "yrTerm3.allUpfront": 0.03794, 
+                        "yrTerm1.allUpfront": 0.05731, 
+                        "yrTerm1.partialUpfront": 0.05885, 
+                        "yrTerm3.partialUpfront": 0.04090
+                    }, 
+                    "ondemand": 0.08700
+                }, 
+                "SQL Server": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.08600, 
+                        "yrTerm3.allUpfront": 0.04578, 
+                        "yrTerm1.allUpfront": 0.07180, 
+                        "yrTerm1.partialUpfront": 0.07319, 
+                        "yrTerm3.partialUpfront": 0.04871
+                    }, 
+                    "ondemand": 0.09800
+                }, 
+                "Aurora MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.07800, 
+                        "yrTerm3.allUpfront": 0.04330, 
+                        "yrTerm1.allUpfront": 0.06541, 
+                        "yrTerm1.partialUpfront": 0.06702, 
+                        "yrTerm3.partialUpfront": 0.04706
+                    }, 
+                    "ondemand": 0.09800
+                }, 
+                "MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.06400, 
+                        "yrTerm3.allUpfront": 0.03565, 
+                        "yrTerm1.allUpfront": 0.05377, 
+                        "yrTerm1.partialUpfront": 0.05485, 
+                        "yrTerm3.partialUpfront": 0.03790
+                    }, 
+                    "ondemand": 0.08100
+                }, 
                 "Oracle": {
                     "reserved": {
                         "yrTerm1.noUpfront": 0.06400, 
@@ -14842,36 +15735,6 @@
                         "yrTerm3.partialUpfront": 0.03790
                     }, 
                     "ondemand": 0.08100
-                }, 
-                "PostgreSQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.06800, 
-                        "yrTerm3.allUpfront": 0.03794, 
-                        "yrTerm1.allUpfront": 0.05731, 
-                        "yrTerm1.partialUpfront": 0.05885, 
-                        "yrTerm3.partialUpfront": 0.04090
-                    }, 
-                    "ondemand": 0.08700
-                }, 
-                "MySQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.06400, 
-                        "yrTerm3.allUpfront": 0.03565, 
-                        "yrTerm1.allUpfront": 0.05377, 
-                        "yrTerm1.partialUpfront": 0.05485, 
-                        "yrTerm3.partialUpfront": 0.03790
-                    }, 
-                    "ondemand": 0.08100
-                }, 
-                "SQL Server": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.08600, 
-                        "yrTerm3.allUpfront": 0.04578, 
-                        "yrTerm1.allUpfront": 0.07180, 
-                        "yrTerm1.partialUpfront": 0.07319, 
-                        "yrTerm3.partialUpfront": 0.04871
-                    }, 
-                    "ondemand": 0.09800
                 }
             }, 
             "ap-south-1": {
@@ -15175,11 +16038,11 @@
                 }, 
                 "MariaDB": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.06930, 
-                        "yrTerm3.allUpfront": 0.04475, 
-                        "yrTerm1.allUpfront": 0.06461, 
-                        "yrTerm1.partialUpfront": 0.06599, 
-                        "yrTerm3.partialUpfront": 0.04563
+                        "yrTerm1.noUpfront": 0.05350, 
+                        "yrTerm3.allUpfront": 0.03501, 
+                        "yrTerm1.allUpfront": 0.04989, 
+                        "yrTerm1.partialUpfront": 0.05096, 
+                        "yrTerm3.partialUpfront": 0.03575
                     }, 
                     "ondemand": 0.07600
                 }
@@ -15211,6 +16074,92 @@
         "engineCode": "14", 
         "physicalProcessor": "Intel Xeon Family", 
         "databaseEngine": "PostgreSQL"
+    }, 
+    {
+        "family": "Memory optimized", 
+        "databaseEdition": "Enterprise", 
+        "currentGeneration": "Yes", 
+        "network_performance": "Up to 10 Gigabit", 
+        "servicename": "Amazon Relational Database Service", 
+        "pricing": {
+            "us-west-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 13.90080, 
+                        "yrTerm3.allUpfront": 6.27336, 
+                        "yrTerm1.allUpfront": 13.00457, 
+                        "yrTerm1.partialUpfront": 13.22217, 
+                        "yrTerm3.partialUpfront": 6.72713
+                    }, 
+                    "ondemand": 22.41790
+                }
+            }, 
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 22.41790
+                }
+            }, 
+            "ap-northeast-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 19.11040, 
+                        "yrTerm3.allUpfront": 8.62588, 
+                        "yrTerm1.allUpfront": 17.87032, 
+                        "yrTerm1.partialUpfront": 18.18938, 
+                        "yrTerm3.partialUpfront": 9.24302
+                    }, 
+                    "ondemand": 30.81790
+                }
+            }, 
+            "eu-west-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 16.66560, 
+                        "yrTerm3.allUpfront": 7.52511, 
+                        "yrTerm1.allUpfront": 15.59087, 
+                        "yrTerm1.partialUpfront": 15.87025, 
+                        "yrTerm3.partialUpfront": 8.06488
+                    }, 
+                    "ondemand": 26.88000
+                }
+            }, 
+            "ap-southeast-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 19.11040, 
+                        "yrTerm3.allUpfront": 8.62588, 
+                        "yrTerm1.allUpfront": 17.87032, 
+                        "yrTerm1.partialUpfront": 18.18938, 
+                        "yrTerm3.partialUpfront": 9.24302
+                    }, 
+                    "ondemand": 30.81790
+                }
+            }
+        }, 
+        "operation": "CreateDBInstance:0005", 
+        "instanceType": "db.x1e.16xlarge", 
+        "vcpu": "64", 
+        "storage": "1 x 1920 SSD", 
+        "location": "EU (Ireland)", 
+        "memory": "1952", 
+        "networkPerformance": "Up to 10 Gigabit", 
+        "usagetype": "EU-InstanceUsage:db.x1e.16xl", 
+        "normalizationSizeFactor": "128", 
+        "processorArchitecture": "64-bit", 
+        "pretty_name": "X1E 16xlarge", 
+        "instanceTypeFamily": "X1e", 
+        "servicecode": "AmazonRDS", 
+        "arch": "64-bit", 
+        "database_engine": "Oracle", 
+        "instanceFamily": "Memory optimized", 
+        "locationType": "AWS Region", 
+        "region": "eu-west-1", 
+        "licenseModel": "Bring your own license", 
+        "instance_type": "db.x1e.16xlarge", 
+        "deploymentOption": "Single-AZ", 
+        "engineCode": "5", 
+        "physicalProcessor": "Intel Xeon E7-8880 v3", 
+        "databaseEngine": "Oracle"
     }, 
     {
         "family": "Memory optimized", 
@@ -15559,6 +16508,92 @@
         "engineCode": "14", 
         "physicalProcessor": "Intel Xeon Family", 
         "databaseEngine": "PostgreSQL"
+    }, 
+    {
+        "family": "Memory optimized", 
+        "databaseEdition": "Standard", 
+        "currentGeneration": "Yes", 
+        "network_performance": "Up to 10 Gigabit", 
+        "servicename": "Amazon Relational Database Service", 
+        "pricing": {
+            "us-west-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 6.95040, 
+                        "yrTerm3.allUpfront": 3.13668, 
+                        "yrTerm1.allUpfront": 6.50228, 
+                        "yrTerm1.partialUpfront": 6.61108, 
+                        "yrTerm3.partialUpfront": 3.36357
+                    }, 
+                    "ondemand": 11.20900
+                }
+            }, 
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 11.20900
+                }
+            }, 
+            "ap-northeast-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 9.55520, 
+                        "yrTerm3.allUpfront": 4.31294, 
+                        "yrTerm1.allUpfront": 8.93516, 
+                        "yrTerm1.partialUpfront": 9.09469, 
+                        "yrTerm3.partialUpfront": 4.62151
+                    }, 
+                    "ondemand": 15.40900
+                }
+            }, 
+            "eu-west-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 8.33280, 
+                        "yrTerm3.allUpfront": 3.76256, 
+                        "yrTerm1.allUpfront": 7.79543, 
+                        "yrTerm1.partialUpfront": 7.93512, 
+                        "yrTerm3.partialUpfront": 4.03244
+                    }, 
+                    "ondemand": 13.44000
+                }
+            }, 
+            "ap-southeast-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 9.55520, 
+                        "yrTerm3.allUpfront": 4.31294, 
+                        "yrTerm1.allUpfront": 8.93516, 
+                        "yrTerm1.partialUpfront": 9.09469, 
+                        "yrTerm3.partialUpfront": 4.62151
+                    }, 
+                    "ondemand": 15.40900
+                }
+            }
+        }, 
+        "operation": "CreateDBInstance:0004", 
+        "instanceType": "db.x1e.8xlarge", 
+        "vcpu": "32", 
+        "storage": "1 x 960 SSD", 
+        "location": "Asia Pacific (Sydney)", 
+        "memory": "976", 
+        "networkPerformance": "Up to 10 Gigabit", 
+        "usagetype": "APS2-Multi-AZUsage:db.x1e.8xl", 
+        "normalizationSizeFactor": "128", 
+        "processorArchitecture": "64-bit", 
+        "pretty_name": "X1E Eight Extra Large", 
+        "instanceTypeFamily": "X1e", 
+        "servicecode": "AmazonRDS", 
+        "arch": "64-bit", 
+        "database_engine": "Oracle", 
+        "instanceFamily": "Memory optimized", 
+        "locationType": "AWS Region", 
+        "region": "ap-southeast-2", 
+        "licenseModel": "Bring your own license", 
+        "instance_type": "db.x1e.8xlarge", 
+        "deploymentOption": "Multi-AZ", 
+        "engineCode": "4", 
+        "physicalProcessor": "Intel Xeon E7-8880 v3", 
+        "databaseEngine": "Oracle"
     }, 
     {
         "family": "Memory optimized", 
@@ -16818,13 +17853,13 @@
                 }, 
                 "SQL Server": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 1.20960, 
-                        "yrTerm3.allUpfront": 0.90944, 
-                        "yrTerm1.allUpfront": 1.12900, 
-                        "yrTerm1.partialUpfront": 1.15203, 
-                        "yrTerm3.partialUpfront": 0.92800
+                        "yrTerm1.noUpfront": 5.04460, 
+                        "yrTerm3.allUpfront": 4.60704, 
+                        "yrTerm1.allUpfront": 4.70833, 
+                        "yrTerm1.partialUpfront": 4.80437, 
+                        "yrTerm3.partialUpfront": 4.70103
                     }, 
-                    "ondemand": 1.60000
+                    "ondemand": 5.16600
                 }, 
                 "Aurora PostgreSQL": {
                     "reserved": {
@@ -17094,15 +18129,28 @@
                 }
             }, 
             "us-gov-west-1": {
-                "Oracle": {
+                "PostgreSQL": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.65600, 
-                        "yrTerm3.allUpfront": 0.39696, 
-                        "yrTerm1.allUpfront": 0.61187, 
-                        "yrTerm1.partialUpfront": 0.62433, 
-                        "yrTerm3.partialUpfront": 0.40533
+                        "yrTerm1.noUpfront": 0.76070, 
+                        "yrTerm3.allUpfront": 0.44836, 
+                        "yrTerm1.allUpfront": 0.63710, 
+                        "yrTerm1.partialUpfront": 0.65021, 
+                        "yrTerm3.partialUpfront": 0.45757
                     }, 
-                    "ondemand": 1.15680
+                    "ondemand": 1.20400
+                }, 
+                "SQL Server": {
+                    "ondemand": 1.89200
+                }, 
+                "Aurora MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.89000, 
+                        "yrTerm3.allUpfront": 0.50011, 
+                        "yrTerm1.allUpfront": 0.74098, 
+                        "yrTerm1.partialUpfront": 0.75808, 
+                        "yrTerm3.partialUpfront": 0.53606
+                    }, 
+                    "ondemand": 1.40000
                 }, 
                 "MySQL": {
                     "reserved": {
@@ -17114,15 +18162,15 @@
                     }, 
                     "ondemand": 1.15600
                 }, 
-                "PostgreSQL": {
+                "Oracle": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.76070, 
-                        "yrTerm3.allUpfront": 0.44836, 
-                        "yrTerm1.allUpfront": 0.63710, 
-                        "yrTerm1.partialUpfront": 0.65021, 
-                        "yrTerm3.partialUpfront": 0.45757
+                        "yrTerm1.noUpfront": 0.65600, 
+                        "yrTerm3.allUpfront": 0.39696, 
+                        "yrTerm1.allUpfront": 0.61187, 
+                        "yrTerm1.partialUpfront": 0.62433, 
+                        "yrTerm3.partialUpfront": 0.40533
                     }, 
-                    "ondemand": 1.20400
+                    "ondemand": 1.15680
                 }, 
                 "MariaDB": {
                     "reserved": {
@@ -17133,9 +18181,6 @@
                         "yrTerm3.partialUpfront": 0.43923
                     }, 
                     "ondemand": 1.15600
-                }, 
-                "SQL Server": {
-                    "ondemand": 1.89200
                 }
             }, 
             "ap-south-1": {
@@ -17530,352 +18575,89 @@
     }, 
     {
         "family": "Memory optimized", 
-        "databaseEdition": "Enterprise", 
-        "currentGeneration": "No", 
-        "network_performance": "Moderate", 
+        "databaseEdition": "Standard One", 
+        "currentGeneration": "Yes", 
+        "network_performance": "Up to 10 Gigabit", 
         "servicename": "Amazon Relational Database Service", 
         "pricing": {
+            "us-west-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 1.73760, 
+                        "yrTerm3.allUpfront": 0.78417, 
+                        "yrTerm1.allUpfront": 1.62557, 
+                        "yrTerm1.partialUpfront": 1.65277, 
+                        "yrTerm3.partialUpfront": 0.84089
+                    }, 
+                    "ondemand": 2.80220
+                }
+            }, 
             "us-east-1": {
                 "Oracle": {
-                    "ondemand": 0.33000
-                }, 
-                "SQL Server": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.28200, 
-                        "yrTerm3.allUpfront": 0.16651, 
-                        "yrTerm1.allUpfront": 0.23596, 
-                        "yrTerm1.partialUpfront": 0.24075, 
-                        "yrTerm3.partialUpfront": 0.17711
-                    }, 
-                    "ondemand": 0.43000
-                }, 
-                "PostgreSQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.15800, 
-                        "yrTerm3.allUpfront": 0.07930, 
-                        "yrTerm1.allUpfront": 0.13231, 
-                        "yrTerm1.partialUpfront": 0.13500, 
-                        "yrTerm3.partialUpfront": 0.08436
-                    }, 
-                    "ondemand": 0.34500
-                }, 
-                "MySQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.15000, 
-                        "yrTerm3.allUpfront": 0.07557, 
-                        "yrTerm1.allUpfront": 0.12546, 
-                        "yrTerm1.partialUpfront": 0.12800, 
-                        "yrTerm3.partialUpfront": 0.08036
-                    }, 
-                    "ondemand": 0.33000
+                    "ondemand": 2.80220
                 }
             }, 
             "ap-northeast-1": {
                 "Oracle": {
-                    "ondemand": 0.36500
-                }, 
-                "MySQL": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.19300, 
-                        "yrTerm3.allUpfront": 0.10415, 
-                        "yrTerm1.allUpfront": 0.16119, 
-                        "yrTerm1.partialUpfront": 0.16439, 
-                        "yrTerm3.partialUpfront": 0.11078
+                        "yrTerm1.noUpfront": 2.38880, 
+                        "yrTerm3.allUpfront": 1.07823, 
+                        "yrTerm1.allUpfront": 2.23379, 
+                        "yrTerm1.partialUpfront": 2.27367, 
+                        "yrTerm3.partialUpfront": 1.15538
                     }, 
-                    "ondemand": 0.36500
-                }, 
-                "PostgreSQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.20500, 
-                        "yrTerm3.allUpfront": 0.10978, 
-                        "yrTerm1.allUpfront": 0.17100, 
-                        "yrTerm1.partialUpfront": 0.17439, 
-                        "yrTerm3.partialUpfront": 0.11678
-                    }, 
-                    "ondemand": 0.36500
-                }, 
-                "SQL Server": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.34400, 
-                        "yrTerm3.allUpfront": 0.21811, 
-                        "yrTerm1.allUpfront": 0.29943, 
-                        "yrTerm1.partialUpfront": 0.30547, 
-                        "yrTerm3.partialUpfront": 0.23200
-                    }, 
-                    "ondemand": 1.24000
-                }
-            }, 
-            "sa-east-1": {
-                "Oracle": {
-                    "ondemand": 0.57500
-                }, 
-                "MySQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.16300, 
-                        "yrTerm3.allUpfront": 0.09684, 
-                        "yrTerm1.allUpfront": 0.13584, 
-                        "yrTerm1.partialUpfront": 0.13855, 
-                        "yrTerm3.partialUpfront": 0.10299
-                    }, 
-                    "ondemand": 0.40500
-                }, 
-                "PostgreSQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.17200, 
-                        "yrTerm3.allUpfront": 0.10152, 
-                        "yrTerm1.allUpfront": 0.14372, 
-                        "yrTerm1.partialUpfront": 0.14655, 
-                        "yrTerm3.partialUpfront": 0.10799
-                    }, 
-                    "ondemand": 0.42500
-                }, 
-                "SQL Server": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.40400, 
-                        "yrTerm3.allUpfront": 0.27028, 
-                        "yrTerm1.allUpfront": 0.42021, 
-                        "yrTerm1.partialUpfront": 0.42876, 
-                        "yrTerm3.partialUpfront": 0.28751
-                    }, 
-                    "ondemand": 0.50500
-                }
-            }, 
-            "ap-southeast-1": {
-                "Oracle": {
-                    "ondemand": 0.38000
-                }, 
-                "MySQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.19200, 
-                        "yrTerm3.allUpfront": 0.10259, 
-                        "yrTerm1.allUpfront": 0.16005, 
-                        "yrTerm1.partialUpfront": 0.16328, 
-                        "yrTerm3.partialUpfront": 0.10912
-                    }, 
-                    "ondemand": 0.38000
-                }, 
-                "PostgreSQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.20200, 
-                        "yrTerm3.allUpfront": 0.10822, 
-                        "yrTerm1.allUpfront": 0.16884, 
-                        "yrTerm1.partialUpfront": 0.17228, 
-                        "yrTerm3.partialUpfront": 0.11512
-                    }, 
-                    "ondemand": 0.40000
-                }, 
-                "SQL Server": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.42400, 
-                        "yrTerm3.allUpfront": 0.26762, 
-                        "yrTerm1.allUpfront": 0.37249, 
-                        "yrTerm1.partialUpfront": 0.37999, 
-                        "yrTerm3.partialUpfront": 0.28469
-                    }, 
-                    "ondemand": 0.53000
-                }
-            }, 
-            "ap-southeast-2": {
-                "Oracle": {
-                    "ondemand": 0.38000
-                }, 
-                "MySQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.19200, 
-                        "yrTerm3.allUpfront": 0.10259, 
-                        "yrTerm1.allUpfront": 0.16005, 
-                        "yrTerm1.partialUpfront": 0.16328, 
-                        "yrTerm3.partialUpfront": 0.10912
-                    }, 
-                    "ondemand": 0.38000
-                }, 
-                "PostgreSQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.20200, 
-                        "yrTerm3.allUpfront": 0.10822, 
-                        "yrTerm1.allUpfront": 0.16884, 
-                        "yrTerm1.partialUpfront": 0.17228, 
-                        "yrTerm3.partialUpfront": 0.11512
-                    }, 
-                    "ondemand": 0.40000
-                }, 
-                "SQL Server": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.85400, 
-                        "yrTerm3.allUpfront": 0.59151, 
-                        "yrTerm1.allUpfront": 0.71473, 
-                        "yrTerm1.partialUpfront": 0.72926, 
-                        "yrTerm3.partialUpfront": 0.62925
-                    }, 
-                    "ondemand": 1.17000
-                }
-            }, 
-            "us-west-2": {
-                "Oracle": {
-                    "ondemand": 0.33000
-                }, 
-                "MySQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.15000, 
-                        "yrTerm3.allUpfront": 0.07557, 
-                        "yrTerm1.allUpfront": 0.12546, 
-                        "yrTerm1.partialUpfront": 0.12800, 
-                        "yrTerm3.partialUpfront": 0.08036
-                    }, 
-                    "ondemand": 0.33000
-                }, 
-                "PostgreSQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.15800, 
-                        "yrTerm3.allUpfront": 0.07930, 
-                        "yrTerm1.allUpfront": 0.13231, 
-                        "yrTerm1.partialUpfront": 0.13500, 
-                        "yrTerm3.partialUpfront": 0.08436
-                    }, 
-                    "ondemand": 0.34500
-                }, 
-                "SQL Server": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.76100, 
-                        "yrTerm3.allUpfront": 0.52926, 
-                        "yrTerm1.allUpfront": 0.63687, 
-                        "yrTerm1.partialUpfront": 0.64986, 
-                        "yrTerm3.partialUpfront": 0.56304
-                    }, 
-                    "ondemand": 1.17000
-                }
-            }, 
-            "us-gov-west-1": {
-                "Oracle": {
-                    "ondemand": 0.37500
-                }, 
-                "SQL Server": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.80700, 
-                        "yrTerm3.allUpfront": 0.55936, 
-                        "yrTerm1.allUpfront": 0.67557, 
-                        "yrTerm1.partialUpfront": 0.68942, 
-                        "yrTerm3.partialUpfront": 0.59507
-                    }, 
-                    "ondemand": 1.29000
-                }, 
-                "PostgreSQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.18500, 
-                        "yrTerm3.allUpfront": 0.09448, 
-                        "yrTerm1.allUpfront": 0.15468, 
-                        "yrTerm1.partialUpfront": 0.15784, 
-                        "yrTerm3.partialUpfront": 0.10052
-                    }, 
-                    "ondemand": 0.39500
-                }, 
-                "MySQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.17500, 
-                        "yrTerm3.allUpfront": 0.08980, 
-                        "yrTerm1.allUpfront": 0.14680, 
-                        "yrTerm1.partialUpfront": 0.14984, 
-                        "yrTerm3.partialUpfront": 0.09552
-                    }, 
-                    "ondemand": 0.37500
-                }
-            }, 
-            "us-west-1": {
-                "Oracle": {
-                    "ondemand": 0.36000
-                }, 
-                "MySQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.17700, 
-                        "yrTerm3.allUpfront": 0.09437, 
-                        "yrTerm1.allUpfront": 0.14806, 
-                        "yrTerm1.partialUpfront": 0.15100, 
-                        "yrTerm3.partialUpfront": 0.10036
-                    }, 
-                    "ondemand": 0.36000
-                }, 
-                "PostgreSQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.18500, 
-                        "yrTerm3.allUpfront": 0.09905, 
-                        "yrTerm1.allUpfront": 0.15491, 
-                        "yrTerm1.partialUpfront": 0.15800, 
-                        "yrTerm3.partialUpfront": 0.10536
-                    }, 
-                    "ondemand": 0.37500
-                }, 
-                "SQL Server": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.84900, 
-                        "yrTerm3.allUpfront": 0.58870, 
-                        "yrTerm1.allUpfront": 0.71084, 
-                        "yrTerm1.partialUpfront": 0.72526, 
-                        "yrTerm3.partialUpfront": 0.62625
-                    }, 
-                    "ondemand": 1.22500
+                    "ondemand": 3.85220
                 }
             }, 
             "eu-west-1": {
                 "Oracle": {
-                    "ondemand": 0.65600
-                }, 
-                "SQL Server": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.33600, 
-                        "yrTerm3.allUpfront": 0.21442, 
-                        "yrTerm1.allUpfront": 0.29578, 
-                        "yrTerm1.partialUpfront": 0.30175, 
-                        "yrTerm3.partialUpfront": 0.22811
+                        "yrTerm1.noUpfront": 2.08320, 
+                        "yrTerm3.allUpfront": 0.94064, 
+                        "yrTerm1.allUpfront": 1.94886, 
+                        "yrTerm1.partialUpfront": 1.98378, 
+                        "yrTerm3.partialUpfront": 1.00811
                     }, 
-                    "ondemand": 0.42000
-                }, 
-                "PostgreSQL": {
+                    "ondemand": 3.36000
+                }
+            }, 
+            "ap-southeast-2": {
+                "Oracle": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.18500, 
-                        "yrTerm3.allUpfront": 0.10000, 
-                        "yrTerm1.allUpfront": 0.15491, 
-                        "yrTerm1.partialUpfront": 0.15800, 
-                        "yrTerm3.partialUpfront": 0.10636
+                        "yrTerm1.noUpfront": 2.38880, 
+                        "yrTerm3.allUpfront": 1.07823, 
+                        "yrTerm1.allUpfront": 2.23379, 
+                        "yrTerm1.partialUpfront": 2.27367, 
+                        "yrTerm3.partialUpfront": 1.15538
                     }, 
-                    "ondemand": 0.37900
-                }, 
-                "MySQL": {
-                    "reserved": {
-                        "yrTerm1.noUpfront": 0.17700, 
-                        "yrTerm3.allUpfront": 0.09528, 
-                        "yrTerm1.allUpfront": 0.14806, 
-                        "yrTerm1.partialUpfront": 0.15100, 
-                        "yrTerm3.partialUpfront": 0.10136
-                    }, 
-                    "ondemand": 0.36000
+                    "ondemand": 3.85220
                 }
             }
         }, 
-        "operation": "CreateDBInstance:0009", 
-        "instanceType": "db.m2.xlarge", 
-        "vcpu": "2", 
-        "storage": "1 x 420", 
+        "operation": "CreateDBInstance:0003", 
+        "instanceType": "db.x1e.2xlarge", 
+        "vcpu": "8", 
+        "storage": "1 x 240 SSD", 
         "location": "Asia Pacific (Sydney)", 
-        "memory": "17.1", 
-        "networkPerformance": "Moderate", 
-        "usagetype": "APS2-InstanceUsage:db.m2.xlarge", 
-        "normalizationSizeFactor": "NA", 
+        "memory": "244", 
+        "networkPerformance": "Up to 10 Gigabit", 
+        "usagetype": "APS2-Multi-AZUsage:db.x1e.2xl", 
+        "normalizationSizeFactor": "32", 
         "processorArchitecture": "64-bit", 
-        "pretty_name": "M2 High Memory Extra Large", 
-        "instanceTypeFamily": "M2", 
+        "pretty_name": "X1E Double Extra Large", 
+        "instanceTypeFamily": "X1e", 
         "servicecode": "AmazonRDS", 
         "arch": "64-bit", 
-        "database_engine": "SQL Server", 
-        "dedicatedEbsThroughput": "500 Mbps", 
+        "database_engine": "Oracle", 
         "instanceFamily": "Memory optimized", 
         "locationType": "AWS Region", 
         "region": "ap-southeast-2", 
         "licenseModel": "Bring your own license", 
-        "instance_type": "db.m2.xlarge", 
-        "deploymentOption": "Single-AZ", 
-        "engineCode": "9", 
-        "physicalProcessor": "Intel Xeon Family", 
-        "databaseEngine": "SQL Server"
+        "instance_type": "db.x1e.2xlarge", 
+        "deploymentOption": "Multi-AZ", 
+        "engineCode": "3", 
+        "physicalProcessor": "Intel Xeon E7-8880 v3", 
+        "databaseEngine": "Oracle"
     }, 
     {
         "family": "General purpose", 
@@ -18562,11 +19344,11 @@
                 }, 
                 "MariaDB": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.55420, 
-                        "yrTerm3.allUpfront": 0.35811, 
-                        "yrTerm1.allUpfront": 0.51724, 
-                        "yrTerm1.partialUpfront": 0.52783, 
-                        "yrTerm3.partialUpfront": 0.36539
+                        "yrTerm1.noUpfront": 0.42770, 
+                        "yrTerm3.allUpfront": 0.28006, 
+                        "yrTerm1.allUpfront": 0.39920, 
+                        "yrTerm1.partialUpfront": 0.40735, 
+                        "yrTerm3.partialUpfront": 0.28578
                     }, 
                     "ondemand": 0.60800
                 }, 
@@ -19405,7 +20187,7 @@
                         "yrTerm1.partialUpfront": 0.20124, 
                         "yrTerm3.partialUpfront": 0.13384
                     }, 
-                    "ondemand": 0.31100
+                    "ondemand": 0.33400
                 }, 
                 "MariaDB": {
                     "reserved": {
@@ -19461,11 +20243,11 @@
                 }, 
                 "MariaDB": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.13850, 
-                        "yrTerm3.allUpfront": 0.08954, 
-                        "yrTerm1.allUpfront": 0.12934, 
-                        "yrTerm1.partialUpfront": 0.13198, 
-                        "yrTerm3.partialUpfront": 0.09136
+                        "yrTerm1.noUpfront": 0.10690, 
+                        "yrTerm3.allUpfront": 0.07002, 
+                        "yrTerm1.allUpfront": 0.09977, 
+                        "yrTerm1.partialUpfront": 0.10181, 
+                        "yrTerm3.partialUpfront": 0.07143
                     }, 
                     "ondemand": 0.15200
                 }, 
@@ -20380,11 +21162,11 @@
                 }, 
                 "MariaDB": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.01730, 
-                        "yrTerm3.allUpfront": 0.01119, 
-                        "yrTerm1.allUpfront": 0.01621, 
-                        "yrTerm1.partialUpfront": 0.01642, 
-                        "yrTerm3.partialUpfront": 0.01141
+                        "yrTerm1.noUpfront": 0.01340, 
+                        "yrTerm3.allUpfront": 0.00875, 
+                        "yrTerm1.allUpfront": 0.01244, 
+                        "yrTerm1.partialUpfront": 0.01279, 
+                        "yrTerm3.partialUpfront": 0.00895
                     }, 
                     "ondemand": 0.01900
                 }, 
@@ -21131,11 +21913,11 @@
                 }, 
                 "MariaDB": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.27710, 
-                        "yrTerm3.allUpfront": 0.17903, 
-                        "yrTerm1.allUpfront": 0.25868, 
-                        "yrTerm1.partialUpfront": 0.26396, 
-                        "yrTerm3.partialUpfront": 0.18276
+                        "yrTerm1.noUpfront": 0.21390, 
+                        "yrTerm3.allUpfront": 0.14003, 
+                        "yrTerm1.allUpfront": 0.19966, 
+                        "yrTerm1.partialUpfront": 0.20363, 
+                        "yrTerm3.partialUpfront": 0.14282
                     }, 
                     "ondemand": 0.30400
                 }, 
@@ -22800,15 +23582,28 @@
                 }
             }, 
             "us-gov-west-1": {
-                "Oracle": {
+                "PostgreSQL": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.32800, 
-                        "yrTerm3.allUpfront": 0.19848, 
-                        "yrTerm1.allUpfront": 0.30594, 
-                        "yrTerm1.partialUpfront": 0.31216, 
-                        "yrTerm3.partialUpfront": 0.20267
+                        "yrTerm1.noUpfront": 0.38030, 
+                        "yrTerm3.allUpfront": 0.22420, 
+                        "yrTerm1.allUpfront": 0.31861, 
+                        "yrTerm1.partialUpfront": 0.32506, 
+                        "yrTerm3.partialUpfront": 0.22878
                     }, 
-                    "ondemand": 0.57840
+                    "ondemand": 0.60200
+                }, 
+                "SQL Server": {
+                    "ondemand": 0.79100
+                }, 
+                "Aurora MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 0.45000, 
+                        "yrTerm3.allUpfront": 0.25008, 
+                        "yrTerm1.allUpfront": 0.37055, 
+                        "yrTerm1.partialUpfront": 0.37904, 
+                        "yrTerm3.partialUpfront": 0.27303
+                    }, 
+                    "ondemand": 0.70000
                 }, 
                 "MySQL": {
                     "reserved": {
@@ -22820,15 +23615,15 @@
                     }, 
                     "ondemand": 0.57800
                 }, 
-                "PostgreSQL": {
+                "Oracle": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.38030, 
-                        "yrTerm3.allUpfront": 0.22420, 
-                        "yrTerm1.allUpfront": 0.31861, 
-                        "yrTerm1.partialUpfront": 0.32506, 
-                        "yrTerm3.partialUpfront": 0.22878
+                        "yrTerm1.noUpfront": 0.32800, 
+                        "yrTerm3.allUpfront": 0.19848, 
+                        "yrTerm1.allUpfront": 0.30594, 
+                        "yrTerm1.partialUpfront": 0.31216, 
+                        "yrTerm3.partialUpfront": 0.20267
                     }, 
-                    "ondemand": 0.60200
+                    "ondemand": 0.57840
                 }, 
                 "MariaDB": {
                     "reserved": {
@@ -22839,9 +23634,6 @@
                         "yrTerm3.partialUpfront": 0.21962
                     }, 
                     "ondemand": 0.57800
-                }, 
-                "SQL Server": {
-                    "ondemand": 0.79100
                 }
             }, 
             "us-west-1": {
@@ -23374,15 +24166,15 @@
                 "Oracle": {
                     "ondemand": 0.58000
                 }, 
-                "SQL Server": {
+                "MySQL": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.61500, 
-                        "yrTerm3.allUpfront": 0.37648, 
-                        "yrTerm1.allUpfront": 0.51461, 
-                        "yrTerm1.partialUpfront": 0.52503, 
-                        "yrTerm3.partialUpfront": 0.40049
+                        "yrTerm1.noUpfront": 0.38100, 
+                        "yrTerm3.allUpfront": 0.20350, 
+                        "yrTerm1.allUpfront": 0.31872, 
+                        "yrTerm1.partialUpfront": 0.32517, 
+                        "yrTerm3.partialUpfront": 0.21646
                     }, 
-                    "ondemand": 0.86000
+                    "ondemand": 0.58000
                 }, 
                 "PostgreSQL": {
                     "reserved": {
@@ -23394,15 +24186,15 @@
                     }, 
                     "ondemand": 0.60500
                 }, 
-                "MySQL": {
+                "SQL Server": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.38100, 
-                        "yrTerm3.allUpfront": 0.20350, 
-                        "yrTerm1.allUpfront": 0.31872, 
-                        "yrTerm1.partialUpfront": 0.32517, 
-                        "yrTerm3.partialUpfront": 0.21646
+                        "yrTerm1.noUpfront": 0.61500, 
+                        "yrTerm3.allUpfront": 0.37648, 
+                        "yrTerm1.allUpfront": 0.51461, 
+                        "yrTerm1.partialUpfront": 0.52503, 
+                        "yrTerm3.partialUpfront": 0.40049
                     }, 
-                    "ondemand": 0.58000
+                    "ondemand": 0.86000
                 }
             }, 
             "us-west-2": {
@@ -23778,13 +24570,13 @@
                 }, 
                 "SQL Server": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 0.69600, 
-                        "yrTerm3.allUpfront": 0.51971, 
-                        "yrTerm1.allUpfront": 0.61450, 
-                        "yrTerm1.partialUpfront": 0.62694, 
-                        "yrTerm3.partialUpfront": 0.55285
+                        "yrTerm1.noUpfront": 0.27600, 
+                        "yrTerm3.allUpfront": 0.16857, 
+                        "yrTerm1.allUpfront": 0.23105, 
+                        "yrTerm1.partialUpfront": 0.23572, 
+                        "yrTerm3.partialUpfront": 0.17930
                     }, 
-                    "ondemand": 0.87000
+                    "ondemand": 0.37000
                 }
             }, 
             "ap-southeast-2": {
@@ -24907,15 +25699,28 @@
                 }
             }, 
             "us-gov-west-1": {
-                "Oracle": {
+                "PostgreSQL": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 5.92640, 
-                        "yrTerm3.allUpfront": 3.05875, 
-                        "yrTerm1.allUpfront": 4.90959, 
-                        "yrTerm1.partialUpfront": 4.99463, 
-                        "yrTerm3.partialUpfront": 3.24265
+                        "yrTerm1.noUpfront": 6.08550, 
+                        "yrTerm3.allUpfront": 3.58695, 
+                        "yrTerm1.allUpfront": 5.09726, 
+                        "yrTerm1.partialUpfront": 5.20128, 
+                        "yrTerm3.partialUpfront": 3.66020
                     }, 
-                    "ondemand": 9.25440
+                    "ondemand": 9.63200
+                }, 
+                "SQL Server": {
+                    "ondemand": 25.37600
+                }, 
+                "Aurora MySQL": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 7.08000, 
+                        "yrTerm3.allUpfront": 4.00065, 
+                        "yrTerm1.allUpfront": 5.92705, 
+                        "yrTerm1.partialUpfront": 6.05466, 
+                        "yrTerm3.partialUpfront": 4.25846
+                    }, 
+                    "ondemand": 11.20000
                 }, 
                 "MySQL": {
                     "reserved": {
@@ -24927,15 +25732,15 @@
                     }, 
                     "ondemand": 9.24800
                 }, 
-                "PostgreSQL": {
+                "Oracle": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 6.08550, 
-                        "yrTerm3.allUpfront": 3.58695, 
-                        "yrTerm1.allUpfront": 5.09726, 
-                        "yrTerm1.partialUpfront": 5.20128, 
-                        "yrTerm3.partialUpfront": 3.66020
+                        "yrTerm1.noUpfront": 5.92640, 
+                        "yrTerm3.allUpfront": 3.05875, 
+                        "yrTerm1.allUpfront": 4.90959, 
+                        "yrTerm1.partialUpfront": 4.99463, 
+                        "yrTerm3.partialUpfront": 3.24265
                     }, 
-                    "ondemand": 9.63200
+                    "ondemand": 9.25440
                 }, 
                 "MariaDB": {
                     "reserved": {
@@ -24946,9 +25751,6 @@
                         "yrTerm3.partialUpfront": 3.51422
                     }, 
                     "ondemand": 9.24800
-                }, 
-                "SQL Server": {
-                    "ondemand": 25.37600
                 }
             }, 
             "us-west-1": {
@@ -26228,15 +27030,15 @@
                     }, 
                     "ondemand": 4.53600
                 }, 
-                "SQL Server": {
+                "MariaDB": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 3.09500, 
-                        "yrTerm3.allUpfront": 1.76876, 
-                        "yrTerm1.allUpfront": 2.59281, 
-                        "yrTerm1.partialUpfront": 2.64617, 
-                        "yrTerm3.partialUpfront": 1.88139
+                        "yrTerm1.noUpfront": 2.80400, 
+                        "yrTerm3.allUpfront": 1.55308, 
+                        "yrTerm1.allUpfront": 2.34863, 
+                        "yrTerm1.partialUpfront": 2.39648, 
+                        "yrTerm3.partialUpfront": 1.65193
                     }, 
-                    "ondemand": 10.13200
+                    "ondemand": 4.53600
                 }, 
                 "PostgreSQL": {
                     "reserved": {
@@ -26248,15 +27050,15 @@
                     }, 
                     "ondemand": 4.77600
                 }, 
-                "MariaDB": {
+                "SQL Server": {
                     "reserved": {
-                        "yrTerm1.noUpfront": 2.80400, 
-                        "yrTerm3.allUpfront": 1.55308, 
-                        "yrTerm1.allUpfront": 2.34863, 
-                        "yrTerm1.partialUpfront": 2.39648, 
-                        "yrTerm3.partialUpfront": 1.65193
+                        "yrTerm1.noUpfront": 3.09500, 
+                        "yrTerm3.allUpfront": 1.76876, 
+                        "yrTerm1.allUpfront": 2.59281, 
+                        "yrTerm1.partialUpfront": 2.64617, 
+                        "yrTerm3.partialUpfront": 1.88139
                     }, 
-                    "ondemand": 4.53600
+                    "ondemand": 10.13200
                 }, 
                 "MySQL": {
                     "reserved": {
@@ -26494,5 +27296,211 @@
         "engineCode": "14", 
         "physicalProcessor": "Intel Xeon E5-2670 v2 (Ivy Bridge)", 
         "databaseEngine": "PostgreSQL"
+    }, 
+    {
+        "family": "Memory optimized", 
+        "databaseEdition": "Enterprise", 
+        "currentGeneration": "Yes", 
+        "network_performance": "10 Gigabit", 
+        "servicename": "Amazon Relational Database Service", 
+        "pricing": {
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 11.20000
+                }
+            }, 
+            "ap-northeast-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 10.07360, 
+                        "yrTerm3.allUpfront": 4.55890, 
+                        "yrTerm1.allUpfront": 9.43927, 
+                        "yrTerm1.partialUpfront": 9.59269, 
+                        "yrTerm3.partialUpfront": 4.88498
+                    }, 
+                    "ondemand": 16.25600
+                }
+            }, 
+            "us-east-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 6.95040, 
+                        "yrTerm3.allUpfront": 3.13668, 
+                        "yrTerm1.allUpfront": 6.50228, 
+                        "yrTerm1.partialUpfront": 6.60468, 
+                        "yrTerm3.partialUpfront": 3.37484
+                    }, 
+                    "ondemand": 11.20000
+                }
+            }, 
+            "ap-northeast-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 10.07360, 
+                        "yrTerm3.allUpfront": 4.55890, 
+                        "yrTerm1.allUpfront": 9.43927, 
+                        "yrTerm1.partialUpfront": 9.59269, 
+                        "yrTerm3.partialUpfront": 4.88498
+                    }, 
+                    "ondemand": 16.25600
+                }
+            }, 
+            "eu-west-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 8.33280, 
+                        "yrTerm3.allUpfront": 3.76499, 
+                        "yrTerm1.allUpfront": 7.78813, 
+                        "yrTerm1.partialUpfront": 7.94243, 
+                        "yrTerm3.partialUpfront": 4.03884
+                    }, 
+                    "ondemand": 13.44000
+                }
+            }, 
+            "ap-southeast-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 10.07360, 
+                        "yrTerm3.allUpfront": 4.54429, 
+                        "yrTerm1.allUpfront": 9.42466, 
+                        "yrTerm1.partialUpfront": 9.59269, 
+                        "yrTerm3.partialUpfront": 4.88498
+                    }, 
+                    "ondemand": 16.24320
+                }
+            }, 
+            "ca-central-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 7.64160, 
+                        "yrTerm3.allUpfront": 3.45814, 
+                        "yrTerm1.allUpfront": 7.15982, 
+                        "yrTerm1.partialUpfront": 7.27356, 
+                        "yrTerm3.partialUpfront": 3.70684
+                    }, 
+                    "ondemand": 12.32640
+                }
+            }, 
+            "ap-southeast-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 10.07360, 
+                        "yrTerm3.allUpfront": 4.55890, 
+                        "yrTerm1.allUpfront": 9.43927, 
+                        "yrTerm1.partialUpfront": 9.59269, 
+                        "yrTerm3.partialUpfront": 4.88498
+                    }, 
+                    "ondemand": 16.25600
+                }
+            }, 
+            "us-west-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 6.95040, 
+                        "yrTerm3.allUpfront": 3.13668, 
+                        "yrTerm1.allUpfront": 6.50228, 
+                        "yrTerm1.partialUpfront": 6.60468, 
+                        "yrTerm3.partialUpfront": 3.37484
+                    }, 
+                    "ondemand": 11.20000
+                }
+            }, 
+            "us-gov-west-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 8.33280, 
+                        "yrTerm3.allUpfront": 3.76499, 
+                        "yrTerm1.allUpfront": 7.78813, 
+                        "yrTerm1.partialUpfront": 7.94243, 
+                        "yrTerm3.partialUpfront": 4.03884
+                    }, 
+                    "ondemand": 13.44000
+                }
+            }, 
+            "ap-south-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 9.57440, 
+                        "yrTerm3.allUpfront": 4.32511, 
+                        "yrTerm1.allUpfront": 8.94247, 
+                        "yrTerm1.partialUpfront": 9.11570, 
+                        "yrTerm3.partialUpfront": 4.63522
+                    }, 
+                    "ondemand": 15.43680
+                }
+            }, 
+            "eu-central-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 9.72800, 
+                        "yrTerm3.allUpfront": 4.38843, 
+                        "yrTerm1.allUpfront": 9.10320, 
+                        "yrTerm1.partialUpfront": 9.26556, 
+                        "yrTerm3.partialUpfront": 4.71258
+                    }, 
+                    "ondemand": 15.68000
+                }
+            }, 
+            "sa-east-1": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 13.54240, 
+                        "yrTerm3.allUpfront": 6.11750, 
+                        "yrTerm1.allUpfront": 12.66849, 
+                        "yrTerm1.partialUpfront": 12.89504, 
+                        "yrTerm3.partialUpfront": 6.55473
+                    }, 
+                    "ondemand": 21.84960
+                }
+            }, 
+            "eu-west-2": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 8.75520, 
+                        "yrTerm3.allUpfront": 3.95495, 
+                        "yrTerm1.allUpfront": 8.19726, 
+                        "yrTerm1.partialUpfront": 8.33718, 
+                        "yrTerm3.partialUpfront": 4.24352
+                    }, 
+                    "ondemand": 14.11840
+                }
+            }, 
+            "eu-west-3": {
+                "Oracle": {
+                    "reserved": {
+                        "yrTerm1.noUpfront": 8.75520, 
+                        "yrTerm3.allUpfront": 3.95495, 
+                        "yrTerm1.allUpfront": 8.19726, 
+                        "yrTerm1.partialUpfront": 8.33718, 
+                        "yrTerm3.partialUpfront": 4.24352
+                    }, 
+                    "ondemand": 14.11840
+                }
+            }
+        }, 
+        "operation": "CreateDBInstance:0005", 
+        "instanceType": "db.x1.16xlarge", 
+        "vcpu": "64", 
+        "storage": "1 x 1920 SSD", 
+        "location": "US East (N. Virginia)", 
+        "memory": "976", 
+        "networkPerformance": "10 Gigabit", 
+        "usagetype": "Multi-AZUsage:db.x1.16xl", 
+        "normalizationSizeFactor": "256", 
+        "processorArchitecture": "64-bit", 
+        "pretty_name": "X1 16xlarge", 
+        "instanceTypeFamily": "X1e", 
+        "servicecode": "AmazonRDS", 
+        "arch": "64-bit", 
+        "database_engine": "Oracle", 
+        "instanceFamily": "Memory optimized", 
+        "locationType": "AWS Region", 
+        "region": "us-east-1", 
+        "licenseModel": "Bring your own license", 
+        "instance_type": "db.x1.16xlarge", 
+        "deploymentOption": "Multi-AZ", 
+        "engineCode": "5", 
+        "physicalProcessor": "Intel Xeon E7-8880 v3", 
+        "databaseEngine": "Oracle"
     }
 ]
