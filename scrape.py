@@ -99,7 +99,8 @@ class Instance(object):
                  clock_speed_ghz=self.clock_speed_ghz,
                  intel_avx=self.intel_avx,
                  intel_avx2=self.intel_avx2,
-                 intel_turbo=self.intel_turbo)
+                 intel_turbo=self.intel_turbo,
+                 emr=self.emr)
         if self.ebs_only:
             d['storage'] = None
         else:
