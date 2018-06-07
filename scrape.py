@@ -51,6 +51,7 @@ class Instance(object):
         self.vCPU = 0
         self.vpc = None
         self.vpc_only = False
+        self.emr = False
 
     def get_type_prefix(self):
         """h1, i3, d2, etc"""
@@ -707,6 +708,37 @@ def add_pretty_names(instances):
         i.pretty_name = ' '.join([b for b in bits if b])
 
 
+def add_emr_info(instances):
+    url = "https://a0.awsstatic.com/pricing/1/emr/pricing-emr.min.js"
+    pricing = fetch_data(url)
+
+    def extract_prices(data):
+        ret = {}
+        for x in data["regions"]:
+            for inst in x["instanceTypes"]:
+                for size in inst["sizes"]:
+                    if size["size"] not in ret:
+                        ret[size["size"]] = {}
+                    ret[size["size"]][x["region"]] = {
+                        size["valueColumns"][0]["name"]:
+                        size["valueColumns"][0]["prices"]["USD"],
+                        size["valueColumns"][1]["name"]:
+                        size["valueColumns"][1]["prices"]["USD"],
+                        "currencies": data["currencies"],
+                        "rate": data["rate"],
+                    }
+        return ret
+
+    pricing = extract_prices(pricing["config"])
+    for inst in instances:
+        if inst.instance_type in pricing:
+            inst.emr = True
+            for region in inst.pricing:
+                if region in pricing[inst.instance_type]:
+                    inst.pricing[region]["emr"] = pricing[
+                        inst.instance_type][region]
+
+
 def scrape(data_file):
     """Scrape AWS to get instance data"""
     print("Parsing instance types...")
@@ -729,7 +761,10 @@ def scrape(data_file):
     add_pretty_names(all_instances)
     print("Parsing instance cpu details...")
     add_cpu_details(all_instances)
+    print("Parsing emr details...")
+    add_emr_info(all_instances)
 
+    __import__('ipdb').set_trace()
     with open(data_file, 'w') as f:
         json.dump([i.to_dict() for i in all_instances],
                   f,
