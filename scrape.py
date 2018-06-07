@@ -764,7 +764,6 @@ def scrape(data_file):
     print("Parsing emr details...")
     add_emr_info(all_instances)
 
-    __import__('ipdb').set_trace()
     with open(data_file, 'w') as f:
         json.dump([i.to_dict() for i in all_instances],
                   f,
