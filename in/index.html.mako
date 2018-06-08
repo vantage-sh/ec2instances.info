@@ -186,8 +186,8 @@
           <th class="cost-ebs-optimized">
             <abbr title='Some instance types are charged additionally when configured for optimized EBS usage'>EBS Optimized surcharge</abbr>
           </th>
-          <th class="emr">
-            EMR cost
+          <th class="cost-emr">
+            <abbr title="This are the hourly rate EMR costs. Actual costs are EC2 + EMR by hourly rate">EMR cost</abbr>
           </th>
         </tr>
       </thead>
@@ -376,12 +376,10 @@
               <span sort="999999">unavailable</span>
             % endif
           </td>
-          <td class="emr">
+          <td class="cost-emr" data-pricing='${json.dumps({r:p.get('emr', {}).get('emr', {}) for r,p in inst['pricing'].iteritems()}) | h}'>
             % if inst['pricing'].get('us-east-1', {}).get("emr", {}):
-              <span sort="${inst['pricing']['us-east-1']["emr"]['ec2']} + ${inst['pricing']['us-east-1']["emr"]['emr']}">
-                ec2: $${inst['pricing']['us-east-1']["emr"]['ec2']}
-                + 
-                emr: $${inst['pricing']['us-east-1']["emr"]['emr']}
+              <span sort="${inst['pricing']['us-east-1']["emr"]['emr']}">
+                $${inst['pricing']['us-east-1']["emr"]['emr']}
               </span>
             % else:
               <span sort="999999">unavailable</span>
