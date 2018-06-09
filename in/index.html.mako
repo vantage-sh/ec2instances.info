@@ -376,10 +376,10 @@
               <span sort="999999">unavailable</span>
             % endif
           </td>
-          <td class="cost-emr" data-pricing='${json.dumps({r:p.get('emr', {}).get('emr', {}) for r,p in inst['pricing'].iteritems()}) | h}'>
+          <td class="cost-emr cost-ondemand" data-pricing='${json.dumps({r:p.get('emr', {}).get('emr', {}) for r,p in inst['pricing'].iteritems()}) | h}'>
             % if inst['pricing'].get('us-east-1', {}).get("emr", {}):
               <span sort="${inst['pricing']['us-east-1']["emr"]['emr']}">
-                $${inst['pricing']['us-east-1']["emr"]['emr']}
+                $${inst['pricing']['us-east-1']["emr"]['emr']} hourly
               </span>
             % else:
               <span sort="999999">unavailable</span>
