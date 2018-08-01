@@ -535,10 +535,14 @@ def add_linux_ami_info(instances):
         # We only check the primary EBS-backed values here since the 'storage'
         # column will already be able to tell users whether or not the instance
         # they're looking at can use EBS and/or instance-store AMIs.
-        if totext(r[1]) == checkmark_char:
-            supported_types.append('HVM')
-        if totext(r[3]) == checkmark_char:
-            supported_types.append('PV')
+        try:
+            if totext(r[1]) == checkmark_char:
+                supported_types.append('HVM')
+            if totext(r[3]) == checkmark_char:
+                supported_types.append('PV')
+        except Exception as e:
+            # 2018-08-01: handle missing cells on last row in this table...
+            print("Exception while parsing AMI info for {}: {}".format(family_id, e))
 
         # Apply types for this instance family to all matching instances
         for i in instances:
