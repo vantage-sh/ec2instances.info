@@ -78,7 +78,7 @@ function init_data_table() {
           "cost-reserved-linuxSQLWeb",
           "ebs-throughput",
           "ebs-iops",
-          "ebs-iops",
+          "ebs-as-nvme",
           "ebs-max-bandwidth",
           "cost-ebs-optimized",
           "trim-support",

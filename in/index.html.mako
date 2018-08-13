@@ -132,6 +132,9 @@
           <th class="ebs-max-bandwidth">EBS Optimized: Max Bandwidth</th>
           <th class="ebs-throughput">EBS Optimized: Throughput</th>
           <th class="ebs-iops">EBS Optimized: Max 16K IOPS</th>
+          <th class="ebs-as-nvme">
+            <abbr title="EBS volumes on these instances will be exposed as NVMe devices (/dev/nvmeXn1)">EBS Exposed as NVMe</abbr>
+          </th>
           <th class="maxips">
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
@@ -272,7 +275,6 @@
                 N/A
             % endif
           </td>
-
           <td class="architecture">
             % if 'i386' in inst['arch']:
             32/64-bit
@@ -303,6 +305,13 @@
             <span sort="${inst['ebs_iops']}">
               ${inst['ebs_iops']} IOPS
             </span>
+          </td>
+          <td class="ebs-as-nvme">
+            % if inst['ebs_as_nvme']:
+                Yes
+            % else:
+                No
+            % endif
           </td>
           <td class="maxips">
             % if inst['vpc']:

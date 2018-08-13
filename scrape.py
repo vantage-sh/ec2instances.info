@@ -24,6 +24,7 @@ class Instance(object):
         self.ebs_only = True
         self.ebs_optimized = False
         self.ebs_throughput = 0
+        self.ebs_as_nvme = False
         self.ECU = 0
         self.enhanced_networking = None
         self.family = ''
@@ -85,6 +86,7 @@ class Instance(object):
                  ebs_optimized=self.ebs_optimized,
                  ebs_throughput=self.ebs_throughput,
                  ebs_iops=self.ebs_iops,
+                 ebs_as_nvme=self.ebs_as_nvme,
                  ebs_max_bandwidth=self.ebs_max_bandwidth,
                  network_performance=self.network_performance,
                  enhanced_networking=self.enhanced_networking,
@@ -514,6 +516,30 @@ def add_ebs_info(instances):
         by_type[instance_type].ebs_max_bandwidth = ebs_max_bandwidth
 
 
+def check_ebs_as_nvme(instances):
+    """Note which instances expose EBS as NVMe devices
+
+    Some of the new instances (like i3.metal and c5d family) will expose EBS
+    volume at /dev/nvmeXn1.
+    https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/nvme-ebs-volumes.html
+    """
+
+    url = 'https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/nvme-ebs-volumes.html'
+    tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
+
+    # This should get the p text with instance families
+    p_text = ' '.join(s.strip() for s in tree.xpath(r'//*[@id="main-col-body"]/p[1]/text()'))
+    families = [fam.lower() for fam in re.findall(r'[a-zA-Z]\d[a-z]?', p_text)]
+
+    # This should get all code tags which suppose to contain an instance type
+    instance_types = tree.xpath(r'//*[@id="main-col-body"]/p[1]/code//text()')
+
+    for inst in instances:
+        inst_family = inst.instance_type.partition('.')[0]
+        if inst.instance_type in instance_types or inst_family in families:
+            inst.ebs_as_nvme = True
+
+
 def add_linux_ami_info(instances):
     """Add information about which virtualization options are supported.
 
@@ -754,6 +780,8 @@ def scrape(data_file):
     add_eni_info(all_instances)
     print("Parsing EBS info...")
     add_ebs_info(all_instances)
+    print("Adding EBS as NVMe info...")
+    check_ebs_as_nvme(all_instances)
     print("Parsing Linux AMI info...")
     add_linux_ami_info(all_instances)
     print("Parsing VPC-only info...")
