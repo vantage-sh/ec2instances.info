@@ -28,7 +28,7 @@ abspath = lambda filename: os.path.join(os.path.abspath(os.path.dirname(__file__
                                         filename)
 
 FAB_HOST = os.getenv('FAB_HOST', '127.0.0.1')
-FAB_PORT = os.getenv('FAB_PORT', '')
+FAB_PORT = os.getenv('FAB_PORT', '8080')
 
 @task
 def build():
