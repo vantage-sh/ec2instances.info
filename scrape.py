@@ -564,7 +564,7 @@ def add_linux_ami_info(instances):
         try:
             if totext(r[1]) == checkmark_char:
                 supported_types.append('HVM')
-            if totext(r[3]) == checkmark_char:
+            if len(r) >= 4 and totext(r[3]) == checkmark_char:
                 supported_types.append('PV')
         except Exception as e:
             # 2018-08-01: handle missing cells on last row in this table...
