@@ -35,6 +35,7 @@ class Instance(object):
         self.instance_type = ''
         self.intel_avx = None
         self.intel_avx2 = None
+        self.intel_avx512 = None
         self.intel_turbo = None
         self.linux_virtualization_types = []
         self.memory = 0
@@ -101,6 +102,7 @@ class Instance(object):
                  clock_speed_ghz=self.clock_speed_ghz,
                  intel_avx=self.intel_avx,
                  intel_avx2=self.intel_avx2,
+                 intel_avx512=self.intel_avx512,
                  intel_turbo=self.intel_turbo,
                  emr=self.emr)
         if self.ebs_only:
@@ -652,23 +654,47 @@ def add_cpu_details(instances):
             'no': False,
         }.get(x, x)
 
+    def text_for(element):
+        return "".join(element.itertext())
+
     by_type = {i.instance_type: i for i in instances}
     url = "https://aws.amazon.com/ec2/instance-types/#instance-type-matrix"
     tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
     tables = tree.xpath('//div[@class="aws-table"]//table')
-    tables = filter(lambda x: x.xpath('.//tr//td')[0].text == 'Instance Type', tables)
-    rows = [r for t in tables for r in t.xpath('.//tr') if not r[0].text == 'Instance Type']
-    for r in rows:
-        instance_type = sanitize_instance_type(etree.tostring(r[0], method='text'))
-        instance = by_type.get(instance_type)
-        if not instance:
-            print("Unknown instance type: {}".format(instance_type))
-            continue
-        instance.physical_processor = clean_output(totext(r[5]))
-        instance.clock_speed_ghz = clean_output(totext(r[6]))
-        instance.intel_avx = clean_output(totext(r[7]))
-        instance.intel_avx2 = clean_output(totext(r[8]))
-        instance.intel_turbo = clean_output(totext(r[9]))
+    tables = filter(lambda x: text_for(x.xpath('.//tr//td')[0]) == 'Instance Type', tables)
+    for t in tables:
+        header_row = t.xpath('.//tr')[0]
+        intel_avx_idx = -1
+        intel_avx2_idx = -1
+        intel_avx512_idx = -1
+        intel_turbo_idx = -1
+        for idx, c in enumerate(header_row):
+            text = text_for(c)
+            if "Intel AVX-512" in text:
+                intel_avx512_idx = idx
+            elif "Intel AVX2" in text:
+                intel_avx2_idx = idx
+            elif "Intel AVX" in text:
+                intel_avx_idx = idx
+            elif "Intel Turbo" in text:
+                intel_turbo_idx = idx
+        rows = [r for r in t.xpath('.//tr') if not text_for(r[0]) == 'Instance Type']
+        for r in rows:
+            instance_type = sanitize_instance_type(etree.tostring(r[0], method='text'))
+            instance = by_type.get(instance_type)
+            if not instance:
+                print("Unknown instance type: {}".format(instance_type))
+                continue
+            instance.physical_processor = clean_output(totext(r[5]))
+            instance.clock_speed_ghz = clean_output(totext(r[6]))
+            if intel_avx_idx != -1:
+                instance.intel_avx = clean_output(totext(r[intel_avx_idx]))
+            if intel_avx2_idx != -1:
+                instance.intel_avx2 = clean_output(totext(r[intel_avx2_idx]))
+            if intel_avx512_idx != -1:
+                instance.intel_avx512 = clean_output(totext(r[intel_avx512_idx]))
+            if intel_turbo_idx != -1:
+                instance.intel_turbo = clean_output(totext(r[intel_turbo_idx]))
 
 
 def add_t2_credits(instances):
