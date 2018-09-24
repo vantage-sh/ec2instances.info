@@ -240,11 +240,11 @@
             <span sort="${inst['ECU_per_vcpu']}">${"%.4g" % inst['ECU_per_vcpu']} units</span>
             % endif
           </td>
-          <td class="physical_processor">${inst['physical_processor'] or ''}</td>
-          <td class="clock_speed_ghz">${inst['clock_speed_ghz'] or ''}</td>
-          <td class="intel_avx">${'Yes' if inst['intel_avx'] else ''}</td>
-          <td class="intel_avx2">${'Yes' if inst['intel_avx2'] else ''}</td>
-          <td class="intel_turbo">${'Yes' if inst['intel_turbo'] else ''}</td>
+          <td class="physical_processor">${inst['physical_processor'] or 'unknown'}</td>
+          <td class="clock_speed_ghz">${inst['clock_speed_ghz'] or 'unknown'}</td>
+          <td class="intel_avx">${'Yes' if inst['intel_avx'] else 'unknown'}</td>
+          <td class="intel_avx2">${'Yes' if inst['intel_avx2'] else 'unknown'}</td>
+          <td class="intel_turbo">${'Yes' if inst['intel_turbo'] else 'unknown'}</td>
           <td class="storage">
             <% storage = inst['storage'] %>
             % if not storage:
