@@ -59,7 +59,7 @@ def render(data_file, template_file, destination_file):
     generated_at = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')
     with io.open(destination_file, 'w', encoding="utf-8") as fh:
         try:
-            fh.write(template.render(instances=instances, generated_at=generated_at))
+            fh.write(template.render(instances=instances, generated_at=generated_at).encode('UTF-8'))
         except:
             print mako.exceptions.text_error_template().render()
 
