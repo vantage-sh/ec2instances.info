@@ -1,6 +1,7 @@
 import mako.template
 import mako.lookup
 import mako.exceptions
+import io
 import json
 import datetime
 
@@ -56,7 +57,7 @@ def render(data_file, template_file, destination_file):
         add_render_info(i)
     print "Rendering to %s..." % destination_file
     generated_at = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')
-    with open(destination_file, 'w') as fh:
+    with io.open(destination_file, 'w', encoding="utf-8") as fh:
         try:
             fh.write(template.render(instances=instances, generated_at=generated_at))
         except:
