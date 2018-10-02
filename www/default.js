@@ -364,15 +364,17 @@ var apply_min_values = function () {
     var filter_on = $(this).data('type');
     var filter_val = $(this).val();
     
-    if (filter_on == 'family' && filter_val != "") {
+    if (filter_on == 'family') {
       g_settings["family"] = filter_val;
 
-      var match_fail = data_rows.filter(function () {
-        var row_val = $(this).find('td[class~="apiname"]').text();
-        return row_val.split('.')[0] != filter_val;
-      });
+      if (filter_val != "") {
+        var match_fail = data_rows.filter(function () {
+          var row_val = $(this).find('td[class~="apiname"]').text();
+          return row_val.split('.')[0] != filter_val;
+        });
 
-      match_fail.hide();
+        match_fail.hide();
+      }
     } else {
       filter_val = parseFloat(filter_val) || 0;
 
