@@ -21,16 +21,16 @@ Make sure you have LibXML and Python development files.  On Ubuntu, run `sudo ap
 3. `virtualenv env` (make sure you have virtualenv package installed)
 4. `source env/bin/activate`
 5. `pip install -r requirements.txt`
-6. `fab build`
-7. `fab serve`
+6. `invoke build`
+7. `invoke serve`
 8. Browse to http://localhost:8080
 9. `deactivate` (to exit virtualenv)
 
 
 ### Requirements
 
-- Python 2.7+ with virtualenv (not Python 3 yet due to Fabric dependency)
-- [Fabric](http://docs.fabfile.org/en/1.8/) 1.1+
+- Python 2.7+ with virtualenv (not Python 3 yet)
+- [Invoke](http://www.pyinvoke.org/)
 - [Boto](http://boto.readthedocs.org/en/latest/)
 - [Mako](http://www.makotemplates.org/)
 - [lxml](http://lxml.de/)
@@ -43,7 +43,7 @@ To build a docker image follow these steps:
 2. `cd ec2instances.info`
 3. `docker build -t ec2instances.info .`
 4. Start a container `docker run -d --name some-container -p 8080:8080 ec2instances.info`
-5. Update files `docker exec -it some-container bash -c "fab build"`
+5. Update files `docker exec -it some-container bash -c "invoke build"`
 
 Also this image can be found at quay.io/ssro/ec2instances.info
 

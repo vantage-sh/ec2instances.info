@@ -18,10 +18,10 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-ENV FAB_HOST=0.0.0.0 FAB_PORT=8080
+ENV HTTP_HOST=0.0.0.0 HTTP_PORT=8080
 
-RUN fab build
+RUN invoke build
 
 EXPOSE 8080
 
-CMD ["fab", "serve"]
+CMD ["invoke", "serve"]

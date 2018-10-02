@@ -4,7 +4,6 @@
 *.egg-info
 env
 venv
-.fab_tasks~
 .env
 build
 dist
