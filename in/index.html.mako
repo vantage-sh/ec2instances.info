@@ -102,6 +102,10 @@
       Min Memory (GiB): <input data-action="datafilter" data-type="memory" class="form-control" />
       Min vCPUs: <input data-action="datafilter" data-type="vcpus" class="form-control" />
       Min Storage (GiB): <input data-action="datafilter" data-type="storage" class="form-control" />
+      Family:
+      <select data-action="datafilter" data-type="family" class="form-control">
+        <option selected></option>
+      </select>
     </div>
 
     <table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">

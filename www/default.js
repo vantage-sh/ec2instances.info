@@ -11,6 +11,7 @@ var g_settings_defaults = {
   min_memory: 0,
   min_vcpus: 0,
   min_storage: 0,
+  family: '',
   selected: ''
 };
 
@@ -275,6 +276,20 @@ function setup_clear() {
   });
 }
 
+function setup_families() {
+  var families = {};
+  g_data_table.rows().every( function () {
+    var d = this.data();
+    var family = d[1].split('.')[0];
+    families[family] = family;
+  });
+  families = Object.keys(families).sort();
+  
+  $.each(families, function (i, fam) {
+    $('#filters select').append($('<option>').text(fam));
+  });
+}
+
 function clear_row_selections() {
   $('#data tbody tr').removeClass('highlight');
 }
@@ -284,6 +299,7 @@ function url_for_selections() {
     min_memory: g_settings.min_memory,
     min_vcpus: g_settings.min_vcpus,
     min_storage: g_settings.min_storage,
+    family: g_settings.family,
     filter: g_data_table.settings()[0].oPreviousSearch['sSearch'],
     region: g_settings.region,
     cost_duration: g_settings.cost_duration,
@@ -346,20 +362,33 @@ var apply_min_values = function () {
 
   all_filters.each(function () {
     var filter_on = $(this).data('type');
-    var filter_val = parseFloat($(this).val()) || 0;
+    var filter_val = $(this).val();
+    
+    if (filter_on == 'family' && filter_val != "") {
+      g_settings["family"] = filter_val;
 
-    // update global variable for dynamic URL
-    g_settings["min_" + filter_on] = filter_val;
+      var match_fail = data_rows.filter(function () {
+        var row_val = $(this).find('td[class~="apiname"]').text();
+        return row_val.split('.')[0] != filter_val;
+      });
 
-    var match_fail = data_rows.filter(function () {
-      var row_val;
-      row_val = parseFloat(
-        $(this).find('td[class~="' + filter_on + '"] span').attr('sort')
-      );
-      return row_val < filter_val;
-    });
+      match_fail.hide();
+    } else {
+      filter_val = parseFloat(filter_val) || 0;
 
-    match_fail.hide();
+      // update global variable for dynamic URL
+      g_settings["min_" + filter_on] = filter_val;
+
+      var match_fail = data_rows.filter(function () {
+        var row_val;
+        row_val = parseFloat(
+          $(this).find('td[class~="' + filter_on + '"] span').attr('sort')
+        );
+        return row_val < filter_val;
+      });
+
+      match_fail.hide();
+    }
   });
   maybe_update_url();
 };
@@ -370,10 +399,13 @@ function on_data_table_initialized() {
 
   load_settings();
 
+  setup_families();
+
   // populate filter inputs
   $('[data-action="datafilter"][data-type="memory"]').val(g_settings['min_memory']);
   $('[data-action="datafilter"][data-type="vcpus"]').val(g_settings['min_vcpus']);
   $('[data-action="datafilter"][data-type="storage"]').val(g_settings['min_storage']);
+  $('[data-action="datafilter"][data-type="family"]').val(g_settings['family']);
   g_data_table.search(g_settings['filter']);
   apply_min_values();
 
@@ -386,7 +418,7 @@ function on_data_table_initialized() {
   configure_highlighting();
 
   // Allow row filtering by min-value match.
-  $('[data-action=datafilter]').on('keyup', apply_min_values);
+  $('[data-action=datafilter]').on('keyup change', apply_min_values);
 
   change_region(g_settings.region);
   change_cost(g_settings.cost_duration);
