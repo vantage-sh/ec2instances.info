@@ -29,7 +29,7 @@ Make sure you have LibXML and Python development files.  On Ubuntu, run `sudo ap
 
 ### Requirements
 
-- Python 2.7+ with virtualenv (not Python 3 yet)
+- Python with virtualenv
 - [Invoke](http://www.pyinvoke.org/)
 - [Boto](http://boto.readthedocs.org/en/latest/)
 - [Mako](http://www.makotemplates.org/)
