@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 from lxml import etree
-import urllib2
 import re
 import json
 import locale
+
+from six.moves.urllib import request as urllib2
 
 # Following advice from https://stackoverflow.com/a/1779324/216138
 # The locale must be installed in the system, and it must be one where ',' is
