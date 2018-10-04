@@ -4,6 +4,8 @@ import json
 from json import encoder
 import sys
 
+import six
+
 
 def add_pretty_names(instances):
     family_names = {
@@ -87,7 +89,7 @@ def scrape(output_file, input_file=None):
     }
 
     # loop through products, and only fetch available instances for now
-    for sku, product in data['products'].iteritems():
+    for sku, product in six.iteritems(data['products']):
 
         if product.get('productFamily', None) == 'Database Instance':
             # map the region
@@ -117,9 +119,9 @@ def scrape(output_file, input_file=None):
                 instances[attributes['instance_type']]['pricing'] = {}
 
     # Parse ondemand pricing
-    for sku, offers in data['terms']['OnDemand'].iteritems():
-        for code, offer in offers.iteritems():
-            for key, dimension in offer['priceDimensions'].iteritems():
+    for sku, offers in six.iteritems(data['terms']['OnDemand']):
+        for code, offer in six.iteritems(offers):
+            for key, dimension in six.iteritems(offer['priceDimensions']):
 
                 # skip these for now
                 if any(descr in dimension['description'].lower() for descr in ['transfer', 'global', 'storage', 'iops', 'requests', 'multi-az']):
@@ -146,9 +148,9 @@ def scrape(output_file, input_file=None):
     }
 
     # Parse reserved pricing
-    for sku, offers in data['terms']['Reserved'].iteritems():
-        for code, offer in offers.iteritems():
-            for key, dimension in offer['priceDimensions'].iteritems():
+    for sku, offers in six.iteritems(data['terms']['Reserved']):
+        for code, offer in six.iteritems(offers):
+            for key, dimension in six.iteritems(offer['priceDimensions']):
 
                 # skip multi-az
                 if rds_instances[sku]['deploymentOption'] != 'Single-AZ':
@@ -180,9 +182,9 @@ def scrape(output_file, input_file=None):
     # print json.dumps(instances['db.m3.medium']['pricing']['eu-west-1']['MySQL'], indent=4)
 
     # Calculate all reserved effective pricings (upfront hourly + hourly price)
-    for instance_type, instance in instances.iteritems():
-        for region, pricing in instance['pricing'].iteritems():
-            for engine, prices in pricing.iteritems():
+    for instance_type, instance in six.iteritems(instances):
+        for region, pricing in six.iteritems(instance['pricing']):
+            for engine, prices in six.iteritems(pricing):
                 if 'reserved' not in prices:
                     continue
                 try:
