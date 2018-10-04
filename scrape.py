@@ -462,8 +462,8 @@ def fetch_data(url):
         pricing = json.loads(content)
     except ValueError:
         # if the data isn't compatible JSON, try to parse as jsonP
-        json_string = re.sub(r"(\w+):", r'"\1":',
-                             content[content.index('callback(') + 9: -2])  # convert into valid json
+        json_string = re.search(r'callback\((.*)\);', content).groups()[0]  # extract javascript object
+        json_string = re.sub(r"(\w+):", r'"\1":', json_string)  # convert to json
         pricing = json.loads(json_string)
 
     return pricing
