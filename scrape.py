@@ -457,7 +457,7 @@ def add_pricing_info(instances):
 
 
 def fetch_data(url):
-    content = urllib2.urlopen(url).read()
+    content = urllib2.urlopen(url).read().decode()
     try:
         pricing = json.loads(content)
     except ValueError:
@@ -477,9 +477,9 @@ def add_eni_info(instances):
     by_type = {i.instance_type: i for i in instances}
 
     for r in rows:
-        instance_type = etree.tostring(r[0], method='text').strip()
-        max_enis = locale.atoi(etree.tostring(r[1], method='text'))
-        ip_per_eni = locale.atoi(etree.tostring(r[2], method='text'))
+        instance_type = etree.tostring(r[0], method='text').strip().decode()
+        max_enis = locale.atoi(etree.tostring(r[1], method='text').decode())
+        ip_per_eni = locale.atoi(etree.tostring(r[2], method='text').decode())
         if instance_type not in by_type:
             print("Unknown instance type: {}".format(instance_type))
             continue
@@ -681,7 +681,7 @@ def add_cpu_details(instances):
                 intel_turbo_idx = idx
         rows = [r for r in t.xpath('.//tr') if not text_for(r[0]) == 'Instance Type']
         for r in rows:
-            instance_type = sanitize_instance_type(etree.tostring(r[0], method='text'))
+            instance_type = sanitize_instance_type(etree.tostring(r[0], method='text').decode())
             instance = by_type.get(instance_type)
             if not instance:
                 print("Unknown instance type: {}".format(instance_type))
