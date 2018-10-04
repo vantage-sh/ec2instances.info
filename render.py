@@ -50,18 +50,18 @@ def render(data_file, template_file, destination_file):
     """Build the HTML content from scraped data"""
     lookup = mako.lookup.TemplateLookup(directories=['.'])
     template = mako.template.Template(filename=template_file, lookup=lookup)
-    print "Loading data from %s..." % data_file
+    print("Loading data from %s..." % data_file)
     with open(data_file) as f:
         instances = json.load(f)
     for i in instances:
         add_render_info(i)
-    print "Rendering to %s..." % destination_file
+    print("Rendering to %s..." % destination_file)
     generated_at = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')
     with io.open(destination_file, 'w', encoding="utf-8") as fh:
         try:
             fh.write(template.render(instances=instances, generated_at=generated_at))
         except:
-            print mako.exceptions.text_error_template().render()
+            print(mako.exceptions.text_error_template().render())
 
 if __name__ == '__main__':
     render('www/instances.json', 'in/index.html.mako', 'www/index.html')

@@ -46,8 +46,8 @@ def scrape_ec2(c):
     try:
         scrape(ec2_file)
     except Exception as e:
-        print "ERROR: Unable to scrape data: %s" % e
-        print traceback.print_exc()
+        print("ERROR: Unable to scrape data: %s" % e)
+        print(traceback.print_exc())
 
 
 @task
@@ -57,8 +57,8 @@ def scrape_rds(c):
     try:
         rds_scrape(rds_file)
     except Exception as e:
-        print "ERROR: Unable to scrape RDS data: %s" % e
-        print traceback.print_exc()
+        print("ERROR: Unable to scrape RDS data: %s" % e)
+        print(traceback.print_exc())
 
 
 @task
@@ -66,7 +66,7 @@ def serve(c):
     """Serve site contents locally for development"""
     os.chdir("www/")
     httpd = SocketServer.TCPServer((HTTP_HOST, int(HTTP_PORT)), SimpleHTTPServer.SimpleHTTPRequestHandler)
-    print "Serving on http://{}:{}".format(httpd.socket.getsockname()[0], httpd.socket.getsockname()[1])
+    print("Serving on http://{}:{}".format(httpd.socket.getsockname()[0], httpd.socket.getsockname()[1]))
     httpd.serve_forever()
 
 
@@ -83,18 +83,18 @@ def bucket_create(c):
     conn = connect_s3(calling_format=BUCKET_CALLING_FORMAT)
     bucket = conn.create_bucket(BUCKET_NAME, policy='public-read')
     bucket.configure_website('index.html', 'error.html')
-    print 'Bucket %r created.' % BUCKET_NAME
+    print('Bucket %r created.' % BUCKET_NAME)
 
 
 @task
 def bucket_delete(c):
     """Deletes the S3 bucket used to host the site"""
     if not confirm("Are you sure you want to delete the bucket %r?" % BUCKET_NAME):
-        print 'Aborting at user request.'
+        print('Aborting at user request.')
         exit(1)
     conn = connect_s3(calling_format=BUCKET_CALLING_FORMAT)
     conn.delete_bucket(BUCKET_NAME)
-    print 'Bucket %r deleted.' % BUCKET_NAME
+    print('Bucket %r deleted.' % BUCKET_NAME)
 
 
 @task
@@ -109,7 +109,7 @@ def deploy(c, root_dir='www'):
                 continue
             local_path = os.path.join(root, name)
             remote_path = local_path[len(root_dir) + 1:]
-            print '%s -> %s/%s' % (local_path, BUCKET_NAME, remote_path)
+            print('%s -> %s/%s' % (local_path, BUCKET_NAME, remote_path))
             k = Key(bucket)
             k.key = remote_path
             k.set_contents_from_filename(local_path, policy='public-read')
