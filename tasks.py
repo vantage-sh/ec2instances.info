@@ -3,8 +3,6 @@
 #   AWS_SECRET_ACCESS_KEY
 # as explained in: http://boto.s3.amazonaws.com/s3_tut.html
 
-import SimpleHTTPServer
-import SocketServer
 import os
 import traceback
 
@@ -13,6 +11,7 @@ from boto.s3.connection import OrdinaryCallingFormat
 from boto.s3.key import Key
 from invoke import task
 from invocations.console import confirm
+from six.moves import SimpleHTTPServer, socketserver
 
 from rds import scrape as rds_scrape
 from render import render
@@ -65,7 +64,7 @@ def scrape_rds(c):
 def serve(c):
     """Serve site contents locally for development"""
     os.chdir("www/")
-    httpd = SocketServer.TCPServer((HTTP_HOST, int(HTTP_PORT)), SimpleHTTPServer.SimpleHTTPRequestHandler)
+    httpd = socketserver.TCPServer((HTTP_HOST, int(HTTP_PORT)), SimpleHTTPServer.SimpleHTTPRequestHandler)
     print("Serving on http://{}:{}".format(httpd.socket.getsockname()[0], httpd.socket.getsockname()[1]))
     httpd.serve_forever()
 
