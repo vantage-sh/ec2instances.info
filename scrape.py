@@ -52,7 +52,7 @@ class Instance(object):
         self.trim_support = False
         self.vCPU = 0
         self.vpc = None
-        self.vpc_only = False
+        self.vpc_only = True
         self.emr = False
 
     def get_type_prefix(self):
@@ -595,13 +595,13 @@ def add_linux_ami_info(instances):
 
 
 def add_vpconly_detail(instances):
-    # specific instances can be lanuched in VPC only
-    # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types
-    vpc_only_families = ('c5', 'c5d', 'c4', 'f1', 'g3', 'h1', 'i3', 'm4', 'm5', 'm5d', 'p2', 'r4', 't2', 'x1')
+    # A few legacy instances can be launched in EC2 Classic, the rest is VPC only
+    # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-classic-platform.html#ec2-classic-instance-types
+    classic_families = ("m1", "m3", "t1", "c1", "c3", "cc2", "cr1", "m2", "r3", "d2", "hs1", "i2", "g2")
     for i in instances:
-        for family in vpc_only_families:
+        for family in classic_families:
             if i.instance_type.startswith(family):
-                i.vpc_only = True
+                i.vpc_only = False
 
 
 def add_instance_storage_details(instances):
