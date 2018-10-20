@@ -1,7 +1,6 @@
-fabric<2.0.0
+invoke
+invocations
 boto
 mako
 lxml
-paramiko
-pycrypto
 requests==2.9.1

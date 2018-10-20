@@ -11,8 +11,8 @@ import traceback
 from boto import connect_s3
 from boto.s3.connection import OrdinaryCallingFormat
 from boto.s3.key import Key
-from fabric.api import abort, task
-from fabric.contrib.console import confirm
+from invoke import task
+from invocations.console import confirm
 
 from rds import scrape as rds_scrape
 from render import render
@@ -27,19 +27,20 @@ BUCKET_CALLING_FORMAT = OrdinaryCallingFormat()
 abspath = lambda filename: os.path.join(os.path.abspath(os.path.dirname(__file__)),
                                         filename)
 
-FAB_HOST = os.getenv('FAB_HOST', '127.0.0.1')
-FAB_PORT = os.getenv('FAB_PORT', '8080')
+HTTP_HOST = os.getenv('HTTP_HOST', '127.0.0.1')
+HTTP_PORT = os.getenv('HTTP_PORT', '8080')
+
 
 @task
-def build():
+def build(c):
     """Scrape AWS sources for data and build the site"""
-    scrape_ec2()
-    scrape_rds()
-    render_html()
+    scrape_ec2(c)
+    scrape_rds(c)
+    render_html(c)
 
 
 @task
-def scrape_ec2():
+def scrape_ec2(c):
     """Scrape EC2 data from AWS and save to local file"""
     ec2_file = 'www/instances.json'
     try:
@@ -50,7 +51,7 @@ def scrape_ec2():
 
 
 @task
-def scrape_rds():
+def scrape_rds(c):
     """Scrape RDS data from AWS and save to local file"""
     rds_file = 'www/rds/instances.json'
     try:
@@ -61,23 +62,23 @@ def scrape_rds():
 
 
 @task
-def serve():
+def serve(c):
     """Serve site contents locally for development"""
     os.chdir("www/")
-    httpd = SocketServer.TCPServer((FAB_HOST, int(FAB_PORT)), SimpleHTTPServer.SimpleHTTPRequestHandler)
+    httpd = SocketServer.TCPServer((HTTP_HOST, int(HTTP_PORT)), SimpleHTTPServer.SimpleHTTPRequestHandler)
     print "Serving on http://{}:{}".format(httpd.socket.getsockname()[0], httpd.socket.getsockname()[1])
     httpd.serve_forever()
 
 
 @task
-def render_html():
+def render_html(c):
     """Render HTML but do not update data from Amazon"""
     render('www/instances.json', 'in/index.html.mako', 'www/index.html')
     render('www/rds/instances.json', 'in/rds.html.mako', 'www/rds/index.html')
 
 
 @task
-def bucket_create():
+def bucket_create(c):
     """Creates the S3 bucket used to host the site"""
     conn = connect_s3(calling_format=BUCKET_CALLING_FORMAT)
     bucket = conn.create_bucket(BUCKET_NAME, policy='public-read')
@@ -86,17 +87,18 @@ def bucket_create():
 
 
 @task
-def bucket_delete():
+def bucket_delete(c):
     """Deletes the S3 bucket used to host the site"""
     if not confirm("Are you sure you want to delete the bucket %r?" % BUCKET_NAME):
-        abort('Aborting at user request.')
+        print 'Aborting at user request.'
+        exit(1)
     conn = connect_s3(calling_format=BUCKET_CALLING_FORMAT)
     conn.delete_bucket(BUCKET_NAME)
     print 'Bucket %r deleted.' % BUCKET_NAME
 
 
 @task
-def deploy(root_dir='www'):
+def deploy(c, root_dir='www'):
     """Deploy current content"""
     conn = connect_s3(calling_format=BUCKET_CALLING_FORMAT)
     bucket = conn.get_bucket(BUCKET_NAME)
@@ -106,7 +108,7 @@ def deploy(root_dir='www'):
             if name.startswith('.'):
                 continue
             local_path = os.path.join(root, name)
-            remote_path = local_path[len(root_dir)+1:]
+            remote_path = local_path[len(root_dir) + 1:]
             print '%s -> %s/%s' % (local_path, BUCKET_NAME, remote_path)
             k = Key(bucket)
             k.key = remote_path
@@ -114,7 +116,7 @@ def deploy(root_dir='www'):
 
 
 @task(default=True)
-def update():
+def update(c):
     """Build and deploy the site"""
-    build()
-    deploy()
+    build(c)
+    deploy(c)
