@@ -3,6 +3,7 @@ from lxml import etree
 import re
 import json
 import locale
+import ec2
 
 from six.moves.urllib import request as urllib2
 
@@ -332,64 +333,6 @@ def transform_region(reg):
     return base + "-" + num
 
 
-def add_pricing(imap, data, platform, pricing_mode):
-    if pricing_mode == 'od':
-        add_ondemand_pricing(imap, data, platform)
-    elif pricing_mode == 'ri':
-        add_reserved_pricing(imap, data, platform)
-
-
-def add_ondemand_pricing(imap, data, platform):
-    for region_spec in data['config']['regions']:
-        region = transform_region(region_spec['region'])
-        for t_spec in region_spec['instanceTypes']:
-            typename = t_spec['type']
-            for i_spec in t_spec['sizes']:
-                i_type = i_spec['size']
-                if i_type not in imap:
-                    print("ERROR: Got ondemand pricing data for unknown instance type {} in region {}".format(i_type, region))
-                    continue
-                inst = imap[i_type]
-                inst.pricing.setdefault(region, {})
-                # print "%s/%s" % (region, i_type)
-
-                inst.pricing[region].setdefault(platform, {})
-                for col in i_spec['valueColumns']:
-                    inst.pricing[region][platform]['ondemand'] = col['prices']['USD']
-
-                # ECU is only available here
-                try:
-                    inst.ECU = locale.atof(i_spec['ECU'])
-                except:
-                    # these are likely instances with 'variable' ECU
-                    inst.ECU = i_spec['ECU']
-
-
-def add_reserved_pricing(imap, data, platform):
-    for region_spec in data['config']['regions']:
-        region = transform_region(region_spec['region'])
-        for t_spec in region_spec['instanceTypes']:
-            i_type = t_spec['type']
-            if i_type not in imap:
-                print("ERROR: Got reserved pricing data for unknown instance type {} in region {}".format(i_type, region))
-                continue
-            inst = imap[i_type]
-            inst.pricing.setdefault(region, {})
-            # print "%s/%s" % (region, i_type)
-            inst.pricing[region].setdefault(platform, {})
-            inst.pricing[region][platform].setdefault('reserved', {})
-
-            termPricing = {}
-
-            for term in t_spec['terms']:
-                for po in term['purchaseOptions']:
-                    for value in po['valueColumns']:
-                        if value['name'] == 'effectiveHourly':
-                            termPricing[term['term'] + '.' + po['purchaseOption']] = value['prices']['USD']
-
-            inst.pricing[region][platform]['reserved'] = termPricing
-
-
 def add_ebs_pricing(imap, data):
     for region_spec in data['config']['regions']:
         region = transform_region(region_spec['region'])
@@ -409,46 +352,12 @@ def add_ebs_pricing(imap, data):
 
 
 def add_pricing_info(instances):
-    pricing_modes = ['ri', 'od']
-
-    reserved_name_map = {
-        'linux': 'linux-unix-shared',
-        'rhel': 'red-hat-enterprise-linux-shared',
-        'sles': 'suse-linux-shared',
-        'mswin': 'windows-shared',
-        'mswinSQL': 'windows-with-sql-server-standard-shared',
-        'mswinSQLWeb': 'windows-with-sql-server-web-shared',
-        'mswinSQLEnterprise': 'windows-with-sql-server-enterprise-shared',
-        'linuxSQL': 'linux-with-sql-server-standard-shared',
-        'linuxSQLWeb': 'linux-with-sql-server-web-shared',
-        'linuxSQLEnterprise':' linux-with-sql-server-enterprise-shared'
-    }
 
     for i in instances:
         i.pricing = {}
 
     by_type = {i.instance_type: i for i in instances}
-
-    for platform in ['linux', 'rhel', 'sles', 'mswin', 'mswinSQL', 'mswinSQLWeb', 'mswinSQLEnterprise', 'linuxSQL', 'linuxSQLWeb', 'linuxSQLEnterprise']:
-        for pricing_mode in pricing_modes:
-            # current generation
-            if pricing_mode == 'od':
-                pricing_url = 'https://a0.awsstatic.com/pricing/1/deprecated/ec2/%s-od.json' % (platform,)
-            else:
-                pricing_url = 'http://a0.awsstatic.com/pricing/1/ec2/ri-v2/%s.min.js' % (reserved_name_map[platform],)
-
-            pricing = fetch_data(pricing_url)
-            add_pricing(by_type, pricing, platform, pricing_mode)
-
-            # previous generation
-            if pricing_mode == 'od':
-                pricing_url = 'http://a0.awsstatic.com/pricing/1/ec2/previous-generation/%s-od.min.js' % (platform,)
-            else:
-                pricing_url = 'http://a0.awsstatic.com/pricing/1/ec2/previous-generation/ri-v2/%s.min.js' % (
-                    reserved_name_map[platform],)
-
-            pricing = fetch_data(pricing_url)
-            add_pricing(by_type, pricing, platform, pricing_mode)
+    ec2.add_pricing(by_type)
 
     # EBS cost surcharge as per https://aws.amazon.com/ec2/pricing/on-demand/#EBS-Optimized_Instances
     ebs_pricing_url = 'https://a0.awsstatic.com/pricing/1/ec2/pricing-ebs-optimized-instances.min.js'
