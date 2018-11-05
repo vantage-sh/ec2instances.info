@@ -19,6 +19,7 @@
           </a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="javascript:;" data-region='ap-south-1'>Asia-Pacific (Mumbai)</a></li>
+            <li><a href="javascript:;" data-region='ap-northeast-3'>Asia Pacific (Osaka-Local)</a></li>
             <li><a href="javascript:;" data-region='ap-northeast-2'>Asia-Pacific (Seoul)</a></li>
             <li><a href="javascript:;" data-region='ap-southeast-1'>Asia-Pacific (Singapore)</a></li>
             <li><a href="javascript:;" data-region='ap-southeast-2'>Asia-Pacific (Sydney)</a></li>
