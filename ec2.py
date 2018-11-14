@@ -62,6 +62,12 @@ def add_pricing(imap):
             product_attributes = product.get('attributes')
 
             location = product_attributes.get('location')
+
+            # There may be a slight delay in updating botocore with new regional endpoints, skip and inform
+            if location not in descriptions:
+                print('ERROR: Region "{}" not found, skipping').format(location)
+                continue
+
             region = descriptions[location]
             terms = offer.get('terms')
 
