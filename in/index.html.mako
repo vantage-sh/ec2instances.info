@@ -34,7 +34,8 @@
             <li><a href="javascript:;" data-region='us-east-2'>US East (Ohio)</a></li>
             <li><a href="javascript:;" data-region='us-west-1'>US West (Northern California)</a></li>
             <li><a href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
-            <li><a href="javascript:;" data-region='us-gov-west-1'>AWS GovCloud (US)</a></li>
+            <li><a href="javascript:;" data-region='us-gov-west-1'>AWS GovCloud (US-West)</a></li>
+            <li><a href="javascript:;" data-region='us-gov-east-1'>AWS GovCloud (US-East)</a></li>
           </ul>
         </div>
 
