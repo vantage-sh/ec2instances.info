@@ -2,6 +2,7 @@ import boto3
 import locale
 import json
 from pkg_resources import resource_filename
+import scrape
 
 
 # Translate between the API and what is used locally
@@ -42,6 +43,49 @@ def get_region_descriptions():
     # The Osaka region is special and is not on the list of endpoints in boto3
     result['Asia Pacific (Osaka-Local)'] = 'ap-northeast-3'
     return result
+
+
+def get_instances():
+    # FPGA missing
+    # Enhanced networking missing
+
+    instances = {}
+    pricing_client = boto3.client('pricing', region_name='us-east-1')
+    product_pager = pricing_client.get_paginator('get_products')
+
+    product_iterator = product_pager.paginate(
+         ServiceCode='AmazonEC2', Filters=[
+            # We're gonna assume N. Virginia has all the available types
+            {'Type': 'TERM_MATCH', 'Field': 'location', 'Value': 'US East (N. Virginia)'},
+
+        ]
+    )
+    for product_item in product_iterator:
+        for offer_string in product_item.get('PriceList'):
+            offer = json.loads(offer_string)
+            product = offer.get('product')
+
+            # Check if it's an instance
+            if product.get('productFamily') not in ['Compute Instance', 'Compute Instance (bare metal)', 'Dedicated Host']:
+                continue
+
+            product_attributes = product.get('attributes')
+            instance_type = product_attributes.get('instanceType')
+
+            if instance_type in ['u-6tb1', 'u-9tb1', 'u-12tb1']:
+                # API return the name without the .metal part
+                instance_type = instance_type + '.metal'
+
+            if instance_type in instances:
+                continue
+
+            new_inst = parse_instance(instance_type, product_attributes)
+
+            # Some instanced may be dedicated hosts instead
+            if new_inst is not None:
+                instances[instance_type] = new_inst
+
+    return list(instances.values())
 
 
 def add_pricing(imap):
@@ -86,16 +130,6 @@ def add_pricing(imap):
             if reserved:
                 inst.pricing[region][platform]['reserved'] = reserved
 
-            # ECU was gathered in previous pricing function so we should include it here
-            ecu = product_attributes.get('ecu')
-            try:
-                if ecu == 'Variable':
-                    inst.ECU = 'variable'
-                else:
-                    inst.ECU = locale.atof(ecu)
-            except:
-                pass
-
 
 def format_price(price):
     return str(float("%f" % float(price))).rstrip('0').rstrip('.')
@@ -133,3 +167,60 @@ def get_reserved_pricing(terms):
         price = float(price_per_hour) + (float(upfront_price)/hours_in_term)
         pricing[local_term] = format_price(price)
     return pricing
+
+def parse_instance(instance_type, product_attributes):
+    i = scrape.Instance()
+    i.instance_type = instance_type
+
+    pieces = instance_type.split('.')
+    if len(pieces) == 1:
+        # Dedicated host that is not u-*.metal, skipping
+        # May be a good idea to all dedicated hosts in the future
+        return
+
+    i.family = pieces[0]
+
+    if '32-bit' in product_attributes.get('processorArchitecture'):
+        i.arch.append('i386')
+
+    i.vCPU = locale.atoi(product_attributes.get('vcpu'))
+
+    # Memory is given in form of "1,952 GiB", let's parse it
+    i.memory = locale.atof(product_attributes.get('memory').split(' ')[0])
+
+    i.network_performance = product_attributes.get('networkPerformance')
+    if product_attributes.get('currentGeneration') == 'Yes':
+        i.generation = 'current'
+    else:
+        i.generation = 'previous'
+
+    gpu = product_attributes.get('gpu')
+    if gpu is not None:
+        i.GPU = locale.atoi(gpu)
+
+    try:
+        ecu = product_attributes.get('ecu')
+        if ecu == 'Variable':
+            i.ECU = 'variable'
+        else:
+            i.ECU = locale.atof(ecu)
+    except:
+        pass
+
+    i.physical_processor = product_attributes.get('physicalProcessor')
+
+    # CPU features
+    processor_features = product_attributes.get('processorFeatures')
+    if processor_features is not None:
+        if "Intel AVX-512" in processor_features:
+            i.intel_avx512 = True
+        if "Intel AVX2" in processor_features:
+            i.intel_avx2 = True
+        if "Intel AVX" in processor_features:
+            i.intel_avx = True
+        if "Intel Turbo" in processor_features:
+            i.intel_turbo = True
+
+    i.clock_speed_ghz = product_attributes.get('clockSpeed')
+
+    return i

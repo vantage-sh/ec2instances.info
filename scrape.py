@@ -553,60 +553,6 @@ def add_instance_storage_details(instances):
                     i.includes_swap_partition = dagger_char in storage_volumes
 
 
-def add_cpu_details(instances):
-    def clean_output(x):
-        return {
-            '': None,
-            '-': None,
-            'Yes': True,
-            'yes': True,
-            'No': False,
-            'no': False,
-        }.get(x, x)
-
-    def text_for(element):
-        return "".join(element.itertext())
-
-    by_type = {i.instance_type: i for i in instances}
-    url = "https://aws.amazon.com/ec2/instance-types/#instance-type-matrix"
-    tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
-    tables = tree.xpath('//div[@class="aws-table"]//table')
-    tables = filter(lambda x: text_for(x.xpath('.//tr//td')[0]) == 'Instance Type', tables)
-    for t in tables:
-        header_row = t.xpath('.//tr')[0]
-        intel_avx_idx = -1
-        intel_avx2_idx = -1
-        intel_avx512_idx = -1
-        intel_turbo_idx = -1
-        for idx, c in enumerate(header_row):
-            text = text_for(c)
-            if "Intel AVX-512" in text:
-                intel_avx512_idx = idx
-            elif "Intel AVX2" in text:
-                intel_avx2_idx = idx
-            elif "Intel AVX" in text:
-                intel_avx_idx = idx
-            elif "Intel Turbo" in text:
-                intel_turbo_idx = idx
-        rows = [r for r in t.xpath('.//tr') if not text_for(r[0]) == 'Instance Type']
-        for r in rows:
-            instance_type = sanitize_instance_type(etree.tostring(r[0], method='text').decode())
-            instance = by_type.get(instance_type)
-            if not instance:
-                print("Unknown instance type: {}".format(instance_type))
-                continue
-            instance.physical_processor = clean_output(totext(r[5]))
-            instance.clock_speed_ghz = clean_output(totext(r[6]))
-            if intel_avx_idx != -1:
-                instance.intel_avx = clean_output(totext(r[intel_avx_idx]))
-            if intel_avx2_idx != -1:
-                instance.intel_avx2 = clean_output(totext(r[intel_avx2_idx]))
-            if intel_avx512_idx != -1:
-                instance.intel_avx512 = clean_output(totext(r[intel_avx512_idx]))
-            if intel_turbo_idx != -1:
-                instance.intel_turbo = clean_output(totext(r[intel_turbo_idx]))
-
-
 def add_t2_credits(instances):
     tree = etree.parse(
         urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-credits-baseline-concepts.html"),
@@ -709,7 +655,7 @@ def add_emr_info(instances):
 def scrape(data_file):
     """Scrape AWS to get instance data"""
     print("Parsing instance types...")
-    all_instances = scrape_instances()
+    all_instances = ec2.get_instances()
     print("Parsing pricing info...")
     add_pricing_info(all_instances)
     print("Parsing ENI info...")
@@ -728,8 +674,6 @@ def scrape(data_file):
     add_t2_credits(all_instances)
     print("Parsing instance names...")
     add_pretty_names(all_instances)
-    print("Parsing instance cpu details...")
-    add_cpu_details(all_instances)
     print("Parsing emr details...")
     add_emr_info(all_instances)
 
