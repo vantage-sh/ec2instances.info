@@ -47,7 +47,6 @@ def get_region_descriptions():
 
 def get_instances():
     # FPGA missing
-    # Enhanced networking missing
 
     instances = {}
     pricing_client = boto3.client('pricing', region_name='us-east-1')
@@ -222,5 +221,9 @@ def parse_instance(instance_type, product_attributes):
             i.intel_turbo = True
 
     i.clock_speed_ghz = product_attributes.get('clockSpeed')
+
+    enhanced_networking = product_attributes.get('enhancedNetworkingSupported')
+    if enhanced_networking is not  None and enhanced_networking == 'Yes':
+        i.enhanced_networking = True
 
     return i
