@@ -69,7 +69,8 @@ def scrape(output_file, input_file=None):
 
     # region mapping, someone thought it was handy not to include the region id's :(
     regions = {
-        "AWS GovCloud (US)": 'us-gov-west-1',
+        "AWS GovCloud (US-West)": 'us-gov-west-1',
+        "AWS GovCloud (US-East)": 'us-gov-east-1',
         "Asia Pacific (Mumbai)": 'ap-south-1',
         "Asia Pacific (Seoul)": 'ap-northeast-2',
         "Asia Pacific (Singapore)": 'ap-southeast-1',
