@@ -5,3 +5,4 @@ mako
 lxml
 requests==2.9.1
 six
+boto3

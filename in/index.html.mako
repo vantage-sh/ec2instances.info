@@ -366,7 +366,7 @@
             % endif
           </td>
           <td class="cost-reserved cost-reserved-${platform}" data-pricing='${json.dumps({r:p.get(platform, p.get('os',{})).get('reserved', {}) for r,p in six.iteritems(inst['pricing'])}) | h}'>
-            % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('reserved', 'N/A') != "N/A":
+            % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['us-east-1'][platform]['reserved'].get('yrTerm1Standard.noUpfront', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']}">
                 $${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']} hourly
               </span>
