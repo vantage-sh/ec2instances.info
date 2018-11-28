@@ -18,7 +18,7 @@ Make sure you have LibXML and Python development files.  On Ubuntu, run `sudo ap
 
 1. Clone the git repo
 2. `cd ec2instances.info/`
-3. `virtualenv env` (make sure you have virtualenv package installed)
+3. `python3 -m venv env`
 4. `source env/bin/activate`
 5. `pip install -r requirements.txt`
 6. `invoke build`
