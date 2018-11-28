@@ -6,6 +6,8 @@ import sys
 
 import six
 
+import ec2
+
 
 def add_pretty_names(instances):
     family_names = {
@@ -68,26 +70,7 @@ def scrape(output_file, input_file=None):
     instances = {}
 
     # region mapping, someone thought it was handy not to include the region id's :(
-    regions = {
-        "AWS GovCloud (US-West)": 'us-gov-west-1',
-        "AWS GovCloud (US-East)": 'us-gov-east-1',
-        "Asia Pacific (Mumbai)": 'ap-south-1',
-        "Asia Pacific (Seoul)": 'ap-northeast-2',
-        "Asia Pacific (Singapore)": 'ap-southeast-1',
-        "Asia Pacific (Sydney)": 'ap-southeast-2',
-        "Asia Pacific (Tokyo)": 'ap-northeast-1',
-        "Asia Pacific (Osaka-Local)": 'ap-northeast-3',
-        "Canada (Central)": 'ca-central-1',
-        "EU (Frankfurt)": 'eu-central-1',
-        "EU (Ireland)": 'eu-west-1',
-        "EU (London)": 'eu-west-2',
-        "EU (Paris)": 'eu-west-3',
-        "South America (Sao Paulo)": 'sa-east-1',
-        "US East (N. Virginia)": 'us-east-1',
-        "US East (Ohio)": 'us-east-2',
-        "US West (N. California)": 'us-west-1',
-        "US West (Oregon)": 'us-west-2',
-    }
+    regions = ec2.get_region_descriptions()
 
     # loop through products, and only fetch available instances for now
     for sku, product in six.iteritems(data['products']):
@@ -145,7 +128,8 @@ def scrape(output_file, input_file=None):
         '1yr Partial Upfront': 'yrTerm1.partialUpfront',
         '3yr All Upfront': 'yrTerm3.allUpfront',
         '1yr All Upfront': 'yrTerm1.allUpfront',
-        '1yr No Upfront': 'yrTerm1.noUpfront'
+        '1yr No Upfront': 'yrTerm1.noUpfront',
+        '3yr No Upfront': 'yrTerm3.noUpfront',
     }
 
     # Parse reserved pricing
@@ -197,6 +181,8 @@ def scrape(output_file, input_file=None):
                         'yrTerm1.allUpfront': (prices['reserved']['yrTerm1.allUpfront-quantity'] / 365 / 24) + prices['reserved']['yrTerm1.allUpfront-hrs'],
                         'yrTerm1.noUpfront': prices['reserved']['yrTerm1.noUpfront-hrs'],
                     }
+                    if 'yrTerm3.noUpfront-hrs' in prices['reserved']:
+                        reserved_prices['yrTerm3.noUpfront'] = prices['reserved']['yrTerm3.noUpfront-hrs']
                     instances[instance_type]['pricing'][region][engine]['reserved'] = reserved_prices
                 except Exception as e:
                     print("ERROR: Trouble generating RDS reserved price for {}: {!r}".format(instance_type, e))
