@@ -8,3 +8,4 @@ venv
 build
 dist
 ec2instances
+.vscode
