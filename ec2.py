@@ -177,7 +177,7 @@ def parse_instance(instance_type, product_attributes):
         # May be a good idea to all dedicated hosts in the future
         return
 
-    i.family = pieces[0]
+    i.family = product_attributes.get('instanceFamily')
 
     if '32-bit' in product_attributes.get('processorArchitecture'):
         i.arch.append('i386')
