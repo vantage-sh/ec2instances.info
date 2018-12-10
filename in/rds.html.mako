@@ -36,6 +36,8 @@
             <li><a href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
             <li><a href="javascript:;" data-region='us-gov-west-1'>AWS GovCloud (US-West)</a></li>
             <li><a href="javascript:;" data-region='us-gov-east-1'>AWS GovCloud (US-East)</a></li>
+            <li><a href="javascript:;" data-region='cn-north-1'>China (Beijing)</a></li>
+            <li><a href="javascript:;" data-region='cn-northwest-1'>China (Ningxia)</a></li>
           </ul>
         </div>
 
