@@ -17,6 +17,10 @@ from rds import scrape as rds_scrape
 from render import render
 from scrape import scrape
 
+from io import BytesIO
+import gzip
+import shutil
+
 BUCKET_NAME = 'www.ec2instances.info'
 
 # Work around https://github.com/boto/boto/issues/2836 by explicitly setting
@@ -111,7 +115,20 @@ def deploy(c, root_dir='www'):
             print('%s -> %s/%s' % (local_path, BUCKET_NAME, remote_path))
             k = Key(bucket)
             k.key = remote_path
-            k.set_contents_from_filename(local_path, policy='public-read')
+
+            if name.endswith('.html'):
+                upload_file = BytesIO()
+                with gzip.GzipFile(fileobj=upload_file, mode='wb')as gz,  open(local_path, 'rb') as fp:
+                    shutil.copyfileobj(fp, gz)
+                upload_file.seek(0)
+                k.set_metadata('Content-Type', 'text/html')
+                k.set_metadata('Content-Encoding', 'gzip')
+            else:
+                upload_file = open(local_path, 'rb')
+
+
+
+            k.set_contents_from_file(upload_file, policy='public-read')
 
 
 @task(default=True)
