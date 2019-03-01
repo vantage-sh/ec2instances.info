@@ -15,6 +15,18 @@ var g_settings_defaults = {
 };
 
 function init_data_table() {
+  // create a second header row
+  $("#data thead tr").clone(true).appendTo("#data thead");
+  // add a text input filter to each column of the new row
+  $("#data thead tr:eq(1) th").each(function (i) {
+    var title = $(this).text();
+    $(this).html("<input type='text' placeholder='Search '" + title + "' />");
+    $("input", this).on( "keyup change", function () {
+      if (g_data_table.column(i).search() !== this.value) {
+        g_data_table.column(i).search(this.value).draw();
+      }
+    });
+  });
   g_data_table = $('#data').DataTable({
     "bPaginate": false,
     "bInfo": false,
