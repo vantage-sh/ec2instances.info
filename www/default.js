@@ -31,6 +31,7 @@ function init_data_table() {
     "bPaginate": false,
     "bInfo": false,
     "bStateSave": true,
+    "orderCellsTop": true,
     "oSearch": {
       "bRegex": true,
       "bSmart": false
