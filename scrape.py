@@ -427,6 +427,7 @@ def add_pretty_names(instances):
         'hi1': 'HI1. High I/O',
         'hs1': 'High Storage',
         'i3': 'I3 High I/O',
+        'i3en': 'I3 High I/O',
         'm1': 'M1 General Purpose',
         'm2': 'M2 High Memory',
         'm3': 'M3 General Purpose',
