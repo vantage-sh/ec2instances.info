@@ -124,7 +124,7 @@ class Instance(object):
 
 
 def sanitize_instance_type(instance_type):
-    """Typos and other bad data are common in the instance type colums for some reason"""
+    """Typos and other bad data are common in the instance type columns for some reason"""
     # Remove random whitespace
     instance_type = re.sub(r"\s+", "", instance_type, flags=re.UNICODE)
 
@@ -339,7 +339,7 @@ def add_linux_ami_info(instances):
     # Some background info at https://github.com/powdahound/ec2instances.info/pull/161
     for i in instances:
         i_family_id = i.instance_type.split('.')[0]
-        if i_family_id in ('cc2', 'cg1', 'hi1', 'hs1'):
+        if i_family_id in ('cc2', 'cg1', 'hi1', 'hs1', 'i3en'):
             if not 'HVM' in i.linux_virtualization_types:
                 i.linux_virtualization_types.append('HVM')
         if i_family_id in ('t1', 'm1', 'm2', 'c1', 'hi1', 'hs1'):
