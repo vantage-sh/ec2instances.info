@@ -23,7 +23,7 @@ def add_pretty_names(instances):
         'cr1': 'High Memory Cluster',
         'hs1': 'High Storage',
         'c1' : 'C1 High-CPU',
-        'hi1': 'HI1. High I/O',
+        'hi1': 'HI1 High I/O',
         'm2' : 'M2 High Memory',
         'm1' : 'M1 General Purpose',
         'm4' : 'M4 General Purpose'
