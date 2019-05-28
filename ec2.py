@@ -108,7 +108,7 @@ def add_pricing(imap):
 
             # There may be a slight delay in updating botocore with new regional endpoints, skip and inform
             if location not in descriptions:
-                print('ERROR: Region "{}" not found, skipping').format(location)
+                print('ERROR: Region "{}" not found, skipping'.format(location))
                 continue
 
             region = descriptions[location]

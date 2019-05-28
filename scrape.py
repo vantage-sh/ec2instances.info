@@ -276,22 +276,18 @@ def check_ebs_as_nvme(instances):
 
     Some of the new instances (like i3.metal and c5d family) will expose EBS
     volume at /dev/nvmeXn1.
-    https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/nvme-ebs-volumes.html
+    https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     """
 
-    url = 'https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/nvme-ebs-volumes.html'
+    url = 'https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html'
     tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
 
     # This should get the p text with instance families
-    p_text = ' '.join(s.strip() for s in tree.xpath(r'//*[@id="main-col-body"]/p[1]/text()'))
-    families = [fam.lower() for fam in re.findall(r'[a-zA-Z]\d[a-z]?', p_text)]
-
-    # This should get all code tags which suppose to contain an instance type
-    instance_types = tree.xpath(r'//*[@id="main-col-body"]/p[1]/code//text()')
+    p_text = ' '.join(text for p in tree.xpath(r'//*[@id="main-col-body"]/div[8]/ul/li[1]/p') for text in p.itertext())
+    prefixes = [fam.lower() for fam in re.findall(r'[a-zA-Z]\d[a-z]*(?:\.[0-9a-z]+)?', p_text)]
 
     for inst in instances:
-        inst_family = inst.instance_type.partition('.')[0]
-        if inst.instance_type in instance_types or inst_family in families:
+        if any(inst.instance_type.startswith(prefix) for prefix in prefixes):
             inst.ebs_as_nvme = True
 
 
