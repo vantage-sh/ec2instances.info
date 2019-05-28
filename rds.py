@@ -12,21 +12,24 @@ import ec2
 def add_pretty_names(instances):
     family_names = {
         't2': 'T2 General Purpose',
+        't3': 'T3 General Purpose',
         'r3': 'R3 Memory Optimized',
         'r4': 'R4 Memory Optimized',
+        'r5': 'R5 Memory Optimized',
+        'c1': 'C1 High-CPU',
         'c3': 'C3 High-CPU',
         'c4': 'C4 High-CPU',
-        'm3': 'M3 General Purpose',
         'i3': 'I3 High I/O',
         'cg1': 'Cluster GPU',
         'cc2': 'Cluster Compute',
         'cr1': 'High Memory Cluster',
         'hs1': 'High Storage',
-        'c1' : 'C1 High-CPU',
         'hi1': 'HI1. High I/O',
-        'm2' : 'M2 High Memory',
         'm1' : 'M1 General Purpose',
-        'm4' : 'M4 General Purpose'
+        'm2' : 'M2 High Memory',
+        'm3' : 'M3 General Purpose',
+        'm4' : 'M4 General Purpose',
+        'm5' : 'M5 General Purpose'
         }
     for k in instances:
         i = instances[k]
