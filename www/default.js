@@ -174,7 +174,7 @@ function change_cost(duration) {
   var per_time;
   $.each($("td.cost-ondemand"), function (i, elem) {
     elem = $(elem);
-    per_time = elem.data("pricing")[g_settings.region];
+    per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, elem.data("platform"), "ondemand");
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(6);
       elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
@@ -185,14 +185,7 @@ function change_cost(duration) {
 
   $.each($("td.cost-reserved"), function (i, elem) {
     elem = $(elem);
-    per_time = elem.data("pricing")[g_settings.region];
-
-    if (!per_time) {
-      elem.html('<span sort="999999">unavailable</span>');
-      return;
-    }
-
-    per_time = per_time[g_settings.reserved_term];
+    per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, elem.data("platform"), "reserved", g_settings.reserved_term);
 
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(6);
@@ -204,7 +197,18 @@ function change_cost(duration) {
 
   $.each($("td.cost-ebs-optimized"), function (i, elem) {
     elem = $(elem);
-    per_time = elem.data("pricing")[g_settings.region];
+    per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, "ebs");
+    if (per_time && !isNaN(per_time)) {
+      per_time = (per_time * multiplier).toFixed(6);
+      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+    } else {
+      elem.html('<span sort="999999">unavailable</span>');
+    }
+  });
+
+  $.each($("td.cost-emr"), function (i, elem) {
+    elem = $(elem);
+    per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, "emr", "emr");
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(6);
       elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
