@@ -12,11 +12,16 @@ def network_sort(inst):
         'Very Low',
         'Low',
         'Low to Moderate',
-        'Moderate',
-        'High',
         'Up to 10 Gigabit',
+        'Moderate',
         '10 Gigabit',
-        '20 Gigabit'
+        '12 Gigabit',
+        'High',
+        '20 Gigabit',
+        'Up to 25 Gigabit',
+        '25 Gigabit', 
+        '50 Gigabit',
+        '100 Gigabit' 
     ]
     try:
         sort = network_rank.index(perf)
