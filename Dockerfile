@@ -21,6 +21,8 @@ COPY . .
 
 ENV HTTP_HOST=0.0.0.0 HTTP_PORT=8080
 
+RUN yum -y remove ${PACKAGES} kernel-headers vim-minimal
+
 RUN invoke build
 
 EXPOSE 8080
