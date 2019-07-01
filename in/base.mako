@@ -58,6 +58,21 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
     <script src="/store/store.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var _pricing = ${pricing_json};
+        function get_pricing() {
+            // see compress_pricing in render.py for the generation side
+            v = _pricing["data"];
+            for (var i = 0; i < arguments.length; i++) {
+                k = _pricing["index"][arguments[i]];
+                v = v[k];
+                if (v === undefined) {
+                    return undefined;
+                }
+            }
+            return v;
+        }
+    </script>
     <script src="/default.js" type="text/javascript" charset="utf-8"></script>
 
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
