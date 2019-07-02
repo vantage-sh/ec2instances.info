@@ -128,6 +128,7 @@
           <th class="clock_speed_ghz">Clock Speed(GHz)</th>
           <th class="intel_avx">Intel AVX</th>
           <th class="intel_avx2">Intel AVX2</th>
+          <th class="intel_avx512">Intel AVX-512</th>
           <th class="intel_turbo">Intel Turbo</th>
           <th class="storage">Instance Storage</th>
           <th class="warmed-up">Instance Storage: already warmed-up</th>
@@ -249,6 +250,7 @@
           <td class="clock_speed_ghz">${inst['clock_speed_ghz'] or 'unknown'}</td>
           <td class="intel_avx">${'Yes' if inst['intel_avx'] else 'unknown'}</td>
           <td class="intel_avx2">${'Yes' if inst['intel_avx2'] else 'unknown'}</td>
+          <td class="intel_avx512">${'Yes' if inst['intel_avx512'] else 'unknown'}</td>
           <td class="intel_turbo">${'Yes' if inst['intel_turbo'] else 'unknown'}</td>
           <td class="storage">
             <% storage = inst['storage'] %>

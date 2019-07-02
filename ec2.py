@@ -211,7 +211,7 @@ def parse_instance(instance_type, product_attributes):
     # CPU features
     processor_features = product_attributes.get('processorFeatures')
     if processor_features is not None:
-        if "Intel AVX-512" in processor_features:
+        if "Intel AVX512" in processor_features:
             i.intel_avx512 = True
         if "Intel AVX2" in processor_features:
             i.intel_avx2 = True
