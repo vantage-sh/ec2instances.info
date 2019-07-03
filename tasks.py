@@ -16,6 +16,7 @@ from six.moves import SimpleHTTPServer, socketserver
 from rds import scrape as rds_scrape
 from render import render
 from scrape import scrape
+from openexchange import openexchange_scrape
 
 from io import BytesIO
 import gzip
@@ -39,6 +40,7 @@ def build(c):
     """Scrape AWS sources for data and build the site"""
     scrape_ec2(c)
     scrape_rds(c)
+    scrape_openexchange(c)
     render_html(c)
 
 
@@ -65,6 +67,17 @@ def scrape_rds(c):
 
 
 @task
+def scrape_openexchange(c):
+    """Scrape currency rates from openexchange and save to local file"""
+    exchange_file = 'www/exchange_rates.json'
+    try:
+        openexchange_scrape(exchange_file)
+    except Exception as e:
+        print("ERROR: Unable to scrape OpenExchange data: %s" % e)
+        print(traceback.print_exc())
+
+
+@task
 def serve(c):
     """Serve site contents locally for development"""
     os.chdir("www/")
@@ -76,8 +89,8 @@ def serve(c):
 @task
 def render_html(c):
     """Render HTML but do not update data from Amazon"""
-    render('www/instances.json', 'in/index.html.mako', 'www/index.html')
-    render('www/rds/instances.json', 'in/rds.html.mako', 'www/rds/index.html')
+    render('www/instances.json', 'in/index.html.mako', 'www/index.html', 'www/exchange_rates.json')
+    render('www/rds/instances.json', 'in/rds.html.mako', 'www/rds/index.html', 'www/exchange_rates.json')
 
 
 @task
@@ -125,8 +138,6 @@ def deploy(c, root_dir='www'):
                 k.set_metadata('Content-Encoding', 'gzip')
             else:
                 upload_file = open(local_path, 'rb')
-
-
 
             k.set_contents_from_file(upload_file, policy='public-read')
 

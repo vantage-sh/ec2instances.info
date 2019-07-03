@@ -90,6 +90,19 @@
           </ul>
         </div>
 
+        <div class="btn-group" id="currency-dropdown">
+          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+            <i class="icon-filter icon-white"></i>
+            Currency
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+% for currency in exchange_rates['rates'].keys():
+            <li><a href="javascript:;">${currency}</a></li>
+% endfor
+          </ul>
+        </div>
+
         <button class="btn btn-primary btn-compare"
           data-text-on="End Compare"
           data-text-off="Compare Selected">

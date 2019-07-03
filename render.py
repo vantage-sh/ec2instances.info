@@ -87,7 +87,7 @@ def compress_pricing(instances):
     return json.dumps({"index": prices_dict, "data": dict(_compress_pricing(prices))})
 
 
-def render(data_file, template_file, destination_file):
+def render(data_file, template_file, destination_file, exchange_rates_file):
     """Build the HTML content from scraped data"""
     lookup = mako.lookup.TemplateLookup(directories=['.'])
     template = mako.template.Template(filename=template_file, lookup=lookup)
@@ -96,12 +96,15 @@ def render(data_file, template_file, destination_file):
         instances = json.load(f)
     for i in instances:
         add_render_info(i)
+    print("Loading data from %s..." % exchange_rates_file)
+    with open(exchange_rates_file) as f:
+        exchange_rates = json.load(f)
     pricing_json = compress_pricing(instances)
     print("Rendering to %s..." % destination_file)
     generated_at = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')
     with io.open(destination_file, 'w', encoding="utf-8") as fh:
         try:
-            fh.write(template.render(instances=instances, pricing_json=pricing_json, generated_at=generated_at))
+            fh.write(template.render(instances=instances, pricing_json=pricing_json, generated_at=generated_at, exchange_rates=exchange_rates))
         except:
             print(mako.exceptions.text_error_template().render())
 

@@ -1,45 +1,50 @@
-'use strict';
+"use strict";
 
 var g_app_initialized = false;
 var g_data_table = null;
 var g_settings = {};
 
 var g_settings_defaults = {
-  cost_duration: 'hourly',
-  region: 'us-east-1',
-  reserved_term: 'yrTerm1Standard.noUpfront',
+  cost_duration: "hourly",
+  region: "us-east-1",
+  reserved_term: "yrTerm1Standard.noUpfront",
   min_memory: 0,
   min_vcpus: 0,
   min_storage: 0,
-  selected: ''
+  selected: "",
 };
 
 function init_data_table() {
   // create a second header row
-  $("#data thead tr").clone(true).appendTo("#data thead");
+  $("#data thead tr")
+    .clone(true)
+    .appendTo("#data thead");
   // add a text input filter to each column of the new row
-  $("#data thead tr:eq(1) th").each(function (i) {
+  $("#data thead tr:eq(1) th").each(function(i) {
     var title = $(this).text();
     $(this).html("<input type='text' placeholder='Search '" + title + "' />");
-    $("input", this).on( "keyup change", function () {
+    $("input", this).on("keyup change", function() {
       if (g_data_table.column(i).search() !== this.value) {
-        g_data_table.column(i).search(this.value).draw();
+        g_data_table
+          .column(i)
+          .search(this.value)
+          .draw();
       }
     });
   });
-  g_data_table = $('#data').DataTable({
-    "bPaginate": false,
-    "bInfo": false,
-    "bStateSave": true,
-    "orderCellsTop": true,
-    "oSearch": {
-      "bRegex": true,
-      "bSmart": false
+  g_data_table = $("#data").DataTable({
+    bPaginate: false,
+    bInfo: false,
+    bStateSave: true,
+    orderCellsTop: true,
+    oSearch: {
+      bRegex: true,
+      bSmart: false,
     },
-    "aoColumnDefs": [
+    aoColumnDefs: [
       {
         // The columns below are sorted according to the sort attr of the <span> tag within their data cells
-        "aTargets": [
+        aTargets: [
           "memory",
           "computeunits",
           "vcpus",
@@ -52,11 +57,11 @@ function init_data_table() {
           "cost-reserved",
           "cost-ebs-optimized",
         ],
-        "sType": "span-sort"
+        sType: "span-sort",
       },
       {
         // The columns below are hidden by default
-        "aTargets": [
+        aTargets: [
           "architecture",
           "computeunits",
           "ecu-per-vcpu",
@@ -98,23 +103,21 @@ function init_data_table() {
           "warmed-up",
           "ipv6-support",
           "placement-group-support",
-          "vpc-only"
+          "vpc-only",
         ],
-        "bVisible": false
-      }
+        bVisible: false,
+      },
     ],
     // default sort by linux cost
-    "aaSorting": [
-      [15, "asc"]
-    ],
-    'initComplete': function () {
+    aaSorting: [[15, "asc"]],
+    initComplete: function() {
       // fire event in separate context so that calls to get_data_table()
       // receive the cached object.
-      setTimeout(function () {
+      setTimeout(function() {
         on_data_table_initialized();
       }, 0);
     },
-    'drawCallback': function () {
+    drawCallback: function() {
       // abort if initialization hasn't finished yet (initial draw)
       if (g_data_table === null) {
         return;
@@ -126,25 +129,24 @@ function init_data_table() {
       redraw_costs();
     },
     // Store filtering, sorting, etc - core datatable feature
-    'stateSave': true,
+    stateSave: true,
     // Allow export to CSV
-    'buttons': ['csv']
+    buttons: ["csv"],
   });
 
   g_data_table
     .buttons()
     .container()
-    .find('a')
-    .addClass('btn btn-primary')
-    .appendTo($('#menu > div'));
+    .find("a")
+    .addClass("btn btn-primary")
+    .appendTo($("#menu > div"));
 
   return g_data_table;
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
   init_data_table();
 });
-
 
 function change_cost(duration) {
   // update menu text
@@ -153,65 +155,76 @@ function change_cost(duration) {
   $("#cost-dropdown .dropdown-toggle .text").text(text);
 
   // update selected menu option
-  $('#cost-dropdown li a').each(function (i, e) {
+  $("#cost-dropdown li a").each(function(i, e) {
     e = $(e);
-    if (e.attr('duration') == duration) {
-      e.parent().addClass('active');
+    if (e.attr("duration") == duration) {
+      e.parent().addClass("active");
     } else {
-      e.parent().removeClass('active');
+      e.parent().removeClass("active");
     }
   });
 
   var hour_multipliers = {
-    "secondly": 1 / (60 * 60),
-    "hourly": 1,
-    "daily": 24,
-    "weekly": (7 * 24),
-    "monthly": (365 * 24 / 12),
-    "annually": (365 * 24)
+    secondly: 1 / (60 * 60),
+    hourly: 1,
+    daily: 24,
+    weekly: 7 * 24,
+    monthly: (365 * 24) / 12,
+    annually: 365 * 24,
   };
   var multiplier = hour_multipliers[duration];
   var per_time;
-  $.each($("td.cost-ondemand"), function (i, elem) {
+  $.each($("td.cost-ondemand"), function(i, elem) {
     elem = $(elem);
-    per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, elem.data("platform"), "ondemand");
+    per_time = get_pricing(
+      elem.closest("tr").attr("id"),
+      g_settings.region,
+      elem.data("platform"),
+      "ondemand"
+    );
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(6);
-      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+      elem.html('<span sort="' + per_time + '">$' + per_time + " " + duration + "</span>");
     } else {
       elem.html('<span sort="999999">unavailable</span>');
     }
   });
 
-  $.each($("td.cost-reserved"), function (i, elem) {
+  $.each($("td.cost-reserved"), function(i, elem) {
     elem = $(elem);
-    per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, elem.data("platform"), "reserved", g_settings.reserved_term);
+    per_time = get_pricing(
+      elem.closest("tr").attr("id"),
+      g_settings.region,
+      elem.data("platform"),
+      "reserved",
+      g_settings.reserved_term
+    );
 
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(6);
-      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+      elem.html('<span sort="' + per_time + '">$' + per_time + " " + duration + "</span>");
     } else {
       elem.html('<span sort="999999">unavailable</span>');
     }
   });
 
-  $.each($("td.cost-ebs-optimized"), function (i, elem) {
+  $.each($("td.cost-ebs-optimized"), function(i, elem) {
     elem = $(elem);
     per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, "ebs");
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(6);
-      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+      elem.html('<span sort="' + per_time + '">$' + per_time + " " + duration + "</span>");
     } else {
       elem.html('<span sort="999999">unavailable</span>');
     }
   });
 
-  $.each($("td.cost-emr"), function (i, elem) {
+  $.each($("td.cost-emr"), function(i, elem) {
     elem = $(elem);
     per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, "emr", "emr");
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(6);
-      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+      elem.html('<span sort="' + per_time + '">$' + per_time + " " + duration + "</span>");
     } else {
       elem.html('<span sort="999999">unavailable</span>');
     }
@@ -224,33 +237,56 @@ function change_cost(duration) {
 function change_region(region) {
   g_settings.region = region;
   var region_name = null;
-  $('#region-dropdown li a').each(function (i, e) {
+  $("#region-dropdown li a").each(function(i, e) {
     e = $(e);
-    if (e.data('region') === region) {
-      e.parent().addClass('active');
+    if (e.data("region") === region) {
+      e.parent().addClass("active");
       region_name = e.text();
     } else {
-      e.parent().removeClass('active');
+      e.parent().removeClass("active");
     }
   });
   $("#region-dropdown .dropdown-toggle .text").text(region_name);
   change_cost(g_settings.cost_duration);
 
   // redraw table to pick up on new sort values
-  g_data_table.rows().invalidate().draw();
+  g_data_table
+    .rows()
+    .invalidate()
+    .draw();
 }
 
 function change_reserved_term(term) {
   g_settings.reserved_term = term;
-  var $dropdown = $('#reserved-term-dropdown'),
+  var $dropdown = $("#reserved-term-dropdown"),
     $activeLink = $dropdown.find('li a[data-reserved-term="' + term + '"]'),
     term_name = $activeLink.text();
 
-  $dropdown.find('li').removeClass('active');
-  $activeLink.closest('li').addClass('active');
+  $dropdown.find("li").removeClass("active");
+  $activeLink.closest("li").addClass("active");
 
-  $dropdown.find('.dropdown-toggle .text').text(term_name);
+  $dropdown.find(".dropdown-toggle .text").text(term_name);
   change_cost(g_settings.cost_duration);
+}
+
+function change_currency(targetCurrency) {
+  var costsNodes = $("td.cost-ondemand, td.cost-reserved");
+  var costUsd = 0;
+  var targetCost = 0;
+  var costNode = null;
+  costsNodes.each(function() {
+    costNode = $(this).find("span");
+    costUsd = accounting.unformat(costNode.attr("sort"));
+    // 999999 means "unavailable"
+    if (costUsd < 999000) {
+      targetCost = accounting.formatMoney(fx.convert(costUsd, { to: targetCurrency }), {
+        symbol: targetCurrency,
+        format: "%v %s hourly",
+        precision: 3,
+      });
+      costNode.text(targetCost);
+    }
+  });
 }
 
 // Update all visible costs to the current duration.
@@ -260,17 +296,19 @@ function redraw_costs() {
 }
 
 function setup_column_toggle() {
-  $.each(g_data_table.columns().indexes(), function (i, idx) {
+  $.each(g_data_table.columns().indexes(), function(i, idx) {
     var column = g_data_table.column(idx);
     $("#filter-dropdown ul").append(
-      $('<li>')
-        .toggleClass('active', column.visible())
+      $("<li>")
+        .toggleClass("active", column.visible())
         .append(
-          $('<a>', {href: "javascript:;"})
+          $("<a>", { href: "javascript:;" })
             .text($(column.header()).text())
-            .click(function (e) {
+            .click(function(e) {
               toggle_column(i);
-              $(this).parent().toggleClass("active");
+              $(this)
+                .parent()
+                .toggleClass("active");
               $(this).blur(); // prevent focus style from sticking in Firefox
               e.stopPropagation(); // keep dropdown menu open
             })
@@ -280,7 +318,7 @@ function setup_column_toggle() {
 }
 
 function setup_clear() {
-  $('.btn-clear').click(function () {
+  $(".btn-clear").click(function() {
     // Reset app.
     g_settings = JSON.parse(JSON.stringify(g_settings_defaults)); // clone
     g_data_table.search("");
@@ -293,7 +331,7 @@ function setup_clear() {
 }
 
 function clear_row_selections() {
-  $('#data tbody tr').removeClass('highlight');
+  $("#data tbody tr").removeClass("highlight");
 }
 
 function url_for_selections() {
@@ -301,23 +339,25 @@ function url_for_selections() {
     min_memory: g_settings.min_memory,
     min_vcpus: g_settings.min_vcpus,
     min_storage: g_settings.min_storage,
-    filter: g_data_table.settings()[0].oPreviousSearch['sSearch'],
+    filter: g_data_table.settings()[0].oPreviousSearch["sSearch"],
     region: g_settings.region,
     cost_duration: g_settings.cost_duration,
-    reserved_term: g_settings.reserved_term
+    reserved_term: g_settings.reserved_term,
   };
 
   // avoid storing empty or default values in URL
   for (var key in params) {
-    if (params[key] === '' || params[key] == null || params[key] === g_settings_defaults[key]) {
+    if (params[key] === "" || params[key] == null || params[key] === g_settings_defaults[key]) {
       delete params[key];
     }
   }
 
   // selected rows
-  var selected_row_ids = $('#data tbody tr.highlight').map(function () {
-    return this.id;
-  }).get();
+  var selected_row_ids = $("#data tbody tr.highlight")
+    .map(function() {
+      return this.id;
+    })
+    .get();
   if (selected_row_ids.length > 0) {
     params.selected = selected_row_ids;
   }
@@ -326,18 +366,18 @@ function url_for_selections() {
   var parameters = [];
   for (var setting in params) {
     if (params[setting] !== undefined) {
-      parameters.push(setting + '=' + params[setting]);
+      parameters.push(setting + "=" + params[setting]);
     }
   }
   if (parameters.length > 0) {
-    url = url + '?' + parameters.join('&');
+    url = url + "?" + parameters.join("&");
   }
   return url;
 }
 
 function maybe_update_url() {
   // Save localstorage data as well
-  store.set('ec2_settings', g_settings);
+  store.set("ec2_settings", g_settings);
 
   if (!history.replaceState) {
     return;
@@ -349,29 +389,31 @@ function maybe_update_url() {
       return;
     }
 
-    history.replaceState(null, '', url);
+    history.replaceState(null, "", url);
   } catch (ex) {
     // doesn't matter
   }
 }
 
-var apply_min_values = function () {
+var apply_min_values = function() {
   var all_filters = $('[data-action="datafilter"]');
-  var data_rows = $('#data tr:has(td)');
+  var data_rows = $("#data tr:has(td)");
 
   data_rows.show();
 
-  all_filters.each(function () {
-    var filter_on = $(this).data('type');
+  all_filters.each(function() {
+    var filter_on = $(this).data("type");
     var filter_val = parseFloat($(this).val()) || 0;
 
     // update global variable for dynamic URL
     g_settings["min_" + filter_on] = filter_val;
 
-    var match_fail = data_rows.filter(function () {
+    var match_fail = data_rows.filter(function() {
       var row_val;
       row_val = parseFloat(
-        $(this).find('td[class~="' + filter_on + '"] span').attr('sort')
+        $(this)
+          .find('td[class~="' + filter_on + '"] span')
+          .attr("sort")
       );
       return row_val < filter_val;
     });
@@ -388,29 +430,29 @@ function on_data_table_initialized() {
   load_settings();
 
   // populate filter inputs
-  $('[data-action="datafilter"][data-type="memory"]').val(g_settings['min_memory']);
-  $('[data-action="datafilter"][data-type="vcpus"]').val(g_settings['min_vcpus']);
-  $('[data-action="datafilter"][data-type="storage"]').val(g_settings['min_storage']);
-  g_data_table.search(g_settings['filter']);
+  $('[data-action="datafilter"][data-type="memory"]').val(g_settings["min_memory"]);
+  $('[data-action="datafilter"][data-type="vcpus"]').val(g_settings["min_vcpus"]);
+  $('[data-action="datafilter"][data-type="storage"]').val(g_settings["min_storage"]);
+  g_data_table.search(g_settings["filter"]);
   apply_min_values();
 
   // apply highlight to selected rows
-  $.each(g_settings.selected.split(','), function (_, id) {
-    id = id.replace('.', '\\.');
-    $('#' + id).addClass('highlight');
+  $.each(g_settings.selected.split(","), function(_, id) {
+    id = id.replace(".", "\\.");
+    $("#" + id).addClass("highlight");
   });
 
   configure_highlighting();
 
   // Allow row filtering by min-value match.
-  $('[data-action=datafilter]').on('keyup', apply_min_values);
+  $("[data-action=datafilter]").on("keyup", apply_min_values);
 
   change_region(g_settings.region);
   change_cost(g_settings.cost_duration);
   change_reserved_term(g_settings.reserved_term);
 
   $.extend($.fn.dataTableExt.oStdClasses, {
-    "sWrapper": "dataTables_wrapper form-inline"
+    sWrapper: "dataTables_wrapper form-inline",
   });
 
   setup_column_toggle();
@@ -418,32 +460,36 @@ function on_data_table_initialized() {
   setup_clear();
 
   // enable bootstrap tooltips
-  $('abbr').tooltip({
-    placement: function (tt, el) {
-      return (this.$element.parents('thead').length) ? 'top' : 'right';
-    }
+  $("abbr").tooltip({
+    placement: function(tt, el) {
+      return this.$element.parents("thead").length ? "top" : "right";
+    },
   });
 
-  $("#cost-dropdown li").bind("click", function (e) {
+  $("#cost-dropdown li").bind("click", function(e) {
     change_cost(e.target.getAttribute("duration"));
   });
 
-  $("#region-dropdown li").bind("click", function (e) {
-    change_region($(e.target).data('region'));
+  $("#region-dropdown li").bind("click", function(e) {
+    change_region($(e.target).data("region"));
   });
 
-  $("#reserved-term-dropdown li").bind("click", function (e) {
-    change_reserved_term($(e.target).data('reservedTerm'));
+  $("#reserved-term-dropdown li").bind("click", function(e) {
+    change_reserved_term($(e.target).data("reservedTerm"));
+  });
+
+  $("#currency-dropdown li").bind("click", function(e) {
+    change_currency(e.target.text);
   });
 
   // apply classes to search box
-  $('div.dataTables_filter input').addClass('form-control search');
+  $("div.dataTables_filter input").addClass("form-control search");
 }
 
 // sorting for colums with more complex data
 // http://datatables.net/plug-ins/sorting#hidden_title
 jQuery.extend(jQuery.fn.dataTableExt.oSort, {
-  "span-sort-pre": function (elem) {
+  "span-sort-pre": function(elem) {
     var matches = elem.match(/sort="(.*?)"/);
     if (matches) {
       return parseFloat(matches[1]);
@@ -451,13 +497,13 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
     return 0;
   },
 
-  "span-sort-asc": function (a, b) {
-    return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+  "span-sort-asc": function(a, b) {
+    return a < b ? -1 : a > b ? 1 : 0;
   },
 
-  "span-sort-desc": function (a, b) {
-    return ((a < b) ? 1 : ((a > b) ? -1 : 0));
-  }
+  "span-sort-desc": function(a, b) {
+    return a < b ? 1 : a > b ? -1 : 0;
+  },
 });
 
 // toggle columns
@@ -470,22 +516,22 @@ function toggle_column(col_index) {
 // retrieve all the parameters from the location string
 function load_settings() {
   // load settings from local storage
-  g_settings = store.get('ec2_settings') || {};
+  g_settings = store.get("ec2_settings") || {};
 
   if (location.search) {
-    var params = location.search.slice(1).split('&');
-    params.forEach(function (param) {
-      var parts = param.split('=');
+    var params = location.search.slice(1).split("&");
+    params.forEach(function(param) {
+      var parts = param.split("=");
       var key = parts[0];
       var val = parts[1];
       // support legacy key names
-      if (key == 'cost') {
-        key = 'cost_duration';
-      } else if (key == 'term') {
-        key = 'reserved_term';
+      if (key == "cost") {
+        key = "cost_duration";
+      } else if (key == "term") {
+        key = "reserved_term";
       }
       // store in global settings
-      console.log('Loaded setting from URL:', key, '=', val);
+      console.log("Loaded setting from URL:", key, "=", val);
       g_settings[key] = val;
     });
   }
@@ -502,35 +548,37 @@ function load_settings() {
 
 function configure_highlighting() {
   var compareOn = false,
-    $compareBtn = $('.btn-compare'),
-    $rows = $('#data tbody tr');
+    $compareBtn = $(".btn-compare"),
+    $rows = $("#data tbody tr");
 
   // Allow row highlighting by clicking.
-  $rows.click(function () {
-    $(this).toggleClass('highlight');
+  $rows.click(function() {
+    $(this).toggleClass("highlight");
 
     if (!compareOn) {
-      $compareBtn.prop('disabled', !$rows.is('.highlight'));
+      $compareBtn.prop("disabled", !$rows.is(".highlight"));
     }
 
     maybe_update_url();
   });
 
-  $compareBtn.prop('disabled', !$($rows).is('.highlight'));
-  $compareBtn.text($compareBtn.data('textOff'));
+  $compareBtn.prop("disabled", !$($rows).is(".highlight"));
+  $compareBtn.text($compareBtn.data("textOff"));
 
-  $compareBtn.click(function () {
+  $compareBtn.click(function() {
     if (compareOn) {
       $rows.show();
-      $compareBtn.text($compareBtn.data('textOff'))
-        .addClass('btn-primary')
-        .removeClass('btn-success')
-        .prop('disabled', !$rows.is('.highlight'));
+      $compareBtn
+        .text($compareBtn.data("textOff"))
+        .addClass("btn-primary")
+        .removeClass("btn-success")
+        .prop("disabled", !$rows.is(".highlight"));
     } else {
-      $rows.filter(':not(.highlight)').hide();
-      $compareBtn.text($compareBtn.data('textOn'))
-        .addClass('btn-success')
-        .removeClass('btn-primary');
+      $rows.filter(":not(.highlight)").hide();
+      $compareBtn
+        .text($compareBtn.data("textOn"))
+        .addClass("btn-success")
+        .removeClass("btn-primary");
     }
 
     compareOn = !compareOn;
