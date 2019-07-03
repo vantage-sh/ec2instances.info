@@ -2,10 +2,16 @@
 import requests
 import json
 from json import encoder
+import os
+import sys
 
 
 def openexchange_scrape(output_file):
-    payload_url = 'https://openexchangerates.org/api/latest.json?app_id=255b3db9f4d44ae18d02613a5b5857a2'
+    try:
+        api_key = os.environ['OPENEXCHANGE_API_KEY']
+    except KeyError as e:
+        sys.exit('Error! Please provide your open exchange API key as an environment variable called OPENEXCHANGE_API_KEY')
+    payload_url = 'https://openexchangerates.org/api/latest.json?app_id=' + api_key
     index = requests.get(payload_url)
     data = index.json()
 
