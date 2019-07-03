@@ -274,6 +274,8 @@ function change_currency(targetCurrency) {
   var costUsd = 0;
   var targetCost = 0;
   var costNode = null;
+  var duration = $("#cost-dropdown .active a").attr("duration");
+
   costsNodes.each(function() {
     costNode = $(this).find("span");
     costUsd = accounting.unformat(costNode.attr("sort"));
@@ -281,7 +283,7 @@ function change_currency(targetCurrency) {
     if (costUsd < 999000) {
       targetCost = accounting.formatMoney(fx.convert(costUsd, { to: targetCurrency }), {
         symbol: targetCurrency,
-        format: "%v %s hourly",
+        format: "%v %s " + duration,
         precision: 3,
       });
       costNode.text(targetCost);
