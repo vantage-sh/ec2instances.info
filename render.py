@@ -43,6 +43,7 @@ def add_cpu_detail(i):
         i['physical_processor'] = (i['physical_processor'] or '').replace('*', '')
         i['intel_avx'] = 'Yes' if i['intel_avx'] else ''
         i['intel_avx2'] = 'Yes' if i['intel_avx2'] else ''
+        i['intel_avx512'] = 'Yes' if i['intel_avx512'] else ''
         i['intel_turbo'] = 'Yes' if i['intel_turbo'] else ''
 
 

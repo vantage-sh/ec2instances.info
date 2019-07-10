@@ -67,6 +67,7 @@ function init_data_table() {
           "clock_speed_ghz",
           "intel_avx",
           "intel_avx2",
+          "intel_avx512",
           "intel_turbo",
           "enhanced-networking",
           "maxips",
