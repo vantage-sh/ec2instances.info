@@ -19,6 +19,7 @@ class Instance(object):
         self.base_performance = None
         self.burst_minutes = None
         self.clock_speed_ghz = None
+        self.compute_capability = 0
         self.devices = 0
         self.drive_size = None
         self.ebs_iops = 0
@@ -33,6 +34,8 @@ class Instance(object):
         self.FPGA = 0
         self.generation = None
         self.GPU = 0
+        self.GPU_memory = 0
+        self.GPU_model = None
         self.includes_swap_partition = False
         self.instance_type = ''
         self.intel_avx = None
@@ -81,6 +84,9 @@ class Instance(object):
                  arch=self.arch,
                  vCPU=self.vCPU,
                  GPU=self.GPU,
+                 GPU_model=self.GPU_model,
+                 GPU_memory=self.GPU_memory,
+                 compute_capability=self.compute_capability,
                  FPGA=self.FPGA,
                  ECU=self.ECU,
                  base_performance=self.base_performance,
@@ -490,6 +496,104 @@ def add_emr_info(instances):
                     inst.pricing[region]["emr"] = pricing[
                         inst.instance_type][region]
 
+def add_gpu_info(instances):
+    """
+    Add info about GPUs from the manually-curated dictionaries below. They are
+    manually curated because GPU models and their corresponding CUDA Compute
+    Capability are not listed in a structured form anywhere in the AWS docs.
+
+    This function will print a warning if it encounters an instance with
+    .GPU > 0 for which GPU information is not included in the dictionaries
+    below. This may indicate that AWS has added a new GPU instance type. If you
+    see such a warning and want to fill in the missing information, check
+    https://aws.amazon.com/ec2/instance-types/#Accelerated_Computing for
+    descriptions of the instance types and https://en.wikipedia.org/wiki/CUDA
+    for information on the CUDA compute capability of different Nvidia GPU
+    models.
+    """
+    gpu_data = {
+        'g2.2xlarge': {
+            # No longer listed in AWS docs linked above. Alternative source is
+            # https://medium.com/@manku_timma1/part-1-g2-2xlarge-gpu-basics-805ad40a37a4
+            'gpu_model': 'NVIDIA GRID K520',
+            'compute_capability': 3.0,
+            'gpu_memory': 8
+        },
+        'g2.8xlarge': {
+            # No longer listed in AWS docs linked above. Alternative source is
+            # https://aws.amazon.com/blogs/aws/new-g2-instance-type-with-4x-more-gpu-power/
+            'gpu_model': 'NVIDIA GRID K520',
+            'compute_capability': 3.0,
+            'gpu_memory': 32
+        },
+        'g3s.xlarge': {
+            'gpu_model': 'NVIDIA Tesla M60',
+            'compute_capability': 5.2,
+            'gpu_memory': 8
+        },
+        'g3.4xlarge': {
+            'gpu_model': 'NVIDIA Tesla M60',
+            'compute_capability': 5.2,
+            'gpu_memory': 8
+        },
+        'g3.8xlarge': {
+            'gpu_model': 'NVIDIA Tesla M60',
+            'compute_capability': 5.2,
+            'gpu_memory': 16
+        },
+        'g3.16xlarge': {
+            'gpu_model': 'NVIDIA Tesla M60',
+            'compute_capability': 5.2,
+            'gpu_memory': 32
+        },
+        'p2.xlarge': {
+            'gpu_model': 'NVIDIA Tesla K80',
+            'compute_capability': 3.7,
+            'gpu_memory': 12
+        },
+        'p2.8xlarge': {
+            'gpu_model': 'NVIDIA Tesla K80',
+            'compute_capability': 3.7,
+            'gpu_memory': 96
+        },
+        'p2.16xlarge': {
+            'gpu_model': 'NVIDIA Tesla K80',
+            'compute_capability': 3.7,
+            'gpu_memory': 192
+        },
+        'p3.2xlarge': {
+            'gpu_model': 'NVIDIA Tesla V100',
+            'compute_capability': 7.0,
+            'gpu_memory': 16
+        },
+        'p3.8xlarge': {
+            'gpu_model': 'NVIDIA Tesla V100',
+            'compute_capability': 7.0,
+            'gpu_memory': 64
+        },
+        'p3.16xlarge': {
+            'gpu_model': 'NVIDIA Tesla V100',
+            'compute_capability': 7.0,
+            'gpu_memory': 128
+        },
+        'p3dn.24xlarge': {
+            'gpu_model': 'NVIDIA Tesla V100',
+            'compute_capability': 7.0,
+            'gpu_memory': 256
+        },
+    }
+    for inst in instances:
+        if inst.GPU == 0:
+            continue
+        if inst.instance_type not in gpu_data:
+            print('WARNING: instance %s has GPUs but is missing from gpu_data '
+                  'dict in scrape.add_gpu_info. The dict needs to be updated '
+                  'manually.')
+            continue
+        inst_gpu_data = gpu_data[inst.instance_type]
+        inst.GPU_model = inst_gpu_data['gpu_model']
+        inst.compute_capability = inst_gpu_data['compute_capability']
+        inst.GPU_memory = inst_gpu_data['gpu_memory']
 
 def scrape(data_file):
     """Scrape AWS to get instance data"""
@@ -515,6 +619,8 @@ def scrape(data_file):
     add_pretty_names(all_instances)
     print("Parsing emr details...")
     add_emr_info(all_instances)
+    print("Adding GPU details...")
+    add_gpu_info(all_instances)
 
     with open(data_file, 'w') as f:
         json.dump([i.to_dict() for i in all_instances],
