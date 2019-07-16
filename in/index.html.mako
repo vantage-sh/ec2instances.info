@@ -122,6 +122,9 @@
             <abbr title="Each virtual CPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">vCPUs</abbr>
           </th>
           <th class="gpus">GPUs</th>
+          <th class="gpu_model">GPU model</th>
+          <th class="gpu_memory">GPU memory</th>
+          <th class="compute_capability">CUDA Compute Capability</th>
           <th class="fpgas">FPGAs</th>
           <th class="ecu-per-vcpu">ECU per vCPU</th>
           <th class="physical_processor">Physical Processor</th>
@@ -236,6 +239,9 @@
             </span>
           </td>
           <td class="gpus">${inst['GPU']}</td>
+          <td class="gpu_model">${inst['GPU_model']}</td>
+          <td class="gpu_memory">${inst['GPU_memory']} GiB</td>
+          <td class="compute_capability">${inst['compute_capability']}</td>
           <td class="fpga">${inst['FPGA']}</td>
           <td class="ecu-per-vcpu">
             % if inst['ECU'] == 'variable':
