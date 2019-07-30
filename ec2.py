@@ -119,15 +119,19 @@ def add_pricing(imap):
             platform = translate_platform_name(operating_system, preinstalled_software)
 
             instance_type = product_attributes.get('instanceType')
-            inst = imap[instance_type]
-
-            inst.pricing.setdefault(region, {})
-            inst.pricing[region].setdefault(platform, {})
-            inst.pricing[region][platform]['ondemand'] = get_ondemand_pricing(terms)
-            # Some instances don't offer reserved terms at all
-            reserved = get_reserved_pricing(terms)
-            if reserved:
-                inst.pricing[region][platform]['reserved'] = reserved
+            # If the instance type is not in us-east-1 imap[instance_type] could fail
+            try:
+                inst = imap[instance_type]
+                inst.pricing.setdefault(region, {})
+                inst.pricing[region].setdefault(platform, {})
+                inst.pricing[region][platform]['ondemand'] = get_ondemand_pricing(terms)
+                # Some instances don't offer reserved terms at all
+                reserved = get_reserved_pricing(terms)
+                if reserved:
+                    inst.pricing[region][platform]['reserved'] = reserved
+            except:
+                # print more details about the instance for debugging
+                print(json.dumps(product_attributes))
 
 
 def format_price(price):
