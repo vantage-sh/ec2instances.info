@@ -12,7 +12,7 @@ var g_settings_defaults = {
   min_vcpus: 0,
   min_storage: 0,
   selected: '',
-  compareOn: false
+  compare_on: false
 };
 
 function init_data_table() {
@@ -310,7 +310,7 @@ function url_for_selections() {
     region: g_settings.region,
     cost_duration: g_settings.cost_duration,
     reserved_term: g_settings.reserved_term,
-    compareOn: g_settings.compareOn
+    compare_on: g_settings.compare_on
   };
 
   // avoid storing empty or default values in URL
@@ -519,7 +519,7 @@ function configure_highlighting() {
   });
 
   $compareBtn.click(function () {
-    g_settings.compareOn = !g_settings.compareOn;
+    g_settings.compare_on = !g_settings.compare_on;
     update_compare_button();
     update_visible_rows();
     maybe_update_url();
@@ -529,10 +529,9 @@ function configure_highlighting() {
   update_visible_rows();
 }
 
-function update_visible_rows()
-{
+function update_visible_rows() {
   var $rows = $('#data tbody tr');
-  if (! g_settings.compareOn) {
+  if (! g_settings.compare_on) {
     $rows.show();
   } else {
     $rows.filter(':not(.highlight)').hide();
@@ -543,7 +542,7 @@ function update_compare_button() {
   var $compareBtn = $('.btn-compare'),
       $rows = $('#data tbody tr');
 
-  if (! g_settings.compareOn) {
+  if (! g_settings.compare_on) {
     $compareBtn.text($compareBtn.data('textOff'))
         .addClass('btn-primary')
         .removeClass('btn-success')
