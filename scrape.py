@@ -515,9 +515,10 @@ def add_gpu_info(instances):
         'g2.2xlarge': {
             # No longer listed in AWS docs linked above. Alternative source is
             # https://medium.com/@manku_timma1/part-1-g2-2xlarge-gpu-basics-805ad40a37a4
+            # The model has 2 units, 4G of memory each, but AWS exposes only 1 unit per instance
             'gpu_model': 'NVIDIA GRID K520',
             'compute_capability': 3.0,
-            'gpu_memory': 8
+            'gpu_memory': 4
         },
         'g2.8xlarge': {
             # No longer listed in AWS docs linked above. Alternative source is
