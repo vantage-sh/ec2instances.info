@@ -76,31 +76,35 @@ def scrape(output_file, input_file=None):
     for sku, product in six.iteritems(data['products']):
 
         if product.get('productFamily', None) == 'Database Instance':
+            attributes = product['attributes']
+
             # map the region
+            location = attributes['location']
+            instance_type = attributes['instanceType']
             try:
-                region = regions[product['attributes']['location']]
+                region = regions[location]
             except KeyError as e:
-                if product['attributes']['location'] == 'Any':
+                if location == 'Any':
                     region = 'us-east-1'
                 else:
-                    raise
+                    print(f"ERROR: No region data for location={location}. Ignoring instance with sku={sku}, type={instance_type}")
+                    continue
 
             # set the attributes in line with the ec2 index
-            attributes = product['attributes']
             attributes['region'] = region
             attributes['memory'] = attributes['memory'].split(' ')[0]
             attributes['network_performance'] = attributes['networkPerformance']
             attributes['family'] = attributes['instanceFamily']
-            attributes['instance_type'] = attributes['instanceType']
+            attributes['instance_type'] = instance_type
             attributes['database_engine'] = attributes['databaseEngine']
             attributes['arch'] = attributes['processorArchitecture']
             attributes['pricing'] = {}
             attributes['pricing'][region] = {}
             rds_instances[sku] = attributes
 
-            if attributes['instance_type'] not in instances.keys():
-                instances[attributes['instance_type']] = attributes
-                instances[attributes['instance_type']]['pricing'] = {}
+            if instance_type not in instances.keys():
+                instances[instance_type] = attributes
+                instances[instance_type]['pricing'] = {}
 
     # Parse ondemand pricing
     for sku, offers in six.iteritems(data['terms']['OnDemand']):
@@ -113,7 +117,7 @@ def scrape(output_file, input_file=None):
 
                 instance = rds_instances.get(sku)
                 if not instance:
-                    print("ERROR: Instance type not found for sku={}".format(sku))
+                    print(f"ERROR: Received on demand pricing info for unknown sku={sku}")
                     continue
 
                 if instance['region'] not in instances[instance['instance_type']]['pricing']:
@@ -137,34 +141,32 @@ def scrape(output_file, input_file=None):
         for code, offer in six.iteritems(offers):
             for key, dimension in six.iteritems(offer['priceDimensions']):
 
-                # skip multi-az
-                if rds_instances[sku]['deploymentOption'] != 'Single-AZ':
+                instance = rds_instances.get(sku)
+                if not instance:
+                    print(f"ERROR: Received reserved pricing info for unknown sku={sku}")
                     continue
 
-                instance = rds_instances[sku]
-                region = rds_instances[sku]['region']
+                # skip multi-az
+                if instance['deploymentOption'] != 'Single-AZ':
+                    continue
+
+                region = instance['region']
 
                 # create a regional hash
-                if region not in instances[instance['instance_type']]['pricing']:
-                    instances[instance['instance_type']]['pricing'][region] = {}
+                if region not in instance['pricing']:
+                    instance['pricing'][region] = {}
+
+                # create a database_engine hash
+                if instance['database_engine'] not in instance['pricing'][region]:
+                    instance['pricing'][region][instance['database_engine']] = {}
 
                 # create a reserved hash
-                if 'reserved' not in instances[instance['instance_type']]['pricing'][region][instance['database_engine']]:
-                    instances[instance['instance_type']]['pricing'][region][instance['database_engine']]['reserved'] = {}
+                if 'reserved' not in instance['pricing'][region][instance['database_engine']]:
+                    instance['pricing'][region][instance['database_engine']]['reserved'] = {}
 
                 # store the pricing in placeholder field
                 reserved_type = "%s %s" % (offer['termAttributes']['LeaseContractLength'], offer['termAttributes']['PurchaseOption'])
-                instances[instance['instance_type']]['pricing'][region][instance['database_engine']]['reserved']['%s-%s' % (reserved_mapping[reserved_type], dimension['unit'].lower())] = float(dimension['pricePerUnit']['USD'])
-
-                # if instance['instance_type'] == 'db.m3.medium' and region == 'eu-west-1' and instance['database_engine'].lower() == 'mysql':
-                #     print offer
-                #     print instance['database_engine']
-                #     print dimension
-                #     print reserved_type
-                #     print dimension['pricePerUnit']['USD'], float(dimension['pricePerUnit']['USD'])
-                #     print instances[instance['instance_type']]['pricing'][region][instance['database_engine']]['reserved']
-
-    # print json.dumps(instances['db.m3.medium']['pricing']['eu-west-1']['MySQL'], indent=4)
+                instance['pricing'][region][instance['database_engine']]['reserved']['%s-%s' % (reserved_mapping[reserved_type], dimension['unit'].lower())] = float(dimension['pricePerUnit']['USD'])
 
     # Calculate all reserved effective pricings (upfront hourly + hourly price)
     for instance_type, instance in six.iteritems(instances):
