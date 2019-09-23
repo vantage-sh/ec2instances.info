@@ -140,8 +140,8 @@
           <th class="architecture">Arch</th>
           <th class="networkperf">Network Performance</th>
           <th class="ebs-max-bandwidth">EBS Optimized: Max Bandwidth</th>
-          <th class="ebs-throughput">EBS Optimized: Throughput</th>
-          <th class="ebs-iops">EBS Optimized: Max 16K IOPS</th>
+          <th class="ebs-throughput">EBS Optimized: Max Throughput (128K)</th>
+          <th class="ebs-iops">EBS Optimized: Max IOPS (16K)</th>
           <th class="ebs-as-nvme">
             <abbr title="EBS volumes on these instances will be exposed as NVMe devices (/dev/nvmeXn1)">EBS Exposed as NVMe</abbr>
           </th>
@@ -312,7 +312,7 @@
           </td>
           <td class="ebs-throughput">
             <span sort="${inst['ebs_throughput']}">
-              ${inst['ebs_throughput']} MB/s
+              ${inst['ebs_throughput']} Mbps  <!-- Not MB/s! -->
             </span>
           </td>
           <td class="ebs-iops">

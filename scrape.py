@@ -247,34 +247,51 @@ def add_eni_info(instances):
 
 
 def add_ebs_info(instances):
+    """
+    Three tables on this page:
+
+    1: EBS optimized by default
+        Instance type | Maximum bandwidth (Mib/s) | Maximum throughput (MiB/s, 128 KiB I/O) | Maximum IOPS (16 KiB I/O)
+
+    2: Baseline performance metrics for instances with asterisk (unsupported for now, see comment below)
+        Instance type | Baseline bandwidth (Mib/s) | Baseline throughput (MiB/s, 128 KiB I/O) | Baseline IOPS (16 KiB I/O)
+
+    3: Not EBS optimized by default
+        Instance type | Maximum bandwidth (Mib/s) | Maximum throughput (MiB/s, 128 KiB I/O) | Maximum IOPS (16 KiB I/O)
+
+    TODO: Support the asterisk on type names in the first table, which means:
+        "These instance types can support maximum performance for 30 minutes at least once every 24 hours. For example,
+        c5.large instances can deliver 281 MB/s for 30 minutes at least once every 24 hours. If you have a workload
+        that requires sustained maximum performance for longer than 30 minutes, select an instance type based on the
+        following baseline performance."
+
+    """
+    def parse_ebs_table(by_type, table, ebs_optimized_by_default):
+        for row in table.xpath('tr'):
+            if row.xpath('th'):
+                continue
+            cols = row.xpath('td')
+            instance_type = sanitize_instance_type(totext(cols[0]).replace("*", ""))
+            ebs_optimized_by_default = ebs_optimized_by_default
+            ebs_max_bandwidth = locale.atof(totext(cols[1]))
+            ebs_throughput = locale.atof(totext(cols[2]))
+            ebs_iops = locale.atof(totext(cols[3]))
+            if instance_type not in by_type:
+                print(f"ERROR: Ignoring EBS info for unknown instance {instance_type}")
+                by_type[instance_type] = Instance()
+                # continue
+            by_type[instance_type].ebs_optimized_by_default = ebs_optimized_by_default
+            by_type[instance_type].ebs_throughput = ebs_throughput
+            by_type[instance_type].ebs_iops = ebs_iops
+            by_type[instance_type].ebs_max_bandwidth = ebs_max_bandwidth
+        return by_type
+
+    by_type = {i.instance_type: i for i in instances}
     ebs_url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html"
     tree = etree.parse(urllib2.urlopen(ebs_url), etree.HTMLParser())
-    table = tree.xpath('//div[@class="table-contents"]//table')[0]
-    rows = table.xpath('tr')
-    by_type = {i.instance_type: i for i in instances}
-
-    for row in rows:
-        if row.xpath('th'):
-            continue
-
-        cols = row.xpath('td')
-        # TODO: Support the asterisk, which means: "These instance types can support maximum
-        # performance for 30 minutes at least once every 24 hours. For example, c5.large
-        # instances can deliver 281 MB/s for 30 minutes at least once every 24 hours. If you
-        # have a workload that requires sustained maximum performance for longer than 30
-        # minutes, select an instance type based on the following baseline performance."
-        instance_type = sanitize_instance_type(totext(cols[0]).replace("*", ""))
-        ebs_optimized_by_default = totext(cols[1]) == 'Yes'
-        ebs_max_bandwidth = locale.atof(totext(cols[2]))
-        ebs_throughput = locale.atof(totext(cols[3]))
-        ebs_iops = locale.atof(totext(cols[4]))
-        if instance_type not in by_type:
-            print("Unknown instance type: {}".format(instance_type))
-            continue
-        by_type[instance_type].ebs_optimized_by_default = ebs_optimized_by_default
-        by_type[instance_type].ebs_throughput = ebs_throughput
-        by_type[instance_type].ebs_iops = ebs_iops
-        by_type[instance_type].ebs_max_bandwidth = ebs_max_bandwidth
+    tables = tree.xpath('//div[@class="table-contents"]//table')
+    parse_ebs_table(by_type, tables[0], True)
+    parse_ebs_table(by_type, tables[2], False)
 
 
 def check_ebs_as_nvme(instances):
@@ -496,6 +513,7 @@ def add_emr_info(instances):
                     inst.pricing[region]["emr"] = pricing[
                         inst.instance_type][region]
 
+
 def add_gpu_info(instances):
     """
     Add info about GPUs from the manually-curated dictionaries below. They are
@@ -595,6 +613,7 @@ def add_gpu_info(instances):
         inst.GPU_model = inst_gpu_data['gpu_model']
         inst.compute_capability = inst_gpu_data['compute_capability']
         inst.GPU_memory = inst_gpu_data['gpu_memory']
+
 
 def scrape(data_file):
     """Scrape AWS to get instance data"""
