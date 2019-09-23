@@ -34,14 +34,17 @@ def translate_reserved_terms(term_attributes):
 # The pricing API requires human readable names for some reason
 def get_region_descriptions():
     result = dict()
+    # Source: https://github.com/boto/botocore/blob/develop/botocore/data/endpoints.json
     endpoint_file = resource_filename('botocore', 'data/endpoints.json')
     with open(endpoint_file, 'r') as f:
         endpoints = json.load(f)
         for partition in endpoints['partitions']:
             for region in partition['regions']:
                 result[partition['regions'][region]['description']] = region
-    # The Osaka region is special and is not on the list of endpoints in boto3
+
+    # The Osaka region is invite only and not in boto's list: https://github.com/boto/botocore/issues/1423
     result['Asia Pacific (Osaka-Local)'] = 'ap-northeast-3'
+
     return result
 
 
@@ -72,7 +75,7 @@ def get_instances():
             instance_type = product_attributes.get('instanceType')
 
             if instance_type in ['u-6tb1', 'u-9tb1', 'u-12tb1']:
-                # API return the name without the .metal part
+                # API returns the name without the .metal suffix
                 instance_type = instance_type + '.metal'
 
             if instance_type in instances:
@@ -84,6 +87,7 @@ def get_instances():
             if new_inst is not None:
                 instances[instance_type] = new_inst
 
+    print(f"Found data for instance types: {', '.join(sorted(instances.keys()))}")
     return list(instances.values())
 
 
@@ -103,12 +107,12 @@ def add_pricing(imap):
             offer = json.loads(offer_string)
             product = offer.get('product')
             product_attributes = product.get('attributes')
-
+            instance_type = product_attributes.get('instanceType')
             location = product_attributes.get('location')
 
             # There may be a slight delay in updating botocore with new regional endpoints, skip and inform
             if location not in descriptions:
-                print('ERROR: Region "{}" not found, skipping'.format(location))
+                print(f"WARNING: Ignoring pricing for instance {instance_type} in {location}. Location is unknown.")
                 continue
 
             region = descriptions[location]
@@ -118,7 +122,10 @@ def add_pricing(imap):
             preinstalled_software = product_attributes.get('preInstalledSw')
             platform = translate_platform_name(operating_system, preinstalled_software)
 
-            instance_type = product_attributes.get('instanceType')
+            if instance_type not in imap:
+                print(f"WARNING: Ignoring pricing for unrecognized instance type {instance_type} in {region}")
+                continue
+
             # If the instance type is not in us-east-1 imap[instance_type] could fail
             try:
                 inst = imap[instance_type]
@@ -129,9 +136,9 @@ def add_pricing(imap):
                 reserved = get_reserved_pricing(terms)
                 if reserved:
                     inst.pricing[region][platform]['reserved'] = reserved
-            except:
+            except Exception as e:
                 # print more details about the instance for debugging
-                print(json.dumps(product_attributes))
+                print(f"ERROR: Exception adding pricing for {instance_type}: {e}")
 
 
 def format_price(price):
@@ -170,6 +177,7 @@ def get_reserved_pricing(terms):
         price = float(price_per_hour) + (float(upfront_price)/hours_in_term)
         pricing[local_term] = format_price(price)
     return pricing
+
 
 def parse_instance(instance_type, product_attributes):
     i = scrape.Instance()
