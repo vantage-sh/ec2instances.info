@@ -153,6 +153,11 @@
                     "ondemand": 0.6
                 }
             },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 0.822
+                }
+            },
             "ca-central-1": {
                 "MariaDB": {
                     "ondemand": 0.296
@@ -295,6 +300,84 @@
             }
         },
         "pretty_name": "T3 Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (Ohio)",
+        "locationType": "AWS Region",
+        "instanceType": "db.x1e.8xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Memory optimized",
+        "vcpu": "32",
+        "physicalProcessor": "Intel Xeon E7-8880 v3",
+        "memory": "976",
+        "storage": "1 x 960 SSD",
+        "networkPerformance": "Up to 10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "5",
+        "databaseEngine": "Oracle",
+        "databaseEdition": "Enterprise",
+        "licenseModel": "Bring your own license",
+        "deploymentOption": "Multi-AZ",
+        "usagetype": "USE2-Multi-AZUsage:db.x1e.8xl",
+        "operation": "CreateDBInstance:0005",
+        "instanceTypeFamily": "X1e",
+        "normalizationSizeFactor": "128",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-2",
+        "network_performance": "Up to 10 Gigabit",
+        "family": "Memory optimized",
+        "instance_type": "db.x1e.8xlarge",
+        "database_engine": "Oracle",
+        "arch": "64-bit",
+        "pricing": {
+            "us-west-2": {
+                "Oracle": {
+                    "ondemand": 11.209
+                }
+            },
+            "ap-southeast-1": {
+                "Oracle": {
+                    "ondemand": 16.249
+                }
+            },
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 11.209
+                }
+            },
+            "eu-west-1": {
+                "Oracle": {
+                    "ondemand": 13.44
+                }
+            },
+            "ap-northeast-2": {
+                "Oracle": {
+                    "ondemand": 16.249
+                }
+            },
+            "eu-central-1": {
+                "Oracle": {
+                    "ondemand": 15.6845
+                }
+            },
+            "ap-northeast-1": {
+                "Oracle": {
+                    "ondemand": 15.409
+                }
+            },
+            "ap-southeast-2": {
+                "Oracle": {
+                    "ondemand": 15.409
+                }
+            },
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 11.209
+                }
+            }
+        },
+        "pretty_name": "X1E Eight Extra Large"
     },
     {
         "servicecode": "AmazonRDS",
@@ -1894,6 +1977,11 @@
                     "ondemand": 1.928
                 }
             },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 1.996
+                }
+            },
             "ap-southeast-1": {
                 "SQL Server": {
                     "ondemand": 9.593
@@ -2361,6 +2449,11 @@
                     "ondemand": 0.026
                 },
                 "MariaDB": {
+                    "ondemand": 0.026
+                }
+            },
+            "ap-northeast-3": {
+                "Oracle": {
                     "ondemand": 0.026
                 }
             }
@@ -4023,6 +4116,11 @@
                 "MySQL": {
                     "ondemand": 9.84
                 }
+            },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 11.976
+                }
             }
         },
         "pretty_name": "M5 24xlarge"
@@ -5356,6 +5454,11 @@
                 },
                 "MariaDB": {
                     "ondemand": 0.608
+                }
+            },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 0.836
                 }
             },
             "us-west-2": {
@@ -7998,6 +8101,11 @@
                     "ondemand": 0.236
                 }
             },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 0.2495
+                }
+            },
             "ap-south-1": {
                 "MySQL": {
                     "ondemand": 0.241
@@ -9073,6 +9181,11 @@
                 "MariaDB": {
                     "ondemand": 0.82
                 }
+            },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 0.998
+                }
             }
         },
         "pretty_name": "M5 Double Extra Large"
@@ -9860,6 +9973,400 @@
             }
         },
         "pretty_name": "R4 Memory Optimized Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "Asia Pacific (Osaka-Local)",
+        "locationType": "AWS Region",
+        "instanceType": "db.t3.medium",
+        "currentGeneration": "Yes",
+        "instanceFamily": "General purpose",
+        "vcpu": "2",
+        "physicalProcessor": "Intel Skylake E5 2686 v5 (2.5 GHz)",
+        "memory": "4",
+        "storage": "EBS Only",
+        "networkPerformance": "Low to Moderate",
+        "processorArchitecture": "64-bit",
+        "engineCode": "19",
+        "databaseEngine": "Oracle",
+        "databaseEdition": "Standard Two",
+        "licenseModel": "Bring your own license",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "APN3-InstanceUsage:db.t3.medium",
+        "operation": "CreateDBInstance:0019",
+        "instanceTypeFamily": "T3",
+        "normalizationSizeFactor": "2",
+        "servicename": "Amazon Relational Database Service",
+        "region": "ap-northeast-3",
+        "network_performance": "Low to Moderate",
+        "family": "General purpose",
+        "instance_type": "db.t3.medium",
+        "database_engine": "Oracle",
+        "arch": "64-bit",
+        "pricing": {
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 0.105
+                }
+            },
+            "eu-west-1": {
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.088
+                },
+                "Oracle": {
+                    "ondemand": 0.072
+                },
+                "MariaDB": {
+                    "ondemand": 0.072
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.078
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.088
+                },
+                "MySQL": {
+                    "ondemand": 0.072
+                }
+            },
+            "ap-southeast-2": {
+                "Oracle": {
+                    "ondemand": 0.104
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.112
+                },
+                "MariaDB": {
+                    "ondemand": 0.104
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.125
+                },
+                "MySQL": {
+                    "ondemand": 0.104
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.125
+                }
+            },
+            "ap-south-1": {
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.118
+                },
+                "Oracle": {
+                    "ondemand": 0.098
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.106
+                },
+                "MariaDB": {
+                    "ondemand": 0.098
+                },
+                "MySQL": {
+                    "ondemand": 0.098
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.118
+                }
+            },
+            "us-gov-west-1": {
+                "Oracle": {
+                    "ondemand": 0.162
+                }
+            },
+            "ca-central-1": {
+                "Oracle": {
+                    "ondemand": 0.154
+                },
+                "MariaDB": {
+                    "ondemand": 0.074
+                },
+                "MySQL": {
+                    "ondemand": 0.074
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.09
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.08
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.09
+                }
+            },
+            "eu-north-1": {
+                "Oracle": {
+                    "ondemand": 0.068
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.084
+                },
+                "MySQL": {
+                    "ondemand": 0.068
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.084
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.074
+                },
+                "MariaDB": {
+                    "ondemand": 0.068
+                }
+            },
+            "eu-central-1": {
+                "Oracle": {
+                    "ondemand": 0.08
+                },
+                "MariaDB": {
+                    "ondemand": 0.08
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.096
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.084
+                },
+                "MySQL": {
+                    "ondemand": 0.08
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.096
+                }
+            },
+            "eu-west-3": {
+                "MariaDB": {
+                    "ondemand": 0.076
+                },
+                "Oracle": {
+                    "ondemand": 0.163
+                },
+                "MySQL": {
+                    "ondemand": 0.076
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.092
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.082
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.092
+                }
+            },
+            "sa-east-1": {
+                "Oracle": {
+                    "ondemand": 0.2
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.151
+                },
+                "MariaDB": {
+                    "ondemand": 0.14
+                },
+                "MySQL": {
+                    "ondemand": 0.14
+                }
+            },
+            "ap-southeast-1": {
+                "Oracle": {
+                    "ondemand": 0.176
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.112
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.126
+                },
+                "MySQL": {
+                    "ondemand": 0.104
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.126
+                },
+                "MariaDB": {
+                    "ondemand": 0.104
+                }
+            },
+            "ap-northeast-2": {
+                "Oracle": {
+                    "ondemand": 0.176
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.125
+                },
+                "MariaDB": {
+                    "ondemand": 0.104
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.125
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.112
+                },
+                "MySQL": {
+                    "ondemand": 0.104
+                }
+            },
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 0.068
+                },
+                "MySQL": {
+                    "ondemand": 0.068
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.082
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.072
+                },
+                "MariaDB": {
+                    "ondemand": 0.068
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.082
+                }
+            },
+            "ap-east-1": {
+                "Oracle": {
+                    "ondemand": 0.1936
+                },
+                "MariaDB": {
+                    "ondemand": 0.1144
+                },
+                "MySQL": {
+                    "ondemand": 0.1144
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.1232
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.1386
+                }
+            },
+            "us-west-2": {
+                "Oracle": {
+                    "ondemand": 0.14
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.082
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.082
+                },
+                "MySQL": {
+                    "ondemand": 0.068
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.072
+                },
+                "MariaDB": {
+                    "ondemand": 0.068
+                }
+            },
+            "us-east-2": {
+                "MySQL": {
+                    "ondemand": 0.068
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.072
+                },
+                "MariaDB": {
+                    "ondemand": 0.068
+                },
+                "Oracle": {
+                    "ondemand": 0.14
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.082
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.082
+                }
+            },
+            "eu-west-2": {
+                "Oracle": {
+                    "ondemand": 0.162
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.082
+                },
+                "MariaDB": {
+                    "ondemand": 0.076
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.093
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.093
+                },
+                "MySQL": {
+                    "ondemand": 0.076
+                }
+            },
+            "me-south-1": {
+                "MySQL": {
+                    "ondemand": 0.079
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.086
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.097
+                },
+                "Oracle": {
+                    "ondemand": 0.079
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.097
+                },
+                "MariaDB": {
+                    "ondemand": 0.079
+                }
+            },
+            "us-west-1": {
+                "Oracle": {
+                    "ondemand": 0.172
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.106
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.106
+                },
+                "MySQL": {
+                    "ondemand": 0.088
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.095
+                },
+                "MariaDB": {
+                    "ondemand": 0.088
+                }
+            },
+            "ap-northeast-1": {
+                "Oracle": {
+                    "ondemand": 0.176
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.112
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.125
+                },
+                "MySQL": {
+                    "ondemand": 0.104
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.125
+                },
+                "MariaDB": {
+                    "ondemand": 0.104
+                }
+            }
+        },
+        "pretty_name": "T3 Medium"
     },
     {
         "servicecode": "AmazonRDS",
@@ -11479,6 +11986,11 @@
                     "ondemand": 0.037
                 }
             },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 0.103
+                }
+            },
             "us-west-2": {
                 "Oracle": {
                     "ondemand": 0.034
@@ -11818,6 +12330,11 @@
                 },
                 "MariaDB": {
                     "ondemand": 5.64
+                }
+            },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 5.988
                 }
             },
             "ap-southeast-2": {
@@ -12206,6 +12723,11 @@
                     "ondemand": 0.41
                 }
             },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 0.499
+                }
+            },
             "us-east-2": {
                 "SQL Server": {
                     "ondemand": 1.224
@@ -12245,398 +12767,81 @@
     },
     {
         "servicecode": "AmazonRDS",
-        "location": "EU (Ireland)",
+        "location": "Asia Pacific (Seoul)",
         "locationType": "AWS Region",
-        "instanceType": "db.t3.medium",
+        "instanceType": "db.x1e.32xlarge",
         "currentGeneration": "Yes",
-        "instanceFamily": "General purpose",
-        "vcpu": "2",
-        "physicalProcessor": "Intel Skylake E5 2686 v5 (2.5 GHz)",
-        "memory": "4",
-        "storage": "EBS Only",
-        "networkPerformance": "Low to Moderate",
+        "instanceFamily": "Memory optimized",
+        "vcpu": "128",
+        "physicalProcessor": "Intel Xeon E7-8880 v3",
+        "memory": "3904",
+        "storage": "2 x 1920 SSD",
+        "networkPerformance": "25 Gigabit",
         "processorArchitecture": "64-bit",
-        "engineCode": "21",
-        "databaseEngine": "Aurora PostgreSQL",
-        "licenseModel": "No license required",
-        "deploymentOption": "Single-AZ",
-        "usagetype": "EU-InstanceUsage:db.t3.medium",
-        "operation": "CreateDBInstance:0021",
-        "instanceTypeFamily": "T3",
-        "normalizationSizeFactor": "2",
+        "engineCode": "5",
+        "databaseEngine": "Oracle",
+        "databaseEdition": "Enterprise",
+        "licenseModel": "Bring your own license",
+        "deploymentOption": "Multi-AZ",
+        "usagetype": "APN2-Multi-AZUsage:db.x1e.32xl",
+        "operation": "CreateDBInstance:0005",
+        "instanceTypeFamily": "X1e",
+        "normalizationSizeFactor": "512",
         "servicename": "Amazon Relational Database Service",
-        "region": "eu-west-1",
-        "network_performance": "Low to Moderate",
-        "family": "General purpose",
-        "instance_type": "db.t3.medium",
-        "database_engine": "Aurora PostgreSQL",
+        "region": "ap-northeast-2",
+        "network_performance": "25 Gigabit",
+        "family": "Memory optimized",
+        "instance_type": "db.x1e.32xlarge",
+        "database_engine": "Oracle",
         "arch": "64-bit",
         "pricing": {
-            "eu-west-1": {
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.088,
-                    "reserved": {
-                        "yrTerm3.partialUpfront": 0.041884322678843226,
-                        "yrTerm1.partialUpfront": 0.05939269406392694,
-                        "yrTerm3.allUpfront": 0.039383561643835614,
-                        "yrTerm1.allUpfront": 0.058219178082191785,
-                        "yrTerm1.noUpfront": 0.069
-                    }
-                },
+            "ap-southeast-1": {
                 "Oracle": {
-                    "ondemand": 0.072
-                },
-                "MariaDB": {
-                    "ondemand": 0.072
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.078
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.088
-                },
-                "MySQL": {
-                    "ondemand": 0.072
+                    "ondemand": 64.9958
                 }
             },
             "ap-southeast-2": {
                 "Oracle": {
-                    "ondemand": 0.104
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.112
-                },
-                "MariaDB": {
-                    "ondemand": 0.104
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.125
-                },
-                "MySQL": {
-                    "ondemand": 0.104
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.125
-                }
-            },
-            "ap-south-1": {
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.118
-                },
-                "Oracle": {
-                    "ondemand": 0.098
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.106
-                },
-                "MariaDB": {
-                    "ondemand": 0.098
-                },
-                "MySQL": {
-                    "ondemand": 0.098
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.118
-                }
-            },
-            "us-gov-west-1": {
-                "Oracle": {
-                    "ondemand": 0.162
-                }
-            },
-            "ca-central-1": {
-                "Oracle": {
-                    "ondemand": 0.154
-                },
-                "MariaDB": {
-                    "ondemand": 0.074
-                },
-                "MySQL": {
-                    "ondemand": 0.074
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.09
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.08
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.09
-                }
-            },
-            "eu-north-1": {
-                "Oracle": {
-                    "ondemand": 0.068
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.084
-                },
-                "MySQL": {
-                    "ondemand": 0.068
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.084
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.074
-                },
-                "MariaDB": {
-                    "ondemand": 0.068
-                }
-            },
-            "eu-central-1": {
-                "Oracle": {
-                    "ondemand": 0.08
-                },
-                "MariaDB": {
-                    "ondemand": 0.08
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.096
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.084
-                },
-                "MySQL": {
-                    "ondemand": 0.08
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.096
-                }
-            },
-            "eu-west-3": {
-                "MariaDB": {
-                    "ondemand": 0.076
-                },
-                "Oracle": {
-                    "ondemand": 0.163
-                },
-                "MySQL": {
-                    "ondemand": 0.076
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.092
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.082
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.092
-                }
-            },
-            "sa-east-1": {
-                "Oracle": {
-                    "ondemand": 0.2
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.151
-                },
-                "MariaDB": {
-                    "ondemand": 0.14
-                },
-                "MySQL": {
-                    "ondemand": 0.14
-                }
-            },
-            "ap-southeast-1": {
-                "Oracle": {
-                    "ondemand": 0.176
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.112
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.126
-                },
-                "MySQL": {
-                    "ondemand": 0.104
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.126
-                },
-                "MariaDB": {
-                    "ondemand": 0.104
-                }
-            },
-            "ap-northeast-2": {
-                "Oracle": {
-                    "ondemand": 0.176
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.125
-                },
-                "MariaDB": {
-                    "ondemand": 0.104
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.125
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.112
-                },
-                "MySQL": {
-                    "ondemand": 0.104
+                    "ondemand": 61.6358
                 }
             },
             "us-east-1": {
                 "Oracle": {
-                    "ondemand": 0.068
-                },
-                "MySQL": {
-                    "ondemand": 0.068
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.082
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.072
-                },
-                "MariaDB": {
-                    "ondemand": 0.068
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.082
-                }
-            },
-            "ap-east-1": {
-                "Oracle": {
-                    "ondemand": 0.1936
-                },
-                "MariaDB": {
-                    "ondemand": 0.1144
-                },
-                "MySQL": {
-                    "ondemand": 0.1144
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.1232
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.1386
-                }
-            },
-            "us-west-2": {
-                "Oracle": {
-                    "ondemand": 0.14
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.082
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.082
-                },
-                "MySQL": {
-                    "ondemand": 0.068
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.072
-                },
-                "MariaDB": {
-                    "ondemand": 0.068
-                }
-            },
-            "us-east-2": {
-                "MySQL": {
-                    "ondemand": 0.068
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.072
-                },
-                "MariaDB": {
-                    "ondemand": 0.068
-                },
-                "Oracle": {
-                    "ondemand": 0.14
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.082
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.082
-                }
-            },
-            "eu-west-2": {
-                "Oracle": {
-                    "ondemand": 0.162
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.082
-                },
-                "MariaDB": {
-                    "ondemand": 0.076
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.093
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.093
-                },
-                "MySQL": {
-                    "ondemand": 0.076
-                }
-            },
-            "me-south-1": {
-                "MySQL": {
-                    "ondemand": 0.079
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.086
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.097
-                },
-                "Oracle": {
-                    "ondemand": 0.079
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.097
-                },
-                "MariaDB": {
-                    "ondemand": 0.079
-                }
-            },
-            "us-west-1": {
-                "Oracle": {
-                    "ondemand": 0.172
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.106
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.106
-                },
-                "MySQL": {
-                    "ondemand": 0.088
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.095
-                },
-                "MariaDB": {
-                    "ondemand": 0.088
+                    "ondemand": 44.8358
                 }
             },
             "ap-northeast-1": {
                 "Oracle": {
-                    "ondemand": 0.176
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.112
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.125
-                },
-                "MySQL": {
-                    "ondemand": 0.104
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.125
-                },
-                "MariaDB": {
-                    "ondemand": 0.104
+                    "ondemand": 61.6358
+                }
+            },
+            "eu-central-1": {
+                "Oracle": {
+                    "ondemand": 62.7379
+                }
+            },
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 44.8358
+                }
+            },
+            "ap-northeast-2": {
+                "Oracle": {
+                    "ondemand": 64.9958
+                }
+            },
+            "eu-west-1": {
+                "Oracle": {
+                    "ondemand": 53.76
+                }
+            },
+            "us-west-2": {
+                "Oracle": {
+                    "ondemand": 44.8358
                 }
             }
         },
-        "pretty_name": "T3 Medium"
+        "pretty_name": "X1E 32xlarge"
     },
     {
         "servicecode": "AmazonRDS",
@@ -12683,14 +12888,34 @@
                     "ondemand": 1.4011
                 }
             },
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 1.4011
+                }
+            },
             "ap-northeast-1": {
                 "Oracle": {
                     "ondemand": 1.9261
                 }
             },
+            "eu-central-1": {
+                "Oracle": {
+                    "ondemand": 1.9606
+                }
+            },
             "ap-southeast-2": {
                 "Oracle": {
                     "ondemand": 1.9261
+                }
+            },
+            "ap-northeast-2": {
+                "Oracle": {
+                    "ondemand": 2.0311
+                }
+            },
+            "ap-southeast-1": {
+                "Oracle": {
+                    "ondemand": 2.0311
                 }
             }
         },
@@ -15804,6 +16029,11 @@
                     "ondemand": 0.164
                 }
             },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 0.209
+                }
+            },
             "us-east-2": {
                 "Oracle": {
                     "ondemand": 0.28
@@ -15878,6 +16108,11 @@
             "ap-east-1": {
                 "Oracle": {
                     "ondemand": 8.272
+                }
+            },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 7.984
                 }
             },
             "eu-west-2": {
@@ -15986,6 +16221,11 @@
             "ap-south-1": {
                 "Oracle": {
                     "ondemand": 3.856
+                }
+            },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 3.992
                 }
             },
             "us-east-2": {
@@ -16762,6 +17002,84 @@
     },
     {
         "servicecode": "AmazonRDS",
+        "location": "Asia Pacific (Singapore)",
+        "locationType": "AWS Region",
+        "instanceType": "db.x1e.2xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Memory optimized",
+        "vcpu": "8",
+        "physicalProcessor": "Intel Xeon E7-8880 v3",
+        "memory": "244",
+        "storage": "1 x 240 SSD",
+        "networkPerformance": "Up to 10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "19",
+        "databaseEngine": "Oracle",
+        "databaseEdition": "Standard Two",
+        "licenseModel": "Bring your own license",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "APS1-InstanceUsage:db.x1e.2xl",
+        "operation": "CreateDBInstance:0019",
+        "instanceTypeFamily": "X1e",
+        "normalizationSizeFactor": "16",
+        "servicename": "Amazon Relational Database Service",
+        "region": "ap-southeast-1",
+        "network_performance": "Up to 10 Gigabit",
+        "family": "Memory optimized",
+        "instance_type": "db.x1e.2xlarge",
+        "database_engine": "Oracle",
+        "arch": "64-bit",
+        "pricing": {
+            "ap-southeast-1": {
+                "Oracle": {
+                    "ondemand": 4.0622
+                }
+            },
+            "us-west-2": {
+                "Oracle": {
+                    "ondemand": 2.8022
+                }
+            },
+            "eu-central-1": {
+                "Oracle": {
+                    "ondemand": 3.9211
+                }
+            },
+            "ap-northeast-1": {
+                "Oracle": {
+                    "ondemand": 3.8522
+                }
+            },
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 2.8022
+                }
+            },
+            "ap-northeast-2": {
+                "Oracle": {
+                    "ondemand": 4.0622
+                }
+            },
+            "ap-southeast-2": {
+                "Oracle": {
+                    "ondemand": 3.8522
+                }
+            },
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 2.8022
+                }
+            },
+            "eu-west-1": {
+                "Oracle": {
+                    "ondemand": 3.36
+                }
+            }
+        },
+        "pretty_name": "X1E Double Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
         "location": "EU (Ireland)",
         "locationType": "AWS Region",
         "instanceType": "db.x1e.16xlarge",
@@ -16790,6 +17108,21 @@
         "database_engine": "Oracle",
         "arch": "64-bit",
         "pricing": {
+            "ap-southeast-1": {
+                "Oracle": {
+                    "ondemand": 32.4979
+                }
+            },
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 22.4179
+                }
+            },
+            "eu-central-1": {
+                "Oracle": {
+                    "ondemand": 31.369
+                }
+            },
             "ap-northeast-1": {
                 "Oracle": {
                     "ondemand": 30.8179
@@ -16814,9 +17147,92 @@
                 "Oracle": {
                     "ondemand": 22.4179
                 }
+            },
+            "ap-northeast-2": {
+                "Oracle": {
+                    "ondemand": 32.4979
+                }
             }
         },
         "pretty_name": "X1E 16xlarge"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "EU (Frankfurt)",
+        "locationType": "AWS Region",
+        "instanceType": "db.x1e.4xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Memory optimized",
+        "vcpu": "16",
+        "physicalProcessor": "Intel Xeon E7-8880 v3",
+        "memory": "488",
+        "storage": "1 x 480 SSD",
+        "networkPerformance": "Up to 10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "3",
+        "databaseEngine": "Oracle",
+        "databaseEdition": "Standard One",
+        "licenseModel": "Bring your own license",
+        "deploymentOption": "Multi-AZ",
+        "usagetype": "EUC1-Multi-AZUsage:db.x1e.4xl",
+        "operation": "CreateDBInstance:0003",
+        "instanceTypeFamily": "X1e",
+        "normalizationSizeFactor": "64",
+        "servicename": "Amazon Relational Database Service",
+        "region": "eu-central-1",
+        "network_performance": "Up to 10 Gigabit",
+        "family": "Memory optimized",
+        "instance_type": "db.x1e.4xlarge",
+        "database_engine": "Oracle",
+        "arch": "64-bit",
+        "pricing": {
+            "ap-southeast-2": {
+                "Oracle": {
+                    "ondemand": 7.7045
+                }
+            },
+            "us-west-2": {
+                "Oracle": {
+                    "ondemand": 5.6045
+                }
+            },
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 5.6045
+                }
+            },
+            "ap-northeast-1": {
+                "Oracle": {
+                    "ondemand": 7.7045
+                }
+            },
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 5.6045
+                }
+            },
+            "eu-west-1": {
+                "Oracle": {
+                    "ondemand": 6.72
+                }
+            },
+            "eu-central-1": {
+                "Oracle": {
+                    "ondemand": 7.8422
+                }
+            },
+            "ap-northeast-2": {
+                "Oracle": {
+                    "ondemand": 8.1245
+                }
+            },
+            "ap-southeast-1": {
+                "Oracle": {
+                    "ondemand": 8.1245
+                }
+            }
+        },
+        "pretty_name": "X1E Quadruple Extra Large"
     },
     {
         "servicecode": "AmazonRDS",
@@ -16915,9 +17331,19 @@
                     "ondemand": 14.1184
                 }
             },
+            "us-west-1": {
+                "Oracle": {
+                    "ondemand": 14.5656
+                }
+            },
             "us-east-1": {
                 "Oracle": {
                     "ondemand": 11.2
+                }
+            },
+            "ap-east-1": {
+                "Oracle": {
+                    "ondemand": 17.8718
                 }
             },
             "ap-south-1": {
@@ -17048,71 +17474,6 @@
     },
     {
         "servicecode": "AmazonRDS",
-        "location": "US West (Oregon)",
-        "locationType": "AWS Region",
-        "instanceType": "db.x1e.8xlarge",
-        "currentGeneration": "Yes",
-        "instanceFamily": "Memory optimized",
-        "vcpu": "32",
-        "physicalProcessor": "Intel Xeon E7-8880 v3",
-        "memory": "976",
-        "storage": "1 x 960 SSD",
-        "networkPerformance": "Up to 10 Gigabit",
-        "processorArchitecture": "64-bit",
-        "engineCode": "4",
-        "databaseEngine": "Oracle",
-        "databaseEdition": "Standard",
-        "licenseModel": "Bring your own license",
-        "deploymentOption": "Single-AZ",
-        "usagetype": "USW2-InstanceUsage:db.x1e.8xl",
-        "operation": "CreateDBInstance:0004",
-        "instanceTypeFamily": "X1e",
-        "normalizationSizeFactor": "64",
-        "servicename": "Amazon Relational Database Service",
-        "region": "us-west-2",
-        "network_performance": "Up to 10 Gigabit",
-        "family": "Memory optimized",
-        "instance_type": "db.x1e.8xlarge",
-        "database_engine": "Oracle",
-        "arch": "64-bit",
-        "pricing": {
-            "us-west-2": {
-                "Oracle": {
-                    "ondemand": 11.209,
-                    "reserved": {
-                        "yrTerm3.partialUpfront": 3.363565296803653,
-                        "yrTerm1.partialUpfront": 6.611083105022831,
-                        "yrTerm3.allUpfront": 3.136681887366819,
-                        "yrTerm1.allUpfront": 6.502283105022831,
-                        "yrTerm1.noUpfront": 6.9504
-                    }
-                }
-            },
-            "us-east-1": {
-                "Oracle": {
-                    "ondemand": 11.209
-                }
-            },
-            "eu-west-1": {
-                "Oracle": {
-                    "ondemand": 13.44
-                }
-            },
-            "ap-northeast-1": {
-                "Oracle": {
-                    "ondemand": 15.409
-                }
-            },
-            "ap-southeast-2": {
-                "Oracle": {
-                    "ondemand": 15.409
-                }
-            }
-        },
-        "pretty_name": "X1E Eight Extra Large"
-    },
-    {
-        "servicecode": "AmazonRDS",
         "location": "EU (Paris)",
         "locationType": "AWS Region",
         "instanceType": "db.x1.32xlarge",
@@ -17201,6 +17562,16 @@
                     "ondemand": 22.4
                 }
             },
+            "ap-east-1": {
+                "Oracle": {
+                    "ondemand": 35.7437
+                }
+            },
+            "us-west-1": {
+                "Oracle": {
+                    "ondemand": 29.1312
+                }
+            },
             "ap-northeast-2": {
                 "Oracle": {
                     "ondemand": 32.512
@@ -17218,64 +17589,6 @@
             }
         },
         "pretty_name": "X1 32xlarge"
-    },
-    {
-        "servicecode": "AmazonRDS",
-        "location": "US East (N. Virginia)",
-        "locationType": "AWS Region",
-        "instanceType": "db.x1e.2xlarge",
-        "currentGeneration": "Yes",
-        "instanceFamily": "Memory optimized",
-        "vcpu": "8",
-        "physicalProcessor": "Intel Xeon E7-8880 v3",
-        "memory": "244",
-        "storage": "1 x 240 SSD",
-        "networkPerformance": "Up to 10 Gigabit",
-        "processorArchitecture": "64-bit",
-        "engineCode": "19",
-        "databaseEngine": "Oracle",
-        "databaseEdition": "Standard Two",
-        "licenseModel": "Bring your own license",
-        "deploymentOption": "Multi-AZ",
-        "usagetype": "Multi-AZUsage:db.x1e.2xl",
-        "operation": "CreateDBInstance:0019",
-        "instanceTypeFamily": "X1e",
-        "normalizationSizeFactor": "32",
-        "servicename": "Amazon Relational Database Service",
-        "region": "us-east-1",
-        "network_performance": "Up to 10 Gigabit",
-        "family": "Memory optimized",
-        "instance_type": "db.x1e.2xlarge",
-        "database_engine": "Oracle",
-        "arch": "64-bit",
-        "pricing": {
-            "us-west-2": {
-                "Oracle": {
-                    "ondemand": 2.8022
-                }
-            },
-            "ap-northeast-1": {
-                "Oracle": {
-                    "ondemand": 3.8522
-                }
-            },
-            "us-east-1": {
-                "Oracle": {
-                    "ondemand": 2.8022
-                }
-            },
-            "ap-southeast-2": {
-                "Oracle": {
-                    "ondemand": 3.8522
-                }
-            },
-            "eu-west-1": {
-                "Oracle": {
-                    "ondemand": 3.36
-                }
-            }
-        },
-        "pretty_name": "X1E Double Extra Large"
     },
     {
         "servicecode": "AmazonRDS",
@@ -17408,71 +17721,6 @@
             }
         },
         "pretty_name": "M1 General Purpose Large"
-    },
-    {
-        "servicecode": "AmazonRDS",
-        "location": "Asia Pacific (Sydney)",
-        "locationType": "AWS Region",
-        "instanceType": "db.x1e.4xlarge",
-        "currentGeneration": "Yes",
-        "instanceFamily": "Memory optimized",
-        "vcpu": "16",
-        "physicalProcessor": "Intel Xeon E7-8880 v3",
-        "memory": "488",
-        "storage": "1 x 480 SSD",
-        "networkPerformance": "Up to 10 Gigabit",
-        "processorArchitecture": "64-bit",
-        "engineCode": "5",
-        "databaseEngine": "Oracle",
-        "databaseEdition": "Enterprise",
-        "licenseModel": "Bring your own license",
-        "deploymentOption": "Single-AZ",
-        "usagetype": "APS2-InstanceUsage:db.x1e.4xl",
-        "operation": "CreateDBInstance:0005",
-        "instanceTypeFamily": "X1e",
-        "normalizationSizeFactor": "32",
-        "servicename": "Amazon Relational Database Service",
-        "region": "ap-southeast-2",
-        "network_performance": "Up to 10 Gigabit",
-        "family": "Memory optimized",
-        "instance_type": "db.x1e.4xlarge",
-        "database_engine": "Oracle",
-        "arch": "64-bit",
-        "pricing": {
-            "ap-southeast-2": {
-                "Oracle": {
-                    "ondemand": 7.7045,
-                    "reserved": {
-                        "yrTerm3.partialUpfront": 2.3107555555555557,
-                        "yrTerm1.partialUpfront": 4.547346118721461,
-                        "yrTerm3.allUpfront": 2.156468797564688,
-                        "yrTerm1.allUpfront": 4.467579908675799,
-                        "yrTerm1.noUpfront": 4.7776
-                    }
-                }
-            },
-            "us-west-2": {
-                "Oracle": {
-                    "ondemand": 5.6045
-                }
-            },
-            "ap-northeast-1": {
-                "Oracle": {
-                    "ondemand": 7.7045
-                }
-            },
-            "us-east-1": {
-                "Oracle": {
-                    "ondemand": 5.6045
-                }
-            },
-            "eu-west-1": {
-                "Oracle": {
-                    "ondemand": 6.72
-                }
-            }
-        },
-        "pretty_name": "X1E Quadruple Extra Large"
     },
     {
         "servicecode": "AmazonRDS",
@@ -17626,63 +17874,5 @@
             }
         },
         "pretty_name": "Z1D 6xlarge"
-    },
-    {
-        "servicecode": "AmazonRDS",
-        "location": "EU (Ireland)",
-        "locationType": "AWS Region",
-        "instanceType": "db.x1e.32xlarge",
-        "currentGeneration": "Yes",
-        "instanceFamily": "Memory optimized",
-        "vcpu": "128",
-        "physicalProcessor": "Intel Xeon E7-8880 v3",
-        "memory": "3904",
-        "storage": "2 x 1920 SSD",
-        "networkPerformance": "25 Gigabit",
-        "processorArchitecture": "64-bit",
-        "engineCode": "5",
-        "databaseEngine": "Oracle",
-        "databaseEdition": "Enterprise",
-        "licenseModel": "Bring your own license",
-        "deploymentOption": "Multi-AZ",
-        "usagetype": "EU-Multi-AZUsage:db.x1e.32xl",
-        "operation": "CreateDBInstance:0005",
-        "instanceTypeFamily": "X1e",
-        "normalizationSizeFactor": "512",
-        "servicename": "Amazon Relational Database Service",
-        "region": "eu-west-1",
-        "network_performance": "25 Gigabit",
-        "family": "Memory optimized",
-        "instance_type": "db.x1e.32xlarge",
-        "database_engine": "Oracle",
-        "arch": "64-bit",
-        "pricing": {
-            "ap-southeast-2": {
-                "Oracle": {
-                    "ondemand": 61.6358
-                }
-            },
-            "us-east-1": {
-                "Oracle": {
-                    "ondemand": 44.8358
-                }
-            },
-            "ap-northeast-1": {
-                "Oracle": {
-                    "ondemand": 61.6358
-                }
-            },
-            "eu-west-1": {
-                "Oracle": {
-                    "ondemand": 53.76
-                }
-            },
-            "us-west-2": {
-                "Oracle": {
-                    "ondemand": 44.8358
-                }
-            }
-        },
-        "pretty_name": "X1E 32xlarge"
     }
 ]
