@@ -443,6 +443,7 @@ def add_pretty_names(instances):
         'cc2': 'Cluster Compute',
         'cg1': 'Cluster GPU',
         'cr1': 'High Memory Cluster',
+        'g4': 'G4 Accelerated Computing',
         'hi1': 'HI1. High I/O',
         'hs1': 'High Storage',
         'i3': 'I3 High I/O',
@@ -564,6 +565,36 @@ def add_gpu_info(instances):
             'gpu_model': 'NVIDIA Tesla M60',
             'compute_capability': 5.2,
             'gpu_memory': 32
+        },
+        'g4dn.xlarge': {
+            'gpu_model': 'NVIDIA T4 Tensor Core',
+            'compute_capability': 7.5,
+            'gpu_memory': 16
+        },
+        'g4dn.2xlarge': {
+            'gpu_model': 'NVIDIA T4 Tensor Core',
+            'compute_capability': 7.5,
+            'gpu_memory': 16
+        },
+        'g4dn.4xlarge': {
+            'gpu_model': 'NVIDIA T4 Tensor Core',
+            'compute_capability': 7.5,
+            'gpu_memory': 16
+        },
+        'g4dn.8xlarge': {
+            'gpu_model': 'NVIDIA T4 Tensor Core',
+            'compute_capability': 7.5,
+            'gpu_memory': 16
+        },
+        'g4dn.16xlarge': {
+            'gpu_model': 'NVIDIA T4 Tensor Core',
+            'compute_capability': 7.5,
+            'gpu_memory': 16
+        },
+        'g4dn.12xlarge': {
+            'gpu_model': 'NVIDIA T4 Tensor Core',
+            'compute_capability': 7.5,
+            'gpu_memory': 64
         },
         'p2.xlarge': {
             'gpu_model': 'NVIDIA Tesla K80',
