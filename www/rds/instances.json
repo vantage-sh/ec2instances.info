@@ -228,6 +228,11 @@
                     "ondemand": 0.352
                 }
             },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 0.328
+                }
+            },
             "us-east-2": {
                 "MariaDB": {
                     "ondemand": 0.272
@@ -334,6 +339,11 @@
             "us-west-2": {
                 "Oracle": {
                     "ondemand": 11.209
+                }
+            },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 13.44
                 }
             },
             "ap-southeast-1": {
@@ -1398,6 +1408,16 @@
                     "ondemand": 7.524
                 }
             },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 6.732
+                }
+            },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 6.648
+                }
+            },
             "us-gov-west-1": {
                 "Oracle": {
                     "ondemand": 6.73
@@ -1682,6 +1702,26 @@
                     "ondemand": 0.041
                 }
             },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 0.041
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.049
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.043
+                },
+                "SQL Server": {
+                    "ondemand": 0.049
+                },
+                "MariaDB": {
+                    "ondemand": 0.041
+                },
+                "MySQL": {
+                    "ondemand": 0.041
+                }
+            },
             "ap-southeast-2": {
                 "MariaDB": {
                     "ondemand": 0.052
@@ -1757,23 +1797,6 @@
                 },
                 "MariaDB": {
                     "ondemand": 0.07
-                }
-            },
-            "us-gov-east-1": {
-                "Aurora MySQL": {
-                    "ondemand": 0.049
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.043
-                },
-                "SQL Server": {
-                    "ondemand": 0.049
-                },
-                "MariaDB": {
-                    "ondemand": 0.041
-                },
-                "MySQL": {
-                    "ondemand": 0.041
                 }
             },
             "us-gov-west-1": {
@@ -2419,6 +2442,11 @@
                     "ondemand": 0.024
                 }
             },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 0.021
+                }
+            },
             "us-gov-west-1": {
                 "Oracle": {
                     "ondemand": 0.021
@@ -2604,6 +2632,11 @@
                     "ondemand": 0.561
                 }
             },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 0.554
+                }
+            },
             "us-east-1": {
                 "Oracle": {
                     "ondemand": 0.466
@@ -2781,6 +2814,11 @@
                     "ondemand": 0.5405
                 }
             },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 1.077
+                }
+            },
             "eu-west-1": {
                 "PostgreSQL": {
                     "ondemand": 0.56
@@ -2799,11 +2837,6 @@
                 },
                 "MariaDB": {
                     "ondemand": 0.53
-                }
-            },
-            "us-gov-east-1": {
-                "Oracle": {
-                    "ondemand": 1.077
                 }
             },
             "us-west-2": {
@@ -4115,6 +4148,9 @@
                 },
                 "MySQL": {
                     "ondemand": 9.84
+                },
+                "Oracle": {
+                    "ondemand": 9.84
                 }
             },
             "ap-northeast-3": {
@@ -4418,6 +4454,26 @@
                     "ondemand": 0.104
                 }
             },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 0.155
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.098
+                },
+                "MySQL": {
+                    "ondemand": 0.081
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.087
+                },
+                "SQL Server": {
+                    "ondemand": 0.298
+                },
+                "MariaDB": {
+                    "ondemand": 0.081
+                }
+            },
             "us-west-1": {
                 "SQL Server": {
                     "ondemand": 0.308
@@ -4496,23 +4552,6 @@
                 },
                 "MariaDB": {
                     "ondemand": 0.076
-                }
-            },
-            "us-gov-east-1": {
-                "Aurora MySQL": {
-                    "ondemand": 0.098
-                },
-                "MySQL": {
-                    "ondemand": 0.081
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.087
-                },
-                "SQL Server": {
-                    "ondemand": 0.298
-                },
-                "MariaDB": {
-                    "ondemand": 0.081
                 }
             }
         },
@@ -4892,6 +4931,20 @@
                     "ondemand": 0.544
                 }
             },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 0.648
+                },
+                "MySQL": {
+                    "ondemand": 0.648
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.696
+                },
+                "MariaDB": {
+                    "ondemand": 0.648
+                }
+            },
             "us-west-1": {
                 "Oracle": {
                     "ondemand": 0.712
@@ -4904,17 +4957,6 @@
                 },
                 "MySQL": {
                     "ondemand": 0.712
-                }
-            },
-            "us-gov-east-1": {
-                "MySQL": {
-                    "ondemand": 0.648
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.696
-                },
-                "MariaDB": {
-                    "ondemand": 0.648
                 }
             },
             "ap-northeast-2": {
@@ -5530,6 +5572,11 @@
                 "MySQL": {
                     "ondemand": 1.12
                 }
+            },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 0.656
+                }
             }
         },
         "pretty_name": "T3 Double Extra Large"
@@ -5807,6 +5854,9 @@
             "us-gov-east-1": {
                 "PostgreSQL": {
                     "ondemand": 0.348
+                },
+                "Oracle": {
+                    "ondemand": 0.324
                 },
                 "MySQL": {
                     "ondemand": 0.324
@@ -6810,6 +6860,11 @@
                     "ondemand": 1.2
                 }
             },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 1.108
+                }
+            },
             "eu-central-1": {
                 "Aurora PostgreSQL": {
                     "ondemand": 1.4
@@ -6857,6 +6912,89 @@
             }
         },
         "pretty_name": "R5 Double Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "AWS GovCloud (US-East)",
+        "locationType": "AWS Region",
+        "instanceType": "db.x1e.32xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Memory optimized",
+        "vcpu": "128",
+        "physicalProcessor": "Intel Xeon E7-8880 v3",
+        "memory": "3904",
+        "storage": "2 x 1920 SSD",
+        "networkPerformance": "25 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "5",
+        "databaseEngine": "Oracle",
+        "databaseEdition": "Enterprise",
+        "licenseModel": "Bring your own license",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "UGE1-InstanceUsage:db.x1e.32xl",
+        "operation": "CreateDBInstance:0005",
+        "instanceTypeFamily": "X1e",
+        "normalizationSizeFactor": "256",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-gov-east-1",
+        "network_performance": "25 Gigabit",
+        "family": "Memory optimized",
+        "instance_type": "db.x1e.32xlarge",
+        "database_engine": "Oracle",
+        "arch": "64-bit",
+        "pricing": {
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 53.76
+                }
+            },
+            "ap-southeast-1": {
+                "Oracle": {
+                    "ondemand": 64.9958
+                }
+            },
+            "ap-southeast-2": {
+                "Oracle": {
+                    "ondemand": 61.6358
+                }
+            },
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 44.8358
+                }
+            },
+            "ap-northeast-1": {
+                "Oracle": {
+                    "ondemand": 61.6358
+                }
+            },
+            "eu-central-1": {
+                "Oracle": {
+                    "ondemand": 62.7379
+                }
+            },
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 44.8358
+                }
+            },
+            "ap-northeast-2": {
+                "Oracle": {
+                    "ondemand": 64.9958
+                }
+            },
+            "eu-west-1": {
+                "Oracle": {
+                    "ondemand": 53.76
+                }
+            },
+            "us-west-2": {
+                "Oracle": {
+                    "ondemand": 44.8358
+                }
+            }
+        },
+        "pretty_name": "X1E 32xlarge"
     },
     {
         "servicecode": "AmazonRDS",
@@ -7277,6 +7415,11 @@
                     "ondemand": 0.28
                 }
             },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 0.277
+                }
+            },
             "ap-northeast-1": {
                 "Oracle": {
                     "ondemand": 0.277
@@ -7315,6 +7458,11 @@
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 0.32
+                }
+            },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 0.539
                 }
             },
             "us-west-2": {
@@ -7517,11 +7665,6 @@
                 },
                 "PostgreSQL": {
                     "ondemand": 0.25
-                }
-            },
-            "us-gov-east-1": {
-                "Oracle": {
-                    "ondemand": 0.539
                 }
             }
         },
@@ -7963,6 +8106,17 @@
                     "ondemand": 0.342
                 }
             },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 0.481
+                },
+                "MariaDB": {
+                    "ondemand": 0.205
+                },
+                "MySQL": {
+                    "ondemand": 0.205
+                }
+            },
             "us-west-2": {
                 "SQL Server": {
                     "ondemand": 0.977
@@ -8009,17 +8163,6 @@
                 },
                 "MariaDB": {
                     "ondemand": 0.208
-                }
-            },
-            "us-gov-east-1": {
-                "MariaDB": {
-                    "ondemand": 0.205
-                },
-                "Oracle": {
-                    "ondemand": 0.481
-                },
-                "MySQL": {
-                    "ondemand": 0.205
                 }
             },
             "ap-east-1": {
@@ -10364,6 +10507,11 @@
                 "MariaDB": {
                     "ondemand": 0.104
                 }
+            },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 0.15
+                }
             }
         },
         "pretty_name": "T3 Medium"
@@ -11887,6 +12035,11 @@
                     "ondemand": 0.04
                 }
             },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 0.081
+                }
+            },
             "eu-north-1": {
                 "Aurora MySQL": {
                     "ondemand": 0.042
@@ -12247,6 +12400,9 @@
             },
             "us-gov-east-1": {
                 "MariaDB": {
+                    "ondemand": 4.92
+                },
+                "Oracle": {
                     "ondemand": 4.92
                 },
                 "MySQL": {
@@ -12717,7 +12873,7 @@
                     "ondemand": 0.41
                 },
                 "Oracle": {
-                    "ondemand": 0.41
+                    "ondemand": 0.91
                 },
                 "MariaDB": {
                     "ondemand": 0.41
@@ -12764,84 +12920,6 @@
             }
         },
         "pretty_name": "M5 Extra Large"
-    },
-    {
-        "servicecode": "AmazonRDS",
-        "location": "Asia Pacific (Seoul)",
-        "locationType": "AWS Region",
-        "instanceType": "db.x1e.32xlarge",
-        "currentGeneration": "Yes",
-        "instanceFamily": "Memory optimized",
-        "vcpu": "128",
-        "physicalProcessor": "Intel Xeon E7-8880 v3",
-        "memory": "3904",
-        "storage": "2 x 1920 SSD",
-        "networkPerformance": "25 Gigabit",
-        "processorArchitecture": "64-bit",
-        "engineCode": "5",
-        "databaseEngine": "Oracle",
-        "databaseEdition": "Enterprise",
-        "licenseModel": "Bring your own license",
-        "deploymentOption": "Multi-AZ",
-        "usagetype": "APN2-Multi-AZUsage:db.x1e.32xl",
-        "operation": "CreateDBInstance:0005",
-        "instanceTypeFamily": "X1e",
-        "normalizationSizeFactor": "512",
-        "servicename": "Amazon Relational Database Service",
-        "region": "ap-northeast-2",
-        "network_performance": "25 Gigabit",
-        "family": "Memory optimized",
-        "instance_type": "db.x1e.32xlarge",
-        "database_engine": "Oracle",
-        "arch": "64-bit",
-        "pricing": {
-            "ap-southeast-1": {
-                "Oracle": {
-                    "ondemand": 64.9958
-                }
-            },
-            "ap-southeast-2": {
-                "Oracle": {
-                    "ondemand": 61.6358
-                }
-            },
-            "us-east-1": {
-                "Oracle": {
-                    "ondemand": 44.8358
-                }
-            },
-            "ap-northeast-1": {
-                "Oracle": {
-                    "ondemand": 61.6358
-                }
-            },
-            "eu-central-1": {
-                "Oracle": {
-                    "ondemand": 62.7379
-                }
-            },
-            "us-east-2": {
-                "Oracle": {
-                    "ondemand": 44.8358
-                }
-            },
-            "ap-northeast-2": {
-                "Oracle": {
-                    "ondemand": 64.9958
-                }
-            },
-            "eu-west-1": {
-                "Oracle": {
-                    "ondemand": 53.76
-                }
-            },
-            "us-west-2": {
-                "Oracle": {
-                    "ondemand": 44.8358
-                }
-            }
-        },
-        "pretty_name": "X1E 32xlarge"
     },
     {
         "servicecode": "AmazonRDS",
@@ -12916,6 +12994,11 @@
             "ap-southeast-1": {
                 "Oracle": {
                     "ondemand": 2.0311
+                }
+            },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 1.68
                 }
             }
         },
@@ -13950,6 +14033,11 @@
                 "PostgreSQL": {
                     "ondemand": 2.4
                 }
+            },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 4.448
+                }
             }
         },
         "pretty_name": "R5 Quadruple Extra Large"
@@ -14462,6 +14550,9 @@
             "us-gov-east-1": {
                 "MariaDB": {
                     "ondemand": 0.02
+                },
+                "Oracle": {
+                    "ondemand": 0.041
                 },
                 "PostgreSQL": {
                     "ondemand": 0.021
@@ -15544,6 +15635,11 @@
                     "ondemand": 11.52
                 }
             },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 13.296
+                }
+            },
             "eu-north-1": {
                 "Aurora PostgreSQL": {
                     "ondemand": 14.4
@@ -15766,6 +15862,11 @@
                 "Oracle": {
                     "ondemand": 13.459
                 }
+            },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 13.464
+                }
             }
         },
         "pretty_name": "R5 24xlarge"
@@ -15882,6 +15983,11 @@
                 },
                 "MySQL": {
                     "ondemand": 0.158
+                }
+            },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 0.164
                 }
             },
             "eu-west-1": {
@@ -16145,6 +16251,11 @@
                     "ondemand": 7.552
                 }
             },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 6.56
+                }
+            },
             "ca-central-1": {
                 "Oracle": {
                     "ondemand": 6.048
@@ -16291,6 +16402,11 @@
             "eu-west-1": {
                 "Oracle": {
                     "ondemand": 3.024
+                }
+            },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 3.28
                 }
             },
             "me-south-1": {
@@ -16574,6 +16690,20 @@
                     "ondemand": 0.224
                 }
             },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 0.309
+                },
+                "MySQL": {
+                    "ondemand": 0.162
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.174
+                },
+                "MariaDB": {
+                    "ondemand": 0.162
+                }
+            },
             "eu-west-1": {
                 "MariaDB": {
                     "ondemand": 0.146
@@ -16586,17 +16716,6 @@
                 },
                 "MySQL": {
                     "ondemand": 0.146
-                }
-            },
-            "us-gov-east-1": {
-                "MySQL": {
-                    "ondemand": 0.162
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.174
-                },
-                "MariaDB": {
-                    "ondemand": 0.162
                 }
             }
         },
@@ -16667,6 +16786,11 @@
                     "ondemand": 4.432
                 }
             },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 4.488
+                }
+            },
             "us-west-2": {
                 "Oracle": {
                     "ondemand": 3.728
@@ -16690,6 +16814,11 @@
             "eu-west-1": {
                 "Oracle": {
                     "ondemand": 4.128
+                }
+            },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 4.432
                 }
             },
             "ap-south-1": {
@@ -16922,6 +17051,50 @@
     },
     {
         "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.cv11.medium",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Compute optimized",
+        "vcpu": "1",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "2",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "120",
+        "databaseEngine": "PostgreSQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.cv11.med",
+        "operation": "CreateDBInstance:0120",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "CV11",
+        "normalizationSizeFactor": "2",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "Compute optimized",
+        "instance_type": "db.cv11.medium",
+        "database_engine": "PostgreSQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "PostgreSQL": {
+                    "ondemand": 0.088
+                },
+                "SQL Server": {
+                    "ondemand": 0.254
+                },
+                "MySQL": {
+                    "ondemand": 0.084
+                }
+            }
+        },
+        "pretty_name": "CV11 Medium"
+    },
+    {
+        "servicecode": "AmazonRDS",
         "location": "Asia Pacific (Singapore)",
         "locationType": "AWS Region",
         "instanceType": "db.z1d.3xlarge",
@@ -17074,6 +17247,11 @@
                 "Oracle": {
                     "ondemand": 3.36
                 }
+            },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 3.36
+                }
             }
         },
         "pretty_name": "X1E Double Extra Large"
@@ -17126,6 +17304,11 @@
             "ap-northeast-1": {
                 "Oracle": {
                     "ondemand": 30.8179
+                }
+            },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 26.88
                 }
             },
             "ap-southeast-2": {
@@ -17226,6 +17409,11 @@
                     "ondemand": 8.1245
                 }
             },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 6.72
+                }
+            },
             "ap-southeast-1": {
                 "Oracle": {
                     "ondemand": 8.1245
@@ -17316,6 +17504,11 @@
                     "ondemand": 13.44
                 }
             },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 13.445
+                }
+            },
             "us-east-2": {
                 "Oracle": {
                     "ondemand": 11.2
@@ -17399,6 +17592,11 @@
                     "ondemand": 8.864
                 }
             },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 8.976
+                }
+            },
             "eu-west-1": {
                 "Oracle": {
                     "ondemand": 8.256
@@ -17427,6 +17625,11 @@
             "eu-central-1": {
                 "Oracle": {
                     "ondemand": 9.024
+                }
+            },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 8.864
                 }
             },
             "us-west-1": {
@@ -17570,6 +17773,11 @@
             "us-west-1": {
                 "Oracle": {
                     "ondemand": 29.1312
+                }
+            },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 26.8901
                 }
             },
             "ap-northeast-2": {
@@ -17724,6 +17932,50 @@
     },
     {
         "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.cv11.small",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Compute optimized",
+        "vcpu": "1",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "1",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "110",
+        "databaseEngine": "MySQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.cv11.small",
+        "operation": "CreateDBInstance:0110",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "CV11",
+        "normalizationSizeFactor": "1",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "Compute optimized",
+        "instance_type": "db.cv11.small",
+        "database_engine": "MySQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "MySQL": {
+                    "ondemand": 0.084
+                },
+                "SQL Server": {
+                    "ondemand": 0.254
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.088
+                }
+            }
+        },
+        "pretty_name": "CV11 Small"
+    },
+    {
+        "servicecode": "AmazonRDS",
         "location": "EU (Frankfurt)",
         "locationType": "AWS Region",
         "instanceType": "db.z1d.12xlarge",
@@ -17794,6 +18046,138 @@
             }
         },
         "pretty_name": "Z1D 12xlarge"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.cv11.9xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Compute optimized",
+        "vcpu": "36",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "72",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "120",
+        "databaseEngine": "PostgreSQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.cv11.9xl",
+        "operation": "CreateDBInstance:0120",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "CV11",
+        "normalizationSizeFactor": "72",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "Compute optimized",
+        "instance_type": "db.cv11.9xlarge",
+        "database_engine": "PostgreSQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "PostgreSQL": {
+                    "ondemand": 3.168
+                },
+                "MySQL": {
+                    "ondemand": 3.024
+                },
+                "SQL Server": {
+                    "ondemand": 9.144
+                }
+            }
+        },
+        "pretty_name": "CV11 9xlarge"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.cv11.xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Compute optimized",
+        "vcpu": "4",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "8",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "120",
+        "databaseEngine": "PostgreSQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.cv11.xl",
+        "operation": "CreateDBInstance:0120",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "CV11",
+        "normalizationSizeFactor": "8",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "Compute optimized",
+        "instance_type": "db.cv11.xlarge",
+        "database_engine": "PostgreSQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "PostgreSQL": {
+                    "ondemand": 0.352
+                },
+                "MySQL": {
+                    "ondemand": 0.336
+                },
+                "SQL Server": {
+                    "ondemand": 1.016
+                }
+            }
+        },
+        "pretty_name": "CV11 Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.rv11.large",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Memory optimized",
+        "vcpu": "2",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "16",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "110",
+        "databaseEngine": "MySQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.rv11.large",
+        "operation": "CreateDBInstance:0110",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "RV11",
+        "normalizationSizeFactor": "4",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "Memory optimized",
+        "instance_type": "db.rv11.large",
+        "database_engine": "MySQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "MySQL": {
+                    "ondemand": 0.336
+                },
+                "SQL Server": {
+                    "ondemand": 0.762
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.35
+                }
+            }
+        },
+        "pretty_name": "RV11 Large"
     },
     {
         "servicecode": "AmazonRDS",
@@ -17874,5 +18258,712 @@
             }
         },
         "pretty_name": "Z1D 6xlarge"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.mv11.xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "General purpose",
+        "vcpu": "4",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "16",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "110",
+        "databaseEngine": "MySQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.mv11.xl",
+        "operation": "CreateDBInstance:0110",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "MV11",
+        "normalizationSizeFactor": "8",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "General purpose",
+        "instance_type": "db.mv11.xlarge",
+        "database_engine": "MySQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "MySQL": {
+                    "ondemand": 0.336
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.352
+                },
+                "SQL Server": {
+                    "ondemand": 1.016
+                }
+            }
+        },
+        "pretty_name": "MV11 Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.cv11.4xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Compute optimized",
+        "vcpu": "16",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "32",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "100",
+        "databaseEngine": "SQL Server",
+        "databaseEdition": "Enterprise",
+        "licenseModel": "On-premises customer provided license",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.cv11.4xl",
+        "operation": "CreateDBInstance:0100",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "CV11",
+        "normalizationSizeFactor": "NA",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "Compute optimized",
+        "instance_type": "db.cv11.4xlarge",
+        "database_engine": "SQL Server",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "SQL Server": {
+                    "ondemand": 4.064
+                },
+                "PostgreSQL": {
+                    "ondemand": 1.408
+                },
+                "MySQL": {
+                    "ondemand": 1.344
+                }
+            }
+        },
+        "pretty_name": "CV11 Quadruple Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.rv11.12xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Memory optimized",
+        "vcpu": "48",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "384",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "120",
+        "databaseEngine": "PostgreSQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.rv11.12xl",
+        "operation": "CreateDBInstance:0120",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "RV11",
+        "normalizationSizeFactor": "96",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "Memory optimized",
+        "instance_type": "db.rv11.12xlarge",
+        "database_engine": "PostgreSQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "PostgreSQL": {
+                    "ondemand": 8.4
+                },
+                "SQL Server": {
+                    "ondemand": 18.288
+                },
+                "MySQL": {
+                    "ondemand": 8.064
+                }
+            }
+        },
+        "pretty_name": "RV11 12xlarge"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.mv11.medium",
+        "currentGeneration": "Yes",
+        "instanceFamily": "General purpose",
+        "vcpu": "1",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "4",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "100",
+        "databaseEngine": "SQL Server",
+        "databaseEdition": "Enterprise",
+        "licenseModel": "On-premises customer provided license",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.mv11.med",
+        "operation": "CreateDBInstance:0100",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "MV11",
+        "normalizationSizeFactor": "NA",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "General purpose",
+        "instance_type": "db.mv11.medium",
+        "database_engine": "SQL Server",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "SQL Server": {
+                    "ondemand": 0.254
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.088
+                },
+                "MySQL": {
+                    "ondemand": 0.084
+                }
+            }
+        },
+        "pretty_name": "MV11 Medium"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.rv11.2xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Memory optimized",
+        "vcpu": "8",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "64",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "120",
+        "databaseEngine": "PostgreSQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.rv11.2xl",
+        "operation": "CreateDBInstance:0120",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "RV11",
+        "normalizationSizeFactor": "16",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "Memory optimized",
+        "instance_type": "db.rv11.2xlarge",
+        "database_engine": "PostgreSQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "PostgreSQL": {
+                    "ondemand": 1.4
+                },
+                "MySQL": {
+                    "ondemand": 1.344
+                },
+                "SQL Server": {
+                    "ondemand": 3.048
+                }
+            }
+        },
+        "pretty_name": "RV11 Double Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.cv11.large",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Compute optimized",
+        "vcpu": "2",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "4",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "110",
+        "databaseEngine": "MySQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.cv11.large",
+        "operation": "CreateDBInstance:0110",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "CV11",
+        "normalizationSizeFactor": "4",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "Compute optimized",
+        "instance_type": "db.cv11.large",
+        "database_engine": "MySQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "MySQL": {
+                    "ondemand": 0.168
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.176
+                },
+                "SQL Server": {
+                    "ondemand": 0.508
+                }
+            }
+        },
+        "pretty_name": "CV11 Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.mv11.2xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "General purpose",
+        "vcpu": "8",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "32",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "110",
+        "databaseEngine": "MySQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.mv11.2xl",
+        "operation": "CreateDBInstance:0110",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "MV11",
+        "normalizationSizeFactor": "16",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "General purpose",
+        "instance_type": "db.mv11.2xlarge",
+        "database_engine": "MySQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "MySQL": {
+                    "ondemand": 0.672
+                },
+                "SQL Server": {
+                    "ondemand": 2.032
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.704
+                }
+            }
+        },
+        "pretty_name": "MV11 Double Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.rv11.xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Memory optimized",
+        "vcpu": "4",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "32",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "110",
+        "databaseEngine": "MySQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.rv11.xl",
+        "operation": "CreateDBInstance:0110",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "RV11",
+        "normalizationSizeFactor": "8",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "Memory optimized",
+        "instance_type": "db.rv11.xlarge",
+        "database_engine": "MySQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "MySQL": {
+                    "ondemand": 0.672
+                },
+                "SQL Server": {
+                    "ondemand": 1.524
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.7
+                }
+            }
+        },
+        "pretty_name": "RV11 Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.cv11.2xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Compute optimized",
+        "vcpu": "8",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "16",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "110",
+        "databaseEngine": "MySQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.cv11.2xl",
+        "operation": "CreateDBInstance:0110",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "CV11",
+        "normalizationSizeFactor": "16",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "Compute optimized",
+        "instance_type": "db.cv11.2xlarge",
+        "database_engine": "MySQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "MySQL": {
+                    "ondemand": 0.672
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.704
+                },
+                "SQL Server": {
+                    "ondemand": 2.032
+                }
+            }
+        },
+        "pretty_name": "CV11 Double Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.cv11.18xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Compute optimized",
+        "vcpu": "72",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "144",
+        "storage": "EBS Only",
+        "networkPerformance": "25 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "120",
+        "databaseEngine": "PostgreSQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.cv11.18xl",
+        "operation": "CreateDBInstance:0120",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "CV11",
+        "normalizationSizeFactor": "144",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "25 Gigabit",
+        "family": "Compute optimized",
+        "instance_type": "db.cv11.18xlarge",
+        "database_engine": "PostgreSQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "PostgreSQL": {
+                    "ondemand": 6.336
+                },
+                "SQL Server": {
+                    "ondemand": 18.288
+                },
+                "MySQL": {
+                    "ondemand": 6.048
+                }
+            }
+        },
+        "pretty_name": "CV11 18xlarge"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.rv11.4xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Memory optimized",
+        "vcpu": "16",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "128",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "110",
+        "databaseEngine": "MySQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.rv11.4xl",
+        "operation": "CreateDBInstance:0110",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "RV11",
+        "normalizationSizeFactor": "32",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "Memory optimized",
+        "instance_type": "db.rv11.4xlarge",
+        "database_engine": "MySQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "MySQL": {
+                    "ondemand": 2.688
+                },
+                "PostgreSQL": {
+                    "ondemand": 2.8
+                },
+                "SQL Server": {
+                    "ondemand": 6.096
+                }
+            }
+        },
+        "pretty_name": "RV11 Quadruple Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.mv11.4xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "General purpose",
+        "vcpu": "16",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "64",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "110",
+        "databaseEngine": "MySQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.mv11.4xl",
+        "operation": "CreateDBInstance:0110",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "MV11",
+        "normalizationSizeFactor": "32",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "General purpose",
+        "instance_type": "db.mv11.4xlarge",
+        "database_engine": "MySQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "MySQL": {
+                    "ondemand": 1.344
+                },
+                "PostgreSQL": {
+                    "ondemand": 1.408
+                },
+                "SQL Server": {
+                    "ondemand": 4.064
+                }
+            }
+        },
+        "pretty_name": "MV11 Quadruple Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.mv11.24xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "General purpose",
+        "vcpu": "96",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "384",
+        "storage": "EBS Only",
+        "networkPerformance": "25 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "100",
+        "databaseEngine": "SQL Server",
+        "databaseEdition": "Enterprise",
+        "licenseModel": "On-premises customer provided license",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.mv11.24xl",
+        "operation": "CreateDBInstance:0100",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "MV11",
+        "normalizationSizeFactor": "NA",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "25 Gigabit",
+        "family": "General purpose",
+        "instance_type": "db.mv11.24xlarge",
+        "database_engine": "SQL Server",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "SQL Server": {
+                    "ondemand": 24.384
+                },
+                "MySQL": {
+                    "ondemand": 8.064
+                },
+                "PostgreSQL": {
+                    "ondemand": 8.448
+                }
+            }
+        },
+        "pretty_name": "MV11 24xlarge"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.rv11.24xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Memory optimized",
+        "vcpu": "96",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "768",
+        "storage": "EBS Only",
+        "networkPerformance": "25 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "120",
+        "databaseEngine": "PostgreSQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.rv11.24xl",
+        "operation": "CreateDBInstance:0120",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "RV11",
+        "normalizationSizeFactor": "192",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "25 Gigabit",
+        "family": "Memory optimized",
+        "instance_type": "db.rv11.24xlarge",
+        "database_engine": "PostgreSQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "PostgreSQL": {
+                    "ondemand": 16.8
+                },
+                "SQL Server": {
+                    "ondemand": 36.576
+                },
+                "MySQL": {
+                    "ondemand": 16.128
+                }
+            }
+        },
+        "pretty_name": "RV11 24xlarge"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.mv11.large",
+        "currentGeneration": "Yes",
+        "instanceFamily": "General purpose",
+        "vcpu": "2",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "8",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "120",
+        "databaseEngine": "PostgreSQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.mv11.large",
+        "operation": "CreateDBInstance:0120",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "MV11",
+        "normalizationSizeFactor": "4",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "General purpose",
+        "instance_type": "db.mv11.large",
+        "database_engine": "PostgreSQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "PostgreSQL": {
+                    "ondemand": 0.176
+                },
+                "SQL Server": {
+                    "ondemand": 0.508
+                },
+                "MySQL": {
+                    "ondemand": 0.168
+                }
+            }
+        },
+        "pretty_name": "MV11 Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.mv11.12xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "General purpose",
+        "vcpu": "48",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "192",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "120",
+        "databaseEngine": "PostgreSQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.mv11.12xl",
+        "operation": "CreateDBInstance:0120",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "MV11",
+        "normalizationSizeFactor": "96",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "General purpose",
+        "instance_type": "db.mv11.12xlarge",
+        "database_engine": "PostgreSQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "PostgreSQL": {
+                    "ondemand": 4.224
+                },
+                "MySQL": {
+                    "ondemand": 4.032
+                },
+                "SQL Server": {
+                    "ondemand": 12.192
+                }
+            }
+        },
+        "pretty_name": "MV11 12xlarge"
     }
 ]
