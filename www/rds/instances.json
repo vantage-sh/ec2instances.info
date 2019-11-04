@@ -2358,20 +2358,6 @@
                     "ondemand": 0.019
                 }
             },
-            "ap-east-1": {
-                "Oracle": {
-                    "ondemand": 0.0286
-                },
-                "MariaDB": {
-                    "ondemand": 0.0286
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.0308
-                },
-                "MySQL": {
-                    "ondemand": 0.0286
-                }
-            },
             "eu-central-1": {
                 "Oracle": {
                     "ondemand": 0.02
@@ -2384,6 +2370,20 @@
                 },
                 "MariaDB": {
                     "ondemand": 0.02
+                }
+            },
+            "ap-east-1": {
+                "Oracle": {
+                    "ondemand": 0.0286
+                },
+                "MariaDB": {
+                    "ondemand": 0.0286
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.0308
+                },
+                "MySQL": {
+                    "ondemand": 0.0286
                 }
             },
             "sa-east-1": {
@@ -16786,14 +16786,14 @@
                     "ondemand": 4.432
                 }
             },
-            "us-gov-east-1": {
-                "Oracle": {
-                    "ondemand": 4.488
-                }
-            },
             "us-west-2": {
                 "Oracle": {
                     "ondemand": 3.728
+                }
+            },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 4.488
                 }
             },
             "ap-southeast-2": {
