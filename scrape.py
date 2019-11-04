@@ -646,6 +646,24 @@ def add_gpu_info(instances):
         inst.GPU_memory = inst_gpu_data['gpu_memory']
 
 
+def add_fpga_info(instances):
+    fpga_key_info_url = "https://aws.amazon.com/ec2/instance-types/f1/"
+    tree = etree.parse(urllib2.urlopen(fpga_key_info_url), etree.HTMLParser())
+    table = tree.xpath('//div[@class="lb-border-p lb-tbl lb-tbl-p lb-tbl-border-inside lb-tbl-header-centered"]//table')[0]
+    rows = table.xpath('.//tr[./td]')
+
+    has_fpga = {}
+
+    for row in rows:
+        instance_type = etree.tostring(row[0], method='text').strip().decode()
+        fpgas = locale.atoi(etree.tostring(row[1], method='text').decode())
+        has_fpga[instance_type] = fpgas
+
+    for instance in instances:
+        if instance.instance_type in has_fpga:
+            instance.FPGA = has_fpga[instance.instance_type]
+
+
 def scrape(data_file):
     """Scrape AWS to get instance data"""
     print("Parsing instance types...")
@@ -672,6 +690,8 @@ def scrape(data_file):
     add_emr_info(all_instances)
     print("Adding GPU details...")
     add_gpu_info(all_instances)
+    print("Adding FPGA details...")
+    add_fpga_info(all_instances)
 
     with open(data_file, 'w') as f:
         json.dump([i.to_dict() for i in all_instances],
