@@ -21,6 +21,7 @@ def network_sort(inst):
         'Up to 25 Gigabit',
         '25 Gigabit',
         '50 Gigabit',
+        '75 Gigabit',
         '100 Gigabit',
     ]
     try:
