@@ -40,6 +40,9 @@
                         "yrTerm1.noUpfront": 0.378
                     }
                 },
+                "SQL Server": {
+                    "ondemand": 0.35
+                },
                 "MariaDB": {
                     "ondemand": 0.272
                 },
@@ -57,6 +60,9 @@
                 "MariaDB": {
                     "ondemand": 0.32
                 },
+                "SQL Server": {
+                    "ondemand": 2.295
+                },
                 "PostgreSQL": {
                     "ondemand": 0.336
                 },
@@ -70,6 +76,9 @@
                 },
                 "MySQL": {
                     "ondemand": 0.288
+                },
+                "SQL Server": {
+                    "ondemand": 0.421
                 },
                 "PostgreSQL": {
                     "ondemand": 0.312
@@ -88,6 +97,9 @@
                 "MySQL": {
                     "ondemand": 0.304
                 },
+                "SQL Server": {
+                    "ondemand": 2.291
+                },
                 "PostgreSQL": {
                     "ondemand": 0.328
                 }
@@ -101,6 +113,9 @@
                 },
                 "Oracle": {
                     "ondemand": 0.416
+                },
+                "SQL Server": {
+                    "ondemand": 2.32
                 },
                 "PostgreSQL": {
                     "ondemand": 0.448
@@ -116,6 +131,9 @@
                 "MySQL": {
                     "ondemand": 0.304
                 },
+                "SQL Server": {
+                    "ondemand": 1.076
+                },
                 "MariaDB": {
                     "ondemand": 0.304
                 }
@@ -123,6 +141,9 @@
             "us-west-2": {
                 "Oracle": {
                     "ondemand": 0.56
+                },
+                "SQL Server": {
+                    "ondemand": 0.4
                 },
                 "MySQL": {
                     "ondemand": 0.272
@@ -138,6 +159,9 @@
                 "Oracle": {
                     "ondemand": 0.416
                 },
+                "SQL Server": {
+                    "ondemand": 0.416
+                },
                 "MySQL": {
                     "ondemand": 0.416
                 },
@@ -148,31 +172,27 @@
                     "ondemand": 0.448
                 }
             },
-            "us-gov-west-1": {
-                "Oracle": {
-                    "ondemand": 0.6
-                }
-            },
-            "ap-northeast-3": {
-                "Oracle": {
-                    "ondemand": 0.822
-                }
-            },
-            "ca-central-1": {
-                "MariaDB": {
-                    "ondemand": 0.296
-                },
-                "Oracle": {
-                    "ondemand": 0.296
-                },
-                "MySQL": {
-                    "ondemand": 0.296
+            "eu-north-1": {
+                "SQL Server": {
+                    "ondemand": 1.053
                 },
                 "PostgreSQL": {
-                    "ondemand": 0.32
+                    "ondemand": 0.296
+                },
+                "MariaDB": {
+                    "ondemand": 0.274
+                },
+                "Oracle": {
+                    "ondemand": 0.274
+                },
+                "MySQL": {
+                    "ondemand": 0.274
                 }
             },
             "ap-east-1": {
+                "SQL Server": {
+                    "ondemand": 0.449
+                },
                 "Oracle": {
                     "ondemand": 0.4576
                 },
@@ -186,9 +206,45 @@
                     "ondemand": 0.4576
                 }
             },
+            "us-gov-west-1": {
+                "Oracle": {
+                    "ondemand": 0.6
+                },
+                "SQL Server": {
+                    "ondemand": 1.086
+                }
+            },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 0.822
+                },
+                "SQL Server": {
+                    "ondemand": 0.466
+                }
+            },
+            "ca-central-1": {
+                "MariaDB": {
+                    "ondemand": 0.296
+                },
+                "Oracle": {
+                    "ondemand": 0.296
+                },
+                "SQL Server": {
+                    "ondemand": 0.378
+                },
+                "MySQL": {
+                    "ondemand": 0.296
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.32
+                }
+            },
             "sa-east-1": {
                 "PostgreSQL": {
                     "ondemand": 0.604
+                },
+                "SQL Server": {
+                    "ondemand": 2.395
                 },
                 "Oracle": {
                     "ondemand": 0.56
@@ -198,6 +254,23 @@
                 },
                 "MySQL": {
                     "ondemand": 0.56
+                }
+            },
+            "me-south-1": {
+                "SQL Server": {
+                    "ondemand": 0.463
+                },
+                "Oracle": {
+                    "ondemand": 0.6776
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.343
+                },
+                "MySQL": {
+                    "ondemand": 0.317
+                },
+                "MariaDB": {
+                    "ondemand": 0.317
                 }
             },
             "ap-northeast-2": {
@@ -210,6 +283,9 @@
                 "PostgreSQL": {
                     "ondemand": 0.448
                 },
+                "SQL Server": {
+                    "ondemand": 2.316
+                },
                 "MySQL": {
                     "ondemand": 0.416
                 }
@@ -217,6 +293,9 @@
             "us-west-1": {
                 "Oracle": {
                     "ondemand": 0.352
+                },
+                "SQL Server": {
+                    "ondemand": 0.441
                 },
                 "PostgreSQL": {
                     "ondemand": 0.38
@@ -231,11 +310,17 @@
             "us-gov-east-1": {
                 "Oracle": {
                     "ondemand": 0.328
+                },
+                "SQL Server": {
+                    "ondemand": 2.299
                 }
             },
             "us-east-2": {
                 "MariaDB": {
                     "ondemand": 0.272
+                },
+                "SQL Server": {
+                    "ondemand": 0.4
                 },
                 "Oracle": {
                     "ondemand": 0.272
@@ -251,6 +336,9 @@
                 "Oracle": {
                     "ondemand": 0.392
                 },
+                "SQL Server": {
+                    "ondemand": 0.417
+                },
                 "MariaDB": {
                     "ondemand": 0.392
                 },
@@ -259,20 +347,6 @@
                 },
                 "MySQL": {
                     "ondemand": 0.392
-                }
-            },
-            "me-south-1": {
-                "Oracle": {
-                    "ondemand": 0.317
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.343
-                },
-                "MySQL": {
-                    "ondemand": 0.317
-                },
-                "MariaDB": {
-                    "ondemand": 0.317
                 }
             },
             "ap-northeast-1": {
@@ -285,26 +359,394 @@
                 "PostgreSQL": {
                     "ondemand": 0.448
                 },
+                "SQL Server": {
+                    "ondemand": 1.118
+                },
                 "MariaDB": {
                     "ondemand": 0.416
-                }
-            },
-            "eu-north-1": {
-                "PostgreSQL": {
-                    "ondemand": 0.296
-                },
-                "MariaDB": {
-                    "ondemand": 0.274
-                },
-                "Oracle": {
-                    "ondemand": 0.274
-                },
-                "MySQL": {
-                    "ondemand": 0.274
                 }
             }
         },
         "pretty_name": "T3 Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "AWS GovCloud (US)",
+        "locationType": "AWS Region",
+        "instanceType": "db.m5.24xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "General purpose",
+        "vcpu": "96",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "clockSpeed": "2.5 GHz",
+        "memory": "384",
+        "storage": "EBS Only",
+        "networkPerformance": "25 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "12",
+        "databaseEngine": "SQL Server",
+        "databaseEdition": "Standard",
+        "licenseModel": "License included",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "UGW1-InstanceUsage:db.m5.24xl",
+        "operation": "CreateDBInstance:0012",
+        "dedicatedEbsThroughput": "12000 Mbps",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "M5",
+        "normalizationSizeFactor": "NA",
+        "processorFeatures": "Intel AVX, Intel AVX2, Intel AVX512, Intel Turbo",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-gov-west-1",
+        "network_performance": "25 Gigabit",
+        "family": "General purpose",
+        "instance_type": "db.m5.24xlarge",
+        "database_engine": "SQL Server",
+        "arch": "64-bit",
+        "pricing": {
+            "us-gov-west-1": {
+                "SQL Server": {
+                    "ondemand": 56.787
+                },
+                "Oracle": {
+                    "ondemand": 9.84
+                },
+                "MySQL": {
+                    "ondemand": 9.84
+                },
+                "MariaDB": {
+                    "ondemand": 9.84
+                }
+            },
+            "me-south-1": {
+                "Oracle": {
+                    "ondemand": 9.979
+                },
+                "SQL Server": {
+                    "ondemand": 33.264
+                },
+                "MySQL": {
+                    "ondemand": 9.979
+                },
+                "MariaDB": {
+                    "ondemand": 9.979
+                },
+                "PostgreSQL": {
+                    "ondemand": 10.402
+                }
+            },
+            "ap-northeast-1": {
+                "MySQL": {
+                    "ondemand": 11.28
+                },
+                "Oracle": {
+                    "ondemand": 11.28
+                },
+                "SQL Server": {
+                    "ondemand": 33.192
+                },
+                "PostgreSQL": {
+                    "ondemand": 11.856
+                },
+                "MariaDB": {
+                    "ondemand": 11.28
+                }
+            },
+            "eu-north-1": {
+                "Oracle": {
+                    "ondemand": 8.618
+                },
+                "MariaDB": {
+                    "ondemand": 8.618
+                },
+                "SQL Server": {
+                    "ondemand": 28.728
+                },
+                "PostgreSQL": {
+                    "ondemand": 8.983
+                },
+                "MySQL": {
+                    "ondemand": 8.618
+                }
+            },
+            "us-west-2": {
+                "MariaDB": {
+                    "ondemand": 8.208
+                },
+                "Oracle": {
+                    "ondemand": 8.208
+                },
+                "SQL Server": {
+                    "ondemand": 29.376
+                },
+                "MySQL": {
+                    "ondemand": 8.208
+                },
+                "PostgreSQL": {
+                    "ondemand": 8.544
+                }
+            },
+            "eu-west-2": {
+                "MySQL": {
+                    "ondemand": 9.504
+                },
+                "SQL Server": {
+                    "ondemand": 57.024
+                },
+                "MariaDB": {
+                    "ondemand": 9.504
+                },
+                "Oracle": {
+                    "ondemand": 9.504
+                },
+                "PostgreSQL": {
+                    "ondemand": 9.888
+                }
+            },
+            "ap-southeast-2": {
+                "Oracle": {
+                    "ondemand": 11.28
+                },
+                "SQL Server": {
+                    "ondemand": 32.808
+                },
+                "PostgreSQL": {
+                    "ondemand": 11.856
+                },
+                "MariaDB": {
+                    "ondemand": 11.28
+                },
+                "MySQL": {
+                    "ondemand": 11.28
+                }
+            },
+            "ap-southeast-1": {
+                "SQL Server": {
+                    "ondemand": 57.552
+                },
+                "PostgreSQL": {
+                    "ondemand": 11.856
+                },
+                "MySQL": {
+                    "ondemand": 11.28
+                },
+                "MariaDB": {
+                    "ondemand": 11.28
+                },
+                "Oracle": {
+                    "ondemand": 11.28
+                }
+            },
+            "eu-west-3": {
+                "PostgreSQL": {
+                    "ondemand": 9.888
+                },
+                "SQL Server": {
+                    "ondemand": 32.718
+                },
+                "Oracle": {
+                    "ondemand": 9.504
+                },
+                "MySQL": {
+                    "ondemand": 9.504
+                },
+                "MariaDB": {
+                    "ondemand": 9.504
+                }
+            },
+            "ca-central-1": {
+                "SQL Server": {
+                    "ondemand": 56.712
+                },
+                "MySQL": {
+                    "ondemand": 9.072
+                },
+                "Oracle": {
+                    "ondemand": 9.072
+                },
+                "PostgreSQL": {
+                    "ondemand": 9.408
+                },
+                "MariaDB": {
+                    "ondemand": 9.072
+                }
+            },
+            "us-east-1": {
+                "SQL Server": {
+                    "ondemand": 56.064
+                },
+                "MySQL": {
+                    "ondemand": 8.208
+                },
+                "Oracle": {
+                    "ondemand": 8.208
+                },
+                "PostgreSQL": {
+                    "ondemand": 8.544
+                },
+                "MariaDB": {
+                    "ondemand": 8.208
+                }
+            },
+            "ap-northeast-3": {
+                "SQL Server": {
+                    "ondemand": 57.792
+                },
+                "Oracle": {
+                    "ondemand": 11.976
+                }
+            },
+            "eu-central-1": {
+                "MariaDB": {
+                    "ondemand": 9.744
+                },
+                "SQL Server": {
+                    "ondemand": 57.264
+                },
+                "PostgreSQL": {
+                    "ondemand": 10.176
+                },
+                "Oracle": {
+                    "ondemand": 9.744
+                },
+                "MySQL": {
+                    "ondemand": 9.744
+                }
+            },
+            "sa-east-1": {
+                "SQL Server": {
+                    "ondemand": 33.84
+                },
+                "Oracle": {
+                    "ondemand": 11.088
+                },
+                "MySQL": {
+                    "ondemand": 11.088
+                },
+                "MariaDB": {
+                    "ondemand": 11.088
+                },
+                "PostgreSQL": {
+                    "ondemand": 11.184
+                }
+            },
+            "ap-northeast-2": {
+                "SQL Server": {
+                    "ondemand": 31.536
+                },
+                "PostgreSQL": {
+                    "ondemand": 11.856
+                },
+                "Oracle": {
+                    "ondemand": 11.328
+                },
+                "MySQL": {
+                    "ondemand": 11.328
+                },
+                "MariaDB": {
+                    "ondemand": 11.328
+                }
+            },
+            "us-gov-east-1": {
+                "SQL Server": {
+                    "ondemand": 56.787
+                },
+                "MariaDB": {
+                    "ondemand": 9.84
+                },
+                "MySQL": {
+                    "ondemand": 9.84
+                },
+                "Oracle": {
+                    "ondemand": 9.84
+                }
+            },
+            "eu-west-1": {
+                "SQL Server": {
+                    "ondemand": 30.24
+                },
+                "MariaDB": {
+                    "ondemand": 9.072
+                },
+                "Oracle": {
+                    "ondemand": 9.072
+                },
+                "PostgreSQL": {
+                    "ondemand": 9.456
+                },
+                "MySQL": {
+                    "ondemand": 9.072
+                }
+            },
+            "us-west-1": {
+                "SQL Server": {
+                    "ondemand": 57.072
+                },
+                "MySQL": {
+                    "ondemand": 9.36
+                },
+                "PostgreSQL": {
+                    "ondemand": 9.744
+                },
+                "MariaDB": {
+                    "ondemand": 9.36
+                },
+                "Oracle": {
+                    "ondemand": 9.36
+                }
+            },
+            "ap-east-1": {
+                "SQL Server": {
+                    "ondemand": 63.3072
+                },
+                "PostgreSQL": {
+                    "ondemand": 13.0416
+                },
+                "MySQL": {
+                    "ondemand": 12.408
+                },
+                "MariaDB": {
+                    "ondemand": 12.408
+                },
+                "Oracle": {
+                    "ondemand": 12.408
+                }
+            },
+            "ap-south-1": {
+                "MySQL": {
+                    "ondemand": 11.568
+                },
+                "SQL Server": {
+                    "ondemand": 57.432
+                },
+                "Oracle": {
+                    "ondemand": 11.568
+                },
+                "MariaDB": {
+                    "ondemand": 11.568
+                },
+                "PostgreSQL": {
+                    "ondemand": 12.144
+                }
+            },
+            "us-east-2": {
+                "MariaDB": {
+                    "ondemand": 8.208
+                },
+                "MySQL": {
+                    "ondemand": 8.208
+                },
+                "PostgreSQL": {
+                    "ondemand": 8.544
+                },
+                "SQL Server": {
+                    "ondemand": 29.376
+                },
+                "Oracle": {
+                    "ondemand": 8.208
+                }
+            }
+        },
+        "pretty_name": "M5 24xlarge"
     },
     {
         "servicecode": "AmazonRDS",
@@ -1071,9 +1513,58 @@
         "database_engine": "MySQL",
         "arch": "64-bit",
         "pricing": {
+            "us-east-2": {
+                "SQL Server": {
+                    "ondemand": 30.012
+                },
+                "Oracle": {
+                    "ondemand": 5.592
+                },
+                "MySQL": {
+                    "ondemand": 5.76
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 6.96
+                },
+                "MariaDB": {
+                    "ondemand": 5.76
+                },
+                "PostgreSQL": {
+                    "ondemand": 6.0
+                },
+                "Aurora MySQL": {
+                    "ondemand": 6.96
+                }
+            },
+            "me-south-1": {
+                "SQL Server": {
+                    "ondemand": 20.262
+                },
+                "MariaDB": {
+                    "ondemand": 6.996
+                },
+                "Aurora MySQL": {
+                    "ondemand": 8.448
+                },
+                "MySQL": {
+                    "ondemand": 6.996
+                },
+                "Oracle": {
+                    "ondemand": 6.806
+                },
+                "PostgreSQL": {
+                    "ondemand": 7.392
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 8.448
+                }
+            },
             "eu-west-2": {
                 "Aurora PostgreSQL": {
                     "ondemand": 8.16
+                },
+                "SQL Server": {
+                    "ondemand": 31.008
                 },
                 "MySQL": {
                     "ondemand": 6.72
@@ -1091,9 +1582,35 @@
                     "ondemand": 6.72
                 }
             },
+            "ap-northeast-1": {
+                "SQL Server": {
+                    "ondemand": 30.996
+                },
+                "PostgreSQL": {
+                    "ondemand": 7.2
+                },
+                "MySQL": {
+                    "ondemand": 6.84
+                },
+                "Aurora MySQL": {
+                    "ondemand": 8.4
+                },
+                "Oracle": {
+                    "ondemand": 6.648
+                },
+                "MariaDB": {
+                    "ondemand": 6.84
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 8.4
+                }
+            },
             "ap-southeast-2": {
                 "PostgreSQL": {
                     "ondemand": 7.2
+                },
+                "SQL Server": {
+                    "ondemand": 19.68
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 8.4
@@ -1127,13 +1644,42 @@
                 "PostgreSQL": {
                     "ondemand": 7.2
                 },
+                "SQL Server": {
+                    "ondemand": 19.68
+                },
                 "MySQL": {
                     "ondemand": 6.84
+                }
+            },
+            "ap-northeast-2": {
+                "SQL Server": {
+                    "ondemand": 30.996
+                },
+                "PostgreSQL": {
+                    "ondemand": 7.2
+                },
+                "MySQL": {
+                    "ondemand": 6.84
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 8.4
+                },
+                "Oracle": {
+                    "ondemand": 6.648
+                },
+                "MariaDB": {
+                    "ondemand": 6.84
+                },
+                "Aurora MySQL": {
+                    "ondemand": 8.4
                 }
             },
             "eu-central-1": {
                 "MySQL": {
                     "ondemand": 6.96
+                },
+                "SQL Server": {
+                    "ondemand": 19.92
                 },
                 "Aurora MySQL": {
                     "ondemand": 8.4
@@ -1155,6 +1701,9 @@
                 "Aurora PostgreSQL": {
                     "ondemand": 7.68
                 },
+                "SQL Server": {
+                    "ondemand": 18.42
+                },
                 "PostgreSQL": {
                     "ondemand": 6.72
                 },
@@ -1175,6 +1724,9 @@
                 "Aurora MySQL": {
                     "ondemand": 7.92
                 },
+                "SQL Server": {
+                    "ondemand": 30.696
+                },
                 "Oracle": {
                     "ondemand": 6.312
                 },
@@ -1188,26 +1740,6 @@
                     "ondemand": 6.84
                 }
             },
-            "ap-northeast-1": {
-                "PostgreSQL": {
-                    "ondemand": 7.2
-                },
-                "MySQL": {
-                    "ondemand": 6.84
-                },
-                "Aurora MySQL": {
-                    "ondemand": 8.4
-                },
-                "Oracle": {
-                    "ondemand": 6.648
-                },
-                "MariaDB": {
-                    "ondemand": 6.84
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 8.4
-                }
-            },
             "us-east-1": {
                 "PostgreSQL": {
                     "ondemand": 6.0
@@ -1217,6 +1749,9 @@
                 },
                 "Aurora MySQL": {
                     "ondemand": 6.96
+                },
+                "SQL Server": {
+                    "ondemand": 18.24
                 },
                 "MariaDB": {
                     "ondemand": 5.76
@@ -1238,6 +1773,9 @@
                 "Oracle": {
                     "ondemand": 6.144
                 },
+                "SQL Server": {
+                    "ondemand": 18.696
+                },
                 "PostgreSQL": {
                     "ondemand": 6.486
                 },
@@ -1248,52 +1786,15 @@
                     "ondemand": 7.68
                 }
             },
-            "us-east-2": {
-                "Oracle": {
-                    "ondemand": 5.592
-                },
-                "MySQL": {
-                    "ondemand": 5.76
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 6.96
-                },
-                "MariaDB": {
-                    "ondemand": 5.76
-                },
-                "PostgreSQL": {
-                    "ondemand": 6.0
-                },
-                "Aurora MySQL": {
-                    "ondemand": 6.96
-                }
-            },
-            "me-south-1": {
-                "MariaDB": {
-                    "ondemand": 6.996
-                },
-                "Aurora MySQL": {
-                    "ondemand": 8.448
-                },
-                "MySQL": {
-                    "ondemand": 6.996
-                },
-                "Oracle": {
-                    "ondemand": 6.806
-                },
-                "PostgreSQL": {
-                    "ondemand": 7.392
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 8.448
-                }
-            },
             "us-west-2": {
                 "PostgreSQL": {
                     "ondemand": 6.0
                 },
                 "MySQL": {
                     "ondemand": 5.76
+                },
+                "SQL Server": {
+                    "ondemand": 18.24
                 },
                 "Oracle": {
                     "ondemand": 5.592
@@ -1309,6 +1810,9 @@
                 }
             },
             "eu-west-3": {
+                "SQL Server": {
+                    "ondemand": 31.008
+                },
                 "Aurora MySQL": {
                     "ondemand": 8.04
                 },
@@ -1329,6 +1833,9 @@
                 }
             },
             "us-west-1": {
+                "SQL Server": {
+                    "ondemand": 30.576
+                },
                 "Oracle": {
                     "ondemand": 6.163
                 },
@@ -1348,6 +1855,14 @@
                     "ondemand": 7.68
                 }
             },
+            "us-gov-west-1": {
+                "SQL Server": {
+                    "ondemand": 29.808
+                },
+                "Oracle": {
+                    "ondemand": 6.73
+                }
+            },
             "eu-north-1": {
                 "MariaDB": {
                     "ondemand": 5.878
@@ -1357,6 +1872,9 @@
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 7.2
+                },
+                "SQL Server": {
+                    "ondemand": 29.052
                 },
                 "Aurora MySQL": {
                     "ondemand": 7.2
@@ -1368,29 +1886,12 @@
                     "ondemand": 6.172
                 }
             },
-            "ap-northeast-2": {
-                "PostgreSQL": {
-                    "ondemand": 7.2
-                },
-                "MySQL": {
-                    "ondemand": 6.84
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 8.4
-                },
-                "Oracle": {
-                    "ondemand": 6.648
-                },
-                "MariaDB": {
-                    "ondemand": 6.84
-                },
-                "Aurora MySQL": {
-                    "ondemand": 8.4
-                }
-            },
             "ap-east-1": {
                 "Oracle": {
                     "ondemand": 7.3128
+                },
+                "SQL Server": {
+                    "ondemand": 21.648
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 9.24
@@ -1411,16 +1912,22 @@
             "us-gov-east-1": {
                 "Oracle": {
                     "ondemand": 6.732
+                },
+                "SQL Server": {
+                    "ondemand": 29.808
                 }
             },
             "ap-northeast-3": {
                 "Oracle": {
                     "ondemand": 6.648
+                },
+                "SQL Server": {
+                    "ondemand": 23.94
                 }
             },
-            "us-gov-west-1": {
+            "sa-east-1": {
                 "Oracle": {
-                    "ondemand": 6.73
+                    "ondemand": 11.664
                 }
             }
         },
@@ -1877,6 +2384,9 @@
                 "Oracle": {
                     "ondemand": 4.12
                 },
+                "SQL Server": {
+                    "ondemand": 9.503
+                },
                 "MariaDB": {
                     "ondemand": 1.584
                 },
@@ -1890,6 +2400,9 @@
             "us-gov-east-1": {
                 "Oracle": {
                     "ondemand": 3.848
+                },
+                "SQL Server": {
+                    "ondemand": 5.256
                 },
                 "MariaDB": {
                     "ondemand": 1.64
@@ -2003,6 +2516,9 @@
             "ap-northeast-3": {
                 "Oracle": {
                     "ondemand": 1.996
+                },
+                "SQL Server": {
+                    "ondemand": 9.632
                 }
             },
             "ap-southeast-1": {
@@ -2176,6 +2692,9 @@
                 }
             },
             "us-gov-west-1": {
+                "SQL Server": {
+                    "ondemand": 2.47
+                },
                 "Oracle": {
                     "ondemand": 1.64
                 },
@@ -2358,20 +2877,6 @@
                     "ondemand": 0.019
                 }
             },
-            "eu-central-1": {
-                "Oracle": {
-                    "ondemand": 0.02
-                },
-                "MySQL": {
-                    "ondemand": 0.02
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.021
-                },
-                "MariaDB": {
-                    "ondemand": 0.02
-                }
-            },
             "ap-east-1": {
                 "Oracle": {
                     "ondemand": 0.0286
@@ -2384,6 +2889,20 @@
                 },
                 "MySQL": {
                     "ondemand": 0.0286
+                }
+            },
+            "eu-central-1": {
+                "Oracle": {
+                    "ondemand": 0.02
+                },
+                "MySQL": {
+                    "ondemand": 0.02
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.021
+                },
+                "MariaDB": {
+                    "ondemand": 0.02
                 }
             },
             "sa-east-1": {
@@ -2490,6 +3009,369 @@
     },
     {
         "servicecode": "AmazonRDS",
+        "location": "South America (Sao Paulo)",
+        "locationType": "AWS Region",
+        "instanceType": "db.t3.2xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "General purpose",
+        "vcpu": "8",
+        "physicalProcessor": "Intel Skylake E5 2686 v5 (2.5 GHz)",
+        "memory": "32",
+        "storage": "EBS Only",
+        "networkPerformance": "Moderate",
+        "processorArchitecture": "64-bit",
+        "engineCode": "15",
+        "databaseEngine": "SQL Server",
+        "databaseEdition": "Enterprise",
+        "licenseModel": "License included",
+        "deploymentOption": "Multi-AZ",
+        "usagetype": "SAE1-MirrorUsage:db.t3.2xl",
+        "operation": "CreateDBInstance:0015",
+        "instanceTypeFamily": "T3",
+        "normalizationSizeFactor": "NA",
+        "servicename": "Amazon Relational Database Service",
+        "region": "sa-east-1",
+        "network_performance": "Moderate",
+        "family": "General purpose",
+        "instance_type": "db.t3.2xlarge",
+        "database_engine": "SQL Server",
+        "arch": "64-bit",
+        "pricing": {
+            "ca-central-1": {
+                "Oracle": {
+                    "ondemand": 1.328
+                },
+                "MariaDB": {
+                    "ondemand": 0.592
+                },
+                "SQL Server": {
+                    "ondemand": 0.85
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.64
+                },
+                "MySQL": {
+                    "ondemand": 0.592
+                }
+            },
+            "ap-northeast-1": {
+                "Oracle": {
+                    "ondemand": 1.408
+                },
+                "SQL Server": {
+                    "ondemand": 2.236
+                },
+                "MariaDB": {
+                    "ondemand": 0.832
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.896
+                },
+                "MySQL": {
+                    "ondemand": 0.832
+                }
+            },
+            "ap-south-1": {
+                "PostgreSQL": {
+                    "ondemand": 0.848
+                },
+                "Oracle": {
+                    "ondemand": 0.784
+                },
+                "MySQL": {
+                    "ondemand": 0.784
+                },
+                "SQL Server": {
+                    "ondemand": 2.125
+                },
+                "MariaDB": {
+                    "ondemand": 0.784
+                }
+            },
+            "ap-northeast-2": {
+                "SQL Server": {
+                    "ondemand": 4.632
+                },
+                "MySQL": {
+                    "ondemand": 0.832
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.896
+                },
+                "Oracle": {
+                    "ondemand": 1.408
+                },
+                "MariaDB": {
+                    "ondemand": 0.832
+                }
+            },
+            "ap-southeast-1": {
+                "MySQL": {
+                    "ondemand": 0.832
+                },
+                "MariaDB": {
+                    "ondemand": 0.832
+                },
+                "Oracle": {
+                    "ondemand": 0.832
+                },
+                "SQL Server": {
+                    "ondemand": 0.916
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.896
+                }
+            },
+            "eu-west-2": {
+                "Oracle": {
+                    "ondemand": 1.296
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.656
+                },
+                "SQL Server": {
+                    "ondemand": 4.582
+                },
+                "MySQL": {
+                    "ondemand": 0.608
+                },
+                "MariaDB": {
+                    "ondemand": 0.608
+                }
+            },
+            "eu-west-1": {
+                "MySQL": {
+                    "ondemand": 0.576
+                },
+                "Oracle": {
+                    "ondemand": 1.232
+                },
+                "SQL Server": {
+                    "ondemand": 2.134
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.624
+                },
+                "MariaDB": {
+                    "ondemand": 0.576
+                }
+            },
+            "me-south-1": {
+                "Oracle": {
+                    "ondemand": 0.634
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.686
+                },
+                "SQL Server": {
+                    "ondemand": 5.023
+                },
+                "MySQL": {
+                    "ondemand": 0.634
+                },
+                "MariaDB": {
+                    "ondemand": 0.634
+                }
+            },
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 1.2
+                },
+                "MySQL": {
+                    "ondemand": 0.544
+                },
+                "MariaDB": {
+                    "ondemand": 0.544
+                },
+                "SQL Server": {
+                    "ondemand": 0.8
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.579
+                }
+            },
+            "ap-southeast-2": {
+                "SQL Server": {
+                    "ondemand": 0.916
+                },
+                "Oracle": {
+                    "ondemand": 0.832
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.896
+                },
+                "MariaDB": {
+                    "ondemand": 0.832
+                },
+                "MySQL": {
+                    "ondemand": 0.832
+                }
+            },
+            "us-west-1": {
+                "Oracle": {
+                    "ondemand": 0.704
+                },
+                "MariaDB": {
+                    "ondemand": 0.704
+                },
+                "MySQL": {
+                    "ondemand": 0.704
+                },
+                "SQL Server": {
+                    "ondemand": 4.607
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.76
+                }
+            },
+            "us-gov-west-1": {
+                "Oracle": {
+                    "ondemand": 0.656
+                },
+                "SQL Server": {
+                    "ondemand": 4.599
+                }
+            },
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 1.2
+                },
+                "SQL Server": {
+                    "ondemand": 4.524
+                },
+                "MySQL": {
+                    "ondemand": 0.544
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.579
+                },
+                "MariaDB": {
+                    "ondemand": 0.544
+                }
+            },
+            "sa-east-1": {
+                "SQL Server": {
+                    "ondemand": 1.066
+                },
+                "Oracle": {
+                    "ondemand": 1.12
+                },
+                "MariaDB": {
+                    "ondemand": 1.12
+                },
+                "PostgreSQL": {
+                    "ondemand": 1.208
+                },
+                "MySQL": {
+                    "ondemand": 1.12
+                }
+            },
+            "ap-east-1": {
+                "MySQL": {
+                    "ondemand": 0.9152
+                },
+                "Oracle": {
+                    "ondemand": 0.9152
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.9856
+                },
+                "SQL Server": {
+                    "ondemand": 4.699
+                },
+                "MariaDB": {
+                    "ondemand": 0.9152
+                }
+            },
+            "eu-west-3": {
+                "Oracle": {
+                    "ondemand": 0.608
+                },
+                "MySQL": {
+                    "ondemand": 0.608
+                },
+                "SQL Server": {
+                    "ondemand": 4.582
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.656
+                },
+                "MariaDB": {
+                    "ondemand": 0.608
+                }
+            },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 0.836
+                },
+                "SQL Server": {
+                    "ondemand": 4.657
+                }
+            },
+            "us-west-2": {
+                "Oracle": {
+                    "ondemand": 1.2
+                },
+                "SQL Server": {
+                    "ondemand": 0.8
+                },
+                "MariaDB": {
+                    "ondemand": 0.544
+                },
+                "MySQL": {
+                    "ondemand": 0.544
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.579
+                }
+            },
+            "eu-central-1": {
+                "MySQL": {
+                    "ondemand": 0.64
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.672
+                },
+                "Oracle": {
+                    "ondemand": 0.64
+                },
+                "SQL Server": {
+                    "ondemand": 2.162
+                },
+                "MariaDB": {
+                    "ondemand": 0.64
+                }
+            },
+            "eu-north-1": {
+                "MariaDB": {
+                    "ondemand": 0.547
+                },
+                "SQL Server": {
+                    "ondemand": 0.816
+                },
+                "Oracle": {
+                    "ondemand": 0.547
+                },
+                "MySQL": {
+                    "ondemand": 0.547
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.593
+                }
+            },
+            "us-gov-east-1": {
+                "SQL Server": {
+                    "ondemand": 4.599
+                },
+                "Oracle": {
+                    "ondemand": 0.656
+                }
+            }
+        },
+        "pretty_name": "T3 Double Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
         "location": "US West (N. California)",
         "locationType": "AWS Region",
         "instanceType": "db.r5.xlarge",
@@ -2531,6 +3413,9 @@
                         "yrTerm1.noUpfront": 0.481
                     }
                 },
+                "SQL Server": {
+                    "ondemand": 0.95
+                },
                 "Oracle": {
                     "ondemand": 0.514
                 },
@@ -2563,6 +3448,9 @@
                 "MariaDB": {
                     "ondemand": 0.58
                 },
+                "SQL Server": {
+                    "ondemand": 0.97
+                },
                 "Aurora MySQL": {
                     "ondemand": 0.7
                 }
@@ -2576,6 +3464,9 @@
                 },
                 "MariaDB": {
                     "ondemand": 0.57
+                },
+                "SQL Server": {
+                    "ondemand": 2.583
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 0.7
@@ -2603,6 +3494,9 @@
                 "Oracle": {
                     "ondemand": 0.542
                 },
+                "SQL Server": {
+                    "ondemand": 2.584
+                },
                 "Aurora PostgreSQL": {
                     "ondemand": 0.67
                 }
@@ -2625,56 +3519,46 @@
                 },
                 "Aurora MySQL": {
                     "ondemand": 0.704
+                },
+                "SQL Server": {
+                    "ondemand": 1.689
                 }
             },
             "us-gov-west-1": {
                 "Oracle": {
                     "ondemand": 0.561
+                },
+                "SQL Server": {
+                    "ondemand": 2.484
                 }
             },
-            "ap-northeast-3": {
-                "Oracle": {
-                    "ondemand": 0.554
-                }
-            },
-            "us-east-1": {
-                "Oracle": {
-                    "ondemand": 0.466
+            "ca-central-1": {
+                "SQL Server": {
+                    "ondemand": 2.558
                 },
-                "MySQL": {
-                    "ondemand": 0.48
-                },
-                "MariaDB": {
-                    "ondemand": 0.48
+                "Oracle": {
+                    "ondemand": 0.512
                 },
                 "Aurora PostgreSQL": {
-                    "ondemand": 0.58
+                    "ondemand": 0.64
                 },
                 "Aurora MySQL": {
-                    "ondemand": 0.58
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.5
-                }
-            },
-            "ap-south-1": {
-                "MariaDB": {
-                    "ondemand": 0.54
-                },
-                "Oracle": {
-                    "ondemand": 1.031
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.57
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.66
+                    "ondemand": 0.64
                 },
                 "MySQL": {
-                    "ondemand": 0.54
+                    "ondemand": 0.52
+                },
+                "MariaDB": {
+                    "ondemand": 0.52
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.5405
                 }
             },
             "ap-east-1": {
+                "SQL Server": {
+                    "ondemand": 2.841
+                },
                 "Oracle": {
                     "ondemand": 0.6094
                 },
@@ -2694,6 +3578,80 @@
                     "ondemand": 0.627
                 }
             },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 0.554
+                },
+                "SQL Server": {
+                    "ondemand": 1.995
+                }
+            },
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 0.466
+                },
+                "MySQL": {
+                    "ondemand": 0.48
+                },
+                "SQL Server": {
+                    "ondemand": 1.52
+                },
+                "MariaDB": {
+                    "ondemand": 0.48
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.58
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.58
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.5
+                }
+            },
+            "ap-south-1": {
+                "MariaDB": {
+                    "ondemand": 0.54
+                },
+                "SQL Server": {
+                    "ondemand": 2.558
+                },
+                "Oracle": {
+                    "ondemand": 1.031
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.57
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.66
+                },
+                "MySQL": {
+                    "ondemand": 0.54
+                }
+            },
+            "eu-west-1": {
+                "SQL Server": {
+                    "ondemand": 0.895
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.56
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.64
+                },
+                "MySQL": {
+                    "ondemand": 0.53
+                },
+                "Oracle": {
+                    "ondemand": 0.996
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.64
+                },
+                "MariaDB": {
+                    "ondemand": 0.53
+                }
+            },
             "ap-northeast-2": {
                 "Oracle": {
                     "ondemand": 0.554
@@ -2703,6 +3661,9 @@
                 },
                 "Aurora MySQL": {
                     "ondemand": 0.7
+                },
+                "SQL Server": {
+                    "ondemand": 2.583
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 0.7
@@ -2717,6 +3678,9 @@
             "eu-north-1": {
                 "MariaDB": {
                     "ondemand": 0.49
+                },
+                "SQL Server": {
+                    "ondemand": 0.85
                 },
                 "PostgreSQL": {
                     "ondemand": 0.515
@@ -2744,6 +3708,9 @@
                 "MariaDB": {
                     "ondemand": 0.48
                 },
+                "SQL Server": {
+                    "ondemand": 1.52
+                },
                 "PostgreSQL": {
                     "ondemand": 0.5
                 },
@@ -2763,6 +3730,9 @@
                 },
                 "PostgreSQL": {
                     "ondemand": 0.588
+                },
+                "SQL Server": {
+                    "ondemand": 2.584
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 0.68
@@ -2784,6 +3754,9 @@
                 "Oracle": {
                     "ondemand": 1.033
                 },
+                "SQL Server": {
+                    "ondemand": 1.0
+                },
                 "MariaDB": {
                     "ondemand": 0.57
                 },
@@ -2794,49 +3767,17 @@
                     "ondemand": 0.57
                 }
             },
-            "ca-central-1": {
-                "Oracle": {
-                    "ondemand": 0.512
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.64
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.64
-                },
-                "MySQL": {
-                    "ondemand": 0.52
-                },
-                "MariaDB": {
-                    "ondemand": 0.52
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.5405
-                }
-            },
             "us-gov-east-1": {
                 "Oracle": {
                     "ondemand": 1.077
+                },
+                "SQL Server": {
+                    "ondemand": 0.946
                 }
             },
-            "eu-west-1": {
-                "PostgreSQL": {
-                    "ondemand": 0.56
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.64
-                },
-                "MySQL": {
-                    "ondemand": 0.53
-                },
+            "sa-east-1": {
                 "Oracle": {
-                    "ondemand": 0.996
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.64
-                },
-                "MariaDB": {
-                    "ondemand": 0.53
+                    "ondemand": 0.972
                 }
             },
             "us-west-2": {
@@ -2855,6 +3796,9 @@
                 "MySQL": {
                     "ondemand": 0.48
                 },
+                "SQL Server": {
+                    "ondemand": 1.52
+                },
                 "Aurora PostgreSQL": {
                     "ondemand": 0.58
                 }
@@ -2862,6 +3806,9 @@
             "ap-northeast-1": {
                 "MySQL": {
                     "ondemand": 0.57
+                },
+                "SQL Server": {
+                    "ondemand": 0.96
                 },
                 "Aurora MySQL": {
                     "ondemand": 0.7
@@ -3786,380 +4733,6 @@
             }
         },
         "pretty_name": "M4 General Purpose Extra Large"
-    },
-    {
-        "servicecode": "AmazonRDS",
-        "location": "Middle East (Bahrain)",
-        "locationType": "AWS Region",
-        "instanceType": "db.m5.24xlarge",
-        "currentGeneration": "Yes",
-        "instanceFamily": "General purpose",
-        "vcpu": "96",
-        "physicalProcessor": "Intel Xeon Platinum 8175",
-        "clockSpeed": "2.5 GHz",
-        "memory": "384",
-        "storage": "EBS Only",
-        "networkPerformance": "25 Gigabit",
-        "processorArchitecture": "64-bit",
-        "engineCode": "5",
-        "databaseEngine": "Oracle",
-        "databaseEdition": "Enterprise",
-        "licenseModel": "Bring your own license",
-        "deploymentOption": "Single-AZ",
-        "usagetype": "MES1-InstanceUsage:db.m5.24xl",
-        "operation": "CreateDBInstance:0005",
-        "dedicatedEbsThroughput": "12000 Mbps",
-        "enhancedNetworkingSupported": "Yes",
-        "instanceTypeFamily": "M5",
-        "normalizationSizeFactor": "48",
-        "processorFeatures": "Intel AVX, Intel AVX2, Intel AVX512, Intel Turbo",
-        "servicename": "Amazon Relational Database Service",
-        "region": "me-south-1",
-        "network_performance": "25 Gigabit",
-        "family": "General purpose",
-        "instance_type": "db.m5.24xlarge",
-        "database_engine": "Oracle",
-        "arch": "64-bit",
-        "pricing": {
-            "me-south-1": {
-                "Oracle": {
-                    "ondemand": 9.979,
-                    "reserved": {
-                        "yrTerm3.partialUpfront": 4.602555707762557,
-                        "yrTerm1.partialUpfront": 6.462050228310503,
-                        "yrTerm3.allUpfront": 4.510502283105023,
-                        "yrTerm1.allUpfront": 6.332762557077626,
-                        "yrTerm1.noUpfront": 6.7851
-                    }
-                },
-                "SQL Server": {
-                    "ondemand": 33.264
-                },
-                "MySQL": {
-                    "ondemand": 9.979
-                },
-                "MariaDB": {
-                    "ondemand": 9.979
-                },
-                "PostgreSQL": {
-                    "ondemand": 10.402
-                }
-            },
-            "ap-northeast-1": {
-                "MySQL": {
-                    "ondemand": 11.28
-                },
-                "Oracle": {
-                    "ondemand": 11.28
-                },
-                "SQL Server": {
-                    "ondemand": 33.192
-                },
-                "PostgreSQL": {
-                    "ondemand": 11.856
-                },
-                "MariaDB": {
-                    "ondemand": 11.28
-                }
-            },
-            "eu-north-1": {
-                "Oracle": {
-                    "ondemand": 8.618
-                },
-                "MariaDB": {
-                    "ondemand": 8.618
-                },
-                "SQL Server": {
-                    "ondemand": 28.728
-                },
-                "PostgreSQL": {
-                    "ondemand": 8.983
-                },
-                "MySQL": {
-                    "ondemand": 8.618
-                }
-            },
-            "us-west-2": {
-                "MariaDB": {
-                    "ondemand": 8.208
-                },
-                "Oracle": {
-                    "ondemand": 8.208
-                },
-                "SQL Server": {
-                    "ondemand": 29.376
-                },
-                "MySQL": {
-                    "ondemand": 8.208
-                },
-                "PostgreSQL": {
-                    "ondemand": 8.544
-                }
-            },
-            "eu-west-2": {
-                "MySQL": {
-                    "ondemand": 9.504
-                },
-                "SQL Server": {
-                    "ondemand": 57.024
-                },
-                "MariaDB": {
-                    "ondemand": 9.504
-                },
-                "Oracle": {
-                    "ondemand": 9.504
-                },
-                "PostgreSQL": {
-                    "ondemand": 9.888
-                }
-            },
-            "ap-southeast-2": {
-                "Oracle": {
-                    "ondemand": 11.28
-                },
-                "SQL Server": {
-                    "ondemand": 32.808
-                },
-                "PostgreSQL": {
-                    "ondemand": 11.856
-                },
-                "MariaDB": {
-                    "ondemand": 11.28
-                },
-                "MySQL": {
-                    "ondemand": 11.28
-                }
-            },
-            "ap-southeast-1": {
-                "SQL Server": {
-                    "ondemand": 57.552
-                },
-                "PostgreSQL": {
-                    "ondemand": 11.856
-                },
-                "MySQL": {
-                    "ondemand": 11.28
-                },
-                "MariaDB": {
-                    "ondemand": 11.28
-                },
-                "Oracle": {
-                    "ondemand": 11.28
-                }
-            },
-            "eu-west-3": {
-                "PostgreSQL": {
-                    "ondemand": 9.888
-                },
-                "Oracle": {
-                    "ondemand": 9.504
-                },
-                "MySQL": {
-                    "ondemand": 9.504
-                },
-                "MariaDB": {
-                    "ondemand": 9.504
-                }
-            },
-            "ca-central-1": {
-                "SQL Server": {
-                    "ondemand": 56.712
-                },
-                "MySQL": {
-                    "ondemand": 9.072
-                },
-                "Oracle": {
-                    "ondemand": 9.072
-                },
-                "PostgreSQL": {
-                    "ondemand": 9.408
-                },
-                "MariaDB": {
-                    "ondemand": 9.072
-                }
-            },
-            "us-east-1": {
-                "SQL Server": {
-                    "ondemand": 56.064
-                },
-                "MySQL": {
-                    "ondemand": 8.208
-                },
-                "Oracle": {
-                    "ondemand": 8.208
-                },
-                "PostgreSQL": {
-                    "ondemand": 8.544
-                },
-                "MariaDB": {
-                    "ondemand": 8.208
-                }
-            },
-            "eu-central-1": {
-                "MariaDB": {
-                    "ondemand": 9.744
-                },
-                "SQL Server": {
-                    "ondemand": 57.264
-                },
-                "PostgreSQL": {
-                    "ondemand": 10.176
-                },
-                "Oracle": {
-                    "ondemand": 9.744
-                },
-                "MySQL": {
-                    "ondemand": 9.744
-                }
-            },
-            "sa-east-1": {
-                "SQL Server": {
-                    "ondemand": 33.84
-                },
-                "Oracle": {
-                    "ondemand": 11.088
-                },
-                "MySQL": {
-                    "ondemand": 11.088
-                },
-                "MariaDB": {
-                    "ondemand": 11.088
-                },
-                "PostgreSQL": {
-                    "ondemand": 11.184
-                }
-            },
-            "ap-northeast-2": {
-                "SQL Server": {
-                    "ondemand": 31.536
-                },
-                "PostgreSQL": {
-                    "ondemand": 11.856
-                },
-                "Oracle": {
-                    "ondemand": 11.328
-                },
-                "MySQL": {
-                    "ondemand": 11.328
-                },
-                "MariaDB": {
-                    "ondemand": 11.328
-                }
-            },
-            "eu-west-1": {
-                "SQL Server": {
-                    "ondemand": 30.24
-                },
-                "MariaDB": {
-                    "ondemand": 9.072
-                },
-                "Oracle": {
-                    "ondemand": 9.072
-                },
-                "PostgreSQL": {
-                    "ondemand": 9.456
-                },
-                "MySQL": {
-                    "ondemand": 9.072
-                }
-            },
-            "us-gov-west-1": {
-                "Oracle": {
-                    "ondemand": 9.84
-                },
-                "MySQL": {
-                    "ondemand": 9.84
-                },
-                "MariaDB": {
-                    "ondemand": 9.84
-                }
-            },
-            "us-west-1": {
-                "SQL Server": {
-                    "ondemand": 57.072
-                },
-                "MySQL": {
-                    "ondemand": 9.36
-                },
-                "PostgreSQL": {
-                    "ondemand": 9.744
-                },
-                "MariaDB": {
-                    "ondemand": 9.36
-                },
-                "Oracle": {
-                    "ondemand": 9.36
-                }
-            },
-            "ap-east-1": {
-                "SQL Server": {
-                    "ondemand": 36.828
-                },
-                "PostgreSQL": {
-                    "ondemand": 13.0416
-                },
-                "MySQL": {
-                    "ondemand": 12.408
-                },
-                "MariaDB": {
-                    "ondemand": 12.408
-                },
-                "Oracle": {
-                    "ondemand": 12.408
-                }
-            },
-            "ap-south-1": {
-                "MySQL": {
-                    "ondemand": 11.568
-                },
-                "SQL Server": {
-                    "ondemand": 57.432
-                },
-                "Oracle": {
-                    "ondemand": 11.568
-                },
-                "MariaDB": {
-                    "ondemand": 11.568
-                },
-                "PostgreSQL": {
-                    "ondemand": 12.144
-                }
-            },
-            "us-east-2": {
-                "MariaDB": {
-                    "ondemand": 8.208
-                },
-                "MySQL": {
-                    "ondemand": 8.208
-                },
-                "PostgreSQL": {
-                    "ondemand": 8.544
-                },
-                "SQL Server": {
-                    "ondemand": 29.376
-                },
-                "Oracle": {
-                    "ondemand": 8.208
-                }
-            },
-            "us-gov-east-1": {
-                "MariaDB": {
-                    "ondemand": 9.84
-                },
-                "MySQL": {
-                    "ondemand": 9.84
-                },
-                "Oracle": {
-                    "ondemand": 9.84
-                }
-            },
-            "ap-northeast-3": {
-                "Oracle": {
-                    "ondemand": 11.976
-                }
-            }
-        },
-        "pretty_name": "M5 24xlarge"
     },
     {
         "servicecode": "AmazonRDS",
@@ -5284,305 +5857,6 @@
     },
     {
         "servicecode": "AmazonRDS",
-        "location": "EU (Frankfurt)",
-        "locationType": "AWS Region",
-        "instanceType": "db.t3.2xlarge",
-        "currentGeneration": "Yes",
-        "instanceFamily": "General purpose",
-        "vcpu": "8",
-        "physicalProcessor": "Intel Skylake E5 2686 v5 (2.5 GHz)",
-        "memory": "32",
-        "storage": "EBS Only",
-        "networkPerformance": "Moderate",
-        "processorArchitecture": "64-bit",
-        "engineCode": "18",
-        "databaseEngine": "MariaDB",
-        "licenseModel": "No license required",
-        "deploymentOption": "Multi-AZ",
-        "usagetype": "EUC1-Multi-AZUsage:db.t3.2xl",
-        "operation": "CreateDBInstance:0018",
-        "instanceTypeFamily": "T3",
-        "normalizationSizeFactor": "32",
-        "servicename": "Amazon Relational Database Service",
-        "region": "eu-central-1",
-        "network_performance": "Moderate",
-        "family": "General purpose",
-        "instance_type": "db.t3.2xlarge",
-        "database_engine": "MariaDB",
-        "arch": "64-bit",
-        "pricing": {
-            "ca-central-1": {
-                "Oracle": {
-                    "ondemand": 1.328
-                },
-                "MariaDB": {
-                    "ondemand": 0.592
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.64
-                },
-                "MySQL": {
-                    "ondemand": 0.592
-                }
-            },
-            "ap-northeast-1": {
-                "Oracle": {
-                    "ondemand": 1.408
-                },
-                "MariaDB": {
-                    "ondemand": 0.832
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.896
-                },
-                "MySQL": {
-                    "ondemand": 0.832
-                }
-            },
-            "ap-south-1": {
-                "PostgreSQL": {
-                    "ondemand": 0.848
-                },
-                "Oracle": {
-                    "ondemand": 0.784
-                },
-                "MySQL": {
-                    "ondemand": 0.784
-                },
-                "MariaDB": {
-                    "ondemand": 0.784
-                }
-            },
-            "ap-southeast-1": {
-                "MySQL": {
-                    "ondemand": 0.832
-                },
-                "MariaDB": {
-                    "ondemand": 0.832
-                },
-                "Oracle": {
-                    "ondemand": 0.832
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.896
-                }
-            },
-            "eu-west-2": {
-                "Oracle": {
-                    "ondemand": 1.296
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.656
-                },
-                "MySQL": {
-                    "ondemand": 0.608
-                },
-                "MariaDB": {
-                    "ondemand": 0.608
-                }
-            },
-            "eu-west-1": {
-                "MySQL": {
-                    "ondemand": 0.576
-                },
-                "Oracle": {
-                    "ondemand": 1.232
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.624
-                },
-                "MariaDB": {
-                    "ondemand": 0.576
-                }
-            },
-            "me-south-1": {
-                "Oracle": {
-                    "ondemand": 0.634
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.686
-                },
-                "MySQL": {
-                    "ondemand": 0.634
-                },
-                "MariaDB": {
-                    "ondemand": 0.634
-                }
-            },
-            "ap-northeast-2": {
-                "MySQL": {
-                    "ondemand": 0.832
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.896
-                },
-                "Oracle": {
-                    "ondemand": 1.408
-                },
-                "MariaDB": {
-                    "ondemand": 0.832
-                }
-            },
-            "us-east-2": {
-                "Oracle": {
-                    "ondemand": 1.2
-                },
-                "MySQL": {
-                    "ondemand": 0.544
-                },
-                "MariaDB": {
-                    "ondemand": 0.544
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.579
-                }
-            },
-            "us-west-1": {
-                "Oracle": {
-                    "ondemand": 0.704
-                },
-                "MariaDB": {
-                    "ondemand": 0.704
-                },
-                "MySQL": {
-                    "ondemand": 0.704
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.76
-                }
-            },
-            "us-gov-west-1": {
-                "Oracle": {
-                    "ondemand": 0.656
-                }
-            },
-            "us-east-1": {
-                "Oracle": {
-                    "ondemand": 1.2
-                },
-                "MySQL": {
-                    "ondemand": 0.544
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.579
-                },
-                "MariaDB": {
-                    "ondemand": 0.544
-                }
-            },
-            "ap-east-1": {
-                "MySQL": {
-                    "ondemand": 0.9152
-                },
-                "Oracle": {
-                    "ondemand": 0.9152
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.9856
-                },
-                "MariaDB": {
-                    "ondemand": 0.9152
-                }
-            },
-            "eu-west-3": {
-                "Oracle": {
-                    "ondemand": 0.608
-                },
-                "MySQL": {
-                    "ondemand": 0.608
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.656
-                },
-                "MariaDB": {
-                    "ondemand": 0.608
-                }
-            },
-            "ap-northeast-3": {
-                "Oracle": {
-                    "ondemand": 0.836
-                }
-            },
-            "us-west-2": {
-                "Oracle": {
-                    "ondemand": 1.2
-                },
-                "MariaDB": {
-                    "ondemand": 0.544
-                },
-                "MySQL": {
-                    "ondemand": 0.544
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.579
-                }
-            },
-            "ap-southeast-2": {
-                "Oracle": {
-                    "ondemand": 0.832
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.896
-                },
-                "MariaDB": {
-                    "ondemand": 0.832
-                },
-                "MySQL": {
-                    "ondemand": 0.832
-                }
-            },
-            "eu-central-1": {
-                "MySQL": {
-                    "ondemand": 0.64
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.672
-                },
-                "Oracle": {
-                    "ondemand": 0.64
-                },
-                "MariaDB": {
-                    "ondemand": 0.64
-                }
-            },
-            "eu-north-1": {
-                "MariaDB": {
-                    "ondemand": 0.547
-                },
-                "Oracle": {
-                    "ondemand": 0.547
-                },
-                "MySQL": {
-                    "ondemand": 0.547
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.593
-                }
-            },
-            "sa-east-1": {
-                "Oracle": {
-                    "ondemand": 1.12
-                },
-                "MariaDB": {
-                    "ondemand": 1.12
-                },
-                "PostgreSQL": {
-                    "ondemand": 1.208
-                },
-                "MySQL": {
-                    "ondemand": 1.12
-                }
-            },
-            "us-gov-east-1": {
-                "Oracle": {
-                    "ondemand": 0.656
-                }
-            }
-        },
-        "pretty_name": "T3 Double Extra Large"
-    },
-    {
-        "servicecode": "AmazonRDS",
         "location": "US West (N. California)",
         "locationType": "AWS Region",
         "instanceType": "db.t2.xlarge",
@@ -6388,6 +6662,198 @@
     },
     {
         "servicecode": "AmazonRDS",
+        "location": "US East (Ohio)",
+        "locationType": "AWS Region",
+        "instanceType": "db.r5.16xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Memory optimized",
+        "vcpu": "64",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "512",
+        "storage": "EBS Only",
+        "networkPerformance": "20 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "15",
+        "databaseEngine": "SQL Server",
+        "databaseEdition": "Enterprise",
+        "licenseModel": "License included",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "USE2-InstanceUsage:db.r5.16xl",
+        "operation": "CreateDBInstance:0015",
+        "instanceTypeFamily": "R5",
+        "normalizationSizeFactor": "NA",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-2",
+        "network_performance": "20 Gigabit",
+        "family": "Memory optimized",
+        "instance_type": "db.r5.16xlarge",
+        "database_engine": "SQL Server",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-2": {
+                "SQL Server": {
+                    "ondemand": 24.32
+                },
+                "Oracle": {
+                    "ondemand": 7.456
+                }
+            },
+            "ap-southeast-2": {
+                "SQL Server": {
+                    "ondemand": 41.328
+                },
+                "Oracle": {
+                    "ondemand": 8.848
+                }
+            },
+            "ap-northeast-3": {
+                "SQL Server": {
+                    "ondemand": 31.92
+                },
+                "Oracle": {
+                    "ondemand": 8.864
+                }
+            },
+            "us-west-1": {
+                "SQL Server": {
+                    "ondemand": 40.768
+                },
+                "Oracle": {
+                    "ondemand": 8.224
+                }
+            },
+            "eu-west-3": {
+                "Oracle": {
+                    "ondemand": 8.672
+                },
+                "SQL Server": {
+                    "ondemand": 25.456
+                }
+            },
+            "ap-northeast-1": {
+                "Oracle": {
+                    "ondemand": 8.864
+                },
+                "SQL Server": {
+                    "ondemand": 41.328
+                }
+            },
+            "us-gov-east-1": {
+                "SQL Server": {
+                    "ondemand": 25.376
+                },
+                "Oracle": {
+                    "ondemand": 8.976
+                }
+            },
+            "eu-central-1": {
+                "SQL Server": {
+                    "ondemand": 41.344
+                },
+                "Oracle": {
+                    "ondemand": 9.024
+                }
+            },
+            "eu-west-1": {
+                "SQL Server": {
+                    "ondemand": 40.768
+                },
+                "Oracle": {
+                    "ondemand": 8.256
+                }
+            },
+            "us-east-1": {
+                "SQL Server": {
+                    "ondemand": 40.016
+                },
+                "Oracle": {
+                    "ondemand": 7.456
+                }
+            },
+            "us-gov-west-1": {
+                "SQL Server": {
+                    "ondemand": 25.376
+                }
+            },
+            "me-south-1": {
+                "Oracle": {
+                    "ondemand": 9.0816
+                },
+                "SQL Server": {
+                    "ondemand": 44.845
+                }
+            },
+            "ap-east-1": {
+                "Oracle": {
+                    "ondemand": 9.7504
+                },
+                "SQL Server": {
+                    "ondemand": 28.864
+                }
+            },
+            "ap-southeast-1": {
+                "SQL Server": {
+                    "ondemand": 26.24
+                },
+                "Oracle": {
+                    "ondemand": 8.864
+                }
+            },
+            "ap-south-1": {
+                "SQL Server": {
+                    "ondemand": 22.976
+                },
+                "Oracle": {
+                    "ondemand": 8.416
+                }
+            },
+            "ca-central-1": {
+                "SQL Server": {
+                    "ondemand": 40.928
+                },
+                "Oracle": {
+                    "ondemand": 8.192
+                }
+            },
+            "us-west-2": {
+                "Oracle": {
+                    "ondemand": 7.456
+                },
+                "SQL Server": {
+                    "ondemand": 40.016
+                }
+            },
+            "ap-northeast-2": {
+                "SQL Server": {
+                    "ondemand": 25.6
+                },
+                "Oracle": {
+                    "ondemand": 8.864
+                }
+            },
+            "sa-east-1": {
+                "Oracle": {
+                    "ondemand": 15.552
+                }
+            },
+            "eu-north-1": {
+                "SQL Server": {
+                    "ondemand": 38.73
+                }
+            },
+            "eu-west-2": {
+                "SQL Server": {
+                    "ondemand": 25.456
+                },
+                "Oracle": {
+                    "ondemand": 8.704
+                }
+            }
+        },
+        "pretty_name": "R5 16xlarge"
+    },
+    {
+        "servicecode": "AmazonRDS",
         "location": "AWS GovCloud (US)",
         "locationType": "AWS Region",
         "instanceType": "db.m2.2xlarge",
@@ -6562,6 +7028,9 @@
                         "yrTerm1.noUpfront": 1.1284
                     }
                 },
+                "SQL Server": {
+                    "ondemand": 1.76
+                },
                 "MySQL": {
                     "ondemand": 0.96
                 },
@@ -6578,9 +7047,35 @@
                     "ondemand": 0.96
                 }
             },
+            "ap-east-1": {
+                "SQL Server": {
+                    "ondemand": 2.2
+                },
+                "MariaDB": {
+                    "ondemand": 1.254
+                },
+                "Oracle": {
+                    "ondemand": 1.2188
+                },
+                "PostgreSQL": {
+                    "ondemand": 1.32
+                },
+                "Aurora MySQL": {
+                    "ondemand": 1.54
+                },
+                "MySQL": {
+                    "ondemand": 1.254
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 1.54
+                }
+            },
             "us-west-2": {
                 "Oracle": {
                     "ondemand": 0.932
+                },
+                "SQL Server": {
+                    "ondemand": 1.76
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 1.16
@@ -6604,6 +7099,9 @@
                 },
                 "PostgreSQL": {
                     "ondemand": 1.2
+                },
+                "SQL Server": {
+                    "ondemand": 3.2
                 },
                 "MariaDB": {
                     "ondemand": 1.14
@@ -6631,6 +7129,9 @@
                 "MySQL": {
                     "ondemand": 1.08
                 },
+                "SQL Server": {
+                    "ondemand": 5.116
+                },
                 "MariaDB": {
                     "ondemand": 1.08
                 }
@@ -6641,6 +7142,9 @@
                 },
                 "Oracle": {
                     "ondemand": 2.066
+                },
+                "SQL Server": {
+                    "ondemand": 2.0
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 1.4
@@ -6658,6 +7162,32 @@
             "us-gov-east-1": {
                 "Oracle": {
                     "ondemand": 1.122
+                },
+                "SQL Server": {
+                    "ondemand": 4.968
+                }
+            },
+            "eu-north-1": {
+                "SQL Server": {
+                    "ondemand": 1.701
+                },
+                "MySQL": {
+                    "ondemand": 0.979
+                },
+                "Oracle": {
+                    "ondemand": 0.979
+                },
+                "PostgreSQL": {
+                    "ondemand": 1.028
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 1.2
+                },
+                "Aurora MySQL": {
+                    "ondemand": 1.2
+                },
+                "MariaDB": {
+                    "ondemand": 0.979
                 }
             },
             "us-west-1": {
@@ -6669,6 +7199,9 @@
                 },
                 "Oracle": {
                     "ondemand": 1.027
+                },
+                "SQL Server": {
+                    "ondemand": 1.9
                 },
                 "Aurora MySQL": {
                     "ondemand": 1.28
@@ -6686,6 +7219,9 @@
                 },
                 "Aurora MySQL": {
                     "ondemand": 1.34
+                },
+                "SQL Server": {
+                    "ondemand": 5.168
                 },
                 "MariaDB": {
                     "ondemand": 1.12
@@ -6706,6 +7242,9 @@
                 },
                 "MySQL": {
                     "ondemand": 1.14
+                },
+                "SQL Server": {
+                    "ondemand": 2.0
                 },
                 "Aurora MySQL": {
                     "ondemand": 1.4
@@ -6733,31 +7272,14 @@
                 "PostgreSQL": {
                     "ondemand": 1.232
                 },
+                "SQL Server": {
+                    "ondemand": 1.969
+                },
                 "MySQL": {
                     "ondemand": 1.166
                 },
                 "MariaDB": {
                     "ondemand": 1.166
-                }
-            },
-            "ap-east-1": {
-                "MariaDB": {
-                    "ondemand": 1.254
-                },
-                "Oracle": {
-                    "ondemand": 1.2188
-                },
-                "PostgreSQL": {
-                    "ondemand": 1.32
-                },
-                "Aurora MySQL": {
-                    "ondemand": 1.54
-                },
-                "MySQL": {
-                    "ondemand": 1.254
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 1.54
                 }
             },
             "eu-west-2": {
@@ -6769,6 +7291,9 @@
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 1.36
+                },
+                "SQL Server": {
+                    "ondemand": 1.894
                 },
                 "PostgreSQL": {
                     "ondemand": 1.176
@@ -6790,6 +7315,9 @@
                 "PostgreSQL": {
                     "ondemand": 1.12
                 },
+                "SQL Server": {
+                    "ondemand": 3.07
+                },
                 "Aurora MySQL": {
                     "ondemand": 1.28
                 },
@@ -6810,6 +7338,9 @@
                 "MariaDB": {
                     "ondemand": 1.04
                 },
+                "SQL Server": {
+                    "ondemand": 5.116
+                },
                 "Aurora MySQL": {
                     "ondemand": 1.28
                 },
@@ -6820,24 +7351,9 @@
                     "ondemand": 1.04
                 }
             },
-            "eu-north-1": {
-                "MySQL": {
-                    "ondemand": 0.979
-                },
+            "sa-east-1": {
                 "Oracle": {
-                    "ondemand": 0.979
-                },
-                "PostgreSQL": {
-                    "ondemand": 1.028
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 1.2
-                },
-                "Aurora MySQL": {
-                    "ondemand": 1.2
-                },
-                "MariaDB": {
-                    "ondemand": 0.979
+                    "ondemand": 1.944
                 }
             },
             "ap-northeast-1": {
@@ -6846,6 +7362,9 @@
                 },
                 "Aurora MySQL": {
                     "ondemand": 1.4
+                },
+                "SQL Server": {
+                    "ondemand": 3.192
                 },
                 "Oracle": {
                     "ondemand": 1.108
@@ -6863,6 +7382,9 @@
             "ap-northeast-3": {
                 "Oracle": {
                     "ondemand": 1.108
+                },
+                "SQL Server": {
+                    "ondemand": 5.166
                 }
             },
             "eu-central-1": {
@@ -6874,6 +7396,9 @@
                 },
                 "PostgreSQL": {
                     "ondemand": 1.22
+                },
+                "SQL Server": {
+                    "ondemand": 5.168
                 },
                 "Oracle": {
                     "ondemand": 1.128
@@ -6903,9 +7428,15 @@
                 },
                 "MariaDB": {
                     "ondemand": 0.96
+                },
+                "SQL Server": {
+                    "ondemand": 3.04
                 }
             },
             "us-gov-west-1": {
+                "SQL Server": {
+                    "ondemand": 3.172
+                },
                 "Oracle": {
                     "ondemand": 1.122
                 }
@@ -7325,6 +7856,9 @@
                 "MariaDB": {
                     "ondemand": 0.285
                 },
+                "SQL Server": {
+                    "ondemand": 1.05
+                },
                 "Aurora PostgreSQL": {
                     "ondemand": 0.35
                 },
@@ -7351,13 +7885,27 @@
                 "PostgreSQL": {
                     "ondemand": 0.308
                 },
+                "SQL Server": {
+                    "ondemand": 1.128
+                },
                 "MariaDB": {
                     "ondemand": 0.292
+                }
+            },
+            "us-gov-west-1": {
+                "SQL Server": {
+                    "ondemand": 1.054
+                },
+                "Oracle": {
+                    "ondemand": 0.28
                 }
             },
             "eu-west-1": {
                 "Oracle": {
                     "ondemand": 0.258
+                },
+                "SQL Server": {
+                    "ondemand": 0.465
                 },
                 "MariaDB": {
                     "ondemand": 0.265
@@ -7382,6 +7930,9 @@
                 "MariaDB": {
                     "ondemand": 0.28
                 },
+                "SQL Server": {
+                    "ondemand": 1.11
+                },
                 "Aurora MySQL": {
                     "ondemand": 0.34
                 },
@@ -7393,6 +7944,29 @@
                 },
                 "PostgreSQL": {
                     "ondemand": 0.294
+                }
+            },
+            "ap-east-1": {
+                "SQL Server": {
+                    "ondemand": 1.172
+                },
+                "Oracle": {
+                    "ondemand": 0.3047
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.385
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.33
+                },
+                "MariaDB": {
+                    "ondemand": 0.3135
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.385
+                },
+                "MySQL": {
+                    "ondemand": 0.3135
                 }
             },
             "eu-west-3": {
@@ -7408,6 +7982,9 @@
                 "PostgreSQL": {
                     "ondemand": 0.294
                 },
+                "SQL Server": {
+                    "ondemand": 0.505
+                },
                 "Aurora PostgreSQL": {
                     "ondemand": 0.335
                 },
@@ -7418,11 +7995,17 @@
             "ap-northeast-3": {
                 "Oracle": {
                     "ondemand": 0.277
+                },
+                "SQL Server": {
+                    "ondemand": 0.49
                 }
             },
             "ap-northeast-1": {
                 "Oracle": {
                     "ondemand": 0.277
+                },
+                "SQL Server": {
+                    "ondemand": 0.49
                 },
                 "MySQL": {
                     "ondemand": 0.285
@@ -7450,6 +8033,9 @@
                 "Aurora MySQL": {
                     "ondemand": 0.32
                 },
+                "SQL Server": {
+                    "ondemand": 1.11
+                },
                 "PostgreSQL": {
                     "ondemand": 0.2703
                 },
@@ -7463,11 +8049,40 @@
             "us-gov-east-1": {
                 "Oracle": {
                     "ondemand": 0.539
+                },
+                "SQL Server": {
+                    "ondemand": 0.494
+                }
+            },
+            "us-east-1": {
+                "SQL Server": {
+                    "ondemand": 1.02
+                },
+                "MySQL": {
+                    "ondemand": 0.24
+                },
+                "Oracle": {
+                    "ondemand": 0.233
+                },
+                "MariaDB": {
+                    "ondemand": 0.24
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.29
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.29
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.25
                 }
             },
             "us-west-2": {
                 "Oracle": {
                     "ondemand": 0.448
+                },
+                "SQL Server": {
+                    "ondemand": 1.02
                 },
                 "MariaDB": {
                     "ondemand": 0.24
@@ -7485,24 +8100,9 @@
                     "ondemand": 0.29
                 }
             },
-            "ap-east-1": {
+            "sa-east-1": {
                 "Oracle": {
-                    "ondemand": 0.3047
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.385
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.33
-                },
-                "MariaDB": {
-                    "ondemand": 0.3135
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.385
-                },
-                "MySQL": {
-                    "ondemand": 0.3135
+                    "ondemand": 0.486
                 }
             },
             "eu-central-1": {
@@ -7511,6 +8111,9 @@
                 },
                 "Oracle": {
                     "ondemand": 0.282
+                },
+                "SQL Server": {
+                    "ondemand": 0.505
                 },
                 "MySQL": {
                     "ondemand": 0.29
@@ -7538,6 +8141,9 @@
                 "PostgreSQL": {
                     "ondemand": 0.28
                 },
+                "SQL Server": {
+                    "ondemand": 0.495
+                },
                 "Aurora MySQL": {
                     "ondemand": 0.32
                 },
@@ -7551,6 +8157,9 @@
                 },
                 "Aurora MySQL": {
                     "ondemand": 0.29
+                },
+                "SQL Server": {
+                    "ondemand": 1.02
                 },
                 "Oracle": {
                     "ondemand": 0.448
@@ -7575,6 +8184,9 @@
                 "PostgreSQL": {
                     "ondemand": 0.3
                 },
+                "SQL Server": {
+                    "ondemand": 1.065
+                },
                 "MariaDB": {
                     "ondemand": 0.285
                 },
@@ -7588,6 +8200,9 @@
             "eu-north-1": {
                 "Oracle": {
                     "ondemand": 0.245
+                },
+                "SQL Server": {
+                    "ondemand": 0.974
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 0.3
@@ -7605,12 +8220,10 @@
                     "ondemand": 0.257
                 }
             },
-            "us-gov-west-1": {
-                "Oracle": {
-                    "ondemand": 0.28
-                }
-            },
             "ap-south-1": {
+                "SQL Server": {
+                    "ondemand": 0.44
+                },
                 "Aurora MySQL": {
                     "ondemand": 0.33
                 },
@@ -7634,6 +8247,9 @@
                 "Aurora MySQL": {
                     "ondemand": 0.35
                 },
+                "SQL Server": {
+                    "ondemand": 0.505
+                },
                 "PostgreSQL": {
                     "ondemand": 0.3
                 },
@@ -7645,26 +8261,6 @@
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 0.35
-                }
-            },
-            "us-east-1": {
-                "MySQL": {
-                    "ondemand": 0.24
-                },
-                "Oracle": {
-                    "ondemand": 0.233
-                },
-                "MariaDB": {
-                    "ondemand": 0.24
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.29
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.29
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.25
                 }
             }
         },
@@ -7845,6 +8441,11 @@
                     }
                 }
             },
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 1.3758
+                }
+            },
             "us-east-1": {
                 "Oracle": {
                     "ondemand": 1.368
@@ -7873,6 +8474,21 @@
             "ap-northeast-1": {
                 "Oracle": {
                     "ondemand": 1.668
+                }
+            },
+            "ap-south-1": {
+                "Oracle": {
+                    "ondemand": 1.5861
+                }
+            },
+            "eu-west-2": {
+                "Oracle": {
+                    "ondemand": 1.6136
+                }
+            },
+            "ap-northeast-2": {
+                "Oracle": {
+                    "ondemand": 1.6401
                 }
             },
             "eu-west-1": {
@@ -8110,6 +8726,9 @@
                 "Oracle": {
                     "ondemand": 0.481
                 },
+                "SQL Server": {
+                    "ondemand": 0.339
+                },
                 "MariaDB": {
                     "ondemand": 0.205
                 },
@@ -8140,6 +8759,9 @@
                 },
                 "MySQL": {
                     "ondemand": 0.198
+                },
+                "SQL Server": {
+                    "ondemand": 0.347
                 },
                 "MariaDB": {
                     "ondemand": 0.198
@@ -8185,6 +8807,9 @@
             "us-gov-west-1": {
                 "Oracle": {
                     "ondemand": 0.481
+                },
+                "SQL Server": {
+                    "ondemand": 0.339
                 },
                 "MySQL": {
                     "ondemand": 0.205
@@ -8247,6 +8872,9 @@
             "ap-northeast-3": {
                 "Oracle": {
                     "ondemand": 0.2495
+                },
+                "SQL Server": {
+                    "ondemand": 0.391
                 }
             },
             "ap-south-1": {
@@ -9017,6 +9645,14 @@
                     "ondemand": 0.988
                 }
             },
+            "ap-northeast-3": {
+                "SQL Server": {
+                    "ondemand": 1.421
+                },
+                "Oracle": {
+                    "ondemand": 0.998
+                }
+            },
             "ap-southeast-2": {
                 "Oracle": {
                     "ondemand": 0.94
@@ -9034,12 +9670,26 @@
                     "ondemand": 0.94
                 }
             },
+            "us-gov-east-1": {
+                "SQL Server": {
+                    "ondemand": 1.213
+                },
+                "Oracle": {
+                    "ondemand": 0.82
+                },
+                "MySQL": {
+                    "ondemand": 0.82
+                },
+                "MariaDB": {
+                    "ondemand": 0.82
+                }
+            },
             "me-south-1": {
                 "PostgreSQL": {
                     "ondemand": 0.867
                 },
                 "Oracle": {
-                    "ondemand": 0.832
+                    "ondemand": 2.1604
                 },
                 "SQL Server": {
                     "ondemand": 1.291
@@ -9204,6 +9854,20 @@
                     "ondemand": 0.756
                 }
             },
+            "us-gov-west-1": {
+                "SQL Server": {
+                    "ondemand": 2.652
+                },
+                "Oracle": {
+                    "ondemand": 0.82
+                },
+                "MariaDB": {
+                    "ondemand": 0.82
+                },
+                "MySQL": {
+                    "ondemand": 0.82
+                }
+            },
             "eu-west-2": {
                 "PostgreSQL": {
                     "ondemand": 0.824
@@ -9255,17 +9919,6 @@
                     "ondemand": 0.749
                 }
             },
-            "us-gov-west-1": {
-                "Oracle": {
-                    "ondemand": 0.82
-                },
-                "MariaDB": {
-                    "ondemand": 0.82
-                },
-                "MySQL": {
-                    "ondemand": 0.82
-                }
-            },
             "us-west-1": {
                 "Oracle": {
                     "ondemand": 2.02
@@ -9307,27 +9960,14 @@
                 "MariaDB": {
                     "ondemand": 0.792
                 },
+                "SQL Server": {
+                    "ondemand": 1.233
+                },
                 "PostgreSQL": {
                     "ondemand": 0.824
                 },
                 "MySQL": {
                     "ondemand": 0.792
-                }
-            },
-            "us-gov-east-1": {
-                "Oracle": {
-                    "ondemand": 0.82
-                },
-                "MySQL": {
-                    "ondemand": 0.82
-                },
-                "MariaDB": {
-                    "ondemand": 0.82
-                }
-            },
-            "ap-northeast-3": {
-                "Oracle": {
-                    "ondemand": 0.998
                 }
             }
         },
@@ -10149,7 +10789,17 @@
         "pricing": {
             "ap-northeast-3": {
                 "Oracle": {
-                    "ondemand": 0.105
+                    "ondemand": 0.105,
+                    "reserved": {
+                        "yrTerm3.partialUpfront": 0.05255570776255708,
+                        "yrTerm1.partialUpfront": 0.07878356164383561,
+                        "yrTerm3.allUpfront": 0.05144596651445967,
+                        "yrTerm1.allUpfront": 0.07716894977168949,
+                        "yrTerm1.noUpfront": 0.0827
+                    }
+                },
+                "SQL Server": {
+                    "ondemand": 0.183
                 }
             },
             "eu-west-1": {
@@ -10170,6 +10820,9 @@
                 },
                 "MySQL": {
                     "ondemand": 0.072
+                },
+                "SQL Server": {
+                    "ondemand": 0.171
                 }
             },
             "ap-southeast-2": {
@@ -10185,6 +10838,9 @@
                 "Aurora PostgreSQL": {
                     "ondemand": 0.125
                 },
+                "SQL Server": {
+                    "ondemand": 0.18
+                },
                 "MySQL": {
                     "ondemand": 0.104
                 },
@@ -10199,6 +10855,9 @@
                 "Oracle": {
                     "ondemand": 0.098
                 },
+                "SQL Server": {
+                    "ondemand": 0.092
+                },
                 "PostgreSQL": {
                     "ondemand": 0.106
                 },
@@ -10212,14 +10871,74 @@
                     "ondemand": 0.118
                 }
             },
+            "eu-west-3": {
+                "SQL Server": {
+                    "ondemand": 0.096
+                },
+                "MariaDB": {
+                    "ondemand": 0.076
+                },
+                "Oracle": {
+                    "ondemand": 0.163
+                },
+                "MySQL": {
+                    "ondemand": 0.076
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.092
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.082
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.092
+                }
+            },
+            "eu-west-2": {
+                "SQL Server": {
+                    "ondemand": 0.173
+                },
+                "Oracle": {
+                    "ondemand": 0.162
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.082
+                },
+                "MariaDB": {
+                    "ondemand": 0.076
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.093
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.093
+                },
+                "MySQL": {
+                    "ondemand": 0.076
+                }
+            },
+            "us-gov-east-1": {
+                "SQL Server": {
+                    "ondemand": 0.098
+                },
+                "Oracle": {
+                    "ondemand": 0.15
+                }
+            },
             "us-gov-west-1": {
                 "Oracle": {
                     "ondemand": 0.162
+                },
+                "SQL Server": {
+                    "ondemand": 0.098
                 }
             },
             "ca-central-1": {
                 "Oracle": {
                     "ondemand": 0.154
+                },
+                "SQL Server": {
+                    "ondemand": 0.172
                 },
                 "MariaDB": {
                     "ondemand": 0.074
@@ -10237,9 +10956,35 @@
                     "ondemand": 0.09
                 }
             },
+            "us-east-2": {
+                "SQL Server": {
+                    "ondemand": 0.088
+                },
+                "MySQL": {
+                    "ondemand": 0.068
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.072
+                },
+                "MariaDB": {
+                    "ondemand": 0.068
+                },
+                "Oracle": {
+                    "ondemand": 0.14
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.082
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.082
+                }
+            },
             "eu-north-1": {
                 "Oracle": {
                     "ondemand": 0.068
+                },
+                "SQL Server": {
+                    "ondemand": 0.168
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 0.084
@@ -10264,6 +11009,9 @@
                 "MariaDB": {
                     "ondemand": 0.08
                 },
+                "SQL Server": {
+                    "ondemand": 0.097
+                },
                 "Aurora PostgreSQL": {
                     "ondemand": 0.096
                 },
@@ -10277,32 +11025,15 @@
                     "ondemand": 0.096
                 }
             },
-            "eu-west-3": {
-                "MariaDB": {
-                    "ondemand": 0.076
-                },
-                "Oracle": {
-                    "ondemand": 0.163
-                },
-                "MySQL": {
-                    "ondemand": 0.076
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.092
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.082
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.092
-                }
-            },
             "sa-east-1": {
                 "Oracle": {
                     "ondemand": 0.2
                 },
                 "PostgreSQL": {
                     "ondemand": 0.151
+                },
+                "SQL Server": {
+                    "ondemand": 0.199
                 },
                 "MariaDB": {
                     "ondemand": 0.14
@@ -10314,6 +11045,9 @@
             "ap-southeast-1": {
                 "Oracle": {
                     "ondemand": 0.176
+                },
+                "SQL Server": {
+                    "ondemand": 0.18
                 },
                 "PostgreSQL": {
                     "ondemand": 0.112
@@ -10347,8 +11081,34 @@
                 "PostgreSQL": {
                     "ondemand": 0.112
                 },
+                "SQL Server": {
+                    "ondemand": 0.103
+                },
                 "MySQL": {
                     "ondemand": 0.104
+                }
+            },
+            "me-south-1": {
+                "Oracle": {
+                    "ondemand": 0.079
+                },
+                "MySQL": {
+                    "ondemand": 0.079
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.086
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.097
+                },
+                "SQL Server": {
+                    "ondemand": 0.102
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.097
+                },
+                "MariaDB": {
+                    "ondemand": 0.079
                 }
             },
             "us-east-1": {
@@ -10360,6 +11120,9 @@
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 0.082
+                },
+                "SQL Server": {
+                    "ondemand": 0.166
                 },
                 "PostgreSQL": {
                     "ondemand": 0.072
@@ -10375,6 +11138,9 @@
                 "Oracle": {
                     "ondemand": 0.1936
                 },
+                "SQL Server": {
+                    "ondemand": 0.112
+                },
                 "MariaDB": {
                     "ondemand": 0.1144
                 },
@@ -10388,107 +11154,10 @@
                     "ondemand": 0.1386
                 }
             },
-            "us-west-2": {
-                "Oracle": {
-                    "ondemand": 0.14
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.082
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.082
-                },
-                "MySQL": {
-                    "ondemand": 0.068
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.072
-                },
-                "MariaDB": {
-                    "ondemand": 0.068
-                }
-            },
-            "us-east-2": {
-                "MySQL": {
-                    "ondemand": 0.068
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.072
-                },
-                "MariaDB": {
-                    "ondemand": 0.068
-                },
-                "Oracle": {
-                    "ondemand": 0.14
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.082
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.082
-                }
-            },
-            "eu-west-2": {
-                "Oracle": {
-                    "ondemand": 0.162
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.082
-                },
-                "MariaDB": {
-                    "ondemand": 0.076
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.093
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.093
-                },
-                "MySQL": {
-                    "ondemand": 0.076
-                }
-            },
-            "me-south-1": {
-                "MySQL": {
-                    "ondemand": 0.079
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.086
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.097
-                },
-                "Oracle": {
-                    "ondemand": 0.079
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.097
-                },
-                "MariaDB": {
-                    "ondemand": 0.079
-                }
-            },
-            "us-west-1": {
-                "Oracle": {
-                    "ondemand": 0.172
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 0.106
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.106
-                },
-                "MySQL": {
-                    "ondemand": 0.088
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.095
-                },
-                "MariaDB": {
-                    "ondemand": 0.088
-                }
-            },
             "ap-northeast-1": {
+                "SQL Server": {
+                    "ondemand": 0.183
+                },
                 "Oracle": {
                     "ondemand": 0.176
                 },
@@ -10508,9 +11177,50 @@
                     "ondemand": 0.104
                 }
             },
-            "us-gov-east-1": {
+            "us-west-2": {
                 "Oracle": {
-                    "ondemand": 0.15
+                    "ondemand": 0.14
+                },
+                "SQL Server": {
+                    "ondemand": 0.088
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.082
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.082
+                },
+                "MySQL": {
+                    "ondemand": 0.068
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.072
+                },
+                "MariaDB": {
+                    "ondemand": 0.068
+                }
+            },
+            "us-west-1": {
+                "Oracle": {
+                    "ondemand": 0.172
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 0.106
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.106
+                },
+                "SQL Server": {
+                    "ondemand": 0.176
+                },
+                "MySQL": {
+                    "ondemand": 0.088
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.095
+                },
+                "MariaDB": {
+                    "ondemand": 0.088
                 }
             }
         },
@@ -11867,6 +12577,9 @@
                 "MySQL": {
                     "ondemand": 0.052
                 },
+                "SQL Server": {
+                    "ondemand": 0.062
+                },
                 "MariaDB": {
                     "ondemand": 0.052
                 },
@@ -11880,6 +12593,9 @@
             "ap-south-1": {
                 "MySQL": {
                     "ondemand": 0.049
+                },
+                "SQL Server": {
+                    "ondemand": 0.058
                 },
                 "Oracle": {
                     "ondemand": 0.072
@@ -11904,6 +12620,9 @@
                 "MySQL": {
                     "ondemand": 0.036
                 },
+                "SQL Server": {
+                    "ondemand": 0.141
+                },
                 "PostgreSQL": {
                     "ondemand": 0.039
                 },
@@ -11914,6 +12633,9 @@
             "us-east-1": {
                 "Aurora MySQL": {
                     "ondemand": 0.041
+                },
+                "SQL Server": {
+                    "ondemand": 0.139
                 },
                 "Oracle": {
                     "ondemand": 0.07
@@ -11941,6 +12663,9 @@
                 "MariaDB": {
                     "ondemand": 0.052
                 },
+                "SQL Server": {
+                    "ondemand": 0.062
+                },
                 "Aurora MySQL": {
                     "ondemand": 0.063
                 }
@@ -11958,6 +12683,9 @@
                 "PostgreSQL": {
                     "ondemand": 0.056
                 },
+                "SQL Server": {
+                    "ondemand": 0.062
+                },
                 "MariaDB": {
                     "ondemand": 0.052
                 }
@@ -11965,6 +12693,29 @@
             "us-gov-west-1": {
                 "Oracle": {
                     "ondemand": 0.081
+                },
+                "SQL Server": {
+                    "ondemand": 0.144
+                }
+            },
+            "us-west-2": {
+                "SQL Server": {
+                    "ondemand": 0.044
+                },
+                "Oracle": {
+                    "ondemand": 0.034
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.041
+                },
+                "MySQL": {
+                    "ondemand": 0.034
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.036
+                },
+                "MariaDB": {
+                    "ondemand": 0.034
                 }
             },
             "us-west-1": {
@@ -11977,6 +12728,9 @@
                 "MariaDB": {
                     "ondemand": 0.044
                 },
+                "SQL Server": {
+                    "ondemand": 0.054
+                },
                 "Aurora MySQL": {
                     "ondemand": 0.053
                 },
@@ -11984,24 +12738,10 @@
                     "ondemand": 0.048
                 }
             },
-            "me-south-1": {
-                "MariaDB": {
-                    "ondemand": 0.04
-                },
-                "Oracle": {
-                    "ondemand": 0.04
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.048
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.043
-                },
-                "MySQL": {
-                    "ondemand": 0.04
-                }
-            },
             "us-east-2": {
+                "SQL Server": {
+                    "ondemand": 0.139
+                },
                 "Aurora MySQL": {
                     "ondemand": 0.041
                 },
@@ -12018,9 +12758,32 @@
                     "ondemand": 0.034
                 }
             },
+            "me-south-1": {
+                "MariaDB": {
+                    "ondemand": 0.04
+                },
+                "Oracle": {
+                    "ondemand": 0.04
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.048
+                },
+                "SQL Server": {
+                    "ondemand": 0.155
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.043
+                },
+                "MySQL": {
+                    "ondemand": 0.04
+                }
+            },
             "eu-central-1": {
                 "Oracle": {
                     "ondemand": 0.04
+                },
+                "SQL Server": {
+                    "ondemand": 0.05
                 },
                 "PostgreSQL": {
                     "ondemand": 0.042
@@ -12038,6 +12801,29 @@
             "us-gov-east-1": {
                 "Oracle": {
                     "ondemand": 0.081
+                },
+                "SQL Server": {
+                    "ondemand": 0.144
+                }
+            },
+            "ap-east-1": {
+                "SQL Server": {
+                    "ondemand": 0.15
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.0616
+                },
+                "MySQL": {
+                    "ondemand": 0.0572
+                },
+                "Oracle": {
+                    "ondemand": 0.0968
+                },
+                "Aurora MySQL": {
+                    "ondemand": 0.0693
+                },
+                "MariaDB": {
+                    "ondemand": 0.0572
                 }
             },
             "eu-north-1": {
@@ -12046,6 +12832,9 @@
                 },
                 "Oracle": {
                     "ondemand": 0.073
+                },
+                "SQL Server": {
+                    "ondemand": 0.14
                 },
                 "MariaDB": {
                     "ondemand": 0.034
@@ -12064,6 +12853,9 @@
                 "PostgreSQL": {
                     "ondemand": 0.056
                 },
+                "SQL Server": {
+                    "ondemand": 0.062
+                },
                 "Aurora MySQL": {
                     "ondemand": 0.063
                 },
@@ -12074,21 +12866,10 @@
                     "ondemand": 0.052
                 }
             },
-            "sa-east-1": {
-                "MariaDB": {
-                    "ondemand": 0.07
-                },
-                "MySQL": {
-                    "ondemand": 0.07
-                },
-                "Oracle": {
-                    "ondemand": 0.07
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.076
-                }
-            },
             "eu-west-3": {
+                "SQL Server": {
+                    "ondemand": 0.142
+                },
                 "MySQL": {
                     "ondemand": 0.038
                 },
@@ -12105,9 +12886,29 @@
                     "ondemand": 0.041
                 }
             },
+            "sa-east-1": {
+                "MariaDB": {
+                    "ondemand": 0.07
+                },
+                "SQL Server": {
+                    "ondemand": 0.155
+                },
+                "MySQL": {
+                    "ondemand": 0.07
+                },
+                "Oracle": {
+                    "ondemand": 0.07
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.076
+                }
+            },
             "eu-west-2": {
                 "Aurora MySQL": {
                     "ondemand": 0.047
+                },
+                "SQL Server": {
+                    "ondemand": 0.142
                 },
                 "Oracle": {
                     "ondemand": 0.076
@@ -12135,6 +12936,9 @@
                 "Aurora MySQL": {
                     "ondemand": 0.045
                 },
+                "SQL Server": {
+                    "ondemand": 0.142
+                },
                 "MariaDB": {
                     "ondemand": 0.037
                 }
@@ -12142,40 +12946,9 @@
             "ap-northeast-3": {
                 "Oracle": {
                     "ondemand": 0.103
-                }
-            },
-            "us-west-2": {
-                "Oracle": {
-                    "ondemand": 0.034
                 },
-                "Aurora MySQL": {
-                    "ondemand": 0.041
-                },
-                "MySQL": {
-                    "ondemand": 0.034
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.036
-                },
-                "MariaDB": {
-                    "ondemand": 0.034
-                }
-            },
-            "ap-east-1": {
-                "PostgreSQL": {
-                    "ondemand": 0.0616
-                },
-                "MySQL": {
-                    "ondemand": 0.0572
-                },
-                "Oracle": {
-                    "ondemand": 0.0968
-                },
-                "Aurora MySQL": {
-                    "ondemand": 0.0693
-                },
-                "MariaDB": {
-                    "ondemand": 0.0572
+                "SQL Server": {
+                    "ondemand": 0.062
                 }
             }
         },
@@ -12214,6 +12987,14 @@
         "database_engine": "MariaDB",
         "arch": "64-bit",
         "pricing": {
+            "ap-northeast-3": {
+                "SQL Server": {
+                    "ondemand": 16.596
+                },
+                "Oracle": {
+                    "ondemand": 5.988
+                }
+            },
             "eu-west-2": {
                 "MySQL": {
                     "ondemand": 4.752
@@ -12265,6 +13046,23 @@
                     "ondemand": 4.104
                 }
             },
+            "eu-west-3": {
+                "SQL Server": {
+                    "ondemand": 28.512
+                },
+                "MySQL": {
+                    "ondemand": 4.752
+                },
+                "MariaDB": {
+                    "ondemand": 4.752
+                },
+                "Oracle": {
+                    "ondemand": 4.752
+                },
+                "PostgreSQL": {
+                    "ondemand": 4.944
+                }
+            },
             "us-west-2": {
                 "Oracle": {
                     "ondemand": 4.104
@@ -12280,20 +13078,6 @@
                 },
                 "PostgreSQL": {
                     "ondemand": 4.272
-                }
-            },
-            "eu-west-3": {
-                "MySQL": {
-                    "ondemand": 4.752
-                },
-                "MariaDB": {
-                    "ondemand": 4.752
-                },
-                "Oracle": {
-                    "ondemand": 4.752
-                },
-                "PostgreSQL": {
-                    "ondemand": 4.944
                 }
             },
             "eu-north-1": {
@@ -12398,9 +13182,26 @@
                     "ondemand": 6.072
                 }
             },
+            "us-gov-west-1": {
+                "SQL Server": {
+                    "ondemand": 15.319
+                },
+                "Oracle": {
+                    "ondemand": 4.92
+                },
+                "MySQL": {
+                    "ondemand": 4.92
+                },
+                "MariaDB": {
+                    "ondemand": 4.92
+                }
+            },
             "us-gov-east-1": {
                 "MariaDB": {
                     "ondemand": 4.92
+                },
+                "SQL Server": {
+                    "ondemand": 15.319
                 },
                 "Oracle": {
                     "ondemand": 4.92
@@ -12424,17 +13225,6 @@
                 },
                 "Oracle": {
                     "ondemand": 4.536
-                }
-            },
-            "us-gov-west-1": {
-                "Oracle": {
-                    "ondemand": 4.92
-                },
-                "MySQL": {
-                    "ondemand": 4.92
-                },
-                "MariaDB": {
-                    "ondemand": 4.92
                 }
             },
             "sa-east-1": {
@@ -12488,9 +13278,21 @@
                     "ondemand": 5.64
                 }
             },
-            "ap-northeast-3": {
+            "ap-east-1": {
+                "SQL Server": {
+                    "ondemand": 18.414
+                },
+                "MariaDB": {
+                    "ondemand": 6.204
+                },
                 "Oracle": {
-                    "ondemand": 5.988
+                    "ondemand": 6.204
+                },
+                "PostgreSQL": {
+                    "ondemand": 6.5208
+                },
+                "MySQL": {
+                    "ondemand": 6.204
                 }
             },
             "ap-southeast-2": {
@@ -12508,23 +13310,6 @@
                 },
                 "MariaDB": {
                     "ondemand": 5.64
-                }
-            },
-            "ap-east-1": {
-                "MariaDB": {
-                    "ondemand": 6.204
-                },
-                "SQL Server": {
-                    "ondemand": 18.414
-                },
-                "Oracle": {
-                    "ondemand": 6.204
-                },
-                "PostgreSQL": {
-                    "ondemand": 6.5208
-                },
-                "MySQL": {
-                    "ondemand": 6.204
                 }
             },
             "ap-southeast-1": {
@@ -12681,7 +13466,7 @@
                     "ondemand": 0.517
                 },
                 "SQL Server": {
-                    "ondemand": 0.7821
+                    "ondemand": 2.6378
                 },
                 "MySQL": {
                     "ondemand": 0.517
@@ -12693,6 +13478,9 @@
             "us-gov-west-1": {
                 "Oracle": {
                     "ondemand": 0.41
+                },
+                "SQL Server": {
+                    "ondemand": 2.366
                 },
                 "MariaDB": {
                     "ondemand": 0.41
@@ -12837,9 +13625,26 @@
                     "ondemand": 0.482
                 }
             },
+            "us-gov-east-1": {
+                "SQL Server": {
+                    "ondemand": 1.277
+                },
+                "MySQL": {
+                    "ondemand": 0.41
+                },
+                "Oracle": {
+                    "ondemand": 0.91
+                },
+                "MariaDB": {
+                    "ondemand": 0.41
+                }
+            },
             "eu-west-3": {
                 "Oracle": {
                     "ondemand": 0.396
+                },
+                "SQL Server": {
+                    "ondemand": 0.605
                 },
                 "PostgreSQL": {
                     "ondemand": 0.412
@@ -12868,20 +13673,12 @@
                     "ondemand": 0.47
                 }
             },
-            "us-gov-east-1": {
-                "MySQL": {
-                    "ondemand": 0.41
-                },
-                "Oracle": {
-                    "ondemand": 0.91
-                },
-                "MariaDB": {
-                    "ondemand": 0.41
-                }
-            },
             "ap-northeast-3": {
                 "Oracle": {
                     "ondemand": 0.499
+                },
+                "SQL Server": {
+                    "ondemand": 0.699
                 }
             },
             "us-east-2": {
@@ -12903,7 +13700,7 @@
             },
             "me-south-1": {
                 "Oracle": {
-                    "ondemand": 0.416
+                    "ondemand": 1.0802
                 },
                 "MySQL": {
                     "ondemand": 0.416
@@ -12920,6 +13717,396 @@
             }
         },
         "pretty_name": "M5 Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "EU (Frankfurt)",
+        "locationType": "AWS Region",
+        "instanceType": "db.m5.16xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "General purpose",
+        "vcpu": "64",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "256",
+        "storage": "EBS Only",
+        "networkPerformance": "20 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "15",
+        "databaseEngine": "SQL Server",
+        "databaseEdition": "Enterprise",
+        "licenseModel": "License included",
+        "deploymentOption": "Multi-AZ",
+        "usagetype": "EUC1-MirrorUsage:db.m5.16xl",
+        "operation": "CreateDBInstance:0015",
+        "instanceTypeFamily": "M5",
+        "normalizationSizeFactor": "NA",
+        "servicename": "Amazon Relational Database Service",
+        "region": "eu-central-1",
+        "network_performance": "20 Gigabit",
+        "family": "General purpose",
+        "instance_type": "db.m5.16xlarge",
+        "database_engine": "SQL Server",
+        "arch": "64-bit",
+        "pricing": {
+            "ap-southeast-1": {
+                "SQL Server": {
+                    "ondemand": 38.368
+                },
+                "Oracle": {
+                    "ondemand": 7.52
+                }
+            },
+            "ap-east-1": {
+                "SQL Server": {
+                    "ondemand": 24.552
+                },
+                "Oracle": {
+                    "ondemand": 8.272
+                }
+            },
+            "ca-central-1": {
+                "SQL Server": {
+                    "ondemand": 21.536
+                },
+                "Oracle": {
+                    "ondemand": 6.048
+                }
+            },
+            "us-west-2": {
+                "Oracle": {
+                    "ondemand": 5.472
+                },
+                "SQL Server": {
+                    "ondemand": 19.584
+                }
+            },
+            "eu-central-1": {
+                "SQL Server": {
+                    "ondemand": 20.656
+                },
+                "Oracle": {
+                    "ondemand": 6.496
+                }
+            },
+            "us-east-1": {
+                "SQL Server": {
+                    "ondemand": 37.376
+                },
+                "Oracle": {
+                    "ondemand": 5.472
+                }
+            },
+            "eu-west-3": {
+                "SQL Server": {
+                    "ondemand": 21.812
+                },
+                "Oracle": {
+                    "ondemand": 6.336
+                }
+            },
+            "ap-northeast-3": {
+                "SQL Server": {
+                    "ondemand": 38.528
+                },
+                "Oracle": {
+                    "ondemand": 7.984
+                }
+            },
+            "sa-east-1": {
+                "SQL Server": {
+                    "ondemand": 22.56
+                },
+                "Oracle": {
+                    "ondemand": 7.392
+                }
+            },
+            "ap-south-1": {
+                "SQL Server": {
+                    "ondemand": 38.288
+                },
+                "Oracle": {
+                    "ondemand": 7.712
+                }
+            },
+            "eu-north-1": {
+                "SQL Server": {
+                    "ondemand": 35.918
+                }
+            },
+            "eu-west-1": {
+                "SQL Server": {
+                    "ondemand": 37.808
+                },
+                "Oracle": {
+                    "ondemand": 6.048
+                }
+            },
+            "me-south-1": {
+                "SQL Server": {
+                    "ondemand": 41.584
+                },
+                "Oracle": {
+                    "ondemand": 6.6528
+                }
+            },
+            "ap-northeast-1": {
+                "SQL Server": {
+                    "ondemand": 38.528
+                },
+                "Oracle": {
+                    "ondemand": 7.52
+                }
+            },
+            "eu-west-2": {
+                "Oracle": {
+                    "ondemand": 6.336
+                },
+                "SQL Server": {
+                    "ondemand": 21.168
+                }
+            },
+            "ap-southeast-2": {
+                "Oracle": {
+                    "ondemand": 7.52
+                },
+                "SQL Server": {
+                    "ondemand": 38.368
+                }
+            },
+            "us-gov-west-1": {
+                "SQL Server": {
+                    "ondemand": 21.022
+                }
+            },
+            "ap-northeast-2": {
+                "SQL Server": {
+                    "ondemand": 21.024
+                },
+                "Oracle": {
+                    "ondemand": 7.552
+                }
+            },
+            "us-west-1": {
+                "SQL Server": {
+                    "ondemand": 20.528
+                },
+                "Oracle": {
+                    "ondemand": 6.24
+                }
+            },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 6.56
+                },
+                "SQL Server": {
+                    "ondemand": 21.022
+                }
+            },
+            "us-east-2": {
+                "SQL Server": {
+                    "ondemand": 37.376
+                },
+                "Oracle": {
+                    "ondemand": 5.472
+                }
+            }
+        },
+        "pretty_name": "M5 16xlarge"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "South America (Sao Paulo)",
+        "locationType": "AWS Region",
+        "instanceType": "db.m5.8xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "General purpose",
+        "vcpu": "32",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "128",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "15",
+        "databaseEngine": "SQL Server",
+        "databaseEdition": "Enterprise",
+        "licenseModel": "License included",
+        "deploymentOption": "Multi-AZ",
+        "usagetype": "SAE1-MirrorUsage:db.m5.8xl",
+        "operation": "CreateDBInstance:0015",
+        "instanceTypeFamily": "M5",
+        "normalizationSizeFactor": "NA",
+        "servicename": "Amazon Relational Database Service",
+        "region": "sa-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "General purpose",
+        "instance_type": "db.m5.8xlarge",
+        "database_engine": "SQL Server",
+        "arch": "64-bit",
+        "pricing": {
+            "ap-northeast-2": {
+                "SQL Server": {
+                    "ondemand": 19.144
+                },
+                "Oracle": {
+                    "ondemand": 3.776
+                }
+            },
+            "ap-south-1": {
+                "Oracle": {
+                    "ondemand": 3.856
+                },
+                "SQL Server": {
+                    "ondemand": 19.144
+                }
+            },
+            "us-gov-east-1": {
+                "SQL Server": {
+                    "ondemand": 10.511
+                },
+                "Oracle": {
+                    "ondemand": 3.28
+                }
+            },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 3.992
+                },
+                "SQL Server": {
+                    "ondemand": 11.064
+                }
+            },
+            "eu-west-1": {
+                "SQL Server": {
+                    "ondemand": 18.904
+                },
+                "Oracle": {
+                    "ondemand": 3.024
+                }
+            },
+            "eu-west-3": {
+                "SQL Server": {
+                    "ondemand": 10.906
+                },
+                "Oracle": {
+                    "ondemand": 3.168
+                }
+            },
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 2.736
+                },
+                "SQL Server": {
+                    "ondemand": 18.688
+                }
+            },
+            "ap-east-1": {
+                "Oracle": {
+                    "ondemand": 4.136
+                },
+                "SQL Server": {
+                    "ondemand": 21.102
+                }
+            },
+            "eu-west-2": {
+                "Oracle": {
+                    "ondemand": 3.168
+                },
+                "SQL Server": {
+                    "ondemand": 19.008
+                }
+            },
+            "us-west-1": {
+                "SQL Server": {
+                    "ondemand": 10.264
+                },
+                "Oracle": {
+                    "ondemand": 3.12
+                }
+            },
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 2.736
+                },
+                "SQL Server": {
+                    "ondemand": 18.688
+                }
+            },
+            "ca-central-1": {
+                "Oracle": {
+                    "ondemand": 3.024
+                },
+                "SQL Server": {
+                    "ondemand": 18.904
+                }
+            },
+            "eu-central-1": {
+                "SQL Server": {
+                    "ondemand": 10.328
+                },
+                "Oracle": {
+                    "ondemand": 3.248
+                }
+            },
+            "us-west-2": {
+                "Oracle": {
+                    "ondemand": 2.736
+                },
+                "SQL Server": {
+                    "ondemand": 9.792
+                }
+            },
+            "us-gov-west-1": {
+                "SQL Server": {
+                    "ondemand": 10.511
+                }
+            },
+            "ap-northeast-1": {
+                "Oracle": {
+                    "ondemand": 3.76
+                },
+                "SQL Server": {
+                    "ondemand": 19.264
+                }
+            },
+            "ap-southeast-2": {
+                "Oracle": {
+                    "ondemand": 3.76
+                },
+                "SQL Server": {
+                    "ondemand": 10.936
+                }
+            },
+            "me-south-1": {
+                "SQL Server": {
+                    "ondemand": 20.792
+                },
+                "Oracle": {
+                    "ondemand": 3.3264
+                }
+            },
+            "eu-north-1": {
+                "SQL Server": {
+                    "ondemand": 17.959
+                }
+            },
+            "ap-southeast-1": {
+                "Oracle": {
+                    "ondemand": 3.76
+                },
+                "SQL Server": {
+                    "ondemand": 19.184
+                }
+            },
+            "sa-east-1": {
+                "Oracle": {
+                    "ondemand": 3.696
+                },
+                "SQL Server": {
+                    "ondemand": 11.28
+                }
+            }
+        },
+        "pretty_name": "M5 Eight Extra Large"
     },
     {
         "servicecode": "AmazonRDS",
@@ -13700,6 +14887,9 @@
                 "PostgreSQL": {
                     "ondemand": 2.352
                 },
+                "SQL Server": {
+                    "ondemand": 3.788
+                },
                 "Aurora PostgreSQL": {
                     "ondemand": 2.68
                 },
@@ -13707,9 +14897,17 @@
                     "ondemand": 2.68
                 }
             },
+            "sa-east-1": {
+                "Oracle": {
+                    "ondemand": 3.888
+                }
+            },
             "us-west-1": {
                 "Oracle": {
                     "ondemand": 4.278
+                },
+                "SQL Server": {
+                    "ondemand": 3.8
                 },
                 "MySQL": {
                     "ondemand": 2.12
@@ -13740,6 +14938,9 @@
                 "Aurora MySQL": {
                     "ondemand": 2.4
                 },
+                "SQL Server": {
+                    "ondemand": 9.682
+                },
                 "PostgreSQL": {
                     "ondemand": 2.057
                 },
@@ -13765,6 +14966,9 @@
                 },
                 "MySQL": {
                     "ondemand": 2.28
+                },
+                "SQL Server": {
+                    "ondemand": 6.56
                 }
             },
             "ap-northeast-2": {
@@ -13776,6 +14980,9 @@
                 },
                 "Aurora MySQL": {
                     "ondemand": 2.8
+                },
+                "SQL Server": {
+                    "ondemand": 6.4
                 },
                 "MariaDB": {
                     "ondemand": 2.28
@@ -13805,6 +15012,17 @@
                 },
                 "Aurora MySQL": {
                     "ondemand": 2.56
+                },
+                "SQL Server": {
+                    "ondemand": 6.232
+                }
+            },
+            "us-gov-west-1": {
+                "SQL Server": {
+                    "ondemand": 9.936
+                },
+                "Oracle": {
+                    "ondemand": 2.243
                 }
             },
             "ap-south-1": {
@@ -13816,6 +15034,9 @@
                 },
                 "Aurora MySQL": {
                     "ondemand": 2.64
+                },
+                "SQL Server": {
+                    "ondemand": 10.232
                 },
                 "PostgreSQL": {
                     "ondemand": 2.28
@@ -13830,6 +15051,9 @@
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 2.56
+                },
+                "SQL Server": {
+                    "ondemand": 3.58
                 },
                 "Oracle": {
                     "ondemand": 2.062
@@ -13857,6 +15081,9 @@
                 "Aurora MySQL": {
                     "ondemand": 2.32
                 },
+                "SQL Server": {
+                    "ondemand": 6.08
+                },
                 "PostgreSQL": {
                     "ondemand": 2.0
                 },
@@ -13877,6 +15104,9 @@
                 "MySQL": {
                     "ondemand": 2.28
                 },
+                "SQL Server": {
+                    "ondemand": 6.56
+                },
                 "Aurora PostgreSQL": {
                     "ondemand": 2.8
                 },
@@ -13884,27 +15114,10 @@
                     "ondemand": 2.4
                 }
             },
-            "us-east-2": {
-                "Oracle": {
-                    "ondemand": 1.864
-                },
-                "PostgreSQL": {
-                    "ondemand": 2.0
-                },
-                "Aurora MySQL": {
-                    "ondemand": 2.32
-                },
-                "MySQL": {
-                    "ondemand": 1.92
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 2.32
-                },
-                "MariaDB": {
-                    "ondemand": 1.92
-                }
-            },
             "me-south-1": {
+                "SQL Server": {
+                    "ondemand": 3.938
+                },
                 "Aurora PostgreSQL": {
                     "ondemand": 2.816
                 },
@@ -13924,12 +15137,38 @@
                     "ondemand": 2.332
                 }
             },
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 1.864
+                },
+                "PostgreSQL": {
+                    "ondemand": 2.0
+                },
+                "SQL Server": {
+                    "ondemand": 3.52
+                },
+                "Aurora MySQL": {
+                    "ondemand": 2.32
+                },
+                "MySQL": {
+                    "ondemand": 1.92
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 2.32
+                },
+                "MariaDB": {
+                    "ondemand": 1.92
+                }
+            },
             "us-east-1": {
                 "Oracle": {
                     "ondemand": 1.864
                 },
                 "MySQL": {
                     "ondemand": 1.92
+                },
+                "SQL Server": {
+                    "ondemand": 6.08
                 },
                 "MariaDB": {
                     "ondemand": 1.92
@@ -13947,11 +15186,9 @@
             "us-gov-east-1": {
                 "Oracle": {
                     "ondemand": 2.245
-                }
-            },
-            "us-gov-west-1": {
-                "Oracle": {
-                    "ondemand": 2.243
+                },
+                "SQL Server": {
+                    "ondemand": 9.936
                 }
             },
             "eu-west-2": {
@@ -13960,6 +15197,9 @@
                 },
                 "Aurora PostgreSQL": {
                     "ondemand": 2.72
+                },
+                "SQL Server": {
+                    "ondemand": 10.336
                 },
                 "Oracle": {
                     "ondemand": 2.176
@@ -13974,27 +15214,10 @@
                     "ondemand": 2.72
                 }
             },
-            "ap-east-1": {
-                "Oracle": {
-                    "ondemand": 2.4376
-                },
-                "MySQL": {
-                    "ondemand": 2.508
-                },
-                "PostgreSQL": {
-                    "ondemand": 2.64
-                },
-                "MariaDB": {
-                    "ondemand": 2.508
-                },
-                "Aurora MySQL": {
-                    "ondemand": 3.08
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 3.08
-                }
-            },
             "eu-central-1": {
+                "SQL Server": {
+                    "ondemand": 10.336
+                },
                 "Oracle": {
                     "ondemand": 2.256
                 },
@@ -14014,9 +15237,35 @@
                     "ondemand": 2.44
                 }
             },
+            "ap-east-1": {
+                "Oracle": {
+                    "ondemand": 2.4376
+                },
+                "MySQL": {
+                    "ondemand": 2.508
+                },
+                "SQL Server": {
+                    "ondemand": 4.4
+                },
+                "PostgreSQL": {
+                    "ondemand": 2.64
+                },
+                "MariaDB": {
+                    "ondemand": 2.508
+                },
+                "Aurora MySQL": {
+                    "ondemand": 3.08
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 3.08
+                }
+            },
             "ap-northeast-1": {
                 "Aurora MySQL": {
                     "ondemand": 2.8
+                },
+                "SQL Server": {
+                    "ondemand": 10.332
                 },
                 "Oracle": {
                     "ondemand": 2.216
@@ -14037,6 +15286,9 @@
             "ap-northeast-3": {
                 "Oracle": {
                     "ondemand": 4.448
+                },
+                "SQL Server": {
+                    "ondemand": 10.332
                 }
             }
         },
@@ -14750,6 +16002,11 @@
                     "ondemand": 0.83
                 }
             },
+            "ap-northeast-2": {
+                "Oracle": {
+                    "ondemand": 0.8201
+                }
+            },
             "eu-west-1": {
                 "Oracle": {
                     "ondemand": 0.764
@@ -14760,14 +16017,29 @@
                     "ondemand": 0.683
                 }
             },
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 0.6879
+                }
+            },
             "ap-northeast-1": {
                 "Oracle": {
                     "ondemand": 0.834
                 }
             },
+            "eu-west-2": {
+                "Oracle": {
+                    "ondemand": 0.8068
+                }
+            },
             "us-east-1": {
                 "Oracle": {
                     "ondemand": 0.683
+                }
+            },
+            "ap-south-1": {
+                "Oracle": {
+                    "ondemand": 0.793
                 }
             },
             "eu-central-1": {
@@ -15571,6 +16843,9 @@
                         "yrTerm1.noUpfront": 8.6428
                     }
                 },
+                "SQL Server": {
+                    "ondemand": 62.016
+                },
                 "PostgreSQL": {
                     "ondemand": 14.112
                 },
@@ -15599,6 +16874,9 @@
                 },
                 "Oracle": {
                     "ondemand": 13.267
+                },
+                "SQL Server": {
+                    "ondemand": 39.36
                 }
             },
             "us-east-1": {
@@ -15616,6 +16894,9 @@
                 },
                 "Oracle": {
                     "ondemand": 11.184
+                },
+                "SQL Server": {
+                    "ondemand": 36.48
                 }
             },
             "us-west-2": {
@@ -15624,6 +16905,9 @@
                 },
                 "PostgreSQL": {
                     "ondemand": 12.0
+                },
+                "SQL Server": {
+                    "ondemand": 60.024
                 },
                 "Oracle": {
                     "ondemand": 11.184
@@ -15635,46 +16919,10 @@
                     "ondemand": 11.52
                 }
             },
-            "ap-northeast-3": {
-                "Oracle": {
-                    "ondemand": 13.296
-                }
-            },
-            "eu-north-1": {
-                "Aurora PostgreSQL": {
-                    "ondemand": 14.4
-                },
-                "PostgreSQL": {
-                    "ondemand": 12.343
-                },
-                "MariaDB": {
-                    "ondemand": 11.755
-                },
-                "MySQL": {
-                    "ondemand": 11.755
-                },
-                "Oracle": {
-                    "ondemand": 11.755
-                }
-            },
-            "ap-northeast-2": {
-                "MySQL": {
-                    "ondemand": 13.68
-                },
-                "Oracle": {
-                    "ondemand": 13.296
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 16.8
-                },
-                "PostgreSQL": {
-                    "ondemand": 14.4
-                },
-                "MariaDB": {
-                    "ondemand": 13.68
-                }
-            },
             "eu-west-3": {
+                "SQL Server": {
+                    "ondemand": 38.184
+                },
                 "PostgreSQL": {
                     "ondemand": 14.112
                 },
@@ -15691,6 +16939,102 @@
                     "ondemand": 12.998
                 }
             },
+            "ap-northeast-3": {
+                "Oracle": {
+                    "ondemand": 13.296
+                },
+                "SQL Server": {
+                    "ondemand": 47.88
+                }
+            },
+            "us-gov-east-1": {
+                "SQL Server": {
+                    "ondemand": 38.064
+                },
+                "Oracle": {
+                    "ondemand": 13.464
+                }
+            },
+            "eu-north-1": {
+                "Aurora PostgreSQL": {
+                    "ondemand": 14.4
+                },
+                "PostgreSQL": {
+                    "ondemand": 12.343
+                },
+                "MariaDB": {
+                    "ondemand": 11.755
+                },
+                "MySQL": {
+                    "ondemand": 11.755
+                },
+                "SQL Server": {
+                    "ondemand": 58.094
+                },
+                "Oracle": {
+                    "ondemand": 11.755
+                }
+            },
+            "ap-northeast-2": {
+                "MySQL": {
+                    "ondemand": 13.68
+                },
+                "SQL Server": {
+                    "ondemand": 61.992
+                },
+                "Oracle": {
+                    "ondemand": 13.296
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 16.8
+                },
+                "PostgreSQL": {
+                    "ondemand": 14.4
+                },
+                "MariaDB": {
+                    "ondemand": 13.68
+                }
+            },
+            "eu-central-1": {
+                "SQL Server": {
+                    "ondemand": 39.84
+                },
+                "PostgreSQL": {
+                    "ondemand": 14.64
+                },
+                "Oracle": {
+                    "ondemand": 13.534
+                },
+                "MySQL": {
+                    "ondemand": 13.92
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 16.8
+                },
+                "MariaDB": {
+                    "ondemand": 13.92
+                }
+            },
+            "ap-east-1": {
+                "SQL Server": {
+                    "ondemand": 68.191
+                },
+                "PostgreSQL": {
+                    "ondemand": 15.84
+                },
+                "Aurora PostgreSQL": {
+                    "ondemand": 18.48
+                },
+                "Oracle": {
+                    "ondemand": 14.6256
+                },
+                "MySQL": {
+                    "ondemand": 15.048
+                },
+                "MariaDB": {
+                    "ondemand": 15.048
+                }
+            },
             "ap-southeast-1": {
                 "Aurora PostgreSQL": {
                     "ondemand": 16.8
@@ -15700,6 +17044,9 @@
                 },
                 "PostgreSQL": {
                     "ondemand": 14.4
+                },
+                "SQL Server": {
+                    "ondemand": 39.36
                 },
                 "MariaDB": {
                     "ondemand": 13.68
@@ -15711,6 +17058,9 @@
             "me-south-1": {
                 "PostgreSQL": {
                     "ondemand": 14.784
+                },
+                "SQL Server": {
+                    "ondemand": 40.524
                 },
                 "MySQL": {
                     "ondemand": 13.992
@@ -15729,6 +17079,9 @@
                 "MySQL": {
                     "ondemand": 11.52
                 },
+                "SQL Server": {
+                    "ondemand": 60.024
+                },
                 "Oracle": {
                     "ondemand": 11.184
                 },
@@ -15745,6 +17098,9 @@
             "ap-northeast-1": {
                 "Oracle": {
                     "ondemand": 13.296
+                },
+                "SQL Server": {
+                    "ondemand": 61.992
                 },
                 "MySQL": {
                     "ondemand": 13.68
@@ -15766,6 +17122,9 @@
                 "Oracle": {
                     "ondemand": 12.624
                 },
+                "SQL Server": {
+                    "ondemand": 34.464
+                },
                 "MySQL": {
                     "ondemand": 12.96
                 },
@@ -15782,6 +17141,9 @@
                 },
                 "PostgreSQL": {
                     "ondemand": 13.44
+                },
+                "SQL Server": {
+                    "ondemand": 36.84
                 },
                 "MariaDB": {
                     "ondemand": 12.72
@@ -15803,28 +17165,17 @@
                 "Oracle": {
                     "ondemand": 12.288
                 },
+                "SQL Server": {
+                    "ondemand": 37.392
+                },
                 "Aurora PostgreSQL": {
                     "ondemand": 15.36
                 }
             },
-            "ap-east-1": {
-                "PostgreSQL": {
-                    "ondemand": 15.84
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 18.48
-                },
-                "Oracle": {
-                    "ondemand": 14.6256
-                },
-                "MySQL": {
-                    "ondemand": 15.048
-                },
-                "MariaDB": {
-                    "ondemand": 15.048
-                }
-            },
             "us-west-1": {
+                "SQL Server": {
+                    "ondemand": 38.16
+                },
                 "MySQL": {
                     "ondemand": 12.72
                 },
@@ -15841,31 +17192,17 @@
                     "ondemand": 13.44
                 }
             },
-            "eu-central-1": {
-                "PostgreSQL": {
-                    "ondemand": 14.64
-                },
-                "Oracle": {
-                    "ondemand": 13.534
-                },
-                "MySQL": {
-                    "ondemand": 13.92
-                },
-                "Aurora PostgreSQL": {
-                    "ondemand": 16.8
-                },
-                "MariaDB": {
-                    "ondemand": 13.92
-                }
-            },
             "us-gov-west-1": {
                 "Oracle": {
                     "ondemand": 13.459
+                },
+                "SQL Server": {
+                    "ondemand": 59.616
                 }
             },
-            "us-gov-east-1": {
+            "sa-east-1": {
                 "Oracle": {
-                    "ondemand": 13.464
+                    "ondemand": 23.328
                 }
             }
         },
@@ -15911,6 +17248,9 @@
                 "PostgreSQL": {
                     "ondemand": 0.145
                 },
+                "SQL Server": {
+                    "ondemand": 0.232
+                },
                 "MariaDB": {
                     "ondemand": 0.136
                 }
@@ -15927,6 +17267,9 @@
                 },
                 "PostgreSQL": {
                     "ondemand": 0.19
+                },
+                "SQL Server": {
+                    "ondemand": 0.185
                 }
             },
             "eu-west-3": {
@@ -15935,6 +17278,9 @@
                 },
                 "Oracle": {
                     "ondemand": 0.152
+                },
+                "SQL Server": {
+                    "ondemand": 0.178
                 },
                 "PostgreSQL": {
                     "ondemand": 0.164
@@ -15953,6 +17299,9 @@
                 "MySQL": {
                     "ondemand": 0.208
                 },
+                "SQL Server": {
+                    "ondemand": 0.199
+                },
                 "MariaDB": {
                     "ondemand": 0.208
                 }
@@ -15964,6 +17313,9 @@
                 "PostgreSQL": {
                     "ondemand": 0.302
                 },
+                "SQL Server": {
+                    "ondemand": 0.237
+                },
                 "MariaDB": {
                     "ondemand": 0.28
                 },
@@ -15971,9 +17323,26 @@
                     "ondemand": 0.28
                 }
             },
+            "ap-northeast-2": {
+                "SQL Server": {
+                    "ondemand": 0.259
+                },
+                "Oracle": {
+                    "ondemand": 0.208
+                },
+                "MariaDB": {
+                    "ondemand": 0.208
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.224
+                },
+                "MySQL": {
+                    "ondemand": 0.208
+                }
+            },
             "me-south-1": {
                 "Oracle": {
-                    "ondemand": 0.158
+                    "ondemand": 0.3388
                 },
                 "MariaDB": {
                     "ondemand": 0.158
@@ -15983,11 +17352,17 @@
                 },
                 "MySQL": {
                     "ondemand": 0.158
+                },
+                "SQL Server": {
+                    "ondemand": 0.19
                 }
             },
             "us-gov-east-1": {
                 "Oracle": {
                     "ondemand": 0.164
+                },
+                "SQL Server": {
+                    "ondemand": 0.183
                 }
             },
             "eu-west-1": {
@@ -16002,6 +17377,9 @@
                 },
                 "PostgreSQL": {
                     "ondemand": 0.156
+                },
+                "SQL Server": {
+                    "ondemand": 0.242
                 }
             },
             "us-east-1": {
@@ -16016,6 +17394,9 @@
                 },
                 "MariaDB": {
                     "ondemand": 0.136
+                },
+                "SQL Server": {
+                    "ondemand": 0.162
                 }
             },
             "ap-east-1": {
@@ -16024,6 +17405,9 @@
                 },
                 "Oracle": {
                     "ondemand": 0.2288
+                },
+                "SQL Server": {
+                    "ondemand": 0.211
                 },
                 "MySQL": {
                     "ondemand": 0.2288
@@ -16039,25 +17423,14 @@
                 "MySQL": {
                     "ondemand": 0.208
                 },
-                "MariaDB": {
-                    "ondemand": 0.208
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.224
-                }
-            },
-            "ap-northeast-2": {
-                "Oracle": {
-                    "ondemand": 0.208
+                "SQL Server": {
+                    "ondemand": 0.194
                 },
                 "MariaDB": {
                     "ondemand": 0.208
                 },
                 "PostgreSQL": {
                     "ondemand": 0.224
-                },
-                "MySQL": {
-                    "ondemand": 0.208
                 }
             },
             "ap-southeast-1": {
@@ -16066,6 +17439,9 @@
                 },
                 "Oracle": {
                     "ondemand": 0.352
+                },
+                "SQL Server": {
+                    "ondemand": 0.261
                 },
                 "MySQL": {
                     "ondemand": 0.208
@@ -16078,6 +17454,9 @@
                 "Oracle": {
                     "ondemand": 0.196
                 },
+                "SQL Server": {
+                    "ondemand": 0.24
+                },
                 "MySQL": {
                     "ondemand": 0.196
                 },
@@ -16088,21 +17467,10 @@
                     "ondemand": 0.212
                 }
             },
-            "eu-north-1": {
-                "Oracle": {
-                    "ondemand": 0.137
-                },
-                "PostgreSQL": {
-                    "ondemand": 0.148
-                },
-                "MySQL": {
-                    "ondemand": 0.137
-                },
-                "MariaDB": {
-                    "ondemand": 0.137
-                }
-            },
             "eu-central-1": {
+                "SQL Server": {
+                    "ondemand": 0.249
+                },
                 "PostgreSQL": {
                     "ondemand": 0.168
                 },
@@ -16116,12 +17484,32 @@
                     "ondemand": 0.16
                 }
             },
+            "eu-north-1": {
+                "Oracle": {
+                    "ondemand": 0.137
+                },
+                "PostgreSQL": {
+                    "ondemand": 0.148
+                },
+                "MySQL": {
+                    "ondemand": 0.137
+                },
+                "SQL Server": {
+                    "ondemand": 0.236
+                },
+                "MariaDB": {
+                    "ondemand": 0.137
+                }
+            },
             "eu-west-2": {
                 "PostgreSQL": {
                     "ondemand": 0.164
                 },
                 "Oracle": {
                     "ondemand": 0.324
+                },
+                "SQL Server": {
+                    "ondemand": 0.246
                 },
                 "MySQL": {
                     "ondemand": 0.152
@@ -16131,11 +17519,17 @@
                 }
             },
             "us-gov-west-1": {
+                "SQL Server": {
+                    "ondemand": 0.183
+                },
                 "Oracle": {
                     "ondemand": 0.164
                 }
             },
             "ap-northeast-3": {
+                "SQL Server": {
+                    "ondemand": 0.265
+                },
                 "Oracle": {
                     "ondemand": 0.209
                 }
@@ -16143,6 +17537,9 @@
             "us-east-2": {
                 "Oracle": {
                     "ondemand": 0.28
+                },
+                "SQL Server": {
+                    "ondemand": 0.162
                 },
                 "MySQL": {
                     "ondemand": 0.136
@@ -16155,6 +17552,9 @@
                 }
             },
             "ca-central-1": {
+                "SQL Server": {
+                    "ondemand": 0.176
+                },
                 "Oracle": {
                     "ondemand": 0.148
                 },
@@ -16170,262 +17570,6 @@
             }
         },
         "pretty_name": "T3 Large"
-    },
-    {
-        "servicecode": "AmazonRDS",
-        "location": "US West (N. California)",
-        "locationType": "AWS Region",
-        "instanceType": "db.m5.16xlarge",
-        "currentGeneration": "Yes",
-        "instanceFamily": "General purpose",
-        "vcpu": "64",
-        "physicalProcessor": "Intel Xeon Platinum 8175",
-        "memory": "256",
-        "storage": "EBS Only",
-        "networkPerformance": "20 Gigabit",
-        "processorArchitecture": "64-bit",
-        "engineCode": "5",
-        "databaseEngine": "Oracle",
-        "databaseEdition": "Enterprise",
-        "licenseModel": "Bring your own license",
-        "deploymentOption": "Multi-AZ",
-        "usagetype": "USW1-Multi-AZUsage:db.m5.16xl",
-        "operation": "CreateDBInstance:0005",
-        "instanceTypeFamily": "M5",
-        "normalizationSizeFactor": "256",
-        "servicename": "Amazon Relational Database Service",
-        "region": "us-west-1",
-        "network_performance": "20 Gigabit",
-        "family": "General purpose",
-        "instance_type": "db.m5.16xlarge",
-        "database_engine": "Oracle",
-        "arch": "64-bit",
-        "pricing": {
-            "ap-southeast-1": {
-                "Oracle": {
-                    "ondemand": 7.52
-                }
-            },
-            "us-west-2": {
-                "Oracle": {
-                    "ondemand": 5.472
-                }
-            },
-            "ap-east-1": {
-                "Oracle": {
-                    "ondemand": 8.272
-                }
-            },
-            "ap-northeast-3": {
-                "Oracle": {
-                    "ondemand": 7.984
-                }
-            },
-            "eu-west-2": {
-                "Oracle": {
-                    "ondemand": 6.336
-                }
-            },
-            "us-east-1": {
-                "Oracle": {
-                    "ondemand": 5.472
-                }
-            },
-            "ap-southeast-2": {
-                "Oracle": {
-                    "ondemand": 7.52
-                }
-            },
-            "eu-west-1": {
-                "Oracle": {
-                    "ondemand": 6.048
-                }
-            },
-            "eu-central-1": {
-                "Oracle": {
-                    "ondemand": 6.496
-                }
-            },
-            "ap-northeast-2": {
-                "Oracle": {
-                    "ondemand": 7.552
-                }
-            },
-            "us-gov-east-1": {
-                "Oracle": {
-                    "ondemand": 6.56
-                }
-            },
-            "ca-central-1": {
-                "Oracle": {
-                    "ondemand": 6.048
-                }
-            },
-            "ap-northeast-1": {
-                "Oracle": {
-                    "ondemand": 7.52
-                }
-            },
-            "us-west-1": {
-                "Oracle": {
-                    "ondemand": 6.24
-                }
-            },
-            "ap-south-1": {
-                "Oracle": {
-                    "ondemand": 7.712
-                }
-            },
-            "sa-east-1": {
-                "Oracle": {
-                    "ondemand": 7.392
-                }
-            },
-            "eu-west-3": {
-                "Oracle": {
-                    "ondemand": 6.336
-                }
-            },
-            "me-south-1": {
-                "Oracle": {
-                    "ondemand": 6.6528
-                }
-            },
-            "us-east-2": {
-                "Oracle": {
-                    "ondemand": 5.472
-                }
-            }
-        },
-        "pretty_name": "M5 16xlarge"
-    },
-    {
-        "servicecode": "AmazonRDS",
-        "location": "Middle East (Bahrain)",
-        "locationType": "AWS Region",
-        "instanceType": "db.m5.8xlarge",
-        "currentGeneration": "Yes",
-        "instanceFamily": "General purpose",
-        "vcpu": "32",
-        "physicalProcessor": "Intel Xeon Platinum 8175",
-        "memory": "128",
-        "storage": "EBS Only",
-        "networkPerformance": "10 Gigabit",
-        "processorArchitecture": "64-bit",
-        "engineCode": "5",
-        "databaseEngine": "Oracle",
-        "databaseEdition": "Enterprise",
-        "licenseModel": "Bring your own license",
-        "deploymentOption": "Multi-AZ",
-        "usagetype": "MES1-Multi-AZUsage:db.m5.8xl",
-        "operation": "CreateDBInstance:0005",
-        "instanceTypeFamily": "M5",
-        "normalizationSizeFactor": "128",
-        "servicename": "Amazon Relational Database Service",
-        "region": "me-south-1",
-        "network_performance": "10 Gigabit",
-        "family": "General purpose",
-        "instance_type": "db.m5.8xlarge",
-        "database_engine": "Oracle",
-        "arch": "64-bit",
-        "pricing": {
-            "ap-south-1": {
-                "Oracle": {
-                    "ondemand": 3.856
-                }
-            },
-            "ap-northeast-3": {
-                "Oracle": {
-                    "ondemand": 3.992
-                }
-            },
-            "us-east-2": {
-                "Oracle": {
-                    "ondemand": 2.736
-                }
-            },
-            "ap-east-1": {
-                "Oracle": {
-                    "ondemand": 4.136
-                }
-            },
-            "eu-west-2": {
-                "Oracle": {
-                    "ondemand": 3.168
-                }
-            },
-            "us-east-1": {
-                "Oracle": {
-                    "ondemand": 2.736
-                }
-            },
-            "ap-northeast-2": {
-                "Oracle": {
-                    "ondemand": 3.776
-                }
-            },
-            "ca-central-1": {
-                "Oracle": {
-                    "ondemand": 3.024
-                }
-            },
-            "eu-west-3": {
-                "Oracle": {
-                    "ondemand": 3.168
-                }
-            },
-            "us-west-1": {
-                "Oracle": {
-                    "ondemand": 3.12
-                }
-            },
-            "us-west-2": {
-                "Oracle": {
-                    "ondemand": 2.736
-                }
-            },
-            "ap-northeast-1": {
-                "Oracle": {
-                    "ondemand": 3.76
-                }
-            },
-            "ap-southeast-2": {
-                "Oracle": {
-                    "ondemand": 3.76
-                }
-            },
-            "eu-central-1": {
-                "Oracle": {
-                    "ondemand": 3.248
-                }
-            },
-            "eu-west-1": {
-                "Oracle": {
-                    "ondemand": 3.024
-                }
-            },
-            "us-gov-east-1": {
-                "Oracle": {
-                    "ondemand": 3.28
-                }
-            },
-            "me-south-1": {
-                "Oracle": {
-                    "ondemand": 3.3264
-                }
-            },
-            "ap-southeast-1": {
-                "Oracle": {
-                    "ondemand": 3.76
-                }
-            },
-            "sa-east-1": {
-                "Oracle": {
-                    "ondemand": 3.696
-                }
-            }
-        },
-        "pretty_name": "M5 Eight Extra Large"
     },
     {
         "servicecode": "AmazonRDS",
@@ -16751,82 +17895,153 @@
         "database_engine": "Oracle",
         "arch": "64-bit",
         "pricing": {
+            "eu-north-1": {
+                "SQL Server": {
+                    "ondemand": 11.666
+                }
+            },
             "me-south-1": {
                 "Oracle": {
                     "ondemand": 4.5408
+                },
+                "SQL Server": {
+                    "ondemand": 22.422
                 }
             },
             "us-east-1": {
                 "Oracle": {
                     "ondemand": 3.728
+                },
+                "SQL Server": {
+                    "ondemand": 12.16
+                }
+            },
+            "ap-southeast-2": {
+                "SQL Server": {
+                    "ondemand": 13.12
+                },
+                "Oracle": {
+                    "ondemand": 4.424
                 }
             },
             "eu-west-2": {
                 "Oracle": {
                     "ondemand": 4.352
+                },
+                "SQL Server": {
+                    "ondemand": 12.728
                 }
             },
             "eu-west-3": {
                 "Oracle": {
                     "ondemand": 4.336
-                }
-            },
-            "us-east-2": {
-                "Oracle": {
-                    "ondemand": 3.728
-                }
-            },
-            "ap-northeast-2": {
-                "Oracle": {
-                    "ondemand": 4.432
-                }
-            },
-            "ap-southeast-1": {
-                "Oracle": {
-                    "ondemand": 4.432
-                }
-            },
-            "us-west-2": {
-                "Oracle": {
-                    "ondemand": 3.728
-                }
-            },
-            "us-gov-east-1": {
-                "Oracle": {
-                    "ondemand": 4.488
-                }
-            },
-            "ap-southeast-2": {
-                "Oracle": {
-                    "ondemand": 4.424
-                }
-            },
-            "ap-northeast-1": {
-                "Oracle": {
-                    "ondemand": 4.432
-                }
-            },
-            "ca-central-1": {
-                "Oracle": {
-                    "ondemand": 4.096
+                },
+                "SQL Server": {
+                    "ondemand": 20.672
                 }
             },
             "eu-west-1": {
+                "SQL Server": {
+                    "ondemand": 12.28
+                },
                 "Oracle": {
                     "ondemand": 4.128
                 }
             },
             "ap-northeast-3": {
+                "SQL Server": {
+                    "ondemand": 15.96
+                },
                 "Oracle": {
                     "ondemand": 4.432
                 }
             },
+            "us-east-2": {
+                "SQL Server": {
+                    "ondemand": 20.008
+                },
+                "Oracle": {
+                    "ondemand": 3.728
+                }
+            },
             "ap-south-1": {
+                "SQL Server": {
+                    "ondemand": 20.464
+                },
                 "Oracle": {
                     "ondemand": 4.208
                 }
             },
+            "ap-northeast-2": {
+                "Oracle": {
+                    "ondemand": 4.432
+                },
+                "SQL Server": {
+                    "ondemand": 20.664
+                }
+            },
+            "ap-southeast-1": {
+                "Oracle": {
+                    "ondemand": 4.432
+                },
+                "SQL Server": {
+                    "ondemand": 13.12
+                }
+            },
+            "us-gov-east-1": {
+                "Oracle": {
+                    "ondemand": 4.488
+                },
+                "SQL Server": {
+                    "ondemand": 19.872
+                }
+            },
+            "us-west-2": {
+                "Oracle": {
+                    "ondemand": 3.728
+                },
+                "SQL Server": {
+                    "ondemand": 12.16
+                }
+            },
+            "sa-east-1": {
+                "Oracle": {
+                    "ondemand": 7.776
+                }
+            },
+            "ap-east-1": {
+                "SQL Server": {
+                    "ondemand": 14.432
+                },
+                "Oracle": {
+                    "ondemand": 4.8752
+                }
+            },
+            "ap-northeast-1": {
+                "Oracle": {
+                    "ondemand": 4.432
+                },
+                "SQL Server": {
+                    "ondemand": 12.768
+                }
+            },
+            "ca-central-1": {
+                "Oracle": {
+                    "ondemand": 4.096
+                },
+                "SQL Server": {
+                    "ondemand": 12.464
+                }
+            },
+            "us-gov-west-1": {
+                "SQL Server": {
+                    "ondemand": 12.688
+                }
+            },
             "us-west-1": {
+                "SQL Server": {
+                    "ondemand": 20.384
+                },
                 "Oracle": {
                     "ondemand": 4.112
                 }
@@ -16834,11 +18049,9 @@
             "eu-central-1": {
                 "Oracle": {
                     "ondemand": 4.512
-                }
-            },
-            "ap-east-1": {
-                "Oracle": {
-                    "ondemand": 4.8752
+                },
+                "SQL Server": {
+                    "ondemand": 13.28
                 }
             }
         },
@@ -17011,9 +18224,19 @@
                     "ondemand": 0.413
                 }
             },
+            "eu-west-2": {
+                "Oracle": {
+                    "ondemand": 0.4034
+                }
+            },
             "ap-northeast-1": {
                 "Oracle": {
                     "ondemand": 0.417
+                }
+            },
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 0.344
                 }
             },
             "us-west-2": {
@@ -17024,6 +18247,11 @@
             "us-east-1": {
                 "Oracle": {
                     "ondemand": 0.342
+                }
+            },
+            "ap-south-1": {
+                "Oracle": {
+                    "ondemand": 0.3965
                 }
             },
             "ap-southeast-1": {
@@ -17039,6 +18267,11 @@
             "eu-west-1": {
                 "Oracle": {
                     "ondemand": 0.382
+                }
+            },
+            "ap-northeast-2": {
+                "Oracle": {
+                    "ondemand": 0.41
                 }
             },
             "ap-southeast-2": {
@@ -17135,6 +18368,11 @@
                     }
                 }
             },
+            "ap-south-1": {
+                "Oracle": {
+                    "ondemand": 2.3791
+                }
+            },
             "ap-northeast-1": {
                 "Oracle": {
                     "ondemand": 2.502
@@ -17148,6 +18386,16 @@
             "ap-southeast-2": {
                 "Oracle": {
                     "ondemand": 2.49
+                }
+            },
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 2.0637
+                }
+            },
+            "eu-west-2": {
+                "Oracle": {
+                    "ondemand": 2.4204
                 }
             },
             "us-east-1": {
@@ -17168,6 +18416,11 @@
             "eu-central-1": {
                 "Oracle": {
                     "ondemand": 2.478
+                }
+            },
+            "ap-northeast-2": {
+                "Oracle": {
+                    "ondemand": 2.4602
                 }
             }
         },
@@ -17205,7 +18458,14 @@
         "pricing": {
             "ap-southeast-1": {
                 "Oracle": {
-                    "ondemand": 4.0622
+                    "ondemand": 4.0622,
+                    "reserved": {
+                        "yrTerm3.partialUpfront": 1.2186226788432268,
+                        "yrTerm1.partialUpfront": 2.396801826484018,
+                        "yrTerm3.allUpfront": 1.1942922374429223,
+                        "yrTerm1.allUpfront": 2.3487442922374426,
+                        "yrTerm1.noUpfront": 2.5166
+                    }
                 }
             },
             "us-west-2": {
@@ -17554,129 +18814,6 @@
     },
     {
         "servicecode": "AmazonRDS",
-        "location": "Asia Pacific (Sydney)",
-        "locationType": "AWS Region",
-        "instanceType": "db.r5.16xlarge",
-        "currentGeneration": "Yes",
-        "instanceFamily": "Memory optimized",
-        "vcpu": "64",
-        "physicalProcessor": "Intel Xeon Platinum 8175",
-        "memory": "512",
-        "storage": "EBS Only",
-        "networkPerformance": "20 Gigabit",
-        "processorArchitecture": "64-bit",
-        "engineCode": "5",
-        "databaseEngine": "Oracle",
-        "databaseEdition": "Enterprise",
-        "licenseModel": "Bring your own license",
-        "deploymentOption": "Multi-AZ",
-        "usagetype": "APS2-Multi-AZUsage:db.r5.16xl",
-        "operation": "CreateDBInstance:0005",
-        "instanceTypeFamily": "R5",
-        "normalizationSizeFactor": "256",
-        "servicename": "Amazon Relational Database Service",
-        "region": "ap-southeast-2",
-        "network_performance": "20 Gigabit",
-        "family": "Memory optimized",
-        "instance_type": "db.r5.16xlarge",
-        "database_engine": "Oracle",
-        "arch": "64-bit",
-        "pricing": {
-            "eu-west-3": {
-                "Oracle": {
-                    "ondemand": 8.672
-                }
-            },
-            "ap-northeast-1": {
-                "Oracle": {
-                    "ondemand": 8.864
-                }
-            },
-            "us-gov-east-1": {
-                "Oracle": {
-                    "ondemand": 8.976
-                }
-            },
-            "eu-west-1": {
-                "Oracle": {
-                    "ondemand": 8.256
-                }
-            },
-            "me-south-1": {
-                "Oracle": {
-                    "ondemand": 9.0816
-                }
-            },
-            "ap-east-1": {
-                "Oracle": {
-                    "ondemand": 9.7504
-                }
-            },
-            "us-west-2": {
-                "Oracle": {
-                    "ondemand": 7.456
-                }
-            },
-            "ap-south-1": {
-                "Oracle": {
-                    "ondemand": 8.416
-                }
-            },
-            "eu-central-1": {
-                "Oracle": {
-                    "ondemand": 9.024
-                }
-            },
-            "ap-northeast-3": {
-                "Oracle": {
-                    "ondemand": 8.864
-                }
-            },
-            "us-west-1": {
-                "Oracle": {
-                    "ondemand": 8.224
-                }
-            },
-            "ap-northeast-2": {
-                "Oracle": {
-                    "ondemand": 8.864
-                }
-            },
-            "ap-southeast-2": {
-                "Oracle": {
-                    "ondemand": 8.848
-                }
-            },
-            "us-east-2": {
-                "Oracle": {
-                    "ondemand": 7.456
-                }
-            },
-            "ap-southeast-1": {
-                "Oracle": {
-                    "ondemand": 8.864
-                }
-            },
-            "us-east-1": {
-                "Oracle": {
-                    "ondemand": 7.456
-                }
-            },
-            "ca-central-1": {
-                "Oracle": {
-                    "ondemand": 8.192
-                }
-            },
-            "eu-west-2": {
-                "Oracle": {
-                    "ondemand": 8.704
-                }
-            }
-        },
-        "pretty_name": "R5 16xlarge"
-    },
-    {
-        "servicecode": "AmazonRDS",
         "location": "EU (Paris)",
         "locationType": "AWS Region",
         "instanceType": "db.x1.32xlarge",
@@ -18014,6 +19151,11 @@
                     "ondemand": 8.208
                 }
             },
+            "ap-south-1": {
+                "Oracle": {
+                    "ondemand": 9.5166
+                }
+            },
             "us-west-1": {
                 "Oracle": {
                     "ondemand": 9.312
@@ -18032,6 +19174,21 @@
             "us-east-1": {
                 "Oracle": {
                     "ondemand": 8.208
+                }
+            },
+            "eu-west-2": {
+                "Oracle": {
+                    "ondemand": 9.6817
+                }
+            },
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 8.2549
+                }
+            },
+            "ap-northeast-2": {
+                "Oracle": {
+                    "ondemand": 9.8408
                 }
             },
             "eu-west-1": {
@@ -18090,6 +19247,99 @@
             }
         },
         "pretty_name": "CV11 9xlarge"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "Asia Pacific (Mumbai)",
+        "locationType": "AWS Region",
+        "instanceType": "db.z1d.6xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Memory optimized",
+        "vcpu": "24",
+        "physicalProcessor": "Intel Xeon Platinum 8151",
+        "memory": "192",
+        "storage": "1 x 900 NVMe SSD",
+        "networkPerformance": "10,000 Mbps",
+        "processorArchitecture": "64-bit",
+        "engineCode": "5",
+        "databaseEngine": "Oracle",
+        "databaseEdition": "Enterprise",
+        "licenseModel": "Bring your own license",
+        "deploymentOption": "Multi-AZ",
+        "usagetype": "APS3-Multi-AZUsage:db.z1d.6xl",
+        "operation": "CreateDBInstance:0005",
+        "instanceTypeFamily": "Z1D",
+        "normalizationSizeFactor": "96",
+        "servicename": "Amazon Relational Database Service",
+        "region": "ap-south-1",
+        "network_performance": "10,000 Mbps",
+        "family": "Memory optimized",
+        "instance_type": "db.z1d.6xlarge",
+        "database_engine": "Oracle",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-2": {
+                "Oracle": {
+                    "ondemand": 4.1274
+                }
+            },
+            "us-east-1": {
+                "Oracle": {
+                    "ondemand": 4.104
+                }
+            },
+            "ap-southeast-1": {
+                "Oracle": {
+                    "ondemand": 4.98
+                }
+            },
+            "eu-west-1": {
+                "Oracle": {
+                    "ondemand": 4.584
+                }
+            },
+            "ap-northeast-2": {
+                "Oracle": {
+                    "ondemand": 4.9204
+                }
+            },
+            "us-west-1": {
+                "Oracle": {
+                    "ondemand": 4.656
+                }
+            },
+            "ap-southeast-2": {
+                "Oracle": {
+                    "ondemand": 4.98
+                }
+            },
+            "eu-west-2": {
+                "Oracle": {
+                    "ondemand": 4.8409
+                }
+            },
+            "ap-northeast-1": {
+                "Oracle": {
+                    "ondemand": 5.004
+                }
+            },
+            "us-west-2": {
+                "Oracle": {
+                    "ondemand": 4.104
+                }
+            },
+            "eu-central-1": {
+                "Oracle": {
+                    "ondemand": 4.956
+                }
+            },
+            "ap-south-1": {
+                "Oracle": {
+                    "ondemand": 4.7583
+                }
+            }
+        },
+        "pretty_name": "Z1D 6xlarge"
     },
     {
         "servicecode": "AmazonRDS",
@@ -18183,86 +19433,6 @@
         "servicecode": "AmazonRDS",
         "location": "US East (N. Virginia)",
         "locationType": "AWS Region",
-        "instanceType": "db.z1d.6xlarge",
-        "currentGeneration": "Yes",
-        "instanceFamily": "Memory optimized",
-        "vcpu": "24",
-        "physicalProcessor": "Intel Xeon Platinum 8151",
-        "memory": "192",
-        "storage": "1 x 900 NVMe SSD",
-        "networkPerformance": "10,000 Mbps",
-        "processorArchitecture": "64-bit",
-        "engineCode": "4",
-        "databaseEngine": "Oracle",
-        "databaseEdition": "Standard",
-        "licenseModel": "Bring your own license",
-        "deploymentOption": "Single-AZ",
-        "usagetype": "InstanceUsage:db.z1d.6xl",
-        "operation": "CreateDBInstance:0004",
-        "instanceTypeFamily": "Z1D",
-        "normalizationSizeFactor": "48",
-        "servicename": "Amazon Relational Database Service",
-        "region": "us-east-1",
-        "network_performance": "10,000 Mbps",
-        "family": "Memory optimized",
-        "instance_type": "db.z1d.6xlarge",
-        "database_engine": "Oracle",
-        "arch": "64-bit",
-        "pricing": {
-            "us-east-1": {
-                "Oracle": {
-                    "ondemand": 4.104,
-                    "reserved": {
-                        "yrTerm3.partialUpfront": 1.8468018264840182,
-                        "yrTerm1.partialUpfront": 2.6675899543379,
-                        "yrTerm3.allUpfront": 1.809855403348554,
-                        "yrTerm1.allUpfront": 2.6142694063926943,
-                        "yrTerm1.noUpfront": 2.801
-                    }
-                }
-            },
-            "ap-southeast-1": {
-                "Oracle": {
-                    "ondemand": 4.98
-                }
-            },
-            "eu-west-1": {
-                "Oracle": {
-                    "ondemand": 4.584
-                }
-            },
-            "us-west-1": {
-                "Oracle": {
-                    "ondemand": 4.656
-                }
-            },
-            "ap-southeast-2": {
-                "Oracle": {
-                    "ondemand": 4.98
-                }
-            },
-            "ap-northeast-1": {
-                "Oracle": {
-                    "ondemand": 5.004
-                }
-            },
-            "us-west-2": {
-                "Oracle": {
-                    "ondemand": 4.104
-                }
-            },
-            "eu-central-1": {
-                "Oracle": {
-                    "ondemand": 4.956
-                }
-            }
-        },
-        "pretty_name": "Z1D 6xlarge"
-    },
-    {
-        "servicecode": "AmazonRDS",
-        "location": "US East (N. Virginia)",
-        "locationType": "AWS Region",
         "instanceType": "db.mv11.xlarge",
         "currentGeneration": "Yes",
         "instanceFamily": "General purpose",
@@ -18302,6 +19472,50 @@
             }
         },
         "pretty_name": "MV11 Extra Large"
+    },
+    {
+        "servicecode": "AmazonRDS",
+        "location": "US East (N. Virginia)",
+        "locationType": "AWS Region",
+        "instanceType": "db.rv11.12xlarge",
+        "currentGeneration": "Yes",
+        "instanceFamily": "Memory optimized",
+        "vcpu": "48",
+        "physicalProcessor": "Intel Xeon Platinum 8175",
+        "memory": "384",
+        "storage": "EBS Only",
+        "networkPerformance": "10 Gigabit",
+        "processorArchitecture": "64-bit",
+        "engineCode": "120",
+        "databaseEngine": "PostgreSQL",
+        "licenseModel": "No license required",
+        "deploymentOption": "Single-AZ",
+        "usagetype": "InstanceUsage:db.rv11.12xl",
+        "operation": "CreateDBInstance:0120",
+        "enhancedNetworkingSupported": "Yes",
+        "instanceTypeFamily": "RV11",
+        "normalizationSizeFactor": "96",
+        "servicename": "Amazon Relational Database Service",
+        "region": "us-east-1",
+        "network_performance": "10 Gigabit",
+        "family": "Memory optimized",
+        "instance_type": "db.rv11.12xlarge",
+        "database_engine": "PostgreSQL",
+        "arch": "64-bit",
+        "pricing": {
+            "us-east-1": {
+                "PostgreSQL": {
+                    "ondemand": 8.4
+                },
+                "SQL Server": {
+                    "ondemand": 18.288
+                },
+                "MySQL": {
+                    "ondemand": 8.064
+                }
+            }
+        },
+        "pretty_name": "RV11 12xlarge"
     },
     {
         "servicecode": "AmazonRDS",
@@ -18347,50 +19561,6 @@
             }
         },
         "pretty_name": "CV11 Quadruple Extra Large"
-    },
-    {
-        "servicecode": "AmazonRDS",
-        "location": "US East (N. Virginia)",
-        "locationType": "AWS Region",
-        "instanceType": "db.rv11.12xlarge",
-        "currentGeneration": "Yes",
-        "instanceFamily": "Memory optimized",
-        "vcpu": "48",
-        "physicalProcessor": "Intel Xeon Platinum 8175",
-        "memory": "384",
-        "storage": "EBS Only",
-        "networkPerformance": "10 Gigabit",
-        "processorArchitecture": "64-bit",
-        "engineCode": "120",
-        "databaseEngine": "PostgreSQL",
-        "licenseModel": "No license required",
-        "deploymentOption": "Single-AZ",
-        "usagetype": "InstanceUsage:db.rv11.12xl",
-        "operation": "CreateDBInstance:0120",
-        "enhancedNetworkingSupported": "Yes",
-        "instanceTypeFamily": "RV11",
-        "normalizationSizeFactor": "96",
-        "servicename": "Amazon Relational Database Service",
-        "region": "us-east-1",
-        "network_performance": "10 Gigabit",
-        "family": "Memory optimized",
-        "instance_type": "db.rv11.12xlarge",
-        "database_engine": "PostgreSQL",
-        "arch": "64-bit",
-        "pricing": {
-            "us-east-1": {
-                "PostgreSQL": {
-                    "ondemand": 8.4
-                },
-                "SQL Server": {
-                    "ondemand": 18.288
-                },
-                "MySQL": {
-                    "ondemand": 8.064
-                }
-            }
-        },
-        "pretty_name": "RV11 12xlarge"
     },
     {
         "servicecode": "AmazonRDS",
