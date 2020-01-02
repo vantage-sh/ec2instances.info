@@ -100,11 +100,13 @@ def scrape(output_file, input_file=None):
             attributes['arch'] = attributes['processorArchitecture']
             attributes['pricing'] = {}
             attributes['pricing'][region] = {}
-            rds_instances[sku] = attributes
 
-            if instance_type not in instances.keys():
-                instances[instance_type] = attributes
-                instances[instance_type]['pricing'] = {}
+            if attributes['engineCode'] not in ['210', '220']:
+                rds_instances[sku] = attributes
+
+                if instance_type not in instances.keys():
+                    instances[instance_type] = attributes
+                    instances[instance_type]['pricing'] = {}
 
     # Parse ondemand pricing
     for sku, offers in six.iteritems(data['terms']['OnDemand']):
