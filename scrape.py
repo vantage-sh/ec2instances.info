@@ -239,7 +239,7 @@ def add_eni_info(instances):
         max_enis = locale.atoi(etree.tostring(r[1], method='text').decode())
         ip_per_eni = locale.atoi(etree.tostring(r[2], method='text').decode())
         if instance_type not in by_type:
-            print("Unknown instance type: {}".format(instance_type))
+            print("WARNING: Ignoring ENI data for unknown instance type: {}".format(instance_type))
             continue
         by_type[instance_type].vpc = {
             'max_enis': max_enis,

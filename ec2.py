@@ -112,7 +112,7 @@ def add_pricing(imap):
 
             # There may be a slight delay in updating botocore with new regional endpoints, skip and inform
             if location not in descriptions:
-                print(f"WARNING: Ignoring pricing for instance {instance_type} in {location}. Location is unknown.")
+                print(f"WARNING: Ignoring pricing - unknown location. instance={instance_type}, location={location}")
                 continue
 
             region = descriptions[location]
@@ -123,7 +123,7 @@ def add_pricing(imap):
             platform = translate_platform_name(operating_system, preinstalled_software)
 
             if instance_type not in imap:
-                print(f"WARNING: Ignoring pricing for unrecognized instance type {instance_type} in {region}")
+                print(f"WARNING: Ignoring pricing - unknown instance type. instance={instance_type}, location={location}")
                 continue
 
             # If the instance type is not in us-east-1 imap[instance_type] could fail
