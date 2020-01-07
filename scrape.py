@@ -228,7 +228,8 @@ def fetch_data(url):
 
 
 def add_eni_info(instances):
-    eni_url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html"
+    # Canonical URL for this info is https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
+    eni_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.partial.html"
     tree = etree.parse(urllib2.urlopen(eni_url), etree.HTMLParser())
     table = tree.xpath('//div[@class="table-contents"]//table')[0]
     rows = table.xpath('.//tr[./td]')
@@ -287,7 +288,8 @@ def add_ebs_info(instances):
         return by_type
 
     by_type = {i.instance_type: i for i in instances}
-    ebs_url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html"
+    # Canonical URL for this info is https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
+    ebs_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.partial.html"
     tree = etree.parse(urllib2.urlopen(ebs_url), etree.HTMLParser())
     tables = tree.xpath('//div[@class="table-contents"]//table')
     parse_ebs_table(by_type, tables[0], True)
@@ -379,7 +381,8 @@ def add_vpconly_detail(instances):
 def add_instance_storage_details(instances):
     """Add information about instance storage features."""
 
-    url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html"
+    # Canonical URL for this info is http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html
+    url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.partial.html"
     tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
     table = tree.xpath('//div[@class="table-contents"]/table')[0]
     rows = table.xpath('.//tr[./td]')
@@ -416,9 +419,10 @@ def add_instance_storage_details(instances):
 
 
 def add_t2_credits(instances):
-    tree = etree.parse(
-        urllib2.urlopen("http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-credits-baseline-concepts.html"),
-        etree.HTMLParser())
+    # Canonical URL for this info is
+    #   http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-credits-baseline-concepts.html
+    url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-credits-baseline-concepts.partial.html"
+    tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
     table = tree.xpath('//div[@class="table-contents"]//table')[0]
     rows = table.xpath('.//tr[./td]')
     assert len(rows) > 0, "Failed to find T2 CPU credit info"
