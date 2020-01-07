@@ -600,6 +600,11 @@ def add_gpu_info(instances):
             'compute_capability': 7.5,
             'gpu_memory': 64
         },
+        'g4dn.metal': {
+            'gpu_model': 'NVIDIA T4 Tensor Core',
+            'compute_capability': 7.5,
+            'gpu_memory': 128
+        },
         'p2.xlarge': {
             'gpu_model': 'NVIDIA Tesla K80',
             'compute_capability': 3.7,
@@ -640,9 +645,8 @@ def add_gpu_info(instances):
         if inst.GPU == 0:
             continue
         if inst.instance_type not in gpu_data:
-            print('WARNING: instance %s has GPUs but is missing from gpu_data '
-                  'dict in scrape.add_gpu_info. The dict needs to be updated '
-                  'manually.')
+            print(f"WARNING: instance {inst.instance_type} has GPUs but is missing from gpu_data "
+                  "dict in scrape.add_gpu_info. The dict needs to be updated manually.")
             continue
         inst_gpu_data = gpu_data[inst.instance_type]
         inst.GPU_model = inst_gpu_data['gpu_model']
