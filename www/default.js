@@ -11,7 +11,8 @@ var g_settings_defaults = {
   min_memory: 0,
   min_vcpus: 0,
   min_storage: 0,
-  selected: ''
+  selected: '',
+  compare_on: false
 };
 
 function init_data_table() {
@@ -308,7 +309,8 @@ function url_for_selections() {
     filter: g_data_table.settings()[0].oPreviousSearch['sSearch'],
     region: g_settings.region,
     cost_duration: g_settings.cost_duration,
-    reserved_term: g_settings.reserved_term
+    reserved_term: g_settings.reserved_term,
+    compare_on: g_settings.compare_on
   };
 
   // avoid storing empty or default values in URL
@@ -505,38 +507,49 @@ function load_settings() {
 }
 
 function configure_highlighting() {
-  var compareOn = false,
-    $compareBtn = $('.btn-compare'),
+  var $compareBtn = $('.btn-compare'),
     $rows = $('#data tbody tr');
 
   // Allow row highlighting by clicking.
   $rows.click(function () {
     $(this).toggleClass('highlight');
 
-    if (!compareOn) {
-      $compareBtn.prop('disabled', !$rows.is('.highlight'));
-    }
-
+    update_compare_button();
     maybe_update_url();
   });
 
-  $compareBtn.prop('disabled', !$($rows).is('.highlight'));
-  $compareBtn.text($compareBtn.data('textOff'));
-
   $compareBtn.click(function () {
-    if (compareOn) {
-      $rows.show();
-      $compareBtn.text($compareBtn.data('textOff'))
+    g_settings.compare_on = !g_settings.compare_on;
+    update_compare_button();
+    update_visible_rows();
+    maybe_update_url();
+  });
+
+  update_compare_button();
+  update_visible_rows();
+}
+
+function update_visible_rows() {
+  var $rows = $('#data tbody tr');
+  if (! g_settings.compare_on) {
+    $rows.show();
+  } else {
+    $rows.filter(':not(.highlight)').hide();
+  }
+}
+
+function update_compare_button() {
+  var $compareBtn = $('.btn-compare'),
+      $rows = $('#data tbody tr');
+
+  if (! g_settings.compare_on) {
+    $compareBtn.text($compareBtn.data('textOff'))
         .addClass('btn-primary')
         .removeClass('btn-success')
         .prop('disabled', !$rows.is('.highlight'));
-    } else {
-      $rows.filter(':not(.highlight)').hide();
-      $compareBtn.text($compareBtn.data('textOn'))
+  } else {
+    $compareBtn.text($compareBtn.data('textOn'))
         .addClass('btn-success')
         .removeClass('btn-primary');
-    }
-
-    compareOn = !compareOn;
-  });
+  }
 }
