@@ -304,11 +304,11 @@ def check_ebs_as_nvme(instances):
     https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     """
 
-    url = 'https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html'
+    url = 'https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.partial.html'
     tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
 
     # This should get the p text with instance families
-    p_text = ' '.join(text for p in tree.xpath(r'//*[@id="main-col-body"]/div[8]/ul/li[1]/p') for text in p.itertext())
+    p_text = ' '.join(text for p in tree.xpath(r'//*[@id="main-col-body"]/div[7]/ul/li[1]/p') for text in p.itertext())
     prefixes = [fam.lower() for fam in re.findall(r'[a-zA-Z]\d[a-z]*(?:\.[0-9a-z]+)?', p_text)]
 
     for inst in instances:
