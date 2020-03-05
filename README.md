@@ -9,7 +9,7 @@ I was sick of comparing EC2 instance metrics and pricing on Amazon's site so I m
 
 I'm actively maintaining the site with the help of contributors here, but am not working on large new features.
 
-People have suggested many neat ideas and feature requests but it remains unclear how long the site will be necessary. I've heard from teams at Amazon that they use the site internally and some have mentioned that that they might be building something similar. They certainly have access to better data.
+People have suggested many neat ideas and feature requests but it remains unclear how long the site will be necessary. I've heard from teams at Amazon that they use the site internally and some have mentioned that they might be building something similar. They certainly have access to better data.
 
 
 ### Running locally
