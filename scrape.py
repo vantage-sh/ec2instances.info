@@ -431,7 +431,11 @@ def add_t2_credits(instances):
 
     for r in rows:
         if len(r) > 1:
-            inst = by_type[totext(r[0])]
+            inst_type = totext(r[0])
+            if not inst_type in by_type:
+                print(f"WARNING: skipping unknown instance type '{inst_type}' in CPU credit info table")
+                continue
+            inst = by_type[inst_type]
             creds_per_hour = locale.atof(totext(r[1]))
             inst.base_performance = creds_per_hour / 60
             inst.burst_minutes = creds_per_hour * 24 / inst.vCPU
