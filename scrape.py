@@ -16,6 +16,7 @@ locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 class Instance(object):
     def __init__(self):
         self.arch = ['x86_64']
+        self.api_description = None
         self.base_performance = None
         self.burst_minutes = None
         self.clock_speed_ghz = None
@@ -242,9 +243,10 @@ def add_eni_info(instances):
         if instance_type not in by_type:
             print("WARNING: Ignoring ENI data for unknown instance type: {}".format(instance_type))
             continue
-        by_type[instance_type].vpc = {
-            'max_enis': max_enis,
-            'ips_per_eni': ip_per_eni}
+        if not by_type[instance_type].vpc:
+            print(f"WARNING: DescrbeInstanceTypes API does not have network info for {instance_type}, scraping instead")
+            by_type[instance_type].vpc = { 'max_enis': max_enis,
+                                           'ips_per_eni': ip_per_eni }
 
 
 def add_ebs_info(instances):
@@ -294,26 +296,6 @@ def add_ebs_info(instances):
     tables = tree.xpath('//div[@class="table-contents"]//table')
     parse_ebs_table(by_type, tables[0], True)
     parse_ebs_table(by_type, tables[2], False)
-
-
-def check_ebs_as_nvme(instances):
-    """Note which instances expose EBS as NVMe devices
-
-    Some of the new instances (like i3.metal and c5d family) will expose EBS
-    volume at /dev/nvmeXn1.
-    https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
-    """
-
-    url = 'https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html'
-    tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
-
-    # This should get the p text with instance families
-    p_text = ' '.join(text for p in tree.xpath(r'//*[@id="main-col-body"]/div[8]/ul/li[1]/p') for text in p.itertext())
-    prefixes = [fam.lower() for fam in re.findall(r'[a-zA-Z]\d[a-z]*(?:\.[0-9a-z]+)?', p_text)]
-
-    for inst in instances:
-        if any(inst.instance_type.startswith(prefix) for prefix in prefixes):
-            inst.ebs_as_nvme = True
 
 
 def add_linux_ami_info(instances):
@@ -431,7 +413,11 @@ def add_t2_credits(instances):
 
     for r in rows:
         if len(r) > 1:
-            inst = by_type[totext(r[0])]
+            inst_type = totext(r[0])
+            if not inst_type in by_type:
+                print(f"WARNING: skipping unknown instance type '{inst_type}' in CPU credit info table")
+                continue
+            inst = by_type[inst_type]
             creds_per_hour = locale.atof(totext(r[1]))
             inst.base_performance = creds_per_hour / 60
             inst.burst_minutes = creds_per_hour * 24 / inst.vCPU
@@ -654,24 +640,6 @@ def add_gpu_info(instances):
         inst.GPU_memory = inst_gpu_data['gpu_memory']
 
 
-def add_fpga_info(instances):
-    fpga_key_info_url = "https://aws.amazon.com/ec2/instance-types/f1/"
-    tree = etree.parse(urllib2.urlopen(fpga_key_info_url), etree.HTMLParser())
-    table = tree.xpath('//div[@class="lb-border-p lb-tbl lb-tbl-p lb-tbl-border-inside lb-tbl-header-centered"]//table')[0]
-    rows = table.xpath('.//tr[./td]')
-
-    has_fpga = {}
-
-    for row in rows:
-        instance_type = etree.tostring(row[0], method='text').strip().decode()
-        fpgas = locale.atoi(etree.tostring(row[1], method='text').decode())
-        has_fpga[instance_type] = fpgas
-
-    for instance in instances:
-        if instance.instance_type in has_fpga:
-            instance.FPGA = has_fpga[instance.instance_type]
-
-
 def scrape(data_file):
     """Scrape AWS to get instance data"""
     print("Parsing instance types...")
@@ -682,8 +650,6 @@ def scrape(data_file):
     add_eni_info(all_instances)
     print("Parsing EBS info...")
     add_ebs_info(all_instances)
-    print("Adding EBS as NVMe info...")
-    check_ebs_as_nvme(all_instances)
     print("Parsing Linux AMI info...")
     add_linux_ami_info(all_instances)
     print("Parsing VPC-only info...")
@@ -698,8 +664,6 @@ def scrape(data_file):
     add_emr_info(all_instances)
     print("Adding GPU details...")
     add_gpu_info(all_instances)
-    print("Adding FPGA details...")
-    add_fpga_info(all_instances)
 
     with open(data_file, 'w') as f:
         json.dump([i.to_dict() for i in all_instances],

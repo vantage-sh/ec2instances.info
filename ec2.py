@@ -44,12 +44,22 @@ def get_region_descriptions():
 
     # The Osaka region is invite only and not in boto's list: https://github.com/boto/botocore/issues/1423
     result['Asia Pacific (Osaka-Local)'] = 'ap-northeast-3'
+    # Alias GovCloud US-West to GovCloud US
+    result['AWS GovCloud (US-West)'] = result['AWS GovCloud (US)']
+    # Alias LA local zone to its home region
+    result['US West (Los Angeles)'] = 'us-west-2'
 
     return result
 
 
 def get_instances():
-    # FPGA missing
+    instance_types = {}
+    ec2_client = boto3.client('ec2', region_name='us-east-1')
+    ec2_pager = ec2_client.get_paginator('describe_instance_types')
+    instance_type_iterator = ec2_pager.paginate()
+    for result in instance_type_iterator:
+        for instance_type in result['InstanceTypes']:
+            instance_types[instance_type['InstanceType']] = instance_type
 
     instances = {}
     pricing_client = boto3.client('pricing', region_name='us-east-1')
@@ -81,7 +91,7 @@ def get_instances():
             if instance_type in instances:
                 continue
 
-            new_inst = parse_instance(instance_type, product_attributes)
+            new_inst = parse_instance(instance_type, product_attributes, instance_types.get(instance_type))
 
             # Some instanced may be dedicated hosts instead
             if new_inst is not None:
@@ -179,15 +189,16 @@ def get_reserved_pricing(terms):
     return pricing
 
 
-def parse_instance(instance_type, product_attributes):
-    i = scrape.Instance()
-    i.instance_type = instance_type
-
+def parse_instance(instance_type, product_attributes, api_description):
     pieces = instance_type.split('.')
     if len(pieces) == 1:
         # Dedicated host that is not u-*.metal, skipping
         # May be a good idea to all dedicated hosts in the future
         return
+
+    i = scrape.Instance()
+    i.api_description = api_description
+    i.instance_type = instance_type
 
     i.family = product_attributes.get('instanceFamily')
 
@@ -199,7 +210,11 @@ def parse_instance(instance_type, product_attributes):
     # Memory is given in form of "1,952 GiB", let's parse it
     i.memory = locale.atof(product_attributes.get('memory').split(' ')[0])
 
-    i.network_performance = product_attributes.get('networkPerformance')
+    if api_description:
+        i.network_performance = api_description['NetworkInfo']['NetworkPerformance']
+    else:
+        i.network_performance = product_attributes.get('networkPerformance')
+
     if product_attributes.get('currentGeneration') == 'Yes':
         i.generation = 'current'
     else:
@@ -208,6 +223,18 @@ def parse_instance(instance_type, product_attributes):
     gpu = product_attributes.get('gpu')
     if gpu is not None:
         i.GPU = locale.atoi(gpu)
+
+    if api_description:
+        if 'FpgaInfo' in api_description:
+            for fpga in api_description['FpgaInfo']['Fpgas']:
+                i.FPGA += fpga['Count']
+
+        netinfo = api_description['NetworkInfo']
+        if netinfo['EnaSupport'] == 'required':
+            i.ebs_as_nvme = True
+
+        i.vpc = { 'max_enis': netinfo['MaximumNetworkInterfaces'],
+                  'ips_per_eni': netinfo['Ipv4AddressesPerInterface'] }
 
     try:
         ecu = product_attributes.get('ecu')
