@@ -230,7 +230,9 @@ def fetch_data(url):
 
 def add_eni_info(instances):
     # Canonical URL for this info is https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
-    eni_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.partial.html"
+    # eni_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.partial.html"
+    # It seems it's no longer dynamically loaded
+    eni_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html"
     tree = etree.parse(urllib2.urlopen(eni_url), etree.HTMLParser())
     table = tree.xpath('//div[@class="table-contents"]//table')[0]
     rows = table.xpath('.//tr[./td]')
@@ -291,7 +293,9 @@ def add_ebs_info(instances):
 
     by_type = {i.instance_type: i for i in instances}
     # Canonical URL for this info is https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
-    ebs_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.partial.html"
+    # ebs_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.partial.html"
+    # It seems it's no longer dynamically loaded
+    ebs_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html"
     tree = etree.parse(urllib2.urlopen(ebs_url), etree.HTMLParser())
     tables = tree.xpath('//div[@class="table-contents"]//table')
     parse_ebs_table(by_type, tables[0], True)
@@ -364,7 +368,9 @@ def add_instance_storage_details(instances):
     """Add information about instance storage features."""
 
     # Canonical URL for this info is http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html
-    url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.partial.html"
+    # url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.partial.html"
+    # It seems it's no longer dynamically loaded
+    url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html"
     tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
     table = tree.xpath('//div[@class="table-contents"]/table')[0]
     rows = table.xpath('.//tr[./td]')
@@ -403,7 +409,9 @@ def add_instance_storage_details(instances):
 def add_t2_credits(instances):
     # Canonical URL for this info is
     #   http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-credits-baseline-concepts.html
-    url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-credits-baseline-concepts.partial.html"
+    # url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-credits-baseline-concepts.partial.html"
+    # It seems it's no longer dynamically loaded
+    url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-credits-baseline-concepts.html"
     tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
     table = tree.xpath('//div[@class="table-contents"]//table')[0]
     rows = table.xpath('.//tr[./td]')
