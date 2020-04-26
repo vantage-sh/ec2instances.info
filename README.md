@@ -16,6 +16,28 @@ People have suggested many neat ideas and feature requests but it remains unclea
 
 Make sure you have LibXML and Python development files.  On Ubuntu, run `sudo apt-get install python-dev libxml2-dev libxslt1-dev libssl-dev`.
 
+First, you'll need to provide credentials so that boto can access the AWS API. Options for setting this up are described in the [boto docs](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html). Ensure that your IAM user has at least the following permissions:
+
+    ```
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Action": "ec2:DescribeInstanceTypes",
+                "Resource": "*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": "pricing:*",
+                "Resource": "*"
+            }
+        ]
+    }
+    ```
+
+Then:
+
 1. Clone the git repo
 2. `cd ec2instances.info/`
 3. `python3 -m venv env`

@@ -1,3 +1,4 @@
+import botocore
 import boto3
 import locale
 import json
@@ -54,12 +55,16 @@ def get_region_descriptions():
 
 def get_instances():
     instance_types = {}
-    ec2_client = boto3.client('ec2', region_name='us-east-1')
-    ec2_pager = ec2_client.get_paginator('describe_instance_types')
-    instance_type_iterator = ec2_pager.paginate()
-    for result in instance_type_iterator:
-        for instance_type in result['InstanceTypes']:
-            instance_types[instance_type['InstanceType']] = instance_type
+    try:
+        ec2_client = boto3.client('ec2', region_name='us-east-1')
+        ec2_pager = ec2_client.get_paginator('describe_instance_types')
+        instance_type_iterator = ec2_pager.paginate()
+        for result in instance_type_iterator:
+            for instance_type in result['InstanceTypes']:
+                instance_types[instance_type['InstanceType']] = instance_type
+    except botocore.exceptions.ClientError as e:
+        print(f"ERROR: Failure listing EC2 instance types. See README for proper IAM permissions.\n{e}")
+        return []
 
     instances = {}
     pricing_client = boto3.client('pricing', region_name='us-east-1')
