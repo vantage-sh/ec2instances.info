@@ -32,6 +32,7 @@
             <li><a href="javascript:;" data-region='eu-west-2'>EU (London)</a></li>
             <li><a href="javascript:;" data-region='eu-west-3'>EU (Paris)</a></li>
             <li><a href="javascript:;" data-region='eu-north-1'>EU (Stockholm)</a></li>
+            <li><a href="javascript:;" data-region='eu-south-1'>EU (Milan)</a></li>
             <li><a href="javascript:;" data-region='me-south-1'>Middle East (Bahrain)</a></li>
             <li><a href="javascript:;" data-region='sa-east-1'>South America (S&atilde;o Paulo)</a></li>
             <li><a href="javascript:;" data-region='us-east-1'>US East (N. Virginia)</a></li>
