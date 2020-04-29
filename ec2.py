@@ -50,6 +50,9 @@ def get_region_descriptions():
     # Alias LA local zone to its home region
     result['US West (Los Angeles)'] = 'us-west-2'
 
+    # Work around a naming inconsistency in botocore/data/endpoints.json
+    result['EU (Milan)'] = result['Europe (Milan)']
+
     return result
 
 
