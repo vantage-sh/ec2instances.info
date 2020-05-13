@@ -53,6 +53,10 @@ body {
   background-color: #eee;
 }
 
+#data th input[type="text"] {
+  width: 100%;
+}
+
 #data td {
   font-size: 13px;
 }
