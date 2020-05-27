@@ -246,7 +246,7 @@ def add_eni_info(instances):
             print("WARNING: Ignoring ENI data for unknown instance type: {}".format(instance_type))
             continue
         if not by_type[instance_type].vpc:
-            print(f"WARNING: DescrbeInstanceTypes API does not have network info for {instance_type}, scraping instead")
+            print(f"WARNING: DescribeInstanceTypes API does not have network info for {instance_type}, scraping instead")
             by_type[instance_type].vpc = { 'max_enis': max_enis,
                                            'ips_per_eni': ip_per_eni }
 
