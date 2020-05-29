@@ -45,8 +45,6 @@ def get_region_descriptions():
 
     # The Osaka region is invite only and not in boto's list: https://github.com/boto/botocore/issues/1423
     result['Asia Pacific (Osaka-Local)'] = 'ap-northeast-3'
-    # Alias GovCloud US-West to GovCloud US
-    result['AWS GovCloud (US-West)'] = result['AWS GovCloud (US)']
     # Alias LA local zone to its home region
     result['US West (Los Angeles)'] = 'us-west-2'
 
