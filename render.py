@@ -14,6 +14,7 @@ def network_sort(inst):
         'Low to Moderate',
         'Moderate',
         'High',
+        'Up to 5 Gigabit',
         'Up to 10 Gigabit',
         '10 Gigabit',
         '12 Gigabit',
