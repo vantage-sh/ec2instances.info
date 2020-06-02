@@ -79,7 +79,7 @@ def scrape(output_file, input_file=None):
             attributes = product['attributes']
 
             # map the region
-            location = attributes['location']
+            location = ec2.canonicalize_location(attributes['location'])
             instance_type = attributes['instanceType']
             try:
                 region = regions[location]

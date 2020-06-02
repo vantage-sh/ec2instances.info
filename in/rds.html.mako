@@ -27,12 +27,12 @@
             <li><a href="javascript:;" data-region='ap-southeast-2'>Asia-Pacific (Sydney)</a></li>
             <li><a href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
             <li><a href="javascript:;" data-region='ca-central-1'>Canada (Central)</a></li>
-            <li><a href="javascript:;" data-region='eu-central-1'>EU (Frankfurt)</a></li>
-            <li><a href="javascript:;" data-region='eu-west-1'>EU (Ireland)</a></li>
-            <li><a href="javascript:;" data-region='eu-west-2'>EU (London)</a></li>
-            <li><a href="javascript:;" data-region='eu-west-3'>EU (Paris)</a></li>
-            <li><a href="javascript:;" data-region='eu-north-1'>EU (Stockholm)</a></li>
-            <li><a href="javascript:;" data-region='eu-south-1'>EU (Milan)</a></li>
+            <li><a href="javascript:;" data-region='eu-central-1'>Europe (Frankfurt)</a></li>
+            <li><a href="javascript:;" data-region='eu-west-1'>Europe (Ireland)</a></li>
+            <li><a href="javascript:;" data-region='eu-west-2'>Europe (London)</a></li>
+            <li><a href="javascript:;" data-region='eu-west-3'>Europe (Paris)</a></li>
+            <li><a href="javascript:;" data-region='eu-north-1'>Europe (Stockholm)</a></li>
+            <li><a href="javascript:;" data-region='eu-south-1'>Europe (Milan)</a></li>
             <li><a href="javascript:;" data-region='me-south-1'>Middle East (Bahrain)</a></li>
             <li><a href="javascript:;" data-region='sa-east-1'>South America (S&atilde;o Paulo)</a></li>
             <li><a href="javascript:;" data-region='us-east-1'>US East (N. Virginia)</a></li>

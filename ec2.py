@@ -3,7 +3,13 @@ import boto3
 import locale
 import json
 from pkg_resources import resource_filename
+import re
 import scrape
+
+def canonicalize_location(location):
+    """Ensure location aligns with one of the options returned by get_region_descriptions()"""
+    # The pricing API returns locations with the old EU prefix
+    return re.sub("^EU", "Europe", location)
 
 
 # Translate between the API and what is used locally
@@ -47,9 +53,6 @@ def get_region_descriptions():
     result['Asia Pacific (Osaka-Local)'] = 'ap-northeast-3'
     # Alias LA local zone to its home region
     result['US West (Los Angeles)'] = 'us-west-2'
-
-    # Work around a naming inconsistency in botocore/data/endpoints.json
-    result['EU (Milan)'] = result['Europe (Milan)']
 
     return result
 
@@ -124,7 +127,7 @@ def add_pricing(imap):
             product = offer.get('product')
             product_attributes = product.get('attributes')
             instance_type = product_attributes.get('instanceType')
-            location = product_attributes.get('location')
+            location = canonicalize_location(product_attributes.get('location'))
 
             # There may be a slight delay in updating botocore with new regional endpoints, skip and inform
             if location not in descriptions:
