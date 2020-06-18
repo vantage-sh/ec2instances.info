@@ -535,6 +535,8 @@ def add_gpu_info(instances):
             # The model has 2 units, 4G of memory each, but AWS exposes only 1 unit per instance
             'gpu_model': 'NVIDIA GRID K520',
             'compute_capability': 3.0,
+            'gpu_count': 1,
+            'cuda_cores': 3072,
             'gpu_memory': 4
         },
         'g2.8xlarge': {
@@ -542,96 +544,134 @@ def add_gpu_info(instances):
             # https://aws.amazon.com/blogs/aws/new-g2-instance-type-with-4x-more-gpu-power/
             'gpu_model': 'NVIDIA GRID K520',
             'compute_capability': 3.0,
+            'gpu_count': 4,
+            'cuda_cores': 6144,
             'gpu_memory': 32
         },
         'g3s.xlarge': {
             'gpu_model': 'NVIDIA Tesla M60',
             'compute_capability': 5.2,
+            'gpu_count': 1,
+            'cuda_cores': 2048,
             'gpu_memory': 8
         },
         'g3.4xlarge': {
             'gpu_model': 'NVIDIA Tesla M60',
             'compute_capability': 5.2,
+            'gpu_count': 1,
+            'cuda_cores': 2048,
             'gpu_memory': 8
         },
         'g3.8xlarge': {
             'gpu_model': 'NVIDIA Tesla M60',
             'compute_capability': 5.2,
+            'gpu_count': 2,
+            'cuda_cores': 4096,
             'gpu_memory': 16
         },
         'g3.16xlarge': {
             'gpu_model': 'NVIDIA Tesla M60',
             'compute_capability': 5.2,
+            'gpu_count': 4,
+            'cuda_cores': 8192,
             'gpu_memory': 32
         },
         'g4dn.xlarge': {
             'gpu_model': 'NVIDIA T4 Tensor Core',
             'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 2560,
             'gpu_memory': 16
         },
         'g4dn.2xlarge': {
             'gpu_model': 'NVIDIA T4 Tensor Core',
             'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 2560,
             'gpu_memory': 16
         },
         'g4dn.4xlarge': {
             'gpu_model': 'NVIDIA T4 Tensor Core',
             'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 2560,
             'gpu_memory': 16
         },
         'g4dn.8xlarge': {
             'gpu_model': 'NVIDIA T4 Tensor Core',
             'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 2560,
             'gpu_memory': 16
         },
         'g4dn.16xlarge': {
             'gpu_model': 'NVIDIA T4 Tensor Core',
             'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 2560,
             'gpu_memory': 16
         },
         'g4dn.12xlarge': {
             'gpu_model': 'NVIDIA T4 Tensor Core',
             'compute_capability': 7.5,
+            'gpu_count': 4,
+            'cuda_cores': 10240,
             'gpu_memory': 64
         },
         'g4dn.metal': {
             'gpu_model': 'NVIDIA T4 Tensor Core',
             'compute_capability': 7.5,
+            'gpu_count': 8,
+            'cuda_cores': 20480,
             'gpu_memory': 128
         },
         'p2.xlarge': {
             'gpu_model': 'NVIDIA Tesla K80',
             'compute_capability': 3.7,
+            'gpu_count': 1,
+            'cuda_cores': 2496,
             'gpu_memory': 12
         },
         'p2.8xlarge': {
             'gpu_model': 'NVIDIA Tesla K80',
             'compute_capability': 3.7,
+            'gpu_count': 4,
+            'cuda_cores': 19968,
             'gpu_memory': 96
         },
         'p2.16xlarge': {
             'gpu_model': 'NVIDIA Tesla K80',
             'compute_capability': 3.7,
+            'gpu_count': 8,
+            'cuda_cores': 39936,
             'gpu_memory': 192
         },
         'p3.2xlarge': {
             'gpu_model': 'NVIDIA Tesla V100',
             'compute_capability': 7.0,
+            'gpu_count': 1,
+            'cuda_cores': 5120,
             'gpu_memory': 16
         },
         'p3.8xlarge': {
             'gpu_model': 'NVIDIA Tesla V100',
             'compute_capability': 7.0,
+            'gpu_count': 4,
+            'cuda_cores': 20480,
             'gpu_memory': 64
         },
         'p3.16xlarge': {
             'gpu_model': 'NVIDIA Tesla V100',
             'compute_capability': 7.0,
+            'gpu_count': 8,
+            'cuda_cores': 40960,
             'gpu_memory': 128
         },
         'p3dn.24xlarge': {
             'gpu_model': 'NVIDIA Tesla V100',
             'compute_capability': 7.0,
+            'gpu_count': 8,
+            'cuda_cores': 40960,
             'gpu_memory': 256
         },
     }
