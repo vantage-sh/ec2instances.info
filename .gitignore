@@ -9,3 +9,5 @@ build
 dist
 ec2instances
 .vscode
+.envrc
+.direnv
