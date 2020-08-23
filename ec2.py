@@ -68,7 +68,7 @@ def get_instances():
                 instance_types[instance_type['InstanceType']] = instance_type
     except botocore.exceptions.ClientError as e:
         print(f"ERROR: Failure listing EC2 instance types. See README for proper IAM permissions.\n{e}")
-        return []
+        raise e
 
     instances = {}
     pricing_client = boto3.client('pricing', region_name='us-east-1')
