@@ -117,7 +117,10 @@ def scrape(output_file, input_file=None):
                     new_attributes.pop('deploymentOption', None)
                     new_attributes.pop('engineCode', None)
                     new_attributes.pop('licenseModel', None)
+                    new_attributes.pop('location', None)
+                    new_attributes.pop('locationType', None)
                     new_attributes.pop('operation', None)
+                    new_attributes.pop('region', None)
                     new_attributes.pop('usagetype', None)
                     new_attributes['pricing'] = attributes['pricing']
 
