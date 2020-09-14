@@ -78,6 +78,10 @@ def scrape(output_file, input_file=None):
         if product.get('productFamily', None) == 'Database Instance':
             attributes = product['attributes']
 
+            # skip multi-az
+            if attributes['deploymentOption'] != 'Single-AZ':
+                continue
+
             # map the region
             location = ec2.canonicalize_location(attributes['location'])
             instance_type = attributes['instanceType']
@@ -105,8 +109,22 @@ def scrape(output_file, input_file=None):
                 rds_instances[sku] = attributes
 
                 if instance_type not in instances.keys():
-                    instances[instance_type] = attributes
-                    instances[instance_type]['pricing'] = {}
+                    # delete some attributes that are inconsistent among skus
+                    new_attributes = attributes.copy() # make copy so we can keep these attributes with the sku
+                    new_attributes.pop('databaseEdition', None)
+                    new_attributes.pop('databaseEngine', None)
+                    new_attributes.pop('database_engine', None)
+                    new_attributes.pop('deploymentOption', None)
+                    new_attributes.pop('engineCode', None)
+                    new_attributes.pop('licenseModel', None)
+                    new_attributes.pop('location', None)
+                    new_attributes.pop('locationType', None)
+                    new_attributes.pop('operation', None)
+                    new_attributes.pop('region', None)
+                    new_attributes.pop('usagetype', None)
+                    new_attributes['pricing'] = attributes['pricing']
+
+                    instances[instance_type] = new_attributes
 
     # Parse ondemand pricing
     for sku, offers in six.iteritems(data['terms']['OnDemand']):
@@ -125,6 +143,12 @@ def scrape(output_file, input_file=None):
                 if instance['region'] not in instances[instance['instance_type']]['pricing']:
                     instances[instance['instance_type']]['pricing'][instance['region']] = {}
 
+                instances[instance['instance_type']]['pricing'][instance['region']][instance['engineCode']] = {
+                    'ondemand': float(dimension['pricePerUnit']['USD'])
+                }
+
+                # keep this for backwards compatibility, even though it's wrong
+                # (database_engine is not unique, so multiple offerings overlap)
                 instances[instance['instance_type']]['pricing'][instance['region']][instance['database_engine']] = {
                     'ondemand': float(dimension['pricePerUnit']['USD'])
                 }
@@ -161,14 +185,19 @@ def scrape(output_file, input_file=None):
                 # create a database_engine hash
                 if instance['database_engine'] not in instance['pricing'][region]:
                     instance['pricing'][region][instance['database_engine']] = {}
+                if instance['engineCode'] not in instance['pricing'][region]:
+                    instance['pricing'][region][instance['engineCode']] = {}
 
                 # create a reserved hash
                 if 'reserved' not in instance['pricing'][region][instance['database_engine']]:
                     instance['pricing'][region][instance['database_engine']]['reserved'] = {}
+                if 'reserved' not in instance['pricing'][region][instance['engineCode']]:
+                    instance['pricing'][region][instance['engineCode']]['reserved'] = {}
 
                 # store the pricing in placeholder field
                 reserved_type = "%s %s" % (offer['termAttributes']['LeaseContractLength'], offer['termAttributes']['PurchaseOption'])
                 instance['pricing'][region][instance['database_engine']]['reserved']['%s-%s' % (reserved_mapping[reserved_type], dimension['unit'].lower())] = float(dimension['pricePerUnit']['USD'])
+                instance['pricing'][region][instance['engineCode']]['reserved']['%s-%s' % (reserved_mapping[reserved_type], dimension['unit'].lower())] = float(dimension['pricePerUnit']['USD'])
 
     # Calculate all reserved effective pricings (upfront hourly + hourly price)
     for instance_type, instance in six.iteritems(instances):
