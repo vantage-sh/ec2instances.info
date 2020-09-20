@@ -5,6 +5,7 @@ import json
 from pkg_resources import resource_filename
 import re
 import scrape
+import traceback
 
 def canonicalize_location(location):
     """Ensure location aligns with one of the options returned by get_region_descriptions()"""
@@ -158,6 +159,7 @@ def add_pricing(imap):
             except Exception as e:
                 # print more details about the instance for debugging
                 print(f"ERROR: Exception adding pricing for {instance_type}: {e}")
+                print(traceback.print_exc())
 
 
 def format_price(price):
@@ -172,6 +174,9 @@ def get_ondemand_pricing(terms):
         price_dimensions = ondemand_terms.get(ondemand_term).get('priceDimensions')
         for price_dimension in price_dimensions.keys():
             price = price_dimensions.get(price_dimension).get('pricePerUnit').get('USD')
+    if not price:
+        # print(f"WARNING: No USD price found")
+        return 0.0
     return format_price(price)
 
 
@@ -186,6 +191,9 @@ def get_reserved_pricing(terms):
         price_per_hour = 0.0
         for price_dimension in price_dimensions.keys():
             temp_price = price_dimensions.get(price_dimension).get('pricePerUnit').get('USD')
+            if not temp_price:
+                # print(f"WARNING: No USD reserved price found")
+                continue
             if price_dimensions.get(price_dimension).get('unit') == 'Hrs':
                 price_per_hour = temp_price
             else:
