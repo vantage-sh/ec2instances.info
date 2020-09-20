@@ -137,7 +137,7 @@ def scrape(output_file, input_file=None):
 
                 instance = rds_instances.get(sku)
                 if not instance:
-                    print(f"ERROR: Received on demand pricing info for unknown sku={sku}")
+                    # print(f"WARNING: Received on demand pricing info for unknown sku={sku}")
                     continue
 
                 if instance['region'] not in instances[instance['instance_type']]['pricing']:
@@ -169,7 +169,7 @@ def scrape(output_file, input_file=None):
 
                 instance = rds_instances.get(sku)
                 if not instance:
-                    print(f"ERROR: Received reserved pricing info for unknown sku={sku}")
+                    # print(f"WARNING: Received reserved pricing info for unknown sku={sku}")
                     continue
 
                 # skip multi-az
