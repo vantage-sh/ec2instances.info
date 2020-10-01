@@ -15,7 +15,7 @@ locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 class Instance(object):
     def __init__(self):
-        self.arch = ['x86_64']
+        self.arch = []
         self.api_description = None
         self.base_performance = None
         self.burst_minutes = None
