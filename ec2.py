@@ -219,17 +219,21 @@ def parse_instance(instance_type, product_attributes, api_description):
 
     i.family = product_attributes.get('instanceFamily')
 
-    if '32-bit' in product_attributes.get('processorArchitecture'):
-        i.arch.append('i386')
-
     i.vCPU = locale.atoi(product_attributes.get('vcpu'))
 
     # Memory is given in form of "1,952 GiB", let's parse it
     i.memory = locale.atof(product_attributes.get('memory').split(' ')[0])
 
     if api_description:
+        i.arch = api_description['ProcessorInfo']['SupportedArchitectures']
+
         i.network_performance = api_description['NetworkInfo']['NetworkPerformance']
     else:
+        # Assume x86_64 if there's no DescribeInstanceTypes data.
+        i.arch.append('x86_64')
+        if '32-bit' in product_attributes.get('processorArchitecture'):
+            i.arch.append('i386')
+
         i.network_performance = product_attributes.get('networkPerformance')
 
     if product_attributes.get('currentGeneration') == 'Yes':
