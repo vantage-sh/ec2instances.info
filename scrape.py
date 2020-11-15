@@ -140,6 +140,7 @@ def sanitize_instance_type(instance_type):
         "x1.16large": "x1.16xlarge",  # https://github.com/powdahound/ec2instances.info/issues/199
         "i3.4xlxarge": "i3.4xlarge",  # https://github.com/powdahound/ec2instances.info/issues/227
         "i3.16large": "i3.16xlarge",  # https://github.com/powdahound/ec2instances.info/issues/227
+        "p4d.2xlarge": "p4d.24xlarge",  # as of 2020-11-15
     }
     return typo_corrections.get(instance_type, instance_type)
 
@@ -234,14 +235,24 @@ def add_eni_info(instances):
     # It seems it's no longer dynamically loaded
     eni_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html"
     tree = etree.parse(urllib2.urlopen(eni_url), etree.HTMLParser())
-    table = tree.xpath('//div[@class="table-contents"]//table')[0]
+    table = tree.xpath('//div[@class="table-contents"]//table')[1]
     rows = table.xpath('.//tr[./td]')
     by_type = {i.instance_type: i for i in instances}
 
     for r in rows:
         instance_type = etree.tostring(r[0], method='text').strip().decode()
-        max_enis = locale.atoi(etree.tostring(r[1], method='text').decode())
+
+        max_enis = etree.tostring(r[1], method='text').decode()
+        
+        # handle <cards>x<interfaces> format
+        if 'x' in max_enis:
+            parts = max_enis.split('x')
+            max_enis = locale.atoi(parts[0]) * locale.atoi(parts[1])
+        else:
+            max_enis = locale.atoi(max_enis)
+
         ip_per_eni = locale.atoi(etree.tostring(r[2], method='text').decode())
+
         if instance_type not in by_type:
             print("WARNING: Ignoring ENI data for unknown instance type: {}".format(instance_type))
             continue
