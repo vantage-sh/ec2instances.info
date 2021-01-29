@@ -3,6 +3,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="description" content="A free and easy-to-use tool for comparing EC2 Instance features and prices."></head>
     <title>Amazon EC2 Instance Comparison</title>
     <link rel="stylesheet" href="/default.css" media="screen">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" media="screen">
@@ -13,7 +14,7 @@
     <div class="page-header">
 
       <span class="pull-right">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-via="powdahound"></a>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="joinvantage"></a>
         <iframe src="https://ghbtns.com/github-btn.html?user=powdahound&repo=ec2instances.info&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
       </span>
 
@@ -37,7 +38,7 @@
       </p>
       <p>
         <strong>Who?</strong>
-        It was started by <a href="http://twitter.com/powdahound" target="_blank">@powdahound</a>, contributed to by <a href="https://github.com/powdahound/ec2instances.info/contributors" target="_blank">many</a>, and awaits your improvements <a href="https://github.com/powdahound/ec2instances.info" target="_blank">on GitHub</a>.
+        It was started by <a href="http://twitter.com/powdahound" target="_blank">@powdahound</a>, contributed to by <a href="https://github.com/powdahound/ec2instances.info/contributors" target="_blank">many</a>, is now managed and maintained by <a href='http://vantage.sh/' target="_blank">Vantage</a>, and awaits your improvements <a href="https://github.com/powdahound/ec2instances.info" target="_blank">on GitHub</a>.
       </p>
       <p>
         <strong>How?</strong>
