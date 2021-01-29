@@ -157,6 +157,9 @@
           <th class="placement-group-support">Placement Group Support</th>
           <th class="linux-virtualization">Linux Virtualization</th>
           <th class="emr-support">On EMR</th>
+          <th class="azs">
+            <abbr title="The AZ IDs where these instances are available, which is a unique and consistent identifier for an Availability Zone across AWS accounts.">Availability Zones</abbr>
+          </th>
 
           <th class="cost-ondemand cost-ondemand-linux">Linux On Demand cost</th>
           <th class="cost-reserved cost-reserved-linux">
@@ -364,6 +367,9 @@
           </td>
           <td class="emr-support">
             ${'Yes' if inst['emr'] else 'No'}
+          </td>
+          <td class="azs">
+            ${', '.join(inst.get('availability_zones', {}).get('us-east-1', []))}
           </td>
           % for platform in ['linux', 'rhel', 'sles', 'mswin', 'mswinSQLWeb', 'mswinSQL', 'mswinSQLEnterprise', 'linuxSQLWeb', 'linuxSQL', 'linuxSQLEnterprise']:
           ## note that the contents in these cost cells are overwritten by the JS change_cost() func, but the initial
