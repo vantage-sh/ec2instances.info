@@ -7,6 +7,7 @@
 
     <%block name="header">
     <h1>EC2Instances.info <small>Easy Amazon <b>EC2</b> Instance Comparison</small></h1>
+    <p>Proudly sponsored by <a href='http://vantage.sh/' target='_blank'>Vantage</a></p>
     </%block>
 
     <div class="row" id="menu">
