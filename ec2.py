@@ -1,4 +1,5 @@
 import botocore
+import botocore.exceptions
 import boto3
 import locale
 import json
@@ -287,3 +288,30 @@ def parse_instance(instance_type, product_attributes, api_description):
         i.enhanced_networking = True
 
     return i
+
+
+def describe_regions():
+    ec2_client = boto3.client('ec2', region_name='us-east-1')
+    response = ec2_client.describe_regions(AllRegions=True)
+    for region in response['Regions']:
+        yield region['RegionName']
+
+
+def describe_instance_type_offerings(region_name='us-east-1', location_type='region'):
+    """
+    location_type = 'region' | 'availability-zone' | 'availability-zone-id'
+    """
+    try:
+        ec2_client = boto3.client('ec2', region_name=region_name)
+        paginator = ec2_client.get_paginator('describe_instance_type_offerings')
+        page_iterator = paginator.paginate(LocationType=location_type)
+        filtered_iterator = page_iterator.search('InstanceTypeOfferings')
+        for offering in filtered_iterator:
+            yield offering
+    except botocore.exceptions.ClientError as error:
+        print(f'ERROR: When calling describe_instance_type_offerings for region={region_name} and location_type={location_type}')
+        print('Error Code: {}'.format(error.response['Error']['Code']))
+        print('Error Message: {}'.format(error.response['Error']['Message']))
+        print('Request ID: {}'.format(error.response['ResponseMetadata']['RequestId']))
+        print('Http code: {}'.format(error.response['ResponseMetadata']['HTTPStatusCode']))
+

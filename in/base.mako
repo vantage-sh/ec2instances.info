@@ -72,6 +72,17 @@
             }
             return v;
         }
+        var _instance_azs = ${instance_azs_json};
+        function get_instance_availability_zones(instance_type, region) {
+          var region_azs = _instance_azs[instance_type];
+          if (region_azs) {
+            var azs = region_azs[region];
+            if (azs) {
+              return azs;
+            }
+          }
+          return [];
+        }
     </script>
     <script src="/default.js" type="text/javascript" charset="utf-8"></script>
 

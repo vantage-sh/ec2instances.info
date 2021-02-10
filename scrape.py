@@ -17,6 +17,7 @@ class Instance(object):
     def __init__(self):
         self.arch = []
         self.api_description = None
+        self.availability_zones = {}
         self.base_performance = None
         self.burst_minutes = None
         self.clock_speed_ghz = None
@@ -113,7 +114,8 @@ class Instance(object):
                  intel_avx2=self.intel_avx2,
                  intel_avx512=self.intel_avx512,
                  intel_turbo=self.intel_turbo,
-                 emr=self.emr)
+                 emr=self.emr,
+                 availability_zones=self.availability_zones)
         if self.ebs_only:
             d['storage'] = None
         else:
@@ -243,7 +245,7 @@ def add_eni_info(instances):
         instance_type = etree.tostring(r[0], method='text').strip().decode()
 
         max_enis = etree.tostring(r[1], method='text').decode()
-        
+
         # handle <cards>x<interfaces> format
         if 'x' in max_enis:
             parts = max_enis.split('x')
@@ -699,6 +701,30 @@ def add_gpu_info(instances):
         inst.GPU_memory = inst_gpu_data['gpu_memory']
 
 
+def add_availability_zone_info(instances):
+    """
+    Add info about availability zones using information from the following APIs:
+        - aws ec2 describe-instance-type-offerings --region us-east-1
+        - aws ec2 describe-instance-type-offerings --location-type availability-zone --region us-east-1
+        - aws ec2 describe-availability-zones --region us-east-1
+    https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instance-type-offerings.html
+    """
+    instance_type_region_availability_zones = {}
+    for region_name in ec2.describe_regions():
+        for offering in ec2.describe_instance_type_offerings(region_name=region_name, location_type='availability-zone-id'):
+            instance_type = offering['InstanceType']
+            availability_zone_id = offering['Location']
+            region_availability_zones = instance_type_region_availability_zones.get(instance_type, {})
+            availability_zones = region_availability_zones.get(region_name, [])
+            if availability_zone_id not in availability_zones:
+                availability_zones.append(availability_zone_id)
+                availability_zones.sort()
+                region_availability_zones[region_name] = availability_zones
+                instance_type_region_availability_zones[instance_type] = region_availability_zones
+    for inst in instances:
+        inst.availability_zones = instance_type_region_availability_zones.get(inst.instance_type, {})
+
+
 def scrape(data_file):
     """Scrape AWS to get instance data"""
     print("Parsing instance types...")
@@ -723,6 +749,8 @@ def scrape(data_file):
     add_emr_info(all_instances)
     print("Adding GPU details...")
     add_gpu_info(all_instances)
+    print("Adding availability zone details...")
+    add_availability_zone_info(all_instances)
 
     with open(data_file, 'w') as f:
         json.dump([i.to_dict() for i in all_instances],

@@ -103,7 +103,8 @@ function init_data_table() {
           "warmed-up",
           "ipv6-support",
           "placement-group-support",
-          "vpc-only"
+          "vpc-only",
+          "azs"
         ],
         "bVisible": false
       }
@@ -226,6 +227,20 @@ function change_cost(duration) {
   maybe_update_url();
 }
 
+function change_availability_zones() {
+  $.each($("td.azs"), function (i, elem) {
+    elem = $(elem);
+    var instance_type = elem.closest("tr").attr("id");
+    var instance_azs = get_instance_availability_zones(instance_type, g_settings.region);
+    if (Array.isArray(instance_azs) && instance_azs.length) {
+      var instance_azs_string = instance_azs.join(", ");
+      elem.html(instance_azs_string);
+    } else {
+      elem.empty();
+    }
+  });
+}
+
 function change_region(region) {
   g_settings.region = region;
   var region_name = null;
@@ -240,6 +255,7 @@ function change_region(region) {
   });
   $("#region-dropdown .dropdown-toggle .text").text(region_name);
   change_cost(g_settings.cost_duration);
+  change_availability_zones();
 
   // redraw table to pick up on new sort values
   g_data_table.rows().invalidate().draw();
