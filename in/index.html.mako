@@ -124,6 +124,7 @@
       <strong> Filter:</strong>
       Min Memory (GiB): <input data-action="datafilter" data-type="memory" class="form-control" />
       Min vCPUs: <input data-action="datafilter" data-type="vcpus" class="form-control" />
+      Min Memory/vCPU (Gib/vCPU): <input data-action="datafilter" data-type="memory-per-vcpu" class="form-control" />
       Min Storage (GiB): <input data-action="datafilter" data-type="storage" class="form-control" />
     </div>
 
@@ -139,6 +140,7 @@
           <th class="vcpus">
             <abbr title="Each virtual CPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">vCPUs</abbr>
           </th>
+          <th class="memory-per-vcpu">GiB of Memory per vCPU</th>
           <th class="gpus">GPUs</th>
           <th class="gpu_model">GPU model</th>
           <th class="gpu_memory">GPU memory</th>
@@ -258,6 +260,13 @@
                 </a></abbr>
                 % endif
             </span>
+          </td>
+          <td class="memory-per-vcpu">
+            % if inst['memory_per_vcpu'] == 'unknown':
+            <span sort="999999">unknown</span>
+            % else:
+            <span sort="${inst['memory_per_vcpu']}">${"{:.2f}".format(inst['memory_per_vcpu'])} GiB/vCPU</span>
+            % endif
           </td>
           <td class="gpus">${inst['GPU']}</td>
           <td class="gpu_model">${inst['GPU_model']}</td>

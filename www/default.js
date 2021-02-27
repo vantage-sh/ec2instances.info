@@ -11,6 +11,7 @@ var g_settings_defaults = {
   reserved_term: 'yrTerm1Standard.noUpfront',
   min_memory: 0,
   min_vcpus: 0,
+  min_memory_per_vcpu: 0,
   min_storage: 0,
   selected: '',
   compare_on: false
@@ -61,6 +62,7 @@ function init_data_table() {
         "aTargets": [
           "architecture",
           "computeunits",
+          "memory-per-vcpu",
           "ecu-per-vcpu",
           "emr-support",
           "gpus",
@@ -360,6 +362,7 @@ function url_for_selections() {
   var params = {
     min_memory: g_settings.min_memory,
     min_vcpus: g_settings.min_vcpus,
+    min_memory_per_vcpu: g_settings.min_memory_per_vcpu,
     min_storage: g_settings.min_storage,
     filter: g_data_table.settings()[0].oPreviousSearch['sSearch'],
     region: g_settings.region,
@@ -428,7 +431,7 @@ var apply_min_values = function () {
     var filter_val = parseFloat($(this).val()) || 0;
 
     // update global variable for dynamic URL
-    g_settings["min_" + filter_on] = filter_val;
+    g_settings["min_" + filter_on.replace('-', '_')] = filter_val;
 
     var match_fail = data_rows.filter(function () {
       var row_val;
@@ -452,6 +455,7 @@ function on_data_table_initialized() {
   // populate filter inputs
   $('[data-action="datafilter"][data-type="memory"]').val(g_settings['min_memory']);
   $('[data-action="datafilter"][data-type="vcpus"]').val(g_settings['min_vcpus']);
+  $('[data-action="datafilter"][data-type="memory-per-vcpu"]').val(g_settings['min_memory_per_vcpu']);
   $('[data-action="datafilter"][data-type="storage"]').val(g_settings['min_storage']);
   g_data_table.search(g_settings['filter']);
   apply_min_values();
