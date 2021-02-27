@@ -45,6 +45,20 @@
           </ul>
         </div>
 
+        <div class="btn-group" id="pricing-unit-dropdown">
+          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+            <i class="icon-shopping-cart icon-white"></i>
+            Pricing Unit: <span class="text"></span>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="javascript:;" pricing-unit="instance">Instance</a></li>
+            <li><a href="javascript:;" pricing-unit="vcpu">vCPU</a></li>
+            <li><a href="javascript:;" pricing-unit="ecu">ECU</a></li>
+            <li><a href="javascript:;" pricing-unit="memory">Memory</a></li>
+           </ul>
+        </div>
+
         <div class="btn-group" id="cost-dropdown">
           <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
             <i class="icon-shopping-cart icon-white"></i>
@@ -376,7 +390,7 @@
           ## note that the contents in these cost cells are overwritten by the JS change_cost() func, but the initial
           ## data here is used for sorting (and anyone with JS disabled...)
           ## for more info, see https://github.com/powdahound/ec2instances.info/issues/140
-          <td class="cost-ondemand cost-ondemand-${platform}" data-platform="${platform}">
+          <td class="cost-ondemand cost-ondemand-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
             % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][platform]['ondemand']}">
                 $${inst['pricing']['us-east-1'][platform]['ondemand']} hourly
@@ -385,7 +399,7 @@
               <span sort="999999">unavailable</span>
             % endif
           </td>
-          <td class="cost-reserved cost-reserved-${platform}" data-platform="${platform}">
+          <td class="cost-reserved cost-reserved-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
             % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['us-east-1'][platform]['reserved'].get('yrTerm1Standard.noUpfront', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']}">
                 $${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']} hourly
@@ -395,7 +409,7 @@
             % endif
           </td>
           % endfor
-          <td class="cost-ebs-optimized">
+          <td class="cost-ebs-optimized" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
            % if inst['ebs_max_bandwidth']:
               % if inst['pricing'].get('us-east-1', {}).get('ebs', 'N/A') != "N/A":
                 <span sort="${inst['pricing']['us-east-1']['ebs']}">
@@ -408,7 +422,7 @@
               <span sort="999999">unavailable</span>
             % endif
           </td>
-          <td class="cost-emr">
+          <td class="cost-emr" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
             % if inst['pricing'].get('us-east-1', {}).get("emr", {}):
               <span sort="${inst['pricing']['us-east-1']["emr"]['emr']}">
                 $${inst['pricing']['us-east-1']["emr"]['emr']} hourly
