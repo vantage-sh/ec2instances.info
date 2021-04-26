@@ -7,7 +7,7 @@
 
     <%block name="header">
     <h1>EC2Instances.info <small>Easy Amazon <b>EC2</b> Instance Comparison</small></h1>
-    <p>Proudly sponsored by <a href='http://vantage.sh/' target='_blank'>Vantage</a></p>
+    <div class='api-announcement'><a href='http://vantage.sh/' target='_blank'>Vantage</a> is launching a free API for ec2instances.info data. Sign up for access <a href='https://docs.google.com/forms/d/e/1FAIpQLSeMAVSYRJ74d8fHfKlCIPtD_mFdzNM0Q7zucAhN38f9TtQIyA/viewform' target='_blank'>here</a>.</div>
     </%block>
 
     <div class="row" id="menu">

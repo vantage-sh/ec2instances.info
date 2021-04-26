@@ -14,7 +14,6 @@
     <div class="page-header">
 
       <span class="pull-right">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-via="joinvantage"></a>
         <iframe src="https://ghbtns.com/github-btn.html?user=powdahound&repo=ec2instances.info&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
       </span>
 
