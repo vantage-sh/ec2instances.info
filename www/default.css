@@ -3,15 +3,15 @@ body {
 }
 
 .api-announcement{
-  background-color:#EDEEFF;
-  width:100%;
-  margin:20px 0;
-  padding:20px 20px 20px 44px;
-  color:#222B86;
-  background-image:url("https://vantage-public.s3.amazonaws.com/vntgec2.png");
-  background-repeat:no-repeat;
-  background-size: 16px 16px;
-  background-position: 20px 21px;
+  background-color: #F5F6FF;
+  width: 100%;
+  margin: 20px 0;
+  padding: 20px 20px 20px 56px;
+  color: #222B86;
+  background-image: url(https://vantage-public.s3.amazonaws.com/instances_api_icon.png);
+  background-repeat: no-repeat;
+  background-size: 44px 30px;
+  background-position: 10px 12px;
 }
 .api-announcement a{
   color:#222B86;
