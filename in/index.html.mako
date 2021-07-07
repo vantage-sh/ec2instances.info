@@ -166,18 +166,26 @@
           <th class="cost-reserved cost-reserved-linux">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux Reserved cost</abbr>
           </th>
+          <th class="cost-spot cost-spot-linux">Linux Spot cost</th>
+
           <th class="cost-ondemand cost-ondemand-rhel">RHEL On Demand cost</th>
           <th class="cost-reserved cost-reserved-rhel">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>RHEL Reserved cost</abbr>
           </th>
+          <th class="cost-spot cost-spot-rhel">RHEL Spot cost</th>
+
           <th class="cost-ondemand cost-ondemand-sles">SLES On Demand cost</th>
           <th class="cost-reserved cost-reserved-sles">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>SLES Reserved cost</abbr>
           </th>
+          <th class="cost-spot cost-spot-sles">SLES Spot cost</th>
+
           <th class="cost-ondemand cost-ondemand-mswin">Windows On Demand cost</th>
           <th class="cost-reserved cost-reserved-mswin">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows Reserved cost</abbr>
           </th>
+          <th class="cost-spot cost-spot-mswin">Windows Spot cost</th>
+
           <th class="cost-ondemand cost-ondemand-mswinSQLWeb">Windows SQL Web On Demand cost</th>
           <th class="cost-reserved cost-reserved-mswinSQLWeb">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows SQL Web Reserved cost</abbr>
@@ -394,6 +402,25 @@
               <span sort="999999">unavailable</span>
             % endif
           </td>
+          % if platform in ['linux', 'rhel', 'sles', 'mswin']:
+          <td class="cost-spot cost-spot-${platform}" data-platform="${platform}">
+            % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot', []) != []:
+              <span sort="${inst['pricing']['us-east-1'][platform]['spot'][0]}">
+              <%
+              min_spot = inst['pricing']['us-east-1'][platform]['spot'][0]
+              max_spot = inst['pricing']['us-east-1'][platform]['spot'][-1]
+              %>
+              % if min_spot == max_spot:
+                $${min_spot} hourly
+              % else:
+                $${min_spot} - $${max_spot} hourly
+              % endif
+              </span>
+            % else:
+              <span sort="999999">unavailable</span>
+            % endif
+          </td>
+          % endif
           % endfor
           <td class="cost-ebs-optimized">
            % if inst['ebs_max_bandwidth']:
