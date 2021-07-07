@@ -1,6 +1,7 @@
 import botocore
 import botocore.exceptions
 import boto3
+from datetime import datetime
 import locale
 import json
 from pkg_resources import resource_filename
@@ -18,8 +19,13 @@ def canonicalize_location(location):
 def translate_platform_name(operating_system, preinstalled_software):
     os = {'Linux': 'linux',
           'RHEL': 'rhel',
+          'Red Hat Enterprise Linux with HA': 'rhel',
           'SUSE': 'sles',
-          'Windows': 'mswin'}
+          'Windows': 'mswin',
+          # Spot products
+          'Linux/UNIX': 'linux',
+          'Red Hat Enterprise Linux': 'rhel',
+          'SUSE Linux': 'sles'}
     software = {'NA': '',
           'SQL Std': 'SQL',
           'SQL Web': 'SQLWeb',
@@ -161,7 +167,7 @@ def add_pricing(imap):
                 # print more details about the instance for debugging
                 print(f"ERROR: Exception adding pricing for {instance_type}: {e}")
                 print(traceback.print_exc())
-
+    add_spot_pricing(imap)
 
 def format_price(price):
     return str(float("%f" % float(price))).rstrip('0').rstrip('.')
@@ -206,6 +212,34 @@ def get_reserved_pricing(terms):
         pricing[local_term] = format_price(price)
     return pricing
 
+def add_spot_pricing(imap):
+    instance_types = list(imap.keys())
+    # get a list of all available regions across all instance types
+    regions = []
+    for instance_type in instance_types:
+        regions += [r for r in imap[instance_type].pricing.keys()]
+    # deduplicate list of regions
+    regions = list(dict.fromkeys(regions))
+    for region in regions:
+        try:
+            # get all spot price data from a region
+            ec2_client = boto3.client('ec2', region_name=region)
+            prices_pager = ec2_client.get_paginator('describe_spot_price_history')
+            prices_iterator = prices_pager.paginate(
+                InstanceTypes=instance_types,
+                StartTime=datetime.now())
+            # populate spot prices into the instance data
+            for p in prices_iterator:
+                prices = p['SpotPriceHistory']
+                for price in prices:
+                    inst = imap[price['InstanceType']]
+                    platform = translate_platform_name(price['ProductDescription'], 'NA')
+                    region = price['AvailabilityZone'][0:-1]
+                    inst.pricing[region][platform]['spot'] = price['SpotPrice']
+        except Exception as e:
+            # print more details about the instance for debugging
+            print(f"ERROR: Exception adding Spot pricing for {region}: {e}")
+            print(traceback.print_exc())
 
 def parse_instance(instance_type, product_attributes, api_description):
     pieces = instance_type.split('.')
