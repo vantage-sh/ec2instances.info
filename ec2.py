@@ -1,6 +1,7 @@
 import botocore
 import botocore.exceptions
 import boto3
+from bisect import insort
 from datetime import datetime
 import locale
 import json
@@ -235,7 +236,10 @@ def add_spot_pricing(imap):
                     inst = imap[price['InstanceType']]
                     platform = translate_platform_name(price['ProductDescription'], 'NA')
                     region = price['AvailabilityZone'][0:-1]
-                    inst.pricing[region][platform]['spot'] = price['SpotPrice']
+                    # define empty values to avoid dictionary exception for missing instance types
+                    inst.pricing[region].setdefault('platform',{})
+                    inst.pricing[region][platform].setdefault('spot',[])
+                    insort(inst.pricing[region][platform]['spot'], price['SpotPrice'])
         except Exception as e:
             # print more details about the instance for debugging
             print(f"ERROR: Exception adding Spot pricing for {region}: {e}")
