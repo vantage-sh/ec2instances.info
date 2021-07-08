@@ -559,7 +559,7 @@ def add_gpu_info(instances):
             'compute_capability': 3.0,
             'gpu_count': 4,
             'cuda_cores': 6144,
-            'gpu_memory': 32
+            'gpu_memory': 16
         },
         'g3s.xlarge': {
             'gpu_model': 'NVIDIA Tesla M60',
