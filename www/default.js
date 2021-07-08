@@ -51,6 +51,8 @@ function init_data_table() {
           "networkperf",
           "cost-ondemand",
           "cost-reserved",
+          "cost-spot-min",
+          "cost-spot-max",
           "cost-ebs-optimized",
         ],
         "sType": "span-sort"
@@ -94,6 +96,13 @@ function init_data_table() {
           "cost-reserved-linuxSQL",
           "cost-reserved-linuxSQLEnterprise",
           "cost-reserved-linuxSQLWeb",
+          "cost-spot-min-mswin",
+          "cost-spot-min-rhel",
+          "cost-spot-min-sles",
+          "cost-spot-max-linux",
+          "cost-spot-max-mswin",
+          "cost-spot-max-rhel",
+          "cost-spot-max-sles",
           "ebs-throughput",
           "ebs-iops",
           "ebs-as-nvme",
@@ -193,6 +202,28 @@ function change_cost(duration) {
     elem = $(elem);
     per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, elem.data("platform"), "reserved", g_settings.reserved_term);
 
+    if (per_time && !isNaN(per_time)) {
+      per_time = (per_time * multiplier).toFixed(6);
+      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+    } else {
+      elem.html('<span sort="999999">unavailable</span>');
+    }
+  });
+
+  $.each($("td.cost-spot-min"), function (i, elem) {
+    elem = $(elem);
+    per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, elem.data("platform"), "spot_min");
+    if (per_time && !isNaN(per_time)) {
+      per_time = (per_time * multiplier).toFixed(6);
+      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+    } else {
+      elem.html('<span sort="999999">unavailable</span>');
+    }
+  });
+
+  $.each($("td.cost-spot-max"), function (i, elem) {
+    elem = $(elem);
+    per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, elem.data("platform"), "spot_max");
     if (per_time && !isNaN(per_time)) {
       per_time = (per_time * multiplier).toFixed(6);
       elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
