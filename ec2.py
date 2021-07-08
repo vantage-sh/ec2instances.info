@@ -236,10 +236,14 @@ def add_spot_pricing(imap):
                     inst = imap[price['InstanceType']]
                     platform = translate_platform_name(price['ProductDescription'], 'NA')
                     region = price['AvailabilityZone'][0:-1]
-                    # define empty values to avoid dictionary exception for missing instance types
+                    # define some empty/meaningful default values to avoid dictionary exception for missing instance types
                     inst.pricing[region].setdefault(platform,{})
                     inst.pricing[region][platform].setdefault('spot',[])
+                    inst.pricing[region][platform].setdefault('spot_min','N/A')
+                    inst.pricing[region][platform].setdefault('spot_max','N/A')
                     insort(inst.pricing[region][platform]['spot'], price['SpotPrice'])
+                    inst.pricing[region][platform]['spot_min'] = inst.pricing[region][platform]['spot'][0]
+                    inst.pricing[region][platform]['spot_max'] = inst.pricing[region][platform]['spot'][-1]
         except Exception as e:
             # print more details about the instance for debugging
             print(f"ERROR: Exception adding Spot pricing for {region}: {e}")

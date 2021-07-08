@@ -166,25 +166,29 @@
           <th class="cost-reserved cost-reserved-linux">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux Reserved cost</abbr>
           </th>
-          <th class="cost-spot cost-spot-linux">Linux Spot cost</th>
+          <th class="cost-spot-min cost-spot-min-linux">Linux Spot Minimum cost</th>
+          <th class="cost-spot-max cost-spot-max-linux">Linux Spot Maximum cost</th>
 
           <th class="cost-ondemand cost-ondemand-rhel">RHEL On Demand cost</th>
           <th class="cost-reserved cost-reserved-rhel">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>RHEL Reserved cost</abbr>
           </th>
-          <th class="cost-spot cost-spot-rhel">RHEL Spot cost</th>
+          <th class="cost-spot-min cost-spot-min-rhel">RHEL Spot Minimum cost</th>
+          <th class="cost-spot-max cost-spot-max-rhel">RHEL Spot Maximum cost</th>
 
           <th class="cost-ondemand cost-ondemand-sles">SLES On Demand cost</th>
           <th class="cost-reserved cost-reserved-sles">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>SLES Reserved cost</abbr>
           </th>
-          <th class="cost-spot cost-spot-sles">SLES Spot cost</th>
+          <th class="cost-spot-min cost-spot-min-sles">SLES Spot Minimum cost</th>
+          <th class="cost-spot-max cost-spot-max-sles">SLES Spot Maximum cost</th>
 
           <th class="cost-ondemand cost-ondemand-mswin">Windows On Demand cost</th>
           <th class="cost-reserved cost-reserved-mswin">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows Reserved cost</abbr>
           </th>
-          <th class="cost-spot cost-spot-mswin">Windows Spot cost</th>
+          <th class="cost-spot-min cost-spot-min-mswin">Windows Spot Minimum cost</th>
+          <th class="cost-spot-max cost-spot-max-mswin">Windows Spot Maximum cost</th>
 
           <th class="cost-ondemand cost-ondemand-mswinSQLWeb">Windows SQL Web On Demand cost</th>
           <th class="cost-reserved cost-reserved-mswinSQLWeb">
@@ -403,24 +407,30 @@
             % endif
           </td>
           % if platform in ['linux', 'rhel', 'sles', 'mswin']:
-          <td class="cost-spot cost-spot-${platform}" data-platform="${platform}">
-            % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot', []) != []:
-              <span sort="${inst['pricing']['us-east-1'][platform]['spot'][0]}">
-              <%
-              min_spot = inst['pricing']['us-east-1'][platform]['spot'][0]
-              max_spot = inst['pricing']['us-east-1'][platform]['spot'][-1]
-              %>
-              % if min_spot == max_spot:
-                $${min_spot} hourly
-              % else:
-                $${min_spot} - $${max_spot} hourly
-              % endif
+          <td class="cost-spot-min cost-spot-min-${platform}" data-platform="${platform}">
+            % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot_min', 'N/A') != 'N/A':
+            <%
+                spot_min = inst['pricing']['us-east-1'][platform]['spot_min']
+            %>
+              <span sort="${spot_min}">
+                $${spot_min} hourly
               </span>
             % else:
               <span sort="999999">unavailable</span>
             % endif
-          % else:
-            <span sort="999999">unavailable</span>
+          </td>
+
+          <td class="cost-spot-max cost-spot-max-${platform}" data-platform="${platform}">
+            %if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot_max', 'N/A') != 'N/A':
+            <%
+              spot_max = inst['pricing']['us-east-1'][platform]['spot_max']
+            %>
+              <span sort="${spot_max}">
+                $${spot_max} hourly
+              </span>
+            % else:
+              <span sort="999999">unavailable</span>
+            % endif
           </td>
           % endif
           % endfor
