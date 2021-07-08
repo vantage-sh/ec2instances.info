@@ -2,8 +2,8 @@ FROM centos:7
 
 MAINTAINER Brooke McKim <brooke@vantage.sh>
 
-ARG AWS_ACCESS_KEY_ID
-ARG AWS_SECRET_ACCESS_KEY
+ARG AWS_DEFAULT_REGION
+ARG AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
 
 ENV nginxversion="1.18.0-2" \
     os="centos" \
