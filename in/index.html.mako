@@ -419,6 +419,8 @@
             % else:
               <span sort="999999">unavailable</span>
             % endif
+          % else:
+            <span sort="999999">unavailable</span>
           </td>
           % endif
           % endfor

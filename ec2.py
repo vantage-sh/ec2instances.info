@@ -237,7 +237,7 @@ def add_spot_pricing(imap):
                     platform = translate_platform_name(price['ProductDescription'], 'NA')
                     region = price['AvailabilityZone'][0:-1]
                     # define empty values to avoid dictionary exception for missing instance types
-                    inst.pricing[region].setdefault('platform',{})
+                    inst.pricing[region].setdefault(platform,{})
                     inst.pricing[region][platform].setdefault('spot',[])
                     insort(inst.pricing[region][platform]['spot'], price['SpotPrice'])
         except Exception as e:
