@@ -430,7 +430,7 @@
             % endif
           </td>
           % if platform in ['linux', 'rhel', 'sles', 'mswin']:
-          <td class="cost-spot-min cost-spot-min-${platform}" data-platform="${platform}">
+          <td class="cost-spot-min cost-spot-min-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
             % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot_min', 'N/A') != 'N/A':
             <%
                 spot_min = inst['pricing']['us-east-1'][platform]['spot_min']
@@ -443,7 +443,7 @@
             % endif
           </td>
 
-          <td class="cost-spot-max cost-spot-max-${platform}" data-platform="${platform}">
+          <td class="cost-spot-max cost-spot-max-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
             %if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot_max', 'N/A') != 'N/A':
             <%
               spot_max = inst['pricing']['us-east-1'][platform]['spot_max']

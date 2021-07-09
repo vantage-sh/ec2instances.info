@@ -246,10 +246,13 @@ function change_cost(duration, pricing_unit) {
 
   $.each($("td.cost-spot-min"), function (i, elem) {
     elem = $(elem);
+    if (pricing_unit != 'instance') {
+      pricing_unit_modifier = elem.data(pricing_unit);
+    }
     per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, elem.data("platform"), "spot_min");
-    if (per_time && !isNaN(per_time)) {
-      per_time = (per_time * multiplier).toFixed(6);
-      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+    if (per_time && !isNaN(per_time) && !isNaN(pricing_unit_modifier) && pricing_unit_modifier > 0) {
+      per_time = (per_time * duration_multiplier / pricing_unit_modifier).toFixed(6);
+      elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
     }
@@ -257,10 +260,13 @@ function change_cost(duration, pricing_unit) {
 
   $.each($("td.cost-spot-max"), function (i, elem) {
     elem = $(elem);
+    if (pricing_unit != 'instance') {
+      pricing_unit_modifier = elem.data(pricing_unit);
+    }
     per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, elem.data("platform"), "spot_max");
-    if (per_time && !isNaN(per_time)) {
-      per_time = (per_time * multiplier).toFixed(6);
-      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+    if (per_time && !isNaN(per_time) && !isNaN(pricing_unit_modifier) && pricing_unit_modifier > 0) {
+      per_time = (per_time * duration_multiplier / pricing_unit_modifier).toFixed(6);
+      elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
     }
