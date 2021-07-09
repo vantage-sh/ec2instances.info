@@ -45,6 +45,20 @@
           </ul>
         </div>
 
+        <div class="btn-group" id="pricing-unit-dropdown">
+          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+            <i class="icon-shopping-cart icon-white"></i>
+            Pricing Unit: <span class="text"></span>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="javascript:;" pricing-unit="instance">Instance</a></li>
+            <li><a href="javascript:;" pricing-unit="vcpu">vCPU</a></li>
+            <li><a href="javascript:;" pricing-unit="ecu">ECU</a></li>
+            <li><a href="javascript:;" pricing-unit="memory">Memory</a></li>
+           </ul>
+        </div>
+
         <div class="btn-group" id="cost-dropdown">
           <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
             <i class="icon-shopping-cart icon-white"></i>
@@ -110,6 +124,7 @@
       <strong> Filter:</strong>
       Min Memory (GiB): <input data-action="datafilter" data-type="memory" class="form-control" />
       Min vCPUs: <input data-action="datafilter" data-type="vcpus" class="form-control" />
+      Min Memory/vCPU (Gib/vCPU): <input data-action="datafilter" data-type="memory-per-vcpu" class="form-control" />
       Min Storage (GiB): <input data-action="datafilter" data-type="storage" class="form-control" />
     </div>
 
@@ -125,6 +140,7 @@
           <th class="vcpus">
             <abbr title="Each virtual CPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">vCPUs</abbr>
           </th>
+          <th class="memory-per-vcpu">GiB of Memory per vCPU</th>
           <th class="gpus">GPUs</th>
           <th class="gpu_model">GPU model</th>
           <th class="gpu_memory">GPU memory</th>
@@ -257,6 +273,13 @@
                 % endif
             </span>
           </td>
+          <td class="memory-per-vcpu">
+            % if inst['memory_per_vcpu'] == 'unknown':
+            <span sort="999999">unknown</span>
+            % else:
+            <span sort="${inst['memory_per_vcpu']}">${"{:.2f}".format(inst['memory_per_vcpu'])} GiB/vCPU</span>
+            % endif
+          </td>
           <td class="gpus">${inst['GPU']}</td>
           <td class="gpu_model">${inst['GPU_model']}</td>
           <td class="gpu_memory">${inst['GPU_memory']} GiB</td>
@@ -388,7 +411,7 @@
           ## note that the contents in these cost cells are overwritten by the JS change_cost() func, but the initial
           ## data here is used for sorting (and anyone with JS disabled...)
           ## for more info, see https://github.com/powdahound/ec2instances.info/issues/140
-          <td class="cost-ondemand cost-ondemand-${platform}" data-platform="${platform}">
+          <td class="cost-ondemand cost-ondemand-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
             % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][platform]['ondemand']}">
                 $${inst['pricing']['us-east-1'][platform]['ondemand']} hourly
@@ -397,7 +420,7 @@
               <span sort="999999">unavailable</span>
             % endif
           </td>
-          <td class="cost-reserved cost-reserved-${platform}" data-platform="${platform}">
+          <td class="cost-reserved cost-reserved-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
             % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['us-east-1'][platform]['reserved'].get('yrTerm1Standard.noUpfront', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']}">
                 $${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']} hourly
@@ -434,7 +457,7 @@
           </td>
           % endif
           % endfor
-          <td class="cost-ebs-optimized">
+          <td class="cost-ebs-optimized" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
            % if inst['ebs_max_bandwidth']:
               % if inst['pricing'].get('us-east-1', {}).get('ebs', 'N/A') != "N/A":
                 <span sort="${inst['pricing']['us-east-1']['ebs']}">
@@ -447,7 +470,7 @@
               <span sort="999999">unavailable</span>
             % endif
           </td>
-          <td class="cost-emr">
+          <td class="cost-emr" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
             % if inst['pricing'].get('us-east-1', {}).get("emr", {}):
               <span sort="${inst['pricing']['us-east-1']["emr"]['emr']}">
                 $${inst['pricing']['us-east-1']["emr"]['emr']} hourly
