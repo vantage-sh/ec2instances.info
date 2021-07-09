@@ -75,6 +75,7 @@ body {
 
 #data td {
   font-size: 13px;
+   text-align: right;
 }
 
 #data td.name {

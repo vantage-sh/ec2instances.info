@@ -41,6 +41,13 @@ def add_cpu_detail(i):
     except:
         # these will be instances with variable/burstable ECU
         i['ECU_per_vcpu'] = 'unknown'
+
+    try:
+        i['memory_per_vcpu'] = round(i['memory'] / i['vCPU'], 2)
+    except:
+        # just to be safe...
+        i['memory_per_vcpu'] = 'unknown'
+
     if 'physical_processor' in i:
         i['physical_processor'] = (i['physical_processor'] or '').replace('*', '')
         i['intel_avx'] = 'Yes' if i['intel_avx'] else ''

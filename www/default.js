@@ -5,11 +5,13 @@ var g_data_table = null;
 var g_settings = {};
 
 var g_settings_defaults = {
+  pricing_unit: 'instance',
   cost_duration: 'hourly',
   region: 'us-east-1',
   reserved_term: 'yrTerm1Standard.noUpfront',
   min_memory: 0,
   min_vcpus: 0,
+  min_memory_per_vcpu: 0,
   min_storage: 0,
   selected: '',
   compare_on: false
@@ -62,6 +64,7 @@ function init_data_table() {
         "aTargets": [
           "architecture",
           "computeunits",
+          "memory-per-vcpu",
           "ecu-per-vcpu",
           "emr-support",
           "gpus",
@@ -161,17 +164,29 @@ $(document).ready(function () {
 });
 
 
-function change_cost(duration) {
-  // update menu text
+function change_cost(duration, pricing_unit) {
+  // update pricing duration menu text
   var first = duration.charAt(0).toUpperCase();
   var text = first + duration.substr(1);
   $("#cost-dropdown .dropdown-toggle .text").text(text);
 
-  // update selected menu option
+  // update pricing duration selected menu option
   $('#cost-dropdown li a').each(function (i, e) {
     e = $(e);
     if (e.attr('duration') == duration) {
       e.parent().addClass('active');
+    } else {
+      e.parent().removeClass('active');
+    }
+  });
+
+  // update pricing unit selected menu option
+  $('#pricing-unit-dropdown li a').each(function (i, e) {
+    e = $(e);
+    if (e.attr('pricing-unit') == pricing_unit) {
+      e.parent().addClass('active');
+      // update pricing unit menu text
+      $("#pricing-unit-dropdown .dropdown-toggle .text").text(e.text());
     } else {
       e.parent().removeClass('active');
     }
@@ -185,14 +200,31 @@ function change_cost(duration) {
     "monthly": (365 * 24 / 12),
     "annually": (365 * 24)
   };
-  var multiplier = hour_multipliers[duration];
+
+  var measuring_units = {
+    'instances': '',
+    'vcpu': 'vCPU',
+    'ecu': 'ECU',
+    'memory': 'GiB'
+  };
+
+  var duration_multiplier = hour_multipliers[duration];
+  var pricing_unit_modifier = 1;
   var per_time;
+
+  var pricing_measuring_units = ' ' + duration
+  if (pricing_unit != 'instance') {
+    pricing_measuring_units = pricing_measuring_units + ' / ' + measuring_units[pricing_unit];
+  }
   $.each($("td.cost-ondemand"), function (i, elem) {
     elem = $(elem);
+    if (pricing_unit != 'instance') {
+      pricing_unit_modifier = elem.data(pricing_unit);
+    }
     per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, elem.data("platform"), "ondemand");
-    if (per_time && !isNaN(per_time)) {
-      per_time = (per_time * multiplier).toFixed(6);
-      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+    if (per_time && !isNaN(per_time) && !isNaN(pricing_unit_modifier) && pricing_unit_modifier > 0) {
+      per_time = (per_time * duration_multiplier / pricing_unit_modifier).toFixed(6);
+      elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
     }
@@ -200,11 +232,13 @@ function change_cost(duration) {
 
   $.each($("td.cost-reserved"), function (i, elem) {
     elem = $(elem);
+    if (pricing_unit != 'instance') {
+      pricing_unit_modifier = elem.data(pricing_unit);
+    }
     per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, elem.data("platform"), "reserved", g_settings.reserved_term);
-
-    if (per_time && !isNaN(per_time)) {
-      per_time = (per_time * multiplier).toFixed(6);
-      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+    if (per_time && !isNaN(per_time) && !isNaN(pricing_unit_modifier) && pricing_unit_modifier > 0) {
+      per_time = (per_time * duration_multiplier / pricing_unit_modifier).toFixed(6);
+      elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
     }
@@ -234,10 +268,13 @@ function change_cost(duration) {
 
   $.each($("td.cost-ebs-optimized"), function (i, elem) {
     elem = $(elem);
+    if (pricing_unit != 'instance') {
+      pricing_unit_modifier = elem.data(pricing_unit);
+    }
     per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, "ebs");
-    if (per_time && !isNaN(per_time)) {
-      per_time = (per_time * multiplier).toFixed(6);
-      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+    if (per_time && !isNaN(per_time) && !isNaN(pricing_unit_modifier) && pricing_unit_modifier > 0) {
+      per_time = (per_time * duration_multiplier / pricing_unit_modifier).toFixed(6);
+      elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
     }
@@ -245,16 +282,20 @@ function change_cost(duration) {
 
   $.each($("td.cost-emr"), function (i, elem) {
     elem = $(elem);
+    if (pricing_unit != 'instance') {
+      pricing_unit_modifier = elem.data(pricing_unit);
+    }
     per_time = get_pricing(elem.closest("tr").attr("id"), g_settings.region, "emr", "emr");
-    if (per_time && !isNaN(per_time)) {
-      per_time = (per_time * multiplier).toFixed(6);
-      elem.html('<span sort="' + per_time + '">$' + per_time + ' ' + duration + '</span>');
+    if (per_time && !isNaN(per_time) && !isNaN(pricing_unit_modifier) && pricing_unit_modifier > 0) {
+      per_time = (per_time * duration_multiplier / pricing_unit_modifier).toFixed(6);
+      elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
     }
   });
 
   g_settings.cost_duration = duration;
+  g_settings.pricing_unit = pricing_unit;
   maybe_update_url();
 }
 
@@ -285,7 +326,7 @@ function change_region(region) {
     }
   });
   $("#region-dropdown .dropdown-toggle .text").text(region_name);
-  change_cost(g_settings.cost_duration);
+  change_cost(g_settings.cost_duration, g_settings.pricing_unit);
   change_availability_zones();
 
   // redraw table to pick up on new sort values
@@ -302,13 +343,13 @@ function change_reserved_term(term) {
   $activeLink.closest('li').addClass('active');
 
   $dropdown.find('.dropdown-toggle .text').text(term_name);
-  change_cost(g_settings.cost_duration);
+  change_cost(g_settings.cost_duration, g_settings.pricing_unit);
 }
 
 // Update all visible costs to the current duration.
 // Called after new columns or rows are shown as their costs may be inaccurate.
 function redraw_costs() {
-  change_cost(g_settings.cost_duration);
+  change_cost(g_settings.cost_duration, g_settings.pricing_unit);
 }
 
 function setup_column_toggle() {
@@ -352,9 +393,11 @@ function url_for_selections() {
   var params = {
     min_memory: g_settings.min_memory,
     min_vcpus: g_settings.min_vcpus,
+    min_memory_per_vcpu: g_settings.min_memory_per_vcpu,
     min_storage: g_settings.min_storage,
     filter: g_data_table.settings()[0].oPreviousSearch['sSearch'],
     region: g_settings.region,
+    pricing_unit: g_settings.pricing_unit,
     cost_duration: g_settings.cost_duration,
     reserved_term: g_settings.reserved_term,
     compare_on: g_settings.compare_on
@@ -419,7 +462,7 @@ var apply_min_values = function () {
     var filter_val = parseFloat($(this).val()) || 0;
 
     // update global variable for dynamic URL
-    g_settings["min_" + filter_on] = filter_val;
+    g_settings["min_" + filter_on.replace('-', '_')] = filter_val;
 
     var match_fail = data_rows.filter(function () {
       var row_val;
@@ -443,6 +486,7 @@ function on_data_table_initialized() {
   // populate filter inputs
   $('[data-action="datafilter"][data-type="memory"]').val(g_settings['min_memory']);
   $('[data-action="datafilter"][data-type="vcpus"]').val(g_settings['min_vcpus']);
+  $('[data-action="datafilter"][data-type="memory-per-vcpu"]').val(g_settings['min_memory_per_vcpu']);
   $('[data-action="datafilter"][data-type="storage"]').val(g_settings['min_storage']);
   g_data_table.search(g_settings['filter']);
   apply_min_values();
@@ -459,7 +503,7 @@ function on_data_table_initialized() {
   $('[data-action=datafilter]').on('keyup', apply_min_values);
 
   change_region(g_settings.region);
-  change_cost(g_settings.cost_duration);
+  change_cost(g_settings.cost_duration, g_settings.pricing_unit);
   change_reserved_term(g_settings.reserved_term);
 
   $.extend($.fn.dataTableExt.oStdClasses, {
@@ -477,8 +521,12 @@ function on_data_table_initialized() {
     }
   });
 
+  $("#pricing-unit-dropdown li").bind("click", function (e) {
+    change_cost(g_settings.cost_duration, e.target.getAttribute("pricing-unit"));
+  });
+
   $("#cost-dropdown li").bind("click", function (e) {
-    change_cost(e.target.getAttribute("duration"));
+    change_cost(e.target.getAttribute("duration"), g_settings.pricing_unit);
   });
 
   $("#region-dropdown li").bind("click", function (e) {

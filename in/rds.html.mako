@@ -44,6 +44,19 @@
           </ul>
         </div>
 
+        <div class="btn-group" id="pricing-unit-dropdown">
+          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+            <i class="icon-shopping-cart icon-white"></i>
+            Pricing Unit: <span class="text"></span>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="javascript:;" pricing-unit="instance">Instance</a></li>
+            <li><a href="javascript:;" pricing-unit="vcpu">vCPU</a></li>
+            <li><a href="javascript:;" pricing-unit="memory">Memory</a></li>
+          </ul>
+        </div>
+
         <div class="btn-group" id="cost-dropdown">
           <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
             <i class="icon-shopping-cart icon-white"></i>
@@ -165,7 +178,7 @@
             % endif
           </td>
           % for platform in ['Aurora PostgreSQL', 'Aurora MySQL', 'MariaDB', 'MySQL', 'Oracle','PostgreSQL', 'SQL Server']:
-          <td class="cost-ondemand cost-ondemand-${platform}" data-platform='${platform}'>
+          <td class="cost-ondemand cost-ondemand-${platform}" data-platform='${platform}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
             % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][platform]['ondemand']}">
                 $${inst['pricing']['us-east-1'][platform]['ondemand']} per hour
@@ -174,7 +187,7 @@
               <span sort="0">unavailable</span>
             % endif
           </td>
-          <td class="cost-reserved cost-reserved-${platform}" data-platform='${platform}'>
+          <td class="cost-reserved cost-reserved-${platform}" data-platform='${platform}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
             % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('reserved', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][platform]['reserved'].get('yrTerm1.noUpfront')}">
                 $${inst['pricing']['us-east-1'][platform]['reserved'].get('yrTerm1.noUpfront')} per hour
