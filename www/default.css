@@ -2,7 +2,7 @@ body {
   padding: 5px 20px;
 }
 
-.api-announcement{
+.announcement{
   background-color: #F5F6FF;
   width: 100%;
   margin: 20px 0;
@@ -13,7 +13,7 @@ body {
   background-size: 44px 30px;
   background-position: 10px 12px;
 }
-.api-announcement a{
+.announcement a{
   color:#222B86;
   font-weight:bold;
 }

@@ -7,7 +7,7 @@
 
     <%block name="header">
     <h1>EC2Instances.info <small>Easy Amazon <b>EC2</b> Instance Comparison</small></h1>
-    <div class='api-announcement'>API access to this data (and more) is now available with Vantage. <a href='http://vantage.readme.io/' target='_blank'>Learn more</a></div>
+    <div class='announcement'>Announcing The Cloud Cost Handbook: A free, open-source guide of best practices related to managing cloud costs. <a href='https://handbook.vantage.sh' target='_blank'>Learn more</a></div>
     </%block>
 
     <div class="row" id="menu">
