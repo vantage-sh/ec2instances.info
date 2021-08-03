@@ -139,7 +139,7 @@ def scrape(output_file, input_file=None):
                 if not instance:
                     # print(f"WARNING: Received on demand pricing info for unknown sku={sku}")
                     continue
-
+ 
                 if instance['region'] not in instances[instance['instance_type']]['pricing']:
                     instances[instance['instance_type']]['pricing'][instance['region']] = {}
 
@@ -189,16 +189,16 @@ def scrape(output_file, input_file=None):
                     instance['pricing'][region][instance['engineCode']] = {}
 
                 # create a reserved hash
-                if 'reserved' not in instance['pricing'][region][instance['database_engine']]:
-                    instance['pricing'][region][instance['database_engine']]['reserved'] = {}
-                if 'reserved' not in instance['pricing'][region][instance['engineCode']]:
-                    instance['pricing'][region][instance['engineCode']]['reserved'] = {}
+                if 'reserved' not in instances[instance['instance_type']]['pricing'][instance['region']][instance['database_engine']]:
+                    instances[instance['instance_type']]['pricing'][instance['region']][instance['database_engine']]['reserved'] = {}
+                if 'reserved' not in instances[instance['instance_type']]['pricing'][instance['region']][instance['engineCode']]:
+                    instances[instance['instance_type']]['pricing'][instance['region']][instance['engineCode']]['reserved'] = {}
 
-                # store the pricing in placeholder field
                 reserved_type = "%s %s" % (offer['termAttributes']['LeaseContractLength'], offer['termAttributes']['PurchaseOption'])
-                instance['pricing'][region][instance['database_engine']]['reserved']['%s-%s' % (reserved_mapping[reserved_type], dimension['unit'].lower())] = float(dimension['pricePerUnit']['USD'])
-                instance['pricing'][region][instance['engineCode']]['reserved']['%s-%s' % (reserved_mapping[reserved_type], dimension['unit'].lower())] = float(dimension['pricePerUnit']['USD'])
 
+                instances[instance['instance_type']]['pricing'][instance['region']][instance['engineCode']]['reserved']['%s-%s' % (reserved_mapping[reserved_type], dimension['unit'].lower())] = float(dimension['pricePerUnit']['USD'])
+                instances[instance['instance_type']]['pricing'][instance['region']][instance['database_engine']]['reserved']['%s-%s' % (reserved_mapping[reserved_type], dimension['unit'].lower())] = float(dimension['pricePerUnit']['USD'])
+   
     # Calculate all reserved effective pricings (upfront hourly + hourly price)
     for instance_type, instance in six.iteritems(instances):
         for region, pricing in six.iteritems(instance['pricing']):
@@ -207,20 +207,26 @@ def scrape(output_file, input_file=None):
                     continue
                 try:
                     # no multi-az here
-                    reserved_prices = {
-                        'yrTerm3.partialUpfront': (prices['reserved']['yrTerm3.partialUpfront-quantity'] / (365 * 3) / 24) + prices['reserved']['yrTerm3.partialUpfront-hrs'],
-                        'yrTerm1.partialUpfront': (prices['reserved']['yrTerm1.partialUpfront-quantity'] / 365 / 24) + prices['reserved']['yrTerm1.partialUpfront-hrs'],
-                        'yrTerm3.allUpfront': (prices['reserved']['yrTerm3.allUpfront-quantity'] / (365 * 3) / 24) + prices['reserved']['yrTerm3.allUpfront-hrs'],
-                        'yrTerm1.allUpfront': (prices['reserved']['yrTerm1.allUpfront-quantity'] / 365 / 24) + prices['reserved']['yrTerm1.allUpfront-hrs'],
-                        'yrTerm1.noUpfront': prices['reserved']['yrTerm1.noUpfront-hrs'],
-                    }
+                    reserved_prices = {}
+
+                    if 'yrTerm3.partialUpfront-quantity' in prices['reserved']:
+                        reserved_prices['yrTerm3Standard.partialUpfront'] = (prices['reserved']['yrTerm3.partialUpfront-quantity'] / (365 * 3) / 24) + prices['reserved']['yrTerm3.partialUpfront-hrs']                    
+
+                    if 'yrTerm1.partialUpfront-quantity' in prices['reserved']:
+                        reserved_prices['yrTerm1Standard.partialUpfront'] = (prices['reserved']['yrTerm1.partialUpfront-quantity'] / 365 / 24) + prices['reserved']['yrTerm1.partialUpfront-hrs']   
+
+                    if 'yrTerm3.allUpfront-quantity' in prices['reserved']:
+                        reserved_prices['yrTerm3Standard.allUpfront'] = (prices['reserved']['yrTerm3.allUpfront-quantity'] / (365 * 3) / 24) + prices['reserved']['yrTerm3.allUpfront-hrs']
+
+                    if 'yrTerm1.noUpfront-hrs' in prices['reserved']:
+                        reserved_prices['yrTerm1Standard.noUpfront'] = prices['reserved']['yrTerm1.noUpfront-hrs'] 
+
                     if 'yrTerm3.noUpfront-hrs' in prices['reserved']:
-                        reserved_prices['yrTerm3.noUpfront'] = prices['reserved']['yrTerm3.noUpfront-hrs']
+                        reserved_prices['yrTerm3Standard.noUpfront'] = prices['reserved']['yrTerm3.noUpfront-hrs']
+                    
                     instances[instance_type]['pricing'][region][engine]['reserved'] = reserved_prices
                 except Exception as e:
                     print("ERROR: Trouble generating RDS reserved price for {}: {!r}".format(instance_type, e))
-
-    # print json.dumps(instances['db.m3.medium']['pricing']['eu-west-1']['MySQL'], indent=4)
 
     add_pretty_names(instances)
 
