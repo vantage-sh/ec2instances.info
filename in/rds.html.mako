@@ -129,9 +129,9 @@
           </th>
           <th class="networkperf">Network Performance</th>
           <th class="arch">Arch</th>
-          % for platform in ['Aurora PostgreSQL', 'Aurora MySQL', 'MariaDB', 'MySQL', 'Oracle','PostgreSQL', 'SQL Server']:
-          <th class="cost-ondemand cost-ondemand-${platform}">${platform} On Demand cost</th>
-          <th class="cost-reserved cost-reserved-${platform}">
+          % for platform, code in {'Aurora PostgreSQL': '21', 'Aurora MySQL': '16', 'MariaDB': '18', 'MySQL': '2', 'Oracle Enterprise': '5', 'PostgreSQL': '14', 'SQL Server Standard': '12'}.items():
+          <th class="cost-ondemand cost-ondemand-${code}">${platform} On Demand cost</th>
+          <th class="cost-reserved cost-reserved-${code}">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>${platform} Reserved cost</abbr>
           </th>
           % endfor
@@ -177,20 +177,20 @@
             64-bit
             % endif
           </td>
-          % for platform in ['Aurora PostgreSQL', 'Aurora MySQL', 'MariaDB', 'MySQL', 'Oracle','PostgreSQL', 'SQL Server']:
-          <td class="cost-ondemand cost-ondemand-${platform}" data-platform='${platform}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
-            % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
-              <span sort="${inst['pricing']['us-east-1'][platform]['ondemand']}">
-                $${inst['pricing']['us-east-1'][platform]['ondemand']} per hour
+          % for platform, code in {'Aurora PostgreSQL': '21', 'Aurora MySQL': '16', 'MariaDB': '18', 'MySQL': '2', 'Oracle Enterprise': '5', 'PostgreSQL': '14', 'SQL Server Standard': '12'}.items():
+          <td class="cost-ondemand cost-ondemand-${code}" data-platform='${code}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
+            % if inst['pricing'].get('us-east-1', {}).get(code, {}).get('ondemand', 'N/A') != "N/A":
+              <span sort="${inst['pricing']['us-east-1'][code]['ondemand']}">
+                $${inst['pricing']['us-east-1'][code]['ondemand']} per hour
               </span>
             % else:
               <span sort="0">unavailable</span>
             % endif
           </td>
-          <td class="cost-reserved cost-reserved-${platform}" data-platform='${platform}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
-            % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('reserved', 'N/A') != "N/A":
-              <span sort="${inst['pricing']['us-east-1'][platform]['reserved'].get('yrTerm1.noUpfront')}">
-                $${inst['pricing']['us-east-1'][platform]['reserved'].get('yrTerm1.noUpfront')} per hour
+          <td class="cost-reserved cost-reserved-${code}" data-platform='${code}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
+            % if inst['pricing'].get('us-east-1', {}).get(code, {}).get('reserved', 'N/A') != "N/A":
+              <span sort="${inst['pricing']['us-east-1'][code]['reserved'].get('yrTerm1.noUpfront')}">
+                $${inst['pricing']['us-east-1'][code]['reserved'].get('yrTerm1.noUpfront')} per hour
               </span>
             % else:
               <span sort="0">unavailable</span>
