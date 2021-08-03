@@ -19,10 +19,11 @@
 
       <%block name="header"/>
 
-      <p class="pull-right label label-info">Last Update: ${generated_at}</p>
       <ul class="nav nav-tabs">
         <li role="presentation" class="${'active' if self.attr.active_ == 'ec2' else ''}"><a href="/">EC2</a></li>
         <li role="presentation" class="${'active' if self.attr.active_ == 'rds' else ''}"><a href="/rds/">RDS</a></li>
+
+        <li><a href="https://vantage.readme.io/" target="_blank">API Documentation</a></li>
       </ul>
     </div>
 
