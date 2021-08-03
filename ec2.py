@@ -58,9 +58,6 @@ def get_region_descriptions():
             for region in partition['regions']:
                 result[partition['regions'][region]['description']] = region
 
-    # The Osaka region is invite only and not in boto's list: https://github.com/boto/botocore/issues/1423
-    result['Asia Pacific (Osaka-Local)'] = 'ap-northeast-3'
-
     return result
 
 
