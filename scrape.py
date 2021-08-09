@@ -687,6 +687,13 @@ def add_gpu_info(instances):
             'cuda_cores': 40960,
             'gpu_memory': 256
         },
+        'p4d.24xlarge': {
+            'gpu_model': 'NVIDIA A100',
+            'compute_capability': 8.0,
+            'gpu_count': 8,
+            'cuda_cores': 55296, # Source: Asked Matthew Wilson at AWS as this isn't public anywhere. 
+            'gpu_memory': 320 
+        },
     }
     for inst in instances:
         if inst.GPU == 0:
