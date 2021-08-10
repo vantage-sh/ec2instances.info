@@ -1,18 +1,18 @@
-# ec2instances.info
+![Vantage Picture](https://uploads-ssl.webflow.com/5f9ba05ba40d6414f341df34/5f9bb1764b6670c6f7739564_moutain-scene.svg)
 
-I was sick of comparing EC2 instance metrics and pricing on Amazon's site so I made [ec2instances.info](https://ec2instances.info). Improvements welcome!
+# EC2Instances.info
 
+I was sick of comparing EC2 instance metrics and pricing on Amazon's site so I made [EC2Instances.info](https://ec2instances.info). 
 
-### Project status
+EC2Instances.info was originally created by [Garret Heaton](https://github.com/powdahound), is now hosted by [Vantage](https://vantage.sh/) and developed by the community of contributors. 
 
-[![Build Status](https://travis-ci.org/powdahound/ec2instances.info.svg)](https://travis-ci.org/powdahound/ec2instances.info)
+## Project status
 
-I'm actively maintaining the site with the help of contributors here, but am not working on large new features.
+Vantage employees are actively maintaining and hosting the site with the help of contributors here. Improvements in the form of pull requests or ideas via issues are welcome!
 
-People have suggested many neat ideas and feature requests but it remains unclear how long the site will be necessary. I've heard from teams at Amazon that they use the site internally and some have mentioned that they might be building something similar. They certainly have access to better data.
+People have suggested many neat ideas and feature requests by opening issues on this repository. We also have a [Slack Community](https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw) for anyone to join with a devoted channel named #instances-vantage.sh. 
 
-
-### Running locally
+## Running locally
 
 Make sure you have LibXML and Python development files.  On Ubuntu, run `sudo apt-get install python-dev libxml2-dev libxslt1-dev libssl-dev`.
 
@@ -50,7 +50,7 @@ open http://localhost:8080
 deactivate # to exit virtualenv
 ```
 
-### Requirements
+## Requirements
 
 - Python with virtualenv
 - [Invoke](http://www.pyinvoke.org/)
@@ -58,7 +58,7 @@ deactivate # to exit virtualenv
 - [Mako](http://www.makotemplates.org/)
 - [lxml](http://lxml.de/)
 
-### Docker
+## Docker
 
 To build a docker image follow these steps:
 
@@ -69,3 +69,16 @@ To build a docker image follow these steps:
    docker run -d --name some-container -p 8080:8080 ec2instances.info # start a container
    ```
 2. `docker exec -it some-container bash -c "invoke build" # update files`
+
+
+## API Access
+
+The data backing EC2Instances.info has recently been made available via a free API. All you need to get started is a free API key. To get started with API access, check out the devoted [API documentation](https://vantage.readme.io/reference/general). 
+
+## Keep up-to-date
+
+Feel free to watch/star this repo as we're looking to update the site regularly. Vantage also works on the following relevant projects:
+
+* [The Cloud Cost Handbook](https://github.com/vantage-sh/handbook) - An open-source set of guides for best practices of managing cloud costs. 
+* [The AWS Cost Leaderboard](https://leaderboard.vantage.sh/) - A hosted site of the top AWS cost centers. 
+* [Vantage](https://vantage.sh/) - A cloud cost transparency platform.
