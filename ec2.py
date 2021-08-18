@@ -1,7 +1,6 @@
 import botocore
 import botocore.exceptions
 import boto3
-from bisect import insort
 from datetime import datetime
 import locale
 import json
