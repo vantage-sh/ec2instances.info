@@ -236,7 +236,8 @@ def add_spot_pricing(imap):
                     inst.pricing[region][platform].setdefault('spot',[])
                     inst.pricing[region][platform].setdefault('spot_min','N/A')
                     inst.pricing[region][platform].setdefault('spot_max','N/A')
-                    insort(inst.pricing[region][platform]['spot'], price['SpotPrice'])
+                    inst.pricing[region][platform]['spot'].append(price['SpotPrice'])
+                    inst.pricing[region][platform]['spot'].sort(key=float)
                     inst.pricing[region][platform]['spot_min'] = inst.pricing[region][platform]['spot'][0]
                     inst.pricing[region][platform]['spot_max'] = inst.pricing[region][platform]['spot'][-1]
         except Exception as e:
