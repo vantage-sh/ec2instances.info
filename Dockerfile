@@ -26,6 +26,8 @@ RUN yum -y install epel-release && \
     rm -rf /var/tmp/* /var/cache/yum/* /root/.cache && \
     python3 -m ensurepip
 
+RUN python3 -m pip install -U pip setuptools
+
 COPY nginx.conf /etc/nginx/nginx.conf
 
 WORKDIR /opt/app
