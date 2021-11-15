@@ -540,6 +540,10 @@ def add_gpu_info(instances):
     descriptions of the instance types and https://en.wikipedia.org/wiki/CUDA
     for information on the CUDA compute capability of different Nvidia GPU
     models.
+
+    For G5 instances, please reference the following:
+      https://aws.amazon.com/ec2/instance-types/g5/
+      https://github.com/vantage-sh/ec2instances.info/issues/593
     """
     gpu_data = {
         'g2.2xlarge': {
@@ -687,6 +691,62 @@ def add_gpu_info(instances):
             'cuda_cores': 40960,
             'gpu_memory': 256
         },
+        'g5.xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 9616,
+            'gpu_memory': 24
+        },
+        'g5.2xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 9616,
+            'gpu_memory': 24
+        },
+        'g5.4xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 9616,
+            'gpu_memory': 24
+        },
+        'g5.8xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 9616,
+            'gpu_memory': 24
+        },
+        'g5.16xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 9616,
+            'gpu_memory': 24
+        },
+        'g5.12xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 4,
+            'cuda_cores': 38464,
+            'gpu_memory': 96
+        },
+        'g5.24xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 4,
+            'cuda_cores': 38464,
+            'gpu_memory': 96
+        },
+        'g5.48xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 8,
+            'cuda_cores': 76928,
+            'gpu_memory': 192
+        }
     }
     for inst in instances:
         if inst.GPU == 0:
