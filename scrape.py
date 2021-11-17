@@ -466,6 +466,7 @@ def add_pretty_names(instances):
         'm5d': 'M5 General Purpose',
         'g3': 'G3 Graphics GPU',
         'g4': 'G4 Graphics and Machine Learning GPU',
+        'g5': 'G5 Graphics and Machine Learning GPU',
         'p2': 'P2 General Purpose GPU',
         'p3': 'P3 High Performance GPU',
         'p4d': 'P4D Highest Performance GPU',
@@ -544,6 +545,10 @@ def add_gpu_info(instances):
     descriptions of the instance types and https://en.wikipedia.org/wiki/CUDA
     for information on the CUDA compute capability of different Nvidia GPU
     models.
+
+    For G5 instances, please reference the following:
+      https://aws.amazon.com/ec2/instance-types/g5/
+      https://github.com/vantage-sh/ec2instances.info/issues/593
     """
     gpu_data = {
         'g2.2xlarge': {
@@ -691,13 +696,69 @@ def add_gpu_info(instances):
             'cuda_cores': 40960,
             'gpu_memory': 256
         },
+        'g5.xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 9616,
+            'gpu_memory': 24
+        },
+        'g5.2xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 9616,
+            'gpu_memory': 24
+        },
+        'g5.4xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 9616,
+            'gpu_memory': 24
+        },
+        'g5.8xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 9616,
+            'gpu_memory': 24
+        },
+        'g5.16xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 9616,
+            'gpu_memory': 24
+        },
+        'g5.12xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 4,
+            'cuda_cores': 38464,
+            'gpu_memory': 96
+        },
+        'g5.24xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 4,
+            'cuda_cores': 38464,
+            'gpu_memory': 96
+        },
+        'g5.48xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 8,
+            'cuda_cores': 76928,
+            'gpu_memory': 192
+        },
         'p4d.24xlarge': {
             'gpu_model': 'NVIDIA A100',
             'compute_capability': 8.0,
             'gpu_count': 8,
             'cuda_cores': 55296, # Source: Asked Matthew Wilson at AWS as this isn't public anywhere. 
             'gpu_memory': 320 
-        },
+        }
     }
     for inst in instances:
         if inst.GPU == 0:
