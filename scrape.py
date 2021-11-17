@@ -464,7 +464,12 @@ def add_pretty_names(instances):
         'm4': 'M4 General Purpose',
         'm5': 'M5 General Purpose',
         'm5d': 'M5 General Purpose',
-        'p2': 'General Purpose GPU',
+        'g3': 'G3 Graphics GPU',
+        'g4': 'G4 Graphics and Machine Learning GPU',
+        'g5': 'G5 Graphics and Machine Learning GPU',
+        'p2': 'P2 General Purpose GPU',
+        'p3': 'P3 High Performance GPU',
+        'p4d': 'P4D Highest Performance GPU',
         'r3': 'R3 High-Memory',
         'r4': 'R4 High-Memory',
         'x1': 'X1 Extra High-Memory'
@@ -746,6 +751,13 @@ def add_gpu_info(instances):
             'gpu_count': 8,
             'cuda_cores': 76928,
             'gpu_memory': 192
+        },
+        'p4d.24xlarge': {
+            'gpu_model': 'NVIDIA A100',
+            'compute_capability': 8.0,
+            'gpu_count': 8,
+            'cuda_cores': 55296, # Source: Asked Matthew Wilson at AWS as this isn't public anywhere. 
+            'gpu_memory': 320 
         }
     }
     for inst in instances:
