@@ -1,12 +1,9 @@
-FROM centos:7
+FROM amazonlinux:2
 
-MAINTAINER Sebastian Sasu <sebi@nologin.ro>
+LABEL org.opencontainers.image.authors="Sebastian Sasu <sebi@nologin.ro>, Cristian Magherusan-Stanciu <cmagh@amazon.de>"
 
-ENV PACKAGES python3-devel libxml2-devel libxslt-devel openssl-devel gcc
-
-RUN yum -y install epel-release && \
-    yum -y update && \
-    yum -y install ${PACKAGES} && \
+RUN yum -y update && \
+    yum -y install python3-devel && \
     yum -y clean all && \
     rm -rf /var/tmp/* /var/cache/yum/* /root/.cache && \
     python3 -m ensurepip
