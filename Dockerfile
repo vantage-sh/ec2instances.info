@@ -7,7 +7,7 @@ ARG AWS_SECRET_ACCESS_KEY
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update
-RUN apt-get install -y nginx python3 pip locales
+RUN apt-get install -y nginx python3 pip locales curl
 RUN python3 -m pip install -U pip setuptools
 RUN locale-gen "en_US.UTF-8"
 COPY nginx.conf /etc/nginx/nginx.conf
