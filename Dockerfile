@@ -1,33 +1,15 @@
-FROM centos:7
+FROM ubuntu:20.04
 
 MAINTAINER Brooke McKim <brooke@vantage.sh>
 
 ARG AWS_ACCESS_KEY_ID
 ARG AWS_SECRET_ACCESS_KEY
+ARG DEBIAN_FRONTEND=noninteractive
 
-ENV nginxversion="1.18.0-2" \
-    os="centos" \
-    osversion="7" \
-    elversion="7"
-
-ENV PACKAGES python3-devel libxml2-devel libxslt-devel openssl-devel gcc
-
-
-RUN yum install -y wget openssl sed &&\
-    yum -y autoremove &&\
-    yum clean all &&\
-    wget http://nginx.org/packages/$os/$osversion/x86_64/RPMS/nginx-$nginxversion.el$elversion.ngx.x86_64.rpm &&\
-    rpm -iv nginx-$nginxversion.el$elversion.ngx.x86_64.rpm
-
-RUN yum -y install epel-release && \
-    yum -y update && \
-    yum -y install ${PACKAGES} && \
-    yum -y clean all && \
-    rm -rf /var/tmp/* /var/cache/yum/* /root/.cache && \
-    python3 -m ensurepip
-
+RUN apt-get update
+RUN apt-get install -y nginx python3 pip locales
 RUN python3 -m pip install -U pip setuptools
-
+RUN locale-gen "en_US.UTF-8"
 COPY nginx.conf /etc/nginx/nginx.conf
 
 WORKDIR /opt/app
