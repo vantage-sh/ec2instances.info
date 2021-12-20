@@ -530,6 +530,7 @@ function on_data_table_initialized() {
 
   $("#pricing-unit-dropdown li").bind("click", function (e) {
     change_cost(g_settings.cost_duration, e.target.getAttribute("pricing-unit"));
+    g_data_table.rows().invalidate().draw();
   });
 
   $("#cost-dropdown li").bind("click", function (e) {
