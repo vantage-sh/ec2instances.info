@@ -125,7 +125,8 @@ class Instance(object):
                                 storage_needs_initialization=self.storage_needs_initialization,
                                 includes_swap_partition=self.includes_swap_partition,
                                 devices=self.num_drives,
-                                size=self.drive_size)
+                                size=self.drive_size,
+                                size_unit=self.size_unit)
         return d
 
     def __repr__(self):
@@ -407,11 +408,19 @@ def add_instance_storage_details(instances):
             if i.instance_type == instance_type:
                 i.ebs_only = True
 
-                m = re.search(r'(\d+)\s*x\s*([0-9,]+)?', storage_volumes)
+                # Supports "24 x 13,980 GB" and "2 x 1,200 GB (2.4 TB)"
+                m = re.search(r'(\d+)\s*x\s*([0-9,]+)?\s+(\w{2})?', storage_volumes)
+
                 if m:
+                    size_unit = 'GB'
+                    
+                    if m.group(3):
+                        size_unit = m.group(3)
+
                     i.ebs_only = False
                     i.num_drives = locale.atoi(m.group(1))
                     i.drive_size = locale.atoi(m.group(2))
+                    i.size_unit = size_unit
                     i.ssd = 'SSD' in storage_type
                     i.nvme_ssd = 'NVMe' in storage_type
                     i.trim_support = checkmark_char in trim_support
