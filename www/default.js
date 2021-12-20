@@ -56,6 +56,7 @@ function init_data_table() {
           "cost-spot-min",
           "cost-spot-max",
           "cost-ebs-optimized",
+          "memory-per-vcpu"
         ],
         "sType": "span-sort"
       },
@@ -552,6 +553,7 @@ function on_data_table_initialized() {
 jQuery.extend(jQuery.fn.dataTableExt.oSort, {
   "span-sort-pre": function (elem) {
     var matches = elem.match(/sort="(.*?)"/);
+
     if (matches) {
       return parseFloat(matches[1]);
     }
