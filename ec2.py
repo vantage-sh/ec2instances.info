@@ -239,10 +239,8 @@ def add_spot_pricing(imap):
                     inst.pricing[region][platform]['spot'].sort(key=float)
                     inst.pricing[region][platform]['spot_min'] = inst.pricing[region][platform]['spot'][0]
                     inst.pricing[region][platform]['spot_max'] = inst.pricing[region][platform]['spot'][-1]
-        except Exception as e:
-            # print more details about the instance for debugging
-            print(f"ERROR: Exception adding Spot pricing for {region}: {e}")
-            print(traceback.print_exc())
+        except botocore.exceptions.ClientError:
+            pass
 
 def parse_instance(instance_type, product_attributes, api_description):
     pieces = instance_type.split('.')
@@ -345,10 +343,5 @@ def describe_instance_type_offerings(region_name='us-east-1', location_type='reg
         filtered_iterator = page_iterator.search('InstanceTypeOfferings')
         for offering in filtered_iterator:
             yield offering
-    except botocore.exceptions.ClientError as error:
-        print(f'ERROR: When calling describe_instance_type_offerings for region={region_name} and location_type={location_type}')
-        print('Error Code: {}'.format(error.response['Error']['Code']))
-        print('Error Message: {}'.format(error.response['Error']['Message']))
-        print('Request ID: {}'.format(error.response['ResponseMetadata']['RequestId']))
-        print('Http code: {}'.format(error.response['ResponseMetadata']['HTTPStatusCode']))
-
+    except botocore.exceptions.ClientError:
+        pass
