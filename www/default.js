@@ -33,7 +33,6 @@ function init_data_table() {
   g_data_table = $('#data').DataTable({
     "bPaginate": false,
     "bInfo": false,
-    "bStateSave": true,
     "orderCellsTop": true,
     "oSearch": {
       "bRegex": true,
@@ -135,6 +134,8 @@ function init_data_table() {
     },
     // Store filtering, sorting, etc - core datatable feature
     'stateSave': true,
+    'stateDuration': 0,
+
     // Allow export to CSV
     'buttons': ['csv']
   });

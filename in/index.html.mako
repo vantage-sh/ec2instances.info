@@ -477,7 +477,7 @@
             </td>
             <td class="cost-emr" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
               % if inst['pricing'].get('us-east-1', {}).get("emr", {}):
-                <span sort="${inst['pricing']['us-east-1']["emr"]['emr']}">
+                <span sort="${inst['pricing']['us-east-1']['emr']['emr']}">
                   $${inst['pricing']['us-east-1']["emr"]['emr']} hourly
                 </span>
               % else:
