@@ -1,23 +1,21 @@
-FROM amazonlinux:2
+FROM ubuntu:20.04
 
-LABEL org.opencontainers.image.authors="Sebastian Sasu <sebi@nologin.ro>, Cristian Magherusan-Stanciu <cmagh@amazon.de>"
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
+ARG DEBIAN_FRONTEND=noninteractive
 
-RUN yum -y update && \
-    yum -y install python3-devel && \
-    yum -y clean all && \
-    rm -rf /var/tmp/* /var/cache/yum/* /root/.cache && \
-    python3 -m ensurepip
+LABEL org.opencontainers.image.authors="Sebastian Sasu <sebi@nologin.ro>, Cristian Magherusan-Stanciu <cmagh@amazon.de>, Brooke McKim <brooke@vantage.sh>"
+
+RUN apt-get update
+RUN apt-get install -y python3 pip locales
+RUN python3 -m pip install -U pip setuptools
+RUN locale-gen "en_US.UTF-8"
 
 WORKDIR /opt/app
 
-COPY requirements.txt .
-
-RUN pip3 install -r requirements.txt
-
 COPY . .
 
-ENV HTTP_HOST=0.0.0.0 HTTP_PORT=8080
-
+RUN pip3 install -r requirements.txt
 RUN invoke build
 
 EXPOSE 8080
