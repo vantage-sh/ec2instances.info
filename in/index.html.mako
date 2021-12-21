@@ -240,247 +240,251 @@
         </tr>
       </thead>
       <tbody>
-% for inst in instances:
-        <tr class='instance' id="${inst['instance_type']}">
-          <td class="name">${inst['pretty_name']}</td>
-          <td class="apiname">${inst['instance_type']}</td>
-          <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
-          <td class="computeunits">
-            % if inst['ECU'] == 'variable':
-              % if inst['base_performance']:
-              <span sort="${inst['base_performance']}">
-                <abbr title="For T2 instances, the 100% unit represents a High Frequency Intel Xeon Processors with Turbo up to 3.3GHz.">
-                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">Base performance:
-                ${"%g" % (inst['base_performance'] * 100,)}%
-                </a></abbr>
-              </span>
-              % else:
-              <span sort="0"><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts_micro_instances.html" target="_blank">Burstable</a></span>
-              % endif
-            % else:
-            <span sort="${inst['ECU']}">${"%g" % (inst['ECU'],)} units</span>
-            % endif
-          </td>
-          <td class="vcpus">
-            <span sort="${inst['vCPU']}">
-              ${inst['vCPU']} vCPUs
-                % if inst['burst_minutes']:
-                <abbr title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs.">
-                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">
-                for a
-                ${"%gh %gm" % divmod(inst['burst_minutes'], 60)}
-                burst
-                </a></abbr>
+        % for inst in instances:
+          <tr class='instance' id="${inst['instance_type']}">
+            <td class="name">${inst['pretty_name']}</td>
+            <td class="apiname">${inst['instance_type']}</td>
+            <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
+            <td class="computeunits">
+              % if inst['ECU'] == 'variable':
+                % if inst['base_performance']:
+                <span sort="${inst['base_performance']}">
+                  <abbr title="For T2 instances, the 100% unit represents a High Frequency Intel Xeon Processors with Turbo up to 3.3GHz.">
+                  <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">Base performance:
+                  ${"%g" % (inst['base_performance'] * 100,)}%
+                  </a></abbr>
+                </span>
+                % else:
+                <span sort="0"><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts_micro_instances.html" target="_blank">Burstable</a></span>
                 % endif
-            </span>
-          </td>
-          <td class="memory-per-vcpu">
-            % if inst['memory_per_vcpu'] == 'unknown':
-            <span sort="999999">unknown</span>
-            % else:
-            <span sort="${inst['memory_per_vcpu']}">${"{:.2f}".format(inst['memory_per_vcpu'])} GiB/vCPU</span>
-            % endif
-          </td>
-          <td class="gpus">${inst['GPU']}</td>
-          <td class="gpu_model">${inst['GPU_model']}</td>
-          <td class="gpu_memory">${inst['GPU_memory']} GiB</td>
-          <td class="compute_capability">${inst['compute_capability']}</td>
-          <td class="fpga">${inst['FPGA']}</td>
-          <td class="ecu-per-vcpu">
-            % if inst['ECU'] == 'variable':
-            <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
-            % elif inst['ECU_per_vcpu'] == 'unknown':
-            <span sort="0">unknown</span>
-            % else:
-            <span sort="${inst['ECU_per_vcpu']}">${"%.4g" % inst['ECU_per_vcpu']} units</span>
-            % endif
-          </td>
-          <td class="physical_processor">${inst['physical_processor'] or 'unknown'}</td>
-          <td class="clock_speed_ghz">${inst['clock_speed_ghz'] or 'unknown'}</td>
-          <td class="intel_avx">${'Yes' if inst['intel_avx'] else 'unknown'}</td>
-          <td class="intel_avx2">${'Yes' if inst['intel_avx2'] else 'unknown'}</td>
-          <td class="intel_avx512">${'Yes' if inst['intel_avx512'] else 'unknown'}</td>
-          <td class="intel_turbo">${'Yes' if inst['intel_turbo'] else 'unknown'}</td>
-          <td class="storage">
-            <% storage = inst['storage'] %>
-            % if not storage:
-            <span sort="0">EBS only</span>
-            % else:
-            <span sort="${storage['devices']*storage['size']}">
-              ${storage['devices'] * storage['size']} ${storage['size_unit']}
-              % if storage['devices'] > 1:
-              (${storage['devices']} * ${storage['size']} ${storage['size_unit']} ${"NVMe " if storage['nvme_ssd'] else ''}${"SSD" if storage['ssd'] else 'HDD'})
               % else:
-              ${"NVMe " if storage['nvme_ssd'] else ''}${"SSD" if storage['ssd'] else 'HDD'}
+              <span sort="${inst['ECU']}">${"%g" % (inst['ECU'],)} units</span>
               % endif
-              ${"+ 900MB swap" if storage['includes_swap_partition'] else ''}
-            </span>
-            % endif
-          </td>
-          <td class="warmed-up">
-            % if inst['storage']:
-                ${"No" if inst['storage']['storage_needs_initialization'] else 'Yes'}
-            % else:
+            </td>
+            <td class="vcpus">
+              <span sort="${inst['vCPU']}">
+                ${inst['vCPU']} vCPUs
+                  % if inst['burst_minutes']:
+                  <abbr title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs.">
+                  <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">
+                  for a
+                  ${"%gh %gm" % divmod(inst['burst_minutes'], 60)}
+                  burst
+                  </a></abbr>
+                  % endif
+              </span>
+            </td>
+            <td class="memory-per-vcpu">
+              % if inst['memory_per_vcpu'] == 'unknown':
+              <span sort="999999">unknown</span>
+              % else:
+              <span sort="${inst['memory_per_vcpu']}">${"{:.2f}".format(inst['memory_per_vcpu'])} GiB/vCPU</span>
+              % endif
+            </td>
+            <td class="gpus">${inst['GPU']}</td>
+            <td class="gpu_model">${inst['GPU_model']}</td>
+            <td class="gpu_memory">${inst['GPU_memory']} GiB</td>
+            <td class="compute_capability">${inst['compute_capability']}</td>
+            <td class="fpga">${inst['FPGA']}</td>
+            <td class="ecu-per-vcpu">
+              % if inst['ECU'] == 'variable':
+              <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
+              % elif inst['ECU_per_vcpu'] == 'unknown':
+              <span sort="0">unknown</span>
+              % else:
+              <span sort="${inst['ECU_per_vcpu']}">${"%.4g" % inst['ECU_per_vcpu']} units</span>
+              % endif
+            </td>
+            <td class="physical_processor">${inst['physical_processor'] or 'unknown'}</td>
+            <td class="clock_speed_ghz">${inst['clock_speed_ghz'] or 'unknown'}</td>
+            <td class="intel_avx">${'Yes' if inst['intel_avx'] else 'unknown'}</td>
+            <td class="intel_avx2">${'Yes' if inst['intel_avx2'] else 'unknown'}</td>
+            <td class="intel_avx512">${'Yes' if inst['intel_avx512'] else 'unknown'}</td>
+            <td class="intel_turbo">${'Yes' if inst['intel_turbo'] else 'unknown'}</td>
+            <td class="storage">
+              <% storage = inst['storage'] %>
+              % if not storage:
+              <span sort="0">EBS only</span>
+              % else:
+              <span sort="${storage['devices']*storage['size']}">
+                ${storage['devices'] * storage['size']} ${storage['size_unit']}
+                % if storage['devices'] > 1:
+                (${storage['devices']} * ${storage['size']} ${storage['size_unit']} ${"NVMe " if storage['nvme_ssd'] else ''}${"SSD" if storage['ssd'] else 'HDD'})
+                % else:
+                ${"NVMe " if storage['nvme_ssd'] else ''}${"SSD" if storage['ssd'] else 'HDD'}
+                % endif
+                ${"+ 900MB swap" if storage['includes_swap_partition'] else ''}
+              </span>
+              % endif
+            </td>
+            <td class="warmed-up">
+              % if inst['storage']:
+                  ${"No" if inst['storage']['storage_needs_initialization'] else 'Yes'}
+              % else:
+                  N/A
+              % endif
+            </td>
+            <td class="trim-support">
+              % if inst['storage'] and inst['storage']['ssd'] :
+                  ${"Yes" if inst['storage']['trim_support'] else 'No'}
+              % else:
+                  N/A
+              % endif
+            </td>
+            <td class="architecture">
+              % if 'i386' in inst['arch']:
+              32/64-bit
+              % else:
+              64-bit
+              % endif
+            </td>
+            <td class="networkperf">
+              <span sort="${inst['network_sort']}">
+                ${inst['network_performance']}
+              </span>
+            </td>
+            <td class="ebs-max-bandwidth">
+              % if not inst['ebs_max_bandwidth']:
+              <span sort="0">N/A</span>
+              % else:
+              <span sort="${inst['ebs_max_bandwidth']}">
+                ${inst['ebs_max_bandwidth']} Mbps  <!-- Not MB/s! -->
+              </span>
+              % endif
+            </td>
+            <td class="ebs-throughput">
+              <span sort="${inst['ebs_throughput']}">
+                ${inst['ebs_throughput']} Mbps  <!-- Not MB/s! -->
+              </span>
+            </td>
+            <td class="ebs-iops">
+              <span sort="${inst['ebs_iops']}">
+                ${inst['ebs_iops']} IOPS
+              </span>
+            </td>
+            <td class="ebs-as-nvme">
+              % if inst['ebs_as_nvme']:
+                  Yes
+              % else:
+                  No
+              % endif
+            </td>
+            <td class="maxips">
+              % if inst['vpc']:
+                ${inst['vpc']['max_enis'] * inst['vpc']['ips_per_eni']}
+              % else:
                 N/A
-            % endif
-          </td>
-          <td class="trim-support">
-            % if inst['storage'] and inst['storage']['ssd'] :
-                ${"Yes" if inst['storage']['trim_support'] else 'No'}
-            % else:
+              % endif
+            </td>
+            <td class="maxenis">
+              % if inst['vpc']:
+                ${inst['vpc']['max_enis']}
+              % else:
                 N/A
-            % endif
-          </td>
-          <td class="architecture">
-            % if 'i386' in inst['arch']:
-            32/64-bit
-            % else:
-            64-bit
-            % endif
-          </td>
-          <td class="networkperf">
-            <span sort="${inst['network_sort']}">
-              ${inst['network_performance']}
-            </span>
-          </td>
-          <td class="ebs-max-bandwidth">
-            % if not inst['ebs_max_bandwidth']:
-            <span sort="0">N/A</span>
-            % else:
-            <span sort="${inst['ebs_max_bandwidth']}">
-              ${inst['ebs_max_bandwidth']} Mbps  <!-- Not MB/s! -->
-            </span>
-            % endif
-          </td>
-          <td class="ebs-throughput">
-            <span sort="${inst['ebs_throughput']}">
-              ${inst['ebs_throughput']} Mbps  <!-- Not MB/s! -->
-            </span>
-          </td>
-          <td class="ebs-iops">
-            <span sort="${inst['ebs_iops']}">
-              ${inst['ebs_iops']} IOPS
-            </span>
-          </td>
-          <td class="ebs-as-nvme">
-            % if inst['ebs_as_nvme']:
-                Yes
-            % else:
-                No
-            % endif
-          </td>
-          <td class="maxips">
-            % if inst['vpc']:
-              ${inst['vpc']['max_enis'] * inst['vpc']['ips_per_eni']}
-            % else:
-              N/A
-            % endif
-          </td>
-          <td class="maxenis">
-            % if inst['vpc']:
-              ${inst['vpc']['max_enis']}
-            % else:
-              N/A
-            % endif
-          </td>
-          <td class="enhanced-networking">
-            ${'Yes' if inst['enhanced_networking'] else 'No'}
-          </td>
-          <td class="vpc-only">
-            ${'Yes' if inst['vpc_only'] else 'No'}
-          </td>
-          <td class="ipv6-support">
-            ${'Yes' if inst['ipv6_support'] else 'No'}
-          </td>
-          <td class="placement-group-support">
-            ${'Yes' if inst['placement_group_support'] else 'No'}
-          </td>
-          <td class="linux-virtualization">
-            % if inst['linux_virtualization_types']:
-            ${', '.join(inst['linux_virtualization_types'])}
-            % else:
-            Unknown
-            % endif
-          </td>
-          <td class="emr-support">
-            ${'Yes' if inst['emr'] else 'No'}
-          </td>
-          <td class="azs">
-            ${', '.join(inst.get('availability_zones', {}).get('us-east-1', []))}
-          </td>
-          % for platform in ['linux', 'rhel', 'sles', 'mswin', 'mswinSQLWeb', 'mswinSQL', 'mswinSQLEnterprise', 'linuxSQLWeb', 'linuxSQL', 'linuxSQLEnterprise']:
-          ## note that the contents in these cost cells are overwritten by the JS change_cost() func, but the initial
-          ## data here is used for sorting (and anyone with JS disabled...)
-          ## for more info, see https://github.com/powdahound/ec2instances.info/issues/140
-          <td class="cost-ondemand cost-ondemand-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
-            % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
-              <span sort="${inst['pricing']['us-east-1'][platform]['ondemand']}">
-                $${inst['pricing']['us-east-1'][platform]['ondemand']} hourly
-              </span>
-            % else:
-              <span sort="999999">unavailable</span>
-            % endif
-          </td>
-          <td class="cost-reserved cost-reserved-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
-            % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['us-east-1'][platform]['reserved'].get('yrTerm1Standard.noUpfront', 'N/A') != "N/A":
-              <span sort="${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']}">
-                $${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']} hourly
-              </span>
-            % else:
-              <span sort="999999">unavailable</span>
-            % endif
-          </td>
-          % if platform in ['linux', 'rhel', 'sles', 'mswin']:
-          <td class="cost-spot-min cost-spot-min-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
-            % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot_min', 'N/A') != 'N/A':
-            <%
-                spot_min = inst['pricing']['us-east-1'][platform]['spot_min']
-            %>
-              <span sort="${spot_min}">
-                $${spot_min} hourly
-              </span>
-            % else:
-              <span sort="999999">unavailable</span>
-            % endif
-          </td>
+              % endif
+            </td>
+            <td class="enhanced-networking">
+              ${'Yes' if inst['enhanced_networking'] else 'No'}
+            </td>
+            <td class="vpc-only">
+              ${'Yes' if inst['vpc_only'] else 'No'}
+            </td>
+            <td class="ipv6-support">
+              ${'Yes' if inst['ipv6_support'] else 'No'}
+            </td>
+            <td class="placement-group-support">
+              ${'Yes' if inst['placement_group_support'] else 'No'}
+            </td>
+            <td class="linux-virtualization">
+              % if inst['linux_virtualization_types']:
+              ${', '.join(inst['linux_virtualization_types'])}
+              % else:
+              Unknown
+              % endif
+            </td>
+            <td class="emr-support">
+              ${'Yes' if inst['emr'] else 'No'}
+            </td>
+            <td class="azs">
+              ${', '.join(inst.get('availability_zones', {}).get('us-east-1', []))}
+            </td>
+            
+            % for platform in ['linux', 'rhel', 'sles', 'mswin', 'mswinSQLWeb', 'mswinSQL', 'mswinSQLEnterprise', 'linuxSQLWeb', 'linuxSQL', 'linuxSQLEnterprise']:
+              ## note that the contents in these cost cells are overwritten by the JS change_cost() func, but the initial
+              ## data here is used for sorting (and anyone with JS disabled...)
+              ## for more info, see https://github.com/powdahound/ec2instances.info/issues/140
+              <td class="cost-ondemand cost-ondemand-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+                % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
+                  <span sort="${inst['pricing']['us-east-1'][platform]['ondemand']}">
+                    $${inst['pricing']['us-east-1'][platform]['ondemand']} hourly
+                  </span>
+                % else:
+                  <span sort="999999">unavailable</span>
+                % endif
+              </td>
 
-          <td class="cost-spot-max cost-spot-max-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
-            %if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot_max', 'N/A') != 'N/A':
-            <%
-              spot_max = inst['pricing']['us-east-1'][platform]['spot_max']
-            %>
-              <span sort="${spot_max}">
-                $${spot_max} hourly
-              </span>
-            % else:
-              <span sort="999999">unavailable</span>
-            % endif
-          </td>
-          % endif
-          % endfor
-          <td class="cost-ebs-optimized" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
-           % if inst['ebs_max_bandwidth']:
-              % if inst['pricing'].get('us-east-1', {}).get('ebs', 'N/A') != "N/A":
-                <span sort="${inst['pricing']['us-east-1']['ebs']}">
-                  $${inst['pricing']['us-east-1']['ebs']} hourly
+              <td class="cost-reserved cost-reserved-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+                % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['us-east-1'][platform]['reserved'].get('yrTerm1Standard.noUpfront', 'N/A') != "N/A":
+                  <span sort="${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']}">
+                    $${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']} hourly
+                  </span>
+                % else:
+                  <span sort="999999">unavailable</span>
+                % endif
+              </td>
+
+              % if platform in ['linux', 'rhel', 'sles', 'mswin']:
+                <td class="cost-spot-min cost-spot-min-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+                  % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot_min', 'N/A') != 'N/A':
+                    <%
+                        spot_min = inst['pricing']['us-east-1'][platform]['spot_min']
+                    %>
+                    <span sort="${spot_min}">
+                      $${spot_min} hourly
+                    </span>
+                  % else:
+                    <span sort="999999">unavailable</span>
+                  % endif
+                </td>
+
+                <td class="cost-spot-max cost-spot-max-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+                  %if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot_max', 'N/A') != 'N/A':
+                    <%
+                      spot_max = inst['pricing']['us-east-1'][platform]['spot_max']
+                    %>
+                    <span sort="${spot_max}">
+                      $${spot_max} hourly
+                    </span>
+                  % else:
+                    <span sort="999999">unavailable</span>
+                  % endif
+                </td>
+              % endif
+            % endfor
+
+            <td class="cost-ebs-optimized" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+              % if inst['ebs_max_bandwidth']:
+                % if inst['pricing'].get('us-east-1', {}).get('ebs', 'N/A') != "N/A":
+                  <span sort="${inst['pricing']['us-east-1']['ebs']}">
+                    $${inst['pricing']['us-east-1']['ebs']} hourly
+                  </span>
+                % else:
+                  <span sort="0">0</span>
+                % endif
+              % else:
+                <span sort="999999">unavailable</span>
+              % endif
+            </td>
+            <td class="cost-emr" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+              % if inst['pricing'].get('us-east-1', {}).get("emr", {}):
+                <span sort="${inst['pricing']['us-east-1']["emr"]['emr']}">
+                  $${inst['pricing']['us-east-1']["emr"]['emr']} hourly
                 </span>
               % else:
-                <span sort="0">0</span>
+                <span sort="999999">unavailable</span>
               % endif
-            % else:
-              <span sort="999999">unavailable</span>
-            % endif
-          </td>
-          <td class="cost-emr" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
-            % if inst['pricing'].get('us-east-1', {}).get("emr", {}):
-              <span sort="${inst['pricing']['us-east-1']["emr"]['emr']}">
-                $${inst['pricing']['us-east-1']["emr"]['emr']} hourly
-              </span>
-            % else:
-              <span sort="999999">unavailable</span>
-            % endif
-          </td>
-        </tr>
-% endfor
+            </td>
+          </tr>
+        % endfor
       </tbody>
     </table>
