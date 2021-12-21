@@ -767,7 +767,6 @@ def add_gpu_info(instances):
             'gpu_count': 8,
             'cuda_cores': 55296, # Source: Asked Matthew Wilson at AWS as this isn't public anywhere. 
             'gpu_memory': 320 
-<<<<<<< HEAD
         },
         'g5.xlarge': {
             'gpu_model': 'NVIDIA A10G',
@@ -824,8 +823,6 @@ def add_gpu_info(instances):
             'gpu_count': 8,
             'cuda_cores': 76928,
             'gpu_memory': 192
-=======
->>>>>>> public/master
         }
     }
     for inst in instances:
