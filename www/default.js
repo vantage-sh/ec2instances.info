@@ -133,17 +133,6 @@ function init_data_table() {
         on_data_table_initialized();
       }, 0);
     },
-    'drawCallback': function () {
-      // abort if initialization hasn't finished yet (initial draw)
-      if (g_data_table === null) {
-        return;
-      }
-
-      // Whenever the table is drawn, update the costs. This is necessary
-      // because the cost duration may have changed while a filter was being
-      // used and so some rows will need updating.
-      redraw_costs();
-    },
     // Store filtering, sorting, etc - core datatable feature
     'stateSave': true,
     // Allow export to CSV
@@ -165,8 +154,11 @@ $(document).ready(function () {
 });
 
 
-function change_cost(duration, pricing_unit) {
+function change_cost() {
   // update pricing duration menu text
+  var duration = g_settings.cost_duration;
+  var pricing_unit = g_settings.pricing_unit;
+
   var first = duration.charAt(0).toUpperCase();
   var text = first + duration.substr(1);
   $("#cost-dropdown .dropdown-toggle .text").text(text);
@@ -301,8 +293,6 @@ function change_cost(duration, pricing_unit) {
     }
   });
 
-  g_settings.cost_duration = duration;
-  g_settings.pricing_unit = pricing_unit;
   maybe_update_url();
 }
 
@@ -333,11 +323,7 @@ function change_region(region) {
     }
   });
   $("#region-dropdown .dropdown-toggle .text").text(region_name);
-  change_cost(g_settings.cost_duration, g_settings.pricing_unit);
   change_availability_zones();
-
-  // redraw table to pick up on new sort values
-  g_data_table.rows().invalidate().draw();
 }
 
 function change_reserved_term(term) {
@@ -348,15 +334,14 @@ function change_reserved_term(term) {
 
   $dropdown.find('li').removeClass('active');
   $activeLink.closest('li').addClass('active');
-
   $dropdown.find('.dropdown-toggle .text').text(term_name);
-  change_cost(g_settings.cost_duration, g_settings.pricing_unit);
 }
 
 // Update all visible costs to the current duration.
 // Called after new columns or rows are shown as their costs may be inaccurate.
 function redraw_costs() {
-  change_cost(g_settings.cost_duration, g_settings.pricing_unit);
+  change_cost();
+  g_data_table.rows().invalidate().draw();
 }
 
 function setup_column_toggle() {
@@ -510,8 +495,8 @@ function on_data_table_initialized() {
   $('[data-action=datafilter]').on('keyup', apply_min_values);
 
   change_region(g_settings.region);
-  change_cost(g_settings.cost_duration, g_settings.pricing_unit);
   change_reserved_term(g_settings.reserved_term);
+  change_cost()
 
   $.extend($.fn.dataTableExt.oStdClasses, {
     "sWrapper": "dataTables_wrapper form-inline"
@@ -529,20 +514,23 @@ function on_data_table_initialized() {
   });
 
   $("#pricing-unit-dropdown li").bind("click", function (e) {
-    change_cost(g_settings.cost_duration, e.target.getAttribute("pricing-unit"));
-    g_data_table.rows().invalidate().draw();
+    g_settings.pricing_unit = e.target.getAttribute("pricing-unit");
+    redraw_costs()
   });
 
   $("#cost-dropdown li").bind("click", function (e) {
-    change_cost(e.target.getAttribute("duration"), g_settings.pricing_unit);
+    g_settings.cost_duration = e.target.getAttribute("duration");
+    redraw_costs();
   });
 
   $("#region-dropdown li").bind("click", function (e) {
     change_region($(e.target).data('region'));
+    redraw_costs()
   });
 
   $("#reserved-term-dropdown li").bind("click", function (e) {
     change_reserved_term($(e.target).data('reservedTerm'));
+    redraw_costs()
   });
 
   // apply classes to search box
