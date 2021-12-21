@@ -46,22 +46,14 @@ def build(c):
 def scrape_ec2(c):
     """Scrape EC2 data from AWS and save to local file"""
     ec2_file = 'www/instances.json'
-    try:
-        scrape(ec2_file)
-    except Exception as e:
-        print("ERROR: Unable to scrape EC2 data")
-        print(traceback.print_exc())
+    scrape(ec2_file)
 
 
 @task
 def scrape_rds(c):
     """Scrape RDS data from AWS and save to local file"""
     rds_file = 'www/rds/instances.json'
-    try:
-        rds_scrape(rds_file)
-    except Exception as e:
-        print("ERROR: Unable to scrape RDS data")
-        print(traceback.print_exc())
+    rds_scrape(rds_file)
 
 
 @task
