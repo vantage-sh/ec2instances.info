@@ -125,7 +125,8 @@ class Instance(object):
                                 storage_needs_initialization=self.storage_needs_initialization,
                                 includes_swap_partition=self.includes_swap_partition,
                                 devices=self.num_drives,
-                                size=self.drive_size)
+                                size=self.drive_size,
+                                size_unit=self.size_unit)
         return d
 
     def __repr__(self):
@@ -407,11 +408,19 @@ def add_instance_storage_details(instances):
             if i.instance_type == instance_type:
                 i.ebs_only = True
 
-                m = re.search(r'(\d+)\s*x\s*([0-9,]+)?', storage_volumes)
+                # Supports "24 x 13,980 GB" and "2 x 1,200 GB (2.4 TB)"
+                m = re.search(r'(\d+)\s*x\s*([0-9,]+)?\s+(\w{2})?', storage_volumes)
+
                 if m:
+                    size_unit = 'GB'
+                    
+                    if m.group(3):
+                        size_unit = m.group(3)
+
                     i.ebs_only = False
                     i.num_drives = locale.atoi(m.group(1))
                     i.drive_size = locale.atoi(m.group(2))
+                    i.size_unit = size_unit
                     i.ssd = 'SSD' in storage_type
                     i.nvme_ssd = 'NVMe' in storage_type
                     i.trim_support = checkmark_char in trim_support
@@ -466,6 +475,7 @@ def add_pretty_names(instances):
         'm5d': 'M5 General Purpose',
         'g3': 'G3 Graphics GPU',
         'g4': 'G4 Graphics and Machine Learning GPU',
+        'g5': 'G5 Graphics and Machine Learning GPU',
         'p2': 'P2 General Purpose GPU',
         'p3': 'P3 High Performance GPU',
         'p4d': 'P4D Highest Performance GPU',
@@ -695,12 +705,69 @@ def add_gpu_info(instances):
             'cuda_cores': 40960,
             'gpu_memory': 256
         },
+        'g5.xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 9616,
+            'gpu_memory': 24
+        },
+        'g5.2xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 9616,
+            'gpu_memory': 24
+        },
+        'g5.4xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 9616,
+            'gpu_memory': 24
+        },
+        'g5.8xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 9616,
+            'gpu_memory': 24
+        },
+        'g5.16xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 1,
+            'cuda_cores': 9616,
+            'gpu_memory': 24
+        },
+        'g5.12xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 4,
+            'cuda_cores': 38464,
+            'gpu_memory': 96
+        },
+        'g5.24xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 4,
+            'cuda_cores': 38464,
+            'gpu_memory': 96
+        },
+        'g5.48xlarge': {
+            'gpu_model': 'NVIDIA A10G',
+            'compute_capability': 7.5,
+            'gpu_count': 8,
+            'cuda_cores': 76928,
+            'gpu_memory': 192
+        },
         'p4d.24xlarge': {
             'gpu_model': 'NVIDIA A100',
             'compute_capability': 8.0,
             'gpu_count': 8,
             'cuda_cores': 55296, # Source: Asked Matthew Wilson at AWS as this isn't public anywhere. 
             'gpu_memory': 320 
+<<<<<<< HEAD
         },
         'g5.xlarge': {
             'gpu_model': 'NVIDIA A10G',
@@ -757,6 +824,8 @@ def add_gpu_info(instances):
             'gpu_count': 8,
             'cuda_cores': 76928,
             'gpu_memory': 192
+=======
+>>>>>>> public/master
         }
     }
     for inst in instances:

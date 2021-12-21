@@ -56,6 +56,7 @@ function init_data_table() {
           "cost-spot-min",
           "cost-spot-max",
           "cost-ebs-optimized",
+          "memory-per-vcpu"
         ],
         "sType": "span-sort"
       },
@@ -529,6 +530,7 @@ function on_data_table_initialized() {
 
   $("#pricing-unit-dropdown li").bind("click", function (e) {
     change_cost(g_settings.cost_duration, e.target.getAttribute("pricing-unit"));
+    g_data_table.rows().invalidate().draw();
   });
 
   $("#cost-dropdown li").bind("click", function (e) {
@@ -552,6 +554,7 @@ function on_data_table_initialized() {
 jQuery.extend(jQuery.fn.dataTableExt.oSort, {
   "span-sort-pre": function (elem) {
     var matches = elem.match(/sort="(.*?)"/);
+
     if (matches) {
       return parseFloat(matches[1]);
     }

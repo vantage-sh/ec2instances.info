@@ -26,6 +26,7 @@
             <li><a href="javascript:;" data-region='ap-northeast-2'>Asia-Pacific (Seoul)</a></li>
             <li><a href="javascript:;" data-region='ap-southeast-1'>Asia-Pacific (Singapore)</a></li>
             <li><a href="javascript:;" data-region='ap-southeast-2'>Asia-Pacific (Sydney)</a></li>
+            <li><a href="javascript:;" data-region='ap-southeast-3'>Asia-Pacific (Jakarta)</a></li>
             <li><a href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
             <li><a href="javascript:;" data-region='ca-central-1'>Canada (Central)</a></li>
             <li><a href="javascript:;" data-region='eu-central-1'>Europe (Frankfurt)</a></li>
@@ -306,9 +307,9 @@
             <span sort="0">EBS only</span>
             % else:
             <span sort="${storage['devices']*storage['size']}">
-              ${storage['devices']*storage['size']} GiB
+              ${storage['devices'] * storage['size']} ${storage['size_unit']}
               % if storage['devices'] > 1:
-              (${storage['devices']} * ${storage['size']} GiB ${"NVMe " if storage['nvme_ssd'] else ''}${"SSD" if storage['ssd'] else 'HDD'})
+              (${storage['devices']} * ${storage['size']} ${storage['size_unit']} ${"NVMe " if storage['nvme_ssd'] else ''}${"SSD" if storage['ssd'] else 'HDD'})
               % else:
               ${"NVMe " if storage['nvme_ssd'] else ''}${"SSD" if storage['ssd'] else 'HDD'}
               % endif

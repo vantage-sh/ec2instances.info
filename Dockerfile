@@ -1,7 +1,5 @@
 FROM ubuntu:20.04
 
-MAINTAINER Brooke McKim <brooke@vantage.sh>
-
 ARG AWS_ACCESS_KEY_ID
 ARG AWS_SECRET_ACCESS_KEY
 ARG DEBIAN_FRONTEND=noninteractive

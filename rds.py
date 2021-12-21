@@ -74,7 +74,6 @@ def scrape(output_file, input_file=None):
 
     # loop through products, and only fetch available instances for now
     for sku, product in six.iteritems(data['products']):
-
         if product.get('productFamily', None) == 'Database Instance':
             attributes = product['attributes']
 
@@ -97,17 +96,21 @@ def scrape(output_file, input_file=None):
             # set the attributes in line with the ec2 index
             attributes['region'] = region
             attributes['memory'] = attributes['memory'].split(' ')[0]
-            attributes['network_performance'] = attributes['networkPerformance']
+            attributes['network_performance'] = attributes.get('networkPerformance', None)
             attributes['family'] = attributes['instanceFamily']
             attributes['instance_type'] = instance_type
             attributes['database_engine'] = attributes['databaseEngine']
-            attributes['arch'] = attributes['processorArchitecture']
+            attributes['arch'] = attributes.get('processorArchitecture', None)
             attributes['pricing'] = {}
             attributes['pricing'][region] = {}
 
+            if attributes.get('engineCode', None) == None:
+                print(f"No Engine Code found. Ignoring instance with sku={sku}")
+                continue
+
             if attributes['engineCode'] not in ['210', '220']:
                 rds_instances[sku] = attributes
-
+ 
                 if instance_type not in instances.keys():
                     # delete some attributes that are inconsistent among skus
                     new_attributes = attributes.copy() # make copy so we can keep these attributes with the sku
