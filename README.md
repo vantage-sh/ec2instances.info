@@ -47,7 +47,7 @@ Ensure that your IAM user has at least the following permissions:
 
 1. Clone the repository, if not already done:
 
-        git clone https://github.com/powdahound/ec2instances.info
+        git clone https://github.com/vantage-sh/ec2instances.info
         cd ec2instances.info
 
 1. Build a docker image:
@@ -71,7 +71,7 @@ apt-get install python-dev libxml2-dev libxslt1-dev libssl-dev`.
 
 Then:
 
-    git clone https://github.com/powdahound/ec2instances.info
+    git clone https://github.com/vantage-sh/ec2instances.info
     cd ec2instances.info/
     python3 -m venv env
     source env/bin/activate
