@@ -159,32 +159,6 @@ function change_cost() {
   var duration = g_settings.cost_duration;
   var pricing_unit = g_settings.pricing_unit;
 
-  var first = duration.charAt(0).toUpperCase();
-  var text = first + duration.substr(1);
-  $("#cost-dropdown .dropdown-toggle .text").text(text);
-
-  // update pricing duration selected menu option
-  $('#cost-dropdown li a').each(function (i, e) {
-    e = $(e);
-    if (e.attr('duration') == duration) {
-      e.parent().addClass('active');
-    } else {
-      e.parent().removeClass('active');
-    }
-  });
-
-  // update pricing unit selected menu option
-  $('#pricing-unit-dropdown li a').each(function (i, e) {
-    e = $(e);
-    if (e.attr('pricing-unit') == pricing_unit) {
-      e.parent().addClass('active');
-      // update pricing unit menu text
-      $("#pricing-unit-dropdown .dropdown-toggle .text").text(e.text());
-    } else {
-      e.parent().removeClass('active');
-    }
-  });
-
   var hour_multipliers = {
     "secondly": 1 / (60 * 60),
     "hourly": 1,
@@ -515,11 +489,36 @@ function on_data_table_initialized() {
 
   $("#pricing-unit-dropdown li").bind("click", function (e) {
     g_settings.pricing_unit = e.target.getAttribute("pricing-unit");
+    
+    // update pricing unit selected menu option
+    $('#pricing-unit-dropdown li a').each(function (i, e) {
+      e = $(e);
+      if (e.attr('pricing-unit') == g_settings.pricing_unit) {
+        e.parent().addClass('active');
+        // update pricing unit menu text
+        $("#pricing-unit-dropdown .dropdown-toggle .text").text(e.text());
+      } else {
+        e.parent().removeClass('active');
+      }
+    });
+
     redraw_costs()
   });
 
   $("#cost-dropdown li").bind("click", function (e) {
     g_settings.cost_duration = e.target.getAttribute("duration");
+    $('#cost-dropdown li a').each(function (i, e) {
+      e = $(e);
+      if (e.attr('duration') == g_settings.cost_duration) {
+        var first = g_settings.cost_duration.charAt(0).toUpperCase();
+        var text = first + g_settings.cost_duration.substr(1);
+        $("#cost-dropdown .dropdown-toggle .text").text(text);
+        e.parent().addClass('active');
+      } else {
+        e.parent().removeClass('active');
+      }
+    });
+  
     redraw_costs();
   });
 
