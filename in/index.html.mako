@@ -7,7 +7,7 @@
 
     <%block name="header">
     <h1>EC2Instances.info <small>Easy Amazon <b>EC2</b> Instance Comparison</small></h1>
-    <div class='announcement'>Announcing The Cloud Cost Handbook: A free, open-source guide of best practices related to managing cloud costs. <a href='https://handbook.vantage.sh' target='_blank'>Learn more</a></div>
+    <div class='announcement'>Give feedback and join the discussion by <a href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw">joining</a> the Vantage slack community.</div>
     </%block>
 
     <div class="row" id="menu">
