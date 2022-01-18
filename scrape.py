@@ -248,9 +248,10 @@ def add_eni_info(instances):
         max_enis = etree.tostring(r[1], method='text').decode()
 
         # handle <cards>x<interfaces> format
-        if 'x' in max_enis:
-            parts = max_enis.split('x')
-            max_enis = locale.atoi(parts[0]) * locale.atoi(parts[1])
+        if 'per network card' in max_enis:
+            match = re.search(r"per network card \((.*)\)", max_enis)
+            eni_values = match.group(1).replace('or', '').replace(' ', '').split(',')
+            max_enis = sorted(list(map(int, eni_values)))[-1]
         else:
             max_enis = locale.atoi(max_enis)
 
