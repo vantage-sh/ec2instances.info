@@ -14,6 +14,7 @@ from invocations.console import confirm
 from six.moves import SimpleHTTPServer, socketserver
 
 from rds import scrape as rds_scrape
+from cache import scrape as cache_scrape
 from render import render
 from scrape import scrape
 
@@ -37,8 +38,9 @@ HTTP_PORT = os.getenv('HTTP_PORT', '8080')
 @task
 def build(c):
     """Scrape AWS sources for data and build the site"""
-    scrape_ec2(c)
-    scrape_rds(c)
+    # scrape_ec2(c)
+    # scrape_rds(c)
+    # scrape_cache(c)
     render_html(c)
 
 
@@ -64,6 +66,15 @@ def scrape_rds(c):
         print(traceback.print_exc())
 
 
+def scrape_cache(c):
+    """Scrape Cache instance data from AWS and save to local file"""
+    cache_file = 'www/cache/instances.json'
+    try:
+        cache_scrape(cache_file)
+    except Exception as e:
+        print("ERROR: Unable to scrape Cache data")
+        print(traceback.print_exc())
+
 @task
 def serve(c):
     """Serve site contents locally for development"""
@@ -78,6 +89,7 @@ def render_html(c):
     """Render HTML but do not update data from Amazon"""
     render('www/instances.json', 'in/index.html.mako', 'www/index.html')
     render('www/rds/instances.json', 'in/rds.html.mako', 'www/rds/index.html')
+    render('www/cache/instances.json', 'in/cache.html.mako', 'www/cache/index.html')
 
 
 @task
