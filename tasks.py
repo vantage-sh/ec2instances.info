@@ -30,7 +30,7 @@ BUCKET_CALLING_FORMAT = OrdinaryCallingFormat()
 abspath = lambda filename: os.path.join(os.path.abspath(os.path.dirname(__file__)),
                                         filename)
 
-HTTP_HOST = os.getenv('HTTP_HOST', '127.0.0.1')
+HTTP_HOST = os.getenv('HTTP_HOST', '0.0.0.0')
 HTTP_PORT = os.getenv('HTTP_PORT', '8080')
 
 
