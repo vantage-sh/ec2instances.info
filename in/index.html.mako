@@ -283,7 +283,11 @@
             </td>
             <td class="gpus">${inst['GPU']}</td>
             <td class="gpu_model">${inst['GPU_model']}</td>
-            <td class="gpu_memory">${inst['GPU_memory']} GiB</td>
+            <td class="gpu_memory">
+              <span sort="${inst['GPU_memory']}">
+                ${inst['GPU_memory']} GiB
+              </span>
+            </td>
             <td class="compute_capability">${inst['compute_capability']}</td>
             <td class="fpga">${inst['FPGA']}</td>
             <td class="ecu-per-vcpu">

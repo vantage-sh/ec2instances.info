@@ -55,7 +55,8 @@ function init_data_table() {
           "cost-spot-min",
           "cost-spot-max",
           "cost-ebs-optimized",
-          "memory-per-vcpu"
+          "memory-per-vcpu",
+          "gpu_memory"
         ],
         "sType": "span-sort"
       },
