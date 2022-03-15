@@ -4,7 +4,7 @@ import re
 import json
 import locale
 import ec2
-
+import os
 from six.moves.urllib import request as urllib2
 
 # Following advice from https://stackoverflow.com/a/1779324/216138
@@ -833,8 +833,9 @@ def scrape(data_file):
     add_gpu_info(all_instances)
     print("Adding availability zone details...")
     add_availability_zone_info(all_instances)
-
-    with open(data_file, 'w') as f:
+    
+    os.makedirs(os.path.dirname(data_file), exist_ok=True)
+    with open(data_file, 'w+') as f:
         json.dump([i.to_dict() for i in all_instances],
                   f,
                   indent=2,

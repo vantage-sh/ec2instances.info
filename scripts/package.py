@@ -19,7 +19,7 @@ subprocess.call(['mkdir', '-p', path('ec2instances/info')])
 subprocess.call(['touch', path('ec2instances/__init__.py')])
 
 
-with open(path('ec2instances/info/__init__.py'), 'w') as output:
+with open(path('ec2instances/info/__init__.py'), 'w+') as output:
     # Final output will look like the following, though pretty-printed:
     #
     #  ec2 = [{'instance_type': 't2.micro', ...}, ...]

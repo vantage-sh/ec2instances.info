@@ -4,7 +4,7 @@ import mako.exceptions
 import io
 import json
 import datetime
-
+import os
 
 def network_sort(inst):
     perf = inst['network_performance']
@@ -118,7 +118,8 @@ def render(data_file, template_file, destination_file):
     instance_azs_json = compress_instance_azs(instances)
     print("Rendering to %s..." % destination_file)
     generated_at = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')
-    with io.open(destination_file, 'w', encoding="utf-8") as fh:
+    os.makedirs(os.path.dirname(destination_file), exist_ok=True)
+    with io.open(destination_file, 'w+', encoding="utf-8") as fh:
         try:
             fh.write(template.render(
                 instances=instances,
