@@ -22,8 +22,8 @@ function init_data_table() {
   $("#data thead tr").clone(true).appendTo("#data thead");
   // add a text input filter to each column of the new row
   $("#data thead tr:eq(1) th").each(function (i) {
-    var title = $(this).text();
-    $(this).html("<input type='text' placeholder='Search '" + title + "' />");
+    var title = $(this).text().trim();
+    $(this).html("<input type='text' placeholder='Search " + title + "' />");
     $("input", this).on( "keyup change", function () {
       if (g_data_table.column(i).search() !== this.value) {
         g_data_table.column(i).search(this.value).draw();
@@ -55,7 +55,8 @@ function init_data_table() {
           "cost-spot-min",
           "cost-spot-max",
           "cost-ebs-optimized",
-          "memory-per-vcpu"
+          "memory-per-vcpu",
+          "gpu_memory"
         ],
         "sType": "span-sort"
       },

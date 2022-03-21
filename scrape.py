@@ -4,7 +4,7 @@ import re
 import json
 import locale
 import ec2
-
+import os
 from six.moves.urllib import request as urllib2
 
 # Following advice from https://stackoverflow.com/a/1779324/216138
@@ -436,7 +436,7 @@ def add_t2_credits(instances):
     # It seems it's no longer dynamically loaded
     url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-credits-baseline-concepts.html"
     tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
-    table = tree.xpath('//div[@class="table-contents"]//table')[0]
+    table = tree.xpath('//div[@class="table-contents"]//table')[1]
     rows = table.xpath('.//tr[./td]')
     assert len(rows) > 0, "Failed to find T2 CPU credit info"
 
@@ -833,8 +833,9 @@ def scrape(data_file):
     add_gpu_info(all_instances)
     print("Adding availability zone details...")
     add_availability_zone_info(all_instances)
-
-    with open(data_file, 'w') as f:
+    
+    os.makedirs(os.path.dirname(data_file), exist_ok=True)
+    with open(data_file, 'w+') as f:
         json.dump([i.to_dict() for i in all_instances],
                   f,
                   indent=2,

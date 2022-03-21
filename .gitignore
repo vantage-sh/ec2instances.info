@@ -11,3 +11,6 @@ ec2instances
 .vscode
 .envrc
 .direnv
+www/index.html
+www/instances.json
+www/rds/
