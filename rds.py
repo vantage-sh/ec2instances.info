@@ -175,10 +175,6 @@ def scrape(output_file, input_file=None):
                     # print(f"WARNING: Received reserved pricing info for unknown sku={sku}")
                     continue
 
-                # skip multi-az
-                if instance['deploymentOption'] != 'Single-AZ':
-                    continue
-
                 region = instance['region']
 
                 # create a regional hash
