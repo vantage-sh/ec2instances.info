@@ -9,8 +9,9 @@ build
 dist
 ec2instances
 .vscode
-.envrc
 .direnv
+.mypy_cache
 www/index.html
 www/instances.json
 www/rds/
+result
