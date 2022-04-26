@@ -6,3 +6,6 @@ pypi: package
 	python setup.py sdist bdist_wheel upload
 
 publish: package pypi
+
+black:
+	@black .
