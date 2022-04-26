@@ -18,6 +18,7 @@ let
   tools = with pkgs; {
     cli = [
       jq
+      just
     ];
     formatters = [
       black
