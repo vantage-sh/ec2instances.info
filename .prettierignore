@@ -1,0 +1,7 @@
+.mypy_cache/
+.direnv/
+result/
+env/
+bootstrap/
+instances.json
+index.html
