@@ -7,5 +7,13 @@ pypi: package
 
 publish: package pypi
 
+format: black prettier nixpkgs-fmt
+
 black:
-	@black .
+	black .
+
+prettier:
+	prettier --write .
+
+nixpkgs-fmt:
+	nixpkgs-fmt .

@@ -3,5 +3,4 @@ python: 3.8
 install:
   - export BOTO_CONFIG=/dev/null
   - pip install -r requirements.txt
-script:
-  invoke build deploy
+script: invoke build deploy

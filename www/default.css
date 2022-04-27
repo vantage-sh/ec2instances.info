@@ -22,9 +22,9 @@ body {
   min-width: 600px;
 }
 
-  #filters input {
-    width: 5rem;
-  }
+#filters input {
+  width: 5rem;
+}
 
 #data {
   margin-top: 10px;
@@ -41,11 +41,13 @@ body {
   cursor: pointer;
 }
 
-#data tr.highlight, #data tr.highlight:hover {
-  background-color: #D3FFFF;
+#data tr.highlight,
+#data tr.highlight:hover {
+  background-color: #d3ffff;
 }
 
-#data th, #data td {
+#data th,
+#data td {
   white-space: nowrap;
 }
 
@@ -53,13 +55,13 @@ body {
   background-color: #eee;
 }
 
-#data th input[type="text"] {
+#data th input[type='text'] {
   width: 100%;
 }
 
 #data td {
   font-size: 13px;
-   text-align: right;
+  text-align: right;
 }
 
 #data td.name {
@@ -132,12 +134,22 @@ table.table thead .sorting_desc_disabled {
   *cursor: hand;
 }
 
-table.table thead .sorting { background: url('datatables/images/sort_both.png') no-repeat center right; }
-table.table thead .sorting_asc { background: url('datatables/images/sort_asc.png') no-repeat center right; }
-table.table thead .sorting_desc { background: url('datatables/images/sort_desc.png') no-repeat center right; }
+table.table thead .sorting {
+  background: url('datatables/images/sort_both.png') no-repeat center right;
+}
+table.table thead .sorting_asc {
+  background: url('datatables/images/sort_asc.png') no-repeat center right;
+}
+table.table thead .sorting_desc {
+  background: url('datatables/images/sort_desc.png') no-repeat center right;
+}
 
-table.table thead .sorting_asc_disabled { background: url('datatables/images/sort_asc_disabled.png') no-repeat center right; }
-table.table thead .sorting_desc_disabled { background: url('datatables/images/sort_desc_disabled.png') no-repeat center right; }
+table.table thead .sorting_asc_disabled {
+  background: url('datatables/images/sort_asc_disabled.png') no-repeat center right;
+}
+table.table thead .sorting_desc_disabled {
+  background: url('datatables/images/sort_desc_disabled.png') no-repeat center right;
+}
 
 /* This class is applied to the DataTables search box by our own code once it renders */
 input.search {

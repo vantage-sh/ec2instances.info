@@ -47,20 +47,20 @@ Ensure that your IAM user has at least the following permissions:
 
 ## Running in Docker (recommended)
 
-1. Clone the repository, if not already done:
+1.  Clone the repository, if not already done:
 
         git clone https://github.com/vantage-sh/ec2instances.info
         cd ec2instances.info
 
-1. Build a docker image:
+1.  Build a docker image:
 
         docker build -t ec2instances.info .
 
-1. Run a container from the built docker image:
+1.  Run a container from the built docker image:
 
         docker run -d --name some-container -p 8080:8080 ec2instances.info
 
-1. Open [localhost:8080](http://localhost:8080) in your browser to see it in action.
+1.  Open [localhost:8080](http://localhost:8080) in your browser to see it in action.
 
 ## Detailed local build instructions
 
@@ -68,8 +68,7 @@ Note: These instructions are only kept here for reference, the Docker
 instructions mentioned above hide all these details and are recommended for
 local execution.
 
-Make sure you have LibXML and Python development files.  On Ubuntu, run `sudo
-apt-get install python-dev libxml2-dev libxslt1-dev libssl-dev`.
+Make sure you have LibXML and Python development files. On Ubuntu, run `sudo apt-get install python-dev libxml2-dev libxslt1-dev libssl-dev`.
 
 Then:
 
