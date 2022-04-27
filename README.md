@@ -73,8 +73,7 @@ Note: These instructions are only kept here for reference, the Docker
 instructions mentioned above hide all these details and are recommended for
 local execution.
 
-Make sure you have LibXML and Python development files.  On Ubuntu, run `sudo
-apt-get install python-dev libxml2-dev libxslt1-dev libssl-dev`.
+Make sure you have LibXML and Python development files. On Ubuntu, run `sudo apt-get install python-dev libxml2-dev libxslt1-dev libssl-dev`.
 
 Then:
 ```bash
