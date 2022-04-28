@@ -1,5 +1,7 @@
 # EC2Instances.info
 
+[![uses aws](https://img.shields.io/badge/uses-AWS-yellow)](https://aws.amazon.com/)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![python style: black](https://img.shields.io/badge/python%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
 
 ![Vantage Picture](https://uploads-ssl.webflow.com/5f9ba05ba40d6414f341df34/5f9bb1764b6670c6f7739564_moutain-scene.svg)
@@ -24,43 +26,47 @@ for anyone to join with a devoted channel named #instances-vantage.sh.
 
 ## Running locally
 
-First, you'll need to provide credentials so that boto can access the AWS API.
+First, you'll need to provide credentials so that boto can access the AWS API. [See a terraform example here](./docs/terraform/iam.tf)!
 Options for setting this up are described in the [boto
 docs](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html).
 Ensure that your IAM user has at least the following permissions:
 
+```json
     {
         "Version": "2012-10-17",
         "Statement": [
             {
                 "Effect": "Allow",
-                "Action": "ec2:DescribeInstanceTypes",
-                "Resource": "*"
-            },
-            {
-                "Effect": "Allow",
-                "Action": "pricing:*",
+                "Action": [
+                    "ec2:DescribeInstanceTypes",
+                    "ec2:DescribeRegions",
+                    "pricing:*"
+                ],
                 "Resource": "*"
             }
         ]
     }
+```
 
 ## Running in Docker (recommended)
 
-1.  Clone the repository, if not already done:
+1. Clone the repository, if not already done:
+```bash
+git clone https://github.com/vantage-sh/ec2instances.info
+cd ec2instances.info
+```
 
-        git clone https://github.com/vantage-sh/ec2instances.info
-        cd ec2instances.info
+2. Build a docker image:
+```bash
+docker build -t ec2instances.info .
+```
 
-1.  Build a docker image:
+3. Run a container from the built docker image:
+```bash
+docker run -d --name some-container -p 8080:8080 ec2instances.info
+```
 
-        docker build -t ec2instances.info .
-
-1.  Run a container from the built docker image:
-
-        docker run -d --name some-container -p 8080:8080 ec2instances.info
-
-1.  Open [localhost:8080](http://localhost:8080) in your browser to see it in action.
+4. Open [localhost:8080](http://localhost:8080) in your browser to see it in action.
 
 ## Detailed local build instructions
 
@@ -71,16 +77,17 @@ local execution.
 Make sure you have LibXML and Python development files. On Ubuntu, run `sudo apt-get install python-dev libxml2-dev libxslt1-dev libssl-dev`.
 
 Then:
-
-    git clone https://github.com/vantage-sh/ec2instances.info
-    cd ec2instances.info/
-    python3 -m venv env
-    source env/bin/activate
-    pip install -r requirements.txt
-    invoke build
-    invoke serve
-    open http://localhost:8080
-    deactivate # to exit virtualenv
+```bash
+git clone https://github.com/vantage-sh/ec2instances.info
+cd ec2instances.info/
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+invoke build
+invoke serve
+open http://localhost:8080
+deactivate # to exit virtualenv
+```
 
 ## Requirements
 
