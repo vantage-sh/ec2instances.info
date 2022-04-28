@@ -7,7 +7,7 @@
 
     <%block name="header">
     <h1>EC2Instances.info <small>Easy Amazon <b>EC2</b> Instance Comparison</small></h1>
-    <div class='announcement'>Give feedback and join the discussion by <a href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw">joining</a> the Vantage slack community.</div>
+    <div class='announcement'>Understand your AWS bill with <a href="https://www.vantage.sh/features/cost-reports">Vantage Cost Reports</a> and the <a href="https://handbook.vantage.sh/">Cloud Costs Handbook</a>. Build pricing apps with the <a href="https://vantage.readme.io/reference/general">Vantage API.</a></div>
     </%block>
 
     <div class="row" id="menu">

@@ -5,14 +5,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="description" content="A free and easy-to-use tool for comparing EC2 Instance features and prices."></head>
     <title>Amazon EC2 Instance Comparison</title>
-    <link rel="stylesheet" href="/default.css" media="screen">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" media="screen">
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="/default.css" media="screen">
+    <link rel="icon" type="image/png" href="https://assets.vantage.sh/www/favicon-32x32.png">
   </head>
 
   <body class="ec2instances">
     <div class="page-header">
-
+      <span class="pull-right">
+        &nbsp;&nbsp;&nbsp;<a href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw">Discuss in Slack</a>
+      </span>
       <span class="pull-right">
         <iframe src="https://ghbtns.com/github-btn.html?user=vantage-sh&repo=ec2instances.info&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
       </span>
@@ -22,8 +24,6 @@
       <ul class="nav nav-tabs">
         <li role="presentation" class="${'active' if self.attr.active_ == 'ec2' else ''}"><a href="/">EC2</a></li>
         <li role="presentation" class="${'active' if self.attr.active_ == 'rds' else ''}"><a href="/rds/">RDS</a></li>
-
-        <li><a href="https://vantage.readme.io/" target="_blank">API Documentation</a></li>
       </ul>
     </div>
 

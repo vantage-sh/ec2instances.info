@@ -3,19 +3,19 @@ body {
 }
 
 .announcement {
-  background-color: #F5F6FF;
+  background-color: #F9E6FF;
   width: 100%;
   margin: 20px 0;
   padding: 20px 20px 20px 56px;
-  color: #222B86;
-  background-image: url(https://vantage-public.s3.amazonaws.com/instances_api_icon.png);
+  color: #5A0A76;
+  background-image: url(https://pbs.twimg.com/profile_images/1468272865820688394/Te1dOx4M_400x400.jpg);
   background-repeat: no-repeat;
-  background-size: 44px 30px;
+  background-size: 30px 30px;
   background-position: 10px 12px;
 }
 
 .announcement a {
-  color:#222B86;
+  color:#5A0A76;
   font-weight:bold;
 }
 
@@ -59,7 +59,7 @@ body {
 }
 
 #data tr.highlight, #data tr.highlight:hover {
-  background-color: #D3FFFF;
+  background-color: #F9E6FF;
 }
 
 #data th, #data td {
@@ -118,11 +118,13 @@ body {
 /* Bootstrap overrides */
 .dropdown-menu .active a {
   color: #fff !important;
+  background: #9C25C7 !important;
 }
 
 .dropdown-menu li > a:hover {
-  background: #0044cc !important;
+  background: #F9E6FF !important;
 }
+
 
 .share-url {
   text-align: left;
@@ -137,6 +139,20 @@ body {
 
 .well p:last-child {
   margin-bottom: 0;
+}
+
+.btn-primary {
+  color: #fff !important;
+  background-color: #9C25C7 !important;
+  border-color: #5A0A76 !important;
+}
+
+.btn-primary:hover {
+  color: #fff !important;
+}
+
+.btn-primary:active {
+  color: #fff !important;
 }
 
 /* DataTables: http://datatables.net/blog/Twitter_Bootstrap_2 */
