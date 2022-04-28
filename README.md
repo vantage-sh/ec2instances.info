@@ -32,36 +32,35 @@ docs](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuratio
 Ensure that your IAM user has at least the following permissions:
 
 ```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
     {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Effect": "Allow",
-                "Action": [
-                    "ec2:DescribeInstanceTypes",
-                    "ec2:DescribeRegions",
-                    "pricing:*"
-                ],
-                "Resource": "*"
-            }
-        ]
+      "Effect": "Allow",
+      "Action": ["ec2:DescribeInstanceTypes", "ec2:DescribeRegions", "pricing:*"],
+      "Resource": "*"
     }
+  ]
+}
 ```
 
 ## Running in Docker (recommended)
 
 1. Clone the repository, if not already done:
+
 ```bash
 git clone https://github.com/vantage-sh/ec2instances.info
 cd ec2instances.info
 ```
 
 2. Build a docker image:
+
 ```bash
 docker build -t ec2instances.info .
 ```
 
 3. Run a container from the built docker image:
+
 ```bash
 docker run -d --name some-container -p 8080:8080 ec2instances.info
 ```
@@ -77,6 +76,7 @@ local execution.
 Make sure you have LibXML and Python development files. On Ubuntu, run `sudo apt-get install python-dev libxml2-dev libxslt1-dev libssl-dev`.
 
 Then:
+
 ```bash
 git clone https://github.com/vantage-sh/ec2instances.info
 cd ec2instances.info/
