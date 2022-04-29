@@ -1,0 +1,56 @@
+{
+  
+  "executionRoleArn": "arn:aws:iam::153271892032:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": null,
+        "options": {
+          "awslogs-group": "/ecs/instances-production-app",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "mountPoints": [],
+      "volumesFrom": [],
+      "portMappings": [
+        {
+          "hostPort": 8080,
+          "protocol": "tcp",
+          "containerPort": 8080
+        }
+      ],
+      "cpu": 0,
+      "environment": [],
+      "image": "",
+      "healthCheck": {
+        "retries": 5,
+        "command": [
+          "CMD-SHELL",
+          "curl -f localhost:8080 || exit 1"
+        ],
+        "timeout": 60,
+        "interval": 300,
+        "startPeriod": 30
+      },
+      "name": "instances-app",
+      "essential": true
+    }
+  ],
+  "placementConstraints": [],
+  "memory": "512",
+  "taskRoleArn": "arn:aws:iam::153271892032:role/ecsTaskExecutionRole",
+  "compatibilities": [
+    "EC2",
+    "FARGATE"
+  ],
+  "family": "instances-production-app",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "networkMode": "awsvpc",
+  "cpu": "256",
+  "status": "ACTIVE",
+  "volumes": []
+}

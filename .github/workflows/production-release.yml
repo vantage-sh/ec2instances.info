@@ -1,0 +1,89 @@
+name: Production Release
+concurrency: production-release
+on:
+  workflow_dispatch:
+
+  repository_dispatch:
+    types: ['trigger-production-release']
+
+env:
+  IMAGE: 153271892032.dkr.ecr.us-east-1.amazonaws.com/instances-app:${{ github.sha }}
+  CI_ROLE: arn:aws:iam::153271892032:role/core-ci
+  ECS_CLUSTER: vantage-production
+  SERVICE: instances-production-app
+
+jobs:
+  build:
+    name: Image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+          role-to-assume: ${{ env.CI_ROLE }}
+          role-skip-session-tagging: true
+          role-duration-seconds: 3600
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: production
+
+      - name: Login to Github Registry
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: "${{ env.IMAGE }"
+          file: Dockerfile
+          build-args:
+      - name: APP Task Interpolation (app)
+        id: app-task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ecs.json
+          container-name: instances-app
+          image: ${{ env.IMAGE }}
+
+      - name: APP Deploy
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.app-task-def.outputs.task-definition }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          service: ${{ env.SERVICE }}
+
+      - name: Success Slack Notify
+        if: ${{ success() }}
+        uses: slackapi/slack-github-action@v1.16.0
+        with:
+          payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\":rocket: **${{ env.ECS_CLUSTER }}** deployed. ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}}]}"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
+      - name: Failure Slack Notify
+        if: ${{ failure() }}
+        uses: slackapi/slack-github-action@v1.16.0
+        with:
+          payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\":see_no_evil: **${{ env.ECS_CLUSTER }}** wasn't deployed. ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}}]}"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
