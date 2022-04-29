@@ -44,7 +44,7 @@ jobs:
           push: true
           tags: "${{ env.IMAGE }}"
           file: Dockerfile
-          build-args:
+          build-args: AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: APP Task Interpolation (app)
         id: app-task-def
