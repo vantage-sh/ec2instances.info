@@ -65,7 +65,7 @@ jobs:
         if: ${{ success() }}
         uses: slackapi/slack-github-action@v1.16.0
         with:
-          payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\":rocket: **${{ env.ECS_CLUSTER }}** deployed. ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}}]}"
+          payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\":rocket: **${{ env.SERVICE }}** deployed. ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}}]}"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
@@ -74,7 +74,7 @@ jobs:
         if: ${{ failure() }}
         uses: slackapi/slack-github-action@v1.16.0
         with:
-          payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\":see_no_evil: **${{ env.ECS_CLUSTER }}** wasn't deployed. ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}}]}"
+          payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\":see_no_evil: **${{ env.SERVICE }}** wasn't deployed. ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}}]}"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
