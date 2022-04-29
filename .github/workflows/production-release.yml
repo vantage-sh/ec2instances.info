@@ -35,15 +35,6 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          ref: production
-
-      - name: Login to Github Registry
-        uses: docker/login-action@v1 
-        with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: ghcr.io
 
       - name: Build and push
         id: docker_build
