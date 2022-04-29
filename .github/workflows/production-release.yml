@@ -1,10 +1,9 @@
 name: Production Release
 concurrency: production-release
 on:
-  workflow_dispatch:
-
-  repository_dispatch:
-    types: ['trigger-production-release']
+  push:
+    branches:
+      - master
 
 env:
   IMAGE: 153271892032.dkr.ecr.us-east-1.amazonaws.com/instances-app:${{ github.sha }}
@@ -52,9 +51,10 @@ jobs:
         with:
           context: .
           push: true
-          tags: "${{ env.IMAGE }"
+          tags: "${{ env.IMAGE }}"
           file: Dockerfile
           build-args:
+
       - name: APP Task Interpolation (app)
         id: app-task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
