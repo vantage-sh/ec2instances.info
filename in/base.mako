@@ -2,6 +2,14 @@
 
 <html lang="en">
   <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TBZCV32');</script>
+    <!-- End Google Tag Manager -->
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="description" content="A free and easy-to-use tool for comparing EC2 Instance features and prices."></head>
     <title>Amazon EC2 Instance Comparison</title>
@@ -11,6 +19,11 @@
   </head>
 
   <body class="ec2instances">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TBZCV32"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
     <div class="page-header">
       <span class="pull-right">
         &nbsp;&nbsp;&nbsp;<a href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw">Discuss in Slack</a>
@@ -88,16 +101,5 @@
     <script src="/default.js" type="text/javascript" charset="utf-8"></script>
 
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-    <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-    try {
-      var pageTracker = _gat._getTracker("UA-4372467-3");
-      pageTracker._trackPageview();
-    } catch(err) {}
-    </script>
   </body>
 </html>
