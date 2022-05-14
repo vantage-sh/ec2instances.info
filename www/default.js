@@ -136,15 +136,16 @@ function init_data_table() {
     stateDuration: 0,
 
     // Allow export to CSV: only visible columns and only current filtered data
-    buttons: [{
-      extend: 'csv',
-      text: 'CSV',
-      exportOptions: {
-        modifier: { search: 'applied' },
-        columns: ':visible'
-      }
-    }],
-
+    buttons: [
+      {
+        extend: 'csv',
+        text: 'CSV',
+        exportOptions: {
+          modifier: {search: 'applied'},
+          columns: ':visible',
+        },
+      },
+    ],
   });
 
   g_data_table
