@@ -58,7 +58,6 @@ def add_pretty_names(instances):
         i["pretty_name"] = " ".join([b for b in bits if b])
 
 
-
 def scrape(output_file, input_file=None):
     # if an argument is given, use that as the path for the json file
     if input_file:

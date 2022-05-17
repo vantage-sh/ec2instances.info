@@ -69,12 +69,13 @@ def scrape_rds(c):
 
 def scrape_cache(c):
     """Scrape Cache instance data from AWS and save to local file"""
-    cache_file = 'www/cache/instances.json'
+    cache_file = "www/cache/instances.json"
     try:
         cache_scrape(cache_file)
     except Exception as e:
         print("ERROR: Unable to scrape Cache data")
         print(traceback.print_exc())
+
 
 @task
 def serve(c):
@@ -94,9 +95,9 @@ def serve(c):
 @task
 def render_html(c):
     """Render HTML but do not update data from Amazon"""
-    render('www/instances.json', 'in/index.html.mako', 'www/index.html')
-    render('www/rds/instances.json', 'in/rds.html.mako', 'www/rds/index.html')
-    render('www/cache/instances.json', 'in/cache.html.mako', 'www/cache/index.html')
+    render("www/instances.json", "in/index.html.mako", "www/index.html")
+    render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
+    render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
 
 
 @task
