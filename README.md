@@ -114,3 +114,14 @@ Vantage also works on the following relevant projects:
 - [The AWS Cost Leaderboard](https://leaderboard.vantage.sh/) - A hosted site of
   the top AWS cost centers.
 - [Vantage](https://vantage.sh/) - A cloud cost transparency platform.
+
+## [Internal] Upstreaming changes from ec2instances.info
+```
+git checkout upstream
+git remote add ec2instances.info git@github.com:vantage-sh/ec2instances.info
+git remote update
+git merge ec2instances.info/master
+git checkout master
+git merge upstream
+git push
+```
