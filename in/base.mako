@@ -37,6 +37,7 @@
       <ul class="nav nav-tabs">
         <li role="presentation" class="${'active' if self.attr.active_ == 'ec2' else ''}"><a href="/">EC2</a></li>
         <li role="presentation" class="${'active' if self.attr.active_ == 'rds' else ''}"><a href="/rds/">RDS</a></li>
+        <li role="presentation" class="${'active' if self.attr.active_ == 'cache' else ''}"><a href="/cache/">ElastiCache</a></li>
       </ul>
     </div>
 

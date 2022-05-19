@@ -30,6 +30,7 @@ function init_data_table() {
       }
     });
   });
+  console.log('here 1');
   g_data_table = $('#data').DataTable({
     bPaginate: false,
     bInfo: false,
@@ -123,7 +124,7 @@ function init_data_table() {
       },
     ],
     // default sort by linux cost
-    aaSorting: [[15, 'asc']],
+    aaSorting: [[6, 'asc']],
     initComplete: function () {
       // fire event in separate context so that calls to get_data_table()
       // receive the cached object.
@@ -147,13 +148,14 @@ function init_data_table() {
       },
     ],
   });
-
+  console.log('here 2');
   g_data_table
     .buttons()
     .container()
     .find('a')
     .addClass('btn btn-primary')
     .appendTo($('#menu > div'));
+  console.log('here 3');
 
   return g_data_table;
 }
