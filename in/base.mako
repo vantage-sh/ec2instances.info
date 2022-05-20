@@ -11,7 +11,7 @@
     <!-- End Google Tag Manager -->
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="description" content="A free and easy-to-use tool for comparing EC2 Instance features and prices."></head>
+    <meta name="description" content="A free and easy-to-use tool for comparing EC2, RDS, and ElastiCache Instance prices."></head>
     <title>Amazon EC2 Instance Comparison</title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" media="screen">
     <link rel="stylesheet" href="/default.css" media="screen">
@@ -25,8 +25,9 @@
     <!-- End Google Tag Manager (noscript) -->
     
     <div class="page-header">
+      <span class="pull-right"><a href="https://vantage.sh/careers">Work at Vantage</a></span>
       <span class="pull-right">
-        &nbsp;&nbsp;&nbsp;<a href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw">Discuss in Slack</a>
+        &nbsp;&nbsp;&nbsp;<a href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw">Slack</a>&nbsp;&nbsp;&nbsp;
       </span>
       <span class="pull-right">
         <iframe src="https://ghbtns.com/github-btn.html?user=vantage-sh&repo=ec2instances.info&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>

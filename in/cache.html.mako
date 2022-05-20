@@ -7,6 +7,7 @@
 
     <%block name="header">
     <h1>EC2Instances.info <small>Easy Amazon <b>ElastiCache</b> Instance Comparison</small></h1>
+    <div class='announcement'>Understand your AWS bill with <a href="https://www.vantage.sh/features/cost-reports">Vantage Cost Reports</a> and the <a href="https://handbook.vantage.sh/">Cloud Costs Handbook</a>. Build pricing apps with the <a href="https://vantage.readme.io/reference/general">Vantage API.</a></div>
     </%block>
 
     <div class="row" id="menu">
