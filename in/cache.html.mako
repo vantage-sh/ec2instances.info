@@ -4,6 +4,11 @@
   import six
 %>
 <%inherit file="base.mako" />
+    
+    <%block name="meta">
+        <title>Amazon ElastiCache Instance Comparison</title>
+        <meta name="description" content="A free and easy-to-use tool for comparing ElastiCache Instance features and prices."></head>
+    </%block>
 
     <%block name="header">
     <h1>EC2Instances.info <small>Easy Amazon <b>ElastiCache</b> Instance Comparison</small></h1>
