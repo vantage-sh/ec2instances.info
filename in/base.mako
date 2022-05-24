@@ -3,8 +3,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="description" content="A free and easy-to-use tool for comparing EC2 Instance features and prices."></head>
-    <title>Amazon EC2 Instance Comparison</title>
+    <%block name="meta"/>
     <link rel="stylesheet" href="/default.css" media="screen">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" media="screen">
     <link rel="icon" type="image/png" href="/favicon.png">
