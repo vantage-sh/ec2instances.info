@@ -116,6 +116,7 @@ Vantage also works on the following relevant projects:
 - [Vantage](https://vantage.sh/) - A cloud cost transparency platform.
 
 ## [Internal] Upstreaming changes from ec2instances.info
+
 ```
 git checkout upstream
 git remote add ec2instances.info git@github.com:vantage-sh/ec2instances.info
