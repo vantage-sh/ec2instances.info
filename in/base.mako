@@ -34,6 +34,9 @@
       </span>
 
       <%block name="header"/>
+      <div class='announcement'>
+        Save 50% on your EC2 bill with <a style="text-decoration: underline" href="https://www.vantage.sh/features/autopilot">Vantage Autopilot</a>, automated buying and selling of Reserved Instances.
+      </div>
 
       <ul class="nav nav-tabs">
         <li role="presentation" class="${'active' if self.attr.active_ == 'ec2' else ''}"><a href="/">EC2</a></li>
