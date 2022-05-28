@@ -903,7 +903,7 @@ def scrape(data_file):
         json.dump(
             [i.to_dict() for i in all_instances],
             f,
-            indent=2,
+            indent=1,
             sort_keys=True,
             separators=(",", ": "),
         )
