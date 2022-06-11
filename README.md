@@ -126,3 +126,8 @@ git checkout master
 git merge upstream
 git push
 ```
+
+## [Internal] Adding Instance Types
+New instance types can automatically be pulled down but the software has to be rebuilt and redployed with a commit to master. This is a list of instance types added that way.
+
+* r6id
