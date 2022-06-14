@@ -125,6 +125,11 @@ body {
 }
 
 /* DataTables: http://datatables.net/blog/Twitter_Bootstrap_2 */
+table.table thead {
+  position: sticky;
+  top: 0;
+}
+
 table.table thead .sorting,
 table.table thead .sorting_asc,
 table.table thead .sorting_desc,
