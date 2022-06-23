@@ -62,6 +62,40 @@ def add_render_info(i):
     add_cpu_detail(i)
 
 
+def build_instance_families(instances, destination_file, pricing_json, instance_azs_json, generated_at):
+    # Find URL path (service) for these instances. It's / for ec2
+    subdir = 'www'
+    dest_subdir = destination_file.split('/')[1]
+    if dest_subdir != 'index.html':
+        subdir = os.path.join('www', dest_subdir)
+
+    lookup = mako.lookup.TemplateLookup(directories=["."])
+    template = mako.template.Template(filename='in/instance-type.html.mako', lookup=lookup)
+    instance_families = {}
+    for i in instances:
+        if "instance_type" in i:
+            instance_type = i["instance_type"]
+            if instance_type not in instance_families:
+                instance_families[instance_type] = {
+                    "instance_type": instance_type,
+                    "instance_data": {},
+                }
+                instance_page = os.path.join(subdir, instance_type + '.html')
+
+                with io.open(instance_page, "w+", encoding="utf-8") as fh:
+                    try:
+                        fh.write(
+                        template.render(
+                            instance_type=instance_type,
+                            pricing_json=pricing_json,
+                            generated_at=generated_at,
+                            instance_azs_json=instance_azs_json,
+                        )
+                        )
+                    except:
+                        print(mako.exceptions.text_error_template().render())
+
+
 prices_dict = {}
 prices_index = 0
 
@@ -114,10 +148,15 @@ def render(data_file, template_file, destination_file):
         instances = json.load(f)
     for i in instances:
         add_render_info(i)
+
+
     pricing_json = compress_pricing(instances)
     instance_azs_json = compress_instance_azs(instances)
     print("Rendering to %s..." % destination_file)
     generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+
+    build_instance_families(instances, destination_file, pricing_json, instance_azs_json, generated_at)
+
     os.makedirs(os.path.dirname(destination_file), exist_ok=True)
     with io.open(destination_file, "w+", encoding="utf-8") as fh:
         try:
@@ -135,3 +174,5 @@ def render(data_file, template_file, destination_file):
 
 if __name__ == "__main__":
     render("www/instances.json", "in/index.html.mako", "www/index.html")
+    render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
+    render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
