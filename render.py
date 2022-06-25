@@ -5,6 +5,7 @@ import io
 import json
 import datetime
 import os
+import csv
 
 
 def network_sort(inst):
@@ -62,12 +63,35 @@ def add_render_info(i):
     add_cpu_detail(i)
 
 
+
+def get_instance_attributes(data_file):
+    # Transform a CSV of instance attributes into a dict of dicts for later lookup
+
+    instance_lookup = {}
+    with open(data_file, 'r') as f:
+        reader = csv.reader(f)
+        header = []
+
+        for i, row in enumerate(reader):
+            if i == 0:
+                header = row
+                continue
+            single_inst = {}
+            for key, val in zip(header, row):
+                single_inst[key] = val
+            instance_lookup[row[4]] = single_inst
+
+    return instance_lookup
+
+
 def build_instance_families(instances, destination_file, pricing_json, instance_azs_json, generated_at):
     # Find URL path (service) for these instances. It's / for ec2
     subdir = 'www'
     dest_subdir = destination_file.split('/')[1]
     if dest_subdir != 'index.html':
         subdir = os.path.join('www', dest_subdir)
+
+    idetails = get_instance_attributes("www/instance-types.csv")
 
     lookup = mako.lookup.TemplateLookup(directories=["."])
     template = mako.template.Template(filename='in/instance-type.html.mako', lookup=lookup)
@@ -81,6 +105,7 @@ def build_instance_families(instances, destination_file, pricing_json, instance_
                     "instance_data": {},
                 }
                 instance_page = os.path.join(subdir, instance_type + '.html')
+                attrs = idetails.get(instance_type)
 
                 with io.open(instance_page, "w+", encoding="utf-8") as fh:
                     try:
@@ -90,6 +115,7 @@ def build_instance_families(instances, destination_file, pricing_json, instance_
                             pricing_json=pricing_json,
                             generated_at=generated_at,
                             instance_azs_json=instance_azs_json,
+                            instance_attrs=attrs,
                         )
                         )
                     except:
