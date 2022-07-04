@@ -27,10 +27,40 @@ def vpc(attrs):
     pass
 
 
-def prices(attrs):
-    # price = json.dumps(i[j]['us-east-1'], indent=4)
-    # print(price)
-    pass
+def prices(pricing):
+    display_prices = {}
+    for region, p in pricing.items():
+        display_prices[region] = {}
+
+        for os, _p in p.items():
+            display_prices[region][os] = {}
+            
+            if os == 'ebs' or os == 'emr':
+                continue
+
+            try:
+                display_prices[region][os]["ondemand"] = _p["ondemand"]
+            except KeyError:
+                display_prices[region][os]["ondemand"] = "N/A"
+            try:
+                display_prices[region][os]["spot"] = _p["spot_max"]
+            except KeyError:
+                display_prices[region][os]["spot"] = "N/A"
+            try:
+                display_prices[region][os]["_1yr"] = _p["reserved"]["yrTerm1Standard.noUpfront"]
+            except KeyError:
+                display_prices[region][os]["_1yr"] = "N/A"
+            try:
+                display_prices[region][os]["_3yr"] = _p["reserved"]["yrTerm3Standard.noUpfront"]
+            except KeyError:
+                display_prices[region][os]["_3yr"] = "N/A"
+    
+    # ondemand = display_prices["us-east-1"]["linux"]["ondemand"]
+    # spot = display_prices["us-east-1"]["linux"]["spot"]
+    # _1yr_reserved = display_prices["us-east-1"]["linux"]["_1yr"]
+    # _3yr_reserved = display_prices["us-east-1"]["linux"]["_3yr"]
+    # print(ondemand, spot, _1yr_reserved, _3yr_reserved)
+    return display_prices
 
 
 def route_special_cases(expanded_instance_attr):
@@ -112,11 +142,13 @@ def map_ec2_attributes(i):
     for c in categories:
         instance_details[c] = []
 
+    print(i['instance_type'])
+
     imap = load_service_attributes()
     for j, k in i.items():
 
         display = imap[j]
-        display["value"] = k
+        display["value"] = k if j != 'pricing' else {}
         display["cloud_key"] = j
         instance_details[display["category"]].append(display)
     
@@ -125,6 +157,8 @@ def map_ec2_attributes(i):
     for c in categories:
         instance_details[c].sort(key=lambda x: x["display_name"])
 
+    instance_details['Pricing'] = prices(i["pricing"])
+    # print(json.dumps(instance_details, indent=4))
     return instance_details
 
 

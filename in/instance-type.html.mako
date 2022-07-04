@@ -27,16 +27,24 @@
         <h1>${i["Amazon"][4]['value']}</h1>
         <div class="row">
           <div class="col-sm-3">
+            <p>${i["Pricing"]["us-east-1"]["linux"]["ondemand"]}</p>
+            <br>
             <p>On Demand</p>
           </div>
           <div class="col-sm-3">
+            <p>${i["Pricing"]["us-east-1"]["linux"]["_1yr"]}</p>
+            <br>
             <p>1 Year Reserved</p>
           </div>
           <div class="col-sm-3">
-            <p>3 Year Reserved</p>
+            <p>${i["Pricing"]["us-east-1"]["linux"]["spot"]}</p>
+            <br>
+            <p>Spot</p>
           </div>
           <div class="col-sm-3">
-            <p>Spot</p>
+            <p>${i["Pricing"]["us-east-1"]["linux"]["_3yr"]}</p>
+            <br>
+            <p>3 Year Reserved</p>
           </div>
         </div>
         <div class="row">
@@ -52,6 +60,8 @@
                   % for a in attrs:
                     <p>${a["cloud_key"]}</p>
                   % endfor
+                % elif category == "Pricing":
+                  <p>See the main page for full pricing</p>
                 % else:
                   <table>
                     <tr>
