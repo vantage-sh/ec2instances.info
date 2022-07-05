@@ -26,24 +26,77 @@
       <div class="col-md-8">
         <h1>${i["Amazon"][4]['value']}</h1>
         <div class="row">
+          <div class="col-sm-4">
+            <select id="region">
+              <option value='us-east-1'>US East (N. Virginia)</option>
+              <option value='af-south-1'>Africa (Cape Town)</option>
+              <option value='ap-east-1'>Asia-Pacific (Hong Kong)</option>
+              <option value='ap-south-1'>Asia-Pacific (Mumbai)</option>
+              <option value='ap-northeast-3'>Asia Pacific (Osaka-Local)</option>
+              <option value='ap-northeast-2'>Asia-Pacific (Seoul)</option>
+              <option value='ap-southeast-1'>Asia-Pacific (Singapore)</option>
+              <option value='ap-southeast-2'>Asia-Pacific (Sydney)</option>
+              <option value='ap-southeast-3'>Asia-Pacific (Jakarta)</option>
+              <option value='ap-northeast-1'>Asia-Pacific (Tokyo)</option>
+              <option value='ca-central-1'>Canada (Central)</option>
+              <option value='eu-central-1'>Europe (Frankfurt)</option>
+              <option value='eu-west-1'>Europe (Ireland)</option>
+              <option value='eu-west-2'>Europe (London)</option>
+              <option value='eu-west-3'>Europe (Paris)</option>
+              <option value='eu-north-1'>Europe (Stockholm)</option>
+              <option value='eu-south-1'>Europe (Milan)</option>
+              <option value='me-south-1'>Middle East (Bahrain)</option>
+              <option value='sa-east-1'>South America (S&atilde;o Paulo)</option>
+              <option value='us-east-2'>US East (Ohio)</option>
+              <option value='us-west-1'>US West (Northern California)</option>
+              <option value='us-west-2'>US West (Oregon)</option>
+              <option value='us-gov-west-1'>AWS GovCloud (US-West)</option>
+              <option value='us-gov-east-1'>AWS GovCloud (US-East)</option>
+            </select>
+          </div>
+          <div class="col-sm-4">
+            <select id="os">
+              <option value="linux">Linux</option>
+              <option value="mswin">Windows</option>
+              <option value="rhel">Red Hat</option>
+              <option value="sles">SUSE</option>
+              <option value="linuxSQL">Linux SQL Server</option>
+              <option value="linuxSQLEnterprise">Linux SQL Server for Enterprise</option>
+              <option value="linuxSQLWeb">Linux SQL Server for Web</option>
+              <option value="mswinSQL">Windows SQL Server</option>
+              <option value="mswinSQLEnterprise">Windows SQL Server for Enterprise</option>
+              <option value="mswinSQLWeb">Windows SQL Server for Web</option>
+              <option value="rhelSQL">Red Hat SQL Server</option>
+              <option value="rhelSQLEnterprise">Red Hat SQL Server Enterprise</option>
+              <option value="rhelSQLWeb">Red Hat SQL Server for Web</option>
+
+            </select>
+          </div>
+          <div class="col-sm-4">
+            <select id="unit">
+              <option value="hour">Per Hour</option>
+              <option value="second">Per Second</option>
+              <option value="day">Per Day</option>
+              <option value="week">Per Week</option>
+              <option value="month">Per Month</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-sm-3">
             <p>${i["Pricing"]["us-east-1"]["linux"]["ondemand"]}</p>
-            <br>
             <p>On Demand</p>
           </div>
           <div class="col-sm-3">
             <p>${i["Pricing"]["us-east-1"]["linux"]["_1yr"]}</p>
-            <br>
             <p>1 Year Reserved</p>
           </div>
           <div class="col-sm-3">
             <p>${i["Pricing"]["us-east-1"]["linux"]["spot"]}</p>
-            <br>
             <p>Spot</p>
           </div>
           <div class="col-sm-3">
             <p>${i["Pricing"]["us-east-1"]["linux"]["_3yr"]}</p>
-            <br>
             <p>3 Year Reserved</p>
           </div>
         </div>
@@ -93,5 +146,28 @@
         </div>
       </div>
     </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    var _prices = ${i["Pricing"]};
+
+    $('#region').change(function() {
+      console.log($(this).val());
+      // recalulate_redisplay_prices()
+    });
+    $('#os').change(function() {
+      console.log($(this).val());
+      // recalulate_redisplay_prices()
+    });
+    $('#unit').change(function() {
+      console.log($(this).val());
+      // recalulate_redisplay_prices()
+    });
+
+
+
+  </script>
   </body>
 </html>
