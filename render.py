@@ -8,8 +8,6 @@ import os
 import csv
 
 
-
-
 def add_render_info(i):
     i["network_sort"] = network_sort(i)
     add_cpu_detail(i)
@@ -33,33 +31,36 @@ def prices(pricing):
         display_prices[region] = {}
 
         for os, _p in p.items():
+            print(os)
             display_prices[region][os] = {}
             
             if os == 'ebs' or os == 'emr':
                 continue
 
+            # Doing a lot of work to deal with prices having up to 6 places
+            # after the decimal, as well as prices not existing for all regions
+            # and operating systems. 
             try:
-                display_prices[region][os]["ondemand"] = _p["ondemand"]
+                display_prices[region][os]["ondemand"] = format(
+                    float(_p["ondemand"]), ".3f")
             except KeyError:
                 display_prices[region][os]["ondemand"] = "N/A"
             try:
-                display_prices[region][os]["spot"] = _p["spot_max"]
+                display_prices[region][os]["spot"] = format(
+                    float(_p["spot_max"]), ".3f")
             except KeyError:
                 display_prices[region][os]["spot"] = "N/A"
             try:
-                display_prices[region][os]["_1yr"] = _p["reserved"]["yrTerm1Standard.noUpfront"]
+                display_prices[region][os]["_1yr"] = format(
+                    float(_p["reserved"]["yrTerm1Standard.noUpfront"]), ".3f")
             except KeyError:
                 display_prices[region][os]["_1yr"] = "N/A"
             try:
-                display_prices[region][os]["_3yr"] = _p["reserved"]["yrTerm3Standard.noUpfront"]
+                display_prices[region][os]["_3yr"] = format(
+                    float(_p["reserved"]["yrTerm3Standard.noUpfront"]), ".3f")
             except KeyError:
                 display_prices[region][os]["_3yr"] = "N/A"
     
-    # ondemand = display_prices["us-east-1"]["linux"]["ondemand"]
-    # spot = display_prices["us-east-1"]["linux"]["spot"]
-    # _1yr_reserved = display_prices["us-east-1"]["linux"]["_1yr"]
-    # _3yr_reserved = display_prices["us-east-1"]["linux"]["_3yr"]
-    # print(ondemand, spot, _1yr_reserved, _3yr_reserved)
     return display_prices
 
 
