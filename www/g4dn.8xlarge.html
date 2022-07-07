@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <link rel="stylesheet" href="/default.css" media="screen">
+    <!-- Boostrap 3.2 https://bootstrapdocs.com/v3.2.0/docs/ -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" media="screen">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <title>g4dn.8xlarge Details</title>
+    <meta name="description" content="g4dn.8xlarge CPUs, memory, storage and pricing"></head>
+    <style>
+      table, th, td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+    
+  <body>
+    <div class="navbar navbar-default"></div>
+    <div class="row">
+      <h1>g4dn.8xlargeColin</h1>
+    </div>
+
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-sm-4" style="padding-left: 0 !important">
+          <select id="region">
+            <option value='us-east-1'>US East (N. Virginia)</option>
+            <option value='af-south-1'>Africa (Cape Town)</option>
+            <option value='ap-east-1'>Asia-Pacific (Hong Kong)</option>
+            <option value='ap-south-1'>Asia-Pacific (Mumbai)</option>
+            <option value='ap-northeast-3'>Asia-Pacific (Osaka)</option>
+            <option value='ap-northeast-2'>Asia-Pacific (Seoul)</option>
+            <option value='ap-southeast-1'>Asia-Pacific (Singapore)</option>
+            <option value='ap-southeast-2'>Asia-Pacific (Sydney)</option>
+            <option value='ap-southeast-3'>Asia-Pacific (Jakarta)</option>
+            <option value='ap-northeast-1'>Asia-Pacific (Tokyo)</option>
+            <option value='ca-central-1'>Canada (Central)</option>
+            <option value='eu-central-1'>Europe (Frankfurt)</option>
+            <option value='eu-west-1'>Europe (Ireland)</option>
+            <option value='eu-west-2'>Europe (London)</option>
+            <option value='eu-west-3'>Europe (Paris)</option>
+            <option value='eu-north-1'>Europe (Stockholm)</option>
+            <option value='eu-south-1'>Europe (Milan)</option>
+            <option value='me-south-1'>Middle East (Bahrain)</option>
+            <option value='sa-east-1'>South America (S&atilde;o Paulo)</option>
+            <option value='us-east-2'>US East (Ohio)</option>
+            <option value='us-west-1'>US West (California)</option>
+            <option value='us-west-2'>US West (Oregon)</option>
+            <option value='us-gov-west-1'>AWS GovCloud (US-West)</option>
+            <option value='us-gov-east-1'>AWS GovCloud (US-East)</option>
+          </select>
+        </div>
+        <div class="col-sm-4">
+          <select id="os">
+            <option value="linux">Linux</option>
+            <option value="mswin">Windows</option>
+            <option value="rhel">Red Hat</option>
+            <option value="sles">SUSE</option>
+            <option value="linuxSQL">Linux SQL Server</option>
+            <option value="linuxSQLEnterprise">Linux SQL Enterprise</option>
+            <option value="linuxSQLWeb">Linux SQL Server for Web</option>
+            <option value="mswinSQL">Windows SQL Server</option>
+            <option value="mswinSQLEnterprise">Windows SQL Enterprise</option>
+            <option value="mswinSQLWeb">Windows SQL Web</option>
+            <option value="rhelSQL">Red Hat SQL Server</option>
+            <option value="rhelSQLEnterprise">Red Hat SQL Enterprise</option>
+            <option value="rhelSQLWeb">Red Hat SQL Web</option>
+          </select>
+        </div>
+        <div class="col-sm-4">
+          <select id="unit">
+            <option value="hour">Per Hour</option>
+            <option value="day">Per Day</option>
+            <option value="week">Per Week</option>
+            <option value="month">Per Month</option>
+          </select>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <p id="p_od">2.176</p>
+            <p>On Demand</p>
+          </div>
+          <div class="col-sm-3">
+            <p id="p_1yr">1.371</p>
+            <p>1 Year Reserved</p>
+          </div>
+          <div class="col-sm-3">
+            <p id="p_spot">N/A</p>
+            <p>Spot</p>
+          </div>
+          <div class="col-sm-3">
+            <p id="p_3yr">0.940</p>
+            <p>3 Year Reserved</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        </div>
+            <h2>Amazon</h2>
+                <table>
+                  <tr>
+                    <th>Amazon</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Current Generation</td>
+                    <td>current</td>
+                  </tr>
+                  <tr>
+                    <td>Elastic Compute Units (ECU)</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>Elastic Map Reduce (EMR)</td>
+                    <td>False</td>
+                  </tr>
+                  <tr>
+                    <td>Family</td>
+                    <td>GPU instance</td>
+                  </tr>
+                  <tr>
+                    <td>Instance Type</td>
+                    <td>g4dn.8xlarge</td>
+                  </tr>
+                  <tr>
+                    <td>Name</td>
+                    <td>G4DN Eight Extra Large</td>
+                  </tr>
+                </table>
+            <h2>Compute</h2>
+                <table>
+                  <tr>
+                    <th>Compute</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>CPU Architecture</td>
+                    <td>['x86_64']</td>
+                  </tr>
+                  <tr>
+                    <td>CPU Memory</td>
+                    <td>4.0</td>
+                  </tr>
+                  <tr>
+                    <td>CPUs</td>
+                    <td>32</td>
+                  </tr>
+                  <tr>
+                    <td>GPU</td>
+                    <td>1</td>
+                  </tr>
+                </table>
+            <h2>Networking</h2>
+                <table>
+                  <tr>
+                    <th>Networking</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Enhance Networking</td>
+                    <td>True</td>
+                  </tr>
+                  <tr>
+                    <td>IPV6</td>
+                    <td>True</td>
+                  </tr>
+                  <tr>
+                    <td>Network Performance (GBps)</td>
+                    <td>50 Gigabit</td>
+                  </tr>
+                  <tr>
+                    <td>Placement Group (?)</td>
+                    <td>False</td>
+                  </tr>
+                </table>
+            <h2>Storage</h2>
+                <table>
+                  <tr>
+                    <th>Storage</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Bandwidth (Mbps) Max on EBS</td>
+                    <td>9500.0</td>
+                  </tr>
+                  <tr>
+                    <td>EBS Optimized</td>
+                    <td>False</td>
+                  </tr>
+                  <tr>
+                    <td>I/O Operations/second (IOPS)</td>
+                    <td>40000.0</td>
+                  </tr>
+                  <tr>
+                    <td>Memory (GB)</td>
+                    <td>128.0</td>
+                  </tr>
+                  <tr>
+                    <td>Throughput (MBs) on EBS</td>
+                    <td>1187.5</td>
+                  </tr>
+                </table>
+            <h2>Hardware</h2>
+                <table>
+                  <tr>
+                    <th>Hardware</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Clock Speed (GHz)</td>
+                    <td>2.5 GHz</td>
+                  </tr>
+                  <tr>
+                    <td>FPGA</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>GPU Architecture</td>
+                    <td>NVIDIA T4 Tensor Core</td>
+                  </tr>
+                  <tr>
+                    <td>GPU Compute Capability (?)</td>
+                    <td>7.5</td>
+                  </tr>
+                  <tr>
+                    <td>Intel Turbo</td>
+                    <td>Yes</td>
+                  </tr>
+                  <tr>
+                    <td>Linux Virtualization Type</td>
+                    <td>[]</td>
+                  </tr>
+                  <tr>
+                    <td>Physical Processor</td>
+                    <td>Intel Xeon Family</td>
+                  </tr>
+                  <tr>
+                    <td>Video Memory</td>
+                    <td>16</td>
+                  </tr>
+                </table>
+            <h2>Not Shown</h2>
+                <p>Request this data to be included on Github</p>
+                  <p>base_performance</p>
+                  <p>burst_minutes</p>
+                  <p>ECU_per_vcpu</p>
+                  <p>intel_avx</p>
+                  <p>intel_avx2</p>
+                  <p>intel_avx512</p>
+                  <p>vpc_only</p>
+                  <p>network_sort</p>
+                  <p>ebs_as_nvme</p>
+            <h2>Coming Soon</h2>
+                  <p>Availability Restrictions</p>
+                  <p>Disk Details</p>
+                  <p>Pricing</p>
+                  <p>VPC Details</p>
+            <h2>Pricing</h2>
+                <p>See the main page for full pricing</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <h2>News</h2>
+        <p>Instance Annoucement</p>
+      </div>
+      <div class="row">
+        <h2>Comments</h2>
+        <p>This instance rules</p>
+      </div>
+    </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    var _prices = {'af-south-1': {'linux': {'ondemand': '2.887', 'spot': 'N/A', '_1yr': '1.970', '_3yr': '1.247'}, 'mswin': {'ondemand': '4.359', 'spot': 'N/A', '_1yr': '3.442', '_3yr': '2.719'}, 'rhel': {'ondemand': '3.052', 'spot': 'N/A', '_1yr': '2.100', '_3yr': '1.377'}, 'sles': {'ondemand': '3.037', 'spot': 'N/A', '_1yr': '2.030', '_3yr': '1.301'}}, 'ap-east-1': {'linux': {'ondemand': '3.351', 'spot': 'N/A', '_1yr': '2.111', '_3yr': '1.448'}, 'mswin': {'ondemand': '4.823', 'spot': 'N/A', '_1yr': '3.583', '_3yr': '2.920'}, 'rhel': {'ondemand': '3.481', 'spot': 'N/A', '_1yr': '2.241', '_3yr': '1.578'}, 'sles': {'ondemand': '3.501', 'spot': 'N/A', '_1yr': '2.171', '_3yr': '1.502'}}, 'ap-northeast-1': {'linux': {'ondemand': '2.938', 'spot': 'N/A', '_1yr': '2.005', '_3yr': '1.491'}, 'mswin': {'ondemand': '4.410', 'spot': 'N/A', '_1yr': '3.477', '_3yr': '2.963'}, 'rhel': {'ondemand': '3.103', 'spot': 'N/A', '_1yr': '2.167', '_3yr': '1.650'}, 'sles': {'ondemand': '3.088', 'spot': 'N/A', '_1yr': '2.065', '_3yr': '1.545'}}, 'ap-northeast-2': {'linux': {'ondemand': '2.677', 'spot': 'N/A', '_1yr': '1.683', '_3yr': '1.156'}, 'mswin': {'ondemand': '4.149', 'spot': 'N/A', '_1yr': '3.155', '_3yr': '2.628'}, 'rhel': {'ondemand': '2.842', 'spot': 'N/A', '_1yr': '1.845', '_3yr': '1.315'}, 'sles': {'ondemand': '2.827', 'spot': 'N/A', '_1yr': '1.743', '_3yr': '1.210'}}, 'ap-northeast-3': {'linux': {'ondemand': '2.938', 'spot': 'N/A', '_1yr': '2.005', '_3yr': '1.491'}, 'mswin': {'ondemand': '4.410', 'spot': 'N/A', '_1yr': '3.477', '_3yr': '2.963'}, 'rhel': {'ondemand': '3.103', 'spot': 'N/A', '_1yr': '2.167', '_3yr': '1.650'}, 'sles': {'ondemand': '3.088', 'spot': 'N/A', '_1yr': '2.065', '_3yr': '1.545'}}, 'ap-south-1': {'linux': {'ondemand': '2.395', 'spot': 'N/A', '_1yr': '1.509', '_3yr': '1.164'}, 'mswin': {'ondemand': '3.867', 'spot': 'N/A', '_1yr': '2.981', '_3yr': '2.636'}, 'rhel': {'ondemand': '2.525', 'spot': 'N/A', '_1yr': '1.639', '_3yr': '1.294'}, 'sles': {'ondemand': '2.545', 'spot': 'N/A', '_1yr': '1.569', '_3yr': '1.218'}}, 'ap-southeast-1': {'linux': {'ondemand': '3.045', 'spot': 'N/A', '_1yr': '1.918', '_3yr': '1.480'}, 'mswin': {'ondemand': '4.517', 'spot': 'N/A', '_1yr': '3.390', '_3yr': '2.952'}, 'rhel': {'ondemand': '3.175', 'spot': 'N/A', '_1yr': '2.048', '_3yr': '1.610'}, 'sles': {'ondemand': '3.195', 'spot': 'N/A', '_1yr': '1.978', '_3yr': '1.534'}}, 'ap-southeast-2': {'linux': {'ondemand': '2.830', 'spot': 'N/A', '_1yr': '1.783', '_3yr': '1.375'}, 'mswin': {'ondemand': '4.302', 'spot': 'N/A', '_1yr': '3.255', '_3yr': '2.847'}, 'rhel': {'ondemand': '2.960', 'spot': 'N/A', '_1yr': '1.913', '_3yr': '1.505'}, 'sles': {'ondemand': '2.980', 'spot': 'N/A', '_1yr': '1.843', '_3yr': '1.429'}}, 'ca-central-1': {'linux': {'ondemand': '2.416', 'spot': 'N/A', '_1yr': '1.522', '_3yr': '1.044'}, 'mswin': {'ondemand': '3.888', 'spot': 'N/A', '_1yr': '2.994', '_3yr': '2.516'}, 'rhel': {'ondemand': '2.581', 'spot': 'N/A', '_1yr': '1.684', '_3yr': '1.202'}, 'sles': {'ondemand': '2.566', 'spot': 'N/A', '_1yr': '1.582', '_3yr': '1.098'}}, 'cn-north-1': {'linux': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': 'N/A'}, 'mswin': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': 'N/A'}, 'rhel': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': 'N/A'}, 'sles': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': 'N/A'}}, 'cn-northwest-1': {'linux': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': '0.000'}, 'mswin': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': '0.000'}, 'rhel': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': '0.000'}, 'sles': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': '0.000'}}, 'eu-central-1': {'linux': {'ondemand': '2.720', 'spot': 'N/A', '_1yr': '1.856', '_3yr': '1.322'}, 'mswin': {'ondemand': '4.192', 'spot': 'N/A', '_1yr': '3.328', '_3yr': '2.794'}, 'rhel': {'ondemand': '2.885', 'spot': 'N/A', '_1yr': '2.018', '_3yr': '1.481'}, 'sles': {'ondemand': '2.870', 'spot': 'N/A', '_1yr': '1.916', '_3yr': '1.376'}}, 'eu-north-1': {'linux': {'ondemand': '2.308', 'spot': 'N/A', '_1yr': '1.454', '_3yr': '0.997'}, 'mswin': {'ondemand': '3.780', 'spot': 'N/A', '_1yr': '2.926', '_3yr': '2.469'}, 'rhel': {'ondemand': '2.438', 'spot': 'N/A', '_1yr': '1.584', '_3yr': '1.127'}, 'sles': {'ondemand': '2.458', 'spot': 'N/A', '_1yr': '1.514', '_3yr': '1.051'}}, 'eu-south-1': {'linux': {'ondemand': '2.547', 'spot': 'N/A', '_1yr': '1.739', '_3yr': '1.101'}, 'mswin': {'ondemand': '4.019', 'spot': 'N/A', '_1yr': '3.211', '_3yr': '2.573'}, 'rhel': {'ondemand': '2.677', 'spot': 'N/A', '_1yr': '1.869', '_3yr': '1.231'}, 'sles': {'ondemand': '2.697', 'spot': 'N/A', '_1yr': '1.799', '_3yr': '1.155'}}, 'eu-west-1': {'linux': {'ondemand': '2.426', 'spot': 'N/A', '_1yr': '1.656', '_3yr': '1.048'}, 'mswin': {'ondemand': '3.898', 'spot': 'N/A', '_1yr': '3.128', '_3yr': '2.520'}, 'rhel': {'ondemand': '2.591', 'spot': 'N/A', '_1yr': '1.818', '_3yr': '1.207'}, 'sles': {'ondemand': '2.576', 'spot': 'N/A', '_1yr': '1.716', '_3yr': '1.102'}}, 'eu-west-2': {'linux': {'ondemand': '2.546', 'spot': 'N/A', '_1yr': '1.738', '_3yr': '1.237'}, 'mswin': {'ondemand': '4.018', 'spot': 'N/A', '_1yr': '3.210', '_3yr': '2.709'}, 'rhel': {'ondemand': '2.676', 'spot': 'N/A', '_1yr': '1.868', '_3yr': '1.367'}, 'sles': {'ondemand': '2.696', 'spot': 'N/A', '_1yr': '1.798', '_3yr': '1.291'}}, 'eu-west-3': {'linux': {'ondemand': '2.544', 'spot': 'N/A', '_1yr': '1.603', '_3yr': '1.236'}, 'mswin': {'ondemand': '4.016', 'spot': 'N/A', '_1yr': '3.075', '_3yr': '2.708'}, 'rhel': {'ondemand': '2.674', 'spot': 'N/A', '_1yr': '1.733', '_3yr': '1.366'}, 'sles': {'ondemand': '2.694', 'spot': 'N/A', '_1yr': '1.663', '_3yr': '1.290'}}, 'me-south-1': {'linux': {'ondemand': '2.669', 'spot': 'N/A', '_1yr': '1.822', '_3yr': '1.153'}, 'mswin': {'ondemand': '4.141', 'spot': 'N/A', '_1yr': '3.294', '_3yr': '2.625'}, 'rhel': {'ondemand': '2.834', 'spot': 'N/A', '_1yr': '1.952', '_3yr': '1.283'}, 'sles': {'ondemand': '2.819', 'spot': 'N/A', '_1yr': '1.882', '_3yr': '1.207'}}, 'sa-east-1': {'linux': {'ondemand': '3.698', 'spot': 'N/A', '_1yr': '2.524', '_3yr': '1.877'}, 'mswin': {'ondemand': '5.170', 'spot': 'N/A', '_1yr': '3.996', '_3yr': '3.349'}, 'rhel': {'ondemand': '3.863', 'spot': 'N/A', '_1yr': '2.686', '_3yr': '2.036'}, 'sles': {'ondemand': '3.848', 'spot': 'N/A', '_1yr': '2.584', '_3yr': '1.931'}}, 'us-east-1': {'linux': {'ondemand': '2.176', 'spot': 'N/A', '_1yr': '1.371', '_3yr': '0.940'}, 'mswin': {'ondemand': '3.648', 'spot': 'N/A', '_1yr': '2.843', '_3yr': '2.412'}, 'rhel': {'ondemand': '2.341', 'spot': 'N/A', '_1yr': '1.533', '_3yr': '1.099'}, 'sles': {'ondemand': '2.326', 'spot': 'N/A', '_1yr': '1.431', '_3yr': '0.994'}}, 'us-east-2': {'linux': {'ondemand': '2.176', 'spot': 'N/A', '_1yr': '1.371', '_3yr': '0.940'}, 'mswin': {'ondemand': '3.648', 'spot': 'N/A', '_1yr': '2.843', '_3yr': '2.412'}, 'rhel': {'ondemand': '2.306', 'spot': 'N/A', '_1yr': '1.501', '_3yr': '1.070'}, 'sles': {'ondemand': '2.326', 'spot': 'N/A', '_1yr': '1.431', '_3yr': '0.994'}}, 'us-gov-east-1': {'linux': {'ondemand': '2.743', 'spot': 'N/A', '_1yr': '1.728', '_3yr': '1.185'}, 'mswin': {'ondemand': '4.215', 'spot': 'N/A', '_1yr': '3.200', '_3yr': '2.657'}, 'rhel': {'ondemand': '2.908', 'spot': 'N/A', '_1yr': '1.890', '_3yr': '1.344'}, 'sles': {'ondemand': '2.893', 'spot': 'N/A', '_1yr': '1.788', '_3yr': '1.239'}}, 'us-gov-west-1': {'linux': {'ondemand': '2.743', 'spot': 'N/A', '_1yr': '1.728', '_3yr': '1.185'}, 'mswin': {'ondemand': '4.215', 'spot': 'N/A', '_1yr': '3.200', '_3yr': '2.657'}, 'rhel': {'ondemand': '2.908', 'spot': 'N/A', '_1yr': '1.890', '_3yr': '1.344'}, 'sles': {'ondemand': '2.893', 'spot': 'N/A', '_1yr': '1.788', '_3yr': '1.239'}}, 'us-west-1': {'linux': {'ondemand': '2.611', 'spot': 'N/A', '_1yr': '1.837', '_3yr': '1.269'}, 'mswin': {'ondemand': '4.083', 'spot': 'N/A', '_1yr': '3.309', '_3yr': '2.741'}, 'rhel': {'ondemand': '2.776', 'spot': 'N/A', '_1yr': '1.999', '_3yr': '1.428'}, 'sles': {'ondemand': '2.761', 'spot': 'N/A', '_1yr': '1.897', '_3yr': '1.323'}}, 'us-west-2': {'linux': {'ondemand': '2.176', 'spot': 'N/A', '_1yr': '1.371', '_3yr': '0.940'}, 'mswin': {'ondemand': '3.648', 'spot': 'N/A', '_1yr': '2.843', '_3yr': '2.412'}, 'rhel': {'ondemand': '2.306', 'spot': 'N/A', '_1yr': '1.501', '_3yr': '1.070'}, 'sles': {'ondemand': '2.326', 'spot': 'N/A', '_1yr': '1.431', '_3yr': '0.994'}}};
+
+    $('#region').change(function() {
+      recalulate_redisplay_prices()
+    });
+    $('#os').change(function() {
+      recalulate_redisplay_prices()
+    });
+    $('#unit').change(function() {
+      recalulate_redisplay_prices()
+    });
+
+    function recalulate_redisplay_prices() {
+      var region = $('#region').val();
+      var os = $('#os').val();
+      var unit = $('#unit').val();
+      var price = _prices[region][os];
+
+      var hour_multipliers = {
+        'hour': 1,
+        'day': 24,
+        'week': 7 * 24,
+        'month': 730,   // use AWS convention of 730 hrs/month
+      };
+
+      var displayed_prices = ['ondemand', '_1yr', 'spot', '_3yr'];
+      var elements = ['p_od', 'p_1yr', 'p_spot', 'p_3yr'];
+
+      for(var i =0; i < elements.length; i++) {
+        var element = elements[i];
+        var displayed_price = displayed_prices[i];
+        var price_value = price[displayed_price];
+
+        if (price_value == 'N/A') {
+          $('#' + element).html('N/A');
+        } else {
+          var price_value = price_value * hour_multipliers[unit];
+          $('#' + element).html(price_value.toFixed(3));
+        }
+      }
+
+    }
+
+
+  </script>
+  </body>
+</html>

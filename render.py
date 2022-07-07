@@ -191,6 +191,9 @@ def build_instance_families(instances, destination_file):
                     except:
                         print(mako.exceptions.text_error_template().render())
 
+        # Don't ship this
+        break
+
 
 def network_sort(inst):
     perf = inst["network_performance"]

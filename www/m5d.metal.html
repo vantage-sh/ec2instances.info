@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <link rel="stylesheet" href="/default.css" media="screen">
+    <!-- Boostrap 3.2 https://bootstrapdocs.com/v3.2.0/docs/ -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" media="screen">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <title>m5d.metal Details</title>
+    <meta name="description" content="m5d.metal CPUs, memory, storage and pricing"></head>
+    <style>
+      table, th, td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+    
+  <body>
+    <div class="navbar navbar-default"></div>
+    <div class="row">
+      <h1>m5d.metalColin</h1>
+    </div>
+
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-sm-4" style="padding-left: 0 !important">
+          <select id="region">
+            <option value='us-east-1'>US East (N. Virginia)</option>
+            <option value='af-south-1'>Africa (Cape Town)</option>
+            <option value='ap-east-1'>Asia-Pacific (Hong Kong)</option>
+            <option value='ap-south-1'>Asia-Pacific (Mumbai)</option>
+            <option value='ap-northeast-3'>Asia-Pacific (Osaka)</option>
+            <option value='ap-northeast-2'>Asia-Pacific (Seoul)</option>
+            <option value='ap-southeast-1'>Asia-Pacific (Singapore)</option>
+            <option value='ap-southeast-2'>Asia-Pacific (Sydney)</option>
+            <option value='ap-southeast-3'>Asia-Pacific (Jakarta)</option>
+            <option value='ap-northeast-1'>Asia-Pacific (Tokyo)</option>
+            <option value='ca-central-1'>Canada (Central)</option>
+            <option value='eu-central-1'>Europe (Frankfurt)</option>
+            <option value='eu-west-1'>Europe (Ireland)</option>
+            <option value='eu-west-2'>Europe (London)</option>
+            <option value='eu-west-3'>Europe (Paris)</option>
+            <option value='eu-north-1'>Europe (Stockholm)</option>
+            <option value='eu-south-1'>Europe (Milan)</option>
+            <option value='me-south-1'>Middle East (Bahrain)</option>
+            <option value='sa-east-1'>South America (S&atilde;o Paulo)</option>
+            <option value='us-east-2'>US East (Ohio)</option>
+            <option value='us-west-1'>US West (California)</option>
+            <option value='us-west-2'>US West (Oregon)</option>
+            <option value='us-gov-west-1'>AWS GovCloud (US-West)</option>
+            <option value='us-gov-east-1'>AWS GovCloud (US-East)</option>
+          </select>
+        </div>
+        <div class="col-sm-4">
+          <select id="os">
+            <option value="linux">Linux</option>
+            <option value="mswin">Windows</option>
+            <option value="rhel">Red Hat</option>
+            <option value="sles">SUSE</option>
+            <option value="linuxSQL">Linux SQL Server</option>
+            <option value="linuxSQLEnterprise">Linux SQL Enterprise</option>
+            <option value="linuxSQLWeb">Linux SQL Server for Web</option>
+            <option value="mswinSQL">Windows SQL Server</option>
+            <option value="mswinSQLEnterprise">Windows SQL Enterprise</option>
+            <option value="mswinSQLWeb">Windows SQL Web</option>
+            <option value="rhelSQL">Red Hat SQL Server</option>
+            <option value="rhelSQLEnterprise">Red Hat SQL Enterprise</option>
+            <option value="rhelSQLWeb">Red Hat SQL Web</option>
+          </select>
+        </div>
+        <div class="col-sm-4">
+          <select id="unit">
+            <option value="hour">Per Hour</option>
+            <option value="day">Per Day</option>
+            <option value="week">Per Week</option>
+            <option value="month">Per Month</option>
+          </select>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <p id="p_od">5.424</p>
+            <p>On Demand</p>
+          </div>
+          <div class="col-sm-3">
+            <p id="p_1yr">3.417</p>
+            <p>1 Year Reserved</p>
+          </div>
+          <div class="col-sm-3">
+            <p id="p_spot">N/A</p>
+            <p>Spot</p>
+          </div>
+          <div class="col-sm-3">
+            <p id="p_3yr">2.343</p>
+            <p>3 Year Reserved</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        </div>
+            <h2>Amazon</h2>
+                <table>
+                  <tr>
+                    <th>Amazon</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Current Generation</td>
+                    <td>current</td>
+                  </tr>
+                  <tr>
+                    <td>Elastic Compute Units (ECU)</td>
+                    <td>345.0</td>
+                  </tr>
+                  <tr>
+                    <td>Elastic Map Reduce (EMR)</td>
+                    <td>False</td>
+                  </tr>
+                  <tr>
+                    <td>Family</td>
+                    <td>General purpose</td>
+                  </tr>
+                  <tr>
+                    <td>Instance Type</td>
+                    <td>m5d.metal</td>
+                  </tr>
+                  <tr>
+                    <td>Name</td>
+                    <td>M5 General Purpose Metal</td>
+                  </tr>
+                </table>
+            <h2>Compute</h2>
+                <table>
+                  <tr>
+                    <th>Compute</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>CPU Architecture</td>
+                    <td>['x86_64']</td>
+                  </tr>
+                  <tr>
+                    <td>CPU Memory</td>
+                    <td>4.0</td>
+                  </tr>
+                  <tr>
+                    <td>CPUs</td>
+                    <td>96</td>
+                  </tr>
+                  <tr>
+                    <td>GPU</td>
+                    <td>0</td>
+                  </tr>
+                </table>
+            <h2>Networking</h2>
+                <table>
+                  <tr>
+                    <th>Networking</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Enhance Networking</td>
+                    <td>True</td>
+                  </tr>
+                  <tr>
+                    <td>IPV6</td>
+                    <td>True</td>
+                  </tr>
+                  <tr>
+                    <td>Network Performance (GBps)</td>
+                    <td>25 Gigabit</td>
+                  </tr>
+                  <tr>
+                    <td>Placement Group (?)</td>
+                    <td>False</td>
+                  </tr>
+                </table>
+            <h2>Storage</h2>
+                <table>
+                  <tr>
+                    <th>Storage</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Bandwidth (Mbps) Max on EBS</td>
+                    <td>19000.0</td>
+                  </tr>
+                  <tr>
+                    <td>EBS Optimized</td>
+                    <td>False</td>
+                  </tr>
+                  <tr>
+                    <td>I/O Operations/second (IOPS)</td>
+                    <td>80000.0</td>
+                  </tr>
+                  <tr>
+                    <td>Memory (GB)</td>
+                    <td>384.0</td>
+                  </tr>
+                  <tr>
+                    <td>Throughput (MBs) on EBS</td>
+                    <td>2375.0</td>
+                  </tr>
+                </table>
+            <h2>Hardware</h2>
+                <table>
+                  <tr>
+                    <th>Hardware</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Clock Speed (GHz)</td>
+                    <td>3.1 GHz</td>
+                  </tr>
+                  <tr>
+                    <td>FPGA</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>GPU Architecture</td>
+                    <td>None</td>
+                  </tr>
+                  <tr>
+                    <td>GPU Compute Capability (?)</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>Intel Turbo</td>
+                    <td>Yes</td>
+                  </tr>
+                  <tr>
+                    <td>Linux Virtualization Type</td>
+                    <td>['HVM']</td>
+                  </tr>
+                  <tr>
+                    <td>Physical Processor</td>
+                    <td>Intel Xeon Platinum 8175</td>
+                  </tr>
+                  <tr>
+                    <td>Video Memory</td>
+                    <td>0</td>
+                  </tr>
+                </table>
+            <h2>Not Shown</h2>
+                <p>Request this data to be included on Github</p>
+                  <p>base_performance</p>
+                  <p>burst_minutes</p>
+                  <p>ECU_per_vcpu</p>
+                  <p>intel_avx</p>
+                  <p>intel_avx2</p>
+                  <p>intel_avx512</p>
+                  <p>vpc_only</p>
+                  <p>network_sort</p>
+                  <p>ebs_as_nvme</p>
+            <h2>Coming Soon</h2>
+                  <p>Availability Restrictions</p>
+                  <p>Disk Details</p>
+                  <p>Pricing</p>
+                  <p>VPC Details</p>
+            <h2>Pricing</h2>
+                <p>See the main page for full pricing</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <h2>News</h2>
+        <p>Instance Annoucement</p>
+      </div>
+      <div class="row">
+        <h2>Comments</h2>
+        <p>This instance rules</p>
+      </div>
+    </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    var _prices = {'af-south-1': {'linux': {'ondemand': '7.200', 'spot': 'N/A', '_1yr': '4.536', '_3yr': '3.110'}, 'linuxSQL': {'ondemand': '18.720', 'spot': 'N/A', '_1yr': '16.056', '_3yr': '14.630'}, 'linuxSQLEnterprise': {'ondemand': '43.200', 'spot': 'N/A', '_1yr': '40.536', '_3yr': '39.110'}, 'linuxSQLWeb': {'ondemand': '8.822', 'spot': 'N/A', '_1yr': '6.158', '_3yr': '4.733'}, 'mswin': {'ondemand': '11.616', 'spot': 'N/A', '_1yr': '8.952', '_3yr': '7.526'}, 'mswinSQL': {'ondemand': '23.136', 'spot': 'N/A', '_1yr': '20.472', '_3yr': '19.046'}, 'mswinSQLEnterprise': {'ondemand': '47.616', 'spot': 'N/A', '_1yr': '44.952', '_3yr': '43.526'}, 'mswinSQLWeb': {'ondemand': '13.238', 'spot': 'N/A', '_1yr': '10.574', '_3yr': '9.149'}, 'rhel': {'ondemand': '7.365', 'spot': 'N/A', '_1yr': '4.698', '_3yr': '3.269'}, 'rhelSQL': {'ondemand': '18.885', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '43.330', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '8.962', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '7.300', 'spot': 'N/A', '_1yr': '4.569', '_3yr': '3.143'}}, 'ap-east-1': {'linux': {'ondemand': '7.440', 'spot': 'N/A', '_1yr': '4.687', '_3yr': '3.214'}, 'linuxSQL': {'ondemand': '18.960', 'spot': 'N/A', '_1yr': '16.207', '_3yr': '14.734'}, 'linuxSQLEnterprise': {'ondemand': '43.440', 'spot': 'N/A', '_1yr': '40.687', '_3yr': '39.214'}, 'linuxSQLWeb': {'ondemand': '9.062', 'spot': 'N/A', '_1yr': '6.310', '_3yr': '4.836'}, 'mswin': {'ondemand': '11.856', 'spot': 'N/A', '_1yr': '9.103', '_3yr': '7.630'}, 'mswinSQL': {'ondemand': '23.376', 'spot': 'N/A', '_1yr': '20.623', '_3yr': '19.150'}, 'mswinSQLEnterprise': {'ondemand': '47.856', 'spot': 'N/A', '_1yr': '45.103', '_3yr': '43.630'}, 'mswinSQLWeb': {'ondemand': '13.478', 'spot': 'N/A', '_1yr': '10.726', '_3yr': '9.252'}, 'rhel': {'ondemand': '7.605', 'spot': 'N/A', '_1yr': '4.817', '_3yr': '3.344'}, 'rhelSQL': {'ondemand': '19.090', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '43.605', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '9.202', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '7.540', 'spot': 'N/A', '_1yr': '4.720', '_3yr': '3.247'}}, 'ap-northeast-1': {'linux': {'ondemand': '7.008', 'spot': 'N/A', '_1yr': '4.415', '_3yr': '3.027'}, 'linuxSQL': {'ondemand': '18.528', 'spot': 'N/A', '_1yr': '15.935', '_3yr': '14.547'}, 'linuxSQLEnterprise': {'ondemand': '43.008', 'spot': 'N/A', '_1yr': '40.415', '_3yr': '39.027'}, 'linuxSQLWeb': {'ondemand': '8.630', 'spot': 'N/A', '_1yr': '6.037', '_3yr': '4.650'}, 'mswin': {'ondemand': '11.424', 'spot': 'N/A', '_1yr': '8.831', '_3yr': '7.443'}, 'mswinSQL': {'ondemand': '22.944', 'spot': 'N/A', '_1yr': '20.351', '_3yr': '18.963'}, 'mswinSQLEnterprise': {'ondemand': '47.424', 'spot': 'N/A', '_1yr': '44.831', '_3yr': '43.443'}, 'mswinSQLWeb': {'ondemand': '13.046', 'spot': 'N/A', '_1yr': '10.453', '_3yr': '9.066'}, 'rhel': {'ondemand': '7.173', 'spot': 'N/A', '_1yr': '4.577', '_3yr': '3.186'}, 'rhelSQL': {'ondemand': '18.658', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '43.138', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '8.770', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '7.108', 'spot': 'N/A', '_1yr': '4.448', '_3yr': '3.060'}}, 'ap-northeast-2': {'linux': {'ondemand': '6.672', 'spot': 'N/A', '_1yr': '4.161', '_3yr': '2.882'}, 'linuxSQL': {'ondemand': '18.192', 'spot': 'N/A', '_1yr': '15.681', '_3yr': '14.402'}, 'linuxSQLEnterprise': {'ondemand': '42.672', 'spot': 'N/A', '_1yr': '40.161', '_3yr': '38.882'}, 'linuxSQLWeb': {'ondemand': '8.294', 'spot': 'N/A', '_1yr': '5.783', '_3yr': '4.505'}, 'mswin': {'ondemand': '11.088', 'spot': 'N/A', '_1yr': '8.577', '_3yr': '7.298'}, 'mswinSQL': {'ondemand': '22.608', 'spot': 'N/A', '_1yr': '20.097', '_3yr': '18.818'}, 'mswinSQLEnterprise': {'ondemand': '47.088', 'spot': 'N/A', '_1yr': '44.577', '_3yr': '43.298'}, 'mswinSQLWeb': {'ondemand': '12.710', 'spot': 'N/A', '_1yr': '10.199', '_3yr': '8.921'}, 'rhel': {'ondemand': '6.837', 'spot': 'N/A', '_1yr': '4.323', '_3yr': '3.041'}, 'rhelSQL': {'ondemand': '18.357', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '42.837', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '8.434', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '6.772', 'spot': 'N/A', '_1yr': '4.194', '_3yr': '2.915'}}, 'ap-northeast-3': {'linux': {'ondemand': '7.008', 'spot': 'N/A', '_1yr': '4.415', '_3yr': '3.027'}, 'linuxSQL': {'ondemand': '18.528', 'spot': 'N/A', '_1yr': '15.935', '_3yr': '14.547'}, 'linuxSQLEnterprise': {'ondemand': '43.008', 'spot': 'N/A', '_1yr': '40.415', '_3yr': '39.027'}, 'linuxSQLWeb': {'ondemand': '8.630', 'spot': 'N/A', '_1yr': '6.037', '_3yr': '4.650'}, 'mswin': {'ondemand': '11.424', 'spot': 'N/A', '_1yr': '8.831', '_3yr': '7.443'}, 'mswinSQL': {'ondemand': '22.944', 'spot': 'N/A', '_1yr': '20.351', '_3yr': '18.963'}, 'mswinSQLEnterprise': {'ondemand': '47.424', 'spot': 'N/A', '_1yr': '44.831', '_3yr': '43.443'}, 'mswinSQLWeb': {'ondemand': '13.046', 'spot': 'N/A', '_1yr': '10.453', '_3yr': '9.066'}, 'rhel': {'ondemand': '7.138', 'spot': 'N/A', '_1yr': '4.545', '_3yr': '3.157'}, 'rhelSQL': {'ondemand': '18.693', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '43.138', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '8.770', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '7.108', 'spot': 'N/A', '_1yr': '4.448', '_3yr': '3.060'}}, 'ap-south-1': {'linux': {'ondemand': '5.856', 'spot': 'N/A', '_1yr': '3.689', '_3yr': '2.530'}, 'linuxSQL': {'ondemand': '17.376', 'spot': 'N/A', '_1yr': '15.209', '_3yr': '14.050'}, 'linuxSQLEnterprise': {'ondemand': '41.856', 'spot': 'N/A', '_1yr': '39.689', '_3yr': '38.530'}, 'linuxSQLWeb': {'ondemand': '7.478', 'spot': 'N/A', '_1yr': '5.312', '_3yr': '4.152'}, 'mswin': {'ondemand': '10.272', 'spot': 'N/A', '_1yr': '8.105', '_3yr': '6.946'}, 'mswinSQL': {'ondemand': '21.792', 'spot': 'N/A', '_1yr': '19.625', '_3yr': '18.466'}, 'mswinSQLEnterprise': {'ondemand': '46.272', 'spot': 'N/A', '_1yr': '44.105', '_3yr': '42.946'}, 'mswinSQLWeb': {'ondemand': '11.894', 'spot': 'N/A', '_1yr': '9.728', '_3yr': '8.568'}, 'rhel': {'ondemand': '5.986', 'spot': 'N/A', '_1yr': '3.819', '_3yr': '2.660'}, 'rhelSQL': {'ondemand': '17.541', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '41.986', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '7.618', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '5.956', 'spot': 'N/A', '_1yr': '3.722', '_3yr': '2.563'}}, 'ap-southeast-1': {'linux': {'ondemand': '6.768', 'spot': 'N/A', '_1yr': '4.264', '_3yr': '2.924'}, 'linuxSQL': {'ondemand': '18.288', 'spot': 'N/A', '_1yr': '15.784', '_3yr': '14.444'}, 'linuxSQLEnterprise': {'ondemand': '42.768', 'spot': 'N/A', '_1yr': '40.264', '_3yr': '38.924'}, 'linuxSQLWeb': {'ondemand': '8.390', 'spot': 'N/A', '_1yr': '5.886', '_3yr': '4.546'}, 'mswin': {'ondemand': '11.184', 'spot': 'N/A', '_1yr': '8.680', '_3yr': '7.340'}, 'mswinSQL': {'ondemand': '22.704', 'spot': 'N/A', '_1yr': '20.200', '_3yr': '18.860'}, 'mswinSQLEnterprise': {'ondemand': '47.184', 'spot': 'N/A', '_1yr': '44.680', '_3yr': '43.340'}, 'mswinSQLWeb': {'ondemand': '12.806', 'spot': 'N/A', '_1yr': '10.302', '_3yr': '8.962'}, 'rhel': {'ondemand': '6.933', 'spot': 'N/A', '_1yr': '4.426', '_3yr': '3.082'}, 'rhelSQL': {'ondemand': '18.418', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '42.898', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '8.530', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '6.868', 'spot': 'N/A', '_1yr': '4.297', '_3yr': '2.957'}}, 'ap-southeast-2': {'linux': {'ondemand': '6.816', 'spot': 'N/A', '_1yr': '4.294', '_3yr': '2.945'}, 'linuxSQL': {'ondemand': '18.336', 'spot': 'N/A', '_1yr': '15.814', '_3yr': '14.465'}, 'linuxSQLEnterprise': {'ondemand': '42.816', 'spot': 'N/A', '_1yr': '40.294', '_3yr': '38.945'}, 'linuxSQLWeb': {'ondemand': '8.438', 'spot': 'N/A', '_1yr': '5.916', '_3yr': '4.567'}, 'mswin': {'ondemand': '11.232', 'spot': 'N/A', '_1yr': '8.710', '_3yr': '7.361'}, 'mswinSQL': {'ondemand': '22.752', 'spot': 'N/A', '_1yr': '20.230', '_3yr': '18.881'}, 'mswinSQLEnterprise': {'ondemand': '47.232', 'spot': 'N/A', '_1yr': '44.710', '_3yr': '43.361'}, 'mswinSQLWeb': {'ondemand': '12.854', 'spot': 'N/A', '_1yr': '10.332', '_3yr': '8.983'}, 'rhel': {'ondemand': '6.946', 'spot': 'N/A', '_1yr': '4.424', '_3yr': '3.075'}, 'rhelSQL': {'ondemand': '18.466', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '42.946', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '8.578', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '6.916', 'spot': 'N/A', '_1yr': '4.327', '_3yr': '2.978'}}, 'ap-southeast-3': {'linux': {'ondemand': '6.768', 'spot': 'N/A', '_1yr': '4.264', '_3yr': '2.924'}, 'linuxSQL': {'ondemand': '18.288', 'spot': 'N/A', '_1yr': '15.784', '_3yr': '14.444'}, 'linuxSQLEnterprise': {'ondemand': '42.768', 'spot': 'N/A', '_1yr': '40.264', '_3yr': '38.924'}, 'linuxSQLWeb': {'ondemand': '8.390', 'spot': 'N/A', '_1yr': '5.886', '_3yr': '4.546'}, 'mswin': {'ondemand': '11.184', 'spot': 'N/A', '_1yr': '8.680', '_3yr': '7.340'}, 'mswinSQL': {'ondemand': '22.704', 'spot': 'N/A', '_1yr': '20.200', '_3yr': '18.860'}, 'mswinSQLEnterprise': {'ondemand': '47.184', 'spot': 'N/A', '_1yr': '44.680', '_3yr': '43.340'}, 'mswinSQLWeb': {'ondemand': '12.806', 'spot': 'N/A', '_1yr': '10.302', '_3yr': '8.962'}, 'rhel': {'ondemand': '6.898', 'spot': 'N/A', '_1yr': '4.394', '_3yr': '3.054'}, 'rhelSQL': {'ondemand': '18.418', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '42.933', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '8.530', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '6.868', 'spot': 'N/A', '_1yr': '4.297', '_3yr': '2.957'}}, 'ca-central-1': {'linux': {'ondemand': '6.048', 'spot': 'N/A', '_1yr': '3.810', '_3yr': '2.613'}, 'linuxSQL': {'ondemand': '17.568', 'spot': 'N/A', '_1yr': '15.330', '_3yr': '14.133'}, 'linuxSQLEnterprise': {'ondemand': '42.048', 'spot': 'N/A', '_1yr': '39.810', '_3yr': '38.613'}, 'linuxSQLWeb': {'ondemand': '7.670', 'spot': 'N/A', '_1yr': '5.433', '_3yr': '4.235'}, 'mswin': {'ondemand': '10.464', 'spot': 'N/A', '_1yr': '8.226', '_3yr': '7.029'}, 'mswinSQL': {'ondemand': '21.984', 'spot': 'N/A', '_1yr': '19.746', '_3yr': '18.549'}, 'mswinSQLEnterprise': {'ondemand': '46.464', 'spot': 'N/A', '_1yr': '44.226', '_3yr': '43.029'}, 'mswinSQLWeb': {'ondemand': '12.086', 'spot': 'N/A', '_1yr': '9.849', '_3yr': '8.651'}, 'rhel': {'ondemand': '6.213', 'spot': 'N/A', '_1yr': '3.972', '_3yr': '2.771'}, 'rhelSQL': {'ondemand': '17.733', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '42.213', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '7.810', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '6.148', 'spot': 'N/A', '_1yr': '3.843', '_3yr': '2.646'}}, 'cn-north-1': {'linux': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': 'N/A'}, 'mswin': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': 'N/A'}, 'mswinSQL': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': 'N/A'}, 'mswinSQLEnterprise': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': 'N/A'}, 'mswinSQLWeb': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': 'N/A'}, 'rhel': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': 'N/A'}, 'rhelSQL': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': 'N/A'}, 'sles': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': 'N/A'}}, 'cn-northwest-1': {'linux': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': '0.000'}, 'mswin': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': '0.000'}, 'mswinSQL': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': '0.000'}, 'mswinSQLEnterprise': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': '0.000'}, 'mswinSQLWeb': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': '0.000'}, 'rhel': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': '0.000'}, 'rhelSQL': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': '0.000'}, 'rhelSQLEnterprise': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': '0.000'}, 'rhelSQLWeb': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': '0.000'}, 'sles': {'ondemand': '0.000', 'spot': 'N/A', '_1yr': '0.000', '_3yr': '0.000'}}, 'eu-central-1': {'linux': {'ondemand': '6.528', 'spot': 'N/A', '_1yr': '4.113', '_3yr': '2.820'}, 'linuxSQL': {'ondemand': '18.048', 'spot': 'N/A', '_1yr': '15.633', '_3yr': '14.340'}, 'linuxSQLEnterprise': {'ondemand': '42.528', 'spot': 'N/A', '_1yr': '40.113', '_3yr': '38.820'}, 'linuxSQLWeb': {'ondemand': '8.150', 'spot': 'N/A', '_1yr': '5.735', '_3yr': '4.442'}, 'mswin': {'ondemand': '10.944', 'spot': 'N/A', '_1yr': '8.529', '_3yr': '7.236'}, 'mswinSQL': {'ondemand': '22.464', 'spot': 'N/A', '_1yr': '20.049', '_3yr': '18.756'}, 'mswinSQLEnterprise': {'ondemand': '46.944', 'spot': 'N/A', '_1yr': '44.529', '_3yr': '43.236'}, 'mswinSQLWeb': {'ondemand': '12.566', 'spot': 'N/A', '_1yr': '10.151', '_3yr': '8.858'}, 'rhel': {'ondemand': '6.693', 'spot': 'N/A', '_1yr': '4.275', '_3yr': '2.979'}, 'rhelSQL': {'ondemand': '18.178', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '42.658', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '8.290', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '6.628', 'spot': 'N/A', '_1yr': '4.146', '_3yr': '2.853'}}, 'eu-north-1': {'linux': {'ondemand': '5.760', 'spot': 'N/A', '_1yr': '3.629', '_3yr': '2.488'}, 'linuxSQL': {'ondemand': '17.280', 'spot': 'N/A', '_1yr': '15.149', '_3yr': '14.008'}, 'linuxSQLEnterprise': {'ondemand': '41.760', 'spot': 'N/A', '_1yr': '39.629', '_3yr': '38.488'}, 'linuxSQLWeb': {'ondemand': '7.382', 'spot': 'N/A', '_1yr': '5.251', '_3yr': '4.111'}, 'mswin': {'ondemand': '10.176', 'spot': 'N/A', '_1yr': '8.045', '_3yr': '6.904'}, 'mswinSQL': {'ondemand': '21.696', 'spot': 'N/A', '_1yr': '19.565', '_3yr': '18.424'}, 'mswinSQLEnterprise': {'ondemand': '46.176', 'spot': 'N/A', '_1yr': '44.045', '_3yr': '42.904'}, 'mswinSQLWeb': {'ondemand': '11.798', 'spot': 'N/A', '_1yr': '9.667', '_3yr': '8.527'}, 'rhel': {'ondemand': '5.925', 'spot': 'N/A', '_1yr': '3.791', '_3yr': '2.647'}, 'rhelSQL': {'ondemand': '17.445', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '41.925', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '7.522', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '5.860', 'spot': 'N/A', '_1yr': '3.662', '_3yr': '2.521'}}, 'eu-south-1': {'linux': {'ondemand': '6.336', 'spot': 'N/A', '_1yr': '3.992', '_3yr': '2.737'}, 'linuxSQL': {'ondemand': '17.856', 'spot': 'N/A', '_1yr': '15.512', '_3yr': '14.257'}, 'linuxSQLEnterprise': {'ondemand': '42.336', 'spot': 'N/A', '_1yr': '39.992', '_3yr': '38.737'}, 'linuxSQLWeb': {'ondemand': '7.958', 'spot': 'N/A', '_1yr': '5.614', '_3yr': '4.360'}, 'mswin': {'ondemand': '10.752', 'spot': 'N/A', '_1yr': '8.408', '_3yr': '7.153'}, 'mswinSQL': {'ondemand': '22.272', 'spot': 'N/A', '_1yr': '19.928', '_3yr': '18.673'}, 'mswinSQLEnterprise': {'ondemand': '46.752', 'spot': 'N/A', '_1yr': '44.408', '_3yr': '43.153'}, 'mswinSQLWeb': {'ondemand': '12.374', 'spot': 'N/A', '_1yr': '10.030', '_3yr': '8.776'}, 'rhel': {'ondemand': '6.501', 'spot': 'N/A', '_1yr': '4.122', '_3yr': '2.867'}, 'rhelSQL': {'ondemand': '17.986', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '42.501', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '8.098', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '6.436', 'spot': 'N/A', '_1yr': '4.025', '_3yr': '2.770'}}, 'eu-west-1': {'linux': {'ondemand': '6.048', 'spot': 'N/A', '_1yr': '3.810', '_3yr': '2.613'}, 'linuxSQL': {'ondemand': '17.568', 'spot': 'N/A', '_1yr': '15.330', '_3yr': '14.133'}, 'linuxSQLEnterprise': {'ondemand': '42.048', 'spot': 'N/A', '_1yr': '39.810', '_3yr': '38.613'}, 'linuxSQLWeb': {'ondemand': '7.670', 'spot': 'N/A', '_1yr': '5.433', '_3yr': '4.235'}, 'mswin': {'ondemand': '10.464', 'spot': 'N/A', '_1yr': '8.226', '_3yr': '7.029'}, 'mswinSQL': {'ondemand': '21.984', 'spot': 'N/A', '_1yr': '19.746', '_3yr': '18.549'}, 'mswinSQLEnterprise': {'ondemand': '46.464', 'spot': 'N/A', '_1yr': '44.226', '_3yr': '43.029'}, 'mswinSQLWeb': {'ondemand': '12.086', 'spot': 'N/A', '_1yr': '9.849', '_3yr': '8.651'}, 'rhel': {'ondemand': '6.178', 'spot': 'N/A', '_1yr': '3.940', '_3yr': '2.743'}, 'rhelSQL': {'ondemand': '17.733', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '42.213', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '7.810', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '6.148', 'spot': 'N/A', '_1yr': '3.843', '_3yr': '2.646'}}, 'eu-west-2': {'linux': {'ondemand': '6.288', 'spot': 'N/A', '_1yr': '3.961', '_3yr': '2.716'}, 'linuxSQL': {'ondemand': '17.808', 'spot': 'N/A', '_1yr': '15.481', '_3yr': '14.236'}, 'linuxSQLEnterprise': {'ondemand': '42.288', 'spot': 'N/A', '_1yr': '39.961', '_3yr': '38.716'}, 'linuxSQLWeb': {'ondemand': '7.910', 'spot': 'N/A', '_1yr': '5.584', '_3yr': '4.339'}, 'mswin': {'ondemand': '10.704', 'spot': 'N/A', '_1yr': '8.377', '_3yr': '7.132'}, 'mswinSQL': {'ondemand': '22.224', 'spot': 'N/A', '_1yr': '19.897', '_3yr': '18.652'}, 'mswinSQLEnterprise': {'ondemand': '46.704', 'spot': 'N/A', '_1yr': '44.377', '_3yr': '43.132'}, 'mswinSQLWeb': {'ondemand': '12.326', 'spot': 'N/A', '_1yr': '10.000', '_3yr': '8.755'}, 'rhel': {'ondemand': '6.453', 'spot': 'N/A', '_1yr': '4.123', '_3yr': '2.875'}, 'rhelSQL': {'ondemand': '17.938', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '42.418', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '8.050', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '6.388', 'spot': 'N/A', '_1yr': '3.994', '_3yr': '2.749'}}, 'eu-west-3': {'linux': {'ondemand': '6.336', 'spot': 'N/A', '_1yr': '3.992', '_3yr': '2.737'}, 'linuxSQL': {'ondemand': '17.856', 'spot': 'N/A', '_1yr': '15.512', '_3yr': '14.257'}, 'linuxSQLEnterprise': {'ondemand': '42.336', 'spot': 'N/A', '_1yr': '39.992', '_3yr': '38.737'}, 'linuxSQLWeb': {'ondemand': '7.958', 'spot': 'N/A', '_1yr': '5.614', '_3yr': '4.360'}, 'mswin': {'ondemand': '10.752', 'spot': 'N/A', '_1yr': '8.408', '_3yr': '7.153'}, 'mswinSQL': {'ondemand': '22.272', 'spot': 'N/A', '_1yr': '19.928', '_3yr': '18.673'}, 'mswinSQLEnterprise': {'ondemand': '46.752', 'spot': 'N/A', '_1yr': '44.408', '_3yr': '43.153'}, 'mswinSQLWeb': {'ondemand': '12.374', 'spot': 'N/A', '_1yr': '10.030', '_3yr': '8.776'}, 'rhel': {'ondemand': '6.466', 'spot': 'N/A', '_1yr': '4.122', '_3yr': '2.867'}, 'rhelSQL': {'ondemand': '17.986', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '42.466', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '8.098', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '6.436', 'spot': 'N/A', '_1yr': '4.025', '_3yr': '2.770'}}, 'me-south-1': {'linux': {'ondemand': '6.653', 'spot': 'N/A', '_1yr': '4.191', '_3yr': '2.874'}, 'linuxSQL': {'ondemand': '18.173', 'spot': 'N/A', '_1yr': '15.711', '_3yr': '14.394'}, 'linuxSQLEnterprise': {'ondemand': '42.653', 'spot': 'N/A', '_1yr': '40.191', '_3yr': '38.874'}, 'linuxSQLWeb': {'ondemand': '8.275', 'spot': 'N/A', '_1yr': '5.814', '_3yr': '4.496'}, 'mswin': {'ondemand': '11.069', 'spot': 'N/A', '_1yr': '8.607', '_3yr': '7.290'}, 'mswinSQL': {'ondemand': '22.589', 'spot': 'N/A', '_1yr': '20.127', '_3yr': '18.810'}, 'mswinSQLEnterprise': {'ondemand': '47.069', 'spot': 'N/A', '_1yr': '44.607', '_3yr': '43.290'}, 'mswinSQLWeb': {'ondemand': '12.691', 'spot': 'N/A', '_1yr': '10.230', '_3yr': '8.912'}, 'rhel': {'ondemand': '6.783', 'spot': 'N/A', '_1yr': '4.321', '_3yr': '3.004'}, 'rhelSQL': {'ondemand': '18.303', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '42.783', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '8.415', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '6.753', 'spot': 'N/A', '_1yr': '4.224', '_3yr': '2.907'}}, 'sa-east-1': {'linux': {'ondemand': '8.640', 'spot': 'N/A', '_1yr': '5.235', '_3yr': '3.732'}, 'linuxSQL': {'ondemand': '20.160', 'spot': 'N/A', '_1yr': '16.755', '_3yr': '15.252'}, 'linuxSQLEnterprise': {'ondemand': '44.640', 'spot': 'N/A', '_1yr': '41.235', '_3yr': '39.732'}, 'linuxSQLWeb': {'ondemand': '10.262', 'spot': 'N/A', '_1yr': '6.858', '_3yr': '5.355'}, 'mswin': {'ondemand': '13.056', 'spot': 'N/A', '_1yr': '9.651', '_3yr': '8.148'}, 'mswinSQL': {'ondemand': '24.576', 'spot': 'N/A', '_1yr': '21.171', '_3yr': '19.668'}, 'mswinSQLEnterprise': {'ondemand': '49.056', 'spot': 'N/A', '_1yr': '45.651', '_3yr': '44.148'}, 'mswinSQLWeb': {'ondemand': '14.678', 'spot': 'N/A', '_1yr': '11.274', '_3yr': '9.771'}, 'rhel': {'ondemand': '8.805', 'spot': 'N/A', '_1yr': '5.397', '_3yr': '3.891'}, 'rhelSQL': {'ondemand': '20.290', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '44.770', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '10.402', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '8.740', 'spot': 'N/A', '_1yr': '5.268', '_3yr': '3.765'}}, 'us-east-1': {'linux': {'ondemand': '5.424', 'spot': 'N/A', '_1yr': '3.417', '_3yr': '2.343'}, 'linuxSQL': {'ondemand': '16.944', 'spot': 'N/A', '_1yr': '14.937', '_3yr': '13.863'}, 'linuxSQLEnterprise': {'ondemand': '41.424', 'spot': 'N/A', '_1yr': '39.417', '_3yr': '38.343'}, 'linuxSQLWeb': {'ondemand': '7.046', 'spot': 'N/A', '_1yr': '5.040', '_3yr': '3.966'}, 'mswin': {'ondemand': '9.840', 'spot': 'N/A', '_1yr': '7.833', '_3yr': '6.759'}, 'mswinSQL': {'ondemand': '21.360', 'spot': 'N/A', '_1yr': '19.353', '_3yr': '18.279'}, 'mswinSQLEnterprise': {'ondemand': '45.840', 'spot': 'N/A', '_1yr': '43.833', '_3yr': '42.759'}, 'mswinSQLWeb': {'ondemand': '11.462', 'spot': 'N/A', '_1yr': '9.456', '_3yr': '8.382'}, 'rhel': {'ondemand': '5.554', 'spot': 'N/A', '_1yr': '3.547', '_3yr': '2.473'}, 'rhelSQL': {'ondemand': '17.074', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '41.554', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '7.186', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '5.524', 'spot': 'N/A', '_1yr': '3.450', '_3yr': '2.376'}}, 'us-east-2': {'linux': {'ondemand': '5.424', 'spot': 'N/A', '_1yr': '3.417', '_3yr': '2.343'}, 'linuxSQL': {'ondemand': '16.944', 'spot': 'N/A', '_1yr': '14.937', '_3yr': '13.863'}, 'linuxSQLEnterprise': {'ondemand': '41.424', 'spot': 'N/A', '_1yr': '39.417', '_3yr': '38.343'}, 'linuxSQLWeb': {'ondemand': '7.046', 'spot': 'N/A', '_1yr': '5.040', '_3yr': '3.966'}, 'mswin': {'ondemand': '9.840', 'spot': 'N/A', '_1yr': '7.833', '_3yr': '6.759'}, 'mswinSQL': {'ondemand': '21.360', 'spot': 'N/A', '_1yr': '19.353', '_3yr': '18.279'}, 'mswinSQLEnterprise': {'ondemand': '45.840', 'spot': 'N/A', '_1yr': '43.833', '_3yr': '42.759'}, 'mswinSQLWeb': {'ondemand': '11.462', 'spot': 'N/A', '_1yr': '9.456', '_3yr': '8.382'}, 'rhel': {'ondemand': '5.589', 'spot': 'N/A', '_1yr': '3.579', '_3yr': '2.502'}, 'rhelSQL': {'ondemand': '17.074', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '41.589', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '7.186', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '5.524', 'spot': 'N/A', '_1yr': '3.450', '_3yr': '2.376'}}, 'us-gov-east-1': {'linux': {'ondemand': '6.864', 'spot': 'N/A', '_1yr': '4.324', '_3yr': '2.965'}, 'linuxSQL': {'ondemand': '18.384', 'spot': 'N/A', '_1yr': '15.844', '_3yr': '14.485'}, 'linuxSQLEnterprise': {'ondemand': '42.864', 'spot': 'N/A', '_1yr': '40.324', '_3yr': '38.965'}, 'linuxSQLWeb': {'ondemand': '8.486', 'spot': 'N/A', '_1yr': '5.947', '_3yr': '4.588'}, 'mswin': {'ondemand': '11.280', 'spot': 'N/A', '_1yr': '8.740', '_3yr': '7.381'}, 'mswinSQL': {'ondemand': '22.800', 'spot': 'N/A', '_1yr': '20.260', '_3yr': '18.901'}, 'mswinSQLEnterprise': {'ondemand': '47.280', 'spot': 'N/A', '_1yr': '44.740', '_3yr': '43.381'}, 'mswinSQLWeb': {'ondemand': '12.902', 'spot': 'N/A', '_1yr': '10.363', '_3yr': '9.004'}, 'rhel': {'ondemand': '6.994', 'spot': 'N/A', '_1yr': '4.454', '_3yr': '3.095'}, 'rhelSQL': {'ondemand': '18.514', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '43.029', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '8.626', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '6.964', 'spot': 'N/A', '_1yr': '4.357', '_3yr': '2.998'}}, 'us-gov-west-1': {'linux': {'ondemand': '6.864', 'spot': 'N/A', '_1yr': '4.324', '_3yr': '2.965'}, 'linuxSQL': {'ondemand': '18.384', 'spot': 'N/A', '_1yr': '15.844', '_3yr': '14.485'}, 'linuxSQLEnterprise': {'ondemand': '42.864', 'spot': 'N/A', '_1yr': '40.324', '_3yr': '38.965'}, 'linuxSQLWeb': {'ondemand': '8.486', 'spot': 'N/A', '_1yr': '5.947', '_3yr': '4.588'}, 'mswin': {'ondemand': '11.280', 'spot': 'N/A', '_1yr': '8.740', '_3yr': '7.381'}, 'mswinSQL': {'ondemand': '22.800', 'spot': 'N/A', '_1yr': '20.260', '_3yr': '18.901'}, 'mswinSQLEnterprise': {'ondemand': '47.280', 'spot': 'N/A', '_1yr': '44.740', '_3yr': '43.381'}, 'mswinSQLWeb': {'ondemand': '12.902', 'spot': 'N/A', '_1yr': '10.363', '_3yr': '9.004'}, 'rhel': {'ondemand': '7.029', 'spot': 'N/A', '_1yr': '4.486', '_3yr': '3.124'}, 'rhelSQL': {'ondemand': '18.514', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '43.029', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '8.626', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '6.964', 'spot': 'N/A', '_1yr': '4.357', '_3yr': '2.998'}}, 'us-west-1': {'linux': {'ondemand': '6.384', 'spot': 'N/A', '_1yr': '4.022', '_3yr': '2.758'}, 'linuxSQL': {'ondemand': '17.904', 'spot': 'N/A', '_1yr': '15.542', '_3yr': '14.278'}, 'linuxSQLEnterprise': {'ondemand': '42.384', 'spot': 'N/A', '_1yr': '40.022', '_3yr': '38.758'}, 'linuxSQLWeb': {'ondemand': '8.006', 'spot': 'N/A', '_1yr': '5.644', '_3yr': '4.380'}, 'mswin': {'ondemand': '10.800', 'spot': 'N/A', '_1yr': '8.438', '_3yr': '7.174'}, 'mswinSQL': {'ondemand': '22.320', 'spot': 'N/A', '_1yr': '19.958', '_3yr': '18.694'}, 'mswinSQLEnterprise': {'ondemand': '46.800', 'spot': 'N/A', '_1yr': '44.438', '_3yr': '43.174'}, 'mswinSQLWeb': {'ondemand': '12.422', 'spot': 'N/A', '_1yr': '10.060', '_3yr': '8.796'}, 'rhel': {'ondemand': '6.549', 'spot': 'N/A', '_1yr': '4.184', '_3yr': '2.917'}, 'rhelSQL': {'ondemand': '18.034', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '42.549', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '8.146', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '6.484', 'spot': 'N/A', '_1yr': '4.055', '_3yr': '2.791'}}, 'us-west-2': {'linux': {'ondemand': '5.424', 'spot': 'N/A', '_1yr': '3.417', '_3yr': '2.343'}, 'linuxSQL': {'ondemand': '16.944', 'spot': 'N/A', '_1yr': '14.937', '_3yr': '13.863'}, 'linuxSQLEnterprise': {'ondemand': '41.424', 'spot': 'N/A', '_1yr': '39.417', '_3yr': '38.343'}, 'linuxSQLWeb': {'ondemand': '7.046', 'spot': 'N/A', '_1yr': '5.040', '_3yr': '3.966'}, 'mswin': {'ondemand': '9.840', 'spot': 'N/A', '_1yr': '7.833', '_3yr': '6.759'}, 'mswinSQL': {'ondemand': '21.360', 'spot': 'N/A', '_1yr': '19.353', '_3yr': '18.279'}, 'mswinSQLEnterprise': {'ondemand': '45.840', 'spot': 'N/A', '_1yr': '43.833', '_3yr': '42.759'}, 'mswinSQLWeb': {'ondemand': '11.462', 'spot': 'N/A', '_1yr': '9.456', '_3yr': '8.382'}, 'rhel': {'ondemand': '5.554', 'spot': 'N/A', '_1yr': '3.547', '_3yr': '2.473'}, 'rhelSQL': {'ondemand': '17.109', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLEnterprise': {'ondemand': '41.589', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'rhelSQLWeb': {'ondemand': '7.186', 'spot': 'N/A', '_1yr': 'N/A', '_3yr': 'N/A'}, 'sles': {'ondemand': '5.524', 'spot': 'N/A', '_1yr': '3.450', '_3yr': '2.376'}}};
+
+    $('#region').change(function() {
+      recalulate_redisplay_prices()
+    });
+    $('#os').change(function() {
+      recalulate_redisplay_prices()
+    });
+    $('#unit').change(function() {
+      recalulate_redisplay_prices()
+    });
+
+    function recalulate_redisplay_prices() {
+      var region = $('#region').val();
+      var os = $('#os').val();
+      var unit = $('#unit').val();
+      var price = _prices[region][os];
+
+      var hour_multipliers = {
+        'hour': 1,
+        'day': 24,
+        'week': 7 * 24,
+        'month': 730,   // use AWS convention of 730 hrs/month
+      };
+
+      var displayed_prices = ['ondemand', '_1yr', 'spot', '_3yr'];
+      var elements = ['p_od', 'p_1yr', 'p_spot', 'p_3yr'];
+
+      for(var i =0; i < elements.length; i++) {
+        var element = elements[i];
+        var displayed_price = displayed_prices[i];
+        var price_value = price[displayed_price];
+
+        if (price_value == 'N/A') {
+          $('#' + element).html('N/A');
+        } else {
+          var price_value = price_value * hour_multipliers[unit];
+          $('#' + element).html(price_value.toFixed(3));
+        }
+      }
+
+    }
+
+
+  </script>
+  </body>
+</html>
