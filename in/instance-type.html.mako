@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/default.css" media="screen">
     <!-- Boostrap 3.2 https://bootstrapdocs.com/v3.2.0/docs/ -->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="/style.css">
     <link rel="icon" type="image/png" href="/favicon.png">
     <title>${i["Amazon"][4]['value']} Details</title>
     <meta name="description" content="${i['Amazon'][4]['value']} CPUs, memory, storage and pricing"></head>
