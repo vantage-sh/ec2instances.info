@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap");
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+html {
+  font-size: initial;
+}
+
+body {
+  font: 100% "Inter", Helvetica, sans-serif;
+  color: #303037;
+  padding: 0;
+}
+
+a {
+  color: #9C25C7;
+}
+
+.nav {
+  background-color: #9C25C7;
+  padding: 12px;
+}
+
+table {
+  border: 1px solid #E3E3E9;
+  font-size: 14px;
+  width: 100%;
+  margin-bottom: 24px !important;
+  border-radius: 6px;
+}
+table th {
+  font-weight: 600;
+  background-color: #FAFAFB !important;
+}
+table.table-mono {
+  font-family: "Roboto Mono", monospace;
+}
+table.table-mono th {
+  background-color: #FFFFFF !important;
+}
+table.table-mono tbody tr:nth-child(even) td {
+  background-color: #FAFAFB !important;
+}
+
+.fs-12 {
+  font-size: 12px;
+}
+
+.btn {
+  font-size: 14px;
+  font-weight: 600;
+}
+.btn.btn-white {
+  background-color: #FFFFFF;
+  color: #1A1A1C;
+  border: 1px solid #E3E3E9;
+}
+
+.column-left {
+  max-width: 400px;
+  width: 100%;
+  padding: 24px 0 24px 24px;
+}
+
+.column-middle {
+  flex: 1 1 auto;
+  display: flex;
+  padding: 24px 40px;
+  overflow: auto;
+}
+
+.column-right {
+  max-width: 350px;
+  width: 100%;
+  background-color: #FAFAFB;
+  padding: 24px;
+}
+
+.github-login {
+  padding: 12px;
+  background-color: #FFFFFF;
+  border: 1px solid #E3E3E9;
+  border-radius: 6px;
+  font-size: 12px;
+}
+.github-login a {
+  text-decoration: none;
+}
+
+.material-icons {
+  font-size: 18px !important;
+}
+
+/*# sourceMappingURL=style.css.map */
