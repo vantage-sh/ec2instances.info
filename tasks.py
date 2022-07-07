@@ -40,8 +40,8 @@ HTTP_PORT = os.getenv("HTTP_PORT", "8080")
 def build(c):
     """Scrape AWS sources for data and build the site"""
     scrape_ec2(c)
-    scrape_rds(c)
-    scrape_cache(c)
+    #scrape_rds(c)
+    #scrape_cache(c)
     render_html(c)
 
 
@@ -96,8 +96,8 @@ def serve(c):
 def render_html(c):
     """Render HTML but do not update data from Amazon"""
     render("www/instances.json", "in/index.html.mako", "www/index.html")
-    render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
-    render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
+    # render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
+    # render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
 
 
 @task

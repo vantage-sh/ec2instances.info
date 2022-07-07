@@ -31,7 +31,6 @@ def prices(pricing):
         display_prices[region] = {}
 
         for os, _p in p.items():
-            print(os)
             display_prices[region][os] = {}
             
             if os == 'ebs' or os == 'emr':
