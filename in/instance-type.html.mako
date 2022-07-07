@@ -159,9 +159,9 @@
               % elif category == "Pricing":
                 <p>See the main page for full pricing</p>
               % else:
-                <table class="table">
+                <table class="table" id="${category}">
                   <tr>
-                    <th class="col-6 border-end">${category}</th>
+                    <th class="col-6 border-end"><a href="#${category}">${category}</a></th>
                     <th class="col-6">Value</th>
                   </tr>
                 % for a in attrs:

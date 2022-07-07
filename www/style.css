@@ -34,6 +34,9 @@ table th {
   font-weight: 600;
   background-color: #FAFAFB !important;
 }
+table a {
+  text-decoration: none !important;
+}
 table.table-mono {
   font-family: "Roboto Mono", monospace;
 }

@@ -58,6 +58,10 @@ table {
     background-color: $gray-7 !important;
   }
 
+  a {
+    text-decoration: none !important;
+  }
+
   &.table-mono {
     font-family: $mono;
     th {
