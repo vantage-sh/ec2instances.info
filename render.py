@@ -9,6 +9,16 @@ import csv
 import yaml
 
 
+def description(instance):
+    name = instance["pretty_name"]
+    family_category = instance["family"]
+    cpus = instance["vCPU"]
+    memory = instance["memory"]
+    bandwidth = instance["network_performance"]
+
+    return "The {} is a {} instance with {} CPUs, {} GiB of memory and {} of bandwidth".format(
+        name, family_category, cpus, memory, bandwidth)
+
 def community():
     data_file = "community_contributions.yaml"
 
@@ -168,11 +178,10 @@ def map_ec2_attributes(i):
     # into the format we want to render. Later we can create this in YAML
     # and use a standard function that maps names
     categories = [
-        "Amazon",
         "Compute",
         "Networking",
         "Storage",
-        "Hardware",
+        "Amazon",
         "Not Shown",
         "Coming Soon",
     ]
@@ -215,6 +224,7 @@ def build_instance_families(instances, destination_file):
     lookup = mako.lookup.TemplateLookup(directories=["."])
     template = mako.template.Template(filename='in/instance-type.html.mako', lookup=lookup)
 
+    # To add more data to a single instance page, do so inside this loop
     for i in instances:
         instance_type = i["instance_type"]
 
@@ -222,12 +232,14 @@ def build_instance_families(instances, destination_file):
         instance_details = map_ec2_attributes(i)
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
+        idescription = description(i)
 
         with io.open(instance_page, "w+", encoding="utf-8") as fh:
             try:
                 fh.write(template.render(
                     i=instance_details,
                     family=fam_members,
+                    description=idescription,
                 ))
             except:
                 print(mako.exceptions.text_error_template().render())

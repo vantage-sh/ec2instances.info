@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/style.css">
     <link rel="icon" type="image/png" href="/favicon.png">
     <title>${i["Amazon"][4]['value']} Details</title>
-    <meta name="description" content="${i['Amazon'][4]['value']} CPUs, memory, storage and pricing"></head>
+    <meta name="description" content="${description}"></head>
   </head>
     
   <body>
@@ -37,7 +37,7 @@
             <h1 class="h3 mb-0 fw-bolder">${i["Amazon"][4]['value']}</h1>
             
             <!-- Placeholder text here -->
-            <p class="py-4 mb-0 small lh-base">The C5 High-CPU Double Extra Large is a compute-optimized instance with 8 CPUs, 16 GB of Memory, up to 10 GBps of bandwidth, and a 200 GB SSD attached.</p>
+            <p class="py-4 mb-0 small lh-base">${description}</p>
             
             <div class="d-flex flex-wrap">
               <div class="col-6 pe-2 mb-2">
@@ -94,26 +94,26 @@
                 </select>
               </div>
               <div class="col-6">
-                <select class="form-select form-select-sm" id="unit">
-                  <option value="hour">New Select</option>
+                <select class="form-select form-select-sm" id="term">
+                  <option value="hour">No Upfront (not implemented)</option>
                 </select>
               </div>
             </div>
             <div class="small d-flex mt-4">
               <div class="col-sm-3">
-                <p class="h6 mb-0 fw-semibold" id="p_od">${i["Pricing"]["us-east-1"]["linux"]["ondemand"]}</p>
+                <p class="h6 mb-0 fw-semibold" id="p_od">&dollar;${i["Pricing"]["us-east-1"]["linux"]["ondemand"]}</p>
                 <p class="mb-0 fs-12 text-muted">On Demand</p>
               </div>
               <div class="col-sm-3">
-                <p class="h6 mb-0 fw-semibold" id="p_1yr">${i["Pricing"]["us-east-1"]["linux"]["_1yr"]}</p>
+                <p class="h6 mb-0 fw-semibold" id="p_1yr">&dollar;${i["Pricing"]["us-east-1"]["linux"]["_1yr"]}</p>
                 <p class="mb-0 fs-12 text-muted">1 Yr Reserved</p>
               </div>
               <div class="col-sm-3">
-                <p class="h6 mb-0 fw-semibold" id="p_spot">${i["Pricing"]["us-east-1"]["linux"]["spot"]}</p>
+                <p class="h6 mb-0 fw-semibold" id="p_spot">&dollar;${i["Pricing"]["us-east-1"]["linux"]["spot"]}</p>
                 <p class="mb-0 fs-12 text-muted">Spot</p>
               </div>
               <div class="col-sm-3">
-                <p class="h6 mb-0 fw-semibold" id="p_3yr">${i["Pricing"]["us-east-1"]["linux"]["_3yr"]}</p>
+                <p class="h6 mb-0 fw-semibold" id="p_3yr">&dollar;${i["Pricing"]["us-east-1"]["linux"]["_3yr"]}</p>
                 <p class="mb-0 fs-12 text-muted">3 Yr Reserved</p>
               </div>
             </div>
@@ -147,15 +147,17 @@
               % for category, attrs in i.items():
                 % if category == "Coming Soon":
                   % for a in attrs:
-                    <p>${a["display_name"]}</p>
+                    <!--<p>${a["display_name"]}</p>-->
                   % endfor
                 % elif category == "Not Shown":
+                <!--
                   <p>Request this data to be included on Github</p>
                   % for a in attrs:
                     <p>${a["cloud_key"]}</p>
                   % endfor
+                -->
                 % elif category == "Pricing":
-                  <p>See the main page for full pricing</p>
+                  <p></p>
                 % else:
                   <table class="table" id="${category}">
                     <tr>
@@ -231,7 +233,7 @@
           $('#' + element).html('N/A');
         } else {
           var price_value = price_value * hour_multipliers[unit];
-          $('#' + element).html(price_value.toFixed(3));
+          $('#' + element).html("&dollar;" + price_value.toFixed(3));
         }
       }
 
