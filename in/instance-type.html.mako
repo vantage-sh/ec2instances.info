@@ -32,144 +32,146 @@
         </svg>
       </div>
       <div class="d-flex flex-fill overflow-hidden">
-        <div class="column-left">
-          <h1 class="h3 mb-0 fw-bolder">${i["Amazon"][4]['value']}</h1>
-          
-          <!-- Placeholder text here -->
-          <p class="py-4 mb-0 small lh-base">The C5 High-CPU Double Extra Large is a compute-optimized instance with 8 CPUs, 16 GB of Memory, up to 10 GBps of bandwidth, and a 200 GB SSD attached.</p>
-          
-          <div class="d-flex flex-wrap">
-            <div class="col-6 pe-2 mb-2">
-              <select class="form-select form-select-sm" id="region">
-                <option value='us-east-1'>US East (N. Virginia)</option>
-                <option value='af-south-1'>Africa (Cape Town)</option>
-                <option value='ap-east-1'>Asia-Pacific (Hong Kong)</option>
-                <option value='ap-south-1'>Asia-Pacific (Mumbai)</option>
-                <option value='ap-northeast-3'>Asia-Pacific (Osaka)</option>
-                <option value='ap-northeast-2'>Asia-Pacific (Seoul)</option>
-                <option value='ap-southeast-1'>Asia-Pacific (Singapore)</option>
-                <option value='ap-southeast-2'>Asia-Pacific (Sydney)</option>
-                <option value='ap-southeast-3'>Asia-Pacific (Jakarta)</option>
-                <option value='ap-northeast-1'>Asia-Pacific (Tokyo)</option>
-                <option value='ca-central-1'>Canada (Central)</option>
-                <option value='eu-central-1'>Europe (Frankfurt)</option>
-                <option value='eu-west-1'>Europe (Ireland)</option>
-                <option value='eu-west-2'>Europe (London)</option>
-                <option value='eu-west-3'>Europe (Paris)</option>
-                <option value='eu-north-1'>Europe (Stockholm)</option>
-                <option value='eu-south-1'>Europe (Milan)</option>
-                <option value='me-south-1'>Middle East (Bahrain)</option>
-                <option value='sa-east-1'>South America (S&atilde;o Paulo)</option>
-                <option value='us-east-2'>US East (Ohio)</option>
-                <option value='us-west-1'>US West (California)</option>
-                <option value='us-west-2'>US West (Oregon)</option>
-                <option value='us-gov-west-1'>AWS GovCloud (US-West)</option>
-                <option value='us-gov-east-1'>AWS GovCloud (US-East)</option>
-              </select>
+        <div class="d-flex flex-fill overflow-auto">
+          <div class="column-left">
+            <h1 class="h3 mb-0 fw-bolder">${i["Amazon"][4]['value']}</h1>
+            
+            <!-- Placeholder text here -->
+            <p class="py-4 mb-0 small lh-base">The C5 High-CPU Double Extra Large is a compute-optimized instance with 8 CPUs, 16 GB of Memory, up to 10 GBps of bandwidth, and a 200 GB SSD attached.</p>
+            
+            <div class="d-flex flex-wrap">
+              <div class="col-6 pe-2 mb-2">
+                <select class="form-select form-select-sm" id="region">
+                  <option value='us-east-1'>US East (N. Virginia)</option>
+                  <option value='af-south-1'>Africa (Cape Town)</option>
+                  <option value='ap-east-1'>Asia-Pacific (Hong Kong)</option>
+                  <option value='ap-south-1'>Asia-Pacific (Mumbai)</option>
+                  <option value='ap-northeast-3'>Asia-Pacific (Osaka)</option>
+                  <option value='ap-northeast-2'>Asia-Pacific (Seoul)</option>
+                  <option value='ap-southeast-1'>Asia-Pacific (Singapore)</option>
+                  <option value='ap-southeast-2'>Asia-Pacific (Sydney)</option>
+                  <option value='ap-southeast-3'>Asia-Pacific (Jakarta)</option>
+                  <option value='ap-northeast-1'>Asia-Pacific (Tokyo)</option>
+                  <option value='ca-central-1'>Canada (Central)</option>
+                  <option value='eu-central-1'>Europe (Frankfurt)</option>
+                  <option value='eu-west-1'>Europe (Ireland)</option>
+                  <option value='eu-west-2'>Europe (London)</option>
+                  <option value='eu-west-3'>Europe (Paris)</option>
+                  <option value='eu-north-1'>Europe (Stockholm)</option>
+                  <option value='eu-south-1'>Europe (Milan)</option>
+                  <option value='me-south-1'>Middle East (Bahrain)</option>
+                  <option value='sa-east-1'>South America (S&atilde;o Paulo)</option>
+                  <option value='us-east-2'>US East (Ohio)</option>
+                  <option value='us-west-1'>US West (California)</option>
+                  <option value='us-west-2'>US West (Oregon)</option>
+                  <option value='us-gov-west-1'>AWS GovCloud (US-West)</option>
+                  <option value='us-gov-east-1'>AWS GovCloud (US-East)</option>
+                </select>
+              </div>
+              <div class="col-6 mb-2">
+                <select class="form-select form-select-sm" id="os">
+                  <option value="linux">Linux</option>
+                  <option value="mswin">Windows</option>
+                  <option value="rhel">Red Hat</option>
+                  <option value="sles">SUSE</option>
+                  <option value="linuxSQL">Linux SQL Server</option>
+                  <option value="linuxSQLEnterprise">Linux SQL Enterprise</option>
+                  <option value="linuxSQLWeb">Linux SQL Server for Web</option>
+                  <option value="mswinSQL">Windows SQL Server</option>
+                  <option value="mswinSQLEnterprise">Windows SQL Enterprise</option>
+                  <option value="mswinSQLWeb">Windows SQL Web</option>
+                  <option value="rhelSQL">Red Hat SQL Server</option>
+                  <option value="rhelSQLEnterprise">Red Hat SQL Enterprise</option>
+                  <option value="rhelSQLWeb">Red Hat SQL Web</option>
+                </select>
+              </div>
+              <div class="col-6 pe-2">
+                <select class="form-select form-select-sm" id="unit">
+                  <option value="hour">Per Hour</option>
+                  <option value="day">Per Day</option>
+                  <option value="week">Per Week</option>
+                  <option value="month">Per Month</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <select class="form-select form-select-sm" id="unit">
+                  <option value="hour">New Select</option>
+                </select>
+              </div>
             </div>
-            <div class="col-6 mb-2">
-              <select class="form-select form-select-sm" id="os">
-                <option value="linux">Linux</option>
-                <option value="mswin">Windows</option>
-                <option value="rhel">Red Hat</option>
-                <option value="sles">SUSE</option>
-                <option value="linuxSQL">Linux SQL Server</option>
-                <option value="linuxSQLEnterprise">Linux SQL Enterprise</option>
-                <option value="linuxSQLWeb">Linux SQL Server for Web</option>
-                <option value="mswinSQL">Windows SQL Server</option>
-                <option value="mswinSQLEnterprise">Windows SQL Enterprise</option>
-                <option value="mswinSQLWeb">Windows SQL Web</option>
-                <option value="rhelSQL">Red Hat SQL Server</option>
-                <option value="rhelSQLEnterprise">Red Hat SQL Enterprise</option>
-                <option value="rhelSQLWeb">Red Hat SQL Web</option>
-              </select>
+            <div class="small d-flex mt-4">
+              <div class="col-sm-3">
+                <p class="h6 mb-0 fw-semibold" id="p_od">${i["Pricing"]["us-east-1"]["linux"]["ondemand"]}</p>
+                <p class="mb-0 fs-12 text-muted">On Demand</p>
+              </div>
+              <div class="col-sm-3">
+                <p class="h6 mb-0 fw-semibold" id="p_1yr">${i["Pricing"]["us-east-1"]["linux"]["_1yr"]}</p>
+                <p class="mb-0 fs-12 text-muted">1 Yr Reserved</p>
+              </div>
+              <div class="col-sm-3">
+                <p class="h6 mb-0 fw-semibold" id="p_spot">${i["Pricing"]["us-east-1"]["linux"]["spot"]}</p>
+                <p class="mb-0 fs-12 text-muted">Spot</p>
+              </div>
+              <div class="col-sm-3">
+                <p class="h6 mb-0 fw-semibold" id="p_3yr">${i["Pricing"]["us-east-1"]["linux"]["_3yr"]}</p>
+                <p class="mb-0 fs-12 text-muted">3 Yr Reserved</p>
+              </div>
             </div>
-            <div class="col-6 pe-2">
-              <select class="form-select form-select-sm" id="unit">
-                <option value="hour">Per Hour</option>
-                <option value="day">Per Day</option>
-                <option value="week">Per Week</option>
-                <option value="month">Per Month</option>
-              </select>
-            </div>
-            <div class="col-6">
-              <select class="form-select form-select-sm" id="unit">
-                <option value="hour">New Select</option>
-              </select>
-            </div>
-          </div>
-          <div class="small d-flex mt-4">
-            <div class="col-sm-3">
-              <p class="h6 mb-0 fw-semibold" id="p_od">${i["Pricing"]["us-east-1"]["linux"]["ondemand"]}</p>
-              <p class="mb-0 fs-12 text-muted">On Demand</p>
-            </div>
-            <div class="col-sm-3">
-              <p class="h6 mb-0 fw-semibold" id="p_1yr">${i["Pricing"]["us-east-1"]["linux"]["_1yr"]}</p>
-              <p class="mb-0 fs-12 text-muted">1 Yr Reserved</p>
-            </div>
-            <div class="col-sm-3">
-              <p class="h6 mb-0 fw-semibold" id="p_spot">${i["Pricing"]["us-east-1"]["linux"]["spot"]}</p>
-              <p class="mb-0 fs-12 text-muted">Spot</p>
-            </div>
-            <div class="col-sm-3">
-              <p class="h6 mb-0 fw-semibold" id="p_3yr">${i["Pricing"]["us-east-1"]["linux"]["_3yr"]}</p>
-              <p class="mb-0 fs-12 text-muted">3 Yr Reserved</p>
-            </div>
-          </div>
-          <div class="mt-5 d-flex flex-column">
-            <div class="d-flex align-items-center mb-3">
-              <span class="material-icons me-1">dns</span>
-              <p class="h6 fw-semibold mb-0">Family Sizes</p>
-            </div>
-            <table class="table table-mono">
-              <thead>
-                <tr>
-                  <th>Size</th>
-                  <th class="text-center">CPU</th>
-                  <th class="text-center">Memory (GiB)</th>
-                </tr>
-              </thead>
-              <tbody>
-                % for f in family:
-                <tr>
-                  <td><a href="/aws/ec2/${f["name"]}.html">${f["name"]}</a></td>
-                  <td class="text-center">${f["cpus"]}</td>
-                  <td class="text-center">${f["memory"]}</td>
-                </tr>
-                % endfor
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="column-middle">
-          <div class="w-100">
-            % for category, attrs in i.items():
-              % if category == "Coming Soon":
-                % for a in attrs:
-                  <p>${a["display_name"]}</p>
-                % endfor
-              % elif category == "Not Shown":
-                <p>Request this data to be included on Github</p>
-                % for a in attrs:
-                  <p>${a["cloud_key"]}</p>
-                % endfor
-              % elif category == "Pricing":
-                <p>See the main page for full pricing</p>
-              % else:
-                <table class="table" id="${category}">
+            <div class="mt-5 d-flex flex-column">
+              <div class="d-flex align-items-center mb-3">
+                <span class="material-icons me-1">dns</span>
+                <p class="h6 fw-semibold mb-0">Family Sizes</p>
+              </div>
+              <table class="table table-mono">
+                <thead>
                   <tr>
-                    <th class="col-6 border-end"><a href="#${category}">${category}</a></th>
-                    <th class="col-6">Value</th>
+                    <th>Size</th>
+                    <th class="text-center">CPU</th>
+                    <th class="text-center">Memory (GiB)</th>
                   </tr>
-                % for a in attrs:
+                </thead>
+                <tbody>
+                  % for f in family:
                   <tr>
-                    <td class="col-6 border-end">${a["display_name"]}</td>
-                    <td class="col-6">${a["value"]}</td>
+                    <td><a href="/aws/ec2/${f["name"]}.html">${f["name"]}</a></td>
+                    <td class="text-center">${f["cpus"]}</td>
+                    <td class="text-center">${f["memory"]}</td>
                   </tr>
-                % endfor
-                </table>
-              % endif
-            % endfor
+                  % endfor
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="column-middle">
+            <div class="w-100">
+              % for category, attrs in i.items():
+                % if category == "Coming Soon":
+                  % for a in attrs:
+                    <p>${a["display_name"]}</p>
+                  % endfor
+                % elif category == "Not Shown":
+                  <p>Request this data to be included on Github</p>
+                  % for a in attrs:
+                    <p>${a["cloud_key"]}</p>
+                  % endfor
+                % elif category == "Pricing":
+                  <p>See the main page for full pricing</p>
+                % else:
+                  <table class="table" id="${category}">
+                    <tr>
+                      <th class="col-6 border-end"><a href="#${category}">${category}</a></th>
+                      <th class="col-6">Value</th>
+                    </tr>
+                  % for a in attrs:
+                    <tr>
+                      <td class="col-6 border-end">${a["display_name"]}</td>
+                      <td class="col-6">${a["value"]}</td>
+                    </tr>
+                  % endfor
+                  </table>
+                % endif
+              % endfor
+            </div>
           </div>
         </div>
         <div class="column-right">
