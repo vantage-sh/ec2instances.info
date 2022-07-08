@@ -189,11 +189,14 @@ def map_ec2_attributes(i):
 
 
 def build_instance_families(instances, destination_file):
-    # Find URL path (service) for these instances. It's / for ec2
-    subdir = 'www'
-    dest_subdir = destination_file.split('/')[1]
-    if dest_subdir != 'index.html':
-        subdir = os.path.join('www', dest_subdir)
+    # Extract which service these instances belong to, for example EC2 is loaded at /
+    service_path = destination_file.split('/')[1]
+    
+    # Find the right path to write these files to. There is a .gitignore file
+    # in each directory so that these generated files are not committed
+    subdir = os.path.join('www', 'aws', 'ec2')
+    if service_path != 'index.html':
+        subdir = os.path.join('www', 'aws', service_path)
 
     ifam, fam_lookup = assemble_the_families(instances)
 
