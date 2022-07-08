@@ -38,8 +38,8 @@
           <!-- Placeholder text here -->
           <p class="py-4 mb-0 small lh-base">The C5 High-CPU Double Extra Large is a compute-optimized instance with 8 CPUs, 16 GB of Memory, up to 10 GBps of bandwidth, and a 200 GB SSD attached.</p>
           
-          <div class="d-flex">
-            <div class="me-2">
+          <div class="d-flex flex-wrap">
+            <div class="col-6 pe-2 mb-2">
               <select class="form-select form-select-sm" id="region">
                 <option value='us-east-1'>US East (N. Virginia)</option>
                 <option value='af-south-1'>Africa (Cape Town)</option>
@@ -67,7 +67,7 @@
                 <option value='us-gov-east-1'>AWS GovCloud (US-East)</option>
               </select>
             </div>
-            <div class="me-2">
+            <div class="col-6 mb-2">
               <select class="form-select form-select-sm" id="os">
                 <option value="linux">Linux</option>
                 <option value="mswin">Windows</option>
@@ -84,12 +84,17 @@
                 <option value="rhelSQLWeb">Red Hat SQL Web</option>
               </select>
             </div>
-            <div>
+            <div class="col-6 pe-2">
               <select class="form-select form-select-sm" id="unit">
                 <option value="hour">Per Hour</option>
                 <option value="day">Per Day</option>
                 <option value="week">Per Week</option>
                 <option value="month">Per Month</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <select class="form-select form-select-sm" id="unit">
+                <option value="hour">New Select</option>
               </select>
             </div>
           </div>
@@ -127,7 +132,7 @@
               <tbody>
                 % for f in family:
                 <tr>
-                  <td>${f["name"]}</td>
+                  <td><a href="/aws/ec2/${f["name"]}.html">${f["name"]}</a></td>
                   <td class="text-center">${f["cpus"]}</td>
                   <td class="text-center">${f["memory"]}</td>
                 </tr>
@@ -171,13 +176,13 @@
           <div class="mb-4">
             <h6 class="fw-semibold">Links</h6>
             <div class="github-login">
-              To share a link, <a href="#" target="_blank">open a pull request</a>.
+              To share a link, <a href="https://github.com/vantage-sh/ec2instances.info/pulls" target="_blank">open a pull request</a>.
             </div>
           </div>
           <div>
             <h6 class="fw-semibold">Comments</h6>
             <div class="github-login">
-              To leave a comment, <a href="#" target="_blank">open a pull request</a>.
+              To leave a comment, <a href="https://github.com/vantage-sh/ec2instances.info/pulls" target="_blank">open a pull request</a>.
             </div>
           </div>
         </div>
