@@ -6,7 +6,19 @@ import json
 import datetime
 import os
 import csv
+import yaml
 
+
+def community():
+    data_file = "community_contributions.yaml"
+
+    stream = open(data_file, "r")
+    dictionary = yaml.load_all(stream, Loader=yaml.SafeLoader)
+    print(list(dictionary))
+
+
+def unavailable_instances():
+    pass
 
 def assemble_the_families(instances):
     # Build 2 lists - one where we can lookup what family an instance belongs to
@@ -107,7 +119,7 @@ def load_service_attributes():
         "storage",
         "pricing",
     ]
-    data_file = 'service-attributes-ec2.csv'
+    data_file = 'service_attributes_ec2.csv'
 
     display_map = {}
     with open(data_file, 'r') as f:
