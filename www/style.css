@@ -34,6 +34,9 @@ table th {
   font-weight: 600;
   background-color: #FAFAFB !important;
 }
+table td, table th {
+  vertical-align: middle;
+}
 table a {
   text-decoration: none !important;
 }
@@ -71,7 +74,6 @@ table.table-mono tbody tr:nth-child(even) td {
   flex: 1 1 auto;
   display: flex;
   padding: 24px 40px;
-  overflow: auto;
 }
 
 .column-right {
@@ -94,6 +96,31 @@ table.table-mono tbody tr:nth-child(even) td {
 
 .material-icons {
   font-size: 18px !important;
+}
+
+.value {
+  border: 1px solid;
+  border-radius: 3px;
+  color: #1A1A1C;
+  font-family: "Roboto Mono", monospace;
+  padding: 4px 5px;
+  font-size: 11px;
+  line-height: 11px;
+  display: inline-block;
+  font-weight: 500;
+  text-transform: lowercase;
+}
+.value.value-true {
+  background-color: #ACF8DD;
+  border-color: #55D4A7;
+}
+.value.value-false {
+  background-color: #FFECEA;
+  border-color: #F8B6AD;
+}
+.value.value-current {
+  background-color: #F9E6FF;
+  border-color: #E59DFF;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -58,6 +58,10 @@ table {
     background-color: $gray-7 !important;
   }
 
+  td, th {
+    vertical-align: middle;
+  }
+
   a {
     text-decoration: none !important;
   }
@@ -126,4 +130,32 @@ table {
 
 .material-icons {
   font-size: 18px !important;
+}
+
+.value {
+  border: 1px solid;
+  border-radius: 3px;
+  color: $gray-0;
+  font-family: $mono;
+  padding: 4px 5px;
+  font-size: 11px;
+  line-height: 11px;
+  display: inline-block;
+  font-weight: 500;
+  text-transform: lowercase;
+
+  &.value-true {
+    background-color: #ACF8DD;
+    border-color: #55D4A7;
+  }
+
+  &.value-false {
+    background-color: #FFECEA;
+    border-color: #F8B6AD;
+  }
+
+  &.value-current {
+    background-color: #F9E6FF;
+    border-color: #E59DFF;
+  }
 }
