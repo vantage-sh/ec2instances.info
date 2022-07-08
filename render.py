@@ -8,9 +8,35 @@ import os
 import csv
 
 
-def add_render_info(i):
-    i["network_sort"] = network_sort(i)
-    add_cpu_detail(i)
+def assemble_the_families(instances):
+    # Build 2 lists - one where we can lookup what family an instance belongs to
+    # and another where we can get the family and see what the members are
+    instance_fam_map = {}
+    families = {}
+
+    for i in instances:
+        name = i["instance_type"]
+        itype = name.split(".")[0]
+
+        if itype not in instance_fam_map:
+            instance_fam_map[itype] = []
+        else:
+            instance_fam_map[itype].append({
+                "name": name,
+                "cpus": int(i["vCPU"]),
+                "memory": i["memory"],
+            })  
+        
+        # The second list, where we will get the family from knowing the instance
+        families[name] = itype
+
+    # Order the families by number of cpus so they display this way on the webpage
+    for f, i in instance_fam_map.items():
+        i.sort(key=lambda x: x["cpus"])
+        instance_fam_map[f] = i
+
+    # for debugging: print(json.dumps(instance_fam_map, indent=4))
+    return instance_fam_map, families
 
 
 def storage(attrs):
@@ -169,27 +195,27 @@ def build_instance_families(instances, destination_file):
     if dest_subdir != 'index.html':
         subdir = os.path.join('www', dest_subdir)
 
+    ifam, fam_lookup = assemble_the_families(instances)
+
     lookup = mako.lookup.TemplateLookup(directories=["."])
     template = mako.template.Template(filename='in/instance-type.html.mako', lookup=lookup)
-    instance_families = {}
+
     for i in instances:
-        # In case of emergency: print(json.dumps(i, indent=4))
+        instance_type = i["instance_type"]
 
-        if "instance_type" in i:
-            instance_type = i["instance_type"]
-            if instance_type not in instance_families:
-                instance_families[instance_type] = {
-                    "instance_type": instance_type,
-                    "instance_data": {},
-                }
-                instance_page = os.path.join(subdir, instance_type + '.html')
-                instance_details = map_ec2_attributes(i)
+        instance_page = os.path.join(subdir, instance_type + '.html')
+        instance_details = map_ec2_attributes(i)
+        fam = fam_lookup[instance_type]
+        fam_members = ifam[fam]
 
-                with io.open(instance_page, "w+", encoding="utf-8") as fh:
-                    try:
-                        fh.write(template.render(i=instance_details))
-                    except:
-                        print(mako.exceptions.text_error_template().render())
+        with io.open(instance_page, "w+", encoding="utf-8") as fh:
+            try:
+                fh.write(template.render(
+                    i=instance_details,
+                    family=fam_members,
+                ))
+            except:
+                print(mako.exceptions.text_error_template().render())
 
 
 def network_sort(inst):
@@ -240,6 +266,11 @@ def add_cpu_detail(i):
         i["intel_avx2"] = "Yes" if i["intel_avx2"] else ""
         i["intel_avx512"] = "Yes" if i["intel_avx512"] else ""
         i["intel_turbo"] = "Yes" if i["intel_turbo"] else ""
+
+
+def add_render_info(i):
+    i["network_sort"] = network_sort(i)
+    add_cpu_detail(i)
 
 
 prices_dict = {}

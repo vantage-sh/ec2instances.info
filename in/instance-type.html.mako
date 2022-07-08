@@ -125,21 +125,13 @@
                 </tr>
               </thead>
               <tbody>
+                % for f in family:
                 <tr>
-                  <td>c5.large</td>
-                  <td class="text-center">2</td>
-                  <td class="text-center">4</td>
+                  <td>${f["name"]}</td>
+                  <td class="text-center">${f["cpus"]}</td>
+                  <td class="text-center">${f["memory"]}</td>
                 </tr>
-                <tr>
-                  <td>c5.large</td>
-                  <td class="text-center">2</td>
-                  <td class="text-center">4</td>
-                </tr>
-                <tr>
-                  <td>c5.large</td>
-                  <td class="text-center">2</td>
-                  <td class="text-center">4</td>
-                </tr>
+                % endfor
               </tbody>
             </table>
           </div>
