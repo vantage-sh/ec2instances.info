@@ -34,7 +34,7 @@
       <div class="d-flex flex-fill overflow-hidden">
         <div class="d-flex flex-fill overflow-auto">
           <div class="column-left">
-            <h1 class="h3 mb-0 fw-bolder">${i["Amazon"][4]['value']}</h1>
+            <h1 class="h3 mb-0 fw-bolder">${i["Amazon"][4]["value"]}</h1>
             
             <!-- Placeholder text here -->
             <p class="py-4 mb-0 small lh-base">${description}</p>
@@ -133,7 +133,11 @@
                 <tbody>
                   % for f in family:
                   <tr>
-                    <td><a href="/aws/ec2/${f["name"]}.html">${f["name"]}</a></td>
+                    % if f["cpus"] == i["Compute"][2]["value"]:
+                      <td>${f["name"]}</td>
+                    % else:
+                      <td><a href="/aws/ec2/${f["name"]}.html">${f["name"]}</a></td>
+                    % endif
                     <td class="text-center">${f["cpus"]}</td>
                     <td class="text-center">${f["memory"]}</td>
                   </tr>

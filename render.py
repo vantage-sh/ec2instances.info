@@ -6,6 +6,7 @@ import json
 import datetime
 import os
 import csv
+import bisect
 import yaml
 
 
@@ -40,15 +41,12 @@ def assemble_the_families(instances):
         name = i["instance_type"]
         itype = name.split(".")[0]
 
+        member = {"name": name, "cpus": int(i["vCPU"]), "memory": int(i["memory"])}
         if itype not in instance_fam_map:
-            instance_fam_map[itype] = []
+            instance_fam_map[itype] = [member]
         else:
-            instance_fam_map[itype].append({
-                "name": name,
-                "cpus": int(i["vCPU"]),
-                "memory": i["memory"],
-            })  
-        
+            instance_fam_map[itype].append(member)        
+
         # The second list, where we will get the family from knowing the instance
         families[name] = itype
 
@@ -56,6 +54,7 @@ def assemble_the_families(instances):
     for f, i in instance_fam_map.items():
         i.sort(key=lambda x: x["cpus"])
         instance_fam_map[f] = i
+    
 
     # for debugging: print(json.dumps(instance_fam_map, indent=4))
     return instance_fam_map, families
@@ -191,6 +190,16 @@ def map_ec2_attributes(i):
 
     print(i['instance_type'])
 
+    # Data structure is:
+    # { "Compute": [
+    #     { "display_name": "CPUs",
+    #       "cagegory": "Compute",
+    #       "value": 8,
+    #       "cloud_key": "vCPU",
+    #     }
+    #  ]
+    # }
+    # For up to date display names, inspect service_attributes_ec2.csv
     imap = load_service_attributes()
     for j, k in i.items():
 
