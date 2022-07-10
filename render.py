@@ -128,7 +128,7 @@ def load_service_attributes():
         "storage",
         "pricing",
     ]
-    data_file = 'service_attributes_ec2.csv'
+    data_file = 'meta/service_attributes_ec2.csv'
 
     display_map = {}
     with open(data_file, 'r') as f:
@@ -152,9 +152,8 @@ def load_service_attributes():
     return display_map
 
 
-def load_service_attributes_cloudhw(data_file):
+def load_service_attributes_cloudhw(data_file="meta/instance_types_cloudhw.csv"):
     # Transform a CSV of instance attributes into a dict of dicts for later lookup
-
     instance_lookup = {}
     with open(data_file, 'r') as f:
         reader = csv.reader(f)
@@ -172,7 +171,7 @@ def load_service_attributes_cloudhw(data_file):
     return instance_lookup
 
 
-def map_ec2_attributes(i):
+def map_ec2_attributes(i, imap):
     # For now, manually transform the instance data we receive from AWS 
     # into the format we want to render. Later we can create this in YAML
     # and use a standard function that maps names
@@ -188,19 +187,16 @@ def map_ec2_attributes(i):
     for c in categories:
         instance_details[c] = []
 
-    print(i['instance_type'])
-
     # Data structure is:
     # { "Compute": [
     #     { "display_name": "CPUs",
     #       "cagegory": "Compute",
     #       "value": 8,
     #       "cloud_key": "vCPU",
-    #     }
+    #     },
     #  ]
     # }
-    # For up to date display names, inspect service_attributes_ec2.csv
-    imap = load_service_attributes()
+    # For up to date display names, inspect meta/service_attributes_ec2.csv
     for j, k in i.items():
 
         display = imap[j]
@@ -229,20 +225,23 @@ def build_instance_families(instances, destination_file):
         subdir = os.path.join('www', 'aws', service_path)
 
     ifam, fam_lookup = assemble_the_families(instances)
+    imap = load_service_attributes()
 
     lookup = mako.lookup.TemplateLookup(directories=["."])
     template = mako.template.Template(filename='in/instance-type.html.mako', lookup=lookup)
 
     # To add more data to a single instance page, do so inside this loop
+    could_not_render = []
     for i in instances:
         instance_type = i["instance_type"]
 
         instance_page = os.path.join(subdir, instance_type + '.html')
-        instance_details = map_ec2_attributes(i)
+        instance_details = map_ec2_attributes(i, imap)
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
         idescription = description(i)
 
+        print("Rendering %s to detail page %s..." % (instance_type, instance_page))
         with io.open(instance_page, "w+", encoding="utf-8") as fh:
             try:
                 fh.write(template.render(
@@ -251,7 +250,18 @@ def build_instance_families(instances, destination_file):
                     description=idescription,
                 ))
             except:
-                print(mako.exceptions.text_error_template().render())
+                render_err = mako.exceptions.text_error_template().render() 
+                err = {
+                    "e": "ERROR for " + instance_type, 
+                    "t": render_err
+                }
+
+                # print(json.dumps(instance_details, indent=4))
+                could_not_render.append(err)
+                # print render_err
+        
+    # [print(page["e"]) for page in could_not_render]
+    [print(err["e"], '{}'.format(err["t"])) for err in could_not_render]
 
 
 def network_sort(inst):
