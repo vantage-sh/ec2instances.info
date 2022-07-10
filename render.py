@@ -87,14 +87,12 @@ def prices(pricing):
             # after the decimal, as well as prices not existing for all regions
             # and operating systems. 
             try:
-                display_prices[region][os]["ondemand"] = format(
-                    float(_p["ondemand"]), ".3f")
+                display_prices[region][os]["ondemand"] = _p["ondemand"]
             except KeyError:
                 display_prices[region][os]["ondemand"] = "N/A"
 
             try:
-                display_prices[region][os]["spot"] = format(
-                    float(_p["spot_max"]), ".3f")
+                display_prices[region][os]["spot"] = _p["spot_max"]
             except KeyError:
                 display_prices[region][os]["spot"] = "N/A"
 
@@ -103,7 +101,7 @@ def prices(pricing):
                 for k, v in _p["reserved"].items():
                     if "Term1" in k:
                         key = k[7:]
-                        reserved[key] = format(float(v), ".3f")
+                        reserved[key] = v
                 display_prices[region][os]["_1yr"] = reserved
             except KeyError:
                 display_prices[region][os]["_1yr"] = "N/A"
@@ -113,7 +111,7 @@ def prices(pricing):
                 for k, v in _p["reserved"].items():
                     if "Term3" in k:
                         key = k[7:]
-                        reserved[key] = format(float(v), ".3f")
+                        reserved[key] = v
                 display_prices[region][os]["_3yr"] = reserved
             except KeyError:
                 display_prices[region][os]["_3yr"] = "N/A"

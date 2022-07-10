@@ -44,27 +44,21 @@
             <p class="py-4 mb-2 small lh-base">${description}</p>
             
             <!-- Prices -->
-            <!--
-            <div class="d-flex align-items-center mb-2">
-              <span class="material-icons me-1">attach_money</span>
-              <p class="h6 fw-semibold mb-0">Cost</p>
-            </div>
-            -->
             <div class="small d-flex pe-2 mb-4">
               <div class="col-sm-3">
-                <p class="h6 mb-0 fw-semibold" id="p_od">&dollar;${i["Pricing"]["us-east-1"]["linux"]["ondemand"]}</p>
+                <p class="h6 mb-0 fw-semibold" id="p_od"></p>
                 <p class="mb-0 fs-12 text-muted">On Demand</p>
               </div>
               <div class="col-sm-3">
-                <p class="h6 mb-0 fw-semibold" id="p_spot">&dollar;${i["Pricing"]["us-east-1"]["linux"]["spot"]}</p>
+                <p class="h6 mb-0 fw-semibold" id="p_spot"></p>
                 <p class="mb-0 fs-12 text-muted">Spot</p>
               </div>
               <div class="col-sm-3">
-                <p class="h6 mb-0 fw-semibold" id="p_1yr">&dollar;${i["Pricing"]["us-east-1"]["linux"]["_1yr"]["Standard.noUpfront"]}</p>
+                <p class="h6 mb-0 fw-semibold" id="p_1yr"></p>
                 <p class="mb-0 fs-12 text-muted">1 Yr Reserved</p>
               </div>
               <div class="col-sm-3">
-                <p class="h6 mb-0 fw-semibold" id="p_3yr">&dollar;${i["Pricing"]["us-east-1"]["linux"]["_3yr"]["Standard.noUpfront"]}</p>
+                <p class="h6 mb-0 fw-semibold" id="p_3yr"></p>
                 <p class="mb-0 fs-12 text-muted">3 Yr Reserved</p>
               </div>
             </div>
@@ -223,7 +217,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript">
-    var _prices = ${i["Pricing"]};
+  $(function() {
+    initialize_prices();
 
     $('#region').change(function() {
       recalulate_redisplay_prices()
@@ -238,12 +233,36 @@
       recalulate_redisplay_prices()
     });
 
+
+    function format_price(element, price_value) {
+      // Handle prices from $0.0001 to $100,000
+      if (price_value < .99) {
+        $('#' + element).html("&dollar;" + price_value.toFixed(4));
+      }
+      else if (price_value > 99 && price_value <= 9999) {
+        $('#' + element).html("&dollar;" + price_value.toFixed(2));
+      }
+      else if (price_value > 9999) {
+        // TODO: localize, use periods instead of commas in EU for example
+        $('#' + element).html("&dollar;" + Math.floor(price_value).toLocaleString('en-US'));
+      } else {
+        $('#' + element).html("&dollar;" + price_value.toFixed(3));
+      }
+    }
+
+    function initialize_prices() {
+      format_price("p_od", ${i["Pricing"]["us-east-1"]["linux"]["ondemand"]});
+      format_price("p_spot", ${i["Pricing"]["us-east-1"]["linux"]["spot"]});
+      format_price("p_1yr", ${i["Pricing"]["us-east-1"]["linux"]["_1yr"]["Standard.noUpfront"]});
+      format_price("p_3yr", ${i["Pricing"]["us-east-1"]["linux"]["_3yr"]["Standard.noUpfront"]});
+    };
+
     function recalulate_redisplay_prices() {
       var region = $('#region').val();
       var os = $('#os').val();
       var unit = $('#unit').val();
       var term = $('#term').val();
-      var price = _prices[region][os];
+      var price = ${i["Pricing"]};
 
       var hour_multipliers = {
         'hour': 1,
@@ -259,7 +278,7 @@
       for(var i =0; i < elements.length; i++) {
         var element = elements[i];
         var displayed_price = displayed_prices[i];
-        var price_value = price[displayed_price];
+        var price_value = price[region][os][displayed_price];
 
         if (price_value == 'N/A') {
           $('#' + element).html('N/A');
@@ -269,21 +288,15 @@
           if (displayed_price === '_1yr' || displayed_price === '_3yr') {
             price_value = parseFloat(price_value[term]);
           }
-          price_value = price_value * hour_multipliers[unit];
+          
+          // Show by day, month, year etc
+          price_value = parseFloat(price_value) * hour_multipliers[unit];
 
-          // Handle prices > $1K differently
-          if (price_value > 999) {
-            // TODO: localize, use periods instead of commas in EU for example
-            $('#' + element).html("&dollar;" + Math.floor(price_value).toLocaleString('en-US'));
-          } else {
-            $('#' + element).html("&dollar;" + price_value.toFixed(3));
-          }
+          format_price(element, price_value);
         }
       }
-
     }
-
-
+  });
   </script>
   </body>
 </html>
