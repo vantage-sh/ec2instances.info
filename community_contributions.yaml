@@ -1,6 +1,9 @@
 ---
 c5d.2xlarge:
   links:
+    - title: Announcing c5d Instances
+      url: https://aws.amazon.com/about-aws/whats-new/2018/05/introducing-amazon-ec2-c5d-instances/
+      date: 05/17/2018
   tips:
 ---
 c5d.xlarge:
