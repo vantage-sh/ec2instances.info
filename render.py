@@ -20,12 +20,13 @@ def description(instance):
     return "The {} is a {} instance with {} CPUs, {} GiB of memory and {} of bandwidth".format(
         name, family_category, cpus, memory, bandwidth)
 
-def community():
-    data_file = "community_contributions.yaml"
+def community(instance, links):
 
-    stream = open(data_file, "r")
-    dictionary = yaml.load_all(stream, Loader=yaml.SafeLoader)
-    print(list(dictionary))
+    # TODO: not the most efficient with many links
+    for l in links:
+        k, linklist = next(iter(l.items()))
+        if k == instance:
+            return linklist["links"]
 
 
 def unavailable_instances():
@@ -226,7 +227,10 @@ def map_ec2_attributes(i, imap):
 def build_instance_families(instances, destination_file):
     # Extract which service these instances belong to, for example EC2 is loaded at /
     service_path = destination_file.split('/')[1]
-    
+    data_file = "community_contributions.yaml"
+    stream = open(data_file, "r")
+    community_data = list(yaml.load_all(stream, Loader=yaml.SafeLoader))
+
     # Find the right path to write these files to. There is a .gitignore file
     # in each directory so that these generated files are not committed
     subdir = os.path.join('www', 'aws', 'ec2')
@@ -249,6 +253,7 @@ def build_instance_families(instances, destination_file):
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
         idescription = description(i)
+        links = community(instance_type, community_data)
 
         print("Rendering %s to detail page %s..." % (instance_type, instance_page))
         with io.open(instance_page, "w+", encoding="utf-8") as fh:
@@ -257,6 +262,7 @@ def build_instance_families(instances, destination_file):
                     i=instance_details,
                     family=fam_members,
                     description=idescription,
+                    links=links,
                 ))
             except:
                 render_err = mako.exceptions.text_error_template().render() 

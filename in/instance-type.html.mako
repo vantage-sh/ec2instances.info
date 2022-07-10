@@ -200,14 +200,29 @@
         <div class="column-right">
           <div class="mb-4">
             <h6 class="fw-semibold">Links</h6>
+              <ul style="list-style-type:none">
+              % for link in links:
+                % if link["title"]:
+                  <li><a href="${link["url"]}" target="_blank">${link["title"]}</a>&emsp;<i>${link["date"]}</i></li>
+                % endif
+              % endfor
+              </ul>
             <div class="github-login">
-              To share a link, <a href="https://github.com/vantage-sh/ec2instances.info/pulls" target="_blank">open a pull request</a>.
+              <p>
+                To add a link, <a href="https://github.com/vantage-sh/ec2instances.info/edit/instance-types/community_contributions.yaml" target="_blank">open a pull request.</a>
+              </p>
+              <ol>
+                <li>Click <b>Fork this Repository</b>
+                <li>Find <b>${i["Amazon"][4]['value']}</b> in the file
+                <li>Insert a link, title, and date.
+              </ol>
+              To review, click <b>Propose Changes</b> and then click <b>Create pull request</b> to submit. Learn more. 
             </div>
           </div>
           <div>
-            <h6 class="fw-semibold">Comments</h6>
+            <h6 class="fw-semibold">File an Issue</h6>
             <div class="github-login">
-              To leave a comment, <a href="https://github.com/vantage-sh/ec2instances.info/pulls" target="_blank">open a pull request</a>.
+              See a data problem? <a href="https://github.com/vantage-sh/ec2instances.info/issues/new" target="_blank">Open a ticket.</a>
             </div>
           </div>
         </div>
