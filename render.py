@@ -10,6 +10,27 @@ import bisect
 import yaml
 
 
+def initial_prices(i, instance_type):
+    flag = ""
+    try:
+        od = i["Pricing"]["us-east-1"]["linux"]["ondemand"]
+    except:
+        # If prices are not available for us-east-1 it means this is a custom instance of some kind
+        return ["N/A", "N/A", "N/A", "N/A"]
+
+    od = i["Pricing"]["us-east-1"]["linux"]["ondemand"]
+    spot = i["Pricing"]["us-east-1"]["linux"]["spot"]
+    try:
+        _1yr = i["Pricing"]["us-east-1"]["linux"]["_1yr"]["Standard.noUpfront"]
+        _3yr = i["Pricing"]["us-east-1"]["linux"]["_3yr"]["Standard.noUpfront"]
+    except:
+        # If we can't get a reservation, likely a previous generation
+        _1yr = "N/A"
+        _3yr = "N/A"
+
+    return [od, spot, _1yr, _3yr]
+
+
 def description(instance):
     name = instance["pretty_name"]
     family_category = instance["family"].lower()
@@ -256,6 +277,7 @@ def build_instance_families(instances, destination_file):
         idescription = description(i)
         links = community(instance_type, community_data)
         denylist = unavailable_instances(instance_type, instance_details)
+        defaults = initial_prices(instance_details, instance_type)
 
         print("Rendering %s to detail page %s..." % (instance_type, instance_page))
         with io.open(instance_page, "w+", encoding="utf-8") as fh:
@@ -266,6 +288,7 @@ def build_instance_families(instances, destination_file):
                     description=idescription,
                     links=links,
                     unavailable=denylist,
+                    defaults=defaults,
                 ))
             except:
                 render_err = mako.exceptions.text_error_template().render() 
@@ -274,13 +297,10 @@ def build_instance_families(instances, destination_file):
                     "t": render_err
                 }
 
-                # print(json.dumps(instance_details, indent=4))
                 could_not_render.append(err)
-                # print render_err
-        # break
         
-    # [print(page["e"]) for page in could_not_render]
     [print(err["e"], '{}'.format(err["t"])) for err in could_not_render]
+    [print(page["e"]) for page in could_not_render]
 
 
 def network_sort(inst):

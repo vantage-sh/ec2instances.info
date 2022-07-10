@@ -265,7 +265,9 @@
 
     function format_price(element, price_value) {
       // Handle prices from $0.0001 to $100,000
-      if (price_value < .99) {
+      if (price_value === "N/A") {
+        $('#' + element).html('N/A');
+      } else if (price_value < .99) {
         $('#' + element).html("&dollar;" + price_value.toFixed(4));
       }
       else if (price_value > 99 && price_value <= 9999) {
@@ -280,10 +282,10 @@
     }
 
     function initialize_prices() {
-      format_price("p_od", ${i["Pricing"]["us-east-1"]["linux"]["ondemand"]});
-      format_price("p_spot", ${i["Pricing"]["us-east-1"]["linux"]["spot"]});
-      format_price("p_1yr", ${i["Pricing"]["us-east-1"]["linux"]["_1yr"]["Standard.noUpfront"]});
-      format_price("p_3yr", ${i["Pricing"]["us-east-1"]["linux"]["_3yr"]["Standard.noUpfront"]});
+      format_price("p_od", ${defaults[0]});
+      format_price("p_spot", ${defaults[1]});
+      format_price("p_1yr", ${defaults[2]});
+      format_price("p_3yr", ${defaults[3]});
     };
 
     function recalulate_redisplay_prices() {
@@ -302,7 +304,7 @@
         if (d[1] === region) {
           if (d[3] === os || d[2] === 'All') {
             for (var i = 0; i < elements.length; i++) {
-              $('#' + elements[i]).html('N/A');
+              format_price(elements[i], "N/A");
             }
             return;
           } 
