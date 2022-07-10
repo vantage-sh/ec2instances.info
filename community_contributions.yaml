@@ -1,6 +1,7 @@
 ---
 c5d.2xlarge:
   links:
+    - https://aws.amazon.com/about-aws/whats-new/2018/05/introducing-amazon-ec2-c5d-instances/
   tips:
 ---
 c5d.xlarge:
