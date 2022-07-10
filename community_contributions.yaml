@@ -1,6 +1,9 @@
 ---
 c5d.2xlarge:
   links:
+    - title: Announcing c5d Instances
+      url: https://aws.amazon.com/about-aws/whats-new/2018/05/introducing-amazon-ec2-c5d-instances/
+      date: 05/17/2018
   tips:
 ---
 c5d.xlarge:
@@ -2049,6 +2052,9 @@ t2.nano:
 ---
 mac2.metal:
   links:
+    - title: Big Sur Support for mac2
+      url: https://aws.amazon.com/about-aws/whats-new/2021/02/amazon-ec2-mac-instances-now-support-macos-big-sur/
+      date: 02/23/2021
   tips:
 ---
 t3a.large:
