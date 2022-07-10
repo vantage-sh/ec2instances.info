@@ -2049,6 +2049,9 @@ t2.nano:
 ---
 mac2.metal:
   links:
+    - title: Big Sur Support for mac2
+      url: https://aws.amazon.com/about-aws/whats-new/2021/02/amazon-ec2-mac-instances-now-support-macos-big-sur/
+      date: 02/23/2021
   tips:
 ---
 t3a.large:
