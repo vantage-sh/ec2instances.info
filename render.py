@@ -47,12 +47,12 @@ def unavailable_instances(itype, instance_details):
         for r in aws_regions:
             if r not in instance_regions:
                 # print("Found that {} is not available in {}".format(itype, r))
-                denylist.append([aws_regions[r], r, "All"])
+                denylist.append([aws_regions[r], r, "All", "*"])
             else:
                 instance_regions_oss = instance_details["Pricing"][r].keys()
                 for os in ec2_os.keys():
                     if os not in instance_regions_oss:
-                        denylist.append([aws_regions[r], r, ec2_os[os]])
+                        denylist.append([aws_regions[r], r, ec2_os[os], os])
                         # print("Found that {} is not available in {} as {}".format(itype, r, os))
     return denylist
 

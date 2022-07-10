@@ -292,6 +292,22 @@
       var unit = $('#unit').val();
       var term = $('#term').val();
       var price = ${i["Pricing"]};
+      var deny = ${unavailable};
+      var displayed_prices = ['ondemand', '_1yr', 'spot', '_3yr'];
+      var elements = ['p_od', 'p_1yr', 'p_spot', 'p_3yr'];
+
+      // Check if this combination of price selections is available
+      // Handle where only a specifc OS like Windows is not available in a region
+      for (const d of deny) {
+        if (d[1] === region) {
+          if (d[3] === os || d[2] === 'All') {
+            for (var i = 0; i < elements.length; i++) {
+              $('#' + elements[i]).html('N/A');
+            }
+            return;
+          } 
+        }
+      }
 
       var hour_multipliers = {
         'hour': 1,
@@ -301,12 +317,11 @@
         'year': 8760
       };
 
-      var displayed_prices = ['ondemand', '_1yr', 'spot', '_3yr'];
-      var elements = ['p_od', 'p_1yr', 'p_spot', 'p_3yr'];
 
       for(var i =0; i < elements.length; i++) {
         var element = elements[i];
         var displayed_price = displayed_prices[i];
+        
         var price_value = price[region][os][displayed_price];
 
         if (price_value == 'N/A') {
