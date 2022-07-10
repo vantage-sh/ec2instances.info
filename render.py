@@ -12,16 +12,16 @@ import yaml
 
 def description(instance):
     name = instance["pretty_name"]
-    family_category = instance["family"]
+    family_category = instance["family"].lower()
     cpus = instance["vCPU"]
     memory = instance["memory"]
-    bandwidth = instance["network_performance"]
+    bandwidth = instance["network_performance"].lower()
 
     return "The {} is a {} instance with {} CPUs, {} GiB of memory and {} of bandwidth".format(
         name, family_category, cpus, memory, bandwidth)
 
-def community(instance, links):
 
+def community(instance, links):
     # TODO: not the most efficient with many links
     for l in links:
         k, linklist = next(iter(l.items()))
@@ -29,8 +29,33 @@ def community(instance, links):
             return linklist["links"]
 
 
-def unavailable_instances():
-    pass
+def unavailable_instances(itype, instance_details):
+    data_file = "regions_aws.yaml"
+    ec2_os = {
+        "linux": "Linux", 
+        "mswin": "Windows",
+        "rhel": "Red Hat",
+        "sles": "SUSE",
+    }
+
+    denylist = []
+    with open(data_file, "r") as f:
+        aws_regions = yaml.safe_load(f)
+        instance_regions = instance_details["Pricing"].keys()
+
+        # If there is no price for a region and os, then it is unavailable
+        for r in aws_regions:
+            if r not in instance_regions:
+                # print("Found that {} is not available in {}".format(itype, r))
+                denylist.append([aws_regions[r], r, "All"])
+            else:
+                instance_regions_oss = instance_details["Pricing"][r].keys()
+                for os in ec2_os.keys():
+                    if os not in instance_regions_oss:
+                        denylist.append([aws_regions[r], r, ec2_os[os]])
+                        # print("Found that {} is not available in {} as {}".format(itype, r, os))
+    return denylist
+
 
 def assemble_the_families(instances):
     # Build 2 lists - one where we can lookup what family an instance belongs to
@@ -59,18 +84,6 @@ def assemble_the_families(instances):
 
     # for debugging: print(json.dumps(instance_fam_map, indent=4))
     return instance_fam_map, families
-
-
-def storage(attrs):
-    pass
-
-
-def availability(attrs):
-    pass
-
-
-def vpc(attrs):
-    pass
 
 
 def prices(pricing):
@@ -120,17 +133,6 @@ def prices(pricing):
     return display_prices
 
 
-def route_special_cases(expanded_instance_attr):
-    subcategory = expanded_instance_attr[0]
-
-    if subcategory == "availability_zones":
-        availability(expanded_instance_attr[3])
-    elif subcategory == "vpc":
-        vpc(expanded_instance_attr[3])
-    elif subcategory == "storage":
-        storage(expanded_instance_attr[3])
-
-
 def load_service_attributes():
     special_attrs = [
         "availability_zones",
@@ -148,7 +150,6 @@ def load_service_attributes():
             if i == 0:
                 continue
             elif row[0] in special_attrs:
-                route_special_cases(row)
                 display_map[row[0]] = {
                     "display_name": row[1],
                     "category": "Coming Soon"
@@ -254,6 +255,7 @@ def build_instance_families(instances, destination_file):
         fam_members = ifam[fam]
         idescription = description(i)
         links = community(instance_type, community_data)
+        denylist = unavailable_instances(instance_type, instance_details)
 
         print("Rendering %s to detail page %s..." % (instance_type, instance_page))
         with io.open(instance_page, "w+", encoding="utf-8") as fh:
@@ -263,6 +265,7 @@ def build_instance_families(instances, destination_file):
                     family=fam_members,
                     description=idescription,
                     links=links,
+                    unavailable=denylist,
                 ))
             except:
                 render_err = mako.exceptions.text_error_template().render() 

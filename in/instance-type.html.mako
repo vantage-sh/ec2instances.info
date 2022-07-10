@@ -194,6 +194,20 @@
                   </table>
                 % endif
               % endfor
+              <table class="table" id="Unavailable">
+                <tr>
+                  <th class="col-4 border-end" style="color:red !important">Unavailable</th>
+                  <th class="col-4" style="color:red !important">Unsupported Region</th>
+                  <th class="col-4" style="color:red !important">Unsupported OS</th>
+                </tr>
+                % for u in unavailable:
+                <tr>
+                  <td class="col-4 border-end">${u[0]}</td>
+                  <td class="col-4">${u[1]}</td>
+                  <td class="col-4">${u[2]}</td>
+                </tr>
+                % endfor
+              </table>
             </div>
           </div>
         </div>
