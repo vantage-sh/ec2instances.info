@@ -91,19 +91,30 @@ def prices(pricing):
                     float(_p["ondemand"]), ".3f")
             except KeyError:
                 display_prices[region][os]["ondemand"] = "N/A"
+
             try:
                 display_prices[region][os]["spot"] = format(
                     float(_p["spot_max"]), ".3f")
             except KeyError:
                 display_prices[region][os]["spot"] = "N/A"
+
             try:
-                display_prices[region][os]["_1yr"] = format(
-                    float(_p["reserved"]["yrTerm1Standard.noUpfront"]), ".3f")
+                reserved = {}
+                for k, v in _p["reserved"].items():
+                    if "Term1" in k:
+                        key = k[7:]
+                        reserved[key] = format(float(v), ".3f")
+                display_prices[region][os]["_1yr"] = reserved
             except KeyError:
                 display_prices[region][os]["_1yr"] = "N/A"
+
             try:
-                display_prices[region][os]["_3yr"] = format(
-                    float(_p["reserved"]["yrTerm3Standard.noUpfront"]), ".3f")
+                reserved = {}
+                for k, v in _p["reserved"].items():
+                    if "Term3" in k:
+                        key = k[7:]
+                        reserved[key] = format(float(v), ".3f")
+                display_prices[region][os]["_3yr"] = reserved
             except KeyError:
                 display_prices[region][os]["_3yr"] = "N/A"
     
@@ -259,6 +270,7 @@ def build_instance_families(instances, destination_file):
                 # print(json.dumps(instance_details, indent=4))
                 could_not_render.append(err)
                 # print render_err
+        # break
         
     # [print(page["e"]) for page in could_not_render]
     [print(err["e"], '{}'.format(err["t"])) for err in could_not_render]

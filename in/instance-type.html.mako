@@ -40,12 +40,40 @@
           <div class="column-left">
             <h1 class="h3 mb-0 fw-bolder">${i["Amazon"][4]["value"]}</h1>
             
-            <!-- Placeholder text here -->
-            <p class="py-4 mb-0 small lh-base">${description}</p>
+            <!-- Description -->
+            <p class="py-4 mb-2 small lh-base">${description}</p>
             
-            <div class="d-flex flex-wrap">
+            <!-- Prices -->
+            <!--
+            <div class="d-flex align-items-center mb-2">
+              <span class="material-icons me-1">attach_money</span>
+              <p class="h6 fw-semibold mb-0">Cost</p>
+            </div>
+            -->
+            <div class="small d-flex pe-2 mb-4">
+              <div class="col-sm-3">
+                <p class="h6 mb-0 fw-semibold" id="p_od">&dollar;${i["Pricing"]["us-east-1"]["linux"]["ondemand"]}</p>
+                <p class="mb-0 fs-12 text-muted">On Demand</p>
+              </div>
+              <div class="col-sm-3">
+                <p class="h6 mb-0 fw-semibold" id="p_spot">&dollar;${i["Pricing"]["us-east-1"]["linux"]["spot"]}</p>
+                <p class="mb-0 fs-12 text-muted">Spot</p>
+              </div>
+              <div class="col-sm-3">
+                <p class="h6 mb-0 fw-semibold" id="p_1yr">&dollar;${i["Pricing"]["us-east-1"]["linux"]["_1yr"]["Standard.noUpfront"]}</p>
+                <p class="mb-0 fs-12 text-muted">1 Yr Reserved</p>
+              </div>
+              <div class="col-sm-3">
+                <p class="h6 mb-0 fw-semibold" id="p_3yr">&dollar;${i["Pricing"]["us-east-1"]["linux"]["_3yr"]["Standard.noUpfront"]}</p>
+                <p class="mb-0 fs-12 text-muted">3 Yr Reserved</p>
+              </div>
+            </div>
+
+            <!-- price Selects -->
+            <div class="d-flex flex-wrap mt-2">
               <div class="col-6 pe-2 mb-2">
                 <select class="form-select form-select-sm" id="region">
+                  <!-- TODO: Localize default option order -->
                   <option value='us-east-1'>US East (N. Virginia)</option>
                   <option value='af-south-1'>Africa (Cape Town)</option>
                   <option value='ap-east-1'>Asia-Pacific (Hong Kong)</option>
@@ -79,14 +107,14 @@
                   <option value="rhel">Red Hat</option>
                   <option value="sles">SUSE</option>
                   <option value="linuxSQL">Linux SQL Server</option>
-                  <option value="linuxSQLEnterprise">Linux SQL Enterprise</option>
                   <option value="linuxSQLWeb">Linux SQL Server for Web</option>
+                  <option value="linuxSQLEnterprise">Linux SQL Enterprise</option>
                   <option value="mswinSQL">Windows SQL Server</option>
-                  <option value="mswinSQLEnterprise">Windows SQL Enterprise</option>
                   <option value="mswinSQLWeb">Windows SQL Web</option>
+                  <option value="mswinSQLEnterprise">Windows SQL Enterprise</option>
                   <option value="rhelSQL">Red Hat SQL Server</option>
-                  <option value="rhelSQLEnterprise">Red Hat SQL Enterprise</option>
                   <option value="rhelSQLWeb">Red Hat SQL Web</option>
+                  <option value="rhelSQLEnterprise">Red Hat SQL Enterprise</option>
                 </select>
               </div>
               <div class="col-6 pe-2">
@@ -95,33 +123,23 @@
                   <option value="day">Per Day</option>
                   <option value="week">Per Week</option>
                   <option value="month">Per Month</option>
+                  <option value="year">Per Year</option>
                 </select>
               </div>
               <div class="col-6">
                 <select class="form-select form-select-sm" id="term">
-                  <option value="hour">No Upfront (not implemented)</option>
+                  <option value="Standard.noUpfront">No Upfront</option>
+                  <option value="Standard.partialUpfront">Partial Upfront</option>
+                  <option value="Standard.allUpfront">All Upfront</option>
+                  <option value="Convertible.noUpfront">No Upfront (Convertible)</option>
+                  <option value="Convertible.partialUpfront">Partial Upfront (Convertible)</option>
+                  <option value="Convertible.allUpfront">All Upfront (Convertible)</option>
                 </select>
               </div>
             </div>
-            <div class="small d-flex mt-4">
-              <div class="col-sm-3">
-                <p class="h6 mb-0 fw-semibold" id="p_od">&dollar;${i["Pricing"]["us-east-1"]["linux"]["ondemand"]}</p>
-                <p class="mb-0 fs-12 text-muted">On Demand</p>
-              </div>
-              <div class="col-sm-3">
-                <p class="h6 mb-0 fw-semibold" id="p_1yr">&dollar;${i["Pricing"]["us-east-1"]["linux"]["_1yr"]}</p>
-                <p class="mb-0 fs-12 text-muted">1 Yr Reserved</p>
-              </div>
-              <div class="col-sm-3">
-                <p class="h6 mb-0 fw-semibold" id="p_spot">&dollar;${i["Pricing"]["us-east-1"]["linux"]["spot"]}</p>
-                <p class="mb-0 fs-12 text-muted">Spot</p>
-              </div>
-              <div class="col-sm-3">
-                <p class="h6 mb-0 fw-semibold" id="p_3yr">&dollar;${i["Pricing"]["us-east-1"]["linux"]["_3yr"]}</p>
-                <p class="mb-0 fs-12 text-muted">3 Yr Reserved</p>
-              </div>
-            </div>
-            <div class="mt-5 d-flex flex-column">
+
+            <!-- Instance families -->
+            <div class="mt-4 d-flex flex-column">
               <div class="d-flex align-items-center mb-3">
                 <span class="material-icons me-1">dns</span>
                 <p class="h6 fw-semibold mb-0">Family Sizes</p>
@@ -150,6 +168,7 @@
               </table>
             </div>
           </div>
+
           <div class="column-middle">
             <div class="w-100">
               % for category, attrs in i.items():
@@ -215,11 +234,15 @@
     $('#unit').change(function() {
       recalulate_redisplay_prices()
     });
+    $('#term').change(function() {
+      recalulate_redisplay_prices()
+    });
 
     function recalulate_redisplay_prices() {
       var region = $('#region').val();
       var os = $('#os').val();
       var unit = $('#unit').val();
+      var term = $('#term').val();
       var price = _prices[region][os];
 
       var hour_multipliers = {
@@ -227,6 +250,7 @@
         'day': 24,
         'week': 7 * 24,
         'month': 730,   // use AWS convention of 730 hrs/month
+        'year': 8760
       };
 
       var displayed_prices = ['ondemand', '_1yr', 'spot', '_3yr'];
@@ -240,8 +264,20 @@
         if (price_value == 'N/A') {
           $('#' + element).html('N/A');
         } else {
-          var price_value = price_value * hour_multipliers[unit];
-          $('#' + element).html("&dollar;" + price_value.toFixed(3));
+
+          // Handle the term conditions for reservations
+          if (displayed_price === '_1yr' || displayed_price === '_3yr') {
+            price_value = parseFloat(price_value[term]);
+          }
+          price_value = price_value * hour_multipliers[unit];
+
+          // Handle prices > $1K differently
+          if (price_value > 999) {
+            // TODO: localize, use periods instead of commas in EU for example
+            $('#' + element).html("&dollar;" + Math.floor(price_value).toLocaleString('en-US'));
+          } else {
+            $('#' + element).html("&dollar;" + price_value.toFixed(3));
+          }
         }
       }
 
