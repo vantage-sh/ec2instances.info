@@ -11,14 +11,14 @@
       rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <title>${i["Amazon"][2]['value']} Details</title>
-    <meta name="description" content="${description}"></head>
+    <title>${i["Amazon"][1]["value"]} Details</title>
+    <meta name="descriptio1" content="${description}"></head>
   </head>
     
   <body>
     <div class="d-flex flex-column h-100 overflow-hidden">
       <div class="nav">
-      <li class="nav-item">
+        <li class="nav-item">
           <a href="/">
             <svg width="135" height="28" viewBox="0 0 135 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M6.22202 2.35943C8.52431 0.821087 11.2311 5.29581e-07 14 5.29581e-07C15.8386 -0.000505245 17.6594 0.361272 19.3582 1.06466C21.057 1.76804 22.6005 2.79925 23.9006 4.09937C25.2007 5.39949 26.232 6.94305 26.9354 8.64184C27.6387 10.3406 28.0005 12.1614 28 14C28 16.7689 27.1789 19.4757 25.6406 21.778C24.1022 24.0803 21.9157 25.8747 19.3576 26.9343C16.7994 27.9939 13.9845 28.2712 11.2687 27.731C8.55299 27.1908 6.05845 25.8574 4.10052 23.8995C2.14258 21.9416 0.809206 19.447 0.269013 16.7313C-0.27118 14.0155 0.00606513 11.2006 1.06569 8.64244C2.12532 6.08427 3.91973 3.89777 6.22202 2.35943ZM3.93449 12.1002L8.13488 16.3044C8.17658 16.3477 8.22655 16.3821 8.28183 16.4055C8.33712 16.429 8.39657 16.4411 8.45664 16.4411C8.51671 16.4411 8.57618 16.429 8.63146 16.4055C8.68675 16.3821 8.73672 16.3477 8.77842 16.3044L12.9711 12.1002C13.0549 12.0164 13.1019 11.9027 13.1019 11.7842C13.1019 11.6657 13.0549 11.552 12.9711 11.4682L8.76685 7.26783C8.68302 7.18405 8.56938 7.13699 8.45088 7.13699C8.33237 7.13699 8.2187 7.18405 8.13488 7.26783L3.93449 11.4682C3.85071 11.552 3.80367 11.6657 3.80367 11.7842C3.80367 11.9027 3.85071 12.0164 3.93449 12.1002ZM14.316 21.8497L18.5164 17.6493C18.6002 17.5655 18.6472 17.4518 18.6472 17.3333C18.6472 17.2148 18.6002 17.1012 18.5164 17.0173L14.316 12.8131C14.2322 12.7293 14.1185 12.6823 14 12.6823C13.8815 12.6823 13.7678 12.7293 13.684 12.8131L9.47977 17.0173C9.396 17.1012 9.34893 17.2148 9.34893 17.3333C9.34893 17.4518 9.396 17.5655 9.47977 17.6493L13.684 21.8497C13.7678 21.9335 13.8815 21.9805 14 21.9805C14.1185 21.9805 14.2322 21.9335 14.316 21.8497ZM19.8613 16.3044L24.0616 12.1002C24.1036 12.0589 24.1369 12.0098 24.1597 11.9555C24.1824 11.9013 24.1941 11.843 24.1941 11.7842C24.1941 11.7254 24.1824 11.6671 24.1597 11.6129C24.1369 11.5586 24.1036 11.5095 24.0616 11.4682L19.8613 7.26783C19.7775 7.18405 19.6638 7.13699 19.5453 7.13699C19.4268 7.13699 19.3131 7.18405 19.2293 7.26783L15.0251 11.4682C14.9413 11.552 14.8942 11.6657 14.8942 11.7842C14.8942 11.9027 14.9413 12.0164 15.0251 12.1002L19.2293 16.3044C19.3131 16.3882 19.4268 16.4353 19.5453 16.4353C19.6638 16.4353 19.7775 16.3882 19.8613 16.3044Z" fill="white"/>
@@ -148,10 +148,11 @@
                 </thead>
                 <tbody>
                   % for f in family:
-                  <tr>
-                    % if f["cpus"] == i["Compute"][1]["value"]:
+                    % if f["name"] == i["Amazon"][1]['value']:
+                    <tr class="no-link">
                       <td>${f["name"]}</td>
                     % else:
+                    <tr>
                       <td><a href="/aws/ec2/${f["name"]}.html">${f["name"]}</a></td>
                     % endif
                     <td class="text-center">${f["cpus"]}</td>
@@ -163,8 +164,8 @@
             </div>
           </div>
 
-          <div class="column-middle">
-            <div class="w-100">
+          <div class="column-middle mb-5">
+            <div class="w-100 d-flex flex-column flex-fill pb-5">
               % for category, attrs in i.items():
                 % if category == "Coming Soon":
                   % for a in attrs:
@@ -196,14 +197,14 @@
               % endfor
               <table class="table" id="Unavailable">
                 <tr>
-                  <th class="col-4 border-end" style="color:red !important">Unavailable</th>
-                  <th class="col-4" style="color:red !important">Unsupported Region</th>
-                  <th class="col-4" style="color:red !important">Unsupported OS</th>
+                  <th class="col-4 border-end">Unavailable</th>
+                  <th class="col-4 border-end">Unsupported Region</th>
+                  <th class="col-4">Unsupported OS</th>
                 </tr>
                 % for u in unavailable:
                 <tr>
                   <td class="col-4 border-end">${u[0]}</td>
-                  <td class="col-4">${u[1]}</td>
+                  <td class="col-4 border-end">${u[1]}</td>
                   <td class="col-4">${u[2]}</td>
                 </tr>
                 % endfor
@@ -212,32 +213,38 @@
           </div>
         </div>
         <div class="column-right">
-          <div class="mb-4">
+          <div class="sidebar-section links">
             <h6 class="fw-semibold">Links</h6>
-              <ul style="list-style-type:none">
-              % for link in links:
-                % if link["title"]:
-                  <li><a href="${link["url"]}" target="_blank">${link["title"]}</a>&emsp;<i>${link["date"]}</i></li>
-                % endif
-              % endfor
-              </ul>
-            <div class="github-login">
-              <p>
-                To add a link, <a href="https://github.com/vantage-sh/ec2instances.info/edit/instance-types/community_contributions.yaml" target="_blank">open a pull request.</a>
-              </p>
-              <ol>
-                <li>Click <b>Fork this Repository</b>
-                <li>Find <b>${i["Amazon"][4]['value']}</b> in the file
-                <li>Insert a link, title, and date.
-              </ol>
-              To review, click <b>Propose Changes</b> and then click <b>Create pull request</b> to submit. Learn more. 
-            </div>
+            <ul class="list-unstyled">
+            % for link in links:
+              % if link["title"]:
+                <li class="mb-2">
+                  <a class="small text-decoration-none mb-1 d-inline-block" href="${link["url"]}" target="_blank">${link["title"]}</a>
+                  <p class="fs-12 mb-0 d-block text-muted">${link["date"]}</p>
+                </li>
+              % endif
+            % endfor
+            </ul>
+            <details>
+              <summary class="small text-muted mb-3">
+                Submit a Link
+              </summary>
+              <div class="github-login mb-3">
+                <p class="lh-base fw-semibold">Submitting a Link</p>
+                <ol class="lh-base ps-4">
+                  <li>Click <span class="fw-semibold">Fork this Repository</span>
+                  <li>Find <span class="fw-semibold">${i["Amazon"][4]['value']}</span> in the file
+                  <li>Insert a link, title, and date.
+                </ol>
+                <p class="mb-0 lh-base">To review, click <span class="fw-semibold">Propose Changes</span> and then click <span class="fw-semibold">Create pull request</span>.</p>
+                <div class="d-grid">
+                  <a class="btn btn-white mt-3" href="https://github.com/vantage-sh/ec2instances.info/edit/instance-types/community_contributions.yaml" target="_blank">Submit a Link</a>
+                </div>
+              </li>
+            </details>
           </div>
-          <div>
-            <h6 class="fw-semibold">File an Issue</h6>
-            <div class="github-login">
-              See a data problem? <a href="https://github.com/vantage-sh/ec2instances.info/issues/new" target="_blank">Open a ticket.</a>
-            </div>
+          <div class="sidebar-section ticket small">
+            See a data problem? <a href="https://github.com/vantage-sh/ec2instances.info/issues/new" target="_blank" class="text-decoration-none">Open a ticket.</a>
           </div>
         </div>
       </div>

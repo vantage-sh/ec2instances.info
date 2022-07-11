@@ -39,6 +39,9 @@ body {
 
 a {
   color: $purple-1;
+  &:hover, &:focus {
+    color: $purple-0;
+  }
 }
 
 .nav {
@@ -78,7 +81,24 @@ table {
             background-color: $gray-7 !important;
           }
         }
+        &.no-link {
+          td {
+            color: $white;
+            background-color: $gray-0 !important;
+          }
+        }
       }
+    }
+  }
+
+  &#Unavailable {
+    border-color: #F8B6AD;
+    th {
+      background-color: #FFECEA !important;
+      color: #76180A !important;
+    }
+    th, td {
+      border-color: #F8B6AD !important;
     }
   }
 }
@@ -94,6 +114,9 @@ table {
     background-color: $white;
     color: $gray-0;
     border: 1px solid $gray-5;
+    &:hover {
+      border-color: $gray-3;
+    }
   }
 }
 
@@ -105,7 +128,6 @@ table {
 
 .column-middle {
   flex: 1 1 auto;
-  display: flex;
   padding: 24px 40px;
 }
 
@@ -113,16 +135,29 @@ table {
   max-width: 350px;
   width: 100%;
   background-color: $gray-7;
-  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  .sidebar-section {
+    padding: 24px;
+  }
+
+  .links {
+    overflow: auto;
+    flex: 1 1 auto;
+    padding-bottom: 0;
+    border-bottom: 1px solid $gray-5;
+  }
 }
 
 
 .github-login {
-  padding: 12px;
-  background-color: $white;
+  padding: 20px;
+  background-color: $gray-6;
   border: 1px solid $gray-5;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 14px;
   a {
     text-decoration: none;
   }

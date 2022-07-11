@@ -17,6 +17,9 @@ body {
 a {
   color: #9C25C7;
 }
+a:hover, a:focus {
+  color: #5A0A76;
+}
 
 .nav {
   background-color: #9C25C7;
@@ -49,6 +52,20 @@ table.table-mono th {
 table.table-mono tbody tr:nth-child(even) td {
   background-color: #FAFAFB !important;
 }
+table.table-mono tbody tr.no-link td {
+  color: #FFFFFF;
+  background-color: #1A1A1C !important;
+}
+table#Unavailable {
+  border-color: #F8B6AD;
+}
+table#Unavailable th {
+  background-color: #FFECEA !important;
+  color: #76180A !important;
+}
+table#Unavailable th, table#Unavailable td {
+  border-color: #F8B6AD !important;
+}
 
 .fs-12 {
   font-size: 12px;
@@ -63,6 +80,9 @@ table.table-mono tbody tr:nth-child(even) td {
   color: #1A1A1C;
   border: 1px solid #E3E3E9;
 }
+.btn.btn-white:hover {
+  border-color: #8A8A8E;
+}
 
 .column-left {
   max-width: 400px;
@@ -72,7 +92,6 @@ table.table-mono tbody tr:nth-child(even) td {
 
 .column-middle {
   flex: 1 1 auto;
-  display: flex;
   padding: 24px 40px;
 }
 
@@ -80,15 +99,26 @@ table.table-mono tbody tr:nth-child(even) td {
   max-width: 350px;
   width: 100%;
   background-color: #FAFAFB;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.column-right .sidebar-section {
   padding: 24px;
+}
+.column-right .links {
+  overflow: auto;
+  flex: 1 1 auto;
+  padding-bottom: 0;
+  border-bottom: 1px solid #E3E3E9;
 }
 
 .github-login {
-  padding: 12px;
-  background-color: #FFFFFF;
+  padding: 20px;
+  background-color: #F7F7F9;
   border: 1px solid #E3E3E9;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .github-login a {
   text-decoration: none;
