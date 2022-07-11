@@ -173,7 +173,7 @@
           <div class="column-middle mb-5">
             <div class="w-100 d-flex flex-column flex-fill pb-5">          
               <div class="d-flex align-items-center mb-3">
-                <span class="material-icons me-1">article</span>
+                <span class="material-icons me-1">info</span>
                 <p class="h6 fw-semibold mb-0">Instance Details</p>
               </div>
               % for category, attrs in i.items():
@@ -224,7 +224,10 @@
         </div>
         <div class="column-right">
           <div class="sidebar-section links">
-            <h6 class="fw-semibold">Links</h6>
+            <div class="d-flex align-items-center mb-2">
+              <span class="material-icons me-1">link</span>
+              <p class="h6 fw-semibold mb-0">Links</p>
+            </div>
             <ul class="list-unstyled">
             % for link in links:
               % if link["title"]:

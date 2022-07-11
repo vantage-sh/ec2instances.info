@@ -154,6 +154,7 @@ table {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  border-left: 1px solid $gray-5;
   @media screen and (max-width: 768px) {
     border-radius: 6px;
     border: 1px solid $gray-5;

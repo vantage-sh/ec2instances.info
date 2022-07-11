@@ -124,6 +124,7 @@ table#Unavailable th, table#Unavailable td {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  border-left: 1px solid #E3E3E9;
 }
 @media screen and (max-width: 768px) {
   .column-right {
