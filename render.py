@@ -8,6 +8,7 @@ import os
 import csv
 import bisect
 import yaml
+import re
 
 
 def initial_prices(i, instance_type):
@@ -51,7 +52,7 @@ def community(instance, links):
 
 
 def unavailable_instances(itype, instance_details):
-    data_file = "regions_aws.yaml"
+    data_file = "meta/regions_aws.yaml"
     ec2_os = {
         "linux": "Linux", 
         "mswin": "Windows",
@@ -156,7 +157,6 @@ def prices(pricing):
 
 def load_service_attributes():
     special_attrs = [
-        "availability_zones",
         "vpc",
         "storage",
         "pricing",
@@ -168,18 +168,24 @@ def load_service_attributes():
         reader = csv.reader(f)
 
         for i, row in enumerate(reader):
+            cloud_key = row[0]
             if i == 0:
+                # Skip the header
                 continue
-            elif row[0] in special_attrs:
-                display_map[row[0]] = {
-                    "display_name": row[1],
-                    "category": "Coming Soon"
-                }
+            elif cloud_key in special_attrs:
+                category = "Coming Soon"
             else:
-                display_map[row[0]] = {
-                    "display_name": row[1],
-                    "category": row[2],
-                }
+                category = row[2]
+
+            display_map[cloud_key] = {
+                "cloud_key": cloud_key,
+                "display_name": row[1],
+                "category": category,
+                "order": row[3],
+                "style": row[4],
+                "regex": row[5],
+                "value": None,
+            }
             
     return display_map
 
@@ -219,27 +225,37 @@ def map_ec2_attributes(i, imap):
     for c in categories:
         instance_details[c] = []
 
-    # Data structure is:
-    # { "Compute": [
-    #     { "display_name": "CPUs",
-    #       "cagegory": "Compute",
-    #       "value": 8,
-    #       "cloud_key": "vCPU",
-    #     },
-    #  ]
-    # }
     # For up to date display names, inspect meta/service_attributes_ec2.csv
     for j, k in i.items():
 
         display = imap[j]
         display["value"] = k if j != 'pricing' else {}
-        display["cloud_key"] = j
+
+        if display["regex"]:
+            toparse = str(display["value"])
+            regex = str(display["regex"])
+            match = re.search(regex, toparse)
+            if match:
+                display["value"] = match.group()
+            # else:
+            #     print("No match found for {} with regex {}".format(toparse, regex))
+        
+        if display["style"]:
+            v = str(display["value"]).lower()
+            # print(v)  # print styling value
+            if v == "false" or v == "0" or v == "none":
+                display["style"] = "value value-false"
+            elif v == "true" or v == "1" or v == "yes":
+                display["style"] = "value value-true"
+            elif v == "current":
+                display["style"] = "value value-current"
+
         instance_details[display["category"]].append(display)
     
     # Sort the instance attributes in each category alphabetically,
     # another general-purpose option could be to sort by value data type
     for c in categories:
-        instance_details[c].sort(key=lambda x: x["display_name"])
+        instance_details[c].sort(key=lambda x: int(x["order"]))
 
     instance_details['Pricing'] = prices(i["pricing"])
     # print(json.dumps(instance_details, indent=4))

@@ -11,7 +11,7 @@
       rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <title>${i["Amazon"][4]['value']} Details</title>
+    <title>${i["Amazon"][2]['value']} Details</title>
     <meta name="description" content="${description}"></head>
   </head>
     
@@ -38,7 +38,7 @@
       <div class="d-flex flex-fill overflow-hidden">
         <div class="d-flex flex-fill overflow-auto">
           <div class="column-left">
-            <h1 class="h3 mb-0 fw-bolder">${i["Amazon"][4]["value"]}</h1>
+            <h1 class="h3 mb-0 fw-bolder">${i["Amazon"][1]["value"]}</h1>
             
             <!-- Description -->
             <p class="py-4 mb-2 small lh-base">${description}</p>
@@ -149,7 +149,7 @@
                 <tbody>
                   % for f in family:
                   <tr>
-                    % if f["cpus"] == i["Compute"][2]["value"]:
+                    % if f["cpus"] == i["Compute"][1]["value"]:
                       <td>${f["name"]}</td>
                     % else:
                       <td><a href="/aws/ec2/${f["name"]}.html">${f["name"]}</a></td>
@@ -188,7 +188,7 @@
                   % for a in attrs:
                     <tr>
                       <td class="col-6 border-end">${a["display_name"]}</td>
-                      <td class="col-6">${a["value"]}</td>
+                      <td class="col-6"><span class="${a["style"]}">${a["value"]}</span></td>
                     </tr>
                   % endfor
                   </table>
