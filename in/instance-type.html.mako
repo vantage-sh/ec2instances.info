@@ -165,7 +165,7 @@
           </div>
 
           <div class="column-middle mb-5">
-            <div class="w-100">
+            <div class="w-100 d-flex flex-column flex-fill pb-5">
               % for category, attrs in i.items():
                 % if category == "Coming Soon":
                   % for a in attrs:

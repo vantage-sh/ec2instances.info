@@ -92,7 +92,6 @@ table#Unavailable th, table#Unavailable td {
 
 .column-middle {
   flex: 1 1 auto;
-  display: flex;
   padding: 24px 40px;
 }
 
