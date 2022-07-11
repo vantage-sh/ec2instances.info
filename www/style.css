@@ -21,6 +21,18 @@ a:hover, a:focus {
   color: #5A0A76;
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+@media screen and (max-width: 768px) {
+  .main {
+    overflow: auto;
+  }
+}
+
 .nav {
   background-color: #9C25C7;
   padding: 12px;
@@ -89,10 +101,20 @@ table#Unavailable th, table#Unavailable td {
   width: 100%;
   padding: 24px 0 24px 24px;
 }
+@media screen and (max-width: 768px) {
+  .column-left {
+    padding: 0;
+  }
+}
 
 .column-middle {
   flex: 1 1 auto;
   padding: 24px 40px;
+}
+@media screen and (max-width: 768px) {
+  .column-middle {
+    padding: 0;
+  }
 }
 
 .column-right {
@@ -103,14 +125,52 @@ table#Unavailable th, table#Unavailable td {
   justify-content: space-between;
   flex-direction: column;
 }
+@media screen and (max-width: 768px) {
+  .column-right {
+    border-radius: 6px;
+    border: 1px solid #E3E3E9;
+  }
+}
 .column-right .sidebar-section {
   padding: 24px;
+}
+@media screen and (max-width: 768px) {
+  .column-right .sidebar-section {
+    padding: 20px;
+  }
 }
 .column-right .links {
   overflow: auto;
   flex: 1 1 auto;
   padding-bottom: 0;
   border-bottom: 1px solid #E3E3E9;
+}
+
+.column-left--parent {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
+  overflow: auto;
+}
+@media screen and (max-width: 768px) {
+  .column-left--parent {
+    flex-direction: column;
+  }
+}
+
+.columns {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
+  overflow: hidden;
+  padding: 0;
+}
+@media screen and (max-width: 768px) {
+  .columns {
+    flex-direction: column;
+    overflow: initial;
+    padding: 16px;
+  }
 }
 
 .github-login {

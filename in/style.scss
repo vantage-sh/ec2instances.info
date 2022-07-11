@@ -44,6 +44,16 @@ a {
   }
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  @media screen and (max-width: 768px) {
+    overflow: auto;
+  }
+}
+
 .nav {
   background-color: $purple-1;
   padding: 12px;
@@ -124,11 +134,17 @@ table {
   max-width: 400px;
   width: 100%;
   padding: 24px 0 24px 24px;
+  @media screen and (max-width: 768px) {
+    padding: 0;
+  }
 }
 
 .column-middle {
   flex: 1 1 auto;
   padding: 24px 40px;
+  @media screen and (max-width: 768px) {
+    padding: 0;
+  }
 }
 
 .column-right {
@@ -138,9 +154,15 @@ table {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-
+  @media screen and (max-width: 768px) {
+    border-radius: 6px;
+    border: 1px solid $gray-5;
+  }
   .sidebar-section {
     padding: 24px;
+    @media screen and (max-width: 768px) {
+      padding: 20px;
+    }
   }
 
   .links {
@@ -148,6 +170,29 @@ table {
     flex: 1 1 auto;
     padding-bottom: 0;
     border-bottom: 1px solid $gray-5;
+  }
+}
+
+.column-left--parent {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
+  overflow: auto;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.columns {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
+  overflow: hidden;
+  padding: 0;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    overflow: initial;
+    padding: 16px;
   }
 }
 

@@ -12,11 +12,13 @@
     <link rel="stylesheet" href="/style.css">
     <link rel="icon" type="image/png" href="/favicon.png">
     <title>${i["Amazon"][1]["value"]} Details</title>
-    <meta name="descriptio1" content="${description}"></head>
+    <meta name="description" content="${description}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  </head>
   </head>
     
   <body>
-    <div class="d-flex flex-column h-100 overflow-hidden">
+    <div class="main">
       <div class="nav">
         <li class="nav-item">
           <a href="/">
@@ -35,29 +37,33 @@
           </a>
           </li>
       </div>
-      <div class="d-flex flex-fill overflow-hidden">
-        <div class="d-flex flex-fill overflow-auto">
+      <div class="columns">
+        <div class="column-left--parent">
           <div class="column-left">
             <h1 class="h3 mb-0 fw-bolder">${i["Amazon"][1]["value"]}</h1>
             
             <!-- Description -->
-            <p class="py-4 mb-2 small lh-base">${description}</p>
+            <p class="py-md-4 py-3 mb-2 small lh-base">${description}</p>
             
+            <div class="d-flex align-items-center mb-3">
+              <span class="material-icons me-1">paid</span>
+              <p class="h6 fw-semibold mb-0">Pricing</p>
+            </div>
             <!-- Prices -->
-            <div class="small d-flex pe-2 mb-4">
-              <div class="col-sm-3">
+            <div class="small d-flex flex-row flex-wrap pe-2 mb-4">
+              <div class="col-md-3 col-6 mb-md-0 mb-3">
                 <p class="h6 mb-0 fw-semibold" id="p_od"></p>
                 <p class="mb-0 fs-12 text-muted">On Demand</p>
               </div>
-              <div class="col-sm-3">
+              <div class="col-md-3 col-6 mb-md-0 mb-3">
                 <p class="h6 mb-0 fw-semibold" id="p_spot"></p>
                 <p class="mb-0 fs-12 text-muted">Spot</p>
               </div>
-              <div class="col-sm-3">
+              <div class="col-md-3 col-6">
                 <p class="h6 mb-0 fw-semibold" id="p_1yr"></p>
                 <p class="mb-0 fs-12 text-muted">1 Yr Reserved</p>
               </div>
-              <div class="col-sm-3">
+              <div class="col-md-3 col-6">
                 <p class="h6 mb-0 fw-semibold" id="p_3yr"></p>
                 <p class="mb-0 fs-12 text-muted">3 Yr Reserved</p>
               </div>
@@ -165,7 +171,11 @@
           </div>
 
           <div class="column-middle mb-5">
-            <div class="w-100 d-flex flex-column flex-fill pb-5">
+            <div class="w-100 d-flex flex-column flex-fill pb-5">          
+              <div class="d-flex align-items-center mb-3">
+                <span class="material-icons me-1">article</span>
+                <p class="h6 fw-semibold mb-0">Instance Details</p>
+              </div>
               % for category, attrs in i.items():
                 % if category == "Coming Soon":
                   % for a in attrs:
