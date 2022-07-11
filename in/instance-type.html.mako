@@ -197,9 +197,9 @@
               % endfor
               <table class="table" id="Unavailable">
                 <tr>
-                  <th class="col-4 border-end" style="color:red !important">Unavailable</th>
-                  <th class="col-4 border-end" style="color:red !important">Unsupported Region</th>
-                  <th class="col-4" style="color:red !important">Unsupported OS</th>
+                  <th class="col-4 border-end">Unavailable</th>
+                  <th class="col-4 border-end">Unsupported Region</th>
+                  <th class="col-4">Unsupported OS</th>
                 </tr>
                 % for u in unavailable:
                 <tr>
@@ -243,10 +243,8 @@
               </li>
             </details>
           </div>
-          <div class="sidebar-section ticket">
-            <div class="github-login">
-              See a data problem? <a href="https://github.com/vantage-sh/ec2instances.info/issues/new" target="_blank">Open a ticket.</a>
-            </div>
+          <div class="sidebar-section ticket small">
+            See a data problem? <a href="https://github.com/vantage-sh/ec2instances.info/issues/new" target="_blank" class="text-decoration-none">Open a ticket.</a>
           </div>
         </div>
       </div>

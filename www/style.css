@@ -56,6 +56,16 @@ table.table-mono tbody tr.no-link td {
   color: #FFFFFF;
   background-color: #1A1A1C !important;
 }
+table#Unavailable {
+  border-color: #F8B6AD;
+}
+table#Unavailable th {
+  background-color: #FFECEA !important;
+  color: #76180A !important;
+}
+table#Unavailable th, table#Unavailable td {
+  border-color: #F8B6AD !important;
+}
 
 .fs-12 {
   font-size: 12px;
