@@ -193,4 +193,9 @@ table {
     background-color: #F9E6FF;
     border-color: #E59DFF;
   }
+
+  &.value-previous {
+    background-color: $gray-6;
+    border-color: $gray-4;
+  }
 }

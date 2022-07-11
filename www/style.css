@@ -152,5 +152,9 @@ table#Unavailable th, table#Unavailable td {
   background-color: #F9E6FF;
   border-color: #E59DFF;
 }
+.value.value-previous {
+  background-color: #F7F7F9;
+  border-color: #CFCFD6;
+}
 
 /*# sourceMappingURL=style.css.map */
