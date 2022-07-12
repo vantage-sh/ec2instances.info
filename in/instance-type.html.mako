@@ -144,7 +144,7 @@
                 <span class="material-icons me-1">dns</span>
                 <p class="h6 fw-semibold mb-0">Family Sizes</p>
               </div>
-              <table class="table table-mono">
+              <table class="table table-mono mb-0">
                 <thead>
                   <tr>
                     <th>Size</th>
@@ -176,6 +176,11 @@
                 <p class="h6 fw-semibold mb-0">Instance Variants</p>
               </div>
               <table class="table table-mono">
+                <thead>
+                  <tr>
+                    <th>Variant</th>
+                  </tr>
+                </thead>
                 <tbody>
                   % for v in variants:
                     % if v[0] == i["Amazon"][1]['value']:
