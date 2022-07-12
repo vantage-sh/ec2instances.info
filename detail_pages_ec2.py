@@ -14,21 +14,22 @@ import re
 def initial_prices(i, instance_type):
     flag = ""
     try:
-        od = i["Pricing"]["us-east-1"]["PostgreSQL"]["ondemand"]
+        od = i["Pricing"]["us-east-1"]["linux"]["ondemand"]
     except:
         # If prices are not available for us-east-1 it means this is a custom instance of some kind
-        return ["'N/A'", "'N/A'", "'N/A'"]
+        return ["'N/A'", "'N/A'", "'N/A'", "'N/A'"]
 
-    od = i["Pricing"]["us-east-1"]["PostgreSQL"]["ondemand"]
+    od = i["Pricing"]["us-east-1"]["linux"]["ondemand"]
+    spot = i["Pricing"]["us-east-1"]["linux"]["spot"]
     try:
-        _1yr = i["Pricing"]["us-east-1"]["PostgreSQL"]["_1yr"]["Standard.partialUpfront"]
-        _3yr = i["Pricing"]["us-east-1"]["PostgreSQL"]["_3yr"]["Standard.partialUpfront"]
+        _1yr = i["Pricing"]["us-east-1"]["linux"]["_1yr"]["Standard.noUpfront"]
+        _3yr = i["Pricing"]["us-east-1"]["linux"]["_3yr"]["Standard.noUpfront"]
     except:
         # If we can't get a reservation, likely a previous generation
         _1yr = "'N/A'"
         _3yr = "'N/A'"
 
-    return [od, _1yr, _3yr]
+    return [od, spot, _1yr, _3yr]
 
 
 def description(id):
@@ -58,15 +59,11 @@ def community(instance, links):
 
 def unavailable_instances(itype, instance_details):
     data_file = "meta/regions_aws.yaml"
-    rds_os = {
-        'MySQL', 
-        'PostgreSQL', 
-        'SQL Server Standard',
-        'Aurora MySQL',
-        'MariaDB',
-        'Oracle',
-        'Oracle Standard Two',
-        'Aurora PostgreSQL', 
+    ec2_os = {
+        "linux": "Linux", 
+        "mswin": "Windows",
+        "rhel": "Red Hat",
+        "sles": "SUSE",
     }
 
     denylist = []
@@ -81,9 +78,9 @@ def unavailable_instances(itype, instance_details):
                 denylist.append([aws_regions[r], r, "All", "*"])
             else:
                 instance_regions_oss = instance_details["Pricing"][r].keys()
-                for os in rds_os:
+                for os in ec2_os.keys():
                     if os not in instance_regions_oss:
-                        denylist.append([aws_regions[r], r, os, os])
+                        denylist.append([aws_regions[r], r, ec2_os[os], os])
                         # print("Found that {} is not available in {} as {}".format(itype, r, os))
     return denylist
 
@@ -97,8 +94,7 @@ def assemble_the_families(instances):
 
     for i in instances:
         name = i["instance_type"]
-        itype = name.split(".")[1]
-        suffix = ''.join(name.split(".")[2:])
+        itype, suffix = name.split(".")
         variant = itype[0:2]
 
         if variant not in variant_families:
@@ -111,8 +107,8 @@ def assemble_the_families(instances):
             if not dupe:
                 variant_families[variant].append([itype, name])
 
-        member = {"name": name, "cpus": int(i["vcpu"]), "memory": float(i["memory"])}
-        if "mem" not in suffix:
+        member = {"name": name, "cpus": int(i["vCPU"]), "memory": int(i["memory"])}
+        if suffix != "metal":
             # metal instances are variants not family members (by this taxonomy)
             if itype not in instance_fam_map:
                 instance_fam_map[itype] = [member]
@@ -138,41 +134,14 @@ def assemble_the_families(instances):
 
 def prices(pricing):
     display_prices = {}
-    # print(json.dumps(pricing, indent=4))
-
-    engine_mapping = {
-        '2': 'MySQL', 
-        '3': 'Oracle Standard One BYOL', 
-        '4': 'Oracle Standard BYOL', 
-        '5': 'Oracle', 
-        '6': 'Oracle Standard One', 
-        '9': 'SQL Server',
-        '10': 'SQL Server Express',
-        '11': 'SQL Server Standard',
-        '12': 'SQL Server Standard',
-        '14': 'PostgreSQL', 
-        '15': 'SQL Server Enterprise',
-        '16': 'Aurora MySQL',
-        '18': 'MariaDB',
-        '19': 'Oracle Standard Two BYOL',
-        '20': 'Oracle Standard Two',
-        '21': 'Aurora PostgreSQL', 
-        '210': 'MySQL (Outpost On-Prem)', 
-        '220': 'PostgreSQL (Outpost On-Prem)', 
-        '230': 'SQL Server Enterprise (Outpost On-Prem)',
-        '231': 'SQL Server (Outpost On-Prem)',
-        '232': 'SQL Server Web (Outpost On-Prem)',
-    }
-
     for region, p in pricing.items():
         display_prices[region] = {}
 
         for os, _p in p.items():
-
-            if len(os) > 3:
-                continue
-            os = engine_mapping[os]
             display_prices[region][os] = {}
+            
+            if os == 'ebs' or os == 'emr':
+                continue
 
             # Doing a lot of work to deal with prices having up to 6 places
             # after the decimal, as well as prices not existing for all regions
@@ -181,6 +150,11 @@ def prices(pricing):
                 display_prices[region][os]["ondemand"] = _p["ondemand"]
             except KeyError:
                 display_prices[region][os]["ondemand"] = "N/A"
+
+            try:
+                display_prices[region][os]["spot"] = _p["spot_max"]
+            except KeyError:
+                display_prices[region][os]["spot"] = "N/A"
 
             try:
                 reserved = {}
@@ -211,7 +185,7 @@ def load_service_attributes():
         "storage",
         "pricing",
     ]
-    data_file = 'meta/service_attributes_rds.csv'
+    data_file = 'meta/service_attributes_ec2.csv'
 
     display_map = {}
     with open(data_file, 'r') as f:
@@ -260,13 +234,14 @@ def load_service_attributes_cloudhw(data_file="meta/instance_types_cloudhw.csv")
     return instance_lookup
 
 
-def map_rds_attributes(i, imap):
+def map_ec2_attributes(i, imap):
     # For now, manually transform the instance data we receive from AWS 
     # into the format we want to render. Later we can create this in YAML
     # and use a standard function that maps names
     categories = [
         "Compute",
         "Networking",
+        "Storage",
         "Amazon",
         "Not Shown",
         "Coming Soon",
@@ -295,12 +270,12 @@ def map_rds_attributes(i, imap):
             # print(v)  # print styling value
             if v == "false" or v == "0" or v == "none":
                 display["style"] = "value value-false"
-            elif v == "true" or v == "1" or v == "yes":
-                display["style"] = "value value-true"
             elif v == "current":
                 display["style"] = "value value-current"
             elif v == "previous":
                 display["style"] = "value value-previous"
+            else:
+                display["style"] = "value value-true"
 
         instance_details[display["category"]].append(display)
     
@@ -314,7 +289,7 @@ def map_rds_attributes(i, imap):
     return instance_details
 
 
-def build_detail_pages_rds(instances, destination_file):
+def build_detail_pages_ec2(instances, destination_file):
     # Extract which service these instances belong to, for example EC2 is loaded at /
     service_path = destination_file.split('/')[1]
     data_file = "community_contributions.yaml"
@@ -331,7 +306,7 @@ def build_detail_pages_rds(instances, destination_file):
     imap = load_service_attributes()
 
     lookup = mako.lookup.TemplateLookup(directories=["."])
-    template = mako.template.Template(filename='in/instance-type-rds.html.mako', lookup=lookup)
+    template = mako.template.Template(filename='in/instance-type.html.mako', lookup=lookup)
 
     # To add more data to a single instance page, do so inside this loop
     could_not_render = []
@@ -339,7 +314,7 @@ def build_detail_pages_rds(instances, destination_file):
         instance_type = i["instance_type"]
 
         instance_page = os.path.join(subdir, instance_type + '.html')
-        instance_details = map_rds_attributes(i, imap)
+        instance_details = map_ec2_attributes(i, imap)
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
         idescription = description(instance_details)
@@ -357,7 +332,7 @@ def build_detail_pages_rds(instances, destination_file):
                     links=links,
                     unavailable=denylist,
                     defaults=defaults,
-                    variants=variants[instance_type[3:5]],
+                    variants=variants[instance_type[0:2]],
                 ))
             except:
                 render_err = mako.exceptions.text_error_template().render() 
