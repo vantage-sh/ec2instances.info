@@ -90,28 +90,46 @@ def assemble_the_families(instances):
     # and another where we can get the family and see what the members are
     instance_fam_map = {}
     families = {}
+    variant_families = {}
 
     for i in instances:
         name = i["instance_type"]
-        itype = name.split(".")[0]
+        itype, suffix = name.split(".")
+        variant = itype[0:2]
+
+        if variant not in variant_families:
+            variant_families[variant] = [[itype, name]]
+        else:
+            dupe = 0
+            for v, _ in variant_families[variant]:
+                if v == itype:
+                    dupe = 1
+            if not dupe:
+                variant_families[variant].append([itype, name])
 
         member = {"name": name, "cpus": int(i["vCPU"]), "memory": int(i["memory"])}
-        if itype not in instance_fam_map:
-            instance_fam_map[itype] = [member]
+        if suffix != "metal":
+            # metal instances are variants not family members (by this taxonomy)
+            if itype not in instance_fam_map:
+                instance_fam_map[itype] = [member]
+            else:
+                instance_fam_map[itype].append(member)        
         else:
-            instance_fam_map[itype].append(member)        
+            if itype not in instance_fam_map:
+                instance_fam_map[itype] = [member]
+            else:
+                variant_families[variant].append([name, name])
 
         # The second list, where we will get the family from knowing the instance
         families[name] = itype
 
     # Order the families by number of cpus so they display this way on the webpage
-    for f, i in instance_fam_map.items():
-        i.sort(key=lambda x: x["cpus"])
-        instance_fam_map[f] = i
-    
+    for f, ilist in instance_fam_map.items():
+        ilist.sort(key=lambda x: x["cpus"])
+        instance_fam_map[f] = ilist
 
     # for debugging: print(json.dumps(instance_fam_map, indent=4))
-    return instance_fam_map, families
+    return instance_fam_map, families, variant_families
 
 
 def prices(pricing):
@@ -191,6 +209,7 @@ def load_service_attributes():
                 "style": row[4],
                 "regex": row[5],
                 "value": None,
+                "variant_family": row[1][0:2],
             }
             
     return display_map
@@ -283,7 +302,7 @@ def build_instance_families(instances, destination_file):
     if service_path != 'index.html':
         subdir = os.path.join('www', 'aws', service_path)
 
-    ifam, fam_lookup = assemble_the_families(instances)
+    ifam, fam_lookup, variants = assemble_the_families(instances)
     imap = load_service_attributes()
 
     lookup = mako.lookup.TemplateLookup(directories=["."])
@@ -313,6 +332,7 @@ def build_instance_families(instances, destination_file):
                     links=links,
                     unavailable=denylist,
                     defaults=defaults,
+                    variants=variants[instance_type[0:2]],
                 ))
             except:
                 render_err = mako.exceptions.text_error_template().render() 
@@ -322,6 +342,7 @@ def build_instance_families(instances, destination_file):
                 }
 
                 could_not_render.append(err)
+        # break
         
     [print(err["e"], '{}'.format(err["t"])) for err in could_not_render]
     [print(page["e"]) for page in could_not_render]

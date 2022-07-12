@@ -168,6 +168,28 @@
                 </tbody>
               </table>
             </div>
+
+            <!-- Instance variants -->
+            <div class="mt-4 d-flex flex-column">
+              <div class="d-flex align-items-center mb-3">
+                <span class="material-icons me-1">dns</span>
+                <p class="h6 fw-semibold mb-0">Instance Variants</p>
+              </div>
+              <table class="table table-mono">
+                <tbody>
+                  % for v in variants:
+                    % if v[0] == i["Amazon"][1]['value']:
+                      <tr class="no-link">
+                        <td>${v[0]}</td>
+                    % else:
+                      <tr>
+                        <td><a href="/aws/ec2/${v[1]}.html">${v[0]}</a></td>
+                    % endif
+                    </tr>
+                  % endfor
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <div class="column-middle mb-5">
