@@ -205,20 +205,22 @@
                   </table>
                 % endif
               % endfor
-              <table class="table" id="Unavailable">
-                <tr>
-                  <th class="col-4 border-end">Unavailable</th>
-                  <th class="col-4 border-end">Unsupported Region</th>
-                  <th class="col-4">Unsupported OS</th>
-                </tr>
-                % for u in unavailable:
-                <tr>
-                  <td class="col-4 border-end">${u[0]}</td>
-                  <td class="col-4 border-end">${u[1]}</td>
-                  <td class="col-4">${u[2]}</td>
-                </tr>
-                % endfor
-              </table>
+              % if len(unavailable) > 0:
+                <table class="table" id="Unavailable">
+                  <tr>
+                    <th class="col-4 border-end">Unavailable</th>
+                    <th class="col-4 border-end">Unsupported Region</th>
+                    <th class="col-4">Unsupported OS</th>
+                  </tr>
+                  % for u in unavailable:
+                  <tr>
+                    <td class="col-4 border-end">${u[0]}</td>
+                    <td class="col-4 border-end">${u[1]}</td>
+                    <td class="col-4">${u[2]}</td>
+                  </tr>
+                  % endfor
+                </table>
+              % endif
             </div>
           </div>
         </div>

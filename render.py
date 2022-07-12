@@ -32,14 +32,20 @@ def initial_prices(i, instance_type):
     return [od, spot, _1yr, _3yr]
 
 
-def description(instance):
-    name = instance["pretty_name"]
-    family_category = instance["family"].lower()
-    cpus = instance["vCPU"]
-    memory = instance["memory"]
-    bandwidth = instance["network_performance"].lower()
+def description(id):
+    name = id["Amazon"][1]["value"]
+    family_category = id["Amazon"][2]["value"].lower()
+    cpus = id["Compute"][0]["value"]
+    memory = id["Compute"][1]["value"]
+    bandwidth = id["Networking"][0]["value"]
 
-    return "The {} is a {} instance with {} CPUs, {} GiB of memory and {} of bandwidth".format(
+    # Some instances say "Low to moderate" for bandwidth, ignore them
+    try:
+        bandwidth = " and {} Gibps of bandwidth.".format(int(id["Networking"][0]["value"]))
+    except:
+        bandwidth = "."
+
+    return "The {} instance is a {} instance with {} CPUs, {} GiB of memory{}".format(
         name, family_category, cpus, memory, bandwidth)
 
 
@@ -249,6 +255,8 @@ def map_ec2_attributes(i, imap):
                 display["style"] = "value value-true"
             elif v == "current":
                 display["style"] = "value value-current"
+            elif v == "previous":
+                display["style"] = "value value-previous"
 
         instance_details[display["category"]].append(display)
     
@@ -290,7 +298,7 @@ def build_instance_families(instances, destination_file):
         instance_details = map_ec2_attributes(i, imap)
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
-        idescription = description(i)
+        idescription = description(instance_details)
         links = community(instance_type, community_data)
         denylist = unavailable_instances(instance_type, instance_details)
         defaults = initial_prices(instance_details, instance_type)
