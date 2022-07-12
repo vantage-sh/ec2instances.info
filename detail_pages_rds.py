@@ -10,28 +10,25 @@ import bisect
 import yaml
 import re
 
-from detail_pages_rds import build_detail_pages
-
 
 def initial_prices(i, instance_type):
     flag = ""
     try:
-        od = i["Pricing"]["us-east-1"]["linux"]["ondemand"]
+        od = i["Pricing"]["us-east-1"]["PostgreSQL"]["ondemand"]
     except:
         # If prices are not available for us-east-1 it means this is a custom instance of some kind
         return ["N/A", "N/A", "N/A", "N/A"]
 
-    od = i["Pricing"]["us-east-1"]["linux"]["ondemand"]
-    spot = i["Pricing"]["us-east-1"]["linux"]["spot"]
+    od = i["Pricing"]["us-east-1"]["PostgreSQL"]["ondemand"]
     try:
-        _1yr = i["Pricing"]["us-east-1"]["linux"]["_1yr"]["Standard.noUpfront"]
-        _3yr = i["Pricing"]["us-east-1"]["linux"]["_3yr"]["Standard.noUpfront"]
+        _1yr = i["Pricing"]["us-east-1"]["PostgreSQL"]["_1yr"]["Standard.allUpfront"]
+        _3yr = i["Pricing"]["us-east-1"]["PostgreSQL"]["_3yr"]["Standard.allUpfront"]
     except:
         # If we can't get a reservation, likely a previous generation
-        _1yr = "N/A"
-        _3yr = "N/A"
+        _1yr = "'N/A'"
+        _3yr = "'N/A'"
 
-    return [od, spot, _1yr, _3yr]
+    return [od, _1yr, _3yr]
 
 
 def description(id):
@@ -61,11 +58,15 @@ def community(instance, links):
 
 def unavailable_instances(itype, instance_details):
     data_file = "meta/regions_aws.yaml"
-    ec2_os = {
-        "linux": "Linux", 
-        "mswin": "Windows",
-        "rhel": "Red Hat",
-        "sles": "SUSE",
+    rds_os = {
+        'MySQL', 
+        'PostgreSQL', 
+        'SQL Server Standard',
+        'Aurora MySQL',
+        'MariaDB',
+        'Oracle',
+        'Oracle Standard Two',
+        'Aurora PostgreSQL', 
     }
 
     denylist = []
@@ -80,9 +81,9 @@ def unavailable_instances(itype, instance_details):
                 denylist.append([aws_regions[r], r, "All", "*"])
             else:
                 instance_regions_oss = instance_details["Pricing"][r].keys()
-                for os in ec2_os.keys():
+                for os in rds_os:
                     if os not in instance_regions_oss:
-                        denylist.append([aws_regions[r], r, ec2_os[os], os])
+                        denylist.append([aws_regions[r], r, os, os])
                         # print("Found that {} is not available in {} as {}".format(itype, r, os))
     return denylist
 
@@ -96,7 +97,9 @@ def assemble_the_families(instances):
 
     for i in instances:
         name = i["instance_type"]
-        itype, suffix = name.split(".")
+        itype = name.split(".")[1]
+        suffix = ''.join(name.split(".")[2:])
+        print(suffix)
         variant = itype[0:2]
 
         if variant not in variant_families:
@@ -109,8 +112,8 @@ def assemble_the_families(instances):
             if not dupe:
                 variant_families[variant].append([itype, name])
 
-        member = {"name": name, "cpus": int(i["vCPU"]), "memory": int(i["memory"])}
-        if suffix != "metal":
+        member = {"name": name, "cpus": int(i["vcpu"]), "memory": float(i["memory"])}
+        if "mem" not in suffix:
             # metal instances are variants not family members (by this taxonomy)
             if itype not in instance_fam_map:
                 instance_fam_map[itype] = [member]
@@ -136,14 +139,41 @@ def assemble_the_families(instances):
 
 def prices(pricing):
     display_prices = {}
+    # print(json.dumps(pricing, indent=4))
+
+    engine_mapping = {
+        '2': 'MySQL', 
+        '3': 'Oracle Standard One BYOL', 
+        '4': 'Oracle Standard BYOL', 
+        '5': 'Oracle', 
+        '6': 'Oracle Standard One', 
+        '9': 'SQL Server',
+        '10': 'SQL Server Express',
+        '11': 'SQL Server Standard',
+        '12': 'SQL Server Standard',
+        '14': 'PostgreSQL', 
+        '15': 'SQL Server Enterprise',
+        '16': 'Aurora MySQL',
+        '18': 'MariaDB',
+        '19': 'Oracle Standard Two BYOL',
+        '20': 'Oracle Standard Two',
+        '21': 'Aurora PostgreSQL', 
+        '210': 'MySQL (Outpost On-Prem)', 
+        '220': 'PostgreSQL (Outpost On-Prem)', 
+        '230': 'SQL Server Enterprise (Outpost On-Prem)',
+        '231': 'SQL Server (Outpost On-Prem)',
+        '232': 'SQL Server Web (Outpost On-Prem)',
+    }
+
     for region, p in pricing.items():
         display_prices[region] = {}
 
         for os, _p in p.items():
-            display_prices[region][os] = {}
-            
-            if os == 'ebs' or os == 'emr':
+
+            if len(os) > 3:
                 continue
+            os = engine_mapping[os]
+            display_prices[region][os] = {}
 
             # Doing a lot of work to deal with prices having up to 6 places
             # after the decimal, as well as prices not existing for all regions
@@ -152,11 +182,6 @@ def prices(pricing):
                 display_prices[region][os]["ondemand"] = _p["ondemand"]
             except KeyError:
                 display_prices[region][os]["ondemand"] = "N/A"
-
-            try:
-                display_prices[region][os]["spot"] = _p["spot_max"]
-            except KeyError:
-                display_prices[region][os]["spot"] = "N/A"
 
             try:
                 reserved = {}
@@ -187,7 +212,7 @@ def load_service_attributes():
         "storage",
         "pricing",
     ]
-    data_file = 'meta/service_attributes_ec2.csv'
+    data_file = 'meta/service_attributes_rds.csv'
 
     display_map = {}
     with open(data_file, 'r') as f:
@@ -236,14 +261,13 @@ def load_service_attributes_cloudhw(data_file="meta/instance_types_cloudhw.csv")
     return instance_lookup
 
 
-def map_ec2_attributes(i, imap):
+def map_rds_attributes(i, imap):
     # For now, manually transform the instance data we receive from AWS 
     # into the format we want to render. Later we can create this in YAML
     # and use a standard function that maps names
     categories = [
         "Compute",
         "Networking",
-        "Storage",
         "Amazon",
         "Not Shown",
         "Coming Soon",
@@ -272,12 +296,12 @@ def map_ec2_attributes(i, imap):
             # print(v)  # print styling value
             if v == "false" or v == "0" or v == "none":
                 display["style"] = "value value-false"
+            elif v == "true" or v == "1" or v == "yes":
+                display["style"] = "value value-true"
             elif v == "current":
                 display["style"] = "value value-current"
             elif v == "previous":
                 display["style"] = "value value-previous"
-            else:
-                display["style"] = "value value-true"
 
         instance_details[display["category"]].append(display)
     
@@ -291,7 +315,7 @@ def map_ec2_attributes(i, imap):
     return instance_details
 
 
-def build_instance_families(instances, destination_file):
+def build_detail_pages(instances, destination_file):
     # Extract which service these instances belong to, for example EC2 is loaded at /
     service_path = destination_file.split('/')[1]
     data_file = "community_contributions.yaml"
@@ -308,7 +332,7 @@ def build_instance_families(instances, destination_file):
     imap = load_service_attributes()
 
     lookup = mako.lookup.TemplateLookup(directories=["."])
-    template = mako.template.Template(filename='in/instance-type.html.mako', lookup=lookup)
+    template = mako.template.Template(filename='in/instance-type-rds.html.mako', lookup=lookup)
 
     # To add more data to a single instance page, do so inside this loop
     could_not_render = []
@@ -316,7 +340,7 @@ def build_instance_families(instances, destination_file):
         instance_type = i["instance_type"]
 
         instance_page = os.path.join(subdir, instance_type + '.html')
-        instance_details = map_ec2_attributes(i, imap)
+        instance_details = map_rds_attributes(i, imap)
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
         idescription = description(instance_details)
@@ -334,7 +358,7 @@ def build_instance_families(instances, destination_file):
                     links=links,
                     unavailable=denylist,
                     defaults=defaults,
-                    variants=variants[instance_type[0:2]],
+                    variants=variants[instance_type[3:5]],
                 ))
             except:
                 render_err = mako.exceptions.text_error_template().render() 
@@ -348,141 +372,3 @@ def build_instance_families(instances, destination_file):
         
     [print(err["e"], '{}'.format(err["t"])) for err in could_not_render]
     [print(page["e"]) for page in could_not_render]
-
-
-def network_sort(inst):
-    perf = inst["network_performance"]
-    network_rank = [
-        "Very Low",
-        "Low",
-        "Low to Moderate",
-        "Moderate",
-        "High",
-        "Up to 5 Gigabit",
-        "Up to 10 Gigabit",
-        "10 Gigabit",
-        "12 Gigabit",
-        "20 Gigabit",
-        "Up to 25 Gigabit",
-        "25 Gigabit",
-        "50 Gigabit",
-        "75 Gigabit",
-        "100 Gigabit",
-    ]
-    try:
-        sort = network_rank.index(perf)
-    except ValueError:
-        sort = len(network_rank)
-    sort *= 2
-    if inst.get("ebs_optimized"):
-        sort += 1
-    return sort
-
-
-def add_cpu_detail(i):
-    try:
-        i["ECU_per_vcpu"] = i["ECU"] / i["vCPU"]
-    except:
-        # these will be instances with variable/burstable ECU
-        i["ECU_per_vcpu"] = "unknown"
-
-    try:
-        i["memory_per_vcpu"] = round(i["memory"] / i["vCPU"], 2)
-    except:
-        # just to be safe...
-        i["memory_per_vcpu"] = "unknown"
-
-    if "physical_processor" in i:
-        i["physical_processor"] = (i["physical_processor"] or "").replace("*", "")
-        i["intel_avx"] = "Yes" if i["intel_avx"] else ""
-        i["intel_avx2"] = "Yes" if i["intel_avx2"] else ""
-        i["intel_avx512"] = "Yes" if i["intel_avx512"] else ""
-        i["intel_turbo"] = "Yes" if i["intel_turbo"] else ""
-
-
-def add_render_info(i):
-    i["network_sort"] = network_sort(i)
-    add_cpu_detail(i)
-
-
-prices_dict = {}
-prices_index = 0
-
-
-def _compress_pricing(d):
-    global prices_index
-
-    for k, v in d.items():
-        if k in prices_dict:
-            nk = prices_dict[k]
-        else:
-            prices_dict[k] = nk = prices_index
-            prices_index += 1
-
-        if isinstance(v, dict):
-            nv = dict(_compress_pricing(v))
-        else:
-            nv = v
-
-        yield nk, nv
-
-
-def compress_pricing(instances):
-    global prices_index
-
-    prices = {i["instance_type"]: i["pricing"] for i in instances}
-
-    prices_dict.clear()
-    prices_index = 0
-
-    return json.dumps({"index": prices_dict, "data": dict(_compress_pricing(prices))})
-
-
-def compress_instance_azs(instances):
-    instance_type_region_availability_zones = {}
-    for inst in instances:
-        if "instance_type" in inst and "availability_zones" in inst:
-            instance_type_region_availability_zones[inst["instance_type"]] = inst[
-                "availability_zones"
-            ]
-    return json.dumps(instance_type_region_availability_zones)
-
-
-def render(data_file, template_file, destination_file):
-    """Build the HTML content from scraped data"""
-    lookup = mako.lookup.TemplateLookup(directories=["."])
-    template = mako.template.Template(filename=template_file, lookup=lookup)
-    with open(data_file) as f:
-        instances = json.load(f)
-
-    print("Loading data from %s..." % data_file)
-    for i in instances:
-        add_render_info(i)
-    pricing_json = compress_pricing(instances)
-    generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
-    instance_azs_json = compress_instance_azs(instances)
-    if "rds" in destination_file:
-        build_detail_pages(instances, destination_file)
-    else:
-        build_instance_families(instances, destination_file)
-
-    print("Rendering to %s..." % destination_file)
-    os.makedirs(os.path.dirname(destination_file), exist_ok=True)
-    with io.open(destination_file, "w+", encoding="utf-8") as fh:
-        try:
-            fh.write(
-                template.render(
-                    instances=instances,
-                    pricing_json=pricing_json,
-                    generated_at=generated_at,
-                    instance_azs_json=instance_azs_json,
-                )
-            )
-        except:
-            print(mako.exceptions.text_error_template().render())
-
-
-if __name__ == "__main__":
-    render("www/instances.json", "in/index.html.mako", "www/index.html")
-    render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
-    # render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
