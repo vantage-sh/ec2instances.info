@@ -134,6 +134,7 @@
       Min Storage (GiB): <input data-action="datafilter" data-type="storage" class="form-control" />
     </div>
 
+    <div>
     <table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">
       <thead>
         <tr>
@@ -248,7 +249,7 @@
         % for inst in instances:
           <tr class='instance' id="${inst['instance_type']}">
             <td class="name">${inst['pretty_name']}</td>
-            <td class="apiname"><a href="/aws/ec2/${inst['instance_type']}.html">${inst['instance_type']}</a></td>
+            <td class="apiname"><b><a href="/aws/ec2/${inst['instance_type']}.html">${inst['instance_type']}</a></b></td>
             <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
             <td class="computeunits">
               % if inst['ECU'] == 'variable':
@@ -497,3 +498,4 @@
         % endfor
       </tbody>
     </table>
+    </div>

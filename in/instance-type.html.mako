@@ -148,7 +148,7 @@
                 <thead>
                   <tr>
                     <th>Size</th>
-                    <th class="text-center">CPU</th>
+                    <th class="text-center">vCPUs</th>
                     <th class="text-center">Memory (GiB)</th>
                   </tr>
                 </thead>
@@ -170,6 +170,7 @@
             </div>
 
             <!-- Instance variants -->
+            % if len(variants) > 1:
             <div class="mt-4 d-flex flex-column">
               <div class="d-flex align-items-center mb-3">
                 <span class="material-icons me-1">dns</span>
@@ -195,6 +196,7 @@
                 </tbody>
               </table>
             </div>
+            % endif
           </div>
 
           <div class="column-middle mb-5">
@@ -232,7 +234,7 @@
                   </table>
                 % endif
               % endfor
-              % if len(unavailable) > 0:
+              % if len(unavailable) > 0 and false:
                 <table class="table" id="Unavailable">
                   <tr>
                     <th class="col-4 border-end">Unavailable</th>

@@ -11,18 +11,48 @@ import yaml
 import re
 
 
+rds_engine_mapping = {
+    '2': 'MySQL', 
+    '3': 'Oracle Standard One BYOL', 
+    '4': 'Oracle Standard BYOL', 
+    '5': 'Oracle', 
+    '6': 'Oracle Standard One', 
+    '9': 'SQL Server',
+    '10': 'SQL Server Express',
+    '11': 'SQL Server Standard',
+    '12': 'SQL Server Standard',
+    '14': 'PostgreSQL', 
+    '15': 'SQL Server Enterprise',
+    '16': 'Aurora MySQL',
+    '18': 'MariaDB',
+    '19': 'Oracle Standard Two BYOL',
+    '20': 'Oracle Standard Two',
+    '21': 'Aurora PostgreSQL', 
+    '210': 'MySQL (Outpost On-Prem)', 
+    '220': 'PostgreSQL (Outpost On-Prem)', 
+    '230': 'SQL Server Enterprise (Outpost On-Prem)',
+    '231': 'SQL Server (Outpost On-Prem)',
+    '232': 'SQL Server Web (Outpost On-Prem)',
+}
+
+
 def initial_prices(i, instance_type):
-    flag = ""
     try:
-        od = i["Pricing"]["us-east-1"]["PostgreSQL"]["ondemand"]
+        if "mem" in instance_type:
+            od = i["Pricing"]["us-east-1"]["Oracle"]["ondemand"]
+        else:
+            od = i["Pricing"]["us-east-1"]["PostgreSQL"]["ondemand"]
     except:
         # If prices are not available for us-east-1 it means this is a custom instance of some kind
         return ["'N/A'", "'N/A'", "'N/A'"]
 
-    od = i["Pricing"]["us-east-1"]["PostgreSQL"]["ondemand"]
     try:
-        _1yr = i["Pricing"]["us-east-1"]["PostgreSQL"]["_1yr"]["Standard.partialUpfront"]
-        _3yr = i["Pricing"]["us-east-1"]["PostgreSQL"]["_3yr"]["Standard.partialUpfront"]
+        if "mem" in instance_type:
+            _1yr = i["Pricing"]["us-east-1"]["Oracle"]["_1yr"]["Standard.partialUpfront"]
+            _3yr = i["Pricing"]["us-east-1"]["Oracle"]["_3yr"]["Standard.partialUpfront"]
+        else:
+            _1yr = i["Pricing"]["us-east-1"]["PostgreSQL"]["_1yr"]["Standard.partialUpfront"]
+            _3yr = i["Pricing"]["us-east-1"]["PostgreSQL"]["_3yr"]["Standard.partialUpfront"]
     except:
         # If we can't get a reservation, likely a previous generation
         _1yr = "'N/A'"
@@ -44,7 +74,7 @@ def description(id):
     except:
         bandwidth = "."
 
-    return "The {} instance is a {} instance with {} CPUs, {} GiB of memory{}".format(
+    return "The {} instance is a {} instance with {} vCPUs, {} GiB of memory{}".format(
         name, family_category, cpus, memory, bandwidth)
 
 
@@ -58,16 +88,6 @@ def community(instance, links):
 
 def unavailable_instances(itype, instance_details):
     data_file = "meta/regions_aws.yaml"
-    rds_os = {
-        'MySQL', 
-        'PostgreSQL', 
-        'SQL Server Standard',
-        'Aurora MySQL',
-        'MariaDB',
-        'Oracle',
-        'Oracle Standard Two',
-        'Aurora PostgreSQL', 
-    }
 
     denylist = []
     with open(data_file, "r") as f:
@@ -81,7 +101,7 @@ def unavailable_instances(itype, instance_details):
                 denylist.append([aws_regions[r], r, "All", "*"])
             else:
                 instance_regions_oss = instance_details["Pricing"][r].keys()
-                for os in rds_os:
+                for os in rds_engine_mapping.values():
                     if os not in instance_regions_oss:
                         denylist.append([aws_regions[r], r, os, os])
                         # print("Found that {} is not available in {} as {}".format(itype, r, os))
@@ -112,17 +132,10 @@ def assemble_the_families(instances):
                 variant_families[variant].append([itype, name])
 
         member = {"name": name, "cpus": int(i["vcpu"]), "memory": float(i["memory"])}
-        if "mem" not in suffix:
-            # metal instances are variants not family members (by this taxonomy)
-            if itype not in instance_fam_map:
-                instance_fam_map[itype] = [member]
-            else:
-                instance_fam_map[itype].append(member)        
+        if itype not in instance_fam_map:
+            instance_fam_map[itype] = [member]
         else:
-            if itype not in instance_fam_map:
-                instance_fam_map[itype] = [member]
-            else:
-                variant_families[variant].append([name, name])
+            instance_fam_map[itype].append(member)        
 
         # The second list, where we will get the family from knowing the instance
         families[name] = itype
@@ -140,30 +153,6 @@ def prices(pricing):
     display_prices = {}
     # print(json.dumps(pricing, indent=4))
 
-    engine_mapping = {
-        '2': 'MySQL', 
-        '3': 'Oracle Standard One BYOL', 
-        '4': 'Oracle Standard BYOL', 
-        '5': 'Oracle', 
-        '6': 'Oracle Standard One', 
-        '9': 'SQL Server',
-        '10': 'SQL Server Express',
-        '11': 'SQL Server Standard',
-        '12': 'SQL Server Standard',
-        '14': 'PostgreSQL', 
-        '15': 'SQL Server Enterprise',
-        '16': 'Aurora MySQL',
-        '18': 'MariaDB',
-        '19': 'Oracle Standard Two BYOL',
-        '20': 'Oracle Standard Two',
-        '21': 'Aurora PostgreSQL', 
-        '210': 'MySQL (Outpost On-Prem)', 
-        '220': 'PostgreSQL (Outpost On-Prem)', 
-        '230': 'SQL Server Enterprise (Outpost On-Prem)',
-        '231': 'SQL Server (Outpost On-Prem)',
-        '232': 'SQL Server Web (Outpost On-Prem)',
-    }
-
     for region, p in pricing.items():
         display_prices[region] = {}
 
@@ -171,7 +160,7 @@ def prices(pricing):
 
             if len(os) > 3:
                 continue
-            os = engine_mapping[os]
+            os = rds_engine_mapping[os]
             display_prices[region][os] = {}
 
             # Doing a lot of work to deal with prices having up to 6 places
@@ -293,14 +282,16 @@ def map_rds_attributes(i, imap):
         if display["style"]:
             v = str(display["value"]).lower()
             # print(v)  # print styling value
-            if v == "false" or v == "0" or v == "none":
+            if display["cloud_key"] == "currentGeneration" and v == "yes":
+                display["style"] = "value value-current"
+                display["value"] = "current"
+            elif v == "false" or v == "0" or v == "none":
                 display["style"] = "value value-false"
             elif v == "true" or v == "1" or v == "yes":
                 display["style"] = "value value-true"
-            elif v == "current":
-                display["style"] = "value value-current"
-            elif v == "previous":
+            elif display["cloud_key"] == "currentGeneration" and v == "no":
                 display["style"] = "value value-previous"
+                display["value"] = "previous"
 
         instance_details[display["category"]].append(display)
     

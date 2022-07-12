@@ -45,7 +45,7 @@ def description(id):
     except:
         bandwidth = "."
 
-    return "The {} instance is a {} instance with {} CPUs, {} GiB of memory{}".format(
+    return "The {} instance is a {} instance with {} vCPUs, {} GiB of memory{}".format(
         name, family_category, cpus, memory, bandwidth)
 
 
@@ -64,6 +64,15 @@ def unavailable_instances(itype, instance_details):
         "mswin": "Windows",
         "rhel": "Red Hat",
         "sles": "SUSE",
+        "linuxSQL": "Linux SQL Server",
+        "linuxSQLWeb": "Linux SQL Server for Web",
+        "linuxSQLEnterprise": "Linux SQL Enterprise",
+        "mswinSQL": "Windows SQL Server",
+        "mswinSQLWeb": "Windows SQL Web",
+        "mswinSQLEnterprise": "Windows SQL Enterprise",
+        "rhelSQL": "Red Hat SQL Server",
+        "rhelSQLWeb": "Red Hat SQL Web",
+        "rhelSQLEnterprise": "Red Hat SQL Enterprise",
     }
 
     denylist = []
@@ -108,17 +117,10 @@ def assemble_the_families(instances):
                 variant_families[variant].append([itype, name])
 
         member = {"name": name, "cpus": int(i["vCPU"]), "memory": int(i["memory"])}
-        if suffix != "metal":
-            # metal instances are variants not family members (by this taxonomy)
-            if itype not in instance_fam_map:
-                instance_fam_map[itype] = [member]
-            else:
-                instance_fam_map[itype].append(member)        
+        if itype not in instance_fam_map:
+            instance_fam_map[itype] = [member]
         else:
-            if itype not in instance_fam_map:
-                instance_fam_map[itype] = [member]
-            else:
-                variant_families[variant].append([name, name])
+            instance_fam_map[itype].append(member)        
 
         # The second list, where we will get the family from knowing the instance
         families[name] = itype
@@ -126,6 +128,11 @@ def assemble_the_families(instances):
     # Order the families by number of cpus so they display this way on the webpage
     for f, ilist in instance_fam_map.items():
         ilist.sort(key=lambda x: x["cpus"])
+        # Move the metal instances to the end of the list
+        for j in ilist:
+            if j["name"].endswith("metal"):
+                ilist.remove(j)
+                ilist.append(j)
         instance_fam_map[f] = ilist
 
     # for debugging: print(json.dumps(instance_fam_map, indent=4))

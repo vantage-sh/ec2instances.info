@@ -147,7 +147,7 @@
 % for inst in instances:
         <tr class='instance' id="${inst['instance_type']}">
           <td class="name">${inst['pretty_name']}</a></td>
-          <td class="apiname"><a href="/aws/rds/${inst['instance_type']}.html">${inst['instance_type']}</a></td>
+          <td class="apiname"><b><a href="/aws/rds/${inst['instance_type']}.html">${inst['instance_type']}</a></b></td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
           <td class="storage">
           <% storage = inst['storage'] %>

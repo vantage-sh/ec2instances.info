@@ -98,23 +98,28 @@
               </div>
               <div class="col-6 mb-2">
                 <select class="form-select form-select-sm" id="os">
-                  <option value="PostgreSQL">PostgreSQL</option> 
+                  % if "mem" in i["Amazon"][1]["value"]:
+                    <option value="Oracle">Oracle</option>
+                    <option value="PostgreSQL">PostgreSQL</option> 
+                  % else:
+                    <option value="PostgreSQL">PostgreSQL</option> 
+                    <option value="Oracle">Oracle</option>
+                  % endif
                   <option value="Aurora PostgreSQL">Aurora PostgreSQL</option>
                   <option value="MySQL">MySQL</option> 
                   <option value="Aurora MySQL">Aurora MySQL</option>
-                  <option value="SQL Server">SQL Server</option>
+                  <option value="SQL Server Standard">SQL Server</option>
                   <option value="SQL Server Enterprise">SQL Server Enterprise</option>
                   <option value="MariaDB">MariaDB</option>
                   <option value="Oracle Standard Two">Oracle Standard Two</option>
                   <option value="Oracle Standard Two BYOL">Oracle Standard Two BYOL</option>
                   <option value="Oracle Standard BYOL">Oracle Standard BYOL</option>
                   <option value="Oracle Enterprise BYOL">Oracle Enterprise BYOL</option>
-                  <option value="Oracle">Oracle</option>
                   <option value="SQL Server Express">SQL Server Express</option>
-                  <option value="SQL Server Standard">SQL Server Standard</option>
                   <option value="Oracle Standard One BYOL">Oracle Standard One BYOL</option> 
                   <option value="MySQL (Outpost On-Prem)">MySQL (Outpost On-Prem)</option>
                   <option value="PostgreSQL (Outpost On-Prem)">PostgreSQL (Outpost On-Prem)</option>
+                  <option value="SQL Server">SQL Server Standard</option>
                   <option value="SQL Server Enterprise (Outpost On-Prem)">SQL Server Enterprise (Outpost On-Prem)</option>
                   <option value="SQL Server (Outpost On-Prem)">SQL Server (Outpost On-Prem)</option>
                   <option value="SQL Server Web (Outpost On-Prem)">SQL Server Web (Outpost On-Prem)</option>
@@ -134,9 +139,6 @@
                   <option value="Standard.partialUpfront">Partial Upfront</option>
                   <option value="Standard.noUpfront">No Upfront</option>
                   <option value="Standard.allUpfront">All Upfront</option>
-                  <option value="Convertible.noUpfront">No Upfront (Convertible)</option>
-                  <option value="Convertible.partialUpfront">Partial Upfront (Convertible)</option>
-                  <option value="Convertible.allUpfront">All Upfront (Convertible)</option>
                 </select>
               </div>
             </div>
@@ -151,7 +153,7 @@
                 <thead>
                   <tr>
                     <th>Size</th>
-                    <th class="text-center">CPU</th>
+                    <th class="text-center">vCPUs</th>
                     <th class="text-center">Memory (GiB)</th>
                   </tr>
                 </thead>
@@ -173,6 +175,7 @@
             </div>
 
             <!-- Instance variants -->
+            % if len(variants) > 1:
             <div class="mt-4 d-flex flex-column">
               <div class="d-flex align-items-center mb-3">
                 <span class="material-icons me-1">dns</span>
@@ -193,6 +196,7 @@
                 </tbody>
               </table>
             </div>
+            % endif
           </div>
 
           <div class="column-middle mb-5">
@@ -230,7 +234,7 @@
                   </table>
                 % endif
               % endfor
-              % if len(unavailable) > 0:
+              % if len(unavailable) > 0 and false:
                 <table class="table" id="Unavailable">
                   <tr>
                     <th class="col-4 border-end">Unavailable</th>
@@ -349,6 +353,7 @@
       for (const d of deny) {
         if (d[1] === region) {
           if (d[3] === os || d[2] === 'All') {
+            console.log("here");
             for (var i = 0; i < elements.length; i++) {
               format_price(elements[i], "N/A");
             }
