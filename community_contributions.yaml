@@ -239,6 +239,15 @@ i4i.large:
       url:
       date:
 ---
+i4i.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
 i3en.metal:
   links:
     - title:

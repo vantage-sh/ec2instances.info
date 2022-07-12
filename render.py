@@ -270,12 +270,12 @@ def map_ec2_attributes(i, imap):
             # print(v)  # print styling value
             if v == "false" or v == "0" or v == "none":
                 display["style"] = "value value-false"
-            elif v == "true" or v == "1" or v == "yes":
-                display["style"] = "value value-true"
             elif v == "current":
                 display["style"] = "value value-current"
             elif v == "previous":
                 display["style"] = "value value-previous"
+            else:
+                display["style"] = "value value-true"
 
         instance_details[display["category"]].append(display)
     

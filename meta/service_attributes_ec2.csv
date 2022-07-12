@@ -1,5 +1,5 @@
 Key,Display Name,Category,Category Order,Style,Regex,Value,More Notes
-generation,Current Generation,Amazon,1,value,,current,
+generation,Generation,Amazon,1,value,,current,
 instance_type,Instance Type,Amazon,2,,,c5d.2xlarge,https://aws.amazon.com/ec2/instance-types/m5/
 family,Family,Amazon,3,,,Compute optimized,
 pretty_name,Name,Amazon,4,,,C5 High-CPU Double Extra Large,
@@ -13,9 +13,9 @@ clock_speed_ghz,Clock Speed (GHz),Compute,5,,\d+,3 GHz,
 arch,CPU Architecture,Compute,6,,\w+,['x86_64'],
 GPU,GPU,Compute,9,value,,0,
 GPU_model,GPU Architecture,Compute,10,value,,None,
-FPGA,FPGA,Compute,11,value,,0,
+FPGA,FPGA,Compute,13,value,,0,
 compute_capability,"GPU Compute Capability <a href=""https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities"">(?)</a>",Compute,12,,,0,
-GPU_memory,Video Memory,Compute,13,,,0,
+GPU_memory,Video Memory (GiB),Compute,11,,,0,
 network_performance,Network Performance (Gibps),Networking,1,,\d+,Up to 10 Gigabit,https://stackoverflow.com/questions/18507405/ec2-instance-typess-exact-network-performance
 enhanced_networking,Enhanced Networking,Networking,2,value,,TRUE,
 ipv6_support,IPV6,Networking,3,value,,TRUE,
