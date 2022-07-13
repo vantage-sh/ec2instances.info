@@ -11,8 +11,8 @@
     <!-- End Google Tag Manager -->
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="description" content="A free and easy-to-use tool for comparing EC2, RDS, and ElastiCache Instance prices."></head>
-    <title>Amazon EC2 Instance Comparison</title>
+    <%block name="meta"/>
+    <link rel="stylesheet" href="/default.css" media="screen">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" media="screen">
     <link rel="stylesheet" href="/default.css" media="screen">
     <link rel="icon" type="image/png" href="https://assets.vantage.sh/www/favicon-32x32.png">
