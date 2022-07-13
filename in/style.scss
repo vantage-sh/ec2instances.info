@@ -68,12 +68,48 @@ a {
   align-items: center;
   justify-content: space-between;
 
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    padding: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+
+  .logo-group {
+    display: flex;
+    justify-content: space-between;
+    .contr-mobile {
+      display: none;
+      @media screen and (max-width: 768px) {
+        display: block;
+      }
+    }
+    @media screen and (max-width: 768px) {
+      padding: 16px;
+      width: 100%;
+      align-items: center;
+    }
+  }
+
   .ad-banner {
     color: $white;
     text-decoration: none;
     font-size: 14px;
+    @media screen and (max-width: 768px) {
+      text-align: center;
+      padding: 16px;
+      background-color: #5A0A76;
+    }
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  .nav-buttons {
+    display: flex;
+    @media screen and (max-width: 768px) {
+      display: none;
     }
   }
 }

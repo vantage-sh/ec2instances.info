@@ -47,13 +47,56 @@ a:hover, a:focus {
   align-items: center;
   justify-content: space-between;
 }
+@media screen and (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+    padding: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+}
+.nav .logo-group {
+  display: flex;
+  justify-content: space-between;
+}
+.nav .logo-group .contr-mobile {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .nav .logo-group .contr-mobile {
+    display: block;
+  }
+}
+@media screen and (max-width: 768px) {
+  .nav .logo-group {
+    padding: 16px;
+    width: 100%;
+    align-items: center;
+  }
+}
 .nav .ad-banner {
   color: #FFFFFF;
   text-decoration: none;
   font-size: 14px;
 }
+@media screen and (max-width: 768px) {
+  .nav .ad-banner {
+    text-align: center;
+    padding: 16px;
+    background-color: #5A0A76;
+  }
+}
 .nav .ad-banner:hover {
   text-decoration: underline;
+}
+.nav .nav-buttons {
+  display: flex;
+}
+@media screen and (max-width: 768px) {
+  .nav .nav-buttons {
+    display: none;
+  }
 }
 
 table {
