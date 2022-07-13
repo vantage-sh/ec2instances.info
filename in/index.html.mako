@@ -4,7 +4,12 @@
   import six
 %>
 <%inherit file="base.mako" />
-
+    
+    <%block name="meta">
+        <title>Amazon EC2 Instance Comparison</title>
+        <meta name="description" content="A free and easy-to-use tool for comparing EC2 Instance features and prices."></head>
+    </%block>
+    
     <%block name="header">
     <h1>EC2Instances.info <small>Easy Amazon <b>EC2</b> Instance Comparison</small></h1>
     <div class='announcement'>Understand your AWS bill with <a href="https://www.vantage.sh/features/cost-reports">Vantage Cost Reports</a> and the <a href="https://handbook.vantage.sh/">Cloud Costs Handbook</a>. Build pricing apps with the <a href="https://vantage.readme.io/reference/general">Vantage API.</a></div>
@@ -129,6 +134,7 @@
       Min Storage (GiB): <input data-action="datafilter" data-type="storage" class="form-control" />
     </div>
 
+    <div>
     <table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">
       <thead>
         <tr>
@@ -243,7 +249,7 @@
         % for inst in instances:
           <tr class='instance' id="${inst['instance_type']}">
             <td class="name">${inst['pretty_name']}</td>
-            <td class="apiname">${inst['instance_type']}</td>
+            <td class="apiname"><a href="/aws/ec2/${inst['instance_type']}.html">${inst['instance_type']}</a></td>
             <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
             <td class="computeunits">
               % if inst['ECU'] == 'variable':
@@ -492,3 +498,4 @@
         % endfor
       </tbody>
     </table>
+    </div>

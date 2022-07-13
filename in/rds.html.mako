@@ -5,6 +5,11 @@
 %>
 <%inherit file="base.mako" />
 
+    <%block name="meta">
+      <title>Amazon RDS Instance Comparison</title>
+      <meta name="description" content="A free and easy-to-use tool for comparing RDS Instance features and prices."></head>
+    </%block>
+
     <%block name="header">
     <h1>EC2Instances.info <small>Easy Amazon <b>RDS</b> Instance Comparison</small></h1>
     <div class='announcement'>Understand your AWS bill with <a href="https://www.vantage.sh/features/cost-reports">Vantage Cost Reports</a> and the <a href="https://handbook.vantage.sh/">Cloud Costs Handbook</a>. Build pricing apps with the <a href="https://vantage.readme.io/reference/general">Vantage API.</a></div>
@@ -142,8 +147,8 @@
       <tbody>
 % for inst in instances:
         <tr class='instance' id="${inst['instance_type']}">
-          <td class="name">${inst['pretty_name']}</td>
-          <td class="apiname">${inst['instance_type']}</td>
+          <td class="name">${inst['pretty_name']}</a></td>
+          <td class="apiname"><a href="/aws/rds/${inst['instance_type']}.html">${inst['instance_type']}</a></td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
           <td class="storage">
           <% storage = inst['storage'] %>
