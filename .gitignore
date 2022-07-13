@@ -14,5 +14,6 @@ ec2instances
 www/index.html
 www/instances.json
 www/rds/
+www/cache/
 result
 .cache

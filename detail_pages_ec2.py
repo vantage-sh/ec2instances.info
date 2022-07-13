@@ -317,6 +317,7 @@ def build_detail_pages_ec2(instances, destination_file):
 
     # To add more data to a single instance page, do so inside this loop
     could_not_render = []
+    sitemap = []
     for i in instances:
         instance_type = i["instance_type"]
 
@@ -341,6 +342,7 @@ def build_detail_pages_ec2(instances, destination_file):
                     defaults=defaults,
                     variants=variants[instance_type[0:2]],
                 ))
+                sitemap.append(instance_page)
             except:
                 render_err = mako.exceptions.text_error_template().render() 
                 err = {
@@ -349,7 +351,8 @@ def build_detail_pages_ec2(instances, destination_file):
                 }
 
                 could_not_render.append(err)
-        # break
         
     [print(err["e"], '{}'.format(err["t"])) for err in could_not_render]
     [print(page["e"]) for page in could_not_render]
+
+    return sitemap

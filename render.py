@@ -108,6 +108,19 @@ def compress_instance_azs(instances):
     return json.dumps(instance_type_region_availability_zones)
 
 
+def build_sitemap(sitemap):
+    surls = ['<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for url in sitemap:
+        surl = url.replace("www/", "")
+        surls.append( "<url><loc>https://instances.vantage.sh/{}</loc></url>".format(surl))
+    surls.append("</urlset>")
+    
+    destination_file = "www/sitemap.xml"
+    print("Rendering all URLs to %s..." % destination_file)
+    with io.open(destination_file, "w+") as fp:
+        fp.write('\n'.join(surls))
+
+
 def render(data_file, template_file, destination_file):
     """Build the HTML content from scraped data"""
     lookup = mako.lookup.TemplateLookup(directories=["."])
@@ -122,10 +135,11 @@ def render(data_file, template_file, destination_file):
     generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     instance_azs_json = compress_instance_azs(instances)
 
+    sitemap = []
     if data_file == "www/instances.json":
-        build_detail_pages_ec2(instances, destination_file)
+        sitemap.extend(build_detail_pages_ec2(instances, destination_file))
     elif data_file == "www/rds/instances.json":
-        build_detail_pages_rds(instances, destination_file)
+        sitemap.extend(build_detail_pages_rds(instances, destination_file))
 
     print("Rendering to %s..." % destination_file)
     os.makedirs(os.path.dirname(destination_file), exist_ok=True)
@@ -139,11 +153,16 @@ def render(data_file, template_file, destination_file):
                     instance_azs_json=instance_azs_json,
                 )
             )
+            sitemap.append(destination_file)
         except:
             print(mako.exceptions.text_error_template().render())
+    
+    return sitemap
 
 
 if __name__ == "__main__":
-    render("www/instances.json", "in/index.html.mako", "www/index.html")
-    render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
-    render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
+    sitemap = []
+    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
+    sitemap.extend(render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html"))
+    sitemap.extend(render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html"))
+    build_sitemap(sitemap)
