@@ -125,7 +125,7 @@ def render(data_file, template_file, destination_file):
     """Build the HTML content from scraped data"""
     lookup = mako.lookup.TemplateLookup(directories=["."])
     template = mako.template.Template(filename=template_file, lookup=lookup)
-    with open(data_file) as f:
+    with open(data_file, "r") as f:
         instances = json.load(f)
 
     print("Loading data from %s..." % data_file)
