@@ -3,11 +3,11 @@ body {
 }
 
 .announcement {
-  background-color: #F9E6FF;
+  background-color: #f9e6ff;
   width: 100%;
   margin: 20px 0;
   padding: 20px 20px 20px 56px;
-  color: #5A0A76;
+  color: #5a0a76;
   background-image: url(https://pbs.twimg.com/profile_images/1468272865820688394/Te1dOx4M_400x400.jpg);
   background-repeat: no-repeat;
   background-size: 30px 30px;
@@ -15,8 +15,8 @@ body {
 }
 
 .announcement a {
-  color:#5A0A76;
-  font-weight:bold;
+  color: #5a0a76;
+  font-weight: bold;
 }
 
 .ec2instances .page-header {
@@ -58,8 +58,9 @@ body {
   cursor: pointer;
 }
 
-#data tr.highlight, #data tr.highlight:hover {
-  background-color: #F9E6FF;
+#data tr.highlight,
+#data tr.highlight:hover {
+  background-color: #f9e6ff;
 }
 
 #data th,
@@ -119,13 +120,12 @@ body {
 /* Bootstrap overrides */
 .dropdown-menu .active a {
   color: #fff !important;
-  background: #9C25C7 !important;
+  background: #9c25c7 !important;
 }
 
 .dropdown-menu li > a:hover {
-  background: #F9E6FF !important;
+  background: #f9e6ff !important;
 }
-
 
 .share-url {
   text-align: left;
@@ -144,8 +144,8 @@ body {
 
 .btn-primary {
   color: #fff !important;
-  background-color: #9C25C7 !important;
-  border-color: #5A0A76 !important;
+  background-color: #9c25c7 !important;
+  border-color: #5a0a76 !important;
 }
 
 .btn-primary:hover {

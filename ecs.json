@@ -1,5 +1,4 @@
 {
-  
   "executionRoleArn": "arn:aws:iam::153271892032:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
@@ -26,10 +25,7 @@
       "image": "",
       "healthCheck": {
         "retries": 5,
-        "command": [
-          "CMD-SHELL",
-          "curl -f localhost:8080 || exit 1"
-        ],
+        "command": ["CMD-SHELL", "curl -f localhost:8080 || exit 1"],
         "timeout": 60,
         "interval": 300,
         "startPeriod": 30
@@ -41,14 +37,9 @@
   "placementConstraints": [],
   "memory": "512",
   "taskRoleArn": "arn:aws:iam::153271892032:role/ecsTaskExecutionRole",
-  "compatibilities": [
-    "EC2",
-    "FARGATE"
-  ],
+  "compatibilities": ["EC2", "FARGATE"],
   "family": "instances-production-app",
-  "requiresCompatibilities": [
-    "FARGATE"
-  ],
+  "requiresCompatibilities": ["FARGATE"],
   "networkMode": "awsvpc",
   "cpu": "256",
   "status": "ACTIVE",
