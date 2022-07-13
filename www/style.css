@@ -21,6 +21,13 @@ a:hover, a:focus {
   color: #5A0A76;
 }
 
+.logo {
+  transition: all 0.1s ease;
+}
+.logo:hover {
+  opacity: 0.9;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -36,6 +43,17 @@ a:hover, a:focus {
 .nav {
   background-color: #9C25C7;
   padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav .ad-banner {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 14px;
+}
+.nav .ad-banner:hover {
+  text-decoration: underline;
 }
 
 table {
@@ -94,6 +112,18 @@ table#Unavailable th, table#Unavailable td {
 }
 .btn.btn-white:hover {
   border-color: #8A8A8E;
+}
+.btn.btn-purple {
+  background-color: #C055E6;
+  color: #FFFFFF;
+}
+.btn.btn-purple:hover {
+  background-color: #CF67F4;
+  border-color: #D37BF2;
+}
+.btn.btn-icon {
+  display: flex;
+  align-items: center;
 }
 
 .column-left {

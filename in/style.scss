@@ -44,6 +44,13 @@ a {
   }
 }
 
+.logo {
+  transition: all 0.1s ease;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -57,6 +64,18 @@ a {
 .nav {
   background-color: $purple-1;
   padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .ad-banner {
+    color: $white;
+    text-decoration: none;
+    font-size: 14px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 table {
@@ -127,6 +146,18 @@ table {
     &:hover {
       border-color: $gray-3;
     }
+  }
+  &.btn-purple {
+    background-color: #C055E6;
+    color: $white;
+    &:hover {
+      background-color: #CF67F4;
+      border-color: #D37BF2;
+    }
+  }
+  &.btn-icon {
+    display: flex;
+    align-items: center;
   }
 }
 
