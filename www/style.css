@@ -21,6 +21,13 @@ a:hover, a:focus {
   color: #5A0A76;
 }
 
+.logo {
+  transition: all 0.1s ease;
+}
+.logo:hover {
+  opacity: 0.9;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -36,6 +43,60 @@ a:hover, a:focus {
 .nav {
   background-color: #9C25C7;
   padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media screen and (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+    padding: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+}
+.nav .logo-group {
+  display: flex;
+  justify-content: space-between;
+}
+.nav .logo-group .contr-mobile {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .nav .logo-group .contr-mobile {
+    display: block;
+  }
+}
+@media screen and (max-width: 768px) {
+  .nav .logo-group {
+    padding: 16px;
+    width: 100%;
+    align-items: center;
+  }
+}
+.nav .ad-banner {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 14px;
+}
+@media screen and (max-width: 768px) {
+  .nav .ad-banner {
+    text-align: center;
+    padding: 16px;
+    background-color: #5A0A76;
+  }
+}
+.nav .ad-banner:hover {
+  text-decoration: underline;
+}
+.nav .nav-buttons {
+  display: flex;
+}
+@media screen and (max-width: 768px) {
+  .nav .nav-buttons {
+    display: none;
+  }
 }
 
 table {
@@ -94,6 +155,18 @@ table#Unavailable th, table#Unavailable td {
 }
 .btn.btn-white:hover {
   border-color: #8A8A8E;
+}
+.btn.btn-purple {
+  background-color: #C055E6;
+  color: #FFFFFF;
+}
+.btn.btn-purple:hover {
+  background-color: #CF67F4;
+  border-color: #D37BF2;
+}
+.btn.btn-icon {
+  display: flex;
+  align-items: center;
 }
 
 .column-left {

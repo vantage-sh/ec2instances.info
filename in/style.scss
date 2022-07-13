@@ -44,6 +44,13 @@ a {
   }
 }
 
+.logo {
+  transition: all 0.1s ease;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -57,6 +64,54 @@ a {
 .nav {
   background-color: $purple-1;
   padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    padding: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+
+  .logo-group {
+    display: flex;
+    justify-content: space-between;
+    .contr-mobile {
+      display: none;
+      @media screen and (max-width: 768px) {
+        display: block;
+      }
+    }
+    @media screen and (max-width: 768px) {
+      padding: 16px;
+      width: 100%;
+      align-items: center;
+    }
+  }
+
+  .ad-banner {
+    color: $white;
+    text-decoration: none;
+    font-size: 14px;
+    @media screen and (max-width: 768px) {
+      text-align: center;
+      padding: 16px;
+      background-color: #5A0A76;
+    }
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .nav-buttons {
+    display: flex;
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
 }
 
 table {
@@ -127,6 +182,18 @@ table {
     &:hover {
       border-color: $gray-3;
     }
+  }
+  &.btn-purple {
+    background-color: #C055E6;
+    color: $white;
+    &:hover {
+      background-color: #CF67F4;
+      border-color: #D37BF2;
+    }
+  }
+  &.btn-icon {
+    display: flex;
+    align-items: center;
   }
 }
 
