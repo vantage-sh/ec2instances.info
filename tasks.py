@@ -40,9 +40,9 @@ HTTP_PORT = os.getenv("HTTP_PORT", "8080")
 @task
 def build(c):
     """Scrape AWS sources for data and build the site"""
-    scrape_ec2(c)
-    scrape_rds(c)
-    scrape_cache(c)
+    # scrape_ec2(c)
+    # scrape_rds(c)
+    # scrape_cache(c)
     render_html(c)
 
 

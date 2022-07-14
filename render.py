@@ -112,7 +112,7 @@ def build_sitemap(sitemap):
     surls = ['<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for url in sitemap:
         surl = url.replace("www/", "")
-        surls.append( "<url><loc>https://instances.vantage.sh/{}</loc></url>".format(surl))
+        surls.append( "<url><loc>https://instances.vantage.sh/{}</loc></url>".format(surl[0:-5]))
     surls.append("</urlset>")
     
     destination_file = "www/sitemap.xml"
