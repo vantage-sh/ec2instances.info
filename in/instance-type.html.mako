@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="https://assets.vantage.sh/www/favicon-32x32.png">
     <title>${i["Amazon"][1]["value"]} pricing and specs | instances.vantage.sh</title>
     <meta name="description" content="${description}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -299,7 +299,7 @@
                 <p class="lh-base fw-semibold">Submitting a Link</p>
                 <ol class="lh-base ps-4">
                   <li>Click <span class="fw-semibold">Fork this Repository</span>
-                  <li>Find <span class="fw-semibold">${i["Amazon"][4]['value']}</span> in the file
+                  <li>Find <span class="fw-semibold">${i["Amazon"][1]['value']}</span> in the file
                   <li>Insert a link, title, and date.
                 </ol>
                 <p class="mb-0 lh-base">To review, click <span class="fw-semibold">Propose Changes</span> and then click <span class="fw-semibold">Create pull request</span>.</p>
