@@ -55,6 +55,7 @@ def community(instance, links):
         k, linklist = next(iter(l.items()))
         if k == instance:
             return linklist["links"]
+    return []
 
 
 def unavailable_instances(itype, instance_details):

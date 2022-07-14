@@ -248,7 +248,7 @@
         % for inst in instances:
           <tr class='instance' id="${inst['instance_type']}">
             <td class="name">${inst['pretty_name']}</td>
-            <td class="apiname"><a href="/aws/ec2/${inst['instance_type']}.html">${inst['instance_type']}</a></td>
+            <td class="apiname"><a href="/aws/ec2/${inst['instance_type']}">${inst['instance_type']}</a></td>
             <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
             <td class="computeunits">
               % if inst['ECU'] == 'variable':
