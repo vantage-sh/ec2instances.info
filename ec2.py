@@ -283,7 +283,7 @@ def add_spot_pricing(imap):
                         # can be available in a region as spots but not on demand or any other 
                         # way. In that case, the logic above will fail and we need to wrap it
                         # in a conditional and create the region first to put spot prices in
-                        print(json.dumps(inst.to_dict(), indent=4))
+                        # If more edge cases: print(json.dumps(inst.to_dict(), indent=4))
                         inst.pricing[region] = {
                             platform: {
                                 "spot": [price["SpotPrice"]],

@@ -74,7 +74,7 @@ def description(id):
     except:
         bandwidth = "."
 
-    return "The {} instance is a {} instance with {} vCPUs, {} GiB of memory{}".format(
+    return "The {} instance is in the {} family and has {} vCPUs, {} GiB of memory{}".format(
         name, family_category, cpus, memory, bandwidth)
 
 
@@ -84,6 +84,7 @@ def community(instance, links):
         k, linklist = next(iter(l.items()))
         if k == instance:
             return linklist["links"]
+    return []
 
 
 def unavailable_instances(itype, instance_details):
