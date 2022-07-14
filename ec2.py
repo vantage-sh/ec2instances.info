@@ -269,19 +269,29 @@ def add_spot_pricing(imap):
                         price["ProductDescription"], "NA"
                     )
                     region = price["AvailabilityZone"][0:-1]
-                    # define some empty/meaningful default values to avoid dictionary exception for missing instance types
-                    inst.pricing[region].setdefault(platform, {})
-                    inst.pricing[region][platform].setdefault("spot", [])
-                    inst.pricing[region][platform].setdefault("spot_min", "N/A")
-                    inst.pricing[region][platform].setdefault("spot_max", "N/A")
-                    inst.pricing[region][platform]["spot"].append(price["SpotPrice"])
-                    inst.pricing[region][platform]["spot"].sort(key=float)
-                    inst.pricing[region][platform]["spot_min"] = inst.pricing[region][
-                        platform
-                    ]["spot"][0]
-                    inst.pricing[region][platform]["spot_max"] = inst.pricing[region][
-                        platform
-                    ]["spot"][-1]
+                    if region in inst.pricing:
+                        inst.pricing[region].setdefault(platform, {})
+                        inst.pricing[region][platform].setdefault("spot", [])
+                        inst.pricing[region][platform].setdefault("spot_min", "N/A")
+                        inst.pricing[region][platform].setdefault("spot_max", "N/A")
+                        inst.pricing[region][platform]["spot"].append(price["SpotPrice"])
+                        inst.pricing[region][platform]["spot"].sort(key=float)
+                        inst.pricing[region][platform]["spot_min"] = inst.pricing[region][platform]["spot"][0]
+                        inst.pricing[region][platform]["spot_max"] = inst.pricing[region][platform]["spot"][-1]
+                    else:
+                        # In rare cases (occuring for the first time in July 2022), instances
+                        # can be available in a region as spots but not on demand or any other 
+                        # way. In that case, the logic above will fail and we need to wrap it
+                        # in a conditional and create the region first to put spot prices in
+                        print(json.dumps(inst.to_dict(), indent=4))
+                        inst.pricing[region] = {
+                            platform: {
+                                "spot": [price["SpotPrice"]],
+                                "spot_min": price["SpotPrice"],
+                                "spot_max": price["SpotPrice"],
+                            }
+                        }
+
         except botocore.exceptions.ClientError:
             pass
 
