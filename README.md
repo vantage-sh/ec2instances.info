@@ -97,6 +97,20 @@ deactivate # to exit virtualenv
 - [Mako](http://www.makotemplates.org/)
 - [lxml](http://lxml.de/)
 
+
+## Tips for Developing Locally
+```
+docker build --no-cache --build-arg AWS_ACCESS_KEY_ID= --build-arg AWS_SECRET_ACCESS_KEY= -t ec2instances.info .
+
+docker run -it --rm --name ec2instances -v $(pwd):/opt/app --env HTTP_HOST=0.0.0.0 -p 8080:8080 ec2instances.info
+
+docker exec -it ec2instances /bin/bash
+
+# INSIDE CONTAINER
+python3 render.py
+sass --watch in/style.scss:www/style.css
+```
+
 ## API Access
 
 The data backing EC2Instances.info has recently been made available via a free

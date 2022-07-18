@@ -6,3 +6,4 @@ lxml
 requests
 six
 boto3
+pyyaml
