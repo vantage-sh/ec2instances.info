@@ -97,8 +97,8 @@ deactivate # to exit virtualenv
 - [Mako](http://www.makotemplates.org/)
 - [lxml](http://lxml.de/)
 
-
 ## Tips for Developing Locally
+
 ```
 docker build --no-cache --build-arg AWS_ACCESS_KEY_ID= --build-arg AWS_SECRET_ACCESS_KEY= -t ec2instances.info .
 

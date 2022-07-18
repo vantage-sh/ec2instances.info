@@ -1,5 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap");
-html, body {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap');
+html,
+body {
   height: 100%;
   overflow: hidden;
 }
@@ -9,16 +10,17 @@ html {
 }
 
 body {
-  font: 100% "Inter", Helvetica, sans-serif;
+  font: 100% 'Inter', Helvetica, sans-serif;
   color: #303037;
   padding: 0;
 }
 
 a {
-  color: #9C25C7;
+  color: #9c25c7;
 }
-a:hover, a:focus {
-  color: #5A0A76;
+a:hover,
+a:focus {
+  color: #5a0a76;
 }
 
 .logo {
@@ -41,7 +43,7 @@ a:hover, a:focus {
 }
 
 .nav {
-  background-color: #9C25C7;
+  background-color: #9c25c7;
   padding: 12px;
   display: flex;
   align-items: center;
@@ -76,7 +78,7 @@ a:hover, a:focus {
   }
 }
 .nav .ad-banner {
-  color: #FFFFFF;
+  color: #ffffff;
   text-decoration: none;
   font-size: 14px;
 }
@@ -84,7 +86,7 @@ a:hover, a:focus {
   .nav .ad-banner {
     text-align: center;
     padding: 16px;
-    background-color: #5A0A76;
+    background-color: #5a0a76;
   }
 }
 .nav .ad-banner:hover {
@@ -100,7 +102,7 @@ a:hover, a:focus {
 }
 
 table {
-  border: 1px solid #E3E3E9;
+  border: 1px solid #e3e3e9;
   font-size: 14px;
   width: 100%;
   margin-bottom: 24px !important;
@@ -108,36 +110,38 @@ table {
 }
 table th {
   font-weight: 600;
-  background-color: #FAFAFB !important;
+  background-color: #fafafb !important;
 }
-table td, table th {
+table td,
+table th {
   vertical-align: middle;
 }
 table a {
   text-decoration: none !important;
 }
 table.table-mono {
-  font-family: "Roboto Mono", monospace;
+  font-family: 'Roboto Mono', monospace;
 }
 table.table-mono th {
-  background-color: #FFFFFF !important;
+  background-color: #ffffff !important;
 }
 table.table-mono tbody tr:nth-child(even) td {
-  background-color: #FAFAFB !important;
+  background-color: #fafafb !important;
 }
 table.table-mono tbody tr.no-link td {
-  color: #FFFFFF;
-  background-color: #1A1A1C !important;
+  color: #ffffff;
+  background-color: #1a1a1c !important;
 }
 table#Unavailable {
-  border-color: #F8B6AD;
+  border-color: #f8b6ad;
 }
 table#Unavailable th {
-  background-color: #FFECEA !important;
-  color: #76180A !important;
+  background-color: #ffecea !important;
+  color: #76180a !important;
 }
-table#Unavailable th, table#Unavailable td {
-  border-color: #F8B6AD !important;
+table#Unavailable th,
+table#Unavailable td {
+  border-color: #f8b6ad !important;
 }
 
 .fs-12 {
@@ -149,20 +153,20 @@ table#Unavailable th, table#Unavailable td {
   font-weight: 600;
 }
 .btn.btn-white {
-  background-color: #FFFFFF;
-  color: #1A1A1C;
-  border: 1px solid #E3E3E9;
+  background-color: #ffffff;
+  color: #1a1a1c;
+  border: 1px solid #e3e3e9;
 }
 .btn.btn-white:hover {
-  border-color: #8A8A8E;
+  border-color: #8a8a8e;
 }
 .btn.btn-purple {
-  background-color: #C055E6;
-  color: #FFFFFF;
+  background-color: #c055e6;
+  color: #ffffff;
 }
 .btn.btn-purple:hover {
-  background-color: #CF67F4;
-  border-color: #D37BF2;
+  background-color: #cf67f4;
+  border-color: #d37bf2;
 }
 .btn.btn-icon {
   display: flex;
@@ -193,16 +197,16 @@ table#Unavailable th, table#Unavailable td {
 .column-right {
   max-width: 350px;
   width: 100%;
-  background-color: #FAFAFB;
+  background-color: #fafafb;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  border-left: 1px solid #E3E3E9;
+  border-left: 1px solid #e3e3e9;
 }
 @media screen and (max-width: 768px) {
   .column-right {
     border-radius: 6px;
-    border: 1px solid #E3E3E9;
+    border: 1px solid #e3e3e9;
   }
 }
 .column-right .sidebar-section {
@@ -217,7 +221,7 @@ table#Unavailable th, table#Unavailable td {
   overflow: auto;
   flex: 1 1 auto;
   padding-bottom: 0;
-  border-bottom: 1px solid #E3E3E9;
+  border-bottom: 1px solid #e3e3e9;
 }
 
 .column-left--parent {
@@ -249,8 +253,8 @@ table#Unavailable th, table#Unavailable td {
 
 .github-login {
   padding: 20px;
-  background-color: #F7F7F9;
-  border: 1px solid #E3E3E9;
+  background-color: #f7f7f9;
+  border: 1px solid #e3e3e9;
   border-radius: 6px;
   font-size: 14px;
 }
@@ -265,8 +269,8 @@ table#Unavailable th, table#Unavailable td {
 .value {
   border: 1px solid;
   border-radius: 3px;
-  color: #1A1A1C;
-  font-family: "Roboto Mono", monospace;
+  color: #1a1a1c;
+  font-family: 'Roboto Mono', monospace;
   padding: 4px 5px;
   font-size: 11px;
   line-height: 11px;
@@ -275,20 +279,20 @@ table#Unavailable th, table#Unavailable td {
   text-transform: lowercase;
 }
 .value.value-true {
-  background-color: #ACF8DD;
-  border-color: #55D4A7;
+  background-color: #acf8dd;
+  border-color: #55d4a7;
 }
 .value.value-false {
-  background-color: #FFECEA;
-  border-color: #F8B6AD;
+  background-color: #ffecea;
+  border-color: #f8b6ad;
 }
 .value.value-current {
-  background-color: #F9E6FF;
-  border-color: #E59DFF;
+  background-color: #f9e6ff;
+  border-color: #e59dff;
 }
 .value.value-previous {
-  background-color: #F7F7F9;
-  border-color: #CFCFD6;
+  background-color: #f7f7f9;
+  border-color: #cfcfd6;
 }
 
 /*# sourceMappingURL=style.css.map */
