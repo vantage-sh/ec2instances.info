@@ -97,8 +97,8 @@ deactivate # to exit virtualenv
 - [Mako](http://www.makotemplates.org/)
 - [lxml](http://lxml.de/)
 
-
 ## Tips for Developing Locally
+
 ```
 docker build --no-cache --build-arg AWS_ACCESS_KEY_ID= --build-arg AWS_SECRET_ACCESS_KEY= -t ec2instances.info .
 
@@ -142,7 +142,8 @@ git push
 ```
 
 ## [Internal] Adding Instance Types
+
 New instance types can automatically be pulled down but the software has to be rebuilt and redployed with a commit to master. This is a list of instance types added that way.
 
-* r6id
-* r6a
+- r6id
+- r6a

@@ -80,11 +80,17 @@ def scrape_cache(c):
 
 @task
 def serve(c):
+    
+    class MyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+        def do_GET(self):
+            # The URL does not include ".html". Add it to serve the file for dev
+            if "/aws/" in self.path:
+                self.path += ".html"
+            SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
+    
     """Serve site contents locally for development"""
     os.chdir("www/")
-    httpd = socketserver.TCPServer(
-        (HTTP_HOST, int(HTTP_PORT)), SimpleHTTPServer.SimpleHTTPRequestHandler
-    )
+    httpd = socketserver.TCPServer((HTTP_HOST, int(HTTP_PORT)), MyHandler)
     print(
         "Serving on http://{}:{}".format(
             httpd.socket.getsockname()[0], httpd.socket.getsockname()[1]
