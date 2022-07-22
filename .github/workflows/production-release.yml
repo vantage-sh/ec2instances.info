@@ -1,6 +1,8 @@
 name: Production Release
 concurrency: production-release
 on:
+  schedule:
+    - cron: '0 */8 * * *'
   push:
     branches:
       - master
