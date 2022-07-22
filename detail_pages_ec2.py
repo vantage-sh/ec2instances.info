@@ -11,8 +11,22 @@ import yaml
 import re
 
 
-def initial_prices(i, instance_type):
-    flag = ""
+def storage(sattrs, imap):
+    if not sattrs:
+        return []
+    storage_details = []
+    for s, v in sattrs.items():
+        try:
+            display = imap[s]
+            display["value"] = v
+            storage_details.append(format_attribute(display))
+        except KeyError:
+            # We chose not to represent this storage attribute
+            continue
+    return storage_details
+
+
+def initial_prices(i):
     try:
         od = i["Pricing"]["us-east-1"]["linux"]["ondemand"]
     except:
@@ -188,11 +202,8 @@ def prices(pricing):
 
 
 def load_service_attributes():
-    special_attrs = [
-        "vpc",
-        "storage",
-        "pricing",
-    ]
+    # This CSV file contains nicely formatted names, styling hints,
+    # and order of display for instance attributes
     data_file = 'meta/service_attributes_ec2.csv'
 
     display_map = {}
@@ -204,8 +215,6 @@ def load_service_attributes():
             if i == 0:
                 # Skip the header
                 continue
-            elif cloud_key in special_attrs:
-                category = "Coming Soon"
             else:
                 category = row[2]
 
@@ -223,24 +232,29 @@ def load_service_attributes():
     return display_map
 
 
-def load_service_attributes_cloudhw(data_file="meta/instance_types_cloudhw.csv"):
-    # Transform a CSV of instance attributes into a dict of dicts for later lookup
-    instance_lookup = {}
-    with open(data_file, 'r') as f:
-        reader = csv.reader(f)
-        header = []
+def format_attribute(display):
 
-        for i, row in enumerate(reader):
-            if i == 0:
-                header = row
-                continue
-            single_inst = {}
-            for key, val in zip(header, row):
-                single_inst[key] = val
-            instance_lookup[row[4]] = single_inst
-
-    return instance_lookup
-
+    if display["regex"]:
+        toparse = str(display["value"])
+        regex = str(display["regex"])
+        match = re.search(regex, toparse)
+        if match:
+            display["value"] = match.group()
+        # else:
+        #     print("No match found for {} with regex {}".format(toparse, regex))
+    
+    if display["style"]:
+        v = str(display["value"]).lower()
+        if v == "false" or v == "0" or v == "none":
+            display["style"] = "value value-false"
+        elif v == "current":
+            display["style"] = "value value-current"
+        elif v == "previous":
+            display["style"] = "value value-previous"
+        else:
+            display["style"] = "value value-true"
+    
+    return display
 
 def map_ec2_attributes(i, imap):
     # For now, manually transform the instance data we receive from AWS 
@@ -252,48 +266,35 @@ def map_ec2_attributes(i, imap):
         "Storage",
         "Amazon",
         "Not Shown",
-        "Coming Soon",
     ]
+    special_attributes = [
+        "pricing", 
+        "storage", 
+        "vpc",
+    ]
+
+    # Group attributes into categories which are then displayed in sections on the page
     instance_details = {}
     for c in categories:
         instance_details[c] = []
 
-    # For up to date display names, inspect meta/service_attributes_ec2.csv
     for j, k in i.items():
-
-        display = imap[j]
-        display["value"] = k if j != 'pricing' else {}
-
-        if display["regex"]:
-            toparse = str(display["value"])
-            regex = str(display["regex"])
-            match = re.search(regex, toparse)
-            if match:
-                display["value"] = match.group()
-            # else:
-            #     print("No match found for {} with regex {}".format(toparse, regex))
-        
-        if display["style"]:
-            v = str(display["value"]).lower()
-            # print(v)  # print styling value
-            if v == "false" or v == "0" or v == "none":
-                display["style"] = "value value-false"
-            elif v == "current":
-                display["style"] = "value value-current"
-            elif v == "previous":
-                display["style"] = "value value-previous"
-            else:
-                display["style"] = "value value-true"
-
-        instance_details[display["category"]].append(display)
+        # Some attributes like storage have nested values that we handle differently
+        if j not in special_attributes:
+            display = imap[j]
+            display["value"] = k
+            instance_details[display["category"]].append(format_attribute(display))
     
-    # Sort the instance attributes in each category alphabetically,
-    # another general-purpose option could be to sort by value data type
+    # Special cases
+    instance_details["Storage"].extend(storage(i["storage"], imap))
+
     for c in categories:
         instance_details[c].sort(key=lambda x: int(x["order"]))
 
+    # Pricing widget
     instance_details['Pricing'] = prices(i["pricing"])
-    # print(json.dumps(instance_details, indent=4))
+
+    # for debugging: print(json.dumps(instance_details, indent=4))
     return instance_details
 
 
@@ -329,7 +330,7 @@ def build_detail_pages_ec2(instances, destination_file):
         idescription = description(instance_details)
         links = community(instance_type, community_data)
         denylist = unavailable_instances(instance_type, instance_details)
-        defaults = initial_prices(instance_details, instance_type)
+        defaults = initial_prices(instance_details)
 
         print("Rendering %s to detail page %s..." % (instance_type, instance_page))
         with io.open(instance_page, "w+", encoding="utf-8") as fh:

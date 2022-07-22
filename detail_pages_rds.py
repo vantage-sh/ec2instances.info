@@ -231,25 +231,6 @@ def load_service_attributes():
     return display_map
 
 
-def load_service_attributes_cloudhw(data_file="meta/instance_types_cloudhw.csv"):
-    # Transform a CSV of instance attributes into a dict of dicts for later lookup
-    instance_lookup = {}
-    with open(data_file, 'r') as f:
-        reader = csv.reader(f)
-        header = []
-
-        for i, row in enumerate(reader):
-            if i == 0:
-                header = row
-                continue
-            single_inst = {}
-            for key, val in zip(header, row):
-                single_inst[key] = val
-            instance_lookup[row[4]] = single_inst
-
-    return instance_lookup
-
-
 def map_rds_attributes(i, imap):
     # For now, manually transform the instance data we receive from AWS 
     # into the format we want to render. Later we can create this in YAML
