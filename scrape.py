@@ -337,6 +337,8 @@ def add_ebs_info(instances):
             by_type[instance_type].ebs_throughput = ebs_throughput
             by_type[instance_type].ebs_iops = ebs_iops
             by_type[instance_type].ebs_max_bandwidth = ebs_max_bandwidth
+            if ebs_max_bandwidth:
+                by_type[instance_type].ebs_optimized = True
         return by_type
 
     by_type = {i.instance_type: i for i in instances}
@@ -874,26 +876,31 @@ def add_gpu_info(instances):
         },
         "g4ad.xlarge": {
             "gpu_model": "AMD Radeon Pro V520",
+            "compute_capability": 0,
             "gpu_count": 1,
             "gpu_memory": 8,
         },
         "g4ad.2xlarge": {
             "gpu_model": "AMD Radeon Pro V520",
+            "compute_capability": 0,
             "gpu_count": 1,
             "gpu_memory": 8,
         },
         "g4ad.4xlarge": {
             "gpu_model": "AMD Radeon Pro V520",
+            "compute_capability": 0,
             "gpu_count": 1,
             "gpu_memory": 8,
         },
         "g4ad.8xlarge": {
             "gpu_model": "AMD Radeon Pro V520",
+            "compute_capability": 0,
             "gpu_count": 2,
             "gpu_memory": 16,
         },
         "g4ad.16xlarge": {
             "gpu_model": "AMD Radeon Pro V520",
+            "compute_capability": 0,
             "gpu_count": 4,
             "gpu_memory": 32,
         },
