@@ -50,7 +50,7 @@ class Instance(object):
         self.num_drives = None
         self.nvme_ssd = False
         self.physical_processor = None
-        self.placement_group_support = False
+        self.placement_group_support = True
         self.pretty_name = ""
         self.pricing = {}
         self.size = 0
@@ -823,6 +823,80 @@ def add_gpu_info(instances):
             "cuda_cores": 55296,  # Source: Asked Matthew Wilson at AWS as this isn't public anywhere.
             "gpu_memory": 320,
         },
+        "p4de.24xlarge": {
+            "gpu_model": "NVIDIA A100",
+            "compute_capability": 8.0,
+            "gpu_count": 8,
+            "cuda_cores": 55296,
+            "gpu_memory": 640,
+        },
+        "g5g.xlarge": {
+            "gpu_model": "NVIDIA T4G Tensor Core",
+            "compute_capability": 7.5,
+            "gpu_count": 1,
+            "cuda_cores": 2560,
+            "gpu_memory": 16,
+        },
+        "g5g.2xlarge": {
+            "gpu_model": "NVIDIA T4G Tensor Core",
+            "compute_capability": 7.5,
+            "gpu_count": 1,
+            "cuda_cores": 2560,
+            "gpu_memory": 16,
+        },
+        "g5g.4xlarge": {
+            "gpu_model": "NVIDIA T4G Tensor Core",
+            "compute_capability": 7.5,
+            "gpu_count": 1,
+            "cuda_cores": 2560,
+            "gpu_memory": 16,
+        },
+        "g5g.8xlarge": {
+            "gpu_model": "NVIDIA T4G Tensor Core",
+            "compute_capability": 7.5,
+            "gpu_count": 1,
+            "cuda_cores": 2560,
+            "gpu_memory": 16,
+        },
+        "g5g.16xlarge": {
+            "gpu_model": "NVIDIA T4G Tensor Core",
+            "compute_capability": 7.5,
+            "gpu_count": 2,
+            "cuda_cores":5120, 
+            "gpu_memory": 32,
+        },
+        "g5g.metal": {
+            "gpu_model": "NVIDIA T4G Tensor Core",
+            "compute_capability": 7.5,
+            "gpu_count": 2,
+            "cuda_cores": 5120,
+            "gpu_memory": 32,
+        },
+        "g4ad.xlarge": {
+            "gpu_model": "AMD Radeon Pro V520",
+            "gpu_count": 1,
+            "gpu_memory": 8,
+        },
+        "g4ad.2xlarge": {
+            "gpu_model": "AMD Radeon Pro V520",
+            "gpu_count": 1,
+            "gpu_memory": 8,
+        },
+        "g4ad.4xlarge": {
+            "gpu_model": "AMD Radeon Pro V520",
+            "gpu_count": 1,
+            "gpu_memory": 8,
+        },
+        "g4ad.8xlarge": {
+            "gpu_model": "AMD Radeon Pro V520",
+            "gpu_count": 2,
+            "gpu_memory": 16,
+        },
+        "g4ad.16xlarge": {
+            "gpu_model": "AMD Radeon Pro V520",
+            "gpu_count": 4,
+            "gpu_memory": 32,
+        },
     }
     for inst in instances:
         if inst.GPU == 0:
@@ -871,6 +945,43 @@ def add_availability_zone_info(instances):
         )
 
 
+def add_placement_groups(instances):
+    """
+    See https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html#placement-groups-limitations-cluster
+    for the logic on which instances support placement groups.
+    """
+    placement_group_data = {
+        "prev_gen_families": [
+            "a1",
+            "c3",
+            "g2",
+            "i2",
+            "r3",
+        ],
+        "prev_gen_instances" : [
+            "cc2.8xlarge",
+            "cr1.8xlarge",
+            "hs1.8xlarge",
+        ],
+        "exceptions": [
+            "t2",
+            "t3",
+            "t4",
+            "ma",   
+        ]
+    }
+
+    for inst in instances:
+        itype = inst.instance_type
+        excpt = placement_group_data["exceptions"]
+        prev_geni = placement_group_data["prev_gen_instances"]
+        prev_genf = placement_group_data["prev_gen_families"]
+        if itype[0:2] in excpt:
+            inst.placement_group_support = False
+        elif inst.generation == "previous" and itype not in prev_geni and itype[0:2] not in prev_genf:
+            inst.placement_group_support = False
+
+
 def scrape(data_file):
     """Scrape AWS to get instance data"""
     print("Parsing instance types...")
@@ -897,6 +1008,8 @@ def scrape(data_file):
     add_gpu_info(all_instances)
     print("Adding availability zone details...")
     add_availability_zone_info(all_instances)
+    print("Adding placement group details...")
+    add_placement_groups(all_instances)
 
     os.makedirs(os.path.dirname(data_file), exist_ok=True)
     with open(data_file, "w+") as f:
