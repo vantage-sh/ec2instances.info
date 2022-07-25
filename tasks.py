@@ -16,6 +16,7 @@ from six.moves import SimpleHTTPServer, socketserver
 from rds import scrape as rds_scrape
 from cache import scrape as cache_scrape
 from render import render
+from render import build_sitemap
 from scrape import scrape
 
 from io import BytesIO
@@ -79,11 +80,17 @@ def scrape_cache(c):
 
 @task
 def serve(c):
+    
+    class MyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+        def do_GET(self):
+            # The URL does not include ".html". Add it to serve the file for dev
+            if "/aws/" in self.path:
+                self.path += ".html"
+            SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
+    
     """Serve site contents locally for development"""
     os.chdir("www/")
-    httpd = socketserver.TCPServer(
-        (HTTP_HOST, int(HTTP_PORT)), SimpleHTTPServer.SimpleHTTPRequestHandler
-    )
+    httpd = socketserver.TCPServer((HTTP_HOST, int(HTTP_PORT)), MyHandler)
     print(
         "Serving on http://{}:{}".format(
             httpd.socket.getsockname()[0], httpd.socket.getsockname()[1]
@@ -95,9 +102,11 @@ def serve(c):
 @task
 def render_html(c):
     """Render HTML but do not update data from Amazon"""
-    render("www/instances.json", "in/index.html.mako", "www/index.html")
-    render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
-    render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
+    sitemap = []
+    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
+    sitemap.extend(render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html"))
+    sitemap.extend(render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html"))
+    build_sitemap(sitemap)
 
 
 @task

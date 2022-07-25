@@ -30,7 +30,6 @@ function init_data_table() {
       }
     });
   });
-  console.log('here 1');
   g_data_table = $('#data').DataTable({
     bPaginate: false,
     bInfo: false,
@@ -148,14 +147,12 @@ function init_data_table() {
       },
     ],
   });
-  console.log('here 2');
   g_data_table
     .buttons()
     .container()
     .find('a')
     .addClass('btn btn-primary')
     .appendTo($('#menu > div'));
-  console.log('here 3');
 
   return g_data_table;
 }
