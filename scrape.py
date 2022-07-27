@@ -566,35 +566,56 @@ def add_pretty_names(instances):
 
 
 def add_emr_info(instances):
-    url = "https://a0.awsstatic.com/pricing/1/emr/pricing-emr.min.js"
+    # We really need to handle this better and stop hardcoding regions. Hopefully tackle this
+    # when we tackle local zones. Note: These regions are named differently than in the dropdown.
+    region_map = {
+        'af-south-1': 'Africa (Cape Town)',
+        'ap-east-1': 'Asia Pacific (Hong Kong)',
+        'ap-south-1': 'Asia Pacific (Mumbai)',
+        'ap-northeast-3': 'Asia Pacific (Osaka)',
+        'ap-northeast-2': 'Asia Pacific (Seoul)',
+        'ap-southeast-1': 'Asia Pacific (Singapore)',
+        'ap-southeast-2': 'Asia Pacific (Sydney)',
+        'ap-southeast-3': 'Asia Pacific (Jakarta)',
+        'ap-northeast-1': 'Asia Pacific (Tokyo)',
+        'ca-central-1': 'Canada (Central)',
+        'eu-central-1': 'EU (Frankfurt)',
+        'eu-west-1': 'EU (Ireland)',
+        'eu-west-2': 'EU (London)',
+        'eu-west-3': 'EU (Paris)',
+        'eu-north-1': 'EU (Stockholm)',
+        'eu-south-1': 'EU (Milan)',
+        'me-south-1': 'Middle East (Bahrain)',
+        'sa-east-1': 'South America (Sao Paulo)',
+        'us-east-1': 'US East (N. Virginia)',
+        'us-east-2': 'US East (Ohio)',
+        'us-west-1': 'US West (N. California)',
+        'us-west-2': 'US West (Oregon)',
+        'us-gov-west-1': 'AWS GovCloud (US-West)',
+        'us-gov-east-1': 'AWS GovCloud (US-East)',
+    }
+    url = "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/elasticmapreduce/USD/current/elasticmapreduce.json"
     pricing = fetch_data(url)
 
-    def extract_prices(data):
-        ret = {}
-        for x in data["regions"]:
-            for inst in x["instanceTypes"]:
-                for size in inst["sizes"]:
-                    if size["size"] not in ret:
-                        ret[size["size"]] = {}
-                    ret[size["size"]][x["region"]] = {
-                        size["valueColumns"][0]["name"]: size["valueColumns"][0][
-                            "prices"
-                        ]["USD"],
-                        size["valueColumns"][1]["name"]: size["valueColumns"][1][
-                            "prices"
-                        ]["USD"],
-                        "currencies": data["currencies"],
-                        "rate": data["rate"],
-                    }
-        return ret
+    emr_prices = {}
+    for region in pricing["regions"]:
+        emr_prices[region] = {}
+        for inst_type in pricing["regions"][region]:
+            _inst_name = inst_type.replace("Instance-instancetype-","")
+            _price = pricing["regions"][region][inst_type]["price"]
+            emr_prices[region][_inst_name] = _price
 
-    pricing = extract_prices(pricing["config"])
     for inst in instances:
-        if inst.instance_type in pricing:
-            inst.emr = True
-            for region in inst.pricing:
-                if region in pricing[inst.instance_type]:
-                    inst.pricing[region]["emr"] = pricing[inst.instance_type][region]
+        for region in inst.pricing:
+            try:
+                emr_price = {}
+                # The frontend expects ["emr"]["emr"] for some reason
+                emr_price["emr"] = emr_prices[region_map[region]][inst.instance_type]
+                inst.pricing[region]["emr"] = emr_price
+                # TODO: this is set for the whole instance when it should be per-region
+                inst.emr = True
+            except KeyError:
+                pass
 
 
 def add_gpu_info(instances):
