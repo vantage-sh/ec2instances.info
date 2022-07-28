@@ -12,7 +12,5 @@ ec2instances
 .direnv
 .mypy_cache
 www/index.html
-www/instances.json
-www/rds/
 result
 .cache

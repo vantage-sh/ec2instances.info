@@ -6,20 +6,16 @@
     <%block name="meta"/>
     <link rel="stylesheet" href="/default.css" media="screen">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="/default.css" media="screen">
     <link rel="icon" type="image/png" href="/favicon.png">
   </head>
 
   <body class="ec2instances">
     <div class="page-header">
-
       <span class="pull-right">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-via="joinvantage"></a>
-        <iframe src="https://ghbtns.com/github-btn.html?user=powdahound&repo=ec2instances.info&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+        <iframe src="https://ghbtns.com/github-btn.html?user=vantage-sh&repo=ec2instances.info&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
       </span>
 
-      <%block name="header"/>
-
-      <p class="pull-right label label-info">Last Update: ${generated_at}</p>
       <ul class="nav nav-tabs">
         <li role="presentation" class="${'active' if self.attr.active_ == 'ec2' else ''}"><a href="/">EC2</a></li>
         <li role="presentation" class="${'active' if self.attr.active_ == 'rds' else ''}"><a href="/rds/">RDS</a></li>
@@ -38,7 +34,7 @@
       </p>
       <p>
         <strong>Who?</strong>
-        It was started by <a href="http://twitter.com/powdahound" target="_blank">@powdahound</a>, contributed to by <a href="https://github.com/powdahound/ec2instances.info/contributors" target="_blank">many</a>, is now managed and maintained by <a href='http://vantage.sh/' target="_blank">Vantage</a>, and awaits your improvements <a href="https://github.com/powdahound/ec2instances.info" target="_blank">on GitHub</a>.
+        It was started by <a href="http://twitter.com/powdahound" target="_blank">@powdahound</a>, contributed to by <a href="https://github.com/vantage-sh/ec2instances.info/contributors" target="_blank">many</a>, is now managed and maintained by <a href='http://vantage.sh/' target="_blank">Vantage</a>, and awaits your improvements <a href="https://github.com/vantage-sh/ec2instances.info" target="_blank">on GitHub</a>.
       </p>
       <p>
         <strong>How?</strong>
@@ -88,16 +84,5 @@
     <script src="/default.js" type="text/javascript" charset="utf-8"></script>
 
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-    <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-    try {
-      var pageTracker = _gat._getTracker("UA-4372467-3");
-      pageTracker._trackPageview();
-    } catch(err) {}
-    </script>
   </body>
 </html>

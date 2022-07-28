@@ -1,0 +1,6018 @@
+---
+c5d.2xlarge:
+  links:
+    - title: Announcing c5d Instances
+      url: https://aws.amazon.com/about-aws/whats-new/2018/05/introducing-amazon-ec2-c5d-instances/
+      date: 05/17/2018
+---
+c5d.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6a.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5dn.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6a.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g5.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+d3en.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+d3en.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5ad.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5a.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5n.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5ad.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6i.32xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5b.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5n.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i2.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5.9xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5ad.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g3s.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5d.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5n.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2idn.32xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i3en.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i4i.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i4i.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i3en.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5zn.3xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5d.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5ad.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+u-9tb1.112xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2iezn.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5dn.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6a.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5n.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+is4gen.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2iedn.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i2.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i4i.32xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5n.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t2.micro:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+d2.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6i.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g5.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i3en.3xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+z1d.3xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+inf1.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5.18xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2iedn.32xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6gd.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+dl1.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x1e.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5n.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5dn.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i2.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5dn.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5a.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i4i.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6i.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6a.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6g.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6i.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6i.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6g.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c4.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+a1.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i3en.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i3.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+d3.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t4g.micro:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5zn.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5b.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i3.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i3en.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5a.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6i.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+p3.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gn.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5n.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5d.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6g.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t2.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+u-12tb1.112xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+h1.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5b.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5d.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i3en.6xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r4.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t2.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c3.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x1.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5d.18xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5a.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6i.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5a.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c3.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6a.48xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6i.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gd.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+inf1.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5a.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g3.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+a1.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i3en.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+u-6tb1.56xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5n.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c4.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x1e.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5d.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5ad.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i3en.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5n.18xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5d.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gd.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6a.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m4.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t3.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+h1.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x1e.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2iezn.6xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5dn.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6i.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g5.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5dn.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g4dn.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5a.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5n.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r3.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5dn.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6a.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6a.32xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5n.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c4.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5dn.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5d.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m4.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5d.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6i.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2iezn.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m3.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c3.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5n.9xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5d.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5a.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6i.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r3.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5n.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5d.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6a.48xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m4.10xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5ad.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2iezn.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5d.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6i.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5d.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6g.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5b.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2gd.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5d.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i2.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6a.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5n.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6i.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5a.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i4i.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x1.32xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5n.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gn.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5n.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+d3en.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6i.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g4ad.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5dn.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+p3.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6a.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5d.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6gd.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i4i.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6g.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m3.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6i.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5d.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gd.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5n.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5n.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5ad.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2iedn.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5dn.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gd.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r4.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+d3en.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x1e.32xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2iedn.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2iedn.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5n.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5a.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5ad.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2iezn.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5a.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t2.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+p3dn.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+p2.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c3.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m3.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g4ad.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6i.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6i.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5dn.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x1e.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+inf1.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6a.32xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6i.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5d.9xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g3.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6i.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g5.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2iedn.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+h1.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5a.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m4.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c3.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5zn.6xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x1e.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+d3en.6xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5a.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5d.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5d.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t2.small:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gn.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6i.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m4.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2idn.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+d2.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6i.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6a.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g4dn.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2gd.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6g.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m1.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5b.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5n.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5a.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6g.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2iedn.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m3.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m1.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t3a.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5n.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r4.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6i.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+z1d.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5dn.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+im4gn.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5ad.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6a.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r3.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r4.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6a.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+z1d.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6gd.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6g.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5dn.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g5.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+d3.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+p2.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+is4gen.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6i.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6i.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c4.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6a.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5a.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6a.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+u-3tb1.56xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+z1d.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t3.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+d2.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6g.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+d2.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5ad.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6g.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6i.32xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2idn.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+u-6tb1.112xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+inf1.6xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g4dn.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g4ad.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+z1d.6xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+d3.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g4ad.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6gd.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5zn.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gd.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6gd.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5a.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5d.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2iezn.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5a.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t3.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6a.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+z1d.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5b.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r4.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m1.small:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5ad.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6i.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5d.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+a1.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5b.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6gd.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6i.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i3.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6g.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5zn.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6g.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2gd.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5ad.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6gd.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t4g.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5n.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5b.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5dn.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5d.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+p2.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5dn.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5ad.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r4.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5a.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5n.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5ad.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6g.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6g.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+d3en.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+f1.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t3a.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5a.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5a.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2idn.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+f1.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5a.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6i.32xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5zn.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+u-12tb1.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2gd.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2iedn.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g5.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5ad.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6gd.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5d.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g2.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6g.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c4.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5ad.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6gd.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g4ad.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5dn.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gn.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+h1.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5a.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6g.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6gd.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6a.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6i.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6a.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i3.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g5g.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g3.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6gd.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6g.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6gd.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gd.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5zn.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5a.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6a.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t4g.small:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m4.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i4i.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5dn.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5b.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5ad.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+im4gn.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2gd.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5ad.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6g.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gd.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6a.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+z1d.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6g.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6i.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r3.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6gd.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i3.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5ad.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i3.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5ad.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+im4gn.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5n.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+im4gn.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5d.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i3.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5ad.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t4g.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5ad.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+is4gen.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g4dn.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5a.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2gd.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5dn.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gn.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g2.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g5.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+is4gen.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g4dn.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r3.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6g.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t3a.small:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m1.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m2.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g5g.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+p3.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6gd.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m2.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c1.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2gd.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6gd.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6g.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+cc2.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+is4gen.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c1.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c5ad.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6g.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5d.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+a1.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m2.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2gd.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r5ad.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6g.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t3a.nano:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+im4gn.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+vt1.3xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g5g.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gd.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+cr1.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6gd.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m5n.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6gd.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+a1.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i4i.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t3.nano:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+d3.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g5g.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g4dn.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t3a.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6g.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gn.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gn.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t3.micro:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+u-6tb1.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t3.small:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+f1.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g5g.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+m6g.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+vt1.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t3.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+vt1.6xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gn.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t3a.micro:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+u-9tb1.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6g.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+im4gn.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+x2gd.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g4dn.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+p4d.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gn.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g5.48xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6g.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+a1.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t2.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t4g.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+g5g.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+hs1.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+u-18tb1.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t1.micro:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+r6gd.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t4g.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+c6gd.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t4g.nano:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+is4gen.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+u-24tb1.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+t2.nano:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+mac2.metal:
+  links:
+    - title: Big Sur Support for mac2
+      url: https://aws.amazon.com/about-aws/whats-new/2021/02/amazon-ec2-mac-instances-now-support-macos-big-sur/
+      date: 02/17/2022
+    - title:
+      url:
+      date:
+---
+t3a.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+i2.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+mac1.metal:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t4g.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t3.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6g.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t2.small:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.2xlarge.tpc2.mem4x:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5d.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m1.small:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6g.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6i.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6g.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.x1e.32xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.z1d.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6i.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t1.micro:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6i.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6g.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.large.tpc1.mem2x:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t4g.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5d.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r3.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t2.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m3.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t3.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t3.small:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6i.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t4g.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5b.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t3.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t3.micro:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.z1d.6xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6g.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5d.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5d.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.x2g.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.4xlarge.tpc2.mem4x:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5d.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m4.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m4.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5b.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5d.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.12xlarge.tpc2.mem2x:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5b.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.z1d.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.4xlarge.tpc2.mem2x:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6g.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r4.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t2.micro:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r4.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6i.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r4.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6i.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r4.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6g.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r3.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t2.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t4g.small:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m4.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5d.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r3.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m1.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.xlarge.tpc2.mem2x:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6g.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5d.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t4g.micro:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.2xlarge.tpc2.mem8x:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5d.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m3.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t3.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6i.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5b.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6i.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r4.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.x1e.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r4.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5d.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5b.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m4.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.x1.32xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.x1.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.xlarge.tpc2.mem4x:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m3.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.4xlarge.tpc2.mem3x:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5d.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m3.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r3.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6g.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t2.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6g.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m4.10xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6i.32xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.x2g.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5b.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.x1e.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t2.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.x1e.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6i.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.6xlarge.tpc2.mem4x:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5d.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5d.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6i.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5b.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.z1d.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.2xlarge.tpc1.mem2x:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6g.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.z1d.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6g.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.x2g.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.x1e.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6g.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.z1d.3xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.x2g.8xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6i.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.x2g.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r3.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.x1e.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6i.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6g.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m4.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6i.32xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m2.4xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6i.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6i.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.x2g.12xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5d.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m6i.16xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m1.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.t4g.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5.8xlarge.tpc2.mem3x:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m1.medium:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5d.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.x2g.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m5d.24xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m2.xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r5b.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.r6i.large:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:
+---
+db.m2.2xlarge:
+  links:
+    - title:
+      url:
+      date:
+    - title:
+      url:
+      date:

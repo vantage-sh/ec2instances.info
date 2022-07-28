@@ -50,7 +50,7 @@ class Instance(object):
         self.num_drives = None
         self.nvme_ssd = False
         self.physical_processor = None
-        self.placement_group_support = False
+        self.placement_group_support = True
         self.pretty_name = ""
         self.pricing = {}
         self.size = 0
@@ -337,6 +337,8 @@ def add_ebs_info(instances):
             by_type[instance_type].ebs_throughput = ebs_throughput
             by_type[instance_type].ebs_iops = ebs_iops
             by_type[instance_type].ebs_max_bandwidth = ebs_max_bandwidth
+            if ebs_max_bandwidth:
+                by_type[instance_type].ebs_optimized = True
         return by_type
 
     by_type = {i.instance_type: i for i in instances}
@@ -564,35 +566,56 @@ def add_pretty_names(instances):
 
 
 def add_emr_info(instances):
-    url = "https://a0.awsstatic.com/pricing/1/emr/pricing-emr.min.js"
+    # We really need to handle this better and stop hardcoding regions. Hopefully tackle this
+    # when we tackle local zones. Note: These regions are named differently than in the dropdown.
+    region_map = {
+        'af-south-1': 'Africa (Cape Town)',
+        'ap-east-1': 'Asia Pacific (Hong Kong)',
+        'ap-south-1': 'Asia Pacific (Mumbai)',
+        'ap-northeast-3': 'Asia Pacific (Osaka)',
+        'ap-northeast-2': 'Asia Pacific (Seoul)',
+        'ap-southeast-1': 'Asia Pacific (Singapore)',
+        'ap-southeast-2': 'Asia Pacific (Sydney)',
+        'ap-southeast-3': 'Asia Pacific (Jakarta)',
+        'ap-northeast-1': 'Asia Pacific (Tokyo)',
+        'ca-central-1': 'Canada (Central)',
+        'eu-central-1': 'EU (Frankfurt)',
+        'eu-west-1': 'EU (Ireland)',
+        'eu-west-2': 'EU (London)',
+        'eu-west-3': 'EU (Paris)',
+        'eu-north-1': 'EU (Stockholm)',
+        'eu-south-1': 'EU (Milan)',
+        'me-south-1': 'Middle East (Bahrain)',
+        'sa-east-1': 'South America (Sao Paulo)',
+        'us-east-1': 'US East (N. Virginia)',
+        'us-east-2': 'US East (Ohio)',
+        'us-west-1': 'US West (N. California)',
+        'us-west-2': 'US West (Oregon)',
+        'us-gov-west-1': 'AWS GovCloud (US-West)',
+        'us-gov-east-1': 'AWS GovCloud (US-East)',
+    }
+    url = "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/elasticmapreduce/USD/current/elasticmapreduce.json"
     pricing = fetch_data(url)
 
-    def extract_prices(data):
-        ret = {}
-        for x in data["regions"]:
-            for inst in x["instanceTypes"]:
-                for size in inst["sizes"]:
-                    if size["size"] not in ret:
-                        ret[size["size"]] = {}
-                    ret[size["size"]][x["region"]] = {
-                        size["valueColumns"][0]["name"]: size["valueColumns"][0][
-                            "prices"
-                        ]["USD"],
-                        size["valueColumns"][1]["name"]: size["valueColumns"][1][
-                            "prices"
-                        ]["USD"],
-                        "currencies": data["currencies"],
-                        "rate": data["rate"],
-                    }
-        return ret
+    emr_prices = {}
+    for region in pricing["regions"]:
+        emr_prices[region] = {}
+        for inst_type in pricing["regions"][region]:
+            _inst_name = inst_type.replace("Instance-instancetype-","")
+            _price = pricing["regions"][region][inst_type]["price"]
+            emr_prices[region][_inst_name] = _price
 
-    pricing = extract_prices(pricing["config"])
     for inst in instances:
-        if inst.instance_type in pricing:
-            inst.emr = True
-            for region in inst.pricing:
-                if region in pricing[inst.instance_type]:
-                    inst.pricing[region]["emr"] = pricing[inst.instance_type][region]
+        for region in inst.pricing:
+            try:
+                emr_price = {}
+                # The frontend expects ["emr"]["emr"] for some reason
+                emr_price["emr"] = emr_prices[region_map[region]][inst.instance_type]
+                inst.pricing[region]["emr"] = emr_price
+                # TODO: this is set for the whole instance when it should be per-region
+                inst.emr = True
+            except KeyError:
+                pass
 
 
 def add_gpu_info(instances):
@@ -823,6 +846,85 @@ def add_gpu_info(instances):
             "cuda_cores": 55296,  # Source: Asked Matthew Wilson at AWS as this isn't public anywhere.
             "gpu_memory": 320,
         },
+        "p4de.24xlarge": {
+            "gpu_model": "NVIDIA A100",
+            "compute_capability": 8.0,
+            "gpu_count": 8,
+            "cuda_cores": 55296,
+            "gpu_memory": 640,
+        },
+        "g5g.xlarge": {
+            "gpu_model": "NVIDIA T4G Tensor Core",
+            "compute_capability": 7.5,
+            "gpu_count": 1,
+            "cuda_cores": 2560,
+            "gpu_memory": 16,
+        },
+        "g5g.2xlarge": {
+            "gpu_model": "NVIDIA T4G Tensor Core",
+            "compute_capability": 7.5,
+            "gpu_count": 1,
+            "cuda_cores": 2560,
+            "gpu_memory": 16,
+        },
+        "g5g.4xlarge": {
+            "gpu_model": "NVIDIA T4G Tensor Core",
+            "compute_capability": 7.5,
+            "gpu_count": 1,
+            "cuda_cores": 2560,
+            "gpu_memory": 16,
+        },
+        "g5g.8xlarge": {
+            "gpu_model": "NVIDIA T4G Tensor Core",
+            "compute_capability": 7.5,
+            "gpu_count": 1,
+            "cuda_cores": 2560,
+            "gpu_memory": 16,
+        },
+        "g5g.16xlarge": {
+            "gpu_model": "NVIDIA T4G Tensor Core",
+            "compute_capability": 7.5,
+            "gpu_count": 2,
+            "cuda_cores":5120, 
+            "gpu_memory": 32,
+        },
+        "g5g.metal": {
+            "gpu_model": "NVIDIA T4G Tensor Core",
+            "compute_capability": 7.5,
+            "gpu_count": 2,
+            "cuda_cores": 5120,
+            "gpu_memory": 32,
+        },
+        "g4ad.xlarge": {
+            "gpu_model": "AMD Radeon Pro V520",
+            "compute_capability": 0,
+            "gpu_count": 1,
+            "gpu_memory": 8,
+        },
+        "g4ad.2xlarge": {
+            "gpu_model": "AMD Radeon Pro V520",
+            "compute_capability": 0,
+            "gpu_count": 1,
+            "gpu_memory": 8,
+        },
+        "g4ad.4xlarge": {
+            "gpu_model": "AMD Radeon Pro V520",
+            "compute_capability": 0,
+            "gpu_count": 1,
+            "gpu_memory": 8,
+        },
+        "g4ad.8xlarge": {
+            "gpu_model": "AMD Radeon Pro V520",
+            "compute_capability": 0,
+            "gpu_count": 2,
+            "gpu_memory": 16,
+        },
+        "g4ad.16xlarge": {
+            "gpu_model": "AMD Radeon Pro V520",
+            "compute_capability": 0,
+            "gpu_count": 4,
+            "gpu_memory": 32,
+        },
     }
     for inst in instances:
         if inst.GPU == 0:
@@ -871,6 +973,43 @@ def add_availability_zone_info(instances):
         )
 
 
+def add_placement_groups(instances):
+    """
+    See https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html#placement-groups-limitations-cluster
+    for the logic on which instances support placement groups.
+    """
+    placement_group_data = {
+        "prev_gen_families": [
+            "a1",
+            "c3",
+            "g2",
+            "i2",
+            "r3",
+        ],
+        "prev_gen_instances" : [
+            "cc2.8xlarge",
+            "cr1.8xlarge",
+            "hs1.8xlarge",
+        ],
+        "exceptions": [
+            "t2",
+            "t3",
+            "t4",
+            "ma",   
+        ]
+    }
+
+    for inst in instances:
+        itype = inst.instance_type
+        excpt = placement_group_data["exceptions"]
+        prev_geni = placement_group_data["prev_gen_instances"]
+        prev_genf = placement_group_data["prev_gen_families"]
+        if itype[0:2] in excpt:
+            inst.placement_group_support = False
+        elif inst.generation == "previous" and itype not in prev_geni and itype[0:2] not in prev_genf:
+            inst.placement_group_support = False
+
+
 def scrape(data_file):
     """Scrape AWS to get instance data"""
     print("Parsing instance types...")
@@ -897,6 +1036,8 @@ def scrape(data_file):
     add_gpu_info(all_instances)
     print("Adding availability zone details...")
     add_availability_zone_info(all_instances)
+    print("Adding placement group details...")
+    add_placement_groups(all_instances)
 
     os.makedirs(os.path.dirname(data_file), exist_ok=True)
     with open(data_file, "w+") as f:
