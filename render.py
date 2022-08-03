@@ -113,13 +113,13 @@ def build_sitemap(sitemap):
     surls = ['<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for url in sitemap:
         surl = url.replace("www/", "")
-        surls.append( "<url><loc>{}/{}</loc></url>".format(HOST, surl[0:-5]))
+        surls.append("<url><loc>{}/{}</loc></url>".format(HOST, surl[0:-5]))
     surls.append("</urlset>")
-    
+
     destination_file = "www/sitemap.xml"
     print("Rendering all URLs to %s..." % destination_file)
     with io.open(destination_file, "w+") as fp:
-        fp.write('\n'.join(surls))
+        fp.write("\n".join(surls))
 
 
 def render(data_file, template_file, destination_file):
@@ -157,13 +157,17 @@ def render(data_file, template_file, destination_file):
             sitemap.append(destination_file)
         except:
             print(mako.exceptions.text_error_template().render())
-    
+
     return sitemap
 
 
 if __name__ == "__main__":
     sitemap = []
     sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
-    sitemap.extend(render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html"))
-    sitemap.extend(render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html"))
+    sitemap.extend(
+        render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
+    )
+    sitemap.extend(
+        render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
+    )
     build_sitemap(sitemap)

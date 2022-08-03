@@ -569,30 +569,30 @@ def add_emr_info(instances):
     # We really need to handle this better and stop hardcoding regions. Hopefully tackle this
     # when we tackle local zones. Note: These regions are named differently than in the dropdown.
     region_map = {
-        'af-south-1': 'Africa (Cape Town)',
-        'ap-east-1': 'Asia Pacific (Hong Kong)',
-        'ap-south-1': 'Asia Pacific (Mumbai)',
-        'ap-northeast-3': 'Asia Pacific (Osaka)',
-        'ap-northeast-2': 'Asia Pacific (Seoul)',
-        'ap-southeast-1': 'Asia Pacific (Singapore)',
-        'ap-southeast-2': 'Asia Pacific (Sydney)',
-        'ap-southeast-3': 'Asia Pacific (Jakarta)',
-        'ap-northeast-1': 'Asia Pacific (Tokyo)',
-        'ca-central-1': 'Canada (Central)',
-        'eu-central-1': 'EU (Frankfurt)',
-        'eu-west-1': 'EU (Ireland)',
-        'eu-west-2': 'EU (London)',
-        'eu-west-3': 'EU (Paris)',
-        'eu-north-1': 'EU (Stockholm)',
-        'eu-south-1': 'EU (Milan)',
-        'me-south-1': 'Middle East (Bahrain)',
-        'sa-east-1': 'South America (Sao Paulo)',
-        'us-east-1': 'US East (N. Virginia)',
-        'us-east-2': 'US East (Ohio)',
-        'us-west-1': 'US West (N. California)',
-        'us-west-2': 'US West (Oregon)',
-        'us-gov-west-1': 'AWS GovCloud (US-West)',
-        'us-gov-east-1': 'AWS GovCloud (US-East)',
+        "af-south-1": "Africa (Cape Town)",
+        "ap-east-1": "Asia Pacific (Hong Kong)",
+        "ap-south-1": "Asia Pacific (Mumbai)",
+        "ap-northeast-3": "Asia Pacific (Osaka)",
+        "ap-northeast-2": "Asia Pacific (Seoul)",
+        "ap-southeast-1": "Asia Pacific (Singapore)",
+        "ap-southeast-2": "Asia Pacific (Sydney)",
+        "ap-southeast-3": "Asia Pacific (Jakarta)",
+        "ap-northeast-1": "Asia Pacific (Tokyo)",
+        "ca-central-1": "Canada (Central)",
+        "eu-central-1": "EU (Frankfurt)",
+        "eu-west-1": "EU (Ireland)",
+        "eu-west-2": "EU (London)",
+        "eu-west-3": "EU (Paris)",
+        "eu-north-1": "EU (Stockholm)",
+        "eu-south-1": "EU (Milan)",
+        "me-south-1": "Middle East (Bahrain)",
+        "sa-east-1": "South America (Sao Paulo)",
+        "us-east-1": "US East (N. Virginia)",
+        "us-east-2": "US East (Ohio)",
+        "us-west-1": "US West (N. California)",
+        "us-west-2": "US West (Oregon)",
+        "us-gov-west-1": "AWS GovCloud (US-West)",
+        "us-gov-east-1": "AWS GovCloud (US-East)",
     }
     url = "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/elasticmapreduce/USD/current/elasticmapreduce.json"
     pricing = fetch_data(url)
@@ -601,7 +601,7 @@ def add_emr_info(instances):
     for region in pricing["regions"]:
         emr_prices[region] = {}
         for inst_type in pricing["regions"][region]:
-            _inst_name = inst_type.replace("Instance-instancetype-","")
+            _inst_name = inst_type.replace("Instance-instancetype-", "")
             _price = pricing["regions"][region][inst_type]["price"]
             emr_prices[region][_inst_name] = _price
 
@@ -885,7 +885,7 @@ def add_gpu_info(instances):
             "gpu_model": "NVIDIA T4G Tensor Core",
             "compute_capability": 7.5,
             "gpu_count": 2,
-            "cuda_cores":5120, 
+            "cuda_cores": 5120,
             "gpu_memory": 32,
         },
         "g5g.metal": {
@@ -986,7 +986,7 @@ def add_placement_groups(instances):
             "i2",
             "r3",
         ],
-        "prev_gen_instances" : [
+        "prev_gen_instances": [
             "cc2.8xlarge",
             "cr1.8xlarge",
             "hs1.8xlarge",
@@ -995,8 +995,8 @@ def add_placement_groups(instances):
             "t2",
             "t3",
             "t4",
-            "ma",   
-        ]
+            "ma",
+        ],
     }
 
     for inst in instances:
@@ -1006,7 +1006,11 @@ def add_placement_groups(instances):
         prev_genf = placement_group_data["prev_gen_families"]
         if itype[0:2] in excpt:
             inst.placement_group_support = False
-        elif inst.generation == "previous" and itype not in prev_geni and itype[0:2] not in prev_genf:
+        elif (
+            inst.generation == "previous"
+            and itype not in prev_geni
+            and itype[0:2] not in prev_genf
+        ):
             inst.placement_group_support = False
 
 

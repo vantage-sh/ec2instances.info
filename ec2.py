@@ -274,13 +274,19 @@ def add_spot_pricing(imap):
                         inst.pricing[region][platform].setdefault("spot", [])
                         inst.pricing[region][platform].setdefault("spot_min", "N/A")
                         inst.pricing[region][platform].setdefault("spot_max", "N/A")
-                        inst.pricing[region][platform]["spot"].append(price["SpotPrice"])
+                        inst.pricing[region][platform]["spot"].append(
+                            price["SpotPrice"]
+                        )
                         inst.pricing[region][platform]["spot"].sort(key=float)
-                        inst.pricing[region][platform]["spot_min"] = inst.pricing[region][platform]["spot"][0]
-                        inst.pricing[region][platform]["spot_max"] = inst.pricing[region][platform]["spot"][-1]
+                        inst.pricing[region][platform]["spot_min"] = inst.pricing[
+                            region
+                        ][platform]["spot"][0]
+                        inst.pricing[region][platform]["spot_max"] = inst.pricing[
+                            region
+                        ][platform]["spot"][-1]
                     else:
                         # In rare cases (occuring for the first time in July 2022), instances
-                        # can be available in a region as spots but not on demand or any other 
+                        # can be available in a region as spots but not on demand or any other
                         # way. In that case, the logic above will fail and we need to wrap it
                         # in a conditional and create the region first to put spot prices in
                         # If more edge cases: print(json.dumps(inst.to_dict(), indent=4))
