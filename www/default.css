@@ -118,14 +118,14 @@ body {
 }
 
 /* Bootstrap overrides */
-.dropdown-menu .active a {
+/* .dropdown-menu .active a {
   color: #fff !important;
   background: #9c25c7 !important;
 }
 
 .dropdown-menu li > a:hover {
   background: #f9e6ff !important;
-}
+} */
 
 .share-url {
   text-align: left;
@@ -166,7 +166,7 @@ table.table thead .sorting_desc_disabled {
   *cursor: hand;
 }
 
-table.table thead .sorting {
+/* table.table thead .sorting {
   background: url('datatables/images/sort_both.png') no-repeat center right;
 }
 table.table thead .sorting_asc {
@@ -181,7 +181,7 @@ table.table thead .sorting_asc_disabled {
 }
 table.table thead .sorting_desc_disabled {
   background: url('datatables/images/sort_desc_disabled.png') no-repeat center right;
-}
+} */
 
 /* This class is applied to the DataTables search box by our own code once it renders */
 input.search {

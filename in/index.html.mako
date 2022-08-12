@@ -17,7 +17,7 @@
     <div class="row" id="menu">
       <div class="col-sm-12">
         <div class="btn-group" id='region-dropdown'>
-          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+          <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-globe icon-white"></i>
             Region: <span class="text"></span>
             <span class="caret"></span>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="btn-group" id="pricing-unit-dropdown">
-          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+          <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-shopping-cart icon-white"></i>
             Pricing Unit: <span class="text"></span>
             <span class="caret"></span>
@@ -65,7 +65,7 @@
         </div>
 
         <div class="btn-group" id="cost-dropdown">
-          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+          <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-shopping-cart icon-white"></i>
             Cost: <span class="text"></span>
             <span class="caret"></span>
@@ -81,7 +81,7 @@
         </div>
 
         <div class="btn-group" id='reserved-term-dropdown'>
-          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+          <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-globe icon-white"></i>
             Reserved: <span class="text">1 yr - No Upfront</span>
             <span class="caret"></span>
@@ -103,7 +103,7 @@
         </div>
 
         <div class="btn-group" id="filter-dropdown">
-          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+          <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-filter icon-white"></i>
             Columns
             <span class="caret"></span>
@@ -125,6 +125,7 @@
       </div>
     </div>
 
+    <!--
     <div class="form-inline" id="filters">
       <strong> Filter:</strong>
       Min Memory (GiB): <input data-action="datafilter" data-type="memory" class="form-control" />
@@ -132,9 +133,10 @@
       Min Memory/vCPU (Gib/vCPU): <input data-action="datafilter" data-type="memory-per-vcpu" class="form-control" />
       Min Storage (GiB): <input data-action="datafilter" data-type="storage" class="form-control" />
     </div>
+    -->
 
-    <div>
-    <table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">
+  <div style="height:100%" class="table-responsive overflow-auto">
+    <table cellspacing="0" class="table" id="data">
       <thead>
         <tr>
           <th class="name">Name</th>
@@ -497,4 +499,4 @@
         % endfor
       </tbody>
     </table>
-    </div>
+  </div>

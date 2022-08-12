@@ -522,10 +522,10 @@ function on_data_table_initialized() {
   apply_min_values();
 
   // apply highlight to selected rows
-  $.each(g_settings.selected.split(','), function (_, id) {
-    id = id.replace('.', '\\.');
-    $('#' + id).addClass('highlight');
-  });
+  // $.each(g_settings.selected.split(','), function (_, id) {
+  //   id = id.replace('.', '\\.');
+  //   $('#' + id).addClass('highlight');
+  // });
 
   configure_highlighting();
 
