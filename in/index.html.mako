@@ -10,12 +10,21 @@
         <meta name="description" content="A free and easy-to-use tool for comparing EC2 Instance features and prices."></head>
     </%block>
     
+    <!--
     <%block name="header">
     <h1>EC2Instances.info <small>Easy Amazon <b>EC2</b> Instance Comparison</small></h1>
     </%block>
+    -->
 
-    <div class="row" id="menu">
-      <div class="col-sm-12">
+    <div class="row mt-3" id="menu">
+      <div class="col-sm-12 ms-2">
+
+        <button class="btn btn-primary btn-compare"
+          data-text-on="End Compare"
+          data-text-off="Compare Selected">
+          Compare Selection
+        </button>
+
         <div class="btn-group" id='region-dropdown'>
           <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-globe icon-white"></i>
@@ -113,12 +122,6 @@
           </ul>
         </div>
 
-        <button class="btn btn-primary btn-compare"
-          data-text-on="End Compare"
-          data-text-off="Compare Selected">
-          Compare Selected
-        </button>
-
         <button class="btn btn-primary btn-clear">
           Clear Filters
         </button>
@@ -139,6 +142,7 @@
     <table cellspacing="0" class="table" id="data">
       <thead>
         <tr>
+          <th></th>
           <th class="name">Name</th>
           <th class="apiname">API Name</th>
           <th class="memory">Memory</th>
@@ -249,6 +253,7 @@
       <tbody>
         % for inst in instances:
           <tr class='instance' id="${inst['instance_type']}">
+            <td></td>
             <td class="name">${inst['pretty_name']}</td>
             <td class="apiname"><a href="/aws/ec2/${inst['instance_type']}">${inst['instance_type']}</a></td>
             <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>

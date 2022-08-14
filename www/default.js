@@ -38,8 +38,16 @@ function init_data_table() {
       bRegex: true,
       bSmart: false,
     },
+    dom: 't',
+    select: {
+      style:    'os',
+      selector: 'td:first-child'
+    },
     aoColumnDefs: [
       {
+          orderable: false,
+          className: 'select-checkbox',
+          targets:   0,
         // The columns below are sorted according to the sort attr of the <span> tag within their data cells
         aTargets: [
           'memory',
