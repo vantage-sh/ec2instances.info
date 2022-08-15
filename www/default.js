@@ -22,14 +22,24 @@ function init_data_table() {
   $('#data thead tr').clone(true).appendTo('#data thead');
   // add a text input filter to each column of the new row
   $('#data thead tr:eq(1) th').each(function (i) {
+    // don't add a filter bar to the checkbox column (column 0)
+    if (i == 0) { return; }
+    if (i == 3) {
+      $(this).html("<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>");
+      return;
+    } else if (i == 5) {
+      $(this).html("<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>");
+      return;
+    } else if (i == 6) {
+      $(this).html("<input data-action='datafilter' data-type='memory-per-vcpu' class='form-control' placeholder='Min Mem/vCPU: 0'/>");
+      return;
+    } else if (i == 19) {
+      $(this).html("<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>");
+      return;
+    }
+
     var title = $(this).text().trim();
-      /* TODO: For these columns, enable a minimum to be entered instead of a filter
-      Min Memory (GiB): <input data-action="datafilter" data-type="memory" class="form-control" />
-      Min vCPUs: <input data-action="datafilter" data-type="vcpus" class="form-control" />
-      Min Memory/vCPU (Gib/vCPU): <input data-action="datafilter" data-type="memory-per-vcpu" class="form-control" />
-      Min Storage (GiB): <input data-action="datafilter" data-type="storage" class="form-control" />
-      */
-    $(this).html("<input type='text' placeholder='Filter..'/>");
+    $(this).html("<input type='text' class='form-control' placeholder='Filter..'/>");
     $('input', this).on('keyup change', function () {
       if (g_data_table.column(i).search() !== this.value) {
         g_data_table.column(i).search(this.value).draw();
@@ -45,6 +55,7 @@ function init_data_table() {
       bSmart: false,
     },
     dom: 'Bt',
+    fixedHeader: true,
     select: {
       style:    'os',
       selector: 'td:first-child'
@@ -522,12 +533,12 @@ function on_data_table_initialized() {
   load_settings();
 
   // populate filter inputs
-  $('[data-action="datafilter"][data-type="memory"]').val(g_settings['min_memory']);
-  $('[data-action="datafilter"][data-type="vcpus"]').val(g_settings['min_vcpus']);
-  $('[data-action="datafilter"][data-type="memory-per-vcpu"]').val(
-    g_settings['min_memory_per_vcpu'],
-  );
-  $('[data-action="datafilter"][data-type="storage"]').val(g_settings['min_storage']);
+  // $('[data-action="datafilter"][data-type="memory"]').val(g_settings['min_memory']);
+  // $('[data-action="datafilter"][data-type="vcpus"]').val(g_settings['min_vcpus']);
+  // $('[data-action="datafilter"][data-type="memory-per-vcpu"]').val(
+  //   g_settings['min_memory_per_vcpu'],
+  // );
+  // $('[data-action="datafilter"][data-type="storage"]').val(g_settings['min_storage']);
   g_data_table.search(g_settings['filter']);
   apply_min_values();
 

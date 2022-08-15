@@ -153,7 +153,7 @@
           <th></th>
           <th class="name">Name</th>
           <th class="apiname">API Name</th>
-          <th class="memory">Memory</th>
+          <th class="memory">Instance Memory</th>
           <th class="computeunits">
             <abbr title="One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.">Compute Units (ECU)</abbr>
           </th>
