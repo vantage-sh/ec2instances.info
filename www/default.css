@@ -170,6 +170,11 @@ table.table thead .sorting_desc_disabled {
   *cursor: hand;
 }
 
+table.table thead {
+  position: sticky;
+  top: 0;
+}
+
 /* table.table thead .sorting {
   background: url('datatables/images/sort_both.png') no-repeat center right;
 }

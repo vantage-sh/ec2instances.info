@@ -23,7 +23,13 @@ function init_data_table() {
   // add a text input filter to each column of the new row
   $('#data thead tr:eq(1) th').each(function (i) {
     var title = $(this).text().trim();
-    $(this).html("<input type='text' placeholder='Search " + title + "' />");
+      /* TODO: For these columns, enable a minimum to be entered instead of a filter
+      Min Memory (GiB): <input data-action="datafilter" data-type="memory" class="form-control" />
+      Min vCPUs: <input data-action="datafilter" data-type="vcpus" class="form-control" />
+      Min Memory/vCPU (Gib/vCPU): <input data-action="datafilter" data-type="memory-per-vcpu" class="form-control" />
+      Min Storage (GiB): <input data-action="datafilter" data-type="storage" class="form-control" />
+      */
+    $(this).html("<input type='text' placeholder='Filter..'/>");
     $('input', this).on('keyup change', function () {
       if (g_data_table.column(i).search() !== this.value) {
         g_data_table.column(i).search(this.value).draw();
@@ -38,7 +44,7 @@ function init_data_table() {
       bRegex: true,
       bSmart: false,
     },
-    dom: 't',
+    dom: 'Bt',
     select: {
       style:    'os',
       selector: 'td:first-child'
@@ -147,20 +153,16 @@ function init_data_table() {
     buttons: [
       {
         extend: 'csv',
-        text: 'CSV',
+        text: "Export",
+        className: 'btn-primary',
         exportOptions: {
           modifier: {search: 'applied'},
           columns: ':visible',
         },
-      },
-    ],
+      }
+    ]
   });
-  g_data_table
-    .buttons()
-    .container()
-    .find('a')
-    .addClass('btn btn-primary')
-    .appendTo($('#menu > div'));
+  g_data_table.buttons().container().appendTo($('#export'));
 
   return g_data_table;
 }
@@ -530,10 +532,15 @@ function on_data_table_initialized() {
   apply_min_values();
 
   // apply highlight to selected rows
-  // $.each(g_settings.selected.split(','), function (_, id) {
-  //   id = id.replace('.', '\\.');
-  //   $('#' + id).addClass('highlight');
-  // });
+  $.each(g_settings.selected.split(','), function (_, id) {
+    console.log(id);
+    id = id.replace('.', '\\.');
+    if (id === "") { 
+      return; 
+    } else {
+      $(id).addClass('highlight');
+    }
+  });
 
   configure_highlighting();
 
@@ -715,3 +722,7 @@ function update_compare_button() {
     $compareBtn.text($compareBtn.data('textOn')).addClass('btn-success').removeClass('btn-primary');
   }
 }
+
+$('#fullsearch').on('keyup', function() {
+  g_data_table.search(this.value).draw();
+});

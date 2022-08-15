@@ -16,12 +16,12 @@
     </%block>
     -->
 
-    <div class="row mt-3" id="menu">
+    <div class="row mt-3 me-2" id="menu">
       <div class="col-sm-12 ms-2">
 
         <button class="btn btn-primary btn-compare"
           data-text-on="End Compare"
-          data-text-off="Compare Selected">
+          data-text-off="Compare Selection">
           Compare Selection
         </button>
 
@@ -122,10 +122,18 @@
           </ul>
         </div>
 
-        <button class="btn btn-primary btn-clear">
+        <button class="btn btn-primary btn-clear" id="clear">
           Clear Filters
         </button>
+
+        <div class="btn-group float-end m2 p2" id="search">
+          <input id="fullsearch" type="text" class="form-control" placeholder="Search...">
+        </div>
+
+        <div class="btn-group btn-primary float-end px-2" id="export"></div>
+
       </div>
+
     </div>
 
     <!--
@@ -138,7 +146,7 @@
     </div>
     -->
 
-  <div style="height:100%" class="table-responsive overflow-auto">
+  <div style="height:100%" class="table-responsive overflow-auto ms-2">
     <table cellspacing="0" class="table" id="data">
       <thead>
         <tr>
