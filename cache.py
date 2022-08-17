@@ -79,7 +79,6 @@ def scrape(output_file, input_file=None):
         if product.get("productFamily", None) == "Cache Instance":
             attributes = product["attributes"]
 
-
             # map the region
             location = ec2.canonicalize_location(attributes["location"])
             instance_type = attributes["instanceType"]
