@@ -93,6 +93,14 @@ def scrape(output_file, input_file=None):
                     )
                     continue
 
+            # Fix https://github.com/vantage-sh/ec2instances.info/issues/644 - Outpost pricing overwriting reserved
+            loctype = attributes["locationType"]
+            if "Outposts" in loctype:
+                print(
+                    f"WARNING: Skipping location type={loctype} for instance with sku={sku}, type={instance_type}"
+                )
+                continue
+
             # set the attributes in line with the ec2 index
             attributes["region"] = region
             attributes["memory"] = attributes["memory"].split(" ")[0]
