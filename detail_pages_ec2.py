@@ -55,12 +55,15 @@ def description(id):
 
     # Some instances say "Low to moderate" for bandwidth, ignore them
     try:
-        bandwidth = " and {} Gibps of bandwidth.".format(int(id["Networking"][0]["value"]))
+        bandwidth = " and {} Gibps of bandwidth.".format(
+            int(id["Networking"][0]["value"])
+        )
     except:
         bandwidth = "."
 
     return "The {} instance is a {} instance with {} vCPUs, {} GiB of memory{}".format(
-        name, family_category, cpus, memory, bandwidth)
+        name, family_category, cpus, memory, bandwidth
+    )
 
 
 def community(instance, links):
@@ -75,7 +78,7 @@ def community(instance, links):
 def unavailable_instances(itype, instance_details):
     data_file = "meta/regions_aws.yaml"
     ec2_os = {
-        "linux": "Linux", 
+        "linux": "Linux",
         "mswin": "Windows",
         "rhel": "Red Hat",
         "sles": "SUSE",
@@ -135,7 +138,7 @@ def assemble_the_families(instances):
         if itype not in instance_fam_map:
             instance_fam_map[itype] = [member]
         else:
-            instance_fam_map[itype].append(member)        
+            instance_fam_map[itype].append(member)
 
         # The second list, where we will get the family from knowing the instance
         families[name] = itype
@@ -161,13 +164,13 @@ def prices(pricing):
 
         for os, _p in p.items():
             display_prices[region][os] = {}
-            
-            if os == 'ebs' or os == 'emr':
+
+            if os == "ebs" or os == "emr":
                 continue
 
             # Doing a lot of work to deal with prices having up to 6 places
             # after the decimal, as well as prices not existing for all regions
-            # and operating systems. 
+            # and operating systems.
             try:
                 display_prices[region][os]["ondemand"] = _p["ondemand"]
             except KeyError:
@@ -197,17 +200,17 @@ def prices(pricing):
                 display_prices[region][os]["_3yr"] = reserved
             except KeyError:
                 display_prices[region][os]["_3yr"] = "N/A"
-    
+
     return display_prices
 
 
 def load_service_attributes():
     # This CSV file contains nicely formatted names, styling hints,
     # and order of display for instance attributes
-    data_file = 'meta/service_attributes_ec2.csv'
+    data_file = "meta/service_attributes_ec2.csv"
 
     display_map = {}
-    with open(data_file, 'r') as f:
+    with open(data_file, "r") as f:
         reader = csv.reader(f)
 
         for i, row in enumerate(reader):
@@ -228,7 +231,7 @@ def load_service_attributes():
                 "value": None,
                 "variant_family": row[1][0:2],
             }
-            
+
     return display_map
 
 
@@ -242,7 +245,7 @@ def format_attribute(display):
             display["value"] = match.group()
         # else:
         #     print("No match found for {} with regex {}".format(toparse, regex))
-    
+
     if display["style"]:
         v = str(display["value"]).lower()
         if v == "false" or v == "0" or v == "none":
@@ -253,11 +256,12 @@ def format_attribute(display):
             display["style"] = "value value-previous"
         else:
             display["style"] = "value value-true"
-    
+
     return display
 
+
 def map_ec2_attributes(i, imap):
-    # For now, manually transform the instance data we receive from AWS 
+    # For now, manually transform the instance data we receive from AWS
     # into the format we want to render. Later we can create this in YAML
     # and use a standard function that maps names
     categories = [
@@ -268,8 +272,8 @@ def map_ec2_attributes(i, imap):
         "Not Shown",
     ]
     special_attributes = [
-        "pricing", 
-        "storage", 
+        "pricing",
+        "storage",
         "vpc",
     ]
 
@@ -284,7 +288,7 @@ def map_ec2_attributes(i, imap):
             display = imap[j]
             display["value"] = k
             instance_details[display["category"]].append(format_attribute(display))
-    
+
     # Special cases
     instance_details["Storage"].extend(storage(i["storage"], imap))
 
@@ -292,7 +296,7 @@ def map_ec2_attributes(i, imap):
         instance_details[c].sort(key=lambda x: int(x["order"]))
 
     # Pricing widget
-    instance_details['Pricing'] = prices(i["pricing"])
+    instance_details["Pricing"] = prices(i["pricing"])
 
     # for debugging: print(json.dumps(instance_details, indent=4))
     return instance_details
@@ -300,22 +304,24 @@ def map_ec2_attributes(i, imap):
 
 def build_detail_pages_ec2(instances, destination_file):
     # Extract which service these instances belong to, for example EC2 is loaded at /
-    service_path = destination_file.split('/')[1]
+    service_path = destination_file.split("/")[1]
     data_file = "community_contributions.yaml"
     stream = open(data_file, "r")
     community_data = list(yaml.load_all(stream, Loader=yaml.SafeLoader))
 
     # Find the right path to write these files to. There is a .gitignore file
     # in each directory so that these generated files are not committed
-    subdir = os.path.join('www', 'aws', 'ec2')
-    if service_path != 'index.html':
-        subdir = os.path.join('www', 'aws', service_path)
+    subdir = os.path.join("www", "aws", "ec2")
+    if service_path != "index.html":
+        subdir = os.path.join("www", "aws", service_path)
 
     ifam, fam_lookup, variants = assemble_the_families(instances)
     imap = load_service_attributes()
 
     lookup = mako.lookup.TemplateLookup(directories=["."])
-    template = mako.template.Template(filename='in/instance-type.html.mako', lookup=lookup)
+    template = mako.template.Template(
+        filename="in/instance-type.html.mako", lookup=lookup
+    )
 
     # To add more data to a single instance page, do so inside this loop
     could_not_render = []
@@ -323,7 +329,7 @@ def build_detail_pages_ec2(instances, destination_file):
     for i in instances:
         instance_type = i["instance_type"]
 
-        instance_page = os.path.join(subdir, instance_type + '.html')
+        instance_page = os.path.join(subdir, instance_type + ".html")
         instance_details = map_ec2_attributes(i, imap)
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
@@ -335,26 +341,25 @@ def build_detail_pages_ec2(instances, destination_file):
         print("Rendering %s to detail page %s..." % (instance_type, instance_page))
         with io.open(instance_page, "w+", encoding="utf-8") as fh:
             try:
-                fh.write(template.render(
-                    i=instance_details,
-                    family=fam_members,
-                    description=idescription,
-                    links=links,
-                    unavailable=denylist,
-                    defaults=defaults,
-                    variants=variants[instance_type[0:2]],
-                ))
+                fh.write(
+                    template.render(
+                        i=instance_details,
+                        family=fam_members,
+                        description=idescription,
+                        links=links,
+                        unavailable=denylist,
+                        defaults=defaults,
+                        variants=variants[instance_type[0:2]],
+                    )
+                )
                 sitemap.append(instance_page)
             except:
-                render_err = mako.exceptions.text_error_template().render() 
-                err = {
-                    "e": "ERROR for " + instance_type, 
-                    "t": render_err
-                }
+                render_err = mako.exceptions.text_error_template().render()
+                err = {"e": "ERROR for " + instance_type, "t": render_err}
 
                 could_not_render.append(err)
-        
-    [print(err["e"], '{}'.format(err["t"])) for err in could_not_render]
+
+    [print(err["e"], "{}".format(err["t"])) for err in could_not_render]
     [print(page["e"]) for page in could_not_render]
 
     return sitemap

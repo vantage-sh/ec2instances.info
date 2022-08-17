@@ -12,27 +12,27 @@ import re
 
 
 rds_engine_mapping = {
-    '2': 'MySQL', 
-    '3': 'Oracle Standard One BYOL', 
-    '4': 'Oracle Standard BYOL', 
-    '5': 'Oracle', 
-    '6': 'Oracle Standard One', 
-    '9': 'SQL Server',
-    '10': 'SQL Server Express',
-    '11': 'SQL Server Standard',
-    '12': 'SQL Server Standard',
-    '14': 'PostgreSQL', 
-    '15': 'SQL Server Enterprise',
-    '16': 'Aurora MySQL',
-    '18': 'MariaDB',
-    '19': 'Oracle Standard Two BYOL',
-    '20': 'Oracle Standard Two',
-    '21': 'Aurora PostgreSQL', 
-    '210': 'MySQL (Outpost On-Prem)', 
-    '220': 'PostgreSQL (Outpost On-Prem)', 
-    '230': 'SQL Server Enterprise (Outpost On-Prem)',
-    '231': 'SQL Server (Outpost On-Prem)',
-    '232': 'SQL Server Web (Outpost On-Prem)',
+    "2": "MySQL",
+    "3": "Oracle Standard One BYOL",
+    "4": "Oracle Standard BYOL",
+    "5": "Oracle",
+    "6": "Oracle Standard One",
+    "9": "SQL Server",
+    "10": "SQL Server Express",
+    "11": "SQL Server Standard",
+    "12": "SQL Server Standard",
+    "14": "PostgreSQL",
+    "15": "SQL Server Enterprise",
+    "16": "Aurora MySQL",
+    "18": "MariaDB",
+    "19": "Oracle Standard Two BYOL",
+    "20": "Oracle Standard Two",
+    "21": "Aurora PostgreSQL",
+    "210": "MySQL (Outpost On-Prem)",
+    "220": "PostgreSQL (Outpost On-Prem)",
+    "230": "SQL Server Enterprise (Outpost On-Prem)",
+    "231": "SQL Server (Outpost On-Prem)",
+    "232": "SQL Server Web (Outpost On-Prem)",
 }
 
 
@@ -48,11 +48,19 @@ def initial_prices(i, instance_type):
 
     try:
         if "mem" in instance_type:
-            _1yr = i["Pricing"]["us-east-1"]["Oracle"]["_1yr"]["Standard.partialUpfront"]
-            _3yr = i["Pricing"]["us-east-1"]["Oracle"]["_3yr"]["Standard.partialUpfront"]
+            _1yr = i["Pricing"]["us-east-1"]["Oracle"]["_1yr"][
+                "Standard.partialUpfront"
+            ]
+            _3yr = i["Pricing"]["us-east-1"]["Oracle"]["_3yr"][
+                "Standard.partialUpfront"
+            ]
         else:
-            _1yr = i["Pricing"]["us-east-1"]["PostgreSQL"]["_1yr"]["Standard.partialUpfront"]
-            _3yr = i["Pricing"]["us-east-1"]["PostgreSQL"]["_3yr"]["Standard.partialUpfront"]
+            _1yr = i["Pricing"]["us-east-1"]["PostgreSQL"]["_1yr"][
+                "Standard.partialUpfront"
+            ]
+            _3yr = i["Pricing"]["us-east-1"]["PostgreSQL"]["_3yr"][
+                "Standard.partialUpfront"
+            ]
     except:
         # If we can't get a reservation, likely a previous generation
         _1yr = "'N/A'"
@@ -70,12 +78,15 @@ def description(id):
 
     # Some instances say "Low to moderate" for bandwidth, ignore them
     try:
-        bandwidth = " and {} Gibps of bandwidth.".format(int(id["Networking"][0]["value"]))
+        bandwidth = " and {} Gibps of bandwidth.".format(
+            int(id["Networking"][0]["value"])
+        )
     except:
         bandwidth = "."
 
     return "The {} instance is in the {} family and has {} vCPUs, {} GiB of memory{}".format(
-        name, family_category, cpus, memory, bandwidth)
+        name, family_category, cpus, memory, bandwidth
+    )
 
 
 def community(instance, links):
@@ -119,7 +130,7 @@ def assemble_the_families(instances):
     for i in instances:
         name = i["instance_type"]
         itype = name.split(".")[1]
-        suffix = ''.join(name.split(".")[2:])
+        suffix = "".join(name.split(".")[2:])
         variant = itype[0:2]
 
         if variant not in variant_families:
@@ -136,7 +147,7 @@ def assemble_the_families(instances):
         if itype not in instance_fam_map:
             instance_fam_map[itype] = [member]
         else:
-            instance_fam_map[itype].append(member)        
+            instance_fam_map[itype].append(member)
 
         # The second list, where we will get the family from knowing the instance
         families[name] = itype
@@ -166,7 +177,7 @@ def prices(pricing):
 
             # Doing a lot of work to deal with prices having up to 6 places
             # after the decimal, as well as prices not existing for all regions
-            # and operating systems. 
+            # and operating systems.
             try:
                 display_prices[region][os]["ondemand"] = _p["ondemand"]
             except KeyError:
@@ -191,7 +202,7 @@ def prices(pricing):
                 display_prices[region][os]["_3yr"] = reserved
             except KeyError:
                 display_prices[region][os]["_3yr"] = "N/A"
-    
+
     return display_prices
 
 
@@ -201,10 +212,10 @@ def load_service_attributes():
         "storage",
         "pricing",
     ]
-    data_file = 'meta/service_attributes_rds.csv'
+    data_file = "meta/service_attributes_rds.csv"
 
     display_map = {}
-    with open(data_file, 'r') as f:
+    with open(data_file, "r") as f:
         reader = csv.reader(f)
 
         for i, row in enumerate(reader):
@@ -227,12 +238,12 @@ def load_service_attributes():
                 "value": None,
                 "variant_family": row[1][0:2],
             }
-            
+
     return display_map
 
 
 def map_rds_attributes(i, imap):
-    # For now, manually transform the instance data we receive from AWS 
+    # For now, manually transform the instance data we receive from AWS
     # into the format we want to render. Later we can create this in YAML
     # and use a standard function that maps names
     categories = [
@@ -250,7 +261,7 @@ def map_rds_attributes(i, imap):
     for j, k in i.items():
 
         display = imap[j]
-        display["value"] = k if j != 'pricing' else {}
+        display["value"] = k if j != "pricing" else {}
 
         if display["regex"]:
             toparse = str(display["value"])
@@ -260,7 +271,7 @@ def map_rds_attributes(i, imap):
                 display["value"] = match.group()
             # else:
             #     print("No match found for {} with regex {}".format(toparse, regex))
-        
+
         if display["style"]:
             v = str(display["value"]).lower()
             # print(v)  # print styling value
@@ -276,35 +287,37 @@ def map_rds_attributes(i, imap):
                 display["value"] = "previous"
 
         instance_details[display["category"]].append(display)
-    
+
     # Sort the instance attributes in each category alphabetically,
     # another general-purpose option could be to sort by value data type
     for c in categories:
         instance_details[c].sort(key=lambda x: int(x["order"]))
 
-    instance_details['Pricing'] = prices(i["pricing"])
+    instance_details["Pricing"] = prices(i["pricing"])
     # print(json.dumps(instance_details, indent=4))
     return instance_details
 
 
 def build_detail_pages_rds(instances, destination_file):
     # Extract which service these instances belong to, for example EC2 is loaded at /
-    service_path = destination_file.split('/')[1]
+    service_path = destination_file.split("/")[1]
     data_file = "community_contributions.yaml"
     stream = open(data_file, "r")
     community_data = list(yaml.load_all(stream, Loader=yaml.SafeLoader))
 
     # Find the right path to write these files to. There is a .gitignore file
     # in each directory so that these generated files are not committed
-    subdir = os.path.join('www', 'aws', 'ec2')
-    if service_path != 'index.html':
-        subdir = os.path.join('www', 'aws', service_path)
+    subdir = os.path.join("www", "aws", "ec2")
+    if service_path != "index.html":
+        subdir = os.path.join("www", "aws", service_path)
 
     ifam, fam_lookup, variants = assemble_the_families(instances)
     imap = load_service_attributes()
 
     lookup = mako.lookup.TemplateLookup(directories=["."])
-    template = mako.template.Template(filename='in/instance-type-rds.html.mako', lookup=lookup)
+    template = mako.template.Template(
+        filename="in/instance-type-rds.html.mako", lookup=lookup
+    )
 
     # To add more data to a single instance page, do so inside this loop
     could_not_render = []
@@ -312,7 +325,7 @@ def build_detail_pages_rds(instances, destination_file):
     for i in instances:
         instance_type = i["instance_type"]
 
-        instance_page = os.path.join(subdir, instance_type + '.html')
+        instance_page = os.path.join(subdir, instance_type + ".html")
         instance_details = map_rds_attributes(i, imap)
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
@@ -324,27 +337,26 @@ def build_detail_pages_rds(instances, destination_file):
         print("Rendering %s to detail page %s..." % (instance_type, instance_page))
         with io.open(instance_page, "w+", encoding="utf-8") as fh:
             try:
-                fh.write(template.render(
-                    i=instance_details,
-                    family=fam_members,
-                    description=idescription,
-                    links=links,
-                    unavailable=denylist,
-                    defaults=defaults,
-                    variants=variants[instance_type[3:5]],
-                ))
+                fh.write(
+                    template.render(
+                        i=instance_details,
+                        family=fam_members,
+                        description=idescription,
+                        links=links,
+                        unavailable=denylist,
+                        defaults=defaults,
+                        variants=variants[instance_type[3:5]],
+                    )
+                )
                 sitemap.append(instance_page)
             except:
-                render_err = mako.exceptions.text_error_template().render() 
-                err = {
-                    "e": "ERROR for " + instance_type, 
-                    "t": render_err
-                }
+                render_err = mako.exceptions.text_error_template().render()
+                err = {"e": "ERROR for " + instance_type, "t": render_err}
 
                 could_not_render.append(err)
         # break
-        
-    [print(err["e"], '{}'.format(err["t"])) for err in could_not_render]
+
+    [print(err["e"], "{}".format(err["t"])) for err in could_not_render]
     [print(page["e"]) for page in could_not_render]
 
     return sitemap
