@@ -136,17 +136,7 @@
 
     </div>
 
-    <!--
-    <div class="form-inline" id="filters">
-      <strong> Filter:</strong>
-      Min Memory (GiB): <input data-action="datafilter" data-type="memory" class="form-control" />
-      Min vCPUs: <input data-action="datafilter" data-type="vcpus" class="form-control" />
-      Min Memory/vCPU (Gib/vCPU): <input data-action="datafilter" data-type="memory-per-vcpu" class="form-control" />
-      Min Storage (GiB): <input data-action="datafilter" data-type="storage" class="form-control" />
-    </div>
-    -->
-
-  <div style="height:100%" class="table-responsive overflow-auto ms-2">
+  <div style="height:100%" class="table-responsive overflow-auto ms-2 preserve-border">
     <table cellspacing="0" class="table" id="data">
       <thead>
         <tr>

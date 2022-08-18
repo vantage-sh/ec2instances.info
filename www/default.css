@@ -44,7 +44,8 @@ body {
 }
 
 #data {
-  margin-top: 10px;
+  margin-top: 0px !important;
+  border-width: 0px !important;
   clear: both;
 }
 
@@ -173,6 +174,11 @@ table.table thead .sorting_desc_disabled {
 table.table thead {
   position: sticky;
   top: 0;
+}
+
+.preserve-border {
+  border: 1px solid #e3e3e9;
+  border-radius: 6px;
 }
 
 /* table.table thead .sorting {

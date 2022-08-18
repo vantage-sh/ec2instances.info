@@ -55,17 +55,18 @@ function init_data_table() {
       bSmart: false,
     },
     dom: 'Bt',
-    fixedHeader: true,
+    fixedHeader: true, 
     select: {
-      style:    'os',
-      selector: 'td:first-child'
+      style: 'ec2-checkbox'
     },
     aoColumnDefs: [
       {
           orderable: false,
-          className: 'select-checkbox',
+          className: '',
           targets:   0,
+      },
         // The columns below are sorted according to the sort attr of the <span> tag within their data cells
+        {
         aTargets: [
           'memory',
           'computeunits',
@@ -544,7 +545,6 @@ function on_data_table_initialized() {
 
   // apply highlight to selected rows
   $.each(g_settings.selected.split(','), function (_, id) {
-    console.log(id);
     id = id.replace('.', '\\.');
     if (id === "") { 
       return; 
