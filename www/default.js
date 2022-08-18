@@ -66,7 +66,7 @@ function init_data_table() {
           targets:   0,
       },
         // The columns below are sorted according to the sort attr of the <span> tag within their data cells
-        {
+      {
         aTargets: [
           'memory',
           'computeunits',
@@ -405,7 +405,7 @@ function setup_column_toggle() {
       $('<li>')
         .toggleClass('active', column.visible())
         .append(
-          $('<a>', {href: 'javascript:;'})
+          $('<a class="dropdown-item">', {href: 'javascript:;'})
             .text($(column.header()).text())
             .click(function (e) {
               toggle_column(i);

@@ -118,15 +118,21 @@ body {
   text-align: left;
 }
 
-/* Bootstrap overrides */
 .dropdown-menu .active a {
   color: #fff !important;
   background: #9c25c7 !important;
 }
 
-.dropdown-menu li > a:hover {
+.dropdown-menu li:hover {
   background: #f9e6ff !important;
 }
+
+.dropdown-menu li > a {
+  color: #303037 !important;
+  text-decoration: none !important;
+}
+
+.dropdown-menu{ max-height:400px; overflow:auto; }
 
 .share-url {
   text-align: left;
@@ -179,6 +185,12 @@ table.table thead {
 .preserve-border {
   border: 1px solid #e3e3e9;
   border-radius: 6px;
+}
+
+.dropdown-label {
+  font-size: 12px;
+  color: #6c757d;
+  font-weight: 600;
 }
 
 /* table.table thead .sorting {
