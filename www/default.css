@@ -133,7 +133,7 @@ body {
   background: #9c25c7 !important;
 }
 
-.dropdown-menu li:hover {
+.dropdown-menu li > a:hover {
   background: #f9e6ff !important;
 }
 
@@ -189,10 +189,12 @@ body {
   color: #303037 !important;
   background-color: #fff !important;
   border-color: #e3e3e9 !important;
-  /*
-  background-color: #9c25c7 !important;
-  border-color: #5a0a76 !important;
-  */
+  outline-color: #f9e6ff !important;
+}
+
+.btn.btn-danger {
+  background-color: #b84737 !important;
+  outline-color: #f8b6ad !important;
 }
 
 .btn-primary:hover {

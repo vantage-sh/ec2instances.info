@@ -405,7 +405,7 @@ function setup_column_toggle() {
       $('<li>')
         .toggleClass('active', column.visible())
         .append(
-          $('<a class="dropdown-item">', {href: 'javascript:;'})
+          $('<a class="dropdown-item" href="javascript:;">')
             .text($(column.header()).text())
             .click(function (e) {
               toggle_column(i);
@@ -725,11 +725,11 @@ function update_compare_button() {
   if (!g_settings.compare_on) {
     $compareBtn
       .text($compareBtn.data('textOff'))
-      .addClass('btn-primary')
-      .removeClass('btn-success')
+      .addClass('btn-purple')
+      .removeClass('btn-danger')
       .prop('disabled', !$rows.is('.highlight'));
   } else {
-    $compareBtn.text($compareBtn.data('textOn')).addClass('btn-success').removeClass('btn-primary');
+    $compareBtn.text($compareBtn.data('textOn')).addClass('btn-danger').removeClass('btn-purple');
   }
 }
 

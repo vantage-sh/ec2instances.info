@@ -123,7 +123,7 @@
 
         <div class="btn-group-vertical">
         <label class="dropdown-label mb-1"><br></label>
-        <button class="btn btn-primary btn-compare"
+        <button class="btn btn-purple btn-compare"
           data-text-on="End Compare"
           data-text-off="Compare Selected">
           Compare Selected
@@ -148,10 +148,9 @@
         </div>
 
       </div>
-
     </div>
 
-  <div style="height:80%" class="table-responsive overflow-auto ms-2 preserve-border">
+  <div style="height:78%" class="table-responsive overflow-auto ms-2 preserve-border">
     <table cellspacing="0" class="table" id="data">
       <thead>
         <tr>
