@@ -19,6 +19,14 @@ body {
   font-weight: bold;
 }
 
+.nav-position {
+  margin-right: auto;
+}
+
+.nav .active {
+  background-color: white;
+}
+
 .ec2instances .page-header {
   margin-top: 0;
   border-bottom: 0;
@@ -44,7 +52,8 @@ body {
 }
 
 #data {
-  margin-top: 10px;
+  margin-top: 0px !important;
+  border-width: 0px !important;
   clear: both;
 }
 
@@ -114,10 +123,19 @@ body {
 }
 
 #data td.apiname {
+  font-family: 'Roboto Mono', monospace;
   text-align: left;
 }
 
-/* Bootstrap overrides */
+#data td.apiname a {
+  color: #9c25c7;
+}
+
+#data td.apiname a:hover,
+#data td.apiname a:focus {
+  color: #5a0a76;
+}
+
 .dropdown-menu .active a {
   color: #fff !important;
   background: #9c25c7 !important;
@@ -125,6 +143,23 @@ body {
 
 .dropdown-menu li > a:hover {
   background: #f9e6ff !important;
+}
+
+.dropdown-menu li > a {
+  color: #303037 !important;
+  text-decoration: none !important;
+}
+
+.dropdown-menu {
+  max-height: 400px;
+  overflow: auto;
+}
+
+.dropdown-label {
+  font-size: 12px;
+  color: #6c757d;
+  font-weight: 600;
+  padding-left: 12px;
 }
 
 .share-url {
@@ -138,22 +173,44 @@ body {
   padding: 3px 0px;
 }
 
-.well p:last-child {
-  margin-bottom: 0;
+.well {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.well .right {
+  text-align: right;
+}
+
+.well .right a {
+  font-family: 'Roboto Mono', monospace;
+  color: #9c25c7;
+  text-decoration: none;
+}
+
+.well .right a:hover,
+.well .right a:focus {
+  color: #5a0a76;
 }
 
 .btn-primary {
-  color: #fff !important;
-  background-color: #9c25c7 !important;
-  border-color: #5a0a76 !important;
+  color: #303037 !important;
+  background-color: #fff !important;
+  border-color: #e3e3e9 !important;
+  outline-color: #f9e6ff !important;
+}
+
+.btn.btn-danger {
+  background-color: #b84737 !important;
+  outline-color: #f8b6ad !important;
 }
 
 .btn-primary:hover {
-  color: #fff !important;
+  color: #303037 !important;
 }
 
 .btn-primary:active {
-  color: #fff !important;
+  color: #303037 !important;
 }
 
 /* DataTables: http://datatables.net/blog/Twitter_Bootstrap_2 */
@@ -166,7 +223,25 @@ table.table thead .sorting_desc_disabled {
   *cursor: hand;
 }
 
-table.table thead .sorting {
+table.table thead {
+  position: sticky;
+  top: 0;
+}
+
+table.table-mono th {
+  background-color: #ffffff !important;
+}
+
+table.table abbr {
+  text-decoration: underline !important;
+}
+
+.preserve-border {
+  border: 1px solid #e3e3e9;
+  border-radius: 6px;
+}
+
+/* table.table thead .sorting {
   background: url('datatables/images/sort_both.png') no-repeat center right;
 }
 table.table thead .sorting_asc {
@@ -181,7 +256,7 @@ table.table thead .sorting_asc_disabled {
 }
 table.table thead .sorting_desc_disabled {
   background: url('datatables/images/sort_desc_disabled.png') no-repeat center right;
-}
+} */
 
 /* This class is applied to the DataTables search box by our own code once it renders */
 input.search {
