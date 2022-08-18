@@ -25,6 +25,6 @@ jobs:
           key: ${{ runner.os }}-npm-prettier
           restore-keys: |
             ${{ runner.os }}-npm-
-      - run: npm install -g prettier@2.6.2
+      - run: npm install -g prettier@2.7.1
       - run: |-
           prettier --check .

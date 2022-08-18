@@ -2,9 +2,9 @@ with builtins;
 { pkgs ? import
     (
       fetchTarball {
-        name = "nixpkgs-unstable-2022-04-21";
-        url = "https://github.com/NixOS/nixpkgs/archive/76b68621e88f674922aa70276a8333f319ce9c05.tar.gz";
-        sha256 = "0c02rxy51jyvmim3h394xjxb6wmnla52mdx1h7rq8x0cf47wmfq4";
+        name = "nixpkgs-unstable-2022-08-17";
+        url = "https://github.com/NixOS/nixpkgs/archive/6c6409e965a6c883677be7b9d87a95fab6c3472e.tar.gz";
+        sha256 = "0l1py0rs1940wx76gpg66wn1kgq2rv2m9hzrhq5isz42hdpf4q6r";
       }
     )
     {
@@ -28,18 +28,19 @@ let
       jq
     ];
     formatters = [
-      black
       nixpkgs-fmt
       nodePackages.prettier
     ];
     python = [
-      (python39.withPackages (p: with p; lib.flatten [
+      (python39.withPackages (p: with p; [
+        black
         boto
         boto3
         (invocations.overridePythonAttrs (old: { propagatedBuildInputs = old.propagatedBuildInputs ++ [ tqdm ]; }))
         invoke
         lxml
         Mako
+        pyyaml
         requests
         six
       ]))
