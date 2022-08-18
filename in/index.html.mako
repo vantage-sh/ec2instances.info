@@ -151,7 +151,7 @@
 
     </div>
 
-  <div style="height:100%" class="table-responsive overflow-auto ms-2 preserve-border">
+  <div style="height:80%" class="table-responsive overflow-auto ms-2 preserve-border">
     <table cellspacing="0" class="table" id="data">
       <thead>
         <tr>

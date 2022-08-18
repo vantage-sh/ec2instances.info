@@ -165,8 +165,24 @@ body {
   padding: 3px 0px;
 }
 
-.well p:last-child {
-  margin-bottom: 0;
+.well {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.well .right {
+  text-align: right;
+}
+
+.well .right a {
+  font-family: 'Roboto Mono', monospace;
+  color: #9c25c7;
+  text-decoration: none;
+}
+
+.well .right a:hover,
+.well .right a:focus {
+  color: #5a0a76;
 }
 
 .btn-primary {

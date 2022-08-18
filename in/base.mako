@@ -67,6 +67,7 @@
 
     ${self.body()}
 
+    <!--
     <div class="well">
       <p>
         <strong>Why?</strong>
@@ -85,6 +86,16 @@
         <strong>Warning:</strong> This site is not maintained by or affiliated with Amazon. The data shown is not guaranteed to be accurate or current. Please <a href="http://github.com/powdahound/ec2instances.info/issues">report issues</a> you see.
       </p>
 
+    </div>
+    -->
+    <div class="well row ms-2 mt-1 me-2">
+        <div class="col-4">
+          <span>Last updated ${generated_at}</span>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4 right">
+          <span><a href="https://github.com/vantage-sh/ec2instances.info/issues/new">File Issue</a>. Maintained by <a target="_blank" href="https://vantage.sh/">Vantage</a>.</span>
+        </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
