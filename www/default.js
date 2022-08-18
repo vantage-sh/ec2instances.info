@@ -527,6 +527,10 @@ var apply_min_values = function () {
   maybe_update_url();
 };
 
+function jq( myid ) {
+  return "#" + myid.replace( /(:|\.|\[|\]|,|=|@)/g, "\\$1" );
+}
+
 function on_data_table_initialized() {
   if (g_app_initialized) return;
   g_app_initialized = true;
@@ -534,22 +538,16 @@ function on_data_table_initialized() {
   load_settings();
 
   // populate filter inputs
-  // $('[data-action="datafilter"][data-type="memory"]').val(g_settings['min_memory']);
-  // $('[data-action="datafilter"][data-type="vcpus"]').val(g_settings['min_vcpus']);
-  // $('[data-action="datafilter"][data-type="memory-per-vcpu"]').val(
-  //   g_settings['min_memory_per_vcpu'],
-  // );
-  // $('[data-action="datafilter"][data-type="storage"]').val(g_settings['min_storage']);
   g_data_table.search(g_settings['filter']);
   apply_min_values();
 
   // apply highlight to selected rows
   $.each(g_settings.selected.split(','), function (_, id) {
-    id = id.replace('.', '\\.');
+    // get an instance id like 't3.nano' from the URL, making sure to escape it
     if (id === "") { 
       return; 
     } else {
-      $(id).addClass('highlight');
+      $(jq(id)).addClass('highlight');
     }
   });
 
@@ -573,7 +571,8 @@ function on_data_table_initialized() {
   // enable bootstrap tooltips
   $('abbr').tooltip({
     placement: function (tt, el) {
-      return this.$element.parents('thead').length ? 'top' : 'right';
+      // if the cell is in the header, show the tooltip on top
+      return $(this).parents('thead').length ? 'top' : 'right';
     },
   });
 

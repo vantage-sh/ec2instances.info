@@ -115,7 +115,17 @@ body {
 }
 
 #data td.apiname {
+  font-family: 'Roboto Mono', monospace;
   text-align: left;
+}
+
+#data td.apiname a {
+  color: #9c25c7;
+}
+
+#data td.apiname a:hover,
+#data td.apiname a:focus {
+  color: #5a0a76;
 }
 
 .dropdown-menu .active a {
@@ -132,7 +142,17 @@ body {
   text-decoration: none !important;
 }
 
-.dropdown-menu{ max-height:400px; overflow:auto; }
+.dropdown-menu {
+  max-height: 400px;
+  overflow: auto;
+}
+
+.dropdown-label {
+  font-size: 12px;
+  color: #6c757d;
+  font-weight: 600;
+  padding-left: 12px;
+}
 
 .share-url {
   text-align: left;
@@ -182,15 +202,17 @@ table.table thead {
   top: 0;
 }
 
+table.table-mono th {
+  background-color: #ffffff !important;
+}
+
+table.table abbr {
+  text-decoration: underline !important;
+}
+
 .preserve-border {
   border: 1px solid #e3e3e9;
   border-radius: 6px;
-}
-
-.dropdown-label {
-  font-size: 12px;
-  color: #6c757d;
-  font-weight: 600;
 }
 
 /* table.table thead .sorting {
