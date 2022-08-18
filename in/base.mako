@@ -4,7 +4,6 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <%block name="meta"/>
-    ## <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" media="screen">
     <link rel="stylesheet" href="/default.css" media="screen">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
@@ -41,6 +40,13 @@
           Contribute
         </a>
       </div>
+      <!--
+      <ul class="nav nav-tabs nav-position">
+        <li role="presentation" class="${'active' if self.attr.active_ == 'ec2' else ''}"><a href="/">EC2</a></li>
+        <li role="presentation" class="${'active' if self.attr.active_ == 'rds' else ''}"><a href="/rds/">RDS</a></li>
+        <li role="presentation" class="${'active' if self.attr.active_ == 'cache' else ''}"><a href="/cache/">ElastiCache</a></li>
+      </ul>
+      -->
       <div class="nav-buttons">
         <a href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-purple btn-icon">
           <svg class="me-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,7 +100,7 @@
         </div>
         <div class="col-4"></div>
         <div class="col-4 right">
-          <span><a href="https://github.com/vantage-sh/ec2instances.info/issues/new">File Issue</a>. Maintained by <a target="_blank" href="https://vantage.sh/">Vantage</a>.</span>
+          <span><!--<a href="https://github.com/vantage-sh/ec2instances.info/issues/new">File Issue</a>. -->Maintained by <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
         </div>
     </div>
 

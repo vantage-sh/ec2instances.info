@@ -19,6 +19,14 @@ body {
   font-weight: bold;
 }
 
+.nav-position {
+  margin-right: auto;
+}
+
+.nav .active {
+  background-color: white;
+}
+
 .ec2instances .page-header {
   margin-top: 0;
   border-bottom: 0;
