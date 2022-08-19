@@ -114,7 +114,7 @@
         </div>
         <div class="col-4"></div>
         <div class="col-4 right">
-          <span><!--<a href="https://github.com/vantage-sh/ec2instances.info/issues/new">File Issue</a>. -->Maintained by <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
+          <span><!--<a href="https://github.com/vantage-sh/ec2instances.info/issues/new">File Issue</a>. -->Hosted by <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
         </div>
     </div>
 
