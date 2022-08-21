@@ -110,6 +110,7 @@
         </div>
 
         <div class="btn-group-vertical" id="filter-dropdown">
+          <!-- blank label maintains spacing -->
           <label class="dropdown-label mb-1"><br></label>
           <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-filter icon-white"></i>
@@ -122,19 +123,19 @@
         </div>
 
         <div class="btn-group-vertical">
-        <label class="dropdown-label mb-1"><br></label>
-        <button class="btn btn-purple btn-compare"
-          data-text-on="End Compare"
-          data-text-off="Compare Selected">
-          Compare Selected
-        </button>
+          <label class="dropdown-label mb-1"><br></label>
+          <button class="btn btn-purple btn-compare"
+            data-text-on="End Compare"
+            data-text-off="Compare Selected">
+            Compare Selected
+          </button>
         </div>
 
         <div class="btn-group-vertical">
-        <label class="dropdown-label mb-1"><br></label>
-        <button class="btn btn-primary btn-clear" id="clear">
-          Clear Filters
-        </button>
+          <label class="dropdown-label mb-1"><br></label>
+          <button class="btn btn-primary btn-clear" id="clear">
+            Clear Filters
+          </button>
         </div>
 
         <div class="btn-group-vertical float-end m2 p2" id="search">
@@ -262,6 +263,7 @@
           </th>
         </tr>
       </thead>
+
       <tbody>
         % for inst in instances:
           <tr class='instance' id="${inst['instance_type']}">

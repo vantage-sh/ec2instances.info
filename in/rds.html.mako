@@ -10,120 +10,152 @@
       <meta name="description" content="A free and easy-to-use tool for comparing RDS Instance features and prices."></head>
     </%block>
 
+    <!--
     <%block name="header">
     <h1>EC2Instances.info <small>Easy Amazon <b>RDS</b> Instance Comparison</small></h1>
     </%block>
+    -->
 
-    <div class="row" id="menu">
-      <div class="col-sm-12">
-        <div class="btn-group" id='region-dropdown'>
-          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+    <div class="row mt-3 me-2" id="menu">
+      <div class="col-sm-12 ms-2">
+
+        <div class="btn-group-vertical" id='region-dropdown'>
+          <label class="dropdown-label mb-1">Region</label>
+          <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-globe icon-white"></i>
-            Region: <span class="text"></span>
+            <span class="text">US East (N. Virginia)</span>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="javascript:;" data-region='af-south-1'>Africa (Cape Town)</a></li>
-            <li><a href="javascript:;" data-region='ap-east-1'>Asia-Pacific (Hong Kong)</a></li>
-            <li><a href="javascript:;" data-region='ap-south-1'>Asia-Pacific (Mumbai)</a></li>
-            <li><a href="javascript:;" data-region='ap-northeast-3'>Asia Pacific (Osaka-Local)</a></li>
-            <li><a href="javascript:;" data-region='ap-northeast-2'>Asia-Pacific (Seoul)</a></li>
-            <li><a href="javascript:;" data-region='ap-southeast-1'>Asia-Pacific (Singapore)</a></li>
-            <li><a href="javascript:;" data-region='ap-southeast-2'>Asia-Pacific (Sydney)</a></li>
-            <li><a href="javascript:;" data-region='ap-southeast-3'>Asia-Pacific (Jakarta)</a></li>
-            <li><a href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
-            <li><a href="javascript:;" data-region='ca-central-1'>Canada (Central)</a></li>
-            <li><a href="javascript:;" data-region='eu-central-1'>Europe (Frankfurt)</a></li>
-            <li><a href="javascript:;" data-region='eu-west-1'>Europe (Ireland)</a></li>
-            <li><a href="javascript:;" data-region='eu-west-2'>Europe (London)</a></li>
-            <li><a href="javascript:;" data-region='eu-west-3'>Europe (Paris)</a></li>
-            <li><a href="javascript:;" data-region='eu-north-1'>Europe (Stockholm)</a></li>
-            <li><a href="javascript:;" data-region='eu-south-1'>Europe (Milan)</a></li>
-            <li><a href="javascript:;" data-region='me-south-1'>Middle East (Bahrain)</a></li>
-            <li><a href="javascript:;" data-region='sa-east-1'>South America (S&atilde;o Paulo)</a></li>
-            <li><a href="javascript:;" data-region='us-east-1'>US East (N. Virginia)</a></li>
-            <li><a href="javascript:;" data-region='us-east-2'>US East (Ohio)</a></li>
-            <li><a href="javascript:;" data-region='us-west-1'>US West (Northern California)</a></li>
-            <li><a href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
-            <li><a href="javascript:;" data-region='us-gov-west-1'>AWS GovCloud (US-West)</a></li>
-            <li><a href="javascript:;" data-region='us-gov-east-1'>AWS GovCloud (US-East)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='af-south-1'>Africa (Cape Town)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='ap-east-1'>Asia-Pacific (Hong Kong)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='ap-south-1'>Asia-Pacific (Mumbai)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='ap-northeast-3'>Asia Pacific (Osaka-Local)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='ap-northeast-2'>Asia-Pacific (Seoul)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='ap-southeast-1'>Asia-Pacific (Singapore)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='ap-southeast-2'>Asia-Pacific (Sydney)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='ap-southeast-3'>Asia-Pacific (Jakarta)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='ca-central-1'>Canada (Central)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='eu-central-1'>Europe (Frankfurt)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='eu-west-1'>Europe (Ireland)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='eu-west-2'>Europe (London)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='eu-west-3'>Europe (Paris)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='eu-north-1'>Europe (Stockholm)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='eu-south-1'>Europe (Milan)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='me-south-1'>Middle East (Bahrain)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='sa-east-1'>South America (S&atilde;o Paulo)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='us-east-1'>US East (N. Virginia)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='us-east-2'>US East (Ohio)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='us-west-1'>US West (Northern California)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='us-gov-west-1'>AWS GovCloud (US-West)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='us-gov-east-1'>AWS GovCloud (US-East)</a></li>
           </ul>
         </div>
 
-        <div class="btn-group" id="pricing-unit-dropdown">
-          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+        <div class="btn-group-vertical" id="pricing-unit-dropdown">
+          <label class="dropdown-label mb-1">Pricing Unit</label>
+          <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-shopping-cart icon-white"></i>
-            Pricing Unit: <span class="text"></span>
+            <span class="text">Instance</span>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="javascript:;" pricing-unit="instance">Instance</a></li>
-            <li><a href="javascript:;" pricing-unit="vcpu">vCPU</a></li>
-            <li><a href="javascript:;" pricing-unit="memory">Memory</a></li>
+            <li class="active"><a class="dropdown-item" href="javascript:;" pricing-unit="instance">Instance</a></li>
+            <li><a class="dropdown-item" href="javascript:;" pricing-unit="vcpu">vCPU</a></li>
+            <li><a class="dropdown-item" href="javascript:;" pricing-unit="memory">Memory</a></li>
           </ul>
         </div>
 
-        <div class="btn-group" id="cost-dropdown">
-          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+        <div class="btn-group-vertical" id="cost-dropdown">
+          <label class="dropdown-label mb-1">Cost</label>
+          <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" href="#">
             <i class="icon-shopping-cart icon-white"></i>
-            Cost: <span class="text"></span>
+            <span class="text">Hourly</span>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="javascript:;" duration="hourly">Hourly</a></li>
-            <li><a href="javascript:;" duration="daily">Daily</a></li>
-            <li><a href="javascript:;" duration="weekly">Weekly</a></li>
-            <li><a href="javascript:;" duration="monthly">Monthly</a></li>
-            <li><a href="javascript:;" duration="annually">Annually</a></li>
+            <li class="active"><a class="dropdown-item" href="javascript:;" duration="hourly">Hourly</a></li>
+            <li><a class="dropdown-item" href="javascript:;" duration="daily">Daily</a></li>
+            <li><a class="dropdown-item" href="javascript:;" duration="weekly">Weekly</a></li>
+            <li><a class="dropdown-item" href="javascript:;" duration="monthly">Monthly</a></li>
+            <li><a class="dropdown-item" href="javascript:;" duration="annually">Annually</a></li>
           </ul>
         </div>
 
-        <div class="btn-group" id='reserved-term-dropdown'>
-          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+        <div class="btn-group-vertical" id='reserved-term-dropdown'>
+          <label class="dropdown-label mb-1">Reserved</label>
+          <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" href="#">
             <i class="icon-globe icon-white"></i>
-            Reserved: <span class="text">1 yr - No Upfront</span>
+            <span class="text">1 yr - No Upfront</span>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="javascript:;" data-reserved-term='yrTerm1.noUpfront'>1 yr - No Upfront</a></li>
-            <li><a href="javascript:;" data-reserved-term='yrTerm1.partialUpfront'>1 yr - Partial Upfront</a></li>
-            <li><a href="javascript:;" data-reserved-term='yrTerm1.allUpfront'>1 yr - Full Upfront</a></li>
-            <li><a href="javascript:;" data-reserved-term='yrTerm3.partialUpfront'>3 yr - Partial Upfront</a></li>
-            <li><a href="javascript:;" data-reserved-term='yrTerm3.allUpfront'>3 yr - Full Upfront</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1.noUpfront'>1 yr - No Upfront</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1.partialUpfront'>1 yr - Partial Upfront</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1.allUpfront'>1 yr - Full Upfront</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3.partialUpfront'>3 yr - Partial Upfront</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3.allUpfront'>3 yr - Full Upfront</a></li>
           </ul>
         </div>
 
-        <div class="btn-group" id="filter-dropdown">
-          <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+        <div class="btn-group-vertical" id="filter-dropdown">
+          <!-- blank label maintains spacing -->
+          <label class="dropdown-label mb-1"><br></label>
+          <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" href="#">
             <i class="icon-filter icon-white"></i>
             Columns
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
+            <!-- table header elements inserted by js -->
           </ul>
         </div>
 
-        <button class="btn btn-primary btn-compare"
-          data-text-on="End Compare"
-          data-text-off="Compare Selected">
-          Compare Selected
-        </button>
+        <div class="btn-group-vertical">
+          <label class="dropdown-label mb-1"><br></label>
+          <button class="btn btn-purple btn-compare"
+            data-text-on="End Compare"
+            data-text-off="Compare Selected">
+            Compare Selected
+          </button>
+        </div>
 
-        <button class="btn btn-primary btn-clear">
-          Clear Filters
-        </button>
+        <div class="btn-group-vertical">
+          <label class="dropdown-label mb-1"><br></label>
+          <button class="btn btn-primary btn-clear" id="clear">
+            Clear Filters
+          </button>
+        </div>
+
+        <div class="btn-group-vertical float-end m2 p2" id="search">
+          <label class="dropdown-label mb-1"><br></label>
+          <input id="fullsearch" type="text" class="form-control" placeholder="Search...">
+        </div>
+
+        <div class="btn-group-vertical float-end px-2">
+          <label class="dropdown-label mb-1"><br></label>
+          <div class="btn-primary" id="export"></div>
+        </div>
+
       </div>
     </div>
 
+    <!--
     <div class="pull-left form-inline" id="filters">
       <strong> Filter:</strong>
       Min Memory (GiB): <input data-action="datafilter" data-type="memory" class="form-control" />
       Min vCPUs: <input data-action="datafilter" data-type="vcpus" class="form-control" />
     </div>
+    -->
 
-    <table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">
+  <div style="height:78%" class="table-responsive overflow-auto ms-2 preserve-border">
+    <!--<table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">-->
+    <table cellspacing="0" class="table" id="data">
       <thead>
         <tr>
+          <th></th>
           <th class="name">Name</th>
           <th class="apiname">API Name</th>
           <th class="memory">Memory</th>
@@ -144,8 +176,9 @@
         </tr>
       </thead>
       <tbody>
-% for inst in instances:
+        % for inst in instances:
         <tr class='instance' id="${inst['instance_type']}">
+          <td></td>
           <td class="name">${inst['pretty_name']}</a></td>
           <td class="apiname"><a href="/aws/rds/${inst['instance_type']}">${inst['instance_type']}</a></td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
@@ -204,6 +237,7 @@
           </td>
           % endfor
         </tr>
-% endfor
+        % endfor
       </tbody>
     </table>
+  </div>
