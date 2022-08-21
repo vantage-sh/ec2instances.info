@@ -21,6 +21,37 @@ body {
 
 .nav-position {
   margin-right: auto;
+  border-bottom: 0 !important;
+  padding-bottom: 0px !important;
+}
+
+.nav-position li {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background-color: #5A0B76;
+  margin-right: 2px;
+}
+
+.nav-position li:active {
+  background-color: #fff;
+}
+
+.nav-position a {
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none !important;
+}
+
+.nav-position li a {
+  color: #fff;
+}
+
+.nav-position li a:focus {
+  color: #303037;
+}
+
+.nav-position li.active a {
+  color: #303037 !important;
 }
 
 .nav .active {
@@ -30,6 +61,10 @@ body {
 .ec2instances .page-header {
   margin-top: 0;
   border-bottom: 0;
+}
+
+.adjust-for-tabs {
+  padding-bottom: 12px;
 }
 
 .dataTables_filter {

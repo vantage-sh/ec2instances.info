@@ -17,7 +17,7 @@
   </head>
 
   <body class="ec2instances">
-    <div class="nav">
+    <div class="nav pb-0">
       <div class="logo-group">
         <a href="/" class="logo">
         <svg width="135" height="28" viewBox="0 0 135 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,13 +40,29 @@
           Contribute
         </a>
       </div>
-      <!--
-      <ul class="nav nav-tabs nav-position">
-        <li role="presentation" class="${'active' if self.attr.active_ == 'ec2' else ''}"><a href="/">EC2</a></li>
-        <li role="presentation" class="${'active' if self.attr.active_ == 'rds' else ''}"><a href="/rds/">RDS</a></li>
-        <li role="presentation" class="${'active' if self.attr.active_ == 'cache' else ''}"><a href="/cache/">ElastiCache</a></li>
+      <ul class="nav nav-tabs nav-buttons nav-position">
+        <li role="presentation" class="${'active' if self.attr.active_ == 'ec2' else ''}">
+          <a href="/">
+          <div class="mx-4 mb-3 mt-2">
+            EC2
+          </div>
+          </a>
+        </li>
+        <li role="presentation" class="${'active' if self.attr.active_ == 'rds' else ''}">
+          <a href="/rds">
+            <div class="mx-4 mb-3 mt-2">
+              RDS
+            </div>
+          </a>
+        </li>
+        <li role="presentation" class="${'active' if self.attr.active_ == 'cache' else ''}">
+          <a href="/cache">
+            <div class="mx-4 mb-3 mt-2">
+              ElastiCache  
+            </div>
+          </a>
+        </li>
       </ul>
-      -->
       <div class="nav-buttons">
         <a href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-purple btn-icon">
           <svg class="me-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,18 +72,6 @@
         </a>
       </div>
     </div>
-    <!--
-    <div class="page-header">
-      <span class="pull-right">
-        <iframe src="https://ghbtns.com/github-btn.html?user=vantage-sh&repo=ec2instances.info&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
-      </span>
-      <ul class="nav nav-tabs">
-        <li role="presentation" class="${'active' if self.attr.active_ == 'ec2' else ''}"><a href="/">EC2</a></li>
-        <li role="presentation" class="${'active' if self.attr.active_ == 'rds' else ''}"><a href="/rds/">RDS</a></li>
-        <li role="presentation" class="${'active' if self.attr.active_ == 'cache' else ''}"><a href="/cache/">ElastiCache</a></li>
-      </ul>
-    </div>
-    -->
 
     <div class="clearfix"></div>
 
