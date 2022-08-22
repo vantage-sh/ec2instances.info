@@ -24,19 +24,45 @@ function init_data_table() {
   $('#data thead tr:eq(1) th').each(function (i) {
     // don't add a filter bar to the checkbox column (column 0)
     if (i == 0) { return; }
-    if (i == 3) {
-      $(this).html("<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>");
-      return;
-    } else if (i == 5) {
-      $(this).html("<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>");
-      return;
-    } else if (i == 6) {
-      $(this).html("<input data-action='datafilter' data-type='memory-per-vcpu' class='form-control' placeholder='Min Mem/vCPU: 0'/>");
-      return;
-    } else if (i == 19) {
-      $(this).html("<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>");
-      return;
+
+    if (window.location.href.includes("rds")) {
+      // Set min inputs for RDS columns
+      if (i == 3) {
+        $(this).html("<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>");
+        return;
+      } else if (i == 4) {
+        $(this).html("<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>");
+        return;
+      } else if (i == 7) {
+        $(this).html("<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>");
+        return;
+      }
+    } else if (window.location.href.includes("cache")) {
+      // Set min inputs for ElastiCache columns
+      if (i == 3) {
+        $(this).html("<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>");
+        return;
+      } else if (i == 4) {
+        $(this).html("<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>");
+        return;
+      }
+    } else {
+      // Set min inputs for EC2 columns
+      if (i == 3) {
+        $(this).html("<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>");
+        return;
+      } else if (i == 5) {
+        $(this).html("<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>");
+        return;
+      } else if (i == 6) {
+        $(this).html("<input data-action='datafilter' data-type='memory-per-vcpu' class='form-control' placeholder='Min Mem/vCPU: 0'/>");
+        return;
+      } else if (i == 19) {
+        $(this).html("<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>");
+        return;
+      }
     }
+
 
     var title = $(this).text().trim();
     $(this).html("<input type='text' class='form-control' placeholder='Filter..'/>");
