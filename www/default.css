@@ -217,14 +217,14 @@ body {
   text-align: right;
 }
 
-.well .right a {
+.well .linkto a {
   font-family: 'Roboto Mono', monospace;
   color: #9c25c7;
   text-decoration: none;
 }
 
-.well .right a:hover,
-.well .right a:focus {
+.well .linkto a:hover,
+.well .linkto a:focus {
   color: #5a0a76;
 }
 

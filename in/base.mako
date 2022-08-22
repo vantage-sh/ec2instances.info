@@ -77,34 +77,18 @@
 
     ${self.body()}
 
-    <!--
-    <div class="well">
-      <p>
-        <strong>Why?</strong>
-        Because it's frustrating to compare instances using Amazon's own <a href="http://aws.amazon.com/ec2/instance-types/" target="_blank">instance type</a>, <a href="http://aws.amazon.com/ec2/pricing/" target="_blank">pricing</a>, and other pages.
-      </p>
-      <p>
-        <strong>Who?</strong>
-        It was started by <a href="http://twitter.com/powdahound" target="_blank">@powdahound</a>, contributed to by <a href="https://github.com/vantage-sh/ec2instances.info/contributors" target="_blank">many</a>, is now managed and maintained by <a href='http://vantage.sh/' target="_blank">Vantage</a>, and awaits your improvements <a href="https://github.com/vantage-sh/ec2instances.info" target="_blank">on GitHub</a>.
-      </p>
-      <p>
-        <strong>How?</strong>
-        Data is scraped from multiple pages on the AWS site. This was last done at ${generated_at}.
-      </p>
-
-      <p class="bg-warning">
-        <strong>Warning:</strong> This site is not maintained by or affiliated with Amazon. The data shown is not guaranteed to be accurate or current. Please <a href="http://github.com/powdahound/ec2instances.info/issues">report issues</a> you see.
-      </p>
-
-    </div>
-    -->
     <div class="footer well">
         <div class="row ms-2 me-3 mt-2">
           <div class="col-4">
             <span>Last updated ${generated_at}</span>
           </div>
-          <div class="col-4"></div>
-          <div class="col-4 right">
+          <div class="col-2 right linkto">
+            <a href="https://handbook.vantage.sh/tools/instances/" target="_blank">Documentation</a>
+          </div>
+          <div class="col-2 linkto">
+            <a href="/about.html">About</a>
+          </div>
+          <div class="col-4 right linkto">
             <span><!--<a href="https://github.com/vantage-sh/ec2instances.info/issues/new">File Issue</a>. -->Maintained by <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
           </div>
         </div>
@@ -121,30 +105,32 @@
 
     <script src="/store/store.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
-        var _pricing = ${pricing_json};
-        function get_pricing() {
-            // see compress_pricing in render.py for the generation side
-            v = _pricing["data"];
-            for (var i = 0; i < arguments.length; i++) {
-                k = _pricing["index"][arguments[i]];
-                v = v[k];
-                if (v === undefined) {
-                    return undefined;
-                }
-            }
-            return v;
-        }
-        var _instance_azs = ${instance_azs_json};
-        function get_instance_availability_zones(instance_type, region) {
-          var region_azs = _instance_azs[instance_type];
-          if (region_azs) {
-            var azs = region_azs[region];
-            if (azs) {
-              return azs;
-            }
+        % if pricing_json:
+          var _pricing = ${pricing_json};
+          function get_pricing() {
+              // see compress_pricing in render.py for the generation side
+              v = _pricing["data"];
+              for (var i = 0; i < arguments.length; i++) {
+                  k = _pricing["index"][arguments[i]];
+                  v = v[k];
+                  if (v === undefined) {
+                      return undefined;
+                  }
+              }
+              return v;
           }
-          return [];
-        }
+          var _instance_azs = ${instance_azs_json};
+          function get_instance_availability_zones(instance_type, region) {
+            var region_azs = _instance_azs[instance_type];
+            if (region_azs) {
+              var azs = region_azs[region];
+              if (azs) {
+                return azs;
+              }
+            }
+            return [];
+          }
+        % endif
     </script>
     <script src="/default.js" type="text/javascript" charset="utf-8"></script>
   </body>
