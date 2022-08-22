@@ -29,7 +29,7 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TBZCV32"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <div class="nav">
+    <div class="nav pb-0">
       <div class="logo-group">
         <a href="/" class="logo">
         <svg width="135" height="28" viewBox="0 0 135 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,14 +52,30 @@
           Contribute
         </a>
       </div>
-      <!--
-      <ul class="nav nav-tabs nav-position">
-        <li role="presentation" class="${'active' if self.attr.active_ == 'ec2' else ''}"><a href="/">EC2</a></li>
-        <li role="presentation" class="${'active' if self.attr.active_ == 'rds' else ''}"><a href="/rds/">RDS</a></li>
-        <li role="presentation" class="${'active' if self.attr.active_ == 'cache' else ''}"><a href="/cache/">ElastiCache</a></li>
+      <ul class="nav nav-tabs nav-buttons nav-position">
+        <li role="presentation" class="${'active' if self.attr.active_ == 'ec2' else ''}">
+          <a href="/">
+          <div class="mx-4 mb-3 mt-2">
+            EC2
+          </div>
+          </a>
+        </li>
+        <li role="presentation" class="${'active' if self.attr.active_ == 'rds' else ''}">
+          <a href="/rds">
+            <div class="mx-4 mb-3 mt-2">
+              RDS
+            </div>
+          </a>
+        </li>
+        <li role="presentation" class="${'active' if self.attr.active_ == 'cache' else ''}">
+          <a href="/cache">
+            <div class="mx-4 mb-3 mt-2">
+              ElastiCache  
+            </div>
+          </a>
+        </li>
       </ul>
-      -->
-      <a href="https://vantage.sh/features/autopilot" class="ad-banner">Save 50% on EC2 with <span class="fw-semibold">Autopilot</span>, automated Reserved Instance purchasing.</a>
+      <!-- <a href="https://vantage.sh/features/autopilot" class="ad-banner">Save 50% on EC2 with <span class="fw-semibold">Autopilot</span>, automated Reserved Instance purchasing.</a> -->
       <div class="nav-buttons">
         <a href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-purple btn-icon">
           <svg class="me-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,51 +86,24 @@
       </div>
     </div>
 
-      <!--
-      <%block name="header"/>
-      <div class='announcement'>
-        Save 50% on your EC2 bill with <a style="text-decoration: underline" href="https://www.vantage.sh/features/autopilot">Vantage Autopilot</a>, automated buying and selling of Reserved Instances.
-      </div>
-      <ul class="nav nav-tabs">
-        <li role="presentation" class="${'active' if self.attr.active_ == 'ec2' else ''}"><a href="/">EC2</a></li>
-        <li role="presentation" class="${'active' if self.attr.active_ == 'rds' else ''}"><a href="/rds/">RDS</a></li>
-        <li role="presentation" class="${'active' if self.attr.active_ == 'cache' else ''}"><a href="/cache/">ElastiCache</a></li>
-      </ul>
-    </div>
-    -->
-
     <div class="clearfix"></div>
 
     ${self.body()}
 
-    <!--
-    <div class="well">
-      <p>
-        <strong>Why?</strong>
-        Because it's frustrating to compare instances using Amazon's own <a href="http://aws.amazon.com/ec2/instance-types/" target="_blank">instance type</a>, <a href="http://aws.amazon.com/ec2/pricing/" target="_blank">pricing</a>, and other pages.
-      </p>
-      <p>
-        <strong>Who?</strong>
-        It was started by <a href="http://twitter.com/powdahound" target="_blank">@powdahound</a>, contributed to by <a href="https://github.com/vantage-sh/ec2instances.info/contributors" target="_blank">many</a>, is now managed and maintained by <a href='http://vantage.sh/' target="_blank">Vantage</a>, and awaits your improvements <a href="https://github.com/vantage-sh/ec2instances.info" target="_blank">on GitHub</a>.
-      </p>
-      <p>
-        <strong>How?</strong>
-        Data is scraped from multiple pages on the AWS site. This was last done at ${generated_at}.
-      </p>
-
-      <p class="bg-warning">
-        <strong>Warning:</strong> This site is not maintained by or affiliated with Amazon. The data shown is not guaranteed to be accurate or current. Please <a href="http://github.com/powdahound/ec2instances.info/issues">report issues</a> you see.
-      </p>
-
-    </div>
-    -->
-    <div class="well row ms-2 mt-2 me-2">
-        <div class="col-4">
-          <span>Last updated ${generated_at}</span>
-        </div>
-        <div class="col-4"></div>
-        <div class="col-4 right">
-          <span><!--<a href="https://github.com/vantage-sh/ec2instances.info/issues/new">File Issue</a>. -->Hosted by <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
+    <div class="footer well">
+        <div class="row ms-2 me-3 mt-2">
+          <div class="col-4">
+            <span>Last updated ${generated_at}</span>
+          </div>
+          <div class="col-2 right linkto">
+            <a href="https://handbook.vantage.sh/tools/instances/" target="_blank">Documentation</a>
+          </div>
+          <div class="col-2 linkto">
+            <a href="/about.html">About</a>
+          </div>
+          <div class="col-4 right linkto">
+            <span><!--<a href="https://github.com/vantage-sh/ec2instances.info/issues/new">File Issue</a>. -->Supported by <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
+          </div>
         </div>
     </div>
 
@@ -129,30 +118,32 @@
 
     <script src="/store/store.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
-        var _pricing = ${pricing_json};
-        function get_pricing() {
-            // see compress_pricing in render.py for the generation side
-            v = _pricing["data"];
-            for (var i = 0; i < arguments.length; i++) {
-                k = _pricing["index"][arguments[i]];
-                v = v[k];
-                if (v === undefined) {
-                    return undefined;
-                }
-            }
-            return v;
-        }
-        var _instance_azs = ${instance_azs_json};
-        function get_instance_availability_zones(instance_type, region) {
-          var region_azs = _instance_azs[instance_type];
-          if (region_azs) {
-            var azs = region_azs[region];
-            if (azs) {
-              return azs;
-            }
+        % if pricing_json:
+          var _pricing = ${pricing_json};
+          function get_pricing() {
+              // see compress_pricing in render.py for the generation side
+              v = _pricing["data"];
+              for (var i = 0; i < arguments.length; i++) {
+                  k = _pricing["index"][arguments[i]];
+                  v = v[k];
+                  if (v === undefined) {
+                      return undefined;
+                  }
+              }
+              return v;
           }
-          return [];
-        }
+          var _instance_azs = ${instance_azs_json};
+          function get_instance_availability_zones(instance_type, region) {
+            var region_azs = _instance_azs[instance_type];
+            if (region_azs) {
+              var azs = region_azs[region];
+              if (azs) {
+                return azs;
+              }
+            }
+            return [];
+          }
+        % endif
     </script>
     <script src="/default.js" type="text/javascript" charset="utf-8"></script>
   </body>

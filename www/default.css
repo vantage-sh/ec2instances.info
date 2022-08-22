@@ -21,6 +21,37 @@ body {
 
 .nav-position {
   margin-right: auto;
+  border-bottom: 0 !important;
+  padding-bottom: 0px !important;
+}
+
+.nav-position li {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background-color: #5a0b76;
+  margin-right: 2px;
+}
+
+.nav-position li:active {
+  background-color: #fff;
+}
+
+.nav-position a {
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none !important;
+}
+
+.nav-position li a {
+  color: #fff;
+}
+
+.nav-position li a:focus {
+  color: #303037;
+}
+
+.nav-position li.active a {
+  color: #303037 !important;
 }
 
 .nav .active {
@@ -30,6 +61,10 @@ body {
 .ec2instances .page-header {
   margin-top: 0;
   border-bottom: 0;
+}
+
+.adjust-for-tabs {
+  padding-bottom: 12px;
 }
 
 .dataTables_filter {
@@ -182,14 +217,14 @@ body {
   text-align: right;
 }
 
-.well .right a {
+.well .linkto a {
   font-family: 'Roboto Mono', monospace;
   color: #9c25c7;
   text-decoration: none;
 }
 
-.well .right a:hover,
-.well .right a:focus {
+.well .linkto a:hover,
+.well .linkto a:focus {
   color: #5a0a76;
 }
 
@@ -236,9 +271,12 @@ table.table abbr {
   text-decoration: underline !important;
 }
 
-.preserve-border {
+.wrap-table {
   border: 1px solid #e3e3e9;
   border-radius: 6px;
+
+  /* 172 is the height of the filter menu plus the nav bar. In some cases this can change */
+  height: calc(100% - 172px);
 }
 
 /* table.table thead .sorting {
@@ -269,4 +307,19 @@ input.search {
 .tooltip-inner {
   /* let text wrap in tooltips */
   white-space: pre-wrap;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background: #fafafa;
+  /*
+  border-top: solid 1px #eee;
+  */
+}
+
+.footer div {
+  margin-top: 8px;
 }

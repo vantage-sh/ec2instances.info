@@ -23,19 +23,62 @@ function init_data_table() {
   // add a text input filter to each column of the new row
   $('#data thead tr:eq(1) th').each(function (i) {
     // don't add a filter bar to the checkbox column (column 0)
-    if (i == 0) { return; }
-    if (i == 3) {
-      $(this).html("<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>");
-      return;
-    } else if (i == 5) {
-      $(this).html("<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>");
-      return;
-    } else if (i == 6) {
-      $(this).html("<input data-action='datafilter' data-type='memory-per-vcpu' class='form-control' placeholder='Min Mem/vCPU: 0'/>");
-      return;
-    } else if (i == 19) {
-      $(this).html("<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>");
-      return;
+
+    // TODO: When adding a new service, we are forced to edit this. Instead it should be controlled in HTML.
+    if (window.location.href.includes('rds')) {
+      // Set min inputs for RDS columns
+      if (i == 2) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
+        );
+        return;
+      } else if (i == 3) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>",
+        );
+        return;
+      } else if (i == 6) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
+        );
+        return;
+      }
+    } else if (window.location.href.includes('cache')) {
+      // Set min inputs for ElastiCache columns
+      if (i == 2) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
+        );
+        return;
+      } else if (i == 3) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
+        );
+        return;
+      }
+    } else {
+      // Set min inputs for EC2 columns
+      if (i == 2) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
+        );
+        return;
+      } else if (i == 4) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
+        );
+        return;
+      } else if (i == 5) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='memory-per-vcpu' class='form-control' placeholder='Min Mem/vCPU: 0'/>",
+        );
+        return;
+      } else if (i == 18) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>",
+        );
+        return;
+      }
     }
 
     var title = $(this).text().trim();
@@ -55,17 +98,17 @@ function init_data_table() {
       bSmart: false,
     },
     dom: 'Bt',
-    fixedHeader: true, 
+    fixedHeader: true,
     select: {
-      style: 'ec2-checkbox'
+      style: 'ec2-checkbox',
     },
     aoColumnDefs: [
       {
-          orderable: false,
-          className: '',
-          targets:   0,
+        orderable: false,
+        className: '',
+        targets: 0,
       },
-        // The columns below are sorted according to the sort attr of the <span> tag within their data cells
+      // The columns below are sorted according to the sort attr of the <span> tag within their data cells
       {
         aTargets: [
           'memory',
@@ -165,14 +208,14 @@ function init_data_table() {
     buttons: [
       {
         extend: 'csv',
-        text: "Export",
+        text: 'Export',
         className: 'btn-primary',
         exportOptions: {
           modifier: {search: 'applied'},
           columns: ':visible',
         },
-      }
-    ]
+      },
+    ],
   });
   g_data_table.buttons().container().appendTo($('#export'));
 
@@ -527,8 +570,8 @@ var apply_min_values = function () {
   maybe_update_url();
 };
 
-function jq( myid ) {
-  return "#" + myid.replace( /(:|\.|\[|\]|,|=|@)/g, "\\$1" );
+function jq(myid) {
+  return '#' + myid.replace(/(:|\.|\[|\]|,|=|@)/g, '\\$1');
 }
 
 function on_data_table_initialized() {
@@ -543,10 +586,11 @@ function on_data_table_initialized() {
 
   // apply highlight to selected rows
   $.each(g_settings.selected.split(','), function (_, id) {
-    // get an instance id like 't3.nano' from the URL, making sure to escape it
-    if (id === "") { 
-      return; 
+    if (id === '') {
+      return;
     } else {
+      // get an instance id like 't3.nano' from the URL, making sure to escape it
+      // previously this was not working for RDS and Elasticache and fixed #189, #532, and #658
       $(jq(id)).addClass('highlight');
     }
   });
@@ -733,6 +777,6 @@ function update_compare_button() {
   }
 }
 
-$('#fullsearch').on('keyup', function() {
+$('#fullsearch').on('keyup', function () {
   g_data_table.search(this.value).draw();
 });

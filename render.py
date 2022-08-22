@@ -108,6 +108,20 @@ def compress_instance_azs(instances):
     return json.dumps(instance_type_region_availability_zones)
 
 
+def about_page(destination_file="www/about.html"):
+    print("Rendering to %s..." % destination_file)
+    lookup = mako.lookup.TemplateLookup(directories=["."])
+    template = mako.template.Template(filename="in/about.html.mako", lookup=lookup)
+    generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+    os.makedirs(os.path.dirname(destination_file), exist_ok=True)
+    with io.open(destination_file, "w+", encoding="utf-8") as fh:
+        try:
+            fh.write(template.render(generated_at=generated_at))
+        except:
+            print(mako.exceptions.text_error_template().render())
+    return destination_file
+
+
 def build_sitemap(sitemap):
     surls = ['<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for url in sitemap:
@@ -169,4 +183,5 @@ if __name__ == "__main__":
     sitemap.extend(
         render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
     )
+    sitemap.append(about_page())
     build_sitemap(sitemap)
