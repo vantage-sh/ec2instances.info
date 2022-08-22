@@ -155,7 +155,6 @@
     <table cellspacing="0" class="table" id="data">
       <thead>
         <tr>
-          <th></th>
           <th class="name">Name</th>
           <th class="apiname">API Name</th>
           <th class="memory">Instance Memory</th>
@@ -267,7 +266,6 @@
       <tbody>
         % for inst in instances:
           <tr class='instance' id="${inst['instance_type']}">
-            <td></td>
             <td class="name">${inst['pretty_name']}</td>
             <td class="apiname"><a href="/aws/ec2/${inst['instance_type']}">${inst['instance_type']}</a></td>
             <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>

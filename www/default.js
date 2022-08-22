@@ -23,41 +23,41 @@ function init_data_table() {
   // add a text input filter to each column of the new row
   $('#data thead tr:eq(1) th').each(function (i) {
     // don't add a filter bar to the checkbox column (column 0)
-    if (i == 0) { return; }
 
+    // TODO: When adding a new service, we are forced to edit this. Instead it should be controlled in HTML.
     if (window.location.href.includes("rds")) {
       // Set min inputs for RDS columns
-      if (i == 3) {
+      if (i == 2) {
         $(this).html("<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>");
         return;
-      } else if (i == 4) {
+      } else if (i == 3) {
         $(this).html("<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>");
         return;
-      } else if (i == 7) {
+      } else if (i == 6) {
         $(this).html("<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>");
         return;
       }
     } else if (window.location.href.includes("cache")) {
       // Set min inputs for ElastiCache columns
-      if (i == 3) {
+      if (i == 2) {
         $(this).html("<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>");
         return;
-      } else if (i == 4) {
+      } else if (i == 3) {
         $(this).html("<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>");
         return;
       }
     } else {
       // Set min inputs for EC2 columns
-      if (i == 3) {
+      if (i == 2) {
         $(this).html("<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>");
         return;
-      } else if (i == 5) {
+      } else if (i == 4) {
         $(this).html("<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>");
         return;
-      } else if (i == 6) {
+      } else if (i == 5) {
         $(this).html("<input data-action='datafilter' data-type='memory-per-vcpu' class='form-control' placeholder='Min Mem/vCPU: 0'/>");
         return;
-      } else if (i == 19) {
+      } else if (i == 18) {
         $(this).html("<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>");
         return;
       }
