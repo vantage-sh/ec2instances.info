@@ -271,9 +271,12 @@ table.table abbr {
   text-decoration: underline !important;
 }
 
-.preserve-border {
+.wrap-table {
   border: 1px solid #e3e3e9;
   border-radius: 6px;
+
+  /* 172 is the height of the filter menu plus the nav bar. In some cases this can change */
+  height: calc(100% - 172px);
 }
 
 /* table.table thead .sorting {
@@ -304,4 +307,19 @@ input.search {
 .tooltip-inner {
   /* let text wrap in tooltips */
   white-space: pre-wrap;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background: #fafafa;
+  /*
+  border-top: solid 1px #eee;
+  */
+}
+
+.footer div {
+  margin-top: 8px;
 }

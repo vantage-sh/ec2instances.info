@@ -150,7 +150,7 @@
     </div>
     -->
 
-  <div style="height:78%" class="table-responsive overflow-auto ms-2 preserve-border">
+  <div class="table-responsive overflow-auto ms-2 wrap-table">
     <!--<table cellspacing="0" class="table table-bordered table-hover table-condensed" id="data">-->
     <table cellspacing="0" class="table" id="data">
       <thead>

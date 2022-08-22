@@ -98,13 +98,15 @@
 
     </div>
     -->
-    <div class="well row ms-2 mt-2 me-2">
-        <div class="col-4">
-          <span>Last updated ${generated_at}</span>
-        </div>
-        <div class="col-4"></div>
-        <div class="col-4 right">
-          <span><!--<a href="https://github.com/vantage-sh/ec2instances.info/issues/new">File Issue</a>. -->Maintained by <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
+    <div class="footer well">
+        <div class="row ms-2 me-3 mt-2">
+          <div class="col-4">
+            <span>Last updated ${generated_at}</span>
+          </div>
+          <div class="col-4"></div>
+          <div class="col-4 right">
+            <span><!--<a href="https://github.com/vantage-sh/ec2instances.info/issues/new">File Issue</a>. -->Maintained by <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
+          </div>
         </div>
     </div>
 
