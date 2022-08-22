@@ -61,14 +61,14 @@
           </a>
         </li>
         <li role="presentation" class="${'active' if self.attr.active_ == 'rds' else ''}">
-          <a href="/rds">
+          <a href="/rds/">
             <div class="mx-4 mb-3 mt-2">
               RDS
             </div>
           </a>
         </li>
         <li role="presentation" class="${'active' if self.attr.active_ == 'cache' else ''}">
-          <a href="/cache">
+          <a href="/cache/">
             <div class="mx-4 mb-3 mt-2">
               ElastiCache  
             </div>
@@ -99,7 +99,7 @@
             <a href="https://handbook.vantage.sh/tools/instances/" target="_blank">Documentation</a>
           </div>
           <div class="col-2 linkto">
-            <a href="/about.html">About</a>
+            <a href="/about">About</a>
           </div>
           <div class="col-4 right linkto">
             <span><!--<a href="https://github.com/vantage-sh/ec2instances.info/issues/new">File Issue</a>. -->Supported by <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
