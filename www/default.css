@@ -26,14 +26,14 @@ body {
 }
 
 .nav-position li {
+  margin-right: 4px;
+}
+
+.nav-position li a {
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   background-color: #5a0b76;
-  margin-right: 2px;
-}
-
-.nav-position li:active {
-  background-color: #fff;
+  padding: 14px 20px;
 }
 
 .nav-position a {
@@ -46,15 +46,11 @@ body {
   color: #fff;
 }
 
-.nav-position li a:focus {
-  color: #303037;
-}
-
 .nav-position li.active a {
   color: #303037 !important;
 }
 
-.nav .active {
+.nav .active a {
   background-color: white;
 }
 
@@ -100,6 +96,7 @@ body {
 #data tr {
   background-color: white;
   cursor: pointer;
+  border-bottom: 1px solid #e9e7ec;
 }
 
 #data tr.highlight,
@@ -272,11 +269,7 @@ table.table abbr {
 }
 
 .wrap-table {
-  border: 1px solid #e3e3e9;
-  border-radius: 6px;
-
-  /* 172 is the height of the filter menu plus the nav bar. In some cases this can change */
-  height: calc(100% - 172px);
+  border-top: 1px solid #e3e3e9;
 }
 
 /* table.table thead .sorting {
@@ -310,10 +303,10 @@ input.search {
 }
 
 .footer {
-  position: absolute;
   bottom: 0;
   width: 100%;
   height: 50px;
+  flex-shrink: 0;
   background: #fafafa;
   /*
   border-top: solid 1px #eee;
@@ -322,4 +315,8 @@ input.search {
 
 .footer div {
   margin-top: 8px;
+}
+
+.form-control {
+  font-size: 14px !important;
 }

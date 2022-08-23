@@ -142,8 +142,8 @@
       </div>
     </div>
 
-  <div class="table-responsive overflow-auto ms-2 wrap-table">
-    <table cellspacing="0" class="table" id="data">
+  <div class="table-responsive overflow-auto wrap-table flex-fill">
+    <table cellspacing="0" class="table" style="border-bottom: 0 !important; margin-bottom: 0 !important;" id="data">
       <thead>
         <tr>
           <th class="name">Name</th>
