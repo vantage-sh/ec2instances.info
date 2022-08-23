@@ -124,6 +124,7 @@ function init_data_table() {
           'cost-spot-min',
           'cost-spot-max',
           'cost-ebs-optimized',
+          'maxenis',
           'memory-per-vcpu',
           'gpu_memory',
         ],

@@ -406,9 +406,9 @@
             </td>
             <td class="maxenis">
               % if inst['vpc']:
-                ${inst['vpc']['max_enis']}
+                <span sort="${inst['vpc']['max_enis']}">${inst['vpc']['max_enis']}</span>
               % else:
-                N/A
+                <span sort="0">N/A</span>
               % endif
             </td>
             <td class="enhanced-networking">
