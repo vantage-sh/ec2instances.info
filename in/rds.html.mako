@@ -176,7 +176,8 @@
           % if storage == 'EBS Only':
           <span sort="0">0 GiB (EBS only)</span>
           % else:
-          <span sort="0">${inst['storage']}</span>
+          <% products = [int(s) for s in storage.split() if s.isdigit()] %>
+          <span sort="${products[0]*products[1]}">${inst['storage']}</span>
           % endif
           </td>
           <td class="ebs-throughput">
