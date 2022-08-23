@@ -151,8 +151,8 @@
       </div>
     </div>
 
-  <div class="table-responsive overflow-auto ms-2 wrap-table">
-    <table cellspacing="0" class="table" id="data">
+  <div class="table-responsive overflow-auto wrap-table flex-fill">
+    <table cellspacing="0" class="table" style="border-bottom: 0 !important; margin-bottom: 0 !important;" id="data">
       <thead>
         <tr>
           <th class="name">Name</th>
@@ -406,9 +406,9 @@
             </td>
             <td class="maxenis">
               % if inst['vpc']:
-                ${inst['vpc']['max_enis']}
+                <span sort="${inst['vpc']['max_enis']}">${inst['vpc']['max_enis']}</span>
               % else:
-                N/A
+                <span sort="0">N/A</span>
               % endif
             </td>
             <td class="enhanced-networking">

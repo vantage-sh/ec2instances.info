@@ -142,8 +142,8 @@
       </div>
     </div>
 
-  <div class="table-responsive overflow-auto ms-2 wrap-table">
-    <table cellspacing="0" class="table" id="data">
+  <div class="table-responsive overflow-auto wrap-table flex-fill">
+    <table cellspacing="0" class="table" style="border-bottom: 0 !important; margin-bottom: 0 !important;" id="data">
       <thead>
         <tr>
           <th class="name">Name</th>
@@ -176,7 +176,8 @@
           % if storage == 'EBS Only':
           <span sort="0">0 GiB (EBS only)</span>
           % else:
-          <span sort="0">${inst['storage']}</span>
+          <% products = [int(s) for s in storage.split() if s.isdigit()] %>
+          <span sort="${products[0]*products[1]}">${inst['storage']}</span>
           % endif
           </td>
           <td class="ebs-throughput">

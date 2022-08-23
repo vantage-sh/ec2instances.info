@@ -1,4 +1,5 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<<<<<<< HEAD
 <url><loc>https://instances.vantage.sh/aws/ec2/c5d.2xlarge</loc></url>
 <url><loc>https://instances.vantage.sh/aws/ec2/c5d.xlarge</loc></url>
 <url><loc>https://instances.vantage.sh/aws/ec2/m6a.24xlarge</loc></url>
@@ -709,4 +710,10 @@
 <url><loc>https://instances.vantage.sh/aws/rds/db.m2.2xlarge</loc></url>
 <url><loc>https://instances.vantage.sh/rds/index</loc></url>
 <url><loc>https://instances.vantage.sh/cache/index</loc></url>
+=======
+<url><loc>/index</loc></url>
+<url><loc>/rds/index</loc></url>
+<url><loc>/cache/index</loc></url>
+<url><loc>/about</loc></url>
+>>>>>>> homepage-refresh
 </urlset>
