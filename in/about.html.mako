@@ -29,6 +29,7 @@
       <div class="col-6">
       <h4>Changelog</h4>
       <ul>
+        <li><a href="https://github.com/vantage-sh/ec2instances.info/pull/655">UI Refresh</a></li>
         <li><a href="https://www.vantage.sh/blog/ec2instances-launches-detail-pages">Detail Pages</a></li>
         <li><a href="https://github.com/vantage-sh/ec2instances.info/pull/628">ElastiCache</a></li>
         <li><a href="https://www.vantage.sh/blog/vantage-has-acquired-ec2instances-info">Vantage acquires EC2Instances.info</a></li>
