@@ -150,10 +150,10 @@ def render(data_file, template_file, destination_file):
     instance_azs_json = compress_instance_azs(instances)
 
     sitemap = []
-    # if data_file == "www/instances.json":
-    #     sitemap.extend(build_detail_pages_ec2(instances, destination_file))
-    # elif data_file == "www/rds/instances.json":
-    #     sitemap.extend(build_detail_pages_rds(instances, destination_file))
+    if data_file == "www/instances.json":
+        sitemap.extend(build_detail_pages_ec2(instances, destination_file))
+    elif data_file == "www/rds/instances.json":
+        sitemap.extend(build_detail_pages_rds(instances, destination_file))
 
     print("Rendering to %s..." % destination_file)
     os.makedirs(os.path.dirname(destination_file), exist_ok=True)
