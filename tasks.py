@@ -17,6 +17,7 @@ from rds import scrape as rds_scrape
 from cache import scrape as cache_scrape
 from render import render
 from render import build_sitemap
+from render import about_page
 from scrape import scrape
 
 from io import BytesIO
@@ -109,6 +110,7 @@ def render_html(c):
     sitemap.extend(
         render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
     )
+    sitemap.append(about_page())
     build_sitemap(sitemap)
 
 
