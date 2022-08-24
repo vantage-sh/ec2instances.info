@@ -87,7 +87,7 @@
               <a href="https://handbook.vantage.sh/tools/instances/" target="_blank">Documentation</a>
             </div>
             <div class="col-2 linkto">
-              <a href="/about">About</a>
+              <a href="/about.html">About</a>
             </div>
             <div class="col-4 right linkto">
               <span><!--<a href="https://github.com/vantage-sh/ec2instances.info/issues/new">File Issue</a>. -->Supported by <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
