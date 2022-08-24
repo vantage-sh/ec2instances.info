@@ -22,8 +22,67 @@ function init_data_table() {
   $('#data thead tr').clone(true).appendTo('#data thead');
   // add a text input filter to each column of the new row
   $('#data thead tr:eq(1) th').each(function (i) {
+    // don't add a filter bar to the checkbox column (column 0)
+
+    // TODO: When adding a new service, we are forced to edit this. Instead it should be controlled in HTML.
+    if (window.location.href.includes('rds')) {
+      // Set min inputs for RDS columns
+      if (i == 2) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
+        );
+        return;
+      } else if (i == 3) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>",
+        );
+        return;
+      } else if (i == 6) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
+        );
+        return;
+      }
+    } else if (window.location.href.includes('cache')) {
+      // Set min inputs for ElastiCache columns
+      if (i == 2) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
+        );
+        return;
+      } else if (i == 3) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
+        );
+        return;
+      }
+    } else {
+      // Set min inputs for EC2 columns
+      if (i == 2) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
+        );
+        return;
+      } else if (i == 4) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
+        );
+        return;
+      } else if (i == 5) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='memory-per-vcpu' class='form-control' placeholder='Min Mem/vCPU: 0'/>",
+        );
+        return;
+      } else if (i == 18) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>",
+        );
+        return;
+      }
+    }
+
     var title = $(this).text().trim();
-    $(this).html("<input type='text' placeholder='Search " + title + "' />");
+    $(this).html("<input type='text' class='form-control' placeholder='Filter..'/>");
     $('input', this).on('keyup change', function () {
       if (g_data_table.column(i).search() !== this.value) {
         g_data_table.column(i).search(this.value).draw();
@@ -38,9 +97,19 @@ function init_data_table() {
       bRegex: true,
       bSmart: false,
     },
+    dom: 'Bt',
+    fixedHeader: true,
+    select: {
+      style: 'ec2-checkbox',
+    },
     aoColumnDefs: [
       {
-        // The columns below are sorted according to the sort attr of the <span> tag within their data cells
+        orderable: false,
+        className: '',
+        targets: 0,
+      },
+      // The columns below are sorted according to the sort attr of the <span> tag within their data cells
+      {
         aTargets: [
           'memory',
           'computeunits',
@@ -55,6 +124,7 @@ function init_data_table() {
           'cost-spot-min',
           'cost-spot-max',
           'cost-ebs-optimized',
+          'maxenis',
           'memory-per-vcpu',
           'gpu_memory',
         ],
@@ -139,7 +209,8 @@ function init_data_table() {
     buttons: [
       {
         extend: 'csv',
-        text: 'CSV',
+        text: 'Export',
+        className: 'btn-primary',
         exportOptions: {
           modifier: {search: 'applied'},
           columns: ':visible',
@@ -147,12 +218,7 @@ function init_data_table() {
       },
     ],
   });
-  g_data_table
-    .buttons()
-    .container()
-    .find('a')
-    .addClass('btn btn-primary')
-    .appendTo($('#menu > div'));
+  g_data_table.buttons().container().appendTo($('#export'));
 
   return g_data_table;
 }
@@ -383,7 +449,7 @@ function setup_column_toggle() {
       $('<li>')
         .toggleClass('active', column.visible())
         .append(
-          $('<a>', {href: 'javascript:;'})
+          $('<a class="dropdown-item" href="javascript:;">')
             .text($(column.header()).text())
             .click(function (e) {
               toggle_column(i);
@@ -505,6 +571,10 @@ var apply_min_values = function () {
   maybe_update_url();
 };
 
+function jq(myid) {
+  return '#' + myid.replace(/(:|\.|\[|\]|,|=|@)/g, '\\$1');
+}
+
 function on_data_table_initialized() {
   if (g_app_initialized) return;
   g_app_initialized = true;
@@ -512,19 +582,18 @@ function on_data_table_initialized() {
   load_settings();
 
   // populate filter inputs
-  $('[data-action="datafilter"][data-type="memory"]').val(g_settings['min_memory']);
-  $('[data-action="datafilter"][data-type="vcpus"]').val(g_settings['min_vcpus']);
-  $('[data-action="datafilter"][data-type="memory-per-vcpu"]').val(
-    g_settings['min_memory_per_vcpu'],
-  );
-  $('[data-action="datafilter"][data-type="storage"]').val(g_settings['min_storage']);
   g_data_table.search(g_settings['filter']);
   apply_min_values();
 
   // apply highlight to selected rows
   $.each(g_settings.selected.split(','), function (_, id) {
-    id = id.replace('.', '\\.');
-    $('#' + id).addClass('highlight');
+    if (id === '') {
+      return;
+    } else {
+      // get an instance id like 't3.nano' from the URL, making sure to escape it
+      // previously this was not working for RDS and Elasticache and fixed #189, #532, and #658
+      $(jq(id)).addClass('highlight');
+    }
   });
 
   configure_highlighting();
@@ -547,7 +616,8 @@ function on_data_table_initialized() {
   // enable bootstrap tooltips
   $('abbr').tooltip({
     placement: function (tt, el) {
-      return this.$element.parents('thead').length ? 'top' : 'right';
+      // if the cell is in the header, show the tooltip on top
+      return $(this).parents('thead').length ? 'top' : 'right';
     },
   });
 
@@ -666,7 +736,16 @@ function configure_highlighting() {
     $rows = $('#data tbody tr');
 
   // Allow row highlighting by clicking.
-  $rows.click(function () {
+  $rows.click(function (e) {
+    // don't highlight if the user clicked on a link to a detail page
+    try {
+      if (e.target.href.includes('aws')) {
+        return;
+      }
+    } catch (err) {
+      // if a link does not exist, continue
+    }
+
     $(this).toggleClass('highlight');
 
     update_compare_button();
@@ -700,10 +779,14 @@ function update_compare_button() {
   if (!g_settings.compare_on) {
     $compareBtn
       .text($compareBtn.data('textOff'))
-      .addClass('btn-primary')
-      .removeClass('btn-success')
+      .addClass('btn-purple')
+      .removeClass('btn-danger')
       .prop('disabled', !$rows.is('.highlight'));
   } else {
-    $compareBtn.text($compareBtn.data('textOn')).addClass('btn-success').removeClass('btn-primary');
+    $compareBtn.text($compareBtn.data('textOn')).addClass('btn-danger').removeClass('btn-purple');
   }
 }
+
+$('#fullsearch').on('keyup', function () {
+  g_data_table.search(this.value).draw();
+});
