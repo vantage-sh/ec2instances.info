@@ -123,10 +123,13 @@ def about_page(destination_file="www/about.html"):
 
 
 def build_sitemap(sitemap):
+    HOST = "https://instances.vantage.sh"
     surls = ['<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for url in sitemap:
         surl = url.replace("www/", "")
-        surls.append( "<url><loc>https://instances.vantage.sh/{}</loc></url>".format(surl[0:-5]))
+        if "index" in surl:
+            surl = surl.replace("index", "")
+        surls.append("<url><loc>{}/{}</loc></url>".format(HOST, surl[0:-5]))
     surls.append("</urlset>")
 
     destination_file = "www/sitemap.xml"
