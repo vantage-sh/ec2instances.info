@@ -736,7 +736,16 @@ function configure_highlighting() {
     $rows = $('#data tbody tr');
 
   // Allow row highlighting by clicking.
-  $rows.click(function () {
+  $rows.click(function (e) {
+    // don't highlight if the user clicked on a link to a detail page
+    try {
+      if (e.target.href.includes('aws')) {
+        return;
+      }
+    } catch (err) {
+      // if a link does not exist, continue
+    }
+
     $(this).toggleClass('highlight');
 
     update_compare_button();

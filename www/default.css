@@ -320,3 +320,9 @@ input.search {
 .form-control {
   font-size: 14px !important;
 }
+
+.banner-ad {
+  font-size: 14px;
+  color: white;
+  margin: 0;
+}
