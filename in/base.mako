@@ -102,7 +102,7 @@
               <a href="https://handbook.vantage.sh/tools/instances/" target="_blank">Documentation</a>
             </div>
             <div class="col-2 linkto">
-              <a href="/about.html">About</a>
+              <a href="https://instances.vantage.sh/about">About</a>
             </div>
             <div class="col-4 right linkto">
               <span>Supported by <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
