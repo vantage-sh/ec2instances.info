@@ -10,11 +10,9 @@
         <meta name="description" content="A free and easy-to-use tool for comparing EC2 Instance features and prices."></head>
     </%block>
     
-    <!--
     <%block name="header">
-    <h1>EC2Instances.info <small>Easy Amazon <b>EC2</b> Instance Comparison</small></h1>
+      <h1>EC2Instances.info <small>Easy Amazon <b>EC2</b> Instance Comparison</small></h1>
     </%block>
-    -->
 
     <div class="row mt-3 me-2" id="menu">
       <div class="col-sm-12 ms-2">
