@@ -63,6 +63,12 @@ body {
   padding-bottom: 12px;
 }
 
+.page-h1 {
+  font-size: 12px;
+  font-weight: 400;
+  color: #6c757d;
+}
+
 .dataTables_filter {
   float: right;
 }

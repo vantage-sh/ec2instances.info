@@ -70,7 +70,7 @@
             </li>
           </ul>
         </div>
-        <%block name="header"/>
+        <a href="https://vantage.sh/features/autopilot" target="_blank" class="ad-banner">Save 50% on EC2 with <span class="fw-semibold">Autopilot</span>, automated Reserved Instance purchasing.</a>
         <div class="d-flex">
           <div class="nav-buttons px-2">
             <a target="_blank" href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw" class="btn btn-purple btn-icon">
@@ -95,17 +95,17 @@
 
       <div class="footer well border-top">
           <div class="row ms-2 me-3 mt-2">
-            <div class="col-4">
-              <span>Last updated ${generated_at}</span>
+            <div class="col-5">
+              <%block name="header"/>
             </div>
-            <div class="col-2 right linkto">
+            <div class="col-1 right linkto">
               <a href="https://handbook.vantage.sh/tools/instances/" target="_blank">Documentation</a>
             </div>
-            <div class="col-2 linkto">
+            <div class="col-1 linkto">
               <a href="https://instances.vantage.sh/about">About</a>
             </div>
-            <div class="col-4 right linkto">
-              <span>Supported by <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
+            <div class="col-5 right linkto">
+              <span>Updated ${generated_at}. Supported by <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
             </div>
           </div>
       </div>
