@@ -586,6 +586,7 @@ def add_emr_info(instances):
         "eu-north-1": "EU (Stockholm)",
         "eu-south-1": "EU (Milan)",
         "me-south-1": "Middle East (Bahrain)",
+        "me-central-1": "Middle East (UAE)",
         "sa-east-1": "South America (Sao Paulo)",
         "us-east-1": "US East (N. Virginia)",
         "us-east-2": "US East (Ohio)",

@@ -101,6 +101,7 @@
                   <option value='eu-north-1'>Europe (Stockholm)</option>
                   <option value='eu-south-1'>Europe (Milan)</option>
                   <option value='me-south-1'>Middle East (Bahrain)</option>
+                  <option value='me-central-1'>Middle East (UAE)</option>
                   <option value='sa-east-1'>South America (S&atilde;o Paulo)</option>
                   <option value='us-east-2'>US East (Ohio)</option>
                   <option value='us-west-1'>US West (California)</option>
