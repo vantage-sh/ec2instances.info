@@ -260,7 +260,13 @@ function init_data_table() {
 }
 
 $(document).ready(function () {
+  json_pricing().then(prices => {
+     prices; // fetched prices
+  });
+
   init_data_table();
+
+  // read _json();
 });
 
 function change_cost() {
@@ -839,3 +845,27 @@ function update_compare_button() {
 $('#fullsearch').on('keyup', function () {
   g_data_table.search(this.value).draw();
 });
+
+async function json_pricing() {
+  const response = await fetch('/instances.json');
+  const prices = await response.json();
+  return prices;
+}
+
+function read_json() {
+  // http://localhost:8080
+  fetch('/instances.json')
+  .then(response => {
+      if (!response.ok) {
+          throw new Error("HTTP error " + response.status);
+      }
+      return response.json();
+  })
+  .then(json => {
+      this.prices = json;
+      console.log(this.prices);
+  })
+  .catch(function () {
+      this.dataError = true;
+  })
+}
