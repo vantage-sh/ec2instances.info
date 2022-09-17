@@ -138,7 +138,7 @@ def build_sitemap(sitemap):
         fp.write("\n".join(surls))
 
 
-def render(data_file, template_file, destination_file):
+def render(data_file, template_file, destination_file, detail_pages=True):
     """Build the HTML content from scraped data"""
     lookup = mako.lookup.TemplateLookup(directories=["."])
     template = mako.template.Template(filename=template_file, lookup=lookup)
@@ -153,10 +153,11 @@ def render(data_file, template_file, destination_file):
     instance_azs_json = compress_instance_azs(instances)
 
     sitemap = []
-    if data_file == "www/instances.json":
-        sitemap.extend(build_detail_pages_ec2(instances, destination_file))
-    elif data_file == "www/rds/instances.json":
-        sitemap.extend(build_detail_pages_rds(instances, destination_file))
+    if detail_pages:
+        if data_file == "www/instances.json":
+            sitemap.extend(build_detail_pages_ec2(instances, destination_file))
+        elif data_file == "www/rds/instances.json":
+            sitemap.extend(build_detail_pages_rds(instances, destination_file))
 
     print("Rendering to %s..." % destination_file)
     os.makedirs(os.path.dirname(destination_file), exist_ok=True)
@@ -165,7 +166,7 @@ def render(data_file, template_file, destination_file):
             fh.write(
                 template.render(
                     instances=instances,
-                    pricing_json=pricing_json,
+                    # pricing_json=pricing_json,
                     generated_at=generated_at,
                     instance_azs_json=instance_azs_json,
                 )
@@ -179,9 +180,9 @@ def render(data_file, template_file, destination_file):
 
 if __name__ == "__main__":
     sitemap = []
-    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
+    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html", False))
     sitemap.extend(
-        render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
+        render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html", False)
     )
     sitemap.extend(
         render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
