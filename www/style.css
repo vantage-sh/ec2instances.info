@@ -172,6 +172,10 @@ table#Unavailable td {
   display: flex;
   align-items: center;
 }
+.btn.btn-github {
+  background-color: #eee;
+  color: #1a1a1c;
+}
 
 .column-left {
   max-width: 400px;
