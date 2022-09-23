@@ -310,7 +310,7 @@ def scrape(output_file, input_file=None):
     encoder.FLOAT_REPR = lambda o: format(o, ".5f")
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     with open(output_file, "w+") as outfile:
-        json.dump(list(instances.values()), outfile, indent=4)
+        json.dump(list(instances.values()), outfile, indent=1)
 
 
 if __name__ == "__main__":

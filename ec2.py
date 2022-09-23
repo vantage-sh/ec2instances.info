@@ -27,6 +27,7 @@ def translate_platform_name(operating_system, preinstalled_software):
         # Spot products
         "Linux/UNIX": "linux",
         "Red Hat Enterprise Linux": "rhel",
+        "Red Hat Enterprise Linux (Amazon VPC)": "rhel",
         "SUSE Linux": "sles",
     }
     software = {
@@ -35,7 +36,7 @@ def translate_platform_name(operating_system, preinstalled_software):
         "SQL Web": "SQLWeb",
         "SQL Ent": "SQLEnterprise",
     }
-    return os[operating_system] + software[preinstalled_software]
+    return os.get(operating_system, 'unknown') + software.get(preinstalled_software, 'unknown')
 
 
 # Translate between the API and what is used locally

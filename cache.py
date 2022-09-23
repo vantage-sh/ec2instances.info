@@ -281,7 +281,7 @@ def scrape(output_file, input_file=None):
     # write output to file
     encoder.FLOAT_REPR = lambda o: format(o, ".5f")
     with open(output_file, "w+") as outfile:
-        json.dump(list(instances.values()), outfile, indent=4)
+        json.dump(list(instances.values()), outfile, indent=1)
 
 
 if __name__ == "__main__":
