@@ -1041,8 +1041,6 @@ def add_placement_groups(instances):
 
 
 def scrape(data_file):
-    import pickle
-
     """Scrape AWS to get instance data"""
     print("Parsing instance types...")
     all_instances = ec2.get_instances()
@@ -1070,9 +1068,6 @@ def scrape(data_file):
     add_availability_zone_info(all_instances)
     print("Adding placement group details...")
     add_placement_groups(all_instances)
-
-    with open('www/instances', 'wb') as f:
-        pickle.dump(all_instances, f)
 
     os.makedirs(os.path.dirname(data_file), exist_ok=True)
     with open(data_file, "w+") as f:
