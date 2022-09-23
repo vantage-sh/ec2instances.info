@@ -30,6 +30,9 @@ class Instance(object):
         self.ebs_optimized = False
         self.ebs_throughput = 0
         self.ebs_as_nvme = False
+        self.ebs_baseline_throughput = 0
+        self.ebs_baseline_iops = 0
+        self.ebs_baseline_bandwidth = 0
         self.ECU = 0
         self.enhanced_networking = None
         self.family = ""
@@ -111,6 +114,9 @@ class Instance(object):
             ebs_iops=self.ebs_iops,
             ebs_as_nvme=self.ebs_as_nvme,
             ebs_max_bandwidth=self.ebs_max_bandwidth,
+            ebs_baseline_throughput = self.ebs_baseline_throughput,
+            ebs_baseline_iops = self.ebs_baseline_iops,
+            ebs_baseline_bandwidth = self.ebs_baseline_bandwidth,
             network_performance=self.network_performance,
             enhanced_networking=self.enhanced_networking,
             placement_group_support=self.placement_group_support,
@@ -319,6 +325,25 @@ def add_ebs_info(instances):
 
     """
 
+    def parse_ebs_baseline_table(by_type, table):
+        for row in table.xpath("tr"):
+            if row.xpath("th"):
+                continue
+            cols = row.xpath("td")
+            instance_type = sanitize_instance_type(totext(cols[0]).replace("*", ""))
+            ebs_baseline_bandwidth = locale.atof(totext(cols[1]))
+            ebs_baseline_throughput = locale.atof(totext(cols[2]))
+            ebs_baseline_iops = locale.atof(totext(cols[3]))
+            if instance_type not in by_type:
+                print(f"ERROR: Ignoring EBS info for unknown instance {instance_type}")
+                by_type[instance_type] = Instance()
+                # continue
+            by_type[instance_type].ebs_baseline_throughput = ebs_baseline_throughput
+            by_type[instance_type].ebs_baseline_iops = ebs_baseline_iops
+            by_type[instance_type].ebs_baseline_bandwidth = ebs_baseline_bandwidth
+        return by_type
+
+
     def parse_ebs_table(by_type, table, ebs_optimized_by_default):
         for row in table.xpath("tr"):
             if row.xpath("th"):
@@ -341,6 +366,7 @@ def add_ebs_info(instances):
                 by_type[instance_type].ebs_optimized = True
         return by_type
 
+
     by_type = {i.instance_type: i for i in instances}
     # Canonical URL for this info is https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
     # ebs_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.partial.html"
@@ -349,6 +375,7 @@ def add_ebs_info(instances):
     tree = etree.parse(urllib2.urlopen(ebs_url), etree.HTMLParser())
     tables = tree.xpath('//div[@class="table-contents"]//table')
     parse_ebs_table(by_type, tables[0], True)
+    parse_ebs_baseline_table(by_type, tables[1])
     parse_ebs_table(by_type, tables[2], False)
 
 
