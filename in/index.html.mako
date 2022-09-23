@@ -181,6 +181,9 @@
           <th class="trim-support">Instance Storage: SSD TRIM Support</th>
           <th class="architecture">Arch</th>
           <th class="networkperf">Network Performance</th>
+          <th class="ebs-baseline-bandwidth">EBS Optimized: Baseline Bandwidth</th>
+          <th class="ebs-baseline-throughput">EBS Optimized: Baseline Throughput (128K)</th>
+          <th class="ebs-baseline-iops">EBS Optimized: Baseline IOPS (16K)</th>
           <th class="ebs-max-bandwidth">EBS Optimized: Max Bandwidth</th>
           <th class="ebs-throughput">EBS Optimized: Max Throughput (128K)</th>
           <th class="ebs-iops">EBS Optimized: Max IOPS (16K)</th>
@@ -370,6 +373,25 @@
                 ${inst['network_performance']}
               </span>
             </td>
+            <td class="ebs-baseline-bandwidth">
+              % if not inst['ebs_baseline_bandwidth']:
+              <span sort="0">N/A</span>
+              % else:
+              <span sort="${inst['ebs_baseline_bandwidth']}">
+                ${inst['ebs_baseline_bandwidth']} Mbps  <!-- Not MB/s! -->
+              </span>
+              % endif
+            </td>
+            <td class="ebs-baseline-throughput">
+              <span sort="${inst['ebs_baseline_throughput']}">
+                ${inst['ebs_baseline_throughput']} MB/s
+              </span>
+            </td>
+            <td class="ebs-baseline-iops">
+              <span sort="${inst['ebs_baseline_iops']}">
+                ${inst['ebs_baseline_iops']} IOPS
+              </span>
+            </td>
             <td class="ebs-max-bandwidth">
               % if not inst['ebs_max_bandwidth']:
               <span sort="0">N/A</span>
@@ -381,7 +403,7 @@
             </td>
             <td class="ebs-throughput">
               <span sort="${inst['ebs_throughput']}">
-                ${inst['ebs_throughput']} Mbps  <!-- Not MB/s! -->
+                ${inst['ebs_throughput']} MB/s
               </span>
             </td>
             <td class="ebs-iops">

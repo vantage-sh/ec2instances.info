@@ -114,9 +114,9 @@ class Instance(object):
             ebs_iops=self.ebs_iops,
             ebs_as_nvme=self.ebs_as_nvme,
             ebs_max_bandwidth=self.ebs_max_bandwidth,
-            ebs_baseline_throughput = self.ebs_baseline_throughput,
-            ebs_baseline_iops = self.ebs_baseline_iops,
-            ebs_baseline_bandwidth = self.ebs_baseline_bandwidth,
+            ebs_baseline_throughput=self.ebs_baseline_throughput,
+            ebs_baseline_iops=self.ebs_baseline_iops,
+            ebs_baseline_bandwidth=self.ebs_baseline_bandwidth,
             network_performance=self.network_performance,
             enhanced_networking=self.enhanced_networking,
             placement_group_support=self.placement_group_support,
@@ -343,7 +343,6 @@ def add_ebs_info(instances):
             by_type[instance_type].ebs_baseline_bandwidth = ebs_baseline_bandwidth
         return by_type
 
-
     def parse_ebs_table(by_type, table, ebs_optimized_by_default):
         for row in table.xpath("tr"):
             if row.xpath("th"):
@@ -365,7 +364,6 @@ def add_ebs_info(instances):
             if ebs_max_bandwidth:
                 by_type[instance_type].ebs_optimized = True
         return by_type
-
 
     by_type = {i.instance_type: i for i in instances}
     # Canonical URL for this info is https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
@@ -1043,6 +1041,8 @@ def add_placement_groups(instances):
 
 
 def scrape(data_file):
+    import pickle
+
     """Scrape AWS to get instance data"""
     print("Parsing instance types...")
     all_instances = ec2.get_instances()
@@ -1070,6 +1070,9 @@ def scrape(data_file):
     add_availability_zone_info(all_instances)
     print("Adding placement group details...")
     add_placement_groups(all_instances)
+
+    with open('www/instances', 'wb') as f:
+        pickle.dump(all_instances, f)
 
     os.makedirs(os.path.dirname(data_file), exist_ok=True)
     with open(data_file, "w+") as f:
