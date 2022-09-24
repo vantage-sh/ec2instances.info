@@ -107,36 +107,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/datatables.min.js"></script>
     <script src="/store/store.js" type="text/javascript" charset="utf-8"></script>
-
-    <!-- Custom JS -->
-    <script type="text/javascript">
-        % if pricing_json:
-          var _pricing = ${pricing_json};
-          function get_pricing() {
-              // see compress_pricing in render.py for the generation side
-              v = _pricing["data"];
-              for (var i = 0; i < arguments.length; i++) {
-                  k = _pricing["index"][arguments[i]];
-                  v = v[k];
-                  if (v === undefined) {
-                      return undefined;
-                  }
-              }
-              return v;
-          }
-          var _instance_azs = ${instance_azs_json};
-          function get_instance_availability_zones(instance_type, region) {
-            var region_azs = _instance_azs[instance_type];
-            if (region_azs) {
-              var azs = region_azs[region];
-              if (azs) {
-                return azs;
-              }
-            }
-            return [];
-          }
-        % endif
-    </script>
     <script src="/default.js" type="text/javascript" charset="utf-8"></script>
   </body>
 </html>
