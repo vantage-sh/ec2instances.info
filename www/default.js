@@ -194,6 +194,7 @@ function init_data_table() {
     ],
     // default sort by linux cost
     aaSorting: [[6, 'asc']],
+    /*
     initComplete: function () {
       // fire event in separate context so that calls to get_data_table()
       // receive the cached object.
@@ -201,6 +202,7 @@ function init_data_table() {
         on_data_table_initialized();
       }, 0);
     },
+    */
     // Store filtering, sorting, etc - core datatable feature
     stateSave: true,
     stateDuration: 0,
@@ -223,15 +225,47 @@ function init_data_table() {
   return g_data_table;
 }
 
+var _pricing;
 $(document).ready(function () {
+  /*
   json_pricing().then(prices => {
      prices; // fetched prices
   });
-
+  */
   init_data_table();
+
+  fetch('/pricing.json')
+  .then((response) => response.json())
+  .then(data => _pricing = data)
+  .then(() => on_data_table_initialized());
 
   // read _json();
 });
+
+function get_pricing() {
+    // see compress_pricing in render.py for the generation side
+    var v = _pricing["data"];
+    for (var i = 0; i < arguments.length; i++) {
+        var k = _pricing["index"][arguments[i]];
+        v = v[k];
+        if (v === undefined) {
+            return undefined;
+        }
+    }
+    return v;
+}
+
+var _instance_azs;
+function get_instance_availability_zones(instance_type, region) {
+  var region_azs = _instance_azs[instance_type];
+  if (region_azs) {
+    var azs = region_azs[region];
+    if (azs) {
+      return azs;
+    }
+  }
+  return [];
+}
 
 function change_cost() {
   // update pricing duration menu text
@@ -797,12 +831,14 @@ $('#fullsearch').on('keyup', function () {
   g_data_table.search(this.value).draw();
 });
 
+
 async function json_pricing() {
   const response = await fetch('/instances.json');
   const prices = await response.json();
   return prices;
 }
 
+/*
 function read_json() {
   // http://localhost:8080
   fetch('/instances.json')
@@ -820,3 +856,4 @@ function read_json() {
       this.dataError = true;
   })
 }
+*/
