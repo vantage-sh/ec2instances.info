@@ -151,18 +151,10 @@ def render(data_file, template_file, destination_file, detail_pages=True):
     pricing_json = compress_pricing(instances)
     with open('www/pricing.json', "w+") as f:
         f.write(pricing_json)
-        # print(pricing_json)
-        # json.dump(pricing_json, f)
-    # with open(data_file, "w+") as f:
-    #     json.dump(
-    #         [i.to_dict() for i in all_instances],
-    #         f,
-    #         indent=1,
-    #         sort_keys=True,
-    #         separators=(",", ": "),
-    #     )
-    generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     instance_azs_json = compress_instance_azs(instances)
+    with open('www/instance_azs.json', "w+") as f:
+        f.write(instance_azs_json)
+    generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
 
     sitemap = []
     if detail_pages:
@@ -178,9 +170,7 @@ def render(data_file, template_file, destination_file, detail_pages=True):
             fh.write(
                 template.render(
                     instances=instances,
-                    # pricing_json=pricing_json,
                     generated_at=generated_at,
-                    instance_azs_json=instance_azs_json,
                 )
             )
             sitemap.append(destination_file)

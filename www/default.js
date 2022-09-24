@@ -262,20 +262,15 @@ function init_data_table() {
 }
 
 var _pricing;
+var _instance_azs;
 $(document).ready(function () {
-  /*
-  json_pricing().then(prices => {
-     prices; // fetched prices
-  });
-  */
   init_data_table();
 
-  fetch('/pricing.json')
-  .then((response) => response.json())
-  .then(data => _pricing = data)
-  .then(() => on_data_table_initialized());
+  Promise.all([
+    fetch('/pricing.json').then((response) => response.json()).then(data => _pricing = data),
+    fetch('/instance_azs.json').then((response) => response.json()).then(data => _instance_azs = data)
+  ]).then(() => on_data_table_initialized())
 
-  // read _json();
 });
 
 function get_pricing() {
@@ -291,7 +286,6 @@ function get_pricing() {
     return v;
 }
 
-var _instance_azs;
 function get_instance_availability_zones(instance_type, region) {
   var region_azs = _instance_azs[instance_type];
   if (region_azs) {
@@ -879,30 +873,3 @@ function update_compare_button() {
 $('#fullsearch').on('keyup', function () {
   g_data_table.search(this.value).draw();
 });
-
-
-async function json_pricing() {
-  const response = await fetch('/instances.json');
-  const prices = await response.json();
-  return prices;
-}
-
-/*
-function read_json() {
-  // http://localhost:8080
-  fetch('/instances.json')
-  .then(response => {
-      if (!response.ok) {
-          throw new Error("HTTP error " + response.status);
-      }
-      return response.json();
-  })
-  .then(json => {
-      this.prices = json;
-      console.log(this.prices);
-  })
-  .catch(function () {
-      this.dataError = true;
-  })
-}
-*/
