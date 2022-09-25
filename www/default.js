@@ -230,9 +230,21 @@ var _instance_azs;
 $(document).ready(function () {
   init_data_table();
 
+  var page = window.location.pathname;
+  var prices_path = '/pricing.json';
+  var azs_path = '/instance_azs.json';
+
+  if (page === "/rds/") {
+    prices_path = '/pricing_rds.json';
+    azs_path = '/instance_azs_rds.json';
+  } else if (page === '/cache/') {
+    prices_path = '/pricing_cache.json';
+    azs_path = '/instance_azs_cache.json';
+  }
+
   Promise.all([
-    fetch('/pricing.json').then((response) => response.json()).then(data => _pricing = data),
-    fetch('/instance_azs.json').then((response) => response.json()).then(data => _instance_azs = data)
+    fetch(prices_path).then((response) => response.json()).then(data => _pricing = data),
+    fetch(prices_path).then((response) => response.json()).then(data => _instance_azs = data)
   ]).then(() => on_data_table_initialized())
 
 });
