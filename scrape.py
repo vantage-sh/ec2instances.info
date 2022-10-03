@@ -1040,34 +1040,109 @@ def add_placement_groups(instances):
             inst.placement_group_support = False
 
 
+def add_dedicated_info(instances):
+    # We really need to handle this better and stop hardcoding regions. Hopefully tackle this
+    # when we tackle local zones. Note: These regions are named differently than in the dropdown.
+    region_map = {
+        "af-south-1": "Africa (Cape Town)",
+        "ap-east-1": "Asia Pacific (Hong Kong)",
+        "ap-south-1": "Asia Pacific (Mumbai)",
+        "ap-northeast-3": "Asia Pacific (Osaka)",
+        "ap-northeast-2": "Asia Pacific (Seoul)",
+        "ap-southeast-1": "Asia Pacific (Singapore)",
+        "ap-southeast-2": "Asia Pacific (Sydney)",
+        "ap-southeast-3": "Asia Pacific (Jakarta)",
+        "ap-northeast-1": "Asia Pacific (Tokyo)",
+        "ca-central-1": "Canada (Central)",
+        "eu-central-1": "EU (Frankfurt)",
+        "eu-west-1": "EU (Ireland)",
+        "eu-west-2": "EU (London)",
+        "eu-west-3": "EU (Paris)",
+        "eu-north-1": "EU (Stockholm)",
+        "eu-south-1": "EU (Milan)",
+        "me-south-1": "Middle East (Bahrain)",
+        "me-central-1": "Middle East (UAE)",
+        "sa-east-1": "South America (Sao Paulo)",
+        "us-east-1": "US East (N. Virginia)",
+        "us-east-2": "US East (Ohio)",
+        "us-west-1": "US West (N. California)",
+        "us-west-2": "US West (Oregon)",
+        "us-gov-west-1": "AWS GovCloud (US-West)",
+        "us-gov-east-1": "AWS GovCloud (US-East)",
+    }
+    url = "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/dedicatedhost-ondemand.json"
+    pricing = fetch_data(url)
+
+    dedicated_prices = {}
+    for region in pricing["regions"]:
+        dedicated_prices[region] = {}
+        # The list of dedicated host prices for a particular region
+        for description, ded_inst in pricing["regions"][region].items():
+            _inst_name = ded_inst["Instance Type"]
+            _price = ded_inst["price"]
+            dedicated_prices[region][_inst_name] = _price
+
+    for inst in instances:
+        for region in inst.pricing:
+            # Add the 'dedicated' price to the price list as a top level key like 'spot'
+            try:
+                dedicated_price = {
+                    "ondemand": dedicated_prices[region_map[region]][
+                        inst.instance_type.split(".")[0]
+                    ]
+                }
+                # print(region)
+                # print(inst.instance_type)
+                # print(inst.family)
+                # print(dedicated_price)
+                inst.pricing[region]["dedicated"] = dedicated_price
+            except KeyError:
+                print(
+                    "No dedicated host price for %s in %s"
+                    % (inst.instance_type, region)
+                )
+                pass
+            break
+        break
+
+
 def scrape(data_file):
-    """Scrape AWS to get instance data"""
-    print("Parsing instance types...")
-    all_instances = ec2.get_instances()
-    print("Parsing pricing info...")
-    add_pricing_info(all_instances)
-    print("Parsing ENI info...")
-    add_eni_info(all_instances)
-    print("Parsing EBS info...")
-    add_ebs_info(all_instances)
-    print("Parsing Linux AMI info...")
-    add_linux_ami_info(all_instances)
-    print("Parsing VPC-only info...")
-    add_vpconly_detail(all_instances)
-    print("Parsing local instance storage...")
-    add_instance_storage_details(all_instances)
-    print("Parsing burstable instance credits...")
-    add_t2_credits(all_instances)
-    print("Parsing instance names...")
-    add_pretty_names(all_instances)
-    print("Parsing emr details...")
-    add_emr_info(all_instances)
-    print("Adding GPU details...")
-    add_gpu_info(all_instances)
-    print("Adding availability zone details...")
-    add_availability_zone_info(all_instances)
-    print("Adding placement group details...")
-    add_placement_groups(all_instances)
+    import pickle
+
+    # """Scrape AWS to get instance data"""
+    # print("Parsing instance types...")
+    # all_instances = ec2.get_instances()
+    # print("Parsing pricing info...")
+    # add_pricing_info(all_instances)
+    # print("Parsing ENI info...")
+    # add_eni_info(all_instances)
+    # print("Parsing EBS info...")
+    # add_ebs_info(all_instances)
+    # print("Parsing Linux AMI info...")
+    # add_linux_ami_info(all_instances)
+    # print("Parsing VPC-only info...")
+    # add_vpconly_detail(all_instances)
+    # print("Parsing local instance storage...")
+    # add_instance_storage_details(all_instances)
+    # print("Parsing burstable instance credits...")
+    # add_t2_credits(all_instances)
+    # print("Parsing instance names...")
+    # add_pretty_names(all_instances)
+    # print("Parsing emr details...")
+    # add_emr_info(all_instances)
+    # print("Adding GPU details...")
+    # add_gpu_info(all_instances)
+    # print("Adding availability zone details...")
+    # add_availability_zone_info(all_instances)
+    # print("Adding placement group details...")
+    # add_placement_groups(all_instances)
+
+    # with open('www/instances', 'wb') as f:
+    #     pickle.dump(all_instances, f)
+
+    with open("www/instances", "rb") as f:
+        all_instances = pickle.load(f)
+    add_dedicated_info(all_instances)
 
     os.makedirs(os.path.dirname(data_file), exist_ok=True)
     with open(data_file, "w+") as f:
