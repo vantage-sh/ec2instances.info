@@ -1070,8 +1070,23 @@ def add_dedicated_info(instances):
         "us-gov-west-1": "AWS GovCloud (US-West)",
         "us-gov-east-1": "AWS GovCloud (US-East)",
     }
+
+    # On demand pricing
     url = "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/dedicatedhost-ondemand.json"
     pricing = fetch_data(url)
+
+    # All of the reserved pricing is at different URLs
+    for region in pricing["regions"]:
+        for term in ["3 year", "1 year"]:
+            for payment in ["No Upfront", "Partial Upfront", "All Upfront"]:
+                base = f"https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/dedicatedhost-reservedinstance-virtual/"
+                path = f"{region}/{term}/{payment}/index.json".replace(" ", "%20")
+
+                try:
+                    pricing = fetch_data(base + path)
+                    print(pricing)
+                except:
+                    print("Could not fetch data for " + path)
 
     dedicated_prices = {}
     for region in pricing["regions"]:
