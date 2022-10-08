@@ -1041,8 +1041,7 @@ def add_placement_groups(instances):
 
 
 def add_dedicated_info(instances):
-    # We really need to handle this better and stop hardcoding regions. Hopefully tackle this
-    # when we tackle local zones. Note: These regions are named differently than in the dropdown.
+    # Note: AWS GovCloud (US) is us-gov-west-1. This seems to be an exception just for dedicated hosts.
     region_map = {
         "af-south-1": "Africa (Cape Town)",
         "ap-east-1": "Asia Pacific (Hong Kong)",
@@ -1067,96 +1066,130 @@ def add_dedicated_info(instances):
         "us-east-2": "US East (Ohio)",
         "us-west-1": "US West (N. California)",
         "us-west-2": "US West (Oregon)",
-        "us-gov-west-1": "AWS GovCloud (US-West)",
+        "us-gov-west-1": "AWS GovCloud (US)",
         "us-gov-east-1": "AWS GovCloud (US-East)",
     }
 
-    # On demand pricing
-    url = "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/dedicatedhost-ondemand.json"
-    pricing = fetch_data(url)
+    # Normalize and translate term lengths and payment options to ec2instances.info terms
+    reserved_map = {
+        "1yrNoUpfront": "yrTerm1Standard.noUpfront",
+        "1yrPartialUpfront": "yrTerm1Standard.partialUpfront",
+        "1yrAllUpfront": "yrTerm1Standard.allUpfront",
+        "1 yrNoUpfront": "yrTerm1Standard.noUpfront",
+        "1 yrPartialUpfront": "yrTerm1Standard.partialUpfront",
+        "1 yrAllUpfront": "yrTerm1Standard.allUpfront",
+        "3yrNoUpfront": "yrTerm3Standard.noUpfront",
+        "3yrPartialUpfront": "yrTerm3Standard.partialUpfront",
+        "3yrAllUpfront": "yrTerm3Standard.allUpfront",
+        "3 yrNoUpfront": "yrTerm3Standard.noUpfront",
+        "3 yrPartialUpfront": "yrTerm3Standard.partialUpfront",
+        "3 yrAllUpfront": "yrTerm3Standard.allUpfront",
+    }
 
-    # All of the reserved pricing is at different URLs
-    for region in pricing["regions"]:
-        for term in ["3 year", "1 year"]:
-            for payment in ["No Upfront", "Partial Upfront", "All Upfront"]:
-                base = f"https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/dedicatedhost-reservedinstance-virtual/"
-                path = f"{region}/{term}/{payment}/index.json".replace(" ", "%20")
+    def format_price(price):
+        return str(float("%f" % float(price))).rstrip("0").rstrip(".")
 
-                try:
-                    pricing = fetch_data(base + path)
-                    print(pricing)
-                except:
-                    print("Could not fetch data for " + path)
+    def fetch_dedicated_prices():
+        all_pricing = {}
 
-    dedicated_prices = {}
-    for region in pricing["regions"]:
-        dedicated_prices[region] = {}
-        # The list of dedicated host prices for a particular region
-        for description, ded_inst in pricing["regions"][region].items():
-            _inst_name = ded_inst["Instance Type"]
-            _price = ded_inst["price"]
-            dedicated_prices[region][_inst_name] = _price
+        # On demand pricing, not all dedicated instances are available on demand
+        url = "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/dedicatedhost-ondemand.json"
+        od_pricing = fetch_data(url)
+        for region in od_pricing["regions"]:
+            all_pricing[region] = {}
+            for instance_description, dinst in od_pricing["regions"][region].items():
+                _price = {"ondemand": format_price(dinst["price"])}
+                all_pricing[region][dinst["Instance Type"]] = _price
 
+        # All of the reserved pricing is at different URLs
+        for region in od_pricing["regions"]:
+            for term in ["3 year", "1 year"]:
+                for payment in ["No Upfront", "Partial Upfront", "All Upfront"]:
+                    base = f"https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/dedicatedhost-reservedinstance-virtual/"
+                    path = f"{region}/{term}/{payment}/index.json".replace(" ", "%20")
+
+                    try:
+                        pricing = fetch_data(base + path)
+                    except:
+                        print("Could not fetch data for " + path)
+                        pricing = None
+
+                    if pricing:
+                        for instance_description, dinst in pricing["regions"][
+                            region
+                        ].items():
+                            # Similar to get_reserved_pricing in ec2.py the goal is to get the effective hourly rate
+                            # and then the frontend will deal with making it monthly, yearly etc
+                            upfront = 0.0
+                            if "Partial" in payment or "All" in payment:
+                                upfront = float(dinst["riupfront:PricePerUnit"])
+                            inst_type = dinst["Instance Type"]
+                            ondemand = float(dinst["price"])
+                            lease_in_years = int(dinst["LeaseContractLength"][0])
+                            hours_in_term = lease_in_years * 365 * 24
+                            price = float(ondemand) + (float(upfront) / hours_in_term)
+                            translate_ri = reserved_map[
+                                dinst["LeaseContractLength"] + dinst["PurchaseOption"]
+                            ]
+
+                            # Certain instances will not have been created above because they are not available on demand
+                            if inst_type not in all_pricing[region]:
+                                all_pricing[region][inst_type] = {}
+
+                            all_pricing[region][inst_type][translate_ri] = format_price(
+                                price
+                            )
+        return all_pricing
+
+    all_pricing = fetch_dedicated_prices()
     for inst in instances:
         for region in inst.pricing:
-            # Add the 'dedicated' price to the price list as a top level key like 'spot'
+            # Add the 'dedicated' price to the price list as a top level key per region.
+            # Dedicated hosts are not associated with any type of software like rhel or mswin
+            # Not all instances are available as dedicated hosts
             try:
-                dedicated_price = {
-                    "ondemand": dedicated_prices[region_map[region]][
-                        inst.instance_type.split(".")[0]
-                    ]
-                }
-                # print(region)
-                # print(inst.instance_type)
-                # print(inst.family)
-                # print(dedicated_price)
-                inst.pricing[region]["dedicated"] = dedicated_price
+                _price = all_pricing[region_map[region]][
+                    inst.instance_type.split(".")[0]
+                ]
+                inst.pricing[region]["dedicated"] = _price
             except KeyError:
                 print(
                     "No dedicated host price for %s in %s"
                     % (inst.instance_type, region)
                 )
-                pass
-            break
+        print(json.dumps(inst.pricing, indent=4))
         break
 
 
 def scrape(data_file):
-    import pickle
-
     # """Scrape AWS to get instance data"""
-    # print("Parsing instance types...")
-    # all_instances = ec2.get_instances()
-    # print("Parsing pricing info...")
-    # add_pricing_info(all_instances)
-    # print("Parsing ENI info...")
-    # add_eni_info(all_instances)
-    # print("Parsing EBS info...")
-    # add_ebs_info(all_instances)
-    # print("Parsing Linux AMI info...")
-    # add_linux_ami_info(all_instances)
-    # print("Parsing VPC-only info...")
-    # add_vpconly_detail(all_instances)
-    # print("Parsing local instance storage...")
-    # add_instance_storage_details(all_instances)
-    # print("Parsing burstable instance credits...")
-    # add_t2_credits(all_instances)
-    # print("Parsing instance names...")
-    # add_pretty_names(all_instances)
-    # print("Parsing emr details...")
-    # add_emr_info(all_instances)
-    # print("Adding GPU details...")
-    # add_gpu_info(all_instances)
-    # print("Adding availability zone details...")
-    # add_availability_zone_info(all_instances)
-    # print("Adding placement group details...")
-    # add_placement_groups(all_instances)
-
-    # with open('www/instances', 'wb') as f:
-    #     pickle.dump(all_instances, f)
-
-    with open("www/instances", "rb") as f:
-        all_instances = pickle.load(f)
+    print("Parsing instance types...")
+    all_instances = ec2.get_instances()
+    print("Parsing pricing info...")
+    add_pricing_info(all_instances)
+    print("Parsing ENI info...")
+    add_eni_info(all_instances)
+    print("Parsing EBS info...")
+    add_ebs_info(all_instances)
+    print("Parsing Linux AMI info...")
+    add_linux_ami_info(all_instances)
+    print("Parsing VPC-only info...")
+    add_vpconly_detail(all_instances)
+    print("Parsing local instance storage...")
+    add_instance_storage_details(all_instances)
+    print("Parsing burstable instance credits...")
+    add_t2_credits(all_instances)
+    print("Parsing instance names...")
+    add_pretty_names(all_instances)
+    print("Parsing emr details...")
+    add_emr_info(all_instances)
+    print("Adding GPU details...")
+    add_gpu_info(all_instances)
+    print("Adding availability zone details...")
+    add_availability_zone_info(all_instances)
+    print("Adding placement group details...")
+    add_placement_groups(all_instances)
+    print("Adding dedicated host pricing...")
     add_dedicated_info(all_instances)
 
     os.makedirs(os.path.dirname(data_file), exist_ok=True)
