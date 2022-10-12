@@ -159,6 +159,7 @@ def assemble_the_families(instances):
 
 def prices(pricing):
     display_prices = {}
+    print(pricing)
     for region, p in pricing.items():
         display_prices[region] = {}
 
@@ -328,6 +329,8 @@ def build_detail_pages_ec2(instances, destination_file):
     sitemap = []
     for i in instances:
         instance_type = i["instance_type"]
+        if instance_type != "mac2.metal":
+            continue
 
         instance_page = os.path.join(subdir, instance_type + ".html")
         instance_details = map_ec2_attributes(i, imap)
