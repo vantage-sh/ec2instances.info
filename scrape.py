@@ -1111,7 +1111,7 @@ def add_dedicated_info(instances):
                     try:
                         pricing = fetch_data(base + path)
                     except:
-                        print("Could not fetch data for " + path)
+                        print("Could not fetch dedicated pricing for " + path)
                         pricing = None
 
                     if pricing:
@@ -1143,26 +1143,36 @@ def add_dedicated_info(instances):
 
     all_pricing = fetch_dedicated_prices()
     for inst in instances:
-        for region in inst.pricing:
-            # Add the 'dedicated' price to the price list as a top level key per region.
-            # Dedicated hosts are not associated with any type of software like rhel or mswin
-            # Not all instances are available as dedicated hosts
-            try:
-                _price = all_pricing[region_map[region]][
-                    inst.instance_type.split(".")[0]
-                ]
-                inst.pricing[region]["dedicated"] = _price
-            except KeyError:
-                print(
-                    "No dedicated host price for %s in %s"
-                    % (inst.instance_type, region)
-                )
-        print(json.dumps(inst.pricing, indent=4))
-        break
+        if not inst.pricing:
+            # Less than 10 instances are ONLY available with dedicated host pricing
+            # In this case there is no prior pricing dict to add the dedicated prices to so
+            # create a new one. Unfortunately we have to search by instance but the
+            # previous dedicated pricing dict we have built is by region.
+            inst_type = inst.instance_type.split(".")[0]
+            for k, r in region_map.items():
+                if inst_type in all_pricing[r]:
+                    _price = all_pricing[r][inst_type]
+                    inst.pricing[k] = {}
+                    inst.pricing[k]["dedicated"] = _price
+        else:
+            for region in inst.pricing:
+                # Add the 'dedicated' price to the price list as a top level key per region.
+                # Dedicated hosts are not associated with any type of software like rhel or mswin
+                # Not all instances are available as dedicated hosts
+                try:
+                    _price = all_pricing[region_map[region]][
+                        inst.instance_type.split(".")[0]
+                    ]
+                    inst.pricing[region]["dedicated"] = _price
+                except KeyError:
+                    print(
+                        "No dedicated host price for %s in %s"
+                        % (inst.instance_type, region)
+                    )
 
 
 def scrape(data_file):
-    # """Scrape AWS to get instance data"""
+    """Scrape AWS to get instance data"""
     print("Parsing instance types...")
     all_instances = ec2.get_instances()
     print("Parsing pricing info...")
