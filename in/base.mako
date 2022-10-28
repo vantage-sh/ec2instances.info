@@ -70,7 +70,7 @@
             </li>
           </ul>
         </div>
-        <a href="https://www.vantage.sh/features/cost-anomaly-alerts" class="vantage">Stop surprise bills with <span class="fw-semibold">Cost Anomaly Alerts</span> for AWS and Snowflake -></a>
+        <a href="https://www.vantage.sh/features/autopilot" class="vantage fw-semibold">Save 50%+ on AWS with Autopilot -></span></a>
         <div class="d-flex">
           <div class="nav-buttons px-2">
             <a target="_blank" href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw" class="btn btn-purple btn-icon">

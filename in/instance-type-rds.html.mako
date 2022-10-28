@@ -49,7 +49,7 @@
             Star
           </a>
         </div>
-        <a href="https://www.vantage.sh/features/cost-anomaly-alerts" class="vantage">Stop surprise bills with <span class="fw-semibold">Cost Anomaly Alerts</span> for AWS and Snowflake -></a>
+        <a href="https://www.vantage.sh/features/autopilot" class="vantage fw-semibold">Save 50%+ on AWS with Autopilot -></span></a>
         <div class="nav-buttons">
           <a href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-github btn-icon">
             <svg class="me-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
