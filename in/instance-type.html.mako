@@ -120,6 +120,7 @@
                   <option value="mswin">Windows</option>
                   <option value="rhel">Red Hat</option>
                   <option value="sles">SUSE</option>
+                  <option value="dedicated">Dedicated Host</option>
                   <option value="linuxSQL">Linux SQL Server</option>
                   <option value="linuxSQLWeb">Linux SQL Server for Web</option>
                   <option value="linuxSQLEnterprise">Linux SQL Enterprise</option>

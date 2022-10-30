@@ -1041,6 +1041,9 @@ def add_placement_groups(instances):
 
 
 def add_dedicated_info(instances):
+    # Dedicated Host is a physical server with EC2 instance capacity fully dedicated to a single customer.
+    # We treat it as another type of OS, like RHEL or SUSE.
+
     # Note: AWS GovCloud (US) is us-gov-west-1. This seems to be an exception just for dedicated hosts.
     region_map = {
         "af-south-1": "Africa (Cape Town)",
@@ -1098,7 +1101,7 @@ def add_dedicated_info(instances):
         for region in od_pricing["regions"]:
             all_pricing[region] = {}
             for instance_description, dinst in od_pricing["regions"][region].items():
-                _price = {"ondemand": format_price(dinst["price"])}
+                _price = {"ondemand": format_price(dinst["price"]), "reserved": {}}
                 all_pricing[region][dinst["Instance Type"]] = _price
 
         # All of the reserved pricing is at different URLs
@@ -1134,9 +1137,9 @@ def add_dedicated_info(instances):
 
                             # Certain instances will not have been created above because they are not available on demand
                             if inst_type not in all_pricing[region]:
-                                all_pricing[region][inst_type] = {}
+                                all_pricing[region][inst_type] = {"reserved": {}}
 
-                            all_pricing[region][inst_type][translate_ri] = format_price(
+                            all_pricing[region][inst_type]["reserved"][translate_ri] = format_price(
                                 price
                             )
         return all_pricing
