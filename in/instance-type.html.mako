@@ -13,13 +13,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <%block name="meta"/>
     <link rel="stylesheet" href="/default.css" media="screen">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
     <link rel="icon" type="image/png" href="https://assets.vantage.sh/www/favicon-32x32.png">
-    <title>${i["Amazon"][1]["value"]} pricing and specs | instances.vantage.sh</title>
+    <title>${i["Amazon"][1]["value"]} pricing and specs | Vantage</title>
     <meta name="description" content="${description}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   </head>
@@ -125,10 +125,20 @@
               </div>
               <div class="col-6 mb-2">
                 <select class="form-select form-select-sm" id="os">
+                <!-- This is the 'not_linux_flag' used for dedicated hosts -->
+                % if defaults[4]:
+                  <option value="dedicated">Dedicated Host</option>
                   <option value="linux">Linux</option>
                   <option value="mswin">Windows</option>
                   <option value="rhel">Red Hat</option>
                   <option value="sles">SUSE</option>
+                % else:
+                  <option value="linux">Linux</option>
+                  <option value="mswin">Windows</option>
+                  <option value="rhel">Red Hat</option>
+                  <option value="sles">SUSE</option>
+                  <option value="dedicated">Dedicated Host</option>
+                % endif
                   <option value="linuxSQL">Linux SQL Server</option>
                   <option value="linuxSQLWeb">Linux SQL Server for Web</option>
                   <option value="linuxSQLEnterprise">Linux SQL Enterprise</option>
@@ -322,6 +332,7 @@
   <script type="text/javascript">
   $(function() {
     initialize_prices();
+    disable_regions();
 
     $('#region').change(function() {
       recalulate_redisplay_prices()
@@ -339,15 +350,15 @@
 
     function format_price(element, price_value) {
       // Handle prices from $0.0001 to $100,000
-      if (price_value === "N/A") {
+      if (isNaN(price_value)) {
+        $('#' + element).html('N/A');
+      } else if (price_value === "N/A") {
         $('#' + element).html('N/A');
       } else if (price_value < .99) {
         $('#' + element).html("&dollar;" + price_value.toFixed(4));
-      }
-      else if (price_value > 99 && price_value <= 9999) {
+      } else if (price_value > 99 && price_value <= 9999) {
         $('#' + element).html("&dollar;" + price_value.toFixed(2));
-      }
-      else if (price_value > 9999) {
+      } else if (price_value > 9999) {
         // TODO: localize, use periods instead of commas in EU for example
         $('#' + element).html("&dollar;" + Math.floor(price_value).toLocaleString('en-US'));
       } else {
@@ -360,6 +371,24 @@
       format_price("p_spot", ${defaults[1]});
       format_price("p_1yr", ${defaults[2]});
       format_price("p_3yr", ${defaults[3]});
+    };
+
+    function disable_regions() {
+      var regions = []
+      var unavailable = ${unavailable};
+      for (const u of unavailable) {
+        if (u[2] == 'All') {
+          regions.push(u[1]);
+        }
+      }
+
+      $("#region option").each(function(i) {
+        var dropdown_region = $(this).val();
+        if (regions.includes(dropdown_region)) {
+          $(this).attr("disabled", "disabled");
+        }
+      });
+
     };
 
     function recalulate_redisplay_prices() {
@@ -411,7 +440,7 @@
           
           // Show by day, month, year etc
           price_value = parseFloat(price_value) * hour_multipliers[unit];
-
+          
           format_price(element, price_value);
         }
       }

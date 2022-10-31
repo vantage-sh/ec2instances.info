@@ -36,7 +36,9 @@ def translate_platform_name(operating_system, preinstalled_software):
         "SQL Web": "SQLWeb",
         "SQL Ent": "SQLEnterprise",
     }
-    return os.get(operating_system, 'unknown') + software.get(preinstalled_software, 'unknown')
+    return os.get(operating_system, "unknown") + software.get(
+        preinstalled_software, "unknown"
+    )
 
 
 # Translate between the API and what is used locally

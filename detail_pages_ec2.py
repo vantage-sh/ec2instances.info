@@ -27,26 +27,41 @@ def storage(sattrs, imap):
 
 
 def initial_prices(i):
-    try:
-        od = i["Pricing"]["us-east-1"]["linux"]["ondemand"]
-    except:
-        # If prices are not available for us-east-1 it means this is a custom instance of some kind
-        return ["'N/A'", "'N/A'", "'N/A'", "'N/A'"]
+    # For EC2, basically everything has a price for linux, on-demand in us-east-1
+    # so default to that. Certain instances (mac2) are only available as dedicated hosts so
+    # fall back to that if no linux option. Reserved options are all over the place
+    # so try/catch for anything and set to n/a
+    not_linux_flag = False
 
-    od = i["Pricing"]["us-east-1"]["linux"]["ondemand"]
-    spot = i["Pricing"]["us-east-1"]["linux"]["spot"]
-    try:
-        _1yr = i["Pricing"]["us-east-1"]["linux"]["_1yr"]["Standard.noUpfront"]
-        _3yr = i["Pricing"]["us-east-1"]["linux"]["_3yr"]["Standard.noUpfront"]
-    except:
-        # If we can't get a reservation, likely a previous generation
-        _1yr = "'N/A'"
-        _3yr = "'N/A'"
+    init_p = {"ondemand": 0, "spot": 0, "_1yr": 0, "_3yr": 0}
+    for pricing_type in ["ondemand", "spot", "_1yr", "_3yr"]:
+        for os in ["linux", "dedicated"]:
+            try:
+                if "yr" in pricing_type:
+                    init_p[pricing_type] = i["Pricing"]["us-east-1"][os][pricing_type][
+                        "Standard.noUpfront"
+                    ]
+                else:
+                    init_p[pricing_type] = i["Pricing"]["us-east-1"][os][pricing_type]
+                break
+            except:
+                init_p[pricing_type] = "'N/A'"
+            finally:
+                # Let the frontend know that we're defaulting to a dedicated host
+                # to display pricing instead of linux
+                if os == "dedicated" and init_p[pricing_type] != "'N/A'":
+                    not_linux_flag = True
 
-    return [od, spot, _1yr, _3yr]
+    return [
+        init_p["ondemand"],
+        init_p["spot"],
+        init_p["_1yr"],
+        init_p["_3yr"],
+        not_linux_flag,
+    ]
 
 
-def description(id):
+def description(id, defaults):
     name = id["Amazon"][1]["value"]
     family_category = id["Amazon"][2]["value"].lower()
     cpus = id["Compute"][0]["value"]
@@ -55,14 +70,14 @@ def description(id):
 
     # Some instances say "Low to moderate" for bandwidth, ignore them
     try:
-        bandwidth = " and {} Gibps of bandwidth.".format(
+        bandwidth = " and {} Gibps of bandwidth".format(
             int(id["Networking"][0]["value"])
         )
     except:
-        bandwidth = "."
+        bandwidth = ""
 
-    return "The {} instance is a {} instance with {} vCPUs, {} GiB of memory{}".format(
-        name, family_category, cpus, memory, bandwidth
+    return "The {} instance is in the {} family with {} vCPUs, {} GiB of memory{} starting at ${} per hour.".format(
+        name, family_category, cpus, memory, bandwidth, defaults[0]
     )
 
 
@@ -75,23 +90,26 @@ def community(instance, links):
     return []
 
 
+ec2_os = {
+    "linux": "Linux",
+    "mswin": "Windows",
+    "rhel": "Red Hat",
+    "sles": "SUSE",
+    "dedicated": "Dedicated Host",
+    "linuxSQL": "Linux SQL Server",
+    "linuxSQLWeb": "Linux SQL Server for Web",
+    "linuxSQLEnterprise": "Linux SQL Enterprise",
+    "mswinSQL": "Windows SQL Server",
+    "mswinSQLWeb": "Windows SQL Web",
+    "mswinSQLEnterprise": "Windows SQL Enterprise",
+    "rhelSQL": "Red Hat SQL Server",
+    "rhelSQLWeb": "Red Hat SQL Web",
+    "rhelSQLEnterprise": "Red Hat SQL Enterprise",
+}
+
+
 def unavailable_instances(itype, instance_details):
     data_file = "meta/regions_aws.yaml"
-    ec2_os = {
-        "linux": "Linux",
-        "mswin": "Windows",
-        "rhel": "Red Hat",
-        "sles": "SUSE",
-        "linuxSQL": "Linux SQL Server",
-        "linuxSQLWeb": "Linux SQL Server for Web",
-        "linuxSQLEnterprise": "Linux SQL Enterprise",
-        "mswinSQL": "Windows SQL Server",
-        "mswinSQLWeb": "Windows SQL Web",
-        "mswinSQLEnterprise": "Windows SQL Enterprise",
-        "rhelSQL": "Red Hat SQL Server",
-        "rhelSQLWeb": "Red Hat SQL Web",
-        "rhelSQLEnterprise": "Red Hat SQL Enterprise",
-    }
 
     denylist = []
     with open(data_file, "r") as f:
@@ -174,13 +192,17 @@ def prices(pricing):
             try:
                 display_prices[region][os]["ondemand"] = _p["ondemand"]
             except KeyError:
-                display_prices[region][os]["ondemand"] = "N/A"
+                display_prices[region][os]["ondemand"] = "'N/A'"
 
             try:
                 display_prices[region][os]["spot"] = _p["spot_max"]
             except KeyError:
-                display_prices[region][os]["spot"] = "N/A"
+                display_prices[region][os]["spot"] = "'N/A'"
 
+            # In the next 2 blocks, we need to split out the list of 1 year,
+            # 3 year, upfront, partial, and no upfront RI prices into 2 sets
+            # of prices: _1yr (all, partial, no) and _3yr (all, partial, no)
+            # These are then rendered into the 2 bottom pricing dropdowns
             try:
                 reserved = {}
                 for k, v in _p["reserved"].items():
@@ -189,7 +211,7 @@ def prices(pricing):
                         reserved[key] = v
                 display_prices[region][os]["_1yr"] = reserved
             except KeyError:
-                display_prices[region][os]["_1yr"] = "N/A"
+                display_prices[region][os]["_1yr"] = "'N/A'"
 
             try:
                 reserved = {}
@@ -199,7 +221,7 @@ def prices(pricing):
                         reserved[key] = v
                 display_prices[region][os]["_3yr"] = reserved
             except KeyError:
-                display_prices[region][os]["_3yr"] = "N/A"
+                display_prices[region][os]["_3yr"] = "'N/A'"
 
     return display_prices
 
@@ -328,15 +350,18 @@ def build_detail_pages_ec2(instances, destination_file):
     sitemap = []
     for i in instances:
         instance_type = i["instance_type"]
+        # Use this to debug individual instances
+        # if instance_type != "t4g.nano":
+        #     continue
 
         instance_page = os.path.join(subdir, instance_type + ".html")
         instance_details = map_ec2_attributes(i, imap)
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
-        idescription = description(instance_details)
         links = community(instance_type, community_data)
         denylist = unavailable_instances(instance_type, instance_details)
         defaults = initial_prices(instance_details)
+        idescription = description(instance_details, defaults)
 
         print("Rendering %s to detail page %s..." % (instance_type, instance_page))
         with io.open(instance_page, "w+", encoding="utf-8") as fh:
