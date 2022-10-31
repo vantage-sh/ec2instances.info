@@ -1040,6 +1040,140 @@ def add_placement_groups(instances):
             inst.placement_group_support = False
 
 
+def add_dedicated_info(instances):
+    # Dedicated Host is a physical server with EC2 instance capacity fully dedicated to a single customer.
+    # We treat it as another type of OS, like RHEL or SUSE.
+
+    # Note: AWS GovCloud (US) is us-gov-west-1. This seems to be an exception just for dedicated hosts.
+    region_map = {
+        "af-south-1": "Africa (Cape Town)",
+        "ap-east-1": "Asia Pacific (Hong Kong)",
+        "ap-south-1": "Asia Pacific (Mumbai)",
+        "ap-northeast-3": "Asia Pacific (Osaka)",
+        "ap-northeast-2": "Asia Pacific (Seoul)",
+        "ap-southeast-1": "Asia Pacific (Singapore)",
+        "ap-southeast-2": "Asia Pacific (Sydney)",
+        "ap-southeast-3": "Asia Pacific (Jakarta)",
+        "ap-northeast-1": "Asia Pacific (Tokyo)",
+        "ca-central-1": "Canada (Central)",
+        "eu-central-1": "EU (Frankfurt)",
+        "eu-west-1": "EU (Ireland)",
+        "eu-west-2": "EU (London)",
+        "eu-west-3": "EU (Paris)",
+        "eu-north-1": "EU (Stockholm)",
+        "eu-south-1": "EU (Milan)",
+        "me-south-1": "Middle East (Bahrain)",
+        "me-central-1": "Middle East (UAE)",
+        "sa-east-1": "South America (Sao Paulo)",
+        "us-east-1": "US East (N. Virginia)",
+        "us-east-2": "US East (Ohio)",
+        "us-west-1": "US West (N. California)",
+        "us-west-2": "US West (Oregon)",
+        "us-gov-west-1": "AWS GovCloud (US)",
+        "us-gov-east-1": "AWS GovCloud (US-East)",
+    }
+
+    # Normalize and translate term lengths and payment options to ec2instances.info terms
+    reserved_map = {
+        "1yrNoUpfront": "yrTerm1Standard.noUpfront",
+        "1yrPartialUpfront": "yrTerm1Standard.partialUpfront",
+        "1yrAllUpfront": "yrTerm1Standard.allUpfront",
+        "1 yrNoUpfront": "yrTerm1Standard.noUpfront",
+        "1 yrPartialUpfront": "yrTerm1Standard.partialUpfront",
+        "1 yrAllUpfront": "yrTerm1Standard.allUpfront",
+        "3yrNoUpfront": "yrTerm3Standard.noUpfront",
+        "3yrPartialUpfront": "yrTerm3Standard.partialUpfront",
+        "3yrAllUpfront": "yrTerm3Standard.allUpfront",
+        "3 yrNoUpfront": "yrTerm3Standard.noUpfront",
+        "3 yrPartialUpfront": "yrTerm3Standard.partialUpfront",
+        "3 yrAllUpfront": "yrTerm3Standard.allUpfront",
+    }
+
+    def format_price(price):
+        return str(float("%f" % float(price))).rstrip("0").rstrip(".")
+
+    def fetch_dedicated_prices():
+        all_pricing = {}
+
+        # On demand pricing, not all dedicated instances are available on demand
+        url = "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/dedicatedhost-ondemand.json"
+        od_pricing = fetch_data(url)
+        for region in od_pricing["regions"]:
+            all_pricing[region] = {}
+            for instance_description, dinst in od_pricing["regions"][region].items():
+                _price = {"ondemand": format_price(dinst["price"]), "reserved": {}}
+                all_pricing[region][dinst["Instance Type"]] = _price
+
+        # All of the reserved pricing is at different URLs
+        for region in od_pricing["regions"]:
+            for term in ["3 year", "1 year"]:
+                for payment in ["No Upfront", "Partial Upfront", "All Upfront"]:
+                    base = f"https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/dedicatedhost-reservedinstance-virtual/"
+                    path = f"{region}/{term}/{payment}/index.json".replace(" ", "%20")
+
+                    try:
+                        pricing = fetch_data(base + path)
+                    except:
+                        print("Could not fetch dedicated pricing for " + path)
+                        pricing = None
+
+                    if pricing:
+                        for instance_description, dinst in pricing["regions"][
+                            region
+                        ].items():
+                            # Similar to get_reserved_pricing in ec2.py the goal is to get the effective hourly rate
+                            # and then the frontend will deal with making it monthly, yearly etc
+                            upfront = 0.0
+                            if "Partial" in payment or "All" in payment:
+                                upfront = float(dinst["riupfront:PricePerUnit"])
+                            inst_type = dinst["Instance Type"]
+                            ondemand = float(dinst["price"])
+                            lease_in_years = int(dinst["LeaseContractLength"][0])
+                            hours_in_term = lease_in_years * 365 * 24
+                            price = float(ondemand) + (float(upfront) / hours_in_term)
+                            translate_ri = reserved_map[
+                                dinst["LeaseContractLength"] + dinst["PurchaseOption"]
+                            ]
+
+                            # Certain instances will not have been created above because they are not available on demand
+                            if inst_type not in all_pricing[region]:
+                                all_pricing[region][inst_type] = {"reserved": {}}
+
+                            all_pricing[region][inst_type]["reserved"][
+                                translate_ri
+                            ] = format_price(price)
+        return all_pricing
+
+    all_pricing = fetch_dedicated_prices()
+    for inst in instances:
+        if not inst.pricing:
+            # Less than 10 instances are ONLY available with dedicated host pricing
+            # In this case there is no prior pricing dict to add the dedicated prices to so
+            # create a new one. Unfortunately we have to search by instance but the
+            # previous dedicated pricing dict we have built is by region.
+            inst_type = inst.instance_type.split(".")[0]
+            for k, r in region_map.items():
+                if inst_type in all_pricing[r]:
+                    _price = all_pricing[r][inst_type]
+                    inst.pricing[k] = {}
+                    inst.pricing[k]["dedicated"] = _price
+        else:
+            for region in inst.pricing:
+                # Add the 'dedicated' price to the price list as a top level key per region.
+                # Dedicated hosts are not associated with any type of software like rhel or mswin
+                # Not all instances are available as dedicated hosts
+                try:
+                    _price = all_pricing[region_map[region]][
+                        inst.instance_type.split(".")[0]
+                    ]
+                    inst.pricing[region]["dedicated"] = _price
+                except KeyError:
+                    print(
+                        "No dedicated host price for %s in %s"
+                        % (inst.instance_type, region)
+                    )
+
+
 def scrape(data_file):
     """Scrape AWS to get instance data"""
     print("Parsing instance types...")
@@ -1068,6 +1202,8 @@ def scrape(data_file):
     add_availability_zone_info(all_instances)
     print("Adding placement group details...")
     add_placement_groups(all_instances)
+    print("Adding dedicated host pricing...")
+    add_dedicated_info(all_instances)
 
     os.makedirs(os.path.dirname(data_file), exist_ok=True)
     with open(data_file, "w+") as f:

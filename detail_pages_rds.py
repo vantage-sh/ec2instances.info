@@ -183,6 +183,10 @@ def prices(pricing):
             except KeyError:
                 display_prices[region][os]["ondemand"] = "N/A"
 
+            # In the next 2 blocks, we need to split out the list of 1 year,
+            # 3 year, upfront, partial, and no upfront RI prices into 2 sets
+            # of prices: _1yr (all, partial, no) and _3yr (all, partial, no)
+            # These are then rendered into the 2 bottom pricing dropdowns
             try:
                 reserved = {}
                 for k, v in _p["reserved"].items():
@@ -274,7 +278,6 @@ def map_rds_attributes(i, imap):
 
         if display["style"]:
             v = str(display["value"]).lower()
-            # print(v)  # print styling value
             if display["cloud_key"] == "currentGeneration" and v == "yes":
                 display["style"] = "value value-current"
                 display["value"] = "current"
