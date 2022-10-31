@@ -31,6 +31,7 @@ def initial_prices(i):
     # so default to that. Certain instances (mac2) are only available as dedicated hosts so
     # fall back to that if no linux option. Reserved options are all over the place
     # so try/catch for anything and set to n/a
+    not_linux_flag = False
 
     init_p = {"ondemand": 0, "spot": 0, "_1yr": 0, "_3yr": 0}
     for pricing_type in ["ondemand", "spot", "_1yr", "_3yr"]:
@@ -45,11 +46,22 @@ def initial_prices(i):
                 break
             except:
                 init_p[pricing_type] = "'N/A'"
+            finally:
+                # Let the frontend know that we're defaulting to a dedicated host
+                # to display pricing instead of linux
+                if os == "dedicated" and init_p[pricing_type] != "'N/A'":
+                    not_linux_flag = True
 
-    return [init_p["ondemand"], init_p["spot"], init_p["_1yr"], init_p["_3yr"]]
+    return [
+        init_p["ondemand"],
+        init_p["spot"],
+        init_p["_1yr"],
+        init_p["_3yr"],
+        not_linux_flag,
+    ]
 
 
-def description(id):
+def description(id, defaults):
     name = id["Amazon"][1]["value"]
     family_category = id["Amazon"][2]["value"].lower()
     cpus = id["Compute"][0]["value"]
@@ -58,14 +70,14 @@ def description(id):
 
     # Some instances say "Low to moderate" for bandwidth, ignore them
     try:
-        bandwidth = " and {} Gibps of bandwidth.".format(
+        bandwidth = " and {} Gibps of bandwidth".format(
             int(id["Networking"][0]["value"])
         )
     except:
-        bandwidth = "."
+        bandwidth = ""
 
-    return "The {} instance is a {} instance with {} vCPUs, {} GiB of memory{}".format(
-        name, family_category, cpus, memory, bandwidth
+    return "The {} instance is in the {} family with {} vCPUs, {} GiB of memory{} starting at ${} per hour.".format(
+        name, family_category, cpus, memory, bandwidth, defaults[0]
     )
 
 
@@ -338,15 +350,17 @@ def build_detail_pages_ec2(instances, destination_file):
     sitemap = []
     for i in instances:
         instance_type = i["instance_type"]
+        # if instance_type != "mac2.metal":
+        #     continue
 
         instance_page = os.path.join(subdir, instance_type + ".html")
         instance_details = map_ec2_attributes(i, imap)
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
-        idescription = description(instance_details)
         links = community(instance_type, community_data)
         denylist = unavailable_instances(instance_type, instance_details)
         defaults = initial_prices(instance_details)
+        idescription = description(instance_details, defaults)
 
         print("Rendering %s to detail page %s..." % (instance_type, instance_page))
         with io.open(instance_page, "w+", encoding="utf-8") as fh:
