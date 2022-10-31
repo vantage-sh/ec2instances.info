@@ -232,6 +232,11 @@
           <th class="cost-spot-min cost-spot-min-mswin">Windows Spot Minimum cost</th>
           <th class="cost-spot-max cost-spot-max-mswin">Windows Spot Maximum cost</th>
 
+          <th class="cost-ondemand cost-ondemand-dedicated">Dedicate Host On Demand</th>
+          <th class="cost-reserved cost-reserved-dedicated">
+            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Dedicated Host Reserved</abbr>
+          </th>
+
           <th class="cost-ondemand cost-ondemand-mswinSQLWeb">Windows SQL Web On Demand cost</th>
           <th class="cost-reserved cost-reserved-mswinSQLWeb">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows SQL Web Reserved cost</abbr>
@@ -458,7 +463,7 @@
               ${', '.join(inst.get('availability_zones', {}).get('us-east-1', []))}
             </td>
             
-            % for platform in ['linux', 'rhel', 'sles', 'mswin', 'mswinSQLWeb', 'mswinSQL', 'mswinSQLEnterprise', 'linuxSQLWeb', 'linuxSQL', 'linuxSQLEnterprise']:
+            % for platform in ['linux', 'rhel', 'sles', 'mswin', 'dedicated', 'mswinSQLWeb', 'mswinSQL', 'mswinSQLEnterprise', 'linuxSQLWeb', 'linuxSQL', 'linuxSQLEnterprise']:
               ## note that the contents in these cost cells are overwritten by the JS change_cost() func, but the initial
               ## data here is used for sorting (and anyone with JS disabled...)
               ## for more info, see https://github.com/powdahound/ec2instances.info/issues/140
