@@ -1139,9 +1139,9 @@ def add_dedicated_info(instances):
                             if inst_type not in all_pricing[region]:
                                 all_pricing[region][inst_type] = {"reserved": {}}
 
-                            all_pricing[region][inst_type]["reserved"][translate_ri] = format_price(
-                                price
-                            )
+                            all_pricing[region][inst_type]["reserved"][
+                                translate_ri
+                            ] = format_price(price)
         return all_pricing
 
     all_pricing = fetch_dedicated_prices()
