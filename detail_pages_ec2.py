@@ -350,7 +350,8 @@ def build_detail_pages_ec2(instances, destination_file):
     sitemap = []
     for i in instances:
         instance_type = i["instance_type"]
-        # if instance_type != "mac2.metal":
+        # Use this to debug individual instances
+        # if instance_type != "t4g.nano":
         #     continue
 
         instance_page = os.path.join(subdir, instance_type + ".html")
