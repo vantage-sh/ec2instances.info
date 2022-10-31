@@ -180,11 +180,11 @@ def render(data_file, template_file, destination_file):
 if __name__ == "__main__":
     sitemap = []
     sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
-    # sitemap.extend(
-    #     render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
-    # )
-    # sitemap.extend(
-    #     render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
-    # )
+    sitemap.extend(
+        render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
+    )
+    sitemap.extend(
+        render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
+    )
     sitemap.append(about_page())
     build_sitemap(sitemap)
