@@ -56,6 +56,11 @@
                 ElastiCache
               </a>
             </li>
+            <li role="presentation" class="${'active' if self.attr.active_ == 'redshift' else ''}">
+              <a class="d-flex align-items-center" href="/redshift/">
+                Redshift
+              </a>
+            </li>
           </ul>
         </div>
         <%block name="header"/>

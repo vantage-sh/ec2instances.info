@@ -15,6 +15,7 @@ from six.moves import SimpleHTTPServer, socketserver
 
 from rds import scrape as rds_scrape
 from cache import scrape as cache_scrape
+from redshift import scrape as redshift_scrape
 from render import render
 from render import build_sitemap
 from render import about_page
@@ -44,6 +45,7 @@ def build(c):
     scrape_ec2(c)
     scrape_rds(c)
     scrape_cache(c)
+    scrape_redshift(c)
     render_html(c)
 
 
@@ -76,6 +78,16 @@ def scrape_cache(c):
         cache_scrape(cache_file)
     except Exception as e:
         print("ERROR: Unable to scrape Cache data")
+        print(traceback.print_exc())
+
+
+def scrape_redshift(c):
+    """Scrape Redshift instance data from AWS and save to local file"""
+    redshift_file = "www/redshift/instances.json"
+    try:
+        redshift_scrape(redshift_file)
+    except Exception as e:
+        print("ERROR: Unable to scrape Redshift data")
         print(traceback.print_exc())
 
 
