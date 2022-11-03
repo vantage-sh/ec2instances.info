@@ -56,6 +56,32 @@ function init_data_table() {
         );
         return;
       }
+    } else if (window.location.href.includes('redshift')) {
+      // Set min inputs for Redshift columns
+      if (i == 2) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
+        );
+        return;
+      } else if (i == 3) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
+        );
+        return;
+      }
+    } else if (window.location.href.includes('opensearch')) {
+      // Set min inputs for OpenSearch columns
+      if (i == 2) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
+        );
+        return;
+      } else if (i == 3) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
+        );
+        return;
+      }
     } else {
       // Set min inputs for EC2 columns
       if (i == 2) {

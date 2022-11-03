@@ -147,13 +147,13 @@
           <th class="memory">Memory</th>
           <th class="storage">Storage</th>
           <th class="ebs-throughput">EBS Throughput</th>
-          <th class="processor">Processor</th>
+          <th class="physical_processor">Processor</th>
           <th class="vcpus">
             <abbr title="Each virtual CPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">vCPUs</abbr>
           </th>
           <th class="networkperf">Network Performance</th>
-          <th class="arch">Arch</th>
-          % for platform, code in {'Aurora PostgreSQL': '21', 'Aurora MySQL': '16', 'MariaDB': '18', 'MySQL': '2', 'Oracle Enterprise': '5', 'PostgreSQL': '14', 'SQL Server Standard': '12'}.items():
+          <th class="architecture">Arch</th>
+          % for platform, code in {'PostgreSQL': '14', 'MySQL': '2', 'SQL Server Standard': '12', 'Aurora PostgreSQL': '21', 'Aurora MySQL': '16', 'MariaDB': '18', 'Oracle Enterprise': '5'}.items():
           <th class="cost-ondemand cost-ondemand-${code}">${platform} On Demand cost</th>
           <th class="cost-reserved cost-reserved-${code}">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>${platform} Reserved cost</abbr>
@@ -184,7 +184,7 @@
             ${inst['dedicatedEbsThroughput']}
           </span>
           % endif
-          <td class="processor">${inst['physicalProcessor']}</td>
+          <td class="physical_processor">${inst['physicalProcessor']}</td>
           <td class="vcpus">
             <span sort="${inst['vcpu']}">
               ${inst['vcpu']} vCPUs
@@ -202,7 +202,7 @@
             64-bit
             % endif
           </td>
-          % for platform, code in {'Aurora PostgreSQL': '21', 'Aurora MySQL': '16', 'MariaDB': '18', 'MySQL': '2', 'Oracle Enterprise': '5', 'PostgreSQL': '14', 'SQL Server Standard': '12'}.items():
+          % for platform, code in {'PostgreSQL': '14', 'MySQL': '2', 'SQL Server Standard': '12', 'Aurora PostgreSQL': '21', 'Aurora MySQL': '16', 'MariaDB': '18', 'Oracle Enterprise': '5'}.items():
           <td class="cost-ondemand cost-ondemand-${code}" data-platform='${code}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
             % if inst['pricing'].get('us-east-1', {}).get(code, {}).get('ondemand', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][code]['ondemand']}">
