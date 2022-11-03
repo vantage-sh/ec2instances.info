@@ -57,7 +57,7 @@ function init_data_table() {
         return;
       }
     } else if (window.location.href.includes('redshift')) {
-      // Set min inputs for ElastiCache columns
+      // Set min inputs for Redshift columns
       if (i == 2) {
         $(this).html(
           "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",

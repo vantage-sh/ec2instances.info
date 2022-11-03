@@ -183,7 +183,8 @@
           </td>
           <td class="ecu-per-vcpu"><span sort="${inst['ecu']}">${inst['ecu']}</span></td>
           <td class="generation"><span sort="${inst['currentGeneration']}">${inst['currentGeneration']}</span></td>
-          <td class="cost-ondemand cost-ondemand-node" data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
+          <td class="cost-ondemand cost-ondemand-node" data-platform="none" data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
+            <!-- % print(inst['pricing']['us-east-1']['ondemand']) % -->
             % if inst['pricing'].get('us-east-1', {}).get('ondemand', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1']['ondemand']}">
                 $${inst['pricing']['us-east-1']['ondemand']} per hour
@@ -192,7 +193,7 @@
               <span sort="0">unavailable</span>
             % endif
           </td>
-          <td class="cost-reserved cost-reserved-node" data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
+          <td class="cost-reserved cost-reserved-node" data-platform="none" data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
             % if inst['pricing'].get('us-east-1', {}).get('reserved', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1']['reserved'].get('yrTerm1Standard.noUpfront')}">
                 $${inst['pricing']['us-east-1']['reserved'].get('yrTerm1Standard.noUpfront')} per hour
