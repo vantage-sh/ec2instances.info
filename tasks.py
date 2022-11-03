@@ -47,6 +47,7 @@ def build(c):
     scrape_rds(c)
     scrape_cache(c)
     scrape_redshift(c)
+    scrape_opensearch(c)
     render_html(c)
 
 
