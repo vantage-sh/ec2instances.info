@@ -10,10 +10,6 @@
         <meta name="description" content="A free and easy-to-use tool for comparing OpenSearch Instance features and prices."></head>
     </%block>
 
-    <%block name="header">
-      <h1 class="banner-ad">EC2Instances.info Easy Amazon <b>OpenSearch</b> Instance Comparison</h1>
-    </%block>
-
     <div class="row mt-3 me-2" id="menu">
       <div class="col-sm-12 ms-2">
 
@@ -196,4 +192,18 @@
         % endfor
       </tbody>
     </table>
+
+    <div class="mt-4 pt-4 mb-4 d-flex flex-container justify-content-center">
+      <div class="row">
+        <div class="d-flex justify-content-center"><span><img width="64" height="64" src="/vantage-logo.svg"></span></div>
+        <div class="d-flex justify-content-center mt-4">
+          <span class="fw-semibold" style="color:#6c757d">Concerned about your cloud costs? <a href="https://console.vantage.sh/signup">Connect your AWS account</a> in under 5 minutes to see savings.</span>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+  <%block name="header">
+    <h1 class="page-h1">EC2Instances.info Easy Amazon <b>OpenSearch</b> Instance Comparison</h1>
+  </%block>
