@@ -80,7 +80,9 @@
             </li>
           </ul>
         </div>
+        % if self.attr.active_ != 'redshift' and self.attr.active_ != 'opensearch':
         <a href="https://www.vantage.sh/features/autopilot" class="vantage fw-semibold">Save 50%+ on AWS with Autopilot -></span></a>
+        % endif
         <div class="d-flex">
           <div class="nav-buttons px-2">
             <a target="_blank" href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw" class="btn btn-purple btn-icon">
