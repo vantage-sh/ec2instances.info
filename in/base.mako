@@ -56,6 +56,16 @@
                 ElastiCache
               </a>
             </li>
+            <li role="presentation" class="${'active' if self.attr.active_ == 'redshift' else ''}">
+              <a class="d-flex align-items-center" href="/redshift/">
+                Redshift
+              </a>
+            </li>
+            <li role="presentation" class="${'active' if self.attr.active_ == 'opensearch' else ''}">
+              <a class="d-flex align-items-center" href="/opensearch/">
+                OpenSearch 
+              </a>
+            </li>
           </ul>
         </div>
         <%block name="header"/>
@@ -116,6 +126,12 @@
               // see compress_pricing in render.py for the generation side
               v = _pricing["data"];
               for (var i = 0; i < arguments.length; i++) {
+                  if (arguments[i] === "none") {
+                    // this is for services like Redshift and OpenSearch which 
+                    // do not have multiple 'platforms'. RDS for example has 20 
+                    // OS's, and ElastiCache has Memcached and Redis
+                    continue;
+                  }
                   k = _pricing["index"][arguments[i]];
                   v = v[k];
                   if (v === undefined) {

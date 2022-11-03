@@ -1,17 +1,17 @@
 <%!
-  active_ = "cache"
+  active_ = "redshift"
   import json
   import six
 %>
 <%inherit file="base.mako" />
     
     <%block name="meta">
-        <title>Amazon ElastiCache Instance Comparison</title>
-        <meta name="description" content="A free and easy-to-use tool for comparing ElastiCache Instance features and prices."></head>
+        <title>Amazon Redshift Instance Comparison</title>
+        <meta name="description" content="A free and easy-to-use tool for comparing Redshift Instance features and prices."></head>
     </%block>
 
     <%block name="header">
-      <h1 class="banner-ad">EC2Instances.info Easy Amazon <b>ElastiCache</b> Instance Comparison</h1>
+      <h1 class="banner-ad">EC2Instances.info Easy Amazon <b>Redshift</b> Instance Comparison</h1>
     </%block>
 
     <div class="row mt-3 me-2" id="menu">
@@ -152,13 +152,14 @@
           <th class="vcpus">
             <abbr title="Each virtual CPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">vCPUs</abbr>
           </th>
-          <th class="networkperf">Network Performance</th>
-          % for cache_engine in {'Redis', 'Memcached'}:
-          <th class="cost-ondemand cost-ondemand-${cache_engine}">${cache_engine} On Demand cost</th>
-          <th class="cost-reserved cost-reserved-${cache_engine}">
-            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>${cache_engine} Reserved cost</abbr>
+          <th class="storage">Storage</th>
+          <th class="io">I/O</th>
+          <th class="ecu-per-vcpu">Elastic Compute Units</th>
+          <th class="generation">Current Generation</th>
+          <th class="cost-ondemand cost-ondemand-node">Node On Demand cost</th>
+          <th class="cost-reserved cost-reserved-node">
+            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Node Reserved cost</abbr>
           </th>
-          % endfor
         </tr>
       </thead>
 
@@ -173,31 +174,28 @@
               ${inst['vcpu']} vCPUs
             </span>
           </td>
-          <td class="networkperf">
-            <span sort="${inst['network_sort']}">
-              ${inst['network_performance']}
-            </span>
-          </td>
-          % for cache_engine in {'Redis', 'Memcached'}:
-          <td class="cost-ondemand cost-ondemand-${cache_engine}" data-platform='${cache_engine}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
-            % if inst['pricing'].get('us-east-1', {}).get(cache_engine, {}).get('ondemand', 'N/A') != "N/A":
-              <span sort="${inst['pricing']['us-east-1'][cache_engine]['ondemand']}">
-                $${inst['pricing']['us-east-1'][cache_engine]['ondemand']} per hour
+          <td class="storage"><span sort="${inst['storage']}">${inst['storage']}</span></td>
+          <td class="io"><span sort="${inst['io']}">${inst['io']}</span></td>
+          <td class="ecu-per-vcpu"><span sort="${inst['ecu']}">${inst['ecu']}</span></td>
+          <td class="generation"><span sort="${inst['currentGeneration']}">${inst['currentGeneration']}</span></td>
+          <td class="cost-ondemand cost-ondemand-node" data-platform="none" data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
+            % if inst['pricing'].get('us-east-1', {}).get('ondemand', 'N/A') != "N/A":
+              <span sort="${inst['pricing']['us-east-1']['ondemand']}">
+                $${inst['pricing']['us-east-1']['ondemand']} per hour
               </span>
             % else:
               <span sort="0">unavailable</span>
             % endif
           </td>
-          <td class="cost-reserved cost-reserved-${cache_engine}" data-platform='${cache_engine}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
-            % if inst['pricing'].get('us-east-1', {}).get(cache_engine, {}).get('reserved', 'N/A') != "N/A":
-              <span sort="${inst['pricing']['us-east-1'][cache_engine]['reserved'].get('yrTerm1Standard.noUpfront')}">
-                $${inst['pricing']['us-east-1'][cache_engine]['reserved'].get('yrTerm1Standard.noUpfront')} per hour
+          <td class="cost-reserved cost-reserved-node" data-platform="none" data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
+            % if inst['pricing'].get('us-east-1', {}).get('reserved', 'N/A') != "N/A":
+              <span sort="${inst['pricing']['us-east-1']['reserved'].get('yrTerm1Standard.noUpfront')}">
+                $${inst['pricing']['us-east-1']['reserved'].get('yrTerm1Standard.noUpfront')} per hour
               </span>
             % else:
               <span sort="0">unavailable</span>
             % endif
           </td>
-          % endfor
         </tr>
         % endfor
       </tbody>
