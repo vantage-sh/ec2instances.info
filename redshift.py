@@ -112,13 +112,12 @@ def scrape(output_file, input_file=None):
         for code, offer in six.iteritems(offers):
             for key, dimension in six.iteritems(offer["priceDimensions"]):
 
-                # skip these for now
+                # skip these types of charges
                 if any(
                     descr in dimension["description"].lower()
                     for descr in [
                         "transfer",
                         "global",
-                        "storage",
                         "iops",
                         "requests",
                         "multi-az",
@@ -169,23 +168,10 @@ def scrape(output_file, input_file=None):
                 instance_type = instance["instance_type"]
 
                 # create a regional hash
-                # print(region)
-                # print(instance_type)
-                # print(sku)
-                # print(code)
-                # print(instance["pricing"])
                 if region not in instance["pricing"]:
                     instance["pricing"][region] = {}
 
                 # create a reserved hash
-                # print(json.dumps(instances[instance_type], indent=4))
-                # TODO: legacy nodes causing an issue here
-                if region not in instances[instance_type]["pricing"]:
-                    print(
-                        "Found {} for {} without pricing".format(region, instance_type)
-                    )
-                    continue
-
                 if "reserved" not in instances[instance_type]["pricing"][region]:
                     instances[instance_type]["pricing"][region]["reserved"] = {}
 

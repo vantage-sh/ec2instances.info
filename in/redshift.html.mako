@@ -153,7 +153,6 @@
           </th>
           <th class="storage">Storage</th>
           <th class="io">I/O</th>
-          <th class="networkperf">Network Performance</th>
           <th class="ecu-per-vcpu">Elastic Compute Units</th>
           <th class="generation">Current Generation</th>
           <th class="cost-ondemand cost-ondemand-node">Node On Demand cost</th>
@@ -174,17 +173,11 @@
               ${inst['vcpu']} vCPUs
             </span>
           </td>
-          <td class="storage"><span sort="${inst['storage']}">${inst['storage']} GiB</span></td>
-          <td class="io"><span sort="${inst['io']}">${inst['io']} GiB/s</span></td>
-          <td class="networkperf">
-            <span sort="${inst['network_sort']}">
-              ${inst['network_performance']}
-            </span>
-          </td>
+          <td class="storage"><span sort="${inst['storage']}">${inst['storage']}</span></td>
+          <td class="io"><span sort="${inst['io']}">${inst['io']}</span></td>
           <td class="ecu-per-vcpu"><span sort="${inst['ecu']}">${inst['ecu']}</span></td>
           <td class="generation"><span sort="${inst['currentGeneration']}">${inst['currentGeneration']}</span></td>
           <td class="cost-ondemand cost-ondemand-node" data-platform="none" data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
-            <!-- % print(inst['pricing']['us-east-1']['ondemand']) % -->
             % if inst['pricing'].get('us-east-1', {}).get('ondemand', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1']['ondemand']}">
                 $${inst['pricing']['us-east-1']['ondemand']} per hour
