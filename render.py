@@ -186,5 +186,19 @@ if __name__ == "__main__":
     sitemap.extend(
         render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
     )
+    sitemap.extend(
+        render(
+            "www/redshift/instances.json",
+            "in/redshift.html.mako",
+            "www/redshift/index.html",
+        )
+    )
+    sitemap.extend(
+        render(
+            "www/opensearch/instances.json",
+            "in/opensearch.html.mako",
+            "www/opensearch/index.html",
+        )
+    )
     sitemap.append(about_page())
     build_sitemap(sitemap)

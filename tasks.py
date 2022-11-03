@@ -15,6 +15,8 @@ from six.moves import SimpleHTTPServer, socketserver
 
 from rds import scrape as rds_scrape
 from cache import scrape as cache_scrape
+from redshift import scrape as redshift_scrape
+from opensearch import scrape as opensearch_scrape
 from render import render
 from render import build_sitemap
 from render import about_page
@@ -44,6 +46,8 @@ def build(c):
     scrape_ec2(c)
     scrape_rds(c)
     scrape_cache(c)
+    scrape_redshift(c)
+    scrape_opensearch(c)
     render_html(c)
 
 
@@ -79,6 +83,26 @@ def scrape_cache(c):
         print(traceback.print_exc())
 
 
+def scrape_redshift(c):
+    """Scrape Redshift instance data from AWS and save to local file"""
+    redshift_file = "www/redshift/instances.json"
+    try:
+        redshift_scrape(redshift_file)
+    except Exception as e:
+        print("ERROR: Unable to scrape Redshift data")
+        print(traceback.print_exc())
+
+
+def scrape_opensearch(c):
+    """Scrape OpenSearch instance data from AWS and save to local file"""
+    opensearch_file = "www/opensearch/instances.json"
+    try:
+        opensearch_scrape(opensearch_file)
+    except Exception as e:
+        print("ERROR: Unable to scrape OpenSearch data")
+        print(traceback.print_exc())
+
+
 @task
 def serve(c):
     class MyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
@@ -109,6 +133,20 @@ def render_html(c):
     )
     sitemap.extend(
         render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
+    )
+    sitemap.extend(
+        render(
+            "www/redshift/instances.json",
+            "in/redshift.html.mako",
+            "www/redshift/index.html",
+        )
+    )
+    sitemap.extend(
+        render(
+            "www/opensearch/instances.json",
+            "in/opensearch.html.mako",
+            "www/opensearch/index.html",
+        )
     )
     sitemap.append(about_page())
     build_sitemap(sitemap)
