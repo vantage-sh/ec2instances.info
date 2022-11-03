@@ -142,9 +142,9 @@ def render_html(c):
     )
     sitemap.extend(
         render(
-            "www/redshift/instances.json",
-            "in/redshift.html.mako",
-            "www/redshift/index.html",
+            "www/opensearch/instances.json",
+            "in/opensearch.html.mako",
+            "www/opensearch/index.html",
         )
     )
     sitemap.append(about_page())
