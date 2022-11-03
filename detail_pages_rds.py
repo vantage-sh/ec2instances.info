@@ -69,7 +69,7 @@ def initial_prices(i, instance_type):
     return [od, _1yr, _3yr]
 
 
-def description(id):
+def description(id, defaults):
     name = id["Amazon"][1]["value"]
     family_category = id["Amazon"][2]["value"].lower()
     cpus = id["Compute"][0]["value"]
@@ -78,14 +78,14 @@ def description(id):
 
     # Some instances say "Low to moderate" for bandwidth, ignore them
     try:
-        bandwidth = " and {} Gibps of bandwidth.".format(
+        bandwidth = " and {} Gibps of bandwidth".format(
             int(id["Networking"][0]["value"])
         )
     except:
-        bandwidth = "."
+        bandwidth = ""
 
-    return "The {} instance is in the {} family and has {} vCPUs, {} GiB of memory{}".format(
-        name, family_category, cpus, memory, bandwidth
+    return "The {} instance is in the {} family and has {} vCPUs, {} GiB of memory{} starting at ${} per hour.".format(
+        name, family_category, cpus, memory, bandwidth, defaults[0]
     )
 
 
@@ -332,10 +332,10 @@ def build_detail_pages_rds(instances, destination_file):
         instance_details = map_rds_attributes(i, imap)
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
-        idescription = description(instance_details)
         links = community(instance_type, community_data)
         denylist = unavailable_instances(instance_type, instance_details)
         defaults = initial_prices(instance_details, instance_type)
+        idescription = description(instance_details, defaults)
 
         print("Rendering %s to detail page %s..." % (instance_type, instance_page))
         with io.open(instance_page, "w+", encoding="utf-8") as fh:

@@ -11,7 +11,7 @@
       rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <title>${i["Amazon"][1]["value"]} pricing and specs | Vantage</title>
+    <title>${i["Amazon"][1]["value"]} pricing and specs - Vantage</title>
     <meta name="description" content="${description}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   </head>
@@ -313,6 +313,7 @@
   <script type="text/javascript">
   $(function() {
     initialize_prices();
+    disable_regions();
 
     $('#region').change(function() {
       recalulate_redisplay_prices()
@@ -350,6 +351,24 @@
       format_price("p_od", ${defaults[0]});
       format_price("p_1yr", ${defaults[1]});
       format_price("p_3yr", ${defaults[2]});
+    };
+
+    function disable_regions() {
+      var regions = []
+      var unavailable = ${unavailable};
+      for (const u of unavailable) {
+        if (u[2] == 'All') {
+          regions.push(u[1]);
+        }
+      }
+
+      $("#region option").each(function(i) {
+        var dropdown_region = $(this).val();
+        if (regions.includes(dropdown_region)) {
+          $(this).attr("disabled", "disabled");
+        }
+      });
+
     };
 
     function recalulate_redisplay_prices() {

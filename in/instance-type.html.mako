@@ -11,7 +11,7 @@
       rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <title>${i["Amazon"][1]["value"]} pricing and specs | Vantage</title>
+    <title>${i["Amazon"][1]["value"]} pricing and specs - Vantage</title>
     <meta name="description" content="${description}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   </head>
