@@ -61,6 +61,11 @@
                 Redshift
               </a>
             </li>
+            <li role="presentation" class="${'active' if self.attr.active_ == 'opensearch' else ''}">
+              <a class="d-flex align-items-center" href="/opensearch/">
+                OpenSearch 
+              </a>
+            </li>
           </ul>
         </div>
         <%block name="header"/>

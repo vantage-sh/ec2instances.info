@@ -205,6 +205,7 @@ def scrape(output_file, input_file=None):
     # Calculate all reserved effective pricings (upfront hourly + hourly price)
     # Since Light, Medium and Heavy utilization are from previous generations and are not available for choosing
     # anymore in AWS console, we are not calculating it
+
     for instance_type, instance in six.iteritems(instances):
         for region, pricing in six.iteritems(instance["pricing"]):
             for engine, prices in six.iteritems(pricing):
@@ -228,6 +229,11 @@ def scrape(output_file, input_file=None):
                         reserved_prices["yrTerm3Standard.allUpfront"] = (
                             prices["yrTerm3.allUpfront-quantity"] / (365 * 3) / 24
                         ) + prices["yrTerm3.allUpfront-hrs"]
+
+                    if "yrTerm1.allUpfront-quantity" in prices:
+                        reserved_prices["yrTerm1Standard.allUpfront"] = (
+                            prices["yrTerm1.allUpfront-quantity"] / 365 / 24
+                        ) + prices["yrTerm1.allUpfront-hrs"]
 
                     if "yrTerm1.noUpfront-hrs" in prices:
                         reserved_prices["yrTerm1Standard.noUpfront"] = prices[
