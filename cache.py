@@ -255,6 +255,11 @@ def scrape(output_file, input_file=None):
                             / 24
                         ) + prices["reserved"]["yrTerm3.allUpfront-hrs"]
 
+                    if "yrTerm1.allUpfront-quantity" in prices:
+                        reserved_prices["yrTerm1Standard.allUpfront"] = (
+                            prices["yrTerm1.allUpfront-quantity"] / 365 / 24
+                        ) + prices["yrTerm1.allUpfront-hrs"]
+
                     if "yrTerm1.noUpfront-hrs" in prices["reserved"]:
                         reserved_prices["yrTerm1Standard.noUpfront"] = prices[
                             "reserved"
