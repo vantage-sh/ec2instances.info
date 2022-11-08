@@ -265,6 +265,7 @@ function change_cost() {
 
   var hour_multipliers = {
     secondly: 1 / (60 * 60),
+    minutely: 1 / 60,
     hourly: 1,
     daily: 24,
     weekly: 7 * 24,
@@ -282,6 +283,13 @@ function change_cost() {
   var duration_multiplier = hour_multipliers[duration];
   var pricing_unit_modifier = 1;
   var per_time;
+
+  // Display these as 'per' but maintain 'secondly' for backwards compatibility
+  if (duration === 'secondly') {
+    duration = 'per sec';  
+  } else if (duration === 'minutely') {
+    duration = 'per min';
+  }
 
   var pricing_measuring_units = ' ' + duration;
   if (pricing_unit != 'instance') {
@@ -677,6 +685,11 @@ function on_data_table_initialized() {
       if (e.attr('duration') == g_settings.cost_duration) {
         var first = g_settings.cost_duration.charAt(0).toUpperCase();
         var text = first + g_settings.cost_duration.substr(1);
+        if (g_settings.cost_duration === 'secondly') {
+          text = 'Per Second';  
+        } else if (g_settings.cost_duration === 'minutely') {
+          text = 'Per Minute';
+        }
         $('#cost-dropdown .dropdown-toggle .text').text(text);
         e.parent().addClass('active');
       } else {

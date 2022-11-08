@@ -143,7 +143,9 @@
               </div>
               <div class="col-6 pe-2">
                 <select class="form-select form-select-sm" id="unit">
-                  <option value="hour">Per Hour</option>
+                  <option value="second">Per Second</option>
+                  <option value="minute">Per Minute</option>
+                  <option value="hour" selected="selected">Per Hour</option>
                   <option value="day">Per Day</option>
                   <option value="week">Per Week</option>
                   <option value="month">Per Month</option>
@@ -406,6 +408,8 @@
       }
 
       var hour_multipliers = {
+        'second': 1 / (60 * 60),
+        'minute': 1 / 60,
         'hour': 1,
         'day': 24,
         'week': 7 * 24,
