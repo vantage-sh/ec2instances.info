@@ -99,6 +99,11 @@ function init_data_table() {
           "<input data-action='datafilter' data-type='memory-per-vcpu' class='form-control' placeholder='Min Mem/vCPU: 0'/>",
         );
         return;
+      } else if (i == 6) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='gpus' class='form-control' placeholder='Min GPUs: 0'/>",
+        );
+        return;
       } else if (i == 18) {
         $(this).html(
           "<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>",
@@ -265,6 +270,7 @@ function change_cost() {
 
   var hour_multipliers = {
     secondly: 1 / (60 * 60),
+    minutely: 1 / 60,
     hourly: 1,
     daily: 24,
     weekly: 7 * 24,
@@ -282,6 +288,13 @@ function change_cost() {
   var duration_multiplier = hour_multipliers[duration];
   var pricing_unit_modifier = 1;
   var per_time;
+
+  // Display these as 'per' but maintain 'secondly' for backwards compatibility
+  if (duration === 'secondly') {
+    duration = 'per sec';  
+  } else if (duration === 'minutely') {
+    duration = 'per min';
+  }
 
   var pricing_measuring_units = ' ' + duration;
   if (pricing_unit != 'instance') {
@@ -677,6 +690,11 @@ function on_data_table_initialized() {
       if (e.attr('duration') == g_settings.cost_duration) {
         var first = g_settings.cost_duration.charAt(0).toUpperCase();
         var text = first + g_settings.cost_duration.substr(1);
+        if (g_settings.cost_duration === 'secondly') {
+          text = 'Per Second';  
+        } else if (g_settings.cost_duration === 'minutely') {
+          text = 'Per Minute';
+        }
         $('#cost-dropdown .dropdown-toggle .text').text(text);
         e.parent().addClass('active');
       } else {

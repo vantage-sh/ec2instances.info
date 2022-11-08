@@ -71,6 +71,8 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="javascript:;" duration="secondly">Per Second</a></li>
+            <li><a class="dropdown-item" href="javascript:;" duration="minutely">Per Minute</a></li>
             <li class="active"><a class="dropdown-item" href="javascript:;" duration="hourly">Hourly</a></li>
             <li><a class="dropdown-item" href="javascript:;" duration="daily">Daily</a></li>
             <li><a class="dropdown-item" href="javascript:;" duration="weekly">Weekly</a></li>
