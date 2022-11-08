@@ -313,7 +313,11 @@
               <span sort="${inst['memory_per_vcpu']}">${"{:.2f}".format(inst['memory_per_vcpu'])} GiB/vCPU</span>
               % endif
             </td>
-            <td class="gpus">${inst['GPU']}</td>
+            <td class="gpus">
+              <span sort="${inst['GPU']}">
+                ${inst['GPU']}
+              </span>
+            </td>
             <td class="gpu_model">${inst['GPU_model']}</td>
             <td class="gpu_memory">
               <span sort="${inst['GPU_memory']}">

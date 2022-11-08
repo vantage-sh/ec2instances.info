@@ -99,6 +99,11 @@ function init_data_table() {
           "<input data-action='datafilter' data-type='memory-per-vcpu' class='form-control' placeholder='Min Mem/vCPU: 0'/>",
         );
         return;
+      } else if (i == 6) {
+        $(this).html(
+          "<input data-action='datafilter' data-type='gpus' class='form-control' placeholder='Min GPUs: 0'/>",
+        );
+        return;
       } else if (i == 18) {
         $(this).html(
           "<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>",
