@@ -291,7 +291,7 @@ function change_cost() {
 
   // Display these as 'per' but maintain 'secondly' for backwards compatibility
   if (duration === 'secondly') {
-    duration = 'per sec';  
+    duration = 'per sec';
   } else if (duration === 'minutely') {
     duration = 'per min';
   }
@@ -691,7 +691,7 @@ function on_data_table_initialized() {
         var first = g_settings.cost_duration.charAt(0).toUpperCase();
         var text = first + g_settings.cost_duration.substr(1);
         if (g_settings.cost_duration === 'secondly') {
-          text = 'Per Second';  
+          text = 'Per Second';
         } else if (g_settings.cost_duration === 'minutely') {
           text = 'Per Minute';
         }
