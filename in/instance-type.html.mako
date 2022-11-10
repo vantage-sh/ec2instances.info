@@ -232,6 +232,9 @@
               </table>
             </div>
             % endif
+            <div class="sidebar-section ticket small pb-4">
+              See a data problem? <a href="https://github.com/vantage-sh/ec2instances.info/issues/new" target="_blank" class="text-decoration-none">Open a ticket.</a>
+            </div>
           </div>
 
           <div class="column-middle mb-5">
@@ -255,6 +258,16 @@
                 % elif category == "Pricing":
                   <p></p>
                 % else:
+                  % if category == "Networking":
+                    <div class="mb-4 d-flex flex-container justify-content-center">
+                      <div class="row">
+                        <div class="d-flex justify-content-center"><span><img width="64" height="64" src="/vantage-logo.svg"></span></div>
+                        <div class="d-flex justify-content-center mt-4">
+                          <span class="fw-semibold" style="color:#6c757d">Concerned about cloud costs? <a href="https://console.vantage.sh/signup">Connect your AWS account</a> in under 5 minutes to see savings.</span>
+                        </div>
+                      </div>
+                    </div>
+                  % endif
                   <table class="table" id="${category}">
                     <tr>
                       <th class="col-6 border-end"><a href="#${category}">${category}</a></th>
@@ -288,6 +301,7 @@
             </div>
           </div>
         </div>
+        % if False:
         <div class="column-right">
           <div class="sidebar-section links">
             <div class="d-flex align-items-center mb-2">
@@ -322,10 +336,8 @@
               </li>
             </details>
           </div>
-          <div class="sidebar-section ticket small">
-            See a data problem? <a href="https://github.com/vantage-sh/ec2instances.info/issues/new" target="_blank" class="text-decoration-none">Open a ticket.</a>
-          </div>
         </div>
+        % endif
       </div>
     </div>
 
