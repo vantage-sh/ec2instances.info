@@ -33,6 +33,7 @@
             <li><a class="dropdown-item" href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
             <li><a class="dropdown-item" href="javascript:;" data-region='ca-central-1'>Canada (Central)</a></li>
             <li><a class="dropdown-item" href="javascript:;" data-region='eu-central-1'>Europe (Frankfurt)</a></li>
+            <li><a class="dropdown-item"  href="javascript:;" data-region='eu-central-2'>Europe (Zurich)</a></li>
             <li><a class="dropdown-item" href="javascript:;" data-region='eu-west-1'>Europe (Ireland)</a></li>
             <li><a class="dropdown-item" href="javascript:;" data-region='eu-west-2'>Europe (London)</a></li>
             <li><a class="dropdown-item" href="javascript:;" data-region='eu-west-3'>Europe (Paris)</a></li>

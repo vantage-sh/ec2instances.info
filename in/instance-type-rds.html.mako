@@ -104,6 +104,7 @@
                   <option value='ap-northeast-1'>Asia-Pacific (Tokyo)</option>
                   <option value='ca-central-1'>Canada (Central)</option>
                   <option value='eu-central-1'>Europe (Frankfurt)</option>
+                  <option value='eu-central-2'>Europe (Zurich)</option>
                   <option value='eu-west-1'>Europe (Ireland)</option>
                   <option value='eu-west-2'>Europe (London)</option>
                   <option value='eu-west-3'>Europe (Paris)</option>
