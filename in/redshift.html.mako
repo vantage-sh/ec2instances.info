@@ -38,6 +38,7 @@
             <li><a class="dropdown-item"  href="javascript:;" data-region='eu-west-3'>Europe (Paris)</a></li>
             <li><a class="dropdown-item"  href="javascript:;" data-region='eu-north-1'>Europe (Stockholm)</a></li>
             <li><a class="dropdown-item"  href="javascript:;" data-region='eu-south-1'>Europe (Milan)</a></li>
+            <li><a class="dropdown-item"  href="javascript:;" data-region='eu-south-2'>Europe (Spain)</a></li>
             <li><a class="dropdown-item"  href="javascript:;" data-region='me-south-1'>Middle East (Bahrain)</a></li>
             <li><a class="dropdown-item"  href="javascript:;" data-region='me-central-1'>Middle East (UAE)</a></li>
             <li><a class="dropdown-item"  href="javascript:;" data-region='sa-east-1'>South America (S&atilde;o Paulo)</a></li>
