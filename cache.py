@@ -3,6 +3,9 @@ import requests
 import json
 from json import encoder
 import sys
+import botocore
+import botocore.exceptions
+import boto3
 
 import six
 from tqdm import tqdm
@@ -281,11 +284,76 @@ def scrape(output_file, input_file=None):
                     )
 
     add_pretty_names(instances)
+    add_cache_parameters(instances)
 
     # write output to file
     encoder.FLOAT_REPR = lambda o: format(o, ".5f")
     with open(output_file, "w+") as outfile:
         json.dump(list(instances.values()), outfile, indent=1)
+
+
+def add_cache_parameters(instances):
+    """
+    Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis6.2
+
+    There are many parameters available for Memcached and Redis. For detail pages we're just interested in the ones that are different per instance
+
+    https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/ParameterGroups.Memcached.html
+
+    https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html
+
+    Custom parameters are:
+    Memcached:
+    - max cache memory
+    - num threads
+    Redis:
+    - max memory
+    - client output buffer limit
+    - max clients
+    - current generation
+    """
+
+    iparams = {}
+
+    for param_fam in [
+        "memcached1.4",
+        "memcached1.5",
+        "memcached1.6",
+        "redis2.6",
+        "redis2.8",
+        "redis3.2",
+        "redis4.0",
+        "redis5.0",
+        "redis6.x",
+    ]:
+        cache_client = boto3.client("elasticache", region_name="us-east-1")
+        response = cache_client.describe_engine_default_parameters(
+            CacheParameterGroupFamily=param_fam,
+        )
+
+        per_instance_params = response["EngineDefaults"][
+            "CacheNodeTypeSpecificParameters"
+        ]
+
+        for param_family in per_instance_params:
+            param_name = param_family["ParameterName"]
+            params_sets = param_family["CacheNodeTypeSpecificValues"]
+
+            for param in params_sets:
+                itype = param["CacheNodeType"]
+                if itype not in iparams:
+                    iparams[itype] = {}
+
+                if param_fam not in iparams[itype]:
+                    iparams[itype][param_fam] = {}
+
+                iparams[itype][param_fam][param_name] = param["Value"]
+
+    for i in instances.keys():
+        try:
+            instances[i]["cache_parameters"] = iparams[i]
+        except KeyError:
+            print("No cache parameters for {}".format(i))
 
 
 if __name__ == "__main__":
