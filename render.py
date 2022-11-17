@@ -149,6 +149,18 @@ def render(data_file, template_file, destination_file, detail_pages=True):
     for i in instances:
         add_render_info(i)
     pricing_json = compress_pricing(instances)
+    with open('www/pricing.json', "w+") as f:
+        f.write(pricing_json)
+        # print(pricing_json)
+        # json.dump(pricing_json, f)
+    # with open(data_file, "w+") as f:
+    #     json.dump(
+    #         [i.to_dict() for i in all_instances],
+    #         f,
+    #         indent=1,
+    #         sort_keys=True,
+    #         separators=(",", ": "),
+    #     )
     generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     instance_azs_json = compress_instance_azs(instances)
 
@@ -180,9 +192,9 @@ def render(data_file, template_file, destination_file, detail_pages=True):
 
 if __name__ == "__main__":
     sitemap = []
-    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html", False))
+    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
     sitemap.extend(
-        render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html", False)
+        render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
     )
     sitemap.extend(
         render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
