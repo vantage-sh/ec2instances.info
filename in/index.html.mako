@@ -91,7 +91,7 @@
           <label class="dropdown-label mb-1">Reserved</label>
           <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-globe icon-white"></i>
-            <span class="text">1 yr - No Upfront</span>
+            <span class="text">1-year - No Upfront</span>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
@@ -476,7 +476,7 @@
               <td class="cost-ondemand cost-ondemand-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
                 % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
                   <span sort="${inst['pricing']['us-east-1'][platform]['ondemand']}">
-                    $${inst['pricing']['us-east-1'][platform]['ondemand']} hourly
+                    $${"{:.4f}".format(float(inst['pricing']['us-east-1'][platform]['ondemand']))} hourly
                   </span>
                 % else:
                   <span sort="999999">unavailable</span>
@@ -486,7 +486,7 @@
               <td class="cost-reserved cost-reserved-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
                 % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['us-east-1'][platform]['reserved'].get('yrTerm1Standard.noUpfront', 'N/A') != "N/A":
                   <span sort="${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']}">
-                    $${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']} hourly
+                    $${"{:.4f}".format(float(inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']))} hourly
                   </span>
                 % else:
                   <span sort="999999">unavailable</span>
@@ -500,7 +500,7 @@
                         spot_min = inst['pricing']['us-east-1'][platform]['spot_min']
                     %>
                     <span sort="${spot_min}">
-                      $${spot_min} hourly
+                      $${"{:.4f}".format(float(spot_min))} hourly
                     </span>
                   % else:
                     <span sort="999999">unavailable</span>
@@ -513,7 +513,7 @@
                       spot_max = inst['pricing']['us-east-1'][platform]['spot_max']
                     %>
                     <span sort="${spot_max}">
-                      $${spot_max} hourly
+                      $${"{:.4f}".format(float(spot_max))} hourly
                     </span>
                   % else:
                     <span sort="999999">unavailable</span>
@@ -526,7 +526,7 @@
               % if inst['ebs_max_bandwidth']:
                 % if inst['pricing'].get('us-east-1', {}).get('ebs', 'N/A') != "N/A":
                   <span sort="${inst['pricing']['us-east-1']['ebs']}">
-                    $${inst['pricing']['us-east-1']['ebs']} hourly
+                    $${"{:.4f}".format(float(inst['pricing']['us-east-1']['ebs']))} hourly
                   </span>
                 % else:
                   <span sort="0">0</span>
@@ -538,7 +538,7 @@
             <td class="cost-emr" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
               % if inst['pricing'].get('us-east-1', {}).get("emr", {}):
                 <span sort="${inst['pricing']['us-east-1']['emr']['emr']}">
-                  $${inst['pricing']['us-east-1']["emr"]['emr']} hourly
+                  $${"{:.4f}".format(float(inst['pricing']['us-east-1']["emr"]['emr']))} hourly
                 </span>
               % else:
                 <span sort="999999">unavailable</span>

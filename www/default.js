@@ -270,7 +270,7 @@ $(document).ready(function () {
   var prices_path = '/pricing.json';
   var azs_path = '/instance_azs.json';
 
-  if (page === "/rds/") {
+  if (page === '/rds/') {
     prices_path = '/pricing_rds.json';
     azs_path = '/instance_azs_rds.json';
   } else if (page === '/cache/') {
@@ -279,23 +279,26 @@ $(document).ready(function () {
   }
 
   Promise.all([
-    fetch(prices_path).then((response) => response.json()).then(data => _pricing = data),
-    fetch(prices_path).then((response) => response.json()).then(data => _instance_azs = data)
-  ]).then(() => on_data_table_initialized())
-
+    fetch(prices_path)
+      .then((response) => response.json())
+      .then((data) => (_pricing = data)),
+    fetch(prices_path)
+      .then((response) => response.json())
+      .then((data) => (_instance_azs = data)),
+  ]).then(() => on_data_table_initialized());
 });
 
 function get_pricing() {
-    // see compress_pricing in render.py for the generation side
-    var v = _pricing["data"];
-    for (var i = 0; i < arguments.length; i++) {
-        var k = _pricing["index"][arguments[i]];
-        v = v[k];
-        if (v === undefined) {
-            return undefined;
-        }
+  // see compress_pricing in render.py for the generation side
+  var v = _pricing['data'];
+  for (var i = 0; i < arguments.length; i++) {
+    var k = _pricing['index'][arguments[i]];
+    v = v[k];
+    if (v === undefined) {
+      return undefined;
     }
-    return v;
+  }
+  return v;
 }
 
 function get_instance_availability_zones(instance_type, region) {
@@ -363,7 +366,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -388,7 +391,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -412,7 +415,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -436,7 +439,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -455,7 +458,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -474,7 +477,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
