@@ -146,6 +146,9 @@ def per_region_pricing(instances):
     with open(data_file, "r") as f:
         aws_regions = yaml.safe_load(f)
 
+    init_pricing_json = ""
+    init_instance_azs_json = ""
+
     instances_no_pricing = copy.deepcopy(instances)
     for i in instances_no_pricing:
         del i["pricing"]
@@ -164,21 +167,23 @@ def per_region_pricing(instances):
                 per_region_out[i]["availability_zones"][r] = instances[i][
                     "availability_zones"
                 ][r]
-            # for region in inst["pricing"].keys():
-            #     if region != "us-east-1":
-            #         del instances2[i]["pricing"][region]
 
-        # with open("www/instances_%s.json" % r, "w") as f:
-        #     f.write(json.dumps(per_region_out, indent=4))
         pricing_out_file = "www/pricing_%s.json" % r
         azs_out_file = "www/instance_azs_%s.json" % r
 
         pricing_json = compress_pricing(per_region_out)
         instance_azs_json = compress_instance_azs(per_region_out)
+
+        if r == "us-east-1":
+            init_pricing_json = pricing_json
+            init_instance_azs_json = instance_azs_json
+
         with open(pricing_out_file, "w+") as f:
             f.write(pricing_json)
         with open(azs_out_file, "w+") as f:
             f.write(instance_azs_json)
+
+    return init_pricing_json, init_instance_azs_json
 
 
 def render(data_file, template_file, destination_file, detail_pages=True):
@@ -191,28 +196,9 @@ def render(data_file, template_file, destination_file, detail_pages=True):
     print("Loading data from %s..." % data_file)
     for i in instances:
         add_render_info(i)
+
     generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
-
-    per_region_pricing(instances)
-
-    with open("region_instances.json", "w") as f:
-        f.write(json.dumps(instances, indent=4))
-    pricing_json = compress_pricing(instances)
-    instance_azs_json = compress_instance_azs(instances)
-    if data_file == "www/instances.json":
-        pricing_out_file = "www/pricing.json"
-        azs_out_file = "www/instance_azs.json"
-    elif data_file == "www/rds/instances.json":
-        pricing_out_file = "www/pricing_rds.json"
-        azs_out_file = "www/instance_azs_rds.json"
-    elif data_file == "www/cache/instances.json":
-        pricing_out_file = "www/pricing_cache.json"
-        azs_out_file = "www/instance_azs_cache.json"
-
-    with open(pricing_out_file, "w+") as f:
-        f.write(pricing_json)
-    with open(azs_out_file, "w+") as f:
-        f.write(instance_azs_json)
+    pricing_json, instance_azs_json = per_region_pricing(instances)
 
     sitemap = []
     if detail_pages:
@@ -228,7 +214,9 @@ def render(data_file, template_file, destination_file, detail_pages=True):
             fh.write(
                 template.render(
                     instances=instances,
+                    pricing_json=pricing_json,
                     generated_at=generated_at,
+                    instance_azs_json=instance_azs_json,
                 )
             )
             sitemap.append(destination_file)
