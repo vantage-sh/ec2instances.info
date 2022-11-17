@@ -140,14 +140,45 @@ def build_sitemap(sitemap):
 
 def per_region_pricing(instances):
     import copy
+    import yaml
 
-    instances2 = copy.deepcopy(instances)
-    for i, inst in enumerate(instances):
-        print(inst["instance_type"])
-        for region in inst["pricing"].keys():
-            if region != "us-east-1":
-                del instances2[i]["pricing"][region]
-    return instances2
+    data_file = "meta/regions_aws.yaml"
+    with open(data_file, "r") as f:
+        aws_regions = yaml.safe_load(f)
+
+    instances_no_pricing = copy.deepcopy(instances)
+    for i in instances_no_pricing:
+        del i["pricing"]
+        del i["availability_zones"]
+
+    for r in aws_regions:
+        per_region_out = {}
+        per_region_out = instances_no_pricing
+
+        for i, inst in enumerate(instances):
+            per_region_out[i]["pricing"] = {}
+            per_region_out[i]["availability_zones"] = {}
+            if r in inst["pricing"]:
+                per_region_out[i]["pricing"][r] = instances[i]["pricing"][r]
+            if r in inst["availability_zones"]:
+                per_region_out[i]["availability_zones"][r] = instances[i][
+                    "availability_zones"
+                ][r]
+            # for region in inst["pricing"].keys():
+            #     if region != "us-east-1":
+            #         del instances2[i]["pricing"][region]
+
+        # with open("www/instances_%s.json" % r, "w") as f:
+        #     f.write(json.dumps(per_region_out, indent=4))
+        pricing_out_file = "www/pricing_%s.json" % r
+        azs_out_file = "www/instance_azs_%s.json" % r
+
+        pricing_json = compress_pricing(per_region_out)
+        instance_azs_json = compress_instance_azs(per_region_out)
+        with open(pricing_out_file, "w+") as f:
+            f.write(pricing_json)
+        with open(azs_out_file, "w+") as f:
+            f.write(instance_azs_json)
 
 
 def render(data_file, template_file, destination_file, detail_pages=True):
@@ -162,7 +193,8 @@ def render(data_file, template_file, destination_file, detail_pages=True):
         add_render_info(i)
     generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
 
-    instances = per_region_pricing(instances)
+    per_region_pricing(instances)
+
     with open("region_instances.json", "w") as f:
         f.write(json.dumps(instances, indent=4))
     pricing_json = compress_pricing(instances)
