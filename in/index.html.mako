@@ -213,6 +213,7 @@
           <th class="cost-spot-min cost-spot-min-linux">Linux Spot Minimum cost</th>
           <th class="cost-spot-max cost-spot-max-linux">Linux Spot Maximum cost</th>
 
+          <!--
           <th class="cost-ondemand cost-ondemand-rhel">RHEL On Demand cost</th>
           <th class="cost-reserved cost-reserved-rhel">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>RHEL Reserved cost</abbr>
@@ -226,11 +227,13 @@
           </th>
           <th class="cost-spot-min cost-spot-min-sles">SLES Spot Minimum cost</th>
           <th class="cost-spot-max cost-spot-max-sles">SLES Spot Maximum cost</th>
+          -->
 
           <th class="cost-ondemand cost-ondemand-mswin">Windows On Demand cost</th>
           <th class="cost-reserved cost-reserved-mswin">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows Reserved cost</abbr>
           </th>
+          <!--
           <th class="cost-spot-min cost-spot-min-mswin">Windows Spot Minimum cost</th>
           <th class="cost-spot-max cost-spot-max-mswin">Windows Spot Maximum cost</th>
 
@@ -263,6 +266,7 @@
           <th class="cost-reserved cost-reserved-linuxSQLEnterprise">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux SQL Ent Reserved cost</abbr>
           </th>
+          -->
           <th class="cost-ebs-optimized">
             <abbr title='Some instance types are charged additionally when configured for optimized EBS usage'>EBS Optimized surcharge</abbr>
           </th>
@@ -469,7 +473,8 @@
               ${', '.join(inst.get('availability_zones', {}).get('us-east-1', []))}
             </td>
             
-            % for platform in ['linux', 'rhel', 'sles', 'mswin', 'dedicated', 'mswinSQLWeb', 'mswinSQL', 'mswinSQLEnterprise', 'linuxSQLWeb', 'linuxSQL', 'linuxSQLEnterprise']:
+            <!-- % for platform in ['linux', 'rhel', 'sles', 'mswin', 'dedicated', 'mswinSQLWeb', 'mswinSQL', 'mswinSQLEnterprise', 'linuxSQLWeb', 'linuxSQL', 'linuxSQLEnterprise']: -->
+            % for platform in ['linux', 'mswin']:
               ## note that the contents in these cost cells are overwritten by the JS change_cost() func, but the initial
               ## data here is used for sorting (and anyone with JS disabled...)
               ## for more info, see https://github.com/powdahound/ec2instances.info/issues/140
@@ -493,7 +498,7 @@
                 % endif
               </td>
 
-              % if platform in ['linux', 'rhel', 'sles', 'mswin']:
+              % if platform in ['linux']:
                 <td class="cost-spot-min cost-spot-min-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
                   % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot_min', 'N/A') != 'N/A':
                     <%
