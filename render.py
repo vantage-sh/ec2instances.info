@@ -148,13 +148,24 @@ def render(data_file, template_file, destination_file, detail_pages=True):
     print("Loading data from %s..." % data_file)
     for i in instances:
         add_render_info(i)
-    pricing_json = compress_pricing(instances)
-    with open('www/pricing.json', "w+") as f:
-        f.write(pricing_json)
-    instance_azs_json = compress_instance_azs(instances)
-    with open('www/instance_azs.json', "w+") as f:
-        f.write(instance_azs_json)
     generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+
+    pricing_json = compress_pricing(instances)
+    instance_azs_json = compress_instance_azs(instances)
+    if data_file == "www/instances.json":
+        pricing_out_file = 'www/pricing.json'
+        azs_out_file = 'www/instance_azs.json'
+    elif data_file == 'www/rds/instances.json':
+        pricing_out_file = 'www/pricing_rds.json'
+        azs_out_file = 'www/instance_azs_rds.json'
+    elif data_file == 'www/cache/instances.json':
+        pricing_out_file = 'www/pricing_cache.json'
+        azs_out_file = 'www/instance_azs_cache.json'
+
+    with open(pricing_out_file, "w+") as f:
+        f.write(pricing_json)
+    with open(azs_out_file, "w+") as f:
+        f.write(instance_azs_json)
 
     sitemap = []
     if detail_pages:
@@ -182,13 +193,20 @@ def render(data_file, template_file, destination_file, detail_pages=True):
 
 if __name__ == "__main__":
     sitemap = []
+<<<<<<< HEAD
     sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
     sitemap.extend(
         render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
+=======
+    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html", False))
+    sitemap.extend(
+        render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html", False)
+>>>>>>> b32b123 (async load data for rds and elasticache too)
     )
     sitemap.extend(
         render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
     )
+<<<<<<< HEAD
     sitemap.extend(
         render(
             "www/redshift/instances.json",
@@ -203,5 +221,7 @@ if __name__ == "__main__":
             "www/opensearch/index.html",
         )
     )
+=======
+>>>>>>> b32b123 (async load data for rds and elasticache too)
     sitemap.append(about_page())
     build_sitemap(sitemap)
