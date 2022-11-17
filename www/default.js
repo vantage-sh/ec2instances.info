@@ -230,7 +230,7 @@ function init_data_table() {
     ],
     // default sort by linux cost
     aaSorting: [[6, 'asc']],
-    /*
+
     initComplete: function () {
       // fire event in separate context so that calls to get_data_table()
       // receive the cached object.
@@ -238,7 +238,7 @@ function init_data_table() {
         on_data_table_initialized();
       }, 0);
     },
-    */
+
     // Store filtering, sorting, etc - core datatable feature
     stateSave: true,
     stateDuration: 0,
@@ -261,31 +261,8 @@ function init_data_table() {
   return g_data_table;
 }
 
-var _pricing;
-var _instance_azs;
 $(document).ready(function () {
   init_data_table();
-
-  var page = window.location.pathname;
-  var prices_path = '/pricing_us-east-1.json';
-  var azs_path = '/instance_azs_us-east-1.json';
-
-  if (page === '/rds/') {
-    prices_path = '/pricing_rds.json';
-    azs_path = '/instance_azs_rds.json';
-  } else if (page === '/cache/') {
-    prices_path = '/pricing_cache.json';
-    azs_path = '/instance_azs_cache.json';
-  }
-
-  Promise.all([
-    fetch(prices_path)
-      .then((response) => response.json())
-      .then((data) => (_pricing = data)),
-    fetch(azs_path)
-      .then((response) => response.json())
-      .then((data) => (_instance_azs = data)),
-  ]).then(() => on_data_table_initialized());
 });
 
 function get_pricing() {
@@ -501,17 +478,12 @@ function change_availability_zones() {
   });
 }
 
-function change_region(region) {
+function change_region(region, called_on_init) {
+  if (called_on_init && region === 'us-east-1') {
+    return;
+  }
   g_settings.region = region;
   console.log(region);
-
-  // if (page === '/rds/') {
-  //   prices_path = '/pricing_rds.json';
-  //   azs_path = '/instance_azs_rds.json';
-  // } else if (page === '/cache/') {
-  //   prices_path = '/pricing_cache.json';
-  //   azs_path = '/instance_azs_cache.json';
-  // }
 
   var prices_path = '/pricing_' + region + '.json';
   var azs_path = '/instance_azs_' + region + '.json';
@@ -716,7 +688,7 @@ function on_data_table_initialized() {
   // Allow row filtering by min-value match.
   $('[data-action=datafilter]').on('keyup', apply_min_values);
 
-  change_region(g_settings.region);
+  change_region(g_settings.region, true);
   change_reserved_term(g_settings.reserved_term);
   change_cost();
 
@@ -778,27 +750,7 @@ function on_data_table_initialized() {
 
   $('#region-dropdown li').bind('click', function (e) {
     var region = $(e.target).data('region');
-    change_region(region);
-    // console.log(region);
-    // var prices_path = '/pricing_' + region + '.json';
-    // var azs_path = '/instance_azs_' + region + '.json';
-
-    // // if (page === '/rds/') {
-    // //   prices_path = '/pricing_rds.json';
-    // //   azs_path = '/instance_azs_rds.json';
-    // // } else if (page === '/cache/') {
-    // //   prices_path = '/pricing_cache.json';
-    // //   azs_path = '/instance_azs_cache.json';
-    // // }
-
-    // Promise.all([
-    //   fetch(prices_path)
-    //     .then((response) => response.json())
-    //     .then((data) => (_pricing = data)),
-    //   fetch(azs_path)
-    //     .then((response) => response.json())
-    //     .then((data) => (_instance_azs = data)),
-    // ]).then(() => change_region(region));
+    change_region(region, false);
   });
 
   $('#reserved-term-dropdown li').bind('click', function (e) {
