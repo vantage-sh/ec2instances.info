@@ -230,6 +230,7 @@ function init_data_table() {
     ],
     // default sort by linux cost
     aaSorting: [[6, 'asc']],
+    /*
     initComplete: function () {
       // fire event in separate context so that calls to get_data_table()
       // receive the cached object.
@@ -237,6 +238,7 @@ function init_data_table() {
         on_data_table_initialized();
       }, 0);
     },
+    */
     // Store filtering, sorting, etc - core datatable feature
     stateSave: true,
     stateDuration: 0,
@@ -259,9 +261,56 @@ function init_data_table() {
   return g_data_table;
 }
 
+var _pricing;
+var _instance_azs;
 $(document).ready(function () {
   init_data_table();
+
+  var page = window.location.pathname;
+  var prices_path = '/pricing_us-east-1.json';
+  var azs_path = '/instance_azs_us-east-1.json';
+
+  if (page === '/rds/') {
+    prices_path = '/pricing_rds.json';
+    azs_path = '/instance_azs_rds.json';
+  } else if (page === '/cache/') {
+    prices_path = '/pricing_cache.json';
+    azs_path = '/instance_azs_cache.json';
+  }
+
+  Promise.all([
+    fetch(prices_path)
+      .then((response) => response.json())
+      .then((data) => (_pricing = data)),
+    fetch(azs_path)
+      .then((response) => response.json())
+      .then((data) => (_instance_azs = data)),
+  ]).then(() => on_data_table_initialized());
 });
+
+function get_pricing() {
+  // see compress_pricing in render.py for the generation side
+  var v = _pricing['data'];
+  for (var i = 0; i < arguments.length; i++) {
+    var k = _pricing['index'][arguments[i]];
+    v = v[k];
+    if (v === undefined) {
+      return undefined;
+    }
+  }
+  return v;
+}
+
+function get_instance_availability_zones(instance_type, region) {
+  var region_azs = _instance_azs[instance_type];
+  if (region_azs) {
+    var azs = region_azs[region];
+    if (azs) {
+      return azs;
+    }
+  }
+  return [];
+}
 
 function change_cost() {
   // update pricing duration menu text
@@ -317,7 +366,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -342,7 +391,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -366,7 +415,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -390,7 +439,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -409,7 +458,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -428,7 +477,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -454,18 +503,40 @@ function change_availability_zones() {
 
 function change_region(region) {
   g_settings.region = region;
-  var region_name = null;
-  $('#region-dropdown li a').each(function (i, e) {
-    e = $(e);
-    if (e.data('region') === region) {
-      e.parent().addClass('active');
-      region_name = e.text();
-    } else {
-      e.parent().removeClass('active');
-    }
+  console.log(region);
+
+  // if (page === '/rds/') {
+  //   prices_path = '/pricing_rds.json';
+  //   azs_path = '/instance_azs_rds.json';
+  // } else if (page === '/cache/') {
+  //   prices_path = '/pricing_cache.json';
+  //   azs_path = '/instance_azs_cache.json';
+  // }
+
+  var prices_path = '/pricing_' + region + '.json';
+  var azs_path = '/instance_azs_' + region + '.json';
+  Promise.all([
+    fetch(prices_path)
+      .then((response) => response.json())
+      .then((data) => (_pricing = data)),
+    fetch(azs_path)
+      .then((response) => response.json())
+      .then((data) => (_instance_azs = data)),
+  ]).then(() => {
+    var region_name = null;
+    $('#region-dropdown li a').each(function (i, e) {
+      e = $(e);
+      if (e.data('region') === region) {
+        e.parent().addClass('active');
+        region_name = e.text();
+      } else {
+        e.parent().removeClass('active');
+      }
+    });
+    $('#region-dropdown .dropdown-toggle .text').text(region_name);
+    change_availability_zones();
+    redraw_costs();
   });
-  $('#region-dropdown .dropdown-toggle .text').text(region_name);
-  change_availability_zones();
 }
 
 function change_reserved_term(term) {
@@ -706,8 +777,28 @@ function on_data_table_initialized() {
   });
 
   $('#region-dropdown li').bind('click', function (e) {
-    change_region($(e.target).data('region'));
-    redraw_costs();
+    var region = $(e.target).data('region');
+    change_region(region);
+    // console.log(region);
+    // var prices_path = '/pricing_' + region + '.json';
+    // var azs_path = '/instance_azs_' + region + '.json';
+
+    // // if (page === '/rds/') {
+    // //   prices_path = '/pricing_rds.json';
+    // //   azs_path = '/instance_azs_rds.json';
+    // // } else if (page === '/cache/') {
+    // //   prices_path = '/pricing_cache.json';
+    // //   azs_path = '/instance_azs_cache.json';
+    // // }
+
+    // Promise.all([
+    //   fetch(prices_path)
+    //     .then((response) => response.json())
+    //     .then((data) => (_pricing = data)),
+    //   fetch(azs_path)
+    //     .then((response) => response.json())
+    //     .then((data) => (_instance_azs = data)),
+    // ]).then(() => change_region(region));
   });
 
   $('#reserved-term-dropdown li').bind('click', function (e) {

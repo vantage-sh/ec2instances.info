@@ -138,7 +138,50 @@ def build_sitemap(sitemap):
         fp.write("\n".join(surls))
 
 
-def render(data_file, template_file, destination_file):
+def per_region_pricing(instances):
+    import copy
+    import yaml
+
+    data_file = "meta/regions_aws.yaml"
+    with open(data_file, "r") as f:
+        aws_regions = yaml.safe_load(f)
+
+    instances_no_pricing = copy.deepcopy(instances)
+    for i in instances_no_pricing:
+        del i["pricing"]
+        del i["availability_zones"]
+
+    for r in aws_regions:
+        per_region_out = {}
+        per_region_out = instances_no_pricing
+
+        for i, inst in enumerate(instances):
+            per_region_out[i]["pricing"] = {}
+            per_region_out[i]["availability_zones"] = {}
+            if r in inst["pricing"]:
+                per_region_out[i]["pricing"][r] = instances[i]["pricing"][r]
+            if r in inst["availability_zones"]:
+                per_region_out[i]["availability_zones"][r] = instances[i][
+                    "availability_zones"
+                ][r]
+            # for region in inst["pricing"].keys():
+            #     if region != "us-east-1":
+            #         del instances2[i]["pricing"][region]
+
+        # with open("www/instances_%s.json" % r, "w") as f:
+        #     f.write(json.dumps(per_region_out, indent=4))
+        pricing_out_file = "www/pricing_%s.json" % r
+        azs_out_file = "www/instance_azs_%s.json" % r
+
+        pricing_json = compress_pricing(per_region_out)
+        instance_azs_json = compress_instance_azs(per_region_out)
+        with open(pricing_out_file, "w+") as f:
+            f.write(pricing_json)
+        with open(azs_out_file, "w+") as f:
+            f.write(instance_azs_json)
+
+
+def render(data_file, template_file, destination_file, detail_pages=True):
     """Build the HTML content from scraped data"""
     lookup = mako.lookup.TemplateLookup(directories=["."])
     template = mako.template.Template(filename=template_file, lookup=lookup)
@@ -148,15 +191,35 @@ def render(data_file, template_file, destination_file):
     print("Loading data from %s..." % data_file)
     for i in instances:
         add_render_info(i)
-    pricing_json = compress_pricing(instances)
     generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+
+    per_region_pricing(instances)
+
+    with open("region_instances.json", "w") as f:
+        f.write(json.dumps(instances, indent=4))
+    pricing_json = compress_pricing(instances)
     instance_azs_json = compress_instance_azs(instances)
+    if data_file == "www/instances.json":
+        pricing_out_file = "www/pricing.json"
+        azs_out_file = "www/instance_azs.json"
+    elif data_file == "www/rds/instances.json":
+        pricing_out_file = "www/pricing_rds.json"
+        azs_out_file = "www/instance_azs_rds.json"
+    elif data_file == "www/cache/instances.json":
+        pricing_out_file = "www/pricing_cache.json"
+        azs_out_file = "www/instance_azs_cache.json"
+
+    with open(pricing_out_file, "w+") as f:
+        f.write(pricing_json)
+    with open(azs_out_file, "w+") as f:
+        f.write(instance_azs_json)
 
     sitemap = []
-    if data_file == "www/instances.json":
-        sitemap.extend(build_detail_pages_ec2(instances, destination_file))
-    elif data_file == "www/rds/instances.json":
-        sitemap.extend(build_detail_pages_rds(instances, destination_file))
+    if detail_pages:
+        if data_file == "www/instances.json":
+            sitemap.extend(build_detail_pages_ec2(instances, destination_file))
+        elif data_file == "www/rds/instances.json":
+            sitemap.extend(build_detail_pages_rds(instances, destination_file))
 
     print("Rendering to %s..." % destination_file)
     os.makedirs(os.path.dirname(destination_file), exist_ok=True)
@@ -165,9 +228,7 @@ def render(data_file, template_file, destination_file):
             fh.write(
                 template.render(
                     instances=instances,
-                    pricing_json=pricing_json,
                     generated_at=generated_at,
-                    instance_azs_json=instance_azs_json,
                 )
             )
             sitemap.append(destination_file)
@@ -179,26 +240,27 @@ def render(data_file, template_file, destination_file):
 
 if __name__ == "__main__":
     sitemap = []
-    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
     sitemap.extend(
-        render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
+        render("www/instances.json", "in/index.html.mako", "www/index.html", False)
     )
-    sitemap.extend(
-        render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
-    )
-    sitemap.extend(
-        render(
-            "www/redshift/instances.json",
-            "in/redshift.html.mako",
-            "www/redshift/index.html",
-        )
-    )
-    sitemap.extend(
-        render(
-            "www/opensearch/instances.json",
-            "in/opensearch.html.mako",
-            "www/opensearch/index.html",
-        )
-    )
+    # sitemap.extend(
+    #     render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html"))
+    # sitemap.extend(
+    #     render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
+    # )
+    # sitemap.extend(
+    #     render(
+    #         "www/redshift/instances.json",
+    #         "in/redshift.html.mako",
+    #         "www/redshift/index.html",
+    #     )
+    # )
+    # sitemap.extend(
+    #     render(
+    #         "www/opensearch/instances.json",
+    #         "in/opensearch.html.mako",
+    #         "www/opensearch/index.html",
+    #     )
+    # )
     sitemap.append(about_page())
     build_sitemap(sitemap)
