@@ -265,30 +265,6 @@ $(document).ready(function () {
   init_data_table();
 });
 
-function get_pricing() {
-  // see compress_pricing in render.py for the generation side
-  var v = _pricing['data'];
-  for (var i = 0; i < arguments.length; i++) {
-    var k = _pricing['index'][arguments[i]];
-    v = v[k];
-    if (v === undefined) {
-      return undefined;
-    }
-  }
-  return v;
-}
-
-function get_instance_availability_zones(instance_type, region) {
-  var region_azs = _instance_azs[instance_type];
-  if (region_azs) {
-    var azs = region_azs[region];
-    if (azs) {
-      return azs;
-    }
-  }
-  return [];
-}
-
 function change_cost() {
   // update pricing duration menu text
   var duration = g_settings.cost_duration;
@@ -480,13 +456,16 @@ function change_availability_zones() {
 
 function change_region(region, called_on_init) {
   if (called_on_init && region === 'us-east-1') {
+    // Don't load pricing data on initial page load. It's already there.
     return;
   }
-  g_settings.region = region;
-  console.log(region);
 
-  var prices_path = '/pricing_' + region + '.json';
-  var azs_path = '/instance_azs_' + region + '.json';
+  g_settings.region = region;
+
+  var urlpath = window.location.pathname;
+  var prices_path = urlpath + 'pricing_' + region + '.json';
+  var azs_path = urlpath + 'instance_azs_' + region + '.json';
+
   Promise.all([
     fetch(prices_path)
       .then((response) => response.json())
@@ -509,6 +488,8 @@ function change_region(region, called_on_init) {
     change_availability_zones();
     redraw_costs();
   });
+
+  return true;
 }
 
 function change_reserved_term(term) {
@@ -688,9 +669,21 @@ function on_data_table_initialized() {
   // Allow row filtering by min-value match.
   $('[data-action=datafilter]').on('keyup', apply_min_values);
 
-  change_region(g_settings.region, true);
+  var will_redraw_costs = change_region(g_settings.region, true);
   change_reserved_term(g_settings.reserved_term);
-  change_cost();
+
+  if (!will_redraw_costs) {
+    // State management situation. Most of this code is synchronous, we get the locally saved
+    // settings from load_settings() and check the reserved term from change_reserved_term().
+    // When those things are applied, we need to change the costs displayed. However the region
+    // change is async, so we have to wait for the data to load and then call change_cost(). That's
+    // handled in the callback in change_region(). If change_cost() is called there, we don't need
+    // to call it here. More scenarios:
+    // - URL is ?region=ap-northeast-1&pricing_unit=vcpu&cost_duration=monthly, don't redraw here
+    // - URL is ?cost_duration=monthly, redraw here
+    // - URL is ?cost_duration=monthly&reserved_term=yrTerm1Convertible.partialUpfront, redraw here
+    change_cost();
+  }
 
   $.extend($.fn.dataTableExt.oStdClasses, {
     sWrapper: 'dataTables_wrapper form-inline',
