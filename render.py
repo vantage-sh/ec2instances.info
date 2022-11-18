@@ -5,6 +5,8 @@ import io
 import json
 import datetime
 import os
+import copy
+import yaml
 
 from detail_pages_rds import build_detail_pages_rds
 from detail_pages_ec2 import build_detail_pages_ec2
@@ -138,7 +140,60 @@ def build_sitemap(sitemap):
         fp.write("\n".join(surls))
 
 
-def render(data_file, template_file, destination_file):
+def per_region_pricing(instances, data_file):
+    # This function splits instances.json into per-region files which are written to
+    # disk and then can be loaded by the web app to reduce the amount of data that
+    # needs to be sent to the client.
+
+    region_list = "meta/regions_aws.yaml"
+    with open(region_list, "r") as f:
+        aws_regions = yaml.safe_load(f)
+
+    init_pricing_json = ""
+    init_instance_azs_json = ""
+
+    outdir = data_file.replace("instances.json", "")
+
+    instances_no_pricing = copy.deepcopy(instances)
+    for i in instances_no_pricing:
+        if "pricing" in i:
+            del i["pricing"]
+        if "availability_zones" in i:
+            del i["availability_zones"]
+
+    for r in aws_regions:
+        per_region_out = {}
+        per_region_out = instances_no_pricing
+
+        for i, inst in enumerate(instances):
+            per_region_out[i]["pricing"] = {}
+            per_region_out[i]["availability_zones"] = {}
+            if r in inst["pricing"]:
+                per_region_out[i]["pricing"][r] = instances[i]["pricing"][r]
+            if "availability_zones" in inst and r in inst["availability_zones"]:
+                per_region_out[i]["availability_zones"][r] = instances[i][
+                    "availability_zones"
+                ][r]
+
+        pricing_out_file = "{}pricing_{}.json".format(outdir, r)
+        azs_out_file = "{}instance_azs_{}.json".format(outdir, r)
+
+        pricing_json = compress_pricing(per_region_out)
+        instance_azs_json = compress_instance_azs(per_region_out)
+
+        if r == "us-east-1":
+            init_pricing_json = pricing_json
+            init_instance_azs_json = instance_azs_json
+
+        with open(pricing_out_file, "w+") as f:
+            f.write(pricing_json)
+        with open(azs_out_file, "w+") as f:
+            f.write(instance_azs_json)
+
+    return init_pricing_json, init_instance_azs_json
+
+
+def render(data_file, template_file, destination_file, detail_pages=True):
     """Build the HTML content from scraped data"""
     lookup = mako.lookup.TemplateLookup(directories=["."])
     template = mako.template.Template(filename=template_file, lookup=lookup)
@@ -148,15 +203,16 @@ def render(data_file, template_file, destination_file):
     print("Loading data from %s..." % data_file)
     for i in instances:
         add_render_info(i)
-    pricing_json = compress_pricing(instances)
+
     generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
-    instance_azs_json = compress_instance_azs(instances)
+    pricing_json, instance_azs_json = per_region_pricing(instances, data_file)
 
     sitemap = []
-    if data_file == "www/instances.json":
-        sitemap.extend(build_detail_pages_ec2(instances, destination_file))
-    elif data_file == "www/rds/instances.json":
-        sitemap.extend(build_detail_pages_rds(instances, destination_file))
+    if detail_pages:
+        if data_file == "www/instances.json":
+            sitemap.extend(build_detail_pages_ec2(instances, destination_file))
+        elif data_file == "www/rds/instances.json":
+            sitemap.extend(build_detail_pages_rds(instances, destination_file))
 
     print("Rendering to %s..." % destination_file)
     os.makedirs(os.path.dirname(destination_file), exist_ok=True)
@@ -179,9 +235,13 @@ def render(data_file, template_file, destination_file):
 
 if __name__ == "__main__":
     sitemap = []
-    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
     sitemap.extend(
-        render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
+        render("www/instances.json", "in/index.html.mako", "www/index.html", False)
+    )
+    sitemap.extend(
+        render(
+            "www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html", False
+        )
     )
     sitemap.extend(
         render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")

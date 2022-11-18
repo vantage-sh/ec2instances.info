@@ -185,16 +185,16 @@
           <td class="cost-ondemand cost-ondemand-node" data-platform="none" data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
             % if inst['pricing'].get('us-east-1', {}).get('ondemand', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1']['ondemand']}">
-                $${inst['pricing']['us-east-1']['ondemand']} per hour
+                $${"{:.4f}".format(float(inst['pricing']['us-east-1']['ondemand']))} hourly
               </span>
             % else:
               <span sort="0">unavailable</span>
             % endif
           </td>
           <td class="cost-reserved cost-reserved-node" data-platform="none" data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
-            % if inst['pricing'].get('us-east-1', {}).get('reserved', 'N/A') != "N/A":
+            % if inst['pricing'].get('us-east-1', {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['us-east-1']['reserved'].get('yrTerm1Standard.noUpfront', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1']['reserved'].get('yrTerm1Standard.noUpfront')}">
-                $${inst['pricing']['us-east-1']['reserved'].get('yrTerm1Standard.noUpfront')} per hour
+                $${"{:.4f}".format(float(inst['pricing']['us-east-1']['reserved'].get('yrTerm1Standard.noUpfront')))} hourly
               </span>
             % else:
               <span sort="0">unavailable</span>

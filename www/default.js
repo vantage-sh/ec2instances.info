@@ -230,6 +230,7 @@ function init_data_table() {
     ],
     // default sort by linux cost
     aaSorting: [[6, 'asc']],
+
     initComplete: function () {
       // fire event in separate context so that calls to get_data_table()
       // receive the cached object.
@@ -237,6 +238,7 @@ function init_data_table() {
         on_data_table_initialized();
       }, 0);
     },
+
     // Store filtering, sorting, etc - core datatable feature
     stateSave: true,
     stateDuration: 0,
@@ -317,7 +319,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -342,7 +344,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -366,7 +368,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -390,7 +392,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -409,7 +411,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -428,7 +430,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(6);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -452,20 +454,42 @@ function change_availability_zones() {
   });
 }
 
-function change_region(region) {
+function change_region(region, called_on_init) {
+  if (called_on_init && region === 'us-east-1') {
+    // Don't load pricing data on initial page load. It's already there.
+    return;
+  }
+
   g_settings.region = region;
-  var region_name = null;
-  $('#region-dropdown li a').each(function (i, e) {
-    e = $(e);
-    if (e.data('region') === region) {
-      e.parent().addClass('active');
-      region_name = e.text();
-    } else {
-      e.parent().removeClass('active');
-    }
+
+  var urlpath = window.location.pathname;
+  var prices_path = urlpath + 'pricing_' + region + '.json';
+  var azs_path = urlpath + 'instance_azs_' + region + '.json';
+
+  Promise.all([
+    fetch(prices_path)
+      .then((response) => response.json())
+      .then((data) => (_pricing = data)),
+    fetch(azs_path)
+      .then((response) => response.json())
+      .then((data) => (_instance_azs = data)),
+  ]).then(() => {
+    var region_name = null;
+    $('#region-dropdown li a').each(function (i, e) {
+      e = $(e);
+      if (e.data('region') === region) {
+        e.parent().addClass('active');
+        region_name = e.text();
+      } else {
+        e.parent().removeClass('active');
+      }
+    });
+    $('#region-dropdown .dropdown-toggle .text').text(region_name);
+    change_availability_zones();
+    redraw_costs();
   });
-  $('#region-dropdown .dropdown-toggle .text').text(region_name);
-  change_availability_zones();
+
+  return true;
 }
 
 function change_reserved_term(term) {
@@ -645,9 +669,21 @@ function on_data_table_initialized() {
   // Allow row filtering by min-value match.
   $('[data-action=datafilter]').on('keyup', apply_min_values);
 
-  change_region(g_settings.region);
+  var will_redraw_costs = change_region(g_settings.region, true);
   change_reserved_term(g_settings.reserved_term);
-  change_cost();
+
+  if (!will_redraw_costs) {
+    // State management situation. Most of this code is synchronous, we get the locally saved
+    // settings from load_settings() and check the reserved term from change_reserved_term().
+    // When those things are applied, we need to change the costs displayed. However the region
+    // change is async, so we have to wait for the data to load and then call change_cost(). That's
+    // handled in the callback in change_region(). If change_cost() is called there, we don't need
+    // to call it here. More scenarios:
+    // - URL is ?region=ap-northeast-1&pricing_unit=vcpu&cost_duration=monthly, don't redraw here
+    // - URL is ?cost_duration=monthly, redraw here
+    // - URL is ?cost_duration=monthly&reserved_term=yrTerm1Convertible.partialUpfront, redraw here
+    change_cost();
+  }
 
   $.extend($.fn.dataTableExt.oStdClasses, {
     sWrapper: 'dataTables_wrapper form-inline',
@@ -706,8 +742,8 @@ function on_data_table_initialized() {
   });
 
   $('#region-dropdown li').bind('click', function (e) {
-    change_region($(e.target).data('region'));
-    redraw_costs();
+    var region = $(e.target).data('region');
+    change_region(region, false);
   });
 
   $('#reserved-term-dropdown li').bind('click', function (e) {
