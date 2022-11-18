@@ -488,6 +488,8 @@ function change_region(region, called_on_init) {
     change_availability_zones();
     redraw_costs();
   });
+
+  return true;
 }
 
 function change_reserved_term(term) {
@@ -667,9 +669,21 @@ function on_data_table_initialized() {
   // Allow row filtering by min-value match.
   $('[data-action=datafilter]').on('keyup', apply_min_values);
 
-  change_region(g_settings.region, true);
+  var will_redraw_costs = change_region(g_settings.region, true);
   change_reserved_term(g_settings.reserved_term);
-  change_cost();
+
+  if (!will_redraw_costs) {
+    // State management situation. Most of this code is synchronous, we get the locally saved
+    // settings from load_settings() and check the reserved term from change_reserved_term().
+    // When those things are applied, we need to change the costs displayed. However the region
+    // change is async, so we have to wait for the data to load and then call change_cost(). That's
+    // handled in the callback in change_region(). If change_cost() is called there, we don't need
+    // to call it here. More scenarios:
+    // - URL is ?region=ap-northeast-1&pricing_unit=vcpu&cost_duration=monthly, don't redraw here
+    // - URL is ?cost_duration=monthly, redraw here
+    // - URL is ?cost_duration=monthly&reserved_term=yrTerm1Convertible.partialUpfront, redraw here
+    change_cost();
+  }
 
   $.extend($.fn.dataTableExt.oStdClasses, {
     sWrapper: 'dataTables_wrapper form-inline',
