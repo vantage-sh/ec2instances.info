@@ -5,6 +5,8 @@ import io
 import json
 import datetime
 import os
+import copy
+import yaml
 
 from detail_pages_rds import build_detail_pages_rds
 from detail_pages_ec2 import build_detail_pages_ec2
@@ -138,21 +140,26 @@ def build_sitemap(sitemap):
         fp.write("\n".join(surls))
 
 
-def per_region_pricing(instances):
-    import copy
-    import yaml
+def per_region_pricing(instances, data_file):
+    # This function splits instances.json into per-region files which are written to
+    # disk and then can be loaded by the web app to reduce the amount of data that
+    # needs to be sent to the client.
 
-    data_file = "meta/regions_aws.yaml"
-    with open(data_file, "r") as f:
+    region_list = "meta/regions_aws.yaml"
+    with open(region_list, "r") as f:
         aws_regions = yaml.safe_load(f)
 
     init_pricing_json = ""
     init_instance_azs_json = ""
 
+    outdir = data_file.replace("instances.json", "")
+
     instances_no_pricing = copy.deepcopy(instances)
     for i in instances_no_pricing:
-        del i["pricing"]
-        del i["availability_zones"]
+        if "pricing" in i:
+            del i["pricing"]
+        if "availability_zones" in i:
+            del i["availability_zones"]
 
     for r in aws_regions:
         per_region_out = {}
@@ -163,13 +170,13 @@ def per_region_pricing(instances):
             per_region_out[i]["availability_zones"] = {}
             if r in inst["pricing"]:
                 per_region_out[i]["pricing"][r] = instances[i]["pricing"][r]
-            if r in inst["availability_zones"]:
+            if "availability_zones" in inst and r in inst["availability_zones"]:
                 per_region_out[i]["availability_zones"][r] = instances[i][
                     "availability_zones"
                 ][r]
 
-        pricing_out_file = "www/pricing_%s.json" % r
-        azs_out_file = "www/instance_azs_%s.json" % r
+        pricing_out_file = "{}pricing_{}.json".format(outdir, r)
+        azs_out_file = "{}instance_azs_{}.json".format(outdir, r)
 
         pricing_json = compress_pricing(per_region_out)
         instance_azs_json = compress_instance_azs(per_region_out)
@@ -198,7 +205,7 @@ def render(data_file, template_file, destination_file, detail_pages=True):
         add_render_info(i)
 
     generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
-    pricing_json, instance_azs_json = per_region_pricing(instances)
+    pricing_json, instance_azs_json = per_region_pricing(instances, data_file)
 
     sitemap = []
     if detail_pages:
@@ -231,24 +238,27 @@ if __name__ == "__main__":
     sitemap.extend(
         render("www/instances.json", "in/index.html.mako", "www/index.html", False)
     )
-    # sitemap.extend(
-    #     render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html"))
-    # sitemap.extend(
-    #     render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
-    # )
-    # sitemap.extend(
-    #     render(
-    #         "www/redshift/instances.json",
-    #         "in/redshift.html.mako",
-    #         "www/redshift/index.html",
-    #     )
-    # )
-    # sitemap.extend(
-    #     render(
-    #         "www/opensearch/instances.json",
-    #         "in/opensearch.html.mako",
-    #         "www/opensearch/index.html",
-    #     )
-    # )
+    sitemap.extend(
+        render(
+            "www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html", False
+        )
+    )
+    sitemap.extend(
+        render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
+    )
+    sitemap.extend(
+        render(
+            "www/redshift/instances.json",
+            "in/redshift.html.mako",
+            "www/redshift/index.html",
+        )
+    )
+    sitemap.extend(
+        render(
+            "www/opensearch/instances.json",
+            "in/opensearch.html.mako",
+            "www/opensearch/index.html",
+        )
+    )
     sitemap.append(about_page())
     build_sitemap(sitemap)

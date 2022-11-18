@@ -265,30 +265,6 @@ $(document).ready(function () {
   init_data_table();
 });
 
-function get_pricing() {
-  // see compress_pricing in render.py for the generation side
-  var v = _pricing['data'];
-  for (var i = 0; i < arguments.length; i++) {
-    var k = _pricing['index'][arguments[i]];
-    v = v[k];
-    if (v === undefined) {
-      return undefined;
-    }
-  }
-  return v;
-}
-
-function get_instance_availability_zones(instance_type, region) {
-  var region_azs = _instance_azs[instance_type];
-  if (region_azs) {
-    var azs = region_azs[region];
-    if (azs) {
-      return azs;
-    }
-  }
-  return [];
-}
-
 function change_cost() {
   // update pricing duration menu text
   var duration = g_settings.cost_duration;
@@ -480,13 +456,16 @@ function change_availability_zones() {
 
 function change_region(region, called_on_init) {
   if (called_on_init && region === 'us-east-1') {
+    // Don't load pricing data on initial page load. It's already there.
     return;
   }
-  g_settings.region = region;
-  console.log(region);
 
-  var prices_path = '/pricing_' + region + '.json';
-  var azs_path = '/instance_azs_' + region + '.json';
+  g_settings.region = region;
+
+  var urlpath = window.location.pathname;
+  var prices_path = urlpath + 'pricing_' + region + '.json';
+  var azs_path = urlpath + 'instance_azs_' + region + '.json';
+
   Promise.all([
     fetch(prices_path)
       .then((response) => response.json())
