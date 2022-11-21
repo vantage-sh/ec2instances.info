@@ -269,6 +269,7 @@ function change_cost() {
   // update pricing duration menu text
   var duration = g_settings.cost_duration;
   var pricing_unit = g_settings.pricing_unit;
+  var precision = 4;
 
   var hour_multipliers = {
     secondly: 1 / (60 * 60),
@@ -294,8 +295,10 @@ function change_cost() {
   // Display these as 'per' but maintain 'secondly' for backwards compatibility
   if (duration === 'secondly') {
     duration = 'per sec';
+    precision = 6;
   } else if (duration === 'minutely') {
     duration = 'per min';
+    precision = 6;
   }
 
   var pricing_measuring_units = ' ' + duration;
@@ -319,7 +322,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(precision);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -344,7 +347,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(precision);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -368,7 +371,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(precision);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -392,7 +395,7 @@ function change_cost() {
       !isNaN(pricing_unit_modifier) &&
       pricing_unit_modifier > 0
     ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(precision);
       elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
     } else {
       elem.html('<span sort="999999">unavailable</span>');
@@ -501,6 +504,42 @@ function change_reserved_term(term) {
   $dropdown.find('li').removeClass('active');
   $activeLink.closest('li').addClass('active');
   $dropdown.find('.dropdown-toggle .text').text(term_name);
+}
+
+function change_cost_duration(duration) {
+  // update duration selected menu option
+  g_settings.cost_duration = duration;
+  $('#cost-dropdown li a').each(function (i, e) {
+    e = $(e);
+    if (e.attr('duration') == g_settings.cost_duration) {
+      var first = g_settings.cost_duration.charAt(0).toUpperCase();
+      var text = first + g_settings.cost_duration.substr(1);
+      if (g_settings.cost_duration === 'secondly') {
+        text = 'Per Second';
+      } else if (g_settings.cost_duration === 'minutely') {
+        text = 'Per Minute';
+      }
+      $('#cost-dropdown .dropdown-toggle .text').text(text);
+      e.parent().addClass('active');
+    } else {
+      e.parent().removeClass('active');
+    }
+  });
+}
+
+function change_pricing_unit(unit) {
+  // update pricing unit selected menu option
+  g_settings.pricing_unit = unit;
+  $('#pricing-unit-dropdown li a').each(function (i, e) {
+    e = $(e);
+    if (e.attr('pricing-unit') == g_settings.pricing_unit) {
+      e.parent().addClass('active');
+      // update pricing unit menu text
+      $('#pricing-unit-dropdown .dropdown-toggle .text').text(e.text());
+    } else {
+      e.parent().removeClass('active');
+    }
+  });
 }
 
 // Update all visible costs to the current duration.
@@ -647,6 +686,7 @@ function on_data_table_initialized() {
   if (g_app_initialized) return;
   g_app_initialized = true;
 
+  // parse the URL for any settings
   load_settings();
 
   // populate filter inputs
@@ -671,6 +711,8 @@ function on_data_table_initialized() {
 
   var will_redraw_costs = change_region(g_settings.region, true);
   change_reserved_term(g_settings.reserved_term);
+  change_cost_duration(g_settings.cost_duration);
+  change_pricing_unit(g_settings.pricing_unit);
 
   if (!will_redraw_costs) {
     // State management situation. Most of this code is synchronous, we get the locally saved
@@ -702,42 +744,14 @@ function on_data_table_initialized() {
   });
 
   $('#pricing-unit-dropdown li').bind('click', function (e) {
-    g_settings.pricing_unit = e.target.getAttribute('pricing-unit');
-
-    // update pricing unit selected menu option
-    $('#pricing-unit-dropdown li a').each(function (i, e) {
-      e = $(e);
-      if (e.attr('pricing-unit') == g_settings.pricing_unit) {
-        e.parent().addClass('active');
-        // update pricing unit menu text
-        $('#pricing-unit-dropdown .dropdown-toggle .text').text(e.text());
-      } else {
-        e.parent().removeClass('active');
-      }
-    });
-
+    var unit = e.target.getAttribute('pricing-unit');
+    change_pricing_unit(unit);
     redraw_costs();
   });
 
   $('#cost-dropdown li').bind('click', function (e) {
-    g_settings.cost_duration = e.target.getAttribute('duration');
-    $('#cost-dropdown li a').each(function (i, e) {
-      e = $(e);
-      if (e.attr('duration') == g_settings.cost_duration) {
-        var first = g_settings.cost_duration.charAt(0).toUpperCase();
-        var text = first + g_settings.cost_duration.substr(1);
-        if (g_settings.cost_duration === 'secondly') {
-          text = 'Per Second';
-        } else if (g_settings.cost_duration === 'minutely') {
-          text = 'Per Minute';
-        }
-        $('#cost-dropdown .dropdown-toggle .text').text(text);
-        e.parent().addClass('active');
-      } else {
-        e.parent().removeClass('active');
-      }
-    });
-
+    var cost_duration = e.target.getAttribute('duration');
+    change_cost_duration(cost_duration);
     redraw_costs();
   });
 
