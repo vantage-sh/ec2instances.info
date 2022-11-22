@@ -47,7 +47,7 @@
             Star
           </a>
         </div>
-        <a href="https://www.vantage.sh/features/autopilot" class="vantage fw-semibold">Save 50%+ on AWS with Autopilot -></span></a>
+        <a href="https://www.vantage.sh/blog/datadog-cost-visibility-supported-in-vantage" class="vantage"><span class="fw-semibold">Datadog Cost Optimization </span> is here. Visibility into metrics, logging, APM, and more -></a>
         <div class="nav-buttons">
           <a href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-github btn-icon">
             <svg class="me-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
