@@ -89,6 +89,7 @@
                   <option value='af-south-1'>Africa (Cape Town)</option>
                   <option value='ap-east-1'>Asia-Pacific (Hong Kong)</option>
                   <option value='ap-south-1'>Asia-Pacific (Mumbai)</option>
+                  <option value='ap-south-2'>Asia-Pacific (Hyderabad)</option>
                   <option value='ap-northeast-3'>Asia-Pacific (Osaka)</option>
                   <option value='ap-northeast-2'>Asia-Pacific (Seoul)</option>
                   <option value='ap-southeast-1'>Asia-Pacific (Singapore)</option>
