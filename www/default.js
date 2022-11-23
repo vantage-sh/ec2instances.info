@@ -113,7 +113,7 @@ function init_data_table() {
     }
 
     var title = $(this).text().trim();
-    $(this).html("<input type='text' class='form-control' placeholder='Filter..'/>");
+    $(this).html("<input type='text' class='form-control' placeholder='Filter...'/>");
     $('input', this).on('keyup change', function () {
       if (g_data_table.column(i).search() !== this.value) {
         g_data_table.column(i).search(this.value).draw();
