@@ -256,7 +256,7 @@ def map_cache_attributes(i, imap):
         instance_details[c].sort(key=lambda x: int(x["order"]))
 
     instance_details["Pricing"] = prices(i["pricing"])
-    print(json.dumps(instance_details, indent=4))
+    # print(json.dumps(instance_details, indent=4))
     return instance_details
 
 
@@ -306,7 +306,7 @@ def build_detail_pages_cache(instances, destination_file):
                 err = {"e": "ERROR for " + instance_type, "t": render_err}
 
                 could_not_render.append(err)
-        break
+        # break
 
     [print(err["e"], "{}".format(err["t"])) for err in could_not_render]
     [print(page["e"]) for page in could_not_render]
