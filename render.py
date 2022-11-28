@@ -8,8 +8,9 @@ import os
 import copy
 import yaml
 
-from detail_pages_rds import build_detail_pages_rds
 from detail_pages_ec2 import build_detail_pages_ec2
+from detail_pages_rds import build_detail_pages_rds
+from detail_pages_cache import build_detail_pages_cache
 
 
 def network_sort(inst):
@@ -213,6 +214,8 @@ def render(data_file, template_file, destination_file, detail_pages=True):
             sitemap.extend(build_detail_pages_ec2(instances, destination_file))
         elif data_file == "www/rds/instances.json":
             sitemap.extend(build_detail_pages_rds(instances, destination_file))
+        elif data_file == "www/cache/instances.json":
+            sitemap.extend(build_detail_pages_cache(instances, destination_file))
 
     print("Rendering to %s..." % destination_file)
     os.makedirs(os.path.dirname(destination_file), exist_ok=True)
@@ -235,9 +238,9 @@ def render(data_file, template_file, destination_file, detail_pages=True):
 
 if __name__ == "__main__":
     sitemap = []
-    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
+    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html", False))
     sitemap.extend(
-        render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
+        render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html", False)
     )
     sitemap.extend(
         render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
