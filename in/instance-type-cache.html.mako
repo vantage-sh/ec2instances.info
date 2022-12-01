@@ -158,7 +158,7 @@
                       <td>${f["name"]}</td>
                     % else:
                     <tr>
-                      <td><a href="/aws/cache/${f["name"]}">${f["name"]}</a></td>
+                      <td><a href="/aws/elasticache/${f["name"]}">${f["name"]}</a></td>
                     % endif
                     <td class="text-center">${f["cpus"]}</td>
                     <td class="text-center">${f["memory"]}</td>
@@ -183,7 +183,7 @@
                         <td>${v[0]}</td>
                     % else:
                       <tr>
-                        <td><a href="/aws/cache/${v[1]}">${v[0]}</a></td>
+                        <td><a href="/aws/elasticache/${v[1]}">${v[0]}</a></td>
                     % endif
                     </tr>
                   % endfor

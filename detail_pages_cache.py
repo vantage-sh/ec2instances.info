@@ -126,13 +126,13 @@ def prices(pricing):
     display_prices = {}
     # print(json.dumps(pricing, indent=4))
 
+    print(pricing)
     for region, p in pricing.items():
         display_prices[region] = {}
 
+        print(p.items())
         for os, _p in p.items():
 
-            if len(os) > 3:
-                continue
             os = cache_engine_mapping[os]
             display_prices[region][os] = {}
 
@@ -255,8 +255,6 @@ def map_cache_attributes(i, imap):
     for c in categories:
         instance_details[c].sort(key=lambda x: int(x["order"]))
 
-    instance_details["Pricing"] = prices(i["pricing"])
-    # print(json.dumps(instance_details, indent=4))
     return instance_details
 
 
@@ -281,6 +279,10 @@ def build_detail_pages_cache(instances, destination_file):
 
         instance_page = os.path.join(subdir, instance_type + ".html")
         instance_details = map_cache_attributes(i, imap)
+        instance_details["Pricing"] = prices(i["pricing"])
+
+        # print(json.dumps(instance_details, indent=4))
+
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
         denylist = unavailable_instances(instance_type, instance_details)
