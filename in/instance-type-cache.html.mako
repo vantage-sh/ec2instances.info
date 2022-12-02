@@ -278,7 +278,9 @@
 
     function format_price(element, price_value) {
       // Handle prices from $0.0001 to $100,000
-      if (price_value === "N/A") {
+      if (isNaN(price_value)) {
+        $('#' + element).html('N/A');
+      } else if (price_value === "N/A") {
         $('#' + element).html('N/A');
       } else if (price_value < .99) {
         $('#' + element).html("&dollar;" + price_value.toFixed(4));
