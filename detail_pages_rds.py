@@ -296,8 +296,6 @@ def map_rds_attributes(i, imap):
     for c in categories:
         instance_details[c].sort(key=lambda x: int(x["order"]))
 
-    instance_details["Pricing"] = prices(i["pricing"])
-    # print(json.dumps(instance_details, indent=4))
     return instance_details
 
 
@@ -330,6 +328,7 @@ def build_detail_pages_rds(instances, destination_file):
 
         instance_page = os.path.join(subdir, instance_type + ".html")
         instance_details = map_rds_attributes(i, imap)
+        instance_details["Pricing"] = prices(i["pricing"])
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
         links = community(instance_type, community_data)

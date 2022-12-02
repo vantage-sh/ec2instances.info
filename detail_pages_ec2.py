@@ -317,10 +317,6 @@ def map_ec2_attributes(i, imap):
     for c in categories:
         instance_details[c].sort(key=lambda x: int(x["order"]))
 
-    # Pricing widget
-    instance_details["Pricing"] = prices(i["pricing"])
-
-    # for debugging: print(json.dumps(instance_details, indent=4))
     return instance_details
 
 
@@ -356,6 +352,7 @@ def build_detail_pages_ec2(instances, destination_file):
 
         instance_page = os.path.join(subdir, instance_type + ".html")
         instance_details = map_ec2_attributes(i, imap)
+        instance_details["Pricing"] = prices(i["pricing"])
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
         links = community(instance_type, community_data)
