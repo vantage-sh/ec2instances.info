@@ -66,14 +66,12 @@ def unavailable_instances(itype, instance_details):
         # If there is no price for a region and os, then it is unavailable
         for r in aws_regions:
             if r not in instance_regions:
-                # print("Found that {} is not available in {}".format(itype, r))
                 denylist.append([aws_regions[r], r, "All", "*"])
             else:
                 instance_regions_oss = instance_details["Pricing"][r].keys()
                 for os in cache_engine_mapping.values():
                     if os not in instance_regions_oss:
                         denylist.append([aws_regions[r], r, os, os])
-                        # print("Found that {} is not available in {} as {}".format(itype, r, os))
     return denylist
 
 
@@ -114,13 +112,11 @@ def assemble_the_families(instances):
         ilist.sort(key=lambda x: x["cpus"])
         instance_fam_map[f] = ilist
 
-    # for debugging: print(json.dumps(instance_fam_map, indent=4))
     return instance_fam_map, families, variant_families
 
 
 def prices(pricing):
     display_prices = {}
-    # print(json.dumps(pricing, indent=4))
 
     for region, p in pricing.items():
         display_prices[region] = {}
@@ -286,9 +282,6 @@ def build_detail_pages_cache(instances, destination_file):
         instance_page = os.path.join(subdir, instance_type + ".html")
         instance_details = map_cache_attributes(i, imap)
         instance_details["Pricing"] = prices(i["pricing"])
-
-        # print(json.dumps(instance_details, indent=4))
-
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
         denylist = unavailable_instances(instance_type, instance_details)
