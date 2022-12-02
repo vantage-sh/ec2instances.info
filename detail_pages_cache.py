@@ -25,12 +25,8 @@ def initial_prices(i, instance_type):
         return ["'N/A'", "'N/A'", "'N/A'"]
 
     try:
-        _1yr = i["Pricing"]["us-east-1"]["Redis"]["_1yr"][
-            "Standard.noUpfront"
-        ]
-        _3yr = i["Pricing"]["us-east-1"]["Redis"]["_3yr"][
-            "Standard.noUpfront"
-        ]
+        _1yr = i["Pricing"]["us-east-1"]["Redis"]["_1yr"]["Standard.noUpfront"]
+        _3yr = i["Pricing"]["us-east-1"]["Redis"]["_3yr"]["Standard.noUpfront"]
     except:
         # If we can't get a reservation, likely a previous generation
         _1yr = "'N/A'"
@@ -126,11 +122,9 @@ def prices(pricing):
     display_prices = {}
     # print(json.dumps(pricing, indent=4))
 
-    print(pricing)
     for region, p in pricing.items():
         display_prices[region] = {}
 
-        print(p.items())
         for os, _p in p.items():
 
             os = cache_engine_mapping[os]
@@ -223,30 +217,42 @@ def map_cache_attributes(i, imap):
     # For up to date display names, inspect meta/service_attributes_cache.csv
     for j, k in i.items():
 
-        display = imap[j]
-        display["value"] = k if j != "pricing" else {}
+        try:
+            display = imap[j]
 
-        if display["regex"]:
-            toparse = str(display["value"])
-            regex = str(display["regex"])
-            match = re.search(regex, toparse)
-            if match:
-                display["value"] = match.group()
-            else:
-                print("No match found for {} with regex {}".format(toparse, regex))
+            # Ignore the pricing attribute, we will handle it separately
+            display["value"] = k if j != "pricing" else {}
 
-        if display["style"]:
-            v = str(display["value"]).lower()
-            if display["cloud_key"] == "currentGeneration" and v == "yes":
-                display["style"] = "value value-current"
-                display["value"] = "current"
-            elif v == "false" or v == "0" or v == "none":
-                display["style"] = "value value-false"
-            elif v == "true" or v == "1" or v == "yes":
-                display["style"] = "value value-true"
-            elif display["cloud_key"] == "currentGeneration" and v == "no":
-                display["style"] = "value value-previous"
-                display["value"] = "previous"
+            if display["regex"]:
+                # Use a regex extract the value to display
+                toparse = str(display["value"])
+                regex = str(display["regex"])
+                match = re.search(regex, toparse)
+                if match:
+                    display["value"] = match.group()
+                else:
+                    print("No match found for {} with regex {}".format(toparse, regex))
+
+            if display["style"]:
+                # Make boolean values have fancy CSS
+                v = str(display["value"]).lower()
+                if display["cloud_key"] == "currentGeneration" and v == "yes":
+                    display["style"] = "value value-current"
+                    display["value"] = "current"
+                elif v == "false" or v == "0" or v == "none":
+                    display["style"] = "value value-false"
+                elif v == "true" or v == "1" or v == "yes":
+                    display["style"] = "value value-true"
+                elif display["cloud_key"] == "currentGeneration" and v == "no":
+                    display["style"] = "value value-previous"
+                    display["value"] = "previous"
+
+        except KeyError:
+            print(
+                "An instances.json attribute {} does not appear in meta/service_attributes_cache.csv and cannot be formatted".format(
+                    j
+                )
+            )
 
         instance_details[display["category"]].append(display)
 
@@ -308,7 +314,6 @@ def build_detail_pages_cache(instances, destination_file):
                 err = {"e": "ERROR for " + instance_type, "t": render_err}
 
                 could_not_render.append(err)
-        # break
 
     [print(err["e"], "{}".format(err["t"])) for err in could_not_render]
     [print(page["e"]) for page in could_not_render]
