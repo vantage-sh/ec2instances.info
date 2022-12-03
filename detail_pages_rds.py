@@ -171,7 +171,9 @@ def prices(pricing):
         for os, _p in p.items():
 
             if len(os) > 3:
+                # RDS ONLY: engines are numbers but some are words. We can skip the words
                 continue
+
             os = rds_engine_mapping[os]
             display_prices[region][os] = {}
 
@@ -246,6 +248,33 @@ def load_service_attributes():
     return display_map
 
 
+def format_attribute(display):
+
+    if display["regex"]:
+        toparse = str(display["value"])
+        regex = str(display["regex"])
+        match = re.search(regex, toparse)
+        if match:
+            display["value"] = match.group()
+        # else:
+        #     print("No match found for {} with regex {}".format(toparse, regex))
+
+    if display["style"]:
+        v = str(display["value"]).lower()
+        if display["cloud_key"] == "currentGeneration" and v == "yes":
+            display["style"] = "value value-current"
+            display["value"] = "current"
+        elif v == "false" or v == "0" or v == "none":
+            display["style"] = "value value-false"
+        elif v == "true" or v == "1" or v == "yes":
+            display["style"] = "value value-true"
+        elif display["cloud_key"] == "currentGeneration" and v == "no":
+            display["style"] = "value value-previous"
+            display["value"] = "previous"
+    
+    return display
+
+
 def map_rds_attributes(i, imap):
     # For now, manually transform the instance data we receive from AWS
     # into the format we want to render. Later we can create this in YAML
@@ -257,6 +286,12 @@ def map_rds_attributes(i, imap):
         "Not Shown",
         "Coming Soon",
     ]
+
+    # Nested attributes in instances.json that we handle differently
+    special_attributes = [
+        "pricing",
+    ]
+
     instance_details = {}
     for c in categories:
         instance_details[c] = []
@@ -264,40 +299,17 @@ def map_rds_attributes(i, imap):
     # For up to date display names, inspect meta/service_attributes_ec2.csv
     for j, k in i.items():
 
-        display = imap[j]
-        display["value"] = k if j != "pricing" else {}
-
-        if display["regex"]:
-            toparse = str(display["value"])
-            regex = str(display["regex"])
-            match = re.search(regex, toparse)
-            if match:
-                display["value"] = match.group()
-            # else:
-            #     print("No match found for {} with regex {}".format(toparse, regex))
-
-        if display["style"]:
-            v = str(display["value"]).lower()
-            if display["cloud_key"] == "currentGeneration" and v == "yes":
-                display["style"] = "value value-current"
-                display["value"] = "current"
-            elif v == "false" or v == "0" or v == "none":
-                display["style"] = "value value-false"
-            elif v == "true" or v == "1" or v == "yes":
-                display["style"] = "value value-true"
-            elif display["cloud_key"] == "currentGeneration" and v == "no":
-                display["style"] = "value value-previous"
-                display["value"] = "previous"
-
-        instance_details[display["category"]].append(display)
+        if j not in special_attributes:
+            # This is one row on a detail page
+            display = imap[j]
+            display["value"] = k
+            instance_details[display["category"]].append(format_attribute(display))
 
     # Sort the instance attributes in each category alphabetically,
     # another general-purpose option could be to sort by value data type
     for c in categories:
         instance_details[c].sort(key=lambda x: int(x["order"]))
 
-    instance_details["Pricing"] = prices(i["pricing"])
-    # print(json.dumps(instance_details, indent=4))
     return instance_details
 
 
@@ -330,6 +342,7 @@ def build_detail_pages_rds(instances, destination_file):
 
         instance_page = os.path.join(subdir, instance_type + ".html")
         instance_details = map_rds_attributes(i, imap)
+        instance_details["Pricing"] = prices(i["pricing"])
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
         links = community(instance_type, community_data)

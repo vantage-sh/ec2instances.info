@@ -2,21 +2,13 @@
 
 <html lang="en">
   <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TBZCV32');</script>
-    <!-- End Google Tag Manager -->
-
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="/default.css" media="screen">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
-    <link rel="icon" type="image/png" href="https://assets.vantage.sh/www/favicon-32x32.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
     <title>${i["Amazon"][1]["value"]} pricing and specs - Vantage</title>
     <meta name="description" content="${description}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -26,7 +18,7 @@
     <div class="main">
       <div class="nav">
         <div class="logo-group">
-          <a href="/rds/" class="logo">
+          <a href="/cache/" class="logo">
           <svg width="135" height="28" viewBox="0 0 135 28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M6.22202 2.35943C8.52431 0.821087 11.2311 5.29581e-07 14 5.29581e-07C15.8386 -0.000505245 17.6594 0.361272 19.3582 1.06466C21.057 1.76804 22.6005 2.79925 23.9006 4.09937C25.2007 5.39949 26.232 6.94305 26.9354 8.64184C27.6387 10.3406 28.0005 12.1614 28 14C28 16.7689 27.1789 19.4757 25.6406 21.778C24.1022 24.0803 21.9157 25.8747 19.3576 26.9343C16.7994 27.9939 13.9845 28.2712 11.2687 27.731C8.55299 27.1908 6.05845 25.8574 4.10052 23.8995C2.14258 21.9416 0.809206 19.447 0.269013 16.7313C-0.27118 14.0155 0.00606513 11.2006 1.06569 8.64244C2.12532 6.08427 3.91973 3.89777 6.22202 2.35943ZM3.93449 12.1002L8.13488 16.3044C8.17658 16.3477 8.22655 16.3821 8.28183 16.4055C8.33712 16.429 8.39657 16.4411 8.45664 16.4411C8.51671 16.4411 8.57618 16.429 8.63146 16.4055C8.68675 16.3821 8.73672 16.3477 8.77842 16.3044L12.9711 12.1002C13.0549 12.0164 13.1019 11.9027 13.1019 11.7842C13.1019 11.6657 13.0549 11.552 12.9711 11.4682L8.76685 7.26783C8.68302 7.18405 8.56938 7.13699 8.45088 7.13699C8.33237 7.13699 8.2187 7.18405 8.13488 7.26783L3.93449 11.4682C3.85071 11.552 3.80367 11.6657 3.80367 11.7842C3.80367 11.9027 3.85071 12.0164 3.93449 12.1002ZM14.316 21.8497L18.5164 17.6493C18.6002 17.5655 18.6472 17.4518 18.6472 17.3333C18.6472 17.2148 18.6002 17.1012 18.5164 17.0173L14.316 12.8131C14.2322 12.7293 14.1185 12.6823 14 12.6823C13.8815 12.6823 13.7678 12.7293 13.684 12.8131L9.47977 17.0173C9.396 17.1012 9.34893 17.2148 9.34893 17.3333C9.34893 17.4518 9.396 17.5655 9.47977 17.6493L13.684 21.8497C13.7678 21.9335 13.8815 21.9805 14 21.9805C14.1185 21.9805 14.2322 21.9335 14.316 21.8497ZM19.8613 16.3044L24.0616 12.1002C24.1036 12.0589 24.1369 12.0098 24.1597 11.9555C24.1824 11.9013 24.1941 11.843 24.1941 11.7842C24.1941 11.7254 24.1824 11.6671 24.1597 11.6129C24.1369 11.5586 24.1036 11.5095 24.0616 11.4682L19.8613 7.26783C19.7775 7.18405 19.6638 7.13699 19.5453 7.13699C19.4268 7.13699 19.3131 7.18405 19.2293 7.26783L15.0251 11.4682C14.9413 11.552 14.8942 11.6657 14.8942 11.7842C14.8942 11.9027 14.9413 12.0164 15.0251 12.1002L19.2293 16.3044C19.3131 16.3882 19.4268 16.4353 19.5453 16.4353C19.6638 16.4353 19.7775 16.3882 19.8613 16.3044Z" fill="white"/>
               <path d="M37.8921 20.4999V5.8999H41.1721V20.4999H37.8921Z" fill="white"/>
@@ -40,20 +32,19 @@
               <path d="M125.635 19.8799C126.515 20.5199 127.735 20.8399 129.295 20.8399C130.281 20.8399 131.141 20.6999 131.875 20.4199C132.608 20.1266 133.175 19.7132 133.575 19.1799C133.975 18.6332 134.175 17.9932 134.175 17.2599C134.175 16.2466 133.801 15.4399 133.055 14.8399C132.308 14.2399 131.261 13.8666 129.915 13.7199L129.055 13.6399C128.481 13.5732 128.068 13.4599 127.815 13.2999C127.561 13.1399 127.435 12.9066 127.435 12.5999C127.435 12.2799 127.581 12.0266 127.875 11.8399C128.168 11.6532 128.561 11.5599 129.055 11.5599C129.681 11.5599 130.155 11.6866 130.475 11.9399C130.795 12.1799 130.981 12.4799 131.035 12.8399H133.875C133.835 11.6666 133.381 10.7732 132.515 10.1599C131.648 9.53324 130.508 9.2199 129.095 9.2199C128.215 9.2199 127.428 9.35324 126.735 9.6199C126.055 9.88657 125.521 10.2799 125.135 10.7999C124.748 11.3199 124.555 11.9666 124.555 12.7399C124.555 13.6732 124.881 14.4399 125.535 15.0399C126.201 15.6399 127.195 16.0066 128.515 16.1399L129.375 16.2199C130.095 16.2999 130.595 16.4399 130.875 16.6399C131.155 16.8266 131.295 17.0799 131.295 17.3999C131.295 17.7599 131.108 18.0399 130.735 18.2399C130.375 18.4266 129.915 18.5199 129.355 18.5199C128.621 18.5199 128.068 18.3866 127.695 18.1199C127.335 17.8399 127.128 17.5266 127.075 17.1799H124.235C124.288 18.3399 124.755 19.2399 125.635 19.8799Z" fill="white"/>
           </svg>
           </a>
-          <a href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-github btn-icon contr-mobile">
+          <a href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-purple btn-icon contr-mobile">
             <svg class="me-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M9 0C4.0275 0 0 4.0275 0 9C0 12.9825 2.57625 16.3463 6.15375 17.5387C6.60375 17.6175 6.7725 17.3475 6.7725 17.1112C6.7725 16.8975 6.76125 16.1888 6.76125 15.435C4.5 15.8513 3.915 14.8837 3.735 14.3775C3.63375 14.1187 3.195 13.32 2.8125 13.1062C2.4975 12.9375 2.0475 12.5212 2.80125 12.51C3.51 12.4987 4.01625 13.1625 4.185 13.4325C4.995 14.7937 6.28875 14.4113 6.80625 14.175C6.885 13.59 7.12125 13.1962 7.38 12.9712C5.3775 12.7463 3.285 11.97 3.285 8.5275C3.285 7.54875 3.63375 6.73875 4.2075 6.10875C4.1175 5.88375 3.8025 4.96125 4.2975 3.72375C4.2975 3.72375 5.05125 3.4875 6.7725 4.64625C7.4925 4.44375 8.2575 4.3425 9.0225 4.3425C9.7875 4.3425 10.5525 4.44375 11.2725 4.64625C12.9938 3.47625 13.7475 3.72375 13.7475 3.72375C14.2425 4.96125 13.9275 5.88375 13.8375 6.10875C14.4113 6.73875 14.76 7.5375 14.76 8.5275C14.76 11.9812 12.6562 12.7463 10.6538 12.9712C10.98 13.2525 11.2613 13.7925 11.2613 14.6363C11.2613 15.84 11.25 16.8075 11.25 17.1112C11.25 17.3475 11.4187 17.6287 11.8688 17.5387C15.4237 16.3463 18 12.9712 18 9C18 4.0275 13.9725 0 9 0Z" fill="black"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M9 0C4.0275 0 0 4.0275 0 9C0 12.9825 2.57625 16.3463 6.15375 17.5387C6.60375 17.6175 6.7725 17.3475 6.7725 17.1112C6.7725 16.8975 6.76125 16.1888 6.76125 15.435C4.5 15.8513 3.915 14.8837 3.735 14.3775C3.63375 14.1187 3.195 13.32 2.8125 13.1062C2.4975 12.9375 2.0475 12.5212 2.80125 12.51C3.51 12.4987 4.01625 13.1625 4.185 13.4325C4.995 14.7937 6.28875 14.4113 6.80625 14.175C6.885 13.59 7.12125 13.1962 7.38 12.9712C5.3775 12.7463 3.285 11.97 3.285 8.5275C3.285 7.54875 3.63375 6.73875 4.2075 6.10875C4.1175 5.88375 3.8025 4.96125 4.2975 3.72375C4.2975 3.72375 5.05125 3.4875 6.7725 4.64625C7.4925 4.44375 8.2575 4.3425 9.0225 4.3425C9.7875 4.3425 10.5525 4.44375 11.2725 4.64625C12.9938 3.47625 13.7475 3.72375 13.7475 3.72375C14.2425 4.96125 13.9275 5.88375 13.8375 6.10875C14.4113 6.73875 14.76 7.5375 14.76 8.5275C14.76 11.9812 12.6562 12.7463 10.6538 12.9712C10.98 13.2525 11.2613 13.7925 11.2613 14.6363C11.2613 15.84 11.25 16.8075 11.25 17.1112C11.25 17.3475 11.4187 17.6287 11.8688 17.5387C15.4237 16.3463 18 12.9712 18 9C18 4.0275 13.9725 0 9 0Z" fill="white"/>
             </svg>
-            Star
+            Contribute
           </a>
         </div>
-        <a href="https://www.vantage.sh/blog/datadog-cost-visibility-supported-in-vantage" class="vantage"><span class="fw-semibold">Datadog Cost Optimization </span> is here. Visibility into metrics, logging, APM, and more -></a>
         <div class="nav-buttons">
-          <a href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-github btn-icon">
+          <a href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-purple btn-icon">
             <svg class="me-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M9 0C4.0275 0 0 4.0275 0 9C0 12.9825 2.57625 16.3463 6.15375 17.5387C6.60375 17.6175 6.7725 17.3475 6.7725 17.1112C6.7725 16.8975 6.76125 16.1888 6.76125 15.435C4.5 15.8513 3.915 14.8837 3.735 14.3775C3.63375 14.1187 3.195 13.32 2.8125 13.1062C2.4975 12.9375 2.0475 12.5212 2.80125 12.51C3.51 12.4987 4.01625 13.1625 4.185 13.4325C4.995 14.7937 6.28875 14.4113 6.80625 14.175C6.885 13.59 7.12125 13.1962 7.38 12.9712C5.3775 12.7463 3.285 11.97 3.285 8.5275C3.285 7.54875 3.63375 6.73875 4.2075 6.10875C4.1175 5.88375 3.8025 4.96125 4.2975 3.72375C4.2975 3.72375 5.05125 3.4875 6.7725 4.64625C7.4925 4.44375 8.2575 4.3425 9.0225 4.3425C9.7875 4.3425 10.5525 4.44375 11.2725 4.64625C12.9938 3.47625 13.7475 3.72375 13.7475 3.72375C14.2425 4.96125 13.9275 5.88375 13.8375 6.10875C14.4113 6.73875 14.76 7.5375 14.76 8.5275C14.76 11.9812 12.6562 12.7463 10.6538 12.9712C10.98 13.2525 11.2613 13.7925 11.2613 14.6363C11.2613 15.84 11.25 16.8075 11.25 17.1112C11.25 17.3475 11.4187 17.6287 11.8688 17.5387C15.4237 16.3463 18 12.9712 18 9C18 4.0275 13.9725 0 9 0Z" fill="black"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M9 0C4.0275 0 0 4.0275 0 9C0 12.9825 2.57625 16.3463 6.15375 17.5387C6.60375 17.6175 6.7725 17.3475 6.7725 17.1112C6.7725 16.8975 6.76125 16.1888 6.76125 15.435C4.5 15.8513 3.915 14.8837 3.735 14.3775C3.63375 14.1187 3.195 13.32 2.8125 13.1062C2.4975 12.9375 2.0475 12.5212 2.80125 12.51C3.51 12.4987 4.01625 13.1625 4.185 13.4325C4.995 14.7937 6.28875 14.4113 6.80625 14.175C6.885 13.59 7.12125 13.1962 7.38 12.9712C5.3775 12.7463 3.285 11.97 3.285 8.5275C3.285 7.54875 3.63375 6.73875 4.2075 6.10875C4.1175 5.88375 3.8025 4.96125 4.2975 3.72375C4.2975 3.72375 5.05125 3.4875 6.7725 4.64625C7.4925 4.44375 8.2575 4.3425 9.0225 4.3425C9.7875 4.3425 10.5525 4.44375 11.2725 4.64625C12.9938 3.47625 13.7475 3.72375 13.7475 3.72375C14.2425 4.96125 13.9275 5.88375 13.8375 6.10875C14.4113 6.73875 14.76 7.5375 14.76 8.5275C14.76 11.9812 12.6562 12.7463 10.6538 12.9712C10.98 13.2525 11.2613 13.7925 11.2613 14.6363C11.2613 15.84 11.25 16.8075 11.25 17.1112C11.25 17.3475 11.4187 17.6287 11.8688 17.5387C15.4237 16.3463 18 12.9712 18 9C18 4.0275 13.9725 0 9 0Z" fill="white"/>
             </svg>
-            Star
+            Contribute
           </a>
         </div>
       </div>
@@ -122,31 +113,8 @@
               </div>
               <div class="col-6 mb-2">
                 <select class="form-select form-select-sm" id="os">
-                  % if "mem" in i["Amazon"][1]["value"]:
-                    <option value="Oracle">Oracle</option>
-                    <option value="PostgreSQL">PostgreSQL</option> 
-                  % else:
-                    <option value="PostgreSQL">PostgreSQL</option> 
-                    <option value="Oracle">Oracle</option>
-                  % endif
-                  <option value="Aurora PostgreSQL">Aurora PostgreSQL</option>
-                  <option value="MySQL">MySQL</option> 
-                  <option value="Aurora MySQL">Aurora MySQL</option>
-                  <option value="SQL Server Standard">SQL Server</option>
-                  <option value="SQL Server Enterprise">SQL Server Enterprise</option>
-                  <option value="MariaDB">MariaDB</option>
-                  <option value="Oracle Standard Two">Oracle Standard Two</option>
-                  <option value="Oracle Standard Two BYOL">Oracle Standard Two BYOL</option>
-                  <option value="Oracle Standard BYOL">Oracle Standard BYOL</option>
-                  <option value="Oracle Enterprise BYOL">Oracle Enterprise BYOL</option>
-                  <option value="SQL Server Express">SQL Server Express</option>
-                  <option value="Oracle Standard One BYOL">Oracle Standard One BYOL</option> 
-                  <option value="MySQL (Outpost On-Prem)">MySQL (Outpost On-Prem)</option>
-                  <option value="PostgreSQL (Outpost On-Prem)">PostgreSQL (Outpost On-Prem)</option>
-                  <option value="SQL Server">SQL Server Standard</option>
-                  <option value="SQL Server Enterprise (Outpost On-Prem)">SQL Server Enterprise (Outpost On-Prem)</option>
-                  <option value="SQL Server (Outpost On-Prem)">SQL Server (Outpost On-Prem)</option>
-                  <option value="SQL Server Web (Outpost On-Prem)">SQL Server Web (Outpost On-Prem)</option>
+                  <option value="Redis">Redis</option>
+                  <option value="Memcached">Memcached</option> 
                 </select>
               </div>
               <div class="col-6 pe-2">
@@ -162,8 +130,8 @@
               </div>
               <div class="col-6">
                 <select class="form-select form-select-sm" id="term">
-                  <option value="Standard.partialUpfront">Partial Upfront</option>
                   <option value="Standard.noUpfront">No Upfront</option>
+                  <option value="Standard.partialUpfront">Partial Upfront</option>
                   <option value="Standard.allUpfront">All Upfront</option>
                 </select>
               </div>
@@ -190,7 +158,7 @@
                       <td>${f["name"]}</td>
                     % else:
                     <tr>
-                      <td><a href="/aws/rds/${f["name"]}">${f["name"]}</a></td>
+                      <td><a href="/aws/elasticache/${f["name"]}">${f["name"]}</a></td>
                     % endif
                     <td class="text-center">${f["cpus"]}</td>
                     <td class="text-center">${f["memory"]}</td>
@@ -215,7 +183,7 @@
                         <td>${v[0]}</td>
                     % else:
                       <tr>
-                        <td><a href="/aws/rds/${v[1]}">${v[0]}</a></td>
+                        <td><a href="/aws/elasticache/${v[1]}">${v[0]}</a></td>
                     % endif
                     </tr>
                   % endfor
@@ -223,9 +191,6 @@
               </table>
             </div>
             % endif
-            <div class="sidebar-section ticket small pb-4">
-              See a data problem? <a href="https://github.com/vantage-sh/ec2instances.info/issues/new" target="_blank" class="text-decoration-none">Open a ticket.</a>
-            </div>
           </div>
 
           <div class="column-middle mb-5">
@@ -235,30 +200,7 @@
                 <p class="h6 fw-semibold mb-0">Instance Details</p>
               </div>
               % for category, attrs in i.items():
-                % if category == "Coming Soon":
-                  % for a in attrs:
-                    <!--<p>${a["display_name"]}</p>-->
-                  % endfor
-                % elif category == "Not Shown":
-                <!--
-                  <p>Request this data to be included on Github</p>
-                  % for a in attrs:
-                    <p>${a["cloud_key"]}</p>
-                  % endfor
-                -->
-                % elif category == "Pricing":
-                  <p></p>
-                % else:
-                  % if category == "Networking":
-                    <div class="mb-4 d-flex flex-container justify-content-center">
-                      <div class="row">
-                        <div class="d-flex justify-content-center"><span><img width="64" height="64" src="/vantage-logo.svg"></span></div>
-                        <div class="d-flex justify-content-center mt-4">
-                          <span class="fw-semibold" style="color:#6c757d">Concerned about cloud costs? <a href="https://console.vantage.sh/signup">Connect your AWS account</a> in under 5 minutes to see savings.</span>
-                        </div>
-                      </div>
-                    </div>
-                  % endif
+                % if category != "Pricing" and category != "Not Shown" and len(attrs) > 0:
                   <table class="table" id="${category}">
                     <tr>
                       <th class="col-6 border-end"><a href="#${category}">${category}</a></th>
@@ -292,43 +234,11 @@
             </div>
           </div>
         </div>
-        % if False:
         <div class="column-right">
-          <div class="sidebar-section links">
-            <div class="d-flex align-items-center mb-2">
-              <span class="material-icons me-1">link</span>
-              <p class="h6 fw-semibold mb-0">Links</p>
-            </div>
-            <ul class="list-unstyled">
-            % for link in links:
-              % if link["title"]:
-                <li class="mb-2">
-                  <a class="small text-decoration-none mb-1 d-inline-block" href="${link["url"]}" target="_blank">${link["title"]}</a>
-                  <p class="fs-12 mb-0 d-block text-muted">${link["date"]}</p>
-                </li>
-              % endif
-            % endfor
-            </ul>
-            <details>
-              <summary class="small text-muted mb-3">
-                Submit a Link
-              </summary>
-              <div class="github-login mb-3">
-                <p class="lh-base fw-semibold">Submitting a Link</p>
-                <ol class="lh-base ps-4">
-                  <li>Click <span class="fw-semibold">Fork this Repository</span>
-                  <li>Find <span class="fw-semibold">${i["Amazon"][1]['value']}</span> in the file
-                  <li>Insert a link, title, and date.
-                </ol>
-                <p class="mb-0 lh-base">To review, click <span class="fw-semibold">Propose Changes</span> and then click <span class="fw-semibold">Create pull request</span>.</p>
-                <div class="d-grid">
-                  <a class="btn btn-white mt-3" href="https://github.com/vantage-sh/ec2instances.info/edit/instance-types/community_contributions.yaml" target="_blank">Submit a Link</a>
-                </div>
-              </li>
-            </details>
+          <div class="sidebar-section ticket small">
+            See a data problem? <a href="https://github.com/vantage-sh/ec2instances.info/issues/new" target="_blank" class="text-decoration-none">Open a ticket.</a>
           </div>
         </div>
-        % endif
       </div>
     </div>
 

@@ -11,39 +11,28 @@ import yaml
 import re
 
 
-def initial_prices(i):
-    # For EC2, basically everything has a price for linux, on-demand in us-east-1
-    # so default to that. Certain instances (mac2) are only available as dedicated hosts so
-    # fall back to that if no linux option. Reserved options are all over the place
-    # so try/catch for anything and set to n/a
-    not_linux_flag = False
+cache_engine_mapping = {
+    "Memcached": "Memcached",
+    "Redis": "Redis",
+}
 
-    init_p = {"ondemand": 0, "spot": 0, "_1yr": 0, "_3yr": 0}
-    for pricing_type in ["ondemand", "spot", "_1yr", "_3yr"]:
-        for os in ["linux", "dedicated"]:
-            try:
-                if "yr" in pricing_type:
-                    init_p[pricing_type] = i["Pricing"]["us-east-1"][os][pricing_type][
-                        "Standard.noUpfront"
-                    ]
-                else:
-                    init_p[pricing_type] = i["Pricing"]["us-east-1"][os][pricing_type]
-                break
-            except:
-                init_p[pricing_type] = "'N/A'"
-            finally:
-                # Let the frontend know that we're defaulting to a dedicated host
-                # to display pricing instead of linux
-                if os == "dedicated" and init_p[pricing_type] != "'N/A'":
-                    not_linux_flag = True
 
-    return [
-        init_p["ondemand"],
-        init_p["spot"],
-        init_p["_1yr"],
-        init_p["_3yr"],
-        not_linux_flag,
-    ]
+def initial_prices(i, instance_type):
+    try:
+        od = i["Pricing"]["us-east-1"]["Redis"]["ondemand"]
+    except:
+        # If prices are not available for us-east-1 it means this is a custom instance of some kind
+        return ["'N/A'", "'N/A'", "'N/A'"]
+
+    try:
+        _1yr = i["Pricing"]["us-east-1"]["Redis"]["_1yr"]["Standard.noUpfront"]
+        _3yr = i["Pricing"]["us-east-1"]["Redis"]["_3yr"]["Standard.noUpfront"]
+    except:
+        # If we can't get a reservation, likely a previous generation
+        _1yr = "'N/A'"
+        _3yr = "'N/A'"
+
+    return [od, _1yr, _3yr]
 
 
 def description(id, defaults):
@@ -61,36 +50,9 @@ def description(id, defaults):
     except:
         bandwidth = ""
 
-    return "The {} instance is in the {} family with {} vCPUs, {} GiB of memory{} starting at ${} per hour.".format(
+    return "The {} instance is in the {} family and has {} vCPUs, {} GiB of memory{} starting at ${} per hour.".format(
         name, family_category, cpus, memory, bandwidth, defaults[0]
     )
-
-
-def community(instance, links):
-    # TODO: not the most efficient with many links
-    for l in links:
-        k, linklist = next(iter(l.items()))
-        if k == instance:
-            return linklist["links"]
-    return []
-
-
-ec2_os = {
-    "linux": "Linux",
-    "mswin": "Windows",
-    "rhel": "Red Hat",
-    "sles": "SUSE",
-    "dedicated": "Dedicated Host",
-    "linuxSQL": "Linux SQL Server",
-    "linuxSQLWeb": "Linux SQL Server for Web",
-    "linuxSQLEnterprise": "Linux SQL Enterprise",
-    "mswinSQL": "Windows SQL Server",
-    "mswinSQLWeb": "Windows SQL Web",
-    "mswinSQLEnterprise": "Windows SQL Enterprise",
-    "rhelSQL": "Red Hat SQL Server",
-    "rhelSQLWeb": "Red Hat SQL Web",
-    "rhelSQLEnterprise": "Red Hat SQL Enterprise",
-}
 
 
 def unavailable_instances(itype, instance_details):
@@ -104,14 +66,12 @@ def unavailable_instances(itype, instance_details):
         # If there is no price for a region and os, then it is unavailable
         for r in aws_regions:
             if r not in instance_regions:
-                # print("Found that {} is not available in {}".format(itype, r))
                 denylist.append([aws_regions[r], r, "All", "*"])
             else:
                 instance_regions_oss = instance_details["Pricing"][r].keys()
-                for os in ec2_os.keys():
+                for os in cache_engine_mapping.values():
                     if os not in instance_regions_oss:
-                        denylist.append([aws_regions[r], r, ec2_os[os], os])
-                        # print("Found that {} is not available in {} as {}".format(itype, r, os))
+                        denylist.append([aws_regions[r], r, os, os])
     return denylist
 
 
@@ -124,7 +84,8 @@ def assemble_the_families(instances):
 
     for i in instances:
         name = i["instance_type"]
-        itype, suffix = name.split(".")
+        itype = name.split(".")[1]
+        suffix = "".join(name.split(".")[2:])
         variant = itype[0:2]
 
         if variant not in variant_families:
@@ -137,7 +98,7 @@ def assemble_the_families(instances):
             if not dupe:
                 variant_families[variant].append([itype, name])
 
-        member = {"name": name, "cpus": int(i["vCPU"]), "memory": int(i["memory"])}
+        member = {"name": name, "cpus": int(i["vcpu"]), "memory": float(i["memory"])}
         if itype not in instance_fam_map:
             instance_fam_map[itype] = [member]
         else:
@@ -149,27 +110,21 @@ def assemble_the_families(instances):
     # Order the families by number of cpus so they display this way on the webpage
     for f, ilist in instance_fam_map.items():
         ilist.sort(key=lambda x: x["cpus"])
-        # Move the metal instances to the end of the list
-        for j in ilist:
-            if j["name"].endswith("metal"):
-                ilist.remove(j)
-                ilist.append(j)
         instance_fam_map[f] = ilist
 
-    # for debugging: print(json.dumps(instance_fam_map, indent=4))
     return instance_fam_map, families, variant_families
 
 
 def prices(pricing):
     display_prices = {}
+
     for region, p in pricing.items():
         display_prices[region] = {}
 
         for os, _p in p.items():
-            display_prices[region][os] = {}
 
-            if os == "ebs" or os == "emr":
-                continue
+            os = cache_engine_mapping[os]
+            display_prices[region][os] = {}
 
             # Doing a lot of work to deal with prices having up to 6 places
             # after the decimal, as well as prices not existing for all regions
@@ -177,12 +132,7 @@ def prices(pricing):
             try:
                 display_prices[region][os]["ondemand"] = _p["ondemand"]
             except KeyError:
-                display_prices[region][os]["ondemand"] = "'N/A'"
-
-            try:
-                display_prices[region][os]["spot"] = _p["spot_max"]
-            except KeyError:
-                display_prices[region][os]["spot"] = "'N/A'"
+                display_prices[region][os]["ondemand"] = "N/A"
 
             # In the next 2 blocks, we need to split out the list of 1 year,
             # 3 year, upfront, partial, and no upfront RI prices into 2 sets
@@ -196,7 +146,7 @@ def prices(pricing):
                         reserved[key] = v
                 display_prices[region][os]["_1yr"] = reserved
             except KeyError:
-                display_prices[region][os]["_1yr"] = "'N/A'"
+                display_prices[region][os]["_1yr"] = "N/A"
 
             try:
                 reserved = {}
@@ -206,15 +156,17 @@ def prices(pricing):
                         reserved[key] = v
                 display_prices[region][os]["_3yr"] = reserved
             except KeyError:
-                display_prices[region][os]["_3yr"] = "'N/A'"
+                display_prices[region][os]["_3yr"] = "N/A"
 
     return display_prices
 
 
 def load_service_attributes():
-    # This CSV file contains nicely formatted names, styling hints,
-    # and order of display for instance attributes
-    data_file = "meta/service_attributes_ec2.csv"
+    special_attrs = [
+        "pricing",
+        "cache_parameters",
+    ]
+    data_file = "meta/service_attributes_cache.csv"
 
     display_map = {}
     with open(data_file, "r") as f:
@@ -225,6 +177,8 @@ def load_service_attributes():
             if i == 0:
                 # Skip the header
                 continue
+            elif cloud_key in special_attrs:
+                category = "Coming Soon"
             else:
                 category = row[2]
 
@@ -245,6 +199,7 @@ def load_service_attributes():
 def format_attribute(display):
 
     if display["regex"]:
+        # Use a regex extract the value to display
         toparse = str(display["value"])
         regex = str(display["regex"])
         match = re.search(regex, toparse)
@@ -254,23 +209,27 @@ def format_attribute(display):
         #     print("No match found for {} with regex {}".format(toparse, regex))
 
     if display["style"]:
+        # Make boolean values have fancy CSS
         v = str(display["value"]).lower()
-        if v == "false" or v == "0" or v == "none":
-            display["style"] = "value value-false"
-        elif v == "current":
+        if display["cloud_key"] == "currentGeneration" and v == "yes":
             display["style"] = "value value-current"
-        elif v == "previous":
-            display["style"] = "value value-previous"
-        else:
+            display["value"] = "current"
+        elif v == "false" or v == "0" or v == "none":
+            display["style"] = "value value-false"
+        elif v == "true" or v == "1" or v == "yes":
             display["style"] = "value value-true"
+        elif display["cloud_key"] == "currentGeneration" and v == "no":
+            display["style"] = "value value-previous"
+            display["value"] = "previous"
+        elif display["style"] == "bytes":
+            display["value"] = round(int(v) / 1048576)
 
     return display
 
 
-def map_ec2_attributes(i, imap):
-    # For now, manually transform the instance data we receive from AWS
-    # into the format we want to render. Later we can create this in YAML
-    # and use a standard function that maps names
+def map_cache_attributes(i, imap):
+    # Transform keys (instance attributes like vCPUs) and values from instances.json
+    # into human readable names and nicely formatted values
     categories = [
         "Compute",
         "Networking",
@@ -282,67 +241,47 @@ def map_ec2_attributes(i, imap):
     # Nested attributes in instances.json that we handle differently
     special_attributes = [
         "pricing",
-        "storage",
-        "vpc",
     ]
 
-    def storage(sattrs, imap):
-        if not sattrs:
-            return []
-        storage_details = []
-        for s, v in sattrs.items():
-            try:
-                # This is one row on a detail page
-                display = imap[s]
-                display["value"] = v
-                storage_details.append(format_attribute(display))
-            except KeyError:
-                # We chose not to represent this storage attribute
-                continue
-        return storage_details
-
-    # Group attributes into categories which are then displayed in sections on the page
     instance_details = {}
     for c in categories:
         instance_details[c] = []
 
-    for j, k in i.items():
-        # Some attributes like storage have nested values that we handle differently
-        if j not in special_attributes:
-            # This is one row on a detail page
-            display = imap[j]
-            display["value"] = k
-            instance_details[display["category"]].append(format_attribute(display))
+    # For up to date display names, inspect meta/service_attributes_cache.csv
+    for attr_name, attr_val in i.items():
+        try:
+            if attr_name not in special_attributes:
+                # This is one row on a detail page
+                display = imap[attr_name]
+                display["value"] = attr_val
+                instance_details[display["category"]].append(format_attribute(display))
 
-    # Special cases
-    more_storage_attributes = storage(i["storage"], imap)
-    instance_details["Storage"].extend(more_storage_attributes)
+        except KeyError:
+            print(
+                "An instances.json attribute {} does not appear in meta/service_attributes_cache.csv and cannot be formatted".format(
+                    attr_name
+                )
+            )
 
+    # Sort the instance attributes in each category alphabetically,
+    # another general-purpose option could be to sort by value data type
     for c in categories:
         instance_details[c].sort(key=lambda x: int(x["order"]))
 
     return instance_details
 
 
-def build_detail_pages_ec2(instances, destination_file):
+def build_detail_pages_cache(instances, destination_file):
     # Extract which service these instances belong to, for example EC2 is loaded at /
     service_path = destination_file.split("/")[1]
-    data_file = "community_contributions.yaml"
-    stream = open(data_file, "r")
-    community_data = list(yaml.load_all(stream, Loader=yaml.SafeLoader))
-
-    # Find the right path to write these files to. There is a .gitignore file
-    # in each directory so that these generated files are not committed
-    subdir = os.path.join("www", "aws", "ec2")
-    if service_path != "index.html":
-        subdir = os.path.join("www", "aws", service_path)
+    subdir = os.path.join("www", "aws", "elasticache")
 
     ifam, fam_lookup, variants = assemble_the_families(instances)
     imap = load_service_attributes()
 
     lookup = mako.lookup.TemplateLookup(directories=["."])
     template = mako.template.Template(
-        filename="in/instance-type.html.mako", lookup=lookup
+        filename="in/instance-type-cache.html.mako", lookup=lookup
     )
 
     # To add more data to a single instance page, do so inside this loop
@@ -350,18 +289,14 @@ def build_detail_pages_ec2(instances, destination_file):
     sitemap = []
     for i in instances:
         instance_type = i["instance_type"]
-        # Use this to debug individual instances
-        # if instance_type != "t4g.nano":
-        #     continue
 
         instance_page = os.path.join(subdir, instance_type + ".html")
-        instance_details = map_ec2_attributes(i, imap)
+        instance_details = map_cache_attributes(i, imap)
         instance_details["Pricing"] = prices(i["pricing"])
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
-        links = community(instance_type, community_data)
         denylist = unavailable_instances(instance_type, instance_details)
-        defaults = initial_prices(instance_details)
+        defaults = initial_prices(instance_details, instance_type)
         idescription = description(instance_details, defaults)
 
         print("Rendering %s to detail page %s..." % (instance_type, instance_page))
@@ -372,10 +307,9 @@ def build_detail_pages_ec2(instances, destination_file):
                         i=instance_details,
                         family=fam_members,
                         description=idescription,
-                        links=links,
                         unavailable=denylist,
                         defaults=defaults,
-                        variants=variants[instance_type[0:2]],
+                        variants=variants[instance_type[6:8]],
                     )
                 )
                 sitemap.append(instance_page)
