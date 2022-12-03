@@ -285,11 +285,28 @@ def scrape(output_file, input_file=None):
 
     add_pretty_names(instances)
     add_cache_parameters(instances)
+    add_max_clients(instances)
 
     # write output to file
     encoder.FLOAT_REPR = lambda o: format(o, ".5f")
     with open(output_file, "w+") as outfile:
         json.dump(list(instances.values()), outfile, indent=1)
+
+
+def add_max_clients(instances):
+    low_max_clients = [
+        "cache.t2.micro",
+        "cache.t2.small",
+        "cache.t2.medium",
+        "cache.t3.micro",
+        "cache.t4g.micro",
+    ]
+
+    for i in instances.keys():
+        if instances[i]["instance_type"] in low_max_clients:
+            instances[i]["max_clients"] = "20000"
+        else:
+            instances[i]["max_clients"] = "65000"
 
 
 def add_cache_parameters(instances):
@@ -316,14 +333,7 @@ def add_cache_parameters(instances):
     iparams = {}
 
     for param_fam in [
-        "memcached1.4",
-        "memcached1.5",
         "memcached1.6",
-        "redis2.6",
-        "redis2.8",
-        "redis3.2",
-        "redis4.0",
-        "redis5.0",
         "redis6.x",
     ]:
         cache_client = boto3.client("elasticache", region_name="us-east-1")
@@ -344,14 +354,12 @@ def add_cache_parameters(instances):
                 if itype not in iparams:
                     iparams[itype] = {}
 
-                if param_fam not in iparams[itype]:
-                    iparams[itype][param_fam] = {}
-
-                iparams[itype][param_fam][param_name] = param["Value"]
+                os_param = "".join([param_fam, "-", param_name])
+                iparams[itype][os_param] = param["Value"]
 
     for i in instances.keys():
         try:
-            instances[i]["cache_parameters"] = iparams[i]
+            instances[i].update(iparams[i])
         except KeyError:
             print("No cache parameters for {}".format(i))
 

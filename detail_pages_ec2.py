@@ -11,21 +11,6 @@ import yaml
 import re
 
 
-def storage(sattrs, imap):
-    if not sattrs:
-        return []
-    storage_details = []
-    for s, v in sattrs.items():
-        try:
-            display = imap[s]
-            display["value"] = v
-            storage_details.append(format_attribute(display))
-        except KeyError:
-            # We chose not to represent this storage attribute
-            continue
-    return storage_details
-
-
 def initial_prices(i):
     # For EC2, basically everything has a price for linux, on-demand in us-east-1
     # so default to that. Certain instances (mac2) are only available as dedicated hosts so
@@ -293,11 +278,28 @@ def map_ec2_attributes(i, imap):
         "Amazon",
         "Not Shown",
     ]
+
+    # Nested attributes in instances.json that we handle differently
     special_attributes = [
         "pricing",
         "storage",
         "vpc",
     ]
+
+    def storage(sattrs, imap):
+        if not sattrs:
+            return []
+        storage_details = []
+        for s, v in sattrs.items():
+            try:
+                # This is one row on a detail page
+                display = imap[s]
+                display["value"] = v
+                storage_details.append(format_attribute(display))
+            except KeyError:
+                # We chose not to represent this storage attribute
+                continue
+        return storage_details
 
     # Group attributes into categories which are then displayed in sections on the page
     instance_details = {}
@@ -307,12 +309,14 @@ def map_ec2_attributes(i, imap):
     for j, k in i.items():
         # Some attributes like storage have nested values that we handle differently
         if j not in special_attributes:
+            # This is one row on a detail page
             display = imap[j]
             display["value"] = k
             instance_details[display["category"]].append(format_attribute(display))
 
     # Special cases
-    instance_details["Storage"].extend(storage(i["storage"], imap))
+    more_storage_attributes = storage(i["storage"], imap)
+    instance_details["Storage"].extend(more_storage_attributes)
 
     for c in categories:
         instance_details[c].sort(key=lambda x: int(x["order"]))

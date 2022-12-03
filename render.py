@@ -50,7 +50,11 @@ def add_cpu_detail(i):
         i["ECU_per_vcpu"] = "unknown"
 
     try:
-        i["memory_per_vcpu"] = round(i["memory"] / i["vCPU"], 2)
+        if "vCPU" in i:
+            # only EC2 uses vCPU
+            i["memory_per_vcpu"] = round(i["memory"] / i["vCPU"], 2)
+        else:
+            i["memory_per_vcpu"] = round(float(i["memory"]) / float(i["vcpu"]), 2)
     except:
         # just to be safe...
         i["memory_per_vcpu"] = "unknown"
@@ -238,9 +242,9 @@ def render(data_file, template_file, destination_file, detail_pages=True):
 
 if __name__ == "__main__":
     sitemap = []
-    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html", False))
+    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
     sitemap.extend(
-        render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html", False)
+        render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
     )
     sitemap.extend(
         render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")

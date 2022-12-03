@@ -130,8 +130,8 @@
               </div>
               <div class="col-6">
                 <select class="form-select form-select-sm" id="term">
-                  <option value="Standard.partialUpfront">Partial Upfront</option>
                   <option value="Standard.noUpfront">No Upfront</option>
+                  <option value="Standard.partialUpfront">Partial Upfront</option>
                   <option value="Standard.allUpfront">All Upfront</option>
                 </select>
               </div>
@@ -200,20 +200,7 @@
                 <p class="h6 fw-semibold mb-0">Instance Details</p>
               </div>
               % for category, attrs in i.items():
-                % if category == "Coming Soon":
-                  % for a in attrs:
-                    <!--<p>${a["display_name"]}</p>-->
-                  % endfor
-                % elif category == "Not Shown":
-                <!--
-                  <p>Request this data to be included on Github</p>
-                  % for a in attrs:
-                    <p>${a["cloud_key"]}</p>
-                  % endfor
-                -->
-                % elif category == "Pricing":
-                  <p></p>
-                % else:
+                % if category != "Pricing" and category != "Not Shown" and len(attrs) > 0:
                   <table class="table" id="${category}">
                     <tr>
                       <th class="col-6 border-end"><a href="#${category}">${category}</a></th>

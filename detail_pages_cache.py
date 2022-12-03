@@ -164,6 +164,7 @@ def prices(pricing):
 def load_service_attributes():
     special_attrs = [
         "pricing",
+        "cache_parameters",
     ]
     data_file = "meta/service_attributes_cache.csv"
 
@@ -195,62 +196,72 @@ def load_service_attributes():
     return display_map
 
 
+def format_attribute(display):
+
+    if display["regex"]:
+        # Use a regex extract the value to display
+        toparse = str(display["value"])
+        regex = str(display["regex"])
+        match = re.search(regex, toparse)
+        if match:
+            display["value"] = match.group()
+        # else:
+        #     print("No match found for {} with regex {}".format(toparse, regex))
+
+    if display["style"]:
+        # Make boolean values have fancy CSS
+        v = str(display["value"]).lower()
+        if display["cloud_key"] == "currentGeneration" and v == "yes":
+            display["style"] = "value value-current"
+            display["value"] = "current"
+        elif v == "false" or v == "0" or v == "none":
+            display["style"] = "value value-false"
+        elif v == "true" or v == "1" or v == "yes":
+            display["style"] = "value value-true"
+        elif display["cloud_key"] == "currentGeneration" and v == "no":
+            display["style"] = "value value-previous"
+            display["value"] = "previous"
+        elif display["style"] == "bytes":
+            display["value"] = round(int(v) / 1048576)
+
+    return display
+
+
 def map_cache_attributes(i, imap):
-    # For now, manually transform the instance data we receive from AWS
-    # into the format we want to render. Later we can create this in YAML
-    # and use a standard function that maps names
+    # Transform keys (instance attributes like vCPUs) and values from instances.json
+    # into human readable names and nicely formatted values
     categories = [
         "Compute",
         "Networking",
+        "Storage",
         "Amazon",
         "Not Shown",
-        "Coming Soon",
     ]
+
+    # Nested attributes in instances.json that we handle differently
+    special_attributes = [
+        "pricing",
+    ]
+
     instance_details = {}
     for c in categories:
         instance_details[c] = []
 
     # For up to date display names, inspect meta/service_attributes_cache.csv
-    for j, k in i.items():
-
+    for attr_name, attr_val in i.items():
         try:
-            display = imap[j]
-
-            # Ignore the pricing attribute, we will handle it separately
-            display["value"] = k if j != "pricing" else {}
-
-            if display["regex"]:
-                # Use a regex extract the value to display
-                toparse = str(display["value"])
-                regex = str(display["regex"])
-                match = re.search(regex, toparse)
-                if match:
-                    display["value"] = match.group()
-                else:
-                    print("No match found for {} with regex {}".format(toparse, regex))
-
-            if display["style"]:
-                # Make boolean values have fancy CSS
-                v = str(display["value"]).lower()
-                if display["cloud_key"] == "currentGeneration" and v == "yes":
-                    display["style"] = "value value-current"
-                    display["value"] = "current"
-                elif v == "false" or v == "0" or v == "none":
-                    display["style"] = "value value-false"
-                elif v == "true" or v == "1" or v == "yes":
-                    display["style"] = "value value-true"
-                elif display["cloud_key"] == "currentGeneration" and v == "no":
-                    display["style"] = "value value-previous"
-                    display["value"] = "previous"
+            if attr_name not in special_attributes:
+                # This is one row on a detail page
+                display = imap[attr_name]
+                display["value"] = attr_val
+                instance_details[display["category"]].append(format_attribute(display))
 
         except KeyError:
             print(
                 "An instances.json attribute {} does not appear in meta/service_attributes_cache.csv and cannot be formatted".format(
-                    j
+                    attr_name
                 )
             )
-
-        instance_details[display["category"]].append(display)
 
     # Sort the instance attributes in each category alphabetically,
     # another general-purpose option could be to sort by value data type
