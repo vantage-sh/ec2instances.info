@@ -3,6 +3,8 @@ import requests
 import json
 from json import encoder
 import sys
+from lxml import etree
+from six.moves.urllib import request as urllib2
 
 import six
 from tqdm import tqdm
@@ -43,6 +45,40 @@ def add_pretty_names(instances):
         bits.append(short.capitalize())
 
         i["pretty_name"] = " ".join([b for b in bits if b])
+
+
+def add_node_parameters(instances):
+    cluster_url = (
+        "https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html"
+    )
+    tree = etree.parse(urllib2.urlopen(cluster_url), etree.HTMLParser())
+
+    for table_cnt in [0, 1, 2]:
+        table = tree.xpath('//div[@class="table-contents"]//table')[table_cnt]
+        rows = table.xpath(".//tr[./td]")
+
+        for r in rows:
+            etree.strip_elements(r, "sup")
+            instance_type = etree.tounicode(r[0], method="text").strip()
+            slices = etree.tounicode(r[3], method="text").strip()
+            per_node_storage = etree.tounicode(r[4], method="text").strip()
+            node_range = etree.tounicode(r[5], method="text").strip()
+            storage_cap = etree.tounicode(r[6], method="text").strip()
+
+            if "single-node" in instance_type:
+                instance_type = "ra3.xlplus"
+            elif "multi-node" in instance_type:
+                instances["ra3.xlplus"][
+                    "multi-node_storage_per_node"
+                ] = per_node_storage
+                instances["ra3.xlplus"]["multi-node_node_range"] = node_range
+                instances["ra3.xlplus"]["multi-node_storage_capacity"] = storage_cap
+                continue
+
+            instances[instance_type]["slices_per_node"] = slices
+            instances[instance_type]["storage_per_node"] = per_node_storage
+            instances[instance_type]["node_range"] = node_range
+            instances[instance_type]["storage_capacity"] = storage_cap
 
 
 def scrape(output_file, input_file=None):
@@ -238,6 +274,7 @@ def scrape(output_file, input_file=None):
                     )
 
     add_pretty_names(instances)
+    add_node_parameters(instances)
 
     # write output to file
     encoder.FLOAT_REPR = lambda o: format(o, ".5f")

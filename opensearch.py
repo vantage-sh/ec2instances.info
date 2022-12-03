@@ -3,6 +3,8 @@ import requests
 import json
 from json import encoder
 import sys
+from lxml import etree
+from six.moves.urllib import request as urllib2
 
 import six
 from tqdm import tqdm
@@ -60,6 +62,35 @@ def add_pretty_names(instances):
         bits.append(short.capitalize())
 
         i["pretty_name"] = " ".join([b for b in bits if b])
+
+
+def add_volume_quotas(instances):
+    os_quotas_url = "https://docs.aws.amazon.com/opensearch-service/latest/developerguide/limits.html"
+    tree = etree.parse(urllib2.urlopen(os_quotas_url), etree.HTMLParser())
+    table = tree.xpath('//div[@class="table-contents disable-scroll"]//table')[4]
+    rows = table.xpath(".//tr[./td]")
+
+    for r in rows:
+        instance_type = etree.tostring(r[0], method="text").strip().decode()
+        min_ebs = etree.tostring(r[1], method="text").strip().decode()
+        max_ebs_gp2 = etree.tostring(r[2], method="text").strip().decode()
+        max_ebs_gp3 = etree.tostring(r[3], method="text").strip().decode()
+
+        instances[instance_type]["min_ebs"] = min_ebs
+        instances[instance_type]["max_ebs_gp2"] = max_ebs_gp2
+        instances[instance_type]["max_ebs_gp3"] = max_ebs_gp3
+
+    table = tree.xpath('//div[@class="table-contents disable-scroll"]//table')[5]
+    rows = table.xpath(".//tr[./td]")
+    for r in rows:
+        instance_type = etree.tostring(r[0], method="text").strip().decode()
+        max_http_payload = etree.tostring(r[1], method="text").strip().decode()
+
+        instances[instance_type]["max_http_payload"] = max_http_payload
+
+    # Manually add ultrawarm storage
+    instances["ultrawarm1.medium.search"]["max_storage"] = "1.5 TiB"
+    instances["ultrawarm1.large.search"]["max_storage"] = "20 TiB"
 
 
 def scrape(output_file, input_file=None):
@@ -256,6 +287,7 @@ def scrape(output_file, input_file=None):
                     )
 
     add_pretty_names(instances)
+    add_volume_quotas(instances)
 
     # write output to file
     encoder.FLOAT_REPR = lambda o: format(o, ".5f")
