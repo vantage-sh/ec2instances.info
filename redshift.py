@@ -119,9 +119,6 @@ def scrape(output_file, input_file=None):
             # set the attributes in line with the ec2 index
             attributes["region"] = region
             attributes["memory"] = attributes["memory"].split(" ")[0]
-            attributes["network_performance"] = attributes.get(
-                "networkPerformance", None
-            )
             attributes["family"] = attributes["usageFamily"]
             attributes["instance_type"] = instance_type
             attributes["pricing"] = {}

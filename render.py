@@ -273,7 +273,6 @@ if __name__ == "__main__":
             "www/redshift/instances.json",
             "in/redshift.html.mako",
             "www/redshift/index.html",
-            False,
         )
     )
     sitemap.extend(

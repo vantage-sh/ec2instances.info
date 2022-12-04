@@ -172,7 +172,7 @@
         % for inst in instances:
         <tr class='instance' id="${inst['instance_type']}">
           <td class="name">${inst['pretty_name']}</td>
-          <td class="apiname">${inst['instance_type']}</td>
+          <td class="apiname"><a href="/aws/redshift/${inst['instance_type']}">${inst['instance_type']}</a></td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
           <td class="vcpus">
             <span sort="${inst['vcpu']}">
