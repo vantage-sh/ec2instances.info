@@ -19,8 +19,8 @@ def initial_prices(i, instance_type):
         return ["'N/A'", "'N/A'", "'N/A'"]
 
     try:
-        _1yr = i["Pricing"]["us-east-1"]["_1yr"]["Standard.noUpfront"]
-        _3yr = i["Pricing"]["us-east-1"]["_3yr"]["Standard.noUpfront"]
+        _1yr = i["Pricing"]["us-east-1"]["_1yr"]["Standard.partialUpfront"]
+        _3yr = i["Pricing"]["us-east-1"]["_3yr"]["Standard.partialUpfront"]
     except:
         # If we can't get a reservation, likely a previous generation
         _1yr = "'N/A'"
@@ -247,8 +247,6 @@ def map_cache_attributes(i, imap):
 
 
 def build_detail_pages_redshift(instances, destination_file):
-    # Extract which service these instances belong to, for example EC2 is loaded at /
-    service_path = destination_file.split("/")[1]
     subdir = os.path.join("www", "aws", "redshift")
 
     ifam, fam_lookup, variants = assemble_the_families(instances)

@@ -247,8 +247,6 @@ def map_cache_attributes(i, imap):
 
 
 def build_detail_pages_opensearch(instances, destination_file):
-    # Extract which service these instances belong to, for example EC2 is loaded at /
-    service_path = destination_file.split("/")[1]
     subdir = os.path.join("www", "aws", "opensearch")
 
     ifam, fam_lookup, variants = assemble_the_families(instances)
