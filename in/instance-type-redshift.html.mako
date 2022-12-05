@@ -202,7 +202,7 @@
               </div>
               % for category, attrs in i.items():
                 % if category != "Pricing" and category != "Not Shown" and len(attrs) > 0:
-                  % if category == "Networking":
+                  % if category == "Storage":
                     <div class="mb-4 d-flex flex-container justify-content-center">
                       <div class="row">
                         <div class="d-flex justify-content-center"><span><img width="64" height="64" src="/vantage-logo.svg"></span></div>
