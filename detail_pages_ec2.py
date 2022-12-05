@@ -66,15 +66,6 @@ def description(id, defaults):
     )
 
 
-def community(instance, links):
-    # TODO: not the most efficient with many links
-    for l in links:
-        k, linklist = next(iter(l.items()))
-        if k == instance:
-            return linklist["links"]
-    return []
-
-
 ec2_os = {
     "linux": "Linux",
     "mswin": "Windows",
@@ -322,17 +313,7 @@ def map_ec2_attributes(i, imap):
 
 
 def build_detail_pages_ec2(instances, destination_file):
-    # Extract which service these instances belong to, for example EC2 is loaded at /
-    service_path = destination_file.split("/")[1]
-    data_file = "community_contributions.yaml"
-    stream = open(data_file, "r")
-    community_data = list(yaml.load_all(stream, Loader=yaml.SafeLoader))
-
-    # Find the right path to write these files to. There is a .gitignore file
-    # in each directory so that these generated files are not committed
     subdir = os.path.join("www", "aws", "ec2")
-    if service_path != "index.html":
-        subdir = os.path.join("www", "aws", service_path)
 
     ifam, fam_lookup, variants = assemble_the_families(instances)
     imap = load_service_attributes()
@@ -357,7 +338,6 @@ def build_detail_pages_ec2(instances, destination_file):
         instance_details["Storage"].extend(storage(i["storage"], imap))
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
-        links = community(instance_type, community_data)
         denylist = unavailable_instances(instance_type, instance_details)
         defaults = initial_prices(instance_details)
         idescription = description(instance_details, defaults)
@@ -370,7 +350,6 @@ def build_detail_pages_ec2(instances, destination_file):
                         i=instance_details,
                         family=fam_members,
                         description=idescription,
-                        links=links,
                         unavailable=denylist,
                         defaults=defaults,
                         variants=variants[instance_type[0:2]],
