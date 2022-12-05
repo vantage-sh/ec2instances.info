@@ -11,21 +11,6 @@ import yaml
 import re
 
 
-def storage(sattrs, imap):
-    if not sattrs:
-        return []
-    storage_details = []
-    for s, v in sattrs.items():
-        try:
-            display = imap[s]
-            display["value"] = v
-            storage_details.append(format_attribute(display))
-        except KeyError:
-            # We chose not to represent this storage attribute
-            continue
-    return storage_details
-
-
 def initial_prices(i):
     # For EC2, basically everything has a price for linux, on-demand in us-east-1
     # so default to that. Certain instances (mac2) are only available as dedicated hosts so
@@ -79,15 +64,6 @@ def description(id, defaults):
     return "The {} instance is in the {} family with {} vCPUs, {} GiB of memory{} starting at ${} per hour.".format(
         name, family_category, cpus, memory, bandwidth, defaults[0]
     )
-
-
-def community(instance, links):
-    # TODO: not the most efficient with many links
-    for l in links:
-        k, linklist = next(iter(l.items()))
-        if k == instance:
-            return linklist["links"]
-    return []
 
 
 ec2_os = {
@@ -226,6 +202,22 @@ def prices(pricing):
     return display_prices
 
 
+def storage(sattrs, imap):
+    if not sattrs:
+        return []
+    storage_details = []
+    for s, v in sattrs.items():
+        try:
+            # This is one row on a detail page
+            display = imap[s]
+            display["value"] = v
+            storage_details.append(format_attribute(display))
+        except KeyError:
+            # We chose not to represent this storage attribute
+            continue
+    return storage_details
+
+
 def load_service_attributes():
     # This CSV file contains nicely formatted names, styling hints,
     # and order of display for instance attributes
@@ -293,6 +285,8 @@ def map_ec2_attributes(i, imap):
         "Amazon",
         "Not Shown",
     ]
+
+    # Nested attributes in instances.json that we handle differently
     special_attributes = [
         "pricing",
         "storage",
@@ -307,35 +301,19 @@ def map_ec2_attributes(i, imap):
     for j, k in i.items():
         # Some attributes like storage have nested values that we handle differently
         if j not in special_attributes:
+            # This is one row on a detail page
             display = imap[j]
             display["value"] = k
             instance_details[display["category"]].append(format_attribute(display))
 
-    # Special cases
-    instance_details["Storage"].extend(storage(i["storage"], imap))
-
     for c in categories:
         instance_details[c].sort(key=lambda x: int(x["order"]))
 
-    # Pricing widget
-    instance_details["Pricing"] = prices(i["pricing"])
-
-    # for debugging: print(json.dumps(instance_details, indent=4))
     return instance_details
 
 
 def build_detail_pages_ec2(instances, destination_file):
-    # Extract which service these instances belong to, for example EC2 is loaded at /
-    service_path = destination_file.split("/")[1]
-    data_file = "community_contributions.yaml"
-    stream = open(data_file, "r")
-    community_data = list(yaml.load_all(stream, Loader=yaml.SafeLoader))
-
-    # Find the right path to write these files to. There is a .gitignore file
-    # in each directory so that these generated files are not committed
     subdir = os.path.join("www", "aws", "ec2")
-    if service_path != "index.html":
-        subdir = os.path.join("www", "aws", service_path)
 
     ifam, fam_lookup, variants = assemble_the_families(instances)
     imap = load_service_attributes()
@@ -356,9 +334,10 @@ def build_detail_pages_ec2(instances, destination_file):
 
         instance_page = os.path.join(subdir, instance_type + ".html")
         instance_details = map_ec2_attributes(i, imap)
+        instance_details["Pricing"] = prices(i["pricing"])
+        instance_details["Storage"].extend(storage(i["storage"], imap))
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
-        links = community(instance_type, community_data)
         denylist = unavailable_instances(instance_type, instance_details)
         defaults = initial_prices(instance_details)
         idescription = description(instance_details, defaults)
@@ -371,7 +350,6 @@ def build_detail_pages_ec2(instances, destination_file):
                         i=instance_details,
                         family=fam_members,
                         description=idescription,
-                        links=links,
                         unavailable=denylist,
                         defaults=defaults,
                         variants=variants[instance_type[0:2]],

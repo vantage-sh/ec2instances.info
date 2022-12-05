@@ -8,8 +8,11 @@ import os
 import copy
 import yaml
 
-from detail_pages_rds import build_detail_pages_rds
 from detail_pages_ec2 import build_detail_pages_ec2
+from detail_pages_rds import build_detail_pages_rds
+from detail_pages_cache import build_detail_pages_cache
+from detail_pages_opensearch import build_detail_pages_opensearch
+from detail_pages_redshift import build_detail_pages_redshift
 
 
 def network_sort(inst):
@@ -49,7 +52,11 @@ def add_cpu_detail(i):
         i["ECU_per_vcpu"] = "unknown"
 
     try:
-        i["memory_per_vcpu"] = round(i["memory"] / i["vCPU"], 2)
+        if "vCPU" in i:
+            # only EC2 uses vCPU
+            i["memory_per_vcpu"] = round(i["memory"] / i["vCPU"], 2)
+        else:
+            i["memory_per_vcpu"] = round(float(i["memory"]) / float(i["vcpu"]), 2)
     except:
         # just to be safe...
         i["memory_per_vcpu"] = "unknown"
@@ -63,7 +70,11 @@ def add_cpu_detail(i):
 
 
 def add_render_info(i):
-    i["network_sort"] = network_sort(i)
+    try:
+        i["network_sort"] = network_sort(i)
+    except KeyError:
+        # This instance, probably from a non EC2 service, does not have traditional networking specs
+        pass
     add_cpu_detail(i)
 
 
@@ -213,6 +224,12 @@ def render(data_file, template_file, destination_file, detail_pages=True):
             sitemap.extend(build_detail_pages_ec2(instances, destination_file))
         elif data_file == "www/rds/instances.json":
             sitemap.extend(build_detail_pages_rds(instances, destination_file))
+        elif data_file == "www/cache/instances.json":
+            sitemap.extend(build_detail_pages_cache(instances, destination_file))
+        elif data_file == "www/opensearch/instances.json":
+            sitemap.extend(build_detail_pages_opensearch(instances, destination_file))
+        elif data_file == "www/redshift/instances.json":
+            sitemap.extend(build_detail_pages_redshift(instances, destination_file))
 
     print("Rendering to %s..." % destination_file)
     os.makedirs(os.path.dirname(destination_file), exist_ok=True)
@@ -240,7 +257,11 @@ if __name__ == "__main__":
         render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
     )
     sitemap.extend(
-        render("www/cache/instances.json", "in/cache.html.mako", "www/cache/index.html")
+        render(
+            "www/cache/instances.json",
+            "in/cache.html.mako",
+            "www/cache/index.html",
+        )
     )
     sitemap.extend(
         render(

@@ -199,6 +199,10 @@ table {
     display: flex;
     align-items: center;
   }
+  &.btn-github {
+    background-color: #eee;
+    color: #1a1a1c;
+  }
 }
 
 .column-left {
