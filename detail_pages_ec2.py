@@ -211,6 +211,22 @@ def prices(pricing):
     return display_prices
 
 
+def storage(sattrs, imap):
+    if not sattrs:
+        return []
+    storage_details = []
+    for s, v in sattrs.items():
+        try:
+            # This is one row on a detail page
+            display = imap[s]
+            display["value"] = v
+            storage_details.append(format_attribute(display))
+        except KeyError:
+            # We chose not to represent this storage attribute
+            continue
+    return storage_details
+
+
 def load_service_attributes():
     # This CSV file contains nicely formatted names, styling hints,
     # and order of display for instance attributes
@@ -286,21 +302,6 @@ def map_ec2_attributes(i, imap):
         "vpc",
     ]
 
-    def storage(sattrs, imap):
-        if not sattrs:
-            return []
-        storage_details = []
-        for s, v in sattrs.items():
-            try:
-                # This is one row on a detail page
-                display = imap[s]
-                display["value"] = v
-                storage_details.append(format_attribute(display))
-            except KeyError:
-                # We chose not to represent this storage attribute
-                continue
-        return storage_details
-
     # Group attributes into categories which are then displayed in sections on the page
     instance_details = {}
     for c in categories:
@@ -313,10 +314,6 @@ def map_ec2_attributes(i, imap):
             display = imap[j]
             display["value"] = k
             instance_details[display["category"]].append(format_attribute(display))
-
-    # Special cases
-    more_storage_attributes = storage(i["storage"], imap)
-    instance_details["Storage"].extend(more_storage_attributes)
 
     for c in categories:
         instance_details[c].sort(key=lambda x: int(x["order"]))
@@ -357,6 +354,7 @@ def build_detail_pages_ec2(instances, destination_file):
         instance_page = os.path.join(subdir, instance_type + ".html")
         instance_details = map_ec2_attributes(i, imap)
         instance_details["Pricing"] = prices(i["pricing"])
+        instance_details["Storage"].extend(storage(i["storage"], imap))
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
         links = community(instance_type, community_data)
