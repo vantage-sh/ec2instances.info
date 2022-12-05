@@ -131,8 +131,8 @@
               </div>
               <div class="col-6">
                 <select class="form-select form-select-sm" id="term">
-                  <option value="Standard.noUpfront">No Upfront</option>
                   <option value="Standard.partialUpfront">Partial Upfront</option>
+                  <option value="Standard.noUpfront">No Upfront</option>
                   <option value="Standard.allUpfront">All Upfront</option>
                 </select>
               </div>
