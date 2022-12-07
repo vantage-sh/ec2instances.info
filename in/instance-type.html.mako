@@ -238,9 +238,6 @@
               </table>
             </div>
             % endif
-            <div class="sidebar-section ticket small pb-4">
-              See a data problem? <a href="https://github.com/vantage-sh/ec2instances.info/issues/new" target="_blank" class="text-decoration-none">Open a ticket.</a>
-            </div>
           </div>
 
           <div class="column-middle mb-5">
