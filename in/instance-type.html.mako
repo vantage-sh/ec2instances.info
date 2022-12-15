@@ -262,13 +262,14 @@
                   <p></p>
                 % else:
                   % if category == "Networking":
-                    <div class="mb-4 d-flex flex-container justify-content-center">
-                      <div class="row">
-                        <div class="d-flex justify-content-center"><span><img width="64" height="64" src="/vantage-logo.svg"></span></div>
-                        <div class="d-flex justify-content-center mt-4">
-                          <span class="fw-semibold" style="color:#6c757d">Concerned about cloud costs? <a href="https://console.vantage.sh/signup">Connect your AWS account</a> in under 5 minutes to see savings.</span>
-                        </div>
+                    <div class="vantage-callout">
+                      <div class="callout-close">
+                        <span class="material-icons">close</span>
                       </div>
+                      <img width="auto" height="25" src="/vantage-logo_full.svg">
+                      <h5>Concerned about cloud costs?</h5>
+                      <p>Connect your AWS account in under<br />5 minutes to see savings.</p>
+                      <a href="https://console.vantage.sh/signup" target="_blank">Connect AWS Account</a>
                     </div>
                   % endif
                   <table class="table" id="${category}">
