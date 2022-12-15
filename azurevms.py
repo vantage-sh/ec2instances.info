@@ -3,6 +3,8 @@ import requests
 import json
 import scrape
 import os
+from azure.identity import DefaultAzureCredential
+from azure.mgmt.compute import ComputeManagementClient
 
 
 class AzureInstance(object):
@@ -32,6 +34,7 @@ class AzureInstance(object):
         self.instance_type = ""
         self.iops = None
         self.low_priority = None
+        self.max_write_disks = None
         self.memory = 0
         self.memory_maintenance = None
         self.network_interfaces = None
@@ -109,6 +112,7 @@ class AzureInstance(object):
             nvme_ssd=self.nvme_ssd,
             devices=self.num_drives,
             size=self.drive_size,
+            max_write_disks=self.max_write_disks,
         )
         return d
 
@@ -116,11 +120,36 @@ class AzureInstance(object):
         return "<Instance {}>".format(self.instance_type)
 
 
+def split_pricing(i, info, region, os, price):
+    if info["type"] == "Consumption":
+        if "Spot" in info["meterName"]:
+            i.pricing[region][os] = {'spot': price}
+        else:
+            i.pricing[region][os] = {'ondemand': price}
+    elif info["type"] == "Reservation":
+        if 'reserved' not in i.pricing[region][os]:
+            i.pricing[region][os]["reserved"] = {}
+        if info["reservationTerm"] == "1 Year":
+            i.pricing[region][os]["reserved"] = {'yrTerm1Standard.allUpfront': price}
+        elif info["reservationTerm"] == "3 Years":
+            i.pricing[region][os]["reserved"] = {'yrTerm3Standard.allUpfront': price}
+    elif info["type"] == "DevTestConsumption":
+        i.pricing[region][os] = {'devtest': price}
+
+
 def parse_instance(i, info):
     i.instance_type = info["armSkuName"]
     i.pretty_name = info["productName"]
-    if info["armRegionName"] not in i.pricing:
-        i.pricing[info["armRegionName"]] = {'ondemand': info["retailPrice"]}
+    region = info["armRegionName"]
+    price = info["retailPrice"]
+
+    if region not in i.pricing:
+        i.pricing[region] = {}
+    
+    if 'Windows' in info["productName"]:
+        split_pricing(i, info, region, "windows", price)
+    else:
+        split_pricing(i, info, region, "linux", price)
 
 
 def parse_specs(i, cap):
@@ -187,14 +216,17 @@ def parse_specs(i, cap):
             i.confidential = c.value
         elif c.name == 'ParentSize':
             i.parent_size = c.value
+        elif c.name == 'NvmeDiskSizeInMiB':
+            i.nvme_ssd = c.value
+        elif c.name == 'GPUs':
+            i.GPU = c.value
+        elif c.name == 'MaxWriteAcceleratorDisksAllowed':
+            i.max_write_disks = c.value
         else:
             print("Found unexpected attribute {} for instance type {}".format(c.name, i.instance_type))
 
     
 def azure_vm_specs():
-    from azure.identity import DefaultAzureCredential
-    from azure.mgmt.compute import ComputeManagementClient
-
     credential = DefaultAzureCredential()
 
     # Retrieve subscription ID from environment variable.
@@ -213,14 +245,13 @@ def azure_vm_specs():
                 instances[s.name].instance_type = s.name
                 parse_specs(instances[s.name], s.capabilities)
             i += 1
-        # if i > 10000:
-        #     break
     print("Went through {} SKUs".format(i))
 
     return instances
 
 
 def azure_prices(instances):
+    missing_instances = []
     s = requests.Session()
 
     response = s.get("https://prices.azure.com/api/retail/prices?$filter=serviceName eq 'Virtual Machines'").json()
@@ -232,13 +263,14 @@ def azure_prices(instances):
                 apiname = pricing["armSkuName"]
                 parse_instance(instances[apiname], pricing)
             except KeyError:
-                print("Don't have attributes for {} when adding pricing".format(pricing["armSkuName"]))
+                if pricing["armSkuName"] not in missing_instances:
+                    missing_instances.append(pricing["armSkuName"])
 
         response = s.get(next_page_url).json()
         print(next_page_url)
         next_page_url = response["NextPageLink"]
         i += 1
-        # if i > 10:
+        # if i > 50:
         #     break
 
     data_file = 'www/azure/instances.json'
@@ -253,7 +285,10 @@ def azure_prices(instances):
         )
     # [print(json.dumps(inst.to_dict(), indent=4)) for inst in instances.values()]
 
+    print("Don't have attributes for these instances when adding pricing")
+    [print(i) for i in missing_instances]
+
 
 if __name__ == '__main__':
     instances = azure_vm_specs()
-    # azure_prices(instances)
+    azure_prices(instances)
