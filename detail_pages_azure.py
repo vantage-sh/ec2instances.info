@@ -23,11 +23,11 @@ def initial_prices(i):
         for os in ["linux", "dedicated"]:
             try:
                 if "yr" in pricing_type:
-                    init_p[pricing_type] = i["Pricing"]["us-east-1"][os][pricing_type][
+                    init_p[pricing_type] = i["Pricing"]["eastus"][os][pricing_type][
                         "Standard.noUpfront"
                     ]
                 else:
-                    init_p[pricing_type] = i["Pricing"]["us-east-1"][os][pricing_type]
+                    init_p[pricing_type] = i["Pricing"]["eastus"][os][pricing_type]
                 break
             except:
                 init_p[pricing_type] = "'N/A'"
@@ -47,8 +47,8 @@ def initial_prices(i):
 
 
 def description(id, defaults):
-    name = id["Amazon"][1]["value"]
-    family_category = id["Amazon"][2]["value"].lower()
+    name = id["Azure"][1]["value"]
+    family_category = id["Azure"][2]["value"].lower()
     cpus = id["Compute"][0]["value"]
     memory = id["Compute"][1]["value"]
     bandwidth = id["Networking"][0]["value"]
@@ -115,8 +115,11 @@ def assemble_the_families(instances):
 
     for i in instances:
         name = i["instance_type"]
-        itype, suffix = name.split(".")
-        variant = itype[0:2]
+        try:
+            itype, suffix = name.split("-")
+        except ValueError:
+            itype = name
+        variant = name[0:2]
 
         if variant not in variant_families:
             variant_families[variant] = [[itype, name]]
@@ -128,7 +131,7 @@ def assemble_the_families(instances):
             if not dupe:
                 variant_families[variant].append([itype, name])
 
-        member = {"name": name, "cpus": int(i["vCPU"]), "memory": int(i["memory"])}
+        member = {"name": name, "cpus": int(i["vcpu"]), "memory": int(i["memory"])}
         if itype not in instance_fam_map:
             instance_fam_map[itype] = [member]
         else:
@@ -221,7 +224,7 @@ def storage(sattrs, imap):
 def load_service_attributes():
     # This CSV file contains nicely formatted names, styling hints,
     # and order of display for instance attributes
-    data_file = "meta/service_attributes_ec2.csv"
+    data_file = "meta/service_attributes_azure.csv"
 
     display_map = {}
     with open(data_file, "r") as f:
@@ -274,7 +277,7 @@ def format_attribute(display):
     return display
 
 
-def map_ec2_attributes(i, imap):
+def map_vm_attributes(i, imap):
     # For now, manually transform the instance data we receive from AWS
     # into the format we want to render. Later we can create this in YAML
     # and use a standard function that maps names
@@ -282,7 +285,7 @@ def map_ec2_attributes(i, imap):
         "Compute",
         "Networking",
         "Storage",
-        "Amazon",
+        "Azure",
         "Not Shown",
     ]
 
@@ -300,11 +303,18 @@ def map_ec2_attributes(i, imap):
 
     for j, k in i.items():
         # Some attributes like storage have nested values that we handle differently
-        if j not in special_attributes:
-            # This is one row on a detail page
-            display = imap[j]
-            display["value"] = k
-            instance_details[display["category"]].append(format_attribute(display))
+        try:
+            if j not in special_attributes:
+                # This is one row on a detail page
+                display = imap[j]
+                display["value"] = k
+                instance_details[display["category"]].append(format_attribute(display))
+        except KeyError:
+            print(
+                "An instances.json attribute {} does not appear in meta/service_attributes_cache.csv and cannot be formatted".format(
+                   j 
+                )
+            )
 
     for c in categories:
         instance_details[c].sort(key=lambda x: int(x["order"]))
@@ -313,14 +323,14 @@ def map_ec2_attributes(i, imap):
 
 
 def build_detail_pages_azure(instances, destination_file):
-    subdir = os.path.join("www", "aws", "ec2")
+    subdir = os.path.join("www", "azure", "vm")
 
     ifam, fam_lookup, variants = assemble_the_families(instances)
     imap = load_service_attributes()
 
     lookup = mako.lookup.TemplateLookup(directories=["."])
     template = mako.template.Template(
-        filename="in/instance-type.html.mako", lookup=lookup
+        filename="in/instance-type-azure.html.mako", lookup=lookup
     )
 
     # To add more data to a single instance page, do so inside this loop
@@ -333,7 +343,7 @@ def build_detail_pages_azure(instances, destination_file):
         #     continue
 
         instance_page = os.path.join(subdir, instance_type + ".html")
-        instance_details = map_ec2_attributes(i, imap)
+        instance_details = map_vm_attributes(i, imap)
         instance_details["Pricing"] = prices(i["pricing"])
         instance_details["Storage"].extend(storage(i["storage"], imap))
         fam = fam_lookup[instance_type]

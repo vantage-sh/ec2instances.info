@@ -3,7 +3,7 @@
   import json
   import six
 %>
-<%inherit file="base.mako" />
+<%inherit file="base-azure.mako" />
     
     <%block name="meta">
         <title>Azure VM Comparison</title>
@@ -95,7 +95,7 @@
           <label class="dropdown-label mb-1">Reserved</label>
           <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-globe icon-white"></i>
-            <span class="text">1-year - No Upfront</span>
+            <span class="text">1-year - All Upfront</span>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
@@ -170,8 +170,6 @@
           <th class="clock_speed_ghz">Clock Speed(GHz)</th>
           <th class="storage">Instance Storage</th>
           <th class="architecture">Arch</th>
-          <th class="networkperf">Network Performance</th>
-          <th class="linux-virtualization">Linux Virtualization</th>
           <th class="azs">
             <abbr title="The AZ IDs where these instances are available, which is a unique and consistent identifier for an Availability Zone across Azure accounts.">Availability Zones</abbr>
           </th>
@@ -201,8 +199,8 @@
               <span sort="${inst['ACU']}">${"%s" % (inst['ACU'],)} units</span>
             </td>
             <td class="vcpus">
-              <span sort="${inst['vcpu']}">
-                ${inst['vcpu']} vCPUs
+              <span sort="${inst['vcpus_available']}">
+                ${inst['vcpus_available']} vCPUs
               </span>
             </td>
             <td class="memory-per-vcpu">
@@ -251,11 +249,6 @@
               64-bit
               % endif
             </td>
-            <td class="networkperf">
-              <span sort="${inst['network_performance']}">
-                ${inst['network_performance']}
-              </span>
-            </td>
             <td class="azs">
               ${', '.join(inst.get('availability_zones', {}).get('eastus', []))}
             </td>
@@ -275,9 +268,9 @@
               </td>
 
               <td class="cost-reserved cost-reserved-${platform}" data-platform="${platform}" data-vcpu="${inst['vcpu']}" data-ecu="${inst['ACU']}" data-memory="${inst['memory']}">
-                % if inst['pricing'].get('eastus', {}).get(platform, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['eastus'][platform]['reserved'].get('yrTerm1Standard.noUpfront', 'N/A') != "N/A":
-                  <span sort="${inst['pricing']['eastus'][platform]['reserved']['yrTerm1Standard.noUpfront']}">
-                    $${"{:.4f}".format(float(inst['pricing']['eastus'][platform]['reserved']['yrTerm1Standard.noUpfront']))} hourly
+                % if inst['pricing'].get('eastus', {}).get(platform, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['eastus'][platform]['reserved'].get('yrTerm1Standard.allUpfront', 'N/A') != "N/A":
+                  <span sort="${inst['pricing']['eastus'][platform]['reserved']['yrTerm1Standard.allUpfront']}">
+                    $${"{:.4f}".format(float(inst['pricing']['eastus'][platform]['reserved']['yrTerm1Standard.allUpfront']))} hourly
                   </span>
                 % else:
                   <span sort="999999">unavailable</span>

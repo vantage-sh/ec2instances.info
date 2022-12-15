@@ -1,0 +1,31 @@
+Key,Display Name,Category,Category Order,Style,Regex,Example
+generation,Generation,Azure,1,value,,current
+instance_type,Instance Type,Azure,2,,,c5d.2xlarge
+family,Family,Azure,3,,,Compute optimized
+pretty_name,Name,Azure,4,,,C5 High-CPU Double Extra Large
+emr,"Elastic Map Reduce <a href=""https://handbook.vantage.sh/aws/services/emr-pricing/"">(EMR)</a>",Azure,5,value,,TRUE
+ACU,"Elastic Compute Units <a href=""https://handbook.vantage.sh/aws/concepts/elastic-compute-units/"">(ECU)</a>",Not Shown,6,,,39
+vCPU,vCPUs,Compute,1,,,8
+memory,Memory (GiB),Compute,2,,[+-]?([0-9]*[.])?[0-9]+,16
+memory_per_vcpu,Memory per vCPU (GiB),Compute,3,,[+-]?([0-9]*[.])?[0-9]+,2
+physical_processor,Physical Processor,Compute,4,,,Intel Xeon Platinum 8124M
+clock_speed_ghz,Clock Speed (GHz),Compute,5,,\d+,3 GHz
+arch,CPU Architecture,Compute,6,,\w+,['x86_64']
+GPU,GPU,Compute,9,value,,0
+GPU_model,GPU Architecture,Compute,10,value,,None
+FPGA,FPGA,Compute,13,value,,0
+compute_capability,"GPU Compute Capability <a href=""https://handbook.vantage.sh/aws/reference/aws-gpu-instances/"">(?)</a>",Compute,12,,,0
+GPU_memory,Video Memory (GiB),Compute,11,,,0
+network_performance,Network Performance (Gibps),Networking,1,,(Up to )\d+,Up to 10 Gigabit
+accelerated_networking,Accelerated Networking,Networking,2,value,,TRUE
+ipv6_support,IPV6,Networking,3,value,,TRUE
+placement_group_support,"Placement Group <a href=""https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html"">(?)</a>",Networking,4,value,,FALSE
+availability_zones,Networking,Not Shown,0,,,
+ACU_per_vcpu,Amazon,Not Shown,0,,,4.875
+vpc_only,Networking,Not Shown,0,value,,TRUE
+intel_turbo,Compute,Not Shown,7,value,,Yes
+storage,Disk Details,Not Shown,0,,,"{'devices': 1, 'includes_swap_partition': False, 'nvme_ssd': True, 'size': 200, 'size_unit': 'GB', 'ssd': True, 'storage_needs_initialization': False, 'trim_support': True}"
+size,Disk Space (GiB),Storage,1,,,
+ssd,SSD,Storage,9,,,
+nvme_ssd,"<a href=""https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances"">NVME</a> Drive",Storage,10,value,,
+devices,Devices,Storage,12,,,

@@ -73,12 +73,17 @@ def compress_instance_azs(instances):
     return json.dumps(instance_type_region_availability_zones)
 
 
+def remove_prefix(instances):
+    for i in instances:
+        i['instance_type'] = i['instance_type'].replace('Standard_', '').replace('_', '-')
+
+
 def per_region_pricing(instances, data_file):
     # This function splits instances.json into per-region files which are written to
     # disk and then can be loaded by the web app to reduce the amount of data that
     # needs to be sent to the client.
 
-    region_list = "meta/regions_aws.yaml"
+    region_list = "meta/regions_azure.yaml"
     with open(region_list, "r") as f:
         aws_regions = yaml.safe_load(f)
 
@@ -114,7 +119,7 @@ def per_region_pricing(instances, data_file):
         pricing_json = compress_pricing(per_region_out)
         instance_azs_json = compress_instance_azs(per_region_out)
 
-        if r == "us-east-1":
+        if r == "eastus":
             init_pricing_json = pricing_json
             init_instance_azs_json = instance_azs_json
 
@@ -132,6 +137,8 @@ def render_azure(data_file, template_file, destination_file, detail_pages=True):
     template = mako.template.Template(filename=template_file, lookup=lookup)
     with open(data_file, "r") as f:
         instances = json.load(f)
+    
+    remove_prefix(instances)
 
     print("Loading data from %s..." % data_file)
     for i in instances:
@@ -165,4 +172,4 @@ def render_azure(data_file, template_file, destination_file, detail_pages=True):
 
 
 if __name__ == "__main__":
-    render_azure("www/azure/instances.json.bak2", "in/azure.html.mako", "www/azure/index.html")
+    render_azure("www/azure/instances.json", "in/azure.html.mako", "www/azure/index.html", True)

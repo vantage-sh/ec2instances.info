@@ -262,6 +262,12 @@ function init_data_table() {
 }
 
 $(document).ready(function () {
+  var urlpath = window.location.pathname;
+  if (urlpath === '/azure/') {
+    g_settings_defaults.region = 'eastus';
+    g_settings_defaults.reserved_term = 'yrTerm1Standard.allUpfront';
+  }
+
   init_data_table();
 });
 
@@ -458,7 +464,7 @@ function change_availability_zones() {
 }
 
 function change_region(region, called_on_init) {
-  if (called_on_init && region === 'us-east-1') {
+  if ((called_on_init && region === 'us-east-1') || (called_on_init && region === 'eastus')) {
     // Don't load pricing data on initial page load. It's already there.
     return;
   }
