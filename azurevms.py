@@ -291,9 +291,9 @@ def azure_prices(instances):
 
 oss = [
     "linux",
+    "windows",
     "red-hat",
     "sles-basic",
-    "windows"
 ]
 
 regions = [
@@ -392,7 +392,7 @@ class AzureInstance2(object):
         self.vcpus = 0.0
         self.memory = 0.0
         self.size = 0
-        self.prices = {}
+        self.pricing = {}
     
     def to_dict(self):
         return vars(self)
@@ -409,11 +409,16 @@ def parse_instance2(i, info):
     except KeyError:
         pass
 
+    try:
+        i.GPU = info["gpu"]
+    except KeyError:
+        pass
+
 
 def azure_specs():
     instances = {}
 
-    for _os in oss[0:1]:
+    for _os in oss:
         specs_file = 'www/azure/{}.json'.format(_os)
 
         with open(specs_file, 'r') as f:
@@ -425,23 +430,11 @@ def azure_specs():
                     parse_instance2(i, info)
                     instances[instance_type] = i
 
-            print('Found {} instances'.format(len(instance_specs["attributesByOffer"].keys())))
-        
-        for region in regions:
-            file = 'www/azure/{}_{}.json'.format(_os, region)
+            print('Found {} {} instances'.format(len(instance_specs["attributesByOffer"].keys()), _os))
 
-    data_file = 'www/azure2/instances.json'
-    os.makedirs(os.path.dirname(data_file), exist_ok=True)
-    with open(data_file, "w+") as f:
-        json.dump(
-            [i.to_dict() for i in instances.values()],
-            f,
-            indent=1,
-            sort_keys=True,
-            separators=(",", ": "),
-        )
+    return instances
 
-    # Azure pricing data structure for reference below: 
+def add_pricing2(instances):
     d= {}
     d["basic"] = {
         "perhour": "basic", # 0.032,
@@ -480,9 +473,90 @@ def azure_specs():
         # "perhourspothybridbenefit": 0.306961
     }
 
+    for _os in oss[0:2]:
+        for region in regions:
+            file = 'www/azure/{}_{}.json'.format(region, _os)
+
+            with open(file, 'r') as f:
+                instance_pricing = json.load(f)
+
+                for k, info in instance_pricing.items():
+                    instance_type = k.split('-')[1]
+                    try:
+                        i = instances[instance_type]
+                    except KeyError:
+                        print("Instance {} from pricing file not found".format(instance_type))
+
+                    # Skip if there is no pricing for this instance in this region and for this os
+                    if not info:
+                        continue
+
+                    if "basic" in k:
+                        if region not in i.pricing:
+                            i.pricing[region] = {}
+                        
+                        if _os not in i.pricing[region]:
+                            i.pricing[region][_os] = {}
+                            
+                        for k2, v in d["basic"].items():
+                            try:
+                                i.pricing[region][_os][v] = info[k2]
+                            except KeyError:
+                                # print("{} {} basic not found in {} pricing file".format(k, k2, region))
+                                pass
+                    
+                    elif "lowpriority" in k:
+                        if region not in i.pricing:
+                            i.pricing[region] = {}
+                        
+                        if _os not in i.pricing[region]:
+                            i.pricing[region][_os] = {}
+                            
+                        for k2, v in d["lowpriority"].items():
+                            try:
+                                i.pricing[region][_os][v] = info[k2]
+                            except KeyError:
+                                # print("{} lowpriority {} not found in {} pricing file".format(k, k2, region))
+                                pass
+
+                    elif "standard" in k:
+                        if region not in i.pricing:
+                            i.pricing[region] = {}
+                        
+                        if _os not in i.pricing[region]:
+                            i.pricing[region][_os] = {}
+                            
+                        for k2, v in d["standard"].items():
+                            try:
+                                if "yrTerm" in v:
+                                    if "reserved" not in i.pricing[region][_os]:
+                                        i.pricing[region][_os]["reserved"] = {}
+                                    i.pricing[region][_os]["reserved"][v] = info[k2]
+                                else:
+                                    i.pricing[region][_os][v] = info[k2]
+                            except KeyError:
+                                # print("{} {} standard not found in {} pricing file".format(k, k2, region))
+                                pass
+
+    data_file = 'www/azure2/instances.json'
+    os.makedirs(os.path.dirname(data_file), exist_ok=True)
+    with open(data_file, "w+") as f:
+        json.dump(
+            [i.to_dict() for i in instances.values()],
+            f,
+            indent=1,
+            sort_keys=True,
+            separators=(",", ": "),
+        )
+    
+    
+
+
+
 
 if __name__ == '__main__':
     # instances = azure_vm_specs()
     # azure_prices(instances)
     # azure_prices2()
-    azure_specs()
+    instances = azure_specs()
+    add_pricing2(instances)
