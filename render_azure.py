@@ -67,9 +67,9 @@ def compress_instance_azs(instances):
     return json.dumps(instance_type_region_availability_zones)
 
 
-def remove_prefix(instances):
+def urlify(instances):
     for i in instances:
-        i['instance_type'] = i['instance_type'].replace('Standard_', '').replace('_', '-')
+        i['instance_type'] = i['instance_type'].replace('v', '-v')
 
 
 def load_regions(region_list):
@@ -138,6 +138,7 @@ def render_azure(data_file, template_file, destination_file, detail_pages=True):
     template = mako.template.Template(filename=template_file, lookup=lookup)
     with open(data_file, "r") as f:
         instances = json.load(f)
+    urlify(instances)
     
     print("Loading data from %s..." % data_file)
     for i in instances:

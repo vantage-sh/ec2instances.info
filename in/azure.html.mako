@@ -62,15 +62,23 @@
         </div>
 
         <div class="btn-group-vertical" id='reserved-term-dropdown'>
-          <label class="dropdown-label mb-1">Reserved</label>
+          <label class="dropdown-label mb-1">Committed Use Discounts</label>
           <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-globe icon-white"></i>
-            <span class="text">1-year - All Upfront</span>
+            <span class="text">1-year - Reservation</span>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Standard.allUpfront'>1-year - Full Upfront</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Standard.allUpfront'>3-year - Full Upfront</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Standard.allUpfront'>1-year - Reservation</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Standard.allUpfront'>3-year - Reservation</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Standard.hybridbenefit'>1-year - Reservation (Hybrid Benefit)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Standard.hybridbenefit'>3-year - Reservation (Hybrid Benefit)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Savings.allUpfront'>1-year - Savings Plan</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Savings.allUpfront'>3-year - Full Upfront</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Savings.hybridbenefit'>1-year - Savings Plan (Hybrid Benefit)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Savings.hybridbenefit'>3-year - Savings Plan (Hybrid Benefit)</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Standard.subscription'>1-year - Subscription</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Standard.subscription'>3-year - Subscription</a></li>
           </ul>
         </div>
 
@@ -130,12 +138,18 @@
           <th class="gpus">GPUs</th>
           <th class="storage">Instance Storage</th>
           <th class="cost-ondemand cost-ondemand-linux">Linux On Demand cost</th>
+          <th class="cost-savings-plan cost-savings-plan-linux">
+            <abbr>Linux Savings Plan</abbr>
+          </th>
           <th class="cost-reserved cost-reserved-linux">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux Reserved cost</abbr>
           </th>
           <th class="cost-spot-min cost-spot-min-linux">Linux Spot cost</th>
 
           <th class="cost-ondemand cost-ondemand-windows">Windows On Demand cost</th>
+          <th class="cost-savings-plan cost-savings-plan-windows">
+            <abbr>Windows Savings Plan</abbr>
+          </th>
           <th class="cost-reserved cost-reserved-windows">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows Reserved cost</abbr>
           </th>
@@ -148,7 +162,7 @@
         % for inst in instances:
           <tr class='instance' id="${inst['instance_type']}">
             <td class="name">${inst['pretty_name']}</td>
-            <td class="apiname"><a href="/azure/vm/${inst['instance_type']}">${inst['instance_type']}</a></td>
+            <td class="apiname"><a href="/azure/vm/${inst['instance_type']}">${inst['pretty_name']}</a></td>
             <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
             <td class="vcpu">
               <span sort="${inst['vcpu']}">
@@ -187,6 +201,16 @@
                 % endif
               </td>
 
+              <td class="cost-savings-plan cost-savings-plan-${platform}" data-platform="${platform}" data-vcpu="${inst['vcpu']}" data-memory="${inst['memory']}">
+                % if inst['pricing'].get('us-east', {}).get(platform, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['us-east'][platform]['reserved'].get('yrTerm1Savings.allUpfront', 'N/A') != "N/A":
+                  <span sort="${inst['pricing']['us-east'][platform]['reserved']['yrTerm1Savings.allUpfront']}">
+                    $${"{:.4f}".format(float(inst['pricing']['us-east'][platform]['reserved']['yrTerm1Savings.allUpfront']))} hourly
+                  </span>
+                % else:
+                  <span sort="999999">unavailable</span>
+                % endif
+              </td>
+
               <td class="cost-reserved cost-reserved-${platform}" data-platform="${platform}" data-vcpu="${inst['vcpu']}" data-memory="${inst['memory']}">
                 % if inst['pricing'].get('us-east', {}).get(platform, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['us-east'][platform]['reserved'].get('yrTerm1Standard.allUpfront', 'N/A') != "N/A":
                   <span sort="${inst['pricing']['us-east'][platform]['reserved']['yrTerm1Standard.allUpfront']}">
@@ -197,21 +221,19 @@
                 % endif
               </td>
 
-              % if platform in ['linux', 'windows']:
-                <td class="cost-spot-min cost-spot-min-${platform}" data-platform="${platform}" data-vcpu="${inst['vcpu']}" data-memory="${inst['memory']}">
-                  % if inst['pricing'].get('us-east', {}).get(platform, {}).get('spot', 'N/A') != 'N/A':
-                    <%
-                        spot = inst['pricing']['us-east'][platform]['spot']
-                    %>
-                    <span sort="${spot}">
-                      $${"{:.4f}".format(float(spot))} hourly
-                    </span>
-                  % else:
-                    <span sort="999999">unavailable</span>
-                  % endif
-                </td>
+              <td class="cost-spot-min cost-spot-min-${platform}" data-platform="${platform}" data-vcpu="${inst['vcpu']}" data-memory="${inst['memory']}">
+                % if inst['pricing'].get('us-east', {}).get(platform, {}).get('spot_min', 'N/A') != 'N/A':
+                  <%
+                      spot_min = inst['pricing']['us-east'][platform]['spot_min']
+                  %>
+                  <span sort="${spot_min}">
+                    $${"{:.4f}".format(float(spot_min))} hourly
+                  </span>
+                % else:
+                  <span sort="999999">unavailable</span>
+                % endif
+              </td>
 
-              % endif
             % endfor
 
           </tr>

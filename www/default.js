@@ -340,6 +340,38 @@ function change_cost() {
     if (pricing_unit != 'instance') {
       pricing_unit_modifier = elem.data(pricing_unit);
     }
+    if (g_settings.reserved_term.includes('Savings')) {
+      // Account for Savings Plan pricing
+      return;
+    }
+    per_time = get_pricing(
+      elem.closest('tr').attr('id'),
+      g_settings.region,
+      elem.data('platform'),
+      'reserved',
+      g_settings.reserved_term,
+    );
+    if (
+      per_time &&
+      !isNaN(per_time) &&
+      !isNaN(pricing_unit_modifier) &&
+      pricing_unit_modifier > 0
+    ) {
+      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(precision);
+      elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
+    } else {
+      elem.html('<span sort="999999">unavailable</span>');
+    }
+  });
+
+  $.each($('td.cost-savings-plan'), function (i, elem) {
+    elem = $(elem);
+    if (!g_settings.reserved_term.includes('Savings')) {
+      return;
+    }
+    if (pricing_unit != 'instance') {
+      pricing_unit_modifier = elem.data(pricing_unit);
+    }
     per_time = get_pricing(
       elem.closest('tr').attr('id'),
       g_settings.region,

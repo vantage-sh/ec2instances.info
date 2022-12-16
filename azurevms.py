@@ -419,7 +419,7 @@ def add_pricing2(instances):
         "perhourthreeyearreserved": "yrTerm3Standard.allUpfront", # 1.44806,
         "perunitoneyearsavings": "yrTerm1Savings.allUpfront", # 2.00432,
         "perunitthreeyearsavings": "yrTerm3Savings.allUpfront", # 1.62371,
-        "perhourspot": "spot", # 0.427518,
+        "perhourspot": "spot_min", # 0.427518,
         "perhourhybridbenefit": "hybridbenefit", # 1.874,
         "perhouroneyearreservedhybridbenefit": "yrTerm1Standard.hybridbenefit",# 1.10559,
         "perhourthreeyearreservedhybridbenefit": "yrTerm3Standard.hybridbenefit", # 0.71206,
