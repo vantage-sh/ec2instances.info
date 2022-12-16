@@ -289,6 +289,200 @@ def azure_prices(instances):
     [print(i) for i in missing_instances]
 
 
+oss = [
+    "linux",
+    "red-hat",
+    "sles-basic",
+    "windows"
+]
+
+regions = [
+    "us-east",
+    "us-east-2",
+    "us-central",
+    "us-north-central",
+    "us-south-central",
+    "us-west-central",
+    "us-west",
+    "us-west-2",
+    "us-west-3",
+    "uk-south",
+    "uk-west",
+    "uae-central",
+    "uae-north",
+    "switzerland-north",
+    "switzerland-west",
+    "sweden-central",
+    "sweden-south",
+    "qatar-central",
+    "norway-east",
+    "norway-west",
+    "korea-central",
+    "korea-south",
+    "japan-east",
+    "japan-west",
+    "india-central",
+    "india-west",
+    "india-south",
+    "germany-north",
+    "germany-west-central",
+    "france-central",
+    "france-south",
+    "europe-north",
+    "europe-west",
+    "canada-central",
+    "canada-east",
+    "brazil-south",
+    "brazil-southeast",
+    "usgov-arizona",
+    "usgov-texas",
+    "usgov-virginia",
+    "australia-central",
+    "australia-central-2",
+    "australia-east",
+    "australia-southeast",
+    "asia-east",
+    "asia-southeast",
+    "south-africa-north",
+    "south-africa-west"
+]
+
+
+def azure_prices2():
+    from random import randint
+    from time import sleep
+
+    specs_url = "https://azure.microsoft.com/api/v3/pricing/virtual-machines/page/details/{}/?showLowPriorityOffers=true"
+    prices_url = "https://azure.microsoft.com/api/v3/pricing/virtual-machines/page/{}/{}/?showLowPriorityOffers=true"
+
+    s = requests.Session()
+
+    for _os in oss:
+        url = specs_url.format(_os)
+        print('Fetching {}'.format(url))
+        response = s.get(url).json()
+
+        file = 'www/azure/{}.json'.format(_os)
+        print('Saving {}'.format(file))
+        with open(file, 'w') as f:
+            json.dump(response, f, indent=4)
+
+        sleep(randint(1,5))
+
+    for _os in oss:
+        for region in regions:
+            url = prices_url.format(_os, region)
+            print('Fetching {}'.format(url))
+            response = s.get(url).json()
+
+            file = 'www/azure/{}_{}.json'.format(region, _os)
+            print('Saving {}'.format(file))
+            with open(file, 'w') as f:
+                json.dump(response, f, indent=4)
+
+            # Be respectful
+            sleep(randint(1,5))
+
+
+class AzureInstance2(object):
+    def __init__(self, instance_type):
+        self.instance_type = instance_type
+        self.family = ""
+        self.category = ""
+        self.vcpus = 0.0
+        self.memory = 0.0
+        self.size = 0
+        self.prices = {}
+    
+    def to_dict(self):
+        return vars(self)
+
+
+def parse_instance2(i, info):
+    i.pretty_name = info["instanceName"]
+    i.family = info["series"]
+    i.category = info["category"]
+    i.vcpus = info["cores"]
+    i.memory = info["ram"]
+    try:
+        i.size = info["diskSize"]
+    except KeyError:
+        pass
+
+
+def azure_specs():
+    instances = {}
+
+    for _os in oss[0:1]:
+        specs_file = 'www/azure/{}.json'.format(_os)
+
+        with open(specs_file, 'r') as f:
+            instance_specs = json.load(f)
+            for k, info in instance_specs["attributesByOffer"].items():
+                instance_type = k.split('-')[1]
+                if instance_type not in instances:
+                    i = AzureInstance2(instance_type)
+                    parse_instance2(i, info)
+                    instances[instance_type] = i
+
+            print('Found {} instances'.format(len(instance_specs["attributesByOffer"].keys())))
+        
+        for region in regions:
+            file = 'www/azure/{}_{}.json'.format(_os, region)
+
+    data_file = 'www/azure2/instances.json'
+    os.makedirs(os.path.dirname(data_file), exist_ok=True)
+    with open(data_file, "w+") as f:
+        json.dump(
+            [i.to_dict() for i in instances.values()],
+            f,
+            indent=1,
+            sort_keys=True,
+            separators=(",", ": "),
+        )
+
+    # Azure pricing data structure for reference below: 
+    d= {}
+    d["basic"] = {
+        "perhour": "basic", # 0.032,
+        "perhourspot": "basic-spot" # 0.007731,
+        # "perhourhybridbenefit": 0.023,
+        # "perhourpaygoneyearsubscription": 0.05405,
+        # "perhourpaygthreeyearsubscription": 0.0437,
+        # "perhourspothybridbenefit": 0.003705
+    }
+
+    d["lowpriority"] = {
+        "perhour": "lowpriority", # 1.044,
+        # "perhourhybridbenefit": 0.375,
+        # "perhourpaygoneyearsubscription": 0.4371,
+        # "perhourpaygthreeyearsubscription": 0.4164
+    }
+
+    d["standard"] = {
+        "perhour": "ondemand", # 2.61,
+        "perhouroneyearreserved": "yrTerm1Standard.allUpfront", # 1.84159
+        "perhourthreeyearreserved": "yrTerm3Standard.allUpfront", # 1.44806,
+        "perunitoneyearsavings": "yrTerm1Savings.allUpfront", # 2.00432,
+        "perunitthreeyearsavings": "yrTerm3Savings.allUpfront", # 1.62371,
+        "perhourspot": "spot", # 0.427518,
+        "perhourhybridbenefit": "hybridbenefit", # 1.874,
+        "perhouroneyearreservedhybridbenefit": "yrTerm1Standard.hybridbenefit",# 1.10559,
+        "perhourthreeyearreservedhybridbenefit": "yrTerm3Standard.hybridbenefit", # 0.71206,
+        "perunitoneyearsavingshybridbenefit": "yrTerm3Savings.hybridbenefit", #1.26832,
+        "perunitthreeyearsavingshybridbenefit": "yrTerm3Savings.hybridbenefit", # 0.88771,
+        "perhourpaygoneyearsubscription": "yrTerm1Standard.subscription", #1.9361, 
+        "perhourpaygthreeyearsubscription": "yrTerm3Standard.subscription", # 1.9154,
+        # "perhouroneyearreservedoneyearsubscription": 1.11241,
+        # "perhouroneyearreservedthreeyearsubscription": 1.09171,
+        # "perhourthreeyearreservedoneyearsubscription": 0.73856,
+        # "perhourthreeyearreservedthreeyearsubscription": 0.71786,
+        # "perhourspothybridbenefit": 0.306961
+    }
+
+
 if __name__ == '__main__':
-    instances = azure_vm_specs()
-    azure_prices(instances)
+    # instances = azure_vm_specs()
+    # azure_prices(instances)
+    # azure_prices2()
+    azure_specs()
