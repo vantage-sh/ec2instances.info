@@ -278,6 +278,6 @@ if __name__ == "__main__":
     #         "www/opensearch/index.html",
     #     )
     # )
-    sitemap.extend(render_azure())
+    sitemap.extend(render_azure("www/azure/instances.json", "in/azure.html.mako", "www/azure/index.html", True))
     sitemap.append(about_page())
     build_sitemap(sitemap)

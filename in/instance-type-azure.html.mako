@@ -99,66 +99,15 @@
               <div class="col-6 pe-2 mb-2">
                 <select class="form-select form-select-sm" id="region">
                   <!-- TODO: Localize default option order -->
-                  <option value='eastus'>(US) East US</option>
-                  <option value='eastus2'>(US) East US 2</option>
-                  <option value='southcentralus'>(US) South Central US</option>
-                  <option value='westus2'>(US) West US 2</option>
-                  <option value='westus3'>(US) West US 3</option>
-                  <option value='australiaeast'>(Asia Pacific) Australia East</option>
-                  <option value='southeastasia'>(Asia Pacific) Southeast Asia</option>
-                  <option value='northeurope'>(Europe) North Europe</option>
-                  <option value='swedencentral'>(Europe) Sweden Central</option>
-                  <option value='uksouth'>(Europe) UK South</option>
-                  <option value='westeurope'>(Europe) West Europe</option>
-                  <option value='centralus'>(US) Central US</option>
-                  <option value='southafricanorth'>(Africa) South Africa North</option>
-                  <option value='centralindia'>(Asia Pacific) Central India</option>
-                  <option value='eastasia'>(Asia Pacific) East Asia</option>
-                  <option value='japaneast'>(Asia Pacific) Japan East</option>
-                  <option value='koreacentral'>(Asia Pacific) Korea Central</option>
-                  <option value='canadacentral'>(Canada) Canada Central</option>
-                  <option value='francecentral'>(Europe) France Central</option>
-                  <option value='germanywestcentral'>(Europe) Germany West Central</option>
-                  <option value='norwayeast'>(Europe) Norway East</option>
-                  <option value='switzerlandnorth'>(Europe) Switzerland North</option>
-                  <option value='uaenorth'>(Middle East) UAE North</option>
-                  <option value='brazilsouth'>(South America) Brazil South</option>
-                  <option value='eastus2euap'>(US) East US 2 EUAP</option>
-                  <option value='qatarcentral'>(Middle East) Qatar Central</option>
-                  <option value='centralusstage'>(US) Central US (Stage)</option>
-                  <option value='eastusstage'>(US) East US (Stage)</option>
-                  <option value='eastus2stage'>(US) East US 2 (Stage)</option>
-                  <option value='northcentralusstage'>(US) North Central US (Stage)</option>
-                  <option value='southcentralusstage'>(US) South Central US (Stage)</option>
-                  <option value='westusstage'>(US) West US (Stage)</option>
-                  <option value='westus2stage'>(US) West US 2 (Stage)</option>
+                  % for r in regions:
+                  <option value='${r[0]}'>${r[1]}</option>
+                  % endfor
                 </select>
               </div>
               <div class="col-6 mb-2">
                 <select class="form-select form-select-sm" id="os">
-                <!-- This is the 'not_linux_flag' used for dedicated hosts -->
-                % if defaults[4]:
-                  <option value="dedicated">Dedicated Host</option>
                   <option value="linux">Linux</option>
                   <option value="mswin">Windows</option>
-                  <option value="rhel">Red Hat</option>
-                  <option value="sles">SUSE</option>
-                % else:
-                  <option value="linux">Linux</option>
-                  <option value="mswin">Windows</option>
-                  <option value="rhel">Red Hat</option>
-                  <option value="sles">SUSE</option>
-                  <option value="dedicated">Dedicated Host</option>
-                % endif
-                  <option value="linuxSQL">Linux SQL Server</option>
-                  <option value="linuxSQLWeb">Linux SQL Server for Web</option>
-                  <option value="linuxSQLEnterprise">Linux SQL Enterprise</option>
-                  <option value="mswinSQL">Windows SQL Server</option>
-                  <option value="mswinSQLWeb">Windows SQL Web</option>
-                  <option value="mswinSQLEnterprise">Windows SQL Enterprise</option>
-                  <option value="rhelSQL">Red Hat SQL Server</option>
-                  <option value="rhelSQLWeb">Red Hat SQL Web</option>
-                  <option value="rhelSQLEnterprise">Red Hat SQL Enterprise</option>
                 </select>
               </div>
               <div class="col-6 pe-2">
@@ -174,12 +123,12 @@
               </div>
               <div class="col-6">
                 <select class="form-select form-select-sm" id="term">
-                  <option value="Standard.noUpfront">No Upfront</option>
-                  <option value="Standard.partialUpfront">Partial Upfront</option>
-                  <option value="Standard.allUpfront">All Upfront</option>
-                  <option value="Convertible.noUpfront">No Upfront (Convertible)</option>
-                  <option value="Convertible.partialUpfront">Partial Upfront (Convertible)</option>
-                  <option value="Convertible.allUpfront">All Upfront (Convertible)</option>
+                  <option value="Standard.allUpfront">Reservation</option>
+                  <option value="Standard.hybridbenefit">Reservation (Hybrid Benefit)</option>
+                  <option value="Standard.subscription">Subscription</option>
+                  <option value="Savings.allUpfront">Savings Plan</option>
+                  <option value="Savings.hybridbenefit">Savings Plan (Hybrid Benefit)</option>
+                  <option value="Savings.subscription">Savings Plan with Subscription<option>
                 </select>
               </div>
             </div>
@@ -205,7 +154,7 @@
                       <td>${f["name"]}</td>
                     % else:
                     <tr>
-                      <td><a href="/aws/ec2/${f["name"]}">${f["name"]}</a></td>
+                      <td><a href="/azure/vm/${f["name"]}">${f["name"]}</a></td>
                     % endif
                     <td class="text-center">${f["cpus"]}</td>
                     <td class="text-center">${f["memory"]}</td>
@@ -235,7 +184,7 @@
                         <td>${v[0]}</td>
                     % else:
                       <tr>
-                        <td><a href="/aws/ec2/${v[1]}">${v[0]}</a></td>
+                        <td><a href="/azure/vm/${v[1]}">${v[0]}</a></td>
                     % endif
                     </tr>
                   % endfor
@@ -413,7 +362,7 @@
         'hour': 1,
         'day': 24,
         'week': 7 * 24,
-        'month': 730,   // use AWS convention of 730 hrs/month
+        'month': 730,   // use convention of 730 hrs/month
         'year': 8760
       };
 

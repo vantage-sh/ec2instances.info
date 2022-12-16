@@ -17,7 +17,9 @@ from rds import scrape as rds_scrape
 from cache import scrape as cache_scrape
 from redshift import scrape as redshift_scrape
 from opensearch import scrape as opensearch_scrape
+from azurevms import scrape as azure_scrape
 from render import render
+from render_azure import render_azure
 from render import build_sitemap
 from render import about_page
 from scrape import scrape
@@ -43,6 +45,7 @@ HTTP_PORT = os.getenv("HTTP_PORT", "8080")
 @task
 def build(c):
     """Scrape AWS sources for data and build the site"""
+    scrape_azure(c)
     scrape_ec2(c)
     scrape_rds(c)
     scrape_cache(c)
@@ -103,6 +106,15 @@ def scrape_opensearch(c):
         print(traceback.print_exc())
 
 
+def scrape_azure(c):
+    """Scrape Azure VM data from Microsoft and save to local file"""
+    azure_file = "www/azure/instances.json"
+    try:
+        azure_scrape(azure_file)
+    except Exception as e:
+        print("ERROR: Unable to scrape Azure data")
+        print(traceback.print_exc())
+
 @task
 def serve(c):
     class MyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
@@ -127,6 +139,7 @@ def serve(c):
 def render_html(c):
     """Render HTML but do not update data from Amazon"""
     sitemap = []
+    sitemap.extend(render_azure("www/azure/instances.json", "in/azure.html.mako", "www/azure/index.html"))
     sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
     sitemap.extend(
         render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")

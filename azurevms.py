@@ -4,8 +4,6 @@ import json
 import scrape
 import os
 import yaml
-from azure.identity import DefaultAzureCredential
-from azure.mgmt.compute import ComputeManagementClient
 
 
 class AzureInstance(object):
@@ -228,6 +226,8 @@ def parse_specs(i, cap):
 
     
 def azure_vm_specs():
+    from azure.identity import DefaultAzureCredential
+    from azure.mgmt.compute import ComputeManagementClient
     credential = DefaultAzureCredential()
 
     # Retrieve subscription ID from environment variable.
@@ -324,8 +324,7 @@ def azure_prices2():
         with open(file, 'w') as f:
             json.dump(response, f, indent=4)
 
-        sleep(randint(1,5))
-
+        sleep(randint(1,3))
 
     for _os in oss:
         for region in load_regions():
@@ -339,7 +338,7 @@ def azure_prices2():
                 json.dump(response, f, indent=4)
 
             # Be respectful
-            sleep(randint(1,5))
+            sleep(randint(1,3))
 
 
 class AzureInstance2(object):
@@ -499,9 +498,14 @@ def add_pricing2(instances):
                                 # print("{} {} standard not found in {} pricing file".format(k, k2, region))
                                 pass
 
-    data_file = 'www/azure/instances.json'
-    os.makedirs(os.path.dirname(data_file), exist_ok=True)
-    with open(data_file, "w+") as f:
+
+def scrape(output_file, input_file=None):
+    azure_prices2()
+    instances = azure_specs()
+    add_pricing2(instances)
+
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    with open(output_file, "w+") as f:
         json.dump(
             [i.to_dict() for i in instances.values()],
             f,
@@ -510,8 +514,7 @@ def add_pricing2(instances):
             separators=(",", ": "),
         )
 
-
 if __name__ == '__main__':
-    # azure_prices2()
-    instances = azure_specs()
-    add_pricing2(instances)
+    output_file = 'www/azure/instances.json'
+    scrape(output_file)
+    scrape()

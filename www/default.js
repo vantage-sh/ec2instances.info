@@ -9,9 +9,11 @@ var g_settings_defaults = {
   cost_duration: 'hourly',
   region: 'us-east-1',
   reserved_term: 'yrTerm1Standard.noUpfront',
+  savings_plan_term: 'yrTerm1Savings.allUpfront',
   min_memory: 0,
   min_vcpus: 0,
   min_memory_per_vcpu: 0,
+  default_sort_col: 7,
   min_storage: 0,
   selected: '',
   compare_on: false,
@@ -229,7 +231,7 @@ function init_data_table() {
       },
     ],
     // default sort by linux cost
-    aaSorting: [[6, 'asc']],
+    aaSorting: [[g_settings_defaults.default_sort_col, 'asc']],
 
     initComplete: function () {
       // fire event in separate context so that calls to get_data_table()
@@ -266,6 +268,7 @@ $(document).ready(function () {
   if (urlpath === '/azure/') {
     g_settings_defaults.region = 'us-east';
     g_settings_defaults.reserved_term = 'yrTerm1Standard.allUpfront';
+    g_settings_defaults.default_sort_col = 7;
   }
 
   init_data_table();
@@ -340,10 +343,6 @@ function change_cost() {
     if (pricing_unit != 'instance') {
       pricing_unit_modifier = elem.data(pricing_unit);
     }
-    if (g_settings.reserved_term.includes('Savings')) {
-      // Account for Savings Plan pricing
-      return;
-    }
     per_time = get_pricing(
       elem.closest('tr').attr('id'),
       g_settings.region,
@@ -366,9 +365,6 @@ function change_cost() {
 
   $.each($('td.cost-savings-plan'), function (i, elem) {
     elem = $(elem);
-    if (!g_settings.reserved_term.includes('Savings')) {
-      return;
-    }
     if (pricing_unit != 'instance') {
       pricing_unit_modifier = elem.data(pricing_unit);
     }
@@ -377,7 +373,7 @@ function change_cost() {
       g_settings.region,
       elem.data('platform'),
       'reserved',
-      g_settings.reserved_term,
+      g_settings.savings_plan_term,
     );
     if (
       per_time &&
@@ -534,7 +530,12 @@ function change_region(region, called_on_init) {
 }
 
 function change_reserved_term(term) {
-  g_settings.reserved_term = term;
+  if (term.includes('Savings')) {
+    // Account for Savings Plan pricing
+    g_settings.savings_plan_term = term;
+  } else {
+    g_settings.reserved_term = term;
+  }
   var $dropdown = $('#reserved-term-dropdown'),
     $activeLink = $dropdown.find('li a[data-reserved-term="' + term + '"]'),
     term_name = $activeLink.text();
@@ -749,6 +750,7 @@ function on_data_table_initialized() {
 
   var will_redraw_costs = change_region(g_settings.region, true);
   change_reserved_term(g_settings.reserved_term);
+  change_reserved_term(g_settings.savings_plan_term);
   change_cost_duration(g_settings.cost_duration);
   change_pricing_unit(g_settings.pricing_unit);
 

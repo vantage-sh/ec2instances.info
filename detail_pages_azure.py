@@ -23,11 +23,11 @@ def initial_prices(i):
         for os in ["linux", "dedicated"]:
             try:
                 if "yr" in pricing_type:
-                    init_p[pricing_type] = i["Pricing"]["eastus"][os][pricing_type][
+                    init_p[pricing_type] = i["Pricing"]["us-east"][os][pricing_type][
                         "Standard.noUpfront"
                     ]
                 else:
-                    init_p[pricing_type] = i["Pricing"]["eastus"][os][pricing_type]
+                    init_p[pricing_type] = i["Pricing"]["us-east"][os][pricing_type]
                 break
             except:
                 init_p[pricing_type] = "'N/A'"
@@ -51,57 +51,38 @@ def description(id, defaults):
     family_category = id["Azure"][2]["value"].lower()
     cpus = id["Compute"][0]["value"]
     memory = id["Compute"][1]["value"]
-    bandwidth = id["Networking"][0]["value"]
 
-    # Some instances say "Low to moderate" for bandwidth, ignore them
-    try:
-        bandwidth = " and {} Gibps of bandwidth".format(
-            int(id["Networking"][0]["value"])
-        )
-    except:
-        bandwidth = ""
-
-    return "The {} instance is in the {} family with {} vCPUs, {} GiB of memory{} starting at ${} per hour.".format(
-        name, family_category, cpus, memory, bandwidth, defaults[0]
+    return "The {} instance is in the {} family with {} vCPUs, {} GiB of memory starting at ${} per hour.".format(
+        name, family_category, cpus, memory, defaults[0]
     )
 
 
-ec2_os = {
+azure_os = {
     "linux": "Linux",
-    "mswin": "Windows",
+    "windows": "Windows",
     "rhel": "Red Hat",
     "sles": "SUSE",
-    "dedicated": "Dedicated Host",
-    "linuxSQL": "Linux SQL Server",
-    "linuxSQLWeb": "Linux SQL Server for Web",
-    "linuxSQLEnterprise": "Linux SQL Enterprise",
-    "mswinSQL": "Windows SQL Server",
-    "mswinSQLWeb": "Windows SQL Web",
-    "mswinSQLEnterprise": "Windows SQL Enterprise",
-    "rhelSQL": "Red Hat SQL Server",
-    "rhelSQLWeb": "Red Hat SQL Web",
-    "rhelSQLEnterprise": "Red Hat SQL Enterprise",
 }
 
 
 def unavailable_instances(itype, instance_details):
-    data_file = "meta/regions_aws.yaml"
+    data_file = "meta/regions_azure2.yaml"
 
     denylist = []
     with open(data_file, "r") as f:
-        aws_regions = yaml.safe_load(f)
+        azure_regions = yaml.safe_load(f)
         instance_regions = instance_details["Pricing"].keys()
 
         # If there is no price for a region and os, then it is unavailable
-        for r in aws_regions:
+        for r in azure_regions:
             if r not in instance_regions:
                 # print("Found that {} is not available in {}".format(itype, r))
-                denylist.append([aws_regions[r], r, "All", "*"])
+                denylist.append([azure_regions[r], r, "All", "*"])
             else:
                 instance_regions_oss = instance_details["Pricing"][r].keys()
-                for os in ec2_os.keys():
+                for os in azure_os.keys():
                     if os not in instance_regions_oss:
-                        denylist.append([aws_regions[r], r, ec2_os[os], os])
+                        denylist.append([azure_regions[r], r, azure_os[os], os])
                         # print("Found that {} is not available in {} as {}".format(itype, r, os))
     return denylist
 
@@ -205,22 +186,6 @@ def prices(pricing):
     return display_prices
 
 
-def storage(sattrs, imap):
-    if not sattrs:
-        return []
-    storage_details = []
-    for s, v in sattrs.items():
-        try:
-            # This is one row on a detail page
-            display = imap[s]
-            display["value"] = v
-            storage_details.append(format_attribute(display))
-        except KeyError:
-            # We chose not to represent this storage attribute
-            continue
-    return storage_details
-
-
 def load_service_attributes():
     # This CSV file contains nicely formatted names, styling hints,
     # and order of display for instance attributes
@@ -311,7 +276,7 @@ def map_vm_attributes(i, imap):
                 instance_details[display["category"]].append(format_attribute(display))
         except KeyError:
             print(
-                "An instances.json attribute {} does not appear in meta/service_attributes_cache.csv and cannot be formatted".format(
+                "An instances.json attribute {} does not appear in meta/service_attributes_azure.csv and cannot be formatted".format(
                    j 
                 )
             )
@@ -322,7 +287,7 @@ def map_vm_attributes(i, imap):
     return instance_details
 
 
-def build_detail_pages_azure(instances, destination_file):
+def build_detail_pages_azure(instances, regions):
     subdir = os.path.join("www", "azure", "vm")
 
     ifam, fam_lookup, variants = assemble_the_families(instances)
@@ -345,7 +310,6 @@ def build_detail_pages_azure(instances, destination_file):
         instance_page = os.path.join(subdir, instance_type + ".html")
         instance_details = map_vm_attributes(i, imap)
         instance_details["Pricing"] = prices(i["pricing"])
-        instance_details["Storage"].extend(storage(i["storage"], imap))
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
         denylist = unavailable_instances(instance_type, instance_details)
@@ -363,6 +327,7 @@ def build_detail_pages_azure(instances, destination_file):
                         unavailable=denylist,
                         defaults=defaults,
                         variants=variants[instance_type[0:2]],
+                        regions=regions,
                     )
                 )
                 sitemap.append(instance_page)

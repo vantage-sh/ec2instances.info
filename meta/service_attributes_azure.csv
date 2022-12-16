@@ -3,9 +3,10 @@ generation,Generation,Azure,1,value,,current
 instance_type,Instance Type,Azure,2,,,c5d.2xlarge
 family,Family,Azure,3,,,Compute optimized
 pretty_name,Name,Azure,4,,,C5 High-CPU Double Extra Large
-emr,"Elastic Map Reduce <a href=""https://handbook.vantage.sh/aws/services/emr-pricing/"">(EMR)</a>",Azure,5,value,,TRUE
+category,Category,Azure,5,,,Compute optimized
+emr,"Elastic Map Reduce <a href=""https://handbook.vantage.sh/aws/services/emr-pricing/"">(EMR)</a>",Not Shown,5,value,,TRUE
 ACU,"Elastic Compute Units <a href=""https://handbook.vantage.sh/aws/concepts/elastic-compute-units/"">(ECU)</a>",Not Shown,6,,,39
-vCPU,vCPUs,Compute,1,,,8
+vcpu,vCPUs,Compute,1,,,8
 memory,Memory (GiB),Compute,2,,[+-]?([0-9]*[.])?[0-9]+,16
 memory_per_vcpu,Memory per vCPU (GiB),Compute,3,,[+-]?([0-9]*[.])?[0-9]+,2
 physical_processor,Physical Processor,Compute,4,,,Intel Xeon Platinum 8124M

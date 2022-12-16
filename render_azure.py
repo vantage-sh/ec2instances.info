@@ -151,7 +151,7 @@ def render_azure(data_file, template_file, destination_file, detail_pages=True):
     sitemap = []
     if detail_pages:
         if data_file == "www/azure/instances.json":
-            sitemap.extend(build_detail_pages_azure(instances, destination_file))
+            sitemap.extend(build_detail_pages_azure(instances, regions))
 
     print("Rendering to %s..." % destination_file)
     os.makedirs(os.path.dirname(destination_file), exist_ok=True)
@@ -174,4 +174,4 @@ def render_azure(data_file, template_file, destination_file, detail_pages=True):
 
 
 if __name__ == "__main__":
-    render_azure("www/azure/instances.json", "in/azure.html.mako", "www/azure/index.html", False)
+    render_azure("www/azure/instances.json", "in/azure.html.mako", "www/azure/index.html", True)
