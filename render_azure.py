@@ -13,12 +13,6 @@ from detail_pages_azure import build_detail_pages_azure
 
 def add_cpu_detail(i):
     try:
-        i["ACU_per_vcpu"] = i["ACU"] / i["vcpu"]
-    except:
-        # these will be instances with variable/burstable ECU
-        i["ACU_per_vcpu"] = "unknown"
-
-    try:
         if "vcpu" in i:
             i["memory_per_vcpu"] = round(float(i["memory"]) / float(i["vcpu"]), 2)
     except:
@@ -78,12 +72,19 @@ def remove_prefix(instances):
         i['instance_type'] = i['instance_type'].replace('Standard_', '').replace('_', '-')
 
 
+def load_regions(region_list):
+    with open(region_list, "r") as f:
+        aws_regions = yaml.safe_load(f)
+
+    return [[r, aws_regions[r]] for r in aws_regions]
+    
+
 def per_region_pricing(instances, data_file):
     # This function splits instances.json into per-region files which are written to
     # disk and then can be loaded by the web app to reduce the amount of data that
     # needs to be sent to the client.
 
-    region_list = "meta/regions_azure.yaml"
+    region_list = "meta/regions_azure2.yaml"
     with open(region_list, "r") as f:
         aws_regions = yaml.safe_load(f)
 
@@ -119,7 +120,7 @@ def per_region_pricing(instances, data_file):
         pricing_json = compress_pricing(per_region_out)
         instance_azs_json = compress_instance_azs(per_region_out)
 
-        if r == "eastus":
+        if r == "us-east":
             init_pricing_json = pricing_json
             init_instance_azs_json = instance_azs_json
 
@@ -138,14 +139,13 @@ def render_azure(data_file, template_file, destination_file, detail_pages=True):
     with open(data_file, "r") as f:
         instances = json.load(f)
     
-    remove_prefix(instances)
-
     print("Loading data from %s..." % data_file)
     for i in instances:
         add_render_info(i)
 
     generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     pricing_json, instance_azs_json = per_region_pricing(instances, data_file)
+    regions = load_regions("meta/regions_azure2.yaml")
 
     sitemap = []
     if detail_pages:
@@ -159,6 +159,7 @@ def render_azure(data_file, template_file, destination_file, detail_pages=True):
             fh.write(
                 template.render(
                     instances=instances,
+                    regions=regions,
                     pricing_json=pricing_json,
                     generated_at=generated_at,
                     instance_azs_json=instance_azs_json,
@@ -172,4 +173,4 @@ def render_azure(data_file, template_file, destination_file, detail_pages=True):
 
 
 if __name__ == "__main__":
-    render_azure("www/azure/instances.json", "in/azure.html.mako", "www/azure/index.html", True)
+    render_azure("www/azure/instances.json", "in/azure.html.mako", "www/azure/index.html", False)

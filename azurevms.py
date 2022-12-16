@@ -3,6 +3,7 @@ import requests
 import json
 import scrape
 import os
+import yaml
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.compute import ComputeManagementClient
 
@@ -296,56 +297,12 @@ oss = [
     "sles-basic",
 ]
 
-regions = [
-    "us-east",
-    "us-east-2",
-    "us-central",
-    "us-north-central",
-    "us-south-central",
-    "us-west-central",
-    "us-west",
-    "us-west-2",
-    "us-west-3",
-    "uk-south",
-    "uk-west",
-    "uae-central",
-    "uae-north",
-    "switzerland-north",
-    "switzerland-west",
-    "sweden-central",
-    "sweden-south",
-    "qatar-central",
-    "norway-east",
-    "norway-west",
-    "korea-central",
-    "korea-south",
-    "japan-east",
-    "japan-west",
-    "india-central",
-    "india-west",
-    "india-south",
-    "germany-north",
-    "germany-west-central",
-    "france-central",
-    "france-south",
-    "europe-north",
-    "europe-west",
-    "canada-central",
-    "canada-east",
-    "brazil-south",
-    "brazil-southeast",
-    "usgov-arizona",
-    "usgov-texas",
-    "usgov-virginia",
-    "australia-central",
-    "australia-central-2",
-    "australia-east",
-    "australia-southeast",
-    "asia-east",
-    "asia-southeast",
-    "south-africa-north",
-    "south-africa-west"
-]
+
+def load_regions(region_list="meta/regions_azure2.yaml"):
+    with open(region_list, "r") as f:
+        aws_regions = yaml.safe_load(f)
+
+    return [r for r in aws_regions]
 
 
 def azure_prices2():
@@ -369,8 +326,9 @@ def azure_prices2():
 
         sleep(randint(1,5))
 
+
     for _os in oss:
-        for region in regions:
+        for region in load_regions():
             url = prices_url.format(_os, region)
             print('Fetching {}'.format(url))
             response = s.get(url).json()
@@ -389,10 +347,12 @@ class AzureInstance2(object):
         self.instance_type = instance_type
         self.family = ""
         self.category = ""
-        self.vcpus = 0.0
+        self.vcpu = 0.0
         self.memory = 0.0
         self.size = 0
         self.pricing = {}
+        self.availability_zones = {}
+        self.GPU = ""
     
     def to_dict(self):
         return vars(self)
@@ -402,7 +362,7 @@ def parse_instance2(i, info):
     i.pretty_name = info["instanceName"]
     i.family = info["series"]
     i.category = info["category"]
-    i.vcpus = info["cores"]
+    i.vcpu = info["cores"]
     i.memory = info["ram"]
     try:
         i.size = info["diskSize"]
@@ -433,6 +393,7 @@ def azure_specs():
             print('Found {} {} instances'.format(len(instance_specs["attributesByOffer"].keys()), _os))
 
     return instances
+
 
 def add_pricing2(instances):
     d= {}
@@ -474,7 +435,7 @@ def add_pricing2(instances):
     }
 
     for _os in oss[0:2]:
-        for region in regions:
+        for region in load_regions():
             file = 'www/azure/{}_{}.json'.format(region, _os)
 
             with open(file, 'r') as f:
@@ -538,7 +499,7 @@ def add_pricing2(instances):
                                 # print("{} {} standard not found in {} pricing file".format(k, k2, region))
                                 pass
 
-    data_file = 'www/azure2/instances.json'
+    data_file = 'www/azure/instances.json'
     os.makedirs(os.path.dirname(data_file), exist_ok=True)
     with open(data_file, "w+") as f:
         json.dump(
@@ -548,15 +509,9 @@ def add_pricing2(instances):
             sort_keys=True,
             separators=(",", ": "),
         )
-    
-    
-
-
 
 
 if __name__ == '__main__':
-    # instances = azure_vm_specs()
-    # azure_prices(instances)
     # azure_prices2()
     instances = azure_specs()
     add_pricing2(instances)

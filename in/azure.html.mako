@@ -22,39 +22,9 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a class="dropdown-item" href="javascript:;" data-region='eastus'>(US) East US</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='eastus2'>(US) East US 2</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='southcentralus'>(US) South Central US</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='westus2'>(US) West US 2</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='westus3'>(US) West US 3</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='australiaeast'>(Asia Pacific) Australia East</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='southeastasia'>(Asia Pacific) Southeast Asia
-            <li><a class="dropdown-item" href="javascript:;" data-region='northeurope'>(Europe) North Europe</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='swedencentral'>(Europe) Sweden Central</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='uksouth'>(Europe) UK South</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='westeurope'>(Europe) West Europe</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='centralus'>(US) Central US</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='southafricanorth'>(Africa) South Africa North</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='centralindia'>(Asia Pacific) Central India</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='eastasia'>(Asia Pacific) East Asia</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='japaneast'>(Asia Pacific) Japan East</a><li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='koreacentral'>(Asia Pacific) Korea Central</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='canadacentral'>(Canada) Canada Central</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='francecentral'>(Europe) France Central</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='germanywestcentral'>(Europe) Germany West Central</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='norwayeast'>(Europe) Norway East</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='switzerlandnorth'>(Europe) Switzerland North</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='uaenorth'>(Middle East) UAE North</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='brazilsouth'>(South America) Brazil South</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='eastus2euap'>(US) East US 2 EUAP</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='qatarcentral'>(Middle East) Qatar Central</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='centralusstage'>(US) Central US (Stage)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='eastusstage'>(US) East US (Stage)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='eastus2stage'>(US) East US 2 (Stage)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='northcentralusstage'>(US) North Central US (Stage)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='southcentralusstage'>(US) South Central US (Stage)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='westusstage'>(US) West US (Stage)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='westus2stage'>(US) West US 2 (Stage)</a></li>
+          % for r in regions:
+            <li><a class="dropdown-item" href="javascript:;" data-region='${r[0]}'>${r[1]}</a></li>
+          % endfor
           </ul>
         </div>
 
@@ -153,27 +123,12 @@
           <th class="name">Name</th>
           <th class="apiname">API Name</th>
           <th class="memory">Instance Memory</th>
-          <th class="computeunits">
-            <abbr title="One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.">Compute Units (ACU)</abbr>
-          </th>
-          <th class="vcpus">
+          <th class="vcpu">
             <abbr title="Each virtual CPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">vCPUs</abbr>
           </th>
           <th class="memory-per-vcpu">GiB of Memory per vCPU</th>
           <th class="gpus">GPUs</th>
-          <th class="gpu_model">GPU model</th>
-          <th class="gpu_memory">GPU memory</th>
-          <th class="compute_capability">CUDA Compute Capability</th>
-          <th class="fpgas">FPGAs</th>
-          <th class="ecu-per-vcpu">ACU per vCPU</th>
-          <th class="physical_processor">Physical Processor</th>
-          <th class="clock_speed_ghz">Clock Speed(GHz)</th>
           <th class="storage">Instance Storage</th>
-          <th class="architecture">Arch</th>
-          <th class="azs">
-            <abbr title="The AZ IDs where these instances are available, which is a unique and consistent identifier for an Availability Zone across Azure accounts.">Availability Zones</abbr>
-          </th>
-
           <th class="cost-ondemand cost-ondemand-linux">Linux On Demand cost</th>
           <th class="cost-reserved cost-reserved-linux">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux Reserved cost</abbr>
@@ -195,12 +150,9 @@
             <td class="name">${inst['pretty_name']}</td>
             <td class="apiname"><a href="/azure/vm/${inst['instance_type']}">${inst['instance_type']}</a></td>
             <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
-            <td class="computeunits">
-              <span sort="${inst['ACU']}">${"%s" % (inst['ACU'],)} units</span>
-            </td>
-            <td class="vcpus">
-              <span sort="${inst['vcpus_available']}">
-                ${inst['vcpus_available']} vCPUs
+            <td class="vcpu">
+              <span sort="${inst['vcpu']}">
+                ${inst['vcpu']} vCPUs
               </span>
             </td>
             <td class="memory-per-vcpu">
@@ -215,62 +167,30 @@
                 ${inst['GPU']}
               </span>
             </td>
-            <td class="gpu_model">${inst['GPU_model']}</td>
-            <td class="gpu_memory">
-              <span sort="${inst['GPU_memory']}">
-                ${inst['GPU_memory']} GiB
-              </span>
-            </td>
-            <td class="compute_capability">${inst['compute_capability']}</td>
-            <td class="fpga">${inst['FPGA']}</td>
-            <td class="acu-per-vcpu">
-              % if inst['ACU_per_vcpu'] == 'unknown':
-              <span sort="0">unknown</span>
-              % else:
-              <span sort="${inst['ACU_per_vcpu']}">${"%.4g" % inst['ACU_per_vcpu']} units</span>
-              % endif
-            </td>
-            <td class="physical_processor">${inst['physical_processor'] or 'unknown'}</td>
-            <td class="clock_speed_ghz">${inst['clock_speed_ghz'] or 'unknown'}</td>
             <td class="storage">
-              <% storage = inst['storage'] %>
-              % if not storage:
-              <span sort="0">EBS only</span>
-              % else:
-              <span sort="${storage['size']}">
-                ${storage['size']}
+              <span sort="${inst['size']}">
+                ${inst['size']}
               </span>
-              % endif
-            </td>
-            <td class="architecture">
-              % if 'i386' in inst['arch']:
-              32/64-bit
-              % else:
-              64-bit
-              % endif
-            </td>
-            <td class="azs">
-              ${', '.join(inst.get('availability_zones', {}).get('eastus', []))}
             </td>
             
             % for platform in ['linux', 'windows',]:
               ## note that the contents in these cost cells are overwritten by the JS change_cost() func, but the initial
               ## data here is used for sorting (and anyone with JS disabled...)
               ## for more info, see https://github.com/powdahound/ec2instances.info/issues/140
-              <td class="cost-ondemand cost-ondemand-${platform}" data-platform="${platform}" data-vcpu="${inst['vcpu']}" data-ecu="${inst['ACU']}" data-memory="${inst['memory']}">
-                % if inst['pricing'].get('eastus', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
-                  <span sort="${inst['pricing']['eastus'][platform]['ondemand']}">
-                    $${"{:.4f}".format(float(inst['pricing']['eastus'][platform]['ondemand']))} hourly
+              <td class="cost-ondemand cost-ondemand-${platform}" data-platform="${platform}" data-vcpu="${inst['vcpu']}" data-memory="${inst['memory']}">
+                % if inst['pricing'].get('us-east', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
+                  <span sort="${inst['pricing']['us-east'][platform]['ondemand']}">
+                    $${"{:.4f}".format(float(inst['pricing']['us-east'][platform]['ondemand']))} hourly
                   </span>
                 % else:
                   <span sort="999999">unavailable</span>
                 % endif
               </td>
 
-              <td class="cost-reserved cost-reserved-${platform}" data-platform="${platform}" data-vcpu="${inst['vcpu']}" data-ecu="${inst['ACU']}" data-memory="${inst['memory']}">
-                % if inst['pricing'].get('eastus', {}).get(platform, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['eastus'][platform]['reserved'].get('yrTerm1Standard.allUpfront', 'N/A') != "N/A":
-                  <span sort="${inst['pricing']['eastus'][platform]['reserved']['yrTerm1Standard.allUpfront']}">
-                    $${"{:.4f}".format(float(inst['pricing']['eastus'][platform]['reserved']['yrTerm1Standard.allUpfront']))} hourly
+              <td class="cost-reserved cost-reserved-${platform}" data-platform="${platform}" data-vcpu="${inst['vcpu']}" data-memory="${inst['memory']}">
+                % if inst['pricing'].get('us-east', {}).get(platform, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['us-east'][platform]['reserved'].get('yrTerm1Standard.allUpfront', 'N/A') != "N/A":
+                  <span sort="${inst['pricing']['us-east'][platform]['reserved']['yrTerm1Standard.allUpfront']}">
+                    $${"{:.4f}".format(float(inst['pricing']['us-east'][platform]['reserved']['yrTerm1Standard.allUpfront']))} hourly
                   </span>
                 % else:
                   <span sort="999999">unavailable</span>
@@ -278,10 +198,10 @@
               </td>
 
               % if platform in ['linux', 'windows']:
-                <td class="cost-spot-min cost-spot-min-${platform}" data-platform="${platform}" data-vcpu="${inst['vcpu']}" data-ecu="${inst['ACU']}" data-memory="${inst['memory']}">
-                  % if inst['pricing'].get('eastus', {}).get(platform, {}).get('spot', 'N/A') != 'N/A':
+                <td class="cost-spot-min cost-spot-min-${platform}" data-platform="${platform}" data-vcpu="${inst['vcpu']}" data-memory="${inst['memory']}">
+                  % if inst['pricing'].get('us-east', {}).get(platform, {}).get('spot', 'N/A') != 'N/A':
                     <%
-                        spot = inst['pricing']['eastus'][platform]['spot']
+                        spot = inst['pricing']['us-east'][platform]['spot']
                     %>
                     <span sort="${spot}">
                       $${"{:.4f}".format(float(spot))} hourly
