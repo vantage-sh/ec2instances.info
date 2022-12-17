@@ -293,8 +293,8 @@ def azure_prices(instances):
 oss = [
     "linux",
     "windows",
-    "red-hat",
-    "sles-basic",
+    # "red-hat",
+    # "sles-basic",
 ]
 
 
