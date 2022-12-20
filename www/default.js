@@ -118,6 +118,13 @@ function init_data_table() {
       if (g_data_table.column(i).search() !== this.value) {
         g_data_table.column(i).search(this.value).draw();
       }
+
+      // console.log('filter keydown');
+      // console.log(g_settings.selected);
+      // var other_selections = g_settings.selected.split(',');
+      // other_selections.forEach(function(s) {
+      //   $('#' + s).show();
+      // });
     });
   });
   g_data_table = $('#data').DataTable({
@@ -600,6 +607,12 @@ function url_for_selections() {
     compare_on: g_settings.compare_on,
   };
 
+  if (g_settings.selected !== "") {
+    params.selected = g_settings.selected.split(',')
+  } else {
+    params.selected = []
+  }
+
   // avoid storing empty or default values in URL
   for (var key in params) {
     if (params[key] === '' || params[key] == null || params[key] === g_settings_defaults[key]) {
@@ -608,25 +621,41 @@ function url_for_selections() {
   }
 
   // selected rows
+  // TODO: this will not pick up rows that are not visible in the table, e.g. if a filter is applied
   var selected_row_ids = $('#data tbody tr.highlight')
     .map(function () {
       return this.id;
     })
     .get();
+  console.log(selected_row_ids);
   if (selected_row_ids.length > 0) {
-    params.selected = selected_row_ids;
+    console.log(params.selected);
+    for (var s in selected_row_ids) {
+      console.log(selected_row_ids[s]);
+      if(!params.selected.includes(selected_row_ids[s])) {
+        params.selected.push(selected_row_ids[s]);
+      }
+    }
+    // params.selected = selected_row_ids;
   }
+  // console.log(params.selected)
 
   var url = location.origin + location.pathname;
   var parameters = [];
   for (var setting in params) {
     if (params[setting] !== undefined) {
+      if (setting === 'selected' && params[setting].length == 0) {
+        continue;
+      }
       parameters.push(setting + '=' + params[setting]);
     }
   }
+  // Turns the selected (highlighted) rows into a comma separated list in the URL
   if (parameters.length > 0) {
     url = url + '?' + parameters.join('&');
   }
+  g_settings.selected = params.selected.join();
+  console.log(url);
   return url;
 }
 
@@ -846,6 +875,8 @@ function configure_highlighting() {
     }
 
     $(this).toggleClass('highlight');
+
+    console.log($(this).attr('id'));
 
     update_compare_button();
     maybe_update_url();
