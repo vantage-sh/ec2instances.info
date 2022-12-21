@@ -12,10 +12,6 @@ import re
 
 
 def initial_prices(i):
-    # For EC2, basically everything has a price for linux, on-demand in us-east-1
-    # so default to that. Certain instances (mac2) are only available as dedicated hosts so
-    # fall back to that if no linux option. Reserved options are all over the place
-    # so try/catch for anything and set to n/a
     not_linux_flag = False
 
     init_p = {"ondemand": 0, "spot": 0, "_1yr": 0, "_3yr": 0}
@@ -24,7 +20,7 @@ def initial_prices(i):
             try:
                 if "yr" in pricing_type:
                     init_p[pricing_type] = i["Pricing"]["us-east"][os][pricing_type][
-                        "Standard.noUpfront"
+                        "Standard.allUpfront"
                     ]
                 else:
                     init_p[pricing_type] = i["Pricing"]["us-east"][os][pricing_type]
@@ -78,7 +74,7 @@ def unavailable_instances(itype, instance_details):
             if r not in instance_regions:
                 # print("Found that {} is not available in {}".format(itype, r))
                 denylist.append([azure_regions[r], r, "All", "*"])
-            else:
+            else :
                 instance_regions_oss = instance_details["Pricing"][r].keys()
                 for os in azure_os.keys():
                     if os not in instance_regions_oss:
@@ -147,7 +143,7 @@ def prices(pricing):
                 display_prices[region][os]["ondemand"] = "'N/A'"
 
             try:
-                display_prices[region][os]["spot"] = _p["spot_max"]
+                display_prices[region][os]["spot"] = _p["spot_min"]
             except KeyError:
                 display_prices[region][os]["spot"] = "'N/A'"
 

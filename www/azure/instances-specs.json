@@ -17,7 +17,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Basic_A0",
+  "pretty_name_azure": "Basic A0",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -53,7 +53,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Basic_A1",
+  "pretty_name_azure": "Basic A1",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -89,7 +89,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Basic_A2",
+  "pretty_name_azure": "Basic A2",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -125,7 +125,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Basic_A3",
+  "pretty_name_azure": "Basic A3",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -161,7 +161,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Basic_A4",
+  "pretty_name_azure": "Basic A4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -197,7 +197,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_A1_v2",
+  "pretty_name_azure": "Standard A1 v2",
   "rdma": false,
   "read_io": 20971520,
   "storage": {
@@ -233,7 +233,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_A2m_v2",
+  "pretty_name_azure": "Standard A2m v2",
   "rdma": false,
   "read_io": 41943040,
   "storage": {
@@ -269,7 +269,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_A2_v2",
+  "pretty_name_azure": "Standard A2 v2",
   "rdma": false,
   "read_io": 41943040,
   "storage": {
@@ -305,7 +305,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_A4m_v2",
+  "pretty_name_azure": "Standard A4m v2",
   "rdma": false,
   "read_io": 83886080,
   "storage": {
@@ -341,7 +341,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_A4_v2",
+  "pretty_name_azure": "Standard A4 v2",
   "rdma": false,
   "read_io": 83886080,
   "storage": {
@@ -377,7 +377,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_A5",
+  "pretty_name_azure": "Standard A5",
   "rdma": false,
   "read_io": 41943040,
   "storage": {
@@ -413,7 +413,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_A6",
+  "pretty_name_azure": "Standard A6",
   "rdma": false,
   "read_io": 83886080,
   "storage": {
@@ -449,7 +449,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_A7",
+  "pretty_name_azure": "Standard A7",
   "rdma": false,
   "read_io": 167772160,
   "storage": {
@@ -485,7 +485,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_A8m_v2",
+  "pretty_name_azure": "Standard A8m v2",
   "rdma": false,
   "read_io": 167772160,
   "storage": {
@@ -521,7 +521,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_A8_v2",
+  "pretty_name_azure": "Standard A8 v2",
   "rdma": false,
   "read_io": 167772160,
   "storage": {
@@ -557,7 +557,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_B12ms",
+  "pretty_name_azure": "Standard B12ms",
   "rdma": false,
   "read_io": 74956800,
   "storage": {
@@ -593,7 +593,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_B16ms",
+  "pretty_name_azure": "Standard B16ms",
   "rdma": false,
   "read_io": 104857600,
   "storage": {
@@ -629,7 +629,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_B1ls",
+  "pretty_name_azure": "Standard B1ls",
   "rdma": false,
   "read_io": 22528000,
   "storage": {
@@ -665,7 +665,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_B1ms",
+  "pretty_name_azure": "Standard B1ms",
   "rdma": false,
   "read_io": 22528000,
   "storage": {
@@ -701,7 +701,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_B1s",
+  "pretty_name_azure": "Standard B1s",
   "rdma": false,
   "read_io": 22528000,
   "storage": {
@@ -737,7 +737,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_B20ms",
+  "pretty_name_azure": "Standard B20ms",
   "rdma": false,
   "read_io": 131072000,
   "storage": {
@@ -773,7 +773,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_B2ms",
+  "pretty_name_azure": "Standard B2ms",
   "rdma": false,
   "read_io": 23592960,
   "storage": {
@@ -809,7 +809,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_B2s",
+  "pretty_name_azure": "Standard B2s",
   "rdma": false,
   "read_io": 22528000,
   "storage": {
@@ -845,7 +845,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_B4ms",
+  "pretty_name_azure": "Standard B4ms",
   "rdma": false,
   "read_io": 36700160,
   "storage": {
@@ -881,7 +881,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_B8ms",
+  "pretty_name_azure": "Standard B8ms",
   "rdma": false,
   "read_io": 52428800,
   "storage": {
@@ -917,7 +917,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D1",
+  "pretty_name_azure": "Standard D1",
   "rdma": false,
   "read_io": 48234496,
   "storage": {
@@ -953,7 +953,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D11",
+  "pretty_name_azure": "Standard D11",
   "rdma": false,
   "read_io": 97517568,
   "storage": {
@@ -989,7 +989,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D11_v2",
+  "pretty_name_azure": "Standard D11 v2",
   "rdma": false,
   "read_io": 97517568,
   "storage": {
@@ -1025,7 +1025,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D11_v2_Promo",
+  "pretty_name_azure": "Standard D11 v2 Promo",
   "rdma": false,
   "read_io": 97517568,
   "storage": {
@@ -1061,7 +1061,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D12",
+  "pretty_name_azure": "Standard D12",
   "rdma": false,
   "read_io": 196083712,
   "storage": {
@@ -1097,7 +1097,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D12_v2",
+  "pretty_name_azure": "Standard D12 v2",
   "rdma": false,
   "read_io": 196083712,
   "storage": {
@@ -1133,7 +1133,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D12_v2_Promo",
+  "pretty_name_azure": "Standard D12 v2 Promo",
   "rdma": false,
   "read_io": 196083712,
   "storage": {
@@ -1169,7 +1169,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D13",
+  "pretty_name_azure": "Standard D13",
   "rdma": false,
   "read_io": 393216000,
   "storage": {
@@ -1205,7 +1205,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D13_v2",
+  "pretty_name_azure": "Standard D13 v2",
   "rdma": false,
   "read_io": 393216000,
   "storage": {
@@ -1241,7 +1241,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D13_v2_Promo",
+  "pretty_name_azure": "Standard D13 v2 Promo",
   "rdma": false,
   "read_io": 393216000,
   "storage": {
@@ -1277,7 +1277,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D14",
+  "pretty_name_azure": "Standard D14",
   "rdma": false,
   "read_io": 786432000,
   "storage": {
@@ -1313,7 +1313,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D14_v2",
+  "pretty_name_azure": "Standard D14 v2",
   "rdma": false,
   "read_io": 786432000,
   "storage": {
@@ -1349,7 +1349,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D14_v2_Promo",
+  "pretty_name_azure": "Standard D14 v2 Promo",
   "rdma": false,
   "read_io": 786432000,
   "storage": {
@@ -1385,7 +1385,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D15_v2",
+  "pretty_name_azure": "Standard D15 v2",
   "rdma": false,
   "read_io": 982515712,
   "storage": {
@@ -1421,7 +1421,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D16ads_v5",
+  "pretty_name_azure": "Standard D16ads v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -1457,7 +1457,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D16as_v4",
+  "pretty_name_azure": "Standard D16as v4",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -1493,7 +1493,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D16as_v5",
+  "pretty_name_azure": "Standard D16as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -1529,7 +1529,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D16a_v4",
+  "pretty_name_azure": "Standard D16a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -1565,7 +1565,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D16ds_v4",
+  "pretty_name_azure": "Standard D16ds v4",
   "rdma": false,
   "read_io": 967835648,
   "storage": {
@@ -1601,7 +1601,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D16ds_v5",
+  "pretty_name_azure": "Standard D16ds v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -1637,7 +1637,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D16d_v4",
+  "pretty_name_azure": "Standard D16d v4",
   "rdma": false,
   "read_io": 967835648,
   "storage": {
@@ -1673,7 +1673,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D16d_v5",
+  "pretty_name_azure": "Standard D16d v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -1709,7 +1709,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D16pds_v5",
+  "pretty_name_azure": "Standard D16pds v5",
   "rdma": false,
   "read_io": 1000000000,
   "storage": {
@@ -1745,7 +1745,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D16plds_v5",
+  "pretty_name_azure": "Standard D16plds v5",
   "rdma": false,
   "read_io": 1000000000,
   "storage": {
@@ -1781,7 +1781,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D16pls_v5",
+  "pretty_name_azure": "Standard D16pls v5",
   "rdma": false,
   "read_io": 1000000000,
   "storage": {
@@ -1817,7 +1817,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D16ps_v5",
+  "pretty_name_azure": "Standard D16ps v5",
   "rdma": false,
   "read_io": 1000000000,
   "storage": {
@@ -1853,7 +1853,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D16s_v3",
+  "pretty_name_azure": "Standard D16s v3",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -1889,7 +1889,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D16s_v4",
+  "pretty_name_azure": "Standard D16s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -1925,7 +1925,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D16s_v5",
+  "pretty_name_azure": "Standard D16s v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -1961,7 +1961,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D16_v3",
+  "pretty_name_azure": "Standard D16 v3",
   "rdma": false,
   "read_io": 393216000,
   "storage": {
@@ -1997,7 +1997,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D16_v4",
+  "pretty_name_azure": "Standard D16 v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -2033,7 +2033,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D16_v5",
+  "pretty_name_azure": "Standard D16 v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -2069,7 +2069,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D1_v2",
+  "pretty_name_azure": "Standard D1 v2",
   "rdma": false,
   "read_io": 48234496,
   "storage": {
@@ -2105,7 +2105,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D2",
+  "pretty_name_azure": "Standard D2",
   "rdma": false,
   "read_io": 97517568,
   "storage": {
@@ -2141,7 +2141,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D2ads_v5",
+  "pretty_name_azure": "Standard D2ads v5",
   "rdma": false,
   "read_io": 131072000,
   "storage": {
@@ -2177,7 +2177,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D2as_v4",
+  "pretty_name_azure": "Standard D2as v4",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -2213,7 +2213,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D2as_v5",
+  "pretty_name_azure": "Standard D2as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -2249,7 +2249,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D2a_v4",
+  "pretty_name_azure": "Standard D2a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -2285,7 +2285,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D2ds_v4",
+  "pretty_name_azure": "Standard D2ds v4",
   "rdma": false,
   "read_io": 120586240,
   "storage": {
@@ -2321,7 +2321,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D2ds_v5",
+  "pretty_name_azure": "Standard D2ds v5",
   "rdma": false,
   "read_io": 131072000,
   "storage": {
@@ -2357,7 +2357,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D2d_v4",
+  "pretty_name_azure": "Standard D2d v4",
   "rdma": false,
   "read_io": 120586240,
   "storage": {
@@ -2393,7 +2393,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D2d_v5",
+  "pretty_name_azure": "Standard D2d v5",
   "rdma": false,
   "read_io": 131072000,
   "storage": {
@@ -2429,7 +2429,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D2pds_v5",
+  "pretty_name_azure": "Standard D2pds v5",
   "rdma": false,
   "read_io": 125000000,
   "storage": {
@@ -2465,7 +2465,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D2plds_v5",
+  "pretty_name_azure": "Standard D2plds v5",
   "rdma": false,
   "read_io": 125000000,
   "storage": {
@@ -2501,7 +2501,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D2pls_v5",
+  "pretty_name_azure": "Standard D2pls v5",
   "rdma": false,
   "read_io": 125000000,
   "storage": {
@@ -2537,7 +2537,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D2ps_v5",
+  "pretty_name_azure": "Standard D2ps v5",
   "rdma": false,
   "read_io": 125000000,
   "storage": {
@@ -2573,7 +2573,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D2s_v3",
+  "pretty_name_azure": "Standard D2s v3",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -2609,7 +2609,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D2s_v4",
+  "pretty_name_azure": "Standard D2s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -2645,7 +2645,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D2s_v5",
+  "pretty_name_azure": "Standard D2s v5",
   "rdma": false,
   "read_io": 131072000,
   "storage": {
@@ -2681,7 +2681,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D2_v2",
+  "pretty_name_azure": "Standard D2 v2",
   "rdma": false,
   "read_io": 97517568,
   "storage": {
@@ -2717,7 +2717,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D2_v2_Promo",
+  "pretty_name_azure": "Standard D2 v2 Promo",
   "rdma": false,
   "read_io": 97517568,
   "storage": {
@@ -2753,7 +2753,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D2_v3",
+  "pretty_name_azure": "Standard D2 v3",
   "rdma": false,
   "read_io": 48234496,
   "storage": {
@@ -2789,7 +2789,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D2_v4",
+  "pretty_name_azure": "Standard D2 v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -2825,7 +2825,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D2_v5",
+  "pretty_name_azure": "Standard D2 v5",
   "rdma": false,
   "read_io": 131072000,
   "storage": {
@@ -2861,7 +2861,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D3",
+  "pretty_name_azure": "Standard D3",
   "rdma": false,
   "read_io": 196083712,
   "storage": {
@@ -2897,7 +2897,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D32ads_v5",
+  "pretty_name_azure": "Standard D32ads v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -2933,7 +2933,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D32as_v4",
+  "pretty_name_azure": "Standard D32as v4",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -2969,7 +2969,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D32as_v5",
+  "pretty_name_azure": "Standard D32as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -3005,7 +3005,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D32a_v4",
+  "pretty_name_azure": "Standard D32a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -3041,7 +3041,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D32ds_v4",
+  "pretty_name_azure": "Standard D32ds v4",
   "rdma": false,
   "read_io": 1935671296,
   "storage": {
@@ -3077,7 +3077,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D32ds_v5",
+  "pretty_name_azure": "Standard D32ds v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -3113,7 +3113,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D32d_v4",
+  "pretty_name_azure": "Standard D32d v4",
   "rdma": false,
   "read_io": 1935671296,
   "storage": {
@@ -3149,7 +3149,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D32d_v5",
+  "pretty_name_azure": "Standard D32d v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -3185,7 +3185,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D32pds_v5",
+  "pretty_name_azure": "Standard D32pds v5",
   "rdma": false,
   "read_io": 2000000000,
   "storage": {
@@ -3221,7 +3221,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D32plds_v5",
+  "pretty_name_azure": "Standard D32plds v5",
   "rdma": false,
   "read_io": 2000000000,
   "storage": {
@@ -3257,7 +3257,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D32pls_v5",
+  "pretty_name_azure": "Standard D32pls v5",
   "rdma": false,
   "read_io": 2000000000,
   "storage": {
@@ -3293,7 +3293,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D32ps_v5",
+  "pretty_name_azure": "Standard D32ps v5",
   "rdma": false,
   "read_io": 2000000000,
   "storage": {
@@ -3329,7 +3329,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D32s_v3",
+  "pretty_name_azure": "Standard D32s v3",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -3365,7 +3365,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D32s_v4",
+  "pretty_name_azure": "Standard D32s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -3401,7 +3401,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D32s_v5",
+  "pretty_name_azure": "Standard D32s v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -3437,7 +3437,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D32_v3",
+  "pretty_name_azure": "Standard D32 v3",
   "rdma": false,
   "read_io": 786432000,
   "storage": {
@@ -3473,7 +3473,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D32_v4",
+  "pretty_name_azure": "Standard D32 v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -3509,7 +3509,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D32_v5",
+  "pretty_name_azure": "Standard D32 v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -3545,7 +3545,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D3_v2",
+  "pretty_name_azure": "Standard D3 v2",
   "rdma": false,
   "read_io": 196083712,
   "storage": {
@@ -3581,7 +3581,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D3_v2_Promo",
+  "pretty_name_azure": "Standard D3 v2 Promo",
   "rdma": false,
   "read_io": 196083712,
   "storage": {
@@ -3617,7 +3617,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D4",
+  "pretty_name_azure": "Standard D4",
   "rdma": false,
   "read_io": 393216000,
   "storage": {
@@ -3653,7 +3653,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D48ads_v5",
+  "pretty_name_azure": "Standard D48ads v5",
   "rdma": false,
   "read_io": 3145728000,
   "storage": {
@@ -3689,7 +3689,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D48as_v4",
+  "pretty_name_azure": "Standard D48as v4",
   "rdma": false,
   "read_io": 805306368,
   "storage": {
@@ -3725,7 +3725,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D48as_v5",
+  "pretty_name_azure": "Standard D48as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -3761,7 +3761,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D48a_v4",
+  "pretty_name_azure": "Standard D48a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -3797,7 +3797,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D48ds_v4",
+  "pretty_name_azure": "Standard D48ds v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -3833,7 +3833,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D48ds_v5",
+  "pretty_name_azure": "Standard D48ds v5",
   "rdma": false,
   "read_io": 3145728000,
   "storage": {
@@ -3869,7 +3869,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D48d_v4",
+  "pretty_name_azure": "Standard D48d v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -3905,7 +3905,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D48d_v5",
+  "pretty_name_azure": "Standard D48d v5",
   "rdma": false,
   "read_io": 3145728000,
   "storage": {
@@ -3941,7 +3941,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D48pds_v5",
+  "pretty_name_azure": "Standard D48pds v5",
   "rdma": false,
   "read_io": 3000000000,
   "storage": {
@@ -3977,7 +3977,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D48plds_v5",
+  "pretty_name_azure": "Standard D48plds v5",
   "rdma": false,
   "read_io": 3000000000,
   "storage": {
@@ -4013,7 +4013,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D48pls_v5",
+  "pretty_name_azure": "Standard D48pls v5",
   "rdma": false,
   "read_io": 3000000000,
   "storage": {
@@ -4049,7 +4049,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D48ps_v5",
+  "pretty_name_azure": "Standard D48ps v5",
   "rdma": false,
   "read_io": 3000000000,
   "storage": {
@@ -4085,7 +4085,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D48s_v3",
+  "pretty_name_azure": "Standard D48s v3",
   "rdma": false,
   "read_io": 805306368,
   "storage": {
@@ -4121,7 +4121,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D48s_v4",
+  "pretty_name_azure": "Standard D48s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -4157,7 +4157,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D48s_v5",
+  "pretty_name_azure": "Standard D48s v5",
   "rdma": false,
   "read_io": 3145728000,
   "storage": {
@@ -4193,7 +4193,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D48_v3",
+  "pretty_name_azure": "Standard D48 v3",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -4229,7 +4229,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D48_v4",
+  "pretty_name_azure": "Standard D48 v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -4265,7 +4265,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D48_v5",
+  "pretty_name_azure": "Standard D48 v5",
   "rdma": false,
   "read_io": 3145728000,
   "storage": {
@@ -4301,7 +4301,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D4ads_v5",
+  "pretty_name_azure": "Standard D4ads v5",
   "rdma": false,
   "read_io": 262144000,
   "storage": {
@@ -4337,7 +4337,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D4as_v4",
+  "pretty_name_azure": "Standard D4as v4",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -4373,7 +4373,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D4as_v5",
+  "pretty_name_azure": "Standard D4as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -4409,7 +4409,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D4a_v4",
+  "pretty_name_azure": "Standard D4a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -4445,7 +4445,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D4ds_v4",
+  "pretty_name_azure": "Standard D4ds v4",
   "rdma": false,
   "read_io": 242221056,
   "storage": {
@@ -4481,7 +4481,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D4ds_v5",
+  "pretty_name_azure": "Standard D4ds v5",
   "rdma": false,
   "read_io": 262144000,
   "storage": {
@@ -4517,7 +4517,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D4d_v4",
+  "pretty_name_azure": "Standard D4d v4",
   "rdma": false,
   "read_io": 242221056,
   "storage": {
@@ -4553,7 +4553,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D4d_v5",
+  "pretty_name_azure": "Standard D4d v5",
   "rdma": false,
   "read_io": 262144000,
   "storage": {
@@ -4589,7 +4589,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D4pds_v5",
+  "pretty_name_azure": "Standard D4pds v5",
   "rdma": false,
   "read_io": 250000000,
   "storage": {
@@ -4625,7 +4625,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D4plds_v5",
+  "pretty_name_azure": "Standard D4plds v5",
   "rdma": false,
   "read_io": 250000000,
   "storage": {
@@ -4661,7 +4661,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D4pls_v5",
+  "pretty_name_azure": "Standard D4pls v5",
   "rdma": false,
   "read_io": 250000000,
   "storage": {
@@ -4697,7 +4697,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D4ps_v5",
+  "pretty_name_azure": "Standard D4ps v5",
   "rdma": false,
   "read_io": 250000000,
   "storage": {
@@ -4733,7 +4733,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D4s_v3",
+  "pretty_name_azure": "Standard D4s v3",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -4769,7 +4769,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D4s_v4",
+  "pretty_name_azure": "Standard D4s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -4805,7 +4805,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D4s_v5",
+  "pretty_name_azure": "Standard D4s v5",
   "rdma": false,
   "read_io": 262144000,
   "storage": {
@@ -4841,7 +4841,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D4_v2",
+  "pretty_name_azure": "Standard D4 v2",
   "rdma": false,
   "read_io": 393216000,
   "storage": {
@@ -4877,7 +4877,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D4_v2_Promo",
+  "pretty_name_azure": "Standard D4 v2 Promo",
   "rdma": false,
   "read_io": 393216000,
   "storage": {
@@ -4913,7 +4913,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D4_v3",
+  "pretty_name_azure": "Standard D4 v3",
   "rdma": false,
   "read_io": 97517568,
   "storage": {
@@ -4949,7 +4949,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D4_v4",
+  "pretty_name_azure": "Standard D4 v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -4985,7 +4985,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D4_v5",
+  "pretty_name_azure": "Standard D4 v5",
   "rdma": false,
   "read_io": 262144000,
   "storage": {
@@ -5021,7 +5021,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D5_v2",
+  "pretty_name_azure": "Standard D5 v2",
   "rdma": false,
   "read_io": 786432000,
   "storage": {
@@ -5057,7 +5057,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D5_v2_Promo",
+  "pretty_name_azure": "Standard D5 v2 Promo",
   "rdma": false,
   "read_io": 786432000,
   "storage": {
@@ -5093,7 +5093,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D64ads_v5",
+  "pretty_name_azure": "Standard D64ads v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -5129,7 +5129,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D64as_v4",
+  "pretty_name_azure": "Standard D64as v4",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -5165,7 +5165,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D64as_v5",
+  "pretty_name_azure": "Standard D64as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -5201,7 +5201,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D64a_v4",
+  "pretty_name_azure": "Standard D64a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -5237,7 +5237,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D64ds_v4",
+  "pretty_name_azure": "Standard D64ds v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -5273,7 +5273,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D64ds_v5",
+  "pretty_name_azure": "Standard D64ds v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -5309,7 +5309,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D64d_v4",
+  "pretty_name_azure": "Standard D64d v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -5345,7 +5345,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D64d_v5",
+  "pretty_name_azure": "Standard D64d v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -5381,7 +5381,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D64pds_v5",
+  "pretty_name_azure": "Standard D64pds v5",
   "rdma": false,
   "read_io": 4000000000,
   "storage": {
@@ -5417,7 +5417,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D64plds_v5",
+  "pretty_name_azure": "Standard D64plds v5",
   "rdma": false,
   "read_io": 4000000000,
   "storage": {
@@ -5453,7 +5453,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D64pls_v5",
+  "pretty_name_azure": "Standard D64pls v5",
   "rdma": false,
   "read_io": 4000000000,
   "storage": {
@@ -5489,7 +5489,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D64ps_v5",
+  "pretty_name_azure": "Standard D64ps v5",
   "rdma": false,
   "read_io": 4000000000,
   "storage": {
@@ -5525,7 +5525,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D64s_v3",
+  "pretty_name_azure": "Standard D64s v3",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -5561,7 +5561,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D64s_v4",
+  "pretty_name_azure": "Standard D64s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -5597,7 +5597,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D64s_v5",
+  "pretty_name_azure": "Standard D64s v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -5633,7 +5633,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D64_v3",
+  "pretty_name_azure": "Standard D64 v3",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -5669,7 +5669,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D64_v4",
+  "pretty_name_azure": "Standard D64 v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -5705,7 +5705,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D64_v5",
+  "pretty_name_azure": "Standard D64 v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -5741,7 +5741,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D8ads_v5",
+  "pretty_name_azure": "Standard D8ads v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -5777,7 +5777,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D8as_v4",
+  "pretty_name_azure": "Standard D8as v4",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -5813,7 +5813,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D8as_v5",
+  "pretty_name_azure": "Standard D8as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -5849,7 +5849,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D8a_v4",
+  "pretty_name_azure": "Standard D8a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -5885,7 +5885,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D8ds_v4",
+  "pretty_name_azure": "Standard D8ds v4",
   "rdma": false,
   "read_io": 484442112,
   "storage": {
@@ -5921,7 +5921,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D8ds_v5",
+  "pretty_name_azure": "Standard D8ds v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -5957,7 +5957,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D8d_v4",
+  "pretty_name_azure": "Standard D8d v4",
   "rdma": false,
   "read_io": 484442112,
   "storage": {
@@ -5993,7 +5993,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D8d_v5",
+  "pretty_name_azure": "Standard D8d v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -6029,7 +6029,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D8pds_v5",
+  "pretty_name_azure": "Standard D8pds v5",
   "rdma": false,
   "read_io": 500000000,
   "storage": {
@@ -6065,7 +6065,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D8plds_v5",
+  "pretty_name_azure": "Standard D8plds v5",
   "rdma": false,
   "read_io": 500000000,
   "storage": {
@@ -6101,7 +6101,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D8pls_v5",
+  "pretty_name_azure": "Standard D8pls v5",
   "rdma": false,
   "read_io": 500000000,
   "storage": {
@@ -6137,7 +6137,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D8ps_v5",
+  "pretty_name_azure": "Standard D8ps v5",
   "rdma": false,
   "read_io": 500000000,
   "storage": {
@@ -6173,7 +6173,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D8s_v3",
+  "pretty_name_azure": "Standard D8s v3",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -6209,7 +6209,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D8s_v4",
+  "pretty_name_azure": "Standard D8s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -6245,7 +6245,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D8s_v5",
+  "pretty_name_azure": "Standard D8s v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -6281,7 +6281,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D8_v3",
+  "pretty_name_azure": "Standard D8 v3",
   "rdma": false,
   "read_io": 196083712,
   "storage": {
@@ -6317,7 +6317,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D8_v4",
+  "pretty_name_azure": "Standard D8 v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -6353,7 +6353,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D8_v5",
+  "pretty_name_azure": "Standard D8 v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -6389,7 +6389,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D96ads_v5",
+  "pretty_name_azure": "Standard D96ads v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -6425,7 +6425,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D96as_v4",
+  "pretty_name_azure": "Standard D96as v4",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -6461,7 +6461,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D96as_v5",
+  "pretty_name_azure": "Standard D96as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -6497,7 +6497,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D96a_v4",
+  "pretty_name_azure": "Standard D96a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -6533,7 +6533,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D96ds_v5",
+  "pretty_name_azure": "Standard D96ds v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -6569,7 +6569,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D96d_v5",
+  "pretty_name_azure": "Standard D96d v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -6605,7 +6605,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_D96s_v5",
+  "pretty_name_azure": "Standard D96s v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -6641,7 +6641,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_D96_v5",
+  "pretty_name_azure": "Standard D96 v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -6677,7 +6677,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC16ads_v5",
+  "pretty_name_azure": "Standard DC16ads v5",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -6713,7 +6713,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC16as_v5",
+  "pretty_name_azure": "Standard DC16as v5",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -6749,7 +6749,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC16ds_v3",
+  "pretty_name_azure": "Standard DC16ds v3",
   "rdma": false,
   "read_io": 154000000000,
   "storage": {
@@ -6785,7 +6785,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC16s_v3",
+  "pretty_name_azure": "Standard DC16s v3",
   "rdma": false,
   "read_io": 154000000000,
   "storage": {
@@ -6821,7 +6821,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC1ds_v3",
+  "pretty_name_azure": "Standard DC1ds v3",
   "rdma": false,
   "read_io": 9500000000,
   "storage": {
@@ -6857,7 +6857,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC1s_v2",
+  "pretty_name_azure": "Standard DC1s v2",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -6893,7 +6893,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC1s_v3",
+  "pretty_name_azure": "Standard DC1s v3",
   "rdma": false,
   "read_io": 9500000000,
   "storage": {
@@ -6929,7 +6929,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC24ds_v3",
+  "pretty_name_azure": "Standard DC24ds v3",
   "rdma": false,
   "read_io": 231000000000,
   "storage": {
@@ -6965,7 +6965,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC24s_v3",
+  "pretty_name_azure": "Standard DC24s v3",
   "rdma": false,
   "read_io": 231000000000,
   "storage": {
@@ -7001,7 +7001,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC2ads_v5",
+  "pretty_name_azure": "Standard DC2ads v5",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -7037,7 +7037,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC2as_v5",
+  "pretty_name_azure": "Standard DC2as v5",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -7073,7 +7073,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC2ds_v3",
+  "pretty_name_azure": "Standard DC2ds v3",
   "rdma": false,
   "read_io": 19000000000,
   "storage": {
@@ -7109,7 +7109,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC2s",
+  "pretty_name_azure": "Standard DC2s",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -7145,7 +7145,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC2s_v2",
+  "pretty_name_azure": "Standard DC2s v2",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -7181,7 +7181,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC2s_v3",
+  "pretty_name_azure": "Standard DC2s v3",
   "rdma": false,
   "read_io": 19000000000,
   "storage": {
@@ -7217,7 +7217,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC32ads_v5",
+  "pretty_name_azure": "Standard DC32ads v5",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -7253,7 +7253,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC32as_v5",
+  "pretty_name_azure": "Standard DC32as v5",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -7289,7 +7289,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC32ds_v3",
+  "pretty_name_azure": "Standard DC32ds v3",
   "rdma": false,
   "read_io": 308000000000,
   "storage": {
@@ -7325,7 +7325,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC32s_v3",
+  "pretty_name_azure": "Standard DC32s v3",
   "rdma": false,
   "read_io": 308000000000,
   "storage": {
@@ -7361,7 +7361,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC48ads_v5",
+  "pretty_name_azure": "Standard DC48ads v5",
   "rdma": false,
   "read_io": 805306368,
   "storage": {
@@ -7397,7 +7397,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC48as_v5",
+  "pretty_name_azure": "Standard DC48as v5",
   "rdma": false,
   "read_io": 805306368,
   "storage": {
@@ -7433,7 +7433,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC48ds_v3",
+  "pretty_name_azure": "Standard DC48ds v3",
   "rdma": false,
   "read_io": 462000000000,
   "storage": {
@@ -7469,7 +7469,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC48s_v3",
+  "pretty_name_azure": "Standard DC48s v3",
   "rdma": false,
   "read_io": 462000000000,
   "storage": {
@@ -7505,7 +7505,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC4ads_v5",
+  "pretty_name_azure": "Standard DC4ads v5",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -7541,7 +7541,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC4as_v5",
+  "pretty_name_azure": "Standard DC4as v5",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -7577,7 +7577,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC4ds_v3",
+  "pretty_name_azure": "Standard DC4ds v3",
   "rdma": false,
   "read_io": 38500000000,
   "storage": {
@@ -7613,7 +7613,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC4s",
+  "pretty_name_azure": "Standard DC4s",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -7649,7 +7649,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC4s_v2",
+  "pretty_name_azure": "Standard DC4s v2",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -7685,7 +7685,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC4s_v3",
+  "pretty_name_azure": "Standard DC4s v3",
   "rdma": false,
   "read_io": 38500000000,
   "storage": {
@@ -7721,7 +7721,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC64ads_v5",
+  "pretty_name_azure": "Standard DC64ads v5",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -7757,7 +7757,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC64as_v5",
+  "pretty_name_azure": "Standard DC64as v5",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -7793,7 +7793,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC8ads_v5",
+  "pretty_name_azure": "Standard DC8ads v5",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -7829,7 +7829,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC8as_v5",
+  "pretty_name_azure": "Standard DC8as v5",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -7865,7 +7865,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC8ds_v3",
+  "pretty_name_azure": "Standard DC8ds v3",
   "rdma": false,
   "read_io": 77000000000,
   "storage": {
@@ -7901,7 +7901,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC8s_v3",
+  "pretty_name_azure": "Standard DC8s v3",
   "rdma": false,
   "read_io": 77000000000,
   "storage": {
@@ -7937,7 +7937,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_DC8_v2",
+  "pretty_name_azure": "Standard DC8 v2",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -7973,7 +7973,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC96ads_v5",
+  "pretty_name_azure": "Standard DC96ads v5",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -8009,7 +8009,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DC96as_v5",
+  "pretty_name_azure": "Standard DC96as v5",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -8045,7 +8045,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS1",
+  "pretty_name_azure": "Standard DS1",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -8081,7 +8081,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS11",
+  "pretty_name_azure": "Standard DS11",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -8117,7 +8117,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS11-1_v2",
+  "pretty_name_azure": "Standard DS11-1 v2",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -8153,7 +8153,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS11_v2",
+  "pretty_name_azure": "Standard DS11 v2",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -8189,7 +8189,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS11_v2_Promo",
+  "pretty_name_azure": "Standard DS11 v2 Promo",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -8225,7 +8225,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS12",
+  "pretty_name_azure": "Standard DS12",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -8261,7 +8261,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS12-1_v2",
+  "pretty_name_azure": "Standard DS12-1 v2",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -8297,7 +8297,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS12-2_v2",
+  "pretty_name_azure": "Standard DS12-2 v2",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -8333,7 +8333,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS12_v2",
+  "pretty_name_azure": "Standard DS12 v2",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -8369,7 +8369,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS12_v2_Promo",
+  "pretty_name_azure": "Standard DS12 v2 Promo",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -8405,7 +8405,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS13",
+  "pretty_name_azure": "Standard DS13",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -8441,7 +8441,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS13-2_v2",
+  "pretty_name_azure": "Standard DS13-2 v2",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -8477,7 +8477,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS13-4_v2",
+  "pretty_name_azure": "Standard DS13-4 v2",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -8513,7 +8513,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS13_v2",
+  "pretty_name_azure": "Standard DS13 v2",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -8549,7 +8549,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS13_v2_Promo",
+  "pretty_name_azure": "Standard DS13 v2 Promo",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -8585,7 +8585,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS14",
+  "pretty_name_azure": "Standard DS14",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -8621,7 +8621,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS14-4_v2",
+  "pretty_name_azure": "Standard DS14-4 v2",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -8657,7 +8657,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS14-8_v2",
+  "pretty_name_azure": "Standard DS14-8 v2",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -8693,7 +8693,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS14_v2",
+  "pretty_name_azure": "Standard DS14 v2",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -8729,7 +8729,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS14_v2_Promo",
+  "pretty_name_azure": "Standard DS14 v2 Promo",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -8765,7 +8765,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS15_v2",
+  "pretty_name_azure": "Standard DS15 v2",
   "rdma": false,
   "read_io": 671088640,
   "storage": {
@@ -8801,7 +8801,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS1_v2",
+  "pretty_name_azure": "Standard DS1 v2",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -8837,7 +8837,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS2",
+  "pretty_name_azure": "Standard DS2",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -8873,7 +8873,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS2_v2",
+  "pretty_name_azure": "Standard DS2 v2",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -8909,7 +8909,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS2_v2_Promo",
+  "pretty_name_azure": "Standard DS2 v2 Promo",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -8945,7 +8945,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS3",
+  "pretty_name_azure": "Standard DS3",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -8981,7 +8981,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS3_v2",
+  "pretty_name_azure": "Standard DS3 v2",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -9017,7 +9017,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS3_v2_Promo",
+  "pretty_name_azure": "Standard DS3 v2 Promo",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -9053,7 +9053,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS4",
+  "pretty_name_azure": "Standard DS4",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -9089,7 +9089,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS4_v2",
+  "pretty_name_azure": "Standard DS4 v2",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -9125,7 +9125,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS4_v2_Promo",
+  "pretty_name_azure": "Standard DS4 v2 Promo",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -9161,7 +9161,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS5_v2",
+  "pretty_name_azure": "Standard DS5 v2",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -9197,7 +9197,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_DS5_v2_Promo",
+  "pretty_name_azure": "Standard DS5 v2 Promo",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -9233,7 +9233,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E104ids_v5",
+  "pretty_name_azure": "Standard E104ids v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -9269,7 +9269,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E104id_v5",
+  "pretty_name_azure": "Standard E104id v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -9305,7 +9305,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E104is_v5",
+  "pretty_name_azure": "Standard E104is v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -9341,7 +9341,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E104i_v5",
+  "pretty_name_azure": "Standard E104i v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -9377,7 +9377,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E112iads_v5",
+  "pretty_name_azure": "Standard E112iads v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -9413,7 +9413,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E112ias_v5",
+  "pretty_name_azure": "Standard E112ias v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -9449,7 +9449,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-4ads_v5",
+  "pretty_name_azure": "Standard E16-4ads v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -9485,7 +9485,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-4as_v4",
+  "pretty_name_azure": "Standard E16-4as v4",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -9521,7 +9521,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-4as_v5",
+  "pretty_name_azure": "Standard E16-4as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -9557,7 +9557,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-4ds_v4",
+  "pretty_name_azure": "Standard E16-4ds v4",
   "rdma": false,
   "read_io": 967835648,
   "storage": {
@@ -9593,7 +9593,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-4ds_v5",
+  "pretty_name_azure": "Standard E16-4ds v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -9629,7 +9629,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-4s_v3",
+  "pretty_name_azure": "Standard E16-4s v3",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -9665,7 +9665,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-4s_v4",
+  "pretty_name_azure": "Standard E16-4s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -9701,7 +9701,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-4s_v5",
+  "pretty_name_azure": "Standard E16-4s v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -9737,7 +9737,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-8ads_v5",
+  "pretty_name_azure": "Standard E16-8ads v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -9773,7 +9773,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-8as_v4",
+  "pretty_name_azure": "Standard E16-8as v4",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -9809,7 +9809,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-8as_v5",
+  "pretty_name_azure": "Standard E16-8as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -9845,7 +9845,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-8ds_v4",
+  "pretty_name_azure": "Standard E16-8ds v4",
   "rdma": false,
   "read_io": 967835648,
   "storage": {
@@ -9881,7 +9881,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-8ds_v5",
+  "pretty_name_azure": "Standard E16-8ds v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -9917,7 +9917,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-8s_v3",
+  "pretty_name_azure": "Standard E16-8s v3",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -9953,7 +9953,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-8s_v4",
+  "pretty_name_azure": "Standard E16-8s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -9989,7 +9989,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16-8s_v5",
+  "pretty_name_azure": "Standard E16-8s v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -10025,7 +10025,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16ads_v5",
+  "pretty_name_azure": "Standard E16ads v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -10061,7 +10061,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16as_v4",
+  "pretty_name_azure": "Standard E16as v4",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -10097,7 +10097,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16as_v5",
+  "pretty_name_azure": "Standard E16as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -10133,7 +10133,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E16a_v4",
+  "pretty_name_azure": "Standard E16a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -10169,7 +10169,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16bds_v5",
+  "pretty_name_azure": "Standard E16bds v5",
   "rdma": false,
   "read_io": 968000000,
   "storage": {
@@ -10205,7 +10205,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16bs_v5",
+  "pretty_name_azure": "Standard E16bs v5",
   "rdma": false,
   "read_io": 968000000,
   "storage": {
@@ -10241,7 +10241,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16ds_v4",
+  "pretty_name_azure": "Standard E16ds v4",
   "rdma": false,
   "read_io": 967835648,
   "storage": {
@@ -10277,7 +10277,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16ds_v5",
+  "pretty_name_azure": "Standard E16ds v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -10313,7 +10313,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E16d_v4",
+  "pretty_name_azure": "Standard E16d v4",
   "rdma": false,
   "read_io": 967835648,
   "storage": {
@@ -10349,7 +10349,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E16d_v5",
+  "pretty_name_azure": "Standard E16d v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -10385,7 +10385,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16pds_v5",
+  "pretty_name_azure": "Standard E16pds v5",
   "rdma": false,
   "read_io": 1000000000,
   "storage": {
@@ -10421,7 +10421,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16ps_v5",
+  "pretty_name_azure": "Standard E16ps v5",
   "rdma": false,
   "read_io": 1000000000,
   "storage": {
@@ -10457,7 +10457,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16s_v3",
+  "pretty_name_azure": "Standard E16s v3",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -10493,7 +10493,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16s_v4",
+  "pretty_name_azure": "Standard E16s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -10529,7 +10529,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E16s_v5",
+  "pretty_name_azure": "Standard E16s v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -10565,7 +10565,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E16_v3",
+  "pretty_name_azure": "Standard E16 v3",
   "rdma": false,
   "read_io": 393216000,
   "storage": {
@@ -10601,7 +10601,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E16_v4",
+  "pretty_name_azure": "Standard E16 v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -10637,7 +10637,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E16_v5",
+  "pretty_name_azure": "Standard E16 v5",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -10673,7 +10673,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E20ads_v5",
+  "pretty_name_azure": "Standard E20ads v5",
   "rdma": false,
   "read_io": 1310720000,
   "storage": {
@@ -10709,7 +10709,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E20as_v4",
+  "pretty_name_azure": "Standard E20as v4",
   "rdma": false,
   "read_io": 335544320,
   "storage": {
@@ -10745,7 +10745,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E20as_v5",
+  "pretty_name_azure": "Standard E20as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -10781,7 +10781,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E20a_v4",
+  "pretty_name_azure": "Standard E20a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -10817,7 +10817,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E20ds_v4",
+  "pretty_name_azure": "Standard E20ds v4",
   "rdma": false,
   "read_io": 1209008128,
   "storage": {
@@ -10853,7 +10853,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E20ds_v5",
+  "pretty_name_azure": "Standard E20ds v5",
   "rdma": false,
   "read_io": 1310720000,
   "storage": {
@@ -10889,7 +10889,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E20d_v4",
+  "pretty_name_azure": "Standard E20d v4",
   "rdma": false,
   "read_io": 1209008128,
   "storage": {
@@ -10925,7 +10925,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E20d_v5",
+  "pretty_name_azure": "Standard E20d v5",
   "rdma": false,
   "read_io": 1310720000,
   "storage": {
@@ -10961,7 +10961,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E20pds_v5",
+  "pretty_name_azure": "Standard E20pds v5",
   "rdma": false,
   "read_io": 1250000000,
   "storage": {
@@ -10997,7 +10997,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E20ps_v5",
+  "pretty_name_azure": "Standard E20ps v5",
   "rdma": false,
   "read_io": 1250000000,
   "storage": {
@@ -11033,7 +11033,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E20s_v3",
+  "pretty_name_azure": "Standard E20s v3",
   "rdma": false,
   "read_io": 335544320,
   "storage": {
@@ -11069,7 +11069,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E20s_v4",
+  "pretty_name_azure": "Standard E20s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -11105,7 +11105,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E20s_v5",
+  "pretty_name_azure": "Standard E20s v5",
   "rdma": false,
   "read_io": 1310720000,
   "storage": {
@@ -11141,7 +11141,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E20_v3",
+  "pretty_name_azure": "Standard E20 v3",
   "rdma": false,
   "read_io": 491520000,
   "storage": {
@@ -11177,7 +11177,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E20_v4",
+  "pretty_name_azure": "Standard E20 v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -11213,7 +11213,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E20_v5",
+  "pretty_name_azure": "Standard E20 v5",
   "rdma": false,
   "read_io": 1310720000,
   "storage": {
@@ -11249,7 +11249,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E2ads_v5",
+  "pretty_name_azure": "Standard E2ads v5",
   "rdma": false,
   "read_io": 131072000,
   "storage": {
@@ -11285,7 +11285,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E2as_v4",
+  "pretty_name_azure": "Standard E2as v4",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -11321,7 +11321,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E2as_v5",
+  "pretty_name_azure": "Standard E2as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -11357,7 +11357,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E2a_v4",
+  "pretty_name_azure": "Standard E2a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -11393,7 +11393,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E2bds_v5",
+  "pretty_name_azure": "Standard E2bds v5",
   "rdma": false,
   "read_io": 120000000,
   "storage": {
@@ -11429,7 +11429,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E2bs_v5",
+  "pretty_name_azure": "Standard E2bs v5",
   "rdma": false,
   "read_io": 120000000,
   "storage": {
@@ -11465,7 +11465,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E2ds_v4",
+  "pretty_name_azure": "Standard E2ds v4",
   "rdma": false,
   "read_io": 120586240,
   "storage": {
@@ -11501,7 +11501,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E2ds_v5",
+  "pretty_name_azure": "Standard E2ds v5",
   "rdma": false,
   "read_io": 131072000,
   "storage": {
@@ -11537,7 +11537,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E2d_v4",
+  "pretty_name_azure": "Standard E2d v4",
   "rdma": false,
   "read_io": 120586240,
   "storage": {
@@ -11573,7 +11573,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E2d_v5",
+  "pretty_name_azure": "Standard E2d v5",
   "rdma": false,
   "read_io": 131072000,
   "storage": {
@@ -11609,7 +11609,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E2pds_v5",
+  "pretty_name_azure": "Standard E2pds v5",
   "rdma": false,
   "read_io": 125000000,
   "storage": {
@@ -11645,7 +11645,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E2ps_v5",
+  "pretty_name_azure": "Standard E2ps v5",
   "rdma": false,
   "read_io": 125000000,
   "storage": {
@@ -11681,7 +11681,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E2s_v3",
+  "pretty_name_azure": "Standard E2s v3",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -11717,7 +11717,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E2s_v4",
+  "pretty_name_azure": "Standard E2s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -11753,7 +11753,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E2s_v5",
+  "pretty_name_azure": "Standard E2s v5",
   "rdma": false,
   "read_io": 131072000,
   "storage": {
@@ -11789,7 +11789,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E2_v3",
+  "pretty_name_azure": "Standard E2 v3",
   "rdma": false,
   "read_io": 49152000,
   "storage": {
@@ -11825,7 +11825,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E2_v4",
+  "pretty_name_azure": "Standard E2 v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -11861,7 +11861,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E2_v5",
+  "pretty_name_azure": "Standard E2 v5",
   "rdma": false,
   "read_io": 131072000,
   "storage": {
@@ -11897,7 +11897,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-16ads_v5",
+  "pretty_name_azure": "Standard E32-16ads v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -11933,7 +11933,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-16as_v4",
+  "pretty_name_azure": "Standard E32-16as v4",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -11969,7 +11969,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-16as_v5",
+  "pretty_name_azure": "Standard E32-16as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -12005,7 +12005,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-16ds_v4",
+  "pretty_name_azure": "Standard E32-16ds v4",
   "rdma": false,
   "read_io": 1935671296,
   "storage": {
@@ -12041,7 +12041,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-16ds_v5",
+  "pretty_name_azure": "Standard E32-16ds v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -12077,7 +12077,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-16s_v3",
+  "pretty_name_azure": "Standard E32-16s v3",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -12113,7 +12113,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-16s_v4",
+  "pretty_name_azure": "Standard E32-16s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -12149,7 +12149,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-16s_v5",
+  "pretty_name_azure": "Standard E32-16s v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -12185,7 +12185,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-8ads_v5",
+  "pretty_name_azure": "Standard E32-8ads v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -12221,7 +12221,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-8as_v4",
+  "pretty_name_azure": "Standard E32-8as v4",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -12257,7 +12257,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-8as_v5",
+  "pretty_name_azure": "Standard E32-8as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -12293,7 +12293,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-8ds_v4",
+  "pretty_name_azure": "Standard E32-8ds v4",
   "rdma": false,
   "read_io": 1935671296,
   "storage": {
@@ -12329,7 +12329,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-8ds_v5",
+  "pretty_name_azure": "Standard E32-8ds v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -12365,7 +12365,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-8s_v3",
+  "pretty_name_azure": "Standard E32-8s v3",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -12401,7 +12401,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-8s_v4",
+  "pretty_name_azure": "Standard E32-8s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -12437,7 +12437,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32-8s_v5",
+  "pretty_name_azure": "Standard E32-8s v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -12473,7 +12473,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32ads_v5",
+  "pretty_name_azure": "Standard E32ads v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -12509,7 +12509,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32as_v4",
+  "pretty_name_azure": "Standard E32as v4",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -12545,7 +12545,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32as_v5",
+  "pretty_name_azure": "Standard E32as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -12581,7 +12581,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E32a_v4",
+  "pretty_name_azure": "Standard E32a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -12617,7 +12617,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32bds_v5",
+  "pretty_name_azure": "Standard E32bds v5",
   "rdma": false,
   "read_io": 1936000000,
   "storage": {
@@ -12653,7 +12653,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32bs_v5",
+  "pretty_name_azure": "Standard E32bs v5",
   "rdma": false,
   "read_io": 1936000000,
   "storage": {
@@ -12689,7 +12689,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32ds_v4",
+  "pretty_name_azure": "Standard E32ds v4",
   "rdma": false,
   "read_io": 1935671296,
   "storage": {
@@ -12725,7 +12725,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32ds_v5",
+  "pretty_name_azure": "Standard E32ds v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -12761,7 +12761,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E32d_v4",
+  "pretty_name_azure": "Standard E32d v4",
   "rdma": false,
   "read_io": 1935671296,
   "storage": {
@@ -12797,7 +12797,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E32d_v5",
+  "pretty_name_azure": "Standard E32d v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -12833,7 +12833,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32pds_v5",
+  "pretty_name_azure": "Standard E32pds v5",
   "rdma": false,
   "read_io": 2000000000,
   "storage": {
@@ -12869,7 +12869,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32ps_v5",
+  "pretty_name_azure": "Standard E32ps v5",
   "rdma": false,
   "read_io": 2000000000,
   "storage": {
@@ -12905,7 +12905,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32s_v3",
+  "pretty_name_azure": "Standard E32s v3",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -12941,7 +12941,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32s_v4",
+  "pretty_name_azure": "Standard E32s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -12977,7 +12977,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E32s_v5",
+  "pretty_name_azure": "Standard E32s v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -13013,7 +13013,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E32_v3",
+  "pretty_name_azure": "Standard E32 v3",
   "rdma": false,
   "read_io": 786432000,
   "storage": {
@@ -13049,7 +13049,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E32_v4",
+  "pretty_name_azure": "Standard E32 v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -13085,7 +13085,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E32_v5",
+  "pretty_name_azure": "Standard E32 v5",
   "rdma": false,
   "read_io": 2097152000,
   "storage": {
@@ -13121,7 +13121,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4-2ads_v5",
+  "pretty_name_azure": "Standard E4-2ads v5",
   "rdma": false,
   "read_io": 262144000,
   "storage": {
@@ -13157,7 +13157,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4-2as_v4",
+  "pretty_name_azure": "Standard E4-2as v4",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -13193,7 +13193,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4-2as_v5",
+  "pretty_name_azure": "Standard E4-2as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -13229,7 +13229,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4-2ds_v4",
+  "pretty_name_azure": "Standard E4-2ds v4",
   "rdma": false,
   "read_io": 242221056,
   "storage": {
@@ -13265,7 +13265,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4-2ds_v5",
+  "pretty_name_azure": "Standard E4-2ds v5",
   "rdma": false,
   "read_io": 262144000,
   "storage": {
@@ -13301,7 +13301,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4-2s_v3",
+  "pretty_name_azure": "Standard E4-2s v3",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -13337,7 +13337,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4-2s_v4",
+  "pretty_name_azure": "Standard E4-2s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -13373,7 +13373,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4-2s_v5",
+  "pretty_name_azure": "Standard E4-2s v5",
   "rdma": false,
   "read_io": 262144000,
   "storage": {
@@ -13409,7 +13409,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E48ads_v5",
+  "pretty_name_azure": "Standard E48ads v5",
   "rdma": false,
   "read_io": 3145728000,
   "storage": {
@@ -13445,7 +13445,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E48as_v4",
+  "pretty_name_azure": "Standard E48as v4",
   "rdma": false,
   "read_io": 805306368,
   "storage": {
@@ -13481,7 +13481,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E48as_v5",
+  "pretty_name_azure": "Standard E48as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -13517,7 +13517,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E48a_v4",
+  "pretty_name_azure": "Standard E48a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -13553,7 +13553,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E48bds_v5",
+  "pretty_name_azure": "Standard E48bds v5",
   "rdma": false,
   "read_io": 2904000000,
   "storage": {
@@ -13589,7 +13589,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E48bs_v5",
+  "pretty_name_azure": "Standard E48bs v5",
   "rdma": false,
   "read_io": 2904000000,
   "storage": {
@@ -13625,7 +13625,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E48ds_v4",
+  "pretty_name_azure": "Standard E48ds v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -13661,7 +13661,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E48ds_v5",
+  "pretty_name_azure": "Standard E48ds v5",
   "rdma": false,
   "read_io": 3145728000,
   "storage": {
@@ -13697,7 +13697,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E48d_v4",
+  "pretty_name_azure": "Standard E48d v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -13733,7 +13733,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E48d_v5",
+  "pretty_name_azure": "Standard E48d v5",
   "rdma": false,
   "read_io": 3145728000,
   "storage": {
@@ -13769,7 +13769,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E48s_v3",
+  "pretty_name_azure": "Standard E48s v3",
   "rdma": false,
   "read_io": 805306368,
   "storage": {
@@ -13805,7 +13805,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E48s_v4",
+  "pretty_name_azure": "Standard E48s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -13841,7 +13841,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E48s_v5",
+  "pretty_name_azure": "Standard E48s v5",
   "rdma": false,
   "read_io": 3145728000,
   "storage": {
@@ -13877,7 +13877,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E48_v3",
+  "pretty_name_azure": "Standard E48 v3",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -13913,7 +13913,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E48_v4",
+  "pretty_name_azure": "Standard E48 v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -13949,7 +13949,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E48_v5",
+  "pretty_name_azure": "Standard E48 v5",
   "rdma": false,
   "read_io": 3145728000,
   "storage": {
@@ -13985,7 +13985,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4ads_v5",
+  "pretty_name_azure": "Standard E4ads v5",
   "rdma": false,
   "read_io": 262144000,
   "storage": {
@@ -14021,7 +14021,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4as_v4",
+  "pretty_name_azure": "Standard E4as v4",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -14057,7 +14057,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4as_v5",
+  "pretty_name_azure": "Standard E4as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -14093,7 +14093,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E4a_v4",
+  "pretty_name_azure": "Standard E4a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -14129,7 +14129,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4bds_v5",
+  "pretty_name_azure": "Standard E4bds v5",
   "rdma": false,
   "read_io": 242000000,
   "storage": {
@@ -14165,7 +14165,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4bs_v5",
+  "pretty_name_azure": "Standard E4bs v5",
   "rdma": false,
   "read_io": 242000000,
   "storage": {
@@ -14201,7 +14201,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4ds_v4",
+  "pretty_name_azure": "Standard E4ds v4",
   "rdma": false,
   "read_io": 242221056,
   "storage": {
@@ -14237,7 +14237,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4ds_v5",
+  "pretty_name_azure": "Standard E4ds v5",
   "rdma": false,
   "read_io": 262144000,
   "storage": {
@@ -14273,7 +14273,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E4d_v4",
+  "pretty_name_azure": "Standard E4d v4",
   "rdma": false,
   "read_io": 242221056,
   "storage": {
@@ -14309,7 +14309,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E4d_v5",
+  "pretty_name_azure": "Standard E4d v5",
   "rdma": false,
   "read_io": 262144000,
   "storage": {
@@ -14345,7 +14345,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4pds_v5",
+  "pretty_name_azure": "Standard E4pds v5",
   "rdma": false,
   "read_io": 250000000,
   "storage": {
@@ -14381,7 +14381,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4ps_v5",
+  "pretty_name_azure": "Standard E4ps v5",
   "rdma": false,
   "read_io": 250000000,
   "storage": {
@@ -14417,7 +14417,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4s_v3",
+  "pretty_name_azure": "Standard E4s v3",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -14453,7 +14453,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4s_v4",
+  "pretty_name_azure": "Standard E4s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -14489,7 +14489,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E4s_v5",
+  "pretty_name_azure": "Standard E4s v5",
   "rdma": false,
   "read_io": 262144000,
   "storage": {
@@ -14525,7 +14525,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E4_v3",
+  "pretty_name_azure": "Standard E4 v3",
   "rdma": false,
   "read_io": 98304000,
   "storage": {
@@ -14561,7 +14561,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E4_v4",
+  "pretty_name_azure": "Standard E4 v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -14597,7 +14597,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E4_v5",
+  "pretty_name_azure": "Standard E4 v5",
   "rdma": false,
   "read_io": 262144000,
   "storage": {
@@ -14633,7 +14633,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-16ads_v5",
+  "pretty_name_azure": "Standard E64-16ads v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -14669,7 +14669,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-16as_v4",
+  "pretty_name_azure": "Standard E64-16as v4",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -14705,7 +14705,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-16as_v5",
+  "pretty_name_azure": "Standard E64-16as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -14741,7 +14741,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-16ds_v4",
+  "pretty_name_azure": "Standard E64-16ds v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -14777,7 +14777,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-16ds_v5",
+  "pretty_name_azure": "Standard E64-16ds v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -14813,7 +14813,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-16s_v3",
+  "pretty_name_azure": "Standard E64-16s v3",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -14849,7 +14849,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-16s_v4",
+  "pretty_name_azure": "Standard E64-16s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -14885,7 +14885,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-16s_v5",
+  "pretty_name_azure": "Standard E64-16s v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -14921,7 +14921,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-32ads_v5",
+  "pretty_name_azure": "Standard E64-32ads v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -14957,7 +14957,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-32as_v4",
+  "pretty_name_azure": "Standard E64-32as v4",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -14993,7 +14993,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-32as_v5",
+  "pretty_name_azure": "Standard E64-32as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -15029,7 +15029,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-32ds_v4",
+  "pretty_name_azure": "Standard E64-32ds v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -15065,7 +15065,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-32ds_v5",
+  "pretty_name_azure": "Standard E64-32ds v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -15101,7 +15101,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-32s_v3",
+  "pretty_name_azure": "Standard E64-32s v3",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -15137,7 +15137,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-32s_v4",
+  "pretty_name_azure": "Standard E64-32s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -15173,7 +15173,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64-32s_v5",
+  "pretty_name_azure": "Standard E64-32s v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -15209,7 +15209,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64ads_v5",
+  "pretty_name_azure": "Standard E64ads v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -15245,7 +15245,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64as_v4",
+  "pretty_name_azure": "Standard E64as v4",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -15281,7 +15281,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64as_v5",
+  "pretty_name_azure": "Standard E64as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -15317,7 +15317,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E64a_v4",
+  "pretty_name_azure": "Standard E64a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -15353,7 +15353,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64bds_v5",
+  "pretty_name_azure": "Standard E64bds v5",
   "rdma": false,
   "read_io": 3872000000,
   "storage": {
@@ -15389,7 +15389,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64bs_v5",
+  "pretty_name_azure": "Standard E64bs v5",
   "rdma": false,
   "read_io": 3872000000,
   "storage": {
@@ -15425,7 +15425,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64ds_v4",
+  "pretty_name_azure": "Standard E64ds v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -15461,7 +15461,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64ds_v5",
+  "pretty_name_azure": "Standard E64ds v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -15497,7 +15497,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E64d_v4",
+  "pretty_name_azure": "Standard E64d v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -15533,7 +15533,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E64d_v5",
+  "pretty_name_azure": "Standard E64d v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -15569,7 +15569,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64is_v3",
+  "pretty_name_azure": "Standard E64is v3",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -15605,7 +15605,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E64i_v3",
+  "pretty_name_azure": "Standard E64i v3",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -15641,7 +15641,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64s_v3",
+  "pretty_name_azure": "Standard E64s v3",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -15677,7 +15677,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64s_v4",
+  "pretty_name_azure": "Standard E64s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -15713,7 +15713,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E64s_v5",
+  "pretty_name_azure": "Standard E64s v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -15749,7 +15749,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E64_v3",
+  "pretty_name_azure": "Standard E64 v3",
   "rdma": false,
   "read_io": 1048576000,
   "storage": {
@@ -15785,7 +15785,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E64_v4",
+  "pretty_name_azure": "Standard E64 v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -15821,7 +15821,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E64_v5",
+  "pretty_name_azure": "Standard E64 v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -15857,7 +15857,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-2ads_v5",
+  "pretty_name_azure": "Standard E8-2ads v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -15893,7 +15893,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-2as_v4",
+  "pretty_name_azure": "Standard E8-2as v4",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -15929,7 +15929,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-2as_v5",
+  "pretty_name_azure": "Standard E8-2as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -15965,7 +15965,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-2ds_v4",
+  "pretty_name_azure": "Standard E8-2ds v4",
   "rdma": false,
   "read_io": 484442112,
   "storage": {
@@ -16001,7 +16001,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-2ds_v5",
+  "pretty_name_azure": "Standard E8-2ds v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -16037,7 +16037,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-2s_v3",
+  "pretty_name_azure": "Standard E8-2s v3",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -16073,7 +16073,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-2s_v4",
+  "pretty_name_azure": "Standard E8-2s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -16109,7 +16109,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-2s_v5",
+  "pretty_name_azure": "Standard E8-2s v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -16145,7 +16145,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-4ads_v5",
+  "pretty_name_azure": "Standard E8-4ads v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -16181,7 +16181,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-4as_v4",
+  "pretty_name_azure": "Standard E8-4as v4",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -16217,7 +16217,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-4as_v5",
+  "pretty_name_azure": "Standard E8-4as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -16253,7 +16253,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-4ds_v4",
+  "pretty_name_azure": "Standard E8-4ds v4",
   "rdma": false,
   "read_io": 484442112,
   "storage": {
@@ -16289,7 +16289,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-4ds_v5",
+  "pretty_name_azure": "Standard E8-4ds v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -16325,7 +16325,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-4s_v3",
+  "pretty_name_azure": "Standard E8-4s v3",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -16361,7 +16361,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-4s_v4",
+  "pretty_name_azure": "Standard E8-4s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -16397,7 +16397,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8-4s_v5",
+  "pretty_name_azure": "Standard E8-4s v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -16433,7 +16433,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E80ids_v4",
+  "pretty_name_azure": "Standard E80ids v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -16469,7 +16469,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E80is_v4",
+  "pretty_name_azure": "Standard E80is v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -16505,7 +16505,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8ads_v5",
+  "pretty_name_azure": "Standard E8ads v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -16541,7 +16541,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8as_v4",
+  "pretty_name_azure": "Standard E8as v4",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -16577,7 +16577,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8as_v5",
+  "pretty_name_azure": "Standard E8as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -16613,7 +16613,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E8a_v4",
+  "pretty_name_azure": "Standard E8a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -16649,7 +16649,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8bds_v5",
+  "pretty_name_azure": "Standard E8bds v5",
   "rdma": false,
   "read_io": 485000000,
   "storage": {
@@ -16685,7 +16685,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8bs_v5",
+  "pretty_name_azure": "Standard E8bs v5",
   "rdma": false,
   "read_io": 485000000,
   "storage": {
@@ -16721,7 +16721,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8ds_v4",
+  "pretty_name_azure": "Standard E8ds v4",
   "rdma": false,
   "read_io": 484442112,
   "storage": {
@@ -16757,7 +16757,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8ds_v5",
+  "pretty_name_azure": "Standard E8ds v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -16793,7 +16793,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E8d_v4",
+  "pretty_name_azure": "Standard E8d v4",
   "rdma": false,
   "read_io": 484442112,
   "storage": {
@@ -16829,7 +16829,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E8d_v5",
+  "pretty_name_azure": "Standard E8d v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -16865,7 +16865,7 @@
   "low_priority": false,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8pds_v5",
+  "pretty_name_azure": "Standard E8pds v5",
   "rdma": false,
   "read_io": 500000000,
   "storage": {
@@ -16901,7 +16901,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8ps_v5",
+  "pretty_name_azure": "Standard E8ps v5",
   "rdma": false,
   "read_io": 500000000,
   "storage": {
@@ -16937,7 +16937,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8s_v3",
+  "pretty_name_azure": "Standard E8s v3",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -16973,7 +16973,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8s_v4",
+  "pretty_name_azure": "Standard E8s v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -17009,7 +17009,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E8s_v5",
+  "pretty_name_azure": "Standard E8s v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -17045,7 +17045,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E8_v3",
+  "pretty_name_azure": "Standard E8 v3",
   "rdma": false,
   "read_io": 196608000,
   "storage": {
@@ -17081,7 +17081,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E8_v4",
+  "pretty_name_azure": "Standard E8 v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -17117,7 +17117,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E8_v5",
+  "pretty_name_azure": "Standard E8 v5",
   "rdma": false,
   "read_io": 524288000,
   "storage": {
@@ -17153,7 +17153,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96-24ads_v5",
+  "pretty_name_azure": "Standard E96-24ads v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -17189,7 +17189,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96-24as_v4",
+  "pretty_name_azure": "Standard E96-24as v4",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -17225,7 +17225,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96-24as_v5",
+  "pretty_name_azure": "Standard E96-24as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -17261,7 +17261,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96-24ds_v5",
+  "pretty_name_azure": "Standard E96-24ds v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -17297,7 +17297,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96-24s_v5",
+  "pretty_name_azure": "Standard E96-24s v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -17333,7 +17333,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96-48ads_v5",
+  "pretty_name_azure": "Standard E96-48ads v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -17369,7 +17369,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96-48as_v4",
+  "pretty_name_azure": "Standard E96-48as v4",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -17405,7 +17405,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96-48as_v5",
+  "pretty_name_azure": "Standard E96-48as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -17441,7 +17441,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96-48ds_v5",
+  "pretty_name_azure": "Standard E96-48ds v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -17477,7 +17477,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96-48s_v5",
+  "pretty_name_azure": "Standard E96-48s v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -17513,7 +17513,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96ads_v5",
+  "pretty_name_azure": "Standard E96ads v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -17549,7 +17549,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96as_v4",
+  "pretty_name_azure": "Standard E96as v4",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -17585,7 +17585,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96as_v5",
+  "pretty_name_azure": "Standard E96as v5",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -17621,7 +17621,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E96a_v4",
+  "pretty_name_azure": "Standard E96a v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -17657,7 +17657,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96ds_v5",
+  "pretty_name_azure": "Standard E96ds v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -17693,7 +17693,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E96d_v5",
+  "pretty_name_azure": "Standard E96d v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -17729,7 +17729,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96ias_v4",
+  "pretty_name_azure": "Standard E96ias v4",
   "rdma": false,
   "read_io": 1070000000,
   "storage": {
@@ -17765,7 +17765,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_E96s_v5",
+  "pretty_name_azure": "Standard E96s v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -17801,7 +17801,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_E96_v5",
+  "pretty_name_azure": "Standard E96 v5",
   "rdma": false,
   "read_io": 4194304000,
   "storage": {
@@ -17837,7 +17837,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC16ads_v5",
+  "pretty_name_azure": "Standard EC16ads v5",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -17873,7 +17873,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC16as_v5",
+  "pretty_name_azure": "Standard EC16as v5",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -17909,7 +17909,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC20ads_v5",
+  "pretty_name_azure": "Standard EC20ads v5",
   "rdma": false,
   "read_io": 335544320,
   "storage": {
@@ -17945,7 +17945,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC20as_v5",
+  "pretty_name_azure": "Standard EC20as v5",
   "rdma": false,
   "read_io": 335544320,
   "storage": {
@@ -17981,7 +17981,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC2ads_v5",
+  "pretty_name_azure": "Standard EC2ads v5",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -18017,7 +18017,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC2as_v5",
+  "pretty_name_azure": "Standard EC2as v5",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -18053,7 +18053,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC32ads_v5",
+  "pretty_name_azure": "Standard EC32ads v5",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -18089,7 +18089,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC32as_v5",
+  "pretty_name_azure": "Standard EC32as v5",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -18125,7 +18125,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC48ads_v5",
+  "pretty_name_azure": "Standard EC48ads v5",
   "rdma": false,
   "read_io": 805306368,
   "storage": {
@@ -18161,7 +18161,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC48as_v5",
+  "pretty_name_azure": "Standard EC48as v5",
   "rdma": false,
   "read_io": 805306368,
   "storage": {
@@ -18197,7 +18197,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC4ads_v5",
+  "pretty_name_azure": "Standard EC4ads v5",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -18233,7 +18233,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC4as_v5",
+  "pretty_name_azure": "Standard EC4as v5",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -18269,7 +18269,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC64ads_v5",
+  "pretty_name_azure": "Standard EC64ads v5",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -18305,7 +18305,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC64as_v5",
+  "pretty_name_azure": "Standard EC64as v5",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -18341,7 +18341,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC8ads_v5",
+  "pretty_name_azure": "Standard EC8ads v5",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -18377,7 +18377,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC8as_v5",
+  "pretty_name_azure": "Standard EC8as v5",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -18413,7 +18413,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC96ads_v5",
+  "pretty_name_azure": "Standard EC96ads v5",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -18449,7 +18449,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC96as_v5",
+  "pretty_name_azure": "Standard EC96as v5",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -18485,7 +18485,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC96iads_v5",
+  "pretty_name_azure": "Standard EC96iads v5",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -18521,7 +18521,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_EC96ias_v5",
+  "pretty_name_azure": "Standard EC96ias v5",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -18557,7 +18557,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_F1",
+  "pretty_name_azure": "Standard F1",
   "rdma": false,
   "read_io": 49152000,
   "storage": {
@@ -18593,7 +18593,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_F16",
+  "pretty_name_azure": "Standard F16",
   "rdma": false,
   "read_io": 786432000,
   "storage": {
@@ -18629,7 +18629,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_F16s",
+  "pretty_name_azure": "Standard F16s",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -18665,7 +18665,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_F16s_v2",
+  "pretty_name_azure": "Standard F16s v2",
   "rdma": false,
   "read_io": 262144000,
   "storage": {
@@ -18701,7 +18701,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_F1s",
+  "pretty_name_azure": "Standard F1s",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -18737,7 +18737,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_F2",
+  "pretty_name_azure": "Standard F2",
   "rdma": false,
   "read_io": 98304000,
   "storage": {
@@ -18773,7 +18773,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_F2s",
+  "pretty_name_azure": "Standard F2s",
   "rdma": false,
   "read_io": 67108864,
   "storage": {
@@ -18809,7 +18809,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_F2s_v2",
+  "pretty_name_azure": "Standard F2s v2",
   "rdma": false,
   "read_io": 32505856,
   "storage": {
@@ -18845,7 +18845,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_F32s_v2",
+  "pretty_name_azure": "Standard F32s v2",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -18881,7 +18881,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_F4",
+  "pretty_name_azure": "Standard F4",
   "rdma": false,
   "read_io": 196608000,
   "storage": {
@@ -18917,7 +18917,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_F48s_v2",
+  "pretty_name_azure": "Standard F48s v2",
   "rdma": false,
   "read_io": 805306368,
   "storage": {
@@ -18953,7 +18953,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_F4s",
+  "pretty_name_azure": "Standard F4s",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -18989,7 +18989,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_F4s_v2",
+  "pretty_name_azure": "Standard F4s v2",
   "rdma": false,
   "read_io": 65536000,
   "storage": {
@@ -19025,7 +19025,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_F64s_v2",
+  "pretty_name_azure": "Standard F64s v2",
   "rdma": false,
   "read_io": 1073741824,
   "storage": {
@@ -19061,7 +19061,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_F72s_v2",
+  "pretty_name_azure": "Standard F72s v2",
   "rdma": false,
   "read_io": 1207959552,
   "storage": {
@@ -19097,7 +19097,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": false,
-  "pretty_name_azure": "Standard_F8",
+  "pretty_name_azure": "Standard F8",
   "rdma": false,
   "read_io": 393216000,
   "storage": {
@@ -19133,7 +19133,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_F8s",
+  "pretty_name_azure": "Standard F8s",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -19169,7 +19169,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_F8s_v2",
+  "pretty_name_azure": "Standard F8s v2",
   "rdma": false,
   "read_io": 131072000,
   "storage": {
@@ -19205,7 +19205,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_FX12mds",
+  "pretty_name_azure": "Standard FX12mds",
   "rdma": false,
   "read_io": 1028653056,
   "storage": {
@@ -19241,7 +19241,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_FX24mds",
+  "pretty_name_azure": "Standard FX24mds",
   "rdma": false,
   "read_io": 2057306112,
   "storage": {
@@ -19277,7 +19277,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_FX36mds",
+  "pretty_name_azure": "Standard FX36mds",
   "rdma": false,
   "read_io": 3085959168,
   "storage": {
@@ -19313,7 +19313,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_FX48mds",
+  "pretty_name_azure": "Standard FX48mds",
   "rdma": false,
   "read_io": 3871342592,
   "storage": {
@@ -19349,7 +19349,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_FX4mds",
+  "pretty_name_azure": "Standard FX4mds",
   "rdma": false,
   "read_io": 342884352,
   "storage": {
@@ -19385,7 +19385,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_G1",
+  "pretty_name_azure": "Standard G1",
   "rdma": false,
   "read_io": 98304000,
   "storage": {
@@ -19421,7 +19421,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_G2",
+  "pretty_name_azure": "Standard G2",
   "rdma": false,
   "read_io": 196608000,
   "storage": {
@@ -19457,7 +19457,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_G3",
+  "pretty_name_azure": "Standard G3",
   "rdma": false,
   "read_io": 393216000,
   "storage": {
@@ -19493,7 +19493,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_G4",
+  "pretty_name_azure": "Standard G4",
   "rdma": false,
   "read_io": 786432000,
   "storage": {
@@ -19529,7 +19529,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_G5",
+  "pretty_name_azure": "Standard G5",
   "rdma": false,
   "read_io": 1572864000,
   "storage": {
@@ -19565,7 +19565,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_GS1",
+  "pretty_name_azure": "Standard GS1",
   "rdma": false,
   "read_io": 104857600,
   "storage": {
@@ -19601,7 +19601,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_GS2",
+  "pretty_name_azure": "Standard GS2",
   "rdma": false,
   "read_io": 209715200,
   "storage": {
@@ -19637,7 +19637,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_GS3",
+  "pretty_name_azure": "Standard GS3",
   "rdma": false,
   "read_io": 419430400,
   "storage": {
@@ -19673,7 +19673,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_GS4",
+  "pretty_name_azure": "Standard GS4",
   "rdma": false,
   "read_io": 838860800,
   "storage": {
@@ -19709,7 +19709,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_GS4-4",
+  "pretty_name_azure": "Standard GS4-4",
   "rdma": false,
   "read_io": 838860800,
   "storage": {
@@ -19745,7 +19745,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_GS4-8",
+  "pretty_name_azure": "Standard GS4-8",
   "rdma": false,
   "read_io": 838860800,
   "storage": {
@@ -19781,7 +19781,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_GS5",
+  "pretty_name_azure": "Standard GS5",
   "rdma": false,
   "read_io": 1677721600,
   "storage": {
@@ -19817,7 +19817,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_GS5-16",
+  "pretty_name_azure": "Standard GS5-16",
   "rdma": false,
   "read_io": 1677721600,
   "storage": {
@@ -19853,7 +19853,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_GS5-8",
+  "pretty_name_azure": "Standard GS5-8",
   "rdma": false,
   "read_io": 1677721600,
   "storage": {
@@ -19889,7 +19889,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_H16",
+  "pretty_name_azure": "Standard H16",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -19925,7 +19925,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_H16m",
+  "pretty_name_azure": "Standard H16m",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -19961,7 +19961,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_H16mr",
+  "pretty_name_azure": "Standard H16mr",
   "rdma": true,
   "read_io": 33554432,
   "storage": {
@@ -19997,7 +19997,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_H16r",
+  "pretty_name_azure": "Standard H16r",
   "rdma": true,
   "read_io": 33554432,
   "storage": {
@@ -20033,7 +20033,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_H8",
+  "pretty_name_azure": "Standard H8",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -20069,7 +20069,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_H8m",
+  "pretty_name_azure": "Standard H8m",
   "rdma": false,
   "read_io": 33554432,
   "storage": {
@@ -20105,7 +20105,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HB120-16rs_v2",
+  "pretty_name_azure": "Standard HB120-16rs v2",
   "rdma": true,
   "read_io": 10307921510,
   "storage": {
@@ -20141,7 +20141,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HB120-16rs_v3",
+  "pretty_name_azure": "Standard HB120-16rs v3",
   "rdma": true,
   "read_io": 10307921510,
   "storage": {
@@ -20177,7 +20177,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HB120-32rs_v2",
+  "pretty_name_azure": "Standard HB120-32rs v2",
   "rdma": true,
   "read_io": 10307921510,
   "storage": {
@@ -20213,7 +20213,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HB120-32rs_v3",
+  "pretty_name_azure": "Standard HB120-32rs v3",
   "rdma": true,
   "read_io": 10307921510,
   "storage": {
@@ -20249,7 +20249,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HB120-64rs_v2",
+  "pretty_name_azure": "Standard HB120-64rs v2",
   "rdma": true,
   "read_io": 10307921510,
   "storage": {
@@ -20285,7 +20285,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HB120-64rs_v3",
+  "pretty_name_azure": "Standard HB120-64rs v3",
   "rdma": true,
   "read_io": 10307921510,
   "storage": {
@@ -20321,7 +20321,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HB120-96rs_v2",
+  "pretty_name_azure": "Standard HB120-96rs v2",
   "rdma": true,
   "read_io": 10307921510,
   "storage": {
@@ -20357,7 +20357,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HB120-96rs_v3",
+  "pretty_name_azure": "Standard HB120-96rs v3",
   "rdma": true,
   "read_io": 10307921510,
   "storage": {
@@ -20393,7 +20393,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HB120rs_v2",
+  "pretty_name_azure": "Standard HB120rs v2",
   "rdma": true,
   "read_io": 0,
   "storage": {
@@ -20429,7 +20429,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HB120rs_v3",
+  "pretty_name_azure": "Standard HB120rs v3",
   "rdma": true,
   "read_io": 10307921510,
   "storage": {
@@ -20462,10 +20462,10 @@
   "hyperv_generations": "V1,V2",
   "instance_type": "hb60-15rs",
   "iops": 1020,
-  "low_priority": true,
+  "low_priority": false,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HB60-15rs",
+  "pretty_name_azure": "Standard HB60-15rs",
   "rdma": true,
   "read_io": 20971520,
   "storage": {
@@ -20498,10 +20498,10 @@
   "hyperv_generations": "V1,V2",
   "instance_type": "hb60-30rs",
   "iops": 1020,
-  "low_priority": true,
+  "low_priority": false,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HB60-30rs",
+  "pretty_name_azure": "Standard HB60-30rs",
   "rdma": true,
   "read_io": 20971520,
   "storage": {
@@ -20534,10 +20534,10 @@
   "hyperv_generations": "V1,V2",
   "instance_type": "hb60-45rs",
   "iops": 1020,
-  "low_priority": true,
+  "low_priority": false,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HB60-45rs",
+  "pretty_name_azure": "Standard HB60-45rs",
   "rdma": true,
   "read_io": 20971520,
   "storage": {
@@ -20570,10 +20570,10 @@
   "hyperv_generations": "V1,V2",
   "instance_type": "hb60rs",
   "iops": null,
-  "low_priority": true,
+  "low_priority": false,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HB60rs",
+  "pretty_name_azure": "Standard HB60rs",
   "rdma": true,
   "read_io": 0,
   "storage": {
@@ -20609,7 +20609,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HC44-16rs",
+  "pretty_name_azure": "Standard HC44-16rs",
   "rdma": true,
   "read_io": 20971520,
   "storage": {
@@ -20645,7 +20645,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HC44-32rs",
+  "pretty_name_azure": "Standard HC44-32rs",
   "rdma": true,
   "read_io": 20971520,
   "storage": {
@@ -20681,7 +20681,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_HC44rs",
+  "pretty_name_azure": "Standard HC44rs",
   "rdma": true,
   "read_io": 0,
   "storage": {
@@ -20717,7 +20717,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L16as_v3",
+  "pretty_name_azure": "Standard L16as v3",
   "rdma": false,
   "read_io": 160000000,
   "storage": {
@@ -20753,7 +20753,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L16s",
+  "pretty_name_azure": "Standard L16s",
   "rdma": false,
   "read_io": 838860800,
   "storage": {
@@ -20789,7 +20789,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L16s_v2",
+  "pretty_name_azure": "Standard L16s v2",
   "rdma": false,
   "read_io": 167772160,
   "storage": {
@@ -20825,7 +20825,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L16s_v3",
+  "pretty_name_azure": "Standard L16s v3",
   "rdma": false,
   "read_io": 160000000,
   "storage": {
@@ -20861,7 +20861,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L32as_v3",
+  "pretty_name_azure": "Standard L32as v3",
   "rdma": false,
   "read_io": 320000000,
   "storage": {
@@ -20897,7 +20897,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L32s",
+  "pretty_name_azure": "Standard L32s",
   "rdma": false,
   "read_io": 1677721600,
   "storage": {
@@ -20933,7 +20933,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L32s_v2",
+  "pretty_name_azure": "Standard L32s v2",
   "rdma": false,
   "read_io": 335544320,
   "storage": {
@@ -20969,7 +20969,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L32s_v3",
+  "pretty_name_azure": "Standard L32s v3",
   "rdma": false,
   "read_io": 320000000,
   "storage": {
@@ -21005,7 +21005,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L48as_v3",
+  "pretty_name_azure": "Standard L48as v3",
   "rdma": false,
   "read_io": 480000000,
   "storage": {
@@ -21041,7 +21041,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L48s_v2",
+  "pretty_name_azure": "Standard L48s v2",
   "rdma": false,
   "read_io": 503316480,
   "storage": {
@@ -21077,7 +21077,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L48s_v3",
+  "pretty_name_azure": "Standard L48s v3",
   "rdma": false,
   "read_io": 480000000,
   "storage": {
@@ -21113,7 +21113,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L4s",
+  "pretty_name_azure": "Standard L4s",
   "rdma": false,
   "read_io": 209715200,
   "storage": {
@@ -21149,7 +21149,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L64as_v3",
+  "pretty_name_azure": "Standard L64as v3",
   "rdma": false,
   "read_io": 640000000,
   "storage": {
@@ -21185,7 +21185,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L64s_v2",
+  "pretty_name_azure": "Standard L64s v2",
   "rdma": false,
   "read_io": 671088640,
   "storage": {
@@ -21221,7 +21221,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L64s_v3",
+  "pretty_name_azure": "Standard L64s v3",
   "rdma": false,
   "read_io": 640000000,
   "storage": {
@@ -21257,7 +21257,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L80as_v3",
+  "pretty_name_azure": "Standard L80as v3",
   "rdma": false,
   "read_io": 800000000,
   "storage": {
@@ -21293,7 +21293,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L80s_v2",
+  "pretty_name_azure": "Standard L80s v2",
   "rdma": false,
   "read_io": 838860800,
   "storage": {
@@ -21329,7 +21329,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L80s_v3",
+  "pretty_name_azure": "Standard L80s v3",
   "rdma": false,
   "read_io": 800000000,
   "storage": {
@@ -21365,7 +21365,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L8as_v3",
+  "pretty_name_azure": "Standard L8as v3",
   "rdma": false,
   "read_io": 80000000,
   "storage": {
@@ -21401,7 +21401,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L8s",
+  "pretty_name_azure": "Standard L8s",
   "rdma": false,
   "read_io": 419430400,
   "storage": {
@@ -21437,7 +21437,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L8s_v2",
+  "pretty_name_azure": "Standard L8s v2",
   "rdma": false,
   "read_io": 83886080,
   "storage": {
@@ -21473,7 +21473,7 @@
   "low_priority": true,
   "memory_maintenance": true,
   "premium_io": true,
-  "pretty_name_azure": "Standard_L8s_v3",
+  "pretty_name_azure": "Standard L8s v3",
   "rdma": false,
   "read_io": 80000000,
   "storage": {
@@ -21509,7 +21509,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M128",
+  "pretty_name_azure": "Standard M128",
   "rdma": false,
   "read_io": 1677721600,
   "storage": {
@@ -21545,7 +21545,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M128-32ms",
+  "pretty_name_azure": "Standard M128-32ms",
   "rdma": false,
   "read_io": 1677721600,
   "storage": {
@@ -21581,7 +21581,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M128-64ms",
+  "pretty_name_azure": "Standard M128-64ms",
   "rdma": false,
   "read_io": 1677721600,
   "storage": {
@@ -21617,7 +21617,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M128dms_v2",
+  "pretty_name_azure": "Standard M128dms v2",
   "rdma": false,
   "read_io": 1600000000,
   "storage": {
@@ -21653,7 +21653,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M128ds_v2",
+  "pretty_name_azure": "Standard M128ds v2",
   "rdma": false,
   "read_io": 1600000000,
   "storage": {
@@ -21689,7 +21689,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M128m",
+  "pretty_name_azure": "Standard M128m",
   "rdma": false,
   "read_io": 1677721600,
   "storage": {
@@ -21725,7 +21725,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M128ms",
+  "pretty_name_azure": "Standard M128ms",
   "rdma": false,
   "read_io": 1677721600,
   "storage": {
@@ -21761,7 +21761,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M128ms_v2",
+  "pretty_name_azure": "Standard M128ms v2",
   "rdma": false,
   "read_io": 1600000000,
   "storage": {
@@ -21797,7 +21797,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M128s",
+  "pretty_name_azure": "Standard M128s",
   "rdma": false,
   "read_io": 1677721600,
   "storage": {
@@ -21833,7 +21833,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M128s_v2",
+  "pretty_name_azure": "Standard M128s v2",
   "rdma": false,
   "read_io": 1600000000,
   "storage": {
@@ -21869,7 +21869,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M16-4ms",
+  "pretty_name_azure": "Standard M16-4ms",
   "rdma": false,
   "read_io": 209715200,
   "storage": {
@@ -21905,7 +21905,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M16-8ms",
+  "pretty_name_azure": "Standard M16-8ms",
   "rdma": false,
   "read_io": 209715200,
   "storage": {
@@ -21941,7 +21941,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M16ms",
+  "pretty_name_azure": "Standard M16ms",
   "rdma": false,
   "read_io": 209715200,
   "storage": {
@@ -21977,7 +21977,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M192idms_v2",
+  "pretty_name_azure": "Standard M192idms v2",
   "rdma": false,
   "read_io": 1600000000,
   "storage": {
@@ -22013,7 +22013,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M192ids_v2",
+  "pretty_name_azure": "Standard M192ids v2",
   "rdma": false,
   "read_io": 1600000000,
   "storage": {
@@ -22049,7 +22049,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M192ims_v2",
+  "pretty_name_azure": "Standard M192ims v2",
   "rdma": false,
   "read_io": 1600000000,
   "storage": {
@@ -22085,7 +22085,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M192is_v2",
+  "pretty_name_azure": "Standard M192is v2",
   "rdma": false,
   "read_io": 1600000000,
   "storage": {
@@ -22121,7 +22121,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M208ms_v2",
+  "pretty_name_azure": "Standard M208ms v2",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -22157,7 +22157,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M208s_v2",
+  "pretty_name_azure": "Standard M208s v2",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -22193,7 +22193,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M32-16ms",
+  "pretty_name_azure": "Standard M32-16ms",
   "rdma": false,
   "read_io": 419430400,
   "storage": {
@@ -22229,7 +22229,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M32-8ms",
+  "pretty_name_azure": "Standard M32-8ms",
   "rdma": false,
   "read_io": 419430400,
   "storage": {
@@ -22265,7 +22265,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M32dms_v2",
+  "pretty_name_azure": "Standard M32dms v2",
   "rdma": false,
   "read_io": 400000000,
   "storage": {
@@ -22301,7 +22301,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M32ls",
+  "pretty_name_azure": "Standard M32ls",
   "rdma": false,
   "read_io": 419430400,
   "storage": {
@@ -22337,7 +22337,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M32ms",
+  "pretty_name_azure": "Standard M32ms",
   "rdma": false,
   "read_io": 419430400,
   "storage": {
@@ -22373,7 +22373,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M32ms_v2",
+  "pretty_name_azure": "Standard M32ms v2",
   "rdma": false,
   "read_io": 400000000,
   "storage": {
@@ -22409,7 +22409,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M32ts",
+  "pretty_name_azure": "Standard M32ts",
   "rdma": false,
   "read_io": 419430400,
   "storage": {
@@ -22445,7 +22445,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M416-208ms_v2",
+  "pretty_name_azure": "Standard M416-208ms v2",
   "rdma": false,
   "read_io": 1600000000,
   "storage": {
@@ -22481,7 +22481,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M416-208s_v2",
+  "pretty_name_azure": "Standard M416-208s v2",
   "rdma": false,
   "read_io": 1600000000,
   "storage": {
@@ -22517,7 +22517,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M416ms_v2",
+  "pretty_name_azure": "Standard M416ms v2",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -22553,7 +22553,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M416s_v2",
+  "pretty_name_azure": "Standard M416s v2",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -22589,7 +22589,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M64",
+  "pretty_name_azure": "Standard M64",
   "rdma": false,
   "read_io": 838860800,
   "storage": {
@@ -22625,7 +22625,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M64-16ms",
+  "pretty_name_azure": "Standard M64-16ms",
   "rdma": false,
   "read_io": 838860800,
   "storage": {
@@ -22661,7 +22661,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M64-32ms",
+  "pretty_name_azure": "Standard M64-32ms",
   "rdma": false,
   "read_io": 838860800,
   "storage": {
@@ -22697,7 +22697,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M64dms_v2",
+  "pretty_name_azure": "Standard M64dms v2",
   "rdma": false,
   "read_io": 800000000,
   "storage": {
@@ -22733,7 +22733,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M64ds_v2",
+  "pretty_name_azure": "Standard M64ds v2",
   "rdma": false,
   "read_io": 800000000,
   "storage": {
@@ -22769,7 +22769,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M64ls",
+  "pretty_name_azure": "Standard M64ls",
   "rdma": false,
   "read_io": 838860800,
   "storage": {
@@ -22805,7 +22805,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M64m",
+  "pretty_name_azure": "Standard M64m",
   "rdma": false,
   "read_io": 838860800,
   "storage": {
@@ -22841,7 +22841,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M64ms",
+  "pretty_name_azure": "Standard M64ms",
   "rdma": false,
   "read_io": 838860800,
   "storage": {
@@ -22877,7 +22877,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M64ms_v2",
+  "pretty_name_azure": "Standard M64ms v2",
   "rdma": false,
   "read_io": 800000000,
   "storage": {
@@ -22913,7 +22913,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M64s",
+  "pretty_name_azure": "Standard M64s",
   "rdma": false,
   "read_io": 800000000,
   "storage": {
@@ -22949,7 +22949,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M64s_v2",
+  "pretty_name_azure": "Standard M64s v2",
   "rdma": false,
   "read_io": 800000000,
   "storage": {
@@ -22985,7 +22985,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M8-2ms",
+  "pretty_name_azure": "Standard M8-2ms",
   "rdma": false,
   "read_io": 104857600,
   "storage": {
@@ -23021,7 +23021,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M8-4ms",
+  "pretty_name_azure": "Standard M8-4ms",
   "rdma": false,
   "read_io": 104857600,
   "storage": {
@@ -23057,7 +23057,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_M8ms",
+  "pretty_name_azure": "Standard M8ms",
   "rdma": false,
   "read_io": 104857600,
   "storage": {
@@ -23093,7 +23093,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_NC12",
+  "pretty_name_azure": "Standard NC12",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -23129,7 +23129,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC12s_v2",
+  "pretty_name_azure": "Standard NC12s v2",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -23165,7 +23165,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC12s_v3",
+  "pretty_name_azure": "Standard NC12s v3",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -23201,7 +23201,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC16ads_A10_v4",
+  "pretty_name_azure": "Standard NC16ads A10 v4",
   "rdma": false,
   "read_io": 536870912,
   "storage": {
@@ -23237,7 +23237,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC16as_T4_v3",
+  "pretty_name_azure": "Standard NC16as T4 v3",
   "rdma": false,
   "read_io": 251658240,
   "storage": {
@@ -23273,7 +23273,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_NC24",
+  "pretty_name_azure": "Standard NC24",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -23309,7 +23309,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC24ads_A100_v4",
+  "pretty_name_azure": "Standard NC24ads A100 v4",
   "rdma": false,
   "read_io": 1000000000,
   "storage": {
@@ -23345,7 +23345,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_NC24r",
+  "pretty_name_azure": "Standard NC24r",
   "rdma": true,
   "read_io": 0,
   "storage": {
@@ -23381,7 +23381,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC24rs_v2",
+  "pretty_name_azure": "Standard NC24rs v2",
   "rdma": true,
   "read_io": 0,
   "storage": {
@@ -23417,7 +23417,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC24rs_v3",
+  "pretty_name_azure": "Standard NC24rs v3",
   "rdma": true,
   "read_io": 0,
   "storage": {
@@ -23453,7 +23453,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC24s_v2",
+  "pretty_name_azure": "Standard NC24s v2",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -23489,7 +23489,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC24s_v3",
+  "pretty_name_azure": "Standard NC24s v3",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -23525,7 +23525,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC32ads_A10_v4",
+  "pretty_name_azure": "Standard NC32ads A10 v4",
   "rdma": false,
   "read_io": 805306368,
   "storage": {
@@ -23561,7 +23561,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC48ads_A100_v4",
+  "pretty_name_azure": "Standard NC48ads A100 v4",
   "rdma": false,
   "read_io": 3000000000,
   "storage": {
@@ -23597,7 +23597,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC4as_T4_v3",
+  "pretty_name_azure": "Standard NC4as T4 v3",
   "rdma": false,
   "read_io": 251658240,
   "storage": {
@@ -23633,7 +23633,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_NC6",
+  "pretty_name_azure": "Standard NC6",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -23669,7 +23669,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC64as_T4_v3",
+  "pretty_name_azure": "Standard NC64as T4 v3",
   "rdma": false,
   "read_io": 251658240,
   "storage": {
@@ -23705,7 +23705,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC6s_v2",
+  "pretty_name_azure": "Standard NC6s v2",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -23741,7 +23741,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC6s_v3",
+  "pretty_name_azure": "Standard NC6s v3",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -23777,7 +23777,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC8ads_A10_v4",
+  "pretty_name_azure": "Standard NC8ads A10 v4",
   "rdma": false,
   "read_io": 268435456,
   "storage": {
@@ -23813,7 +23813,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC8as_T4_v3",
+  "pretty_name_azure": "Standard NC8as T4 v3",
   "rdma": false,
   "read_io": 251658240,
   "storage": {
@@ -23849,7 +23849,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NC96ads_A100_v4",
+  "pretty_name_azure": "Standard NC96ads A100 v4",
   "rdma": false,
   "read_io": 1024000000,
   "storage": {
@@ -23885,7 +23885,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_ND12s",
+  "pretty_name_azure": "Standard ND12s",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -23921,7 +23921,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_ND24rs",
+  "pretty_name_azure": "Standard ND24rs",
   "rdma": true,
   "read_io": 0,
   "storage": {
@@ -23957,7 +23957,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_ND24s",
+  "pretty_name_azure": "Standard ND24s",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -23993,7 +23993,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_ND40rs_v2",
+  "pretty_name_azure": "Standard ND40rs v2",
   "rdma": true,
   "read_io": 0,
   "storage": {
@@ -24029,7 +24029,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_ND40s_v3",
+  "pretty_name_azure": "Standard ND40s v3",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24065,7 +24065,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_ND6s",
+  "pretty_name_azure": "Standard ND6s",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24101,7 +24101,7 @@
   "low_priority": false,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_ND96amsr_A100_v4",
+  "pretty_name_azure": "Standard ND96amsr A100 v4",
   "rdma": true,
   "read_io": 10307921510,
   "storage": {
@@ -24137,7 +24137,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_ND96asr_v4",
+  "pretty_name_azure": "Standard ND96asr v4",
   "rdma": true,
   "read_io": 0,
   "storage": {
@@ -24173,7 +24173,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NP10s",
+  "pretty_name_azure": "Standard NP10s",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24209,7 +24209,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NP20s",
+  "pretty_name_azure": "Standard NP20s",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24245,7 +24245,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NP40s",
+  "pretty_name_azure": "Standard NP40s",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24281,7 +24281,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_NV12",
+  "pretty_name_azure": "Standard NV12",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24317,7 +24317,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV12ads_A10_v5",
+  "pretty_name_azure": "Standard NV12ads A10 v5",
   "rdma": false,
   "read_io": 134217728,
   "storage": {
@@ -24353,7 +24353,7 @@
   "low_priority": false,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV12s_v2",
+  "pretty_name_azure": "Standard NV12s v2",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24389,7 +24389,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV12s_v3",
+  "pretty_name_azure": "Standard NV12s v3",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24425,7 +24425,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV16as_v4",
+  "pretty_name_azure": "Standard NV16as v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24461,7 +24461,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV18ads_A10_v5",
+  "pretty_name_azure": "Standard NV18ads A10 v5",
   "rdma": false,
   "read_io": 125829120,
   "storage": {
@@ -24497,7 +24497,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_NV24",
+  "pretty_name_azure": "Standard NV24",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24533,7 +24533,7 @@
   "low_priority": false,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV24s_v2",
+  "pretty_name_azure": "Standard NV24s v2",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24569,7 +24569,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV24s_v3",
+  "pretty_name_azure": "Standard NV24s v3",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24605,7 +24605,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV32as_v4",
+  "pretty_name_azure": "Standard NV32as v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24641,7 +24641,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV36adms_A10_v5",
+  "pretty_name_azure": "Standard NV36adms A10 v5",
   "rdma": false,
   "read_io": 125829120,
   "storage": {
@@ -24677,7 +24677,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV36ads_A10_v5",
+  "pretty_name_azure": "Standard NV36ads A10 v5",
   "rdma": false,
   "read_io": 125829120,
   "storage": {
@@ -24713,7 +24713,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV48s_v3",
+  "pretty_name_azure": "Standard NV48s v3",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24749,7 +24749,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV4as_v4",
+  "pretty_name_azure": "Standard NV4as v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24785,7 +24785,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": false,
-  "pretty_name_azure": "Standard_NV6",
+  "pretty_name_azure": "Standard NV6",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24821,7 +24821,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV6ads_A10_v5",
+  "pretty_name_azure": "Standard NV6ads A10 v5",
   "rdma": false,
   "read_io": 125829120,
   "storage": {
@@ -24857,7 +24857,7 @@
   "low_priority": false,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV6s_v2",
+  "pretty_name_azure": "Standard NV6s v2",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24893,7 +24893,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV72ads_A10_v5",
+  "pretty_name_azure": "Standard NV72ads A10 v5",
   "rdma": false,
   "read_io": 805306368,
   "storage": {
@@ -24929,7 +24929,7 @@
   "low_priority": true,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_NV8as_v4",
+  "pretty_name_azure": "Standard NV8as v4",
   "rdma": false,
   "read_io": 0,
   "storage": {
@@ -24965,7 +24965,7 @@
   "low_priority": false,
   "memory_maintenance": false,
   "premium_io": true,
-  "pretty_name_azure": "Standard_PB6s",
+  "pretty_name_azure": "Standard PB6s",
   "rdma": false,
   "read_io": 0,
   "storage": {

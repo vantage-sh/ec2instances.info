@@ -226,7 +226,7 @@ def azure_vm_specs():
             if inst_name not in instances:
                 instances[inst_name] = AzureInstance()
                 instances[inst_name].instance_type = inst_name
-                instances[inst_name].pretty_name_azure = s.name
+                instances[inst_name].pretty_name_azure = s.name.replace('_', ' ')
                 parse_specs(instances[inst_name], s.capabilities)
             i += 1
     print("Went through {} SKUs".format(i))
@@ -344,7 +344,7 @@ class AzureInstance2(object):
         self.size = 0
         self.pricing = {}
         self.availability_zones = {}
-        self.GPU = ""
+        self.GPU = "0"
     
     def to_dict(self):
         return vars(self)
@@ -514,6 +514,7 @@ def combine_specs_pricing():
         if found_flag:
             i.update(s)
         else:
+            i["pretty_name_azure"] = i["pretty_name"]
             missing.append(i["instance_type"])
     
     for m in missing:
@@ -549,8 +550,8 @@ def scrape(output_file, input_file=None):
 
 
 if __name__ == '__main__':
-    output_file = 'www/azure/instances.json'
-    scrape(output_file)
+    # output_file = 'www/azure/instances.json'
+    # scrape(output_file)
 
     # Run this to build the instances-specs.json file
     # azure_vm_specs()

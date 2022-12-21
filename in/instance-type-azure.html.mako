@@ -17,7 +17,7 @@
       rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
     <link rel="icon" type="image/png" href="https://assets.vantage.sh/www/favicon-32x32.png">
-    <title>${i["Azure"][1]["value"]} pricing and specs - Vantage</title>
+    <title>${i["Azure"][2]["value"]} pricing and specs - Vantage</title>
     <meta name="description" content="${description}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   </head>
@@ -65,7 +65,7 @@
       <div class="columns">
         <div class="column-left--parent">
           <div class="column-left">
-            <h1 class="h3 mb-0 fw-bolder">${i["Azure"][1]["value"]}</h1>
+            <h1 class="h3 mb-0 fw-bolder">${i["Azure"][2]["value"]}</h1>
             
             <!-- Description -->
             <p class="py-md-4 py-3 mb-2 small lh-base">${description}</p>

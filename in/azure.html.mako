@@ -74,7 +74,7 @@
             <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Standard.hybridbenefit'>1-year - Reservation (Hybrid Benefit)</a></li>
             <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Standard.hybridbenefit'>3-year - Reservation (Hybrid Benefit)</a></li>
             <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Savings.allUpfront'>1-year - Savings Plan</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Savings.allUpfront'>3-year - Full Upfront</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Savings.allUpfront'>3-year - Savings Plan</a></li>
             <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Savings.hybridbenefit'>1-year - Savings Plan (Hybrid Benefit)</a></li>
             <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Savings.hybridbenefit'>3-year - Savings Plan (Hybrid Benefit)</a></li>
             <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Standard.subscription'>1-year - Subscription</a></li>
@@ -161,7 +161,7 @@
       <tbody>
         % for inst in instances:
           <tr class='instance' id="${inst['instance_type']}">
-            <td class="name">${inst['pretty_name']}</td>
+            <td class="name">${inst['pretty_name_azure']}</td>
             <td class="apiname"><a href="/azure/vm/${inst['instance_type']}">${inst['pretty_name']}</a></td>
             <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
             <td class="vcpu">
