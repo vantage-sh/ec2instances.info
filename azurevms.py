@@ -9,51 +9,36 @@ import yaml
 class AzureInstance(object):
     def __init__(self):
         self.ACU = 0
-        self.accelerated_networking = None
+        self.accelerated_networking = False
         self.arch = []
         self.api_description = None
         self.availability_zones = {}
         self.cached_disk = 0
-        self.capacity_support = None
-        self.clock_speed_ghz = None
-        self.compute_capability = 0
-        self.confidential = None
+        self.capacity_support = False
+        self.confidential = False
         self.devices = 0
         self.drive_size = None
         self.ephemeral_disk = None
-        self.encryption = None
-        self.family = ""
-        self.FPGA = 0
-        self.generation = None
-        self.GPU = 0
-        self.GPU_memory = 0
-        self.GPU_model = None
+        self.encryption = False
         self.hibernation = None
         self.hyperv_generations = None
         self.instance_type = ""
         self.iops = None
-        self.low_priority = None
+        self.low_priority = False
         self.max_write_disks = None
         self.memory = 0
-        self.memory_maintenance = None
+        self.memory_maintenance = False
         self.network_interfaces = None
-        self.network_performance = None
         self.num_drives = None
         self.nvme_ssd = False
-        self.parent_size = None
-        self.premium_io = None
-        self.physical_processor = None
-        self.pretty_name = ""
-        self.pricing = {}
-        self.rdma = None
+        self.premium_io = False
+        self.pretty_name_azure = ""
+        self.rdma = False
         self.read_io = 0
-        self.size = 0
-        self.ssd = False
         self.trusted_launch = None
-        self.ultra_ssd = None
+        self.ultra_ssd = False
         self.uncached_disk = 0
         self.uncached_disk_io = 0
-        self.vcpu = 0
         self.vcpus_available = 0
         self.vcpus_percore = 0
         self.vm_deployment = None
@@ -65,24 +50,11 @@ class AzureInstance(object):
 
     def to_dict(self):
         d = dict(
-            family=self.family,
             instance_type=self.instance_type,
-            pretty_name=self.pretty_name,
+            pretty_name_azure=self.pretty_name_azure,
             accelerated_networking=self.accelerated_networking,
             ACU=self.ACU,
             arch=self.arch,
-            vcpu=self.vcpu,
-            GPU=self.GPU,
-            GPU_model=self.GPU_model,
-            GPU_memory=self.GPU_memory,
-            compute_capability=self.compute_capability,
-            FPGA=self.FPGA,
-            memory=self.memory,
-            network_performance=self.network_performance,
-            pricing=self.pricing,
-            generation=self.generation,
-            physical_processor=self.physical_processor,
-            clock_speed_ghz=self.clock_speed_ghz,
             availability_zones=self.availability_zones,
             cached_disk=self.cached_disk,
             capacity_support=self.capacity_support,
@@ -93,7 +65,6 @@ class AzureInstance(object):
             iops=self.iops,
             low_priority=self.low_priority,
             memory_maintenance=self.memory_maintenance,
-            parent_size=self.parent_size,
             premium_io=self.premium_io,
             rdma=self.rdma,
             read_io=self.read_io,
@@ -107,7 +78,6 @@ class AzureInstance(object):
             write_io=self.write_io
         )
         d["storage"] = dict(
-            ssd=self.ssd,
             nvme_ssd=self.nvme_ssd,
             devices=self.num_drives,
             size=self.drive_size,
@@ -137,8 +107,10 @@ def split_pricing(i, info, region, os, price):
 
 
 def parse_instance(i, info):
+    # Old method to get pricing
     i.instance_type = info["armSkuName"]
     i.pretty_name = info["productName"]
+
     region = info["armRegionName"]
     price = info["retailPrice"]
 
@@ -151,38 +123,40 @@ def parse_instance(i, info):
         split_pricing(i, info, region, "linux", price)
 
 
+def return_bool(value):
+    if value == "True":
+        return True
+    if value == "False":
+        return False
+
 def parse_specs(i, cap):
     for c in cap:
-        if c.name == 'MaxResourceVolumeMB':
-            i.size = c.value
-        elif c.name == 'OSVhdSizeMB':
-            i.drive_size = c.value
-        elif c.name == 'vCPUs':
-            i.vcpus = c.value
+        # if c.name == 'MaxResourceVolumeMB':
+        #     i.size = c.value
+        if c.name == 'OSVhdSizeMB':
+            i.drive_size = int(c.value)
         elif c.name == 'ACUs':
-            i.ACU = c.value
+            i.ACU = int(c.value)
         elif c.name == 'MemoryPreservingMaintenanceSupported':
-            i.memory_maintenance = c.value
+            i.memory_maintenance = return_bool(c.value)
         elif c.name == 'HyperVGenerations':
             i.hyperv_generations = c.value
-        elif c.name == 'MemoryGB':
-            i.memory = float(c.value)
         elif c.name == 'MaxDataDiskCount':
             i.devices = int(c.value)
         elif c.name == 'CpuArchitectureType':
             i.arch = [c.value]
         elif c.name == 'LowPriorityCapable':
-            i.low_priority = c.value
+            i.low_priority = return_bool(c.value)
         elif c.name == 'PremiumIO':
-            i.premium_io = c.value
+            i.premium_io = return_bool(c.value)
         elif c.name == 'VMDeploymentTypes':
             i.vm_deployment = c.value
         elif c.name == 'vCPUsAvailable':
-            i.vcpus_available = c.value
+            i.vcpus_available = int(c.value)
         elif c.name == 'vCPUsPerCore':
-            i.vcpus_percore = c.value
+            i.vcpus_percore = int(c.value)
         elif c.name == 'CombinedTempDiskAndCachedIOPS':
-            i.iops = c.value
+            i.iops = int(c.value)
         elif c.name == 'CombinedTempDiskAndCachedReadBytesPerSecond':
             i.read_io = int(c.value)
         elif c.name == 'CombinedTempDiskAndCachedWriteBytesPerSecond':
@@ -196,29 +170,25 @@ def parse_specs(i, cap):
         elif c.name == 'EphemeralOSDiskSupported':
             i.ephemeral_disk = c.value
         elif c.name == 'EncryptionAtHostSupported':
-            i.encryption = c.value
+            i.encryption = return_bool(c.value)
         elif c.name == 'CapacityReservationSupported':
-            i.capacity_support = c.value
+            i.capacity_support = return_bool(c.value)
         elif c.name == 'AcceleratedNetworkingEnabled':
-            i.accelerated_networking = c.value
+            i.accelerated_networking = return_bool(c.value)
         elif c.name == 'RdmaEnabled':
-            i.rdma = c.value
+            i.rdma = return_bool(c.value)
         elif c.name == 'MaxNetworkInterfaces':
             i.network_interfaces = c.value
         elif c.name == 'UltraSSDAvailable':
-            i.ultra_ssd = c.value
+            i.ultra_ssd = return_bool(c.value)
         elif c.name == 'HibernationSupported':
-            i.hibernation = c.value
+            i.hibernation = return_bool(c.value)
         elif c.name == 'TrustedLaunchDisabled':
-            i.trusted_launch = c.value
+            i.trusted_launch = return_bool(c.value)
         elif c.name == 'ConfidentialComputingType':
             i.confidential = c.value
-        elif c.name == 'ParentSize':
-            i.parent_size = c.value
         elif c.name == 'NvmeDiskSizeInMiB':
             i.nvme_ssd = c.value
-        elif c.name == 'GPUs':
-            i.GPU = c.value
         elif c.name == 'MaxWriteAcceleratorDisksAllowed':
             i.max_write_disks = c.value
         else:
@@ -241,20 +211,43 @@ def azure_vm_specs():
     i = 0
     for s in skus_list:
         if s.resource_type == 'virtualMachines':
-            if s.name not in instances:
-                instances[s.name] = AzureInstance()
-                instances[s.name].instance_type = s.name
-                parse_specs(instances[s.name], s.capabilities)
+            matched_name = s.name.split('_')[1]
+            version = s.name.split('_v')
+            if len(version) > 1:
+                version = 'v' + version[1]
+            else:
+                version = ''
+            
+            inst_name = matched_name.lower() + version
+
+            # print(s.name)
+            # print(inst_name)
+
+            if inst_name not in instances:
+                instances[inst_name] = AzureInstance()
+                instances[inst_name].instance_type = inst_name
+                instances[inst_name].pretty_name_azure = s.name
+                parse_specs(instances[inst_name], s.capabilities)
             i += 1
     print("Went through {} SKUs".format(i))
 
+    data_file = 'www/azure/instances-specs.json'
+    os.makedirs(os.path.dirname(data_file), exist_ok=True)
+    with open(data_file, "w+") as f:
+        json.dump(
+            [i.to_dict() for i in instances.values()],
+            f,
+            indent=1,
+            sort_keys=True,
+            separators=(",", ": "),
+        )
+    
     return instances
 
 
 def azure_prices(instances):
     missing_instances = []
     s = requests.Session()
-
     response = s.get("https://prices.azure.com/api/retail/prices?$filter=serviceName eq 'Virtual Machines'").json()
     next_page_url = response["NextPageLink"]
     i = 0
@@ -274,7 +267,7 @@ def azure_prices(instances):
         # if i > 50:
         #     break
 
-    data_file = 'www/azure/instances.json'
+    data_file = 'www/azure/instances-specs.json'
     os.makedirs(os.path.dirname(data_file), exist_ok=True)
     with open(data_file, "w+") as f:
         json.dump(
@@ -499,6 +492,43 @@ def add_pricing2(instances):
                                 pass
 
 
+def combine_specs_pricing():
+
+    specs_file = 'www/azure/instances-specs.json'
+    pricing_file = 'www/azure/instances.json'
+    with open(pricing_file, "r") as f:
+        instances = json.load(f)
+    
+    with open(specs_file, "r") as f:
+        specs = json.load(f)
+    
+    missing = []
+    for i in instances:
+        found_flag = False
+        for s in specs:
+            if i["instance_type"] == s["instance_type"]:
+                # print('Found matching pricing and specs for {}'.format(i["instance_type"]))
+                found_flag = True
+                break
+
+        if found_flag:
+            i.update(s)
+        else:
+            missing.append(i["instance_type"])
+    
+    for m in missing:
+        print("Could not find specs to match these instance pricing for {}".format(m))
+
+    with open(pricing_file, "w+") as f:
+        json.dump(
+            [i for i in instances],
+            f,
+            indent=1,
+            sort_keys=True,
+            separators=(",", ": "),
+        )
+
+
 def scrape(output_file, input_file=None):
     azure_prices2()
     instances = azure_specs()
@@ -513,7 +543,15 @@ def scrape(output_file, input_file=None):
             sort_keys=True,
             separators=(",", ": "),
         )
+    
+    # This adds specs for a hardcoded file to instances.json
+    combine_specs_pricing()
+
 
 if __name__ == '__main__':
     output_file = 'www/azure/instances.json'
     scrape(output_file)
+
+    # Run this to build the instances-specs.json file
+    # azure_vm_specs()
+    combine_specs_pricing()

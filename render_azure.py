@@ -69,7 +69,11 @@ def compress_instance_azs(instances):
 
 def urlify(instances):
     for i in instances:
-        i['instance_type'] = i['instance_type'].replace('v', '-v')
+        if i['instance_type'][0:2] != 'nv': 
+            # Some GPU instances have a v in their instance type which break this
+            i['instance_type'] = i['instance_type'].replace('v', '-v')
+        else:
+            i['instance_type'] = i['instance_type'].replace('sv', 's-v')
 
 
 def load_regions(region_list):

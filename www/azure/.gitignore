@@ -1,2 +1,3 @@
 *.json
 *.html
+!instances-specs.json
