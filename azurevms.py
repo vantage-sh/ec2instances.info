@@ -517,4 +517,3 @@ def scrape(output_file, input_file=None):
 if __name__ == '__main__':
     output_file = 'www/azure/instances.json'
     scrape(output_file)
-    scrape()
