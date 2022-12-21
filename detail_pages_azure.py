@@ -90,45 +90,37 @@ def unavailable_instances(itype, instance_details):
 def assemble_the_families(instances):
     # Build 2 lists - one where we can lookup what family an instance belongs to
     # and another where we can get the family and see what the members are
-    instance_fam_map = {}
-    families = {}
+    instance_fam_map = {} # Other instances in the same family with different sizes
+    families = {} # Each key is an instance type and the value is their family
     variant_families = {}
 
     for i in instances:
         name = i["instance_type"]
-        try:
-            itype, suffix = name.split("-")
-        except ValueError:
-            itype = name
-        variant = name[0:2]
+        family = i["family"]
+        variant = family[0:1]
+
+        member = {"name": name, "cpus": int(i["vcpu"]), "memory": int(i["memory"])}
+        if family not in instance_fam_map:
+            instance_fam_map[family] = [member]
+        else:
+            instance_fam_map[family].append(member)
 
         if variant not in variant_families:
-            variant_families[variant] = [[itype, name]]
+            variant_families[variant] = [[family, name]]
         else:
             dupe = 0
             for v, _ in variant_families[variant]:
-                if v == itype:
+                if v == family:
                     dupe = 1
             if not dupe:
-                variant_families[variant].append([itype, name])
-
-        member = {"name": name, "cpus": int(i["vcpu"]), "memory": int(i["memory"])}
-        if itype not in instance_fam_map:
-            instance_fam_map[itype] = [member]
-        else:
-            instance_fam_map[itype].append(member)
+                variant_families[variant].append([family, name])
 
         # The second list, where we will get the family from knowing the instance
-        families[name] = itype
+        families[name] = family
 
-    # Order the families by number of cpus so they display this way on the webpage
+    # # Order the families by number of cpus so they display this way on the webpage
     for f, ilist in instance_fam_map.items():
         ilist.sort(key=lambda x: x["cpus"])
-        # Move the metal instances to the end of the list
-        for j in ilist:
-            if j["name"].endswith("metal"):
-                ilist.remove(j)
-                ilist.append(j)
         instance_fam_map[f] = ilist
 
     # for debugging: print(json.dumps(instance_fam_map, indent=4))
@@ -326,7 +318,7 @@ def build_detail_pages_azure(instances, regions):
                         description=idescription,
                         unavailable=denylist,
                         defaults=defaults,
-                        variants=variants[instance_type[0:2]],
+                        variants=variants[instance_type[0:1]],
                         regions=regions,
                     )
                 )
