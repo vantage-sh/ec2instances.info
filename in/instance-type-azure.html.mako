@@ -107,7 +107,7 @@
               <div class="col-6 mb-2">
                 <select class="form-select form-select-sm" id="os">
                   <option value="linux">Linux</option>
-                  <option value="mswin">Windows</option>
+                  <option value="windows">Windows</option>
                 </select>
               </div>
               <div class="col-6 pe-2">

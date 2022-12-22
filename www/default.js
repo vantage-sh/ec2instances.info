@@ -750,7 +750,10 @@ function on_data_table_initialized() {
 
   var will_redraw_costs = change_region(g_settings.region, true);
   change_reserved_term(g_settings.reserved_term);
-  change_reserved_term(g_settings.savings_plan_term);
+  var urlpath = window.location.pathname;
+  if (urlpath.includes('/azure/')) {
+    change_reserved_term(g_settings.savings_plan_term);
+  }
   change_cost_duration(g_settings.cost_duration);
   change_pricing_unit(g_settings.pricing_unit);
 
@@ -878,7 +881,7 @@ function configure_highlighting() {
   $rows.click(function (e) {
     // don't highlight if the user clicked on a link to a detail page
     try {
-      if (e.target.href.includes('aws')) {
+      if (e.target.href.includes('aws') || e.target.href.includes('aws')) {
         return;
       }
     } catch (err) {
