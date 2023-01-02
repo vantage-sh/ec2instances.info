@@ -902,21 +902,16 @@ function update_visible_rows() {
   console.log('update visible rows');
   console.log(all_rows.length);
   console.log($rows);
+  console.log(g_data_table.data());
   if (!g_settings.compare_on) {
-    $rows.show();
+    g_data_table.search('').draw();
   } else {
-    $rows.filter(':not(.highlight)').hide();
-
-    var selected_rows = g_settings.selected.split(',');
-
-    for (var s = 0; s < selected_rows.length; s++) {
-      for (var i = 0; i < all_rows.length; i++) {
-        var row = all_rows[i];
-        if (row.DT_RowId == selected_rows[s]) {
-          console.log(row);
-        }
-      }
-    }
+    // prepare the list of selected rows as an input to search()
+    var selected_ids = g_settings.selected.replaceAll(',', '|');
+    // clear any existing column filters which may be hiding rows
+    g_data_table.columns('').search('');
+    // render only the selected rows
+    g_data_table.search(selected_ids, true, false).draw();
   }
 }
 
