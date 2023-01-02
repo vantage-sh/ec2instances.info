@@ -607,10 +607,10 @@ function url_for_selections() {
     compare_on: g_settings.compare_on,
   };
 
-  if (g_settings.selected !== "") {
-    params.selected = g_settings.selected.split(',')
+  if (g_settings.selected !== '') {
+    params.selected = g_settings.selected.split(',');
   } else {
-    params.selected = []
+    params.selected = [];
   }
 
   // avoid storing empty or default values in URL
@@ -627,12 +627,13 @@ function url_for_selections() {
       return this.id;
     })
     .get();
+  console.log('selected rows');
   console.log(selected_row_ids);
   if (selected_row_ids.length > 0) {
     console.log(params.selected);
     for (var s in selected_row_ids) {
       console.log(selected_row_ids[s]);
-      if(!params.selected.includes(selected_row_ids[s])) {
+      if (!params.selected.includes(selected_row_ids[s])) {
         params.selected.push(selected_row_ids[s]);
       }
     }
@@ -883,6 +884,8 @@ function configure_highlighting() {
   });
 
   $compareBtn.click(function () {
+    console.log(g_data_table.rows().data());
+
     g_settings.compare_on = !g_settings.compare_on;
     update_compare_button();
     update_visible_rows();
@@ -895,10 +898,25 @@ function configure_highlighting() {
 
 function update_visible_rows() {
   var $rows = $('#data tbody tr');
+  var all_rows = g_data_table.rows().data();
+  console.log('update visible rows');
+  console.log(all_rows.length);
+  console.log($rows);
   if (!g_settings.compare_on) {
     $rows.show();
   } else {
     $rows.filter(':not(.highlight)').hide();
+
+    var selected_rows = g_settings.selected.split(',');
+
+    for (var s = 0; s < selected_rows.length; s++) {
+      for (var i = 0; i < all_rows.length; i++) {
+        var row = all_rows[i];
+        if (row.DT_RowId == selected_rows[s]) {
+          console.log(row);
+        }
+      }
+    }
   }
 }
 
