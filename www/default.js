@@ -639,6 +639,12 @@ function url_for_selections() {
     compare_on: g_settings.compare_on,
   };
 
+  if (g_settings.selected !== '') {
+    params.selected = g_settings.selected.split(',');
+  } else {
+    params.selected = [];
+  }
+
   // avoid storing empty or default values in URL
   for (var key in params) {
     if (params[key] === '' || params[key] == null || params[key] === g_settings_defaults[key]) {
@@ -652,20 +658,31 @@ function url_for_selections() {
       return this.id;
     })
     .get();
+
   if (selected_row_ids.length > 0) {
-    params.selected = selected_row_ids;
+    for (var s in selected_row_ids) {
+      if (!params.selected.includes(selected_row_ids[s])) {
+        params.selected.push(selected_row_ids[s]);
+      }
+    }
   }
 
   var url = location.origin + location.pathname;
   var parameters = [];
   for (var setting in params) {
     if (params[setting] !== undefined) {
+      if (setting === 'selected' && params[setting].length == 0) {
+        continue;
+      }
       parameters.push(setting + '=' + params[setting]);
     }
   }
+
+  // Turns the selected (highlighted) rows into a comma separated list in the URL
   if (parameters.length > 0) {
     url = url + '?' + parameters.join('&');
   }
+  g_settings.selected = params.selected.join();
   return url;
 }
 
@@ -889,6 +906,14 @@ function configure_highlighting() {
     }
 
     $(this).toggleClass('highlight');
+    
+    // remove a deselected row from the list of selected rows
+    if(!$(this).hasClass('highlight')) {
+      var selected = g_settings.selected.split(',');
+      const index = selected.indexOf($(this).attr("id"));
+      selected.splice(index);
+      g_settings.selected = selected.join();
+    }
 
     update_compare_button();
     maybe_update_url();
@@ -906,11 +931,18 @@ function configure_highlighting() {
 }
 
 function update_visible_rows() {
-  var $rows = $('#data tbody tr');
   if (!g_settings.compare_on) {
-    $rows.show();
+    g_data_table.search('').draw();
   } else {
-    $rows.filter(':not(.highlight)').hide();
+    // prepare the list of selected rows as an input to search()
+    var selected_ids = g_settings.selected.replaceAll(',', '|');
+
+    // clear any existing filters/searches which may be hiding rows
+    g_data_table.columns('').search('');
+    $('.form-control').val('');
+
+    // render only the selected rows
+    g_data_table.search(selected_ids, true, false).draw();
   }
 }
 
