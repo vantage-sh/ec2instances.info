@@ -863,6 +863,14 @@ function configure_highlighting() {
     }
 
     $(this).toggleClass('highlight');
+    
+    // remove a deselected row from the list of selected rows
+    if(!$(this).hasClass('highlight')) {
+      var selected = g_settings.selected.split(',');
+      const index = selected.indexOf($(this).attr("id"));
+      selected.splice(index);
+      g_settings.selected = selected.join();
+    }
 
     update_compare_button();
     maybe_update_url();
