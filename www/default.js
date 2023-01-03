@@ -118,13 +118,6 @@ function init_data_table() {
       if (g_data_table.column(i).search() !== this.value) {
         g_data_table.column(i).search(this.value).draw();
       }
-
-      // console.log('filter keydown');
-      // console.log(g_settings.selected);
-      // var other_selections = g_settings.selected.split(',');
-      // other_selections.forEach(function(s) {
-      //   $('#' + s).show();
-      // });
     });
   });
   g_data_table = $('#data').DataTable({
@@ -621,25 +614,19 @@ function url_for_selections() {
   }
 
   // selected rows
-  // TODO: this will not pick up rows that are not visible in the table, e.g. if a filter is applied
   var selected_row_ids = $('#data tbody tr.highlight')
     .map(function () {
       return this.id;
     })
     .get();
-  console.log('selected rows');
-  console.log(selected_row_ids);
+
   if (selected_row_ids.length > 0) {
-    console.log(params.selected);
     for (var s in selected_row_ids) {
-      console.log(selected_row_ids[s]);
       if (!params.selected.includes(selected_row_ids[s])) {
         params.selected.push(selected_row_ids[s]);
       }
     }
-    // params.selected = selected_row_ids;
   }
-  // console.log(params.selected)
 
   var url = location.origin + location.pathname;
   var parameters = [];
@@ -651,12 +638,12 @@ function url_for_selections() {
       parameters.push(setting + '=' + params[setting]);
     }
   }
+
   // Turns the selected (highlighted) rows into a comma separated list in the URL
   if (parameters.length > 0) {
     url = url + '?' + parameters.join('&');
   }
   g_settings.selected = params.selected.join();
-  console.log(url);
   return url;
 }
 
@@ -877,15 +864,11 @@ function configure_highlighting() {
 
     $(this).toggleClass('highlight');
 
-    console.log($(this).attr('id'));
-
     update_compare_button();
     maybe_update_url();
   });
 
   $compareBtn.click(function () {
-    console.log(g_data_table.rows().data());
-
     g_settings.compare_on = !g_settings.compare_on;
     update_compare_button();
     update_visible_rows();
@@ -897,19 +880,16 @@ function configure_highlighting() {
 }
 
 function update_visible_rows() {
-  var $rows = $('#data tbody tr');
-  var all_rows = g_data_table.rows().data();
-  console.log('update visible rows');
-  console.log(all_rows.length);
-  console.log($rows);
-  console.log(g_data_table.data());
   if (!g_settings.compare_on) {
     g_data_table.search('').draw();
   } else {
     // prepare the list of selected rows as an input to search()
     var selected_ids = g_settings.selected.replaceAll(',', '|');
-    // clear any existing column filters which may be hiding rows
+
+    // clear any existing filters/searches which may be hiding rows
     g_data_table.columns('').search('');
+    $('.form-control').val('');
+
     // render only the selected rows
     g_data_table.search(selected_ids, true, false).draw();
   }
