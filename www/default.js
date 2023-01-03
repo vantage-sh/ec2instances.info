@@ -12,6 +12,7 @@ var g_settings_defaults = {
   min_memory: 0,
   min_vcpus: 0,
   min_memory_per_vcpu: 0,
+  default_sort_col: 39,
   min_storage: 0,
   selected: '',
   compare_on: false,
@@ -229,7 +230,7 @@ function init_data_table() {
       },
     ],
     // default sort by linux cost
-    aaSorting: [[6, 'asc']],
+    aaSorting: [[g_settings_defaults.default_sort_col, 'asc']],
 
     initComplete: function () {
       // fire event in separate context so that calls to get_data_table()
@@ -262,6 +263,19 @@ function init_data_table() {
 }
 
 $(document).ready(function () {
+  var urlpath = window.location.pathname;
+
+  // service specific table defaults, namely sorting by cheapest instance
+  if (urlpath.includes('/rds/')) {
+    g_settings_defaults.default_sort_col = 9;
+  } else if (urlpath.includes('/cache/')) {
+    g_settings_defaults.default_sort_col = 5;
+  } else if (urlpath.includes('/redshift/')) {
+    g_settings_defaults.default_sort_col = 8;
+  } else if (urlpath.includes('/opensearch/')) {
+    g_settings_defaults.default_sort_col = 6;
+  }
+
   init_data_table();
 });
 

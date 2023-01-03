@@ -190,7 +190,7 @@
                 $${inst['pricing']['us-east-1'][cache_engine]['ondemand']} hourly
               </span>
             % else:
-              <span sort="0">unavailable</span>
+              <span sort="999999">unavailable</span>
             % endif
           </td>
           <td class="cost-reserved cost-reserved-${cache_engine}" data-platform='${cache_engine}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
@@ -199,7 +199,7 @@
                 $${inst['pricing']['us-east-1'][cache_engine]['reserved'].get('yrTerm1Standard.noUpfront')} hourly
               </span>
             % else:
-              <span sort="0">unavailable</span>
+              <span sort="999999">unavailable</span>
             % endif
           </td>
           % endfor
