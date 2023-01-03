@@ -181,7 +181,7 @@
                 $${"{:.4f}".format(float(inst['pricing']['us-east-1']['ondemand']))} hourly
               </span>
             % else:
-              <span sort="0">unavailable</span>
+              <span sort="999999">unavailable</span>
             % endif
           </td>
           <td class="cost-reserved cost-reserved-search" data-platform="none" data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
@@ -190,7 +190,7 @@
                 $${"{:.4f}".format(float(inst['pricing']['us-east-1']['reserved'].get('yrTerm1Standard.noUpfront')))} hourly
               </span>
             % else:
-              <span sort="0">unavailable</span>
+              <span sort="999999">unavailable</span>
             % endif
           </td>
         </tr>

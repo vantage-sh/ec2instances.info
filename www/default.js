@@ -13,7 +13,7 @@ var g_settings_defaults = {
   min_memory: 0,
   min_vcpus: 0,
   min_memory_per_vcpu: 0,
-  default_sort_col: 7,
+  default_sort_col: 39,
   min_storage: 0,
   selected: '',
   compare_on: false,
@@ -265,10 +265,20 @@ function init_data_table() {
 
 $(document).ready(function () {
   var urlpath = window.location.pathname;
-  if (urlpath === '/azure/') {
+
+  // service specific table defaults, namely sorting by cheapest instance
+  if (urlpath.includes('/azure/')) {
     g_settings_defaults.region = 'us-east';
     g_settings_defaults.reserved_term = 'yrTerm1Standard.allUpfront';
     g_settings_defaults.default_sort_col = 7;
+  } else if (urlpath.includes('/rds/')) {
+    g_settings_defaults.default_sort_col = 9;
+  } else if (urlpath.includes('/cache/')) {
+    g_settings_defaults.default_sort_col = 5;
+  } else if (urlpath.includes('/redshift/')) {
+    g_settings_defaults.default_sort_col = 8;
+  } else if (urlpath.includes('/opensearch/')) {
+    g_settings_defaults.default_sort_col = 6;
   }
 
   init_data_table();
