@@ -121,7 +121,8 @@ function init_data_table() {
         var isRegExp = true;
         try {
           var r = new RegExp(this.value);
-        } catch (e) { // Failed to compile
+        } catch (e) {
+          // Failed to compile
           isRegExp = false;
         }
         g_data_table.column(i).search(this.value, isRegExp, false).draw();
