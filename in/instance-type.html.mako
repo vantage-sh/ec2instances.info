@@ -318,8 +318,12 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script src="/store/store.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/vantage.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript">
   $(function() {
+    vantage_settings();
+
     initialize_prices();
     disable_regions();
 

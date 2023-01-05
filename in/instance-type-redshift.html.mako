@@ -204,13 +204,14 @@
               % for category, attrs in i.items():
                 % if category != "Pricing" and category != "Not Shown" and len(attrs) > 0:
                   % if category == "Storage":
-                    <div class="mb-4 d-flex flex-container justify-content-center">
-                      <div class="row">
-                        <div class="d-flex justify-content-center"><span><img width="64" height="64" src="/vantage-logo.svg"></span></div>
-                        <div class="d-flex justify-content-center mt-4">
-                          <span class="fw-semibold" style="color:#6c757d">Concerned about cloud costs? <a href="https://console.vantage.sh/signup">Connect your AWS account</a> in under 5 minutes to see savings.</span>
-                        </div>
+                    <div class="vantage-callout">
+                      <div class="callout-close">
+                        <span class="material-icons">close</span>
                       </div>
+                      <img width="auto" height="25" src="/vantage-logo_full.svg">
+                      <h5>Concerned about cloud costs?</h5>
+                      <p>Connect your AWS account in under<br />5 minutes to see savings.</p>
+                      <a href="https://console.vantage.sh/signup" target="_blank">Connect AWS Account</a>
                     </div>
                   % endif
                   <table class="table" id="${category}">
@@ -258,8 +259,12 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script src="/store/store.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/vantage.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript">
   $(function() {
+    vantage_settings();
+
     initialize_prices();
     disable_regions();
 
