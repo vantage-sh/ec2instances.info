@@ -299,4 +299,60 @@ table#Unavailable td {
   border-color: #cfcfd6;
 }
 
+.vantage-callout {
+  margin-bottom: 24px;
+  padding: 24px;
+  border-radius: 6px;
+  border: 1px solid #e3e3e9;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-image: url("/callout-graphic.png");
+  background-position: 330px center;
+  background-repeat: no-repeat;
+  background-size: 300px 300px;
+  position: relative;
+}
+.vantage-callout .callout-close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  padding: 8px;
+  border-radius: 100px;
+  background-color: rgb(255, 255, 255);
+  color: #5a5a5f;
+  display: flex;
+  cursor: pointer;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+.vantage-callout .callout-close .material-icons {
+  font-size: 18px;
+}
+.vantage-callout img {
+  margin-bottom: 20px;
+}
+.vantage-callout a {
+  padding: 12px 14px;
+  border-radius: 6px;
+  color: #ffffff;
+  text-decoration: none;
+  line-height: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #9c25c7;
+}
+.vantage-callout h5 {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 18px;
+  margin: 0;
+}
+.vantage-callout p {
+  font-size: 16px;
+  line-height: 20px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  color: #5a5a5f;
+}
+
 /*# sourceMappingURL=style.css.map */
