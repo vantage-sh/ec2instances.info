@@ -308,10 +308,15 @@ table#Unavailable td {
   flex-direction: column;
   align-items: flex-start;
   background-image: url("/callout-graphic.png");
-  background-position: 330px center;
+  background-position: right center;
   background-repeat: no-repeat;
   background-size: 300px 300px;
   position: relative;
+}
+@media screen and (max-width: 768px) {
+  .vantage-callout {
+    background-image: none;
+  }
 }
 .vantage-callout .callout-close {
   position: absolute;
