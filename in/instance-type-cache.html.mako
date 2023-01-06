@@ -256,6 +256,15 @@
             See a data problem? <a href="https://github.com/vantage-sh/ec2instances.info/issues/new" target="_blank" class="text-decoration-none">Open a ticket.</a>
           </div>
           <div class="sidebar-section ticket small">
+            <form name="submit-to-google-sheet">
+              <label class="mb-3" for="textarea">What's missing from this page?</label><br>
+              <input type="hidden" name="page" value="${i["Amazon"][1]['value']}">
+              <textarea class="mb-4 feedback-text" name="feedback" id="textarea" placeholder="Your feedback"></textarea><br>
+              <label class="mb-3" for="submit-email">Email (optional, if we have questions):</label><br>
+              <input name="email" id="submit-email" type="email" class="submit-email mb-4">
+              <button class="btn btn-purple" type="submit">Send</button>
+            </form>
+            <p id="submission-response"></p>
             <span>Supported by <a target="_blank" href="https://vantage.sh/" class="text-decoration-none">Vantage</a></span>
           </div>
         </div>
@@ -266,6 +275,17 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
   <script src="/store/store.js" type="text/javascript" charset="utf-8"></script>
   <script src="/vantage.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzf3nm7AMdE5JRgU_-R_VFNdekkzhN1-RjiQDeqZu3UsojLH6Kdvo5G0pyC0UzJJKo4/exec'
+    const form = document.forms['submit-to-google-sheet']
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => $("#submission-response").html("Feedback received!"))
+        .catch(error => $("#submission-response").html("Something went wrong, contact support@vantage.sh"));
+    })
+  </script>
   <script type="text/javascript">
   $(function() {
     vantage_settings();
