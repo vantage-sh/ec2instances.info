@@ -17,4 +17,10 @@ function vantage_settings() {
       console.log(e);
     }
   }
+
+  $('#term').change(function () {
+    $('.vantage').html(
+      '<span class="fw-semibold">Autopilot</span> buys and sells Reserved Instances for maximum savings. <span class="fw-semibold">Check it out -></span>',
+    );
+  });
 }

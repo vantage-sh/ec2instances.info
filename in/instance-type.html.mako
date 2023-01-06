@@ -334,10 +334,10 @@
     const form = document.forms['submit-to-google-sheet']
 
     form.addEventListener('submit', e => {
-      e.preventDefault()
+      e.preventDefault();
       fetch(scriptURL, { method: 'POST', body: new FormData(form)})
         .then(response => $("#submission-response").html("Feedback received!"))
-        .catch(error => $("#submission-response").html("Something went wrong, contact support@vantage.sh"))
+        .catch(error => $("#submission-response").html("Something went wrong, contact support@vantage.sh"));
     })
   </script>
   <script type="text/javascript">
