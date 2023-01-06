@@ -245,7 +245,7 @@ table {
     overflow: auto;
     flex: 1 1 auto;
     padding-bottom: 0;
-    border-bottom: 1px solid $gray-5;
+    // border-bottom: 1px solid $gray-5;
   }
 }
 
@@ -344,11 +344,11 @@ table {
     top: 8px;
     padding: 8px;
     border-radius: 100px;
-    background-color: rgba(255,255,255,1);
+    background-color: rgba(255, 255, 255, 1);
     color: $gray-2;
     display: flex;
     cursor: pointer;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 
     .material-icons {
       font-size: 18px;

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap");
 html,
 body {
   height: 100%;
@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  font: 100% 'Inter', Helvetica, sans-serif;
+  font: 100% "Inter", Helvetica, sans-serif;
   color: #303037;
   padding: 0;
 }
@@ -18,8 +18,7 @@ body {
 a {
   color: #9c25c7;
 }
-a:hover,
-a:focus {
+a:hover, a:focus {
   color: #5a0a76;
 }
 
@@ -120,7 +119,7 @@ table a {
   text-decoration: none !important;
 }
 table.table-mono {
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
 }
 table.table-mono th {
   background-color: #ffffff !important;
@@ -225,7 +224,6 @@ table#Unavailable td {
   overflow: auto;
   flex: 1 1 auto;
   padding-bottom: 0;
-  border-bottom: 1px solid #e3e3e9;
 }
 
 .column-left--parent {
@@ -274,7 +272,7 @@ table#Unavailable td {
   border: 1px solid;
   border-radius: 3px;
   color: #1a1a1c;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   padding: 4px 5px;
   font-size: 11px;
   line-height: 11px;

@@ -310,6 +310,12 @@
             See a data problem? <a href="https://github.com/vantage-sh/ec2instances.info/issues/new" target="_blank" class="text-decoration-none">Open a ticket.</a>
           </div>
           <div class="sidebar-section ticket small">
+            <form name="submit-to-google-sheet">
+              <label for="textarea">What's missing from this page?</label><br>
+              <textarea name="feedback" id="textarea"  style="width:100%;height:200px"></textarea><br>
+              <input name="email" type="email" placeholder="Email" required>
+              <button type="submit">Send</button>
+            </form>
             <span>Supported by <a target="_blank" href="https://vantage.sh/" class="text-decoration-none">Vantage</a></span>
           </div>
         </div>
@@ -320,6 +326,33 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
   <script src="/store/store.js" type="text/javascript" charset="utf-8"></script>
   <script src="/vantage.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzf3nm7AMdE5JRgU_-R_VFNdekkzhN1-RjiQDeqZu3UsojLH6Kdvo5G0pyC0UzJJKo4/exec'
+    const form = document.forms['submit-to-google-sheet']
+
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+  <!--
+  <script type="text/javascript">
+    (function() {
+      var t = document.createElement('script'),
+          s = document.getElementsByTagName('script')[0];
+      t.async = true;
+      t.id    = 'cio-forms-handler';
+      t.setAttribute('data-site-id', '42a2045af8b6745a26b2');
+      t.setAttribute('data-base-url', 'https://customerioforms.com');
+
+      t.src = 'https://customerioforms.com/assets/forms.js';
+
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+  -->
   <script type="text/javascript">
   $(function() {
     vantage_settings();
