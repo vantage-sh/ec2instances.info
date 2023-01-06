@@ -311,11 +311,14 @@
           </div>
           <div class="sidebar-section ticket small">
             <form name="submit-to-google-sheet">
-              <label for="textarea">What's missing from this page?</label><br>
-              <textarea name="feedback" id="textarea"  style="width:100%;height:200px"></textarea><br>
-              <input name="email" type="email" placeholder="Email" required>
-              <button type="submit">Send</button>
+              <label class="mb-1" for="textarea">What's missing from this page?</label><br>
+              <input type="hidden" name="page" value="${i["Amazon"][1]['value']}">
+              <textarea class="mb-2 feedback-text" name="feedback" id="textarea" placeholder="Your feedback"></textarea><br>
+              <label class="mb-1" for="submit-email">Email (optional)</label><br>
+              <input name="email" id="submit-email" type="email" class="submit-email mb-2">
+              <button class="btn btn-purple" type="submit">Send</button>
             </form>
+            <p id="submission-response"></p>
             <span>Supported by <a target="_blank" href="https://vantage.sh/" class="text-decoration-none">Vantage</a></span>
           </div>
         </div>
@@ -333,26 +336,10 @@
     form.addEventListener('submit', e => {
       e.preventDefault()
       fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => console.log('Success!', response))
-        .catch(error => console.error('Error!', error.message))
+        .then(response => $("#submission-response").html("Feedback received!"))
+        .catch(error => $("#submission-response").html("Something went wrong, contact support@vantage.sh"))
     })
   </script>
-  <!--
-  <script type="text/javascript">
-    (function() {
-      var t = document.createElement('script'),
-          s = document.getElementsByTagName('script')[0];
-      t.async = true;
-      t.id    = 'cio-forms-handler';
-      t.setAttribute('data-site-id', '42a2045af8b6745a26b2');
-      t.setAttribute('data-base-url', 'https://customerioforms.com');
-
-      t.src = 'https://customerioforms.com/assets/forms.js';
-
-      s.parentNode.insertBefore(t, s);
-    })();
-  </script>
-  -->
   <script type="text/javascript">
   $(function() {
     vantage_settings();
