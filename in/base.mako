@@ -80,7 +80,7 @@
             </li>
           </ul>
         </div>
-        <a href="https://www.vantage.sh/blog/datadog-cost-visibility-supported-in-vantage" class="vantage"><span class="fw-semibold">Datadog Cost Optimization </span> is here. Visibility into metrics, logging, APM, and more -></a>
+        <a href="https://console.vantage.sh/signup" class="vantage"><span class="fw-semibold">Optimize Datadog Costs</span> by connecting metrics, logging, APM, and more -></a>
         <div class="d-flex">
           <div class="nav-buttons px-2">
             <a target="_blank" href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw" class="btn btn-purple btn-icon">
