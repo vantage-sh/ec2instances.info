@@ -21,9 +21,11 @@ var g_settings_defaults = {
 function init_data_table() {
   // create a second header row
   $('#data thead tr').clone(true).appendTo('#data thead');
-  // add a text input filter to each column of the new row
 
+  // add a text input filter to each column of the new row
   $('#data thead tr:eq(1) th').each(function (i) {
+    $(this).attr('column-index', i);
+
     // TODO: When adding a new service, we are forced to edit this. Instead it should be controlled in HTML.
     if (window.location.href.includes('rds')) {
       // Set min inputs for RDS columns
@@ -247,9 +249,15 @@ function init_data_table() {
       }, 0);
     },
 
-    // Store filtering, sorting, etc - core datatable feature
+    // Store and load filtering, sorting, etc - core datatable feature
     stateSave: true,
     stateDuration: 0,
+    stateLoaded: function (settings, data) {
+      $('#data thead tr:eq(1) th').each(function (i) {
+        var col_index = parseInt($(this).attr('column-index'));
+        $('input', this).val(data.columns[col_index].search.search);
+      });
+    },
 
     // Allow export to CSV: only visible columns and only current filtered data
     buttons: [
@@ -730,12 +738,6 @@ function on_data_table_initialized() {
   // populate filter inputs
   g_data_table.search(g_settings['filter']);
   apply_min_values();
-
-  // fill in any filter values
-  var col_filters = g_data_table.state.loaded().columns;
-  $('#data thead tr:eq(1) th').each(function (i) {
-    $('input', this).val(col_filters[i].search.search);
-  });
 
   // apply highlight to selected rows
   $.each(g_settings.selected.split(','), function (_, id) {
