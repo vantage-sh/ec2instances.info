@@ -258,8 +258,8 @@ function init_data_table() {
         $('input', this).val(data.columns[col_index].search.search);
       });
 
+      // handle where the user had a search saved locally
       if (!g_settings.compare_on) {
-        // $('#fullsearch').val(g_data_table.state.loaded().search.search);
         $('#fullsearch').val(data.search.search);
       }
     },
@@ -741,7 +741,6 @@ function on_data_table_initialized() {
   load_settings();
 
   // populate filter inputs
-  g_data_table.search(g_settings['filter']);
   apply_min_values();
 
   // apply highlight to selected rows
@@ -776,6 +775,12 @@ function on_data_table_initialized() {
     // - URL is ?cost_duration=monthly, redraw here
     // - URL is ?cost_duration=monthly&reserved_term=yrTerm1Convertible.partialUpfront, redraw here
     change_cost();
+  }
+
+  // handle a search (/?filter=foo) from the URL
+  if (!g_settings.compare_on && g_settings.filter !== undefined) {
+    g_data_table.search(g_settings['filter']).draw();
+    $('#fullsearch').val(g_settings['filter']);
   }
 
   $.extend($.fn.dataTableExt.oStdClasses, {
@@ -818,8 +823,6 @@ function on_data_table_initialized() {
 
   // apply classes to search box
   $('div.dataTables_filter input').addClass('form-control search');
-
-  // var selected_ids = g_settings.selected.replaceAll(',', '|');
 }
 
 // sorting for colums with more complex data
@@ -923,7 +926,7 @@ function configure_highlighting() {
     maybe_update_url();
   });
 
-  // these two calls handle if there's an initial comparison
+  // these two calls handle if there's an initial comparison, loaded from the URL or local storage
   update_compare_button();
   update_visible_rows();
 }
@@ -952,7 +955,6 @@ function update_compare_button() {
       .addClass('btn-purple')
       .removeClass('btn-danger')
       .prop('disabled', !$rows.is('.highlight'));
-    g_data_table.search('');
   } else {
     $compareBtn.text($compareBtn.data('textOn')).addClass('btn-danger').removeClass('btn-purple');
   }
