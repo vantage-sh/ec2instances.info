@@ -69,11 +69,11 @@ def compress_instance_azs(instances):
 
 def urlify(instances):
     for i in instances:
-        if i['instance_type'][0:2] != 'nv': 
+        if i["instance_type"][0:2] != "nv":
             # Some GPU instances have a v in their instance type which break this
-            i['instance_type'] = i['instance_type'].replace('v', '-v')
+            i["instance_type"] = i["instance_type"].replace("v", "-v")
         else:
-            i['instance_type'] = i['instance_type'].replace('sv', 's-v')
+            i["instance_type"] = i["instance_type"].replace("sv", "s-v")
 
 
 def load_regions(region_list):
@@ -81,7 +81,7 @@ def load_regions(region_list):
         aws_regions = yaml.safe_load(f)
 
     return [[r, aws_regions[r]] for r in aws_regions]
-    
+
 
 def per_region_pricing(instances, data_file):
     # This function splits instances.json into per-region files which are written to
@@ -143,7 +143,7 @@ def render_azure(data_file, template_file, destination_file, detail_pages=True):
     with open(data_file, "r") as f:
         instances = json.load(f)
     urlify(instances)
-    
+
     print("Loading data from %s..." % data_file)
     for i in instances:
         add_render_info(i)
@@ -178,4 +178,6 @@ def render_azure(data_file, template_file, destination_file, detail_pages=True):
 
 
 if __name__ == "__main__":
-    render_azure("www/azure/instances.json", "in/azure.html.mako", "www/azure/index.html", True)
+    render_azure(
+        "www/azure/instances.json", "in/azure.html.mako", "www/azure/index.html", True
+    )

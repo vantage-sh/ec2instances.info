@@ -115,6 +115,7 @@ def scrape_azure(c):
         print("ERROR: Unable to scrape Azure data")
         print(traceback.print_exc())
 
+
 @task
 def serve(c):
     class MyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
@@ -139,7 +140,11 @@ def serve(c):
 def render_html(c):
     """Render HTML but do not update data from Amazon"""
     sitemap = []
-    sitemap.extend(render_azure("www/azure/instances.json", "in/azure.html.mako", "www/azure/index.html"))
+    sitemap.extend(
+        render_azure(
+            "www/azure/instances.json", "in/azure.html.mako", "www/azure/index.html"
+        )
+    )
     sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
     sitemap.extend(
         render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")

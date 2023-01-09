@@ -74,7 +74,7 @@ def unavailable_instances(itype, instance_details):
             if r not in instance_regions:
                 # print("Found that {} is not available in {}".format(itype, r))
                 denylist.append([azure_regions[r], r, "All", "*"])
-            else :
+            else:
                 instance_regions_oss = instance_details["Pricing"][r].keys()
                 for os in azure_os.keys():
                     if os not in instance_regions_oss:
@@ -86,8 +86,8 @@ def unavailable_instances(itype, instance_details):
 def assemble_the_families(instances):
     # Build 2 lists - one where we can lookup what family an instance belongs to
     # and another where we can get the family and see what the members are
-    instance_fam_map = {} # Other instances in the same family with different sizes
-    families = {} # Each key is an instance type and the value is their family
+    instance_fam_map = {}  # Other instances in the same family with different sizes
+    families = {}  # Each key is an instance type and the value is their family
     variant_families = {}
 
     for i in instances:
@@ -265,7 +265,7 @@ def map_vm_attributes(i, imap):
         except KeyError:
             print(
                 "An instances.json attribute {} does not appear in meta/service_attributes_azure.csv and cannot be formatted".format(
-                   j 
+                    j
                 )
             )
 
