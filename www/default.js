@@ -22,9 +22,8 @@ function init_data_table() {
   // create a second header row
   $('#data thead tr').clone(true).appendTo('#data thead');
   // add a text input filter to each column of the new row
-  $('#data thead tr:eq(1) th').each(function (i) {
-    // don't add a filter bar to the checkbox column (column 0)
 
+  $('#data thead tr:eq(1) th').each(function (i) {
     // TODO: When adding a new service, we are forced to edit this. Instead it should be controlled in HTML.
     if (window.location.href.includes('rds')) {
       // Set min inputs for RDS columns
@@ -731,6 +730,12 @@ function on_data_table_initialized() {
   // populate filter inputs
   g_data_table.search(g_settings['filter']);
   apply_min_values();
+
+  // fill in any filter values
+  var col_filters = g_data_table.state.loaded().columns;
+  $('#data thead tr:eq(1) th').each(function (i) {
+    $('input', this).val(col_filters[i].search.search);
+  });
 
   // apply highlight to selected rows
   $.each(g_settings.selected.split(','), function (_, id) {
