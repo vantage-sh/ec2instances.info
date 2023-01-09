@@ -629,6 +629,12 @@ function url_for_selections() {
     compare_on: g_settings.compare_on,
   };
 
+  // the search term is loaded above so set the input accordingly, but only if it's
+  // a true search and not a comparison
+  // if (!g_settings.compare_on) {
+  //   $('#fullsearch').val(params.filter);
+  // }
+
   if (g_settings.selected !== '') {
     params.selected = g_settings.selected.split(',');
   } else {
@@ -918,7 +924,7 @@ function configure_highlighting() {
 
 function update_visible_rows() {
   if (!g_settings.compare_on) {
-    g_data_table.search('').draw();
+    g_data_table.search(g_settings['filter']);
   } else {
     // prepare the list of selected rows as an input to search()
     var selected_ids = g_settings.selected.replaceAll(',', '|');
@@ -942,6 +948,7 @@ function update_compare_button() {
       .addClass('btn-purple')
       .removeClass('btn-danger')
       .prop('disabled', !$rows.is('.highlight'));
+    g_data_table.search('');
   } else {
     $compareBtn.text($compareBtn.data('textOn')).addClass('btn-danger').removeClass('btn-purple');
   }
