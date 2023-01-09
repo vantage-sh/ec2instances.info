@@ -22,9 +22,10 @@ var g_settings_defaults = {
 function init_data_table() {
   // create a second header row
   $('#data thead tr').clone(true).appendTo('#data thead');
+
   // add a text input filter to each column of the new row
   $('#data thead tr:eq(1) th').each(function (i) {
-    // don't add a filter bar to the checkbox column (column 0)
+    $(this).attr('column-index', i);
 
     // TODO: When adding a new service, we are forced to edit this. Instead it should be controlled in HTML.
     if (window.location.href.includes('rds')) {
@@ -249,9 +250,20 @@ function init_data_table() {
       }, 0);
     },
 
-    // Store filtering, sorting, etc - core datatable feature
+    // Store and load filtering, sorting, etc - core datatable feature
     stateSave: true,
     stateDuration: 0,
+    stateLoaded: function (settings, data) {
+      $('#data thead tr:eq(1) th').each(function (i) {
+        var col_index = parseInt($(this).attr('column-index'));
+        $('input', this).val(data.columns[col_index].search.search);
+      });
+
+      // handle where the user had a search saved locally
+      if (!g_settings.compare_on) {
+        $('#fullsearch').val(data.search.search);
+      }
+    },
 
     // Allow export to CSV: only visible columns and only current filtered data
     buttons: [
@@ -770,7 +782,6 @@ function on_data_table_initialized() {
   load_settings();
 
   // populate filter inputs
-  g_data_table.search(g_settings['filter']);
   apply_min_values();
 
   // apply highlight to selected rows
@@ -809,6 +820,12 @@ function on_data_table_initialized() {
     // - URL is ?cost_duration=monthly, redraw here
     // - URL is ?cost_duration=monthly&reserved_term=yrTerm1Convertible.partialUpfront, redraw here
     change_cost();
+  }
+
+  // handle a search (/?filter=foo) from the URL
+  if (!g_settings.compare_on && g_settings.filter !== undefined) {
+    g_data_table.search(g_settings['filter']).draw();
+    $('#fullsearch').val(g_settings['filter']);
   }
 
   $.extend($.fn.dataTableExt.oStdClasses, {
@@ -945,19 +962,22 @@ function configure_highlighting() {
 
   $compareBtn.click(function () {
     g_settings.compare_on = !g_settings.compare_on;
+    if (!g_settings.compare_on) {
+      // clear the comparison when End Compare is clicked
+      g_data_table.search('').draw();
+    }
     update_compare_button();
     update_visible_rows();
     maybe_update_url();
   });
 
+  // these two calls handle if there's an initial comparison, loaded from the URL or local storage
   update_compare_button();
   update_visible_rows();
 }
 
 function update_visible_rows() {
-  if (!g_settings.compare_on) {
-    g_data_table.search('').draw();
-  } else {
+  if (g_settings.compare_on) {
     // prepare the list of selected rows as an input to search()
     var selected_ids = g_settings.selected.replaceAll(',', '|');
 
