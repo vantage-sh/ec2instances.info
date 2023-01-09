@@ -257,6 +257,11 @@ function init_data_table() {
         var col_index = parseInt($(this).attr('column-index'));
         $('input', this).val(data.columns[col_index].search.search);
       });
+
+      if (!g_settings.compare_on) {
+        // $('#fullsearch').val(g_data_table.state.loaded().search.search);
+        $('#fullsearch').val(data.search.search);
+      }
     },
 
     // Allow export to CSV: only visible columns and only current filtered data
@@ -629,12 +634,6 @@ function url_for_selections() {
     compare_on: g_settings.compare_on,
   };
 
-  // the search term is loaded above so set the input accordingly, but only if it's
-  // a true search and not a comparison
-  // if (!g_settings.compare_on) {
-  //   $('#fullsearch').val(params.filter);
-  // }
-
   if (g_settings.selected !== '') {
     params.selected = g_settings.selected.split(',');
   } else {
@@ -819,6 +818,8 @@ function on_data_table_initialized() {
 
   // apply classes to search box
   $('div.dataTables_filter input').addClass('form-control search');
+
+  // var selected_ids = g_settings.selected.replaceAll(',', '|');
 }
 
 // sorting for colums with more complex data
@@ -913,19 +914,22 @@ function configure_highlighting() {
 
   $compareBtn.click(function () {
     g_settings.compare_on = !g_settings.compare_on;
+    if (!g_settings.compare_on) {
+      // clear the comparison when End Compare is clicked
+      g_data_table.search('').draw();
+    }
     update_compare_button();
     update_visible_rows();
     maybe_update_url();
   });
 
+  // these two calls handle if there's an initial comparison
   update_compare_button();
   update_visible_rows();
 }
 
 function update_visible_rows() {
-  if (!g_settings.compare_on) {
-    g_data_table.search(g_settings['filter']);
-  } else {
+  if (g_settings.compare_on) {
     // prepare the list of selected rows as an input to search()
     var selected_ids = g_settings.selected.replaceAll(',', '|');
 
