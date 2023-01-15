@@ -16,7 +16,7 @@ GPU_model,GPU Architecture,Compute,10,value,,None,
 FPGA,FPGA,Compute,13,value,,0,
 compute_capability,"GPU Compute Capability <a href=""https://handbook.vantage.sh/aws/reference/aws-gpu-instances/"">(?)</a>",Compute,12,,,0,
 GPU_memory,Video Memory (GiB),Compute,11,,,0,
-network_performance,Network Performance (Gibps),Networking,1,,(Up to )?\d+,Up to 10 Gigabit,https://stackoverflow.com/questions/18507405/ec2-instance-typess-exact-network-performance
+network_performance,Network Performance (Gibps),Networking,1,,(Up to )?[+-]?([0-9]*[.])?[0-9]+,Up to 10 Gigabit,https://stackoverflow.com/questions/18507405/ec2-instance-typess-exact-network-performance
 enhanced_networking,Enhanced Networking,Networking,2,value,,TRUE,
 ipv6_support,IPV6,Networking,3,value,,TRUE,
 placement_group_support,"Placement Group <a href=""https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html"">(?)</a>",Networking,4,value,,FALSE,https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
