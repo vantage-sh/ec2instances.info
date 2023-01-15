@@ -42,13 +42,15 @@ def description(id, defaults):
     memory = id["Compute"][1]["value"]
     bandwidth = id["Networking"][0]["value"]
 
-    # Some instances say "Low to moderate" for bandwidth, ignore them
-    try:
-        bandwidth = " and {} Gibps of bandwidth".format(
-            int(id["Networking"][0]["value"])
-        )
-    except:
-        bandwidth = ""
+    if (
+        "low" in bandwidth.lower()
+        or "moderate" in bandwidth.lower()
+        or "high" in bandwidth.lower()
+    ):
+        bandwidth = " and {} network performance".format(bandwidth.lower())
+    else:
+        bandwidth.strip("Gigabit")
+        bandwidth = " and {} Gibps of bandwidth".format(bandwidth.lower())
 
     return "The {} instance is in the {} family and has {} vCPUs, {} GiB of memory{} starting at ${} per hour.".format(
         name, family_category, cpus, memory, bandwidth, defaults[0]

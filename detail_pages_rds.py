@@ -40,6 +40,8 @@ def initial_prices(i, instance_type):
     try:
         if "mem" in instance_type:
             od = i["Pricing"]["us-east-1"]["Oracle"]["ondemand"]
+        elif "z1d" in instance_type:
+            od = i["Pricing"]["us-east-1"]["SQL Server Standard"]["ondemand"]
         else:
             od = i["Pricing"]["us-east-1"]["PostgreSQL"]["ondemand"]
     except:
@@ -52,6 +54,13 @@ def initial_prices(i, instance_type):
                 "Standard.partialUpfront"
             ]
             _3yr = i["Pricing"]["us-east-1"]["Oracle"]["_3yr"][
+                "Standard.partialUpfront"
+            ]
+        elif "z1d" in instance_type:
+            _1yr = i["Pricing"]["us-east-1"]["SQL Server Standard"]["_1yr"][
+                "Standard.partialUpfront"
+            ]
+            _3yr = i["Pricing"]["us-east-1"]["SQL Server Standard"]["_3yr"][
                 "Standard.partialUpfront"
             ]
         else:
@@ -76,13 +85,15 @@ def description(id, defaults):
     memory = id["Compute"][1]["value"]
     bandwidth = id["Networking"][0]["value"]
 
-    # Some instances say "Low to moderate" for bandwidth, ignore them
-    try:
-        bandwidth = " and {} Gibps of bandwidth".format(
-            int(id["Networking"][0]["value"])
-        )
-    except:
-        bandwidth = ""
+    if (
+        "low" in bandwidth.lower()
+        or "moderate" in bandwidth.lower()
+        or "high" in bandwidth.lower()
+    ):
+        bandwidth = " and {} network performance".format(bandwidth.lower())
+    else:
+        bandwidth.strip("Gigabit")
+        bandwidth = " and {} Gibps of bandwidth".format(bandwidth.lower())
 
     return "The {} instance is in the {} family and has {} vCPUs, {} GiB of memory{} starting at ${} per hour.".format(
         name, family_category, cpus, memory, bandwidth, defaults[0]

@@ -6,7 +6,7 @@ pretty_name,Name,Amazon,4,,,M3 Previous generation: (not recommended) Double Ext
 vcpu,CPUs,Compute,1,,,8
 memory,Memory (GiB),Compute,2,,,27.9
 cacheEngine,Cache Software,Not Shown,0,,,Memcached
-network_performance,Network Performance (Gibps),Networking,1,,(Up to )\d+,High
+network_performance,Network Performance (Gibps),Networking,1,,(Up to )?[+-]?([0-9]*[.])?[0-9]+,High
 networkPerformance,Network Performance (Gibps),Not Shown,0,,,High
 servicecode,,Not Shown,0,,,AmazonElastiCache
 instanceType,Instance Type,Not Shown,0,,,cache.m3.2xlarge

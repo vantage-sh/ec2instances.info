@@ -129,26 +129,33 @@
                 <select class="form-select form-select-sm" id="os">
                   % if "mem" in i["Amazon"][1]["value"]:
                     <option value="Oracle">Oracle</option>
+                    <option value="MySQL">MySQL</option> 
                     <option value="PostgreSQL">PostgreSQL</option> 
+                    <option value="SQL Server Standard">SQL Server</option>
+                  % elif "z1d" in i["Amazon"][1]["value"]:
+                    <option value="SQL Server Standard">SQL Server</option>
+                    <option value="Oracle">Oracle</option>
+                    <option value="PostgreSQL">PostgreSQL</option> 
+                    <option value="MySQL">MySQL</option> 
                   % else:
                     <option value="PostgreSQL">PostgreSQL</option> 
+                    <option value="MySQL">MySQL</option> 
                     <option value="Oracle">Oracle</option>
+                    <option value="SQL Server Standard">SQL Server</option>
                   % endif
                   <option value="Aurora PostgreSQL">Aurora PostgreSQL</option>
-                  <option value="MySQL">MySQL</option> 
                   <option value="Aurora MySQL">Aurora MySQL</option>
-                  <option value="SQL Server Standard">SQL Server</option>
                   <option value="SQL Server Enterprise">SQL Server Enterprise</option>
                   <option value="MariaDB">MariaDB</option>
                   <option value="Oracle Standard Two">Oracle Standard Two</option>
                   <option value="Oracle Standard Two BYOL">Oracle Standard Two BYOL</option>
                   <option value="Oracle Standard BYOL">Oracle Standard BYOL</option>
                   <option value="Oracle Enterprise BYOL">Oracle Enterprise BYOL</option>
+                  <option value="SQL Server">SQL Server Standard</option>
                   <option value="SQL Server Express">SQL Server Express</option>
                   <option value="Oracle Standard One BYOL">Oracle Standard One BYOL</option> 
                   <option value="MySQL (Outpost On-Prem)">MySQL (Outpost On-Prem)</option>
                   <option value="PostgreSQL (Outpost On-Prem)">PostgreSQL (Outpost On-Prem)</option>
-                  <option value="SQL Server">SQL Server Standard</option>
                   <option value="SQL Server Enterprise (Outpost On-Prem)">SQL Server Enterprise (Outpost On-Prem)</option>
                   <option value="SQL Server (Outpost On-Prem)">SQL Server (Outpost On-Prem)</option>
                   <option value="SQL Server Web (Outpost On-Prem)">SQL Server Web (Outpost On-Prem)</option>
