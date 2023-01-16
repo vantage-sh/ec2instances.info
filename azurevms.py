@@ -4,6 +4,7 @@ import json
 import scrape
 import os
 import yaml
+import math
 
 
 class AzureInstance(object):
@@ -159,15 +160,15 @@ def parse_specs(i, cap):
         elif c.name == "CombinedTempDiskAndCachedIOPS":
             i.iops = int(c.value)
         elif c.name == "CombinedTempDiskAndCachedReadBytesPerSecond":
-            i.read_io = int(c.value)
+            i.read_io = math.floor(int(c.value) / 1000000)
         elif c.name == "CombinedTempDiskAndCachedWriteBytesPerSecond":
-            i.write_io = int(c.value)
+            i.write_io = math.floor(int(c.value) / 1000000)
         elif c.name == "CachedDiskBytes":
-            i.cached_disk = int(c.value)
+            i.cached_disk = math.floor(int(c.value) / 1073741824)
         elif c.name == "UncachedDiskIOPS":
             i.uncached_disk = int(c.value)
         elif c.name == "UncachedDiskBytesPerSecond":
-            i.uncached_disk_io = int(c.value)
+            i.uncached_disk_io = math.floor(int(c.value) / 1000000)
         elif c.name == "EphemeralOSDiskSupported":
             i.ephemeral_disk = c.value
         elif c.name == "EncryptionAtHostSupported":
@@ -570,5 +571,5 @@ if __name__ == "__main__":
     # scrape(output_file)
 
     # Run this to build the instances-specs.json file
-    # azure_vm_specs()
+    azure_vm_specs()
     combine_specs_pricing()

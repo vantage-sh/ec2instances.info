@@ -1,9 +1,10 @@
 Key,Display Name,Category,Category Order,Style,Regex,Example
-generation,Generation,Azure,1,value,,current
 instance_type,Instance Type,Azure,2,,,c5d.2xlarge
+pretty_name_azure,Instance Name,Azure,3,,,
 family,Family,Azure,5,,,Compute optimized
 pretty_name,Name,Azure,4,,,C5 High-CPU Double Extra Large
-ACU,Azure Compute Units,Not Shown,6,,,39
+rdma,RDMA,Azure,7,value,,
+confidential,Confidential,Azure,6,value,,
 vcpu,vCPUs,Compute,1,,,8
 memory,Memory (GiB),Compute,2,,[+-]?([0-9]*[.])?[0-9]+,16
 memory_per_vcpu,Memory per vCPU (GiB),Compute,3,,[+-]?([0-9]*[.])?[0-9]+,2
@@ -14,37 +15,35 @@ GPU,GPU,Compute,9,value,,0
 GPU_model,GPU Architecture,Compute,10,value,,None
 FPGA,FPGA,Compute,13,value,,0
 GPU_memory,Video Memory (GiB),Compute,11,,,0
+capacity_support,Capacity Support,Compute,12,value,,
+low_priority,Low Priority,Compute,15,value,,
+hyperv_generations,VM Generations Supported,Compute,14,,,
+vcpus_percore,vCPUs per Physical Core,Compute,17,,,
+vm_deployment,VM Deployment Method,Compute,18,,,
 network_performance,Network Performance (Gibps),Networking,1,,(Up to )\d+,Up to 10 Gigabit
 accelerated_networking,Accelerated Networking,Networking,2,value,,TRUE
 ipv6_support,IPV6,Networking,3,value,,TRUE
-availability_zones,Networking,Not Shown,0,,,
-ACU_per_vcpu,Amazon,Not Shown,0,,,4.875
-vpc_only,Networking,Not Shown,0,value,,TRUE
-intel_turbo,Compute,Not Shown,7,value,,Yes
+size,Local Temp Storage (GiB),Storage,1,,,
+devices,Devices,Storage,2,,,
+cached_disk,Cached Disk Size with Host Caching (GiB),Storage,3,,,
+iops,Cached/Temp Storage Throughput (IOPS),Storage,4,,,
+read_io,Cached/Temp Storage Read/Write Throughput (MBps),Storage,5,,,
+uncached_disk,Uncached Disk Throughput (IOPS),Storage,7,,,
+uncached_disk_io,Uncached Disk Read/Write Throughput (MBps),Storage,8,,,
+premium_io,Premium I/O,Storage,9,value,,
+ultra_ssd,Ultra Disks Supported,Storage,10,value,,
+encryption,Encryption,Storage,11,value,,
+memory_maintenance,Memory Maintenance,Storage,12,value,,
+nvme_ssd,NVME,Storage,13,value,,
 storage,Disk Details,Not Shown,0,,,"{'devices': 1, 'includes_swap_partition': False, 'nvme_ssd': True, 'size': 200, 'size_unit': 'GB', 'ssd': True, 'storage_needs_initialization': False, 'trim_support': True}"
-size,Disk Space (GiB),Storage,1,,,
-ssd,SSD,Storage,9,,,
-nvme_ssd,NVME,Storage,10,value,,
-devices,Devices,Storage,12,,,
-cached_disk,Cached Disk Size,Storage,13,,,
-capacity_support,Capacity Support,Compute,12,value,,
-confidential,Confidential,Azure,6,value,,
-encryption,Encryption,Storage,14,value,,
-hibernation,Hibernation,Not Shown,13,value,,
-hyperv_generations,HyperV Generations,Compute,14,,,
-iops,IOPS,Storage,15,,,
-low_priority,Low Priority,Compute,15,value,,
-memory_maintenance,Memory Maintenance,Storage,16,,,
-premium_io,Premium I/O,Storage,17,value,,
-pretty_name_azure,Instance Name,Azure,3,,,
-rdma,RDMA,Azure,7,value,,
-read_io,Read I/O,Storage,18,,,
-trusted_launch,Trusted Launch,Not Shown,16,value,,
-ultra_ssd,SSD,Storage,19,value,,
-uncached_disk,Uncached Disk Size,Storage,20,,,
-uncached_disk_io,Uncached Disk I/O,Storage,21,,,
+availability_zones,Networking,Not Shown,0,,,
+ssd,Ultra Disks Supported,Not Shown,9,,,
+ACU_per_vcpu,Amazon,Not Shown,0,,,4.875
+intel_turbo,Compute,Not Shown,7,value,,Yes
+vpc_only,Networking,Not Shown,0,value,,TRUE
+ACU,Azure Compute Units,Not Shown,6,,,39
+write_io,Write I/O,Not Shown,22,,,
 vcpus_available,,Not Shown,0,,,
-vcpus_percore,vCPUs per Physical Core,Compute,17,,,
-vm_deployment,VM Deployment Method,Compute,18,,,
-write_io,Write I/O,Storage,22,,,
+trusted_launch,Trusted Launch,Not Shown,16,value,,
 category,Category,Not Shown,0,,,
+hibernation,Hibernation,Not Shown,13,value,,
