@@ -266,6 +266,8 @@ def add_eni_info(instances):
     # Canonical URL for this info is https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
     # eni_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.partial.html"
     # It seems it's no longer dynamically loaded
+    # TODO: the tables at this URL have changed but it seems the information is already present in 
+    # from the DescribeInstanceTypes API so this function could be deprecated
     eni_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html"
     tree = etree.parse(urllib2.urlopen(eni_url), etree.HTMLParser())
     table = tree.xpath('//div[@class="table-contents"]//table')[1]
@@ -306,15 +308,14 @@ def add_eni_info(instances):
 
 def add_ebs_info(instances):
     """
-    Three tables on this page:
+    Six tables on this page:
 
-    1: EBS optimized by default
+    5 of them: EBS optimized by default and baseline:
+    Baseline performance metrics for instances with asterisk (unsupported for now, see comment below)
         Instance type | Maximum bandwidth (Mib/s) | Maximum throughput (MiB/s, 128 KiB I/O) | Maximum IOPS (16 KiB I/O)
-
-    2: Baseline performance metrics for instances with asterisk (unsupported for now, see comment below)
         Instance type | Baseline bandwidth (Mib/s) | Baseline throughput (MiB/s, 128 KiB I/O) | Baseline IOPS (16 KiB I/O)
 
-    3: Not EBS optimized by default
+    Table 6: Not EBS optimized by default
         Instance type | Maximum bandwidth (Mib/s) | Maximum throughput (MiB/s, 128 KiB I/O) | Maximum IOPS (16 KiB I/O)
 
     TODO: Support the asterisk on type names in the first table, which means:
@@ -325,56 +326,70 @@ def add_ebs_info(instances):
 
     """
 
-    def parse_ebs_baseline_table(by_type, table):
+    def parse_ebs_combined_table(by_type, table):
         for row in table.xpath("tr"):
             if row.xpath("th"):
                 continue
             cols = row.xpath("td")
             instance_type = sanitize_instance_type(totext(cols[0]).replace("*", ""))
-            ebs_baseline_bandwidth = locale.atof(totext(cols[1]))
-            ebs_baseline_throughput = locale.atof(totext(cols[2]))
-            ebs_baseline_iops = locale.atof(totext(cols[3]))
+
+            if len(cols) == 4:
+                ebs_baseline_bandwidth = locale.atof(totext(cols[1]))
+                ebs_baseline_throughput = locale.atof(totext(cols[2]))
+                ebs_baseline_iops = locale.atof(totext(cols[3]))
+                ebs_max_bandwidth = locale.atof(totext(cols[1]))
+                ebs_throughput = locale.atof(totext(cols[2]))
+                ebs_iops = locale.atof(totext(cols[3]))
+            elif len(cols) == 7:
+                ebs_baseline_bandwidth = locale.atof(totext(cols[1]))
+                ebs_max_bandwidth = locale.atof(totext(cols[2]))
+                ebs_baseline_throughput = locale.atof(totext(cols[3]))
+                ebs_throughput = locale.atof(totext(cols[4]))
+                ebs_baseline_iops = locale.atof(totext(cols[5]))
+                ebs_iops = locale.atof(totext(cols[6]))
+
             if instance_type not in by_type:
                 print(f"ERROR: Ignoring EBS info for unknown instance {instance_type}")
-                by_type[instance_type] = Instance()
-                # continue
-            by_type[instance_type].ebs_baseline_throughput = ebs_baseline_throughput
-            by_type[instance_type].ebs_baseline_iops = ebs_baseline_iops
-            by_type[instance_type].ebs_baseline_bandwidth = ebs_baseline_bandwidth
-        return by_type
+            else:
+                by_type[instance_type].ebs_optimized = True
+                by_type[instance_type].ebs_optimized_by_default = True
+                by_type[instance_type].ebs_baseline_throughput = ebs_baseline_throughput
+                by_type[instance_type].ebs_baseline_iops = ebs_baseline_iops
+                by_type[instance_type].ebs_baseline_bandwidth = ebs_baseline_bandwidth
+                by_type[instance_type].ebs_throughput = ebs_throughput
+                by_type[instance_type].ebs_iops = ebs_iops
+                by_type[instance_type].ebs_max_bandwidth = ebs_max_bandwidth
 
-    def parse_ebs_table(by_type, table, ebs_optimized_by_default):
+    def parse_ebs_nondefault_table(by_type, table):
         for row in table.xpath("tr"):
             if row.xpath("th"):
                 continue
             cols = row.xpath("td")
             instance_type = sanitize_instance_type(totext(cols[0]).replace("*", ""))
-            ebs_optimized_by_default = ebs_optimized_by_default
             ebs_max_bandwidth = locale.atof(totext(cols[1]))
             ebs_throughput = locale.atof(totext(cols[2]))
             ebs_iops = locale.atof(totext(cols[3]))
+
             if instance_type not in by_type:
                 print(f"ERROR: Ignoring EBS info for unknown instance {instance_type}")
-                by_type[instance_type] = Instance()
-                # continue
-            by_type[instance_type].ebs_optimized_by_default = ebs_optimized_by_default
-            by_type[instance_type].ebs_throughput = ebs_throughput
-            by_type[instance_type].ebs_iops = ebs_iops
-            by_type[instance_type].ebs_max_bandwidth = ebs_max_bandwidth
-            if ebs_max_bandwidth:
-                by_type[instance_type].ebs_optimized = True
-        return by_type
+            else:
+                if ebs_max_bandwidth:
+                    by_type[instance_type].ebs_optimized = True
+                by_type[instance_type].ebs_optimized_by_default = False
+                by_type[instance_type].ebs_throughput = ebs_throughput
+                by_type[instance_type].ebs_iops = ebs_iops
+                by_type[instance_type].ebs_max_bandwidth = ebs_max_bandwidth
 
     by_type = {i.instance_type: i for i in instances}
     # Canonical URL for this info is https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
     # ebs_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.partial.html"
-    # It seems it's no longer dynamically loaded
     ebs_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html"
     tree = etree.parse(urllib2.urlopen(ebs_url), etree.HTMLParser())
     tables = tree.xpath('//div[@class="table-contents"]//table')
-    parse_ebs_table(by_type, tables[0], True)
-    parse_ebs_baseline_table(by_type, tables[1])
-    parse_ebs_table(by_type, tables[2], False)
+    for t in [0, 1, 2, 3, 4]:
+        parse_ebs_combined_table(by_type, tables[t])
+
+    parse_ebs_nondefault_table(by_type, tables[5])
 
 
 def add_linux_ami_info(instances):
@@ -461,50 +476,52 @@ def add_instance_storage_details(instances):
     # It seems it's no longer dynamically loaded
     url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html"
     tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
-    table = tree.xpath('//div[@class="table-contents"]/table')[0]
-    rows = table.xpath(".//tr[./td]")
 
-    checkmark_char = "\u2714"
-    dagger_char = "\u2020"
+    for t in [0, 1, 2, 3, 4]:
+        table = tree.xpath('//div[@class="table-contents"]/table')[t]
+        rows = table.xpath(".//tr[./td]")
 
-    for r in rows:
-        columns = r.xpath(".//td")
+        checkmark_char = "\u2714"
+        dagger_char = "\u2020"
 
-        (
-            instance_type,
-            storage_volumes,
-            storage_type,
-            needs_initialization,
-            trim_support,
-        ) = tuple(totext(i) for i in columns)
+        for r in rows:
+            columns = r.xpath(".//td")
 
-        if instance_type is None:
-            continue
+            (
+                instance_type,
+                storage_volumes,
+                storage_type,
+                needs_initialization,
+                trim_support,
+            ) = tuple(totext(i) for i in columns)
 
-        for i in instances:
-            if i.instance_type == instance_type:
-                i.ebs_only = True
+            if instance_type is None:
+                continue
 
-                # Supports "24 x 13,980 GB" and "2 x 1,200 GB (2.4 TB)"
-                m = re.search(r"(\d+)\s*x\s*([0-9,]+)?\s+(\w{2})?", storage_volumes)
+            for i in instances:
+                if i.instance_type == instance_type:
+                    i.ebs_only = True
 
-                if m:
-                    size_unit = "GB"
+                    # Supports "24 x 13,980 GB" and "2 x 1,200 GB (2.4 TB)"
+                    m = re.search(r"(\d+)\s*x\s*([0-9,]+)?\s+(\w{2})?", storage_volumes)
 
-                    if m.group(3):
-                        size_unit = m.group(3)
+                    if m:
+                        size_unit = "GB"
 
-                    i.ebs_only = False
-                    i.num_drives = locale.atoi(m.group(1))
-                    i.drive_size = locale.atoi(m.group(2))
-                    i.size_unit = size_unit
-                    i.ssd = "SSD" in storage_type
-                    i.nvme_ssd = "NVMe" in storage_type
-                    i.trim_support = checkmark_char in trim_support
-                    i.storage_needs_initialization = (
-                        checkmark_char in needs_initialization
-                    )
-                    i.includes_swap_partition = dagger_char in storage_volumes
+                        if m.group(3):
+                            size_unit = m.group(3)
+
+                        i.ebs_only = False
+                        i.num_drives = locale.atoi(m.group(1))
+                        i.drive_size = locale.atoi(m.group(2))
+                        i.size_unit = size_unit
+                        i.ssd = "SSD" in storage_type
+                        i.nvme_ssd = "NVMe" in storage_type
+                        i.trim_support = checkmark_char in trim_support
+                        i.storage_needs_initialization = (
+                            checkmark_char in needs_initialization
+                        )
+                        i.includes_swap_partition = dagger_char in storage_volumes
 
 
 def add_t2_credits(instances):

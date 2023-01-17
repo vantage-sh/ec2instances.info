@@ -42,7 +42,7 @@ ebs_iops,"Max I/O Operations/second <a href=""https://handbook.vantage.sh/aws/co
 ebs_baseline_bandwidth,"Baseline Bandwidth (Mbps) on <a href=""https://handbook.vantage.sh/aws/services/ebs-pricing/"">(EBS)</a>",Storage,6,,\d+,4750,
 ebs_baseline_throughput,Baseline Throughput (MB/s) on EBS,Storage,7,,,593.75,
 ebs_baseline_iops,"Baseline I/O Operations/second <a href=""https://handbook.vantage.sh/aws/concepts/io-operations/"">(IOPS)</a>",Storage,8,,\d+,20000,
-ssd,SSD,Storage,9,,,,
+ssd,SSD,Storage,9,value,,,
 nvme_ssd,"<a href=""https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances"">NVME</a> Drive",Storage,10,value,,,
 includes_swap_partition,Swap Partition,Storage,11,value,,,
 devices,Devices,Storage,12,,,,
