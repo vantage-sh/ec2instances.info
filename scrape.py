@@ -266,7 +266,7 @@ def add_eni_info(instances):
     # Canonical URL for this info is https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
     # eni_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.partial.html"
     # It seems it's no longer dynamically loaded
-    # TODO: the tables at this URL have changed but it seems the information is already present in 
+    # TODO: the tables at this URL have changed but it seems the information is already present in
     # from the DescribeInstanceTypes API so this function could be deprecated
     eni_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html"
     tree = etree.parse(urllib2.urlopen(eni_url), etree.HTMLParser())
@@ -620,6 +620,7 @@ def add_emr_info(instances):
         "ap-southeast-1": "Asia Pacific (Singapore)",
         "ap-southeast-2": "Asia Pacific (Sydney)",
         "ap-southeast-3": "Asia Pacific (Jakarta)",
+        "ap-southeast-4": "Asia Pacific (Melbourne)",
         "ap-northeast-1": "Asia Pacific (Tokyo)",
         "ca-central-1": "Canada (Central)",
         "eu-central-1": "EU (Frankfurt)",
@@ -1075,6 +1076,7 @@ def add_dedicated_info(instances):
         "ap-southeast-1": "Asia Pacific (Singapore)",
         "ap-southeast-2": "Asia Pacific (Sydney)",
         "ap-southeast-3": "Asia Pacific (Jakarta)",
+        "ap-southeast-4": "Asia Pacific (Melbourne)",
         "ap-northeast-1": "Asia Pacific (Tokyo)",
         "ca-central-1": "Canada (Central)",
         "eu-central-1": "EU (Frankfurt)",
