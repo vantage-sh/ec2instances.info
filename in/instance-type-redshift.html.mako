@@ -97,6 +97,7 @@
                   <option value='ap-southeast-1'>Asia-Pacific (Singapore)</option>
                   <option value='ap-southeast-2'>Asia-Pacific (Sydney)</option>
                   <option value='ap-southeast-3'>Asia-Pacific (Jakarta)</option>
+                  <option value='ap-southeast-4'>Asia-Pacific (Melbourne)</option>
                   <option value='ap-northeast-1'>Asia-Pacific (Tokyo)</option>
                   <option value='ca-central-1'>Canada (Central)</option>
                   <option value='eu-central-1'>Europe (Frankfurt)</option>

@@ -30,6 +30,7 @@
             <li><a class="dropdown-item"  href="javascript:;" data-region='ap-southeast-1'>Asia-Pacific (Singapore)</a></li>
             <li><a class="dropdown-item"  href="javascript:;" data-region='ap-southeast-2'>Asia-Pacific (Sydney)</a></li>
             <li><a class="dropdown-item"  href="javascript:;" data-region='ap-southeast-3'>Asia-Pacific (Jakarta)</a></li>
+            <li><a class="dropdown-item"  href="javascript:;" data-region='ap-southeast-4'>Asia-Pacific (Melbourne)</a></li>
             <li><a class="dropdown-item"  href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
             <li><a class="dropdown-item"  href="javascript:;" data-region='ca-central-1'>Canada (Central)</a></li>
             <li><a class="dropdown-item"  href="javascript:;" data-region='eu-central-1'>Europe (Frankfurt)</a></li>
