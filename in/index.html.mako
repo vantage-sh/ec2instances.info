@@ -272,6 +272,7 @@
           <th class="cost-emr">
             <abbr title="This are the hourly rate EMR costs. Actual costs are EC2 + EMR by hourly rate">EMR cost</abbr>
           </th>
+          <th class="generation">Generation</th>
         </tr>
       </thead>
 
@@ -547,6 +548,7 @@
                 <span sort="999999">unavailable</span>
               % endif
             </td>
+            <td class="generation">${inst['generation']}</td>
           </tr>
         % endfor
       </tbody>

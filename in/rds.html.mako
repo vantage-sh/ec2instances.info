@@ -168,6 +168,7 @@
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>${platform} Reserved cost</abbr>
           </th>
           % endfor
+          <th class="generation">Generation</th>
         </tr>
       </thead>
       <tbody>
@@ -231,6 +232,9 @@
             % endif
           </td>
           % endfor
+          <td class="generation">
+              ${'current' if inst['currentGeneration'] == 'Yes' else 'previous'}
+          </td>
         </tr>
         % endfor
       </tbody>
