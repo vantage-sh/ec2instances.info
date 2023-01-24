@@ -160,6 +160,7 @@
           <th class="cost-reserved cost-reserved-search">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Reserved cost</abbr>
           </th>
+          <th class="generation">Generation</th>
         </tr>
       </thead>
 
@@ -193,6 +194,9 @@
             % else:
               <span sort="999999">unavailable</span>
             % endif
+          </td>
+          <td class="generation">
+              ${'current' if inst['currentGeneration'] == 'Yes' else 'previous'}
           </td>
         </tr>
         % endfor

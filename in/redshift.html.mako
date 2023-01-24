@@ -157,7 +157,7 @@
           <th class="storage">Storage</th>
           <th class="io">I/O</th>
           <th class="ecu-per-vcpu">Elastic Compute Units</th>
-          <th class="generation">Current Generation</th>
+          <th class="generation">Generation</th>
           <th class="cost-ondemand cost-ondemand-node">Node On Demand cost</th>
           <th class="cost-reserved cost-reserved-node">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Node Reserved cost</abbr>
@@ -179,7 +179,9 @@
           <td class="storage"><span sort="${inst['storage']}">${inst['storage']}</span></td>
           <td class="io"><span sort="${inst['io']}">${inst['io']}</span></td>
           <td class="ecu-per-vcpu"><span sort="${inst['ecu']}">${inst['ecu']}</span></td>
-          <td class="generation"><span sort="${inst['currentGeneration']}">${inst['currentGeneration']}</span></td>
+          <td class="generation">
+              ${'current' if inst['currentGeneration'] == 'Yes' else 'previous'}
+          </td>
           <td class="cost-ondemand cost-ondemand-node" data-platform="none" data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
             % if inst['pricing'].get('us-east-1', {}).get('ondemand', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1']['ondemand']}">
