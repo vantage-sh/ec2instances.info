@@ -11,7 +11,7 @@
     </%block>
 
     <%block name="header">
-      <h1 class="banner-ad">EC2Instances.info Easy Amazon <b>RDS</b> Instance Comparison</h1>
+      <h1 class="banner-ad d-none d-xl-block">EC2Instances.info Easy Amazon <b>RDS</b> Instance Comparison</h1>
     </%block>
 
     <div class="row mt-3 me-2" id="menu">
@@ -134,7 +134,7 @@
           </button>
         </div>
 
-        <div class="btn-group-vertical float-end m2 p2" id="search">
+        <div class="btn-group-vertical float-end m2 p2 d-none d-xl-block" id="search">
           <label class="dropdown-label mb-1"><br></label>
           <input id="fullsearch" type="text" class="form-control" placeholder="Search...">
         </div>

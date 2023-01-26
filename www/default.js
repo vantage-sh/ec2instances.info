@@ -270,7 +270,7 @@ function init_data_table() {
       {
         extend: 'csv',
         text: 'Export',
-        className: 'btn-primary',
+        className: 'btn-primary d-none d-xxl-block',
         exportOptions: {
           modifier: {search: 'applied'},
           columns: ':visible',
