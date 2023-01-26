@@ -111,7 +111,7 @@
           </button>
         </div>
 
-        <div class="btn-group-vertical float-end m2 p2" id="search">
+        <div class="btn-group-vertical float-end m2 p2 d-none d-xl-block" id="search">
           <label class="dropdown-label mb-1"><br></label>
           <input id="fullsearch" type="text" class="form-control" placeholder="Search...">
         </div>
