@@ -235,6 +235,7 @@ function init_data_table() {
           'placement-group-support',
           'vpc-only',
           'azs',
+          'generation',
         ],
         bVisible: false,
       },

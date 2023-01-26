@@ -6,6 +6,13 @@ import sys
 import six
 import os
 import ec2
+import locale
+import re
+from lxml import etree
+from six.moves.urllib import request as urllib2
+
+
+locale.setlocale(locale.LC_ALL, "en_US.UTF-8")
 
 
 def add_pretty_names(instances):
@@ -53,6 +60,118 @@ def add_pretty_names(instances):
         bits.append(short.capitalize())
 
         i["pretty_name"] = " ".join([b for b in bits if b])
+
+
+def sanitize_instance_type(instance_type):
+    """Typos and other bad data are common in the instance type colums for some reason"""
+    # Remove random whitespace
+    instance_type = re.sub(r"\s+", "", instance_type, flags=re.UNICODE)
+
+    # Correct typos
+    typo_corrections = {
+        "x1.16large": "x1.16xlarge",  # https://github.com/powdahound/ec2instances.info/issues/199
+        "i3.4xlxarge": "i3.4xlarge",  # https://github.com/powdahound/ec2instances.info/issues/227
+        "i3.16large": "i3.16xlarge",  # https://github.com/powdahound/ec2instances.info/issues/227
+        "p4d.2xlarge": "p4d.24xlarge",  # as of 2020-11-15
+    }
+    return typo_corrections.get(instance_type, instance_type)
+
+
+def totext(elt):
+    s = etree.tostring(elt, method="text", encoding="unicode").strip()
+    return re.sub(r"\*\d$", "", s)
+
+
+def add_ebs_info(instances):
+    """
+    Six tables on this page:
+
+    5 of them: EBS optimized by default and baseline:
+    Baseline performance metrics for instances with asterisk (unsupported for now, see comment below)
+        Instance type | Maximum bandwidth (Mib/s) | Maximum throughput (MiB/s, 128 KiB I/O) | Maximum IOPS (16 KiB I/O)
+        Instance type | Baseline bandwidth (Mib/s) | Baseline throughput (MiB/s, 128 KiB I/O) | Baseline IOPS (16 KiB I/O)
+
+    Table 6: Not EBS optimized by default
+        Instance type | Maximum bandwidth (Mib/s) | Maximum throughput (MiB/s, 128 KiB I/O) | Maximum IOPS (16 KiB I/O)
+
+    TODO: Support the asterisk on type names in the first table, which means:
+        "These instance types can support maximum performance for 30 minutes at least once every 24 hours. For example,
+        c5.large instances can deliver 281 MB/s for 30 minutes at least once every 24 hours. If you have a workload
+        that requires sustained maximum performance for longer than 30 minutes, select an instance type based on the
+        following baseline performance."
+
+    """
+
+    def parse_ebs_combined_table(by_type, table):
+        for row in table.xpath("tr"):
+            if row.xpath("th"):
+                continue
+            cols = row.xpath("td")
+            instance_type = sanitize_instance_type(totext(cols[0]).replace("*", ""))
+
+            if len(cols) == 4:
+                ebs_baseline_bandwidth = locale.atof(totext(cols[1]))
+                ebs_baseline_throughput = locale.atof(totext(cols[2]))
+                ebs_baseline_iops = locale.atof(totext(cols[3]))
+                ebs_max_bandwidth = locale.atof(totext(cols[1]))
+                ebs_throughput = locale.atof(totext(cols[2]))
+                ebs_iops = locale.atof(totext(cols[3]))
+            elif len(cols) == 7:
+                ebs_baseline_bandwidth = locale.atof(totext(cols[1]))
+                ebs_max_bandwidth = locale.atof(totext(cols[2]))
+                ebs_baseline_throughput = locale.atof(totext(cols[3]))
+                ebs_throughput = locale.atof(totext(cols[4]))
+                ebs_baseline_iops = locale.atof(totext(cols[5]))
+                ebs_iops = locale.atof(totext(cols[6]))
+
+            instance_type = "db." + instance_type
+            if instance_type not in by_type:
+                print(f"ERROR: Ignoring EBS info for unknown instance {instance_type}")
+            else:
+                by_type[instance_type]["ebs_optimized"] = True
+                by_type[instance_type]["ebs_optimized_by_default"] = True
+                by_type[instance_type][
+                    "ebs_baseline_throughput"
+                ] = ebs_baseline_throughput
+                by_type[instance_type]["ebs_baseline_iops"] = ebs_baseline_iops
+                by_type[instance_type][
+                    "ebs_baseline_bandwidth"
+                ] = ebs_baseline_bandwidth
+                by_type[instance_type]["ebs_throughput"] = ebs_throughput
+                by_type[instance_type]["ebs_iops"] = ebs_iops
+                by_type[instance_type]["ebs_max_bandwidth"] = ebs_max_bandwidth
+
+    def parse_ebs_nondefault_table(by_type, table):
+        for row in table.xpath("tr"):
+            if row.xpath("th"):
+                continue
+            cols = row.xpath("td")
+            instance_type = sanitize_instance_type(totext(cols[0]).replace("*", ""))
+            ebs_max_bandwidth = locale.atof(totext(cols[1]))
+            ebs_throughput = locale.atof(totext(cols[2]))
+            ebs_iops = locale.atof(totext(cols[3]))
+
+            instance_type = "db." + instance_type
+            if instance_type not in by_type:
+                print(f"ERROR: Ignoring EBS info for unknown instance {instance_type}")
+            else:
+                if ebs_max_bandwidth:
+                    by_type[instance_type]["ebs_optimized"] = True
+                by_type[instance_type]["ebs_optimized_by_default"] = False
+                by_type[instance_type]["ebs_throughput"] = ebs_throughput
+                by_type[instance_type]["ebs_iops"] = ebs_iops
+                by_type[instance_type]["ebs_max_bandwidth"] = ebs_max_bandwidth
+
+    by_type = {k: v for k, v in instances.items()}
+    # Canonical URL for this info is https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
+    # ebs_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.partial.html"
+    ebs_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html"
+    tree = etree.parse(urllib2.urlopen(ebs_url), etree.HTMLParser())
+    tables = tree.xpath('//div[@class="table-contents"]//table')
+    for t in [0, 1, 2, 3, 4]:
+        parse_ebs_combined_table(by_type, tables[t])
+
+    parse_ebs_nondefault_table(by_type, tables[5])
 
 
 def scrape(output_file, input_file=None):
@@ -305,6 +424,14 @@ def scrape(output_file, input_file=None):
                     )
 
     add_pretty_names(instances)
+    for i, v in instances.items():
+        v["ebs_baseline_bandwidth"] = 0
+        v["ebs_baseline_throughput"] = 0
+        v["ebs_baseline_iops"] = 0
+        v["ebs_max_bandwidth"] = 0
+        v["ebs_throughput"] = 0
+        v["ebs_iops"] = 0
+    add_ebs_info(instances)
 
     # write output to file
     encoder.FLOAT_REPR = lambda o: format(o, ".5f")
