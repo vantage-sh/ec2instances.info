@@ -169,6 +169,12 @@
           </th>
           % endfor
           <th class="generation">Generation</th>
+          <th class="ebs-baseline-bandwidth">EBS Optimized: Baseline Bandwidth</th>
+          <th class="ebs-baseline-throughput">EBS Optimized: Baseline Throughput (128K)</th>
+          <th class="ebs-baseline-iops">EBS Optimized: Baseline IOPS (16K)</th>
+          <th class="ebs-max-bandwidth">EBS Optimized: Max Bandwidth</th>
+          <th class="ebs-throughput">EBS Optimized: Max Throughput (128K)</th>
+          <th class="ebs-iops">EBS Optimized: Max IOPS (16K)</th>
         </tr>
       </thead>
       <tbody>
@@ -235,6 +241,44 @@
           <td class="generation">
               ${'current' if inst['currentGeneration'] == 'Yes' else 'previous'}
           </td>
+              <td class="ebs-baseline-bandwidth">
+                % if not inst['ebs_baseline_bandwidth']:
+                <span sort="0">N/A</span>
+                % else:
+                <span sort="${inst['ebs_baseline_bandwidth']}">
+                  ${inst['ebs_baseline_bandwidth']} Mbps  <!-- Not MB/s! -->
+                </span>
+                % endif
+              </td>
+              <td class="ebs-baseline-throughput">
+                <span sort="${inst['ebs_baseline_throughput']}">
+                  ${inst['ebs_baseline_throughput']} MB/s
+                </span>
+              </td>
+              <td class="ebs-baseline-iops">
+                <span sort="${inst['ebs_baseline_iops']}">
+                  ${inst['ebs_baseline_iops']} IOPS
+                </span>
+              </td>
+              <td class="ebs-max-bandwidth">
+                % if not inst['ebs_max_bandwidth']:
+                <span sort="0">N/A</span>
+                % else:
+                <span sort="${inst['ebs_max_bandwidth']}">
+                  ${inst['ebs_max_bandwidth']} Mbps  <!-- Not MB/s! -->
+                </span>
+                % endif
+              </td>
+              <td class="ebs-throughput">
+                <span sort="${inst['ebs_throughput']}">
+                  ${inst['ebs_throughput']} MB/s
+                </span>
+              </td>
+              <td class="ebs-iops">
+                <span sort="${inst['ebs_iops']}">
+                  ${inst['ebs_iops']} IOPS
+                </span>
+              </td>
         </tr>
         % endfor
       </tbody>

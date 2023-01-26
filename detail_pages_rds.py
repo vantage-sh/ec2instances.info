@@ -283,6 +283,7 @@ def map_rds_attributes(i, imap):
     # and use a standard function that maps names
     categories = [
         "Compute",
+        "Storage",
         "Networking",
         "Amazon",
         "Not Shown",

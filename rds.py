@@ -424,6 +424,13 @@ def scrape(output_file, input_file=None):
                     )
 
     add_pretty_names(instances)
+    for i, v in instances.items():
+        v["ebs_baseline_bandwidth"] = 0
+        v["ebs_baseline_throughput"] = 0
+        v["ebs_baseline_iops"] = 0
+        v["ebs_max_bandwidth"] = 0
+        v["ebs_throughput"] = 0
+        v["ebs_iops"] = 0
     add_ebs_info(instances)
 
     # write output to file
