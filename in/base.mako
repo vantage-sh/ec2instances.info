@@ -80,7 +80,10 @@
             </li>
           </ul>
         </div>
-        <a href="https://console.vantage.sh/signup" class="vantage d-none d-xl-block"><span class="fw-semibold">Optimize Datadog Costs</span> by connecting metrics, logging, APM, and more -></a>
+        <div class="d-flex align-items-center">
+          <img width="24" height="24" src="/mongodb-icon.svg">
+          <a href="https://console.vantage.sh/signup" class="vantage d-none d-xl-block"><span class="fw-semibold">Optimize Datadog Costs</span> by connecting metrics, logging, APM, and more -></a>
+        </div>
         <div class="d-flex">
           <div class="nav-buttons px-2 d-none d-xxl-block">
             <a target="_blank" href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw" class="btn btn-purple btn-icon">
