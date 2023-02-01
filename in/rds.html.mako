@@ -282,11 +282,16 @@
     </table>
 
     <div class="mt-4 pt-4 mb-4 d-flex flex-container justify-content-center">
-      <div class="row">
-        <div class="d-flex justify-content-center"><span><img width="64" height="64" src="/vantage-logo.svg"></span></div>
-        <div class="d-flex justify-content-center mt-4">
-          <span class="fw-semibold" style="color:#6c757d">Concerned about your cloud costs? <a href="https://console.vantage.sh/signup">Connect your AWS account</a> in under 5 minutes to see savings.</span>
+      <div class="d-none d-lg-block">
+      <div class="vantage-callout" style="min-width:640px">
+        <div class="callout-close">
+          <span class="material-icons">close</span>
         </div>
+        <img width="auto" height="25" src="/vantage-logo_full.svg">
+        <h5>Concerned about cloud costs?</h5>
+        <p>Connect your AWS account in under<br />5 minutes to see savings.</p>
+        <a href="https://console.vantage.sh/signup" target="_blank">Connect AWS Account</a>
+      </div>
       </div>
     </div>
 

@@ -169,6 +169,7 @@
         % endif
     </script>
 
+    <script src="/vantage.js" type="text/javascript" charset="utf-8"></script>
     <script src="/default.js" type="text/javascript" charset="utf-8"></script>
   </body>
 </html>
