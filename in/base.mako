@@ -80,9 +80,9 @@
             </li>
           </ul>
         </div>
-        <div class="d-flex align-items-center">
-          <img width="24" height="24" src="/mongodb-icon.svg">
-          <a href="https://console.vantage.sh/signup" class="vantage d-none d-xl-block"><span class="fw-semibold">Optimize Datadog Costs</span> by connecting metrics, logging, APM, and more -></a>
+        <div class="d-flex align-items-center d-none d-xl-block">
+          <img width="24" height="24" src="/mongodb-icon-2.svg">
+          <a href="https://console.vantage.sh/signup" class="vantage">Optimize <span class="fw-semibold">MongoDB Atlas</span> costs across projects, clusters and resources -></a>
         </div>
         <div class="d-flex">
           <div class="nav-buttons px-2 d-none d-xxl-block">
