@@ -68,10 +68,8 @@
             <h1 class="h3 mb-0 fw-bolder">${i["Azure"][2]["value"]}</h1>
             
             <!-- Description -->
-            <p class="pt-md-4 pt-3 mb-2 small lh-base">${description}</p>
+            <p class="pt-md-4 py-3 mb-2 small lh-base">${description}</p>
 
-            <p class="py-md-2 small lh-base"><a href="/azure/" class="text-decoration-none"><- All Azure VM Types</a></p>
-            
             <div class="d-flex align-items-center mb-3">
               <span class="material-icons me-1">paid</span>
               <p class="h6 fw-semibold mb-0">Pricing</p>
@@ -165,6 +163,8 @@
                 </tbody>
               </table>
             </div>
+
+            <p class="py-md-2 small lh-base"><a href="/azure/" class="text-decoration-none"><- All Azure VM Types</a></p>
 
             <!-- Instance variants -->
             % if len(variants) > 1:

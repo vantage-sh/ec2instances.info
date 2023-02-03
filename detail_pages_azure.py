@@ -44,12 +44,50 @@ def initial_prices(i):
 
 def description(id, defaults):
     name = id["Azure"][1]["value"]
-    family_category = id["Azure"][2]["value"].lower()
     cpus = id["Compute"][0]["value"]
     memory = id["Compute"][1]["value"]
 
-    return "The {} instance is in the {} family with {} vCPUs, {} GiB of memory starting at ${} per hour.".format(
-        name, family_category, cpus, memory, defaults[0]
+    series = id["Azure"][2]["value"].split(" ")
+    series[0] = re.sub(r"\d+", "", series[0])
+    family_category = "".join(series)
+
+    if defaults[0] == "'N/A'":
+        ondemand = "."
+    else:
+        ondemand = " starting at ${:.2f} per hour on-demand".format(defaults[0])
+
+    if defaults[1] != "'N/A'":
+        if defaults[1] < 0.01:
+            discounted = " or ${:.4f} per hour with spot machines.".format(defaults[1])
+        else:
+            discounted = " or ${:.2f} per hour with spot machines.".format(defaults[1])
+    elif defaults[2] != "'N/A'":
+        if defaults[2] < 0.01:
+            discounted = " or ${:.4f} per hour with a reservation.".format(defaults[2])
+        else:
+            discounted = " or ${:.2f} per hour with a reservation.".format(defaults[2])
+    else:
+        discounted = "."
+
+    if family_category[0:2] == "nv":
+        if len(series) == 3:
+            family_category = "nv" + series[1] + series[2]
+        elif len(series) == 2:
+            family_category = "nv" + series[-1]
+        else:
+            family_category = "nv"
+
+    if family_category[0:2] == "nc":
+        if len(series) == 3:
+            family_category = "nc" + series[1] + series[2]
+            family_category.strip()
+        elif len(series) == 2:
+            family_category = "nc" + series[1]
+        else:
+            family_category = "nc"
+
+    return "The {} instance is in the {} series with {} vCPUs and {} GiB of memory{}{}".format(
+        name, family_category, cpus, memory, ondemand, discounted
     )
 
 
