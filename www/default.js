@@ -285,6 +285,7 @@ function init_data_table() {
 }
 
 $(document).ready(function () {
+  vantage_settings();
   var urlpath = window.location.pathname;
 
   // service specific table defaults, namely sorting by cheapest instance
@@ -574,12 +575,6 @@ function change_reserved_term(term) {
   $dropdown.find('li').removeClass('active');
   $activeLink.closest('li').addClass('active');
   $dropdown.find('.dropdown-toggle .text').text(term_name);
-
-  if (term !== g_settings_defaults.reserved_term) {
-    $('.vantage').html(
-      '<span class="fw-semibold">Autopilot</span> buys and sells Reserved Instances for maximum savings. <span class="fw-semibold">Check it out -></span>',
-    );
-  }
 }
 
 function change_cost_duration(duration) {
