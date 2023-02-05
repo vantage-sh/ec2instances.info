@@ -317,6 +317,14 @@
       recalulate_redisplay_prices()
     });
 
+    $('a:not([href=#])').on('click', function (e) {
+      var link_name = $(e.target).attr('href');
+      if(link_name.includes('/aws/')) {
+        e.preventDefault();
+        // get the URL params and add them to the link
+        location.href = this.href + window.location.search;
+      }
+    });
 
     function format_price(element, price_value) {
       // Handle prices from $0.0001 to $100,000
@@ -341,6 +349,27 @@
       format_price("p_spot", ${defaults[1]});
       format_price("p_1yr", ${defaults[2]});
       format_price("p_3yr", ${defaults[3]});
+
+      // read the URL params and update the dropdowns
+      var urlParams = new URLSearchParams(window.location.search);
+      var region = urlParams.get('region');
+      var os = urlParams.get('os');
+      var unit = urlParams.get('unit');
+      var term = urlParams.get('term');
+      if (region) {
+        $('#region').val(region);
+      }
+      if (os) {
+        $('#os').val(os);
+      }
+      if (unit) {
+        $('#unit').val(unit);
+      }
+      if (term) {
+        $('#term').val(term);
+      }
+      recalulate_redisplay_prices();
+
     };
 
     function disable_regions() {
@@ -370,6 +399,14 @@
       var deny = ${unavailable};
       var displayed_prices = ['ondemand', '_1yr', 'spot', '_3yr'];
       var elements = ['p_od', 'p_1yr', 'p_spot', 'p_3yr'];
+
+      // update URL parameters with new values
+      var url = new URL(window.location.href);
+      url.searchParams.set('region', region);
+      url.searchParams.set('os', os);
+      url.searchParams.set('unit', unit);
+      url.searchParams.set('term', term);
+      window.history.pushState({}, '', url);
 
       // Check if this combination of price selections is available
       // Handle where only a specifc OS like Windows is not available in a region
