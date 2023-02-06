@@ -122,7 +122,13 @@ def serve(c):
         def do_GET(self):
             # The URL does not include ".html". Add it to serve the file for dev
             if "/aws/" in self.path:
-                self.path += ".html"
+                if "?" in self.path:
+                    self.path = (
+                        self.path.split("?")[0] + ".html?" + self.path.split("?")[1]
+                    )
+                else:
+                    self.path += ".html"
+            print(self.path)
             SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
 
     """Serve site contents locally for development"""

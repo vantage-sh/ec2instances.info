@@ -161,18 +161,18 @@
                 </select>
               </div>
               <div class="col-6 pe-2">
-                <select class="form-select form-select-sm" id="unit">
-                  <option value="second">Per Second</option>
-                  <option value="minute">Per Minute</option>
-                  <option value="hour" selected="selected">Per Hour</option>
-                  <option value="day">Per Day</option>
-                  <option value="week">Per Week</option>
-                  <option value="month">Per Month</option>
-                  <option value="year">Per Year</option>
+                <select class="form-select form-select-sm" id="cost_duration">
+                  <option value="secondly">Per Second</option>
+                  <option value="minutely">Per Minute</option>
+                  <option value="hourly" selected="selected">Per Hour</option>
+                  <option value="daily">Per Day</option>
+                  <option value="weekly">Per Week</option>
+                  <option value="monthly">Per Month</option>
+                  <option value="annually">Per Year</option>
                 </select>
               </div>
               <div class="col-6">
-                <select class="form-select form-select-sm" id="term">
+                <select class="form-select form-select-sm" id="reserved_term">
                   <option value="Standard.noUpfront">No Upfront</option>
                   <option value="Standard.partialUpfront">Partial Upfront</option>
                   <option value="Standard.allUpfront">All Upfront</option>
@@ -351,19 +351,30 @@
     initialize_prices();
     disable_regions();
 
+    get_filters_from_url();
+    $('a').on('click', function (e) {
+      var link_name = $(e.target).attr('href');
+      if (typeof link_name !== 'undefined' && link_name !== false) {
+        if(link_name.includes('/aws/')) {
+          e.preventDefault();
+          // get the URL params and add them to the link
+          location.href = this.href + window.location.search;
+        }
+      }
+    });
+
     $('#region').change(function() {
       recalulate_redisplay_prices()
     });
     $('#os').change(function() {
       recalulate_redisplay_prices()
     });
-    $('#unit').change(function() {
+    $('#cost_duration').change(function() {
       recalulate_redisplay_prices()
     });
-    $('#term').change(function() {
+    $('#reserved_term').change(function() {
       recalulate_redisplay_prices()
     });
-
 
     function format_price(element, price_value) {
       // Handle prices from $0.0001 to $100,000
@@ -409,14 +420,22 @@
     };
 
     function recalulate_redisplay_prices() {
-      var region = $('#region').val();
+      // jQuery returns null if an option is disabled which is the case for unavailable regions.
+      // Use this construct to get the value anyway when someone clicks into a detail page
+      // after having selected a region where the instance is not available from the main page
+      var region = $('#region option:selected').map(function(i,v) {
+        return this.value;
+      }).get()[0];
+
       var os = $('#os').val();
-      var unit = $('#unit').val();
-      var term = $('#term').val();
+      var cost_duration = $('#cost_duration').val();
+      var reserved_term = $('#reserved_term').val();
       var price = ${i["Pricing"]};
       var deny = ${unavailable};
       var displayed_prices = ['ondemand', '_1yr', 'spot', '_3yr'];
       var elements = ['p_od', 'p_1yr', 'p_spot', 'p_3yr'];
+
+      set_url_from_filters(region, os, cost_duration, reserved_term);
 
       // Check if this combination of price selections is available
       // Handle where only a specifc OS like Windows is not available in a region
@@ -432,13 +451,13 @@
       }
 
       var hour_multipliers = {
-        'second': 1 / (60 * 60),
-        'minute': 1 / 60,
-        'hour': 1,
-        'day': 24,
-        'week': 7 * 24,
-        'month': 730,   // use AWS convention of 730 hrs/month
-        'year': 8760
+        'secondly': 1 / (60 * 60),
+        'minutely': 1 / 60,
+        'hourly': 1,
+        'daily': 24,
+        'weekly': 7 * 24,
+        'monthly': 730,   // use AWS convention of 730 hrs/month
+        'annually': 8760
       };
 
 
@@ -452,18 +471,67 @@
           $('#' + element).html('N/A');
         } else {
 
-          // Handle the term conditions for reservations
+          // Handle the reserved_term conditions for reservations
           if (displayed_price === '_1yr' || displayed_price === '_3yr') {
-            price_value = parseFloat(price_value[term]);
+            price_value = parseFloat(price_value[reserved_term]);
           }
           
           // Show by day, month, year etc
-          price_value = parseFloat(price_value) * hour_multipliers[unit];
+          price_value = parseFloat(price_value) * hour_multipliers[cost_duration];
           
           format_price(element, price_value);
         }
       }
     }
+    
+    function set_url_from_filters(region, os, cost_duration, reserved_term) {
+      // update URL parameters with new values
+      var url = new URL(window.location.href);
+      url.searchParams.set('region', region);
+      url.searchParams.set('os', os);
+      url.searchParams.set('cost_duration', cost_duration);
+      url.searchParams.set('reserved_term', reserved_term);
+      window.history.pushState({}, '', url);
+    }
+
+    function get_filters_from_url() {
+      // read the URL params and update the dropdowns
+      var urlParams = new URLSearchParams(window.location.search);
+      var region = urlParams.get('region');
+      var os = urlParams.get('os');
+      var cost_duration = urlParams.get('cost_duration');
+      var reserved_term = urlParams.get('reserved_term');
+      var defaults = true;
+      if (region) {
+        var unavailable = ${unavailable};
+        for (const u of unavailable) {
+          if (u[1] == region && u[2] == 'All') {
+            console.log('Selected region not available');
+          }
+        }
+        $('#region').val(region);
+        defaults = false;
+      }
+      if (os) {
+        $('#os').val(os);
+        defaults = false;
+      }
+      if (cost_duration) {
+        $('#cost_duration').val(cost_duration);
+        defaults = false;
+      }
+      if (reserved_term) {
+        reserved_term = reserved_term.replace('yrTerm1', '');
+        reserved_term = reserved_term.replace('yrTerm3', '');
+        $('#reserved_term').val(reserved_term);
+        defaults = false;
+      }
+
+      if (!defaults) {
+        recalulate_redisplay_prices();
+      }
+    }
+    
   });
   </script>
   </body>
