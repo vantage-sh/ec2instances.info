@@ -822,6 +822,17 @@ function on_data_table_initialized() {
     redraw_costs();
   });
 
+  $('a').on('click', function (e) {
+    var link_name = $(e.target).attr('href');
+    if (typeof link_name !== 'undefined' && link_name !== false) {
+      if (link_name.includes('/aws/')) {
+        e.preventDefault();
+        // get the URL params and add them to the link
+        location.href = this.href + window.location.search;
+      }
+    }
+  });
+
   // apply classes to search box
   $('div.dataTables_filter input').addClass('form-control search');
 }
