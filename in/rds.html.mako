@@ -134,9 +134,9 @@
           </button>
         </div>
 
-        <div class="btn-group-vertical float-end m2 p2 d-none d-xl-block" id="search">
+        <div class="btn-group-vertical float-end m2 p2" id="search">
           <label class="dropdown-label mb-1"><br></label>
-          <input id="fullsearch" type="text" class="form-control" placeholder="Search...">
+          <input id="fullsearch" type="text" class="form-control d-none d-xl-block" placeholder="Search...">
         </div>
 
         <div class="btn-group-vertical float-end px-2">
