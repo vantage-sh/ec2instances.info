@@ -259,7 +259,7 @@
               <label class="mb-3" for="textarea">What's missing from this page?</label><br>
               <input type="hidden" name="page" value="${i["Amazon"][1]['value']}">
               <textarea class="mb-4 feedback-text" name="feedback" id="textarea" placeholder="Your feedback"></textarea><br>
-              <label class="mb-3" for="submit-email">Email (optional, if we have questions):</label><br>
+              <label class="mb-3" for="submit-email">Email (optional):</label><br>
               <input name="email" id="submit-email" type="email" class="submit-email mb-4">
               <button class="btn btn-purple" type="submit">Send</button>
             </form>

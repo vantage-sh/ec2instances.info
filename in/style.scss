@@ -397,3 +397,30 @@ table {
     color: $gray-2;
   }
 }
+
+.autopilot-callout {
+  background: $white;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+.autopilot-callout-wrapper {
+  border-radius: 6px;
+  background: -webkit-linear-gradient(45deg, #7f0eef, #17e0c8);
+  position: relative;
+  padding: 3px;
+}
+
+.autopilot-link {
+  font-weight: 600;
+  background: -webkit-linear-gradient(45deg, #7f0eef, #17e0c8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: underline;
+}
+
+.autopilot-learn-more {
+  text-decoration: none;
+  color: $gray-3;
+  font-size: 12px;
+}

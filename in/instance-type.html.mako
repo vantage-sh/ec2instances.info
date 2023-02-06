@@ -183,6 +183,25 @@
               </div>
             </div>
 
+            % if defaults[0] != "'N/A'" and defaults[3] != "'N/A'":
+            <div class="d-flex flex-wrap mt-4">
+              <div class="autopilot-callout-wrapper w-100">
+                <div class="autopilot-callout w-100">
+                  <p class="text-center mt-1 mb-0">
+                    <% discount = 100 - (float(defaults[3]) / float(defaults[0]) * 100) %>
+                    <% monthly = float(defaults[3]) * 730 %>
+                    $${"{:0.2f}".format(monthly)} per month <span style="color:#1E986D">(-${"{:.0f}".format(discount)}%)</span> with <a class="autopilot-link" href="https://console.vantage.sh/signup">Autopilot</a>
+                  </p>
+                  <div class="d-flex flex-row-reverse">
+                  <span>
+                    <a class="autopilot-learn-more" href="https://docs.vantage.sh/autopilot/">Docs</a>
+                  </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            % endif
+
             <!-- Instance families -->
             <div class="mt-4 d-flex flex-column">
               <div class="d-flex align-items-center mb-3">
@@ -318,7 +337,7 @@
               <label class="mb-3" for="textarea">What's missing from this page?</label><br>
               <input type="hidden" name="page" value="${i["Amazon"][1]['value']}">
               <textarea class="mb-4 feedback-text" name="feedback" id="textarea" placeholder="Your feedback"></textarea><br>
-              <label class="mb-3" for="submit-email">Email (optional, if we have questions):</label><br>
+              <label class="mb-3" for="submit-email">Email (optional):</label><br>
               <input name="email" id="submit-email" type="email" class="submit-email mb-4">
               <button class="btn btn-purple" type="submit">Send</button>
             </form>
