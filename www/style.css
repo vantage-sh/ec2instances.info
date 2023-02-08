@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap");
 html,
 body {
   height: 100%;
@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  font: 100% 'Inter', Helvetica, sans-serif;
+  font: 100% "Inter", Helvetica, sans-serif;
   color: #303037;
   padding: 0;
 }
@@ -18,8 +18,7 @@ body {
 a {
   color: #9c25c7;
 }
-a:hover,
-a:focus {
+a:hover, a:focus {
   color: #5a0a76;
 }
 
@@ -120,7 +119,7 @@ table a {
   text-decoration: none !important;
 }
 table.table-mono {
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
 }
 table.table-mono th {
   background-color: #ffffff !important;
@@ -284,7 +283,7 @@ table#Unavailable td {
   border: 1px solid;
   border-radius: 3px;
   color: #1a1a1c;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   padding: 4px 5px;
   font-size: 11px;
   line-height: 11px;
@@ -317,11 +316,23 @@ table#Unavailable td {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-image: url('/callout-graphic.png');
+  background-image: url("/callout-graphic.png");
   background-position: right center;
   background-repeat: no-repeat;
   background-size: 300px 300px;
   position: relative;
+  /*
+  a {
+    padding: 12px 14px;
+    border-radius: 6px;
+    color: $white;
+    text-decoration: none;
+    line-height: 14px;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: $purple-1;
+  }
+  */
 }
 @media screen and (max-width: 1400px) {
   .vantage-callout {
@@ -345,16 +356,6 @@ table#Unavailable td {
 }
 .vantage-callout img {
   margin-bottom: 20px;
-}
-.vantage-callout a {
-  padding: 12px 14px;
-  border-radius: 6px;
-  color: #ffffff;
-  text-decoration: none;
-  line-height: 14px;
-  font-size: 14px;
-  font-weight: 500;
-  background-color: #9c25c7;
 }
 .vantage-callout h5 {
   font-weight: 600;

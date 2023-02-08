@@ -190,7 +190,7 @@
                   <p class="text-center mt-1 mb-0">
                     <% discount = 100 - (float(defaults[3]) / float(defaults[0]) * 100) %>
                     <% monthly = float(defaults[3]) * 730 %>
-                    $${"{:0.2f}".format(monthly)} per month <span style="color:#1E986D">(-${"{:.0f}".format(discount)}%)</span> with <a class="autopilot-link" href="https://console.vantage.sh/signup">Autopilot</a>
+                    $${"{:0.2f}".format(monthly)} per month <span style="color:#1E986D">(-${"{:.0f}".format(discount)}%)</span> with <a href="https://console.vantage.sh/signup">Autopilot</a>
                   </p>
                   <div class="d-flex flex-row-reverse">
                   <span>
