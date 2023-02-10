@@ -112,7 +112,7 @@ def scrape(output_file, input_file=None):
                     region = "us-east-1"
                 else:
                     print(
-                        f"ERROR: No region data for location={location}. Ignoring instance with sku={sku}, type={instance_type}"
+                        f"WARNING: No region data for location={location}. Ignoring instance with sku={sku}, type={instance_type}"
                     )
                     continue
 

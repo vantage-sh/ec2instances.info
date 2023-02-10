@@ -321,7 +321,11 @@ def parse_instance(instance_type, product_attributes, api_description):
     i.vCPU = locale.atoi(product_attributes.get("vcpu"))
 
     # Memory is given in form of "1,952 GiB", let's parse it
-    i.memory = locale.atof(product_attributes.get("memory").split(" ")[0])
+    try:
+        i.memory = locale.atof(product_attributes.get("memory").split(" ")[0])
+    except:
+        print('WARNING: Could not parse memory for instance type: ' + i.instance_type)
+        i.memory = 'N/A'
 
     if api_description:
         i.arch = api_description["ProcessorInfo"]["SupportedArchitectures"]
