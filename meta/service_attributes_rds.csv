@@ -34,3 +34,4 @@ ebs_baseline_throughput,Baseline Throughput (MB/s) on EBS,Storage,7,,,593.75
 ebs_baseline_iops,"Baseline I/O Operations/second <a href=""https://handbook.vantage.sh/aws/concepts/io-operations/"">(IOPS)</a>",Storage,8,,\d+,20000
 ebs_optimized,EBS Optimized,Storage,2,value,,FALSE
 ebs_optimized_by_default,EBS Optimized,Not Shown,2,value,,FALSE
+pricingUnit,,Not Shown,0,,,

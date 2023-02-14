@@ -130,7 +130,12 @@ def assemble_the_families(instances):
             if not dupe:
                 variant_families[variant].append([itype, name])
 
-        member = {"name": name, "cpus": int(i["vCPU"]), "memory": int(i["memory"])}
+        try:
+            display_mem = int(i["memory"])
+        except ValueError:
+            display_mem = 'N/A'
+
+        member = {"name": name, "cpus": int(i["vCPU"]), "memory": display_mem }
         if itype not in instance_fam_map:
             instance_fam_map[itype] = [member]
         else:

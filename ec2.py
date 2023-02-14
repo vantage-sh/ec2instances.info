@@ -387,8 +387,7 @@ def parse_instance(instance_type, product_attributes, api_description):
 
     i.clock_speed_ghz = product_attributes.get("clockSpeed")
 
-    enhanced_networking = product_attributes.get("enhancedNetworkingSupported")
-    if enhanced_networking is not None and enhanced_networking == "Yes":
+    if i.generation == "current" and instance_type[0:2] != "t2":
         i.enhanced_networking = True
 
     return i
