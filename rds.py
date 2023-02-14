@@ -125,9 +125,7 @@ def add_ebs_info(instances):
                 ebs_iops = locale.atof(totext(cols[6]))
 
             instance_type = "db." + instance_type
-            if instance_type not in by_type:
-                print(f"ERROR: Ignoring EBS info for unknown instance {instance_type}")
-            else:
+            if instance_type in by_type:
                 by_type[instance_type]["ebs_optimized"] = True
                 by_type[instance_type]["ebs_optimized_by_default"] = True
                 by_type[instance_type][
@@ -209,7 +207,7 @@ def scrape(output_file, input_file=None):
                     region = "us-east-1"
                 else:
                     print(
-                        f"ERROR: No region data for location={location}. Ignoring instance with sku={sku}, type={instance_type}"
+                        f"WARNING: No region data for location={location}. Ignoring instance with sku={sku}, type={instance_type}"
                     )
                     continue
 

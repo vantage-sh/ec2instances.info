@@ -1193,10 +1193,11 @@ def add_dedicated_info(instances):
                     ]
                     inst.pricing[region]["dedicated"] = _price
                 except KeyError:
-                    print(
-                        "No dedicated host price for %s in %s"
-                        % (inst.instance_type, region)
-                    )
+                    pass
+                    # print(
+                    #     "No dedicated host price for %s in %s"
+                    #     % (inst.instance_type, region)
+                    # )
 
 
 def scrape(data_file):

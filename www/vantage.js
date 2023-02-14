@@ -17,5 +17,4 @@ function vantage_settings() {
       console.log(e);
     }
   }
-
 }
