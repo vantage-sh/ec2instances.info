@@ -53,16 +53,10 @@ git clone https://github.com/vantage-sh/ec2instances.info
 cd ec2instances.info
 ```
 
-2. Build a docker image:
+2. Build and run docker image using Docker Compose (tested with Docker Compose v2):
 
 ```bash
-docker build -t ec2instances.info .
-```
-
-3. Run a container from the built docker image:
-
-```bash
-docker run -d --name some-container -p 8080:8080 ec2instances.info
+docker-compose up
 ```
 
 4. Open [localhost:8080](http://localhost:8080) in your browser to see it in action.
