@@ -172,6 +172,11 @@ def add_pricing(imap):
                 continue
 
             region = descriptions[location]
+
+            # Skip Chinese regions because they generate incorrect pricing data
+            if region.startswith('cn-'):
+                continue
+
             terms = offer.get("terms")
 
             operating_system = product_attributes.get("operatingSystem")
