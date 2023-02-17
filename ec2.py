@@ -172,6 +172,11 @@ def add_pricing(imap):
                 continue
 
             region = descriptions[location]
+
+            # Skip Chinese regions because they generate incorrect pricing data
+            if region.startswith('cn-'):
+                continue
+
             terms = offer.get("terms")
 
             operating_system = product_attributes.get("operatingSystem")
@@ -321,7 +326,11 @@ def parse_instance(instance_type, product_attributes, api_description):
     i.vCPU = locale.atoi(product_attributes.get("vcpu"))
 
     # Memory is given in form of "1,952 GiB", let's parse it
-    i.memory = locale.atof(product_attributes.get("memory").split(" ")[0])
+    try:
+        i.memory = locale.atof(product_attributes.get("memory").split(" ")[0])
+    except:
+        print('WARNING: Could not parse memory for instance type: ' + i.instance_type)
+        i.memory = 'N/A'
 
     if api_description:
         i.arch = api_description["ProcessorInfo"]["SupportedArchitectures"]
@@ -383,8 +392,7 @@ def parse_instance(instance_type, product_attributes, api_description):
 
     i.clock_speed_ghz = product_attributes.get("clockSpeed")
 
-    enhanced_networking = product_attributes.get("enhancedNetworkingSupported")
-    if enhanced_networking is not None and enhanced_networking == "Yes":
+    if i.generation == "current" and instance_type[0:2] != "t2":
         i.enhanced_networking = True
 
     return i
