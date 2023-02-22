@@ -192,9 +192,9 @@
                     <% monthly = float(defaults[3]) * 730 %>
                     $${"{:0.2f}".format(monthly)} per month <span style="color:#1E986D">(-${"{:.0f}".format(discount)}%)</span> with <a href="https://console.vantage.sh/signup">Autopilot</a>
                   </p>
-                  <div class="d-flex flex-row-reverse">
+                  <div class="d-flex flex-row-reverse mt-2">
                   <span>
-                    <a class="autopilot-learn-more" href="https://docs.vantage.sh/autopilot/">Docs</a>
+                    <a class="autopilot-learn-more" href="https://vantage.sh/features/autopilot">Learn more</a>
                   </span>
                   </div>
                 </div>
@@ -284,17 +284,6 @@
                 % elif category == "Pricing":
                   <p></p>
                 % else:
-                  % if category == "Networking":
-                    <div class="vantage-callout">
-                      <div class="callout-close">
-                        <span class="material-icons">close</span>
-                      </div>
-                      <img width="auto" height="25" src="/vantage-logo_full.svg">
-                      <h5>Concerned about cloud costs?</h5>
-                      <p>Connect your AWS account in under<br />5 minutes to see savings.</p>
-                      <a href="https://console.vantage.sh/signup" target="_blank">Connect AWS Account</a>
-                    </div>
-                  % endif
                   <table class="table" id="${category}">
                     <tr>
                       <th class="col-6 border-end"><a href="#${category}">${category}</a></th>
