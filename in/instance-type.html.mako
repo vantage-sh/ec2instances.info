@@ -202,6 +202,14 @@
               </table>
             </div>
 
+            <div class="mt-4 d-flex justify-content-center">
+              <div>
+                <a href="/?selected=${i["Amazon"][1]["value"]}" class="btn btn-white">
+                  Compare ${i["Amazon"][1]["value"]} to other Instances
+                </a>
+              </div>
+            </div>
+
             <!-- Instance variants -->
             % if len(variants) > 1:
             <div class="mt-4 d-flex flex-column">
