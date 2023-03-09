@@ -144,7 +144,7 @@
             </div>
 
             <!-- Instance families -->
-            <div class="mt-4 d-flex flex-column">
+            <div class="d-flex flex-column">
               <div class="d-flex align-items-center mb-3">
                 <span class="material-icons me-1">dns</span>
                 <p class="h6 fw-semibold mb-0">Family Sizes</p>
@@ -172,6 +172,14 @@
                   % endfor
                 </tbody>
               </table>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <div>
+                <a href="/redshift/?selected=${i["Amazon"][1]["value"]}" class="btn btn-white">
+                  Compare ${i["Amazon"][1]["value"]} to other Instances
+                </a>
+              </div>
             </div>
 
             <!-- Instance variants -->
