@@ -60,7 +60,7 @@
             </li>
           </ul>
         </div>
-        <a href="https://console.vantage.sh/signup" class="vantage d-none d-xl-block"><span class="fw-semibold">Get Visibility into Azure Costs</span> across subscriptions, services, and more -></a>
+        <a href="https://www.vantage.sh/blog/vantage-launches-azure-cost-recommendations" class="vantage d-none d-xl-block">Vantage launches <span class="fw-semibold">Azure Cost Recommendations -></span></a>
         <div class="d-flex">
           <div class="nav-buttons px-2 d-none d-xxl-block">
             <a target="_blank" href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw" class="btn btn-purple btn-icon">

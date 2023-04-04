@@ -47,7 +47,7 @@
             Star
           </a>
         </div>
-        <a href="https://console.vantage.sh/signup" class="vantage"><span class="fw-semibold">Get Visibility into Azure Costs</span> across subscriptions, services, and more -></a>
+        <a href="https://www.vantage.sh/blog/vantage-launches-azure-cost-recommendations" class="vantage d-none d-xl-block">Vantage launches <span class="fw-semibold">Azure Cost Recommendations -></span></a>
         <div class="nav-buttons">
           <a target="_blank" href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw" class="btn btn-purple btn-icon">
             <img class="me-1" width="18px" height="18px" src="https://cdn.bfldr.com/5H442O3W/at/pl546j-7le8zk-j7mis/Slack_Mark_Monochrome_White.svg?auto=webp&format=png&width=100&height=100"> 
