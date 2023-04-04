@@ -185,6 +185,25 @@
               </div>
             </div>
 
+            % if defaults[0] != "'N/A'" and defaults[2] != "'N/A'":
+            <div class="d-flex flex-wrap mt-4">
+              <div class="autopilot-callout-wrapper w-100">
+                <div class="autopilot-callout w-100">
+                  <p class="text-center mt-1 mb-0">
+                    <% discount = 100 - (float(defaults[2]) / float(defaults[0]) * 100) %>
+                    <% monthly = float(defaults[2]) * 730 %>
+                    $${"{:0.2f}".format(monthly)} per month <span style="color:#1E986D">(-${"{:.0f}".format(discount)}%)</span> with <br><a href="https://console.vantage.sh/signup">Autopilot Recommendations</a>
+                  </p>
+                  <div class="d-flex flex-row-reverse mt-2">
+                  <span>
+                    <a class="autopilot-learn-more" href="https://vantage.sh/features/autopilot">Learn more</a>
+                  </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            % endif
+
             <!-- Instance families -->
             <div class="mt-4 d-flex flex-column">
               <div class="d-flex align-items-center mb-3">
@@ -270,17 +289,6 @@
                 % elif category == "Pricing":
                   <p></p>
                 % else:
-                  % if category == "Networking":
-                    <div class="vantage-callout">
-                      <div class="callout-close">
-                        <span class="material-icons">close</span>
-                      </div>
-                      <img width="auto" height="25" src="/vantage-logo_full.svg">
-                      <h5>Concerned about cloud costs?</h5>
-                      <p>Connect your AWS account in under<br />5 minutes to see savings.</p>
-                      <a href="https://console.vantage.sh/signup" target="_blank">Connect AWS Account</a>
-                    </div>
-                  % endif
                   <table class="table" id="${category}">
                     <tr>
                       <th class="col-6 border-end"><a href="#${category}">${category}</a></th>
