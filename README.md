@@ -21,7 +21,7 @@ are welcome!
 
 People have suggested many neat ideas and feature requests by opening issues on
 this repository. We also have a [Slack
-Community](https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw)
+Community](https://join.slack.com/t/vantagecommunity/shared_invite/zt-1szz6puz7-zRuJ8J4OJIiBFlcTobYZXA)
 for anyone to join with a devoted channel named #instances-vantage.sh.
 
 ## Running locally
