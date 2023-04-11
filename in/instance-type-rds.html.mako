@@ -52,7 +52,7 @@
           <a href="https://console.vantage.sh/signup" class="vantage">Optimize <span class="fw-semibold">MongoDB Atlas</span> costs across projects, clusters and resources -></a>
         </div>
         <div class="nav-buttons">
-          <a target="_blank" href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw" class="btn btn-purple btn-icon">
+          <a target="_blank" href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-1szz6puz7-zRuJ8J4OJIiBFlcTobYZXA" class="btn btn-purple btn-icon">
             <img class="me-1" width="18px" height="18px" src="https://cdn.bfldr.com/5H442O3W/at/pl546j-7le8zk-j7mis/Slack_Mark_Monochrome_White.svg?auto=webp&format=png&width=100&height=100"> 
             Slack
           </a>
