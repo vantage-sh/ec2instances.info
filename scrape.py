@@ -232,7 +232,6 @@ def add_ebs_pricing(imap, data):
 
 
 def add_pricing_info(instances):
-
     for i in instances:
         i.pricing = {}
 
