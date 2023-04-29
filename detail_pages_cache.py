@@ -124,7 +124,6 @@ def prices(pricing):
         display_prices[region] = {}
 
         for os, _p in p.items():
-
             os = cache_engine_mapping[os]
             display_prices[region][os] = {}
 
@@ -199,7 +198,6 @@ def load_service_attributes():
 
 
 def format_attribute(display):
-
     if display["regex"]:
         # Use a regex extract the value to display
         toparse = str(display["value"])

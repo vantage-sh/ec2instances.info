@@ -133,9 +133,9 @@ def assemble_the_families(instances):
         try:
             display_mem = int(i["memory"])
         except ValueError:
-            display_mem = 'N/A'
+            display_mem = "N/A"
 
-        member = {"name": name, "cpus": int(i["vCPU"]), "memory": display_mem }
+        member = {"name": name, "cpus": int(i["vCPU"]), "memory": display_mem}
         if itype not in instance_fam_map:
             instance_fam_map[itype] = [member]
         else:
@@ -257,7 +257,6 @@ def load_service_attributes():
 
 
 def format_attribute(display):
-
     if display["regex"]:
         toparse = str(display["value"])
         regex = str(display["regex"])
