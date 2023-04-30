@@ -126,7 +126,13 @@ function init_data_table() {
           // Failed to compile
           isRegExp = false;
         }
+        console.log('filter keyup draw');
         g_data_table.column(i).search(this.value, isRegExp, false).draw();
+
+        // fix issue #687: duration filter isn't applied on some new rows
+        if (g_settings.cost_duration != g_settings_defaults.cost_duration) {
+          change_cost();
+        }
       }
     });
   });
