@@ -171,7 +171,6 @@ def prices(pricing):
         display_prices[region] = {}
 
         for os, _p in p.items():
-
             if len(os) > 3:
                 # RDS ONLY: engines are numbers but some are words. We can skip the words
                 continue
@@ -251,7 +250,6 @@ def load_service_attributes():
 
 
 def format_attribute(display):
-
     if display["regex"]:
         toparse = str(display["value"])
         regex = str(display["regex"])
@@ -301,7 +299,6 @@ def map_rds_attributes(i, imap):
 
     # For up to date display names, inspect meta/service_attributes_ec2.csv
     for j, k in i.items():
-
         if j not in special_attributes:
             # This is one row on a detail page
             display = imap[j]

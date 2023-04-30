@@ -144,7 +144,6 @@ def scrape(output_file, input_file=None):
     for sku, offers in six.iteritems(data["terms"]["OnDemand"]):
         for code, offer in six.iteritems(offers):
             for key, dimension in six.iteritems(offer["priceDimensions"]):
-
                 # skip these types of charges
                 if any(
                     descr in dimension["description"].lower()

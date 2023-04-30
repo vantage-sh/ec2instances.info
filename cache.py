@@ -137,7 +137,6 @@ def scrape(output_file, input_file=None):
     for sku, offers in six.iteritems(data["terms"]["OnDemand"]):
         for code, offer in six.iteritems(offers):
             for key, dimension in six.iteritems(offer["priceDimensions"]):
-
                 # skip these for now
                 if any(
                     descr in dimension["description"].lower()
@@ -188,7 +187,6 @@ def scrape(output_file, input_file=None):
     for sku, offers in six.iteritems(data["terms"]["Reserved"]):
         for code, offer in six.iteritems(offers):
             for key, dimension in six.iteritems(offer["priceDimensions"]):
-
                 instance = caches_instances.get(sku)
                 if not instance:
                     # print(f"WARNING: Received reserved pricing info for unknown sku={sku}")

@@ -172,7 +172,6 @@ def load_service_attributes():
 
 
 def format_attribute(display):
-
     if display["regex"]:
         # Use a regex extract the value to display
         toparse = str(display["value"])
