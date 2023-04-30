@@ -269,7 +269,7 @@
               <textarea class="mb-4 feedback-text" name="feedback" id="textarea" placeholder="Your feedback"></textarea><br>
               <label class="mb-3" for="submit-email">Email (optional):</label><br>
               <input name="email" id="submit-email" type="email" class="submit-email mb-4">
-              <button class="btn btn-purple" type="submit">Send</button>
+              <button id="submit-feedback" class="btn btn-purple" type="submit">Send</button>
             </form>
             <p id="submission-response"></p>
             <span>Supported by <a target="_blank" href="https://vantage.sh/" class="text-decoration-none">Vantage</a></span>
@@ -288,8 +288,12 @@
 
     form.addEventListener('submit', e => {
       e.preventDefault();
+      $("#submit-feedback").attr("disabled", true);
       fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => $("#submission-response").html("Feedback received!"))
+        .then(response => {
+          $("#submission-response").html("Feedback received!"); 
+          $("#submit-feedback").attr("disabled", false); 
+        })
         .catch(error => $("#submission-response").html("Something went wrong, contact support@vantage.sh"));
     })
   </script>
