@@ -510,7 +510,6 @@ def add_pricing2(instances):
 
 
 def combine_specs_pricing():
-
     specs_file = "www/azure/instances-specs.json"
     pricing_file = "www/azure/instances.json"
     with open(pricing_file, "r") as f:
