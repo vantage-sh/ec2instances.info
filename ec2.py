@@ -174,7 +174,7 @@ def add_pricing(imap):
             region = descriptions[location]
 
             # Skip Chinese regions because they generate incorrect pricing data
-            if region.startswith('cn-'):
+            if region.startswith("cn-"):
                 continue
 
             terms = offer.get("terms")
@@ -328,11 +328,11 @@ def parse_instance(instance_type, product_attributes, api_description):
     # Memory is given in form of "1,952 GiB", let's parse it
     # Memory is 'NA' for u-*.metal instances
     if i.instance_type == "u-6tb1.metal":
-        i.memory =  6144.0
-    elif i.instance_type == "u-9tb1.metal": 
-        i.memory =  9216.0
+        i.memory = 6144.0
+    elif i.instance_type == "u-9tb1.metal":
+        i.memory = 9216.0
     elif i.instance_type == "u-12tb1.metal":
-        i.memory =  12288.0
+        i.memory = 12288.0
     else:
         i.memory = locale.atof(product_attributes.get("memory").split(" ")[0])
 

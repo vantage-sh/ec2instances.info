@@ -81,8 +81,8 @@
           </ul>
         </div>
         <div class="d-flex align-items-center d-none d-xl-block">
-          <img width="24" height="24" src="/mongodb-icon-2.svg">
-          <a href="https://console.vantage.sh/signup" class="vantage">Optimize <span class="fw-semibold">MongoDB Atlas</span> costs across projects, clusters and resources -></a>
+          <img width="24" height="24" src="/openai-icon.svg">
+          <a href="https://console.vantage.sh/signup" class="vantage"><span class="fw-semibold">OpenAI and ChatGPT API</span> cost monitoring and forecasting now available -></a>
         </div>
         <div class="d-flex">
           <div class="nav-buttons px-2 d-none d-xxl-block">

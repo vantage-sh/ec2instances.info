@@ -67,7 +67,7 @@ def add_pretty_names(instances):
 def add_volume_quotas(instances):
     os_quotas_url = "https://docs.aws.amazon.com/opensearch-service/latest/developerguide/limits.html"
     tree = etree.parse(urllib2.urlopen(os_quotas_url), etree.HTMLParser())
-    table = tree.xpath('//div[@class="table-contents disable-scroll"]//table')[5]
+    table = tree.xpath('//div[@class="table-contents disable-scroll"]//table')[6]
     rows = table.xpath(".//tr[./td]")
 
     for r in rows:
@@ -80,7 +80,7 @@ def add_volume_quotas(instances):
         instances[instance_type]["max_ebs_gp2"] = max_ebs_gp2
         instances[instance_type]["max_ebs_gp3"] = max_ebs_gp3
 
-    table = tree.xpath('//div[@class="table-contents disable-scroll"]//table')[6]
+    table = tree.xpath('//div[@class="table-contents disable-scroll"]//table')[7]
     rows = table.xpath(".//tr[./td]")
     for r in rows:
         instance_type = etree.tostring(r[0], method="text").strip().decode()
@@ -156,7 +156,6 @@ def scrape(output_file, input_file=None):
     for sku, offers in six.iteritems(data["terms"]["OnDemand"]):
         for code, offer in six.iteritems(offers):
             for key, dimension in six.iteritems(offer["priceDimensions"]):
-
                 # skip these types of charges
                 if any(
                     descr in dimension["description"].lower()

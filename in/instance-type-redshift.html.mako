@@ -40,8 +40,8 @@
           </a>
         </div>
         <div class="d-flex align-items-center d-none d-xl-block">
-          <img width="24" height="24" src="/mongodb-icon-2.svg">
-          <a href="https://console.vantage.sh/signup" class="vantage">Optimize <span class="fw-semibold">MongoDB Atlas</span> costs across projects, clusters and resources -></a>
+          <img width="24" height="24" src="/openai-icon.svg">
+          <a href="https://console.vantage.sh/signup" class="vantage"><span class="fw-semibold">OpenAI and ChatGPT API</span> cost monitoring and forecasting now available -></a>
         </div>
         <div class="nav-buttons">
           <a target="_blank" href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-1szz6puz7-zRuJ8J4OJIiBFlcTobYZXA" class="btn btn-purple btn-icon">
@@ -269,7 +269,7 @@
               <textarea class="mb-4 feedback-text" name="feedback" id="textarea" placeholder="Your feedback"></textarea><br>
               <label class="mb-3" for="submit-email">Email (optional):</label><br>
               <input name="email" id="submit-email" type="email" class="submit-email mb-4">
-              <button class="btn btn-purple" type="submit">Send</button>
+              <button id="submit-feedback" class="btn btn-purple" type="submit">Send</button>
             </form>
             <p id="submission-response"></p>
             <span>Supported by <a target="_blank" href="https://vantage.sh/" class="text-decoration-none">Vantage</a></span>
@@ -288,8 +288,12 @@
 
     form.addEventListener('submit', e => {
       e.preventDefault();
+      $("#submit-feedback").attr("disabled", true);
       fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => $("#submission-response").html("Feedback received!"))
+        .then(response => {
+          $("#submission-response").html("Feedback received!"); 
+          $("#submit-feedback").attr("disabled", false); 
+        })
         .catch(error => $("#submission-response").html("Something went wrong, contact support@vantage.sh"));
     })
   </script>

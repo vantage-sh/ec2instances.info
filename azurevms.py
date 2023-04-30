@@ -510,7 +510,6 @@ def add_pricing2(instances):
 
 
 def combine_specs_pricing():
-
     specs_file = "www/azure/instances-specs.json"
     pricing_file = "www/azure/instances.json"
     with open(pricing_file, "r") as f:
@@ -567,9 +566,9 @@ def scrape(output_file, input_file=None):
 
 
 if __name__ == "__main__":
-    # output_file = 'www/azure/instances.json'
-    # scrape(output_file)
+    output_file = "www/azure/instances.json"
+    scrape(output_file)
 
     # Run this to build the instances-specs.json file
-    azure_vm_specs()
-    combine_specs_pricing()
+    # azure_vm_specs()
+    # combine_specs_pricing()

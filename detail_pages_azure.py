@@ -244,7 +244,6 @@ def load_service_attributes():
 
 
 def format_attribute(display):
-
     if display["regex"]:
         toparse = str(display["value"])
         regex = str(display["regex"])

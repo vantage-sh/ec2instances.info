@@ -50,7 +50,7 @@ def build(c):
     scrape_rds(c)
     scrape_cache(c)
     scrape_redshift(c)
-    scrape_opensearch(c)
+    # scrape_opensearch(c)
     render_html(c)
 
 
@@ -165,13 +165,13 @@ def render_html(c):
             "www/redshift/index.html",
         )
     )
-    sitemap.extend(
-        render(
-            "www/opensearch/instances.json",
-            "in/opensearch.html.mako",
-            "www/opensearch/index.html",
-        )
-    )
+    # sitemap.extend(
+    #     render(
+    #         "www/opensearch/instances.json",
+    #         "in/opensearch.html.mako",
+    #         "www/opensearch/index.html",
+    #     )
+    # )
     sitemap.append(about_page())
     build_sitemap(sitemap)
 
