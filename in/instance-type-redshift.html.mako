@@ -40,7 +40,7 @@
           </a>
         </div>
         <div class="d-flex align-items-center d-none d-xl-block">
-          <img width="24" height="24" src="/openai-icon.svg">
+          <img width="24" height="24" src="/kubernetes-icon.svg">
           <a href="https://console.vantage.sh/signup" class="vantage"><span class="fw-semibold">OpenAI and ChatGPT API</span> cost monitoring and forecasting now available -></a>
         </div>
         <div class="nav-buttons">
