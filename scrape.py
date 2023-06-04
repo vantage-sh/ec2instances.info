@@ -470,10 +470,7 @@ def add_vpconly_detail(instances):
 def add_instance_storage_details(instances):
     """Add information about instance storage features."""
 
-    # Canonical URL for this info is http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html
-    # url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.partial.html"
-    # It seems it's no longer dynamically loaded
-    url = "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html"
+    url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-volumes.html"
     tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
 
     for t in [0, 1, 2, 3, 4]:
