@@ -33,6 +33,8 @@ rds_engine_mapping = {
     "230": "SQL Server Enterprise (Outpost On-Prem)",
     "231": "SQL Server (Outpost On-Prem)",
     "232": "SQL Server Web (Outpost On-Prem)",
+    "405": "SQL Server Standard BYOM",
+    "406": "SQL Server Enterprise BYOM",
 }
 
 

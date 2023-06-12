@@ -151,6 +151,8 @@
                   <option value="SQL Server Enterprise (Outpost On-Prem)">SQL Server Enterprise (Outpost On-Prem)</option>
                   <option value="SQL Server (Outpost On-Prem)">SQL Server (Outpost On-Prem)</option>
                   <option value="SQL Server Web (Outpost On-Prem)">SQL Server Web (Outpost On-Prem)</option>
+                  <option value="SQL Server Standard BYOM">SQL Server Standard BYOM</option>
+                  <option value="SQL Server Enterprise BYOM">SQL Server Enterprise BYOM</option>
                 </select>
               </div>
               <div class="col-6 pe-2">
