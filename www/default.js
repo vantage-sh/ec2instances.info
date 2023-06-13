@@ -18,124 +18,131 @@ var g_settings_defaults = {
   compare_on: false,
 };
 
+const mediaQuery = window.matchMedia('(max-width: 768px)');
+
 function init_data_table() {
-  // create a second header row
-  $('#data thead tr').clone(true).appendTo('#data thead');
-
   // add a text input filter to each column of the new row
-  $('#data thead tr:eq(1) th').each(function (i) {
-    $(this).attr('column-index', i);
+  if (mediaQuery.matches) {
+    console.log('mobile');
+  } else {
+    // create a second header row
+    $('#data thead tr').clone(true).appendTo('#data thead');
 
-    // TODO: When adding a new service, we are forced to edit this. Instead it should be controlled in HTML.
-    if (window.location.href.includes('rds')) {
-      // Set min inputs for RDS columns
-      if (i == 2) {
-        $(this).html(
-          "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
-        );
-        return;
-      } else if (i == 3) {
-        $(this).html(
-          "<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>",
-        );
-        return;
-      } else if (i == 6) {
-        $(this).html(
-          "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
-        );
-        return;
-      }
-    } else if (window.location.href.includes('cache')) {
-      // Set min inputs for ElastiCache columns
-      if (i == 2) {
-        $(this).html(
-          "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
-        );
-        return;
-      } else if (i == 3) {
-        $(this).html(
-          "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
-        );
-        return;
-      }
-    } else if (window.location.href.includes('redshift')) {
-      // Set min inputs for Redshift columns
-      if (i == 2) {
-        $(this).html(
-          "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
-        );
-        return;
-      } else if (i == 3) {
-        $(this).html(
-          "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
-        );
-        return;
-      }
-    } else if (window.location.href.includes('opensearch')) {
-      // Set min inputs for OpenSearch columns
-      if (i == 2) {
-        $(this).html(
-          "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
-        );
-        return;
-      } else if (i == 3) {
-        $(this).html(
-          "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
-        );
-        return;
-      }
-    } else {
-      // Set min inputs for EC2 columns
-      if (i == 2) {
-        $(this).html(
-          "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
-        );
-        return;
-      } else if (i == 4) {
-        $(this).html(
-          "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
-        );
-        return;
-      } else if (i == 5) {
-        $(this).html(
-          "<input data-action='datafilter' data-type='memory-per-vcpu' class='form-control' placeholder='Min Mem/vCPU: 0'/>",
-        );
-        return;
-      } else if (i == 6) {
-        $(this).html(
-          "<input data-action='datafilter' data-type='gpus' class='form-control' placeholder='Min GPUs: 0'/>",
-        );
-        return;
-      } else if (i == 18) {
-        $(this).html(
-          "<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>",
-        );
-        return;
-      }
-    }
+    $('#data thead tr:eq(1) th').each(function (i) {
+      $(this).attr('column-index', i);
 
-    var title = $(this).text().trim();
-    $(this).html("<input type='text' class='form-control' placeholder='Filter...'/>");
-    $('input', this).on('keyup change', function () {
-      if (g_data_table.column(i).search() !== this.value) {
-        // If filter value is a valid regexp then search as regexp, otherwise ignore and search as text
-        var isRegExp = true;
-        try {
-          var r = new RegExp(this.value);
-        } catch (e) {
-          // Failed to compile
-          isRegExp = false;
+      // TODO: When adding a new service, we are forced to edit this. Instead it should be controlled in HTML.
+      if (window.location.href.includes('rds')) {
+        // Set min inputs for RDS columns
+        if (i == 2) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
+          );
+          return;
+        } else if (i == 3) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>",
+          );
+          return;
+        } else if (i == 6) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
+          );
+          return;
         }
-        console.log('filter keyup draw');
-        g_data_table.column(i).search(this.value, isRegExp, false).draw();
-
-        // fix issue #687: duration filter isn't applied on some new rows
-        if (g_settings.cost_duration != g_settings_defaults.cost_duration) {
-          change_cost();
+      } else if (window.location.href.includes('cache')) {
+        // Set min inputs for ElastiCache columns
+        if (i == 2) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
+          );
+          return;
+        } else if (i == 3) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
+          );
+          return;
+        }
+      } else if (window.location.href.includes('redshift')) {
+        // Set min inputs for Redshift columns
+        if (i == 2) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
+          );
+          return;
+        } else if (i == 3) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
+          );
+          return;
+        }
+      } else if (window.location.href.includes('opensearch')) {
+        // Set min inputs for OpenSearch columns
+        if (i == 2) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
+          );
+          return;
+        } else if (i == 3) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
+          );
+          return;
+        }
+      } else {
+        // Set min inputs for EC2 columns
+        if (i == 2) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
+          );
+          return;
+        } else if (i == 4) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
+          );
+          return;
+        } else if (i == 5) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='memory-per-vcpu' class='form-control' placeholder='Min Mem/vCPU: 0'/>",
+          );
+          return;
+        } else if (i == 6) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='gpus' class='form-control' placeholder='Min GPUs: 0'/>",
+          );
+          return;
+        } else if (i == 18) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>",
+          );
+          return;
         }
       }
+
+      var title = $(this).text().trim();
+      $(this).html("<input type='text' class='form-control' placeholder='Filter...'/>");
+      $('input', this).on('keyup change', function () {
+        if (g_data_table.column(i).search() !== this.value) {
+          // If filter value is a valid regexp then search as regexp, otherwise ignore and search as text
+          var isRegExp = true;
+          try {
+            var r = new RegExp(this.value);
+          } catch (e) {
+            // Failed to compile
+            isRegExp = false;
+          }
+          console.log('filter keyup draw');
+          g_data_table.column(i).search(this.value, isRegExp, false).draw();
+
+          // fix issue #687: duration filter isn't applied on some new rows
+          if (g_settings.cost_duration != g_settings_defaults.cost_duration) {
+            change_cost();
+          }
+        }
+      });
     });
-  });
+  }
+
   g_data_table = $('#data').DataTable({
     bPaginate: false,
     bInfo: false,
@@ -244,6 +251,7 @@ function init_data_table() {
         ],
         bVisible: false,
       },
+      // {width: '150px', targets: 1},
     ],
     // default sort by linux cost
     aaSorting: [[g_settings_defaults.default_sort_col, 'asc']],
@@ -256,14 +264,21 @@ function init_data_table() {
       }, 0);
     },
 
+    // mobile layout
+    responsive: true,
+
     // Store and load filtering, sorting, etc - core datatable feature
     stateSave: true,
     stateDuration: 0,
     stateLoaded: function (settings, data) {
-      $('#data thead tr:eq(1) th').each(function (i) {
-        var col_index = parseInt($(this).attr('column-index'));
-        $('input', this).val(data.columns[col_index].search.search);
-      });
+      if (mediaQuery.matches) {
+        console.log('mobile');
+      } else {
+        $('#data thead tr:eq(1) th').each(function (i) {
+          var col_index = parseInt($(this).attr('column-index'));
+          $('input', this).val(data.columns[col_index].search.search);
+        });
+      }
 
       // handle where the user had a search saved locally
       if (!g_settings.compare_on) {

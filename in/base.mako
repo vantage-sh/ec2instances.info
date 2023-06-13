@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" href="/favicon.png">
     <!-- Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/r-2.4.1/datatables.min.css"/>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/default.css" media="screen">
     <link rel="stylesheet" href="/style.css">
@@ -118,7 +118,7 @@
          Configure options and upgrade here: https://datatables.net/download/
     -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/r-2.4.1/datatables.min.js"></script>
     <script src="/store/store.js" type="text/javascript" charset="utf-8"></script>
 
     <!-- Custom JS -->
