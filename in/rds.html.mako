@@ -57,7 +57,7 @@
           </ul>
         </div>
 
-        <div class="btn-group-vertical" id="pricing-unit-dropdown">
+        <div class="btn-group-vertical d-none d-md-inline-block" id="pricing-unit-dropdown">
           <label class="dropdown-label mb-1">Pricing Unit</label>
           <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-shopping-cart icon-white"></i>
@@ -89,7 +89,7 @@
           </ul>
         </div>
 
-        <div class="btn-group-vertical" id='reserved-term-dropdown'>
+        <div class="btn-group-vertical d-none d-md-inline-block" id='reserved-term-dropdown'>
           <label class="dropdown-label mb-1">Reserved</label>
           <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" href="#">
             <i class="icon-globe icon-white"></i>
@@ -122,8 +122,8 @@
           <label class="dropdown-label mb-1"><br></label>
           <button class="btn btn-purple btn-compare"
             data-text-on="End Compare"
-            data-text-off="Compare Selected">
-            Compare Selected
+            data-text-off="Compare">
+            Compare
           </button>
         </div>
 
