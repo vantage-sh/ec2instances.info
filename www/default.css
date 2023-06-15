@@ -257,6 +257,7 @@ table.table thead .sorting_desc_disabled {
 
 table.table thead {
   position: sticky;
+  z-index: 12;
   top: 0;
 }
 
