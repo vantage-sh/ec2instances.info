@@ -151,7 +151,7 @@
     <table cellspacing="0" style="border-bottom: 0 !important; margin-bottom: 0 !important;" id="data" width="100%" class="table">
       <thead>
         <tr>
-          <th class="name">Name</th>
+          <th class="name all" data-priority="1"><div class="d-none d-md-block">Name</div></th>
           <th class="apiname all" data-priority="1">API Name</th>
           <th class="memory">Memory</th>
           <th class="storage">Storage</th>
@@ -164,7 +164,7 @@
           <th class="architecture">Arch</th>
 
           % for platform, code in {'PostgreSQL': '14'}.items():
-            <th class="cost-ondemand cost-ondemand-${code} all" data-priority="1">${platform} Cost</th>
+            <th class="cost-ondemand cost-ondemand-${code} all" data-priority="1">${platform}</th>
             <th class="cost-reserved cost-reserved-${code}">
               <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>${platform} Reserved Cost</abbr>
             </th>
@@ -189,7 +189,7 @@
       <tbody>
         % for inst in instances:
         <tr class='instance' id="${inst['instance_type']}">
-          <td class="name">${inst['pretty_name']}</a></td>
+          <td class="name all"><div class="d-none d-md-block">${inst['pretty_name']}</div></td>
           <td class="apiname"><a href="/aws/rds/${inst['instance_type']}">${inst['instance_type']}</a></td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
           <td class="storage">
