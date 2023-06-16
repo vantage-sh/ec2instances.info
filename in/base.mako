@@ -95,18 +95,18 @@
       ${self.body()}
 
       <div class="footer well border-top">
-          <div class="row ms-2 me-3 mt-2">
-            <div class="col-4">
-              <span>Last updated ${generated_at}</span>
+          <div class="row ms-2 me-3 mt-2 d-flex">
+            <div class="col-8 col-md-4">
+              <span>Updated ${generated_at}</span>
             </div>
-            <div class="col-2 right linkto">
+            <div class="col-2 d-none d-md-block right linkto">
               <a href="https://handbook.vantage.sh/tools/instances/" target="_blank">Documentation</a>
             </div>
-            <div class="col-2 linkto">
+            <div class="col-2 d-none d-md-block linkto">
               <a href="/about.html">About</a>
             </div>
-            <div class="col-4 right linkto">
-              <span>Supported by <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
+            <div class="col-4 right linkto justify-content-end">
+              <span>By <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
             </div>
           </div>
       </div>
