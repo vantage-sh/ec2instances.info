@@ -3,6 +3,7 @@
 var g_app_initialized = false;
 var g_data_table = null;
 var g_settings = {};
+var responsive_mode = false;
 
 var g_settings_defaults = {
   pricing_unit: 'instance',
@@ -22,9 +23,8 @@ const mediaQuery = window.matchMedia('(max-width: 768px)');
 
 function init_data_table() {
   // add a text input filter to each column of the new row
-  if (mediaQuery.matches) {
-    console.log('mobile');
-  } else {
+
+  if (!responsive_mode) {
     // create a second header row
     $('#data thead tr').clone(true).appendTo('#data thead');
 
@@ -265,15 +265,13 @@ function init_data_table() {
     },
 
     // mobile layout
-    responsive: true,
+    responsive: responsive_mode,
 
     // Store and load filtering, sorting, etc - core datatable feature
     stateSave: true,
     stateDuration: 0,
     stateLoaded: function (settings, data) {
-      if (mediaQuery.matches) {
-        console.log('mobile');
-      } else {
+      if (!responsive_mode) {
         $('#data thead tr:eq(1) th').each(function (i) {
           var col_index = parseInt($(this).attr('column-index'));
           $('input', this).val(data.columns[col_index].search.search);
@@ -306,6 +304,7 @@ function init_data_table() {
 
 $(document).ready(function () {
   var urlpath = window.location.pathname;
+  responsive_mode = mediaQuery.matches;
 
   // service specific table defaults, namely sorting by cheapest instance
   if (urlpath.includes('/rds/')) {
