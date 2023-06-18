@@ -159,11 +159,13 @@
           </th>
           <th class="networkperf">Network Performance</th>
           <th class="architecture">Arch</th>
-          % for platform, code in {'PostgreSQL': '14', 'MySQL': '2', 'SQL Server Standard': '12', 'Aurora PostgreSQL': '21', 'Aurora MySQL': '16', 'MariaDB': '18', 'Oracle Enterprise': '5'}.items():
-          <th class="cost-ondemand cost-ondemand-${code}">${platform} On Demand cost</th>
+          % for platform, code in {'PostgreSQL': '14', 'MySQL': '2', 'SQL Server Standard': '12', 'Aurora Postgres & MySQL': '21', 'Aurora I/O Optimized': '211', 'MariaDB': '18', 'Oracle Enterprise': '5'}.items():
+          <th class="cost-ondemand cost-ondemand-${code}">${platform} On Demand Cost</th>
+          % if code != '211':
           <th class="cost-reserved cost-reserved-${code}">
-            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>${platform} Reserved cost</abbr>
+            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>${platform} Reserved Cost</abbr>
           </th>
+          % endif
           % endfor
           <th class="generation">Generation</th>
           <th class="ebs-baseline-bandwidth">EBS Optimized: Baseline Bandwidth</th>
@@ -215,7 +217,7 @@
             64-bit
             % endif
           </td>
-          % for platform, code in {'PostgreSQL': '14', 'MySQL': '2', 'SQL Server Standard': '12', 'Aurora PostgreSQL': '21', 'Aurora MySQL': '16', 'MariaDB': '18', 'Oracle Enterprise': '5'}.items():
+          % for platform, code in {'PostgreSQL': '14', 'MySQL': '2', 'SQL Server Standard': '12', 'Aurora Postgres & MySQL': '21', 'Aurora I/O Optimized': '211', 'MariaDB': '18', 'Oracle Enterprise': '5'}.items():
           <td class="cost-ondemand cost-ondemand-${code}" data-platform='${code}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
             % if inst['pricing'].get('us-east-1', {}).get(code, {}).get('ondemand', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][code]['ondemand']}">
@@ -225,6 +227,7 @@
               <span sort="999999">unavailable</span>
             % endif
           </td>
+          % if code != '211':
           <td class="cost-reserved cost-reserved-${code}" data-platform='${code}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
             % if inst['pricing'].get('us-east-1', {}).get(code, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['us-east-1'][code]['reserved'].get('yrTerm1Standard.noUpfront', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][code]['reserved'].get('yrTerm1Standard.noUpfront')}">
@@ -234,6 +237,7 @@
               <span sort="999999">unavailable</span>
             % endif
           </td>
+          % endif
           % endfor
           <td class="generation">
               ${'current' if inst['currentGeneration'] == 'Yes' else 'previous'}

@@ -178,7 +178,7 @@ def prices(pricing):
                 display_prices[region][os]["ondemand"] = "'N/A'"
 
             try:
-                display_prices[region][os]["spot"] = _p["spot_max"]
+                display_prices[region][os]["spot"] = _p["spot_min"]
             except KeyError:
                 display_prices[region][os]["spot"] = "'N/A'"
 
