@@ -282,9 +282,14 @@ def scrape(output_file, input_file=None):
                         instance["region"]
                     ] = {}
 
-                instances[instance["instance_type"]]["pricing"][instance["region"]][
-                    instance["engineCode"]
-                ] = {"ondemand": float(dimension["pricePerUnit"]["USD"])}
+                if instance["storage"] == "Aurora IO Optimization Mode":
+                    instances[instance["instance_type"]]["pricing"][instance["region"]][
+                        "211"
+                    ] = {"ondemand": float(dimension["pricePerUnit"]["USD"])}
+                else:
+                    instances[instance["instance_type"]]["pricing"][instance["region"]][
+                        instance["engineCode"]
+                    ] = {"ondemand": float(dimension["pricePerUnit"]["USD"])}
 
                 # keep this for backwards compatibility, even though it's wrong
                 # (database_engine is not unique, so multiple offerings overlap)

@@ -135,8 +135,8 @@
                     <option value="Oracle">Oracle</option>
                     <option value="SQL Server Standard">SQL Server</option>
                   % endif
-                  <option value="Aurora PostgreSQL">Aurora PostgreSQL</option>
-                  <option value="Aurora MySQL">Aurora MySQL</option>
+                  <option value="Aurora Postgres & MySQL">Aurora Postgres & MySQL</option>
+                  <option value="Aurora I/O Optimized">Aurora I/O Optimized</option>
                   <option value="SQL Server Enterprise">SQL Server Enterprise</option>
                   <option value="MariaDB">MariaDB</option>
                   <option value="Oracle Standard Two">Oracle Standard Two</option>
