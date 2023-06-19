@@ -57,7 +57,7 @@
           </ul>
         </div>
 
-        <div class="btn-group-vertical" id="pricing-unit-dropdown">
+        <div class="btn-group-vertical d-md-inline-flex d-none" id="pricing-unit-dropdown">
           <label class="dropdown-label mb-1">Pricing Unit</label>
           <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-shopping-cart icon-white"></i>
@@ -89,7 +89,7 @@
           </ul>
         </div>
 
-        <div class="btn-group-vertical" id='reserved-term-dropdown'>
+        <div class="btn-group-vertical d-none d-md-inline-flex" id='reserved-term-dropdown'>
           <label class="dropdown-label mb-1">Reserved</label>
           <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" href="#">
             <i class="icon-globe icon-white"></i>
@@ -122,8 +122,8 @@
           <label class="dropdown-label mb-1"><br></label>
           <button class="btn btn-purple btn-compare"
             data-text-on="End Compare"
-            data-text-off="Compare Selected">
-            Compare Selected
+            data-text-off="Compare">
+            Compare
           </button>
         </div>
 
@@ -148,11 +148,11 @@
     </div>
 
   <div class="table-responsive overflow-auto wrap-table flex-fill">
-    <table cellspacing="0" class="table" style="border-bottom: 0 !important; margin-bottom: 0 !important;" id="data">
+    <table cellspacing="0" style="border-bottom: 0 !important; margin-bottom: 0 !important;" id="data" width="100%" class="table">
       <thead>
         <tr>
-          <th class="name">Name</th>
-          <th class="apiname">API Name</th>
+          <th class="name all" data-priority="1"><div class="d-none d-md-block">Name</div></th>
+          <th class="apiname all" data-priority="1">API Name</th>
           <th class="memory">Memory</th>
           <th class="storage">Storage</th>
           <th class="ebs-throughput">EBS Throughput</th>
@@ -162,14 +162,23 @@
           </th>
           <th class="networkperf">Network Performance</th>
           <th class="architecture">Arch</th>
-          % for platform, code in {'PostgreSQL': '14', 'MySQL': '2', 'SQL Server Standard': '12', 'Aurora Postgres & MySQL': '21', 'Aurora I/O Optimized': '211', 'MariaDB': '18', 'Oracle Enterprise': '5'}.items():
-          <th class="cost-ondemand cost-ondemand-${code}">${platform} On Demand Cost</th>
-          % if code != '211':
-          <th class="cost-reserved cost-reserved-${code}">
-            <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>${platform} Reserved Cost</abbr>
-          </th>
-          % endif
+
+          % for platform, code in {'PostgreSQL': '14'}.items():
+            <th class="cost-ondemand cost-ondemand-${code} all" data-priority="1">${platform}</th>
+            <th class="cost-reserved cost-reserved-${code}">
+              <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>${platform} Reserved Cost</abbr>
+            </th>
           % endfor
+
+          % for platform, code in {'MySQL': '2', 'SQL Server Standard': '12', 'Aurora Postgres & MySQL': '21', 'Aurora I/O Optimized': '211', 'MariaDB': '18', 'Oracle Enterprise': '5'}.items():
+            <th class="cost-ondemand cost-ondemand-${code}">${platform} On Demand Cost</th>
+            % if code != '211':
+            <th class="cost-reserved cost-reserved-${code}">
+              <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>${platform} Reserved Cost</abbr>
+            </th>
+            % endif
+          % endfor
+
           <th class="generation">Generation</th>
           <th class="ebs-baseline-bandwidth">EBS Optimized: Baseline Bandwidth</th>
           <th class="ebs-baseline-throughput">EBS Optimized: Baseline Throughput (128K)</th>
@@ -182,26 +191,26 @@
       <tbody>
         % for inst in instances:
         <tr class='instance' id="${inst['instance_type']}">
-          <td class="name">${inst['pretty_name']}</a></td>
+          <td class="name all"><div class="d-none d-md-block">${inst['pretty_name']}</div></td>
           <td class="apiname"><a href="/aws/rds/${inst['instance_type']}">${inst['instance_type']}</a></td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
           <td class="storage">
-          <% storage = inst['storage'] %>
-          % if storage == 'EBS Only':
-          <span sort="0">0 GiB (EBS only)</span>
-          % else:
-          <% products = [int(s) for s in storage.split() if s.isdigit()] %>
-          <span sort="${products[0]*products[1]}">${inst['storage']}</span>
-          % endif
+            <% storage = inst['storage'] %>
+            % if storage == 'EBS Only':
+            <span sort="0">0 GiB (EBS only)</span>
+            % else:
+            <% products = [int(s) for s in storage.split() if s.isdigit()] %>
+            <span sort="${products[0]*products[1]}">${inst['storage']}</span>
+            % endif
           </td>
           <td class="ebs-throughput">
-          % if 'dedicatedEbsThroughput' not in inst:
-          <span sort="0">N/A</span>
-          % else:
-          <span sort="${inst['dedicatedEbsThroughput']}">
-            ${inst['dedicatedEbsThroughput']}
-          </span>
-          % endif
+            % if 'dedicatedEbsThroughput' not in inst:
+            <span sort="0">N/A</span>
+            % else:
+            <span sort="${inst['dedicatedEbsThroughput']}">
+              ${inst['dedicatedEbsThroughput']}
+            </span>
+            % endif
           <td class="physical_processor">${inst['physicalProcessor']}</td>
           <td class="vcpus">
             <span sort="${inst['vcpu']}">
@@ -220,7 +229,29 @@
             64-bit
             % endif
           </td>
-          % for platform, code in {'PostgreSQL': '14', 'MySQL': '2', 'SQL Server Standard': '12', 'Aurora Postgres & MySQL': '21', 'Aurora I/O Optimized': '211', 'MariaDB': '18', 'Oracle Enterprise': '5'}.items():
+
+          % for platform, code in {'PostgreSQL': '14'}.items():
+          <td class="cost-ondemand cost-ondemand-${code}" data-platform='${code}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
+            % if inst['pricing'].get('us-east-1', {}).get(code, {}).get('ondemand', 'N/A') != "N/A":
+              <span sort="${inst['pricing']['us-east-1'][code]['ondemand']}">
+                $${"{:.4f}".format(float(inst['pricing']['us-east-1'][code]['ondemand']))} hourly
+              </span>
+            % else:
+              <span sort="999999">unavailable</span>
+            % endif
+          </td>
+          <td class="cost-reserved cost-reserved-${code}t" data-platform='${code}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
+            % if inst['pricing'].get('us-east-1', {}).get(code, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['us-east-1'][code]['reserved'].get('yrTerm1Standard.noUpfront', 'N/A') != "N/A":
+              <span sort="${inst['pricing']['us-east-1'][code]['reserved'].get('yrTerm1Standard.noUpfront')}">
+                $${"{:.4f}".format(float(inst['pricing']['us-east-1'][code]['reserved'].get('yrTerm1Standard.noUpfront')))} hourly
+              </span>
+            % else:
+              <span sort="999999">unavailable</span>
+            % endif
+          </td>
+          % endfor
+
+          % for platform, code in {'MySQL': '2', 'SQL Server Standard': '12', 'Aurora Postgres & MySQL': '21', 'Aurora I/O Optimized': '211', 'MariaDB': '18', 'Oracle Enterprise': '5'}.items():
           <td class="cost-ondemand cost-ondemand-${code}" data-platform='${code}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
             % if inst['pricing'].get('us-east-1', {}).get(code, {}).get('ondemand', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][code]['ondemand']}">
@@ -242,47 +273,48 @@
           </td>
           % endif
           % endfor
+
           <td class="generation">
               ${'current' if inst['currentGeneration'] == 'Yes' else 'previous'}
           </td>
-              <td class="ebs-baseline-bandwidth">
-                % if not inst['ebs_baseline_bandwidth']:
-                <span sort="0">N/A</span>
-                % else:
-                <span sort="${inst['ebs_baseline_bandwidth']}">
-                  ${inst['ebs_baseline_bandwidth']} Mbps  <!-- Not MB/s! -->
-                </span>
-                % endif
-              </td>
-              <td class="ebs-baseline-throughput">
-                <span sort="${inst['ebs_baseline_throughput']}">
-                  ${inst['ebs_baseline_throughput']} MB/s
-                </span>
-              </td>
-              <td class="ebs-baseline-iops">
-                <span sort="${inst['ebs_baseline_iops']}">
-                  ${inst['ebs_baseline_iops']} IOPS
-                </span>
-              </td>
-              <td class="ebs-max-bandwidth">
-                % if not inst['ebs_max_bandwidth']:
-                <span sort="0">N/A</span>
-                % else:
-                <span sort="${inst['ebs_max_bandwidth']}">
-                  ${inst['ebs_max_bandwidth']} Mbps  <!-- Not MB/s! -->
-                </span>
-                % endif
-              </td>
-              <td class="ebs-throughput">
-                <span sort="${inst['ebs_throughput']}">
-                  ${inst['ebs_throughput']} MB/s
-                </span>
-              </td>
-              <td class="ebs-iops">
-                <span sort="${inst['ebs_iops']}">
-                  ${inst['ebs_iops']} IOPS
-                </span>
-              </td>
+          <td class="ebs-baseline-bandwidth">
+            % if not inst['ebs_baseline_bandwidth']:
+            <span sort="0">N/A</span>
+            % else:
+            <span sort="${inst['ebs_baseline_bandwidth']}">
+              ${inst['ebs_baseline_bandwidth']} Mbps  <!-- Not MB/s! -->
+            </span>
+            % endif
+          </td>
+          <td class="ebs-baseline-throughput">
+            <span sort="${inst['ebs_baseline_throughput']}">
+              ${inst['ebs_baseline_throughput']} MB/s
+            </span>
+          </td>
+          <td class="ebs-baseline-iops">
+            <span sort="${inst['ebs_baseline_iops']}">
+              ${inst['ebs_baseline_iops']} IOPS
+            </span>
+          </td>
+          <td class="ebs-max-bandwidth">
+            % if not inst['ebs_max_bandwidth']:
+            <span sort="0">N/A</span>
+            % else:
+            <span sort="${inst['ebs_max_bandwidth']}">
+              ${inst['ebs_max_bandwidth']} Mbps  <!-- Not MB/s! -->
+            </span>
+            % endif
+          </td>
+          <td class="ebs-throughput">
+            <span sort="${inst['ebs_throughput']}">
+              ${inst['ebs_throughput']} MB/s
+            </span>
+          </td>
+          <td class="ebs-iops">
+            <span sort="${inst['ebs_iops']}">
+              ${inst['ebs_iops']} IOPS
+            </span>
+          </td>
         </tr>
         % endfor
       </tbody>

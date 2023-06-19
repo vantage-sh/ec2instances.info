@@ -257,6 +257,7 @@ table.table thead .sorting_desc_disabled {
 
 table.table thead {
   position: sticky;
+  z-index: 12;
   top: 0;
 }
 
@@ -325,4 +326,24 @@ input.search {
   font-size: 14px;
   color: white;
   margin: 0;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before {
+  font-size: 1.6em;
+  color: #303037;
+  height: 0.8em;
+  width: 0.8em;
+  background-color: #fff;
+  display: block;
+  position: absolute;
+  box-shadow: 0 0 0px #444;
+  text-align: center;
+  content: '\203A';
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before {
+  color: #303037;
+  height: 0.8em;
+  width: 0.8em;
+  background-color: #fff;
 }
