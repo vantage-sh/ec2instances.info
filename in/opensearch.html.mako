@@ -53,7 +53,7 @@
           </ul>
         </div>
 
-        <div class="btn-group-vertical" id="pricing-unit-dropdown">
+        <div class="btn-group-vertical d-none d-md-inline-flex" id="pricing-unit-dropdown">
           <label class="dropdown-label mb-1">Pricing Unit</label>
           <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-shopping-cart icon-white"></i>
@@ -85,7 +85,7 @@
           </ul>
         </div>
 
-        <div class="btn-group-vertical" id='reserved-term-dropdown'>
+        <div class="btn-group-vertical d-none d-md-inline-flex" id='reserved-term-dropdown'>
           <label class="dropdown-label mb-1">Reserved</label>
           <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" href="#">
             <i class="icon-globe icon-white"></i>
@@ -119,8 +119,8 @@
           <label class="dropdown-label mb-1"><br></label>
           <button class="btn btn-purple btn-compare"
             data-text-on="End Compare"
-            data-text-off="Compare Selected">
-            Compare Selected
+            data-text-off="Compare">
+            Compare
           </button>
         </div>
 
@@ -145,18 +145,18 @@
     </div>
 
   <div class="table-responsive overflow-auto wrap-table flex-fill">
-    <table cellspacing="0" class="table" style="border-bottom: 0 !important; margin-bottom: 0 !important;" id="data">
+    <table cellspacing="0" style="border-bottom: 0 !important; margin-bottom: 0 !important;" id="data" width="100%" class="table">
       <thead>
         <tr>
-          <th class="name">Name</th>
-          <th class="apiname">API Name</th>
+          <th class="name all" data-priority="1"><div class="d-none d-md-block">Name</div></th>
+          <th class="apiname all" data-priority="1">API Name</th>
           <th class="memory">Memory</th>
           <th class="vcpus">
             <abbr title="Each virtual CPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">vCPUs</abbr>
           </th>
           <th class="storage">Storage</th>
           <th class="ecu-per-vcpu">Elastic Compute Units</th>
-          <th class="cost-ondemand cost-ondemand-search">On Demand cost</th>
+          <th class="cost-ondemand cost-ondemand-search all" data-priority="1">On Demand cost</th>
           <th class="cost-reserved cost-reserved-search">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Reserved cost</abbr>
           </th>
@@ -167,8 +167,8 @@
       <tbody>
         % for inst in instances:
         <tr class='instance' id="${inst['instance_type']}">
-          <td class="name">${inst['pretty_name']}</td>
-          <td class="apiname"><a href="/aws/opensearch/${inst['instance_type']}">${inst['instance_type']}</a></td>
+          <td class="name all" data-priority="1"><div class="d-none d-md-block">${inst['pretty_name']}</div></td>
+          <td class="apiname all" data-priority="1"><a href="/aws/opensearch/${inst['instance_type']}">${inst['instance_type']}</a></td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
           <td class="vcpus">
             <span sort="${inst['vcpu']}">
@@ -177,7 +177,7 @@
           </td>
           <td class="storage"><span sort="${inst['storage']}">${inst['storage']}</span></td>
           <td class="ecu-per-vcpu"><span sort="${inst['ecu']}">${inst['ecu']}</span></td>
-          <td class="cost-ondemand cost-ondemand-search" data-platform="none" data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
+          <td class="cost-ondemand cost-ondemand-search all" data-platform="none" data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}' data-priority="1">
             % if inst['pricing'].get('us-east-1', {}).get('ondemand', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1']['ondemand']}">
                 $${"{:.4f}".format(float(inst['pricing']['us-east-1']['ondemand']))} hourly

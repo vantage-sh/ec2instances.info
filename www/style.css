@@ -104,7 +104,7 @@ a:focus {
 table {
   border: 1px solid #e3e3e9;
   font-size: 14px;
-  width: 100%;
+  /* width: 100%; */
   margin-bottom: 24px !important;
   border-radius: 6px;
 }

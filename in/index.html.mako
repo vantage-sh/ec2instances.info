@@ -54,7 +54,7 @@
           </ul>
         </div>
 
-        <div class="btn-group-vertical" id="pricing-unit-dropdown">
+        <div class="btn-group-vertical d-none d-md-inline-flex" id="pricing-unit-dropdown">
           <label class="dropdown-label mb-1">Pricing Unit</label>
           <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-shopping-cart icon-white"></i>
@@ -87,7 +87,7 @@
           </ul>
         </div>
 
-        <div class="btn-group-vertical" id='reserved-term-dropdown'>
+        <div class="btn-group-vertical d-none d-md-inline-flex" id='reserved-term-dropdown'>
           <label class="dropdown-label mb-1">Reserved</label>
           <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-globe icon-white"></i>
@@ -127,8 +127,8 @@
           <label class="dropdown-label mb-1"><br></label>
           <button class="btn btn-purple btn-compare"
             data-text-on="End Compare"
-            data-text-off="Compare Selected">
-            Compare Selected
+            data-text-off="Compare">
+            Compare 
           </button>
         </div>
 
@@ -153,11 +153,11 @@
     </div>
 
   <div class="table-responsive overflow-auto wrap-table flex-fill">
-    <table cellspacing="0" class="table" style="border-bottom: 0 !important; margin-bottom: 0 !important;" id="data">
+    <table cellspacing="0" style="border-bottom: 0 !important; margin-bottom: 0 !important;" id="data" width="100%" class="table">
       <thead>
         <tr>
-          <th class="name">Name</th>
-          <th class="apiname">API Name</th>
+          <th class="name all" data-priority="1"><div class="d-none d-md-block">Name</div></th>
+          <th class="apiname" data-priority="1">API Name</th>
           <th class="memory">Instance Memory</th>
           <th class="computeunits">
             <abbr title="One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.">Compute Units (ECU)</abbr>
@@ -206,7 +206,7 @@
             <abbr title="The AZ IDs where these instances are available, which is a unique and consistent identifier for an Availability Zone across AWS accounts.">Availability Zones</abbr>
           </th>
 
-          <th class="cost-ondemand cost-ondemand-linux">Linux On Demand cost</th>
+          <th class="cost-ondemand cost-ondemand-linux all" data-priority="1">On Demand</th>
           <th class="cost-reserved cost-reserved-linux">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux Reserved cost</abbr>
           </th>
@@ -276,7 +276,7 @@
       <tbody>
         % for inst in instances:
           <tr class='instance' id="${inst['instance_type']}">
-            <td class="name">${inst['pretty_name']}</td>
+            <td class="name all"><div class="d-none d-md-block">${inst['pretty_name']}</div></td>
             <td class="apiname"><a href="/aws/ec2/${inst['instance_type']}">${inst['instance_type']}</a></td>
             <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
             <td class="computeunits">
@@ -474,7 +474,11 @@
               ## note that the contents in these cost cells are overwritten by the JS change_cost() func, but the initial
               ## data here is used for sorting (and anyone with JS disabled...)
               ## for more info, see https://github.com/powdahound/ec2instances.info/issues/140
+              % if platform == 'linux':
+              <td class="cost-ondemand cost-ondemand-linux all" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}" data-priority="1">
+              % else:
               <td class="cost-ondemand cost-ondemand-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+              % endif
                 % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
                   <span sort="${inst['pricing']['us-east-1'][platform]['ondemand']}">
                     $${"{:.4f}".format(float(inst['pricing']['us-east-1'][platform]['ondemand']))} hourly
