@@ -164,6 +164,9 @@ def add_pricing(imap):
             instance_type = product_attributes.get("instanceType")
             location = canonicalize_location(product_attributes.get("location"))
 
+            print(
+                f"instance={instance_type}, location={location}"
+            )
             # There may be a slight delay in updating botocore with new regional endpoints, skip and inform
             if location not in descriptions:
                 print(
@@ -422,3 +425,22 @@ def describe_instance_type_offerings(region_name="us-east-1", location_type="reg
             yield offering
     except botocore.exceptions.ClientError:
         pass
+
+
+def describe_local_wavelength():
+    local_zones = []
+    for region_name in describe_regions():
+        ec2_client = boto3.client("ec2", region_name=region_name)
+
+        try:
+            response = ec2_client.describe_availability_zones(
+                Filters=[{"Name": "zone-type", "Values": ["wavelength-zone"]}],
+                AllAvailabilityZones=True,
+            )
+            for zone in response["AvailabilityZones"]:
+                local_zones.append(zone["ZoneName"])
+
+        except botocore.exceptions.ClientError:
+            pass
+
+    [print(l) for l in local_zones]

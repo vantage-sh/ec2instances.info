@@ -1196,6 +1196,10 @@ def add_dedicated_info(instances):
                     # )
 
 
+def add_local_wavelength_zones(instances):
+    ec2.describe_local_wavelength()
+
+
 def scrape(data_file):
     """Scrape AWS to get instance data"""
     print("Parsing instance types...")
@@ -1240,3 +1244,4 @@ def scrape(data_file):
 
 if __name__ == "__main__":
     scrape("www/instances.json")
+    # add_local_wavelength_zones(None)
