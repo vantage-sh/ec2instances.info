@@ -62,7 +62,7 @@ def translate_reserved_terms(term_attributes):
 
 # The pricing API requires human readable names for some reason
 def get_region_descriptions():
-    result = dict()
+    result = {}
     # Source: https://github.com/boto/botocore/blob/develop/botocore/data/endpoints.json
     endpoint_file = resource_filename("botocore", "data/endpoints.json")
     with open(endpoint_file, "r") as f:
@@ -71,6 +71,37 @@ def get_region_descriptions():
             for region in partition["regions"]:
                 result[partition["regions"][region]["description"]] = region
 
+    local_zones = []
+
+    for region_name in result.values():
+        # Skip secret regions
+        if "us-iso" in region_name:
+            continue
+
+        ec2_client = boto3.client("ec2", region_name=region_name)
+
+        # GroupName here is equivalent to regionCode returned by pricing API
+        try:
+            response = ec2_client.describe_availability_zones(
+                Filters=[
+                    {"Name": "zone-type", "Values": ["wavelength-zone", "local-zone"]}
+                ],
+                AllAvailabilityZones=True,
+            )
+            for zone in response["AvailabilityZones"]:
+                if zone["ZoneType"] == "wavelength-zone":
+                    this_region = zone["ZoneName"].replace("-wlz-", "")
+                else:
+                    this_region = zone["GroupName"]
+
+                if this_region not in local_zones:
+                    local_zones.append(this_region)
+
+        except botocore.exceptions.ClientError:
+            pass
+
+    result["Other"] = local_zones
+    print(json.dumps(result, indent=4))
     return result
 
 
@@ -164,15 +195,27 @@ def add_pricing(imap):
             instance_type = product_attributes.get("instanceType")
             location = canonicalize_location(product_attributes.get("location"))
 
-            print(
-                f"instance={instance_type}, location={location}"
-            )
+            # print(
+            #     f"instance={instance_type}, location={location}"
+            # )
             # There may be a slight delay in updating botocore with new regional endpoints, skip and inform
+            # Use the regionCode here to match to the GroupName in the AZ API and get the
+            # "location" (human readable)
             if location not in descriptions:
-                print(
-                    f"WARNING: Ignoring pricing - unknown location. instance={instance_type}, location={location}"
-                )
-                continue
+                known_zone = False
+                for region in descriptions["Other"]:
+                    if product_attributes["regionCode"] == region:
+                        descriptions[location] = region
+                        known_zone = True
+                # print(json.dumps(product_attributes, indent=4))
+
+                if not known_zone:
+                    print(
+                        f"WARNING: Ignoring pricing - unknown location. instance={instance_type}, location={location}"
+                    )
+                    # print(json.dumps(product_attributes, indent=4))
+                    print(product_attributes["regionCode"])
+                    continue
 
             region = descriptions[location]
 
@@ -427,20 +470,5 @@ def describe_instance_type_offerings(region_name="us-east-1", location_type="reg
         pass
 
 
-def describe_local_wavelength():
-    local_zones = []
-    for region_name in describe_regions():
-        ec2_client = boto3.client("ec2", region_name=region_name)
-
-        try:
-            response = ec2_client.describe_availability_zones(
-                Filters=[{"Name": "zone-type", "Values": ["wavelength-zone"]}],
-                AllAvailabilityZones=True,
-            )
-            for zone in response["AvailabilityZones"]:
-                local_zones.append(zone["ZoneName"])
-
-        except botocore.exceptions.ClientError:
-            pass
-
-    [print(l) for l in local_zones]
+if __name__ == "__main__":
+    get_region_descriptions()
