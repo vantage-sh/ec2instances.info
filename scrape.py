@@ -604,41 +604,10 @@ def add_pretty_names(instances):
 
 
 def add_emr_info(instances):
-    # We really need to handle this better and stop hardcoding regions. Hopefully tackle this
-    # when we tackle local zones. Note: These regions are named differently than in the dropdown.
-    region_map = {
-        "af-south-1": "Africa (Cape Town)",
-        "ap-east-1": "Asia Pacific (Hong Kong)",
-        "ap-south-1": "Asia Pacific (Mumbai)",
-        "ap-south-2": "Asia Pacific (Hyderabad)",
-        "ap-northeast-3": "Asia Pacific (Osaka)",
-        "ap-northeast-2": "Asia Pacific (Seoul)",
-        "ap-southeast-1": "Asia Pacific (Singapore)",
-        "ap-southeast-2": "Asia Pacific (Sydney)",
-        "ap-southeast-3": "Asia Pacific (Jakarta)",
-        "ap-southeast-4": "Asia Pacific (Melbourne)",
-        "ap-northeast-1": "Asia Pacific (Tokyo)",
-        "ca-central-1": "Canada (Central)",
-        "eu-central-1": "EU (Frankfurt)",
-        "eu-central-2": "EU (Zurich)",
-        "eu-west-1": "EU (Ireland)",
-        "eu-west-2": "EU (London)",
-        "eu-west-3": "EU (Paris)",
-        "eu-north-1": "EU (Stockholm)",
-        "eu-south-1": "EU (Milan)",
-        "eu-south-2": "EU (Spain)",
-        "me-south-1": "Middle East (Bahrain)",
-        "me-central-1": "Middle East (UAE)",
-        "sa-east-1": "South America (Sao Paulo)",
-        "us-east-1": "US East (N. Virginia)",
-        "us-east-2": "US East (Ohio)",
-        "us-west-1": "US West (N. California)",
-        "us-west-2": "US West (Oregon)",
-        "us-gov-west-1": "AWS GovCloud (US-West)",
-        "us-gov-east-1": "AWS GovCloud (US-East)",
-    }
     url = "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/elasticmapreduce/USD/current/elasticmapreduce.json"
     pricing = fetch_data(url)
+
+    region_map = {value: key for key, value in ec2.get_region_descriptions().items()}
 
     emr_prices = {}
     for region in pricing["regions"]:
@@ -652,6 +621,8 @@ def add_emr_info(instances):
         for region in inst.pricing:
             try:
                 emr_price = {}
+                region = ec2.canonicalize_location(region, False)
+
                 # The frontend expects ["emr"]["emr"] for some reason
                 emr_price["emr"] = emr_prices[region_map[region]][inst.instance_type]
                 inst.pricing[region]["emr"] = emr_price
@@ -968,6 +939,72 @@ def add_gpu_info(instances):
             "gpu_count": 4,
             "gpu_memory": 32,
         },
+        "trn1.2xlarge": {
+            "gpu_model": "AWS Inferentia",
+            "compute_capability": 0,
+            "gpu_count": 1,
+            "gpu_memory": 32,
+        },
+        "trn1.32xlarge": {
+            "gpu_model": "AWS Inferentia",
+            "compute_capability": 0,
+            "gpu_count": 16,
+            "gpu_memory": 512,
+        },
+        "trn1n.32xlarge": {
+            "gpu_model": "AWS Inferentia",
+            "compute_capability": 0,
+            "gpu_count": 16,
+            "gpu_memory": 512,
+        },
+        "inf1.xlarge": {
+            "gpu_model": "AWS Inferentia",
+            "compute_capability": 0,
+            "gpu_count": 1,
+            "gpu_memory": 0,
+        },
+        "inf1.2xlarge": {
+            "gpu_model": "AWS Inferentia",
+            "compute_capability": 0,
+            "gpu_count": 1,
+            "gpu_memory": 0,
+        },
+        "inf1.6xlarge": {
+            "gpu_model": "AWS Inferentia",
+            "compute_capability": 0,
+            "gpu_count": 4,
+            "gpu_memory": 0,
+        },
+        "inf1.24xlarge": {
+            "gpu_model": "AWS Inferentia",
+            "compute_capability": 0,
+            "gpu_count": 16,
+            "gpu_memory": 0,
+        },
+        "inf2.xlarge": {
+            "gpu_model": "AWS Inferentia2",
+            "compute_capability": 0,
+            "gpu_count": 1,
+            "gpu_memory": 32,
+        },
+        "inf2.8xlarge": {
+            "gpu_model": "AWS Inferentia2",
+            "compute_capability": 0,
+            "gpu_count": 1,
+            "gpu_memory": 32,
+        },
+        "inf2.24xlarge": {
+            "gpu_model": "AWS Inferentia2",
+            "compute_capability": 0,
+            "gpu_count": 6,
+            "gpu_memory": 192,
+        },
+        "inf2.48xlarge": {
+            "gpu_model": "AWS Inferentia2",
+            "compute_capability": 0,
+            "gpu_count": 12,
+            "gpu_memory": 384,
+        },
     }
     for inst in instances:
         if inst.GPU == 0:
@@ -979,6 +1016,7 @@ def add_gpu_info(instances):
             )
             continue
         inst_gpu_data = gpu_data[inst.instance_type]
+        inst.GPU = inst_gpu_data["gpu_count"]
         inst.GPU_model = inst_gpu_data["gpu_model"]
         inst.compute_capability = inst_gpu_data["compute_capability"]
         inst.GPU_memory = inst_gpu_data["gpu_memory"]
@@ -1061,38 +1099,10 @@ def add_dedicated_info(instances):
     # Dedicated Host is a physical server with EC2 instance capacity fully dedicated to a single customer.
     # We treat it as another type of OS, like RHEL or SUSE.
 
+    region_map = {value: key for key, value in ec2.get_region_descriptions().items()}
     # Note: AWS GovCloud (US) is us-gov-west-1. This seems to be an exception just for dedicated hosts.
-    region_map = {
-        "af-south-1": "Africa (Cape Town)",
-        "ap-east-1": "Asia Pacific (Hong Kong)",
-        "ap-south-1": "Asia Pacific (Mumbai)",
-        "ap-south-2": "Asia Pacific (Hyderabad)",
-        "ap-northeast-3": "Asia Pacific (Osaka)",
-        "ap-northeast-2": "Asia Pacific (Seoul)",
-        "ap-southeast-1": "Asia Pacific (Singapore)",
-        "ap-southeast-2": "Asia Pacific (Sydney)",
-        "ap-southeast-3": "Asia Pacific (Jakarta)",
-        "ap-southeast-4": "Asia Pacific (Melbourne)",
-        "ap-northeast-1": "Asia Pacific (Tokyo)",
-        "ca-central-1": "Canada (Central)",
-        "eu-central-1": "EU (Frankfurt)",
-        "eu-central-2": "EU (Zurich)",
-        "eu-west-1": "EU (Ireland)",
-        "eu-west-2": "EU (London)",
-        "eu-west-3": "EU (Paris)",
-        "eu-north-1": "EU (Stockholm)",
-        "eu-south-1": "EU (Milan)",
-        "eu-south-2": "EU (Spain)",
-        "me-south-1": "Middle East (Bahrain)",
-        "me-central-1": "Middle East (UAE)",
-        "sa-east-1": "South America (Sao Paulo)",
-        "us-east-1": "US East (N. Virginia)",
-        "us-east-2": "US East (Ohio)",
-        "us-west-1": "US West (N. California)",
-        "us-west-2": "US West (Oregon)",
-        "us-gov-west-1": "AWS GovCloud (US)",
-        "us-gov-east-1": "AWS GovCloud (US-East)",
-    }
+    region_map["us-gov-west-1"] = "AWS GovCloud (US)"
+    region_map["us-west-2-lax"] = "US West (Los Angeles)"
 
     # Normalize and translate term lengths and payment options to ec2instances.info terms
     reserved_map = {
@@ -1135,34 +1145,38 @@ def add_dedicated_info(instances):
                     try:
                         pricing = fetch_data(base + path)
                     except:
-                        print("Could not fetch dedicated pricing for " + path)
-                        pricing = None
+                        print(
+                            "WARNING: Ignoring pricing - dedicated host. region={}, term={}, payment={}".format(
+                                region, term, payment
+                            )
+                        )
+                        continue
 
-                    if pricing:
-                        for instance_description, dinst in pricing["regions"][
-                            region
-                        ].items():
-                            # Similar to get_reserved_pricing in ec2.py the goal is to get the effective hourly rate
-                            # and then the frontend will deal with making it monthly, yearly etc
-                            upfront = 0.0
-                            if "Partial" in payment or "All" in payment:
-                                upfront = float(dinst["riupfront:PricePerUnit"])
-                            inst_type = dinst["Instance Type"]
-                            ondemand = float(dinst["price"])
-                            lease_in_years = int(dinst["LeaseContractLength"][0])
-                            hours_in_term = lease_in_years * 365 * 24
-                            price = float(ondemand) + (float(upfront) / hours_in_term)
-                            translate_ri = reserved_map[
-                                dinst["LeaseContractLength"] + dinst["PurchaseOption"]
-                            ]
+                    for instance_description, dinst in pricing["regions"][
+                        region
+                    ].items():
+                        # Similar to get_reserved_pricing in ec2.py the goal is to get the effective hourly rate
+                        # and then the frontend will deal with making it monthly, yearly etc
+                        upfront = 0.0
+                        if "Partial" in payment or "All" in payment:
+                            upfront = float(dinst["riupfront:PricePerUnit"])
+                        inst_type = dinst["Instance Type"]
+                        ondemand = float(dinst["price"])
+                        lease_in_years = int(dinst["LeaseContractLength"][0])
+                        hours_in_term = lease_in_years * 365 * 24
+                        price = float(ondemand) + (float(upfront) / hours_in_term)
+                        translate_ri = reserved_map[
+                            dinst["LeaseContractLength"] + dinst["PurchaseOption"]
+                        ]
 
-                            # Certain instances will not have been created above because they are not available on demand
-                            if inst_type not in all_pricing[region]:
-                                all_pricing[region][inst_type] = {"reserved": {}}
+                        # Certain instances will not have been created above because they are not available on demand
+                        if inst_type not in all_pricing[region]:
+                            all_pricing[region][inst_type] = {"reserved": {}}
 
-                            all_pricing[region][inst_type]["reserved"][
-                                translate_ri
-                            ] = format_price(price)
+                        all_pricing[region][inst_type]["reserved"][
+                            translate_ri
+                        ] = format_price(price)
+
         return all_pricing
 
     all_pricing = fetch_dedicated_prices()
@@ -1174,8 +1188,9 @@ def add_dedicated_info(instances):
             # previous dedicated pricing dict we have built is by region.
             inst_type = inst.instance_type.split(".")[0]
             for k, r in region_map.items():
-                if inst_type in all_pricing[r]:
-                    _price = all_pricing[r][inst_type]
+                region = ec2.canonicalize_location(r, False)
+                if inst_type in all_pricing[region]:
+                    _price = all_pricing[region][inst_type]
                     inst.pricing[k] = {}
                     inst.pricing[k]["dedicated"] = _price
         else:
@@ -1194,10 +1209,6 @@ def add_dedicated_info(instances):
                     #     "No dedicated host price for %s in %s"
                     #     % (inst.instance_type, region)
                     # )
-
-
-def add_local_wavelength_zones(instances):
-    ec2.describe_local_wavelength()
 
 
 def scrape(data_file):
@@ -1244,4 +1255,3 @@ def scrape(data_file):
 
 if __name__ == "__main__":
     scrape("www/instances.json")
-    # add_local_wavelength_zones(None)
