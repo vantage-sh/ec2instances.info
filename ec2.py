@@ -10,9 +10,11 @@ import scrape
 import traceback
 
 
-def canonicalize_location(location):
+def canonicalize_location(location, from_pricing_api=True):
     """Ensure location aligns with one of the options returned by get_region_descriptions()"""
     # The pricing API returns locations with the old EU prefix
+    if not from_pricing_api:
+        return re.sub("^Europe", "EU", location)
     return re.sub("^EU", "Europe", location)
 
 
@@ -69,39 +71,9 @@ def get_region_descriptions():
         endpoints = json.load(f)
         for partition in endpoints["partitions"]:
             for region in partition["regions"]:
-                result[partition["regions"][region]["description"]] = region
-
-    local_zones = []
-
-    for region_name in result.values():
-        # Skip secret regions
-        if "us-iso" in region_name:
-            continue
-
-        ec2_client = boto3.client("ec2", region_name=region_name)
-
-        # GroupName here is equivalent to regionCode returned by pricing API
-        try:
-            response = ec2_client.describe_availability_zones(
-                Filters=[
-                    {"Name": "zone-type", "Values": ["wavelength-zone", "local-zone"]}
-                ],
-                AllAvailabilityZones=True,
-            )
-            for zone in response["AvailabilityZones"]:
-                if zone["ZoneType"] == "wavelength-zone":
-                    this_region = zone["ZoneName"].replace("-wlz-", "")
-                else:
-                    this_region = zone["GroupName"]
-
-                if this_region not in local_zones:
-                    local_zones.append(this_region)
-
-        except botocore.exceptions.ClientError:
-            pass
-
-    result["Other"] = local_zones
-    print(json.dumps(result, indent=4))
+                # Skip secret and Chinese regions
+                if "us-iso" not in region and not region.startswith("cn-"):
+                    result[partition["regions"][region]["description"]] = region
     return result
 
 
@@ -195,27 +167,9 @@ def add_pricing(imap):
             instance_type = product_attributes.get("instanceType")
             location = canonicalize_location(product_attributes.get("location"))
 
-            # print(
-            #     f"instance={instance_type}, location={location}"
-            # )
-            # There may be a slight delay in updating botocore with new regional endpoints, skip and inform
-            # Use the regionCode here to match to the GroupName in the AZ API and get the
-            # "location" (human readable)
+            # Add regions local zones and wavelength zones on the fly as we find them
             if location not in descriptions:
-                known_zone = False
-                for region in descriptions["Other"]:
-                    if product_attributes["regionCode"] == region:
-                        descriptions[location] = region
-                        known_zone = True
-                # print(json.dumps(product_attributes, indent=4))
-
-                if not known_zone:
-                    print(
-                        f"WARNING: Ignoring pricing - unknown location. instance={instance_type}, location={location}"
-                    )
-                    # print(json.dumps(product_attributes, indent=4))
-                    print(product_attributes["regionCode"])
-                    continue
+                descriptions[location] = product_attributes["regionCode"]
 
             region = descriptions[location]
 
@@ -300,13 +254,8 @@ def get_reserved_pricing(terms):
 
 def add_spot_pricing(imap):
     instance_types = list(imap.keys())
-    # get a list of all available regions across all instance types
-    regions = []
-    for instance_type in instance_types:
-        regions += [r for r in imap[instance_type].pricing.keys()]
-    # deduplicate list of regions
-    regions = list(dict.fromkeys(regions))
-    for region in regions:
+
+    for region in get_region_descriptions().values():
         try:
             # get all spot price data from a region
             ec2_client = boto3.client("ec2", region_name=region)
@@ -402,6 +351,8 @@ def parse_instance(instance_type, product_attributes, api_description):
     gpu = product_attributes.get("gpu")
     if gpu is not None:
         i.GPU = locale.atoi(gpu)
+    if "inf" in instance_type or "trn" in instance_type:
+        i.GPU = 1
 
     if api_description:
         if "FpgaInfo" in api_description:
