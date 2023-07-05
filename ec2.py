@@ -169,7 +169,7 @@ def add_pricing(imap):
 
             # Add regions local zones and wavelength zones on the fly as we find them
             if location not in descriptions:
-                descriptions[location] = product_attributes["regionCode"]
+                descriptions[location] = product_attributes.get("regionCode")
 
             region = descriptions[location]
 
@@ -193,6 +193,7 @@ def add_pricing(imap):
             try:
                 inst = imap[instance_type]
                 inst.pricing.setdefault(region, {})
+                inst.regions[region] = location
                 inst.pricing[region].setdefault(platform, {})
                 inst.pricing[region][platform]["ondemand"] = get_ondemand_pricing(terms)
                 # Some instances don't offer reserved terms at all

@@ -56,6 +56,7 @@ class Instance(object):
         self.placement_group_support = True
         self.pretty_name = ""
         self.pricing = {}
+        self.regions = {}
         self.size = 0
         self.ssd = False
         self.storage_needs_initialization = False
@@ -134,6 +135,7 @@ class Instance(object):
             intel_turbo=self.intel_turbo,
             emr=self.emr,
             availability_zones=self.availability_zones,
+            regions=self.regions,
         )
         if self.ebs_only:
             d["storage"] = None
@@ -538,7 +540,7 @@ def add_t2_credits(instances):
             inst_type = totext(r[0])
             if not inst_type in by_type:
                 print(
-                    f"WARNING: skipping unknown instance type '{inst_type}' in CPU credit info table"
+                    f"WARNING: Skipping unknown instance type '{inst_type}' in CPU credit info table"
                 )
                 continue
             inst = by_type[inst_type]
@@ -1191,6 +1193,7 @@ def add_dedicated_info(instances):
                 region = ec2.canonicalize_location(r, False)
                 if inst_type in all_pricing[region]:
                     _price = all_pricing[region][inst_type]
+                    inst.regions[k] = region
                     inst.pricing[k] = {}
                     inst.pricing[k]["dedicated"] = _price
         else:

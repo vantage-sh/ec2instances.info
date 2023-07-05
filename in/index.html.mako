@@ -25,6 +25,18 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
+            % for region, region_name in regions["main"].items():
+            <li><a class="dropdown-item" href="javascript:;" data-region='${region}'>${region_name}&emsp;&emsp;${region}</a></li>
+            % endfor
+            <span><strong>Local Zones</strong></span>
+            % for region, region_name in regions["local_zone"].items():
+            <li><a class="dropdown-item" href="javascript:;" data-region='${region}'>${region_name}&emsp;&emsp;${region}</a></li>
+            % endfor
+            <span><strong>Wavelength Zones</strong></span>
+            % for region, region_name in regions["wavelength"].items():
+            <li><a class="dropdown-item" href="javascript:;" data-region='${region}'>${region_name}&emsp;&emsp;${region}</a></li>
+            % endfor
+            <!--
             <li><a class="dropdown-item" href="javascript:;" data-region='af-south-1'>Africa (Cape Town)</a></li>
             <li><a class="dropdown-item" href="javascript:;" data-region='ap-east-1'>Asia-Pacific (Hong Kong)</a></li>
             <li><a class="dropdown-item" href="javascript:;" data-region='ap-south-1'>Asia-Pacific (Mumbai)</a></li>
@@ -54,6 +66,7 @@
             <li><a class="dropdown-item" href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
             <li><a class="dropdown-item" href="javascript:;" data-region='us-gov-west-1'>AWS GovCloud (US-West)</a></li>
             <li><a class="dropdown-item" href="javascript:;" data-region='us-gov-east-1'>AWS GovCloud (US-East)</a></li>
+            -->
           </ul>
         </div>
 

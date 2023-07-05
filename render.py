@@ -7,6 +7,7 @@ import datetime
 import os
 import copy
 import yaml
+import re
 
 from detail_pages_ec2 import build_detail_pages_ec2
 from detail_pages_rds import build_detail_pages_rds
@@ -204,6 +205,24 @@ def per_region_pricing(instances, data_file):
     return init_pricing_json, init_instance_azs_json
 
 
+def regions_list(instances):
+    regions = {}
+    regions["main"] = {}
+    regions["local_zone"] = {}
+    regions["wavelength"] = {}
+
+    for i in instances:
+        for r in i["pricing"]:
+            if "wl1" in r or "wl2" in r:
+                regions["wavelength"][r] = i["regions"][r]
+            elif len(re.findall(r"\d+", r)) > 1:
+                regions["local_zone"][r] = i["regions"][r]
+            else:
+                regions["main"][r] = i["regions"][r]
+
+    return regions
+
+
 def render(data_file, template_file, destination_file, detail_pages=True):
     """Build the HTML content from scraped data"""
     lookup = mako.lookup.TemplateLookup(directories=["."])
@@ -217,6 +236,7 @@ def render(data_file, template_file, destination_file, detail_pages=True):
 
     generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     pricing_json, instance_azs_json = per_region_pricing(instances, data_file)
+    regions = regions_list(instances)
 
     sitemap = []
     if detail_pages:
@@ -238,6 +258,7 @@ def render(data_file, template_file, destination_file, detail_pages=True):
             fh.write(
                 template.render(
                     instances=instances,
+                    regions=regions,
                     pricing_json=pricing_json,
                     generated_at=generated_at,
                     instance_azs_json=instance_azs_json,
