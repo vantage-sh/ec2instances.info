@@ -184,7 +184,13 @@ body {
 
 .dropdown-menu {
   max-height: 400px;
+  min-width: 500px;
   overflow: auto;
+}
+
+.dropdown-region {
+  float: right;
+  color: #8a8a8e;
 }
 
 .dropdown-label {

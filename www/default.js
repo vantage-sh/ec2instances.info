@@ -994,3 +994,10 @@ function update_compare_button() {
 $('#fullsearch').on('keyup', function () {
   g_data_table.search(this.value).draw();
 });
+
+$('#dropdown-search').on('keyup', function () {
+  var value = $(this).val().toLowerCase();
+  $('.dropdown-menu li').filter(function () {
+    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+  });
+});
