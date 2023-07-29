@@ -16,9 +16,11 @@ RUN locale-gen "en_US.UTF-8"
 
 WORKDIR /opt/app
 
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
+
 COPY . .
 
-RUN pip3 install -r requirements.txt
 RUN invoke build
 
 EXPOSE 8080
