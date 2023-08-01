@@ -261,7 +261,7 @@
               <button id="submit-feedback" class="btn btn-purple" type="submit">Send</button>
             </form>
             <p id="submission-response"></p>
-            <span>Supported by <a target="_blank" href="https://vantage.sh/" class="text-decoration-none">Vantage</a></span>
+            <span>Meet us at <a target="_blank" href="https://vantage.sh/events/reinvent-2023-vantage" class="text-decoration-none">re:Invent 2023</a></span>
           </div>
         </div>
       </div>
