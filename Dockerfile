@@ -11,14 +11,14 @@ RUN apt-get install -y python3 pip locales
 RUN apt-get install -y nodejs
 RUN apt-get install -y npm
 RUN npm install --global sass
-RUN python3 -m pip install -U pip setuptools
+RUN python3 -m pip install --no-cache-dir -U pip setuptools
 RUN locale-gen "en_US.UTF-8"
 
 WORKDIR /opt/app
 
 COPY . .
 
-RUN pip3 install -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 RUN invoke build
 
 EXPOSE 8080
