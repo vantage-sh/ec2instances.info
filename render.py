@@ -152,14 +152,14 @@ def build_sitemap(sitemap):
         fp.write("\n".join(surls))
 
 
-def per_region_pricing(instances, data_file):
+def per_region_pricing(instances, data_file, regions):
     # This function splits instances.json into per-region files which are written to
     # disk and then can be loaded by the web app to reduce the amount of data that
     # needs to be sent to the client.
 
-    region_list = "meta/regions_aws.yaml"
-    with open(region_list, "r") as f:
-        aws_regions = yaml.safe_load(f)
+    aws_regions = regions["main"].copy()
+    aws_regions.update(regions["local_zone"])
+    aws_regions.update(regions["wavelength"])
 
     init_pricing_json = ""
     init_instance_azs_json = ""
@@ -235,8 +235,8 @@ def render(data_file, template_file, destination_file, detail_pages=True):
         add_render_info(i)
 
     generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
-    pricing_json, instance_azs_json = per_region_pricing(instances, data_file)
     regions = regions_list(instances)
+    pricing_json, instance_azs_json = per_region_pricing(instances, data_file, regions)
 
     sitemap = []
     if detail_pages:

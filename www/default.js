@@ -536,7 +536,7 @@ function change_region(region, called_on_init) {
       e = $(e);
       if (e.data('region') === region) {
         e.parent().addClass('active');
-        region_name = e.text();
+        region_name = e.find('span:first').text();
       } else {
         e.parent().removeClass('active');
       }
@@ -832,7 +832,7 @@ function on_data_table_initialized() {
   });
 
   $('#region-dropdown li').bind('click', function (e) {
-    var region = $(e.target).data('region');
+    var region = $(this).find('a.dropdown-item').attr('data-region');
     change_region(region, false);
   });
 
