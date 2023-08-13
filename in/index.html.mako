@@ -31,23 +31,30 @@
             % for region, region_name in regions["main"].items():
             <li>
               <a class="dropdown-item" href="javascript:;" data-region='${region}'>
-                <span>${region_name}</span><span class="dropdown-region">${region}</span>
+                <span>${region_name}</span>
+                <span class="dropdown-region">${region}</span>
               </a>
             </li>
             % endfor
-            <div class="ms-2 mb-2 mt-2"><span><strong>Local Zones</strong></span></div>
+            <div class="ms-2 mb-2 mt-2">
+              <span><strong>Local Zones</strong></span>
+            </div>
             % for region, region_name in regions["local_zone"].items():
             <li>
               <a class="dropdown-item" href="javascript:;" data-region='${region}'>
-                <span>${region_name}</span><span class="dropdown-region">${region}</span>
+                <span>${region_name}</span>
+                <span class="dropdown-region">${region}</span>
               </a>
             </li>
             % endfor
-            <div class="ms-2 mb-2 mt-2"><span><strong>Wavelength Zones</strong></span></div>
+            <div class="ms-2 mb-2 mt-2">
+              <span><strong>Wavelength Zones</strong></span>
+            </div>
             % for region, region_name in regions["wavelength"].items():
             <li>
               <a class="dropdown-item" href="javascript:;" data-region='${region}'>
-                <span>${region_name}</span><span class="dropdown-region">${region}</span>
+                <span>${region_name}</span>
+                <span class="dropdown-region">${region}</span>
               </a>
             </li>
             % endfor

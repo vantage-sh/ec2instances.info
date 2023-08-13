@@ -152,14 +152,10 @@ def build_sitemap(sitemap):
         fp.write("\n".join(surls))
 
 
-def per_region_pricing(instances, data_file, regions):
+def per_region_pricing(instances, data_file, all_regions):
     # This function splits instances.json into per-region files which are written to
     # disk and then can be loaded by the web app to reduce the amount of data that
     # needs to be sent to the client.
-
-    aws_regions = regions["main"].copy()
-    aws_regions.update(regions["local_zone"])
-    aws_regions.update(regions["wavelength"])
 
     init_pricing_json = ""
     init_instance_azs_json = ""
@@ -173,7 +169,7 @@ def per_region_pricing(instances, data_file, regions):
         if "availability_zones" in i:
             del i["availability_zones"]
 
-    for r in aws_regions:
+    for r in all_regions:
         per_region_out = {}
         per_region_out = instances_no_pricing
 
@@ -236,12 +232,17 @@ def render(data_file, template_file, destination_file, detail_pages=True):
 
     generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     regions = regions_list(instances)
-    pricing_json, instance_azs_json = per_region_pricing(instances, data_file, regions)
+    all_regions = regions["main"].copy()
+    all_regions.update(regions["local_zone"])
+    all_regions.update(regions["wavelength"])
+    pricing_json, instance_azs_json = per_region_pricing(
+        instances, data_file, all_regions
+    )
 
     sitemap = []
     if detail_pages:
         if data_file == "www/instances.json":
-            sitemap.extend(build_detail_pages_ec2(instances, destination_file))
+            sitemap.extend(build_detail_pages_ec2(instances, all_regions))
         elif data_file == "www/rds/instances.json":
             sitemap.extend(build_detail_pages_rds(instances, destination_file))
         elif data_file == "www/cache/instances.json":
@@ -273,9 +274,7 @@ def render(data_file, template_file, destination_file, detail_pages=True):
 
 if __name__ == "__main__":
     sitemap = []
-    sitemap.extend(
-        render("www/instances.json", "in/index.html.mako", "www/index.html", False)
-    )
+    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
     import sys
 
     sys.exit(0)
