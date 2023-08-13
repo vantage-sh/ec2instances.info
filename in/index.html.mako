@@ -26,7 +26,7 @@
           </a>
           <ul class="dropdown-menu" role="menu">
             <li>
-              <input type="text" id="dropdown-search" class="form-control" placeholder="Search" />
+              <input type="text" id="dropdown-search" class="ms-2 mb-2 form-control dropdown-search" placeholder="Search" />
             </li>
             % for region, region_name in regions["main"].items():
             <li>
@@ -35,7 +35,7 @@
               </a>
             </li>
             % endfor
-            <span><strong>&nbsp;Local Zones</strong></span>
+            <div class="ms-2 mb-2 mt-2"><span><strong>Local Zones</strong></span></div>
             % for region, region_name in regions["local_zone"].items():
             <li>
               <a class="dropdown-item" href="javascript:;" data-region='${region}'>
@@ -43,7 +43,7 @@
               </a>
             </li>
             % endfor
-            <span><strong>&nbsp;Wavelength Zones</strong></span>
+            <div class="ms-2 mb-2 mt-2"><span><strong>Wavelength Zones</strong></span></div>
             % for region, region_name in regions["wavelength"].items():
             <li>
               <a class="dropdown-item" href="javascript:;" data-region='${region}'>

@@ -832,8 +832,11 @@ function on_data_table_initialized() {
   });
 
   $('#region-dropdown li').bind('click', function (e) {
-    var region = $(this).find('a.dropdown-item').attr('data-region');
-    change_region(region, false);
+    // don't change the region if the user is searching
+    if (!$(this).find('#dropdown-search').length > 0) {
+      var region = $(this).find('a.dropdown-item').attr('data-region');
+      change_region(region, false);
+    }
   });
 
   $('#reserved-term-dropdown li').bind('click', function (e) {
@@ -854,6 +857,25 @@ function on_data_table_initialized() {
 
   // apply classes to search box
   $('div.dataTables_filter input').addClass('form-control search');
+
+  $('#dropdown-search').on('keyup', function () {
+    var searchText = $(this).val().toLowerCase();
+
+    // check each dropdown item
+    $('.dropdown-menu li')
+      .has('.dropdown-item')
+      .each(function () {
+        var listItem = $(this);
+        var itemText = listItem.find('.dropdown-item span').text().toLowerCase();
+
+        // if the search text is found in the item, show the <li>, otherwise hide it
+        if (itemText.indexOf(searchText) > -1) {
+          listItem.show();
+        } else {
+          listItem.hide();
+        }
+      });
+  });
 }
 
 // sorting for colums with more complex data
@@ -993,11 +1015,4 @@ function update_compare_button() {
 
 $('#fullsearch').on('keyup', function () {
   g_data_table.search(this.value).draw();
-});
-
-$('#dropdown-search').on('keyup', function () {
-  var value = $(this).val().toLowerCase();
-  $('.dropdown-menu li').filter(function () {
-    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-  });
 });
