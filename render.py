@@ -209,12 +209,17 @@ def regions_list(instances):
 
     for i in instances:
         for r in i["pricing"]:
-            if "wl1" in r or "wl2" in r:
-                regions["wavelength"][r] = i["regions"][r]
-            elif len(re.findall(r"\d+", r)) > 1:
-                regions["local_zone"][r] = i["regions"][r]
-            else:
-                regions["main"][r] = i["regions"][r]
+            try:
+                if "wl1" in r or "wl2" in r:
+                    regions["wavelength"][r] = i["regions"][r]
+                elif len(re.findall(r"\d+", r)) > 1:
+                    regions["local_zone"][r] = i["regions"][r]
+                else:
+                    regions["main"][r] = i["regions"][r]
+            except KeyError:
+                print(
+                    'ERROR: "regions" key not found in instances.json. Run scrape.py.'
+                )
 
     return regions
 

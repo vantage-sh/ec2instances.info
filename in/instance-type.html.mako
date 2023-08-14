@@ -89,7 +89,11 @@
             <div class="d-flex flex-wrap mt-2">
               <div class="col-6 pe-2 mb-2">
                 <select class="form-select form-select-sm" id="region">
+                  <option value='us-east-1'>US East (N. Virginia)</option>
                   % for api_name, region in regions.items():
+                    % if api_name == 'us-east-1':
+                      <% continue %>
+                    % endif
                     <option value='${api_name}'>${region}</option>
                   % endfor
                 </select>
