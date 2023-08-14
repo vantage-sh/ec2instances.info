@@ -235,27 +235,34 @@ def render(data_file, template_file, destination_file, detail_pages=True):
     for i in instances:
         add_render_info(i)
 
-    generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     regions = regions_list(instances)
-    all_regions = regions["main"].copy()
-    all_regions.update(regions["local_zone"])
-    all_regions.update(regions["wavelength"])
+
+    sitemap = []
+    if data_file == "www/instances.json":
+        all_regions = regions["main"].copy()
+        all_regions.update(regions["local_zone"])
+        all_regions.update(regions["wavelength"])
+        if detail_pages:
+            sitemap.extend(build_detail_pages_ec2(instances, all_regions))
+    elif data_file == "www/rds/instances.json":
+        all_regions = regions["main"].copy()
+        all_regions.update(regions["local_zone"])
+        if detail_pages:
+            sitemap.extend(build_detail_pages_rds(instances, all_regions))
+    elif data_file == "www/cache/instances.json":
+        if detail_pages:
+            sitemap.extend(build_detail_pages_cache(instances, destination_file))
+    elif data_file == "www/opensearch/instances.json":
+        if detail_pages:
+            sitemap.extend(build_detail_pages_opensearch(instances, destination_file))
+    elif data_file == "www/redshift/instances.json":
+        if detail_pages:
+            sitemap.extend(build_detail_pages_redshift(instances, destination_file))
+
+    generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     pricing_json, instance_azs_json = per_region_pricing(
         instances, data_file, all_regions
     )
-
-    sitemap = []
-    if detail_pages:
-        if data_file == "www/instances.json":
-            sitemap.extend(build_detail_pages_ec2(instances, all_regions))
-        elif data_file == "www/rds/instances.json":
-            sitemap.extend(build_detail_pages_rds(instances, destination_file))
-        elif data_file == "www/cache/instances.json":
-            sitemap.extend(build_detail_pages_cache(instances, destination_file))
-        elif data_file == "www/opensearch/instances.json":
-            sitemap.extend(build_detail_pages_opensearch(instances, destination_file))
-        elif data_file == "www/redshift/instances.json":
-            sitemap.extend(build_detail_pages_redshift(instances, destination_file))
 
     print("Rendering to %s..." % destination_file)
     os.makedirs(os.path.dirname(destination_file), exist_ok=True)
@@ -280,12 +287,12 @@ def render(data_file, template_file, destination_file, detail_pages=True):
 if __name__ == "__main__":
     sitemap = []
     sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
-    import sys
-
-    sys.exit(0)
     sitemap.extend(
         render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
     )
+    import sys
+
+    sys.exit(0)
     sitemap.extend(
         render(
             "www/cache/instances.json",

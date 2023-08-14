@@ -200,16 +200,30 @@ def scrape(output_file, input_file=None):
             # map the region
             location = ec2.canonicalize_location(attributes["location"])
             instance_type = attributes["instanceType"]
-            try:
+
+            if location == "Any":
+                region = "us-east-1"
+            elif location == "Asia Pacific (Osaka-Local)":
+                # at one point this region was local but was upgraded to a standard region
+                # however some SKUs still reference the old region
+                region = "ap-northeast-3"
+                regions[location] = region
+            elif location not in regions.values():
+                region = attributes["regionCode"]
+                regions[location] = region
+            else:
                 region = regions[location]
-            except KeyError as e:
-                if location == "Any":
-                    region = "us-east-1"
-                else:
-                    print(
-                        f"WARNING: No region data for location={location}. Ignoring instance with sku={sku}, type={instance_type}"
-                    )
-                    continue
+
+            # try:
+            #     region = regions[location]
+            # except KeyError as e:
+            #     if location == "Any":
+            #         region = "us-east-1"
+            #     else:
+            #         print(
+            #             f"WARNING: No region data for location={location}. Ignoring instance with sku={sku}, type={instance_type}"
+            #         )
+            #         continue
 
             # set the attributes in line with the ec2 index
             attributes["region"] = region
@@ -225,7 +239,9 @@ def scrape(output_file, input_file=None):
             attributes["pricing"][region] = {}
 
             if attributes.get("engineCode", None) == None:
-                print(f"No Engine Code found. Ignoring instance with sku={sku}")
+                print(
+                    f"WARNING: No Engine Code found. Ignoring instance with sku={sku}"
+                )
                 continue
 
             if attributes["engineCode"] not in ["210", "220"]:
@@ -248,6 +264,7 @@ def scrape(output_file, input_file=None):
                     new_attributes.pop("region", None)
                     new_attributes.pop("usagetype", None)
                     new_attributes["pricing"] = attributes["pricing"]
+                    new_attributes["regions"] = {}
 
                     instances[instance_type] = new_attributes
 
@@ -296,6 +313,15 @@ def scrape(output_file, input_file=None):
                 instances[instance["instance_type"]]["pricing"][instance["region"]][
                     instance["database_engine"]
                 ] = {"ondemand": float(dimension["pricePerUnit"]["USD"])}
+
+                # build the list of regions where each instance is available
+                # we have to do a reverse lookup from the regions list
+                l = ""
+                for l, r in regions.items():
+                    if instance["region"] == r:
+                        location = l
+                        break
+                instances[instance["instance_type"]]["regions"][instance["region"]] = l
 
     reserved_mapping = {
         "3yr Partial Upfront": "yrTerm3.partialUpfront",
