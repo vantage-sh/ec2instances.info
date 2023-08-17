@@ -23,7 +23,7 @@
           </a>
           <ul class="dropdown-menu" role="menu">
           % for r in regions:
-            <li><a class="dropdown-item" href="javascript:;" data-region='${r[0]}'>${r[1]}</a></li>
+            <li><a class="dropdown-item" href="javascript:;" data-region='${r[0]}'><span>${r[1]}</span></a></li>
           % endfor
           </ul>
         </div>
