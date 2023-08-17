@@ -250,12 +250,15 @@ def render(data_file, template_file, destination_file, detail_pages=True):
         if detail_pages:
             sitemap.extend(build_detail_pages_rds(instances, all_regions))
     elif data_file == "www/cache/instances.json":
+        all_regions = regions["main"].copy()
         if detail_pages:
-            sitemap.extend(build_detail_pages_cache(instances, destination_file))
+            sitemap.extend(build_detail_pages_cache(instances, all_regions))
     elif data_file == "www/opensearch/instances.json":
+        all_regions = regions["main"].copy()
         if detail_pages:
             sitemap.extend(build_detail_pages_opensearch(instances, destination_file))
     elif data_file == "www/redshift/instances.json":
+        all_regions = regions["main"].copy()
         if detail_pages:
             sitemap.extend(build_detail_pages_redshift(instances, destination_file))
 
@@ -290,9 +293,6 @@ if __name__ == "__main__":
     sitemap.extend(
         render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
     )
-    import sys
-
-    sys.exit(0)
     sitemap.extend(
         render(
             "www/cache/instances.json",
@@ -300,6 +300,9 @@ if __name__ == "__main__":
             "www/cache/index.html",
         )
     )
+    import sys
+
+    sys.exit(0)
     sitemap.extend(
         render(
             "www/redshift/instances.json",
