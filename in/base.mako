@@ -73,8 +73,7 @@
           </div>
         </div>
         <div class="d-flex align-items-center d-none d-xl-block">
-          <img width="24" height="24" src="/kubernetes-icon.svg">
-          <a href="https://console.vantage.sh/signup" class="vantage">Rightsize <span class="fw-semibold">Kubernetes</span> clusters with Pod Efficiency Metrics -></a>
+          <a href="https://vantage.sh/features/budgets" class="vantage">Get <span class="fw-semibold">Budget Alerts</span> for AWS in Slack and email -></a>
         </div>
         <div class="d-flex">
           <div class="nav-buttons px-2 d-none d-xxl-block">
