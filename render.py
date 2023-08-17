@@ -7,6 +7,7 @@ import datetime
 import os
 import copy
 import yaml
+import re
 
 from detail_pages_ec2 import build_detail_pages_ec2
 from detail_pages_rds import build_detail_pages_rds
@@ -152,14 +153,10 @@ def build_sitemap(sitemap):
         fp.write("\n".join(surls))
 
 
-def per_region_pricing(instances, data_file):
+def per_region_pricing(instances, data_file, all_regions):
     # This function splits instances.json into per-region files which are written to
     # disk and then can be loaded by the web app to reduce the amount of data that
     # needs to be sent to the client.
-
-    region_list = "meta/regions_aws.yaml"
-    with open(region_list, "r") as f:
-        aws_regions = yaml.safe_load(f)
 
     init_pricing_json = ""
     init_instance_azs_json = ""
@@ -173,7 +170,7 @@ def per_region_pricing(instances, data_file):
         if "availability_zones" in i:
             del i["availability_zones"]
 
-    for r in aws_regions:
+    for r in all_regions:
         per_region_out = {}
         per_region_out = instances_no_pricing
 
@@ -205,6 +202,29 @@ def per_region_pricing(instances, data_file):
     return init_pricing_json, init_instance_azs_json
 
 
+def regions_list(instances):
+    regions = {}
+    regions["main"] = {}
+    regions["local_zone"] = {}
+    regions["wavelength"] = {}
+
+    for i in instances:
+        for r in i["pricing"]:
+            try:
+                if "wl1" in r or "wl2" in r:
+                    regions["wavelength"][r] = i["regions"][r]
+                elif len(re.findall(r"\d+", r)) > 1:
+                    regions["local_zone"][r] = i["regions"][r]
+                else:
+                    regions["main"][r] = i["regions"][r]
+            except KeyError:
+                print(
+                    'ERROR: "regions" key not found in instances.json. Run scrape.py.'
+                )
+
+    return regions
+
+
 def render(data_file, template_file, destination_file, detail_pages=True):
     """Build the HTML content from scraped data"""
     lookup = mako.lookup.TemplateLookup(directories=["."])
@@ -216,21 +236,37 @@ def render(data_file, template_file, destination_file, detail_pages=True):
     for i in instances:
         add_render_info(i)
 
-    generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
-    pricing_json, instance_azs_json = per_region_pricing(instances, data_file)
+    regions = regions_list(instances)
 
     sitemap = []
-    if detail_pages:
-        if data_file == "www/instances.json":
-            sitemap.extend(build_detail_pages_ec2(instances, destination_file))
-        elif data_file == "www/rds/instances.json":
-            sitemap.extend(build_detail_pages_rds(instances, destination_file))
-        elif data_file == "www/cache/instances.json":
-            sitemap.extend(build_detail_pages_cache(instances, destination_file))
-        elif data_file == "www/opensearch/instances.json":
-            sitemap.extend(build_detail_pages_opensearch(instances, destination_file))
-        elif data_file == "www/redshift/instances.json":
-            sitemap.extend(build_detail_pages_redshift(instances, destination_file))
+    if data_file == "www/instances.json":
+        all_regions = regions["main"].copy()
+        all_regions.update(regions["local_zone"])
+        all_regions.update(regions["wavelength"])
+        if detail_pages:
+            sitemap.extend(build_detail_pages_ec2(instances, all_regions))
+    elif data_file == "www/rds/instances.json":
+        all_regions = regions["main"].copy()
+        all_regions.update(regions["local_zone"])
+        if detail_pages:
+            sitemap.extend(build_detail_pages_rds(instances, all_regions))
+    elif data_file == "www/cache/instances.json":
+        all_regions = regions["main"].copy()
+        if detail_pages:
+            sitemap.extend(build_detail_pages_cache(instances, all_regions))
+    elif data_file == "www/opensearch/instances.json":
+        all_regions = regions["main"].copy()
+        if detail_pages:
+            sitemap.extend(build_detail_pages_opensearch(instances, all_regions))
+    elif data_file == "www/redshift/instances.json":
+        all_regions = regions["main"].copy()
+        if detail_pages:
+            sitemap.extend(build_detail_pages_redshift(instances, all_regions))
+
+    generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+    pricing_json, instance_azs_json = per_region_pricing(
+        instances, data_file, all_regions
+    )
 
     print("Rendering to %s..." % destination_file)
     os.makedirs(os.path.dirname(destination_file), exist_ok=True)
@@ -239,6 +275,7 @@ def render(data_file, template_file, destination_file, detail_pages=True):
             fh.write(
                 template.render(
                     instances=instances,
+                    regions=regions,
                     pricing_json=pricing_json,
                     generated_at=generated_at,
                     instance_azs_json=instance_azs_json,

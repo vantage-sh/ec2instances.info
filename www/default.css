@@ -179,8 +179,19 @@ body {
   background: #9c25c7 !important;
 }
 
+.dropdown-menu .active a .dropdown-region {
+  color: #fff !important;
+  background: #9c25c7 !important;
+}
+
 .dropdown-menu li > a:hover {
   background: #f9e6ff !important;
+  color: #303037 !important;
+}
+
+.dropdown-menu li > a:hover .dropdown-region {
+  background: #f9e6ff !important;
+  color: #303037 !important;
 }
 
 .dropdown-menu li > a {
@@ -190,7 +201,17 @@ body {
 
 .dropdown-menu {
   max-height: 400px;
+  min-width: 500px;
   overflow: auto;
+}
+
+.dropdown-search {
+  max-width: 460px;
+}
+
+.dropdown-region {
+  float: right;
+  color: #8a8a8e;
 }
 
 .dropdown-label {

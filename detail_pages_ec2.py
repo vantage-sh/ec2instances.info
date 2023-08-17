@@ -86,25 +86,22 @@ ec2_os = {
 }
 
 
-def unavailable_instances(itype, instance_details):
-    data_file = "meta/regions_aws.yaml"
-
+def unavailable_instances(instance_details, all_regions):
     denylist = []
-    with open(data_file, "r") as f:
-        aws_regions = yaml.safe_load(f)
-        instance_regions = instance_details["Pricing"].keys()
 
-        # If there is no price for a region and os, then it is unavailable
-        for r in aws_regions:
-            if r not in instance_regions:
-                # print("Found that {} is not available in {}".format(itype, r))
-                denylist.append([aws_regions[r], r, "All", "*"])
-            else:
-                instance_regions_oss = instance_details["Pricing"][r].keys()
-                for os in ec2_os.keys():
-                    if os not in instance_regions_oss:
-                        denylist.append([aws_regions[r], r, ec2_os[os], os])
-                        # print("Found that {} is not available in {} as {}".format(itype, r, os))
+    instance_regions = instance_details["Pricing"].keys()
+
+    # If there is no price for a region and os, then it is unavailable
+    for r in all_regions:
+        if r not in instance_regions:
+            # print("Found that {} is not available in {}".format(itype, r))
+            denylist.append([all_regions[r], r, "All", "*"])
+        else:
+            instance_regions_oss = instance_details["Pricing"][r].keys()
+            for os in ec2_os.keys():
+                if os not in instance_regions_oss:
+                    denylist.append([all_regions[r], r, ec2_os[os], os])
+                    # print("Found that {} is not available in {} as {}".format(itype, r, os))
     return denylist
 
 
@@ -297,6 +294,7 @@ def map_ec2_attributes(i, imap):
         "pricing",
         "storage",
         "vpc",
+        "regions",
     ]
 
     # Group attributes into categories which are then displayed in sections on the page
@@ -318,7 +316,7 @@ def map_ec2_attributes(i, imap):
     return instance_details
 
 
-def build_detail_pages_ec2(instances, destination_file):
+def build_detail_pages_ec2(instances, all_regions):
     subdir = os.path.join("www", "aws", "ec2")
 
     ifam, fam_lookup, variants = assemble_the_families(instances)
@@ -344,7 +342,7 @@ def build_detail_pages_ec2(instances, destination_file):
         instance_details["Storage"].extend(storage(i["storage"], imap))
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
-        denylist = unavailable_instances(instance_type, instance_details)
+        denylist = unavailable_instances(instance_details, all_regions)
         defaults = initial_prices(instance_details)
         idescription = description(instance_details, defaults)
 
@@ -359,6 +357,7 @@ def build_detail_pages_ec2(instances, destination_file):
                         unavailable=denylist,
                         defaults=defaults,
                         variants=variants[instance_type[0:2]],
+                        regions=all_regions,
                     )
                 )
                 sitemap.append(instance_page)

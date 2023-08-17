@@ -567,7 +567,7 @@ function change_region(region, called_on_init) {
       e = $(e);
       if (e.data('region') === region) {
         e.parent().addClass('active');
-        region_name = e.text();
+        region_name = e.find('span:first').text();
       } else {
         e.parent().removeClass('active');
       }
@@ -872,8 +872,11 @@ function on_data_table_initialized() {
   });
 
   $('#region-dropdown li').bind('click', function (e) {
-    var region = $(e.target).data('region');
-    change_region(region, false);
+    // don't change the region if the user is searching
+    if (!$(this).find('#dropdown-search').length > 0) {
+      var region = $(this).find('a.dropdown-item').attr('data-region');
+      change_region(region, false);
+    }
   });
 
   $('#reserved-term-dropdown li').bind('click', function (e) {
@@ -894,6 +897,25 @@ function on_data_table_initialized() {
 
   // apply classes to search box
   $('div.dataTables_filter input').addClass('form-control search');
+
+  $('#dropdown-search').on('keyup', function () {
+    var searchText = $(this).val().toLowerCase();
+
+    // check each dropdown item
+    $('.dropdown-menu li')
+      .has('.dropdown-item')
+      .each(function () {
+        var listItem = $(this);
+        var itemText = listItem.find('.dropdown-item span').text().toLowerCase();
+
+        // if the search text is found in the item, show the <li>, otherwise hide it
+        if (itemText.indexOf(searchText) > -1) {
+          listItem.show();
+        } else {
+          listItem.hide();
+        }
+      });
+  });
 }
 
 // sorting for colums with more complex data

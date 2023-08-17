@@ -28,3 +28,64 @@ us-west-1: US West (California)
 us-west-2: US West (Oregon)
 us-gov-west-1: AWS GovCloud (US-West)
 us-gov-east-1: AWS GovCloud (US-East)
+ap-south-1-ccu-1a: India (Kolkata)
+ap-south-1-del-1a: India (Delhi)
+eu-central-1-ham-1a: Germany (Hamburg)
+eu-central-1-waw-1a: Poland (Warsaw)
+us-west-2-den-1a: US West (Denver)
+us-west-2-las-1a: US West (Las Vegas)
+us-west-2-lax-1a: US West (Los Angeles)
+us-west-2-lax-1b: US West (Los Angeles)
+us-west-2-pdx-1a: US West (Portland)
+us-west-2-phx-1a: US West (Phoenix)
+us-west-2-sea-1a: US West (Seattle)
+eu-north-1-cph-1a: Denmark (Copenhagen)
+eu-north-1-hel-1a: Finland (Helsinki)
+ap-northeast-1-tpe-1a: Taiwan (Taipei)
+ap-southeast-1-bkk-1a: Thailand (Bangkok)
+ap-southeast-1-mnl-1a: Philippines (Manila)
+ap-southeast-2-akl-1a: New Zealand (Auckland)
+ap-southeast-2-per-1a: Australia (Perth)
+us-east-1-atl-1a: US East (Atlanta)
+us-east-1-bos-1a: US East (Boston)
+us-east-1-bue-1a: US East (Buenos Aires)
+us-east-1-chi-1a: US East (Chicago)
+us-east-1-dfw-1a: US East (Dallas)
+us-east-1-iah-1a: US East (Houston)
+us-east-1-lim-1a: Peru (Lima)
+us-east-1-mci-1a: US East (Kansas City)
+us-east-1-mia-1a: US East (Miami)
+us-east-1-msp-1a: US East (Minneapolis)
+us-east-1-nyc-1a: US East (New York)
+us-east-1-phl-1a: US East (Philadelphia)
+us-east-1-qro-1a: Mexico (Queretaro)
+us-east-1-scl-1a: Chile (Santiago)
+ca-central-1-wl1-yto-wlz-1: Toronto (Bell)
+eu-central-1-wl1-ber-wlz-1: Europe (Vodafone) - Berlin
+eu-central-1-wl1-dtm-wlz-1: Europe (Vodafone) - Dortmund
+eu-central-1-wl1-muc-wlz-1: Europe (Vodafone) - Munich
+us-west-2-wl1-den-wlz-1: US West (Verizon) - Denver
+us-west-2-wl1-las-wlz-1: US West (Verizon) - Las Vegas
+us-west-2-wl1-lax-wlz-1: US West (Verizon) - Los Angeles
+us-west-2-wl1-phx-wlz-1: US West (Verizon) - Phoenix
+us-west-2-wl1-sea-wlz-1: US West (Verizon) - Seattle
+us-west-2-wl1-sfo-wlz-1: US West (Verizon) - San Francisco
+eu-west-2-wl1-man-wlz-1: Europe (Vodafone) - Manchester
+eu-west-2-wl2-man-wlz-1: Europe (British Telecom) - Manchester
+ap-northeast-2-wl1-cjj-wlz-1: Asia Pacific (SKT) - Daejeon
+ap-northeast-2-wl1-sel-wlz-1: Asia Pacific (SKT) - Seoul
+ap-northeast-1-wl1-kix-wlz-1: Asia Pacific (KDDI) - Osaka
+ap-northeast-1-wl1-nrt-wlz-1: Asia Pacific (KDDI) - Tokyo
+us-east-1-wl1-atl-wlz-1: US East (Verizon) - Atlanta
+us-east-1-wl1-bna-wlz-1: US East (Verizon) - Nashville
+us-east-1-wl1-bos-wlz-1: US East (Verizon) - Boston
+us-east-1-wl1-chi-wlz-1: US East (Verizon) - Chicago
+us-east-1-wl1-clt-wlz-1: US East (Verizon) - Charlotte
+us-east-1-wl1-dfw-wlz-1: US East (Verizon) - Dallas
+us-east-1-wl1-dtw-wlz-1: US East (Verizon) - Detroit
+us-east-1-wl1-iah-wlz-1: US East (Verizon) - Houston
+us-east-1-wl1-mia-wlz-1: US East (Verizon) - Miami
+us-east-1-wl1-msp-wlz-1: US East (Verizon) - Minneapolis
+us-east-1-wl1-nyc-wlz-1: US East (Verizon) - New York City
+us-east-1-wl1-tpa-wlz-1: US East (Verizon) - Tampa
+us-east-1-wl1-was-wlz-1: US East (Verizon) - Washington DC

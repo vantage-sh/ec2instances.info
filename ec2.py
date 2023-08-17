@@ -10,9 +10,11 @@ import scrape
 import traceback
 
 
-def canonicalize_location(location):
+def canonicalize_location(location, from_pricing_api=True):
     """Ensure location aligns with one of the options returned by get_region_descriptions()"""
     # The pricing API returns locations with the old EU prefix
+    if not from_pricing_api:
+        return re.sub("^Europe", "EU", location)
     return re.sub("^EU", "Europe", location)
 
 
@@ -62,15 +64,16 @@ def translate_reserved_terms(term_attributes):
 
 # The pricing API requires human readable names for some reason
 def get_region_descriptions():
-    result = dict()
+    result = {}
     # Source: https://github.com/boto/botocore/blob/develop/botocore/data/endpoints.json
     endpoint_file = resource_filename("botocore", "data/endpoints.json")
     with open(endpoint_file, "r") as f:
         endpoints = json.load(f)
         for partition in endpoints["partitions"]:
             for region in partition["regions"]:
-                result[partition["regions"][region]["description"]] = region
-
+                # Skip secret and Chinese regions
+                if "us-iso" not in region and not region.startswith("cn-"):
+                    result[partition["regions"][region]["description"]] = region
     return result
 
 
@@ -164,12 +167,9 @@ def add_pricing(imap):
             instance_type = product_attributes.get("instanceType")
             location = canonicalize_location(product_attributes.get("location"))
 
-            # There may be a slight delay in updating botocore with new regional endpoints, skip and inform
+            # Add regions local zones and wavelength zones on the fly as we find them
             if location not in descriptions:
-                print(
-                    f"WARNING: Ignoring pricing - unknown location. instance={instance_type}, location={location}"
-                )
-                continue
+                descriptions[location] = product_attributes.get("regionCode")
 
             region = descriptions[location]
 
@@ -193,6 +193,7 @@ def add_pricing(imap):
             try:
                 inst = imap[instance_type]
                 inst.pricing.setdefault(region, {})
+                inst.regions[region] = location
                 inst.pricing[region].setdefault(platform, {})
                 inst.pricing[region][platform]["ondemand"] = get_ondemand_pricing(terms)
                 # Some instances don't offer reserved terms at all
@@ -254,13 +255,8 @@ def get_reserved_pricing(terms):
 
 def add_spot_pricing(imap):
     instance_types = list(imap.keys())
-    # get a list of all available regions across all instance types
-    regions = []
-    for instance_type in instance_types:
-        regions += [r for r in imap[instance_type].pricing.keys()]
-    # deduplicate list of regions
-    regions = list(dict.fromkeys(regions))
-    for region in regions:
+
+    for region in get_region_descriptions().values():
         try:
             # get all spot price data from a region
             ec2_client = boto3.client("ec2", region_name=region)
@@ -356,6 +352,8 @@ def parse_instance(instance_type, product_attributes, api_description):
     gpu = product_attributes.get("gpu")
     if gpu is not None:
         i.GPU = locale.atoi(gpu)
+    if "inf" in instance_type or "trn" in instance_type:
+        i.GPU = 1
 
     if api_description:
         if "FpgaInfo" in api_description:
@@ -422,3 +420,7 @@ def describe_instance_type_offerings(region_name="us-east-1", location_type="reg
             yield offering
     except botocore.exceptions.ClientError:
         pass
+
+
+if __name__ == "__main__":
+    get_region_descriptions()

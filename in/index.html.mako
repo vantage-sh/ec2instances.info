@@ -22,35 +22,39 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a class="dropdown-item" href="javascript:;" data-region='af-south-1'>Africa (Cape Town)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='ap-east-1'>Asia-Pacific (Hong Kong)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='ap-south-1'>Asia-Pacific (Mumbai)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='ap-south-2'>Asia-Pacific (Hyderabad)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='ap-northeast-3'>Asia Pacific (Osaka-Local)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='ap-northeast-2'>Asia-Pacific (Seoul)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='ap-southeast-1'>Asia-Pacific (Singapore)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='ap-southeast-2'>Asia-Pacific (Sydney)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='ap-southeast-3'>Asia-Pacific (Jakarta)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='ap-southeast-4'>Asia-Pacific (Melbourne)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='ap-northeast-1'>Asia-Pacific (Tokyo)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='ca-central-1'>Canada (Central)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='eu-central-1'>Europe (Frankfurt)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='eu-central-2'>Europe (Zurich)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='eu-west-1'>Europe (Ireland)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='eu-west-2'>Europe (London)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='eu-west-3'>Europe (Paris)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='eu-north-1'>Europe (Stockholm)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='eu-south-1'>Europe (Milan)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='eu-south-2'>Europe (Spain)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='me-south-1'>Middle East (Bahrain)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='me-central-1'>Middle East (UAE)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='sa-east-1'>South America (S&atilde;o Paulo)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='us-east-1'>US East (N. Virginia)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='us-east-2'>US East (Ohio)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='us-west-1'>US West (Northern California)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='us-west-2'>US West (Oregon)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='us-gov-west-1'>AWS GovCloud (US-West)</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-region='us-gov-east-1'>AWS GovCloud (US-East)</a></li>
+            <li>
+              <input type="text" id="dropdown-search" class="ms-2 mb-2 form-control dropdown-search" placeholder="Search" />
+            </li>
+            % for region, region_name in regions["main"].items():
+            <li>
+              <a class="dropdown-item" href="javascript:;" data-region='${region}'>
+                <span>${region_name}</span>
+                <span class="dropdown-region">${region}</span>
+              </a>
+            </li>
+            % endfor
+            <div class="ms-2 mb-2 mt-2">
+              <span><strong>Local Zones</strong></span>
+            </div>
+            % for region, region_name in regions["local_zone"].items():
+            <li>
+              <a class="dropdown-item" href="javascript:;" data-region='${region}'>
+                <span>${region_name}</span>
+                <span class="dropdown-region">${region}</span>
+              </a>
+            </li>
+            % endfor
+            <div class="ms-2 mb-2 mt-2">
+              <span><strong>Wavelength Zones</strong></span>
+            </div>
+            % for region, region_name in regions["wavelength"].items():
+            <li>
+              <a class="dropdown-item" href="javascript:;" data-region='${region}'>
+                <span>${region_name}</span>
+                <span class="dropdown-region">${region}</span>
+              </a>
+            </li>
+            % endfor
           </ul>
         </div>
 
