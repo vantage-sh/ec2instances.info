@@ -40,18 +40,14 @@ def description(id, defaults):
     )
 
 
-def unavailable_instances(itype, instance_details):
-    data_file = "meta/regions_aws.yaml"
-
+def unavailable_instances(instance_details, all_regions):
     denylist = []
-    with open(data_file, "r") as f:
-        aws_regions = yaml.safe_load(f)
-        instance_regions = instance_details["Pricing"].keys()
+    instance_regions = instance_details["Pricing"].keys()
 
-        # If there is no price for a region and os, then it is unavailable
-        for r in aws_regions:
-            if r not in instance_regions:
-                denylist.append([aws_regions[r], r, "All", "*"])
+    # If there is no price for a region and os, then it is unavailable
+    for r in all_regions:
+        if r not in instance_regions:
+            denylist.append([all_regions[r], r, "All", "*"])
 
     return denylist
 
@@ -140,6 +136,7 @@ def prices(pricing):
 def load_service_attributes():
     special_attrs = [
         "pricing",
+        "regions",
     ]
     data_file = "meta/service_attributes_redshift.csv"
 
@@ -215,6 +212,7 @@ def map_cache_attributes(i, imap):
     # Nested attributes in instances.json that we handle differently
     special_attributes = [
         "pricing",
+        "regions",
     ]
 
     instance_details = {}
@@ -245,7 +243,7 @@ def map_cache_attributes(i, imap):
     return instance_details
 
 
-def build_detail_pages_redshift(instances, destination_file):
+def build_detail_pages_redshift(instances, all_regions):
     subdir = os.path.join("www", "aws", "redshift")
 
     ifam, fam_lookup, variants = assemble_the_families(instances)
@@ -267,7 +265,7 @@ def build_detail_pages_redshift(instances, destination_file):
         instance_details["Pricing"] = prices(i["pricing"])
         fam = fam_lookup[instance_type]
         fam_members = ifam[fam]
-        denylist = unavailable_instances(instance_type, instance_details)
+        denylist = unavailable_instances(instance_details, all_regions)
         defaults = initial_prices(instance_details, instance_type)
         idescription = description(instance_details, defaults)
 
@@ -282,6 +280,7 @@ def build_detail_pages_redshift(instances, destination_file):
                         unavailable=denylist,
                         defaults=defaults,
                         variants=variants[instance_type[0:2]],
+                        regions=all_regions,
                     )
                 )
                 sitemap.append(instance_page)

@@ -214,17 +214,6 @@ def scrape(output_file, input_file=None):
             else:
                 region = regions[location]
 
-            # try:
-            #     region = regions[location]
-            # except KeyError as e:
-            #     if location == "Any":
-            #         region = "us-east-1"
-            #     else:
-            #         print(
-            #             f"WARNING: No region data for location={location}. Ignoring instance with sku={sku}, type={instance_type}"
-            #         )
-            #         continue
-
             # set the attributes in line with the ec2 index
             attributes["region"] = region
             attributes["memory"] = attributes["memory"].split(" ")[0]

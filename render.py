@@ -256,11 +256,11 @@ def render(data_file, template_file, destination_file, detail_pages=True):
     elif data_file == "www/opensearch/instances.json":
         all_regions = regions["main"].copy()
         if detail_pages:
-            sitemap.extend(build_detail_pages_opensearch(instances, destination_file))
+            sitemap.extend(build_detail_pages_opensearch(instances, all_regions))
     elif data_file == "www/redshift/instances.json":
         all_regions = regions["main"].copy()
         if detail_pages:
-            sitemap.extend(build_detail_pages_redshift(instances, destination_file))
+            sitemap.extend(build_detail_pages_redshift(instances, all_regions))
 
     generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     pricing_json, instance_azs_json = per_region_pricing(
@@ -300,9 +300,6 @@ if __name__ == "__main__":
             "www/cache/index.html",
         )
     )
-    import sys
-
-    sys.exit(0)
     sitemap.extend(
         render(
             "www/redshift/instances.json",

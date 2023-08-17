@@ -85,36 +85,13 @@
             <div class="d-flex flex-wrap mt-2">
               <div class="col-6 pe-2 mb-2">
                 <select class="form-select form-select-sm" id="region">
-                  <!-- TODO: Localize default option order -->
                   <option value='us-east-1'>US East (N. Virginia)</option>
-                  <option value='af-south-1'>Africa (Cape Town)</option>
-                  <option value='ap-east-1'>Asia-Pacific (Hong Kong)</option>
-                  <option value='ap-south-1'>Asia-Pacific (Mumbai)</option>
-                  <option value='ap-south-2'>Asia-Pacific (Hyderabad)</option>
-                  <option value='ap-northeast-3'>Asia-Pacific (Osaka)</option>
-                  <option value='ap-northeast-2'>Asia-Pacific (Seoul)</option>
-                  <option value='ap-southeast-1'>Asia-Pacific (Singapore)</option>
-                  <option value='ap-southeast-2'>Asia-Pacific (Sydney)</option>
-                  <option value='ap-southeast-3'>Asia-Pacific (Jakarta)</option>
-                  <option value='ap-southeast-4'>Asia-Pacific (Melbourne)</option>
-                  <option value='ap-northeast-1'>Asia-Pacific (Tokyo)</option>
-                  <option value='ca-central-1'>Canada (Central)</option>
-                  <option value='eu-central-1'>Europe (Frankfurt)</option>
-                  <option value='eu-central-2'>Europe (Zurich)</option>
-                  <option value='eu-west-1'>Europe (Ireland)</option>
-                  <option value='eu-west-2'>Europe (London)</option>
-                  <option value='eu-west-3'>Europe (Paris)</option>
-                  <option value='eu-north-1'>Europe (Stockholm)</option>
-                  <option value='eu-south-1'>Europe (Milan)</option>
-                  <option value='eu-south-2'>Europe (Spain)</option>
-                  <option value='me-south-1'>Middle East (Bahrain)</option>
-                  <option value='me-central-1'>Middle East (UAE)</option>
-                  <option value='sa-east-1'>South America (S&atilde;o Paulo)</option>
-                  <option value='us-east-2'>US East (Ohio)</option>
-                  <option value='us-west-1'>US West (California)</option>
-                  <option value='us-west-2'>US West (Oregon)</option>
-                  <option value='us-gov-west-1'>AWS GovCloud (US-West)</option>
-                  <option value='us-gov-east-1'>AWS GovCloud (US-East)</option>
+                  % for api_name, region in regions.items():
+                    % if api_name == 'us-east-1':
+                      <% continue %>
+                    % endif
+                    <option value='${api_name}'>${region}</option>
+                  % endfor
                 </select>
               </div>
               <div class="col-6 mb-2">
