@@ -74,7 +74,7 @@
         </div>
         <div class="d-flex align-items-center d-none d-xl-block">
           <img width="24" height="24" src="/kubernetes-icon.svg">
-          <a href="https://console.vantage.sh/signup" class="vantage">Rightsize <span class="fw-semibold">Kubernetes</span> clusters with Pod Efficiency Metrics -></a>
+          <a href="https://console.vantage.sh/signup" class="vantage"><span class="fw-semibold">Optimize Kubernetes</span> clusters with Pod Efficiency Metrics -></a>
         </div>
         <div class="d-flex">
           <div class="nav-buttons px-2 d-none d-xxl-block">

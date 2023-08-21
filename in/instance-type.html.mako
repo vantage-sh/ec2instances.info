@@ -38,7 +38,7 @@
         </div>
         <div class="d-flex align-items-center d-none d-xl-block">
           <img width="24" height="24" src="/kubernetes-icon.svg">
-          <a href="https://console.vantage.sh/signup" class="vantage">Rightsize <span class="fw-semibold">Kubernetes</span> clusters with Pod Efficiency Metrics -></a>
+          <a href="https://console.vantage.sh/signup" class="vantage"><span class="fw-semibold">Optimize Kubernetes</span> clusters with Pod Efficiency Metrics -></a>
         </div>
         <div class="nav-buttons">
           <a target="_blank" href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-1szz6puz7-zRuJ8J4OJIiBFlcTobYZXA" class="btn btn-purple btn-icon">
