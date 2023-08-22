@@ -2,6 +2,7 @@
 
 var g_app_initialized = false;
 var g_data_table = null;
+var state_loaded = false;
 var g_settings = {};
 var responsive_mode = false;
 
@@ -282,6 +283,7 @@ function init_data_table() {
       if (!g_settings.compare_on) {
         $('#fullsearch').val(data.search.search);
       }
+      state_loaded = true;
     },
 
     // Allow export to CSV: only visible columns and only current filtered data
@@ -775,6 +777,11 @@ function on_data_table_initialized() {
     }
   });
 
+  if (!state_loaded) {
+    // if we loaded saved state, e.g. compare or filter, we already called this
+    // if it's a fresh page load, we need to configure each row to be selected and highlighted
+    configure_highlighting();
+  }
   // these two calls handle if there's an initial comparison, loaded from the URL or local storage
   update_compare_button();
   update_visible_rows();
