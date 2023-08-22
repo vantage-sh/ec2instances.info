@@ -276,6 +276,7 @@ function init_data_table() {
           $('input', this).val(data.columns[col_index].search.search);
         });
       }
+      configure_highlighting();
 
       // handle where the user had a search saved locally
       if (!g_settings.compare_on) {
@@ -774,7 +775,9 @@ function on_data_table_initialized() {
     }
   });
 
-  configure_highlighting();
+  // these two calls handle if there's an initial comparison, loaded from the URL or local storage
+  update_compare_button();
+  update_visible_rows();
 
   // Allow row filtering by min-value match.
   $('[data-action=datafilter]').on('keyup', apply_min_values);
@@ -940,8 +943,8 @@ function load_settings() {
 }
 
 function configure_highlighting() {
-  var $compareBtn = $('.btn-compare'),
-    $rows = $('#data tbody tr');
+  var $compareBtn = $('.btn-compare');
+  var $rows = $('#data tbody tr');
 
   // Allow row highlighting by clicking.
   $rows.click(function (e) {
@@ -978,10 +981,6 @@ function configure_highlighting() {
     update_visible_rows();
     maybe_update_url();
   });
-
-  // these two calls handle if there's an initial comparison, loaded from the URL or local storage
-  update_compare_button();
-  update_visible_rows();
 }
 
 function update_visible_rows() {
