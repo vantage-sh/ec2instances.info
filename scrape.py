@@ -1009,6 +1009,13 @@ def add_gpu_info(instances):
             "gpu_count": 12,
             "gpu_memory": 384,
         },
+        "p5.48xlarge": {
+            "gpu_model": "NVIDIA H100",
+            "compute_capability": 9.0,
+            "gpu_count": 8,
+            "cuda_cores": 18432,
+            "gpu_memory": 640,
+        },
     }
     for inst in instances:
         if inst.GPU == 0:
