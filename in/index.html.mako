@@ -163,6 +163,7 @@
     <table cellspacing="0" style="border-bottom: 0 !important; margin-bottom: 0 !important;" id="data" width="100%" class="table">
       <thead>
         <tr>
+          <!-- TODO: only render the default columns here. Use the column().nodes() API to set the header name and class -->
           <th class="name all" data-priority="1"><div class="d-none d-md-block">Name</div></th>
           <th class="apiname" data-priority="1">API Name</th>
           <th class="memory">Instance Memory</th>
@@ -282,6 +283,8 @@
 
       <tbody>
         % for inst in instances:
+          <!-- TODO: convert most of this logic into javascript. Use g_data_table.column(i).visible(true).draw() -->
+          <!-- TODO: alternatively, we could create a specifications.json file where this logic can still be done in python -->
           <tr class='instance' id="${inst['instance_type']}">
             <td class="name all"><div class="d-none d-md-block">${inst['pretty_name']}</div></td>
             <td class="apiname"><a href="/aws/ec2/${inst['instance_type']}">${inst['instance_type']}</a></td>
