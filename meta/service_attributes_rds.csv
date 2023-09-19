@@ -21,6 +21,7 @@ instanceType,Instance Type,Not Shown,0,,,db.t4g.xlarge
 instanceFamily,Family,Not Shown,0,,,General purpose
 ECU_per_vcpu,,Not Shown,0,,,unknown
 storage,Storage,Not Shown,1,,,EBS Only
+engineMediaType,Storage,Not Shown,1,,,EBS Only
 pricing,Pricing,Pricing,0,,,
 clockSpeed,Clock Speed (GHz),Compute,5,,[+-]?([0-9]*[.])?[0-9]+,
 processorFeatures,Processor Features,Compute,6,,,
