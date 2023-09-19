@@ -21,7 +21,8 @@ resource "aws_iam_policy" "ec2_pricing" {
         Action = [
           "ec2:DescribeInstanceTypes",
           "ec2:DescribeRegions",
-          "pricing:*"
+          "pricing:*",
+          "elasticache:DescribeEngineDefaultParameters"
         ],
         Resource = "*"
       }
