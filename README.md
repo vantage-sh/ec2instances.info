@@ -37,7 +37,12 @@ Ensure that your IAM user has at least the following permissions:
   "Statement": [
     {
       "Effect": "Allow",
-      "Action": ["ec2:DescribeInstanceTypes", "ec2:DescribeRegions", "pricing:*", "elasticache:DescribeEngineDefaultParameters"],
+      "Action": [
+        "ec2:DescribeInstanceTypes",
+        "ec2:DescribeRegions",
+        "pricing:*",
+        "elasticache:DescribeEngineDefaultParameters"
+      ],
       "Resource": "*"
     }
   ]
