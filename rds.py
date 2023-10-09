@@ -229,7 +229,7 @@ def scrape(output_file, input_file=None):
 
             if attributes.get("engineCode", None) == None:
                 print(
-                    f"WARNING: No Engine Code found. Ignoring instance with sku={sku}"
+                    f"WARNING: No Engine Code found. Ignoring instance with sku={sku}, instance={instance_type}"
                 )
                 continue
 
@@ -418,6 +418,11 @@ def scrape(output_file, input_file=None):
                             / (365 * 3)
                             / 24
                         ) + prices["reserved"]["yrTerm3.allUpfront-hrs"]
+
+                    if "yrTerm1.allUpfront-quantity" in prices["reserved"]:
+                        reserved_prices["yrTerm1Standard.allUpfront"] = (
+                            prices["reserved"]["yrTerm1.allUpfront-quantity"] / 365 / 24
+                        ) + prices["reserved"]["yrTerm1.allUpfront-hrs"]
 
                     if "yrTerm1.noUpfront-hrs" in prices["reserved"]:
                         reserved_prices["yrTerm1Standard.noUpfront"] = prices[
