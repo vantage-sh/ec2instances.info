@@ -872,7 +872,7 @@ function on_data_table_initialized() {
     var searchText = $(this).val().toLowerCase();
 
     // check each dropdown item
-    $('.dropdown-menu li')
+    $('.dropdown-menu.region-list-dropdown li')
       .has('.dropdown-item')
       .each(function () {
         var listItem = $(this);
