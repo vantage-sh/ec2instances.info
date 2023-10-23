@@ -24,7 +24,7 @@
             <span class="text">US East (N. Virginia)</span>
             <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu region-list-dropdown" role="menu">
             <li>
               <input type="text" id="dropdown-search" class="ms-2 mb-2 form-control dropdown-search" placeholder="Search" />
             </li>
