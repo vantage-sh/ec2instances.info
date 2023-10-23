@@ -68,6 +68,11 @@
                   OpenSearch 
                 </a>
               </li>
+              <li role="presentation" class="${'active' if self.attr.active_ == 'sagemaker' else ''}">
+                <a class="d-flex align-items-center" href="/sagemaker/">
+                  SageMaker
+                </a>
+              </li>
             </ul>
           </div>
         </div>

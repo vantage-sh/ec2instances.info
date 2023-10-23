@@ -14,6 +14,7 @@ from detail_pages_rds import build_detail_pages_rds
 from detail_pages_cache import build_detail_pages_cache
 from detail_pages_opensearch import build_detail_pages_opensearch
 from detail_pages_redshift import build_detail_pages_redshift
+from detail_pages_sagemaker import build_detail_pages_sagemaker
 
 
 def network_sort(inst):
@@ -261,6 +262,10 @@ def render(data_file, template_file, destination_file, detail_pages=True):
         all_regions = regions["main"].copy()
         if detail_pages:
             sitemap.extend(build_detail_pages_redshift(instances, all_regions))
+    elif data_file == "www/sagemaker/instances.json":
+        all_regions = regions["main"].copy()
+        if detail_pages:
+            sitemap.extend(build_detail_pages_sagemaker(instances, all_regions))
 
     generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     pricing_json, instance_azs_json = per_region_pricing(
@@ -312,6 +317,13 @@ if __name__ == "__main__":
             "www/opensearch/instances.json",
             "in/opensearch.html.mako",
             "www/opensearch/index.html",
+        )
+    )
+    sitemap.extend(
+        render(
+            "www/sagemaker/instances.json",
+            "in/sagemaker.html.mako",
+            "www/sagemaker/index.html",
         )
     )
     sitemap.append(about_page())
