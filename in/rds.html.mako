@@ -201,7 +201,9 @@
           <td class="storage">
             <% storage = inst['storage'] %>
             % if storage == 'EBS Only':
-            <span sort="0">0 GiB (EBS only)</span>
+            <span sort="1">0 GiB (EBS only)</span>
+            % elif 'Aurora' in inst['storage']:
+            <span sort="0">Aurora I/O Optimized</span>
             % else:
             <% products = [int(s) for s in storage.split() if s.isdigit()] %>
             <span sort="${products[0]*products[1]}">${inst['storage']}</span>
