@@ -19,7 +19,7 @@ rds_engine_mapping = {
     "6": "Oracle Standard One",
     "9": "SQL Server",
     "10": "SQL Server Express",
-    "11": "SQL Server Standard",
+    "11": "SQL Server Web",
     "12": "SQL Server Standard",
     "14": "PostgreSQL",
     "15": "SQL Server Enterprise",
@@ -36,6 +36,7 @@ rds_engine_mapping = {
     "232": "SQL Server Web (Outpost On-Prem)",
     "405": "SQL Server Standard BYOM",
     "406": "SQL Server Enterprise BYOM",
+    "407": "SQL Server Developer",
     "410": "Oracle Enterprise",
 }
 
