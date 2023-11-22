@@ -83,7 +83,10 @@ def scrape(output_file, input_file=None):
 
             # map the region
             location = ec2.canonicalize_location(attributes["location"])
-            instance_type = attributes["instanceType"]
+            print(attributes)
+            instance_type = attributes["instanceType"].split("-")[0]
+            if instance_type == "NA":
+                instance_type = attributes["usagetype"].split(":")[1]
 
             if location == "Any":
                 region = "us-east-1"
@@ -112,9 +115,8 @@ def scrape(output_file, input_file=None):
             attributes["network_performance"] = attributes.get(
                 "networkPerformance", None
             )
-            attributes["family"] = attributes["instanceFamily"]
             attributes["instance_type"] = instance_type
-            attributes["component"] = attributes["component"]
+            attributes["component"] = attributes["platoinstancetype"]
             attributes["pricing"] = {}
             attributes["pricing"][region] = {}
 
@@ -178,118 +180,6 @@ def scrape(output_file, input_file=None):
                         location = l
                         break
                 instances[instance["instance_type"]]["regions"][instance["region"]] = l
-
-    reserved_mapping = {
-        "1yr All Upfront": "yrTerm1.allUpfront",
-        "1yr Partial Upfront": "yrTerm1.partialUpfront",
-        "1yr No Upfront": "yrTerm1.noUpfront",
-        "1yr Light Utilization": "yrTerm1.lightUtilization",
-        "1yr Medium Utilization": "yrTerm1.mediumUtilization",
-        "1yr Heavy Utilization": "yrTerm1.heavyUtilization",
-        "3yr All Upfront": "yrTerm3.allUpfront",
-        "3yr Partial Upfront": "yrTerm3.partialUpfront",
-        "3yr No Upfront": "yrTerm3.noUpfront",
-        "3yr Light Utilization": "yrTerm3.lightUtilization",
-        "3yr Medium Utilization": "yrTerm3.mediumUtilization",
-        "3yr Heavy Utilization": "yrTerm3.heavyUtilization",
-    }
-
-    # Parse reserved pricing
-    for sku, offers in six.iteritems(data["terms"]["Reserved"]):
-        for code, offer in six.iteritems(offers):
-            for key, dimension in six.iteritems(offer["priceDimensions"]):
-                instance = ml_instances.get(sku)
-                if not instance:
-                    # print(f"WARNING: Received reserved pricing info for unknown sku={sku}")
-                    continue
-
-                region = instance["region"]
-                instance_type = instance["instance_type"]
-                component = instance["component"]
-
-                # create a regional hash
-                if region not in instance["pricing"]:
-                    instance["pricing"][region] = {}
-
-                if component not in instance["pricing"][region]:
-                    instance["pricing"][region][instance["component"]] = {}
-
-                # create a reserved hash
-                if (
-                    "reserved"
-                    not in instances[instance_type]["pricing"][region][component]
-                ):
-                    instances[instance_type]["pricing"][region][component][
-                        "reserved"
-                    ] = {}
-
-                reserved_type = f"%s %s" % (
-                    offer["termAttributes"]["LeaseContractLength"],
-                    offer["termAttributes"]["PurchaseOption"],
-                )
-
-                instances[instance_type]["pricing"][region][component]["reserved"][
-                    "%s-%s"
-                    % (reserved_mapping[reserved_type], dimension["unit"].lower())
-                ] = float(dimension["pricePerUnit"]["USD"])
-
-    # Calculate all reserved effective pricings (upfront hourly + hourly price)
-    # Since Light, Medium and Heavy utilization are from previous generations and are not available for choosing
-    # anymore in AWS console, we are not calculating it
-    for instance_type, instance in six.iteritems(instances):
-        for region, pricing in six.iteritems(instance["pricing"]):
-            for engine, prices in six.iteritems(pricing):
-                if "reserved" not in prices:
-                    continue
-                try:
-                    # no multi-az here
-                    reserved_prices = {}
-
-                    if "yrTerm3.partialUpfront-quantity" in prices["reserved"]:
-                        reserved_prices["yrTerm3Standard.partialUpfront"] = (
-                            prices["reserved"]["yrTerm3.partialUpfront-quantity"]
-                            / (365 * 3)
-                            / 24
-                        ) + prices["reserved"]["yrTerm3.partialUpfront-hrs"]
-
-                    if "yrTerm1.partialUpfront-quantity" in prices["reserved"]:
-                        reserved_prices["yrTerm1Standard.partialUpfront"] = (
-                            prices["reserved"]["yrTerm1.partialUpfront-quantity"]
-                            / 365
-                            / 24
-                        ) + prices["reserved"]["yrTerm1.partialUpfront-hrs"]
-
-                    if "yrTerm3.allUpfront-quantity" in prices["reserved"]:
-                        reserved_prices["yrTerm3Standard.allUpfront"] = (
-                            prices["reserved"]["yrTerm3.allUpfront-quantity"]
-                            / (365 * 3)
-                            / 24
-                        ) + prices["reserved"]["yrTerm3.allUpfront-hrs"]
-
-                    if "yrTerm1.allUpfront-quantity" in prices:
-                        reserved_prices["yrTerm1Standard.allUpfront"] = (
-                            prices["yrTerm1.allUpfront-quantity"] / 365 / 24
-                        ) + prices["yrTerm1.allUpfront-hrs"]
-
-                    if "yrTerm1.noUpfront-hrs" in prices["reserved"]:
-                        reserved_prices["yrTerm1Standard.noUpfront"] = prices[
-                            "reserved"
-                        ]["yrTerm1.noUpfront-hrs"]
-
-                    if "yrTerm3.noUpfront-hrs" in prices["reserved"]:
-                        reserved_prices["yrTerm3Standard.noUpfront"] = prices[
-                            "reserved"
-                        ]["yrTerm3.noUpfront-hrs"]
-
-                    instances[instance_type]["pricing"][region][engine][
-                        "reserved"
-                    ] = reserved_prices
-                except Exception as e:
-                    print(
-                        "ERROR: Trouble generating SageMaker reserved price for {}: {!r}".format(
-                            instance_type, e
-                        )
-                    )
 
     add_pretty_names(instances)
 
