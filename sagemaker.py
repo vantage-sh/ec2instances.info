@@ -83,7 +83,6 @@ def scrape(output_file, input_file=None):
 
             # map the region
             location = ec2.canonicalize_location(attributes["location"])
-            print(attributes)
             instance_type = attributes["instanceType"].split("-")[0]
             if instance_type == "NA":
                 instance_type = attributes["usagetype"].split(":")[1]
@@ -111,12 +110,32 @@ def scrape(output_file, input_file=None):
 
             # set the attributes in line with the ec2 index
             attributes["region"] = region
-            attributes["memory"] = attributes["memory"].split(" ")[0]
+            attributes["vCPU"] = attributes["vCpu"]
+            attributes["physical_processor"] = attributes["physicalCpu"]
+            attributes["GPU"] = attributes["physicalGpu"]
+            attributes["GPU_memory"] = attributes["gpuMemory"]
+            if attributes["GPU_memory"] == "N/A":
+                attributes["GPU_memory"] = 0
+            elif "HBM2e" in attributes["GPU_memory"]:
+                attributes["GPU_memory"] = int(attributes["GPU_memory"].split(" ")[0])
+            else:
+                attributes["GPU_memory"] = int(attributes["GPU_memory"])
+            attributes["arch"] = attributes.get("processorArchitecture", None)
+            attributes["memory"] = float(attributes["memory"].split(" ")[0])
+            attributes["clock_speed_ghz"] = attributes.get("clockSpeed", "N/A")
             attributes["network_performance"] = attributes.get(
                 "networkPerformance", None
             )
             attributes["instance_type"] = instance_type
             attributes["component"] = attributes["platoinstancetype"]
+            if "computeType" in attributes:
+                # some skus don't have this. Unclear why
+                attributes["family"] = attributes["computeType"]
+            if "currentGeneration" in attributes:
+                if attributes["currentGeneration"] == "yes":
+                    attributes["generation"] = "current"
+                else:
+                    attributes["generation"] = "previous"
             attributes["pricing"] = {}
             attributes["pricing"][region] = {}
 
@@ -128,10 +147,28 @@ def scrape(output_file, input_file=None):
                     attributes.copy()
                 )  # make copy so we can keep these attributes with the sku
                 new_attributes.pop("location", None)
+                new_attributes.pop("regionCode", None)
+                new_attributes.pop("vCpu", None)
                 new_attributes.pop("locationType", None)
-                new_attributes.pop("operation", None)
                 new_attributes.pop("region", None)
+                new_attributes.pop("networkPerformance", None)
+                new_attributes.pop("processorArchitecture", None)
+                new_attributes.pop("servicename", None)
+                new_attributes.pop("servicecode", None)
                 new_attributes.pop("usagetype", None)
+                new_attributes.pop("instanceType", None)
+                new_attributes.pop("physicalCpu", None)
+                new_attributes.pop("physicalGpu", None)
+                new_attributes.pop("clockSpeed", None)
+                new_attributes.pop("computeType", None)
+                new_attributes.pop("gpu", None)
+                new_attributes.pop("gpuMemory", None)
+                new_attributes.pop("platoinstancetype", None)
+                new_attributes.pop("platoinstancename", None)
+                new_attributes.pop("currentGeneration", None)
+                new_attributes.pop("operation", None)
+                new_attributes.pop("processing", None)
+
                 new_attributes["pricing"] = attributes["pricing"]
                 new_attributes["regions"] = {}
 
@@ -187,6 +224,68 @@ def scrape(output_file, input_file=None):
     encoder.FLOAT_REPR = lambda o: format(o, ".5f")
     with open(output_file, "w+") as outfile:
         json.dump(list(instances.values()), outfile, indent=1)
+
+
+def parse_savings_plans():
+    pass
+
+    # download this json file
+    # /savingsPlan/v1.0/aws/AWSMachineLearningSavingsPlans/current/region_index.json
+
+    # Iterate through all regions and download the json file at versionUrl
+    # "regions" : [ {
+    #   "regionCode" : "af-south-1",
+    #   "versionUrl" : "/savingsPlan/v1.0/aws/AWSMachineLearningSavingsPlans/20231027160516/af-south-1/index.json"
+    # }, {
+
+    # parse the details of the savings plan
+    # {
+    #   "sku": "3YPXFW2FJXS3D9VM",
+    #   "productFamily": "SageMakerSavingsPlans",
+    #   "serviceCode": "MachineLearningSavingsPlans",
+    #   "usageType": "SageMakerSP:1yrPartialUpfront",
+    #   "operation": "",
+    #   "attributes": {
+    #     "purchaseOption": "Partial Upfront",
+    #     "productFamily": "SageMakerSavingsPlans",
+    #     "serviceCode": "MachineLearningSavingsPlans",
+    #     "granularity": "hourly",
+    #     "locationType": "AWS Region",
+    #     "purchaseTerm": "1yr",
+    #     "location": "Any",
+    #     "detail": "1yrPartialUpfront",
+    #     "usageType": "SageMakerSP:1yrPartialUpfront"
+    #   }
+    # },
+
+    # parse through each SP for each instance and line up the discount with the instance
+    # "terms": {
+    #   "savingsPlan": [
+    #     {
+    #       "sku": "3YPXFW2FJXS3D9VM",
+    #       "description": "1 year Partial Upfront SageMaker Savings Plan",
+    #       "effectiveDate": "2023-10-27T16:00:53Z",
+    #       "leaseContractLength": {
+    #         "duration": 1,
+    #         "unit": "year"
+    #       },
+    #       "rates": [
+    #         {
+    #           "discountedSku": "25TC687A4JSSSY7E",
+    #           "discountedUsageType": "USE1-Train:ml.m4.16xlarge",
+    #           "discountedOperation": "RunInstance",
+    #           "discountedServiceCode": "AmazonSageMaker",
+    #           "rateCode": "3YPXFW2FJXS3D9VM.25TC687A4JSSSY7E",
+    #           "unit": "Hrs",
+    #           "discountedRate": {
+    #             "price": "2.60544",
+    #             "currency": "USD"
+    #           }
+    #         },
+
+
+def add_spot_pricing():
+    pass
 
 
 if __name__ == "__main__":
