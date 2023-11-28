@@ -28,6 +28,8 @@ rds_engine_mapping = {
     "19": "Oracle Standard Two BYOL",
     "20": "Oracle Standard Two",
     "21": "Aurora Postgres & MySQL",
+    "28": "IMB Db2 Standard",
+    "29": "IMB Db2 Advanced",
     "211": "Aurora I/O Optimized",
     "210": "MySQL (Outpost On-Prem)",
     "220": "PostgreSQL (Outpost On-Prem)",
@@ -172,7 +174,7 @@ def prices(pricing):
         display_prices[region] = {}
 
         for os, _p in p.items():
-            if len(os) > 3:
+            if len(os) > 3 or os == "Db2":
                 # RDS ONLY: engines are numbers but some are words. We can skip the words
                 continue
 
