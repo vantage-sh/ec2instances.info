@@ -61,6 +61,24 @@ def add_pretty_names(instances):
         i["pretty_name"] = " ".join([b for b in bits if b])
 
 
+service_pretty_name_map = {
+    "Processing": "Processing",
+    "Training": "Training",
+    "Hosting": "Hosting",
+    "Notebook": "Notebook Instances",
+    "AsyncInf": "Asynchronous Inference",
+    "BatchTransform": "Batch Transform",
+    "RStudio:RSession": "RStudio",
+    "RStudio:RServer": "RStudio",
+    "RStudio:RSessionGateway": "RStudio",
+    "Studio-Notebook": "Studio Notebooks",
+    "TensorBoard": "TensorBoard",
+    "Processing_DW": "Data Wrangler Processing",
+    "Studio": "Data Wrangler Interactive",
+    "SpotTraining": "Spot Training",
+}
+
+
 def scrape(output_file, input_file=None):
     # if an argument is given, use that as the path for the json file
     if input_file:
@@ -127,7 +145,15 @@ def scrape(output_file, input_file=None):
                 "networkPerformance", None
             )
             attributes["instance_type"] = instance_type
-            attributes["component"] = attributes["platoinstancetype"]
+            if attributes["platoinstancetype"] == "Processing_Geo":
+                # https://aws.amazon.com/sagemaker/geospatial/pricing/ is only availble in Oregon
+                # and is simply an additional charge on top of instance usage
+                continue
+            elif "Free" in attributes["platoinstancetype"]:
+                continue
+            attributes["component"] = service_pretty_name_map[
+                attributes["platoinstancetype"]
+            ]
             if "computeType" in attributes:
                 # some skus don't have this. Unclear why
                 attributes["family"] = attributes["computeType"]
@@ -161,8 +187,6 @@ def scrape(output_file, input_file=None):
                 new_attributes.pop("physicalGpu", None)
                 new_attributes.pop("clockSpeed", None)
                 new_attributes.pop("computeType", None)
-                new_attributes.pop("gpu", None)
-                new_attributes.pop("gpuMemory", None)
                 new_attributes.pop("platoinstancetype", None)
                 new_attributes.pop("platoinstancename", None)
                 new_attributes.pop("currentGeneration", None)
