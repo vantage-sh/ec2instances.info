@@ -76,6 +76,8 @@ service_pretty_name_map = {
     "Processing_DW": "Data Wrangler Processing",
     "Studio": "Data Wrangler Interactive",
     "SpotTraining": "Spot Training",
+    "Cluster": "HyperPod",
+    "Cluster-Reserved": "HyperPod",
 }
 
 
@@ -130,11 +132,14 @@ def scrape(output_file, input_file=None):
             attributes["region"] = region
             attributes["vCPU"] = attributes["vCpu"]
             attributes["physical_processor"] = attributes["physicalCpu"]
-            attributes["GPU"] = attributes["physicalGpu"]
+            if attributes["physicalGpu"] == "N/A":
+                attributes["GPU"] = 0
+            else:
+                attributes["GPU"] = attributes["physicalGpu"]
             attributes["GPU_memory"] = attributes["gpuMemory"]
             if attributes["GPU_memory"] == "N/A":
                 attributes["GPU_memory"] = 0
-            elif "HBM2e" in attributes["GPU_memory"]:
+            elif "hbm" in attributes["GPU_memory"].lower():
                 attributes["GPU_memory"] = int(attributes["GPU_memory"].split(" ")[0])
             else:
                 attributes["GPU_memory"] = int(attributes["GPU_memory"])
@@ -187,6 +192,8 @@ def scrape(output_file, input_file=None):
                 new_attributes.pop("physicalGpu", None)
                 new_attributes.pop("clockSpeed", None)
                 new_attributes.pop("computeType", None)
+                new_attributes.pop("gpu", None)
+                new_attributes.pop("gpuMemory", None)
                 new_attributes.pop("platoinstancetype", None)
                 new_attributes.pop("platoinstancename", None)
                 new_attributes.pop("currentGeneration", None)
@@ -197,6 +204,14 @@ def scrape(output_file, input_file=None):
                 new_attributes["regions"] = {}
 
                 instances[instance_type] = new_attributes
+            else:
+                # hardware details are inconsistent between some SKUs
+                if attributes["vCPU"] != "N/A":
+                    instances[instance_type]["vCPU"] = attributes["vCPU"]
+                if attributes["GPU"] != 0:
+                    instances[instance_type]["GPU"] = attributes["GPU"]
+                if attributes["GPU_memory"] != "N/A":
+                    instances[instance_type]["GPU_memory"] = attributes["GPU_memory"]
 
     # Parse ondemand pricing
     for sku, offers in six.iteritems(data["terms"]["OnDemand"]):
