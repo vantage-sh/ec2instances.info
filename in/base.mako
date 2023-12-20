@@ -131,7 +131,7 @@
               </div>
             </div>
             <div class="col-4 col-md-3 right linkto pull-right">
-              <span><a target="_blank" href="https://vantage.sh/events/reinvent-2023-vantage">re:Invent 2023</a></span>
+              <span>By <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
             </div>
           </div>
       </div>
