@@ -282,20 +282,43 @@ def scrape(output_file, input_file=None):
 
 
 def parse_savings_plans():
+    """
+    The savings plans pricing looks like this, after we get the versionUrl from 
+    the region_index.json file. We iterate through these, matching 'discountedUsageType'
+    with the temporary 'usage' value we added to the instance data structure.
+
+    "terms": {
+        "savingsPlan": [
+            {
+                "sku": "3YPXFW2FJXS3D9VM",
+                "description": "1 year Partial Upfront SageMaker Savings Plan",
+                "effectiveDate": "2023-12-06T00:26:52Z",
+                "leaseContractLength": {
+                    "duration": 1,
+                    "unit": "year"
+                },
+                "rates": [
+                    {
+                        "discountedSku": "28EWXKH3XN6XHPZ2",
+                        "discountedUsageType": "AFS1-Studio:KernelGateway-ml.r5.24xlarge",
+                        "discountedOperation": "RunInstance",
+                        "discountedServiceCode": "AmazonSageMaker",
+                        "rateCode": "3YPXFW2FJXS3D9VM.28EWXKH3XN6XHPZ2",
+                        "unit": "Hrs",
+                        "discountedRate": {
+                            "price": "6.6768",
+                            "currency": "USD"
+                        }
+                    },
+
+    """
     with open("sagemaker.pickle", "rb") as file:
         instances = pickle.load(file)
 
-    # download this json file
-    # /savingsPlan/v1.0/aws/AWSMachineLearningSavingsPlans/current/region_index.json
     price_index = "https://pricing.us-east-1.amazonaws.com/savingsPlan/v1.0/aws/AWSMachineLearningSavingsPlans/current/region_index.json"
     index = requests.get(price_index)
     data = index.json()
 
-    # Iterate through all regions and download the json file at versionUrl
-    # "regions" : [ {
-    #   "regionCode" : "af-south-1",
-    #   "versionUrl" : "/savingsPlan/v1.0/aws/AWSMachineLearningSavingsPlans/20231027160516/af-south-1/index.json"
-    # }, {
     for region in data["regions"]:
         print(region["regionCode"])
         print(region["versionUrl"])
@@ -314,7 +337,7 @@ def parse_savings_plans():
                 if not match:
                     print(
                         "ERROR: Could not find instance type in {}".format(
-                            rate["discountedSku"]
+                            rate["rateCode"]
                         )
                     )
                 this_instance = match.group()
@@ -323,9 +346,6 @@ def parse_savings_plans():
                         for region, components in instances[i]["pricing"].items():
                             for component, value in components.items():
                                 if rate["discountedUsageType"] == value["usage"]:
-                                    # print("Found savings plan")
-                                    # print(value["usage"])
-                                    # print(rate["discountedUsageType"])
                                     if (
                                         not "reserved"
                                         in instances[i]["pricing"][region][component]
@@ -337,10 +357,6 @@ def parse_savings_plans():
                                         instances[i]["pricing"][region][component][
                                             "reserved"
                                         ][term] = float(rate["discountedRate"]["price"])
-        
-                # print(this_instance)
-        #     break
-        # break
 
     # clean up 'usage' intermediate value
     for i in instances:
@@ -353,51 +369,6 @@ def parse_savings_plans():
     encoder.FLOAT_REPR = lambda o: format(o, ".5f")
     with open(output_file, "w+") as outfile:
         json.dump(list(instances.values()), outfile, indent=1)
-
-    # parse the details of the savings plan
-    # {
-    #   "sku": "3YPXFW2FJXS3D9VM",
-    #   "productFamily": "SageMakerSavingsPlans",
-    #   "serviceCode": "MachineLearningSavingsPlans",
-    #   "usageType": "SageMakerSP:1yrPartialUpfront",
-    #   "operation": "",
-    #   "attributes": {
-    #     "purchaseOption": "Partial Upfront",
-    #     "productFamily": "SageMakerSavingsPlans",
-    #     "serviceCode": "MachineLearningSavingsPlans",
-    #     "granularity": "hourly",
-    #     "locationType": "AWS Region",
-    #     "purchaseTerm": "1yr",
-    #     "location": "Any",
-    #     "detail": "1yrPartialUpfront",
-    #     "usageType": "SageMakerSP:1yrPartialUpfront"
-    #   }
-    # },
-
-    # parse through each SP for each instance and line up the discount with the instance
-    # "terms": {
-    #   "savingsPlan": [
-    #     {
-    #       "sku": "3YPXFW2FJXS3D9VM",
-    #       "description": "1 year Partial Upfront SageMaker Savings Plan",
-    #       "effectiveDate": "2023-10-27T16:00:53Z",
-    #       "leaseContractLength": {
-    #         "duration": 1,
-    #         "unit": "year"
-    #       },
-    #       "rates": [
-    #         {
-    #           "discountedSku": "25TC687A4JSSSY7E",
-    #           "discountedUsageType": "USE1-Train:ml.m4.16xlarge",
-    #           "discountedOperation": "RunInstance",
-    #           "discountedServiceCode": "AmazonSageMaker",
-    #           "rateCode": "3YPXFW2FJXS3D9VM.25TC687A4JSSSY7E",
-    #           "unit": "Hrs",
-    #           "discountedRate": {
-    #             "price": "2.60544",
-    #             "currency": "USD"
-    #           }
-    #         },
 
 
 def add_spot_pricing():
