@@ -6,6 +6,8 @@ import sys
 import botocore
 import botocore.exceptions
 import boto3
+import pickle
+import re
 
 import six
 from tqdm import tqdm
@@ -78,6 +80,8 @@ service_pretty_name_map = {
     "SpotTraining": "Spot Training",
     "Cluster": "HyperPod",
     "Cluster-Reserved": "HyperPod",
+    "Studio-JupyterLab": "JupyterLab",
+    "studio-codeeditor": "Code Editor",
 }
 
 
@@ -245,7 +249,8 @@ def scrape(output_file, input_file=None):
                     instances[instance_type]["pricing"][region] = {}
 
                 instances[instance_type]["pricing"][region][component] = {
-                    "ondemand": float(dimension["pricePerUnit"]["USD"])
+                    "ondemand": float(dimension["pricePerUnit"]["USD"]),
+                    "usage": instance["usagetype"],
                 }
 
                 # build the list of regions where each instance is available
@@ -258,6 +263,8 @@ def scrape(output_file, input_file=None):
                 instances[instance["instance_type"]]["regions"][instance["region"]] = l
 
     add_pretty_names(instances)
+    with open("sagemaker.pickle", "wb") as file:
+        pickle.dump(instances, file)
 
     # write output to file
     encoder.FLOAT_REPR = lambda o: format(o, ".5f")
@@ -266,16 +273,50 @@ def scrape(output_file, input_file=None):
 
 
 def parse_savings_plans():
-    pass
+    with open("sagemaker.pickle", "rb") as file:
+        instances = pickle.load(file)
 
     # download this json file
     # /savingsPlan/v1.0/aws/AWSMachineLearningSavingsPlans/current/region_index.json
+    price_index = "https://pricing.us-east-1.amazonaws.com/savingsPlan/v1.0/aws/AWSMachineLearningSavingsPlans/current/region_index.json"
+    index = requests.get(price_index)
+    data = index.json()
 
     # Iterate through all regions and download the json file at versionUrl
     # "regions" : [ {
     #   "regionCode" : "af-south-1",
     #   "versionUrl" : "/savingsPlan/v1.0/aws/AWSMachineLearningSavingsPlans/20231027160516/af-south-1/index.json"
     # }, {
+    for region in data["regions"]:
+        print(region["regionCode"])
+        print(region["versionUrl"])
+
+        base = "https://pricing.us-east-1.amazonaws.com"
+        price_index = base + region["versionUrl"]
+        index = requests.get(price_index)
+        data = index.json()
+        for sku in data["terms"]["savingsPlan"]:
+            for rate in sku["rates"]:
+                print(rate)
+                pattern = r"\w+\.\w+\.\w+$"
+                match = re.search(pattern, rate["discountedUsageType"])
+                if not match:
+                    print('ERROR: Could not find instance type in {}'.format(rate["discountedSku"]))
+                this_instance = match.group()
+                for i in instances:
+                    if instances[i]["instance_type"] == this_instance:
+                        for region, components in instances[i]["pricing"].items():
+                            for component, value in components.items():
+                                if rate["discountedUsageType"] == value["usage"]:
+                                    # TODO: look up term of savings plan (1 yr, 3 yr)
+                                    # TODO: add this term to the pricing dict
+                                    # TODO: maybe unroll these for loops
+                                    print('Found savings plan')
+                                    print(value["usage"])
+                                    print(rate["discountedUsageType"])
+                print(this_instance)
+            break
+        break
 
     # parse the details of the savings plan
     # {
@@ -328,6 +369,9 @@ def add_spot_pricing():
 
 
 if __name__ == "__main__":
+    parse_savings_plans()
+    sys.exit(1)
+
     input_file = None
     if len(sys.argv) > 1:
         input_file = sys.argv[1]
