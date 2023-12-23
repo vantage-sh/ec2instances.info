@@ -84,6 +84,15 @@ service_pretty_name_map = {
     "studio-codeeditor": "Code Editor",
 }
 
+savings_plan_map = {
+    "3 year No Upfront SageMaker Savings Plan": "yrTerm3Savings.noUpfront",
+    "1 year No Upfront SageMaker Savings Plan": "yrTerm1Savings.noUpfront",
+    "3 year Partial Upfront SageMaker Savings Plan": "yrTerm3Savings.partialUpfront",
+    "1 year Partial Upfront SageMaker Savings Plan": "yrTerm1Savings.partialUpfront",
+    "3 year All Upfront SageMaker Savings Plan": "yrTerm3Savings.allUpfront",
+    "1 year All Upfront SageMaker Savings Plan": "yrTerm1Savings.allUpfront",
+}
+
 
 def scrape(output_file, input_file=None):
     # if an argument is given, use that as the path for the json file
@@ -295,28 +304,55 @@ def parse_savings_plans():
         price_index = base + region["versionUrl"]
         index = requests.get(price_index)
         data = index.json()
+        # print(json.dumps(data, indent=4))
         for sku in data["terms"]["savingsPlan"]:
+            term = savings_plan_map[sku["description"]]
             for rate in sku["rates"]:
-                print(rate)
+                # print(rate)
                 pattern = r"\w+\.\w+\.\w+$"
                 match = re.search(pattern, rate["discountedUsageType"])
                 if not match:
-                    print('ERROR: Could not find instance type in {}'.format(rate["discountedSku"]))
+                    print(
+                        "ERROR: Could not find instance type in {}".format(
+                            rate["discountedSku"]
+                        )
+                    )
                 this_instance = match.group()
                 for i in instances:
                     if instances[i]["instance_type"] == this_instance:
                         for region, components in instances[i]["pricing"].items():
                             for component, value in components.items():
                                 if rate["discountedUsageType"] == value["usage"]:
-                                    # TODO: look up term of savings plan (1 yr, 3 yr)
-                                    # TODO: add this term to the pricing dict
-                                    # TODO: maybe unroll these for loops
-                                    print('Found savings plan')
-                                    print(value["usage"])
-                                    print(rate["discountedUsageType"])
-                print(this_instance)
-            break
-        break
+                                    # print("Found savings plan")
+                                    # print(value["usage"])
+                                    # print(rate["discountedUsageType"])
+                                    if (
+                                        not "reserved"
+                                        in instances[i]["pricing"][region][component]
+                                    ):
+                                        instances[i]["pricing"][region][component][
+                                            "reserved"
+                                        ] = {term: float(rate["discountedRate"]["price"])}
+                                    else:
+                                        instances[i]["pricing"][region][component][
+                                            "reserved"
+                                        ][term] = float(rate["discountedRate"]["price"])
+        
+                # print(this_instance)
+        #     break
+        # break
+
+    # clean up 'usage' intermediate value
+    for i in instances:
+        for region, components in instances[i]["pricing"].items():
+            for component, value in components.items():
+                del instances[i]["pricing"][region][component]["usage"]
+
+    # write output to file
+    output_file = "./www/sagemaker/instances.json"
+    encoder.FLOAT_REPR = lambda o: format(o, ".5f")
+    with open(output_file, "w+") as outfile:
+        json.dump(list(instances.values()), outfile, indent=1)
 
     # parse the details of the savings plan
     # {
