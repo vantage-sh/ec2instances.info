@@ -94,7 +94,7 @@ savings_plan_map = {
 }
 
 
-def scrape(output_file, input_file=None):
+def add_pricing_info(output_file, input_file=None):
     # if an argument is given, use that as the path for the json file
     if input_file:
         with open(input_file) as json_data:
@@ -271,19 +271,12 @@ def scrape(output_file, input_file=None):
                         break
                 instances[instance["instance_type"]]["regions"][instance["region"]] = l
 
-    add_pretty_names(instances)
-    with open("sagemaker.pickle", "wb") as file:
-        pickle.dump(instances, file)
-
-    # write output to file
-    encoder.FLOAT_REPR = lambda o: format(o, ".5f")
-    with open(output_file, "w+") as outfile:
-        json.dump(list(instances.values()), outfile, indent=1)
+    return instances
 
 
-def parse_savings_plans():
+def parse_savings_plans(instances):
     """
-    The savings plans pricing looks like this, after we get the versionUrl from 
+    The savings plans pricing looks like this, after we get the versionUrl from
     the region_index.json file. We iterate through these, matching 'discountedUsageType'
     with the temporary 'usage' value we added to the instance data structure.
 
@@ -312,16 +305,16 @@ def parse_savings_plans():
                     },
 
     """
-    with open("sagemaker.pickle", "rb") as file:
-        instances = pickle.load(file)
+    # with open("sagemaker.pickle", "rb") as file:
+    #     instances = pickle.load(file)
 
     price_index = "https://pricing.us-east-1.amazonaws.com/savingsPlan/v1.0/aws/AWSMachineLearningSavingsPlans/current/region_index.json"
     index = requests.get(price_index)
     data = index.json()
 
     for region in data["regions"]:
-        print(region["regionCode"])
-        print(region["versionUrl"])
+        # print(region["regionCode"])
+        # print(region["versionUrl"])
 
         base = "https://pricing.us-east-1.amazonaws.com"
         price_index = base + region["versionUrl"]
@@ -352,7 +345,9 @@ def parse_savings_plans():
                                     ):
                                         instances[i]["pricing"][region][component][
                                             "reserved"
-                                        ] = {term: float(rate["discountedRate"]["price"])}
+                                        ] = {
+                                            term: float(rate["discountedRate"]["price"])
+                                        }
                                     else:
                                         instances[i]["pricing"][region][component][
                                             "reserved"
@@ -364,20 +359,66 @@ def parse_savings_plans():
             for component, value in components.items():
                 del instances[i]["pricing"][region][component]["usage"]
 
-    # write output to file
+
+def add_spot_pricing(ml_instances):
+    with open("www/instances.json", "r") as file:
+        instances = json.load(file)
+
+    spot_prices = {}
+
+    for i in instances:
+        spot_prices[i["instance_type"]] = {}
+        for r in i["pricing"]:
+            try:
+                spot_prices[i["instance_type"]][r] = i["pricing"][r]["linux"][
+                    "spot_min"
+                ]
+            except KeyError:
+                continue
+
+    # print(json.dumps(spot_prices, indent=4))
+
+    # with open("sagemaker.pickle", "rb") as file:
+    #     ml_instances = pickle.load(file)
+
+    for i in ml_instances:
+        for r in ml_instances[i]["pricing"]:
+            for c in ml_instances[i]["pricing"][r]:
+                if c == "Training":
+                    # print(i)
+                    try:
+                        ml_instances[i]["pricing"][r][c]["spot"] = float(
+                            spot_prices[i[3:]][r]
+                        )
+                    except KeyError:
+                        # this region or instance does not offer spot pricing
+                        continue
+
+
+def scrape(output_file, input_file):
     output_file = "./www/sagemaker/instances.json"
+    print("Parsing instance types...")
+    instances = add_pricing_info(output_file, input_file)
+    with open("sagemaker.pickle", "wb") as file:
+        pickle.dump(instances, file)
+
+    print("Parsing instance names...")
+    add_pretty_names(instances)
+    print("Parsing sagemaker savings plans...")
+    parse_savings_plans(instances)
+    print("Adding spot pricing...")
+    add_spot_pricing(instances)
+
+    # write output to file
     encoder.FLOAT_REPR = lambda o: format(o, ".5f")
     with open(output_file, "w+") as outfile:
         json.dump(list(instances.values()), outfile, indent=1)
 
 
-def add_spot_pricing():
-    pass
-
-
 if __name__ == "__main__":
-    parse_savings_plans()
-    sys.exit(1)
+    # parse_savings_plans()
+    # add_spot_pricing()
+    # sys.exit(1)
 
     input_file = None
     if len(sys.argv) > 1:
