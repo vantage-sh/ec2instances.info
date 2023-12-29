@@ -63,12 +63,15 @@ def add_cpu_detail(i):
         # just to be safe...
         i["memory_per_vcpu"] = "unknown"
 
-    if "physical_processor" in i:
-        i["physical_processor"] = (i["physical_processor"] or "").replace("*", "")
-        i["intel_avx"] = "Yes" if i["intel_avx"] else ""
-        i["intel_avx2"] = "Yes" if i["intel_avx2"] else ""
-        i["intel_avx512"] = "Yes" if i["intel_avx512"] else ""
-        i["intel_turbo"] = "Yes" if i["intel_turbo"] else ""
+
+def add_intel_processor_features(instances):
+    for i in instances:
+        if "physical_processor" in i:
+            i["physical_processor"] = (i["physical_processor"] or "").replace("*", "")
+            i["intel_avx"] = "Yes" if i["intel_avx"] else ""
+            i["intel_avx2"] = "Yes" if i["intel_avx2"] else ""
+            i["intel_avx512"] = "Yes" if i["intel_avx512"] else ""
+            i["intel_turbo"] = "Yes" if i["intel_turbo"] else ""
 
 
 def add_render_info(i):
@@ -243,6 +246,7 @@ def render(data_file, template_file, destination_file, detail_pages=True):
         all_regions = regions["main"].copy()
         all_regions.update(regions["local_zone"])
         all_regions.update(regions["wavelength"])
+        add_intel_processor_features(instances)
         if detail_pages:
             sitemap.extend(build_detail_pages_ec2(instances, all_regions))
     elif data_file == "www/rds/instances.json":
@@ -294,31 +298,31 @@ def render(data_file, template_file, destination_file, detail_pages=True):
 
 if __name__ == "__main__":
     sitemap = []
-    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
-    sitemap.extend(
-        render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
-    )
-    sitemap.extend(
-        render(
-            "www/cache/instances.json",
-            "in/cache.html.mako",
-            "www/cache/index.html",
-        )
-    )
-    sitemap.extend(
-        render(
-            "www/redshift/instances.json",
-            "in/redshift.html.mako",
-            "www/redshift/index.html",
-        )
-    )
-    sitemap.extend(
-        render(
-            "www/opensearch/instances.json",
-            "in/opensearch.html.mako",
-            "www/opensearch/index.html",
-        )
-    )
+    # sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
+    # sitemap.extend(
+    #     render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
+    # )
+    # sitemap.extend(
+    #     render(
+    #         "www/cache/instances.json",
+    #         "in/cache.html.mako",
+    #         "www/cache/index.html",
+    #     )
+    # )
+    # sitemap.extend(
+    #     render(
+    #         "www/redshift/instances.json",
+    #         "in/redshift.html.mako",
+    #         "www/redshift/index.html",
+    #     )
+    # )
+    # sitemap.extend(
+    #     render(
+    #         "www/opensearch/instances.json",
+    #         "in/opensearch.html.mako",
+    #         "www/opensearch/index.html",
+    #     )
+    # )
     sitemap.extend(
         render(
             "www/sagemaker/instances.json",

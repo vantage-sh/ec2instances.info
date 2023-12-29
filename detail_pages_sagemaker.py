@@ -11,12 +11,6 @@ import yaml
 import re
 
 
-cache_engine_mapping = {
-    "Memcached": "Memcached",
-    "Redis": "Redis",
-}
-
-
 def initial_prices(i, instance_type):
     try:
         od = i["Pricing"]["us-east-1"]["Redis"]["ondemand"]
@@ -57,6 +51,28 @@ def description(id, defaults):
     )
 
 
+sagemaker_service_pretty_names = {
+    "Processing": "Processing",
+    "Training": "Training",
+    "Hosting": "Hosting",
+    "Notebook": "Notebook Instances",
+    "AsyncInf": "Asynchronous Inference",
+    "BatchTransform": "Batch Transform",
+    "RStudio:RSession": "RStudio",
+    "RStudio:RServer": "RStudio",
+    "RStudio:RSessionGateway": "RStudio",
+    "Studio-Notebook": "Studio Notebooks",
+    "TensorBoard": "TensorBoard",
+    "Processing_DW": "Data Wrangler Processing",
+    "Studio": "Data Wrangler Interactive",
+    "SpotTraining": "Spot Training",
+    "Cluster": "HyperPod",
+    "Cluster-Reserved": "HyperPod",
+    "Studio-JupyterLab": "JupyterLab",
+    "studio-codeeditor": "Code Editor",
+}
+
+
 def unavailable_instances(instance_details, all_regions):
     denylist = []
     instance_regions = instance_details["Pricing"].keys()
@@ -67,7 +83,7 @@ def unavailable_instances(instance_details, all_regions):
             denylist.append([all_regions[r], r, "All", "*"])
         else:
             instance_regions_oss = instance_details["Pricing"][r].keys()
-            for os in cache_engine_mapping.values():
+            for os in sagemaker_service_pretty_names.values():
                 if os not in instance_regions_oss:
                     denylist.append([all_regions[r], r, os, os])
     return denylist
@@ -96,7 +112,7 @@ def assemble_the_families(instances):
             if not dupe:
                 variant_families[variant].append([itype, name])
 
-        member = {"name": name, "cpus": int(i["vcpu"]), "memory": float(i["memory"])}
+        member = {"name": name, "cpus": int(i["vCPU"]), "memory": float(i["memory"])}
         if itype not in instance_fam_map:
             instance_fam_map[itype] = [member]
         else:
@@ -120,7 +136,6 @@ def prices(pricing):
         display_prices[region] = {}
 
         for os, _p in p.items():
-            os = cache_engine_mapping[os]
             display_prices[region][os] = {}
 
             # Doing a lot of work to deal with prices having up to 6 places

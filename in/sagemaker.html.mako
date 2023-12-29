@@ -162,8 +162,8 @@
           <td class="apiname all" data-priority="1"><a href="/aws/sagemaker/${inst['instance_type']}">${inst['instance_type']}</a></td>
           <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
           <td class="vcpus">
-            <span sort="${inst['vcpu']}">
-              ${inst['vcpu']} vCPUs
+            <span sort="${inst['vCPU']}">
+              ${inst['vCPU']} vCPUs
             </span>
           </td>
           <td class="networkperf">
@@ -172,7 +172,7 @@
             </span>
           </td>
           % for cache_engine in {'Redis', 'Memcached'}:
-          <td class="cost-ondemand cost-ondemand-${cache_engine}" data-platform='${cache_engine}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
+          <td class="cost-ondemand cost-ondemand-${cache_engine}" data-platform='${cache_engine}' data-vcpu='${inst['vCPU']}' data-memory='${inst['memory']}'>
             % if inst['pricing'].get('us-east-1', {}).get(cache_engine, {}).get('ondemand', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][cache_engine]['ondemand']}">
                 $${inst['pricing']['us-east-1'][cache_engine]['ondemand']} hourly
@@ -181,7 +181,7 @@
               <span sort="999999">unavailable</span>
             % endif
           </td>
-          <td class="cost-reserved cost-reserved-${cache_engine}" data-platform='${cache_engine}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
+          <td class="cost-reserved cost-reserved-${cache_engine}" data-platform='${cache_engine}' data-vcpu='${inst['vCPU']}' data-memory='${inst['memory']}'>
             % if inst['pricing'].get('us-east-1', {}).get(cache_engine, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['us-east-1'][cache_engine]['reserved'].get('yrTerm1Standard.noUpfront', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][cache_engine]['reserved'].get('yrTerm1Standard.noUpfront')}">
                 $${inst['pricing']['us-east-1'][cache_engine]['reserved'].get('yrTerm1Standard.noUpfront')} hourly
