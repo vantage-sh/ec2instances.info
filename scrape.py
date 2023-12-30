@@ -157,7 +157,7 @@ class Instance(object):
 
 
 def sanitize_instance_type(instance_type):
-    """Typos and other bad data are common in the instance type colums for some reason"""
+    """Typos and other bad data are common in the instance type columns for some reason"""
     # Remove random whitespace
     instance_type = re.sub(r"\s+", "", instance_type, flags=re.UNICODE)
 
@@ -332,7 +332,9 @@ def add_ebs_info(instances):
             if row.xpath("th"):
                 continue
             cols = row.xpath("td")
-            instance_type = sanitize_instance_type(totext(cols[0]).replace("*", ""))
+            # remove last character which is a superscript with other info
+            instance_type = sanitize_instance_type(totext(cols[0]))[:-1]
+            print(instance_type)
 
             if len(cols) == 4:
                 ebs_baseline_bandwidth = locale.atof(totext(cols[1]))
@@ -366,7 +368,8 @@ def add_ebs_info(instances):
             if row.xpath("th"):
                 continue
             cols = row.xpath("td")
-            instance_type = sanitize_instance_type(totext(cols[0]).replace("*", ""))
+            # remove last character which is a superscript with other info
+            instance_type = sanitize_instance_type(totext(cols[0]))[:-1]
             ebs_max_bandwidth = locale.atof(totext(cols[1]))
             ebs_throughput = locale.atof(totext(cols[2]))
             ebs_iops = locale.atof(totext(cols[3]))
