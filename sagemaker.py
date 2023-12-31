@@ -396,6 +396,34 @@ def add_spot_pricing(ml_instances):
                         continue
 
 
+def studio_classic_availability():
+    # https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks-available-instance-types.html
+    pass
+
+def rstudio_recommendations():
+    # https://docs.aws.amazon.com/sagemaker/latest/dg/rstudio-select-instance.html
+    pass
+
+def model_parallelism():
+    # https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-model-parallel-support-v2.html
+    pass
+
+def neo():
+    # https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-cloud.html
+    pass
+
+def built_in_algorithms():
+    # https://docs.aws.amazon.com/sagemaker/latest/dg/cmn-info-instance-types.html
+    pass
+
+def processor_features():
+    # https://www.intel.com/content/www/us/en/developer/articles/technical/accelerate-your-ai-software-workloads-on-aws.html#gs.2bu45n
+    pass
+
+def host_instance_storage_volumes():
+    # https://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/
+    pass
+
 def scrape(output_file, input_file):
     output_file = "./www/sagemaker/instances.json"
     print("Parsing instance types...")

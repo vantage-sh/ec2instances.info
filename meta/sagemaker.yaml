@@ -1,93 +1,45 @@
-- Key: vCPU
-  Display Name: CPUs
-  Category: Compute
-  Category Order: 1
-  Example: '8'
-- Key: GPU
-  Display Name: GPUs
-  Category: Compute
-  Category Order: 2
-  Example: '8'
-- Key: memory
-  Display Name: Memory (GiB)
-  Category: Compute
-  Category Order: 3
-  Example: '27.9'
-- Key: memory_per_vcpu
-  Display Name: Memory per vCPU (GiB)
-  Category: Compute
-  Category Order: 4
-- Key: GPU_memory
-  Display Name: GPU Memory (GiB)
-  Category: Compute
-  Category Order: 5
-- Key: arch
-  Display Name: Architecture
-  Category: Compute
-  Category Order: 6
-- Key: GPU_memory
-  Display Name: GPU Memory (GiB)
-  Category: Compute
-  Category Order: 7
-- Key: clock_speed_ghz
-  Display Name: Clock Speed (GHz)
-  Category: Compute
-  Category Order: 8
-- Key: physical_processor
-  Display Name: Processor
-  Category: Compute
-  Category Order: 9
-- Key: currentGeneration
-  Display Name: Generation
-  Category: Amazon
-  Category Order: 1
-  Style: value
-  Example: 'No'
-- Key: instance_type
-  Display Name: Instance Type
-  Category: Amazon
-  Category Order: 2
-  Example: cache.m3.2xlarge
-- Key: family
-  Display Name: Family
-  Category: Amazon
-  Category Order: 3
-  Example: Standard
-- Key: pretty_name
-  Display Name: Name
-  Category: Amazon
-  Category Order: 4
-  Example: 'M3 Previous generation: (not recommended) Double Extra Large'
-- Key: component 
-  Display Name: Component
-  Category: Not Shown
-  Category Order: 0
-  Example: Memcached
-- Key: network_performance
-  Display Name: Network Performance (Gibps)
-  Category: Networking
-  Category Order: 1
-  Regex: (Up to )?[+-]?([0-9]*[.])?[0-9]+
-  Example: High
-- Key: servicecode
-  Category: Not Shown
-  Category Order: 0
-  Example: AmazonElastiCache
-- Key: network_sort
-  Category: Not Shown
-  Category Order: 0
-  Example: '8'
-- Key: ECU_per_vcpu
-  Display Name: Amazon
-  Category: Not Shown
-  Category Order: 0
-  Example: unknown
-- Key: ssd
-  Display Name: SSD (GiB)
-  Category: Storage
-  Category Order: 1
-  Regex: \d+
-- Key: storage
-  Display Name: SSD (GiB)
-  Category: Storage
-  Category Order: 2
+- category: Compute
+  attributes:
+    - key: vCPU
+      display: vCPUs
+    - key: GPU
+      display: GPUs
+    - key: memory
+      display: Memory (GiB)
+    - key: memory_per_vcpu
+      display: Memory per vCPU (GiB)
+    - key: GPU_memory
+      display: GPU Memory (GiB)
+    - key: arch
+      display: Architecture
+    - key: GPU_memory
+      display: GPU Memory (GiB)
+    - key: clock_speed_ghz
+      display: Clock Speed (GHz)
+    - key: physical_processor
+      display: Processor
+    - key: ECU_per_vcpu
+      display: ECU per vCPU
+- category: Networking
+  attributes:
+    - key: network_performance
+      display: Network Performance (Gibps)
+      regex: (Up to )?[+-]?([0-9]*[.])?[0-9]+
+- category: Storage
+  attributes:
+    - key: ssd
+      display: SSD (GiB)
+      regex: \d+
+    - key: storage
+      display: SSD (GiB)
+- category: Amazon
+  attributes:
+    - key: generation
+      display: Generation
+      style: value
+    - key: instance_type
+      display: Instance Type
+    - key: family
+      display: Family
+    - key: pretty_name
+      display: Name

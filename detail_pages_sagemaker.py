@@ -9,6 +9,7 @@ import csv
 import bisect
 import yaml
 import re
+import sys
 
 
 def initial_prices(i, instance_type):
@@ -174,37 +175,61 @@ def prices(pricing):
 
 
 def load_service_attributes():
-    special_attrs = [
-        "pricing",
-        "cache_parameters",
-        "regions",
-    ]
-    data_file = "meta/service_attributes_cache.csv"
+    # special_attrs = [
+    #     "pricing",
+    #     "cache_parameters",
+    #     "regions",
+    # ]
+    # data_file = "meta/service_attributes_cache.csv"
+
+    # display_map = {}
+    # with open(data_file, "r") as f:
+    #     reader = csv.reader(f)
+
+    #     for i, row in enumerate(reader):
+    #         cloud_key = row[0]
+    #         if i == 0:
+    #             # Skip the header
+    #             continue
+    #         elif cloud_key in special_attrs:
+    #             category = "Coming Soon"
+    #         else:
+    #             category = row[2]
+
+    #         display_map[cloud_key] = {
+    #             "cloud_key": cloud_key,
+    #             "display_name": row[1],
+    #             "category": category,
+    #             "order": row[3],
+    #             "style": row[4],
+    #             "regex": row[5],
+    #             "value": None,
+    #             "variant_family": row[1][0:2],
+    #         }
+
+    # print(json.dumps(display_map, indent=4))
+
+    attribute_label_file = "meta/sagemaker.yaml"
+    with open(attribute_label_file, "r") as f:
+        attribute_labels = yaml.safe_load(f)
 
     display_map = {}
-    with open(data_file, "r") as f:
-        reader = csv.reader(f)
-
-        for i, row in enumerate(reader):
-            cloud_key = row[0]
-            if i == 0:
-                # Skip the header
-                continue
-            elif cloud_key in special_attrs:
-                category = "Coming Soon"
-            else:
-                category = row[2]
-
+    for category in attribute_labels:
+        for order, attr in enumerate(category["attributes"]):
+            cloud_key = attr["key"]
             display_map[cloud_key] = {
                 "cloud_key": cloud_key,
-                "display_name": row[1],
-                "category": category,
-                "order": row[3],
-                "style": row[4],
-                "regex": row[5],
+                "display_name": attr["display"],
+                "category": category["category"],
+                "order": order,
+                "style": attr["style"] if "style" in attr else None,
+                "regex": attr["regex"] if "regex" in attr else None,
                 "value": None,
-                "variant_family": row[1][0:2],
             }
+
+        print(category)
+
+    print(json.dumps(display_map, indent=4))
 
     return display_map
 
@@ -285,6 +310,9 @@ def map_cache_attributes(i, imap):
 
 
 def build_detail_pages_sagemaker(instances, all_regions):
+    # load_service_attributes()
+    # sys.exit(1)
+
     subdir = os.path.join("www", "aws", "elasticache")
 
     ifam, fam_lookup, variants = assemble_the_families(instances)
