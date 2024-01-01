@@ -26,6 +26,7 @@ def translate_platform_name(operating_system, preinstalled_software):
         "Red Hat Enterprise Linux with HA": "rhel",
         "SUSE": "sles",
         "Windows": "mswin",
+        "Ubuntu Pro": "ubuntu",
         # Spot products
         "Linux/UNIX": "linux",
         "Red Hat Enterprise Linux": "rhel",
@@ -38,9 +39,13 @@ def translate_platform_name(operating_system, preinstalled_software):
         "SQL Web": "SQLWeb",
         "SQL Ent": "SQLEnterprise",
     }
-    return os.get(operating_system, "unknown") + software.get(
+    platform = os.get(operating_system, "unknown") + software.get(
         preinstalled_software, "unknown"
     )
+    if "unknown" in platform:
+        print(f"WARNING: Unknown platform: {operating_system}, {preinstalled_software}")
+    return platform
+
 
 
 # Translate between the API and what is used locally
@@ -303,6 +308,7 @@ def add_spot_pricing(imap):
                         }
 
         except botocore.exceptions.ClientError:
+            print('WARNING: Spot region "{}" not enabled'.format(region))
             pass
 
 
