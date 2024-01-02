@@ -278,6 +278,8 @@ function init_data_table() {
           $('input', this).val(data.columns[col_index].search.search);
         });
       }
+      // Optimization of initial page load to hide hidden columns in DOM
+      document.querySelectorAll('.hidden').forEach((el) => el.classList.remove('hidden'));
       configure_highlighting();
 
       // handle where the user had a search saved locally
@@ -621,6 +623,8 @@ function setup_column_toggle() {
               $(this).parent().toggleClass('active');
               $(this).blur(); // prevent focus style from sticking in Firefox
               e.stopPropagation(); // keep dropdown menu open
+              // Optimization of initial page load to hide hidden columns in DOM
+              document.querySelectorAll('.hidden').forEach((el) => el.classList.remove('hidden'));
             }),
         ),
     );

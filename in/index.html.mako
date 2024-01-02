@@ -166,50 +166,50 @@
           <th class="name all" data-priority="1"><div class="d-none d-md-block">Name</div></th>
           <th class="apiname" data-priority="1">API Name</th>
           <th class="memory">Instance Memory</th>
-          <th class="computeunits">
+          <th class="computeunits hidden">
             <abbr title="One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.">Compute Units (ECU)</abbr>
           </th>
           <th class="vcpus">
             <abbr title="Each virtual CPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">vCPUs</abbr>
           </th>
-          <th class="memory-per-vcpu">GiB of Memory per vCPU</th>
-          <th class="gpus">GPUs</th>
-          <th class="gpu_model">GPU model</th>
-          <th class="gpu_memory">GPU memory</th>
-          <th class="compute_capability">CUDA Compute Capability</th>
-          <th class="fpgas">FPGAs</th>
-          <th class="ecu-per-vcpu">ECU per vCPU</th>
-          <th class="physical_processor">Physical Processor</th>
-          <th class="clock_speed_ghz">Clock Speed(GHz)</th>
-          <th class="intel_avx">Intel AVX</th>
-          <th class="intel_avx2">Intel AVX2</th>
-          <th class="intel_avx512">Intel AVX-512</th>
-          <th class="intel_turbo">Intel Turbo</th>
+          <th class="memory-per-vcpu hidden">GiB of Memory per vCPU</th>
+          <th class="gpus hidden">GPUs</th>
+          <th class="gpu_model hidden">GPU model</th>
+          <th class="gpu_memory hidden">GPU memory</th>
+          <th class="compute_capability hidden">CUDA Compute Capability</th>
+          <th class="fpgas hidden">FPGAs</th>
+          <th class="ecu-per-vcpu hidden">ECU per vCPU</th>
+          <th class="physical_processor hidden">Physical Processor</th>
+          <th class="clock_speed_ghz hidden">Clock Speed(GHz)</th>
+          <th class="intel_avx hidden">Intel AVX</th>
+          <th class="intel_avx2 hidden">Intel AVX2</th>
+          <th class="intel_avx512 hidden">Intel AVX-512</th>
+          <th class="intel_turbo hidden">Intel Turbo</th>
           <th class="storage">Instance Storage</th>
-          <th class="warmed-up">Instance Storage: already warmed-up</th>
-          <th class="trim-support">Instance Storage: SSD TRIM Support</th>
-          <th class="architecture">Arch</th>
+          <th class="warmed-up hidden">Instance Storage: already warmed-up</th>
+          <th class="trim-support hidden">Instance Storage: SSD TRIM Support</th>
+          <th class="architecture hidden">Arch</th>
           <th class="networkperf">Network Performance</th>
-          <th class="ebs-baseline-bandwidth">EBS Optimized: Baseline Bandwidth</th>
-          <th class="ebs-baseline-throughput">EBS Optimized: Baseline Throughput (128K)</th>
-          <th class="ebs-baseline-iops">EBS Optimized: Baseline IOPS (16K)</th>
-          <th class="ebs-max-bandwidth">EBS Optimized: Max Bandwidth</th>
-          <th class="ebs-throughput">EBS Optimized: Max Throughput (128K)</th>
-          <th class="ebs-iops">EBS Optimized: Max IOPS (16K)</th>
-          <th class="ebs-as-nvme">
+          <th class="ebs-baseline-bandwidth hidden">EBS Optimized: Baseline Bandwidth</th>
+          <th class="ebs-baseline-throughput hidden">EBS Optimized: Baseline Throughput (128K)</th>
+          <th class="ebs-baseline-iops hidden">EBS Optimized: Baseline IOPS (16K)</th>
+          <th class="ebs-max-bandwidth hidden">EBS Optimized: Max Bandwidth</th>
+          <th class="ebs-throughput hidden">EBS Optimized: Max Throughput (128K)</th>
+          <th class="ebs-iops hidden">EBS Optimized: Max IOPS (16K)</th>
+          <th class="ebs-as-nvme hidden">
             <abbr title="EBS volumes on these instances will be exposed as NVMe devices (/dev/nvmeXn1)">EBS Exposed as NVMe</abbr>
           </th>
-          <th class="maxips">
+          <th class="maxips hidden">
             <abbr title="Adding additional IPs requires launching the instance in a VPC.">Max IPs</abbr>
           </th>
-          <th class="maxenis">Max ENIs</th>
-          <th class="enhanced-networking">Enhanced Networking</th>
-          <th class="vpc-only">VPC Only</th>
-          <th class="ipv6-support">IPv6 Support</th>
-          <th class="placement-group-support">Placement Group Support</th>
-          <th class="linux-virtualization">Linux Virtualization</th>
-          <th class="emr-support">On EMR</th>
-          <th class="azs">
+          <th class="maxenis hidden">Max ENIs</th>
+          <th class="enhanced-networking hidden">Enhanced Networking</th>
+          <th class="vpc-only hidden">VPC Only</th>
+          <th class="ipv6-support hidden">IPv6 Support</th>
+          <th class="placement-group-support hidden">Placement Group Support</th>
+          <th class="linux-virtualization hidden">Linux Virtualization</th>
+          <th class="emr-support hidden">On EMR</th>
+          <th class="azs hidden">
             <abbr title="The AZ IDs where these instances are available, which is a unique and consistent identifier for an Availability Zone across AWS accounts.">Availability Zones</abbr>
           </th>
 
@@ -218,65 +218,65 @@
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux Reserved cost</abbr>
           </th>
           <th class="cost-spot-min cost-spot-min-linux">Linux Spot Minimum cost</th>
-          <th class="cost-spot-max cost-spot-max-linux">Linux Spot Maximum cost</th>
+          <th class="cost-spot-max cost-spot-max-linux hidden">Linux Spot Maximum cost</th>
 
-          <th class="cost-ondemand cost-ondemand-rhel">RHEL On Demand cost</th>
-          <th class="cost-reserved cost-reserved-rhel">
+          <th class="cost-ondemand cost-ondemand-rhel hidden">RHEL On Demand cost</th>
+          <th class="cost-reserved cost-reserved-rhel hidden">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>RHEL Reserved cost</abbr>
           </th>
-          <th class="cost-spot-min cost-spot-min-rhel">RHEL Spot Minimum cost</th>
-          <th class="cost-spot-max cost-spot-max-rhel">RHEL Spot Maximum cost</th>
+          <th class="cost-spot-min cost-spot-min-rhel hidden">RHEL Spot Minimum cost</th>
+          <th class="cost-spot-max cost-spot-max-rhel hidden">RHEL Spot Maximum cost</th>
 
-          <th class="cost-ondemand cost-ondemand-sles">SLES On Demand cost</th>
-          <th class="cost-reserved cost-reserved-sles">
+          <th class="cost-ondemand cost-ondemand-sles hidden">SLES On Demand cost</th>
+          <th class="cost-reserved cost-reserved-sles hidden">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>SLES Reserved cost</abbr>
           </th>
-          <th class="cost-spot-min cost-spot-min-sles">SLES Spot Minimum cost</th>
-          <th class="cost-spot-max cost-spot-max-sles">SLES Spot Maximum cost</th>
+          <th class="cost-spot-min cost-spot-min-sles hidden">SLES Spot Minimum cost</th>
+          <th class="cost-spot-max cost-spot-max-sles hidden">SLES Spot Maximum cost</th>
 
           <th class="cost-ondemand cost-ondemand-mswin">Windows On Demand cost</th>
           <th class="cost-reserved cost-reserved-mswin">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows Reserved cost</abbr>
           </th>
-          <th class="cost-spot-min cost-spot-min-mswin">Windows Spot Minimum cost</th>
-          <th class="cost-spot-max cost-spot-max-mswin">Windows Spot Maximum cost</th>
+          <th class="cost-spot-min cost-spot-min-mswin hidden">Windows Spot Minimum cost</th>
+          <th class="cost-spot-max cost-spot-max-mswin hidden">Windows Spot Maximum cost</th>
 
-          <th class="cost-ondemand cost-ondemand-dedicated">Dedicate Host On Demand</th>
-          <th class="cost-reserved cost-reserved-dedicated">
+          <th class="cost-ondemand cost-ondemand-dedicated hidden">Dedicated Host On Demand</th>
+          <th class="cost-reserved cost-reserved-dedicated hidden">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Dedicated Host Reserved</abbr>
           </th>
 
-          <th class="cost-ondemand cost-ondemand-mswinSQLWeb">Windows SQL Web On Demand cost</th>
-          <th class="cost-reserved cost-reserved-mswinSQLWeb">
+          <th class="cost-ondemand cost-ondemand-mswinSQLWeb hidden">Windows SQL Web On Demand cost</th>
+          <th class="cost-reserved cost-reserved-mswinSQLWeb hidden">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows SQL Web Reserved cost</abbr>
           </th>
-          <th class="cost-ondemand cost-ondemand-mswinSQL">Windows SQL Std On Demand cost</th>
-          <th class="cost-reserved cost-reserved-mswinSQL">
+          <th class="cost-ondemand cost-ondemand-mswinSQL hidden">Windows SQL Std On Demand cost</th>
+          <th class="cost-reserved cost-reserved-mswinSQL hidden">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows SQL Std Reserved cost</abbr>
           </th>
-          <th class="cost-ondemand cost-ondemand-mswinSQLEnterprise">Windows SQL Ent On Demand cost</th>
-          <th class="cost-reserved cost-reserved-mswinSQLEnterprise">
+          <th class="cost-ondemand cost-ondemand-mswinSQLEnterprise hidden">Windows SQL Ent On Demand cost</th>
+          <th class="cost-reserved cost-reserved-mswinSQLEnterprise hidden">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows SQL Ent Reserved cost</abbr>
           </th>
-          <th class="cost-ondemand cost-ondemand-linuxSQLWeb">Linux SQL Web On Demand cost</th>
-          <th class="cost-reserved cost-reserved-linuxSQLWeb">
+          <th class="cost-ondemand cost-ondemand-linuxSQLWeb hidden">Linux SQL Web On Demand cost</th>
+          <th class="cost-reserved cost-reserved-linuxSQLWeb hidden">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux SQL Web Reserved cost</abbr>
           </th>
-          <th class="cost-ondemand cost-ondemand-linuxSQL">Linux SQL Std On Demand cost</th>
-          <th class="cost-reserved cost-reserved-linuxSQL">
+          <th class="cost-ondemand cost-ondemand-linuxSQL hidden">Linux SQL Std On Demand cost</th>
+          <th class="cost-reserved cost-reserved-linuxSQL hidden">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux SQL Std Reserved cost</abbr>
           </th>
-          <th class="cost-ondemand cost-ondemand-linuxSQLEnterprise">Linux SQL Ent On Demand cost</th>
-          <th class="cost-reserved cost-reserved-linuxSQLEnterprise">
+          <th class="cost-ondemand cost-ondemand-linuxSQLEnterprise hidden">Linux SQL Ent On Demand cost</th>
+          <th class="cost-reserved cost-reserved-linuxSQLEnterprise hidden">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux SQL Ent Reserved cost</abbr>
           </th>
-          <th class="cost-ebs-optimized">
+          <th class="cost-ebs-optimized hidden">
             <abbr title='Some instance types are charged additionally when configured for optimized EBS usage'>EBS Optimized surcharge</abbr>
           </th>
-          <th class="cost-emr">
+          <th class="cost-emr hidden">
             <abbr title="This are the hourly rate EMR costs. Actual costs are EC2 + EMR by hourly rate">EMR cost</abbr>
           </th>
-          <th class="generation">Generation</th>
+          <th class="generation hidden">Generation</th>
         </tr>
       </thead>
 
@@ -286,7 +286,7 @@
             <td class="name all"><div class="d-none d-md-block">${inst['pretty_name']}</div></td>
             <td class="apiname"><a href="/aws/ec2/${inst['instance_type']}">${inst['instance_type']}</a></td>
             <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
-            <td class="computeunits">
+            <td class="computeunits hidden">
               % if inst['ECU'] == 'variable':
                 % if inst['base_performance']:
                 <span sort="${inst['base_performance']}">
@@ -315,27 +315,27 @@
                   % endif
               </span>
             </td>
-            <td class="memory-per-vcpu">
+            <td class="memory-per-vcpu hidden">
               % if inst['memory_per_vcpu'] == 'unknown':
               <span sort="999999">unknown</span>
               % else:
               <span sort="${inst['memory_per_vcpu']}">${"{:.2f}".format(inst['memory_per_vcpu'])} GiB/vCPU</span>
               % endif
             </td>
-            <td class="gpus">
+            <td class="gpus hidden">
               <span sort="${inst['GPU']}">
                 ${inst['GPU']}
               </span>
             </td>
-            <td class="gpu_model">${inst['GPU_model']}</td>
-            <td class="gpu_memory">
+            <td class="gpu_model hidden">${inst['GPU_model']}</td>
+            <td class="gpu_memory hidden">
               <span sort="${inst['GPU_memory']}">
                 ${inst['GPU_memory']} GiB
               </span>
             </td>
-            <td class="compute_capability">${inst['compute_capability']}</td>
-            <td class="fpga">${inst['FPGA']}</td>
-            <td class="ecu-per-vcpu">
+            <td class="compute_capability hidden">${inst['compute_capability']}</td>
+            <td class="fpga hidden">${inst['FPGA']}</td>
+            <td class="ecu-per-vcpu hidden">
               % if inst['ECU'] == 'variable':
               <span sort="0"><a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">Burstable</a></span>
               % elif inst['ECU_per_vcpu'] == 'unknown':
@@ -344,12 +344,12 @@
               <span sort="${inst['ECU_per_vcpu']}">${"%.4g" % inst['ECU_per_vcpu']} units</span>
               % endif
             </td>
-            <td class="physical_processor">${inst['physical_processor'] or 'unknown'}</td>
-            <td class="clock_speed_ghz">${inst['clock_speed_ghz'] or 'unknown'}</td>
-            <td class="intel_avx">${'Yes' if inst['intel_avx'] else 'unknown'}</td>
-            <td class="intel_avx2">${'Yes' if inst['intel_avx2'] else 'unknown'}</td>
-            <td class="intel_avx512">${'Yes' if inst['intel_avx512'] else 'unknown'}</td>
-            <td class="intel_turbo">${'Yes' if inst['intel_turbo'] else 'unknown'}</td>
+            <td class="physical_processor hidden">${inst['physical_processor'] or 'unknown'}</td>
+            <td class="clock_speed_ghz hidden">${inst['clock_speed_ghz'] or 'unknown'}</td>
+            <td class="intel_avx hidden">${'Yes' if inst['intel_avx'] else 'unknown'}</td>
+            <td class="intel_avx2 hidden">${'Yes' if inst['intel_avx2'] else 'unknown'}</td>
+            <td class="intel_avx512 hidden">${'Yes' if inst['intel_avx512'] else 'unknown'}</td>
+            <td class="intel_turbo hidden">${'Yes' if inst['intel_turbo'] else 'unknown'}</td>
             <td class="storage">
               <% storage = inst['storage'] %>
               % if not storage:
@@ -366,21 +366,21 @@
               </span>
               % endif
             </td>
-            <td class="warmed-up">
+            <td class="warmed-up hidden">
               % if inst['storage']:
                   ${"No" if inst['storage']['storage_needs_initialization'] else 'Yes'}
               % else:
                   N/A
               % endif
             </td>
-            <td class="trim-support">
+            <td class="trim-support hidden">
               % if inst['storage'] and inst['storage']['ssd'] :
                   ${"Yes" if inst['storage']['trim_support'] else 'No'}
               % else:
                   N/A
               % endif
             </td>
-            <td class="architecture">
+            <td class="architecture hidden">
               % if 'i386' in inst['arch']:
               32/64-bit
               % else:
@@ -392,7 +392,7 @@
                 ${inst['network_performance']}
               </span>
             </td>
-            <td class="ebs-baseline-bandwidth">
+            <td class="ebs-baseline-bandwidth hidden">
               % if not inst['ebs_baseline_bandwidth']:
               <span sort="0">N/A</span>
               % else:
@@ -401,17 +401,17 @@
               </span>
               % endif
             </td>
-            <td class="ebs-baseline-throughput">
+            <td class="ebs-baseline-throughput hidden">
               <span sort="${inst['ebs_baseline_throughput']}">
                 ${inst['ebs_baseline_throughput']} MB/s
               </span>
             </td>
-            <td class="ebs-baseline-iops">
+            <td class="ebs-baseline-iops hidden">
               <span sort="${inst['ebs_baseline_iops']}">
                 ${inst['ebs_baseline_iops']} IOPS
               </span>
             </td>
-            <td class="ebs-max-bandwidth">
+            <td class="ebs-max-bandwidth hidden">
               % if not inst['ebs_max_bandwidth']:
               <span sort="0">N/A</span>
               % else:
@@ -420,60 +420,60 @@
               </span>
               % endif
             </td>
-            <td class="ebs-throughput">
+            <td class="ebs-throughput hidden">
               <span sort="${inst['ebs_throughput']}">
                 ${inst['ebs_throughput']} MB/s
               </span>
             </td>
-            <td class="ebs-iops">
+            <td class="ebs-iops hidden">
               <span sort="${inst['ebs_iops']}">
                 ${inst['ebs_iops']} IOPS
               </span>
             </td>
-            <td class="ebs-as-nvme">
+            <td class="ebs-as-nvme hidden">
               % if inst['ebs_as_nvme']:
                   Yes
               % else:
                   No
               % endif
             </td>
-            <td class="maxips">
+            <td class="maxips hidden">
               % if inst['vpc']:
                 ${inst['vpc']['max_enis'] * inst['vpc']['ips_per_eni']}
               % else:
                 N/A
               % endif
             </td>
-            <td class="maxenis">
+            <td class="maxenis hidden">
               % if inst['vpc']:
                 <span sort="${inst['vpc']['max_enis']}">${inst['vpc']['max_enis']}</span>
               % else:
                 <span sort="0">N/A</span>
               % endif
             </td>
-            <td class="enhanced-networking">
+            <td class="enhanced-networking hidden">
               ${'Yes' if inst['enhanced_networking'] else 'No'}
             </td>
-            <td class="vpc-only">
+            <td class="vpc-only hidden">
               ${'Yes' if inst['vpc_only'] else 'No'}
             </td>
-            <td class="ipv6-support">
+            <td class="ipv6-support hidden">
               ${'Yes' if inst['ipv6_support'] else 'No'}
             </td>
-            <td class="placement-group-support">
+            <td class="placement-group-support hidden">
               ${'Yes' if inst['placement_group_support'] else 'No'}
             </td>
-            <td class="linux-virtualization">
+            <td class="linux-virtualization hidden">
               % if inst['linux_virtualization_types']:
               ${', '.join(inst['linux_virtualization_types'])}
               % else:
               Unknown
               % endif
             </td>
-            <td class="emr-support">
+            <td class="emr-support hidden">
               ${'Yes' if inst['emr'] else 'No'}
             </td>
-            <td class="azs">
+            <td class="azs hidden">
               ${', '.join(inst.get('availability_zones', {}).get('us-east-1', []))}
             </td>
             
@@ -482,20 +482,28 @@
               ## data here is used for sorting (and anyone with JS disabled...)
               ## for more info, see https://github.com/powdahound/ec2instances.info/issues/140
               % if platform == 'linux':
-              <td class="cost-ondemand cost-ondemand-linux all" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}" data-priority="1">
+                <td class="cost-ondemand cost-ondemand-linux all" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}" data-priority="1">
+              % elif platform == 'mswin':
+                <td class="cost-ondemand cost-ondemand-mswin" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}" data-priority="1">
               % else:
-              <td class="cost-ondemand cost-ondemand-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+                <td class="cost-ondemand cost-ondemand-${platform} hidden" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
               % endif
-                % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
-                  <span sort="${inst['pricing']['us-east-1'][platform]['ondemand']}">
-                    $${"{:.4f}".format(float(inst['pricing']['us-east-1'][platform]['ondemand']))} hourly
-                  </span>
-                % else:
-                  <span sort="999999">unavailable</span>
-                % endif
-              </td>
 
-              <td class="cost-reserved cost-reserved-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+              % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('ondemand', 'N/A') != "N/A":
+                <span sort="${inst['pricing']['us-east-1'][platform]['ondemand']}">
+                  $${"{:.4f}".format(float(inst['pricing']['us-east-1'][platform]['ondemand']))} hourly
+                </span>
+              % else:
+                <span sort="999999">unavailable</span>
+              % endif
+                </td>
+
+              % if platform == 'linux' or platform == 'mswin':
+                <td class="cost-reserved cost-reserved-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+              % else:
+                <td class="cost-reserved cost-reserved-${platform} hidden" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+              % endif
+
                 % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('reserved', 'N/A') != "N/A" and inst['pricing']['us-east-1'][platform]['reserved'].get('yrTerm1Standard.noUpfront', 'N/A') != "N/A":
                   <span sort="${inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']}">
                     $${"{:.4f}".format(float(inst['pricing']['us-east-1'][platform]['reserved']['yrTerm1Standard.noUpfront']))} hourly
@@ -506,7 +514,11 @@
               </td>
 
               % if platform in ['linux', 'rhel', 'sles', 'mswin']:
-                <td class="cost-spot-min cost-spot-min-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+                % if platfrom == 'linux':
+                  <td class="cost-spot-min cost-spot-min-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+                % else:
+                  <td class="cost-spot-min cost-spot-min-${platform} hidden" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+                % endif
                   % if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot_min', 'N/A') != 'N/A':
                     <%
                         spot_min = inst['pricing']['us-east-1'][platform]['spot_min']
@@ -519,7 +531,7 @@
                   % endif
                 </td>
 
-                <td class="cost-spot-max cost-spot-max-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+                <td class="cost-spot-max cost-spot-max-${platform} hidden" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
                   %if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot_max', 'N/A') != 'N/A':
                     <%
                       spot_max = inst['pricing']['us-east-1'][platform]['spot_max']
@@ -534,7 +546,7 @@
               % endif
             % endfor
 
-            <td class="cost-ebs-optimized" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+            <td class="cost-ebs-optimized hidden" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
               % if inst['ebs_max_bandwidth']:
                 % if inst['pricing'].get('us-east-1', {}).get('ebs', 'N/A') != "N/A":
                   <span sort="${inst['pricing']['us-east-1']['ebs']}">
@@ -547,7 +559,7 @@
                 <span sort="999999">unavailable</span>
               % endif
             </td>
-            <td class="cost-emr" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+            <td class="cost-emr hidden" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
               % if inst['pricing'].get('us-east-1', {}).get("emr", {}):
                 <span sort="${inst['pricing']['us-east-1']['emr']['emr']}">
                   $${"{:.4f}".format(float(inst['pricing']['us-east-1']["emr"]['emr']))} hourly
@@ -556,7 +568,7 @@
                 <span sort="999999">unavailable</span>
               % endif
             </td>
-            <td class="generation">${inst['generation']}</td>
+            <td class="generation hidden">${inst['generation']}</td>
           </tr>
         % endfor
       </tbody>
