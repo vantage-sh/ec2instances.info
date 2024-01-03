@@ -179,7 +179,7 @@ function init_data_table() {
           'cost-reserved',
           'cost-spot-min',
           'cost-spot-max',
-          'cost-ebs-optimized',
+          'spot-interrupt-rate',
           'maxenis',
           'memory-per-vcpu',
           'gpu_memory',
@@ -242,7 +242,7 @@ function init_data_table() {
           'ebs-iops',
           'ebs-as-nvme',
           'ebs-max-bandwidth',
-          'cost-ebs-optimized',
+          'spot-interrupt-rate',
           'trim-support',
           'warmed-up',
           'ipv6-support',
@@ -279,6 +279,22 @@ function init_data_table() {
           $('input', this).val(data.columns[col_index].search.search);
         });
       }
+
+      // Show columns hidden by default as part of initial page load optimization
+      this.api()
+        .columns()
+        .every(function () {
+          if (this.visible()) {
+            var col_class = $(this.header()).attr('class');
+            if (col_class.includes('cost-')) {
+              var find_class = col_class.split(' ')[1];
+            } else {
+              var find_class = col_class.split(' ')[0];
+            }
+            $('.' + find_class).removeClass('hidden');
+          }
+        });
+
       configure_highlighting();
 
       // handle where the user had a search saved locally
@@ -491,22 +507,20 @@ function change_cost() {
     }
   });
 
-  $.each($('td.cost-ebs-optimized'), function (i, elem) {
+  $.each($('td.spot-interrupt-rate'), function (i, elem) {
     elem = $(elem);
-    if (pricing_unit != 'instance') {
-      pricing_unit_modifier = elem.data(pricing_unit);
-    }
-    per_time = get_pricing(elem.closest('tr').attr('id'), g_settings.region, 'ebs');
-    if (
-      per_time &&
-      !isNaN(per_time) &&
-      !isNaN(pricing_unit_modifier) &&
-      pricing_unit_modifier > 0
-    ) {
-      per_time = ((per_time * duration_multiplier) / pricing_unit_modifier).toFixed(4);
-      elem.html('<span sort="' + per_time + '">$' + per_time + pricing_measuring_units + '</span>');
+    var per_time = get_pricing(
+      elem.closest('tr').attr('id'),
+      g_settings.region,
+      'linux',
+      'pct_interrupt',
+    );
+    if (per_time !== undefined) {
+      let freq = ['<5%', '5-10%', '10-15%', '15-20%', '>20%'];
+      var sort = freq.indexOf(per_time);
+      elem.html('<span sort="' + sort + '">' + per_time + '</span>');
     } else {
-      elem.html('<span sort="999999">unavailable</span>');
+      elem.html('<span sort="9">unavailable</span>');
     }
   });
 
@@ -657,6 +671,15 @@ function setup_column_toggle() {
               $(this).parent().toggleClass('active');
               $(this).blur(); // prevent focus style from sticking in Firefox
               e.stopPropagation(); // keep dropdown menu open
+
+              // Show columns hidden by default as part of initial page load optimization
+              var col_class = $(column.header()).attr('class');
+              if (col_class.includes('cost-')) {
+                var find_class = col_class.split(' ')[1];
+              } else {
+                var find_class = col_class.split(' ')[0];
+              }
+              $('.' + find_class).removeClass('hidden');
             }),
         ),
     );

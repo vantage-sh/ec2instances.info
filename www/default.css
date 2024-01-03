@@ -19,6 +19,10 @@ body {
   font-weight: bold;
 }
 
+.hidden {
+  display: none;
+}
+
 .nav-position {
   margin-right: auto;
   border-bottom: 0 !important;

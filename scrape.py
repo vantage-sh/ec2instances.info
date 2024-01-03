@@ -5,6 +5,7 @@ import json
 import locale
 import ec2
 import os
+import requests
 from six.moves.urllib import request as urllib2
 
 # Following advice from https://stackoverflow.com/a/1779324/216138
@@ -1226,6 +1227,57 @@ def add_dedicated_info(instances):
                     # )
 
 
+def add_spot_interrupt_info(instances):
+    """
+    add spot interrupt info for linux/windows instances in supported regions
+    see: https://aws.amazon.com/ec2/spot/instance-advisor/
+    """
+    os_keys = (("Windows", "mswin"), ("Linux", "linux"))
+    freq = ["<5%", "5-10%", "10-15%", "15-20%", ">20%"]
+    response = requests.get(
+        "https://spot-bid-advisor.s3.amazonaws.com/spot-advisor-data.json"
+    )
+    data = response.json()
+    spot_advisor = data["spot_advisor"]
+    spot_interrupt = {}
+    for region, regional_data in spot_advisor.items():
+        spot_interrupt[region] = {}
+        for os_key, os_id in os_keys:
+            spot_interrupt[region][os_id] = {}
+            for instance, info in regional_data[os_key].items():
+                spot_interrupt[region][os_id][instance] = {
+                    "r": info["r"],
+                    "s": info["s"],
+                }
+
+    for instance in instances:
+        for region in instance.pricing:
+            for _, os_id in os_keys:
+                if (
+                    region in spot_interrupt
+                    and os_id in spot_interrupt[region]
+                    and instance.instance_type in spot_interrupt[region][os_id]
+                    and region in instance.pricing
+                    and os_id in instance.pricing[region]
+                ):
+                    spot_data = spot_interrupt[region][os_id][instance.instance_type]
+                    instance.pricing[region][os_id]["pct_interrupt"] = freq[
+                        spot_data["r"]
+                    ]
+                    instance.pricing[region][os_id]["pct_savings_od"] = spot_data["s"]
+
+                    # For newer regions, spot data may not be available unless the AWS
+                    # credentials used to scrape have that region enabled. In this case,
+                    # fallback to using the 30 day % savings from spot advisor as the price
+                    if not "spot_min" in instance.pricing[region][os_id]:
+                        est_spot = (
+                            0.01
+                            * (100 - spot_data["s"])
+                            * float(instance.pricing[region][os_id]["ondemand"])
+                        )
+                        instance.pricing[region][os_id]["spot_min"] = f"{est_spot:.6f}"
+
+
 def scrape(data_file):
     """Scrape AWS to get instance data"""
     print("Parsing instance types...")
@@ -1256,6 +1308,8 @@ def scrape(data_file):
     add_placement_groups(all_instances)
     print("Adding dedicated host pricing...")
     add_dedicated_info(all_instances)
+    print("Adding spot interrupt details...")
+    add_spot_interrupt_info(all_instances)
 
     os.makedirs(os.path.dirname(data_file), exist_ok=True)
     with open(data_file, "w+") as f:
