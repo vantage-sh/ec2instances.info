@@ -270,8 +270,8 @@
           <th class="cost-reserved cost-reserved-linuxSQLEnterprise hidden">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux SQL Ent Reserved cost</abbr>
           </th>
-          <th class="cost-ebs-optimized hidden">
-            <abbr title='Some instance types are charged additionally when configured for optimized EBS usage'>EBS Optimized surcharge</abbr>
+          <th class="spot-interrupt-rate hidden">
+            <abbr title='The frequency at which spot instances are reclaimed by AWS.'>Linux Spot Interrupt Rate</abbr>
           </th>
           <th class="cost-emr hidden">
             <abbr title="This are the hourly rate EMR costs. Actual costs are EC2 + EMR by hourly rate">EMR cost</abbr>
@@ -547,20 +547,18 @@
               % endif
             % endfor
 
-            <td class="cost-ebs-optimized hidden" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
-              % if inst['ebs_max_bandwidth']:
-                % if inst['pricing'].get('us-east-1', {}).get('ebs', 'N/A') != "N/A":
-                  <span sort="${inst['pricing']['us-east-1']['ebs']}">
-                    $${"{:.4f}".format(float(inst['pricing']['us-east-1']['ebs']))} hourly
-                  </span>
-                % else:
-                  <span sort="0">0</span>
-                % endif
+            <td class="spot-interrupt-rate hidden" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+              <% intrpt = inst['pricing'].get('us-east-1', {}).get('linux', {}).get('pct_interrupt', 'N/A') %>
+              % if intrpt != "N/A":
+                <% freq = ["<5%", "5-10%", "10-15%", "15-20%", ">20%"] %>
+                <% sort = freq.index(intrpt) %> 
+                <span sort="${sort}">${intrpt}</span>
               % else:
-                <span sort="999999">unavailable</span>
+                <span sort="9">unavailable</span>
               % endif
+
             </td>
-            <td class="cost-emr hidden" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
+            <td class="cost-emr cost-emr hidden" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
               % if inst['pricing'].get('us-east-1', {}).get("emr", {}):
                 <span sort="${inst['pricing']['us-east-1']['emr']['emr']}">
                   $${"{:.4f}".format(float(inst['pricing']['us-east-1']["emr"]['emr']))} hourly
