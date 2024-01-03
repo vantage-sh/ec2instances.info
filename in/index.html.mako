@@ -119,7 +119,7 @@
 
         <div class="btn-group-vertical" id="filter-dropdown">
           <!-- blank label maintains spacing -->
-          <label class="dropdown-label mb-1"><br></label>
+          <label class="dropdown-label mb-1">Visible</label>
           <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
             <i class="icon-filter icon-white"></i>
             Columns
@@ -485,6 +485,7 @@
                 <td class="cost-ondemand cost-ondemand-linux all" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}" data-priority="1">
               % elif platform == 'mswin':
                 <td class="cost-ondemand cost-ondemand-mswin" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}" data-priority="1">
+
               % else:
                 <td class="cost-ondemand cost-ondemand-${platform} hidden" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
               % endif
@@ -514,7 +515,7 @@
               </td>
 
               % if platform in ['linux', 'rhel', 'sles', 'mswin']:
-                % if platfrom == 'linux':
+                % if platform == 'linux':
                   <td class="cost-spot-min cost-spot-min-${platform}" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
                 % else:
                   <td class="cost-spot-min cost-spot-min-${platform} hidden" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">

@@ -278,8 +278,22 @@ function init_data_table() {
           $('input', this).val(data.columns[col_index].search.search);
         });
       }
-      // Optimization of initial page load to hide hidden columns in DOM
-      document.querySelectorAll('.hidden').forEach((el) => el.classList.remove('hidden'));
+
+      // Show columns hidden by default as part of initial page load optimization
+      this.api()
+        .columns()
+        .every(function () {
+          if (this.visible()) {
+            var col_class = $(this.header()).attr('class');
+            if (col_class.includes('cost-')) {
+              var find_class = col_class.split(' ')[1];
+            } else {
+              var find_class = col_class.split(' ')[0];
+            }
+            $('.' + find_class).removeClass('hidden');
+          }
+        });
+
       configure_highlighting();
 
       // handle where the user had a search saved locally
@@ -623,8 +637,15 @@ function setup_column_toggle() {
               $(this).parent().toggleClass('active');
               $(this).blur(); // prevent focus style from sticking in Firefox
               e.stopPropagation(); // keep dropdown menu open
-              // Optimization of initial page load to hide hidden columns in DOM
-              document.querySelectorAll('.hidden').forEach((el) => el.classList.remove('hidden'));
+
+              // Show columns hidden by default as part of initial page load optimization
+              var col_class = $(column.header()).attr('class');
+              if (col_class.includes('cost-')) {
+                var find_class = col_class.split(' ')[1];
+              } else {
+                var find_class = col_class.split(' ')[0];
+              }
+              $('.' + find_class).removeClass('hidden');
             }),
         ),
     );
