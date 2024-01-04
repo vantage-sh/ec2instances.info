@@ -15,20 +15,17 @@ Heaton](https://github.com/powdahound), is now hosted by
 
 ## Project status
 
-Vantage employees are actively maintaining and hosting the site with the help of
-contributors here. Improvements in the form of pull requests or ideas via issues
-are welcome!
+Vantage employees are actively maintaining and hosting the site with the help of contributors here. Improvements in the form of pull requests or ideas via issues are welcome!
 
-People have suggested many neat ideas and feature requests by opening issues on
-this repository. We also have a [Slack
-Community](https://join.slack.com/t/vantagecommunity/shared_invite/zt-1szz6puz7-zRuJ8J4OJIiBFlcTobYZXA)
-for anyone to join with a devoted channel named #instances-vantage.sh.
+People have suggested many neat ideas and feature requests by opening issues on this repository. We also have a [Slack
+Community](https://vantage.sh/slack) for anyone to join with a devoted channel named #instances-vantage.sh.
 
 ## Running locally
 
 First, you'll need to provide credentials so that boto can access the AWS API. [See a terraform example here](./docs/terraform/iam.tf)!
 Options for setting this up are described in the [boto
 docs](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html).
+
 Ensure that your IAM user has at least the following permissions:
 
 ```json
@@ -58,13 +55,13 @@ git clone https://github.com/vantage-sh/ec2instances.info
 cd ec2instances.info
 ```
 
-2. Build a docker image:
+2. Build a `docker` image:
 
 ```bash
 docker build -t ec2instances.info .
 ```
 
-3. Run a container from the built docker image:
+3. Run a container from the built `docker` image:
 
 ```bash
 docker run -d --name some-container -p 8080:8080 ec2instances.info
@@ -75,8 +72,7 @@ docker run -d --name some-container -p 8080:8080 ec2instances.info
 ## Detailed local build instructions
 
 Note: These instructions are only kept here for reference, the Docker
-instructions mentioned above hide all these details and are recommended for
-local execution.
+instructions mentioned above hide all these details and are recommended for local execution.
 
 Make sure you have LibXML and Python development files. On Ubuntu, run `sudo apt-get install python-dev libxml2-dev libxslt1-dev libssl-dev`.
 
@@ -118,15 +114,14 @@ sass --watch in/style.scss:www/style.css
 
 ## API Access
 
-The data backing EC2Instances.info has recently been made available via a free
-API. All you need to get started is a free API key. To get started with API
-access, check out the devoted [API
-documentation](https://vantage.readme.io/reference/general).
+The data backing EC2Instances.info is available via a free API.
+
+- To get started, create a [free API key](https://vantage.readme.io/reference/authentication).
+- Review the `providers`, `services`, and `products` endpoints in the [API documentation](https://vantage.readme.io/v1.1.0/reference/getproviders).
 
 ## Keep up-to-date
 
-Feel free to watch/star this repo as we're looking to update the site regularly.
-Vantage also works on the following relevant projects:
+Feel free to watch/star this repo as we're looking to update the site regularly. Vantage also works on the following relevant projects:
 
 - [The Cloud Cost Handbook](https://github.com/vantage-sh/handbook) - An
   open-source set of guides for best practices of managing cloud costs.
