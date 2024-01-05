@@ -289,7 +289,7 @@ def render(data_file, template_file, destination_file, detail_pages=True):
 
 if __name__ == "__main__":
     sitemap = []
-    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html"))
+    sitemap.extend(render("www/instances.json", "in/index.html.mako", "www/index.html", False))
     sitemap.extend(
         render("www/rds/instances.json", "in/rds.html.mako", "www/rds/index.html")
     )

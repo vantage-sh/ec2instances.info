@@ -217,9 +217,12 @@
           <th class="cost-reserved cost-reserved-linux">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux Reserved cost</abbr>
           </th>
-          <th class="cost-spot-min cost-spot-min-linux">Linux Spot Minimum cost</th>
-          <th class="cost-spot-max cost-spot-max-linux hidden">Linux Spot Maximum cost</th>
-
+          <th class="cost-spot-min cost-spot-min-linux">
+            <abbr title='Minimum spot price for the region, which is specific to one AZ.  Spot prices are different per availabiliy zone.'>Linux Spot Minimum cost</abbr>
+          </th>
+          <th class="cost-spot-max cost-spot-max-linux hidden">
+            <abbr title='Trailing 30 day average spot sprice for the whole region.  Spot prices differ per AZ.'>Linux Spot Average cost</abbr>
+          </th>
           <th class="cost-ondemand cost-ondemand-rhel hidden">RHEL On Demand cost</th>
           <th class="cost-reserved cost-reserved-rhel hidden">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>RHEL Reserved cost</abbr>
@@ -238,8 +241,12 @@
           <th class="cost-reserved cost-reserved-mswin">
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Windows Reserved cost</abbr>
           </th>
-          <th class="cost-spot-min cost-spot-min-mswin hidden">Windows Spot Minimum cost</th>
-          <th class="cost-spot-max cost-spot-max-mswin hidden">Windows Spot Maximum cost</th>
+          <th class="cost-spot-min cost-spot-min-mswin hidden">
+            <abbr title='Minimum spot price for the region, which is specific to one AZ.  Spot prices are different per availabiliy zone.'>Windows Spot Minimum cost</abbr>
+          </th>
+          <th class="cost-spot-max cost-spot-max-mswin hidden">
+            <abbr title='Trailing 30 day average spot sprice for the whole region.  Spot prices differ per AZ.'>Windows Spot Average cost</abbr>
+          </th>
 
           <th class="cost-ondemand cost-ondemand-dedicated hidden">Dedicated Host On Demand</th>
           <th class="cost-reserved cost-reserved-dedicated hidden">
@@ -271,7 +278,7 @@
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux SQL Ent Reserved cost</abbr>
           </th>
           <th class="spot-interrupt-rate hidden">
-            <abbr title='The frequency at which spot instances are reclaimed by AWS.'>Linux Spot Interrupt Rate</abbr>
+            <abbr title='The frequency at which Linux spot instances are reclaimed by AWS.'>Linux Spot Interrupt Frequency</abbr>
           </th>
           <th class="cost-emr hidden">
             <abbr title="This are the hourly rate EMR costs. Actual costs are EC2 + EMR by hourly rate">EMR cost</abbr>
@@ -533,12 +540,18 @@
                 </td>
 
                 <td class="cost-spot-max cost-spot-max-${platform} hidden" data-platform="${platform}" data-vcpu="${inst['vCPU']}" data-ecu="${inst['ECU']}" data-memory="${inst['memory']}">
-                  %if inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot_max', 'N/A') != 'N/A':
+                  % if platform == 'linux' or platform == 'mswin':
                     <%
-                      spot_max = inst['pricing']['us-east-1'][platform]['spot_max']
+                      spot_price = inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot_avg', 'N/A')
                     %>
-                    <span sort="${spot_max}">
-                      $${"{:.4f}".format(float(spot_max))} hourly
+                  % else: 
+                    <%
+                      spot_price = inst['pricing'].get('us-east-1', {}).get(platform, {}).get('spot_max', 'N/A')
+                    %>
+                  % endif
+                  % if spot_price != 'N/A':
+                    <span sort="${spot_price}">
+                      $${"{:.4f}".format(float(spot_price))} hourly
                     </span>
                   % else:
                     <span sort="999999">unavailable</span>

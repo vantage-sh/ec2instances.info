@@ -6,6 +6,7 @@ import locale
 import ec2
 import os
 import requests
+import pickle
 from six.moves.urllib import request as urllib2
 
 # Following advice from https://stackoverflow.com/a/1779324/216138
@@ -335,7 +336,6 @@ def add_ebs_info(instances):
             cols = row.xpath("td")
             # remove last character which is a superscript with other info
             instance_type = sanitize_instance_type(totext(cols[0]))[:-1]
-            print(instance_type)
 
             if len(cols) == 4:
                 ebs_baseline_bandwidth = locale.atof(totext(cols[1]))
@@ -1264,16 +1264,13 @@ def add_spot_interrupt_info(instances):
                     ]
                     instance.pricing[region][os_id]["pct_savings_od"] = spot_data["s"]
 
-                    # For newer regions, spot data may not be available unless the AWS
-                    # credentials used to scrape have that region enabled. In this case,
-                    # fallback to using the 30 day % savings from spot advisor as the price
-                    if not "spot_min" in instance.pricing[region][os_id]:
-                        est_spot = (
-                            0.01
-                            * (100 - spot_data["s"])
-                            * float(instance.pricing[region][os_id]["ondemand"])
-                        )
-                        instance.pricing[region][os_id]["spot_min"] = f"{est_spot:.6f}"
+                    # convert percent savings to price
+                    est_spot = (
+                        0.01
+                        * (100 - spot_data["s"])
+                        * float(instance.pricing[region][os_id]["ondemand"])
+                    )
+                    instance.pricing[region][os_id]["spot_avg"] = f"{est_spot:.6f}"
 
 
 def scrape(data_file):
