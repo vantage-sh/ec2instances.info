@@ -488,12 +488,21 @@ function change_cost() {
     if (pricing_unit != 'instance') {
       pricing_unit_modifier = elem.data(pricing_unit);
     }
-    per_time = get_pricing(
-      elem.closest('tr').attr('id'),
-      g_settings.region,
-      elem.data('platform'),
-      'spot_max',
-    );
+    if (elem.data('platform') == 'mswin' || elem.data('platform') == 'linux') {
+      per_time = get_pricing(
+        elem.closest('tr').attr('id'),
+        g_settings.region,
+        elem.data('platform'),
+        'spot_avg',
+      );
+    } else {
+      per_time = get_pricing(
+        elem.closest('tr').attr('id'),
+        g_settings.region,
+        elem.data('platform'),
+        'spot_max',
+      );
+    }
     if (
       per_time &&
       !isNaN(per_time) &&
