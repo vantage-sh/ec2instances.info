@@ -218,7 +218,7 @@
             <abbr title='Minimum spot price for the region, which is specific to one AZ.  Spot prices are different per availabiliy zone.'>Linux Spot Minimum cost</abbr>
           </th>
           <th class="cost-spot-max cost-spot-max-linux hidden">
-            <abbr title='Trailing 30 day average spot sprice for the whole region.  Spot prices differ per AZ.'>Linux Spot Average cost</abbr>
+            <abbr title='30 day historical average spot sprice for the whole region.  Spot prices differ per AZ.  Source: Spot Instance Advisor.'>Linux Spot Average cost</abbr>
           </th>
           <th class="cost-ondemand cost-ondemand-rhel hidden">RHEL On Demand cost</th>
           <th class="cost-reserved cost-reserved-rhel hidden">
@@ -242,7 +242,7 @@
             <abbr title='Minimum spot price for the region, which is specific to one AZ.  Spot prices are different per availabiliy zone.'>Windows Spot Minimum cost</abbr>
           </th>
           <th class="cost-spot-max cost-spot-max-mswin hidden">
-            <abbr title='Trailing 30 day average spot sprice for the whole region.  Spot prices differ per AZ.'>Windows Spot Average cost</abbr>
+            <abbr title='Trailing 30 day average spot sprice for the whole region.  Spot prices differ per AZ.  Source: Spot Instance Advisor.'>Windows Spot Average cost</abbr>
           </th>
 
           <th class="cost-ondemand cost-ondemand-dedicated hidden">Dedicated Host On Demand</th>
@@ -275,7 +275,7 @@
             <abbr title='Reserved costs are an "effective" hourly rate, calculated by hourly rate + (upfront cost / hours in reserved term).  Actual hourly rates may vary.'>Linux SQL Ent Reserved cost</abbr>
           </th>
           <th class="spot-interrupt-rate hidden">
-            <abbr title='The frequency at which Linux spot instances are reclaimed by AWS.'>Linux Spot Interrupt Frequency</abbr>
+            <abbr title='The frequency at which Linux spot instances are reclaimed by AWS. Source: Spot Instance Advisor.'>Linux Spot Interrupt Frequency</abbr>
           </th>
           <th class="cost-emr hidden">
             <abbr title="This are the hourly rate EMR costs. Actual costs are EC2 + EMR by hourly rate">EMR cost</abbr>
