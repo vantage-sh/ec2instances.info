@@ -73,8 +73,8 @@
           </div>
         </div>
         <div class="d-flex align-items-center d-none d-xl-block">
-          <img width="20" height="100%" src="/terraform.svg">
-          <a href="https://console.vantage.sh/signup" class="vantage"><span class="fw-semibold">Automate AWS cost reporting with Terraform -></span></a>
+          <img width="24" src="/kubernetes-color.svg">
+          <a href="https://console.vantage.sh/signup" class="vantage">Optimize <span class="fw-semibold">Kubernetes Costs</span> with pod efficiency reports -></a>
         </div>
         <div class="d-flex">
           <div class="nav-buttons px-2 d-none d-xxl-block">

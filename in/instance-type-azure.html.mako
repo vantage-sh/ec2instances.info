@@ -36,12 +36,31 @@
             Star
           </a>
         </div>
-        <a href="https://www.vantage.sh/blog/vantage-launches-azure-cost-recommendations" class="vantage d-none d-xl-block">Vantage launches <span class="fw-semibold">Azure Cost Recommendations -></span></a>
+        <div class="d-flex align-items-center d-none d-xl-block">
+          <img width="24" src="/kubernetes-color.svg">
+          <a href="https://console.vantage.sh/signup" class="vantage">Optimize <span class="fw-semibold">Kubernetes Costs</span> with pod efficiency reports -></a>
+        </div>
         <div class="nav-buttons">
-          <a target="_blank" href="https://join.slack.com/t/vantagecommunity/shared_invite/zt-oey52myv-gq4AWRKkX25kjp1UGziPTw" class="btn btn-purple btn-icon">
-            <img class="me-1" width="18px" height="18px" src="https://cdn.bfldr.com/5H442O3W/at/pl546j-7le8zk-j7mis/Slack_Mark_Monochrome_White.svg?auto=webp&format=png&width=100&height=100"> 
-            Slack
-          </a>
+          <div class="nav-buttons px-2 d-none d-xxl-block">
+            <a target="_blank" href="https://vantage.sh/slack" class="btn btn-purple btn-icon">
+              <svg class="me-2" width="18" height="18" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <mask id="mask0_2_502" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="1" y="1" width="22" height="22">
+                  <path d="M22.6667 1.33334H1.33333V22.6667H22.6667V1.33334Z" fill="white"/>
+                </mask>
+                <g mask="url(#mask0_2_502)">
+                  <path d="M9.19336 12.5789C7.95607 12.5789 6.95251 13.5825 6.95251 14.8198V20.4251C6.95251 21.6625 7.95607 22.666 9.19336 22.666C10.4307 22.666 11.4342 21.6625 11.4342 20.4251V14.8198C11.4333 13.5825 10.4298 12.5789 9.19336 12.5789Z" fill="white"/>
+                  <path d="M1.35071 14.8199C1.35071 16.0581 2.35515 17.0626 3.59337 17.0626C4.8316 17.0626 5.83606 16.0581 5.83606 14.8199V12.5772H3.59515H3.59337C2.35515 12.5772 1.35071 13.5817 1.35071 14.8199Z" fill="white"/>
+                  <path d="M9.19611 1.33234H9.19344C7.95522 1.33234 6.95078 2.33679 6.95078 3.57501C6.95078 4.81323 7.95522 5.81765 9.19344 5.81765H11.4343V3.57501C11.4343 3.57501 11.4343 3.57234 11.4343 3.57056C11.4334 2.33412 10.4316 1.33234 9.19611 1.33234Z" fill="white"/>
+                  <path d="M3.57775 11.4402H9.19376C10.432 11.4402 11.4365 10.4357 11.4365 9.19753C11.4365 7.95931 10.432 6.95486 9.19376 6.95486H3.57775C2.33952 6.95486 1.33508 7.95931 1.33508 9.19753C1.33508 10.4357 2.33952 11.4402 3.57775 11.4402Z" fill="white"/>
+                  <path d="M20.406 6.95389C19.1696 6.95389 18.1678 7.95567 18.1678 9.19211V9.19655V11.4392H20.4087C21.6469 11.4392 22.6514 10.4347 22.6514 9.19655C22.6514 7.95833 21.6469 6.95389 20.4087 6.95389H20.406Z" fill="white"/>
+                  <path d="M12.5688 3.57497V9.19721C12.5688 10.4345 13.5723 11.4381 14.8097 11.4381C16.047 11.4381 17.0507 10.4345 17.0507 9.19721V3.57497C17.0507 2.33763 16.047 1.33408 14.8097 1.33408C13.5723 1.33408 12.5688 2.33763 12.5688 3.57497Z" fill="white"/>
+                  <path d="M17.0506 20.423C17.0506 19.1857 16.047 18.1822 14.8097 18.1822H12.5688V20.4248C12.5697 21.6612 13.5723 22.6639 14.8097 22.6639C16.047 22.6639 17.0506 21.6604 17.0506 20.423Z" fill="white"/>
+                  <path d="M20.4257 12.5771H14.8097C13.5715 12.5771 12.5671 13.5816 12.5671 14.8198C12.5671 16.058 13.5715 17.0625 14.8097 17.0625H20.4257C21.6639 17.0625 22.6683 16.058 22.6683 14.8198C22.6683 13.5816 21.6639 12.5771 20.4257 12.5771Z" fill="white"/>
+                </g>
+              </svg>
+              Slack
+            </a>
+          </div>
           <div class="px-1"></div>
           <a href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-github btn-icon">
             <svg class="me-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
