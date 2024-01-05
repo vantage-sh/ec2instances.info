@@ -15,6 +15,7 @@ var g_settings_defaults = {
   min_vcpus: 0,
   min_memory_per_vcpu: 0,
   min_gpus: 0,
+  min_maxips: 0,
   default_sort_col: 39,
   min_storage: 0,
   selected: '',
@@ -118,6 +119,11 @@ function init_data_table() {
             "<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>",
           );
           return;
+        } else if (i == 30) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='maxips' class='form-control' placeholder='Min IPs: 0'/>",
+          );
+          return;
         }
       }
 
@@ -180,6 +186,8 @@ function init_data_table() {
           'cost-spot-max',
           'spot-interrupt-rate',
           'maxenis',
+          'gpus',
+          'maxips',
           'memory-per-vcpu',
           'gpu_memory',
         ],
@@ -682,6 +690,7 @@ function url_for_selections() {
     min_vcpus: g_settings.min_vcpus,
     min_memory_per_vcpu: g_settings.min_memory_per_vcpu,
     min_gpus: g_settings.min_gpus,
+    min_maxips: g_settings.min_maxips,
     min_storage: g_settings.min_storage,
     filter: g_data_table.settings()[0].oPreviousSearch['sSearch'],
     region: g_settings.region,

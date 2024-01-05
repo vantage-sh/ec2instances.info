@@ -446,9 +446,14 @@
             </td>
             <td class="maxips hidden">
               % if inst['vpc']:
-                ${inst['vpc']['max_enis'] * inst['vpc']['ips_per_eni']}
+                <%
+                  maxips = inst['vpc']['max_enis'] * inst['vpc']['ips_per_eni']
+                %>
+                <span sort="${maxips}">
+                  ${maxips}
+                </span>
               % else:
-                N/A
+                <span sort="0">N/A</span>
               % endif
             </td>
             <td class="maxenis hidden">
