@@ -2,7 +2,14 @@
 
 <html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="UTF-8">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TBZCV32');</script>
+    <!-- End Google Tag Manager -->
     <link rel="stylesheet" href="/default.css" media="screen">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -19,7 +26,7 @@
       <div class="nav">
         <div class="logo-group">
           <a href="/opensearch/" class="logo">
-            <img width="135" height="100%" src="/vantage-logo-horizontal.svg">
+            <img width="135" height="35" alt="Vantage Logo" src="/vantage-logo-horizontal.svg">
           </a>
           <a href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-github btn-icon contr-mobile">
             <svg class="me-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +36,7 @@
           </a>
         </div>
         <div class="d-flex align-items-center d-none d-xl-block">
-          <img width="24" src="/kubernetes-color.svg">
+          <img width="24" height="24" alt="Kubernetes Logo" src="/kubernetes-color.svg">
           <a href="https://console.vantage.sh/signup" class="vantage">Optimize <span class="fw-semibold">Kubernetes Costs</span> with pod efficiency reports -></a>
         </div>
         <div class="nav-buttons">
@@ -258,10 +265,10 @@
       </div>
     </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript" charset="UTF-8"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-  <script src="/store/store.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/vantage.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/store/store.js" type="text/javascript" charset="UTF-8"></script>
+  <script src="/vantage.js" type="text/javascript" charset="UTF-8"></script>
   <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzf3nm7AMdE5JRgU_-R_VFNdekkzhN1-RjiQDeqZu3UsojLH6Kdvo5G0pyC0UzJJKo4/exec'
     const form = document.forms['submit-to-google-sheet']

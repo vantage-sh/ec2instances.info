@@ -191,7 +191,7 @@
         <div class="callout-close">
           <span class="material-icons">close</span>
         </div>
-        <img width="auto" height="25" src="/vantage-logo_full.svg">
+        <img width="auto" height="25" alt="Vantage Logo" src="/vantage-logo_full.svg">
         <h5>Concerned about cloud costs?</h5>
         <p>Connect your AWS account in under<br />5 minutes to see savings.</p>
         <a href="https://console.vantage.sh/signup" target="_blank">Connect AWS Account</a>

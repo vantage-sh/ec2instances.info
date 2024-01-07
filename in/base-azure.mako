@@ -2,6 +2,7 @@
 
 <html lang="en">
   <head>
+    <meta charset="UTF-8">
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -10,7 +11,6 @@
     })(window,document,'script','dataLayer','GTM-TBZCV32');</script>
     <!-- End Google Tag Manager -->
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <%block name="meta"/>
     <script type="application/ld+json">
       {
@@ -41,7 +41,7 @@
         <div class="d-flex align-items-center">
           <div class="logo-group me-md-3 me-0">
             <a href="/" class="logo">
-              <img width="135" height="100%" src="/vantage-logo-horizontal.svg">
+              <img width="135" height="35" alt="Vantage Logo" src="/vantage-logo-horizontal.svg">
             </a>
             <a href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-github btn-icon contr-mobile">
               <svg class="me-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +59,7 @@
           </ul>
         </div>
         <div class="d-flex align-items-center d-none d-xl-block">
-          <img width="24" src="/kubernetes-color.svg">
+          <img width="24" height="24" alt="Kubernetes Logo" src="/kubernetes-color.svg">
           <a href="https://console.vantage.sh/signup" class="vantage">Optimize <span class="fw-semibold">Kubernetes Costs</span> with pod efficiency reports -></a>
         </div>
         <div class="d-flex">
@@ -123,7 +123,7 @@
     -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/datatables.min.js"></script>
-    <script src="/store/store.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/store/store.js" type="text/javascript" charset="UTF-8"></script>
 
     <!-- Custom JS -->
     <script type="text/javascript">
@@ -161,7 +161,7 @@
         % endif
     </script>
 
-    <script src="/vantage.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/default.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/vantage.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="/default.js" type="text/javascript" charset="UTF-8"></script>
   </body>
 </html>
