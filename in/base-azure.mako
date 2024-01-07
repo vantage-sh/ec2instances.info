@@ -12,15 +12,6 @@
     <!-- End Google Tag Manager -->
 
     <%block name="meta"/>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Vantage",
-        "alternateName": ["EC2Instances.info"],
-        "url": "https://instances.vantage.sh/"
-      }
-    </script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" type="image/png" href="https://assets.vantage.sh/www/favicon-32x32.png">
     <!-- Libraries -->

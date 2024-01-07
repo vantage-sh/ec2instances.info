@@ -19,7 +19,7 @@
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Vantage",
-        "alternateName": ["EC2Instances.info"],
+        "alternateName": ["EC2Instances.info", "Vantage Cloud Costs"],
         "url": "https://instances.vantage.sh/"
       }
     </script>
