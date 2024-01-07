@@ -13,7 +13,6 @@
       <!-- Required meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <%block name="meta"/>
     <script type="application/ld+json">
       {

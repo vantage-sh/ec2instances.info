@@ -11,7 +11,6 @@
     })(window,document,'script','dataLayer','GTM-TBZCV32');</script>
     <!-- End Google Tag Manager -->
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="/default.css" media="screen">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
