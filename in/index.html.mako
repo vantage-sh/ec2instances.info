@@ -298,7 +298,7 @@
                 % if inst['base_performance']:
                 <span sort="${inst['base_performance']}">
                   <abbr title="For T2 instances, the 100% unit represents a High Frequency Intel Xeon Processors with Turbo up to 3.3GHz.">
-                  <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">Base performance:
+                  <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html" target="_blank">Base performance:
                   ${"%g" % (inst['base_performance'] * 100,)}%
                   </a></abbr>
                 </span>
@@ -314,7 +314,7 @@
                 ${inst['vCPU']} vCPUs
                   % if inst['burst_minutes']:
                   <abbr title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs.">
-                  <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html" target="_blank">
+                  <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html" target="_blank">
                   for a
                   ${"%gh %gm" % divmod(inst['burst_minutes'], 60)}
                   burst
