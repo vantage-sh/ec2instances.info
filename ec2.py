@@ -47,7 +47,6 @@ def translate_platform_name(operating_system, preinstalled_software):
     return platform
 
 
-
 # Translate between the API and what is used locally
 def translate_reserved_terms(term_attributes):
     lease_contract_length = term_attributes.get("LeaseContractLength")
@@ -308,7 +307,11 @@ def add_spot_pricing(imap):
                         }
 
         except botocore.exceptions.ClientError:
-            print('WARNING: Spot region "{}" not enabled. Falling back to spot advisor.'.format(region))
+            print(
+                'WARNING: Spot region "{}" not enabled. Falling back to spot advisor.'.format(
+                    region
+                )
+            )
             pass
 
 
