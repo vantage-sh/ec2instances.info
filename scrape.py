@@ -805,14 +805,14 @@ def add_gpu_info(instances):
         },
         "g5.xlarge": {
             "gpu_model": "NVIDIA A10G",
-            "compute_capability": 8.6, 
+            "compute_capability": 8.6,
             "gpu_count": 1,
             "cuda_cores": 9616,
             "gpu_memory": 24,
         },
         "g5.2xlarge": {
             "gpu_model": "NVIDIA A10G",
-            "compute_capability": 8.6, 
+            "compute_capability": 8.6,
             "gpu_count": 1,
             "cuda_cores": 9616,
             "gpu_memory": 24,
