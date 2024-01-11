@@ -1,0 +1,2 @@
+<img width="24" height="24" alt="Kubernetes Logo" src="/kubernetes-color.svg">
+<a href="https://console.vantage.sh/signup" class="vantage">Optimize <span class="fw-semibold">Kubernetes Costs</span> with pod efficiency reports -></a>

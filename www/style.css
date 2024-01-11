@@ -168,6 +168,14 @@ table#Unavailable td {
   background-color: #cf67f4;
   border-color: #d37bf2;
 }
+.btn.btn-callout {
+  background-color: #9c25c7;
+  color: #ffffff;
+}
+.btn.btn-callout:hover {
+  background-color: #cf67f4;
+  border-color: #d37bf2;
+}
 .btn.btn-icon {
   display: flex;
   align-items: center;
@@ -322,18 +330,9 @@ table#Unavailable td {
   background-repeat: no-repeat;
   background-size: 300px 300px;
   position: relative;
-  /*
-  a {
-    padding: 12px 14px;
-    border-radius: 6px;
-    color: $white;
-    text-decoration: none;
-    line-height: 14px;
-    font-size: 14px;
-    font-weight: 500;
-    background-color: $purple-1;
-  }
-  */
+}
+.detail-page-callout {
+  background-image: none !important;
 }
 @media screen and (max-width: 1400px) {
   .vantage-callout {

@@ -349,6 +349,10 @@ table {
   @media screen and (max-width: 1400px) {
     background-image: none;
   }
+  
+  .detail-page-callout {
+    background-image: none !important;
+  }
 
   .callout-close {
     position: absolute;

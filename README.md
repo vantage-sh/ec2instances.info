@@ -141,9 +141,10 @@ git merge upstream
 git push
 ```
 
-## [Internal] Adding Instance Types
+## [Internal] How the Ads work
 
-New instance types can automatically be pulled down but the software has to be rebuilt and redployed with a commit to master. This is a list of instance types added that way.
+Check `vantage.js`. The `vantage_settings()` function is called first thing in `$(document).ready()` in `default.js` and it's called in the beginning of the javascript on each detail page.
 
-- r6id
-- r6a
+It looks up the `vantage` cookie in local storage and sees if the ad tag, a variant of `connect-X` where X is a number, is set. If it is, it hides the ad. If it is not set, it adds a click handler to the X button on the ad. If a user clicks the X button, the ad will be hidden and their preference will be saved to local storage.
+
+To unhide all ads, increment the ad tag.

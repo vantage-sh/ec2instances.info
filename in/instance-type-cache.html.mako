@@ -36,8 +36,7 @@
           </a>
         </div>
         <div class="d-flex align-items-center d-none d-xl-block">
-          <img width="24" height="24" alt="Kubernetes Logo" src="/kubernetes-color.svg">
-          <a href="https://console.vantage.sh/signup" class="vantage">Optimize <span class="fw-semibold">Kubernetes Costs</span> with pod efficiency reports -></a>
+          <%include file="ads-banner.mako"/>
         </div>
         <div class="nav-buttons">
           <a target="_blank" href="https://vantage.sh/slack" class="btn btn-purple btn-icon">
@@ -257,6 +256,7 @@
                 </table>
               % endif
             </div>
+            <%include file="ads-connect-dp.mako"/>
           </div>
         </div>
         <div class="column-right">

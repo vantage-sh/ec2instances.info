@@ -81,8 +81,7 @@
           </div>
         </div>
         <div class="d-flex align-items-center d-none d-xl-block">
-          <img width="24" height="24" alt="Kubernetes Logo" src="/kubernetes-color.svg">
-          <a href="https://console.vantage.sh/signup" class="vantage">Optimize <span class="fw-semibold">Kubernetes Costs</span> with pod efficiency reports -></a>
+          <%include file="ads-banner.mako"/>
         </div>
         <div class="d-flex">
           <div class="nav-buttons px-2 d-none d-xxl-block">

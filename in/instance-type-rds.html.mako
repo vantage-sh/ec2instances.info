@@ -27,7 +27,7 @@
       <div class="nav">
         <div class="logo-group">
           <a href="/rds/" class="logo">
-            <img width="135" height="35" alt="Kubernetes Logo" src="/vantage-logo-horizontal.svg">
+            <img width="135" height="35" alt="Vantage Logo" src="/vantage-logo-horizontal.svg">
           </a>
           <a href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-github btn-icon contr-mobile">
             <svg class="me-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,8 +37,7 @@
           </a>
         </div>
         <div class="d-flex align-items-center d-none d-xl-block">
-          <img width="24" src="/kubernetes-color.svg">
-          <a href="https://console.vantage.sh/signup" class="vantage">Optimize <span class="fw-semibold">Kubernetes Costs</span> with pod efficiency reports -></a>
+          <%include file="ads-banner.mako"/>
         </div>
         <div class="nav-buttons">
           <a target="_blank" href="https://vantage.sh/slack" class="btn btn-purple btn-icon">
@@ -302,6 +301,7 @@
                 </table>
               % endif
             </div>
+            <%include file="ads-connect-dp.mako"/>
           </div>
         </div>
         <div class="column-right">

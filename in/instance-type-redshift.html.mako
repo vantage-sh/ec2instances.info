@@ -36,8 +36,7 @@
           </a>
         </div>
         <div class="d-flex align-items-center d-none d-xl-block">
-          <img width="24" height="24" alt="Kubernetes Logo" src="/kubernetes-color.svg">
-          <a href="https://console.vantage.sh/signup" class="vantage">Optimize <span class="fw-semibold">Kubernetes Costs</span> with pod efficiency reports -></a>
+          <%include file="ads-banner.mako"/>
         </div>
         <div class="nav-buttons">
           <a target="_blank" href="https://vantage.sh/slack" class="btn btn-purple btn-icon">
@@ -202,17 +201,6 @@
               </div>
               % for category, attrs in i.items():
                 % if category != "Pricing" and category != "Not Shown" and len(attrs) > 0:
-                  % if category == "Storage":
-                    <div class="vantage-callout">
-                      <div class="callout-close">
-                        <span class="material-icons">close</span>
-                      </div>
-                      <img width="auto" height="25" src="/vantage-logo_full.svg">
-                      <h5>Concerned about cloud costs?</h5>
-                      <p>Connect your AWS account in under<br />5 minutes to see savings.</p>
-                      <a href="https://console.vantage.sh/signup" target="_blank">Connect AWS Account</a>
-                    </div>
-                  % endif
                   <table class="table" id="${category}">
                     <tr>
                       <th class="col-6 border-end"><a href="#${category}">${category}</a></th>
@@ -243,6 +231,7 @@
                 </table>
               % endif
             </div>
+            <%include file="ads-connect-dp.mako"/>
           </div>
         </div>
         <div class="column-right">
