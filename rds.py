@@ -107,7 +107,7 @@ def add_ebs_info(instances):
             if row.xpath("th"):
                 continue
             cols = row.xpath("td")
-            instance_type = sanitize_instance_type(totext(cols[0]).replace("*", ""))
+            instance_type = sanitize_instance_type(totext(cols[0]))[:-1]
 
             if len(cols) == 4:
                 ebs_baseline_bandwidth = locale.atof(totext(cols[1]))
@@ -144,7 +144,7 @@ def add_ebs_info(instances):
             if row.xpath("th"):
                 continue
             cols = row.xpath("td")
-            instance_type = sanitize_instance_type(totext(cols[0]).replace("*", ""))
+            instance_type = sanitize_instance_type(totext(cols[0]))[:-1]
             ebs_max_bandwidth = locale.atof(totext(cols[1]))
             ebs_throughput = locale.atof(totext(cols[2]))
             ebs_iops = locale.atof(totext(cols[3]))
