@@ -231,7 +231,7 @@
                 </table>
               % endif
             </div>
-            <%include file="ads-connect-dp.mako"/>
+            <%include file="ads-connect.mako"/>
           </div>
         </div>
         <div class="column-right">

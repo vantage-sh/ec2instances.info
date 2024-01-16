@@ -14,3 +14,5 @@ ec2instances
 www/index.html
 result
 .cache
+.sass-cache/
+*.style.css.map
