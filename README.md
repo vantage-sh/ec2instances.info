@@ -107,10 +107,14 @@ docker run -it --rm --name ec2instances -v $(pwd):/opt/app --env HTTP_HOST=0.0.0
 
 docker exec -it ec2instances /bin/bash
 
+# (if editing css)
+sass --watch in/style.scss:www/style.css
+
 # INSIDE CONTAINER
 python3 render.py
-sass --watch in/style.scss:www/style.css
 ```
+
+**Note about CSS:** The current container (20.04) doesn't work anymore with sass. Run this outside to make changes to the CSS. Run prettier formatter after on .css and .scss files to pass the linter.
 
 ## API Access
 

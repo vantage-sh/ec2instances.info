@@ -203,6 +203,14 @@ table {
     background-color: #eee;
     color: #1a1a1c;
   }
+  &.btn-callout {
+    background-color: #9c25c7;
+    color: #ffffff;
+    &:hover {
+      background-color: #cf67f4;
+      border-color: #d37bf2;
+    }
+  }
 }
 
 .column-left {
@@ -340,16 +348,12 @@ table {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-image: url('/callout-graphic.png');
-  background-position: right center;
-  background-repeat: no-repeat;
-  background-size: 300px 300px;
   position: relative;
 
   @media screen and (max-width: 1400px) {
     background-image: none;
   }
-  
+
   .detail-page-callout {
     background-image: none !important;
   }
@@ -374,19 +378,6 @@ table {
   img {
     margin-bottom: 20px;
   }
-
-  /*
-  a {
-    padding: 12px 14px;
-    border-radius: 6px;
-    color: $white;
-    text-decoration: none;
-    line-height: 14px;
-    font-size: 14px;
-    font-weight: 500;
-    background-color: $purple-1;
-  }
-  */
 
   h5 {
     font-weight: 600;

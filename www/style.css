@@ -104,7 +104,7 @@ a:focus {
 table {
   border: 1px solid #e3e3e9;
   font-size: 14px;
-  /* width: 100%; */
+  width: 100%;
   margin-bottom: 24px !important;
   border-radius: 6px;
 }
@@ -168,14 +168,6 @@ table#Unavailable td {
   background-color: #cf67f4;
   border-color: #d37bf2;
 }
-.btn.btn-callout {
-  background-color: #9c25c7;
-  color: #ffffff;
-}
-.btn.btn-callout:hover {
-  background-color: #cf67f4;
-  border-color: #d37bf2;
-}
 .btn.btn-icon {
   display: flex;
   align-items: center;
@@ -183,6 +175,14 @@ table#Unavailable td {
 .btn.btn-github {
   background-color: #eee;
   color: #1a1a1c;
+}
+.btn.btn-callout {
+  background-color: #9c25c7;
+  color: #ffffff;
+}
+.btn.btn-callout:hover {
+  background-color: #cf67f4;
+  border-color: #d37bf2;
 }
 
 .column-left {
@@ -325,19 +325,15 @@ table#Unavailable td {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-image: url('/callout-graphic.png');
-  background-position: right center;
-  background-repeat: no-repeat;
-  background-size: 300px 300px;
   position: relative;
-}
-.detail-page-callout {
-  background-image: none !important;
 }
 @media screen and (max-width: 1400px) {
   .vantage-callout {
     background-image: none;
   }
+}
+.vantage-callout .detail-page-callout {
+  background-image: none !important;
 }
 .vantage-callout .callout-close {
   position: absolute;
@@ -345,7 +341,7 @@ table#Unavailable td {
   top: 8px;
   padding: 8px;
   border-radius: 100px;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   color: #5a5a5f;
   display: flex;
   cursor: pointer;
