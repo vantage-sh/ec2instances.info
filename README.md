@@ -117,7 +117,7 @@ sass --watch in/style.scss:www/style.css
 The data backing EC2Instances.info is available via a free API.
 
 - To get started, create a [free API key](https://vantage.readme.io/reference/authentication).
-- Review the `providers`, `services`, and `products` endpoints in the [API documentation](https://vantage.readme.io/v1.1.0/reference/getproviders).
+- Review the `providers`, `services`, and `products` endpoints in the [API documentation](https://vantage.readme.io/reference/getproducts).
 
 ## Keep up-to-date
 
