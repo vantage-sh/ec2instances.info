@@ -121,23 +121,20 @@
 
       <div class="footer well border-top">
           <div class="row ms-2 me-2 mt-2">
-            <div class="col-8 col-md-3">
+            <div class="col-auto d-none d-md-block">
+              <span class="pe-2"><strong>AWS</strong></span>
+              <span class="pe-2"><a href="/azure">Azure</a></span>
+            </div>
+            <div class="col-auto d-none d-md-block">
               <span>Updated ${generated_at}</span>
             </div>
-            <div class="col-6 d-none d-md-block right linkto align-items-start mt-0">
-              <div class="row align-items-start mt-0">
-                <div class="col-9 d-none d-xl-block">
-                  <%block name="header"/>
-                </div>
-                <div class="col-2">
-                  <a href="https://handbook.vantage.sh/tools/instances/" target="_blank">Docs</a>
-                </div>
-                <div class="col-1">
-                  <a href="https://instances.vantage.sh/about">About</a>
-                </div>
-              </div>
+            <div class="col-auto">
+              <%block name="header"/>
             </div>
-            <div class="col-4 col-md-3 right linkto pull-right">
+            <div class="col-auto d-none d-md-block">
+              <a href="https://handbook.vantage.sh/tools/instances/" target="_blank">Docs</a>
+            </div>
+            <div class="col-auto d-none d-md-block">
               <span>By <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
             </div>
           </div>

@@ -90,18 +90,22 @@
       ${self.body()}
 
       <div class="footer well border-top">
-          <div class="row ms-2 me-3 mt-2">
-            <div class="col-5">
+          <div class="row ms-2 me-3 mt-2 align-items-middle">
+            <div class="col-auto">
+              <span class="pe-2"><a href="/">AWS</a></span>
+              <span class="pe-2"><strong>Azure</strong></span>
+            </div>
+            <div class="col-auto">
               <%block name="header"/>
             </div>
-            <div class="col-1 right linkto">
-              <a href="https://handbook.vantage.sh/tools/instances/" target="_blank">Documentation</a>
+            <div class="col-auto">
+              <a href="https://handbook.vantage.sh/tools/instances/" target="_blank">Docs</a>
             </div>
-            <div class="col-1 linkto">
-              <a href="https://instances.vantage.sh/about">About</a>
+            <div class="col-auto">
+              <span>Updated ${generated_at}.</span>
             </div>
-            <div class="col-5 right linkto">
-              <span>Updated ${generated_at}. Supported by <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
+            <div class="col-auto">
+              <span>By <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
             </div>
           </div>
       </div>

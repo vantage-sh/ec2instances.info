@@ -785,7 +785,12 @@ function url_for_selections() {
 
 function maybe_update_url() {
   // Save localstorage data as well
-  store.set('ec2_settings', g_settings);
+  var urlpath = window.location.pathname;
+  if (urlpath.includes('azure')) {
+    store.set('azure_settings', g_settings);
+  } else {
+    store.set('ec2_settings', g_settings);
+  }
 
   if (!history.replaceState) {
     return;
@@ -1002,7 +1007,13 @@ function toggle_column(col_index) {
 // retrieve all the parameters from the location string
 function load_settings() {
   // load settings from local storage
-  g_settings = store.get('ec2_settings') || {};
+  var urlpath = window.location.pathname;
+  if (urlpath.includes('azure')) {
+    g_settings = store.get('azure_settings') || {};
+  } else {
+    g_settings = store.get('ec2_settings') || {};
+    store.set('ec2_settings', g_settings);
+  }
 
   if (location.search) {
     var params = location.search.slice(1).split('&');
