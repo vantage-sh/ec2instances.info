@@ -174,7 +174,7 @@
             </th>
           % endfor
 
-          % for platform, code in {'MySQL': '2', 'SQL Server Standard': '12', 'Aurora Postgres & MySQL': '21', 'Aurora I/O Optimized': '211', 'MariaDB': '18', 'Oracle Enterprise': '5'}.items():
+          % for platform, code in {'MySQL': '2',  'SQL Server Express': '10','SQL Server Web': '11','SQL Server Standard': '12','SQL Server Enterprise': '15', 'Aurora Postgres & MySQL': '21', 'Aurora I/O Optimized': '211', 'MariaDB': '18', 'Oracle Enterprise': '5'}.items():
             <th class="cost-ondemand cost-ondemand-${code}">${platform} On Demand Cost</th>
             % if code != '211':
             <th class="cost-reserved cost-reserved-${code}">
@@ -257,7 +257,7 @@
           </td>
           % endfor
 
-          % for platform, code in {'MySQL': '2', 'SQL Server Standard': '12', 'Aurora Postgres & MySQL': '21', 'Aurora I/O Optimized': '211', 'MariaDB': '18', 'Oracle Enterprise': '5'}.items():
+          % for platform, code in {'MySQL': '2', 'SQL Server Express': '10', 'SQL Server Web': '11', 'SQL Server Standard': '12','SQL Server Enterprise': '15', 'Aurora Postgres & MySQL': '21', 'Aurora I/O Optimized': '211', 'MariaDB': '18', 'Oracle Enterprise': '5'}.items():
           <td class="cost-ondemand cost-ondemand-${code}" data-platform='${code}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
             % if inst['pricing'].get('us-east-1', {}).get(code, {}).get('ondemand', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][code]['ondemand']}">
