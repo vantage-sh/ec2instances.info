@@ -63,9 +63,18 @@ docker build -t ec2instances.info .
 
 3. Run a container from the built `docker` image:
 
-```bash
+````bash
 docker run -d --name some-container -p 8080:8080 ec2instances.info
-```
+
+4. Open [localhost:8080](http://localhost:8080) in your browser to see it in action.
+
+## Docker Compose
+
+Here's how you can build and run docker image using Docker Compose (tested with Docker Compose v2):
+
+```bash
+docker-compose up
+````
 
 4. Open [localhost:8080](http://localhost:8080) in your browser to see it in action.
 
@@ -121,7 +130,7 @@ python3 render.py
 The data backing EC2Instances.info is available via a free API.
 
 - To get started, create a [free API key](https://vantage.readme.io/reference/authentication).
-- Review the `providers`, `services`, and `products` endpoints in the [API documentation](https://vantage.readme.io/v1.1.0/reference/getproviders).
+- Review the `providers`, `services`, and `products` endpoints in the [API documentation](https://vantage.readme.io/reference/getproducts).
 
 ## Keep up-to-date
 

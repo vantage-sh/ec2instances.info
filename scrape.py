@@ -1060,9 +1060,9 @@ def add_availability_zone_info(instances):
                 availability_zones.append(availability_zone_id)
                 availability_zones.sort()
                 region_availability_zones[region_name] = availability_zones
-                instance_type_region_availability_zones[
-                    instance_type
-                ] = region_availability_zones
+                instance_type_region_availability_zones[instance_type] = (
+                    region_availability_zones
+                )
     for inst in instances:
         inst.availability_zones = instance_type_region_availability_zones.get(
             inst.instance_type, {}
@@ -1188,9 +1188,9 @@ def add_dedicated_info(instances):
                         if inst_type not in all_pricing[region]:
                             all_pricing[region][inst_type] = {"reserved": {}}
 
-                        all_pricing[region][inst_type]["reserved"][
-                            translate_ri
-                        ] = format_price(price)
+                        all_pricing[region][inst_type]["reserved"][translate_ri] = (
+                            format_price(price)
+                        )
 
         return all_pricing
 
