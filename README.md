@@ -63,7 +63,7 @@ docker build -t ec2instances.info .
 
 3. Run a container from the built `docker` image:
 
-```bash
+````bash
 docker run -d --name some-container -p 8080:8080 ec2instances.info
 
 4. Open [localhost:8080](http://localhost:8080) in your browser to see it in action.
@@ -74,7 +74,7 @@ Here's how you can build and run docker image using Docker Compose (tested with 
 
 ```bash
 docker-compose up
-```
+````
 
 4. Open [localhost:8080](http://localhost:8080) in your browser to see it in action.
 
