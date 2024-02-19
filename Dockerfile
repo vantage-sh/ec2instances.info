@@ -5,11 +5,8 @@ ARG AWS_SECRET_ACCESS_KEY
 ARG AWS_SESSION_TOKEN
 ARG DEBIAN_FRONTEND=noninteractive
 
-<<<<<<< HEAD
-=======
 LABEL org.opencontainers.image.authors="Sebastian Sasu <sebi@nologin.ro>, Cristian Magherusan-Stanciu <cristi@leanercloud.com>, Brooke McKim <brooke@vantage.sh>"
 
->>>>>>> ec2instances.info/master
 RUN apt-get update > /dev/null
 RUN apt-get install -y nginx python3 pip locales curl libxml2-dev libxslt-dev nodejs npm > /dev/null
 RUN npm install --global sass
@@ -29,10 +26,4 @@ RUN invoke build
 
 EXPOSE 8080
 
-<<<<<<< HEAD
 CMD ["nginx", "-g", "daemon off;"]
-=======
-ENV HTTP_HOST=0.0.0.0
-
-CMD ["invoke", "serve"]
->>>>>>> ec2instances.info/master
