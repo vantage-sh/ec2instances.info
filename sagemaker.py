@@ -213,6 +213,8 @@ def add_pricing_info(output_file, input_file=None):
                 new_attributes.pop("operation", None)
                 new_attributes.pop("processing", None)
                 new_attributes.pop("instanceName", None)
+                new_attributes.pop("component", None)
+                new_attributes.pop("pricingUnit", None)
 
                 new_attributes["pricing"] = attributes["pricing"]
                 new_attributes["regions"] = {}
