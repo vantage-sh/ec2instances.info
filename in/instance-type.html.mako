@@ -99,6 +99,14 @@
               </div>
             </div>
 
+            % if i["Amazon"][1]["value"] == 'p5.48xlarge' or i["Amazon"][1]["value"] == 'p4d.24xlarge':
+            <div class="mt-4 d-flex justify-content-center">
+              <div>
+                <p>This instance is available in <a href="https://www.vantage.sh/blog/aws-ec2-capacity-blocks-gpu-shortage-cost">Capacity Blocks</a>.</p>
+              </div>
+            </div>
+            % endif
+
             <!-- price Selects -->
             <div class="d-flex flex-wrap mt-2">
               <div class="col-6 pe-2 mb-2">
