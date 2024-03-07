@@ -120,7 +120,7 @@
       ${self.body()}
 
       <div class="footer well border-top">
-          <div class="row ms-2 me-2 mt-2">
+          <div class="row ms-2 me-2 mt-0 d-flex align-items-center">
             <div class="col-auto d-none d-md-block">
               <span class="pe-2"><strong>AWS</strong></span>
               <span class="pe-2"><a href="/azure">Azure</a></span>
@@ -128,7 +128,7 @@
             <div class="col-auto d-none d-md-block">
               <span>Updated ${generated_at}</span>
             </div>
-            <div class="col-auto">
+            <div class="col-auto d-none d-md-block mt-3">
               <%block name="header"/>
             </div>
             <div class="col-auto d-none d-md-block">
@@ -136,6 +136,12 @@
             </div>
             <div class="col-auto d-none d-md-block">
               <span>By <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
+            </div>
+            <div class="col-auto d-none d-md-block">
+              <input class="form-control" id="api-email-input" placeholder="Email">
+            </div>
+            <div class="col-auto d-none d-md-block">
+              <button class="btn btn-primary api-submit-input">Get API Key</button>
             </div>
           </div>
       </div>

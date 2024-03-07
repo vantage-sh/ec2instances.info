@@ -974,6 +974,30 @@ function on_data_table_initialized() {
         }
       });
   });
+
+  $('.api-submit-input').click(function (e) {
+    e.preventDefault();
+    var email = $('#api-email-input').val();
+    var ret = push_cio_redirect(email, true);
+  });
+
+  function push_cio_redirect(email, redirect) {
+    var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    if (email.match(regex)) {
+      if (redirect) {
+        window.location.href = 'https://console.vantage.sh/signup?authentication_email=' + email;
+      } else {
+        return 'Thanks!';
+      }
+    } else {
+      // Either an empty email (they just clicked 'Get Started') or invalid. Either way, go to signup
+      if (redirect) {
+        window.location.href = 'https://console.vantage.sh/signup';
+      }
+      return 'Email did not pass validation';
+    }
+  }
 }
 
 // sorting for colums with more complex data
