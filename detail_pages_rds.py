@@ -36,6 +36,8 @@ rds_engine_mapping = {
     "230": "SQL Server Enterprise (Outpost On-Prem)",
     "231": "SQL Server (Outpost On-Prem)",
     "232": "SQL Server Web (Outpost On-Prem)",
+    "402": "SQL Server Standard BYOL",
+    "403": "SQL Server Enterprise",
     "405": "SQL Server Standard BYOM",
     "406": "SQL Server Enterprise BYOM",
     "407": "SQL Server Developer",
@@ -178,7 +180,11 @@ def prices(pricing):
                 # RDS ONLY: engines are numbers but some are words. We can skip the words
                 continue
 
-            os = rds_engine_mapping[os]
+            try:
+                os = rds_engine_mapping[os]
+            except KeyError:
+                print(f"WARNING: RDS OS {os} not found for detail pages.")
+                continue
             display_prices[region][os] = {}
 
             # Doing a lot of work to deal with prices having up to 6 places
