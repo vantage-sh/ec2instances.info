@@ -1,26 +1,27 @@
 import argparse
 import json
 
-def load_data(file_path):
-    with open(file_path, 'r') as file:
-        return json.load(file)
-
 def filter_instances(data, region, vcpus, memory, arch):
     filtered = []
-    for instance_id, attributes in data.items():
-        if attributes.get('region') == region and \
-           attributes.get('vcpus') == vcpus and \
-           attributes.get('memory') == memory and \
-           arch in attributes.get('arch', []) and \
-           'linux' in attributes:
-            filtered.append({"instance_type": instance_id, **attributes['linux']})
-    return filtered
+    filtered = [instance for instance in data if region in set(instance['pricing'].keys())]
+    filtered = [instance for instance in filtered if int(instance['vCPU']) == int(vcpus)]
+    filtered = [instance for instance in filtered if int(instance['memory']) == int(memory)]
+    filtered = [instance for instance in filtered if arch in instance.get('arch', [])]
+
+    return [{"instance_type": instance['instance_type'], **instance['pricing'][region]['linux']}
+            for instance in filtered
+            if region in instance['pricing'] and \
+            'linux' in instance['pricing'][region]]
 
 def find_cheapest(instances, cost_type):
     cheapest = None
     for instance in instances:
         if cost_type == 'spot':
-            price = float(instance.get('spot_avg', float('inf')))
+            if instance.get('pct_interrupt', 0) == '<5%':
+                print(instance['instance_type'])
+#            if instance.get('pct_savings_od', 0) > 70:
+#                print(instance)
+            # price = float(instance.get('spot_avg', float('inf')))
         elif cost_type == 'ondemand':
             price = float(instance.get('ondemand', float('inf')))
         else:  # blend
@@ -28,15 +29,18 @@ def find_cheapest(instances, cost_type):
             ondemand_price = float(instance.get('ondemand', float('inf')))
             price = min(spot_price, ondemand_price)
 
-        if cheapest is None or price < cheapest[1]:
-            cheapest = (instance, price)
-    if cheapest:
-        return {"instance_type": cheapest[0]['instance_type'], "spot_price": cheapest[0].get('spot_avg'), "ondemand_price": cheapest[0].get('ondemand')}
-    return None
+    #     if cheapest is None or price < cheapest[1]:
+    #         cheapest = (instance, price)
+    # if cheapest:
+    #     print(cheapest)
+    #     return {
+    #         "instance_type": cheapest[0]['instance_type'],
+    #         "spot_price": cheapest[0].get('spot_avg'),
+    #         "ondemand_price": cheapest[0].get('ondemand')
+    #     }
 
 def main():
     parser = argparse.ArgumentParser(description='Select Linux instances based on criteria.')
-    parser.add_argument('file_path', type=str, help='Path to the JSON data file')
     parser.add_argument('--region', type=str, required=True, help='Region name')
     parser.add_argument('--vcpus', type=int, required=True, help='Number of vCPUs')
     parser.add_argument('--memory', type=int, required=True, help='Memory in GB')
@@ -45,7 +49,8 @@ def main():
 
     args = parser.parse_args()
 
-    data = load_data(args.file_path)
+    data = json.load(open("www/instances.json"))
+
     instances = filter_instances(data, args.region, args.vcpus, args.memory, args.arch)
 
     if args.cheapest:
