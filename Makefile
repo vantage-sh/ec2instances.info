@@ -20,4 +20,4 @@ nixpkgs-fmt:
 
 
 deploy-opszero:
-	wrangler pages deploy --project-name instance-select ./build/
+	wrangler pages deploy --project-name instance-select ./opszero-app/
