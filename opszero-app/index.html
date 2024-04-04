@@ -1,0 +1,46 @@
+<html>
+
+    <head>
+        <title>instance-select by opsZero</title>
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('#data').DataTable({
+                    ajax: '/instances.json',
+                    columns: [
+                        { data: "instance-type" },
+                        { data: "arch" },
+                        { data: "generation" },
+                        { data: "region" },
+                        { data: "ondemand" },
+                        { data: "spot_avg" },
+                    ],
+                    paging: false
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <h1>instance-select</h1>
+
+        <table id="data">
+            <thead>
+                <tr>
+                    <th>Instance Type</th>
+                    <th>Arch</th>
+                    <th>Generation</th>
+                    <th>Region</th>
+                    <th>Ondemand</th>
+                    <th>Spot</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+    </body>
+
+</html>

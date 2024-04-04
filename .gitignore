@@ -5,7 +5,6 @@
 env
 venv
 .env
-build
 dist
 ec2instances
 .vscode
