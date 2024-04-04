@@ -17,3 +17,7 @@ prettier:
 
 nixpkgs-fmt:
 	nixpkgs-fmt .
+
+
+deploy-opszero:
+	wrangler pages deploy --project-name instance-select ./build/
