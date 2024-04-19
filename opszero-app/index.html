@@ -1,58 +1,112 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <title>instance-select by opsZero</title>
-        <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+<head>
+    <title>instance-select by opsZero</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/5.0.0/js/dataTables.fixedColumns.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/5.0.0/js/fixedColumns.dataTables.js"></script>
+</head>
 
-        <script>
-            $(document).ready(function () {
-                $('#data').DataTable({
-                    ajax: '/instances.json',
-                    columns: [
-                        { data: "instance-type" },
-                        { data: "arch" },
-                        { data: "memory" },
-                        { data: "vCPU" },
-                        { data: "GPU" },
-                        { data: "GPU_memory" },
-                        { data: "current-generation" },
-                        { data: "region" },
-                        { data: "ondemand" },
-                        { data: "spot_avg" },
-                    ],
-                    paging: false
-                });
+<body>
+    <h1>instance-select</h1>
+    <div id="unique-names" style="margin-bottom: 20px;">
+        <strong>Instance Types:</strong> <span id="unique-list"></span>
+    </div>
+
+    <table id="data">
+        <thead>
+            <tr>
+                <th>Instance Type</th>
+                <th>Arch</th>
+                <th>Memory</th>
+                <th>CPU</th>
+                <th>GPU</th>
+                <th>GPU Memory</th>
+                <th>Current Generation</th>
+                <th>Region</th>
+                <th>Ondemand</th>
+                <th>Spot</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+
+    <script>
+        $(document).ready(function () {
+            var table = $('#data').DataTable({
+                ajax: '/instances.json',  
+                columns: [
+                    { data: 'instance-type' },
+                    { data: 'arch' },
+                    { data: 'memory' },
+                    { data: 'vCPU' },
+                    { data: 'GPU' },
+                    { data: 'GPU_memory' },
+                    { data: 'current-generation' },
+                    { data: 'region' },
+                    { data: 'ondemand' },
+                    { data: 'spot_avg' },
+                ],
+                paging: false,
+                fixedColumns: true,
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        $('input', this.footer()).on('keyup change clear', function () {
+                            if (column.search() !== this.value) {
+                                column.search(this.value).draw();
+                            }
+                        });
+                    });
+                }
             });
-        </script>
-    </head>
-
-    <body>
-        <h1>instance-select</h1>
-
-        <div id="terraform-output">
-
-        </div>
-
-        <table id="data">
-            <thead>
-                <tr>
-                    <th>Instance Type</th>
-                    <th>Arch</th>
-                    <th>Memory</th>
-                    <th>CPU</th>
-                    <th>GPU</th>
-                    <th>GPU Memory</th>
-                    <th>Current Generation</th>
-                    <th>Region</th>
-                    <th>Ondemand</th>
-                    <th>Spot</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-
-    </body>
+    
+            $('#data thead th').each(function (i) {
+                var title = $(this).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+    
+            function updateUniqueInstanceNames(searchTerm) {
+                if (searchTerm.trim() === '') {
+                    $('#unique-list').text(''); 
+                } else {
+                    table.column(0).search(searchTerm).draw();
+                    var filteredData = table.rows({ filter: 'applied' }).data();
+                    var instanceNamesSet = new Set();
+                    filteredData.each(function (value) {
+                        instanceNamesSet.add(value['instance-type']);
+                    });
+                    var uniqueInstanceNames = Array.from(instanceNamesSet);
+                    $('#unique-list').text(uniqueInstanceNames.join(', '));
+                }
+            }
+    
+            $('#data thead th input').eq(0).on('keyup change', function () {
+                updateUniqueInstanceNames($(this).val());
+            });
+    
+            updateUniqueInstanceNames('');
+        });
+    </script>
+    
+</body>
 
 </html>
