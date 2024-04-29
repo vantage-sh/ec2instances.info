@@ -7,6 +7,7 @@ import ec2
 import os
 import requests
 import pickle
+import boto3
 from six.moves.urllib import request as urllib2
 
 # Following advice from https://stackoverflow.com/a/1779324/216138
@@ -266,31 +267,17 @@ def fetch_data(url):
 
 
 def add_eni_info(instances):
-    # Canonical URL for this info is https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
-    # eni_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.partial.html"
-    # It seems it's no longer dynamically loaded
-    # TODO: the tables at this URL have changed but it seems the information is already present in
-    # from the DescribeInstanceTypes API so this function could be deprecated
-    eni_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html"
-    tree = etree.parse(urllib2.urlopen(eni_url), etree.HTMLParser())
-    table = tree.xpath('//div[@class="table-contents"]//table')[1]
-    rows = table.xpath(".//tr[./td]")
+    client = boto3.client('ec2', region_name='us-east-1')
+    # need to add region to client and set up accordingly
+    response = client.describe_instance_types(Filters=[{'Name': 'instance-type', 'Values': ['*']}])
+    instance_types = response['InstanceTypes']
+
     by_type = {i.instance_type: i for i in instances}
 
-    for r in rows:
-        instance_type = etree.tostring(r[0], method="text").strip().decode()
-
-        max_enis = etree.tostring(r[1], method="text").decode()
-
-        # handle <cards>x<interfaces> format
-        if "per network card" in max_enis:
-            match = re.search(r"per network card \((.*)\)", max_enis)
-            eni_values = match.group(1).replace("or", "").replace(" ", "").split(",")
-            max_enis = sorted(list(map(int, eni_values)))[-1]
-        else:
-            max_enis = locale.atoi(max_enis)
-
-        ip_per_eni = locale.atoi(etree.tostring(r[2], method="text").decode())
+    for instance_type_info in instance_types:
+        instance_type = instance_type_info['InstanceType']
+        max_enis = instance_type_info['NetworkInfo']['MaximumNetworkInterfaces']
+        ip_per_eni = instance_type_info['NetworkInfo']['Ipv4AddressesPerInterface']
 
         if instance_type not in by_type:
             print(
@@ -299,6 +286,7 @@ def add_eni_info(instances):
                 )
             )
             continue
+
         if not by_type[instance_type].vpc:
             print(
                 f"WARNING: DescribeInstanceTypes API does not have network info for {instance_type}, scraping instead"
@@ -475,58 +463,28 @@ def add_vpconly_detail(instances):
 
 def add_instance_storage_details(instances):
     """Add information about instance storage features."""
+    client = boto3.client('ec2')
+    # need to add region to client and set up accordingly
+    response = client.describe_instance_types(Filters=[{'Name': 'instance-storage-supported', 'Values': ['true']},{'Name': 'instance-type', 'Values': ['*']}])    
+    instance_types = response['InstanceTypes']
+    
+    for i in instances:
+        i.ebs_only = True
 
-    # Canonical URL for this info is https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-volumes.html
-    # It seems it's no longer dynamically loaded
-    url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-volumes.html"
-    tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
+        for instance_type in instance_types:  
+            if i.instance_type == instance_type["InstanceType"]:
+                storage_info = instance_type["InstanceStorageInfo"]
+                
+                if storage_info:
+                    nvme_support = storage_info["NvmeSupport"]
+                    disk = storage_info["Disks"][0]
 
-    for t in [0, 1, 2, 3, 4]:
-        table = tree.xpath('//div[@class="table-contents"]/table')[t]
-        rows = table.xpath(".//tr[./td]")
-
-        checkmark_char = "\u2714"
-        dagger_char = "\u2020"
-
-        for r in rows:
-            columns = r.xpath(".//td")
-
-            (
-                instance_type,
-                storage_volumes,
-                storage_type,
-                needs_initialization,
-                trim_support,
-            ) = tuple(totext(i) for i in columns)
-
-            if instance_type is None:
-                continue
-
-            for i in instances:
-                if i.instance_type == instance_type:
-                    i.ebs_only = True
-
-                    # Supports "24 x 13,980 GB" and "2 x 1,200 GB (2.4 TB)"
-                    m = re.search(r"(\d+)\s*x\s*([0-9,]+)?\s+(\w{2})?", storage_volumes)
-
-                    if m:
-                        size_unit = "GB"
-
-                        if m.group(3):
-                            size_unit = m.group(3)
-
-                        i.ebs_only = False
-                        i.num_drives = locale.atoi(m.group(1))
-                        i.drive_size = locale.atoi(m.group(2))
-                        i.size_unit = size_unit
-                        i.ssd = "SSD" in storage_type
-                        i.nvme_ssd = "NVMe" in storage_type
-                        i.trim_support = checkmark_char in trim_support
-                        i.storage_needs_initialization = (
-                            checkmark_char in needs_initialization
-                        )
-                        i.includes_swap_partition = dagger_char in storage_volumes
-
+                    i.ebs_only = False
+                    i.num_drives = disk["Count"]
+                    i.drive_size = disk["SizeInGB"]
+                    i.size_unit = "GB"
+                    i.ssd = "ssd" == disk["Type"]
+                    i.nvme_ssd = nvme_support in ['supported', 'required']
 
 def add_t2_credits(instances):
     # Canonical URL for this info is
