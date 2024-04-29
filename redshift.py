@@ -53,7 +53,7 @@ def add_node_parameters(instances):
     )
     tree = etree.parse(urllib2.urlopen(cluster_url), etree.HTMLParser())
 
-    for table_cnt in [0, 1, 2]:
+    for table_cnt in [0, 1]:
         table = tree.xpath('//div[@class="table-contents"]//table')[table_cnt]
         rows = table.xpath(".//tr[./td]")
 
