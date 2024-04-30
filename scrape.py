@@ -268,7 +268,6 @@ def fetch_data(url):
 
 def add_eni_info(instances):
     client = boto3.client('ec2', region_name='us-east-1')
-    # need to add region to client and set up accordingly
     response = client.describe_instance_types(Filters=[{'Name': 'instance-type', 'Values': ['*']}])
     instance_types = response['InstanceTypes']
 
@@ -463,8 +462,7 @@ def add_vpconly_detail(instances):
 
 def add_instance_storage_details(instances):
     """Add information about instance storage features."""
-    client = boto3.client('ec2')
-    # need to add region to client and set up accordingly
+    client = boto3.client('ec2', region_name='us-east-1')
     response = client.describe_instance_types(Filters=[{'Name': 'instance-storage-supported', 'Values': ['true']},{'Name': 'instance-type', 'Values': ['*']}])    
     instance_types = response['InstanceTypes']
     
