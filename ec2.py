@@ -100,47 +100,49 @@ def get_instances():
     pricing_client = boto3.client("pricing", region_name="us-east-1")
     product_pager = pricing_client.get_paginator("get_products")
 
-    product_iterator = product_pager.paginate(
-        ServiceCode="AmazonEC2",
-        Filters=[
-            # We're gonna assume N. Virginia has all the available types
-            {
-                "Type": "TERM_MATCH",
-                "Field": "location",
-                "Value": "US East (N. Virginia)",
-            },
-        ],
-    )
-    for product_item in product_iterator:
-        for offer_string in product_item.get("PriceList"):
-            offer = json.loads(offer_string)
-            product = offer.get("product")
+    # Not all instances are in US-EAST-1 any longer.
+    # Check Ohio as well.
+    for region in ["US East (Ohio)", "US East (N. Virginia)"]:
+        product_iterator = product_pager.paginate(
+            ServiceCode="AmazonEC2",
+            Filters=[
+                {
+                    "Type": "TERM_MATCH",
+                    "Field": "location",
+                    "Value": region,
+                }
+            ],
+        )
+        for product_item in product_iterator:
+            for offer_string in product_item.get("PriceList"):
+                offer = json.loads(offer_string)
+                product = offer.get("product")
 
-            # Check if it's an instance
-            if product.get("productFamily") not in [
-                "Compute Instance",
-                "Compute Instance (bare metal)",
-                "Dedicated Host",
-            ]:
-                continue
+                # Check if it's an instance
+                if product.get("productFamily") not in [
+                    "Compute Instance",
+                    "Compute Instance (bare metal)",
+                    "Dedicated Host",
+                ]:
+                    continue
 
-            product_attributes = product.get("attributes")
-            instance_type = product_attributes.get("instanceType")
+                product_attributes = product.get("attributes")
+                instance_type = product_attributes.get("instanceType")
 
-            if instance_type in ["u-6tb1", "u-9tb1", "u-12tb1"]:
-                # API returns the name without the .metal suffix
-                instance_type = instance_type + ".metal"
+                if instance_type in ["u-6tb1", "u-9tb1", "u-12tb1"]:
+                    # API returns the name without the .metal suffix
+                    instance_type = instance_type + ".metal"
 
-            if instance_type in instances:
-                continue
+                if instance_type in instances:
+                    continue
 
-            new_inst = parse_instance(
-                instance_type, product_attributes, instance_types.get(instance_type)
-            )
+                new_inst = parse_instance(
+                    instance_type, product_attributes, instance_types.get(instance_type)
+                )
 
-            # Some instanced may be dedicated hosts instead
-            if new_inst is not None:
-                instances[instance_type] = new_inst
+                # Some instanced may be dedicated hosts instead
+                if new_inst is not None:
+                    instances[instance_type] = new_inst
 
     print(f"Found data for instance types: {', '.join(sorted(instances.keys()))}")
     return list(instances.values())
