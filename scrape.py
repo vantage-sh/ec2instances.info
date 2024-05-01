@@ -535,6 +535,7 @@ def add_pretty_names(instances):
         "g4": "G4 Graphics and Machine Learning GPU",
         "g5": "G5 Graphics and Machine Learning GPU",
         "g6": "G6 Graphics and Machine Learning GPU",
+        "gr6": "Gr6 Graphics and Machine Learning GPU High RAM ratio",
         "p2": "P2 General Purpose GPU",
         "p3": "P3 High Performance GPU",
         "p4d": "P4D Highest Performance GPU",
