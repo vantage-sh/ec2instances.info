@@ -268,32 +268,34 @@ def fetch_data(url):
 
 def add_eni_info(instances):
     client = boto3.client('ec2', region_name='us-east-1')
-    response = client.describe_instance_types(Filters=[{'Name': 'instance-type', 'Values': ['*']}])
-    instance_types = response['InstanceTypes']
+    pager = client.get_paginator("describe_instance_types")
+    responses = pager.paginate(Filters=[{'Name': 'instance-type', 'Values': ['*']}])
+    for response in responses:
+        instance_types = response['InstanceTypes']
 
-    by_type = {i.instance_type: i for i in instances}
+        by_type = {i.instance_type: i for i in instances}
 
-    for instance_type_info in instance_types:
-        instance_type = instance_type_info['InstanceType']
-        max_enis = instance_type_info['NetworkInfo']['MaximumNetworkInterfaces']
-        ip_per_eni = instance_type_info['NetworkInfo']['Ipv4AddressesPerInterface']
+        for instance_type_info in instance_types:
+            instance_type = instance_type_info['InstanceType']
+            max_enis = instance_type_info['NetworkInfo']['MaximumNetworkInterfaces']
+            ip_per_eni = instance_type_info['NetworkInfo']['Ipv4AddressesPerInterface']
 
-        if instance_type not in by_type:
-            print(
-                "WARNING: Ignoring ENI data for unknown instance type: {}".format(
-                    instance_type
+            if instance_type not in by_type:
+                print(
+                    "WARNING: Ignoring ENI data for unknown instance type: {}".format(
+                        instance_type
+                    )
                 )
-            )
-            continue
+                continue
 
-        if not by_type[instance_type].vpc:
-            print(
-                f"WARNING: DescribeInstanceTypes API does not have network info for {instance_type}, scraping instead"
-            )
-            by_type[instance_type].vpc = {
-                "max_enis": max_enis,
-                "ips_per_eni": ip_per_eni,
-            }
+            if not by_type[instance_type].vpc:
+                print(
+                    f"WARNING: DescribeInstanceTypes API does not have network info for {instance_type}, scraping instead"
+                )
+                by_type[instance_type].vpc = {
+                    "max_enis": max_enis,
+                    "ips_per_eni": ip_per_eni,
+                }
 
 
 def add_ebs_info(instances):
@@ -463,26 +465,27 @@ def add_vpconly_detail(instances):
 def add_instance_storage_details(instances):
     """Add information about instance storage features."""
     client = boto3.client('ec2', region_name='us-east-1')
-    response = client.describe_instance_types(Filters=[{'Name': 'instance-storage-supported', 'Values': ['true']},{'Name': 'instance-type', 'Values': ['*']}])    
-    instance_types = response['InstanceTypes']
+    pager = client.get_paginator("describe_instance_types")
+    responses = pager.paginate(Filters=[{'Name': 'instance-storage-supported', 'Values': ['true']},{'Name': 'instance-type', 'Values': ['*']}])
     
-    for i in instances:
-        i.ebs_only = True
+    for response in responses:
+        instance_types = response['InstanceTypes']
+    
+        for i in instances:
+            for instance_type in instance_types:  
+                if i.instance_type == instance_type["InstanceType"]:
+                    storage_info = instance_type["InstanceStorageInfo"]
+                    
+                    if storage_info:
+                        nvme_support = storage_info["NvmeSupport"]
+                        disk = storage_info["Disks"][0]
 
-        for instance_type in instance_types:  
-            if i.instance_type == instance_type["InstanceType"]:
-                storage_info = instance_type["InstanceStorageInfo"]
-                
-                if storage_info:
-                    nvme_support = storage_info["NvmeSupport"]
-                    disk = storage_info["Disks"][0]
-
-                    i.ebs_only = False
-                    i.num_drives = disk["Count"]
-                    i.drive_size = disk["SizeInGB"]
-                    i.size_unit = "GB"
-                    i.ssd = "ssd" == disk["Type"]
-                    i.nvme_ssd = nvme_support in ['supported', 'required']
+                        i.ebs_only = False
+                        i.num_drives = disk["Count"]
+                        i.drive_size = disk["SizeInGB"]
+                        i.size_unit = "GB"
+                        i.ssd = "ssd" == disk["Type"]
+                        i.nvme_ssd = nvme_support in ['supported', 'required']
 
 def add_t2_credits(instances):
     # Canonical URL for this info is
