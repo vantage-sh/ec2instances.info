@@ -474,14 +474,9 @@ def add_instance_storage_details(instances):
         for i in instances:
             for instance_type in instance_types:  
                 if i.instance_type == instance_type["InstanceType"]:
-                    if i.instance_type == "i4i.xlarge":
-                        print("ZORPS!!!")
                     storage_info = instance_type["InstanceStorageInfo"]
                     
                     if storage_info:
-                        if i.instance_type == "i4i.xlarge":
-                            print(storage_info)
-
                         nvme_support = storage_info["NvmeSupport"]
                         disk = storage_info["Disks"][0]
 
