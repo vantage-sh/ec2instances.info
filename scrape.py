@@ -268,32 +268,34 @@ def fetch_data(url):
 
 def add_eni_info(instances):
     client = boto3.client('ec2', region_name='us-east-1')
-    response = client.describe_instance_types(Filters=[{'Name': 'instance-type', 'Values': ['*']}])
-    instance_types = response['InstanceTypes']
+    pager = client.get_paginator("describe_instance_types")
+    responses = pager.paginate(Filters=[{'Name': 'instance-type', 'Values': ['*']}])
+    for response in responses:
+        instance_types = response['InstanceTypes']
 
-    by_type = {i.instance_type: i for i in instances}
+        by_type = {i.instance_type: i for i in instances}
 
-    for instance_type_info in instance_types:
-        instance_type = instance_type_info['InstanceType']
-        max_enis = instance_type_info['NetworkInfo']['MaximumNetworkInterfaces']
-        ip_per_eni = instance_type_info['NetworkInfo']['Ipv4AddressesPerInterface']
+        for instance_type_info in instance_types:
+            instance_type = instance_type_info['InstanceType']
+            max_enis = instance_type_info['NetworkInfo']['MaximumNetworkInterfaces']
+            ip_per_eni = instance_type_info['NetworkInfo']['Ipv4AddressesPerInterface']
 
-        if instance_type not in by_type:
-            print(
-                "WARNING: Ignoring ENI data for unknown instance type: {}".format(
-                    instance_type
+            if instance_type not in by_type:
+                print(
+                    "WARNING: Ignoring ENI data for unknown instance type: {}".format(
+                        instance_type
+                    )
                 )
-            )
-            continue
+                continue
 
-        if not by_type[instance_type].vpc:
-            print(
-                f"WARNING: DescribeInstanceTypes API does not have network info for {instance_type}, scraping instead"
-            )
-            by_type[instance_type].vpc = {
-                "max_enis": max_enis,
-                "ips_per_eni": ip_per_eni,
-            }
+            if not by_type[instance_type].vpc:
+                print(
+                    f"WARNING: DescribeInstanceTypes API does not have network info for {instance_type}, scraping instead"
+                )
+                by_type[instance_type].vpc = {
+                    "max_enis": max_enis,
+                    "ips_per_eni": ip_per_eni,
+                }
 
 
 def add_ebs_info(instances):
@@ -463,26 +465,32 @@ def add_vpconly_detail(instances):
 def add_instance_storage_details(instances):
     """Add information about instance storage features."""
     client = boto3.client('ec2', region_name='us-east-1')
-    response = client.describe_instance_types(Filters=[{'Name': 'instance-storage-supported', 'Values': ['true']},{'Name': 'instance-type', 'Values': ['*']}])    
-    instance_types = response['InstanceTypes']
+    pager = client.get_paginator("describe_instance_types")
+    responses = pager.paginate(Filters=[{'Name': 'instance-storage-supported', 'Values': ['true']},{'Name': 'instance-type', 'Values': ['*']}])
     
-    for i in instances:
-        i.ebs_only = True
+    for response in responses:
+        instance_types = response['InstanceTypes']
+    
+        for i in instances:
+            for instance_type in instance_types:  
+                if i.instance_type == instance_type["InstanceType"]:
+                    if i.instance_type == "i4i.xlarge":
+                        print("ZORPS!!!")
+                    storage_info = instance_type["InstanceStorageInfo"]
+                    
+                    if storage_info:
+                        if i.instance_type == "i4i.xlarge":
+                            print(storage_info)
 
-        for instance_type in instance_types:  
-            if i.instance_type == instance_type["InstanceType"]:
-                storage_info = instance_type["InstanceStorageInfo"]
-                
-                if storage_info:
-                    nvme_support = storage_info["NvmeSupport"]
-                    disk = storage_info["Disks"][0]
+                        nvme_support = storage_info["NvmeSupport"]
+                        disk = storage_info["Disks"][0]
 
-                    i.ebs_only = False
-                    i.num_drives = disk["Count"]
-                    i.drive_size = disk["SizeInGB"]
-                    i.size_unit = "GB"
-                    i.ssd = "ssd" == disk["Type"]
-                    i.nvme_ssd = nvme_support in ['supported', 'required']
+                        i.ebs_only = False
+                        i.num_drives = disk["Count"]
+                        i.drive_size = disk["SizeInGB"]
+                        i.size_unit = "GB"
+                        i.ssd = "ssd" == disk["Type"]
+                        i.nvme_ssd = nvme_support in ['supported', 'required']
 
 def add_t2_credits(instances):
     # Canonical URL for this info is
@@ -534,6 +542,8 @@ def add_pretty_names(instances):
         "g3": "G3 Graphics GPU",
         "g4": "G4 Graphics and Machine Learning GPU",
         "g5": "G5 Graphics and Machine Learning GPU",
+        "g6": "G6 Graphics and Machine Learning GPU",
+        "gr6": "Gr6 Graphics and Machine Learning GPU High RAM ratio",
         "p2": "P2 General Purpose GPU",
         "p3": "P3 High Performance GPU",
         "p4d": "P4D Highest Performance GPU",
@@ -815,6 +825,78 @@ def add_gpu_info(instances):
             "compute_capability": 8.6,
             "gpu_count": 8,
             "cuda_cores": 76928,
+            "gpu_memory": 192,
+        },
+        "g6.xlarge": {  
+            # GPU core count found from the whitepaper
+            # https://images.nvidia.com/aem-dam/Solutions/Data-Center/l4/nvidia-ada-gpu-architecture-whitepaper-v2.1.pdf
+            "gpu_model": "NVIDIA L4",
+            "compute_capability": 8.9,
+            "gpu_count": 1,
+            "cuda_cores": 7424,
+            "gpu_memory": 24,
+        },
+        "g6.2xlarge": {
+            "gpu_model": "NVIDIA L4",
+            "compute_capability": 8.9,
+            "gpu_count": 1,
+            "cuda_cores": 7424,
+            "gpu_memory": 24,
+        },
+        "g6.4xlarge": {
+            "gpu_model": "NVIDIA L4",
+            "compute_capability": 8.9,
+            "gpu_count": 1,
+            "cuda_cores": 7424,
+            "gpu_memory": 24,
+        },
+        "g6.8xlarge": {
+            "gpu_model": "NVIDIA L4",
+            "compute_capability": 8.9,
+            "gpu_count": 1,
+            "cuda_cores": 7424,
+            "gpu_memory": 24,
+        },
+        "gr6.4xlarge": {
+            "gpu_model": "NVIDIA L4",
+            "compute_capability": 8.9,
+            "gpu_count": 1,
+            "cuda_cores": 7424,
+            "gpu_memory": 24,
+        },
+        "gr6.8xlarge": {
+            "gpu_model": "NVIDIA L4",
+            "compute_capability": 8.9,
+            "gpu_count": 1,
+            "cuda_cores": 7424,
+            "gpu_memory": 24,
+        },
+        "g6.16xlarge": {
+            "gpu_model": "NVIDIA L4",
+            "compute_capability": 8.9,
+            "gpu_count": 1,
+            "cuda_cores": 7424,
+            "gpu_memory": 24,
+        },
+        "g6.12xlarge": {
+            "gpu_model": "NVIDIA L4",
+            "compute_capability": 8.9,
+            "gpu_count": 4,
+            "cuda_cores": 29696,
+            "gpu_memory": 96,
+        },
+        "g6.24xlarge": {
+            "gpu_model": "NVIDIA L4",
+            "compute_capability": 8.9,
+            "gpu_count": 4,
+            "cuda_cores": 29696,
+            "gpu_memory": 96,
+        },
+        "g6.48xlarge": {
+            "gpu_model": "NVIDIA L4",
+            "compute_capability": 8.9,
+            "gpu_count": 8,
+            "cuda_cores": 59392,
             "gpu_memory": 192,
         },
         "p4d.24xlarge": {
