@@ -151,6 +151,7 @@ function init_data_table() {
   }
 
   g_data_table = $('#data').DataTable({
+    // TODO: this object can be used for loading the initial data but will be augmented
     bPaginate: false,
     bInfo: false,
     orderCellsTop: true,
@@ -195,6 +196,8 @@ function init_data_table() {
       },
       {
         // The columns below are hidden by default
+        // TODO: remove this. No need to write pricing columns to specifications.json
+        // since that data is already available in pricing.json
         aTargets: [
           'architecture',
           'computeunits',
@@ -638,6 +641,9 @@ function redraw_costs() {
   g_data_table.rows().invalidate().draw();
 }
 
+// TODO: This function will need to populate the column dropdown based on
+// the data in g_data_table.columns().data() instead of reading it from the
+// HTML page.
 function setup_column_toggle() {
   $.each(g_data_table.columns().indexes(), function (i, idx) {
     var column = g_data_table.column(idx);
