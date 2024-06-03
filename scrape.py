@@ -1237,11 +1237,12 @@ def add_dedicated_info(instances):
             inst_type = inst.instance_type.split(".")[0]
             for k, r in region_map.items():
                 region = ec2.canonicalize_location(r, False)
-                if inst_type in all_pricing[region]:
-                    _price = all_pricing[region][inst_type]
-                    inst.regions[k] = region
-                    inst.pricing[k] = {}
-                    inst.pricing[k]["dedicated"] = _price
+                if region in all_pricing:
+                    if inst_type in all_pricing[region]:
+                        _price = all_pricing[region][inst_type]
+                        inst.regions[k] = region
+                        inst.pricing[k] = {}
+                        inst.pricing[k]["dedicated"] = _price
         else:
             for region in inst.pricing:
                 # Add the 'dedicated' price to the price list as a top level key per region.
