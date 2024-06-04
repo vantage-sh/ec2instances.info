@@ -217,8 +217,7 @@ body {
 .dropdown-label {
   font-size: 12px;
   color: #6c757d;
-  font-weight: 600;
-  padding-left: 12px;
+  font-weight: normal;
 }
 
 .share-url {
@@ -335,7 +334,7 @@ input.search {
   width: 100%;
   padding: 8px;
   flex-shrink: 0;
-  background: #fafafa;
+  background: #FFF;
   /*
   border-top: solid 1px #eee;
   */

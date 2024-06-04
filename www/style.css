@@ -44,7 +44,7 @@ a:focus {
 
 .nav {
   background-color: #9c25c7;
-  padding: 12px;
+  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;

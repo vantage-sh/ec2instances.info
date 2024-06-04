@@ -11,148 +11,140 @@
     </%block>
     
 
-    <div class="row mt-3 me-2" id="menu">
-      <div class="col-sm-12 ms-2">
+    <div class="m-2 d-flex justify-content-between align-items-end" id="menu">
+      <div class="d-flex align-items-end gap-4">
+        <div class="d-flex gap-3">
+          <div class="btn-group-vertical" id='region-dropdown'>
+            <label class="dropdown-label mb-1">Region</label>
+            <a class="dropdown-toggle p-0 border-0 d-flex align-items-center h-auto small fw-semibold text-decoration-none link-dark" data-bs-toggle="dropdown" role="button" href="#">
+              <span class="text">US East (N. Virginia)</span>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu region-list-dropdown" role="menu">
+              <li>
+                <input type="text" id="dropdown-search" class="ms-2 mb-2 form-control dropdown-search" placeholder="Search" />
+              </li>
+              % for region, region_name in regions["main"].items():
+              <li>
+                <a class="dropdown-item" href="javascript:;" data-region='${region}'>
+                  <span>${region_name}</span>
+                  <span class="dropdown-region">${region}</span>
+                </a>
+              </li>
+              % endfor
+              <div class="ms-2 mb-2 mt-2">
+                <span><strong>Local Zones</strong></span>
+              </div>
+              % for region, region_name in regions["local_zone"].items():
+              <li>
+                <a class="dropdown-item" href="javascript:;" data-region='${region}'>
+                  <span>${region_name}</span>
+                  <span class="dropdown-region">${region}</span>
+                </a>
+              </li>
+              % endfor
+              <div class="ms-2 mb-2 mt-2">
+                <span><strong>Wavelength Zones</strong></span>
+              </div>
+              % for region, region_name in regions["wavelength"].items():
+              <li>
+                <a class="dropdown-item" href="javascript:;" data-region='${region}'>
+                  <span>${region_name}</span>
+                  <span class="dropdown-region">${region}</span>
+                </a>
+              </li>
+              % endfor
+            </ul>
+          </div>
 
-        <div class="btn-group-vertical" id='region-dropdown'>
-          <label class="dropdown-label mb-1">Region</label>
-          <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
-            <i class="icon-globe icon-white"></i>
-            <span class="text">US East (N. Virginia)</span>
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu region-list-dropdown" role="menu">
-            <li>
-              <input type="text" id="dropdown-search" class="ms-2 mb-2 form-control dropdown-search" placeholder="Search" />
-            </li>
-            % for region, region_name in regions["main"].items():
-            <li>
-              <a class="dropdown-item" href="javascript:;" data-region='${region}'>
-                <span>${region_name}</span>
-                <span class="dropdown-region">${region}</span>
-              </a>
-            </li>
-            % endfor
-            <div class="ms-2 mb-2 mt-2">
-              <span><strong>Local Zones</strong></span>
-            </div>
-            % for region, region_name in regions["local_zone"].items():
-            <li>
-              <a class="dropdown-item" href="javascript:;" data-region='${region}'>
-                <span>${region_name}</span>
-                <span class="dropdown-region">${region}</span>
-              </a>
-            </li>
-            % endfor
-            <div class="ms-2 mb-2 mt-2">
-              <span><strong>Wavelength Zones</strong></span>
-            </div>
-            % for region, region_name in regions["wavelength"].items():
-            <li>
-              <a class="dropdown-item" href="javascript:;" data-region='${region}'>
-                <span>${region_name}</span>
-                <span class="dropdown-region">${region}</span>
-              </a>
-            </li>
-            % endfor
-          </ul>
+          <div class="btn-group-vertical d-none d-md-inline-flex" id="pricing-unit-dropdown">
+            <label class="dropdown-label mb-1">Pricing Unit</label>
+            <a class="dropdown-toggle p-0 border-0 d-flex align-items-center h-auto small fw-semibold text-decoration-none link-dark" data-bs-toggle="dropdown" role="button" href="#">
+              <i class="icon-shopping-cart icon-white"></i>
+              <span class="text">Instance</span>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="active"><a class="dropdown-item" href="javascript:;" pricing-unit="instance">Instance</a></li>
+              <li><a class="dropdown-item" href="javascript:;" pricing-unit="vcpu">vCPU</a></li>
+              <li><a class="dropdown-item" href="javascript:;" pricing-unit="ecu">ECU</a></li>
+              <li><a class="dropdown-item" href="javascript:;" pricing-unit="memory">Memory</a></li>
+             </ul>
+          </div>
+
+          <div class="btn-group-vertical" id="cost-dropdown">
+            <label class="dropdown-label mb-1">Cost</label>
+            <a class="dropdown-toggle p-0 border-0 d-flex align-items-center h-auto small fw-semibold text-decoration-none link-dark" data-bs-toggle="dropdown" role="button" href="#">
+              <i class="icon-shopping-cart icon-white"></i>
+              <span class="text">Hourly</span>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a class="dropdown-item" href="javascript:;" duration="secondly">Per Second</a></li>
+              <li><a class="dropdown-item" href="javascript:;" duration="minutely">Per Minute</a></li>
+              <li class="active"><a class="dropdown-item" href="javascript:;" duration="hourly">Hourly</a></li>
+              <li><a class="dropdown-item" href="javascript:;" duration="daily">Daily</a></li>
+              <li><a class="dropdown-item" href="javascript:;" duration="weekly">Weekly</a></li>
+              <li><a class="dropdown-item" href="javascript:;" duration="monthly">Monthly</a></li>
+              <li><a class="dropdown-item" href="javascript:;" duration="annually">Annually</a></li>
+            </ul>
+          </div>
+
+          <div class="btn-group-vertical d-none d-md-inline-flex" id='reserved-term-dropdown'>
+            <label class="dropdown-label mb-1">Reserved</label>
+            <a class="dropdown-toggle p-0 border-0 d-flex align-items-center h-auto small fw-semibold text-decoration-none link-dark" data-bs-toggle="dropdown" role="button" href="#">
+              <i class="icon-globe icon-white"></i>
+              <span class="text">1-year - No Upfront</span>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Standard.noUpfront'>1-year - No Upfront</a></li>
+              <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Standard.partialUpfront'>1-year - Partial Upfront</a></li>
+              <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Standard.allUpfront'>1-year - Full Upfront</a></li>
+              <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Standard.noUpfront'>3-year - No Upfront</a></li>
+              <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Standard.partialUpfront'>3-year - Partial Upfront</a></li>
+              <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Standard.allUpfront'>3-year - Full Upfront</a></li>
+              <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Convertible.noUpfront'>1-year convertible - No Upfront</a></li>
+              <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Convertible.partialUpfront'>1-year convertible - Partial Upfront</a></li>
+              <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Convertible.allUpfront'>1-year convertible - Full Upfront</a></li>
+              <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Convertible.noUpfront'>3-year convertible - No Upfront</a></li>
+              <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Convertible.partialUpfront'>3-year convertible - Partial Upfront</a></li>
+              <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Convertible.allUpfront'>3-year convertible - Full Upfront</a></li>
+            </ul>
+          </div>
+
+          <div class="btn-group-vertical" id="filter-dropdown">
+            <!-- blank label maintains spacing -->
+            <label class="dropdown-label mb-1">Visible</label>
+            <a class="dropdown-toggle p-0 border-0 d-flex align-items-center h-auto small fw-semibold text-decoration-none link-dark" data-bs-toggle="dropdown" role="button" href="#">
+              <i class="icon-filter icon-white"></i>
+              Columns
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <!-- table header elements inserted by js -->
+            </ul>
+          </div>
         </div>
 
-        <div class="btn-group-vertical d-none d-md-inline-flex" id="pricing-unit-dropdown">
-          <label class="dropdown-label mb-1">Pricing Unit</label>
-          <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
-            <i class="icon-shopping-cart icon-white"></i>
-            <span class="text">Instance</span>
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" role="menu">
-            <li class="active"><a class="dropdown-item" href="javascript:;" pricing-unit="instance">Instance</a></li>
-            <li><a class="dropdown-item" href="javascript:;" pricing-unit="vcpu">vCPU</a></li>
-            <li><a class="dropdown-item" href="javascript:;" pricing-unit="ecu">ECU</a></li>
-            <li><a class="dropdown-item" href="javascript:;" pricing-unit="memory">Memory</a></li>
-           </ul>
-        </div>
-
-        <div class="btn-group-vertical" id="cost-dropdown">
-          <label class="dropdown-label mb-1">Cost</label>
-          <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
-            <i class="icon-shopping-cart icon-white"></i>
-            <span class="text">Hourly</span>
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a class="dropdown-item" href="javascript:;" duration="secondly">Per Second</a></li>
-            <li><a class="dropdown-item" href="javascript:;" duration="minutely">Per Minute</a></li>
-            <li class="active"><a class="dropdown-item" href="javascript:;" duration="hourly">Hourly</a></li>
-            <li><a class="dropdown-item" href="javascript:;" duration="daily">Daily</a></li>
-            <li><a class="dropdown-item" href="javascript:;" duration="weekly">Weekly</a></li>
-            <li><a class="dropdown-item" href="javascript:;" duration="monthly">Monthly</a></li>
-            <li><a class="dropdown-item" href="javascript:;" duration="annually">Annually</a></li>
-          </ul>
-        </div>
-
-        <div class="btn-group-vertical d-none d-md-inline-flex" id='reserved-term-dropdown'>
-          <label class="dropdown-label mb-1">Reserved</label>
-          <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
-            <i class="icon-globe icon-white"></i>
-            <span class="text">1-year - No Upfront</span>
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Standard.noUpfront'>1-year - No Upfront</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Standard.partialUpfront'>1-year - Partial Upfront</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Standard.allUpfront'>1-year - Full Upfront</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Standard.noUpfront'>3-year - No Upfront</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Standard.partialUpfront'>3-year - Partial Upfront</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Standard.allUpfront'>3-year - Full Upfront</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Convertible.noUpfront'>1-year convertible - No Upfront</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Convertible.partialUpfront'>1-year convertible - Partial Upfront</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm1Convertible.allUpfront'>1-year convertible - Full Upfront</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Convertible.noUpfront'>3-year convertible - No Upfront</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Convertible.partialUpfront'>3-year convertible - Partial Upfront</a></li>
-            <li><a class="dropdown-item" href="javascript:;" data-reserved-term='yrTerm3Convertible.allUpfront'>3-year convertible - Full Upfront</a></li>
-          </ul>
-        </div>
-
-        <div class="btn-group-vertical" id="filter-dropdown">
-          <!-- blank label maintains spacing -->
-          <label class="dropdown-label mb-1">Visible</label>
-          <a class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" role="button" href="#">
-            <i class="icon-filter icon-white"></i>
-            Columns
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" role="menu">
-            <!-- table header elements inserted by js -->
-          </ul>
-        </div>
-
-        <div class="btn-group-vertical">
-          <label class="dropdown-label mb-1"><br></label>
+        <div class="d-flex gap-2">
           <button class="btn btn-purple btn-compare"
             data-text-on="End Compare"
             data-text-off="Compare">
             Compare 
           </button>
-        </div>
 
-        <div class="btn-group-vertical">
-          <label class="dropdown-label mb-1"><br></label>
           <button class="btn btn-primary btn-clear" id="clear">
             Clear Filters
           </button>
         </div>
+      </div>
 
-        <div class="btn-group-vertical float-end m2 p2" id="search">
-          <label class="dropdown-label mb-1"><br></label>
+      <div class="d-flex gap-2">
+        <div class="btn-primary" id="export"></div>
+        <div class="btn-group-vertical" id="search">
           <input id="fullsearch" type="text" class="form-control d-none d-xl-block" placeholder="Search...">
         </div>
-
-        <div class="btn-group-vertical float-end px-2">
-          <label class="dropdown-label mb-1"><br></label>
-          <div class="btn-primary" id="export"></div>
-        </div>
-
       </div>
     </div>
 
