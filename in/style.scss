@@ -64,7 +64,7 @@ a {
 }
 
 .nav {
-  background-color: $purple-1;
+  background-color: #872EE1;
   padding: 12px;
   display: flex;
   align-items: center;
@@ -176,6 +176,28 @@ table {
   font-size: 12px;
 }
 
+.provider-toggle {
+  display: flex;
+  padding: 2px;
+  border-radius: 6px;
+
+  .toggle-option {
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    color: $gray-4;
+  }
+
+  .toggle-option--active {
+    background-color: $white;
+    color: $gray-0;
+    font-weight: 500;
+    box-shadow: 0 1px 7px -1px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.05);
+  }
+}
+
 .btn {
   font-size: 14px;
   font-weight: 600;
@@ -200,8 +222,9 @@ table {
     align-items: center;
   }
   &.btn-github {
-    background-color: #eee;
+    background-color: #fff;
     color: #1a1a1c;
+    padding: 4px 10px !important;
   }
   &.btn-callout {
     background-color: #9c25c7;

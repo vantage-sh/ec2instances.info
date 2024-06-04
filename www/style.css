@@ -173,8 +173,9 @@ table#Unavailable td {
   align-items: center;
 }
 .btn.btn-github {
-  background-color: #eee;
+  background-color: #fff;
   color: #1a1a1c;
+  padding: 4px 10px !important;
 }
 .btn.btn-callout {
   background-color: #9c25c7;
@@ -394,4 +395,33 @@ table#Unavailable td {
   font-size: 12px;
 }
 
+.provider-toggle {
+  display: flex;
+  padding: 2px;
+  border-radius: 6px;
+  background-color: #F1F2F4;
+}
+
+.provider-toggle .toggle-option {
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+}
+
+.provider-toggle .toggle-option:hover {
+  color: #111;
+}
+
+.provider-toggle .toggle-option.toggle-option--active {
+  background-color: #FFF;
+  color: #111;
+  font-weight: 500;
+  box-shadow: 0 1px 7px -1px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.15);
+}
+
 /*# sourceMappingURL=style.css.map */
+

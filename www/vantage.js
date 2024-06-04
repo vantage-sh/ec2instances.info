@@ -1,5 +1,13 @@
 'use strict';
 
+// const redirectUrls = [
+//     "https://instances.vantage.sh/#1",
+//     "https://instances.vantage.sh/#2",
+//     "https://instances.vantage.sh/#3",
+// ]
+
+// document.location = redirectUrls[Math.floor(Math.random() * redirectUrls.length)]
+
 function vantage_settings() {
   var vantage_settings = store.get('vantage');
   if (vantage_settings) {

@@ -593,5 +593,5 @@
   </div>
 
   <%block name="header">
-    <h1 class="page-h1">EC2Instances.info - Easy Amazon <b>EC2</b> Instance Comparison</h1>
+    <span>EC2Instances.info - Easy Amazon <b>EC2</b> Instance Comparison</span>
   </%block>

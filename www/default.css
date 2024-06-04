@@ -34,10 +34,10 @@ body {
 }
 
 .nav-position li a {
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  background-color: #5a0b76;
-  padding: 14px 20px;
+  border-radius: 6px;
+  background-color: transparent;
+  padding: 6px 10px;
+  color: #fff;
 }
 
 .nav-position a {
@@ -46,16 +46,12 @@ body {
   text-decoration: none !important;
 }
 
-.nav-position li a {
-  color: #fff;
-}
-
 .nav-position li.active a {
-  color: #303037 !important;
+  color: #FFF !important;
 }
 
 .nav .active a {
-  background-color: white;
+  background-color: #5F209A;
 }
 
 .ec2instances .page-header {
@@ -337,16 +333,12 @@ input.search {
 .footer {
   bottom: 0;
   width: 100%;
-  height: 50px;
+  padding: 8px;
   flex-shrink: 0;
   background: #fafafa;
   /*
   border-top: solid 1px #eee;
   */
-}
-
-.footer div {
-  margin-top: 8px;
 }
 
 .form-control {
