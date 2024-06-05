@@ -176,6 +176,7 @@ table#Unavailable td {
   background-color: #fff;
   color: #1a1a1c;
   padding: 4px 10px !important;
+  font-weight: 500;
 }
 .btn.btn-callout {
   background-color: #9c25c7;
@@ -319,14 +320,19 @@ table#Unavailable td {
 }
 
 .vantage-callout {
-  margin-bottom: 24px;
   padding: 24px;
   border-radius: 6px;
   border: 1px solid #e3e3e9;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  position: relative;
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  height: 400px;
+  width: 300px;
+  background-color: #FFF;
+  box-shadow: 0 5px 15px  rgba(0,0,0,0.1), 0 1px 0 rgba(0,0,0,0.2), 0 5px 15px -3px rgba(0, 0, 0, 0.1);
 }
 @media screen and (max-width: 1400px) {
   .vantage-callout {
@@ -346,7 +352,6 @@ table#Unavailable td {
   color: #5a5a5f;
   display: flex;
   cursor: pointer;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 .vantage-callout .callout-close .material-icons {
   font-size: 18px;

@@ -12,7 +12,7 @@
     
 
     <div class="m-2 d-flex justify-content-between align-items-end" id="menu">
-      <div class="d-flex align-items-end gap-4">
+      <div class="d-flex align-items-md-end gap-md-4 gap-3 flex-md-row flex-column">
         <div class="d-flex gap-3">
           <div class="btn-group-vertical" id='region-dropdown'>
             <label class="dropdown-label mb-1">Region</label>

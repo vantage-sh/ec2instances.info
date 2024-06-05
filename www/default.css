@@ -46,6 +46,10 @@ body {
   text-decoration: none !important;
 }
 
+.nav-position a:hover {
+  background-color: #5F209A;
+}
+
 .nav-position li.active a {
   color: #FFF !important;
 }
