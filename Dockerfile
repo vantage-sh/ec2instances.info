@@ -8,12 +8,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 LABEL org.opencontainers.image.authors="Sebastian Sasu <sebi@nologin.ro>, Cristian Magherusan-Stanciu <cristi@leanercloud.com>, Brooke McKim <brooke@vantage.sh>"
 
 RUN apt-get update > /dev/null
-RUN apt-get install -y nginx python3 pip locales curl libxml2-dev libxslt-dev > /dev/null
-
-# Add NodeSource repository and install Node.js 14
-RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt-get install -y nodejs
-
+RUN apt-get install -y nginx python3 pip locales curl libxml2-dev libxslt-dev nodejs npm > /dev/null
 RUN npm install --global sass
 RUN python3 -m pip install -U pip setuptools
 RUN locale-gen "en_US.UTF-8"
