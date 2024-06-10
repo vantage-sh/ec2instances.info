@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap");
 html,
 body {
   height: 100%;
@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  font: 100% 'Inter', Helvetica, sans-serif;
+  font: 100% "Inter", Helvetica, sans-serif;
   color: #303037;
   padding: 0;
 }
@@ -18,8 +18,7 @@ body {
 a {
   color: #9c25c7;
 }
-a:hover,
-a:focus {
+a:hover, a:focus {
   color: #5a0a76;
 }
 
@@ -43,7 +42,7 @@ a:focus {
 }
 
 .nav {
-  background-color: #9c25c7;
+  background-color: #872EE1;
   padding: 8px;
   display: flex;
   align-items: center;
@@ -120,7 +119,7 @@ table a {
   text-decoration: none !important;
 }
 table.table-mono {
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
 }
 table.table-mono th {
   background-color: #ffffff !important;
@@ -146,6 +145,67 @@ table#Unavailable td {
 
 .fs-12 {
   font-size: 12px;
+}
+
+.banner-ad {
+  background-color: #151515;
+  transition: all 0.2s ease;
+  color: white;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  text-decoration: none;
+  text-align: center;
+}
+.banner-ad:hover {
+  color: white;
+  background-color: #000;
+}
+@media screen and (max-width: 1400px) {
+  .banner-ad {
+    flex-direction: column;
+  }
+}
+
+#unfix {
+  position: fixed;
+  bottom: 20px;
+  right: 386px;
+}
+#unfix .vantage-callout {
+  position: relative;
+  bottom: unset;
+  right: unset;
+}
+#unfix .vantage-callout img {
+  margin: 0;
+}
+
+.provider-toggle {
+  display: flex;
+  padding: 2px;
+  border-radius: 6px;
+  background-color: rgba(227, 227, 233, 0.7);
+}
+.provider-toggle .toggle-option {
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  color: #8a8a8e;
+  text-decoration: none;
+}
+.provider-toggle .toggle-option:hover {
+  color: #1a1a1c;
+}
+.provider-toggle .toggle-option--active {
+  background-color: #ffffff;
+  color: #1a1a1c;
+  font-weight: 500;
+  box-shadow: 0 1px 7px -1px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
 .btn {
@@ -176,7 +236,6 @@ table#Unavailable td {
   background-color: #fff;
   color: #1a1a1c;
   padding: 4px 10px !important;
-  font-weight: 500;
 }
 .btn.btn-callout {
   background-color: #9c25c7;
@@ -294,7 +353,7 @@ table#Unavailable td {
   border: 1px solid;
   border-radius: 3px;
   color: #1a1a1c;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   padding: 4px 5px;
   font-size: 11px;
   line-height: 11px;
@@ -320,19 +379,13 @@ table#Unavailable td {
 }
 
 .vantage-callout {
-  padding: 24px;
-  border-radius: 6px;
-  border: 1px solid #e3e3e9;
+  border-radius: 14px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   position: fixed;
-  bottom: 80px;
   right: 24px;
-  height: 400px;
-  width: 300px;
-  background-color: #FFF;
-  box-shadow: 0 5px 15px  rgba(0,0,0,0.1), 0 1px 0 rgba(0,0,0,0.2), 0 5px 15px -3px rgba(0, 0, 0, 0.1);
+  bottom: 80px;
 }
 @media screen and (max-width: 1400px) {
   .vantage-callout {
@@ -348,16 +401,14 @@ table#Unavailable td {
   top: 8px;
   padding: 8px;
   border-radius: 100px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   color: #5a5a5f;
   display: flex;
   cursor: pointer;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 .vantage-callout .callout-close .material-icons {
   font-size: 18px;
-}
-.vantage-callout img {
-  margin-bottom: 20px;
 }
 .vantage-callout h5 {
   font-weight: 600;
@@ -400,33 +451,4 @@ table#Unavailable td {
   font-size: 12px;
 }
 
-.provider-toggle {
-  display: flex;
-  padding: 2px;
-  border-radius: 6px;
-  background-color: #F1F2F4;
-}
-
-.provider-toggle .toggle-option {
-  padding: 4px 8px;
-  border-radius: 6px;
-  display: flex;
-  gap: 4px;
-  align-items: center;
-  color: #333;
-  text-decoration: none;
-}
-
-.provider-toggle .toggle-option:hover {
-  color: #111;
-}
-
-.provider-toggle .toggle-option.toggle-option--active {
-  background-color: #FFF;
-  color: #111;
-  font-weight: 500;
-  box-shadow: 0 1px 7px -1px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.15);
-}
-
 /*# sourceMappingURL=style.css.map */
-

@@ -1,4 +1,6 @@
-<a href="https://console.vantage.sh/signup" class="d-flex align-items-center small m-0 justify-content-center py-2 text-decoration-none gap-2" style="background: #99F6E4; color: #111;">
-	<img width="18" height="18" alt="Kubernetes Logo" src="/kubernetes-color.svg">
-	Optimize Kubernetes Costs with pod efficiency reports
+<a href="https://console.vantage.sh/signup" class="banner-ad">
+	<img width="18" height="18" alt="Vantage Logo" src="/vantage-logo-icon.svg">
+	<span>
+		<span class="fw-semibold">Start Saving on EC2:</span> Connect your AWS account with Vantage for a free trial.
+	</span>
 </a>

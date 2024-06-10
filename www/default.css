@@ -344,6 +344,10 @@ input.search {
   */
 }
 
+.footer h1 {
+  margin: 0;
+}
+
 .form-control {
   font-size: 14px !important;
 }

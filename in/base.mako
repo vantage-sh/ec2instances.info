@@ -80,20 +80,20 @@
             </ul>
           </div>
           <a href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-github btn-icon contr-mobile">
-            <img src="./icon-github.svg" height="18" width="18" class="me-1" />
+            <img src="/icon-github.svg" height="18" width="18" class="me-1" />
             Star
           </a>
         </div>
         <div class="d-flex">
           <div class="nav-buttons px-2 d-none d-xxl-block">
             <a target="_blank" href="https://vantage.sh/slack" class="btn btn-github btn-icon">
-              <img src="./icon-slack.svg" height="18" width="18" class="me-1" />
+              <img src="/icon-slack.svg" height="18" width="18" class="me-1" />
               Slack
             </a>
           </div>
           <div class="nav-buttons d-none d-xxl-block">
             <a target="_black" href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-github btn-icon">
-              <img src="./icon-github.svg" height="18" width="18" class="me-1" />
+              <img src="/icon-github.svg" height="18" width="18" class="me-1" />
               Star
             </a>
           </div>
@@ -111,11 +111,11 @@
           <div class="d-flex align-items-center gap-3">
             <div class="provider-toggle">
               <div class="toggle-option toggle-option--active">
-                <img src="./icon-aws.svg" height="18" width="18" />
+                <img src="/icon-aws.svg" height="18" width="18" />
                 AWS
               </div>
               <a href="/azure" class="toggle-option">
-                <img src="./icon-azure.svg" height="18" width="18" />
+                <img src="/icon-azure.svg" height="18" width="18" />
                 Azure
               </a>
             </div>
