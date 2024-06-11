@@ -58,11 +58,8 @@ def build(c):
 def scrape_ec2(c):
     """Scrape EC2 data from AWS and save to local file"""
     ec2_file = "www/instances.json"
-    try:
-        scrape(ec2_file)
-    except Exception as e:
-        print("ERROR: Unable to scrape EC2 data")
-        print(traceback.print_exc())
+    scrape(ec2_file)
+
 
 
 @task

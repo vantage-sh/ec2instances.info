@@ -101,8 +101,8 @@ def get_instances():
     product_pager = pricing_client.get_paginator("get_products")
 
     # Not all instances are in US-EAST-1 any longer.
-    # Check Ohio as well.
-    for region in ["US East (Ohio)", "US East (N. Virginia)"]:
+    # Check Ohio and California as well.
+    for region in ["US East (Ohio)", "US East (N. Virginia)", "US West (N. California)"]:
         product_iterator = product_pager.paginate(
             ServiceCode="AmazonEC2",
             Filters=[
@@ -312,7 +312,7 @@ def add_spot_pricing(imap):
                             }
                         }
 
-        except botocore.exceptions.ClientError:
+        except (botocore.exceptions.ClientError, botocore.exceptions.EndpointConnectionError):
             print(
                 'WARNING: Spot region "{}" not enabled. Falling back to spot advisor.'.format(
                     region
