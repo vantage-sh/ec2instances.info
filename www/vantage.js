@@ -3,15 +3,15 @@
 $(document).ready(function () {
   var vantage_settings = store.get('vantage');
   
-  if (vantage_settings) {
-    if (vantage_settings['connect-2']) {
-      $('.vantage-callout').hide();
-    }
+  if (vantage_settings && vantage_settings['connect-2']) {
+
+  } else {
+    $("#vantage-callout").toggleClass('d-none');
   }
 
   $('.callout-close').click(function () {
     var vantage_settings = {'connect-2': true};
     store.set('vantage', vantage_settings);
-    $(this).parent().hide();
+    $("#vantage-callout").toggleClass('d-none');
   });
 })
