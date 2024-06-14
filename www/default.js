@@ -331,7 +331,7 @@ function init_data_table() {
 }
 
 $(document).ready(function () {
-  vantage_settings();
+  ;
   var urlpath = window.location.pathname;
   responsive_mode = mediaQuery.matches;
 

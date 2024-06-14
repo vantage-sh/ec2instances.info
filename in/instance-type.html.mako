@@ -345,7 +345,7 @@
   </script>
   <script type="text/javascript">
   $(function() {
-    vantage_settings();
+    
 
     initialize_prices();
     disable_regions();
