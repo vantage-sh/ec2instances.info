@@ -1,16 +1,10 @@
-<div class="mt-4 pt-4 mb-4 d-flex flex-container justify-content-center">
-    <div class="d-none d-lg-block">
-        <div id="vantage-callout" class="vantage-callout">
-            <div class="callout-close">
-                <span class="material-icons">close</span>
-            </div>
-            <img width="auto" height="25" alt="Vantage Logo" src="/vantage-logo_full.svg">
-            <h5>EC2 Rightsizing Recommendations</h5>
-            <p>Connect your AWS account with Vantage to see a savings estimate.</p>
-            ## <h5>EC2 Rightsizing Recommendations</h5>
-            ## <p>Explore more cloud cost management <br />tools from Vantage.</p>
-
-            <a class="btn btn-callout" href="https://console.vantage.sh/signup" target="_blank">Sign Up</a>
+<div class="d-none">
+    <div id="vantage-callout" class="vantage-callout d-none">
+        <div class="callout-close">
+            <span class="material-icons">close</span>
         </div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf5OE9mcer3TMDeMj6_ag3D1_IiAP9zWTRugERkh6Timzyl8A/viewform" target="_blank" class="d-flex">
+            <img src="https://assets.vantage.sh/www/instances-shirt.png" height="400" width="300" />
+        </a>
     </div>
 </div>
