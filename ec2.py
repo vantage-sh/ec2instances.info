@@ -384,6 +384,18 @@ def parse_instance(instance_type, product_attributes, api_description):
             "ips_per_eni": netinfo["Ipv4AddressesPerInterface"],
         }
 
+    if api_description:
+        if "EbsInfo" in api_description:
+            if "EbsOptimizedInfo" in api_description["EbsInfo"]:
+                ebs_optimized_info = api_description["EbsInfo"]["EbsOptimizedInfo"]
+                i.ebs_optimized = True
+                i.ebs_baseline_throughput = ebs_optimized_info['BaselineThroughputInMBps']
+                i.ebs_baseline_iops = ebs_optimized_info['BaselineIops']
+                i.ebs_baseline_bandwidth = ebs_optimized_info['BaselineBandwidthInMbps']
+                i.ebs_throughput = ebs_optimized_info['BaselineThroughputInMBps']
+                i.ebs_iops = ebs_optimized_info['MaximumIops']
+                i.ebs_max_bandwidth = ebs_optimized_info['MaximumBandwidthInMbps']
+
     try:
         ecu = product_attributes.get("ecu")
         if ecu == "Variable":
