@@ -282,7 +282,7 @@ def add_eni_info(instances):
 
             if instance_type not in by_type:
                 print(
-                    "WARNING: Ignoring ENI data for unknown instance type: {}".format(
+                    "WARNING: Ignoring data for unknown instance type: {}".format(
                         instance_type
                     )
                 )
@@ -296,95 +296,6 @@ def add_eni_info(instances):
                     "max_enis": max_enis,
                     "ips_per_eni": ip_per_eni,
                 }
-
-
-def add_ebs_info(instances):
-    """
-    Six tables on this page:
-
-    5 of them: EBS optimized by default and baseline:
-    Baseline performance metrics for instances with asterisk (unsupported for now, see comment below)
-        Instance type | Maximum bandwidth (Mib/s) | Maximum throughput (MiB/s, 128 KiB I/O) | Maximum IOPS (16 KiB I/O)
-        Instance type | Baseline bandwidth (Mib/s) | Baseline throughput (MiB/s, 128 KiB I/O) | Baseline IOPS (16 KiB I/O)
-
-    Table 6: Not EBS optimized by default
-        Instance type | Maximum bandwidth (Mib/s) | Maximum throughput (MiB/s, 128 KiB I/O) | Maximum IOPS (16 KiB I/O)
-
-    TODO: Support the asterisk on type names in the first table, which means:
-        "These instance types can support maximum performance for 30 minutes at least once every 24 hours. For example,
-        c5.large instances can deliver 281 MB/s for 30 minutes at least once every 24 hours. If you have a workload
-        that requires sustained maximum performance for longer than 30 minutes, select an instance type based on the
-        following baseline performance."
-
-    """
-
-    def parse_ebs_combined_table(by_type, table):
-        for row in table.xpath("tr"):
-            if row.xpath("th"):
-                continue
-            cols = row.xpath("td")
-            # remove last character which is a superscript with other info
-            instance_type = sanitize_instance_type(totext(cols[0]))[:-1]
-
-            if len(cols) == 4:
-                ebs_baseline_bandwidth = locale.atof(totext(cols[1]))
-                ebs_baseline_throughput = locale.atof(totext(cols[2]))
-                ebs_baseline_iops = locale.atof(totext(cols[3]))
-                ebs_max_bandwidth = locale.atof(totext(cols[1]))
-                ebs_throughput = locale.atof(totext(cols[2]))
-                ebs_iops = locale.atof(totext(cols[3]))
-            elif len(cols) == 7:
-                ebs_baseline_bandwidth = locale.atof(totext(cols[1]))
-                ebs_max_bandwidth = locale.atof(totext(cols[2]))
-                ebs_baseline_throughput = locale.atof(totext(cols[3]))
-                ebs_throughput = locale.atof(totext(cols[4]))
-                ebs_baseline_iops = locale.atof(totext(cols[5]))
-                ebs_iops = locale.atof(totext(cols[6]))
-
-            if instance_type not in by_type:
-                print(f"ERROR: Ignoring EBS info for unknown instance {instance_type}")
-            else:
-                by_type[instance_type].ebs_optimized = True
-                by_type[instance_type].ebs_optimized_by_default = True
-                by_type[instance_type].ebs_baseline_throughput = ebs_baseline_throughput
-                by_type[instance_type].ebs_baseline_iops = ebs_baseline_iops
-                by_type[instance_type].ebs_baseline_bandwidth = ebs_baseline_bandwidth
-                by_type[instance_type].ebs_throughput = ebs_throughput
-                by_type[instance_type].ebs_iops = ebs_iops
-                by_type[instance_type].ebs_max_bandwidth = ebs_max_bandwidth
-
-    def parse_ebs_nondefault_table(by_type, table):
-        for row in table.xpath("tr"):
-            if row.xpath("th"):
-                continue
-            cols = row.xpath("td")
-            # remove last character which is a superscript with other info
-            instance_type = sanitize_instance_type(totext(cols[0]))[:-1]
-            ebs_max_bandwidth = locale.atof(totext(cols[1]))
-            ebs_throughput = locale.atof(totext(cols[2]))
-            ebs_iops = locale.atof(totext(cols[3]))
-
-            if instance_type not in by_type:
-                print(f"ERROR: Ignoring EBS info for unknown instance {instance_type}")
-            else:
-                if ebs_max_bandwidth:
-                    by_type[instance_type].ebs_optimized = True
-                by_type[instance_type].ebs_optimized_by_default = False
-                by_type[instance_type].ebs_throughput = ebs_throughput
-                by_type[instance_type].ebs_iops = ebs_iops
-                by_type[instance_type].ebs_max_bandwidth = ebs_max_bandwidth
-
-    by_type = {i.instance_type: i for i in instances}
-    # Canonical URL for this info is https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
-    # ebs_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.partial.html"
-    ebs_url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html"
-    tree = etree.parse(urllib2.urlopen(ebs_url), etree.HTMLParser())
-    tables = tree.xpath('//div[@class="table-contents"]//table')
-    for t in [0, 1, 2, 3, 4]:
-        parse_ebs_combined_table(by_type, tables[t])
-
-    parse_ebs_nondefault_table(by_type, tables[5])
-
 
 def add_linux_ami_info(instances):
     """Add information about which virtualization options are supported.
@@ -1317,8 +1228,6 @@ def scrape(data_file):
     add_pricing_info(all_instances)
     print("Parsing ENI info...")
     add_eni_info(all_instances)
-    print("Parsing EBS info...")
-    add_ebs_info(all_instances)
     print("Parsing Linux AMI info...")
     add_linux_ami_info(all_instances)
     print("Parsing VPC-only info...")
