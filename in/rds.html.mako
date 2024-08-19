@@ -323,8 +323,6 @@
       </tbody>
     </table>
 
-    <%include file="ads-connect.mako"/>
-
   </div>
 
   <%block name="header">
