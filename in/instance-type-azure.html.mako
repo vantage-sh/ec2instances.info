@@ -243,9 +243,7 @@
                 </table>
               % endif
             </div>
-            <div id="unfix" class="d-none d-lg-block">
-              <%include file="ads-connect.mako"/>
-            </div>
+
           </div>
         </div>
         <div class="column-right">
