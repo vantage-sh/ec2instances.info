@@ -71,7 +71,8 @@ def add_volume_quotas(instances):
     rows = table.xpath(".//tr[./td]")
 
     for r in rows:
-        instance_type = etree.tostring(r[0], method="text").strip().decode()
+        # .lower() as keys were coming back with odd capitalization.
+        instance_type = etree.tostring(r[0], method="text").strip().decode().lower()
         min_ebs = etree.tostring(r[1], method="text").strip().decode()
         max_ebs_gp2 = etree.tostring(r[2], method="text").strip().decode()
         max_ebs_gp3 = etree.tostring(r[3], method="text").strip().decode()
