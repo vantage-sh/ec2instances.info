@@ -76,9 +76,10 @@ def add_volume_quotas(instances):
         max_ebs_gp2 = etree.tostring(r[2], method="text").strip().decode()
         max_ebs_gp3 = etree.tostring(r[3], method="text").strip().decode()
 
-        instances[instance_type]["min_ebs"] = min_ebs
-        instances[instance_type]["max_ebs_gp2"] = max_ebs_gp2
-        instances[instance_type]["max_ebs_gp3"] = max_ebs_gp3
+        if instance_type in instances:
+            instances[instance_type]["min_ebs"] = min_ebs
+            instances[instance_type]["max_ebs_gp2"] = max_ebs_gp2
+            instances[instance_type]["max_ebs_gp3"] = max_ebs_gp3
 
     table = tree.xpath('//div[@class="table-contents disable-scroll"]//table')[2]
     rows = table.xpath(".//tr[./td]")
@@ -86,7 +87,8 @@ def add_volume_quotas(instances):
         instance_type = etree.tostring(r[0], method="text").strip().decode()
         max_http_payload = etree.tostring(r[1], method="text").strip().decode()
 
-        instances[instance_type]["max_http_payload"] = max_http_payload
+        if instance_type in instances:
+            instances[instance_type]["max_http_payload"] = max_http_payload
 
     # Manually add ultrawarm storage
     instances["ultrawarm1.medium.search"]["max_storage"] = "1.5 TiB"
