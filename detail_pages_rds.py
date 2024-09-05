@@ -312,9 +312,10 @@ def map_rds_attributes(i, imap):
     for j, k in i.items():
         if j not in special_attributes:
             # This is one row on a detail page
-            display = imap[j]
-            display["value"] = k
-            instance_details[display["category"]].append(format_attribute(display))
+            if j in imap:
+                display = imap[j]
+                display["value"] = k
+                instance_details[display["category"]].append(format_attribute(display))
 
     # Sort the instance attributes in each category alphabetically,
     # another general-purpose option could be to sort by value data type
