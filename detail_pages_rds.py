@@ -342,36 +342,34 @@ def build_detail_pages_rds(instances, all_regions):
     for i in instances:
         instance_type = i["instance_type"]
 
-        instance_page = os.path.join(subdir, instance_type + ".html")
-        instance_details = map_rds_attributes(i, imap)
-        instance_details["Pricing"] = prices(i["pricing"])
-        fam = fam_lookup[instance_type]
-        fam_members = ifam[fam]
-        denylist = unavailable_instances(instance_details, all_regions)
-        defaults = initial_prices(instance_details, instance_type)
-        idescription = description(instance_details, defaults)
+        try:
+            instance_page = os.path.join(subdir, instance_type + ".html")
+            instance_details = map_rds_attributes(i, imap)
+            instance_details["Pricing"] = prices(i["pricing"])
+            fam = fam_lookup[instance_type]
+            fam_members = ifam[fam]
+            denylist = unavailable_instances(instance_details, all_regions)
+            defaults = initial_prices(instance_details, instance_type)
+            idescription = description(instance_details, defaults)
 
-        print("Rendering %s to detail page %s..." % (instance_type, instance_page))
-        with io.open(instance_page, "w+", encoding="utf-8") as fh:
-            try:
-                fh.write(
-                    template.render(
-                        i=instance_details,
-                        family=fam_members,
-                        description=idescription,
-                        unavailable=denylist,
-                        defaults=defaults,
-                        variants=variants[instance_type[3:5]],
-                        regions=all_regions,
+            print("Rendering %s to detail page %s..." % (instance_type, instance_page))
+            with io.open(instance_page, "w+", encoding="utf-8") as fh:
+                    fh.write(
+                        template.render(
+                            i=instance_details,
+                            family=fam_members,
+                            description=idescription,
+                            unavailable=denylist,
+                            defaults=defaults,
+                            variants=variants[instance_type[3:5]],
+                            regions=all_regions,
+                        )
                     )
-                )
-                sitemap.append(instance_page)
-            except:
-                render_err = mako.exceptions.text_error_template().render()
-                err = {"e": "ERROR for " + instance_type, "t": render_err}
-
-                could_not_render.append(err)
-        # break
+                    sitemap.append(instance_page)
+        except:
+            render_err = mako.exceptions.text_error_template().render()
+            err = {"e": "ERROR for " + instance_type, "t": render_err}
+            could_not_render.append(err)
 
     [print(err["e"], "{}".format(err["t"])) for err in could_not_render]
     [print(page["e"]) for page in could_not_render]
