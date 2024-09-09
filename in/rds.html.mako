@@ -183,7 +183,6 @@
             % endif
           % endfor
 
-          <th class="generation">Generation</th>
           <th class="ebs-baseline-bandwidth">EBS Optimized: Baseline Bandwidth</th>
           <th class="ebs-baseline-throughput">EBS Optimized: Baseline Throughput (128K)</th>
           <th class="ebs-baseline-iops">EBS Optimized: Baseline IOPS (16K)</th>
@@ -217,7 +216,7 @@
               ${inst['dedicatedEbsThroughput']}
             </span>
             % endif
-          <td class="physical_processor">${inst['physicalProcessor']}</td>
+          <td class="physical_processor">${inst['physicalProcessor'] if 'physicalProcessor' in inst else '-'}</td>
           <td class="vcpus">
             <span sort="${inst['vcpu']}">
               ${inst['vcpu']} vCPUs
@@ -229,7 +228,7 @@
             </span>
           </td>
           <td class="architecture">
-            % if 'i386' in inst['arch']:
+            % if inst['arch'] and 'i386' in inst['arch']:
             32/64-bit
             % else:
             64-bit
@@ -280,9 +279,6 @@
           % endif
           % endfor
 
-          <td class="generation">
-              ${'current' if inst['currentGeneration'] == 'Yes' else 'previous'}
-          </td>
           <td class="ebs-baseline-bandwidth">
             % if not inst['ebs_baseline_bandwidth']:
             <span sort="0">N/A</span>

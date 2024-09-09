@@ -92,20 +92,9 @@ def description(id, defaults):
     family_category = id["Amazon"][2]["value"].lower()
     cpus = id["Compute"][0]["value"]
     memory = id["Compute"][1]["value"]
-    bandwidth = id["Networking"][0]["value"]
 
-    if (
-        "low" in bandwidth.lower()
-        or "moderate" in bandwidth.lower()
-        or "high" in bandwidth.lower()
-    ):
-        bandwidth = " and {} network performance".format(bandwidth.lower())
-    else:
-        bandwidth.strip("Gigabit")
-        bandwidth = " and {} Gibps of bandwidth".format(bandwidth.lower())
-
-    return "The {} instance is in the {} family and has {} vCPUs, {} GiB of memory{} starting at ${} per hour.".format(
-        name, family_category, cpus, memory, bandwidth, defaults[0]
+    return "The {} instance is in the {} family and has {} vCPUs, {} GiB of memory starting at ${} per hour.".format(
+        name, family_category, cpus, memory, defaults[0]
     )
 
 
@@ -340,7 +329,6 @@ def build_detail_pages_rds(instances, all_regions):
     sitemap = []
     for i in instances:
         instance_type = i["instance_type"]
-
         instance_page = os.path.join(subdir, instance_type + ".html")
         instance_details = map_rds_attributes(i, imap)
         instance_details["Pricing"] = prices(i["pricing"])
