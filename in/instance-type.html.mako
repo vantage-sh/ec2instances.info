@@ -159,24 +159,7 @@
               </div>
             </div>
 
-            % if defaults[0] != "'N/A'" and defaults[3] != "'N/A'":
-            <div class="d-flex flex-wrap mt-4">
-              <div class="autopilot-callout-wrapper w-100">
-                <div class="autopilot-callout w-100">
-                  <p class="text-center mt-1 mb-0">
-                    <% discount = 100 - (float(defaults[3]) / float(defaults[0]) * 100) %>
-                    <% monthly = float(defaults[3]) * 730 %>
-                    $${"{:0.2f}".format(monthly)} per month <span style="color:#1E986D">(-${"{:.0f}".format(discount)}%)</span> with <a href="https://console.vantage.sh/signup">Autopilot</a>
-                  </p>
-                  <div class="d-flex flex-row-reverse mt-2">
-                  <span>
-                    <a class="autopilot-learn-more" href="https://vantage.sh/features/autopilot">Learn more</a>
-                  </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            % endif
+            <%include file="ads-demo.mako"/>
 
             <!-- Instance families -->
             <div class="mt-4 d-flex flex-column">
@@ -300,23 +283,8 @@
               % endif
             </div>
           </div>
-        </div>
-        <div class="column-right">
-          <div class="sidebar-section links">
-            See a data problem? <a href="https://github.com/vantage-sh/ec2instances.info/issues/new" target="_blank" class="text-decoration-none">Open a ticket.</a>
-          </div>
-          <div class="sidebar-section ticket small">
-            <form name="submit-to-google-sheet">
-              <label class="mb-3" for="textarea">What's missing from this page?</label><br>
-              <input type="hidden" name="page" value="${i["Amazon"][1]['value']}">
-              <textarea class="mb-4 feedback-text" name="feedback" id="textarea" placeholder="Your feedback"></textarea><br>
-              <label class="mb-3" for="submit-email">Email (optional):</label><br>
-              <input name="email" id="submit-email" type="email" class="submit-email mb-4">
-              <button id="submit-feedback" class="btn btn-purple" type="submit">Send</button>
-            </form>
-            <p id="submission-response"></p>
-            <span>By <a target="_blank" href="https://vantage.sh/" class="text-decoration-none">Vantage</a></span>
-          </div>
+
+          <%include file="ads-detail-column.mako"/>
         </div>
       </div>
     </div>
