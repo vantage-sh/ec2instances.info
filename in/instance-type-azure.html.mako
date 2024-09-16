@@ -58,7 +58,7 @@
       <%include file="ads-banner.mako"/>
 
       <div class="columns">
-        <div class="column-left--parent">
+        <div class="column-left--parent justify-content-center">
           <div class="column-left">
             <h1 class="h3 mb-0 fw-bolder">${i["Azure"][2]["value"]}</h1>
             
@@ -191,7 +191,7 @@
             % endif
           </div>
 
-          <div class="column-middle mb-5">
+          <div class="column-middle mb-5" style="max-width: 800px;">
             <div class="w-100 d-flex flex-column flex-fill pb-5">          
               <div class="d-flex align-items-center mb-3">
                 <span class="material-icons me-1">info</span>

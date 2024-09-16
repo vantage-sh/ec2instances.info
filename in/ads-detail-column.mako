@@ -1,4 +1,4 @@
-<div id="details-column" class="py-3 pe-3 w-100 d-lg-flex d-none flex-column gap-3" style="max-width: 360px;">
+<div id="details-column" class="py-3 pe-3 w-100 d-none flex-column gap-3" style="max-width: 360px;">
 	<!-- Template Option 1 -->
 	<div id="ad-1" class="w-100 d-none flex-column gap-3">
 		<a id="ad-1_option-1_link" href="#" class="d-flex flex-column border text-decoration-none align-items-start w-100 p-3 rounded-2" style="font-size: 12px;">
