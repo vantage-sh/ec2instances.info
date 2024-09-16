@@ -35,7 +35,7 @@
 	</div>
 
 	<!-- Template Option 3 -->
-	<div id="ad-3" class="w-100 d-flex flex-column gap-3">
+	<div id="ad-3" class="w-100 d-none flex-column gap-3">
 		<a id="ad-3_option-1_link" href="#" class="d-flex gap-3 border text-decoration-none align-items-center w-100 rounded-2" style="font-size: 12px; padding: 12px;">
 			<img id="ad-3_option-1_img" src="https://assets.vantage.sh/blog/gpt-4o-small-vs-gemini-1-5-flash-vs-claude-3-haiku-cost/gpt-4o-small-vs-gemini-1-5-flash-vs-claude-3-haiku-cost.jpg" width="110px" height="auto" class="rounded-1">
 			<div class="flex-fill">
