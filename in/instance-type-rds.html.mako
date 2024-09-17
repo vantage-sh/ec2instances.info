@@ -57,13 +57,13 @@
       </div>
       <%include file="ads-banner.mako"/>
       <div class="columns">
-        <div class="column-left--parent">
+        <div class="column-left--parent justify-content-center">
           <div class="column-left">
             <h1 class="h3 mb-0 fw-bolder">${i["Amazon"][1]["value"]}</h1>
-            
+
             <!-- Description -->
             <p class="py-md-4 py-3 mb-2 small lh-base">${description}</p>
-            
+
             <div class="d-flex align-items-center mb-3">
               <span class="material-icons me-1">paid</span>
               <p class="h6 fw-semibold mb-0">Pricing</p>
@@ -90,30 +90,30 @@
                 <select class="form-select form-select-sm" id="region">
                   <option value='us-east-1'>US East (N. Virginia)</option>
                   % for api_name, region in regions.items():
-                    % if api_name == 'us-east-1':
-                      <% continue %>
-                    % endif
-                    <option value='${api_name}'>${region}</option>
+                  % if api_name == 'us-east-1':
+                  <% continue %>
+                  % endif
+                  <option value='${api_name}'>${region}</option>
                   % endfor
                 </select>
               </div>
               <div class="col-6 mb-2">
                 <select class="form-select form-select-sm" id="os">
                   % if "mem" in i["Amazon"][1]["value"]:
-                    <option value="Oracle">Oracle</option>
-                    <option value="MySQL">MySQL</option> 
-                    <option value="PostgreSQL">PostgreSQL</option> 
-                    <option value="SQL Server Standard">SQL Server</option>
+                  <option value="Oracle">Oracle</option>
+                  <option value="MySQL">MySQL</option> 
+                  <option value="PostgreSQL">PostgreSQL</option> 
+                  <option value="SQL Server Standard">SQL Server</option>
                   % elif "z1d" in i["Amazon"][1]["value"]:
-                    <option value="SQL Server Standard">SQL Server</option>
-                    <option value="Oracle">Oracle</option>
-                    <option value="PostgreSQL">PostgreSQL</option> 
-                    <option value="MySQL">MySQL</option> 
+                  <option value="SQL Server Standard">SQL Server</option>
+                  <option value="Oracle">Oracle</option>
+                  <option value="PostgreSQL">PostgreSQL</option> 
+                  <option value="MySQL">MySQL</option> 
                   % else:
-                    <option value="PostgreSQL">PostgreSQL</option> 
-                    <option value="MySQL">MySQL</option> 
-                    <option value="Oracle">Oracle</option>
-                    <option value="SQL Server Standard">SQL Server</option>
+                  <option value="PostgreSQL">PostgreSQL</option> 
+                  <option value="MySQL">MySQL</option> 
+                  <option value="Oracle">Oracle</option>
+                  <option value="SQL Server Standard">SQL Server</option>
                   % endif
                   <option value="Aurora Postgres & MySQL">Aurora Postgres & MySQL</option>
                   <option value="Aurora I/O Optimized">Aurora I/O Optimized</option>
@@ -155,24 +155,7 @@
               </div>
             </div>
 
-            % if defaults[0] != "'N/A'" and defaults[2] != "'N/A'":
-            <div class="d-flex flex-wrap mt-4">
-              <div class="autopilot-callout-wrapper w-100">
-                <div class="autopilot-callout w-100">
-                  <p class="text-center mt-1 mb-0">
-                    <% discount = 100 - (float(defaults[2]) / float(defaults[0]) * 100) %>
-                    <% monthly = float(defaults[2]) * 730 %>
-                    $${"{:0.2f}".format(monthly)} per month <span style="color:#1E986D">(-${"{:.0f}".format(discount)}%)</span> with <br><a href="https://console.vantage.sh/signup">Autopilot Recommendations</a>
-                  </p>
-                  <div class="d-flex flex-row-reverse mt-2">
-                  <span>
-                    <a class="autopilot-learn-more" href="https://vantage.sh/features/autopilot">Learn more</a>
-                  </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            % endif
+            <%include file="ads-demo.mako"/>
 
             <!-- Instance families -->
             <div class="mt-4 d-flex flex-column">
@@ -190,126 +173,110 @@
                 </thead>
                 <tbody>
                   % for f in family:
-                    % if f["name"] == i["Amazon"][1]['value']:
-                    <tr class="no-link">
-                      <td>${f["name"]}</td>
+                  % if f["name"] == i["Amazon"][1]['value']:
+                  <tr class="no-link">
+                    <td>${f["name"]}</td>
                     % else:
                     <tr>
                       <td><a href="/aws/rds/${f["name"]}">${f["name"]}</a></td>
-                    % endif
-                    <td class="text-center">${f["cpus"]}</td>
-                    <td class="text-center">${f["memory"]}</td>
-                  </tr>
-                  % endfor
-                </tbody>
-              </table>
-            </div>
-
-            <div class="d-flex justify-content-center">
-              <div>
-                <a href="/rds/?selected=${i["Amazon"][1]["value"]}" class="btn btn-white">
-                  Compare ${i["Amazon"][1]["value"]} to other Instances
-                </a>
+                      % endif
+                      <td class="text-center">${f["cpus"]}</td>
+                      <td class="text-center">${f["memory"]}</td>
+                    </tr>
+                    % endfor
+                  </tbody>
+                </table>
               </div>
-            </div>
 
-            <!-- Instance variants -->
-            % if len(variants) > 1:
-            <div class="mt-4 d-flex flex-column">
-              <div class="d-flex align-items-center mb-3">
-                <span class="material-icons me-1">dns</span>
-                <p class="h6 fw-semibold mb-0">Instance Variants</p>
+              <div class="d-flex justify-content-center">
+                <div>
+                  <a href="/rds/?selected=${i["Amazon"][1]["value"]}" class="btn btn-white">
+                    Compare ${i["Amazon"][1]["value"]} to other Instances
+                  </a>
+                </div>
               </div>
-              <table class="table table-mono">
-                <tbody>
-                  % for v in variants:
+
+              <!-- Instance variants -->
+              % if len(variants) > 1:
+              <div class="mt-4 d-flex flex-column">
+                <div class="d-flex align-items-center mb-3">
+                  <span class="material-icons me-1">dns</span>
+                  <p class="h6 fw-semibold mb-0">Instance Variants</p>
+                </div>
+                <table class="table table-mono">
+                  <tbody>
+                    % for v in variants:
                     % if v[0] == i["Amazon"][1]['value']:
-                      <tr class="no-link">
-                        <td>${v[0]}</td>
-                    % else:
+                    <tr class="no-link">
+                      <td>${v[0]}</td>
+                      % else:
                       <tr>
                         <td><a href="/aws/rds/${v[1]}">${v[0]}</a></td>
-                    % endif
-                    </tr>
-                  % endfor
-                </tbody>
-              </table>
-            </div>
-            % endif
-          </div>
+                        % endif
+                      </tr>
+                      % endfor
+                    </tbody>
+                  </table>
+                </div>
+                % endif
+              </div>
 
-          <div class="column-middle mb-5">
+          <div class="column-middle mb-5" style="max-width: 800px;">
             <div class="w-100 d-flex flex-column flex-fill pb-5">          
               <div class="d-flex align-items-center mb-3">
                 <span class="material-icons me-1">info</span>
                 <p class="h6 fw-semibold mb-0">Instance Details</p>
               </div>
               % for category, attrs in i.items():
-                % if category == "Coming Soon":
-                  % for a in attrs:
-                    <!--<p>${a["display_name"]}</p>-->
-                  % endfor
-                % elif category == "Not Shown":
-                <!--
-                  <p>Request this data to be included on Github</p>
-                  % for a in attrs:
-                    <p>${a["cloud_key"]}</p>
-                  % endfor
-                -->
-                % elif category == "Pricing":
-                  <p></p>
-                % else:
-                  <table class="table" id="${category}">
-                    <tr>
-                      <th class="col-6 border-end"><a href="#${category}">${category}</a></th>
-                      <th class="col-6">Value</th>
-                    </tr>
-                  % for a in attrs:
-                    <tr>
-                      <td class="col-6 border-end">${a["display_name"]}</td>
-                      <td class="col-6"><span class="${a["style"]}">${a["value"]}</span></td>
-                    </tr>
-                  % endfor
-                  </table>
-                % endif
+              % if category == "Coming Soon":
+              % for a in attrs:
+              <!--<p>${a["display_name"]}</p>-->
+              % endfor
+              % elif category == "Not Shown":
+              <!--
+                <p>Request this data to be included on Github</p>
+                % for a in attrs:
+                  <p>${a["cloud_key"]}</p>
+                % endfor
+              -->
+              % elif category == "Pricing":
+              <p></p>
+              % else:
+              <table class="table" id="${category}">
+                <tr>
+                  <th class="col-6 border-end"><a href="#${category}">${category}</a></th>
+                  <th class="col-6">Value</th>
+                </tr>
+                % for a in attrs:
+                <tr>
+                  <td class="col-6 border-end">${a["display_name"]}</td>
+                  <td class="col-6"><span class="${a["style"]}">${a["value"]}</span></td>
+                </tr>
+                % endfor
+              </table>
+              % endif
               % endfor
               % if len(unavailable) > 0 and false:
-                <table class="table" id="Unavailable">
-                  <tr>
-                    <th class="col-4 border-end">Unavailable</th>
-                    <th class="col-4 border-end">Unsupported Region</th>
-                    <th class="col-4">Unsupported OS</th>
-                  </tr>
-                  % for u in unavailable:
-                  <tr>
-                    <td class="col-4 border-end">${u[0]}</td>
-                    <td class="col-4 border-end">${u[1]}</td>
-                    <td class="col-4">${u[2]}</td>
-                  </tr>
-                  % endfor
-                </table>
+              <table class="table" id="Unavailable">
+                <tr>
+                  <th class="col-4 border-end">Unavailable</th>
+                  <th class="col-4 border-end">Unsupported Region</th>
+                  <th class="col-4">Unsupported OS</th>
+                </tr>
+                % for u in unavailable:
+                <tr>
+                  <td class="col-4 border-end">${u[0]}</td>
+                  <td class="col-4 border-end">${u[1]}</td>
+                  <td class="col-4">${u[2]}</td>
+                </tr>
+                % endfor
+              </table>
               % endif
             </div>
           </div>
+          <%include file="ads-detail-column.mako"/>
         </div>
-        <div class="column-right">
-          <div class="sidebar-section links">
-            See a data problem? <a href="https://github.com/vantage-sh/ec2instances.info/issues/new" target="_blank" class="text-decoration-none">Open a ticket.</a>
-          </div>
-          <div class="sidebar-section ticket small">
-            <form name="submit-to-google-sheet">
-              <label class="mb-3" for="textarea">What's missing from this page?</label><br>
-              <input type="hidden" name="page" value="${i["Amazon"][1]['value']}">
-              <textarea class="mb-4 feedback-text" name="feedback" id="textarea" placeholder="Your feedback"></textarea><br>
-              <label class="mb-3" for="submit-email">Email (optional):</label><br>
-              <input name="email" id="submit-email" type="email" class="submit-email mb-4">
-              <button id="submit-feedback" class="btn btn-purple" type="submit">Send</button>
-            </form>
-            <p id="submission-response"></p>
-            <span>By <a target="_blank" href="https://vantage.sh/events/" class="text-decoration-none">Vantage</a></span>
-          </div>
-        </div>
-    </div>
+      </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript" charset="UTF-8"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>

@@ -95,7 +95,7 @@
         <div class="d-none d-md-block">
           <%block name="header"/>
         </div>
-        <div class="d-flex align-items-center gap-3">
+        <div class="d-flex align-items-center gap-3 pe-3">
           <a href="https://handbook.vantage.sh/tools/instances/" target="_blank">Docs</a>
           <span>By <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
         </div>

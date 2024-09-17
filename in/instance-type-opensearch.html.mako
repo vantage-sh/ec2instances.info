@@ -56,7 +56,7 @@
       </div>
       <%include file="ads-banner.mako"/>
       <div class="columns">
-        <div class="column-left--parent">
+        <div class="column-left--parent justify-content-center">
           <div class="column-left">
             <h1 class="h3 mb-0 fw-bolder">${i["Amazon"][1]["value"]}</h1>
             
@@ -182,7 +182,7 @@
             % endif
           </div>
 
-          <div class="column-middle mb-5">
+          <div class="column-middle mb-5" style="max-width: 800px;">
             <div class="w-100 d-flex flex-column flex-fill pb-5">          
               <div class="d-flex align-items-center mb-3">
                 <span class="material-icons me-1">info</span>
@@ -221,23 +221,8 @@
               % endif
             </div>
           </div>
-        </div>
-        <div class="column-right">
-          <div class="sidebar-section links">
-            See a data problem? <a href="https://github.com/vantage-sh/ec2instances.info/issues/new" target="_blank" class="text-decoration-none">Open a ticket.</a>
-          </div>
-          <div class="sidebar-section ticket small">
-            <form name="submit-to-google-sheet">
-              <label class="mb-3" for="textarea">What's missing from this page?</label><br>
-              <input type="hidden" name="page" value="${i["Amazon"][1]['value']}">
-              <textarea class="mb-4 feedback-text" name="feedback" id="textarea" placeholder="Your feedback"></textarea><br>
-              <label class="mb-3" for="submit-email">Email (optional):</label><br>
-              <input name="email" id="submit-email" type="email" class="submit-email mb-4">
-              <button id="submit-feedback" class="btn btn-purple" type="submit">Send</button>
-            </form>
-            <p id="submission-response"></p>
-            <span>By <a target="_blank" href="https://vantage.sh/" class="text-decoration-none">Vantage</a></span>
-          </div>
+
+          <%include file="ads-detail-column.mako"/>
         </div>
       </div>
     </div>
