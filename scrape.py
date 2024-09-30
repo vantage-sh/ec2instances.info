@@ -3,6 +3,7 @@ from lxml import etree
 import re
 import json
 import locale
+import gzip
 import ec2
 import os
 import requests
@@ -252,7 +253,13 @@ def add_pricing_info(instances):
 
 
 def fetch_data(url):
-    content = urllib2.urlopen(url).read().decode()
+    response = urllib2.urlopen(url).read()
+
+    try:
+        content = response.decode()
+    except UnicodeDecodeError:
+        content = gzip.decompress(response).decode()
+
     try:
         pricing = json.loads(content)
     except ValueError:
