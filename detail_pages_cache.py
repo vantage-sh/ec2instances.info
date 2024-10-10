@@ -120,40 +120,41 @@ def prices(pricing):
         display_prices[region] = {}
 
         for os, _p in p.items():
-            os = cache_engine_mapping[os]
-            display_prices[region][os] = {}
+            if os in cache_engine_mapping:
+                os = cache_engine_mapping[os]
+                display_prices[region][os] = {}
 
-            # Doing a lot of work to deal with prices having up to 6 places
-            # after the decimal, as well as prices not existing for all regions
-            # and operating systems.
-            try:
-                display_prices[region][os]["ondemand"] = _p["ondemand"]
-            except KeyError:
-                display_prices[region][os]["ondemand"] = "N/A"
+                # Doing a lot of work to deal with prices having up to 6 places
+                # after the decimal, as well as prices not existing for all regions
+                # and operating systems.
+                try:
+                    display_prices[region][os]["ondemand"] = _p["ondemand"]
+                except KeyError:
+                    display_prices[region][os]["ondemand"] = "N/A"
 
-            # In the next 2 blocks, we need to split out the list of 1 year,
-            # 3 year, upfront, partial, and no upfront RI prices into 2 sets
-            # of prices: _1yr (all, partial, no) and _3yr (all, partial, no)
-            # These are then rendered into the 2 bottom pricing dropdowns
-            try:
-                reserved = {}
-                for k, v in _p["reserved"].items():
-                    if "Term1" in k:
-                        key = k[7:]
-                        reserved[key] = v
-                display_prices[region][os]["_1yr"] = reserved
-            except KeyError:
-                display_prices[region][os]["_1yr"] = "N/A"
+                # In the next 2 blocks, we need to split out the list of 1 year,
+                # 3 year, upfront, partial, and no upfront RI prices into 2 sets
+                # of prices: _1yr (all, partial, no) and _3yr (all, partial, no)
+                # These are then rendered into the 2 bottom pricing dropdowns
+                try:
+                    reserved = {}
+                    for k, v in _p["reserved"].items():
+                        if "Term1" in k:
+                            key = k[7:]
+                            reserved[key] = v
+                    display_prices[region][os]["_1yr"] = reserved
+                except KeyError:
+                    display_prices[region][os]["_1yr"] = "N/A"
 
-            try:
-                reserved = {}
-                for k, v in _p["reserved"].items():
-                    if "Term3" in k:
-                        key = k[7:]
-                        reserved[key] = v
-                display_prices[region][os]["_3yr"] = reserved
-            except KeyError:
-                display_prices[region][os]["_3yr"] = "N/A"
+                try:
+                    reserved = {}
+                    for k, v in _p["reserved"].items():
+                        if "Term3" in k:
+                            key = k[7:]
+                            reserved[key] = v
+                    display_prices[region][os]["_3yr"] = reserved
+                except KeyError:
+                    display_prices[region][os]["_3yr"] = "N/A"
 
     return display_prices
 
