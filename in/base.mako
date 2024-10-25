@@ -126,9 +126,17 @@
           <div class="d-none d-md-block">
             <%block name="header"/>
           </div>
-          <div class="d-flex align-items-center gap-3 pe-3">
+          <div class="d-flex align-items-center gap-3">
             <a href="https://handbook.vantage.sh/tools/instances/" target="_blank">Docs</a>
             <span>By <a target="_blank" href="https://vantage.sh/">Vantage</a></span>
+            <div class="d-md-flex d-none gap-2">
+              <div class="d-none d-md-block">
+                <input class="form-control" id="api-email-input" placeholder="Email">
+              </div>
+              <div class="d-none d-md-block">
+                <button class="btn btn-primary api-submit-input">Get API Key</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
