@@ -138,7 +138,7 @@
             <abbr title="Each virtual CPU is a hyperthread of an Intel Xeon core for M3, C4, C3, R3, HS1, G2, I2, and D2">vCPUs</abbr>
           </th>
           <th class="networkperf">Network Performance</th>
-          % for cache_engine in {'Redis', 'Memcached'}:
+          % for cache_engine in {'Redis', 'Memcached', 'Valkey'}:
           % if cache_engine == 'Redis':
           <th class="cost-ondemand cost-ondemand-${cache_engine} all" data-priority="1">${cache_engine} Cost</th>
           % else:
@@ -168,7 +168,7 @@
               ${inst['network_performance']}
             </span>
           </td>
-          % for cache_engine in {'Redis', 'Memcached'}:
+          % for cache_engine in {'Redis', 'Memcached', 'Valkey'}:
           <td class="cost-ondemand cost-ondemand-${cache_engine}" data-platform='${cache_engine}' data-vcpu='${inst['vcpu']}' data-memory='${inst['memory']}'>
             % if inst['pricing'].get('us-east-1', {}).get(cache_engine, {}).get('ondemand', 'N/A') != "N/A":
               <span sort="${inst['pricing']['us-east-1'][cache_engine]['ondemand']}">

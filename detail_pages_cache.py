@@ -14,6 +14,7 @@ import re
 cache_engine_mapping = {
     "Memcached": "Memcached",
     "Redis": "Redis",
+    "Valkey": "Valkey",
 }
 
 
