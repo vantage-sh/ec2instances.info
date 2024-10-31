@@ -114,16 +114,18 @@ def scrape(output_file, input_file=None):
 
     # loop through products, and only fetch available instances for now
     for sku, product in tqdm(six.iteritems(data["products"])):
-        if (
-            product.get("productFamily", None) == "Amazon OpenSearch Service Instance"
+        if (product.get("productFamily", None) == "Amazon OpenSearch Service Instance"
             and product.get("attributes", {}).get("operation", None)
-            != "DirectQueryAmazonS3GDCOCU"
-        ):
-            attributes = product["attributes"]
+            != "DirectQueryAmazonS3GDCOCU"):
+
+            attributes = product.get("attributes", {})
+            if "instanceType" not in attributes:
+                continue
+
+            instance_type = attributes["instanceType"]
 
             # map the region
             location = ec2.canonicalize_location(attributes["location"])
-            instance_type = attributes["instanceType"]
             if location == "Any":
                 region = "us-east-1"
             elif location == "Asia Pacific (Osaka-Local)":
@@ -149,9 +151,7 @@ def scrape(output_file, input_file=None):
 
             if instance_type not in instances.keys():
                 # delete some attributes that are inconsistent among skus
-                new_attributes = (
-                    attributes.copy()
-                )  # make copy so we can keep these attributes with the sku
+                new_attributes = attributes.copy()  # make copy so we can keep these attributes with the sku
                 new_attributes.pop("location", None)
                 new_attributes.pop("locationType", None)
                 new_attributes.pop("operation", None)
@@ -291,9 +291,7 @@ def scrape(output_file, input_file=None):
                             "yrTerm3.noUpfront-hrs"
                         ]
 
-                    instances[instance_type]["pricing"][region][
-                        "reserved"
-                    ] = reserved_prices
+                    instances[instance_type]["pricing"][region]["reserved"] = reserved_prices
                 except Exception as e:
                     print(
                         "ERROR: Trouble generating Cache reserved price for {}: {!r}".format(
