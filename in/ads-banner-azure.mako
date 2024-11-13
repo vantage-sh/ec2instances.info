@@ -1,7 +1,6 @@
-<a href="https://console.vantage.sh/signup" class="banner-ad">
+<a href="https://console.vantage.sh/signup?utm_campaign=Instances%20Blog%20Clicks&utm_source=azure-banner" class="banner-ad">
 	<img width="18" height="18" alt="Vantage Logo" src="/vantage-logo-icon.svg">
 	<span>
-	  <span class="fw-semibold">Start Saving on Azure VMs:</span> 
-	  Connect your Azure account with Vantage for a free trial.
+	    <span class="fw-semibold">Trying to save on VMs?</span> Connect your Azure account to view savings for free.
 	</span>
 </a>
