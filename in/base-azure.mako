@@ -69,7 +69,7 @@
           </div>
         </div>
       </div>
-      <%include file="ads-banner.mako"/>
+      <%include file="ads-banner-azure.mako"/>
 
       <div class="clearfix"></div>
 

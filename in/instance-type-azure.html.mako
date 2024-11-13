@@ -55,7 +55,7 @@
           </div>
         </div>
       </div>
-      <%include file="ads-banner.mako"/>
+      <%include file="ads-banner-azure.mako"/>
 
       <div class="columns">
         <div class="column-left--parent justify-content-center">
