@@ -1,5 +1,5 @@
 <div class="d-flex flex-wrap mt-4" id="details-ad-banner">
-	<a href="https://vantage.sh/contact/sales" id="details-ad-link" target="_blank" class="autopilot-callout-wrapper w-100 text-decoration-none">
+	<a href="https://vantage.sh/contact/sales?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar" id="details-ad-link" target="_blank" class="autopilot-callout-wrapper w-100 text-decoration-none">
 		<div class="autopilot-callout w-100 p-3 d-flex flex-items-center gap-3">
 			<img src="/ad-vantage-icon.svg" id="details-ad-img">
 			<div>
