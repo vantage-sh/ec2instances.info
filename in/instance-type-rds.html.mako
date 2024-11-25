@@ -32,7 +32,7 @@
             </a>
             <div class="d-flex flex-column">
               <p class="fs-6 fw-semibold text-white mb-0">Instances</p>
-              <a href="https://www.vantage.sh/?utm_campaign=Instances%20Blog%20Clicks&utm_source=presented-by" target="_blank" class="text-decoration-none text-white mb-0 opacity-75" style="font-size: 12px;">Presented by Vantage</a>
+              <a href="https://www.vantage.sh/lp/aws-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=presented-by" target="_blank" class="text-decoration-none text-white mb-0 opacity-75" style="font-size: 12px;">Presented by Vantage</a>
             </div>
           </div>
           <a href="https://github.com/vantage-sh/ec2instances.info" class="btn btn-github btn-icon contr-mobile">
