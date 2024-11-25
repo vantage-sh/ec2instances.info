@@ -47,7 +47,7 @@
             </a>
             <div class="d-flex flex-column">
               <p class="fs-6 fw-semibold text-white mb-0">Instances</p>
-              <a href="https://www.vantage.sh/?utm_campaign=Instances%20Blog%20Clicks&utm_source=presented-by" target="_blank" class="text-decoration-none text-white mb-0 opacity-75" style="font-size: 12px;">Presented by Vantage</a>
+              <a href="https://www.vantage.sh/lp/aws-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=presented-by" target="_blank" class="text-decoration-none text-white mb-0 opacity-75" style="font-size: 12px;">Presented by Vantage</a>
             </div>
           </div>
           <div class="d-flex align-items-center d-none d-md-block ms-3">
@@ -128,7 +128,7 @@
           </div>
           <div class="d-flex align-items-center gap-3">
             <a href="https://handbook.vantage.sh/tools/instances/" target="_blank">Docs</a>
-            <span>By <a target="_blank" href="https://www.vantage.sh/?utm_campaign=Instances%20Blog%20Clicks&utm_source=by-vantage">Vantage</a></span>
+            <span>By <a target="_blank" href="https://www.vantage.sh/lp/aws-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=by-vantage">Vantage</a></span>
             <div class="d-md-flex d-none gap-2">
               <div class="d-none d-md-block">
                 <input class="form-control" id="api-email-input" placeholder="Email">
