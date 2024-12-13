@@ -9,7 +9,15 @@ import os
 import requests
 import pickle
 import boto3
+import logging
 from six.moves.urllib import request as urllib2
+
+from parallel_scraper import ParallelScraper
+from parallel_pricing import ParallelPricingCollector
+from dedicated_price_collector import DedicatedPriceCollector
+from logging_setup import setup_logging, log_api_call, log_scraping_progress
+
+logger = setup_logging()
 
 # Following advice from https://stackoverflow.com/a/1779324/216138
 # The locale must be installed in the system, and it must be one where ',' is
@@ -385,15 +393,15 @@ def add_instance_storage_details(instances):
     client = boto3.client('ec2', region_name='us-east-1')
     pager = client.get_paginator("describe_instance_types")
     responses = pager.paginate(Filters=[{'Name': 'instance-storage-supported', 'Values': ['true']},{'Name': 'instance-type', 'Values': ['*']}])
-    
+
     for response in responses:
         instance_types = response['InstanceTypes']
-    
+
         for i in instances:
-            for instance_type in instance_types:  
+            for instance_type in instance_types:
                 if i.instance_type == instance_type["InstanceType"]:
                     storage_info = instance_type["InstanceStorageInfo"]
-                    
+
                     if storage_info:
                         nvme_support = storage_info["NvmeSupport"]
                         disk = storage_info["Disks"][0]
@@ -740,7 +748,7 @@ def add_gpu_info(instances):
             "cuda_cores": 76928,
             "gpu_memory": 192,
         },
-        "g6.xlarge": {  
+        "g6.xlarge": {
             # GPU core count found from the whitepaper
             # https://images.nvidia.com/aem-dam/Solutions/Data-Center/l4/nvidia-ada-gpu-architecture-whitepaper-v2.1.pdf
             "gpu_model": "NVIDIA L4",
@@ -1062,121 +1070,44 @@ def add_placement_groups(instances):
 
 
 def add_dedicated_info(instances):
-    # Dedicated Host is a physical server with EC2 instance capacity fully dedicated to a single customer.
-    # We treat it as another type of OS, like RHEL or SUSE.
-
-    region_map = {value: key for key, value in ec2.get_region_descriptions().items()}
-    # Note: AWS GovCloud (US) is us-gov-west-1. This seems to be an exception just for dedicated hosts.
-    region_map["us-gov-west-1"] = "AWS GovCloud (US)"
-    region_map["us-west-2-lax"] = "US West (Los Angeles)"
-
-    # Normalize and translate term lengths and payment options to ec2instances.info terms
-    reserved_map = {
-        "1yrNoUpfront": "yrTerm1Standard.noUpfront",
-        "1yrPartialUpfront": "yrTerm1Standard.partialUpfront",
-        "1yrAllUpfront": "yrTerm1Standard.allUpfront",
-        "1 yrNoUpfront": "yrTerm1Standard.noUpfront",
-        "1 yrPartialUpfront": "yrTerm1Standard.partialUpfront",
-        "1 yrAllUpfront": "yrTerm1Standard.allUpfront",
-        "3yrNoUpfront": "yrTerm3Standard.noUpfront",
-        "3yrPartialUpfront": "yrTerm3Standard.partialUpfront",
-        "3yrAllUpfront": "yrTerm3Standard.allUpfront",
-        "3 yrNoUpfront": "yrTerm3Standard.noUpfront",
-        "3 yrPartialUpfront": "yrTerm3Standard.partialUpfront",
-        "3 yrAllUpfront": "yrTerm3Standard.allUpfront",
-    }
-
-    def format_price(price):
-        return str(float("%f" % float(price))).rstrip("0").rstrip(".")
-
-    def fetch_dedicated_prices():
-        all_pricing = {}
-
-        # On demand pricing, not all dedicated instances are available on demand
-        url = "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/dedicatedhost-ondemand.json"
-        od_pricing = fetch_data(url)
-        for region in od_pricing["regions"]:
-            all_pricing[region] = {}
-            for instance_description, dinst in od_pricing["regions"][region].items():
-                _price = {"ondemand": format_price(dinst["price"]), "reserved": {}}
-                all_pricing[region][dinst["Instance Type"]] = _price
-
-        # All of the reserved pricing is at different URLs
-        for region in od_pricing["regions"]:
-            for term in ["3 year", "1 year"]:
-                for payment in ["No Upfront", "Partial Upfront", "All Upfront"]:
-                    base = f"https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/dedicatedhost-reservedinstance-virtual/"
-                    path = f"{region}/{term}/{payment}/index.json".replace(" ", "%20")
-
+    """Add dedicated host pricing information to instances"""
+    logger = logging.getLogger('add_dedicated_info')
+    
+    try:
+        # Create price collector and fetch prices
+        collector = DedicatedPriceCollector(max_workers=10)
+        all_pricing = collector.fetch_dedicated_prices()
+        
+        region_map = {value: key for key, value in ec2.get_region_descriptions().items()}
+        region_map["us-gov-west-1"] = "AWS GovCloud (US)"
+        region_map["us-west-2-lax"] = "US West (Los Angeles)"
+        
+        # Update instance pricing information
+        for inst in instances:
+            if not inst.pricing:
+                # Handle instances that are ONLY available with dedicated host pricing
+                inst_type = inst.instance_type.split(".")[0]
+                for k, r in region_map.items():
+                    region = ec2.canonicalize_location(r, False)
+                    if region in all_pricing and inst_type in all_pricing[region]:
+                        _price = all_pricing[region][inst_type]
+                        inst.regions[k] = region
+                        inst.pricing[k] = {}
+                        inst.pricing[k]["dedicated"] = _price
+            else:
+                # Add dedicated pricing to instances with existing pricing info
+                for region in inst.pricing:
                     try:
-                        pricing = fetch_data(base + path)
-                    except:
-                        print(
-                            "WARNING: Ignoring pricing - dedicated host. region={}, term={}, payment={}".format(
-                                region, term, payment
-                            )
-                        )
-                        continue
-
-                    for instance_description, dinst in pricing["regions"][
-                        region
-                    ].items():
-                        # Similar to get_reserved_pricing in ec2.py the goal is to get the effective hourly rate
-                        # and then the frontend will deal with making it monthly, yearly etc
-                        upfront = 0.0
-                        if "Partial" in payment or "All" in payment:
-                            upfront = float(dinst["riupfront:PricePerUnit"])
-                        inst_type = dinst["Instance Type"]
-                        ondemand = float(dinst["price"])
-                        lease_in_years = int(dinst["LeaseContractLength"][0])
-                        hours_in_term = lease_in_years * 365 * 24
-                        price = float(ondemand) + (float(upfront) / hours_in_term)
-                        translate_ri = reserved_map[
-                            dinst["LeaseContractLength"] + dinst["PurchaseOption"]
+                        _price = all_pricing[region_map[region]][
+                            inst.instance_type.split(".")[0]
                         ]
-
-                        # Certain instances will not have been created above because they are not available on demand
-                        if inst_type not in all_pricing[region]:
-                            all_pricing[region][inst_type] = {"reserved": {}}
-
-                        all_pricing[region][inst_type]["reserved"][translate_ri] = (
-                            format_price(price)
-                        )
-
-        return all_pricing
-
-    all_pricing = fetch_dedicated_prices()
-    for inst in instances:
-        if not inst.pricing:
-            # Less than 10 instances are ONLY available with dedicated host pricing
-            # In this case there is no prior pricing dict to add the dedicated prices to so
-            # create a new one. Unfortunately we have to search by instance but the
-            # previous dedicated pricing dict we have built is by region.
-            inst_type = inst.instance_type.split(".")[0]
-            for k, r in region_map.items():
-                region = ec2.canonicalize_location(r, False)
-                if inst_type in all_pricing[region]:
-                    _price = all_pricing[region][inst_type]
-                    inst.regions[k] = region
-                    inst.pricing[k] = {}
-                    inst.pricing[k]["dedicated"] = _price
-        else:
-            for region in inst.pricing:
-                # Add the 'dedicated' price to the price list as a top level key per region.
-                # Dedicated hosts are not associated with any type of software like rhel or mswin
-                # Not all instances are available as dedicated hosts
-                try:
-                    _price = all_pricing[region_map[region]][
-                        inst.instance_type.split(".")[0]
-                    ]
-                    inst.pricing[region]["dedicated"] = _price
-                except KeyError:
-                    pass
-                    # print(
-                    #     "No dedicated host price for %s in %s"
-                    #     % (inst.instance_type, region)
-                    # )
-
+                        inst.pricing[region]["dedicated"] = _price
+                    except KeyError:
+                        pass
+                        
+    except Exception as e:
+        logger.error(f"Error adding dedicated host information: {str(e)}")
+        raise
 
 def add_spot_interrupt_info(instances):
     """
@@ -1225,48 +1156,186 @@ def add_spot_interrupt_info(instances):
                     )
                     instance.pricing[region][os_id]["spot_avg"] = f"{est_spot:.6f}"
 
+class InstanceScraper:
+    def __init__(self, max_workers=10):
+        self.logger = logging.getLogger('scraper.InstanceScraper')
+        self.scraper = ParallelScraper(max_workers=max_workers)
+        self.regions = list(ec2.describe_regions())
+        self.instance_map = {}
+        self.all_instances = []
+
+    def _process_instance_info(self, instance_info):
+        """Process raw instance information into an Instance object"""
+        try:
+            inst = Instance()
+            inst.instance_type = instance_info['InstanceType']
+            inst.api_description = instance_info
+
+            # Process CPU info
+            if 'ProcessorInfo' in instance_info:
+                inst.arch = instance_info['ProcessorInfo']['SupportedArchitectures']
+                if 'SustainedClockSpeedInGhz' in instance_info['ProcessorInfo']:
+                    inst.clock_speed_ghz = str(instance_info['ProcessorInfo']['SustainedClockSpeedInGhz'])
+
+            # Process memory info
+            if 'MemoryInfo' in instance_info:
+                inst.memory = instance_info['MemoryInfo']['SizeInMiB'] / 1024.0
+
+            # Process vCPU info
+            if 'VCpuInfo' in instance_info:
+                inst.vCPU = instance_info['VCpuInfo']['DefaultVCpus']
+
+            # Process network info
+            if 'NetworkInfo' in instance_info:
+                net_info = instance_info['NetworkInfo']
+                inst.network_performance = net_info['NetworkPerformance']
+                if net_info.get('EnaSupport') == 'required':
+                    inst.ebs_as_nvme = True
+                inst.vpc = {
+                    'max_enis': net_info['MaximumNetworkInterfaces'],
+                    'ips_per_eni': net_info['Ipv4AddressesPerInterface']
+                }
+
+            return inst
+        except Exception as e:
+            self.logger.error(f"Error processing instance info for {instance_info.get('InstanceType', 'unknown')}: {str(e)}")
+            raise
+
+    def collect_instance_data(self):
+        """Collect basic instance type information"""
+        self.logger.info("Starting instance data collection...")
+        try:
+            instance_data = self.scraper.parallel_instance_fetch(self.regions)
+            processed = 0
+
+            for region, instances in instance_data.items():
+                self.logger.debug(f"Processing {len(instances)} instances from {region}")
+                for instance_info in instances:
+                    instance_type = instance_info['InstanceType']
+                    if instance_type not in self.instance_map:
+                        inst = self._process_instance_info(instance_info)
+                        self.instance_map[instance_type] = inst
+                        self.all_instances.append(inst)
+                    processed += 1
+
+            self.logger.info(f"Completed instance data collection. Found {len(self.instance_map)} unique instance types")
+
+        except Exception as e:
+            self.logger.error(f"Failed to collect instance data: {str(e)}", exc_info=True)
+            raise
+
+    def collect_pricing_data(self):
+        """Collect pricing information using parallel processing"""
+        self.logger.info("Starting parallel pricing data collection...")
+        try:
+            # Create pricing collector instance
+            collector = ParallelPricingCollector(max_workers=10)
+
+            # Collect pricing data in parallel
+            collector.collect_pricing(self.all_instances, self.regions)
+
+            self.logger.info("Completed parallel pricing data collection")
+
+        except Exception as e:
+            self.logger.error(f"Failed to collect pricing data: {str(e)}")
+            raise
+
+    def collect_additional_info(self):
+        """Collect all additional instance information"""
+        try:
+            self.logger.info("Collecting additional instance information...")
+
+            # ENI info
+            self.logger.info("Adding ENI information...")
+            add_eni_info(self.all_instances)
+
+            # Linux AMI info
+            self.logger.info("Adding Linux AMI information...")
+            add_linux_ami_info(self.all_instances)
+
+            # VPC only info
+            self.logger.info("Adding VPC-only information...")
+            add_vpconly_detail(self.all_instances)
+
+            # Instance storage
+            self.logger.info("Adding instance storage details...")
+            add_instance_storage_details(self.all_instances)
+
+            # T2 credits
+            self.logger.info("Adding T2 credit information...")
+            add_t2_credits(self.all_instances)
+
+            # Pretty names
+            self.logger.info("Adding pretty names...")
+            add_pretty_names(self.all_instances)
+
+            # EMR info
+            self.logger.info("Adding EMR details...")
+            add_emr_info(self.all_instances)
+
+            # GPU info
+            self.logger.info("Adding GPU details...")
+            add_gpu_info(self.all_instances)
+
+            # Placement groups
+            self.logger.info("Adding placement group details...")
+            add_placement_groups(self.all_instances)
+
+            # Dedicated host pricing
+            self.logger.info("Adding dedicated host pricing...")
+            add_dedicated_info(self.all_instances)
+
+            # Spot interrupt info
+            self.logger.info("Adding spot interrupt details...")
+            add_spot_interrupt_info(self.all_instances)
+
+            self.logger.info("Completed collecting additional information")
+
+        except Exception as e:
+            self.logger.error(f"Failed to collect additional information: {str(e)}", exc_info=True)
+            raise
+
+    def scrape_all(self):
+        """Execute complete scraping process"""
+        try:
+            self.logger.info("Starting complete scraping process")
+
+            # Collect instance data
+            self.collect_instance_data()
+
+            # Collect pricing data
+            self.collect_pricing_data()
+
+            # Collect additional information
+            self.collect_additional_info()
+
+            self.logger.info("Completed scraping process successfully")
+
+        except Exception as e:
+            self.logger.error(f"Error during scraping process: {str(e)}")
+            raise
 
 def scrape(data_file):
-    """Scrape AWS to get instance data"""
-    print("Parsing instance types...")
-    all_instances = ec2.get_instances()
-    print("Parsing pricing info...")
-    add_pricing_info(all_instances)
-    print("Parsing ENI info...")
-    add_eni_info(all_instances)
-    print("Parsing Linux AMI info...")
-    add_linux_ami_info(all_instances)
-    print("Parsing VPC-only info...")
-    add_vpconly_detail(all_instances)
-    print("Parsing local instance storage...")
-    add_instance_storage_details(all_instances)
-    print("Parsing burstable instance credits...")
-    add_t2_credits(all_instances)
-    print("Parsing instance names...")
-    add_pretty_names(all_instances)
-    print("Parsing emr details...")
-    add_emr_info(all_instances)
-    print("Adding GPU details...")
-    add_gpu_info(all_instances)
-    print("Adding availability zone details...")
-    add_availability_zone_info(all_instances)
-    print("Adding placement group details...")
-    add_placement_groups(all_instances)
-    print("Adding dedicated host pricing...")
-    add_dedicated_info(all_instances)
-    print("Adding spot interrupt details...")
-    add_spot_interrupt_info(all_instances)
+    """Main scraping function with improved error handling"""
+    logger = logging.getLogger(__name__)
 
-    os.makedirs(os.path.dirname(data_file), exist_ok=True)
-    with open(data_file, "w+") as f:
-        json.dump(
-            [i.to_dict() for i in all_instances],
-            f,
-            indent=1,
-            sort_keys=True,
-            separators=(",", ": "),
-        )
+    try:
+        logger.info(f"Starting EC2 instance scraping process for {data_file}")
+        scraper = InstanceScraper(max_workers=10)
+        scraper.scrape_all()
 
+        # Save results
+        logger.info(f"Saving results to {data_file}")
+        os.makedirs(os.path.dirname(data_file), exist_ok=True)
+        with open(data_file, "w") as f:
+            json.dump([i.to_dict() for i in scraper.all_instances], f, indent=1)
+
+        logger.info("EC2 instance scraping process completed successfully")
+
+    except Exception as e:
+        logger.error(f"Failed to complete EC2 instance scraping process: {str(e)}")
+        logger.debug(traceback.format_exc())
+        raise
 
 if __name__ == "__main__":
     scrape("www/instances.json")
