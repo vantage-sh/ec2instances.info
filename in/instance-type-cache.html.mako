@@ -112,7 +112,8 @@
               <div class="col-6 mb-2">
                 <select class="form-select form-select-sm" id="os">
                   <option value="Redis">Redis</option>
-                  <option value="Memcached">Memcached</option> 
+                  <option value="Memcached">Memcached</option>
+                  <option value="Valkey">Valkey</option>
                 </select>
               </div>
               <div class="col-6 pe-2">
