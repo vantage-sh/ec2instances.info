@@ -159,7 +159,7 @@ def scrape(output_file, input_file=None):
                 new_attributes["pricing"] = attributes["pricing"]
                 new_attributes["regions"] = {}
 
-               instances[instance_type] = new_attributes
+                instances[instance_type] = new_attributes
 
     # Parse ondemand pricing
     for sku, offers in six.iteritems(data["terms"]["OnDemand"]):
