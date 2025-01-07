@@ -115,8 +115,7 @@ def scrape(output_file, input_file=None):
     # loop through products, and only fetch available instances for now
     for sku, product in tqdm(six.iteritems(data["products"])):
         if (product.get("productFamily", None) == "Amazon OpenSearch Service Instance"
-            and product.get("attributes", {}).get("operation", None)
-            != "DirectQueryAmazonS3GDCOCU"):
+            and product.get("attributes", {}).get("operation", None) != "DirectQueryAmazonS3GDCOCU"):
 
             attributes = product.get("attributes", {})
             if "instanceType" not in attributes:
