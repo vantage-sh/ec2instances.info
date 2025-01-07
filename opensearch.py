@@ -115,7 +115,8 @@ def scrape(output_file, input_file=None):
     # loop through products, and only fetch available instances for now
     for sku, product in tqdm(six.iteritems(data["products"])):
         if (product.get("productFamily", None) == "Amazon OpenSearch Service Instance"
-            and product.get("attributes", {}).get("operation", None) != "DirectQueryAmazonS3GDCOCU"):
+            and product.get("attributes", {}).get("operation", None)
+            != "DirectQueryAmazonS3GDCOCU"):
 
             attributes = product.get("attributes", {})
             if "instanceType" not in attributes:
@@ -138,15 +139,15 @@ def scrape(output_file, input_file=None):
             else:
                 region = regions[location]
 
-                # set the attributes in line with the ec2 index
-                attributes["region"] = region
-                attributes["memory"] = attributes["memoryGib"].split(" ")[0]
-                attributes["family"] = attributes["instanceFamily"]
-                attributes["instance_type"] = instance_type
-                attributes["pricing"] = {}
-                attributes["pricing"][region] = {}
+            # set the attributes in line with the ec2 index
+            attributes["region"] = region
+            attributes["memory"] = attributes["memoryGib"].split(" ")[0]
+            attributes["family"] = attributes["instanceFamily"]
+            attributes["instance_type"] = instance_type
+            attributes["pricing"] = {}
+            attributes["pricing"][region] = {}
 
-                caches_instances[sku] = attributes
+            caches_instances[sku] = attributes
 
             if instance_type not in instances.keys():
                 # delete some attributes that are inconsistent among skus
