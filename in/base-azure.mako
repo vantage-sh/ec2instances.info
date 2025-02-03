@@ -37,7 +37,7 @@
             </a>
             <div class="d-flex flex-column">
               <p class="fs-6 fw-semibold text-white mb-0">Instances</p>
-              <a href="https://www.vantage.sh/lp/azure-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=presented-by" target="_blank" class="text-decoration-none text-white mb-0 opacity-75" style="font-size: 12px;">Presented by Vantage</a>
+              <a href="/" class="text-decoration-none text-white mb-0 opacity-75" style="font-size: 12px;">Presented by Vantage</a>
             </div>
           </div>
           <div class="d-flex align-items-center d-none d-md-block ms-3">

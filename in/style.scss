@@ -64,7 +64,7 @@ a {
 }
 
 .nav {
-  background-color: #872EE1;
+  background-color: #872ee1;
   padding: 8px;
   display: flex;
   align-items: center;
@@ -238,7 +238,7 @@ table {
     background-color: $white;
     color: $gray-0;
     font-weight: 500;
-    box-shadow: 0 1px 7px -1px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 7px -1px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.05);
   }
 }
 
@@ -457,17 +457,8 @@ table {
   }
 }
 
-.autopilot-callout {
-  background: $white;
-  border-radius: 4px;
-  padding: 2px;
-}
-
-.autopilot-callout-wrapper {
-  border-radius: 6px;
-  background: -webkit-linear-gradient(45deg, #7f0eef, #17e0c8);
-  position: relative;
-  padding: 3px;
+.demo-callout {
+  padding: 2px, 0px, 2px;
 }
 
 .autopilot-link {
