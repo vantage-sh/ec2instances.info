@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap');
 html,
 body {
   height: 100%;
@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  font: 100% "Inter", Helvetica, sans-serif;
+  font: 100% 'Inter', Helvetica, sans-serif;
   color: #303037;
   padding: 0;
 }
@@ -18,7 +18,8 @@ body {
 a {
   color: #9c25c7;
 }
-a:hover, a:focus {
+a:hover,
+a:focus {
   color: #5a0a76;
 }
 
@@ -42,7 +43,7 @@ a:hover, a:focus {
 }
 
 .nav {
-  background-color: #872EE1;
+  background-color: #872ee1;
   padding: 8px;
   display: flex;
   align-items: center;
@@ -119,7 +120,7 @@ table a {
   text-decoration: none !important;
 }
 table.table-mono {
-  font-family: "Roboto Mono", monospace;
+  font-family: 'Roboto Mono', monospace;
 }
 table.table-mono th {
   background-color: #ffffff !important;
@@ -353,7 +354,7 @@ table#Unavailable td {
   border: 1px solid;
   border-radius: 3px;
   color: #1a1a1c;
-  font-family: "Roboto Mono", monospace;
+  font-family: 'Roboto Mono', monospace;
   padding: 4px 5px;
   font-size: 11px;
   line-height: 11px;
@@ -424,17 +425,8 @@ table#Unavailable td {
   color: #5a5a5f;
 }
 
-.autopilot-callout {
-  background: #ffffff;
-  border-radius: 4px;
-  padding: 2px;
-}
-
-.autopilot-callout-wrapper {
-  border-radius: 6px;
-  background: -webkit-linear-gradient(45deg, #7f0eef, #17e0c8);
-  position: relative;
-  padding: 3px;
+.demo-callout {
+  padding: 2px, 0px, 2px;
 }
 
 .autopilot-link {
