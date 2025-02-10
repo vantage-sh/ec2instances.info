@@ -1,10 +1,12 @@
 #!/usr/bin/env python
-import requests
 import json
-import scrape
-import os
-import yaml
 import math
+import os
+
+import requests
+import yaml
+
+import scrape
 
 
 class AzureInstance(object):
@@ -404,7 +406,7 @@ def add_pricing2(instances):
     d = {}
     d["basic"] = {
         "perhour": "basic",  # 0.032,
-        "perhourspot": "basic-spot"  # 0.007731,
+        "perhourspot": "basic-spot",  # 0.007731,
         # "perhourhybridbenefit": 0.023,
         # "perhourpaygoneyearsubscription": 0.05405,
         # "perhourpaygthreeyearsubscription": 0.0437,

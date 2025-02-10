@@ -331,7 +331,6 @@ function init_data_table() {
 }
 
 $(document).ready(function () {
-  ;
   var urlpath = window.location.pathname;
   responsive_mode = mediaQuery.matches;
 

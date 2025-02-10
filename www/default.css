@@ -47,15 +47,15 @@ body {
 }
 
 .nav-position a:hover {
-  background-color: #5F209A;
+  background-color: #5f209a;
 }
 
 .nav-position li.active a {
-  color: #FFF !important;
+  color: #fff !important;
 }
 
 .nav .active a {
-  background-color: #5F209A;
+  background-color: #5f209a;
 }
 
 .ec2instances .page-header {
@@ -338,7 +338,7 @@ input.search {
   width: 100%;
   padding: 8px;
   flex-shrink: 0;
-  background: #FFF;
+  background: #fff;
   /*
   border-top: solid 1px #eee;
   */

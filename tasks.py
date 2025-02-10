@@ -3,30 +3,28 @@
 #   AWS_SECRET_ACCESS_KEY
 # as explained in: http://boto.s3.amazonaws.com/s3_tut.html
 
+import gzip
+import mimetypes
 import os
+import shutil
 import traceback
 
+import brotli
 from boto import connect_s3
 from boto.s3.connection import OrdinaryCallingFormat
 from boto.s3.key import Key
-from invoke import task
 from invocations.console import confirm
+from invoke import task
 from six.moves import SimpleHTTPServer, socketserver
 
-from rds import scrape as rds_scrape
-from cache import scrape as cache_scrape
-from redshift import scrape as redshift_scrape
-from opensearch import scrape as opensearch_scrape
 from azurevms import scrape as azure_scrape
-from render import render
+from cache import scrape as cache_scrape
+from opensearch import scrape as opensearch_scrape
+from rds import scrape as rds_scrape
+from redshift import scrape as redshift_scrape
+from render import about_page, build_sitemap, render
 from render_azure import render_azure
-from render import build_sitemap
-from render import about_page
 from scrape import scrape
-
-from io import BytesIO
-import gzip
-import shutil
 
 BUCKET_NAME = "www.ec2instances.info"
 
@@ -52,6 +50,12 @@ def build(c):
     scrape_redshift(c)
     scrape_opensearch(c)
     render_html(c)
+    compress_json_files(c)
+
+
+@task
+def compress(c):
+    compress_json_files(c)
 
 
 @task
@@ -60,16 +64,19 @@ def scrape_ec2(c):
     ec2_file = "www/instances.json"
     scrape(ec2_file)
 
+
 @task
 def scrape_rds(c):
     """Scrape RDS data from AWS and save to local file"""
     rds_file = "www/rds/instances.json"
     rds_scrape(rds_file)
 
+
 def scrape_cache(c):
     """Scrape Cache instance data from AWS and save to local file"""
     cache_file = "www/cache/instances.json"
     cache_scrape(cache_file)
+
 
 def scrape_redshift(c):
     """Scrape Redshift instance data from AWS and save to local file"""
@@ -87,6 +94,30 @@ def scrape_azure(c):
     """Scrape Azure VM data from Microsoft and save to local file"""
     azure_file = "www/azure/instances.json"
     azure_scrape(azure_file)
+
+
+def compress_json_files(c):
+    """Compress JSON files with gzip and brotli"""
+    for root, _, files in os.walk("www"):
+        for name in files:
+            if name.endswith(".json"):
+                print("Compressing %s" % name)
+
+                local_path = os.path.join(root, name)
+                with open(local_path, "rb") as f:
+                    data = f.read()
+
+                    compressed_gzip = gzip.compress(data)
+                    gzip_path = local_path + ".gz"
+                    gzip_file = open(gzip_path, "wb")
+                    gzip_file.write(compressed_gzip)
+                    gzip_file.close()
+
+                    compressed_brotli = brotli.compress(data)
+                    brotli_path = local_path + ".br"
+                    brotli_file = open(brotli_path, "wb")
+                    brotli_file.write(compressed_brotli)
+                    brotli_file.close()
 
 
 @task
@@ -167,6 +198,7 @@ def bucket_delete(c):
     conn = connect_s3(calling_format=BUCKET_CALLING_FORMAT)
     conn.delete_bucket(BUCKET_NAME)
     print("Bucket %r deleted." % BUCKET_NAME)
+
 
 @task
 def deploy(c, root_dir="www"):

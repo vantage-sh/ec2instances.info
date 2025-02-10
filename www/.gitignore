@@ -1,3 +1,5 @@
 *.json
+**/*.json.gz
+**/*.json.br
 *.xml
 about.html

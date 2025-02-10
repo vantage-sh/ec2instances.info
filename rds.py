@@ -1,16 +1,17 @@
 #!/usr/bin/env python
-import requests
 import json
-from json import encoder
-import sys
-import six
-import os
-import ec2
 import locale
+import os
 import re
+import sys
+from json import encoder
+
+import requests
+import six
 from lxml import etree
 from six.moves.urllib import request as urllib2
 
+import ec2
 
 locale.setlocale(locale.LC_ALL, "en_US.UTF-8")
 
@@ -86,18 +87,21 @@ def add_ebs_info(instances):
     by_type = {k: v for k, v in instances.items()}
 
     ec2_instances = ec2.get_instances()
-    
+
     for i in ec2_instances:
         instance_type = "db." + i.instance_type
 
         if instance_type in by_type:
             by_type[instance_type]["ebs_optimized"] = i.ebs_optimized
-            by_type[instance_type]["ebs_baseline_throughput"] = i.ebs_baseline_throughput
+            by_type[instance_type][
+                "ebs_baseline_throughput"
+            ] = i.ebs_baseline_throughput
             by_type[instance_type]["ebs_baseline_iops"] = i.ebs_baseline_iops
             by_type[instance_type]["ebs_baseline_bandwidth"] = i.ebs_baseline_bandwidth
             by_type[instance_type]["ebs_throughput"] = i.ebs_throughput
             by_type[instance_type]["ebs_iops"] = i.ebs_iops
-            by_type[instance_type]["ebs_max_bandwidth"] = i.ebs_max_bandwidth      
+            by_type[instance_type]["ebs_max_bandwidth"] = i.ebs_max_bandwidth
+
 
 def scrape(output_file, input_file=None):
     # if an argument is given, use that as the path for the json file
