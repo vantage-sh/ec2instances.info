@@ -356,6 +356,9 @@ input.search {
   font-size: 14px;
   color: white;
   margin: 0;
+  padding: 16px 0;
+  background-image: url('https://assets.vantage.sh/www/instances-banner.png');
+  background-position: center;
 }
 
 table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before {
