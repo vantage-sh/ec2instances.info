@@ -136,6 +136,7 @@ The data backing EC2Instances.info is available via a free API.
 
 Feel free to watch/star this repo as we're looking to update the site regularly. Vantage also works on the following relevant projects:
 
+- [cur.vantage.sh](cur.vantage.sh) - Definitions of all AWS Cost and Usage Report (CUR) billing codes by service.
 - [The Cloud Cost Handbook](https://github.com/vantage-sh/handbook) - An
   open-source set of guides for best practices of managing cloud costs.
 - [The AWS Cost Leaderboard](https://leaderboard.vantage.sh/) - A hosted site of

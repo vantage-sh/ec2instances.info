@@ -66,7 +66,7 @@
 
             <div class="d-flex align-items-center mb-3">
               <span class="material-icons me-1">paid</span>
-              <p class="h6 fw-semibold mb-0">Pricing</p>
+              <p class="h6 fw-semibold mb-0"><a href="https://cur.vantage.sh/aws/amazonrds/">Pricing</a></p>
             </div>
             <!-- Prices -->
             <div class="small d-flex flex-row flex-wrap pe-2 mb-4">
