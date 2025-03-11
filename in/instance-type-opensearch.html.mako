@@ -65,7 +65,7 @@
             
             <div class="d-flex align-items-center mb-3">
               <span class="material-icons me-1">paid</span>
-              <p class="h6 fw-semibold mb-0"><a href="https://cur.vantage.sh/aws/amazones/">Pricing</a></p>
+              <p class="h6 fw-semibold mb-0">Pricing</p>
             </div>
             <!-- Prices -->
             <div class="small d-flex flex-row flex-wrap pe-2 mb-4">
@@ -182,6 +182,16 @@
               </table>
             </div>
             % endif
+
+            <!-- CUR link -->
+            <div class="mt-4 d-flex flex-column">
+              <div class="d-flex align-items-center mb-3">
+                <p>
+                Having trouble making sense of your OpenSearch costs? Check out <a href="https://cur.vantage.sh/aws/amazones/">cur.vantage.sh</a> for an AWS billing code lookup tool.
+                </p>
+              </div>
+            </div>
+
           </div>
 
           <div class="column-middle mb-5" style="max-width: 800px;">
