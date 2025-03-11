@@ -188,6 +188,16 @@
               </table>
             </div>
             % endif
+
+            <!-- CUR link -->
+            <div class="mt-4 d-flex flex-column">
+              <div class="d-flex align-items-center mb-3">
+                <p>
+                Having trouble making sense of your ElastiCache costs? Check out <a href="https://cur.vantage.sh/aws/amazonelasticache/">cur.vantage.sh</a> for an AWS billing code lookup tool.
+                </p>
+              </div>
+            </div>
+
           </div>
 
           <div class="column-middle mb-5" style="max-width: 800px;">
