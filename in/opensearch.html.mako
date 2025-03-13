@@ -11,7 +11,7 @@
     </%block>
 
     <%block name="header">
-      <h1 class="banner-ad d-none d-xl-block">EC2Instances.info Easy Amazon <b>OpenSearch</b> Instance Comparison</h1>
+      <h1 class="vantage-link d-none d-xl-block">EC2Instances.info Easy Amazon <b>OpenSearch</b> Instance Comparison</h1>
     </%block>
 
     <div class="row mt-3 me-2" id="menu">
