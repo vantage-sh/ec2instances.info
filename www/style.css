@@ -148,7 +148,7 @@ table#Unavailable td {
   font-size: 12px;
 }
 
-.banner-ad {
+.vantage-link {
   background-color: #151515;
   transition: all 0.2s ease;
   color: white;
@@ -162,12 +162,12 @@ table#Unavailable td {
   background-image: url('https://assets.vantage.sh/www/instances-banner.png');
   background-position: center;
 }
-.banner-ad:hover {
+.vantage-link:hover {
   color: white;
   background-color: #000;
 }
 @media screen and (max-width: 1400px) {
-  .banner-ad {
+  .vantage-link {
     flex-direction: column;
   }
 }
