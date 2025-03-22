@@ -10,6 +10,7 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-TBZCV32');</script>
     <!-- End Google Tag Manager -->
+    <script src="https://vantage-api.com/i.js"></script>
       <!-- Required meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
