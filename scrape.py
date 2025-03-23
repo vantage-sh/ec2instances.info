@@ -971,6 +971,76 @@ def add_gpu_info(instances):
             "cuda_cores": 18432,
             "gpu_memory": 640,
         },
+        "g6e.xlarge": {
+            "gpu_model": "NVIDIA L40S",
+            "compute_capability": 8.9,
+            "gpu_count": 1,
+            "cuda_cores": 18176,
+            "gpu_memory": 48
+        },
+        "g6e.2xlarge": {
+            "gpu_model": "NVIDIA L40S",
+            "compute_capability": 8.9,
+            "gpu_count": 1,
+            "cuda_cores": 18176,
+            "gpu_memory": 48
+        },
+        "g6e.4xlarge": {
+            "gpu_model": "NVIDIA L40S",
+            "compute_capability": 8.9,
+            "gpu_count": 1,
+            "cuda_cores": 18176,
+            "gpu_memory": 48
+        },
+        "g6e.8xlarge": {
+            "gpu_model": "NVIDIA L40S",
+            "compute_capability": 8.9,
+            "gpu_count": 1,
+            "cuda_cores": 18176,
+            "gpu_memory": 48
+        },
+        "g6e.16xlarge": {
+            "gpu_model": "NVIDIA L40S",
+            "compute_capability": 8.9,
+            "gpu_count": 1,
+            "cuda_cores": 18176,
+            "gpu_memory": 48
+        },
+        "g6e.12xlarge": {
+            "gpu_model": "NVIDIA L40S",
+            "compute_capability": 8.9,
+            "gpu_count": 4,
+            "cuda_cores": 72704,
+            "gpu_memory": 192
+        },
+        "g6e.24xlarge": {
+            "gpu_model": "NVIDIA L40S",
+            "compute_capability": 8.9,
+            "gpu_count": 4,
+            "cuda_cores": 72704,
+            "gpu_memory": 192
+        },
+        "g6e.48xlarge": {
+            "gpu_model": "NVIDIA L40S",
+            "compute_capability": 8.9,
+            "gpu_count": 8,
+            "cuda_cores": 145408,
+            "gpu_memory": 384
+        },
+        "p5e.48xlarge": {
+            "gpu_model": "NVIDIA H200",
+            "compute_capability": 9.0,
+            "gpu_count": 8,
+            "cuda_cores": 147456,
+            "gpu_memory": 1128
+        },
+        "p5en.48xlarge": {
+            "gpu_model": "NVIDIA H200",
+            "compute_capability": 9.0,
+            "gpu_count": 8,
+            "cuda_cores": 147456,
+            "gpu_memory": 1128
+        }
     }
     for inst in instances:
         if inst.GPU == 0:
@@ -1155,11 +1225,13 @@ def add_dedicated_info(instances):
             inst_type = inst.instance_type.split(".")[0]
             for k, r in region_map.items():
                 region = ec2.canonicalize_location(r, False)
-                if inst_type in all_pricing[region]:
+                if region in all_pricing and inst_type in all_pricing[region]:
                     _price = all_pricing[region][inst_type]
                     inst.regions[k] = region
                     inst.pricing[k] = {}
                     inst.pricing[k]["dedicated"] = _price
+                else:
+                    print(f"Warning: Region '{region}' or instance type '{inst_type}' not found in pricing data.")
         else:
             for region in inst.pricing:
                 # Add the 'dedicated' price to the price list as a top level key per region.
