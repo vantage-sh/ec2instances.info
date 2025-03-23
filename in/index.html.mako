@@ -273,6 +273,7 @@
             <abbr title="This are the hourly rate EMR costs. Actual costs are EC2 + EMR by hourly rate">EMR cost</abbr>
           </th>
           <th class="generation hidden">Generation</th>
+          <th class="family hidden">Instance Family</th>
         </tr>
       </thead>
 
@@ -575,6 +576,7 @@
               % endif
             </td>
             <td class="generation hidden">${inst['generation']}</td>
+            <td class="family">${inst['instance_type'].split('.')[0]}</td>
           </tr>
         % endfor
       </tbody>

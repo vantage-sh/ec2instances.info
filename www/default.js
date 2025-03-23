@@ -17,7 +17,7 @@ var g_settings_defaults = {
   min_memory_per_vcpu: 0,
   min_gpus: 0,
   min_maxips: 0,
-  default_sort_col: 39,
+  default_sort_col: 40,
   min_storage: 0,
   selected: '',
   compare_on: false,
@@ -124,6 +124,19 @@ function init_data_table() {
           $(this).html(
             "<input data-action='datafilter' data-type='maxips' class='form-control' placeholder='Min IPs: 0'/>",
           );
+          return;
+        } else if (i == 72) {
+          $(this).html(
+            "<input type='text' class='form-control' placeholder='Filter Family...'/>",
+          );
+          $('input', this).on('keyup change', function() {
+            var value = this.value;
+            // Use a regex that matches the exact family (e.g., "c6i" won't match "c6in")
+            var regex = value ? '^' + value + '$' : '';
+            if (g_data_table.column(i).search() !== regex) {
+              g_data_table.column(i).search(regex, true, false).draw();
+            }
+          });
           return;
         }
       }
@@ -258,6 +271,7 @@ function init_data_table() {
           'vpc-only',
           'azs',
           'generation',
+          'family',
         ],
         bVisible: false,
       },
