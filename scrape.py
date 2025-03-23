@@ -892,6 +892,20 @@ def add_gpu_info(instances):
             "cuda_cores": 55296,
             "gpu_memory": 640,
         },
+        "p5e.48xlarge": {
+            "gpu_model": "NVIDIA H200",
+            "compute_capability": 9.0,
+            "gpu_count": 8,
+            "cuda_cores": 147456,
+            "gpu_memory": 1128,
+        },
+        "p5en.48xlarge": {
+            "gpu_model": "NVIDIA H200",
+            "compute_capability": 9.0,
+            "gpu_count": 8,
+            "cuda_cores": 147456,
+            "gpu_memory": 1128,
+        },
         "g5g.xlarge": {
             "gpu_model": "NVIDIA T4G Tensor Core",
             "compute_capability": 7.5,
