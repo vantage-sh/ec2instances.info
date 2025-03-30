@@ -177,6 +177,7 @@ def bucket_delete(c):
     conn.delete_bucket(BUCKET_NAME)
     print("Bucket %r deleted." % BUCKET_NAME)
 
+
 @task
 def deploy(c, root_dir="www"):
     """Deploy current content"""
