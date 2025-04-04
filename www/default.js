@@ -132,7 +132,7 @@ function init_data_table() {
           $('input', this).on('keyup change', function() {
             var value = this.value;
             // Use a regex that matches the exact family (e.g., "c6i" won't match "c6in")
-            var regex = value ? '^' + value + '$' : '';
+            var regex = value ? '^' + $.escapeSelector(value) + '$' : '';
             if (g_data_table.column(i).search() !== regex) {
               g_data_table.column(i).search(regex, true, false).draw();
             }
