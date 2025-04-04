@@ -1022,8 +1022,44 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
 
 // toggle columns
 function toggle_column(col_index) {
-  var is_visible = g_data_table.column(col_index).visible();
-  g_data_table.column(col_index).visible(is_visible ? false : true);
+  var column = g_data_table.column(col_index);
+  var is_visible = column.visible();
+  column.visible(is_visible ? false : true);
+
+  // If we're making a column visible, specifically reinitialize its filter
+  if (!is_visible) {
+    var columnHeader = $(column.header());
+    var columnClass = columnHeader.attr('class');
+
+    // Wait for DOM to update after visibility change
+    setTimeout(function() {
+      // Find the filter input for this column in the second header row
+      var filterCell = $('#data thead tr:eq(1) th[column-index="' + col_index + '"]');
+      var filterInput = filterCell.find('input');
+
+      if (filterInput.length) {
+        // First remove any existing handlers to avoid duplicates
+        filterInput.off('keyup change');
+
+        filterInput.on('keyup change', function() {
+          if (column.search() !== this.value) {
+            var isRegExp = true;
+            try {
+              new RegExp(this.value);
+            } catch (e) {
+              isRegExp = false;
+            }
+            column.search(this.value, isRegExp, false).draw();
+
+            // Apply cost duration changes if needed
+            if (g_settings.cost_duration != g_settings_defaults.cost_duration) {
+              change_cost();
+            }
+          }
+        });
+      }
+    }, 50);
+  }
   redraw_costs();
 }
 
