@@ -99,6 +99,15 @@ open http://localhost:8080
 deactivate # to exit virtualenv
 ```
 
+### Faster Local Dev: Only Render the HTML
+
+Running `invoke build` can take 20 minutes. For many changes you may only need to re-render HTML. Run:
+
+```bash
+invoke render-html
+```
+This won't work for data and API changes but for front-end it should serve you well.
+
 ## Requirements
 
 - Python with virtualenv
