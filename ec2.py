@@ -273,6 +273,13 @@ def add_spot_pricing(imap):
     instance_types = list(imap.keys())
 
     for region in get_region_descriptions().values():
+        # Skip the new EU Sovereign Cloud region that causes timeout issues
+        # TODO: Remove this when the region is available: https://ec2.eusc-de-east-1.amazonaws.eu/
+        # Initially introduced in: https://github.com/boto/botocore/commit/24cb96eda38a3867c1dc9ceb412133d1df11bd20
+        if region.startswith("eusc-"):
+            print(f"INFO: Skipping EU Sovereign Cloud region: {region}")
+            continue
+
         try:
             # get all spot price data from a region
             ec2_client = boto3.client("ec2", region_name=region)
