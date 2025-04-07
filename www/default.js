@@ -15,6 +15,7 @@ var g_settings_defaults = {
   min_memory: 0,
   min_vcpus: 0,
   min_memory_per_vcpu: 0,
+  min_gpu_memory: 0,
   min_gpus: 0,
   min_maxips: 0,
   default_sort_col: 40,
@@ -126,6 +127,11 @@ function init_data_table() {
         } else if (i == 7) {
           $(this).html(
             "<input data-action='datafilter' data-type='gpus' class='form-control' placeholder='Min GPUs: 0'/>",
+          );
+          return;
+        } else if (i == 9) {
+          $(this).html(
+            "<input data-action='datafilter' data-type='gpu_memory' class='form-control' placeholder='Min GPU Mem: 0'/>",
           );
           return;
         } else if (i == 19) {
@@ -739,6 +745,7 @@ function url_for_selections() {
     min_vcpus: g_settings.min_vcpus,
     min_memory_per_vcpu: g_settings.min_memory_per_vcpu,
     min_gpus: g_settings.min_gpus,
+    min_gpu_memory: g_settings.min_gpu_memory,
     min_maxips: g_settings.min_maxips,
     min_storage: g_settings.min_storage,
     filter: g_data_table.settings()[0].oPreviousSearch['sSearch'],
@@ -1071,6 +1078,11 @@ function toggle_column(col_index) {
             }
           }
         });
+
+        // Rebind the apply_min_values function for numeric filters
+        if (filterInput.attr('data-action') === 'datafilter') {
+          filterInput.off('keyup').on('keyup', apply_min_values);
+        }
       }
     }, 50);
   }
