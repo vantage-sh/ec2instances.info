@@ -1078,6 +1078,11 @@ function toggle_column(col_index) {
             }
           }
         });
+
+        // Rebind the apply_min_values function for numeric filters
+        if (filterInput.attr('data-action') === 'datafilter') {
+          filterInput.off('keyup').on('keyup', apply_min_values);
+        }
       }
     }, 50);
   }
