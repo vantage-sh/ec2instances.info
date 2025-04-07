@@ -17,7 +17,7 @@ var g_settings_defaults = {
   min_memory_per_vcpu: 0,
   min_gpus: 0,
   min_maxips: 0,
-  default_sort_col: 39,
+  default_sort_col: 40,
   min_storage: 0,
   selected: '',
   compare_on: false,
@@ -97,30 +97,43 @@ function init_data_table() {
         // Set min inputs for EC2 columns
         if (i == 2) {
           $(this).html(
-            "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
+            "<input type='text' class='form-control' placeholder='Filter Family...'/>",
           );
+          $('input', this).on('keyup change', function() {
+            var value = this.value;
+            // Use a regex that matches the exact family (e.g., "c6i" won't match "c6in")
+            var regex = value ? '^' + $.escapeSelector(value) + '$' : '';
+            if (g_data_table.column(i).search() !== regex) {
+              g_data_table.column(i).search(regex, true, false).draw();
+            }
+          });
           return;
-        } else if (i == 4) {
+        } else if (i == 3) {
           $(this).html(
-            "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
+            "<input data-action='datafilter' data-type='memory' class='form-control' placeholder='Min Mem: 0'/>",
           );
           return;
         } else if (i == 5) {
           $(this).html(
-            "<input data-action='datafilter' data-type='memory-per-vcpu' class='form-control' placeholder='Min Mem/vCPU: 0'/>",
+            "<input data-action='datafilter' data-type='vcpus' class='form-control' placeholder='Min vCPUs: 0'/>",
           );
           return;
         } else if (i == 6) {
           $(this).html(
+            "<input data-action='datafilter' data-type='memory-per-vcpu' class='form-control' placeholder='Min Mem/vCPU: 0'/>",
+          );
+          return;
+        } else if (i == 7) {
+          $(this).html(
             "<input data-action='datafilter' data-type='gpus' class='form-control' placeholder='Min GPUs: 0'/>",
           );
           return;
-        } else if (i == 18) {
+        } else if (i == 19) {
           $(this).html(
             "<input data-action='datafilter' data-type='storage' class='form-control' placeholder='Min Storage: 0'/>",
           );
           return;
-        } else if (i == 30) {
+        } else if (i == 31) {
           $(this).html(
             "<input data-action='datafilter' data-type='maxips' class='form-control' placeholder='Min IPs: 0'/>",
           );
@@ -258,6 +271,7 @@ function init_data_table() {
           'vpc-only',
           'azs',
           'generation',
+          'family',
         ],
         bVisible: false,
       },

@@ -154,6 +154,7 @@
         <tr>
           <th class="name all" data-priority="1"><div class="d-none d-md-block">Name</div></th>
           <th class="apiname" data-priority="1">API Name</th>
+          <th class="family hidden">Instance Family</th>
           <th class="memory">Instance Memory</th>
           <th class="computeunits hidden">
             <abbr title="One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor.">Compute Units (ECU)</abbr>
@@ -281,6 +282,7 @@
           <tr class='instance' id="${inst['instance_type']}">
             <td class="name all"><div class="d-none d-md-block">${inst['pretty_name']}</div></td>
             <td class="apiname"><a href="/aws/ec2/${inst['instance_type']}">${inst['instance_type']}</a></td>
+            <td class="family">${inst['instance_type'].split('.')[0]}</td>
             <td class="memory"><span sort="${inst['memory']}">${inst['memory']} GiB</span></td>
             <td class="computeunits hidden">
               % if inst['ECU'] == 'variable':
