@@ -168,7 +168,9 @@ table#Unavailable td {
 }
 @media screen and (max-width: 768px) {
   .vantage-link {
-    img { display: none; }
+    img {
+      display: none;
+    }
   }
 }
 

@@ -96,10 +96,8 @@ function init_data_table() {
       } else {
         // Set min inputs for EC2 columns
         if (i == 2) {
-          $(this).html(
-            "<input type='text' class='form-control' placeholder='Filter Family...'/>",
-          );
-          $('input', this).on('keyup change', function() {
+          $(this).html("<input type='text' class='form-control' placeholder='Filter Family...'/>");
+          $('input', this).on('keyup change', function () {
             var value = this.value;
             // Use a regex that matches the exact family (e.g., "c6i" won't match "c6in")
             var regex = value ? '^' + $.escapeSelector(value) + '$' : '';
@@ -1046,7 +1044,7 @@ function toggle_column(col_index) {
     var columnClass = columnHeader.attr('class');
 
     // Wait for DOM to update after visibility change
-    setTimeout(function() {
+    setTimeout(function () {
       // Find the filter input for this column in the second header row
       var filterCell = $('#data thead tr:eq(1) th[column-index="' + col_index + '"]');
       var filterInput = filterCell.find('input');
@@ -1055,7 +1053,7 @@ function toggle_column(col_index) {
         // First remove any existing handlers to avoid duplicates
         filterInput.off('keyup change');
 
-        filterInput.on('keyup change', function() {
+        filterInput.on('keyup change', function () {
           if (column.search() !== this.value) {
             var isRegExp = true;
             try {
