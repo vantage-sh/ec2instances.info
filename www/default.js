@@ -1099,6 +1099,17 @@ function load_settings() {
   }
 
   if (location.search) {
+    const urlParams = new URLSearchParams(location.search);
+    // Reset key shareable parameters if they're not explicitly in the URL
+    // This way shared URLs work predictably
+    if (!urlParams.has('selected')) {
+      g_settings.selected = '';
+    }
+
+    if (!urlParams.has('filter')) {
+      g_settings.filter = '';
+    }
+
     var params = location.search.slice(1).split('&');
     params.forEach(function (param) {
       var parts = param.split('=');
