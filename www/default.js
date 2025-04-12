@@ -1047,9 +1047,6 @@ function toggle_column(col_index) {
 
   // If we're making a column visible, specifically reinitialize its filter
   if (!is_visible) {
-    var columnHeader = $(column.header());
-    var columnClass = columnHeader.attr('class');
-
     // Wait for DOM to update after visibility change
     setTimeout(function () {
       // Find the filter input for this column in the second header row
@@ -1057,32 +1054,30 @@ function toggle_column(col_index) {
       var filterInput = filterCell.find('input');
 
       if (filterInput.length) {
-        // First remove any existing handlers to avoid duplicates
-        filterInput.off('keyup change');
+        filterInput.off();
 
-        filterInput.on('keyup change', function () {
-          if (column.search() !== this.value) {
-            var isRegExp = true;
-            try {
-              new RegExp(this.value);
-            } catch (e) {
-              isRegExp = false;
-            }
-            column.search(this.value, isRegExp, false).draw();
-
-            // Apply cost duration changes if needed
-            if (g_settings.cost_duration != g_settings_defaults.cost_duration) {
-              change_cost();
-            }
-          }
-        });
-
-        // Rebind the apply_min_values function for numeric filters
         if (filterInput.attr('data-action') === 'datafilter') {
-          filterInput.off('keyup').on('keyup', apply_min_values);
+          filterInput.on('keyup change', apply_min_values);
+        } else {
+          // For regular filter inputs
+          filterInput.on('keyup change', function () {
+            if (column.search() !== this.value) {
+              var isRegExp = true;
+              try {
+                new RegExp(this.value);
+              } catch (e) {
+                isRegExp = false;
+              }
+              column.search(this.value, isRegExp, false).draw();
+
+              if (g_settings.cost_duration != g_settings_defaults.cost_duration) {
+                change_cost();
+              }
+            }
+          });
         }
       }
-    }, 50);
+    }, 100);
   }
   redraw_costs();
 }
