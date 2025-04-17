@@ -8,6 +8,7 @@ import mimetypes
 import os
 import shutil
 import traceback
+import concurrent.futures
 
 import brotli
 from invoke import task
@@ -26,13 +27,37 @@ abspath = lambda filename: os.path.join(
 
 @task
 def build(c):
-    """Scrape AWS sources for data and build the site"""
-    scrape_azure(c)
-    scrape_ec2(c)
-    scrape_rds(c)
-    scrape_cache(c)
-    scrape_redshift(c)
-    scrape_opensearch(c)
+    """Scrape AWS sources for data and build the site in parallel"""
+    scraper_functions = [
+        scrape_azure,
+        scrape_ec2,
+        scrape_rds,
+        scrape_cache,
+        scrape_redshift,
+        scrape_opensearch,
+    ]
+
+    # Update max workers as we add more scrapers
+    max_workers = 6
+    print(f"Starting parallel scraping of all services with {max_workers} workers...")
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_to_scraper = {
+            executor.submit(scraper, c): scraper.__name__
+            for scraper in scraper_functions
+        }
+
+        for future in concurrent.futures.as_completed(future_to_scraper):
+            scraper_name = future_to_scraper[future]
+            try:
+                future.result()
+                print(f"✅ Completed scraping for {scraper_name}")
+            except Exception as exc:
+                print(f"❌ {scraper_name} generated an exception: {exc}")
+                import traceback
+
+                traceback.print_exc()
+
+    print("All scraping tasks completed. Proceeding with rendering and compression...")
     compress_json_files(c)
 
 
