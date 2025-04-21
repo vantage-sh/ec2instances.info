@@ -1,0 +1,288 @@
+@import "tailwindcss";
+
+:root {
+  --font: 'Inter', Helvetica, sans-serif;
+  --mono: 'Roboto Mono', monospace;
+  
+  --white: #ffffff;
+  --gray-0: #1a1a1c;
+  --gray-1: #303037;
+  --gray-2: #5a5a5f;
+  --gray-3: #8a8a8e;
+  --gray-4: #cfcfd6;
+  --gray-5: #e3e3e9;
+  --gray-6: #f7f7f9;
+  --gray-7: #fafafb;
+  --purple-0: #5a0a76;
+  --purple-1: #9c25c7;
+  --purple-2: #c055e6;
+  --purple-3: #e59dff;
+  --purple-4: #f1c9ff;
+  --purple-5: #f9e6ff;
+  --purple-6: #fcf4ff;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--gray-1);
+  padding: 0;
+  margin: 0;
+}
+
+.table-responsive {
+  overflow: auto;
+  flex: 1 1 auto;
+}
+
+.table {
+  border: 1px solid var(--gray-5);
+  font-size: 14px;
+  width: 100%;
+  margin-bottom: 24px !important;
+  border-radius: 6px;
+}
+
+.table th {
+  font-weight: 600;
+  background-color: var(--gray-7) !important;
+  vertical-align: middle;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.table a {
+  text-decoration: none !important;
+  color: var(--purple-1);
+}
+
+.table a:hover {
+  color: var(--purple-0);
+}
+
+.btn {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-purple {
+  background-color: var(--purple-2);
+  color: var(--white);
+}
+
+.btn-purple:hover {
+  background-color: #cf67f4;
+  border-color: #d37bf2;
+}
+
+.btn-primary {
+  background-color: var(--purple-1);
+  color: var(--white);
+}
+
+.btn-outline-secondary {
+  background-color: transparent;
+  border: 1px solid var(--gray-5);
+  color: var(--gray-1);
+}
+
+.btn-outline-secondary:hover {
+  border-color: var(--gray-3);
+}
+
+.btn-outline-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-select {
+  padding: 8px 16px;
+  border: 1px solid var(--gray-5);
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--gray-1);
+  background-color: var(--white);
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: var(--purple-2);
+}
+
+.dropdown-menu {
+  background-color: var(--white);
+  border: 1px solid var(--gray-5);
+  border-radius: 6px;
+  padding: 8px;
+  min-width: 200px;
+}
+
+.dropdown-item {
+  padding: 8px 16px;
+  color: var(--gray-1);
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-item:hover {
+  background-color: var(--gray-6);
+}
+
+.dropdown-item.active {
+  background-color: var(--purple-5);
+  color: var(--purple-1);
+}
+
+.dropdown-search {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--gray-5);
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.dropdown-label {
+  font-size: 12px;
+  color: var(--gray-2);
+  margin-bottom: 4px;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: var(--white);
+  border: 1px solid var(--gray-5);
+  border-radius: 6px;
+  color: var(--gray-1);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.dropdown-toggle:hover {
+  background-color: var(--gray-6);
+}
+
+.icon-white {
+  color: var(--white);
+}
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 8px;
+  vertical-align: middle;
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
+.gap-3 {
+  gap: 12px;
+}
+
+.mt-3 {
+  margin-top: 16px;
+}
+
+.mx-2 {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.ms-2 {
+  margin-left: 8px;
+}
+
+.mb-1 {
+  margin-bottom: 4px;
+}
+
+.mb-2 {
+  margin-bottom: 8px;
+}
+
+.mt-2 {
+  margin-top: 8px;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.border-0 {
+  border: none;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}
+
+.link-dark {
+  color: var(--gray-1);
+}
+
+.small {
+  font-size: 12px;
+}
+
+.fw-semibold {
+  font-weight: 600;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.d-none {
+  display: none;
+}
+
+.d-xl-block {
+  @media (min-width: 1200px) {
+    display: block;
+  }
+}
+
+.d-xxl-block {
+  @media (min-width: 1400px) {
+    display: block;
+  }
+}
+
+.w-auto {
+  width: auto;
+}
+
+.flex-fill {
+  flex: 1 1 auto;
+}
+
+.wrap-table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
