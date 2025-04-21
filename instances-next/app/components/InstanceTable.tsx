@@ -158,18 +158,20 @@ export default function InstanceTable({
       id: 'ECU_per_vcpu',
       cell: info => {
         const value = info.getValue();
-        if (value === 'variable') {
+        if (value === 'variable' || value === 'unknown') {
           return (
             <span>
               <a href="http://aws.amazon.com/ec2/instance-types/#burst" target="_blank">
-                Burstable
+                {value === 'variable' ? 'Burstable' : 'unknown'}
               </a>
             </span>
           );
         }
-        console.log(value);
-        if (value === 'unknown') return 'unknown';
-        return `${Number(value).toFixed(4)} units`;
+        const numValue = Number(value);
+        if (isNaN(numValue)) {
+          return 'unknown';
+        }
+        return `${numValue.toFixed(4)} units`;
       },
     },
     {
