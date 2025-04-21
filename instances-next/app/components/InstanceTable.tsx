@@ -8,6 +8,7 @@ import {
   flexRender,
 } from '@tanstack/react-table';
 import { Instance } from '../types';
+import state from '../state';
 
 interface InstanceTableProps {
   instances: Instance[];
@@ -16,7 +17,6 @@ interface InstanceTableProps {
   duration: string;
   reservedTerm: string;
   searchTerm: string;
-  columnVisibility: Record<string, boolean>;
 }
 
 interface Storage {
@@ -34,8 +34,9 @@ export default function InstanceTable({
   duration,
   reservedTerm,
   searchTerm,
-  columnVisibility,
 }: InstanceTableProps) {
+  const columnVisibility = state.columVisibility.use();
+
   const columns: ColumnDef<Instance>[] = [
     {
       accessorKey: 'pretty_name',

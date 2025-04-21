@@ -1,16 +1,17 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { ColumnVisibility } from '../columnVisibility';
 
 interface ColumnOption {
-    key: string;
+    key: keyof ColumnVisibility;
     label: string;
     visible: boolean;
 }
 
 interface ColumnFilterProps {
     columns: ColumnOption[];
-    onColumnVisibilityChange: (key: string, visible: boolean) => void;
+    onColumnVisibilityChange: (key: keyof ColumnVisibility, visible: boolean) => void;
 }
 
 export default function ColumnFilter({

@@ -3,6 +3,8 @@
 import { Region } from '../types';
 import FilterDropdown from './FilterDropdown';
 import ColumnFilter from './ColumnFilter';
+import state from '../state';
+import { ColumnVisibility } from '../columnVisibility';
 
 interface FiltersProps {
     regions: Region;
@@ -16,8 +18,6 @@ interface FiltersProps {
     onReservedTermChange: (term: string) => void;
     searchTerm: string;
     onSearchTermChange: (term: string) => void;
-    columnVisibility: Record<string, boolean>;
-    onColumnVisibilityChange: (key: string, visible: boolean) => void;
 }
 
 export default function Filters({
@@ -32,9 +32,9 @@ export default function Filters({
     onReservedTermChange,
     searchTerm,
     onSearchTermChange,
-    columnVisibility,
-    onColumnVisibilityChange,
 }: FiltersProps) {
+    const columnVisibility = state.columVisibility.use();
+
     const regionOptions = Object.entries(regions.main).map(([code, name]) => ({
         value: code,
         label: name,
@@ -85,80 +85,87 @@ export default function Filters({
         { value: 'yrTerm3Convertible.allUpfront', label: '3-year convertible - Full Upfront' },
     ];
 
+    function makeColumnOption<K extends keyof ColumnVisibility>(key: K, label: string) {
+        return {
+            key,
+            label,
+            visible: columnVisibility[key],
+        };
+    }
     const columnOptions = [
-        { key: 'pretty_name', label: 'Name', visible: columnVisibility.pretty_name },
-        { key: 'instance_type', label: 'API Name', visible: columnVisibility.instance_type },
-        { key: 'family', label: 'Instance Family', visible: columnVisibility.family },
-        { key: 'memory', label: 'Memory', visible: columnVisibility.memory },
-        { key: 'ECU', label: 'Compute Units (ECU)', visible: columnVisibility.ECU },
-        { key: 'vCPU', label: 'vCPUs', visible: columnVisibility.vCPU },
-        { key: 'memory_per_vcpu', label: 'GiB of Memory per vCPU', visible: columnVisibility.memory_per_vcpu },
-        { key: 'GPU', label: 'GPUs', visible: columnVisibility.GPU },
-        { key: 'GPU_model', label: 'GPU model', visible: columnVisibility.GPU_model },
-        { key: 'GPU_memory', label: 'GPU memory', visible: columnVisibility.GPU_memory },
-        { key: 'compute_capability', label: 'CUDA Compute Capability', visible: columnVisibility.compute_capability },
-        { key: 'FPGA', label: 'FPGAs', visible: columnVisibility.FPGA },
-        { key: 'ECU_per_vcpu', label: 'ECU per vCPU', visible: columnVisibility.ECU_per_vcpu },
-        { key: 'physical_processor', label: 'Physical Processor', visible: columnVisibility.physical_processor },
-        { key: 'clock_speed_ghz', label: 'Clock Speed(GHz)', visible: columnVisibility.clock_speed_ghz },
-        { key: 'intel_avx', label: 'Intel AVX', visible: columnVisibility.intel_avx },
-        { key: 'intel_avx2', label: 'Intel AVX2', visible: columnVisibility.intel_avx2 },
-        { key: 'intel_avx512', label: 'Intel AVX-512', visible: columnVisibility.intel_avx512 },
-        { key: 'intel_turbo', label: 'Intel Turbo', visible: columnVisibility.intel_turbo },
-        { key: 'storage', label: 'Instance Storage', visible: columnVisibility.storage },
-        { key: 'warmed-up', label: 'Instance Storage: already warmed-up', visible: columnVisibility['warmed-up'] },
-        { key: 'trim-support', label: 'Instance Storage: SSD TRIM Support', visible: columnVisibility['trim-support'] },
-        { key: 'arch', label: 'Arch', visible: columnVisibility.arch },
-        { key: 'network_performance', label: 'Network Performance', visible: columnVisibility.network_performance },
-        { key: 'ebs_baseline_bandwidth', label: 'EBS Optimized: Baseline Bandwidth', visible: columnVisibility.ebs_baseline_bandwidth },
-        { key: 'ebs_baseline_throughput', label: 'EBS Optimized: Baseline Throughput (128K)', visible: columnVisibility.ebs_baseline_throughput },
-        { key: 'ebs_baseline_iops', label: 'EBS Optimized: Baseline IOPS (16K)', visible: columnVisibility.ebs_baseline_iops },
-        { key: 'ebs_max_bandwidth', label: 'EBS Optimized: Max Bandwidth', visible: columnVisibility.ebs_max_bandwidth },
-        { key: 'ebs_throughput', label: 'EBS Optimized: Max Throughput (128K)', visible: columnVisibility.ebs_throughput },
-        { key: 'ebs_iops', label: 'EBS Optimized: Max IOPS (16K)', visible: columnVisibility.ebs_iops },
-        { key: 'ebs_as_nvme', label: 'EBS Exposed as NVMe', visible: columnVisibility.ebs_as_nvme },
-        { key: 'maxips', label: 'Max IPs', visible: columnVisibility.maxips },
-        { key: 'maxenis', label: 'Max ENIs', visible: columnVisibility.maxenis },
-        { key: 'enhanced_networking', label: 'Enhanced Networking', visible: columnVisibility.enhanced_networking },
-        { key: 'vpc_only', label: 'VPC Only', visible: columnVisibility.vpc_only },
-        { key: 'ipv6_support', label: 'IPv6 Support', visible: columnVisibility.ipv6_support },
-        { key: 'placement_group_support', label: 'Placement Group Support', visible: columnVisibility.placement_group_support },
-        { key: 'linux_virtualization_types', label: 'Linux Virtualization', visible: columnVisibility.linux_virtualization_types },
-        { key: 'emr', label: 'On EMR', visible: columnVisibility.emr },
-        { key: 'availability_zones', label: 'Availability Zones', visible: columnVisibility.availability_zones },
-        { key: 'cost-ondemand', label: 'On Demand', visible: columnVisibility['cost-ondemand'] },
-        { key: 'cost-reserved', label: 'Linux Reserved cost', visible: columnVisibility['cost-reserved'] },
-        { key: 'cost-spot-min', label: 'Linux Spot Minimum cost', visible: columnVisibility['cost-spot-min'] },
-        { key: 'cost-spot-max', label: 'Linux Spot Average cost', visible: columnVisibility['cost-spot-max'] },
-        { key: 'cost-ondemand-rhel', label: 'RHEL On Demand cost', visible: columnVisibility['cost-ondemand-rhel'] },
-        { key: 'cost-reserved-rhel', label: 'RHEL Reserved cost', visible: columnVisibility['cost-reserved-rhel'] },
-        { key: 'cost-spot-min-rhel', label: 'RHEL Spot Minimum cost', visible: columnVisibility['cost-spot-min-rhel'] },
-        { key: 'cost-spot-max-rhel', label: 'RHEL Spot Maximum cost', visible: columnVisibility['cost-spot-max-rhel'] },
-        { key: 'cost-ondemand-sles', label: 'SLES On Demand cost', visible: columnVisibility['cost-ondemand-sles'] },
-        { key: 'cost-reserved-sles', label: 'SLES Reserved cost', visible: columnVisibility['cost-reserved-sles'] },
-        { key: 'cost-spot-min-sles', label: 'SLES Spot Minimum cost', visible: columnVisibility['cost-spot-min-sles'] },
-        { key: 'cost-spot-max-sles', label: 'SLES Spot Maximum cost', visible: columnVisibility['cost-spot-max-sles'] },
-        { key: 'cost-ondemand-mswin', label: 'Windows On Demand cost', visible: columnVisibility['cost-ondemand-mswin'] },
-        { key: 'cost-reserved-mswin', label: 'Windows Reserved cost', visible: columnVisibility['cost-reserved-mswin'] },
-        { key: 'cost-spot-min-mswin', label: 'Windows Spot Minimum cost', visible: columnVisibility['cost-spot-min-mswin'] },
-        { key: 'cost-spot-max-mswin', label: 'Windows Spot Average cost', visible: columnVisibility['cost-spot-max-mswin'] },
-        { key: 'cost-ondemand-dedicated', label: 'Dedicated Host On Demand', visible: columnVisibility['cost-ondemand-dedicated'] },
-        { key: 'cost-reserved-dedicated', label: 'Dedicated Host Reserved', visible: columnVisibility['cost-reserved-dedicated'] },
-        { key: 'cost-ondemand-mswinSQLWeb', label: 'Windows SQL Web On Demand cost', visible: columnVisibility['cost-ondemand-mswinSQLWeb'] },
-        { key: 'cost-reserved-mswinSQLWeb', label: 'Windows SQL Web Reserved cost', visible: columnVisibility['cost-reserved-mswinSQLWeb'] },
-        { key: 'cost-ondemand-mswinSQL', label: 'Windows SQL Std On Demand cost', visible: columnVisibility['cost-ondemand-mswinSQL'] },
-        { key: 'cost-reserved-mswinSQL', label: 'Windows SQL Std Reserved cost', visible: columnVisibility['cost-reserved-mswinSQL'] },
-        { key: 'cost-ondemand-mswinSQLEnterprise', label: 'Windows SQL Ent On Demand cost', visible: columnVisibility['cost-ondemand-mswinSQLEnterprise'] },
-        { key: 'cost-reserved-mswinSQLEnterprise', label: 'Windows SQL Ent Reserved cost', visible: columnVisibility['cost-reserved-mswinSQLEnterprise'] },
-        { key: 'cost-ondemand-linuxSQLWeb', label: 'Linux SQL Web On Demand cost', visible: columnVisibility['cost-ondemand-linuxSQLWeb'] },
-        { key: 'cost-reserved-linuxSQLWeb', label: 'Linux SQL Web Reserved cost', visible: columnVisibility['cost-reserved-linuxSQLWeb'] },
-        { key: 'cost-ondemand-linuxSQL', label: 'Linux SQL Std On Demand cost', visible: columnVisibility['cost-ondemand-linuxSQL'] },
-        { key: 'cost-reserved-linuxSQL', label: 'Linux SQL Std Reserved cost', visible: columnVisibility['cost-reserved-linuxSQL'] },
-        { key: 'cost-ondemand-linuxSQLEnterprise', label: 'Linux SQL Ent On Demand cost', visible: columnVisibility['cost-ondemand-linuxSQLEnterprise'] },
-        { key: 'cost-reserved-linuxSQLEnterprise', label: 'Linux SQL Ent Reserved cost', visible: columnVisibility['cost-reserved-linuxSQLEnterprise'] },
-        { key: 'spot-interrupt-rate', label: 'Linux Spot Interrupt Frequency', visible: columnVisibility['spot-interrupt-rate'] },
-        { key: 'cost-emr', label: 'EMR cost', visible: columnVisibility['cost-emr'] },
-        { key: 'generation', label: 'Generation', visible: columnVisibility.generation }
+        makeColumnOption('pretty_name', 'Name'),
+        makeColumnOption('instance_type', 'API Name'),
+        makeColumnOption('family', 'Instance Family'),
+        makeColumnOption('memory', 'Memory'),
+        makeColumnOption('ECU', 'Compute Units (ECU)'),
+        makeColumnOption('vCPU', 'vCPUs'),
+        makeColumnOption('memory_per_vcpu', 'GiB of Memory per vCPU'),
+        makeColumnOption('GPU', 'GPUs'),
+        makeColumnOption('GPU_model', 'GPU model'),
+        makeColumnOption('GPU_memory', 'GPU memory'),
+        makeColumnOption('compute_capability', 'CUDA Compute Capability'),
+        makeColumnOption('FPGA', 'FPGAs'),
+        makeColumnOption('ECU_per_vcpu', 'ECU per vCPU'),
+        makeColumnOption('physical_processor', 'Physical Processor'),
+        makeColumnOption('clock_speed_ghz', 'Clock Speed(GHz)'),
+        makeColumnOption('intel_avx', 'Intel AVX'),
+        makeColumnOption('intel_avx2', 'Intel AVX2'),
+        makeColumnOption('intel_avx512', 'Intel AVX-512'),
+        makeColumnOption('intel_turbo', 'Intel Turbo'),
+        makeColumnOption('storage', 'Instance Storage'),
+        makeColumnOption('warmed-up', 'Instance Storage: already warmed-up'),
+        makeColumnOption('trim-support', 'Instance Storage: SSD TRIM Support'),
+        makeColumnOption('arch', 'Arch'),
+        makeColumnOption('network_performance', 'Network Performance'),
+        makeColumnOption('ebs_baseline_bandwidth', 'EBS Optimized: Baseline Bandwidth'),
+        makeColumnOption('ebs_baseline_throughput', 'EBS Optimized: Baseline Throughput (128K)'),
+        makeColumnOption('ebs_baseline_iops', 'EBS Optimized: Baseline IOPS (16K)'),
+        makeColumnOption('ebs_max_bandwidth', 'EBS Optimized: Max Bandwidth'),
+        makeColumnOption('ebs_throughput', 'EBS Optimized: Max Throughput (128K)'),
+        makeColumnOption('ebs_iops', 'EBS Optimized: Max IOPS (16K)'),
+        makeColumnOption('ebs_as_nvme', 'EBS Exposed as NVMe'),
+        makeColumnOption('maxips', 'Max IPs'),
+        makeColumnOption('maxenis', 'Max ENIs'),
+        makeColumnOption('enhanced_networking', 'Enhanced Networking'),
+        makeColumnOption('vpc_only', 'VPC Only'),
+        makeColumnOption('ipv6_support', 'IPv6 Support'),
+        makeColumnOption('placement_group_support', 'Placement Group Support'),
+        makeColumnOption('linux_virtualization_types', 'Linux Virtualization'),
+        makeColumnOption('emr', 'On EMR'),
+        makeColumnOption('availability_zones', 'Availability Zones'),
+        makeColumnOption('cost-ondemand', 'On Demand'),
+        makeColumnOption('cost-reserved', 'Linux Reserved cost'),
+        makeColumnOption('cost-spot-min', 'Linux Spot Minimum cost'),
+        makeColumnOption('cost-spot-max', 'Linux Spot Average cost'),
+        makeColumnOption('cost-ondemand-rhel', 'RHEL On Demand cost'),
+        makeColumnOption('cost-reserved-rhel', 'RHEL Reserved cost'),
+        makeColumnOption('cost-spot-min-rhel', 'RHEL Spot Minimum cost'),
+        makeColumnOption('cost-spot-max-rhel', 'RHEL Spot Maximum cost'),
+        makeColumnOption('cost-ondemand-sles', 'SLES On Demand cost'),
+        makeColumnOption('cost-reserved-sles', 'SLES Reserved cost'),
+        makeColumnOption('cost-spot-min-sles', 'SLES Spot Minimum cost'),
+        makeColumnOption('cost-spot-max-sles', 'SLES Spot Maximum cost'),
+        makeColumnOption('cost-ondemand-mswin', 'Windows On Demand cost'),
+        makeColumnOption('cost-reserved-mswin', 'Windows Reserved cost'),
+        makeColumnOption('cost-spot-min-mswin', 'Windows Spot Minimum cost'),
+        makeColumnOption('cost-spot-max-mswin', 'Windows Spot Average cost'),
+        makeColumnOption('cost-ondemand-dedicated', 'Dedicated Host On Demand'),
+        makeColumnOption('cost-reserved-dedicated', 'Dedicated Host Reserved'),
+        makeColumnOption('cost-ondemand-mswinSQLWeb', 'Windows SQL Web On Demand cost'),
+        makeColumnOption('cost-reserved-mswinSQLWeb', 'Windows SQL Web Reserved cost'),
+        makeColumnOption('cost-ondemand-mswinSQL', 'Windows SQL Std On Demand cost'),
+        makeColumnOption('cost-reserved-mswinSQL', 'Windows SQL Std Reserved cost'),
+        makeColumnOption('cost-ondemand-mswinSQLEnterprise', 'Windows SQL Ent On Demand cost'),
+        makeColumnOption('cost-reserved-mswinSQLEnterprise', 'Windows SQL Ent Reserved cost'),
+        makeColumnOption('cost-ondemand-linuxSQLWeb', 'Linux SQL Web On Demand cost'),
+        makeColumnOption('cost-reserved-linuxSQLWeb', 'Linux SQL Web Reserved cost'),
+        makeColumnOption('cost-ondemand-linuxSQL', 'Linux SQL Std On Demand cost'),
+        makeColumnOption('cost-reserved-linuxSQL', 'Linux SQL Std Reserved cost'),
+        makeColumnOption('cost-ondemand-linuxSQLEnterprise', 'Linux SQL Ent On Demand cost'),
+        makeColumnOption('cost-reserved-linuxSQLEnterprise', 'Linux SQL Ent Reserved cost'),
+        makeColumnOption('spot-interrupt-rate', 'Linux Spot Interrupt Frequency'),
+        makeColumnOption('cost-emr', 'EMR cost'),
+        makeColumnOption('generation', 'Generation'),
     ];
 
     return (
@@ -194,7 +201,11 @@ export default function Filters({
                     />
                     <ColumnFilter
                         columns={columnOptions}
-                        onColumnVisibilityChange={onColumnVisibilityChange}
+                        onColumnVisibilityChange={(k, v) => {
+                            state.columVisibility.mutate((o) => {
+                                o[k] = v;
+                            });
+                        }}
                     />
                 </div>
                 <div className="d-flex gap-2">
@@ -225,4 +236,4 @@ export default function Filters({
             </div>
         </div>
     );
-} 
+}
