@@ -8,32 +8,15 @@ import { ColumnVisibility } from '../columnVisibility';
 
 interface FiltersProps {
     regions: Region;
-    selectedRegion: string;
-    onRegionChange: (region: string) => void;
-    pricingUnit: string;
-    onPricingUnitChange: (unit: string) => void;
-    duration: string;
-    onDurationChange: (duration: string) => void;
-    reservedTerm: string;
-    onReservedTermChange: (term: string) => void;
-    searchTerm: string;
-    onSearchTermChange: (term: string) => void;
 }
 
-export default function Filters({
-    regions,
-    selectedRegion,
-    onRegionChange,
-    pricingUnit,
-    onPricingUnitChange,
-    duration,
-    onDurationChange,
-    reservedTerm,
-    onReservedTermChange,
-    searchTerm,
-    onSearchTermChange,
-}: FiltersProps) {
+export default function Filters({ regions }: FiltersProps) {
     const columnVisibility = state.columVisibility.use();
+    const searchTerm = state.searchTerm.use();
+    const selectedRegion = state.selectedRegion.use();
+    const pricingUnit = state.pricingUnit.use();
+    const duration = state.duration.use();
+    const reservedTerm = state.reservedTerm.use();
 
     const regionOptions = Object.entries(regions.main).map(([code, name]) => ({
         value: code,
@@ -175,27 +158,27 @@ export default function Filters({
                     <FilterDropdown
                         label="Region"
                         value={selectedRegion}
-                        onChange={onRegionChange}
+                        onChange={(v) => state.selectedRegion.set(v)}
                         options={[...regionOptions, ...localZoneOptions, ...wavelengthOptions]}
                     />
                     <FilterDropdown
                         label="Pricing Unit"
                         value={pricingUnit}
-                        onChange={onPricingUnitChange}
+                        onChange={(v) => state.pricingUnit.set(v)}
                         options={pricingUnitOptions}
                         icon="shopping-cart"
                     />
                     <FilterDropdown
                         label="Cost"
                         value={duration}
-                        onChange={onDurationChange}
+                        onChange={(v) => state.duration.set(v)}
                         options={durationOptions}
                         icon="shopping-cart"
                     />
                     <FilterDropdown
                         label="Reserved"
                         value={reservedTerm}
-                        onChange={onReservedTermChange}
+                        onChange={(v) => state.reservedTerm.set(v)}
                         options={reservedTermOptions}
                         icon="globe"
                     />
@@ -229,7 +212,7 @@ export default function Filters({
                             className="form-control d-none d-xl-block"
                             placeholder="Search..."
                             value={searchTerm}
-                            onChange={(e) => onSearchTermChange(e.target.value)}
+                            onChange={(e) => state.searchTerm.set(e.target.value)}
                         />
                     </div>
                 </div>

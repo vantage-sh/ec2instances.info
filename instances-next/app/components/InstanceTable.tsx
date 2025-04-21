@@ -12,11 +12,6 @@ import state from '../state';
 
 interface InstanceTableProps {
   instances: Instance[];
-  selectedRegion: string;
-  pricingUnit: string;
-  duration: string;
-  reservedTerm: string;
-  searchTerm: string;
 }
 
 interface Storage {
@@ -29,13 +24,11 @@ interface Storage {
 
 export default function InstanceTable({
   instances,
-  selectedRegion,
-  pricingUnit,
-  duration,
-  reservedTerm,
-  searchTerm,
 }: InstanceTableProps) {
   const columnVisibility = state.columVisibility.use();
+  const searchTerm = state.searchTerm.use();
+  const selectedRegion = state.selectedRegion.use();
+  const reservedTerm = state.reservedTerm.use();
 
   const columns: ColumnDef<Instance>[] = [
     {
