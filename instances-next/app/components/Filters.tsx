@@ -3,7 +3,7 @@
 import { Region } from '../types';
 import FilterDropdown from './FilterDropdown';
 import ColumnFilter from './ColumnFilter';
-import { columnVisibilityAtom, useSearchTerm, useSelectedRegion, usePricingUnit, useDuration, useReservedTerm } from '../state';
+import { columnVisibilityAtom, useSearchTerm, useSelectedRegion, usePricingUnit, useDuration, useReservedTerm, callExportEvents } from '../state';
 import type { ColumnVisibility } from '../columnVisibility';
 
 interface FiltersProps {
@@ -201,7 +201,7 @@ export default function Filters({ regions }: FiltersProps) {
                 </div>
             </div>
             <div className="d-flex gap-2">
-                <button className="btn btn-outline-secondary btn-primary" id="export">
+                <button className="btn btn-outline-secondary btn-primary" onClick={callExportEvents}>
                     Export
                 </button>
                 <div className="btn-group-vertical" id="search">
