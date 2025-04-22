@@ -65,7 +65,7 @@ function validateBoolean(value: string): boolean {
 export default class GSettings {
     settings: typeof g_settings_default;
     key: string;
-    filter = '';
+    filterData = '';
 
     constructor(azure: boolean) {
         this.key = azure ? 'azure_settings' : 'aws_settings';
@@ -128,6 +128,15 @@ export default class GSettings {
         }
         const paramsStringify = new URLSearchParams(params);
         window.history.replaceState({}, '', `${window.location.pathname}?${paramsStringify.toString()}`);
+    }
+
+    get filter() {
+        return this.filterData;
+    }
+
+    set filter(value: string) {
+        this.filterData = value;
+        this._write();
     }
 
     get pricingUnit() {

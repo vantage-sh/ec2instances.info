@@ -6,6 +6,24 @@ import GSettings from "@/utils/g_settings_port";
 import { safeParse } from "valibot";
 import { makeColumnVisibilitySchema } from "./columnVisibility";
 
+const exportEvents: Set<() => void> = new Set();
+
+export function callExportEvents() {
+    for (const fn of exportEvents) {
+        fn();
+    }
+}
+
+/** This is a bit hacky, but alas, the table is in one place. */
+export function useHookToExportButton(hn: () => void) {
+    useEffect(() => {
+        exportEvents.add(hn);
+        return () => {
+            exportEvents.delete(hn);
+        };
+    }, []);
+}
+
 function createColumnVisibilityAtom() {
     const atomRes = atom({ ...initialColumnsValue });
 
@@ -71,8 +89,12 @@ function useGSettingsValue<Key extends keyof GSettings>(key: Key, defaultValue: 
         const expectedKey = pathname.split("?")[0].includes('azure') ? 'azure_settings' : 'aws_settings';
         if (!gSettings || gSettings.key !== expectedKey) {
             gSettings = new GSettings(expectedKey === 'azure_settings');
+            for (const value of gSettingsEvent.values()) {
+                for (const fn of value) {
+                    fn();
+                }
+            }
         }
-        fireEvents(key);
     }, [pathname]);
 
     return [value, (newValue: GSettings[Key]) => {
