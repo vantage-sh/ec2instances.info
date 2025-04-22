@@ -3,20 +3,20 @@
 import { Region } from '../types';
 import FilterDropdown from './FilterDropdown';
 import ColumnFilter from './ColumnFilter';
-import state from '../state';
-import { ColumnVisibility } from '../columnVisibility';
+import { columnVisibilityAtom, useSearchTerm, useSelectedRegion, usePricingUnit, useDuration, useReservedTerm } from '../state';
+import type { ColumnVisibility } from '../columnVisibility';
 
 interface FiltersProps {
     regions: Region;
 }
 
 export default function Filters({ regions }: FiltersProps) {
-    const columnVisibility = state.columVisibility.use();
-    const searchTerm = state.searchTerm.use();
-    const selectedRegion = state.selectedRegion.use();
-    const pricingUnit = state.pricingUnit.use();
-    const duration = state.duration.use();
-    const reservedTerm = state.reservedTerm.use();
+    const columnVisibility = columnVisibilityAtom.use();
+    const [searchTerm, setSearchTerm] = useSearchTerm();
+    const [selectedRegion, setSelectedRegion] = useSelectedRegion();
+    const [pricingUnit, setPricingUnit] = usePricingUnit();
+    const [duration, setDuration] = useDuration();
+    const [reservedTerm, setReservedTerm] = useReservedTerm();
 
     const regionOptions = Object.entries(regions.main).map(([code, name]) => ({
         value: code,
@@ -158,34 +158,34 @@ export default function Filters({ regions }: FiltersProps) {
                     <FilterDropdown
                         label="Region"
                         value={selectedRegion}
-                        onChange={(v) => state.selectedRegion.set(v)}
+                        onChange={(v) => setSelectedRegion(v)}
                         options={[...regionOptions, ...localZoneOptions, ...wavelengthOptions]}
                     />
                     <FilterDropdown
                         label="Pricing Unit"
                         value={pricingUnit}
-                        onChange={(v) => state.pricingUnit.set(v)}
+                        onChange={(v) => setPricingUnit(v)}
                         options={pricingUnitOptions}
                         icon="shopping-cart"
                     />
                     <FilterDropdown
                         label="Cost"
                         value={duration}
-                        onChange={(v) => state.duration.set(v)}
+                        onChange={(v) => setDuration(v)}
                         options={durationOptions}
                         icon="shopping-cart"
                     />
                     <FilterDropdown
                         label="Reserved"
                         value={reservedTerm}
-                        onChange={(v) => state.reservedTerm.set(v)}
+                        onChange={(v) => setReservedTerm(v)}
                         options={reservedTermOptions}
                         icon="globe"
                     />
                     <ColumnFilter
                         columns={columnOptions}
                         onColumnVisibilityChange={(k, v) => {
-                            state.columVisibility.mutate((o) => {
+                            columnVisibilityAtom.mutate((o) => {
                                 o[k] = v;
                             });
                         }}
@@ -212,7 +212,7 @@ export default function Filters({ regions }: FiltersProps) {
                             className="form-control d-none d-xl-block"
                             placeholder="Search..."
                             value={searchTerm}
-                            onChange={(e) => state.searchTerm.set(e.target.value)}
+                            onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>
                 </div>

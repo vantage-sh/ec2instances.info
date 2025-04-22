@@ -8,7 +8,7 @@ import {
   flexRender,
 } from '@tanstack/react-table';
 import { Instance } from '../types';
-import state from '../state';
+import { columnVisibilityAtom, useSearchTerm, useSelectedRegion, useReservedTerm } from '../state';
 
 interface InstanceTableProps {
   instances: Instance[];
@@ -25,10 +25,10 @@ interface Storage {
 export default function InstanceTable({
   instances,
 }: InstanceTableProps) {
-  const columnVisibility = state.columVisibility.use();
-  const searchTerm = state.searchTerm.use();
-  const selectedRegion = state.selectedRegion.use();
-  const reservedTerm = state.reservedTerm.use();
+  const columnVisibility = columnVisibilityAtom.use();
+  const [searchTerm] = useSearchTerm();
+  const [selectedRegion] = useSelectedRegion();
+  const [reservedTerm] = useReservedTerm();
 
   const columns: ColumnDef<Instance>[] = [
     {
