@@ -1,6 +1,6 @@
 import { atom } from "atomtree";
 import { initialColumnsValue, ColumnVisibility } from "./columnVisibility";
-import { useEffect, useState } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import GSettings from "@/utils/g_settings_port";
 import { safeParse } from "valibot";
@@ -36,21 +36,48 @@ export const columnVisibilityAtom = createColumnVisibilityAtom();
 
 let gSettings: GSettings | undefined;
 
+const gSettingsEvent: Map<string, Set<() => void>> = new Map();
+
 function useGSettingsValue<Key extends keyof GSettings>(key: Key, defaultValue: GSettings[Key]) {
-    const [value, setValue] = useState(defaultValue);
+    const value = useSyncExternalStore(
+        (onStoreChange) => {
+            let s = gSettingsEvent.get(key);
+            if (!s) {
+                s = new Set();
+                gSettingsEvent.set(key, s);
+            }
+            s.add(onStoreChange);
+            return () => {
+                s.delete(onStoreChange);
+            };
+        },
+        () => {
+            return gSettings?.[key] ?? defaultValue;
+        },
+        () => defaultValue,
+    );
     const pathname = usePathname();
+
+    const fireEvents = (key: string) => {
+        const s = gSettingsEvent.get(key);
+        if (s) {
+            for (const fn of s) {
+                fn();
+            }
+        }
+    };
 
     useEffect(() => {
         const expectedKey = pathname.split("?")[0].includes('azure') ? 'azure_settings' : 'aws_settings';
         if (!gSettings || gSettings.key !== expectedKey) {
             gSettings = new GSettings(expectedKey === 'azure_settings');
         }
-        setValue(gSettings[key]);
+        fireEvents(key);
     }, [pathname]);
 
     return [value, (newValue: GSettings[Key]) => {
         gSettings![key] = newValue;
-        setValue(newValue);
+        fireEvents(key);
     }] as const;
 }
 
