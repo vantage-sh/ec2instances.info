@@ -8,7 +8,7 @@ import {
   flexRender,
 } from '@tanstack/react-table';
 import { Instance } from '../types';
-import { columnVisibilityAtom, useSearchTerm, useSelectedRegion, useReservedTerm } from '../state';
+import { columnVisibilityAtom, useSearchTerm, useSelectedRegion, useReservedTerm, useHookToExportButton } from '../state';
 
 interface InstanceTableProps {
   instances: Instance[];
@@ -20,6 +20,17 @@ interface Storage {
   size_unit: string;
   nvme_ssd: boolean;
   ssd: boolean;
+}
+
+function csvEscape(input: string) {
+  // Check if the input contains special characters or double quotes
+  if (/[",\n]/.test(input)) {
+    // If it does, wrap the input in double quotes and escape existing double quotes
+    return `"${input.replace(/"/g, '""')}"`;
+  } else {
+    // If no special characters are present, return the input as is
+    return input;
+  }
 }
 
 export default function InstanceTable({
@@ -717,6 +728,25 @@ export default function InstanceTable({
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+  });
+
+  useHookToExportButton(() => {
+    let csv = "";
+    for (const header of table.getHeaderGroups()) {
+      csv += header.headers.map(h => csvEscape(h.getContext().column.columnDef.header as string)).join(',') + '\n';
+    }
+    for (const row of table.getRowModel().rows) {
+      csv += row.getVisibleCells().map(c => csvEscape(String(c.getContext().getValue()))).join(',') + '\n';
+    }
+    if (typeof window !== 'undefined') {
+      const filename = `${document.title}.csv`;
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+    }
   });
 
   return (
