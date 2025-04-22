@@ -890,9 +890,9 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                     </thead>
                     <tbody>
                         {table.getRowModel().rows.map((row) => (
-                            <tr key={row.id}>
+                            <tr key={row.id} className="border-b border-gray-200">
                                 {row.getVisibleCells().map((cell) => (
-                                    <td key={cell.id}>
+                                    <td key={cell.id} className="py-1">
                                         {flexRender(
                                             cell.column.columnDef.cell,
                                             cell.getContext(),
