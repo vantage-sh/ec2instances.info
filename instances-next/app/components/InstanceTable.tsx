@@ -835,6 +835,8 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
             columnVisibility,
             globalFilter: searchTerm,
         },
+        enableFilters: true,
+        enableMultiRowSelection: true,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
     });
@@ -913,6 +915,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                         )}
                                     </th>
                                 ))}
+                                <th></th>
                             </tr>
                         ))}
                     </thead>
@@ -925,7 +928,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                         {virtualRows.map((virtualRow) => {
                             const row = rows[virtualRow.index];
                             return (
-                                <tr key={row.id} className="border-b border-gray-200">
+                                <tr onClick={() => row.toggleSelected()} key={row.id} className={`border-b border-gray-200 ${row.getIsSelected() ? "bg-purple-50" : ""}`}>
                                     {row.getVisibleCells().map((cell) => (
                                         <td 
                                             key={cell.id} 
@@ -937,6 +940,19 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                             )}
                                         </td>
                                     ))}
+                                    <td>
+                                        {/** DO NOT REMOVE! This is essential for blind people to select rows */}
+                                        <form onSubmit={(e) => {
+                                            e.preventDefault();
+                                            row.toggleSelected();
+                                            // TODO: Handle this
+                                        }}>
+                                            <label htmlFor={`${row.id}-checkbox`} className="sr-only">
+                                                {row.getIsSelected() ? "Deselect" : "Select"} row
+                                            </label>
+                                            <input type="checkbox" id={`${row.id}-checkbox`} className="sr-only" />
+                                        </form>
+                                    </td>
                                 </tr>
                             );
                         })}
