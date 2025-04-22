@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { ColumnVisibility } from '../columnVisibility';
+import { useState, useRef, useEffect } from "react";
+import { ColumnVisibility } from "../columnVisibility";
 
 interface ColumnOption {
     key: keyof ColumnVisibility;
@@ -11,7 +11,10 @@ interface ColumnOption {
 
 interface ColumnFilterProps {
     columns: ColumnOption[];
-    onColumnVisibilityChange: (key: keyof ColumnVisibility, visible: boolean) => void;
+    onColumnVisibilityChange: (
+        key: keyof ColumnVisibility,
+        visible: boolean,
+    ) => void;
 }
 
 export default function ColumnFilter({
@@ -19,24 +22,27 @@ export default function ColumnFilter({
     onColumnVisibilityChange,
 }: ColumnFilterProps) {
     const [isOpen, setIsOpen] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState("");
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target as Node)
+            ) {
                 setIsOpen(false);
             }
         }
 
-        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside);
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
 
-    const filteredColumns = columns.filter(column =>
-        column.label.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredColumns = columns.filter((column) =>
+        column.label.toLowerCase().includes(searchTerm.toLowerCase()),
     );
 
     return (
@@ -51,7 +57,10 @@ export default function ColumnFilter({
                 <span className="caret"></span>
             </button>
             {isOpen && (
-                <ul className="dropdown-menu absolute left-0 top-full mt-1 z-50 bg-white shadow-lg rounded-md min-w-[200px] max-h-[400px] overflow-y-auto" role="menu">
+                <ul
+                    className="dropdown-menu absolute left-0 top-full mt-1 z-50 bg-white shadow-lg rounded-md min-w-[200px] max-h-[400px] overflow-y-auto"
+                    role="menu"
+                >
                     <li className="sticky bg-white p-2 top-[-8px]">
                         <input
                             type="text"
@@ -65,11 +74,16 @@ export default function ColumnFilter({
                         <li key={column.key}>
                             <button
                                 className={`block px-4 py-2 text-sm hover:bg-purple-100 ${
-                                    column.visible ? 'bg-purple-100 font-medium' : ''
+                                    column.visible
+                                        ? "bg-purple-100 font-medium"
+                                        : ""
                                 } w-full text-left cursor-pointer`}
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    onColumnVisibilityChange(column.key, !column.visible);
+                                    onColumnVisibilityChange(
+                                        column.key,
+                                        !column.visible,
+                                    );
                                 }}
                             >
                                 <span>{column.label}</span>

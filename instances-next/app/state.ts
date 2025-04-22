@@ -27,9 +27,15 @@ export function useHookToExportButton(hn: () => void) {
 function createColumnVisibilityAtom() {
     const atomRes = atom({ ...initialColumnsValue });
 
-    const localStorageValue = typeof window !== 'undefined' ? localStorage.getItem('columnVisibility') : null;
+    const localStorageValue =
+        typeof window !== "undefined"
+            ? localStorage.getItem("columnVisibility")
+            : null;
     if (localStorageValue) {
-        const res = safeParse(makeColumnVisibilitySchema(), JSON.parse(localStorageValue));
+        const res = safeParse(
+            makeColumnVisibilitySchema(),
+            JSON.parse(localStorageValue),
+        );
         if (res.success) {
             atomRes.set(res.output);
         }
@@ -38,13 +44,13 @@ function createColumnVisibilityAtom() {
     return {
         ...atomRes,
         set: (newValue: ColumnVisibility) => {
-            localStorage.setItem('columnVisibility', JSON.stringify(newValue));
+            localStorage.setItem("columnVisibility", JSON.stringify(newValue));
             atomRes.set(newValue);
         },
         mutate: (fn: (value: ColumnVisibility) => void) => {
             atomRes.mutate((value) => {
                 fn(value);
-                localStorage.setItem('columnVisibility', JSON.stringify(value));
+                localStorage.setItem("columnVisibility", JSON.stringify(value));
             });
         },
     };
@@ -56,7 +62,10 @@ let gSettings: GSettings | undefined;
 
 const gSettingsEvent: Map<string, Set<() => void>> = new Map();
 
-function useGSettingsValue<Key extends keyof GSettings>(key: Key, defaultValue: GSettings[Key]) {
+function useGSettingsValue<Key extends keyof GSettings>(
+    key: Key,
+    defaultValue: GSettings[Key],
+) {
     const value = useSyncExternalStore(
         (onStoreChange) => {
             let s = gSettingsEvent.get(key);
@@ -86,9 +95,11 @@ function useGSettingsValue<Key extends keyof GSettings>(key: Key, defaultValue: 
     };
 
     useEffect(() => {
-        const expectedKey = pathname.split("?")[0].includes('azure') ? 'azure_settings' : 'aws_settings';
+        const expectedKey = pathname.split("?")[0].includes("azure")
+            ? "azure_settings"
+            : "aws_settings";
         if (!gSettings || gSettings.key !== expectedKey) {
-            gSettings = new GSettings(expectedKey === 'azure_settings');
+            gSettings = new GSettings(expectedKey === "azure_settings");
             for (const value of gSettingsEvent.values()) {
                 for (const fn of value) {
                     fn();
@@ -97,30 +108,33 @@ function useGSettingsValue<Key extends keyof GSettings>(key: Key, defaultValue: 
         }
     }, [pathname]);
 
-    return [value, (newValue: GSettings[Key]) => {
-        gSettings![key] = newValue;
-        fireEvents(key);
-    }] as const;
+    return [
+        value,
+        (newValue: GSettings[Key]) => {
+            gSettings![key] = newValue;
+            fireEvents(key);
+        },
+    ] as const;
 }
 
 export function useSearchTerm() {
-    return useGSettingsValue('filter', '');
+    return useGSettingsValue("filter", "");
 }
 
 export function useSelectedRegion() {
-    return useGSettingsValue('region', 'us-east-1');
+    return useGSettingsValue("region", "us-east-1");
 }
 
 export function usePricingUnit() {
-    return useGSettingsValue('pricingUnit', 'instance');
+    return useGSettingsValue("pricingUnit", "instance");
 }
 
 export function useDuration() {
-    return useGSettingsValue('costDuration', 'hourly');
+    return useGSettingsValue("costDuration", "hourly");
 }
 
 export function useReservedTerm() {
-    return useGSettingsValue('reservedTerm', 'yrTerm1Standard.noUpfront');
+    return useGSettingsValue("reservedTerm", "yrTerm1Standard.noUpfront");
 }
 
 export function clearGSettings() {
