@@ -15,6 +15,8 @@ import {
     useReservedTerm,
     useHookToExportButton,
 } from "../state";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import { useRef } from "react";
 
 interface InstanceTableProps {
     instances: Instance[];
@@ -867,18 +869,36 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
         }
     });
 
+    const tableContainerRef = useRef<HTMLDivElement>(null);
+    const tableBodyRef = useRef<HTMLTableSectionElement>(null);
+
+    const { rows } = table.getRowModel();
+    const rowVirtualizer = useVirtualizer({
+        count: rows.length,
+        getScrollElement: () => tableContainerRef.current,
+        estimateSize: () => 35, // Adjust based on your row height
+        overscan: 10,
+    });
+
+    const virtualRows = rowVirtualizer.getVirtualItems();
+    const totalHeight = rowVirtualizer.getTotalSize();
+    const paddingTop = virtualRows.length > 0 ? virtualRows[0].start : 0;
+    const paddingBottom = virtualRows.length > 0 
+        ? totalHeight - virtualRows[virtualRows.length - 1].end 
+        : 0;
+
     return (
         <div className="w-full h-full">
-            <div className="h-full overflow-auto">
+            <div 
+                ref={tableContainerRef} 
+                className="h-full overflow-auto"
+            >
                 <table className="w-full table">
-                    <thead>
+                    <thead className="sticky top-0 z-10 bg-gray-50">
                         {table.getHeaderGroups().map((headerGroup) => (
                             <tr key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => (
-                                    <th
-                                        key={header.id}
-                                        className="sticky top-0 bg-gray-50"
-                                    >
+                                    <th key={header.id}>
                                         {flexRender(
                                             header.column.columnDef.header,
                                             header.getContext(),
@@ -888,19 +908,32 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                             </tr>
                         ))}
                     </thead>
-                    <tbody>
-                        {table.getRowModel().rows.map((row) => (
-                            <tr key={row.id} className="border-b border-gray-200">
-                                {row.getVisibleCells().map((cell) => (
-                                    <td key={cell.id} className="py-1">
-                                        {flexRender(
-                                            cell.column.columnDef.cell,
-                                            cell.getContext(),
-                                        )}
-                                    </td>
-                                ))}
+                    <tbody ref={tableBodyRef}>
+                        {paddingTop > 0 && (
+                            <tr>
+                                <td style={{ height: `${paddingTop}px` }} colSpan={table.getVisibleLeafColumns().length} />
                             </tr>
-                        ))}
+                        )}
+                        {virtualRows.map((virtualRow) => {
+                            const row = rows[virtualRow.index];
+                            return (
+                                <tr key={row.id} className="border-b border-gray-200">
+                                    {row.getVisibleCells().map((cell) => (
+                                        <td key={cell.id} className="py-1">
+                                            {flexRender(
+                                                cell.column.columnDef.cell,
+                                                cell.getContext(),
+                                            )}
+                                        </td>
+                                    ))}
+                                </tr>
+                            );
+                        })}
+                        {paddingBottom > 0 && (
+                            <tr>
+                                <td style={{ height: `${paddingBottom}px` }} colSpan={table.getVisibleLeafColumns().length} />
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>

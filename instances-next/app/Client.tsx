@@ -13,9 +13,11 @@ export default function Home({
     regions: Region;
 }) {
     return (
-        <main className="container-fluid py-4">
+        <main className="h-screen flex flex-col">
             <Filters regions={regions} />
-            <InstanceTable instances={instances} />
+            <div className="flex-1 min-h-0">
+                <InstanceTable instances={instances} />
+            </div>
         </main>
     );
 }

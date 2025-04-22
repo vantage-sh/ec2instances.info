@@ -12,6 +12,7 @@
     "dependencies": {
         "@tailwindcss/postcss": "^4.1.4",
         "@tanstack/react-table": "^8.21.3",
+        "@tanstack/react-virtual": "^3.13.6",
         "atomtree": "^1.0.3",
         "next": "^15.3.1",
         "postcss": "^8.5.3",
@@ -24,7 +25,7 @@
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
-        "typescript": "^5",
-        "prettier": "^3.5.3"
+        "prettier": "^3.5.3",
+        "typescript": "^5"
     }
 }
