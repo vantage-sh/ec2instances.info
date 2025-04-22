@@ -1,10 +1,38 @@
 import { atom } from "atomtree";
-import { initialColumnsValue } from "./columnVisibility";
+import { initialColumnsValue, ColumnVisibility } from "./columnVisibility";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import GSettings from "@/utils/g_settings_port";
+import { safeParse } from "valibot";
+import { makeColumnVisibilitySchema } from "./columnVisibility";
 
-export const columnVisibilityAtom = atom({...initialColumnsValue});
+function createColumnVisibilityAtom() {
+    const atomRes = atom({ ...initialColumnsValue });
+
+    const localStorageValue = typeof window !== 'undefined' ? localStorage.getItem('columnVisibility') : null;
+    if (localStorageValue) {
+        const res = safeParse(makeColumnVisibilitySchema(), JSON.parse(localStorageValue));
+        if (res.success) {
+            atomRes.set(res.output);
+        }
+    }
+
+    return {
+        ...atomRes,
+        set: (newValue: ColumnVisibility) => {
+            localStorage.setItem('columnVisibility', JSON.stringify(newValue));
+            atomRes.set(newValue);
+        },
+        mutate: (fn: (value: ColumnVisibility) => void) => {
+            atomRes.mutate((value) => {
+                fn(value);
+                localStorage.setItem('columnVisibility', JSON.stringify(value));
+            });
+        },
+    };
+}
+
+export const columnVisibilityAtom = createColumnVisibilityAtom();
 
 let gSettings: GSettings | undefined;
 

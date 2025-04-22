@@ -1,3 +1,5 @@
+import { boolean, BooleanSchema, object, optional, OptionalSchema } from "valibot";
+
 export const initialColumnsValue = {
     pretty_name: true,
     instance_type: true,
@@ -75,3 +77,11 @@ export const initialColumnsValue = {
 };
 
 export type ColumnVisibility = typeof initialColumnsValue;
+
+export function makeColumnVisibilitySchema() {
+    const o: { [key in keyof typeof initialColumnsValue]: OptionalSchema<BooleanSchema<undefined>, boolean> } = {} as any;
+    for (const key in initialColumnsValue) {
+        o[key as keyof typeof initialColumnsValue] = optional(boolean(), initialColumnsValue[key as keyof typeof initialColumnsValue]);
+    }
+    return object(o);
+}
