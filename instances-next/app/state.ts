@@ -122,3 +122,14 @@ export function useDuration() {
 export function useReservedTerm() {
     return useGSettingsValue('reservedTerm', 'yrTerm1Standard.noUpfront');
 }
+
+export function clearGSettings() {
+    if (gSettings) {
+        gSettings.clear();
+    }
+    for (const value of gSettingsEvent.values()) {
+        for (const fn of value) {
+            fn();
+        }
+    }
+}

@@ -273,4 +273,10 @@ export default class GSettings {
         this.settings.selected = value.join(',');
         this._write();
     }
+
+    clear() {
+        this.filterData = '';
+        this.settings = { ...g_settings_default };
+        this._write();
+    }
 }

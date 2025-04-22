@@ -3,7 +3,7 @@
 import { Region } from '../types';
 import FilterDropdown from './FilterDropdown';
 import ColumnFilter from './ColumnFilter';
-import { columnVisibilityAtom, useSearchTerm, useSelectedRegion, usePricingUnit, useDuration, useReservedTerm, callExportEvents } from '../state';
+import { columnVisibilityAtom, useSearchTerm, useSelectedRegion, usePricingUnit, useDuration, useReservedTerm, callExportEvents, clearGSettings } from '../state';
 import type { ColumnVisibility } from '../columnVisibility';
 
 interface FiltersProps {
@@ -195,7 +195,7 @@ export default function Filters({ regions }: FiltersProps) {
                     <button className="btn btn-purple btn-compare">
                         Compare
                     </button>
-                    <button className="btn btn-outline-secondary btn-clear">
+                    <button className="btn btn-outline-secondary btn-clear" onClick={clearGSettings}>
                         Clear Filters
                     </button>
                 </div>
