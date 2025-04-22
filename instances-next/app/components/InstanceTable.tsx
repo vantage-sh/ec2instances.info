@@ -876,7 +876,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
     const rowVirtualizer = useVirtualizer({
         count: rows.length,
         getScrollElement: () => tableContainerRef.current,
-        estimateSize: () => 35, // Adjust based on your row height
+        estimateSize: () => 35,
         overscan: 10,
     });
 
@@ -893,12 +893,20 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                 ref={tableContainerRef} 
                 className="h-full overflow-auto"
             >
-                <table className="w-full table">
+                <table className="w-full table-fixed">
+                    <colgroup>
+                        {table.getVisibleLeafColumns().map((column) => (
+                            <col key={column.id} style={{ width: `${column.getSize()}px` }} />
+                        ))}
+                    </colgroup>
                     <thead className="sticky top-0 z-10 bg-gray-50">
                         {table.getHeaderGroups().map((headerGroup) => (
                             <tr key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => (
-                                    <th key={header.id}>
+                                    <th 
+                                        key={header.id}
+                                        className="whitespace-nowrap overflow-hidden text-ellipsis"
+                                    >
                                         {flexRender(
                                             header.column.columnDef.header,
                                             header.getContext(),
@@ -919,7 +927,10 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                             return (
                                 <tr key={row.id} className="border-b border-gray-200">
                                     {row.getVisibleCells().map((cell) => (
-                                        <td key={cell.id} className="py-1">
+                                        <td 
+                                            key={cell.id} 
+                                            className="py-1 whitespace-nowrap overflow-hidden text-ellipsis"
+                                        >
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext(),
