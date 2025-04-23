@@ -6,6 +6,7 @@ import {
     getFilteredRowModel,
     ColumnDef,
     flexRender,
+    Row,
 } from "@tanstack/react-table";
 import { Instance } from "../types";
 import {
@@ -14,9 +15,10 @@ import {
     useSelectedRegion,
     useReservedTerm,
     useHookToExportButton,
+    useGSettings,
 } from "../state";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 interface InstanceTableProps {
     instances: Instance[];
@@ -46,6 +48,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
     const [searchTerm] = useSearchTerm();
     const [selectedRegion] = useSelectedRegion();
     const [reservedTerm] = useReservedTerm();
+    const gSettings = useGSettings();
 
     const columns: ColumnDef<Instance>[] = [
         {
@@ -889,6 +892,28 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
         ? totalHeight - virtualRows[virtualRows.length - 1].end 
         : 0;
 
+    useEffect(() => {
+        if (!gSettings) return;
+        const selectedInstances = gSettings.selected;
+        for (const row of rows) {
+            if (selectedInstances.includes(row.original.instance_type)) {
+                row.toggleSelected();
+            }
+        }
+    }, [gSettings, rows]);
+
+    const handleRow = useCallback((row: Row<Instance>) => {
+        if (!gSettings) return;
+        row.toggleSelected();
+        const selectedInstances = gSettings.selected;
+        if (selectedInstances.includes(row.original.instance_type)) {
+            selectedInstances.splice(selectedInstances.indexOf(row.original.instance_type), 1);
+        } else {
+            selectedInstances.push(row.original.instance_type);
+        }
+        gSettings.selected = selectedInstances;
+    }, [gSettings]);
+
     return (
         <div className="w-full h-full">
             <div 
@@ -928,7 +953,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                         {virtualRows.map((virtualRow) => {
                             const row = rows[virtualRow.index];
                             return (
-                                <tr onClick={() => row.toggleSelected()} key={row.id} className={`border-b border-gray-200 ${row.getIsSelected() ? "bg-purple-50" : ""}`}>
+                                <tr onClick={() => handleRow(row)} key={row.id} className={`border-b border-gray-200 ${row.getIsSelected() ? "bg-purple-50" : ""}`}>
                                     {row.getVisibleCells().map((cell) => (
                                         <td 
                                             key={cell.id} 
@@ -942,15 +967,14 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                     ))}
                                     <td>
                                         {/** DO NOT REMOVE! This is essential for blind people to select rows */}
-                                        <form onSubmit={(e) => {
-                                            e.preventDefault();
-                                            row.toggleSelected();
-                                            // TODO: Handle this
-                                        }}>
+                                        <form onSubmit={(e) => e.preventDefault()}>
                                             <label htmlFor={`${row.id}-checkbox`} className="sr-only">
-                                                {row.getIsSelected() ? "Deselect" : "Select"} row
+                                                Toggle row
                                             </label>
-                                            <input type="checkbox" id={`${row.id}-checkbox`} className="sr-only" />
+                                            <input type="checkbox" id={`${row.id}-checkbox`} className="sr-only" checked={row.getIsSelected()} onChange={(e) => {
+                                                e.preventDefault();
+                                                handleRow(row);
+                                            }} />
                                         </form>
                                     </td>
                                 </tr>

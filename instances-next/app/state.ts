@@ -137,6 +137,24 @@ export function useReservedTerm() {
     return useGSettingsValue("reservedTerm", "yrTerm1Standard.noUpfront");
 }
 
+export function useGSettings() {
+    return useSyncExternalStore(
+        (onStoreChange) => {
+            let s = gSettingsEvent.get(""); // Blank string since other effects fire all when gSettings changes
+            if (!s) {
+                s = new Set();
+                gSettingsEvent.set("", s);
+            }
+            s.add(onStoreChange);
+            return () => {
+                s.delete(onStoreChange);
+            };
+        },
+        () => gSettings,
+        () => undefined,
+    );
+}
+
 export function clearGSettings() {
     if (gSettings) {
         gSettings.clear();
