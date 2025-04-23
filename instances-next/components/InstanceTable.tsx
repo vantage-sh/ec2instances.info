@@ -8,7 +8,7 @@ import {
     flexRender,
     Row,
 } from "@tanstack/react-table";
-import { Instance } from "../types";
+import { Instance } from "@/types";
 import {
     columnVisibilityAtom,
     useSearchTerm,
@@ -16,7 +16,7 @@ import {
     useReservedTerm,
     useHookToExportButton,
     useGSettings,
-} from "../state";
+} from "@/state";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useCallback, useEffect, useRef } from "react";
 
@@ -888,9 +888,10 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
     const virtualRows = rowVirtualizer.getVirtualItems();
     const totalHeight = rowVirtualizer.getTotalSize();
     const paddingTop = virtualRows.length > 0 ? virtualRows[0].start : 0;
-    const paddingBottom = virtualRows.length > 0 
-        ? totalHeight - virtualRows[virtualRows.length - 1].end 
-        : 0;
+    const paddingBottom =
+        virtualRows.length > 0
+            ? totalHeight - virtualRows[virtualRows.length - 1].end
+            : 0;
 
     useEffect(() => {
         if (!gSettings) return;
@@ -902,35 +903,41 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
         }
     }, [gSettings, rows]);
 
-    const handleRow = useCallback((row: Row<Instance>) => {
-        if (!gSettings) return;
-        row.toggleSelected();
-        const selectedInstances = gSettings.selected;
-        if (selectedInstances.includes(row.original.instance_type)) {
-            selectedInstances.splice(selectedInstances.indexOf(row.original.instance_type), 1);
-        } else {
-            selectedInstances.push(row.original.instance_type);
-        }
-        gSettings.selected = selectedInstances;
-    }, [gSettings]);
+    const handleRow = useCallback(
+        (row: Row<Instance>) => {
+            if (!gSettings) return;
+            row.toggleSelected();
+            const selectedInstances = gSettings.selected;
+            if (selectedInstances.includes(row.original.instance_type)) {
+                selectedInstances.splice(
+                    selectedInstances.indexOf(row.original.instance_type),
+                    1,
+                );
+            } else {
+                selectedInstances.push(row.original.instance_type);
+            }
+            gSettings.selected = selectedInstances;
+        },
+        [gSettings],
+    );
 
     return (
         <div className="w-full h-full">
-            <div 
-                ref={tableContainerRef} 
-                className="h-full overflow-auto"
-            >
+            <div ref={tableContainerRef} className="h-full overflow-auto">
                 <table className="w-full table-fixed">
                     <colgroup>
                         {table.getVisibleLeafColumns().map((column) => (
-                            <col key={column.id} style={{ width: `${column.getSize()}px` }} />
+                            <col
+                                key={column.id}
+                                style={{ width: `${column.getSize()}px` }}
+                            />
                         ))}
                     </colgroup>
                     <thead className="sticky top-0 z-10 bg-gray-50">
                         {table.getHeaderGroups().map((headerGroup) => (
                             <tr key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => (
-                                    <th 
+                                    <th
                                         key={header.id}
                                         className="whitespace-nowrap overflow-hidden text-ellipsis"
                                     >
@@ -947,16 +954,25 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                     <tbody ref={tableBodyRef}>
                         {paddingTop > 0 && (
                             <tr>
-                                <td style={{ height: `${paddingTop}px` }} colSpan={table.getVisibleLeafColumns().length} />
+                                <td
+                                    style={{ height: `${paddingTop}px` }}
+                                    colSpan={
+                                        table.getVisibleLeafColumns().length
+                                    }
+                                />
                             </tr>
                         )}
                         {virtualRows.map((virtualRow) => {
                             const row = rows[virtualRow.index];
                             return (
-                                <tr onClick={() => handleRow(row)} key={row.id} className={`border-b border-gray-200 ${row.getIsSelected() ? "bg-purple-50" : ""}`}>
+                                <tr
+                                    onClick={() => handleRow(row)}
+                                    key={row.id}
+                                    className={`border-b border-gray-200 ${row.getIsSelected() ? "bg-purple-50" : ""}`}
+                                >
                                     {row.getVisibleCells().map((cell) => (
-                                        <td 
-                                            key={cell.id} 
+                                        <td
+                                            key={cell.id}
                                             className="py-1 whitespace-nowrap overflow-hidden text-ellipsis"
                                         >
                                             {flexRender(
@@ -967,14 +983,25 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                     ))}
                                     <td>
                                         {/** DO NOT REMOVE! This is essential for blind people to select rows */}
-                                        <form onSubmit={(e) => e.preventDefault()}>
-                                            <label htmlFor={`${row.id}-checkbox`} className="sr-only">
+                                        <form
+                                            onSubmit={(e) => e.preventDefault()}
+                                        >
+                                            <label
+                                                htmlFor={`${row.id}-checkbox`}
+                                                className="sr-only"
+                                            >
                                                 Toggle row
                                             </label>
-                                            <input type="checkbox" id={`${row.id}-checkbox`} className="sr-only" checked={row.getIsSelected()} onChange={(e) => {
-                                                e.preventDefault();
-                                                handleRow(row);
-                                            }} />
+                                            <input
+                                                type="checkbox"
+                                                id={`${row.id}-checkbox`}
+                                                className="sr-only"
+                                                checked={row.getIsSelected()}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    handleRow(row);
+                                                }}
+                                            />
                                         </form>
                                     </td>
                                 </tr>
@@ -982,7 +1009,12 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                         })}
                         {paddingBottom > 0 && (
                             <tr>
-                                <td style={{ height: `${paddingBottom}px` }} colSpan={table.getVisibleLeafColumns().length} />
+                                <td
+                                    style={{ height: `${paddingBottom}px` }}
+                                    colSpan={
+                                        table.getVisibleLeafColumns().length
+                                    }
+                                />
                             </tr>
                         )}
                     </tbody>

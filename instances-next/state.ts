@@ -1,10 +1,13 @@
 import { atom } from "atomtree";
-import { initialColumnsValue, ColumnVisibility } from "./columnVisibility";
+import {
+    initialColumnsValue,
+    ColumnVisibility,
+} from "./utils/columnVisibility";
 import { useEffect, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import GSettings from "@/utils/g_settings_port";
 import { safeParse } from "valibot";
-import { makeColumnVisibilitySchema } from "./columnVisibility";
+import { makeColumnVisibilitySchema } from "./utils/columnVisibility";
 
 const exportEvents: Set<() => void> = new Set();
 

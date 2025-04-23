@@ -1,6 +1,6 @@
 "use client";
 
-import { Region } from "../types";
+import { Region } from "@/types";
 import FilterDropdown from "./FilterDropdown";
 import ColumnFilter from "./ColumnFilter";
 import {
@@ -12,8 +12,8 @@ import {
     useReservedTerm,
     callExportEvents,
     clearGSettings,
-} from "../state";
-import type { ColumnVisibility } from "../columnVisibility";
+} from "@/state";
+import type { ColumnVisibility } from "@/utils/columnVisibility";
 
 interface FiltersProps {
     regions: Region;

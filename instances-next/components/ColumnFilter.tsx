@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { ColumnVisibility } from "../columnVisibility";
+import { ColumnVisibility } from "@/utils/columnVisibility";
 
 interface ColumnOption {
     key: keyof ColumnVisibility;

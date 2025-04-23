@@ -1,4 +1,4 @@
-import { Instance, Region } from "./types";
+import { Instance, Region } from "../types";
 import { readFile } from "fs/promises";
 import Client from "./Client";
 
