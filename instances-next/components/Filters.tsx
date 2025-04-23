@@ -196,7 +196,7 @@ export default function Filters({ regions }: FiltersProps) {
             makeColumnOption("cost-emr", "EMR cost"),
             makeColumnOption("generation", "Generation"),
         ];
-    }, [columnVisibility]);
+    }, Object.values(columnVisibility));
 
     return (
         <div
