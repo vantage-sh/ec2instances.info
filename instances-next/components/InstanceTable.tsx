@@ -19,6 +19,7 @@ import {
 } from "@/state";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useCallback, useEffect, useRef } from "react";
+import React from "react";
 
 interface InstanceTableProps {
     instances: Instance[];
@@ -49,6 +50,8 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
     const [selectedRegion] = useSelectedRegion();
     const [reservedTerm] = useReservedTerm();
     const [gSettings, gSettingsFullMutations] = useGSettings();
+    const [columnResizeMode] = React.useState<'onChange' | 'onEnd'>('onChange');
+    const [columnSizing, setColumnSizing] = React.useState({});
 
     const columns: ColumnDef<Instance>[] = [
         {
@@ -838,6 +841,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
         state: {
             columnVisibility,
             globalFilter: searchTerm,
+            columnSizing,
         },
         defaultColumn: {
             size: 200,
@@ -846,6 +850,8 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
         },
         enableFilters: true,
         enableMultiRowSelection: true,
+        columnResizeMode,
+        onColumnSizingChange: setColumnSizing,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
     });
@@ -928,7 +934,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
     return (
         <div className="w-full h-full">
             <div ref={tableContainerRef} className="h-full overflow-auto">
-                <table className="w-full table-fixed">
+                <table className="w-full table-fixed border-collapse">
                     <colgroup>
                         {table.getVisibleLeafColumns().map((column) => (
                             <col
@@ -943,12 +949,19 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                 {headerGroup.headers.map((header) => (
                                     <th
                                         key={header.id}
-                                        className="whitespace-nowrap overflow-hidden text-ellipsis text-left"
+                                        className="whitespace-nowrap overflow-hidden text-ellipsis text-left relative"
                                     >
                                         {flexRender(
                                             header.column.columnDef.header,
                                             header.getContext(),
                                         )}
+                                        <div
+                                            onMouseDown={header.getResizeHandler()}
+                                            onTouchStart={header.getResizeHandler()}
+                                            className={`mx-2 absolute right-0 top-0 bottom-0 w-1 cursor-col-resize select-none touch-none z-20 ${
+                                                header.column.getIsResizing() ? 'bg-blue-500' : 'bg-gray-200'
+                                            }`}
+                                        />
                                     </th>
                                 ))}
                                 <th></th>
@@ -977,11 +990,20 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                     {row.getVisibleCells().map((cell) => (
                                         <td
                                             key={cell.id}
-                                            className="py-1 whitespace-nowrap overflow-hidden text-ellipsis"
+                                            className="py-1 whitespace-nowrap overflow-hidden text-ellipsis relative"
                                         >
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext(),
+                                            )}
+                                            {cell.column.getCanResize() && (
+                                                <div
+                                                    onMouseDown={table.getHeaderGroups()[0].headers.find(h => h.column.id === cell.column.id)?.getResizeHandler()}
+                                                    onTouchStart={table.getHeaderGroups()[0].headers.find(h => h.column.id === cell.column.id)?.getResizeHandler()}
+                                                    className={`mx-2 absolute right-0 top-0 bottom-0 w-1 cursor-col-resize select-none touch-none ${
+                                                        cell.column.getIsResizing() ? 'bg-blue-500' : 'bg-gray-200'
+                                                    }`}
+                                                />
                                             )}
                                         </td>
                                     ))}
