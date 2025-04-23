@@ -55,6 +55,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
             accessorKey: "pretty_name",
             header: "Name",
             id: "pretty_name",
+            size: 350,
             cell: (info) => info.getValue() as string,
         },
         {
@@ -838,6 +839,11 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
             columnVisibility,
             globalFilter: searchTerm,
         },
+        defaultColumn: {
+            size: 200,
+            minSize: 50,
+            maxSize: 500,
+        },
         enableFilters: true,
         enableMultiRowSelection: true,
         getCoreRowModel: getCoreRowModel(),
@@ -937,7 +943,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                 {headerGroup.headers.map((header) => (
                                     <th
                                         key={header.id}
-                                        className="whitespace-nowrap overflow-hidden text-ellipsis"
+                                        className="whitespace-nowrap overflow-hidden text-ellipsis text-left"
                                     >
                                         {flexRender(
                                             header.column.columnDef.header,
