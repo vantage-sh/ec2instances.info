@@ -49,10 +49,10 @@ export default function ColumnFilter({
         <div className="btn-group-vertical relative" ref={dropdownRef}>
             <label className="dropdown-label mb-1">Columns</label>
             <button
-                className="dropdown-toggle p-0 border-0 d-flex align-items-center h-auto small fw-semibold text-decoration-none link-dark"
+                className="dropdown-toggle p-0 border-0 d-flex align-items-center h-auto text-sm font-semibold text-decoration-none text-gray-1"
                 onClick={() => setIsOpen(!isOpen)}
             >
-                <i className="icon-filter icon-white me-1"></i>
+                <i className="icon-filter text-white me-1"></i>
                 <span className="text">Columns</span>
                 <span className="caret"></span>
             </button>

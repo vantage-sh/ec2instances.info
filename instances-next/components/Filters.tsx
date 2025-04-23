@@ -269,7 +269,7 @@ export default function Filters({ regions }: FiltersProps) {
                         <input
                             id="fullsearch"
                             type="text"
-                            className="form-control d-none d-xl-block"
+                            className="form-control not-xl:hidden"
                             placeholder="Search..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}

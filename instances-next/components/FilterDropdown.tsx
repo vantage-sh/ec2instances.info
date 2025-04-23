@@ -65,10 +65,10 @@ export default function FilterDropdown({
         <div className="btn-group-vertical relative" ref={dropdownRef}>
             <label className="dropdown-label mb-1">{label}</label>
             <button
-                className="dropdown-toggle p-0 border-0 d-flex align-items-center h-auto small fw-semibold text-decoration-none link-dark"
+                className="dropdown-toggle p-0 border-0 d-flex align-items-center h-auto text-sm font-semibold text-decoration-none link-dark"
                 onClick={() => setIsOpen(!isOpen)}
             >
-                {icon && <i className={`icon-${icon} icon-white me-1`}></i>}
+                {icon && <i className={`icon-${icon} text-white me-1`}></i>}
                 <span className="text">
                     {selectedOption?.label || "Select..."}
                 </span>
