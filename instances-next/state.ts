@@ -61,7 +61,7 @@ function createColumnVisibilityAtom() {
 
 export const columnVisibilityAtom = createColumnVisibilityAtom();
 
-let gSettings: GSettings | undefined;
+let gSettingsHolder: [GSettings | undefined, number] = [undefined, 0];
 
 const gSettingsEvent: Map<string, Set<() => void>> = new Map();
 
@@ -82,7 +82,7 @@ function useGSettingsValue<Key extends keyof GSettings>(
             };
         },
         () => {
-            return gSettings?.[key] ?? defaultValue;
+            return gSettingsHolder[0]?.[key] ?? defaultValue;
         },
         () => defaultValue,
     );
@@ -101,8 +101,9 @@ function useGSettingsValue<Key extends keyof GSettings>(
         const expectedKey = pathname.split("?")[0].includes("azure")
             ? "azure_settings"
             : "aws_settings";
-        if (!gSettings || gSettings.key !== expectedKey) {
-            gSettings = new GSettings(expectedKey === "azure_settings");
+        if (!gSettingsHolder[0] || gSettingsHolder[0].key !== expectedKey) {
+            const gSettings = new GSettings(expectedKey === "azure_settings");
+            gSettingsHolder = [gSettings, gSettingsHolder[1] + 1];
             for (const value of gSettingsEvent.values()) {
                 for (const fn of value) {
                     fn();
@@ -114,7 +115,7 @@ function useGSettingsValue<Key extends keyof GSettings>(
     return [
         value,
         (newValue: GSettings[Key]) => {
-            gSettings![key] = newValue;
+            gSettingsHolder[0]![key] = newValue;
             fireEvents(key);
         },
     ] as const;
@@ -140,6 +141,8 @@ export function useReservedTerm() {
     return useGSettingsValue("reservedTerm", "yrTerm1Standard.noUpfront");
 }
 
+const undefinedPtr: [GSettings | undefined, number] = [undefined, 0];
+
 export function useGSettings() {
     return useSyncExternalStore(
         (onStoreChange) => {
@@ -153,14 +156,15 @@ export function useGSettings() {
                 s.delete(onStoreChange);
             };
         },
-        () => gSettings,
-        () => undefined,
+        () => gSettingsHolder,
+        () => undefinedPtr,
     );
 }
 
 export function clearGSettings() {
-    if (gSettings) {
-        gSettings.clear();
+    if (gSettingsHolder[0]) {
+        gSettingsHolder[0].clear();
+        gSettingsHolder = [gSettingsHolder[0], gSettingsHolder[1] + 1];
     }
     for (const value of gSettingsEvent.values()) {
         for (const fn of value) {

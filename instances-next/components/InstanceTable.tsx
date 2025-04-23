@@ -48,7 +48,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
     const [searchTerm] = useSearchTerm();
     const [selectedRegion] = useSelectedRegion();
     const [reservedTerm] = useReservedTerm();
-    const gSettings = useGSettings();
+    const [gSettings, gSettingsFullMutations] = useGSettings();
 
     const columns: ColumnDef<Instance>[] = [
         {
@@ -897,11 +897,9 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
         if (!gSettings) return;
         const selectedInstances = gSettings.selected;
         for (const row of rows) {
-            if (selectedInstances.includes(row.original.instance_type)) {
-                row.toggleSelected();
-            }
+            row.toggleSelected(selectedInstances.includes(row.original.instance_type));
         }
-    }, [gSettings, rows]);
+    }, [gSettingsFullMutations, rows]);
 
     const handleRow = useCallback(
         (row: Row<Instance>) => {
@@ -918,7 +916,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
             }
             gSettings.selected = selectedInstances;
         },
-        [gSettings],
+        [gSettingsFullMutations],
     );
 
     return (
