@@ -20,6 +20,7 @@ import {
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useCallback, useEffect, useRef } from "react";
 import React from "react";
+import IndividualColumnFilter from "./IndividualColumnFilter";
 
 interface InstanceTableProps {
     instances: Instance[];
@@ -50,8 +51,6 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
     const [selectedRegion] = useSelectedRegion();
     const [reservedTerm] = useReservedTerm();
     const [gSettings, gSettingsFullMutations] = useGSettings();
-    const [columnResizeMode] = React.useState<'onChange' | 'onEnd'>('onChange');
-    const [columnSizing, setColumnSizing] = React.useState({});
 
     const columns: ColumnDef<Instance>[] = [
         {
@@ -841,7 +840,6 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
         state: {
             columnVisibility,
             globalFilter: searchTerm,
-            columnSizing,
         },
         defaultColumn: {
             size: 200,
@@ -850,8 +848,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
         },
         enableFilters: true,
         enableMultiRowSelection: true,
-        columnResizeMode,
-        onColumnSizingChange: setColumnSizing,
+        columnResizeMode: "onChange",
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
     });
@@ -966,12 +963,10 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                         />
                                         {header.column.getCanFilter() && (
                                             <div className="mt-2 mb-1 ml-2 mr-3">
-                                                <input
-                                                    type="text"
-                                                    value={(header.column.getFilterValue() as string) ?? ''}
-                                                    onChange={(e) => header.column.setFilterValue(e.target.value)}
-                                                    placeholder={`Filter ${header.column.columnDef.header as string}...`}
-                                                    className="w-full px-2 py-1 text-sm border rounded"
+                                                <IndividualColumnFilter
+                                                    gSettings={gSettings}
+                                                    gSettingsFullMutations={gSettingsFullMutations}
+                                                    column={header.column}
                                                 />
                                             </div>
                                         )}
