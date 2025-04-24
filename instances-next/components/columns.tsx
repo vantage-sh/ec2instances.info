@@ -9,6 +9,8 @@ interface Storage {
     ssd: boolean;
 }
 
+// TODO: factor in pricing unit and cost duration
+
 export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instance>[] => [
     {
         accessorKey: "pretty_name",
