@@ -17,7 +17,7 @@ import {
     useGSettings,
 } from "@/state";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import IndividualColumnFilter from "./IndividualColumnFilter";
 import columnsGen from "./columns";
 
@@ -43,7 +43,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
     const [reservedTerm] = useReservedTerm();
     const [gSettings, gSettingsFullMutations] = useGSettings();
 
-    const columns = useMemo(() => columnsGen(selectedRegion, reservedTerm), [selectedRegion, reservedTerm]);
+    const columns = columnsGen(selectedRegion, reservedTerm);
 
     const table = useReactTable({
         data: instances,
