@@ -1,3 +1,5 @@
+import { CostDuration, PricingUnit } from "@/types";
+
 const g_settings_default = {
     pricing_unit: "instance",
     cost_duration: "hourly",
@@ -157,20 +159,20 @@ export default class GSettings {
         this._write();
     }
 
-    get pricingUnit() {
-        return this.settings.pricing_unit;
+    get pricingUnit(): PricingUnit {
+        return this.settings.pricing_unit as PricingUnit;
     }
 
-    set pricingUnit(value: string) {
+    set pricingUnit(value: PricingUnit) {
         this.settings.pricing_unit = value;
         this._write();
     }
 
-    get costDuration() {
-        return this.settings.cost_duration;
+    get costDuration(): CostDuration {
+        return this.settings.cost_duration as CostDuration;
     }
 
-    set costDuration(value: string) {
+    set costDuration(value: CostDuration) {
         this.settings.cost_duration = value;
         this._write();
     }

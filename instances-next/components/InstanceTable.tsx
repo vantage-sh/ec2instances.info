@@ -16,6 +16,8 @@ import {
     useReservedTerm,
     useHookToExportButton,
     useGSettings,
+    usePricingUnit,
+    useDuration,
 } from "@/state";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -41,6 +43,8 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
     const columnVisibility = columnVisibilityAtom.use();
     const [searchTerm] = useSearchTerm();
     const [selectedRegion] = useSelectedRegion();
+    const [pricingUnit] = usePricingUnit();
+    const [costDuration] = useDuration();
     const [reservedTerm] = useReservedTerm();
     const [gSettings, gSettingsFullMutations] = useGSettings();
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -80,7 +84,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
         ]);
     }, [gSettingsFullMutations]);
 
-    const columns = columnsGen(selectedRegion, reservedTerm);
+    const columns = columnsGen(selectedRegion, pricingUnit, costDuration, reservedTerm);
 
     const table = useReactTable({
         data: instances,

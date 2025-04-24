@@ -1,6 +1,6 @@
 "use client";
 
-import { Region } from "@/types";
+import { CostDuration, PricingUnit, Region } from "@/types";
 import FilterDropdown from "./FilterDropdown";
 import ColumnFilter from "./ColumnFilter";
 import {
@@ -218,14 +218,14 @@ export default function Filters({ regions }: FiltersProps) {
                     <FilterDropdown
                         label="Pricing Unit"
                         value={pricingUnit}
-                        onChange={(v) => setPricingUnit(v)}
+                        onChange={(v) => setPricingUnit(v as PricingUnit)}
                         options={pricingUnitOptions}
                         icon="shopping-cart"
                     />
                     <FilterDropdown
                         label="Cost"
                         value={duration}
-                        onChange={(v) => setDuration(v)}
+                        onChange={(v) => setDuration(v as CostDuration)}
                         options={durationOptions}
                         icon="shopping-cart"
                     />

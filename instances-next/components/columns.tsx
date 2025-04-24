@@ -1,4 +1,4 @@
-import { Instance } from "@/types";
+import { CostDuration, Instance, Pricing, PricingUnit } from "@/types";
 import { ColumnDef, Row } from "@tanstack/react-table";
 
 interface Storage {
@@ -9,15 +9,59 @@ interface Storage {
     ssd: boolean;
 }
 
-// TODO: factor in pricing unit and cost duration
-
 function gt(row: Row<Instance>, columnId: string, filterValue: number) {
     const value = row.original[columnId as keyof Instance];
     if (typeof value !== "number") return false;
     return value >= filterValue;
 }
 
-export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instance>[] => [
+function calculateCost(
+    price: string | undefined,
+    instance: Instance,
+    pricingUnit: PricingUnit,
+    costDuration: CostDuration
+): string {
+    if (!price) return "unavailable";
+    
+    const hourMultipliers = {
+        secondly: 1 / (60 * 60),
+        minutely: 1 / 60,
+        hourly: 1,
+        daily: 24,
+        weekly: 7 * 24,
+        monthly: (365 * 24) / 12,
+        annually: 365 * 24,
+    };
+
+    const measuringUnits = {
+        instances: '',
+        vcpu: 'vCPU',
+        ecu: 'ECU',
+        memory: 'GiB',
+    };
+
+    const durationMultiplier = hourMultipliers[costDuration];
+    let pricingUnitModifier = 1;
+
+    if (pricingUnit !== 'instance') {
+        pricingUnitModifier = instance[pricingUnit === 'vcpu' ? 'vCPU' : pricingUnit === 'ecu' ? 'ECU' : 'memory'] as number;
+    }
+
+    const perTime = (Number(price) * durationMultiplier) / pricingUnitModifier;
+    const precision = costDuration === 'secondly' || costDuration === 'minutely' ? 6 : 4;
+    
+    let durationText: string = costDuration;
+    if (costDuration === 'secondly') durationText = 'per sec';
+    if (costDuration === 'minutely') durationText = 'per min';
+    
+    const pricingMeasuringUnits = pricingUnit === 'instance' 
+        ? ` ${durationText}`
+        : ` ${durationText} / ${measuringUnits[pricingUnit]}`;
+
+    return `$${perTime.toFixed(precision)}${pricingMeasuringUnits}`;
+}
+
+export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: CostDuration, reservedTerm: string): ColumnDef<Instance>[] => [
     {
         accessorKey: "pretty_name",
         header: "Name",
@@ -403,11 +447,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "On Demand",
         id: "cost-ondemand",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.linux?.ondemand;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -415,12 +457,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Linux Reserved cost",
         id: "cost-reserved",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
-            const price =
-                pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm];
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            const pricing = info.getValue() as Pricing | undefined;
+            const price = pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm];
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -428,11 +467,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Linux Spot Minimum cost",
         id: "cost-spot-min",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.linux?.spot_min;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -440,11 +477,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Linux Spot Average cost",
         id: "cost-spot-max",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.linux?.spot_avg;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -452,11 +487,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "RHEL On Demand cost",
         id: "cost-ondemand-rhel",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.rhel?.ondemand;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -464,12 +497,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "RHEL Reserved cost",
         id: "cost-reserved-rhel",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
-            const price =
-                pricing?.[selectedRegion]?.rhel?.reserved?.[reservedTerm];
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            const pricing = info.getValue() as Pricing | undefined;
+            const price = pricing?.[selectedRegion]?.rhel?.reserved?.[reservedTerm];
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -477,11 +507,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "RHEL Spot Minimum cost",
         id: "cost-spot-min-rhel",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.rhel?.spot_min;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -489,11 +517,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "RHEL Spot Maximum cost",
         id: "cost-spot-max-rhel",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.rhel?.spot_max;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -501,11 +527,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "SLES On Demand cost",
         id: "cost-ondemand-sles",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.sles?.ondemand;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -513,12 +537,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "SLES Reserved cost",
         id: "cost-reserved-sles",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
-            const price =
-                pricing?.[selectedRegion]?.sles?.reserved?.[reservedTerm];
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            const pricing = info.getValue() as Pricing | undefined;
+            const price = pricing?.[selectedRegion]?.sles?.reserved?.[reservedTerm];
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -526,11 +547,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "SLES Spot Minimum cost",
         id: "cost-spot-min-sles",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.sles?.spot_min;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -538,11 +557,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "SLES Spot Maximum cost",
         id: "cost-spot-max-sles",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.sles?.spot_max;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -550,11 +567,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Windows On Demand cost",
         id: "cost-ondemand-mswin",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.mswin?.ondemand;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -562,12 +577,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Windows Reserved cost",
         id: "cost-reserved-mswin",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
-            const price =
-                pricing?.[selectedRegion]?.mswin?.reserved?.[reservedTerm];
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            const pricing = info.getValue() as Pricing | undefined;
+            const price = pricing?.[selectedRegion]?.mswin?.reserved?.[reservedTerm];
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -575,11 +587,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Windows Spot Minimum cost",
         id: "cost-spot-min-mswin",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.mswin?.spot_min;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -587,11 +597,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Windows Spot Average cost",
         id: "cost-spot-max-mswin",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.mswin?.spot_avg;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -599,11 +607,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Dedicated Host On Demand",
         id: "cost-ondemand-dedicated",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.dedicated?.ondemand;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -611,14 +617,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Dedicated Host Reserved",
         id: "cost-reserved-dedicated",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
-            const price =
-                pricing?.[selectedRegion]?.dedicated?.reserved?.[
-                    reservedTerm
-                ];
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            const pricing = info.getValue() as Pricing | undefined;
+            const price = pricing?.[selectedRegion]?.dedicated?.reserved?.[reservedTerm];
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -626,11 +627,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Windows SQL Web On Demand cost",
         id: "cost-ondemand-mswinSQLWeb",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.mswinSQLWeb?.ondemand;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -638,14 +637,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Windows SQL Web Reserved cost",
         id: "cost-reserved-mswinSQLWeb",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
-            const price =
-                pricing?.[selectedRegion]?.mswinSQLWeb?.reserved?.[
-                    reservedTerm
-                ];
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            const pricing = info.getValue() as Pricing | undefined;
+            const price = pricing?.[selectedRegion]?.mswinSQLWeb?.reserved?.[reservedTerm];
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -653,11 +647,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Windows SQL Std On Demand cost",
         id: "cost-ondemand-mswinSQL",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.mswinSQL?.ondemand;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -665,14 +657,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Windows SQL Std Reserved cost",
         id: "cost-reserved-mswinSQL",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
-            const price =
-                pricing?.[selectedRegion]?.mswinSQL?.reserved?.[
-                    reservedTerm
-                ];
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            const pricing = info.getValue() as Pricing | undefined;
+            const price = pricing?.[selectedRegion]?.mswinSQL?.reserved?.[reservedTerm];
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -680,12 +667,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Windows SQL Ent On Demand cost",
         id: "cost-ondemand-mswinSQLEnterprise",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
-            const price =
-                pricing?.[selectedRegion]?.mswinSQLEnterprise?.ondemand;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            const pricing = info.getValue() as Pricing | undefined;
+            const price = pricing?.[selectedRegion]?.mswinSQLEnterprise?.ondemand;
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -693,14 +677,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Windows SQL Ent Reserved cost",
         id: "cost-reserved-mswinSQLEnterprise",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
-            const price =
-                pricing?.[selectedRegion]?.mswinSQLEnterprise?.reserved?.[
-                    reservedTerm
-                ];
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            const pricing = info.getValue() as Pricing | undefined;
+            const price = pricing?.[selectedRegion]?.mswinSQLEnterprise?.reserved?.[reservedTerm];
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -708,11 +687,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Linux SQL Web On Demand cost",
         id: "cost-ondemand-linuxSQLWeb",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.linuxSQLWeb?.ondemand;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -720,14 +697,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Linux SQL Web Reserved cost",
         id: "cost-reserved-linuxSQLWeb",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
-            const price =
-                pricing?.[selectedRegion]?.linuxSQLWeb?.reserved?.[
-                    reservedTerm
-                ];
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            const pricing = info.getValue() as Pricing | undefined;
+            const price = pricing?.[selectedRegion]?.linuxSQLWeb?.reserved?.[reservedTerm];
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -735,11 +707,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Linux SQL Std On Demand cost",
         id: "cost-ondemand-linuxSQL",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
+            const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.linuxSQL?.ondemand;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -747,14 +717,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Linux SQL Std Reserved cost",
         id: "cost-reserved-linuxSQL",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
-            const price =
-                pricing?.[selectedRegion]?.linuxSQL?.reserved?.[
-                    reservedTerm
-                ];
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            const pricing = info.getValue() as Pricing | undefined;
+            const price = pricing?.[selectedRegion]?.linuxSQL?.reserved?.[reservedTerm];
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -762,12 +727,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Linux SQL Ent On Demand cost",
         id: "cost-ondemand-linuxSQLEnterprise",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
-            const price =
-                pricing?.[selectedRegion]?.linuxSQLEnterprise?.ondemand;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            const pricing = info.getValue() as Pricing | undefined;
+            const price = pricing?.[selectedRegion]?.linuxSQLEnterprise?.ondemand;
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -775,14 +737,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Linux SQL Ent Reserved cost",
         id: "cost-reserved-linuxSQLEnterprise",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
-            const price =
-                pricing?.[selectedRegion]?.linuxSQLEnterprise?.reserved?.[
-                    reservedTerm
-                ];
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            const pricing = info.getValue() as Pricing | undefined;
+            const price = pricing?.[selectedRegion]?.linuxSQLEnterprise?.reserved?.[reservedTerm];
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {
@@ -790,9 +747,8 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "Linux Spot Interrupt Frequency",
         id: "spot-interrupt-rate",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
-            const pctInterrupt =
-                pricing?.[selectedRegion]?.linux?.pct_interrupt;
+            const pricing = info.getValue() as Pricing | undefined;
+            const pctInterrupt = pricing?.[selectedRegion]?.linux?.pct_interrupt;
             if (pctInterrupt === "N/A") return "unavailable";
             return pctInterrupt;
         },
@@ -802,11 +758,9 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         header: "EMR cost",
         id: "cost-emr",
         cell: (info) => {
-            const pricing = info.getValue() as Record<string, any>;
-            const price = pricing?.[selectedRegion]?.emr?.emr;
-            return price
-                ? `$${Number(price).toFixed(4)} hourly`
-                : "unavailable";
+            const pricing = info.getValue() as Pricing | undefined;
+            const price = pricing?.[selectedRegion]?.emr?.ondemand;
+            return calculateCost(price, info.row.original, pricingUnit, costDuration);
         },
     },
     {

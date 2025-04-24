@@ -1,11 +1,13 @@
-export const pricingUnitOptions = [
+import { CostDuration, PricingUnit } from "@/types";
+
+export const pricingUnitOptions: { value: PricingUnit, label: string }[] = [
     { value: "instance", label: "Instance" },
     { value: "vcpu", label: "vCPU" },
     { value: "ecu", label: "ECU" },
     { value: "memory", label: "Memory" },
 ];
 
-export const durationOptions = [
+export const durationOptions: { value: CostDuration, label: string }[] = [
     { value: "secondly", label: "Per Second" },
     { value: "minutely", label: "Per Minute" },
     { value: "hourly", label: "Hourly" },

@@ -1,3 +1,19 @@
+
+export interface Pricing {
+    [region: string]: {
+        [platform: string]: {
+            ondemand: string;
+            reserved?: {
+                [term: string]: string;
+            };
+            spot_min?: string;
+            spot_avg?: string;
+            spot_max?: string;
+            pct_interrupt?: string;
+        };
+    };
+}
+
 export interface Instance {
     instance_type: string;
     pretty_name: string;
@@ -52,20 +68,7 @@ export interface Instance {
     availability_zones?: {
         [region: string]: string[];
     };
-    pricing: {
-        [region: string]: {
-            [platform: string]: {
-                ondemand: string;
-                reserved?: {
-                    [term: string]: string;
-                };
-                spot_min?: string;
-                spot_avg?: string;
-                spot_max?: string;
-                pct_interrupt?: string;
-            };
-        };
-    };
+    pricing: Pricing;
     generation: string;
 }
 
@@ -80,3 +83,7 @@ export interface Region {
         [key: string]: string;
     };
 }
+
+export type PricingUnit = "instance" | "vcpu" | "ecu" | "memory";
+
+export type CostDuration = "secondly" | "minutely" | "hourly" | "daily" | "weekly" | "monthly" | "annually";
