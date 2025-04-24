@@ -951,24 +951,37 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                         key={header.id}
                                         className="whitespace-nowrap overflow-hidden text-ellipsis text-left relative"
                                     >
-                                        {flexRender(
-                                            header.column.columnDef.header,
-                                            header.getContext(),
-                                        )}
+                                        <div className="mx-2">
+                                            {flexRender(
+                                                header.column.columnDef.header,
+                                                header.getContext(),
+                                            )}
+                                        </div>
                                         <div
                                             onMouseDown={header.getResizeHandler()}
                                             onTouchStart={header.getResizeHandler()}
-                                            className={`mx-2 absolute right-0 top-0 bottom-0 w-1 cursor-col-resize select-none touch-none z-20 ${
+                                            className={`absolute right-0 top-0 bottom-0 w-1 cursor-col-resize select-none touch-none z-20 ${
                                                 header.column.getIsResizing() ? 'bg-blue-500' : 'bg-gray-200'
                                             }`}
                                         />
+                                        {header.column.getCanFilter() && (
+                                            <div className="mt-2 mb-1 ml-2 mr-3">
+                                                <input
+                                                    type="text"
+                                                    value={(header.column.getFilterValue() as string) ?? ''}
+                                                    onChange={(e) => header.column.setFilterValue(e.target.value)}
+                                                    placeholder={`Filter ${header.column.columnDef.header as string}...`}
+                                                    className="w-full px-2 py-1 text-sm border rounded"
+                                                />
+                                            </div>
+                                        )}
                                     </th>
                                 ))}
                                 <th></th>
                             </tr>
                         ))}
                     </thead>
-                    <tbody ref={tableBodyRef}>
+                    <tbody ref={tableBodyRef} className="relative">
                         {paddingTop > 0 && (
                             <tr>
                                 <td
@@ -992,15 +1005,17 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                             key={cell.id}
                                             className="py-1 whitespace-nowrap overflow-hidden text-ellipsis relative"
                                         >
-                                            {flexRender(
-                                                cell.column.columnDef.cell,
-                                                cell.getContext(),
-                                            )}
+                                            <div className="ml-2 mr-3">
+                                                {flexRender(
+                                                    cell.column.columnDef.cell,
+                                                    cell.getContext(),
+                                                )}
+                                            </div>
                                             {cell.column.getCanResize() && (
                                                 <div
                                                     onMouseDown={table.getHeaderGroups()[0].headers.find(h => h.column.id === cell.column.id)?.getResizeHandler()}
                                                     onTouchStart={table.getHeaderGroups()[0].headers.find(h => h.column.id === cell.column.id)?.getResizeHandler()}
-                                                    className={`mx-2 absolute right-0 top-0 bottom-0 w-1 cursor-col-resize select-none touch-none ${
+                                                    className={`absolute right-0 top-0 bottom-0 w-1 cursor-col-resize select-none touch-none ${
                                                         cell.column.getIsResizing() ? 'bg-blue-500' : 'bg-gray-200'
                                                     }`}
                                                 />
