@@ -7,6 +7,8 @@ import {
     flexRender,
     Row,
     ColumnFiltersState,
+    SortingState,
+    getSortedRowModel,
 } from "@tanstack/react-table";
 import { Instance } from "@/types";
 import {
@@ -25,6 +27,7 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import IndividualColumnFilter from "./IndividualColumnFilter";
 import columnsGen from "./columns";
+import SortToggle from "./SortToggle";
 
 interface InstanceTableProps {
     instances: Instance[];
@@ -55,6 +58,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const rowSelection = rowSelectionAtom.use();
     const [compareOn] = useCompareOn();
+    const [sorting, setSorting] = useState<SortingState>([]);
 
     // Initially set the column filters to the gSettings.
     useEffect(() => {
@@ -109,6 +113,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
             globalFilter: compareOn ? undefined : searchTerm,
             columnFilters: compareOn ? emptyColumnFilters : columnFilters,
             rowSelection,
+            sorting,
         },
         defaultColumn: {
             size: 200,
@@ -142,6 +147,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
         columnResizeMode: "onChange",
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
+        getSortedRowModel: getSortedRowModel(),
     });
 
     useHookToExportButton(() => {
@@ -250,11 +256,25 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                         key={header.id}
                                         className="whitespace-nowrap overflow-hidden text-ellipsis text-left relative"
                                     >
-                                        <div className="mx-2">
+                                        <div className="mx-2 mt-2">
                                             {flexRender(
                                                 header.column.columnDef.header,
                                                 header.getContext(),
                                             )}
+                                            <SortToggle
+                                                value={sorting.find(s => s.id === header.id)?.desc}
+                                                setValue={(value) => setSorting((old) => {
+                                                    const inside = old.find(s => s.id === header.id);
+                                                    if (inside?.desc === value) {
+                                                        // Remove the sorting if it's already set.
+                                                        return old.filter(s => s.id !== header.id);
+                                                    }
+                                                    if (inside) {
+                                                        return old.map(s => s.id === header.id ? { ...s, desc: value } : s);
+                                                    }
+                                                    return [...old, { id: header.id, desc: value }];
+                                                })}
+                                            />
                                         </div>
                                         <div
                                             onMouseDown={header.getResizeHandler()}
@@ -264,7 +284,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                             }`}
                                         />
                                         {header.column.getCanFilter() && !compareOn && (
-                                            <div className="mt-2 mb-1 ml-2 mr-3">
+                                            <div className="mt-2 mb-2 ml-2 mr-3">
                                                 <IndividualColumnFilter
                                                     gSettings={gSettings}
                                                     gSettingsFullMutations={gSettingsFullMutations}
