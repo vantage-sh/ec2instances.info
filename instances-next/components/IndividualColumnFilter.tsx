@@ -17,12 +17,9 @@ function GSettingsNumberFilter({
     const [value, setValue] = useState(initValue);
 
     useEffect(() => {
-        // Handle if it is reset.
-        setValue(initValue); 
-
-        // Set the filter value.
-        column.setFilterValue(initValue);
-    }, [initValue, gSettingsFullMutations]);
+        // Handle if we launched the page with a value or it reset.
+        setValue(initValue);
+    }, [initValue]);
 
     const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const v = e.target.valueAsNumber;

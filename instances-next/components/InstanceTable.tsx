@@ -6,6 +6,7 @@ import {
     getFilteredRowModel,
     flexRender,
     Row,
+    ColumnFiltersState,
 } from "@tanstack/react-table";
 import { Instance } from "@/types";
 import {
@@ -17,7 +18,7 @@ import {
     useGSettings,
 } from "@/state";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import IndividualColumnFilter from "./IndividualColumnFilter";
 import columnsGen from "./columns";
 
@@ -42,6 +43,42 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
     const [selectedRegion] = useSelectedRegion();
     const [reservedTerm] = useReservedTerm();
     const [gSettings, gSettingsFullMutations] = useGSettings();
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
+    // Initially set the column filters to the gSettings.
+    useEffect(() => {
+        if (!gSettings) return;
+        setColumnFilters([
+            {
+                id: "memory",
+                value: gSettings.minMemory,
+            },
+            {
+                id: "vCPU",
+                value: gSettings.minVcpus,
+            },
+            {
+                id: "memory_per_vcpu",
+                value: gSettings.minMemoryPerVcpu,
+            },
+            {
+                id: "GPU",
+                value: gSettings.minGpus,
+            },
+            {
+                id: "GPU_memory",
+                value: gSettings.minGpuMemory,
+            },
+            {
+                id: "maxips",
+                value: gSettings.minMaxips,
+            },
+            {
+                id: "storage",
+                value: gSettings.minStorage,
+            },
+        ]);
+    }, [gSettingsFullMutations]);
 
     const columns = columnsGen(selectedRegion, reservedTerm);
 
@@ -51,6 +88,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
         state: {
             columnVisibility,
             globalFilter: searchTerm,
+            columnFilters,
         },
         defaultColumn: {
             size: 200,
@@ -58,6 +96,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
             maxSize: 500,
         },
         enableFilters: true,
+        onColumnFiltersChange: setColumnFilters,
         enableMultiRowSelection: true,
         columnResizeMode: "onChange",
         getCoreRowModel: getCoreRowModel(),
