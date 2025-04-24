@@ -18,9 +18,11 @@ import {
     useGSettings,
     usePricingUnit,
     useDuration,
+    rowSelectionAtom,
+    useCompareOn,
 } from "@/state";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import IndividualColumnFilter from "./IndividualColumnFilter";
 import columnsGen from "./columns";
 
@@ -39,6 +41,9 @@ function csvEscape(input: string) {
     }
 }
 
+// Hack to stop Tanstack Table from thinking the array changed.
+const emptyColumnFilters: ColumnFiltersState = [];
+
 export default function InstanceTable({ instances }: InstanceTableProps) {
     const columnVisibility = columnVisibilityAtom.use();
     const [searchTerm] = useSearchTerm();
@@ -48,6 +53,8 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
     const [reservedTerm] = useReservedTerm();
     const [gSettings, gSettingsFullMutations] = useGSettings();
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+    const rowSelection = rowSelectionAtom.use();
+    const [compareOn] = useCompareOn();
 
     // Initially set the column filters to the gSettings.
     useEffect(() => {
@@ -86,13 +93,22 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
 
     const columns = columnsGen(selectedRegion, pricingUnit, costDuration, reservedTerm);
 
+    const data = useMemo(() => {
+        if (compareOn) {
+            return instances.filter(i => rowSelection[i.instance_type]);
+        }
+        return instances;
+    }, [compareOn, rowSelection, instances]);
+
     const table = useReactTable({
-        data: instances,
+        data,
+        getRowId: (row) => row.instance_type,
         columns,
         state: {
             columnVisibility,
-            globalFilter: searchTerm,
-            columnFilters,
+            globalFilter: compareOn ? undefined : searchTerm,
+            columnFilters: compareOn ? emptyColumnFilters : columnFilters,
+            rowSelection,
         },
         defaultColumn: {
             size: 200,
@@ -102,6 +118,27 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
         enableFilters: true,
         onColumnFiltersChange: setColumnFilters,
         enableMultiRowSelection: true,
+        onRowSelectionChange: (state) => {
+            if (typeof state === "function") {
+                return rowSelectionAtom.mutate((old) => {
+                    const res = state(old);
+                    const oldKeys = Object.keys(old);
+                    for (const key of oldKeys) {
+                        if (key in res) {
+                            old[key] = res[key];
+                        } else {
+                            delete old[key];
+                        }
+                    }
+                    const onlyNew = Object.keys(res).filter(k => !(k in old));
+                    for (const key of onlyNew) {
+                        old[key] = res[key];
+                    }
+                    return old;
+                });
+            }
+            rowSelectionAtom.set(state);
+        },
         columnResizeMode: "onChange",
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
@@ -156,7 +193,14 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
             ? totalHeight - virtualRows[virtualRows.length - 1].end
             : 0;
 
+    // Handle synchronising the rows with the global settings.
+    const first = useRef(true);
     useEffect(() => {
+        if (first.current) {
+            // Also zero the row selection atom in case it was set from a previous render
+            rowSelectionAtom.set({});
+            first.current = false;
+        }
         if (!gSettings) return;
         const selectedInstances = gSettings.selected;
         for (const row of rows) {
@@ -166,6 +210,10 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
 
     const handleRow = useCallback(
         (row: Row<Instance>) => {
+            // Row checking is off when comparing.
+            if (compareOn) return;
+
+            // Select the row and update the global settings.
             if (!gSettings) return;
             row.toggleSelected();
             const selectedInstances = gSettings.selected;
@@ -179,7 +227,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
             }
             gSettings.selected = selectedInstances;
         },
-        [gSettingsFullMutations],
+        [gSettingsFullMutations, compareOn],
     );
 
     return (
@@ -215,7 +263,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                                 header.column.getIsResizing() ? 'bg-blue-500' : 'bg-gray-200'
                                             }`}
                                         />
-                                        {header.column.getCanFilter() && (
+                                        {header.column.getCanFilter() && !compareOn && (
                                             <div className="mt-2 mb-1 ml-2 mr-3">
                                                 <IndividualColumnFilter
                                                     gSettings={gSettings}
@@ -273,26 +321,30 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                     ))}
                                     <td>
                                         {/** DO NOT REMOVE! This is essential for blind people to select rows */}
-                                        <form
-                                            onSubmit={(e) => e.preventDefault()}
-                                        >
-                                            <label
-                                                htmlFor={`${row.id}-checkbox`}
-                                                className="sr-only"
-                                            >
-                                                Toggle row
-                                            </label>
-                                            <input
-                                                type="checkbox"
-                                                id={`${row.id}-checkbox`}
-                                                className="sr-only"
-                                                checked={row.getIsSelected()}
-                                                onChange={(e) => {
-                                                    e.preventDefault();
-                                                    handleRow(row);
-                                                }}
-                                            />
-                                        </form>
+                                        {
+                                            !compareOn && (
+                                                <form
+                                                    onSubmit={(e) => e.preventDefault()}
+                                                >
+                                                    <label
+                                                        htmlFor={`${row.id}-checkbox`}
+                                                        className="sr-only"
+                                                    >
+                                                        Toggle row
+                                                    </label>
+                                                    <input
+                                                        type="checkbox"
+                                                        id={`${row.id}-checkbox`}
+                                                        className="sr-only"
+                                                        checked={row.getIsSelected()}
+                                                        onChange={(e) => {
+                                                            e.preventDefault();
+                                                            handleRow(row);
+                                                        }}
+                                                    />
+                                                </form>
+                                            )
+                                        }
                                     </td>
                                 </tr>
                             );

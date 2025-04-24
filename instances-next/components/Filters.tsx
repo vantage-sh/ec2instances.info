@@ -12,6 +12,8 @@ import {
     useReservedTerm,
     callExportEvents,
     clearGSettings,
+    useCompareOn,
+    rowSelectionAtom,
 } from "@/state";
 import type { ColumnVisibility } from "@/utils/columnVisibility";
 import {
@@ -32,6 +34,16 @@ export default function Filters({ regions }: FiltersProps) {
     const [pricingUnit, setPricingUnit] = usePricingUnit();
     const [duration, setDuration] = useDuration();
     const [reservedTerm, setReservedTerm] = useReservedTerm();
+    const [compareOn, valuePreCompareOn, setCompareOn] = useCompareOn();
+    const selected = rowSelectionAtom.use();
+
+    let anySelected = false;
+    for (const key in selected) {
+        if (selected[key]) {
+            anySelected = true;
+            break;
+        }
+    }
 
     const [regionOptions, localZoneOptions, wavelengthOptions] = useMemo(() => {
         const regionOptions = Object.entries(regions.main).map(([code, name]) => ({
@@ -246,9 +258,24 @@ export default function Filters({ regions }: FiltersProps) {
                     />
                 </div>
                 <div className="d-flex gap-2">
-                    <button className="btn btn-purple btn-compare">
-                        Compare
-                    </button>
+                    {
+                        compareOn ? (
+                            <button
+                                className="btn bg-red-600 text-white"
+                                onClick={() => setCompareOn(false)}
+                            >
+                                End Compare
+                            </button>
+                        ) : (
+                            <button
+                                disabled={!anySelected}
+                                className="btn btn-purple btn-compare disabled:opacity-50"
+                                onClick={() => setCompareOn(true)}
+                            >
+                                Compare
+                            </button>
+                        )
+                    }
                     <button
                         className="btn btn-outline-secondary btn-clear"
                         onClick={clearGSettings}
@@ -271,7 +298,8 @@ export default function Filters({ regions }: FiltersProps) {
                             type="text"
                             className="form-control not-xl:hidden"
                             placeholder="Search..."
-                            value={searchTerm}
+                            value={compareOn ? valuePreCompareOn : searchTerm}
+                            disabled={compareOn}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>

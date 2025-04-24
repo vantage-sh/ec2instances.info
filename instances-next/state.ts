@@ -8,6 +8,9 @@ import { usePathname } from "next/navigation";
 import GSettings from "@/utils/g_settings_port";
 import { safeParse } from "valibot";
 import { makeColumnVisibilitySchema } from "./utils/columnVisibility";
+import { RowSelectionState } from "@tanstack/react-table";
+
+export const rowSelectionAtom = atom<RowSelectionState>({});
 
 const exportEvents: Set<() => void> = new Set();
 
@@ -139,6 +142,11 @@ export function useDuration() {
 
 export function useReservedTerm() {
     return useGSettingsValue("reservedTerm", "yrTerm1Standard.noUpfront");
+}
+
+export function useCompareOn() {
+    const [v, set] = useGSettingsValue("compareOn", false);
+    return [v, gSettingsHolder[0]?.filterPreCompareOn, set] as const;
 }
 
 const undefinedPtr: [GSettings | undefined, number] = [undefined, 0];

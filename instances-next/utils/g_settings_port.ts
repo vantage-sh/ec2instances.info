@@ -82,6 +82,7 @@ export default class GSettings {
     settings: typeof g_settings_default;
     key: string;
     filterData = "";
+    filterPreCompareOn = "";
 
     constructor(azure: boolean) {
         this.key = azure ? "azure_settings" : "aws_settings";
@@ -281,16 +282,31 @@ export default class GSettings {
     }
 
     set compareOn(value: boolean) {
+        if (value) {
+            this.filterPreCompareOn = this.filter;
+            this.filter = this.selected.join("|");
+            this.selected = [];
+        } else {
+            this.selected = this.filter.split("|");
+            this.filter = this.filterPreCompareOn;
+        }
         this.settings.compare_on = value;
         this._write();
     }
 
     get selected() {
-        return this.settings.selected.split(",");
+        const v = this.settings.selected.split(",");
+        if (v.length === 1 && v[0] === "") {
+            return [];
+        }
+        return v;
     }
 
     set selected(value: string[]) {
         this.settings.selected = value.join(",");
+        if (this.settings.selected === ",") {
+            this.settings.selected = "";
+        }
         this._write();
     }
 
