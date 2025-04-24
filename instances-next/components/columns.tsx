@@ -1,5 +1,5 @@
 import { Instance } from "@/types";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, Row } from "@tanstack/react-table";
 
 interface Storage {
     devices: number;
@@ -10,6 +10,12 @@ interface Storage {
 }
 
 // TODO: factor in pricing unit and cost duration
+
+function gt(row: Row<Instance>, columnId: string, filterValue: number) {
+    const value = row.original[columnId as keyof Instance];
+    if (typeof value !== "number") return false;
+    return value >= filterValue;
+}
 
 export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instance>[] => [
     {
@@ -38,6 +44,7 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         accessorKey: "memory",
         header: "Instance Memory",
         id: "memory",
+        filterFn: gt,
         cell: (info) => `${info.getValue() as number} GiB`,
     },
     {
@@ -81,6 +88,7 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         accessorKey: "vCPU",
         header: "vCPUs",
         id: "vCPU",
+        filterFn: gt,
         cell: (info) => {
             const value = info.getValue() as number;
             const burstMinutes = info.row.original.burst_minutes;
@@ -108,6 +116,7 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         accessorKey: "memory_per_vcpu",
         header: "GiB of Memory per vCPU",
         id: "memory_per_vcpu",
+        filterFn: gt,
         cell: (info) => {
             const value = info.getValue();
             if (value === "unknown") return "unknown";
@@ -118,6 +127,7 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         accessorKey: "GPU",
         header: "GPUs",
         id: "GPU",
+        filterFn: gt,
         cell: (info) => info.getValue() as number,
     },
     {
@@ -130,6 +140,7 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         accessorKey: "GPU_memory",
         header: "GPU memory",
         id: "GPU_memory",
+        filterFn: gt,
         cell: (info) => `${info.getValue() as number} GiB`,
     },
     {
@@ -209,6 +220,13 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         accessorKey: "storage",
         header: "Instance Storage",
         id: "storage",
+        filterFn: (row, _, filterValue) => {
+            if (filterValue === 0) return true;
+            const storage = row.original.storage;
+            if (!storage) return false;
+            const totalSize = storage.devices * storage.size;
+            return totalSize >= filterValue;
+        },
         cell: (info) => {
             const storage = info.getValue() as Storage;
             if (!storage) return "EBS only";
@@ -309,6 +327,12 @@ export default (selectedRegion: string, reservedTerm: string): ColumnDef<Instanc
         accessorKey: "vpc",
         header: "Max IPs",
         id: "maxips",
+        filterFn: (row, _, filterValue) => {
+            const vpc = row.original.vpc;
+            if (!vpc) return false;
+            const maxIps = vpc.max_enis * vpc.ips_per_eni;
+            return maxIps >= filterValue;
+        },
         cell: (info) => {
             const vpc = info.getValue() as any;
             if (!vpc) return "N/A";
