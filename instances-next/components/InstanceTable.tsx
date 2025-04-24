@@ -18,7 +18,6 @@ import {
 } from "@/state";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useCallback, useEffect, useMemo, useRef } from "react";
-import React from "react";
 import IndividualColumnFilter from "./IndividualColumnFilter";
 import columnsGen from "./columns";
 
