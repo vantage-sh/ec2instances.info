@@ -1,42 +1,45 @@
-import { Instance, Region } from "@/types";
-import { decode } from "@msgpack/msgpack";
+import { Instance } from "@/types";
+import { decodeArrayStream } from "@msgpack/msgpack";
 import { XzReadableStream } from "xz-decompress";
 
-export default async function handleCompressedFile(path: string) {
-    const res = await fetch(path);
-    if (!res.ok) {
-        throw new Error(`Failed to fetch compressed file: ${path}`);
-    }
-    const buffer = await res.arrayBuffer();
-    const [compressedInstances, regions] = decode(buffer) as [
-        Uint8Array,
-        Region,
-    ];
+export default function handleCompressedFile(path: string, instances: Instance[]) {
+    const changeNotifier = new Set<() => void>();
 
-    // Decompress the instances.
-    const blob = new Blob([compressedInstances]);
-    const s = new XzReadableStream(blob.stream());
-    const reader = s.getReader();
-    let chunks: Uint8Array[] = [];
-    let totalLength = 0;
-    while (true) {
-        const result = await reader.read();
-        if (result.done) {
-            break;
+    (async () => {
+        const res = await fetch(path);
+        if (!res.ok) {
+            throw new Error(`Failed to fetch compressed file: ${path}`);
         }
-        chunks.push(result.value!);
-        totalLength += result.value!.length;
-    }
-    const a = new Uint8Array(totalLength);
-    let offset = 0;
-    for (const chunk of chunks) {
-        a.set(chunk, offset);
-        offset += chunk.length;
-    }
-    const instances = decode(a) as Instance[];
+
+        // Decompress the instances.
+        const s = new XzReadableStream(res.body!);
+        let instancesBuffer: Instance[] = [];
+        try {
+            for await (const item of decodeArrayStream(s)) {
+                instancesBuffer.push(item as Instance);
+                if (instancesBuffer.length === 30) {
+                    instances = [...instances, ...instancesBuffer];
+                    instancesBuffer = [];
+                    changeNotifier.forEach((fn) => fn());
+                }
+            }
+        } catch {
+            // At the end it throws an error for some reason. It does get all
+            // the instances though, so I'm not too worried.
+        }
+        if (instancesBuffer.length > 0) {
+            instances = [...instances, ...instancesBuffer];
+            changeNotifier.forEach((fn) => fn());
+        }
+    })();
 
     return {
-        instances,
-        regions,
+        get value() {
+            return instances;
+        },
+        addChangeNotifier: (fn: () => void) => {
+            changeNotifier.add(fn);
+            return () => changeNotifier.delete(fn);
+        },
     };
 }

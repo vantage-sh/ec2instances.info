@@ -79,19 +79,30 @@ async function main() {
     }
 
     // Encode and then compress the instances.
-    const instancesEncoded = encode(instances);
+    const first30Instances = instances.slice(0, 30);
+    const remainingInstances = instances.slice(30);
+    const first30InstancesEncoded = encode(first30Instances);
+    const remainingInstancesEncoded = encode(remainingInstances);
     console.log("Compressing AWS instances data...");
-    const compressedInstances: Buffer = await new Promise((res) => {
-        compress(Buffer.from(instancesEncoded), {}, (result) => {
+    const compressedRemainingInstances: Buffer = await new Promise((res) => {
+        compress(Buffer.from(remainingInstancesEncoded), {}, (result) => {
             res(result);
         });
     });
 
     await writeFile(
-        "./public/instances-compressed.msgpack",
-        encode([compressedInstances, regions]),
+        "./public/instances-regions.msgpack",
+        encode(regions),
     );
-    console.log("AWS instances data compressed and saved to ./public/instances-compressed.msgpack");
+    await writeFile(
+        "./public/first-30-instances.msgpack",
+        first30InstancesEncoded,
+    );
+    await writeFile(
+        "./public/remaining-instances.msgpack.xz",
+        compressedRemainingInstances,
+    );
+    console.log("AWS instances data compressed and saved");
 }
 
 main();
