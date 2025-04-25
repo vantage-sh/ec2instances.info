@@ -17,7 +17,7 @@ export default function handleCompressedFile(path: string, instances: Instance[]
         try {
             for await (const item of decodeArrayStream(s)) {
                 instancesBuffer.push(item as Instance);
-                if (instancesBuffer.length === 30) {
+                if (instancesBuffer.length === 100) {
                     instances = [...instances, ...instancesBuffer];
                     instancesBuffer = [];
                     changeNotifier.forEach((fn) => fn());
