@@ -13,7 +13,6 @@ import {
     callExportEvents,
     clearGSettings,
     useCompareOn,
-    rowSelectionAtom,
 } from "@/state";
 import type { ColumnVisibility } from "@/utils/columnVisibility";
 import {
@@ -22,12 +21,14 @@ import {
     reservedTermOptions,
 } from "@/utils/dataMappings";
 import { useMemo } from "react";
+import { RowSelectionState } from "@tanstack/react-table";
 
 interface FiltersProps {
     regions: Region;
+    rowSelection: RowSelectionState;
 }
 
-export default function Filters({ regions }: FiltersProps) {
+export default function Filters({ regions, rowSelection }: FiltersProps) {
     const columnVisibility = columnVisibilityAtom.use();
     const [searchTerm, setSearchTerm] = useSearchTerm();
     const [selectedRegion, setSelectedRegion] = useSelectedRegion();
@@ -35,11 +36,10 @@ export default function Filters({ regions }: FiltersProps) {
     const [duration, setDuration] = useDuration();
     const [reservedTerm, setReservedTerm] = useReservedTerm();
     const [compareOn, valuePreCompareOn, setCompareOn] = useCompareOn();
-    const selected = rowSelectionAtom.use();
 
     let anySelected = false;
-    for (const key in selected) {
-        if (selected[key]) {
+    for (const key in rowSelection) {
+        if (rowSelection[key]) {
             anySelected = true;
             break;
         }

@@ -2,13 +2,21 @@
 
 import { useInstanceData } from "@/state";
 import InstanceTable from "@/components/InstanceTable";
-import Loading from "@/components/Loading";
-import { Instance } from "@/types";
+import { Instance, Region } from "@/types";
+import Filters from "@/components/Filters";
+import { useState } from "react";
+import { RowSelectionState } from "@tanstack/react-table";
 
-export default function Client({ first50Instances }: { first50Instances: Instance[] }) {
+export default function Client({ regions, first50Instances }: { regions: Region, first50Instances: Instance[] }) {
     const instances = useInstanceData("/remaining-instances.msgpack.xz", first50Instances);
-    if (!instances) {
-        return <Loading />;
-    }
-    return <InstanceTable instances={instances} />;
+    const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
+    return (
+        <main className="h-screen flex flex-col">
+            <Filters regions={regions} rowSelection={rowSelection} />
+            <div className="flex-1 min-h-0">
+                <InstanceTable instances={instances} rowSelection={rowSelection} setRowSelection={setRowSelection} />
+            </div>
+        </main>
+    );
 }

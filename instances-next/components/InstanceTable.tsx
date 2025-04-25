@@ -9,6 +9,7 @@ import {
     ColumnFiltersState,
     SortingState,
     getSortedRowModel,
+    RowSelectionState,
 } from "@tanstack/react-table";
 import { Instance } from "@/types";
 import {
@@ -20,17 +21,18 @@ import {
     useGSettings,
     usePricingUnit,
     useDuration,
-    rowSelectionAtom,
     useCompareOn,
 } from "@/state";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import IndividualColumnFilter from "./IndividualColumnFilter";
 import columnsGen from "./columns";
 import SortToggle from "./SortToggle";
 
 interface InstanceTableProps {
     instances: Instance[];
+    rowSelection: RowSelectionState;
+    setRowSelection: (value: SetStateAction<RowSelectionState>) => void;
 }
 
 function csvEscape(input: string) {
@@ -47,7 +49,7 @@ function csvEscape(input: string) {
 // Hack to stop Tanstack Table from thinking the array changed.
 const emptyColumnFilters: ColumnFiltersState = [];
 
-export default function InstanceTable({ instances }: InstanceTableProps) {
+export default function InstanceTable({ instances, rowSelection, setRowSelection }: InstanceTableProps) {
     const columnVisibility = columnVisibilityAtom.use();
     const [searchTerm] = useSearchTerm();
     const [selectedRegion] = useSelectedRegion();
@@ -56,7 +58,6 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
     const [reservedTerm] = useReservedTerm();
     const [gSettings, gSettingsFullMutations] = useGSettings();
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-    const rowSelection = rowSelectionAtom.use();
     const [compareOn] = useCompareOn();
     const [sorting, setSorting] = useState<SortingState>([]);
 
@@ -98,11 +99,12 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
     const columns = columnsGen(selectedRegion, pricingUnit, costDuration, reservedTerm);
 
     const data = useMemo(() => {
-        if (compareOn) {
-            return instances.filter(i => rowSelection[i.instance_type]);
+        if (compareOn && gSettings) {
+            const selectedInstances = gSettings.filter.split("|");
+            return instances.filter(i => selectedInstances.includes(i.instance_type));
         }
         return instances;
-    }, [compareOn, rowSelection, instances]);
+    }, [compareOn, gSettingsFullMutations, instances]);
 
     const table = useReactTable({
         data,
@@ -123,27 +125,7 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
         enableFilters: true,
         onColumnFiltersChange: setColumnFilters,
         enableMultiRowSelection: true,
-        onRowSelectionChange: (state) => {
-            if (typeof state === "function") {
-                return rowSelectionAtom.mutate((old) => {
-                    const res = state(old);
-                    const oldKeys = Object.keys(old);
-                    for (const key of oldKeys) {
-                        if (key in res) {
-                            old[key] = res[key];
-                        } else {
-                            delete old[key];
-                        }
-                    }
-                    const onlyNew = Object.keys(res).filter(k => !(k in old));
-                    for (const key of onlyNew) {
-                        old[key] = res[key];
-                    }
-                    return old;
-                });
-            }
-            rowSelectionAtom.set(state);
-        },
+        onRowSelectionChange: setRowSelection,
         columnResizeMode: "onChange",
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
@@ -200,19 +182,13 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
             : 0;
 
     // Handle synchronising the rows with the global settings.
-    const first = useRef(true);
     useEffect(() => {
-        if (first.current) {
-            // Also zero the row selection atom in case it was set from a previous render
-            rowSelectionAtom.set({});
-            first.current = false;
-        }
         if (!gSettings) return;
-        const selectedInstances = gSettings.selected;
+        const selectedInstances = compareOn ? gSettings.filter.split("|") : gSettings.selected;
         for (const row of rows) {
             row.toggleSelected(selectedInstances.includes(row.original.instance_type));
         }
-    }, [gSettingsFullMutations, rows]);
+    }, [gSettingsFullMutations, rows, compareOn]);
 
     const handleRow = useCallback(
         (row: Row<Instance>) => {

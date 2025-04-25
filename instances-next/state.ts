@@ -30,12 +30,17 @@ export function useInstanceData(path: string, initialInstances: Instance[]) {
             const unregister = p.addChangeNotifier(onStoreChange);
             return unregister;
         },
-        () => preloadedValues[path].value,
+        () => {
+            let p = preloadedValues[path];
+            if (!p) {
+                p = handleCompressedFile(path, initialInstances);
+                preloadedValues[path] = p;
+            }
+            return p.value;
+        },
         () => initialInstances,
     );
 }
-
-export const rowSelectionAtom = atom<RowSelectionState>({});
 
 const exportEvents: Set<() => void> = new Set();
 
