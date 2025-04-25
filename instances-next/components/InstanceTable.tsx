@@ -239,7 +239,8 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
     return (
         <div className="w-full h-full">
             <div ref={tableContainerRef} className="h-full overflow-auto">
-                <table className="w-full table-fixed border-collapse">
+                {/* MOVE CLASSES TO GLOBAL CSS */}
+                <table className="index-table">
                     <colgroup>
                         {table.getVisibleLeafColumns().map((column) => (
                             <col
@@ -248,19 +249,22 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                             />
                         ))}
                     </colgroup>
-                    <thead className="sticky top-0 z-10 bg-gray-50">
+                    <thead>
                         {table.getHeaderGroups().map((headerGroup) => (
                             <tr key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => (
                                     <th
                                         key={header.id}
-                                        className="whitespace-nowrap overflow-hidden text-ellipsis text-left relative"
                                     >
-                                        <div className="mx-2 mt-2">
-                                            {flexRender(
-                                                header.column.columnDef.header,
-                                                header.getContext(),
-                                            )}
+                                        <div className="mx-2 mt-2 flex items-center justify-between">
+                                            <span className="cursor-pointer select-none" onClick={() => 
+                                                setSorting((old) => [{ id: header.id, desc: old.find(s => s.id === header.id)?.desc === false }])
+                                            }>
+                                                {flexRender(
+                                                    header.column.columnDef.header,
+                                                    header.getContext(),
+                                                )}
+                                            </span>
                                             <SortToggle
                                                 value={sorting.find(s => s.id === header.id)?.desc}
                                                 setValue={(value) => setSorting((old) => {
@@ -276,13 +280,6 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                                 })}
                                             />
                                         </div>
-                                        <div
-                                            onMouseDown={header.getResizeHandler()}
-                                            onTouchStart={header.getResizeHandler()}
-                                            className={`absolute right-0 top-0 bottom-0 w-1 cursor-col-resize select-none touch-none z-20 ${
-                                                header.column.getIsResizing() ? 'bg-blue-500' : 'bg-gray-200'
-                                            }`}
-                                        />
                                         {header.column.getCanFilter() && !compareOn && (
                                             <div className="mt-2 mb-2 ml-2 mr-3">
                                                 <IndividualColumnFilter
@@ -298,7 +295,18 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                             </tr>
                         ))}
                     </thead>
-                    <tbody ref={tableBodyRef} className="relative">
+                    <tbody ref={tableBodyRef}>
+                        <tr className="resize-row">
+                            {table.getHeaderGroups()[0].headers.map((header) => (
+                                <td key={header.id}>
+                                    <div
+                                        onMouseDown={header.getResizeHandler()}
+                                        onTouchStart={header.getResizeHandler()}
+                                        className="absolute z-10 right-0 h-[9999vh] w-1 cursor-col-resize select-none touch-none hover:bg-gray-100 active:bg-blue-200"
+                                    />
+                                </td>
+                            ))}
+                        </tr>
                         {paddingTop > 0 && (
                             <tr>
                                 <td
@@ -309,33 +317,22 @@ export default function InstanceTable({ instances }: InstanceTableProps) {
                                 />
                             </tr>
                         )}
-                        {virtualRows.map((virtualRow) => {
+                        {virtualRows.map((virtualRow, vrIndex) => {
                             const row = rows[virtualRow.index];
                             return (
                                 <tr
                                     onClick={() => handleRow(row)}
                                     key={row.id}
-                                    className={`border-b border-gray-200 ${row.getIsSelected() ? "bg-purple-50" : ""}`}
+                                    className={` ${row.getIsSelected() ? "bg-purple-50" : ""}`}
                                 >
                                     {row.getVisibleCells().map((cell) => (
                                         <td
                                             key={cell.id}
-                                            className="py-1 whitespace-nowrap overflow-hidden text-ellipsis relative"
                                         >
-                                            <div className="ml-2 mr-3">
-                                                {flexRender(
-                                                    cell.column.columnDef.cell,
-                                                    cell.getContext(),
-                                                )}
-                                            </div>
-                                            {cell.column.getCanResize() && (
-                                                <div
-                                                    onMouseDown={table.getHeaderGroups()[0].headers.find(h => h.column.id === cell.column.id)?.getResizeHandler()}
-                                                    onTouchStart={table.getHeaderGroups()[0].headers.find(h => h.column.id === cell.column.id)?.getResizeHandler()}
-                                                    className={`absolute right-0 top-0 bottom-0 w-1 cursor-col-resize select-none touch-none ${
-                                                        cell.column.getIsResizing() ? 'bg-blue-500' : 'bg-gray-200'
-                                                    }`}
-                                                />
+                                            {flexRender(
+                                                cell.column.columnDef.cell,
+                                                cell.getContext(),
+
                                             )}
                                         </td>
                                     ))}

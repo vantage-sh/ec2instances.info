@@ -24,30 +24,44 @@ body {
     margin: 0;
 }
 
-.table {
-    border: 1px solid var(--color-gray-5);
-    font-size: 14px;
-    width: 100%;
-    margin-bottom: 24px !important;
-    border-radius: 6px;
+.index-table {
+    @apply w-full caption-bottom text-[13px] table-fixed border-collapse overflow-hidden;
 }
 
-.table th {
-    font-weight: 600;
-    background-color: var(--color-gray-7) !important;
-    vertical-align: middle;
+.index-table thead {
+    @apply sticky top-0 z-10;
 }
 
-.table td {
-    vertical-align: middle;
+.index-table th {
+    @apply whitespace-nowrap overflow-hidden text-ellipsis text-left relative bg-gray-100;
 }
 
-.table a {
+.index-table tbody {
+    @apply [&_tr:last-child]:border-0 leading-tight;
+}
+
+.index-table tbody tr {
+    @apply border-b border-gray-100 transition-colors hover:bg-gray-100/50 data-[state=selected]:bg-gray-100;
+}
+
+.index-table tbody td {
+    @apply py-2 pl-2 pr-3 whitespace-nowrap text-ellipsis relative align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px];
+}
+
+.index-table tbody tr.resize-row, .index-table tbody tr.resize-row td {
+    @apply h-0 p-0;
+}
+
+.index-table tbody tr:not(:first-child) td {
+    @apply overflow-hidden;
+}
+
+.index-table a {
     text-decoration: none !important;
     color: var(--color-purple-1);
 }
 
-.table a:hover {
+.index-table a:hover {
     color: var(--color-purple-0);
 }
 
