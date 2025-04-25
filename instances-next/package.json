@@ -3,29 +3,35 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
+        "init": "tsx utils/conpressAwsData.ts",
         "dev": "next dev --turbopack",
-        "build": "next build",
+        "build": "npm run init && next build",
         "start": "next start",
         "format": "prettier --check .",
         "format:fix": "prettier --write ."
     },
     "dependencies": {
+        "@msgpack/msgpack": "^3.1.1",
         "@tailwindcss/postcss": "^4.1.4",
         "@tanstack/react-table": "^8.21.3",
         "@tanstack/react-virtual": "^3.13.6",
         "atomtree": "^1.0.3",
+        "lzma-native": "^8.0.6",
         "next": "^15.3.1",
         "postcss": "^8.5.3",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
         "tailwindcss": "^4.1.4",
-        "valibot": "^1.0.0"
+        "valibot": "^1.0.0",
+        "xz-decompress": "^0.2.2"
     },
     "devDependencies": {
+        "@types/lzma-native": "^4.0.4",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
         "prettier": "^3.5.3",
+        "tsx": "^4.19.3",
         "typescript": "^5"
     }
 }

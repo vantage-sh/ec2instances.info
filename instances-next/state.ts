@@ -3,12 +3,40 @@ import {
     initialColumnsValue,
     ColumnVisibility,
 } from "./utils/columnVisibility";
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import GSettings from "@/utils/g_settings_port";
 import { safeParse } from "valibot";
 import { makeColumnVisibilitySchema } from "./utils/columnVisibility";
 import { RowSelectionState } from "@tanstack/react-table";
+import { Instance, Region } from "./types";
+import handleCompressedFile from "./utils/handleCompressedFile";
+
+const preloadedValues: {
+    [path: string]: Promise<{
+        instances: Instance[];
+        regions: Region;
+    }>;
+} = {};
+
+export function useInstanceData(path: string) {
+    const [instances, setInstances] = useState<Instance[] | null>(null);
+    const [regions, setRegions] = useState<Region | null>(null);
+
+    useEffect(() => {
+        let p = preloadedValues[path];
+        if (!p) {
+            p = handleCompressedFile(path);
+            preloadedValues[path] = p;
+        }
+        p.then(({ instances, regions }) => {
+            setInstances(instances);
+            setRegions(regions);
+        });
+    }, [path]);
+
+    return [instances, regions] as const;
+}
 
 export const rowSelectionAtom = atom<RowSelectionState>({});
 
