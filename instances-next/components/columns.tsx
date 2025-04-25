@@ -7,6 +7,8 @@ interface Storage {
     size_unit: string;
     nvme_ssd: boolean;
     ssd: boolean;
+    trim_support: boolean;
+    storage_needs_initialization: boolean;
 }
 
 function gt(row: Row<Instance>, columnId: string, filterValue: number) {
@@ -315,22 +317,42 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         accessorKey: "storage",
         header: "Instance Storage: already warmed-up",
         id: "warmed-up",
-        // TODO: Fix this
+        sortingFn: (rowA, rowB) => {
+            const storageA = rowA.original.storage;
+            const storageB = rowB.original.storage;
+            if (!storageA) return -1;
+            if (!storageB) return 1;
+            return storageA.storage_needs_initialization ? 1 : -1;
+        },
         cell: (info) => {
             const storage = info.getValue() as Storage;
             if (!storage) return "N/A";
-            return "N/A";
+            if (storage.storage_needs_initialization === undefined) throw new Error("storage_needs_initialization is undefined");
+            return storage.storage_needs_initialization ? "No" : "Yes";
         },
     },
     {
         accessorKey: "storage",
         header: "Instance Storage: SSD TRIM Support",
         id: "trim-support",
-        // TODO: Fix this
+        sortingFn: (rowA, rowB) => {
+            const storageA = rowA.original.storage;
+            const storageB = rowB.original.storage;
+            if (!storageA) return -1;
+            if (!storageB) return 1;
+            if (!storageA.ssd) return -1;
+            if (!storageB.ssd) return 1;
+            const valueA = storageA.trim_support;
+            const valueB = storageB.trim_support;
+            if (valueA === undefined) return -1;
+            if (valueB === undefined) return 1;
+            return valueA ? 1 : -1;
+        },
         cell: (info) => {
             const storage = info.getValue() as Storage;
             if (!storage || !storage.ssd) return "N/A";
-            return "N/A";
+            if (storage.trim_support === undefined) throw new Error("trim_support is undefined");
+            return storage.trim_support ? "Yes" : "No";
         },
     },
     {
