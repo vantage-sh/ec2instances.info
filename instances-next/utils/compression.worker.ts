@@ -26,4 +26,5 @@ onmessage = async (e) => {
         // the instances though, so I'm not too worried.
     }
     if (instancesBuffer.length > 0) postMessage(instancesBuffer);
+    postMessage(null);
 };

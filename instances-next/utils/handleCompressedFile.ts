@@ -18,7 +18,11 @@ export default function handleCompressedFile(path: string, instances: Instance[]
 
     const changeNotifier = new Set<() => void>();
     worker.onmessage = (e) => {
-        const newInstances = e.data as Instance[];
+        const newInstances = e.data as Instance[] | null;
+        if (!newInstances) {
+            worker.terminate();
+            return;
+        }
         instances = [...instances, ...newInstances];
         for (const fn of changeNotifier) {
             fn();
