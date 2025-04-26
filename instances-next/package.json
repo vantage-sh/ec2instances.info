@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "init": "tsx utils/conpressAwsData.ts",
+        "init": "tsx utils/compressAwsData.ts",
         "dev": "next dev --turbopack",
         "build": "npm run init && next build",
         "start": "next start",
