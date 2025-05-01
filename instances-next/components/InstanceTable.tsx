@@ -169,7 +169,8 @@ export default function InstanceTable({ instances, rowSelection, setRowSelection
     const rowVirtualizer = useVirtualizer({
         count: rows.length,
         getScrollElement: () => tableContainerRef.current,
-        estimateSize: () => 35,
+        estimateSize: () => 30,
+        measureElement: (element) => element.getBoundingClientRect().height,
         overscan: 10,
     });
 
@@ -278,7 +279,8 @@ export default function InstanceTable({ instances, rowSelection, setRowSelection
                                     <div
                                         onMouseDown={header.getResizeHandler()}
                                         onTouchStart={header.getResizeHandler()}
-                                        className="absolute z-10 right-0 h-[9999vh] w-1 cursor-col-resize select-none touch-none hover:bg-gray-100 active:bg-blue-200"
+                                        style={{ height: `${totalHeight}px` }}
+                                        className="absolute z-10 right-0 w-1 cursor-col-resize select-none touch-none hover:bg-gray-100 active:bg-blue-200"
                                     />
                                 </td>
                             ))}
@@ -293,7 +295,7 @@ export default function InstanceTable({ instances, rowSelection, setRowSelection
                                 />
                             </tr>
                         )}
-                        {virtualRows.map((virtualRow, vrIndex) => {
+                        {virtualRows.map((virtualRow) => {
                             const row = rows[virtualRow.index];
                             return (
                                 <tr
@@ -308,7 +310,6 @@ export default function InstanceTable({ instances, rowSelection, setRowSelection
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext(),
-
                                             )}
                                         </td>
                                     ))}
