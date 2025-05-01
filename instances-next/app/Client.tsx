@@ -7,8 +7,8 @@ import Filters from "@/components/Filters";
 import { useState } from "react";
 import { RowSelectionState } from "@tanstack/react-table";
 
-export default function Client({ regions, first50Instances }: { regions: Region, first50Instances: Instance[] }) {
-    const instances = useInstanceData("/remaining-instances.msgpack.xz", first50Instances);
+export default function Client({ regions, first30Instances }: { regions: Region, first30Instances: Instance[] }) {
+    const instances = useInstanceData("/remaining-instances.msgpack.xz", first30Instances);
     const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
     return (
