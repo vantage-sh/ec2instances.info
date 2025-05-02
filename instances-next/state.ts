@@ -8,7 +8,6 @@ import { usePathname } from "next/navigation";
 import GSettings from "@/utils/g_settings_port";
 import { safeParse } from "valibot";
 import { makeColumnVisibilitySchema } from "./utils/columnVisibility";
-import { RowSelectionState } from "@tanstack/react-table";
 import { Instance } from "./types";
 import handleCompressedFile from "./utils/handleCompressedFile";
 
@@ -60,12 +59,12 @@ export function useHookToExportButton(hn: () => void) {
     }, []);
 }
 
-function createColumnVisibilityAtom() {
+function createColumnVisibilityAtomForKey(key: string) {
     const atomRes = atom({ ...initialColumnsValue });
 
     const localStorageValue =
         typeof window !== "undefined"
-            ? localStorage.getItem("columnVisibility")
+            ? localStorage.getItem(`columnVisibility_${key}`)
             : null;
     if (localStorageValue) {
         const res = safeParse(
@@ -80,19 +79,19 @@ function createColumnVisibilityAtom() {
     return {
         ...atomRes,
         set: (newValue: ColumnVisibility) => {
-            localStorage.setItem("columnVisibility", JSON.stringify(newValue));
+            localStorage.setItem(`columnVisibility_${key}`, JSON.stringify(newValue));
             atomRes.set(newValue);
         },
         mutate: (fn: (value: ColumnVisibility) => void) => {
             atomRes.mutate((value) => {
                 fn(value);
-                localStorage.setItem("columnVisibility", JSON.stringify(value));
+                localStorage.setItem(`columnVisibility_${key}`, JSON.stringify(value));
             });
         },
     };
 }
 
-export const columnVisibilityAtom = createColumnVisibilityAtom();
+export const columnVisibilityAtom = createColumnVisibilityAtomForKey("aws");
 
 let gSettingsHolder: [GSettings | undefined, number] = [undefined, 0];
 
