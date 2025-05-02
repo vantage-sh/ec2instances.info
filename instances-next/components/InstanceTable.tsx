@@ -169,7 +169,7 @@ export default function InstanceTable({ instances, rowSelection, setRowSelection
     const rowVirtualizer = useVirtualizer({
         count: rows.length,
         getScrollElement: () => tableContainerRef.current,
-        estimateSize: () => 30,
+        estimateSize: () => 33.3,
         measureElement: (element) => element.getBoundingClientRect().height,
         overscan: 10,
     });
