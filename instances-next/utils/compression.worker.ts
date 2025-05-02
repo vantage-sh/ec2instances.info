@@ -1,6 +1,7 @@
-import { Instance, Pricing } from "@/types";
+import { Instance } from "@/types";
 import { decodeArrayStream } from "@msgpack/msgpack";
 import { XzReadableStream } from "xz-decompress";
+import processRainbowTable from "./processRainbowTable";
 
 onmessage = async (e) => {
     const { url }: { url: string } = e.data;
@@ -14,48 +15,6 @@ onmessage = async (e) => {
     const s = new XzReadableStream(res.body!);
     let instancesBuffer: Instance[] = [];
     let pricingRainbowTable: Map<number, string> | null = null;
-    const processRainbowTable = (instance: Instance) => {
-        // @ts-expect-error: This is intentionally the wrong type.
-        const pricing: [
-            // Region
-            number,
-            [
-                // Platform
-                number,
-                [
-                    // Key inside platform
-                    number,
-                    any,
-                ][],
-            ][],
-        ][] = instance.pricing;
-        const newPricing: Pricing = {};
-        for (const region of pricing) {
-            const regionKey = pricingRainbowTable!.get(region[0]);
-            const platforms: Pricing[string] = {};
-            for (const platform of region[1]) {
-                const platformKey = pricingRainbowTable!.get(platform[0]);
-                const kv: { [key: string]: any } = {};
-                for (const v of platform[1]) {
-                    const key = pricingRainbowTable!.get(v[0])!;
-                    if (key === "reserved") {
-                        const reserved: any = {};
-                        for (const reservedKv of v[1]) {
-                            reserved[pricingRainbowTable!.get(reservedKv[0])!] = reservedKv[1];
-                        }
-                        kv[key] = reserved;
-                    } else {
-                        kv[key] = v[1];
-                    }
-                }
-                // @ts-expect-error: This is intentionally the wrong type.
-                platforms[platformKey] = kv;
-            }
-            newPricing[regionKey!] = platforms;
-        }
-        instance.pricing = newPricing;
-        return instance;
-    };
     try {
         for await (const item of decodeArrayStream(s)) {
             if (pricingRainbowTable === null) {
@@ -66,7 +25,7 @@ onmessage = async (e) => {
                 }
                 continue;
             }
-            instancesBuffer.push(processRainbowTable(item as Instance));
+            instancesBuffer.push(processRainbowTable(pricingRainbowTable, item as Instance));
             if (instancesBuffer.length === 50) {
                 postMessage(instancesBuffer);
                 instancesBuffer = [];
