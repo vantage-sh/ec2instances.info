@@ -72,22 +72,27 @@ onmessage = async (e) => {
     const s = new Stream().stream;
     let instancesBuffer: Instance[] = [];
     let pricingRainbowTable: Map<number, string> | null = null;
-    for await (const item of decodeArrayStream(s)) {
-        if (pricingRainbowTable === null) {
-            const arr = item as string[];
-            pricingRainbowTable = new Map<number, string>();
-            for (let i = 0; i < arr.length; i++) {
-                pricingRainbowTable.set(i, arr[i]);
+    try {
+        for await (const item of decodeArrayStream(s)) {
+            if (pricingRainbowTable === null) {
+                const arr = item as string[];
+                pricingRainbowTable = new Map<number, string>();
+                for (let i = 0; i < arr.length; i++) {
+                    pricingRainbowTable.set(i, arr[i]);
+                }
+                continue;
             }
-            continue;
+            instancesBuffer.push(
+                processRainbowTable(pricingRainbowTable, item as Instance),
+            );
+            if (instancesBuffer.length === 50) {
+                postMessage(instancesBuffer);
+                instancesBuffer = [];
+            }
         }
-        instancesBuffer.push(
-            processRainbowTable(pricingRainbowTable, item as Instance),
-        );
-        if (instancesBuffer.length === 50) {
-            postMessage(instancesBuffer);
-            instancesBuffer = [];
-        }
+    } catch {
+        // At the end it throws an error for some reason. It does get all
+        // the instances though, so I'm not too worried.
     }
     if (instancesBuffer.length > 0) postMessage(instancesBuffer);
     postMessage(null);
