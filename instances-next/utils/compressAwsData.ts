@@ -50,7 +50,9 @@ function makeRainbowTable(instances: Instance[]) {
                     const keyIndex = rainbowTable.indexOf(key);
                     if (key === "reserved") {
                         const reserved: [number, string][] = [];
-                        for (const [key, value] of Object.entries(pricing[region][platform].reserved || {})) {
+                        for (const [key, value] of Object.entries(
+                            pricing[region][platform].reserved || {},
+                        )) {
                             reserved.push([rainbowTable.indexOf(key), value]);
                         }
                         kv.push([keyIndex, reserved]);
@@ -95,7 +97,9 @@ async function main() {
     const first30Instances = instances.slice(0, 30);
     const first30InstancesEncoded = encode(first30Instances);
     const remainingInstances = instances.slice(30);
-    const remainingInstancesEncoded = encode(makeRainbowTable(remainingInstances));
+    const remainingInstancesEncoded = encode(
+        makeRainbowTable(remainingInstances),
+    );
     console.log("Compressing AWS instances data...");
     const compressedRemainingInstances: Buffer = await new Promise((res) => {
         compress(Buffer.from(remainingInstancesEncoded), {}, (result) => {
@@ -103,10 +107,7 @@ async function main() {
         });
     });
 
-    await writeFile(
-        "./public/instances-regions.msgpack",
-        encode(regions),
-    );
+    await writeFile("./public/instances-regions.msgpack", encode(regions));
     await writeFile(
         "./public/first-30-instances.msgpack",
         first30InstancesEncoded,

@@ -1,4 +1,3 @@
-
 export interface Pricing {
     [region: string]: {
         [platform: string]: {
@@ -86,4 +85,11 @@ export interface Region {
 
 export type PricingUnit = "instance" | "vcpu" | "ecu" | "memory";
 
-export type CostDuration = "secondly" | "minutely" | "hourly" | "daily" | "weekly" | "monthly" | "annually";
+export type CostDuration =
+    | "secondly"
+    | "minutely"
+    | "hourly"
+    | "daily"
+    | "weekly"
+    | "monthly"
+    | "annually";

@@ -3,7 +3,7 @@
 type SortToggleProps = {
     value: boolean | undefined;
     setValue: (value: boolean) => void;
-}
+};
 
 export default function SortToggle({ value, setValue }: SortToggleProps) {
     return (

@@ -21,13 +21,16 @@ function GSettingsNumberFilter({
         setValue(initValue);
     }, [initValue]);
 
-    const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const v = e.target.valueAsNumber;
-        if (isNaN(v)) return;
-        setValue(v);
-        gSettingsSet(v);
-        column.setFilterValue(v);
-    }, [gSettingsFullMutations]);
+    const onChange = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const v = e.target.valueAsNumber;
+            if (isNaN(v)) return;
+            setValue(v);
+            gSettingsSet(v);
+            column.setFilterValue(v);
+        },
+        [gSettingsFullMutations],
+    );
 
     return (
         <input
@@ -42,7 +45,7 @@ function GSettingsNumberFilter({
 }
 
 type OnlyAllowedGSettingsKeys = {
-    [K in keyof GSettings]: GSettings[K] extends number ? K : never
+    [K in keyof GSettings]: GSettings[K] extends number ? K : never;
 }[keyof GSettings];
 
 const columnMapping: Record<string, OnlyAllowedGSettingsKeys> = {
@@ -64,12 +67,15 @@ export default function IndividualColumnFilter({
     gSettingsFullMutations: number;
     column: Column<Instance>;
 }) {
-    const set = useCallback((value: number) => {
-        const key = columnMapping[column.columnDef.id!];
-        if (key && gSettings) {
-            gSettings[key] = value;
-        }
-    }, [column.columnDef.id, gSettingsFullMutations]);
+    const set = useCallback(
+        (value: number) => {
+            const key = columnMapping[column.columnDef.id!];
+            if (key && gSettings) {
+                gSettings[key] = value;
+            }
+        },
+        [column.columnDef.id, gSettingsFullMutations],
+    );
 
     const key = columnMapping[column.columnDef.id!];
     if (key && gSettings) {
@@ -87,7 +93,7 @@ export default function IndividualColumnFilter({
     return (
         <input
             type="text"
-            value={(column.getFilterValue() as string) ?? ''}
+            value={(column.getFilterValue() as string) ?? ""}
             onChange={(e) => column.setFilterValue(e.target.value)}
             placeholder={`Filter ${column.columnDef.header as string}...`}
             className="w-full px-2 py-1 text-sm border rounded"

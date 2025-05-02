@@ -83,7 +83,7 @@ const initialColumnsArr = [
 ] as const;
 
 export const initialColumnsValue: {
-    [idx in typeof initialColumnsArr[number][0]]: boolean;
+    [idx in (typeof initialColumnsArr)[number][0]]: boolean;
 } = {} as any;
 for (const [key, value] of initialColumnsArr) {
     initialColumnsValue[key] = value;

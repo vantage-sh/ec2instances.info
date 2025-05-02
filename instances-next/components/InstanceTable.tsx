@@ -24,7 +24,14 @@ import {
     useCompareOn,
 } from "@/state";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+    SetStateAction,
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from "react";
 import IndividualColumnFilter from "./IndividualColumnFilter";
 import columnsGen from "./columns";
 import SortToggle from "./SortToggle";
@@ -49,7 +56,11 @@ function csvEscape(input: string) {
 // Hack to stop Tanstack Table from thinking the array changed.
 const emptyColumnFilters: ColumnFiltersState = [];
 
-export default function InstanceTable({ instances, rowSelection, setRowSelection }: InstanceTableProps) {
+export default function InstanceTable({
+    instances,
+    rowSelection,
+    setRowSelection,
+}: InstanceTableProps) {
     const columnVisibility = columnVisibilityAtom.use();
     const [searchTerm] = useSearchTerm();
     const [selectedRegion] = useSelectedRegion();
@@ -96,12 +107,19 @@ export default function InstanceTable({ instances, rowSelection, setRowSelection
         ]);
     }, [gSettingsFullMutations]);
 
-    const columns = columnsGen(selectedRegion, pricingUnit, costDuration, reservedTerm);
+    const columns = columnsGen(
+        selectedRegion,
+        pricingUnit,
+        costDuration,
+        reservedTerm,
+    );
 
     const data = useMemo(() => {
         if (compareOn && gSettings) {
             const selectedInstances = gSettings.filter.split("|");
-            return instances.filter(i => selectedInstances.includes(i.instance_type));
+            return instances.filter((i) =>
+                selectedInstances.includes(i.instance_type),
+            );
         }
         return instances;
     }, [compareOn, gSettingsFullMutations, instances]);
@@ -185,9 +203,13 @@ export default function InstanceTable({ instances, rowSelection, setRowSelection
     // Handle synchronising the rows with the global settings.
     useEffect(() => {
         if (!gSettings) return;
-        const selectedInstances = compareOn ? gSettings.filter.split("|") : gSettings.selected;
+        const selectedInstances = compareOn
+            ? gSettings.filter.split("|")
+            : gSettings.selected;
         for (const row of rows) {
-            row.toggleSelected(selectedInstances.includes(row.original.instance_type));
+            row.toggleSelected(
+                selectedInstances.includes(row.original.instance_type),
+            );
         }
     }, [gSettingsFullMutations, rows, compareOn]);
 
@@ -230,42 +252,91 @@ export default function InstanceTable({ instances, rowSelection, setRowSelection
                         {table.getHeaderGroups().map((headerGroup) => (
                             <tr key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => (
-                                    <th
-                                        key={header.id}
-                                    >
+                                    <th key={header.id}>
                                         <div className="mx-2 mt-2 flex items-center justify-between">
-                                            <span className="cursor-pointer select-none" onClick={() => 
-                                                setSorting((old) => [{ id: header.id, desc: old.find(s => s.id === header.id)?.desc === false }])
-                                            }>
+                                            <span
+                                                className="cursor-pointer select-none"
+                                                onClick={() =>
+                                                    setSorting((old) => [
+                                                        {
+                                                            id: header.id,
+                                                            desc:
+                                                                old.find(
+                                                                    (s) =>
+                                                                        s.id ===
+                                                                        header.id,
+                                                                )?.desc ===
+                                                                false,
+                                                        },
+                                                    ])
+                                                }
+                                            >
                                                 {flexRender(
-                                                    header.column.columnDef.header,
+                                                    header.column.columnDef
+                                                        .header,
                                                     header.getContext(),
                                                 )}
                                             </span>
                                             <SortToggle
-                                                value={sorting.find(s => s.id === header.id)?.desc}
-                                                setValue={(value) => setSorting((old) => {
-                                                    const inside = old.find(s => s.id === header.id);
-                                                    if (inside?.desc === value) {
-                                                        // Remove the sorting if it's already set.
-                                                        return old.filter(s => s.id !== header.id);
-                                                    }
-                                                    if (inside) {
-                                                        return old.map(s => s.id === header.id ? { ...s, desc: value } : s);
-                                                    }
-                                                    return [...old, { id: header.id, desc: value }];
-                                                })}
+                                                value={
+                                                    sorting.find(
+                                                        (s) =>
+                                                            s.id === header.id,
+                                                    )?.desc
+                                                }
+                                                setValue={(value) =>
+                                                    setSorting((old) => {
+                                                        const inside = old.find(
+                                                            (s) =>
+                                                                s.id ===
+                                                                header.id,
+                                                        );
+                                                        if (
+                                                            inside?.desc ===
+                                                            value
+                                                        ) {
+                                                            // Remove the sorting if it's already set.
+                                                            return old.filter(
+                                                                (s) =>
+                                                                    s.id !==
+                                                                    header.id,
+                                                            );
+                                                        }
+                                                        if (inside) {
+                                                            return old.map(
+                                                                (s) =>
+                                                                    s.id ===
+                                                                    header.id
+                                                                        ? {
+                                                                              ...s,
+                                                                              desc: value,
+                                                                          }
+                                                                        : s,
+                                                            );
+                                                        }
+                                                        return [
+                                                            ...old,
+                                                            {
+                                                                id: header.id,
+                                                                desc: value,
+                                                            },
+                                                        ];
+                                                    })
+                                                }
                                             />
                                         </div>
-                                        {header.column.getCanFilter() && !compareOn && (
-                                            <div className="mt-2 mb-2 ml-2 mr-3">
-                                                <IndividualColumnFilter
-                                                    gSettings={gSettings}
-                                                    gSettingsFullMutations={gSettingsFullMutations}
-                                                    column={header.column}
-                                                />
-                                            </div>
-                                        )}
+                                        {header.column.getCanFilter() &&
+                                            !compareOn && (
+                                                <div className="mt-2 mb-2 ml-2 mr-3">
+                                                    <IndividualColumnFilter
+                                                        gSettings={gSettings}
+                                                        gSettingsFullMutations={
+                                                            gSettingsFullMutations
+                                                        }
+                                                        column={header.column}
+                                                    />
+                                                </div>
+                                            )}
                                     </th>
                                 ))}
                                 <th></th>
@@ -274,16 +345,20 @@ export default function InstanceTable({ instances, rowSelection, setRowSelection
                     </thead>
                     <tbody ref={tableBodyRef}>
                         <tr className="resize-row">
-                            {table.getHeaderGroups()[0].headers.map((header) => (
-                                <td key={header.id}>
-                                    <div
-                                        onMouseDown={header.getResizeHandler()}
-                                        onTouchStart={header.getResizeHandler()}
-                                        style={{ height: `${totalHeight}px` }}
-                                        className="absolute z-10 right-0 w-1 cursor-col-resize select-none touch-none hover:bg-gray-100 active:bg-blue-200"
-                                    />
-                                </td>
-                            ))}
+                            {table
+                                .getHeaderGroups()[0]
+                                .headers.map((header) => (
+                                    <td key={header.id}>
+                                        <div
+                                            onMouseDown={header.getResizeHandler()}
+                                            onTouchStart={header.getResizeHandler()}
+                                            style={{
+                                                height: `${totalHeight}px`,
+                                            }}
+                                            className="absolute z-10 right-0 w-1 cursor-col-resize select-none touch-none hover:bg-gray-100 active:bg-blue-200"
+                                        />
+                                    </td>
+                                ))}
                         </tr>
                         {paddingTop > 0 && (
                             <tr>
@@ -304,9 +379,7 @@ export default function InstanceTable({ instances, rowSelection, setRowSelection
                                     className={` ${row.getIsSelected() ? "bg-purple-50" : ""}`}
                                 >
                                     {row.getVisibleCells().map((cell) => (
-                                        <td
-                                            key={cell.id}
-                                        >
+                                        <td key={cell.id}>
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext(),
@@ -315,30 +388,30 @@ export default function InstanceTable({ instances, rowSelection, setRowSelection
                                     ))}
                                     <td>
                                         {/** DO NOT REMOVE! This is essential for blind people to select rows */}
-                                        {
-                                            !compareOn && (
-                                                <form
-                                                    onSubmit={(e) => e.preventDefault()}
+                                        {!compareOn && (
+                                            <form
+                                                onSubmit={(e) =>
+                                                    e.preventDefault()
+                                                }
+                                            >
+                                                <label
+                                                    htmlFor={`${row.id}-checkbox`}
+                                                    className="sr-only"
                                                 >
-                                                    <label
-                                                        htmlFor={`${row.id}-checkbox`}
-                                                        className="sr-only"
-                                                    >
-                                                        Toggle row
-                                                    </label>
-                                                    <input
-                                                        type="checkbox"
-                                                        id={`${row.id}-checkbox`}
-                                                        className="sr-only"
-                                                        checked={row.getIsSelected()}
-                                                        onChange={(e) => {
-                                                            e.preventDefault();
-                                                            handleRow(row);
-                                                        }}
-                                                    />
-                                                </form>
-                                            )
-                                        }
+                                                    Toggle row
+                                                </label>
+                                                <input
+                                                    type="checkbox"
+                                                    id={`${row.id}-checkbox`}
+                                                    className="sr-only"
+                                                    checked={row.getIsSelected()}
+                                                    onChange={(e) => {
+                                                        e.preventDefault();
+                                                        handleRow(row);
+                                                    }}
+                                                />
+                                            </form>
+                                        )}
                                     </td>
                                 </tr>
                             );

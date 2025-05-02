@@ -15,7 +15,12 @@ export default async function Home() {
     return (
         <>
             <Head>
-                <link rel="preload" href="/remaining-instances.msgpack.xz" as="fetch" fetchPriority="high" />
+                <link
+                    rel="preload"
+                    href="/remaining-instances.msgpack.xz"
+                    as="fetch"
+                    fetchPriority="high"
+                />
             </Head>
             <Client regions={regions} first30Instances={first30Instances} />
         </>

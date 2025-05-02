@@ -21,10 +21,10 @@ function calculateCost(
     price: string | undefined,
     instance: Instance,
     pricingUnit: PricingUnit,
-    costDuration: CostDuration
+    costDuration: CostDuration,
 ): number {
     if (!price) return -1;
-    
+
     const hourMultipliers = {
         secondly: 1 / (60 * 60),
         minutely: 1 / 60,
@@ -38,8 +38,14 @@ function calculateCost(
     const durationMultiplier = hourMultipliers[costDuration];
     let pricingUnitModifier = 1;
 
-    if (pricingUnit !== 'instance') {
-        pricingUnitModifier = instance[pricingUnit === 'vcpu' ? 'vCPU' : pricingUnit === 'ecu' ? 'ECU' : 'memory'] as number;
+    if (pricingUnit !== "instance") {
+        pricingUnitModifier = instance[
+            pricingUnit === "vcpu"
+                ? "vCPU"
+                : pricingUnit === "ecu"
+                  ? "ECU"
+                  : "memory"
+        ] as number;
     }
 
     return (Number(price) * durationMultiplier) / pricingUnitModifier;
@@ -49,32 +55,39 @@ function calculateAndFormatCost(
     price: string | undefined,
     instance: Instance,
     pricingUnit: PricingUnit,
-    costDuration: CostDuration
+    costDuration: CostDuration,
 ): string {
     const perTime = calculateCost(price, instance, pricingUnit, costDuration);
     if (perTime === -1) return "unavailable";
 
-    const precision = costDuration === 'secondly' || costDuration === 'minutely' ? 6 : 4;
+    const precision =
+        costDuration === "secondly" || costDuration === "minutely" ? 6 : 4;
 
     const measuringUnits = {
-        instances: '',
-        vcpu: 'vCPU',
-        ecu: 'ECU',
-        memory: 'GiB',
+        instances: "",
+        vcpu: "vCPU",
+        ecu: "ECU",
+        memory: "GiB",
     };
 
     let durationText: string = costDuration;
-    if (costDuration === 'secondly') durationText = 'per sec';
-    if (costDuration === 'minutely') durationText = 'per min';
+    if (costDuration === "secondly") durationText = "per sec";
+    if (costDuration === "minutely") durationText = "per min";
 
-    const pricingMeasuringUnits = pricingUnit === 'instance' 
-        ? ` ${durationText}`
-        : ` ${durationText} / ${measuringUnits[pricingUnit]}`;
+    const pricingMeasuringUnits =
+        pricingUnit === "instance"
+            ? ` ${durationText}`
+            : ` ${durationText} / ${measuringUnits[pricingUnit]}`;
 
     return `$${perTime.toFixed(precision)}${pricingMeasuringUnits}`;
 }
 
-export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: CostDuration, reservedTerm: string): ColumnDef<Instance>[] => [
+export default (
+    selectedRegion: string,
+    pricingUnit: PricingUnit,
+    costDuration: CostDuration,
+    reservedTerm: string,
+): ColumnDef<Instance>[] => [
     {
         accessorKey: "pretty_name",
         header: "Name",
@@ -327,7 +340,8 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         cell: (info) => {
             const storage = info.getValue() as Storage;
             if (!storage) return "N/A";
-            if (storage.storage_needs_initialization === undefined) throw new Error("storage_needs_initialization is undefined");
+            if (storage.storage_needs_initialization === undefined)
+                throw new Error("storage_needs_initialization is undefined");
             return storage.storage_needs_initialization ? "No" : "Yes";
         },
     },
@@ -351,7 +365,8 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         cell: (info) => {
             const storage = info.getValue() as Storage;
             if (!storage || !storage.ssd) return "N/A";
-            if (storage.trim_support === undefined) throw new Error("trim_support is undefined");
+            if (storage.trim_support === undefined)
+                throw new Error("trim_support is undefined");
             return storage.trim_support ? "Yes" : "No";
         },
     },
@@ -457,7 +472,10 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
             const valueB = rowB.original.vpc;
             if (!valueA) return -1;
             if (!valueB) return 1;
-            return valueA.max_enis * valueA.ips_per_eni - valueB.max_enis * valueB.ips_per_eni;
+            return (
+                valueA.max_enis * valueA.ips_per_eni -
+                valueB.max_enis * valueB.ips_per_eni
+            );
         },
         filterFn: (row, _, filterValue) => {
             const vpc = row.original.vpc;
@@ -558,14 +576,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "On Demand",
         id: "cost-ondemand",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.linux?.ondemand, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.linux?.ondemand, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.linux?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.linux?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.linux?.ondemand;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -573,14 +606,34 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Linux Reserved cost",
         id: "cost-reserved",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm], rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm], rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.linux?.reserved?.[
+                    reservedTerm
+                ],
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.linux?.reserved?.[
+                    reservedTerm
+                ],
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            const price =
+                pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm];
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -588,14 +641,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Linux Spot Minimum cost",
         id: "cost-spot-min",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.linux?.spot_min, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.linux?.spot_min, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.linux?.spot_min,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.linux?.spot_min,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.linux?.spot_min;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -603,14 +671,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Linux Spot Average cost",
         id: "cost-spot-max",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.linux?.spot_avg, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.linux?.spot_avg, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.linux?.spot_avg,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.linux?.spot_avg,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.linux?.spot_avg;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -618,14 +701,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "RHEL On Demand cost",
         id: "cost-ondemand-rhel",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.rhel?.ondemand, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.rhel?.ondemand, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.rhel?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.rhel?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.rhel?.ondemand;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -633,14 +731,34 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "RHEL Reserved cost",
         id: "cost-reserved-rhel",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.rhel?.reserved?.[reservedTerm], rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.rhel?.reserved?.[reservedTerm], rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.rhel?.reserved?.[
+                    reservedTerm
+                ],
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.rhel?.reserved?.[
+                    reservedTerm
+                ],
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.rhel?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            const price =
+                pricing?.[selectedRegion]?.rhel?.reserved?.[reservedTerm];
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -648,14 +766,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "RHEL Spot Minimum cost",
         id: "cost-spot-min-rhel",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.rhel?.spot_min, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.rhel?.spot_min, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.rhel?.spot_min,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.rhel?.spot_min,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.rhel?.spot_min;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -663,14 +796,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "RHEL Spot Maximum cost",
         id: "cost-spot-max-rhel",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.rhel?.spot_max, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.rhel?.spot_max, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.rhel?.spot_max,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.rhel?.spot_max,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.rhel?.spot_max;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -678,14 +826,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "SLES On Demand cost",
         id: "cost-ondemand-sles",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.sles?.ondemand, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.sles?.ondemand, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.sles?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.sles?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.sles?.ondemand;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -693,14 +856,34 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "SLES Reserved cost",
         id: "cost-reserved-sles",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.sles?.reserved?.[reservedTerm], rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.sles?.reserved?.[reservedTerm], rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.sles?.reserved?.[
+                    reservedTerm
+                ],
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.sles?.reserved?.[
+                    reservedTerm
+                ],
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.sles?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            const price =
+                pricing?.[selectedRegion]?.sles?.reserved?.[reservedTerm];
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -708,14 +891,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "SLES Spot Minimum cost",
         id: "cost-spot-min-sles",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.sles?.spot_min, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.sles?.spot_min, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.sles?.spot_min,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.sles?.spot_min,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.sles?.spot_min;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -723,14 +921,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "SLES Spot Maximum cost",
         id: "cost-spot-max-sles",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.sles?.spot_max, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.sles?.spot_max, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.sles?.spot_max,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.sles?.spot_max,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.sles?.spot_max;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -738,14 +951,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Windows On Demand cost",
         id: "cost-ondemand-mswin",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.mswin?.ondemand, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.mswin?.ondemand, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.mswin?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.mswin?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.mswin?.ondemand;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -753,14 +981,34 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Windows Reserved cost",
         id: "cost-reserved-mswin",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.mswin?.reserved?.[reservedTerm], rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.mswin?.reserved?.[reservedTerm], rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.mswin?.reserved?.[
+                    reservedTerm
+                ],
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.mswin?.reserved?.[
+                    reservedTerm
+                ],
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.mswin?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            const price =
+                pricing?.[selectedRegion]?.mswin?.reserved?.[reservedTerm];
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -768,14 +1016,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Windows Spot Minimum cost",
         id: "cost-spot-min-mswin",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.mswin?.spot_min, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.mswin?.spot_min, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.mswin?.spot_min,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.mswin?.spot_min,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.mswin?.spot_min;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -783,14 +1046,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Windows Spot Average cost",
         id: "cost-spot-max-mswin",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.mswin?.spot_avg, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.mswin?.spot_avg, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.mswin?.spot_avg,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.mswin?.spot_avg,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.mswin?.spot_avg;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -798,14 +1076,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Dedicated Host On Demand",
         id: "cost-ondemand-dedicated",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.dedicated?.ondemand, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.dedicated?.ondemand, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.dedicated?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.dedicated?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.dedicated?.ondemand;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -813,14 +1106,34 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Dedicated Host Reserved",
         id: "cost-reserved-dedicated",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.dedicated?.reserved?.[reservedTerm], rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.dedicated?.reserved?.[reservedTerm], rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.dedicated?.reserved?.[
+                    reservedTerm
+                ],
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.dedicated?.reserved?.[
+                    reservedTerm
+                ],
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.dedicated?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            const price =
+                pricing?.[selectedRegion]?.dedicated?.reserved?.[reservedTerm];
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -828,14 +1141,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Windows SQL Web On Demand cost",
         id: "cost-ondemand-mswinSQLWeb",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.mswinSQLWeb?.ondemand, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.mswinSQLWeb?.ondemand, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.mswinSQLWeb?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.mswinSQLWeb?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.mswinSQLWeb?.ondemand;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -843,14 +1171,34 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Windows SQL Web Reserved cost",
         id: "cost-reserved-mswinSQLWeb",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.mswinSQLWeb?.reserved?.[reservedTerm], rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.mswinSQLWeb?.reserved?.[reservedTerm], rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.mswinSQLWeb
+                    ?.reserved?.[reservedTerm],
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.mswinSQLWeb
+                    ?.reserved?.[reservedTerm],
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.mswinSQLWeb?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            const price =
+                pricing?.[selectedRegion]?.mswinSQLWeb?.reserved?.[
+                    reservedTerm
+                ];
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -858,14 +1206,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Windows SQL Std On Demand cost",
         id: "cost-ondemand-mswinSQL",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.mswinSQL?.ondemand, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.mswinSQL?.ondemand, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.mswinSQL?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.mswinSQL?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.mswinSQL?.ondemand;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -873,14 +1236,34 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Windows SQL Std Reserved cost",
         id: "cost-reserved-mswinSQL",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.mswinSQL?.reserved?.[reservedTerm], rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.mswinSQL?.reserved?.[reservedTerm], rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.mswinSQL?.reserved?.[
+                    reservedTerm
+                ],
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.mswinSQL?.reserved?.[
+                    reservedTerm
+                ],
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.mswinSQL?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            const price =
+                pricing?.[selectedRegion]?.mswinSQL?.reserved?.[reservedTerm];
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -888,14 +1271,32 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Windows SQL Ent On Demand cost",
         id: "cost-ondemand-mswinSQLEnterprise",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.mswinSQLEnterprise?.ondemand, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.mswinSQLEnterprise?.ondemand, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.mswinSQLEnterprise
+                    ?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.mswinSQLEnterprise
+                    ?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.mswinSQLEnterprise?.ondemand;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            const price =
+                pricing?.[selectedRegion]?.mswinSQLEnterprise?.ondemand;
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -903,14 +1304,34 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Windows SQL Ent Reserved cost",
         id: "cost-reserved-mswinSQLEnterprise",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.mswinSQLEnterprise?.reserved?.[reservedTerm], rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.mswinSQLEnterprise?.reserved?.[reservedTerm], rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.mswinSQLEnterprise
+                    ?.reserved?.[reservedTerm],
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.mswinSQLEnterprise
+                    ?.reserved?.[reservedTerm],
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.mswinSQLEnterprise?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            const price =
+                pricing?.[selectedRegion]?.mswinSQLEnterprise?.reserved?.[
+                    reservedTerm
+                ];
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -918,14 +1339,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Linux SQL Web On Demand cost",
         id: "cost-ondemand-linuxSQLWeb",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.linuxSQLWeb?.ondemand, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.linuxSQLWeb?.ondemand, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.linuxSQLWeb?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.linuxSQLWeb?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.linuxSQLWeb?.ondemand;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -933,14 +1369,34 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Linux SQL Web Reserved cost",
         id: "cost-reserved-linuxSQLWeb",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.linuxSQLWeb?.reserved?.[reservedTerm], rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.linuxSQLWeb?.reserved?.[reservedTerm], rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.linuxSQLWeb
+                    ?.reserved?.[reservedTerm],
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.linuxSQLWeb
+                    ?.reserved?.[reservedTerm],
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.linuxSQLWeb?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            const price =
+                pricing?.[selectedRegion]?.linuxSQLWeb?.reserved?.[
+                    reservedTerm
+                ];
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -948,14 +1404,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Linux SQL Std On Demand cost",
         id: "cost-ondemand-linuxSQL",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.linuxSQL?.ondemand, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.linuxSQL?.ondemand, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.linuxSQL?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.linuxSQL?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.linuxSQL?.ondemand;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -963,14 +1434,34 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Linux SQL Std Reserved cost",
         id: "cost-reserved-linuxSQL",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.linuxSQL?.reserved?.[reservedTerm], rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.linuxSQL?.reserved?.[reservedTerm], rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.linuxSQL?.reserved?.[
+                    reservedTerm
+                ],
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.linuxSQL?.reserved?.[
+                    reservedTerm
+                ],
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.linuxSQL?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            const price =
+                pricing?.[selectedRegion]?.linuxSQL?.reserved?.[reservedTerm];
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -978,14 +1469,32 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Linux SQL Ent On Demand cost",
         id: "cost-ondemand-linuxSQLEnterprise",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.linuxSQLEnterprise?.ondemand, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.linuxSQLEnterprise?.ondemand, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.linuxSQLEnterprise
+                    ?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.linuxSQLEnterprise
+                    ?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.linuxSQLEnterprise?.ondemand;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            const price =
+                pricing?.[selectedRegion]?.linuxSQLEnterprise?.ondemand;
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -993,14 +1502,34 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Linux SQL Ent Reserved cost",
         id: "cost-reserved-linuxSQLEnterprise",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.linuxSQLEnterprise?.reserved?.[reservedTerm], rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.linuxSQLEnterprise?.reserved?.[reservedTerm], rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.linuxSQLEnterprise
+                    ?.reserved?.[reservedTerm],
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.linuxSQLEnterprise
+                    ?.reserved?.[reservedTerm],
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.linuxSQLEnterprise?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            const price =
+                pricing?.[selectedRegion]?.linuxSQLEnterprise?.reserved?.[
+                    reservedTerm
+                ];
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -1008,15 +1537,18 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "Linux Spot Interrupt Frequency",
         id: "spot-interrupt-rate",
         sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.pricing?.[selectedRegion]?.linux?.pct_interrupt;
-            const valueB = rowB.original.pricing?.[selectedRegion]?.linux?.pct_interrupt;
+            const valueA =
+                rowA.original.pricing?.[selectedRegion]?.linux?.pct_interrupt;
+            const valueB =
+                rowB.original.pricing?.[selectedRegion]?.linux?.pct_interrupt;
             if (!valueA) return -1;
             if (!valueB) return 1;
             return valueA.localeCompare(valueB);
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
-            const pctInterrupt = pricing?.[selectedRegion]?.linux?.pct_interrupt;
+            const pctInterrupt =
+                pricing?.[selectedRegion]?.linux?.pct_interrupt;
             if (pctInterrupt === "N/A") return "unavailable";
             return pctInterrupt;
         },
@@ -1026,14 +1558,29 @@ export default (selectedRegion: string, pricingUnit: PricingUnit, costDuration: 
         header: "EMR cost",
         id: "cost-emr",
         sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(rowA.original.pricing?.[selectedRegion]?.emr?.ondemand, rowA.original, pricingUnit, costDuration);
-            const valueB = calculateCost(rowB.original.pricing?.[selectedRegion]?.emr?.ondemand, rowB.original, pricingUnit, costDuration);
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.emr?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.emr?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
             return valueA - valueB;
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.emr?.ondemand;
-            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {

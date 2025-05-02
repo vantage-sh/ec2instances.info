@@ -11,6 +11,8 @@ import { makeColumnVisibilitySchema } from "./utils/columnVisibility";
 import { Instance } from "./types";
 import handleCompressedFile from "./utils/handleCompressedFile";
 
+export const unpackedAtom = atom(false);
+
 const preloadedValues: {
     [path: string]: {
         value: Instance[];
@@ -79,13 +81,19 @@ function createColumnVisibilityAtomForKey(key: string) {
     return {
         ...atomRes,
         set: (newValue: ColumnVisibility) => {
-            localStorage.setItem(`columnVisibility_${key}`, JSON.stringify(newValue));
+            localStorage.setItem(
+                `columnVisibility_${key}`,
+                JSON.stringify(newValue),
+            );
             atomRes.set(newValue);
         },
         mutate: (fn: (value: ColumnVisibility) => void) => {
             atomRes.mutate((value) => {
                 fn(value);
-                localStorage.setItem(`columnVisibility_${key}`, JSON.stringify(value));
+                localStorage.setItem(
+                    `columnVisibility_${key}`,
+                    JSON.stringify(value),
+                );
             });
         },
     };
