@@ -4,7 +4,7 @@ import { XzReadableStream } from "xz-decompress";
 import { Instance, Region } from "@/types";
 import processRainbowTable from "@/utils/processRainbowTable";
 
-let p: Promise<{ regions: Region, instances: Instance[] }>;
+let p: Promise<{ regions: Region; instances: Instance[] }>;
 
 async function getData() {
     if (p) return p;
@@ -15,14 +15,18 @@ async function getData() {
         const first30 = decode(
             await readFile("./public/first-30-instances.msgpack"),
         ) as Instance[];
-    
-        const remainingCompressed = await readFile("./public/remaining-instances.msgpack.xz");
-        const stream = new XzReadableStream(new ReadableStream({
-            start(controller) {
-                controller.enqueue(remainingCompressed);
-                controller.close();
-            },
-        }));
+
+        const remainingCompressed = await readFile(
+            "./public/remaining-instances.msgpack.xz",
+        );
+        const stream = new XzReadableStream(
+            new ReadableStream({
+                start(controller) {
+                    controller.enqueue(remainingCompressed);
+                    controller.close();
+                },
+            }),
+        );
         const buffers: Uint8Array[] = [];
         const reader = stream.getReader();
         while (true) {
@@ -39,23 +43,34 @@ async function getData() {
         }
         return {
             regions,
-            instances: [...first30, ...remaining.map((i) => processRainbowTable(pricingRainbowTable, i))],
+            instances: [
+                ...first30,
+                ...remaining.map((i) =>
+                    processRainbowTable(pricingRainbowTable, i),
+                ),
+            ],
         };
     })();
     return p;
 }
 
 function initial_prices(instance: Instance) {
-    const init_p = {"ondemand": 0, "spot": 0, "_1yr": 0, "_3yr": 0};
+    const init_p = { ondemand: 0, spot: 0, _1yr: 0, _3yr: 0 };
     for (const pricing_type of ["ondemand", "spot", "_1yr", "_3yr"]) {
         for (const os of ["linux", "dedicated"]) {
             try {
                 if (pricing_type.includes("yr")) {
                     // @ts-expect-error: Trusting this because its from the python code.
-                    init_p[pricing_type] = instance.pricing["us-east-1"][os][pricing_type]["Standard.noUpfront"];
+                    init_p[pricing_type] =
+                        // @ts-expect-error: Trusting this because its from the python code.
+                        instance.pricing["us-east-1"][os][pricing_type][
+                            "Standard.noUpfront"
+                        ];
                 } else {
                     // @ts-expect-error: Trusting this because its from the python code.
-                    init_p[pricing_type] = instance.pricing["us-east-1"][os][pricing_type];
+                    init_p[pricing_type] =
+                        // @ts-expect-error: Trusting this because its from the python code.
+                        instance.pricing["us-east-1"][os][pricing_type];
                 }
                 break;
             } catch (e) {
@@ -90,13 +105,17 @@ function generateDescription(instance: Instance, initialPrices: InitialPrices) {
 
 async function handleParams(params: Promise<{ slug: string }>) {
     const { slug } = await params;
-    const { instances } = await getData();
+    const { instances, regions } = await getData();
     const instance = instances.find((i) => i.instance_type === slug)!;
     const initialPrices = initial_prices(instance);
-    return { instance, initialPrices };
+    return { instance, initialPrices, regions };
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
+}) {
     const { instance, initialPrices } = await handleParams(params);
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
@@ -104,8 +123,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
 }
 
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Page({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
+}) {
     const { instance, initialPrices } = await handleParams(params);
-    
-    return generateDescription(instance, initialPrices);
+    const description = generateDescription(instance, initialPrices);
+
+    return description;
 }
