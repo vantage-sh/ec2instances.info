@@ -17,7 +17,7 @@ export default function handleCompressedFile(
     }
 
     const worker = new Worker(
-        new URL("./compression.worker.ts", import.meta.url),
+        new URL("./processor.worker.ts", import.meta.url),
         {
             type: "module",
         },
