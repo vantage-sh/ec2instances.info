@@ -291,12 +291,12 @@ export default function Filters({ regions, rowSelection }: FiltersProps) {
                 >
                     Export
                 </button>
-                <div className="btn-group-vertical" id="search">
-                    <div className="block my-auto h-max">
+                <div className="my-auto" id="search">
+                    <div className="block">
                         <input
                             id="fullsearch"
                             type="text"
-                            className="form-control not-xl:hidden"
+                            className="form-control not-xl:hidden p-1 border-gray-300 border rounded-md"
                             placeholder="Search..."
                             value={compareOn ? valuePreCompareOn : searchTerm}
                             disabled={compareOn}
