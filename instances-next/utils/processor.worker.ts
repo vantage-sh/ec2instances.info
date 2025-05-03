@@ -8,12 +8,15 @@ const chunks: Uint8Array[] = [];
 async function waitForDataChunk() {
     if (chunks.length > 0) return chunks.shift()!;
     return new Promise<Uint8Array | undefined>((resolve) => {
-        listeners ? listeners.add(() => resolve(chunks.shift())) : resolve(undefined);
+        listeners
+            ? listeners.add(() => resolve(chunks.shift()))
+            : resolve(undefined);
     });
 }
 
 class Stream {
-    private controller: ReadableStreamDefaultController<Uint8Array> | null = null;
+    private controller: ReadableStreamDefaultController<Uint8Array> | null =
+        null;
 
     constructor() {
         this.stream = new ReadableStream<Uint8Array>({

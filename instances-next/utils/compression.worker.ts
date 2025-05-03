@@ -19,4 +19,4 @@ onmessage = async (e) => {
         // @ts-expect-error: Web workers use a different set of params to the browser.
         postMessage(value, [value.buffer]);
     }
-}
+};
