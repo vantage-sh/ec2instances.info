@@ -19,6 +19,11 @@ export default function Client({
 }) {
     const first50Instances = useMemo(() => {
         const rainbowTable = compressedInstances.shift() as string[];
+        if (!Array.isArray(rainbowTable)) {
+            // This hook re-ran for some reason. Probably dev.
+            compressedInstances.unshift(rainbowTable);
+            return compressedInstances as Instance[];
+        }
         return compressedInstances.map((i) =>
             processRainbowTable(rainbowTable, i as Instance),
         );
