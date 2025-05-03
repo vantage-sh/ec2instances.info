@@ -94,9 +94,11 @@ async function main() {
     }
 
     // Encode and then compress the instances.
-    const first30Instances = instances.slice(0, 30);
-    const first30InstancesEncoded = encode(first30Instances);
-    const remainingInstances = instances.slice(30);
+    const first50Instances = instances.slice(0, 50);
+    const first50InstancesEncoded = encode(
+        makeRainbowTable(first50Instances),
+    );
+    const remainingInstances = instances.slice(50);
     const remainingInstancesEncoded = encode(
         makeRainbowTable(remainingInstances),
     );
@@ -109,8 +111,8 @@ async function main() {
 
     await writeFile("./public/instances-regions.msgpack", encode(regions));
     await writeFile(
-        "./public/first-30-instances.msgpack",
-        first30InstancesEncoded,
+        "./public/first-50-instances.msgpack",
+        first50InstancesEncoded,
     );
     await writeFile(
         "./public/remaining-instances.msgpack.xz",

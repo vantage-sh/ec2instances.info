@@ -46,15 +46,11 @@ onmessage = async (e) => {
         },
     });
     let instancesBuffer: Instance[] = [];
-    let pricingRainbowTable: Map<number, string> | null = null;
+    let pricingRainbowTable: string[] | null = null;
     try {
         for await (const item of decodeArrayStream(s)) {
             if (pricingRainbowTable === null) {
-                const arr = item as string[];
-                pricingRainbowTable = new Map<number, string>();
-                for (let i = 0; i < arr.length; i++) {
-                    pricingRainbowTable.set(i, arr[i]);
-                }
+                pricingRainbowTable = item as string[];
                 continue;
             }
             instancesBuffer.push(

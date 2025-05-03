@@ -9,8 +9,8 @@ export default async function Home() {
     let data = await readFile("./public/instances-regions.msgpack");
     const regions = decode(data) as Region;
 
-    data = await readFile("./public/first-30-instances.msgpack");
-    const first30Instances = decode(data) as Instance[];
+    data = await readFile("./public/first-50-instances.msgpack");
+    const compressedInstances = decode(data) as [string[], ...Instance[]];
 
     return (
         <>
@@ -22,7 +22,7 @@ export default async function Home() {
                     fetchPriority="high"
                 />
             </Head>
-            <Client regions={regions} first30Instances={first30Instances} />
+            <Client regions={regions} compressedInstances={compressedInstances} />
         </>
     );
 }

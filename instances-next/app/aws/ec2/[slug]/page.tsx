@@ -12,9 +12,10 @@ async function getData() {
         const regions = decode(
             await readFile("./public/instances-regions.msgpack"),
         ) as Region;
-        const first30 = decode(
-            await readFile("./public/first-30-instances.msgpack"),
+        const compressed50 = decode(
+            await readFile("./public/first-50-instances.msgpack"),
         ) as Instance[];
+
 
         const remainingCompressed = await readFile(
             "./public/remaining-instances.msgpack.xz",
@@ -35,18 +36,18 @@ async function getData() {
             buffers.push(value);
         }
         const remaining = decode(Buffer.concat(buffers)) as Instance[];
-        const pricingRainbowTable = new Map<number, string>();
         // @ts-expect-error: The first item is the rainbow table.
-        const arr: string[] = remaining.shift();
-        for (let i = 0; i < arr.length; i++) {
-            pricingRainbowTable.set(i, arr[i]);
-        }
+        const first50RainbowTable: string[] = compressed50.shift();
+        // @ts-expect-error: The first item is the rainbow table.
+        const remainingPricingRainbowTable: string[] = remaining.shift();
         return {
             regions,
             instances: [
-                ...first30,
+                ...compressed50.map((i) =>
+                    processRainbowTable(first50RainbowTable, i),
+                ),
                 ...remaining.map((i) =>
-                    processRainbowTable(pricingRainbowTable, i),
+                    processRainbowTable(remainingPricingRainbowTable, i),
                 ),
             ],
         };

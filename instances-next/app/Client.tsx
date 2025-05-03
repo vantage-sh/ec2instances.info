@@ -4,21 +4,29 @@ import { useInstanceData } from "@/state";
 import InstanceTable from "@/components/InstanceTable";
 import { Instance, Region } from "@/types";
 import Filters from "@/components/Filters";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { RowSelectionState } from "@tanstack/react-table";
 import { columnVisibilityAtom } from "@/state";
 import DoMigration from "@/components/DoMigration";
+import processRainbowTable from "@/utils/processRainbowTable";
 
 export default function Client({
     regions,
-    first30Instances,
+    compressedInstances,
 }: {
     regions: Region;
-    first30Instances: Instance[];
+    compressedInstances: [string[], ...Instance[]];
 }) {
+    const first50Instances = useMemo(() => {
+        const rainbowTable = compressedInstances.shift() as string[];
+        return compressedInstances.map((i) =>
+            processRainbowTable(rainbowTable, i as Instance),
+        );
+    }, [compressedInstances]);
+
     const instances = useInstanceData(
         "/remaining-instances.msgpack.xz",
-        first30Instances,
+        first50Instances,
     );
     const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
