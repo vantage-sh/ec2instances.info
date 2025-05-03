@@ -6,50 +6,13 @@ let listeners: Set<() => void> | null = new Set();
 const chunks: Uint8Array[] = [];
 
 async function waitForDataChunk() {
-    if (chunks.length > 0) return chunks.shift()!;
+    const chunk = chunks.shift();
+    if (chunk) return chunk;
     return new Promise<Uint8Array | undefined>((resolve) => {
         listeners
             ? listeners.add(() => resolve(chunks.shift()))
             : resolve(undefined);
     });
-}
-
-class Stream {
-    private controller: ReadableStreamDefaultController<Uint8Array> | null =
-        null;
-
-    constructor() {
-        this.stream = new ReadableStream<Uint8Array>({
-            start: (controller) => {
-                this.controller = controller;
-            },
-            pull: async (controller) => {
-                const chunk = await waitForDataChunk();
-                if (chunk) {
-                    controller.enqueue(chunk);
-                } else {
-                    controller.close();
-                }
-            },
-            cancel: () => {
-                this.controller = null;
-            },
-        });
-    }
-
-    public stream: ReadableStream<Uint8Array>;
-
-    enqueue(chunk: Uint8Array) {
-        if (this.controller) {
-            this.controller.enqueue(chunk);
-        }
-    }
-
-    close() {
-        if (this.controller) {
-            this.controller.close();
-        }
-    }
 }
 
 onmessage = async (e) => {
@@ -71,8 +34,17 @@ onmessage = async (e) => {
     };
     worker.postMessage(e.data);
 
-    // Decompress the instances.
-    const s = new Stream().stream;
+    // Read and process the instances.
+    const s = new ReadableStream<Uint8Array>({
+        pull: async (controller) => {
+            const chunk = await waitForDataChunk();
+            if (chunk) {
+                controller.enqueue(chunk);
+            } else {
+                controller.close();
+            }
+        },
+    });
     let instancesBuffer: Instance[] = [];
     let pricingRainbowTable: Map<number, string> | null = null;
     try {
