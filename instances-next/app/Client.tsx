@@ -24,9 +24,10 @@ export default function Client({
             compressedInstances.unshift(rainbowTable);
             return compressedInstances as Instance[];
         }
-        return compressedInstances.map((i) =>
-            processRainbowTable(rainbowTable, i as Instance),
-        );
+        for (const i of compressedInstances) {
+            processRainbowTable(rainbowTable, i as Instance);
+        }
+        return compressedInstances as Instance[];
     }, [compressedInstances]);
 
     const instances = useInstanceData(
