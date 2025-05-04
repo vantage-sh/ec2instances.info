@@ -11,8 +11,6 @@ import { makeColumnVisibilitySchema } from "./utils/columnVisibility";
 import { Instance } from "./types";
 import handleCompressedFile from "./utils/handleCompressedFile";
 
-export const unpackedAtom = atom(false);
-
 const preloadedValues: {
     [path: string]: {
         value: Instance[];

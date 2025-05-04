@@ -13,7 +13,6 @@ import {
     callExportEvents,
     clearGSettings,
     useCompareOn,
-    unpackedAtom,
 } from "@/state";
 import type { ColumnVisibility } from "@/utils/columnVisibility";
 import {
@@ -30,7 +29,6 @@ interface FiltersProps {
 }
 
 export default function Filters({ regions, rowSelection }: FiltersProps) {
-    const unpacked = unpackedAtom.use();
     const columnVisibility = columnVisibilityAtom.use();
     const [searchTerm, setSearchTerm] = useSearchTerm();
     const [selectedRegion, setSelectedRegion] = useSelectedRegion();
@@ -288,71 +286,57 @@ export default function Filters({ regions, rowSelection }: FiltersProps) {
                         }}
                     />
                 </div>
-                {unpacked && (
-                    <div className="d-flex gap-2">
-                        {compareOn ? (
-                            <button
-                                className="btn bg-red-600 text-white"
-                                onClick={() => setCompareOn(false)}
-                            >
-                                End Compare
-                            </button>
-                        ) : (
-                            <button
-                                disabled={!anySelected}
-                                className="btn btn-purple btn-compare disabled:opacity-50"
-                                onClick={() => setCompareOn(true)}
-                            >
-                                Compare
-                            </button>
-                        )}
+                <div className="d-flex gap-2">
+                    {compareOn ? (
                         <button
-                            className="btn btn-outline-secondary btn-clear"
-                            onClick={clearGSettings}
+                            className="btn bg-red-600 text-white"
+                            onClick={() => setCompareOn(false)}
                         >
-                            Clear Filters
+                            End Compare
                         </button>
-                    </div>
-                )}
+                    ) : (
+                        <button
+                            disabled={!anySelected}
+                            className="btn btn-purple btn-compare disabled:opacity-50"
+                            onClick={() => setCompareOn(true)}
+                        >
+                            Compare
+                        </button>
+                    )}
+                    <button
+                        className="btn btn-outline-secondary btn-clear"
+                        onClick={clearGSettings}
+                    >
+                        Clear Filters
+                    </button>
+                </div>
             </div>
             <div className="d-flex gap-2">
-                {unpacked ? (
-                    <>
-                        <button
-                            className="btn btn-outline-secondary btn-primary"
-                            onClick={callExportEvents}
-                        >
-                            Export
-                        </button>
-                        <div className="my-auto" id="search">
-                            <div className="block">
-                                <input
-                                    id="fullsearch"
-                                    type="text"
-                                    className="form-control not-xl:hidden p-1 border-gray-300 border rounded-md"
-                                    placeholder="Search..."
-                                    value={
-                                        compareOn
-                                            ? valuePreCompareOn
-                                            : searchTerm
-                                    }
-                                    disabled={compareOn}
-                                    onChange={(e) =>
-                                        setSearchTerm(e.target.value)
-                                    }
-                                />
-                            </div>
-                        </div>
-                    </>
-                ) : (
-                    <div className="flex-1 flex justify-center">
-                        <div className="text-center text-sm italic border rounded-md border-gray-800 px-4 py-2">
-                            <p className="pt-1 select-none">
-                                Unpacking. All rows will be shown in a moment.
-                            </p>
-                        </div>
+                <button
+                    className="btn btn-outline-secondary btn-primary"
+                    onClick={callExportEvents}
+                >
+                    Export
+                </button>
+                <div className="my-auto" id="search">
+                    <div className="block">
+                        <input
+                            id="fullsearch"
+                            type="text"
+                            className="form-control not-xl:hidden p-1 border-gray-300 border rounded-md"
+                            placeholder="Search..."
+                            value={
+                                compareOn
+                                    ? valuePreCompareOn
+                                    : searchTerm
+                            }
+                            disabled={compareOn}
+                            onChange={(e) =>
+                                setSearchTerm(e.target.value)
+                            }
+                        />
                     </div>
-                )}
+                </div>
             </div>
         </div>
     );

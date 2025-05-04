@@ -8,7 +8,7 @@ import { useMemo, useState } from "react";
 import { RowSelectionState } from "@tanstack/react-table";
 import { columnVisibilityAtom } from "@/state";
 import DoMigration from "@/components/DoMigration";
-import processRainbowTable from "@/utils/processRainbowTable";
+import dynamicallyDecompress from "@/utils/dynamicallyDecompress";
 
 export default function Client({
     regions,
@@ -17,22 +17,19 @@ export default function Client({
     regions: Region;
     compressedInstances: [string[], ...Instance[]];
 }) {
-    const first50Instances = useMemo(() => {
+    const initialInstances = useMemo(() => {
         const rainbowTable = compressedInstances.shift() as string[];
         if (!Array.isArray(rainbowTable)) {
-            // This hook re-ran for some reason. Probably dev.
+            // This is probably dev.
             compressedInstances.unshift(rainbowTable);
             return compressedInstances as Instance[];
         }
-        for (const i of compressedInstances) {
-            processRainbowTable(rainbowTable, i as Instance);
-        }
-        return compressedInstances as Instance[];
+        return compressedInstances.map((instance) => dynamicallyDecompress(instance as Instance, rainbowTable));
     }, [compressedInstances]);
 
     const instances = useInstanceData(
-        "/remaining-instances.msgpack.xz",
-        first50Instances,
+        "/remaining-instances-p{}.msgpack.xz",
+        initialInstances,
     );
     const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 

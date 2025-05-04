@@ -56,15 +56,10 @@ onmessage = async (e) => {
             instancesBuffer.push(
                 processRainbowTable(pricingRainbowTable, item as Instance),
             );
-            if (instancesBuffer.length === 50) {
-                postMessage(instancesBuffer);
-                instancesBuffer = [];
-            }
         }
     } catch {
         // At the end it throws an error for some reason. It does get all
         // the instances though, so I'm not too worried.
     }
-    if (instancesBuffer.length > 0) postMessage(instancesBuffer);
-    postMessage(null);
+    postMessage(instancesBuffer);
 };

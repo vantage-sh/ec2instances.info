@@ -4,6 +4,8 @@ import { encode } from "@msgpack/msgpack";
 import { compress } from "lzma-native";
 import addRenderInfo from "./addRenderInfo";
 
+const PIPELINE_SIZE = 10;
+
 function makeRainbowTable(instances: Instance[]) {
     // Pass 1: Get all the keys.
     const pricingSet = new Set<string>();
@@ -94,30 +96,35 @@ async function main() {
     }
 
     // Encode and then compress the instances.
-    const first50Instances = instances.slice(0, 50);
-    const first50InstancesEncoded = encode(
-        makeRainbowTable(first50Instances),
-    );
-    const remainingInstances = instances.slice(50);
-    const remainingInstancesEncoded = encode(
-        makeRainbowTable(remainingInstances),
-    );
-    console.log("Compressing AWS instances data...");
-    const compressedRemainingInstances: Buffer = await new Promise((res) => {
-        compress(Buffer.from(remainingInstancesEncoded), {}, (result) => {
-            res(result);
-        });
-    });
-
+    const first30Instances = instances.slice(0, 30);
+    const first30InstancesEncoded = encode(makeRainbowTable(first30Instances));
+    const remainingInstances: Instance[] = instances.slice(30);
     await writeFile("./public/instances-regions.msgpack", encode(regions));
     await writeFile(
-        "./public/first-50-instances.msgpack",
-        first50InstancesEncoded,
+        "./public/first-30-instances.msgpack",
+        first30InstancesEncoded,
     );
-    await writeFile(
-        "./public/remaining-instances.msgpack.xz",
-        compressedRemainingInstances,
-    );
+    const itemsPerPipeline = Math.ceil(remainingInstances.length / PIPELINE_SIZE);
+    const remainingPipelineLength = remainingInstances.length % itemsPerPipeline;
+
+    console.log("Compressing AWS instances data...");
+    for (let i = 0; i < PIPELINE_SIZE; i++) {
+        let chunk = remainingInstances.slice(i * itemsPerPipeline, (i + 1) * itemsPerPipeline);
+        if (i === PIPELINE_SIZE - 1 && remainingPipelineLength > 0) {
+            chunk = chunk.concat(remainingInstances.slice((i + 1) * itemsPerPipeline, remainingInstances.length));
+        }
+        const chunkEncoded = encode(makeRainbowTable(chunk));
+        const compressedChunk: Buffer = await new Promise((res) => {
+            compress(Buffer.from(chunkEncoded), {}, (result) => {
+                res(result);
+            });
+        });
+        await writeFile(
+            `./public/remaining-instances-p${i}.msgpack.xz`,
+            compressedChunk,
+        );
+    }
+
     console.log("AWS instances data compressed and saved");
 }
 
