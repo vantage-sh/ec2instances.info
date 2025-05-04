@@ -1,5 +1,6 @@
 import { CostDuration, Instance, Pricing, PricingUnit } from "@/types";
 import { ColumnDef, Row } from "@tanstack/react-table";
+import Link from "next/link";
 
 interface Storage {
     devices: number;
@@ -103,7 +104,7 @@ export default (
         sortingFn: "alphanumeric",
         cell: (info) => {
             const value = info.getValue() as string;
-            return <a href={`/aws/ec2/${value}`}>{value}</a>;
+            return <Link onClick={(e) => e.stopPropagation()} href={`/aws/ec2/${value}`}>{value}</Link>;
         },
     },
     {

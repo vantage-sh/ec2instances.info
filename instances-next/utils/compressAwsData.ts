@@ -96,6 +96,9 @@ async function main() {
     }
 
     // Encode and then compress the instances.
+    const instanceCount = instances.length;
+    await writeFile("./public/instance-count.txt", instanceCount.toString());
+    await writeFile("./public/instance-ids.json", JSON.stringify(instances.map((i: Instance) => i.instance_type)));
     const first30Instances = instances.slice(0, 30);
     const first30InstancesEncoded = encode(makeRainbowTable(first30Instances));
     const remainingInstances: Instance[] = instances.slice(30);
@@ -104,8 +107,6 @@ async function main() {
         "./public/first-30-instances.msgpack",
         first30InstancesEncoded,
     );
-    const instanceCount = remainingInstances.length + first30Instances.length;
-    await writeFile("./public/instance-count.txt", instanceCount.toString());
     const itemsPerPipeline = Math.ceil(remainingInstances.length / PIPELINE_SIZE);
     const remainingPipelineLength = remainingInstances.length % itemsPerPipeline;
 

@@ -5,7 +5,7 @@ export const pricingUnitOptions: { value: PricingUnit; label: string }[] = [
     { value: "vcpu", label: "vCPU" },
     { value: "ecu", label: "ECU" },
     { value: "memory", label: "Memory" },
-];
+] as const;
 
 export const durationOptions: { value: CostDuration; label: string }[] = [
     { value: "secondly", label: "Per Second" },
@@ -15,7 +15,7 @@ export const durationOptions: { value: CostDuration; label: string }[] = [
     { value: "weekly", label: "Weekly" },
     { value: "monthly", label: "Monthly" },
     { value: "annually", label: "Annually" },
-];
+] as const;
 
 export const reservedTermOptions = [
     { value: "yrTerm1Standard.noUpfront", label: "1-year - No Upfront" },
@@ -54,4 +54,4 @@ export const reservedTermOptions = [
         value: "yrTerm3Convertible.allUpfront",
         label: "3-year convertible - Full Upfront",
     },
-];
+] as const;

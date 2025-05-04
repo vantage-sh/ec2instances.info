@@ -12,7 +12,7 @@ interface FilterDropdownProps {
     label: string;
     value: string;
     onChange: (value: string) => void;
-    options: Option[];
+    options: Option[] | readonly Option[];
     icon?: string;
 }
 
