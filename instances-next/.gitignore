@@ -42,3 +42,4 @@ next-env.d.ts
 # compressed data
 public/*.msgpack
 public/*.msgpack.xz
+public/instance-count.txt

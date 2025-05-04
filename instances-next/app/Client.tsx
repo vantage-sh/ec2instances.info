@@ -13,9 +13,11 @@ import dynamicallyDecompress from "@/utils/dynamicallyDecompress";
 export default function Client({
     regions,
     compressedInstances,
+    instanceCount,
 }: {
     regions: Region;
     compressedInstances: [string[], ...Instance[]];
+    instanceCount: number;
 }) {
     const initialInstances = useMemo(() => {
         const rainbowTable = compressedInstances.shift() as string[];
@@ -42,6 +44,7 @@ export default function Client({
                     instances={instances}
                     rowSelection={rowSelection}
                     setRowSelection={setRowSelection}
+                    instanceCount={instanceCount}
                 />
             </div>
         </main>

@@ -12,6 +12,8 @@ export default async function Home() {
     data = await readFile("./public/first-30-instances.msgpack");
     const compressedInstances = decode(data) as [string[], ...Instance[]];
 
+    const instanceCount = Number(await readFile("./public/instance-count.txt"));
+
     return (
         <>
             <Head>
@@ -27,7 +29,11 @@ export default async function Home() {
                     ))
                 }
             </Head>
-            <Client regions={regions} compressedInstances={compressedInstances} />
+            <Client
+                instanceCount={instanceCount}
+                regions={regions}
+                compressedInstances={compressedInstances}
+            />
         </>
     );
 }

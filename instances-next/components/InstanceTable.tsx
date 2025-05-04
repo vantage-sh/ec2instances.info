@@ -40,6 +40,7 @@ interface InstanceTableProps {
     instances: Instance[];
     rowSelection: RowSelectionState;
     setRowSelection: (value: SetStateAction<RowSelectionState>) => void;
+    instanceCount: number;
 }
 
 function csvEscape(input: string) {
@@ -60,6 +61,7 @@ export default function InstanceTable({
     instances,
     rowSelection,
     setRowSelection,
+    instanceCount,
 }: InstanceTableProps) {
     const columnVisibility = columnVisibilityAtom.use();
     const [searchTerm] = useSearchTerm();
@@ -193,7 +195,11 @@ export default function InstanceTable({
     });
 
     const virtualRows = rowVirtualizer.getVirtualItems();
-    const totalHeight = rowVirtualizer.getTotalSize();
+    let totalHeight = rowVirtualizer.getTotalSize();
+    if (instances.length < instanceCount && !compareOn) {
+        // Add padding to the table to account for the missing instances.
+        totalHeight += (totalHeight / instances.length) * (instanceCount - instances.length);
+    }
     const paddingTop = virtualRows.length > 0 ? virtualRows[0].start : 0;
     const paddingBottom =
         virtualRows.length > 0

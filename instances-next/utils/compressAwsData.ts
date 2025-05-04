@@ -104,6 +104,8 @@ async function main() {
         "./public/first-30-instances.msgpack",
         first30InstancesEncoded,
     );
+    const instanceCount = remainingInstances.length + first30Instances.length;
+    await writeFile("./public/instance-count.txt", instanceCount.toString());
     const itemsPerPipeline = Math.ceil(remainingInstances.length / PIPELINE_SIZE);
     const remainingPipelineLength = remainingInstances.length % itemsPerPipeline;
 
