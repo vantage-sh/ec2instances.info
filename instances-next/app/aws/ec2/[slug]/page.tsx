@@ -106,7 +106,7 @@ function generateDescription(instance: Instance, initialPrices: InitialPrices) {
     if (instance.network_performance.match(LOW_MEDIUM_HIGH)) {
         bw = ` and ${instance.network_performance.toLowerCase()} network performance`;
     } else {
-        bw = ` and ${instance.network_performance.replace("Gigabit", "").trim()} Gibps of bandwidth`;
+        bw = ` and ${instance.network_performance.toLowerCase().replace("gigabit", "").trim()} Gibps of bandwidth`;
     }
     return `The ${instance.instance_type} instance is in the ${instance.instance_type.split(".")[0]} family with ${instance.vCPU} vCPUs, ${instance.memory} GiB of memory${bw} starting at $${initialPrices.ondemand} per hour.`;
 }
