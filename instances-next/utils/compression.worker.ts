@@ -3,7 +3,7 @@ import { XzReadableStream } from "xz-decompress";
 onmessage = async (e) => {
     const { url }: { url: string } = e.data;
 
-    const res = await fetch(url);
+    const res = await fetch(url, { priority: "high" });
     if (!res.ok) {
         throw new Error(`Failed to fetch compressed file: ${url}`);
     }
