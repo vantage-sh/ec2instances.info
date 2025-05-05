@@ -3,7 +3,7 @@
 import { Instance, Pricing, CostDuration, Region } from "@/types";
 import { DollarSignIcon, Server } from "lucide-react";
 import Link from "next/link";
-import { useMemo, useState, useId } from "react";
+import { useMemo, useState, useId, useEffect } from "react";
 import processRainbowTable from "@/utils/processRainbowTable";
 import { durationOptions } from "@/utils/dataMappings";
 
@@ -28,8 +28,36 @@ function dollarString(value: string | undefined, duration: CostDuration) {
         annually: 365 * 24,
     };
 
-    return `$${n * hourMultipliers[duration]}`;
+    const mul = n * hourMultipliers[duration];
+    const rounded = Math.round(mul * 10000) / 10000;
+    return `$${rounded}`;
 }
+
+const osOptions = [
+    ["linux", "Linux"],
+    ["mswin", "Windows"],
+    ["rhel", "Red Hat"],
+    ["sles", "SUSE"],
+    ["dedicated", "Dedicated Host"],
+    ["linuxSQL", "Linux SQL Server"],
+    ["linuxSQLWeb", "Linux SQL Server for Web"],
+    ["linuxSQLEnterprise", "Linux SQL Enterprise"],
+    ["mswinSQL", "Windows SQL Server"],
+    ["mswinSQLWeb", "Windows SQL Web"],
+    ["mswinSQLEnterprise", "Windows SQL Enterprise"],
+    ["rhelSQL", "Red Hat SQL Server"],
+    ["rhelSQLWeb", "Red Hat SQL Web"],
+    ["rhelSQLEnterprise", "Red Hat SQL Enterprise"],
+] as const;
+
+const reservedTermOptions = [
+    ["Standard.noUpfront", "No Upfront"],
+    ["Standard.partialUpfront", "Partial Upfront"],
+    ["Standard.allUpfront", "All Upfront"],
+    ["Convertible.noUpfront", "No Upfront (Convertible)"],
+    ["Convertible.partialUpfront", "Partial Upfront (Convertible)"],
+    ["Convertible.allUpfront", "All Upfront (Convertible)"],
+] as const;
 
 function Calculator({ pricing, regions }: { pricing: Pricing; regions: Region }) {
     const priceHoldersId = useId();
@@ -40,10 +68,59 @@ function Calculator({ pricing, regions }: { pricing: Pricing; regions: Region })
             Object.keys(pricing["us-east-1"] || {})[0] || "linux";
     }, [pricing]);
 
-    const [region, setRegion] = useState<string>("us-east-1");
-    const [platform, setPlatform] = useState<string>(defaultPlatform);
-    const [duration, setDuration] = useState<CostDuration>("hourly");
-    const [pricingType, setPricingType] = useState<string>("Standard.noUpfront");
+    const [region, setRegionState] = useState<string>("us-east-1");
+    const [platform, setPlatformState] = useState<string>(defaultPlatform);
+    const [duration, setDurationState] = useState<CostDuration>("hourly");
+    const [pricingType, setPricingTypeState] = useState<string>("Standard.noUpfront");
+
+    // Check the URL to make sure this is the state it was originally in.
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        const query = new URLSearchParams(window.location.search);
+
+        const region = query.get("region");
+        if (region && regions.local_zone[region]) setRegionState(region);
+
+        // If there is no OS option, don't let the user change it.
+        if (defaultPlatform === "linux") {
+            const platform = query.get("platform");
+            if (platform && osOptions.some(([value]) => value === platform)) setPlatformState(platform);
+        }
+
+        const duration = query.get("duration");
+        switch (duration) {
+            case "secondly":
+            case "minutely":
+            case "hourly":
+            case "daily":
+            case "weekly":
+            case "monthly":
+            case "annually":
+                setDurationState(duration as CostDuration);
+                break;
+        }
+
+        const pricingType = query.get("pricingType");
+        if (pricingType) {
+            // We do this in case the case got weird when reading the link.
+            const validPricingType = reservedTermOptions.find(([value]) => value.toLowerCase() === pricingType.toLowerCase());
+            if (validPricingType) setPricingTypeState(validPricingType[0]);
+        }
+    }, []);
+
+    function wrapStringUpdater<T extends string>(handler: (value: T) => void, key: string) {
+        return (value: T) => {
+            handler(value);
+            if (typeof window === "undefined") return;
+            const url = new URL(window.location.href);
+            url.searchParams.set(key, value);
+            window.history.replaceState({}, "", url.toString());
+        };
+    }
+    const setRegion = wrapStringUpdater(setRegionState, "region");
+    const setPlatform = wrapStringUpdater(setPlatformState, "platform");
+    const setDuration = wrapStringUpdater<CostDuration>(setDurationState, "duration");
+    const setPricingType = wrapStringUpdater(setPricingTypeState, "pricingType");
 
     const prices = useMemo(() => {
         const root = pricing[region]?.[platform];
@@ -81,7 +158,7 @@ function Calculator({ pricing, regions }: { pricing: Pricing; regions: Region })
     return (
         <>
             <div className="mt-2" id={priceHoldersId} aria-live="polite" aria-atomic="true">
-                <div className="flex gap-4 w-full">
+                <div className="flex gap-4 w-full flex-wrap">
                     {prices.map(({ label, value }) => (
                         <div key={label} className="flex-col">
                             <p className="text-lg font-bold text-center">{value}</p>
@@ -92,7 +169,7 @@ function Calculator({ pricing, regions }: { pricing: Pricing; regions: Region })
             </div>
 
             <div className="mt-4 grid grid-cols-2 gap-2">
-                <select aria-controls={priceHoldersId} defaultValue={region} className={selectStyling} onChange={(e) => setRegion(e.target.value)}>
+                <select aria-controls={priceHoldersId} value={region} className={selectStyling} onChange={(e) => setRegion(e.target.value)}>
                     {localZones.map(([code, name]) => (
                         <option key={code} value={code} disabled={!pricing[code]}>{name}</option>
                     ))}
@@ -100,26 +177,15 @@ function Calculator({ pricing, regions }: { pricing: Pricing; regions: Region })
 
                 {
                     defaultPlatform === "linux" && (
-                        <select aria-controls={priceHoldersId} defaultValue={platform} className={selectStyling} onChange={(e) => setPlatform(e.target.value)}>
-                            <option value="linux">Linux</option>
-                            <option value="mswin">Windows</option>
-                            <option value="rhel">Red Hat</option>
-                            <option value="sles">SUSE</option>
-                            <option value="dedicated">Dedicated Host</option>
-                            <option value="linuxSQL">Linux SQL Server</option>
-                            <option value="linuxSQLWeb">Linux SQL Server for Web</option>
-                            <option value="linuxSQLEnterprise">Linux SQL Enterprise</option>
-                            <option value="mswinSQL">Windows SQL Server</option>
-                            <option value="mswinSQLWeb">Windows SQL Web</option>
-                            <option value="mswinSQLEnterprise">Windows SQL Enterprise</option>
-                            <option value="rhelSQL">Red Hat SQL Server</option>
-                            <option value="rhelSQLWeb">Red Hat SQL Web</option>
-                            <option value="rhelSQLEnterprise">Red Hat SQL Enterprise</option>
+                        <select aria-controls={priceHoldersId} value={platform} className={selectStyling} onChange={(e) => setPlatform(e.target.value)}>
+                            {osOptions.map(([value, label]) => (
+                                <option key={value} value={value}>{label}</option>
+                            ))}
                         </select>
                     )
                 }
 
-                <select aria-controls={priceHoldersId} defaultValue={duration} className={selectStyling} onChange={(e) => setDuration(e.target.value as CostDuration)}>
+                <select aria-controls={priceHoldersId} value={duration} className={selectStyling} onChange={(e) => setDuration(e.target.value as CostDuration)}>
                     {
                         durationOptions.map(({ value, label }) => (
                             <option key={value} value={value}>{label}</option>
@@ -127,13 +193,10 @@ function Calculator({ pricing, regions }: { pricing: Pricing; regions: Region })
                     }
                 </select>
 
-                <select aria-controls={priceHoldersId} defaultValue={pricingType} className={selectStyling} onChange={(e) => setPricingType(e.target.value)}>
-                    <option value="Standard.noUpfront">No Upfront</option>
-                    <option value="Standard.partialUpfront">Partial Upfront</option>
-                    <option value="Standard.allUpfront">All Upfront</option>
-                    <option value="Convertible.noUpfront">No Upfront (Convertible)</option>
-                    <option value="Convertible.partialUpfront">Partial Upfront (Convertible)</option>
-                    <option value="Convertible.allUpfront">All Upfront (Convertible)</option>
+                <select aria-controls={priceHoldersId} value={pricingType} className={selectStyling} onChange={(e) => setPricingType(e.target.value)}>
+                    {reservedTermOptions.map(([value, label]) => (
+                        <option key={value} value={value}>{label}</option>
+                    ))}
                 </select>
             </div>
         </>
