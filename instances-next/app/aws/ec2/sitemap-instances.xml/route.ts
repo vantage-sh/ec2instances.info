@@ -18,4 +18,3 @@ export async function GET() {
 </urlset>`;
     return new Response(sitemap, { headers: { "Content-Type": "application/xml" } });
 }
-
