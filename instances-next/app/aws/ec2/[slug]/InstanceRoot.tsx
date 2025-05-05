@@ -46,7 +46,7 @@ function InstanceVariants({ bestOfVariants }: { bestOfVariants: { [key: string]:
 
 export default function InstanceRoot({ rainbowTable, compressedInstance, description, bestOfVariants, allOfInstanceType, regions }: InstanceRootProps) {
     return (
-        <main className="md:flex my-4 max-w-screen-lg mx-auto gap-8">
+        <main className="md:flex my-4 px-4 max-w-screen-lg mx-auto gap-8">
             <div className="md:max-w-sm">
                 <h1 className="text-2xl font-bold mb-2">{compressedInstance.instance_type}</h1>
                 <p className="text-sm mb-4">{description}</p>
@@ -59,7 +59,7 @@ export default function InstanceRoot({ rainbowTable, compressedInstance, descrip
                     </a> for an AWS billing code lookup tool.
                 </p>
             </div>
-            <div className="flex-grow">
+            <div className="flex-grow md:mt-0 mt-4">
                 <InstanceDataView instance={compressedInstance} />
             </div>
         </main>
