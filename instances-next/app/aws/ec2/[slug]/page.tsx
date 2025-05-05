@@ -3,8 +3,9 @@ import { readFile } from "fs/promises";
 import { XzReadableStream } from "xz-decompress";
 import { Instance, Region } from "@/types";
 import processRainbowTable from "@/utils/processRainbowTable";
-import InstanceView from "./InstanceView";
+import InstanceRoot from "./InstanceRoot";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
+import makeRainbowTable from "@/utils/makeRainbowTable";
 
 export const dynamic = "force-static";
 
@@ -193,6 +194,9 @@ export default async function Page({
 }: {
     params: Promise<{ slug: string }>;
 }) {
+    let data = await readFile("./public/instances-regions.msgpack");
+    const regions = decode(data) as Region;
+
     const { instance, instances, initialPrices } = await handleParams(params);
     const description = generateDescription(instance, initialPrices);
 
@@ -205,9 +209,13 @@ export default async function Page({
         memory: i.memory || "N/A",
     }));
 
+    const compressedInstance = makeRainbowTable([{ ...instance }]);
+
     return (
-        <InstanceView
-            instance={instance}
+        <InstanceRoot
+            rainbowTable={compressedInstance[0] as string[]}
+            compressedInstance={compressedInstance[1] as Instance}
+            regions={regions}
             description={description}
             bestOfVariants={bestInstanceForEachVariant(allOfVariant, instance)}
             allOfInstanceType={allOfInstanceType}
