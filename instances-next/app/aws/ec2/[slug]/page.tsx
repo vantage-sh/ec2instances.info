@@ -63,36 +63,6 @@ async function getData() {
     return p;
 }
 
-function initial_prices(instance: Instance) {
-    const init_p = { ondemand: 0, spot: 0, _1yr: 0, _3yr: 0 };
-    for (const pricing_type of ["ondemand", "spot", "_1yr", "_3yr"]) {
-        for (const os of ["linux", "dedicated"]) {
-            try {
-                if (pricing_type.includes("yr")) {
-                    // @ts-expect-error: Trusting this because its from the python code.
-                    init_p[pricing_type] =
-                        // @ts-expect-error: Trusting this because its from the python code.
-                        instance.pricing["us-east-1"][os][pricing_type][
-                            "Standard.noUpfront"
-                        ];
-                } else {
-                    // @ts-expect-error: Trusting this because its from the python code.
-                    init_p[pricing_type] =
-                        // @ts-expect-error: Trusting this because its from the python code.
-                        instance.pricing["us-east-1"][os][pricing_type];
-                }
-                break;
-            } catch (e) {
-                // @ts-expect-error: Trusting this because its from the python code.
-                init_p[pricing_type] = "'N/A'";
-            }
-        }
-    }
-    return init_p;
-}
-
-type InitialPrices = ReturnType<typeof initial_prices>;
-
 export async function generateStaticParams() {
     const { instances } = await getData();
     return instances.map((instance) => ({
@@ -102,22 +72,22 @@ export async function generateStaticParams() {
 
 const LOW_MEDIUM_HIGH = /(low|moderate|high)/gi;
 
-function generateDescription(instance: Instance, initialPrices: InitialPrices) {
+function generateDescription(instance: Instance, ondemandCost: string) {
     let bw = "";
     if (instance.network_performance.match(LOW_MEDIUM_HIGH)) {
         bw = ` and ${instance.network_performance.toLowerCase()} network performance`;
     } else {
         bw = ` and ${instance.network_performance.toLowerCase().replace("gigabit", "").trim()} Gibps of bandwidth`;
     }
-    return `The ${instance.instance_type} instance is in the ${instance.instance_type.split(".")[0]} family with ${instance.vCPU} vCPUs, ${instance.memory} GiB of memory${bw} starting at $${initialPrices.ondemand} per hour.`;
+    return `The ${instance.instance_type} instance is in the ${instance.instance_type.split(".")[0]} family with ${instance.vCPU} vCPUs, ${instance.memory} GiB of memory${bw} starting at $${ondemandCost} per hour.`;
 }
 
 async function handleParams(params: Promise<{ slug: string }>) {
     const { slug } = await params;
     const { instances, regions } = await getData();
     const instance = instances.find((i) => i.instance_type === slug)!;
-    const initialPrices = initial_prices(instance);
-    return { instance, instances, initialPrices, regions };
+    const ondemandCost = instance.pricing["us-east-1"]?.linux?.ondemand || "N/A";
+    return { instance, instances, ondemandCost, regions };
 }
 
 export async function generateMetadata({
@@ -125,10 +95,10 @@ export async function generateMetadata({
 }: {
     params: Promise<{ slug: string }>;
 }) {
-    const { instance, initialPrices } = await handleParams(params);
+    const { instance, ondemandCost } = await handleParams(params);
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
-        description: generateDescription(instance, initialPrices),
+        description: generateDescription(instance, ondemandCost),
     };
 }
 
@@ -197,8 +167,8 @@ export default async function Page({
     let data = await readFile("./public/instances-regions.msgpack");
     const regions = decode(data) as Region;
 
-    const { instance, instances, initialPrices } = await handleParams(params);
-    const description = generateDescription(instance, initialPrices);
+    const { instance, instances, ondemandCost } = await handleParams(params);
+    const description = generateDescription(instance, ondemandCost);
 
     const [itype] = instance.instance_type.split(".", 2);
     const variant = itype.slice(0, 2);
