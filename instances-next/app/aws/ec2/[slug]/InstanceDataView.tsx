@@ -134,7 +134,9 @@ export default function InstanceDataView({ instance }: { instance: Omit<Instance
                     {instance.ebs_baseline_iops}
                 </Row>
                 <Row name="Devices" children={instance.storage?.devices || "0"} />
-                <Row name="Swap Partition" children={instance.storage?.includes_swap_partition ?? false} />
+                <Row name="Swap Partition">
+                    <BGStyled content={instance.storage?.includes_swap_partition ?? false} />
+                </Row>
                 <Row name="NVME Drive" help="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">
                     <BGStyled content={instance.storage?.nvme_ssd ?? false} />
                 </Row>
