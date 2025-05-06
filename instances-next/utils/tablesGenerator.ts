@@ -1,0 +1,205 @@
+import { Instance } from "@/types";
+
+type Row = {
+    name: string;
+    children: any;
+    bgStyled?: boolean;
+    help?: string | undefined;
+    helpText?: string | undefined;
+};
+
+type Table = {
+    name: string;
+    slug: string;
+    rows: Row[];
+};
+
+function round(value: number) {
+    return Math.round(value * 100) / 100;
+}
+
+export function generateAwsTables(instance: Omit<Instance, "pricing">): Table[] {
+    return [
+        {
+            name: "Compute",
+            slug: "compute",
+            rows: [
+                {
+                    name: "vCPUs",
+                    children: instance.vCPU,
+                },
+                {
+                    name: "Memory (GiB)",
+                    children: instance.memory,
+                },
+                {
+                    name: "Memory per vCPU (GiB)",
+                    children: round(instance.memory / instance.vCPU),
+                },
+                {
+                    name: "Physical Processor",
+                    children: instance.physical_processor || "N/A",
+                },
+                {
+                    name: "Clock Speed (GHz)",
+                    children: instance.clock_speed_ghz || "N/A",
+                },
+                {
+                    name: "CPU Architecture",
+                    children: instance.arch[0] || "N/A",
+                },
+                {
+                    name: "GPU",
+                    children: instance.GPU ?? "N/A",
+                    bgStyled: true,
+                },
+                {
+                    name: "GPU Architecture",
+                    children: instance.GPU_model ?? "none",
+                    bgStyled: true,
+                },
+                {
+                    name: "Video Memory (GiB)",
+                    children: instance.GPU_memory || "0",
+                },
+                {
+                    name: "GPU Compute Capability",
+                    help: "https://handbook.vantage.sh/aws/reference/aws-gpu-instances/",
+                    children: instance.compute_capability || "0",
+                },
+                {
+                    name: "FPGA",
+                    children: instance.FPGA ?? "0",
+                    bgStyled: true,
+                },
+            ],
+        },
+        {
+            name: "Networking",
+            slug: "networking",
+            rows: [
+                {
+                    name: "Network Performance (Gibps)",
+                    children: instance.network_performance.toLowerCase().replace("gigabit", "").trim(),
+                },
+                {
+                    name: "Enhanced Networking",
+                    children: instance.enhanced_networking,
+                    bgStyled: true,
+                },
+                {
+                    name: "IPv6",
+                    children: instance.ipv6_support,
+                    bgStyled: true,
+                },
+                {
+                    name: "Placement Group",
+                    help: "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html",
+                    children: instance.placement_group_support,
+                },
+            ],
+        },
+        {
+            name: "Storage",
+            slug: "storage",
+            rows: [
+                {
+                    name: "EBS Optimized",
+                    children: instance.ebs_as_nvme,
+                    bgStyled: true,
+                },
+                {
+                    name: "Max Bandwidth (Mbps) on",
+                    helpText: "EBS",
+                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    children: instance.ebs_max_bandwidth,
+                },
+                {
+                    name: "Max Throughput (MB/s) on",
+                    helpText: "EBS",
+                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    children: instance.ebs_throughput,
+                },
+                {
+                    name: "Max I/O operations/second",
+                    helpText: "IOPS",
+                    help: "https://handbook.vantage.sh/aws/concepts/io-operations/",
+                    children: instance.ebs_iops,
+                },
+                {
+                    name: "Baseline Bandwidth (Mbps) on",
+                    helpText: "EBS",
+                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    children: instance.ebs_baseline_bandwidth,
+                },
+                {
+                    name: "Baseline Throughput (MB/s) on",
+                    helpText: "EBS",
+                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    children: instance.ebs_baseline_throughput,
+                },
+                {
+                    name: "Baseline I/O operations/second",
+                    helpText: "IOPS",
+                    help: "https://handbook.vantage.sh/aws/concepts/io-operations/",
+                    children: instance.ebs_baseline_iops,
+                },
+                {
+                    name: "Devices",
+                    children: instance.storage?.devices || "0",
+                },
+                {
+                    name: "Swap Partition",
+                    children: instance.storage?.includes_swap_partition ?? false,
+                    bgStyled: true,
+                },
+                {
+                    name: "NVME Drive",
+                    help: "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances",
+                    children: instance.storage?.nvme_ssd ?? false,
+                    bgStyled: true,
+                },
+                {
+                    name: "Disk Space (GiB)",
+                    children: instance.storage?.size || "0",
+                },
+                {
+                    name: "SSD",
+                    children: instance.storage?.ssd ?? false,
+                    bgStyled: true,
+                },
+                {
+                    name: "Initialize Storage",
+                    children: instance.storage?.storage_needs_initialization ?? false,
+                    bgStyled: true,
+                },
+            ],
+        },
+        {
+            name: "Amazon",
+            slug: "amazon",
+            rows: [
+                {
+                    name: "Generation",
+                    children: instance.generation,
+                    bgStyled: true,
+                },
+                {
+                    name: "Instance Type",
+                    children: instance.instance_type,
+                },
+                {
+                    name: "Name",
+                    children: instance.pretty_name,
+                },
+                {
+                    name: "Elastic Map Reduce",
+                    helpText: "EMR",
+                    help: "https://handbook.vantage.sh/aws/services/emr-pricing/",
+                    children: instance.emr,
+                    bgStyled: true,
+                },
+            ],
+        },
+    ];
+}
