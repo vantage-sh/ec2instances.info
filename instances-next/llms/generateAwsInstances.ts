@@ -2,13 +2,25 @@ import { Instance } from "@/types";
 import { awsInstances } from "./loadedData";
 import generateDescription from "@/utils/generateDescription";
 import { calculatePrice } from "./generateAwsIndexes";
+import { generateAwsTables } from "@/utils/tablesGenerator";
 
 function generateInstanceMarkdown(instance: Instance) {
+    const tables = generateAwsTables(instance);
+
+    const tableData = tables.map((table) => `## ${table.name}
+
+${table.rows.map((row) => `- ${row.name}: ${row.children}`).join("\n")}
+`).join("\n");
+
     return `# ${instance.instance_type}
 
 > ${generateDescription(instance, calculatePrice(instance))}
- 
-Hello World!
+
+${tableData}
+
+## Pricing
+
+TODO
 `;
 }
 
