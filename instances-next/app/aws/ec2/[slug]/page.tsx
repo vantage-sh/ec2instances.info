@@ -6,6 +6,7 @@ import processRainbowTable from "@/utils/processRainbowTable";
 import InstanceRoot from "./InstanceRoot";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 import makeRainbowTable from "@/utils/makeRainbowTable";
+import generateDescription from "@/utils/generateDescription";
 
 export const dynamic = "force-static";
 
@@ -68,18 +69,6 @@ export async function generateStaticParams() {
     return instances.map((instance) => ({
         slug: instance.instance_type,
     }));
-}
-
-const LOW_MEDIUM_HIGH = /(low|moderate|high)/gi;
-
-function generateDescription(instance: Instance, ondemandCost: string) {
-    let bw = "";
-    if (instance.network_performance.match(LOW_MEDIUM_HIGH)) {
-        bw = ` and ${instance.network_performance.toLowerCase()} network performance`;
-    } else {
-        bw = ` and ${instance.network_performance.toLowerCase().replace("gigabit", "").trim()} Gibps of bandwidth`;
-    }
-    return `The ${instance.instance_type} instance is in the ${instance.instance_type.split(".")[0]} family with ${instance.vCPU} vCPUs, ${instance.memory} GiB of memory${bw} starting at $${ondemandCost} per hour.`;
 }
 
 async function handleParams(params: Promise<{ slug: string }>) {

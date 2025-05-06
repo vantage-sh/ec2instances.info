@@ -1,10 +1,9 @@
-import { Instance, Region } from "@/types";
+import { Instance } from "@/types";
 import { readFile } from "fs/promises";
 import { XzReadableStream } from "xz-decompress";
 import { decode } from "@msgpack/msgpack";
 import processRainbowTable from "@/utils/processRainbowTable";
-
-const PIPELINE_SIZE = 10;
+import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 
 export const awsInstances = (async () => {
     const compressed30 = decode(
