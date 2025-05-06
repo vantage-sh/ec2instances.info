@@ -10,6 +10,6 @@ This file contains information on where to find indexes for instance types we su
 
 ## Amazon EC2
 
-${awsIndexes.map((i) => urlInject`- [Index of all ${raw(i.name)}](${`/aws/ec2/${i.slug}`})`).join("\n")}
+${awsIndexes.map((i) => urlInject`- [Index of all ${raw(i.name)}](${`/aws/ec2/${i.slug}.md`})`).join("\n")}
 ${(await getAwsFamilies()).map((family) => urlInject`- [Index of all ${raw(family)} instances](${`/aws/ec2/families/${family}.md`})`).join("\n")}
 `;
