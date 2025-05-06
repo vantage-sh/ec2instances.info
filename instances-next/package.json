@@ -5,7 +5,9 @@
     "scripts": {
         "init": "tsx utils/compressAwsData.ts",
         "dev": "next dev --turbopack",
-        "build": "npm run init && next build",
+        "build:llms": "tsx llms/index.ts",
+        "build:next": "next build",
+        "build": "npm run init && npm run build:llms && npm run build:next",
         "start": "next start",
         "format": "prettier --check .",
         "format:fix": "prettier --write ."

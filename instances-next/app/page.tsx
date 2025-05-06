@@ -13,6 +13,7 @@ export default async function Home() {
     const compressedInstances = decode(data) as [string[], ...Instance[]];
 
     const instanceCount = Number(await readFile("./public/instance-count.txt"));
+    const instancesHash = await readFile("./public/instances-hash.txt", "utf-8");
 
     return (
         <>
@@ -22,7 +23,7 @@ export default async function Home() {
                         <link
                             key={i}
                             rel="preload"
-                            href={`/remaining-instances-p${i}.msgpack.xz`}
+                            href={`/remaining-instances-p${i}.msgpack.xz?cache=${instancesHash}`}
                             as="fetch"
                             fetchPriority="high"
                         />
@@ -33,6 +34,7 @@ export default async function Home() {
                 instanceCount={instanceCount}
                 regions={regions}
                 compressedInstances={compressedInstances}
+                instancesHash={instancesHash}
             />
         </>
     );

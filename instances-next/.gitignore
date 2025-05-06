@@ -43,4 +43,9 @@ next-env.d.ts
 public/*.msgpack
 public/*.msgpack.xz
 public/instance-count.txt
+public/instances-hash.txt
 public/instance-ids.json
+
+# llms data
+public/llms.txt
+public/**/*.md

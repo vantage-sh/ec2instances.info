@@ -1,4 +1,4 @@
-import urlInject from "@/utils/urlInject";
+import { urlInject } from "@/utils/urlInject";
 
 export const dynamic = "force-static";
 

@@ -14,10 +14,12 @@ export default function Client({
     regions,
     compressedInstances,
     instanceCount,
+    instancesHash,
 }: {
     regions: Region;
     compressedInstances: [string[], ...Instance[]];
     instanceCount: number;
+    instancesHash: string;
 }) {
     const initialInstances = useMemo(() => {
         const rainbowTable = compressedInstances.shift() as string[];
@@ -30,7 +32,7 @@ export default function Client({
     }, [compressedInstances]);
 
     const instances = useInstanceData(
-        "/remaining-instances-p{}.msgpack.xz",
+        `/remaining-instances-p{}.msgpack.xz?cache=${instancesHash}`,
         initialInstances,
     );
     const [rowSelection, setRowSelection] = useState<RowSelectionState>({});

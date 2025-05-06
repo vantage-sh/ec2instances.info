@@ -4,8 +4,14 @@ import { encode } from "@msgpack/msgpack";
 import { compress } from "lzma-native";
 import addRenderInfo from "./addRenderInfo";
 import makeRainbowTable from "./makeRainbowTable";
+import { createHash } from "crypto";
 
 const PIPELINE_SIZE = 10;
+
+function hashInstances(instances: Instance[]) {
+    const j = JSON.stringify(instances);
+    return createHash("sha256").update(j).digest("hex");
+}
 
 async function main() {
     const regions: Region = {
@@ -30,9 +36,9 @@ async function main() {
     }
 
     // Encode and then compress the instances.
-    const instanceCount = instances.length;
-    await writeFile("./public/instance-count.txt", instanceCount.toString());
+    await writeFile("./public/instance-count.txt", instances.length.toString());
     await writeFile("./public/instance-ids.json", JSON.stringify(instances.map((i: Instance) => i.instance_type)));
+    await writeFile("./public/instances-hash.txt", hashInstances(instances));
     const first30Instances = instances.slice(0, 30);
     const first30InstancesEncoded = encode(makeRainbowTable(first30Instances));
     const remainingInstances: Instance[] = instances.slice(30);
