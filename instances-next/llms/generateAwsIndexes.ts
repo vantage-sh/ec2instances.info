@@ -139,7 +139,7 @@ export function generateIndexMarkdown(name: string, instances: Instance[]) {
 
 ${instances.map((i) => urlInject`- **${raw(i.instance_type)} (min $${raw(calculatePrice(i))}/hr on demand)**
     - [HTML (with user UI)](${`/aws/ec2/${i.instance_type}`})
-    - [Markdown (with pricing data)](${`/aws/ec2/${i.instance_type}.md`})`).join("\n")}
+    - [Markdown (with pricing data region indexes)](${`/aws/ec2/${i.instance_type}.md`})`).join("\n")}
 `;
 }
 

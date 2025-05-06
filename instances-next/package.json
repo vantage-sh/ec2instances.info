@@ -20,6 +20,7 @@
         "atomtree": "^1.0.3",
         "lucide-react": "^0.507.0",
         "lzma-native": "^8.0.6",
+        "markdown-table": "^3.0.4",
         "next": "^15.3.1",
         "postcss": "^8.5.3",
         "react": "^19.1.0",

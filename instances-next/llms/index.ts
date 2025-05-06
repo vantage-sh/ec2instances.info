@@ -24,7 +24,10 @@ async function main() {
 
     const awsInstances = await generateAwsInstances();
     for (const [slug, index] of awsInstances.entries()) {
-        await writeFile(`./public/aws/ec2/${slug}.md`, index);
+        await writeFile(`./public/aws/ec2/${slug}.md`, index.root);
+        for (const [region, i] of index.regions.entries()) {
+            await writeFile(`./public/aws/ec2/${slug}-${region}.md`, i);
+        }
     }
     console.log("Generated instances for aws/ec2/*.md");
 }
