@@ -1,4 +1,4 @@
-import { Instance } from "@/types";
+import { EC2Instance } from "@/types";
 
 type Row = {
     name: string;
@@ -18,7 +18,7 @@ function round(value: number) {
     return Math.round(value * 100) / 100;
 }
 
-export function generateAwsTables(instance: Omit<Instance, "pricing">): Table[] {
+export function generateAwsTables(instance: Omit<EC2Instance, "pricing">): Table[] {
     return [
         {
             name: "Compute",

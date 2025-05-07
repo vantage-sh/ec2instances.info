@@ -1,10 +1,10 @@
-import { Instance } from "@/types";
+import { EC2Instance } from "@/types";
 import { awsInstances } from "./loadedData";
 import { generateIndexMarkdown } from "./generateAwsIndexes";
 
 export default async function generateAwsFamilyIndexes() {
     const instances = await awsInstances;
-    const instanceFamilyMap = new Map<string, Instance[]>();
+    const instanceFamilyMap = new Map<string, EC2Instance[]>();
     for (const instance of instances) {
         const family = instance.instance_type.split(".")[0];
         let familyInstances = instanceFamilyMap.get(family);

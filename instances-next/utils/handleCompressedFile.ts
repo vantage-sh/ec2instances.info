@@ -1,8 +1,6 @@
-import { Instance } from "@/types";
-
 export const PIPELINE_SIZE = 10;
 
-export default function handleCompressedFile(
+export default function handleCompressedFile<Instance>(
     pathFormatString: string,
     initialInstances: Instance[],
 ) {

@@ -1,4 +1,4 @@
-import { Instance, Region } from "@/types";
+import { EC2Instance, Region } from "@/types";
 import { readFile, writeFile } from "fs/promises";
 import { encode } from "@msgpack/msgpack";
 import { compress } from "lzma-native";
@@ -8,7 +8,7 @@ import { createHash } from "crypto";
 
 const PIPELINE_SIZE = 10;
 
-function hashInstances(instances: Instance[]) {
+function hashInstances(instances: EC2Instance[]) {
     const j = JSON.stringify(instances);
     return createHash("sha256").update(j).digest("hex");
 }
@@ -37,11 +37,11 @@ async function main() {
 
     // Encode and then compress the instances.
     await writeFile("./public/instance-count.txt", instances.length.toString());
-    await writeFile("./public/instance-ids.json", JSON.stringify(instances.map((i: Instance) => i.instance_type)));
+    await writeFile("./public/instance-ids.json", JSON.stringify(instances.map((i: EC2Instance) => i.instance_type)));
     await writeFile("./public/instances-hash.txt", hashInstances(instances));
     const first30Instances = instances.slice(0, 30);
     const first30InstancesEncoded = encode(makeRainbowTable(first30Instances));
-    const remainingInstances: Instance[] = instances.slice(30);
+    const remainingInstances: EC2Instance[] = instances.slice(30);
     await writeFile("./public/instances-regions.msgpack", encode(regions));
     await writeFile(
         "./public/first-30-instances.msgpack",

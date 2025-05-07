@@ -1,4 +1,4 @@
-import { Instance, Region } from "@/types";
+import { EC2Instance, Region } from "@/types";
 import { useMemo } from "react";
 import { Server } from "lucide-react";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import InstanceDataView from "./InstanceDataView";
 
 interface InstanceRootProps {
     rainbowTable: string[];
-    compressedInstance: Instance;
+    compressedInstance: EC2Instance;
     description: string;
     bestOfVariants: {
         [key: string]: string;

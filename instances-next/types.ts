@@ -15,7 +15,7 @@ export interface Pricing {
     };
 }
 
-export interface Instance {
+export interface EC2Instance {
     instance_type: string;
     pretty_name: string;
     memory: number;

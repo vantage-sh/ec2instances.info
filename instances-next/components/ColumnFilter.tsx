@@ -1,26 +1,26 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { ColumnVisibility } from "@/utils/columnVisibility";
+import type * as columnData from "@/utils/colunnData";
 
-interface ColumnOption {
-    key: keyof ColumnVisibility;
+interface ColumnOption<Key extends keyof typeof columnData> {
+    key: Key;
     label: string;
     visible: boolean;
 }
 
-interface ColumnFilterProps {
-    columns: ColumnOption[];
+interface ColumnFilterProps<Key extends keyof typeof columnData> {
+    columns: ColumnOption<Key>[];
     onColumnVisibilityChange: (
-        key: keyof ColumnVisibility,
+        key: Key,
         visible: boolean,
     ) => void;
 }
 
-export default function ColumnFilter({
+export default function ColumnFilter<Key extends keyof typeof columnData>({
     columns,
     onColumnVisibilityChange,
-}: ColumnFilterProps) {
+}: ColumnFilterProps<Key>) {
     const [isOpen, setIsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const dropdownRef = useRef<HTMLDivElement>(null);

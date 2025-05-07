@@ -1,4 +1,4 @@
-import { Instance } from "@/types";
+import { EC2Instance } from "@/types";
 import { Info } from "lucide-react";
 import { generateAwsTables } from "@/utils/tablesGenerator";
 import BGStyled from "@/components/BGStyled";
@@ -47,7 +47,7 @@ function Row({ name, children, help, helpText }: RowProps) {
     );
 }
 
-export default function InstanceDataView({ instance }: { instance: Omit<Instance, "pricing"> }) {
+export default function InstanceDataView({ instance }: { instance: Omit<EC2Instance, "pricing"> }) {
     return (
         <article>
             <h2 className="font-bold flex items-center gap-2"><Info className="w-4 h-4" />Instance Details</h2>

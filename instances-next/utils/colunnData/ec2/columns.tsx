@@ -1,4 +1,4 @@
-import { CostDuration, Instance, Pricing, PricingUnit } from "@/types";
+import { CostDuration, EC2Instance, Pricing, PricingUnit } from "@/types";
 import { ColumnDef, Row } from "@tanstack/react-table";
 import Link from "next/link";
 
@@ -12,15 +12,15 @@ interface Storage {
     storage_needs_initialization: boolean;
 }
 
-function gt(row: Row<Instance>, columnId: string, filterValue: number) {
-    const value = row.original[columnId as keyof Instance];
+function gt(row: Row<EC2Instance>, columnId: string, filterValue: number) {
+    const value = row.original[columnId as keyof EC2Instance];
     if (typeof value !== "number") return false;
     return value >= filterValue;
 }
 
 function calculateCost(
     price: string | undefined,
-    instance: Instance,
+    instance: EC2Instance,
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
 ): number {
@@ -54,7 +54,7 @@ function calculateCost(
 
 function calculateAndFormatCost(
     price: string | undefined,
-    instance: Instance,
+    instance: EC2Instance,
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
 ): string {
@@ -83,12 +83,12 @@ function calculateAndFormatCost(
     return `$${perTime.toFixed(precision)}${pricingMeasuringUnits}`;
 }
 
-export default (
+export const columnsGen = (
     selectedRegion: string,
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
     reservedTerm: string,
-): ColumnDef<Instance>[] => [
+): ColumnDef<EC2Instance>[] => [
     {
         accessorKey: "pretty_name",
         header: "Name",

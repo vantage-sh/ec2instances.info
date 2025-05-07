@@ -1,6 +1,6 @@
 "use client";
 
-import { Instance, Pricing, CostDuration, Region } from "@/types";
+import { EC2Instance, Pricing, CostDuration, Region } from "@/types";
 import { DollarSignIcon, Server } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState, useId, useEffect } from "react";
@@ -205,7 +205,7 @@ function Calculator({ pricing, regions }: { pricing: Pricing; regions: Region })
 
 type PricingSelectorProps = {
     rainbowTable: string[];
-    compressedInstance: Instance;
+    compressedInstance: EC2Instance;
     regions: Region;
 }
 

@@ -84,7 +84,7 @@ export default class GSettings {
     filterData = "";
     filterPreCompareOn = "";
 
-    constructor(azure: boolean) {
+    constructor(azure: boolean, private notRoot: boolean) {
         this.key = azure ? "azure_settings" : "aws_settings";
         this.settings = { ...g_settings_default };
         const stored = localStorage.getItem(this.key);
@@ -103,9 +103,11 @@ export default class GSettings {
         validate(params, this.settings, "min_memory", validateNumber);
         validate(params, this.settings, "min_vcpus", validateNumber);
         validate(params, this.settings, "min_memory_per_vcpu", validateNumber);
-        validate(params, this.settings, "min_gpus", validateNumber);
-        validate(params, this.settings, "min_gpu_memory", validateNumber);
-        validate(params, this.settings, "min_maxips", validateNumber);
+        if (!this.notRoot) {
+            validate(params, this.settings, "min_gpus", validateNumber);
+            validate(params, this.settings, "min_gpu_memory", validateNumber);
+            validate(params, this.settings, "min_maxips", validateNumber);
+        }
         validate(params, this.settings, "min_storage", validateNumber);
         validate(params, this.settings, "region");
         validate(params, this.settings, "pricing_unit");
@@ -142,6 +144,11 @@ export default class GSettings {
         };
         if (this.selected.length > 0) {
             params.selected = this.settings.selected;
+        }
+        if (this.notRoot) {
+            delete params.min_gpus;
+            delete params.min_gpu_memory;
+            delete params.min_maxips;
         }
         const paramsStringify = new URLSearchParams(params);
         window.history.replaceState(

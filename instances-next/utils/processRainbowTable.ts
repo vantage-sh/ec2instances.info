@@ -1,6 +1,6 @@
-import type { Instance, Pricing } from "@/types";
+import type { Pricing } from "@/types";
 
-export default function processRainbowTable(
+export default function processRainbowTable<Instance extends { pricing: Pricing }>(
     pricingRainbowTable: string[],
     instance: Instance,
 ) {

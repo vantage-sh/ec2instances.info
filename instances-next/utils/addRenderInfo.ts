@@ -1,6 +1,6 @@
-import { Instance } from "@/types";
+import { EC2Instance } from "@/types";
 
-function networkSort(instance: Instance) {
+function networkSort(instance: EC2Instance) {
     const perf = instance.network_performance;
     const network_rank = [
         "Very Low",
@@ -27,7 +27,7 @@ function networkSort(instance: Instance) {
     }
 }
 
-function addCpuDetail(instance: Instance) {
+function addCpuDetail(instance: EC2Instance) {
     if (typeof instance.ECU === "number" && typeof instance.vCPU === "number") {
         instance.ECU_per_vcpu = instance.ECU / instance.vCPU;
     } else {
@@ -47,7 +47,7 @@ function addCpuDetail(instance: Instance) {
     }
 }
 
-export default function addRenderInfo(instance: Instance) {
+export default function addRenderInfo(instance: EC2Instance) {
     try {
         instance.network_sort = networkSort(instance);
     } catch {}

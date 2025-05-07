@@ -1,24 +1,22 @@
 import { atom } from "atomtree";
-import {
-    initialColumnsValue,
-    ColumnVisibility,
-} from "./utils/columnVisibility";
 import { useEffect, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import GSettings from "@/utils/g_settings_port";
 import { safeParse } from "valibot";
-import { makeColumnVisibilitySchema } from "./utils/columnVisibility";
-import { Instance } from "./types";
 import handleCompressedFile from "./utils/handleCompressedFile";
+import * as columnData from "./utils/colunnData";
 
 const preloadedValues: {
     [path: string]: {
-        value: Instance[];
+        value: any[];
         addChangeNotifier: (fn: () => void) => () => void;
     };
 } = {};
 
-export function useInstanceData(path: string, initialInstances: Instance[]) {
+export function useInstanceData<Instance>(path: string | null, initialInstances: Instance[]) {
+    if (!path) {
+        return initialInstances;
+    }
     return useSyncExternalStore(
         (onStoreChange) => {
             let p = preloadedValues[path];
@@ -35,7 +33,7 @@ export function useInstanceData(path: string, initialInstances: Instance[]) {
                 p = handleCompressedFile(path, initialInstances);
                 preloadedValues[path] = p;
             }
-            return p.value;
+            return p.value as Instance[];
         },
         () => initialInstances,
     );
@@ -59,8 +57,11 @@ export function useHookToExportButton(hn: () => void) {
     }, []);
 }
 
-function createColumnVisibilityAtomForKey(key: string) {
-    const atomRes = atom({ ...initialColumnsValue });
+export type ColumnVisibility<Key extends keyof typeof columnData> = typeof columnData[Key]["initialColumnsValue"];
+
+function createColumnVisibilityAtomForKey<Key extends keyof typeof columnData>(key: Key) {
+    const v = columnData[key];
+    const atomRes = atom({ ...v.initialColumnsValue });
 
     const localStorageValue =
         typeof window !== "undefined"
@@ -68,7 +69,7 @@ function createColumnVisibilityAtomForKey(key: string) {
             : null;
     if (localStorageValue) {
         const res = safeParse(
-            makeColumnVisibilitySchema(),
+            v.makeColumnVisibilitySchema(),
             JSON.parse(localStorageValue),
         );
         if (res.success) {
@@ -78,14 +79,14 @@ function createColumnVisibilityAtomForKey(key: string) {
 
     return {
         ...atomRes,
-        set: (newValue: ColumnVisibility) => {
+        set: (newValue: ColumnVisibility<Key>) => {
             localStorage.setItem(
                 `columnVisibility_${key}`,
                 JSON.stringify(newValue),
             );
             atomRes.set(newValue);
         },
-        mutate: (fn: (value: ColumnVisibility) => void) => {
+        mutate: (fn: (value: ColumnVisibility<Key>) => void) => {
             atomRes.mutate((value) => {
                 fn(value);
                 localStorage.setItem(
@@ -97,7 +98,10 @@ function createColumnVisibilityAtomForKey(key: string) {
     };
 }
 
-export const columnVisibilityAtom = createColumnVisibilityAtomForKey("aws");
+export const columnVisibilityAtoms = {
+    ec2: createColumnVisibilityAtomForKey("ec2"),
+    redshift: createColumnVisibilityAtomForKey("redshift"),
+};
 
 let gSettingsHolder: [GSettings | undefined, number] = [undefined, 0];
 
@@ -136,11 +140,12 @@ function useGSettingsValue<Key extends keyof GSettings>(
     };
 
     useEffect(() => {
-        const expectedKey = pathname.split("?")[0].includes("azure")
+        const path = pathname.split("?")[0]
+        const expectedKey = path.includes("azure")
             ? "azure_settings"
-            : "aws_settings";
+            : "ec2_settings";
         if (!gSettingsHolder[0] || gSettingsHolder[0].key !== expectedKey) {
-            const gSettings = new GSettings(expectedKey === "azure_settings");
+            const gSettings = new GSettings(expectedKey === "azure_settings", path !== "/");
             gSettingsHolder = [gSettings, gSettingsHolder[1] + 1];
             for (const value of gSettingsEvent.values()) {
                 for (const fn of value) {

@@ -1,7 +1,7 @@
 import { readFile } from "fs/promises";
 import { decode } from "@msgpack/msgpack";
-import { Instance, Region } from "@/types";
-import Client from "./Client";
+import { EC2Instance, Region } from "@/types";
+import AWSClient from "./AWSClient";
 import Head from "next/head";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 
@@ -10,7 +10,7 @@ export default async function Home() {
     const regions = decode(data) as Region;
 
     data = await readFile("./public/first-30-instances.msgpack");
-    const compressedInstances = decode(data) as [string[], ...Instance[]];
+    const compressedInstances = decode(data) as [string[], ...EC2Instance[]];
 
     const instanceCount = Number(await readFile("./public/instance-count.txt"));
     const instancesHash = await readFile("./public/instances-hash.txt", "utf-8");
@@ -30,11 +30,12 @@ export default async function Home() {
                     ))
                 }
             </Head>
-            <Client
+            <AWSClient
                 instanceCount={instanceCount}
                 regions={regions}
                 compressedInstances={compressedInstances}
-                instancesHash={instancesHash}
+                compressedDataPathTemplate={`/remaining-instances-p{}.msgpack.xz?cache=${instancesHash}`}
+                columnAtomKey="ec2"
             />
         </>
     );

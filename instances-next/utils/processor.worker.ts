@@ -1,4 +1,3 @@
-import { Instance } from "@/types";
 import { decodeArrayStream } from "@msgpack/msgpack";
 import processRainbowTable from "./processRainbowTable";
 
@@ -45,7 +44,7 @@ onmessage = async (e) => {
             }
         },
     });
-    let instancesBuffer: Instance[] = [];
+    let instancesBuffer: any[] = [];
     let pricingRainbowTable: string[] | null = null;
     try {
         for await (const item of decodeArrayStream(s)) {
@@ -54,7 +53,7 @@ onmessage = async (e) => {
                 continue;
             }
             instancesBuffer.push(
-                processRainbowTable(pricingRainbowTable, item as Instance),
+                processRainbowTable(pricingRainbowTable, item as any),
             );
         }
     } catch {

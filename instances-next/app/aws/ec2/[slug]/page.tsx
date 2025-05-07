@@ -1,7 +1,7 @@
 import { decode } from "@msgpack/msgpack";
 import { readFile } from "fs/promises";
 import { XzReadableStream } from "xz-decompress";
-import { Instance, Region } from "@/types";
+import { EC2Instance, Region } from "@/types";
 import processRainbowTable from "@/utils/processRainbowTable";
 import InstanceRoot from "./InstanceRoot";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
@@ -10,7 +10,7 @@ import generateDescription from "@/utils/generateDescription";
 
 export const dynamic = "force-static";
 
-let p: Promise<{ regions: Region; instances: Instance[] }>;
+let p: Promise<{ regions: Region; instances: EC2Instance[] }>;
 
 async function getData() {
     if (p) return p;
@@ -20,9 +20,9 @@ async function getData() {
         ) as Region;
         const compressed30 = decode(
             await readFile("./public/first-30-instances.msgpack"),
-        ) as Instance[];
+        ) as EC2Instance[];
 
-        const remainingInstances: Instance[] = [];
+        const remainingInstances: EC2Instance[] = [];
         for (let i = 0; i < PIPELINE_SIZE; i++) {
             const compressed = await readFile(
                 `./public/remaining-instances-p${i}.msgpack.xz`,
@@ -42,7 +42,7 @@ async function getData() {
                 if (done) break;
                 chunks.push(value);
             }
-            const remaining = decode(Buffer.concat(chunks)) as Instance[];
+            const remaining = decode(Buffer.concat(chunks)) as EC2Instance[];
             // @ts-expect-error: The first item is the rainbow table.
             const rainbowTable: string[] = remaining.shift();
             remainingInstances.push(...remaining.map((i) =>
@@ -91,7 +91,7 @@ export async function generateMetadata({
     };
 }
 
-function findNearestInstanceMutatesNoCleanup(instances: Instance[], closestTo: Instance) {
+function findNearestInstanceMutatesNoCleanup(instances: EC2Instance[], closestTo: EC2Instance) {
     instances.push(closestTo);
     instances.sort((a, b) => {
         // Sort by CPU, memory, and then GPU.
@@ -121,8 +121,8 @@ function findNearestInstanceMutatesNoCleanup(instances: Instance[], closestTo: I
     return left || right;
 }
 
-function bestInstanceForEachVariant(instances: Instance[], closestTo: Instance) {
-    const variants: Map<string, Instance | Instance[]> = new Map();
+function bestInstanceForEachVariant(instances: EC2Instance[], closestTo: EC2Instance) {
+    const variants: Map<string, EC2Instance | EC2Instance[]> = new Map();
     for (const instance of instances) {
         const [itype] = instance.instance_type.split(".", 2);
         let a = variants.get(itype);
@@ -130,20 +130,20 @@ function bestInstanceForEachVariant(instances: Instance[], closestTo: Instance) 
             a = [];
             variants.set(itype, a);
         }
-        (a as Instance[]).push(instance);
+        (a as EC2Instance[]).push(instance);
     }
 
     for (const [itype, instances] of variants.entries()) {
-        if ((instances as Instance[]).includes(closestTo)) {
+        if ((instances as EC2Instance[]).includes(closestTo)) {
             variants.set(itype, closestTo);
         }
-        const best = findNearestInstanceMutatesNoCleanup(instances as Instance[], closestTo);
+        const best = findNearestInstanceMutatesNoCleanup(instances as EC2Instance[], closestTo);
         variants.set(itype, best);
     }
 
     const o: { [key: string]: string } = {};
     for (const [itype, instance] of variants.entries()) {
-        o[itype] = (instance as Instance).instance_type;
+        o[itype] = (instance as EC2Instance).instance_type;
     }
     return o;
 }
@@ -173,7 +173,7 @@ export default async function Page({
     return (
         <InstanceRoot
             rainbowTable={compressedInstance[0] as string[]}
-            compressedInstance={compressedInstance[1] as Instance}
+            compressedInstance={compressedInstance[1] as EC2Instance}
             regions={regions}
             description={description}
             bestOfVariants={bestInstanceForEachVariant(allOfVariant, instance)}

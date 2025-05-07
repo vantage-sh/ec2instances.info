@@ -1,9 +1,8 @@
-import { Instance } from "@/types";
 import GSettings from "@/utils/g_settings_port";
 import { Column } from "@tanstack/react-table";
 import { useEffect, useCallback, useState } from "react";
 
-function GSettingsNumberFilter({
+function GSettingsNumberFilter<Instance>({
     gSettingsSet,
     gSettingsFullMutations,
     column,
@@ -58,7 +57,7 @@ const columnMapping: Record<string, OnlyAllowedGSettingsKeys> = {
     storage: "minStorage",
 };
 
-export default function IndividualColumnFilter({
+export default function IndividualColumnFilter<Instance>({
     gSettings,
     gSettingsFullMutations,
     column,

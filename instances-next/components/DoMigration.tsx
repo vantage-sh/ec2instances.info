@@ -1,20 +1,21 @@
-import { doDataTablesMigration } from "@/utils/columnVisibility";
-import type { Atom } from "atomtree";
-import { useEffect } from "react";
+"use client";
 
-export default function DoMigration({
-    path,
-    atom,
+import { columnVisibilityAtoms } from "@/state";
+import { useEffect } from "react";
+import * as columnData from "@/utils/colunnData";
+
+export default function DoMigration<AtomKey extends keyof typeof columnVisibilityAtoms>({
+    atomKey,
 }: {
-    path: string;
-    atom: Atom<any>;
+    atomKey: AtomKey;
 }) {
     useEffect(() => {
-        const v = doDataTablesMigration(path);
+        const v = columnData[atomKey].doDataTablesMigration();
         if (v) {
-            atom.set(v);
+            // @ts-expect-error: I can't figure out this type error and don't want to spend time on it
+            columnVisibilityAtoms[atomKey].set(v);
         }
-    }, [path]);
+    }, [atomKey]);
 
     return null;
 }

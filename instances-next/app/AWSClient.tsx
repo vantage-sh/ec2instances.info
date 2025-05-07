@@ -1,25 +1,27 @@
 "use client";
 
-import { useInstanceData } from "@/state";
+import { useInstanceData, columnVisibilityAtoms } from "@/state";
 import InstanceTable from "@/components/InstanceTable";
-import { Instance, Region } from "@/types";
+import { Region, Pricing } from "@/types";
 import Filters from "@/components/Filters";
 import { useMemo, useState } from "react";
 import { RowSelectionState } from "@tanstack/react-table";
-import { columnVisibilityAtom } from "@/state";
-import DoMigration from "@/components/DoMigration";
 import dynamicallyDecompress from "@/utils/dynamicallyDecompress";
+import DoMigration from "@/components/DoMigration";
+import { AtomKeyWhereInstanceIs } from "@/components/InstanceTable";
 
-export default function Client({
+export default function AWSClient<Instance extends { instance_type: string; pricing: Pricing }>({
+    compressedDataPathTemplate,
     regions,
     compressedInstances,
     instanceCount,
-    instancesHash,
+    columnAtomKey,
 }: {
+    compressedDataPathTemplate: string | null;
     regions: Region;
     compressedInstances: [string[], ...Instance[]];
     instanceCount: number;
-    instancesHash: string;
+    columnAtomKey: AtomKeyWhereInstanceIs<Instance>;
 }) {
     const initialInstances = useMemo(() => {
         const rainbowTable = compressedInstances.shift() as string[];
@@ -31,22 +33,20 @@ export default function Client({
         return compressedInstances.map((instance) => dynamicallyDecompress(instance as Instance, rainbowTable));
     }, [compressedInstances]);
 
-    const instances = useInstanceData(
-        `/remaining-instances-p{}.msgpack.xz?cache=${instancesHash}`,
-        initialInstances,
-    );
+    const instances = useInstanceData(compressedDataPathTemplate, initialInstances);
     const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
     return (
         <main className="h-screen flex flex-col">
-            <DoMigration path="/" atom={columnVisibilityAtom} />
-            <Filters regions={regions} rowSelection={rowSelection} />
+            <DoMigration atomKey={columnAtomKey} />
+            <Filters columnAtomKey={columnAtomKey} regions={regions} rowSelection={rowSelection} />
             <div className="flex-1 min-h-0">
                 <InstanceTable
                     instances={instances}
                     rowSelection={rowSelection}
                     setRowSelection={setRowSelection}
                     instanceCount={instanceCount}
+                    columnAtomKey={columnAtomKey}
                 />
             </div>
         </main>

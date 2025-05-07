@@ -1,4 +1,4 @@
-import { Instance } from "@/types";
+import { EC2Instance } from "@/types";
 import { awsInstances } from "./loadedData";
 import generateDescription from "@/utils/generateDescription";
 import { calculatePrice } from "./generateAwsIndexes";
@@ -54,7 +54,7 @@ const niceNames: Record<string, string> = {
     windows: "Windows",
 };
 
-function generateInstanceMarkdown(instance: Instance) {
+function generateInstanceMarkdown(instance: EC2Instance) {
     const tables = generateAwsTables(instance);
 
     function renderData(region: string, platform: string, column: {

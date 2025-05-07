@@ -10,10 +10,10 @@ import {
     SortingState,
     getSortedRowModel,
     RowSelectionState,
+    ColumnDef,
 } from "@tanstack/react-table";
-import { Instance } from "@/types";
 import {
-    columnVisibilityAtom,
+    columnVisibilityAtoms,
     useSearchTerm,
     useSelectedRegion,
     useReservedTerm,
@@ -33,14 +33,20 @@ import {
     useState,
 } from "react";
 import IndividualColumnFilter from "./IndividualColumnFilter";
-import columnsGen from "./columns";
 import SortToggle from "./SortToggle";
+import * as columnData from "@/utils/colunnData";
 
-interface InstanceTableProps {
+export type AtomKeyWhereInstanceIs<Instance> = {
+    [AtomKey in keyof typeof columnData]:
+        typeof columnData[AtomKey]["columnsGen"] extends (...args: any[]) => ColumnDef<Instance>[] ? AtomKey : never;
+}[keyof typeof columnData];
+
+interface InstanceTableProps<Instance> {
     instances: Instance[];
     rowSelection: RowSelectionState;
     setRowSelection: (value: SetStateAction<RowSelectionState>) => void;
     instanceCount: number;
+    columnAtomKey: AtomKeyWhereInstanceIs<Instance>;
 }
 
 function csvEscape(input: string) {
@@ -57,13 +63,14 @@ function csvEscape(input: string) {
 // Hack to stop Tanstack Table from thinking the array changed.
 const emptyColumnFilters: ColumnFiltersState = [];
 
-export default function InstanceTable({
+export default function InstanceTable<Instance extends { instance_type: string }>({
     instances,
     rowSelection,
     setRowSelection,
     instanceCount,
-}: InstanceTableProps) {
-    const columnVisibility = columnVisibilityAtom.use();
+    columnAtomKey,
+}: InstanceTableProps<Instance>) {
+    const columnVisibility = columnVisibilityAtoms[columnAtomKey].use();
     const [searchTerm] = useSearchTerm();
     const [selectedRegion] = useSelectedRegion();
     const [pricingUnit] = usePricingUnit();
@@ -74,10 +81,17 @@ export default function InstanceTable({
     const [compareOn] = useCompareOn();
     const [sorting, setSorting] = useState<SortingState>([]);
 
+    const columns = columnData[columnAtomKey].columnsGen(
+        selectedRegion,
+        pricingUnit,
+        costDuration,
+        reservedTerm,
+    );
+
     // Initially set the column filters to the gSettings.
     useEffect(() => {
         if (!gSettings) return;
-        setColumnFilters([
+        const a = [
             {
                 id: "memory",
                 value: gSettings.minMemory,
@@ -86,35 +100,36 @@ export default function InstanceTable({
                 id: "vCPU",
                 value: gSettings.minVcpus,
             },
-            {
-                id: "memory_per_vcpu",
-                value: gSettings.minMemoryPerVcpu,
-            },
-            {
-                id: "GPU",
-                value: gSettings.minGpus,
-            },
-            {
-                id: "GPU_memory",
-                value: gSettings.minGpuMemory,
-            },
-            {
-                id: "maxips",
-                value: gSettings.minMaxips,
-            },
+        ];
+        if (columnAtomKey === "ec2") {
+            a.push(
+                {
+                    id: "memory_per_vcpu",
+                    value: gSettings.minMemoryPerVcpu,
+                },
+                {
+                    id: "GPU",
+                    value: gSettings.minGpus,
+                },
+                {
+                    id: "GPU_memory",
+                    value: gSettings.minGpuMemory,
+                },
+                {
+                    id: "maxips",
+                    value: gSettings.minMaxips,
+                },
+            );
+        }
+        a.push(
             {
                 id: "storage",
                 value: gSettings.minStorage,
             },
-        ]);
-    }, [gSettingsFullMutations]);
+        );
 
-    const columns = columnsGen(
-        selectedRegion,
-        pricingUnit,
-        costDuration,
-        reservedTerm,
-    );
+        setColumnFilters(a);
+    }, [gSettingsFullMutations, columnAtomKey]);
 
     const data = useMemo(() => {
         if (compareOn && gSettings) {
@@ -129,7 +144,7 @@ export default function InstanceTable({
     const table = useReactTable({
         data,
         getRowId: (row) => row.instance_type,
-        columns,
+        columns: columns as ColumnDef<Instance, any>[],
         state: {
             columnVisibility,
             globalFilter: compareOn ? undefined : searchTerm,

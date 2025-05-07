@@ -1,4 +1,4 @@
-import { Instance } from "@/types";
+import { EC2Instance } from "@/types";
 import { readFile } from "fs/promises";
 import { XzReadableStream } from "xz-decompress";
 import { decode } from "@msgpack/msgpack";
@@ -8,9 +8,9 @@ import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 export const awsInstances = (async () => {
     const compressed30 = decode(
         await readFile("./public/first-30-instances.msgpack"),
-    ) as Instance[];
+    ) as EC2Instance[];
 
-    const remainingInstances: Instance[] = [];
+    const remainingInstances: EC2Instance[] = [];
     for (let i = 0; i < PIPELINE_SIZE; i++) {
         const compressed = await readFile(
             `./public/remaining-instances-p${i}.msgpack.xz`,
@@ -30,7 +30,7 @@ export const awsInstances = (async () => {
             if (done) break;
             chunks.push(value);
         }
-        const remaining = decode(Buffer.concat(chunks)) as Instance[];
+        const remaining = decode(Buffer.concat(chunks)) as EC2Instance[];
         // @ts-expect-error: The first item is the rainbow table.
         const rainbowTable: string[] = remaining.shift();
         remainingInstances.push(...remaining.map((i) =>
