@@ -8,6 +8,12 @@ export async function GET() {
     <url>
         <loc>${"/"}</loc>
     </url>
+    <url>
+        <loc>${"/cache"}</loc>
+    </url>
+    <url>
+        <loc>${"/redshift"}</loc>
+    </url>
 </urlset>`;
     return new Response(sitemap, { headers: { "Content-Type": "application/xml" } });
 }
