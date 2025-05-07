@@ -5,6 +5,8 @@ import AWSClient from "./AWSClient";
 import Head from "next/head";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 
+// TODO: Add metadata
+
 export default async function Home() {
     let data = await readFile("./public/instances-regions.msgpack");
     const regions = decode(data) as Region;
