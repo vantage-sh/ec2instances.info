@@ -98,10 +98,13 @@ function createColumnVisibilityAtomForKey<Key extends keyof typeof columnData>(k
     };
 }
 
-export const columnVisibilityAtoms = {
-    ec2: createColumnVisibilityAtomForKey("ec2"),
-    redshift: createColumnVisibilityAtomForKey("redshift"),
-};
+export const columnVisibilityAtoms: {
+    [key in keyof typeof columnData]: ReturnType<typeof createColumnVisibilityAtomForKey<key>>;
+} = {} as any;
+for (const key in columnData) {
+    // @ts-expect-error: TS doesn't understand this because its dynamic.
+    columnVisibilityAtoms[key] = createColumnVisibilityAtomForKey(key);
+}
 
 let gSettingsHolder: [GSettings | undefined, number] = [undefined, 0];
 

@@ -2,7 +2,6 @@ import { Region } from "@/types";
 import { readFile } from "fs/promises";
 import addRenderInfo from "@/utils/addRenderInfo";
 import AWSClient from "../AWSClient";
-import makeRainbowTable from "@/utils/makeRainbowTable";
 import type { Instance } from "@/utils/colunnData/redshift";
 
 export default async function Redshift() {
@@ -27,14 +26,10 @@ export default async function Redshift() {
         }
     }
 
-    const compressedInstances = makeRainbowTable(instances) as [string[], ...Instance[]];
-
     return (
         <AWSClient
-            instanceCount={instances.length}
             regions={regions}
-            compressedInstances={compressedInstances}
-            compressedDataPathTemplate={null}
+            instances={instances as Instance[]}
             columnAtomKey="redshift"
         />
     );

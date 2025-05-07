@@ -1,8 +1,17 @@
-import { PricingUnit, Pricing } from "@/types";
+import { PricingUnit } from "@/types";
 import { CostDuration } from "@/types";
 import { makeSchemaWithDefaults, doAllDataTablesMigrations } from "./shared";
 import { ColumnDef, Row } from "@tanstack/react-table";
 import Link from "next/link";
+
+type RedshiftPricing = {
+    [region: string]: {
+        ondemand: string;
+        reserved?: {
+            [term: string]: string;
+        };
+    };
+}
 
 export type Instance = {
     pretty_name: string;
@@ -11,9 +20,9 @@ export type Instance = {
     vcpu: string;
     storage: string;
     io: string;
-    ECU: string;
+    ecu: string;
     generation: string;
-    pricing: Pricing;
+    pricing: RedshiftPricing;
 };
 
 const initialColumnsArr = [
@@ -77,11 +86,40 @@ function tryConv(value: string | number) {
 }
 
 function gt(row: Row<Instance>, columnId: string, filterValue: number) {
-    const value = row.original[columnId as keyof Instance];
+    console.log(row.original);
+    const value = row.original[columnId.toLowerCase() as keyof Instance];
     // @ts-expect-error: We know this is a string or number.
     const conv = tryConv(value);
     if (isNaN(conv)) return false;
     return conv >= filterValue;
+}
+
+function calculateCost(
+    price: string | undefined,
+    instance: Instance,
+    pricingUnit: PricingUnit,
+    costDuration: CostDuration,
+) {
+    if (!price) return "N/A";
+
+    const hourMultipliers = {
+        secondly: 1 / (60 * 60),
+        minutely: 1 / 60,
+        hourly: 1,
+        daily: 24,
+        weekly: 7 * 24,
+        monthly: (365 * 24) / 12,
+        annually: 365 * 24,
+    };
+
+    const durationMultiplier = hourMultipliers[costDuration];
+    let pricingUnitModifier = 1;
+
+    if (pricingUnit !== "instance") {
+        pricingUnitModifier = Number(instance[pricingUnit]);
+    }
+
+    return `$${((Number(price) * durationMultiplier) / pricingUnitModifier).toFixed(4)} ${costDuration}`;
 }
 
 export const columnsGen = (
@@ -99,7 +137,7 @@ export const columnsGen = (
         cell: (info) => info.getValue() as string,
     },
     {
-        accessorKey: "instanceType",
+        accessorKey: "instance_type",
         header: "API Name",
         id: "instance_type",
         sortingFn: "alphanumeric",
@@ -132,6 +170,53 @@ export const columnsGen = (
         id: "storage",
         sortingFn: "alphanumeric",
         filterFn: gt,
-        cell: (info) => `${info.getValue()} GiB`,
+    },
+    {
+        accessorKey: "io",
+        header: "IO",
+        id: "io",
+        sortingFn: "alphanumeric",
+        filterFn: gt,
+    },
+    {
+        accessorKey: "ecu",
+        header: "ECU",
+        id: "ECU",
+        sortingFn: "alphanumeric",
+        filterFn: gt,
+    },
+    {
+        accessorKey: "currentGeneration",
+        header: "Generation",
+        id: "generation",
+        sortingFn: "alphanumeric",
+        cell: (info) => {
+            if (info.getValue() === "Yes") return "current";
+            return "previous";
+        },
+    },
+    {
+        accessorKey: "pricing",
+        header: "On Demand Cost",
+        id: "cost-ondemand",
+        sortingFn: "alphanumeric",
+        cell: (info) => {
+            const pricing = info.getValue() as RedshiftPricing;
+            const region = pricing[selectedRegion];
+            if (!region) return "N/A";
+            return calculateCost(region.ondemand, info.row.original, pricingUnit, costDuration);
+        },
+    },
+    {
+        accessorKey: "pricing",
+        header: "Reserved Cost",
+        id: "cost-reserved",
+        sortingFn: "alphanumeric",
+        cell: (info) => {
+            const pricing = info.getValue() as RedshiftPricing;
+            const region = pricing[selectedRegion];
+            if (!region) return "N/A";
+            return calculateCost(region.reserved?.[reservedTerm], info.row.original, pricingUnit, costDuration);
+        },
     },
 ];
