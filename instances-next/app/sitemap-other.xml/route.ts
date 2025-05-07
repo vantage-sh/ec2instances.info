@@ -12,6 +12,9 @@ export async function GET() {
         <loc>${"/cache"}</loc>
     </url>
     <url>
+        <loc>${"/opensearch"}</loc>
+    </url>
+    <url>
         <loc>${"/redshift"}</loc>
     </url>
 </urlset>`;

@@ -1,6 +1,6 @@
 import { EC2Instance } from "@/types";
 
-export default function makeRainbowTable<SkipPlatform = false>(instances: EC2Instance[]) {
+export default function makeRainbowTable(instances: EC2Instance[]) {
     // Pass 1: Get all the keys.
     const pricingSet = new Set<string>();
     for (const instance of instances) {

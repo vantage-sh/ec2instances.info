@@ -97,7 +97,7 @@ export default function InstanceTable<Instance extends { instance_type: string }
                 value: gSettings.minMemory,
             },
             {
-                id: columns.find((v) => v.id === "vcpus")?.id ?? "vCPU",
+                id: columns.find((v) => v.id === "vcpus" || v.id === "vcpu")?.id ?? "vCPU",
                 value: gSettings.minVcpus,
             },
         ];
