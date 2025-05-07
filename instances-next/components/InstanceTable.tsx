@@ -97,7 +97,7 @@ export default function InstanceTable<Instance extends { instance_type: string }
                 value: gSettings.minMemory,
             },
             {
-                id: "vCPU",
+                id: columns.find((v) => v.id === "vcpus")?.id ?? "vCPU",
                 value: gSettings.minVcpus,
             },
         ];
@@ -121,12 +121,14 @@ export default function InstanceTable<Instance extends { instance_type: string }
                 },
             );
         }
-        a.push(
-            {
-                id: "storage",
-                value: gSettings.minStorage,
-            },
-        );
+        if (columns.find((v) => v.id === "storage")) {
+            a.push(
+                {
+                    id: "storage",
+                    value: gSettings.minStorage,
+                },
+            );
+        }
 
         setColumnFilters(a);
     }, [gSettingsFullMutations, columnAtomKey]);

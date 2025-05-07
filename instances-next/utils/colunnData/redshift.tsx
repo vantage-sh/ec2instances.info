@@ -1,7 +1,7 @@
 import { PricingUnit } from "@/types";
 import { CostDuration } from "@/types";
-import { makeSchemaWithDefaults, doAllDataTablesMigrations } from "./shared";
-import { ColumnDef, Row } from "@tanstack/react-table";
+import { makeSchemaWithDefaults, doAllDataTablesMigrations, gt, calculateCost } from "./shared";
+import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 
 type RedshiftPricing = {
@@ -66,60 +66,6 @@ export function makePrettyNames<V>(makeColumnOption: (key: keyof typeof initialC
         makeColumnOption("cost-ondemand", "On Demand Cost"),
         makeColumnOption("cost-reserved", "Reserved Cost"),
     ];
-}
-
-const NOT_NUMBER_OR_DOT = /[^0-9.]/g;
-
-function tryConv(value: string | number) {
-    if (typeof value === "number") return value;
-    if (typeof value === "string") {
-        const n = Number(value);
-        if (isNaN(n)) {
-            const s = value.split(" ")[0].replace(NOT_NUMBER_OR_DOT, "");
-            const n2 = Number(s);
-            if (!isNaN(n2)) return n2;
-            return NaN;
-        }
-        return n;
-    }
-    return NaN;
-}
-
-function gt(row: Row<Instance>, columnId: string, filterValue: number) {
-    console.log(row.original);
-    const value = row.original[columnId.toLowerCase() as keyof Instance];
-    // @ts-expect-error: We know this is a string or number.
-    const conv = tryConv(value);
-    if (isNaN(conv)) return false;
-    return conv >= filterValue;
-}
-
-function calculateCost(
-    price: string | undefined,
-    instance: Instance,
-    pricingUnit: PricingUnit,
-    costDuration: CostDuration,
-) {
-    if (!price) return "N/A";
-
-    const hourMultipliers = {
-        secondly: 1 / (60 * 60),
-        minutely: 1 / 60,
-        hourly: 1,
-        daily: 24,
-        weekly: 7 * 24,
-        monthly: (365 * 24) / 12,
-        annually: 365 * 24,
-    };
-
-    const durationMultiplier = hourMultipliers[costDuration];
-    let pricingUnitModifier = 1;
-
-    if (pricingUnit !== "instance") {
-        pricingUnitModifier = Number(instance[pricingUnit]);
-    }
-
-    return `$${((Number(price) * durationMultiplier) / pricingUnitModifier).toFixed(4)} ${costDuration}`;
 }
 
 export const columnsGen = (
