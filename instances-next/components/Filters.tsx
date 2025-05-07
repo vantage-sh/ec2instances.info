@@ -91,11 +91,11 @@ export default function Filters<DataKey extends keyof typeof columnData>({ regio
 
     return (
         <div
-            className="m-2 d-flex justify-content-between align-items-end"
+            className="my-1.5 mx-2 d-flex justify-content-between align-items-end"
             id="menu"
         >
-            <div className="d-flex align-items-md-end gap-md-4 gap-3 flex-md-row flex-column">
-                <div className="d-flex gap-3">
+            <div className="d-flex align-items-md-end gap-md-4 gap-4 flex-md-row flex-column">
+                <div className="d-flex gap-4">
                     <FilterDropdown
                         label="Region"
                         value={selectedRegion}
@@ -111,21 +111,18 @@ export default function Filters<DataKey extends keyof typeof columnData>({ regio
                         value={pricingUnit}
                         onChange={(v) => setPricingUnit(v as PricingUnit)}
                         options={pricingUnitOptions}
-                        icon="shopping-cart"
                     />
                     <FilterDropdown
                         label="Cost"
                         value={duration}
                         onChange={(v) => setDuration(v as CostDuration)}
                         options={durationOptions}
-                        icon="shopping-cart"
                     />
                     <FilterDropdown
                         label="Reserved"
                         value={reservedTerm}
                         onChange={(v) => setReservedTerm(v)}
                         options={reservedTermOptions}
-                        icon="globe"
                     />
                     <ColumnFilter<DataKey>
                         // @ts-expect-error: TS doesn't like this for some reason.
@@ -149,14 +146,14 @@ export default function Filters<DataKey extends keyof typeof columnData>({ regio
                     ) : (
                         <button
                             disabled={!anySelected}
-                            className="btn btn-purple btn-compare disabled:opacity-50"
+                            className="btn btn-purple btn-compare disabled:opacity-50 self-end"
                             onClick={() => setCompareOn(true)}
                         >
                             Compare
                         </button>
                     )}
                     <button
-                        className="btn btn-outline-secondary btn-clear"
+                        className="btn text-sm btn-outline-secondary btn-clear self-end"
                         onClick={clearGSettings}
                     >
                         Clear Filters

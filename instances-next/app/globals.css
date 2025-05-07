@@ -33,7 +33,7 @@ body {
 }
 
 .index-table th {
-    @apply whitespace-nowrap overflow-hidden text-ellipsis text-left relative bg-gray-100;
+    @apply whitespace-nowrap overflow-hidden text-ellipsis text-left relative bg-gray-6 border-t border-gray-5 border-b;
 }
 
 .index-table tbody {
@@ -69,7 +69,7 @@ body {
 .btn {
     font-size: 14px;
     font-weight: 600;
-    padding: 8px 16px;
+    padding: 8px 12px;
     border-radius: 6px;
     border: none;
     cursor: pointer;
@@ -154,13 +154,12 @@ body {
 .dropdown-label {
     font-size: 12px;
     color: var(--color-gray-2);
-    margin-bottom: 4px;
 }
 
 .dropdown-toggle {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     padding: 8px 16px;
     background-color: white;
     border: 1px solid var(--color-gray-5);
@@ -179,7 +178,6 @@ body {
     display: inline-block;
     width: 0;
     height: 0;
-    margin-left: 8px;
     vertical-align: middle;
     border-top: 4px solid;
     border-right: 4px solid transparent;

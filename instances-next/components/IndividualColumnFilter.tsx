@@ -37,7 +37,7 @@ function GSettingsNumberFilter<Instance>({
             value={value}
             onChange={onChange}
             placeholder={`Filter ${column.columnDef.header as string}...`}
-            className="w-full px-2 py-1 text-sm border rounded"
+            className="w-full px-2 py-1 text-sm border border-gray-5 bg-white font-normal rounded"
             min={0}
         />
     );
@@ -95,7 +95,7 @@ export default function IndividualColumnFilter<Instance>({
             value={(column.getFilterValue() as string) ?? ""}
             onChange={(e) => column.setFilterValue(e.target.value)}
             placeholder={`Filter ${column.columnDef.header as string}...`}
-            className="w-full px-2 py-1 text-sm border rounded"
+            className="w-full px-2 py-1 text-sm border border-gray-5 bg-white font-normal rounded"
         />
     );
 }

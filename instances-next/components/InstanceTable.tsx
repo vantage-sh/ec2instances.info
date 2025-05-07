@@ -276,7 +276,7 @@ export default function InstanceTable<Instance extends { instance_type: string }
                                     <th key={header.id}>
                                         <div className="mx-2 mt-2 flex items-center justify-between">
                                             <span
-                                                className="cursor-pointer select-none"
+                                                className="px-2 cursor-pointer select-none flex-1 hover:bg-gray-5"
                                                 onClick={() =>
                                                     setSorting((old) => [
                                                         {
