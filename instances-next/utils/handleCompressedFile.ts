@@ -16,8 +16,39 @@ export default function handleCompressedFile<Instance>(
     }
 
     let instances = initialInstances;
-    const pipeline: Instance[][] = Array(PIPELINE_SIZE).fill([]);
     const changeNotifier = new Set<() => void>();
+
+    const o = {
+        get value() {
+            return instances;
+        },
+        addChangeNotifier: (fn: () => void) => {
+            changeNotifier.add(fn);
+            return () => changeNotifier.delete(fn);
+        },
+    };
+
+    if (!pathFormatString.includes("{}")) {
+        // If this isn't a pipeline, we can just use a single worker.
+        const worker = new Worker(
+            new URL("./processor.worker.ts", import.meta.url),
+        );
+        worker.onmessage = (e) => {
+            instances = [...initialInstances, ...e.data as Instance[]];
+            for (const fn of changeNotifier) {
+                fn();
+            }
+            worker.terminate();
+        };
+        const url = new URL(
+            pathFormatString,
+            `${window.location.protocol}//${window.location.host}`,
+        ).href;
+        worker.postMessage({ url });
+        return o;
+    }
+
+    const pipeline: Instance[][] = Array(PIPELINE_SIZE).fill([]);
     for (let i = 0; i < PIPELINE_SIZE; i++) {
         const worker = new Worker(
             new URL("./processor.worker.ts", import.meta.url),
@@ -38,13 +69,5 @@ export default function handleCompressedFile<Instance>(
         worker.postMessage({ url });
     }
 
-    return {
-        get value() {
-            return instances;
-        },
-        addChangeNotifier: (fn: () => void) => {
-            changeNotifier.add(fn);
-            return () => changeNotifier.delete(fn);
-        },
-    };
+    return o;
 }

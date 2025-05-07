@@ -45,6 +45,8 @@ public/*.msgpack.xz
 public/instance-count.txt
 public/instances-hash.txt
 public/instance-ids.json
+public/instance-rds-count.txt
+public/instance-rds-hash.txt
 
 # llms data
 public/llms.txt

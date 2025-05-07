@@ -14,20 +14,18 @@ const preloadedValues: {
 } = {};
 
 export function useInstanceData<Instance>(path: string | null, initialInstances: Instance[]) {
-    if (!path) {
-        return initialInstances;
-    }
     return useSyncExternalStore(
         (onStoreChange) => {
+            if (!path) return () => {};
             let p = preloadedValues[path];
             if (!p) {
                 p = handleCompressedFile(path, initialInstances);
                 preloadedValues[path] = p;
             }
-            const unregister = p.addChangeNotifier(onStoreChange);
-            return unregister;
+            return p.addChangeNotifier(onStoreChange);
         },
         () => {
+            if (!path) return initialInstances;
             let p = preloadedValues[path];
             if (!p) {
                 p = handleCompressedFile(path, initialInstances);

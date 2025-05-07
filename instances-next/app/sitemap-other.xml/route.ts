@@ -9,6 +9,9 @@ export async function GET() {
         <loc>${"/"}</loc>
     </url>
     <url>
+        <loc>${"/rds"}</loc>
+    </url>
+    <url>
         <loc>${"/cache"}</loc>
     </url>
     <url>

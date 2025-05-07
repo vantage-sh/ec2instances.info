@@ -13,7 +13,7 @@ function hashInstances(instances: EC2Instance[]) {
     return createHash("sha256").update(j).digest("hex");
 }
 
-async function main() {
+async function compressEC2Instances() {
     const regions: Region = {
         main: {},
         local_zone: {},
@@ -35,7 +35,7 @@ async function main() {
         }
     }
 
-    // Encode and then compress the instances.
+    // Encode and then compress the EC2 instances.
     await writeFile("./public/instance-count.txt", instances.length.toString());
     await writeFile("./public/instance-ids.json", JSON.stringify(instances.map((i: EC2Instance) => i.instance_type)));
     await writeFile("./public/instances-hash.txt", hashInstances(instances));
@@ -50,7 +50,7 @@ async function main() {
     const itemsPerPipeline = Math.ceil(remainingInstances.length / PIPELINE_SIZE);
     const remainingPipelineLength = remainingInstances.length % itemsPerPipeline;
 
-    console.log("Compressing AWS instances data...");
+    console.log("Compressing EC2 instances data...");
     for (let i = 0; i < PIPELINE_SIZE; i++) {
         let chunk = remainingInstances.slice(i * itemsPerPipeline, (i + 1) * itemsPerPipeline);
         if (i === PIPELINE_SIZE - 1 && remainingPipelineLength > 0) {
@@ -68,7 +68,56 @@ async function main() {
         );
     }
 
-    console.log("AWS instances data compressed and saved");
+    console.log("EC2 instances data compressed and saved");
+}
+
+async function compressRDSInstances() {
+    const regions: Region = {
+        main: {},
+        local_zone: {},
+        wavelength: {},
+    };
+    const instances = JSON.parse(
+        await readFile("../www/rds/instances.json", "utf8"),
+    );
+    for (const instance of instances) {
+        addRenderInfo(instance);
+        for (const r in instance.pricing) {
+            if (r.includes("wl1") || r.includes("wl2")) {
+                regions.wavelength[r] = instance.regions[r];
+            } else if (/\d+/.test(r)) {
+                regions.local_zone[r] = instance.regions[r];
+            } else {
+                regions.main[r] = instance.regions[r];
+            }
+        }
+        delete instance.regions;
+    }
+
+    // Encode and then compress the RDS instances.
+    console.log("Compressing RDS instances data...");
+    await writeFile("./public/instance-rds-count.txt", instances.length.toString());
+    await writeFile("./public/instance-rds-hash.txt", hashInstances(instances));
+    const first30Instances = instances.slice(0, 30);
+    const first30InstancesEncoded = encode(makeRainbowTable(first30Instances));
+    await writeFile("./public/instance-rds-regions.msgpack", encode(regions));
+    await writeFile(
+        "./public/first-30-rds-instances.msgpack",
+        first30InstancesEncoded,
+    );
+    const remainingInstances = instances.slice(30);
+    const res = await new Promise<Buffer>((resolve) => {
+        compress(Buffer.from(encode(makeRainbowTable(remainingInstances))), {}, (result) => {
+            resolve(result);
+        });
+    });
+    await writeFile("./public/remaining-rds-instances.msgpack.xz", res);
+    console.log("RDS instances data compressed and saved");
+}
+
+async function main() {
+    await compressEC2Instances();
+    await compressRDSInstances();
 }
 
 main();
