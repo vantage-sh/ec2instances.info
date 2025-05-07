@@ -18,6 +18,9 @@ export function makeHalfRainbowTable<
                 reservedSet.add(platform);
             }
         }
+
+        // @ts-expect-error: We don't need this and if it exists it is HUGE
+        delete instance.regions;
     }
 
     // Pass 2: Mutate the instances to use the rainbow table.

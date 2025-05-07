@@ -26,6 +26,11 @@ export default async function Cache() {
         }
     }
 
+    for (const instance of instances) {
+        // Shave a few kb off the size.
+        delete instance.regions;
+    }
+
     const compressedData = makeRainbowTable(instances);
 
     return (
