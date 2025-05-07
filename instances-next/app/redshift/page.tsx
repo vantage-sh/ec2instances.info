@@ -1,8 +1,9 @@
 import { Region } from "@/types";
 import { readFile } from "fs/promises";
 import addRenderInfo from "@/utils/addRenderInfo";
-import AWSClient from "../AWSClient";
 import type { Instance } from "@/utils/colunnData/redshift";
+import { makeHalfRainbowTable } from "@/utils/halfRainbowTable";
+import HalfRainbowWrap from "../HalfRainbowWrap";
 
 export default async function Redshift() {
     const regions: Region = {
@@ -26,10 +27,13 @@ export default async function Redshift() {
         }
     }
 
+    const [rainbowTable, ...compressedInstances] = makeHalfRainbowTable(instances as Instance[]);
+
     return (
-        <AWSClient
+        <HalfRainbowWrap
+            instances={compressedInstances}
+            rainbowTable={rainbowTable}
             regions={regions}
-            instances={instances as Instance[]}
             columnAtomKey="redshift"
         />
     );
