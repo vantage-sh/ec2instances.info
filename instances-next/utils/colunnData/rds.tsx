@@ -1,27 +1,8 @@
-import { CostDuration, PricingUnit } from "@/types";
+import { CostDuration, EC2Instance, PricingUnit } from "@/types";
 import { makeSchemaWithDefaults, doAllDataTablesMigrations, gt } from "./shared";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 
-type OpenSearchPricing = {
-    [region: string]: {
-        ondemand: string;
-        reserved?: {
-            [term: string]: string;
-        };
-    };
-}
-
-export type Instance = {
-    pretty_name: string;
-    instance_type: string;
-    memoryGib: string;
-    vcpu: string;
-    storage: string;
-    ecu: string;
-    pricing: OpenSearchPricing;
-    currentGeneration: string;
-};
 
 const initialColumnsArr = [
     ["pretty_name", true],
@@ -61,7 +42,7 @@ export const columnsGen = (
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
     reservedTerm: string,
-): ColumnDef<Instance>[] => [
+): ColumnDef<EC2Instance>[] => [
     {
         header: "Name",
         accessorKey: "pretty_name",
