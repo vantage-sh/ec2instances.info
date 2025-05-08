@@ -144,6 +144,7 @@ export default async function Page({
             generatorKey="ec2"
             pathPrefix="/aws/ec2"
             lessPricingFlexibility={false}
+            tablePath="/"
         />
     );
 }

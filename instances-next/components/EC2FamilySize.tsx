@@ -10,7 +10,7 @@ export type AllOfInstanceType = {
     memory: string | number;
 }[];
 
-export function EC2FamilySizes({ allOfInstanceType, instanceName, pathPrefix }: { allOfInstanceType: AllOfInstanceType; instanceName: string; pathPrefix: string }) {
+export function EC2FamilySizes({ allOfInstanceType, instanceName, pathPrefix, tablePath }: { allOfInstanceType: AllOfInstanceType; instanceName: string; pathPrefix: string; tablePath: string }) {
     // This is a hack, but its a memo so that it runs immediately. We don't need a variable since its a mutation.
     useMemo(() => {
         return allOfInstanceType.sort((a, b) => {
@@ -57,7 +57,7 @@ export function EC2FamilySizes({ allOfInstanceType, instanceName, pathPrefix }: 
             </table>
             <div className="mt-4 mb-6">
                 <p className="text-center text-sm">
-                    <Link href={`/?selected=${instanceName}`} className="p-2 border border-gray-200 hover:border-gray-300 rounded-md">
+                    <Link href={`${tablePath}?selected=${instanceName}`} className="p-2 border border-gray-200 hover:border-gray-300 rounded-md">
                         Compare {instanceName} to other instances
                     </Link>
                 </p>
