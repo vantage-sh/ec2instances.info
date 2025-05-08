@@ -18,7 +18,7 @@ function gt(row: Row<EC2Instance>, columnId: string, filterValue: number) {
     return value >= filterValue;
 }
 
-function calculateCost(
+export function calculateCost(
     price: string | undefined,
     instance: EC2Instance,
     pricingUnit: PricingUnit,
@@ -52,7 +52,7 @@ function calculateCost(
     return (Number(price) * durationMultiplier) / pricingUnitModifier;
 }
 
-function calculateAndFormatCost(
+export function calculateAndFormatCost(
     price: string | undefined,
     instance: EC2Instance,
     pricingUnit: PricingUnit,
