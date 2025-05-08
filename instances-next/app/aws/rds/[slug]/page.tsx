@@ -76,6 +76,24 @@ const osOptions: [string, string][] = [
     ["MySQL", "MySQL"],
     ["Oracle", "Oracle"],
     ["SQL Server", "SQL Server"],
+    ["21", "Aurora Postgres & MySQL"],
+    ["211", "Aurora I/O Optimized"],
+    ["403", "SQL Server Enterprise"],
+    ["18", "MariaDB"],
+    ["20", "Oracle Standard Two"],
+    ["19", "Oracle Standard Two BYOL"],
+    ["4", "Oracle Standard BYOL"],
+    ["410", "Oracle Enterprise BYOL"],
+    ["12", "SQL Server Standard"],
+    ["10", "SQL Server Express"],
+    ["3", "Oracle Standard One BYOL"],
+    ["210", "MySQL (Outpost On-Prem)"],
+    ["220", "PostgreSQL (Outpost On-Prem)"],
+    ["230", "SQL Server Enterprise (Outpost On-Prem)"],
+    ["231", "SQL Server (Outpost On-Prem)"],
+    ["232", "SQL Server Web (Outpost On-Prem)"],
+    ["405", "SQL Server Standard BYOM"],
+    ["406", "SQL Server Enterprise BYOM"],
 ];
 
 export default async function Page({
@@ -129,6 +147,7 @@ export default async function Page({
             pathPrefix="/aws/rds"
             lessPricingFlexibility={true}
             tablePath="/rds"
+            storeOsNameRatherThanId={true}
         />
     );
 }

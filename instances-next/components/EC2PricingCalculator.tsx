@@ -2,7 +2,7 @@
 
 import { EC2Instance, Pricing, CostDuration, Region } from "@/types";
 import { DollarSignIcon } from "lucide-react";
-import { useMemo, useState, useId, useEffect } from "react";
+import { useMemo, useState, useId, useEffect, useCallback } from "react";
 import processRainbowTable from "@/utils/processRainbowTable";
 import { durationOptions } from "@/utils/dataMappings";
 
@@ -41,12 +41,14 @@ function Calculator({
     osOptions,
     defaultOs,
     lessPricingFlexibility,
+    storeOsNameRatherThanId,
 }: {
     pricing: Pricing;
     regions: Region;
     osOptions: [string, string][];
     defaultOs: string;
     lessPricingFlexibility: boolean;
+    storeOsNameRatherThanId: boolean;
 }) {
     const priceHoldersId = useId();
 
@@ -71,10 +73,17 @@ function Calculator({
         if (region && regions.local_zone[region]) setRegionState(region);
 
         // If there is no OS option, don't let the user change it.
-        if (defaultPlatform === "linux") {
+        if (defaultPlatform === defaultOs) {
             const platform = query.get("platform");
-            if (platform && osOptions.some(([value]) => value === platform))
-                setPlatformState(platform);
+            if (platform) {
+                if (storeOsNameRatherThanId) {
+                    const osByName = osOptions.find(([, name]) => name === platform);
+                    if (osByName) setPlatformState(osByName[0]);
+                } else {
+                    const osById = osOptions.find(([id]) => id === platform);
+                    if (osById) setPlatformState(platform);
+                }
+            }
         }
 
         const duration = query.get("duration");
@@ -103,7 +112,7 @@ function Calculator({
             )
                 setPricingTypeState(validPricingType[0]);
         }
-    }, [pricing, regions, osOptions]);
+    }, [pricing, regions, osOptions, storeOsNameRatherThanId, defaultOs]);
 
     function wrapStringUpdater<T extends string>(
         handler: (value: T) => void,
@@ -118,7 +127,6 @@ function Calculator({
         };
     }
     const setRegion = wrapStringUpdater(setRegionState, "region");
-    const setPlatform = wrapStringUpdater(setPlatformState, "platform");
     const setDuration = wrapStringUpdater<CostDuration>(
         setDurationState,
         "duration",
@@ -126,6 +134,19 @@ function Calculator({
     const setPricingType = wrapStringUpdater(
         setPricingTypeState,
         "pricingType",
+    );
+    const setPlatform = useCallback(
+        (value: string) => {
+            setPlatformState(value);
+            let v = value;
+            if (storeOsNameRatherThanId) {
+                v = osOptions.find(([id]) => id === value)?.[1] || value;
+            }
+            const url = new URL(window.location.href);
+            url.searchParams.set("platform", v);
+            window.history.replaceState({}, "", url.toString());
+        },
+        [setPlatformState, storeOsNameRatherThanId, osOptions],
     );
 
     const prices = useMemo(() => {
@@ -274,6 +295,7 @@ type PricingSelectorProps = {
     osOptions: [string, string][];
     defaultOs: string;
     lessPricingFlexibility: boolean;
+    storeOsNameRatherThanId: boolean;
 };
 
 export default function EC2PricingSelector({
@@ -283,6 +305,7 @@ export default function EC2PricingSelector({
     osOptions,
     defaultOs,
     lessPricingFlexibility,
+    storeOsNameRatherThanId,
 }: PricingSelectorProps) {
     const instance = useMemo(() => {
         if (!Array.isArray(compressedInstance.pricing))
@@ -302,6 +325,7 @@ export default function EC2PricingSelector({
                 osOptions={osOptions}
                 defaultOs={defaultOs}
                 lessPricingFlexibility={lessPricingFlexibility}
+                storeOsNameRatherThanId={storeOsNameRatherThanId}
             />
         </section>
     );

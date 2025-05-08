@@ -155,6 +155,7 @@ export default async function Page({
             pathPrefix="/aws/ec2"
             lessPricingFlexibility={false}
             tablePath="/"
+            storeOsNameRatherThanId={false}
         />
     );
 }

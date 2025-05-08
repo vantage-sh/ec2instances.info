@@ -22,6 +22,7 @@ interface InstanceRootProps {
     pathPrefix: string;
     lessPricingFlexibility: boolean;
     tablePath: string;
+    storeOsNameRatherThanId: boolean;
 }
 
 function InstanceVariants({
@@ -178,6 +179,7 @@ export default function EC2InstanceRoot({
     pathPrefix,
     lessPricingFlexibility,
     tablePath,
+    storeOsNameRatherThanId,
 }: InstanceRootProps) {
     return (
         <main className="md:flex my-4 px-4 max-w-screen-lg mx-auto gap-8">
@@ -193,6 +195,7 @@ export default function EC2InstanceRoot({
                     osOptions={osOptions}
                     defaultOs={defaultOs}
                     lessPricingFlexibility={lessPricingFlexibility}
+                    storeOsNameRatherThanId={storeOsNameRatherThanId}
                 />
                 <EC2FamilySizes
                     allOfInstanceType={allOfInstanceType}
