@@ -98,6 +98,7 @@ async function compressRDSInstances() {
     console.log("Compressing RDS instances data...");
     await writeFile("./public/instance-rds-count.txt", instances.length.toString());
     await writeFile("./public/instance-rds-hash.txt", hashInstances(instances));
+    await writeFile("./public/instance-rds-ids.json", JSON.stringify(instances.map((i: EC2Instance) => i.instance_type)));
     const first30Instances = instances.slice(0, 30);
     const first30InstancesEncoded = encode(makeRainbowTable(first30Instances));
     await writeFile("./public/instance-rds-regions.msgpack", encode(regions));

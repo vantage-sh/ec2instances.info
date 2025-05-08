@@ -47,6 +47,7 @@ public/instances-hash.txt
 public/instance-ids.json
 public/instance-rds-count.txt
 public/instance-rds-hash.txt
+public/instance-rds-ids.json
 
 # llms data
 public/llms.txt
