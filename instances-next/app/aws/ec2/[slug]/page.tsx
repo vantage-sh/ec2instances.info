@@ -143,6 +143,7 @@ export default async function Page({
             defaultOs="linux"
             generatorKey="ec2"
             pathPrefix="/aws/ec2"
+            lessPricingFlexibility={false}
         />
     );
 }

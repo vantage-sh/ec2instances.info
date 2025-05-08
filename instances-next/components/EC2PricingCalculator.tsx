@@ -40,11 +40,13 @@ function Calculator({
     regions,
     osOptions,
     defaultOs,
+    lessPricingFlexibility,
 }: {
     pricing: Pricing;
     regions: Region;
     osOptions: [string, string][];
     defaultOs: string;
+    lessPricingFlexibility: boolean;
 }) {
     const priceHoldersId = useId();
 
@@ -90,7 +92,7 @@ function Calculator({
         if (pricingType) {
             // We do this in case the case got weird when reading the link.
             const validPricingType = reservedTermOptions.find(([value]) => value.toLowerCase() === pricingType.toLowerCase());
-            if (validPricingType) setPricingTypeState(validPricingType[0]);
+            if (validPricingType && (!lessPricingFlexibility || !validPricingType[0].includes("Convertible"))) setPricingTypeState(validPricingType[0]);
         }
     }, [pricing, regions, osOptions]);
 
@@ -110,15 +112,19 @@ function Calculator({
 
     const prices = useMemo(() => {
         const root = pricing[region]?.[platform];
-        return [
+        const a = [
             {
                 label: "On Demand",
                 value: dollarString(root?.ondemand, duration),
             },
-            {
+        ];
+        if (!lessPricingFlexibility) {
+            a.push({
                 label: "Spot",
                 value: dollarString(root?.spot_avg, duration),
-            },
+            });
+        }
+        a.push(
             {
                 label: "1-Year Reserved",
                 value: dollarString(root?.reserved?.[`yrTerm1${pricingType}`], duration),
@@ -127,8 +133,9 @@ function Calculator({
                 label: "3-Year Reserved",
                 value: dollarString(root?.reserved?.[`yrTerm3${pricingType}`], duration),
             },
-        ];
-    }, [pricing, region, platform, duration, pricingType]);
+        );
+        return a;
+    }, [pricing, region, platform, duration, pricingType, lessPricingFlexibility]);
 
     const localZones = useMemo(() => {
         return Object.entries(regions.local_zone).sort((a, b) => {
@@ -180,7 +187,7 @@ function Calculator({
                 </select>
 
                 <select aria-controls={priceHoldersId} value={pricingType} className={selectStyling} onChange={(e) => setPricingType(e.target.value)}>
-                    {reservedTermOptions.map(([value, label]) => (
+                    {reservedTermOptions.map(([value, label]) => lessPricingFlexibility && value.includes("Convertible") ? null : (
                         <option key={value} value={value}>{label}</option>
                     ))}
                 </select>
@@ -195,9 +202,10 @@ type PricingSelectorProps = {
     regions: Region;
     osOptions: [string, string][];
     defaultOs: string;
+    lessPricingFlexibility: boolean;
 }
 
-export default function EC2PricingSelector({ rainbowTable, compressedInstance, regions, osOptions, defaultOs }: PricingSelectorProps) {
+export default function EC2PricingSelector({ rainbowTable, compressedInstance, regions, osOptions, defaultOs, lessPricingFlexibility }: PricingSelectorProps) {
     const instance = useMemo(() => {
         if (!Array.isArray(compressedInstance.pricing)) return compressedInstance;
         return processRainbowTable(rainbowTable, compressedInstance);
@@ -206,7 +214,7 @@ export default function EC2PricingSelector({ rainbowTable, compressedInstance, r
     return (
         <section className="mb-4">
             <h3 className="flex items-center gap-2"><DollarSignIcon className="w-4 h-4 inline-block my-auto" /> Pricing</h3>
-            <Calculator pricing={instance.pricing} regions={regions} osOptions={osOptions} defaultOs={defaultOs} />
+            <Calculator pricing={instance.pricing} regions={regions} osOptions={osOptions} defaultOs={defaultOs} lessPricingFlexibility={lessPricingFlexibility} />
         </section>
     );
 }

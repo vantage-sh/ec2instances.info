@@ -148,6 +148,7 @@ export default async function Page({
             }
             generatorKey="rds"
             pathPrefix="/aws/rds"
+            lessPricingFlexibility={true}
         />
     );
 }

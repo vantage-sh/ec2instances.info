@@ -20,6 +20,7 @@ interface InstanceRootProps {
     defaultOs: string;
     generatorKey: keyof typeof tablesGenerator;
     pathPrefix: string;
+    lessPricingFlexibility: boolean;
 }
 
 function InstanceVariants({ bestOfVariants, pathPrefix }: { bestOfVariants: { [key: string]: string }; pathPrefix: string }) {
@@ -117,13 +118,13 @@ function InstanceDataView({ instance, generatorKey }: { instance: Omit<EC2Instan
     );
 }
 
-export default function EC2InstanceRoot({ rainbowTable, compressedInstance, description, bestOfVariants, allOfInstanceType, regions, osOptions, defaultOs, generatorKey, pathPrefix }: InstanceRootProps) {
+export default function EC2InstanceRoot({ rainbowTable, compressedInstance, description, bestOfVariants, allOfInstanceType, regions, osOptions, defaultOs, generatorKey, pathPrefix, lessPricingFlexibility }: InstanceRootProps) {
     return (
         <main className="md:flex my-4 px-4 max-w-screen-lg mx-auto gap-8">
             <div className="md:max-w-sm">
                 <h1 className="text-2xl font-bold mb-2">{compressedInstance.instance_type}</h1>
                 <p className="text-sm mb-4">{description}</p>
-                <AWSPricingSelector rainbowTable={rainbowTable} compressedInstance={compressedInstance} regions={regions} osOptions={osOptions} defaultOs={defaultOs} />
+                <AWSPricingSelector rainbowTable={rainbowTable} compressedInstance={compressedInstance} regions={regions} osOptions={osOptions} defaultOs={defaultOs} lessPricingFlexibility={lessPricingFlexibility} />
                 <EC2FamilySizes allOfInstanceType={allOfInstanceType} instanceName={compressedInstance.instance_type} pathPrefix={pathPrefix} />
                 <InstanceVariants bestOfVariants={bestOfVariants} pathPrefix={pathPrefix} />
                 <p className="mt-6">
