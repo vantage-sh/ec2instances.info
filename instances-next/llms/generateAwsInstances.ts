@@ -2,7 +2,7 @@ import { EC2Instance } from "@/types";
 import { awsInstances } from "./loadedData";
 import generateDescription from "@/utils/generateDescription";
 import { calculatePrice } from "./generateAwsIndexes";
-import { generateAwsTables } from "@/utils/tablesGenerator";
+import { ec2 } from "@/utils/ec2TablesGenerator";
 import { markdownTable } from "markdown-table";
 import { raw, urlInject } from "@/utils/urlInject";
 
@@ -55,7 +55,7 @@ const niceNames: Record<string, string> = {
 };
 
 function generateInstanceMarkdown(instance: EC2Instance) {
-    const tables = generateAwsTables(instance);
+    const tables = ec2(instance);
 
     function renderData(region: string, platform: string, column: {
         [key in typeof tableColumns[number][0]]: key;

@@ -1,17 +1,10 @@
 "use client";
 
 import { EC2Instance, Pricing, CostDuration, Region } from "@/types";
-import { DollarSignIcon, Server } from "lucide-react";
-import Link from "next/link";
+import { DollarSignIcon } from "lucide-react";
 import { useMemo, useState, useId, useEffect } from "react";
 import processRainbowTable from "@/utils/processRainbowTable";
 import { durationOptions } from "@/utils/dataMappings";
-
-export type AllOfInstanceType = {
-    name: string;
-    cpus: number;
-    memory: string | number;
-}[];
 
 function dollarString(value: string | undefined, duration: CostDuration) {
     if (value === undefined) return "N/A";
@@ -33,23 +26,6 @@ function dollarString(value: string | undefined, duration: CostDuration) {
     return `$${rounded}`;
 }
 
-const osOptions = [
-    ["linux", "Linux"],
-    ["mswin", "Windows"],
-    ["rhel", "Red Hat"],
-    ["sles", "SUSE"],
-    ["dedicated", "Dedicated Host"],
-    ["linuxSQL", "Linux SQL Server"],
-    ["linuxSQLWeb", "Linux SQL Server for Web"],
-    ["linuxSQLEnterprise", "Linux SQL Enterprise"],
-    ["mswinSQL", "Windows SQL Server"],
-    ["mswinSQLWeb", "Windows SQL Web"],
-    ["mswinSQLEnterprise", "Windows SQL Enterprise"],
-    ["rhelSQL", "Red Hat SQL Server"],
-    ["rhelSQLWeb", "Red Hat SQL Web"],
-    ["rhelSQLEnterprise", "Red Hat SQL Enterprise"],
-] as const;
-
 const reservedTermOptions = [
     ["Standard.noUpfront", "No Upfront"],
     ["Standard.partialUpfront", "Partial Upfront"],
@@ -59,14 +35,24 @@ const reservedTermOptions = [
     ["Convertible.allUpfront", "All Upfront (Convertible)"],
 ] as const;
 
-function Calculator({ pricing, regions }: { pricing: Pricing; regions: Region }) {
+function Calculator({
+    pricing,
+    regions,
+    osOptions,
+    defaultOs,
+}: {
+    pricing: Pricing;
+    regions: Region;
+    osOptions: [string, string][];
+    defaultOs: string;
+}) {
     const priceHoldersId = useId();
 
     const defaultPlatform = useMemo(() => {
-        return pricing["us-east-1"]?.["linux"] ?
-            "linux" :
-            Object.keys(pricing["us-east-1"] || {})[0] || "linux";
-    }, [pricing]);
+        return pricing["us-east-1"]?.[defaultOs] ?
+            defaultOs :
+            Object.keys(pricing["us-east-1"] || {})[0] || defaultOs;
+    }, [pricing, defaultOs]);
 
     const [region, setRegionState] = useState<string>("us-east-1");
     const [platform, setPlatformState] = useState<string>(defaultPlatform);
@@ -106,7 +92,7 @@ function Calculator({ pricing, regions }: { pricing: Pricing; regions: Region })
             const validPricingType = reservedTermOptions.find(([value]) => value.toLowerCase() === pricingType.toLowerCase());
             if (validPricingType) setPricingTypeState(validPricingType[0]);
         }
-    }, []);
+    }, [pricing, regions, osOptions]);
 
     function wrapStringUpdater<T extends string>(handler: (value: T) => void, key: string) {
         return (value: T) => {
@@ -176,7 +162,7 @@ function Calculator({ pricing, regions }: { pricing: Pricing; regions: Region })
                 </select>
 
                 {
-                    defaultPlatform === "linux" && (
+                    defaultPlatform === defaultOs && (
                         <select aria-controls={priceHoldersId} value={platform} className={selectStyling} onChange={(e) => setPlatform(e.target.value)}>
                             {osOptions.map(([value, label]) => (
                                 <option key={value} value={value}>{label}</option>
@@ -207,9 +193,11 @@ type PricingSelectorProps = {
     rainbowTable: string[];
     compressedInstance: EC2Instance;
     regions: Region;
+    osOptions: [string, string][];
+    defaultOs: string;
 }
 
-export function PricingSelector({ rainbowTable, compressedInstance, regions }: PricingSelectorProps) {
+export default function EC2PricingSelector({ rainbowTable, compressedInstance, regions, osOptions, defaultOs }: PricingSelectorProps) {
     const instance = useMemo(() => {
         if (!Array.isArray(compressedInstance.pricing)) return compressedInstance;
         return processRainbowTable(rainbowTable, compressedInstance);
@@ -218,63 +206,7 @@ export function PricingSelector({ rainbowTable, compressedInstance, regions }: P
     return (
         <section className="mb-4">
             <h3 className="flex items-center gap-2"><DollarSignIcon className="w-4 h-4 inline-block my-auto" /> Pricing</h3>
-            <Calculator pricing={instance.pricing} regions={regions} />
-        </section>
-    );
-}
-
-export function FamilySizes({ allOfInstanceType, instanceName }: { allOfInstanceType: AllOfInstanceType; instanceName: string }) {
-    // This is a hack, but its a memo so that it runs immediately. We don't need a variable since its a mutation.
-    useMemo(() => {
-        return allOfInstanceType.sort((a, b) => {
-            // sort by cpu and memory.
-            if (a.cpus !== b.cpus) return a.cpus - b.cpus;
-            const m = Number(a.memory) - Number(b.memory);
-            if (m === 0) return a.name.localeCompare(b.name);
-            return m;
-        });
-    }, [allOfInstanceType]);
-
-    return (
-        <section className="mb-4">
-            <h3 className="flex items-center gap-2"><Server className="w-4 h-4 inline-block my-auto" /> Family Sizes</h3>
-            <table className="mt-2 w-full text-sm">
-                <thead>
-                    <tr className="border-r border-gray-200">
-                        <th className="text-left pb-1">Size</th>
-                        <th className="text-left pb-1">vCPUs</th>
-                        <th className="text-left pb-1">Memory (GiB)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {allOfInstanceType.map((item) => {
-                        let tdStyling = "border border-gray-200 p-1";
-                        if (item.name === instanceName) tdStyling = "p-1";
-                        return (
-                            <tr key={item.name} className={
-                                item.name === instanceName ? "bg-black text-white" : "odd:bg-gray-100"
-                            }>
-                                <td className={tdStyling}>
-                                    {
-                                        item.name === instanceName ? item.name : (
-                                            <Link className="text-purple-1 hover:text-purple-0" href={`/aws/ec2/${item.name}`}>{item.name}</Link>
-                                        )
-                                    }
-                                </td>
-                                <td className={tdStyling}>{item.cpus}</td>
-                                <td className={tdStyling}>{item.memory}</td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-            <div className="mt-4 mb-6">
-                <p className="text-center text-sm">
-                    <Link href={`/?selected=${instanceName}`} className="p-2 border border-gray-200 hover:border-gray-300 rounded-md">
-                        Compare {instanceName} to other instances
-                    </Link>
-                </p>
-            </div>
+            <Calculator pricing={instance.pricing} regions={regions} osOptions={osOptions} defaultOs={defaultOs} />
         </section>
     );
 }

@@ -3,10 +3,11 @@ import { readFile } from "fs/promises";
 import { XzReadableStream } from "xz-decompress";
 import { EC2Instance, Region } from "@/types";
 import processRainbowTable from "@/utils/processRainbowTable";
-import InstanceRoot from "./InstanceRoot";
+import EC2InstanceRoot from "@/components/EC2InstanceRoot";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 import makeRainbowTable from "@/utils/makeRainbowTable";
 import generateDescription from "@/utils/generateDescription";
+import bestEc2InstanceForEachVariant from "@/utils/bestEc2InstanceForEachVariant";
 
 export const dynamic = "force-static";
 
@@ -91,72 +92,29 @@ export async function generateMetadata({
     };
 }
 
-function findNearestInstanceMutatesNoCleanup(instances: EC2Instance[], closestTo: EC2Instance) {
-    instances.push(closestTo);
-    instances.sort((a, b) => {
-        // Sort by CPU, memory, and then GPU.
-        if (a.vCPU !== b.vCPU) {
-            return a.vCPU - b.vCPU;
-        }
-        if (a.memory !== b.memory) {
-            return a.memory - b.memory;
-        }
-        return (a.GPU || 0) - (b.GPU || 0);
-    });
-    const ourInstance = instances.indexOf(closestTo);
-    const left = instances[ourInstance - 1];
-    const right = instances[ourInstance + 1];
-    if (left && right) {
-        // Try and find one equality here with the closest instance.
-        if (left.vCPU === closestTo.vCPU || left.memory === closestTo.memory || (left.GPU || 0) === (closestTo.GPU || 0)) {
-            return left;
-        }
-        if (right.vCPU === closestTo.vCPU || right.memory === closestTo.memory || (right.GPU || 0) === (closestTo.GPU || 0)) {
-            return right;
-        }
-
-        // If this isn't possible, return the best of the two.
-        return left.vCPU === right.vCPU && left.memory === right.memory ? left : right;
-    }
-    return left || right;
-}
-
-function bestInstanceForEachVariant(instances: EC2Instance[], closestTo: EC2Instance) {
-    const variants: Map<string, EC2Instance | EC2Instance[]> = new Map();
-    for (const instance of instances) {
-        const [itype] = instance.instance_type.split(".", 2);
-        let a = variants.get(itype);
-        if (!a) {
-            a = [];
-            variants.set(itype, a);
-        }
-        (a as EC2Instance[]).push(instance);
-    }
-
-    for (const [itype, instances] of variants.entries()) {
-        if ((instances as EC2Instance[]).includes(closestTo)) {
-            variants.set(itype, closestTo);
-        }
-        const best = findNearestInstanceMutatesNoCleanup(instances as EC2Instance[], closestTo);
-        variants.set(itype, best);
-    }
-
-    const o: { [key: string]: string } = {};
-    for (const [itype, instance] of variants.entries()) {
-        o[itype] = (instance as EC2Instance).instance_type;
-    }
-    return o;
-}
+const osOptions: [string, string][] = [
+    ["linux", "Linux"],
+    ["mswin", "Windows"],
+    ["rhel", "Red Hat"],
+    ["sles", "SUSE"],
+    ["dedicated", "Dedicated Host"],
+    ["linuxSQL", "Linux SQL Server"],
+    ["linuxSQLWeb", "Linux SQL Server for Web"],
+    ["linuxSQLEnterprise", "Linux SQL Enterprise"],
+    ["mswinSQL", "Windows SQL Server"],
+    ["mswinSQLWeb", "Windows SQL Web"],
+    ["mswinSQLEnterprise", "Windows SQL Enterprise"],
+    ["rhelSQL", "Red Hat SQL Server"],
+    ["rhelSQLWeb", "Red Hat SQL Web"],
+    ["rhelSQLEnterprise", "Red Hat SQL Enterprise"],
+];
 
 export default async function Page({
     params,
 }: {
     params: Promise<{ slug: string }>;
 }) {
-    let data = await readFile("./public/instances-regions.msgpack");
-    const regions = decode(data) as Region;
-
-    const { instance, instances, ondemandCost } = await handleParams(params);
+    const { instance, instances, ondemandCost, regions } = await handleParams(params);
     const description = generateDescription(instance, ondemandCost);
 
     const [itype] = instance.instance_type.split(".", 2);
@@ -171,13 +129,20 @@ export default async function Page({
     const compressedInstance = makeRainbowTable([{ ...instance }]);
 
     return (
-        <InstanceRoot
+        <EC2InstanceRoot
             rainbowTable={compressedInstance[0] as string[]}
             compressedInstance={compressedInstance[1] as EC2Instance}
             regions={regions}
             description={description}
-            bestOfVariants={bestInstanceForEachVariant(allOfVariant, instance)}
+            bestOfVariants={bestEc2InstanceForEachVariant(allOfVariant, instance, (i) => {
+                const [itype] = i.instance_type.split(".", 2);
+                return itype;
+            })}
             allOfInstanceType={allOfInstanceType}
+            osOptions={osOptions}
+            defaultOs="linux"
+            generatorKey="ec2"
+            pathPrefix="/aws/ec2"
         />
     );
 }

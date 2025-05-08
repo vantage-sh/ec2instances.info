@@ -18,7 +18,7 @@ function round(value: number) {
     return Math.round(value * 100) / 100;
 }
 
-export function generateAwsTables(instance: Omit<EC2Instance, "pricing">): Table[] {
+export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
     return [
         {
             name: "Compute",
@@ -202,4 +202,8 @@ export function generateAwsTables(instance: Omit<EC2Instance, "pricing">): Table
             ],
         },
     ];
+}
+
+export function rds(instance: Omit<EC2Instance, "pricing">): Table[] {
+    return [];
 }
