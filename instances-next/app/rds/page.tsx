@@ -11,13 +11,23 @@ export default async function RDS() {
     data = await readFile("./public/first-30-rds-instances.msgpack");
     const compressedInstances = decode(data) as [string[], ...EC2Instance[]];
 
-    const instanceCount = Number(await readFile("./public/instance-rds-count.txt"));
-    const instancesHash = await readFile("./public/instance-rds-hash.txt", "utf-8");
+    const instanceCount = Number(
+        await readFile("./public/instance-rds-count.txt"),
+    );
+    const instancesHash = await readFile(
+        "./public/instance-rds-hash.txt",
+        "utf-8",
+    );
 
     return (
         <>
             <Head>
-                <link rel="preload" href={`/remaining-rds-instances.msgpack.xz?cache=${instancesHash}`} as="fetch" fetchPriority="high" />
+                <link
+                    rel="preload"
+                    href={`/remaining-rds-instances.msgpack.xz?cache=${instancesHash}`}
+                    as="fetch"
+                    fetchPriority="high"
+                />
             </Head>
             <AWSClient
                 instanceCount={instanceCount}

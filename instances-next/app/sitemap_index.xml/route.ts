@@ -15,5 +15,7 @@ export async function GET() {
         <loc>${"/sitemap-other.xml"}</loc>
     </sitemap>
 </sitemapindex>`;
-    return new Response(sitemap, { headers: { "Content-Type": "application/xml" } });
+    return new Response(sitemap, {
+        headers: { "Content-Type": "application/xml" },
+    });
 }

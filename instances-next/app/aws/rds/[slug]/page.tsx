@@ -83,17 +83,22 @@ export default async function Page({
 }: {
     params: Promise<{ slug: string }>;
 }) {
-    const { instance, instances, ondemandCost, regions } = await handleParams(params);
+    const { instance, instances, ondemandCost, regions } =
+        await handleParams(params);
     const description = generateDescription(instance, ondemandCost);
 
     const [db, itype] = instance.instance_type.split(".", 3);
     const variant = itype.slice(0, 2);
-    const allOfVariant = instances.filter((i) => i.instance_type.startsWith(`${db}.${variant}`));
-    const allOfInstanceType = instances.filter((i) => i.instance_type.startsWith(`${db}.${itype}.`)).map((i) => ({
-        name: i.instance_type,
-        cpus: i.vCPU,
-        memory: i.memory || "N/A",
-    }));
+    const allOfVariant = instances.filter((i) =>
+        i.instance_type.startsWith(`${db}.${variant}`),
+    );
+    const allOfInstanceType = instances
+        .filter((i) => i.instance_type.startsWith(`${db}.${itype}.`))
+        .map((i) => ({
+            name: i.instance_type,
+            cpus: i.vCPU,
+            memory: i.memory || "N/A",
+        }));
 
     const compressedInstance = makeRainbowTable([{ ...instance }]);
 
@@ -103,16 +108,22 @@ export default async function Page({
             compressedInstance={compressedInstance[1] as EC2Instance}
             regions={regions}
             description={description}
-            bestOfVariants={bestEc2InstanceForEachVariant(allOfVariant, instance, (i) => {
-                const [, itype] = i.instance_type.split(".", 3);
-                return itype;
-            })}
+            bestOfVariants={bestEc2InstanceForEachVariant(
+                allOfVariant,
+                instance,
+                (i) => {
+                    const [, itype] = i.instance_type.split(".", 3);
+                    return itype;
+                },
+            )}
             allOfInstanceType={allOfInstanceType}
             osOptions={osOptions}
             defaultOs={
-                instance.instance_type.includes("mem") ? "Oracle" :
-                    instance.instance_type.includes("z1d") ? "SQL Server" :
-                        "PostgreSQL"
+                instance.instance_type.includes("mem")
+                    ? "Oracle"
+                    : instance.instance_type.includes("z1d")
+                      ? "SQL Server"
+                      : "PostgreSQL"
             }
             generatorKey="rds"
             pathPrefix="/aws/rds"

@@ -104,7 +104,14 @@ export const columnsGen = (
         sortingFn: "alphanumeric",
         cell: (info) => {
             const value = info.getValue() as string;
-            return <Link onClick={(e) => e.stopPropagation()} href={`/aws/ec2/${value}`}>{value}</Link>;
+            return (
+                <Link
+                    onClick={(e) => e.stopPropagation()}
+                    href={`/aws/ec2/${value}`}
+                >
+                    {value}
+                </Link>
+            );
         },
     },
     {

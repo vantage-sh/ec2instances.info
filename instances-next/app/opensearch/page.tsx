@@ -27,7 +27,9 @@ export default async function OpenSearch() {
         }
     }
 
-    const [rainbowTable, ...compressedInstances] = makeHalfRainbowTable(instances as Instance[]);
+    const [rainbowTable, ...compressedInstances] = makeHalfRainbowTable(
+        instances as Instance[],
+    );
 
     return (
         <HalfRainbowWrap

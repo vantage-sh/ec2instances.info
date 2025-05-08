@@ -15,22 +15,23 @@ export default async function Home() {
     const compressedInstances = decode(data) as [string[], ...EC2Instance[]];
 
     const instanceCount = Number(await readFile("./public/instance-count.txt"));
-    const instancesHash = await readFile("./public/instances-hash.txt", "utf-8");
+    const instancesHash = await readFile(
+        "./public/instances-hash.txt",
+        "utf-8",
+    );
 
     return (
         <>
             <Head>
-                {
-                    Array.from({ length: PIPELINE_SIZE }).map((_, i) => (
-                        <link
-                            key={i}
-                            rel="preload"
-                            href={`/remaining-instances-p${i}.msgpack.xz?cache=${instancesHash}`}
-                            as="fetch"
-                            fetchPriority="high"
-                        />
-                    ))
-                }
+                {Array.from({ length: PIPELINE_SIZE }).map((_, i) => (
+                    <link
+                        key={i}
+                        rel="preload"
+                        href={`/remaining-instances-p${i}.msgpack.xz?cache=${instancesHash}`}
+                        as="fetch"
+                        fetchPriority="high"
+                    />
+                ))}
             </Head>
             <AWSClient
                 instanceCount={instanceCount}

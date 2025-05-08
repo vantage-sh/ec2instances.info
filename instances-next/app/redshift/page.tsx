@@ -27,7 +27,9 @@ export default async function Redshift() {
         }
     }
 
-    const [rainbowTable, ...compressedInstances] = makeHalfRainbowTable(instances as Instance[]);
+    const [rainbowTable, ...compressedInstances] = makeHalfRainbowTable(
+        instances as Instance[],
+    );
 
     return (
         <HalfRainbowWrap

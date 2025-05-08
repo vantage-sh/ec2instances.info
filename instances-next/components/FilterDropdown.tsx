@@ -45,7 +45,9 @@ export default function FilterDropdown({
 
     const filteredOptions = options.filter((option) => {
         try {
-            return option.label.toLowerCase().includes(searchTerm.toLowerCase());
+            return option.label
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase());
         } catch (error) {
             console.error("Error filtering options:", error, option);
             return "";
@@ -67,13 +69,18 @@ export default function FilterDropdown({
     const selectedOption = options.find((option) => option.value === value);
 
     return (
-        <div className="relative flex flex-col gap-0.5 justify-center items-start" ref={dropdownRef}>
+        <div
+            className="relative flex flex-col gap-0.5 justify-center items-start"
+            ref={dropdownRef}
+        >
             <label className="text-xs text-gray-3 ">{label}</label>
             <button
                 className="flex items-center justify-start gap-1 bg-white border-0 text-sm font-semibold text-decoration-none"
                 onClick={() => setIsOpen(!isOpen)}
             >
-                {icon ? <i className={`icon-${icon} text-white me-1`}></i> : null}
+                {icon ? (
+                    <i className={`icon-${icon} text-white me-1`}></i>
+                ) : null}
                 <span className="text">
                     {selectedOption?.label || "Select..."}
                 </span>

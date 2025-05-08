@@ -21,5 +21,7 @@ export async function GET() {
         <loc>${"/redshift"}</loc>
     </url>
 </urlset>`;
-    return new Response(sitemap, { headers: { "Content-Type": "application/xml" } });
+    return new Response(sitemap, {
+        headers: { "Content-Type": "application/xml" },
+    });
 }

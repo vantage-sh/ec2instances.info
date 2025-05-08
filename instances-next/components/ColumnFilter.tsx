@@ -11,10 +11,7 @@ interface ColumnOption<Key extends keyof typeof columnData> {
 
 interface ColumnFilterProps<Key extends keyof typeof columnData> {
     columns: ColumnOption<Key>[];
-    onColumnVisibilityChange: (
-        key: Key,
-        visible: boolean,
-    ) => void;
+    onColumnVisibilityChange: (key: Key, visible: boolean) => void;
 }
 
 export default function ColumnFilter<Key extends keyof typeof columnData>({
@@ -46,13 +43,15 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
     );
 
     return (
-        <div className="relative flex flex-col gap-0.5 justify-center" ref={dropdownRef}>
+        <div
+            className="relative flex flex-col gap-0.5 justify-center"
+            ref={dropdownRef}
+        >
             <label className="text-xs text-gray-3">Columns</label>
             <button
                 className="dropdown-toggle p-0 border-0 d-flex align-items-center h-auto text-sm font-semibold text-decoration-none text-gray-1"
                 onClick={() => setIsOpen(!isOpen)}
             >
-                
                 <span className="text">Columns</span>
                 <span className="caret"></span>
             </button>

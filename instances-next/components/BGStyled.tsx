@@ -1,4 +1,16 @@
-const RED: string[] = ["0", "n/a", "no", "none", "false", "off", "unavailable", "error", "unknown", "unsupported", "unsupported"];
+const RED: string[] = [
+    "0",
+    "n/a",
+    "no",
+    "none",
+    "false",
+    "off",
+    "unavailable",
+    "error",
+    "unknown",
+    "unsupported",
+    "unsupported",
+];
 
 export default function BGStyled({ content }: { content: any }) {
     if (typeof content === "string" && content.toLowerCase() === "current") {
@@ -13,7 +25,9 @@ export default function BGStyled({ content }: { content: any }) {
     const danger = RED.includes(j.toLowerCase());
 
     return (
-        <div className={`py-0.5 px-1 w-max font-bold font-mono rounded-md ${danger ? "bg-red-100 border border-red-300" : "bg-green-100 border border-green-300"}`}>
+        <div
+            className={`py-0.5 px-1 w-max font-bold font-mono rounded-md ${danger ? "bg-red-100 border border-red-300" : "bg-green-100 border border-green-300"}`}
+        >
             {j}
         </div>
     );

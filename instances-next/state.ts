@@ -13,7 +13,10 @@ const preloadedValues: {
     };
 } = {};
 
-export function useInstanceData<Instance>(path: string | null, initialInstances: Instance[]) {
+export function useInstanceData<Instance>(
+    path: string | null,
+    initialInstances: Instance[],
+) {
     return useSyncExternalStore(
         (onStoreChange) => {
             if (!path) return () => {};
@@ -55,9 +58,12 @@ export function useHookToExportButton(hn: () => void) {
     }, []);
 }
 
-export type ColumnVisibility<Key extends keyof typeof columnData> = typeof columnData[Key]["initialColumnsValue"];
+export type ColumnVisibility<Key extends keyof typeof columnData> =
+    (typeof columnData)[Key]["initialColumnsValue"];
 
-function createColumnVisibilityAtomForKey<Key extends keyof typeof columnData>(key: Key) {
+function createColumnVisibilityAtomForKey<Key extends keyof typeof columnData>(
+    key: Key,
+) {
     const v = columnData[key];
     const atomRes = atom({ ...v.initialColumnsValue });
 
@@ -97,7 +103,9 @@ function createColumnVisibilityAtomForKey<Key extends keyof typeof columnData>(k
 }
 
 export const columnVisibilityAtoms: {
-    [key in keyof typeof columnData]: ReturnType<typeof createColumnVisibilityAtomForKey<key>>;
+    [key in keyof typeof columnData]: ReturnType<
+        typeof createColumnVisibilityAtomForKey<key>
+    >;
 } = {} as any;
 for (const key in columnData) {
     // @ts-expect-error: TS doesn't understand this because its dynamic.
@@ -141,12 +149,15 @@ function useGSettingsValue<Key extends keyof GSettings>(
     };
 
     useEffect(() => {
-        const path = pathname.split("?")[0]
+        const path = pathname.split("?")[0];
         const expectedKey = path.includes("azure")
             ? "azure_settings"
             : "ec2_settings";
         if (!gSettingsHolder[0] || gSettingsHolder[0].key !== expectedKey) {
-            const gSettings = new GSettings(expectedKey === "azure_settings", path !== "/");
+            const gSettings = new GSettings(
+                expectedKey === "azure_settings",
+                path !== "/",
+            );
             gSettingsHolder = [gSettings, gSettingsHolder[1] + 1];
             for (const value of gSettingsEvent.values()) {
                 for (const fn of value) {

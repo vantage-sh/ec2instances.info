@@ -1,5 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { calculateCost, doAllDataTablesMigrations, gt, makeSchemaWithDefaults } from "./shared";
+import {
+    calculateCost,
+    doAllDataTablesMigrations,
+    gt,
+    makeSchemaWithDefaults,
+} from "./shared";
 import { EC2Instance, PricingUnit, CostDuration, Pricing } from "@/types";
 import Link from "next/link";
 
@@ -30,10 +35,19 @@ export function makeColumnVisibilitySchema() {
 }
 
 export function doDataTablesMigration() {
-    return doAllDataTablesMigrations("/cache", initialColumnsArr, initialColumnsValue);
+    return doAllDataTablesMigrations(
+        "/cache",
+        initialColumnsArr,
+        initialColumnsValue,
+    );
 }
 
-export function makePrettyNames<V>(makeColumnOption: (key: keyof typeof initialColumnsValue, label: string) => V) {
+export function makePrettyNames<V>(
+    makeColumnOption: (
+        key: keyof typeof initialColumnsValue,
+        label: string,
+    ) => V,
+) {
     return [
         makeColumnOption("pretty_name", "Name"),
         makeColumnOption("instance_type", "API Name"),
@@ -69,7 +83,14 @@ export const columnsGen = (
         sortingFn: "alphanumeric",
         cell: (info) => {
             const value = info.getValue() as string;
-            return <Link onClick={(e) => e.stopPropagation()} href={`/aws/elasticache/${value}`}>{value}</Link>;
+            return (
+                <Link
+                    onClick={(e) => e.stopPropagation()}
+                    href={`/aws/elasticache/${value}`}
+                >
+                    {value}
+                </Link>
+            );
         },
     },
     {
@@ -109,7 +130,12 @@ export const columnsGen = (
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
-            return calculateCost(region.Redis?.ondemand, info.row.original, pricingUnit, costDuration);
+            return calculateCost(
+                region.Redis?.ondemand,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -121,7 +147,12 @@ export const columnsGen = (
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
-            return calculateCost(region.Redis?.reserved?.[reservedTerm], info.row.original, pricingUnit, costDuration);
+            return calculateCost(
+                region.Redis?.reserved?.[reservedTerm],
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -133,7 +164,12 @@ export const columnsGen = (
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
-            return calculateCost(region.Memcached?.ondemand, info.row.original, pricingUnit, costDuration);
+            return calculateCost(
+                region.Memcached?.ondemand,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -145,7 +181,12 @@ export const columnsGen = (
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
-            return calculateCost(region.Memcached?.reserved?.[reservedTerm], info.row.original, pricingUnit, costDuration);
+            return calculateCost(
+                region.Memcached?.reserved?.[reservedTerm],
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -157,7 +198,12 @@ export const columnsGen = (
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
-            return calculateCost(region.Valkey?.ondemand, info.row.original, pricingUnit, costDuration);
+            return calculateCost(
+                region.Valkey?.ondemand,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -169,7 +215,12 @@ export const columnsGen = (
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
-            return calculateCost(region.Valkey?.reserved?.[reservedTerm], info.row.original, pricingUnit, costDuration);
+            return calculateCost(
+                region.Valkey?.reserved?.[reservedTerm],
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {

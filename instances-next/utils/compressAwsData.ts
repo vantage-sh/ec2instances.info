@@ -37,7 +37,10 @@ async function compressEC2Instances() {
 
     // Encode and then compress the EC2 instances.
     await writeFile("./public/instance-count.txt", instances.length.toString());
-    await writeFile("./public/instance-ids.json", JSON.stringify(instances.map((i: EC2Instance) => i.instance_type)));
+    await writeFile(
+        "./public/instance-ids.json",
+        JSON.stringify(instances.map((i: EC2Instance) => i.instance_type)),
+    );
     await writeFile("./public/instances-hash.txt", hashInstances(instances));
     const first30Instances = instances.slice(0, 30);
     const first30InstancesEncoded = encode(makeRainbowTable(first30Instances));
@@ -47,14 +50,25 @@ async function compressEC2Instances() {
         "./public/first-30-instances.msgpack",
         first30InstancesEncoded,
     );
-    const itemsPerPipeline = Math.ceil(remainingInstances.length / PIPELINE_SIZE);
-    const remainingPipelineLength = remainingInstances.length % itemsPerPipeline;
+    const itemsPerPipeline = Math.ceil(
+        remainingInstances.length / PIPELINE_SIZE,
+    );
+    const remainingPipelineLength =
+        remainingInstances.length % itemsPerPipeline;
 
     console.log("Compressing EC2 instances data...");
     for (let i = 0; i < PIPELINE_SIZE; i++) {
-        let chunk = remainingInstances.slice(i * itemsPerPipeline, (i + 1) * itemsPerPipeline);
+        let chunk = remainingInstances.slice(
+            i * itemsPerPipeline,
+            (i + 1) * itemsPerPipeline,
+        );
         if (i === PIPELINE_SIZE - 1 && remainingPipelineLength > 0) {
-            chunk = chunk.concat(remainingInstances.slice((i + 1) * itemsPerPipeline, remainingInstances.length));
+            chunk = chunk.concat(
+                remainingInstances.slice(
+                    (i + 1) * itemsPerPipeline,
+                    remainingInstances.length,
+                ),
+            );
         }
         const chunkEncoded = encode(makeRainbowTable(chunk));
         const compressedChunk: Buffer = await new Promise((res) => {
@@ -96,9 +110,15 @@ async function compressRDSInstances() {
 
     // Encode and then compress the RDS instances.
     console.log("Compressing RDS instances data...");
-    await writeFile("./public/instance-rds-count.txt", instances.length.toString());
+    await writeFile(
+        "./public/instance-rds-count.txt",
+        instances.length.toString(),
+    );
     await writeFile("./public/instance-rds-hash.txt", hashInstances(instances));
-    await writeFile("./public/instance-rds-ids.json", JSON.stringify(instances.map((i: EC2Instance) => i.instance_type)));
+    await writeFile(
+        "./public/instance-rds-ids.json",
+        JSON.stringify(instances.map((i: EC2Instance) => i.instance_type)),
+    );
     const first30Instances = instances.slice(0, 30);
     const first30InstancesEncoded = encode(makeRainbowTable(first30Instances));
     await writeFile("./public/instance-rds-regions.msgpack", encode(regions));
@@ -108,9 +128,13 @@ async function compressRDSInstances() {
     );
     const remainingInstances = instances.slice(30);
     const res = await new Promise<Buffer>((resolve) => {
-        compress(Buffer.from(encode(makeRainbowTable(remainingInstances))), {}, (result) => {
-            resolve(result);
-        });
+        compress(
+            Buffer.from(encode(makeRainbowTable(remainingInstances))),
+            {},
+            (result) => {
+                resolve(result);
+            },
+        );
     });
     await writeFile("./public/remaining-rds-instances.msgpack.xz", res);
     console.log("RDS instances data compressed and saved");

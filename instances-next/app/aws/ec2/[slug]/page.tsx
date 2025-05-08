@@ -46,9 +46,9 @@ async function getData() {
             const remaining = decode(Buffer.concat(chunks)) as EC2Instance[];
             // @ts-expect-error: The first item is the rainbow table.
             const rainbowTable: string[] = remaining.shift();
-            remainingInstances.push(...remaining.map((i) =>
-                processRainbowTable(rainbowTable, i),
-            ));
+            remainingInstances.push(
+                ...remaining.map((i) => processRainbowTable(rainbowTable, i)),
+            );
         }
         // @ts-expect-error: The first item is the rainbow table.
         const first30RainbowTable: string[] = compressed30.shift();
@@ -76,7 +76,8 @@ async function handleParams(params: Promise<{ slug: string }>) {
     const { slug } = await params;
     const { instances, regions } = await getData();
     const instance = instances.find((i) => i.instance_type === slug)!;
-    const ondemandCost = instance.pricing["us-east-1"]?.linux?.ondemand || "N/A";
+    const ondemandCost =
+        instance.pricing["us-east-1"]?.linux?.ondemand || "N/A";
     return { instance, instances, ondemandCost, regions };
 }
 
@@ -114,17 +115,22 @@ export default async function Page({
 }: {
     params: Promise<{ slug: string }>;
 }) {
-    const { instance, instances, ondemandCost, regions } = await handleParams(params);
+    const { instance, instances, ondemandCost, regions } =
+        await handleParams(params);
     const description = generateDescription(instance, ondemandCost);
 
     const [itype] = instance.instance_type.split(".", 2);
     const variant = itype.slice(0, 2);
-    const allOfVariant = instances.filter((i) => i.instance_type.startsWith(variant));
-    const allOfInstanceType = instances.filter((i) => i.instance_type.startsWith(`${itype}.`)).map((i) => ({
-        name: i.instance_type,
-        cpus: i.vCPU,
-        memory: i.memory || "N/A",
-    }));
+    const allOfVariant = instances.filter((i) =>
+        i.instance_type.startsWith(variant),
+    );
+    const allOfInstanceType = instances
+        .filter((i) => i.instance_type.startsWith(`${itype}.`))
+        .map((i) => ({
+            name: i.instance_type,
+            cpus: i.vCPU,
+            memory: i.memory || "N/A",
+        }));
 
     const compressedInstance = makeRainbowTable([{ ...instance }]);
 
@@ -134,10 +140,14 @@ export default async function Page({
             compressedInstance={compressedInstance[1] as EC2Instance}
             regions={regions}
             description={description}
-            bestOfVariants={bestEc2InstanceForEachVariant(allOfVariant, instance, (i) => {
-                const [itype] = i.instance_type.split(".", 2);
-                return itype;
-            })}
+            bestOfVariants={bestEc2InstanceForEachVariant(
+                allOfVariant,
+                instance,
+                (i) => {
+                    const [itype] = i.instance_type.split(".", 2);
+                    return itype;
+                },
+            )}
             allOfInstanceType={allOfInstanceType}
             osOptions={osOptions}
             defaultOs="linux"

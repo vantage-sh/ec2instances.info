@@ -57,9 +57,13 @@ const niceNames: Record<string, string> = {
 function generateInstanceMarkdown(instance: EC2Instance) {
     const tables = ec2(instance);
 
-    function renderData(region: string, platform: string, column: {
-        [key in typeof tableColumns[number][0]]: key;
-    }[typeof tableColumns[number][0]]): string {
+    function renderData(
+        region: string,
+        platform: string,
+        column: {
+            [key in (typeof tableColumns)[number][0]]: key;
+        }[(typeof tableColumns)[number][0]],
+    ): string {
         if (column === "") {
             return niceNames[platform] || platform;
         }
@@ -81,7 +85,9 @@ function generateInstanceMarkdown(instance: EC2Instance) {
             case "yrTerm3Convertible.noUpfront":
             case "yrTerm3Convertible.partialUpfront":
             case "yrTerm3Convertible.allUpfront":
-                return fmtPrice(instance.pricing[region]?.[platform]?.reserved?.[column]);
+                return fmtPrice(
+                    instance.pricing[region]?.[platform]?.reserved?.[column],
+                );
         }
     }
 
@@ -95,9 +101,13 @@ function generateInstanceMarkdown(instance: EC2Instance) {
             tableColumns.map(([, columnName]) => columnName),
         ];
 
-        const platformsSorted = Object.keys(platforms).sort((a, b) => a.localeCompare(b));
+        const platformsSorted = Object.keys(platforms).sort((a, b) =>
+            a.localeCompare(b),
+        );
         for (const platform of platformsSorted) {
-            const row = tableColumns.map(([column]) => renderData(region, platform, column));
+            const row = tableColumns.map(([column]) =>
+                renderData(region, platform, column),
+            );
             rows.push(row);
         }
 
@@ -105,12 +115,18 @@ function generateInstanceMarkdown(instance: EC2Instance) {
         tableMdFrags.set(region, tableMd);
     }
 
-    const regions = Array.from(tableMdFrags.keys()).sort((a, b) => a.localeCompare(b));
-    
-    const tableData = tables.map((table) => `## ${table.name}
+    const regions = Array.from(tableMdFrags.keys()).sort((a, b) =>
+        a.localeCompare(b),
+    );
+
+    const tableData = tables
+        .map(
+            (table) => `## ${table.name}
 
 ${table.rows.map((row) => `- ${row.name}: ${row.children}`).join("\n")}
-`).join("\n");
+`,
+        )
+        .join("\n");
 
     const root = `# ${instance.instance_type}
 
@@ -131,10 +147,13 @@ ${regions.map((region) => urlInject`- [${raw(region)}](${`/aws/ec2/${instance.in
 
 export default async function generateAwsInstances() {
     const instances = await awsInstances;
-    const instancesMarkdown = new Map<string, {
-        root: string;
-        regions: Map<string, string>;
-    }>();
+    const instancesMarkdown = new Map<
+        string,
+        {
+            root: string;
+            regions: Map<string, string>;
+        }
+    >();
     for (const instance of instances) {
         const data = generateInstanceMarkdown(instance);
         instancesMarkdown.set(instance.instance_type, data);

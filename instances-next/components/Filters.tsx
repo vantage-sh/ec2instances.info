@@ -29,7 +29,11 @@ interface FiltersProps<DataKey extends keyof typeof columnData> {
     columnAtomKey: DataKey;
 }
 
-export default function Filters<DataKey extends keyof typeof columnData>({ regions, rowSelection, columnAtomKey }: FiltersProps<DataKey>) {
+export default function Filters<DataKey extends keyof typeof columnData>({
+    regions,
+    rowSelection,
+    columnAtomKey,
+}: FiltersProps<DataKey>) {
     const columnVisibility = columnVisibilityAtoms[columnAtomKey].use();
     const [searchTerm, setSearchTerm] = useSearchTerm();
     const [selectedRegion, setSelectedRegion] = useSelectedRegion();
@@ -174,15 +178,9 @@ export default function Filters<DataKey extends keyof typeof columnData>({ regio
                             type="text"
                             className="form-control not-xl:hidden p-1 border-gray-300 border rounded-md"
                             placeholder="Search..."
-                            value={
-                                compareOn
-                                    ? valuePreCompareOn
-                                    : searchTerm
-                            }
+                            value={compareOn ? valuePreCompareOn : searchTerm}
                             disabled={compareOn}
-                            onChange={(e) =>
-                                setSearchTerm(e.target.value)
-                            }
+                            onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>
                 </div>

@@ -10,7 +10,17 @@ export type AllOfInstanceType = {
     memory: string | number;
 }[];
 
-export function EC2FamilySizes({ allOfInstanceType, instanceName, pathPrefix, tablePath }: { allOfInstanceType: AllOfInstanceType; instanceName: string; pathPrefix: string; tablePath: string }) {
+export function EC2FamilySizes({
+    allOfInstanceType,
+    instanceName,
+    pathPrefix,
+    tablePath,
+}: {
+    allOfInstanceType: AllOfInstanceType;
+    instanceName: string;
+    pathPrefix: string;
+    tablePath: string;
+}) {
     // This is a hack, but its a memo so that it runs immediately. We don't need a variable since its a mutation.
     useMemo(() => {
         return allOfInstanceType.sort((a, b) => {
@@ -24,7 +34,9 @@ export function EC2FamilySizes({ allOfInstanceType, instanceName, pathPrefix, ta
 
     return (
         <section className="mb-4">
-            <h3 className="flex items-center gap-2"><Server className="w-4 h-4 inline-block my-auto" /> Family Sizes</h3>
+            <h3 className="flex items-center gap-2">
+                <Server className="w-4 h-4 inline-block my-auto" /> Family Sizes
+            </h3>
             <table className="mt-2 w-full text-sm">
                 <thead>
                     <tr className="border-r border-gray-200">
@@ -38,15 +50,25 @@ export function EC2FamilySizes({ allOfInstanceType, instanceName, pathPrefix, ta
                         let tdStyling = "border border-gray-200 p-1";
                         if (item.name === instanceName) tdStyling = "p-1";
                         return (
-                            <tr key={item.name} className={
-                                item.name === instanceName ? "bg-black text-white" : "odd:bg-gray-100"
-                            }>
+                            <tr
+                                key={item.name}
+                                className={
+                                    item.name === instanceName
+                                        ? "bg-black text-white"
+                                        : "odd:bg-gray-100"
+                                }
+                            >
                                 <td className={tdStyling}>
-                                    {
-                                        item.name === instanceName ? item.name : (
-                                            <Link className="text-purple-1 hover:text-purple-0" href={`${pathPrefix}/${item.name}`}>{item.name}</Link>
-                                        )
-                                    }
+                                    {item.name === instanceName ? (
+                                        item.name
+                                    ) : (
+                                        <Link
+                                            className="text-purple-1 hover:text-purple-0"
+                                            href={`${pathPrefix}/${item.name}`}
+                                        >
+                                            {item.name}
+                                        </Link>
+                                    )}
                                 </td>
                                 <td className={tdStyling}>{item.cpus}</td>
                                 <td className={tdStyling}>{item.memory}</td>
@@ -57,7 +79,10 @@ export function EC2FamilySizes({ allOfInstanceType, instanceName, pathPrefix, ta
             </table>
             <div className="mt-4 mb-6">
                 <p className="text-center text-sm">
-                    <Link href={`${tablePath}?selected=${instanceName}`} className="p-2 border border-gray-200 hover:border-gray-300 rounded-md">
+                    <Link
+                        href={`${tablePath}?selected=${instanceName}`}
+                        className="p-2 border border-gray-200 hover:border-gray-300 rounded-md"
+                    >
                         Compare {instanceName} to other instances
                     </Link>
                 </p>

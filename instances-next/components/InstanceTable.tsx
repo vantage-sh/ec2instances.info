@@ -37,8 +37,11 @@ import SortToggle from "./SortToggle";
 import * as columnData from "@/utils/colunnData";
 
 export type AtomKeyWhereInstanceIs<Instance> = {
-    [AtomKey in keyof typeof columnData]:
-        typeof columnData[AtomKey]["columnsGen"] extends (...args: any[]) => ColumnDef<Instance>[] ? AtomKey : never;
+    [AtomKey in keyof typeof columnData]: (typeof columnData)[AtomKey]["columnsGen"] extends (
+        ...args: any[]
+    ) => ColumnDef<Instance>[]
+        ? AtomKey
+        : never;
 }[keyof typeof columnData];
 
 interface InstanceTableProps<Instance> {
@@ -63,7 +66,9 @@ function csvEscape(input: string) {
 // Hack to stop Tanstack Table from thinking the array changed.
 const emptyColumnFilters: ColumnFiltersState = [];
 
-export default function InstanceTable<Instance extends { instance_type: string }>({
+export default function InstanceTable<
+    Instance extends { instance_type: string },
+>({
     instances,
     rowSelection,
     setRowSelection,
@@ -97,7 +102,9 @@ export default function InstanceTable<Instance extends { instance_type: string }
                 value: gSettings.minMemory,
             },
             {
-                id: columns.find((v) => v.id === "vcpus" || v.id === "vcpu")?.id ?? "vCPU",
+                id:
+                    columns.find((v) => v.id === "vcpus" || v.id === "vcpu")
+                        ?.id ?? "vCPU",
                 value: gSettings.minVcpus,
             },
         ];
@@ -122,12 +129,10 @@ export default function InstanceTable<Instance extends { instance_type: string }
             );
         }
         if (columns.find((v) => v.id === "storage")) {
-            a.push(
-                {
-                    id: "storage",
-                    value: gSettings.minStorage,
-                },
-            );
+            a.push({
+                id: "storage",
+                value: gSettings.minStorage,
+            });
         }
 
         setColumnFilters(a);
@@ -215,7 +220,9 @@ export default function InstanceTable<Instance extends { instance_type: string }
     let totalHeight = rowVirtualizer.getTotalSize();
     if (instances.length < instanceCount && !compareOn) {
         // Add padding to the table to account for the missing instances.
-        totalHeight += (totalHeight / instances.length) * (instanceCount - instances.length);
+        totalHeight +=
+            (totalHeight / instances.length) *
+            (instanceCount - instances.length);
     }
     const paddingTop = virtualRows.length > 0 ? virtualRows[0].start : 0;
     const paddingBottom =

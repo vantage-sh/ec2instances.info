@@ -51,15 +51,16 @@ function Calculator({
     const priceHoldersId = useId();
 
     const defaultPlatform = useMemo(() => {
-        return pricing["us-east-1"]?.[defaultOs] ?
-            defaultOs :
-            Object.keys(pricing["us-east-1"] || {})[0] || defaultOs;
+        return pricing["us-east-1"]?.[defaultOs]
+            ? defaultOs
+            : Object.keys(pricing["us-east-1"] || {})[0] || defaultOs;
     }, [pricing, defaultOs]);
 
     const [region, setRegionState] = useState<string>("us-east-1");
     const [platform, setPlatformState] = useState<string>(defaultPlatform);
     const [duration, setDurationState] = useState<CostDuration>("hourly");
-    const [pricingType, setPricingTypeState] = useState<string>("Standard.noUpfront");
+    const [pricingType, setPricingTypeState] =
+        useState<string>("Standard.noUpfront");
 
     // Check the URL to make sure this is the state it was originally in.
     useEffect(() => {
@@ -72,7 +73,8 @@ function Calculator({
         // If there is no OS option, don't let the user change it.
         if (defaultPlatform === "linux") {
             const platform = query.get("platform");
-            if (platform && osOptions.some(([value]) => value === platform)) setPlatformState(platform);
+            if (platform && osOptions.some(([value]) => value === platform))
+                setPlatformState(platform);
         }
 
         const duration = query.get("duration");
@@ -91,12 +93,22 @@ function Calculator({
         const pricingType = query.get("pricingType");
         if (pricingType) {
             // We do this in case the case got weird when reading the link.
-            const validPricingType = reservedTermOptions.find(([value]) => value.toLowerCase() === pricingType.toLowerCase());
-            if (validPricingType && (!lessPricingFlexibility || !validPricingType[0].includes("Convertible"))) setPricingTypeState(validPricingType[0]);
+            const validPricingType = reservedTermOptions.find(
+                ([value]) => value.toLowerCase() === pricingType.toLowerCase(),
+            );
+            if (
+                validPricingType &&
+                (!lessPricingFlexibility ||
+                    !validPricingType[0].includes("Convertible"))
+            )
+                setPricingTypeState(validPricingType[0]);
         }
     }, [pricing, regions, osOptions]);
 
-    function wrapStringUpdater<T extends string>(handler: (value: T) => void, key: string) {
+    function wrapStringUpdater<T extends string>(
+        handler: (value: T) => void,
+        key: string,
+    ) {
         return (value: T) => {
             handler(value);
             if (typeof window === "undefined") return;
@@ -107,8 +119,14 @@ function Calculator({
     }
     const setRegion = wrapStringUpdater(setRegionState, "region");
     const setPlatform = wrapStringUpdater(setPlatformState, "platform");
-    const setDuration = wrapStringUpdater<CostDuration>(setDurationState, "duration");
-    const setPricingType = wrapStringUpdater(setPricingTypeState, "pricingType");
+    const setDuration = wrapStringUpdater<CostDuration>(
+        setDurationState,
+        "duration",
+    );
+    const setPricingType = wrapStringUpdater(
+        setPricingTypeState,
+        "pricingType",
+    );
 
     const prices = useMemo(() => {
         const root = pricing[region]?.[platform];
@@ -127,15 +145,28 @@ function Calculator({
         a.push(
             {
                 label: "1-Year Reserved",
-                value: dollarString(root?.reserved?.[`yrTerm1${pricingType}`], duration),
+                value: dollarString(
+                    root?.reserved?.[`yrTerm1${pricingType}`],
+                    duration,
+                ),
             },
             {
                 label: "3-Year Reserved",
-                value: dollarString(root?.reserved?.[`yrTerm3${pricingType}`], duration),
+                value: dollarString(
+                    root?.reserved?.[`yrTerm3${pricingType}`],
+                    duration,
+                ),
             },
         );
         return a;
-    }, [pricing, region, platform, duration, pricingType, lessPricingFlexibility]);
+    }, [
+        pricing,
+        region,
+        platform,
+        duration,
+        pricingType,
+        lessPricingFlexibility,
+    ]);
 
     const localZones = useMemo(() => {
         return Object.entries(regions.local_zone).sort((a, b) => {
@@ -150,11 +181,18 @@ function Calculator({
 
     return (
         <>
-            <div className="mt-2" id={priceHoldersId} aria-live="polite" aria-atomic="true">
+            <div
+                className="mt-2"
+                id={priceHoldersId}
+                aria-live="polite"
+                aria-atomic="true"
+            >
                 <div className="flex gap-4 w-full flex-wrap">
                     {prices.map(({ label, value }) => (
                         <div key={label} className="flex-col">
-                            <p className="text-lg font-bold text-center">{value}</p>
+                            <p className="text-lg font-bold text-center">
+                                {value}
+                            </p>
                             <p className="text-xs text-center">{label}</p>
                         </div>
                     ))}
@@ -162,34 +200,67 @@ function Calculator({
             </div>
 
             <div className="mt-4 grid grid-cols-2 gap-2">
-                <select aria-controls={priceHoldersId} value={region} className={selectStyling} onChange={(e) => setRegion(e.target.value)}>
+                <select
+                    aria-controls={priceHoldersId}
+                    value={region}
+                    className={selectStyling}
+                    onChange={(e) => setRegion(e.target.value)}
+                >
                     {localZones.map(([code, name]) => (
-                        <option key={code} value={code} disabled={!pricing[code]}>{name}</option>
+                        <option
+                            key={code}
+                            value={code}
+                            disabled={!pricing[code]}
+                        >
+                            {name}
+                        </option>
                     ))}
                 </select>
 
-                {
-                    defaultPlatform === defaultOs && (
-                        <select aria-controls={priceHoldersId} value={platform} className={selectStyling} onChange={(e) => setPlatform(e.target.value)}>
-                            {osOptions.map(([value, label]) => (
-                                <option key={value} value={value}>{label}</option>
-                            ))}
-                        </select>
-                    )
-                }
+                {defaultPlatform === defaultOs && (
+                    <select
+                        aria-controls={priceHoldersId}
+                        value={platform}
+                        className={selectStyling}
+                        onChange={(e) => setPlatform(e.target.value)}
+                    >
+                        {osOptions.map(([value, label]) => (
+                            <option key={value} value={value}>
+                                {label}
+                            </option>
+                        ))}
+                    </select>
+                )}
 
-                <select aria-controls={priceHoldersId} value={duration} className={selectStyling} onChange={(e) => setDuration(e.target.value as CostDuration)}>
-                    {
-                        durationOptions.map(({ value, label }) => (
-                            <option key={value} value={value}>{label}</option>
-                        ))
+                <select
+                    aria-controls={priceHoldersId}
+                    value={duration}
+                    className={selectStyling}
+                    onChange={(e) =>
+                        setDuration(e.target.value as CostDuration)
                     }
+                >
+                    {durationOptions.map(({ value, label }) => (
+                        <option key={value} value={value}>
+                            {label}
+                        </option>
+                    ))}
                 </select>
 
-                <select aria-controls={priceHoldersId} value={pricingType} className={selectStyling} onChange={(e) => setPricingType(e.target.value)}>
-                    {reservedTermOptions.map(([value, label]) => lessPricingFlexibility && value.includes("Convertible") ? null : (
-                        <option key={value} value={value}>{label}</option>
-                    ))}
+                <select
+                    aria-controls={priceHoldersId}
+                    value={pricingType}
+                    className={selectStyling}
+                    onChange={(e) => setPricingType(e.target.value)}
+                >
+                    {reservedTermOptions.map(([value, label]) =>
+                        lessPricingFlexibility &&
+                        value.includes("Convertible") ? null : (
+                            <option key={value} value={value}>
+                                {label}
+                            </option>
+                        ),
+                    )}
                 </select>
             </div>
         </>
@@ -203,18 +274,35 @@ type PricingSelectorProps = {
     osOptions: [string, string][];
     defaultOs: string;
     lessPricingFlexibility: boolean;
-}
+};
 
-export default function EC2PricingSelector({ rainbowTable, compressedInstance, regions, osOptions, defaultOs, lessPricingFlexibility }: PricingSelectorProps) {
+export default function EC2PricingSelector({
+    rainbowTable,
+    compressedInstance,
+    regions,
+    osOptions,
+    defaultOs,
+    lessPricingFlexibility,
+}: PricingSelectorProps) {
     const instance = useMemo(() => {
-        if (!Array.isArray(compressedInstance.pricing)) return compressedInstance;
+        if (!Array.isArray(compressedInstance.pricing))
+            return compressedInstance;
         return processRainbowTable(rainbowTable, compressedInstance);
     }, [rainbowTable, compressedInstance]);
 
     return (
         <section className="mb-4">
-            <h3 className="flex items-center gap-2"><DollarSignIcon className="w-4 h-4 inline-block my-auto" /> Pricing</h3>
-            <Calculator pricing={instance.pricing} regions={regions} osOptions={osOptions} defaultOs={defaultOs} lessPricingFlexibility={lessPricingFlexibility} />
+            <h3 className="flex items-center gap-2">
+                <DollarSignIcon className="w-4 h-4 inline-block my-auto" />{" "}
+                Pricing
+            </h3>
+            <Calculator
+                pricing={instance.pricing}
+                regions={regions}
+                osOptions={osOptions}
+                defaultOs={defaultOs}
+                lessPricingFlexibility={lessPricingFlexibility}
+            />
         </section>
     );
 }

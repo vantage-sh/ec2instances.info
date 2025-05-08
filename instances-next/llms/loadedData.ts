@@ -33,16 +33,14 @@ export const awsInstances = (async () => {
         const remaining = decode(Buffer.concat(chunks)) as EC2Instance[];
         // @ts-expect-error: The first item is the rainbow table.
         const rainbowTable: string[] = remaining.shift();
-        remainingInstances.push(...remaining.map((i) =>
-            processRainbowTable(rainbowTable, i),
-        ));
+        remainingInstances.push(
+            ...remaining.map((i) => processRainbowTable(rainbowTable, i)),
+        );
     }
     // @ts-expect-error: The first item is the rainbow table.
     const first30RainbowTable: string[] = compressed30.shift();
     return [
-        ...compressed30.map((i) =>
-            processRainbowTable(first30RainbowTable, i),
-        ),
+        ...compressed30.map((i) => processRainbowTable(first30RainbowTable, i)),
         ...remainingInstances,
     ];
 })();

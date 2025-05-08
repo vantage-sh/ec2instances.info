@@ -1,5 +1,10 @@
 import { CostDuration, PricingUnit } from "@/types";
-import { makeSchemaWithDefaults, doAllDataTablesMigrations, gt, calculateCost } from "./shared";
+import {
+    makeSchemaWithDefaults,
+    doAllDataTablesMigrations,
+    gt,
+    calculateCost,
+} from "./shared";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 
@@ -10,7 +15,7 @@ type OpenSearchPricing = {
             [term: string]: string;
         };
     };
-}
+};
 
 export type Instance = {
     pretty_name: string;
@@ -47,10 +52,19 @@ export function makeColumnVisibilitySchema() {
 }
 
 export function doDataTablesMigration() {
-    return doAllDataTablesMigrations("/opensearch", initialColumnsArr, initialColumnsValue);
+    return doAllDataTablesMigrations(
+        "/opensearch",
+        initialColumnsArr,
+        initialColumnsValue,
+    );
 }
 
-export function makePrettyNames<V>(makeColumnOption: (key: keyof typeof initialColumnsValue, label: string) => V) {
+export function makePrettyNames<V>(
+    makeColumnOption: (
+        key: keyof typeof initialColumnsValue,
+        label: string,
+    ) => V,
+) {
     return [
         makeColumnOption("pretty_name", "Name"),
         makeColumnOption("instance_type", "API Name"),
@@ -83,7 +97,14 @@ export const columnsGen = (
         sortingFn: "alphanumeric",
         cell: (info) => {
             const value = info.getValue() as string;
-            return <Link onClick={(e) => e.stopPropagation()} href={`/aws/opensearch/${value}`}>{value}</Link>;
+            return (
+                <Link
+                    onClick={(e) => e.stopPropagation()}
+                    href={`/aws/opensearch/${value}`}
+                >
+                    {value}
+                </Link>
+            );
         },
     },
     {
@@ -126,7 +147,12 @@ export const columnsGen = (
             const pricing = info.getValue() as OpenSearchPricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
-            return calculateCost(region.ondemand, info.row.original, pricingUnit, costDuration);
+            return calculateCost(
+                region.ondemand,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -138,7 +164,12 @@ export const columnsGen = (
             const pricing = info.getValue() as OpenSearchPricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
-            return calculateCost(region.reserved?.[reservedTerm], info.row.original, pricingUnit, costDuration);
+            return calculateCost(
+                region.reserved?.[reservedTerm],
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {

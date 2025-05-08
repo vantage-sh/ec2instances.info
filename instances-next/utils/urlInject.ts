@@ -10,7 +10,10 @@ export function raw(s: string) {
     return new Raw(s);
 }
 
-export function urlInject(strings: TemplateStringsArray, ...paths: (string | Raw)[]) {
+export function urlInject(
+    strings: TemplateStringsArray,
+    ...paths: (string | Raw)[]
+) {
     const e = process.env.NEXT_PUBLIC_URL;
     if (!e) {
         throw new Error("NEXT_PUBLIC_URL is not set");

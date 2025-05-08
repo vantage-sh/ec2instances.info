@@ -84,7 +84,10 @@ export default class GSettings {
     filterData = "";
     filterPreCompareOn = "";
 
-    constructor(azure: boolean, private notRoot: boolean) {
+    constructor(
+        azure: boolean,
+        private notRoot: boolean,
+    ) {
         this.key = azure ? "azure_settings" : "aws_settings";
         this.settings = { ...g_settings_default };
         const stored = localStorage.getItem(this.key);

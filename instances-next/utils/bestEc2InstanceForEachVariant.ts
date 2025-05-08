@@ -1,6 +1,9 @@
 import { EC2Instance } from "@/types";
 
-function findNearestInstanceMutatesNoCleanup(instances: EC2Instance[], closestTo: EC2Instance) {
+function findNearestInstanceMutatesNoCleanup(
+    instances: EC2Instance[],
+    closestTo: EC2Instance,
+) {
     instances.push(closestTo);
     instances.sort((a, b) => {
         // Sort by CPU, memory, and then GPU.
@@ -17,20 +20,34 @@ function findNearestInstanceMutatesNoCleanup(instances: EC2Instance[], closestTo
     const right = instances[ourInstance + 1];
     if (left && right) {
         // Try and find one equality here with the closest instance.
-        if (left.vCPU === closestTo.vCPU || left.memory === closestTo.memory || (left.GPU || 0) === (closestTo.GPU || 0)) {
+        if (
+            left.vCPU === closestTo.vCPU ||
+            left.memory === closestTo.memory ||
+            (left.GPU || 0) === (closestTo.GPU || 0)
+        ) {
             return left;
         }
-        if (right.vCPU === closestTo.vCPU || right.memory === closestTo.memory || (right.GPU || 0) === (closestTo.GPU || 0)) {
+        if (
+            right.vCPU === closestTo.vCPU ||
+            right.memory === closestTo.memory ||
+            (right.GPU || 0) === (closestTo.GPU || 0)
+        ) {
             return right;
         }
 
         // If this isn't possible, return the best of the two.
-        return left.vCPU === right.vCPU && left.memory === right.memory ? left : right;
+        return left.vCPU === right.vCPU && left.memory === right.memory
+            ? left
+            : right;
     }
     return left || right;
 }
 
-export default function bestEc2InstanceForEachVariant(instances: EC2Instance[], closestTo: EC2Instance, instanceSplit: (instance: EC2Instance) => string) {
+export default function bestEc2InstanceForEachVariant(
+    instances: EC2Instance[],
+    closestTo: EC2Instance,
+    instanceSplit: (instance: EC2Instance) => string,
+) {
     const variants: Map<string, EC2Instance | EC2Instance[]> = new Map();
     for (const instance of instances) {
         const itype = instanceSplit(instance);
@@ -46,7 +63,10 @@ export default function bestEc2InstanceForEachVariant(instances: EC2Instance[], 
         if ((instances as EC2Instance[]).includes(closestTo)) {
             variants.set(itype, closestTo);
         }
-        const best = findNearestInstanceMutatesNoCleanup(instances as EC2Instance[], closestTo);
+        const best = findNearestInstanceMutatesNoCleanup(
+            instances as EC2Instance[],
+            closestTo,
+        );
         variants.set(itype, best);
     }
 

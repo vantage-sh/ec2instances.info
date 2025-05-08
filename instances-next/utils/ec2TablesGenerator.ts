@@ -80,7 +80,10 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
             rows: [
                 {
                     name: "Network Performance (Gibps)",
-                    children: instance.network_performance.toLowerCase().replace("gigabit", "").trim(),
+                    children: instance.network_performance
+                        .toLowerCase()
+                        .replace("gigabit", "")
+                        .trim(),
                 },
                 {
                     name: "Enhanced Networking",
@@ -150,7 +153,8 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
                 },
                 {
                     name: "Swap Partition",
-                    children: instance.storage?.includes_swap_partition ?? false,
+                    children:
+                        instance.storage?.includes_swap_partition ?? false,
                     bgStyled: true,
                 },
                 {
@@ -170,7 +174,8 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
                 },
                 {
                     name: "Initialize Storage",
-                    children: instance.storage?.storage_needs_initialization ?? false,
+                    children:
+                        instance.storage?.storage_needs_initialization ?? false,
                     bgStyled: true,
                 },
             ],

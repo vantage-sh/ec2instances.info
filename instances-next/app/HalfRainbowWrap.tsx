@@ -6,37 +6,48 @@ import { decompressHalfRainbowTable } from "@/utils/halfRainbowTable";
 import { useMemo } from "react";
 import AWSClient from "./AWSClient";
 
-type Props<Instance extends {
-    pricing: {
-        [region: string]: {
-            ondemand: any;
-            reserved?: {
-                [term: string]: any;
+type Props<
+    Instance extends {
+        pricing: {
+            [region: string]: {
+                ondemand: any;
+                reserved?: {
+                    [term: string]: any;
+                };
             };
         };
-    };
-}> = {
+    },
+> = {
     instances: Instance[];
     rainbowTable: string[];
     regions: Region;
     columnAtomKey: AtomKeyWhereInstanceIs<Instance>;
 };
 
-
-export default function HalfRainbowWrap<Instance extends {
-    pricing: {
-        [region: string]: {
-            ondemand: any;
-            reserved?: {
-                [term: string]: any;
+export default function HalfRainbowWrap<
+    Instance extends {
+        pricing: {
+            [region: string]: {
+                ondemand: any;
+                reserved?: {
+                    [term: string]: any;
+                };
             };
         };
-    };
-    instance_type: string;
-}>({ instances, rainbowTable, regions, columnAtomKey }: Props<Instance>) {
+        instance_type: string;
+    },
+>({ instances, rainbowTable, regions, columnAtomKey }: Props<Instance>) {
     const decompressed = useMemo(() => {
-        return instances.map((instance) => decompressHalfRainbowTable(rainbowTable, instance));
+        return instances.map((instance) =>
+            decompressHalfRainbowTable(rainbowTable, instance),
+        );
     }, [instances, rainbowTable]);
 
-    return <AWSClient instances={decompressed} regions={regions} columnAtomKey={columnAtomKey} />;
+    return (
+        <AWSClient
+            instances={decompressed}
+            regions={regions}
+            columnAtomKey={columnAtomKey}
+        />
+    );
 }

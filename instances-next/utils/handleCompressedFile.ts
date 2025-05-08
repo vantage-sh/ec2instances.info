@@ -34,7 +34,7 @@ export default function handleCompressedFile<Instance>(
             new URL("./processor.worker.ts", import.meta.url),
         );
         worker.onmessage = (e) => {
-            instances = [...initialInstances, ...e.data as Instance[]];
+            instances = [...initialInstances, ...(e.data as Instance[])];
             for (const fn of changeNotifier) {
                 fn();
             }

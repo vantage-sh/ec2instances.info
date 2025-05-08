@@ -1,6 +1,11 @@
 import { PricingUnit } from "@/types";
 import { CostDuration } from "@/types";
-import { makeSchemaWithDefaults, doAllDataTablesMigrations, gt, calculateCost } from "./shared";
+import {
+    makeSchemaWithDefaults,
+    doAllDataTablesMigrations,
+    gt,
+    calculateCost,
+} from "./shared";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 
@@ -11,7 +16,7 @@ type RedshiftPricing = {
             [term: string]: string;
         };
     };
-}
+};
 
 export type Instance = {
     pretty_name: string;
@@ -50,10 +55,19 @@ export function makeColumnVisibilitySchema() {
 }
 
 export function doDataTablesMigration() {
-    return doAllDataTablesMigrations("/redshift", initialColumnsArr, initialColumnsValue);
+    return doAllDataTablesMigrations(
+        "/redshift",
+        initialColumnsArr,
+        initialColumnsValue,
+    );
 }
 
-export function makePrettyNames<V>(makeColumnOption: (key: keyof typeof initialColumnsValue, label: string) => V) {
+export function makePrettyNames<V>(
+    makeColumnOption: (
+        key: keyof typeof initialColumnsValue,
+        label: string,
+    ) => V,
+) {
     return [
         makeColumnOption("pretty_name", "Name"),
         makeColumnOption("instance_type", "API Name"),
@@ -89,7 +103,14 @@ export const columnsGen = (
         sortingFn: "alphanumeric",
         cell: (info) => {
             const value = info.getValue() as string;
-            return <Link onClick={(e) => e.stopPropagation()} href={`/aws/redshift/${value}`}>{value}</Link>;
+            return (
+                <Link
+                    onClick={(e) => e.stopPropagation()}
+                    href={`/aws/redshift/${value}`}
+                >
+                    {value}
+                </Link>
+            );
         },
     },
     {
@@ -150,7 +171,12 @@ export const columnsGen = (
             const pricing = info.getValue() as RedshiftPricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
-            return calculateCost(region.ondemand, info.row.original, pricingUnit, costDuration);
+            return calculateCost(
+                region.ondemand,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
     {
@@ -162,7 +188,12 @@ export const columnsGen = (
             const pricing = info.getValue() as RedshiftPricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
-            return calculateCost(region.reserved?.[reservedTerm], info.row.original, pricingUnit, costDuration);
+            return calculateCost(
+                region.reserved?.[reservedTerm],
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
         },
     },
 ];

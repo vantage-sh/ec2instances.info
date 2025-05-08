@@ -8,7 +8,7 @@ export function makeHalfRainbowTable<
                 };
             };
         };
-    }
+    },
 >(instances: Instance[]): [string[], ...Instance[]] {
     // Pass 1: Get all the keys.
     const reservedSet = new Set<string>();
@@ -29,13 +29,20 @@ export function makeHalfRainbowTable<
     for (const instance of instances) {
         const newPricing: [number, [any, ...[number, any][]]][] = [];
         for (const region in instance.pricing) {
-            const compressed: [any, ...[number, any][]] = [instance.pricing[region].ondemand];
+            const compressed: [any, ...[number, any][]] = [
+                instance.pricing[region].ondemand,
+            ];
             for (const reservedKey in instance.pricing[region].reserved || {}) {
                 const index = rainbowTable.indexOf(reservedKey);
                 if (index === -1) {
-                    throw new Error(`Reserved key ${reservedKey} not found in rainbow table`);
+                    throw new Error(
+                        `Reserved key ${reservedKey} not found in rainbow table`,
+                    );
                 }
-                compressed.push([index, instance.pricing[region].reserved![reservedKey]]);
+                compressed.push([
+                    index,
+                    instance.pricing[region].reserved![reservedKey],
+                ]);
             }
             newPricing.push([rainbowTable.indexOf(region), compressed]);
         }
@@ -55,12 +62,13 @@ export function decompressHalfRainbowTable<
                 };
             };
         };
-    }
+    },
 >(rainbowTable: string[], instance: Instance) {
     // @ts-expect-error: We know the type is wrong now.
     if (instance._decmp) return instance;
     // @ts-expect-error: The type is currently wrong.
-    const compressedPricing: [number, [any, ...[number, any][]]][] = instance.pricing;
+    const compressedPricing: [number, [any, ...[number, any][]]][] =
+        instance.pricing;
     const newPricing: Record<string, any> = {};
     for (const [regionIndex, compressed] of compressedPricing) {
         const region = rainbowTable[regionIndex];

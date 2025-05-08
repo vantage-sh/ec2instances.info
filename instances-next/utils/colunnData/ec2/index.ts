@@ -90,10 +90,19 @@ export function makeColumnVisibilitySchema() {
 }
 
 export function doDataTablesMigration() {
-    return doAllDataTablesMigrations("/", initialColumnsArr, initialColumnsValue);
+    return doAllDataTablesMigrations(
+        "/",
+        initialColumnsArr,
+        initialColumnsValue,
+    );
 }
 
-export function makePrettyNames<V>(makeColumnOption: (key: keyof typeof initialColumnsValue, label: string) => V) {
+export function makePrettyNames<V>(
+    makeColumnOption: (
+        key: keyof typeof initialColumnsValue,
+        label: string,
+    ) => V,
+) {
     return [
         makeColumnOption("pretty_name", "Name"),
         makeColumnOption("instance_type", "API Name"),
@@ -115,14 +124,8 @@ export function makePrettyNames<V>(makeColumnOption: (key: keyof typeof initialC
         makeColumnOption("intel_avx512", "Intel AVX-512"),
         makeColumnOption("intel_turbo", "Intel Turbo"),
         makeColumnOption("storage", "Instance Storage"),
-        makeColumnOption(
-            "warmed-up",
-            "Instance Storage: already warmed-up",
-        ),
-        makeColumnOption(
-            "trim-support",
-            "Instance Storage: SSD TRIM Support",
-        ),
+        makeColumnOption("warmed-up", "Instance Storage: already warmed-up"),
+        makeColumnOption("trim-support", "Instance Storage: SSD TRIM Support"),
         makeColumnOption("arch", "Arch"),
         makeColumnOption("network_performance", "Network Performance"),
         makeColumnOption(
@@ -137,10 +140,7 @@ export function makePrettyNames<V>(makeColumnOption: (key: keyof typeof initialC
             "ebs_baseline_iops",
             "EBS Optimized: Baseline IOPS (16K)",
         ),
-        makeColumnOption(
-            "ebs_max_bandwidth",
-            "EBS Optimized: Max Bandwidth",
-        ),
+        makeColumnOption("ebs_max_bandwidth", "EBS Optimized: Max Bandwidth"),
         makeColumnOption(
             "ebs_throughput",
             "EBS Optimized: Max Throughput (128K)",
@@ -152,14 +152,8 @@ export function makePrettyNames<V>(makeColumnOption: (key: keyof typeof initialC
         makeColumnOption("enhanced_networking", "Enhanced Networking"),
         makeColumnOption("vpc_only", "VPC Only"),
         makeColumnOption("ipv6_support", "IPv6 Support"),
-        makeColumnOption(
-            "placement_group_support",
-            "Placement Group Support",
-        ),
-        makeColumnOption(
-            "linux_virtualization_types",
-            "Linux Virtualization",
-        ),
+        makeColumnOption("placement_group_support", "Placement Group Support"),
+        makeColumnOption("linux_virtualization_types", "Linux Virtualization"),
         makeColumnOption("emr", "On EMR"),
         makeColumnOption("availability_zones", "Availability Zones"),
         makeColumnOption("cost-ondemand", "On Demand"),
@@ -176,22 +170,10 @@ export function makePrettyNames<V>(makeColumnOption: (key: keyof typeof initialC
         makeColumnOption("cost-spot-max-sles", "SLES Spot Maximum cost"),
         makeColumnOption("cost-ondemand-mswin", "Windows On Demand cost"),
         makeColumnOption("cost-reserved-mswin", "Windows Reserved cost"),
-        makeColumnOption(
-            "cost-spot-min-mswin",
-            "Windows Spot Minimum cost",
-        ),
-        makeColumnOption(
-            "cost-spot-max-mswin",
-            "Windows Spot Average cost",
-        ),
-        makeColumnOption(
-            "cost-ondemand-dedicated",
-            "Dedicated Host On Demand",
-        ),
-        makeColumnOption(
-            "cost-reserved-dedicated",
-            "Dedicated Host Reserved",
-        ),
+        makeColumnOption("cost-spot-min-mswin", "Windows Spot Minimum cost"),
+        makeColumnOption("cost-spot-max-mswin", "Windows Spot Average cost"),
+        makeColumnOption("cost-ondemand-dedicated", "Dedicated Host On Demand"),
+        makeColumnOption("cost-reserved-dedicated", "Dedicated Host Reserved"),
         makeColumnOption(
             "cost-ondemand-mswinSQLWeb",
             "Windows SQL Web On Demand cost",

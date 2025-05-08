@@ -15,34 +15,49 @@ type RootProps<Instance extends { instance_type: string }> = {
     regions: Region;
 };
 
-type AWSClientProps<Instance extends { instance_type: string; pricing: Pricing }> = RootProps<Instance> & ({
-    compressedDataPathTemplate: string | null;
-    compressedInstances: [string[], ...Instance[]];
-    instanceCount: number;
-    instances?: undefined;
-} | {
-    compressedInstances?: undefined;
-    instances: Instance[];
-    instanceCount?: undefined;
-});
+type AWSClientProps<
+    Instance extends { instance_type: string; pricing: Pricing },
+> = RootProps<Instance> &
+    (
+        | {
+              compressedDataPathTemplate: string | null;
+              compressedInstances: [string[], ...Instance[]];
+              instanceCount: number;
+              instances?: undefined;
+          }
+        | {
+              compressedInstances?: undefined;
+              instances: Instance[];
+              instanceCount?: undefined;
+          }
+    );
 
-type AWSDecompressionClientProps<Instance extends { instance_type: string; pricing: Pricing }> = RootProps<Instance> & {
+type AWSDecompressionClientProps<
+    Instance extends { instance_type: string; pricing: Pricing },
+> = RootProps<Instance> & {
     compressedDataPathTemplate: string | null;
     compressedInstances: [string[], ...Instance[]];
     instanceCount: number;
     instances?: undefined;
 };
 
-type AWSAllInstancesClientProps<Instance extends { instance_type: string }> = RootProps<Instance> & {
-    instances: Instance[];
-    compressedDataPathTemplate?: undefined;
-    compressedInstances?: undefined;
-    instanceCount?: undefined;
-};
+type AWSAllInstancesClientProps<Instance extends { instance_type: string }> =
+    RootProps<Instance> & {
+        instances: Instance[];
+        compressedDataPathTemplate?: undefined;
+        compressedInstances?: undefined;
+        instanceCount?: undefined;
+    };
 
-export default function AWSClient<Instance extends { instance_type: string }>(props: AWSAllInstancesClientProps<Instance>): JSX.Element;
-export default function AWSClient<Instance extends { instance_type: string; pricing: Pricing }>(props: AWSDecompressionClientProps<Instance>): JSX.Element;
-export default function AWSClient<Instance extends { instance_type: string; pricing: Pricing }>(props: AWSClientProps<Instance>): JSX.Element {
+export default function AWSClient<Instance extends { instance_type: string }>(
+    props: AWSAllInstancesClientProps<Instance>,
+): JSX.Element;
+export default function AWSClient<
+    Instance extends { instance_type: string; pricing: Pricing },
+>(props: AWSDecompressionClientProps<Instance>): JSX.Element;
+export default function AWSClient<
+    Instance extends { instance_type: string; pricing: Pricing },
+>(props: AWSClientProps<Instance>): JSX.Element {
     const initialInstances = useMemo(() => {
         if (props.compressedInstances) {
             const rainbowTable = props.compressedInstances.shift() as string[];
@@ -51,14 +66,19 @@ export default function AWSClient<Instance extends { instance_type: string; pric
                 props.compressedInstances.unshift(rainbowTable);
                 return props.compressedInstances as Instance[];
             }
-            return props.compressedInstances.map((instance) => dynamicallyDecompress(instance as Instance, rainbowTable));
+            return props.compressedInstances.map((instance) =>
+                dynamicallyDecompress(instance as Instance, rainbowTable),
+            );
         }
         return null;
     }, [props.compressedInstances, props.instances]);
 
     let instances: Instance[];
     if (props.compressedInstances) {
-        instances = useInstanceData(props.compressedDataPathTemplate, initialInstances!);
+        instances = useInstanceData(
+            props.compressedDataPathTemplate,
+            initialInstances!,
+        );
     } else {
         instances = props.instances;
     }
@@ -67,7 +87,11 @@ export default function AWSClient<Instance extends { instance_type: string; pric
     return (
         <main className="h-screen flex flex-col">
             <DoMigration atomKey={props.columnAtomKey} />
-            <Filters columnAtomKey={props.columnAtomKey} regions={props.regions} rowSelection={rowSelection} />
+            <Filters
+                columnAtomKey={props.columnAtomKey}
+                regions={props.regions}
+                rowSelection={rowSelection}
+            />
             <div className="flex-1 min-h-0">
                 <InstanceTable
                     instances={instances}
