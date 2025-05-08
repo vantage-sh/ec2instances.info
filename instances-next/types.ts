@@ -17,6 +17,7 @@ export interface Pricing {
 
 export interface EC2Instance {
     instance_type: string;
+    family: string;
     pretty_name: string;
     memory: number;
     vCPU: number;
@@ -54,6 +55,7 @@ export interface EC2Instance {
     ebs_baseline_iops: number;
     ebs_max_bandwidth?: number;
     ebs_throughput: number;
+    ebs_optimized: boolean;
     ebs_iops: number;
     ebs_as_nvme: boolean;
     vpc?: {

@@ -108,7 +108,7 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
             rows: [
                 {
                     name: "EBS Optimized",
-                    children: instance.ebs_as_nvme,
+                    children: instance.ebs_optimized,
                     bgStyled: true,
                 },
                 {
@@ -194,6 +194,10 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
                     children: instance.instance_type,
                 },
                 {
+                    name: "Family",
+                    children: instance.family || "N/A",
+                },
+                {
                     name: "Name",
                     children: instance.pretty_name,
                 },
@@ -210,5 +214,116 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
 }
 
 export function rds(instance: Omit<EC2Instance, "pricing">): Table[] {
-    return [];
+    return [
+        {
+            name: "Compute",
+            slug: "Compute",
+            rows: [
+                {
+                    name: "vCPUs",
+                    children: instance.vCPU,
+                },
+                {
+                    name: "Memory (GiB)",
+                    children: instance.memory,
+                },
+                {
+                    name: "Physical Processor",
+                    children: instance.physical_processor || "N/A",
+                },
+                {
+                    name: "CPU Architecture",
+                    children: instance.arch || "N/A",
+                },
+            ],
+        },
+        {
+            name: "Storage",
+            slug: "storage",
+            rows: [
+                {
+                    name: "EBS Optimized",
+                    children: instance.ebs_optimized || false,
+                    bgStyled: true,
+                },
+                {
+                    name: "Max Bandwidth (Mbps) on",
+                    helpText: "EBS",
+                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    children: instance.ebs_max_bandwidth,
+                },
+                {
+                    name: "Max Throughput (MB/s) on",
+                    helpText: "EBS",
+                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    children: instance.ebs_throughput,
+                },
+                {
+                    name: "Max I/O operations/second",
+                    helpText: "IOPS",
+                    help: "https://handbook.vantage.sh/aws/concepts/io-operations/",
+                    children: instance.ebs_iops,
+                },
+                {
+                    name: "Baseline Bandwidth (Mbps) on",
+                    helpText: "EBS",
+                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    children: instance.ebs_baseline_bandwidth,
+                },
+                {
+                    name: "Baseline Throughput (MB/s) on",
+                    helpText: "EBS",
+                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    children: instance.ebs_baseline_throughput,
+                },
+                {
+                    name: "Baseline I/O operations/second",
+                    helpText: "IOPS",
+                    help: "https://handbook.vantage.sh/aws/concepts/io-operations/",
+                    children: instance.ebs_baseline_iops,
+                },
+            ],
+        },
+        {
+            name: "Networking",
+            slug: "Networking",
+            rows: [
+                {
+                    name: "Network Performance (Gibps)",
+                    children: (instance.network_performance || "N/A")
+                        .replace("Gigabit", "")
+                        .trim(),
+                },
+            ],
+        },
+        {
+            name: "Amazon",
+            slug: "amazon",
+            rows: [
+                {
+                    name: "Generation",
+                    // @ts-expect-error: RDS specific
+                    children: instance.currentGeneration === "Yes" ? "current" : "previous",
+                    bgStyled: true,
+                },
+                {
+                    name: "Instance Type",
+                    children: instance.instance_type,
+                },
+                {
+                    name: "Family",
+                    children: instance.family || "N/A",
+                },
+                {
+                    name: "Name",
+                    children: instance.pretty_name,
+                },
+                {
+                    name: "Normalization Factor",
+                    // @ts-expect-error: RDS specific
+                    children: instance.normalizationSizeFactor,
+                },
+            ],
+        },
+    ];
 }

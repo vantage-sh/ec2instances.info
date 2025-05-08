@@ -24,6 +24,11 @@ async function getData() {
                 x.vCPU = x.vcpu;
                 delete x.vcpu;
             }
+            if ("physicalProcessor" in x) {
+                // @ts-expect-error: This is a different typed field.
+                x.physical_processor = x.physicalProcessor;
+                delete x.physicalProcessor;
+            }
         }
         return {
             regions,
