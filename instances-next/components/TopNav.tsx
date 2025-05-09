@@ -5,14 +5,7 @@ import { buttonVariants } from "@/components/ui/button"
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 
-interface NavItem {
-    label: string;
-    href: string;
-    orIncludes?: string[];
-    children?: NavItem[];
-}
-
-const navItems: NavItem[] = [
+const navItems = [
     {
         label: "AWS",
         href: "/",
@@ -28,7 +21,6 @@ const navItems: NavItem[] = [
             {
                 label: "ElastiCache",
                 href: "/cache",
-                orIncludes: ["/elasticache"],
             },
             {
                 label: "Redshift",
@@ -72,7 +64,7 @@ export default function TopNav() {
                         <div className="flex items-center justify-start gap-4 rounded rounded-b-none bg-white/50 p-1 pb-0">
                             {item.children &&
                                 item.children.map((child) => (
-                                    <Link className={`font-normal text-sm px-2 py-1 pb-2 rounded rounded-b-none ${currentPath === child.href || (child.orIncludes && child.orIncludes.some((i) => currentPath.includes(i))) || currentPath.includes(child.label.toLowerCase()) ? "bg-white text-black font-semibold" : "text-gray-6"}`} key={child.label} href={child.href}>{child.label}</Link>
+                                    <Link className={`font-normal text-sm px-2 py-1 pb-2 rounded rounded-b-none ${currentPath === child.href || currentPath.includes(child.label.toLowerCase()) ? "bg-white text-black font-semibold" : "text-gray-6"}`} key={child.label} href={child.href}>{child.label}</Link>
                                 ))}
                         </div>
                     </div>
