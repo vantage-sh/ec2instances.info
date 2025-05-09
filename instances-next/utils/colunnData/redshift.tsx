@@ -28,6 +28,11 @@ export type Instance = {
     io: string;
     ecu: string;
     generation: string;
+    currentGeneration: string;
+    slices_per_node: string;
+    node_range: string;
+    storage_per_node: string;
+    storage_capacity: string;
     pricing: RedshiftPricing;
 };
 
