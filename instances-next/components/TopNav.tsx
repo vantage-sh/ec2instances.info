@@ -61,17 +61,46 @@ export default function TopNav() {
                     <div className="flex items-center justify-start gap-4 relative top-1.5 ml-2" key={item.label}>
                         <Link className="font-medium text-gray-6 text-sm" href={item.href}>{item.label}</Link>
                         <div className="flex items-center justify-start gap-4 rounded rounded-b-none bg-white/50 p-1 pb-0">
-                        {item.children &&
-                            item.children.map((child) => (
-                                <Link className={`font-normal text-sm px-2 py-1 pb-2 rounded rounded-b-none ${usePathname().startsWith(child.href) ? "bg-white text-black font-semibold" : "text-gray-6"}`} key={child.label} href={child.href}>{child.label}</Link>
-                            ))}
+                            {item.children &&
+                                item.children.map((child) => (
+                                    <Link className={`font-normal text-sm px-2 py-1 pb-2 rounded rounded-b-none ${usePathname().startsWith(child.href) ? "bg-white text-black font-semibold" : "text-gray-6"}`} key={child.label} href={child.href}>{child.label}</Link>
+                                ))}
                         </div>
                     </div>
                 ))}
             </div>
             <div className="flex items-center justify-end gap-4">
-                <Link href="https://vantage.sh/slack" className={buttonVariants({ variant: "outline", size: "sm" })}>Slack</Link>
-                <Link href="https://github.com/vantage-sh/ec2instances.info" className={buttonVariants({ variant: "outline", size: "sm" })}>Star</Link>
+                <Link href="https://vantage.sh/slack" className={buttonVariants({ variant: "outline", size: "sm" })}>
+
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clipPath="url(#clip0_3_31)">
+                            <path d="M3.80157 11.379C3.80157 12.4251 2.95514 13.2707 1.90786 13.2707C0.860589 13.2707 0.0141602 12.4251 0.0141602 11.379C0.0141602 10.3328 0.860589 9.48724 1.90786 9.48724H3.80157V11.379ZM4.74842 11.379C4.74842 10.3328 5.59486 9.48724 6.64212 9.48724C7.6894 9.48724 8.53582 10.3328 8.53582 11.379V16.1083C8.53582 17.1545 7.6894 18 6.64212 18C5.59486 18 4.74842 17.1545 4.74842 16.1083V11.379Z" fill="#E01E5A" />
+                            <path d="M6.64231 3.78345C5.59503 3.78345 4.74861 2.9379 4.74861 1.89172C4.74861 0.845541 5.59503 0 6.64231 0C7.68959 0 8.53601 0.845541 8.53601 1.89172V3.78345H6.64231ZM6.64231 4.74363C7.68959 4.74363 8.53601 5.58917 8.53601 6.63535C8.53601 7.68153 7.68959 8.52708 6.64231 8.52708H1.8937C0.846428 8.52708 0 7.68153 0 6.63535C0 5.58917 0.846428 4.74363 1.8937 4.74363H6.64231Z" fill="#36C5F0" />
+                            <path d="M14.2313 6.63535C14.2313 5.58917 15.0778 4.74363 16.125 4.74363C17.1722 4.74363 18.0188 5.58917 18.0188 6.63535C18.0188 7.68153 17.1722 8.52708 16.125 8.52708H14.2313V6.63535ZM13.2845 6.63535C13.2845 7.68153 12.4381 8.52708 11.3908 8.52708C10.3435 8.52708 9.49707 7.68153 9.49707 6.63535V1.89172C9.49707 0.845541 10.3435 0 11.3908 0C12.4381 0 13.2845 0.845541 13.2845 1.89172V6.63535Z" fill="#2EB67D" />
+                            <path d="M11.3908 14.2165C12.4381 14.2165 13.2845 15.0621 13.2845 16.1083C13.2845 17.1545 12.4381 18 11.3908 18C10.3435 18 9.49707 17.1545 9.49707 16.1083V14.2165H11.3908ZM11.3908 13.2707C10.3435 13.2707 9.49707 12.4251 9.49707 11.379C9.49707 10.3328 10.3435 9.48724 11.3908 9.48724H16.1394C17.1866 9.48724 18.033 10.3328 18.033 11.379C18.033 12.4251 17.1866 13.2707 16.1394 13.2707H11.3908Z" fill="#ECB22E" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_3_31">
+                                <rect width="18" height="18" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+
+                    Slack</Link>
+                <Link href="https://github.com/vantage-sh/ec2instances.info" className={buttonVariants({ variant: "outline", size: "sm" })}>
+
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clipPath="url(#clip0_3_29)">
+                            <path d="M9 0C13.9725 0 18 4.0275 18 9C17.9995 10.8857 17.4077 12.7238 16.3078 14.2556C15.2079 15.7873 13.6554 16.9356 11.8688 17.5387C11.4188 17.6287 11.25 17.3475 11.25 17.1112C11.25 16.8075 11.2613 15.84 11.2613 14.6363C11.2613 13.7925 10.98 13.2525 10.6538 12.9712C12.6563 12.7463 14.76 11.9812 14.76 8.5275C14.76 7.5375 14.4113 6.73875 13.8375 6.10875C13.9275 5.88375 14.2425 4.96125 13.7475 3.72375C13.7475 3.72375 12.9938 3.47625 11.2725 4.64625C10.5525 4.44375 9.7875 4.3425 9.0225 4.3425C8.2575 4.3425 7.4925 4.44375 6.7725 4.64625C5.05125 3.4875 4.2975 3.72375 4.2975 3.72375C3.8025 4.96125 4.1175 5.88375 4.2075 6.10875C3.63375 6.73875 3.285 7.54875 3.285 8.5275C3.285 11.97 5.3775 12.7463 7.38 12.9712C7.12125 13.1962 6.885 13.59 6.80625 14.175C6.28875 14.4113 4.995 14.7937 4.185 13.4325C4.01625 13.1625 3.51 12.4987 2.80125 12.51C2.0475 12.5212 2.4975 12.9375 2.8125 13.1062C3.195 13.32 3.63375 14.1187 3.735 14.3775C3.915 14.8837 4.5 15.8513 6.76125 15.435C6.76125 16.1888 6.7725 16.8975 6.7725 17.1112C6.7725 17.3475 6.60375 17.6175 6.15375 17.5387C4.36122 16.9421 2.80208 15.7961 1.6975 14.2635C0.592928 12.7308 -0.000990539 10.8892 1.2401e-06 9C1.2401e-06 4.0275 4.0275 0 9 0Z" fill="black" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_3_29">
+                                <rect width="18" height="18" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+
+                    Star</Link>
             </div>
         </nav>
     );

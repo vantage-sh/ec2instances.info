@@ -15,7 +15,7 @@ const RED: string[] = [
 export default function BGStyled({ content }: { content: any }) {
     if (typeof content === "string" && content.toLowerCase() === "current") {
         return (
-            <div className="py-0.5 px-1 w-max font-bold font-mono rounded-md bg-purple-100 border border-purple-300">
+            <div className="py-0.5 px-1 w-max font-mono text-sm rounded-md bg-purple-100 border border-purple-300">
                 current
             </div>
         );
@@ -26,7 +26,7 @@ export default function BGStyled({ content }: { content: any }) {
 
     return (
         <div
-            className={`py-0.5 px-1 w-max font-bold font-mono rounded-md ${danger ? "bg-red-100 border border-red-300" : "bg-green-100 border border-green-300"}`}
+            className={`py-0.5 px-1 w-max text-xs font-mono rounded -my-0.5 ${danger ? "bg-red-100 border border-red-300" : "bg-green-100 border border-green-300"}`}
         >
             {j}
         </div>

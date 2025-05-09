@@ -44,7 +44,7 @@ type RowProps = {
 function Row({ name, children, help, helpText }: RowProps) {
     return (
         <tr>
-            <td className="p-1 border border-gray-200">
+            <td className="p-1.5 border border-gray-200">
                 {name}
                 {help && (
                     <span>
@@ -59,7 +59,7 @@ function Row({ name, children, help, helpText }: RowProps) {
                     </span>
                 )}
             </td>
-            <td className="p-1 border border-gray-200">{children}</td>
+            <td className="p-1.5 border border-gray-200">{children}</td>
         </tr>
     );
 }
