@@ -45,11 +45,55 @@ export const awsInstances = (async () => {
     ];
 })();
 
-export async function getAwsFamilies() {
+export const rdsInstances = (async () => {
+    const d = await readFile("../www/rds/instances.json", "utf-8");
+    const i = JSON.parse(d) as EC2Instance[];
+    for (const instance of i) {
+        if ("vcpu" in instance) {
+            // @ts-expect-error: Handle if vcpu is used instead.
+            instance.vCPU = instance.vcpu;
+        }
+    }
+    return i;
+})();
+
+export const elasticacheInstances = (async () => {
+    const d = await readFile("../www/cache/instances.json", "utf-8");
+    const i = JSON.parse(d) as EC2Instance[];
+    for (const instance of i) {
+        if ("vcpu" in instance) {
+            // @ts-expect-error: Handle if vcpu is used instead.
+            instance.vCPU = instance.vcpu;
+        }
+    }
+    return i;
+})();
+
+export async function getEc2Families() {
     const instances = await awsInstances;
     const families = new Set<string>();
     for (const instance of instances) {
         families.add(instance.instance_type.split(".")[0]);
+    }
+    return Array.from(families).sort();
+}
+
+export async function getRdsFamilies() {
+    const instances = await rdsInstances;
+    const families = new Set<string>();
+    for (const instance of instances) {
+        const [family, version] = instance.instance_type.split(".", 3);
+        families.add(`${family}.${version}`);
+    }
+    return Array.from(families).sort();
+}
+
+export async function getElasticacheFamilies() {
+    const instances = await elasticacheInstances;
+    const families = new Set<string>();
+    for (const instance of instances) {
+        const [family, version] = instance.instance_type.split(".", 3);
+        families.add(`${family}.${version}`);
     }
     return Array.from(families).sort();
 }

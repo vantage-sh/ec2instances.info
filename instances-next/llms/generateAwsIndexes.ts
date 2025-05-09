@@ -158,7 +158,7 @@ export const awsIndexes = [
     },
 ];
 
-export function generateIndexMarkdown(name: string, instances: EC2Instance[]) {
+export function generateIndexMarkdown(pathPrefix: string, name: string, instances: EC2Instance[]) {
     return `# ${name}
 
 ${instances
@@ -166,15 +166,15 @@ ${instances
         (
             i,
         ) => urlInject`- **${raw(i.instance_type)} (min $${raw(calculatePrice(i))}/hr on demand)**
-    - [HTML (with user UI)](${`/aws/ec2/${i.instance_type}`})
-    - [Markdown (with pricing data region indexes)](${`/aws/ec2/${i.instance_type}.md`})`,
+    - [HTML (with user UI)](${`${pathPrefix}/${i.instance_type}`})
+    - [Markdown (with pricing data region indexes)](${`${pathPrefix}/${i.instance_type}.md`})`,
     )
     .join("\n")}
 `;
 }
 
-export async function generateAwsIndexes() {
-    const instances = await awsInstances;
+export async function generateAwsIndexes(pathPrefix: string, instancesPromise: Promise<EC2Instance[]>) {
+    const instances = await instancesPromise;
     const buckets = new Map<string, EC2Instance[]>();
     for (const instance of instances) {
         for (const index of awsIndexes) {
@@ -189,6 +189,7 @@ export async function generateAwsIndexes() {
     const markdownFiles = new Map<string, string>();
     for (const [slug, instances] of buckets.entries()) {
         const markdown = generateIndexMarkdown(
+            pathPrefix,
             awsIndexes.find((i) => i.slug === slug)!.name,
             instances,
         );

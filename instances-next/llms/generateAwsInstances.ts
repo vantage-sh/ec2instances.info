@@ -1,10 +1,7 @@
 import { EC2Instance } from "@/types";
-import { awsInstances } from "./loadedData";
-import generateEc2Description from "@/utils/generateEc2Description";
-import { calculatePrice } from "./generateAwsIndexes";
-import { ec2 } from "@/utils/ec2TablesGenerator";
 import { markdownTable } from "markdown-table";
 import { raw, urlInject } from "@/utils/urlInject";
+import { Table } from "@/utils/ec2TablesGenerator";
 
 const tableColumns = [
     ["", "OS"],
@@ -34,6 +31,7 @@ function fmtPrice(price: string | undefined) {
 }
 
 const niceNames: Record<string, string> = {
+    // EC2
     dedicated: "Dedicated",
     ebs: "EBS",
     emr: "EMR",
@@ -52,10 +50,39 @@ const niceNames: Record<string, string> = {
     sles: "SLES",
     ubuntu: "Ubuntu",
     windows: "Windows",
+
+    // RDS
+    PostgreSQL: "PostgreSQL",
+    MySQL: "MySQL",
+    Oracle: "Oracle",
+    "SQL Server": "SQL Server",
+    "21": "Aurora Postgres & MySQL",
+    "211": "Aurora I/O Optimized",
+    "403": "SQL Server Enterprise",
+    "18": "MariaDB",
+    "20": "Oracle Standard Two",
+    "19": "Oracle Standard Two BYOL",
+    "4": "Oracle Standard BYOL",
+    "410": "Oracle Enterprise BYOL",
+    "12": "SQL Server Standard",
+    "10": "SQL Server Express",
+    "3": "Oracle Standard One BYOL",
+    "210": "MySQL (Outpost On-Prem)",
+    "220": "PostgreSQL (Outpost On-Prem)",
+    "230": "SQL Server Enterprise (Outpost On-Prem)",
+    "231": "SQL Server (Outpost On-Prem)",
+    "232": "SQL Server Web (Outpost On-Prem)",
+    "405": "SQL Server Standard BYOM",
+    "406": "SQL Server Enterprise BYOM",
+
+    // ElastiCache
+    Redis: "Redis",
+    Memcached: "Memcached",
+    Valkey: "Valkey",
 };
 
-function generateInstanceMarkdown(instance: EC2Instance) {
-    const tables = ec2(instance);
+function generateInstanceMarkdown(description: string, hideOs: boolean, pathPrefix: string, hideConvertible: boolean, instance: EC2Instance, generateTables: (instance: EC2Instance) => Table[]) {
+    const tables = generateTables(instance);
 
     function renderData(
         region: string,
@@ -93,21 +120,22 @@ function generateInstanceMarkdown(instance: EC2Instance) {
 
     const tableMdFrags: Map<string, string> = new Map();
     for (const [region, platforms] of Object.entries(instance.pricing)) {
-        const columnWidths = new Map<string, number>();
-        for (const col of tableColumns) {
-            columnWidths.set(col[0], col[1].length);
-        }
         const rows: string[][] = [
-            tableColumns.map(([, columnName]) => columnName),
+            tableColumns.map(([, columnName]) => columnName).filter(
+                (column) => (!column.includes("Convertible") && !column.includes("Spot")) || !hideConvertible,
+            ),
         ];
 
         const platformsSorted = Object.keys(platforms).sort((a, b) =>
             a.localeCompare(b),
         );
         for (const platform of platformsSorted) {
+            if (hideOs && !niceNames[platform]) continue;
             const row = tableColumns.map(([column]) =>
-                renderData(region, platform, column),
-            );
+                (column.includes("Convertible") || column.includes("spot")) && hideConvertible ?
+                    null :
+                    renderData(region, platform, column),
+            ).filter((r) => r !== null);
             rows.push(row);
         }
 
@@ -130,13 +158,13 @@ ${table.rows.map((row) => `- ${row.name}: ${row.children}`).join("\n")}
 
     const root = `# ${instance.instance_type}
 
-> ${generateEc2Description(instance, calculatePrice(instance))}
+> ${description}
 
 ${tableData}
 
 ## Pricing Indexes
 
-${regions.map((region) => urlInject`- [${raw(region)}](${`/aws/ec2/${instance.instance_type}-${region}.md`})`).join("\n")}
+${regions.map((region) => urlInject`- [${raw(region)}](${`${pathPrefix}/${instance.instance_type}-${region}.md`})`).join("\n")}
 `;
 
     return {
@@ -145,8 +173,8 @@ ${regions.map((region) => urlInject`- [${raw(region)}](${`/aws/ec2/${instance.in
     };
 }
 
-export default async function generateAwsInstances() {
-    const instances = await awsInstances;
+export default async function generateAwsInstances(generateDescription: (instance: EC2Instance) => string, hideOs: boolean, pathPrefix: string, hideConvertible: boolean, instancesPromise: Promise<EC2Instance[]>, generateTables: (instance: EC2Instance) => Table[]) {
+    const instances = await instancesPromise;
     const instancesMarkdown = new Map<
         string,
         {
@@ -155,7 +183,7 @@ export default async function generateAwsInstances() {
         }
     >();
     for (const instance of instances) {
-        const data = generateInstanceMarkdown(instance);
+        const data = generateInstanceMarkdown(generateDescription(instance), hideOs, pathPrefix, hideConvertible, instance, generateTables);
         instancesMarkdown.set(instance.instance_type, data);
     }
     return instancesMarkdown;
