@@ -100,6 +100,7 @@ export const columnsGen = (
     {
         accessorKey: "instance_type",
         header: "API Name",
+        size: 175,
         id: "instance_type",
         sortingFn: "alphanumeric",
         cell: (info) => {
@@ -117,6 +118,7 @@ export const columnsGen = (
     {
         accessorKey: "instance_type",
         header: "Instance Family",
+        size: 150,
         id: "family",
         sortingFn: "alphanumeric",
         cell: (info) => (info.getValue() as string).split(".")[0],
@@ -124,6 +126,7 @@ export const columnsGen = (
     {
         accessorKey: "memory",
         header: "Instance Memory",
+        size: 160,
         id: "memory",
         sortingFn: "alphanumeric",
         filterFn: gt,
@@ -132,6 +135,7 @@ export const columnsGen = (
     {
         accessorKey: "ECU",
         header: "Compute Units (ECU)",
+        size: 180,
         id: "ECU",
         sortingFn: "alphanumeric",
         cell: (info) => {
@@ -170,6 +174,7 @@ export const columnsGen = (
     {
         accessorKey: "vCPU",
         header: "vCPUs",
+        size: 100,
         id: "vCPU",
         filterFn: gt,
         cell: (info) => {
@@ -209,12 +214,14 @@ export const columnsGen = (
     {
         accessorKey: "GPU",
         header: "GPUs",
+        size: 80,
         id: "GPU",
         filterFn: gt,
         cell: (info) => info.getValue() as number,
     },
     {
         accessorKey: "GPU_model",
+        size: 120,
         header: "GPU model",
         id: "GPU_model",
         sortingFn: "alphanumeric",
@@ -223,6 +230,7 @@ export const columnsGen = (
     {
         accessorKey: "GPU_memory",
         header: "GPU memory",
+        size: 130,
         id: "GPU_memory",
         sortingFn: "alphanumeric",
         filterFn: gt,
@@ -236,6 +244,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "FPGA",
+        size: 90,
         header: "FPGAs",
         id: "FPGA",
         cell: (info) => info.getValue() as number,
@@ -243,6 +252,7 @@ export const columnsGen = (
     {
         accessorKey: "ECU_per_vcpu",
         header: "ECU per vCPU",
+        size: 140,
         id: "ECU_per_vcpu",
         cell: (info) => {
             const value = info.getValue();
@@ -267,6 +277,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "physical_processor",
+        size: 200,
         header: "Physical Processor",
         id: "physical_processor",
         sortingFn: "alphanumeric",
@@ -275,6 +286,7 @@ export const columnsGen = (
     {
         accessorKey: "clock_speed_ghz",
         header: "Clock Speed(GHz)",
+        size: 160,
         id: "clock_speed_ghz",
         sortingFn: "alphanumeric",
         cell: (info) => info.getValue() || "unknown",
@@ -282,30 +294,35 @@ export const columnsGen = (
     {
         accessorKey: "intel_avx",
         header: "Intel AVX",
+        size: 110,
         id: "intel_avx",
         cell: (info) => (info.getValue() ? "Yes" : "unknown"),
     },
     {
         accessorKey: "intel_avx2",
         header: "Intel AVX2",
+        size: 110,
         id: "intel_avx2",
         cell: (info) => (info.getValue() ? "Yes" : "unknown"),
     },
     {
         accessorKey: "intel_avx512",
         header: "Intel AVX-512",
+        size: 130,
         id: "intel_avx512",
         cell: (info) => (info.getValue() ? "Yes" : "unknown"),
     },
     {
         accessorKey: "intel_turbo",
         header: "Intel Turbo",
+        size: 120,
         id: "intel_turbo",
         cell: (info) => (info.getValue() ? "Yes" : "unknown"),
     },
     {
         accessorKey: "storage",
         header: "Instance Storage",
+        size: 150,
         id: "storage",
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.storage;
@@ -381,6 +398,7 @@ export const columnsGen = (
     {
         accessorKey: "arch",
         header: "Arch",
+        size: 80,
         id: "arch",
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.arch;
@@ -399,6 +417,7 @@ export const columnsGen = (
     {
         accessorKey: "network_performance",
         header: "Network Performance",
+        size: 190,
         id: "network_performance",
         sortingFn: "alphanumeric",
         cell: (info) => info.getValue() as string,
@@ -474,6 +493,7 @@ export const columnsGen = (
     {
         accessorKey: "vpc",
         header: "Max IPs",
+        size: 100,
         id: "maxips",
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.vpc;
@@ -501,6 +521,7 @@ export const columnsGen = (
     {
         accessorKey: "vpc",
         header: "Max ENIs",
+        size: 100,
         id: "maxenis",
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.vpc;
@@ -524,12 +545,14 @@ export const columnsGen = (
     {
         accessorKey: "vpc_only",
         header: "VPC Only",
+        size: 110,
         id: "vpc_only",
         cell: (info) => (info.getValue() ? "Yes" : "No"),
     },
     {
         accessorKey: "ipv6_support",
         header: "IPv6 Support",
+        size: 130,
         id: "ipv6_support",
         cell: (info) => (info.getValue() ? "Yes" : "No"),
     },
@@ -560,6 +583,7 @@ export const columnsGen = (
     {
         accessorKey: "emr",
         header: "On EMR",
+        size: 100,
         id: "emr",
         cell: (info) => (info.getValue() ? "Yes" : "No"),
     },
@@ -582,6 +606,7 @@ export const columnsGen = (
     {
         accessorKey: "pricing",
         header: "On Demand",
+        size: 150,
         id: "cost-ondemand",
         sortingFn: (rowA, rowB) => {
             const valueA = calculateCost(
@@ -612,6 +637,7 @@ export const columnsGen = (
     {
         accessorKey: "pricing",
         header: "Linux Reserved cost",
+        size: 180,
         id: "cost-reserved",
         sortingFn: (rowA, rowB) => {
             const valueA = calculateCost(
@@ -647,6 +673,7 @@ export const columnsGen = (
     {
         accessorKey: "pricing",
         header: "Linux Spot Minimum cost",
+        size: 180,
         id: "cost-spot-min",
         sortingFn: (rowA, rowB) => {
             const valueA = calculateCost(
@@ -677,6 +704,7 @@ export const columnsGen = (
     {
         accessorKey: "pricing",
         header: "Linux Spot Average cost",
+        size: 180,
         id: "cost-spot-max",
         sortingFn: (rowA, rowB) => {
             const valueA = calculateCost(
@@ -707,6 +735,7 @@ export const columnsGen = (
     {
         accessorKey: "pricing",
         header: "RHEL On Demand cost",
+        size: 180,
         id: "cost-ondemand-rhel",
         sortingFn: (rowA, rowB) => {
             const valueA = calculateCost(
@@ -1564,6 +1593,7 @@ export const columnsGen = (
     {
         accessorKey: "pricing",
         header: "EMR cost",
+        size: 100,
         id: "cost-emr",
         sortingFn: (rowA, rowB) => {
             const valueA = calculateCost(
@@ -1594,6 +1624,7 @@ export const columnsGen = (
     {
         accessorKey: "generation",
         header: "Generation",
+        size: 120,
         id: "generation",
         sortingFn: "alphanumeric",
         cell: (info) => info.getValue() as string,
