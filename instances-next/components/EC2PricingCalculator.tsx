@@ -211,7 +211,7 @@ function Calculator({
                 <div className="flex gap-4 w-full flex-wrap">
                     {prices.map(({ label, value }) => (
                         <div key={label} className="flex-col">
-                            <p className="text-lg font-bold">
+                            <p className="font-bold">
                                 {value}
                             </p>
                             <p className="text-xs text-gray-3">{label}</p>
