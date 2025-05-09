@@ -45,7 +45,10 @@ body {
 }
 
 .index-table tbody tr {
-    @apply border-b border-gray-100 transition-colors hover:bg-gray-100/50 data-[state=selected]:bg-gray-100;
+    @apply border-b border-gray-100 transition-colors hover:bg-gray-100 active:bg-purple-200;
+}
+.index-table tbody tr.bg-purple-200 {
+    @apply hover:bg-purple-300;
 }
 
 .index-table tbody td {

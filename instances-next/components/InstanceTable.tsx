@@ -406,7 +406,7 @@ export default function InstanceTable<
                                 <tr
                                     onClick={() => handleRow(row)}
                                     key={row.id}
-                                    className={` ${row.getIsSelected() ? "bg-purple-50" : ""}`}
+                                    className={` ${row.getIsSelected() ? "bg-purple-200" : ""}`}
                                 >
                                     {row.getVisibleCells().map((cell) => (
                                         <td key={cell.id}>
