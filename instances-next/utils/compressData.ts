@@ -85,6 +85,68 @@ async function compressEC2Instances() {
     console.log("EC2 instances data compressed and saved");
 }
 
+async function compressAzureInstances() {
+    const instances = JSON.parse(
+        await readFile("../www/azure/instances.json", "utf8"),
+    );
+
+    // Encode and then compress the Azure instances.
+    await writeFile(
+        "./public/azure-instance-count.txt",
+        instances.length.toString(),
+    );
+    await writeFile(
+        "./public/azure-instance-ids.json",
+        JSON.stringify(instances.map((i: { instance_type: string }) => i.instance_type)),
+    );
+    await writeFile(
+        "./public/azure-instances-hash.txt",
+        hashInstances(instances),
+    );
+    const first100Instances = instances.slice(0, 100);
+    const first100InstancesEncoded = encode(
+        makeRainbowTable(first100Instances),
+    );
+    const remainingInstances = instances.slice(100);
+    await writeFile(
+        "./public/first-100-azure-instances.msgpack",
+        first100InstancesEncoded,
+    );
+    const itemsPerPipeline = Math.ceil(
+        remainingInstances.length / PIPELINE_SIZE,
+    );
+    const remainingPipelineLength =
+        remainingInstances.length % itemsPerPipeline;
+
+    console.log("Compressing Azure instances data...");
+    for (let i = 0; i < PIPELINE_SIZE; i++) {
+        let chunk = remainingInstances.slice(
+            i * itemsPerPipeline,
+            (i + 1) * itemsPerPipeline,
+        );
+        if (i === PIPELINE_SIZE - 1 && remainingPipelineLength > 0) {
+            chunk = chunk.concat(
+                remainingInstances.slice(
+                    (i + 1) * itemsPerPipeline,
+                    remainingInstances.length,
+                ),
+            );
+        }
+        const chunkEncoded = encode(makeRainbowTable(chunk));
+        const compressedChunk: Buffer = await new Promise((res) => {
+            compress(Buffer.from(chunkEncoded), {}, (result) => {
+                res(result);
+            });
+        });
+        await writeFile(
+            `./public/remaining-azure-instances-p${i}.msgpack.xz`,
+            compressedChunk,
+        );
+    }
+
+    console.log("Azure instances data compressed and saved");
+}
+
 async function compressRDSInstances() {
     const regions: Region = {
         main: {},
@@ -142,6 +204,7 @@ async function compressRDSInstances() {
 
 async function main() {
     await compressEC2Instances();
+    await compressAzureInstances();
     await compressRDSInstances();
 }
 

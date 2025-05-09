@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "init": "tsx utils/compressAwsData.ts",
+        "init": "tsx utils/compressData.ts",
         "dev": "next dev --turbopack",
         "build:llms": "rimraf public/aws && tsx llms/index.ts",
         "build:next": "next build",

@@ -42,12 +42,9 @@ next-env.d.ts
 # compressed data
 public/*.msgpack
 public/*.msgpack.xz
-public/instance-count.txt
-public/instances-hash.txt
-public/instance-ids.json
-public/instance-rds-count.txt
-public/instance-rds-hash.txt
-public/instance-rds-ids.json
+public/*-count.txt
+public/*-hash.txt
+public/*-ids.json
 
 # llms data
 public/llms.txt
