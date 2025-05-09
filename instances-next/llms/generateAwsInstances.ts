@@ -1,6 +1,6 @@
 import { EC2Instance } from "@/types";
 import { awsInstances } from "./loadedData";
-import generateDescription from "@/utils/generateDescription";
+import generateEc2Description from "@/utils/generateEc2Description";
 import { calculatePrice } from "./generateAwsIndexes";
 import { ec2 } from "@/utils/ec2TablesGenerator";
 import { markdownTable } from "markdown-table";
@@ -130,7 +130,7 @@ ${table.rows.map((row) => `- ${row.name}: ${row.children}`).join("\n")}
 
     const root = `# ${instance.instance_type}
 
-> ${generateDescription(instance, calculatePrice(instance))}
+> ${generateEc2Description(instance, calculatePrice(instance))}
 
 ${tableData}
 

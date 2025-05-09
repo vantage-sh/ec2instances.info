@@ -4,6 +4,7 @@ import EC2InstanceRoot from "@/components/EC2InstanceRoot";
 import makeRainbowTable from "@/utils/makeRainbowTable";
 import bestEc2InstanceForEachVariant from "@/utils/bestEc2InstanceForEachVariant";
 import addRenderInfo from "@/utils/addRenderInfo";
+import generateEc2Description from "@/utils/generateEc2Description";
 
 export const dynamic = "force-static";
 
@@ -54,10 +55,6 @@ export async function generateStaticParams() {
     }));
 }
 
-function generateDescription(instance: any, ondemandCost: string | undefined) {
-    return "TODO";
-}
-
 async function handleParams(params: Promise<{ slug: string }>) {
     const { slug } = await params;
     const { instances, regions } = await getData();
@@ -74,7 +71,7 @@ export async function generateMetadata({
     const { instance, ondemandCost } = await handleParams(params);
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
-        description: generateDescription(instance, ondemandCost),
+        description: generateEc2Description(instance, ondemandCost),
     };
 }
 
@@ -91,7 +88,7 @@ export default async function Page({
 }) {
     const { instance, instances, ondemandCost, regions } =
         await handleParams(params);
-    const description = generateDescription(instance, ondemandCost);
+    const description = generateEc2Description(instance, ondemandCost);
 
     const [cache, itype] = instance.instance_type.split(".", 3);
     const variant = itype.slice(0, 2);

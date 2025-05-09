@@ -6,7 +6,7 @@ import processRainbowTable from "@/utils/processRainbowTable";
 import EC2InstanceRoot from "@/components/EC2InstanceRoot";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 import makeRainbowTable from "@/utils/makeRainbowTable";
-import generateDescription from "@/utils/generateDescription";
+import generateEc2Description from "@/utils/generateEc2Description";
 import bestEc2InstanceForEachVariant from "@/utils/bestEc2InstanceForEachVariant";
 
 export const dynamic = "force-static";
@@ -89,7 +89,7 @@ export async function generateMetadata({
     const { instance, ondemandCost } = await handleParams(params);
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
-        description: generateDescription(instance, ondemandCost),
+        description: generateEc2Description(instance, ondemandCost),
     };
 }
 
@@ -117,7 +117,7 @@ export default async function Page({
 }) {
     const { instance, instances, ondemandCost, regions } =
         await handleParams(params);
-    const description = generateDescription(instance, ondemandCost);
+    const description = generateEc2Description(instance, ondemandCost);
 
     const [itype] = instance.instance_type.split(".", 2);
     const variant = itype.slice(0, 2);
