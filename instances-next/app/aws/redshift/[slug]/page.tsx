@@ -2,6 +2,8 @@ import { readFile } from "fs/promises";
 import { Region } from "@/types";
 import type { Instance } from "@/utils/colunnData/redshift";
 import HalfEC2Root from "@/components/HalfEC2Root";
+import InstanceDataView from "@/components/InstanceDataView";
+import generateRedshiftTables from "@/utils/generateRedshiftTables";
 
 export const dynamic = "force-static";
 
@@ -53,6 +55,10 @@ async function handleParams(params: Promise<{ slug: string }>) {
     return { instance, instances, ondemandCost, regions };
 }
 
+function generateDescription(instance: Instance, ondemandCost: string) {
+    return `The ${instance.instance_type} instance is in the ${instance.family} family and it has ${instance.vcpu} vCPUs, ${instance.memory} GiB of memory starting at $${ondemandCost} per hour.`;
+}
+
 export async function generateMetadata({
     params,
 }: {
@@ -61,7 +67,7 @@ export async function generateMetadata({
     const { instance, ondemandCost } = await handleParams(params);
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
-        description: "TODO",
+        description: generateDescription(instance, ondemandCost),
     };
 }
 
@@ -72,7 +78,7 @@ export default async function Page({
 }) {
     const { instance, instances, ondemandCost, regions } =
         await handleParams(params);
-    const description = "TODO";
+    const description = generateDescription(instance, ondemandCost);
 
     const [itype] = instance.instance_type.split(".", 2);
     const allOfInstanceType = instances
@@ -92,7 +98,7 @@ export default async function Page({
             tablePath="/redshift"
             regions={regions}
         >
-            <div>TODO</div>
+            <InstanceDataView tables={generateRedshiftTables(instance)} />
         </HalfEC2Root>
     );
 }

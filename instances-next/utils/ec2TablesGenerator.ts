@@ -8,7 +8,7 @@ type Row = {
     helpText?: string | undefined;
 };
 
-type Table = {
+export type Table = {
     name: string;
     slug: string;
     rows: Row[];

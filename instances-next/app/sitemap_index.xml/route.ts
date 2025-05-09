@@ -15,6 +15,9 @@ export async function GET() {
         <loc>${"/aws/elasticache/sitemap-instances.xml"}</loc>
     </sitemap>
     <sitemap>
+        <loc>${"/aws/redshift/sitemap-instances.xml"}</loc>
+    </sitemap>
+    <sitemap>
         <loc>${"/sitemap-other.xml"}</loc>
     </sitemap>
 </sitemapindex>`;

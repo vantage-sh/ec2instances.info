@@ -21,6 +21,7 @@ type RedshiftPricing = {
 export type Instance = {
     pretty_name: string;
     instance_type: string;
+    family: string;
     memory: string;
     vcpu: string;
     storage: string;

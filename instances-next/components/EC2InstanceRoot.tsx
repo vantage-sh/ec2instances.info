@@ -1,11 +1,11 @@
 import { EC2Instance, Region } from "@/types";
 import { useMemo } from "react";
-import { Info, Server } from "lucide-react";
+import { Server } from "lucide-react";
 import Link from "next/link";
 import { AllOfInstanceType, EC2FamilySizes } from "./EC2FamilySize";
 import AWSPricingSelector from "@/components/EC2PricingCalculator";
-import BGStyled from "@/components/BGStyled";
 import * as tablesGenerator from "@/utils/ec2TablesGenerator";
+import InstanceDataView from "./InstanceDataView";
 
 interface InstanceRootProps {
     rainbowTable: string[];
@@ -68,104 +68,6 @@ function InstanceVariants({
     );
 }
 
-type TableProps = {
-    slug: string;
-    name: string;
-    children: React.ReactNode;
-};
-
-function Table({ slug, name, children }: TableProps) {
-    return (
-        <table
-            id={slug}
-            className="mt-4 w-full text-sm p-2 border-collapse border border-gray-200 rounded-md"
-        >
-            <thead>
-                <tr className="bg-gray-100">
-                    <th className="text-left p-1 border-gray-200">
-                        <a
-                            href={`#${slug}`}
-                            className="text-purple-1 hover:text-purple-0"
-                        >
-                            {name}
-                        </a>
-                    </th>
-                    <th className="text-left p-1 border-l border-gray-200">
-                        Value
-                    </th>
-                </tr>
-            </thead>
-            <tbody>{children}</tbody>
-        </table>
-    );
-}
-
-type RowProps = {
-    name: string;
-    children: React.ReactNode;
-    help?: string;
-    helpText?: string;
-};
-
-function Row({ name, children, help, helpText }: RowProps) {
-    return (
-        <tr>
-            <td className="p-1 border border-gray-200">
-                {name}
-                {help && (
-                    <span>
-                        {" "}
-                        <a
-                            target="_blank"
-                            href={help}
-                            className="text-purple-1 hover:text-purple-0"
-                        >
-                            ({helpText || "?"})
-                        </a>
-                    </span>
-                )}
-            </td>
-            <td className="p-1 border border-gray-200">{children}</td>
-        </tr>
-    );
-}
-
-function InstanceDataView({
-    instance,
-    generatorKey,
-}: {
-    instance: Omit<EC2Instance, "pricing">;
-    generatorKey: keyof typeof tablesGenerator;
-}) {
-    return (
-        <article>
-            <h2 className="font-bold flex items-center gap-2">
-                <Info className="w-4 h-4" />
-                Instance Details
-            </h2>
-
-            {tablesGenerator[generatorKey](instance).map((table) => (
-                <Table key={table.slug} slug={table.slug} name={table.name}>
-                    {table.rows.map((row) => (
-                        <Row
-                            key={row.name}
-                            name={row.name}
-                            help={row.help}
-                            helpText={row.helpText}
-                        >
-                            {row.bgStyled ? (
-                                <BGStyled content={row.children} />
-                            ) : (
-                                row.children
-                            )}
-                        </Row>
-                    ))}
-                </Table>
-            ))}
-        </article>
-    );
-}
-
 export default function EC2InstanceRoot({
     rainbowTable,
     compressedInstance,
@@ -221,8 +123,7 @@ export default function EC2InstanceRoot({
             </div>
             <div className="flex-grow md:mt-0 mt-4">
                 <InstanceDataView
-                    instance={compressedInstance}
-                    generatorKey={generatorKey}
+                    tables={tablesGenerator[generatorKey](compressedInstance)}
                 />
             </div>
         </main>
