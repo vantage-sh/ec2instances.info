@@ -19,7 +19,7 @@ const navItems = [
             },
             {
                 label: "ElastiCache",
-                href: "/elasticache"
+                href: "/cache"
             },
             {
                 label: "Redshift",
