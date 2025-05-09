@@ -27,7 +27,8 @@ const navItems: NavItem[] = [
             },
             {
                 label: "ElastiCache",
-                href: "/cache"
+                href: "/cache",
+                orIncludes: ["/elasticache"],
             },
             {
                 label: "Redshift",
