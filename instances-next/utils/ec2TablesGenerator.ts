@@ -327,3 +327,8 @@ export function rds(instance: Omit<EC2Instance, "pricing">): Table[] {
         },
     ];
 }
+
+
+export function elasticache(instance: Omit<EC2Instance, "pricing">): Table[] {
+    return [];
+}
