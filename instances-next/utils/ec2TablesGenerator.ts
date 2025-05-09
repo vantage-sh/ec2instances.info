@@ -328,7 +328,97 @@ export function rds(instance: Omit<EC2Instance, "pricing">): Table[] {
     ];
 }
 
+interface ElasticacheExt extends Omit<EC2Instance, "pricing"> {
+    "memcached1.6-num_threads": string;
+    "redis6.x-maxmemory": string;
+    max_clients: string;
+    "redis6.x-client-output-buffer-limit-replica-hard-limit": string;
+}
+
+function handleSize(size: string | undefined) {
+    if (!size) return "N/A";
+    const num = Number(size);
+    if (isNaN(num)) return size;
+    return Math.floor(num / 1024 / 1024);
+}
+
+function elasticacheSpecificRows(instance: ElasticacheExt): Row[] {
+    return [
+        {
+            name: "Redis Max Memory (MiB)",
+            children: handleSize(instance["redis6.x-maxmemory"]),
+        },
+        {
+            name: "Cache Max Buffer Size (MiB)",
+            children: handleSize(instance["redis6.x-client-output-buffer-limit-replica-hard-limit"]),
+        },
+        {
+            name: "Redis Max Clients",
+            children: instance.max_clients,
+        },
+        {
+            name: "Memcached Max Thread Count",
+            children: instance["memcached1.6-num_threads"],
+        },
+    ];
+}
 
 export function elasticache(instance: Omit<EC2Instance, "pricing">): Table[] {
-    return [];
+    return [
+        {
+            name: "Compute",
+            slug: "compute",
+            rows: [
+                {
+                    name: "CPUs",
+                    children: instance.vCPU,
+                },
+                {
+                    name: "Memory (GiB)",
+                    children: instance.memory,
+                },
+                {
+                    name: "Memory per vCPU (GiB)",
+                    children: round(instance.memory / instance.vCPU),
+                },
+                ...elasticacheSpecificRows(instance as ElasticacheExt),
+            ],
+        },
+        {
+            name: "Networking",
+            slug: "Networking",
+            rows: [
+                {
+                    name: "Network Performance (Gibps)",
+                    children: (instance.network_performance || "N/A")
+                        .replace("Gigabit", "")
+                        .trim(),
+                },
+            ],
+        },
+        {
+            name: "Amazon",
+            slug: "amazon",
+            rows: [
+                {
+                    name: "Generation",
+                    // @ts-expect-error: RDS specific
+                    children: instance.currentGeneration === "Yes" ? "current" : "previous",
+                    bgStyled: true,
+                },
+                {
+                    name: "Instance Type",
+                    children: instance.instance_type,
+                },
+                {
+                    name: "Family",
+                    children: instance.family || "N/A",
+                },
+                {
+                    name: "Name",
+                    children: instance.pretty_name,
+                },
+            ],
+        },
+    ];
 }
