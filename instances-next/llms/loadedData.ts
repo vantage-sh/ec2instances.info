@@ -4,6 +4,8 @@ import { XzReadableStream } from "xz-decompress";
 import { decode } from "@msgpack/msgpack";
 import processRainbowTable from "@/utils/processRainbowTable";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
+import { Instance as RedshiftInstance } from "@/utils/colunnData/redshift";
+import { Instance as OpensearchInstance } from "@/utils/colunnData/opensearch";
 
 export const awsInstances = (async () => {
     const compressed30 = decode(
@@ -67,6 +69,16 @@ export const elasticacheInstances = (async () => {
         }
     }
     return i;
+})();
+
+export const redshiftInstances = (async () => {
+    const d = await readFile("../www/redshift/instances.json", "utf-8");
+    return JSON.parse(d) as RedshiftInstance[];
+})();
+
+export const opensearchInstances = (async () => {
+    const d = await readFile("../www/opensearch/instances.json", "utf-8");
+    return JSON.parse(d) as OpensearchInstance[];
 })();
 
 export async function getEc2Families() {
