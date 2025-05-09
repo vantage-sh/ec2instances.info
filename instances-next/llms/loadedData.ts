@@ -109,3 +109,12 @@ export async function getElasticacheFamilies() {
     }
     return Array.from(families).sort();
 }
+
+export async function getOpensearchFamilies() {
+    const instances = await opensearchInstances;
+    const families = new Set<string>();
+    for (const instance of instances) {
+        families.add(instance.instance_type.split(".")[0]);
+    }
+    return Array.from(families).sort();
+}

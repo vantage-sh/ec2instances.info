@@ -8,6 +8,8 @@ import { ec2, elasticache, rds } from "@/utils/ec2TablesGenerator";
 import generateEc2Description from "@/utils/generateEc2Description";
 import generateRedshiftMarkdown from "./generateRedshiftMarkdown";
 import generateOpensearchMarkdown from "./generateOpensearchMarkdown";
+import { generateOpensearchIndexes } from "./generateOpensearchIndexes";
+import generateOpensearchFamilyIndexes from "./generateOpensearchFamilyIndexes";
 
 function generateRdsDescription(instance: any, ondemandCost: string | undefined) {
     return `The ${instance.instance_type} instance is a ${instance.family} instance with ${instance.vCPU} vCPUs and ${instance.memory}GB of memory starting at $${ondemandCost} per hour.`;
@@ -100,6 +102,7 @@ async function main() {
         }
     }
     await Promise.all(promises);
+    console.log("Generated instances for aws/elasticache/*.md");
 
     await mkdir("./public/aws/redshift", { recursive: true });
     promises.length = 0;
@@ -111,7 +114,17 @@ async function main() {
     console.log("Generated instances for aws/redshift/*.md");
 
     await mkdir("./public/aws/opensearch/families", { recursive: true });
-    // TODO: Generate opensearch families
+    const opensearchFamilyIndexes = await generateOpensearchFamilyIndexes(opensearchInstances);
+    for (const [family, index] of opensearchFamilyIndexes.entries()) {
+        await writeFile(`./public/aws/opensearch/families/${family}.md`, index);
+    }
+    console.log("Generated aws/opensearch/families/*.md");
+
+    const opensearchIndexes = await generateOpensearchIndexes(opensearchInstances);
+    for (const [slug, index] of opensearchIndexes.entries()) {
+        await writeFile(`./public/aws/opensearch/${slug}.md`, index);
+    }
+    console.log("Generated indexes for aws/opensearch/*.md");
 
     promises.length = 0;
     for (const instance of await opensearchInstances) {

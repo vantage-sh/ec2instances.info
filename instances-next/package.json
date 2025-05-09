@@ -5,7 +5,7 @@
     "scripts": {
         "init": "tsx utils/compressAwsData.ts",
         "dev": "next dev --turbopack",
-        "build:llms": "tsx llms/index.ts",
+        "build:llms": "rimraf public/aws && tsx llms/index.ts",
         "build:next": "next build",
         "build": "npm run init && npm run build:llms && npm run build:next",
         "start": "next start",
@@ -43,6 +43,7 @@
         "prettier": "^3.5.3",
         "tsx": "^4.19.3",
         "tw-animate-css": "^1.2.9",
-        "typescript": "^5"
+        "typescript": "^5",
+        "rimraf": "^6.0.1"
     }
 }
