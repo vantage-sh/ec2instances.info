@@ -26,6 +26,8 @@ export type Instance = {
     ecu: string;
     pricing: OpenSearchPricing;
     currentGeneration: string;
+    family: string;
+    memory: string;
 };
 
 const initialColumnsArr = [
