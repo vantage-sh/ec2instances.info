@@ -5,7 +5,6 @@ export const g_settings_aws_default = {
     cost_duration: "hourly",
     region: "us-east-1",
     reserved_term: "yrTerm1Standard.noUpfront",
-    savings_plan_term: "yrTerm1Savings.allUpfront",
     min_memory: 0,
     min_vcpus: 0,
     min_memory_per_vcpu: 0,
@@ -21,6 +20,7 @@ export const g_settings_aws_default = {
 export const g_settings_azure_default = {
     ...g_settings_aws_default,
     region: "us-east",
+    reserved_term: "yrTerm1Standard.allUpfront",
 };
 
 type GSettingsDefault = typeof g_settings_aws_default;
@@ -123,6 +123,15 @@ export default class GSettings {
         validate(params, this.settings, "reserved_term");
         validate(params, this.settings, "compare_on", validateBoolean);
 
+        if (this.azure) {
+            // Migration for the old savings plan term.
+            const savingsPlanTerm = params.get("savings_plan_term");
+            if (savingsPlanTerm) {
+                this.settings.reserved_term = savingsPlanTerm.replace("Savings", "Standard");
+            }
+            this.settings.reserved_term = this.settings.reserved_term.replace("noUpfront", "allUpfront");
+        }
+
         if (params.has("filter")) {
             this.filter = params.get("filter")!;
         }
@@ -208,15 +217,6 @@ export default class GSettings {
 
     set reservedTerm(value: string) {
         this.settings.reserved_term = value;
-        this._write();
-    }
-
-    get savingsPlanTerm() {
-        return this.settings.savings_plan_term;
-    }
-
-    set savingsPlanTerm(value: string) {
-        this.settings.savings_plan_term = value;
         this._write();
     }
 

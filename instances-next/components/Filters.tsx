@@ -17,7 +17,6 @@ import {
 import {
     pricingUnitOptions,
     durationOptions,
-    reservedTermOptions,
 } from "@/utils/dataMappings";
 import { useMemo } from "react";
 import { RowSelectionState } from "@tanstack/react-table";
@@ -27,7 +26,12 @@ interface FiltersProps<DataKey extends keyof typeof columnData> {
     regions: Region;
     rowSelection: RowSelectionState;
     columnAtomKey: DataKey;
+    reservedTermOptions: {
+        value: string;
+        label: string;
+    }[];
     ecuRename?: string;
+    reservedLabel?: string;
 }
 
 export default function Filters<DataKey extends keyof typeof columnData>({
@@ -35,6 +39,8 @@ export default function Filters<DataKey extends keyof typeof columnData>({
     rowSelection,
     columnAtomKey,
     ecuRename,
+    reservedTermOptions,
+    reservedLabel,
 }: FiltersProps<DataKey>) {
     const columnVisibility = columnVisibilityAtoms[columnAtomKey].use();
     const [searchTerm, setSearchTerm] = useSearchTerm();
@@ -136,7 +142,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                         options={durationOptions}
                     />
                     <FilterDropdown
-                        label="Reserved"
+                        label={reservedLabel ?? "Reserved"}
                         value={reservedTerm}
                         onChange={(v) => setReservedTerm(v)}
                         options={reservedTermOptions}

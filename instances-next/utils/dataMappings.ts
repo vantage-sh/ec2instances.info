@@ -54,4 +54,4 @@ export const reservedTermOptions = [
         value: "yrTerm3Convertible.allUpfront",
         label: "3-year convertible - Full Upfront",
     },
-] as const;
+];

@@ -9,6 +9,7 @@ import { RowSelectionState } from "@tanstack/react-table";
 import dynamicallyDecompress from "@/utils/dynamicallyDecompress";
 import DoMigration from "@/components/DoMigration";
 import { AtomKeyWhereInstanceIs } from "@/components/InstanceTable";
+import { reservedTermOptions } from "@/utils/dataMappings";
 
 type RootProps<Instance extends { instance_type: string }> = {
     columnAtomKey: AtomKeyWhereInstanceIs<Instance>;
@@ -91,6 +92,7 @@ export default function AWSClient<
                 columnAtomKey={props.columnAtomKey}
                 regions={props.regions}
                 rowSelection={rowSelection}
+                reservedTermOptions={reservedTermOptions}
             />
             <div className="flex-1 min-h-0">
                 <InstanceTable

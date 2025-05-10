@@ -206,7 +206,12 @@ export function useDuration() {
 }
 
 export function useReservedTerm() {
-    return useGSettingsValue("reservedTerm", "yrTerm1Standard.noUpfront");
+    const pathname = usePathname();
+    const defaultReservedTerm = pathname.includes("azure")
+        ? "yrTerm1Standard.allUpfront"
+        : "yrTerm1Standard.noUpfront";
+
+    return useGSettingsValue("reservedTerm", defaultReservedTerm);
 }
 
 export function useCompareOn() {

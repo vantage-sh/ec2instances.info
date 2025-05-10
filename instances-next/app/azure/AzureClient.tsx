@@ -56,6 +56,25 @@ export default function AzureClient({
                 }}
                 rowSelection={rowSelection}
                 ecuRename="ACU"
+                reservedTermOptions={[
+                    {
+                        value: "yrTerm1Standard.allUpfront",
+                        label: "No Hybrid Benefit - 1 Year",
+                    },
+                    {
+                        value: "yrTerm3Standard.allUpfront",
+                        label: "No Hybrid Benefit - 3 Year",
+                    },
+                    {
+                        value: "yrTerm1Standard.hybridbenefit",
+                        label: "Hybrid Benefit - 1 Year",
+                    },
+                    {
+                        value: "yrTerm3Standard.hybridbenefit",
+                        label: "Hybrid Benefit - 3 Year",
+                    },
+                ]}
+                reservedLabel="Hybrid Benefit"
             />
             <div className="flex-1 min-h-0">
                 <InstanceTable
