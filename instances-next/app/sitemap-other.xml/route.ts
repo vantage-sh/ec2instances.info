@@ -9,6 +9,9 @@ export async function GET() {
         <loc>${"/"}</loc>
     </url>
     <url>
+        <loc>${"/azure"}</loc>
+    </url>
+    <url>
         <loc>${"/rds"}</loc>
     </url>
     <url>

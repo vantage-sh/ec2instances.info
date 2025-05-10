@@ -86,7 +86,6 @@ export function gt(row: Row<any>, columnId: string, filterValue: number) {
     const value = row.original[columnId.toLowerCase()];
     const conv = tryConv(value);
     if (isNaN(conv)) {
-        console.log(value, conv, columnId);
         return false;
     }
     return conv >= filterValue;

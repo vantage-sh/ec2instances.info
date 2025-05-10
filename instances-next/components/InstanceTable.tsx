@@ -50,6 +50,7 @@ interface InstanceTableProps<Instance> {
     setRowSelection: (value: SetStateAction<RowSelectionState>) => void;
     instanceCount: number;
     columnAtomKey: AtomKeyWhereInstanceIs<Instance>;
+    ecuRename?: string;
 }
 
 function csvEscape(input: string) {
@@ -74,11 +75,12 @@ export default function InstanceTable<
     setRowSelection,
     instanceCount,
     columnAtomKey,
+    ecuRename,
 }: InstanceTableProps<Instance>) {
     const columnVisibility = columnVisibilityAtoms[columnAtomKey].use();
     const [searchTerm] = useSearchTerm();
     const [selectedRegion] = useSelectedRegion();
-    const [pricingUnit] = usePricingUnit();
+    const [pricingUnit] = usePricingUnit(ecuRename);
     const [costDuration] = useDuration();
     const [reservedTerm] = useReservedTerm();
     const [gSettings, gSettingsFullMutations] = useGSettings();

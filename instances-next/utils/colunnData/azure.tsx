@@ -1,0 +1,241 @@
+import { PricingUnit } from "@/types";
+import { ColumnDef } from "@tanstack/react-table";
+import { doAllDataTablesMigrations, gt } from "./shared";
+import { makeSchemaWithDefaults } from "./shared";
+import { CostDuration } from "@/types";
+import Link from "next/link";
+
+interface AzurePricing {
+    [region: string]: {
+        [platform: string]: {
+            reserved: {
+                [key: string]: number;
+            };
+        };
+    };
+}
+
+interface Storage {
+    size: number;
+}
+
+export type AzureInstance = {
+    instance_type: string;
+    pretty_name_azure: string;
+    pricing: AzurePricing;
+    vcpu: number;
+    memory: number;
+    GPU: number;
+    storage?: Storage;
+    ACU?: number;
+};
+
+const initialColumnsArr = [
+    ["pretty_name_azure", true],
+    ["instance_type", true],
+    ["memory", true],
+    ["vcpu", true],
+    ["memory_per_vcpu", false],
+    ["GPU", false],
+    ["size", true],
+    ["linux-ondemand", true],
+    ["linux-savings", true],
+    ["linux-reserved", true],
+    ["linux-spot", true],
+    ["windows-ondemand", true],
+    ["windows-savings", true],
+    ["windows-reserved", true],
+    ["windows-spot", true],
+] as const;
+
+export const initialColumnsValue: {
+    [idx in (typeof initialColumnsArr)[number][0]]: boolean;
+} = {} as any;
+for (const [key, value] of initialColumnsArr) {
+    initialColumnsValue[key] = value;
+}
+
+export function makeColumnVisibilitySchema() {
+    return makeSchemaWithDefaults(initialColumnsValue);
+}
+
+export function doDataTablesMigration() {
+    return doAllDataTablesMigrations(
+        "/azure",
+        initialColumnsArr,
+        initialColumnsValue,
+    );
+}
+
+export function makePrettyNames<V>(
+    makeColumnOption: (
+        key: keyof typeof initialColumnsValue,
+        label: string,
+    ) => V,
+) {
+    return [
+        makeColumnOption("pretty_name_azure", "Name"),
+        makeColumnOption("instance_type", "API Name"),
+        makeColumnOption("memory", "Instance Memory"),
+        makeColumnOption("vcpu", "vCPUs"),
+        makeColumnOption("memory_per_vcpu", "Memory per vCPU"),
+        makeColumnOption("GPU", "GPUs"),
+        makeColumnOption("size", "Storage"),
+        makeColumnOption("linux-ondemand", "Linux On-Demand"),
+        makeColumnOption("linux-savings", "Linux Savings"),
+        makeColumnOption("linux-reserved", "Linux Reserved"),
+        makeColumnOption("linux-spot", "Linux Spot"),
+        makeColumnOption("windows-ondemand", "Windows On-Demand"),
+        makeColumnOption("windows-savings", "Windows Savings"),
+        makeColumnOption("windows-reserved", "Windows Reserved"),
+        makeColumnOption("windows-spot", "Windows Spot"),
+    ];
+}
+
+function round(value: number) {
+    return Math.round(value * 100) / 100;
+}
+
+function calculateCost(
+    price: string | undefined,
+    instance: AzureInstance,
+    pricingUnit: PricingUnit,
+    costDuration: CostDuration,
+): number {
+    if (!price) return -1;
+
+    const hourMultipliers = {
+        secondly: 1 / (60 * 60),
+        minutely: 1 / 60,
+        hourly: 1,
+        daily: 24,
+        weekly: 7 * 24,
+        monthly: (365 * 24) / 12,
+        annually: 365 * 24,
+    };
+
+    const durationMultiplier = hourMultipliers[costDuration];
+    let pricingUnitModifier = 1;
+
+    if (pricingUnit !== "instance") {
+        pricingUnitModifier = instance[
+            pricingUnit === "vcpu"
+                ? "vcpu"
+                : pricingUnit === "ecu"
+                  ? "ACU"
+                  : "memory"
+        ] as number;
+    }
+
+    return (Number(price) * durationMultiplier) / pricingUnitModifier;
+}
+
+export function calculateAndFormatCost(
+    price: string | undefined,
+    instance: AzureInstance,
+    pricingUnit: PricingUnit,
+    costDuration: CostDuration,
+): string {
+    const perTime = calculateCost(price, instance, pricingUnit, costDuration);
+    if (perTime === -1) return "unavailable";
+
+    const precision =
+        costDuration === "secondly" || costDuration === "minutely" ? 6 : 4;
+
+    const measuringUnits = {
+        instances: "",
+        vcpu: "vCPU",
+        ecu: "ACU",
+        memory: "GiB",
+    };
+
+    let durationText: string = costDuration;
+    if (costDuration === "secondly") durationText = "per sec";
+    if (costDuration === "minutely") durationText = "per min";
+
+    const pricingMeasuringUnits =
+        pricingUnit === "instance"
+            ? ` ${durationText}`
+            : ` ${durationText} / ${measuringUnits[pricingUnit]}`;
+
+    return `$${perTime.toFixed(precision)}${pricingMeasuringUnits}`;
+}
+
+export const columnsGen = (
+    selectedRegion: string,
+    pricingUnit: PricingUnit,
+    costDuration: CostDuration,
+    reservedTerm: string,
+): ColumnDef<AzureInstance>[] => [
+    {
+        accessorKey: "pretty_name_azure",
+        id: "pretty_name_azure",
+        header: "Name",
+        sortingFn: "alphanumeric",
+    },
+    {
+        accessorKey: "instance_type",
+        id: "instance_type",
+        header: "API Name",
+        sortingFn: "alphanumeric",
+        cell: (info) => {
+            const value = info.getValue() as string;
+            return (
+                <Link
+                    onClick={(e) => e.stopPropagation()}
+                    href={`/azure/vm/${value}`}
+                >
+                    {value}
+                </Link>
+            );
+        },
+    },
+    {
+        accessorKey: "memory",
+        header: "Instance Memory",
+        size: 160,
+        id: "memory",
+        sortingFn: "alphanumeric",
+        filterFn: gt,
+        cell: (info) => `${info.getValue() as number} GiB`,
+    },
+    {
+        accessorKey: "vcpu",
+        header: "vCPUs",
+        size: 160,
+        id: "vcpu",
+        sortingFn: "alphanumeric",
+        filterFn: gt,
+    },
+    {
+        accessorKey: "memory",
+        header: "Memory per vCPU",
+        size: 160,
+        id: "memory_per_vcpu",
+        filterFn: (row, _, filterValue) => {
+            const value = row.original.memory;
+            const cpu = row.original.vcpu;
+            return value / cpu >= filterValue;
+        },
+        cell: (info) => {
+            const value = info.getValue() as number;
+            const cpu = info.row.original.vcpu;
+            return `${round(value / cpu)} GiB/vCPU`;
+        },
+    },
+    {
+        accessorKey: "GPU",
+        header: "GPUs",
+        size: 160,
+        id: "GPU",
+    },
+    {
+        accessorKey: "size",
+        header: "Storage",
+        size: 160,
+        id: "size",
+        filterFn: gt,
+        cell: (info) => `${info.getValue() as number} GiB`,
+    },
+
+];

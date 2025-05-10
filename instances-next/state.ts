@@ -5,6 +5,7 @@ import GSettings from "@/utils/g_settings_port";
 import { safeParse } from "valibot";
 import handleCompressedFile from "./utils/handleCompressedFile";
 import * as columnData from "./utils/colunnData";
+import { PricingUnit } from "./types";
 
 const preloadedValues: {
     [path: string]: {
@@ -119,6 +120,7 @@ const gSettingsEvent: Map<string, Set<() => void>> = new Map();
 function useGSettingsValue<Key extends keyof GSettings>(
     key: Key,
     defaultValue: GSettings[Key],
+    pathname?: string,
 ) {
     const value = useSyncExternalStore(
         (onStoreChange) => {
@@ -137,7 +139,7 @@ function useGSettingsValue<Key extends keyof GSettings>(
         },
         () => defaultValue,
     );
-    const pathname = usePathname();
+    if (!pathname) pathname = usePathname();
 
     const fireEvents = (key: string) => {
         const s = gSettingsEvent.get(key);
@@ -181,11 +183,22 @@ export function useSearchTerm() {
 }
 
 export function useSelectedRegion() {
-    return useGSettingsValue("region", "us-east-1");
+    const pathname = usePathname();
+    const defaultRegion = pathname.includes("azure") ? "us-east" : "us-east-1";
+
+    return useGSettingsValue("region", defaultRegion, pathname);
 }
 
-export function usePricingUnit() {
-    return useGSettingsValue("pricingUnit", "instance");
+export function usePricingUnit(ecuRename?: string) {
+    const [v, set] = useGSettingsValue("pricingUnit", "instance");
+    return [v === ecuRename ? "ecu" : v, (v: PricingUnit) => {
+        if (v === "ecu" && ecuRename) {
+            // @ts-expect-error: This technically isn't spec compliant, but we catch it.
+            set(ecuRename.toLowerCase());
+        } else {
+            set(v);
+        }
+    }] as const;
 }
 
 export function useDuration() {

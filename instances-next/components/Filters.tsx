@@ -27,17 +27,19 @@ interface FiltersProps<DataKey extends keyof typeof columnData> {
     regions: Region;
     rowSelection: RowSelectionState;
     columnAtomKey: DataKey;
+    ecuRename?: string;
 }
 
 export default function Filters<DataKey extends keyof typeof columnData>({
     regions,
     rowSelection,
     columnAtomKey,
+    ecuRename,
 }: FiltersProps<DataKey>) {
     const columnVisibility = columnVisibilityAtoms[columnAtomKey].use();
     const [searchTerm, setSearchTerm] = useSearchTerm();
     const [selectedRegion, setSelectedRegion] = useSelectedRegion();
-    const [pricingUnit, setPricingUnit] = usePricingUnit();
+    const [pricingUnit, setPricingUnit] = usePricingUnit(ecuRename);
     const [duration, setDuration] = useDuration();
     const [reservedTerm, setReservedTerm] = useReservedTerm();
     const [compareOn, valuePreCompareOn, setCompareOn] = useCompareOn();
@@ -93,6 +95,17 @@ export default function Filters<DataKey extends keyof typeof columnData>({
         return columnData[columnAtomKey].makePrettyNames(makeColumnOption);
     }, Object.values(columnVisibility));
 
+    let pricingUnitOptionsCpy = pricingUnitOptions;
+    if (ecuRename) {
+        pricingUnitOptionsCpy = [...pricingUnitOptionsCpy];
+        for (const option of pricingUnitOptionsCpy) {
+            if (option.value === "ecu") {
+                option.label = ecuRename;
+                break;
+            }
+        }
+    }
+
     return (
         <div
             className="my-1.5 mx-2 d-flex justify-content-between align-items-end"
@@ -114,7 +127,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                         label="Pricing Unit"
                         value={pricingUnit}
                         onChange={(v) => setPricingUnit(v as PricingUnit)}
-                        options={pricingUnitOptions}
+                        options={pricingUnitOptionsCpy}
                     />
                     <FilterDropdown
                         label="Cost"

@@ -23,6 +23,7 @@
         "atomtree": "^1.0.3",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
+        "js-yaml": "^4.1.0",
         "lucide-react": "^0.507.0",
         "lzma-native": "^8.0.6",
         "markdown-table": "^3.0.4",
@@ -36,14 +37,15 @@
         "xz-decompress": "^0.2.2"
     },
     "devDependencies": {
+        "@types/js-yaml": "^4.0.9",
         "@types/lzma-native": "^4.0.4",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
         "prettier": "^3.5.3",
+        "rimraf": "^6.0.1",
         "tsx": "^4.19.3",
         "tw-animate-css": "^1.2.9",
-        "typescript": "^5",
-        "rimraf": "^6.0.1"
+        "typescript": "^5"
     }
 }
