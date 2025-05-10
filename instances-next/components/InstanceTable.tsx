@@ -110,7 +110,10 @@ export default function InstanceTable<
                 value: gSettings.minVcpus,
             },
         ];
-        if (columnAtomKey === "ec2") {
+        if (
+            columnAtomKey === "ec2" ||
+            columnAtomKey === "azure"
+        ) {
             a.push(
                 {
                     id: "memory_per_vcpu",
@@ -120,6 +123,10 @@ export default function InstanceTable<
                     id: "GPU",
                     value: gSettings.minGpus,
                 },
+            );
+        }
+        if (columnAtomKey === "ec2") {
+            a.push(
                 {
                     id: "GPU_memory",
                     value: gSettings.minGpuMemory,
