@@ -21,6 +21,9 @@ export async function GET() {
         <loc>${"/aws/opensearch/sitemap-instances.xml"}</loc>
     </sitemap>
     <sitemap>
+        <loc>${"/azure/vm/sitemap-instances.xml"}</loc>
+    </sitemap>
+    <sitemap>
         <loc>${"/sitemap-other.xml"}</loc>
     </sitemap>
 </sitemapindex>`;

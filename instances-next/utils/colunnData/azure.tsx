@@ -23,11 +23,13 @@ interface Storage {
 
 export type AzureInstance = {
     instance_type: string;
+    pretty_name: string;
     pretty_name_azure: string;
     pricing: AzurePricing;
     vcpu: number;
     memory: number;
     GPU: number;
+    family: string;
     storage?: Storage;
     ACU?: number;
 };
@@ -190,7 +192,7 @@ export const columnsGen = (
                         onClick={(e) => e.stopPropagation()}
                         href={`/azure/vm/${value}`}
                     >
-                        {value}
+                        {info.row.original.pretty_name}
                     </Link>
                 );
             },

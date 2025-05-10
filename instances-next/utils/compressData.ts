@@ -4,6 +4,7 @@ import { encode } from "@msgpack/msgpack";
 import { compress } from "lzma-native";
 import addRenderInfo from "./addRenderInfo";
 import makeRainbowTable from "./makeRainbowTable";
+import formatAzureInstanceType from "./formatAzureInstanceType";
 import { createHash } from "crypto";
 
 const PIPELINE_SIZE = 10;
@@ -89,6 +90,9 @@ async function compressAzureInstances() {
     const instances = JSON.parse(
         await readFile("../www/azure/instances.json", "utf8"),
     );
+    for (const instance of instances) {
+        formatAzureInstanceType(instance);
+    }
 
     // Encode and then compress the Azure instances.
     await writeFile(
