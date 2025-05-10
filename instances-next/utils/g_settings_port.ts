@@ -1,6 +1,6 @@
 import { CostDuration, PricingUnit } from "@/types";
 
-const g_settings_default = {
+export const g_settings_aws_default = {
     pricing_unit: "instance",
     cost_duration: "hourly",
     region: "us-east-1",
@@ -18,7 +18,12 @@ const g_settings_default = {
     compare_on: false,
 };
 
-type GSettingsDefault = typeof g_settings_default;
+export const g_settings_azure_default = {
+    ...g_settings_aws_default,
+    region: "us-east",
+};
+
+type GSettingsDefault = typeof g_settings_aws_default;
 type GSettingsKey = keyof GSettingsDefault;
 
 /** Used internally to validate and set values. */
@@ -79,17 +84,17 @@ function validateBoolean(value: string): boolean {
  * Note this is not in itself reactive, but it provides a type-safe way to access and modify settings.
  */
 export default class GSettings {
-    settings: typeof g_settings_default;
+    settings: typeof g_settings_aws_default;
     key: string;
     filterData = "";
     filterPreCompareOn = "";
 
     constructor(
-        azure: boolean,
+        private azure: boolean,
         private notRoot: boolean,
     ) {
-        this.key = azure ? "azure_settings" : "aws_settings";
-        this.settings = { ...g_settings_default };
+        this.key = this.azure ? "azure_settings" : "aws_settings";
+        this.settings = this.azure ? { ...g_settings_azure_default } : { ...g_settings_aws_default };
         const stored = localStorage.getItem(this.key);
         if (stored) {
             try {
@@ -322,7 +327,7 @@ export default class GSettings {
 
     clear() {
         this.filterData = "";
-        this.settings = { ...g_settings_default };
+        this.settings = this.azure ? { ...g_settings_azure_default } : { ...g_settings_aws_default };
         this._write();
     }
 }
