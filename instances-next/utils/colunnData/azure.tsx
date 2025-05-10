@@ -271,7 +271,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Linux Savings cost",
+        header: "Linux Savings Plan",
         id: "linux-savings",
         // TODO: figure this out
         sortingFn: (rowA, rowB) => {
@@ -382,7 +382,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Windows Savings cost",
+        header: "Windows Savings Plan",
         id: "windows-savings",
         // TODO: figure this out
         sortingFn: (rowA, rowB) => {
