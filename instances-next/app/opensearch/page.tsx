@@ -4,6 +4,12 @@ import addRenderInfo from "@/utils/addRenderInfo";
 import type { Instance } from "@/utils/colunnData/opensearch";
 import { makeHalfRainbowTable } from "@/utils/halfRainbowTable";
 import HalfRainbowWrap from "../HalfRainbowWrap";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Amazon OpenSearch, Open-Source Elasticsearch, Instance Comparison",
+    description: "A free and easy-to-use tool for comparing OpenSearch Instance features and prices.",
+};
 
 export default async function OpenSearch() {
     const regions: Region = {

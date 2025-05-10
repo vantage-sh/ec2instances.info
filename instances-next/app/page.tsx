@@ -4,8 +4,13 @@ import { EC2Instance, Region } from "@/types";
 import AWSClient from "./AWSClient";
 import Head from "next/head";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
+import type { Metadata } from "next";
 
-// TODO: Add metadata
+export const metadata: Metadata = {
+    title: "Amazon EC2 Instance Comparison",
+    description:
+        "A free and easy-to-use tool for comparing EC2 Instance features and prices.",
+};
 
 export default async function Home() {
     let data = await readFile("./public/instances-regions.msgpack");

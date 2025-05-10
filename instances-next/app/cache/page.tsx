@@ -3,6 +3,12 @@ import { readFile } from "fs/promises";
 import addRenderInfo from "@/utils/addRenderInfo";
 import AWSClient from "../AWSClient";
 import makeRainbowTable from "@/utils/makeRainbowTable";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Amazon ElastiCache Instance Comparison",
+    description: "A free and easy-to-use tool for comparing ElastiCache Instance features and prices.",
+};
 
 export default async function Cache() {
     const regions: Region = {

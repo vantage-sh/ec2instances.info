@@ -5,6 +5,12 @@ import { load } from "js-yaml";
 import { decode } from "@msgpack/msgpack";
 import { AzureInstance } from "@/utils/colunnData/azure";
 import AzureClient from "./AzureClient";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Azure VM Comparison",
+    description: "A free and easy-to-use tool for comparing Azure VM features and prices.",
+};
 
 export default async function Azure() {
     const regions = load(await readFile("../meta/regions_azure2.yaml", "utf-8")) as {
