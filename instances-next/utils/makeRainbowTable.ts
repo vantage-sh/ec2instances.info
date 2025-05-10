@@ -33,14 +33,24 @@ export default function makeRainbowTable(instances: EC2Instance[]) {
                     // Key inside platform
                     number,
                     any,
-                ][],
+                ][] | [number, number],
             ][],
         ][] = [];
+        const previousReserved = new Map<string, [number, number]>();
         for (const region in pricing) {
             const regionIndex = rainbowTable.indexOf(region);
-            const platforms: [number, [number, any][]][] = [];
+            const platforms: [number, [number, any][] | [number, number]][] = [];
             for (const platform in pricing[region]) {
+                // Check if we already have a platform with this pricing.
                 const platformIndex = rainbowTable.indexOf(platform);
+                const stringified = JSON.stringify(pricing[region][platform]);
+                const previousRef = previousReserved.get(stringified);
+                if (previousRef) {
+                    platforms.push([platformIndex, previousRef]);
+                    continue;
+                }
+
+                // Do the compression and then add write that data to our table.
                 const kv: [number, any][] = [];
                 for (const key in pricing[region][platform]) {
                     const keyIndex = rainbowTable.indexOf(key);
@@ -58,6 +68,7 @@ export default function makeRainbowTable(instances: EC2Instance[]) {
                     }
                 }
                 platforms.push([platformIndex, kv]);
+                previousReserved.set(stringified, [regionIndex, platformIndex]);
             }
             newPricing.push([regionIndex, platforms]);
         }

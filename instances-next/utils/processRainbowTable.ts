@@ -14,7 +14,7 @@ export default function processRainbowTable<
                 // Key inside platform
                 number,
                 any,
-            ][],
+            ][] | [number, number],
         ][],
     ][] = instance.pricing;
     const newPricing: Pricing = {};
@@ -23,8 +23,18 @@ export default function processRainbowTable<
         const platforms: Pricing[string] = {};
         for (const platform of region[1]) {
             const platformKey = pricingRainbowTable[platform[0]];
+            if (typeof platform[1][0] === "number") {
+                // This is a reference to another platform.
+                const referencedRegion = pricingRainbowTable[platform[1][0]];
+                const referencedPlatform = pricingRainbowTable[(platform as [number, [number, number]])[1][1]];
+                platforms[platformKey] = referencedRegion === regionKey ?
+                    platforms[referencedPlatform] :
+                    newPricing[referencedRegion][referencedPlatform];
+                continue;
+            }
+
             const kv: { [key: string]: any } = {};
-            for (const v of platform[1]) {
+            for (const v of platform[1] as [number, any][]) {
                 const key = pricingRainbowTable[v[0]]!;
                 if (key === "reserved") {
                     const reserved: any = {};
