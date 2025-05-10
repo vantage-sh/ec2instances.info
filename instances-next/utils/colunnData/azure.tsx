@@ -8,9 +8,11 @@ import Link from "next/link";
 interface AzurePricing {
     [region: string]: {
         [platform: string]: {
+            ondemand: number;
             reserved: {
                 [key: string]: number;
             };
+            spot_min?: number;
         };
     };
 }
@@ -97,7 +99,7 @@ function round(value: number) {
 }
 
 function calculateCost(
-    price: string | undefined,
+    price: string | number | undefined,
     instance: AzureInstance,
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
@@ -131,7 +133,7 @@ function calculateCost(
 }
 
 export function calculateAndFormatCost(
-    price: string | undefined,
+    price: string | number | undefined,
     instance: AzureInstance,
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
@@ -237,5 +239,226 @@ export const columnsGen = (
         filterFn: gt,
         cell: (info) => `${info.getValue() as number} GiB`,
     },
-
+    {
+        accessorKey: "pricing",
+        header: "Linux On Demand cost",
+        id: "linux-ondemand",
+        sortingFn: (rowA, rowB) => {
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.linux?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.linux?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
+            return valueA - valueB;
+        },
+        cell: (info) => {
+            const pricing = info.getValue() as AzurePricing | undefined;
+            const price = pricing?.[selectedRegion]?.linux?.ondemand;
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
+        },
+    },
+    {
+        accessorKey: "pricing",
+        header: "Linux Savings cost",
+        id: "linux-savings",
+        // TODO: figure this out
+        sortingFn: (rowA, rowB) => {
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.linux?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.linux?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
+            return valueA - valueB;
+        },
+        cell: (info) => {
+            const pricing = info.getValue() as AzurePricing | undefined;
+            const price = pricing?.[selectedRegion]?.linux?.ondemand;
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
+        },
+    },
+    {
+        accessorKey: "pricing",
+        header: "Linux Reserved cost",
+        id: "linux-reserved",
+        sortingFn: (rowA, rowB) => {
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm],
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm],
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
+            return valueA - valueB;
+        },
+        cell: (info) => {
+            const pricing = info.getValue() as AzurePricing | undefined;
+            const price = pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm];
+            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+        },
+    },
+    {
+        accessorKey: "pricing",
+        header: "Linux Spot cost",
+        id: "linux-spot",
+        sortingFn: (rowA, rowB) => {
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.linux?.spot_min,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.linux?.spot_min,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
+            return valueA - valueB;
+        },
+        cell: (info) => {
+            const pricing = info.getValue() as AzurePricing | undefined;
+            const price = pricing?.[selectedRegion]?.linux?.spot_min;
+            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+        },
+    },
+    {
+        accessorKey: "pricing",
+        header: "Windows On Demand cost",
+        id: "windows-ondemand",
+        sortingFn: (rowA, rowB) => {
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.windows?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.windows?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
+            return valueA - valueB;
+        },
+        cell: (info) => {
+            const pricing = info.getValue() as AzurePricing | undefined;
+            const price = pricing?.[selectedRegion]?.windows?.ondemand;
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
+        },
+    },
+    {
+        accessorKey: "pricing",
+        header: "Windows Savings cost",
+        id: "windows-savings",
+        // TODO: figure this out
+        sortingFn: (rowA, rowB) => {
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.windows?.ondemand,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.windows?.ondemand,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
+            return valueA - valueB;
+        },
+        cell: (info) => {
+            const pricing = info.getValue() as AzurePricing | undefined;
+            const price = pricing?.[selectedRegion]?.windows?.ondemand;
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
+        },
+    },
+    {
+        accessorKey: "pricing",
+        header: "Windows Reserved cost",
+        id: "windows-reserved",
+        sortingFn: (rowA, rowB) => {
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.windows?.reserved?.[reservedTerm],
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.windows?.reserved?.[reservedTerm],
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
+            return valueA - valueB;
+        },
+        cell: (info) => {
+            const pricing = info.getValue() as AzurePricing | undefined;
+            const price = pricing?.[selectedRegion]?.windows?.reserved?.[reservedTerm];
+            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+        },
+    },
+    {
+        accessorKey: "pricing",
+        header: "Windows Spot cost",
+        id: "windows-spot",
+        sortingFn: (rowA, rowB) => {
+            const valueA = calculateCost(
+                rowA.original.pricing?.[selectedRegion]?.windows?.spot_min,
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                rowB.original.pricing?.[selectedRegion]?.windows?.spot_min,
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
+            return valueA - valueB;
+        },
+        cell: (info) => {
+            const pricing = info.getValue() as AzurePricing | undefined;
+            const price = pricing?.[selectedRegion]?.windows?.spot_min;
+            return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+        },
+    },
 ];
