@@ -6,6 +6,7 @@ import InstanceDataView from "./InstanceDataView";
 import azureTablesGenerator from "@/utils/azureTablesGenerator";
 import PricingCalculator from "./PricingCalculator";
 import VantageDemo from "./VantageDemo";
+import MarketingWrapper from "./MarketingWrapper";
 
 type AzureInstanceRootProps = {
     rainbowTable: string[];
@@ -34,54 +35,56 @@ const osOptions: [string, string][] = [
 
 export default function AzureInstanceRoot({ allOfInstanceType, compressedInstance, description, bestOfVariants, rainbowTable, regions }: AzureInstanceRootProps) {
     return (
-        <main className="my-4 px-4 max-w-screen-lg mx-auto">
-            <InstanceBreadcrumbs crumbs={[
-                { name: "Azure", href: "/azure" },
-                { name: "VM", href: "/azure" },
-                { name: compressedInstance.instance_type, href: `/azure/vm/${compressedInstance.instance_type}` },
-            ]} />
-            <div className="md:flex gap-8">
-                <div className="md:max-w-sm">
-                    <h1 className="text-2xl font-bold mb-2">
-                        {compressedInstance.instance_type}
-                    </h1>
-                    <p className="text-sm mb-4">{description}</p>
-                    <PricingCalculator
-                        rainbowTable={rainbowTable}
-                        compressedInstance={compressedInstance}
-                        regions={{
-                            main: {},
-                            local_zone: regions,
-                            wavelength: {},
-                        }}
-                        defaultOs="linux"
-                        removeSpot={false}
-                        storeOsNameRatherThanId={false}
-                        reservedTermOptions={reservedTermOptions}
-                        osOptions={osOptions}
-                        defaultRegion="us-east"
-                        useSpotMin={true}
-                    />
-                    <VantageDemo
-                        link="https://www.vantage.sh/lp/azure-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar"
-                    />
-                    <FamilySize
-                        allOfInstanceType={allOfInstanceType}
-                        instanceName={compressedInstance.instance_type}
-                        pathPrefix="/azure/vm"
-                        tablePath="/azure"
-                    />
-                    <InstanceVariants
-                        bestOfVariants={bestOfVariants}
-                        pathPrefix="/azure/vm"
-                    />
+        <MarketingWrapper azure={true}>
+            <main className="my-4 px-4 max-w-screen-lg">
+                <InstanceBreadcrumbs crumbs={[
+                    { name: "Azure", href: "/azure" },
+                    { name: "VM", href: "/azure" },
+                    { name: compressedInstance.instance_type, href: `/azure/vm/${compressedInstance.instance_type}` },
+                ]} />
+                <div className="md:flex gap-8">
+                    <div className="md:max-w-sm">
+                        <h1 className="text-2xl font-bold mb-2">
+                            {compressedInstance.instance_type}
+                        </h1>
+                        <p className="text-sm mb-4">{description}</p>
+                        <PricingCalculator
+                            rainbowTable={rainbowTable}
+                            compressedInstance={compressedInstance}
+                            regions={{
+                                main: {},
+                                local_zone: regions,
+                                wavelength: {},
+                            }}
+                            defaultOs="linux"
+                            removeSpot={false}
+                            storeOsNameRatherThanId={false}
+                            reservedTermOptions={reservedTermOptions}
+                            osOptions={osOptions}
+                            defaultRegion="us-east"
+                            useSpotMin={true}
+                        />
+                        <VantageDemo
+                            link="https://www.vantage.sh/lp/azure-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar"
+                        />
+                        <FamilySize
+                            allOfInstanceType={allOfInstanceType}
+                            instanceName={compressedInstance.instance_type}
+                            pathPrefix="/azure/vm"
+                            tablePath="/azure"
+                        />
+                        <InstanceVariants
+                            bestOfVariants={bestOfVariants}
+                            pathPrefix="/azure/vm"
+                        />
+                    </div>
+                    <div className="flex-grow md:mt-0 mt-4">
+                        <InstanceDataView
+                            tables={azureTablesGenerator(compressedInstance)}
+                        />
+                    </div>
                 </div>
-                <div className="flex-grow md:mt-0 mt-4">
-                    <InstanceDataView
-                        tables={azureTablesGenerator(compressedInstance)}
-                    />
-                </div>
-            </div>
-        </main>
+            </main>
+        </MarketingWrapper>
     );
 }
