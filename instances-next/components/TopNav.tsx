@@ -37,7 +37,7 @@ const navItems = [
         href: "/azure",
         children: [
             {
-                label: "VMs",
+                label: "VM",
                 href: "/azure"
             }
         ],
@@ -67,16 +67,19 @@ export default function TopNav() {
                 {navItems.map((item) => (
                     <div className="flex items-center justify-start gap-4 relative top-1.5 ml-2" key={item.label}>
                         <Link className="font-medium text-gray-6 text-sm" href={item.href}>{item.label}</Link>
-                        <div className="flex items-center justify-start gap-4 rounded-md rounded-b-none bg-black/30 p-1 pb-0">
+                        <div className="flex items-center justify-start gap-4 rounded-md rounded-b-none bg-black/30 not-lg:hidden p-1 pb-0">
                             {item.children &&
-                                item.children.map((child) => (
-                                    <Link className={`font-normal text-sm px-2 py-1 pb-2 rounded rounded-b-none ${currentPath === child.href || currentPath.includes(child.label.toLowerCase()) ? "bg-white text-black font-semibold" : "text-gray-6"}`} key={child.label} href={child.href}>{child.label}</Link>
-                                ))}
+                                item.children.map((child) => {
+                                    const selected = currentPath === child.href || currentPath.includes(child.label.toLowerCase());
+                                    return (
+                                        <Link aria-selected={selected} className={`font-normal text-sm px-2 py-1 pb-2 rounded rounded-b-none ${selected ? "bg-white text-black font-semibold" : "text-gray-6"}`} key={child.label} href={child.href}>{child.label}</Link>
+                                    )
+                                })}
                         </div>
                     </div>
                 ))}
             </div>
-            <div className="flex items-center justify-end gap-4">
+            <div className="flex items-center justify-end gap-4 not-md:hidden">
                 <Link href="https://vantage.sh/slack" className={buttonVariants({ variant: "outline", size: "sm" })}>
 
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
