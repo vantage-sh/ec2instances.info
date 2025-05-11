@@ -1,4 +1,4 @@
-import { writeFile, mkdir } from "fs/promises";
+import { writeFile, mkdir, readFile } from "fs/promises";
 import generateIndex from "./generateIndex";
 import generateAwsFamilyIndexes from "./generateAwsFamilyIndexes";
 import { calculatePrice, generateAwsIndexes } from "./generateAwsIndexes";
@@ -10,7 +10,10 @@ import generateRedshiftMarkdown from "./generateRedshiftMarkdown";
 import generateOpensearchMarkdown from "./generateOpensearchMarkdown";
 import { generateOpensearchIndexes } from "./generateOpensearchIndexes";
 import generateOpensearchFamilyIndexes from "./generateOpensearchFamilyIndexes";
-
+import { AzureInstance } from "@/utils/colunnData/azure";
+import generateAzureFamilyIndexes from "./generateAzureFamilyIndexes";
+import { generateAzureIndexes } from "./generateAzureIndexes";
+import generateAzureInstances from "./generateAzureInstances";
 function generateRdsDescription(instance: any, ondemandCost: string | undefined) {
     return `The ${instance.instance_type} instance is a ${instance.family} instance with ${instance.vCPU} vCPUs and ${instance.memory}GB of memory starting at $${ondemandCost} per hour.`;
 }
@@ -133,6 +136,30 @@ async function main() {
     }
     await Promise.all(promises);
     console.log("Generated instances for aws/opensearch/*.md");
+
+    await mkdir("./public/azure/vm/families", { recursive: true });
+    familyIndexes = await generateAzureFamilyIndexes("/azure/vm");
+    for (const [family, index] of familyIndexes.entries()) {
+        await writeFile(`./public/azure/vm/families/${family}.md`, index);
+    }
+    console.log("Generated azure/vm/families/*.md");
+
+    const azureIndexes = await generateAzureIndexes("/azure/vm");
+    for (const [slug, index] of azureIndexes.entries()) {
+        await writeFile(`./public/azure/vm/${slug}.md`, index);
+    }
+    console.log("Generated indexes for azure/vm/*.md");
+
+    const azureInstances = await generateAzureInstances();
+    promises.length = 0;
+    for (const [slug, index] of azureInstances.entries()) {
+        promises.push(writeFile(`./public/azure/vm/${slug}.md`, index.root));
+        for (const [region, i] of index.regions.entries()) {
+            promises.push(writeFile(`./public/azure/vm/${slug}-${region}.md`, i));
+        }
+    }
+    await Promise.all(promises);
+    console.log("Generated instances for azure/vm/*.md");
 }
 
 main();

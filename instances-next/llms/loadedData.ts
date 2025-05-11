@@ -6,6 +6,7 @@ import processRainbowTable from "@/utils/processRainbowTable";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 import { Instance as RedshiftInstance } from "@/utils/colunnData/redshift";
 import { Instance as OpensearchInstance } from "@/utils/colunnData/opensearch";
+import type { AzureInstance } from "@/utils/colunnData/azure";
 
 export const awsInstances = (async () => {
     const compressed30 = decode(
@@ -81,6 +82,11 @@ export const opensearchInstances = (async () => {
     return JSON.parse(d) as OpensearchInstance[];
 })();
 
+export const azureInstances = (async () => {
+    const d = await readFile("../www/azure/instances.json", "utf-8");
+    return JSON.parse(d) as AzureInstance[];
+})();
+
 export async function getEc2Families() {
     const instances = await awsInstances;
     const families = new Set<string>();
@@ -115,6 +121,15 @@ export async function getOpensearchFamilies() {
     const families = new Set<string>();
     for (const instance of instances) {
         families.add(instance.instance_type.split(".")[0]);
+    }
+    return Array.from(families).sort();
+}
+
+export async function getAzureFamilies() {
+    const instances = await azureInstances;
+    const families = new Set<string>();
+    for (const instance of instances) {
+        families.add(instance.instance_type.substring(0, 2));
     }
     return Array.from(families).sort();
 }

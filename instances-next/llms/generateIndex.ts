@@ -1,7 +1,9 @@
 import { raw, urlInject } from "@/utils/urlInject";
-import { getEc2Families, getRdsFamilies, getElasticacheFamilies, getOpensearchFamilies, redshiftInstances, opensearchInstances } from "./loadedData";
+import { getEc2Families, getRdsFamilies, getElasticacheFamilies, getOpensearchFamilies, redshiftInstances, ] getAzureFamilies } from "./loadedData";
 import { awsIndexes } from "./generateAwsIndexes";
 import { opensearchIndexes } from "./generateOpensearchIndexes";
+import { azureIndexes } from "./generateAzureIndexes";
+
 export default async () => `# ec2instances.info
 
 > ec2instances.info contains a comprehensive list of pricing and specifications for instance types on various cloud providers.
@@ -31,4 +33,9 @@ ${(await redshiftInstances).map((i) => urlInject`- [${raw(i.instance_type)} inst
 
 ${opensearchIndexes.map((i) => urlInject`- [${raw(i.name)} instances](${`/aws/opensearch/${i.slug}.md`})`).join("\n")}
 ${(await getOpensearchFamilies()).map((family) => urlInject`- [Index of all ${raw(family)} instances](${`/aws/opensearch/families/${family}.md`})`).join("\n")}
+
+## Azure
+
+${azureIndexes.map((i) => urlInject`- [${raw(i.name)} instances](${`/azure/vm/${i.slug}.md`})`).join("\n")}
+${(await getAzureFamilies()).map((family) => urlInject`- [Index of all ${raw(family)} instances](${`/azure/vm/families/${family}.md`})`).join("\n")}
 `;
