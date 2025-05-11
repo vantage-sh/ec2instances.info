@@ -5,6 +5,7 @@ import InstanceVariants from "./InstanceVariants";
 import InstanceDataView from "./InstanceDataView";
 import azureTablesGenerator from "@/utils/azureTablesGenerator";
 import PricingCalculator from "./PricingCalculator";
+import VantageDemo from "./VantageDemo";
 
 type AzureInstanceRootProps = {
     rainbowTable: string[];
@@ -56,6 +57,9 @@ export default function AzureInstanceRoot({ allOfInstanceType, compressedInstanc
                         osOptions={osOptions}
                         defaultRegion="us-east"
                         useSpotMin={true}
+                    />
+                    <VantageDemo
+                        link="https://www.vantage.sh/lp/azure-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar"
                     />
                     <FamilySize
                         allOfInstanceType={allOfInstanceType}

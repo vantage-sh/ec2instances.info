@@ -2,6 +2,7 @@ import { Pricing } from "@/types";
 import { AllOfInstanceType, FamilySize } from "./FamilySize";
 import { Region } from "@/types";
 import PricingCalculator from "./PricingCalculator";
+import VantageDemo from "./VantageDemo";
 
 type HalfPricing = {
     [region: string]: {
@@ -67,6 +68,9 @@ export default function HalfEC2Root<Instance extends { instance_type: string; pr
                     reservedTermOptions={reservedTermOptions}
                     defaultRegion="us-east-1"
                     useSpotMin={false}
+                />
+                <VantageDemo
+                    link="https://www.vantage.sh/lp/aws-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar"
                 />
                 <FamilySize
                     allOfInstanceType={allOfInstanceType}

@@ -5,6 +5,7 @@ import * as tablesGenerator from "@/utils/ec2TablesGenerator";
 import InstanceDataView from "./InstanceDataView";
 import InstanceBreadcrumbs from "./InstanceBreadcrumbs";
 import InstanceVariants from "./InstanceVariants";
+import VantageDemo from "./VantageDemo";
 
 interface InstanceRootProps {
     rainbowTable: string[];
@@ -61,6 +62,9 @@ export default function EC2InstanceRoot({
                         reservedTermOptions={reservedTermOptions}
                         defaultRegion="us-east-1"
                         useSpotMin={false}
+                    />
+                    <VantageDemo
+                        link="hhttps://www.vantage.sh/lp/aws-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar"
                     />
                     <FamilySize
                         allOfInstanceType={allOfInstanceType}
