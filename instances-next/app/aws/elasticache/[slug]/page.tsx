@@ -81,6 +81,12 @@ const osOptions: [string, string][] = [
     ["Valkey", "Valkey"],
 ];
 
+const reservedTermOptions: [string, string][] = [
+    ["Standard.noUpfront", "No Upfront"],
+    ["Standard.partialUpfront", "Partial Upfront"],
+    ["Standard.allUpfront", "All Upfront"],
+];
+
 export default async function Page({
     params,
 }: {
@@ -124,9 +130,10 @@ export default async function Page({
             defaultOs="Redis"
             generatorKey="elasticache"
             pathPrefix="/aws/elasticache"
-            lessPricingFlexibility={true}
+            removeSpot={true}
             tablePath="/cache"
             storeOsNameRatherThanId={true}
+            reservedTermOptions={reservedTermOptions}
         />
     );
 }

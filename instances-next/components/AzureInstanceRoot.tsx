@@ -3,8 +3,8 @@ import InstanceBreadcrumbs from "./InstanceBreadcrumbs";
 import { FamilySize } from "./FamilySize";
 import InstanceVariants from "./InstanceVariants";
 import InstanceDataView from "./InstanceDataView";
-import AzurePricingCalculator from "./AzurePricingCalculator";
 import azureTablesGenerator from "@/utils/azureTablesGenerator";
+import PricingCalculator from "./PricingCalculator";
 
 type AzureInstanceRootProps = {
     rainbowTable: string[];
@@ -19,6 +19,18 @@ type AzureInstanceRootProps = {
     bestOfVariants: Record<string, string>;
 };
 
+const reservedTermOptions: [string, string][] = [
+    ["Standard.allUpfront", "Reservation"],
+    ["Standard.hybridbenefit", "Reservation (Hybrid Benefit)"],
+    ["Savings.allUpfront", "Savings Plan"],
+    ["Savings.hybridbenefit", "Savings Plan (Hybrid Benefit)"],
+];
+
+const osOptions: [string, string][] = [
+    ["linux", "Linux"],
+    ["windows", "Windows"],
+];
+
 export default function AzureInstanceRoot({ allOfInstanceType, compressedInstance, description, bestOfVariants, rainbowTable, regions }: AzureInstanceRootProps) {
     return (
         <main className="my-4 px-4 max-w-screen-lg mx-auto">
@@ -29,10 +41,21 @@ export default function AzureInstanceRoot({ allOfInstanceType, compressedInstanc
                         {compressedInstance.instance_type}
                     </h1>
                     <p className="text-sm mb-4">{description}</p>
-                    <AzurePricingCalculator
+                    <PricingCalculator
                         rainbowTable={rainbowTable}
                         compressedInstance={compressedInstance}
-                        regions={regions}
+                        regions={{
+                            main: {},
+                            local_zone: regions,
+                            wavelength: {},
+                        }}
+                        defaultOs="linux"
+                        removeSpot={false}
+                        storeOsNameRatherThanId={false}
+                        reservedTermOptions={reservedTermOptions}
+                        osOptions={osOptions}
+                        defaultRegion="us-east"
+                        useSpotMin={true}
                     />
                     <FamilySize
                         allOfInstanceType={allOfInstanceType}

@@ -1,7 +1,7 @@
 import { Pricing } from "@/types";
 import { AllOfInstanceType, FamilySize } from "./FamilySize";
 import { Region } from "@/types";
-import AWSPricingSelector from "./EC2PricingCalculator";
+import PricingCalculator from "./PricingCalculator";
 
 type HalfPricing = {
     [region: string]: {
@@ -21,6 +21,12 @@ type InstanceRootProps<Instance extends { instance_type: string; pricing: HalfPr
     tablePath: string;
     regions: Region;
 };
+
+const reservedTermOptions: [string, string][] = [
+    ["Standard.noUpfront", "No Upfront"],
+    ["Standard.partialUpfront", "Partial Upfront"],
+    ["Standard.allUpfront", "All Upfront"],
+];
 
 export default function HalfEC2Root<Instance extends { instance_type: string; pricing: HalfPricing }>({
     allOfInstanceType,
@@ -48,7 +54,7 @@ export default function HalfEC2Root<Instance extends { instance_type: string; pr
                     {instance.instance_type}
                 </h1>
                 <p className="text-sm mb-4">{description}</p>
-                <AWSPricingSelector
+                <PricingCalculator
                     rainbowTable={[]}
                     compressedInstance={{
                         pricing: remappedPricing,
@@ -56,8 +62,11 @@ export default function HalfEC2Root<Instance extends { instance_type: string; pr
                     regions={regions}
                     osOptions={[]}
                     defaultOs="unused"
-                    lessPricingFlexibility={true}
+                    removeSpot={true}
                     storeOsNameRatherThanId={false}
+                    reservedTermOptions={reservedTermOptions}
+                    defaultRegion="us-east-1"
+                    useSpotMin={false}
                 />
                 <FamilySize
                     allOfInstanceType={allOfInstanceType}

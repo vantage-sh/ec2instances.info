@@ -1,12 +1,21 @@
 "use client";
 
-import { Pricing, CostDuration, Region } from "@/types";
+import { CostDuration, Region } from "@/types";
 import { DollarSignIcon } from "lucide-react";
 import { useMemo, useState, useId, useEffect, useCallback } from "react";
 import processRainbowTable from "@/utils/processRainbowTable";
 import { durationOptions } from "@/utils/dataMappings";
 
-function dollarString(value: string | undefined, duration: CostDuration) {
+interface Platform {
+    ondemand: string | number;
+    reserved?: {
+        [term: string]: string | number;
+    };
+    spot_avg?: string | number;
+    spot_min?: string | number;
+}
+
+function dollarString(value: string | number | undefined, duration: CostDuration) {
     if (value === undefined) return "N/A";
     const n = Number(value);
     if (isNaN(n)) return "N/A";
@@ -26,39 +35,36 @@ function dollarString(value: string | undefined, duration: CostDuration) {
     return `$${rounded}`;
 }
 
-const reservedTermOptions = [
-    ["Standard.noUpfront", "No Upfront"],
-    ["Standard.partialUpfront", "Partial Upfront"],
-    ["Standard.allUpfront", "All Upfront"],
-    ["Convertible.noUpfront", "No Upfront (Convertible)"],
-    ["Convertible.partialUpfront", "Partial Upfront (Convertible)"],
-    ["Convertible.allUpfront", "All Upfront (Convertible)"],
-] as const;
-
 function Calculator({
     pricing,
     regions,
     osOptions,
     defaultOs,
-    lessPricingFlexibility,
     storeOsNameRatherThanId,
+    reservedTermOptions,
+    removeSpot,
+    defaultRegion,
+    useSpotMin,
 }: {
-    pricing: Pricing;
+    pricing: Record<string, Record<string, Platform>>;
     regions: Region;
     osOptions: [string, string][];
     defaultOs: string;
-    lessPricingFlexibility: boolean;
     storeOsNameRatherThanId: boolean;
+    reservedTermOptions: [string, string][];
+    removeSpot: boolean;
+    defaultRegion: string;
+    useSpotMin: boolean;
 }) {
     const priceHoldersId = useId();
 
     const defaultPlatform = useMemo(() => {
-        return pricing["us-east-1"]?.[defaultOs]
+        return pricing[defaultRegion]?.[defaultOs]
             ? defaultOs
-            : Object.keys(pricing["us-east-1"] || {})[0] || defaultOs;
-    }, [pricing, defaultOs]);
+            : Object.keys(pricing[defaultRegion] || {})[0] || defaultOs;
+    }, [pricing, defaultOs, defaultRegion]);
 
-    const [region, setRegionState] = useState<string>("us-east-1");
+    const [region, setRegionState] = useState<string>(defaultRegion);
     const [platform, setPlatformState] = useState<string>(defaultPlatform);
     const [duration, setDurationState] = useState<CostDuration>("hourly");
     const [pricingType, setPricingTypeState] =
@@ -105,12 +111,7 @@ function Calculator({
             const validPricingType = reservedTermOptions.find(
                 ([value]) => value.toLowerCase() === pricingType.toLowerCase(),
             );
-            if (
-                validPricingType &&
-                (!lessPricingFlexibility ||
-                    !validPricingType[0].includes("Convertible"))
-            )
-                setPricingTypeState(validPricingType[0]);
+            if (validPricingType) setPricingTypeState(validPricingType[0]);
         }
     }, [pricing, regions, osOptions, storeOsNameRatherThanId, defaultOs]);
 
@@ -157,10 +158,10 @@ function Calculator({
                 value: dollarString(root?.ondemand, duration),
             },
         ];
-        if (!lessPricingFlexibility) {
+        if (!removeSpot) {
             a.push({
                 label: "Spot",
-                value: dollarString(root?.spot_avg, duration),
+                value: dollarString(useSpotMin ? root?.spot_min : root?.spot_avg, duration),
             });
         }
         a.push(
@@ -186,14 +187,14 @@ function Calculator({
         platform,
         duration,
         pricingType,
-        lessPricingFlexibility,
+        removeSpot,
     ]);
 
     const localZones = useMemo(() => {
         return Object.entries(regions.local_zone).sort((a, b) => {
-            // Generally alphabetical, but us-east-1 is first.
-            if (a[0] === "us-east-1") return -1;
-            if (b[0] === "us-east-1") return 1;
+            // Generally alphabetical, but default region is first.
+            if (a[0] === defaultRegion) return -1;
+            if (b[0] === defaultRegion) return 1;
             return a[1].localeCompare(b[1]);
         });
     }, [regions]);
@@ -275,12 +276,9 @@ function Calculator({
                     onChange={(e) => setPricingType(e.target.value)}
                 >
                     {reservedTermOptions.map(([value, label]) =>
-                        lessPricingFlexibility &&
-                        value.includes("Convertible") ? null : (
-                            <option key={value} value={value}>
-                                {label}
-                            </option>
-                        ),
+                        <option key={value} value={value}>
+                            {label}
+                        </option>
                     )}
                 </select>
             </div>
@@ -288,25 +286,31 @@ function Calculator({
     );
 }
 
-type PricingSelectorProps = {
+type PricingCalculatorProps = {
     rainbowTable: string[];
-    compressedInstance: { pricing: Pricing };
+    compressedInstance: { pricing: Record<string, Record<string, Platform>> };
     regions: Region;
     osOptions: [string, string][];
     defaultOs: string;
-    lessPricingFlexibility: boolean;
     storeOsNameRatherThanId: boolean;
+    reservedTermOptions: [string, string][];
+    removeSpot: boolean;
+    defaultRegion: string;
+    useSpotMin: boolean;
 };
 
-export default function EC2PricingSelector({
+export default function PricingCalculator({
     rainbowTable,
     compressedInstance,
     regions,
     osOptions,
     defaultOs,
-    lessPricingFlexibility,
     storeOsNameRatherThanId,
-}: PricingSelectorProps) {
+    reservedTermOptions,
+    removeSpot,
+    defaultRegion,
+    useSpotMin,
+}: PricingCalculatorProps) {
     const instance = useMemo(() => {
         if (!Array.isArray(compressedInstance.pricing))
             return compressedInstance;
@@ -324,8 +328,11 @@ export default function EC2PricingSelector({
                 regions={regions}
                 osOptions={osOptions}
                 defaultOs={defaultOs}
-                lessPricingFlexibility={lessPricingFlexibility}
                 storeOsNameRatherThanId={storeOsNameRatherThanId}
+                reservedTermOptions={reservedTermOptions}
+                removeSpot={removeSpot}
+                defaultRegion={defaultRegion}
+                useSpotMin={useSpotMin}
             />
         </section>
     );

@@ -93,6 +93,15 @@ export async function generateMetadata({
     };
 }
 
+const reservedTermOptions: [string, string][] = [
+    ["Standard.noUpfront", "No Upfront"],
+    ["Standard.partialUpfront", "Partial Upfront"],
+    ["Standard.allUpfront", "All Upfront"],
+    ["Convertible.noUpfront", "No Upfront (Convertible)"],
+    ["Convertible.partialUpfront", "Partial Upfront (Convertible)"],
+    ["Convertible.allUpfront", "All Upfront (Convertible)"],
+];
+
 const osOptions: [string, string][] = [
     ["linux", "Linux"],
     ["mswin", "Windows"],
@@ -153,9 +162,10 @@ export default async function Page({
             defaultOs="linux"
             generatorKey="ec2"
             pathPrefix="/aws/ec2"
-            lessPricingFlexibility={false}
+            removeSpot={false}
             tablePath="/"
             storeOsNameRatherThanId={false}
+            reservedTermOptions={reservedTermOptions}
         />
     );
 }

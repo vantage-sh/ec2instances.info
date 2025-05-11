@@ -1,6 +1,6 @@
 import { EC2Instance, Region } from "@/types";
 import { AllOfInstanceType, FamilySize } from "./FamilySize";
-import AWSPricingSelector from "@/components/EC2PricingCalculator";
+import PricingCalculator from "@/components/PricingCalculator";
 import * as tablesGenerator from "@/utils/ec2TablesGenerator";
 import InstanceDataView from "./InstanceDataView";
 import InstanceBreadcrumbs from "./InstanceBreadcrumbs";
@@ -19,9 +19,10 @@ interface InstanceRootProps {
     defaultOs: string;
     generatorKey: keyof typeof tablesGenerator;
     pathPrefix: string;
-    lessPricingFlexibility: boolean;
+    removeSpot: boolean;
     tablePath: string;
     storeOsNameRatherThanId: boolean;
+    reservedTermOptions: [string, string][];
 }
 
 export default function EC2InstanceRoot({
@@ -35,9 +36,10 @@ export default function EC2InstanceRoot({
     defaultOs,
     generatorKey,
     pathPrefix,
-    lessPricingFlexibility,
+    removeSpot,
     tablePath,
     storeOsNameRatherThanId,
+    reservedTermOptions,
 }: InstanceRootProps) {
     return (
         <main className="my-4 px-4 max-w-screen-lg mx-auto">
@@ -48,14 +50,17 @@ export default function EC2InstanceRoot({
                         {compressedInstance.instance_type}
                     </h1>
                     <p className="text-sm mb-4">{description}</p>
-                    <AWSPricingSelector
+                    <PricingCalculator
                         rainbowTable={rainbowTable}
                         compressedInstance={compressedInstance}
                         regions={regions}
                         osOptions={osOptions}
                         defaultOs={defaultOs}
-                        lessPricingFlexibility={lessPricingFlexibility}
+                        removeSpot={removeSpot}
                         storeOsNameRatherThanId={storeOsNameRatherThanId}
+                        reservedTermOptions={reservedTermOptions}
+                        defaultRegion="us-east-1"
+                        useSpotMin={false}
                     />
                     <FamilySize
                         allOfInstanceType={allOfInstanceType}

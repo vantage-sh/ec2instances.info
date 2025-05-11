@@ -76,6 +76,12 @@ export async function generateMetadata({
     };
 }
 
+const reservedTermOptions: [string, string][] = [
+    ["Standard.noUpfront", "No Upfront"],
+    ["Standard.partialUpfront", "Partial Upfront"],
+    ["Standard.allUpfront", "All Upfront"],
+];
+
 const osOptions: [string, string][] = [
     ["PostgreSQL", "PostgreSQL"],
     ["MySQL", "MySQL"],
@@ -150,9 +156,10 @@ export default async function Page({
             }
             generatorKey="rds"
             pathPrefix="/aws/rds"
-            lessPricingFlexibility={true}
+            removeSpot={true}
             tablePath="/rds"
             storeOsNameRatherThanId={true}
+            reservedTermOptions={reservedTermOptions}
         />
     );
 }

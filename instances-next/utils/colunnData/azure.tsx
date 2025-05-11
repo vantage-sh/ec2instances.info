@@ -5,7 +5,7 @@ import { makeSchemaWithDefaults } from "./shared";
 import { CostDuration } from "@/types";
 import Link from "next/link";
 
-interface AzurePricing {
+export interface AzurePricing {
     [region: string]: {
         [platform: string]: {
             ondemand: number;
