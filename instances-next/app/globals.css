@@ -37,7 +37,7 @@ body {
 }
 
 .index-table th {
-    @apply whitespace-nowrap overflow-hidden text-ellipsis text-left relative bg-gray-6 border-t border-gray-5 border-b;
+    @apply whitespace-nowrap overflow-hidden text-ellipsis text-left relative bg-gray-6 border-gray-5 border-b;
 }
 
 .index-table tbody {

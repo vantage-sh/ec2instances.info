@@ -35,6 +35,12 @@ const navItems = [
     {
         label: "Azure",
         href: "/azure",
+        children: [
+            {
+                label: "VMs",
+                href: "/azure"
+            }
+        ],
     }
 ]
 
