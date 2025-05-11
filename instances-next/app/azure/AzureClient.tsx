@@ -45,7 +45,7 @@ export default function AzureClient({
     const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
     return (
-        <main className="h-[calc(100vh-3rem)] flex flex-col">
+        <main className="h-[calc(100vh-3rem)] overflow-y-hidden flex flex-col">
             <DoMigration atomKey="azure" />
             <Filters
                 columnAtomKey="azure"
