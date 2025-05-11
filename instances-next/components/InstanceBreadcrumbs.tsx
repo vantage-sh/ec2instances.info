@@ -7,33 +7,23 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { usePathname } from "next/navigation";
 import React from "react";
 
-export default function InstanceBreadcrumbs() {
-    const pathname = usePathname();
-    const pathParts = pathname.split("/").filter(Boolean);
-    
+export default function InstanceBreadcrumbs({ crumbs }: { crumbs: { name: string, href: string }[] }) {
     return (
         <Breadcrumb className="my-3">
             <BreadcrumbList>
-                {pathParts.map((part, index) => {
-                    const href = part === 'aws' || part === 'ec2' ? '/' : `/${part}`;
-                    const displayName = part
-                        .replace('aws', 'AWS')
-                        .replace('ec2', 'EC2')
-                        .replace('rds', 'RDS');
-                    
+                {crumbs.map((crumb, index) => {
                     return (
                         <React.Fragment key={index}>
                             <BreadcrumbItem>
-                                {index === pathParts.length - 1 ? (
-                                    <BreadcrumbPage>{displayName}</BreadcrumbPage>
+                                {index === crumbs.length - 1 ? (
+                                    <BreadcrumbPage>{crumb.name}</BreadcrumbPage>
                                 ) : (
-                                    <BreadcrumbLink href={href}>{displayName}</BreadcrumbLink>
+                                    <BreadcrumbLink href={crumb.href}>{crumb.name}</BreadcrumbLink>
                                 )}
                             </BreadcrumbItem>
-                            {index < pathParts.length - 1 && <BreadcrumbSeparator />}
+                            {index < crumbs.length - 1 && <BreadcrumbSeparator />}
                         </React.Fragment>
                     );
                 })}

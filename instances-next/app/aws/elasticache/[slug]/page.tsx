@@ -134,6 +134,7 @@ export default async function Page({
             tablePath="/cache"
             storeOsNameRatherThanId={true}
             reservedTermOptions={reservedTermOptions}
+            typeName="Cache"
         />
     );
 }

@@ -166,6 +166,7 @@ export default async function Page({
             tablePath="/"
             storeOsNameRatherThanId={false}
             reservedTermOptions={reservedTermOptions}
+            typeName="EC2"
         />
     );
 }

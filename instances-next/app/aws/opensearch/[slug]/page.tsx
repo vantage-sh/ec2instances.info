@@ -97,6 +97,7 @@ export default async function Page({
             pathPrefix="/aws/opensearch"
             tablePath="/opensearch"
             regions={regions}
+            typeName="OpenSearch"
         >
             <InstanceDataView tables={generateOpensearchTables(instance)} />
         </HalfEC2Root>

@@ -24,6 +24,7 @@ interface InstanceRootProps {
     tablePath: string;
     storeOsNameRatherThanId: boolean;
     reservedTermOptions: [string, string][];
+    typeName: string;
 }
 
 export default function EC2InstanceRoot({
@@ -39,12 +40,17 @@ export default function EC2InstanceRoot({
     pathPrefix,
     removeSpot,
     tablePath,
+    typeName,
     storeOsNameRatherThanId,
     reservedTermOptions,
 }: InstanceRootProps) {
     return (
         <main className="my-4 px-4 max-w-screen-lg mx-auto">
-            <InstanceBreadcrumbs />
+            <InstanceBreadcrumbs crumbs={[
+                { name: "AWS", href: "/" },
+                { name: typeName, href: tablePath },
+                { name: compressedInstance.instance_type, href: `/${compressedInstance.instance_type}` },
+            ]} />
             <div className="md:flex gap-8">
                 <div className="md:max-w-sm">
                     <h1 className="text-2xl font-bold mb-2">

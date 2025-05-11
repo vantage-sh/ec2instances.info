@@ -35,7 +35,11 @@ const osOptions: [string, string][] = [
 export default function AzureInstanceRoot({ allOfInstanceType, compressedInstance, description, bestOfVariants, rainbowTable, regions }: AzureInstanceRootProps) {
     return (
         <main className="my-4 px-4 max-w-screen-lg mx-auto">
-            <InstanceBreadcrumbs />
+            <InstanceBreadcrumbs crumbs={[
+                { name: "Azure", href: "/azure" },
+                { name: "VM", href: "/azure" },
+                { name: compressedInstance.instance_type, href: `/azure/vm/${compressedInstance.instance_type}` },
+            ]} />
             <div className="md:flex gap-8">
                 <div className="md:max-w-sm">
                     <h1 className="text-2xl font-bold mb-2">

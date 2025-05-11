@@ -160,6 +160,7 @@ export default async function Page({
             tablePath="/rds"
             storeOsNameRatherThanId={true}
             reservedTermOptions={reservedTermOptions}
+            typeName="RDS"
         />
     );
 }
