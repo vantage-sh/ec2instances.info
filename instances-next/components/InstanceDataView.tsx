@@ -44,7 +44,7 @@ type RowProps = {
 function Row({ name, children, help, helpText }: RowProps) {
     return (
         <tr>
-            <td className="py-1.5 px-3 border border-gray-200">
+            <td className="py-1.5 px-3 border border-gray-200 w-1/2">
                 {name}
                 {help && (
                     <span>
@@ -59,7 +59,7 @@ function Row({ name, children, help, helpText }: RowProps) {
                     </span>
                 )}
             </td>
-            <td className="py-1.5 px-3 border border-gray-200">{children}</td>
+            <td className="py-1.5 px-3 border border-gray-200 w-1/2">{children}</td>
         </tr>
     );
 }
