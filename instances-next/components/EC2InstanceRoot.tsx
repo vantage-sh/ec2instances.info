@@ -47,7 +47,7 @@ export default function EC2InstanceRoot({
 }: InstanceRootProps) {
     return (
         <MarketingWrapper azure={false}>
-            <main className="my-4 px-4 max-w-screen-lg">
+            <main className="my-4 px-4 max-w-screen-lg not-md:w-screen">
                 <InstanceBreadcrumbs crumbs={[
                     { name: "AWS", href: "/" },
                     { name: typeName, href: tablePath },

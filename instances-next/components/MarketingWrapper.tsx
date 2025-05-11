@@ -1,5 +1,5 @@
 const ItemsWrapper = ({ children }: { children: React.ReactNode }) => (
-    <section className="not-xl:flex not-xl:flex-wrap gap-4 mt-4">
+    <section className="not-xl:flex not-xl:flex-wrap not-xl:w-screen gap-4 mt-4">
         {children}
     </section>
 );
@@ -12,7 +12,7 @@ type ItemProps = {
 };
 
 const Item = ({ link, image, title, description }: ItemProps) => (
-    <a href={link} target="_blank">
+    <a href={link} target="_blank" className="not-sm:mx-auto">
         <div className="xl:mt-4 flex-col border border-gray-200 rounded-md p-4 w-2xs">
             <img src={image} alt={title} className="w-full h-40 object-cover rounded-md" />
             <h3 className="text-lg font-bold mt-2" aria-hidden="true">{title}</h3>

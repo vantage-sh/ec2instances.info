@@ -7,7 +7,7 @@ export default function VantageDemo({ link }: { link: string }) {
                     <img
                         src="/demo.png"
                         alt="Request a demo"
-                        className="w-full"
+                        className="h-30"
                     />
                 </a>
             </div>

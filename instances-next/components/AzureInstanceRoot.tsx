@@ -36,7 +36,7 @@ const osOptions: [string, string][] = [
 export default function AzureInstanceRoot({ allOfInstanceType, compressedInstance, description, bestOfVariants, rainbowTable, regions }: AzureInstanceRootProps) {
     return (
         <MarketingWrapper azure={true}>
-            <main className="my-4 px-4 max-w-screen-lg">
+            <main className="my-4 px-4 max-w-screen-lg not-md:w-screen">
                 <InstanceBreadcrumbs crumbs={[
                     { name: "Azure", href: "/azure" },
                     { name: "VM", href: "/azure" },
