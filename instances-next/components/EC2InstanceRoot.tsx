@@ -70,7 +70,7 @@ export default function EC2InstanceRoot({
                         useSpotMin={false}
                     />
                     <VantageDemo
-                        link="hhttps://www.vantage.sh/lp/aws-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar"
+                        link="https://www.vantage.sh/lp/aws-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar"
                     />
                     <FamilySize
                         allOfInstanceType={allOfInstanceType}
