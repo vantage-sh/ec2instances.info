@@ -1,6 +1,6 @@
-import { EC2Instance } from "@/types";
-
-export default function makeRainbowTable(instances: EC2Instance[]) {
+export default function makeRainbowTable<
+    Instance extends { pricing: Record<string, Record<string, any>> },
+>(instances: Instance[]) {
     // Pass 1: Get all the keys.
     const pricingSet = new Set<string>();
     for (const instance of instances) {
@@ -59,11 +59,11 @@ export default function makeRainbowTable(instances: EC2Instance[]) {
                         for (const [key, value] of Object.entries(
                             pricing[region][platform].reserved || {},
                         )) {
+                            // @ts-expect-error: We know what to expect here.
                             reserved.push([rainbowTable.indexOf(key), value]);
                         }
                         kv.push([keyIndex, reserved]);
                     } else {
-                        // @ts-expect-error: Doing some dangerous type stuff here.
                         kv.push([keyIndex, pricing[region][platform][key]]);
                     }
                 }

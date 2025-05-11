@@ -1,7 +1,7 @@
 import type { Pricing } from "@/types";
 
 export default function processRainbowTable<
-    Instance extends { pricing: Pricing },
+    Instance extends { pricing: Record<string, Record<string, any>> },
 >(pricingRainbowTable: string[], instance: Instance) {
     // @ts-expect-error: This is intentionally the wrong type.
     const pricing: [

@@ -4,7 +4,7 @@ import type { AzureInstance } from "@/utils/colunnData/azure";
 import processRainbowTable from "@/utils/processRainbowTable";
 import { useMemo } from "react";
 
-function Calculator({ instances, regions }: { instances: AzureInstance, regions: Record<string, string> }) {
+function Calculator({ instance, regions }: { instance: AzureInstance, regions: Record<string, string> }) {
     // TODO: Implement the calculator
     return null;
 }
@@ -16,15 +16,14 @@ type AzurePricingCalculatorProps = {
 };
 
 export default function AzurePricingCalculator({ rainbowTable, compressedInstance, regions }: AzurePricingCalculatorProps) {
-    const instances = useMemo(() => {
+    const instance = useMemo(() => {
         if (!Array.isArray(compressedInstance.pricing)) return compressedInstance;
-        // @ts-expect-error: Close enough for our purposes
-        return processRainbowTable(rainbowTable, compressedInstance) as AzureInstance;
+        return processRainbowTable(rainbowTable, compressedInstance);
     }, [rainbowTable, compressedInstance]);
 
     return (
         <Calculator
-            instances={instances}
+            instance={instance}
             regions={regions}
         />
     );

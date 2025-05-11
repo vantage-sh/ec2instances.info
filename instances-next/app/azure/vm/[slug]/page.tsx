@@ -178,13 +178,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     );
     const bestOfVariants = bestAzureInstanceForEachVariant(allOfVariant, instance);
 
-    // @ts-expect-error: The EC2 handler is similar enough for compression
     const compressedInstance = makeRainbowTable([{ ...instance }]);
 
     return (
         <AzureInstanceRoot
             rainbowTable={compressedInstance[0] as string[]}
-            // @ts-expect-error: The EC2 handler is similar enough for compression
             compressedInstance={compressedInstance[1] as AzureInstance}
             allOfInstanceType={allOfInstanceType}
             regions={regions}
