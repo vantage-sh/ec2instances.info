@@ -1,6 +1,5 @@
 {
-    "name": "instances-next",
-    "version": "0.1.0",
+    "name": "instances",
     "private": true,
     "scripts": {
         "init": "tsx utils/compressData.ts",

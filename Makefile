@@ -1,3 +1,13 @@
+.DEFAULT_GOAL := all
+.PHONY: fetch-data next
+
+fetch-data:
+	./fetch_data.sh
+
+next:
+	cd next && ~/.nvm/nvm.sh install && ~/.nvm/nvm.sh use && npm ci && npm run build
+	cp -r next/out/ www/
+
 package:
 	python scripts/package.py
 	pip install -e .
@@ -7,7 +17,7 @@ pypi: package
 
 publish: package pypi
 
-format: black prettier nixpkgs-fmt
+format: black prettier
 
 black:
 	black .
@@ -15,5 +25,4 @@ black:
 prettier:
 	prettier --write .
 
-nixpkgs-fmt:
-	nixpkgs-fmt .
+all: fetch-data next pypi

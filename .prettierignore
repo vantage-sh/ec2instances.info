@@ -3,5 +3,5 @@
 result/
 env/
 bootstrap/
-instances.json
-index.html
+www
+!www/azure/instances-specs.json

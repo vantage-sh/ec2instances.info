@@ -11,8 +11,7 @@ ec2instances
 .vscode
 .direnv
 .mypy_cache
-www/index.html
+www
+!www/azure/instances-specs.json
 result
 .cache
-.sass-cache/
-*.style.css.map

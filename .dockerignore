@@ -2,3 +2,5 @@ Dockerfile
 .travis*
 .git*
 .dockerignore
+www
+next

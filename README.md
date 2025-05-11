@@ -95,8 +95,6 @@ python3 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
 invoke build
-invoke serve
-open http://localhost:8080
 deactivate # to exit virtualenv
 ```
 
@@ -115,7 +113,6 @@ This won't work for data and API changes but for front-end it should serve you w
 - Python with virtualenv
 - [Invoke](http://www.pyinvoke.org/)
 - [Boto](http://boto.readthedocs.org/en/latest/)
-- [Mako](http://www.makotemplates.org/)
 - [lxml](http://lxml.de/)
 
 ## Tips for Developing Locally
