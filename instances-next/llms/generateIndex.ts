@@ -1,5 +1,5 @@
 import { raw, urlInject } from "@/utils/urlInject";
-import { getEc2Families, getRdsFamilies, getElasticacheFamilies, getOpensearchFamilies, redshiftInstances, ] getAzureFamilies } from "./loadedData";
+import { getEc2Families, getRdsFamilies, getElasticacheFamilies, getOpensearchFamilies, redshiftInstances,  getAzureFamilies } from "./loadedData";
 import { awsIndexes } from "./generateAwsIndexes";
 import { opensearchIndexes } from "./generateOpensearchIndexes";
 import { azureIndexes } from "./generateAzureIndexes";
