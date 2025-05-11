@@ -67,7 +67,7 @@ export default function TopNav() {
                 {navItems.map((item) => (
                     <div className="flex items-center justify-start gap-4 relative top-1.5 ml-2" key={item.label}>
                         <Link className="font-medium text-gray-6 text-sm" href={item.href}>{item.label}</Link>
-                        <div className="flex items-center justify-start gap-4 rounded-md rounded-b-none bg-white/40 p-1 pb-0">
+                        <div className="flex items-center justify-start gap-4 rounded-md rounded-b-none bg-black/30 p-1 pb-0">
                             {item.children &&
                                 item.children.map((child) => (
                                     <Link className={`font-normal text-sm px-2 py-1 pb-2 rounded rounded-b-none ${currentPath === child.href || currentPath.includes(child.label.toLowerCase()) ? "bg-white text-black font-semibold" : "text-gray-6"}`} key={child.label} href={child.href}>{child.label}</Link>
