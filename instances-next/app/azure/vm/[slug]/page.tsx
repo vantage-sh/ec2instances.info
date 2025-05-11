@@ -2,6 +2,8 @@ import { AzureInstance } from "@/utils/colunnData/azure";
 import { load } from "js-yaml";
 import { readFile } from "fs/promises";
 import formatAzureInstanceType from "@/utils/formatAzureInstanceType";
+import makeRainbowTable from "@/utils/makeRainbowTable";
+import AzureInstanceRoot from "@/components/AzureInstanceRoot";
 
 export const dynamic = "force-static";
 
@@ -83,7 +85,111 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
 }
 
+function findNearestInstanceMutatesNoCleanup(
+    instances: AzureInstance[],
+    closestTo: AzureInstance,
+) {
+    instances.push(closestTo);
+    instances.sort((a, b) => {
+        // Sort by CPU, memory, and then GPU.
+        if (a.vcpu !== b.vcpu) {
+            return a.vcpu - b.vcpu;
+        }
+        if (a.memory !== b.memory) {
+            return a.memory - b.memory;
+        }
+        return (a.GPU || 0) - (b.GPU || 0);
+    });
+    const ourInstance = instances.indexOf(closestTo);
+    const left = instances[ourInstance - 1];
+    const right = instances[ourInstance + 1];
+    if (left && right) {
+        // Try and find one equality here with the closest instance.
+        if (
+            left.vcpu === closestTo.vcpu ||
+            left.memory === closestTo.memory ||
+            (left.GPU || 0) === (closestTo.GPU || 0)
+        ) {
+            return left;
+        }
+        if (
+            right.vcpu === closestTo.vcpu ||
+            right.memory === closestTo.memory ||
+            (right.GPU || 0) === (closestTo.GPU || 0)
+        ) {
+            return right;
+        }
+
+        // If this isn't possible, return the best of the two.
+        return left.vcpu === right.vcpu && left.memory === right.memory
+            ? left
+            : right;
+    }
+    return left || right;
+}
+
+function bestAzureInstanceForEachVariant(
+    instances: AzureInstance[],
+    closestTo: AzureInstance,
+) {
+    const variants: Map<string, AzureInstance | AzureInstance[]> = new Map();
+    for (const instance of instances) {
+        const itype = instance.instance_type.split("-", 2)[0];
+        let a = variants.get(itype);
+        if (!a) {
+            a = [];
+            variants.set(itype, a);
+        }
+        (a as AzureInstance[]).push(instance);
+    }
+
+    for (const [itype, instances] of variants.entries()) {
+        if ((instances as AzureInstance[]).includes(closestTo)) {
+            variants.set(itype, closestTo);
+        }
+        const best = findNearestInstanceMutatesNoCleanup(
+            instances as AzureInstance[],
+            closestTo,
+        );
+        variants.set(itype, best);
+    }
+
+    const o: { [key: string]: string } = {};
+    for (const [itype, instance] of variants.entries()) {
+        o[itype] = (instance as AzureInstance).instance_type;
+    }
+    return o;
+}
+
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-    const { instance, regions, description } = await handleParams(params);
-    return null;
+    const { instances, instance, regions, description } = await handleParams(params);
+    const [itype] = instance.instance_type.split("-", 2);
+    const allOfInstanceType = instances
+        .filter((i) => i.instance_type.startsWith(`${itype}-`) || i.instance_type === itype)
+        .map((i) => ({
+            name: i.instance_type,
+            cpus: i.vcpu,
+            memory: i.memory || "N/A",
+        }));
+
+    const variant = itype.slice(0, 1);
+    const allOfVariant = instances.filter((i) =>
+        i.instance_type.startsWith(variant),
+    );
+    const bestOfVariants = bestAzureInstanceForEachVariant(allOfVariant, instance);
+
+    // @ts-expect-error: The EC2 handler is similar enough for compression
+    const compressedInstance = makeRainbowTable([{ ...instance }]);
+
+    return (
+        <AzureInstanceRoot
+            rainbowTable={compressedInstance[0] as string[]}
+            // @ts-expect-error: The EC2 handler is similar enough for compression
+            compressedInstance={compressedInstance[1] as AzureInstance}
+            allOfInstanceType={allOfInstanceType}
+            regions={regions}
+            description={description}
+            bestOfVariants={bestOfVariants}
+        />
+    );
 }

@@ -1,5 +1,5 @@
 import { Pricing } from "@/types";
-import { AllOfInstanceType, EC2FamilySizes } from "./EC2FamilySize";
+import { AllOfInstanceType, FamilySize } from "./FamilySize";
 import { Region } from "@/types";
 import AWSPricingSelector from "./EC2PricingCalculator";
 
@@ -59,7 +59,7 @@ export default function HalfEC2Root<Instance extends { instance_type: string; pr
                     lessPricingFlexibility={true}
                     storeOsNameRatherThanId={false}
                 />
-                <EC2FamilySizes
+                <FamilySize
                     allOfInstanceType={allOfInstanceType}
                     instanceName={instance.instance_type}
                     pathPrefix={pathPrefix}

@@ -10,7 +10,7 @@ export type AllOfInstanceType = {
     memory: string | number;
 }[];
 
-export function EC2FamilySizes({
+export function FamilySize({
     allOfInstanceType,
     instanceName,
     pathPrefix,

@@ -1,12 +1,11 @@
 import { EC2Instance, Region } from "@/types";
-import { useMemo } from "react";
-import { Server } from "lucide-react";
-import Link from "next/link";
-import { AllOfInstanceType, EC2FamilySizes } from "./EC2FamilySize";
+import { AllOfInstanceType, FamilySize } from "./FamilySize";
 import AWSPricingSelector from "@/components/EC2PricingCalculator";
 import * as tablesGenerator from "@/utils/ec2TablesGenerator";
 import InstanceDataView from "./InstanceDataView";
 import InstanceBreadcrumbs from "./InstanceBreadcrumbs";
+import InstanceVariants from "./InstanceVariants";
+
 interface InstanceRootProps {
     rainbowTable: string[];
     compressedInstance: EC2Instance;
@@ -23,49 +22,6 @@ interface InstanceRootProps {
     lessPricingFlexibility: boolean;
     tablePath: string;
     storeOsNameRatherThanId: boolean;
-}
-
-function InstanceVariants({
-    bestOfVariants,
-    pathPrefix,
-}: {
-    bestOfVariants: { [key: string]: string };
-    pathPrefix: string;
-}) {
-    const keys = useMemo(
-        () => Object.keys(bestOfVariants).sort((a, b) => a.localeCompare(b)),
-        [bestOfVariants],
-    );
-
-    return (
-        <section>
-            <h3 className="flex items-center gap-2">
-                <Server className="w-4 h-4 inline-block my-auto" /> Instance
-                Variants
-            </h3>
-            <table className="mt-2 w-full text-sm">
-                <thead>
-                    <tr className="border-r border-gray-200">
-                        <th className="text-left pb-1">Variant</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {keys.map((key) => (
-                        <tr key={key} className="odd:bg-gray-100">
-                            <td className="border border-gray-200 p-1">
-                                <Link
-                                    className="text-purple-1 hover:text-purple-0"
-                                    href={`${pathPrefix}/${bestOfVariants[key]}`}
-                                >
-                                    {key}
-                                </Link>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </section>
-    );
 }
 
 export default function EC2InstanceRoot({
@@ -101,7 +57,7 @@ export default function EC2InstanceRoot({
                         lessPricingFlexibility={lessPricingFlexibility}
                         storeOsNameRatherThanId={storeOsNameRatherThanId}
                     />
-                    <EC2FamilySizes
+                    <FamilySize
                         allOfInstanceType={allOfInstanceType}
                         instanceName={compressedInstance.instance_type}
                         pathPrefix={pathPrefix}
