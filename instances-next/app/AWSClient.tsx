@@ -86,7 +86,7 @@ export default function AWSClient<
     const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
     return (
-        <main className="h-screen flex flex-col">
+        <main className="h-[calc(100vh-3rem)] flex flex-col">
             <DoMigration atomKey={props.columnAtomKey} />
             <Filters
                 columnAtomKey={props.columnAtomKey}
