@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := all
-.PHONY: fetch-data next
+.PHONY: fetch-data next deploy-staging deploy-production
 
 clean:
 	mv www/azure/instances-specs.json specs.json.tmp
@@ -12,7 +12,7 @@ fetch-data:
 
 next:
 	docker run -e NEXT_PUBLIC_URL -e DENY_ROBOTS_TXT -v $(shell pwd):/app -w /app --rm -it node:$(shell cat next/.nvmrc | tr -d 'v')-alpine sh -c 'cd next && npm ci && npm run build'
-	cp -r next/out/ www/
+	cp -a next/out/. www/
 
 package:
 	docker build -t ec2instances-scraper -f Dockerfile.python .
@@ -23,8 +23,12 @@ pypi-upload:
 	python3 setup.py sdist bdist_wheel upload
 
 deploy-staging:
-	
+	cd deployment && npm ci && npm run start
 	wrangler deploy -e staging
+
+deploy-production:
+	cd deployment && npm ci && npm run start
+	wrangler deploy
 
 black:
 	docker build -t ec2instances-format -f Dockerfile.format .

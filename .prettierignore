@@ -11,3 +11,5 @@ next/public/
 next/.next/
 next/build/
 next/next-env.d.ts
+.wrangler
+deployment/node_modules

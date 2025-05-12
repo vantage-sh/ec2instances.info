@@ -1,0 +1,14 @@
+{
+    "private": true,
+    "scripts": {
+        "start": "tsx index.ts"
+    },
+    "dependencies": {
+        "@aws-sdk/client-s3": "^3.806.0",
+        "mime": "^4.0.7",
+        "tsx": "^4.19.4"
+    },
+    "devDependencies": {
+        "@types/node": "^22.15.17"
+    }
+}

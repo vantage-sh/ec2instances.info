@@ -13,7 +13,14 @@ export default {
         }
 
         // Get the path.
-        let path = url.pathname.substring(1);
+        let path;
+        try {
+            path = decodeURIComponent(url.pathname.substring(1));
+        } catch (e) {
+            return new Response("Invalid path", {
+                status: 400,
+            });
+        }
         if (path === "index.html") {
             // Redirect to root
             return Response.redirect(new URL("/", request.url), 301);
@@ -58,7 +65,7 @@ export default {
         const headers = new Headers();
         asset.writeHttpMetadata(headers);
         headers.set("etag", asset.httpEtag);
-        headers.append("Cache-Control", "s-maxage=3600");
+        headers.append("Cache-Control", "s-maxage=2629746");
         const response = new Response(asset.body, {
             headers,
         });
