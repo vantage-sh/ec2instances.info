@@ -1,22 +1,16 @@
-name: lint
-
-on:
-    push:
-        branches:
-            - master
-    pull_request:
-        branches:
-            - master
-    workflow_dispatch:
+name: Lint
+on: push
 
 jobs:
     black:
-        runs-on: ubuntu-latest
+        name: Black
+        runs-on: ubuntu-22.04
         steps:
             - uses: actions/checkout@v2
             - uses: jpetrucciani/black-check@master
     prettier:
-        runs-on: ubuntu-latest
+        name: Prettier
+        runs-on: ubuntu-22.04
         steps:
             - uses: actions/checkout@v2
             - uses: actions/cache@v4
@@ -25,6 +19,6 @@ jobs:
                   key: ${{ runner.os }}-npm-prettier
                   restore-keys: |
                       ${{ runner.os }}-npm-
-            - run: npm install -g prettier@2.6.2
+            - run: npm install -g prettier@3.5.3
             - run: |-
                   prettier --check .

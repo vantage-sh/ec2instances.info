@@ -1,5 +1,5 @@
 FROM python:3.13-alpine
 RUN pip install black
 RUN apk add --no-cache nodejs npm
-RUN npm install -g prettier
+RUN npm install -g prettier@3.5.3
 WORKDIR /app
