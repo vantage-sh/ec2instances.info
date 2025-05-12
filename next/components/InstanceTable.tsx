@@ -40,8 +40,8 @@ export type AtomKeyWhereInstanceIs<Instance> = {
     [AtomKey in keyof typeof columnData]: (typeof columnData)[AtomKey]["columnsGen"] extends (
         ...args: any[]
     ) => ColumnDef<Instance>[]
-    ? AtomKey
-    : never;
+        ? AtomKey
+        : never;
 }[keyof typeof columnData];
 
 interface InstanceTableProps<Instance> {
@@ -240,8 +240,8 @@ export default function InstanceTable<
         // Add padding to the table to account for the missing instances.
         totalHeight +=
             (totalHeight / instances.length) *
-            (instanceCount - instances.length)
-            + 79;
+                (instanceCount - instances.length) +
+            79;
     }
     const paddingTop = virtualRows.length > 0 ? virtualRows[0].start : 0;
     const paddingBottom =
@@ -355,11 +355,11 @@ export default function InstanceTable<
                                                             return old.map(
                                                                 (s) =>
                                                                     s.id ===
-                                                                        header.id
+                                                                    header.id
                                                                         ? {
-                                                                            ...s,
-                                                                            desc: value,
-                                                                        }
+                                                                              ...s,
+                                                                              desc: value,
+                                                                          }
                                                                         : s,
                                                             );
                                                         }
@@ -377,11 +377,15 @@ export default function InstanceTable<
                                                 !compareOn && (
                                                     <div className="absolute bottom-2 left-2 right-2">
                                                         <IndividualColumnFilter
-                                                            gSettings={gSettings}
+                                                            gSettings={
+                                                                gSettings
+                                                            }
                                                             gSettingsFullMutations={
                                                                 gSettingsFullMutations
                                                             }
-                                                            column={header.column}
+                                                            column={
+                                                                header.column
+                                                            }
                                                         />
                                                     </div>
                                                 )}

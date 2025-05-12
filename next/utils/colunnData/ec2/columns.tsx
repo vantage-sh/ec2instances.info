@@ -186,7 +186,10 @@ export const columnsGen = (
                 return (
                     <span className="block @container">
                         {value} vCPUs{" "}
-                        <abbr className="hidden @[150px]:inline-block" title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs.">
+                        <abbr
+                            className="hidden @[150px]:inline-block"
+                            title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs."
+                        >
                             <a
                                 href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html"
                                 target="_blank"
@@ -195,7 +198,10 @@ export const columnsGen = (
                                 {hours}h {minutes}m burst
                             </a>
                         </abbr>
-                        <abbr className="visible @[150px]:hidden" title={`For a ${hours}h ${minutes}m burst`}>
+                        <abbr
+                            className="visible @[150px]:hidden"
+                            title={`For a ${hours}h ${minutes}m burst`}
+                        >
                             <ClockFadingIcon className="inline-block w-3 h-3 stroke-purple-1" />
                         </abbr>
                     </span>
@@ -351,8 +357,13 @@ export const columnsGen = (
             const storageType = `${storage.nvme_ssd ? "NVMe " : ""}${storage.ssd ? "SSD" : "HDD"}`;
             if (storage.devices > 1) {
                 const text = `${totalSize} ${storage.size_unit}`;
-                const detail = `${storage.devices}×${storage.size} ${storage.size_unit} ${storageType}`
-                return (<span title={`${text} (${detail})`}>{text} <span className="text-xs text-gray-2">({detail})</span></span>);
+                const detail = `${storage.devices}×${storage.size} ${storage.size_unit} ${storageType}`;
+                return (
+                    <span title={`${text} (${detail})`}>
+                        {text}{" "}
+                        <span className="text-xs text-gray-2">({detail})</span>
+                    </span>
+                );
             }
             return `${totalSize} ${storage.size_unit} ${storageType}`;
         },
