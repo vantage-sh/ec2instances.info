@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update > /dev/null
-RUN apt-get install -y python3 pip locales curl libxml2-dev libxslt-dev > /dev/null
+RUN apt-get install -y git python3 pip locales curl libxml2-dev libxslt-dev > /dev/null
 RUN python3 -m pip install -U pip setuptools
 RUN locale-gen "en_US.UTF-8"
 
@@ -14,5 +14,3 @@ COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
 COPY . .
-
-CMD invoke build

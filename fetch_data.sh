@@ -14,4 +14,4 @@ fi
 
 mkdir -p www/azure www/aws www/cache www/opensearch www/redshift www/rds
 docker build -t ec2instances-scraper -f Dockerfile.python .
-docker run -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN -v $(pwd)/www:/opt/app/www --rm -it ec2instances-scraper
+docker run -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN -v $(pwd)/www:/opt/app/www --rm -it ec2instances-scraper invoke build

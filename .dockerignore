@@ -4,3 +4,4 @@ Dockerfile
 .dockerignore
 www
 next
+ec2instances/

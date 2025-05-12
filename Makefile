@@ -1,21 +1,26 @@
 .DEFAULT_GOAL := all
 .PHONY: fetch-data next
 
+clean:
+	mv www/azure/instances-specs.json specs.json.tmp
+	rm -rf www
+	mkdir -p www/azure
+	mv specs.json.tmp www/azure/instances-specs.json
+
 fetch-data:
 	./fetch_data.sh
 
 next:
-	cd next && ~/.nvm/nvm.sh install && ~/.nvm/nvm.sh use && npm ci && npm run build
+	docker run -e NEXT_PUBLIC_URL -v $(shell pwd):/app -w /app --rm -it node:$(shell cat next/.nvmrc | tr -d 'v')-alpine sh -c 'cd next && npm ci && npm run build'
 	cp -r next/out/ www/
 
 package:
-	python scripts/package.py
-	pip install -e .
+	docker build -t ec2instances-scraper -f Dockerfile.python .
+	mkdir -p ec2instances
+	docker run -v $(shell pwd)/www:/opt/app/www -v $(shell pwd)/.git:/opt/app/.git -v $(shell pwd)/ec2instances:/opt/app/ec2instances --rm -it ec2instances-scraper sh -c 'git config --global --add safe.directory /opt/app && python3 scripts/package.py'
 
 pypi: package
 	python setup.py sdist bdist_wheel upload
-
-publish: package pypi
 
 format: black prettier
 
@@ -25,4 +30,6 @@ black:
 prettier:
 	prettier --write .
 
-all: fetch-data next pypi
+all: clean fetch-data next package
+
+publish: all pypi
