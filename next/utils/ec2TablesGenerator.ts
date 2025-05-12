@@ -302,8 +302,8 @@ export function rds(instance: Omit<EC2Instance, "pricing">): Table[] {
             rows: [
                 {
                     name: "Generation",
-                    // @ts-expect-error: RDS specific
                     children:
+                        // @ts-expect-error: RDS specific
                         instance.currentGeneration === "Yes"
                             ? "current"
                             : "previous",
@@ -409,8 +409,8 @@ export function elasticache(instance: Omit<EC2Instance, "pricing">): Table[] {
             rows: [
                 {
                     name: "Generation",
-                    // @ts-expect-error: RDS specific
                     children:
+                        // @ts-expect-error: RDS specific
                         instance.currentGeneration === "Yes"
                             ? "current"
                             : "previous",
