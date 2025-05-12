@@ -11,7 +11,7 @@ fetch-data:
 	./fetch_data.sh
 
 next:
-	docker run -e NEXT_PUBLIC_URL -v $(shell pwd):/app -w /app --rm -it node:$(shell cat next/.nvmrc | tr -d 'v')-alpine sh -c 'cd next && npm ci && npm run build'
+	docker run -e NEXT_PUBLIC_URL -e DENY_ROBOTS_TXT -v $(shell pwd):/app -w /app --rm -it node:$(shell cat next/.nvmrc | tr -d 'v')-alpine sh -c 'cd next && npm ci && npm run build'
 	cp -r next/out/ www/
 
 package:
@@ -21,6 +21,10 @@ package:
 
 pypi-upload:
 	python3 setup.py sdist bdist_wheel upload
+
+deploy-staging:
+	
+	wrangler deploy -e staging
 
 black:
 	docker build -t ec2instances-format -f Dockerfile.format .

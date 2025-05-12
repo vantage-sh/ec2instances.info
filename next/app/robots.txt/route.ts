@@ -8,6 +8,12 @@ function urlGen(path: string) {
 }
 
 export async function GET() {
+    if (process.env.DENY_ROBOTS_TXT === "1") {
+        return new Response("User-agent: *\nDisallow: /", {
+            headers: { "Content-Type": "text/plain" },
+        });
+    }
+
     const robots = `User-agent: *
 Allow: /
 Sitemap: ${urlGen("/sitemap_index.xml")}

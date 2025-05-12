@@ -1,0 +1,22 @@
+{
+    "name": "ec2instances-worker",
+    "compatibility_date": "2025-05-12",
+    "main": "worker.js",
+    "r2_buckets": [
+        {
+            "bucket_name": "ec2instances-assets-prod",
+            "binding": "ASSETS",
+        },
+    ],
+    "env": {
+        "staging": {
+            "name": "ec2instances-worker-staging",
+            "r2_buckets": [
+                {
+                    "bucket_name": "ec2instances-assets-staging",
+                    "binding": "ASSETS",
+                },
+            ],
+        },
+    },
+}
