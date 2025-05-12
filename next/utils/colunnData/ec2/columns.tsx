@@ -1,7 +1,7 @@
 import { CostDuration, EC2Instance, Pricing, PricingUnit } from "@/types";
 import { ColumnDef, Row } from "@tanstack/react-table";
 import Link from "next/link";
-
+import { ClockFadingIcon } from "lucide-react";
 interface Storage {
     devices: number;
     size: number;
@@ -126,7 +126,7 @@ export const columnsGen = (
     {
         accessorKey: "memory",
         header: "Instance Memory",
-        size: 160,
+        size: 170,
         id: "memory",
         sortingFn: "alphanumeric",
         filterFn: gt,
@@ -174,7 +174,7 @@ export const columnsGen = (
     {
         accessorKey: "vCPU",
         header: "vCPUs",
-        size: 100,
+        size: 110,
         id: "vCPU",
         filterFn: gt,
         cell: (info) => {
@@ -184,15 +184,19 @@ export const columnsGen = (
                 const hours = Math.floor(burstMinutes / 60);
                 const minutes = burstMinutes % 60;
                 return (
-                    <span>
+                    <span className="block @container">
                         {value} vCPUs{" "}
-                        <abbr title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs.">
+                        <abbr className="hidden @[150px]:inline-block" title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs.">
                             <a
                                 href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html"
                                 target="_blank"
+                                className="text-xs"
                             >
-                                for a {hours}h {minutes}m burst
+                                {hours}h {minutes}m burst
                             </a>
+                        </abbr>
+                        <abbr className="visible @[150px]:hidden" title={`For a ${hours}h ${minutes}m burst`}>
+                            <ClockFadingIcon className="inline-block w-3 h-3 stroke-purple-1" />
                         </abbr>
                     </span>
                 );
@@ -322,7 +326,7 @@ export const columnsGen = (
     {
         accessorKey: "storage",
         header: "Instance Storage",
-        size: 150,
+        size: 160,
         id: "storage",
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.storage;
@@ -346,7 +350,9 @@ export const columnsGen = (
             const totalSize = storage.devices * storage.size;
             const storageType = `${storage.nvme_ssd ? "NVMe " : ""}${storage.ssd ? "SSD" : "HDD"}`;
             if (storage.devices > 1) {
-                return `${totalSize} ${storage.size_unit} (${storage.devices} * ${storage.size} ${storage.size_unit} ${storageType})`;
+                const text = `${totalSize} ${storage.size_unit}`;
+                const detail = `${storage.devices}×${storage.size} ${storage.size_unit} ${storageType}`
+                return (<span title={`${text} (${detail})`}>{text} <span className="text-xs text-gray-2">({detail})</span></span>);
             }
             return `${totalSize} ${storage.size_unit} ${storageType}`;
         },
@@ -417,7 +423,7 @@ export const columnsGen = (
     {
         accessorKey: "network_performance",
         header: "Network Performance",
-        size: 190,
+        size: 200,
         id: "network_performance",
         sortingFn: "alphanumeric",
         cell: (info) => info.getValue() as string,

@@ -38,6 +38,7 @@ body {
 
 .index-table th {
     @apply whitespace-nowrap overflow-hidden text-ellipsis text-left relative bg-gray-6 border-gray-5 border-b;
+    @apply sticky top-0 z-20;
 }
 
 .index-table tbody {

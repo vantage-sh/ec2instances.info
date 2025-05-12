@@ -40,8 +40,8 @@ export type AtomKeyWhereInstanceIs<Instance> = {
     [AtomKey in keyof typeof columnData]: (typeof columnData)[AtomKey]["columnsGen"] extends (
         ...args: any[]
     ) => ColumnDef<Instance>[]
-        ? AtomKey
-        : never;
+    ? AtomKey
+    : never;
 }[keyof typeof columnData];
 
 interface InstanceTableProps<Instance> {
@@ -240,7 +240,8 @@ export default function InstanceTable<
         // Add padding to the table to account for the missing instances.
         totalHeight +=
             (totalHeight / instances.length) *
-            (instanceCount - instances.length);
+            (instanceCount - instances.length)
+            + 79;
     }
     const paddingTop = virtualRows.length > 0 ? virtualRows[0].start : 0;
     const paddingBottom =
@@ -301,9 +302,9 @@ export default function InstanceTable<
                             <tr key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => (
                                     <th key={header.id}>
-                                        <div className="mx-2 mt-2 flex items-center justify-between">
+                                        <div className="relative overflow-hidden border-y border-r border-gray-5 bg-gray-6">
                                             <span
-                                                className="px-2 cursor-pointer select-none flex-1 hover:bg-gray-5"
+                                                className="block w-full h-[70px] px-2 pt-1 pr-5 cursor-pointer select-none overflow-hidden whitespace-nowrap text-ellipsis text-left flex-1 hover:bg-gray-5"
                                                 onClick={() =>
                                                     setSorting((old) => [
                                                         {
@@ -354,11 +355,11 @@ export default function InstanceTable<
                                                             return old.map(
                                                                 (s) =>
                                                                     s.id ===
-                                                                    header.id
+                                                                        header.id
                                                                         ? {
-                                                                              ...s,
-                                                                              desc: value,
-                                                                          }
+                                                                            ...s,
+                                                                            desc: value,
+                                                                        }
                                                                         : s,
                                                             );
                                                         }
@@ -372,19 +373,19 @@ export default function InstanceTable<
                                                     })
                                                 }
                                             />
+                                            {header.column.getCanFilter() &&
+                                                !compareOn && (
+                                                    <div className="absolute bottom-2 left-2 right-2">
+                                                        <IndividualColumnFilter
+                                                            gSettings={gSettings}
+                                                            gSettingsFullMutations={
+                                                                gSettingsFullMutations
+                                                            }
+                                                            column={header.column}
+                                                        />
+                                                    </div>
+                                                )}
                                         </div>
-                                        {header.column.getCanFilter() &&
-                                            !compareOn && (
-                                                <div className="mt-2 mb-2 ml-2 mr-3">
-                                                    <IndividualColumnFilter
-                                                        gSettings={gSettings}
-                                                        gSettingsFullMutations={
-                                                            gSettingsFullMutations
-                                                        }
-                                                        column={header.column}
-                                                    />
-                                                </div>
-                                            )}
                                     </th>
                                 ))}
                                 <th></th>
@@ -403,7 +404,7 @@ export default function InstanceTable<
                                             style={{
                                                 height: `${totalHeight}px`,
                                             }}
-                                            className="absolute z-10 right-0 w-1 cursor-col-resize select-none touch-none hover:bg-gray-100 active:bg-blue-200"
+                                            className="absolute z-20 top-[-79px] right-0 w-1 cursor-col-resize select-none touch-none hover:bg-gray-200 active:bg-blue-200"
                                         />
                                     </td>
                                 ))}
