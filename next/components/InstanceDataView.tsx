@@ -59,16 +59,14 @@ function Row({ name, children, help, helpText }: RowProps) {
                     </span>
                 )}
             </td>
-            <td className="py-1.5 px-3 border border-gray-200 w-1/2">{children}</td>
+            <td className="py-1.5 px-3 border border-gray-200 w-1/2">
+                {children}
+            </td>
         </tr>
     );
 }
 
-export default function InstanceDataView({
-    tables,
-}: {
-    tables: TableType[];
-}) {
+export default function InstanceDataView({ tables }: { tables: TableType[] }) {
     return (
         <article>
             <h2 className="font-bold flex items-center gap-2">

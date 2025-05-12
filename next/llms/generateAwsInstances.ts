@@ -81,7 +81,14 @@ const niceNames: Record<string, string> = {
     Valkey: "Valkey",
 };
 
-function generateInstanceMarkdown(description: string, hideOs: boolean, pathPrefix: string, hideConvertible: boolean, instance: EC2Instance, generateTables: (instance: EC2Instance) => Table[]) {
+function generateInstanceMarkdown(
+    description: string,
+    hideOs: boolean,
+    pathPrefix: string,
+    hideConvertible: boolean,
+    instance: EC2Instance,
+    generateTables: (instance: EC2Instance) => Table[],
+) {
     const tables = generateTables(instance);
 
     function renderData(
@@ -121,9 +128,14 @@ function generateInstanceMarkdown(description: string, hideOs: boolean, pathPref
     const tableMdFrags: Map<string, string> = new Map();
     for (const [region, platforms] of Object.entries(instance.pricing)) {
         const rows: string[][] = [
-            tableColumns.map(([, columnName]) => columnName).filter(
-                (column) => (!column.includes("Convertible") && !column.includes("Spot")) || !hideConvertible,
-            ),
+            tableColumns
+                .map(([, columnName]) => columnName)
+                .filter(
+                    (column) =>
+                        (!column.includes("Convertible") &&
+                            !column.includes("Spot")) ||
+                        !hideConvertible,
+                ),
         ];
 
         const platformsSorted = Object.keys(platforms).sort((a, b) =>
@@ -131,11 +143,15 @@ function generateInstanceMarkdown(description: string, hideOs: boolean, pathPref
         );
         for (const platform of platformsSorted) {
             if (hideOs && !niceNames[platform]) continue;
-            const row = tableColumns.map(([column]) =>
-                (column.includes("Convertible") || column.includes("spot")) && hideConvertible ?
-                    null :
-                    renderData(region, platform, column),
-            ).filter((r) => r !== null);
+            const row = tableColumns
+                .map(([column]) =>
+                    (column.includes("Convertible") ||
+                        column.includes("spot")) &&
+                    hideConvertible
+                        ? null
+                        : renderData(region, platform, column),
+                )
+                .filter((r) => r !== null);
             rows.push(row);
         }
 
@@ -173,7 +189,14 @@ ${regions.map((region) => urlInject`- [${raw(region)}](${`${pathPrefix}/${instan
     };
 }
 
-export default async function generateAwsInstances(generateDescription: (instance: EC2Instance) => string, hideOs: boolean, pathPrefix: string, hideConvertible: boolean, instancesPromise: Promise<EC2Instance[]>, generateTables: (instance: EC2Instance) => Table[]) {
+export default async function generateAwsInstances(
+    generateDescription: (instance: EC2Instance) => string,
+    hideOs: boolean,
+    pathPrefix: string,
+    hideConvertible: boolean,
+    instancesPromise: Promise<EC2Instance[]>,
+    generateTables: (instance: EC2Instance) => Table[],
+) {
     const instances = await instancesPromise;
     const instancesMarkdown = new Map<
         string,
@@ -183,7 +206,14 @@ export default async function generateAwsInstances(generateDescription: (instanc
         }
     >();
     for (const instance of instances) {
-        const data = generateInstanceMarkdown(generateDescription(instance), hideOs, pathPrefix, hideConvertible, instance, generateTables);
+        const data = generateInstanceMarkdown(
+            generateDescription(instance),
+            hideOs,
+            pathPrefix,
+            hideConvertible,
+            instance,
+            generateTables,
+        );
         instancesMarkdown.set(instance.instance_type, data);
     }
     return instancesMarkdown;

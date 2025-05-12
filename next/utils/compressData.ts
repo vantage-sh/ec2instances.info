@@ -101,7 +101,9 @@ async function compressAzureInstances() {
     );
     await writeFile(
         "./public/azure-instance-ids.json",
-        JSON.stringify(instances.map((i: { instance_type: string }) => i.instance_type)),
+        JSON.stringify(
+            instances.map((i: { instance_type: string }) => i.instance_type),
+        ),
     );
     await writeFile(
         "./public/azure-instances-hash.txt",

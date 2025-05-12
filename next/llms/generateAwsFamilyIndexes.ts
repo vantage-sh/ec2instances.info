@@ -1,7 +1,11 @@
 import { EC2Instance } from "@/types";
 import { generateIndexMarkdown } from "./generateAwsIndexes";
 
-export default async function generateAwsFamilyIndexes(pathPrefix: string, split: (s: string) => string, instancesPromise: Promise<EC2Instance[]>) {
+export default async function generateAwsFamilyIndexes(
+    pathPrefix: string,
+    split: (s: string) => string,
+    instancesPromise: Promise<EC2Instance[]>,
+) {
     const instances = await instancesPromise;
     const instanceFamilyMap = new Map<string, EC2Instance[]>();
     for (const instance of instances) {

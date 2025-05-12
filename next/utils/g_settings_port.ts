@@ -94,7 +94,9 @@ export default class GSettings {
         private notRoot: boolean,
     ) {
         this.key = this.azure ? "azure_settings" : "aws_settings";
-        this.settings = this.azure ? { ...g_settings_azure_default } : { ...g_settings_aws_default };
+        this.settings = this.azure
+            ? { ...g_settings_azure_default }
+            : { ...g_settings_aws_default };
         const stored = localStorage.getItem(this.key);
         if (stored) {
             try {
@@ -127,9 +129,15 @@ export default class GSettings {
             // Migration for the old savings plan term.
             const savingsPlanTerm = params.get("savings_plan_term");
             if (savingsPlanTerm) {
-                this.settings.reserved_term = savingsPlanTerm.replace("Savings", "Standard");
+                this.settings.reserved_term = savingsPlanTerm.replace(
+                    "Savings",
+                    "Standard",
+                );
             }
-            this.settings.reserved_term = this.settings.reserved_term.replace("noUpfront", "allUpfront");
+            this.settings.reserved_term = this.settings.reserved_term.replace(
+                "noUpfront",
+                "allUpfront",
+            );
         }
 
         if (params.has("filter")) {
@@ -327,7 +335,9 @@ export default class GSettings {
 
     clear() {
         this.filterData = "";
-        this.settings = this.azure ? { ...g_settings_azure_default } : { ...g_settings_aws_default };
+        this.settings = this.azure
+            ? { ...g_settings_azure_default }
+            : { ...g_settings_aws_default };
         this._write();
     }
 }

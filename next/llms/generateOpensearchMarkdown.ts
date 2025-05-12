@@ -7,10 +7,14 @@ function generateDescription(instance: Instance, ondemandCost: string) {
 }
 
 export default function generateOpensearchMarkdown(instance: Instance) {
-    const tableData = generateOpensearchTables(instance).map((t) => `## ${t.name}
+    const tableData = generateOpensearchTables(instance)
+        .map(
+            (t) => `## ${t.name}
 
 ${t.rows.map((r) => `- ${r.name}: ${r.children}`).join("\n")}
-`).join("\n");
+`,
+        )
+        .join("\n");
 
     return `# ${instance.instance_type}
 

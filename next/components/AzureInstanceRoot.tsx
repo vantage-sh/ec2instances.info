@@ -33,15 +33,27 @@ const osOptions: [string, string][] = [
     ["windows", "Windows"],
 ];
 
-export default function AzureInstanceRoot({ allOfInstanceType, compressedInstance, description, bestOfVariants, rainbowTable, regions }: AzureInstanceRootProps) {
+export default function AzureInstanceRoot({
+    allOfInstanceType,
+    compressedInstance,
+    description,
+    bestOfVariants,
+    rainbowTable,
+    regions,
+}: AzureInstanceRootProps) {
     return (
         <MarketingWrapper azure={true}>
             <main className="my-4 px-4 max-w-screen-lg not-md:w-screen">
-                <InstanceBreadcrumbs crumbs={[
-                    { name: "Azure", href: "/azure" },
-                    { name: "VM", href: "/azure" },
-                    { name: compressedInstance.instance_type, href: `/azure/vm/${compressedInstance.instance_type}` },
-                ]} />
+                <InstanceBreadcrumbs
+                    crumbs={[
+                        { name: "Azure", href: "/azure" },
+                        { name: "VM", href: "/azure" },
+                        {
+                            name: compressedInstance.instance_type,
+                            href: `/azure/vm/${compressedInstance.instance_type}`,
+                        },
+                    ]}
+                />
                 <div className="md:flex gap-8">
                     <div className="md:max-w-sm">
                         <h1 className="text-2xl font-bold mb-2">
@@ -64,9 +76,7 @@ export default function AzureInstanceRoot({ allOfInstanceType, compressedInstanc
                             defaultRegion="us-east"
                             useSpotMin={true}
                         />
-                        <VantageDemo
-                            link="https://www.vantage.sh/lp/azure-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar"
-                        />
+                        <VantageDemo link="https://www.vantage.sh/lp/azure-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar" />
                         <FamilySize
                             allOfInstanceType={allOfInstanceType}
                             instanceName={compressedInstance.instance_type}

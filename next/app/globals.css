@@ -19,7 +19,7 @@
     --color-purple-4: #f1c9ff;
     --color-purple-5: #f9e6ff;
     --color-purple-6: #fcf4ff;
-    --color-purple-nu: #6742D6;
+    --color-purple-nu: #6742d6;
 }
 
 body {
@@ -347,10 +347,10 @@ body {
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+    * {
+        @apply border-border outline-ring/50;
     }
-  body {
-    @apply bg-background text-foreground;
+    body {
+        @apply bg-background text-foreground;
     }
 }

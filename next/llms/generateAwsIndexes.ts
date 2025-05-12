@@ -157,7 +157,11 @@ export const awsIndexes = [
     },
 ];
 
-export function generateIndexMarkdown(pathPrefix: string, name: string, instances: EC2Instance[]) {
+export function generateIndexMarkdown(
+    pathPrefix: string,
+    name: string,
+    instances: EC2Instance[],
+) {
     return `# ${name}
 
 ${instances
@@ -172,7 +176,10 @@ ${instances
 `;
 }
 
-export async function generateAwsIndexes(pathPrefix: string, instancesPromise: Promise<EC2Instance[]>) {
+export async function generateAwsIndexes(
+    pathPrefix: string,
+    instancesPromise: Promise<EC2Instance[]>,
+) {
     const instances = await instancesPromise;
     const buckets = new Map<string, EC2Instance[]>();
     for (const instance of instances) {

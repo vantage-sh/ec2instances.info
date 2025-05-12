@@ -15,7 +15,10 @@ interface Platform {
     spot_min?: string | number;
 }
 
-function dollarString(value: string | number | undefined, duration: CostDuration) {
+function dollarString(
+    value: string | number | undefined,
+    duration: CostDuration,
+) {
     if (value === undefined) return "N/A";
     const n = Number(value);
     if (isNaN(n)) return "N/A";
@@ -83,7 +86,9 @@ function Calculator({
             const platform = query.get("platform");
             if (platform) {
                 if (storeOsNameRatherThanId) {
-                    const osByName = osOptions.find(([, name]) => name === platform);
+                    const osByName = osOptions.find(
+                        ([, name]) => name === platform,
+                    );
                     if (osByName) setPlatformState(osByName[0]);
                 } else {
                     const osById = osOptions.find(([id]) => id === platform);
@@ -161,7 +166,10 @@ function Calculator({
         if (!removeSpot) {
             a.push({
                 label: "Spot",
-                value: dollarString(useSpotMin ? root?.spot_min : root?.spot_avg, duration),
+                value: dollarString(
+                    useSpotMin ? root?.spot_min : root?.spot_avg,
+                    duration,
+                ),
             });
         }
         a.push(
@@ -181,14 +189,7 @@ function Calculator({
             },
         );
         return a;
-    }, [
-        pricing,
-        region,
-        platform,
-        duration,
-        pricingType,
-        removeSpot,
-    ]);
+    }, [pricing, region, platform, duration, pricingType, removeSpot]);
 
     const localZones = useMemo(() => {
         return Object.entries(regions.local_zone).sort((a, b) => {
@@ -212,9 +213,7 @@ function Calculator({
                 <div className="flex gap-4 w-full flex-wrap">
                     {prices.map(({ label, value }) => (
                         <div key={label} className="flex-col">
-                            <p className="font-bold">
-                                {value}
-                            </p>
+                            <p className="font-bold">{value}</p>
                             <p className="text-xs text-gray-3">{label}</p>
                         </div>
                     ))}
@@ -275,11 +274,11 @@ function Calculator({
                     className={selectStyling}
                     onChange={(e) => setPricingType(e.target.value)}
                 >
-                    {reservedTermOptions.map(([value, label]) =>
+                    {reservedTermOptions.map(([value, label]) => (
                         <option key={value} value={value}>
                             {label}
                         </option>
-                    )}
+                    ))}
                 </select>
             </div>
         </>

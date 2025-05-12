@@ -299,13 +299,17 @@ export const columnsGen = (
             id: "linux-savings",
             sortingFn: (rowA, rowB) => {
                 const valueA = calculateCost(
-                    rowA.original.pricing?.[selectedRegion]?.linux?.reserved?.[savingsKey],
+                    rowA.original.pricing?.[selectedRegion]?.linux?.reserved?.[
+                        savingsKey
+                    ],
                     rowA.original,
                     pricingUnit,
                     costDuration,
                 );
                 const valueB = calculateCost(
-                    rowB.original.pricing?.[selectedRegion]?.linux?.reserved?.[savingsKey],
+                    rowB.original.pricing?.[selectedRegion]?.linux?.reserved?.[
+                        savingsKey
+                    ],
                     rowB.original,
                     pricingUnit,
                     costDuration,
@@ -314,7 +318,8 @@ export const columnsGen = (
             },
             cell: (info) => {
                 const pricing = info.getValue() as AzurePricing | undefined;
-                const price = pricing?.[selectedRegion]?.linux?.reserved?.[savingsKey];
+                const price =
+                    pricing?.[selectedRegion]?.linux?.reserved?.[savingsKey];
                 return calculateAndFormatCost(
                     price,
                     info.row.original,
@@ -329,13 +334,17 @@ export const columnsGen = (
             id: "linux-reserved",
             sortingFn: (rowA, rowB) => {
                 const valueA = calculateCost(
-                    rowA.original.pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm],
+                    rowA.original.pricing?.[selectedRegion]?.linux?.reserved?.[
+                        reservedTerm
+                    ],
                     rowA.original,
                     pricingUnit,
                     costDuration,
                 );
                 const valueB = calculateCost(
-                    rowB.original.pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm],
+                    rowB.original.pricing?.[selectedRegion]?.linux?.reserved?.[
+                        reservedTerm
+                    ],
                     rowB.original,
                     pricingUnit,
                     costDuration,
@@ -344,8 +353,14 @@ export const columnsGen = (
             },
             cell: (info) => {
                 const pricing = info.getValue() as AzurePricing | undefined;
-                const price = pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm];
-                return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+                const price =
+                    pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm];
+                return calculateAndFormatCost(
+                    price,
+                    info.row.original,
+                    pricingUnit,
+                    costDuration,
+                );
             },
         },
         {
@@ -370,7 +385,12 @@ export const columnsGen = (
             cell: (info) => {
                 const pricing = info.getValue() as AzurePricing | undefined;
                 const price = pricing?.[selectedRegion]?.linux?.spot_min;
-                return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+                return calculateAndFormatCost(
+                    price,
+                    info.row.original,
+                    pricingUnit,
+                    costDuration,
+                );
             },
         },
         {
@@ -409,13 +429,15 @@ export const columnsGen = (
             id: "windows-savings",
             sortingFn: (rowA, rowB) => {
                 const valueA = calculateCost(
-                    rowA.original.pricing?.[selectedRegion]?.windows?.reserved?.[savingsKey],
+                    rowA.original.pricing?.[selectedRegion]?.windows
+                        ?.reserved?.[savingsKey],
                     rowA.original,
                     pricingUnit,
                     costDuration,
                 );
                 const valueB = calculateCost(
-                    rowB.original.pricing?.[selectedRegion]?.windows?.reserved?.[savingsKey],
+                    rowB.original.pricing?.[selectedRegion]?.windows
+                        ?.reserved?.[savingsKey],
                     rowB.original,
                     pricingUnit,
                     costDuration,
@@ -424,7 +446,8 @@ export const columnsGen = (
             },
             cell: (info) => {
                 const pricing = info.getValue() as AzurePricing | undefined;
-                const price = pricing?.[selectedRegion]?.windows?.reserved?.[savingsKey];
+                const price =
+                    pricing?.[selectedRegion]?.windows?.reserved?.[savingsKey];
                 return calculateAndFormatCost(
                     price,
                     info.row.original,
@@ -439,13 +462,15 @@ export const columnsGen = (
             id: "windows-reserved",
             sortingFn: (rowA, rowB) => {
                 const valueA = calculateCost(
-                    rowA.original.pricing?.[selectedRegion]?.windows?.reserved?.[reservedTerm],
+                    rowA.original.pricing?.[selectedRegion]?.windows
+                        ?.reserved?.[reservedTerm],
                     rowA.original,
                     pricingUnit,
                     costDuration,
                 );
                 const valueB = calculateCost(
-                    rowB.original.pricing?.[selectedRegion]?.windows?.reserved?.[reservedTerm],
+                    rowB.original.pricing?.[selectedRegion]?.windows
+                        ?.reserved?.[reservedTerm],
                     rowB.original,
                     pricingUnit,
                     costDuration,
@@ -454,8 +479,16 @@ export const columnsGen = (
             },
             cell: (info) => {
                 const pricing = info.getValue() as AzurePricing | undefined;
-                const price = pricing?.[selectedRegion]?.windows?.reserved?.[reservedTerm];
-                return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+                const price =
+                    pricing?.[selectedRegion]?.windows?.reserved?.[
+                        reservedTerm
+                    ];
+                return calculateAndFormatCost(
+                    price,
+                    info.row.original,
+                    pricingUnit,
+                    costDuration,
+                );
             },
         },
         {
@@ -480,8 +513,13 @@ export const columnsGen = (
             cell: (info) => {
                 const pricing = info.getValue() as AzurePricing | undefined;
                 const price = pricing?.[selectedRegion]?.windows?.spot_min;
-                return calculateAndFormatCost(price, info.row.original, pricingUnit, costDuration);
+                return calculateAndFormatCost(
+                    price,
+                    info.row.original,
+                    pricingUnit,
+                    costDuration,
+                );
             },
         },
-    ];    
+    ];
 };

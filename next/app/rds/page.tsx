@@ -7,7 +7,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "Amazon RDS Instance Comparison",
-    description: "A free and easy-to-use tool for comparing RDS Instance features and prices.",
+    description:
+        "A free and easy-to-use tool for comparing RDS Instance features and prices.",
 };
 
 export default async function RDS() {

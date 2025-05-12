@@ -14,10 +14,7 @@ import {
     useCompareOn,
     columnVisibilityAtoms,
 } from "@/state";
-import {
-    pricingUnitOptions,
-    durationOptions,
-} from "@/utils/dataMappings";
+import { pricingUnitOptions, durationOptions } from "@/utils/dataMappings";
 import { useMemo } from "react";
 import { RowSelectionState } from "@tanstack/react-table";
 import * as columnData from "@/utils/colunnData";

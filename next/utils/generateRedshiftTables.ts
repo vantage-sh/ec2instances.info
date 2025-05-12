@@ -72,7 +72,10 @@ export default function generateRedshiftTables(instance: Instance): Table[] {
             rows: [
                 {
                     name: "Generation",
-                    children: instance.currentGeneration === "Yes" ? "current" : "previous",
+                    children:
+                        instance.currentGeneration === "Yes"
+                            ? "current"
+                            : "previous",
                     bgStyled: true,
                 },
                 {

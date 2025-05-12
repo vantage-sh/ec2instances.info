@@ -191,14 +191,17 @@ export function useSelectedRegion() {
 
 export function usePricingUnit(ecuRename?: string) {
     const [v, set] = useGSettingsValue("pricingUnit", "instance");
-    return [v === ecuRename?.toLowerCase() ? "ecu" : v, (v: PricingUnit) => {
-        if (v === "ecu" && ecuRename) {
-            // @ts-expect-error: This technically isn't spec compliant, but we catch it.
-            set(ecuRename.toLowerCase());
-        } else {
-            set(v);
-        }
-    }] as const;
+    return [
+        v === ecuRename?.toLowerCase() ? "ecu" : v,
+        (v: PricingUnit) => {
+            if (v === "ecu" && ecuRename) {
+                // @ts-expect-error: This technically isn't spec compliant, but we catch it.
+                set(ecuRename.toLowerCase());
+            } else {
+                set(v);
+            }
+        },
+    ] as const;
 }
 
 export function useDuration() {

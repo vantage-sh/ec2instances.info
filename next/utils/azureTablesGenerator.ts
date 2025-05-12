@@ -5,7 +5,9 @@ function round(value: number) {
     return Math.round(value * 100) / 100;
 }
 
-export default function azureTablesGenerator(instance: Omit<AzureInstance, "pricing">): Table[] {
+export default function azureTablesGenerator(
+    instance: Omit<AzureInstance, "pricing">,
+): Table[] {
     return [
         {
             name: "Compute",

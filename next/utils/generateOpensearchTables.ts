@@ -21,7 +21,9 @@ export default function generateOpensearchTables(instance: Instance): Table[] {
                 },
                 {
                     name: "Memory per vCPU (GiB)",
-                    children: round(Number(instance.memory) / Number(instance.vcpu)),
+                    children: round(
+                        Number(instance.memory) / Number(instance.vcpu),
+                    ),
                 },
             ],
         },
@@ -41,7 +43,10 @@ export default function generateOpensearchTables(instance: Instance): Table[] {
             rows: [
                 {
                     name: "Generation",
-                    children: instance.currentGeneration === "Yes" ? "current" : "previous",
+                    children:
+                        instance.currentGeneration === "Yes"
+                            ? "current"
+                            : "previous",
                     bgStyled: true,
                 },
                 {

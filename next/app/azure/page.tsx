@@ -9,18 +9,23 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "Azure VM Comparison",
-    description: "A free and easy-to-use tool for comparing Azure VM features and prices.",
+    description:
+        "A free and easy-to-use tool for comparing Azure VM features and prices.",
 };
 
 export default async function Azure() {
-    const regions = load(await readFile("../meta/regions_azure2.yaml", "utf-8")) as {
+    const regions = load(
+        await readFile("../meta/regions_azure2.yaml", "utf-8"),
+    ) as {
         [key: string]: string;
     };
 
     const data = await readFile("./public/first-100-azure-instances.msgpack");
     const compressedInstances = decode(data) as [string[], ...AzureInstance[]];
 
-    const instanceCount = Number(await readFile("./public/azure-instance-count.txt"));
+    const instanceCount = Number(
+        await readFile("./public/azure-instance-count.txt"),
+    );
     const instancesHash = await readFile(
         "./public/azure-instances-hash.txt",
         "utf-8",

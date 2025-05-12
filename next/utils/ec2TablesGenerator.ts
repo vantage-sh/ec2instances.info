@@ -303,7 +303,10 @@ export function rds(instance: Omit<EC2Instance, "pricing">): Table[] {
                 {
                     name: "Generation",
                     // @ts-expect-error: RDS specific
-                    children: instance.currentGeneration === "Yes" ? "current" : "previous",
+                    children:
+                        instance.currentGeneration === "Yes"
+                            ? "current"
+                            : "previous",
                     bgStyled: true,
                 },
                 {
@@ -350,7 +353,11 @@ function elasticacheSpecificRows(instance: ElasticacheExt): Row[] {
         },
         {
             name: "Cache Max Buffer Size (MiB)",
-            children: handleSize(instance["redis6.x-client-output-buffer-limit-replica-hard-limit"]),
+            children: handleSize(
+                instance[
+                    "redis6.x-client-output-buffer-limit-replica-hard-limit"
+                ],
+            ),
         },
         {
             name: "Redis Max Clients",
@@ -403,7 +410,10 @@ export function elasticache(instance: Omit<EC2Instance, "pricing">): Table[] {
                 {
                     name: "Generation",
                     // @ts-expect-error: RDS specific
-                    children: instance.currentGeneration === "Yes" ? "current" : "previous",
+                    children:
+                        instance.currentGeneration === "Yes"
+                            ? "current"
+                            : "previous",
                     bgStyled: true,
                 },
                 {

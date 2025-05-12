@@ -110,10 +110,7 @@ export default function InstanceTable<
                 value: gSettings.minVcpus,
             },
         ];
-        if (
-            columnAtomKey === "ec2" ||
-            columnAtomKey === "azure"
-        ) {
+        if (columnAtomKey === "ec2" || columnAtomKey === "azure") {
             a.push(
                 {
                     id: "memory_per_vcpu",

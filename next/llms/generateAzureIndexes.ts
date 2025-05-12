@@ -155,11 +155,16 @@ export const azureIndexes = [
     {
         name: "instances more than $8/hr on demand",
         slug: "more-than-8-hr-on-demand",
-        filter: (instance: AzureInstance) => Number(calculatePrice(instance)) > 8,
+        filter: (instance: AzureInstance) =>
+            Number(calculatePrice(instance)) > 8,
     },
 ];
 
-export function generateIndexMarkdown(pathPrefix: string, name: string, instances: AzureInstance[]) {
+export function generateIndexMarkdown(
+    pathPrefix: string,
+    name: string,
+    instances: AzureInstance[],
+) {
     return `# ${name}
 
 ${instances

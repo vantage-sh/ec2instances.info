@@ -6,7 +6,9 @@ function split(instanceType: string) {
     return instanceTypeParts[0];
 }
 
-export default async function generateOpensearchFamilyIndexes(instancesPromise: Promise<Instance[]>) {
+export default async function generateOpensearchFamilyIndexes(
+    instancesPromise: Promise<Instance[]>,
+) {
     const instances = await instancesPromise;
     const instanceFamilyMap = new Map<string, Instance[]>();
     for (const instance of instances) {

@@ -65,7 +65,9 @@ ${instances
 `;
 }
 
-export async function generateOpensearchIndexes(instancesPromise: Promise<Instance[]>) {
+export async function generateOpensearchIndexes(
+    instancesPromise: Promise<Instance[]>,
+) {
     const instances = await instancesPromise;
     const buckets = new Map<string, Instance[]>();
     for (const instance of instances) {

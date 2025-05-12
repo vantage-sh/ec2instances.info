@@ -30,19 +30,19 @@ Ensure that your IAM user has at least the following permissions:
 
 ```json
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:DescribeInstanceTypes",
-        "ec2:DescribeRegions",
-        "pricing:*",
-        "elasticache:DescribeEngineDefaultParameters"
-      ],
-      "Resource": "*"
-    }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeInstanceTypes",
+                "ec2:DescribeRegions",
+                "pricing:*",
+                "elasticache:DescribeEngineDefaultParameters"
+            ],
+            "Resource": "*"
+        }
+    ]
 }
 ```
 

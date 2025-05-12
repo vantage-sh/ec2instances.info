@@ -8,7 +8,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "Amazon OpenSearch, Open-Source Elasticsearch, Instance Comparison",
-    description: "A free and easy-to-use tool for comparing OpenSearch Instance features and prices.",
+    description:
+        "A free and easy-to-use tool for comparing OpenSearch Instance features and prices.",
 };
 
 export default async function OpenSearch() {

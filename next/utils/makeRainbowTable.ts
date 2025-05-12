@@ -29,17 +29,21 @@ export default function makeRainbowTable<
             [
                 // Platform
                 number,
-                [
-                    // Key inside platform
-                    number,
-                    any,
-                ][] | [number, number],
+                (
+                    | [
+                          // Key inside platform
+                          number,
+                          any,
+                      ][]
+                    | [number, number]
+                ),
             ][],
         ][] = [];
         const previousReserved = new Map<string, [number, number]>();
         for (const region in pricing) {
             const regionIndex = rainbowTable.indexOf(region);
-            const platforms: [number, [number, any][] | [number, number]][] = [];
+            const platforms: [number, [number, any][] | [number, number]][] =
+                [];
             for (const platform in pricing[region]) {
                 // Check if we already have a platform with this pricing.
                 const platformIndex = rainbowTable.indexOf(platform);

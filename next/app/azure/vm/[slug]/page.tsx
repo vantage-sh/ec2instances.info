@@ -40,9 +40,10 @@ export async function generateStaticParams() {
 async function handleParams(params: Promise<{ slug: string }>) {
     const { slug } = await params;
     const { instances, regions } = await getData();
-    const instance = instances.find((instance) => instance.instance_type === slug)!;
+    const instance = instances.find(
+        (instance) => instance.instance_type === slug,
+    )!;
 
- 
     return {
         instance,
         instances,
@@ -51,7 +52,11 @@ async function handleParams(params: Promise<{ slug: string }>) {
     };
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
+}) {
     const { description, instance } = await handleParams(params);
     return {
         title: `${instance.pretty_name} pricing and specs - Vantage`,
@@ -135,11 +140,20 @@ function bestAzureInstanceForEachVariant(
     return o;
 }
 
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-    const { instances, instance, regions, description } = await handleParams(params);
+export default async function Page({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
+}) {
+    const { instances, instance, regions, description } =
+        await handleParams(params);
     const [itype] = instance.instance_type.split("-", 2);
     const allOfInstanceType = instances
-        .filter((i) => i.instance_type.startsWith(`${itype}-`) || i.instance_type === itype)
+        .filter(
+            (i) =>
+                i.instance_type.startsWith(`${itype}-`) ||
+                i.instance_type === itype,
+        )
         .map((i) => ({
             name: i.instance_type,
             cpus: i.vcpu,
@@ -150,7 +164,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     const allOfVariant = instances.filter((i) =>
         i.instance_type.startsWith(variant),
     );
-    const bestOfVariants = bestAzureInstanceForEachVariant(allOfVariant, instance);
+    const bestOfVariants = bestAzureInstanceForEachVariant(
+        allOfVariant,
+        instance,
+    );
 
     const compressedInstance = makeRainbowTable([{ ...instance }]);
 

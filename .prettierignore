@@ -5,3 +5,9 @@ env/
 bootstrap/
 www
 !www/azure/instances-specs.json
+next/node_modules/
+next/out/
+next/public/
+next/.next/
+next/build/
+next/next-env.d.ts

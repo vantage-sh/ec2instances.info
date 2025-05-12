@@ -29,7 +29,10 @@ const niceNames: Record<string, string> = {
     linux: "Linux",
 };
 
-function generateInstanceMarkdown(description: string, instance: AzureInstance) {
+function generateInstanceMarkdown(
+    description: string,
+    instance: AzureInstance,
+) {
     const tables = azureTablesGenerator(instance);
 
     function renderData(

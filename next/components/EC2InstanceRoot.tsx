@@ -48,11 +48,16 @@ export default function EC2InstanceRoot({
     return (
         <MarketingWrapper azure={false}>
             <main className="my-4 px-4 max-w-screen-lg not-md:w-screen">
-                <InstanceBreadcrumbs crumbs={[
-                    { name: "AWS", href: "/" },
-                    { name: typeName, href: tablePath },
-                    { name: compressedInstance.instance_type, href: `/${compressedInstance.instance_type}` },
-                ]} />
+                <InstanceBreadcrumbs
+                    crumbs={[
+                        { name: "AWS", href: "/" },
+                        { name: typeName, href: tablePath },
+                        {
+                            name: compressedInstance.instance_type,
+                            href: `/${compressedInstance.instance_type}`,
+                        },
+                    ]}
+                />
                 <div className="md:flex gap-8">
                     <div className="md:max-w-sm">
                         <h1 className="text-2xl font-bold mb-2">
@@ -71,9 +76,7 @@ export default function EC2InstanceRoot({
                             defaultRegion="us-east-1"
                             useSpotMin={false}
                         />
-                        <VantageDemo
-                            link="https://www.vantage.sh/lp/aws-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar"
-                        />
+                        <VantageDemo link="https://www.vantage.sh/lp/aws-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar" />
                         <FamilySize
                             allOfInstanceType={allOfInstanceType}
                             instanceName={compressedInstance.instance_type}
@@ -85,7 +88,8 @@ export default function EC2InstanceRoot({
                             pathPrefix={pathPrefix}
                         />
                         <p className="mt-6">
-                            Having trouble making sense of your EC2 costs? Check out{" "}
+                            Having trouble making sense of your EC2 costs? Check
+                            out{" "}
                             <a
                                 target="_blank"
                                 className="text-purple-1 hover:text-purple-0 underline"
@@ -98,7 +102,9 @@ export default function EC2InstanceRoot({
                     </div>
                     <div className="flex-grow md:mt-0 mt-4">
                         <InstanceDataView
-                            tables={tablesGenerator[generatorKey](compressedInstance)}
+                            tables={tablesGenerator[generatorKey](
+                                compressedInstance,
+                            )}
                         />
                     </div>
                 </div>
