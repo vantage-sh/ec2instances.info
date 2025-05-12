@@ -192,22 +192,34 @@ export default function InstanceTable<
                     )
                     .join(",") + "\n";
         }
-        for (const row of table.getRowModel().rows) {
-            csv +=
-                row
-                    .getVisibleCells()
-                    .map((c) => csvEscape(String(c.getContext().getValue())))
-                    .join(",") + "\n";
-        }
-        if (typeof window !== "undefined") {
-            const filename = `${document.title}.csv`;
-            const blob = new Blob([csv], { type: "text/csv" });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = filename;
-            a.click();
-        }
+        import("react-dom/server").then(({ renderToString }) => {
+            const el = document.createElement("div");
+            for (const row of table.getRowModel().rows) {
+                csv +=
+                    row
+                        .getVisibleCells()
+                        .map((c) => {
+                            const v = renderToString(
+                                flexRender(
+                                    c.column.columnDef.cell,
+                                    c.getContext(),
+                                ),
+                            );
+                            el.innerHTML = v;
+                            return csvEscape(el.textContent ?? "");
+                        })
+                        .join(",") + "\n";
+            }
+            if (typeof window !== "undefined") {
+                const filename = `${document.title}.csv`;
+                const blob = new Blob([csv], { type: "text/csv" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = filename;
+                a.click();
+            }
+        });
     });
 
     const tableContainerRef = useRef<HTMLDivElement>(null);
@@ -412,7 +424,11 @@ export default function InstanceTable<
                                 <tr
                                     onClick={() => handleRow(row)}
                                     key={row.id}
-                                    className={` ${row.getIsSelected() ? "bg-purple-200" : ""}`}
+                                    className={` ${
+                                        row.getIsSelected()
+                                            ? "bg-purple-200"
+                                            : ""
+                                    }`}
                                 >
                                     {row.getVisibleCells().map((cell) => (
                                         <td key={cell.id}>
