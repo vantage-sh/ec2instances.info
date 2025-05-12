@@ -20,7 +20,7 @@ package:
 	docker run -v $(shell pwd)/www:/opt/app/www -v $(shell pwd)/.git:/opt/app/.git -v $(shell pwd)/ec2instances:/opt/app/ec2instances --rm -it ec2instances-scraper sh -c 'git config --global --add safe.directory /opt/app && python3 scripts/package.py'
 
 pypi-upload:
-	python setup.py sdist bdist_wheel upload
+	python3 setup.py sdist bdist_wheel upload
 
 black:
 	docker build -t ec2instances-format -f Dockerfile.format .
