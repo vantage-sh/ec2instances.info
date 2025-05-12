@@ -1,0 +1,5 @@
+FROM python:3.13-alpine
+RUN pip install black
+RUN apk add --no-cache nodejs npm
+RUN npm install -g prettier
+WORKDIR /app

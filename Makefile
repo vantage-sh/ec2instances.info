@@ -22,14 +22,16 @@ package:
 pypi-upload:
 	python setup.py sdist bdist_wheel upload
 
-format: black prettier
-
 black:
-	black .
+	docker build -t ec2instances-format -f Dockerfile.format .
+	docker run -v $(shell pwd):/app --rm -it ec2instances-format black .
 
 prettier:
-	prettier --write .
+	docker build -t ec2instances-format -f Dockerfile.format .
+	docker run -v $(shell pwd):/app --rm -it ec2instances-format prettier --write .
+
+format: black prettier
 
 all: clean fetch-data next package
 
-publish: all pypi
+publish: all pypi-upload
