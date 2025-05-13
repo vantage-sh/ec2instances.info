@@ -68,40 +68,51 @@ export default function FilterDropdown({
                         aria-expanded={open}
                         className="w-full justify-between text-black"
                     >
-                        {icon && <i className={`icon-${icon} text-white me-1`}></i>}
+                        {icon && (
+                            <i className={`icon-${icon} text-white me-1`}></i>
+                        )}
                         {selectedOption?.label || "Select..."}
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-full p-0">
                     <Command>
-                        {Object.entries(groupedOptions).map(([group, groupOptions]) => (
-                            <CommandGroup key={group} heading={group !== "Other" ? group : undefined}>
-                                {groupOptions.map((option: Option) => (
-                                    <CommandItem
-                                        key={option.value}
-                                        value={option.value}
-                                        onSelect={() => {
-                                            onChange(option.value);
-                                            setOpen(false);
-                                        }}
-                                    >
-                                        <Check
-                                            className={cn(
-                                                "mr-2 h-4 w-4",
-                                                value === option.value ? "opacity-100" : "opacity-0"
+                        {Object.entries(groupedOptions).map(
+                            ([group, groupOptions]) => (
+                                <CommandGroup
+                                    key={group}
+                                    heading={
+                                        group !== "Other" ? group : undefined
+                                    }
+                                >
+                                    {groupOptions.map((option: Option) => (
+                                        <CommandItem
+                                            key={option.value}
+                                            value={option.value}
+                                            onSelect={() => {
+                                                onChange(option.value);
+                                                setOpen(false);
+                                            }}
+                                        >
+                                            <Check
+                                                className={cn(
+                                                    "mr-2 h-4 w-4",
+                                                    value === option.value
+                                                        ? "opacity-100"
+                                                        : "opacity-0",
+                                                )}
+                                            />
+                                            <span>{option.label}</span>
+                                            {option.group && (
+                                                <span className="text-gray-500 text-xs ml-2">
+                                                    {option.value}
+                                                </span>
                                             )}
-                                        />
-                                        <span>{option.label}</span>
-                                        {option.group && (
-                                            <span className="text-gray-500 text-xs ml-2">
-                                                {option.value}
-                                            </span>
-                                        )}
-                                    </CommandItem>
-                                ))}
-                            </CommandGroup>
-                        ))}
+                                        </CommandItem>
+                                    ))}
+                                </CommandGroup>
+                            ),
+                        )}
                     </Command>
                 </PopoverContent>
             </Popover>

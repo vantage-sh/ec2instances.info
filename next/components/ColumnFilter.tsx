@@ -6,18 +6,18 @@ import type * as columnData from "@/utils/colunnData";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+    CommandSeparator,
 } from "@/components/ui/command";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
 } from "@/components/ui/popover";
 
 interface ColumnOption<Key extends keyof typeof columnData> {
@@ -40,7 +40,7 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
     const [searchTerm, setSearchTerm] = React.useState("");
 
     const filteredColumns = columns.filter((column) =>
-        column.label.toLowerCase().includes(searchTerm.toLowerCase())
+        column.label.toLowerCase().includes(searchTerm.toLowerCase()),
     );
 
     const handleSelectAll = () => {
@@ -77,8 +77,8 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                 </PopoverTrigger>
                 <PopoverContent sideOffset={-36} align="start" className="p-0">
                     <Command>
-                        <CommandInput 
-                            placeholder="Search columns..." 
+                        <CommandInput
+                            placeholder="Search columns..."
                             value={searchTerm}
                             onValueChange={setSearchTerm}
                         />
@@ -92,14 +92,16 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                                         onSelect={() => {
                                             onColumnVisibilityChange(
                                                 column.key,
-                                                !column.visible
+                                                !column.visible,
                                             );
                                         }}
                                     >
                                         <Check
                                             className={cn(
                                                 "mr-2 h-4 w-4",
-                                                column.visible ? "opacity-100" : "opacity-0"
+                                                column.visible
+                                                    ? "opacity-100"
+                                                    : "opacity-0",
                                             )}
                                         />
                                         {column.label}
@@ -109,12 +111,23 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                         </CommandList>
                     </Command>
                     <div className="flex items-center justify-start gap-2 p-1">
-                                    <Button className="cursor-pointer" onSelect={handleSelectAll} size="sm" variant={"outline"}>
-                                        Select All</Button>
-                                    <Button className="cursor-pointer" 
-                                    onSelect={handleSelectDefaults} size="sm" variant={"outline"}>
-                                        Select Defaults</Button>
-                                </div>
+                        <Button
+                            className="cursor-pointer"
+                            onSelect={handleSelectAll}
+                            size="sm"
+                            variant={"outline"}
+                        >
+                            Select All
+                        </Button>
+                        <Button
+                            className="cursor-pointer"
+                            onSelect={handleSelectDefaults}
+                            size="sm"
+                            variant={"outline"}
+                        >
+                            Select Defaults
+                        </Button>
+                    </div>
                 </PopoverContent>
             </Popover>
         </div>
