@@ -1,6 +1,21 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import * as React from "react";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 interface Option {
     value: string;
@@ -23,122 +38,73 @@ export default function FilterDropdown({
     options,
     icon,
 }: FilterDropdownProps) {
-    const [isOpen, setIsOpen] = useState(false);
-    const [searchTerm, setSearchTerm] = useState("");
-    const dropdownRef = useRef<HTMLDivElement>(null);
+    const [open, setOpen] = React.useState(false);
 
-    useEffect(() => {
-        function handleClickOutside(event: MouseEvent) {
-            if (
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target as Node)
-            ) {
-                setIsOpen(false);
-            }
-        }
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
-
-    const filteredOptions = options.filter((option) => {
-        try {
-            return option.label
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase());
-        } catch (error) {
-            console.error("Error filtering options:", error, option);
-            return "";
-        }
-    });
-
-    const groupedOptions = filteredOptions.reduce(
-        (groups, option) => {
+    const groupedOptions = React.useMemo(() => {
+        type GroupedOptions = Record<string, Option[]>;
+        const initialGroups: GroupedOptions = {};
+        
+        return options.reduce<GroupedOptions>((groups, option) => {
             const group = option.group || "Other";
             if (!groups[group]) {
                 groups[group] = [];
             }
             groups[group].push(option);
             return groups;
-        },
-        {} as Record<string, Option[]>,
-    );
+        }, initialGroups);
+    }, [options]);
 
     const selectedOption = options.find((option) => option.value === value);
 
     return (
-        <div
-            className="relative flex flex-col gap-0.5 justify-center items-start"
-            ref={dropdownRef}
-        >
-            <label className="text-xs text-gray-3 ">{label}</label>
-            <button
-                className="flex items-center justify-start gap-1 bg-white border-0 text-sm font-semibold text-decoration-none"
-                onClick={() => setIsOpen(!isOpen)}
-            >
-                {icon ? (
-                    <i className={`icon-${icon} text-white me-1`}></i>
-                ) : null}
-                <span className="text">
-                    {selectedOption?.label || "Select..."}
-                </span>
-                <span className="caret"></span>
-            </button>
-            {isOpen && (
-                <ul
-                    className="dropdown-menu absolute left-0 top-full mt-1 z-50 bg-white shadow-lg rounded-md min-w-[200px] max-h-[400px] overflow-y-auto"
-                    role="menu"
-                >
-                    <li className="sticky bg-white p-2 top-[-8px]">
-                        <input
-                            type="text"
-                            className="w-full px-2 py-1 border rounded cursor-pointer"
-                            placeholder="Search..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                    </li>
-                    {Object.entries(groupedOptions).map(
-                        ([group, groupOptions]) => (
-                            <div key={group}>
-                                {group !== "Other" && (
-                                    <div className="px-2 py-1 bg-gray-50">
-                                        <span className="font-semibold text-sm">
-                                            {group}
-                                        </span>
-                                    </div>
-                                )}
-                                {groupOptions.map((option) => (
-                                    <li key={option.value}>
-                                        <a
-                                            className={`block px-4 py-2 text-sm hover:bg-gray-100 ${
-                                                option.value === value
-                                                    ? "bg-gray-100 font-medium"
-                                                    : ""
-                                            }`}
-                                            href="#"
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                onChange(option.value);
-                                                setIsOpen(false);
-                                            }}
-                                        >
-                                            <span>{option.label}</span>
-                                            {option.group && (
-                                                <span className="text-gray-500 text-xs ml-2">
-                                                    {option.value}
-                                                </span>
+        <div className="flex flex-col gap-0.5">
+            <label className="text-xs text-gray-3">{label}</label>
+            <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        role="combobox"
+                        aria-expanded={open}
+                        className="w-full justify-between"
+                    >
+                        {icon && <i className={`icon-${icon} text-white me-1`}></i>}
+                        {selectedOption?.label || "Select..."}
+                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-full p-0">
+                    <Command>
+                        {Object.entries(groupedOptions).map(([group, groupOptions]) => (
+                            <CommandGroup key={group} heading={group !== "Other" ? group : undefined}>
+                                {groupOptions.map((option: Option) => (
+                                    <CommandItem
+                                        key={option.value}
+                                        value={option.value}
+                                        onSelect={() => {
+                                            onChange(option.value);
+                                            setOpen(false);
+                                        }}
+                                    >
+                                        <Check
+                                            className={cn(
+                                                "mr-2 h-4 w-4",
+                                                value === option.value ? "opacity-100" : "opacity-0"
                                             )}
-                                        </a>
-                                    </li>
+                                        />
+                                        <span>{option.label}</span>
+                                        {option.group && (
+                                            <span className="text-gray-500 text-xs ml-2">
+                                                {option.value}
+                                            </span>
+                                        )}
+                                    </CommandItem>
                                 ))}
-                            </div>
-                        ),
-                    )}
-                </ul>
-            )}
+                            </CommandGroup>
+                        ))}
+                    </Command>
+                </PopoverContent>
+            </Popover>
         </div>
     );
 }
