@@ -59,7 +59,13 @@ body {
 .index-table tbody td a {
     @apply font-mono;
 }
+.index-table tbody td a[target="_blank"] {
+    @apply text-inherit;
+}
 
+.index-table tbody td abbr {
+    @apply text-xs;
+}
 .index-table tbody tr.resize-row,
 .index-table tbody tr.resize-row td {
     @apply h-0 p-0;

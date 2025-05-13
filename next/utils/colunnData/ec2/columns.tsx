@@ -186,17 +186,13 @@ export const columnsGen = (
                 return (
                     <span className="block @container">
                         {value} vCPUs{" "}
-                        <abbr
-                            className="hidden @[150px]:inline-block"
-                            title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs."
-                        >
-                            <a
+                        <abbr className="hidden @[150px]:inline-block" title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs.">
+                            (<a
                                 href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html"
                                 target="_blank"
-                                className="text-xs"
                             >
                                 {hours}h {minutes}m burst
-                            </a>
+                            </a>)
                         </abbr>
                         <abbr
                             className="visible @[150px]:hidden"
