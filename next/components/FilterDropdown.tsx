@@ -42,16 +42,18 @@ export default function FilterDropdown({
 
     const groupedOptions = React.useMemo(() => {
         type GroupedOptions = Record<string, Option[]>;
-        const initialGroups: GroupedOptions = {};
+        const groups: GroupedOptions = {};
 
-        return options.reduce<GroupedOptions>((groups, option) => {
+        for (const option of options) {
             const group = option.group || "Other";
-            if (!groups[group]) {
-                groups[group] = [];
+            let groupedOptions = groups[group];
+            if (!groupedOptions) {
+                groupedOptions = [];
             }
-            groups[group].push(option);
-            return groups;
-        }, initialGroups);
+            groupedOptions.push(option);
+            groups[group] = groupedOptions;
+        }
+        return groups;
     }, [options]);
 
     const selectedOption = options.find((option) => option.value === value);
