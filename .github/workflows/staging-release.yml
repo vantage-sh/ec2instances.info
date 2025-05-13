@@ -22,6 +22,7 @@ jobs:
                   AWS_ACCESS_KEY_ID: ${{ secrets.DATA_AWS_ACCESS_KEY_ID }}
                   AWS_SECRET_ACCESS_KEY: ${{ secrets.DATA_AWS_SECRET_ACCESS_KEY }}
                   NEXT_PUBLIC_URL: https://${{ secrets.STAGING_HOSTNAME }}/
+                  DENY_ROBOTS_TXT: "1"
 
             - run: make deploy-staging
               env:
