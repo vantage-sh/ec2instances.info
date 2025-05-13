@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := all
-.PHONY: fetch-data next deploy-staging deploy-production
+.PHONY: fetch-data next deploy-staging deploy-production black prettier format all
 
 clean:
 	mv www/azure/instances-specs.json specs.json.tmp
@@ -41,5 +41,3 @@ prettier:
 format: black prettier
 
 all: clean fetch-data next package
-
-publish: all pypi-upload

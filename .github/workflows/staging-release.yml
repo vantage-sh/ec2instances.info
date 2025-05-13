@@ -1,0 +1,56 @@
+name: Staging Release
+concurrency: staging-release
+on:
+    push:
+        branches:
+            - develop
+
+jobs:
+    build:
+        name: Build and Deploy to Staging
+        runs-on: ubuntu-22.04
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: cloudflare/wrangler-action@v3
+              with:
+                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                  accountId: ${{ secrets.DEPLOYMENT_CF_ACCOUNT_ID }}
+
+            - run: make all
+              env:
+                  AWS_ACCESS_KEY_ID: ${{ secrets.DATA_AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.DATA_AWS_SECRET_ACCESS_KEY }}
+                  NEXT_PUBLIC_URL: https://${{ secrets.STAGING_HOSTNAME }}/
+
+            - run: make deploy-staging
+              env:
+                  DEPLOYMENT_CF_BUCKET: ${{ secrets.STAGING_CF_BUCKET }}
+                  DEPLOYMENT_CF_ACCOUNT_ID: ${{ secrets.DEPLOYMENT_CF_ACCOUNT_ID }}
+                  DEPLOYMENT_CF_AWS_ACCESS_KEY_ID: ${{ secrets.STAGING_CF_AWS_ACCESS_KEY_ID }}
+                  DEPLOYMENT_CF_AWS_SECRET_ACCESS_KEY: ${{ secrets.STAGING_CF_AWS_SECRET_ACCESS_KEY }}
+
+            - name: Clear cloudflare cache
+              run: |
+                  curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.STAGING_CF_ZONE_ID }}/purge_cache" \
+                  -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+                  -H "Content-Type: application/json" \
+                  --data '{"hosts":["${{ secrets.STAGING_HOSTNAME }}"]}'
+
+            - name: Success Slack Notify
+              if: ${{ success() }}
+              uses: slackapi/slack-github-action@v1.16.0
+              with:
+                  payload: '{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":":rocket: **${{ env.SERVICE }}** deployed. ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}}]}'
+              env:
+                  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+                  SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
+            - name: Failure Slack Notify
+              if: ${{ failure() }}
+              uses: slackapi/slack-github-action@v1.16.0
+              with:
+                  payload: '{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":":see_no_evil: **${{ env.SERVICE }}** wasn''t deployed. ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}}]}'
+              env:
+                  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+                  SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
