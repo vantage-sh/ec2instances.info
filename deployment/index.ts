@@ -1,8 +1,14 @@
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import {
+    S3Client,
+    PutObjectCommand,
+    GetObjectCommand,
+    GetObjectCommandOutput,
+    NoSuchKey,
+} from "@aws-sdk/client-s3";
 import { join } from "path";
 import fs from "fs/promises";
-import { createReadStream } from "fs";
 import mime from "mime";
+import crypto from "crypto";
 
 function requiresEnv(name: string) {
     const value = process.env[name];
@@ -34,13 +40,21 @@ function contentTypeHandler(filePath: string) {
     return mime.getType(filePath) ?? undefined;
 }
 
+let fileHashes: { [key: string]: string } = {};
+
 async function uploadFile(key: string, filePath: string) {
-    const fileStream = createReadStream(filePath);
+    const file = await fs.readFile(filePath);
+    const hash = crypto.createHash("sha256").update(file).digest("hex");
+    if (fileHashes[key] === hash) {
+        return;
+    }
+    fileHashes[key] = hash;
+
     await s3Client.send(
         new PutObjectCommand({
             Bucket: bucket,
             Key: key,
-            Body: fileStream,
+            Body: file,
             ContentType: contentTypeHandler(filePath),
         }),
     );
@@ -68,7 +82,40 @@ async function uploadFolder(extras: string[]) {
     await Promise.all(promises);
 }
 
-uploadFolder([]).catch((e) => {
+(async () => {
+    // Read file_hashes.json from the bucket.
+    let fileHashesResponse: GetObjectCommandOutput;
+    try {
+        fileHashesResponse = await s3Client.send(
+            new GetObjectCommand({
+                Bucket: bucket,
+                Key: "file_hashes.json",
+            }),
+        );
+        if (fileHashesResponse.Body)
+            fileHashes = JSON.parse(
+                await fileHashesResponse.Body.transformToString(),
+            );
+    } catch (e) {
+        if (e instanceof NoSuchKey) {
+            fileHashes = {};
+        } else {
+            throw e;
+        }
+    }
+
+    // Upload the folder.
+    await uploadFolder([]);
+
+    // Write file_hashes.json to the bucket.
+    await s3Client.send(
+        new PutObjectCommand({
+            Bucket: bucket,
+            Key: "file_hashes.json",
+            Body: JSON.stringify(fileHashes),
+        }),
+    );
+})().catch((e) => {
     console.error(e);
     process.exit(1);
 });
