@@ -11,21 +11,21 @@ fetch-data:
 	./fetch_data.sh
 
 next:
-	docker run -e NEXT_PUBLIC_URL -e DENY_ROBOTS_TXT -v $(shell pwd):/app -w /app --rm -it node:$(shell cat next/.nvmrc | tr -d 'v')-alpine sh -c 'cd next && npm ci && npm run build'
+	docker run -e NEXT_PUBLIC_URL -e DENY_ROBOTS_TXT -v $(shell pwd):/app -w /app --rm -i node:$(shell cat next/.nvmrc | tr -d 'v')-alpine sh -c 'cd next && npm ci && npm run build'
 	cp -a next/out/. www/
 
 package:
 	docker build -t ec2instances-scraper -f Dockerfile.python .
 	mkdir -p ec2instances
-	docker run -v $(shell pwd)/www:/opt/app/www -v $(shell pwd)/.git:/opt/app/.git -v $(shell pwd)/ec2instances:/opt/app/ec2instances --rm -it ec2instances-scraper sh -c 'git config --global --add safe.directory /opt/app && python3 scripts/package.py'
+	docker run -v $(shell pwd)/www:/opt/app/www -v $(shell pwd)/.git:/opt/app/.git -v $(shell pwd)/ec2instances:/opt/app/ec2instances --rm -i ec2instances-scraper sh -c 'git config --global --add safe.directory /opt/app && python3 scripts/package.py'
 
 black:
 	docker build -t ec2instances-format -f Dockerfile.format .
-	docker run -v $(shell pwd):/app --rm -it ec2instances-format black .
+	docker run -v $(shell pwd):/app --rm -i ec2instances-format black .
 
 prettier:
 	docker build -t ec2instances-format -f Dockerfile.format .
-	docker run -v $(shell pwd):/app --rm -it ec2instances-format prettier --write .
+	docker run -v $(shell pwd):/app --rm -i ec2instances-format prettier --write .
 
 format: black prettier
 
