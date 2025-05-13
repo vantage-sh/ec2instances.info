@@ -11,6 +11,8 @@
     },
     "dependencies": {
         "@msgpack/msgpack": "^3.1.1",
+        "@radix-ui/react-dialog": "^1.1.13",
+        "@radix-ui/react-popover": "^1.1.13",
         "@radix-ui/react-separator": "^1.1.6",
         "@radix-ui/react-slot": "^1.2.2",
         "@radix-ui/react-tabs": "^1.1.11",
@@ -20,6 +22,7 @@
         "atomtree": "^1.0.3",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
+        "cmdk": "^1.1.1",
         "js-yaml": "^4.1.0",
         "lucide-react": "^0.507.0",
         "lzma-native": "^8.0.6",
