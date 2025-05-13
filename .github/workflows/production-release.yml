@@ -14,23 +14,24 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - uses: cloudflare/wrangler-action@v3
-              with:
-                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-                  accountId: ${{ secrets.DEPLOYMENT_CF_ACCOUNT_ID }}
-
             - run: make all
               env:
                   AWS_ACCESS_KEY_ID: ${{ secrets.DATA_AWS_ACCESS_KEY_ID }}
                   AWS_SECRET_ACCESS_KEY: ${{ secrets.DATA_AWS_SECRET_ACCESS_KEY }}
                   NEXT_PUBLIC_URL: https://${{ secrets.PRODUCTION_HOSTNAME }}/
 
-            - run: make deploy-production
+            - name: Deploy to the production bucket
+              run: cd deployment && npm ci && npm run start
               env:
                   DEPLOYMENT_CF_BUCKET: ${{ secrets.PRODUCTION_CF_BUCKET }}
                   DEPLOYMENT_CF_ACCOUNT_ID: ${{ secrets.DEPLOYMENT_CF_ACCOUNT_ID }}
                   DEPLOYMENT_CF_AWS_ACCESS_KEY_ID: ${{ secrets.PRODUCTION_CF_AWS_ACCESS_KEY_ID }}
                   DEPLOYMENT_CF_AWS_SECRET_ACCESS_KEY: ${{ secrets.PRODUCTION_CF_AWS_SECRET_ACCESS_KEY }}
+
+            - uses: cloudflare/wrangler-action@v3
+              with:
+                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                  accountId: ${{ secrets.DEPLOYMENT_CF_ACCOUNT_ID }}
 
             - name: Clear cloudflare cache
               run: |

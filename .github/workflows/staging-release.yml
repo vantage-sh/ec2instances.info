@@ -12,11 +12,6 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - uses: cloudflare/wrangler-action@v3
-              with:
-                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-                  accountId: ${{ secrets.DEPLOYMENT_CF_ACCOUNT_ID }}
-
             - run: make all
               env:
                   AWS_ACCESS_KEY_ID: ${{ secrets.DATA_AWS_ACCESS_KEY_ID }}
@@ -24,12 +19,19 @@ jobs:
                   NEXT_PUBLIC_URL: https://${{ secrets.STAGING_HOSTNAME }}/
                   DENY_ROBOTS_TXT: "1"
 
-            - run: make deploy-staging
+            - name: Deploy to the staging bucket
+              run: cd deployment && npm ci && npm run start
               env:
                   DEPLOYMENT_CF_BUCKET: ${{ secrets.STAGING_CF_BUCKET }}
                   DEPLOYMENT_CF_ACCOUNT_ID: ${{ secrets.DEPLOYMENT_CF_ACCOUNT_ID }}
                   DEPLOYMENT_CF_AWS_ACCESS_KEY_ID: ${{ secrets.STAGING_CF_AWS_ACCESS_KEY_ID }}
                   DEPLOYMENT_CF_AWS_SECRET_ACCESS_KEY: ${{ secrets.STAGING_CF_AWS_SECRET_ACCESS_KEY }}
+
+            - uses: cloudflare/wrangler-action@v3
+              with:
+                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                  accountId: ${{ secrets.DEPLOYMENT_CF_ACCOUNT_ID }}
+                  environment: staging
 
             - name: Clear cloudflare cache
               run: |

@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := all
-.PHONY: fetch-data next deploy-staging deploy-production black prettier format all
+.PHONY: fetch-data next black prettier format all
 
 clean:
 	mv www/azure/instances-specs.json specs.json.tmp
@@ -21,14 +21,6 @@ package:
 
 pypi-upload:
 	python3 setup.py sdist bdist_wheel upload
-
-deploy-staging:
-	cd deployment && npm ci && npm run start
-	wrangler deploy -e staging
-
-deploy-production:
-	cd deployment && npm ci && npm run start
-	wrangler deploy
 
 black:
 	docker build -t ec2instances-format -f Dockerfile.format .
