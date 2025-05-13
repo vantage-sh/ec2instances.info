@@ -5,16 +5,16 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
 } from "@/components/ui/command";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
 } from "@/components/ui/popover";
 
 interface Option {
@@ -43,7 +43,7 @@ export default function FilterDropdown({
     const groupedOptions = React.useMemo(() => {
         type GroupedOptions = Record<string, Option[]>;
         const initialGroups: GroupedOptions = {};
-        
+
         return options.reduce<GroupedOptions>((groups, option) => {
             const group = option.group || "Other";
             if (!groups[group]) {
@@ -66,7 +66,7 @@ export default function FilterDropdown({
                         size="sm"
                         role="combobox"
                         aria-expanded={open}
-                        className="w-full justify-between"
+                        className="w-full justify-between text-black"
                     >
                         {icon && <i className={`icon-${icon} text-white me-1`}></i>}
                         {selectedOption?.label || "Select..."}
