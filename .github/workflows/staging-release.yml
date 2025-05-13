@@ -49,6 +49,7 @@ jobs:
               env:
                   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
                   SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+                  SERVICE: ec2instances-staging
 
             - name: Failure Slack Notify
               if: ${{ failure() }}
@@ -58,3 +59,4 @@ jobs:
               env:
                   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
                   SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+                  SERVICE: ec2instances-staging
