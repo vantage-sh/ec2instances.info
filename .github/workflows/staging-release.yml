@@ -32,6 +32,7 @@ jobs:
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   accountId: ${{ secrets.DEPLOYMENT_CF_ACCOUNT_ID }}
                   environment: staging
+                  wranglerVersion: "4.15.0"
 
             - name: Clear cloudflare cache
               run: |
