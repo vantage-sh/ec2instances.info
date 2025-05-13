@@ -50,12 +50,31 @@ async function uploadFile(key: string, filePath: string) {
     }
     fileHashes[key] = hash;
 
+    const ContentType = contentTypeHandler(filePath);
+    for (let i = 0; i < 9; i++) {
+        try {
+            await s3Client.send(
+                new PutObjectCommand({
+                    Bucket: bucket,
+                    Key: key,
+                    Body: file,
+                    ContentType,
+                }),
+            );
+            return;
+        } catch {
+            // For the first 9 attempts, just wait 1 second and try again.
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+    }
+
+    // Our final try - if this fails, we're out of retries, just throw.
     await s3Client.send(
         new PutObjectCommand({
             Bucket: bucket,
             Key: key,
             Body: file,
-            ContentType: contentTypeHandler(filePath),
+            ContentType,
         }),
     );
 }
