@@ -48,7 +48,7 @@ export default function TopNav() {
     const router = useRouter();
     const currentPath = usePathname();
     return (
-        <nav className="flex items-center justify-between bg-purple-nu h-[3rem] py-2 px-4">
+        <nav className="flex items-center justify-between bg-purple-brand h-[3rem] py-2 px-4">
             <div className="flex items-center justify-start gap-4">
                 <div className="flex items-center justify-start gap-2">
                     <Link href="/" className="font-medium text-gray-6">
