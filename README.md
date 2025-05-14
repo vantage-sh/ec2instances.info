@@ -77,7 +77,7 @@ This will take ~30 minutes, and when it is done you will have a `www` folder wit
 - `/index.html` or `/index` should redirect to `/`
 - Trailing slashes should redirect without them.
 - Anything path ending `.html` should either 404 or redirect to the site without that.
-- 404's should show a 404 and redirect to `/404.html`.
+- 404's should show a 404 and display the content in `/404.html`.
 
 The logic we use to do this (a mix of a scripted push to R2 and a small Cloudflare Worker) can be found in `deployment/index.ts` and `worker.js`.
 
