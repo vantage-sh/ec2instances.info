@@ -22,3 +22,10 @@ jobs:
             - run: npm install -g prettier@3.5.3
             - run: |-
                   prettier --check .
+
+    check-types:
+        name: Check Types
+        runs-on: ubuntu-22.04
+        steps:
+            - uses: actions/checkout@v2
+            - run: cd next && npm ci && npm run check-types

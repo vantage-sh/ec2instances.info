@@ -7,7 +7,8 @@
         "build:llms": "rimraf public/azure && rimraf public/aws && tsx llms/index.ts",
         "build:next": "next build",
         "build": "npm run init && npm run build:llms && npm run build:next",
-        "start": "next start"
+        "start": "next start",
+        "check-types": "tsc --noEmit"
     },
     "dependencies": {
         "@msgpack/msgpack": "^3.1.1",
