@@ -44,8 +44,8 @@ export function calculateCost(
             pricingUnit === "vcpu"
                 ? "vCPU"
                 : pricingUnit === "ecu"
-                ? "ECU"
-                : "memory"
+                  ? "ECU"
+                  : "memory"
         ] as number;
     }
 
