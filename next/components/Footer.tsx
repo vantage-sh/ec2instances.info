@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 export default function Footer() {
     return (
-        <div className="border-t border-gray-200 p-2 sticky bottom-0 text-xs text-gray-2 bg-white">
-            <div className="flex items-center justify-between">
+        <div className="border-t border-gray-200 h-[3rem] sticky bottom-0 text-xs text-gray-2 bg-white">
+            <div className="flex items-center justify-between h-full px-2">
                 <div className="flex items-center gap-3">
                     <div className="hidden md:block">
                         Updated 2025-05-12 16:29:32 UTC
