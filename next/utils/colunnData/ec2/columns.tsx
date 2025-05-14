@@ -355,7 +355,9 @@ export const columnsGen = (
             const storage = info.getValue() as Storage;
             if (!storage) return "EBS only";
             const totalSize = storage.devices * storage.size;
-            const storageType = `${storage.nvme_ssd ? "NVMe " : ""}${storage.ssd ? "SSD" : "HDD"}`;
+            const storageType = `${storage.nvme_ssd ? "NVMe " : ""}${
+                storage.ssd ? "SSD" : "HDD"
+            }`;
             if (storage.devices > 1) {
                 const text = `${totalSize} ${storage.size_unit}`;
                 const detail = `${storage.devices}×${storage.size} ${storage.size_unit} ${storageType}`;
@@ -610,15 +612,15 @@ export const columnsGen = (
         header: "Availability Zones",
         id: "availability_zones",
         sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.availability_zones?.["us-east-1"];
-            const valueB = rowB.original.availability_zones?.["us-east-1"];
+            const valueA = rowA.original.availability_zones?.[selectedRegion];
+            const valueB = rowB.original.availability_zones?.[selectedRegion];
             if (!valueA) return -1;
             if (!valueB) return 1;
             return valueA.join(", ").localeCompare(valueB.join(", "));
         },
         cell: (info) => {
             const zones = info.getValue() as Record<string, string[]>;
-            return zones?.["us-east-1"]?.join(", ") || "";
+            return zones?.[selectedRegion]?.join(", ") || "";
         },
     },
     {
