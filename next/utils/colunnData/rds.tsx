@@ -217,21 +217,27 @@ export const columnsGen = (
     },
     {
         accessorKey: "arch",
-        header: "Architecture",
+        header: "Arch",
+        size: 100,
         id: "architecture",
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.arch;
             const valueB = rowB.original.arch;
             if (!valueA) return -1;
             if (!valueB) return 1;
-            const a = valueA.includes("i386") ? "32/64-bit" : "64-bit";
-            const b = valueB.includes("i386") ? "32/64-bit" : "64-bit";
-            return a.localeCompare(b);
+            return JSON.stringify(
+                typeof valueA === "string" ? [valueA] : valueA.sort(),
+            ).localeCompare(
+                JSON.stringify(
+                    typeof valueB === "string" ? [valueB] : valueB.sort(),
+                ),
+            );
         },
         cell: (info) => {
-            const arch = info.getValue() as string[];
-            if (!arch) return "unknown";
-            return arch.includes("i386") ? "32/64-bit" : "64-bit";
+            const arch = info.getValue() as string[] | string;
+            if (typeof arch === "string") return arch;
+            if (!arch) return "";
+            return arch.sort().join(", ");
         },
     },
     {
