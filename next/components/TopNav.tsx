@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
 
 const navItems = [
     {
@@ -45,7 +44,6 @@ const navItems = [
 ];
 
 export default function TopNav() {
-    const router = useRouter();
     const currentPath = usePathname();
     return (
         <nav className="flex items-center justify-between bg-purple-brand h-[3rem] py-2 px-4">
@@ -116,7 +114,11 @@ export default function TopNav() {
                                     return (
                                         <Link
                                             aria-selected={selected}
-                                            className={`font-normal text-sm px-2 py-1 pb-2 rounded rounded-b-none ${selected ? "bg-white text-black font-semibold" : "text-gray-6"}`}
+                                            className={`font-normal text-sm px-2 py-1 pb-2 rounded rounded-b-none ${
+                                                selected
+                                                    ? "bg-white text-black font-semibold"
+                                                    : "text-gray-6"
+                                            }`}
                                             key={child.label}
                                             href={child.href}
                                         >

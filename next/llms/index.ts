@@ -1,4 +1,4 @@
-import { writeFile, mkdir, readFile } from "fs/promises";
+import { writeFile, mkdir } from "fs/promises";
 import generateIndex from "./generateIndex";
 import generateAwsFamilyIndexes from "./generateAwsFamilyIndexes";
 import { calculatePrice, generateAwsIndexes } from "./generateAwsIndexes";
@@ -16,7 +16,6 @@ import generateRedshiftMarkdown from "./generateRedshiftMarkdown";
 import generateOpensearchMarkdown from "./generateOpensearchMarkdown";
 import { generateOpensearchIndexes } from "./generateOpensearchIndexes";
 import generateOpensearchFamilyIndexes from "./generateOpensearchFamilyIndexes";
-import { AzureInstance } from "@/utils/colunnData/azure";
 import generateAzureFamilyIndexes from "./generateAzureFamilyIndexes";
 import { generateAzureIndexes } from "./generateAzureIndexes";
 import generateAzureInstances from "./generateAzureInstances";
@@ -178,15 +177,17 @@ async function main() {
     console.log("Generated instances for aws/redshift/*.md");
 
     await mkdir("./public/aws/opensearch/families", { recursive: true });
-    const opensearchFamilyIndexes =
-        await generateOpensearchFamilyIndexes(opensearchInstances);
+    const opensearchFamilyIndexes = await generateOpensearchFamilyIndexes(
+        opensearchInstances,
+    );
     for (const [family, index] of opensearchFamilyIndexes.entries()) {
         await writeFile(`./public/aws/opensearch/families/${family}.md`, index);
     }
     console.log("Generated aws/opensearch/families/*.md");
 
-    const opensearchIndexes =
-        await generateOpensearchIndexes(opensearchInstances);
+    const opensearchIndexes = await generateOpensearchIndexes(
+        opensearchInstances,
+    );
     for (const [slug, index] of opensearchIndexes.entries()) {
         await writeFile(`./public/aws/opensearch/${slug}.md`, index);
     }
