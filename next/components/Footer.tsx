@@ -32,11 +32,15 @@ export default function Footer() {
                             Vantage
                         </a>
                     </span>
-                    <div className="hidden md:flex gap-2">
+                    <form
+                        action="https://console.vantage.sh/signup"
+                        method="GET"
+                        className="hidden md:flex gap-2"
+                    >
                         <div className="hidden md:block">
                             <input
                                 className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                id="api-email-input"
+                                name="authentication_email"
                                 placeholder="Email"
                             />
                         </div>
@@ -45,7 +49,7 @@ export default function Footer() {
                                 Get API Key
                             </Button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
