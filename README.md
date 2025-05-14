@@ -70,7 +70,7 @@ To build a full release, you will likely want to clone a clean slate version of 
 - `AWS_SECRET_ACCESS_KEY`: Follow the start of [Developing locally](#developing-locally) to get a AWS key with the correct permissions. This is the secret access key for that.
 - `NEXT_PUBLIC_URL`: The public base URL for where the application lives. Probably `https://<hostname>/`.
 
-**Important:** If you don't want your build to be indexed by search engines, you should also set `DENY_ROBOTS_TXT=1`.
+**Important:** If you don't want your build to be indexed by search engines, you should also set `DENY_ROBOTS_TXT=1`. To remove adverts, you can also add `NEXT_PUBLIC_REMOVE_ADVERTS=1`.
 
 This will take ~30 minutes, and when it is done you will have a `www` folder with the content you can deploy to your web server. Your web server should do the following:
 

@@ -70,6 +70,8 @@ export default function MarketingWrapper({
     azure,
     children,
 }: MarketingWrapperProps) {
+    if (process.env.NEXT_PUBLIC_REMOVE_ADVERTS === "1") return children;
+
     return (
         <div className="w-full">
             <div className="xl:flex gap-4 mx-auto w-max">
