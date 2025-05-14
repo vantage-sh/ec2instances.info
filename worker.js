@@ -16,7 +16,7 @@ export default {
         let path;
         try {
             path = decodeURIComponent(url.pathname.substring(1));
-        } catch (e) {
+        } catch {
             return new Response("Invalid path", {
                 status: 400,
             });

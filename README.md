@@ -1,6 +1,6 @@
 # EC2Instances.info
 
-[![uses aws](https://img.shields.io/badge/uses-AWS-yellow)](https://aws.amazon.com/)
+[![uses cloudflare](https://img.shields.io/badge/uses-Cloudflare-orange)](https://cloudflare.com)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![python style: black](https://img.shields.io/badge/python%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
 
@@ -20,11 +20,13 @@ Vantage employees are actively maintaining and hosting the site with the help of
 People have suggested many neat ideas and feature requests by opening issues on this repository. We also have a [Slack
 Community](https://vantage.sh/slack) for anyone to join with a devoted channel named #instances-vantage.sh.
 
-## Running locally
+## Requirements
 
-First, you'll need to provide credentials so that boto can access the AWS API. [See a terraform example here](./docs/terraform/iam.tf)!
-Options for setting this up are described in the [boto
-docs](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html).
+To do a full build, you just need Docker installed. To develop this, however, you will need Docker and it is suggested you also have [nvm](https://nvm.sh) installed. You can technically just use a Node version that matches or is higher than `next/.nvmrc`, though, if you so wish.
+
+## Developing locally
+
+First, you'll need to provide credentials so that boto can access the AWS API. Options for setting this up are described in the [boto docs](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html).
 
 Ensure that your IAM user has at least the following permissions:
 
@@ -46,92 +48,38 @@ Ensure that your IAM user has at least the following permissions:
 }
 ```
 
-## Running in Docker (recommended)
+When you have made these credentials, go ahead and store them somewhere safe (`.env` is gitignored), and then you will want to fetch all of the data. You can do this with the following command:
 
-1. Clone the repository, if not already done:
-
-```bash
-git clone https://github.com/vantage-sh/ec2instances.info
-cd ec2instances.info
+```sh
+AWS_ACCESS_KEY_ID="YOUR_AWS_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="YOUR_AWS_SECRET_ACCESS_KEY" make fetch-data
 ```
 
-2. Build a `docker` image:
+Now go ahead and grab yourself a cup of tea or coffee because this will take 20-30 minutes. You only need to run this when the Python is changed in a way that alters the data or there is new API data available you want to test against.
 
-```bash
-docker build -t ec2instances.info .
-```
+To start the development server, cd into the `next` directory and run `nvm use` (run `nvm install` before this if the Node version changed or this is first usage). From here, run `npm ci` and then `npm run dev`. This will start the Next development server. Before you make a pull request, it is suggested you run `NEXT_PUBLIC_URL="http://example.com" npm run build` to find any type issues. This will be done before build for a reviewer, but this ensures a faster development cycle by finding issues early.
 
-3. Run a container from the built `docker` image:
+When you make changes, it is suggested to use the recommended VS Code extensions if that is your editor. If not, tell your editor to auto-format based on the Prettier configuration in the root. Before you make a PR, you should run `make format` in the root to make sure the formatting is correct for the version of Black/Prettier we use.
 
-```bash
-docker run -d --name some-container -p 8080:8080 ec2instances.info
-```
+## Building a full release
 
-4. Open [localhost:8080](http://localhost:8080) in your browser to see it in action.
+**NOTE:** This is NOT needed for development in most cases and can on some setups mess with the file permsisions in the next folder leading to needing to clean the build output/temp folders in there. In most development cases, building the next part is sufficient for testing. However, this is needed for production/staging.
 
-## Docker Compose
+To build a full release, you will likely want to clone a clean slate version of the repository. From here, go ahead and run `make all` with the following environment variables:
 
-Here's how you can build and run docker image using Docker Compose (tested with Docker Compose v2):
+- `AWS_ACCESS_KEY_ID`: Follow the start of [Developing locally](#developing-locally) to get a AWS key with the correct permissions. This is the key ID for that.
+- `AWS_SECRET_ACCESS_KEY`: Follow the start of [Developing locally](#developing-locally) to get a AWS key with the correct permissions. This is the secret access key for that.
+- `NEXT_PUBLIC_URL`: The public base URL for where the application lives. Probably `https://<hostname>/`.
 
-```bash
-docker-compose up
-```
+**Important:** If you don't want your build to be indexed by search engines, you should also set `DENY_ROBOTS_TXT=1`.
 
-4. Open [localhost:8080](http://localhost:8080) in your browser to see it in action.
+This will take ~30 minutes, and when it is done you will have a `www` folder with the content you can deploy to your web server. Your web server should do the following:
 
-## Detailed local build instructions
+- `/index.html` or `/index` should redirect to `/`
+- Trailing slashes should redirect without them.
+- Anything path ending `.html` should either 404 or redirect to the site without that.
+- 404's should show a 404 and redirect to `/404.html`.
 
-Note: These instructions are only kept here for reference, the Docker
-instructions mentioned above hide all these details and are recommended for local execution.
-
-Make sure you have LibXML and Python development files. On Ubuntu, run `sudo apt-get install python-dev libxml2-dev libxslt1-dev libssl-dev`.
-
-Then:
-
-```bash
-git clone https://github.com/vantage-sh/ec2instances.info
-cd ec2instances.info/
-python3 -m venv env
-source env/bin/activate
-pip install -r requirements.txt
-invoke build
-deactivate # to exit virtualenv
-```
-
-### Faster Local Dev: Only Render the HTML
-
-Running `invoke build` can take 20 minutes. For many changes you may only need to re-render HTML. Run:
-
-```bash
-invoke render-html
-```
-
-This won't work for data and API changes but for front-end it should serve you well.
-
-## Requirements
-
-- Python with virtualenv
-- [Invoke](http://www.pyinvoke.org/)
-- [Boto](http://boto.readthedocs.org/en/latest/)
-- [lxml](http://lxml.de/)
-
-## Tips for Developing Locally
-
-```
-docker build --no-cache --build-arg AWS_ACCESS_KEY_ID= --build-arg AWS_SECRET_ACCESS_KEY= -t ec2instances.info .
-
-docker run -it --rm --name ec2instances -v $(pwd):/opt/app --env HTTP_HOST=0.0.0.0 -p 8080:8080 ec2instances.info
-
-docker exec -it ec2instances /bin/bash
-
-# (if editing css)
-sass --watch in/style.scss:www/style.css
-
-# INSIDE CONTAINER
-python3 render.py
-```
-
-**Note about CSS:** The current container (20.04) doesn't work anymore with sass. Run this outside to make changes to the CSS. Run prettier formatter after on .css and .scss files to pass the linter.
+The logic we use to do this (a mix of a scripted push to R2 and a small Cloudflare Worker) can be found in `deployment/index.ts` and `worker.js`.
 
 ## API Access
 
@@ -150,23 +98,3 @@ Feel free to watch/star this repo as we're looking to update the site regularly.
 - [The AWS Cost Leaderboard](https://leaderboard.vantage.sh/) - A hosted site of
   the top AWS cost centers.
 - [Vantage](https://vantage.sh/) - A cloud cost transparency platform.
-
-## [Internal] Upstreaming changes from ec2instances.info
-
-```
-git checkout upstream
-git remote add ec2instances.info git@github.com:vantage-sh/ec2instances.info
-git remote update
-git merge ec2instances.info/master
-git checkout master
-git merge upstream
-git push
-```
-
-## [Internal] How the Ads work
-
-Check `vantage.js`. The `vantage_settings()` function is called first thing in `$(document).ready()` in `default.js` and it's called in the beginning of the javascript on each detail page.
-
-It looks up the `vantage` cookie in local storage and sees if the ad tag, a variant of `connect-X` where X is a number, is set. If it is, it hides the ad. If it is not set, it adds a click handler to the X button on the ad. If a user clicks the X button, the ad will be hidden and their preference will be saved to local storage.
-
-To unhide all ads, increment the ad tag.
