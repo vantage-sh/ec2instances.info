@@ -92,6 +92,8 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                 key,
                 label,
                 visible: columnVisibility[key],
+                defaultVisible:
+                    columnData[columnAtomKey].initialColumnsValue[key],
             };
         }
         // @ts-expect-error: TS doesn't like this for some reason.

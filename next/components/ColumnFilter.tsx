@@ -12,7 +12,6 @@ import {
     CommandInput,
     CommandItem,
     CommandList,
-    CommandSeparator,
 } from "@/components/ui/command";
 import {
     Popover,
@@ -43,22 +42,22 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
         column.label.toLowerCase().includes(searchTerm.toLowerCase()),
     );
 
-    const handleSelectAll = () => {
-        columns.forEach((column) => {
+    const handleSelectAll = React.useCallback(() => {
+        for (const column of columns) {
             if (!column.visible) {
                 onColumnVisibilityChange(column.key, true);
             }
-        });
-    };
+        }
+    }, [columns, onColumnVisibilityChange]);
 
-    const handleSelectDefaults = () => {
-        columns.forEach((column) => {
+    const handleSelectDefaults = React.useCallback(() => {
+        for (const column of columns) {
             const shouldBeVisible = column.defaultVisible ?? false;
             if (column.visible !== shouldBeVisible) {
                 onColumnVisibilityChange(column.key, shouldBeVisible);
             }
-        });
-    };
+        }
+    }, [columns, onColumnVisibilityChange]);
 
     return (
         <div className="relative flex flex-col gap-0.5 justify-center">
@@ -110,23 +109,25 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                             </CommandGroup>
                         </CommandList>
                     </Command>
-                    <div className="flex items-center justify-start gap-2 p-1">
-                        <Button
-                            className="cursor-pointer"
-                            onSelect={handleSelectAll}
-                            size="sm"
-                            variant={"outline"}
-                        >
-                            Select All
-                        </Button>
-                        <Button
-                            className="cursor-pointer"
-                            onSelect={handleSelectDefaults}
-                            size="sm"
-                            variant={"outline"}
-                        >
-                            Select Defaults
-                        </Button>
+                    <div className="w-full flex justify-center">
+                        <div className="flex items-center justify-start gap-2 p-1 w-max">
+                            <Button
+                                className="cursor-pointer"
+                                onClick={handleSelectAll}
+                                size="sm"
+                                variant={"outline"}
+                            >
+                                Select All
+                            </Button>
+                            <Button
+                                className="cursor-pointer"
+                                onClick={handleSelectDefaults}
+                                size="sm"
+                                variant={"outline"}
+                            >
+                                Select Defaults
+                            </Button>
+                        </div>
                     </div>
                 </PopoverContent>
             </Popover>

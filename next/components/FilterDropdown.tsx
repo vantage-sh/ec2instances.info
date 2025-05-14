@@ -68,7 +68,7 @@ export default function FilterDropdown({
                         size="sm"
                         role="combobox"
                         aria-expanded={open}
-                        className="w-full justify-between text-black"
+                        className="w-full justify-between text-black py-4.5"
                     >
                         {icon && (
                             <i className={`icon-${icon} text-white me-1`}></i>
