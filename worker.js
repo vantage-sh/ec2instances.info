@@ -23,15 +23,14 @@ export default {
         }
         if (path === "index.html") {
             // Redirect to root
-            return Response.redirect(new URL("/", request.url), 301);
+            url.pathname = "/";
+            return Response.redirect(url, 301);
         }
         if (path === "") path = "index.html";
         if (path.endsWith("/")) {
             // Redirect to no trailing slash
-            return Response.redirect(
-                new URL(path.slice(0, -1), request.url),
-                301,
-            );
+            url.pathname = "/" + path.slice(0, -1);
+            return Response.redirect(url, 301);
         }
 
         // Handle non-GET requests.
