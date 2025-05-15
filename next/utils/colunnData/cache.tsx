@@ -6,7 +6,7 @@ import {
     makeSchemaWithDefaults,
 } from "./shared";
 import { EC2Instance, PricingUnit, CostDuration, Pricing } from "@/types";
-import Link from "next/link";
+import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 
 const initialColumnsArr = [
     ["pretty_name", true],
@@ -84,12 +84,12 @@ export const columnsGen = (
         cell: (info) => {
             const value = info.getValue() as string;
             return (
-                <Link
+                <RegionLinkPreloader
                     onClick={(e) => e.stopPropagation()}
                     href={`/aws/elasticache/${value}`}
                 >
                     {value}
-                </Link>
+                </RegionLinkPreloader>
             );
         },
     },

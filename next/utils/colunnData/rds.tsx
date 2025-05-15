@@ -5,7 +5,7 @@ import {
     gt,
 } from "./shared";
 import { ColumnDef } from "@tanstack/react-table";
-import Link from "next/link";
+import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import { calculateCost, calculateAndFormatCost } from "./ec2/columns";
 
 const initialColumnsArr = [
@@ -167,12 +167,12 @@ export const columnsGen = (
         cell: (info) => {
             const value = info.getValue() as string;
             return (
-                <Link
+                <RegionLinkPreloader
                     onClick={(e) => e.stopPropagation()}
                     href={`/aws/rds/${value}`}
                 >
                     {value}
-                </Link>
+                </RegionLinkPreloader>
             );
         },
     },

@@ -7,7 +7,7 @@ import {
     calculateCost,
 } from "./shared";
 import { ColumnDef } from "@tanstack/react-table";
-import Link from "next/link";
+import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 
 type RedshiftPricing = {
     [region: string]: {
@@ -110,12 +110,12 @@ export const columnsGen = (
         cell: (info) => {
             const value = info.getValue() as string;
             return (
-                <Link
+                <RegionLinkPreloader
                     onClick={(e) => e.stopPropagation()}
                     href={`/aws/redshift/${value}`}
                 >
                     {value}
-                </Link>
+                </RegionLinkPreloader>
             );
         },
     },

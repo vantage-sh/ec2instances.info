@@ -1,7 +1,8 @@
 import { CostDuration, EC2Instance, Pricing, PricingUnit } from "@/types";
 import { ColumnDef, Row } from "@tanstack/react-table";
-import Link from "next/link";
+import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import { ClockFadingIcon } from "lucide-react";
+
 interface Storage {
     devices: number;
     size: number;
@@ -44,8 +45,8 @@ export function calculateCost(
             pricingUnit === "vcpu"
                 ? "vCPU"
                 : pricingUnit === "ecu"
-                  ? "ECU"
-                  : "memory"
+                ? "ECU"
+                : "memory"
         ] as number;
     }
 
@@ -106,12 +107,12 @@ export const columnsGen = (
         cell: (info) => {
             const value = info.getValue() as string;
             return (
-                <Link
+                <RegionLinkPreloader
                     onClick={(e) => e.stopPropagation()}
                     href={`/aws/ec2/${value}`}
                 >
                     {value}
-                </Link>
+                </RegionLinkPreloader>
             );
         },
     },

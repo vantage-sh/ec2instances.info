@@ -3,7 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { doAllDataTablesMigrations, gt } from "./shared";
 import { makeSchemaWithDefaults } from "./shared";
 import { CostDuration } from "@/types";
-import Link from "next/link";
+import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 
 export interface AzurePricing {
     [region: string]: {
@@ -207,12 +207,12 @@ export const columnsGen = (
             cell: (info) => {
                 const value = info.getValue() as string;
                 return (
-                    <Link
+                    <RegionLinkPreloader
                         onClick={(e) => e.stopPropagation()}
                         href={`/azure/vm/${value}`}
                     >
                         {info.row.original.pretty_name}
-                    </Link>
+                    </RegionLinkPreloader>
                 );
             },
         },
