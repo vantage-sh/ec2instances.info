@@ -17,7 +17,8 @@ import {
     useSearchTerm,
     useSelectedRegion,
     useReservedTerm,
-    useHookToExportButton,
+    useHookToCsvExportButton,
+    useHookToMdExportButton,
     useGSettings,
     usePricingUnit,
     useDuration,
@@ -35,6 +36,7 @@ import {
 import IndividualColumnFilter from "./IndividualColumnFilter";
 import SortToggle from "./SortToggle";
 import * as columnData from "@/utils/colunnData";
+import { markdownTable } from "markdown-table";
 
 export type AtomKeyWhereInstanceIs<Instance> = {
     [AtomKey in keyof typeof columnData]: (typeof columnData)[AtomKey]["columnsGen"] extends (
@@ -180,7 +182,7 @@ export default function InstanceTable<
         getSortedRowModel: getSortedRowModel(),
     });
 
-    useHookToExportButton(() => {
+    useHookToCsvExportButton(() => {
         let csv = "";
         for (const header of table.getHeaderGroups()) {
             csv +=
@@ -219,6 +221,34 @@ export default function InstanceTable<
                 a.download = filename;
                 a.click();
             }
+        });
+    });
+
+    useHookToMdExportButton(() => {
+        const rows: string[][] = [];
+        for (const header of table.getHeaderGroups()) {
+            rows.push(
+                header.headers.map(
+                    (h) => h.getContext().column.columnDef.header as string,
+                ),
+            );
+        }
+        import("react-dom/server").then(({ renderToString }) => {
+            const el = document.createElement("div");
+            for (const row of table.getRowModel().rows) {
+                rows.push(
+                    row.getVisibleCells().map((c) => {
+                        const v = renderToString(
+                            flexRender(c.column.columnDef.cell, c.getContext()),
+                        );
+                        el.innerHTML = v;
+                        return el.textContent ?? "";
+                    }),
+                );
+            }
+            const md = markdownTable(rows);
+            navigator.clipboard.writeText(md);
+            alert("Markdown table copied to clipboard!");
         });
     });
 

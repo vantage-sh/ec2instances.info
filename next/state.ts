@@ -41,20 +41,38 @@ export function useInstanceData<Instance>(
     );
 }
 
-const exportEvents: Set<() => void> = new Set();
+const csvExportEvents: Set<() => void> = new Set();
 
-export function callExportEvents() {
-    for (const fn of exportEvents) {
+export function callCsvExportEvents() {
+    for (const fn of csvExportEvents) {
         fn();
     }
 }
 
 /** This is a bit hacky, but alas, the table is in one place. */
-export function useHookToExportButton(hn: () => void) {
+export function useHookToCsvExportButton(hn: () => void) {
     useEffect(() => {
-        exportEvents.add(hn);
+        csvExportEvents.add(hn);
         return () => {
-            exportEvents.delete(hn);
+            csvExportEvents.delete(hn);
+        };
+    }, []);
+}
+
+const mdExportEvents: Set<() => void> = new Set();
+
+export function callMdExportEvents() {
+    for (const fn of mdExportEvents) {
+        fn();
+    }
+}
+
+/** This is a bit hacky, but alas, the table is in one place. */
+export function useHookToMdExportButton(hn: () => void) {
+    useEffect(() => {
+        mdExportEvents.add(hn);
+        return () => {
+            mdExportEvents.delete(hn);
         };
     }, []);
 }

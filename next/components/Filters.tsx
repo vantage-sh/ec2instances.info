@@ -9,7 +9,8 @@ import {
     usePricingUnit,
     useDuration,
     useReservedTerm,
-    callExportEvents,
+    callCsvExportEvents,
+    callMdExportEvents,
     clearGSettings,
     useCompareOn,
     columnVisibilityAtoms,
@@ -183,18 +184,26 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                 </div>
             </div>
             <div className="d-flex gap-2">
-                <button
-                    className="btn btn-outline-secondary btn-primary"
-                    onClick={callExportEvents}
-                >
-                    Export
-                </button>
+                <div className="d-flex gap-1 my-auto">
+                    <button
+                        className="text-sm m-1 px-2 py-2 h-max border border-gray-300 rounded-md cursor-pointer font-semibold"
+                        onClick={callCsvExportEvents}
+                    >
+                        Export CSV
+                    </button>
+                    <button
+                        className="text-sm m-1 px-2 py-2 h-max border border-gray-300 rounded-md cursor-pointer font-semibold"
+                        onClick={callMdExportEvents}
+                    >
+                        Export MD
+                    </button>
+                </div>
                 <div className="my-auto" id="search">
                     <div className="block">
                         <input
                             id="fullsearch"
                             type="text"
-                            className="form-control not-xl:hidden p-1 border-gray-300 border rounded-md"
+                            className="form-control not-xl:hidden not-2xl:w-25 p-1 border-gray-300 border rounded-md"
                             placeholder="Search..."
                             value={compareOn ? valuePreCompareOn : searchTerm}
                             disabled={compareOn}

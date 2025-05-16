@@ -48,7 +48,13 @@ export default ({
     prefetch = true,
     ...props
 }: Omit<React.ComponentProps<typeof Link>, "ref">) => {
-    const router = useRouter();
+    let router: ReturnType<typeof useRouter> | null = null;
+    try {
+        router = useRouter();
+    } catch (e) {
+        // Not mounted in Next, probably an export. Hack to handle this.
+        if (typeof e === "object" && e !== null && "then" in e) throw e;
+    }
     const internalRef = useRef<HTMLAnchorElement>(null);
 
     useEffect(() => {
@@ -83,7 +89,7 @@ export default ({
                         // If the cursor is still in range, we should preload the link.
                         if (once) {
                             once = false;
-                            router.prefetch(element.href);
+                            router?.prefetch(element.href);
                         }
                     }
                 }, 20);
