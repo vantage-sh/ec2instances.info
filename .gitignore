@@ -16,3 +16,4 @@ result
 .cache
 .wrangler
 deployment/node_modules
+node_modules

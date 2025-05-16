@@ -26,7 +26,9 @@ To do a full build, you just need Docker installed. To develop this, however, yo
 
 ## Developing locally
 
-First, you'll need to provide credentials so that boto can access the AWS API. Options for setting this up are described in the [boto docs](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html).
+The first thing you should do is run `npm ci` in the root. This is to ensure you have prettier installed as expected.
+
+You'll need to provide credentials so that boto can access the AWS API. Options for setting this up are described in the [boto docs](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html).
 
 Ensure that your IAM user has at least the following permissions:
 
@@ -56,7 +58,7 @@ AWS_ACCESS_KEY_ID="YOUR_AWS_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="YOUR_AWS_SECRE
 
 Now go ahead and grab yourself a cup of tea or coffee because this will take 20-30 minutes. You only need to run this when the Python is changed in a way that alters the data or there is new API data available you want to test against.
 
-To start the development server, cd into the `next` directory and run `nvm use` (run `nvm install` before this if the Node version changed or this is first usage). From here, run `npm ci` and then `npm run dev`. This will start the Next development server. Before you make a pull request, it is suggested you run `npm run check-types` to find any type issues. This will be done before build by the CI, but it does tighten development cycles to do it here.
+To start the development server, cd into the `next` directory and run `nvm use` (run `nvm install` before this if the Node version changed or this is first usage). From here, run `npm ci`, for your first ever time run `npm run init`, and then `npm run dev`. This will start the Next development server. Before you make a pull request, it is suggested you run `npm run check-types` to find any type issues. This will be done before build by the CI, but it does tighten development cycles to do it here.
 
 When you make changes, it is suggested to use the recommended VS Code extensions if that is your editor. If not, tell your editor to auto-format based on the Prettier configuration in the root. Before you make a PR, you should run `make format` in the root to make sure the formatting is correct for the version of Black/Prettier we use.
 
