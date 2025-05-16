@@ -19,7 +19,10 @@ const Item = ({ link, image, title, description }: ItemProps) => (
                 alt={title}
                 className="w-full h-40 object-cover rounded-md"
             />
-            <h3 className="text-md font-semibold mt-2 leading-tight" aria-hidden="true">
+            <h3
+                className="text-md font-semibold mt-2 leading-tight"
+                aria-hidden="true"
+            >
                 {title}
             </h3>
             <p className="text-xs text-gray-500">{description}</p>
