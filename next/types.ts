@@ -7,6 +7,7 @@ export interface PlatformPricing {
     spot_avg?: string;
     spot_max?: string;
     pct_interrupt?: string;
+    emr?: string;
 }
 
 export interface Pricing {

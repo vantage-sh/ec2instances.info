@@ -1623,13 +1623,13 @@ export const columnsGen = (
         id: "cost-emr",
         sortingFn: (rowA, rowB) => {
             const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.emr?.ondemand,
+                rowA.original.pricing?.[selectedRegion]?.emr?.emr,
                 rowA.original,
                 pricingUnit,
                 costDuration,
             );
             const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.emr?.ondemand,
+                rowB.original.pricing?.[selectedRegion]?.emr?.emr,
                 rowB.original,
                 pricingUnit,
                 costDuration,
@@ -1638,7 +1638,7 @@ export const columnsGen = (
         },
         cell: (info) => {
             const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.emr?.ondemand;
+            const price = pricing?.[selectedRegion]?.emr?.emr;
             return calculateAndFormatCost(
                 price,
                 info.row.original,
