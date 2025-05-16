@@ -41,40 +41,22 @@ export function useInstanceData<Instance>(
     );
 }
 
-const csvExportEvents: Set<() => void> = new Set();
+const activeTableDataFormatters: Set<() => Promise<string[][]>> = new Set();
 
-export function callCsvExportEvents() {
-    for (const fn of csvExportEvents) {
-        fn();
+export async function callActiveTableDataFormatter() {
+    for (const fn of activeTableDataFormatters) {
+        return await fn();
     }
+    throw new Error("No table data formatter found");
 }
 
-/** This is a bit hacky, but alas, the table is in one place. */
-export function useHookToCsvExportButton(hn: () => void) {
+export function useActiveTableDataFormatter(fn: () => Promise<string[][]>) {
     useEffect(() => {
-        csvExportEvents.add(hn);
+        activeTableDataFormatters.add(fn);
         return () => {
-            csvExportEvents.delete(hn);
+            activeTableDataFormatters.delete(fn);
         };
-    }, []);
-}
-
-const mdExportEvents: Set<() => void> = new Set();
-
-export function callMdExportEvents() {
-    for (const fn of mdExportEvents) {
-        fn();
-    }
-}
-
-/** This is a bit hacky, but alas, the table is in one place. */
-export function useHookToMdExportButton(hn: () => void) {
-    useEffect(() => {
-        mdExportEvents.add(hn);
-        return () => {
-            mdExportEvents.delete(hn);
-        };
-    }, []);
+    }, [activeTableDataFormatters]);
 }
 
 export type ColumnVisibility<Key extends keyof typeof columnData> =

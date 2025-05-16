@@ -17,8 +17,7 @@ import {
     useSearchTerm,
     useSelectedRegion,
     useReservedTerm,
-    useHookToCsvExportButton,
-    useHookToMdExportButton,
+    useActiveTableDataFormatter,
     useGSettings,
     usePricingUnit,
     useDuration,
@@ -36,7 +35,6 @@ import {
 import IndividualColumnFilter from "./IndividualColumnFilter";
 import SortToggle from "./SortToggle";
 import * as columnData from "@/utils/colunnData";
-import { markdownTable } from "markdown-table";
 
 export type AtomKeyWhereInstanceIs<Instance> = {
     [AtomKey in keyof typeof columnData]: (typeof columnData)[AtomKey]["columnsGen"] extends (
@@ -53,17 +51,6 @@ interface InstanceTableProps<Instance> {
     instanceCount: number;
     columnAtomKey: AtomKeyWhereInstanceIs<Instance>;
     ecuRename?: string;
-}
-
-function csvEscape(input: string) {
-    // Check if the input contains special characters or double quotes
-    if (/[",\n]/.test(input)) {
-        // If it does, wrap the input in double quotes and escape existing double quotes
-        return `"${input.replace(/"/g, '""')}"`;
-    } else {
-        // If no special characters are present, return the input as is
-        return input;
-    }
 }
 
 // Hack to stop Tanstack Table from thinking the array changed.
@@ -182,49 +169,7 @@ export default function InstanceTable<
         getSortedRowModel: getSortedRowModel(),
     });
 
-    useHookToCsvExportButton(() => {
-        let csv = "";
-        for (const header of table.getHeaderGroups()) {
-            csv +=
-                header.headers
-                    .map((h) =>
-                        csvEscape(
-                            h.getContext().column.columnDef.header as string,
-                        ),
-                    )
-                    .join(",") + "\n";
-        }
-        import("react-dom/server").then(({ renderToString }) => {
-            const el = document.createElement("div");
-            for (const row of table.getRowModel().rows) {
-                csv +=
-                    row
-                        .getVisibleCells()
-                        .map((c) => {
-                            const v = renderToString(
-                                flexRender(
-                                    c.column.columnDef.cell,
-                                    c.getContext(),
-                                ),
-                            );
-                            el.innerHTML = v;
-                            return csvEscape(el.textContent ?? "");
-                        })
-                        .join(",") + "\n";
-            }
-            if (typeof window !== "undefined") {
-                const filename = `${document.title}.csv`;
-                const blob = new Blob([csv], { type: "text/csv" });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = filename;
-                a.click();
-            }
-        });
-    });
-
-    useHookToMdExportButton(() => {
+    useActiveTableDataFormatter(async () => {
         const rows: string[][] = [];
         for (const header of table.getHeaderGroups()) {
             rows.push(
@@ -233,23 +178,20 @@ export default function InstanceTable<
                 ),
             );
         }
-        import("react-dom/server").then(({ renderToString }) => {
-            const el = document.createElement("div");
-            for (const row of table.getRowModel().rows) {
-                rows.push(
-                    row.getVisibleCells().map((c) => {
-                        const v = renderToString(
-                            flexRender(c.column.columnDef.cell, c.getContext()),
-                        );
-                        el.innerHTML = v;
-                        return el.textContent ?? "";
-                    }),
-                );
-            }
-            const md = markdownTable(rows);
-            navigator.clipboard.writeText(md);
-            alert("Markdown table copied to clipboard!");
-        });
+        const { renderToString } = await import("react-dom/server");
+        const el = document.createElement("div");
+        for (const row of table.getRowModel().rows) {
+            rows.push(
+                row.getVisibleCells().map((c) => {
+                    const v = renderToString(
+                        flexRender(c.column.columnDef.cell, c.getContext()),
+                    );
+                    el.innerHTML = v;
+                    return el.textContent ?? "";
+                }),
+            );
+        }
+        return rows;
     });
 
     const tableContainerRef = useRef<HTMLDivElement>(null);

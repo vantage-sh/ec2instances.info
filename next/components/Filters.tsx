@@ -3,14 +3,13 @@
 import { CostDuration, PricingUnit, Region } from "@/types";
 import FilterDropdown from "./FilterDropdown";
 import ColumnFilter from "./ColumnFilter";
+import ExportDropdown from "./ExportDropdown";
 import {
     useSearchTerm,
     useSelectedRegion,
     usePricingUnit,
     useDuration,
     useReservedTerm,
-    callCsvExportEvents,
-    callMdExportEvents,
     clearGSettings,
     useCompareOn,
     columnVisibilityAtoms,
@@ -184,20 +183,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                 </div>
             </div>
             <div className="d-flex gap-2">
-                <div className="d-flex gap-1 my-auto">
-                    <button
-                        className="text-sm m-1 px-2 py-2 h-max border border-gray-300 rounded-md cursor-pointer font-semibold"
-                        onClick={callCsvExportEvents}
-                    >
-                        Export CSV
-                    </button>
-                    <button
-                        className="text-sm m-1 px-2 py-2 h-max border border-gray-300 rounded-md cursor-pointer font-semibold"
-                        onClick={callMdExportEvents}
-                    >
-                        Export MD
-                    </button>
-                </div>
+                <ExportDropdown />
                 <div className="my-auto" id="search">
                     <div className="block">
                         <input
