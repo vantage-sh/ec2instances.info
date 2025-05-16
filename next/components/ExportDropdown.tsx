@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { callActiveTableDataFormatter } from "@/state";
 import { Button } from "./ui/button";
-import { ChevronsUpDown, Save } from "lucide-react";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Command, CommandItem } from "./ui/command";
+import { Save } from "lucide-react";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 function csvEscape(input: string) {
     // Check if the input contains special characters or double quotes
@@ -63,8 +67,8 @@ export default function ExportDropdown() {
     }
 
     return (
-        <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
                 <Button
                     variant="outline"
                     size="sm"
@@ -75,23 +79,21 @@ export default function ExportDropdown() {
                     <Save className="mr-2 h-4 w-4" />
                     Export
                 </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="end">
-                <Command>
-                    <CommandItem onSelect={closeWrap(downloadCsvClick)}>
-                        Download CSV
-                    </CommandItem>
-                    <CommandItem onSelect={closeWrap(copyCsvClick)}>
-                        Copy CSV
-                    </CommandItem>
-                    <CommandItem onSelect={closeWrap(copyTsvClick)}>
-                        Copy TSV
-                    </CommandItem>
-                    <CommandItem onSelect={closeWrap(copyMdClick)}>
-                        Copy Markdown Table
-                    </CommandItem>
-                </Command>
-            </PopoverContent>
-        </Popover>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+                <DropdownMenuItem onSelect={closeWrap(downloadCsvClick)}>
+                    Download CSV
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={closeWrap(copyCsvClick)}>
+                    Copy CSV
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={closeWrap(copyTsvClick)}>
+                    Copy TSV
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={closeWrap(copyMdClick)}>
+                    Copy Markdown Table
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
     );
 }
