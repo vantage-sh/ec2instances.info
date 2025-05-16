@@ -130,7 +130,23 @@ export default function TopNav() {
                     </div>
                 ))}
             </div>
-            <div className="flex items-center justify-end gap-4 not-md:hidden">
+            <div className="flex items-center justify-end gap-4 not-md:hidden overflow-hidden">
+                <a
+                    href="https://github.com/vantage-sh/ec2instances.info/issues/new"
+                    className="group animate-in slide-in-from-bottom-20 fade-in fill-mode-backwards delay-500 flex items-center justify-start gap-1 pl-0 pr-2 py-1 h-8 text-xs font-semibold bg-white/80 hover:bg-white/90 transition-colors shadow-md text-purple-brand rounded-md overflow-hidden"
+                >
+                    <span className="animate-in slide-in-from-left spin-in fill-mode-backwards delay-[600ms] bg-white rounded-full w-12 h-12 p-1 flex items-center justify-center relative top-1 -left-1 shadow-md">
+                        <img
+                            src="/scoutdialog.png"
+                            alt="Scout Dialog"
+                            className="-rotate-6 group-hover:-rotate-12 transition-transform"
+                        />
+                    </span>
+                    <span className="animate-in fade-in fill-mode-backwards delay-[700ms] ">
+                        We updated the Instances site. See an issue?{" "}
+                        <span className="underline">Let us know!</span>
+                    </span>
+                </a>
                 <Link
                     href="https://vantage.sh/slack"
                     className={buttonVariants({
