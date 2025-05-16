@@ -94,6 +94,7 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                                                 !column.visible,
                                             );
                                         }}
+                                        aria-selected={column.visible}
                                     >
                                         <Check
                                             className={cn(
@@ -102,6 +103,7 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                                                     ? "opacity-100"
                                                     : "opacity-0",
                                             )}
+                                            aria-hidden="true"
                                         />
                                         {column.label}
                                     </CommandItem>
