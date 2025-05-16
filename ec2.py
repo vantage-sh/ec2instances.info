@@ -410,7 +410,7 @@ def parse_instance(instance_type, product_attributes, api_description):
                 ]
                 i.ebs_baseline_iops = ebs_optimized_info["BaselineIops"]
                 i.ebs_baseline_bandwidth = ebs_optimized_info["BaselineBandwidthInMbps"]
-                i.ebs_throughput = ebs_optimized_info["BaselineThroughputInMBps"]
+                i.ebs_throughput = ebs_optimized_info["MaximumThroughputInMBps"]
                 i.ebs_iops = ebs_optimized_info["MaximumIops"]
                 i.ebs_max_bandwidth = ebs_optimized_info["MaximumBandwidthInMbps"]
 
