@@ -13,16 +13,16 @@ type ItemProps = {
 
 const Item = ({ link, image, title, description }: ItemProps) => (
     <a href={link} target="_blank" className="not-sm:mx-auto">
-        <div className="xl:mt-4 flex-col border border-gray-200 rounded-md p-4 w-2xs">
+        <div className="xl:mt-4 flex-col border border-gray-200 rounded-md p-4 w-xs">
             <img
                 src={image}
                 alt={title}
                 className="w-full h-40 object-cover rounded-md"
             />
-            <h3 className="text-lg font-bold mt-2" aria-hidden="true">
+            <h3 className="text-md font-semibold mt-2 leading-tight" aria-hidden="true">
                 {title}
             </h3>
-            <p className="text-sm text-gray-500">{description}</p>
+            <p className="text-xs text-gray-500">{description}</p>
         </div>
     </a>
 );
@@ -30,16 +30,16 @@ const Item = ({ link, image, title, description }: ItemProps) => (
 const AWSMarketing = () => (
     <ItemsWrapper>
         <Item
-            link="https://aws.amazon.com/ec2/"
-            image="/demo.png"
-            title="Hello World!"
-            description="item 1"
+            link="https://www.vantage.sh/blog/vantage-mcp?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=ec2"
+            image="https://assets.vantage.sh/blog/vantage-mcp/vantage-mcp.jpg"
+            title="The Vantage MCP Server: Use AI to Analyze Your Cost and Usage Data"
+            description="Ask questions about your organization's previous and current cloud cost spend, cost tagging, provider integrations, and more."
         />
         <Item
             link="https://aws.amazon.com/ec2/"
-            image="/demo.png"
-            title="Hello World!"
-            description="item 2"
+            image="https://assets.vantage.sh/blog/aws-ec2-processors-intel-vs-amd-vs-graviton-adoption/aws-ec2-processors-intel-vs-amd-vs-graviton-adoption.jpg"
+            title="Intel vs AMD vs Graviton: Amazon EC2 Processor Differences and Distribution"
+            description="As Graviton and AMD processors gain broader EC2 availability alongside Intel, we analyze factors such as performance, cost, and distribution."
         />
     </ItemsWrapper>
 );
@@ -47,16 +47,16 @@ const AWSMarketing = () => (
 const AzureMarketing = () => (
     <ItemsWrapper>
         <Item
-            link="https://aws.amazon.com/ec2/"
-            image="/demo.png"
-            title="Azure Hello World!"
-            description="item 1"
+            link="https://www.vantage.sh/blog/how-to-save-on-azure-virtual-machine-costs?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=azure"
+            image="https://assets.vantage.sh/blog/how-to-save-on-azure-virtual-machine-costs/how-to-save-on-azure-virtual-machine-costs.jpg"
+            title="How to Save on Azure Virtual Machines"
+            description="Data shows Azure Virtual Machine users are not fully leveraging available cost optimization strategies. This guide goes over high-level strategies to save on VM costs."
         />
         <Item
-            link="https://aws.amazon.com/ec2/"
-            image="/demo.png"
-            title="Azure Hello World!"
-            description="item 2"
+            link="https://www.vantage.sh/blog/vantage-launches-additional-azure-cost-recommendations?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=azure"
+            image="https://assets.vantage.sh/blog/vantage-launches-additional-azure-cost-recommendations/vantage-launches-additional-azure-cost-recommendations.jpg"
+            title="Azure Cost Recommendations"
+            description="Vantage launches support for additional Azure cost recommendations for services like Blob Storage Reserved Instances and Virtual Machine Rightsizing."
         />
     </ItemsWrapper>
 );
