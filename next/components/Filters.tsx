@@ -160,7 +160,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                 <div className="d-flex gap-2">
                     {compareOn ? (
                         <button
-                            className="btn bg-red-600 text-white"
+                            className="btn bg-red-600 text-white btn-compare disabled:opacity-50 self-end"
                             onClick={() => setCompareOn(false)}
                         >
                             End Compare
