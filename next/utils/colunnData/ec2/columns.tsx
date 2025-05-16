@@ -53,6 +53,8 @@ export function calculateCost(
     return (Number(price) * durationMultiplier) / pricingUnitModifier;
 }
 
+const FLOAT = /\d*\.?\d+/g;
+
 export function calculateAndFormatCost(
     price: string | undefined,
     instance: EC2Instance,
@@ -300,7 +302,28 @@ export const columnsGen = (
         header: "Clock Speed(GHz)",
         size: 160,
         id: "clock_speed_ghz",
-        sortingFn: "alphanumeric",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.clock_speed_ghz?.match(FLOAT);
+            const valueB = rowB.original.clock_speed_ghz?.match(FLOAT);
+            if (!valueA) return -1;
+            if (!valueB) return 1;
+            return parseFloat(valueA[0]) - parseFloat(valueB[0]);
+        },
+        filterFn: (row, _, filterValue) => {
+            // Check the filter value and row have a float.
+            const matchFilter = filterValue?.match(FLOAT);
+            if (!matchFilter) {
+                // Filter by case insensitive match.
+                const rowValue = row.original.clock_speed_ghz;
+                if (!rowValue) return false;
+                return rowValue
+                    .toLowerCase()
+                    .includes(filterValue.toLowerCase());
+            }
+            const rowValue = row.original.clock_speed_ghz?.match(FLOAT);
+            if (!rowValue) return false;
+            return parseFloat(rowValue[0]) >= parseFloat(matchFilter[0]);
+        },
         cell: (info) => info.getValue() || "unknown",
     },
     {
