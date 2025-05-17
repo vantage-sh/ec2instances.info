@@ -49,7 +49,7 @@ export default function AzureInstanceRoot({
                         { name: "Azure", href: "/azure" },
                         { name: "VM", href: "/azure" },
                         {
-                            name: compressedInstance.instance_type,
+                            name: compressedInstance.pretty_name,
                             href: `/azure/vm/${compressedInstance.instance_type}`,
                         },
                     ]}
@@ -57,7 +57,7 @@ export default function AzureInstanceRoot({
                 <div className="md:flex gap-8">
                     <div className="md:max-w-sm">
                         <h1 className="text-2xl font-bold mb-2">
-                            {compressedInstance.instance_type}
+                            {compressedInstance.pretty_name}
                         </h1>
                         <p className="text-sm mb-4">{description}</p>
                         <PricingCalculator
