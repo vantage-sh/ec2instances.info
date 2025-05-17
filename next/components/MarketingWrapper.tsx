@@ -39,7 +39,7 @@ const AWSMarketing = () => (
             description="Ask questions about your organization's previous and current cloud cost spend, cost tagging, provider integrations, and more."
         />
         <Item
-            link="https://aws.amazon.com/ec2/"
+            link="https://www.vantage.sh/blog/aws-ec2-processors-intel-vs-amd-vs-graviton-adoption?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances"
             image="https://assets.vantage.sh/blog/aws-ec2-processors-intel-vs-amd-vs-graviton-adoption/aws-ec2-processors-intel-vs-amd-vs-graviton-adoption.jpg"
             title="Intel vs AMD vs Graviton: Amazon EC2 Processor Differences and Distribution"
             description="As Graviton and AMD processors gain broader EC2 availability alongside Intel, we analyze factors such as performance, cost, and distribution."
