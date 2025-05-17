@@ -57,7 +57,7 @@ export default function HalfEC2Root<
 
     return (
         <MarketingWrapper azure={false}>
-            <main className="my-4 px-4 max-w-screen-lg not-md:w-screen">
+            <main className="my-4 px-4 not-md:w-screen">
                 <InstanceBreadcrumbs
                     crumbs={[
                         { name: "AWS", href: "/" },
@@ -108,7 +108,9 @@ export default function HalfEC2Root<
                             for an AWS billing code lookup tool.
                         </p>
                     </div>
-                    <div className="flex-grow md:mt-0 mt-4">{children}</div>
+                    <div className="not-xl:flex-grow xl:w-2xl md:mt-0 mt-4">
+                        {children}
+                    </div>
                 </div>
             </main>
         </MarketingWrapper>
