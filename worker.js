@@ -64,7 +64,7 @@ export default {
         const headers = new Headers();
         asset.writeHttpMetadata(headers);
         headers.set("etag", asset.httpEtag);
-        headers.append("Cache-Control", "s-maxage=2629746");
+        headers.append("Cache-Control", "s-maxage=86400");
         const response = new Response(asset.body, {
             headers,
         });
