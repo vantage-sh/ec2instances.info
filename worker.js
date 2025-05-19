@@ -64,7 +64,10 @@ export default {
         const headers = new Headers();
         asset.writeHttpMetadata(headers);
         headers.set("etag", asset.httpEtag);
-        headers.append("Cache-Control", "s-maxage=86400");
+        if (!path.endsWith(".xml")) {
+            // Ignore .xml files because they are for search engines
+            headers.append("Cache-Control", "s-maxage=86400");
+        }
         const response = new Response(asset.body, {
             headers,
         });
