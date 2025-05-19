@@ -40,15 +40,16 @@ export function FamilySize({
             <table className="mt-2 w-full text-sm">
                 <thead>
                     <tr className="border-r border-gray-200">
-                        <th className="text-left pb-1">Size</th>
-                        <th className="text-left pb-1">vCPUs</th>
-                        <th className="text-left pb-1">Memory (GiB)</th>
+                        <th className="text-left pb-1 pl-2">Size</th>
+                        <th className="text-left pb-1 pl-2">vCPUs</th>
+                        <th className="text-left pb-1 pl-2">Memory (GiB)</th>
                     </tr>
                 </thead>
                 <tbody>
                     {allOfInstanceType.map((item) => {
-                        let tdStyling = "border border-gray-200 p-1";
-                        if (item.name === instanceName) tdStyling = "p-1";
+                        let tdStyling = "border border-gray-200 p-1 py-2 pl-2";
+                        if (item.name === instanceName)
+                            tdStyling = "p-1 py-2 pl-2";
                         return (
                             <tr
                                 key={item.name}
