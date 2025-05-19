@@ -7,6 +7,7 @@ import {
 } from "./shared";
 import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
+import sortByInstanceType from "../sortByInstanceType";
 
 type OpenSearchPricing = {
     [region: string]: {
@@ -96,7 +97,11 @@ export const columnsGen = (
         accessorKey: "instance_type",
         id: "instance_type",
         header: "API Name",
-        sortingFn: "alphanumeric",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.instance_type;
+            const valueB = rowB.original.instance_type;
+            return sortByInstanceType(valueA, valueB, ".");
+        },
         cell: (info) => {
             const value = info.getValue() as string;
             return (

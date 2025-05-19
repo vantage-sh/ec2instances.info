@@ -2,6 +2,7 @@ import { CostDuration, EC2Instance, Pricing, PricingUnit } from "@/types";
 import { ColumnDef, Row } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import { ClockFadingIcon } from "lucide-react";
+import sortByInstanceType from "@/utils/sortByInstanceType";
 
 interface Storage {
     devices: number;
@@ -105,7 +106,11 @@ export const columnsGen = (
         header: "API Name",
         size: 175,
         id: "instance_type",
-        sortingFn: "alphanumeric",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.instance_type;
+            const valueB = rowB.original.instance_type;
+            return sortByInstanceType(valueA, valueB, ".");
+        },
         cell: (info) => {
             const value = info.getValue() as string;
             return (

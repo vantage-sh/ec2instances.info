@@ -7,6 +7,7 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import { calculateCost, calculateAndFormatCost } from "./ec2/columns";
+import sortByInstanceType from "../sortByInstanceType";
 
 const initialColumnsArr = [
     ["name", true],
@@ -163,7 +164,11 @@ export const columnsGen = (
         header: "API Name",
         id: "apiname",
         accessorKey: "instance_type",
-        sortingFn: "alphanumeric",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.instance_type;
+            const valueB = rowB.original.instance_type;
+            return sortByInstanceType(valueA, valueB, ".", "db.");
+        },
         cell: (info) => {
             const value = info.getValue() as string;
             return (

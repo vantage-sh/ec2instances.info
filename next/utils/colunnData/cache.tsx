@@ -7,6 +7,7 @@ import {
 } from "./shared";
 import { EC2Instance, PricingUnit, CostDuration, Pricing } from "@/types";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
+import sortByInstanceType from "../sortByInstanceType";
 
 const initialColumnsArr = [
     ["pretty_name", true],
@@ -80,7 +81,11 @@ export const columnsGen = (
         accessorKey: "instance_type",
         id: "instance_type",
         header: "API Name",
-        sortingFn: "alphanumeric",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.instance_type;
+            const valueB = rowB.original.instance_type;
+            return sortByInstanceType(valueA, valueB, ".", "cache.");
+        },
         cell: (info) => {
             const value = info.getValue() as string;
             return (
