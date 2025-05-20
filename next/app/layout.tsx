@@ -2,6 +2,8 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import TopNav from "@/components/TopNav";
 import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/sonner";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
@@ -22,6 +24,7 @@ export default function RootLayout({
             </head>
             <body className={inter.className}>
                 <TopNav />
+                <Toaster duration={2000} />
                 {children}
                 <Footer />
             </body>

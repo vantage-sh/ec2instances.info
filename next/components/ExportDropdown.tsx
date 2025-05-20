@@ -8,6 +8,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
 
 function csvEscape(input: string) {
     // Check if the input contains special characters or double quotes
@@ -39,12 +40,14 @@ async function downloadCsvClick() {
 async function copyCsvClick() {
     const csv = await makeCsv();
     navigator.clipboard.writeText(csv);
+    toast.success("CSV copied to clipboard");
 }
 
 async function copyTsvClick() {
     const rows = await callActiveTableDataFormatter();
     const tsv = rows.map((row) => row.map(csvEscape).join("\t")).join("\n");
     navigator.clipboard.writeText(tsv);
+    toast.success("TSV copied to clipboard");
 }
 
 async function copyMdClick() {
@@ -54,6 +57,7 @@ async function copyMdClick() {
     ]);
     const md = markdownTable(rows);
     navigator.clipboard.writeText(md);
+    toast.success("Markdown table copied to clipboard");
 }
 
 export default function ExportDropdown() {
