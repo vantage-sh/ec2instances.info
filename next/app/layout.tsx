@@ -13,6 +13,12 @@ export default function RootLayout({
         <html lang="en">
             <head>
                 <link rel="icon" href="/favicon.png" />
+                <link
+                    rel="sitemap"
+                    type="application/xml"
+                    title="Sitemap"
+                    href="/sitemap_index.xml"
+                />
             </head>
             <body className={inter.className}>
                 <TopNav />
