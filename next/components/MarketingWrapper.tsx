@@ -13,19 +13,21 @@ type ItemProps = {
 
 const Item = ({ link, image, title, description }: ItemProps) => (
     <a href={link} target="_blank" className="not-sm:mx-auto">
-        <div className="xl:mt-4 flex-col border border-gray-200 rounded-md p-4 w-xs">
+        <div className="xl:mt-4 flex-col border border-gray-200 rounded-md p-4 w-xs xl:w-3xs 2xl:w-xs">
             <img
                 src={image}
                 alt={title}
                 className="w-full h-40 object-cover rounded-md"
             />
             <h3
-                className="text-md font-semibold mt-2 leading-tight"
+                className="text-md not-xl:text-sm xl:text-xs 2xl:text-sm font-semibold mt-2 leading-tight mb-1"
                 aria-hidden="true"
             >
                 {title}
             </h3>
-            <p className="text-xs text-gray-500">{description}</p>
+            <p className="text-xs not-xl:text-2xs xl:text-3xs 2xl:text-2xs text-gray-500">
+                {description}
+            </p>
         </div>
     </a>
 );

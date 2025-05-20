@@ -108,7 +108,7 @@ export default function HalfEC2Root<
                             for an AWS billing code lookup tool.
                         </p>
                     </div>
-                    <div className="not-xl:flex-grow xl:w-2xl md:mt-0 mt-4">
+                    <div className="not-xl:flex-grow xl:w-xl 2xl:w-2xl md:mt-0 mt-4">
                         {children}
                     </div>
                 </div>
