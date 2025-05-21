@@ -4,7 +4,7 @@
     "main": "worker.js",
     "r2_buckets": [
         {
-            "bucket_name": "ec2instances-assets-prod",
+            "bucket_name": "ec2instances-assets-production",
             "binding": "ASSETS",
         },
     ],
