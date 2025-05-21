@@ -84,7 +84,7 @@ export function makeColumnVisibilitySchema() {
 
 export function doDataTablesMigration() {
     return doAllDataTablesMigrations(
-        "/azure",
+        "/azure/",
         initialColumnsArr,
         initialColumnsValue,
     );

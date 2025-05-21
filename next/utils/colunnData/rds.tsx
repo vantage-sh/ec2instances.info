@@ -59,7 +59,7 @@ export function makeColumnVisibilitySchema() {
 
 export function doDataTablesMigration() {
     return doAllDataTablesMigrations(
-        "/rds",
+        "/rds/",
         initialColumnsArr,
         initialColumnsValue,
     );

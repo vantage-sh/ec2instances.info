@@ -63,7 +63,7 @@ export function makeColumnVisibilitySchema() {
 
 export function doDataTablesMigration() {
     return doAllDataTablesMigrations(
-        "/redshift",
+        "/redshift/",
         initialColumnsArr,
         initialColumnsValue,
     );

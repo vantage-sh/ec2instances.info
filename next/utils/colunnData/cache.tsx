@@ -37,7 +37,7 @@ export function makeColumnVisibilitySchema() {
 
 export function doDataTablesMigration() {
     return doAllDataTablesMigrations(
-        "/cache",
+        "/cache/",
         initialColumnsArr,
         initialColumnsValue,
     );

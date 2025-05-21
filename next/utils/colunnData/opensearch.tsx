@@ -56,7 +56,7 @@ export function makeColumnVisibilitySchema() {
 
 export function doDataTablesMigration() {
     return doAllDataTablesMigrations(
-        "/opensearch",
+        "/opensearch/",
         initialColumnsArr,
         initialColumnsValue,
     );
