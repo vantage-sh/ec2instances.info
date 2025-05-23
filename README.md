@@ -62,6 +62,8 @@ To start the development server, cd into the `next` directory and run `nvm use` 
 
 When you make changes, it is suggested to use the recommended VS Code extensions if that is your editor. If not, tell your editor to auto-format based on the Prettier configuration in the root. Before you make a PR, you should run `make format` in the root to make sure the formatting is correct for the version of Black/Prettier we use.
 
+Make sure your pull requests target `develop` since this is our staging. When it is merged into `main`, that is production.
+
 ## Building a full release
 
 **NOTE:** This is NOT needed for development in most cases and can on some setups mess with the file permsisions in the next folder leading to needing to clean the build output/temp folders in there. In most development cases, building the next part is sufficient for testing. However, this is needed for production/staging.
