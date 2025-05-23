@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import TopNav from "@/components/TopNav";
 import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
+import { GoogleTagManager } from '@next/third-parties/google'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +23,8 @@ export default function RootLayout({
                     title="Sitemap"
                     href="/sitemap_index.xml"
                 />
+                <GoogleTagManager gtmId="GTM-TBZCV32" />
+                <Script src="https://vantage-api.com/i.js" />
             </head>
             <body className={inter.className}>
                 <TopNav />
