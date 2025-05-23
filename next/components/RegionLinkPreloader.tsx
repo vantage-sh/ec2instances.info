@@ -8,7 +8,7 @@ const linksMapping: Set<{
     preload: () => void;
 }> =
     typeof window !== "undefined"
-        ? // @ts-expect-error: This is not typed to get on the window.
+        ? // @ts-ignore: This is not typed to get on the window.
           window.__LINKS_MAPPING__ || new Set()
         : new Set();
 
@@ -36,7 +36,7 @@ function handleWindowMovement() {
 
 if (typeof window !== "undefined") {
     if (!("__LINKS_MAPPING__" in window)) {
-        // @ts-expect-error: This is not typed to get on the window.
+        // @ts-ignore: This is not typed to get on the window.
         window.__LINKS_MAPPING__ = linksMapping;
         window.addEventListener("mousemove", handleMouseMove);
         window.addEventListener("scroll", handleWindowMovement);
