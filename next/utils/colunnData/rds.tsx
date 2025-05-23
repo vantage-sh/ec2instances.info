@@ -3,10 +3,15 @@ import {
     makeSchemaWithDefaults,
     doAllDataTablesMigrations,
     gt,
+    regex,
 } from "./shared";
 import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
-import { calculateCost, calculateAndFormatCost } from "./ec2/columns";
+import {
+    calculateCost,
+    calculateAndFormatCost,
+    makeCellWithRegexSorter,
+} from "./ec2/columns";
 import sortByInstanceType from "../sortByInstanceType";
 
 const initialColumnsArr = [
@@ -159,6 +164,7 @@ export const columnsGen = (
         id: "name",
         accessorKey: "pretty_name",
         sortingFn: "alphanumeric",
+        filterFn: regex({}),
     },
     {
         header: "API Name",
@@ -180,6 +186,7 @@ export const columnsGen = (
                 </RegionLinkPreloader>
             );
         },
+        filterFn: regex({}),
     },
     {
         header: "Memory",
@@ -200,12 +207,14 @@ export const columnsGen = (
         id: "ebs-throughput",
         accessorKey: "ebs_throughput",
         sortingFn: "alphanumeric",
+        filterFn: regex({}),
     },
     {
         header: "Processor",
         id: "physical_processor",
         accessorKey: "physicalProcessor",
         sortingFn: "alphanumeric",
+        filterFn: regex({}),
     },
     {
         header: "vCPUs",
@@ -219,6 +228,7 @@ export const columnsGen = (
         id: "networkperf",
         accessorKey: "network_performance",
         sortingFn: "alphanumeric",
+        filterFn: regex({}),
     },
     {
         accessorKey: "arch",
@@ -238,6 +248,14 @@ export const columnsGen = (
                 ),
             );
         },
+        filterFn: regex({
+            getCell: (row) => {
+                const arch = row.original.arch;
+                if (typeof arch === "string") return arch;
+                if (!arch) return "";
+                return arch.sort().join(", ");
+            },
+        }),
         cell: (info) => {
             const arch = info.getValue() as string[] | string;
             if (typeof arch === "string") return arch;
@@ -264,7 +282,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["14"]?.ondemand;
             return calculateAndFormatCost(
@@ -273,7 +291,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "PostgreSQL Reserved Cost",
@@ -298,7 +316,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["14"]?.reserved?.[reservedTerm];
@@ -308,7 +326,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "MySQL On Demand Cost",
@@ -329,7 +347,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["2"]?.ondemand;
             return calculateAndFormatCost(
@@ -338,7 +356,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "MySQL Reserved Cost",
@@ -363,7 +381,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["2"]?.reserved?.[reservedTerm];
@@ -373,7 +391,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "SQL Server Expresss On Demand Cost",
@@ -394,7 +412,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["10"]?.ondemand;
             return calculateAndFormatCost(
@@ -403,7 +421,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "SQL Server Expresss Reserved Cost",
@@ -428,7 +446,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["10"]?.reserved?.[reservedTerm];
@@ -438,7 +456,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "SQL Server Web On Demand Cost",
@@ -459,7 +477,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["11"]?.ondemand;
             return calculateAndFormatCost(
@@ -468,7 +486,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "SQL Server Web Reserved Cost",
@@ -493,7 +511,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["11"]?.reserved?.[reservedTerm];
@@ -503,7 +521,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "SQL Server Standard On Demand Cost",
@@ -524,7 +542,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["12"]?.ondemand;
             return calculateAndFormatCost(
@@ -533,7 +551,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "SQL Server Standard Reserved Cost",
@@ -558,7 +576,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["12"]?.reserved?.[reservedTerm];
@@ -568,7 +586,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "SQL Server Enterprise On Demand Cost",
@@ -589,7 +607,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["15"]?.ondemand;
             return calculateAndFormatCost(
@@ -598,7 +616,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "SQL Server Enterprise Reserved Cost",
@@ -623,7 +641,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["15"]?.reserved?.[reservedTerm];
@@ -633,7 +651,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "Aurora Postgres & MySQL On Demand Cost",
@@ -654,7 +672,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["21"]?.ondemand;
             return calculateAndFormatCost(
@@ -663,7 +681,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "Aurora Postgres & MySQL Reserved Cost",
@@ -688,7 +706,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["21"]?.reserved?.[reservedTerm];
@@ -698,7 +716,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "Aurora I/O Optimized On Demand Cost",
@@ -719,7 +737,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["211"]?.ondemand;
             return calculateAndFormatCost(
@@ -728,7 +746,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "MariaDB On Demand Cost",
@@ -749,7 +767,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["18"]?.ondemand;
             return calculateAndFormatCost(
@@ -758,7 +776,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "MariaDB Reserved Cost",
@@ -783,7 +801,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["18"]?.reserved?.[reservedTerm];
@@ -793,7 +811,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "Oracle Enterprise On Demand Cost",
@@ -814,7 +832,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["5"]?.ondemand;
             return calculateAndFormatCost(
@@ -823,7 +841,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "Oracle Enterprise Reserved Cost",
@@ -848,7 +866,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["5"]?.reserved?.[reservedTerm];
@@ -858,42 +876,48 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         header: "EBS Optimized: Baseline Bandwidth",
         id: "ebs-baseline-bandwidth",
         accessorKey: "ebs_baseline_bandwidth",
         sortingFn: "alphanumeric",
+        filterFn: regex({}),
     },
     {
         header: "EBS Optimized: Baseline Throughput (128K)",
         id: "ebs-baseline-throughput",
         accessorKey: "ebs_baseline_throughput",
         sortingFn: "alphanumeric",
+        filterFn: regex({}),
     },
     {
         header: "EBS Optimized: Baseline IOPS (16K)",
         id: "ebs-baseline-iops",
         accessorKey: "ebs_baseline_iops",
         sortingFn: "alphanumeric",
+        filterFn: regex({}),
     },
     {
         header: "EBS Optimized: Max Bandwidth",
         id: "ebs-max-bandwidth",
         accessorKey: "ebs_max_bandwidth",
         sortingFn: "alphanumeric",
+        filterFn: regex({}),
     },
     {
         header: "EBS Optimized: Max Throughput (128K)",
         id: "ebs-max-throughput",
         accessorKey: "ebs_throughput",
         sortingFn: "alphanumeric",
+        filterFn: regex({}),
     },
     {
         header: "EBS Optimized: Max IOPS (16K)",
         id: "ebs-iops",
         accessorKey: "ebs_iops",
         sortingFn: "alphanumeric",
+        filterFn: regex({}),
     },
 ];

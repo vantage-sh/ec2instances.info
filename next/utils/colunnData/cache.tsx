@@ -4,10 +4,12 @@ import {
     doAllDataTablesMigrations,
     gt,
     makeSchemaWithDefaults,
+    regex,
 } from "./shared";
 import { EC2Instance, PricingUnit, CostDuration, Pricing } from "@/types";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import sortByInstanceType from "../sortByInstanceType";
+import { makeCellWithRegexSorter } from "./ec2/columns";
 
 const initialColumnsArr = [
     ["pretty_name", true],
@@ -76,6 +78,7 @@ export const columnsGen = (
         id: "pretty_name",
         header: "Name",
         sortingFn: "alphanumeric",
+        filterFn: regex({}),
     },
     {
         accessorKey: "instance_type",
@@ -86,6 +89,7 @@ export const columnsGen = (
             const valueB = rowB.original.instance_type;
             return sortByInstanceType(valueA, valueB, ".", "cache.");
         },
+        filterFn: regex({}),
         cell: (info) => {
             const value = info.getValue() as string;
             return (
@@ -125,13 +129,14 @@ export const columnsGen = (
         id: "networkperf",
         sortingFn: "alphanumeric",
         header: "Network Performance",
+        filterFn: regex({}),
     },
     {
         accessorKey: "pricing",
         id: "cost-ondemand-redis",
         header: "Redis Cost",
         sortingFn: "alphanumeric",
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -141,14 +146,14 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         accessorKey: "pricing",
         id: "cost-reserved-redis",
         header: "Redis Reserved Cost",
         sortingFn: "alphanumeric",
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -158,14 +163,14 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         accessorKey: "pricing",
         id: "cost-ondemand-memcached",
         header: "Memcached On Demand Cost",
         sortingFn: "alphanumeric",
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -175,14 +180,14 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         accessorKey: "pricing",
         id: "cost-reserved-memcached",
         header: "Memcached Reserved Cost",
         sortingFn: "alphanumeric",
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -192,14 +197,14 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         accessorKey: "pricing",
         id: "cost-ondemand-valkey",
         header: "Valkey On Demand Cost",
         sortingFn: "alphanumeric",
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -209,14 +214,14 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         accessorKey: "pricing",
         id: "cost-reserved-valkey",
         header: "Valkey Reserved Cost",
         sortingFn: "alphanumeric",
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -226,13 +231,21 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         accessorKey: "currentGeneration",
         id: "generation",
         header: "Generation",
         sortingFn: "alphanumeric",
+        filterFn: regex({
+            getCell: (row) => {
+                // @ts-expect-error: Not typed
+                const v = row.original.currentGeneration;
+                if (v === "Yes") return "current";
+                return "previous";
+            },
+        }),
         cell: (info) => {
             if (info.getValue() === "Yes") return "current";
             return "previous";

@@ -118,3 +118,59 @@ export function calculateCost(
 
     return `$${((Number(price) * durationMultiplier) / pricingUnitModifier).toFixed(4)} ${costDuration}`;
 }
+
+class RegexCacheWithTTL {
+    private cache = new Map<string, RegExp>();
+
+    get(key: string) {
+        return this.cache.get(key);
+    }
+
+    set(key: string, value: RegExp) {
+        this.cache.set(key, value);
+        setTimeout(() => this.cache.delete(key), 10000);
+    }
+}
+
+const regexCache = new RegexCacheWithTTL();
+
+export function regex<Instance, Value>(opts: {
+    fallback?: (
+        row: Row<Instance>,
+        columnId: string,
+        filterValue: Value,
+    ) => boolean;
+    getCell?: (row: Row<Instance>) => any;
+}): (row: Row<Instance>, columnId: string, filterValue: Value) => boolean {
+    let fallback = opts.fallback;
+    if (!fallback) {
+        fallback = (row, columnId, filterValue) => {
+            const value = String(
+                opts.getCell
+                    ? opts.getCell(row)
+                    : row.original[columnId as keyof Instance],
+            );
+            if (typeof value !== "string") return false;
+            return value
+                .toLowerCase()
+                .includes(String(filterValue).toLowerCase());
+        };
+    }
+
+    return (row, columnId, filterValue) => {
+        const value = String(
+            opts.getCell
+                ? opts.getCell(row)
+                : row.original[columnId as keyof Instance],
+        );
+        try {
+            let regex = regexCache.get(String(filterValue));
+            if (!regex) {
+                regex = new RegExp(String(filterValue), "ig");
+                regexCache.set(String(filterValue), regex);
+            }
+            if (regex.test(value)) return true;
+        } catch {}
+        return fallback(row, columnId, filterValue);
+    };
+}

@@ -1,7 +1,11 @@
 import { PricingUnit } from "@/types";
-import { ColumnDef } from "@tanstack/react-table";
-import { doAllDataTablesMigrations, gt } from "./shared";
-import { makeSchemaWithDefaults } from "./shared";
+import { ColumnDef, Row } from "@tanstack/react-table";
+import {
+    doAllDataTablesMigrations,
+    gt,
+    regex,
+    makeSchemaWithDefaults,
+} from "./shared";
 import { CostDuration } from "@/types";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 
@@ -184,6 +188,28 @@ export function calculateAndFormatCost(
     return `$${perTime.toFixed(precision)}${pricingMeasuringUnits}`;
 }
 
+function makeCellWithRegexSorter(
+    cellGet: (cell: { getValue: () => any; row: Row<AzureInstance> }) => any,
+): {
+    cell: (info: { getValue: () => any; row: Row<AzureInstance> }) => any;
+    filterFn: (
+        row: Row<AzureInstance>,
+        columnId: string,
+        filterValue: string,
+    ) => boolean;
+} {
+    return {
+        cell: cellGet,
+        filterFn: regex({
+            getCell: (row) =>
+                cellGet({
+                    getValue: () => row.original.pricing,
+                    row,
+                }),
+        }),
+    };
+}
+
 export const columnsGen = (
     selectedRegion: string,
     pricingUnit: PricingUnit,
@@ -198,6 +224,7 @@ export const columnsGen = (
             id: "pretty_name_azure",
             header: "Name",
             sortingFn: "alphanumeric",
+            filterFn: regex({}),
         },
         {
             accessorKey: "instance_type",
@@ -215,6 +242,7 @@ export const columnsGen = (
                     </RegionLinkPreloader>
                 );
             },
+            filterFn: regex({}),
         },
         {
             accessorKey: "memory",
@@ -254,6 +282,7 @@ export const columnsGen = (
             header: "GPUs",
             size: 160,
             id: "GPU",
+            filterFn: regex({}),
         },
         {
             accessorKey: "size",
@@ -282,7 +311,7 @@ export const columnsGen = (
                 );
                 return valueA - valueB;
             },
-            cell: (info) => {
+            ...makeCellWithRegexSorter((info) => {
                 const pricing = info.getValue() as AzurePricing | undefined;
                 const price = pricing?.[selectedRegion]?.linux?.ondemand;
                 return calculateAndFormatCost(
@@ -291,7 +320,7 @@ export const columnsGen = (
                     pricingUnit,
                     costDuration,
                 );
-            },
+            }),
         },
         {
             accessorKey: "pricing",
@@ -316,7 +345,7 @@ export const columnsGen = (
                 );
                 return valueA - valueB;
             },
-            cell: (info) => {
+            ...makeCellWithRegexSorter((info) => {
                 const pricing = info.getValue() as AzurePricing | undefined;
                 const price =
                     pricing?.[selectedRegion]?.linux?.reserved?.[savingsKey];
@@ -326,7 +355,7 @@ export const columnsGen = (
                     pricingUnit,
                     costDuration,
                 );
-            },
+            }),
         },
         {
             accessorKey: "pricing",
@@ -351,7 +380,7 @@ export const columnsGen = (
                 );
                 return valueA - valueB;
             },
-            cell: (info) => {
+            ...makeCellWithRegexSorter((info) => {
                 const pricing = info.getValue() as AzurePricing | undefined;
                 const price =
                     pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm];
@@ -361,7 +390,7 @@ export const columnsGen = (
                     pricingUnit,
                     costDuration,
                 );
-            },
+            }),
         },
         {
             accessorKey: "pricing",
@@ -382,7 +411,7 @@ export const columnsGen = (
                 );
                 return valueA - valueB;
             },
-            cell: (info) => {
+            ...makeCellWithRegexSorter((info) => {
                 const pricing = info.getValue() as AzurePricing | undefined;
                 const price = pricing?.[selectedRegion]?.linux?.spot_min;
                 return calculateAndFormatCost(
@@ -391,7 +420,7 @@ export const columnsGen = (
                     pricingUnit,
                     costDuration,
                 );
-            },
+            }),
         },
         {
             accessorKey: "pricing",
@@ -412,7 +441,7 @@ export const columnsGen = (
                 );
                 return valueA - valueB;
             },
-            cell: (info) => {
+            ...makeCellWithRegexSorter((info) => {
                 const pricing = info.getValue() as AzurePricing | undefined;
                 const price = pricing?.[selectedRegion]?.windows?.ondemand;
                 return calculateAndFormatCost(
@@ -421,7 +450,7 @@ export const columnsGen = (
                     pricingUnit,
                     costDuration,
                 );
-            },
+            }),
         },
         {
             accessorKey: "pricing",
@@ -444,7 +473,7 @@ export const columnsGen = (
                 );
                 return valueA - valueB;
             },
-            cell: (info) => {
+            ...makeCellWithRegexSorter((info) => {
                 const pricing = info.getValue() as AzurePricing | undefined;
                 const price =
                     pricing?.[selectedRegion]?.windows?.reserved?.[savingsKey];
@@ -454,7 +483,7 @@ export const columnsGen = (
                     pricingUnit,
                     costDuration,
                 );
-            },
+            }),
         },
         {
             accessorKey: "pricing",
@@ -477,7 +506,7 @@ export const columnsGen = (
                 );
                 return valueA - valueB;
             },
-            cell: (info) => {
+            ...makeCellWithRegexSorter((info) => {
                 const pricing = info.getValue() as AzurePricing | undefined;
                 const price =
                     pricing?.[selectedRegion]?.windows?.reserved?.[
@@ -489,7 +518,7 @@ export const columnsGen = (
                     pricingUnit,
                     costDuration,
                 );
-            },
+            }),
         },
         {
             accessorKey: "pricing",
@@ -510,7 +539,7 @@ export const columnsGen = (
                 );
                 return valueA - valueB;
             },
-            cell: (info) => {
+            ...makeCellWithRegexSorter((info) => {
                 const pricing = info.getValue() as AzurePricing | undefined;
                 const price = pricing?.[selectedRegion]?.windows?.spot_min;
                 return calculateAndFormatCost(
@@ -519,7 +548,7 @@ export const columnsGen = (
                     pricingUnit,
                     costDuration,
                 );
-            },
+            }),
         },
     ];
 };

@@ -5,8 +5,9 @@ import {
     doAllDataTablesMigrations,
     gt,
     calculateCost,
+    regex,
 } from "./shared";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, Row } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import sortByInstanceType from "../sortByInstanceType";
 
@@ -89,6 +90,28 @@ export function makePrettyNames<V>(
     ];
 }
 
+function makeCellWithRegexSorter(
+    cellGet: (cell: { getValue: () => any; row: Row<Instance> }) => any,
+): {
+    cell: (info: { getValue: () => any; row: Row<Instance> }) => any;
+    filterFn: (
+        row: Row<Instance>,
+        columnId: string,
+        filterValue: string,
+    ) => boolean;
+} {
+    return {
+        cell: cellGet,
+        filterFn: regex({
+            getCell: (row) =>
+                cellGet({
+                    getValue: () => row.original.pricing,
+                    row,
+                }),
+        }),
+    };
+}
+
 export const columnsGen = (
     selectedRegion: string,
     pricingUnit: PricingUnit,
@@ -101,12 +124,14 @@ export const columnsGen = (
         id: "pretty_name",
         size: 350,
         sortingFn: "alphanumeric",
+        filterFn: regex({}),
         cell: (info) => info.getValue() as string,
     },
     {
         accessorKey: "instance_type",
         header: "API Name",
         id: "instance_type",
+        filterFn: regex({}),
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.instance_type;
             const valueB = rowB.original.instance_type;
@@ -168,6 +193,13 @@ export const columnsGen = (
         header: "Generation",
         id: "generation",
         sortingFn: "alphanumeric",
+        filterFn: regex({
+            getCell: (row) => {
+                const v = row.original.currentGeneration;
+                if (v === "Yes") return "current";
+                return "previous";
+            },
+        }),
         cell: (info) => {
             if (info.getValue() === "Yes") return "current";
             return "previous";
@@ -178,7 +210,7 @@ export const columnsGen = (
         header: "On Demand Cost",
         id: "cost-ondemand",
         sortingFn: "alphanumeric",
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as RedshiftPricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -188,14 +220,14 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
     {
         accessorKey: "pricing",
         header: "Reserved Cost",
         id: "cost-reserved",
         sortingFn: "alphanumeric",
-        cell: (info) => {
+        ...makeCellWithRegexSorter((info) => {
             const pricing = info.getValue() as RedshiftPricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -205,6 +237,6 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
             );
-        },
+        }),
     },
 ];
