@@ -2,6 +2,12 @@ export default {
     async fetch(request, env, ctx) {
         const url = new URL(request.url);
 
+        // Handle HTTP redirects.
+        if (url.protocol === "http:") {
+            url.protocol = "https:";
+            return Response.redirect(url, 301);
+        }
+
         // Construct the cache key from the cache URL
         const cacheKey = new Request(url.toString(), request);
         const cache = caches.default;
