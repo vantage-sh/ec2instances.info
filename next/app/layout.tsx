@@ -24,7 +24,10 @@ export default function RootLayout({
                     href="/sitemap_index.xml"
                 />
                 <GoogleTagManager gtmId="GTM-TBZCV32" />
-                <Script src="https://vantage-api.com/i.js" strategy="afterInteractive" />
+                <Script
+                    src="https://vantage-api.com/i.js"
+                    strategy="afterInteractive"
+                />
             </head>
             <body className={inter.className}>
                 <TopNav />
