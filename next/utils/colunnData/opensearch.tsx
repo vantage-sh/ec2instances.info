@@ -5,8 +5,9 @@ import {
     gt,
     calculateCost,
     regex,
+    makeCellWithRegexSorter,
 } from "./shared";
-import { ColumnDef, Row } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import sortByInstanceType from "../sortByInstanceType";
 
@@ -82,28 +83,6 @@ export function makePrettyNames<V>(
     ] as const;
 }
 
-function makeCellWithRegexSorter(
-    cellGet: (cell: { getValue: () => any; row: Row<Instance> }) => any,
-): {
-    cell: (info: { getValue: () => any; row: Row<Instance> }) => any;
-    filterFn: (
-        row: Row<Instance>,
-        columnId: string,
-        filterValue: string,
-    ) => boolean;
-} {
-    return {
-        cell: cellGet,
-        filterFn: regex({
-            getCell: (row) =>
-                cellGet({
-                    getValue: () => row.original.pricing,
-                    row,
-                }),
-        }),
-    };
-}
-
 export const columnsGen = (
     selectedRegion: string,
     pricingUnit: PricingUnit,
@@ -176,7 +155,7 @@ export const columnsGen = (
         id: "cost-ondemand",
         header: "On Demand Cost",
         sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as OpenSearchPricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -193,7 +172,7 @@ export const columnsGen = (
         id: "cost-reserved",
         header: "Reserved Cost",
         sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as OpenSearchPricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -210,16 +189,9 @@ export const columnsGen = (
         id: "generation",
         header: "Generation",
         sortingFn: "alphanumeric",
-        filterFn: regex({
-            getCell: (row) => {
-                const v = row.original.currentGeneration;
-                if (v === "Yes") return "current";
-                return "previous";
-            },
-        }),
-        cell: (info) => {
+        ...makeCellWithRegexSorter("currentGeneration", (info) => {
             if (info.getValue() === "Yes") return "current";
             return "previous";
-        },
+        }),
     },
 ];

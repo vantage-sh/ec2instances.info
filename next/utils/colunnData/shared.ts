@@ -174,3 +174,26 @@ export function regex<Instance, Value>(opts: {
         return fallback(row, columnId, filterValue);
     };
 }
+
+export function makeCellWithRegexSorter<Instance>(
+    accessorKey: keyof Instance,
+    cellGet: (cell: { getValue: () => any; row: Row<Instance> }) => any,
+): {
+    cell: (info: { getValue: () => any; row: Row<Instance> }) => any;
+    filterFn: (
+        row: Row<Instance>,
+        columnId: string,
+        filterValue: string,
+    ) => boolean;
+} {
+    return {
+        cell: cellGet,
+        filterFn: regex({
+            getCell: (row) =>
+                cellGet({
+                    getValue: () => row.original[accessorKey],
+                    row,
+                }),
+        }),
+    };
+}
