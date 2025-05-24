@@ -5,11 +5,11 @@ import {
     gt,
     makeSchemaWithDefaults,
     regex,
+    makeCellWithRegexSorter,
 } from "./shared";
 import { EC2Instance, PricingUnit, CostDuration, Pricing } from "@/types";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import sortByInstanceType from "../sortByInstanceType";
-import { makeCellWithRegexSorter } from "./ec2/columns";
 
 const initialColumnsArr = [
     ["pretty_name", true],
@@ -136,7 +136,7 @@ export const columnsGen = (
         id: "cost-ondemand-redis",
         header: "Redis Cost",
         sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -153,7 +153,7 @@ export const columnsGen = (
         id: "cost-reserved-redis",
         header: "Redis Reserved Cost",
         sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -170,7 +170,7 @@ export const columnsGen = (
         id: "cost-ondemand-memcached",
         header: "Memcached On Demand Cost",
         sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -187,7 +187,7 @@ export const columnsGen = (
         id: "cost-reserved-memcached",
         header: "Memcached Reserved Cost",
         sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -204,7 +204,7 @@ export const columnsGen = (
         id: "cost-ondemand-valkey",
         header: "Valkey On Demand Cost",
         sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -221,7 +221,7 @@ export const columnsGen = (
         id: "cost-reserved-valkey",
         header: "Valkey Reserved Cost",
         sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing;
             const region = pricing[selectedRegion];
             if (!region) return "N/A";
@@ -238,17 +238,10 @@ export const columnsGen = (
         id: "generation",
         header: "Generation",
         sortingFn: "alphanumeric",
-        filterFn: regex({
-            getCell: (row) => {
-                // @ts-expect-error: Not typed
-                const v = row.original.currentGeneration;
-                if (v === "Yes") return "current";
-                return "previous";
-            },
-        }),
-        cell: (info) => {
+        // @ts-expect-error: This accessor is not typed right now.
+        ...makeCellWithRegexSorter("currentGeneration", (info) => {
             if (info.getValue() === "Yes") return "current";
             return "previous";
-        },
+        }),
     },
 ];

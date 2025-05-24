@@ -3,7 +3,7 @@ import { ColumnDef, Row } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import { ClockFadingIcon } from "lucide-react";
 import sortByInstanceType from "@/utils/sortByInstanceType";
-import { regex } from "../shared";
+import { regex, makeCellWithRegexSorter } from "../shared";
 
 interface Storage {
     devices: number;
@@ -86,28 +86,6 @@ export function calculateAndFormatCost(
             : ` ${durationText} / ${measuringUnits[pricingUnit]}`;
 
     return `$${perTime.toFixed(precision)}${pricingMeasuringUnits}`;
-}
-
-export function makeCellWithRegexSorter(
-    cellGet: (cell: { getValue: () => any; row: Row<EC2Instance> }) => any,
-): {
-    cell: (info: { getValue: () => any; row: Row<EC2Instance> }) => any;
-    filterFn: (
-        row: Row<EC2Instance>,
-        columnId: string,
-        filterValue: string,
-    ) => boolean;
-} {
-    return {
-        cell: cellGet,
-        filterFn: regex({
-            getCell: (row) =>
-                cellGet({
-                    getValue: () => row.original.pricing,
-                    row,
-                }),
-        }),
-    };
 }
 
 export const columnsGen = (
@@ -449,24 +427,13 @@ export const columnsGen = (
             if (!storageB) return 1;
             return storageA.storage_needs_initialization ? 1 : -1;
         },
-        filterFn: regex({
-            getCell: (row) => {
-                const storage = row.original.storage;
-                if (!storage) return "N/A";
-                if (storage.storage_needs_initialization === undefined)
-                    throw new Error(
-                        "storage_needs_initialization is undefined",
-                    );
-                return storage.storage_needs_initialization ? "No" : "Yes";
-            },
-        }),
-        cell: (info) => {
+        ...makeCellWithRegexSorter("storage", (info) => {
             const storage = info.getValue() as Storage;
             if (!storage) return "N/A";
             if (storage.storage_needs_initialization === undefined)
                 throw new Error("storage_needs_initialization is undefined");
             return storage.storage_needs_initialization ? "No" : "Yes";
-        },
+        }),
     },
     {
         accessorKey: "storage",
@@ -485,22 +452,13 @@ export const columnsGen = (
             if (valueB === undefined) return 1;
             return valueA ? 1 : -1;
         },
-        filterFn: regex({
-            getCell: (row) => {
-                const storage = row.original.storage;
-                if (!storage || !storage.ssd) return "N/A";
-                if (storage.trim_support === undefined)
-                    throw new Error("trim_support is undefined");
-                return storage.trim_support ? "Yes" : "No";
-            },
-        }),
-        cell: (info) => {
+        ...makeCellWithRegexSorter("storage", (info) => {
             const storage = info.getValue() as Storage;
             if (!storage || !storage.ssd) return "N/A";
             if (storage.trim_support === undefined)
                 throw new Error("trim_support is undefined");
             return storage.trim_support ? "Yes" : "No";
-        },
+        }),
     },
     {
         accessorKey: "arch",
@@ -520,18 +478,11 @@ export const columnsGen = (
                 ),
             );
         },
-        filterFn: regex({
-            getCell: (row) => {
-                const arch = row.original.arch;
-                if (typeof arch === "string") return arch;
-                return arch.sort().join(", ");
-            },
-        }),
-        cell: (info) => {
+        ...makeCellWithRegexSorter("arch", (info) => {
             const arch = info.getValue() as string[] | string;
             if (typeof arch === "string") return arch;
             return arch.sort().join(", ");
-        },
+        }),
     },
     {
         accessorKey: "network_performance",
@@ -553,38 +504,31 @@ export const columnsGen = (
             if (!valueB) return 1;
             return valueA - valueB;
         },
-        filterFn: regex({
-            getCell: (row) => {
-                const value = row.original.ebs_baseline_bandwidth;
-                if (!value) return "N/A";
-                return `${value} Mbps`;
-            },
-        }),
-        cell: (info) => {
+        ...makeCellWithRegexSorter("ebs_baseline_bandwidth", (info) => {
             const value = info.getValue();
             if (!value) return "N/A";
             return `${value} Mbps`;
-        },
+        }),
     },
     {
         accessorKey: "ebs_baseline_throughput",
         header: "EBS Optimized: Baseline Throughput (128K)",
         id: "ebs_baseline_throughput",
         sortingFn: "alphanumeric",
-        filterFn: regex({
-            getCell: (row) => `${row.original.ebs_baseline_bandwidth} MB/s`,
-        }),
-        cell: (info) => `${info.getValue() as number} MB/s`,
+        ...makeCellWithRegexSorter(
+            "ebs_baseline_throughput",
+            (info) => `${info.getValue() as number} MB/s`,
+        ),
     },
     {
         accessorKey: "ebs_baseline_iops",
         header: "EBS Optimized: Baseline IOPS (16K)",
         id: "ebs_baseline_iops",
         sortingFn: "alphanumeric",
-        filterFn: regex({
-            getCell: (row) => `${row.original.ebs_baseline_iops} IOPS`,
-        }),
-        cell: (info) => `${info.getValue() as number} IOPS`,
+        ...makeCellWithRegexSorter(
+            "ebs_baseline_iops",
+            (info) => `${info.getValue() as number} IOPS`,
+        ),
     },
     {
         accessorKey: "ebs_max_bandwidth",
@@ -597,49 +541,39 @@ export const columnsGen = (
             if (!valueB) return 1;
             return valueA - valueB;
         },
-        filterFn: regex({
-            getCell: (row) => {
-                const value = row.original.ebs_max_bandwidth;
-                if (!value) return "N/A";
-                return `${value} Mbps`;
-            },
-        }),
-        cell: (info) => {
+        ...makeCellWithRegexSorter("ebs_max_bandwidth", (info) => {
             const value = info.getValue();
             if (!value) return "N/A";
             return `${value} Mbps`;
-        },
+        }),
     },
     {
         accessorKey: "ebs_throughput",
         header: "EBS Optimized: Max Throughput (128K)",
         id: "ebs_throughput",
         sortingFn: "alphanumeric",
-        filterFn: regex({
-            getCell: (row) => `${row.original.ebs_throughput} MB/s`,
-        }),
-        cell: (info) => `${info.getValue() as number} MB/s`,
+        ...makeCellWithRegexSorter(
+            "ebs_throughput",
+            (info) => `${info.getValue() as number} MB/s`,
+        ),
     },
     {
         accessorKey: "ebs_iops",
         header: "EBS Optimized: Max IOPS (16K)",
         id: "ebs_iops",
         sortingFn: "alphanumeric",
-        filterFn: regex({
-            getCell: (row) => `${row.original.ebs_iops} IOPS`,
-        }),
-        cell: (info) => `${info.getValue() as number} IOPS`,
+        ...makeCellWithRegexSorter(
+            "ebs_iops",
+            (info) => `${info.getValue() as number} IOPS`,
+        ),
     },
     {
         accessorKey: "ebs_as_nvme",
         header: "EBS Exposed as NVMe",
         id: "ebs_as_nvme",
-        filterFn: regex({
-            getCell: (row) => {
-                return row.original.ebs_as_nvme ? "Yes" : "No";
-            },
-        }),
-        cell: (info) => (info.getValue() ? "Yes" : "No"),
+        ...makeCellWithRegexSorter("ebs_as_nvme", (info) =>
+            info.getValue() ? "Yes" : "No",
+        ),
     },
     {
         accessorKey: "vpc",
@@ -681,64 +615,45 @@ export const columnsGen = (
             if (!valueB) return 1;
             return valueA.max_enis - valueB.max_enis;
         },
-        filterFn: regex({
-            getCell: (row) => {
-                const vpc = row.original.vpc;
-                if (!vpc) return "N/A";
-                return vpc.max_enis;
-            },
-        }),
-        cell: (info) => {
+        ...makeCellWithRegexSorter("vpc", (info) => {
             const vpc = info.getValue() as any;
             if (!vpc) return "N/A";
             return vpc.max_enis;
-        },
+        }),
     },
     {
         accessorKey: "enhanced_networking",
         header: "Enhanced Networking",
         id: "enhanced_networking",
-        filterFn: regex({
-            getCell: (row) => {
-                return row.original.enhanced_networking ? "Yes" : "No";
-            },
+        ...makeCellWithRegexSorter("enhanced_networking", (info) => {
+            return info.getValue() ? "Yes" : "No";
         }),
-        cell: (info) => (info.getValue() ? "Yes" : "No"),
     },
     {
         accessorKey: "vpc_only",
         header: "VPC Only",
         size: 110,
         id: "vpc_only",
-        filterFn: regex({
-            getCell: (row) => {
-                return row.original.vpc_only ? "Yes" : "No";
-            },
+        ...makeCellWithRegexSorter("vpc_only", (info) => {
+            return info.getValue() ? "Yes" : "No";
         }),
-        cell: (info) => (info.getValue() ? "Yes" : "No"),
     },
     {
         accessorKey: "ipv6_support",
         header: "IPv6 Support",
         size: 130,
         id: "ipv6_support",
-        filterFn: regex({
-            getCell: (row) => {
-                return row.original.ipv6_support ? "Yes" : "No";
-            },
-        }),
-        cell: (info) => (info.getValue() ? "Yes" : "No"),
+        ...makeCellWithRegexSorter("ipv6_support", (info) =>
+            info.getValue() ? "Yes" : "No",
+        ),
     },
     {
         accessorKey: "placement_group_support",
         header: "Placement Group Support",
         id: "placement_group_support",
-        filterFn: regex({
-            getCell: (row) => {
-                return row.original.placement_group_support ? "Yes" : "No";
-            },
-        }),
-        cell: (info) => (info.getValue() ? "Yes" : "No"),
+        ...makeCellWithRegexSorter("placement_group_support", (info) =>
+            info.getValue() ? "Yes" : "No",
+        ),
     },
     {
         accessorKey: "linux_virtualization_types",
@@ -753,29 +668,19 @@ export const columnsGen = (
             // I can't think of a better way to do this
             return valueA.join(", ").localeCompare(valueB.join(", "));
         },
-        filterFn: regex({
-            getCell: (row) => {
-                const types = row.original.linux_virtualization_types;
-                if (!types || types.length === 0) return "Unknown";
-                return types.join(", ");
-            },
-        }),
-        cell: (info) => {
+        ...makeCellWithRegexSorter("linux_virtualization_types", (info) => {
             const types = info.getValue() as string[];
             return types?.length ? types.join(", ") : "Unknown";
-        },
+        }),
     },
     {
         accessorKey: "emr",
         header: "On EMR",
         size: 100,
         id: "emr",
-        filterFn: regex({
-            getCell: (row) => {
-                return row.original.emr ? "Yes" : "No";
-            },
-        }),
-        cell: (info) => (info.getValue() ? "Yes" : "No"),
+        ...makeCellWithRegexSorter("emr", (info) =>
+            info.getValue() ? "Yes" : "No",
+        ),
     },
     {
         accessorKey: "availability_zones",
@@ -788,17 +693,10 @@ export const columnsGen = (
             if (!valueB) return 1;
             return valueA.join(", ").localeCompare(valueB.join(", "));
         },
-        filterFn: regex({
-            getCell: (row) => {
-                const zones = row.original.availability_zones;
-                if (!zones) return "N/A";
-                return zones[selectedRegion]?.join(", ") || "";
-            },
-        }),
-        cell: (info) => {
+        ...makeCellWithRegexSorter("availability_zones", (info) => {
             const zones = info.getValue() as Record<string, string[]>;
             return zones?.[selectedRegion]?.join(", ") || "";
-        },
+        }),
     },
     {
         accessorKey: "pricing",
@@ -820,7 +718,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.linux?.ondemand;
             return calculateAndFormatCost(
@@ -855,7 +753,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm];
@@ -887,7 +785,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.linux?.spot_min;
             return calculateAndFormatCost(
@@ -918,7 +816,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.linux?.spot_avg;
             return calculateAndFormatCost(
@@ -949,7 +847,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.rhel?.ondemand;
             return calculateAndFormatCost(
@@ -983,7 +881,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.rhel?.reserved?.[reservedTerm];
@@ -1014,7 +912,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.rhel?.spot_min;
             return calculateAndFormatCost(
@@ -1044,7 +942,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.rhel?.spot_max;
             return calculateAndFormatCost(
@@ -1074,7 +972,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.sles?.ondemand;
             return calculateAndFormatCost(
@@ -1108,7 +1006,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.sles?.reserved?.[reservedTerm];
@@ -1139,7 +1037,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.sles?.spot_min;
             return calculateAndFormatCost(
@@ -1169,7 +1067,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.sles?.spot_max;
             return calculateAndFormatCost(
@@ -1199,7 +1097,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.mswin?.ondemand;
             return calculateAndFormatCost(
@@ -1233,7 +1131,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.mswin?.reserved?.[reservedTerm];
@@ -1264,7 +1162,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.mswin?.spot_min;
             return calculateAndFormatCost(
@@ -1294,7 +1192,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.mswin?.spot_avg;
             return calculateAndFormatCost(
@@ -1324,7 +1222,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.dedicated?.ondemand;
             return calculateAndFormatCost(
@@ -1358,7 +1256,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.dedicated?.reserved?.[reservedTerm];
@@ -1389,7 +1287,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.mswinSQLWeb?.ondemand;
             return calculateAndFormatCost(
@@ -1421,7 +1319,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.mswinSQLWeb?.reserved?.[
@@ -1454,7 +1352,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.mswinSQL?.ondemand;
             return calculateAndFormatCost(
@@ -1488,7 +1386,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.mswinSQL?.reserved?.[reservedTerm];
@@ -1521,7 +1419,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.mswinSQLEnterprise?.ondemand;
@@ -1554,7 +1452,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.mswinSQLEnterprise?.reserved?.[
@@ -1587,7 +1485,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.linuxSQLWeb?.ondemand;
             return calculateAndFormatCost(
@@ -1619,7 +1517,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.linuxSQLWeb?.reserved?.[
@@ -1652,7 +1550,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.linuxSQL?.ondemand;
             return calculateAndFormatCost(
@@ -1686,7 +1584,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.linuxSQL?.reserved?.[reservedTerm];
@@ -1719,7 +1617,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.linuxSQLEnterprise?.ondemand;
@@ -1752,7 +1650,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.linuxSQLEnterprise?.reserved?.[
@@ -1779,21 +1677,13 @@ export const columnsGen = (
             if (!valueB) return 1;
             return valueA.localeCompare(valueB);
         },
-        filterFn: regex({
-            getCell: (row) => {
-                const pricing = row.original.pricing?.[selectedRegion]?.linux;
-                if (!pricing) return "N/A";
-                if (pricing.pct_interrupt === "N/A") return "unavailable";
-                return pricing.pct_interrupt;
-            },
-        }),
-        cell: (info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const pctInterrupt =
                 pricing?.[selectedRegion]?.linux?.pct_interrupt;
             if (pctInterrupt === "N/A") return "unavailable";
             return pctInterrupt;
-        },
+        }),
     },
     {
         accessorKey: "pricing",
@@ -1815,7 +1705,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.emr?.emr;
             return calculateAndFormatCost(
@@ -1832,6 +1722,9 @@ export const columnsGen = (
         size: 120,
         id: "generation",
         sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter((info) => info.getValue() as string),
+        ...makeCellWithRegexSorter(
+            "pricing",
+            (info) => info.getValue() as string,
+        ),
     },
 ];

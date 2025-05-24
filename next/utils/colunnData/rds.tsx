@@ -4,14 +4,11 @@ import {
     doAllDataTablesMigrations,
     gt,
     regex,
+    makeCellWithRegexSorter,
 } from "./shared";
 import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
-import {
-    calculateCost,
-    calculateAndFormatCost,
-    makeCellWithRegexSorter,
-} from "./ec2/columns";
+import { calculateCost, calculateAndFormatCost } from "./ec2/columns";
 import sortByInstanceType from "../sortByInstanceType";
 
 const initialColumnsArr = [
@@ -248,20 +245,12 @@ export const columnsGen = (
                 ),
             );
         },
-        filterFn: regex({
-            getCell: (row) => {
-                const arch = row.original.arch;
-                if (typeof arch === "string") return arch;
-                if (!arch) return "";
-                return arch.sort().join(", ");
-            },
-        }),
-        cell: (info) => {
+        ...makeCellWithRegexSorter("arch", (info) => {
             const arch = info.getValue() as string[] | string;
             if (typeof arch === "string") return arch;
             if (!arch) return "";
             return arch.sort().join(", ");
-        },
+        }),
     },
     {
         header: "PostgreSQL",
@@ -282,7 +271,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["14"]?.ondemand;
             return calculateAndFormatCost(
@@ -316,7 +305,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["14"]?.reserved?.[reservedTerm];
@@ -347,7 +336,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["2"]?.ondemand;
             return calculateAndFormatCost(
@@ -381,7 +370,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["2"]?.reserved?.[reservedTerm];
@@ -412,7 +401,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["10"]?.ondemand;
             return calculateAndFormatCost(
@@ -446,7 +435,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["10"]?.reserved?.[reservedTerm];
@@ -477,7 +466,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["11"]?.ondemand;
             return calculateAndFormatCost(
@@ -511,7 +500,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["11"]?.reserved?.[reservedTerm];
@@ -542,7 +531,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["12"]?.ondemand;
             return calculateAndFormatCost(
@@ -576,7 +565,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["12"]?.reserved?.[reservedTerm];
@@ -607,7 +596,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["15"]?.ondemand;
             return calculateAndFormatCost(
@@ -641,7 +630,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["15"]?.reserved?.[reservedTerm];
@@ -672,7 +661,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["21"]?.ondemand;
             return calculateAndFormatCost(
@@ -706,7 +695,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["21"]?.reserved?.[reservedTerm];
@@ -737,7 +726,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["211"]?.ondemand;
             return calculateAndFormatCost(
@@ -767,7 +756,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["18"]?.ondemand;
             return calculateAndFormatCost(
@@ -801,7 +790,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["18"]?.reserved?.[reservedTerm];
@@ -832,7 +821,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price = pricing?.[selectedRegion]?.["5"]?.ondemand;
             return calculateAndFormatCost(
@@ -866,7 +855,7 @@ export const columnsGen = (
             );
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter((info) => {
+        ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const price =
                 pricing?.[selectedRegion]?.["5"]?.reserved?.[reservedTerm];
