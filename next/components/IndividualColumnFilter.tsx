@@ -39,6 +39,14 @@ function GSettingsNumberFilter<Instance>({
             placeholder={`Filter ${column.columnDef.header as string}...`}
             className="w-full px-2 py-1 text-sm border border-gray-5 bg-white font-normal rounded"
             min={0}
+            onKeyDown={(e) => {
+                // number inputs can be unintuitive when deleting the last digit. This helps with that.
+                if (e.key === "Backspace" && value < 10) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    (e.target as HTMLInputElement).select();
+                }
+            }}
         />
     );
 }
