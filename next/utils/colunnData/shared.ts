@@ -135,6 +135,7 @@ class RegexCacheWithTTL {
 const regexCache = new RegexCacheWithTTL();
 
 export function regex<Instance, Value>(opts: {
+    accessorKey: keyof Instance;
     fallback?: (
         row: Row<Instance>,
         columnId: string,
@@ -144,11 +145,11 @@ export function regex<Instance, Value>(opts: {
 }): (row: Row<Instance>, columnId: string, filterValue: Value) => boolean {
     let fallback = opts.fallback;
     if (!fallback) {
-        fallback = (row, columnId, filterValue) => {
+        fallback = (row, _, filterValue) => {
             const value = String(
                 opts.getCell
                     ? opts.getCell(row)
-                    : row.original[columnId as keyof Instance],
+                    : row.original[opts.accessorKey],
             );
             if (typeof value !== "string") return false;
             return value
@@ -159,9 +160,7 @@ export function regex<Instance, Value>(opts: {
 
     return (row, columnId, filterValue) => {
         const value = String(
-            opts.getCell
-                ? opts.getCell(row)
-                : row.original[columnId as keyof Instance],
+            opts.getCell ? opts.getCell(row) : row.original[opts.accessorKey],
         );
         try {
             let regex = regexCache.get(String(filterValue));
@@ -189,6 +188,7 @@ export function makeCellWithRegexSorter<Instance>(
     return {
         cell: cellGet,
         filterFn: regex({
+            accessorKey,
             getCell: (row) =>
                 cellGet({
                     getValue: () => row.original[accessorKey],

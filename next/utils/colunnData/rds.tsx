@@ -161,7 +161,7 @@ export const columnsGen = (
         id: "name",
         accessorKey: "pretty_name",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "pretty_name" }),
     },
     {
         header: "API Name",
@@ -183,7 +183,7 @@ export const columnsGen = (
                 </RegionLinkPreloader>
             );
         },
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "instance_type" }),
     },
     {
         header: "Memory",
@@ -204,14 +204,15 @@ export const columnsGen = (
         id: "ebs-throughput",
         accessorKey: "ebs_throughput",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "ebs_throughput" }),
     },
     {
         header: "Processor",
         id: "physical_processor",
         accessorKey: "physicalProcessor",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        // @ts-expect-error: The typing is weird in the file
+        filterFn: regex({ accessorKey: "physicalProcessor" }),
     },
     {
         header: "vCPUs",
@@ -225,7 +226,7 @@ export const columnsGen = (
         id: "networkperf",
         accessorKey: "network_performance",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "network_performance" }),
     },
     {
         accessorKey: "arch",
@@ -872,41 +873,41 @@ export const columnsGen = (
         id: "ebs-baseline-bandwidth",
         accessorKey: "ebs_baseline_bandwidth",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "ebs_baseline_bandwidth" }),
     },
     {
         header: "EBS Optimized: Baseline Throughput (128K)",
         id: "ebs-baseline-throughput",
         accessorKey: "ebs_baseline_throughput",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "ebs_baseline_throughput" }),
     },
     {
         header: "EBS Optimized: Baseline IOPS (16K)",
         id: "ebs-baseline-iops",
         accessorKey: "ebs_baseline_iops",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "ebs_baseline_iops" }),
     },
     {
         header: "EBS Optimized: Max Bandwidth",
         id: "ebs-max-bandwidth",
         accessorKey: "ebs_max_bandwidth",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "ebs_max_bandwidth" }),
     },
     {
         header: "EBS Optimized: Max Throughput (128K)",
         id: "ebs-max-throughput",
         accessorKey: "ebs_throughput",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "ebs_throughput" }),
     },
     {
         header: "EBS Optimized: Max IOPS (16K)",
         id: "ebs-iops",
         accessorKey: "ebs_iops",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "ebs_iops" }),
     },
 ];

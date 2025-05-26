@@ -100,7 +100,7 @@ export const columnsGen = (
         id: "pretty_name",
         size: 350,
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "pretty_name" }),
         cell: (info) => info.getValue() as string,
     },
     {
@@ -113,7 +113,7 @@ export const columnsGen = (
             const valueB = rowB.original.instance_type;
             return sortByInstanceType(valueA, valueB, ".");
         },
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "instance_type" }),
         cell: (info) => {
             const value = info.getValue() as string;
             return (
@@ -132,8 +132,10 @@ export const columnsGen = (
         size: 150,
         id: "family",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
-        cell: (info) => (info.getValue() as string).split(".")[0],
+        ...makeCellWithRegexSorter(
+            "instance_type",
+            (info) => (info.getValue() as string).split(".")[0],
+        ),
     },
     {
         accessorKey: "memory",
@@ -150,7 +152,9 @@ export const columnsGen = (
         size: 180,
         id: "ECU",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({
+            accessorKey: "ECU",
+        }),
         cell: (info) => {
             const value = info.getValue();
             if (value === "variable") {
@@ -249,7 +253,7 @@ export const columnsGen = (
         header: "GPU model",
         id: "GPU_model",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "GPU_model" }),
         cell: (info) => info.getValue() as string,
     },
     {
@@ -265,7 +269,7 @@ export const columnsGen = (
         accessorKey: "compute_capability",
         header: "CUDA Compute Capability",
         id: "compute_capability",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "compute_capability" }),
         cell: (info) => info.getValue() as string,
     },
     {
@@ -273,7 +277,7 @@ export const columnsGen = (
         size: 90,
         header: "FPGAs",
         id: "FPGA",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "FPGA" }),
         cell: (info) => info.getValue() as number,
     },
     {
@@ -281,7 +285,7 @@ export const columnsGen = (
         header: "ECU per vCPU",
         size: 140,
         id: "ECU_per_vcpu",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "ECU_per_vcpu" }),
         cell: (info) => {
             const value = info.getValue();
             if (value === "variable" || value === "unknown") {
@@ -309,7 +313,7 @@ export const columnsGen = (
         header: "Physical Processor",
         id: "physical_processor",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "physical_processor" }),
         cell: (info) => info.getValue() || "unknown",
     },
     {
@@ -325,6 +329,7 @@ export const columnsGen = (
             return parseFloat(valueA[0]) - parseFloat(valueB[0]);
         },
         filterFn: regex({
+            accessorKey: "clock_speed_ghz",
             fallback: (row, _, filterValue) => {
                 // Check the filter value and row have a float.
                 const matchFilter = filterValue?.match(FLOAT);
@@ -348,7 +353,7 @@ export const columnsGen = (
         header: "Intel AVX",
         size: 110,
         id: "intel_avx",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "intel_avx" }),
         cell: (info) => (info.getValue() ? "Yes" : "unknown"),
     },
     {
@@ -356,7 +361,7 @@ export const columnsGen = (
         header: "Intel AVX2",
         size: 110,
         id: "intel_avx2",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "intel_avx2" }),
         cell: (info) => (info.getValue() ? "Yes" : "unknown"),
     },
     {
@@ -364,7 +369,7 @@ export const columnsGen = (
         header: "Intel AVX-512",
         size: 130,
         id: "intel_avx512",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "intel_avx512" }),
         cell: (info) => (info.getValue() ? "Yes" : "unknown"),
     },
     {
@@ -372,7 +377,7 @@ export const columnsGen = (
         header: "Intel Turbo",
         size: 120,
         id: "intel_turbo",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "intel_turbo" }),
         cell: (info) => (info.getValue() ? "Yes" : "unknown"),
     },
     {
@@ -490,7 +495,7 @@ export const columnsGen = (
         size: 200,
         id: "network_performance",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "network_performance" }),
         cell: (info) => info.getValue() as string,
     },
     {

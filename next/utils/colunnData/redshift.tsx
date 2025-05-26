@@ -103,14 +103,14 @@ export const columnsGen = (
         id: "pretty_name",
         size: 350,
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "pretty_name" }),
         cell: (info) => info.getValue() as string,
     },
     {
         accessorKey: "instance_type",
         header: "API Name",
         id: "instance_type",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "instance_type" }),
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.instance_type;
             const valueB = rowB.original.instance_type;

@@ -203,7 +203,7 @@ export const columnsGen = (
             id: "pretty_name_azure",
             header: "Name",
             sortingFn: "alphanumeric",
-            filterFn: regex({}),
+            filterFn: regex({ accessorKey: "pretty_name_azure" }),
         },
         {
             accessorKey: "instance_type",
@@ -221,7 +221,7 @@ export const columnsGen = (
                     </RegionLinkPreloader>
                 );
             },
-            filterFn: regex({}),
+            filterFn: regex({ accessorKey: "instance_type" }),
         },
         {
             accessorKey: "memory",
@@ -261,7 +261,7 @@ export const columnsGen = (
             header: "GPUs",
             size: 160,
             id: "GPU",
-            filterFn: regex({}),
+            filterFn: regex({ accessorKey: "GPU" }),
         },
         {
             accessorKey: "size",

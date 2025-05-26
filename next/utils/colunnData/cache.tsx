@@ -78,7 +78,7 @@ export const columnsGen = (
         id: "pretty_name",
         header: "Name",
         sortingFn: "alphanumeric",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "pretty_name" }),
     },
     {
         accessorKey: "instance_type",
@@ -89,7 +89,7 @@ export const columnsGen = (
             const valueB = rowB.original.instance_type;
             return sortByInstanceType(valueA, valueB, ".", "cache.");
         },
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "instance_type" }),
         cell: (info) => {
             const value = info.getValue() as string;
             return (
@@ -129,7 +129,7 @@ export const columnsGen = (
         id: "networkperf",
         sortingFn: "alphanumeric",
         header: "Network Performance",
-        filterFn: regex({}),
+        filterFn: regex({ accessorKey: "network_performance" }),
     },
     {
         accessorKey: "pricing",
