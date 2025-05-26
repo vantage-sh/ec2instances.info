@@ -90,24 +90,24 @@ export default function InstanceTable<
         const a = [
             {
                 id: "memory",
-                value: gSettings.minMemory,
+                value: gSettings.memoryExpr,
             },
             {
                 id:
                     columns.find((v) => v.id === "vcpus" || v.id === "vcpu")
                         ?.id ?? "vCPU",
-                value: gSettings.minVcpus,
+                value: gSettings.vcpuExpr,
             },
         ];
         if (columnAtomKey === "ec2" || columnAtomKey === "azure") {
             a.push(
                 {
                     id: "memory_per_vcpu",
-                    value: gSettings.minMemoryPerVcpu,
+                    value: gSettings.memoryPerVcpuExpr,
                 },
                 {
                     id: "GPU",
-                    value: gSettings.minGpus,
+                    value: gSettings.gpusExpr,
                 },
             );
         }
@@ -115,18 +115,23 @@ export default function InstanceTable<
             a.push(
                 {
                     id: "GPU_memory",
-                    value: gSettings.minGpuMemory,
+                    value: gSettings.gpuMemoryExpr,
                 },
                 {
                     id: "maxips",
-                    value: gSettings.minMaxips,
+                    value: gSettings.maxipsExpr,
                 },
             );
         }
         if (columns.find((v) => v.id === "storage")) {
             a.push({
                 id: "storage",
-                value: gSettings.minStorage,
+                value: gSettings.storageExpr,
+            });
+        } else if (columnAtomKey === "azure") {
+            a.push({
+                id: "size",
+                value: gSettings.storageExpr,
             });
         }
 

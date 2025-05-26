@@ -1,9 +1,10 @@
 import { CostDuration, EC2Instance, Pricing, PricingUnit } from "@/types";
-import { ColumnDef, Row } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import { ClockFadingIcon } from "lucide-react";
 import sortByInstanceType from "@/utils/sortByInstanceType";
-import { regex, makeCellWithRegexSorter } from "../shared";
+import { regex, makeCellWithRegexSorter, expr } from "../shared";
+import exprCompiler from "@/utils/expr";
 
 interface Storage {
     devices: number;
@@ -13,12 +14,6 @@ interface Storage {
     ssd: boolean;
     trim_support: boolean;
     storage_needs_initialization: boolean;
-}
-
-function gt(row: Row<EC2Instance>, columnId: string, filterValue: number) {
-    const value = row.original[columnId as keyof EC2Instance];
-    if (typeof value !== "number") return false;
-    return value >= filterValue;
 }
 
 export function calculateCost(
@@ -143,7 +138,7 @@ export const columnsGen = (
         size: 170,
         id: "memory",
         sortingFn: "alphanumeric",
-        filterFn: gt,
+        filterFn: expr,
         cell: (info) => `${info.getValue() as number} GiB`,
     },
     {
@@ -193,7 +188,7 @@ export const columnsGen = (
         header: "vCPUs",
         size: 110,
         id: "vCPU",
-        filterFn: gt,
+        filterFn: expr,
         cell: (info) => {
             const value = info.getValue() as number;
             const burstMinutes = info.row.original.burst_minutes;
@@ -232,7 +227,7 @@ export const columnsGen = (
         accessorKey: "memory_per_vcpu",
         header: "GiB of Memory per vCPU",
         id: "memory_per_vcpu",
-        filterFn: gt,
+        filterFn: expr,
         cell: (info) => {
             const value = info.getValue();
             if (value === "unknown") return "unknown";
@@ -244,7 +239,7 @@ export const columnsGen = (
         header: "GPUs",
         size: 80,
         id: "GPU",
-        filterFn: gt,
+        filterFn: expr,
         cell: (info) => info.getValue() as number,
     },
     {
@@ -262,7 +257,7 @@ export const columnsGen = (
         size: 130,
         id: "GPU_memory",
         sortingFn: "alphanumeric",
-        filterFn: gt,
+        filterFn: expr,
         cell: (info) => `${info.getValue() as number} GiB`,
     },
     {
@@ -399,7 +394,7 @@ export const columnsGen = (
             const storage = row.original.storage;
             if (!storage) return false;
             const totalSize = storage.devices * storage.size;
-            return totalSize >= filterValue;
+            return exprCompiler(filterValue)(totalSize);
         },
         cell: (info) => {
             const storage = info.getValue() as Storage;
@@ -599,7 +594,7 @@ export const columnsGen = (
             const vpc = row.original.vpc;
             if (!vpc) return false;
             const maxIps = vpc.max_enis * vpc.ips_per_eni;
-            return maxIps >= filterValue;
+            return exprCompiler(filterValue)(maxIps);
         },
         cell: (info) => {
             const vpc = info.getValue() as any;
