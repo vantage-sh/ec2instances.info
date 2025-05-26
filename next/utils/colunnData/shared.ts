@@ -7,6 +7,7 @@ import {
     OptionalSchema,
     BooleanSchema,
 } from "valibot";
+import exprCompiler from "@/utils/expr";
 
 export function makeSchemaWithDefaults<T extends Record<string, boolean>>(
     initialColumnsValue: T,
@@ -82,13 +83,29 @@ function tryConv(value: string | number) {
     return NaN;
 }
 
-export function gt(row: Row<any>, columnId: string, filterValue: number) {
-    const value = row.original[columnId.toLowerCase()];
+const exprCache = new Map<string, (a: number) => boolean>();
+
+function runCachedEval(expr: string, a: number) {
+    const cached = exprCache.get(expr);
+    if (cached) return cached(a);
+    try {
+        const e = exprCompiler(expr);
+        exprCache.set(expr, e);
+        return e(a);
+    } catch {
+        // Just allow all if the expr is invalid.
+        return true;
+    }
+}
+
+export function expr(row: Row<any>, columnId: string, filterValue: string) {
+    const value =
+        row.original[columnId] ?? row.original[columnId.toLowerCase()];
     const conv = tryConv(value);
     if (isNaN(conv)) {
         return false;
     }
-    return conv >= filterValue;
+    return runCachedEval(filterValue, conv);
 }
 
 export function calculateCost(

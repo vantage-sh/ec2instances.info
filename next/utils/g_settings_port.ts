@@ -5,14 +5,14 @@ export const g_settings_aws_default = {
     cost_duration: "hourly",
     region: "us-east-1",
     reserved_term: "yrTerm1Standard.noUpfront",
-    min_memory: 0,
-    min_vcpus: 0,
-    min_memory_per_vcpu: 0,
-    min_gpu_memory: 0,
-    min_gpus: 0,
-    min_maxips: 0,
+    memory_expr: ">=0",
+    vcpus_expr: ">=0",
+    memory_per_vcpu_expr: ">=0",
+    gpu_memory_expr: ">=0",
+    gpus_expr: ">=0",
+    maxips_expr: ">=0",
+    storage_expr: ">=0",
     default_sort_col: 40,
-    min_storage: 0,
     selected: "",
     compare_on: false,
 };
@@ -56,12 +56,6 @@ function validate<K extends GSettingsKey>(
     obj[key] = value;
 }
 
-function validateNumber(value: string): number {
-    const num = Number(value);
-    if (isNaN(num)) throw new Error("Invalid number");
-    return num;
-}
-
 const boolValues = {
     true: true,
     false: false,
@@ -77,6 +71,45 @@ function validateBoolean(value: string): boolean {
     const bool = boolValues[value.toLowerCase() as keyof typeof boolValues];
     if (bool === undefined) throw new Error("Invalid boolean");
     return bool;
+}
+
+function doMinToExprParamsMigration(params: URLSearchParams) {
+    const mins = [
+        "min_memory",
+        "min_vcpus",
+        "min_memory_per_vcpu",
+        "min_gpus",
+        "min_gpu_memory",
+        "min_maxips",
+        "min_storage",
+    ];
+    for (const min of mins) {
+        const value = params.get(min);
+        if (value) {
+            params.set(min.replace("min_", "") + "_expr", `>=${value}`);
+            params.delete(min);
+        }
+    }
+}
+
+function doMinToExprSettingsMigration(settings: typeof g_settings_aws_default) {
+    const mins = [
+        "min_memory",
+        "min_vcpus",
+        "min_memory_per_vcpu",
+        "min_gpus",
+        "min_gpu_memory",
+        "min_maxips",
+        "min_storage",
+    ];
+    for (const min of mins) {
+        const value = settings[min as keyof typeof settings];
+        if (value !== undefined) {
+            // @ts-expect-error: This is dynamic
+            settings[min.replace("min_", "") + "_expr"] = `>=${value}`;
+            delete settings[min as keyof typeof settings];
+        }
+    }
 }
 
 /**
@@ -105,20 +138,22 @@ export default class GSettings {
                 // Weird.
             }
         }
+        doMinToExprSettingsMigration(this.settings);
         this._readFromUrl();
     }
 
     private _readFromUrl() {
         const params = new URLSearchParams(window.location.search);
-        validate(params, this.settings, "min_memory", validateNumber);
-        validate(params, this.settings, "min_vcpus", validateNumber);
-        validate(params, this.settings, "min_memory_per_vcpu", validateNumber);
+        doMinToExprParamsMigration(params);
+        validate(params, this.settings, "memory_expr");
+        validate(params, this.settings, "vcpus_expr");
+        validate(params, this.settings, "memory_per_vcpu_expr");
         if (!this.notRoot) {
-            validate(params, this.settings, "min_gpus", validateNumber);
-            validate(params, this.settings, "min_gpu_memory", validateNumber);
-            validate(params, this.settings, "min_maxips", validateNumber);
+            validate(params, this.settings, "gpus_expr");
+            validate(params, this.settings, "gpu_memory_expr");
+            validate(params, this.settings, "maxips_expr");
         }
-        validate(params, this.settings, "min_storage", validateNumber);
+        validate(params, this.settings, "storage_expr");
         validate(params, this.settings, "region");
         validate(params, this.settings, "pricing_unit");
         validate(params, this.settings, "cost_duration");
@@ -153,13 +188,13 @@ export default class GSettings {
     private _write() {
         localStorage.setItem(this.key, JSON.stringify(this.settings));
         const params: Record<string, any> = {
-            min_memory: this.minMemory,
-            min_vcpus: this.minVcpus,
-            min_memory_per_vcpu: this.minMemoryPerVcpu,
-            min_gpus: this.minGpus,
-            min_gpu_memory: this.minGpuMemory,
-            min_maxips: this.minMaxips,
-            min_storage: this.minStorage,
+            memory_expr: this.memoryExpr,
+            vcpus_expr: this.vcpuExpr,
+            memory_per_vcpu_expr: this.memoryPerVcpuExpr,
+            gpu_memory_expr: this.gpuMemoryExpr,
+            gpus_expr: this.gpusExpr,
+            maxips_expr: this.maxipsExpr,
+            storage_expr: this.storageExpr,
             filter: this.filter,
             region: this.region,
             pricing_unit: this.pricingUnit,
@@ -228,57 +263,57 @@ export default class GSettings {
         this._write();
     }
 
-    get minMemory() {
-        return this.settings.min_memory;
+    get memoryExpr() {
+        return this.settings.memory_expr;
     }
 
-    set minMemory(value: number) {
-        this.settings.min_memory = value;
+    set memoryExpr(value: string) {
+        this.settings.memory_expr = value;
         this._write();
     }
 
-    get minVcpus() {
-        return this.settings.min_vcpus;
+    get vcpuExpr() {
+        return this.settings.vcpus_expr;
     }
 
-    set minVcpus(value: number) {
-        this.settings.min_vcpus = value;
+    set vcpuExpr(value: string) {
+        this.settings.vcpus_expr = value;
         this._write();
     }
 
-    get minMemoryPerVcpu() {
-        return this.settings.min_memory_per_vcpu;
+    get memoryPerVcpuExpr() {
+        return this.settings.memory_per_vcpu_expr;
     }
 
-    set minMemoryPerVcpu(value: number) {
-        this.settings.min_memory_per_vcpu = value;
+    set memoryPerVcpuExpr(value: string) {
+        this.settings.memory_per_vcpu_expr = value;
         this._write();
     }
 
-    get minGpuMemory() {
-        return this.settings.min_gpu_memory;
+    get gpuMemoryExpr() {
+        return this.settings.gpu_memory_expr;
     }
 
-    set minGpuMemory(value: number) {
-        this.settings.min_gpu_memory = value;
+    set gpuMemoryExpr(value: string) {
+        this.settings.gpu_memory_expr = value;
         this._write();
     }
 
-    get minGpus() {
-        return this.settings.min_gpus;
+    get gpusExpr() {
+        return this.settings.gpus_expr;
     }
 
-    set minGpus(value: number) {
-        this.settings.min_gpus = value;
+    set gpusExpr(value: string) {
+        this.settings.gpus_expr = value;
         this._write();
     }
 
-    get minMaxips() {
-        return this.settings.min_maxips;
+    get maxipsExpr() {
+        return this.settings.maxips_expr;
     }
 
-    set minMaxips(value: number) {
-        this.settings.min_maxips = value;
+    set maxipsExpr(value: string) {
+        this.settings.maxips_expr = value;
         this._write();
     }
 
@@ -291,12 +326,12 @@ export default class GSettings {
         this._write();
     }
 
-    get minStorage() {
-        return this.settings.min_storage;
+    get storageExpr() {
+        return this.settings.storage_expr;
     }
 
-    set minStorage(value: number) {
-        this.settings.min_storage = value;
+    set storageExpr(value: string) {
+        this.settings.storage_expr = value;
         this._write();
     }
 
