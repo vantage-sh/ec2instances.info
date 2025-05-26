@@ -2,10 +2,10 @@ import { CostDuration, PricingUnit } from "@/types";
 import {
     makeSchemaWithDefaults,
     doAllDataTablesMigrations,
-    gt,
     calculateCost,
     regex,
     makeCellWithRegexSorter,
+    expr,
 } from "./shared";
 import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
@@ -122,7 +122,7 @@ export const columnsGen = (
         accessorKey: "memoryGib",
         id: "memory",
         header: "Memory",
-        filterFn: gt,
+        filterFn: expr,
         sortingFn: "alphanumeric",
         cell: (info) => {
             const value = info.getValue() as string;
@@ -132,7 +132,7 @@ export const columnsGen = (
     {
         accessorKey: "vcpu",
         id: "vcpu",
-        filterFn: gt,
+        filterFn: expr,
         sortingFn: "alphanumeric",
         header: "vCPUs",
     },
@@ -140,7 +140,7 @@ export const columnsGen = (
         accessorKey: "storage",
         id: "storage",
         header: "Storage",
-        filterFn: gt,
+        filterFn: expr,
         sortingFn: "alphanumeric",
     },
     {

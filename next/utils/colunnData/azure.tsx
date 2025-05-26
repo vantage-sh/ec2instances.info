@@ -2,13 +2,14 @@ import { PricingUnit } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import {
     doAllDataTablesMigrations,
-    gt,
     regex,
     makeSchemaWithDefaults,
     makeCellWithRegexSorter,
+    expr,
 } from "./shared";
 import { CostDuration } from "@/types";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
+import exprCompiler from "@/utils/expr";
 
 export interface AzurePricing {
     [region: string]: {
@@ -229,7 +230,7 @@ export const columnsGen = (
             size: 160,
             id: "memory",
             sortingFn: "alphanumeric",
-            filterFn: gt,
+            filterFn: expr,
             cell: (info) => `${info.getValue() as number} GiB`,
         },
         {
@@ -238,7 +239,7 @@ export const columnsGen = (
             size: 160,
             id: "vcpu",
             sortingFn: "alphanumeric",
-            filterFn: gt,
+            filterFn: expr,
         },
         {
             accessorKey: "memory",
@@ -248,7 +249,7 @@ export const columnsGen = (
             filterFn: (row, _, filterValue) => {
                 const value = row.original.memory;
                 const cpu = row.original.vcpu;
-                return value / cpu >= filterValue;
+                return exprCompiler(filterValue)(value / cpu);
             },
             cell: (info) => {
                 const value = info.getValue() as number;
@@ -261,14 +262,14 @@ export const columnsGen = (
             header: "GPUs",
             size: 160,
             id: "GPU",
-            filterFn: regex({ accessorKey: "GPU" }),
+            filterFn: expr,
         },
         {
             accessorKey: "size",
             header: "Storage",
             size: 160,
             id: "size",
-            filterFn: gt,
+            filterFn: expr,
             cell: (info) => `${info.getValue() as number} GiB`,
         },
         {
