@@ -15,9 +15,10 @@ import {
     columnVisibilityAtoms,
 } from "@/state";
 import { pricingUnitOptions, durationOptions } from "@/utils/dataMappings";
-import { useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { RowSelectionState } from "@tanstack/react-table";
 import * as columnData from "@/utils/colunnData";
+import { usePathname } from "next/navigation";
 
 interface FiltersProps<DataKey extends keyof typeof columnData> {
     regions: Region;
@@ -46,6 +47,29 @@ export default function Filters<DataKey extends keyof typeof columnData>({
     const [duration, setDuration] = useDuration();
     const [reservedTerm, setReservedTerm] = useReservedTerm();
     const [compareOn, valuePreCompareOn, setCompareOn] = useCompareOn();
+    const pathname = usePathname();
+
+    const [frequentlyUsedRegions, setFrequentlyUsedRegions] = useState<{
+        [key: string]: number;
+    }>({});
+    useEffect(() => {
+        const v = localStorage.getItem(`${pathname}-regions`);
+        if (!v) return;
+        setFrequentlyUsedRegions(JSON.parse(v) as { [key: string]: number });
+    }, [pathname]);
+
+    const markRegionAsUsed = useCallback(
+        (region: string) => {
+            frequentlyUsedRegions[region] =
+                (frequentlyUsedRegions[region] ?? 0) + 1;
+            localStorage.setItem(
+                `${pathname}-regions`,
+                JSON.stringify(regions),
+            );
+            setFrequentlyUsedRegions({ ...frequentlyUsedRegions });
+        },
+        [frequentlyUsedRegions, pathname],
+    );
 
     let anySelected = false;
     for (const key in rowSelection) {
@@ -55,7 +79,30 @@ export default function Filters<DataKey extends keyof typeof columnData>({
         }
     }
 
-    const [regionOptions, localZoneOptions, wavelengthOptions] = useMemo(() => {
+    const [
+        frequentlyUsedRegionOptions,
+        regionOptions,
+        localZoneOptions,
+        wavelengthOptions,
+    ] = useMemo(() => {
+        const top10 = Object.entries(frequentlyUsedRegions)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 10);
+        const frequentlyUsedRegionOptions = top10
+            .map(([code]) => {
+                const name =
+                    regions.main[code] ??
+                    regions.local_zone[code] ??
+                    regions.wavelength[code];
+                if (!name) return undefined;
+                return {
+                    value: code,
+                    label: name,
+                    group: "Frequently Used",
+                };
+            })
+            .filter((o) => o !== undefined);
+
         const regionOptions = Object.entries(regions.main).map(
             ([code, name]) => ({
                 value: code,
@@ -80,8 +127,13 @@ export default function Filters<DataKey extends keyof typeof columnData>({
             }),
         );
 
-        return [regionOptions, localZoneOptions, wavelengthOptions] as const;
-    }, [regions]);
+        return [
+            frequentlyUsedRegionOptions,
+            regionOptions,
+            localZoneOptions,
+            wavelengthOptions,
+        ] as const;
+    }, [regions, frequentlyUsedRegions]);
 
     const columnOptions = useMemo(() => {
         function makeColumnOption<Key extends keyof typeof columnVisibility>(
@@ -121,8 +173,12 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                     <FilterDropdown
                         label="Region"
                         value={selectedRegion}
-                        onChange={(v) => setSelectedRegion(v)}
+                        onChange={(v) => {
+                            setSelectedRegion(v);
+                            markRegionAsUsed(v);
+                        }}
                         options={[
+                            ...frequentlyUsedRegionOptions,
                             ...regionOptions,
                             ...localZoneOptions,
                             ...wavelengthOptions,
