@@ -183,24 +183,28 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                             ...localZoneOptions,
                             ...wavelengthOptions,
                         ]}
+                        hideSearch={false}
                     />
                     <FilterDropdown
                         label="Pricing Unit"
                         value={pricingUnit}
                         onChange={(v) => setPricingUnit(v as PricingUnit)}
                         options={pricingUnitOptionsCpy}
+                        hideSearch={true}
                     />
                     <FilterDropdown
                         label="Cost"
                         value={duration}
                         onChange={(v) => setDuration(v as CostDuration)}
                         options={durationOptions}
+                        hideSearch={true}
                     />
                     <FilterDropdown
                         label={reservedLabel ?? "Reserved"}
                         value={reservedTerm}
                         onChange={(v) => setReservedTerm(v)}
                         options={reservedTermOptions}
+                        hideSearch={true}
                     />
                     <ColumnFilter<DataKey>
                         // @ts-expect-error: TS doesn't like this for some reason.
