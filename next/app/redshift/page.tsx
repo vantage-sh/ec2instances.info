@@ -26,7 +26,7 @@ export default async function Redshift() {
         for (const r in instance.pricing) {
             if (r.includes("wl1") || r.includes("wl2")) {
                 regions.wavelength[r] = instance.regions[r];
-            } else if (/\d+/.test(r)) {
+            } else if ((r.match(/\d+/g) || []).length > 1) {
                 regions.local_zone[r] = instance.regions[r];
             } else {
                 regions.main[r] = instance.regions[r];
