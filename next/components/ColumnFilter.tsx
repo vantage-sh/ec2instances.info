@@ -9,9 +9,9 @@ import {
     Command,
     CommandEmpty,
     CommandGroup,
-    CommandInput,
     CommandItem,
     CommandList,
+    CommandTraditionalInput,
 } from "@/components/ui/command";
 import {
     Popover,
@@ -76,10 +76,10 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                 </PopoverTrigger>
                 <PopoverContent sideOffset={-36} align="start" className="p-0">
                     <Command>
-                        <CommandInput
+                        <CommandTraditionalInput
                             placeholder="Search columns..."
                             value={searchTerm}
-                            onValueChange={setSearchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
                         />
                         <CommandList>
                             <CommandEmpty>No columns found.</CommandEmpty>
