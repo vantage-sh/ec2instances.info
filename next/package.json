@@ -6,7 +6,8 @@
         "dev": "next dev --turbopack",
         "build:llms": "rimraf public/azure && rimraf public/aws && tsx llms/index.ts",
         "build:next": "next build",
-        "build": "npm run init && npm run build:llms && npm run build:next",
+        "build:images": "tsx imageGen/index.ts",
+        "build": "npm run init && npm run build:llms && npm run build:next && npm run build:images",
         "start": "next start",
         "check-types": "tsc --noEmit"
     },
