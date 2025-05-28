@@ -347,17 +347,22 @@ def add_spot_placement_scores(imap):
 
     # Skip if we don't have at least 3 instance types as required by AWS
     if len(instance_types) < 3:
-        print('WARNING: Need at least 3 instance types to get meaningful Spot placement scores')
+        print(
+            "WARNING: Need at least 3 instance types to get meaningful Spot placement scores"
+        )
         return
 
     # Process instance types in batches to avoid API limits
     batch_size = 20
-    instance_batches = [instance_types[i:i+batch_size] for i in range(0, len(instance_types), batch_size)]
+    instance_batches = [
+        instance_types[i : i + batch_size]
+        for i in range(0, len(instance_types), batch_size)
+    ]
 
     all_region_scores = {}
 
     try:
-        ec2_client = boto3.client('ec2', region_name='us-east-1')
+        ec2_client = boto3.client("ec2", region_name="us-east-1")
 
         # Try different target capacities to get more varied scores
         target_capacities = [1, 50, 100]
@@ -368,53 +373,72 @@ def add_spot_placement_scores(imap):
                     response = ec2_client.get_spot_placement_scores(
                         InstanceTypes=batch,
                         TargetCapacity=capacity,
-                        TargetCapacityUnitType='vcpu',
-                        SingleAvailabilityZone=False
+                        TargetCapacityUnitType="vcpu",
+                        SingleAvailabilityZone=False,
                     )
 
-                    if 'SpotPlacementScores' in response and response['SpotPlacementScores']:
-                        for score_data in response['SpotPlacementScores']:
-                            if 'Region' in score_data and 'Score' in score_data:
-                                region_name = score_data['Region']
-                                score = score_data['Score']
+                    if (
+                        "SpotPlacementScores" in response
+                        and response["SpotPlacementScores"]
+                    ):
+                        for score_data in response["SpotPlacementScores"]:
+                            if "Region" in score_data and "Score" in score_data:
+                                region_name = score_data["Region"]
+                                score = score_data["Score"]
 
                                 # Only update if we haven't seen this region yet or if the score is different
-                                if region_name not in all_region_scores or all_region_scores[region_name] != score:
+                                if (
+                                    region_name not in all_region_scores
+                                    or all_region_scores[region_name] != score
+                                ):
                                     all_region_scores[region_name] = score
-                                    print(f"Found score {score} for region {region_name} with capacity {capacity}")
+                                    print(
+                                        f"Found score {score} for region {region_name} with capacity {capacity}"
+                                    )
                 except Exception as e:
-                    print(f"Error getting scores for batch with capacity {capacity}: {str(e)}")
+                    print(
+                        f"Error getting scores for batch with capacity {capacity}: {str(e)}"
+                    )
                     continue
 
             # If we found different scores across regions, stop trying larger capacities
             if len(set(all_region_scores.values())) > 1:
-                print(f"Found score variation with capacity {capacity}, stopping search")
+                print(
+                    f"Found score variation with capacity {capacity}, stopping search"
+                )
                 break
 
     except Exception as e:
-        print(f'WARNING: Failed to get spot placement scores from us-east-1: {str(e)}')
+        print(f"WARNING: Failed to get spot placement scores from us-east-1: {str(e)}")
 
     # If we couldn't get any scores from us-east-1, try each region individually
     if not all_region_scores:
         for region in get_region_descriptions().values():
             try:
-                ec2_client = boto3.client('ec2', region_name=region)
+                ec2_client = boto3.client("ec2", region_name=region)
 
                 for batch in instance_batches:
                     response = ec2_client.get_spot_placement_scores(
                         InstanceTypes=batch,
                         TargetCapacity=100,
-                        TargetCapacityUnitType='vcpu',
-                        SingleAvailabilityZone=False
+                        TargetCapacityUnitType="vcpu",
+                        SingleAvailabilityZone=False,
                     )
 
-                    if 'SpotPlacementScores' in response and response['SpotPlacementScores']:
-                        for score_data in response['SpotPlacementScores']:
-                            region_to_update = score_data.get('Region', region)
-                            if 'Score' in score_data:
-                                all_region_scores[region_to_update] = score_data['Score']
+                    if (
+                        "SpotPlacementScores" in response
+                        and response["SpotPlacementScores"]
+                    ):
+                        for score_data in response["SpotPlacementScores"]:
+                            region_to_update = score_data.get("Region", region)
+                            if "Score" in score_data:
+                                all_region_scores[region_to_update] = score_data[
+                                    "Score"
+                                ]
             except Exception as e:
-                print(f'WARNING: Could not get spot placement scores for region "{region}": {str(e)}')
+                print(
+                    f'WARNING: Could not get spot placement scores for region "{region}": {str(e)}'
+                )
                 continue
 
     for region, score in all_region_scores.items():
@@ -430,10 +454,10 @@ def add_spot_placement_scores(imap):
                     inst.pricing[region] = {}
 
                 # Store score for both linux and mswin platforms
-                for platform in ['linux', 'mswin']:
+                for platform in ["linux", "mswin"]:
                     if platform not in inst.pricing[region]:
                         inst.pricing[region][platform] = {}
-                    inst.pricing[region][platform]['spot_score'] = int(score)
+                    inst.pricing[region][platform]["spot_score"] = int(score)
 
     if all_region_scores:
         print(f"Spot placement scores summary:")
@@ -441,6 +465,7 @@ def add_spot_placement_scores(imap):
             print(f"  {region}: {score}")
     else:
         print("WARNING: Could not obtain spot placement scores for any region")
+
 
 def parse_instance(instance_type, product_attributes, api_description):
     pieces = instance_type.split(".")
