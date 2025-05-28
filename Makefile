@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := all
-.PHONY: fetch-data next black prettier format all
+.PHONY: fetch-data compress-www next black prettier format all
 
 clean:
 	mv www/azure/instances-specs.json specs.json.tmp
@@ -9,6 +9,10 @@ clean:
 
 fetch-data:
 	./fetch_data.sh
+
+compress-www:
+	tar -cvzf www_pre_build.tar.gz www
+	mv www_pre_build.tar.gz www/www_pre_build.tar.gz
 
 next:
 	docker run -e NEXT_PUBLIC_URL -e DENY_ROBOTS_TXT -e NEXT_PUBLIC_REMOVE_ADVERTS -v $(shell pwd):/app -w /app --rm -t node:$(shell cat next/.nvmrc | tr -d 'v')-alpine sh -c 'cd next && npm ci && npm run build'
@@ -29,4 +33,4 @@ prettier:
 
 format: black prettier
 
-all: clean fetch-data next package
+all: clean fetch-data compress-www next package
