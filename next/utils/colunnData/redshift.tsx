@@ -154,7 +154,6 @@ export const columnsGen = (
         filterFn: expr,
     },
     {
-        // TODO: this and ecu
         accessorKey: "io",
         header: "IO",
         id: "io",

@@ -128,7 +128,7 @@ type OnlyAllowedGSettingsKeys = {
     [K in keyof GSettings]: K extends `${string}Expr` ? K : never;
 }[keyof GSettings];
 
-const columnMapping: Record<string, OnlyAllowedGSettingsKeys> = {
+const columnMapping: Record<string, OnlyAllowedGSettingsKeys | null> = {
     memory: "memoryExpr",
     vCPU: "vcpuExpr",
     vcpu: "vcpuExpr",
@@ -139,6 +139,9 @@ const columnMapping: Record<string, OnlyAllowedGSettingsKeys> = {
     maxips: "maxipsExpr",
     storage: "storageExpr",
     size: "storageExpr",
+    ecu: null,
+    ECU: null,
+    io: null,
 };
 
 export default function IndividualColumnFilter<Instance>({
@@ -169,6 +172,15 @@ export default function IndividualColumnFilter<Instance>({
                 gSettingsSet={set}
                 column={column}
                 initValue={value}
+            />
+        );
+    } else if (key === null) {
+        return (
+            <GSettingsExprFilter
+                gSettingsFullMutations={0}
+                gSettingsSet={() => {}}
+                column={column}
+                initValue={">=0"}
             />
         );
     }
