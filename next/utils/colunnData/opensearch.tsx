@@ -148,7 +148,7 @@ export const columnsGen = (
         id: "ecu",
         header: "Elastic Compute Units",
         sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "ecu" }),
+        filterFn: expr,
     },
     {
         accessorKey: "pricing",

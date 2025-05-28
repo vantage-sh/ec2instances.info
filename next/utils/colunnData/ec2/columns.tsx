@@ -147,9 +147,7 @@ export const columnsGen = (
         size: 180,
         id: "ECU",
         sortingFn: "alphanumeric",
-        filterFn: regex({
-            accessorKey: "ECU",
-        }),
+        filterFn: expr,
         cell: (info) => {
             const value = info.getValue();
             if (value === "variable") {
