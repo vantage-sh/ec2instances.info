@@ -1692,6 +1692,26 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
+        header: "Spot Placement Score",
+        id: "spot-placement-score",
+        sortingFn: (rowA, rowB) => {
+            const valueA =
+                rowA.original.pricing?.[selectedRegion]?.linux?.spot_score;
+            const valueB =
+                rowB.original.pricing?.[selectedRegion]?.linux?.spot_score;
+            if (!valueA) return -1;
+            if (!valueB) return 1;
+            return valueA.localeCompare(valueB);
+        },
+        ...makeCellWithRegexSorter("pricing", (info) => {
+            const pricing = info.getValue() as Pricing | undefined;
+            const spotScore = pricing?.[selectedRegion]?.linux?.spot_score;
+            if (spotScore === "N/A") return "unavailable";
+            return spotScore;
+        }),
+    },
+    {
+        accessorKey: "pricing",
         header: "EMR cost",
         size: 100,
         id: "cost-emr",
