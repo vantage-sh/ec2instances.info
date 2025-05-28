@@ -392,8 +392,7 @@ export const columnsGen = (
         filterFn: (row, _, filterValue) => {
             if (filterValue === 0) return true;
             const storage = row.original.storage;
-            if (!storage) return false;
-            const totalSize = storage.devices * storage.size;
+            const totalSize = (storage?.devices || 0) * (storage?.size || 0);
             return exprCompiler(filterValue)(totalSize);
         },
         cell: (info) => {
@@ -592,8 +591,7 @@ export const columnsGen = (
         },
         filterFn: (row, _, filterValue) => {
             const vpc = row.original.vpc;
-            if (!vpc) return false;
-            const maxIps = vpc.max_enis * vpc.ips_per_eni;
+            const maxIps = (vpc?.max_enis || 0) * (vpc?.ips_per_eni || 0);
             return exprCompiler(filterValue)(maxIps);
         },
         cell: (info) => {
