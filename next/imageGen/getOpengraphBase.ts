@@ -1,10 +1,7 @@
 import sharp from "sharp";
 
 const vantageOgNote = `
-NOTE: OpenGraph image generation is currently using a Vantage background,
-owned by Vantage. It is not MIT licensed! It is totally fine to use this in development, but if you
-aren't Vantage and deploying to production, please set OPENGRAPH_URL to something else. Ideally, make
-this image 1911x1156.
+NOTE: OpenGraph image generation is currently using a Vantage background, owned by Vantage. It is not MIT licensed! It is totally fine to use this in development, but if you aren't Vantage and deploying to production, please set OPENGRAPH_URL to something else. Ideally, make this image 1911x1156.
 `;
 
 const baseRes = (() => {
