@@ -91,6 +91,35 @@ export function makePrettyNames<V>(
     ];
 }
 
+function getPricingSorter(
+    selectedRegion: string,
+    pricingUnit: PricingUnit,
+    costDuration: CostDuration,
+    getter: (
+        pricing: RedshiftPricing[string] | undefined,
+    ) => string | undefined,
+) {
+    return {
+        sortUndefined: "last",
+        accessorFn: (row) => {
+            const g = getter(row.pricing?.[selectedRegion]);
+            if (isNaN(Number(g)) || !g) return undefined;
+            return calculateCost(g, row, pricingUnit, costDuration);
+        },
+        ...makeCellWithRegexSorter("pricing", (info) => {
+            const pricing = info.row.original.pricing;
+            const price = getter(pricing?.[selectedRegion]);
+            if (isNaN(Number(price)) || !price) return "unavailable";
+            return calculateCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
+        }),
+    } satisfies Partial<ColumnDef<Instance>>;
+}
+
 export const columnsGen = (
     selectedRegion: string,
     pricingUnit: PricingUnit,
@@ -182,33 +211,25 @@ export const columnsGen = (
         header: "On Demand Cost",
         id: "cost-ondemand",
         sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as RedshiftPricing;
-            const region = pricing[selectedRegion];
-            if (!region) return "N/A";
-            return calculateCost(
-                region.ondemand,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => {
+                return pricing?.ondemand;
+            },
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Reserved Cost",
         id: "cost-reserved",
         sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as RedshiftPricing;
-            const region = pricing[selectedRegion];
-            if (!region) return "N/A";
-            return calculateCost(
-                region.reserved?.[reservedTerm],
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.reserved?.[reservedTerm],
+        ),
     },
 ];
