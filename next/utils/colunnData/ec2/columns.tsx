@@ -83,6 +83,49 @@ export function calculateAndFormatCost(
     return `$${perTime.toFixed(precision)}${pricingMeasuringUnits}`;
 }
 
+function getPricingSorter(
+    selectedRegion: string,
+    pricingUnit: PricingUnit,
+    costDuration: CostDuration,
+    getter: (pricing: Pricing[string] | undefined) => string | undefined,
+) {
+    return {
+        sortingFn: (rowA, rowB) => {
+            const valueA = calculateCost(
+                getter(rowA.original.pricing?.[selectedRegion]),
+                rowA.original,
+                pricingUnit,
+                costDuration,
+            );
+            const valueB = calculateCost(
+                getter(rowB.original.pricing?.[selectedRegion]),
+                rowB.original,
+                pricingUnit,
+                costDuration,
+            );
+            return valueA - valueB;
+        },
+        sortUndefined: "last",
+        accessorFn: (row) => {
+            const g = getter(row.pricing?.[selectedRegion]);
+            if (isNaN(Number(g))) return undefined;
+            const value = calculateCost(g, row, pricingUnit, costDuration);
+            return value === -1 ? undefined : value;
+        },
+        ...makeCellWithRegexSorter("pricing", (info) => {
+            const pricing = info.row.original.pricing;
+            const price = getter(pricing?.[selectedRegion]);
+            if (isNaN(Number(price))) return "unavailable";
+            return calculateAndFormatCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+            );
+        }),
+    } satisfies Partial<ColumnDef<EC2Instance>>;
+}
+
 export const columnsGen = (
     selectedRegion: string,
     pricingUnit: PricingUnit,
@@ -699,1018 +742,362 @@ export const columnsGen = (
         header: "On Demand",
         size: 150,
         id: "cost-ondemand",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.linux?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.linux?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.linux?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => {
+                return pricing?.linux?.ondemand;
+            },
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Linux Reserved cost",
         size: 180,
         id: "cost-reserved",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.linux?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.linux?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.linux?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => {
+                return pricing?.linux?.reserved?.[reservedTerm];
+            },
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Linux Spot Minimum cost",
         size: 180,
         id: "cost-spot-min",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.linux?.spot_min,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.linux?.spot_min,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.linux?.spot_min;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.linux?.spot_min,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Linux Spot Average cost",
         size: 180,
         id: "cost-spot-max",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.linux?.spot_avg,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.linux?.spot_avg,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.linux?.spot_avg;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.linux?.spot_avg,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "RHEL On Demand cost",
         size: 180,
         id: "cost-ondemand-rhel",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.rhel?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.rhel?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.rhel?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.rhel?.ondemand,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "RHEL Reserved cost",
         id: "cost-reserved-rhel",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.rhel?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.rhel?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.rhel?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.rhel?.reserved?.[reservedTerm],
+        ),
     },
     {
         accessorKey: "pricing",
         header: "RHEL Spot Minimum cost",
         id: "cost-spot-min-rhel",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.rhel?.spot_min,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.rhel?.spot_min,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.rhel?.spot_min;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.rhel?.spot_min,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "RHEL Spot Maximum cost",
         id: "cost-spot-max-rhel",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.rhel?.spot_max,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.rhel?.spot_max,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.rhel?.spot_max;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.rhel?.spot_max,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "SLES On Demand cost",
         id: "cost-ondemand-sles",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.sles?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.sles?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.sles?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.sles?.ondemand,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "SLES Reserved cost",
         id: "cost-reserved-sles",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.sles?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.sles?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.sles?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.sles?.reserved?.[reservedTerm],
+        ),
     },
     {
         accessorKey: "pricing",
         header: "SLES Spot Minimum cost",
         id: "cost-spot-min-sles",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.sles?.spot_min,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.sles?.spot_min,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.sles?.spot_min;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.sles?.spot_min,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "SLES Spot Maximum cost",
         id: "cost-spot-max-sles",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.sles?.spot_max,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.sles?.spot_max,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.sles?.spot_max;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.sles?.spot_max,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Windows On Demand cost",
         id: "cost-ondemand-mswin",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.mswin?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.mswin?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.mswin?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.mswin?.ondemand,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Windows Reserved cost",
         id: "cost-reserved-mswin",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.mswin?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.mswin?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.mswin?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.mswin?.reserved?.[reservedTerm],
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Windows Spot Minimum cost",
         id: "cost-spot-min-mswin",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.mswin?.spot_min,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.mswin?.spot_min,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.mswin?.spot_min;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.mswin?.spot_min,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Windows Spot Average cost",
         id: "cost-spot-max-mswin",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.mswin?.spot_avg,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.mswin?.spot_avg,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.mswin?.spot_avg;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.mswin?.spot_avg,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Dedicated Host On Demand",
         id: "cost-ondemand-dedicated",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.dedicated?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.dedicated?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.dedicated?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.dedicated?.ondemand,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Dedicated Host Reserved",
         id: "cost-reserved-dedicated",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.dedicated?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.dedicated?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.dedicated?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.dedicated?.reserved?.[reservedTerm],
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Windows SQL Web On Demand cost",
         id: "cost-ondemand-mswinSQLWeb",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.mswinSQLWeb?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.mswinSQLWeb?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.mswinSQLWeb?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.mswinSQLWeb?.ondemand,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Windows SQL Web Reserved cost",
         id: "cost-reserved-mswinSQLWeb",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.mswinSQLWeb
-                    ?.reserved?.[reservedTerm],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.mswinSQLWeb
-                    ?.reserved?.[reservedTerm],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.mswinSQLWeb?.reserved?.[
-                    reservedTerm
-                ];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.mswinSQLWeb?.reserved?.[reservedTerm],
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Windows SQL Std On Demand cost",
         id: "cost-ondemand-mswinSQL",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.mswinSQL?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.mswinSQL?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.mswinSQL?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.mswinSQL?.ondemand,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Windows SQL Std Reserved cost",
         id: "cost-reserved-mswinSQL",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.mswinSQL?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.mswinSQL?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.mswinSQL?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.mswinSQL?.reserved?.[reservedTerm],
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Windows SQL Ent On Demand cost",
         id: "cost-ondemand-mswinSQLEnterprise",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.mswinSQLEnterprise
-                    ?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.mswinSQLEnterprise
-                    ?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.mswinSQLEnterprise?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.mswinSQLEnterprise?.ondemand,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Windows SQL Ent Reserved cost",
         id: "cost-reserved-mswinSQLEnterprise",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.mswinSQLEnterprise
-                    ?.reserved?.[reservedTerm],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.mswinSQLEnterprise
-                    ?.reserved?.[reservedTerm],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.mswinSQLEnterprise?.reserved?.[
-                    reservedTerm
-                ];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.mswinSQLEnterprise?.reserved?.[reservedTerm],
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Linux SQL Web On Demand cost",
         id: "cost-ondemand-linuxSQLWeb",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.linuxSQLWeb?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.linuxSQLWeb?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.linuxSQLWeb?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.linuxSQLWeb?.ondemand,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Linux SQL Web Reserved cost",
         id: "cost-reserved-linuxSQLWeb",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.linuxSQLWeb
-                    ?.reserved?.[reservedTerm],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.linuxSQLWeb
-                    ?.reserved?.[reservedTerm],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.linuxSQLWeb?.reserved?.[
-                    reservedTerm
-                ];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.linuxSQLWeb?.reserved?.[reservedTerm],
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Linux SQL Std On Demand cost",
         id: "cost-ondemand-linuxSQL",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.linuxSQL?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.linuxSQL?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.linuxSQL?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.linuxSQL?.ondemand,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Linux SQL Std Reserved cost",
         id: "cost-reserved-linuxSQL",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.linuxSQL?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.linuxSQL?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.linuxSQL?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.linuxSQL?.reserved?.[reservedTerm],
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Linux SQL Ent On Demand cost",
         id: "cost-ondemand-linuxSQLEnterprise",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.linuxSQLEnterprise
-                    ?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.linuxSQLEnterprise
-                    ?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.linuxSQLEnterprise?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.linuxSQLEnterprise?.ondemand,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Linux SQL Ent Reserved cost",
         id: "cost-reserved-linuxSQLEnterprise",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.linuxSQLEnterprise
-                    ?.reserved?.[reservedTerm],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.linuxSQLEnterprise
-                    ?.reserved?.[reservedTerm],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.linuxSQLEnterprise?.reserved?.[
-                    reservedTerm
-                ];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.linuxSQLEnterprise?.reserved?.[reservedTerm],
+        ),
     },
     {
         accessorKey: "pricing",
         header: "Linux Spot Interrupt Frequency",
         id: "spot-interrupt-rate",
-        sortingFn: (rowA, rowB) => {
-            const valueA =
-                rowA.original.pricing?.[selectedRegion]?.linux?.pct_interrupt;
-            const valueB =
-                rowB.original.pricing?.[selectedRegion]?.linux?.pct_interrupt;
-            if (!valueA) return -1;
-            if (!valueB) return 1;
-            return valueA.localeCompare(valueB);
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const pctInterrupt =
-                pricing?.[selectedRegion]?.linux?.pct_interrupt;
-            if (pctInterrupt === "N/A") return "unavailable";
-            return pctInterrupt;
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.linux?.pct_interrupt,
+        ),
     },
     {
         accessorKey: "pricing",
         header: "EMR cost",
         size: 100,
         id: "cost-emr",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.emr?.emr,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.emr?.emr,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.emr?.emr;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.emr?.emr,
+        ),
     },
     {
         accessorKey: "generation",
