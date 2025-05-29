@@ -1,15 +1,15 @@
 import { ColumnDef } from "@tanstack/react-table";
 import {
-    calculateCost,
     doAllDataTablesMigrations,
     makeSchemaWithDefaults,
     regex,
     makeCellWithRegexSorter,
     expr,
 } from "./shared";
-import { EC2Instance, PricingUnit, CostDuration, Pricing } from "@/types";
+import { EC2Instance, PricingUnit, CostDuration } from "@/types";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import sortByInstanceType from "../sortByInstanceType";
+import { getPricingSorter } from "./ec2/columns";
 
 const initialColumnsArr = [
     ["pretty_name", true],
@@ -135,103 +135,67 @@ export const columnsGen = (
         accessorKey: "pricing",
         id: "cost-ondemand-redis",
         header: "Redis Cost",
-        sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing;
-            const region = pricing[selectedRegion];
-            if (!region) return "N/A";
-            return calculateCost(
-                region.Redis?.ondemand,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.Redis?.ondemand,
+        ),
     },
     {
         accessorKey: "pricing",
         id: "cost-reserved-redis",
         header: "Redis Reserved Cost",
-        sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing;
-            const region = pricing[selectedRegion];
-            if (!region) return "N/A";
-            return calculateCost(
-                region.Redis?.reserved?.[reservedTerm],
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.Redis?.reserved?.[reservedTerm],
+        ),
     },
     {
         accessorKey: "pricing",
         id: "cost-ondemand-memcached",
         header: "Memcached On Demand Cost",
-        sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing;
-            const region = pricing[selectedRegion];
-            if (!region) return "N/A";
-            return calculateCost(
-                region.Memcached?.ondemand,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.Memcached?.ondemand,
+        ),
     },
     {
         accessorKey: "pricing",
         id: "cost-reserved-memcached",
         header: "Memcached Reserved Cost",
-        sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing;
-            const region = pricing[selectedRegion];
-            if (!region) return "N/A";
-            return calculateCost(
-                region.Memcached?.reserved?.[reservedTerm],
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.Memcached?.reserved?.[reservedTerm],
+        ),
     },
     {
         accessorKey: "pricing",
         id: "cost-ondemand-valkey",
         header: "Valkey On Demand Cost",
-        sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing;
-            const region = pricing[selectedRegion];
-            if (!region) return "N/A";
-            return calculateCost(
-                region.Valkey?.ondemand,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.Valkey?.ondemand,
+        ),
     },
     {
         accessorKey: "pricing",
         id: "cost-reserved-valkey",
         header: "Valkey Reserved Cost",
-        sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing;
-            const region = pricing[selectedRegion];
-            if (!region) return "N/A";
-            return calculateCost(
-                region.Valkey?.reserved?.[reservedTerm],
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.Valkey?.reserved?.[reservedTerm],
+        ),
     },
     {
         accessorKey: "currentGeneration",
