@@ -1,8 +1,8 @@
 import makeImage from "./makeImage";
 
 makeImage(
-    "EC2 Instances",
     "t1.micro",
+    "EC2 Instances",
     [
         {
             name: "CPU",
@@ -11,22 +11,22 @@ makeImage(
         },
         {
             name: "CPU",
-            value: "test hello test",
+            value: "test",
             squareIconPath: "icons/cpu.png",
         },
         {
             name: "CPU",
-            value: "test hello test",
+            value: "test2",
             squareIconPath: "icons/cpu.png",
         },
         {
             name: "CPU",
-            value: "test hello test",
+            value: "test3",
             squareIconPath: "icons/cpu.png",
         },
         {
             name: "CPU",
-            value: "test hello test",
+            value: "test4",
             squareIconPath: "icons/cpu.png",
         },
     ],
