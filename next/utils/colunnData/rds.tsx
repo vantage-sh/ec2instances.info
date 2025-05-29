@@ -1,4 +1,4 @@
-import { CostDuration, EC2Instance, Pricing, PricingUnit } from "@/types";
+import { CostDuration, EC2Instance, PricingUnit } from "@/types";
 import {
     makeSchemaWithDefaults,
     doAllDataTablesMigrations,
@@ -8,7 +8,7 @@ import {
 } from "./shared";
 import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
-import { calculateCost, calculateAndFormatCost } from "./ec2/columns";
+import { getPricingSorter } from "./ec2/columns";
 import sortByInstanceType from "../sortByInstanceType";
 
 const initialColumnsArr = [
@@ -257,616 +257,210 @@ export const columnsGen = (
         header: "PostgreSQL",
         id: "cost-ondemand-14",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["14"]?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["14"]?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.["14"]?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["14"]?.ondemand,
+        ),
     },
     {
         header: "PostgreSQL Reserved Cost",
         id: "cost-reserved-14t",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["14"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["14"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.["14"]?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["14"]?.reserved?.[reservedTerm],
+        ),
     },
     {
         header: "MySQL On Demand Cost",
         id: "cost-ondemand-2",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["2"]?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["2"]?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.["2"]?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["2"]?.ondemand,
+        ),
     },
     {
         header: "MySQL Reserved Cost",
         id: "cost-reserved-2",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["2"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["2"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.["2"]?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["2"]?.reserved?.[reservedTerm],
+        ),
     },
     {
         header: "SQL Server Expresss On Demand Cost",
         id: "cost-ondemand-10",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["10"]?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["10"]?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.["10"]?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["10"]?.ondemand,
+        ),
     },
     {
         header: "SQL Server Expresss Reserved Cost",
         id: "cost-reserved-10",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["10"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["10"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.["10"]?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["10"]?.reserved?.[reservedTerm],
+        ),
     },
     {
         header: "SQL Server Web On Demand Cost",
         id: "cost-ondemand-11",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["11"]?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["11"]?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.["11"]?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["11"]?.ondemand,
+        ),
     },
     {
         header: "SQL Server Web Reserved Cost",
         id: "cost-reserved-11",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["11"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["11"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.["11"]?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["11"]?.reserved?.[reservedTerm],
+        ),
     },
     {
         header: "SQL Server Standard On Demand Cost",
         id: "cost-ondemand-12",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["12"]?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["12"]?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.["12"]?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["12"]?.ondemand,
+        ),
     },
     {
         header: "SQL Server Standard Reserved Cost",
         id: "cost-reserved-12",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["12"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["12"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.["12"]?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["12"]?.reserved?.[reservedTerm],
+        ),
     },
     {
         header: "SQL Server Enterprise On Demand Cost",
         id: "cost-ondemand-15",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["15"]?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["15"]?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.["15"]?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["15"]?.ondemand,
+        ),
     },
     {
         header: "SQL Server Enterprise Reserved Cost",
         id: "cost-reserved-15",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["15"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["15"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.["15"]?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["15"]?.reserved?.[reservedTerm],
+        ),
     },
     {
         header: "Aurora Postgres & MySQL On Demand Cost",
         id: "cost-ondemand-21",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["21"]?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["21"]?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.["21"]?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["21"]?.ondemand,
+        ),
     },
     {
         header: "Aurora Postgres & MySQL Reserved Cost",
         id: "cost-reserved-21",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["21"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["21"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.["21"]?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["21"]?.reserved?.[reservedTerm],
+        ),
     },
     {
         header: "Aurora I/O Optimized On Demand Cost",
         id: "cost-ondemand-211",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["211"]?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["211"]?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.["211"]?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["211"]?.ondemand,
+        ),
     },
     {
         header: "MariaDB On Demand Cost",
         id: "cost-ondemand-18",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["18"]?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["18"]?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.["18"]?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["18"]?.ondemand,
+        ),
     },
     {
         header: "MariaDB Reserved Cost",
         id: "cost-reserved-18",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["18"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["18"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.["18"]?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["18"]?.reserved?.[reservedTerm],
+        ),
     },
     {
         header: "Oracle Enterprise On Demand Cost",
         id: "cost-ondemand-5",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["5"]?.ondemand,
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["5"]?.ondemand,
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price = pricing?.[selectedRegion]?.["5"]?.ondemand;
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["5"]?.ondemand,
+        ),
     },
     {
         header: "Oracle Enterprise Reserved Cost",
         id: "cost-reserved-5",
         accessorKey: "pricing",
-        sortingFn: (rowA, rowB) => {
-            const valueA = calculateCost(
-                rowA.original.pricing?.[selectedRegion]?.["5"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowA.original,
-                pricingUnit,
-                costDuration,
-            );
-            const valueB = calculateCost(
-                rowB.original.pricing?.[selectedRegion]?.["5"]?.reserved?.[
-                    reservedTerm
-                ],
-                rowB.original,
-                pricingUnit,
-                costDuration,
-            );
-            return valueA - valueB;
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.getValue() as Pricing | undefined;
-            const price =
-                pricing?.[selectedRegion]?.["5"]?.reserved?.[reservedTerm];
-            return calculateAndFormatCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-            );
-        }),
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.["5"]?.reserved?.[reservedTerm],
+        ),
     },
     {
         header: "EBS Optimized: Baseline Bandwidth",

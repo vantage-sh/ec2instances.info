@@ -83,7 +83,7 @@ export function calculateAndFormatCost(
     return `$${perTime.toFixed(precision)}${pricingMeasuringUnits}`;
 }
 
-function getPricingSorter(
+export function getPricingSorter(
     selectedRegion: string,
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
