@@ -26,6 +26,7 @@ async function compressEC2Instances() {
     for (const instance of instances) {
         addRenderInfo(instance);
         for (const r in instance.pricing) {
+            if (!instance.regions[r]) continue;
             if (r.includes("wl1") || r.includes("wl2")) {
                 regions.wavelength[r] = instance.regions[r];
             } else if (/\d+/.test(r)) {

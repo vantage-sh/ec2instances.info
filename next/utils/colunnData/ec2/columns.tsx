@@ -1701,12 +1701,12 @@ export const columnsGen = (
                 rowB.original.pricing?.[selectedRegion]?.linux?.spot_score;
             if (!valueA) return -1;
             if (!valueB) return 1;
-            return valueA.localeCompare(valueB);
+            return valueA - valueB;
         },
         ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.getValue() as Pricing | undefined;
             const spotScore = pricing?.[selectedRegion]?.linux?.spot_score;
-            if (spotScore === "N/A") return "unavailable";
+            if (!spotScore) return "unavailable";
             return spotScore;
         }),
     },
