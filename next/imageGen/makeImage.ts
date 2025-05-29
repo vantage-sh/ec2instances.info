@@ -27,6 +27,16 @@ function valuesToComposite(values: Value[]): Sharp.OverlayOptions[] {
     let left = LEFT_START;
     let currentRowCol = 0;
 
+    let firstColMaxWidth = 0;
+    values.forEach((value, index) => {
+        if (index % MAX_ROW_COL === 0) {
+            const titleWidth = (value.name.length + 1) * 15;
+            const valueWidth = value.value.length * 13;
+            const maxWidth = Math.max(titleWidth, valueWidth) + 180;
+            firstColMaxWidth = Math.max(firstColMaxWidth, maxWidth);
+        }
+    });
+
     return values
         .map((value) => {
             if (currentRowCol === MAX_ROW_COL) {
@@ -82,7 +92,7 @@ function valuesToComposite(values: Value[]): Sharp.OverlayOptions[] {
                     left: left + 170,
                 },
             ] satisfies Sharp.OverlayOptions[];
-            left += maxWidth + 50;
+            left += firstColMaxWidth + 50;
             return v;
         })
         .flat();
