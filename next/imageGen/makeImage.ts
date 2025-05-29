@@ -17,12 +17,14 @@ function sanitize(text: string) {
         .replace(/'/g, "&#039;");
 }
 
-const MAX_ROW_COL = 3;
+const MAX_ROW_COL = 2;
 const ROW_HEIGHT = 100;
+const TOP_START = 250;
+const LEFT_START = 120;
 
 function valuesToComposite(values: Value[]): Sharp.OverlayOptions[] {
-    let top = 250;
-    let left = 110;
+    let top = TOP_START + 210;
+    let left = LEFT_START;
     let currentRowCol = 0;
 
     return values
@@ -30,14 +32,14 @@ function valuesToComposite(values: Value[]): Sharp.OverlayOptions[] {
             if (currentRowCol === MAX_ROW_COL) {
                 // Reset the row and column
                 currentRowCol = 0;
-                top += ROW_HEIGHT + 40;
-                left = 110;
+                top += ROW_HEIGHT + 100;
+                left = LEFT_START;
             }
             currentRowCol++;
 
             const titleWidth = (value.name.length + 1) * 15;
-            const valueWidth = value.value.length * 15;
-            const maxWidth = Math.max(titleWidth, valueWidth) + 130;
+            const valueWidth = value.value.length * 13;
+            const maxWidth = Math.max(titleWidth, valueWidth) + 180;
 
             const v = [
                 {
@@ -59,8 +61,8 @@ function valuesToComposite(values: Value[]): Sharp.OverlayOptions[] {
                             rgba: true,
                         },
                     },
-                    top: top + 15,
-                    left: left + 130,
+                    top: top + 40,
+                    left: left + 170,
                 },
                 {
                     input: {
@@ -76,27 +78,42 @@ function valuesToComposite(values: Value[]): Sharp.OverlayOptions[] {
                             rgba: true,
                         },
                     },
-                    top: top + 50,
-                    left: left + 130,
+                    top: top + 75,
+                    left: left + 170,
                 },
             ] satisfies Sharp.OverlayOptions[];
-            left += maxWidth + 10;
+            left += maxWidth + 50;
             return v;
         })
         .flat();
 }
 
 export default async function makeImage(
-    categoryHeader: string,
     title: string,
+    categoryHeader: string,
     values: Value[],
     filename: string,
 ) {
     const sharp = await getOpengraphBase();
 
-    const leftLogoOffset = 450;
-    const topLogoOffset = 120;
     sharp.composite([
+        {
+            input: {
+                text: {
+                    fontfile: path.join(
+                        __dirname,
+                        "fonts",
+                        "Inter-VariableFont_slnt,wght.ttf",
+                    ),
+                    text: `<span foreground="#ffffff">${sanitize(title)}</span>`,
+                    height: 70,
+                    width: 10000,
+                    rgba: true,
+                },
+            },
+            top: TOP_START,
+            left: LEFT_START,
+        },
         {
             input: {
                 text: {
@@ -111,25 +128,8 @@ export default async function makeImage(
                     rgba: true,
                 },
             },
-            top: topLogoOffset,
-            left: leftLogoOffset,
-        },
-        {
-            input: {
-                text: {
-                    fontfile: path.join(
-                        __dirname,
-                        "fonts",
-                        "Inter-VariableFont_slnt,wght.ttf",
-                    ),
-                    text: `<span foreground="#ffffff">${sanitize(title)}</span>`,
-                    height: 22,
-                    width: 10000,
-                    rgba: true,
-                },
-            },
-            top: topLogoOffset + 50,
-            left: leftLogoOffset,
+            top: TOP_START + 110,
+            left: LEFT_START,
         },
         ...valuesToComposite(values),
     ]);
