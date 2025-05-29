@@ -22,6 +22,12 @@ const ROW_HEIGHT = 100;
 const TOP_START = 250;
 const LEFT_START = 120;
 
+const fontfile = path.join(
+    __dirname,
+    "fonts",
+    "Inter-VariableFont_slnt,wght.ttf",
+);
+
 function valuesToComposite(values: Value[]): Sharp.OverlayOptions[] {
     let top = TOP_START + 210;
     let left = LEFT_START;
@@ -49,7 +55,6 @@ function valuesToComposite(values: Value[]): Sharp.OverlayOptions[] {
 
             const titleWidth = (value.name.length + 1) * 15;
             const valueWidth = value.value.length * 13;
-            const maxWidth = Math.max(titleWidth, valueWidth) + 180;
 
             const v = [
                 {
@@ -60,11 +65,7 @@ function valuesToComposite(values: Value[]): Sharp.OverlayOptions[] {
                 {
                     input: {
                         text: {
-                            fontfile: path.join(
-                                __dirname,
-                                "fonts",
-                                "Inter-VariableFont_slnt,wght.ttf",
-                            ),
+                            fontfile,
                             text: `<span foreground="#ffffff"><b>${sanitize(value.name)}:</b></span>`,
                             height: 22,
                             width: 10000,
@@ -77,11 +78,7 @@ function valuesToComposite(values: Value[]): Sharp.OverlayOptions[] {
                 {
                     input: {
                         text: {
-                            fontfile: path.join(
-                                __dirname,
-                                "fonts",
-                                "Inter-VariableFont_slnt,wght.ttf",
-                            ),
+                            fontfile,
                             text: `<span foreground="#ffffff">${sanitize(value.value)}</span>`,
                             height: 22,
                             width: 10000,
@@ -110,11 +107,7 @@ export default async function makeImage(
         {
             input: {
                 text: {
-                    fontfile: path.join(
-                        __dirname,
-                        "fonts",
-                        "Inter-VariableFont_slnt,wght.ttf",
-                    ),
+                    fontfile,
                     text: `<span foreground="#ffffff">${sanitize(title)}</span>`,
                     height: 70,
                     width: 10000,
@@ -127,11 +120,7 @@ export default async function makeImage(
         {
             input: {
                 text: {
-                    fontfile: path.join(
-                        __dirname,
-                        "fonts",
-                        "Inter-VariableFont_slnt,wght.ttf",
-                    ),
+                    fontfile,
                     text: `<span foreground="#ffffff">${sanitize(categoryHeader)}</span>`,
                     height: 30,
                     width: 10000,
