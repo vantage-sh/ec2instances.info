@@ -74,9 +74,9 @@ const initialColumnsArr = [
     ["cost-ondemand-linuxSQLEnterprise", false],
     ["cost-reserved-linuxSQLEnterprise", false],
     ["spot-interrupt-rate", false],
-    ["spot-placement-score", false],
     ["cost-emr", false],
     ["generation", false],
+    ["spot-placement-score", false],
 ] as const;
 
 export const initialColumnsValue: {
