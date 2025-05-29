@@ -53,9 +53,6 @@ function valuesToComposite(values: Value[]): Sharp.OverlayOptions[] {
             }
             currentRowCol++;
 
-            const titleWidth = (value.name.length + 1) * 15;
-            const valueWidth = value.value.length * 13;
-
             const v = [
                 {
                     input: path.join(__dirname, value.squareIconPath),
