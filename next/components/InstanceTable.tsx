@@ -56,6 +56,16 @@ interface InstanceTableProps<Instance> {
 // Hack to stop Tanstack Table from thinking the array changed.
 const emptyColumnFilters: ColumnFiltersState = [];
 
+const regexCache = new Map<string, RegExp>();
+function getRegex(value: string) {
+    let regex = regexCache.get(value);
+    if (!regex) {
+        regex = new RegExp(value, "ig");
+        regexCache.set(value, regex);
+    }
+    return regex;
+}
+
 export default function InstanceTable<
     Instance extends { instance_type: string },
 >({
@@ -152,6 +162,15 @@ export default function InstanceTable<
         data,
         getRowId: (row) => row.instance_type,
         columns: columns as ColumnDef<Instance, any>[],
+        globalFilterFn: (row, columnId, filterValue) => {
+            const column = `${row.getValue(columnId)}`;
+            try {
+                const regex = getRegex(filterValue);
+                const v = regex.test(column);
+                return !!v;
+            } catch {}
+            return column.toLowerCase().includes(filterValue.toLowerCase());
+        },
         state: {
             columnVisibility,
             globalFilter: compareOn ? undefined : searchTerm,
