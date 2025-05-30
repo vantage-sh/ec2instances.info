@@ -40,6 +40,10 @@ function evaluate(token: Tokens, num: number): boolean {
 }
 
 export default (value: string) => {
+    // If the value is empty or only whitespace, return a function that always returns true (no filtering)
+    if (!value.trim()) {
+        return () => true;
+    }
     const tokens = tokenise(value);
     return (num: number) => evaluate(tokens, num);
 };
