@@ -1,6 +1,8 @@
 import Sharp, { Sharp as SharpInstance } from "sharp";
 import path from "path";
 
+Sharp.cache({ items: 20000 });
+
 type Value = {
     name: string;
     value: string;
