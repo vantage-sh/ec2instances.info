@@ -20,7 +20,7 @@ function sanitize(text: string) {
 
 const MAX_ROW_COL = 2;
 const ROW_HEIGHT = 100;
-const TOP_START = 250;
+const TOP_START = 230;
 const LEFT_START = 120;
 
 const fontfile = path.join(
@@ -30,16 +30,16 @@ const fontfile = path.join(
 );
 
 function valuesToComposite(values: Value[]): Sharp.OverlayOptions[] {
-    let top = TOP_START + 210;
+    let top = TOP_START + 100;
     let left = LEFT_START;
     let currentRowCol = 0;
 
     let firstColMaxWidth = 0;
     values.forEach((value, index) => {
         if (index % MAX_ROW_COL === 0) {
-            const titleWidth = (value.name.length + 1) * 15;
-            const valueWidth = value.value.length * 13;
-            const maxWidth = Math.max(titleWidth, valueWidth) + 180;
+            const titleWidth = (value.name.length + 1) * 30;
+            const valueWidth = value.value.length * 24;
+            const maxWidth = Math.max(titleWidth, valueWidth) + 200;
             firstColMaxWidth = Math.max(firstColMaxWidth, maxWidth);
         }
     });
@@ -65,29 +65,29 @@ function valuesToComposite(values: Value[]): Sharp.OverlayOptions[] {
                         text: {
                             fontfile,
                             text: `<span foreground="#ffffff"><b>${sanitize(value.name)}:</b></span>`,
-                            height: 22,
+                            height: 44,
                             width: 10000,
                             rgba: true,
                         },
                     },
-                    top: top + 40,
-                    left: left + 170,
+                    top: top + 20,
+                    left: left + 190,
                 },
                 {
                     input: {
                         text: {
                             fontfile,
                             text: `<span foreground="#ffffff">${sanitize(value.value)}</span>`,
-                            height: 22,
+                            height: 40,
                             width: 10000,
                             rgba: true,
                         },
                     },
-                    top: top + 75,
-                    left: left + 170,
+                    top: top + 80,
+                    left: left + 190,
                 },
             ] satisfies Sharp.OverlayOptions[];
-            left += firstColMaxWidth + 50;
+            left += firstColMaxWidth + 40;
             return v;
         })
         .flat();
@@ -100,31 +100,35 @@ export default async function makeImage(
     values: Value[],
     filename: string,
 ) {
+    // Ok, this is very petty of me, but basically the size is mildly different on different titles.
+    const titleImage = Sharp({
+        text: {
+            fontfile,
+            text: `<span foreground="#ffffff">${sanitize(title)}</span>`,
+            width: 10000,
+            wrap: "none",
+            rgba: true,
+            dpi: 400,
+        },
+    });
+
     sharp.composite([
         {
-            input: {
-                text: {
-                    fontfile,
-                    text: `<span foreground="#ffffff">${sanitize(title)}</span>`,
-                    height: 70,
-                    width: 10000,
-                    rgba: true,
-                },
-            },
-            top: TOP_START,
-            left: LEFT_START,
+            input: await titleImage.png().toBuffer(),
+            top: 152 - Math.floor((await titleImage.metadata()).height / 2),
+            left: 440,
         },
         {
             input: {
                 text: {
                     fontfile,
                     text: `<span foreground="#ffffff">${sanitize(categoryHeader)}</span>`,
-                    height: 30,
+                    height: 40,
                     width: 10000,
                     rgba: true,
                 },
             },
-            top: TOP_START + 110,
+            top: TOP_START,
             left: LEFT_START,
         },
         ...valuesToComposite(values),
