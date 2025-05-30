@@ -314,49 +314,49 @@ def add_linux_ami_info(instances):
     given its own column.
 
     """
-    checkmark_char = "\u2713"
-    url = "http://aws.amazon.com/amazon-linux-ami/instance-type-matrix/"
-    tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
-    table = tree.xpath('//div[@role="table"]/table')[0]
-    rows = table.xpath(".//tr[./td]")[1:]  # ignore header
+    # checkmark_char = "\u2713"
+    # url = "http://aws.amazon.com/amazon-linux-ami/instance-type-matrix/"
+    # tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
+    # table = tree.xpath('//div[@role="table"]/table')[0]
+    # rows = table.xpath(".//tr[./td]")[1:]  # ignore header
 
-    for r in rows:
-        supported_types = []
-        family_id = totext(r[0]).lower()
-        if not family_id:
-            continue
-        # We only check the primary EBS-backed values here since the 'storage'
-        # column will already be able to tell users whether or not the instance
-        # they're looking at can use EBS and/or instance-store AMIs.
-        try:
-            if totext(r[1]) == checkmark_char:
-                supported_types.append("HVM")
-            if len(r) >= 4 and totext(r[3]) == checkmark_char:
-                supported_types.append("PV")
-        except Exception as e:
-            # 2018-08-01: handle missing cells on last row in this table...
-            print("Exception while parsing AMI info for {}: {}".format(family_id, e))
+    # for r in rows:
+    #     supported_types = []
+    #     family_id = totext(r[0]).lower()
+    #     if not family_id:
+    #         continue
+    #     # We only check the primary EBS-backed values here since the 'storage'
+    #     # column will already be able to tell users whether or not the instance
+    #     # they're looking at can use EBS and/or instance-store AMIs.
+    #     try:
+    #         if totext(r[1]) == checkmark_char:
+    #             supported_types.append("HVM")
+    #         if len(r) >= 4 and totext(r[3]) == checkmark_char:
+    #             supported_types.append("PV")
+    #     except Exception as e:
+    #         # 2018-08-01: handle missing cells on last row in this table...
+    #         print("Exception while parsing AMI info for {}: {}".format(family_id, e))
 
-        # Apply types for this instance family to all matching instances
-        for i in instances:
-            i_family_id = i.instance_type.split(".")[0]
-            if i_family_id == family_id:
-                i.linux_virtualization_types = supported_types
+    #     # Apply types for this instance family to all matching instances
+    #     for i in instances:
+    #         i_family_id = i.instance_type.split(".")[0]
+    #         if i_family_id == family_id:
+    #             i.linux_virtualization_types = supported_types
 
-    # http://aws.amazon.com/amazon-linux-ami/instance-type-matrix/ page is
-    # missing info about both older (t1, m1, c1, m2) and newer exotic (cg1,
-    # cr1, hi1, hs1, cc2) instance type generations.
+    # # http://aws.amazon.com/amazon-linux-ami/instance-type-matrix/ page is
+    # # missing info about both older (t1, m1, c1, m2) and newer exotic (cg1,
+    # # cr1, hi1, hs1, cc2) instance type generations.
 
-    # Adding "manual" info about older generations
-    # Some background info at https://github.com/powdahound/ec2instances.info/pull/161
-    for i in instances:
-        i_family_id = i.instance_type.split(".")[0]
-        if i_family_id in ("cc2", "cg1", "hi1", "hs1"):
-            if not "HVM" in i.linux_virtualization_types:
-                i.linux_virtualization_types.append("HVM")
-        if i_family_id in ("t1", "m1", "m2", "c1", "hi1", "hs1"):
-            if not "PV" in i.linux_virtualization_types:
-                i.linux_virtualization_types.append("PV")
+    # # Adding "manual" info about older generations
+    # # Some background info at https://github.com/powdahound/ec2instances.info/pull/161
+    # for i in instances:
+    #     i_family_id = i.instance_type.split(".")[0]
+    #     if i_family_id in ("cc2", "cg1", "hi1", "hs1"):
+    #         if not "HVM" in i.linux_virtualization_types:
+    #             i.linux_virtualization_types.append("HVM")
+    #     if i_family_id in ("t1", "m1", "m2", "c1", "hi1", "hs1"):
+    #         if not "PV" in i.linux_virtualization_types:
+    #             i.linux_virtualization_types.append("PV")
 
 
 def add_vpconly_detail(instances):
