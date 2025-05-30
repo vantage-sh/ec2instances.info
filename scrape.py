@@ -317,7 +317,7 @@ def add_linux_ami_info(instances):
     checkmark_char = "\u2713"
     url = "http://aws.amazon.com/amazon-linux-ami/instance-type-matrix/"
     tree = etree.parse(urllib2.urlopen(url), etree.HTMLParser())
-    table = tree.xpath('//div[@class="aws-table"]/table')[0]
+    table = tree.xpath('//div[@role="table"]/table')[0]
     rows = table.xpath(".//tr[./td]")[1:]  # ignore header
 
     for r in rows:
