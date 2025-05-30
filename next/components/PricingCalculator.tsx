@@ -79,7 +79,8 @@ function Calculator({
         const query = new URLSearchParams(window.location.search);
 
         const region = query.get("region");
-        if (region && regions.local_zone[region]) setRegionState(region);
+        if (region && (regions.local_zone[region] || regions.main[region]))
+            setRegionState(region);
 
         // If there is no OS option, don't let the user change it.
         if (defaultPlatform === defaultOs) {
@@ -192,7 +193,10 @@ function Calculator({
     }, [pricing, region, platform, duration, pricingType, removeSpot]);
 
     const localZones = useMemo(() => {
-        return Object.entries(regions.local_zone).sort((a, b) => {
+        return [
+            ...Object.entries(regions.main),
+            ...Object.entries(regions.local_zone),
+        ].sort((a, b) => {
             // Generally alphabetical, but default region is first.
             if (a[0] === defaultRegion) return -1;
             if (b[0] === defaultRegion) return 1;
