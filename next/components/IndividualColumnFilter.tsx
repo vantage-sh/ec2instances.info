@@ -1,24 +1,110 @@
 import GSettings from "@/utils/g_settings_port";
 import { Column } from "@tanstack/react-table";
-import { useEffect, useCallback, useState, useId } from "react";
-import { FunctionSquare } from "lucide-react";
+import {
+    useEffect,
+    useCallback,
+    useState,
+    useId,
+    useMemo,
+    useRef,
+} from "react";
+import { Info, X } from "lucide-react";
+import expr from "@/utils/expr";
 
-const GTE_EXPR = /^[ \t\n]*>=[ \t\n]*([\d.]+)[ \t\n]*$/;
+function ExprHelpData({ parseError }: { parseError: string | null }) {
+    return (
+        <div className="font-normal text-sm">
+            {parseError && (
+                <div className="text-red-500 font-bold border border-red-500 rounded-md p-2 mb-4">
+                    {parseError}
+                </div>
+            )}
+            <p>
+                Expressions are used to filter the table. You can use the
+                following syntax:
+            </p>
+            <ul className="list-disc pl-4 mt-2 space-y-1">
+                <li>
+                    Numbers: <code>42</code>, <code>3.14</code>
+                </li>
+                <li>
+                    Comparisons: <code>&gt;10</code>, <code>&gt;=20</code>,{" "}
+                    <code>&lt;30</code>, <code>&lt;=40</code>
+                </li>
+                <li>
+                    Ranges: <code>10..20</code> (inclusive range)
+                </li>
+                <li>
+                    Logical operators: <code>&amp;&amp;</code> (AND),{" "}
+                    <code>||</code> (OR), <code>!</code> (NOT)
+                </li>
+                <li>
+                    Grouping: <code>(expression)</code>
+                </li>
+            </ul>
+            <p className="mt-2">Examples:</p>
+            <ul className="list-disc pl-4 mt-1 space-y-1">
+                <li>
+                    <code>&gt;=4 &amp;&amp; &lt;=8</code> - Values between 4 and
+                    8 (inclusive)
+                </li>
+                <li>
+                    <code>2..4 || &gt;=10</code> - Values from 2 to 4, or
+                    greater than or equal to 10
+                </li>
+                <li>
+                    <code>!(2..4)</code> - Values not between 2 and 4
+                </li>
+            </ul>
+        </div>
+    );
+}
 
-function isGteExpr(expr: string): number | null {
-    const match = expr.match(GTE_EXPR);
-    if (!match) return null;
+function ExprHelpModal({ parseError }: { parseError: string | null }) {
+    const dialogRef = useRef<HTMLDialogElement>(null);
 
-    let num = match[1];
-    if (num.startsWith(".")) {
-        num = "0" + num;
-    } else if (num.endsWith(".")) {
-        num = num + "0";
-    }
-
-    const v = parseFloat(num);
-    if (isNaN(v)) return null;
-    return v;
+    return (
+        <>
+            <dialog
+                ref={dialogRef}
+                className="fixed inset-0 z-50"
+                onClick={() => dialogRef.current?.close()}
+            >
+                <div className="fixed inset-0 bg-opacity-50"></div>
+                <div className="fixed inset-0 flex items-center justify-center">
+                    <div
+                        className="bg-white dark:text-white p-4 mx-4 rounded-lg max-w-2xl"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="flex gap-2">
+                            <button
+                                onClick={() => dialogRef.current?.close()}
+                                className="text-black cursor-pointer"
+                                aria-label="Close expression help"
+                            >
+                                <X size={15} />
+                            </button>
+                            <h1 className="text-lg font-bold">
+                                Expression Help
+                            </h1>
+                        </div>
+                        <hr className="my-4" />
+                        <ExprHelpData parseError={parseError} />
+                    </div>
+                </div>
+            </dialog>
+            <button
+                onClick={() => {
+                    dialogRef.current?.showModal();
+                }}
+                aria-label="Show expression help"
+                title="Show expression help"
+                className="text-black cursor-pointer mt-1.5"
+            >
+                <Info size={15} />
+            </button>
+        </>
+    );
 }
 
 function GSettingsExprFilter<Instance>({
@@ -33,23 +119,20 @@ function GSettingsExprFilter<Instance>({
     initValue: string;
 }) {
     const [value, setValue] = useState(initValue);
-    const [exprMode, setExprMode] = useState(() => {
-        const v = isGteExpr(initValue);
-        return v === null;
-    });
-    const [numberValue, setNumberValue] = useState(() => {
-        const v = isGteExpr(initValue);
-        if (v !== null) return v;
-        return 0;
-    });
+    const exprParseError = useMemo(() => {
+        try {
+            expr(value);
+            return null;
+        } catch (e) {
+            return e instanceof Error ? e.message : `${e}`;
+        }
+    }, [value]);
+
     const id = useId();
 
     useEffect(() => {
         // Handle if we launched the page with a value or it reset.
         setValue(initValue);
-        const v = isGteExpr(initValue);
-        setNumberValue(v ?? 0);
-        if (v === null) setExprMode(true);
     }, [initValue]);
 
     const exprStringChange = useCallback(
@@ -58,19 +141,6 @@ function GSettingsExprFilter<Instance>({
             setValue(v);
             gSettingsSet(v);
             column.setFilterValue(v);
-            setNumberValue(isGteExpr(v) ?? 0);
-        },
-        [gSettingsFullMutations],
-    );
-
-    const numberChange = useCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) => {
-            const v = e.target.valueAsNumber;
-            if (isNaN(v)) return;
-            setValue(`>=${v}`);
-            gSettingsSet(`>=${v}`);
-            column.setFilterValue(`>=${v}`);
-            setNumberValue(v);
         },
         [gSettingsFullMutations],
     );
@@ -78,47 +148,20 @@ function GSettingsExprFilter<Instance>({
     return (
         <div className="flex gap-1 w-full">
             <div className="flex-col my-auto">
-                <button
-                    aria-selected={exprMode}
-                    onClick={() => setExprMode(!exprMode)}
-                    aria-label="Toggle expression mode"
-                    aria-controls={id}
-                    title="Toggle expression mode"
-                    className="text-black [&[aria-selected=true]]:text-purple-500 cursor-pointer mt-1"
-                >
-                    <FunctionSquare size={20} />
-                </button>
+                <ExprHelpModal parseError={exprParseError} />
             </div>
 
             <div className="flex-col grow">
-                {exprMode ? (
-                    <input
-                        type="text"
-                        value={value}
-                        onChange={exprStringChange}
-                        placeholder={`Filter ${column.columnDef.header as string}...`}
-                        id={id}
-                        className="w-full px-2 py-1 text-sm border border-gray-5 bg-white font-normal rounded"
-                    />
-                ) : (
-                    <input
-                        type="number"
-                        value={numberValue}
-                        onChange={numberChange}
-                        placeholder={`Filter ${column.columnDef.header as string}...`}
-                        className="w-full px-2 py-1 text-sm border border-gray-5 bg-white font-normal rounded"
-                        min={0}
-                        id={id}
-                        onKeyDown={(e) => {
-                            // number inputs can be unintuitive when deleting the last digit. This helps with that.
-                            if (e.key === "Backspace" && numberValue < 10) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                (e.target as HTMLInputElement).select();
-                            }
-                        }}
-                    />
-                )}
+                <input
+                    type="text"
+                    value={value}
+                    onChange={exprStringChange}
+                    placeholder={`Filter ${column.columnDef.header as string}...`}
+                    id={id}
+                    className={`w-full px-2 py-1 text-sm border border-gray-5 bg-white font-normal rounded ${
+                        exprParseError ? "border-red-500" : ""
+                    }`}
+                />
             </div>
         </div>
     );
