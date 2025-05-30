@@ -1,5 +1,4 @@
-import Sharp from "sharp";
-import getOpengraphBase from "./getOpengraphBase";
+import Sharp, { Sharp as SharpInstance } from "sharp";
 import path from "path";
 
 type Value = {
@@ -93,13 +92,12 @@ function valuesToComposite(values: Value[]): Sharp.OverlayOptions[] {
 }
 
 export default async function makeImage(
+    sharp: SharpInstance,
     title: string,
     categoryHeader: string,
     values: Value[],
     filename: string,
 ) {
-    const sharp = await getOpengraphBase();
-
     sharp.composite([
         {
             input: {
