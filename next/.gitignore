@@ -49,3 +49,5 @@ public/*-ids.json
 # llms data
 public/llms.txt
 public/**/*.md
+public/aws/**/*.png
+public/azure/**/*.png
