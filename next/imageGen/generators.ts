@@ -10,6 +10,8 @@ function formatStorage(storage: EC2Instance["storage"]) {
     return `${storage.size} ${storage.size_unit}`;
 }
 
+const ONLY_INSTANCES = process.env.ONLY_INSTANCES?.split(",") || [];
+
 export function generateEc2Images() {
     const ec2Instances = JSON.parse(
         readFileSync(
@@ -18,10 +20,18 @@ export function generateEc2Images() {
         ),
     ) as EC2Instance[];
 
-    return ec2Instances.map((instance) =>
-        pushToWorker({
+    return ec2Instances.map((instance) => {
+        if (
+            ONLY_INSTANCES.length > 0 &&
+            !ONLY_INSTANCES.includes(instance.instance_type)
+        ) {
+            return Promise.resolve();
+        }
+        return pushToWorker({
             name: instance.instance_type,
-            categoryHeader: "EC2 Instances",
+            categoryHeader: `EC2 Instances${
+                instance.family ? ` (${instance.family})` : ""
+            }`,
             filename: path.join(
                 __dirname,
                 "..",
@@ -32,12 +42,12 @@ export function generateEc2Images() {
             ),
             values: [
                 {
-                    name: "CPU Cores",
+                    name: "vCPUs",
                     value: instance.vCPU.toString(),
                     squareIconPath: "icons/cpu-cores.png",
                 },
                 {
-                    name: "CPU Architecture",
+                    name: "Architecture",
                     value: instance.arch[0] || "N/A",
                     squareIconPath: "icons/cpu-arch.png",
                 },
@@ -58,12 +68,7 @@ export function generateEc2Images() {
                     value: formatStorage(instance.storage),
                     squareIconPath: "icons/storage.png",
                 },
-                {
-                    name: "Instance Family",
-                    value: instance.family,
-                    squareIconPath: "icons/instance-family.png",
-                },
             ],
-        }),
-    );
+        });
+    });
 }
