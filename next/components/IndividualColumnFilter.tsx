@@ -8,7 +8,7 @@ import {
     useMemo,
     useRef,
 } from "react";
-import { Info, X } from "lucide-react";
+import { SquareFunction, X } from "lucide-react";
 import expr from "@/utils/expr";
 
 function ExprHelpData({ parseError }: { parseError: string | null }) {
@@ -99,9 +99,9 @@ function ExprHelpModal({ parseError }: { parseError: string | null }) {
                 }}
                 aria-label="Show expression help"
                 title="Show expression help"
-                className="text-black cursor-pointer mt-1.5"
+                className="text-gray-2 cursor-pointer mt-1.5"
             >
-                <Info size={15} />
+                <SquareFunction size={15} />
             </button>
         </>
     );
@@ -147,10 +147,6 @@ function GSettingsExprFilter<Instance>({
 
     return (
         <div className="flex gap-1 w-full">
-            <div className="flex-col my-auto">
-                <ExprHelpModal parseError={exprParseError} />
-            </div>
-
             <div className="flex-col grow">
                 <input
                     type="text"
@@ -162,6 +158,9 @@ function GSettingsExprFilter<Instance>({
                         exprParseError ? "border-red-500" : ""
                     }`}
                 />
+            </div>
+            <div className="flex-col my-auto">
+                <ExprHelpModal parseError={exprParseError} />
             </div>
         </div>
     );
