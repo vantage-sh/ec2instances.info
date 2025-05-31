@@ -1,9 +1,12 @@
 import { workers } from "./shared";
-import { generateEc2Images } from "./generators";
+import { generateEc2Images, generateRdsImages } from "./generators";
 
 const allPromises: Promise<void>[] = [
     // EC2
     ...generateEc2Images(),
+
+    // RDS
+    ...generateRdsImages(),
 ];
 
 async function main() {
