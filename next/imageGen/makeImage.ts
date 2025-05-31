@@ -134,5 +134,16 @@ export default async function makeImage(
         ...valuesToComposite(values),
     ]);
 
-    await sharp.png().toFile(filename);
+    // Half the image to make it smaller and add anti-aliasing
+    const metadata = await sharp.metadata();
+    const png = await sharp.png().toBuffer();
+    await Sharp(png)
+        .resize(
+            Math.floor(metadata.width / 2),
+            Math.floor(metadata.height / 2),
+            {
+                kernel: "lanczos3",
+            },
+        )
+        .toFile(filename);
 }
