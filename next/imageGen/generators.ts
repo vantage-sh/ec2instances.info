@@ -142,3 +142,19 @@ export function generateRdsImages() {
         });
     });
 }
+
+export function generateElasticacheImages() {
+    return [] as Promise<void>[];
+}
+
+export function generateOpensearchImages() {
+    return [] as Promise<void>[];
+}
+
+export function generateRedshiftImages() {
+    return [] as Promise<void>[];
+}
+
+export function generateAzureImages() {
+    return [] as Promise<void>[];
+}
