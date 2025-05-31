@@ -87,7 +87,7 @@ function valuesToComposite(values: Value[]): Sharp.OverlayOptions[] {
                     left: left + 190,
                 },
             ] satisfies Sharp.OverlayOptions[];
-            left += firstColMaxWidth + 40;
+            left += firstColMaxWidth + 50;
             return v;
         })
         .flat();
