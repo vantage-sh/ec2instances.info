@@ -1,5 +1,12 @@
 import { workers } from "./shared";
-import { generateEc2Images, generateRdsImages } from "./generators";
+import {
+    generateAzureImages,
+    generateElasticacheImages,
+    generateEc2Images,
+    generateOpensearchImages,
+    generateRdsImages,
+    generateRedshiftImages,
+} from "./generators";
 
 const allPromises: Promise<void>[] = [
     // EC2
@@ -7,6 +14,18 @@ const allPromises: Promise<void>[] = [
 
     // RDS
     ...generateRdsImages(),
+
+    // Elasticache
+    ...generateElasticacheImages(),
+
+    // Opensearch
+    ...generateOpensearchImages(),
+
+    // Redshift
+    ...generateRedshiftImages(),
+
+    // Azure
+    ...generateAzureImages(),
 ];
 
 async function main() {
