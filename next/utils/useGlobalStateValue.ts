@@ -1,5 +1,4 @@
 import { useCallback, useSyncExternalStore } from "react";
-import { usePathname } from "next/navigation";
 import { get, write, StateDump } from "./instancesKvClient";
 
 async function doWrite(
@@ -88,7 +87,7 @@ function useReadArr(pathname: string) {
     }, [pathname]);
 }
 
-function resOrDefault<T>(v: T | undefined, defaultValue: T) {
+function resOrDefault<T>(v: T | undefined, defaultValue: T): T {
     if (Array.isArray(v) || typeof v === "object") return v;
     return v || defaultValue;
 }
@@ -98,10 +97,9 @@ function resOrDefault<T>(v: T | undefined, defaultValue: T) {
  */
 export function useGlobalStateValue<Key extends keyof StateDump>(
     key: Key,
-    defaultValue: StateDump[Key],
-    pathname?: string,
+    pathname: string,
+    defaultValue?: StateDump[Key],
 ) {
-    if (!pathname) pathname = usePathname();
     const readArr = useReadArr(pathname);
 
     const res = useSyncExternalStore(
@@ -119,9 +117,12 @@ export function useGlobalStateValue<Key extends keyof StateDump>(
         },
         () => {
             const [, data] = readArr();
-            return resOrDefault(data?.[key], defaultValue);
+            return resOrDefault(
+                data?.[key],
+                defaultValue ?? blankStateDump[key],
+            );
         },
-        () => defaultValue,
+        () => defaultValue ?? blankStateDump[key],
     );
 
     return [
