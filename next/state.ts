@@ -1,5 +1,4 @@
 import { useEffect, useSyncExternalStore } from "react";
-import { usePathname } from "next/navigation";
 import handleCompressedFile from "./utils/handleCompressedFile";
 import { CostDuration, PricingUnit } from "./types";
 import { useGlobalStateValue } from "./utils/useGlobalStateValue";
@@ -58,19 +57,18 @@ export function useActiveTableDataFormatter(fn: () => Promise<string[][]>) {
     }, [activeTableDataFormatters]);
 }
 
-export function useSearchTerm() {
-    return useGlobalStateValue("filter", "");
+export function useSearchTerm(pathname: string) {
+    return useGlobalStateValue("filter", pathname);
 }
 
-export function useSelectedRegion() {
-    const pathname = usePathname();
+export function useSelectedRegion(pathname: string) {
     const defaultRegion = pathname.includes("azure") ? "us-east" : "us-east-1";
 
-    return useGlobalStateValue("region", defaultRegion, pathname);
+    return useGlobalStateValue("region", pathname, defaultRegion);
 }
 
-export function usePricingUnit(ecuRename?: string) {
-    const [v, set] = useGlobalStateValue("pricingUnit", "instance");
+export function usePricingUnit(pathname: string, ecuRename?: string) {
+    const [v, set] = useGlobalStateValue("pricingUnit", pathname, "instance");
     return [
         (v === ecuRename?.toLowerCase() ? "ecu" : v) as PricingUnit,
         (v: PricingUnit) => {
@@ -83,38 +81,37 @@ export function usePricingUnit(ecuRename?: string) {
     ] as const;
 }
 
-export function useDuration() {
-    return useGlobalStateValue("costDuration", "hourly") as readonly [
+export function useDuration(pathname: string) {
+    return useGlobalStateValue("costDuration", pathname, "hourly") as readonly [
         CostDuration,
         (value: CostDuration) => void,
     ];
 }
 
-export function useReservedTerm() {
-    const pathname = usePathname();
+export function useReservedTerm(pathname: string) {
     const defaultReservedTerm = pathname.includes("azure")
         ? "yrTerm1Standard.allUpfront"
         : "yrTerm1Standard.noUpfront";
 
-    return useGlobalStateValue("reservedTerm", defaultReservedTerm, pathname);
+    return useGlobalStateValue("reservedTerm", pathname, defaultReservedTerm);
 }
 
-export function useCompareOn() {
-    return useGlobalStateValue("compareOn", false);
+export function useCompareOn(pathname: string) {
+    return useGlobalStateValue("compareOn", pathname);
 }
 
-export function useColumnVisibility() {
-    return useGlobalStateValue("visibleColumns", {});
+export function useColumnVisibility(pathname: string) {
+    return useGlobalStateValue("visibleColumns", pathname);
 }
 
-export function useColumnFilters() {
-    return useGlobalStateValue("columns", []);
+export function useColumnFilters(pathname: string) {
+    return useGlobalStateValue("columns", pathname);
 }
 
-export function useSorting() {
-    return useGlobalStateValue("sort", []);
+export function useSorting(pathname: string) {
+    return useGlobalStateValue("sort", pathname);
 }
 
-export function useSelected() {
-    return useGlobalStateValue("selected", []);
+export function useSelected(pathname: string) {
+    return useGlobalStateValue("selected", pathname);
 }

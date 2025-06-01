@@ -38,15 +38,16 @@ export default function Filters<DataKey extends keyof typeof columnData>({
     reservedTermOptions,
     reservedLabel,
 }: FiltersProps<DataKey>) {
-    const [columnVisibility, setColumnVisibility] = useColumnVisibility();
-    const [searchTerm, setSearchTerm] = useSearchTerm();
-    const [selectedRegion, setSelectedRegion] = useSelectedRegion();
-    const [pricingUnit, setPricingUnit] = usePricingUnit(ecuRename);
-    const [duration, setDuration] = useDuration();
-    const [reservedTerm, setReservedTerm] = useReservedTerm();
-    const [compareOn, setCompareOn] = useCompareOn();
-    const [selected] = useSelected();
     const pathname = usePathname();
+    const [columnVisibility, setColumnVisibility] =
+        useColumnVisibility(pathname);
+    const [searchTerm, setSearchTerm] = useSearchTerm(pathname);
+    const [selectedRegion, setSelectedRegion] = useSelectedRegion(pathname);
+    const [pricingUnit, setPricingUnit] = usePricingUnit(pathname, ecuRename);
+    const [duration, setDuration] = useDuration(pathname);
+    const [reservedTerm, setReservedTerm] = useReservedTerm(pathname);
+    const [compareOn, setCompareOn] = useCompareOn(pathname);
+    const [selected] = useSelected(pathname);
 
     const [frequentlyUsedRegions, setFrequentlyUsedRegions] = useState<{
         [key: string]: number;

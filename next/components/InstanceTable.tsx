@@ -30,6 +30,7 @@ import { useCallback, useMemo, useRef } from "react";
 import IndividualColumnFilter from "./IndividualColumnFilter";
 import SortToggle from "./SortToggle";
 import * as columnData from "@/utils/colunnData";
+import { usePathname } from "next/navigation";
 
 export type AtomKeyWhereInstanceIs<Instance> = {
     [AtomKey in keyof typeof columnData]: (typeof columnData)[AtomKey]["columnsGen"] extends (
@@ -67,16 +68,17 @@ export default function InstanceTable<
     columnAtomKey,
     ecuRename,
 }: InstanceTableProps<Instance>) {
-    const [columnVisibilityState] = useColumnVisibility();
-    const [searchTerm] = useSearchTerm();
-    const [selectedRegion] = useSelectedRegion();
-    const [pricingUnit] = usePricingUnit(ecuRename);
-    const [costDuration] = useDuration();
-    const [reservedTerm] = useReservedTerm();
-    const [columnFilters, setColumnFilters] = useColumnFilters();
-    const [compareOn] = useCompareOn();
-    const [selected, setSelected] = useSelected();
-    const [sorting, setSorting] = useSorting();
+    const pathname = usePathname();
+    const [columnVisibilityState] = useColumnVisibility(pathname);
+    const [searchTerm] = useSearchTerm(pathname);
+    const [selectedRegion] = useSelectedRegion(pathname);
+    const [pricingUnit] = usePricingUnit(pathname, ecuRename);
+    const [costDuration] = useDuration(pathname);
+    const [reservedTerm] = useReservedTerm(pathname);
+    const [columnFilters, setColumnFilters] = useColumnFilters(pathname);
+    const [compareOn] = useCompareOn(pathname);
+    const [selected, setSelected] = useSelected(pathname);
+    const [sorting, setSorting] = useSorting(pathname);
 
     const columns = columnData[columnAtomKey].columnsGen(
         selectedRegion,
