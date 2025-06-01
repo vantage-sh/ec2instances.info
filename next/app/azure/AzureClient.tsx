@@ -1,13 +1,11 @@
 "use client";
 
-import DoMigration from "@/components/DoMigration";
 import Filters from "@/components/Filters";
 import InstanceTable from "@/components/InstanceTable";
 import { useInstanceData } from "@/state";
 import { AzureInstance } from "@/utils/colunnData/azure";
 import dynamicallyDecompress from "@/utils/dynamicallyDecompress";
-import { RowSelectionState } from "@tanstack/react-table";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 type Props = {
     instanceCount: number;
@@ -42,11 +40,8 @@ export default function AzureClient({
         // @ts-expect-error: This is wrong, but close enough to work.
         initialInstances,
     );
-    const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
-
     return (
         <main className="h-[calc(100vh-6rem)] overflow-y-hidden flex flex-col">
-            <DoMigration atomKey="azure" />
             <Filters
                 columnAtomKey="azure"
                 regions={{
@@ -54,7 +49,6 @@ export default function AzureClient({
                     main: regions,
                     wavelength: {},
                 }}
-                rowSelection={rowSelection}
                 ecuRename="ACU"
                 reservedTermOptions={[
                     {
@@ -79,8 +73,6 @@ export default function AzureClient({
             <div className="flex-1 min-h-0">
                 <InstanceTable
                     instances={allInstances}
-                    rowSelection={rowSelection}
-                    setRowSelection={setRowSelection}
                     instanceCount={instanceCount}
                     columnAtomKey="azure"
                     ecuRename="ACU"

@@ -7,31 +7,26 @@ import {
     flexRender,
     Row,
     ColumnFiltersState,
-    SortingState,
     getSortedRowModel,
     RowSelectionState,
     ColumnDef,
+    Updater,
 } from "@tanstack/react-table";
 import {
-    columnVisibilityAtoms,
     useSearchTerm,
     useSelectedRegion,
     useReservedTerm,
     useActiveTableDataFormatter,
-    useGSettings,
     usePricingUnit,
     useDuration,
     useCompareOn,
+    useColumnVisibility,
+    useSorting,
+    useColumnFilters,
+    useSelected,
 } from "@/state";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import {
-    SetStateAction,
-    useCallback,
-    useEffect,
-    useMemo,
-    useRef,
-    useState,
-} from "react";
+import { useCallback, useMemo, useRef } from "react";
 import IndividualColumnFilter from "./IndividualColumnFilter";
 import SortToggle from "./SortToggle";
 import * as columnData from "@/utils/colunnData";
@@ -46,8 +41,6 @@ export type AtomKeyWhereInstanceIs<Instance> = {
 
 interface InstanceTableProps<Instance> {
     instances: Instance[];
-    rowSelection: RowSelectionState;
-    setRowSelection: (value: SetStateAction<RowSelectionState>) => void;
     instanceCount: number;
     columnAtomKey: AtomKeyWhereInstanceIs<Instance>;
     ecuRename?: string;
@@ -70,22 +63,20 @@ export default function InstanceTable<
     Instance extends { instance_type: string },
 >({
     instances,
-    rowSelection,
-    setRowSelection,
     instanceCount,
     columnAtomKey,
     ecuRename,
 }: InstanceTableProps<Instance>) {
-    const columnVisibility = columnVisibilityAtoms[columnAtomKey].use();
+    const [columnVisibilityState] = useColumnVisibility();
     const [searchTerm] = useSearchTerm();
     const [selectedRegion] = useSelectedRegion();
     const [pricingUnit] = usePricingUnit(ecuRename);
     const [costDuration] = useDuration();
     const [reservedTerm] = useReservedTerm();
-    const [gSettings, gSettingsFullMutations] = useGSettings();
-    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+    const [columnFilters, setColumnFilters] = useColumnFilters();
     const [compareOn] = useCompareOn();
-    const [sorting, setSorting] = useState<SortingState>([]);
+    const [selected, setSelected] = useSelected();
+    const [sorting, setSorting] = useSorting();
 
     const columns = columnData[columnAtomKey].columnsGen(
         selectedRegion,
@@ -94,69 +85,29 @@ export default function InstanceTable<
         reservedTerm,
     );
 
-    // Initially set the column filters to the gSettings.
-    useEffect(() => {
-        if (!gSettings) return;
-        const a = [
-            {
-                id: "memory",
-                value: gSettings.memoryExpr,
-            },
-            {
-                id:
-                    columns.find((v) => v.id === "vcpus" || v.id === "vcpu")
-                        ?.id ?? "vCPU",
-                value: gSettings.vcpuExpr,
-            },
-        ];
-        if (columnAtomKey === "ec2" || columnAtomKey === "azure") {
-            a.push(
-                {
-                    id: "memory_per_vcpu",
-                    value: gSettings.memoryPerVcpuExpr,
-                },
-                {
-                    id: "GPU",
-                    value: gSettings.gpusExpr,
-                },
-            );
+    const columnVisibility = useMemo(() => {
+        // Merge the state with the default values.
+        const res = { ...columnData[columnAtomKey].initialColumnsValue };
+        for (const key in columnVisibilityState) {
+            res[key as keyof typeof res] = columnVisibilityState[key];
         }
-        if (columnAtomKey === "ec2") {
-            a.push(
-                {
-                    id: "GPU_memory",
-                    value: gSettings.gpuMemoryExpr,
-                },
-                {
-                    id: "maxips",
-                    value: gSettings.maxipsExpr,
-                },
-            );
-        }
-        if (columns.find((v) => v.id === "storage")) {
-            a.push({
-                id: "storage",
-                value: gSettings.storageExpr,
-            });
-        } else if (columnAtomKey === "azure") {
-            a.push({
-                id: "size",
-                value: gSettings.storageExpr,
-            });
-        }
-
-        setColumnFilters(a);
-    }, [gSettingsFullMutations, columnAtomKey]);
+        return res;
+    }, [columnAtomKey, columnVisibilityState]);
 
     const data = useMemo(() => {
-        if (compareOn && gSettings) {
-            const selectedInstances = gSettings.filter.split("|");
-            return instances.filter((i) =>
-                selectedInstances.includes(i.instance_type),
-            );
+        if (compareOn) {
+            return instances.filter((i) => selected.includes(i.instance_type));
         }
         return instances;
-    }, [compareOn, gSettingsFullMutations, instances]);
+    }, [compareOn, instances, selected]);
+
+    const rowSelectionRemapped = useMemo(() => {
+        const res: RowSelectionState = {};
+        for (const instance of selected) {
+            res[instance] = true;
+        }
+        return res;
+    }, [selected]);
 
     const table = useReactTable({
         data,
@@ -175,8 +126,8 @@ export default function InstanceTable<
             columnVisibility,
             globalFilter: compareOn ? undefined : searchTerm,
             columnFilters: compareOn ? emptyColumnFilters : columnFilters,
-            rowSelection,
             sorting,
+            rowSelection: rowSelectionRemapped,
         },
         defaultColumn: {
             size: 200,
@@ -185,8 +136,18 @@ export default function InstanceTable<
         },
         enableFilters: true,
         onColumnFiltersChange: setColumnFilters,
+        onRowSelectionChange: useCallback(
+            (updater: Updater<RowSelectionState>) => {
+                if (typeof updater === "function") {
+                    const obj = updater(rowSelectionRemapped);
+                    setSelected(Object.keys(obj).filter((k) => obj[k]));
+                } else {
+                    setSelected(Object.keys(updater).filter((k) => updater[k]));
+                }
+            },
+            [selected, rowSelectionRemapped],
+        ),
         enableMultiRowSelection: true,
-        onRowSelectionChange: setRowSelection,
         columnResizeMode: "onChange",
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
@@ -245,39 +206,12 @@ export default function InstanceTable<
             ? totalHeight - virtualRows[virtualRows.length - 1].end
             : 0;
 
-    // Handle synchronising the rows with the global settings.
-    useEffect(() => {
-        if (!gSettings) return;
-        const selectedInstances = compareOn
-            ? gSettings.filter.split("|")
-            : gSettings.selected;
-        for (const row of rows) {
-            row.toggleSelected(
-                selectedInstances.includes(row.original.instance_type),
-            );
-        }
-    }, [gSettingsFullMutations, rows, compareOn]);
-
     const handleRow = useCallback(
         (row: Row<Instance>) => {
-            // Row checking is off when comparing.
             if (compareOn) return;
-
-            // Select the row and update the global settings.
-            if (!gSettings) return;
             row.toggleSelected();
-            const selectedInstances = gSettings.selected;
-            if (selectedInstances.includes(row.original.instance_type)) {
-                selectedInstances.splice(
-                    selectedInstances.indexOf(row.original.instance_type),
-                    1,
-                );
-            } else {
-                selectedInstances.push(row.original.instance_type);
-            }
-            gSettings.selected = selectedInstances;
         },
-        [gSettingsFullMutations, compareOn],
+        [compareOn],
     );
 
     return (
@@ -373,12 +307,6 @@ export default function InstanceTable<
                                                 !compareOn && (
                                                     <div className="absolute bottom-2 left-2 right-2">
                                                         <IndividualColumnFilter
-                                                            gSettings={
-                                                                gSettings
-                                                            }
-                                                            gSettingsFullMutations={
-                                                                gSettingsFullMutations
-                                                            }
                                                             column={
                                                                 header.column
                                                             }
