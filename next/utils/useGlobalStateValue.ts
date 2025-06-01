@@ -4,7 +4,7 @@ import { get, write, StateDump } from "./instancesKvClient";
 async function doWrite(
     [, data]: [
         Map<string, Set<() => void>>,
-        StateDump | null,
+        StateDump,
         ReturnType<typeof setTimeout> | null,
     ],
     pathname: string,
@@ -27,7 +27,7 @@ function getIdFromUrl() {
 async function doNetworkRead(
     v: [
         Map<string, Set<() => void>>,
-        StateDump | null,
+        StateDump,
         ReturnType<typeof setTimeout> | null,
     ],
     pathname: string,
@@ -47,7 +47,7 @@ const pathRefMap = new Map<
     string,
     [
         Map<string, Set<() => void>>,
-        StateDump | null,
+        StateDump,
         ReturnType<typeof setTimeout> | null,
     ]
 >();
@@ -136,13 +136,8 @@ export function useGlobalStateValue<Key extends keyof StateDump>(
                     | StateDump[Key]
                     | ((value: StateDump[Key]) => StateDump[Key]),
             ) => {
-                let v = readArr();
-                if (!v[1]) {
-                    // Clone the blank state dump.
-                    v[1] = { ...blankStateDump };
-                }
-
                 // Set the value.
+                const v = readArr();
                 if (typeof value === "function") value = value(v[1][key]);
                 v[1][key] = value;
 
@@ -180,7 +175,7 @@ export function resetGlobalState(pathname: string) {
     window.history.replaceState({}, "", url.toString());
     const v = pathRefMap.get(pathname);
     if (v) {
-        v[1] = { ...blankStateDump };
+        v[1] = { ...blankStateDump, path: pathname };
         for (const cbs of v[0].values()) {
             for (const cb of cbs.values()) cb();
         }
