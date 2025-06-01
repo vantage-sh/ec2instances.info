@@ -30,11 +30,13 @@ async function doNetworkRead(
         StateDump | null,
         ReturnType<typeof setTimeout> | null,
     ],
+    pathname: string,
 ) {
     const id = getIdFromUrl();
     if (!id) return null;
     const r = await get(id);
     if (v[2]) return;
+    if (pathname !== r.path) return;
     v[1] = r;
     for (const cbs of v[0].values()) {
         for (const cb of cbs.values()) cb();
@@ -52,6 +54,7 @@ const pathRefMap = new Map<
 
 const blankStateDump: StateDump = {
     version: 1,
+    path: "",
     columns: [],
     compareOn: false,
     selected: [],
@@ -66,7 +69,7 @@ const blankStateDump: StateDump = {
 
 function doLocalStorageRead(pathname: string) {
     const v = localStorage.getItem(`gstate-${pathname}`);
-    if (!v) return { ...blankStateDump };
+    if (!v) return { ...blankStateDump, path: pathname };
     return JSON.parse(v);
 }
 
@@ -79,7 +82,7 @@ function useReadArr(pathname: string) {
             pathRefMap.set(pathname, pathRef);
 
             // As a side effect, read the data from the network if possible.
-            doNetworkRead(pathRef).catch((e) => {
+            doNetworkRead(pathRef, pathname).catch((e) => {
                 console.error("Failed to read from instanceskv", e);
             });
         }
@@ -142,6 +145,12 @@ export function useGlobalStateValue<Key extends keyof StateDump>(
                 // Set the value.
                 if (typeof value === "function") value = value(v[1][key]);
                 v[1][key] = value;
+
+                // Write to local storage.
+                localStorage.setItem(
+                    `gstate-${pathname}`,
+                    JSON.stringify(v[1]),
+                );
 
                 // Call the callbacks.
                 const cbs = v[0].get(key) || new Set();

@@ -10,6 +10,7 @@ const url =
 
 type DumpV1 = {
     version: 1;
+    path: string;
     filter: string;
     columns: {
         id: string;
