@@ -1,11 +1,5 @@
 import { CostDuration, EC2Instance, PricingUnit } from "@/types";
-import {
-    makeSchemaWithDefaults,
-    doAllDataTablesMigrations,
-    regex,
-    makeCellWithRegexSorter,
-    expr,
-} from "./shared";
+import { regex, makeCellWithRegexSorter, expr } from "./shared";
 import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import { getPricingSorter } from "./ec2/columns";
@@ -53,18 +47,6 @@ export const initialColumnsValue: {
 } = {} as any;
 for (const [key, value] of initialColumnsArr) {
     initialColumnsValue[key] = value;
-}
-
-export function makeColumnVisibilitySchema() {
-    return makeSchemaWithDefaults(initialColumnsValue);
-}
-
-export function doDataTablesMigration() {
-    return doAllDataTablesMigrations(
-        "/rds/",
-        initialColumnsArr,
-        initialColumnsValue,
-    );
 }
 
 export function makePrettyNames<V>(

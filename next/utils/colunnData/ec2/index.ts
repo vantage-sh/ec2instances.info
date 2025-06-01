@@ -1,5 +1,3 @@
-import { makeSchemaWithDefaults, doAllDataTablesMigrations } from "../shared";
-
 export { columnsGen } from "./columns";
 
 const initialColumnsArr = [
@@ -83,18 +81,6 @@ export const initialColumnsValue: {
 } = {} as any;
 for (const [key, value] of initialColumnsArr) {
     initialColumnsValue[key] = value;
-}
-
-export function makeColumnVisibilitySchema() {
-    return makeSchemaWithDefaults(initialColumnsValue);
-}
-
-export function doDataTablesMigration() {
-    return doAllDataTablesMigrations(
-        "/",
-        initialColumnsArr,
-        initialColumnsValue,
-    );
 }
 
 export function makePrettyNames<V>(

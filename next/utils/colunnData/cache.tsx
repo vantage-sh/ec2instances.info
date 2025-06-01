@@ -1,11 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import {
-    doAllDataTablesMigrations,
-    makeSchemaWithDefaults,
-    regex,
-    makeCellWithRegexSorter,
-    expr,
-} from "./shared";
+import { regex, makeCellWithRegexSorter, expr } from "./shared";
 import { EC2Instance, PricingUnit, CostDuration } from "@/types";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import sortByInstanceType from "../sortByInstanceType";
@@ -31,18 +25,6 @@ export const initialColumnsValue: {
 } = {} as any;
 for (const [key, value] of initialColumnsArr) {
     initialColumnsValue[key] = value;
-}
-
-export function makeColumnVisibilitySchema() {
-    return makeSchemaWithDefaults(initialColumnsValue);
-}
-
-export function doDataTablesMigration() {
-    return doAllDataTablesMigrations(
-        "/cache/",
-        initialColumnsArr,
-        initialColumnsValue,
-    );
 }
 
 export function makePrettyNames<V>(

@@ -4,10 +4,8 @@ import { useInstanceData } from "@/state";
 import InstanceTable from "@/components/InstanceTable";
 import { Region, Pricing } from "@/types";
 import Filters from "@/components/Filters";
-import { useMemo, useState } from "react";
-import { RowSelectionState } from "@tanstack/react-table";
+import { useMemo } from "react";
 import dynamicallyDecompress from "@/utils/dynamicallyDecompress";
-import DoMigration from "@/components/DoMigration";
 import { AtomKeyWhereInstanceIs } from "@/components/InstanceTable";
 import { reservedTermOptions } from "@/utils/dataMappings";
 
@@ -83,7 +81,6 @@ export default function AWSClient<
     } else {
         instances = props.instances;
     }
-    const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
     const full =
         process.env.NEXT_PUBLIC_REMOVE_ADVERTS === "1"
@@ -92,18 +89,14 @@ export default function AWSClient<
 
     return (
         <main className={`${full} overflow-y-hidden flex flex-col`}>
-            <DoMigration atomKey={props.columnAtomKey} />
             <Filters
                 columnAtomKey={props.columnAtomKey}
                 regions={props.regions}
-                rowSelection={rowSelection}
                 reservedTermOptions={reservedTermOptions}
             />
             <div className="flex-1 min-h-0">
                 <InstanceTable
                     instances={instances}
-                    rowSelection={rowSelection}
-                    setRowSelection={setRowSelection}
                     instanceCount={props.instanceCount ?? instances.length}
                     columnAtomKey={props.columnAtomKey}
                 />
