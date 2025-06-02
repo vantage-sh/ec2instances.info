@@ -158,7 +158,7 @@ export function useGlobalStateValue<Key extends keyof StateDump>(
                         console.error("Failed to write to instanceskv", e);
                     });
                     v[2] = null;
-                }, 100);
+                }, 200);
             },
             [pathname, key],
         ),
