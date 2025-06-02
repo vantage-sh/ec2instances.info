@@ -198,6 +198,80 @@ export function generateElasticacheImages() {
     });
 }
 
+export function generateRedshiftImages() {
+    const redshiftInstances = JSON.parse(
+        readFileSync(
+            path.join(
+                __dirname,
+                "..",
+                "..",
+                "www",
+                "redshift",
+                "instances.json",
+            ),
+            "utf-8",
+        ),
+    ) as {
+        instance_type: string;
+        family: string;
+        vcpu: number;
+        memory: number;
+        storage: string;
+        ecu: string;
+        io: string;
+    }[];
+
+    return redshiftInstances.map((instance) => {
+        if (
+            ONLY_INSTANCES.length > 0 &&
+            !ONLY_INSTANCES.includes(instance.instance_type)
+        ) {
+            return Promise.resolve();
+        }
+        return pushToWorker({
+            name: instance.instance_type,
+            categoryHeader: `Redshift Instances${
+                instance.family ? ` (${instance.family})` : ""
+            }`,
+            filename: path.join(
+                __dirname,
+                "..",
+                "public",
+                "aws",
+                "redshift",
+                `${instance.instance_type}.png`,
+            ),
+            values: [
+                {
+                    name: "vCPUs",
+                    value: instance.vcpu.toString(),
+                    squareIconPath: "icons/cpu-cores.png",
+                },
+                {
+                    name: "RAM",
+                    value: `${instance.memory} GB`,
+                    squareIconPath: "icons/ram.png",
+                },
+                {
+                    name: "Storage",
+                    value: instance.storage || "EBS only",
+                    squareIconPath: "icons/storage.png",
+                },
+                {
+                    name: "ECUs",
+                    value: instance.ecu || "Variable",
+                    squareIconPath: "icons/cpu-arch.png",
+                },
+                {
+                    name: "IO",
+                    value: instance.io || "N/A",
+                    squareIconPath: "icons/gpu.png",
+                },
+            ],
+        });
+    });
+}
+
 export function generateOpensearchImages() {
     const opensearchInstances = JSON.parse(
         readFileSync(
@@ -264,10 +338,6 @@ export function generateOpensearchImages() {
             ],
         });
     });
-}
-
-export function generateRedshiftImages() {
-    return [] as Promise<void>[];
 }
 
 export function generateAzureImages() {
