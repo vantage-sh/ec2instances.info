@@ -10,6 +10,7 @@ import InstanceVariants from "./InstanceVariants";
 import VantageDemo from "./VantageDemo";
 import MarketingWrapper from "./MarketingWrapper";
 import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
+import OpengraphImageInjector from "./OpengraphImageInjector";
 
 interface InstanceRootProps {
     rainbowTable: string[];
@@ -52,6 +53,7 @@ export default function EC2InstanceRoot({
 
     return (
         <MarketingWrapper azure={false}>
+            <OpengraphImageInjector />
             <main className="my-4 px-4 not-md:w-screen">
                 <InstanceBreadcrumbs
                     crumbs={[
