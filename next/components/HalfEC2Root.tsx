@@ -9,7 +9,6 @@ import InstanceBreadcrumbs from "./InstanceBreadcrumbs";
 import MarketingWrapper from "./MarketingWrapper";
 import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
 import { useMemo } from "react";
-import OpengraphImageInjector from "./OpengraphImageInjector";
 
 type HalfPricing = {
     [region: string]: {
@@ -67,7 +66,6 @@ export default function HalfEC2Root<
 
     return (
         <MarketingWrapper azure={false}>
-            <OpengraphImageInjector />
             <main className="my-4 px-4 not-md:w-screen">
                 <InstanceBreadcrumbs
                     crumbs={[

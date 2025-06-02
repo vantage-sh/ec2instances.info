@@ -4,6 +4,8 @@ import bestEc2InstanceForEachVariant from "@/utils/bestEc2InstanceForEachVariant
 import makeRainbowTable from "@/utils/makeRainbowTable";
 import { decode } from "@msgpack/msgpack";
 import { readFile } from "fs/promises";
+import { Metadata } from "next";
+import { urlInject } from "@/utils/urlInject";
 
 export const dynamic = "force-static";
 
@@ -71,11 +73,16 @@ export async function generateMetadata({
     params,
 }: {
     params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
     const { instance, ondemandCost } = await handleParams(params);
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
         description: generateDescription(instance, ondemandCost),
+        openGraph: {
+            images: [
+                urlInject`${"/aws/rds/" + instance.instance_type + ".png"}`,
+            ],
+        },
     };
 }
 

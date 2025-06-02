@@ -5,6 +5,8 @@ import makeRainbowTable from "@/utils/makeRainbowTable";
 import bestEc2InstanceForEachVariant from "@/utils/bestEc2InstanceForEachVariant";
 import addRenderInfo from "@/utils/addRenderInfo";
 import generateEc2Description from "@/utils/generateEc2Description";
+import { Metadata } from "next";
+import { urlInject } from "@/utils/urlInject";
 
 export const dynamic = "force-static";
 
@@ -70,11 +72,16 @@ export async function generateMetadata({
     params,
 }: {
     params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
     const { instance, ondemandCost } = await handleParams(params);
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
         description: generateEc2Description(instance, ondemandCost),
+        openGraph: {
+            images: [
+                urlInject`${"/aws/elasticache/" + instance.instance_type + ".png"}`,
+            ],
+        },
     };
 }
 
