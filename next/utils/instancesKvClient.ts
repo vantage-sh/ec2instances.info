@@ -1,10 +1,10 @@
 /**
  * You can self-host this yourself if you want! If you want to, simply put https://github.com/vantage-sh/instanceskv
- * on a server/Cloudflare Worker somewhere and then set the NEXT_PUBLIC_COLUMN_KV_URL environment variable to the URL
+ * on a server/Cloudflare Worker somewhere and then set the NEXT_PUBLIC_INSTANCESKV_URL environment variable to the URL
  * of your instance. We run our own version and hardcode it because its what production/staging uses and its just easier.
  */
 const url =
-    process.env.NEXT_PUBLIC_COLUMN_KV_URL ||
+    process.env.NEXT_PUBLIC_INSTANCESKV_URL ||
     // TODO: change this URL
     "https://instanceskv.vantagesh.workers.dev/";
 
