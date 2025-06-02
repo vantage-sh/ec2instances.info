@@ -341,5 +341,61 @@ export function generateOpensearchImages() {
 }
 
 export function generateAzureImages() {
-    return [] as Promise<void>[];
+    const azureInstances = JSON.parse(
+        readFileSync(
+            path.join(__dirname, "..", "..", "www", "azure", "instances.json"),
+            "utf-8",
+        ),
+    ) as {
+        instance_type: string;
+        pretty_name_azure: string;
+        family: string;
+        vcpu: number;
+        memory: number;
+        size: number;
+        GPU: string;
+    }[];
+
+    return azureInstances.map((instance) => {
+        if (
+            ONLY_INSTANCES.length > 0 &&
+            !ONLY_INSTANCES.includes(instance.instance_type)
+        ) {
+            return Promise.resolve();
+        }
+        return pushToWorker({
+            name: instance.pretty_name_azure,
+            categoryHeader: "Azure Instances",
+            filename: path.join(
+                __dirname,
+                "..",
+                "public",
+                "azure",
+                "vm",
+                `${instance.instance_type}.png`,
+            ),
+            values: [
+                {
+                    name: "vCPUs",
+                    value: instance.vcpu.toString(),
+                    squareIconPath: "icons/cpu-cores.png",
+                },
+                {
+                    name: "RAM",
+                    value: `${instance.memory} GB`,
+                    squareIconPath: "icons/ram.png",
+                },
+                {
+                    name: "Storage",
+                    value: `${instance.size || 0} GB`,
+                    squareIconPath: "icons/storage.png",
+                },
+                {
+                    name: "GPUs",
+                    value: instance.GPU || "0",
+                    squareIconPath: "icons/gpu.png",
+                },
+            ],
+        });
+    });
 }
