@@ -67,9 +67,13 @@ const blankStateDump: StateDump = {
     reservedTerm: "yrTerm1Standard.noUpfront",
 };
 
+function deepCopy<T>(v: T): T {
+    return JSON.parse(JSON.stringify(v));
+}
+
 function doLocalStorageRead(pathname: string) {
     const v = localStorage.getItem(`gstate-${pathname}`);
-    if (!v) return { ...blankStateDump, path: pathname };
+    if (!v) return { ...deepCopy(blankStateDump), path: pathname };
     return JSON.parse(v);
 }
 
@@ -175,7 +179,7 @@ export function resetGlobalState(pathname: string) {
     window.history.replaceState({}, "", url.toString());
     const v = pathRefMap.get(pathname);
     if (v) {
-        v[1] = { ...blankStateDump, path: pathname };
+        v[1] = { ...deepCopy(blankStateDump), path: pathname };
         for (const cbs of v[0].values()) {
             for (const cb of cbs.values()) cb();
         }
