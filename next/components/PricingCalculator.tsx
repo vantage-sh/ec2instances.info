@@ -192,17 +192,33 @@ function Calculator({
         return a;
     }, [pricing, region, platform, duration, pricingType, removeSpot]);
 
-    const localZones = useMemo(() => {
-        return [
-            ...Object.entries(regions.main),
-            ...Object.entries(regions.local_zone),
-        ].sort((a, b) => {
-            // Generally alphabetical, but default region is first.
-            if (a[0] === defaultRegion) return -1;
-            if (b[0] === defaultRegion) return 1;
-            return a[1].localeCompare(b[1]);
-        });
-    }, [regions]);
+    const handleRegions = (regionsArr: [string, string][], label: string) => {
+        const v = regionsArr
+            .sort((a, b) => {
+                return a[1].localeCompare(b[1]);
+            })
+            .map(([code, name]) => (
+                <option key={code} value={code} disabled={!pricing[code]}>
+                    {name}
+                </option>
+            ));
+        return <optgroup label={label}>{v}</optgroup>;
+    };
+
+    const mainRegions = useMemo(
+        () => handleRegions(Object.entries(regions.main), "Main Regions"),
+        [regions.main, pricing],
+    );
+
+    const localZones = useMemo(
+        () => handleRegions(Object.entries(regions.local_zone), "Local Zones"),
+        [regions.local_zone, pricing],
+    );
+
+    const wavelengthRegions = useMemo(
+        () => handleRegions(Object.entries(regions.wavelength), "Wavelength"),
+        [regions.wavelength, pricing],
+    );
 
     const selectStyling = "w-full border border-gray-200 rounded-md p-1";
 
@@ -231,15 +247,9 @@ function Calculator({
                     className={selectStyling}
                     onChange={(e) => setRegion(e.target.value)}
                 >
-                    {localZones.map(([code, name]) => (
-                        <option
-                            key={code}
-                            value={code}
-                            disabled={!pricing[code]}
-                        >
-                            {name}
-                        </option>
-                    ))}
+                    {mainRegions}
+                    {localZones}
+                    {wavelengthRegions}
                 </select>
 
                 {defaultPlatform === defaultOs && (
