@@ -10,6 +10,7 @@ import PricingCalculator from "./PricingCalculator";
 import VantageDemo from "./VantageDemo";
 import MarketingWrapper from "./MarketingWrapper";
 import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
+import OpengraphImageInjector from "./OpengraphImageInjector";
 
 type AzureInstanceRootProps = {
     rainbowTable: string[];
@@ -48,6 +49,7 @@ export default function AzureInstanceRoot({
 
     return (
         <MarketingWrapper azure={true}>
+            <OpengraphImageInjector />
             <main className="my-4 px-4 not-md:w-screen">
                 <InstanceBreadcrumbs
                     crumbs={[
