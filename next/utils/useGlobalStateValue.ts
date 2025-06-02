@@ -1,5 +1,6 @@
 import { useCallback, useSyncExternalStore } from "react";
 import { get, write, StateDump } from "./instancesKvClient";
+import { migrateLocalStorage, migrateUrl } from "./migrations";
 
 async function doWrite(
     [, data]: [
@@ -32,15 +33,22 @@ async function doNetworkRead(
     ],
     pathname: string,
 ) {
+    // Try to do the migration.
+    const callbacks = () => {
+        for (const cbs of v[0].values()) {
+            for (const cb of cbs.values()) cb();
+        }
+    };
+    if (await migrateUrl(callbacks, v[1])) return;
+
+    // Try to read from the URL.
     const id = getIdFromUrl();
     if (!id) return null;
     const r = await get(id);
     if (v[2]) return;
     if (pathname !== r.path) return;
     v[1] = r;
-    for (const cbs of v[0].values()) {
-        for (const cb of cbs.values()) cb();
-    }
+    callbacks();
 }
 
 const pathRefMap = new Map<
@@ -82,6 +90,10 @@ function useReadArr(pathname: string) {
         // Get the [callbacks, data].
         let pathRef = pathRefMap.get(pathname);
         if (!pathRef) {
+            // Do the migration to local storage.
+            migrateLocalStorage(() => deepCopy(blankStateDump));
+
+            // Try to read from local storage initially.
             pathRef = [new Map(), doLocalStorageRead(pathname), null];
             pathRefMap.set(pathname, pathRef);
 
