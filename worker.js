@@ -73,7 +73,9 @@ export default {
         }
 
         // Construct the cache key from the cache URL
-        const cacheKey = new Request(url.toString(), request);
+        const cacheUrl = new URL(url);
+        cacheUrl.searchParams.delete("id");
+        const cacheKey = new Request(cacheUrl.toString(), request);
         const cache = caches.default;
 
         const cacheResponse = await cache.match(cacheKey);
