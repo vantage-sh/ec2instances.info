@@ -4,6 +4,8 @@ import type { Instance } from "@/utils/colunnData/opensearch";
 import HalfEC2Root from "@/components/HalfEC2Root";
 import InstanceDataView from "@/components/InstanceDataView";
 import generateOpensearchTables from "@/utils/generateOpensearchTables";
+import { Metadata } from "next";
+import { urlInject } from "@/utils/urlInject";
 
 export const dynamic = "force-static";
 
@@ -66,11 +68,16 @@ export async function generateMetadata({
     params,
 }: {
     params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
     const { instance, ondemandCost } = await handleParams(params);
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
         description: generateDescription(instance, ondemandCost),
+        openGraph: {
+            images: [
+                urlInject`${"/aws/opensearch/" + instance.instance_type + ".png"}`,
+            ],
+        },
     };
 }
 
