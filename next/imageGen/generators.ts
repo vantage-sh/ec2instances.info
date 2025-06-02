@@ -199,7 +199,71 @@ export function generateElasticacheImages() {
 }
 
 export function generateOpensearchImages() {
-    return [] as Promise<void>[];
+    const opensearchInstances = JSON.parse(
+        readFileSync(
+            path.join(
+                __dirname,
+                "..",
+                "..",
+                "www",
+                "opensearch",
+                "instances.json",
+            ),
+            "utf-8",
+        ),
+    ) as {
+        instance_type: string;
+        family: string;
+        vcpu: number;
+        memory: number;
+        ecu: string;
+        storage: string;
+    }[];
+
+    return opensearchInstances.map((instance) => {
+        if (
+            ONLY_INSTANCES.length > 0 &&
+            !ONLY_INSTANCES.includes(instance.instance_type)
+        ) {
+            return Promise.resolve();
+        }
+        return pushToWorker({
+            name: instance.instance_type,
+            categoryHeader: `OpenSearch Instances${
+                instance.family ? ` (${instance.family})` : ""
+            }`,
+            filename: path.join(
+                __dirname,
+                "..",
+                "public",
+                "aws",
+                "opensearch",
+                `${instance.instance_type}.png`,
+            ),
+            values: [
+                {
+                    name: "vCPUs",
+                    value: instance.vcpu.toString(),
+                    squareIconPath: "icons/cpu-cores.png",
+                },
+                {
+                    name: "RAM",
+                    value: `${instance.memory} GB`,
+                    squareIconPath: "icons/ram.png",
+                },
+                {
+                    name: "ECUs",
+                    value: instance.ecu || "Variable",
+                    squareIconPath: "icons/cpu-arch.png",
+                },
+                {
+                    name: "Storage",
+                    value: instance.storage || "EBS only",
+                    squareIconPath: "icons/storage.png",
+                },
+            ],
+        });
+    });
 }
 
 export function generateRedshiftImages() {
