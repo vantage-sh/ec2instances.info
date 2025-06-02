@@ -41,22 +41,23 @@ def build(c):
     max_workers = 6
     print(f"Starting parallel scraping of all services with {max_workers} workers...")
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-        futures = {
+        future_to_scraper = {
             executor.submit(scraper, c): scraper.__name__
             for scraper in scraper_functions
         }
-        for future in concurrent.futures.as_completed(futures):
-            scraper_name = futures[future]
+
+        for future in concurrent.futures.as_completed(future_to_scraper):
+            scraper_name = future_to_scraper[future]
             try:
                 future.result()
                 print(f"✅ Completed scraping for {scraper_name}")
             except Exception as exc:
-                print(f"❌ {scraper_name} failed with error: {exc}")
-                traceback.print_exc()
-                print("Stopping the build process immediately")
-                os._exit(1)
+                print(f"❌ {scraper_name} generated an exception: {exc}")
+                import traceback
 
-    print("✅ All scraping tasks completed successfully. Proceeding with rendering...")
+                traceback.print_exc()
+
+    print("All scraping tasks completed. Proceeding with rendering and compression...")
     compress_json_files(c)
 
 
