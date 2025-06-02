@@ -1,4 +1,4 @@
-import { StateDump } from "./instancesKvClient";
+import { StateDump, write } from "./instancesKvClient";
 
 function splitRemovingBlanks(s: string, delimiter: string) {
     return s.split(delimiter).filter((x) => x !== "");
@@ -65,8 +65,8 @@ function mergeGSettings(state: StateDump, encodedGSettings: string) {
             if (typeof expr !== "string") expr = undefined;
 
             if (!expr) {
-                // If *_min exists, we will migrate that initially to expr.
-                const min = gSettings[key + "_min"];
+                // If min_* exists, we will migrate that initially to expr.
+                const min = gSettings[`min_${key}`];
                 if (min === undefined) return;
                 expr = `>=${min}`;
             }
@@ -326,6 +326,106 @@ export function migrateLocalStorage(getBlankState: () => StateDump) {
 
 /** Migrate the URL to the new format by uploading the previous state to the network. */
 export async function migrateUrl(callbacks: () => void, state: StateDump) {
-    // TODO
-    return false;
+    // Get the search params.
+    const searchParams = new URLSearchParams(window.location.search);
+
+    // If id is in the search params, ignore this.
+    if (searchParams.has("id")) return false;
+
+    let migratedCount = 0;
+    const migrateString = <K extends WhereString<StateDump>>(
+        newKey: K,
+        oldKey: string,
+    ) => {
+        const res = searchParams.get(oldKey);
+        if (typeof res !== "string") return;
+        state[newKey] = res;
+        migratedCount++;
+    };
+
+    // Migrate the low hanging fruit first.
+    migrateString("pricingUnit", "pricing_unit");
+    migrateString("costDuration", "cost_duration");
+    migrateString("region", "region");
+    migrateString("reservedTerm", "reserved_term");
+
+    if (searchParams.get("compare_on") === "true") {
+        state.compareOn = true;
+
+        // For some reason, in the old version, this caused it to use the filter as a pipe
+        // split holder of everything. Handle this here.
+        const filter = searchParams.get("filter");
+        if (filter) state.selected = splitRemovingBlanks(filter, "|");
+    } else {
+        // We can just use the filter presuming its a string.
+        migrateString("filter", "filter");
+
+        // selected is a comma seperated list of IDs.
+        const selected = searchParams.get("selected");
+        if (selected) state.selected = splitRemovingBlanks(selected, ",");
+    }
+
+    // Migrate the exprs.
+    const migrateExpr = (key: string) => {
+        // Prefer *_expr.
+        let expr = searchParams.get(key + "_expr");
+        if (typeof expr !== "string") expr = null;
+
+        if (!expr) {
+            // If min_* exists, we will migrate that initially to expr.
+            const min = searchParams.get(`min_${key}`);
+            if (min === null) return;
+            expr = `>=${min}`;
+        }
+
+        if (expr === ">=0") {
+            // We can ignore this.
+            return;
+        }
+
+        // Check if the key needs to be changed.
+        switch (key) {
+            case "gpus":
+                key = "GPU";
+                break;
+            case "gpu_memory":
+                key = "GPU_memory";
+                break;
+            case "vcpus":
+                key = remapVcpus(state.path);
+                break;
+        }
+
+        // Write or replace the filter.
+        const existing = state.columns.find((c) => c.id === key);
+        if (existing) {
+            existing.value = expr;
+        } else {
+            state.columns.push({ id: key, value: expr });
+        }
+        migratedCount++;
+    };
+    migrateExpr("memory");
+    migrateExpr("vcpus");
+    migrateExpr("memory_per_vcpu");
+    migrateExpr("gpus");
+    migrateExpr("gpu_memory");
+    migrateExpr("maxips");
+    migrateExpr("storage");
+
+    // Return early if there were no migrations.
+    if (migratedCount === 0) return false;
+
+    // Call the callbacks so the state updates (but don't write it because it is a layer).
+    callbacks();
+
+    // Write the state and then set the URL if the user is on the same page.
+    const id = await write(state);
+    const url = new URL(window.location.href);
+    if (url.pathname !== state.path) return true;
+    url.search = `?id=${encodeURIComponent(id)}`;
+    window.history.replaceState({}, "", url.toString());
+
+    // We did migrate!
+    return true;
 }
