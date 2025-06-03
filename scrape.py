@@ -1054,6 +1054,16 @@ def add_gpu_info(instances):
             "cuda_cores": 18432,
             "gpu_memory": 640,
         },
+        "p6-b200.48xlarge": {
+            "gpu_model": "NVIDIA B200",
+            "compute_capability": 10.0,
+            "gpu_count": 8,
+            # https://www.civo.com/blog/comparing-nvidia-b200-and-h100 is the only
+            # source I can find for this.
+            "cuda_cores": 16896,
+            # https://resources.nvidia.com/en-us-dgx-systems/dgx-b200-datasheet
+            "gpu_memory": 1440,
+        },
     }
     for inst in instances:
         if inst.GPU == 0:
