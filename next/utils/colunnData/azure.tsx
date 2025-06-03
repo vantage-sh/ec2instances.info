@@ -292,7 +292,11 @@ export const columnsGen = (
             filterFn: (row, _, filterValue) => {
                 const value = row.original.memory;
                 const cpu = row.original.vcpu;
-                return exprCompiler(filterValue)(value / cpu);
+                const memoryPerVcpu = round(value / cpu);
+                return exprCompiler(filterValue)(
+                    memoryPerVcpu,
+                    `${memoryPerVcpu} GiB/vCPU`,
+                );
             },
             cell: (info) => {
                 const value = info.getValue() as number;

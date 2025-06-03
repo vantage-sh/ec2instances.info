@@ -126,6 +126,22 @@ export function getPricingSorter(
     } satisfies Partial<ColumnDef<EC2Instance>>;
 }
 
+function formatStorage(
+    storage: Storage | undefined,
+): [string, string | undefined] {
+    if (!storage) return ["EBS only", undefined];
+    const totalSize = storage.devices * storage.size;
+    const storageType = `${storage.nvme_ssd ? "NVMe " : ""}${
+        storage.ssd ? "SSD" : "HDD"
+    }`;
+    if (storage.devices > 1) {
+        const text = `${totalSize} ${storage.size_unit}`;
+        const detail = `${storage.devices}×${storage.size} ${storage.size_unit} ${storageType}`;
+        return [text, detail];
+    }
+    return [`${totalSize} ${storage.size_unit} ${storageType}`, undefined];
+}
+
 export const columnsGen = (
     selectedRegion: string,
     pricingUnit: PricingUnit,
@@ -434,22 +450,20 @@ export const columnsGen = (
             if (filterValue === 0) return true;
             const storage = row.original.storage;
             const totalSize = (storage?.devices || 0) * (storage?.size || 0);
+            const [text, detail] = formatStorage(storage);
             try {
-                return exprCompiler(filterValue)(totalSize);
+                return exprCompiler(filterValue)(
+                    totalSize,
+                    detail ? `${text} (${detail})` : text,
+                );
             } catch {
                 return true;
             }
         },
         cell: (info) => {
             const storage = info.getValue() as Storage;
-            if (!storage) return "EBS only";
-            const totalSize = storage.devices * storage.size;
-            const storageType = `${storage.nvme_ssd ? "NVMe " : ""}${
-                storage.ssd ? "SSD" : "HDD"
-            }`;
-            if (storage.devices > 1) {
-                const text = `${totalSize} ${storage.size_unit}`;
-                const detail = `${storage.devices}×${storage.size} ${storage.size_unit} ${storageType}`;
+            const [text, detail] = formatStorage(storage);
+            if (detail) {
                 return (
                     <span title={`${text} (${detail})`}>
                         {text}{" "}
@@ -457,7 +471,7 @@ export const columnsGen = (
                     </span>
                 );
             }
-            return `${totalSize} ${storage.size_unit} ${storageType}`;
+            return text;
         },
     },
     {
@@ -638,7 +652,7 @@ export const columnsGen = (
             const vpc = row.original.vpc;
             const maxIps = (vpc?.max_enis || 0) * (vpc?.ips_per_eni || 0);
             try {
-                return exprCompiler(filterValue)(maxIps);
+                return exprCompiler(filterValue)(maxIps, maxIps.toString());
             } catch {
                 return true;
             }

@@ -121,7 +121,7 @@ function GSettingsExprFilter<Instance>({
     const [value, setValue] = useState(initValue);
     const exprParseError = useMemo(() => {
         try {
-            expr(value);
+            expr(value)(0, "");
             return null;
         } catch (e) {
             return e instanceof Error ? e.message : `${e}`;

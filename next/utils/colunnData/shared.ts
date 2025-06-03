@@ -83,15 +83,16 @@ function tryConv(value: string | number) {
     return NaN;
 }
 
-const exprCache = new Map<string, (a: number) => boolean>();
+const exprCache = new Map<string, (num: number, strValue: string) => boolean>();
 
-function runCachedEval(expr: string, a: number) {
+function runCachedEval(expr: string, num: number, strValue: string) {
     const cached = exprCache.get(expr);
-    if (cached) return cached(a);
+    if (cached) return cached(num, strValue);
     try {
         const e = exprCompiler(expr);
+        const v = e(num, strValue);
         exprCache.set(expr, e);
-        return e(a);
+        return v;
     } catch {
         // Just allow all if the expr is invalid.
         return true;
@@ -105,7 +106,7 @@ export function expr(row: Row<any>, columnId: string, filterValue: string) {
     if (isNaN(conv)) {
         return false;
     }
-    return runCachedEval(filterValue, conv);
+    return runCachedEval(filterValue, conv, value);
 }
 
 export function calculateCost(
