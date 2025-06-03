@@ -1,4 +1,5 @@
 import { StateDump, write } from "./instancesKvClient";
+import * as colunnData from "./colunnData";
 
 function splitRemovingBlanks(s: string, delimiter: string) {
     return s.split(delimiter).filter((x) => x !== "");
@@ -131,7 +132,29 @@ function mergeColumnVisibility(
 }
 
 function mergeDataTables(state: StateDump, encodedDataTables: string) {
-    // TODO
+    let res: Record<string, boolean> | null = null;
+    switch (state.path) {
+        case "/":
+            res = colunnData.ec2.transformDataTables(encodedDataTables);
+            break;
+        case "/rds":
+            res = colunnData.rds.transformDataTables(encodedDataTables);
+            break;
+        case "/cache":
+            res = colunnData.cache.transformDataTables(encodedDataTables);
+            break;
+        case "/redshift":
+            res = colunnData.redshift.transformDataTables(encodedDataTables);
+            break;
+        case "/opensearch":
+            res = colunnData.opensearch.transformDataTables(encodedDataTables);
+            break;
+        case "/azure":
+            res = colunnData.azure.transformDataTables(encodedDataTables);
+            break;
+    }
+    if (res === null) return false;
+    state.visibleColumns = res;
     return true;
 }
 

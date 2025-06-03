@@ -1,5 +1,10 @@
 import { CostDuration, EC2Instance, PricingUnit } from "@/types";
-import { regex, makeCellWithRegexSorter, expr } from "./shared";
+import {
+    regex,
+    makeCellWithRegexSorter,
+    expr,
+    transformAllDataTables,
+} from "./shared";
 import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import { getPricingSorter } from "./ec2/columns";
@@ -47,6 +52,10 @@ export const initialColumnsValue: {
 } = {} as any;
 for (const [key, value] of initialColumnsArr) {
     initialColumnsValue[key] = value;
+}
+
+export function transformDataTables(dataTablesData: any) {
+    return transformAllDataTables(initialColumnsArr, dataTablesData);
 }
 
 export function makePrettyNames<V>(
