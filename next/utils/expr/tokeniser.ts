@@ -1,58 +1,64 @@
-type TokenBase = {
-    startPos: number;
-};
-
-export type Tokens = TokenBase &
-    (
-        | {
-              type: "brackets";
-              inner: Tokens;
-          }
-        | {
-              type: "or";
-              left: Tokens;
-              right: Tokens;
-          }
-        | {
-              type: "and";
-              left: Tokens;
-              right: Tokens;
-          }
-        | {
-              type: "not";
-              inner: Tokens;
-          }
-        | {
-              type: "number";
-              value: number;
-          }
-        | {
-              type: "gt";
-              value: number;
-          }
-        | {
-              type: "gte";
-              value: number;
-          }
-        | {
-              type: "lt";
-              value: number;
-          }
-        | {
-              type: "lte";
-              value: number;
-          }
-        | {
-              type: "range";
-              start: number;
-              end: number;
-          }
-    );
-
-type NumberToken = TokenBase & {
+type NumberToken = {
     type: "number";
     value: number;
 };
+
+export type Tokens =
+    | {
+          type: "brackets";
+          inner: Tokens;
+      }
+    | {
+          type: "or";
+          left: Tokens;
+          right: Tokens;
+      }
+    | {
+          type: "and";
+          left: Tokens;
+          right: Tokens;
+      }
+    | {
+          type: "not";
+          inner: Tokens;
+      }
+    | NumberToken
+    | {
+          type: "gt";
+          value: number;
+      }
+    | {
+          type: "gte";
+          value: number;
+      }
+    | {
+          type: "lt";
+          value: number;
+      }
+    | {
+          type: "lte";
+          value: number;
+      }
+    | {
+          type: "range";
+          start: number;
+          end: number;
+      }
+    | {
+          type: "ternary";
+          condition: Tokens;
+          true: Tokens;
+          false: Tokens;
+      }
+    | {
+          type: "string";
+          value: string;
+      }
+    | {
+          type: "method_call";
+          methodName: string;
+          arg?: Tokens;
+      };
 
 function parseNumber(value: string): number {
     if (value.startsWith(".")) {
@@ -176,7 +182,6 @@ function tokeniseGtOrGteOrLtOrLte<TokenStart extends "gt" | "lt">(
         {
             type: gte ? `${start}e` : `${start}`,
             value: token.value,
-            startPos: offsetAfterGtSymbol - 1,
         },
         newOffset,
     ] as [Tokens, number];
@@ -234,6 +239,50 @@ function tokeniseRange(
     ] as [Tokens, number];
 }
 
+function tokeniseString(
+    value: string,
+    offset: number,
+    quote: string,
+): [Tokens, number] {
+    const content: string[] = [];
+    let inEscape = false;
+    for (; offset < value.length; offset++) {
+        if (inEscape) {
+            // If we are in an escape sequence, just add the character to the content.
+            inEscape = false;
+            content.push(value[offset]);
+            continue;
+        }
+
+        switch (value[offset]) {
+            case "\\":
+                inEscape = true;
+                break;
+            case quote:
+                offset++;
+                return [
+                    {
+                        type: "string",
+                        value: content.join(""),
+                    },
+                    offset,
+                ] as [Tokens, number];
+            default:
+                content.push(value[offset]);
+        }
+    }
+    throw new Error(`Unexpected end of string at position ${offset}`);
+}
+
+function isAlpha(value: string, offset: number): boolean {
+    const charCode = value.charCodeAt(offset);
+    return (
+        (charCode >= 65 && charCode <= 90) ||
+        charCode === 95 ||
+        (charCode >= 97 && charCode <= 122)
+    );
+}
+
 function tokeniseBase(
     value: string,
     offset: number,
@@ -248,35 +297,30 @@ function tokeniseBase(
 
     let notMode: number | null = null;
     let token: Tokens;
-    let newOffset = offset;
     const consumeEndBracket = (value: string) => {
-        if (value[newOffset] !== ")") {
-            throw new Error(`Expected ) at position ${newOffset}`);
+        if (value[offset] !== ")") {
+            throw new Error(`Expected ) at position ${offset}`);
         }
-        newOffset++;
+        offset++;
     };
     parse1: for (;;) {
-        switch (value[newOffset]) {
+        switch (value[offset]) {
             case "(":
-                [token, newOffset] = tokeniseBase(
-                    value,
-                    newOffset + 1,
-                    depth + 1,
-                );
+                [token, offset] = tokeniseBase(value, offset + 1, depth + 1);
                 consumeEndBracket(value);
                 break;
             case "!":
                 if (notMode !== null) {
-                    throw new Error(`Unexpected ! at position ${newOffset}`);
+                    throw new Error(`Unexpected ! at position ${offset}`);
                 }
-                notMode = newOffset;
-                newOffset++;
+                notMode = offset;
+                offset++;
                 continue parse1;
             case " ":
             case "\t":
             case "\n":
             case "\r":
-                newOffset++;
+                offset++;
                 continue parse1;
             case "0":
             case "1":
@@ -289,24 +333,43 @@ function tokeniseBase(
             case "8":
             case "9":
             case ".":
-                [token, newOffset] = tokeniseNumber(value, newOffset);
+                [token, offset] = tokeniseNumber(value, offset);
                 break;
             case ">":
-                [token, newOffset] = tokeniseGtOrGteOrLtOrLte(
+                [token, offset] = tokeniseGtOrGteOrLtOrLte(
                     value,
-                    newOffset + 1,
+                    offset + 1,
                     "gt",
                 );
                 break;
             case "<":
-                [token, newOffset] = tokeniseGtOrGteOrLtOrLte(
+                [token, offset] = tokeniseGtOrGteOrLtOrLte(
                     value,
-                    newOffset + 1,
+                    offset + 1,
                     "lt",
                 );
                 break;
+            case "'":
+            case '"':
+            case "`":
+                [token, offset] = tokeniseString(
+                    value,
+                    offset + 1,
+                    value[offset],
+                );
+                break;
             default:
-                unexpectedCharacter(value, offset);
+                if (isAlpha(value, offset)) {
+                    // Likely a method call
+                    [token, offset] = tokeniseMethodCall(
+                        value,
+                        offset,
+                        depth + 1,
+                    );
+                } else {
+                    // This is just invalid syntax
+                    unexpectedCharacter(value, offset);
+                }
         }
         break;
     }
@@ -316,19 +379,18 @@ function tokeniseBase(
         token = {
             type: "not",
             inner: token,
-            startPos: notMode,
         };
     }
 
     joiners: for (;;) {
         // Gobble up whitespace
         gobble1: for (;;) {
-            switch (value[newOffset]) {
+            switch (value[offset]) {
                 case " ":
                 case "\t":
                 case "\n":
                 case "\r":
-                    newOffset++;
+                    offset++;
                     continue;
                 default:
                     break gobble1;
@@ -336,29 +398,37 @@ function tokeniseBase(
         }
 
         // Look ahead for a or/and/range
-        switch (value[newOffset]) {
+        switch (value[offset]) {
             case "|":
-                [token, newOffset] = tokeniseJoiner(
+                [token, offset] = tokeniseJoiner(
                     value,
                     token,
-                    newOffset + 1,
+                    offset + 1,
                     depth + 1,
                     "or",
                     "|",
                 );
                 break;
             case "&":
-                [token, newOffset] = tokeniseJoiner(
+                [token, offset] = tokeniseJoiner(
                     value,
                     token,
-                    newOffset + 1,
+                    offset + 1,
                     depth + 1,
                     "and",
                     "&",
                 );
                 break;
+            case "?":
+                [token, offset] = tokeniseTernary(
+                    value,
+                    offset + 1,
+                    depth + 1,
+                    token,
+                );
+                break;
             case ".":
-                [token, newOffset] = tokeniseRange(value, newOffset + 1, token);
+                [token, offset] = tokeniseRange(value, offset + 1, token);
                 break;
             default:
                 break joiners;
@@ -367,12 +437,12 @@ function tokeniseBase(
 
     // Gobble up whitespace
     gobble2: for (;;) {
-        switch (value[newOffset]) {
+        switch (value[offset]) {
             case " ":
             case "\t":
             case "\n":
             case "\r":
-                newOffset++;
+                offset++;
                 continue;
             default:
                 break gobble2;
@@ -381,11 +451,89 @@ function tokeniseBase(
 
     if (depth === 0) {
         // Make sure the expression is complete
-        if (value[newOffset] !== undefined)
-            unexpectedCharacter(value, newOffset);
+        if (value[offset] !== undefined) unexpectedCharacter(value, offset);
     }
 
-    return [token, newOffset];
+    return [token, offset];
+}
+
+function tokeniseMethodCall(
+    value: string,
+    offset: number,
+    depth: number,
+): [Tokens, number] {
+    // Fast forward to the end of the method name
+    const start = offset;
+    for (; offset < value.length; offset++) {
+        if (!isAlpha(value, offset)) break;
+    }
+    const end = offset;
+
+    // Gobble up whitespace
+    gobble1: for (;;) {
+        switch (value[offset]) {
+            case " ":
+            case "\t":
+            case "\n":
+            case "\r":
+                offset++;
+                continue gobble1;
+            default:
+                break gobble1;
+        }
+    }
+
+    // Handle if there is an argument
+    let arg: Tokens | undefined;
+    if (value[offset] === "(") {
+        [arg, offset] = tokeniseBase(value, offset + 1, depth);
+        if (value[offset] !== ")") {
+            throw new Error(`Expected ) at position ${offset}`);
+        }
+        offset++;
+    }
+
+    // Return the token.
+    return [
+        {
+            type: "method_call",
+            methodName: value.slice(start, end),
+            arg,
+        },
+        offset,
+    ] as [Tokens, number];
+}
+
+function tokeniseTernary(
+    value: string,
+    offset: number,
+    depth: number,
+    condition: Tokens,
+): [Tokens, number] {
+    // Get the true case.
+    let trueCase: Tokens;
+    [trueCase, offset] = tokeniseBase(value, offset, depth);
+
+    // Find the :
+    if (value[offset] !== ":") {
+        throw new Error(`Expected : at position ${offset}`);
+    }
+    offset++;
+
+    // Get the false case.
+    let falseCase: Tokens;
+    [falseCase, offset] = tokeniseBase(value, offset, depth);
+
+    // Return the token.
+    return [
+        {
+            type: "ternary",
+            condition,
+            true: trueCase,
+            false: falseCase,
+        },
+        offset,
+    ] as [Tokens, number];
 }
 
 function tokeniseJoiner(
