@@ -293,10 +293,14 @@ export const columnsGen = (
                 const value = row.original.memory;
                 const cpu = row.original.vcpu;
                 const memoryPerVcpu = round(value / cpu);
-                return exprCompiler(filterValue)(
-                    memoryPerVcpu,
-                    `${memoryPerVcpu} GiB/vCPU`,
-                );
+                try {
+                    return exprCompiler(filterValue)(
+                        memoryPerVcpu,
+                        `${memoryPerVcpu} GiB/vCPU`,
+                    );
+                } catch {
+                    return true;
+                }
             },
             cell: (info) => {
                 const value = info.getValue() as number;
