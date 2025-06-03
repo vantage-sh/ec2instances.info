@@ -41,6 +41,44 @@ function ExprHelpData({ parseError }: { parseError: string | null }) {
                 <li>
                     Grouping: <code>(expression)</code>
                 </li>
+                <li>
+                    String methods:
+                    <ul className="list-disc pl-4 mt-1 space-y-1">
+                        <li>
+                            <code>starts_with("text")</code> - Checks if value
+                            starts with text
+                        </li>
+                        <li>
+                            <code>ends_with("text")</code> - Checks if value
+                            ends with text
+                        </li>
+                        <li>
+                            <code>has("text")</code> - Checks if value contains
+                            text
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Storage type methods:
+                    <ul className="list-disc pl-4 mt-1 space-y-1">
+                        <li>
+                            <code>ebs</code> - Matches EBS storage
+                        </li>
+                        <li>
+                            <code>nvme</code> - Matches NVMe storage
+                        </li>
+                        <li>
+                            <code>ssd</code> - Matches SSD storage
+                        </li>
+                        <li>
+                            <code>hdd</code> - Matches HDD storage
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Ternary operator:{" "}
+                    <code>condition ? trueValue : falseValue</code>
+                </li>
             </ul>
             <p className="mt-2">Examples:</p>
             <ul className="list-disc pl-4 mt-1 space-y-1">
@@ -54,6 +92,13 @@ function ExprHelpData({ parseError }: { parseError: string | null }) {
                 </li>
                 <li>
                     <code>!(2..4)</code> - Values not between 2 and 4
+                </li>
+                <li>
+                    <code>&lt;100 ? ssd : hdd</code> - Match SSD if storage &lt;
+                    100, otherwise match HDD
+                </li>
+                <li>
+                    <code>nvme</code> - Match NVMe storage
                 </li>
             </ul>
         </div>
