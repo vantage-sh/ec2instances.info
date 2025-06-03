@@ -1,5 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { regex, makeCellWithRegexSorter, expr } from "./shared";
+import {
+    regex,
+    makeCellWithRegexSorter,
+    expr,
+    transformAllDataTables,
+} from "./shared";
 import { EC2Instance, PricingUnit, CostDuration } from "@/types";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import sortByInstanceType from "../sortByInstanceType";
@@ -25,6 +30,10 @@ export const initialColumnsValue: {
 } = {} as any;
 for (const [key, value] of initialColumnsArr) {
     initialColumnsValue[key] = value;
+}
+
+export function transformDataTables(dataTablesData: any) {
+    return transformAllDataTables(initialColumnsArr, dataTablesData);
 }
 
 export function makePrettyNames<V>(
