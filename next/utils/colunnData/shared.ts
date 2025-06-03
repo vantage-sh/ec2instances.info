@@ -151,3 +151,22 @@ export function makeCellWithRegexSorter<Instance>(
         }),
     };
 }
+
+export function transformAllDataTables(
+    values: readonly (readonly [string, boolean])[],
+    dataTablesData: any,
+) {
+    if (!Array.isArray(dataTablesData.columns)) {
+        return null;
+    }
+    const newMapping: Record<string, boolean> = {};
+    const columns = dataTablesData.columns;
+    for (let i = 0; i < columns.length; i++) {
+        const visible = columns[i].visible;
+        const [key, ourDefault] = values[i];
+        if (visible !== ourDefault) {
+            newMapping[key] = visible;
+        }
+    }
+    return newMapping;
+}

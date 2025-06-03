@@ -1,4 +1,5 @@
 export { columnsGen } from "./columns";
+import { transformAllDataTables } from "../shared";
 
 const initialColumnsArr = [
     ["pretty_name", true],
@@ -81,6 +82,10 @@ export const initialColumnsValue: {
 } = {} as any;
 for (const [key, value] of initialColumnsArr) {
     initialColumnsValue[key] = value;
+}
+
+export function transformDataTables(dataTablesData: any) {
+    return transformAllDataTables(initialColumnsArr, dataTablesData);
 }
 
 export function makePrettyNames<V>(
