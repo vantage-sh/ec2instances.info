@@ -993,6 +993,12 @@ def add_gpu_info(instances):
             "gpu_count": 16,
             "gpu_memory": 512,
         },
+        "trn2.48xlarge": {
+            "gpu_model": "AWS Trainium2",
+            "compute_capability": 0,
+            "gpu_count": 16,
+            "gpu_memory": 96,
+        },
         "trn1n.32xlarge": {
             "gpu_model": "AWS Inferentia",
             "compute_capability": 0,
