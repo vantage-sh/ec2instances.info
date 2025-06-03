@@ -190,10 +190,6 @@ def add_pricing(imap):
             if region.startswith("cn-"):
                 continue
 
-            # Skip capacity block pricing which affects certain p series instances
-            if product_attributes["marketoption"] == "CapacityBlock":
-                continue
-
             terms = offer.get("terms")
 
             operating_system = product_attributes.get("operatingSystem")
