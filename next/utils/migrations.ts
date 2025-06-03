@@ -133,29 +133,37 @@ function mergeColumnVisibility(
 
 function mergeDataTables(state: StateDump, encodedDataTables: string) {
     let res: Record<string, boolean> | null = null;
-    switch (state.path) {
-        case "/":
-            res = colunnData.ec2.transformDataTables(encodedDataTables);
-            break;
-        case "/rds":
-            res = colunnData.rds.transformDataTables(encodedDataTables);
-            break;
-        case "/cache":
-            res = colunnData.cache.transformDataTables(encodedDataTables);
-            break;
-        case "/redshift":
-            res = colunnData.redshift.transformDataTables(encodedDataTables);
-            break;
-        case "/opensearch":
-            res = colunnData.opensearch.transformDataTables(encodedDataTables);
-            break;
-        case "/azure":
-            res = colunnData.azure.transformDataTables(encodedDataTables);
-            break;
+    try {
+        const v = JSON.parse(encodedDataTables);
+        if (typeof v !== "object") return false;
+
+        switch (state.path) {
+            case "/":
+                res = colunnData.ec2.transformDataTables(v);
+                break;
+            case "/rds":
+                res = colunnData.rds.transformDataTables(v);
+                break;
+            case "/cache":
+                res = colunnData.cache.transformDataTables(v);
+                break;
+            case "/redshift":
+                res = colunnData.redshift.transformDataTables(v);
+                break;
+            case "/opensearch":
+                res = colunnData.opensearch.transformDataTables(v);
+                break;
+            case "/azure":
+                res = colunnData.azure.transformDataTables(v);
+                break;
+        }
+        if (res === null) return false;
+        state.visibleColumns = res;
+        return true;
+    } catch {
+        // Any errors here means the user had a malformed configuration. Just return false.
+        return false;
     }
-    if (res === null) return false;
-    state.visibleColumns = res;
-    return true;
 }
 
 /** Migrate the local storage to the new format. */
