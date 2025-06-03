@@ -472,6 +472,7 @@ def add_pretty_names(instances):
         "p4d": "P4D Highest Performance GPU",
         "p5e": "P5e High Performance Computing GPU",
         "p5en": "P5en High Performance Computing GPU",
+        "p6-b200": "P6-B200 High Performance and Machine Learning GPU",
         "r3": "R3 High-Memory",
         "r4": "R4 High-Memory",
         "x1": "X1 Extra High-Memory",
