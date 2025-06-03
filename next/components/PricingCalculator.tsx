@@ -46,7 +46,7 @@ function Calculator({
     storeOsNameRatherThanId,
     reservedTermOptions,
     removeSpot,
-    defaultRegion,
+    defaultRegionForType,
     useSpotMin,
 }: {
     pricing: Record<string, Record<string, Platform>>;
@@ -56,10 +56,15 @@ function Calculator({
     storeOsNameRatherThanId: boolean;
     reservedTermOptions: [string, string][];
     removeSpot: boolean;
-    defaultRegion: string;
+    defaultRegionForType: string;
     useSpotMin: boolean;
 }) {
     const priceHoldersId = useId();
+
+    const defaultRegion = useMemo(() => {
+        if (!pricing[defaultRegionForType]) return Object.keys(pricing)[0];
+        return defaultRegionForType;
+    }, [pricing, defaultRegionForType]);
 
     const defaultPlatform = useMemo(() => {
         return pricing[defaultRegion]?.[defaultOs]
@@ -334,7 +339,7 @@ export default function PricingCalculator({
                 storeOsNameRatherThanId={storeOsNameRatherThanId}
                 reservedTermOptions={reservedTermOptions}
                 removeSpot={removeSpot}
-                defaultRegion={defaultRegion}
+                defaultRegionForType={defaultRegion}
                 useSpotMin={useSpotMin}
             />
         </section>
