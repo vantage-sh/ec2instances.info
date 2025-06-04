@@ -21,6 +21,7 @@
         "@radix-ui/react-separator": "^1.1.6",
         "@radix-ui/react-slot": "^1.2.2",
         "@radix-ui/react-tabs": "^1.1.11",
+        "@sentry/nextjs": "^9.25.1",
         "@tailwindcss/postcss": "^4.1.4",
         "@tanstack/react-table": "^8.21.3",
         "@tanstack/react-virtual": "^3.13.6",
