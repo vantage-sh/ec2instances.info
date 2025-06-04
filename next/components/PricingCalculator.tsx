@@ -38,6 +38,12 @@ function dollarString(
     return `$${rounded}`;
 }
 
+function keysWithOnDemand(regionPricing: Record<string, Platform>) {
+    return Object.keys(regionPricing).filter(
+        (platform) => regionPricing[platform].ondemand,
+    );
+}
+
 function Calculator({
     pricing,
     regions,
@@ -67,9 +73,9 @@ function Calculator({
     }, [pricing, defaultRegionForType]);
 
     const defaultPlatform = useMemo(() => {
-        return pricing[defaultRegion]?.[defaultOs]
+        return pricing[defaultRegion]?.[defaultOs]?.ondemand
             ? defaultOs
-            : Object.keys(pricing[defaultRegion] || {})[0] || defaultOs;
+            : keysWithOnDemand(pricing[defaultRegion] || {})[0] || defaultOs;
     }, [pricing, defaultOs, defaultRegion]);
 
     const [region, setRegionState] = useState<string>(defaultRegion);

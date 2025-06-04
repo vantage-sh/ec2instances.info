@@ -8,6 +8,7 @@ import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 import makeRainbowTable from "@/utils/makeRainbowTable";
 import generateEc2Description from "@/utils/generateEc2Description";
 import bestEc2InstanceForEachVariant from "@/utils/bestEc2InstanceForEachVariant";
+import tryPricingMappingWithDefaultsAndYoloIfNot from "@/utils/tryPricingGetAndYoloIfNot";
 
 export const dynamic = "force-static";
 
@@ -77,7 +78,10 @@ async function handleParams(params: Promise<{ slug: string }>) {
     const { instances, regions } = await getData();
     const instance = instances.find((i) => i.instance_type === slug)!;
     const ondemandCost =
-        instance.pricing["us-east-1"]?.linux?.ondemand || "N/A";
+        tryPricingMappingWithDefaultsAndYoloIfNot(
+            instance.pricing,
+            "us-east-1",
+        ) || "N/A";
     return { instance, instances, ondemandCost, regions };
 }
 
@@ -89,7 +93,7 @@ export async function generateMetadata({
     const { instance, ondemandCost } = await handleParams(params);
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
-        description: generateEc2Description(instance, ondemandCost),
+        description: generateEc2Description(instance, ondemandCost as string),
     };
 }
 
@@ -126,8 +130,10 @@ export default async function Page({
 }) {
     const { instance, instances, ondemandCost, regions } =
         await handleParams(params);
-    const description = generateEc2Description(instance, ondemandCost);
-
+    const description = generateEc2Description(
+        instance,
+        ondemandCost as string,
+    );
     const [itype] = instance.instance_type.split(".", 2);
     const variant = itype.slice(0, 2);
     const allOfVariant = instances.filter((i) =>

@@ -7,6 +7,11 @@ function generateDescription(instance: Instance, ondemandCost: string) {
 }
 
 export default function generateRedshiftMarkdown(instance: Instance) {
+    const regionRoot =
+        instance.pricing["us-east-1"] ||
+        instance.pricing[Object.keys(instance.pricing)[0]];
+    const ondemandCost = regionRoot?.ondemand;
+
     const tableData = generateRedshiftTables(instance)
         .map(
             (t) => `## ${t.name}
@@ -18,7 +23,7 @@ ${t.rows.map((r) => `- ${r.name}: ${r.children}`).join("\n")}
 
     return `# ${instance.instance_type}
 
-> ${generateDescription(instance, instance.pricing["us-east-1"]?.ondemand)}
+> ${generateDescription(instance, ondemandCost)}
 
 ${tableData}
 ## Pricing
