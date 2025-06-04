@@ -4,16 +4,23 @@ let importedCaptureRouterTransitionStart: (
 ) => void | undefined;
 
 if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
-    import("@sentry/nextjs").then(({ init, captureRouterTransitionStart }) => {
-        init({
-            dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+    import("@sentry/nextjs").then(
+        ({ init, captureRouterTransitionStart, replayIntegration }) => {
+            init({
+                dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
 
-            // Set the sample rate to 10%. With our user rate, this is still a
-            // lot of useful information.
-            tracesSampleRate: 0.1,
-        });
-        importedCaptureRouterTransitionStart = captureRouterTransitionStart;
-    });
+                // Set the sample rate to 10%. With our user rate, this is still a
+                // lot of useful information.
+                tracesSampleRate: 0.1,
+
+                // Turn on replays.
+                integrations: [replayIntegration()],
+                replaysSessionSampleRate: 0.1,
+                replaysOnErrorSampleRate: 1.0,
+            });
+            importedCaptureRouterTransitionStart = captureRouterTransitionStart;
+        },
+    );
 }
 
 export const onRouterTransitionStart = (
