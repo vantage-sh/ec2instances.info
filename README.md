@@ -80,6 +80,10 @@ To build a full release, you will likely want to clone a clean slate version of 
 - `AWS_ACCESS_KEY_ID`: Follow the start of [Developing locally](#developing-locally) to get a AWS key with the correct permissions. This is the key ID for that.
 - `AWS_SECRET_ACCESS_KEY`: Follow the start of [Developing locally](#developing-locally) to get a AWS key with the correct permissions. This is the secret access key for that.
 - `NEXT_PUBLIC_URL`: The public base URL for where the application lives. Probably `https://<hostname>/`.
+- `NEXT_PUBLIC_SENTRY_DSN`: **(Optional)** The DSN for Sentry. If you add this, the other items are required:
+    - `SENTRY_ORG`: The Sentry organisation.
+    - `SENTRY_PROJECT`: The Sentry project.
+    - `SENTRY_AUTH_TOKEN`: The Sentry auth token.
 
 **Important:** If you don't want your build to be indexed by search engines, you should also set `DENY_ROBOTS_TXT=1`. To remove adverts, you can also add `NEXT_PUBLIC_REMOVE_ADVERTS=1`. You should also set `OPENGRAPH_URL=<some url>` to a URL which serves a 1911x1156 image if you aren't Vantage and deploying to production. The default is not MIT licensed.
 
