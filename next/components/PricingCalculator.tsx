@@ -19,7 +19,7 @@ function dollarString(
     value: string | number | undefined,
     duration: CostDuration,
 ) {
-    if (value === undefined) return "N/A";
+    if (value === undefined || value === "0") return "N/A";
     const n = Number(value);
     if (isNaN(n)) return "N/A";
 
