@@ -1,3 +1,5 @@
+const BAD_ON_DEMAND: (string | number | undefined)[] = [0, "0", "", undefined];
+
 function keysWhereODIsNotZero<
     RegionPricing extends {
         [platform: string]: {
@@ -25,7 +27,7 @@ export default function tryPricingMappingWithDefaultsAndYoloIfNot<
         pricing[defaultRegion] || pricing[Object.keys(pricing)[0]];
     if (!regionRoot) return undefined;
     let platformRoot = regionRoot["linux"];
-    if (!platformRoot) {
+    if (!platformRoot || BAD_ON_DEMAND.includes(platformRoot.ondemand)) {
         const platformKeys = keysWhereODIsNotZero(regionRoot);
         if (platformKeys.length === 0) return undefined;
         platformRoot = regionRoot[platformKeys[0]];
