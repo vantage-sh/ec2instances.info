@@ -3,12 +3,14 @@ import { urlInject, raw } from "@/utils/urlInject";
 import tryPricingMappingWithDefaultsAndYoloIfNot from "@/utils/tryPricingGetAndYoloIfNot";
 
 export function calculatePrice(instance: EC2Instance) {
-    return `${
-        tryPricingMappingWithDefaultsAndYoloIfNot(
-            instance.pricing,
-            "us-east-1",
-        ) || "N/A"
-    }`;
+    let res = tryPricingMappingWithDefaultsAndYoloIfNot(
+        instance.pricing,
+        "us-east-1",
+    );
+    if (res === "0") {
+        res = "N/A";
+    }
+    return `${res}`;
 }
 
 export const awsIndexes = [

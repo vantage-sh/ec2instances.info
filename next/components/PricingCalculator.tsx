@@ -44,6 +44,9 @@ function keysWithOnDemand(regionPricing: Record<string, Platform>) {
     );
 }
 
+// https://www.youtube.com/watch?v=rksaoaqt3JA
+const BAD_ON_DEMAND: (string | number | undefined)[] = [0, "0", "", undefined];
+
 function Calculator({
     pricing,
     regions,
@@ -73,7 +76,9 @@ function Calculator({
     }, [pricing, defaultRegionForType]);
 
     const defaultPlatform = useMemo(() => {
-        return pricing[defaultRegion]?.[defaultOs]?.ondemand
+        return !BAD_ON_DEMAND.includes(
+            pricing[defaultRegion]?.[defaultOs]?.ondemand,
+        )
             ? defaultOs
             : keysWithOnDemand(pricing[defaultRegion] || {})[0] || defaultOs;
     }, [pricing, defaultOs, defaultRegion]);
