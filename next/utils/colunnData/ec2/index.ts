@@ -76,6 +76,7 @@ const initialColumnsArr = [
     ["spot-interrupt-rate", false],
     ["cost-emr", false],
     ["generation", false],
+    ["spot-placement-score", false],
 ] as const;
 
 export const initialColumnsValue: {
@@ -226,6 +227,7 @@ export function makePrettyNames<V>(
             "spot-interrupt-rate",
             "Linux Spot Interrupt Frequency",
         ),
+        makeColumnOption("spot-placement-score", "Spot Placement Score"),
         makeColumnOption("cost-emr", "EMR cost"),
         makeColumnOption("generation", "Generation"),
     ];

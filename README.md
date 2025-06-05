@@ -41,6 +41,7 @@ Ensure that your IAM user has at least the following permissions:
             "Action": [
                 "ec2:DescribeInstanceTypes",
                 "ec2:DescribeRegions",
+                "ec2:GetSpotPlacementScores",
                 "pricing:*",
                 "elasticache:DescribeEngineDefaultParameters"
             ],
