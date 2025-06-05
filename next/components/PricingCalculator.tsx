@@ -40,7 +40,9 @@ function dollarString(
 
 function keysWithOnDemand(regionPricing: Record<string, Platform>) {
     return Object.keys(regionPricing).filter(
-        (platform) => regionPricing[platform].ondemand,
+        (platform) =>
+            regionPricing[platform].ondemand &&
+            !BAD_ON_DEMAND.includes(regionPricing[platform].ondemand),
     );
 }
 
