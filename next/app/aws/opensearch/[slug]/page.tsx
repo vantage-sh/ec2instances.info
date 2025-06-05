@@ -51,7 +51,10 @@ async function handleParams(params: Promise<{ slug: string }>) {
     const { slug } = await params;
     const { instances, regions } = await getData();
     const instance = instances.find((i) => i.instance_type === slug)!;
-    const ondemandCost = instance.pricing["us-east-1"]?.ondemand;
+    const regionRoot =
+        instance.pricing["us-east-1"] ||
+        instance.pricing[Object.keys(instance.pricing)[0]];
+    const ondemandCost = regionRoot?.ondemand;
     return { instance, instances, ondemandCost, regions };
 }
 

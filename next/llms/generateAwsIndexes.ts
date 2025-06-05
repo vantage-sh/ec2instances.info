@@ -1,15 +1,16 @@
 import { EC2Instance } from "@/types";
 import { urlInject, raw } from "@/utils/urlInject";
+import tryPricingMappingWithDefaultsAndYoloIfNot from "@/utils/tryPricingGetAndYoloIfNot";
 
 export function calculatePrice(instance: EC2Instance) {
-    const usEast1 = instance.pricing["us-east-1"];
-    if (!usEast1) {
-        return "N/A";
+    let res = tryPricingMappingWithDefaultsAndYoloIfNot(
+        instance.pricing,
+        "us-east-1",
+    );
+    if (res === "0") {
+        res = "N/A";
     }
-    if (usEast1.linux) {
-        return usEast1.linux.ondemand;
-    }
-    return Object.values(usEast1)[0].ondemand;
+    return `${res}`;
 }
 
 export const awsIndexes = [

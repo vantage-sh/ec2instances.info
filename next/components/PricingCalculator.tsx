@@ -19,7 +19,7 @@ function dollarString(
     value: string | number | undefined,
     duration: CostDuration,
 ) {
-    if (value === undefined) return "N/A";
+    if (value === undefined || value === "0") return "N/A";
     const n = Number(value);
     if (isNaN(n)) return "N/A";
 
@@ -37,6 +37,17 @@ function dollarString(
     const rounded = Math.round(mul * 10000) / 10000;
     return `$${rounded}`;
 }
+
+function keysWithOnDemand(regionPricing: Record<string, Platform>) {
+    return Object.keys(regionPricing).filter(
+        (platform) =>
+            regionPricing[platform].ondemand &&
+            !BAD_ON_DEMAND.includes(regionPricing[platform].ondemand),
+    );
+}
+
+// https://www.youtube.com/watch?v=rksaoaqt3JA
+const BAD_ON_DEMAND: (string | number | undefined)[] = [0, "0", "", undefined];
 
 function Calculator({
     pricing,
@@ -67,9 +78,11 @@ function Calculator({
     }, [pricing, defaultRegionForType]);
 
     const defaultPlatform = useMemo(() => {
-        return pricing[defaultRegion]?.[defaultOs]
+        return !BAD_ON_DEMAND.includes(
+            pricing[defaultRegion]?.[defaultOs]?.ondemand,
+        )
             ? defaultOs
-            : Object.keys(pricing[defaultRegion] || {})[0] || defaultOs;
+            : keysWithOnDemand(pricing[defaultRegion] || {})[0] || defaultOs;
     }, [pricing, defaultOs, defaultRegion]);
 
     const [region, setRegionState] = useState<string>(defaultRegion);

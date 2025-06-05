@@ -50,12 +50,15 @@ async function handleParams(params: Promise<{ slug: string }>) {
     const { instances, regions } = await getData();
     const instance = instances.find((i) => i.instance_type === slug)!;
     let ondemandCost: string | undefined;
+    const regionRoot =
+        instance.pricing["us-east-1"] ||
+        instance.pricing[Object.keys(instance.pricing)[0]];
     if (instance.instance_type.includes("mem")) {
-        ondemandCost = instance.pricing["us-east-1"]?.Oracle?.ondemand;
+        ondemandCost = regionRoot?.Oracle?.ondemand;
     } else if (instance.instance_type.includes("z1d")) {
-        ondemandCost = instance.pricing["us-east-1"]?.["SQL Server"]?.ondemand;
+        ondemandCost = regionRoot?.["SQL Server"]?.ondemand;
     } else {
-        ondemandCost = instance.pricing["us-east-1"]?.PostgreSQL?.ondemand;
+        ondemandCost = regionRoot?.PostgreSQL?.ondemand;
     }
     return { instance, instances, ondemandCost, regions };
 }

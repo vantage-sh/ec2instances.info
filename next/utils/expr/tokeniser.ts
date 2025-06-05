@@ -283,6 +283,21 @@ function isAlpha(value: string, offset: number): boolean {
     );
 }
 
+function gobbleWhitespace(value: string, offset: number): number {
+    for (;;) {
+        switch (value[offset]) {
+            case " ":
+            case "\t":
+            case "\n":
+            case "\r":
+                offset++;
+                break;
+            default:
+                return offset;
+        }
+    }
+}
+
 function tokeniseBase(
     value: string,
     offset: number,
@@ -383,19 +398,7 @@ function tokeniseBase(
     }
 
     joiners: for (;;) {
-        // Gobble up whitespace
-        gobble1: for (;;) {
-            switch (value[offset]) {
-                case " ":
-                case "\t":
-                case "\n":
-                case "\r":
-                    offset++;
-                    continue;
-                default:
-                    break gobble1;
-            }
-        }
+        offset = gobbleWhitespace(value, offset);
 
         // Look ahead for a or/and/range
         switch (value[offset]) {
@@ -435,19 +438,7 @@ function tokeniseBase(
         }
     }
 
-    // Gobble up whitespace
-    gobble2: for (;;) {
-        switch (value[offset]) {
-            case " ":
-            case "\t":
-            case "\n":
-            case "\r":
-                offset++;
-                continue;
-            default:
-                break gobble2;
-        }
-    }
+    offset = gobbleWhitespace(value, offset);
 
     if (depth === 0) {
         // Make sure the expression is complete
@@ -470,18 +461,7 @@ function tokeniseMethodCall(
     const end = offset;
 
     // Gobble up whitespace
-    gobble1: for (;;) {
-        switch (value[offset]) {
-            case " ":
-            case "\t":
-            case "\n":
-            case "\r":
-                offset++;
-                continue gobble1;
-            default:
-                break gobble1;
-        }
-    }
+    offset = gobbleWhitespace(value, offset);
 
     // Handle if there is an argument
     let arg: Tokens | undefined;
