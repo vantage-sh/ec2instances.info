@@ -1,3 +1,5 @@
+"use client";
+
 import { Pricing } from "@/types";
 import { AllOfInstanceType, FamilySize } from "./FamilySize";
 import { Region } from "@/types";
@@ -5,6 +7,9 @@ import PricingCalculator from "./PricingCalculator";
 import VantageDemo from "./VantageDemo";
 import InstanceBreadcrumbs from "./InstanceBreadcrumbs";
 import MarketingWrapper from "./MarketingWrapper";
+import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
+import { useMemo } from "react";
+
 type HalfPricing = {
     [region: string]: {
         ondemand: string;
@@ -45,15 +50,19 @@ export default function HalfEC2Root<
     tablePath,
     regions,
 }: InstanceRootProps<Instance>) {
-    const remappedPricing: Pricing = {};
-    for (const region in instance.pricing) {
-        remappedPricing[region] = {
-            single: {
-                ondemand: instance.pricing[region].ondemand,
-                reserved: instance.pricing[region].reserved,
-            },
-        };
-    }
+    const remappedPricing = useMemo(() => {
+        const remappedPricing: Pricing = {};
+        for (const region in instance.pricing) {
+            remappedPricing[region] = {
+                single: {
+                    ondemand: instance.pricing[region].ondemand,
+                    reserved: instance.pricing[region].reserved,
+                },
+            };
+        }
+        return remappedPricing;
+    }, [instance.pricing]);
+    const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
 
     return (
         <MarketingWrapper azure={false}>
@@ -87,6 +96,7 @@ export default function HalfEC2Root<
                             reservedTermOptions={reservedTermOptions}
                             defaultRegion="us-east-1"
                             useSpotMin={false}
+                            setPathSuffix={setPathSuffix}
                         />
                         <VantageDemo link="https://www.vantage.sh/lp/aws-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar" />
                         <FamilySize
@@ -94,6 +104,7 @@ export default function HalfEC2Root<
                             instanceName={instance.instance_type}
                             pathPrefix={pathPrefix}
                             tablePath={tablePath}
+                            pathSuffix={pathSuffix}
                         />
                         <p className="mt-6">
                             Having trouble making sense of your EC2 costs? Check

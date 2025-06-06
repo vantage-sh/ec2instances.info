@@ -5,9 +5,11 @@ import Link from "next/link";
 export default function InstanceVariants({
     bestOfVariants,
     pathPrefix,
+    pathSuffix,
 }: {
     bestOfVariants: { [key: string]: string };
     pathPrefix: string;
+    pathSuffix: string;
 }) {
     const keys = useMemo(
         () => Object.keys(bestOfVariants).sort((a, b) => a.localeCompare(b)),
@@ -32,7 +34,7 @@ export default function InstanceVariants({
                             <td className="border border-gray-200 p-1">
                                 <Link
                                     className="text-purple-1 hover:text-purple-0"
-                                    href={`${pathPrefix}/${bestOfVariants[key]}`}
+                                    href={`${pathPrefix}/${bestOfVariants[key]}${pathSuffix}`}
                                 >
                                     {key}
                                 </Link>

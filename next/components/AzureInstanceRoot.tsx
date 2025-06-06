@@ -1,3 +1,5 @@
+"use client";
+
 import type { AzureInstance } from "@/utils/colunnData/azure";
 import InstanceBreadcrumbs from "./InstanceBreadcrumbs";
 import { FamilySize } from "./FamilySize";
@@ -7,6 +9,7 @@ import azureTablesGenerator from "@/utils/azureTablesGenerator";
 import PricingCalculator from "./PricingCalculator";
 import VantageDemo from "./VantageDemo";
 import MarketingWrapper from "./MarketingWrapper";
+import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
 
 type AzureInstanceRootProps = {
     rainbowTable: string[];
@@ -41,6 +44,8 @@ export default function AzureInstanceRoot({
     rainbowTable,
     regions,
 }: AzureInstanceRootProps) {
+    const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
+
     return (
         <MarketingWrapper azure={true}>
             <main className="my-4 px-4 not-md:w-screen">
@@ -75,6 +80,7 @@ export default function AzureInstanceRoot({
                             osOptions={osOptions}
                             defaultRegion="us-east"
                             useSpotMin={true}
+                            setPathSuffix={setPathSuffix}
                         />
                         <VantageDemo link="https://www.vantage.sh/lp/azure-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar" />
                         <FamilySize
@@ -82,10 +88,12 @@ export default function AzureInstanceRoot({
                             instanceName={compressedInstance.instance_type}
                             pathPrefix="/azure/vm"
                             tablePath="/azure"
+                            pathSuffix={pathSuffix}
                         />
                         <InstanceVariants
                             bestOfVariants={bestOfVariants}
                             pathPrefix="/azure/vm"
+                            pathSuffix={pathSuffix}
                         />
                     </div>
                     <div className="not-xl:flex-grow xl:w-xl 2xl:w-2xl md:mt-0 mt-4">

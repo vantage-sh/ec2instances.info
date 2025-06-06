@@ -1,3 +1,5 @@
+"use client";
+
 import { EC2Instance, Region } from "@/types";
 import { AllOfInstanceType, FamilySize } from "./FamilySize";
 import PricingCalculator from "@/components/PricingCalculator";
@@ -7,6 +9,7 @@ import InstanceBreadcrumbs from "./InstanceBreadcrumbs";
 import InstanceVariants from "./InstanceVariants";
 import VantageDemo from "./VantageDemo";
 import MarketingWrapper from "./MarketingWrapper";
+import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
 
 interface InstanceRootProps {
     rainbowTable: string[];
@@ -45,6 +48,8 @@ export default function EC2InstanceRoot({
     storeOsNameRatherThanId,
     reservedTermOptions,
 }: InstanceRootProps) {
+    const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
+
     return (
         <MarketingWrapper azure={false}>
             <main className="my-4 px-4 not-md:w-screen">
@@ -75,6 +80,7 @@ export default function EC2InstanceRoot({
                             reservedTermOptions={reservedTermOptions}
                             defaultRegion="us-east-1"
                             useSpotMin={false}
+                            setPathSuffix={setPathSuffix}
                         />
                         <VantageDemo link="https://www.vantage.sh/lp/aws-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar" />
                         <FamilySize
@@ -82,10 +88,12 @@ export default function EC2InstanceRoot({
                             instanceName={compressedInstance.instance_type}
                             pathPrefix={pathPrefix}
                             tablePath={tablePath}
+                            pathSuffix={pathSuffix}
                         />
                         <InstanceVariants
                             bestOfVariants={bestOfVariants}
                             pathPrefix={pathPrefix}
+                            pathSuffix={pathSuffix}
                         />
                         <p className="mt-6">
                             Having trouble making sense of your EC2 costs? Check

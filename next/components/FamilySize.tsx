@@ -15,11 +15,13 @@ export function FamilySize({
     instanceName,
     pathPrefix,
     tablePath,
+    pathSuffix,
 }: {
     allOfInstanceType: AllOfInstanceType;
     instanceName: string;
     pathPrefix: string;
     tablePath: string;
+    pathSuffix: string;
 }) {
     // This is a hack, but its a memo so that it runs immediately. We don't need a variable since its a mutation.
     useMemo(() => {
@@ -65,7 +67,7 @@ export function FamilySize({
                                     ) : (
                                         <Link
                                             className="text-purple-1 hover:text-purple-0"
-                                            href={`${pathPrefix}/${item.name}`}
+                                            href={`${pathPrefix}/${item.name}${pathSuffix}`}
                                         >
                                             {item.name}
                                         </Link>

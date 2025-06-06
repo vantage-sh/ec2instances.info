@@ -59,6 +59,7 @@ function Calculator({
     removeSpot,
     defaultRegionForType,
     useSpotMin,
+    setPathSuffix,
 }: {
     pricing: Record<string, Record<string, Platform>>;
     regions: Region;
@@ -69,6 +70,7 @@ function Calculator({
     removeSpot: boolean;
     defaultRegionForType: string;
     useSpotMin: boolean;
+    setPathSuffix: (value: string) => void;
 }) {
     const priceHoldersId = useId();
 
@@ -149,6 +151,7 @@ function Calculator({
             const url = new URL(window.location.href);
             url.searchParams.set(key, value);
             window.history.replaceState({}, "", url.toString());
+            setPathSuffix?.("?" + url.searchParams.toString());
         };
     }
     const setRegion = wrapStringUpdater(setRegionState, "region");
@@ -170,6 +173,7 @@ function Calculator({
             const url = new URL(window.location.href);
             url.searchParams.set("platform", v);
             window.history.replaceState({}, "", url.toString());
+            setPathSuffix?.("?" + url.searchParams.toString());
         },
         [setPlatformState, storeOsNameRatherThanId, osOptions],
     );
@@ -318,6 +322,7 @@ type PricingCalculatorProps = {
     removeSpot: boolean;
     defaultRegion: string;
     useSpotMin: boolean;
+    setPathSuffix: (value: string) => void;
 };
 
 export default function PricingCalculator({
@@ -331,6 +336,7 @@ export default function PricingCalculator({
     removeSpot,
     defaultRegion,
     useSpotMin,
+    setPathSuffix,
 }: PricingCalculatorProps) {
     const instance = useMemo(() => {
         if (!Array.isArray(compressedInstance.pricing))
@@ -354,6 +360,7 @@ export default function PricingCalculator({
                 removeSpot={removeSpot}
                 defaultRegionForType={defaultRegion}
                 useSpotMin={useSpotMin}
+                setPathSuffix={setPathSuffix}
             />
         </section>
     );
