@@ -15,7 +15,7 @@ compress-www:
 	mv www_pre_build.tar.gz www/www_pre_build.tar.gz
 
 next:
-	docker run -e NEXT_PUBLIC_URL -e DENY_ROBOTS_TXT -e NEXT_PUBLIC_REMOVE_ADVERTS -v $(shell pwd):/app -w /app --rm -t node:$(shell cat next/.nvmrc | tr -d 'v')-alpine sh -c 'cd next && npm ci && npm run build'
+	docker run -e NEXT_PUBLIC_URL -e DENY_ROBOTS_TXT -e NEXT_PUBLIC_REMOVE_ADVERTS -e NEXT_PUBLIC_SENTRY_DSN -e SENTRY_ORG -e SENTRY_PROJECT -e SENTRY_AUTH_TOKEN -v $(shell pwd):/app -w /app --rm -t node:$(shell cat next/.nvmrc | tr -d 'v')-alpine sh -c 'cd next && npm ci && npm run build'
 	cp -a next/out/. www/
 
 package:
