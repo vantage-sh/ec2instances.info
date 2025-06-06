@@ -108,14 +108,14 @@ export function getPricingSorter(
         sortUndefined: "last",
         accessorFn: (row) => {
             const g = getter(row.pricing?.[selectedRegion]);
-            if (isNaN(Number(g))) return undefined;
+            if (isNaN(Number(g)) || g === "0") return undefined;
             const value = calculateCost(g, row, pricingUnit, costDuration);
             return value === -1 ? undefined : value;
         },
         ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.row.original.pricing;
             const price = getter(pricing?.[selectedRegion]);
-            if (isNaN(Number(price))) return "unavailable";
+            if (isNaN(Number(price)) || price === "0") return "unavailable";
             return calculateAndFormatCost(
                 price,
                 info.row.original,
