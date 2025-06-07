@@ -1,6 +1,9 @@
 import { useCallback, useSyncExternalStore } from "react";
 import { get, write, StateDump } from "./instancesKvClient";
 import { migrateLocalStorage, migrateUrl } from "./migrations";
+import { Mutex } from "async-mutex";
+
+const writerMutex = new Mutex();
 
 async function doWrite(
     [, data]: [
@@ -11,11 +14,14 @@ async function doWrite(
     pathname: string,
 ) {
     if (!data) return;
-    const id = await write(data);
-    const url = new URL(window.location.href);
-    if (url.pathname !== pathname) return;
-    url.searchParams.set("id", id);
-    window.history.replaceState({}, "", url.toString());
+    const idPromise = write(data);
+    await writerMutex.runExclusive(async () => {
+        const id = await idPromise;
+        const url = new URL(window.location.href);
+        if (url.pathname !== pathname) return;
+        url.searchParams.set("id", id);
+        window.history.replaceState({}, "", url.toString());
+    });
 }
 
 function getIdFromUrl() {
