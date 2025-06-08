@@ -1,5 +1,5 @@
 import { decodeArrayStream } from "@msgpack/msgpack";
-import processRainbowTable from "./processRainbowTable";
+import processRainbowTable from "../processRainbowTable";
 
 let listeners: Set<() => void> | null = new Set();
 const chunks: Uint8Array[] = [];
