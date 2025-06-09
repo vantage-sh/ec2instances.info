@@ -21,7 +21,7 @@ export default {
 
     starts_with: (arg, strValue) => {
         if (arg === undefined)
-            throw new Error("startsWith: value is undefined");
+            throw new Error("starts_with: value is undefined");
         return strValue.startsWith(String(arg));
     },
     has: (arg, strValue) => {

@@ -9,6 +9,9 @@ export default defineConfig({
             "components/**/*.test.ts?(x)",
             "utils/**/*.test.ts?(x)",
         ],
+        coverage: {
+            provider: "v8",
+        },
     },
     resolve: {
         alias: {

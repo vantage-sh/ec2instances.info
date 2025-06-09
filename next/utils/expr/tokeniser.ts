@@ -527,7 +527,7 @@ function tokeniseJoiner(
     // Make sure the second joiner is there
     if (value[offsetAfterFirstJoiner] !== joiner) {
         throw new Error(
-            `Expected ${value[offsetAfterFirstJoiner]} at position ${offsetAfterFirstJoiner}`,
+            `Unexpected character ${value[offsetAfterFirstJoiner]} at position ${offsetAfterFirstJoiner}`,
         );
     }
 
