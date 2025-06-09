@@ -12,7 +12,7 @@ export default defineConfig({
         exclude: ["public", "out", ".next"],
         coverage: {
             provider: "v8",
-            exclude: ["public", "out", ".next"],
+            exclude: ["public", "out", ".next", "utils/testing"],
         },
     },
     resolve: {
