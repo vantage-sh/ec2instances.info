@@ -30,9 +30,12 @@ jobs:
             - uses: actions/checkout@v2
             - name: un-tar a URL at the root of the repo
               run: curl -L https://instances.vantagestaging.sh/www_pre_build.tar.gz | tar -xzf -
+            - uses: actions/setup-node@v4
+              with:
+                  node-version-file: next/.nvmrc
             - name: Initialize the test environment
-              run: cd next && nvm install && nvm use && npm ci && npm run init
+              run: cd next && npm ci && npm run init
             - name: Check types
-              run: cd next && nvm use && npm run check-types
+              run: cd next && npm run check-types
             - name: Run unit tests
-              run: cd next && nvm use && npm run test
+              run: cd next && npm run test
