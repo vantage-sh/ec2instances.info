@@ -31,8 +31,8 @@ jobs:
             - name: un-tar a URL at the root of the repo
               run: curl -L https://instances.vantagestaging.sh/www_pre_build.tar.gz | tar -xzf -
             - name: Initialize the test environment
-              run: cd next && npm ci && npm run init
+              run: cd next && nvm install && nvm use && npm ci && npm run init
             - name: Check types
-              run: cd next && npm run check-types
+              run: cd next && nvm use && npm run check-types
             - name: Run unit tests
-              run: cd next && npm run test
+              run: cd next && nvm use && npm run test
