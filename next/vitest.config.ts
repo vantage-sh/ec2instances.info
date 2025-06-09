@@ -9,8 +9,10 @@ export default defineConfig({
             "components/**/*.test.ts?(x)",
             "utils/**/*.test.ts?(x)",
         ],
+        exclude: ["public", "out", ".next"],
         coverage: {
             provider: "v8",
+            exclude: ["public", "out", ".next"],
         },
     },
     resolve: {
