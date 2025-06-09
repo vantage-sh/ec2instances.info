@@ -38,4 +38,4 @@ jobs:
             - name: Check types
               run: cd next && npm run check-types
             - name: Run unit tests
-              run: cd next && npm run test
+              run: cd next && npm run test -- --coverage
