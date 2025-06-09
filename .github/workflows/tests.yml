@@ -1,4 +1,4 @@
-name: Lint
+name: Tests
 on: push
 
 jobs:
@@ -23,9 +23,16 @@ jobs:
             - run: |-
                   prettier --check .
 
-    check-types:
-        name: Check Types
+    tests:
+        name: Check Types and Run Tests
         runs-on: ubuntu-22.04
         steps:
             - uses: actions/checkout@v2
-            - run: cd next && npm ci && npm run check-types
+            - name: un-tar a URL at the root of the repo
+              run: curl -L https://instances.vantagestaging.sh/www_pre_build.tar.gz | tar -xzf -
+            - name: Initialize the test environment
+              run: cd next && npm ci && npm run init
+            - name: Check types
+              run: cd next && npm run check-types
+            - name: Run unit tests
+              run: cd next && npm run test
