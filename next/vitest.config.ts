@@ -9,10 +9,16 @@ export default defineConfig({
             "components/**/*.test.ts?(x)",
             "utils/**/*.test.ts?(x)",
         ],
-        exclude: ["public", "out", ".next"],
+        exclude: ["public", "out", ".next", "utils/compressData.ts"],
         coverage: {
             provider: "v8",
-            exclude: ["public", "out", ".next", "utils/testing"],
+            exclude: [
+                "public",
+                "out",
+                ".next",
+                "utils/testing",
+                "utils/compressData.ts",
+            ],
         },
     },
     resolve: {

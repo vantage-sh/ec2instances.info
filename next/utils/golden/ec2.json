@@ -1,0 +1,187 @@
+[
+    {
+        "name": "Compute",
+        "slug": "compute",
+        "rows": [
+            {
+                "name": "vCPUs",
+                "children": 128
+            },
+            {
+                "name": "Memory (GiB)",
+                "children": 4096
+            },
+            {
+                "name": "Memory per vCPU (GiB)",
+                "children": 32
+            },
+            {
+                "name": "Physical Processor",
+                "children": "Intel Xeon Scalable (Icelake)"
+            },
+            {
+                "name": "Clock Speed (GHz)",
+                "children": "3.5 GHz"
+            },
+            {
+                "name": "CPU Architecture",
+                "children": "x86_64"
+            },
+            {
+                "name": "GPU",
+                "children": 0,
+                "bgStyled": true
+            },
+            {
+                "name": "GPU Architecture",
+                "children": "none",
+                "bgStyled": true
+            },
+            {
+                "name": "Video Memory (GiB)",
+                "children": "0"
+            },
+            {
+                "name": "GPU Compute Capability",
+                "help": "https://handbook.vantage.sh/aws/reference/aws-gpu-instances/",
+                "children": "0"
+            },
+            {
+                "name": "FPGA",
+                "children": 0,
+                "bgStyled": true
+            }
+        ]
+    },
+    {
+        "name": "Networking",
+        "slug": "networking",
+        "rows": [
+            {
+                "name": "Network Performance (Gibps)",
+                "children": "100"
+            },
+            {
+                "name": "Enhanced Networking",
+                "children": true,
+                "bgStyled": true
+            },
+            {
+                "name": "IPv6",
+                "children": true,
+                "bgStyled": true
+            },
+            {
+                "name": "Placement Group",
+                "help": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html",
+                "children": true
+            }
+        ]
+    },
+    {
+        "name": "Storage",
+        "slug": "storage",
+        "rows": [
+            {
+                "name": "EBS Optimized",
+                "children": true,
+                "bgStyled": true
+            },
+            {
+                "name": "Max Bandwidth (Mbps) on",
+                "helpText": "EBS",
+                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                "children": 80000
+            },
+            {
+                "name": "Max Throughput (MB/s) on",
+                "helpText": "EBS",
+                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                "children": 10000
+            },
+            {
+                "name": "Max I/O operations/second",
+                "helpText": "IOPS",
+                "help": "https://handbook.vantage.sh/aws/concepts/io-operations/",
+                "children": 260000
+            },
+            {
+                "name": "Baseline Bandwidth (Mbps) on",
+                "helpText": "EBS",
+                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                "children": 80000
+            },
+            {
+                "name": "Baseline Throughput (MB/s) on",
+                "helpText": "EBS",
+                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                "children": 10000
+            },
+            {
+                "name": "Baseline I/O operations/second",
+                "helpText": "IOPS",
+                "help": "https://handbook.vantage.sh/aws/concepts/io-operations/",
+                "children": 260000
+            },
+            {
+                "name": "Devices",
+                "children": 2
+            },
+            {
+                "name": "Swap Partition",
+                "children": false,
+                "bgStyled": true
+            },
+            {
+                "name": "NVME Drive",
+                "help": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances",
+                "children": true,
+                "bgStyled": true
+            },
+            {
+                "name": "Disk Space (GiB)",
+                "children": 1900
+            },
+            {
+                "name": "SSD",
+                "children": true,
+                "bgStyled": true
+            },
+            {
+                "name": "Initialize Storage",
+                "children": false,
+                "bgStyled": true
+            }
+        ]
+    },
+    {
+        "name": "Amazon",
+        "slug": "amazon",
+        "rows": [
+            {
+                "name": "Generation",
+                "children": "current",
+                "bgStyled": true
+            },
+            {
+                "name": "Instance Type",
+                "children": "x2iedn.32xlarge"
+            },
+            {
+                "name": "Family",
+                "children": "Memory optimized"
+            },
+            {
+                "name": "Name",
+                "children": "X2IEDN 32xlarge"
+            },
+            {
+                "name": "Elastic Map Reduce",
+                "helpText": "EMR",
+                "help": "https://handbook.vantage.sh/aws/services/emr-pricing/",
+                "children": true,
+                "bgStyled": true
+            }
+        ]
+    }
+]
