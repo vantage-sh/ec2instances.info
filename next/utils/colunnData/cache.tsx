@@ -140,6 +140,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.Redis?.ondemand,
+            true,
         ),
     },
     {
@@ -151,6 +152,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.Redis?.reserved?.[reservedTerm],
+            true,
         ),
     },
     {
@@ -162,6 +164,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.Memcached?.ondemand,
+            true,
         ),
     },
     {
@@ -173,6 +176,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.Memcached?.reserved?.[reservedTerm],
+            true,
         ),
     },
     {
@@ -184,6 +188,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.Valkey?.ondemand,
+            true,
         ),
     },
     {
@@ -195,6 +200,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.Valkey?.reserved?.[reservedTerm],
+            true,
         ),
     },
     {

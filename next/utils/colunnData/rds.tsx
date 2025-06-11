@@ -262,6 +262,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["14"]?.ondemand,
+            true,
         ),
     },
     {
@@ -273,6 +274,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["14"]?.reserved?.[reservedTerm],
+            true,
         ),
     },
     {
@@ -284,6 +286,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["2"]?.ondemand,
+            true,
         ),
     },
     {
@@ -295,6 +298,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["2"]?.reserved?.[reservedTerm],
+            true,
         ),
     },
     {
@@ -306,6 +310,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["10"]?.ondemand,
+            true,
         ),
     },
     {
@@ -317,6 +322,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["10"]?.reserved?.[reservedTerm],
+            true,
         ),
     },
     {
@@ -328,6 +334,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["11"]?.ondemand,
+            true,
         ),
     },
     {
@@ -339,6 +346,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["11"]?.reserved?.[reservedTerm],
+            true,
         ),
     },
     {
@@ -350,6 +358,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["12"]?.ondemand,
+            true,
         ),
     },
     {
@@ -361,6 +370,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["12"]?.reserved?.[reservedTerm],
+            true,
         ),
     },
     {
@@ -372,6 +382,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["15"]?.ondemand,
+            true,
         ),
     },
     {
@@ -383,6 +394,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["15"]?.reserved?.[reservedTerm],
+            true,
         ),
     },
     {
@@ -394,6 +406,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["21"]?.ondemand,
+            true,
         ),
     },
     {
@@ -405,6 +418,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["21"]?.reserved?.[reservedTerm],
+            true,
         ),
     },
     {
@@ -416,6 +430,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["211"]?.ondemand,
+            true,
         ),
     },
     {
@@ -427,6 +442,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["18"]?.ondemand,
+            true,
         ),
     },
     {
@@ -438,6 +454,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["18"]?.reserved?.[reservedTerm],
+            true,
         ),
     },
     {
@@ -449,6 +466,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["5"]?.ondemand,
+            true,
         ),
     },
     {
@@ -460,6 +478,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.["5"]?.reserved?.[reservedTerm],
+            true,
         ),
     },
     {
