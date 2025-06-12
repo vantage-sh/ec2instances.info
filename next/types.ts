@@ -50,7 +50,6 @@ export interface EC2Instance {
     };
     arch: string[];
     network_performance: string;
-    network_sort: number;
     ebs_baseline_bandwidth?: number;
     ebs_baseline_throughput: number;
     ebs_baseline_iops: number;

@@ -1,33 +1,6 @@
 import { EC2Instance } from "@/types";
 
-function networkSort(instance: EC2Instance) {
-    const perf = instance.network_performance;
-    const network_rank = [
-        "Very Low",
-        "Low",
-        "Low to Moderate",
-        "Moderate",
-        "High",
-        "Up to 5 Gigabit",
-        "Up to 10 Gigabit",
-        "10 Gigabit",
-        "12 Gigabit",
-        "20 Gigabit",
-        "Up to 25 Gigabit",
-        "25 Gigabit",
-        "50 Gigabit",
-        "75 Gigabit",
-        "100 Gigabit",
-    ];
-    try {
-        const sort = network_rank.indexOf(perf);
-        return sort * 2;
-    } catch {
-        return network_rank.length * 2;
-    }
-}
-
-function addCpuDetail(instance: EC2Instance) {
+export default function addRenderInfo(instance: EC2Instance) {
     if (typeof instance.ECU === "number" && typeof instance.vCPU === "number") {
         instance.ECU_per_vcpu = instance.ECU / instance.vCPU;
     } else {
@@ -45,11 +18,4 @@ function addCpuDetail(instance: EC2Instance) {
             "",
         );
     }
-}
-
-export default function addRenderInfo(instance: EC2Instance) {
-    try {
-        instance.network_sort = networkSort(instance);
-    } catch {}
-    addCpuDetail(instance);
 }

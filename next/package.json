@@ -2,7 +2,7 @@
     "name": "instances",
     "private": true,
     "scripts": {
-        "init": "tsx utils/compressData.ts",
+        "init": "tsx cli/compressData.ts",
         "dev": "next dev --turbopack",
         "build:llms": "rimraf public/azure && rimraf public/aws && tsx llms/index.ts",
         "build:next": "next build",

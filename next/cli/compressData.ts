@@ -2,9 +2,9 @@ import { EC2Instance, Region } from "@/types";
 import { readFile, writeFile } from "fs/promises";
 import { encode } from "@msgpack/msgpack";
 import { compress } from "lzma-native";
-import addRenderInfo from "./addRenderInfo";
-import makeRainbowTable from "./makeRainbowTable";
-import formatAzureInstanceType from "./formatAzureInstanceType";
+import addRenderInfo from "@/utils/addRenderInfo";
+import makeRainbowTable from "@/utils/makeRainbowTable";
+import formatAzureInstanceType from "@/utils/formatAzureInstanceType";
 import { createHash } from "crypto";
 
 const PIPELINE_SIZE = 10;
