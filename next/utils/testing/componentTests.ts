@@ -9,7 +9,11 @@ import axe from "axe-core";
 type TestItem<Props extends Record<string, unknown>> = {
     name: string;
     props: Props;
-    test: (component: RenderResult) => void;
+    patch?: {
+        before?: () => void;
+        after?: () => void;
+    };
+    test?: (component: RenderResult) => void;
 };
 
 export default function componentTests<Test extends TestItem<any>>(
@@ -22,6 +26,8 @@ export default function componentTests<Test extends TestItem<any>>(
                 const originalReact = window.React;
                 window.React = React;
 
+                t.patch?.before?.();
+
                 try {
                     const res = render(React.createElement(component, t.props));
                     const results = await axe.run(res.container);
@@ -29,21 +35,30 @@ export default function componentTests<Test extends TestItem<any>>(
                     res.unmount();
                 } finally {
                     window.React = originalReact;
+                    t.patch?.after?.();
                 }
             });
 
-            test("function called successfully", () => {
-                const originalReact = window.React;
-                window.React = React;
+            const testFn = t.test;
+            if (testFn) {
+                test("function called successfully", () => {
+                    const originalReact = window.React;
+                    window.React = React;
 
-                try {
-                    const res = render(React.createElement(component, t.props));
-                    t.test(res);
-                    res.unmount();
-                } finally {
-                    window.React = originalReact;
-                }
-            });
+                    t.patch?.before?.();
+
+                    try {
+                        const res = render(
+                            React.createElement(component, t.props),
+                        );
+                        testFn(res);
+                        res.unmount();
+                    } finally {
+                        window.React = originalReact;
+                        t.patch?.after?.();
+                    }
+                });
+            }
         });
     }
 }
