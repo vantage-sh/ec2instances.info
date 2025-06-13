@@ -1,8 +1,8 @@
-import { RenderResult } from "@testing-library/react";
 import { expect } from "vitest";
 import componentTests from "@/utils/testing/componentTests";
 import PricingCalculator from "./PricingCalculator";
 import makeRainbowTable from "@/utils/makeRainbowTable";
+import { fireEvent } from "@testing-library/react";
 
 const mockPricing = {
     "us-east-1": {
@@ -66,130 +66,234 @@ const defaultProps = {
     removeSpot: false,
     defaultRegion: "us-east-1",
     useSpotMin: false,
-    setPathSuffix: () => {},
+    setPathSuffix: () => {
+        throw new Error("setPathSuffix should not be called");
+    },
 };
 
 const [rainbowTable, compressedInstance] = makeRainbowTable([
     { pricing: mockPricing },
 ]);
 
-const tests = [
-    {
-        name: "decompresses on render",
-        props: {
-            ...defaultProps,
-            compressedInstance: compressedInstance as any,
-            rainbowTable: rainbowTable as string[],
-        },
-    },
-    {
-        name: "renders basic pricing information",
-        props: defaultProps,
-        test: (component: RenderResult) => {
-            const prices = component.container.querySelectorAll("p");
-            expect(prices[0].textContent).toBe("$0.1");
-            expect(prices[1].textContent).toBe("On Demand");
-            expect(prices[2].textContent).toBe("$0.05");
-            expect(prices[3].textContent).toBe("Spot");
-        },
-    },
-    {
-        name: "renders with spot prices removed",
-        props: {
-            ...defaultProps,
-            removeSpot: true,
-        },
-        test: (component: RenderResult) => {
-            const prices = component.container.querySelectorAll("p");
-            expect(prices[0].textContent).toBe("$0.1");
-            expect(prices[1].textContent).toBe("On Demand");
-            expect(prices[2].textContent).toBe("$0.08");
-            expect(prices[3].textContent).toBe("1-Year Reserved");
-        },
-    },
-    {
-        name: "renders with spot minimum prices",
-        props: {
-            ...defaultProps,
-            useSpotMin: true,
-        },
-        test: (component: RenderResult) => {
-            const prices = component.container.querySelectorAll("p");
-            expect(prices[0].textContent).toBe("$0.1");
-            expect(prices[1].textContent).toBe("On Demand");
-            expect(prices[2].textContent).toBe("$0.03");
-            expect(prices[3].textContent).toBe("Spot");
-        },
-    },
-    {
-        name: "renders with different OS options",
-        props: {
-            ...defaultProps,
-            defaultOs: "windows",
-        },
-        test: (component: RenderResult) => {
-            const prices = component.container.querySelectorAll("p");
-            expect(prices[0].textContent).toBe("$0.2");
-            expect(prices[1].textContent).toBe("On Demand");
-            expect(prices[2].textContent).toBe("$0.1");
-            expect(prices[3].textContent).toBe("Spot");
-        },
-    },
-    {
-        name: "renders with different duration",
-        props: defaultProps,
-        patch: {
-            before: () => {
-                const url = new URL(window.location.href);
-                url.searchParams.set("duration", "monthly");
-                window.history.replaceState({}, "", url.toString());
+let pathSuffix = "";
+
+componentTests(
+    [
+        // Initial render tests
+
+        {
+            name: "decompresses on render",
+            props: {
+                ...defaultProps,
+                compressedInstance: compressedInstance as any,
+                rainbowTable: rainbowTable as string[],
             },
         },
-        test: (component: RenderResult) => {
-            const prices = component.container.querySelectorAll("p");
-            expect(prices[0].textContent).toBe("$73");
-            expect(prices[1].textContent).toBe("On Demand");
-            expect(prices[2].textContent).toBe("$36.5");
-            expect(prices[3].textContent).toBe("Spot");
-        },
-    },
-    {
-        name: "renders with different region",
-        props: defaultProps,
-        patch: {
-            before: () => {
-                const url = new URL(window.location.href);
-                url.searchParams.set("region", "us-west-1");
-                window.history.replaceState({}, "", url.toString());
+        {
+            name: "renders basic pricing information",
+            props: defaultProps,
+            test: (component) => {
+                const prices = component.container.querySelectorAll("p");
+                expect(prices[0].textContent).toBe("$0.1");
+                expect(prices[1].textContent).toBe("On Demand");
+                expect(prices[2].textContent).toBe("$0.05");
+                expect(prices[3].textContent).toBe("Spot");
             },
         },
-        test: (component: RenderResult) => {
-            const prices = component.container.querySelectorAll("p");
-            expect(prices[0].textContent).toBe("$219");
-            expect(prices[1].textContent).toBe("On Demand");
-            expect(prices[2].textContent).toBe("$36.5");
-            expect(prices[3].textContent).toBe("Spot");
+        {
+            name: "renders with spot prices removed",
+            props: {
+                ...defaultProps,
+                removeSpot: true,
+            },
+            test: (component) => {
+                const prices = component.container.querySelectorAll("p");
+                expect(prices[0].textContent).toBe("$0.1");
+                expect(prices[1].textContent).toBe("On Demand");
+                expect(prices[2].textContent).toBe("$0.08");
+                expect(prices[3].textContent).toBe("1-Year Reserved");
+            },
         },
-    },
-    {
-        name: "hides different OS options when only one is available",
-        props: {
-            ...defaultProps,
-            compressedInstance: {
-                pricing: {
-                    "us-east-1": {
-                        value: {
-                            ondemand: "0.1",
+        {
+            name: "renders with spot minimum prices",
+            props: {
+                ...defaultProps,
+                useSpotMin: true,
+            },
+            test: (component) => {
+                const prices = component.container.querySelectorAll("p");
+                expect(prices[0].textContent).toBe("$0.1");
+                expect(prices[1].textContent).toBe("On Demand");
+                expect(prices[2].textContent).toBe("$0.03");
+                expect(prices[3].textContent).toBe("Spot");
+            },
+        },
+        {
+            name: "renders with different OS options",
+            props: {
+                ...defaultProps,
+                defaultOs: "windows",
+            },
+            test: (component) => {
+                const prices = component.container.querySelectorAll("p");
+                expect(prices[0].textContent).toBe("$0.2");
+                expect(prices[1].textContent).toBe("On Demand");
+                expect(prices[2].textContent).toBe("$0.1");
+                expect(prices[3].textContent).toBe("Spot");
+            },
+        },
+        {
+            name: "renders with different duration",
+            props: defaultProps,
+            patch: {
+                before: () => {
+                    const url = new URL(window.location.href);
+                    url.searchParams.set("duration", "monthly");
+                    window.history.replaceState({}, "", url.toString());
+                },
+            },
+            test: (component) => {
+                const prices = component.container.querySelectorAll("p");
+                expect(prices[0].textContent).toBe("$73");
+                expect(prices[1].textContent).toBe("On Demand");
+                expect(prices[2].textContent).toBe("$36.5");
+                expect(prices[3].textContent).toBe("Spot");
+            },
+        },
+        {
+            name: "renders with different region",
+            props: defaultProps,
+            patch: {
+                before: () => {
+                    const url = new URL(window.location.href);
+                    url.searchParams.set("region", "us-west-1");
+                    window.history.replaceState({}, "", url.toString());
+                },
+            },
+            test: (component) => {
+                const prices = component.container.querySelectorAll("p");
+                expect(prices[0].textContent).toBe("$0.3");
+                expect(prices[1].textContent).toBe("On Demand");
+                expect(prices[2].textContent).toBe("$0.05");
+                expect(prices[3].textContent).toBe("Spot");
+            },
+        },
+        {
+            name: "hides different OS options when only one is available",
+            props: {
+                ...defaultProps,
+                compressedInstance: {
+                    pricing: {
+                        "us-east-1": {
+                            value: {
+                                ondemand: "0.1",
+                            },
                         },
                     },
                 },
             },
+            test: (component) => {
+                const selects = component.container.querySelectorAll("select");
+                expect(selects.length).toBe(3);
+            },
         },
-        test: (component: RenderResult) => {
-            const selects = component.container.querySelectorAll("select");
-            expect(selects.length).toBe(3);
+        {
+            name: "select's aria-controls is set to the id of the pricing calculator",
+            props: defaultProps,
+            skipAxe: true,
+            test: (component) => {
+                const selects = component.container.querySelectorAll(
+                    "select[aria-controls]",
+                );
+                const labels: string[] = [];
+                const idSet: Set<string> = new Set();
+                for (const select of selects) {
+                    labels.push(select.getAttribute("aria-label")!);
+                    idSet.add(select.getAttribute("aria-controls")!);
+                }
+                expect(labels).toEqual([
+                    "Region",
+                    "Platform",
+                    "Duration",
+                    "Pricing Type",
+                ]);
+                expect(idSet.size).toBe(1);
+            },
         },
-    },
-];
 
-componentTests(tests, PricingCalculator);
+        // Handle changing select values
+
+        {
+            name: "region is changed",
+            props: {
+                ...defaultProps,
+                setPathSuffix: (suffix: string) => (pathSuffix = suffix),
+            },
+            patch: {
+                before: () => (pathSuffix = ""),
+                after: () => (pathSuffix = ""),
+            },
+            test: (component) => {
+                const region = component.container.querySelector("select")!;
+                const onDemandPrice = component.container.querySelector(
+                    "p[data-testid='On Demand']",
+                )!;
+                expect(onDemandPrice.textContent).toBe("$0.1");
+                fireEvent.change(region, { target: { value: "us-west-1" } });
+                expect(pathSuffix).toBe("?region=us-west-1");
+                expect(document.location.search).toBe("?region=us-west-1");
+
+                expect(onDemandPrice.textContent).toBe("$0.3");
+            },
+        },
+        {
+            name: "platform is changed",
+            props: {
+                ...defaultProps,
+                setPathSuffix: (suffix: string) => (pathSuffix = suffix),
+            },
+            patch: {
+                before: () => (pathSuffix = ""),
+                after: () => (pathSuffix = ""),
+            },
+            test: (component) => {
+                const platform = component.container.querySelector(
+                    "select:nth-child(2)",
+                )!;
+                const onDemandPrice = component.container.querySelector(
+                    "p[data-testid='On Demand']",
+                )!;
+                expect(onDemandPrice.textContent).toBe("$0.1");
+                fireEvent.change(platform, { target: { value: "windows" } });
+                expect(pathSuffix).toBe("?platform=windows");
+                expect(document.location.search).toBe("?platform=windows");
+                expect(onDemandPrice.textContent).toBe("$0.2");
+            },
+        },
+        {
+            name: "duration is changed",
+            props: {
+                ...defaultProps,
+                setPathSuffix: (suffix: string) => (pathSuffix = suffix),
+            },
+            patch: {
+                before: () => (pathSuffix = ""),
+                after: () => (pathSuffix = ""),
+            },
+            test: (component) => {
+                const duration = component.container.querySelector(
+                    "select:nth-child(3)",
+                )!;
+                const onDemandPrice = component.container.querySelector(
+                    "p[data-testid='On Demand']",
+                )!;
+                expect(onDemandPrice.textContent).toBe("$0.1");
+                fireEvent.change(duration, { target: { value: "monthly" } });
+                expect(pathSuffix).toBe("?duration=monthly");
+                expect(document.location.search).toBe("?duration=monthly");
+                expect(onDemandPrice.textContent).toBe("$73");
+            },
+        },
+    ],
+    PricingCalculator,
+);

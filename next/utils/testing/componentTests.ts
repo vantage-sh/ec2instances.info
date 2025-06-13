@@ -9,11 +9,12 @@ import axe from "axe-core";
 type TestItem<Props extends Record<string, unknown>> = {
     name: string;
     props: Props;
+    skipAxe?: boolean;
     patch?: {
         before?: () => void;
         after?: () => void;
     };
-    test?: (component: RenderResult) => void;
+    test?: (component: RenderResult, rerender: () => void) => void;
 };
 
 export default function componentTests<Test extends TestItem<any>>(
@@ -22,28 +23,12 @@ export default function componentTests<Test extends TestItem<any>>(
 ) {
     for (const t of tests) {
         describe(t.name, () => {
-            test("passes axe accessibility checks", async () => {
-                const originalReact = window.React;
-                window.React = React;
-
-                t.patch?.before?.();
-
-                try {
-                    const res = render(React.createElement(component, t.props));
-                    const results = await axe.run(res.container);
-                    expect(results.violations).toEqual([]);
-                    res.unmount();
-                } finally {
-                    window.React = originalReact;
-                    t.patch?.after?.();
-                }
-            });
-
-            const testFn = t.test;
-            if (testFn) {
-                test("function called successfully", () => {
+            if (t.skipAxe !== true) {
+                test("passes axe accessibility checks", async () => {
                     const originalReact = window.React;
                     window.React = React;
+
+                    const originalUrl = new URL(window.location.href);
 
                     t.patch?.before?.();
 
@@ -51,10 +36,45 @@ export default function componentTests<Test extends TestItem<any>>(
                         const res = render(
                             React.createElement(component, t.props),
                         );
-                        testFn(res);
+                        const results = await axe.run(res.container);
+                        expect(results.violations).toEqual([]);
                         res.unmount();
                     } finally {
                         window.React = originalReact;
+                        window.history.replaceState(
+                            {},
+                            "",
+                            originalUrl.toString(),
+                        );
+                        t.patch?.after?.();
+                    }
+                });
+            }
+
+            const testFn = t.test;
+            if (testFn) {
+                test("function called successfully", () => {
+                    const originalReact = window.React;
+                    window.React = React;
+
+                    const originalUrl = new URL(window.location.href);
+
+                    t.patch?.before?.();
+                    const el = React.createElement(component, t.props);
+
+                    try {
+                        const res = render(el);
+                        testFn(res, () => {
+                            res.rerender(el);
+                        });
+                        res.unmount();
+                    } finally {
+                        window.React = originalReact;
+                        window.history.replaceState(
+                            {},
+                            "",
+                            originalUrl.toString(),
+                        );
                         t.patch?.after?.();
                     }
                 });
