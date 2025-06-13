@@ -2,7 +2,14 @@
 
 import { CostDuration, Region } from "@/types";
 import { DollarSignIcon } from "lucide-react";
-import { useMemo, useState, useId, useEffect, useCallback } from "react";
+import {
+    useMemo,
+    useState,
+    useId,
+    useEffect,
+    useCallback,
+    SelectHTMLAttributes,
+} from "react";
 import processRainbowTable from "@/utils/processRainbowTable";
 import { durationOptions } from "@/utils/dataMappings";
 
@@ -264,6 +271,7 @@ function Calculator({
 
             <div className="mt-4 grid grid-cols-2 gap-2">
                 <select
+                    aria-label="Region"
                     aria-controls={priceHoldersId}
                     value={region}
                     className={selectStyling}
@@ -276,6 +284,7 @@ function Calculator({
 
                 {defaultPlatform === defaultOs && (
                     <select
+                        aria-label="Platform"
                         aria-controls={priceHoldersId}
                         value={platform}
                         className={selectStyling}
@@ -290,6 +299,7 @@ function Calculator({
                 )}
 
                 <select
+                    aria-label="Duration"
                     aria-controls={priceHoldersId}
                     value={duration}
                     className={selectStyling}
@@ -305,6 +315,7 @@ function Calculator({
                 </select>
 
                 <select
+                    aria-label="Pricing Type"
                     aria-controls={priceHoldersId}
                     value={pricingType}
                     className={selectStyling}

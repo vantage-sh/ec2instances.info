@@ -1,0 +1,25 @@
+---
+description: 
+globs: next/**/*.ts,next/**/*.tsx
+alwaysApply: false
+---
+Any tests use Vitest. Never use Jest. Never use Jest related libraries. Tests go in the same folder as the application logic suffixed .test.ts. Don't use Object.defineProperty, instead use the vi.mock functionality at the root (have a global variable and then in beforeAll create the mock function which points to it and in afterAll destroy the mocks in the root of the test file). For component tests, use "@/utils/testing/componentTests" with the default import componentTests. The signature for this module is the following:
+
+```ts
+type TestItem<Props extends Record<string, unknown>> = {
+    name: string;
+    props: Props;
+    patch?: {
+        before?: () => void;
+        after?: () => void;
+    };
+    test?: (component: import("@testing-library/react").RenderResult) => void;
+};
+
+export default function componentTests<Test extends TestItem<any>>(
+    tests: Test[],
+    component: React.ComponentType<Test["props"]>,
+): void;
+```
+
+This module will create the describe/test logic for vitest so don't add that. In component tests, NEVER use describe or test. The componentTests function will do that for you, instead make a test table. Try to find uses to pass judgement. Don't use "@testing-library/jest-dom". If this is a component test, presume you are in a DOM. Prefer .ts over .tsx. Do not do snapshot tests. Instead prefer asserting. Do not use screen, instead use component.container in the test function. You will need to import any test utilities (such as expect) from vitest.
