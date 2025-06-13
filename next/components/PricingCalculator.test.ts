@@ -1,4 +1,4 @@
-import { fireEvent, RenderResult } from "@testing-library/react";
+import { RenderResult } from "@testing-library/react";
 import { expect } from "vitest";
 import componentTests from "@/utils/testing/componentTests";
 import PricingCalculator from "./PricingCalculator";

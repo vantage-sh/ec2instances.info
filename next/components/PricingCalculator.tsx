@@ -2,14 +2,7 @@
 
 import { CostDuration, Region } from "@/types";
 import { DollarSignIcon } from "lucide-react";
-import {
-    useMemo,
-    useState,
-    useId,
-    useEffect,
-    useCallback,
-    SelectHTMLAttributes,
-} from "react";
+import { useMemo, useState, useId, useEffect, useCallback } from "react";
 import processRainbowTable from "@/utils/processRainbowTable";
 import { durationOptions } from "@/utils/dataMappings";
 
