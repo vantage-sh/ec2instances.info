@@ -9,7 +9,7 @@ Any tests use Vitest. Never use Jest. Never use Jest related libraries. Tests go
 type TestItem<Props extends Record<string, unknown>> = {
     name: string;
     props: Props;
-    skipAxe?: boolean; // defaults to true if undefined
+    skipAxe?: boolean; // defaults to false if undefined, omly set to true if its purely a logic test
     patch?: {
         before?: () => void;
         after?: () => void;
