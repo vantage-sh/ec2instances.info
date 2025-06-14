@@ -1,10 +1,28 @@
-import { AzureInstance } from "./colunnData/azure";
-
 function titleCase(str: string) {
     return str.replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
-export default function generateAzureDescription(instance: AzureInstance) {
+export default function generateAzureDescription<
+    Instance extends {
+        instance_type: string;
+        family: string;
+        vcpu: number;
+        memory: number;
+        pretty_name_azure: string;
+        pricing: {
+            [region: string]: {
+                linux?: {
+                    ondemand?: string;
+                    spot_min?: string;
+                };
+                windows?: {
+                    ondemand?: string;
+                    spot_min?: string;
+                };
+            };
+        };
+    },
+>(instance: Instance) {
     let region = instance.pricing["us-east"];
     if (!region) {
         region = instance.pricing[Object.keys(instance.pricing)[0]];
@@ -13,7 +31,7 @@ export default function generateAzureDescription(instance: AzureInstance) {
     if (!platform) {
         platform = region.windows;
         if (!platform) {
-            platform = region[Object.keys(region)[0]];
+            platform = region[Object.keys(region)[0] as keyof typeof region];
         }
     }
     if (!platform) {

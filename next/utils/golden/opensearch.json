@@ -1,0 +1,53 @@
+[
+    {
+        "name": "Compute",
+        "slug": "Compute",
+        "rows": [
+            {
+                "name": "CPUs",
+                "children": "2"
+            },
+            {
+                "name": "Memory (GiB)",
+                "children": "8"
+            },
+            {
+                "name": "Memory per vCPU (GiB)",
+                "children": 4
+            }
+        ]
+    },
+    {
+        "name": "Storage",
+        "slug": "Storage",
+        "rows": [
+            {
+                "name": "Storage",
+                "children": "EBS Only"
+            }
+        ]
+    },
+    {
+        "name": "Amazon",
+        "slug": "Amazon",
+        "rows": [
+            {
+                "name": "Generation",
+                "children": "current",
+                "bgStyled": true
+            },
+            {
+                "name": "Instance Type",
+                "children": "m5.large.search"
+            },
+            {
+                "name": "Family",
+                "children": "General purpose"
+            },
+            {
+                "name": "Name",
+                "children": "M5 General Purpose Large"
+            }
+        ]
+    }
+]

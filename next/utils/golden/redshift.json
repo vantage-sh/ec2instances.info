@@ -1,0 +1,77 @@
+[
+    {
+        "name": "Compute",
+        "slug": "Compute",
+        "rows": [
+            {
+                "name": "CPUs",
+                "children": "2"
+            },
+            {
+                "name": "Memory",
+                "children": "15"
+            },
+            {
+                "name": "Memory per vCPU (GiB)",
+                "children": 7.5
+            },
+            {
+                "name": "Default Slices per Node",
+                "children": "2"
+            },
+            {
+                "name": "Node Range",
+                "children": "1–32"
+            }
+        ]
+    },
+    {
+        "name": "Storage",
+        "slug": "Storage",
+        "rows": [
+            {
+                "name": "Storage",
+                "children": "0.16TB SSD"
+            },
+            {
+                "name": "I/O GiBps",
+                "children": "0.60 GB/s"
+            },
+            {
+                "name": "ECU",
+                "children": "7"
+            },
+            {
+                "name": "Max Storage per Node",
+                "children": "160 GB NVMe-SSD"
+            },
+            {
+                "name": "Max Storage Capacity",
+                "children": "5.12 TB"
+            }
+        ]
+    },
+    {
+        "name": "Amazon",
+        "slug": "Amazon",
+        "rows": [
+            {
+                "name": "Generation",
+                "children": "current",
+                "bgStyled": true
+            },
+            {
+                "name": "Instance Type",
+                "children": "dc2.large"
+            },
+            {
+                "name": "Family",
+                "children": "Dense Compute"
+            },
+            {
+                "name": "Name",
+                "children": "Dense Compute DC2 Large"
+            }
+        ]
+    }
+]

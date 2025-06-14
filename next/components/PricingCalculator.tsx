@@ -255,7 +255,9 @@ function Calculator({
                 <div className="flex gap-4 w-full flex-wrap">
                     {prices.map(({ label, value }) => (
                         <div key={label} className="flex-col">
-                            <p className="font-bold">{value}</p>
+                            <p className="font-bold" data-testid={label}>
+                                {value}
+                            </p>
                             <p className="text-xs text-gray-3">{label}</p>
                         </div>
                     ))}
@@ -264,6 +266,7 @@ function Calculator({
 
             <div className="mt-4 grid grid-cols-2 gap-2">
                 <select
+                    aria-label="Region"
                     aria-controls={priceHoldersId}
                     value={region}
                     className={selectStyling}
@@ -276,6 +279,7 @@ function Calculator({
 
                 {defaultPlatform === defaultOs && (
                     <select
+                        aria-label="Platform"
                         aria-controls={priceHoldersId}
                         value={platform}
                         className={selectStyling}
@@ -290,6 +294,7 @@ function Calculator({
                 )}
 
                 <select
+                    aria-label="Duration"
                     aria-controls={priceHoldersId}
                     value={duration}
                     className={selectStyling}
@@ -305,6 +310,7 @@ function Calculator({
                 </select>
 
                 <select
+                    aria-label="Pricing Type"
                     aria-controls={priceHoldersId}
                     value={pricingType}
                     className={selectStyling}

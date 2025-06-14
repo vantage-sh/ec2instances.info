@@ -1,0 +1,144 @@
+[
+    {
+        "name": "Compute",
+        "slug": "Compute",
+        "rows": [
+            {
+                "name": "vCPUs",
+                "children": 2
+            },
+            {
+                "name": "Memory (GiB)",
+                "children": 7
+            },
+            {
+                "name": "Memory per vCPU (GiB)",
+                "children": 3.5
+            },
+            {
+                "name": "CPU Architecture",
+                "children": "x64"
+            },
+            {
+                "name": "GPU",
+                "children": "0",
+                "bgStyled": true
+            },
+            {
+                "name": "Capacity Support",
+                "children": false,
+                "bgStyled": true
+            },
+            {
+                "name": "VM Generations Supported",
+                "children": "V1"
+            },
+            {
+                "name": "Low Priority",
+                "children": true,
+                "bgStyled": true
+            },
+            {
+                "name": "vCPUs per Physical Core",
+                "children": 1
+            },
+            {
+                "name": "VM Deployment Method",
+                "children": "IaaS,PaaS"
+            }
+        ]
+    },
+    {
+        "name": "Networking",
+        "slug": "Networking",
+        "rows": [
+            {
+                "name": "Accelerated Networking",
+                "children": false,
+                "bgStyled": true
+            }
+        ]
+    },
+    {
+        "name": "Storage",
+        "slug": "Storage",
+        "rows": [
+            {
+                "name": "Local Temp Storage (GiB)",
+                "children": 100
+            },
+            {
+                "name": "Cached Disk Size with Host Caching (GiB)",
+                "children": 0
+            },
+            {
+                "name": "Cached/Temp Storage Throughput (IOPS)",
+                "children": 6000
+            },
+            {
+                "name": "Cached/Temp Storage Read/Write Throughput (MBps)",
+                "children": 97
+            },
+            {
+                "name": "Uncached Disk Throughput (IOPS)",
+                "children": 0
+            },
+            {
+                "name": "Uncached Disk Read/Write Throughput (MBps)",
+                "children": 0
+            },
+            {
+                "name": "Premium I/O",
+                "children": false,
+                "bgStyled": true
+            },
+            {
+                "name": "Ultra Disks Supported",
+                "children": false,
+                "bgStyled": true
+            },
+            {
+                "name": "Encryption",
+                "children": false,
+                "bgStyled": true
+            },
+            {
+                "name": "Memory Maintenance",
+                "children": true,
+                "bgStyled": true
+            }
+        ]
+    },
+    {
+        "name": "Azure",
+        "slug": "Azure",
+        "rows": [
+            {
+                "name": "Instance Type",
+                "children": "d2"
+            },
+            {
+                "name": "Instance Name",
+                "children": "Standard D2"
+            },
+            {
+                "name": "Name",
+                "children": "D2"
+            },
+            {
+                "name": "Family",
+                "children": "d2"
+            },
+            {
+                "name": "Confidential",
+                "children": false,
+                "bgStyled": true
+            },
+            {
+                "name": "RDMA",
+                "children": false,
+                "bgStyled": true
+            }
+        ]
+    }
+]

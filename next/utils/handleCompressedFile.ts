@@ -31,7 +31,7 @@ export default function handleCompressedFile<Instance>(
     if (!pathFormatString.includes("{}")) {
         // If this isn't a pipeline, we can just use a single worker.
         const worker = new Worker(
-            new URL("./processor.worker.ts", import.meta.url),
+            new URL("./workers/processor.worker.ts", import.meta.url),
         );
         worker.onmessage = (e) => {
             instances = [...initialInstances, ...(e.data as Instance[])];
@@ -51,7 +51,7 @@ export default function handleCompressedFile<Instance>(
     const pipeline: Instance[][] = Array(PIPELINE_SIZE).fill([]);
     for (let i = 0; i < PIPELINE_SIZE; i++) {
         const worker = new Worker(
-            new URL("./processor.worker.ts", import.meta.url),
+            new URL("./workers/processor.worker.ts", import.meta.url),
         );
         const thisPipelineIndex = i;
         worker.onmessage = (e) => {

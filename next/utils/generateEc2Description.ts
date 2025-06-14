@@ -1,11 +1,14 @@
-import { EC2Instance } from "@/types";
-
 const LOW_MEDIUM_HIGH = /(low|moderate|high)/gi;
 
-export default function generateEc2Description(
-    instance: EC2Instance,
-    ondemandCost: string,
-) {
+export default function generateEc2Description<
+    Instance extends {
+        instance_type: string;
+        family: string;
+        vCPU: number;
+        memory: number;
+        network_performance: string;
+    },
+>(instance: Instance, ondemandCost: string) {
     let bw = "";
     if (instance.network_performance.match(LOW_MEDIUM_HIGH)) {
         bw = ` and ${instance.network_performance.toLowerCase()} network performance`;
