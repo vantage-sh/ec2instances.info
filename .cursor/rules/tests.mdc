@@ -1,5 +1,5 @@
 ---
-description: 
+description: Test rules
 globs: next/**/*.ts,next/**/*.tsx
 alwaysApply: false
 ---
@@ -23,4 +23,4 @@ export default function componentTests<Test extends TestItem<any>>(
 ): void;
 ```
 
-This module will create the describe/test logic for vitest so don't add that. In component tests, NEVER use describe or test. The componentTests function will do that for you, instead make a test table. Try to find uses to pass judgement. Don't use "@testing-library/jest-dom". If this is a component test, presume you are in a DOM. Prefer .ts over .tsx. Do not do snapshot tests. Instead prefer asserting. Do not use screen, instead use component.container in the test function. You will need to import any test utilities (such as expect) from vitest.
+This module will create the describe/test logic for vitest so don't add that. In component tests, NEVER use describe or test. The componentTests function will do that for you, instead make a test table and inline it inside the test function. Try to find uses to pass judgement. Don't use "@testing-library/jest-dom". If this is a component test, presume you are in a DOM. Prefer .ts over .tsx. Do not do snapshot tests. Instead prefer asserting. Do not use screen, instead use component.container in the test function. You will need to import any test utilities (such as expect) from vitest.
