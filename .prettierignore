@@ -10,6 +10,8 @@ next/out/
 next/public/
 next/.next/
 next/build/
+golden
+mocks
 next/next-env.d.ts
 .wrangler
 deployment/node_modules

@@ -49,7 +49,11 @@ export default function TopNav() {
         <nav className="flex items-center justify-between bg-purple-brand h-[3rem] py-2 px-4">
             <div className="flex items-center justify-start gap-4">
                 <div className="flex items-center justify-start gap-2">
-                    <Link href="/" className="font-medium text-gray-6">
+                    <Link
+                        href="/"
+                        className="font-medium text-gray-6"
+                        aria-hidden="true"
+                    >
                         <svg
                             width="28"
                             height="28"
@@ -113,7 +117,7 @@ export default function TopNav() {
                                         );
                                     return (
                                         <Link
-                                            aria-selected={selected}
+                                            aria-current={selected}
                                             className={`font-normal text-sm px-2 py-1 pb-2 rounded rounded-b-none ${
                                                 selected
                                                     ? "bg-white text-black font-semibold"
