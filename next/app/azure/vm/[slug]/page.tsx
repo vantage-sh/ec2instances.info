@@ -5,6 +5,8 @@ import formatAzureInstanceType from "@/utils/formatAzureInstanceType";
 import makeRainbowTable from "@/utils/makeRainbowTable";
 import AzureInstanceRoot from "@/components/AzureInstanceRoot";
 import generateAzureDescription from "@/utils/generateAzureDescription";
+import { Metadata } from "next";
+import { urlInject } from "@/utils/urlInject";
 
 export const dynamic = "force-static";
 
@@ -56,11 +58,16 @@ export async function generateMetadata({
     params,
 }: {
     params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
     const { description, instance } = await handleParams(params);
     return {
         title: `${instance.pretty_name} pricing and specs - Vantage`,
         description,
+        openGraph: {
+            images: [
+                urlInject`${"/azure/vm/" + instance.instance_type + ".png"}`,
+            ],
+        },
     };
 }
 
