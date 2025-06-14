@@ -13,6 +13,8 @@ const mockPricing = {
             reserved: {
                 "yrTerm1Standard.noUpfront": "0.08",
                 "yrTerm3Standard.noUpfront": "0.06",
+                "yrTerm1Standard.partialUpfront": "0.05",
+                "yrTerm3Standard.partialUpfront": "0.04",
             },
         },
         windows: {
@@ -292,6 +294,40 @@ componentTests(
                 expect(pathSuffix).toBe("?duration=monthly");
                 expect(document.location.search).toBe("?duration=monthly");
                 expect(onDemandPrice.textContent).toBe("$73");
+            },
+        },
+        {
+            name: "reserved term is changed",
+            props: {
+                ...defaultProps,
+                setPathSuffix: (suffix: string) => (pathSuffix = suffix),
+            },
+            patch: {
+                before: () => (pathSuffix = ""),
+                after: () => (pathSuffix = ""),
+            },
+            test: (component) => {
+                const reservedTerm = component.container.querySelector(
+                    "select:nth-child(4)",
+                )!;
+                const oneYearReservedPrice = component.container.querySelector(
+                    "p[data-testid='1-Year Reserved']",
+                )!;
+                const threeYearReservedPrice =
+                    component.container.querySelector(
+                        "p[data-testid='3-Year Reserved']",
+                    )!;
+                expect(oneYearReservedPrice.textContent).toBe("$0.08");
+                expect(threeYearReservedPrice.textContent).toBe("$0.06");
+                fireEvent.change(reservedTerm, {
+                    target: { value: "Standard.partialUpfront" },
+                });
+                expect(pathSuffix).toBe("?pricingType=Standard.partialUpfront");
+                expect(document.location.search).toBe(
+                    "?pricingType=Standard.partialUpfront",
+                );
+                expect(oneYearReservedPrice.textContent).toBe("$0.05");
+                expect(threeYearReservedPrice.textContent).toBe("$0.04");
             },
         },
     ],
