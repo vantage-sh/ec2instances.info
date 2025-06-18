@@ -15,7 +15,8 @@ compress-www:
 	mv www_pre_build.tar.gz www/www_pre_build.tar.gz
 
 next:
-	docker run -e NEXT_PUBLIC_URL -e DENY_ROBOTS_TXT -e NEXT_PUBLIC_REMOVE_ADVERTS -e OPENGRAPH_URL -v $(shell pwd):/app -w /app --rm -t node:$(shell cat next/.nvmrc | tr -d 'v')-alpine sh -c 'cd next && npm ci && npm run build'
+	docker build -t ec2instances-node -f next/Dockerfile.base .
+	docker run -e NEXT_PUBLIC_URL -e DENY_ROBOTS_TXT -e NEXT_PUBLIC_REMOVE_ADVERTS -e OPENGRAPH_URL -v $(shell pwd):/app -w /app --rm -t ec2instances-node sh -c 'cd next && npm ci && npm run build'
 	cp -a next/out/. www/
 
 package:

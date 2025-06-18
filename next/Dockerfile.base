@@ -1,0 +1,5 @@
+FROM node:22.15.0-bookworm
+RUN apt update && apt install -y \
+    build-essential \
+    python3 \
+    && rm -rf /var/lib/apt/lists/*
