@@ -28,6 +28,19 @@ To do a full build, you just need Docker installed. To develop this, however, yo
 
 The first thing you should do is run `npm ci` in the root. This is to ensure you have prettier installed as expected.
 
+You then need to either:
+
+- [Scrape the data locally](#scraping-the-data-locally)
+- If you aren't touching the scraper, run `curl -L https://instances.vantagestaging.sh/www_pre_build.tar.gz | tar -xzf -` in the root of the repository to grab the latest CI artifact.
+
+To start the development server, cd into the `next` directory and run `nvm use` (run `nvm install` before this if the Node version changed or this is first usage). From here, run `npm ci`, for your first ever time run `npm run init`, and then `npm run dev`. This will start the Next development server. Before you make a pull request, it is suggested you run `npm run check-types` to find any type issues. This will be done before build by the CI, but it does tighten development cycles to do it here.
+
+When you make changes, it is suggested to use the recommended VS Code extensions if that is your editor. If not, tell your editor to auto-format based on the Prettier configuration in the root. Before you make a PR, you should run `make format` in the root to make sure the formatting is correct for the version of Black/Prettier we use.
+
+Make sure your pull requests target `develop` since this is our staging. When it is merged into `main`, that is production.
+
+### Scraping the data locally
+
 You'll need to provide credentials so that boto can access the AWS API. Options for setting this up are described in the [boto docs](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html).
 
 Ensure that your IAM user has at least the following permissions:
@@ -58,12 +71,6 @@ AWS_ACCESS_KEY_ID="YOUR_AWS_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="YOUR_AWS_SECRE
 
 Now go ahead and grab yourself a cup of tea or coffee because this will take 20-30 minutes. You only need to run this when the Python is changed in a way that alters the data or there is new API data available you want to test against.
 
-To start the development server, cd into the `next` directory and run `nvm use` (run `nvm install` before this if the Node version changed or this is first usage). From here, run `npm ci`, for your first ever time run `npm run init`, and then `npm run dev`. This will start the Next development server. Before you make a pull request, it is suggested you run `npm run check-types` to find any type issues. This will be done before build by the CI, but it does tighten development cycles to do it here.
-
-When you make changes, it is suggested to use the recommended VS Code extensions if that is your editor. If not, tell your editor to auto-format based on the Prettier configuration in the root. Before you make a PR, you should run `make format` in the root to make sure the formatting is correct for the version of Black/Prettier we use.
-
-Make sure your pull requests target `develop` since this is our staging. When it is merged into `main`, that is production.
-
 ## Building a full release
 
 **NOTE:** This is NOT needed for development in most cases and can on some setups mess with the file permsisions in the next folder leading to needing to clean the build output/temp folders in there. In most development cases, building the next part is sufficient for testing. However, this is needed for production/staging.
@@ -74,7 +81,7 @@ To build a full release, you will likely want to clone a clean slate version of 
 - `AWS_SECRET_ACCESS_KEY`: Follow the start of [Developing locally](#developing-locally) to get a AWS key with the correct permissions. This is the secret access key for that.
 - `NEXT_PUBLIC_URL`: The public base URL for where the application lives. Probably `https://<hostname>/`.
 
-**Important:** If you don't want your build to be indexed by search engines, you should also set `DENY_ROBOTS_TXT=1`. To remove adverts, you can also add `NEXT_PUBLIC_REMOVE_ADVERTS=1`.
+**Important:** If you don't want your build to be indexed by search engines, you should also set `DENY_ROBOTS_TXT=1`. To remove adverts, you can also add `NEXT_PUBLIC_REMOVE_ADVERTS=1`. You should also set `OPENGRAPH_URL=<some url>` to a URL which serves a 1911x1156 image if you aren't Vantage and deploying to production. The default is not MIT licensed.
 
 This will take ~30 minutes, and when it is done you will have a `www` folder with the content you can deploy to your web server. Your web server should do the following:
 
