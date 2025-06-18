@@ -2,6 +2,7 @@ import { readFileSync } from "fs";
 import path from "path";
 import type { EC2Instance } from "../types";
 import { pushToWorker } from "./shared";
+import { urlInject } from "@/utils/urlInject";
 
 const ONLY_INSTANCES = process.env.ONLY_INSTANCES?.split(",") || [];
 
@@ -40,6 +41,7 @@ export function generateEc2Images() {
                 "ec2",
                 `${instance.instance_type}.png`,
             ),
+            url: urlInject`${`/aws/ec2/${instance.instance_type}`}`,
             values: [
                 {
                     name: "vCPUs",
@@ -119,6 +121,7 @@ export function generateRdsImages() {
                 "rds",
                 `${instance.instance_type}.png`,
             ),
+            url: urlInject`${`/aws/rds/${instance.instance_type}`}`,
             values: [
                 {
                     name: "vCPUs",
@@ -177,6 +180,7 @@ export function generateElasticacheImages() {
                 "elasticache",
                 `${instance.instance_type}.png`,
             ),
+            url: urlInject`${`/aws/elasticache/${instance.instance_type}`}`,
             values: [
                 {
                     name: "vCPUs",
@@ -241,6 +245,7 @@ export function generateRedshiftImages() {
                 "redshift",
                 `${instance.instance_type}.png`,
             ),
+            url: urlInject`${`/aws/redshift/${instance.instance_type}`}`,
             values: [
                 {
                     name: "vCPUs",
@@ -314,6 +319,7 @@ export function generateOpensearchImages() {
                 "opensearch",
                 `${instance.instance_type}.png`,
             ),
+            url: urlInject`${`/aws/opensearch/${instance.instance_type}`}`,
             values: [
                 {
                     name: "vCPUs",
@@ -374,6 +380,7 @@ export function generateAzureImages() {
                 "vm",
                 `${instance.instance_type}.png`,
             ),
+            url: urlInject`${`/azure/vm/${instance.instance_type}`}`,
             values: [
                 {
                     name: "vCPUs",

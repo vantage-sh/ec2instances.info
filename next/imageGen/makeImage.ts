@@ -97,6 +97,7 @@ export default async function makeImage(
     sharp: SharpInstance,
     title: string,
     categoryHeader: string,
+    url: string,
     values: Value[],
     filename: string,
 ) {
@@ -113,6 +114,7 @@ export default async function makeImage(
     });
 
     sharp.composite([
+        // Title and category header
         {
             input: await titleImage.png().toBuffer(),
             top: 152 - Math.floor((await titleImage.metadata()).height / 2),
@@ -131,6 +133,23 @@ export default async function makeImage(
             top: TOP_START,
             left: LEFT_START,
         },
+
+        // Add the URL to the bottom left
+        {
+            input: {
+                text: {
+                    fontfile,
+                    text: `<span foreground="#ffffff">${sanitize(url)}</span>`,
+                    height: 40,
+                    width: 10000,
+                    rgba: true,
+                },
+            },
+            top: 1110,
+            left: 10,
+        },
+
+        // General values
         ...valuesToComposite(values),
     ]);
 

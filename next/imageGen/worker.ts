@@ -5,6 +5,7 @@ export type InstanceOverlay = {
     name: string;
     categoryHeader: string;
     filename: string;
+    url: string;
     values: {
         name: string;
         value: string;
@@ -29,6 +30,7 @@ process.on("message", async (message: [InstanceOverlay, number]) => {
         base.clone(),
         overlay.name,
         overlay.categoryHeader,
+        overlay.url,
         overlay.values,
         overlay.filename,
     )
