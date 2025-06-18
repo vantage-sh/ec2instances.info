@@ -42,7 +42,7 @@ componentTests(
             props: {},
             test: (component) => {
                 expect(component.container.innerHTML).toContain(
-                    "Vantage is a FinOps platform your engineering team will actually use.",
+                    "Vantage is the FinOps platform your engineering team will actually use.",
                 );
             },
         },

@@ -11,7 +11,7 @@ const AzureAd = () => (
 
 const AWSAd = () => (
     <p>
-        Vantage is a FinOps platform your engineering team will actually use.{" "}
+        Vantage is the FinOps platform your engineering team will actually use.{" "}
         <span className="font-bold">Get a demo.</span>
     </p>
 );
