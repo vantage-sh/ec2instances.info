@@ -140,12 +140,12 @@ export default async function makeImage(
                 text: {
                     fontfile,
                     text: `<span foreground="#ffffff">${sanitize(url)}</span>`,
-                    height: 40,
+                    height: 30,
                     width: 10000,
                     rgba: true,
                 },
             },
-            top: 1110,
+            top: 1120,
             left: 10,
         },
 
