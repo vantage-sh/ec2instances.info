@@ -73,6 +73,7 @@ To build a full release, you will likely want to clone a clean slate version of 
 - `AWS_ACCESS_KEY_ID`: Follow the start of [Developing locally](#developing-locally) to get a AWS key with the correct permissions. This is the key ID for that.
 - `AWS_SECRET_ACCESS_KEY`: Follow the start of [Developing locally](#developing-locally) to get a AWS key with the correct permissions. This is the secret access key for that.
 - `NEXT_PUBLIC_URL`: The public base URL for where the application lives. Probably `https://<hostname>/`.
+- `NEXT_PUBLIC_INSTANCESKV_URL`: **(Optional)** The base URL you wish to use for [instanceskv](https://github.com/vantage-sh/instanceskv). If this is unset, it will use the version hosted by Vantage.
 
 **Important:** If you don't want your build to be indexed by search engines, you should also set `DENY_ROBOTS_TXT=1`. To remove adverts, you can also add `NEXT_PUBLIC_REMOVE_ADVERTS=1`.
 

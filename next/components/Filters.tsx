@@ -10,19 +10,18 @@ import {
     usePricingUnit,
     useDuration,
     useReservedTerm,
-    clearGSettings,
     useCompareOn,
-    columnVisibilityAtoms,
+    useColumnVisibility,
+    useSelected,
 } from "@/state";
 import { pricingUnitOptions, durationOptions } from "@/utils/dataMappings";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { RowSelectionState } from "@tanstack/react-table";
 import * as columnData from "@/utils/colunnData";
 import { usePathname } from "next/navigation";
+import { resetGlobalState } from "@/utils/useGlobalStateValue";
 
 interface FiltersProps<DataKey extends keyof typeof columnData> {
     regions: Region;
-    rowSelection: RowSelectionState;
     columnAtomKey: DataKey;
     reservedTermOptions: {
         value: string;
@@ -34,20 +33,21 @@ interface FiltersProps<DataKey extends keyof typeof columnData> {
 
 export default function Filters<DataKey extends keyof typeof columnData>({
     regions,
-    rowSelection,
     columnAtomKey,
     ecuRename,
     reservedTermOptions,
     reservedLabel,
 }: FiltersProps<DataKey>) {
-    const columnVisibility = columnVisibilityAtoms[columnAtomKey].use();
-    const [searchTerm, setSearchTerm] = useSearchTerm();
-    const [selectedRegion, setSelectedRegion] = useSelectedRegion();
-    const [pricingUnit, setPricingUnit] = usePricingUnit(ecuRename);
-    const [duration, setDuration] = useDuration();
-    const [reservedTerm, setReservedTerm] = useReservedTerm();
-    const [compareOn, valuePreCompareOn, setCompareOn] = useCompareOn();
     const pathname = usePathname();
+    const [columnVisibility, setColumnVisibility] =
+        useColumnVisibility(pathname);
+    const [searchTerm, setSearchTerm] = useSearchTerm(pathname);
+    const [selectedRegion, setSelectedRegion] = useSelectedRegion(pathname);
+    const [pricingUnit, setPricingUnit] = usePricingUnit(pathname, ecuRename);
+    const [duration, setDuration] = useDuration(pathname);
+    const [reservedTerm, setReservedTerm] = useReservedTerm(pathname);
+    const [compareOn, setCompareOn] = useCompareOn(pathname);
+    const [selected] = useSelected(pathname);
 
     const [frequentlyUsedRegions, setFrequentlyUsedRegions] = useState<{
         [key: string]: number;
@@ -70,14 +70,6 @@ export default function Filters<DataKey extends keyof typeof columnData>({
         },
         [frequentlyUsedRegions, pathname],
     );
-
-    let anySelected = false;
-    for (const key in rowSelection) {
-        if (rowSelection[key]) {
-            anySelected = true;
-            break;
-        }
-    }
 
     const [
         frequentlyUsedRegionOptions,
@@ -145,12 +137,12 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                 label,
                 visible: columnVisibility[key],
                 defaultVisible:
+                    // @ts-expect-error: The visibility is dynamic, but we know this is a valid key.
                     columnData[columnAtomKey].initialColumnsValue[key],
             };
         }
-        // @ts-expect-error: TS doesn't like this for some reason.
         return columnData[columnAtomKey].makePrettyNames(makeColumnOption);
-    }, Object.values(columnVisibility));
+    }, [JSON.stringify(columnVisibility)]);
 
     let pricingUnitOptionsCpy = pricingUnitOptions;
     if (ecuRename) {
@@ -210,9 +202,8 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                         // @ts-expect-error: TS doesn't like this for some reason.
                         columns={columnOptions}
                         onColumnVisibilityChange={(k, v) => {
-                            columnVisibilityAtoms[columnAtomKey].mutate((o) => {
-                                // @ts-expect-error: We know this is a valid key.
-                                o[k] = v;
+                            setColumnVisibility((o) => {
+                                return { ...o, [k]: v };
                             });
                         }}
                     />
@@ -227,7 +218,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                         </button>
                     ) : (
                         <button
-                            disabled={!anySelected}
+                            disabled={selected.length === 0}
                             className="btn btn-purple btn-compare disabled:opacity-50 self-end"
                             onClick={() => setCompareOn(true)}
                         >
@@ -236,7 +227,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                     )}
                     <button
                         className="btn text-sm btn-outline-secondary btn-clear self-end"
-                        onClick={clearGSettings}
+                        onClick={() => resetGlobalState(pathname)}
                     >
                         Clear Filters
                     </button>
@@ -251,7 +242,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                             type="text"
                             className="form-control not-xl:hidden not-2xl:w-25 p-1 border-gray-300 border rounded-md"
                             placeholder="Search..."
-                            value={compareOn ? valuePreCompareOn : searchTerm}
+                            value={searchTerm}
                             disabled={compareOn}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />

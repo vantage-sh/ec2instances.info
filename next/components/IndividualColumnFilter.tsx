@@ -1,13 +1,5 @@
-import GSettings from "@/utils/g_settings_port";
 import { Column } from "@tanstack/react-table";
-import {
-    useEffect,
-    useCallback,
-    useState,
-    useId,
-    useMemo,
-    useRef,
-} from "react";
+import { useEffect, useState, useId, useMemo, useRef } from "react";
 import { SquareFunction, X } from "lucide-react";
 import expr from "@/utils/expr";
 
@@ -152,14 +144,10 @@ function ExprHelpModal({ parseError }: { parseError: string | null }) {
     );
 }
 
-function GSettingsExprFilter<Instance>({
-    gSettingsSet,
-    gSettingsFullMutations,
+function ExprFilter<Instance>({
     column,
     initValue,
 }: {
-    gSettingsSet: (value: string) => void;
-    gSettingsFullMutations: number;
     column: Column<Instance>;
     initValue: string;
 }) {
@@ -180,15 +168,11 @@ function GSettingsExprFilter<Instance>({
         setValue(initValue);
     }, [initValue]);
 
-    const exprStringChange = useCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) => {
-            const v = e.target.value;
-            setValue(v);
-            gSettingsSet(v);
-            column.setFilterValue(v);
-        },
-        [gSettingsFullMutations],
-    );
+    const exprStringChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const v = e.target.value;
+        setValue(v);
+        column.setFilterValue(v);
+    };
 
     return (
         <div className="flex gap-1 w-full">
@@ -211,63 +195,34 @@ function GSettingsExprFilter<Instance>({
     );
 }
 
-type OnlyAllowedGSettingsKeys = {
-    [K in keyof GSettings]: K extends `${string}Expr` ? K : never;
-}[keyof GSettings];
-
-const columnMapping: Record<string, OnlyAllowedGSettingsKeys | null> = {
-    memory: "memoryExpr",
-    vCPU: "vcpuExpr",
-    vcpu: "vcpuExpr",
-    vcpus: "vcpuExpr",
-    memory_per_vcpu: "memoryPerVcpuExpr",
-    GPU: "gpusExpr",
-    GPU_memory: "gpuMemoryExpr",
-    maxips: "maxipsExpr",
-    storage: "storageExpr",
-    size: "storageExpr",
-    ecu: null,
-    ECU: null,
-    io: null,
-};
+const exprColumns = [
+    "memory",
+    "vCPU",
+    "vcpu",
+    "vcpus",
+    "memory_per_vcpu",
+    "GPU",
+    "GPU_memory",
+    "maxips",
+    "storage",
+    "size",
+    "ecu",
+    "ECU",
+    "io",
+];
 
 export default function IndividualColumnFilter<Instance>({
-    gSettings,
-    gSettingsFullMutations,
     column,
 }: {
-    gSettings: GSettings | undefined;
-    gSettingsFullMutations: number;
     column: Column<Instance>;
 }) {
-    const set = useCallback(
-        (value: string) => {
-            const key = columnMapping[column.columnDef.id!];
-            if (key && gSettings) {
-                gSettings[key] = value;
-            }
-        },
-        [column.columnDef.id, gSettingsFullMutations],
-    );
-
-    const key = columnMapping[column.columnDef.id!];
-    if (key && gSettings) {
-        const value = gSettings[key];
+    if (exprColumns.includes(column.columnDef.id!)) {
         return (
-            <GSettingsExprFilter
-                gSettingsFullMutations={gSettingsFullMutations}
-                gSettingsSet={set}
+            <ExprFilter
                 column={column}
-                initValue={value}
-            />
-        );
-    } else if (key === null) {
-        return (
-            <GSettingsExprFilter
-                gSettingsFullMutations={0}
-                gSettingsSet={() => {}}
-                column={column}
-                initValue={">=0"}
+                initValue={
+                    (column.getFilterValue() as string | undefined) ?? ">=0"
+                }
             />
         );
     }
