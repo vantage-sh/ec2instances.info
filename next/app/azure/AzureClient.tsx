@@ -44,8 +44,13 @@ export default function AzureClient({
     );
     const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
+    const full =
+        process.env.NEXT_PUBLIC_REMOVE_ADVERTS === "1"
+            ? "h-[calc(100vh-6em)]"
+            : "h-[calc(100vh-8.5em)]";
+
     return (
-        <main className="h-[calc(100vh-6rem)] overflow-y-hidden flex flex-col">
+        <main className={`${full} overflow-y-hidden flex flex-col`}>
             <DoMigration atomKey="azure" />
             <Filters
                 columnAtomKey="azure"

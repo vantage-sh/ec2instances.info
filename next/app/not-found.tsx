@@ -1,6 +1,13 @@
 export default function Page404() {
+    const full =
+        process.env.NEXT_PUBLIC_REMOVE_ADVERTS === "1"
+            ? "h-[calc(100vh-6em)]"
+            : "h-[calc(100vh-8.5em)]";
+
     return (
-        <main className="flex flex-col items-center justify-center h-[calc(100vh-6em)] mx-4">
+        <main
+            className={`flex flex-col items-center justify-center ${full} mx-4`}
+        >
             <h1 className="text-2xl font-bold mb-2">Page not found</h1>
             <p>
                 The page you are looking for does not exist. Is this unexpected?
