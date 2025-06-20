@@ -1,6 +1,7 @@
 CREATE TABLE kv (
     key TEXT PRIMARY KEY,
-    value JSONB NOT NULL
+    value JSONB NOT NULL,
+    initial_value JSONB NOT NULL
 );
 
 CREATE TABLE modification_chain (
