@@ -8,7 +8,7 @@ import (
 
 const (
 	kvReadQuery  = "SELECT value FROM kv WHERE key = $1"
-	kvWriteQuery = "INSERT INTO kv (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET value = $2"
+	kvWriteQuery = "INSERT INTO kv (key, value, initial_value) VALUES ($1, $2, $2) ON CONFLICT (key) DO UPDATE SET value = $2"
 
 	modChainWriteQuery = "INSERT INTO modification_chain (key, run_time, event) VALUES ($1, $2, $3)"
 )
