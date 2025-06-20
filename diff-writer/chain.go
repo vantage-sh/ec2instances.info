@@ -60,28 +60,37 @@ func chainCompare(prevInstances, newInstances []json.RawMessage, runTime int64, 
 				if err != nil {
 					log.Fatal(err)
 				}
-				tx.WriteToBlockchain(prevInstanceType, runTime, &Event{
+				err = tx.WriteToBlockchain(prevInstanceType, runTime, &Event{
 					EventType:    EventTypeUpdate,
 					InstanceType: prevInstanceType,
 					JsonDiff:     diffBytes,
 				})
+				if err != nil {
+					log.Fatal(err)
+				}
 			}
 		} else {
 			// The instance was removed.
-			tx.WriteToBlockchain(prevInstanceType, runTime, &Event{
+			err := tx.WriteToBlockchain(prevInstanceType, runTime, &Event{
 				EventType:    EventTypeRemove,
 				InstanceType: prevInstanceType,
 			})
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
 	}
 
 	for newInstanceType, newInstance := range newIdMap {
 		if _, ok := prevIdMap[newInstanceType]; !ok {
-			tx.WriteToBlockchain(newInstanceType, runTime, &Event{
+			err := tx.WriteToBlockchain(newInstanceType, runTime, &Event{
 				EventType:    EventTypeAdd,
 				InstanceType: newInstanceType,
 				FullInstance: newInstance,
 			})
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
 	}
 }
