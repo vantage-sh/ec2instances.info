@@ -26,7 +26,6 @@ export default function Footer() {
                         <a
                             target="_blank"
                             href="https://www.vantage.sh/lp/aws-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=by-vantage"
-                            rel="noopener noreferrer"
                             className="text-purple-brand text-underline hover:text-purple-0"
                         >
                             Vantage
