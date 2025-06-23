@@ -5,8 +5,7 @@
  */
 const url =
     process.env.NEXT_PUBLIC_INSTANCESKV_URL ||
-    // TODO: change this URL
-    "https://instanceskv.vantagesh.workers.dev/";
+    "https://instanceskv.vantage-api.com/";
 
 type DumpV1 = {
     version: 1;
