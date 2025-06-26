@@ -108,6 +108,7 @@ export default async function Page({
             tablePath="/redshift"
             regions={regions}
             typeName="Redshift"
+            instanceType="redshift"
         >
             <InstanceDataView tables={generateRedshiftTables(instance)} />
         </HalfEC2Root>

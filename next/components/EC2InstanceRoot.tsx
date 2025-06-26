@@ -29,6 +29,7 @@ interface InstanceRootProps {
     storeOsNameRatherThanId: boolean;
     reservedTermOptions: [string, string][];
     typeName: string;
+    marketingInstanceType: string;
 }
 
 export default function EC2InstanceRoot({
@@ -47,11 +48,12 @@ export default function EC2InstanceRoot({
     typeName,
     storeOsNameRatherThanId,
     reservedTermOptions,
+    marketingInstanceType,
 }: InstanceRootProps) {
     const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
 
     return (
-        <MarketingWrapper azure={false}>
+        <MarketingWrapper instanceType={marketingInstanceType}>
             <main className="my-4 px-4 not-md:w-screen">
                 <InstanceBreadcrumbs
                     crumbs={[

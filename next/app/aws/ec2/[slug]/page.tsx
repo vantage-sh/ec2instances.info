@@ -156,6 +156,16 @@ export default async function Page({
 
     const compressedInstance = makeRainbowTable([{ ...instance }]);
 
+    let marketingInstanceType = "ec2-other";
+    if (
+        instance.instance_type.includes("flex") ||
+        instance.instance_type.startsWith("t")
+    ) {
+        marketingInstanceType = "ec2-flex";
+    } else if (instance.GPU && Number(instance.GPU) !== 0) {
+        marketingInstanceType = "ec2-gpu";
+    }
+
     return (
         <EC2InstanceRoot
             rainbowTable={compressedInstance[0] as string[]}
@@ -180,6 +190,7 @@ export default async function Page({
             storeOsNameRatherThanId={false}
             reservedTermOptions={reservedTermOptions}
             typeName="EC2"
+            marketingInstanceType={marketingInstanceType}
         />
     );
 }

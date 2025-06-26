@@ -26,7 +26,7 @@ componentTests(
         // Marketing disabled
 
         {
-            name: "renders just child if marketing is disabled in aws mode",
+            name: "renders just child if marketing is disabled in ec2-other mode",
             patch: {
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
@@ -37,7 +37,7 @@ componentTests(
                 },
             },
             props: {
-                azure: false,
+                instanceType: "ec2-other",
                 children: testP,
             },
             test: (component) => {
@@ -58,7 +58,7 @@ componentTests(
                 },
             },
             props: {
-                azure: true,
+                instanceType: "azure",
                 children: testP,
             },
             test: (component) => {
@@ -68,10 +68,10 @@ componentTests(
             },
         },
 
-        // Marketing enabled
+        // Marketing enabled - AWS EC2 types
 
         {
-            name: "renders child and marketing in aws mode",
+            name: "renders child and marketing in ec2-flex mode",
             patch: {
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
@@ -82,11 +82,119 @@ componentTests(
                 },
             },
             props: {
-                azure: false,
+                instanceType: "ec2-flex",
                 children: testP,
             },
             test: validateMarketing,
         },
+        {
+            name: "renders child and marketing in ec2-gpu mode",
+            patch: {
+                before: () => {
+                    originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
+                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
+                },
+                after: () => {
+                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                },
+            },
+            props: {
+                instanceType: "ec2-gpu",
+                children: testP,
+            },
+            test: validateMarketing,
+        },
+        {
+            name: "renders child and marketing in ec2-other mode",
+            patch: {
+                before: () => {
+                    originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
+                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
+                },
+                after: () => {
+                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                },
+            },
+            props: {
+                instanceType: "ec2-other",
+                children: testP,
+            },
+            test: validateMarketing,
+        },
+
+        // Marketing enabled - AWS Database types
+
+        {
+            name: "renders child and marketing in rds mode",
+            patch: {
+                before: () => {
+                    originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
+                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
+                },
+                after: () => {
+                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                },
+            },
+            props: {
+                instanceType: "rds",
+                children: testP,
+            },
+            test: validateMarketing,
+        },
+        {
+            name: "renders child and marketing in opensearch mode",
+            patch: {
+                before: () => {
+                    originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
+                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
+                },
+                after: () => {
+                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                },
+            },
+            props: {
+                instanceType: "opensearch",
+                children: testP,
+            },
+            test: validateMarketing,
+        },
+        {
+            name: "renders child and marketing in redshift mode",
+            patch: {
+                before: () => {
+                    originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
+                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
+                },
+                after: () => {
+                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                },
+            },
+            props: {
+                instanceType: "redshift",
+                children: testP,
+            },
+            test: validateMarketing,
+        },
+        {
+            name: "renders child and marketing in elasticache mode",
+            patch: {
+                before: () => {
+                    originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
+                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
+                },
+                after: () => {
+                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                },
+            },
+            props: {
+                instanceType: "elasticache",
+                children: testP,
+            },
+            test: validateMarketing,
+        },
+
+        // Marketing enabled - Azure
+
         {
             name: "renders child and marketing in azure mode",
             patch: {
@@ -99,7 +207,7 @@ componentTests(
                 },
             },
             props: {
-                azure: true,
+                instanceType: "azure",
                 children: testP,
             },
             test: validateMarketing,

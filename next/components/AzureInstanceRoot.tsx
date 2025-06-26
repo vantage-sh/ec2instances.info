@@ -47,7 +47,7 @@ export default function AzureInstanceRoot({
     const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
 
     return (
-        <MarketingWrapper azure={true}>
+        <MarketingWrapper instanceType="azure">
             <main className="my-4 px-4 not-md:w-screen">
                 <InstanceBreadcrumbs
                     crumbs={[

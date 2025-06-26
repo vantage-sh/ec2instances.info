@@ -171,6 +171,7 @@ export default async function Page({
             storeOsNameRatherThanId={true}
             reservedTermOptions={reservedTermOptions}
             typeName="RDS"
+            marketingInstanceType="rds"
         />
     );
 }

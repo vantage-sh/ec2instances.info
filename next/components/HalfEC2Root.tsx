@@ -30,6 +30,7 @@ type InstanceRootProps<
     typeName: string;
     tablePath: string;
     regions: Region;
+    instanceType: string;
 };
 
 const reservedTermOptions: [string, string][] = [
@@ -49,6 +50,7 @@ export default function HalfEC2Root<
     typeName,
     tablePath,
     regions,
+    instanceType,
 }: InstanceRootProps<Instance>) {
     const remappedPricing = useMemo(() => {
         const remappedPricing: Pricing = {};
@@ -65,7 +67,7 @@ export default function HalfEC2Root<
     const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
 
     return (
-        <MarketingWrapper azure={false}>
+        <MarketingWrapper instanceType={instanceType}>
             <main className="my-4 px-4 not-md:w-screen">
                 <InstanceBreadcrumbs
                     crumbs={[

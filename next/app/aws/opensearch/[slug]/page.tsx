@@ -108,6 +108,7 @@ export default async function Page({
             tablePath="/opensearch"
             regions={regions}
             typeName="OpenSearch"
+            instanceType="opensearch"
         >
             <InstanceDataView tables={generateOpensearchTables(instance)} />
         </HalfEC2Root>

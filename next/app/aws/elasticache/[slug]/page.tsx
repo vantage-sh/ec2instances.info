@@ -145,6 +145,7 @@ export default async function Page({
             storeOsNameRatherThanId={true}
             reservedTermOptions={reservedTermOptions}
             typeName="Cache"
+            marketingInstanceType="elasticache"
         />
     );
 }
