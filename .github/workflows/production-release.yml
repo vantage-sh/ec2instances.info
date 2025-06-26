@@ -37,12 +37,12 @@ jobs:
 
             - name: Run the diff writer
               run: |
-                  ./diff-writer/diff-writer "${{ secrets.PRODUCTION_DB_CONNECTION_STRING }}" ec2 ./www/instances.json
-                  ./diff-writer/diff-writer "${{ secrets.PRODUCTION_DB_CONNECTION_STRING }}" rds ./www/rds/instances.json
-                  ./diff-writer/diff-writer "${{ secrets.PRODUCTION_DB_CONNECTION_STRING }}" cache ./www/cache/instances.json
-                  ./diff-writer/diff-writer "${{ secrets.PRODUCTION_DB_CONNECTION_STRING }}" opensearch ./www/opensearch/instances.json
-                  ./diff-writer/diff-writer "${{ secrets.PRODUCTION_DB_CONNECTION_STRING }}" redshift ./www/redshift/instances.json
-                  ./diff-writer/diff-writer "${{ secrets.PRODUCTION_DB_CONNECTION_STRING }}" azure ./www/azure/instances.json
+                  ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" ec2 ./www/instances.json
+                  ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" rds ./www/rds/instances.json
+                  ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" cache ./www/cache/instances.json
+                  ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" opensearch ./www/opensearch/instances.json
+                  ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" redshift ./www/redshift/instances.json
+                  ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" azure ./www/azure/instances.json
 
             - name: Deploy to the production bucket
               run: cd deployment && npm ci && npm run start
