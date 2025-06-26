@@ -30,6 +30,10 @@ jobs:
                   SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
                   SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
                   SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+                  NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID: ${{ secrets.GOOGLE_TAG_MANAGER_ID }}
+                  NEXT_PUBLIC_ENABLE_VANTAGE_SCRIPT_TAG: "1"
+                  NEXT_PUBLIC_UNIFY_TAG_ID: ${{ secrets.UNIFY_TAG_ID }}
+                  NEXT_PUBLIC_UNIFY_API_KEY: ${{ secrets.UNIFY_API_KEY }}
 
             - name: Run the diff writer
               run: |
