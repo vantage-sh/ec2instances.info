@@ -79,6 +79,7 @@ export default function ExportDropdown() {
                     role="combobox"
                     aria-expanded={open}
                     className="my-auto justify-between text-black py-4.5"
+                    aria-label="Export"
                 >
                     <Save className="mr-2 h-4 w-4" />
                     Export

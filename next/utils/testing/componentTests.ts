@@ -14,7 +14,13 @@ type TestItem<Props extends Record<string, unknown>> = {
         before?: () => void;
         after?: () => void;
     };
-    test?: (component: RenderResult, rerender: () => void) => void;
+    test?: (
+        component: RenderResult,
+        testUtils: {
+            rerunAxe: () => Promise<void>;
+            rerender: () => void;
+        },
+    ) => void | Promise<void>;
 };
 
 export default function componentTests<Test extends TestItem<any>>(
@@ -53,7 +59,7 @@ export default function componentTests<Test extends TestItem<any>>(
 
             const testFn = t.test;
             if (testFn) {
-                test("function called successfully", () => {
+                test("function called successfully", async () => {
                     const originalReact = window.React;
                     window.React = React;
 
@@ -64,8 +70,14 @@ export default function componentTests<Test extends TestItem<any>>(
 
                     try {
                         const res = render(el);
-                        testFn(res, () => {
-                            res.rerender(el);
+                        await testFn(res, {
+                            rerunAxe: async () => {
+                                const results = await axe.run(res.container);
+                                expect(results.violations).toEqual([]);
+                            },
+                            rerender: () => {
+                                res.rerender(el);
+                            },
                         });
                         res.unmount();
                     } finally {

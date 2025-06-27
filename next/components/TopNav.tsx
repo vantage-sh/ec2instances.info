@@ -48,12 +48,8 @@ export default function TopNav() {
     return (
         <nav className="flex items-center justify-between bg-purple-brand h-[3rem] py-2 px-4">
             <div className="flex items-center justify-start gap-4">
-                <div className="flex items-center justify-start gap-2">
-                    <Link
-                        href="/"
-                        className="font-medium text-gray-6"
-                        aria-hidden="true"
-                    >
+                <Link href="/" className="font-medium text-gray-6">
+                    <div className="flex items-center justify-start gap-2">
                         <svg
                             width="28"
                             height="28"
@@ -80,22 +76,16 @@ export default function TopNav() {
                                 fill="white"
                             />
                         </svg>
-                    </Link>
-                    <div className="flex flex-col">
-                        <Link
-                            href="/"
-                            className="font-semibold text-white leading-5"
-                        >
-                            Instances
-                        </Link>
-                        <Link
-                            href="https://www.vantage.sh"
-                            className="text-xs italic text-gray-5"
-                        >
-                            Presented by Vantage
-                        </Link>
+                        <div className="flex flex-col">
+                            <span className="font-semibold text-white leading-5">
+                                Instances
+                            </span>
+                            <span className="text-xs italic text-gray-5">
+                                Presented by Vantage
+                            </span>
+                        </div>
                     </div>
-                </div>
+                </Link>
                 {navItems.map((item) => (
                     <div
                         className="flex items-center justify-start gap-4 relative top-1.5 ml-2"

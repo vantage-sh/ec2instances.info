@@ -35,6 +35,7 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
     columns,
     onColumnVisibilityChange,
 }: ColumnFilterProps<Key>) {
+    const buttonId = React.useId();
     const [open, setOpen] = React.useState(false);
     const [searchTerm, setSearchTerm] = React.useState("");
 
@@ -61,13 +62,16 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
 
     return (
         <div className="relative flex flex-col gap-0.5 justify-center">
-            <label className="text-xs text-gray-3">Columns</label>
+            <label htmlFor={buttonId} className="text-xs text-gray-3">
+                Columns
+            </label>
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                     <Button
                         variant="outline"
                         role="combobox"
                         aria-expanded={open}
+                        id={buttonId}
                         className="w-[200px] justify-between"
                     >
                         Columns

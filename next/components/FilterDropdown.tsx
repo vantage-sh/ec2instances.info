@@ -41,6 +41,7 @@ export default function FilterDropdown({
     hideSearch,
     icon,
 }: FilterDropdownProps) {
+    const buttonId = React.useId();
     const [open, setOpen] = React.useState(false);
     const [searchTerm, setSearchTerm] = React.useState("");
 
@@ -81,7 +82,9 @@ export default function FilterDropdown({
 
     return (
         <div className="flex flex-col gap-0.5">
-            <label className="text-xs text-gray-3">{label}</label>
+            <label htmlFor={buttonId} className="text-xs text-gray-3">
+                {label}
+            </label>
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                     <Button
@@ -89,10 +92,14 @@ export default function FilterDropdown({
                         size="sm"
                         role="combobox"
                         aria-expanded={open}
+                        id={buttonId}
                         className="w-full justify-between text-black py-4.5"
                     >
                         {icon && (
-                            <i className={`icon-${icon} text-white me-1`}></i>
+                            <i
+                                aria-hidden="true"
+                                className={`icon-${icon} text-white me-1`}
+                            ></i>
                         )}
                         {selectedOption?.label || "Select..."}
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -125,6 +132,9 @@ export default function FilterDropdown({
                                                     onChange(option.value);
                                                     setOpen(false);
                                                 }}
+                                                aria-checked={
+                                                    value === option.value
+                                                }
                                             >
                                                 <Check
                                                     className={cn(

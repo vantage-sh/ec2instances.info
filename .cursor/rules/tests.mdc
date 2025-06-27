@@ -14,7 +14,10 @@ type TestItem<Props extends Record<string, unknown>> = {
         before?: () => void;
         after?: () => void;
     };
-    test?: (component: import("@testing-library/react").RenderResult, rerender: () => void) => void;
+    test?: (component: import("@testing-library/react").RenderResult, testUtils: {
+        rerunAxe: () => Promise<void>;
+        rerender: () => void;
+    }) => void | Promise<void>;
 };
 
 export default function componentTests<Test extends TestItem<any>>(
