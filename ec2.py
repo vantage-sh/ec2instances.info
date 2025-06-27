@@ -365,10 +365,15 @@ def parse_instance(instance_type, product_attributes, api_description):
 
         i.network_performance = api_description["NetworkInfo"]["NetworkPerformance"]
     else:
-        # Assume x86_64 if there's no DescribeInstanceTypes data.
-        i.arch.append("x86_64")
-        if "32-bit" in product_attributes.get("processorArchitecture"):
-            i.arch.append("i386")
+        if "AWS Graviton" in product_attributes.get("physicalProcessor"):
+            # If we don't have too much info but it has "AWS Graviton" in the physicalProcessor,
+            # we can assume it's arm64.
+            i.arch.append("arm64")
+        else:
+            # Assume x86_64 if there's no DescribeInstanceTypes data.
+            i.arch.append("x86_64")
+            if "32-bit" in product_attributes.get("processorArchitecture"):
+                i.arch.append("i686")
 
         i.network_performance = product_attributes.get("networkPerformance")
 
