@@ -146,7 +146,7 @@ function ExprHelpModal({ parseError }: { parseError: string | null }) {
                 title="Show expression help"
                 className="text-gray-2 cursor-pointer mt-1.5"
             >
-                <SquareFunction size={15} />
+                <SquareFunction size={20} />
             </button>
         </>
     );

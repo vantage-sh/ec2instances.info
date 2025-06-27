@@ -82,7 +82,7 @@ export default function FilterDropdown({
 
     return (
         <div className="flex flex-col gap-0.5">
-            <label htmlFor={buttonId} className="text-xs text-gray-3">
+            <label htmlFor={buttonId} className="text-xs text-gray-1">
                 {label}
             </label>
             <Popover open={open} onOpenChange={setOpen}>

@@ -62,7 +62,7 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
 
     return (
         <div className="relative flex flex-col gap-0.5 justify-center">
-            <label htmlFor={buttonId} className="text-xs text-gray-3">
+            <label htmlFor={buttonId} className="text-xs text-gray-1">
                 Columns
             </label>
             <Popover open={open} onOpenChange={setOpen}>
