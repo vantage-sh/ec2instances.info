@@ -258,7 +258,7 @@ function Calculator({
                             <p className="font-bold" data-testid={label}>
                                 {value}
                             </p>
-                            <p className="text-xs text-gray-3">{label}</p>
+                            <p className="text-xs text-gray-2">{label}</p>
                         </div>
                     ))}
                 </div>

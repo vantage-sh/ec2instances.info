@@ -52,9 +52,9 @@ function Row({ name, children, help, helpText }: RowProps) {
                         <a
                             target="_blank"
                             href={help}
-                            className="text-purple-1 hover:text-purple-0"
+                            className="text-purple-1 hover:text-purple-0 before:content-['('] after:content-[')']"
                         >
-                            ({helpText || "?"})
+                            {helpText || "?"}
                         </a>
                     </span>
                 )}

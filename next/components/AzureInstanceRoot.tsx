@@ -64,7 +64,7 @@ export default function AzureInstanceRoot({
                         <h1 className="text-2xl font-bold mb-2">
                             {compressedInstance.pretty_name}
                         </h1>
-                        <p className="text-sm mb-4">{description}</p>
+                        <h2 className="text-sm mb-4">{description}</h2>
                         <PricingCalculator
                             rainbowTable={rainbowTable}
                             compressedInstance={compressedInstance}
