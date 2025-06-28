@@ -22,7 +22,7 @@ import {
 interface ColumnOption<Key extends keyof typeof columnData> {
     key: Key;
     label: string;
-    visible: boolean;
+    visible?: boolean;
     defaultVisible?: boolean;
 }
 
@@ -88,30 +88,34 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                         <CommandList>
                             <CommandEmpty>No columns found.</CommandEmpty>
                             <CommandGroup>
-                                {filteredColumns.map((column) => (
-                                    <CommandItem
-                                        key={column.key}
-                                        value={column.key}
-                                        onSelect={() => {
-                                            onColumnVisibilityChange(
-                                                column.key,
-                                                !column.visible,
-                                            );
-                                        }}
-                                        aria-selected={column.visible}
-                                    >
-                                        <Check
-                                            className={cn(
-                                                "mr-2 h-4 w-4",
-                                                column.visible
-                                                    ? "opacity-100"
-                                                    : "opacity-0",
-                                            )}
-                                            aria-hidden="true"
-                                        />
-                                        {column.label}
-                                    </CommandItem>
-                                ))}
+                                {filteredColumns.map((column) => {
+                                    const visible =
+                                        column.visible ?? column.defaultVisible;
+                                    return (
+                                        <CommandItem
+                                            key={column.key}
+                                            value={column.key}
+                                            onSelect={() => {
+                                                onColumnVisibilityChange(
+                                                    column.key,
+                                                    !visible,
+                                                );
+                                            }}
+                                            aria-selected={visible}
+                                        >
+                                            <Check
+                                                className={cn(
+                                                    "mr-2 h-4 w-4",
+                                                    visible
+                                                        ? "opacity-100"
+                                                        : "opacity-0",
+                                                )}
+                                                aria-hidden="true"
+                                            />
+                                            {column.label}
+                                        </CommandItem>
+                                    );
+                                })}
                             </CommandGroup>
                         </CommandList>
                     </Command>
