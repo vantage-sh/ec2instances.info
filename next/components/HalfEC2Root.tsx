@@ -84,7 +84,7 @@ export default function HalfEC2Root<
                         <h1 className="text-2xl font-bold mb-2">
                             {instance.instance_type}
                         </h1>
-                        <p className="text-sm mb-4">{description}</p>
+                        <h2 className="text-sm mb-4">{description}</h2>
                         <PricingCalculator
                             rainbowTable={[]}
                             compressedInstance={{
