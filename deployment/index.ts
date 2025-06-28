@@ -4,6 +4,7 @@ import {
     GetObjectCommand,
     GetObjectCommandOutput,
     NoSuchKey,
+    DeleteObjectCommand,
 } from "@aws-sdk/client-s3";
 import { join } from "path";
 import fs from "fs/promises";
@@ -41,6 +42,20 @@ function contentTypeHandler(filePath: string) {
 }
 
 let fileHashes: { [key: string]: string } = {};
+const writtenKeys = new Set<string>();
+
+async function tryOp10Times(fn: () => Promise<void>) {
+    for (let i = 0; i < 9; i++) {
+        try {
+            await fn();
+            return;
+        } catch {
+            // Sleep for 1 second.
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+    }
+    await fn();
+}
 
 async function uploadFile(key: string, filePath: string) {
     const file = await fs.readFile(filePath);
@@ -49,34 +64,19 @@ async function uploadFile(key: string, filePath: string) {
         return;
     }
     fileHashes[key] = hash;
+    writtenKeys.add(key);
 
     const ContentType = contentTypeHandler(filePath);
-    for (let i = 0; i < 9; i++) {
-        try {
-            await s3Client.send(
-                new PutObjectCommand({
-                    Bucket: bucket,
-                    Key: key,
-                    Body: file,
-                    ContentType,
-                }),
-            );
-            return;
-        } catch {
-            // For the first 9 attempts, just wait 1 second and try again.
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-        }
-    }
-
-    // Our final try - if this fails, we're out of retries, just throw.
-    await s3Client.send(
-        new PutObjectCommand({
-            Bucket: bucket,
-            Key: key,
-            Body: file,
-            ContentType,
-        }),
-    );
+    await tryOp10Times(async () => {
+        await s3Client.send(
+            new PutObjectCommand({
+                Bucket: bucket,
+                Key: key,
+                Body: file,
+                ContentType,
+            }),
+        );
+    });
 }
 
 async function uploadFolder(extras: string[]) {
@@ -126,14 +126,39 @@ async function uploadFolder(extras: string[]) {
     // Upload the folder.
     await uploadFolder([]);
 
-    // Write file_hashes.json to the bucket.
-    await s3Client.send(
-        new PutObjectCommand({
-            Bucket: bucket,
-            Key: "file_hashes.json",
-            Body: JSON.stringify(fileHashes),
-        }),
+    // Get all the files that no longer exist by comparing the writtenKeys set to the fileHashes object.
+    const filesToDelete: string[] = [];
+    for (const key of Object.keys(fileHashes)) {
+        if (!writtenKeys.has(key)) {
+            if (!key.startsWith("_next")) {
+                // Keep the old next files. Everything else is deleted, though.
+                filesToDelete.push(key);
+                delete fileHashes[key];
+            }
+        }
+    }
+    console.log(
+        `Wrote ${writtenKeys.size} files. ${filesToDelete.length} files to delete.`,
     );
+    const deletePromises = filesToDelete.map((key) =>
+        tryOp10Times(() =>
+            s3Client.send(
+                new DeleteObjectCommand({ Bucket: bucket, Key: key }),
+            ),
+        ),
+    );
+    await Promise.all(deletePromises);
+
+    // Write file_hashes.json to the bucket.
+    await tryOp10Times(async () => {
+        await s3Client.send(
+            new PutObjectCommand({
+                Bucket: bucket,
+                Key: "file_hashes.json",
+                Body: JSON.stringify(fileHashes),
+            }),
+        );
+    });
 })().catch((e) => {
     console.error(e);
     process.exit(1);
