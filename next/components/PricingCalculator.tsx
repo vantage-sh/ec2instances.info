@@ -214,7 +214,11 @@ function Calculator({
         return a;
     }, [pricing, region, platform, duration, pricingType, removeSpot]);
 
-    const handleRegions = (regionsArr: [string, string][], label: string) => {
+    const handleRegions = (
+        regionsArr: [string, string][],
+        label: string,
+        onlySingleKey: boolean,
+    ) => {
         const v = regionsArr
             .sort((a, b) => {
                 return a[1].localeCompare(b[1]);
@@ -224,21 +228,47 @@ function Calculator({
                     {name}
                 </option>
             ));
-        return <optgroup label={label}>{v}</optgroup>;
+
+        if (v.length === 0) return null;
+        return onlySingleKey ? v : <optgroup label={label}>{v}</optgroup>;
     };
 
+    const onlySingleKey = useMemo(() => {
+        const objs = [regions.main, regions.local_zone, regions.wavelength];
+        const v = objs.reduce((acc, obj) => {
+            const keys = Object.keys(obj);
+            return keys.length > 0 ? acc + 1 : acc;
+        }, 0);
+        return v === 1;
+    }, [regions.main, regions.local_zone, regions.wavelength]);
+
     const mainRegions = useMemo(
-        () => handleRegions(Object.entries(regions.main), "Main Regions"),
+        () =>
+            handleRegions(
+                Object.entries(regions.main),
+                "Main Regions",
+                onlySingleKey,
+            ),
         [regions.main, pricing],
     );
 
     const localZones = useMemo(
-        () => handleRegions(Object.entries(regions.local_zone), "Local Zones"),
+        () =>
+            handleRegions(
+                Object.entries(regions.local_zone),
+                "Local Zones",
+                onlySingleKey,
+            ),
         [regions.local_zone, pricing],
     );
 
     const wavelengthRegions = useMemo(
-        () => handleRegions(Object.entries(regions.wavelength), "Wavelength"),
+        () =>
+            handleRegions(
+                Object.entries(regions.wavelength),
+                "Wavelength",
+                onlySingleKey,
+            ),
         [regions.wavelength, pricing],
     );
 
