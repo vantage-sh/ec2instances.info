@@ -1,3 +1,56 @@
+async function getAsset(path, env, ctx, cacheKey) {
+    const value = await env.ASSETS_KV.getWithMetadata(path, {
+        type: "arrayBuffer",
+    });
+    if (!value) {
+        // Check the bucket
+        const bucket = await env.ASSETS_BUCKET.get(path);
+        if (!bucket) {
+            // Handle a 404
+            const notFoundAsset = await env.ASSETS.get("404");
+            if (!notFoundAsset) {
+                return new Response("Internal server error", {
+                    status: 500,
+                });
+            }
+            return new Response(notFoundAsset, {
+                status: 404,
+                headers: {
+                    "Content-Type": "text/html; charset=utf-8",
+                },
+            });
+        }
+
+        // Write the asset to the cache and return it
+        const headers = new Headers();
+        bucket.writeHttpMetadata(headers);
+        headers.set("etag", bucket.httpEtag);
+        if (!path.endsWith(".xml")) {
+            // Ignore .xml files because they are for search engines
+            headers.append("Cache-Control", "s-maxage=86400");
+        }
+        const resp = new Response(bucket.body, {
+            headers,
+        });
+        ctx.waitUntil(caches.default.put(cacheKey, resp.clone()));
+        return resp;
+    }
+
+    // Return the asset from the cache.
+    const xmlLine = path.endsWith(".xml")
+        ? {}
+        : { "Cache-Control": "s-maxage=86400" };
+    const resp = new Response(value.body, {
+        status: path === "404" ? 404 : 200,
+        headers: {
+            ...value.metadata,
+            ...xmlLine,
+        },
+    });
+    ctx.waitUntil(caches.default.put(cacheKey, resp.clone()));
+    return resp;
+}
+
 export default {
     async fetch(request, env, ctx) {
         const url = new URL(request.url);
@@ -19,14 +72,7 @@ export default {
         }
 
         // Get the path.
-        let path;
-        try {
-            path = decodeURIComponent(url.pathname.substring(1));
-        } catch {
-            return new Response("Invalid path", {
-                status: 400,
-            });
-        }
+        const path = url.pathname.substring(1);
         if (path === "index.html") {
             // Redirect to root
             url.pathname = "/";
@@ -35,7 +81,7 @@ export default {
         if (path === "") path = "index.html";
         if (path.endsWith("/")) {
             // Redirect to no trailing slash
-            url.pathname = "/" + path.slice(0, -1);
+            url.pathname = "/" + encodeURIComponent(path.slice(0, -1));
             return Response.redirect(url, 301);
         }
 
@@ -50,36 +96,6 @@ export default {
         }
 
         // Try to get the asset.
-        const asset = await env.ASSETS.get(path);
-        if (!asset) {
-            const notFoundAsset = await env.ASSETS.get("404");
-            if (!notFoundAsset) {
-                return new Response("Internal server error", {
-                    status: 500,
-                });
-            }
-            const headers = new Headers();
-            notFoundAsset.writeHttpMetadata(headers);
-            headers.set("etag", notFoundAsset.httpEtag);
-            return new Response(notFoundAsset.body, {
-                status: 404,
-                headers,
-            });
-        }
-
-        const headers = new Headers();
-        asset.writeHttpMetadata(headers);
-        headers.set("etag", asset.httpEtag);
-        if (!path.endsWith(".xml")) {
-            // Ignore .xml files because they are for search engines
-            headers.append("Cache-Control", "s-maxage=86400");
-        }
-        const response = new Response(asset.body, {
-            headers,
-        });
-
-        // Cache the response
-        ctx.waitUntil(cache.put(cacheKey, response.clone()));
-        return response;
+        return await getAsset(path, env, ctx, cacheKey);
     },
 };
