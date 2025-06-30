@@ -58,13 +58,15 @@ async function tryOp10Times(fn: () => Promise<void>) {
 }
 
 async function uploadFile(key: string, filePath: string) {
+    // This is before the hash check so we don't destroy the file if its been written in the past.
+    writtenKeys.add(key);
+
     const file = await fs.readFile(filePath);
     const hash = crypto.createHash("sha256").update(file).digest("hex");
     if (fileHashes[key] === hash) {
         return;
     }
     fileHashes[key] = hash;
-    writtenKeys.add(key);
 
     const ContentType = contentTypeHandler(filePath);
     await tryOp10Times(async () => {
