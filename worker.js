@@ -1,4 +1,13 @@
 async function getAsset(path, env, ctx, cacheKey) {
+    // Attempt to decode the path.
+    try {
+        path = decodeURIComponent(path);
+    } catch {
+        return new Response("Invalid path", {
+            status: 400,
+        });
+    }
+
     const value = await env.ASSETS_KV.getWithMetadata(path, {
         type: "arrayBuffer",
     });
@@ -81,7 +90,7 @@ export default {
         if (path === "") path = "index.html";
         if (path.endsWith("/")) {
             // Redirect to no trailing slash
-            url.pathname = "/" + encodeURIComponent(path.slice(0, -1));
+            url.pathname = "/" + path.slice(0, -1);
             return Response.redirect(url, 301);
         }
 
