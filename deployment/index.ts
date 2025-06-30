@@ -305,6 +305,11 @@ async function uploadFolder(extras: string[]) {
             }),
         );
     });
+
+    // Sleep for 1 minute because CF says it can take up to 60 seconds to update.
+    console.log("Done! Sleeping for 1 minute to let CF update...");
+    await new Promise((resolve) => setTimeout(resolve, 60000));
+    console.log("Done sleeping!");
 })().catch((e) => {
     console.error(e);
     process.exit(1);
