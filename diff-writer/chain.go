@@ -43,7 +43,7 @@ type Event struct {
 	JsonDiff json.RawMessage `json:"json_diff,omitempty"`
 }
 
-func chainCompare(prevInstances, newInstances []json.RawMessage, runTime int64, tx *TxWrapper) {
+func chainCompare(providerName string, prevInstances, newInstances []json.RawMessage, runTime int64, tx *TxWrapper) {
 	prevIdMap := instances2id(prevInstances)
 	newIdMap := instances2id(newInstances)
 
@@ -60,7 +60,7 @@ func chainCompare(prevInstances, newInstances []json.RawMessage, runTime int64, 
 				if err != nil {
 					log.Fatal(err)
 				}
-				err = tx.WriteToBlockchain(prevInstanceType, runTime, &Event{
+				err = tx.WriteToBlockchain(providerName, runTime, &Event{
 					EventType:    EventTypeUpdate,
 					InstanceType: prevInstanceType,
 					JsonDiff:     diffBytes,
@@ -71,7 +71,7 @@ func chainCompare(prevInstances, newInstances []json.RawMessage, runTime int64, 
 			}
 		} else {
 			// The instance was removed.
-			err := tx.WriteToBlockchain(prevInstanceType, runTime, &Event{
+			err := tx.WriteToBlockchain(providerName, runTime, &Event{
 				EventType:    EventTypeRemove,
 				InstanceType: prevInstanceType,
 			})
@@ -83,7 +83,7 @@ func chainCompare(prevInstances, newInstances []json.RawMessage, runTime int64, 
 
 	for newInstanceType, newInstance := range newIdMap {
 		if _, ok := prevIdMap[newInstanceType]; !ok {
-			err := tx.WriteToBlockchain(newInstanceType, runTime, &Event{
+			err := tx.WriteToBlockchain(providerName, runTime, &Event{
 				EventType:    EventTypeAdd,
 				InstanceType: newInstanceType,
 				FullInstance: newInstance,

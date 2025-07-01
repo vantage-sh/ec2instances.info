@@ -51,7 +51,7 @@ func main() {
 
 	if prevChainFound {
 		// Compare the instances to the previous chain.
-		chainCompare(seed.Instances, instances, runTime, tx)
+		chainCompare(args[1], seed.Instances, instances, runTime, tx)
 	}
 
 	// Write the new chain to the database.
