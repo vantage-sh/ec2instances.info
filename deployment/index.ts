@@ -66,7 +66,7 @@ async function writeTick() {
         const json = `[${batch.join(",")}]`;
         const url = `https://api.cloudflare.com/client/v4/accounts/${accountId}/storage/kv/namespaces/${namespace}/bulk`;
         const response = await fetch(url, {
-            method: "POST",
+            method: "PUT",
             body: json,
             headers: {
                 Authorization: `Bearer ${apiKey}`,
@@ -177,6 +177,10 @@ let keysToDelete: string[] = [];
 let keysToDeleteTickPromise: Promise<void> | null = null;
 
 async function kvDeleteTick() {
+    // This tick is ready to run. Let others make a new one.
+    keysToDeleteTickPromise = null;
+
+    // Grab the current items so another tick can run.
     const items = keysToDelete;
     keysToDelete = [];
 
