@@ -11,12 +11,14 @@ async function getAsset(path, env, ctx, cacheKey) {
     const value = await env.ASSETS_KV.getWithMetadata(path, {
         type: "arrayBuffer",
     });
-    if (!value) {
+    if (!value.value) {
         // Check the bucket
         const bucket = await env.ASSETS_BUCKET.get(path);
         if (!bucket) {
             // Handle a 404
-            const notFoundAsset = await env.ASSETS_KV.get("404");
+            const notFoundAsset = await env.ASSETS_KV.get("404", {
+                type: "arrayBuffer",
+            });
             if (!notFoundAsset) {
                 return new Response("Internal server error", {
                     status: 500,
@@ -49,7 +51,7 @@ async function getAsset(path, env, ctx, cacheKey) {
     const xmlLine = path.endsWith(".xml")
         ? {}
         : { "Cache-Control": "s-maxage=86400" };
-    const resp = new Response(value.body, {
+    const resp = new Response(value.value, {
         status: path === "404" ? 404 : 200,
         headers: {
             ...value.metadata,
