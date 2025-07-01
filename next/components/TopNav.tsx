@@ -1,8 +1,10 @@
 "use client";
 
-import Link from "next/link";
+import TranslationFriendlyLink from "@/components/TranslationFriendlyLink";
 import { buttonVariants } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
+import { translationToolDetected } from "@/state";
 
 const navItems = [
     {
@@ -43,12 +45,49 @@ const navItems = [
     },
 ];
 
+function TranslationToolDetector({
+    className,
+    text,
+}: {
+    className: string;
+    text: string;
+}) {
+    const spanRef = useRef<HTMLSpanElement>(null);
+
+    useEffect(() => {
+        const span = spanRef.current;
+        if (!span) return;
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                const textContent = mutation.target.textContent;
+                if (textContent !== text) {
+                    translationToolDetected.set(true);
+                    observer.disconnect();
+                }
+            });
+        });
+        observer.observe(span, { childList: true });
+        return () => observer.disconnect();
+    }, [text]);
+
+    return (
+        <span ref={spanRef} className={className}>
+            {text}
+        </span>
+    );
+}
+
 export default function TopNav() {
     const currentPath = usePathname();
+
     return (
         <nav className="flex items-center justify-between bg-purple-brand h-[3rem] py-2 px-4">
             <div className="flex items-center justify-start gap-4">
-                <Link href="/" className="font-medium text-gray-6">
+                <TranslationFriendlyLink
+                    href="/"
+                    className="font-medium text-gray-6"
+                >
                     <div className="flex items-center justify-start gap-2">
                         <svg
                             width="28"
@@ -80,23 +119,24 @@ export default function TopNav() {
                             <span className="font-semibold text-white leading-5">
                                 Instances
                             </span>
-                            <span className="text-xs italic text-gray-5">
-                                Presented by Vantage
-                            </span>
+                            <TranslationToolDetector
+                                className="text-xs italic text-gray-5"
+                                text="Presented by Vantage"
+                            />
                         </div>
                     </div>
-                </Link>
+                </TranslationFriendlyLink>
                 {navItems.map((item) => (
                     <div
                         className="flex items-center justify-start gap-4 relative top-1.5 ml-2"
                         key={item.label}
                     >
-                        <Link
+                        <TranslationFriendlyLink
                             className="font-medium text-gray-6 text-sm"
                             href={item.href}
                         >
                             {item.label}
-                        </Link>
+                        </TranslationFriendlyLink>
                         <div className="flex items-center justify-start gap-4 rounded-md rounded-b-none bg-black/30 not-lg:hidden p-1 pb-0">
                             {item.children &&
                                 item.children.map((child) => {
@@ -106,7 +146,7 @@ export default function TopNav() {
                                             child.label.toLowerCase(),
                                         );
                                     return (
-                                        <Link
+                                        <TranslationFriendlyLink
                                             aria-current={selected}
                                             className={`font-normal text-sm px-2 py-1 pb-2 rounded rounded-b-none ${
                                                 selected
@@ -117,7 +157,7 @@ export default function TopNav() {
                                             href={child.href}
                                         >
                                             {child.label}
-                                        </Link>
+                                        </TranslationFriendlyLink>
                                     );
                                 })}
                         </div>
@@ -125,7 +165,7 @@ export default function TopNav() {
                 ))}
             </div>
             <div className="flex items-center justify-end gap-4 not-md:hidden overflow-hidden">
-                <Link
+                <TranslationFriendlyLink
                     href="https://vantage.sh/slack"
                     className={buttonVariants({
                         variant: "outline",
@@ -164,8 +204,8 @@ export default function TopNav() {
                         </defs>
                     </svg>
                     Slack
-                </Link>
-                <Link
+                </TranslationFriendlyLink>
+                <TranslationFriendlyLink
                     href="https://github.com/vantage-sh/ec2instances.info"
                     className={buttonVariants({
                         variant: "outline",
@@ -192,7 +232,7 @@ export default function TopNav() {
                         </defs>
                     </svg>
                     Star
-                </Link>
+                </TranslationFriendlyLink>
             </div>
         </nav>
     );

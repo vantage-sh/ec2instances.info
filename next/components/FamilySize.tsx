@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo } from "react";
 import { Server } from "lucide-react";
+import TranslationFriendlyLink from "./TranslationFriendlyLink";
 
 export type AllOfInstanceType = {
     name: string;
@@ -65,12 +65,12 @@ export function FamilySize({
                                     {item.name === instanceName ? (
                                         item.name
                                     ) : (
-                                        <Link
+                                        <TranslationFriendlyLink
                                             className="text-purple-1 hover:text-purple-0"
                                             href={`${pathPrefix}/${item.name}${pathSuffix}`}
                                         >
                                             {item.name}
-                                        </Link>
+                                        </TranslationFriendlyLink>
                                     )}
                                 </td>
                                 <td className={tdStyling}>{item.cpus}</td>
@@ -82,12 +82,12 @@ export function FamilySize({
             </table>
             <div className="mt-4 mb-6">
                 <p className="text-center text-sm">
-                    <Link
+                    <TranslationFriendlyLink
                         href={`${tablePath}?selected=${instanceName}`}
                         className="p-2 border border-gray-200 hover:border-gray-300 rounded-md"
                     >
                         Compare {instanceName} to other instances
-                    </Link>
+                    </TranslationFriendlyLink>
                 </p>
             </div>
         </section>

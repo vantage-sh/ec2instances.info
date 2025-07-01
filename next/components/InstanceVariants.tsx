@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Server } from "lucide-react";
-import Link from "next/link";
+import TranslationFriendlyLink from "./TranslationFriendlyLink";
 
 export default function InstanceVariants({
     bestOfVariants,
@@ -32,12 +32,12 @@ export default function InstanceVariants({
                     {keys.map((key) => (
                         <tr key={key} className="odd:bg-gray-100">
                             <td className="border border-gray-200 p-1">
-                                <Link
+                                <TranslationFriendlyLink
                                     className="text-purple-1 hover:text-purple-0"
                                     href={`${pathPrefix}/${bestOfVariants[key]}${pathSuffix}`}
                                 >
                                     {key}
-                                </Link>
+                                </TranslationFriendlyLink>
                             </td>
                         </tr>
                     ))}

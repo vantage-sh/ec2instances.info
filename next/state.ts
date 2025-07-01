@@ -14,6 +14,8 @@ const preloadedValues: {
     };
 } = {};
 
+export const translationToolDetected = atom(false);
+
 export function useInstanceData<Instance>(
     path: string | null,
     initialInstances: Instance[],

@@ -1,3 +1,4 @@
+import { translationToolDetected } from "@/state";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
@@ -47,7 +48,11 @@ if (typeof window !== "undefined") {
 export default ({
     prefetch = true,
     ...props
-}: Omit<React.ComponentProps<typeof Link>, "ref">) => {
+}: Omit<React.ComponentProps<"a">, "ref" | "href"> & {
+    prefetch?: boolean;
+    href: string;
+}) => {
+    const usesTranslationTool = translationToolDetected.use();
     let router: ReturnType<typeof useRouter> | null = null;
     try {
         router = useRouter();
@@ -105,6 +110,10 @@ export default ({
             }
         };
     }, [internalRef.current, prefetch, router, linksMapping]);
+
+    if (usesTranslationTool) {
+        return <a {...props} />;
+    }
 
     if (!prefetch) {
         return <Link prefetch={false} {...props} />;
