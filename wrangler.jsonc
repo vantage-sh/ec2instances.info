@@ -5,7 +5,13 @@
     "r2_buckets": [
         {
             "bucket_name": "ec2instances-assets-production",
-            "binding": "ASSETS",
+            "binding": "ASSETS_BUCKET",
+        },
+    ],
+    "kv_namespaces": [
+        {
+            "binding": "ASSETS_KV",
+            "id": "33b0605d8d1e48bc9d92b2a3a2170f73",
         },
     ],
     "env": {
@@ -14,7 +20,13 @@
             "r2_buckets": [
                 {
                     "bucket_name": "ec2instances-assets-staging",
-                    "binding": "ASSETS",
+                    "binding": "ASSETS_BUCKET",
+                },
+            ],
+            "kv_namespaces": [
+                {
+                    "binding": "ASSETS_KV",
+                    "id": "21c077fc724842bd95a0df80f84a3484",
                 },
             ],
         },
