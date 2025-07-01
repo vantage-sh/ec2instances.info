@@ -81,7 +81,7 @@ export default {
         }
 
         // Get the path.
-        const path = url.pathname.substring(1);
+        let path = url.pathname.substring(1);
         if (path === "index.html") {
             // Redirect to root
             url.pathname = "/";
