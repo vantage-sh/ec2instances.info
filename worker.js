@@ -16,7 +16,7 @@ async function getAsset(path, env, ctx, cacheKey) {
         const bucket = await env.ASSETS_BUCKET.get(path);
         if (!bucket) {
             // Handle a 404
-            const notFoundAsset = await env.ASSETS.get("404");
+            const notFoundAsset = await env.ASSETS_KV.get("404");
             if (!notFoundAsset) {
                 return new Response("Internal server error", {
                     status: 500,
