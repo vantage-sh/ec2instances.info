@@ -70,6 +70,7 @@ async function writeTick() {
             body: json,
             headers: {
                 Authorization: `Bearer ${apiKey}`,
+                "Content-Type": "application/json",
             },
         });
         if (!response.ok) {
