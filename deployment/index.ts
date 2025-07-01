@@ -100,7 +100,7 @@ async function kvPut(
     // Wait for the tick to run and make it if it doesn't exist.
     if (!writeTickPromise) {
         writeTickPromise = (async () => {
-            await new Promise((resolve) => setTimeout(resolve, 100));
+            await new Promise((resolve) => setTimeout(resolve, 10000));
             await writeTick();
         })();
     }
@@ -224,7 +224,7 @@ async function kvDelete(key: string) {
     keysToDelete.push(key);
     if (!keysToDeleteTickPromise) {
         keysToDeleteTickPromise = (async () => {
-            await new Promise((resolve) => setTimeout(resolve, 100));
+            await new Promise((resolve) => setTimeout(resolve, 10000));
             await kvDeleteTick();
         })();
     }
