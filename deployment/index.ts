@@ -196,11 +196,10 @@ async function kvDeleteTick() {
 
     // Make the requests.
     for (const batch of batches) {
-        const json = `[${batch.join(",")}]`;
         const url = `https://api.cloudflare.com/client/v4/accounts/${accountId}/storage/kv/namespaces/${namespace}/bulk`;
         const response = await fetch(url, {
             method: "POST",
-            body: json,
+            body: JSON.stringify(batch),
             headers: {
                 Authorization: `Bearer ${apiKey}`,
             },
