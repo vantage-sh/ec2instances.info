@@ -207,6 +207,7 @@ async function kvDeleteTick() {
             body: JSON.stringify(batch),
             headers: {
                 Authorization: `Bearer ${apiKey}`,
+                "Content-Type": "application/json",
             },
         });
         if (!response.ok) {
