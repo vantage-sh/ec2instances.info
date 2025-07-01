@@ -50,6 +50,8 @@ jobs:
                   DEPLOYMENT_CF_ACCOUNT_ID: ${{ secrets.DEPLOYMENT_CF_ACCOUNT_ID }}
                   DEPLOYMENT_CF_AWS_ACCESS_KEY_ID: ${{ secrets.STAGING_CF_AWS_ACCESS_KEY_ID }}
                   DEPLOYMENT_CF_AWS_SECRET_ACCESS_KEY: ${{ secrets.STAGING_CF_AWS_SECRET_ACCESS_KEY }}
+                  DEPLOYMENT_CF_API_KEY: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                  DEPLOYMENT_CF_NAMESPACE: ${{ secrets.STAGING_CF_NAMESPACE }}
 
             - uses: cloudflare/wrangler-action@v3
               with:
