@@ -78,7 +78,7 @@ async function writeTick() {
                 `Failed to write to KV: ${response.status} ${response.statusText} (${await response.text()})`,
             );
         }
-        await new Promise((resolve) => setTimeout(resolve, 100));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
     }
 }
 
@@ -216,7 +216,7 @@ async function kvDeleteTick() {
                 `Failed to delete from KV: ${response.status} ${response.statusText} (${await response.text()})`,
             );
         }
-        await new Promise((resolve) => setTimeout(resolve, 100));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
     }
 }
 
