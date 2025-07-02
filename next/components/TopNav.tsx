@@ -69,7 +69,7 @@ function TranslationToolDetector({
         });
         observer.observe(span, { childList: true });
         return () => observer.disconnect();
-    }, [text]);
+    }, [text, spanRef.current, translationToolDetected]);
 
     return (
         <span ref={spanRef} className={className}>
