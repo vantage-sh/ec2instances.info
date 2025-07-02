@@ -9,7 +9,7 @@ async function getAsset(path, env, ctx, cacheKey) {
     }
 
     const value = await env.ASSETS_KV.getWithMetadata(path, {
-        type: "arrayBuffer",
+        type: "stream",
     });
     if (!value.value) {
         // Check the bucket
@@ -17,7 +17,7 @@ async function getAsset(path, env, ctx, cacheKey) {
         if (!bucket) {
             // Handle a 404
             const notFoundAsset = await env.ASSETS_KV.get("404", {
-                type: "arrayBuffer",
+                type: "stream",
             });
             if (!notFoundAsset) {
                 return new Response("Internal server error", {
