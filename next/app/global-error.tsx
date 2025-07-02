@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { translationToolDetected } from "@/state";
 import { useEffect } from "react";
 
 export default function GlobalError({ error }: { error: Error }) {
@@ -9,7 +10,13 @@ export default function GlobalError({ error }: { error: Error }) {
         let reportPromise: Promise<string | void> = Promise.resolve();
         if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
             reportPromise = import("@sentry/nextjs").then(
-                ({ captureException }) => captureException(error),
+                ({ captureException }) =>
+                    captureException(error, {
+                        extra: {
+                            translation_tool:
+                                translationToolDetected.nonReactGet(),
+                        },
+                    }),
             );
         }
 
