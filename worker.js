@@ -17,7 +17,7 @@ async function getAsset(path, env, ctx, cacheKey) {
         if (!bucket) {
             // Handle a 404
             const notFoundAsset = await env.ASSETS_KV.get("404", {
-                type: "stream",
+                type: "arrayBuffer",
             });
             if (!notFoundAsset) {
                 return new Response("Internal server error", {

@@ -88,12 +88,15 @@ async function kvPut(
     contentType: string | undefined,
 ) {
     // Create the item to batch.
+    const baseObj = { "Content-Length": value.length.toString() };
     const b64 = value.toString("base64");
     const item = JSON.stringify({
         base64: true,
         key,
         value: b64,
-        metadata: contentType ? { "Content-Type": contentType } : {},
+        metadata: contentType
+            ? { ...baseObj, "Content-Type": contentType }
+            : baseObj,
     });
     pendingKvWriteRequests.push(item);
 
