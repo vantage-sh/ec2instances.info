@@ -1,3 +1,4 @@
+import { atom } from "atomtree";
 import { useEffect, useSyncExternalStore } from "react";
 import handleCompressedFile from "./utils/handleCompressedFile";
 import { CostDuration, PricingUnit } from "./types";
