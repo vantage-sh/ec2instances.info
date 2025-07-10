@@ -5,6 +5,7 @@ import type { Instance } from "@/utils/colunnData/redshift";
 import { makeHalfRainbowTable } from "@/utils/halfRainbowTable";
 import HalfRainbowWrap from "../HalfRainbowWrap";
 import type { Metadata } from "next";
+import loadAdvertData from "@/utils/loadAdvertData";
 
 export const metadata: Metadata = {
     title: "Amazon Redshift Instance Comparison",
@@ -34,6 +35,8 @@ export default async function Redshift() {
         }
     }
 
+    const marketingData = await loadAdvertData;
+
     const [rainbowTable, ...compressedInstances] = makeHalfRainbowTable(
         instances as Instance[],
     );
@@ -44,6 +47,7 @@ export default async function Redshift() {
             rainbowTable={rainbowTable}
             regions={regions}
             columnAtomKey="redshift"
+            marketingData={marketingData}
         />
     );
 }

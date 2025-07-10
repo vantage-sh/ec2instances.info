@@ -10,6 +10,7 @@ import PricingCalculator from "./PricingCalculator";
 import VantageDemo from "./VantageDemo";
 import MarketingWrapper from "./MarketingWrapper";
 import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
+import { MarketingSchema } from "@/schemas/marketing";
 
 type AzureInstanceRootProps = {
     rainbowTable: string[];
@@ -22,6 +23,7 @@ type AzureInstanceRootProps = {
     regions: Record<string, string>;
     description: string;
     bestOfVariants: Record<string, string>;
+    marketingData: MarketingSchema;
 };
 
 const reservedTermOptions: [string, string][] = [
@@ -43,11 +45,12 @@ export default function AzureInstanceRoot({
     bestOfVariants,
     rainbowTable,
     regions,
+    marketingData,
 }: AzureInstanceRootProps) {
     const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
 
     return (
-        <MarketingWrapper instanceType="azure">
+        <MarketingWrapper instanceType="azure" marketingData={marketingData}>
             <main className="my-4 px-4 not-md:w-screen">
                 <InstanceBreadcrumbs
                     crumbs={[

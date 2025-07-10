@@ -6,6 +6,7 @@ import { decode } from "@msgpack/msgpack";
 import { readFile } from "fs/promises";
 import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
+import loadAdvertData from "@/utils/loadAdvertData";
 
 export const dynamic = "force-static";
 
@@ -141,6 +142,8 @@ export default async function Page({
 
     const compressedInstance = makeRainbowTable([{ ...instance }]);
 
+    const marketingData = await loadAdvertData;
+
     return (
         <EC2InstanceRoot
             rainbowTable={compressedInstance[0] as string[]}
@@ -172,6 +175,7 @@ export default async function Page({
             reservedTermOptions={reservedTermOptions}
             typeName="RDS"
             marketingInstanceType="rds"
+            marketingData={marketingData}
         />
     );
 }

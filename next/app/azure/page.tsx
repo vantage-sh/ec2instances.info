@@ -6,6 +6,7 @@ import { decode } from "@msgpack/msgpack";
 import { AzureInstance } from "@/utils/colunnData/azure";
 import AzureClient from "./AzureClient";
 import type { Metadata } from "next";
+import loadAdvertData from "@/utils/loadAdvertData";
 
 export const metadata: Metadata = {
     title: "Azure VM Comparison",
@@ -31,6 +32,8 @@ export default async function Azure() {
         "utf-8",
     );
 
+    const marketingData = await loadAdvertData;
+
     return (
         <>
             <Head>
@@ -49,6 +52,7 @@ export default async function Azure() {
                 regions={regions}
                 compressedDataPathTemplate={`/remaining-azure-instances-p{}.msgpack.xz?cache=${instancesHash}`}
                 compressedInstances={compressedInstances}
+                marketingData={marketingData}
             />
         </>
     );

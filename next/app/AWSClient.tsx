@@ -10,10 +10,13 @@ import dynamicallyDecompress from "@/utils/dynamicallyDecompress";
 import DoMigration from "@/components/DoMigration";
 import { AtomKeyWhereInstanceIs } from "@/components/InstanceTable";
 import { reservedTermOptions } from "@/utils/dataMappings";
+import { MarketingSchema } from "@/schemas/marketing";
+import Advert from "@/components/Advert";
 
 type RootProps<Instance extends { instance_type: string }> = {
     columnAtomKey: AtomKeyWhereInstanceIs<Instance>;
     regions: Region;
+    marketingData: MarketingSchema;
 };
 
 type AWSClientProps<
@@ -91,23 +94,30 @@ export default function AWSClient<
             : "h-[calc(100vh-8.5em)]";
 
     return (
-        <main className={`${full} overflow-y-hidden flex flex-col`}>
-            <DoMigration atomKey={props.columnAtomKey} />
-            <Filters
-                columnAtomKey={props.columnAtomKey}
-                regions={props.regions}
-                rowSelection={rowSelection}
-                reservedTermOptions={reservedTermOptions}
+        <>
+            <Advert
+                marketingData={props.marketingData}
+                instanceGroup={props.columnAtomKey}
+                gpu={false}
             />
-            <div className="flex-1 min-h-0">
-                <InstanceTable
-                    instances={instances}
-                    rowSelection={rowSelection}
-                    setRowSelection={setRowSelection}
-                    instanceCount={props.instanceCount ?? instances.length}
+            <main className={`${full} overflow-y-hidden flex flex-col`}>
+                <DoMigration atomKey={props.columnAtomKey} />
+                <Filters
                     columnAtomKey={props.columnAtomKey}
+                    regions={props.regions}
+                    reservedTermOptions={reservedTermOptions}
+                    rowSelection={rowSelection}
                 />
-            </div>
-        </main>
+                <div className="flex-1 min-h-0">
+                    <InstanceTable
+                        instances={instances}
+                        instanceCount={props.instanceCount ?? instances.length}
+                        columnAtomKey={props.columnAtomKey}
+                        rowSelection={rowSelection}
+                        setRowSelection={setRowSelection}
+                    />
+                </div>
+            </main>
+        </>
     );
 }

@@ -7,6 +7,7 @@ import AzureInstanceRoot from "@/components/AzureInstanceRoot";
 import generateAzureDescription from "@/utils/generateAzureDescription";
 import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
+import loadAdvertData from "@/utils/loadAdvertData";
 
 export const dynamic = "force-static";
 
@@ -152,6 +153,8 @@ export default async function Page({
 }: {
     params: Promise<{ slug: string }>;
 }) {
+    const marketingData = await loadAdvertData;
+
     const { instances, instance, regions, description } =
         await handleParams(params);
     const [itype] = instance.instance_type.split("-", 2);
@@ -186,6 +189,7 @@ export default async function Page({
             regions={regions}
             description={description}
             bestOfVariants={bestOfVariants}
+            marketingData={marketingData}
         />
     );
 }
