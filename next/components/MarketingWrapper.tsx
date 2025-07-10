@@ -1,3 +1,6 @@
+import { MarketingSchema } from "@/schemas/marketing";
+import Advert from "./Advert";
+
 const ItemsWrapper = ({ children }: { children: React.ReactNode }) => (
     <section className="not-xl:flex not-xl:flex-wrap not-xl:w-screen gap-4 mt-4">
         {children}
@@ -218,12 +221,34 @@ const AzureMarketing = () => (
 
 type MarketingWrapperProps = {
     instanceType: string;
+    marketingData: MarketingSchema;
     children: React.ReactNode;
 };
+
+const ITEMS = [
+    "ec2",
+    "azure",
+    "rds",
+    "opensearch",
+    "redshift",
+    "cache",
+] as const;
+
+function processGroup(instanceType: string) {
+    const s = instanceType.split("-");
+    if (s[0] === "elasticache") {
+        return "cache";
+    }
+    if (ITEMS.includes(s[0] as (typeof ITEMS)[number])) {
+        return s[0] as (typeof ITEMS)[number];
+    }
+    throw new Error(`Unknown instance type: ${instanceType}`);
+}
 
 export default function MarketingWrapper({
     instanceType,
     children,
+    marketingData,
 }: MarketingWrapperProps) {
     if (process.env.NEXT_PUBLIC_REMOVE_ADVERTS === "1") return children;
 
@@ -259,11 +284,18 @@ export default function MarketingWrapper({
     }
 
     return (
-        <div className="w-full">
-            <div className="xl:flex gap-4 mx-auto w-max">
-                <div className="flex-col">{children}</div>
-                <div className="flex-col">{node}</div>
+        <>
+            <Advert
+                marketingData={marketingData}
+                instanceGroup={processGroup(instanceType)}
+                gpu={instanceType.endsWith("-gpu")}
+            />
+            <div className="w-full">
+                <div className="xl:flex gap-4 mx-auto w-max">
+                    <div className="flex-col">{children}</div>
+                    <div className="flex-col">{node}</div>
+                </div>
             </div>
-        </div>
+        </>
     );
 }

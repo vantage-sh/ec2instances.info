@@ -11,6 +11,7 @@ import bestEc2InstanceForEachVariant from "@/utils/bestEc2InstanceForEachVariant
 import tryPricingMappingWithDefaultsAndYoloIfNot from "@/utils/tryPricingGetAndYoloIfNot";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 import { urlInject } from "@/utils/urlInject";
+import loadAdvertData from "@/utils/loadAdvertData";
 
 export const dynamic = "force-static";
 
@@ -166,6 +167,8 @@ export default async function Page({
         marketingInstanceType = "ec2-gpu";
     }
 
+    const marketingData = await loadAdvertData;
+
     return (
         <EC2InstanceRoot
             rainbowTable={compressedInstance[0] as string[]}
@@ -181,6 +184,7 @@ export default async function Page({
                 },
             )}
             allOfInstanceType={allOfInstanceType}
+            marketingData={marketingData}
             osOptions={osOptions}
             defaultOs="linux"
             generatorKey="ec2"

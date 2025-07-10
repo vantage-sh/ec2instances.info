@@ -10,6 +10,7 @@ import InstanceVariants from "./InstanceVariants";
 import VantageDemo from "./VantageDemo";
 import MarketingWrapper from "./MarketingWrapper";
 import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
+import { MarketingSchema } from "@/schemas/marketing";
 
 interface InstanceRootProps {
     rainbowTable: string[];
@@ -30,6 +31,7 @@ interface InstanceRootProps {
     reservedTermOptions: [string, string][];
     typeName: string;
     marketingInstanceType: string;
+    marketingData: MarketingSchema;
 }
 
 export default function EC2InstanceRoot({
@@ -49,11 +51,15 @@ export default function EC2InstanceRoot({
     storeOsNameRatherThanId,
     reservedTermOptions,
     marketingInstanceType,
+    marketingData,
 }: InstanceRootProps) {
     const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
 
     return (
-        <MarketingWrapper instanceType={marketingInstanceType}>
+        <MarketingWrapper
+            instanceType={marketingInstanceType}
+            marketingData={marketingData}
+        >
             <main className="my-4 px-4 not-md:w-screen">
                 <InstanceBreadcrumbs
                     crumbs={[

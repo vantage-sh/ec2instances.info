@@ -6,6 +6,7 @@ import InstanceDataView from "@/components/InstanceDataView";
 import generateRedshiftTables from "@/utils/generateRedshiftTables";
 import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
+import loadAdvertData from "@/utils/loadAdvertData";
 
 export const dynamic = "force-static";
 
@@ -90,6 +91,8 @@ export default async function Page({
         await handleParams(params);
     const description = generateDescription(instance, ondemandCost);
 
+    const marketingData = await loadAdvertData;
+
     const [itype] = instance.instance_type.split(".", 2);
     const allOfInstanceType = instances
         .filter((i) => i.instance_type.startsWith(`${itype}.`))
@@ -109,6 +112,7 @@ export default async function Page({
             regions={regions}
             typeName="Redshift"
             instanceType="redshift"
+            marketingData={marketingData}
         >
             <InstanceDataView tables={generateRedshiftTables(instance)} />
         </HalfEC2Root>

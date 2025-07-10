@@ -9,6 +9,7 @@ import InstanceBreadcrumbs from "./InstanceBreadcrumbs";
 import MarketingWrapper from "./MarketingWrapper";
 import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
 import { useMemo } from "react";
+import { MarketingSchema } from "@/schemas/marketing";
 
 type HalfPricing = {
     [region: string]: {
@@ -31,6 +32,7 @@ type InstanceRootProps<
     tablePath: string;
     regions: Region;
     instanceType: string;
+    marketingData: MarketingSchema;
 };
 
 const reservedTermOptions: [string, string][] = [
@@ -51,6 +53,7 @@ export default function HalfEC2Root<
     tablePath,
     regions,
     instanceType,
+    marketingData,
 }: InstanceRootProps<Instance>) {
     const remappedPricing = useMemo(() => {
         const remappedPricing: Pricing = {};
@@ -67,7 +70,10 @@ export default function HalfEC2Root<
     const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
 
     return (
-        <MarketingWrapper instanceType={instanceType}>
+        <MarketingWrapper
+            instanceType={instanceType}
+            marketingData={marketingData}
+        >
             <main className="my-4 px-4 not-md:w-screen">
                 <InstanceBreadcrumbs
                     crumbs={[

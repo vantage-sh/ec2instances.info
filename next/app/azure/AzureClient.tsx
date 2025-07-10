@@ -6,6 +6,8 @@ import { useInstanceData } from "@/state";
 import { AzureInstance } from "@/utils/colunnData/azure";
 import dynamicallyDecompress from "@/utils/dynamicallyDecompress";
 import { useMemo } from "react";
+import { MarketingSchema } from "@/schemas/marketing";
+import Advert from "@/components/Advert";
 
 type Props = {
     instanceCount: number;
@@ -14,6 +16,7 @@ type Props = {
     };
     compressedDataPathTemplate: string;
     compressedInstances: [string[], ...AzureInstance[]];
+    marketingData: MarketingSchema;
 };
 
 export default function AzureClient({
@@ -21,6 +24,7 @@ export default function AzureClient({
     regions,
     compressedDataPathTemplate,
     compressedInstances,
+    marketingData,
 }: Props) {
     const initialInstances = useMemo(() => {
         const rainbowTable = compressedInstances.shift() as string[];
@@ -47,43 +51,50 @@ export default function AzureClient({
             : "h-[calc(100vh-8.5em)]";
 
     return (
-        <main className={`${full} overflow-y-hidden flex flex-col`}>
-            <Filters
-                columnAtomKey="azure"
-                regions={{
-                    local_zone: {},
-                    main: regions,
-                    wavelength: {},
-                }}
-                ecuRename="ACU"
-                reservedTermOptions={[
-                    {
-                        value: "yrTerm1Standard.allUpfront",
-                        label: "No Hybrid Benefit - 1 Year",
-                    },
-                    {
-                        value: "yrTerm3Standard.allUpfront",
-                        label: "No Hybrid Benefit - 3 Year",
-                    },
-                    {
-                        value: "yrTerm1Standard.hybridbenefit",
-                        label: "Hybrid Benefit - 1 Year",
-                    },
-                    {
-                        value: "yrTerm3Standard.hybridbenefit",
-                        label: "Hybrid Benefit - 3 Year",
-                    },
-                ]}
-                reservedLabel="Hybrid Benefit"
+        <>
+            <Advert
+                marketingData={marketingData}
+                instanceGroup="azure"
+                gpu={false}
             />
-            <div className="flex-1 min-h-0">
-                <InstanceTable
-                    instances={allInstances}
-                    instanceCount={instanceCount}
+            <main className={`${full} overflow-y-hidden flex flex-col`}>
+                <Filters
                     columnAtomKey="azure"
+                    regions={{
+                        local_zone: {},
+                        main: regions,
+                        wavelength: {},
+                    }}
                     ecuRename="ACU"
+                    reservedTermOptions={[
+                        {
+                            value: "yrTerm1Standard.allUpfront",
+                            label: "No Hybrid Benefit - 1 Year",
+                        },
+                        {
+                            value: "yrTerm3Standard.allUpfront",
+                            label: "No Hybrid Benefit - 3 Year",
+                        },
+                        {
+                            value: "yrTerm1Standard.hybridbenefit",
+                            label: "Hybrid Benefit - 1 Year",
+                        },
+                        {
+                            value: "yrTerm3Standard.hybridbenefit",
+                            label: "Hybrid Benefit - 3 Year",
+                        },
+                    ]}
+                    reservedLabel="Hybrid Benefit"
                 />
-            </div>
-        </main>
+                <div className="flex-1 min-h-0">
+                    <InstanceTable
+                        instances={allInstances}
+                        instanceCount={instanceCount}
+                        columnAtomKey="azure"
+                        ecuRename="ACU"
+                    />
+                </div>
+            </main>
+        </>
     );
 }

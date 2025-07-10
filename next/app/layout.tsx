@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import { GoogleTagManager } from "@next/third-parties/google";
 import Script from "next/script";
-import Advert from "@/components/Advert";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,7 +45,6 @@ export default function RootLayout({
             </head>
             <body className={inter.className}>
                 <TopNav />
-                <Advert />
                 <Toaster duration={2000} />
                 {children}
                 <Footer />

@@ -5,6 +5,7 @@ import AWSClient from "./AWSClient";
 import Head from "next/head";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 import type { Metadata } from "next";
+import loadAdvertData from "@/utils/loadAdvertData";
 
 export const metadata: Metadata = {
     title: "Amazon EC2 Instance Comparison",
@@ -25,6 +26,8 @@ export default async function Home() {
         "utf-8",
     );
 
+    const marketingData = await loadAdvertData;
+
     return (
         <>
             <Head>
@@ -39,6 +42,7 @@ export default async function Home() {
                 ))}
             </Head>
             <AWSClient
+                marketingData={marketingData}
                 instanceCount={instanceCount}
                 regions={regions}
                 compressedInstances={compressedInstances}
