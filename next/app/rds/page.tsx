@@ -4,6 +4,7 @@ import { EC2Instance, Region } from "@/types";
 import AWSClient from "../AWSClient";
 import Head from "next/head";
 import type { Metadata } from "next";
+import loadAdvertData from "@/utils/loadAdvertData";
 
 export const metadata: Metadata = {
     title: "Amazon RDS Instance Comparison",
@@ -26,6 +27,8 @@ export default async function RDS() {
         "utf-8",
     );
 
+    const marketingData = await loadAdvertData;
+
     return (
         <>
             <Head>
@@ -42,6 +45,7 @@ export default async function RDS() {
                 compressedInstances={compressedInstances}
                 compressedDataPathTemplate={`/remaining-rds-instances.msgpack.xz?cache=${instancesHash}`}
                 columnAtomKey="rds"
+                marketingData={marketingData}
             />
         </>
     );

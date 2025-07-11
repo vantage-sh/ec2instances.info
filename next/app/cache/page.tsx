@@ -4,6 +4,7 @@ import addRenderInfo from "@/utils/addRenderInfo";
 import AWSClient from "../AWSClient";
 import makeRainbowTable from "@/utils/makeRainbowTable";
 import type { Metadata } from "next";
+import loadAdvertData from "@/utils/loadAdvertData";
 
 export const metadata: Metadata = {
     title: "Amazon ElastiCache Instance Comparison",
@@ -38,6 +39,8 @@ export default async function Cache() {
         delete instance.regions;
     }
 
+    const marketingData = await loadAdvertData;
+
     const compressedData = makeRainbowTable(instances);
 
     return (
@@ -47,6 +50,7 @@ export default async function Cache() {
             compressedInstances={compressedData as [string[], ...EC2Instance[]]}
             instanceCount={instances.length}
             columnAtomKey="cache"
+            marketingData={marketingData}
         />
     );
 }
