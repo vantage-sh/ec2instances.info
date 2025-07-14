@@ -1,6 +1,7 @@
 import componentTests from "@/utils/testing/componentTests";
 import Advert from "./Advert";
 import { expect, vi } from "vitest";
+import { InstanceGroupType, MarketingSchema } from "@/schemas/marketing";
 
 const originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
 
@@ -10,6 +11,34 @@ vi.mock("next/navigation", () => ({
     usePathname: () => pathname,
 }));
 
+const genericMockMarketingData: MarketingSchema = {
+    ctas: {
+        hello: {
+            title: "Hello",
+            cta_text: "Hello",
+            cta_url: "https://www.vantage.sh",
+        },
+    },
+    promotions: {
+        generic: [
+            {
+                cta: "hello",
+            },
+        ],
+    },
+};
+
+const fetchBefore = window.fetch;
+
+const stubFetchWithError = {
+    before: () => {
+        window.fetch = () => Promise.reject(new Error("test"));
+    },
+    after: () => {
+        window.fetch = fetchBefore;
+    },
+};
+
 componentTests(
     [
         {
@@ -17,12 +46,18 @@ componentTests(
             patch: {
                 before: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "1";
+                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                    stubFetchWithError.after();
                 },
             },
-            props: {},
+            props: {
+                gpu: false,
+                instanceGroup: "generic" as InstanceGroupType,
+                marketingData: genericMockMarketingData,
+            },
             test: (component) => {
                 expect(component.container.innerHTML).toBe("");
             },
@@ -33,37 +68,21 @@ componentTests(
                 before: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "0";
                     pathname = "/";
+                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
                     pathname = "/";
+                    stubFetchWithError.after();
                 },
             },
-            props: {},
+            props: {
+                gpu: false,
+                instanceGroup: "generic" as InstanceGroupType,
+                marketingData: genericMockMarketingData,
+            },
             test: (component) => {
-                expect(component.container.innerHTML).toContain(
-                    "Vantage is the FinOps platform your engineering team will actually use.",
-                );
-            },
-        },
-        {
-            name: "should render azure when NEXT_PUBLIC_REMOVE_ADVERTS is not 1",
-            patch: {
-                before: () => {
-                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "0";
-                    pathname = "/azure/vm";
-                },
-                after: () => {
-                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
-                    pathname = "/";
-                },
-            },
-            props: {},
-            test: (component) => {
-                expect(component.container.innerHTML).not.toBe("");
-                expect(component.container.innerHTML).toContain(
-                    "Trying to save on Azure?",
-                );
+                expect(component.container.innerHTML).toContain("Hello");
             },
         },
     ],
