@@ -22,6 +22,7 @@ export const promotion = object({
         object({
             uses_gt: optional(number()),
             gpu: optional(boolean()),
+            ab: optional(boolean()),
         }),
     ),
 });

@@ -6,6 +6,7 @@ import {
     validateMarketing,
 } from "@/schemas/marketing";
 import { useEffect, useState } from "react";
+import { MARKETING_JSON_URL } from "./advertUrl";
 
 const style = {
     color: "white",
@@ -15,9 +16,7 @@ const style = {
     backgroundRepeat: "no-repeat",
 };
 
-export const MARKETING_JSON_URL = "";
-
-async function fetchOrGetCachedMarketingData() {
+async function fetchOrGetCachedMarketingData(marketingData: MarketingSchema) {
     // Cache this for 30 minutes.
     const cachedString = localStorage.getItem("vantage-marketing-data");
     if (cachedString) {
@@ -32,16 +31,21 @@ async function fetchOrGetCachedMarketingData() {
     }
 
     // Fetch the latest marketing data.
-    const res = await fetch(MARKETING_JSON_URL);
-    const newData = await res.json();
-    localStorage.setItem(
-        "vantage-marketing-data",
-        JSON.stringify({
-            timestamp: Date.now(),
-            data: newData,
-        }),
-    );
-    return newData;
+    try {
+        const res = await fetch(MARKETING_JSON_URL);
+        const newData = await res.json();
+        localStorage.setItem(
+            "vantage-marketing-data",
+            JSON.stringify({
+                timestamp: Date.now(),
+                data: newData,
+            }),
+        );
+        return newData;
+    } catch {}
+
+    // Use the old marketing data if the fetch fails.
+    return marketingData;
 }
 
 export default function Advert({
@@ -74,6 +78,7 @@ export default function Advert({
         const genericPromotion = marketingData.promotions.generic;
         for (const promotion of genericPromotion || []) {
             if (promotion.if) {
+                if (promotion.if.ab) continue;
                 if (promotion.if.gpu && gpu) {
                     return marketingData.ctas[promotion.cta];
                 }
@@ -100,6 +105,20 @@ export default function Advert({
         return null;
     });
 
+    // Make an ab group.
+    const [abGroup, setAbGroup] = useState(false);
+    useEffect(() => {
+        const localStorageValue = localStorage.getItem("vantage-ab-group");
+        if (localStorageValue) {
+            setAbGroup(Boolean(localStorageValue));
+        } else {
+            const random = Math.random();
+            const ab = random < 0.5;
+            localStorage.setItem("vantage-ab-group", ab.toString());
+            setAbGroup(ab);
+        }
+    }, []);
+
     // Handle the client-side logic.
     useEffect(() => {
         // Add 1 to the use counter.
@@ -115,12 +134,16 @@ export default function Advert({
 
         (async () => {
             // Get the latest marketing data.
-            const newData = await fetchOrGetCachedMarketingData();
+            const newData = await fetchOrGetCachedMarketingData(marketingData);
 
             // Handle the selected promotion.
             const selectedPromotion = newData.promotions[instanceGroup];
             for (const promotion of selectedPromotion || []) {
                 if (promotion.if) {
+                    if (promotion.if.ab && abGroup) {
+                        if (active) setCta(newData.ctas[promotion.cta]);
+                        return;
+                    }
                     if (promotion.if.gpu && gpu) {
                         if (active) setCta(newData.ctas[promotion.cta]);
                         return;
@@ -142,6 +165,10 @@ export default function Advert({
             const genericPromotion = newData.promotions.generic;
             for (const promotion of genericPromotion || []) {
                 if (promotion.if) {
+                    if (promotion.if.ab && abGroup) {
+                        if (active) setCta(newData.ctas[promotion.cta]);
+                        return;
+                    }
                     if (promotion.if.gpu && gpu) {
                         if (active) setCta(newData.ctas[promotion.cta]);
                         return;
@@ -159,7 +186,7 @@ export default function Advert({
         return () => {
             active = false;
         };
-    }, [gpu]);
+    }, [gpu, abGroup]);
 
     const handledCta =
         cta ||
