@@ -1,5 +1,5 @@
 import { validateMarketing } from "@/schemas/marketing";
-import { MARKETING_JSON_URL } from "@/components/Advert";
+import { MARKETING_JSON_URL } from "@/components/advertUrl";
 
 async function loadAdvertData() {
     const res = await fetch(MARKETING_JSON_URL);
