@@ -3,6 +3,7 @@ import MarketingWrapper from "./MarketingWrapper";
 import componentTests from "@/utils/testing/componentTests";
 import { expect } from "vitest";
 import { RenderResult } from "@testing-library/react";
+import { MarketingSchema } from "@/schemas/marketing";
 
 function validateMarketing(component: RenderResult) {
     const cols = component.container.querySelectorAll("div[class='flex-col']");
@@ -21,6 +22,34 @@ let originalEnv: string | undefined;
 
 const testP = React.createElement("p", {}, "testing 123");
 
+const mockMarketingData: MarketingSchema = {
+    ctas: {
+        hello: {
+            title: "Hello",
+            cta_text: "Hello",
+            cta_url: "https://www.vantage.sh",
+        },
+    },
+    promotions: {
+        generic: [
+            {
+                cta: "hello",
+            },
+        ],
+    },
+};
+
+const fetchBefore = window.fetch;
+
+const stubFetchWithError = {
+    before: () => {
+        window.fetch = () => Promise.reject(new Error("test"));
+    },
+    after: () => {
+        window.fetch = fetchBefore;
+    },
+};
+
 componentTests(
     [
         // Marketing disabled
@@ -31,14 +60,17 @@ componentTests(
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "1";
+                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                    stubFetchWithError.after();
                 },
             },
             props: {
                 instanceType: "ec2-other",
                 children: testP,
+                marketingData: mockMarketingData,
             },
             test: (component) => {
                 expect(component.container.innerHTML).toBe(
@@ -52,14 +84,17 @@ componentTests(
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "1";
+                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                    stubFetchWithError.after();
                 },
             },
             props: {
                 instanceType: "azure",
                 children: testP,
+                marketingData: mockMarketingData,
             },
             test: (component) => {
                 expect(component.container.innerHTML).toBe(
@@ -76,14 +111,17 @@ componentTests(
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
+                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                    stubFetchWithError.after();
                 },
             },
             props: {
                 instanceType: "ec2-flex",
                 children: testP,
+                marketingData: mockMarketingData,
             },
             test: validateMarketing,
         },
@@ -93,14 +131,17 @@ componentTests(
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
+                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                    stubFetchWithError.after();
                 },
             },
             props: {
                 instanceType: "ec2-gpu",
                 children: testP,
+                marketingData: mockMarketingData,
             },
             test: validateMarketing,
         },
@@ -110,14 +151,17 @@ componentTests(
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
+                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                    stubFetchWithError.after();
                 },
             },
             props: {
                 instanceType: "ec2-other",
                 children: testP,
+                marketingData: mockMarketingData,
             },
             test: validateMarketing,
         },
@@ -130,14 +174,17 @@ componentTests(
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
+                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                    stubFetchWithError.after();
                 },
             },
             props: {
                 instanceType: "rds",
                 children: testP,
+                marketingData: mockMarketingData,
             },
             test: validateMarketing,
         },
@@ -147,14 +194,17 @@ componentTests(
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
+                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                    stubFetchWithError.after();
                 },
             },
             props: {
                 instanceType: "opensearch",
                 children: testP,
+                marketingData: mockMarketingData,
             },
             test: validateMarketing,
         },
@@ -164,14 +214,17 @@ componentTests(
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
+                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                    stubFetchWithError.after();
                 },
             },
             props: {
                 instanceType: "redshift",
                 children: testP,
+                marketingData: mockMarketingData,
             },
             test: validateMarketing,
         },
@@ -181,14 +234,17 @@ componentTests(
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
+                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                    stubFetchWithError.after();
                 },
             },
             props: {
                 instanceType: "elasticache",
                 children: testP,
+                marketingData: mockMarketingData,
             },
             test: validateMarketing,
         },
@@ -209,6 +265,7 @@ componentTests(
             props: {
                 instanceType: "azure",
                 children: testP,
+                marketingData: mockMarketingData,
             },
             test: validateMarketing,
         },

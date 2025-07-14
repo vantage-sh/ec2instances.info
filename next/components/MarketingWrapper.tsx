@@ -290,7 +290,7 @@ export default function MarketingWrapper({
                 instanceGroup={processGroup(instanceType)}
                 gpu={instanceType.endsWith("-gpu")}
             />
-            <div className="w-full">
+            <div className="w-full" data-wrapper="true">
                 <div className="xl:flex gap-4 mx-auto w-max">
                     <div className="flex-col">{children}</div>
                     <div className="flex-col">{node}</div>
