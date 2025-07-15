@@ -10,7 +10,8 @@ import { MARKETING_JSON_URL } from "./advertUrl";
 
 const style = {
     color: "white",
-    backgroundImage: "url(https://assets.vantage.sh/www/instances-banner.png)",
+    backgroundImage:
+        "url(https://assets.vantage.sh/www/instances-banner-blue.png)",
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
