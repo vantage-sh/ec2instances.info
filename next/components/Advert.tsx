@@ -60,51 +60,12 @@ export default function Advert({
 }) {
     if (process.env.NEXT_PUBLIC_REMOVE_ADVERTS === "1") return null;
 
-    // Handle a server-friendly execution path. We will handle the client-side
-    // logic in effects.
-    const [cta, setCta] = useState(() => {
-        // Handle the selected promotion.
-        const selectedPromotion = marketingData.promotions[instanceGroup];
-        for (const promotion of selectedPromotion || []) {
-            if (promotion.if) {
-                if (promotion.if.gpu && gpu) {
-                    return marketingData.ctas[promotion.cta];
-                }
-            } else {
-                return marketingData.ctas[promotion.cta];
-            }
-        }
-
-        // Try with the generic promotion.
-        const genericPromotion = marketingData.promotions.generic;
-        for (const promotion of genericPromotion || []) {
-            if (promotion.if) {
-                if (promotion.if.ab) continue;
-                if (promotion.if.gpu && gpu) {
-                    return marketingData.ctas[promotion.cta];
-                }
-            } else {
-                return marketingData.ctas[promotion.cta];
-            }
-        }
-
-        // If no promotion was found, handle it differently depending on if this
-        // is the server (if this is the server, scream!).
-        if (typeof window === "undefined") {
-            throw new Error("No promotion found");
-        } else {
-            setTimeout(() => {
-                throw new Error("No promotion found");
-            }, 0);
-        }
-
-        // Return a generic promotion.
-        const cta = Object.keys(marketingData.ctas)[0];
-        if (cta) {
-            return marketingData.ctas[cta];
-        }
-        return null;
-    });
+    // Get the cta.
+    const [cta, setCta] = useState<{
+        title: string;
+        cta_text: string;
+        cta_url: string;
+    } | null>(null);
 
     // Make an ab group.
     const [abGroup, setAbGroup] = useState(false);
@@ -191,29 +152,23 @@ export default function Advert({
         }
 
         // Throw if no promotion was found.
-        throw new Error("No promotion found");
+        setTimeout(() => {
+            throw new Error("No promotion found");
+        }, 0);
     }, [gpu, abGroup, loadedMarketingData]);
 
-    const handledCta =
-        cta ||
-        (() => {
-            if (typeof window === "undefined") {
-                throw new Error("No CTA found");
-            } else {
-                setTimeout(() => {
-                    throw new Error("No CTA found");
-                }, 0);
-            }
-            return {
-                title: "Get a demo",
-                cta_text: "Get a demo of Vantage from a FinOps expert.",
-                cta_url:
-                    "https://vantage.sh/lp/aws-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=aws-banner",
-            };
-        })();
+    // By default, show the banner with no context.
+    if (!cta) {
+        return (
+            <div className="h-[2.5em]" style={style}>
+                <div className="flex items-center justify-center h-full"></div>
+            </div>
+        );
+    }
 
+    // Return when the cta is found.
     return (
-        <a href={handledCta.cta_url} target="_blank">
+        <a href={cta.cta_url} target="_blank">
             <div className="h-[2.5em]" style={style}>
                 <div className="flex items-center justify-center h-full">
                     <img
@@ -222,8 +177,8 @@ export default function Advert({
                         className="h-4 mr-1.5"
                     />
                     <p>
-                        {handledCta.title}{" "}
-                        <span className="font-bold">{handledCta.cta_text}</span>
+                        {cta.title}{" "}
+                        <span className="font-bold">{cta.cta_text}</span>
                     </p>
                 </div>
             </div>
