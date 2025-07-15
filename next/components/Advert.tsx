@@ -72,7 +72,7 @@ export default function Advert({
     useEffect(() => {
         const localStorageValue = localStorage.getItem("vantage-ab-group");
         if (localStorageValue) {
-            setAbGroup(Boolean(localStorageValue));
+            setAbGroup(localStorageValue === "true");
         } else {
             const random = Math.random();
             const ab = random < 0.5;
