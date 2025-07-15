@@ -33,7 +33,7 @@ async function fetchOrGetCachedMarketingData(marketingData: MarketingSchema) {
     // Fetch the latest marketing data.
     try {
         const res = await fetch(MARKETING_JSON_URL);
-        const newData = await res.json();
+        const newData = validateMarketing(await res.json());
         localStorage.setItem(
             "vantage-marketing-data",
             JSON.stringify({
@@ -119,6 +119,22 @@ export default function Advert({
         }
     }, []);
 
+    const [loadedMarketingData, setLoadedMarketingData] =
+        useState(marketingData);
+    useEffect(() => {
+        let active = true;
+        fetchOrGetCachedMarketingData(marketingData)
+            .then((data) => {
+                if (active) setLoadedMarketingData(data);
+            })
+            .catch(() => {
+                console.error("Failed to fetch marketing data");
+            });
+        return () => {
+            active = false;
+        };
+    }, [marketingData]);
+
     // Handle the client-side logic.
     useEffect(() => {
         // Add 1 to the use counter.
@@ -130,63 +146,52 @@ export default function Advert({
             (useCounter + 1).toString(),
         );
 
-        let active = true;
-
-        (async () => {
-            // Get the latest marketing data.
-            const newData = await fetchOrGetCachedMarketingData(marketingData);
-
-            // Handle the selected promotion.
-            const selectedPromotion = newData.promotions[instanceGroup];
-            for (const promotion of selectedPromotion || []) {
-                if (promotion.if) {
-                    if (promotion.if.ab && abGroup) {
-                        if (active) setCta(newData.ctas[promotion.cta]);
-                        return;
-                    }
-                    if (promotion.if.gpu && gpu) {
-                        if (active) setCta(newData.ctas[promotion.cta]);
-                        return;
-                    }
-                    if (
-                        promotion.if.uses_gt &&
-                        useCounter >= promotion.if.uses_gt
-                    ) {
-                        if (active) setCta(newData.ctas[promotion.cta]);
-                        return;
-                    }
-                } else {
-                    if (active) setCta(newData.ctas[promotion.cta]);
+        // Handle the selected promotion.
+        const selectedPromotion = loadedMarketingData.promotions[instanceGroup];
+        for (const promotion of selectedPromotion || []) {
+            if (promotion.if) {
+                if (promotion.if.ab && abGroup) {
+                    setCta(loadedMarketingData.ctas[promotion.cta]);
                     return;
                 }
-            }
-
-            // Try with the generic promotion.
-            const genericPromotion = newData.promotions.generic;
-            for (const promotion of genericPromotion || []) {
-                if (promotion.if) {
-                    if (promotion.if.ab && abGroup) {
-                        if (active) setCta(newData.ctas[promotion.cta]);
-                        return;
-                    }
-                    if (promotion.if.gpu && gpu) {
-                        if (active) setCta(newData.ctas[promotion.cta]);
-                        return;
-                    }
-                } else {
-                    if (active) setCta(newData.ctas[promotion.cta]);
+                if (promotion.if.gpu && gpu) {
+                    setCta(loadedMarketingData.ctas[promotion.cta]);
                     return;
                 }
+                if (
+                    promotion.if.uses_gt &&
+                    useCounter >= promotion.if.uses_gt
+                ) {
+                    setCta(loadedMarketingData.ctas[promotion.cta]);
+                    return;
+                }
+            } else {
+                setCta(loadedMarketingData.ctas[promotion.cta]);
+                return;
             }
+        }
 
-            // Throw if no promotion was found.
-            throw new Error("No promotion found");
-        })();
+        // Try with the generic promotion.
+        const genericPromotion = loadedMarketingData.promotions.generic;
+        for (const promotion of genericPromotion || []) {
+            if (promotion.if) {
+                if (promotion.if.ab && abGroup) {
+                    setCta(loadedMarketingData.ctas[promotion.cta]);
+                    return;
+                }
+                if (promotion.if.gpu && gpu) {
+                    setCta(loadedMarketingData.ctas[promotion.cta]);
+                    return;
+                }
+            } else {
+                setCta(loadedMarketingData.ctas[promotion.cta]);
+                return;
+            }
+        }
 
-        return () => {
-            active = false;
-        };
-    }, [gpu, abGroup]);
+        // Throw if no promotion was found.
+        throw new Error("No promotion found");
+    }, [gpu, abGroup, loadedMarketingData]);
 
     const handledCta =
         cta ||
