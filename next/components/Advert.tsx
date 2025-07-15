@@ -67,20 +67,6 @@ export default function Advert({
         cta_url: string;
     } | null>(null);
 
-    // Make an ab group.
-    const [abGroup, setAbGroup] = useState(false);
-    useEffect(() => {
-        const localStorageValue = localStorage.getItem("vantage-ab-group");
-        if (localStorageValue) {
-            setAbGroup(localStorageValue === "true");
-        } else {
-            const random = Math.random();
-            const ab = random < 0.5;
-            localStorage.setItem("vantage-ab-group", ab.toString());
-            setAbGroup(ab);
-        }
-    }, []);
-
     const [loadedMarketingData, setLoadedMarketingData] =
         useState(marketingData);
     useEffect(() => {
@@ -99,6 +85,17 @@ export default function Advert({
 
     // Handle the client-side logic.
     useEffect(() => {
+        // Get the ab group.
+        let abGroup = false;
+        const localStorageValue = localStorage.getItem("vantage-ab-group");
+        if (localStorageValue) {
+            abGroup = localStorageValue === "true";
+        } else {
+            const random = Math.random();
+            abGroup = random < 0.5;
+            localStorage.setItem("vantage-ab-group", abGroup.toString());
+        }
+
         // Add 1 to the use counter.
         let useCounter = Number(
             localStorage.getItem("vantage-use-counter") || "0",
@@ -155,7 +152,7 @@ export default function Advert({
         setTimeout(() => {
             throw new Error("No promotion found");
         }, 0);
-    }, [gpu, abGroup, loadedMarketingData]);
+    }, [gpu, loadedMarketingData]);
 
     // By default, show the banner with no context.
     if (!cta) {
