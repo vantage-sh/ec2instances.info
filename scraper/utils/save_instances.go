@@ -25,8 +25,5 @@ func SaveInstances(sortedInstances any, fp string) {
 		log.Fatal(err)
 	}
 
-	err = os.WriteFile(fp, []byte(jsonS), 0644)
-	if err != nil {
-		log.Fatal(err)
-	}
+	WriteAndCompressFile(fp, []byte(jsonS))
 }

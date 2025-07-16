@@ -988,7 +988,6 @@ func loadDedicatedHostReservedData(
 	var dedicatedHostReservedData dedicatedHostReservedData
 	err := fetchDataFromAWSWebsite(url, &dedicatedHostReservedData)
 	if err != nil {
-		log.Default().Println("Ignoring pricing - dedicated host (this is expected for a lot of regions). region", region, "term", term, "payment option", paymentOption, "error", err)
 		return
 	}
 
