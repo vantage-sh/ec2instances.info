@@ -19,4 +19,5 @@ func main() {
 	fg.Add(azure.DoAzureScraping)
 
 	fg.Run()
+	log.Default().Println("All threads done! Everything seems fine! Exiting now!")
 }
