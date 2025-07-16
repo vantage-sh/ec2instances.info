@@ -10,12 +10,6 @@ import {
     parse,
 } from "valibot";
 
-export const cta = object({
-    title: string(),
-    cta_text: string(),
-    cta_url: string(),
-});
-
 export const promotion = object({
     cta: string(),
     if: optional(
@@ -30,7 +24,14 @@ export const promotion = object({
 export const promotions = optional(array(promotion));
 
 export const marketing = object({
-    ctas: record(string(), cta),
+    ctas: record(
+        string(),
+        object({
+            title: string(),
+            cta_text: string(),
+            cta_url: string(),
+        }),
+    ),
     promotions: object({
         generic: promotions,
         ec2: promotions,
