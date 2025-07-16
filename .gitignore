@@ -11,7 +11,6 @@ ec2instances
 .direnv
 .mypy_cache
 www
-!www/azure/instances-specs.json
 result
 .cache
 .wrangler

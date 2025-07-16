@@ -1,9 +1,0 @@
-invoke
-invocations
-lxml
-requests
-six
-boto3
-pyyaml
-brotli
-black

@@ -30,11 +30,11 @@ type AzureInstance struct {
 	Pricing         map[string]map[string]map[string]any `json:"pricing"`
 }
 
-func enrichAzureInstance(instance *AzureInstance, instanceAttrs map[string]any) {
+func enrichAzureInstance(instance *AzureInstance, instanceAttrs map[string]any, specsApiResponse *utils.SlowBuildingMap[string, *AzureSpecsApiIteratorItem]) {
 	// TODO
 }
 
-func processSpecsDataResult(instances map[string]*AzureInstance, instanceAttrs map[string]map[string]any) {
+func processSpecsDataResult(instances map[string]*AzureInstance, instanceAttrs map[string]map[string]any, specsApiResponse *utils.SlowBuildingMap[string, *AzureSpecsApiIteratorItem]) {
 	for k, v := range instanceAttrs {
 		dashSplit := strings.Split(k, "-")
 		if len(dashSplit) < 2 {
@@ -47,11 +47,11 @@ func processSpecsDataResult(instances map[string]*AzureInstance, instanceAttrs m
 			}
 			instances[dashSplit[1]] = instance
 		}
-		enrichAzureInstance(instance, v)
+		enrichAzureInstance(instance, v, specsApiResponse)
 	}
 }
 
-func processAzureOsResponse(osSlug string, instances map[string]*AzureInstance, instancesMu *sync.Mutex) {
+func processAzureOsResponse(osSlug string, instances map[string]*AzureInstance, instancesMu *sync.Mutex, specsApiResponse *utils.SlowBuildingMap[string, *AzureSpecsApiIteratorItem]) {
 	url := strings.Replace(AZURE_OS_URL, "{}", osSlug, 1)
 
 	var rm json.RawMessage
@@ -86,7 +86,7 @@ func processAzureOsResponse(osSlug string, instances map[string]*AzureInstance, 
 	}
 
 	instancesMu.Lock()
-	processSpecsDataResult(instances, m)
+	processSpecsDataResult(instances, m, specsApiResponse)
 	instancesMu.Unlock()
 }
 
@@ -236,7 +236,7 @@ func processPricingDataForRegionAndOs(
 	instancesPricingMu.Unlock()
 }
 
-func processAzureApi(regionsAndOsData *AzureRootData) map[string]*AzureInstance {
+func processAzureApi(regionsAndOsData *AzureRootData, specsApiResponse *utils.SlowBuildingMap[string, *AzureSpecsApiIteratorItem]) map[string]*AzureInstance {
 	instancesPricing := make(map[string]map[string]map[string]map[string]any)
 	instancesPricingMu := sync.Mutex{}
 
@@ -247,7 +247,7 @@ func processAzureApi(regionsAndOsData *AzureRootData) map[string]*AzureInstance 
 
 	for _, os := range regionsAndOsData.OperatingSystems {
 		fg.Add(func() {
-			processAzureOsResponse(os.Slug, instances, &instancesMu)
+			processAzureOsResponse(os.Slug, instances, &instancesMu, specsApiResponse)
 		})
 		for _, region := range regionsAndOsData.Regions {
 			fg.Add(func() {
@@ -269,15 +269,86 @@ func processAzureApi(regionsAndOsData *AzureRootData) map[string]*AzureInstance 
 	return instances
 }
 
+type AzureSpecsApiIteratorItemCapability struct {
+	Name string `json:"name"`
+	Value string `json:"value"`
+}
+
+type AzureSpecsApiIteratorItem struct {
+	ResourceType string `json:"resourceType"`
+	Capabilities []AzureSpecsApiIteratorItemCapability `json:"capabilities"`
+	Name string `json:"name"`
+	Tier string `json:"tier"`
+	Size string `json:"size"`
+	Family string `json:"family"`
+}
+
+type AzureSpecsApiIteratorResult struct {
+	Value []*AzureSpecsApiIteratorItem `json:"value"`
+	NextLink *string                    `json:"nextLink"`
+}
+
+func processRawSkuSpecs(rawSkus []*AzureSpecsApiIteratorItem) {
+	// TODO
+}
+
+func getAzureSpecsApiIterator() *utils.SlowBuildingMap[string, *AzureSpecsApiIteratorItem] {
+	return utils.NewSlowBuildingMap(func (pushChunk func(map[string]*AzureSpecsApiIteratorItem)) {
+		// Get everything we need to start the request.
+		accessToken := getAzureAccessToken()
+		subId := os.Getenv("AZURE_SUBSCRIPTION_ID")
+		if subId == "" {
+			log.Fatal("AZURE_SUBSCRIPTION_ID must be set")
+		}
+
+		// Handle getting the raw skus.
+		rawSkus := []*AzureSpecsApiIteratorItem{}
+		apiUrl := "https://management.azure.com/subscriptions/" + subId + "/providers/Microsoft.Compute/skus?api-version=2021-07-01"
+		for apiUrl != "" {
+			// Firstly, cast into a raw message. We need to process this twice.
+			var rm json.RawMessage
+			if err := utils.LoadJsonWithBearerToken(apiUrl, &rm, &accessToken); err != nil {
+				log.Fatal(err)
+			}
+
+			// Process it into the iterator result.
+			var a AzureSpecsApiIteratorResult
+			if err := json.Unmarshal(rm, &a); err != nil {
+				log.Fatal(err)
+			}
+			rawSkus = append(rawSkus, a.Value...)
+
+			// Remap it by the size.
+			remapped := make(map[string]*AzureSpecsApiIteratorItem)
+			for _, item := range a.Value {
+				remapped[item.Size] = item
+			}
+			pushChunk(remapped)
+
+			// Get the next link.
+			if a.NextLink == nil {
+				apiUrl = ""
+			} else {
+				apiUrl = *a.NextLink
+			}
+		}
+
+		// Write the skus to a file.
+		processRawSkuSpecs(rawSkus)
+	})
+}
+
 // DoAzureScraping is the main function that scrapes the Azure pricing data and saves it to a file.
 func DoAzureScraping() {
+	specsApiResponse := getAzureSpecsApiIterator()
+
 	var regionsAndOsData AzureRootData
 	if err := utils.LoadJson("https://azure.microsoft.com/api/v4/pricing/virtual-machines/metadata/", &regionsAndOsData); err != nil {
 		log.Fatal(err)
 	}
 
 	// Process the instances and pricing data
-	instances := processAzureApi(&regionsAndOsData)
+	instances := processAzureApi(&regionsAndOsData, specsApiResponse)
 
 	// Save the instances
 	instancesSorted := make([]*AzureInstance, 0, len(instances))

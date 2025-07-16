@@ -4,7 +4,6 @@ result/
 env/
 bootstrap/
 www
-!www/azure/instances-specs.json
 next/node_modules/
 next/out/
 next/public/
