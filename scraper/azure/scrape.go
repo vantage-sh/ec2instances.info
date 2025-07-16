@@ -204,9 +204,10 @@ func processSpecsDataResult(instances map[string]*AzureInstance, instanceAttrs m
 			instance = &AzureInstance{
 				InstanceType: dashSplit[1],
 				GPU: "0",
-				Regions: make(map[string]string),
+				Regions:  make(map[string]string),
 				Arch: []string{},
 				AvailabilityZones: make(map[string]any),
+				Pricing: make(map[string]map[string]map[string]any),
 			}
 			instances[dashSplit[1]] = instance
 		}
