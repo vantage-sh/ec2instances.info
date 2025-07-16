@@ -12,4 +12,4 @@ FROM alpine:3.22
 WORKDIR /app
 RUN apk add --no-cache ca-certificates
 COPY --from=builder /app/scraper /app/scraper
-ENTRYPOINT ["./scraper"]
+CMD ["./scraper"]

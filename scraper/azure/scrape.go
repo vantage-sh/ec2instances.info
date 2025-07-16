@@ -24,14 +24,53 @@ const AZURE_OS_URL = "https://azure.microsoft.com/api/v3/pricing/virtual-machine
 
 // AzureInstance is the instance data for a specific instance type in a specific region.
 type AzureInstance struct {
+	// Write the instance type.
 	InstanceType    string                               `json:"instance_type"`
+	
+	// This is all got from the specifications and pricing API's.
 	PrettyName      string                               `json:"pretty_name"`
-	PrettyNameAzure string                               `json:"pretty_name_azure"`
+	Family          string                               `json:"family"`
+	Category        string                               `json:"category"`
+	Vcpu            float64                              `json:"vcpu"`
+	Memory          float64                              `json:"memory"`
+	Size            float64                              `json:"size"`
+	GPU             any                              `json:"GPU"`
 	Pricing         map[string]map[string]map[string]any `json:"pricing"`
+	Regions         map[string]string                    `json:"regions"`
+
+	// Everything from the specs API.
+	PrettyNameAzure string                               `json:"pretty_name_azure,omitempty"`
+}
+
+func parseSpecs(instance *AzureInstance, capabilities []AzureSpecsApiIteratorItemCapability) {
+	// TODO
 }
 
 func enrichAzureInstance(instance *AzureInstance, instanceAttrs map[string]any, specsApiResponse *utils.SlowBuildingMap[string, *AzureSpecsApiIteratorItem]) {
-	// TODO
+	// Get the initial information from the fast loading json.
+	instance.PrettyName = instanceAttrs["instanceName"].(string)
+	instance.Family = instanceAttrs["series"].(string)
+	instance.Category = instanceAttrs["category"].(string)
+	instance.Vcpu = instanceAttrs["cores"].(float64)
+	instance.Memory = instanceAttrs["ram"].(float64)
+	vf, ok := instanceAttrs["diskSize"].(float64)
+	if ok {
+		instance.Size = vf
+	}
+	vs, ok := instanceAttrs["gpu"]
+	if ok {
+		instance.GPU = vs
+	}
+
+	// Get the instance type from the specs api.
+	specs, ok := specsApiResponse.Get(instance.InstanceType)
+	if !ok {
+		return
+	}
+	instance.PrettyNameAzure = strings.ReplaceAll(specs.Name, "_", " ")
+
+	// Parse the specs.
+	parseSpecs(instance, specs.Capabilities)
 }
 
 func processSpecsDataResult(instances map[string]*AzureInstance, instanceAttrs map[string]map[string]any, specsApiResponse *utils.SlowBuildingMap[string, *AzureSpecsApiIteratorItem]) {
@@ -44,6 +83,8 @@ func processSpecsDataResult(instances map[string]*AzureInstance, instanceAttrs m
 		if !ok {
 			instance = &AzureInstance{
 				InstanceType: dashSplit[1],
+				GPU: "0",
+				Regions: make(map[string]string),
 			}
 			instances[dashSplit[1]] = instance
 		}
@@ -190,11 +231,24 @@ func processPricingDataResult(
 					if ok {
 						reserved[v] = x
 					}
+					if len(reserved) == 0 {
+						delete(os, "reserved")
+					}
 				} else {
 					x, ok := respVal[k2]
 					if ok {
 						os[v] = x
 					}
+				}
+			}
+		}
+
+		if len(os) == 0 {
+			delete(regionData, osSlug)
+			if len(regionData) == 0 {
+				delete(instance, region)
+				if len(instance) == 0 {
+					delete(instancesPricing, instanceType)
 				}
 			}
 		}
@@ -258,12 +312,22 @@ func processAzureApi(regionsAndOsData *AzureRootData, specsApiResponse *utils.Sl
 
 	fg.Run()
 
+	regionMap := make(map[string]string)
+	for _, region := range regionsAndOsData.Regions {
+		regionMap[region.Slug] = region.DisplayName
+	}
+
 	for instanceType, pricing := range instancesPricing {
 		instance, ok := instances[instanceType]
 		if !ok {
 			continue
 		}
 		instance.Pricing = pricing
+		regions := make(map[string]string)
+		for region := range pricing {
+			regions[region] = regionMap[region]
+		}
+		instance.Regions = regions
 	}
 
 	return instances
@@ -286,10 +350,6 @@ type AzureSpecsApiIteratorItem struct {
 type AzureSpecsApiIteratorResult struct {
 	Value []*AzureSpecsApiIteratorItem `json:"value"`
 	NextLink *string                    `json:"nextLink"`
-}
-
-func processRawSkuSpecs(rawSkus []*AzureSpecsApiIteratorItem) {
-	// TODO
 }
 
 func getAzureSpecsApiIterator() *utils.SlowBuildingMap[string, *AzureSpecsApiIteratorItem] {
