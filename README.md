@@ -53,8 +53,7 @@ Ensure that your IAM user has at least the following permissions:
             "Effect": "Allow",
             "Action": [
                 "ec2:DescribeInstanceTypes",
-                "ec2:DescribeRegions",
-                "pricing:*",
+                "ec2:DescribeSpotPriceHistory",
                 "elasticache:DescribeEngineDefaultParameters"
             ],
             "Resource": "*"
@@ -63,11 +62,7 @@ Ensure that your IAM user has at least the following permissions:
 }
 ```
 
-When you have made these credentials, go ahead and store them somewhere safe (`.env` is gitignored), and then you will want to fetch all of the data. You can do this with the following command:
-
-```sh
-AWS_ACCESS_KEY_ID="YOUR_AWS_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="YOUR_AWS_SECRET_ACCESS_KEY" make fetch-data
-```
+When you have made these credentials, go ahead and store them somewhere safe as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` (`.env` is gitignored), and then you will want to fetch all of the data. [You will also need to setup Azure!](./docs/setting-up-azure.md)
 
 Now go ahead and grab yourself a cup of tea or coffee because this will take 20-30 minutes. You only need to run this when the Python is changed in a way that alters the data or there is new API data available you want to test against.
 

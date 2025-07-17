@@ -25,6 +25,10 @@ jobs:
               env:
                   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
                   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+                  AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+                  AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+                  AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
                   NEXT_PUBLIC_URL: https://${{ secrets.PRODUCTION_HOSTNAME }}/
                   NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
                   SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
