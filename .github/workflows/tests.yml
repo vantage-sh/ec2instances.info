@@ -2,7 +2,7 @@ name: Tests
 on: push
 
 jobs:
-    black:
+    gofmt:
         name: gofmt
         runs-on: ubuntu-22.04
         steps:
