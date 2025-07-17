@@ -1,11 +1,11 @@
 import { readFile } from "fs/promises";
 import Head from "next/head";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
-import { load } from "js-yaml";
 import { decode } from "@msgpack/msgpack";
 import { AzureInstance } from "@/utils/colunnData/azure";
 import AzureClient from "./AzureClient";
 import type { Metadata } from "next";
+import { Region } from "@/types";
 import loadAdvertData from "@/utils/loadAdvertData";
 
 export const metadata: Metadata = {
@@ -15,11 +15,9 @@ export const metadata: Metadata = {
 };
 
 export default async function Azure() {
-    const regions = load(
-        await readFile("../meta/regions_azure2.yaml", "utf-8"),
-    ) as {
-        [key: string]: string;
-    };
+    const regions = JSON.parse(
+        await readFile("./public/azure-regions.json", "utf-8"),
+    ) as Region;
 
     const data = await readFile("./public/first-100-azure-instances.msgpack");
     const compressedInstances = decode(data) as [string[], ...AzureInstance[]];
@@ -49,7 +47,7 @@ export default async function Azure() {
             </Head>
             <AzureClient
                 instanceCount={instanceCount}
-                regions={regions}
+                regions={regions.main}
                 compressedDataPathTemplate={`/remaining-azure-instances-p{}.msgpack.xz?cache=${instancesHash}`}
                 compressedInstances={compressedInstances}
                 marketingData={marketingData}
