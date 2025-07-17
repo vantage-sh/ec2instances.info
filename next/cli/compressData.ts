@@ -94,6 +94,19 @@ async function compressAzureInstances() {
         formatAzureInstanceType(instance);
     }
 
+    // Process the regions.
+    const regions: Region = {
+        main: {},
+        local_zone: {},
+        wavelength: {},
+    };
+    for (const instance of instances) {
+        for (const r in instance.regions) {
+            regions.main[r] = instance.regions[r];
+        }
+    }
+    await writeFile("./public/azure-regions.json", JSON.stringify(regions));
+
     // Encode and then compress the Azure instances.
     await writeFile(
         "./public/azure-instance-count.txt",

@@ -1,5 +1,4 @@
 import { AzureInstance } from "@/utils/colunnData/azure";
-import { load } from "js-yaml";
 import { readFile } from "fs/promises";
 import formatAzureInstanceType from "@/utils/formatAzureInstanceType";
 import makeRainbowTable from "@/utils/makeRainbowTable";
@@ -7,6 +6,7 @@ import AzureInstanceRoot from "@/components/AzureInstanceRoot";
 import generateAzureDescription from "@/utils/generateAzureDescription";
 import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
+import { Region } from "@/types";
 import loadAdvertData from "@/utils/loadAdvertData";
 
 export const dynamic = "force-static";
@@ -16,9 +16,9 @@ let p: Promise<{ regions: Record<string, string>; instances: AzureInstance[] }>;
 async function getData() {
     if (p) return p;
     p = (async () => {
-        const regions = load(
-            await readFile("../meta/regions_azure2.yaml", "utf8"),
-        ) as Record<string, string>;
+        const regions = JSON.parse(
+            await readFile("./public/azure-regions.json", "utf-8"),
+        ) as Region;
         const instances = JSON.parse(
             await readFile("../www/azure/instances.json", "utf8"),
         ) as AzureInstance[];
@@ -26,7 +26,7 @@ async function getData() {
             formatAzureInstanceType(instance);
         }
         return {
-            regions,
+            regions: regions.main,
             instances,
         };
     })();
