@@ -11,7 +11,7 @@ jobs:
               with:
                   go-version: 1.24.4
             - name: Check gofmt
-              run: cd scraper && gofmt -l . && test -z "$$(gofmt -l .)"
+              run: cd scraper && gofmt -l . && test -z "$(gofmt -l .)"
 
     prettier:
         name: Prettier
