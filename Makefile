@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := all
-.PHONY: fetch-data compress-www next black prettier format all
+.PHONY: fetch-data compress-www next gofmt prettier format all
 
 clean:
 	mv www/azure/instances-specs.json specs.json.tmp
@@ -24,14 +24,14 @@ package:
 	mkdir -p ec2instances
 	docker run -v $(shell pwd)/www:/opt/app/www -v $(shell pwd)/.git:/opt/app/.git -v $(shell pwd)/ec2instances:/opt/app/ec2instances --rm -t ec2instances-scraper sh -c 'git config --global --add safe.directory /opt/app && python3 scripts/package.py'
 
-black:
+gofmt:
 	docker build -t ec2instances-format -f Dockerfile.format .
-	docker run -v $(shell pwd):/app --rm -t ec2instances-format black .
+	docker run -v $(shell pwd)/scraper:/app --rm -t ec2instances-format gofmt -w .
 
 prettier:
 	docker build -t ec2instances-format -f Dockerfile.format .
 	docker run -v $(shell pwd):/app --rm -t ec2instances-format prettier --write .
 
-format: black prettier
+format: gofmt prettier
 
 all: clean fetch-data compress-www next package

@@ -3,11 +3,9 @@ package azure
 import (
 	"encoding/json"
 	"log"
-	"math"
 	"os"
 	"scraper/utils"
 	"sort"
-	"strconv"
 	"strings"
 	"sync"
 )
@@ -24,18 +22,8 @@ type AzureRootData struct {
 
 const AZURE_OS_URL = "https://azure.microsoft.com/api/v3/pricing/virtual-machines/page/details/{}/?showLowPriorityOffers=true"
 
-type AzureStorage struct {
-	NvmeSsd       bool    `json:"nvme_ssd"`
-	Devices       int     `json:"devices"`
-	Size          int     `json:"size"`
-	MaxWriteDisks *string `json:"max_write_disks"`
-}
-
 // AzureInstance is the instance data for a specific instance type in a specific region.
 type AzureInstance struct {
-	// Write the instance type.
-	InstanceType string `json:"instance_type"`
-
 	// This is all got from the specifications and pricing API's.
 	PrettyName string                               `json:"pretty_name"`
 	Family     string                               `json:"family"`
@@ -48,119 +36,11 @@ type AzureInstance struct {
 	Regions    map[string]string                    `json:"regions"`
 
 	// Everything from the compute API.
-	PrettyNameAzure       string         `json:"pretty_name_azure,omitempty"`
-	ACU                   int            `json:"ACU,omitempty"`
-	AcceleratedNetworking bool           `json:"accelerated_networking"`
-	Arch                  []string       `json:"arch"`
-	AvailabilityZones     map[string]any `json:"availability_zones"`
-	CachedDisk            int            `json:"cached_disk"`
-	CapacitySupport       bool           `json:"capacity_support"`
-	Confidential          bool           `json:"confidential"`
-	Encryption            bool           `json:"encryption"`
-	Hibernation           *bool          `json:"hibernation"`
-	HypervGenerations     *string        `json:"hyperv_generations"`
-	Iops                  *int           `json:"iops"`
-	LowPriority           bool           `json:"low_priority"`
-	MemoryMaintenance     bool           `json:"memory_maintenance"`
-	PremiumIo             bool           `json:"premium_io"`
-	Rdma                  bool           `json:"rdma"`
-	ReadIo                int            `json:"read_io"`
-	TrustedLaunch         *bool          `json:"trusted_launch"`
-	UltraSsd              bool           `json:"ultra_ssd"`
-	UncachedDisk          int            `json:"uncached_disk"`
-	UncachedDiskIo        int            `json:"uncached_disk_io"`
-	VcpusAvailable        int            `json:"vcpus_available"`
-	VcpusPercore          int            `json:"vcpus_percore"`
-	VmDeployment          *string        `json:"vm_deployment"`
-	WriteIo               int            `json:"write_io"`
-	Storage               AzureStorage   `json:"storage"`
+	AvailabilityZones map[string]any `json:"availability_zones"`
+	PrettyNameAzure   string         `json:"pretty_name_azure,omitempty"`
+	AzureSpecsData    `json:",inline"`
 
 	disownedFromFamily bool
-}
-
-func parseSpecs(instance *AzureInstance, capabilities []AzureSpecsApiIteratorItemCapability) {
-	for _, c := range capabilities {
-		switch c.Name {
-		case "OSVhdSizeMB":
-			if val, err := strconv.Atoi(c.Value); err == nil {
-				instance.Storage.Size = val
-			}
-		case "ACUs":
-			if val, err := strconv.Atoi(c.Value); err == nil {
-				instance.ACU = val
-			}
-		case "MemoryPreservingMaintenanceSupported":
-			instance.MemoryMaintenance = c.Value == "True"
-		case "HyperVGenerations":
-			instance.HypervGenerations = &c.Value
-		case "MaxDataDiskCount":
-			if val, err := strconv.Atoi(c.Value); err == nil {
-				instance.Storage.Devices = val
-			}
-		case "CpuArchitectureType":
-			instance.Arch = []string{c.Value}
-		case "LowPriorityCapable":
-			instance.LowPriority = c.Value == "True"
-		case "PremiumIO":
-			instance.PremiumIo = c.Value == "True"
-		case "VMDeploymentTypes":
-			instance.VmDeployment = &c.Value
-		case "vCPUsAvailable":
-			if val, err := strconv.Atoi(c.Value); err == nil {
-				instance.VcpusAvailable = val
-			}
-		case "vCPUsPerCore":
-			if val, err := strconv.Atoi(c.Value); err == nil {
-				instance.VcpusPercore = val
-			}
-		case "CombinedTempDiskAndCachedIOPS":
-			if val, err := strconv.Atoi(c.Value); err == nil {
-				instance.Iops = &val
-			}
-		case "CombinedTempDiskAndCachedReadBytesPerSecond":
-			if val, err := strconv.Atoi(c.Value); err == nil {
-				instance.ReadIo = int(math.Floor(float64(val) / 1000000))
-			}
-		case "CombinedTempDiskAndCachedWriteBytesPerSecond":
-			if val, err := strconv.Atoi(c.Value); err == nil {
-				instance.WriteIo = int(math.Floor(float64(val) / 1000000))
-			}
-		case "CachedDiskBytes":
-			if val, err := strconv.Atoi(c.Value); err == nil {
-				instance.CachedDisk = int(math.Floor(float64(val) / 1073741824))
-			}
-		case "UncachedDiskIOPS":
-			if val, err := strconv.Atoi(c.Value); err == nil {
-				instance.UncachedDisk = val
-			}
-		case "UncachedDiskBytesPerSecond":
-			if val, err := strconv.Atoi(c.Value); err == nil {
-				instance.UncachedDiskIo = int(math.Floor(float64(val) / 1000000))
-			}
-		case "EncryptionAtHostSupported":
-			instance.Encryption = c.Value == "True"
-		case "CapacityReservationSupported":
-			instance.CapacitySupport = c.Value == "True"
-		case "AcceleratedNetworkingEnabled":
-			instance.AcceleratedNetworking = c.Value == "True"
-		case "RdmaEnabled":
-			instance.Rdma = c.Value == "True"
-		case "UltraSSDAvailable":
-			instance.UltraSsd = c.Value == "True"
-		case "HibernationSupported":
-			val := c.Value == "True"
-			instance.Hibernation = &val
-		case "TrustedLaunchDisabled":
-			val := c.Value == "True"
-			instance.TrustedLaunch = &val
-		case "ConfidentialComputingType":
-			instance.Confidential = c.Value == "True"
-		case "NvmeDiskSizeInMiB":
-			instance.Storage.NvmeSsd = c.Value == "True"
-		case "MaxWriteAcceleratorDisksAllowed":
-			instance.Storage.MaxWriteDisks = &c.Value
-		}
-	}
 }
 
 func enrichAzureInstance(instance *AzureInstance, instanceAttrs map[string]any, specsApiResponse *utils.SlowBuildingMap[string, *AzureSpecsApiIteratorItem], type_ string) {
@@ -193,7 +73,7 @@ func enrichAzureInstance(instance *AzureInstance, instanceAttrs map[string]any, 
 	}
 
 	// Parse the specs.
-	parseSpecs(instance, specs.Capabilities)
+	parseSpecs(&instance.AzureSpecsData, specs.Capabilities)
 }
 
 func processSpecsDataResult(instances map[string]*AzureInstance, instanceAttrs map[string]map[string]any, specsApiResponse *utils.SlowBuildingMap[string, *AzureSpecsApiIteratorItem]) {
@@ -212,12 +92,14 @@ func processSpecsDataResult(instances map[string]*AzureInstance, instanceAttrs m
 		instance, ok := instances[dashSplit[1]]
 		if !ok {
 			instance = &AzureInstance{
-				InstanceType:      dashSplit[1],
 				GPU:               "0",
 				Regions:           make(map[string]string),
-				Arch:              []string{},
 				AvailabilityZones: make(map[string]any),
 				Pricing:           make(map[string]map[string]map[string]any),
+				AzureSpecsData: AzureSpecsData{
+					InstanceType: dashSplit[1],
+					Arch:         []string{},
+				},
 			}
 			instances[dashSplit[1]] = instance
 		}
