@@ -1,5 +1,4 @@
-FROM python:3.13-alpine
-RUN pip install black
+FROM golang:1.24-alpine
 RUN apk add --no-cache nodejs npm
 RUN npm install -g prettier@3.5.3
 WORKDIR /app
