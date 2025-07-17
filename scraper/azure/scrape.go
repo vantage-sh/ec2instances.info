@@ -2,7 +2,6 @@ package azure
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"math"
 	"os"
@@ -25,55 +24,58 @@ type AzureRootData struct {
 
 const AZURE_OS_URL = "https://azure.microsoft.com/api/v3/pricing/virtual-machines/page/details/{}/?showLowPriorityOffers=true"
 
+type AzureStorage struct {
+	NvmeSsd       bool    `json:"nvme_ssd"`
+	Devices       int     `json:"devices"`
+	Size          int     `json:"size"`
+	MaxWriteDisks *string `json:"max_write_disks"`
+}
+
 // AzureInstance is the instance data for a specific instance type in a specific region.
 type AzureInstance struct {
 	// Write the instance type.
-	InstanceType    string                               `json:"instance_type"`
-	
+	InstanceType string `json:"instance_type"`
+
 	// This is all got from the specifications and pricing API's.
-	PrettyName      string                               `json:"pretty_name"`
-	Family          string                               `json:"family"`
-	Category        string                               `json:"category"`
-	Vcpu            float64                              `json:"vcpu"`
-	Memory          float64                              `json:"memory"`
-	Size            float64                              `json:"size"`
-	GPU             any                              `json:"GPU"`
-	Pricing         map[string]map[string]map[string]any `json:"pricing"`
-	Regions         map[string]string                    `json:"regions"`
+	PrettyName string                               `json:"pretty_name"`
+	Family     string                               `json:"family"`
+	Category   string                               `json:"category"`
+	Vcpu       float64                              `json:"vcpu"`
+	Memory     float64                              `json:"memory"`
+	Size       float64                              `json:"size"`
+	GPU        any                                  `json:"GPU"`
+	Pricing    map[string]map[string]map[string]any `json:"pricing"`
+	Regions    map[string]string                    `json:"regions"`
 
 	// Everything from the compute API.
-	PrettyNameAzure string                               `json:"pretty_name_azure,omitempty"`
-	ACU                    int      `json:"ACU"`
-	AcceleratedNetworking  bool     `json:"accelerated_networking"`
-	Arch                   []string `json:"arch"`
+	PrettyNameAzure       string         `json:"pretty_name_azure,omitempty"`
+	ACU                   int            `json:"ACU,omitempty"`
+	AcceleratedNetworking bool           `json:"accelerated_networking"`
+	Arch                  []string       `json:"arch"`
 	AvailabilityZones     map[string]any `json:"availability_zones"`
-	CachedDisk            int      `json:"cached_disk"`
-	CapacitySupport       bool     `json:"capacity_support"`
-	Confidential          *string  `json:"confidential"`
-	Devices               int      `json:"devices"`
-	DriveSize             *int     `json:"drive_size"`
-	EphemeralDisk         *string  `json:"ephemeral_disk"`
-	Encryption            bool     `json:"encryption"`
-	Hibernation           *bool    `json:"hibernation"`
-	HypervGenerations     *string  `json:"hyperv_generations"`
-	Iops                  *int     `json:"iops"`
-	LowPriority           bool     `json:"low_priority"`
-	MaxWriteDisks         *string  `json:"max_write_disks"`
-	MemoryMaintenance     bool     `json:"memory_maintenance"`
-	NetworkInterfaces     *string  `json:"network_interfaces"`
-	NumDrives             *int     `json:"num_drives"`
-	NvmeSsd               *string  `json:"nvme_ssd"`
-	PremiumIo             bool     `json:"premium_io"`
-	Rdma                  bool     `json:"rdma"`
-	ReadIo                int      `json:"read_io"`
-	TrustedLaunch         *bool    `json:"trusted_launch"`
-	UltraSsd              bool     `json:"ultra_ssd"`
-	UncachedDisk          int      `json:"uncached_disk"`
-	UncachedDiskIo        int      `json:"uncached_disk_io"`
-	VcpusAvailable        int      `json:"vcpus_available"`
-	VcpusPercore          int      `json:"vcpus_percore"`
-	VmDeployment          *string  `json:"vm_deployment"`
-	WriteIo               int      `json:"write_io"`
+	CachedDisk            int            `json:"cached_disk"`
+	CapacitySupport       bool           `json:"capacity_support"`
+	Confidential          bool           `json:"confidential"`
+	Encryption            bool           `json:"encryption"`
+	Hibernation           *bool          `json:"hibernation"`
+	HypervGenerations     *string        `json:"hyperv_generations"`
+	Iops                  *int           `json:"iops"`
+	LowPriority           bool           `json:"low_priority"`
+	MemoryMaintenance     bool           `json:"memory_maintenance"`
+	PremiumIo             bool           `json:"premium_io"`
+	Rdma                  bool           `json:"rdma"`
+	ReadIo                int            `json:"read_io"`
+	TrustedLaunch         *bool          `json:"trusted_launch"`
+	UltraSsd              bool           `json:"ultra_ssd"`
+	UncachedDisk          int            `json:"uncached_disk"`
+	UncachedDiskIo        int            `json:"uncached_disk_io"`
+	VcpusAvailable        int            `json:"vcpus_available"`
+	VcpusPercore          int            `json:"vcpus_percore"`
+	VmDeployment          *string        `json:"vm_deployment"`
+	WriteIo               int            `json:"write_io"`
+	Storage               AzureStorage   `json:"storage"`
+
+	disownedFromFamily bool
 }
 
 func parseSpecs(instance *AzureInstance, capabilities []AzureSpecsApiIteratorItemCapability) {
@@ -81,7 +83,7 @@ func parseSpecs(instance *AzureInstance, capabilities []AzureSpecsApiIteratorIte
 		switch c.Name {
 		case "OSVhdSizeMB":
 			if val, err := strconv.Atoi(c.Value); err == nil {
-				instance.DriveSize = &val
+				instance.Storage.Size = val
 			}
 		case "ACUs":
 			if val, err := strconv.Atoi(c.Value); err == nil {
@@ -93,7 +95,7 @@ func parseSpecs(instance *AzureInstance, capabilities []AzureSpecsApiIteratorIte
 			instance.HypervGenerations = &c.Value
 		case "MaxDataDiskCount":
 			if val, err := strconv.Atoi(c.Value); err == nil {
-				instance.Devices = val
+				instance.Storage.Devices = val
 			}
 		case "CpuArchitectureType":
 			instance.Arch = []string{c.Value}
@@ -135,8 +137,6 @@ func parseSpecs(instance *AzureInstance, capabilities []AzureSpecsApiIteratorIte
 			if val, err := strconv.Atoi(c.Value); err == nil {
 				instance.UncachedDiskIo = int(math.Floor(float64(val) / 1000000))
 			}
-		case "EphemeralOSDiskSupported":
-			instance.EphemeralDisk = &c.Value
 		case "EncryptionAtHostSupported":
 			instance.Encryption = c.Value == "True"
 		case "CapacityReservationSupported":
@@ -145,8 +145,6 @@ func parseSpecs(instance *AzureInstance, capabilities []AzureSpecsApiIteratorIte
 			instance.AcceleratedNetworking = c.Value == "True"
 		case "RdmaEnabled":
 			instance.Rdma = c.Value == "True"
-		case "MaxNetworkInterfaces":
-			instance.NetworkInterfaces = &c.Value
 		case "UltraSSDAvailable":
 			instance.UltraSsd = c.Value == "True"
 		case "HibernationSupported":
@@ -156,16 +154,16 @@ func parseSpecs(instance *AzureInstance, capabilities []AzureSpecsApiIteratorIte
 			val := c.Value == "True"
 			instance.TrustedLaunch = &val
 		case "ConfidentialComputingType":
-			instance.Confidential = &c.Value
+			instance.Confidential = c.Value == "True"
 		case "NvmeDiskSizeInMiB":
-			instance.NvmeSsd = &c.Value
+			instance.Storage.NvmeSsd = c.Value == "True"
 		case "MaxWriteAcceleratorDisksAllowed":
-			instance.MaxWriteDisks = &c.Value
+			instance.Storage.MaxWriteDisks = &c.Value
 		}
 	}
 }
 
-func enrichAzureInstance(instance *AzureInstance, instanceAttrs map[string]any, specsApiResponse *utils.SlowBuildingMap[string, *AzureSpecsApiIteratorItem]) {
+func enrichAzureInstance(instance *AzureInstance, instanceAttrs map[string]any, specsApiResponse *utils.SlowBuildingMap[string, *AzureSpecsApiIteratorItem], type_ string) {
 	// Get the initial information from the fast loading json.
 	instance.PrettyName = instanceAttrs["instanceName"].(string)
 	instance.Family = instanceAttrs["series"].(string)
@@ -182,19 +180,31 @@ func enrichAzureInstance(instance *AzureInstance, instanceAttrs map[string]any, 
 	}
 
 	// Get the instance type from the specs api.
-	specs, ok := specsApiResponse.Get(strings.ReplaceAll(strings.ToLower(instance.InstanceType), "_", ""))
+	specs, ok := specsApiResponse.Get(strings.ReplaceAll(strings.ToLower(type_+instance.InstanceType), "_", ""))
 	if !ok {
-		fmt.Println("No specs found for", instance.InstanceType)
 		return
 	}
-	instance.PrettyNameAzure = strings.ReplaceAll(specs.Name, "_", " ")
+	if instance.PrettyNameAzure == "" {
+		instance.PrettyNameAzure = strings.ReplaceAll(specs.Name, "_", " ")
+	} else if !instance.disownedFromFamily {
+		instance.disownedFromFamily = true
+		spaceSplit := strings.Split(instance.PrettyNameAzure, " ")
+		instance.PrettyNameAzure = strings.Join(spaceSplit[1:], " ")
+	}
 
 	// Parse the specs.
 	parseSpecs(instance, specs.Capabilities)
 }
 
 func processSpecsDataResult(instances map[string]*AzureInstance, instanceAttrs map[string]map[string]any, specsApiResponse *utils.SlowBuildingMap[string, *AzureSpecsApiIteratorItem]) {
-	for k, v := range instanceAttrs {
+	keysSorted := make([]string, 0, len(instanceAttrs))
+	for k := range instanceAttrs {
+		keysSorted = append(keysSorted, k)
+	}
+	sort.Strings(keysSorted)
+
+	for _, k := range keysSorted {
+		v := instanceAttrs[k]
 		dashSplit := strings.Split(k, "-")
 		if len(dashSplit) < 2 {
 			continue
@@ -202,16 +212,16 @@ func processSpecsDataResult(instances map[string]*AzureInstance, instanceAttrs m
 		instance, ok := instances[dashSplit[1]]
 		if !ok {
 			instance = &AzureInstance{
-				InstanceType: dashSplit[1],
-				GPU: "0",
-				Regions:  make(map[string]string),
-				Arch: []string{},
+				InstanceType:      dashSplit[1],
+				GPU:               "0",
+				Regions:           make(map[string]string),
+				Arch:              []string{},
 				AvailabilityZones: make(map[string]any),
-				Pricing: make(map[string]map[string]map[string]any),
+				Pricing:           make(map[string]map[string]map[string]any),
 			}
 			instances[dashSplit[1]] = instance
 		}
-		enrichAzureInstance(instance, v, specsApiResponse)
+		enrichAzureInstance(instance, v, specsApiResponse, dashSplit[2])
 	}
 }
 
@@ -451,26 +461,26 @@ func processAzureApi(regionsAndOsData *AzureRootData, specsApiResponse *utils.Sl
 }
 
 type AzureSpecsApiIteratorItemCapability struct {
-	Name string `json:"name"`
+	Name  string `json:"name"`
 	Value string `json:"value"`
 }
 
 type AzureSpecsApiIteratorItem struct {
-	ResourceType string `json:"resourceType"`
+	ResourceType string                                `json:"resourceType"`
 	Capabilities []AzureSpecsApiIteratorItemCapability `json:"capabilities"`
-	Name string `json:"name"`
-	Tier string `json:"tier"`
-	Size string `json:"size"`
-	Family string `json:"family"`
+	Name         string                                `json:"name"`
+	Tier         string                                `json:"tier"`
+	Size         string                                `json:"size"`
+	Family       string                                `json:"family"`
 }
 
 type AzureSpecsApiIteratorResult struct {
-	Value []*AzureSpecsApiIteratorItem `json:"value"`
-	NextLink *string                    `json:"nextLink"`
+	Value    []*AzureSpecsApiIteratorItem `json:"value"`
+	NextLink *string                      `json:"nextLink"`
 }
 
 func getAzureSpecsApiIterator() *utils.SlowBuildingMap[string, *AzureSpecsApiIteratorItem] {
-	return utils.NewSlowBuildingMap(func (pushChunk func(map[string]*AzureSpecsApiIteratorItem)) {
+	return utils.NewSlowBuildingMap(func(pushChunk func(map[string]*AzureSpecsApiIteratorItem)) {
 		// Get everything we need to start the request.
 		accessToken := getAzureAccessToken()
 		subId := os.Getenv("AZURE_SUBSCRIPTION_ID")
@@ -498,7 +508,7 @@ func getAzureSpecsApiIterator() *utils.SlowBuildingMap[string, *AzureSpecsApiIte
 			// Remap it by the size.
 			remapped := make(map[string]*AzureSpecsApiIteratorItem)
 			for _, item := range a.Value {
-				remapped[strings.ReplaceAll(strings.ToLower(item.Size), "_", "")] = item
+				remapped[strings.ReplaceAll(strings.ToLower(item.Name), "_", "")] = item
 			}
 			pushChunk(remapped)
 

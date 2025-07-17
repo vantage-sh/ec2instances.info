@@ -135,6 +135,7 @@ func getElastiCacheCacheParameters() map[string]map[string]string {
 			}
 		}
 	}
+	log.Println("ElastiCache cache parameters from AWS")
 
 	return instanceData
 }

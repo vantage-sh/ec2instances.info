@@ -9,7 +9,6 @@ import (
 	"os"
 )
 
-
 func getAzureAccessToken() string {
 	tenantId := os.Getenv("AZURE_TENANT_ID")
 	clientId := os.Getenv("AZURE_CLIENT_ID")
