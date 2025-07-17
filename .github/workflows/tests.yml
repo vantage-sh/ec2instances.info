@@ -10,7 +10,9 @@ jobs:
             - uses: actions/setup-go@v5
               with:
                   go-version: 1.24.4
-            - run: cd scraper && gofmt -w .
+            - name: Check gofmt
+              run: cd scraper && gofmt -l . && test -z "$$(gofmt -l .)"
+
     prettier:
         name: Prettier
         runs-on: ubuntu-22.04
