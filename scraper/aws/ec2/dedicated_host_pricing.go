@@ -98,31 +98,30 @@ type dedicatedHostReservedData struct {
 	Regions map[string]map[string]dedicatedHostReservedPrice `json:"regions"`
 }
 
-
 const (
 	DEDICATED_HOST_RESERVED_URL_BASE_US = "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/dedicatedhost-reservedinstance-virtual/"
 	DEDICATED_HOST_RESERVED_URL_BASE_CN = "https://calculator.amazonaws.cn/pricing/2.0/meteredUnitMaps/aws-cn/computesavingsplan/CNY/current/compute-ec2-calc/"
 )
 
 var RESERVED_TRANSLATIONS = map[string]string{
-	"1yrNoUpfront":       "yrTerm1Standard.noUpfront",
-	"1yrPartialUpfront":  "yrTerm1Standard.partialUpfront",
-	"1yrAllUpfront":      "yrTerm1Standard.allUpfront",
-	"1 yrNoUpfront":      "yrTerm1Standard.noUpfront",
-	"1 yrPartialUpfront": "yrTerm1Standard.partialUpfront",
-	"1 yrAllUpfront":     "yrTerm1Standard.allUpfront",
-	"1 yearNo Upfront":    "yrTerm1Standard.noUpfront",
+	"1yrNoUpfront":          "yrTerm1Standard.noUpfront",
+	"1yrPartialUpfront":     "yrTerm1Standard.partialUpfront",
+	"1yrAllUpfront":         "yrTerm1Standard.allUpfront",
+	"1 yrNoUpfront":         "yrTerm1Standard.noUpfront",
+	"1 yrPartialUpfront":    "yrTerm1Standard.partialUpfront",
+	"1 yrAllUpfront":        "yrTerm1Standard.allUpfront",
+	"1 yearNo Upfront":      "yrTerm1Standard.noUpfront",
 	"1 yearPartial Upfront": "yrTerm1Standard.partialUpfront",
-	"1 yearAll Upfront":   "yrTerm1Standard.allUpfront",
-	"3yrNoUpfront":       "yrTerm3Standard.noUpfront",
-	"3yrPartialUpfront":  "yrTerm3Standard.partialUpfront",
-	"3yrAllUpfront":      "yrTerm3Standard.allUpfront",
-	"3 yrNoUpfront":      "yrTerm3Standard.noUpfront",
-	"3 yrPartialUpfront": "yrTerm3Standard.partialUpfront",
-	"3 yrAllUpfront":     "yrTerm3Standard.allUpfront",
-	"3 yearNo Upfront":    "yrTerm3Standard.noUpfront",
+	"1 yearAll Upfront":     "yrTerm1Standard.allUpfront",
+	"3yrNoUpfront":          "yrTerm3Standard.noUpfront",
+	"3yrPartialUpfront":     "yrTerm3Standard.partialUpfront",
+	"3yrAllUpfront":         "yrTerm3Standard.allUpfront",
+	"3 yrNoUpfront":         "yrTerm3Standard.noUpfront",
+	"3 yrPartialUpfront":    "yrTerm3Standard.partialUpfront",
+	"3 yrAllUpfront":        "yrTerm3Standard.allUpfront",
+	"3 yearNo Upfront":      "yrTerm3Standard.noUpfront",
 	"3 yearPartial Upfront": "yrTerm3Standard.partialUpfront",
-	"3 yearAll Upfront":   "yrTerm3Standard.allUpfront",
+	"3 yearAll Upfront":     "yrTerm3Standard.allUpfront",
 }
 
 func loadDedicatedHostReservedData(
@@ -264,7 +263,6 @@ func addDedicatedHostPricingUs(instances map[string]*EC2Instance, regionsInverte
 	}
 	fg.Run()
 }
-
 
 const DEDICATED_HOST_ON_DEMAND_URL_CN = "https://calculator.amazonaws.cn/pricing/2.0/meteredUnitMaps/aws-cn/ec2/CNY/current/ec2-calc/{}/OnDemand/Dedicated/Linux/NA/No%20License%20required/Yes/index.json"
 
