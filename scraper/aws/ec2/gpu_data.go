@@ -1,4 +1,6 @@
-package aws
+package ec2
+
+import "log"
 
 type gpuData struct {
 	gpuModel          string
@@ -485,4 +487,23 @@ var GPU_DATA = map[string]gpuData{
 		// https://resources.nvidia.com/en-us-dgx-systems/dgx-b200-datasheet
 		gpuMemory: 1440,
 	},
+}
+
+func addGpuInfo(instances map[string]*EC2Instance) {
+	log.Default().Println("Adding GPU info to EC2")
+
+	for instanceType, instance := range instances {
+		gpuData, ok := GPU_DATA[instanceType]
+		if !ok {
+			if instance.GPU > 0 {
+				log.Default().Println("WARNING: GPU data missing for", instanceType)
+			}
+			continue
+		}
+
+		instance.GPU = gpuData.gpuCount
+		instance.GPUModel = &gpuData.gpuModel
+		instance.ComputeCapability = gpuData.computeCapability
+		instance.GPUMemory = gpuData.gpuMemory
+	}
 }

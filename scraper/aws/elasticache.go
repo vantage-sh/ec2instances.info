@@ -3,6 +3,7 @@ package aws
 import (
 	"context"
 	"log"
+	"scraper/aws/awsutils"
 	"scraper/utils"
 	"sort"
 	"strings"
@@ -69,7 +70,7 @@ func enrichElastiCacheInstance(instance map[string]any, attributes map[string]st
 	// Add the pretty name
 	if _, ok := instance["pretty_name"]; !ok {
 		instanceTypeWithoutCache := strings.TrimPrefix(instance["instance_type"].(string), "cache.")
-		instance["pretty_name"] = addPrettyName(instanceTypeWithoutCache, ELASTICACHE_FAMILY_NAMES)
+		instance["pretty_name"] = awsutils.AddPrettyName(instanceTypeWithoutCache, ELASTICACHE_FAMILY_NAMES)
 	}
 
 	// Add the max clients
@@ -80,7 +81,7 @@ func enrichElastiCacheInstance(instance map[string]any, attributes map[string]st
 	}
 }
 
-func processElastiCacheOnDemandDimension(attributes map[string]string, priceDimension RegionPriceDimension, getPricingData func(platform string) *genericAwsPricingData) {
+func processElastiCacheOnDemandDimension(attributes map[string]string, priceDimension awsutils.RegionPriceDimension, getPricingData func(platform string) *genericAwsPricingData, currency string) {
 	descLower := strings.ToLower(priceDimension.Description)
 	for _, chunk := range BAD_DESCRIPTION_CHUNKS {
 		if strings.Contains(descLower, chunk) {
@@ -90,20 +91,20 @@ func processElastiCacheOnDemandDimension(attributes map[string]string, priceDime
 	}
 
 	cacheEngine := attributes["cacheEngine"]
-	usd := priceDimension.PricePerUnit["USD"]
+	usd := priceDimension.PricePerUnit[currency]
 	if usd != "" {
-		usdF := floaty(usd)
+		usdF := awsutils.Floaty(usd)
 		pricingData := getPricingData(cacheEngine)
 		pricingData.OnDemand = usdF
 	}
 }
 
-func processElastiCacheReservedOffer(attributes map[string]string, offer RegionTerm, getPricingData func(platform string) *genericAwsPricingData) {
+func processElastiCacheReservedOffer(attributes map[string]string, offer awsutils.RegionTerm, getPricingData func(platform string) *genericAwsPricingData, currency string) {
 	data := []*genericAwsPricingData{
 		getPricingData(attributes["cacheEngine"]),
 	}
 	termCode := translateGenericAwsReservedTermAttributes(offer.TermAttributes)
-	processRDSAndElastiCacheReservedOffer(data, termCode, offer)
+	processRDSAndElastiCacheReservedOffer(data, termCode, offer, currency)
 }
 
 func getElastiCacheCacheParameters() map[string]map[string]string {
@@ -140,16 +141,20 @@ func getElastiCacheCacheParameters() map[string]map[string]string {
 	return instanceData
 }
 
-func processElastiCacheData(inData chan *rawRegion) {
+func processElastiCacheData(
+	inData chan *awsutils.RawRegion,
+	china bool,
+	cacheParamsGetter func() map[string]map[string]string,
+) {
+	// Defines the currency
+	currency := "USD"
+	if china {
+		currency = "CNY"
+	}
+
 	// Data that is used throughout the process
 	instancesHashmap := make(map[string]map[string]any)
 	sku2SkuData := make(map[string]genericAwsSkuData)
-
-	// Get the cache parameters in the background
-	ch := make(chan map[string]map[string]string)
-	go func() {
-		ch <- getElastiCacheCacheParameters()
-	}()
 
 	// The descriptions found for each region
 	regionDescriptions := make(map[string]string)
@@ -164,7 +169,7 @@ func processElastiCacheData(inData chan *rawRegion) {
 
 		// Process the products in the region
 		regionDescription := ""
-		for _, product := range rawRegion.regionData.Products {
+		for _, product := range rawRegion.RegionData.Products {
 			if product.ProductFamily != "Cache Instance" {
 				continue
 			}
@@ -190,7 +195,7 @@ func processElastiCacheData(inData chan *rawRegion) {
 			if !ok {
 				instance = map[string]any{
 					"instance_type": instanceType,
-					"pricing":       make(map[string]map[OS]any),
+					"pricing":       make(map[string]map[string]any),
 				}
 				instancesHashmap[instanceType] = instance
 			}
@@ -202,7 +207,7 @@ func processElastiCacheData(inData chan *rawRegion) {
 		}
 
 		// Process the on demand pricing
-		for _, offerMapping := range rawRegion.regionData.Terms.OnDemand {
+		for _, offerMapping := range rawRegion.RegionData.Terms.OnDemand {
 			for _, offer := range offerMapping {
 				// Get the instance in question
 				skuData, ok := sku2SkuData[offer.SKU]
@@ -216,21 +221,21 @@ func processElastiCacheData(inData chan *rawRegion) {
 				if len(offer.PriceDimensions) != 1 {
 					log.Fatalln("ElastiCache Pricing data has more than one price dimension for on demand", offer.SKU, instance["instance_type"])
 				}
-				var priceDimension RegionPriceDimension
+				var priceDimension awsutils.RegionPriceDimension
 				for _, priceDimension = range offer.PriceDimensions {
 					// Intentionally empty - this just gets the first one
 				}
 
 				// Handle getting the on demand pricing
 				getPricingdataScoped := func(platform string) *genericAwsPricingData {
-					return getgenericAwsPricingData(instance, rawRegion.regionName, platform)
+					return getgenericAwsPricingData(instance, rawRegion.RegionName, platform)
 				}
-				processElastiCacheOnDemandDimension(attributes, priceDimension, getPricingdataScoped)
+				processElastiCacheOnDemandDimension(attributes, priceDimension, getPricingdataScoped, currency)
 			}
 		}
 
 		// Process the reserved pricing
-		for _, offerMapping := range rawRegion.regionData.Terms.Reserved {
+		for _, offerMapping := range rawRegion.RegionData.Terms.Reserved {
 			for _, offer := range offerMapping {
 				// Get the instance in question
 				skuData, ok := sku2SkuData[offer.SKU]
@@ -242,28 +247,27 @@ func processElastiCacheData(inData chan *rawRegion) {
 
 				// Process the reserved pricing
 				getPricingdataScoped := func(platform string) *genericAwsPricingData {
-					return getgenericAwsPricingData(instance, rawRegion.regionName, platform)
+					return getgenericAwsPricingData(instance, rawRegion.RegionName, platform)
 				}
-				processElastiCacheReservedOffer(attributes, offer, getPricingdataScoped)
+				processElastiCacheReservedOffer(attributes, offer, getPricingdataScoped, currency)
 			}
 		}
 
 		// Set the region description
 		if regionDescription == "" {
-			log.Fatalln("ElastiCache Region description missing for", rawRegion.regionName)
+			log.Fatalln("ElastiCache Region description missing for", rawRegion.RegionName)
 		} else {
-			regionDescriptions[rawRegion.regionName] = regionDescription
+			regionDescriptions[rawRegion.RegionName] = regionDescription
 		}
 	}
 
 	// Clean up empty regions and set the regions map for non-empty regions
 	for _, instance := range instancesHashmap {
-		instance["regions"] = cleanEmptyRegions(instance["pricing"].(map[string]map[OS]any), regionDescriptions)
+		instance["regions"] = cleanEmptyRegions(instance["pricing"].(map[string]map[string]any), regionDescriptions)
 	}
 
 	// Set the cache parameters
-	cacheParameters := <-ch
-	for instanceType, cacheParameters := range cacheParameters {
+	for instanceType, cacheParameters := range cacheParamsGetter() {
 		instance, ok := instancesHashmap[instanceType]
 		if !ok {
 			continue
@@ -281,5 +285,9 @@ func processElastiCacheData(inData chan *rawRegion) {
 	sort.Slice(instancesSorted, func(i, j int) bool {
 		return instancesSorted[i]["instance_type"].(string) < instancesSorted[j]["instance_type"].(string)
 	})
-	utils.SaveInstances(instancesSorted, "www/cache/instances.json")
+	fp := "www/cache/instances.json"
+	if china {
+		fp = "www/cache/instances-cn.json"
+	}
+	utils.SaveInstances(instancesSorted, fp)
 }
