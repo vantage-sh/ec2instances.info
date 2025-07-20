@@ -216,11 +216,9 @@ func processEC2Data(
 		addSpotPricing(instancesHashmap, regionDescriptions)
 	}
 
-	// Add EBS pricing
-	if china {
-		addEBSPricingCn(instancesHashmap, currency)
-	} else {
-		addEBSPricingUs(instancesHashmap, currency)
+	// Add EBS pricing if not China
+	if !china {
+		addEBSPricing(instancesHashmap, currency)
 	}
 
 	// Add T2 credits
