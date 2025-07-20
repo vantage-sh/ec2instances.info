@@ -3,6 +3,7 @@ package aws
 import (
 	"context"
 	"log"
+	"runtime"
 	"scraper/aws/awsutils"
 	ec2Internal "scraper/aws/ec2"
 	"scraper/utils"
@@ -67,6 +68,7 @@ func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootInd
 					RegionName: regionName,
 					RegionData: j,
 				}
+				runtime.GC()
 			}
 			service.globalInData <- nil
 		}()
@@ -100,6 +102,7 @@ func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootInd
 					RegionName: regionName,
 					RegionData: j,
 				}
+				runtime.GC()
 			}
 			service.chinaInData <- nil
 		}()

@@ -218,9 +218,10 @@ func processEC2Data(
 	}
 
 	// Add EBS pricing
-	if !china {
-		// TODO: support china
-		addEBSPricing(instancesHashmap, currency)
+	if china {
+		addEBSPricingCn(instancesHashmap, currency)
+	} else {
+		addEBSPricingUs(instancesHashmap, currency)
 	}
 
 	// Add T2 credits
@@ -240,8 +241,11 @@ func processEC2Data(
 	}
 
 	// Add EMR pricing
-	// TODO: add China support
-	addEmrPricing(instancesHashmap, regionsInverted)
+	if china {
+		addEmrPricingCn(instancesHashmap, regionsInverted)
+	} else {
+		addEmrPricingUs(instancesHashmap, regionsInverted)
+	}
 
 	// Add GPU information
 	addGpuInfo(instancesHashmap)
