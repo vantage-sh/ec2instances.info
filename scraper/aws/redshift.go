@@ -2,6 +2,7 @@ package aws
 
 import (
 	"log"
+	"scraper/aws/awsutils"
 	"scraper/utils"
 	"sort"
 	"strings"
@@ -39,11 +40,11 @@ func enrichRedshiftInstance(instance map[string]any, attributes map[string]strin
 
 	// Add the pretty name
 	if _, ok := instance["pretty_name"]; !ok {
-		instance["pretty_name"] = addPrettyName(instance["instance_type"].(string), REDSHIFT_FAMILY_NAMES)
+		instance["pretty_name"] = awsutils.AddPrettyName(instance["instance_type"].(string), REDSHIFT_FAMILY_NAMES)
 	}
 }
 
-func processRedshiftOnDemandDimension(priceDimension RegionPriceDimension, getPricingData func() *genericAwsPricingData) {
+func processRedshiftOnDemandDimension(priceDimension awsutils.RegionPriceDimension, getPricingData func() *genericAwsPricingData, currency string) {
 	descLower := strings.ToLower(priceDimension.Description)
 	for _, chunk := range BAD_DESCRIPTION_CHUNKS {
 		if strings.Contains(descLower, chunk) {
@@ -52,11 +53,11 @@ func processRedshiftOnDemandDimension(priceDimension RegionPriceDimension, getPr
 		}
 	}
 
-	usd := priceDimension.PricePerUnit["USD"]
+	usd := priceDimension.PricePerUnit[currency]
 	if usd == "" {
 		return
 	}
-	usdF := floaty(usd)
+	usdF := awsutils.Floaty(usd)
 	if usdF == 0 {
 		return
 	}
@@ -125,19 +126,23 @@ func getRedshiftNodeParameters() map[string]map[string]string {
 	return m
 }
 
-func processRedshiftData(inData chan *rawRegion) {
+func processRedshiftData(
+	inData chan *awsutils.RawRegion,
+	china bool,
+	redshiftNodeParametersGetter func() map[string]map[string]string,
+) {
+	// Defines the currency
+	currency := "USD"
+	if china {
+		currency = "CNY"
+	}
+
 	// Data that is used throughout the process
 	instancesHashmap := make(map[string]map[string]any)
 	sku2Instance := make(map[string]map[string]any)
 
 	// The descriptions found for each region
 	regionDescriptions := make(map[string]string)
-
-	// Get the redshift node parameters
-	ch := make(chan map[string]map[string]string)
-	go func() {
-		ch <- getRedshiftNodeParameters()
-	}()
 
 	for rawRegion := range inData {
 		// Close the channel when we're done
@@ -148,7 +153,7 @@ func processRedshiftData(inData chan *rawRegion) {
 
 		// Process the products in the region
 		regionDescription := ""
-		for _, product := range rawRegion.regionData.Products {
+		for _, product := range rawRegion.RegionData.Products {
 			if product.ProductFamily != "Compute Instance" {
 				continue
 			}
@@ -180,18 +185,18 @@ func processRedshiftData(inData chan *rawRegion) {
 
 		// Gets the pricing data.
 		getPricingData := func(instance map[string]any) *genericAwsPricingData {
-			regionMap := instance["pricing"].(map[string]*genericAwsPricingData)[rawRegion.regionName]
+			regionMap := instance["pricing"].(map[string]*genericAwsPricingData)[rawRegion.RegionName]
 			if regionMap == nil {
 				regionMap = &genericAwsPricingData{
 					Reserved: make(map[string]float64),
 				}
-				instance["pricing"].(map[string]*genericAwsPricingData)[rawRegion.regionName] = regionMap
+				instance["pricing"].(map[string]*genericAwsPricingData)[rawRegion.RegionName] = regionMap
 			}
 			return regionMap
 		}
 
 		// Process the on demand pricing
-		for _, offerMapping := range rawRegion.regionData.Terms.OnDemand {
+		for _, offerMapping := range rawRegion.RegionData.Terms.OnDemand {
 			for _, offer := range offerMapping {
 				// Get the instance in question
 				instance, ok := sku2Instance[offer.SKU]
@@ -203,7 +208,7 @@ func processRedshiftData(inData chan *rawRegion) {
 				if len(offer.PriceDimensions) != 1 {
 					log.Fatalln("Redshift Pricing data has more than one price dimension for on demand", offer.SKU, instance["instance_type"])
 				}
-				var priceDimension RegionPriceDimension
+				var priceDimension awsutils.RegionPriceDimension
 				for _, priceDimension = range offer.PriceDimensions {
 					// Intentionally empty - this just gets the first one
 				}
@@ -212,12 +217,12 @@ func processRedshiftData(inData chan *rawRegion) {
 				getPricingDataScoped := func() *genericAwsPricingData {
 					return getPricingData(instance)
 				}
-				processRedshiftOnDemandDimension(priceDimension, getPricingDataScoped)
+				processRedshiftOnDemandDimension(priceDimension, getPricingDataScoped, currency)
 			}
 		}
 
 		// Process the reserved pricing
-		for _, offerMapping := range rawRegion.regionData.Terms.Reserved {
+		for _, offerMapping := range rawRegion.RegionData.Terms.Reserved {
 			for _, offer := range offerMapping {
 				// Get the instance in question
 				instance, ok := sku2Instance[offer.SKU]
@@ -229,15 +234,15 @@ func processRedshiftData(inData chan *rawRegion) {
 				getPricingDataScoped := func() *genericAwsPricingData {
 					return getPricingData(instance)
 				}
-				processGenericHalfReservedOffer(offer, getPricingDataScoped)
+				processGenericHalfReservedOffer(offer, getPricingDataScoped, currency)
 			}
 		}
 
 		// Set the region description
 		if regionDescription == "" {
-			log.Fatalln("ElastiCache Region description missing for", rawRegion.regionName)
+			log.Fatalln("ElastiCache Region description missing for", rawRegion.RegionName)
 		} else {
-			regionDescriptions[rawRegion.regionName] = regionDescription
+			regionDescriptions[rawRegion.RegionName] = regionDescription
 		}
 	}
 
@@ -247,8 +252,7 @@ func processRedshiftData(inData chan *rawRegion) {
 	}
 
 	// Set the node parameters
-	nodeParameters := <-ch
-	for instanceType, nodeParameters := range nodeParameters {
+	for instanceType, nodeParameters := range redshiftNodeParametersGetter() {
 		instance, ok := instancesHashmap[instanceType]
 		if !ok {
 			continue
@@ -266,5 +270,9 @@ func processRedshiftData(inData chan *rawRegion) {
 	sort.Slice(instancesSorted, func(i, j int) bool {
 		return instancesSorted[i]["instance_type"].(string) < instancesSorted[j]["instance_type"].(string)
 	})
-	utils.SaveInstances(instancesSorted, "www/redshift/instances.json")
+	fp := "www/redshift/instances.json"
+	if china {
+		fp = "www/redshift/instances-cn.json"
+	}
+	utils.SaveInstances(instancesSorted, fp)
 }

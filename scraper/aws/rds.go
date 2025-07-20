@@ -2,6 +2,7 @@ package aws
 
 import (
 	"log"
+	"scraper/aws/awsutils"
 	"scraper/utils"
 	"sort"
 	"strings"
@@ -62,7 +63,7 @@ func enrichRdsInstance(
 	// Add the pretty name
 	instanceTypeWithoutDb := strings.TrimPrefix(instance["instance_type"].(string), "db.")
 	if _, ok := instance["pretty_name"]; !ok {
-		instance["pretty_name"] = addPrettyName(instanceTypeWithoutDb, RDS_FAMILY_NAMES)
+		instance["pretty_name"] = awsutils.AddPrettyName(instanceTypeWithoutDb, RDS_FAMILY_NAMES)
 	}
 
 	// Check if we can supplement this instance with storage info
@@ -100,8 +101,9 @@ type genericAwsPricingData struct {
 
 func processRdsOnDemandDimension(
 	attributes map[string]string,
-	priceDimension RegionPriceDimension,
+	priceDimension awsutils.RegionPriceDimension,
 	getPricingdata func(platform string) *genericAwsPricingData,
+	currency string,
 ) {
 	descLower := strings.ToLower(priceDimension.Description)
 	for _, chunk := range BAD_DESCRIPTION_CHUNKS {
@@ -116,11 +118,11 @@ func processRdsOnDemandDimension(
 		engineCode = "211"
 	}
 	pricingData := getPricingdata(engineCode)
-	usd := priceDimension.PricePerUnit["USD"]
+	usd := priceDimension.PricePerUnit[currency]
 	if usd == "" {
 		return
 	}
-	usdF := floaty(usd)
+	usdF := awsutils.Floaty(usd)
 	if usdF == 0 {
 		return
 	}
@@ -134,8 +136,8 @@ func translateGenericAwsReservedTermAttributes(termAttributes map[string]string)
 	leaseContractLength := termAttributes["LeaseContractLength"]
 	purchaseOption := termAttributes["PurchaseOption"]
 
-	lease := LEASES[leaseContractLength]
-	option := PURCHASE_OPTIONS[purchaseOption]
+	lease := awsutils.LEASES[leaseContractLength]
+	option := awsutils.PURCHASE_OPTIONS[purchaseOption]
 
 	if lease == "" || option == "" {
 		log.Fatalln("RDS or ElastiCache Reserved pricing data makes unknown term code", termAttributes)
@@ -147,13 +149,14 @@ func translateGenericAwsReservedTermAttributes(termAttributes map[string]string)
 func processRDSAndElastiCacheReservedOffer(
 	data []*genericAwsPricingData,
 	termCode string,
-	offer RegionTerm,
+	offer awsutils.RegionTerm,
+	currency string,
 ) {
 	for _, data := range data {
 		for _, offer := range offer.PriceDimensions {
-			usd := offer.PricePerUnit["USD"]
+			usd := offer.PricePerUnit[currency]
 			if usd != "" && usd != "0" {
-				f := floaty(usd)
+				f := awsutils.Floaty(usd)
 				switch termCode {
 				case "yrTerm1Standard.partialUpfront", "yrTerm1Standard.allUpfront":
 					f = f / 365 / 24
@@ -164,7 +167,7 @@ func processRDSAndElastiCacheReservedOffer(
 					data.Reserved[termCode] = f
 				}
 			} else {
-				log.Fatalln("RDS or ElastiCache Reserved pricing data has no USD price", offer)
+				log.Fatalln("RDS or ElastiCache Reserved pricing data has no price", offer)
 			}
 		}
 	}
@@ -172,8 +175,9 @@ func processRDSAndElastiCacheReservedOffer(
 
 func processRdsReservedOffer(
 	attributes map[string]string,
-	offer RegionTerm,
+	offer awsutils.RegionTerm,
 	getPricingData func(platform string) *genericAwsPricingData,
+	currency string,
 ) {
 	if attributes["deploymentOption"] != "Single-AZ" {
 		return
@@ -184,7 +188,7 @@ func processRdsReservedOffer(
 		getPricingData(attributes["engineCode"]),
 	}
 	termCode := translateGenericAwsReservedTermAttributes(offer.TermAttributes)
-	processRDSAndElastiCacheReservedOffer(data, termCode, offer)
+	processRDSAndElastiCacheReservedOffer(data, termCode, offer, currency)
 }
 
 type genericAwsSkuData struct {
@@ -200,10 +204,10 @@ var RDS_DUPLICATED_KEYS = map[string]string{
 }
 
 func getgenericAwsPricingData(instance map[string]any, regionName, platform string) *genericAwsPricingData {
-	regionMap := instance["pricing"].(map[string]map[OS]any)[regionName]
+	regionMap := instance["pricing"].(map[string]map[string]any)[regionName]
 	if regionMap == nil {
-		regionMap = make(map[OS]any)
-		instance["pricing"].(map[string]map[OS]any)[regionName] = regionMap
+		regionMap = make(map[string]any)
+		instance["pricing"].(map[string]map[string]any)[regionName] = regionMap
 	}
 	osMap := regionMap[platform]
 	if osMap == nil {
@@ -215,7 +219,13 @@ func getgenericAwsPricingData(instance map[string]any, regionName, platform stri
 	return osMap.(*genericAwsPricingData)
 }
 
-func processRDSData(inData chan *rawRegion, ec2ApiResponses *utils.SlowBuildingMap[string, *types.InstanceTypeInfo]) {
+func processRDSData(inData chan *awsutils.RawRegion, ec2ApiResponses *utils.SlowBuildingMap[string, *types.InstanceTypeInfo], china bool) {
+	// Defines the currency
+	currency := "USD"
+	if china {
+		currency = "CNY"
+	}
+
 	// Data that is used throughout the process
 	instancesHashmap := make(map[string]map[string]any)
 	sku2SkuData := make(map[string]genericAwsSkuData)
@@ -232,7 +242,7 @@ func processRDSData(inData chan *rawRegion, ec2ApiResponses *utils.SlowBuildingM
 
 		// Process the products in the region
 		regionDescription := ""
-		for _, product := range rawRegion.regionData.Products {
+		for _, product := range rawRegion.RegionData.Products {
 			if product.ProductFamily != "Database Instance" {
 				continue
 			}
@@ -258,7 +268,7 @@ func processRDSData(inData chan *rawRegion, ec2ApiResponses *utils.SlowBuildingM
 			if !ok {
 				instance = map[string]any{
 					"instance_type":           instanceType,
-					"pricing":                 make(map[string]map[OS]any),
+					"pricing":                 make(map[string]map[string]any),
 					"ebs_baseline_throughput": 0.0,
 					"ebs_baseline_iops":       0,
 					"ebs_baseline_bandwidth":  0,
@@ -278,7 +288,7 @@ func processRDSData(inData chan *rawRegion, ec2ApiResponses *utils.SlowBuildingM
 		}
 
 		// Process the on demand pricing
-		for _, offerMapping := range rawRegion.regionData.Terms.OnDemand {
+		for _, offerMapping := range rawRegion.RegionData.Terms.OnDemand {
 			for _, offer := range offerMapping {
 				// Get the instance in question
 				skuData, ok := sku2SkuData[offer.SKU]
@@ -292,21 +302,21 @@ func processRDSData(inData chan *rawRegion, ec2ApiResponses *utils.SlowBuildingM
 				if len(offer.PriceDimensions) != 1 {
 					log.Fatalln("RDS Pricing data has more than one price dimension for on demand", offer.SKU, instance["instance_type"])
 				}
-				var priceDimension RegionPriceDimension
+				var priceDimension awsutils.RegionPriceDimension
 				for _, priceDimension = range offer.PriceDimensions {
 					// Intentionally empty - this just gets the first one
 				}
 
 				// Handle getting the on demand pricing
 				getPricingdataScoped := func(platform string) *genericAwsPricingData {
-					return getgenericAwsPricingData(instance, rawRegion.regionName, platform)
+					return getgenericAwsPricingData(instance, rawRegion.RegionName, platform)
 				}
-				processRdsOnDemandDimension(attributes, priceDimension, getPricingdataScoped)
+				processRdsOnDemandDimension(attributes, priceDimension, getPricingdataScoped, currency)
 			}
 		}
 
 		// Process the reserved pricing
-		for _, offerMapping := range rawRegion.regionData.Terms.Reserved {
+		for _, offerMapping := range rawRegion.RegionData.Terms.Reserved {
 			for _, offer := range offerMapping {
 				// Get the instance in question
 				skuData, ok := sku2SkuData[offer.SKU]
@@ -318,23 +328,23 @@ func processRDSData(inData chan *rawRegion, ec2ApiResponses *utils.SlowBuildingM
 
 				// Process the reserved pricing
 				getPricingdataScoped := func(platform string) *genericAwsPricingData {
-					return getgenericAwsPricingData(instance, rawRegion.regionName, platform)
+					return getgenericAwsPricingData(instance, rawRegion.RegionName, platform)
 				}
-				processRdsReservedOffer(attributes, offer, getPricingdataScoped)
+				processRdsReservedOffer(attributes, offer, getPricingdataScoped, currency)
 			}
 		}
 
 		// Set the region description
 		if regionDescription == "" {
-			log.Fatalln("RDS Region description missing for", rawRegion.regionName)
+			log.Fatalln("RDS Region description missing for", rawRegion.RegionName)
 		} else {
-			regionDescriptions[rawRegion.regionName] = regionDescription
+			regionDescriptions[rawRegion.RegionName] = regionDescription
 		}
 	}
 
 	// Clean up empty regions and set the regions map for non-empty regions
 	for _, instance := range instancesHashmap {
-		instance["regions"] = cleanEmptyRegions(instance["pricing"].(map[string]map[OS]any), regionDescriptions)
+		instance["regions"] = cleanEmptyRegions(instance["pricing"].(map[string]map[string]any), regionDescriptions)
 	}
 
 	// Save the data
@@ -348,5 +358,9 @@ func processRDSData(inData chan *rawRegion, ec2ApiResponses *utils.SlowBuildingM
 	sort.Slice(instancesSorted, func(i, j int) bool {
 		return instancesSorted[i]["instance_type"].(string) < instancesSorted[j]["instance_type"].(string)
 	})
-	utils.SaveInstances(instancesSorted, "www/rds/instances.json")
+	fp := "www/rds/instances.json"
+	if china {
+		fp = "www/rds/instances-cn.json"
+	}
+	utils.SaveInstances(instancesSorted, fp)
 }

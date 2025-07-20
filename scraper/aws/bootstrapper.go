@@ -1,12 +1,21 @@
 package aws
 
 import (
+	"context"
 	"log"
+	"scraper/aws/awsutils"
+	ec2Internal "scraper/aws/ec2"
 	"scraper/utils"
 	"strings"
+
+	"github.com/aws/aws-sdk-go-v2/service/ec2"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
 
-const AWS_NON_CHINA_ROOT_URL = "https://pricing.us-east-1.amazonaws.com"
+const (
+	AWS_NON_CHINA_ROOT_URL = "https://pricing.us-east-1.amazonaws.com"
+	AWS_CHINA_ROOT_URL     = "https://pricing.cn-north-1.amazonaws.com.cn"
+)
 
 // Loads an AWS "URL". These are generally actually paths.
 func loadAwsUrlJson(baseUrl string, awsUrl string, val any) error {
@@ -28,52 +37,18 @@ type AwsRegionIndexResponse struct {
 	} `json:"regions"`
 }
 
-type RegionProduct struct {
-	SKU           string            `json:"sku"`
-	ProductFamily string            `json:"productFamily"`
-	Attributes    map[string]string `json:"attributes"`
-}
-
-type RegionPriceDimension struct {
-	RateCode     string            `json:"rateCode"`
-	Description  string            `json:"description"`
-	BeginRange   string            `json:"beginRange"`
-	EndRange     string            `json:"endRange"`
-	Unit         string            `json:"unit"`
-	PricePerUnit map[string]string `json:"pricePerUnit"`
-}
-
-type RegionTerm struct {
-	SKU             string                          `json:"sku"`
-	PriceDimensions map[string]RegionPriceDimension `json:"priceDimensions"`
-	TermAttributes  map[string]string               `json:"termAttributes"`
-}
-
-type RegionTerms struct {
-	OnDemand map[string]map[string]RegionTerm `json:"OnDemand"`
-	Reserved map[string]map[string]RegionTerm `json:"Reserved"`
-}
-
-type RegionData struct {
-	Products map[string]RegionProduct `json:"products"`
-	Terms    RegionTerms              `json:"terms"`
-}
-
-type rawRegion struct {
-	regionName string
-	regionData RegionData
-}
-
 type service struct {
-	serviceName string
-	inData      chan *rawRegion
+	serviceName  string
+	globalInData chan *awsutils.RawRegion
+	chinaInData  chan *awsutils.RawRegion
 }
 
-func loadAllRegionsForServices(services []service, rootIndex AwsRootIndexResponse) {
+func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootIndex AwsRootIndexResponse) {
+	// Global
 	for _, service := range services {
-		region, ok := rootIndex.Offers[service.serviceName]
+		region, ok := globalRootIndex.Offers[service.serviceName]
 		if !ok {
-			log.Fatalf("Service %s not found in root index", service.serviceName)
+			log.Fatalf("Service %s not found in global root index", service.serviceName)
 		}
 
 		go func() {
@@ -83,87 +58,184 @@ func loadAllRegionsForServices(services []service, rootIndex AwsRootIndexRespons
 			}
 
 			for regionName, regionMeta := range regionIndex.Regions {
-				var j RegionData
+				var j awsutils.RegionData
 				if err := loadAwsUrlJson(AWS_NON_CHINA_ROOT_URL, regionMeta.CurrentVersionUrl, &j); err != nil {
 					log.Fatal(err)
 				}
 
-				service.inData <- &rawRegion{
-					regionName: regionName,
-					regionData: j,
+				service.globalInData <- &awsutils.RawRegion{
+					RegionName: regionName,
+					RegionData: j,
 				}
 			}
-			service.inData <- nil
+			service.globalInData <- nil
+		}()
+	}
+
+	// AWS China
+	for _, service := range services {
+		region, ok := chinaRootIndex.Offers[service.serviceName]
+		if !ok {
+			log.Fatalf("Service %s not found in china root index", service.serviceName)
+		}
+
+		go func() {
+			var regionIndex AwsRegionIndexResponse
+			if err := loadAwsUrlJson(AWS_CHINA_ROOT_URL, region.CurrentRegionIndexUrl, &regionIndex); err != nil {
+				log.Fatal(err)
+			}
+
+			for regionName, regionMeta := range regionIndex.Regions {
+				if regionName == "aws-cn-other" {
+					// Weird thing AWS sends in China
+					continue
+				}
+
+				var j awsutils.RegionData
+				if err := loadAwsUrlJson(AWS_CHINA_ROOT_URL, regionMeta.CurrentVersionUrl, &j); err != nil {
+					log.Fatal(err)
+				}
+
+				service.chinaInData <- &awsutils.RawRegion{
+					RegionName: regionName,
+					RegionData: j,
+				}
+			}
+			service.chinaInData <- nil
 		}()
 	}
 }
 
+func int32Ptr(i int32) *int32 {
+	return &i
+}
+
+func makeEc2Iterator() *utils.SlowBuildingMap[string, *types.InstanceTypeInfo] {
+	return utils.NewSlowBuildingMap(func(pushChunk func(map[string]*types.InstanceTypeInfo)) {
+		paginator := ec2.NewDescribeInstanceTypesPaginator(ec2Client, &ec2.DescribeInstanceTypesInput{
+			MaxResults: int32Ptr(100),
+		})
+		for paginator.HasMorePages() {
+			output, err := paginator.NextPage(context.Background())
+			if err != nil {
+				log.Fatal(err)
+			}
+			log.Default().Println("Processed", len(output.InstanceTypes), "instance types via EC2 describe API")
+
+			mapped := make(map[string]*types.InstanceTypeInfo)
+			for i := range output.InstanceTypes {
+				mapped[string(output.InstanceTypes[i].InstanceType)] = &output.InstanceTypes[i]
+			}
+			pushChunk(mapped)
+		}
+	})
+}
+
 // DoAwsScraping is the main function that scrapes the AWS pricing data and saves it to a file.
 func DoAwsScraping() {
-	// Load the root index
-	var rootIndex AwsRootIndexResponse
-	if err := loadAwsUrlJson(AWS_NON_CHINA_ROOT_URL, "/offers/v1.0/aws/index.json", &rootIndex); err != nil {
-		log.Fatal(err)
-	}
+	// Load the root indexes
+	rootIndexChannel := make(chan AwsRootIndexResponse)
+	go func() {
+		var rootIndex AwsRootIndexResponse
+		if err := loadAwsUrlJson(AWS_NON_CHINA_ROOT_URL, "/offers/v1.0/aws/index.json", &rootIndex); err != nil {
+			log.Fatal(err)
+		}
+		rootIndexChannel <- rootIndex
+	}()
+	chinaRootIndexChannel := make(chan AwsRootIndexResponse)
+	go func() {
+		var rootIndex AwsRootIndexResponse
+		if err := loadAwsUrlJson(AWS_CHINA_ROOT_URL, "/offers/v1.0/cn/index.json", &rootIndex); err != nil {
+			log.Fatal(err)
+		}
+		chinaRootIndexChannel <- rootIndex
+	}()
 
 	var fg utils.FunctionGroup
 
 	// Get the EC2 API responses here because both EC2 and RDS use the data
 	ec2ApiResponses := makeEc2Iterator()
 
-	// Defines the channel for the EC2 data
-	ec2Channel := make(chan *rawRegion)
-	fg.Add(func() {
-		processEC2Data(ec2Channel, ec2ApiResponses)
-	})
+	// Start the EC2 data processing threads (this is outside of this function because its complex)
+	ec2GlobalChannel, ec2ChinaChannel := ec2Internal.Setup(&fg, ec2ApiResponses)
 
 	// Defines the channel for the RDS data
-	rdsChannel := make(chan *rawRegion)
+	rdsGlobalChannel := make(chan *awsutils.RawRegion)
+	rdsChinaChannel := make(chan *awsutils.RawRegion)
 	fg.Add(func() {
-		processRDSData(rdsChannel, ec2ApiResponses)
+		processRDSData(rdsChinaChannel, ec2ApiResponses, true)
 	})
+	fg.Add(func() {
+		processRDSData(rdsGlobalChannel, ec2ApiResponses, false)
+	})
+
+	// Get the ElastiCache cache parameters in the background
+	cacheParamsGetter := utils.BlockUntilDone(getElastiCacheCacheParameters)
 
 	// Defines the channel for the ElastiCache data
-	elastiCacheChannel := make(chan *rawRegion)
+	elastiCacheGlobalChannel := make(chan *awsutils.RawRegion)
+	elastiCacheChinaChannel := make(chan *awsutils.RawRegion)
 	fg.Add(func() {
-		processElastiCacheData(elastiCacheChannel)
+		processElastiCacheData(elastiCacheChinaChannel, true, cacheParamsGetter)
 	})
+	fg.Add(func() {
+		processElastiCacheData(elastiCacheGlobalChannel, false, cacheParamsGetter)
+	})
+
+	// Get the Redshift node parameters in the background
+	redshiftNodeParametersGetter := utils.BlockUntilDone(getRedshiftNodeParameters)
 
 	// Defines the channel for the Redshift data
-	redshiftChannel := make(chan *rawRegion)
+	redshiftGlobalChannel := make(chan *awsutils.RawRegion)
+	redshiftChinaChannel := make(chan *awsutils.RawRegion)
 	fg.Add(func() {
-		processRedshiftData(redshiftChannel)
+		processRedshiftData(redshiftChinaChannel, true, redshiftNodeParametersGetter)
+	})
+	fg.Add(func() {
+		processRedshiftData(redshiftGlobalChannel, false, redshiftNodeParametersGetter)
 	})
 
+	// Get the OpenSearch volume quotas in the background
+	volumeQuotasGetter := utils.BlockUntilDone(getOpenSearchVolumeQuotas)
+
 	// Defines the channel for the OpenSearch data
-	openSearchChannel := make(chan *rawRegion)
+	openSearchGlobalChannel := make(chan *awsutils.RawRegion)
+	openSearchChinaChannel := make(chan *awsutils.RawRegion)
 	fg.Add(func() {
-		processOpenSearchData(openSearchChannel)
+		processOpenSearchData(openSearchChinaChannel, true, volumeQuotasGetter)
+	})
+	fg.Add(func() {
+		processOpenSearchData(openSearchGlobalChannel, false, volumeQuotasGetter)
 	})
 
 	// Load all the regions for the things we care about
 	loadAllRegionsForServices([]service{
 		{
-			serviceName: "AmazonEC2",
-			inData:      ec2Channel,
+			serviceName:  "AmazonEC2",
+			globalInData: ec2GlobalChannel,
+			chinaInData:  ec2ChinaChannel,
 		},
 		{
-			serviceName: "AmazonRDS",
-			inData:      rdsChannel,
+			serviceName:  "AmazonRDS",
+			globalInData: rdsGlobalChannel,
+			chinaInData:  rdsChinaChannel,
 		},
 		{
-			serviceName: "AmazonElastiCache",
-			inData:      elastiCacheChannel,
+			serviceName:  "AmazonElastiCache",
+			globalInData: elastiCacheGlobalChannel,
+			chinaInData:  elastiCacheChinaChannel,
 		},
 		{
-			serviceName: "AmazonRedshift",
-			inData:      redshiftChannel,
+			serviceName:  "AmazonRedshift",
+			globalInData: redshiftGlobalChannel,
+			chinaInData:  redshiftChinaChannel,
 		},
 		{
-			serviceName: "AmazonES",
-			inData:      openSearchChannel,
+			serviceName:  "AmazonES",
+			globalInData: openSearchGlobalChannel,
+			chinaInData:  openSearchChinaChannel,
 		},
-	}, rootIndex)
+	}, <-rootIndexChannel, <-chinaRootIndexChannel)
 
 	// Wait for all the data to be processed
 	fg.Run()

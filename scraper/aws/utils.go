@@ -1,12 +1,8 @@
 package aws
 
 import (
-	"encoding/json"
-	"fmt"
-	"io"
 	"log"
-	"net/http"
-	"regexp"
+	"scraper/aws/awsutils"
 	"strings"
 )
 
@@ -18,55 +14,11 @@ func capitalize(s string) string {
 	return strings.Join(spaceSplit, " ")
 }
 
-var ROUGHLY_JS_KEY = regexp.MustCompile(`(\w+):`)
-
-func fetchDataFromAWSWebsite(url string, v any) error {
-	resp, err := http.Get(url)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != 200 {
-		return fmt.Errorf("failed to fetch data from AWS website: %s", resp.Status)
-	}
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return err
-	}
-
-	err = json.Unmarshal(body, v)
-	if err != nil {
-		// Try looking for the first usage of "callback(" and the last usage of ")"
-		bodyStr := string(body)
-		callbackStart := strings.Index(bodyStr, "callback(")
-		callbackEnd := strings.LastIndex(bodyStr, ")")
-		if callbackStart == -1 || callbackEnd == -1 {
-			return err
-		}
-		body = []byte(ROUGHLY_JS_KEY.ReplaceAllString(bodyStr[callbackStart+9:callbackEnd], `"$1":`))
-		err = json.Unmarshal(body, v)
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func cleanEmptyRegions(pricing map[Region]map[OS]any, regionDescriptions map[string]string) map[string]string {
+func cleanEmptyRegions(pricing map[string]map[string]any, regionDescriptions map[string]string) map[string]string {
 	for region, regionData := range pricing {
 		okOsCount := 0
 		for os, osData := range regionData {
 			switch v := osData.(type) {
-			case *EC2PricingData:
-				if v.OnDemand == "0" && v.Reserved != nil && len(*v.Reserved) == 0 {
-					// Remove this OS from the instance
-					delete(regionData, os)
-				} else {
-					// Keep this OS
-					okOsCount++
-				}
 			case *genericAwsPricingData:
 				if v.OnDemand == 0 && len(v.Reserved) == 0 {
 					// Remove this OS from the instance
@@ -90,57 +42,7 @@ func cleanEmptyRegions(pricing map[Region]map[OS]any, regionDescriptions map[str
 	return regions
 }
 
-func addPrettyName(instanceType string, familyNames map[string]string) string {
-	instanceSplit := strings.Split(instanceType, ".")
-	family := instanceSplit[0]
-	short := instanceSplit[1]
-	prefix, ok := familyNames[family]
-	if !ok {
-		prefix = strings.ToUpper(family)
-	}
-
-	extra := ""
-	extraFound := true
-	switch {
-	case strings.HasPrefix(short, "8x"):
-		extra = "Eight"
-	case strings.HasPrefix(short, "4x"):
-		extra = "Quadruple"
-	case strings.HasPrefix(short, "2x"):
-		extra = "Double"
-	case strings.HasPrefix(short, "10x"):
-		extra = "Deca"
-	case strings.HasPrefix(short, "12x"):
-		extra = "12xlarge"
-	case strings.HasPrefix(short, "16x"):
-		extra = "16xlarge"
-	case strings.HasPrefix(short, "x"):
-		extra = ""
-	default:
-		extraFound = false
-	}
-	bits := []string{prefix}
-	if extraFound {
-		bits = append(bits, extra, "Extra")
-		short = "Large"
-	}
-	bits = append(bits, capitalize(short))
-
-	pName := ""
-	nonBlanks := 0
-	for _, chunk := range bits {
-		if chunk != "" {
-			nonBlanks++
-			if nonBlanks > 1 {
-				pName += " "
-			}
-			pName += chunk
-		}
-	}
-	return pName
-}
-
-func processGenericHalfReservedOffer(offer RegionTerm, getPricingData func() *genericAwsPricingData) {
+func processGenericHalfReservedOffer(offer awsutils.RegionTerm, getPricingData func() *genericAwsPricingData, currency string) {
 	termCode := translateGenericAwsReservedTermAttributes(offer.TermAttributes)
 	for _, offer := range offer.PriceDimensions {
 		descLower := strings.ToLower(offer.Description)
@@ -151,9 +53,9 @@ func processGenericHalfReservedOffer(offer RegionTerm, getPricingData func() *ge
 			}
 		}
 
-		usd := offer.PricePerUnit["USD"]
+		usd := offer.PricePerUnit[currency]
 		if usd != "" && usd != "0" {
-			f := floaty(usd)
+			f := awsutils.Floaty(usd)
 			switch termCode {
 			case "yrTerm1Standard.partialUpfront", "yrTerm1Standard.allUpfront":
 				f = f / 365 / 24
@@ -164,7 +66,7 @@ func processGenericHalfReservedOffer(offer RegionTerm, getPricingData func() *ge
 				getPricingData().Reserved[termCode] = f
 			}
 		} else {
-			log.Fatalln("Reserved pricing data has no USD price", offer)
+			log.Fatalln("Reserved pricing data has no price", offer)
 		}
 	}
 }

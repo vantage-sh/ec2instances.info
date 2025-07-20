@@ -3,6 +3,7 @@ package aws
 import (
 	"errors"
 	"log"
+	"scraper/aws/awsutils"
 	"scraper/utils"
 	"sort"
 	"strings"
@@ -54,7 +55,7 @@ func enrichOpenSearchInstance(instance map[string]any, attributes map[string]str
 	// Add the pretty name
 	if _, ok := instance["pretty_name"]; !ok {
 		instanceType := instance["instance_type"].(string)
-		instance["pretty_name"] = addPrettyName(instanceType, OPENSEARCH_FAMILY_NAMES)
+		instance["pretty_name"] = awsutils.AddPrettyName(instanceType, OPENSEARCH_FAMILY_NAMES)
 	}
 }
 
@@ -185,19 +186,23 @@ func getOpenSearchVolumeQuotas() map[string]map[string]string {
 	return extraMetadata
 }
 
-func processOpenSearchData(inData chan *rawRegion) {
+func processOpenSearchData(
+	inData chan *awsutils.RawRegion,
+	china bool,
+	volumeQuotasGetter func() map[string]map[string]string,
+) {
+	// Defines the currency
+	currency := "USD"
+	if china {
+		currency = "CNY"
+	}
+
 	// Data that is used throughout the process
 	instancesHashmap := make(map[string]map[string]any)
 	sku2Instance := make(map[string]map[string]any)
 
 	// The descriptions found for each region
 	regionDescriptions := make(map[string]string)
-
-	// Get the volume quotas
-	ch := make(chan map[string]map[string]string)
-	go func() {
-		ch <- getOpenSearchVolumeQuotas()
-	}()
 
 	// Process each region as it comes in
 	for rawRegion := range inData {
@@ -209,7 +214,7 @@ func processOpenSearchData(inData chan *rawRegion) {
 
 		// Process the products in the region
 		regionDescription := ""
-		for _, product := range rawRegion.regionData.Products {
+		for _, product := range rawRegion.RegionData.Products {
 			if product.ProductFamily != "Amazon OpenSearch Service Instance" ||
 				product.Attributes["operation"] == "DirectQueryAmazonS3GDCOCU" {
 				continue
@@ -241,7 +246,7 @@ func processOpenSearchData(inData chan *rawRegion) {
 		}
 
 		// Process the on demand pricing
-		for _, offerMapping := range rawRegion.regionData.Terms.OnDemand {
+		for _, offerMapping := range rawRegion.RegionData.Terms.OnDemand {
 			for _, offer := range offerMapping {
 				// Get the instance in question
 				instance, ok := sku2Instance[offer.SKU]
@@ -251,25 +256,25 @@ func processOpenSearchData(inData chan *rawRegion) {
 
 				// Get the price dimension
 				if len(offer.PriceDimensions) != 1 {
-					log.Fatalln("RDS Pricing data has more than one price dimension for on demand", offer.SKU, instance["instance_type"])
+					log.Fatalln("OpenSearch Pricing data has more than one price dimension for on demand", offer.SKU, instance["instance_type"])
 				}
-				var priceDimension RegionPriceDimension
+				var priceDimension awsutils.RegionPriceDimension
 				for _, priceDimension = range offer.PriceDimensions {
 					// Intentionally empty - this just gets the first one
 				}
 
 				// Handle getting the on demand pricing
 				pricing := instance["pricing"].(map[string]*genericAwsPricingData)
-				pricingData, ok := pricing[rawRegion.regionName]
+				pricingData, ok := pricing[rawRegion.RegionName]
 				if !ok {
 					pricingData = &genericAwsPricingData{
 						Reserved: make(map[string]float64),
 					}
-					pricing[rawRegion.regionName] = pricingData
+					pricing[rawRegion.RegionName] = pricingData
 				}
-				usd := priceDimension.PricePerUnit["USD"]
+				usd := priceDimension.PricePerUnit[currency]
 				if usd != "" {
-					usdF := floaty(usd)
+					usdF := awsutils.Floaty(usd)
 					if usdF != 0 {
 						pricingData.OnDemand = usdF
 					}
@@ -278,7 +283,7 @@ func processOpenSearchData(inData chan *rawRegion) {
 		}
 
 		// Handle the reserved pricing
-		for _, offerMapping := range rawRegion.regionData.Terms.Reserved {
+		for _, offerMapping := range rawRegion.RegionData.Terms.Reserved {
 			for _, offer := range offerMapping {
 				instance, ok := sku2Instance[offer.SKU]
 				if !ok {
@@ -287,23 +292,23 @@ func processOpenSearchData(inData chan *rawRegion) {
 
 				processGenericHalfReservedOffer(offer, func() *genericAwsPricingData {
 					pricing := instance["pricing"].(map[string]*genericAwsPricingData)
-					pricingData, ok := pricing[rawRegion.regionName]
+					pricingData, ok := pricing[rawRegion.RegionName]
 					if !ok {
 						pricingData = &genericAwsPricingData{
 							Reserved: make(map[string]float64),
 						}
-						pricing[rawRegion.regionName] = pricingData
+						pricing[rawRegion.RegionName] = pricingData
 					}
 					return pricingData
-				})
+				}, currency)
 			}
 		}
 
 		// Handle the description
 		if regionDescription == "" {
-			log.Fatalln("OpenSearch Region description missing for", rawRegion.regionName)
+			log.Fatalln("OpenSearch Region description missing for", rawRegion.RegionName)
 		} else {
-			regionDescriptions[rawRegion.regionName] = regionDescription
+			regionDescriptions[rawRegion.RegionName] = regionDescription
 		}
 	}
 
@@ -313,8 +318,7 @@ func processOpenSearchData(inData chan *rawRegion) {
 	}
 
 	// Process the volume quotas
-	volumeQuotas := <-ch
-	for instanceType, extraAttributes := range volumeQuotas {
+	for instanceType, extraAttributes := range volumeQuotasGetter() {
 		instance, ok := instancesHashmap[instanceType]
 		if !ok {
 			continue
@@ -332,5 +336,9 @@ func processOpenSearchData(inData chan *rawRegion) {
 	sort.Slice(instancesSorted, func(i, j int) bool {
 		return instancesSorted[i]["instance_type"].(string) < instancesSorted[j]["instance_type"].(string)
 	})
-	utils.SaveInstances(instancesSorted, "www/opensearch/instances.json")
+	fp := "www/opensearch/instances.json"
+	if china {
+		fp = "www/opensearch/instances-cn.json"
+	}
+	utils.SaveInstances(instancesSorted, fp)
 }
