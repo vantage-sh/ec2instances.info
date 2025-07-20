@@ -14,9 +14,13 @@ type emrData struct {
 	Regions map[string]map[string]emrPrice `json:"regions"`
 }
 
+func addEmrPricingCn(instances map[string]*EC2Instance, regionsInverted map[string]string) {
+	// TODO: Add China
+}
+
 const EMR_INSTANCE_TYPE_PREFIX = "Instance-instancetype-"
 
-func addEmrPricing(instances map[string]*EC2Instance, regionsInverted map[string]string) {
+func addEmrPricingUs(instances map[string]*EC2Instance, regionsInverted map[string]string) {
 	log.Default().Println("Adding EMR pricing to EC2")
 
 	var emrData emrData

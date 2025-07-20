@@ -74,7 +74,11 @@ func transformEbsRegionName(region string) string {
 	return ""
 }
 
-func addEBSPricing(instances map[string]*EC2Instance, currency string) {
+func addEBSPricingCn(instances map[string]*EC2Instance, currency string) {
+	// TODO: Add China
+}
+
+func addEBSPricingUs(instances map[string]*EC2Instance, currency string) {
 	log.Default().Println("Adding EBS pricing to EC2")
 
 	var ebsData EBSData
