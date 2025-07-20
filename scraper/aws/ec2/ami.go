@@ -6,7 +6,6 @@ import (
 	"strings"
 )
 
-
 var POTENTIALLY_MISSING_LINUX_VIRTUALIZATION_TYPES = map[string][]string{
 	"cc2": {"HVM"},
 	"cg1": {"HVM"},

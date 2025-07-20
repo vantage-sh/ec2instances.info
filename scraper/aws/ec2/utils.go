@@ -44,8 +44,6 @@ func toText(node soup.Root) string {
 	return strings.TrimSpace(text)
 }
 
-
-
 func cleanEmptyRegions(pricing map[string]map[string]any, regionDescriptions map[string]string) map[string]string {
 	for region, regionData := range pricing {
 		okOsCount := 0

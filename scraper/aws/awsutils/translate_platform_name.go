@@ -5,7 +5,6 @@ import (
 	"strings"
 )
 
-
 var OS_MAP = map[string]string{
 	"Linux":                            "linux",
 	"RHEL":                             "rhel",

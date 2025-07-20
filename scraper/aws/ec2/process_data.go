@@ -12,7 +12,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
 
-
 type ec2DataGetters struct {
 	spotDataPartialGetter func() *spotDataPartial
 	t2HtmlGetter          func() *soup.Root

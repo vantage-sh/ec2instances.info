@@ -84,4 +84,3 @@ func addT2Credits(instances map[string]*EC2Instance, t2HtmlGetter func() *soup.R
 		}
 	}
 }
-

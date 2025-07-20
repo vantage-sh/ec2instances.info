@@ -6,7 +6,6 @@ import (
 	"strconv"
 )
 
-
 type EBSConfig struct {
 	Regions []EBSRegion `json:"regions"`
 }
