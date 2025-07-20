@@ -44,6 +44,11 @@ type service struct {
 	chinaInData  chan *awsutils.RawRegion
 }
 
+type flatData struct {
+	regionName        string
+	currentVersionUrl string
+}
+
 func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootIndex AwsRootIndexResponse) {
 	// Global
 	for _, service := range services {
@@ -58,16 +63,30 @@ func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootInd
 				log.Fatal(err)
 			}
 
+			dataFlattened := make([]flatData, 0, len(regionIndex.Regions))
 			for regionName, regionMeta := range regionIndex.Regions {
-				var j awsutils.RegionData
-				if err := loadAwsUrlJson(AWS_NON_CHINA_ROOT_URL, regionMeta.CurrentVersionUrl, &j); err != nil {
-					log.Fatal(err)
-				}
+				dataFlattened = append(dataFlattened, flatData{
+					regionName:        regionName,
+					currentVersionUrl: regionMeta.CurrentVersionUrl,
+				})
+			}
+			chunks := utils.Chunk(dataFlattened, 5)
 
-				service.globalInData <- &awsutils.RawRegion{
-					RegionName: regionName,
-					RegionData: j,
+			for _, chunk := range chunks {
+				fg := utils.FunctionGroup{}
+				for _, r := range chunk {
+					fg.Add(func() {
+						var j awsutils.RegionData
+						if err := loadAwsUrlJson(AWS_NON_CHINA_ROOT_URL, r.currentVersionUrl, &j); err != nil {
+							log.Fatal(err)
+						}
+						service.globalInData <- &awsutils.RawRegion{
+							RegionName: r.regionName,
+							RegionData: j,
+						}
+					})
 				}
+				fg.Run()
 				runtime.GC()
 			}
 			service.globalInData <- nil
@@ -87,21 +106,34 @@ func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootInd
 				log.Fatal(err)
 			}
 
+			dataFlattened := make([]flatData, 0, len(regionIndex.Regions))
 			for regionName, regionMeta := range regionIndex.Regions {
 				if regionName == "aws-cn-other" {
 					// Weird thing AWS sends in China
 					continue
 				}
+				dataFlattened = append(dataFlattened, flatData{
+					regionName:        regionName,
+					currentVersionUrl: regionMeta.CurrentVersionUrl,
+				})
+			}
+			chunks := utils.Chunk(dataFlattened, 5)
 
-				var j awsutils.RegionData
-				if err := loadAwsUrlJson(AWS_CHINA_ROOT_URL, regionMeta.CurrentVersionUrl, &j); err != nil {
-					log.Fatal(err)
+			for _, chunk := range chunks {
+				fg := utils.FunctionGroup{}
+				for _, r := range chunk {
+					fg.Add(func() {
+						var j awsutils.RegionData
+						if err := loadAwsUrlJson(AWS_CHINA_ROOT_URL, r.currentVersionUrl, &j); err != nil {
+							log.Fatal(err)
+						}
+						service.chinaInData <- &awsutils.RawRegion{
+							RegionName: r.regionName,
+							RegionData: j,
+						}
+					})
 				}
-
-				service.chinaInData <- &awsutils.RawRegion{
-					RegionName: regionName,
-					RegionData: j,
-				}
+				fg.Run()
 				runtime.GC()
 			}
 			service.chinaInData <- nil
