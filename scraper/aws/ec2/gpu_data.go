@@ -480,6 +480,13 @@ var GPU_DATA = map[string]gpuData{
 		gpuCount:          8,
 		gpuMemory:         640,
 	},
+	"p6e-gb200.36xlarge": {
+		gpuModel:          "NVIDIA B200",
+		computeCapability: 10.0,
+		// https://aws.amazon.com/ec2/instance-types/p6/
+		gpuCount:  36,
+		gpuMemory: 6660,
+	},
 	"p6-b200.48xlarge": {
 		gpuModel:          "NVIDIA B200",
 		computeCapability: 10.0,
