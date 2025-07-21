@@ -45,6 +45,7 @@ public/*.msgpack.xz
 public/*-count.txt
 public/*-hash.txt
 public/*-ids.json
+public/*-regions.json
 
 # llms data
 public/llms.txt
