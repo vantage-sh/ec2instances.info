@@ -72,7 +72,8 @@ export default function FilterDropdown({
             const filteredOptions = groupOptions.filter((option) => {
                 const x = (option.label + option.value)
                     .toLowerCase()
-                    .includes(searchTerm.toLowerCase());
+                    .replaceAll(".", "")
+                    .includes(searchTerm.toLowerCase().replaceAll(".", ""));
                 return x;
             });
             if (filteredOptions.length > 0) {

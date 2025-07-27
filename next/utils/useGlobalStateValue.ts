@@ -14,6 +14,16 @@ async function doWrite(
     pathname: string,
 ) {
     if (!data) return;
+
+    if (data.currency === undefined) {
+        // Currency is a special case because it is sticky across tables.
+        // We want this to be consistent with what is on the users display, but
+        // we don't want to set it too early or else it might feel a bit weird for
+        // the user.
+        data = { ...data };
+        data.currency = localStorage.getItem("last_currency") || "USD";
+    }
+
     const idPromise = write(data);
     await writerMutex.runExclusive(async () => {
         const id = await idPromise;
@@ -30,6 +40,8 @@ function getIdFromUrl() {
     if (!id) return null;
     return decodeURIComponent(id);
 }
+
+const lastCurrencyChangerEvents = new Set<() => void>();
 
 async function doNetworkRead(
     v: [
@@ -54,6 +66,14 @@ async function doNetworkRead(
     if (v[2]) return;
     if (pathname !== r.path) return;
     v[1] = r;
+
+    // Handle if currency is set.
+    if (r.currency !== undefined) {
+        localStorage.setItem("last_currency", r.currency);
+        delete r.currency;
+        for (const cb of lastCurrencyChangerEvents.values()) cb();
+    }
+
     callbacks();
 }
 
@@ -117,6 +137,19 @@ function resOrDefault<T>(v: T | undefined, defaultValue: T): T {
     return v || defaultValue;
 }
 
+export function useLastCurrencyLocalStorageValue() {
+    return useSyncExternalStore(
+        (subscribe) => {
+            lastCurrencyChangerEvents.add(subscribe);
+            return () => {
+                lastCurrencyChangerEvents.delete(subscribe);
+            };
+        },
+        () => localStorage.getItem("last_currency"),
+        () => null,
+    );
+}
+
 /**
  * Used to get a specific value from the global state.
  */
@@ -163,15 +196,28 @@ export function useGlobalStateValue<Key extends keyof StateDump>(
                 if (typeof value === "function") value = value(v[1][key]);
                 v[1][key] = value;
 
+                // Because its a special sticky case, we need to call the callbacks for changes
+                // and set it, but not set it in local state to maintain global stickiness.
+                if (key === "currency") {
+                    localStorage.setItem("last_currency", value as string);
+                    for (const cb of lastCurrencyChangerEvents.values()) cb();
+                }
+
                 // Write to local storage.
                 localStorage.setItem(
                     `gstate-${pathname}`,
-                    JSON.stringify(v[1]),
+                    JSON.stringify({
+                        ...v[1],
+                        // NEVER set the currency locally. We have the last_currency sticky value.
+                        currency: undefined,
+                    }),
                 );
 
-                // Call the callbacks.
-                const cbs = v[0].get(key) || new Set();
-                for (const cb of cbs.values()) cb();
+                if (key !== "currency") {
+                    // Call the callbacks.
+                    const cbs = v[0].get(key) || new Set();
+                    for (const cb of cbs.values()) cb();
+                }
 
                 // Write to the network after a delay.
                 if (v[2]) clearTimeout(v[2]);
@@ -192,12 +238,14 @@ export function useGlobalStateValue<Key extends keyof StateDump>(
  */
 export function resetGlobalState(pathname: string) {
     localStorage.removeItem(`gstate-${pathname}`);
+    localStorage.removeItem("last_currency");
     const url = new URL(window.location.href);
     url.searchParams.delete("id");
     window.history.replaceState({}, "", url.toString());
     const v = pathRefMap.get(pathname);
     if (v) {
         v[1] = { ...deepCopy(blankStateDump), path: pathname };
+        for (const cb of lastCurrencyChangerEvents.values()) cb();
         for (const cbs of v[0].values()) {
             for (const cb of cbs.values()) cb();
         }

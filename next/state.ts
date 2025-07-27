@@ -2,7 +2,10 @@ import { atom } from "atomtree";
 import { useEffect, useSyncExternalStore } from "react";
 import handleCompressedFile from "./utils/handleCompressedFile";
 import { CostDuration, PricingUnit } from "./types";
-import { useGlobalStateValue } from "./utils/useGlobalStateValue";
+import {
+    useGlobalStateValue,
+    useLastCurrencyLocalStorageValue,
+} from "./utils/useGlobalStateValue";
 import type { CurrencyItem } from "./utils/loadCurrencies";
 
 const preloadedValues: {
@@ -126,15 +129,15 @@ export const currencyRateAtom = atom<{
     cny: 1,
 });
 
-type CurrencySetter = (value: string | ((value: string) => string)) => void;
-
 export function useCurrency(pathname: string, currencies?: CurrencyItem[]) {
     const [v, set] = useGlobalStateValue("currency", pathname);
+    const ls = useLastCurrencyLocalStorageValue();
+    const valueWithFallback = v || ls || "USD";
 
     // Side affect to handle the currency rate when currencies are specified.
     useEffect(() => {
         if (!currencies) return;
-        const currency = currencies.find((c) => c.code === v);
+        const currency = currencies.find((c) => c.code === valueWithFallback);
         if (currency) {
             // Set the currency rate
             currencyRateAtom.set({
@@ -145,7 +148,21 @@ export function useCurrency(pathname: string, currencies?: CurrencyItem[]) {
             // Default to USD
             set("USD");
         }
-    }, [currencies, v]);
+    }, [currencies, valueWithFallback]);
 
-    return [v || "USD", set as CurrencySetter] as const;
+    return [
+        valueWithFallback,
+        (value: string | ((value: string) => string)) => {
+            if (typeof value === "function") {
+                set((old) => {
+                    const newVal = value(
+                        old || localStorage.getItem("last_currency") || "USD",
+                    );
+                    return newVal;
+                });
+            } else {
+                set(value);
+            }
+        },
+    ] as const;
 }
