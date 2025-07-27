@@ -121,6 +121,7 @@ function calculateCost(
     instance: AzureInstance,
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
+    usdRate: number,
 ): number {
     if (!price) return -1;
 
@@ -147,7 +148,9 @@ function calculateCost(
         ] as number;
     }
 
-    return (Number(price) * durationMultiplier) / pricingUnitModifier;
+    return (
+        ((Number(price) * durationMultiplier) / pricingUnitModifier) * usdRate
+    );
 }
 
 export function calculateAndFormatCost(
@@ -155,8 +158,18 @@ export function calculateAndFormatCost(
     instance: AzureInstance,
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
+    currency: {
+        code: string;
+        usdRate: number;
+    },
 ): string {
-    const perTime = calculateCost(price, instance, pricingUnit, costDuration);
+    const perTime = calculateCost(
+        price,
+        instance,
+        pricingUnit,
+        costDuration,
+        currency.usdRate,
+    );
     if (perTime === -1) return "unavailable";
 
     const precision =
@@ -178,7 +191,13 @@ export function calculateAndFormatCost(
             ? ` ${durationText}`
             : ` ${durationText} / ${measuringUnits[pricingUnit]}`;
 
-    return `$${perTime.toFixed(precision)}${pricingMeasuringUnits}`;
+    const currencyData = Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: currency.code,
+        maximumFractionDigits: precision,
+    }).format(perTime);
+
+    return `${currencyData}${pricingMeasuringUnits}`;
 }
 
 function getPricingSorter(
@@ -186,6 +205,10 @@ function getPricingSorter(
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
     getter: (pricing: AzurePricing[string] | undefined) => number | undefined,
+    currency: {
+        code: string;
+        usdRate: number;
+    },
 ) {
     return {
         sortingFn: (rowA, rowB) => {
@@ -194,12 +217,14 @@ function getPricingSorter(
                 rowA.original,
                 pricingUnit,
                 costDuration,
+                currency.usdRate,
             );
             const valueB = calculateCost(
                 getter(rowB.original.pricing?.[selectedRegion]),
                 rowB.original,
                 pricingUnit,
                 costDuration,
+                currency.usdRate,
             );
             return valueA - valueB;
         },
@@ -207,7 +232,13 @@ function getPricingSorter(
         accessorFn: (row) => {
             const g = getter(row.pricing?.[selectedRegion]);
             if (isNaN(Number(g))) return undefined;
-            const value = calculateCost(g, row, pricingUnit, costDuration);
+            const value = calculateCost(
+                g,
+                row,
+                pricingUnit,
+                costDuration,
+                currency.usdRate,
+            );
             return value === -1 ? undefined : value;
         },
         ...makeCellWithRegexSorter("pricing", (info) => {
@@ -219,6 +250,7 @@ function getPricingSorter(
                 info.row.original,
                 pricingUnit,
                 costDuration,
+                currency,
             );
         }),
     } satisfies Partial<ColumnDef<AzureInstance>>;
@@ -229,6 +261,11 @@ export const columnsGen = (
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
     reservedTerm: string,
+    currency: {
+        code: string;
+        usdRate: number;
+        cnyRate: number;
+    },
 ): ColumnDef<AzureInstance>[] => {
     const savingsKey = reservedTerm.replace("Standard", "Savings");
 
@@ -323,6 +360,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
                 (pricing) => pricing?.linux?.ondemand,
+                currency,
             ),
         },
         {
@@ -334,6 +372,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
                 (pricing) => pricing?.linux?.reserved?.[savingsKey],
+                currency,
             ),
         },
         {
@@ -345,6 +384,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
                 (pricing) => pricing?.linux?.reserved?.[reservedTerm],
+                currency,
             ),
         },
         {
@@ -356,6 +396,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
                 (pricing) => pricing?.linux?.spot_min,
+                currency,
             ),
         },
         {
@@ -367,6 +408,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
                 (pricing) => pricing?.windows?.ondemand,
+                currency,
             ),
         },
         {
@@ -378,6 +420,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
                 (pricing) => pricing?.windows?.reserved?.[savingsKey],
+                currency,
             ),
         },
         {
@@ -389,6 +432,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
                 (pricing) => pricing?.windows?.reserved?.[reservedTerm],
+                currency,
             ),
         },
         {
@@ -400,6 +444,7 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
                 (pricing) => pricing?.windows?.spot_min,
+                currency,
             ),
         },
     ];

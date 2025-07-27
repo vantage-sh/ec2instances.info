@@ -24,6 +24,8 @@ import {
     useSorting,
     useColumnFilters,
     useSelected,
+    useCurrency,
+    currencyRateAtom,
 } from "@/state";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useCallback, useMemo, useRef } from "react";
@@ -80,12 +82,19 @@ export default function InstanceTable<
     const [compareOn] = useCompareOn(pathname);
     const [selected, setSelected] = useSelected(pathname);
     const [sorting, setSorting] = useSorting(pathname);
+    const [currency] = useCurrency(pathname);
+    const conversionRate = currencyRateAtom.use();
 
     const columns = columnData[columnAtomKey].columnsGen(
         selectedRegion,
         pricingUnit,
         costDuration,
         reservedTerm,
+        {
+            code: currency,
+            usdRate: conversionRate.usd,
+            cnyRate: conversionRate.cny,
+        },
     );
 
     const columnVisibility = useMemo(() => {
