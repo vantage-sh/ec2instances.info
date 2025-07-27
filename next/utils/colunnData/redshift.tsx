@@ -89,13 +89,25 @@ function getPricingSorter(
     getter: (
         pricing: RedshiftPricing[string] | undefined,
     ) => string | undefined,
+    currency: {
+        code: string;
+        usdRate: number;
+        cnyRate: number;
+    },
 ) {
     return {
         sortUndefined: "last",
         accessorFn: (row) => {
             const g = getter(row.pricing?.[selectedRegion]);
             if (isNaN(Number(g)) || !g) return undefined;
-            return calculateCost(g, row, pricingUnit, costDuration);
+            return calculateCost(
+                g,
+                row,
+                pricingUnit,
+                costDuration,
+                selectedRegion,
+                currency,
+            );
         },
         ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.row.original.pricing;
@@ -106,6 +118,8 @@ function getPricingSorter(
                 info.row.original,
                 pricingUnit,
                 costDuration,
+                selectedRegion,
+                currency,
             );
         }),
     } satisfies Partial<ColumnDef<Instance>>;
@@ -116,6 +130,11 @@ export const columnsGen = (
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
     reservedTerm: string,
+    currency: {
+        code: string;
+        usdRate: number;
+        cnyRate: number;
+    },
 ): ColumnDef<Instance>[] => [
     {
         accessorKey: "pretty_name",
@@ -209,6 +228,7 @@ export const columnsGen = (
             (pricing) => {
                 return pricing?.ondemand;
             },
+            currency,
         ),
     },
     {
@@ -221,6 +241,7 @@ export const columnsGen = (
             pricingUnit,
             costDuration,
             (pricing) => pricing?.reserved?.[reservedTerm],
+            currency,
         ),
     },
 ];

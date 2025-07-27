@@ -50,6 +50,12 @@ export function calculateCost(
     instance: any,
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
+    selectedRegion: string,
+    currency: {
+        code: string;
+        usdRate: number;
+        cnyRate: number;
+    },
 ) {
     if (!price) return "N/A";
 
@@ -70,7 +76,21 @@ export function calculateCost(
         pricingUnitModifier = Number(instance[pricingUnit]);
     }
 
-    return `$${((Number(price) * durationMultiplier) / pricingUnitModifier).toFixed(4)} ${costDuration}`;
+    const currencyMultiplier = selectedRegion.startsWith("cn-")
+        ? currency.cnyRate
+        : currency.usdRate;
+
+    const perTime =
+        ((Number(price) * durationMultiplier) / pricingUnitModifier) *
+        currencyMultiplier;
+
+    const currencyData = Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: currency.code,
+        maximumFractionDigits: 4,
+    }).format(perTime);
+
+    return `${currencyData} ${costDuration}`;
 }
 
 class RegexCacheWithTTL {

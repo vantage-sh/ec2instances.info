@@ -146,6 +146,11 @@ export const columnsGen = (
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
     reservedTerm: string,
+    currency: {
+        code: string;
+        usdRate: number;
+        cnyRate: number;
+    },
 ): ColumnDef<EC2Instance>[] => [
     {
         header: "Name",
@@ -254,6 +259,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["14"]?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -266,6 +272,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["14"]?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -278,6 +285,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["2"]?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -290,6 +298,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["2"]?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -302,6 +311,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["10"]?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -314,6 +324,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["10"]?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -326,6 +337,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["11"]?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -338,6 +350,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["11"]?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -350,6 +363,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["12"]?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -362,6 +376,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["12"]?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -374,6 +389,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["15"]?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -386,6 +402,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["15"]?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -398,6 +415,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["21"]?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -410,6 +428,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["21"]?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -422,6 +441,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["211"]?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -434,6 +454,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["18"]?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -446,6 +467,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["18"]?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -458,6 +480,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["5"]?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -470,6 +493,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.["5"]?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {

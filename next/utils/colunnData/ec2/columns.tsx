@@ -21,6 +21,12 @@ export function calculateCost(
     instance: EC2Instance,
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
+    selectedRegion: string,
+    currency: {
+        code: string;
+        usdRate: number;
+        cnyRate: number;
+    },
 ): number {
     if (!price) return -1;
 
@@ -51,7 +57,14 @@ export function calculateCost(
         if (pricingUnitModifier === undefined) return -1;
     }
 
-    return (Number(price) * durationMultiplier) / pricingUnitModifier;
+    const currencyMultiplier = selectedRegion.startsWith("cn-")
+        ? currency.cnyRate
+        : currency.usdRate;
+
+    return (
+        ((Number(price) * durationMultiplier) / pricingUnitModifier) *
+        currencyMultiplier
+    );
 }
 
 const FLOAT = /\d*\.?\d+/g;
@@ -61,8 +74,21 @@ export function calculateAndFormatCost(
     instance: EC2Instance,
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
+    selectedRegion: string,
+    currency: {
+        code: string;
+        usdRate: number;
+        cnyRate: number;
+    },
 ): string {
-    const perTime = calculateCost(price, instance, pricingUnit, costDuration);
+    const perTime = calculateCost(
+        price,
+        instance,
+        pricingUnit,
+        costDuration,
+        selectedRegion,
+        currency,
+    );
     if (perTime === -1) return "unavailable";
 
     const precision =
@@ -84,7 +110,13 @@ export function calculateAndFormatCost(
             ? ` ${durationText}`
             : ` ${durationText} / ${measuringUnits[pricingUnit]}`;
 
-    return `$${perTime.toFixed(precision)}${pricingMeasuringUnits}`;
+    const currencyData = Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: currency.code,
+        maximumFractionDigits: precision,
+    }).format(perTime);
+
+    return `${currencyData}${pricingMeasuringUnits}`;
 }
 
 export function getPricingSorter(
@@ -93,6 +125,11 @@ export function getPricingSorter(
     costDuration: CostDuration,
     getter: (pricing: Pricing[string] | undefined) => string | undefined,
     convertToPrice: boolean,
+    currency: {
+        code: string;
+        usdRate: number;
+        cnyRate: number;
+    },
 ) {
     return {
         sortingFn: (rowA, rowB) => {
@@ -110,12 +147,16 @@ export function getPricingSorter(
                 rowA.original,
                 pricingUnit,
                 costDuration,
+                selectedRegion,
+                currency,
             );
             const valueB = calculateCost(
                 getter(rowB.original.pricing?.[selectedRegion]),
                 rowB.original,
                 pricingUnit,
                 costDuration,
+                selectedRegion,
+                currency,
             );
             return valueA - valueB;
         },
@@ -124,7 +165,14 @@ export function getPricingSorter(
             const g = getter(row.pricing?.[selectedRegion]);
             if (!convertToPrice) return g;
             if (isNaN(Number(g)) || g === "0") return undefined;
-            const value = calculateCost(g, row, pricingUnit, costDuration);
+            const value = calculateCost(
+                g,
+                row,
+                pricingUnit,
+                costDuration,
+                selectedRegion,
+                currency,
+            );
             return value === -1 ? undefined : value;
         },
         ...makeCellWithRegexSorter("pricing", (info) => {
@@ -137,6 +185,8 @@ export function getPricingSorter(
                 info.row.original,
                 pricingUnit,
                 costDuration,
+                selectedRegion,
+                currency,
             );
         }),
     } satisfies Partial<ColumnDef<EC2Instance>>;
@@ -163,6 +213,11 @@ export const columnsGen = (
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
     reservedTerm: string,
+    currency: {
+        code: string;
+        usdRate: number;
+        cnyRate: number;
+    },
 ): ColumnDef<EC2Instance>[] => [
     {
         accessorKey: "pretty_name",
@@ -788,6 +843,7 @@ export const columnsGen = (
                 return pricing?.linux?.ondemand;
             },
             true,
+            currency,
         ),
     },
     {
@@ -803,6 +859,7 @@ export const columnsGen = (
                 return pricing?.linux?.reserved?.[reservedTerm];
             },
             true,
+            currency,
         ),
     },
     {
@@ -816,6 +873,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.linux?.spot_min,
             true,
+            currency,
         ),
     },
     {
@@ -829,6 +887,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.linux?.spot_avg,
             true,
+            currency,
         ),
     },
     {
@@ -842,6 +901,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.rhel?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -854,6 +914,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.rhel?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -866,6 +927,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.rhel?.spot_min,
             true,
+            currency,
         ),
     },
     {
@@ -878,6 +940,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.rhel?.spot_max,
             true,
+            currency,
         ),
     },
     {
@@ -890,6 +953,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.sles?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -902,6 +966,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.sles?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -914,6 +979,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.sles?.spot_min,
             true,
+            currency,
         ),
     },
     {
@@ -926,6 +992,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.sles?.spot_max,
             true,
+            currency,
         ),
     },
     {
@@ -938,6 +1005,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.mswin?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -950,6 +1018,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.mswin?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -962,6 +1031,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.mswin?.spot_min,
             true,
+            currency,
         ),
     },
     {
@@ -974,6 +1044,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.mswin?.spot_avg,
             true,
+            currency,
         ),
     },
     {
@@ -986,6 +1057,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.dedicated?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -998,6 +1070,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.dedicated?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -1010,6 +1083,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.mswinSQLWeb?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -1022,6 +1096,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.mswinSQLWeb?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -1034,6 +1109,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.mswinSQL?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -1046,6 +1122,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.mswinSQL?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -1058,6 +1135,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.mswinSQLEnterprise?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -1070,6 +1148,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.mswinSQLEnterprise?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -1082,6 +1161,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.linuxSQLWeb?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -1094,6 +1174,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.linuxSQLWeb?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -1106,6 +1187,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.linuxSQL?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -1118,6 +1200,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.linuxSQL?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -1130,6 +1213,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.linuxSQLEnterprise?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -1142,6 +1226,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.linuxSQLEnterprise?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -1154,6 +1239,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.linux?.pct_interrupt,
             false,
+            currency,
         ),
     },
     {
@@ -1167,6 +1253,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.emr?.emr,
             true,
+            currency,
         ),
     },
     {

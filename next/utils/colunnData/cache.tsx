@@ -63,6 +63,11 @@ export const columnsGen = (
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
     reservedTerm: string,
+    currency: {
+        code: string;
+        usdRate: number;
+        cnyRate: number;
+    },
 ): ColumnDef<EC2Instance>[] => [
     {
         accessorKey: "pretty_name",
@@ -132,6 +137,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.Redis?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -144,6 +150,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.Redis?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -156,6 +163,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.Memcached?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -168,6 +176,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.Memcached?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
@@ -180,6 +189,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.Valkey?.ondemand,
             true,
+            currency,
         ),
     },
     {
@@ -192,6 +202,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.Valkey?.reserved?.[reservedTerm],
             true,
+            currency,
         ),
     },
     {
