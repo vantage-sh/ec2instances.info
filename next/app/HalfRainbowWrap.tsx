@@ -6,6 +6,7 @@ import { decompressHalfRainbowTable } from "@/utils/halfRainbowTable";
 import { useMemo } from "react";
 import AWSClient from "./AWSClient";
 import { MarketingSchema } from "@/schemas/marketing";
+import type { CurrencyItem } from "@/utils/loadCurrencies";
 
 type Props<
     Instance extends {
@@ -24,6 +25,7 @@ type Props<
     regions: Region;
     columnAtomKey: AtomKeyWhereInstanceIs<Instance>;
     marketingData: MarketingSchema;
+    currencies: CurrencyItem[];
 };
 
 export default function HalfRainbowWrap<
@@ -42,6 +44,7 @@ export default function HalfRainbowWrap<
     instances,
     rainbowTable,
     regions,
+    currencies,
     columnAtomKey,
     marketingData,
 }: Props<Instance>) {
@@ -53,6 +56,7 @@ export default function HalfRainbowWrap<
 
     return (
         <AWSClient
+            currencies={currencies}
             instances={decompressed}
             regions={regions}
             columnAtomKey={columnAtomKey}

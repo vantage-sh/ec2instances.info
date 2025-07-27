@@ -8,6 +8,7 @@ import dynamicallyDecompress from "@/utils/dynamicallyDecompress";
 import { useMemo } from "react";
 import { MarketingSchema } from "@/schemas/marketing";
 import Advert from "@/components/Advert";
+import type { CurrencyItem } from "@/utils/loadCurrencies";
 
 type Props = {
     instanceCount: number;
@@ -17,6 +18,7 @@ type Props = {
     compressedDataPathTemplate: string;
     compressedInstances: [string[], ...AzureInstance[]];
     marketingData: MarketingSchema;
+    currencies: CurrencyItem[];
 };
 
 export default function AzureClient({
@@ -25,6 +27,7 @@ export default function AzureClient({
     compressedDataPathTemplate,
     compressedInstances,
     marketingData,
+    currencies,
 }: Props) {
     const initialInstances = useMemo(() => {
         const rainbowTable = compressedInstances.shift() as string[];
@@ -59,6 +62,7 @@ export default function AzureClient({
             />
             <main className={`${full} overflow-y-hidden flex flex-col`}>
                 <Filters
+                    currencies={currencies}
                     columnAtomKey="azure"
                     regions={{
                         local_zone: {},

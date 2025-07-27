@@ -31,6 +31,7 @@ interface FilterDropdownProps {
     options: Option[] | readonly Option[];
     hideSearch: boolean;
     icon?: string;
+    small?: boolean;
 }
 
 export default function FilterDropdown({
@@ -40,6 +41,7 @@ export default function FilterDropdown({
     options,
     hideSearch,
     icon,
+    small,
 }: FilterDropdownProps) {
     const buttonId = React.useId();
     const [open, setOpen] = React.useState(false);
@@ -93,7 +95,10 @@ export default function FilterDropdown({
                         role="combobox"
                         aria-expanded={open}
                         id={buttonId}
-                        className="w-full justify-between text-black py-4.5"
+                        className={cn(
+                            "w-full justify-between text-black py-4.5",
+                            small ? "text-xs" : "",
+                        )}
                     >
                         {icon && (
                             <i

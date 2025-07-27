@@ -10,11 +10,13 @@ import { AtomKeyWhereInstanceIs } from "@/components/InstanceTable";
 import { reservedTermOptions } from "@/utils/dataMappings";
 import { MarketingSchema } from "@/schemas/marketing";
 import Advert from "@/components/Advert";
+import type { CurrencyItem } from "@/utils/loadCurrencies";
 
 type RootProps<Instance extends { instance_type: string }> = {
     columnAtomKey: AtomKeyWhereInstanceIs<Instance>;
     regions: Region;
     marketingData: MarketingSchema;
+    currencies: CurrencyItem[];
 };
 
 type AWSClientProps<
@@ -102,6 +104,7 @@ export default function AWSClient<
                     columnAtomKey={props.columnAtomKey}
                     regions={props.regions}
                     reservedTermOptions={reservedTermOptions}
+                    currencies={props.currencies}
                 />
                 <div className="flex-1 min-h-0">
                     <InstanceTable

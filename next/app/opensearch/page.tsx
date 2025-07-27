@@ -6,6 +6,7 @@ import { makeHalfRainbowTable } from "@/utils/halfRainbowTable";
 import HalfRainbowWrap from "../HalfRainbowWrap";
 import type { Metadata } from "next";
 import loadAdvertData from "@/utils/loadAdvertData";
+import loadCurrencies from "@/utils/loadCurrencies";
 
 export const metadata: Metadata = {
     title: "Amazon OpenSearch, Open-Source Elasticsearch, Instance Comparison",
@@ -36,6 +37,7 @@ export default async function OpenSearch() {
     }
 
     const marketingData = await loadAdvertData;
+    const currencies = await loadCurrencies;
 
     const [rainbowTable, ...compressedInstances] = makeHalfRainbowTable(
         instances as Instance[],
@@ -43,6 +45,7 @@ export default async function OpenSearch() {
 
     return (
         <HalfRainbowWrap
+            currencies={currencies}
             instances={compressedInstances}
             rainbowTable={rainbowTable}
             regions={regions}

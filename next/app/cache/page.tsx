@@ -5,6 +5,7 @@ import AWSClient from "../AWSClient";
 import makeRainbowTable from "@/utils/makeRainbowTable";
 import type { Metadata } from "next";
 import loadAdvertData from "@/utils/loadAdvertData";
+import loadCurrencies from "@/utils/loadCurrencies";
 
 export const metadata: Metadata = {
     title: "Amazon ElastiCache Instance Comparison",
@@ -40,11 +41,13 @@ export default async function Cache() {
     }
 
     const marketingData = await loadAdvertData;
+    const currencies = await loadCurrencies;
 
     const compressedData = makeRainbowTable(instances);
 
     return (
         <AWSClient
+            currencies={currencies}
             regions={regions}
             compressedDataPathTemplate={null}
             compressedInstances={compressedData as [string[], ...EC2Instance[]]}

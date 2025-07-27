@@ -5,6 +5,7 @@ import AWSClient from "../AWSClient";
 import Head from "next/head";
 import type { Metadata } from "next";
 import loadAdvertData from "@/utils/loadAdvertData";
+import loadCurrencies from "@/utils/loadCurrencies";
 
 export const metadata: Metadata = {
     title: "Amazon RDS Instance Comparison",
@@ -28,6 +29,7 @@ export default async function RDS() {
     );
 
     const marketingData = await loadAdvertData;
+    const currencies = await loadCurrencies;
 
     return (
         <>
@@ -40,6 +42,7 @@ export default async function RDS() {
                 />
             </Head>
             <AWSClient
+                currencies={currencies}
                 instanceCount={instanceCount}
                 regions={regions}
                 compressedInstances={compressedInstances}

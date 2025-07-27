@@ -7,6 +7,7 @@ import AzureClient from "./AzureClient";
 import type { Metadata } from "next";
 import { Region } from "@/types";
 import loadAdvertData from "@/utils/loadAdvertData";
+import loadCurrencies from "@/utils/loadCurrencies";
 
 export const metadata: Metadata = {
     title: "Azure VM Comparison",
@@ -31,6 +32,7 @@ export default async function Azure() {
     );
 
     const marketingData = await loadAdvertData;
+    const currencies = await loadCurrencies;
 
     return (
         <>
@@ -46,6 +48,7 @@ export default async function Azure() {
                 ))}
             </Head>
             <AzureClient
+                currencies={currencies}
                 instanceCount={instanceCount}
                 regions={regions.main}
                 compressedDataPathTemplate={`/remaining-azure-instances-p{}.msgpack.xz?cache=${instancesHash}`}

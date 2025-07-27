@@ -6,6 +6,7 @@ import Head from "next/head";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 import type { Metadata } from "next";
 import loadAdvertData from "@/utils/loadAdvertData";
+import loadCurrencies from "@/utils/loadCurrencies";
 
 export const metadata: Metadata = {
     title: "Amazon EC2 Instance Comparison",
@@ -27,6 +28,7 @@ export default async function Home() {
     );
 
     const marketingData = await loadAdvertData;
+    const currencies = await loadCurrencies;
 
     return (
         <>
@@ -42,6 +44,7 @@ export default async function Home() {
                 ))}
             </Head>
             <AWSClient
+                currencies={currencies}
                 marketingData={marketingData}
                 instanceCount={instanceCount}
                 regions={regions}

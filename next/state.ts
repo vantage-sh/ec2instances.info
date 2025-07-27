@@ -3,6 +3,7 @@ import { useEffect, useSyncExternalStore } from "react";
 import handleCompressedFile from "./utils/handleCompressedFile";
 import { CostDuration, PricingUnit } from "./types";
 import { useGlobalStateValue } from "./utils/useGlobalStateValue";
+import type { CurrencyItem } from "./utils/loadCurrencies";
 
 const preloadedValues: {
     [path: string]: {
@@ -115,4 +116,36 @@ export function useSorting(pathname: string) {
 
 export function useSelected(pathname: string) {
     return useGlobalStateValue("selected", pathname);
+}
+
+export const currencyRateAtom = atom<{
+    usd: number;
+    cny: number;
+}>({
+    usd: 1,
+    cny: 1,
+});
+
+type CurrencySetter = (value: string | ((value: string) => string)) => void;
+
+export function useCurrency(pathname: string, currencies?: CurrencyItem[]) {
+    const [v, set] = useGlobalStateValue("currency", pathname);
+
+    // Side affect to handle the currency rate when currencies are specified.
+    useEffect(() => {
+        if (!currencies) return;
+        const currency = currencies.find((c) => c.code === v);
+        if (currency) {
+            // Set the currency rate
+            currencyRateAtom.set({
+                usd: currency.usdRate,
+                cny: currency.cnyRate,
+            });
+        } else {
+            // Default to USD
+            set("USD");
+        }
+    }, [currencies, v]);
+
+    return [v || "USD", set as CurrencySetter] as const;
 }

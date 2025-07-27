@@ -13,12 +13,14 @@ import {
     useCompareOn,
     useColumnVisibility,
     useSelected,
+    useCurrency,
 } from "@/state";
 import { pricingUnitOptions, durationOptions } from "@/utils/dataMappings";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import * as columnData from "@/utils/colunnData";
 import { usePathname } from "next/navigation";
 import { resetGlobalState } from "@/utils/useGlobalStateValue";
+import type { CurrencyItem } from "@/utils/loadCurrencies";
 
 interface FiltersProps<DataKey extends keyof typeof columnData> {
     regions: Region;
@@ -27,6 +29,7 @@ interface FiltersProps<DataKey extends keyof typeof columnData> {
         value: string;
         label: string;
     }[];
+    currencies: CurrencyItem[];
     ecuRename?: string;
     reservedLabel?: string;
 }
@@ -34,6 +37,7 @@ interface FiltersProps<DataKey extends keyof typeof columnData> {
 export default function Filters<DataKey extends keyof typeof columnData>({
     regions,
     columnAtomKey,
+    currencies,
     ecuRename,
     reservedTermOptions,
     reservedLabel,
@@ -48,6 +52,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
     const [reservedTerm, setReservedTerm] = useReservedTerm(pathname);
     const [compareOn, setCompareOn] = useCompareOn(pathname);
     const [selected] = useSelected(pathname);
+    const [currency, setCurrency] = useCurrency(pathname, currencies);
 
     const [frequentlyUsedRegions, setFrequentlyUsedRegions] = useState<{
         [key: string]: number;
@@ -176,6 +181,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                             ...wavelengthOptions,
                         ]}
                         hideSearch={false}
+                        small={true}
                     />
                     <FilterDropdown
                         label="Pricing Unit"
@@ -183,6 +189,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                         onChange={(v) => setPricingUnit(v as PricingUnit)}
                         options={pricingUnitOptionsCpy}
                         hideSearch={true}
+                        small={true}
                     />
                     <FilterDropdown
                         label="Cost"
@@ -190,6 +197,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                         onChange={(v) => setDuration(v as CostDuration)}
                         options={durationOptions}
                         hideSearch={true}
+                        small={true}
                     />
                     <FilterDropdown
                         label={reservedLabel ?? "Reserved"}
@@ -197,6 +205,18 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                         onChange={(v) => setReservedTerm(v)}
                         options={reservedTermOptions}
                         hideSearch={true}
+                        small={true}
+                    />
+                    <FilterDropdown
+                        label="Currency"
+                        value={currency}
+                        onChange={(v) => setCurrency(v)}
+                        options={currencies.map((c) => ({
+                            value: c.code,
+                            label: `${c.name}${c.currencySymbol && ` (${c.currencySymbol})`}`,
+                        }))}
+                        hideSearch={false}
+                        small={true}
                     />
                     <ColumnFilter<DataKey>
                         // @ts-expect-error: TS doesn't like this for some reason.

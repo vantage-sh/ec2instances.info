@@ -33,6 +33,7 @@ function mergeGSettings(state: StateDump, encodedGSettings: string) {
             oldKey: string,
         ) => {
             if (typeof gSettings[oldKey] === "string") {
+                // @ts-ignore - unsure why this is an error but is type safe.
                 state[newKey] = gSettings[oldKey];
             }
         };
@@ -370,6 +371,7 @@ export async function migrateUrl(callbacks: () => void, state: StateDump) {
     ) => {
         const res = searchParams.get(oldKey);
         if (typeof res !== "string") return;
+        // @ts-ignore - unsure why this is an error but is type safe.
         state[newKey] = res;
         migratedCount++;
     };

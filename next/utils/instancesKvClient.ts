@@ -26,6 +26,7 @@ type DumpV1 = {
         id: string;
         desc: boolean;
     }[];
+    currency?: string;
 };
 
 export type StateDump = DumpV1;
