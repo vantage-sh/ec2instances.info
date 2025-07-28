@@ -18,6 +18,7 @@ export default async function Cache() {
         main: {},
         local_zone: {},
         wavelength: {},
+        china: {},
     };
     const instances = JSON.parse(
         await readFile("../www/cache/instances.json", "utf8"),
@@ -33,6 +34,27 @@ export default async function Cache() {
                 regions.main[r] = instance.regions[r];
             }
         }
+    }
+
+    const instancesCn = JSON.parse(
+        await readFile("../www/cache/instances-cn.json", "utf8"),
+    );
+    for (const instance of instancesCn) {
+        for (const r in instance.regions) {
+            regions.china[r] = instance.regions[r];
+        }
+        const matchingInstance = instances.find(
+            (i: EC2Instance) => i.instance_type === instance.instance_type,
+        );
+        if (!matchingInstance) {
+            throw new Error(
+                `Instance ${instance.instance_type} not found in instances.json`,
+            );
+        }
+        matchingInstance.pricing = {
+            ...matchingInstance.pricing,
+            ...instance.pricing,
+        };
     }
 
     for (const instance of instances) {

@@ -78,6 +78,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
 
     const [
         frequentlyUsedRegionOptions,
+        chinaRegionOptions,
         regionOptions,
         localZoneOptions,
         wavelengthOptions,
@@ -99,6 +100,14 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                 };
             })
             .filter((o) => o !== undefined);
+
+        const chinaRegionOptions = Object.entries(regions.china).map(
+            ([code, name]) => ({
+                value: code,
+                label: name,
+                group: "China Cloud Regions",
+            }),
+        );
 
         const regionOptions = Object.entries(regions.main).map(
             ([code, name]) => ({
@@ -126,6 +135,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
 
         return [
             frequentlyUsedRegionOptions,
+            chinaRegionOptions,
             regionOptions,
             localZoneOptions,
             wavelengthOptions,
@@ -176,6 +186,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                         }}
                         options={[
                             ...frequentlyUsedRegionOptions,
+                            ...chinaRegionOptions,
                             ...regionOptions,
                             ...localZoneOptions,
                             ...wavelengthOptions,

@@ -68,6 +68,7 @@ export default function AzureClient({
                         local_zone: {},
                         main: regions,
                         wavelength: {},
+                        china: {},
                     }}
                     ecuRename="ACU"
                     reservedTermOptions={[

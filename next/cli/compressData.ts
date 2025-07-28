@@ -19,6 +19,7 @@ async function compressEC2Instances() {
         main: {},
         local_zone: {},
         wavelength: {},
+        china: {},
     };
     const instances = JSON.parse(
         await readFile("../www/instances.json", "utf8"),
@@ -34,6 +35,28 @@ async function compressEC2Instances() {
                 regions.main[r] = instance.regions[r];
             }
         }
+    }
+
+    // Add the China regions.
+    const instancesCn = JSON.parse(
+        await readFile("../www/instances-cn.json", "utf8"),
+    );
+    for (const instance of instancesCn) {
+        for (const r in instance.pricing) {
+            regions.china[r] = instance.regions[r];
+        }
+        const matchingInstance = instances.find(
+            (i: EC2Instance) => i.instance_type === instance.instance_type,
+        );
+        if (!matchingInstance) {
+            throw new Error(
+                `Instance ${instance.instance_type} not found in instances.json`,
+            );
+        }
+        matchingInstance.pricing = {
+            ...matchingInstance.pricing,
+            ...instance.pricing,
+        };
     }
 
     // Encode and then compress the EC2 instances.
@@ -99,6 +122,7 @@ async function compressAzureInstances() {
         main: {},
         local_zone: {},
         wavelength: {},
+        china: {},
     };
     for (const instance of instances) {
         for (const r in instance.regions) {
@@ -171,6 +195,7 @@ async function compressRDSInstances() {
         main: {},
         local_zone: {},
         wavelength: {},
+        china: {},
     };
     const instances = JSON.parse(
         await readFile("../www/rds/instances.json", "utf8"),
@@ -187,6 +212,28 @@ async function compressRDSInstances() {
             }
         }
         delete instance.regions;
+    }
+
+    // Add the China regions.
+    const instancesCn = JSON.parse(
+        await readFile("../www/rds/instances-cn.json", "utf8"),
+    );
+    for (const instance of instancesCn) {
+        for (const r in instance.regions) {
+            regions.china[r] = instance.regions[r];
+        }
+        const matchingInstance = instances.find(
+            (i: EC2Instance) => i.instance_type === instance.instance_type,
+        );
+        if (!matchingInstance) {
+            throw new Error(
+                `Instance ${instance.instance_type} not found in instances.json`,
+            );
+        }
+        matchingInstance.pricing = {
+            ...matchingInstance.pricing,
+            ...instance.pricing,
+        };
     }
 
     // Encode and then compress the RDS instances.

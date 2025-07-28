@@ -79,6 +79,7 @@ export default function AzureInstanceRoot({
                                 main: {},
                                 local_zone: regions,
                                 wavelength: {},
+                                china: {},
                             }}
                             defaultOs="linux"
                             removeSpot={false}

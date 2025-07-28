@@ -325,13 +325,28 @@ function Calculator({
     };
 
     const onlySingleKey = useMemo(() => {
-        const objs = [regions.main, regions.local_zone, regions.wavelength];
+        const objs = [
+            regions.main,
+            regions.local_zone,
+            regions.wavelength,
+            regions.china,
+        ];
         const v = objs.reduce((acc, obj) => {
             const keys = Object.keys(obj);
             return keys.length > 0 ? acc + 1 : acc;
         }, 0);
         return v === 1;
-    }, [regions.main, regions.local_zone, regions.wavelength]);
+    }, [regions.main, regions.local_zone, regions.wavelength, regions.china]);
+
+    const chinaRegions = useMemo(
+        () =>
+            handleRegions(
+                Object.entries(regions.china),
+                "China Regions",
+                onlySingleKey,
+            ),
+        [regions.china, pricing],
+    );
 
     const mainRegions = useMemo(
         () =>
@@ -393,6 +408,7 @@ function Calculator({
                     className={selectStyling}
                     onChange={(e) => setRegion(e.target.value)}
                 >
+                    {chinaRegions}
                     {mainRegions}
                     {localZones}
                     {wavelengthRegions}

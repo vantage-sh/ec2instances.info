@@ -85,6 +85,9 @@ export interface Region {
     wavelength: {
         [key: string]: string;
     };
+    china: {
+        [key: string]: string;
+    };
 }
 
 export type PricingUnit = "instance" | "vcpu" | "ecu" | "memory";

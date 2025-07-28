@@ -44,6 +44,7 @@ const mockRegions = {
         "us-west-1": "US West (N. California)",
     },
     wavelength: {},
+    china: {},
 };
 
 const mockOsOptions: [string, string][] = [

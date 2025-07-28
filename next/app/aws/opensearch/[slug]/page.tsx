@@ -23,6 +23,7 @@ async function getData() {
             main: {},
             local_zone: {},
             wavelength: {},
+            china: {},
         };
         for (const instance of instances) {
             for (const r in instance.pricing) {
@@ -34,6 +35,27 @@ async function getData() {
                     regions.main[r] = instance.regions[r];
                 }
             }
+        }
+
+        const instancesCn = JSON.parse(
+            await readFile("../www/opensearch/instances-cn.json", "utf8"),
+        );
+        for (const instance of instancesCn) {
+            for (const r in instance.regions) {
+                regions.china[r] = instance.regions[r];
+            }
+            const matchingInstance = instances.find(
+                (i: Instance) => i.instance_type === instance.instance_type,
+            );
+            if (!matchingInstance) {
+                throw new Error(
+                    `Instance ${instance.instance_type} not found in instances.json`,
+                );
+            }
+            matchingInstance.pricing = {
+                ...matchingInstance.pricing,
+                ...instance.pricing,
+            };
         }
 
         return {
