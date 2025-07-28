@@ -30,8 +30,10 @@ interface FilterDropdownProps {
     onChange: (value: string) => void;
     options: Option[] | readonly Option[];
     hideSearch: boolean;
+    hideLabel?: boolean;
     icon?: string;
     small?: boolean;
+    ariaControls?: string;
 }
 
 export default function FilterDropdown({
@@ -40,8 +42,10 @@ export default function FilterDropdown({
     onChange,
     options,
     hideSearch,
+    hideLabel,
     icon,
     small,
+    ariaControls,
 }: FilterDropdownProps) {
     const buttonId = React.useId();
     const [open, setOpen] = React.useState(false);
@@ -85,16 +89,23 @@ export default function FilterDropdown({
 
     return (
         <div className="flex flex-col gap-0.5">
-            <label htmlFor={buttonId} className="text-xs text-gray-1">
-                {label}
-            </label>
-            <Popover open={open} onOpenChange={setOpen}>
+            {!hideLabel && (
+                <label htmlFor={buttonId} className="text-xs text-gray-1">
+                    {label}
+                </label>
+            )}
+            <Popover
+                open={open}
+                onOpenChange={setOpen}
+                aria-controls={ariaControls}
+            >
                 <PopoverTrigger asChild>
                     <Button
                         variant="outline"
                         size="sm"
                         role="combobox"
                         aria-expanded={open}
+                        aria-label={hideLabel ? label : undefined}
                         id={buttonId}
                         className={cn(
                             "w-full justify-between text-black py-4.5",

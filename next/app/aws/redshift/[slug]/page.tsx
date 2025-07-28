@@ -7,6 +7,7 @@ import generateRedshiftTables from "@/utils/generateRedshiftTables";
 import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
 import loadAdvertData from "@/utils/loadAdvertData";
+import loadCurrencies from "@/utils/loadCurrencies";
 
 export const dynamic = "force-static";
 
@@ -92,6 +93,7 @@ export default async function Page({
     const description = generateDescription(instance, ondemandCost);
 
     const marketingData = await loadAdvertData;
+    const currencies = await loadCurrencies;
 
     const [itype] = instance.instance_type.split(".", 2);
     const allOfInstanceType = instances
@@ -104,6 +106,7 @@ export default async function Page({
 
     return (
         <HalfEC2Root
+            currencies={currencies}
             allOfInstanceType={allOfInstanceType}
             instance={instance}
             description={description}

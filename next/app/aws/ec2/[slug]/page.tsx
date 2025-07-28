@@ -12,6 +12,7 @@ import tryPricingMappingWithDefaultsAndYoloIfNot from "@/utils/tryPricingGetAndY
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 import { urlInject } from "@/utils/urlInject";
 import loadAdvertData from "@/utils/loadAdvertData";
+import loadCurrencies from "@/utils/loadCurrencies";
 
 export const dynamic = "force-static";
 
@@ -168,9 +169,11 @@ export default async function Page({
     }
 
     const marketingData = await loadAdvertData;
+    const currencies = await loadCurrencies;
 
     return (
         <EC2InstanceRoot
+            currencies={currencies}
             rainbowTable={compressedInstance[0] as string[]}
             compressedInstance={compressedInstance[1] as EC2Instance}
             regions={regions}

@@ -10,6 +10,7 @@ import MarketingWrapper from "./MarketingWrapper";
 import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
 import { useMemo } from "react";
 import { MarketingSchema } from "@/schemas/marketing";
+import type { CurrencyItem } from "@/utils/loadCurrencies";
 
 type HalfPricing = {
     [region: string]: {
@@ -33,6 +34,7 @@ type InstanceRootProps<
     regions: Region;
     instanceType: string;
     marketingData: MarketingSchema;
+    currencies: CurrencyItem[];
 };
 
 const reservedTermOptions: [string, string][] = [
@@ -54,6 +56,7 @@ export default function HalfEC2Root<
     regions,
     instanceType,
     marketingData,
+    currencies,
 }: InstanceRootProps<Instance>) {
     const remappedPricing = useMemo(() => {
         const remappedPricing: Pricing = {};
@@ -92,6 +95,7 @@ export default function HalfEC2Root<
                         </h1>
                         <h2 className="text-sm mb-4">{description}</h2>
                         <PricingCalculator
+                            currencies={currencies}
                             rainbowTable={[]}
                             compressedInstance={{
                                 pricing: remappedPricing,

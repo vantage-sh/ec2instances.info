@@ -8,6 +8,7 @@ import generateEc2Description from "@/utils/generateEc2Description";
 import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
 import loadAdvertData from "@/utils/loadAdvertData";
+import loadCurrencies from "@/utils/loadCurrencies";
 
 export const dynamic = "force-static";
 
@@ -123,9 +124,11 @@ export default async function Page({
     const compressedInstance = makeRainbowTable([{ ...instance }]);
 
     const marketingData = await loadAdvertData;
+    const currencies = await loadCurrencies;
 
     return (
         <EC2InstanceRoot
+            currencies={currencies}
             rainbowTable={compressedInstance[0] as string[]}
             compressedInstance={compressedInstance[1] as EC2Instance}
             regions={regions}

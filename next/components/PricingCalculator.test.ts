@@ -71,6 +71,15 @@ const defaultProps = {
     setPathSuffix: () => {
         throw new Error("setPathSuffix should not be called");
     },
+    currencies: [
+        {
+            code: "USD",
+            name: "US Dollar",
+            cnyRate: 7.1,
+            usdRate: 1,
+            currencySymbol: "$",
+        },
+    ],
 };
 
 const [rainbowTable, compressedInstance] = makeRainbowTable([
@@ -96,7 +105,7 @@ componentTests(
             props: defaultProps,
             test: (component) => {
                 const prices = component.container.querySelectorAll("p");
-                expect(prices[0].textContent).toBe("$0.1");
+                expect(prices[0].textContent).toBe("$0.10");
                 expect(prices[1].textContent).toBe("On Demand");
                 expect(prices[2].textContent).toBe("$0.05");
                 expect(prices[3].textContent).toBe("Spot");
@@ -110,7 +119,7 @@ componentTests(
             },
             test: (component) => {
                 const prices = component.container.querySelectorAll("p");
-                expect(prices[0].textContent).toBe("$0.1");
+                expect(prices[0].textContent).toBe("$0.10");
                 expect(prices[1].textContent).toBe("On Demand");
                 expect(prices[2].textContent).toBe("$0.08");
                 expect(prices[3].textContent).toBe("1-Year Reserved");
@@ -124,7 +133,7 @@ componentTests(
             },
             test: (component) => {
                 const prices = component.container.querySelectorAll("p");
-                expect(prices[0].textContent).toBe("$0.1");
+                expect(prices[0].textContent).toBe("$0.10");
                 expect(prices[1].textContent).toBe("On Demand");
                 expect(prices[2].textContent).toBe("$0.03");
                 expect(prices[3].textContent).toBe("Spot");
@@ -138,9 +147,9 @@ componentTests(
             },
             test: (component) => {
                 const prices = component.container.querySelectorAll("p");
-                expect(prices[0].textContent).toBe("$0.2");
+                expect(prices[0].textContent).toBe("$0.20");
                 expect(prices[1].textContent).toBe("On Demand");
-                expect(prices[2].textContent).toBe("$0.1");
+                expect(prices[2].textContent).toBe("$0.10");
                 expect(prices[3].textContent).toBe("Spot");
             },
         },
@@ -156,9 +165,9 @@ componentTests(
             },
             test: (component) => {
                 const prices = component.container.querySelectorAll("p");
-                expect(prices[0].textContent).toBe("$73");
+                expect(prices[0].textContent).toBe("$73.00");
                 expect(prices[1].textContent).toBe("On Demand");
-                expect(prices[2].textContent).toBe("$36.5");
+                expect(prices[2].textContent).toBe("$36.50");
                 expect(prices[3].textContent).toBe("Spot");
             },
         },
@@ -174,7 +183,7 @@ componentTests(
             },
             test: (component) => {
                 const prices = component.container.querySelectorAll("p");
-                expect(prices[0].textContent).toBe("$0.3");
+                expect(prices[0].textContent).toBe("$0.30");
                 expect(prices[1].textContent).toBe("On Demand");
                 expect(prices[2].textContent).toBe("$0.05");
                 expect(prices[3].textContent).toBe("Spot");
@@ -240,12 +249,14 @@ componentTests(
                 const onDemandPrice = component.container.querySelector(
                     "p[data-testid='On Demand']",
                 )!;
-                expect(onDemandPrice.textContent).toBe("$0.1");
+                expect(onDemandPrice.textContent).toBe("$0.10");
                 fireEvent.change(region, { target: { value: "us-west-1" } });
-                expect(pathSuffix).toBe("?region=us-west-1");
-                expect(document.location.search).toBe("?region=us-west-1");
+                expect(pathSuffix).toBe("?currency=USD&region=us-west-1");
+                expect(document.location.search).toBe(
+                    "?currency=USD&region=us-west-1",
+                );
 
-                expect(onDemandPrice.textContent).toBe("$0.3");
+                expect(onDemandPrice.textContent).toBe("$0.30");
             },
         },
         {
@@ -265,11 +276,13 @@ componentTests(
                 const onDemandPrice = component.container.querySelector(
                     "p[data-testid='On Demand']",
                 )!;
-                expect(onDemandPrice.textContent).toBe("$0.1");
+                expect(onDemandPrice.textContent).toBe("$0.10");
                 fireEvent.change(platform, { target: { value: "windows" } });
-                expect(pathSuffix).toBe("?platform=windows");
-                expect(document.location.search).toBe("?platform=windows");
-                expect(onDemandPrice.textContent).toBe("$0.2");
+                expect(pathSuffix).toBe("?currency=USD&platform=windows");
+                expect(document.location.search).toBe(
+                    "?currency=USD&platform=windows",
+                );
+                expect(onDemandPrice.textContent).toBe("$0.20");
             },
         },
         {
@@ -289,11 +302,13 @@ componentTests(
                 const onDemandPrice = component.container.querySelector(
                     "p[data-testid='On Demand']",
                 )!;
-                expect(onDemandPrice.textContent).toBe("$0.1");
+                expect(onDemandPrice.textContent).toBe("$0.10");
                 fireEvent.change(duration, { target: { value: "monthly" } });
-                expect(pathSuffix).toBe("?duration=monthly");
-                expect(document.location.search).toBe("?duration=monthly");
-                expect(onDemandPrice.textContent).toBe("$73");
+                expect(pathSuffix).toBe("?currency=USD&duration=monthly");
+                expect(document.location.search).toBe(
+                    "?currency=USD&duration=monthly",
+                );
+                expect(onDemandPrice.textContent).toBe("$73.00");
             },
         },
         {
@@ -322,9 +337,11 @@ componentTests(
                 fireEvent.change(reservedTerm, {
                     target: { value: "Standard.partialUpfront" },
                 });
-                expect(pathSuffix).toBe("?pricingType=Standard.partialUpfront");
+                expect(pathSuffix).toBe(
+                    "?currency=USD&pricingType=Standard.partialUpfront",
+                );
                 expect(document.location.search).toBe(
-                    "?pricingType=Standard.partialUpfront",
+                    "?currency=USD&pricingType=Standard.partialUpfront",
                 );
                 expect(oneYearReservedPrice.textContent).toBe("$0.05");
                 expect(threeYearReservedPrice.textContent).toBe("$0.04");

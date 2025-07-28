@@ -5,6 +5,9 @@ import { DollarSignIcon } from "lucide-react";
 import { useMemo, useState, useId, useEffect, useCallback } from "react";
 import processRainbowTable from "@/utils/processRainbowTable";
 import { durationOptions } from "@/utils/dataMappings";
+import type { CurrencyItem } from "@/utils/loadCurrencies";
+import { currencyRateAtom } from "@/state";
+import CurrencySelector from "./CurrencySelector";
 
 interface Platform {
     ondemand: string | number;
@@ -15,9 +18,12 @@ interface Platform {
     spot_min?: string | number;
 }
 
-function dollarString(
+function currencyString(
     value: string | number | undefined,
     duration: CostDuration,
+    currency: string,
+    conversionRate: { usd: number; cny: number },
+    region: string,
 ) {
     if (value === undefined || value === "0") return "N/A";
     const n = Number(value);
@@ -34,8 +40,16 @@ function dollarString(
     };
 
     const mul = n * hourMultipliers[duration];
-    const rounded = Math.round(mul * 10000) / 10000;
-    return `$${rounded}`;
+
+    const useCny =
+        region.startsWith("cn-") || region.toLowerCase().includes("china");
+    const rate = useCny ? conversionRate.cny : conversionRate.usd;
+    const formatted = Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency,
+        maximumFractionDigits: 3,
+    }).format(mul * rate);
+    return formatted;
 }
 
 function keysWithOnDemand(regionPricing: Record<string, Platform>) {
@@ -60,6 +74,7 @@ function Calculator({
     defaultRegionForType,
     useSpotMin,
     setPathSuffix,
+    currencies,
 }: {
     pricing: Record<string, Record<string, Platform>>;
     regions: Region;
@@ -71,6 +86,7 @@ function Calculator({
     defaultRegionForType: string;
     useSpotMin: boolean;
     setPathSuffix: (value: string) => void;
+    currencies: CurrencyItem[];
 }) {
     const priceHoldersId = useId();
 
@@ -92,6 +108,8 @@ function Calculator({
     const [duration, setDurationState] = useState<CostDuration>("hourly");
     const [pricingType, setPricingTypeState] =
         useState<string>("Standard.noUpfront");
+    const [currency, setCurrencyState] = useState<string>("USD");
+    const conversionRate = currencyRateAtom.use();
 
     // Check the URL to make sure this is the state it was originally in.
     useEffect(() => {
@@ -99,8 +117,14 @@ function Calculator({
         const query = new URLSearchParams(window.location.search);
 
         const region = query.get("region");
-        if (region && (regions.local_zone[region] || regions.main[region]))
-            setRegionState(region);
+        const regionIn = (regionSlug: string) => {
+            for (const regionType in regions) {
+                if (regions[regionType as keyof Region][regionSlug])
+                    return true;
+            }
+            return false;
+        };
+        if (region && regionIn(region)) setRegionState(region);
 
         // If there is no OS option, don't let the user change it.
         if (defaultPlatform === defaultOs) {
@@ -139,7 +163,50 @@ function Calculator({
             );
             if (validPricingType) setPricingTypeState(validPricingType[0]);
         }
-    }, [pricing, regions, osOptions, storeOsNameRatherThanId, defaultOs]);
+
+        // Handle setting the currency. Be careful adding after this because we return.
+        const urlCurrency = query.get("currency");
+        if (urlCurrency) {
+            const currency = currencies.find((c) => c.code === urlCurrency);
+            if (currency) {
+                setCurrencyState(currency.code);
+                currencyRateAtom.set({
+                    usd: currency.usdRate,
+                    cny: currency.cnyRate,
+                });
+                return;
+            }
+        }
+
+        // Check our local storage state.
+        const localStorageLastCurrency = localStorage.getItem("last_currency");
+        if (localStorageLastCurrency) {
+            const currency = currencies.find(
+                (c) => c.code === localStorageLastCurrency,
+            );
+            if (currency) {
+                setCurrencyState(currency.code);
+                currencyRateAtom.set({
+                    usd: currency.usdRate,
+                    cny: currency.cnyRate,
+                });
+            }
+        }
+
+        // Since we got here, we do need to update the URL.
+        const url = new URL(window.location.href);
+        url.searchParams.set("currency", localStorageLastCurrency || "USD");
+        window.history.replaceState({}, "", url.toString());
+    }, [
+        pricing,
+        regions,
+        osOptions,
+        storeOsNameRatherThanId,
+        defaultOs,
+        currencies,
+        setCurrencyState,
+        currencyRateAtom,
+    ]);
 
     function wrapStringUpdater<T extends string>(
         handler: (value: T) => void,
@@ -183,36 +250,60 @@ function Calculator({
         const a = [
             {
                 label: "On Demand",
-                value: dollarString(root?.ondemand, duration),
+                value: currencyString(
+                    root?.ondemand,
+                    duration,
+                    currency,
+                    conversionRate,
+                    region,
+                ),
             },
         ];
         if (!removeSpot) {
             a.push({
                 label: "Spot",
-                value: dollarString(
+                value: currencyString(
                     useSpotMin ? root?.spot_min : root?.spot_avg,
                     duration,
+                    currency,
+                    conversionRate,
+                    region,
                 ),
             });
         }
         a.push(
             {
                 label: "1-Year Reserved",
-                value: dollarString(
+                value: currencyString(
                     root?.reserved?.[`yrTerm1${pricingType}`],
                     duration,
+                    currency,
+                    conversionRate,
+                    region,
                 ),
             },
             {
                 label: "3-Year Reserved",
-                value: dollarString(
+                value: currencyString(
                     root?.reserved?.[`yrTerm3${pricingType}`],
                     duration,
+                    currency,
+                    conversionRate,
+                    region,
                 ),
             },
         );
         return a;
-    }, [pricing, region, platform, duration, pricingType, removeSpot]);
+    }, [
+        pricing,
+        region,
+        platform,
+        duration,
+        pricingType,
+        removeSpot,
+        currency,
+        conversionRate,
+    ]);
 
     const handleRegions = (
         regionsArr: [string, string][],
@@ -352,7 +443,29 @@ function Calculator({
                         </option>
                     ))}
                 </select>
+
+                {defaultOs !== defaultPlatform && (
+                    <CurrencySelector
+                        currencies={currencies}
+                        currency={currency}
+                        setCurrency={setCurrencyState}
+                        setPathSuffix={setPathSuffix}
+                        controls={priceHoldersId}
+                    />
+                )}
             </div>
+
+            {defaultOs === defaultPlatform && (
+                <div className="mt-2">
+                    <CurrencySelector
+                        currencies={currencies}
+                        currency={currency}
+                        setCurrency={setCurrencyState}
+                        setPathSuffix={setPathSuffix}
+                        controls={priceHoldersId}
+                    />
+                </div>
+            )}
         </>
     );
 }
@@ -369,6 +482,7 @@ type PricingCalculatorProps = {
     defaultRegion: string;
     useSpotMin: boolean;
     setPathSuffix: (value: string) => void;
+    currencies: CurrencyItem[];
 };
 
 export default function PricingCalculator({
@@ -383,6 +497,7 @@ export default function PricingCalculator({
     defaultRegion,
     useSpotMin,
     setPathSuffix,
+    currencies,
 }: PricingCalculatorProps) {
     const instance = useMemo(() => {
         if (!Array.isArray(compressedInstance.pricing))
@@ -407,6 +522,7 @@ export default function PricingCalculator({
                 defaultRegionForType={defaultRegion}
                 useSpotMin={useSpotMin}
                 setPathSuffix={setPathSuffix}
+                currencies={currencies}
             />
         </section>
     );

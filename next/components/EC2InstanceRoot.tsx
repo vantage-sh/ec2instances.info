@@ -11,6 +11,7 @@ import VantageDemo from "./VantageDemo";
 import MarketingWrapper from "./MarketingWrapper";
 import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
 import { MarketingSchema } from "@/schemas/marketing";
+import type { CurrencyItem } from "@/utils/loadCurrencies";
 
 interface InstanceRootProps {
     rainbowTable: string[];
@@ -32,6 +33,7 @@ interface InstanceRootProps {
     typeName: string;
     marketingInstanceType: string;
     marketingData: MarketingSchema;
+    currencies: CurrencyItem[];
 }
 
 export default function EC2InstanceRoot({
@@ -52,6 +54,7 @@ export default function EC2InstanceRoot({
     reservedTermOptions,
     marketingInstanceType,
     marketingData,
+    currencies,
 }: InstanceRootProps) {
     const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
 
@@ -78,6 +81,7 @@ export default function EC2InstanceRoot({
                         </h1>
                         <h2 className="text-sm mb-4">{description}</h2>
                         <PricingCalculator
+                            currencies={currencies}
                             rainbowTable={rainbowTable}
                             compressedInstance={compressedInstance}
                             regions={regions}

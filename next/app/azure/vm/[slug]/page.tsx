@@ -8,6 +8,7 @@ import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
 import { Region } from "@/types";
 import loadAdvertData from "@/utils/loadAdvertData";
+import loadCurrencies from "@/utils/loadCurrencies";
 
 export const dynamic = "force-static";
 
@@ -180,9 +181,11 @@ export default async function Page({
     );
 
     const compressedInstance = makeRainbowTable([{ ...instance }]);
+    const currencies = await loadCurrencies;
 
     return (
         <AzureInstanceRoot
+            currencies={currencies}
             rainbowTable={compressedInstance[0] as string[]}
             compressedInstance={compressedInstance[1] as AzureInstance}
             allOfInstanceType={allOfInstanceType}
