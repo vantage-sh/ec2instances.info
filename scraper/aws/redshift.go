@@ -75,52 +75,58 @@ func getRedshiftNodeParameters() map[string]map[string]string {
 		log.Fatalln("Error loading Redshift node parameters", err)
 	}
 
-	tableContainer := doc.Find("div", "class", "table-container")
-	if tableContainer.Error != nil {
-		log.Fatalln("Error finding Redshift node parameters table", tableContainer.Error)
+	tableContainers := doc.FindAll("div", "class", "table-container")
+	if len(tableContainers) < 2 {
+		log.Fatalln("Not enough table containers found for Redshift node parameters", len(tableContainers))
 	}
-
-	table := tableContainer.Find("table")
-	if table.Error != nil {
-		log.Fatalln("Error finding Redshift node parameters table", table.Error)
-	}
-
-	tbody := table.Find("tbody")
-	if tbody.Error != nil {
-		log.Fatalln("Error finding Redshift node parameters tbody", tbody.Error)
-	}
-
-	trs := tbody.FindAll("tr")
-	for _, tr := range trs {
-		tds := tr.FindAll("td")
-
-		instanceType := strings.TrimSpace(tds[0].FullText())
-		isMultiNode := strings.Contains(instanceType, "multi-node")
-		instanceType = strings.Split(instanceType, " ")[0]
-		if instanceType == "" {
-			continue
+	for i, tableContainer := range tableContainers {
+		if i == 2 {
+			// We only want the first 2
+			break
 		}
 
-		slices := strings.TrimSpace(tds[3].FullText())
-		perNodeStorage := strings.TrimSpace(tds[4].FullText())
-		nodeRange := strings.TrimSpace(tds[5].FullText())
-		storageCap := strings.TrimSpace(tds[6].FullText())
-
-		ma, ok := m[instanceType]
-		if !ok {
-			ma = make(map[string]string)
-			m[instanceType] = ma
+		table := tableContainer.Find("table")
+		if table.Error != nil {
+			log.Fatalln("Error finding Redshift node parameters table", table.Error)
 		}
 
-		if isMultiNode {
-			ma["multi-node_node_range"] = nodeRange
-			ma["multi-node_storage_capacity"] = storageCap
+		tbody := table.Find("tbody")
+		if tbody.Error != nil {
+			log.Fatalln("Error finding Redshift node parameters tbody", tbody.Error)
 		}
 
-		ma["slices_per_node"] = slices
-		ma["storage_per_node"] = perNodeStorage
-		ma["node_range"] = nodeRange
-		ma["storage_capacity"] = storageCap
+		trs := tbody.FindAll("tr")
+		for _, tr := range trs {
+			tds := tr.FindAll("td")
+
+			instanceType := strings.TrimSpace(tds[0].FullText())
+			isMultiNode := strings.Contains(instanceType, "multi-node")
+			instanceType = strings.Split(instanceType, " ")[0]
+			if instanceType == "" {
+				continue
+			}
+
+			slices := strings.TrimSpace(tds[3].FullText())
+			perNodeStorage := strings.TrimSpace(tds[4].FullText())
+			nodeRange := strings.TrimSpace(tds[5].FullText())
+			storageCap := strings.TrimSpace(tds[6].FullText())
+
+			ma, ok := m[instanceType]
+			if !ok {
+				ma = make(map[string]string)
+				m[instanceType] = ma
+			}
+
+			if isMultiNode {
+				ma["multi-node_node_range"] = nodeRange
+				ma["multi-node_storage_capacity"] = storageCap
+			}
+
+			ma["slices_per_node"] = slices
+			ma["storage_per_node"] = perNodeStorage
+			ma["node_range"] = nodeRange
+			ma["storage_capacity"] = storageCap
+		}
 	}
 
 	return m
