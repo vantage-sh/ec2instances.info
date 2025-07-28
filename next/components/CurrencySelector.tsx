@@ -1,5 +1,6 @@
 import type { CurrencyItem } from "@/utils/loadCurrencies";
 import FilterDropdown from "./FilterDropdown";
+import { currencyRateAtom } from "@/state";
 
 type CurrencySelectorProps = {
     currencies: CurrencyItem[];
@@ -28,6 +29,11 @@ export default function CurrencySelector({
                 localStorage.setItem("last_currency", v);
                 window.history.replaceState({}, "", url.toString());
                 setPathSuffix("?" + url.searchParams.toString());
+                const rates = currencies.find((c) => c.code === v)!;
+                currencyRateAtom.set({
+                    usd: rates.usdRate,
+                    cny: rates.cnyRate,
+                });
             }}
             options={currencies.map((c) => ({
                 value: c.code,
