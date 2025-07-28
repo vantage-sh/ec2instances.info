@@ -63,7 +63,7 @@ export default (async () => {
         cnyRate: forexCnyData.usd.rate,
         currencySymbol: "$",
     });
-    newData.sort((a, b) => a.code.localeCompare(b.code));
+    newData.sort((a, b) => a.name.trim().localeCompare(b.name.trim()));
 
     // Return the data
     return newData;
