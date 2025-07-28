@@ -85,7 +85,7 @@ type EC2Instance struct {
 	IntelAVX                 *bool                 `json:"intel_avx"`
 	IntelTurbo               *bool                 `json:"intel_turbo"`
 	ClockSpeedGhz            *string               `json:"clock_speed_ghz"`
-	EnhancedNetworking       bool                 `json:"enhanced_networking"`
+	EnhancedNetworking       bool                  `json:"enhanced_networking"`
 	Pricing                  map[Region]map[OS]any `json:"pricing"` // any is *EC2PricingData or string
 	Regions                  map[string]string     `json:"regions"`
 	LinuxVirtualizationTypes []string              `json:"linux_virtualization_types"`
