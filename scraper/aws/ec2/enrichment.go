@@ -210,7 +210,7 @@ func enrichEc2Instance(instance *EC2Instance, attributes map[string]string, ec2A
 	}
 
 	if instance.Generation == "current" && instance.InstanceType[:2] != "t2" {
-		instance.EnhancedNetworking = &trueVal
+		instance.EnhancedNetworking = true
 	}
 
 	if hasApiDescription {
