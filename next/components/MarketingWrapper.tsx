@@ -50,9 +50,9 @@ const EC2FlexMarketing = () => (
             description="As Graviton and AMD processors gain broader EC2 availability alongside Intel, we analyze factors such as performance, cost, and distribution."
         />
         <Item
-            link="https://www.vantage.sh/blog/vantage-mcp?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=m7i-flex-t"
-            image="https://assets.vantage.sh/blog/vantage-mcp/vantage-mcp.jpg"
-            title="The Vantage MCP Server: Use AI to Analyze Your Cost and Usage Data"
+            link="https://www.vantage.sh/blog/remote-mcp?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=m7i-flex-t"
+            image="https://assets.vantage.sh/blog/remote-mcp/remote-mcp.png"
+            title="The Vantage Remote MCP Server: Use AI to Analyze Your Cost and Usage Data"
             description="Ask questions about your organization's previous and current cloud cost spend, cost tagging, provider integrations, and more."
         />
     </ItemsWrapper>
@@ -61,9 +61,9 @@ const EC2FlexMarketing = () => (
 const EC2GPUMarketing = () => (
     <ItemsWrapper>
         <Item
-            link="https://www.vantage.sh/blog/vantage-mcp?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=gpu"
-            image="https://assets.vantage.sh/blog/vantage-mcp/vantage-mcp.jpg"
-            title="The Vantage MCP Server: Use AI to Analyze Your Cost and Usage Data"
+            link="https://www.vantage.sh/blog/remote-mcp?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=gpu"
+            image="https://assets.vantage.sh/blog/remote-mcp/remote-mcp.png"
+            title="The Vantage Remote MCP Server: Use AI to Analyze Your Cost and Usage Data"
             description="Ask questions about your organization's previous and current cloud cost spend, cost tagging, provider integrations, and more."
         />
         <Item
@@ -84,9 +84,9 @@ const EC2GPUMarketing = () => (
 const EC2OtherMarketing = () => (
     <ItemsWrapper>
         <Item
-            link="https://www.vantage.sh/blog/vantage-mcp?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=ec2"
-            image="https://assets.vantage.sh/blog/vantage-mcp/vantage-mcp.jpg"
-            title="The Vantage MCP Server: Use AI to Analyze Your Cost and Usage Data"
+            link="https://www.vantage.sh/blog/remote-mcp?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=ec2"
+            image="https://assets.vantage.sh/blog/remote-mcp/remote-mcp.png"
+            title="The Vantage Remote MCP Server: Use AI to Analyze Your Cost and Usage Data"
             description="Ask questions about your organization's previous and current cloud cost spend, cost tagging, provider integrations, and more."
         />
         <Item
