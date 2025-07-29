@@ -31,6 +31,7 @@ import IndividualColumnFilter from "./IndividualColumnFilter";
 import SortToggle from "./SortToggle";
 import * as columnData from "@/utils/colunnData";
 import { usePathname } from "next/navigation";
+import DragDetector from "./DragDetector";
 
 export type AtomKeyWhereInstanceIs<Instance> = {
     [AtomKey in keyof typeof columnData]: (typeof columnData)[AtomKey]["columnsGen"] extends (
@@ -352,8 +353,8 @@ export default function InstanceTable<
                         {virtualRows.map((virtualRow) => {
                             const row = rows[virtualRow.index];
                             return (
-                                <tr
-                                    onClick={() => handleRow(row)}
+                                <DragDetector
+                                    onNotDrag={() => handleRow(row)}
                                     key={row.id}
                                     className={` ${
                                         row.getIsSelected()
@@ -396,7 +397,7 @@ export default function InstanceTable<
                                             </form>
                                         )}
                                     </td>
-                                </tr>
+                                </DragDetector>
                             );
                         })}
                         {paddingBottom > 0 && (
