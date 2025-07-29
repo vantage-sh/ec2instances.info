@@ -39,8 +39,11 @@ export function calculateCost(
 
     if (pricingUnit !== "instance") {
         pricingUnitModifier = instance[
+            // @ts-expect-error: Some instance types are odd
             pricingUnit === "vcpu"
-                ? "vCPU"
+                ? "vCPU" in instance
+                    ? "vCPU"
+                    : "vcpu"
                 : pricingUnit === "ecu"
                   ? "ECU"
                   : "memory"
