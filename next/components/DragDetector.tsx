@@ -20,7 +20,7 @@ export default function DragDetector({
     }, [onNotDrag]);
 
     return (
-        <tr className={className} onMouseUp={checkIfDragging}>
+        <tr className={className} onClick={checkIfDragging}>
             {children}
         </tr>
     );
