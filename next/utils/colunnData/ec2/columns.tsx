@@ -48,6 +48,7 @@ export function calculateCost(
                   ? "ECU"
                   : "memory"
         ] as number;
+        if (pricingUnitModifier === undefined) return -1;
     }
 
     return (Number(price) * durationMultiplier) / pricingUnitModifier;
