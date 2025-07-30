@@ -186,8 +186,8 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                         }}
                         options={[
                             ...frequentlyUsedRegionOptions,
-                            ...chinaRegionOptions,
                             ...regionOptions,
+                            ...chinaRegionOptions,
                             ...localZoneOptions,
                             ...wavelengthOptions,
                         ]}

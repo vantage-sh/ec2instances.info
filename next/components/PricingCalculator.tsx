@@ -338,16 +338,6 @@ function Calculator({
         return v === 1;
     }, [regions.main, regions.local_zone, regions.wavelength, regions.china]);
 
-    const chinaRegions = useMemo(
-        () =>
-            handleRegions(
-                Object.entries(regions.china),
-                "China Regions",
-                onlySingleKey,
-            ),
-        [regions.china, pricing],
-    );
-
     const mainRegions = useMemo(
         () =>
             handleRegions(
@@ -356,6 +346,16 @@ function Calculator({
                 onlySingleKey,
             ),
         [regions.main, pricing],
+    );
+
+    const chinaRegions = useMemo(
+        () =>
+            handleRegions(
+                Object.entries(regions.china),
+                "China Regions",
+                onlySingleKey,
+            ),
+        [regions.china, pricing],
     );
 
     const localZones = useMemo(
@@ -408,8 +408,8 @@ function Calculator({
                     className={selectStyling}
                     onChange={(e) => setRegion(e.target.value)}
                 >
-                    {chinaRegions}
                     {mainRegions}
+                    {chinaRegions}
                     {localZones}
                     {wavelengthRegions}
                 </select>
