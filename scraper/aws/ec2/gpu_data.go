@@ -5,7 +5,7 @@ import "log"
 type gpuData struct {
 	gpuModel          string
 	computeCapability float64
-	gpuCount          int
+	gpuCount          float64
 	gpuMemory         int
 }
 
@@ -493,6 +493,36 @@ var GPU_DATA = map[string]gpuData{
 		gpuCount:          8,
 		// https://resources.nvidia.com/en-us-dgx-systems/dgx-b200-datasheet
 		gpuMemory: 1440,
+	},
+	"gr6f.4xlarge": {
+		gpuModel:          "NVIDIA L4",
+		computeCapability: 10.0,
+		gpuCount:          0.5,
+		gpuMemory:         12,
+	},
+	"g6f.large": {
+		gpuModel:          "NVIDIA L4",
+		computeCapability: 10.0,
+		gpuCount:          0.125,
+		gpuMemory:         3,
+	},
+	"g6f.4xlarge": {
+		gpuModel:          "NVIDIA L4",
+		computeCapability: 10.0,
+		gpuCount:          0.5,
+		gpuMemory:         12,
+	},
+	"g6f.2xlarge": {
+		gpuModel:          "NVIDIA L4",
+		computeCapability: 10.0,
+		gpuCount:          0.25,
+		gpuMemory:         6,
+	},
+	"g6f.xlarge": {
+		gpuModel:          "NVIDIA L4",
+		computeCapability: 10.0,
+		gpuCount:          0.125,
+		gpuMemory:         3,
 	},
 }
 

@@ -134,7 +134,7 @@ func enrichEc2Instance(instance *EC2Instance, attributes map[string]string, ec2A
 
 	gpu := attributes["gpu"]
 	if gpu != "" {
-		GPU, err := strconv.Atoi(gpu)
+		GPU, err := strconv.ParseFloat(gpu, 64)
 		if err != nil {
 			log.Fatal(err)
 		}

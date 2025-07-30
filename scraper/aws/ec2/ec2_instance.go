@@ -68,7 +68,7 @@ type EC2Instance struct {
 	NetworkPerformance       string                `json:"network_performance"`
 	PhysicalProcessor        string                `json:"physical_processor"`
 	Generation               string                `json:"generation"`
-	GPU                      int                   `json:"GPU"`
+	GPU                      float64               `json:"GPU"`
 	FPGA                     int                   `json:"FPGA"`
 	EBSAsNVMe                bool                  `json:"ebs_as_nvme"`
 	VPC                      *VPC                  `json:"vpc"`
