@@ -20,7 +20,7 @@ func SaveInstances(sortedInstances any, fp string) {
 		log.Fatal(err)
 	}
 
-	err = os.MkdirAll(filepath.Dir(fp), 0755)
+	err = os.MkdirAll(filepath.Dir(fp), 0777)
 	if err != nil {
 		log.Fatal(err)
 	}

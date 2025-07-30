@@ -125,7 +125,7 @@ func processAzureOsResponse(osSlug string, instances map[string]*AzureInstance, 
 		log.Fatal(err)
 	}
 
-	err = os.MkdirAll("www/azure", 0755)
+	err = os.MkdirAll("www/azure", 0777)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -286,7 +286,7 @@ func processPricingDataForRegionAndOs(
 		log.Fatal(err)
 	}
 
-	err = os.MkdirAll("www/azure", 0755)
+	err = os.MkdirAll("www/azure", 0777)
 	if err != nil {
 		log.Fatal(err)
 	}
