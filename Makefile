@@ -1,12 +1,6 @@
 .DEFAULT_GOAL := all
 .PHONY: fetch-data compress-www next gofmt prettier format all
 
-clean:
-	mv www/azure/instances-specs.json specs.json.tmp
-	rm -rf www
-	mkdir -p www/azure
-	mv specs.json.tmp www/azure/instances-specs.json
-
 fetch-data:
 	./fetch_data.sh
 
@@ -29,4 +23,4 @@ prettier:
 
 format: gofmt prettier
 
-all: clean fetch-data compress-www next
+all: fetch-data compress-www next
