@@ -67,7 +67,7 @@ function parseNumber(value: string): number {
     if (value.endsWith(".")) {
         return parseFloat(value.slice(0, -1));
     }
-    const n = parseInt(value, 10);
+    const n = parseFloat(value);
     if (isNaN(n)) {
         throw new Error(`Invalid number: ${value}`);
     }
