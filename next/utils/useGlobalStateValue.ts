@@ -217,7 +217,7 @@ export function useGlobalStateValue<Key extends keyof StateDump>(
 
                 // Because its a special sticky case, we need to call the callbacks for changes
                 // and set it, but not set it in local state to maintain global stickiness.
-                if (key === "currency" && !browserBlockingLocalStorage) {
+                if (key === "currency") {
                     const v = value!.toString();
                     lastCurrencyCurrentValue = v;
                     if (!browserBlockingLocalStorage) {
