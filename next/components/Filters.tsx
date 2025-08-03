@@ -21,6 +21,7 @@ import * as columnData from "@/utils/colunnData";
 import { usePathname } from "next/navigation";
 import { resetGlobalState } from "@/utils/useGlobalStateValue";
 import type { CurrencyItem } from "@/utils/loadCurrencies";
+import { browserBlockingLocalStorage } from "@/utils/abGroup";
 
 interface FiltersProps<DataKey extends keyof typeof columnData> {
     regions: Region;
@@ -58,6 +59,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
         [key: string]: number;
     }>({});
     useEffect(() => {
+        if (browserBlockingLocalStorage) return;
         const v = localStorage.getItem(`${pathname}-regions`);
         if (!v) return;
         setFrequentlyUsedRegions(JSON.parse(v) as { [key: string]: number });
@@ -67,10 +69,12 @@ export default function Filters<DataKey extends keyof typeof columnData>({
         (region: string) => {
             frequentlyUsedRegions[region] =
                 (frequentlyUsedRegions[region] ?? 0) + 1;
-            localStorage.setItem(
-                `${pathname}-regions`,
-                JSON.stringify(regions),
-            );
+            if (!browserBlockingLocalStorage) {
+                localStorage.setItem(
+                    `${pathname}-regions`,
+                    JSON.stringify(regions),
+                );
+            }
             setFrequentlyUsedRegions({ ...frequentlyUsedRegions });
         },
         [frequentlyUsedRegions, pathname],

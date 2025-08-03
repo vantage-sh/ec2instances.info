@@ -1,6 +1,7 @@
 import type { CurrencyItem } from "@/utils/loadCurrencies";
 import FilterDropdown from "./FilterDropdown";
 import { currencyRateAtom } from "@/state";
+import { browserBlockingLocalStorage } from "@/utils/abGroup";
 
 type CurrencySelectorProps = {
     currencies: CurrencyItem[];
@@ -26,7 +27,9 @@ export default function CurrencySelector({
                 setCurrency(v);
                 const url = new URL(window.location.href);
                 url.searchParams.set("currency", v);
-                localStorage.setItem("last_currency", v);
+                if (!browserBlockingLocalStorage) {
+                    localStorage.setItem("last_currency", v);
+                }
                 window.history.replaceState({}, "", url.toString());
                 setPathSuffix("?" + url.searchParams.toString());
                 const rates = currencies.find((c) => c.code === v)!;

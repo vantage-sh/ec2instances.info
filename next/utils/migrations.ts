@@ -1,5 +1,6 @@
 import { StateDump, write } from "./instancesKvClient";
 import * as colunnData from "./colunnData";
+import { browserBlockingLocalStorage } from "./abGroup";
 
 function splitRemovingBlanks(s: string, delimiter: string) {
     return s.split(delimiter).filter((x) => x !== "");
@@ -169,6 +170,9 @@ function mergeDataTables(state: StateDump, encodedDataTables: string) {
 
 /** Migrate the local storage to the new format. */
 export function migrateLocalStorage(getBlankState: () => StateDump) {
+    // If the users browser won't let us access localStorage, don't even try.
+    if (browserBlockingLocalStorage) return;
+
     // Yes I know, I laughed at this too. This is genuinely how you get all keys in local storage.
     // I love this beautiful mess of a language -Astrid
     const keys = Object.keys(localStorage);

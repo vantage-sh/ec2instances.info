@@ -7,6 +7,7 @@ import {
 } from "@/schemas/marketing";
 import { useEffect, useState } from "react";
 import { MARKETING_JSON_URL } from "./advertUrl";
+import { abGroup, browserBlockingLocalStorage } from "@/utils/abGroup";
 
 const style = {
     color: "white",
@@ -19,15 +20,17 @@ const style = {
 
 async function fetchOrGetCachedMarketingData(marketingData: MarketingSchema) {
     // Cache this for 30 minutes.
-    const cachedString = localStorage.getItem("vantage-marketing-data");
-    if (cachedString) {
-        let cachedData: {
-            timestamp: number;
-            data: MarketingSchema;
-        } = JSON.parse(cachedString);
-        const d = validateMarketing(cachedData.data);
-        if (cachedData.timestamp >= Date.now() - 30 * 60 * 1000) {
-            return d;
+    if (!browserBlockingLocalStorage) {
+        const cachedString = localStorage.getItem("vantage-marketing-data");
+        if (cachedString) {
+            let cachedData: {
+                timestamp: number;
+                data: MarketingSchema;
+            } = JSON.parse(cachedString);
+            const d = validateMarketing(cachedData.data);
+            if (cachedData.timestamp >= Date.now() - 30 * 60 * 1000) {
+                return d;
+            }
         }
     }
 
@@ -35,13 +38,15 @@ async function fetchOrGetCachedMarketingData(marketingData: MarketingSchema) {
     try {
         const res = await fetch(MARKETING_JSON_URL);
         const newData = validateMarketing(await res.json());
-        localStorage.setItem(
-            "vantage-marketing-data",
-            JSON.stringify({
-                timestamp: Date.now(),
-                data: newData,
-            }),
-        );
+        if (!browserBlockingLocalStorage) {
+            localStorage.setItem(
+                "vantage-marketing-data",
+                JSON.stringify({
+                    timestamp: Date.now(),
+                    data: newData,
+                }),
+            );
+        }
         return newData;
     } catch {}
 
@@ -85,25 +90,17 @@ export default function Advert({
 
     // Handle the client-side logic.
     useEffect(() => {
-        // Get the ab group.
-        let abGroup = false;
-        const localStorageValue = localStorage.getItem("vantage-ab-group");
-        if (localStorageValue) {
-            abGroup = localStorageValue === "true";
-        } else {
-            const random = Math.random();
-            abGroup = random < 0.5;
-            localStorage.setItem("vantage-ab-group", abGroup.toString());
-        }
-
         // Add 1 to the use counter.
-        let useCounter = Number(
-            localStorage.getItem("vantage-use-counter") || "0",
-        );
-        localStorage.setItem(
-            "vantage-use-counter",
-            (useCounter + 1).toString(),
-        );
+        let useCounter = 0;
+        if (!browserBlockingLocalStorage) {
+            useCounter = Number(
+                localStorage.getItem("vantage-use-counter") || "0",
+            );
+            localStorage.setItem(
+                "vantage-use-counter",
+                (useCounter + 1).toString(),
+            );
+        }
 
         // Handle the selected promotion.
         const selectedPromotion = loadedMarketingData.promotions[instanceGroup];

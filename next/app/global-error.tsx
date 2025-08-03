@@ -37,8 +37,12 @@ export default function GlobalError({ error }: { error: Error }) {
     }, [error]);
 
     const clearStorage = () => {
-        localStorage.clear();
-        sessionStorage.clear();
+        try {
+            localStorage.clear();
+        } catch {}
+        try {
+            sessionStorage.clear();
+        } catch {}
         window.location.reload();
     };
 

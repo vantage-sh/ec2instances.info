@@ -8,6 +8,7 @@ import { durationOptions } from "@/utils/dataMappings";
 import type { CurrencyItem } from "@/utils/loadCurrencies";
 import { currencyRateAtom } from "@/state";
 import CurrencySelector from "./CurrencySelector";
+import { browserBlockingLocalStorage } from "@/utils/abGroup";
 
 interface Platform {
     ondemand: string | number;
@@ -179,7 +180,10 @@ function Calculator({
         }
 
         // Check our local storage state.
-        const localStorageLastCurrency = localStorage.getItem("last_currency");
+        let localStorageLastCurrency: string | null = null;
+        if (!browserBlockingLocalStorage) {
+            localStorageLastCurrency = localStorage.getItem("last_currency");
+        }
         if (localStorageLastCurrency) {
             const currency = currencies.find(
                 (c) => c.code === localStorageLastCurrency,

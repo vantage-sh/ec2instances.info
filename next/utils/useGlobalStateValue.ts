@@ -2,6 +2,7 @@ import { useCallback, useSyncExternalStore } from "react";
 import { get, write, StateDump } from "./instancesKvClient";
 import { migrateLocalStorage, migrateUrl } from "./migrations";
 import { Mutex } from "async-mutex";
+import { browserBlockingLocalStorage } from "./abGroup";
 
 const writerMutex = new Mutex();
 
@@ -21,7 +22,10 @@ async function doWrite(
         // we don't want to set it too early or else it might feel a bit weird for
         // the user.
         data = { ...data };
-        data.currency = localStorage.getItem("last_currency") || "USD";
+        const lsValue = browserBlockingLocalStorage
+            ? null
+            : localStorage.getItem("last_currency");
+        data.currency = lsValue || "USD";
     }
 
     const idPromise = write(data);
@@ -69,7 +73,9 @@ async function doNetworkRead(
 
     // Handle if currency is set.
     if (r.currency !== undefined) {
-        localStorage.setItem("last_currency", r.currency);
+        if (!browserBlockingLocalStorage) {
+            localStorage.setItem("last_currency", r.currency);
+        }
         delete r.currency;
         for (const cb of lastCurrencyChangerEvents.values()) cb();
     }
@@ -106,9 +112,14 @@ function deepCopy<T>(v: T): T {
 }
 
 function doLocalStorageRead(pathname: string) {
-    const v = localStorage.getItem(`gstate-${pathname}`);
-    if (!v) return { ...deepCopy(blankStateDump), path: pathname };
-    return JSON.parse(v);
+    if (!browserBlockingLocalStorage) {
+        const v = localStorage.getItem(`gstate-${pathname}`);
+        if (!v) return { ...deepCopy(blankStateDump), path: pathname };
+        return JSON.parse(v);
+    }
+
+    // Create a clean slate because we can't read from localStorage.
+    return { ...deepCopy(blankStateDump), path: pathname };
 }
 
 function useReadArr(pathname: string) {
@@ -137,6 +148,14 @@ function resOrDefault<T>(v: T | undefined, defaultValue: T): T {
     return v || defaultValue;
 }
 
+// We copy here in case the user blocks localStorage.
+let lastCurrencyCurrentValue: string | null = null;
+if (typeof window !== "undefined") {
+    lastCurrencyCurrentValue = browserBlockingLocalStorage
+        ? null
+        : localStorage.getItem("last_currency");
+}
+
 export function useLastCurrencyLocalStorageValue() {
     return useSyncExternalStore(
         (subscribe) => {
@@ -145,7 +164,7 @@ export function useLastCurrencyLocalStorageValue() {
                 lastCurrencyChangerEvents.delete(subscribe);
             };
         },
-        () => localStorage.getItem("last_currency"),
+        () => lastCurrencyCurrentValue,
         () => null,
     );
 }
@@ -198,20 +217,26 @@ export function useGlobalStateValue<Key extends keyof StateDump>(
 
                 // Because its a special sticky case, we need to call the callbacks for changes
                 // and set it, but not set it in local state to maintain global stickiness.
-                if (key === "currency") {
-                    localStorage.setItem("last_currency", value as string);
+                if (key === "currency" && !browserBlockingLocalStorage) {
+                    const v = value!.toString();
+                    lastCurrencyCurrentValue = v;
+                    if (!browserBlockingLocalStorage) {
+                        localStorage.setItem("last_currency", v);
+                    }
                     for (const cb of lastCurrencyChangerEvents.values()) cb();
                 }
 
                 // Write to local storage.
-                localStorage.setItem(
-                    `gstate-${pathname}`,
-                    JSON.stringify({
-                        ...v[1],
-                        // NEVER set the currency locally. We have the last_currency sticky value.
-                        currency: undefined,
-                    }),
-                );
+                if (!browserBlockingLocalStorage) {
+                    localStorage.setItem(
+                        `gstate-${pathname}`,
+                        JSON.stringify({
+                            ...v[1],
+                            // NEVER set the currency locally. We have the last_currency sticky value.
+                            currency: undefined,
+                        }),
+                    );
+                }
 
                 if (key !== "currency") {
                     // Call the callbacks.
@@ -237,8 +262,10 @@ export function useGlobalStateValue<Key extends keyof StateDump>(
  * Used to reset the global state to the default values.
  */
 export function resetGlobalState(pathname: string) {
-    localStorage.removeItem(`gstate-${pathname}`);
-    localStorage.removeItem("last_currency");
+    if (!browserBlockingLocalStorage) {
+        localStorage.removeItem(`gstate-${pathname}`);
+        localStorage.removeItem("last_currency");
+    }
     const url = new URL(window.location.href);
     url.searchParams.delete("id");
     window.history.replaceState({}, "", url.toString());

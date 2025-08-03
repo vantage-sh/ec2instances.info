@@ -6,6 +6,7 @@ import {
     useGlobalStateValue,
     useLastCurrencyLocalStorageValue,
 } from "./utils/useGlobalStateValue";
+import { browserBlockingLocalStorage } from "./utils/abGroup";
 import type { CurrencyItem } from "./utils/loadCurrencies";
 
 const preloadedValues: {
@@ -155,9 +156,11 @@ export function useCurrency(pathname: string, currencies?: CurrencyItem[]) {
         (value: string | ((value: string) => string)) => {
             if (typeof value === "function") {
                 set((old) => {
-                    const newVal = value(
-                        old || localStorage.getItem("last_currency") || "USD",
-                    );
+                    const sGet = () => {
+                        if (browserBlockingLocalStorage) return "USD";
+                        return localStorage.getItem("last_currency") || "USD";
+                    };
+                    const newVal = value(old || sGet());
                     return newVal;
                 });
             } else {
