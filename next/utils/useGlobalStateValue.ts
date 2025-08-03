@@ -266,6 +266,7 @@ export function resetGlobalState(pathname: string) {
         localStorage.removeItem(`gstate-${pathname}`);
         localStorage.removeItem("last_currency");
     }
+    lastCurrencyCurrentValue = null;
     const url = new URL(window.location.href);
     url.searchParams.delete("id");
     window.history.replaceState({}, "", url.toString());
