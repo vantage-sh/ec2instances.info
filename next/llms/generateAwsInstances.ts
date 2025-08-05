@@ -23,10 +23,18 @@ const tableColumns = [
     ["yrTerm3Convertible.allUpfront", "3yr All Upfront (Convertible)"],
 ] as const;
 
-function fmtPrice(price: string | undefined) {
+function fmtPrice(region: string, price: string | undefined) {
     if (price === undefined) return "N/A";
     const n = Number(price);
     if (isNaN(n)) return "N/A";
+
+    const useCny =
+        region.startsWith("cn-") || region.toLowerCase().includes("china");
+
+    if (useCny) {
+        return `¥${n}/hr`;
+    }
+
     return `$${n}/hr`;
 }
 
@@ -106,7 +114,10 @@ function generateInstanceMarkdown(
             case "spot_avg":
             case "spot_min":
             case "spot_max":
-                return fmtPrice(instance.pricing[region]?.[platform]?.[column]);
+                return fmtPrice(
+                    region,
+                    instance.pricing[region]?.[platform]?.[column],
+                );
             case "yrTerm1Standard.noUpfront":
             case "yrTerm1Standard.partialUpfront":
             case "yrTerm1Standard.allUpfront":
@@ -120,6 +131,7 @@ function generateInstanceMarkdown(
             case "yrTerm3Convertible.partialUpfront":
             case "yrTerm3Convertible.allUpfront":
                 return fmtPrice(
+                    region,
                     instance.pricing[region]?.[platform]?.reserved?.[column],
                 );
         }
