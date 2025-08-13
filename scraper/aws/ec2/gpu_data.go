@@ -474,6 +474,12 @@ var GPU_DATA = map[string]gpuData{
 		gpuCount:          12,
 		gpuMemory:         384,
 	},
+	"p5.4xlarge": {
+		gpuModel:          "NVIDIA H100",
+		computeCapability: 9.0,
+		gpuCount:          1,
+		gpuMemory:         80,
+	},
 	"p5.48xlarge": {
 		gpuModel:          "NVIDIA H100",
 		computeCapability: 9.0,
@@ -523,6 +529,12 @@ var GPU_DATA = map[string]gpuData{
 		computeCapability: 10.0,
 		gpuCount:          0.125,
 		gpuMemory:         3,
+	},
+	"dl2q.24xlarge": {
+		gpuModel:          "Qualcomm AI 100 Accelerators",
+		computeCapability: 0,
+		gpuCount:          8,
+		gpuMemory:         128,
 	},
 }
 
