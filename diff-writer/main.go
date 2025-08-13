@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 	"slices"
-	"strconv"
 	"time"
 )
 
@@ -15,30 +14,21 @@ type chainSeed struct {
 	Instances []json.RawMessage `json:"instances"`
 }
 
-type floatyNumberOrString float64
+type floatyNumberOrAbandon float64
 
-func (f *floatyNumberOrString) UnmarshalJSON(data []byte) error {
+func (f *floatyNumberOrAbandon) UnmarshalJSON(data []byte) error {
 	var v float64
 	if err := json.Unmarshal(data, &v); err == nil {
-		*f = floatyNumberOrString(v)
+		*f = floatyNumberOrAbandon(v)
 		return nil
 	}
 
-	var v2 string
-	if err := json.Unmarshal(data, &v2); err == nil {
-		x, err := strconv.ParseFloat(v2, 64)
-		if err != nil {
-			return err
-		}
-		*f = floatyNumberOrString(x)
-		return nil
-	}
-
-	return fmt.Errorf("invalid floaty number or string: %s", string(data))
+	*f = floatyNumberOrAbandon(0)
+	return nil
 }
 
 type gpuInstance struct {
-	GPU      *floatyNumberOrString `json:"GPU"`
+	GPU      *floatyNumberOrAbandon `json:"GPU"`
 	GPUModel *string               `json:"GPU_model"`
 }
 
