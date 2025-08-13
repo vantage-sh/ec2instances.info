@@ -15,8 +15,8 @@ type chainSeed struct {
 }
 
 type gpuInstance struct {
-	GPU      *float64 `json:"gpu"`
-	GPUModel *string  `json:"gpu_model"`
+	GPU      *float64 `json:"GPU"`
+	GPUModel *string  `json:"GPU_model"`
 }
 
 func main() {
