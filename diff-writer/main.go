@@ -5,12 +5,18 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"slices"
 	"time"
 )
 
 type chainSeed struct {
 	RunTime   int64             `json:"run_time"`
 	Instances []json.RawMessage `json:"instances"`
+}
+
+type gpuInstance struct {
+	GPU      *float64 `json:"gpu"`
+	GPUModel *string  `json:"gpu_model"`
 }
 
 func main() {
@@ -47,6 +53,34 @@ func main() {
 	var instances []json.RawMessage
 	if err := json.Unmarshal(instancesBytes, &instances); err != nil {
 		log.Fatal(err)
+	}
+
+	// Log and handle any instances with GPUs that don't have a GPU model.
+	toKill := []int{}
+	for i, instance := range instances {
+		var gpuInstance gpuInstance
+		if err := json.Unmarshal(instance, &gpuInstance); err != nil {
+			log.Fatal(err)
+		}
+
+		// Check if this is relevant.
+		if gpuInstance.GPU != nil && *gpuInstance.GPU > 0 {
+			if gpuInstance.GPUModel == nil {
+				toKill = append(toKill, i)
+				log.Printf("Instance %s has a GPU but no GPU model, not adding to chain yet.", instance)
+			}
+		}
+	}
+
+	// If relevant, remake the slice without the instances that need to be killed.
+	if len(toKill) > 0 {
+		newInstances := make([]json.RawMessage, 0, len(instances)-len(toKill))
+		for i, instance := range instances {
+			if !slices.Contains(toKill, i) {
+				newInstances = append(newInstances, instance)
+			}
+		}
+		instances = newInstances
 	}
 
 	if prevChainFound {
