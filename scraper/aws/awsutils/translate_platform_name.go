@@ -1,7 +1,7 @@
 package awsutils
 
 import (
-	"log"
+	"scraper/utils"
 	"strings"
 )
 
@@ -45,7 +45,7 @@ func TranslatePlatformName(operatingSystem string, preinstalledSoftware string) 
 
 	val := osValue + softwareValue
 	if strings.Contains(val, "unknown") {
-		log.Default().Println("WARNING: Unknown platform", operatingSystem, preinstalledSoftware)
+		utils.SendWarning("Unknown platform", operatingSystem, preinstalledSoftware)
 		return ""
 	}
 	return val

@@ -161,13 +161,13 @@ func loadDedicatedHostReservedData(
 		for _, reservedPrice := range instanceData {
 			riTranslated, ok := RESERVED_TRANSLATIONS[reservedPrice.LeaseContractLength+reservedPrice.PurchaseOption]
 			if !ok {
-				log.Default().Println("WARNING: Dedicated host reserved data has unknown term", reservedPrice.LeaseContractLength, reservedPrice.PurchaseOption, "for", reservedPrice.InstanceType)
+				utils.SendWarning("Dedicated host reserved data has unknown term", reservedPrice.LeaseContractLength, reservedPrice.PurchaseOption, "for", reservedPrice.InstanceType)
 				continue
 			}
 
 			regionSlug := regionsInverted[regionName]
 			if regionSlug == "" {
-				log.Default().Println("WARNING: Dedicated host reserved data has unknown region", regionName)
+				utils.SendWarning("Dedicated host reserved data has unknown region", regionName)
 				continue
 			}
 

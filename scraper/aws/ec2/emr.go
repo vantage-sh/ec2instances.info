@@ -101,7 +101,7 @@ func addEmrPricingCn(instances map[string]*EC2Instance, regionsInverted map[stri
 
 			instance := instances[instanceType]
 			if instance == nil {
-				log.Default().Println("WARNING: EMR pricing data has unknown instance type", instanceType)
+				utils.SendWarning("EMR pricing data has unknown instance type", instanceType)
 				continue
 			}
 			regionPricing := instance.Pricing[regionSlug]
@@ -151,7 +151,7 @@ func addEmrPricingUs(instances map[string]*EC2Instance, regionsInverted map[stri
 				instanceType := priceId[len(EMR_INSTANCE_TYPE_PREFIX):]
 				instance := instances[instanceType]
 				if instance == nil {
-					log.Default().Println("WARNING: EMR pricing data has unknown instance type", instanceType)
+					utils.SendWarning("EMR pricing data has unknown instance type", instanceType)
 					continue
 				}
 				for _, region := range regions {

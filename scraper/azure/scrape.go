@@ -420,15 +420,10 @@ func DoAzureScraping() {
 	instances := processAzureApi(&regionsAndOsData, specsApiResponse)
 
 	// Warn about any instances that have specs missing.
-	missingSpecs := []string{}
 	for _, instance := range instances {
 		if instance.PrettyNameAzure == "" {
-			missingSpecs = append(missingSpecs, instance.InstanceType)
 			instance.PrettyNameAzure = instance.PrettyName
 		}
-	}
-	if len(missingSpecs) > 0 {
-		log.Default().Println("WARNING: No Azure specs found for", missingSpecs)
 	}
 
 	// Save the instances

@@ -41,13 +41,13 @@ func processSpotInterruptData(region string, os string, instance *EC2Instance, s
 	remap, ok := OS_REMAP[os]
 	if !ok {
 		if !china {
-			log.Default().Println("WARNING: Spot interrupt data has unknown OS", os)
+			utils.SendWarning("Spot interrupt data has unknown OS", os)
 		}
 		return
 	}
 
 	if r > len(R_VALUES_MAPPING) {
-		log.Default().Println("WARNING: Spot interrupt data has unknown R value", r, "for", instance.InstanceType)
+		utils.SendWarning("Spot interrupt data has unknown R value", r, "for", instance.InstanceType)
 		return
 	}
 	rValue := R_VALUES_MAPPING[r]
@@ -55,7 +55,7 @@ func processSpotInterruptData(region string, os string, instance *EC2Instance, s
 	regionMap := instance.Pricing[region]
 	if regionMap == nil {
 		if !china {
-			log.Default().Println("WARNING: Spot interrupt data has unknown region", region, "for", instance.InstanceType)
+			utils.SendWarning("Spot interrupt data has unknown region", region, "for", instance.InstanceType)
 		}
 		return
 	}
@@ -63,7 +63,7 @@ func processSpotInterruptData(region string, os string, instance *EC2Instance, s
 	osResult, ok := regionMap[remap].(*EC2PricingData)
 	if !ok {
 		if !china {
-			log.Default().Println("WARNING: Spot interrupt data has unknown OS", os, "for", instance.InstanceType)
+			utils.SendWarning("Spot interrupt data has unknown OS", os, "for", instance.InstanceType)
 		}
 		return
 	}
@@ -99,7 +99,7 @@ func addSpotInterruptInfo(instances map[string]*EC2Instance, spotDataPartialGett
 				instance, ok := instances[instanceType]
 				if !ok {
 					if !china {
-						log.Default().Println("WARNING: Spot interrupt data has unknown instance type", instanceType)
+						utils.SendWarning("Spot interrupt data has unknown instance type", instanceType)
 					}
 					continue
 				}

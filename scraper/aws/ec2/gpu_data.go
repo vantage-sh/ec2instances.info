@@ -1,6 +1,9 @@
 package ec2
 
-import "log"
+import (
+	"log"
+	"scraper/utils"
+)
 
 type gpuData struct {
 	gpuModel          string
@@ -545,7 +548,7 @@ func addGpuInfo(instances map[string]*EC2Instance) {
 		gpuData, ok := GPU_DATA[instanceType]
 		if !ok {
 			if instance.GPU > 0 {
-				log.Default().Println("WARNING: GPU data missing for", instanceType)
+				utils.SendWarning("GPU data missing for", instanceType)
 			}
 			continue
 		}

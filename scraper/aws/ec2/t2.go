@@ -71,12 +71,12 @@ func addT2Credits(instances map[string]*EC2Instance, t2HtmlGetter func() *soup.R
 			instance := instances[firstNodeText]
 			if instance == nil {
 				if strings.Contains(firstNodeText, ".") {
-					log.Default().Println("WARNING: T2 credits data has unknown instance type", firstNodeText)
+					utils.SendWarning("T2 credits data has unknown instance type", firstNodeText)
 				}
 			} else {
 				childText := toText(children[1])
 				if childText == "" {
-					log.Default().Println("WARNING: T2 credits data has empty row", firstNodeText)
+					utils.SendWarning("T2 credits data has empty row", firstNodeText)
 				} else {
 					processT2Row(instance, childText)
 				}
