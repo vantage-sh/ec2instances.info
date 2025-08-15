@@ -188,7 +188,7 @@ func processEC2Data(
 							if old > usdFloat {
 								log.Printf("EC2 pricing data for %s is lower than the on demand price for %s", offer.SKU, instance.InstanceType)
 							} else {
-								pricingData.OnDemand = formatPrice(old)
+								pricingData.OnDemand = formatPrice(usdFloat)
 							}
 						}
 					}
