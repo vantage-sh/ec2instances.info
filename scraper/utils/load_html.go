@@ -20,7 +20,7 @@ func tryWith2MinTimeout(url string) (*soup.Root, error) {
 	}
 
 	resp, err := http.DefaultClient.Do(req)
-	
+
 	if err != nil {
 		return nil, err
 	}
