@@ -108,16 +108,21 @@ func processEC2Data(
 				}
 				instancesHashmap[instanceType] = instance
 			}
-			platform := awsutils.TranslatePlatformName(
-				product.Attributes["operatingSystem"],
-				product.Attributes["preInstalledSw"],
-			)
-			if platform != "" {
-				sku2SkuData[product.SKU] = ec2SkuData{
-					instance: instance,
-					platform: platform,
+
+			if product.Attributes["licenseModel"] != "Bring your own license" {
+				// We don't add BYOL because it causes table weird-ness.
+				platform := awsutils.TranslatePlatformName(
+					product.Attributes["operatingSystem"],
+					product.Attributes["preInstalledSw"],
+				)
+				if platform != "" {
+					sku2SkuData[product.SKU] = ec2SkuData{
+						instance: instance,
+						platform: platform,
+					}
 				}
 			}
+
 			enrichEc2Instance(instance, product.Attributes, ec2ApiResponses)
 		}
 
