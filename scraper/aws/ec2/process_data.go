@@ -180,7 +180,9 @@ func processEC2Data(
 							// No such thing as a free lunch
 							continue
 						}
-						if pricingData.OnDemand != "0" {
+						if pricingData.OnDemand == "0" {
+							pricingData.OnDemand = formatPrice(usdFloat)
+						} else {
 							old, err := strconv.ParseFloat(pricingData.OnDemand, 64)
 							if err != nil {
 								log.Fatalln("Unable to parse EC2 pricing data for", offer.SKU, instance.InstanceType, pricingData.OnDemand)
