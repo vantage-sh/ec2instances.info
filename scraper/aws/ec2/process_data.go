@@ -183,7 +183,17 @@ func processEC2Data(
 							// No such thing as a free lunch
 							continue
 						}
-						pricingData.OnDemand = formatPrice(usdFloat)
+						if pricingData.OnDemand != "0" {
+							old, err := strconv.ParseFloat(pricingData.OnDemand, 64)
+							if err != nil {
+								log.Fatalln("Unable to parse EC2 pricing data for", offer.SKU, instance.InstanceType, pricingData.OnDemand)
+							}
+							if old > usdFloat {
+								log.Printf("EC2 pricing data for %s is lower than the on demand price for %s", offer.SKU, instance.InstanceType)
+							} else {
+								pricingData.OnDemand = formatPrice(old)
+							}
+						}
 					}
 				}
 			}
