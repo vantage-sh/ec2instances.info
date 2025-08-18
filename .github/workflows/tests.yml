@@ -4,7 +4,7 @@ on: push
 jobs:
     gofmt:
         name: gofmt
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-go@v5
@@ -15,7 +15,7 @@ jobs:
 
     prettier:
         name: Prettier
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
             - uses: actions/cache@v4
@@ -30,7 +30,7 @@ jobs:
 
     tests:
         name: Check Types and Run Tests
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
             - name: un-tar the staging www at the root of the repo
