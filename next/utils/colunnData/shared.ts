@@ -142,6 +142,9 @@ export function regex<Instance, Value>(opts: {
                 regex = new RegExp(String(filterValue), "ig");
                 regexCache.set(String(filterValue), regex);
             }
+
+            // Wow, JavaScript can surprise you everyday.
+            regex.lastIndex = 0;
             if (regex.test(value)) return true;
         } catch {}
         return fallback(row, columnId, filterValue);

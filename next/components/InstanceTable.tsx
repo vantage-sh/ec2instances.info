@@ -60,6 +60,7 @@ function getRegex(value: string) {
         regex = new RegExp(value, "ig");
         regexCache.set(value, regex);
     }
+    regex.lastIndex = 0;
     return regex;
 }
 
