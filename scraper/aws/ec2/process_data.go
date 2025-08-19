@@ -73,6 +73,11 @@ func processEC2Data(
 				continue
 			}
 
+			// This is a magic thing that breaks pricing. Ignore anything with it.
+			if product.Attributes["instancesku"] != "" {
+				continue
+			}
+
 			location := product.Attributes["location"]
 			if location != "" {
 				if regionDescription != "" && regionDescription != location {
