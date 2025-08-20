@@ -30,9 +30,9 @@ var EC2_ADD_METAL = map[string]bool{
 }
 
 type ec2SkuData struct {
-	instance           *EC2Instance
-	platform           string
-	hasInstancekuValue bool
+	instance    *EC2Instance
+	platform    string
+	hasBoxUsage bool
 }
 
 func processEC2Data(
@@ -116,9 +116,9 @@ func processEC2Data(
 			)
 			if platform != "" {
 				sku2SkuData[product.SKU] = ec2SkuData{
-					instance:           instance,
-					platform:           platform,
-					hasInstancekuValue: product.Attributes["instancesku"] != "",
+					instance:    instance,
+					platform:    platform,
+					hasBoxUsage: strings.Contains(product.Attributes["usagetype"], "BoxUsage"),
 				}
 			}
 
@@ -155,7 +155,7 @@ func processEC2Data(
 				instance := skuData.instance
 				platform := skuData.platform
 
-				if skuData.hasInstancekuValue {
+				if !skuData.hasBoxUsage {
 					// This is a magic thing that breaks pricing. Ignore anything with it.
 					continue
 				}
@@ -208,8 +208,7 @@ func processEC2Data(
 					continue
 				}
 
-
-				if skuData.hasInstancekuValue {
+				if !skuData.hasBoxUsage {
 					// This is a magic thing that breaks pricing. Ignore anything with it.
 					continue
 				}
