@@ -30,8 +30,9 @@ var EC2_ADD_METAL = map[string]bool{
 }
 
 type ec2SkuData struct {
-	instance *EC2Instance
-	platform string
+	instance           *EC2Instance
+	platform           string
+	hasInstancekuValue bool
 }
 
 func processEC2Data(
@@ -70,11 +71,6 @@ func processEC2Data(
 
 			instanceType := product.Attributes["instanceType"]
 			if instanceType == "" {
-				continue
-			}
-
-			// This is a magic thing that breaks pricing. Ignore anything with it.
-			if product.Attributes["instancesku"] != "" {
 				continue
 			}
 
@@ -120,8 +116,9 @@ func processEC2Data(
 			)
 			if platform != "" {
 				sku2SkuData[product.SKU] = ec2SkuData{
-					instance: instance,
-					platform: platform,
+					instance:           instance,
+					platform:           platform,
+					hasInstancekuValue: product.Attributes["instancesku"] != "",
 				}
 			}
 
@@ -157,6 +154,11 @@ func processEC2Data(
 				}
 				instance := skuData.instance
 				platform := skuData.platform
+
+				if skuData.hasInstancekuValue {
+					// This is a magic thing that breaks pricing. Ignore anything with it.
+					continue
+				}
 
 				// Get the price dimension
 				if len(offer.PriceDimensions) != 1 {
@@ -203,6 +205,12 @@ func processEC2Data(
 				// Get the instance in question
 				skuData, ok := sku2SkuData[offer.SKU]
 				if !ok {
+					continue
+				}
+
+
+				if skuData.hasInstancekuValue {
+					// This is a magic thing that breaks pricing. Ignore anything with it.
 					continue
 				}
 
