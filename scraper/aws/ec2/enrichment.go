@@ -126,10 +126,14 @@ func enrichEc2Instance(instance *EC2Instance, attributes map[string]string, ec2A
 		}
 	}
 
-	if attributes["currentGeneration"] == "Yes" {
-		instance.Generation = "current"
-	} else {
-		instance.Generation = "previous"
+	if instance.Generation != "current" {
+		// This if is here to stop a potential race condition if one DC
+		// marks it as previous generation and another does not.
+		if attributes["currentGeneration"] == "Yes" {
+			instance.Generation = "current"
+		} else {
+			instance.Generation = "previous"
+		}
 	}
 
 	gpu := attributes["gpu"]
