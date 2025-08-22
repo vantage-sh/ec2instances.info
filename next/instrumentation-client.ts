@@ -9,13 +9,13 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
             init({
                 dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
 
-                // Set the sample rate to 10%. With our user rate, this is still a
+                // Set the sample rate to 5%. With our user rate, this is still a
                 // lot of useful information.
-                tracesSampleRate: 0.1,
+                tracesSampleRate: 0.05,
 
                 // Turn on replays.
                 integrations: [replayIntegration()],
-                replaysSessionSampleRate: 0.1,
+                replaysSessionSampleRate: 0.05,
                 replaysOnErrorSampleRate: 1.0,
             });
             importedCaptureRouterTransitionStart = captureRouterTransitionStart;
