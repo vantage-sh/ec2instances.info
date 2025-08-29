@@ -58,6 +58,8 @@ jobs:
                   DEPLOYMENT_CF_AWS_SECRET_ACCESS_KEY: ${{ secrets.PRODUCTION_CF_AWS_SECRET_ACCESS_KEY }}
                   DEPLOYMENT_CF_API_KEY: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   DEPLOYMENT_CF_NAMESPACE: ${{ secrets.PRODUCTION_CF_NAMESPACE }}
+                  BASE_URL: https://${{ secrets.PRODUCTION_HOSTNAME }}/
+                  GOOGLE_INDEXING_TOKEN: ${{ secrets.GOOGLE_INDEXING_TOKEN }}
 
             - uses: cloudflare/wrangler-action@v3
               with:

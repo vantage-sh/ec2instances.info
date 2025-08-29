@@ -145,14 +145,22 @@ async function tryOp10Times(fn: () => Promise<void>) {
 
 const TEN_MB = 10 * 1024 * 1024;
 
-async function uploadFile(key: string, filePath: string) {
+const needsToBeIndexed: string[] = [];
+
+async function uploadFile(key: string, filePath: string, isHtml: boolean) {
     // This is before the hash check so we don't destroy the file if its been written in the past.
     writtenKeys.add(key);
 
     const file = await fs.readFile(filePath);
     const hash = crypto.createHash("sha256").update(file).digest("hex");
-    if (fileHashes[key] === hash) {
+    const oldHash = fileHashes[key];
+    if (oldHash === hash) {
+        // nothing to do here - this is the same content
         return;
+    }
+    if (!oldHash && isHtml) {
+        // we write this key because it's a new HTML file
+        needsToBeIndexed.push(key);
     }
     fileHashes[key] = hash;
 
@@ -249,11 +257,52 @@ async function uploadFolder(extras: string[]) {
                     ? "index.html"
                     : file.replace(".html", "");
             promises.push(
-                uploadFile([...extras, filename].join("/"), filePath),
+                uploadFile(
+                    [...extras, filename].join("/"),
+                    filePath,
+                    file.endsWith(".html"),
+                ),
             );
         }
     }
     await Promise.all(promises);
+}
+
+async function indexToGoogle(indexingToken: string, baseUrl: string) {
+    // Go through and turn the paths into full URLs.
+    const fullUrls = needsToBeIndexed.map((path) => {
+        if (path === "index.html") return baseUrl;
+        path = "/" + path;
+        const u = new URL(path, baseUrl);
+        return u.toString();
+    });
+
+    // POST them all to Google.
+    await Promise.all(
+        fullUrls.map((url) => {
+            return fetch(
+                "https://indexing.googleapis.com/v3/urlNotifications:publish",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${indexingToken}`,
+                    },
+                    body: JSON.stringify({
+                        url,
+                        type: "URL_UPDATED",
+                    }),
+                },
+            ).then((response) => {
+                if (!response.ok) {
+                    throw new Error(
+                        `Failed to notify Google: ${response.status} ${response.statusText}`,
+                    );
+                }
+                console.log(`Notified Google of ${url}`);
+            });
+        }),
+    );
 }
 
 (async () => {
@@ -320,6 +369,13 @@ async function uploadFolder(extras: string[]) {
     console.log("Done! Sleeping for 1 minute to let CF update...");
     await new Promise((resolve) => setTimeout(resolve, 60000));
     console.log("Done sleeping!");
+
+    // If the credentials are specified, handle indexing to Google.
+    const indexingToken = process.env.GOOGLE_INDEXING_TOKEN;
+    const baseUrl = process.env.BASE_URL;
+    if (indexingToken && baseUrl) {
+        await indexToGoogle(indexingToken, baseUrl);
+    }
 })().catch((e) => {
     console.error(e);
     process.exit(1);
