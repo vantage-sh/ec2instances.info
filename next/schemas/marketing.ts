@@ -5,11 +5,16 @@ const TYPE_MAPPING = {
     homepage: "boolean",
 } as const;
 
+type InverseType = {
+    string: string;
+    number: number;
+    bigint: bigint;
+    boolean: boolean;
+    object: object;
+};
+
 export type PromotionIf = {
-    uses_gt?: number;
-    gpu?: boolean;
-    ab?: boolean;
-    homepage?: boolean;
+    [K in keyof typeof TYPE_MAPPING]?: InverseType[(typeof TYPE_MAPPING)[K]];
 };
 
 type Promotion = {
