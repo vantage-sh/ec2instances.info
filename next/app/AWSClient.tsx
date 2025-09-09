@@ -96,9 +96,8 @@ export default function AWSClient<
         <>
             <Advert
                 marketingData={props.marketingData}
-                instanceGroup={props.columnAtomKey}
+                instanceGroup={`${props.columnAtomKey}-home`}
                 gpu={false}
-                homepage={true}
             />
             <main className={`${full} overflow-y-hidden flex flex-col`}>
                 <Filters

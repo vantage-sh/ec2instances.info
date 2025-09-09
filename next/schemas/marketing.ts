@@ -24,12 +24,18 @@ type Promotion = {
 
 const ALLOWED_PROMOTIONS = [
     "generic",
-    "ec2",
-    "cache",
-    "rds",
-    "opensearch",
-    "redshift",
-    "azure",
+    "ec2-instances",
+    "ec2-home",
+    "cache-instances",
+    "cache-home",
+    "rds-instances",
+    "rds-home",
+    "opensearch-instances",
+    "opensearch-home",
+    "redshift-instances",
+    "redshift-home",
+    "azure-instances",
+    "azure-home",
 ] as const;
 
 export type MarketingSchema = {

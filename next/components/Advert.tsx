@@ -58,7 +58,6 @@ async function fetchOrGetCachedMarketingData(marketingData: MarketingSchema) {
 function processIfBranches(
     ifs: PromotionIf | undefined,
     gpu: boolean,
-    homepage: boolean,
     useCounter: number,
 ) {
     if (!ifs) return true;
@@ -66,19 +65,16 @@ function processIfBranches(
     if (ifs.ab && !abGroup) return false;
     if (ifs.gpu && !gpu) return false;
     if (ifs.uses_gt && useCounter < ifs.uses_gt) return false;
-    if (ifs.homepage !== undefined && ifs.homepage !== homepage) return false;
 
     return true;
 }
 
 export default function Advert({
     gpu,
-    homepage,
     instanceGroup,
     marketingData,
 }: {
     gpu: boolean;
-    homepage: boolean;
     instanceGroup: InstanceGroupType;
     marketingData: MarketingSchema;
 }) {
@@ -124,7 +120,7 @@ export default function Advert({
         // Handle the selected promotion.
         const selectedPromotion = loadedMarketingData.promotions[instanceGroup];
         for (const promotion of selectedPromotion || []) {
-            if (processIfBranches(promotion.if, gpu, homepage, useCounter)) {
+            if (processIfBranches(promotion.if, gpu, useCounter)) {
                 setCta(loadedMarketingData.ctas[promotion.cta]);
                 return;
             }
@@ -133,7 +129,7 @@ export default function Advert({
         // Try with the generic promotion.
         const genericPromotion = loadedMarketingData.promotions.generic;
         for (const promotion of genericPromotion || []) {
-            if (processIfBranches(promotion.if, gpu, homepage, useCounter)) {
+            if (processIfBranches(promotion.if, gpu, useCounter)) {
                 setCta(loadedMarketingData.ctas[promotion.cta]);
                 return;
             }
@@ -143,7 +139,7 @@ export default function Advert({
         setTimeout(() => {
             throw new Error("No promotion found");
         }, 0);
-    }, [gpu, homepage, loadedMarketingData]);
+    }, [gpu, loadedMarketingData]);
 
     // By default, show the banner with no context.
     if (!cta) {
