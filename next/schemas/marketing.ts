@@ -2,15 +2,19 @@ const TYPE_MAPPING = {
     uses_gt: "number",
     gpu: "boolean",
     ab: "boolean",
+    homepage: "boolean",
 } as const;
+
+export type PromotionIf = {
+    uses_gt?: number;
+    gpu?: boolean;
+    ab?: boolean;
+    homepage?: boolean;
+};
 
 type Promotion = {
     cta: string;
-    if?: {
-        uses_gt?: number;
-        gpu?: boolean;
-        ab?: boolean;
-    };
+    if?: PromotionIf;
 };
 
 const ALLOWED_PROMOTIONS = [

@@ -59,6 +59,7 @@ export default function AzureClient({
                 marketingData={marketingData}
                 instanceGroup="azure"
                 gpu={false}
+                homepage={true}
             />
             <main className={`${full} overflow-y-hidden flex flex-col`}>
                 <Filters

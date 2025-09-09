@@ -4,6 +4,7 @@ import {
     MarketingSchema,
     InstanceGroupType,
     validateMarketing,
+    PromotionIf,
 } from "@/schemas/marketing";
 import { useEffect, useState } from "react";
 import { MARKETING_JSON_URL } from "./advertUrl";
@@ -54,12 +55,30 @@ async function fetchOrGetCachedMarketingData(marketingData: MarketingSchema) {
     return marketingData;
 }
 
+function processIfBranches(
+    ifs: PromotionIf | undefined,
+    gpu: boolean,
+    homepage: boolean,
+    useCounter: number,
+) {
+    if (!ifs) return true;
+
+    if (ifs.ab && !abGroup) return false;
+    if (ifs.gpu && !gpu) return false;
+    if (ifs.uses_gt && useCounter < ifs.uses_gt) return false;
+    if (ifs.homepage !== undefined && ifs.homepage !== homepage) return false;
+
+    return true;
+}
+
 export default function Advert({
     gpu,
+    homepage,
     instanceGroup,
     marketingData,
 }: {
     gpu: boolean;
+    homepage: boolean;
     instanceGroup: InstanceGroupType;
     marketingData: MarketingSchema;
 }) {
@@ -105,23 +124,7 @@ export default function Advert({
         // Handle the selected promotion.
         const selectedPromotion = loadedMarketingData.promotions[instanceGroup];
         for (const promotion of selectedPromotion || []) {
-            if (promotion.if) {
-                if (promotion.if.ab && abGroup) {
-                    setCta(loadedMarketingData.ctas[promotion.cta]);
-                    return;
-                }
-                if (promotion.if.gpu && gpu) {
-                    setCta(loadedMarketingData.ctas[promotion.cta]);
-                    return;
-                }
-                if (
-                    promotion.if.uses_gt &&
-                    useCounter >= promotion.if.uses_gt
-                ) {
-                    setCta(loadedMarketingData.ctas[promotion.cta]);
-                    return;
-                }
-            } else {
+            if (processIfBranches(promotion.if, gpu, homepage, useCounter)) {
                 setCta(loadedMarketingData.ctas[promotion.cta]);
                 return;
             }
@@ -130,16 +133,7 @@ export default function Advert({
         // Try with the generic promotion.
         const genericPromotion = loadedMarketingData.promotions.generic;
         for (const promotion of genericPromotion || []) {
-            if (promotion.if) {
-                if (promotion.if.ab && abGroup) {
-                    setCta(loadedMarketingData.ctas[promotion.cta]);
-                    return;
-                }
-                if (promotion.if.gpu && gpu) {
-                    setCta(loadedMarketingData.ctas[promotion.cta]);
-                    return;
-                }
-            } else {
+            if (processIfBranches(promotion.if, gpu, homepage, useCounter)) {
                 setCta(loadedMarketingData.ctas[promotion.cta]);
                 return;
             }
@@ -149,7 +143,7 @@ export default function Advert({
         setTimeout(() => {
             throw new Error("No promotion found");
         }, 0);
-    }, [gpu, loadedMarketingData]);
+    }, [gpu, homepage, loadedMarketingData]);
 
     // By default, show the banner with no context.
     if (!cta) {
