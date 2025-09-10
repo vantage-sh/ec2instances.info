@@ -55,7 +55,6 @@ componentTests(
             },
             props: {
                 gpu: false,
-                homepage: true,
                 instanceGroup: "generic" as InstanceGroupType,
                 marketingData: genericMockMarketingData,
             },
@@ -79,7 +78,6 @@ componentTests(
             },
             props: {
                 gpu: false,
-                homepage: true,
                 instanceGroup: "generic" as InstanceGroupType,
                 marketingData: genericMockMarketingData,
             },
