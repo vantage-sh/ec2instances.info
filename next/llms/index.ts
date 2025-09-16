@@ -42,7 +42,7 @@ async function main() {
     }
     console.log("Generated aws/ec2/families/*.md");
 
-    let awsIndexes = await generateAwsIndexes("/aws/ec2", awsInstances);
+    let awsIndexes = await generateAwsIndexes("/aws/ec2", awsInstances, true);
     for (const [slug, index] of awsIndexes.entries()) {
         await writeFile(`./public/aws/ec2/${slug}.md`, index);
     }
@@ -84,7 +84,7 @@ async function main() {
     }
     console.log("Generated aws/rds/families/*.md");
 
-    awsIndexes = await generateAwsIndexes("/aws/rds", rdsInstances);
+    awsIndexes = await generateAwsIndexes("/aws/rds", rdsInstances, false);
     for (const [slug, index] of awsIndexes.entries()) {
         await writeFile(`./public/aws/rds/${slug}.md`, index);
     }
@@ -132,6 +132,7 @@ async function main() {
     awsIndexes = await generateAwsIndexes(
         "/aws/elasticache",
         elasticacheInstances,
+        false,
     );
     for (const [slug, index] of awsIndexes.entries()) {
         await writeFile(`./public/aws/elasticache/${slug}.md`, index);

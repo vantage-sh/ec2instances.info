@@ -158,6 +158,11 @@ export const awsIndexes = [
     },
 ];
 
+function gpuInfo(instance: EC2Instance) {
+    if (!instance.GPU) return "";
+    return `, ${instance.GPU} GPU${instance.GPU > 1 ? "s" : ""} | ${instance.GPU_memory} GB VRAM`;
+}
+
 export function generateIndexMarkdown(
     pathPrefix: string,
     name: string,
@@ -169,7 +174,7 @@ ${instances
     .map(
         (
             i,
-        ) => urlInject`- **${raw(i.instance_type)} (min $${raw(calculatePrice(i))}/hr on demand)**
+        ) => urlInject`- **${raw(i.instance_type)} (min $${raw(calculatePrice(i))}/hr on demand${raw(gpuInfo(i))})**
     - [HTML (with user UI)](${`${pathPrefix}/${i.instance_type}`})
     - [Markdown (with pricing data region indexes)](${`${pathPrefix}/${i.instance_type}.md`})`,
     )
@@ -177,14 +182,49 @@ ${instances
 `;
 }
 
+export const ec2Indexes = [
+    {
+        name: "1 gpu",
+        slug: "has-1-gpu",
+        filter: (instance: EC2Instance) => instance.GPU === 1,
+    },
+    {
+        name: "over 1 gpu but under 3 gpu's",
+        slug: "has-over-1-under-3-gpus",
+        filter: (instance: EC2Instance) => {
+            const gpuCount = instance.GPU || 0;
+            return gpuCount > 1 && gpuCount < 3;
+        },
+    },
+    {
+        name: "over 3 gpu's but under 8 gpu's",
+        slug: "has-over-3-under-8-gpus",
+        filter: (instance: EC2Instance) => {
+            const gpuCount = instance.GPU || 0;
+            return gpuCount >= 3 && gpuCount < 8;
+        },
+    },
+    {
+        name: "over 8 gpu's",
+        slug: "has-over-8-gpus",
+        filter: (instance: EC2Instance) => {
+            const gpuCount = instance.GPU || 0;
+            return gpuCount >= 8;
+        },
+    },
+];
+
 export async function generateAwsIndexes(
     pathPrefix: string,
     instancesPromise: Promise<EC2Instance[]>,
+    hasEc2: boolean,
 ) {
+    const indexes = hasEc2 ? [...awsIndexes, ...ec2Indexes] : awsIndexes;
+
     const instances = await instancesPromise;
     const buckets = new Map<string, EC2Instance[]>();
     for (const instance of instances) {
-        for (const index of awsIndexes) {
+        for (const index of indexes) {
             if (index.filter(instance)) {
                 const bucket = buckets.get(index.slug) || [];
                 bucket.push(instance);
@@ -197,7 +237,7 @@ export async function generateAwsIndexes(
     for (const [slug, instances] of buckets.entries()) {
         const markdown = generateIndexMarkdown(
             pathPrefix,
-            awsIndexes.find((i) => i.slug === slug)!.name,
+            indexes.find((i) => i.slug === slug)!.name,
             instances,
         );
         markdownFiles.set(slug, markdown);

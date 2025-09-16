@@ -7,7 +7,7 @@ import {
     redshiftInstances,
     getAzureFamilies,
 } from "./loadedData";
-import { awsIndexes } from "./generateAwsIndexes";
+import { awsIndexes, ec2Indexes } from "./generateAwsIndexes";
 import { opensearchIndexes } from "./generateOpensearchIndexes";
 import { azureIndexes } from "./generateAzureIndexes";
 
@@ -19,7 +19,7 @@ This file contains information on where to find indexes for instance types we su
 
 ## Amazon EC2
 
-${awsIndexes.map((i) => urlInject`- [${raw(i.name)} instances](${`/aws/ec2/${i.slug}.md`})`).join("\n")}
+${[...awsIndexes, ...ec2Indexes].map((i) => urlInject`- [${raw(i.name)} instances](${`/aws/ec2/${i.slug}.md`})`).join("\n")}
 ${(await getEc2Families()).map((family) => urlInject`- [${raw(family)} instances](${`/aws/ec2/families/${family}.md`})`).join("\n")}
 
 ## Amazon RDS
