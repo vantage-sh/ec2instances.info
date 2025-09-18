@@ -28,7 +28,7 @@ const Item = ({ link, image, title, description }: ItemProps) => (
             >
                 {title}
             </h3>
-            <p className="text-xs not-xl:text-2xs xl:text-3xs 2xl:text-2xs text-gray-500">
+            <p className="text-xs not-xl:text-2xs xl:text-3xs 2xl:text-2xs text-gray-2">
                 {description}
             </p>
         </div>
