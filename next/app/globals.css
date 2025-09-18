@@ -15,10 +15,6 @@
     --color-purple-brand: var(--color-purple-1);
 }
 
-temp {
-    color: #5a5a5f
-}
-
 body {
     color: var(--color-gray-1);
     padding: 0;
