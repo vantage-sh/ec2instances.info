@@ -8,10 +8,10 @@
     --color-gray-2: #5a5a5f;
     --color-gray-3: #e3e3e9;
     --color-gray-4: #f7f7f9;
-    --color-purple-1: #6742D6;
-    --color-purple-2: #8F86F9;
-    --color-purple-3: #E5E5FF;
-    --color-purple-nu: #6742D6;
+    --color-purple-1: #6742d6;
+    --color-purple-2: #8f86f9;
+    --color-purple-3: #e5e5ff;
+    --color-purple-nu: #6742d6;
     --color-purple-brand: var(--color-purple-1);
 }
 
