@@ -86,7 +86,7 @@ export default function TopNav() {
             <div className="flex items-center justify-start gap-4">
                 <TranslationFriendlyLink
                     href="/"
-                    className="font-medium text-gray-6"
+                    className="font-medium text-gray-4"
                 >
                     <div className="flex items-center justify-start gap-2">
                         <svg
@@ -120,7 +120,7 @@ export default function TopNav() {
                                 Instances
                             </span>
                             <TranslationToolDetector
-                                className="text-xs italic text-gray-5"
+                                className="text-xs italic text-gray-3"
                                 text="Presented by Vantage"
                             />
                         </div>
@@ -132,7 +132,7 @@ export default function TopNav() {
                         key={item.label}
                     >
                         <TranslationFriendlyLink
-                            className="font-medium text-gray-6 text-sm"
+                            className="font-medium text-gray-4 text-sm"
                             href={item.href}
                         >
                             {item.label}
@@ -151,7 +151,7 @@ export default function TopNav() {
                                             className={`font-normal text-sm px-2 py-1 pb-2 rounded rounded-b-none ${
                                                 selected
                                                     ? "bg-white text-black font-semibold"
-                                                    : "text-gray-6"
+                                                    : "text-gray-4"
                                             }`}
                                             key={child.label}
                                             href={child.href}

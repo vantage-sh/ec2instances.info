@@ -183,7 +183,7 @@ function ExprFilter<Instance>({
                     onChange={exprStringChange}
                     placeholder={`Filter ${column.columnDef.header as string}...`}
                     id={id}
-                    className={`w-full px-2 py-1 text-sm border border-gray-5 bg-white font-normal rounded ${
+                    className={`w-full px-2 py-1 text-sm border border-gray-3 bg-white font-normal rounded ${
                         exprParseError ? "border-red-500" : ""
                     }`}
                 />
@@ -233,7 +233,7 @@ export default function IndividualColumnFilter<Instance>({
             value={(column.getFilterValue() as string) ?? ""}
             onChange={(e) => column.setFilterValue(e.target.value)}
             placeholder={`Filter ${column.columnDef.header as string}...`}
-            className="w-full px-2 py-1 text-sm border border-gray-5 bg-white font-normal rounded"
+            className="w-full px-2 py-1 text-sm border border-gray-3 bg-white font-normal rounded"
         />
     );
 }

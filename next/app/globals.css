@@ -4,23 +4,19 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-    --color-gray-0: #1a1a1c;
     --color-gray-1: #303037;
     --color-gray-2: #5a5a5f;
-    --color-gray-3: #8a8a8e;
-    --color-gray-4: #cfcfd6;
-    --color-gray-5: #e3e3e9;
-    --color-gray-6: #f7f7f9;
-    --color-gray-7: #fafafb;
-    --color-purple-0: #5a0a76;
-    --color-purple-1: #9c25c7;
-    --color-purple-2: #c055e6;
-    --color-purple-3: #e59dff;
-    --color-purple-4: #f1c9ff;
-    --color-purple-5: #f9e6ff;
-    --color-purple-6: #fcf4ff;
-    --color-purple-nu: #6742d6;
-    --color-purple-brand: #872ee1;
+    --color-gray-3: #e3e3e9;
+    --color-gray-4: #f7f7f9;
+    --color-purple-1: #6742D6;
+    --color-purple-2: #8F86F9;
+    --color-purple-3: #E5E5FF;
+    --color-purple-nu: #6742D6;
+    --color-purple-brand: var(--color-purple-1);
+}
+
+temp {
+    color: #5a5a5f
 }
 
 body {
@@ -38,7 +34,7 @@ body {
 }
 
 .index-table th {
-    @apply whitespace-nowrap overflow-hidden text-ellipsis text-left relative bg-gray-6 border-gray-5 border-b;
+    @apply whitespace-nowrap overflow-hidden text-ellipsis text-left relative bg-gray-4 border-gray-3 border-b;
     @apply sticky top-0 z-20;
 }
 
@@ -47,10 +43,17 @@ body {
 }
 
 .index-table tbody tr {
-    @apply border-b border-gray-100 transition-colors hover:bg-gray-100 active:bg-purple-200;
+    @apply border-b border-gray-100 transition-colors;
+    background-color: transparent;
 }
-.index-table tbody tr.bg-purple-200 {
-    @apply hover:bg-purple-300;
+.index-table tbody tr:hover {
+    background-color: var(--color-gray-4);
+}
+.index-table tbody tr.row-selected {
+    background-color: var(--color-purple-3);
+}
+.index-table tbody tr.row-selected:hover {
+    background-color: var(--color-purple-2);
 }
 
 .index-table tbody td {
@@ -81,7 +84,7 @@ body {
 }
 
 .index-table a:hover {
-    color: var(--color-purple-0);
+    color: var(--color-purple-1);
 }
 
 .btn {
@@ -99,8 +102,8 @@ body {
 }
 
 .btn-purple:hover {
-    background-color: #cf67f4;
-    border-color: #d37bf2;
+    background-color: var(--color-purple-1);
+    border-color: var(--color-purple-2);
 }
 
 .btn-primary {
@@ -110,12 +113,12 @@ body {
 
 .btn-outline-secondary {
     background-color: transparent;
-    border: 1px solid var(--color-gray-5);
+    border: 1px solid var(--color-gray-3);
     color: var(--color-gray-1);
 }
 
 .btn-outline-secondary:hover {
-    border-color: var(--color-gray-3);
+    border-color: var(--color-gray-2);
 }
 
 .btn-outline-secondary:disabled {
@@ -125,7 +128,7 @@ body {
 
 .form-select {
     padding: 8px 16px;
-    border: 1px solid var(--color-gray-5);
+    border: 1px solid var(--color-gray-3);
     border-radius: 6px;
     font-size: 14px;
     color: var(--color-gray-1);
@@ -139,7 +142,7 @@ body {
 
 .dropdown-menu {
     background-color: white;
-    border: 1px solid var(--color-gray-5);
+    border: 1px solid var(--color-gray-3);
     border-radius: 6px;
     padding: 8px;
     min-width: 200px;
@@ -153,18 +156,18 @@ body {
 }
 
 .dropdown-item:hover {
-    background-color: var(--color-gray-6);
+    background-color: var(--color-gray-4);
 }
 
 .dropdown-item.active {
-    background-color: var(--color-purple-5);
+    background-color: var(--color-purple-3);
     color: var(--color-purple-1);
 }
 
 .dropdown-search {
     width: 100%;
     padding: 8px;
-    border: 1px solid var(--color-gray-5);
+    border: 1px solid var(--color-gray-3);
     border-radius: 6px;
     margin-bottom: 8px;
 }
@@ -180,7 +183,7 @@ body {
     gap: 4px;
     padding: 8px 16px;
     background-color: white;
-    border: 1px solid var(--color-gray-5);
+    border: 1px solid var(--color-gray-3);
     border-radius: 6px;
     color: var(--color-gray-1);
     font-size: 14px;
@@ -189,7 +192,7 @@ body {
 }
 
 .dropdown-toggle:hover {
-    background-color: var(--color-gray-6);
+    background-color: var(--color-gray-4);
 }
 
 .caret {

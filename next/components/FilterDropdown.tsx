@@ -163,7 +163,7 @@ export default function FilterDropdown({
                                                 />
                                                 <span>{option.label}</span>
                                                 {option.group && (
-                                                    <span className="text-gray-500 text-xs ml-2">
+                                                    <span className="text-gray-300 text-xs ml-2">
                                                         {option.value}
                                                     </span>
                                                 )}
