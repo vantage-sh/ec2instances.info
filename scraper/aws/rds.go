@@ -131,7 +131,7 @@ func processRdsOnDemandDimension(
 
 	isByol := attributes["licenseModel"] == "Bring your own license"
 	engineCode := attributes["engineCode"]
-	if byolOnly[engineCode] != isByol {
+	if byolOnly[engineCode] == isByol {
 		// Only do this if its wanted within this context.
 		if attributes["storage"] == "Aurora IO Optimization Mode" {
 			engineCode = "211"
