@@ -141,7 +141,9 @@ func processRdsOnDemandDimension(
 	}
 
 	pricingData := getPricingdata(attributes["databaseEngine"])
-	pricingData.OnDemand = usdF
+	if usdF > pricingData.OnDemand {
+		pricingData.OnDemand = usdF
+	}
 }
 
 func translateGenericAwsReservedTermAttributes(termAttributes map[string]string) string {
