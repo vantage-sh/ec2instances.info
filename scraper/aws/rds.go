@@ -100,10 +100,10 @@ type genericAwsPricingData struct {
 }
 
 var byolOnly = map[string]bool{
-	"19": true,
-	"4": true,
+	"19":  true,
+	"4":   true,
 	"410": true,
-	"3": true,
+	"3":   true,
 }
 
 func processRdsOnDemandDimension(
@@ -177,7 +177,7 @@ func processRDSAndElastiCacheReservedOffer(
 				case "yrTerm3Standard.partialUpfront", "yrTerm3Standard.allUpfront":
 					f = f / (365 * 3) / 24
 				}
-				if f != 0 {
+				if f != 0 && f > data.Reserved[termCode] {
 					data.Reserved[termCode] = f
 				}
 			} else {
@@ -199,8 +199,18 @@ func processRdsReservedOffer(
 
 	data := []*genericAwsPricingData{
 		getPricingData(attributes["databaseEngine"]),
-		getPricingData(attributes["engineCode"]),
 	}
+
+	isByol := attributes["licenseModel"] == "Bring your own license"
+	engineCode := attributes["engineCode"]
+	if byolOnly[engineCode] == isByol {
+		// Only do this if its wanted within this context.
+		if attributes["storage"] == "Aurora IO Optimization Mode" {
+			engineCode = "211"
+		}
+		data = append(data, getPricingData(engineCode))
+	}
+
 	termCode := translateGenericAwsReservedTermAttributes(offer.TermAttributes)
 	processRDSAndElastiCacheReservedOffer(data, termCode, offer, currency)
 }
