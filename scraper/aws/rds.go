@@ -99,6 +99,13 @@ type genericAwsPricingData struct {
 	Reserved map[string]float64 `json:"reserved"`
 }
 
+var byolOnly = map[string]bool{
+	"19": true,
+	"4": true,
+	"410": true,
+	"3": true,
+}
+
 func processRdsOnDemandDimension(
 	attributes map[string]string,
 	priceDimension awsutils.RegionPriceDimension,
@@ -113,11 +120,6 @@ func processRdsOnDemandDimension(
 		}
 	}
 
-	engineCode := attributes["engineCode"]
-	if attributes["storage"] == "Aurora IO Optimization Mode" {
-		engineCode = "211"
-	}
-	pricingData := getPricingdata(engineCode)
 	usd := priceDimension.PricePerUnit[currency]
 	if usd == "" {
 		return
@@ -126,10 +128,22 @@ func processRdsOnDemandDimension(
 	if usdF == 0 {
 		return
 	}
-	pricingData.OnDemand = usdF
 
-	pricingData = getPricingdata(attributes["databaseEngine"])
-	pricingData.OnDemand = usdF
+	isByol := attributes["licenseModel"] == "Bring your own license"
+	engineCode := attributes["engineCode"]
+	if byolOnly[engineCode] == isByol {
+		// Only do this if its wanted within this context.
+		if attributes["storage"] == "Aurora IO Optimization Mode" {
+			engineCode = "211"
+		}
+		pricingData := getPricingdata(engineCode)
+		pricingData.OnDemand = usdF
+	}
+
+	pricingData := getPricingdata(attributes["databaseEngine"])
+	if usdF > pricingData.OnDemand {
+		pricingData.OnDemand = usdF
+	}
 }
 
 func translateGenericAwsReservedTermAttributes(termAttributes map[string]string) string {
