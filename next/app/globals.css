@@ -11,6 +11,7 @@
     --color-purple-1: #6742d6;
     --color-purple-2: #8f86f9;
     --color-purple-3: #e5e5ff;
+    --color-purple-hover: #ececff;
     --color-purple-nu: #6742d6;
     --color-purple-brand: var(--color-purple-1);
 }
@@ -49,7 +50,7 @@ body {
     background-color: var(--color-purple-3);
 }
 .index-table tbody tr.row-selected:hover {
-    background-color: var(--color-purple-2);
+    background-color: var(--color-purple-hover);
 }
 
 .index-table tbody td {
