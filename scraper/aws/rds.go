@@ -99,13 +99,6 @@ type genericAwsPricingData struct {
 	Reserved map[string]float64 `json:"reserved"`
 }
 
-var byolOnly = map[string]bool{
-	"19":  true,
-	"4":   true,
-	"410": true,
-	"3":   true,
-}
-
 func processRdsOnDemandDimension(
 	attributes map[string]string,
 	priceDimension awsutils.RegionPriceDimension,
@@ -129,18 +122,14 @@ func processRdsOnDemandDimension(
 		return
 	}
 
-	isByol := attributes["licenseModel"] == "Bring your own license"
 	engineCode := attributes["engineCode"]
-	if byolOnly[engineCode] == isByol {
-		// Only do this if its wanted within this context.
-		if attributes["storage"] == "Aurora IO Optimization Mode" {
-			engineCode = "211"
-		}
-		pricingData := getPricingdata(engineCode)
-		pricingData.OnDemand = usdF
+	if attributes["storage"] == "Aurora IO Optimization Mode" {
+		engineCode = "211"
 	}
+	pricingData := getPricingdata(engineCode)
+	pricingData.OnDemand = usdF
 
-	pricingData := getPricingdata(attributes["databaseEngine"])
+	pricingData = getPricingdata(attributes["databaseEngine"])
 	if usdF > pricingData.OnDemand {
 		pricingData.OnDemand = usdF
 	}
@@ -199,16 +188,7 @@ func processRdsReservedOffer(
 
 	data := []*genericAwsPricingData{
 		getPricingData(attributes["databaseEngine"]),
-	}
-
-	isByol := attributes["licenseModel"] == "Bring your own license"
-	engineCode := attributes["engineCode"]
-	if byolOnly[engineCode] == isByol {
-		// Only do this if its wanted within this context.
-		if attributes["storage"] == "Aurora IO Optimization Mode" {
-			engineCode = "211"
-		}
-		data = append(data, getPricingData(engineCode))
+		getPricingData(attributes["engineCode"]),
 	}
 
 	termCode := translateGenericAwsReservedTermAttributes(offer.TermAttributes)
