@@ -190,6 +190,35 @@ export default function TopNav() {
                     Get Notified
                 </TranslationFriendlyLink>
                 <TranslationFriendlyLink
+                    href="https://instances-mcp.vantage.sh?utm_campaign=Instances%20Blog%20Clicks&utm_source=nav"
+                    className={buttonVariants({
+                        variant: "outline",
+                        size: "sm",
+                    })}
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="black"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    >
+                        <path d="M12 20h9" />
+                        <path d="M12 4h9" />
+                        <path d="M4 4h.01" />
+                        <path d="M4 20h.01" />
+                        <path d="M4 12h.01" />
+                        <path d="M12 12h9" />
+                        <path d="M4 16h.01" />
+                        <path d="M4 8h.01" />
+                    </svg>
+                    MCP
+                </TranslationFriendlyLink>
+                <TranslationFriendlyLink
                     href="https://github.com/vantage-sh/ec2instances.info"
                     className={buttonVariants({
                         variant: "outline",
