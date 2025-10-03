@@ -166,7 +166,7 @@ export default function TopNav() {
             </div>
             <div className="flex items-center justify-end gap-4 not-md:hidden overflow-hidden">
                 <TranslationFriendlyLink
-                    href="https://newsletters.vantage.sh"
+                    href="https://newsletters.vantage.sh/?utm_campaign=Instances%20Blog%20Clicks&utm_source=na"
                     target="_blank"
                     className={buttonVariants({
                         variant: "outline",
@@ -190,7 +190,7 @@ export default function TopNav() {
                     Get Notified
                 </TranslationFriendlyLink>
                 <TranslationFriendlyLink
-                    href="https://instances-mcp.vantage.sh?utm_campaign=Instances%20Blog%20Clicks&utm_source=nav"
+                    href="https://instances-mcp.vantage.sh/?utm_campaign=Instances%20Blog%20Clicks&utm_source=nav"
                     className={buttonVariants({
                         variant: "outline",
                         size: "sm",
