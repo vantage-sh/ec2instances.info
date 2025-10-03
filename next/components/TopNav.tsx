@@ -166,7 +166,7 @@ export default function TopNav() {
             </div>
             <div className="flex items-center justify-end gap-4 not-md:hidden overflow-hidden">
                 <TranslationFriendlyLink
-                    href="https://newsletters.vantage.sh/?utm_campaign=Instances%20Blog%20Clicks&utm_source=na"
+                    href="https://newsletters.vantage.sh/?utm_campaign=Instances%20Blog%20Clicks&utm_source=nav"
                     target="_blank"
                     className={buttonVariants({
                         variant: "outline",
