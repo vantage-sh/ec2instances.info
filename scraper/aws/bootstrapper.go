@@ -108,7 +108,7 @@ func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootInd
 
 			dataFlattened := make([]flatData, 0, len(regionIndex.Regions))
 			for regionName, regionMeta := range regionIndex.Regions {
-				if regionName == "aws-cn-other" {
+				if regionName == "aws-cn-other" || regionName == "cn-north-1-pkx-1" {
 					// Weird thing AWS sends in China
 					continue
 				}
