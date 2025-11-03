@@ -33,6 +33,12 @@ jobs:
               env:
                   SLACK_WEBHOOK_URL: ${{ secrets.SCRAPER_SLACK_WEBHOOK_URL }}
 
+            - uses: jakejarvis/s3-sync-action@master
+              env:
+                  AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+                  AWS_REGION: 'eu-west-2'
+                  SOURCE_DIR: 'www'
+
             - name: Success Slack Notify
               if: ${{ success() }}
               uses: slackapi/slack-github-action@v1.16.0
