@@ -2,9 +2,7 @@ package main
 
 import (
 	"log"
-	"os"
 	"scraper/aws"
-	"scraper/azure"
 	"scraper/utils"
 )
 
