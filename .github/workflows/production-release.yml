@@ -29,14 +29,12 @@ jobs:
               with:
                   go-version: 1.25.3
 
-#            - run: ./fetch_data.sh
-#              env:
-#                  SLACK_WEBHOOK_URL: ${{ secrets.SCRAPER_SLACK_WEBHOOK_URL }}
+            - run: ./fetch_data.sh
+              env:
+                  SLACK_WEBHOOK_URL: ${{ secrets.SCRAPER_SLACK_WEBHOOK_URL }}
 
             - name: Upload to S3
               run: |
-                mkdir -p ./www
-                touch www/hello.txt
                 aws s3 sync ./www s3://${{ secrets.AWS_S3_BUCKET }}/
 
             - name: Success Slack Notify
