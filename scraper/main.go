@@ -5,6 +5,7 @@ import (
 	"os"
 	"scraper/aws"
 	"scraper/azure"
+	"scraper/gcp"
 	"scraper/utils"
 )
 
@@ -23,9 +24,11 @@ func main() {
 	mustSet("AZURE_CLIENT_ID")
 	mustSet("AZURE_CLIENT_SECRET")
 	mustSet("AZURE_SUBSCRIPTION_ID")
+	mustSet("GCP_API_KEY")
 
 	fg.Add(aws.DoAwsScraping)
 	fg.Add(azure.DoAzureScraping)
+	fg.Add(gcp.DoGCPScraping)
 
 	fg.Run()
 	log.Default().Println("All threads done! Everything seems fine! Exiting now!")
