@@ -366,9 +366,6 @@ func getAzureSpecsApiIterator() *utils.SlowBuildingMap[string, *AzureSpecsApiIte
 		// Get everything we need to start the request.
 		accessToken := getAzureAccessToken()
 		subId := os.Getenv("AZURE_SUBSCRIPTION_ID")
-		if subId == "" {
-			log.Fatal("AZURE_SUBSCRIPTION_ID must be set")
-		}
 
 		// Handle getting the raw skus.
 		rawSkus := []*AzureSpecsApiIteratorItem{}

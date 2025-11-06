@@ -8,12 +8,21 @@ import (
 	"scraper/utils"
 )
 
+func mustSet(key string) {
+	if os.Getenv(key) == "" {
+		log.Fatalf("%s must be set", key)
+	}
+}
+
 func main() {
 	var fg utils.FunctionGroup
 
-	if os.Getenv("AWS_ACCESS_KEY_ID") == "" || os.Getenv("AWS_SECRET_ACCESS_KEY") == "" {
-		log.Fatal("AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY must be set")
-	}
+	mustSet("AWS_ACCESS_KEY_ID")
+	mustSet("AWS_SECRET_ACCESS_KEY")
+	mustSet("AZURE_TENANT_ID")
+	mustSet("AZURE_CLIENT_ID")
+	mustSet("AZURE_CLIENT_SECRET")
+	mustSet("AZURE_SUBSCRIPTION_ID")
 
 	fg.Add(aws.DoAwsScraping)
 	fg.Add(azure.DoAzureScraping)
