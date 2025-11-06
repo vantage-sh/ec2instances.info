@@ -4,6 +4,11 @@ import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
 import { Region } from "@/types";
 import { notFound } from "next/navigation";
+import makeRainbowTable from "@/utils/makeRainbowTable";
+import GCPInstanceRoot from "@/components/GCPInstanceRoot";
+import generateGcpDescription from "@/utils/generateGcpDescription";
+import loadAdvertData from "@/utils/loadAdvertData";
+import loadCurrencies from "@/utils/loadCurrencies";
 
 export const dynamic = "force-static";
 
@@ -44,13 +49,11 @@ async function handleParams(params: Promise<{ slug: string }>) {
         notFound();
     }
 
-    const description = `${instance.pretty_name} features and pricing. ${instance.vCPU} vCPUs, ${instance.memory} GiB memory. Compare with other GCP Compute Engine instances.`;
-
     return {
         instance,
         instances,
         regions,
-        description,
+        description: generateGcpDescription(instance),
     };
 }
 
@@ -69,42 +72,126 @@ export async function generateMetadata({
     };
 }
 
+function findNearestInstanceMutatesNoCleanup(
+    instances: GCPInstance[],
+    closestTo: GCPInstance,
+) {
+    instances.push(closestTo);
+    instances.sort((a, b) => {
+        // Sort by CPU, memory, and then GPU.
+        if (a.vCPU !== b.vCPU) {
+            return a.vCPU - b.vCPU;
+        }
+        if (a.memory !== b.memory) {
+            return a.memory - b.memory;
+        }
+        return (a.GPU || 0) - (b.GPU || 0);
+    });
+    const ourInstance = instances.indexOf(closestTo);
+    const left = instances[ourInstance - 1];
+    const right = instances[ourInstance + 1];
+    if (left && right) {
+        // Try and find one equality here with the closest instance.
+        if (
+            left.vCPU === closestTo.vCPU ||
+            left.memory === closestTo.memory ||
+            (left.GPU || 0) === (closestTo.GPU || 0)
+        ) {
+            return left;
+        }
+        if (
+            right.vCPU === closestTo.vCPU ||
+            right.memory === closestTo.memory ||
+            (right.GPU || 0) === (closestTo.GPU || 0)
+        ) {
+            return right;
+        }
+
+        // If this isn't possible, return the best of the two.
+        return left.vCPU === right.vCPU && left.memory === right.memory
+            ? left
+            : right;
+    }
+    return left || right;
+}
+
+function bestGcpInstanceForEachVariant(
+    instances: GCPInstance[],
+    closestTo: GCPInstance,
+) {
+    const variants: Map<string, GCPInstance | GCPInstance[]> = new Map();
+    for (const instance of instances) {
+        const itype = instance.instance_type.split("-", 2)[0];
+        let a = variants.get(itype);
+        if (!a) {
+            a = [];
+            variants.set(itype, a);
+        }
+        (a as GCPInstance[]).push(instance);
+    }
+
+    for (const [itype, instances] of variants.entries()) {
+        if ((instances as GCPInstance[]).includes(closestTo)) {
+            variants.set(itype, closestTo);
+        }
+        const best = findNearestInstanceMutatesNoCleanup(
+            instances as GCPInstance[],
+            closestTo,
+        );
+        variants.set(itype, best);
+    }
+
+    const o: { [key: string]: string } = {};
+    for (const [itype, instance] of variants.entries()) {
+        o[itype] = (instance as GCPInstance).instance_type;
+    }
+    return o;
+}
+
 export default async function Page({
     params,
 }: {
     params: Promise<{ slug: string }>;
 }) {
-    const { instance } = await handleParams(params);
+    const marketingData = await loadAdvertData;
 
-    // For now, redirect to the main GCP page
-    // TODO: Create a full GCPInstanceRoot component similar to Azure/EC2
+    const { instances, instance, regions, description } =
+        await handleParams(params);
+    const [itype] = instance.instance_type.split("-", 2);
+    const allOfInstanceType = instances
+        .filter(
+            (i) =>
+                i.instance_type.startsWith(`${itype}-`) ||
+                i.instance_type === itype,
+        )
+        .map((i) => ({
+            name: i.instance_type,
+            cpus: i.vCPU,
+            memory: i.memory || "N/A",
+        }));
+
+    const variant = itype.slice(0, 1);
+    const allOfVariant = instances.filter((i) =>
+        i.instance_type.startsWith(variant),
+    );
+    const bestOfVariants = bestGcpInstanceForEachVariant(
+        allOfVariant,
+        instance,
+    );
+
+    const compressedInstance = makeRainbowTable([{ ...instance }]);
+    const currencies = await loadCurrencies;
+
     return (
-        <div className="container mx-auto p-6">
-            <h1 className="text-3xl font-bold mb-4">{instance.pretty_name}</h1>
-            <div className="space-y-4">
-                <div>
-                    <strong>Instance Type:</strong> {instance.instance_type}
-                </div>
-                <div>
-                    <strong>vCPUs:</strong> {instance.vCPU}
-                </div>
-                <div>
-                    <strong>Memory:</strong> {instance.memory} GiB
-                </div>
-                <div>
-                    <strong>Family:</strong> {instance.family}
-                </div>
-                {instance.GPU > 0 && (
-                    <div>
-                        <strong>GPUs:</strong> {instance.GPU}
-                    </div>
-                )}
-                <div className="mt-6">
-                    <a href="/gcp" className="text-blue-600 hover:underline">
-                        ← Back to all GCP instances
-                    </a>
-                </div>
-            </div>
-        </div>
+        <GCPInstanceRoot
+            currencies={currencies}
+            rainbowTable={compressedInstance[0] as string[]}
+            compressedInstance={compressedInstance[1] as GCPInstance}
+            allOfInstanceType={allOfInstanceType}
+            regions={regions}
+            description={description}
+            bestOfVariants={bestOfVariants}
+            marketingData={marketingData}
+        />
     );
 }

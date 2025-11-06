@@ -219,6 +219,8 @@ const AzureMarketing = () => (
     </ItemsWrapper>
 );
 
+const GCPMarketing = () => <ItemsWrapper>Hello World!</ItemsWrapper>;
+
 type MarketingWrapperProps = {
     instanceType: string;
     marketingData: MarketingSchema;
@@ -232,6 +234,7 @@ const ITEMS = [
     "opensearch",
     "redshift",
     "cache",
+    "gcp",
 ] as const;
 
 function processGroup(instanceType: string) {
@@ -277,6 +280,9 @@ export default function MarketingWrapper({
             break;
         case "elasticache":
             node = <CacheMarketing />;
+            break;
+        case "gcp":
+            node = <GCPMarketing />;
             break;
         default:
             // This should fail the build

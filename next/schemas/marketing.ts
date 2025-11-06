@@ -24,6 +24,8 @@ type Promotion = {
 
 const ALLOWED_PROMOTIONS = [
     "generic",
+    "gcp-instances",
+    "gcp-home",
     "ec2-instances",
     "ec2-home",
     "cache-instances",
