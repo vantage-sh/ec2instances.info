@@ -43,6 +43,16 @@ const navItems = [
             },
         ],
     },
+    {
+        label: "GCP",
+        href: "/gcp",
+        children: [
+            {
+                label: "Compute Engine",
+                href: "/gcp",
+            },
+        ],
+    },
 ];
 
 function TranslationToolDetector({

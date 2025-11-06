@@ -214,14 +214,16 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                         hideSearch={true}
                         small={true}
                     />
-                    <FilterDropdown
-                        label={reservedLabel ?? "Reserved"}
-                        value={reservedTerm}
-                        onChange={(v) => setReservedTerm(v)}
-                        options={reservedTermOptions}
-                        hideSearch={true}
-                        small={true}
-                    />
+                    {reservedTermOptions.length > 0 && (
+                        <FilterDropdown
+                            label={reservedLabel ?? "Reserved"}
+                            value={reservedTerm}
+                            onChange={(v) => setReservedTerm(v)}
+                            options={reservedTermOptions}
+                            hideSearch={true}
+                            small={true}
+                        />
+                    )}
                     <FilterDropdown
                         label="Currency"
                         value={currency}

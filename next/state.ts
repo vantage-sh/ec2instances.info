@@ -68,7 +68,12 @@ export function useSearchTerm(pathname: string) {
 }
 
 export function useSelectedRegion(pathname: string) {
-    const defaultRegion = pathname.includes("azure") ? "us-east" : "us-east-1";
+    let defaultRegion = "us-east-1";
+    if (pathname.includes("azure")) {
+        defaultRegion = "us-east";
+    } else if (pathname.includes("gcp")) {
+        defaultRegion = "us-east4";
+    }
 
     return useGlobalStateValue("region", pathname, defaultRegion);
 }

@@ -12,6 +12,9 @@ export async function GET() {
         <loc>${"/azure"}</loc>
     </url>
     <url>
+        <loc>${"/gcp"}</loc>
+    </url>
+    <url>
         <loc>${"/rds"}</loc>
     </url>
     <url>
