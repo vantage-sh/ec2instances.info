@@ -406,3 +406,77 @@ export function generateAzureImages() {
         });
     });
 }
+
+export function generateGcpImages() {
+    const gcpInstances = JSON.parse(
+        readFileSync(
+            path.join(__dirname, "..", "..", "www", "gcp", "instances.json"),
+            "utf-8",
+        ),
+    ) as {
+        instance_type: string;
+        pretty_name: string;
+        family: string;
+        vCPU: number;
+        memory: number;
+        GPU: number;
+        GPU_memory?: number;
+        local_ssd: boolean;
+        local_ssd_size?: number;
+        shared_cpu: boolean;
+    }[];
+
+    return gcpInstances.map((instance) => {
+        if (
+            ONLY_INSTANCES.length > 0 &&
+            !ONLY_INSTANCES.includes(instance.instance_type)
+        ) {
+            return Promise.resolve();
+        }
+        return pushToWorker({
+            name: instance.pretty_name,
+            categoryHeader: `GCP Instances${
+                instance.family ? ` (${instance.family})` : ""
+            }`,
+            filename: path.join(
+                __dirname,
+                "..",
+                "public",
+                "gcp",
+                `${instance.instance_type}.png`,
+            ),
+            url: urlInject`${`/gcp/${instance.instance_type}`}`,
+            values: [
+                {
+                    name: "vCPUs",
+                    value: instance.vCPU.toString(),
+                    squareIconPath: "icons/cpu-cores.png",
+                },
+                {
+                    name: "RAM",
+                    value: `${instance.memory} GB`,
+                    squareIconPath: "icons/ram.png",
+                },
+                {
+                    name: "GPUs",
+                    value: instance.GPU
+                        ? `${instance.GPU} (${instance.GPU_memory || 0} GB)`
+                        : "0",
+                    squareIconPath: "icons/gpu.png",
+                },
+                {
+                    name: "Local SSD",
+                    value: instance.local_ssd
+                        ? `${instance.local_ssd_size || 0} GB`
+                        : "No",
+                    squareIconPath: "icons/storage.png",
+                },
+                {
+                    name: "Shared CPU",
+                    value: instance.shared_cpu ? "Yes" : "No",
+                    squareIconPath: "icons/cpu-arch.png",
+                },
+            ],
+        });
+    });
+}

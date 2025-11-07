@@ -3,6 +3,7 @@ import {
     generateAzureImages,
     generateElasticacheImages,
     generateEc2Images,
+    generateGcpImages,
     generateOpensearchImages,
     generateRdsImages,
     generateRedshiftImages,
@@ -26,6 +27,9 @@ const allPromises: Promise<void>[] = [
 
     // Azure
     ...generateAzureImages(),
+
+    // GCP
+    ...generateGcpImages(),
 ];
 
 async function main() {

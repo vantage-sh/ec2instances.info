@@ -19,6 +19,9 @@ import generateOpensearchFamilyIndexes from "./generateOpensearchFamilyIndexes";
 import generateAzureFamilyIndexes from "./generateAzureFamilyIndexes";
 import { generateAzureIndexes } from "./generateAzureIndexes";
 import generateAzureInstances from "./generateAzureInstances";
+import generateGcpFamilyIndexes from "./generateGcpFamilyIndexes";
+import { generateGcpIndexes } from "./generateGcpIndexes";
+import generateGcpInstances from "./generateGcpInstances";
 function generateRdsDescription(
     instance: any,
     ondemandCost: string | undefined,
@@ -230,6 +233,30 @@ async function main() {
     }
     await Promise.all(promises);
     console.log("Generated instances for azure/vm/*.md");
+
+    await mkdir("./public/gcp/families", { recursive: true });
+    familyIndexes = await generateGcpFamilyIndexes("/gcp");
+    for (const [family, index] of familyIndexes.entries()) {
+        await writeFile(`./public/gcp/families/${family}.md`, index);
+    }
+    console.log("Generated gcp/families/*.md");
+
+    const gcpIndexes = await generateGcpIndexes("/gcp");
+    for (const [slug, index] of gcpIndexes.entries()) {
+        await writeFile(`./public/gcp/${slug}.md`, index);
+    }
+    console.log("Generated indexes for gcp/*.md");
+
+    const gcpInstances = await generateGcpInstances();
+    promises.length = 0;
+    for (const [slug, index] of gcpInstances.entries()) {
+        promises.push(writeFile(`./public/gcp/${slug}.md`, index.root));
+        for (const [region, i] of index.regions.entries()) {
+            promises.push(writeFile(`./public/gcp/${slug}-${region}.md`, i));
+        }
+    }
+    await Promise.all(promises);
+    console.log("Generated instances for gcp/*.md");
 }
 
 main();
