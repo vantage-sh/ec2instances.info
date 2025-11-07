@@ -175,11 +175,12 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 
 			rk := regionKey{region: key.region, isSpot: key.isSpot, isWindows: key.isWindows}
 			pricing := regionPricing[rk]
-			
-			if key.resourceType == "core" {
+
+			switch key.resourceType {
+			case "core":
 				pricing.corePrice = hourlyPrice
 				pricing.hasCores = true
-			} else if key.resourceType == "ram" {
+			case "ram":
 				pricing.ramPrice = hourlyPrice
 				pricing.hasRAM = true
 			}
