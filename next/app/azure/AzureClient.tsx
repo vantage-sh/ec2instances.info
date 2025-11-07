@@ -36,15 +36,15 @@ export default function AzureClient({
             compressedInstances.unshift(rainbowTable);
             return compressedInstances as AzureInstance[];
         }
-        return compressedInstances.map((instance) =>
-            // @ts-expect-error: This is wrong, but close enough to work.
-            dynamicallyDecompress(instance as AzureInstance, rainbowTable),
+        return compressedInstances.map(
+            (instance) =>
+                // @ts-expect-error: This is wrong, but close enough to work.
+                dynamicallyDecompress(instance, rainbowTable) as AzureInstance,
         );
     }, [compressedInstances]);
 
     const allInstances = useInstanceData(
         compressedDataPathTemplate,
-        // @ts-expect-error: This is wrong, but close enough to work.
         initialInstances,
     );
 

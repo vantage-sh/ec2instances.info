@@ -38,7 +38,7 @@ export default function GCPClient({
         }
         return compressedInstances.map((instance) =>
             // @ts-expect-error: This is wrong, but close enough to work.
-            dynamicallyDecompress(instance as GCPInstance, rainbowTable),
+            dynamicallyDecompress(instance, rainbowTable),
         );
     }, [compressedInstances]);
 
