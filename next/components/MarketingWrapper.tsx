@@ -219,7 +219,28 @@ const AzureMarketing = () => (
     </ItemsWrapper>
 );
 
-const GCPMarketing = () => <ItemsWrapper>Hello World!</ItemsWrapper>;
+const GCPMarketing = () => (
+    <ItemsWrapper>
+        <Item
+            link="https://www.vantage.sh/blog/remote-mcp?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=gcp"
+            image="https://assets.vantage.sh/blog/remote-mcp/remote-mcp.png"
+            title="The Vantage Remote MCP Server: Use AI to Analyze Your Cost and Usage Data"
+            description="Ask questions about your organization's previous and current cloud cost spend, cost tagging, provider integrations, and more."
+        />
+        <Item
+            link="https://www.vantage.sh/blog/vantage-launches-gcp-active-resources-cost-recs?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=gcp"
+            image="https://assets.vantage.sh/blog/vantage-launches-gcp-active-resources-cost-recs/vantage-launches-gcp-active-resources-cost-recs.jpg"
+            title="Vantage Supports GCP Active Resources and Cost Recommendations"
+            description="Save on GCP with GCP active resources and with cost recommendations for GCP compute resources."
+        />
+        <Item
+            link="https://www.vantage.sh/blog/anthropic-support?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=gcp"
+            image="https://assets.vantage.sh/blog/anthropic-support/anthropic-support.jpg"
+            title="Vantage Launches Support for Anthropic Costs"
+            description="Track Claude model usage and costs alongside your other providers."
+        />
+    </ItemsWrapper>
+);
 
 type MarketingWrapperProps = {
     instanceType: string;

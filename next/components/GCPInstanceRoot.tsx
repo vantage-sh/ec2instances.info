@@ -28,11 +28,6 @@ type GCPInstanceRootProps = {
     currencies: CurrencyItem[];
 };
 
-const reservedTermOptions: [string, string][] = [
-    ["commitment1yr", "1 Year Commitment"],
-    ["commitment3yr", "3 Year Commitment"],
-];
-
 const osOptions: [string, string][] = [
     ["linux", "Linux"],
     ["windows", "Windows"],
@@ -82,9 +77,9 @@ export default function GCPInstanceRoot({
                             defaultOs="linux"
                             removeSpot={false}
                             storeOsNameRatherThanId={false}
-                            reservedTermOptions={reservedTermOptions}
+                            reservedTermOptions={[]}
                             osOptions={osOptions}
-                            defaultRegion="us-east1"
+                            defaultRegion="us-east4"
                             useSpotMin={true}
                             setPathSuffix={setPathSuffix}
                         />

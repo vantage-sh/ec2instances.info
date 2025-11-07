@@ -57,7 +57,7 @@ export default function GCPClient({
         <>
             <Advert
                 marketingData={marketingData}
-                instanceGroup="generic"
+                instanceGroup="gcp-home"
                 gpu={false}
             />
             <main className={`${full} overflow-y-hidden flex flex-col`}>
@@ -71,6 +71,7 @@ export default function GCPClient({
                         china: {},
                     }}
                     reservedTermOptions={[]}
+                    hideEcu={true}
                 />
                 <div className="flex-1 min-h-0">
                     <InstanceTable

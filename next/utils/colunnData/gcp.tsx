@@ -52,6 +52,8 @@ const initialColumnsArr = [
     ["shared_cpu", false],
     ["linux-ondemand", true],
     ["linux-spot", true],
+    ["windows-ondemand", true],
+    ["windows-spot", true],
 ] as const;
 
 export const initialColumnsValue: {
@@ -83,6 +85,8 @@ export function makePrettyNames<V>(
         makeColumnOption("shared_cpu", "Shared CPU"),
         makeColumnOption("linux-ondemand", "Linux On-Demand"),
         makeColumnOption("linux-spot", "Linux Spot"),
+        makeColumnOption("windows-ondemand", "Windows On-Demand"),
+        makeColumnOption("windows-spot", "Windows Spot"),
     ];
 }
 
@@ -379,6 +383,30 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
                 (pricing) => pricing?.linux?.spot,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header: "Windows On Demand cost",
+            id: "windows-ondemand",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.windows?.ondemand,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header: "Windows Spot cost",
+            id: "windows-spot",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.windows?.spot,
                 currency,
             ),
         },

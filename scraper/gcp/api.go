@@ -187,20 +187,36 @@ func fetchPricing(apiKey string) (map[string]PriceInfo, error) {
 // "Spot Preemptible E2 Custom Instance Core running in Paris"
 // "Compute optimized Core running in Americas"
 // "Sole Tenancy Instance RAM running in Jakarta"
-var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2|n2d|e2|e2a|c2|c2d|m1|m2|m3|m4|t2d|t2a|a2|a3|g2|h3|c3|c3d|z3|c4|n4).*instance\s+(core|ram)`)
+// "Licensing Fee for Windows Server 2012 BYOL (CPU cost)"
+// "Licensing Fee for Windows Server 2012 BYOL (RAM cost)"
+var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2|n2d|e2|e2a|c2|c2d|m1|m2|m3|m4|t2d|t2a|a2|a3|g2|h3|c3|c3d|z3|c4|n4).*(?:instance\s+(core|ram)|\((?:cpu|ram)\s+cost\))`)
 
-func parseMachineTypeFromSKU(sku SKU) (machineFamily string, resourceType string, region string, isSpot bool) {
+func parseMachineTypeFromSKU(sku SKU) (machineFamily string, resourceType string, region string, isSpot bool, isWindows bool) {
 	displayName := sku.DisplayName
 
 	// Check if it's spot/preemptible
 	isSpot = strings.Contains(strings.ToLower(displayName), "preemptible") ||
 		strings.Contains(strings.ToLower(displayName), "spot")
 
+	// Check if it's Windows pricing
+	isWindows = strings.Contains(strings.ToLower(displayName), "windows")
+
 	// Parse machine family and resource type
 	matches := machineTypeRegex.FindStringSubmatch(displayName)
-	if len(matches) >= 3 {
+	if len(matches) >= 2 {
 		machineFamily = strings.ToUpper(matches[1])
-		resourceType = strings.ToLower(matches[2])
+		// Check if we have a captured resource type (from instance core/ram)
+		if len(matches) >= 3 && matches[2] != "" {
+			resourceType = strings.ToLower(matches[2])
+		} else {
+			// Parse from licensing fee format "(CPU cost)" or "(RAM cost)"
+			displayLower := strings.ToLower(displayName)
+			if strings.Contains(displayLower, "cpu cost") || strings.Contains(displayLower, "core") {
+				resourceType = "core"
+			} else if strings.Contains(displayLower, "ram cost") {
+				resourceType = "ram"
+			}
+		}
 	}
 
 	// Get region from geo taxonomy - fix the condition
@@ -219,8 +235,17 @@ func calculateHourlyPrice(price PriceInfo) float64 {
 
 	tier := price.Rate.Tiers[0]
 	
-	// Convert nanos to dollars
-	dollars := float64(tier.ListPrice.Nanos) / 1e9
+	// Convert to dollars - check both Value (string) and Nanos fields
+	var dollars float64
+	if tier.ListPrice.Value != "" {
+		// Parse the value string
+		if parsed, err := strconv.ParseFloat(tier.ListPrice.Value, 64); err == nil {
+			dollars = parsed
+		}
+	} else {
+		// Convert nanos to dollars
+		dollars = float64(tier.ListPrice.Nanos) / 1e9
+	}
 	
 	// GCP pricing is often per hour, but check the unit
 	unit := strings.ToLower(price.Rate.Unit.Unit)

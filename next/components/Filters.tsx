@@ -32,6 +32,7 @@ interface FiltersProps<DataKey extends keyof typeof columnData> {
     }[];
     currencies: CurrencyItem[];
     ecuRename?: string;
+    hideEcu?: boolean;
     reservedLabel?: string;
 }
 
@@ -42,6 +43,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
     ecuRename,
     reservedTermOptions,
     reservedLabel,
+    hideEcu,
 }: FiltersProps<DataKey>) {
     const pathname = usePathname();
     const [columnVisibility, setColumnVisibility] =
@@ -172,6 +174,11 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                 break;
             }
         }
+    }
+    if (hideEcu) {
+        pricingUnitOptionsCpy = pricingUnitOptionsCpy.filter(
+            (option) => option.value !== "ecu",
+        );
     }
 
     return (

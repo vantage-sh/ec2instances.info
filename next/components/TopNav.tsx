@@ -36,22 +36,10 @@ const navItems = [
     {
         label: "Azure",
         href: "/azure",
-        children: [
-            {
-                label: "VM",
-                href: "/azure",
-            },
-        ],
     },
     {
         label: "GCP",
         href: "/gcp",
-        children: [
-            {
-                label: "Compute Engine",
-                href: "/gcp",
-            },
-        ],
     },
 ];
 
@@ -85,6 +73,73 @@ function TranslationToolDetector({
         <span ref={spanRef} className={className}>
             {text}
         </span>
+    );
+}
+
+type NavItemProps = {
+    item: {
+        label: string;
+        href: string;
+        children?: {
+            label: string;
+            href: string;
+        }[];
+    };
+    currentPath: string;
+};
+
+function NavItem({ item, currentPath }: NavItemProps) {
+    let anySelected = false;
+    const children =
+        item.children &&
+        item.children.map((child) => {
+            const selected =
+                currentPath === child.href ||
+                currentPath.includes(child.label.toLowerCase());
+            if (selected) anySelected = true;
+            return (
+                <TranslationFriendlyLink
+                    aria-current={selected}
+                    className={`font-normal text-sm px-2 py-1 pb-2 rounded rounded-b-none ${
+                        selected
+                            ? "bg-white text-black font-semibold"
+                            : "text-gray-4"
+                    }`}
+                    key={child.label}
+                    href={child.href}
+                >
+                    {child.label}
+                </TranslationFriendlyLink>
+            );
+        });
+    if (
+        !anySelected &&
+        currentPath.startsWith(item.href) &&
+        item.href !== "/"
+    ) {
+        anySelected = true;
+    }
+
+    return (
+        <div
+            className="flex items-center justify-start gap-4 relative top-1.5 ml-2"
+            key={item.label}
+        >
+            <TranslationFriendlyLink
+                className="font-medium text-gray-4 text-sm"
+                href={item.href}
+                aria-selected={anySelected}
+            >
+                <span className={anySelected ? "font-bold" : "text-gray-100"}>
+                    {item.label}
+                </span>
+            </TranslationFriendlyLink>
+            {children && (
+                <div className="flex items-center justify-start gap-4 rounded-md rounded-b-none bg-black/30 not-lg:hidden p-1 pb-0">
+                    {children}
+                </div>
+            )}
+        </div>
     );
 }
 
@@ -137,41 +192,11 @@ export default function TopNav() {
                     </div>
                 </TranslationFriendlyLink>
                 {navItems.map((item) => (
-                    <div
-                        className="flex items-center justify-start gap-4 relative top-1.5 ml-2"
+                    <NavItem
                         key={item.label}
-                    >
-                        <TranslationFriendlyLink
-                            className="font-medium text-gray-4 text-sm"
-                            href={item.href}
-                        >
-                            {item.label}
-                        </TranslationFriendlyLink>
-                        <div className="flex items-center justify-start gap-4 rounded-md rounded-b-none bg-black/30 not-lg:hidden p-1 pb-0">
-                            {item.children &&
-                                item.children.map((child) => {
-                                    const selected =
-                                        currentPath === child.href ||
-                                        currentPath.includes(
-                                            child.label.toLowerCase(),
-                                        );
-                                    return (
-                                        <TranslationFriendlyLink
-                                            aria-current={selected}
-                                            className={`font-normal text-sm px-2 py-1 pb-2 rounded rounded-b-none ${
-                                                selected
-                                                    ? "bg-white text-black font-semibold"
-                                                    : "text-gray-4"
-                                            }`}
-                                            key={child.label}
-                                            href={child.href}
-                                        >
-                                            {child.label}
-                                        </TranslationFriendlyLink>
-                                    );
-                                })}
-                        </div>
-                    </div>
+                        item={item}
+                        currentPath={currentPath}
+                    />
                 ))}
             </div>
             <div className="flex items-center justify-end gap-4 not-md:hidden overflow-hidden">
