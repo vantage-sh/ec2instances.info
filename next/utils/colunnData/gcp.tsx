@@ -26,9 +26,17 @@ export type GCPInstance = {
     vCPU: number;
     memory: number;
     GPU: number;
+    GPU_model?: string;
+    GPU_memory?: number;
     family: string;
     network_performance: string;
     generation: string;
+    local_ssd: boolean;
+    local_ssd_size?: number;
+    shared_cpu: boolean;
+    compute_optimized?: boolean;
+    memory_optimized?: boolean;
+    accelerator_type?: string;
 };
 
 const initialColumnsArr = [
@@ -38,6 +46,10 @@ const initialColumnsArr = [
     ["vCPU", true],
     ["memory_per_vcpu", false],
     ["GPU", false],
+    ["network_performance", false],
+    ["generation", false],
+    ["local_ssd", false],
+    ["shared_cpu", false],
     ["linux-ondemand", true],
     ["linux-spot", true],
 ] as const;
@@ -65,6 +77,10 @@ export function makePrettyNames<V>(
         makeColumnOption("vCPU", "vCPUs"),
         makeColumnOption("memory_per_vcpu", "Memory per vCPU"),
         makeColumnOption("GPU", "GPUs"),
+        makeColumnOption("network_performance", "Network Performance"),
+        makeColumnOption("generation", "Generation"),
+        makeColumnOption("local_ssd", "Local SSD"),
+        makeColumnOption("shared_cpu", "Shared CPU"),
         makeColumnOption("linux-ondemand", "Linux On-Demand"),
         makeColumnOption("linux-spot", "Linux Spot"),
     ];
@@ -287,6 +303,60 @@ export const columnsGen = (
             size: 160,
             id: "GPU",
             filterFn: expr,
+        },
+        {
+            accessorKey: "network_performance",
+            header: "Network Performance",
+            size: 160,
+            id: "network_performance",
+            sortingFn: "alphanumeric",
+            filterFn: regex({ accessorKey: "network_performance" }),
+            cell: (info) => info.getValue() as string,
+        },
+        {
+            accessorKey: "generation",
+            header: "Generation",
+            size: 160,
+            id: "generation",
+            sortingFn: "alphanumeric",
+            filterFn: regex({ accessorKey: "generation" }),
+            cell: (info) => info.getValue() as string,
+        },
+        {
+            accessorKey: "local_ssd",
+            header: "Local SSD",
+            size: 120,
+            id: "local_ssd",
+            filterFn: (row, _, filterValue) => {
+                const value = row.original.local_ssd;
+                try {
+                    return exprCompiler(filterValue)(
+                        value ? 1 : 0,
+                        value ? "Yes" : "No",
+                    );
+                } catch {
+                    return true;
+                }
+            },
+            cell: (info) => ((info.getValue() as boolean) ? "Yes" : "No"),
+        },
+        {
+            accessorKey: "shared_cpu",
+            header: "Shared CPU",
+            size: 120,
+            id: "shared_cpu",
+            filterFn: (row, _, filterValue) => {
+                const value = row.original.shared_cpu;
+                try {
+                    return exprCompiler(filterValue)(
+                        value ? 1 : 0,
+                        value ? "Yes" : "No",
+                    );
+                } catch {
+                    return true;
+                }
+            },
+            cell: (info) => ((info.getValue() as boolean) ? "Yes" : "No"),
         },
         {
             accessorKey: "pricing",
