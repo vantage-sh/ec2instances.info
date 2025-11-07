@@ -1,10 +1,9 @@
 package gcp
 
 import (
-	"encoding/json"
-	"fmt"
 	"log"
 	"os"
+	"scraper/utils"
 	"sort"
 	"strconv"
 	"strings"
@@ -303,21 +302,6 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 	return instances
 }
 
-// Save instances to JSON file
-func saveInstances(instances []*GCPInstance, filename string) error {
-	data, err := json.MarshalIndent(instances, "", " ")
-	if err != nil {
-		return fmt.Errorf("failed to marshal instances: %w", err)
-	}
-
-	if err := os.WriteFile(filename, data, 0644); err != nil {
-		return fmt.Errorf("failed to write file: %w", err)
-	}
-
-	log.Printf("Saved %d GCP instances to %s", len(instances), filename)
-	return nil
-}
-
 // Main scraping function
 func DoGCPScraping() {
 	apiKey := os.Getenv("GCP_API_KEY")
@@ -353,9 +337,6 @@ func DoGCPScraping() {
 	log.Printf("Processed %d unique GCP instance types", len(instances))
 
 	// Save to file
-	if err := saveInstances(instances, "www/gcp/instances.json"); err != nil {
-		log.Fatal("Failed to save instances:", err)
-	}
-
+	utils.SaveInstances(instances, "www/gcp/instances.json")
 	log.Println("GCP scraping completed successfully!")
 }
