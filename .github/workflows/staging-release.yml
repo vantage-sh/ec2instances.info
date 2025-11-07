@@ -48,6 +48,7 @@ jobs:
                   ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" staging-opensearch ./www/opensearch/instances.json
                   ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" staging-redshift ./www/redshift/instances.json
                   ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" staging-azure ./www/azure/instances.json
+                  ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" staging-gcp ./www/gcp/instances.json
 
             - name: Deploy to the staging bucket
               run: cd deployment && npm ci && npm run start

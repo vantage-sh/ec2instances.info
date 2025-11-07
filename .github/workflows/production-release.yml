@@ -49,6 +49,7 @@ jobs:
                   ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" opensearch ./www/opensearch/instances.json
                   ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" redshift ./www/redshift/instances.json
                   ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" azure ./www/azure/instances.json
+                  ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" gcp ./www/gcp/instances.json
 
             - name: Deploy to the production bucket
               run: cd deployment && npm ci && npm run start
