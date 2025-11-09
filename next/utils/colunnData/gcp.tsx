@@ -74,6 +74,7 @@ export function makePrettyNames<V>(
     ) => V,
 ) {
     return [
+        makeColumnOption("pretty_name", "Instance Name"),
         makeColumnOption("instance_type", "API Name"),
         makeColumnOption("memory", "Instance Memory"),
         makeColumnOption("vCPU", "vCPUs"),
@@ -243,6 +244,12 @@ export const columnsGen = (
 ): ColumnDef<GCPInstance>[] => {
     return [
         {
+            accessorKey: "pretty_name",
+            id: "pretty_name",
+            header: "Instance Name",
+            sortingFn: "alphanumeric",
+        },
+        {
             accessorKey: "instance_type",
             id: "instance_type",
             header: "API Name",
@@ -254,7 +261,7 @@ export const columnsGen = (
                         onClick={(e) => e.stopPropagation()}
                         href={`/gcp/${value}`}
                     >
-                        {info.row.original.pretty_name}
+                        {info.row.original.instance_type}
                     </RegionLinkPreloader>
                 );
             },
