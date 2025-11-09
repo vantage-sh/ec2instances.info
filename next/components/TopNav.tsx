@@ -128,7 +128,7 @@ function NavItem({ item, currentPath }: NavItemProps) {
             <TranslationFriendlyLink
                 className="font-medium text-gray-4 text-sm"
                 href={item.href}
-                aria-selected={anySelected}
+                aria-current={anySelected}
             >
                 <span className={anySelected ? "font-bold" : "text-gray-100"}>
                     {item.label}

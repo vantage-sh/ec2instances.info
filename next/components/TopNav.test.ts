@@ -3,6 +3,8 @@ import componentTests from "@/utils/testing/componentTests";
 import TopNav from "./TopNav";
 import { RenderResult } from "@testing-library/react";
 
+const AWS_PATHS = ["/", "/rds", "/cache", "/redshift", "/opensearch"];
+
 function runSelectedTest(pathLitUp: string) {
     return (component: RenderResult) => {
         const currents =
@@ -13,6 +15,11 @@ function runSelectedTest(pathLitUp: string) {
             ariaCurrent: c.getAttribute("aria-current") === "true",
         }));
         const expected = [
+            {
+                label: "AWS",
+                href: "/",
+                ariaCurrent: AWS_PATHS.includes(pathLitUp),
+            },
             {
                 label: "EC2",
                 href: "/",
@@ -39,9 +46,14 @@ function runSelectedTest(pathLitUp: string) {
                 ariaCurrent: pathLitUp === "/opensearch",
             },
             {
-                label: "VM",
+                label: "Azure",
                 href: "/azure",
                 ariaCurrent: pathLitUp === "/azure",
+            },
+            {
+                label: "GCP",
+                href: "/gcp",
+                ariaCurrent: pathLitUp === "/gcp",
             },
         ];
         expect(formatted).toEqual(expected);
@@ -198,6 +210,29 @@ componentTests(
                 },
             },
             test: runSelectedTest("/azure"),
+        },
+
+        // GCP
+
+        {
+            name: "GCP lights up GCP when on table page",
+            props: {},
+            patch: {
+                before: () => {
+                    mockPath = "/gcp";
+                },
+            },
+            test: runSelectedTest("/gcp"),
+        },
+        {
+            name: "GCP lights up GCP when on instance page",
+            props: {},
+            patch: {
+                before: () => {
+                    mockPath = "/gcp/123";
+                },
+            },
+            test: runSelectedTest("/gcp"),
         },
     ],
     TopNav,
