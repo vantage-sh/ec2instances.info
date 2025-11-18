@@ -31,8 +31,16 @@ function processToasts(toasts: Toasts) {
             continue;
         }
 
+        // Get the title and description.
+        let title = t.message;
+        let description: string | undefined = undefined;
+        if (title.includes("\n")) {
+            [title, description] = title.split("\n", 2);
+        }
+
         // Show the toast
-        toast(t.message, {
+        toast(title, {
+            description,
             onDismiss: () => {
                 setUnlessBlockingLocalStorage(
                     `toastDismissed-${t.campaign_id}`,
