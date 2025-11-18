@@ -234,7 +234,7 @@ func calculateHourlyPrice(price PriceInfo) float64 {
 	}
 
 	tier := price.Rate.Tiers[0]
-	
+
 	// Convert to dollars - check both Value (string) and Nanos fields
 	var dollars float64
 	if tier.ListPrice.Value != "" {
@@ -246,30 +246,30 @@ func calculateHourlyPrice(price PriceInfo) float64 {
 		// Convert nanos to dollars
 		dollars = float64(tier.ListPrice.Nanos) / 1e9
 	}
-	
+
 	// GCP pricing is often per hour, but check the unit
 	unit := strings.ToLower(price.Rate.Unit.Unit)
 	if strings.Contains(unit, "month") || strings.Contains(unit, "mo") {
 		// Convert monthly to hourly (assuming 730 hours per month)
 		dollars = dollars / 730
 	}
-	
+
 	return dollars
 }
 
 // Region name mapping
 var gcpRegionNames = map[string]string{
-	"us-central1":       "Iowa",
-	"us-east1":          "South Carolina",
-	"us-east4":          "Northern Virginia",
-	"us-east5":          "Columbus",
-	"us-east7":          "Alabama",
-	"us-south1":         "Dallas",
-	"us-west1":          "Oregon",
-	"us-west2":          "Los Angeles",
-	"us-west3":          "Salt Lake City",
-	"us-west4":          "Las Vegas",
-	"us-west8":          "Phoenix",
+	"us-central1":             "Iowa",
+	"us-east1":                "South Carolina",
+	"us-east4":                "Northern Virginia",
+	"us-east5":                "Columbus",
+	"us-east7":                "Alabama",
+	"us-south1":               "Dallas",
+	"us-west1":                "Oregon",
+	"us-west2":                "Los Angeles",
+	"us-west3":                "Salt Lake City",
+	"us-west4":                "Las Vegas",
+	"us-west8":                "Phoenix",
 	"northamerica-northeast1": "Montreal",
 	"northamerica-northeast2": "Toronto",
 	"northamerica-south1":     "Mexico",
@@ -329,7 +329,7 @@ var gcpMachineSpecs = map[string]struct {
 	"n1-standard-32": {32, 120, "General purpose"},
 	"n1-standard-64": {64, 240, "General purpose"},
 	"n1-standard-96": {96, 360, "General purpose"},
-	
+
 	// N1 High Memory
 	"n1-highmem-2":  {2, 13, "Memory optimized"},
 	"n1-highmem-4":  {4, 26, "Memory optimized"},
@@ -338,7 +338,7 @@ var gcpMachineSpecs = map[string]struct {
 	"n1-highmem-32": {32, 208, "Memory optimized"},
 	"n1-highmem-64": {64, 416, "Memory optimized"},
 	"n1-highmem-96": {96, 624, "Memory optimized"},
-	
+
 	// N1 High CPU
 	"n1-highcpu-2":  {2, 1.8, "Compute optimized"},
 	"n1-highcpu-4":  {4, 3.6, "Compute optimized"},
@@ -347,7 +347,7 @@ var gcpMachineSpecs = map[string]struct {
 	"n1-highcpu-32": {32, 28.8, "Compute optimized"},
 	"n1-highcpu-64": {64, 57.6, "Compute optimized"},
 	"n1-highcpu-96": {96, 86.4, "Compute optimized"},
-	
+
 	// N2 Standard
 	"n2-standard-2":   {2, 8, "General purpose"},
 	"n2-standard-4":   {4, 16, "General purpose"},
@@ -359,7 +359,7 @@ var gcpMachineSpecs = map[string]struct {
 	"n2-standard-80":  {80, 320, "General purpose"},
 	"n2-standard-96":  {96, 384, "General purpose"},
 	"n2-standard-128": {128, 512, "General purpose"},
-	
+
 	// N2D Standard (AMD)
 	"n2d-standard-2":   {2, 8, "General purpose"},
 	"n2d-standard-4":   {4, 16, "General purpose"},
@@ -372,21 +372,21 @@ var gcpMachineSpecs = map[string]struct {
 	"n2d-standard-96":  {96, 384, "General purpose"},
 	"n2d-standard-128": {128, 512, "General purpose"},
 	"n2d-standard-224": {224, 896, "General purpose"},
-	
+
 	// E2 Standard (Cost-optimized)
 	"e2-standard-2":  {2, 8, "General purpose"},
 	"e2-standard-4":  {4, 16, "General purpose"},
 	"e2-standard-8":  {8, 32, "General purpose"},
 	"e2-standard-16": {16, 64, "General purpose"},
 	"e2-standard-32": {32, 128, "General purpose"},
-	
+
 	// C2 Compute-optimized
 	"c2-standard-4":  {4, 16, "Compute optimized"},
 	"c2-standard-8":  {8, 32, "Compute optimized"},
 	"c2-standard-16": {16, 64, "Compute optimized"},
 	"c2-standard-30": {30, 120, "Compute optimized"},
 	"c2-standard-60": {60, 240, "Compute optimized"},
-	
+
 	// C2D Compute-optimized (AMD)
 	"c2d-standard-2":   {2, 8, "Compute optimized"},
 	"c2d-standard-4":   {4, 16, "Compute optimized"},
@@ -395,24 +395,24 @@ var gcpMachineSpecs = map[string]struct {
 	"c2d-standard-32":  {32, 128, "Compute optimized"},
 	"c2d-standard-56":  {56, 224, "Compute optimized"},
 	"c2d-standard-112": {112, 448, "Compute optimized"},
-	
+
 	// M1 Memory-optimized
 	"m1-ultramem-40":  {40, 961, "Memory optimized"},
 	"m1-ultramem-80":  {80, 1922, "Memory optimized"},
 	"m1-ultramem-160": {160, 3844, "Memory optimized"},
 	"m1-megamem-96":   {96, 1433.6, "Memory optimized"},
-	
+
 	// M2 Memory-optimized
 	"m2-ultramem-208": {208, 5888, "Memory optimized"},
 	"m2-ultramem-416": {416, 11776, "Memory optimized"},
 	"m2-megamem-416":  {416, 5888, "Memory optimized"},
-	
+
 	// T2D Shared-core (burstable)
 	"t2d-standard-1": {1, 4, "General purpose"},
 	"t2d-standard-2": {2, 8, "General purpose"},
 	"t2d-standard-4": {4, 16, "General purpose"},
 	"t2d-standard-8": {8, 32, "General purpose"},
-	
+
 	// T2A Shared-core (ARM)
 	"t2a-standard-1": {1, 4, "General purpose"},
 	"t2a-standard-2": {2, 8, "General purpose"},
@@ -426,10 +426,10 @@ func createPrettyName(instanceType string) string {
 	if len(parts) < 2 {
 		return instanceType
 	}
-	
+
 	family := strings.ToUpper(parts[0])
 	variant := parts[1]
-	
+
 	var prettyVariant string
 	switch variant {
 	case "standard":
@@ -445,7 +445,7 @@ func createPrettyName(instanceType string) string {
 	default:
 		prettyVariant = strings.Title(variant)
 	}
-	
+
 	if len(parts) > 2 {
 		return fmt.Sprintf("%s %s %s", family, prettyVariant, strings.Join(parts[2:], " "))
 	}

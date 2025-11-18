@@ -21,15 +21,15 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 		isWindows    bool
 		resourceType string
 	}
-	
+
 	skuData := make(map[skuKey]PriceInfo)
-	
+
 	// Store Windows license fees separately (they're global, not region-specific)
 	type windowsLicenseType struct {
 		resourceType string // "core" or "ram"
 	}
 	windowsLicenses := make(map[windowsLicenseType]PriceInfo)
-	
+
 	// Debug counters
 	instanceSKUCount := 0
 	parsedSKUCount := 0
@@ -38,14 +38,14 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 
 	for _, sku := range skus {
 		displayLower := strings.ToLower(sku.DisplayName)
-		
+
 		// Check for Windows Server licensing fees (generic, apply to all instances)
 		// Look for patterns like "Licensing Fee for Windows Server 2016 Datacenter Edition (CPU cost)"
 		// Prefer Datacenter Edition over BYOL (BYOL has $0 cost)
 		if strings.Contains(displayLower, "licensing fee for windows server") &&
-		   (strings.Contains(displayLower, "cpu cost)") || strings.Contains(displayLower, "ram cost)")) &&
-		   !strings.Contains(displayLower, "byol") {  // Skip BYOL - it's $0
-			
+			(strings.Contains(displayLower, "cpu cost)") || strings.Contains(displayLower, "ram cost)")) &&
+			!strings.Contains(displayLower, "byol") { // Skip BYOL - it's $0
+
 			// Determine resource type
 			var resourceType string
 			if strings.Contains(displayLower, "cpu cost)") {
@@ -53,7 +53,7 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 			} else if strings.Contains(displayLower, "ram cost)") {
 				resourceType = "ram"
 			}
-			
+
 			if resourceType != "" {
 				if price, hasPricing := pricing[sku.SkuId]; hasPricing {
 					key := windowsLicenseType{
@@ -64,13 +64,13 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 					windowsSKUCount++
 				}
 			}
-			continue  // Don't process as instance SKU
+			continue // Don't process as instance SKU
 		}
-		
+
 		// Process both instance SKUs and Windows licensing SKUs
 		isInstanceSKU := strings.Contains(displayLower, "instance")
 		isWindowsLicense := strings.Contains(displayLower, "licensing fee for windows")
-		
+
 		if !isInstanceSKU && !isWindowsLicense {
 			continue
 		}
@@ -85,13 +85,13 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 		if machineFamily == "" || resourceType == "" || region == "" {
 			// Log failed parse for debugging
 			if parsedSKUCount < 5 {
-				log.Printf("Failed to parse SKU: family='%s', type='%s', region='%s', windows=%v from '%s'", 
+				log.Printf("Failed to parse SKU: family='%s', type='%s', region='%s', windows=%v from '%s'",
 					machineFamily, resourceType, region, isWindows, sku.DisplayName)
 			}
 			continue
 		}
 		parsedSKUCount++
-		
+
 		// Track Windows SKUs
 		if isWindows {
 			windowsSKUCount++
@@ -119,7 +119,7 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 			isWindows:    isWindows,
 			resourceType: resourceType,
 		}
-		
+
 		skuData[key] = price
 	}
 
@@ -147,7 +147,7 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 		// Add pricing data for each region
 		// Extract machine family from instance type (e.g., "n2" from "n2-standard-4")
 		machineFamily := strings.ToUpper(strings.Split(instanceType, "-")[0])
-		
+
 		// Group pricing by region, spot status, and OS
 		type regionKey struct {
 			region    string
@@ -160,7 +160,7 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 			hasCores  bool
 			hasRAM    bool
 		})
-		
+
 		for key, priceInfo := range skuData {
 			if key.machineType != machineFamily {
 				continue
@@ -183,20 +183,20 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 				pricing.ramPrice = hourlyPrice
 				pricing.hasRAM = true
 			}
-			
+
 			regionPricing[rk] = pricing
 		}
-		
+
 		// Now calculate total instance pricing
 		for rk, pricing := range regionPricing {
 			// We need both cores and RAM pricing to calculate total
 			if !pricing.hasCores || !pricing.hasRAM {
 				continue
 			}
-			
+
 			// Total price = (vCPUs * core price) + (memory GB * RAM price)
 			totalPrice := (float64(specs.vcpu) * pricing.corePrice) + (specs.memory * pricing.ramPrice)
-			
+
 			if totalPrice == 0 {
 				continue
 			}
@@ -211,7 +211,7 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 			if rk.isWindows {
 				os = "windows"
 			}
-			
+
 			var pricingData *GCPPricingData
 			if existing, ok := instance.Pricing[rk.region][os].(*GCPPricingData); ok {
 				pricingData = existing
@@ -238,56 +238,56 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 			matchedInstances++
 		}
 	}
-	
+
 	// Now add Windows pricing to all instances
 	windowsInstanceCount := 0
-	
+
 	for _, instance := range instances {
 		// Check if we have Windows license fees (global, not region-specific)
 		coreKey := windowsLicenseType{resourceType: "core"}
 		ramKey := windowsLicenseType{resourceType: "ram"}
-		
+
 		coreLicense, hasCoreLicense := windowsLicenses[coreKey]
 		ramLicense, hasRamLicense := windowsLicenses[ramKey]
-		
+
 		if !hasCoreLicense {
-			continue  // At minimum need core pricing
+			continue // At minimum need core pricing
 		}
-		
+
 		// Calculate Windows license cost (same for all regions)
 		coreLicensePrice := calculateHourlyPrice(coreLicense)
 		ramLicensePrice := 0.0
 		if hasRamLicense {
 			ramLicensePrice = calculateHourlyPrice(ramLicense)
 		}
-		
+
 		if coreLicensePrice == 0 {
-			continue  // Need at least core pricing
+			continue // Need at least core pricing
 		}
-		
+
 		// Windows license = (vCPUs * core license) + (memory GB * RAM license)
 		windowsLicenseCost := (float64(instance.VCPU) * coreLicensePrice) + (instance.Memory * ramLicensePrice)
-		
+
 		// For each region that has Linux pricing, add Windows pricing
 		for region := range instance.Pricing {
 			// Get Linux pricing to add Windows license on top
 			if linuxPricing, ok := instance.Pricing[region]["linux"].(*GCPPricingData); ok {
 				windowsPricing := &GCPPricingData{}
-				
+
 				// Add license cost to on-demand pricing
 				if linuxPricing.OnDemand != "" {
 					linuxOnDemand, _ := strconv.ParseFloat(linuxPricing.OnDemand, 64)
 					windowsOnDemand := linuxOnDemand + windowsLicenseCost
 					windowsPricing.OnDemand = formatPrice(windowsOnDemand)
 				}
-				
+
 				// Add license cost to spot pricing (Windows spot includes license)
 				if linuxPricing.Spot != "" {
 					linuxSpot, _ := strconv.ParseFloat(linuxPricing.Spot, 64)
 					windowsSpot := linuxSpot + windowsLicenseCost
 					windowsPricing.Spot = formatPrice(windowsSpot)
 				}
-				
+
 				// Store Windows pricing
 				if windowsPricing.OnDemand != "" || windowsPricing.Spot != "" {
 					instance.Pricing[region]["windows"] = windowsPricing
@@ -296,7 +296,7 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 			}
 		}
 	}
-	
+
 	log.Printf("Added Windows pricing to %d instance-region combinations", windowsInstanceCount)
 
 	return instances

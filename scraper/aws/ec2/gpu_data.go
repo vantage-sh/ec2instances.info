@@ -503,6 +503,13 @@ var GPU_DATA = map[string]gpuData{
 		// https://resources.nvidia.com/en-us-dgx-systems/dgx-b200-datasheet
 		gpuMemory: 1440,
 	},
+	"p6-b300.48xlarge": {
+		gpuModel:          "NVIDIA B300",
+		computeCapability: 10.0,
+		gpuCount:          8,
+		//https://resources.nvidia.com/en-us-dgx-systems/dgx-b300-datasheet
+		gpuMemory: 2100,
+	},
 	"gr6f.4xlarge": {
 		gpuModel:          "NVIDIA L4",
 		computeCapability: 10.0,
