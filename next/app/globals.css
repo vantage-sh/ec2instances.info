@@ -362,3 +362,8 @@ body {
         @apply bg-background text-foreground;
     }
 }
+
+/* Hack to fix some sonner behaviour */
+[data-sonner-toast][data-mounted="true"][data-expanded="true"] {
+    height: initial !important;
+}

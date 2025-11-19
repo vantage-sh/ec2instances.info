@@ -70,7 +70,7 @@ function ToastInner({
                 <img
                     src={imageUrl}
                     alt={imageAltText || ""}
-                    className="mb-2 max-h-32 w-auto mx-auto"
+                    className="mb-2 max-h-32 w-auto mx-auto block"
                 />
                 {element}
             </>
@@ -138,10 +138,6 @@ function processToasts(toasts: Toasts) {
                 },
                 closeButton: true,
                 duration: Infinity,
-
-                // This is weird, but it is needed to fix some weird
-                // state update issues with sonner
-                action: "",
             },
         );
         idContainer[0] = id;
