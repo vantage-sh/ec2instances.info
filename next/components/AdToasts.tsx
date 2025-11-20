@@ -46,7 +46,7 @@ function ToastInner({
     }
 
     let element = (
-        <p>
+        <p className="select-none">
             {description.split("\n").map((line, i) => (
                 <span key={i}>
                     {line}
@@ -58,7 +58,7 @@ function ToastInner({
     if (title) {
         element = (
             <>
-                <p className="font-bold mb-1">{title}</p>
+                <p className="select-none font-bold mb-1">{title}</p>
                 {element}
             </>
         );
@@ -70,7 +70,7 @@ function ToastInner({
                 <img
                     src={imageUrl}
                     alt={imageAltText || ""}
-                    className="mb-2 max-h-32 w-auto mx-auto block"
+                    className="select-none non-draggable mb-2 max-h-32 w-auto mx-auto block"
                 />
                 {element}
             </>
