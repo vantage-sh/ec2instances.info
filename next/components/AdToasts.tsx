@@ -70,6 +70,7 @@ function ToastInner({
                 <img
                     src={imageUrl}
                     alt={imageAltText || ""}
+                    draggable={false}
                     className="select-none non-draggable mb-2 max-h-32 w-auto mx-auto block"
                 />
                 {element}
