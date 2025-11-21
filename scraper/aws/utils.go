@@ -6,14 +6,6 @@ import (
 	"strings"
 )
 
-func capitalize(s string) string {
-	spaceSplit := strings.Split(s, " ")
-	for i, word := range spaceSplit {
-		spaceSplit[i] = strings.ToUpper(word[:1]) + word[1:]
-	}
-	return strings.Join(spaceSplit, " ")
-}
-
 func cleanEmptyRegions(pricing map[string]map[string]any, regionDescriptions map[string]string) map[string]string {
 	for region, regionData := range pricing {
 		okOsCount := 0

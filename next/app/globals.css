@@ -362,3 +362,18 @@ body {
         @apply bg-background text-foreground;
     }
 }
+
+/* Hack to fix some sonner behaviour */
+[data-sonner-toast][data-mounted="true"][data-expanded="true"] {
+    height: initial !important;
+}
+
+/* Makes the element not draggable in browsers */
+.non-draggable {
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}

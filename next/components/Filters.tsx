@@ -32,6 +32,7 @@ interface FiltersProps<DataKey extends keyof typeof columnData> {
     }[];
     currencies: CurrencyItem[];
     ecuRename?: string;
+    hideEcu?: boolean;
     reservedLabel?: string;
 }
 
@@ -42,6 +43,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
     ecuRename,
     reservedTermOptions,
     reservedLabel,
+    hideEcu,
 }: FiltersProps<DataKey>) {
     const pathname = usePathname();
     const [columnVisibility, setColumnVisibility] =
@@ -173,6 +175,11 @@ export default function Filters<DataKey extends keyof typeof columnData>({
             }
         }
     }
+    if (hideEcu) {
+        pricingUnitOptionsCpy = pricingUnitOptionsCpy.filter(
+            (option) => option.value !== "ecu",
+        );
+    }
 
     return (
         <div
@@ -214,14 +221,16 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                         hideSearch={true}
                         small={true}
                     />
-                    <FilterDropdown
-                        label={reservedLabel ?? "Reserved"}
-                        value={reservedTerm}
-                        onChange={(v) => setReservedTerm(v)}
-                        options={reservedTermOptions}
-                        hideSearch={true}
-                        small={true}
-                    />
+                    {reservedTermOptions.length > 0 && (
+                        <FilterDropdown
+                            label={reservedLabel ?? "Reserved"}
+                            value={reservedTerm}
+                            onChange={(v) => setReservedTerm(v)}
+                            options={reservedTermOptions}
+                            hideSearch={true}
+                            small={true}
+                        />
+                    )}
                     <FilterDropdown
                         label="Currency"
                         value={currency}

@@ -14,10 +14,6 @@ func getAzureAccessToken() string {
 	clientId := os.Getenv("AZURE_CLIENT_ID")
 	clientSecret := os.Getenv("AZURE_CLIENT_SECRET")
 
-	if tenantId == "" || clientId == "" || clientSecret == "" {
-		log.Fatal("AZURE_TENANT_ID, AZURE_CLIENT_ID, and AZURE_CLIENT_SECRET must be set")
-	}
-
 	body := url.Values{
 		"grant_type":    {"client_credentials"},
 		"client_id":     {clientId},

@@ -67,7 +67,7 @@ export default async function RootLayout({
             </head>
             <body className={inter.className}>
                 <TopNav />
-                <Toaster duration={2000} />
+                <Toaster theme="light" duration={2000} />
                 <AdToasts initialToasts={initialToasts} />
                 {children}
                 <Footer />

@@ -3,7 +3,7 @@
 import Filters from "@/components/Filters";
 import InstanceTable from "@/components/InstanceTable";
 import { useInstanceData } from "@/state";
-import { AzureInstance } from "@/utils/colunnData/azure";
+import { GCPInstance } from "@/utils/colunnData/gcp";
 import dynamicallyDecompress from "@/utils/dynamicallyDecompress";
 import { useMemo } from "react";
 import { MarketingSchema } from "@/schemas/marketing";
@@ -16,12 +16,12 @@ type Props = {
         [key: string]: string;
     };
     compressedDataPathTemplate: string;
-    compressedInstances: [string[], ...AzureInstance[]];
+    compressedInstances: [string[], ...GCPInstance[]];
     marketingData: MarketingSchema;
     currencies: CurrencyItem[];
 };
 
-export default function AzureClient({
+export default function GCPClient({
     instanceCount,
     regions,
     compressedDataPathTemplate,
@@ -34,17 +34,17 @@ export default function AzureClient({
         if (!Array.isArray(rainbowTable)) {
             // This is probably dev.
             compressedInstances.unshift(rainbowTable);
-            return compressedInstances as AzureInstance[];
+            return compressedInstances as GCPInstance[];
         }
-        return compressedInstances.map(
-            (instance) =>
-                // @ts-expect-error: This is wrong, but close enough to work.
-                dynamicallyDecompress(instance, rainbowTable) as AzureInstance,
+        return compressedInstances.map((instance) =>
+            // @ts-expect-error: This is wrong, but close enough to work.
+            dynamicallyDecompress(instance, rainbowTable),
         );
     }, [compressedInstances]);
 
     const allInstances = useInstanceData(
         compressedDataPathTemplate,
+        // @ts-expect-error: This is wrong, but close enough to work.
         initialInstances,
     );
 
@@ -57,46 +57,27 @@ export default function AzureClient({
         <>
             <Advert
                 marketingData={marketingData}
-                instanceGroup="azure-home"
+                instanceGroup="gcp-home"
                 gpu={false}
             />
             <main className={`${full} overflow-y-hidden flex flex-col`}>
                 <Filters
                     currencies={currencies}
-                    columnAtomKey="azure"
+                    columnAtomKey="gcp"
                     regions={{
                         local_zone: {},
                         main: regions,
                         wavelength: {},
                         china: {},
                     }}
-                    ecuRename="ACU"
-                    reservedTermOptions={[
-                        {
-                            value: "yrTerm1Standard.allUpfront",
-                            label: "No Hybrid Benefit - 1 Year",
-                        },
-                        {
-                            value: "yrTerm3Standard.allUpfront",
-                            label: "No Hybrid Benefit - 3 Year",
-                        },
-                        {
-                            value: "yrTerm1Standard.hybridbenefit",
-                            label: "Hybrid Benefit - 1 Year",
-                        },
-                        {
-                            value: "yrTerm3Standard.hybridbenefit",
-                            label: "Hybrid Benefit - 3 Year",
-                        },
-                    ]}
-                    reservedLabel="Hybrid Benefit"
+                    reservedTermOptions={[]}
+                    hideEcu={true}
                 />
                 <div className="flex-1 min-h-0">
                     <InstanceTable
                         instances={allInstances}
                         instanceCount={instanceCount}
-                        columnAtomKey="azure"
-                        ecuRename="ACU"
+                        columnAtomKey="gcp"
                     />
                 </div>
             </main>

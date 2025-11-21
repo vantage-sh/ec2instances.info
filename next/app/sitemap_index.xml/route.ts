@@ -24,6 +24,9 @@ export async function GET() {
         <loc>${"/azure/vm/sitemap-instances.xml"}</loc>
     </sitemap>
     <sitemap>
+        <loc>${"/gcp/sitemap-instances.xml"}</loc>
+    </sitemap>
+    <sitemap>
         <loc>${"/sitemap-other.xml"}</loc>
     </sitemap>
 </sitemapindex>`;

@@ -190,6 +190,92 @@ async function compressAzureInstances() {
     console.log("Azure instances data compressed and saved");
 }
 
+async function compressGCPInstances() {
+    const instances = JSON.parse(
+        await readFile("../www/gcp/instances.json", "utf8"),
+    );
+
+    // Process the regions.
+    const regions: Region = {
+        main: {},
+        local_zone: {},
+        wavelength: {},
+        china: {},
+    };
+    for (const instance of instances) {
+        // Use the regions field from the instance data which has nice names
+        if (instance.regions) {
+            for (const r in instance.regions) {
+                regions.main[r] = instance.regions[r];
+            }
+        } else {
+            // Fallback to using region code if regions field doesn't exist
+            for (const r in instance.pricing) {
+                regions.main[r] = r;
+            }
+        }
+    }
+    await writeFile("./public/gcp-regions.json", JSON.stringify(regions));
+
+    // Encode and then compress the GCP instances.
+    await writeFile(
+        "./public/gcp-instance-count.txt",
+        instances.length.toString(),
+    );
+    await writeFile(
+        "./public/gcp-instance-ids.json",
+        JSON.stringify(
+            instances.map((i: { instance_type: string }) => i.instance_type),
+        ),
+    );
+    await writeFile(
+        "./public/gcp-instances-hash.txt",
+        hashInstances(instances),
+    );
+    const first100Instances = instances.slice(0, 100);
+    const first100InstancesEncoded = encode(
+        makeRainbowTable(first100Instances),
+    );
+    const remainingInstances = instances.slice(100);
+    await writeFile(
+        "./public/first-100-gcp-instances.msgpack",
+        first100InstancesEncoded,
+    );
+    const itemsPerPipeline = Math.ceil(
+        remainingInstances.length / PIPELINE_SIZE,
+    );
+    const remainingPipelineLength =
+        remainingInstances.length % itemsPerPipeline;
+
+    console.log("Compressing GCP instances data...");
+    for (let i = 0; i < PIPELINE_SIZE; i++) {
+        let chunk = remainingInstances.slice(
+            i * itemsPerPipeline,
+            (i + 1) * itemsPerPipeline,
+        );
+        if (i === PIPELINE_SIZE - 1 && remainingPipelineLength > 0) {
+            chunk = chunk.concat(
+                remainingInstances.slice(
+                    (i + 1) * itemsPerPipeline,
+                    remainingInstances.length,
+                ),
+            );
+        }
+        const chunkEncoded = encode(makeRainbowTable(chunk));
+        const compressedChunk: Buffer = await new Promise((res) => {
+            compress(Buffer.from(chunkEncoded), {}, (result) => {
+                res(result);
+            });
+        });
+        await writeFile(
+            `./public/remaining-gcp-instances-p${i}.msgpack.xz`,
+            compressedChunk,
+        );
+    }
+
+    console.log("GCP instances data compressed and saved");
+}
+
 async function compressRDSInstances() {
     const regions: Region = {
         main: {},
@@ -271,6 +357,7 @@ async function compressRDSInstances() {
 async function main() {
     await compressEC2Instances();
     await compressAzureInstances();
+    await compressGCPInstances();
     await compressRDSInstances();
 }
 

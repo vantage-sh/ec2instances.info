@@ -6,10 +6,12 @@ import {
     getOpensearchFamilies,
     redshiftInstances,
     getAzureFamilies,
+    getGcpFamilies,
 } from "./loadedData";
 import { awsIndexes, ec2Indexes } from "./generateAwsIndexes";
 import { opensearchIndexes } from "./generateOpensearchIndexes";
 import { azureIndexes } from "./generateAzureIndexes";
+import { gcpIndexes } from "./generateGcpIndexes";
 
 export default async () => `# ec2instances.info
 
@@ -45,4 +47,9 @@ ${(await getOpensearchFamilies()).map((family) => urlInject`- [Index of all ${ra
 
 ${azureIndexes.map((i) => urlInject`- [${raw(i.name)} instances](${`/azure/vm/${i.slug}.md`})`).join("\n")}
 ${(await getAzureFamilies()).map((family) => urlInject`- [Index of all ${raw(family)} instances](${`/azure/vm/families/${family}.md`})`).join("\n")}
+
+## Google Cloud Platform (GCP)
+
+${gcpIndexes.map((i) => urlInject`- [${raw(i.name)} instances](${`/gcp/${i.slug}.md`})`).join("\n")}
+${(await getGcpFamilies()).map((family) => urlInject`- [Index of all ${raw(family)} instances](${`/gcp/families/${family}.md`})`).join("\n")}
 `;

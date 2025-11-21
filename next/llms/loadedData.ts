@@ -7,6 +7,7 @@ import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 import { Instance as RedshiftInstance } from "@/utils/colunnData/redshift";
 import { Instance as OpensearchInstance } from "@/utils/colunnData/opensearch";
 import type { AzureInstance } from "@/utils/colunnData/azure";
+import type { GCPInstance } from "@/utils/colunnData/gcp";
 
 export const awsInstances = (async () => {
     const compressed30 = decode(
@@ -87,6 +88,11 @@ export const azureInstances = (async () => {
     return JSON.parse(d) as AzureInstance[];
 })();
 
+export const gcpInstances = (async () => {
+    const d = await readFile("../www/gcp/instances.json", "utf-8");
+    return JSON.parse(d) as GCPInstance[];
+})();
+
 export async function getEc2Families() {
     const instances = await awsInstances;
     const families = new Set<string>();
@@ -130,6 +136,15 @@ export async function getAzureFamilies() {
     const families = new Set<string>();
     for (const instance of instances) {
         families.add(instance.instance_type.substring(0, 2));
+    }
+    return Array.from(families).sort();
+}
+
+export async function getGcpFamilies() {
+    const instances = await gcpInstances;
+    const families = new Set<string>();
+    for (const instance of instances) {
+        families.add(instance.family);
     }
     return Array.from(families).sort();
 }

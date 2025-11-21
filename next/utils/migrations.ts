@@ -158,6 +158,9 @@ function mergeDataTables(state: StateDump, encodedDataTables: string) {
             case "/azure":
                 res = colunnData.azure.transformDataTables(v);
                 break;
+            case "/gcp":
+                res = colunnData.gcp.transformDataTables(v);
+                break;
         }
         if (res === null) return false;
         state.visibleColumns = res;

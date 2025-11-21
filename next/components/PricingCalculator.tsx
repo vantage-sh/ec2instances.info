@@ -156,13 +156,17 @@ function Calculator({
                 break;
         }
 
-        const pricingType = query.get("pricingType");
-        if (pricingType) {
-            // We do this in case the case got weird when reading the link.
-            const validPricingType = reservedTermOptions.find(
-                ([value]) => value.toLowerCase() === pricingType.toLowerCase(),
-            );
-            if (validPricingType) setPricingTypeState(validPricingType[0]);
+        let pricingType: string | null = null;
+        if (reservedTermOptions.length > 0) {
+            pricingType = query.get("pricingType");
+            if (pricingType) {
+                // We do this in case the case got weird when reading the link.
+                const validPricingType = reservedTermOptions.find(
+                    ([value]) =>
+                        value.toLowerCase() === pricingType!.toLowerCase(),
+                );
+                if (validPricingType) setPricingTypeState(validPricingType[0]);
+            }
         }
 
         // Handle setting the currency. Be careful adding after this because we return.
@@ -275,28 +279,30 @@ function Calculator({
                 ),
             });
         }
-        a.push(
-            {
-                label: "1-Year Reserved",
-                value: currencyString(
-                    root?.reserved?.[`yrTerm1${pricingType}`],
-                    duration,
-                    currency,
-                    conversionRate,
-                    region,
-                ),
-            },
-            {
-                label: "3-Year Reserved",
-                value: currencyString(
-                    root?.reserved?.[`yrTerm3${pricingType}`],
-                    duration,
-                    currency,
-                    conversionRate,
-                    region,
-                ),
-            },
-        );
+        if (reservedTermOptions.length > 0) {
+            a.push(
+                {
+                    label: "1-Year Reserved",
+                    value: currencyString(
+                        root?.reserved?.[`yrTerm1${pricingType}`],
+                        duration,
+                        currency,
+                        conversionRate,
+                        region,
+                    ),
+                },
+                {
+                    label: "3-Year Reserved",
+                    value: currencyString(
+                        root?.reserved?.[`yrTerm3${pricingType}`],
+                        duration,
+                        currency,
+                        conversionRate,
+                        region,
+                    ),
+                },
+            );
+        }
         return a;
     }, [
         pricing,
@@ -307,6 +313,7 @@ function Calculator({
         removeSpot,
         currency,
         conversionRate,
+        reservedTermOptions,
     ]);
 
     const handleRegions = (
@@ -438,7 +445,10 @@ function Calculator({
                     aria-label="Duration"
                     aria-controls={priceHoldersId}
                     value={duration}
-                    className={selectStyling}
+                    className={
+                        selectStyling +
+                        (reservedTermOptions.length === 0 ? " col-span-2" : "")
+                    }
                     onChange={(e) =>
                         setDuration(e.target.value as CostDuration)
                     }
@@ -450,19 +460,21 @@ function Calculator({
                     ))}
                 </select>
 
-                <select
-                    aria-label="Pricing Type"
-                    aria-controls={priceHoldersId}
-                    value={pricingType}
-                    className={selectStyling}
-                    onChange={(e) => setPricingType(e.target.value)}
-                >
-                    {reservedTermOptions.map(([value, label]) => (
-                        <option key={value} value={value}>
-                            {label}
-                        </option>
-                    ))}
-                </select>
+                {reservedTermOptions.length > 0 && (
+                    <select
+                        aria-label="Pricing Type"
+                        aria-controls={priceHoldersId}
+                        value={pricingType}
+                        className={selectStyling}
+                        onChange={(e) => setPricingType(e.target.value)}
+                    >
+                        {reservedTermOptions.map(([value, label]) => (
+                            <option key={value} value={value}>
+                                {label}
+                            </option>
+                        ))}
+                    </select>
+                )}
 
                 {defaultOs !== defaultPlatform && (
                     <CurrencySelector
