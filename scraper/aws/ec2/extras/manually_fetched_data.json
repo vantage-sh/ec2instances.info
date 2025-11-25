@@ -660,9 +660,9 @@
     "c5.metal": {
         "ran_at": "2025-11-25T01:45:20.293189Z",
         "coremark": {
-            "total_ticks": 634,
-            "iterations_second": 630914.826498,
-            "total_time_seconds": 0.634
+            "total_ticks": 13877,
+            "iterations_second": 28824.673921,
+            "total_time_seconds": 13.877
         },
         "ffmpeg": {
             "fps": 202,
