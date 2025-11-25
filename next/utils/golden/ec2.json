@@ -33,6 +33,10 @@
                 "bgStyled": true
             },
             {
+                "name": "GPU Average Wattage",
+                "children": "0 W"
+            },
+            {
                 "name": "GPU Architecture",
                 "children": "none",
                 "bgStyled": true
@@ -50,6 +54,14 @@
                 "name": "FPGA",
                 "children": 0,
                 "bgStyled": true
+            },
+            {
+                "name": "ffmpeg FPS",
+                "children": "N/A"
+            },
+            {
+                "name": "CoreMark iterations/Second",
+                "children": "N/A"
             }
         ]
     },
