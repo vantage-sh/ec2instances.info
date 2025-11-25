@@ -294,20 +294,7 @@ export default function InstanceTable<
                                                                     header.id,
                                                             );
                                                         }
-                                                        if (inside) {
-                                                            return old.map(
-                                                                (s) =>
-                                                                    s.id ===
-                                                                    header.id
-                                                                        ? {
-                                                                              ...s,
-                                                                              desc: value,
-                                                                          }
-                                                                        : s,
-                                                            );
-                                                        }
                                                         return [
-                                                            ...old,
                                                             {
                                                                 id: header.id,
                                                                 desc: value,
