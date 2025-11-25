@@ -107,6 +107,7 @@ func processEC2Data(
 					// make a fixed version for here
 					AvailabilityZones: make(map[string][]string),
 				}
+				instance.addExtraDetails()
 				instancesHashmap[instanceType] = instance
 			}
 

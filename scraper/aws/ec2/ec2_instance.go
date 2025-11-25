@@ -2,6 +2,7 @@ package ec2
 
 import (
 	"encoding/json"
+	"scraper/aws/ec2/extras"
 	"strconv"
 )
 
@@ -63,6 +64,7 @@ type EC2Instance struct {
 	Family                   string                `json:"family"`
 	VCPU                     int                   `json:"vCPU"`
 	Memory                   float64               `json:"memory"`
+	MemorySpeed              *int                  `json:"memory_speed"`
 	PrettyName               string                `json:"pretty_name"`
 	Arch                     []string              `json:"arch"`
 	NetworkPerformance       string                `json:"network_performance"`
@@ -100,4 +102,52 @@ type EC2Instance struct {
 	Storage                  *Storage              `json:"storage"`
 	EMR                      bool                  `json:"emr"`
 	IPV6Support              bool                  `json:"ipv6_support"`
+	CoremarkIterationsSecond *float64              `json:"coremark_iterations_second"`
+	GPUArchitectures         []string              `json:"gpu_architectures"`
+	GPUCurrentTempAvgCelsius *float64              `json:"gpu_current_temp_avg_celsius"`
+	FFmpegUsedCuda           *bool                 `json:"ffmpeg_used_cuda"`
+	FFmpegSpeed              *float64              `json:"ffmpeg_speed"`
+	FFmpegFPS                *float64              `json:"ffmpeg_fps"`
+	GPUPowerDrawWattsAvg     *int                  `json:"gpu_power_draw_watts_avg"`
+	GPUClocks                []extras.GPUClocks    `json:"gpu_clocks"`
+}
+
+func (instance *EC2Instance) addExtraDetails() {
+	if details, ok := extras.ExtraInstanceDetails[instance.InstanceType]; ok {
+		instance.MemorySpeed = details.Memory.SpeedMhz
+		instance.CoremarkIterationsSecond = &details.Coremark.IterationsSecond
+		gpuArchitectures := []string{}
+		gpuTemps := []int{}
+		gpuPowerDraws := []int{}
+		gpuClocks := []extras.GPUClocks{}
+		for _, gpu := range details.NvidiaGPUs {
+			gpuArchitectures = append(gpuArchitectures, gpu.Architecture)
+			gpuTemps = append(gpuTemps, gpu.Temp.CurrentTempCelsius)
+			gpuPowerDraws = append(gpuPowerDraws, gpu.Power.AveragePowerDrawWatts)
+			gpuClocks = append(gpuClocks, gpu.Clocks)
+		}
+		if len(gpuTemps) > 0 {
+			sum := 0
+			for _, t := range gpuTemps {
+				sum += t
+			}
+			avg := float64(sum) / float64(len(gpuTemps))
+			instance.GPUCurrentTempAvgCelsius = &avg
+		}
+		if len(gpuPowerDraws) > 0 {
+			sum := 0
+			for _, p := range gpuPowerDraws {
+				sum += p
+			}
+			avg := sum / len(gpuPowerDraws)
+			instance.GPUPowerDrawWattsAvg = &avg
+		}
+		instance.GPUArchitectures = gpuArchitectures
+		instance.GPUClocks = gpuClocks
+		if details.FfMpeg != nil {
+			instance.FFmpegUsedCuda = &details.FfMpeg.CudaUsed
+			instance.FFmpegSpeed = &details.FfMpeg.Speed
+			instance.FFmpegFPS = &details.FfMpeg.FPS
+		}
+	}
 }
