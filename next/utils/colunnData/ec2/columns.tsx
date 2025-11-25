@@ -298,6 +298,19 @@ export const columnsGen = (
         cell: (info) => `${info.getValue() as number} GiB`,
     },
     {
+        accessorKey: "memory_speed",
+        header: "Memory Speed",
+        size: 150,
+        id: "memory_speed",
+        sortingFn: "alphanumeric",
+        filterFn: expr,
+        cell: (info) => {
+            if (info.getValue() === null || info.getValue() === undefined)
+                return "unknown";
+            return `${info.getValue() as number} MT/s`;
+        },
+    },
+    {
         accessorKey: "ECU",
         header: "Compute Units (ECU)",
         size: 180,
@@ -1353,6 +1366,19 @@ export const columnsGen = (
         header: "GPU Power Draw (Avg Watts)",
         size: 200,
         id: "gpu_power_draw_watts_avg",
+        sortingFn: "alphanumeric",
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | null;
+            if (value === null || value === undefined) return "N/A";
+            return `${value.toFixed(1)}W`;
+        },
+    },
+    {
+        accessorKey: "gpu_power_draw_watts_avg",
+        header: "GPU Power Limit (Watts)",
+        size: 180,
+        id: "gpu_power_max_watts_avg",
         sortingFn: "alphanumeric",
         filterFn: expr,
         cell: (info) => {

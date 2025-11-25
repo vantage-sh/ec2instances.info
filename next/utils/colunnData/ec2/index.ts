@@ -78,6 +78,7 @@ const initialColumnsArr = [
     ["coremark_iterations_second", true],
     ["gpu_architectures", false],
     ["gpu_current_temp_avg_celsius", false],
+    ["gpu_power_max_watts_avg", false],
     ["ffmpeg_used_cuda", false],
     ["ffmpeg_speed", false],
     ["ffmpeg_fps", true],
@@ -86,6 +87,7 @@ const initialColumnsArr = [
     ["gpu_clocks_sm_avg", false],
     ["gpu_clocks_memory_avg", false],
     ["gpu_clocks_video_avg", false],
+    ["memory_speed", false],
 ] as const;
 
 export const initialColumnsValue: {
@@ -112,6 +114,7 @@ export function makePrettyNames<V>(
         makeColumnOption("coremark_iterations_second", "CoreMark Score"),
         makeColumnOption("ffmpeg_fps", "FFmpeg FPS"),
         makeColumnOption("memory", "Memory"),
+        makeColumnOption("memory_speed", "Memory Speed"),
         makeColumnOption("ECU", "Compute Units (ECU)"),
         makeColumnOption("vCPU", "vCPUs"),
         makeColumnOption("memory_per_vcpu", "GiB of Memory per vCPU"),
@@ -239,6 +242,10 @@ export function makePrettyNames<V>(
         makeColumnOption(
             "gpu_power_draw_watts_avg",
             "GPU Power Draw (Avg Watts)",
+        ),
+        makeColumnOption(
+            "gpu_power_max_watts_avg",
+            "GPU Power Max (Avg Watts)",
         ),
         makeColumnOption(
             "gpu_clocks_graphics_avg",
