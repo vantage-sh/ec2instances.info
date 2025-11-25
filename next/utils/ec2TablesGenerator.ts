@@ -54,6 +54,10 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
                     bgStyled: true,
                 },
                 {
+                    name: "GPU Average Wattage",
+                    children: `${instance.gpu_power_draw_watts_avg || "0"} W`,
+                },
+                {
                     name: "GPU Architecture",
                     children: instance.GPU_model ?? "none",
                     bgStyled: true,
@@ -71,6 +75,14 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
                     name: "FPGA",
                     children: instance.FPGA ?? "0",
                     bgStyled: true,
+                },
+                {
+                    name: "ffmpeg FPS",
+                    children: instance.ffmpeg_fps || "N/A",
+                },
+                {
+                    name: "CoreMark iterations/Second",
+                    children: instance.coremark_iterations_second || "N/A",
                 },
             ],
         },
