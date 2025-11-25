@@ -21,6 +21,7 @@ export interface EC2Instance {
     family: string;
     pretty_name: string;
     memory: number;
+    memory_speed: number | null;
     vCPU: number;
     ECU: number | "variable";
     base_performance?: number;
@@ -73,6 +74,21 @@ export interface EC2Instance {
     };
     pricing: Pricing;
     generation: string;
+    coremark_iterations_second: number | null;
+    gpu_architectures: string[] | null;
+    gpu_current_temp_avg_celsius: number | null;
+    ffmpeg_used_cuda: boolean | null;
+    ffmpeg_speed: number | null;
+    ffmpeg_fps: number | null;
+    gpu_power_draw_watts_avg: number | null;
+    gpu_clocks:
+        | {
+              graphics_clock_mhz: number;
+              sm_clock_mhz: number;
+              memory_clock_mhz: number;
+              video_clock_mhz: number;
+          }[]
+        | null;
 }
 
 export interface Region {

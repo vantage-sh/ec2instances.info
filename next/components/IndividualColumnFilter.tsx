@@ -209,6 +209,14 @@ const exprColumns = [
     "ecu",
     "ECU",
     "io",
+    "coremark_iterations_second",
+    "gpu_power_draw_watts_avg",
+    "gpu_clocks_graphics_avg",
+    "gpu_clocks_sm_avg",
+    "gpu_clocks_memory_avg",
+    "gpu_clocks_video_avg",
+    "ffmpeg_speed",
+    "ffmpeg_fps",
 ];
 
 export default function IndividualColumnFilter<Instance>({

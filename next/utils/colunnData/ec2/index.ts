@@ -75,6 +75,17 @@ const initialColumnsArr = [
     ["spot-interrupt-rate", false],
     ["cost-emr", false],
     ["generation", false],
+    ["coremark_iterations_second", true],
+    ["gpu_architectures", false],
+    ["gpu_current_temp_avg_celsius", false],
+    ["ffmpeg_used_cuda", false],
+    ["ffmpeg_speed", false],
+    ["ffmpeg_fps", true],
+    ["gpu_power_draw_watts_avg", false],
+    ["gpu_clocks_graphics_avg", false],
+    ["gpu_clocks_sm_avg", false],
+    ["gpu_clocks_memory_avg", false],
+    ["gpu_clocks_video_avg", false],
 ] as const;
 
 export const initialColumnsValue: {
@@ -98,6 +109,8 @@ export function makePrettyNames<V>(
         makeColumnOption("pretty_name", "Name"),
         makeColumnOption("instance_type", "API Name"),
         makeColumnOption("family", "Instance Family"),
+        makeColumnOption("coremark_iterations_second", "CoreMark Score"),
+        makeColumnOption("ffmpeg_fps", "FFmpeg FPS"),
         makeColumnOption("memory", "Memory"),
         makeColumnOption("ECU", "Compute Units (ECU)"),
         makeColumnOption("vCPU", "vCPUs"),
@@ -219,5 +232,20 @@ export function makePrettyNames<V>(
         ),
         makeColumnOption("cost-emr", "EMR cost"),
         makeColumnOption("generation", "Generation"),
+        makeColumnOption("gpu_architectures", "GPU Architectures"),
+        makeColumnOption("gpu_current_temp_avg_celsius", "GPU Temp (Avg °C)"),
+        makeColumnOption("ffmpeg_used_cuda", "FFmpeg Used CUDA"),
+        makeColumnOption("ffmpeg_speed", "FFmpeg Speed"),
+        makeColumnOption(
+            "gpu_power_draw_watts_avg",
+            "GPU Power Draw (Avg Watts)",
+        ),
+        makeColumnOption(
+            "gpu_clocks_graphics_avg",
+            "GPU Graphics Clock (Avg MHz)",
+        ),
+        makeColumnOption("gpu_clocks_sm_avg", "GPU SM Clock (Avg MHz)"),
+        makeColumnOption("gpu_clocks_memory_avg", "GPU Memory Clock (Avg MHz)"),
+        makeColumnOption("gpu_clocks_video_avg", "GPU Video Clock (Avg MHz)"),
     ];
 }

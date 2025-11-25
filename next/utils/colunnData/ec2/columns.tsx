@@ -263,6 +263,32 @@ export const columnsGen = (
         ),
     },
     {
+        accessorKey: "coremark_iterations_second",
+        header: "CoreMark Score",
+        size: 150,
+        id: "coremark_iterations_second",
+        sortingFn: "alphanumeric",
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | null;
+            if (value === null || value === undefined) return "N/A";
+            return value.toLocaleString();
+        },
+    },
+    {
+        accessorKey: "ffmpeg_fps",
+        header: "FFmpeg FPS",
+        size: 130,
+        id: "ffmpeg_fps",
+        sortingFn: "alphanumeric",
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | null;
+            if (value === null || value === undefined) return "N/A";
+            return `${value.toFixed(1)} fps`;
+        },
+    },
+    {
         accessorKey: "memory",
         header: "Instance Memory",
         size: 170,
@@ -1266,5 +1292,237 @@ export const columnsGen = (
             "pricing",
             (info) => info.getValue() as string,
         ),
+    },
+    {
+        accessorKey: "gpu_architectures",
+        header: "GPU Architectures",
+        size: 150,
+        id: "gpu_architectures",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.gpu_architectures;
+            const valueB = rowB.original.gpu_architectures;
+            if (!valueA) return 1;
+            if (!valueB) return -1;
+            return valueA.join(", ").localeCompare(valueB.join(", "));
+        },
+        ...makeCellWithRegexSorter("gpu_architectures", (info) => {
+            const value = info.getValue() as string[] | null;
+            if (!value || value.length === 0) return "N/A";
+            return value.join(", ");
+        }),
+    },
+    {
+        accessorKey: "gpu_current_temp_avg_celsius",
+        header: "GPU Temp (Avg °C)",
+        size: 150,
+        id: "gpu_current_temp_avg_celsius",
+        sortingFn: "alphanumeric",
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | null;
+            if (value === null || value === undefined) return "N/A";
+            return `${value.toFixed(1)}°C`;
+        },
+    },
+    {
+        accessorKey: "ffmpeg_used_cuda",
+        header: "FFmpeg Used CUDA",
+        size: 150,
+        id: "ffmpeg_used_cuda",
+        ...makeCellWithRegexSorter("ffmpeg_used_cuda", (info) => {
+            const value = info.getValue() as boolean | null;
+            if (value === null || value === undefined) return "N/A";
+            return value ? "Yes" : "No";
+        }),
+    },
+    {
+        accessorKey: "ffmpeg_speed",
+        header: "FFmpeg Speed",
+        size: 130,
+        id: "ffmpeg_speed",
+        sortingFn: "alphanumeric",
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | null;
+            if (value === null || value === undefined) return "N/A";
+            return `${value.toFixed(2)}x`;
+        },
+    },
+    {
+        accessorKey: "gpu_power_draw_watts_avg",
+        header: "GPU Power Draw (Avg Watts)",
+        size: 200,
+        id: "gpu_power_draw_watts_avg",
+        sortingFn: "alphanumeric",
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | null;
+            if (value === null || value === undefined) return "N/A";
+            return `${value.toFixed(1)}W`;
+        },
+    },
+    {
+        accessorKey: "gpu_clocks",
+        header: "GPU Graphics Clock (Avg MHz)",
+        size: 220,
+        id: "gpu_clocks_graphics_avg",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.gpu_clocks;
+            const valueB = rowB.original.gpu_clocks;
+            if (!valueA || valueA.length === 0) return 1;
+            if (!valueB || valueB.length === 0) return -1;
+            const avgA =
+                valueA.reduce(
+                    (sum, clock) => sum + clock.graphics_clock_mhz,
+                    0,
+                ) / valueA.length;
+            const avgB =
+                valueB.reduce(
+                    (sum, clock) => sum + clock.graphics_clock_mhz,
+                    0,
+                ) / valueB.length;
+            return avgA - avgB;
+        },
+        filterFn: (row, _, filterValue) => {
+            const clocks = row.original.gpu_clocks;
+            if (!clocks || clocks.length === 0) return false;
+            const avg =
+                clocks.reduce(
+                    (sum, clock) => sum + clock.graphics_clock_mhz,
+                    0,
+                ) / clocks.length;
+            try {
+                return exprCompiler(filterValue)(avg, `${avg.toFixed(0)} MHz`);
+            } catch {
+                return false;
+            }
+        },
+        cell: (info) => {
+            const clocks = info.getValue() as EC2Instance["gpu_clocks"];
+            if (!clocks || clocks.length === 0) return "N/A";
+            const avg =
+                clocks.reduce(
+                    (sum, clock) => sum + clock.graphics_clock_mhz,
+                    0,
+                ) / clocks.length;
+            return `${avg.toFixed(0)} MHz`;
+        },
+    },
+    {
+        accessorKey: "gpu_clocks",
+        header: "GPU SM Clock (Avg MHz)",
+        size: 200,
+        id: "gpu_clocks_sm_avg",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.gpu_clocks;
+            const valueB = rowB.original.gpu_clocks;
+            if (!valueA || valueA.length === 0) return 1;
+            if (!valueB || valueB.length === 0) return -1;
+            const avgA =
+                valueA.reduce((sum, clock) => sum + clock.sm_clock_mhz, 0) /
+                valueA.length;
+            const avgB =
+                valueB.reduce((sum, clock) => sum + clock.sm_clock_mhz, 0) /
+                valueB.length;
+            return avgA - avgB;
+        },
+        filterFn: (row, _, filterValue) => {
+            const clocks = row.original.gpu_clocks;
+            if (!clocks || clocks.length === 0) return false;
+            const avg =
+                clocks.reduce((sum, clock) => sum + clock.sm_clock_mhz, 0) /
+                clocks.length;
+            try {
+                return exprCompiler(filterValue)(avg, `${avg.toFixed(0)} MHz`);
+            } catch {
+                return false;
+            }
+        },
+        cell: (info) => {
+            const clocks = info.getValue() as EC2Instance["gpu_clocks"];
+            if (!clocks || clocks.length === 0) return "N/A";
+            const avg =
+                clocks.reduce((sum, clock) => sum + clock.sm_clock_mhz, 0) /
+                clocks.length;
+            return `${avg.toFixed(0)} MHz`;
+        },
+    },
+    {
+        accessorKey: "gpu_clocks",
+        header: "GPU Memory Clock (Avg MHz)",
+        size: 220,
+        id: "gpu_clocks_memory_avg",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.gpu_clocks;
+            const valueB = rowB.original.gpu_clocks;
+            if (!valueA || valueA.length === 0) return 1;
+            if (!valueB || valueB.length === 0) return -1;
+            const avgA =
+                valueA.reduce((sum, clock) => sum + clock.memory_clock_mhz, 0) /
+                valueA.length;
+            const avgB =
+                valueB.reduce((sum, clock) => sum + clock.memory_clock_mhz, 0) /
+                valueB.length;
+            return avgA - avgB;
+        },
+        filterFn: (row, _, filterValue) => {
+            const clocks = row.original.gpu_clocks;
+            if (!clocks || clocks.length === 0) return false;
+            const avg =
+                clocks.reduce((sum, clock) => sum + clock.memory_clock_mhz, 0) /
+                clocks.length;
+            try {
+                return exprCompiler(filterValue)(avg, `${avg.toFixed(0)} MHz`);
+            } catch {
+                return false;
+            }
+        },
+        cell: (info) => {
+            const clocks = info.getValue() as EC2Instance["gpu_clocks"];
+            if (!clocks || clocks.length === 0) return "N/A";
+            const avg =
+                clocks.reduce((sum, clock) => sum + clock.memory_clock_mhz, 0) /
+                clocks.length;
+            return `${avg.toFixed(0)} MHz`;
+        },
+    },
+    {
+        accessorKey: "gpu_clocks",
+        header: "GPU Video Clock (Avg MHz)",
+        size: 200,
+        id: "gpu_clocks_video_avg",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.gpu_clocks;
+            const valueB = rowB.original.gpu_clocks;
+            if (!valueA || valueA.length === 0) return 1;
+            if (!valueB || valueB.length === 0) return -1;
+            const avgA =
+                valueA.reduce((sum, clock) => sum + clock.video_clock_mhz, 0) /
+                valueA.length;
+            const avgB =
+                valueB.reduce((sum, clock) => sum + clock.video_clock_mhz, 0) /
+                valueB.length;
+            return avgA - avgB;
+        },
+        filterFn: (row, _, filterValue) => {
+            const clocks = row.original.gpu_clocks;
+            if (!clocks || clocks.length === 0) return false;
+            const avg =
+                clocks.reduce((sum, clock) => sum + clock.video_clock_mhz, 0) /
+                clocks.length;
+            try {
+                return exprCompiler(filterValue)(avg, `${avg.toFixed(0)} MHz`);
+            } catch {
+                return false;
+            }
+        },
+        cell: (info) => {
+            const clocks = info.getValue() as EC2Instance["gpu_clocks"];
+            if (!clocks || clocks.length === 0) return "N/A";
+            const avg =
+                clocks.reduce((sum, clock) => sum + clock.video_clock_mhz, 0) /
+                clocks.length;
+            return `${avg.toFixed(0)} MHz`;
+        },
     },
 ];
