@@ -2,6 +2,7 @@ import { Tokens, tokenise } from "./tokeniser";
 import methods from "./methods";
 
 function evaluate(token: Tokens, num: number, strValue: string): boolean {
+    if (isNaN(num)) num = 0;
     let a: boolean;
     let b: boolean;
     for (;;) {

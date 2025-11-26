@@ -39,9 +39,6 @@ export function expr(row: Row<any>, columnId: string, filterValue: string) {
     const value =
         row.original[columnId] ?? row.original[columnId.toLowerCase()];
     const conv = tryConv(value);
-    if (isNaN(conv)) {
-        return false;
-    }
     return runCachedEval(filterValue, conv, value);
 }
 
