@@ -373,6 +373,17 @@ var gcpMachineSpecs = map[string]struct {
 	"n2d-standard-128": {128, 512, "General purpose"},
 	"n2d-standard-224": {224, 896, "General purpose"},
 
+	// N2D High Memory (AMD)
+	"n2d-highmem-2":  {2, 16, "Memory optimized"},
+	"n2d-highmem-4":  {4, 32, "Memory optimized"},
+	"n2d-highmem-8":  {8, 64, "Memory optimized"},
+	"n2d-highmem-16": {16, 128, "Memory optimized"},
+	"n2d-highmem-32": {32, 256, "Memory optimized"},
+	"n2d-highmem-48": {48, 384, "Memory optimized"},
+	"n2d-highmem-64": {64, 512, "Memory optimized"},
+	"n2d-highmem-80": {80, 640, "Memory optimized"},
+	"n2d-highmem-96": {96, 768, "Memory optimized"},
+
 	// E2 Standard (Cost-optimized)
 	"e2-standard-2":  {2, 8, "General purpose"},
 	"e2-standard-4":  {4, 16, "General purpose"},
