@@ -1,4 +1,514 @@
 {
+    "c8a.12xlarge": {
+        "ran_at": "2025-12-02T17:55:31.173012Z",
+        "coremark": {
+            "total_ticks": 22711,
+            "iterations_second": 48434.67923,
+            "total_time_seconds": 22.711
+        },
+        "ffmpeg": {
+            "fps": 146,
+            "elapsed_time_seconds": 12.33,
+            "speed": 4.86,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 94742,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R45",
+            "speed": 2600,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 48,
+            "threads": 48
+        }
+    },
+    "c8a.16xlarge": {
+        "ran_at": "2025-12-02T18:09:46.428236Z",
+        "coremark": {
+            "total_ticks": 21611,
+            "iterations_second": 50900.004627,
+            "total_time_seconds": 21.611
+        },
+        "ffmpeg": {
+            "fps": 418,
+            "elapsed_time_seconds": 4.3,
+            "speed": 13.9,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 126404,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R45",
+            "speed": 2600,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 64,
+            "threads": 64
+        }
+    },
+    "c8a.24xlarge": {
+        "ran_at": "2025-12-02T18:08:01.800705Z",
+        "coremark": {
+            "total_ticks": 7853,
+            "iterations_second": 50935.948045,
+            "total_time_seconds": 7.853
+        },
+        "ffmpeg": {
+            "fps": 351,
+            "elapsed_time_seconds": 5.12,
+            "speed": 11.7,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 189639,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R45",
+            "speed": 2600,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 96,
+            "threads": 96
+        }
+    },
+    "c8a.2xlarge": {
+        "ran_at": "2025-12-02T18:11:41.894613Z",
+        "coremark": {
+            "total_ticks": 23335,
+            "iterations_second": 47139.490036,
+            "total_time_seconds": 23.335
+        },
+        "ffmpeg": {
+            "fps": 136,
+            "elapsed_time_seconds": 13.23,
+            "speed": 4.53,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 15652,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R45",
+            "speed": 2600,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 8,
+            "threads": 8
+        }
+    },
+    "c8a.4xlarge": {
+        "ran_at": "2025-12-02T18:01:13.099875Z",
+        "coremark": {
+            "total_ticks": 23260,
+            "iterations_second": 47291.487532,
+            "total_time_seconds": 23.26
+        },
+        "ffmpeg": {
+            "fps": 153,
+            "elapsed_time_seconds": 11.74,
+            "speed": 5.1,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 31460,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R45",
+            "speed": 2600,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 16,
+            "threads": 16
+        }
+    },
+    "c8a.8xlarge": {
+        "ran_at": "2025-12-02T18:11:36.088817Z",
+        "coremark": {
+            "total_ticks": 23559,
+            "iterations_second": 46691.285708,
+            "total_time_seconds": 23.559
+        },
+        "ffmpeg": {
+            "fps": 285,
+            "elapsed_time_seconds": 6.3,
+            "speed": 9.5,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 63076,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R45",
+            "speed": 2600,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 32,
+            "threads": 32
+        }
+    },
+    "c8a.large": {
+        "ran_at": "2025-12-02T18:11:10.787914Z",
+        "coremark": {
+            "total_ticks": 13199,
+            "iterations_second": 45457.989242,
+            "total_time_seconds": 13.199
+        },
+        "ffmpeg": null,
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 3795,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R45",
+            "speed": 2600,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 2,
+            "threads": 2
+        }
+    },
+    "c8a.medium": {
+        "ran_at": "2025-12-02T18:10:20.893673Z",
+        "coremark": {
+            "total_ticks": 13124,
+            "iterations_second": 45717.768973,
+            "total_time_seconds": 13.124
+        },
+        "ffmpeg": null,
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 1885,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R45",
+            "speed": 2600,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 1,
+            "threads": 1
+        }
+    },
+    "c8a.metal-24xl": {
+        "ran_at": "2025-12-02T18:18:18.708995Z",
+        "coremark": {
+            "total_ticks": 24111,
+            "iterations_second": 45622.330057,
+            "total_time_seconds": 24.111
+        },
+        "ffmpeg": {
+            "fps": 146,
+            "elapsed_time_seconds": 12.33,
+            "speed": 4.86,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 192054,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R45 96-Core Processor",
+            "speed": 2600,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 96,
+            "threads": 96
+        }
+    },
+    "c8a.xlarge": {
+        "ran_at": "2025-12-02T18:12:33.523723Z",
+        "coremark": {
+            "total_ticks": 22049,
+            "iterations_second": 49888.88385,
+            "total_time_seconds": 22.049
+        },
+        "ffmpeg": {
+            "fps": 72,
+            "elapsed_time_seconds": 24.85,
+            "speed": 2.41,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 7749,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R45",
+            "speed": 2600,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 4,
+            "threads": 4
+        }
+    },
+    "x8aedz.12xlarge": {
+        "ran_at": "2025-12-02T18:00:33.32916Z",
+        "coremark": {
+            "total_ticks": 20729,
+            "iterations_second": 53065.753292,
+            "total_time_seconds": 20.729
+        },
+        "ffmpeg": {
+            "fps": 153,
+            "elapsed_time_seconds": 11.73,
+            "speed": 5.11,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 1541657,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R05",
+            "speed": 3300,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 48,
+            "threads": 48
+        }
+    },
+    "x8aedz.24xlarge": {
+        "ran_at": "2025-12-02T18:09:36.298905Z",
+        "coremark": {
+            "total_ticks": 19354,
+            "iterations_second": 56835.796218,
+            "total_time_seconds": 19.354
+        },
+        "ffmpeg": {
+            "fps": 295,
+            "elapsed_time_seconds": 6.1,
+            "speed": 9.82,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 3084205,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R05",
+            "speed": 3300,
+            "cache": 1024,
+            "cpus": 2,
+            "cores": 96,
+            "threads": 96
+        }
+    },
+    "x8aedz.3xlarge": {
+        "ran_at": "2025-12-02T18:08:59.07406Z",
+        "coremark": {
+            "total_ticks": 20980,
+            "iterations_second": 52430.886559,
+            "total_time_seconds": 20.98
+        },
+        "ffmpeg": {
+            "fps": 202,
+            "elapsed_time_seconds": 8.9,
+            "speed": 6.73,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 385211,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R05",
+            "speed": 3300,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 12,
+            "threads": 12
+        }
+    },
+    "x8aedz.6xlarge": {
+        "ran_at": "2025-12-02T18:08:58.559977Z",
+        "coremark": {
+            "total_ticks": 20835,
+            "iterations_second": 52795.776338,
+            "total_time_seconds": 20.835
+        },
+        "ffmpeg": {
+            "fps": 316,
+            "elapsed_time_seconds": 5.69,
+            "speed": 10.5,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 770575,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R05",
+            "speed": 3300,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 24,
+            "threads": 24
+        }
+    },
+    "x8aedz.large": {
+        "ran_at": "2025-12-02T18:09:44.124856Z",
+        "coremark": {
+            "total_ticks": 20115,
+            "iterations_second": 54685.558041,
+            "total_time_seconds": 20.115
+        },
+        "ffmpeg": {
+            "fps": 38,
+            "elapsed_time_seconds": 47.61,
+            "speed": 1.26,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 64009,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R05",
+            "speed": 3300,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 2,
+            "threads": 2
+        }
+    },
+    "x8aedz.metal-12xl": {
+        "ran_at": "2025-12-02T18:19:55.619162Z",
+        "coremark": {
+            "total_ticks": 20159,
+            "iterations_second": 54566.19872,
+            "total_time_seconds": 20.159
+        },
+        "ffmpeg": {
+            "fps": 341,
+            "elapsed_time_seconds": 5.27,
+            "speed": 11.4,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 1547395,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R05 64-Core Processor",
+            "speed": 3300,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 48,
+            "threads": 48
+        }
+    },
+    "x8aedz.metal-24xl": {
+        "ran_at": "2025-12-02T18:17:55.321493Z",
+        "coremark": {
+            "total_ticks": 20395,
+            "iterations_second": 53934.787938,
+            "total_time_seconds": 20.395
+        },
+        "ffmpeg": {
+            "fps": 427,
+            "elapsed_time_seconds": 4.21,
+            "speed": 14.2,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 3096045,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R05 64-Core Processor",
+            "speed": 3300,
+            "cache": 1024,
+            "cpus": 2,
+            "cores": 96,
+            "threads": 96
+        }
+    },
+    "x8aedz.xlarge": {
+        "ran_at": "2025-12-02T18:06:30.768715Z",
+        "coremark": {
+            "total_ticks": 20903,
+            "iterations_second": 52624.02526,
+            "total_time_seconds": 20.903
+        },
+        "ffmpeg": {
+            "fps": 77,
+            "elapsed_time_seconds": 23.4,
+            "speed": 2.56,
+            "aac_qavg": 335.41,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 128269,
+            "speed_mhz": 6400
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 9R05",
+            "speed": 3300,
+            "cache": 1024,
+            "cpus": 1,
+            "cores": 4,
+            "threads": 4
+        }
+    },
     "a1.2xlarge": {
         "ran_at": "2025-11-25T11:42:52.853988Z",
         "coremark": {
