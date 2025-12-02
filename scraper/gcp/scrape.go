@@ -1,17 +1,21 @@
 package gcp
 
 import (
+	"context"
 	"log"
 	"os"
 	"scraper/utils"
 	"sort"
 	"strconv"
 	"strings"
+
+	"golang.org/x/oauth2/google"
 )
 
 // Process SKUs and pricing data to generate GCP instances
-func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPInstance {
+func processGCPData(skus []SKU, pricing map[string]PriceInfo, regionNames map[string]string, machineTypes map[string]MachineType) map[string]*GCPInstance {
 	instances := make(map[string]*GCPInstance)
+
 
 	// Group SKUs by machine type and region
 	type skuKey struct {
@@ -125,12 +129,20 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 
 	// Build instances from machine specs
 	matchedInstances := 0
-	for instanceType, specs := range gcpMachineSpecs {
+	for instanceType, specs := range machineTypes {
+		// Determine family based on name
+		family := "General purpose"
+		if strings.Contains(instanceType, "highmem") || strings.Contains(instanceType, "ultramem") || strings.Contains(instanceType, "megamem") {
+			family = "Memory optimized"
+		} else if strings.Contains(instanceType, "highcpu") || strings.Contains(instanceType, "compute") {
+			family = "Compute optimized"
+		}
+
 		instance := &GCPInstance{
 			InstanceType:       instanceType,
-			Family:             specs.family,
-			VCPU:               specs.vcpu,
-			Memory:             specs.memory,
+			Family:             family,
+			VCPU:               specs.GuestCpus,
+			Memory:             float64(specs.MemoryMb) / 1024.0, // Convert MB to GB
 			PrettyName:         createPrettyName(instanceType),
 			NetworkPerformance: "Variable",
 			Generation:         "current",
@@ -140,8 +152,8 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 			AvailabilityZones:  make(map[string][]string),
 			LocalSSD:           false,
 			SharedCPU:          strings.HasPrefix(instanceType, "e2-") || strings.HasPrefix(instanceType, "f1-") || strings.HasPrefix(instanceType, "g1-"),
-			ComputeOptimized:   strings.Contains(specs.family, "Compute optimized"),
-			MemoryOptimized:    strings.Contains(specs.family, "Memory optimized"),
+			ComputeOptimized:   family == "Compute optimized",
+			MemoryOptimized:    family == "Memory optimized",
 		}
 
 		// Add pricing data for each region
@@ -195,7 +207,7 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 			}
 
 			// Total price = (vCPUs * core price) + (memory GB * RAM price)
-			totalPrice := (float64(specs.vcpu) * pricing.corePrice) + (specs.memory * pricing.ramPrice)
+			totalPrice := (float64(specs.GuestCpus) * pricing.corePrice) + (float64(specs.MemoryMb) / 1024.0 * pricing.ramPrice)
 
 			if totalPrice == 0 {
 				continue
@@ -229,7 +241,11 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 			}
 
 			// Add region to the regions map
-			instance.Regions[rk.region] = getRegionDisplayName(rk.region)
+			regionName := rk.region
+			if prettyName, ok := regionNames[rk.region]; ok {
+				regionName = prettyName
+			}
+			instance.Regions[rk.region] = regionName
 		}
 
 		// Only include instances that have pricing data
@@ -305,23 +321,59 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 // Main scraping function
 func DoGCPScraping() {
 	apiKey := os.Getenv("GCP_API_KEY")
+	projectID := os.Getenv("GCP_PROJECT_ID")
+	ctx := context.Background()
+
+	// Scope for Cloud Platform (covers Compute and Billing)
+	creds, err := google.FindDefaultCredentials(ctx, "https://www.googleapis.com/auth/cloud-platform")
+	if err != nil {
+		log.Fatalln("Failed to find default credentials:", err)
+	}
+	t, err := creds.TokenSource.Token()
+	if err != nil {
+		log.Fatalln("Failed to get token from credentials:", err)
+	}
+	token := t.AccessToken
+
+	log.Println("Fetching GCP region names from documentation...")
+	regionNames, err := fetchRegionNamesFromDocs()
+	if err != nil {
+		log.Printf("Warning: Failed to fetch region names from docs: %v", err)
+		log.Println("Will use region codes as display names")
+		regionNames = make(map[string]string)
+	}
+	log.Printf("Fetched %d region names from documentation", len(regionNames))
+
+	log.Println("Fetching GCP regions...")
+	regions, err := fetchRegions(projectID, apiKey, token)
+	if err != nil {
+		log.Fatal("Failed to fetch regions:", err)
+	}
+	log.Printf("Fetched %d GCP regions", len(regions))
+
+	log.Println("Fetching GCP machine types...")
+	machineTypes, err := fetchMachineTypes(projectID, apiKey, token)
+	if err != nil {
+		log.Fatal("Failed to fetch machine types:", err)
+	}
+	log.Printf("Fetched %d GCP machine types", len(machineTypes))
 
 	log.Println("Fetching GCP Compute Engine SKUs...")
-	skus, err := fetchComputeSKUs(apiKey)
+	skus, err := fetchComputeSKUs(apiKey, token)
 	if err != nil {
 		log.Fatal("Failed to fetch SKUs:", err)
 	}
 	log.Printf("Fetched %d GCP SKUs", len(skus))
 
 	log.Println("Fetching GCP pricing data...")
-	pricing, err := fetchPricing(apiKey)
+	pricing, err := fetchPricing(apiKey, token)
 	if err != nil {
 		log.Fatal("Failed to fetch pricing:", err)
 	}
 	log.Printf("Fetched pricing for %d GCP SKUs", len(pricing))
 
 	log.Println("Processing GCP instance data...")
-	instancesMap := processGCPData(skus, pricing)
+	instancesMap := processGCPData(skus, pricing, regionNames, machineTypes)
 
 	// Convert map to sorted slice
 	instances := make([]*GCPInstance, 0, len(instancesMap))

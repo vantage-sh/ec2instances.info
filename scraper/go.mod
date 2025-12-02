@@ -1,6 +1,8 @@
 module scraper
 
-go 1.24
+go 1.24.0
+
+toolchain go1.24.4
 
 require (
 	github.com/anaskhan96/soup v1.2.5
@@ -9,9 +11,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.231.0
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.46.3
 	github.com/zcalusic/sysinfo v1.1.3
+	golang.org/x/oauth2 v0.33.0
 )
 
 require (
+	cloud.google.com/go/compute/metadata v0.3.0 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.36.5 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.70 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.32 // indirect

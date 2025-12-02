@@ -6,12 +6,14 @@ import (
 	"log"
 	"net/http"
 	"regexp"
+	"scraper/utils"
 	"strconv"
 	"strings"
 )
 
 const (
 	GCP_BILLING_API_BASE = "https://cloudbilling.googleapis.com"
+	GCP_COMPUTE_API_BASE = "https://compute.googleapis.com/compute/v1"
 	COMPUTE_SERVICE_ID   = "6F81-5844-456A" // Compute Engine service ID
 )
 
@@ -94,16 +96,48 @@ type PricesResponse struct {
 	NextPageToken string      `json:"nextPageToken"`
 }
 
-// Helper function to make API requests with API key
-func makeGCPRequest(url string, apiKey string, result interface{}) error {
+// Compute Engine API structures
+type RegionList struct {
+	Items []ComputeRegion `json:"items"`
+}
+
+type ComputeRegion struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+}
+
+type MachineTypeAggregatedList struct {
+	Items map[string]MachineTypesScopedList `json:"items"`
+}
+
+type MachineTypesScopedList struct {
+	MachineTypes []MachineType `json:"machineTypes"`
+}
+
+type MachineType struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	GuestCpus   int    `json:"guestCpus"`
+	MemoryMb    int    `json:"memoryMb"`
+	Zone        string `json:"zone"`
+}
+
+// Helper function to make API requests with API key or Bearer token
+func makeGCPRequest(url string, apiKey string, token string, result interface{}) error {
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return err
 	}
 
 	q := req.URL.Query()
-	q.Add("key", apiKey)
+	if apiKey != "" {
+		q.Add("key", apiKey)
+	}
 	req.URL.RawQuery = q.Encode()
+
+	if token != "" {
+		req.Header.Set("Authorization", "Bearer "+token)
+	}
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -120,7 +154,7 @@ func makeGCPRequest(url string, apiKey string, result interface{}) error {
 }
 
 // Fetch all SKUs for Compute Engine with pagination
-func fetchComputeSKUs(apiKey string) ([]SKU, error) {
+func fetchComputeSKUs(apiKey, token string) ([]SKU, error) {
 	var allSKUs []SKU
 	pageToken := ""
 
@@ -131,7 +165,7 @@ func fetchComputeSKUs(apiKey string) ([]SKU, error) {
 		}
 
 		var response SKUsResponse
-		if err := makeGCPRequest(url, apiKey, &response); err != nil {
+		if err := makeGCPRequest(url, apiKey, token, &response); err != nil {
 			return nil, fmt.Errorf("failed to fetch SKUs: %w", err)
 		}
 
@@ -147,7 +181,7 @@ func fetchComputeSKUs(apiKey string) ([]SKU, error) {
 }
 
 // Fetch pricing for all SKUs
-func fetchPricing(apiKey string) (map[string]PriceInfo, error) {
+func fetchPricing(apiKey, token string) (map[string]PriceInfo, error) {
 	priceMap := make(map[string]PriceInfo)
 	pageToken := ""
 
@@ -158,7 +192,7 @@ func fetchPricing(apiKey string) (map[string]PriceInfo, error) {
 		}
 
 		var response PricesResponse
-		if err := makeGCPRequest(url, apiKey, &response); err != nil {
+		if err := makeGCPRequest(url, apiKey, token, &response); err != nil {
 			return nil, fmt.Errorf("failed to fetch prices: %w", err)
 		}
 
@@ -181,6 +215,104 @@ func fetchPricing(apiKey string) (map[string]PriceInfo, error) {
 	return priceMap, nil
 }
 
+// Fetch all regions
+func fetchRegions(projectID, apiKey, token string) ([]ComputeRegion, error) {
+	url := fmt.Sprintf("%s/projects/%s/regions", GCP_COMPUTE_API_BASE, projectID)
+	
+	var response RegionList
+	if err := makeGCPRequest(url, apiKey, token, &response); err != nil {
+		return nil, fmt.Errorf("failed to fetch regions: %w", err)
+	}
+
+	return response.Items, nil
+}
+
+// Fetch region display names from GCP documentation
+func fetchRegionNamesFromDocs() (map[string]string, error) {
+	url := "https://cloud.google.com/compute/docs/regions-zones"
+	
+	root, err := utils.LoadHTML(url)
+	if err != nil {
+		return nil, fmt.Errorf("failed to load HTML: %w", err)
+	}
+
+	regionNames := make(map[string]string)
+	
+	// Find all table rows in the regions table
+	// The structure has zone names like "africa-south1-a" followed by location like "Johannesburg, South Africa"
+	trs := root.FindAll("tr")
+	
+	for _, tr := range trs {
+		tds := tr.FindAll("td")
+		if len(tds) < 2 {
+			continue
+		}
+		
+		// First td contains the zone name (e.g., "africa-south1-a")
+		// It might be in a nested element like <code>
+		var zoneName string
+		codeTag := tds[0].Find("code")
+		if codeTag.Error == nil {
+			zoneName = strings.TrimSpace(codeTag.Text())
+		} else {
+			zoneName = strings.TrimSpace(tds[0].Text())
+		}
+		
+		// Second td contains the location (e.g., "Johannesburg, South Africa")
+		location := strings.TrimSpace(tds[1].Text())
+		
+		if zoneName == "" || location == "" {
+			continue
+		}
+		
+		// Extract region from zone name (remove the zone suffix like "-a", "-b", etc.)
+		// Zone format: region-zone (e.g., "us-central1-a" -> "us-central1")
+		parts := strings.Split(zoneName, "-")
+		if len(parts) < 3 {
+			continue
+		}
+		
+		// Region is everything except the last part
+		region := strings.Join(parts[:len(parts)-1], "-")
+		
+		// Extract just the city/state name from location
+		// Format: "City, State/Country" or "City, Country, Region"
+		// We want just the first part (city/state)
+		locationParts := strings.Split(location, ",")
+		if len(locationParts) > 0 {
+			prettyName := strings.TrimSpace(locationParts[0])
+			// Only store if we haven't seen this region yet (first zone wins)
+			if _, exists := regionNames[region]; !exists {
+				regionNames[region] = prettyName
+			}
+		}
+	}
+	
+	return regionNames, nil
+}
+
+// Fetch all machine types
+func fetchMachineTypes(projectID, apiKey, token string) (map[string]MachineType, error) {
+	url := fmt.Sprintf("%s/projects/%s/aggregated/machineTypes", GCP_COMPUTE_API_BASE, projectID)
+	
+	var response MachineTypeAggregatedList
+	if err := makeGCPRequest(url, apiKey, token, &response); err != nil {
+		return nil, fmt.Errorf("failed to fetch machine types: %w", err)
+	}
+
+	machineTypes := make(map[string]MachineType)
+	for _, scope := range response.Items {
+		for _, mt := range scope.MachineTypes {
+			// We only need one definition per machine type name, as they are consistent across zones
+			// usually.
+			if _, exists := machineTypes[mt.Name]; !exists {
+				machineTypes[mt.Name] = mt
+			}
+		}
+	}
+	return machineTypes, nil
+}
+
 // Parse machine type from display name
 // Examples from GCP API:
 // "N1 Predefined Instance Ram running in Zurich"
@@ -189,7 +321,7 @@ func fetchPricing(apiKey string) (map[string]PriceInfo, error) {
 // "Sole Tenancy Instance RAM running in Jakarta"
 // "Licensing Fee for Windows Server 2012 BYOL (CPU cost)"
 // "Licensing Fee for Windows Server 2012 BYOL (RAM cost)"
-var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2|n2d|e2|e2a|c2|c2d|m1|m2|m3|m4|t2d|t2a|a2|a3|g2|h3|c3|c3d|z3|c4|n4).*(?:instance\s+(core|ram)|\((?:cpu|ram)\s+cost\))`)
+var machineTypeRegex = regexp.MustCompile(`(?i)(n2d|n2|n1|e2a|e2|c2d|c2|m1|m2|m3|m4|t2d|t2a|a2|a3|g2|h3|c3d|c3|z3|c4|n4).*(?:instance\s+(core|ram)|\((?:cpu|ram)\s+cost\))`)
 
 func parseMachineTypeFromSKU(sku SKU) (machineFamily string, resourceType string, region string, isSpot bool, isWindows bool) {
 	displayName := sku.DisplayName
@@ -258,178 +390,10 @@ func calculateHourlyPrice(price PriceInfo) float64 {
 }
 
 // Region name mapping
-var gcpRegionNames = map[string]string{
-	"us-central1":             "Iowa",
-	"us-east1":                "South Carolina",
-	"us-east4":                "Northern Virginia",
-	"us-east5":                "Columbus",
-	"us-east7":                "Alabama",
-	"us-south1":               "Dallas",
-	"us-west1":                "Oregon",
-	"us-west2":                "Los Angeles",
-	"us-west3":                "Salt Lake City",
-	"us-west4":                "Las Vegas",
-	"us-west8":                "Phoenix",
-	"northamerica-northeast1": "Montreal",
-	"northamerica-northeast2": "Toronto",
-	"northamerica-south1":     "Mexico",
-	"southamerica-east1":      "São Paulo",
-	"southamerica-west1":      "Santiago",
-	"europe-central2":         "Warsaw",
-	"europe-north1":           "Finland",
-	"europe-north2":           "Sweden",
-	"europe-southwest1":       "Madrid",
-	"europe-west1":            "Belgium",
-	"europe-west2":            "London",
-	"europe-west3":            "Frankfurt",
-	"europe-west4":            "Netherlands",
-	"europe-west5":            "Zurich",
-	"europe-west6":            "Zurich",
-	"europe-west8":            "Milan",
-	"europe-west9":            "Paris",
-	"europe-west10":           "Berlin",
-	"europe-west12":           "Turin",
-	"asia-east1":              "Taiwan",
-	"asia-east2":              "Hong Kong",
-	"asia-northeast1":         "Tokyo",
-	"asia-northeast2":         "Osaka",
-	"asia-northeast3":         "Seoul",
-	"asia-south1":             "Mumbai",
-	"asia-south2":             "Delhi",
-	"asia-southeast1":         "Singapore",
-	"asia-southeast2":         "Jakarta",
-	"australia-southeast1":    "Sydney",
-	"australia-southeast2":    "Melbourne",
-	"me-central1":             "Doha",
-	"me-central2":             "Dammam",
-	"me-west1":                "Tel Aviv",
-	"africa-south1":           "Johannesburg",
-}
 
-func getRegionDisplayName(region string) string {
-	if name, ok := gcpRegionNames[region]; ok {
-		return name
-	}
-	return region
-}
 
 // Parse instance specifications from GCP machine type definitions
 // This is a simplified mapping - in production you'd want to fetch this from GCP API
-var gcpMachineSpecs = map[string]struct {
-	vcpu   int
-	memory float64
-	family string
-}{
-	// N1 Standard
-	"n1-standard-1":  {1, 3.75, "General purpose"},
-	"n1-standard-2":  {2, 7.5, "General purpose"},
-	"n1-standard-4":  {4, 15, "General purpose"},
-	"n1-standard-8":  {8, 30, "General purpose"},
-	"n1-standard-16": {16, 60, "General purpose"},
-	"n1-standard-32": {32, 120, "General purpose"},
-	"n1-standard-64": {64, 240, "General purpose"},
-	"n1-standard-96": {96, 360, "General purpose"},
-
-	// N1 High Memory
-	"n1-highmem-2":  {2, 13, "Memory optimized"},
-	"n1-highmem-4":  {4, 26, "Memory optimized"},
-	"n1-highmem-8":  {8, 52, "Memory optimized"},
-	"n1-highmem-16": {16, 104, "Memory optimized"},
-	"n1-highmem-32": {32, 208, "Memory optimized"},
-	"n1-highmem-64": {64, 416, "Memory optimized"},
-	"n1-highmem-96": {96, 624, "Memory optimized"},
-
-	// N1 High CPU
-	"n1-highcpu-2":  {2, 1.8, "Compute optimized"},
-	"n1-highcpu-4":  {4, 3.6, "Compute optimized"},
-	"n1-highcpu-8":  {8, 7.2, "Compute optimized"},
-	"n1-highcpu-16": {16, 14.4, "Compute optimized"},
-	"n1-highcpu-32": {32, 28.8, "Compute optimized"},
-	"n1-highcpu-64": {64, 57.6, "Compute optimized"},
-	"n1-highcpu-96": {96, 86.4, "Compute optimized"},
-
-	// N2 Standard
-	"n2-standard-2":   {2, 8, "General purpose"},
-	"n2-standard-4":   {4, 16, "General purpose"},
-	"n2-standard-8":   {8, 32, "General purpose"},
-	"n2-standard-16":  {16, 64, "General purpose"},
-	"n2-standard-32":  {32, 128, "General purpose"},
-	"n2-standard-48":  {48, 192, "General purpose"},
-	"n2-standard-64":  {64, 256, "General purpose"},
-	"n2-standard-80":  {80, 320, "General purpose"},
-	"n2-standard-96":  {96, 384, "General purpose"},
-	"n2-standard-128": {128, 512, "General purpose"},
-
-	// N2D Standard (AMD)
-	"n2d-standard-2":   {2, 8, "General purpose"},
-	"n2d-standard-4":   {4, 16, "General purpose"},
-	"n2d-standard-8":   {8, 32, "General purpose"},
-	"n2d-standard-16":  {16, 64, "General purpose"},
-	"n2d-standard-32":  {32, 128, "General purpose"},
-	"n2d-standard-48":  {48, 192, "General purpose"},
-	"n2d-standard-64":  {64, 256, "General purpose"},
-	"n2d-standard-80":  {80, 320, "General purpose"},
-	"n2d-standard-96":  {96, 384, "General purpose"},
-	"n2d-standard-128": {128, 512, "General purpose"},
-	"n2d-standard-224": {224, 896, "General purpose"},
-
-	// N2D High Memory (AMD)
-	"n2d-highmem-2":  {2, 16, "Memory optimized"},
-	"n2d-highmem-4":  {4, 32, "Memory optimized"},
-	"n2d-highmem-8":  {8, 64, "Memory optimized"},
-	"n2d-highmem-16": {16, 128, "Memory optimized"},
-	"n2d-highmem-32": {32, 256, "Memory optimized"},
-	"n2d-highmem-48": {48, 384, "Memory optimized"},
-	"n2d-highmem-64": {64, 512, "Memory optimized"},
-	"n2d-highmem-80": {80, 640, "Memory optimized"},
-	"n2d-highmem-96": {96, 768, "Memory optimized"},
-
-	// E2 Standard (Cost-optimized)
-	"e2-standard-2":  {2, 8, "General purpose"},
-	"e2-standard-4":  {4, 16, "General purpose"},
-	"e2-standard-8":  {8, 32, "General purpose"},
-	"e2-standard-16": {16, 64, "General purpose"},
-	"e2-standard-32": {32, 128, "General purpose"},
-
-	// C2 Compute-optimized
-	"c2-standard-4":  {4, 16, "Compute optimized"},
-	"c2-standard-8":  {8, 32, "Compute optimized"},
-	"c2-standard-16": {16, 64, "Compute optimized"},
-	"c2-standard-30": {30, 120, "Compute optimized"},
-	"c2-standard-60": {60, 240, "Compute optimized"},
-
-	// C2D Compute-optimized (AMD)
-	"c2d-standard-2":   {2, 8, "Compute optimized"},
-	"c2d-standard-4":   {4, 16, "Compute optimized"},
-	"c2d-standard-8":   {8, 32, "Compute optimized"},
-	"c2d-standard-16":  {16, 64, "Compute optimized"},
-	"c2d-standard-32":  {32, 128, "Compute optimized"},
-	"c2d-standard-56":  {56, 224, "Compute optimized"},
-	"c2d-standard-112": {112, 448, "Compute optimized"},
-
-	// M1 Memory-optimized
-	"m1-ultramem-40":  {40, 961, "Memory optimized"},
-	"m1-ultramem-80":  {80, 1922, "Memory optimized"},
-	"m1-ultramem-160": {160, 3844, "Memory optimized"},
-	"m1-megamem-96":   {96, 1433.6, "Memory optimized"},
-
-	// M2 Memory-optimized
-	"m2-ultramem-208": {208, 5888, "Memory optimized"},
-	"m2-ultramem-416": {416, 11776, "Memory optimized"},
-	"m2-megamem-416":  {416, 5888, "Memory optimized"},
-
-	// T2D Shared-core (burstable)
-	"t2d-standard-1": {1, 4, "General purpose"},
-	"t2d-standard-2": {2, 8, "General purpose"},
-	"t2d-standard-4": {4, 16, "General purpose"},
-	"t2d-standard-8": {8, 32, "General purpose"},
-
-	// T2A Shared-core (ARM)
-	"t2a-standard-1": {1, 4, "General purpose"},
-	"t2a-standard-2": {2, 8, "General purpose"},
-	"t2a-standard-4": {4, 16, "General purpose"},
-	"t2a-standard-8": {8, 32, "General purpose"},
-}
 
 // Create pretty name from instance type
 func createPrettyName(instanceType string) string {
