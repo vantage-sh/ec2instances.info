@@ -1649,23 +1649,23 @@
         }
     },
     "c5d.metal": {
-        "ran_at": "2025-11-25T03:39:42.320769Z",
+        "ran_at": "2025-12-03T14:59:55.210649Z",
         "coremark": {
-            "total_ticks": 7087,
-            "iterations_second": 56441.371525,
-            "total_time_seconds": 7.087
+            "total_ticks": 11519,
+            "iterations_second": 34725.236566,
+            "total_time_seconds": 11.519
         },
         "ffmpeg": {
-            "fps": 201,
-            "elapsed_time_seconds": 8.97,
-            "speed": 6.68,
+            "fps": 202,
+            "elapsed_time_seconds": 8.92,
+            "speed": 6.71,
             "aac_qavg": 335.41,
             "cuda_used": false
         },
         "nvidia_gpus": [],
         "memory": {
             "total_mb": 193031,
-            "speed_mhz": 3200
+            "speed_mhz": 2933
         },
         "cpu": {
             "vendor": "GenuineIntel",
@@ -2565,11 +2565,11 @@
         }
     },
     "c6gd.medium": {
-        "ran_at": "2025-11-24T19:56:28.789231Z",
+        "ran_at": "2025-12-03T14:24:27.594706Z",
         "coremark": {
-            "total_ticks": 5840,
-            "iterations_second": 18835.616438,
-            "total_time_seconds": 5.84
+            "total_ticks": 10659,
+            "iterations_second": 18763.486256,
+            "total_time_seconds": 10.659
         },
         "ffmpeg": null,
         "nvidia_gpus": [],
@@ -4057,11 +4057,11 @@
         }
     },
     "c7gd.medium": {
-        "ran_at": "2025-11-24T19:58:08.400629Z",
+        "ran_at": "2025-12-03T14:24:27.14269Z",
         "coremark": {
-            "total_ticks": 5568,
-            "iterations_second": 19755.747126,
-            "total_time_seconds": 5.568
+            "total_ticks": 12144,
+            "iterations_second": 24703.557312,
+            "total_time_seconds": 12.144
         },
         "ffmpeg": null,
         "nvidia_gpus": [],
@@ -4814,11 +4814,11 @@
         }
     },
     "c8g.medium": {
-        "ran_at": "2025-11-24T20:06:05.67348Z",
+        "ran_at": "2025-12-03T14:47:37.550959Z",
         "coremark": {
-            "total_ticks": 9875,
-            "iterations_second": 30379.746835,
-            "total_time_seconds": 9.875
+            "total_ticks": 14836,
+            "iterations_second": 26961.445133,
+            "total_time_seconds": 14.836
         },
         "ffmpeg": null,
         "nvidia_gpus": [],
@@ -4856,16 +4856,16 @@
         }
     },
     "c8g.metal-48xl": {
-        "ran_at": "2025-11-25T09:13:14.172829Z",
+        "ran_at": "2025-12-03T14:31:15.555944Z",
         "coremark": {
-            "total_ticks": 8704,
-            "iterations_second": 45955.882353,
-            "total_time_seconds": 8.704
+            "total_ticks": 10030,
+            "iterations_second": 39880.358923,
+            "total_time_seconds": 10.03
         },
         "ffmpeg": {
-            "fps": 285,
-            "elapsed_time_seconds": 6.32,
-            "speed": 9.47,
+            "fps": 149,
+            "elapsed_time_seconds": 12.11,
+            "speed": 4.95,
             "aac_qavg": 335.904,
             "cuda_used": false
         },
@@ -6010,16 +6010,16 @@
         }
     },
     "d3en.6xlarge": {
-        "ran_at": "2025-11-25T02:01:51.608391Z",
+        "ran_at": "2025-12-03T15:04:07.793088Z",
         "coremark": {
-            "total_ticks": 8471,
-            "iterations_second": 23609.963405,
-            "total_time_seconds": 8.471
+            "total_ticks": 13948,
+            "iterations_second": 21508.459994,
+            "total_time_seconds": 13.948
         },
         "ffmpeg": {
             "fps": 127,
-            "elapsed_time_seconds": 14.19,
-            "speed": 4.22,
+            "elapsed_time_seconds": 14.18,
+            "speed": 4.23,
             "aac_qavg": 335.41,
             "cuda_used": false
         },
@@ -11063,16 +11063,16 @@
         }
     },
     "i4i.metal": {
-        "ran_at": "2025-11-25T03:05:52.840381Z",
+        "ran_at": "2025-12-03T15:01:54.063021Z",
         "coremark": {
-            "total_ticks": 7597,
-            "iterations_second": 52652.362775,
-            "total_time_seconds": 7.597
+            "total_ticks": 12539,
+            "iterations_second": 31900.470532,
+            "total_time_seconds": 12.539
         },
         "ffmpeg": {
-            "fps": 253,
-            "elapsed_time_seconds": 7.1,
-            "speed": 8.44,
+            "fps": 165,
+            "elapsed_time_seconds": 10.93,
+            "speed": 5.48,
             "aac_qavg": 335.41,
             "cuda_used": false
         },
@@ -12205,16 +12205,16 @@
         }
     },
     "i8ge.metal-48xl": {
-        "ran_at": "2025-11-25T09:43:45.739411Z",
+        "ran_at": "2025-12-03T14:49:42.068139Z",
         "coremark": {
-            "total_ticks": 6925,
-            "iterations_second": 57761.732852,
-            "total_time_seconds": 6.925
+            "total_ticks": 13347,
+            "iterations_second": 29969.281486,
+            "total_time_seconds": 13.347
         },
         "ffmpeg": {
-            "fps": 284,
-            "elapsed_time_seconds": 6.32,
-            "speed": 9.47,
+            "fps": 176,
+            "elapsed_time_seconds": 10.24,
+            "speed": 5.85,
             "aac_qavg": 335.904,
             "cuda_used": false
         },
@@ -12773,11 +12773,11 @@
         }
     },
     "m1.medium": {
-        "ran_at": "2025-11-24T19:31:42.461918Z",
+        "ran_at": "2025-12-03T15:05:06.066425Z",
         "coremark": {
-            "total_ticks": 8448,
-            "iterations_second": 13020.833333,
-            "total_time_seconds": 8.448
+            "total_ticks": 10203,
+            "iterations_second": 10781.142801,
+            "total_time_seconds": 10.203
         },
         "ffmpeg": null,
         "nvidia_gpus": [],
@@ -16568,11 +16568,11 @@
         }
     },
     "m7a.medium": {
-        "ran_at": "2025-11-24T18:32:15.882845Z",
+        "ran_at": "2025-12-03T15:05:26.616889Z",
         "coremark": {
-            "total_ticks": 9368,
-            "iterations_second": 32023.911187,
-            "total_time_seconds": 9.368
+            "total_ticks": 13471,
+            "iterations_second": 29693.415485,
+            "total_time_seconds": 13.471
         },
         "ffmpeg": null,
         "nvidia_gpus": [],
@@ -16793,11 +16793,11 @@
         }
     },
     "m7g.medium": {
-        "ran_at": "2025-11-24T20:05:12.880775Z",
+        "ran_at": "2025-12-03T14:26:01.964544Z",
         "coremark": {
-            "total_ticks": 7591,
-            "iterations_second": 26346.989856,
-            "total_time_seconds": 7.591
+            "total_ticks": 11827,
+            "iterations_second": 25365.688678,
+            "total_time_seconds": 11.827
         },
         "ffmpeg": null,
         "nvidia_gpus": [],
@@ -18114,11 +18114,11 @@
         }
     },
     "m8g.medium": {
-        "ran_at": "2025-11-24T19:59:41.136797Z",
+        "ran_at": "2025-12-03T14:28:22.52265Z",
         "coremark": {
-            "total_ticks": 9918,
-            "iterations_second": 30248.033878,
-            "total_time_seconds": 9.918
+            "total_ticks": 10063,
+            "iterations_second": 29812.183246,
+            "total_time_seconds": 10.063
         },
         "ffmpeg": null,
         "nvidia_gpus": [],
@@ -20642,16 +20642,16 @@
         }
     },
     "r5a.large": {
-        "ran_at": "2025-11-25T04:07:54.077227Z",
+        "ran_at": "2025-12-03T15:02:18.411998Z",
         "coremark": {
-            "total_ticks": 7172,
-            "iterations_second": 15337.423313,
-            "total_time_seconds": 7.172
+            "total_ticks": 12729,
+            "iterations_second": 15712.153351,
+            "total_time_seconds": 12.729
         },
         "ffmpeg": {
-            "fps": 9.6,
-            "elapsed_time_seconds": 187.72,
-            "speed": 0.319,
+            "fps": 9.5,
+            "elapsed_time_seconds": 188.58,
+            "speed": 0.318,
             "aac_qavg": 335.41,
             "cuda_used": false
         },
@@ -22987,16 +22987,16 @@
         }
     },
     "r7g.medium": {
-        "ran_at": "2025-11-24T20:12:29.01654Z",
+        "ran_at": "2025-12-03T14:44:06.435254Z",
         "coremark": {
-            "total_ticks": 7994,
-            "iterations_second": 25018.764073,
-            "total_time_seconds": 7.994
+            "total_ticks": 11853,
+            "iterations_second": 25310.048089,
+            "total_time_seconds": 11.853
         },
         "ffmpeg": {
             "fps": 10,
-            "elapsed_time_seconds": 173.78,
-            "speed": 0.345,
+            "elapsed_time_seconds": 174.12,
+            "speed": 0.344,
             "aac_qavg": 335.904,
             "cuda_used": false
         },
@@ -23203,16 +23203,16 @@
         }
     },
     "r7gd.medium": {
-        "ran_at": "2025-11-24T20:05:02.997802Z",
+        "ran_at": "2025-12-03T14:32:48.451752Z",
         "coremark": {
-            "total_ticks": 7510,
-            "iterations_second": 26631.158455,
-            "total_time_seconds": 7.51
+            "total_ticks": 11884,
+            "iterations_second": 25244.025581,
+            "total_time_seconds": 11.884
         },
         "ffmpeg": {
             "fps": 10,
-            "elapsed_time_seconds": 175.51,
-            "speed": 0.341,
+            "elapsed_time_seconds": 174.94,
+            "speed": 0.343,
             "aac_qavg": 335.904,
             "cuda_used": false
         },
@@ -24894,11 +24894,11 @@
         }
     },
     "t2.micro": {
-        "ran_at": "2025-11-24T18:19:39.229943Z",
+        "ran_at": "2025-12-03T15:03:52.110902Z",
         "coremark": {
-            "total_ticks": 9977,
-            "iterations_second": 20046.106044,
-            "total_time_seconds": 9.977
+            "total_ticks": 10013,
+            "iterations_second": 19974.033756,
+            "total_time_seconds": 10.013
         },
         "ffmpeg": null,
         "nvidia_gpus": [],
@@ -25021,16 +25021,16 @@
         }
     },
     "t3.large": {
-        "ran_at": "2025-11-24T19:26:40.393471Z",
+        "ran_at": "2025-12-03T14:56:42.184858Z",
         "coremark": {
-            "total_ticks": 8885,
-            "iterations_second": 22509.848059,
-            "total_time_seconds": 8.885
+            "total_ticks": 14882,
+            "iterations_second": 20158.580836,
+            "total_time_seconds": 14.882
         },
         "ffmpeg": {
-            "fps": 9.8,
-            "elapsed_time_seconds": 183.72,
-            "speed": 0.326,
+            "fps": 9.5,
+            "elapsed_time_seconds": 189.75,
+            "speed": 0.316,
             "aac_qavg": 335.41,
             "cuda_used": false
         },
@@ -26189,16 +26189,16 @@
         }
     },
     "x2gd.medium": {
-        "ran_at": "2025-11-24T20:15:44.515013Z",
+        "ran_at": "2025-12-03T14:38:08.647611Z",
         "coremark": {
-            "total_ticks": 7278,
-            "iterations_second": 15114.042319,
-            "total_time_seconds": 7.278
+            "total_ticks": 10320,
+            "iterations_second": 19379.844961,
+            "total_time_seconds": 10.32
         },
         "ffmpeg": {
-            "fps": 6.6,
-            "elapsed_time_seconds": 274.02,
-            "speed": 0.219,
+            "fps": 6.9,
+            "elapsed_time_seconds": 262.44,
+            "speed": 0.228,
             "aac_qavg": 335.904,
             "cuda_used": false
         },
@@ -26951,16 +26951,16 @@
         }
     },
     "x8g.medium": {
-        "ran_at": "2025-11-24T20:14:33.925768Z",
+        "ran_at": "2025-12-03T14:26:56.2912Z",
         "coremark": {
-            "total_ticks": 9598,
-            "iterations_second": 31256.511773,
-            "total_time_seconds": 9.598
+            "total_ticks": 13321,
+            "iterations_second": 30027.775693,
+            "total_time_seconds": 13.321
         },
         "ffmpeg": {
             "fps": 12,
-            "elapsed_time_seconds": 149.46,
-            "speed": 0.401,
+            "elapsed_time_seconds": 147.85,
+            "speed": 0.405,
             "aac_qavg": 335.904,
             "cuda_used": false
         },
