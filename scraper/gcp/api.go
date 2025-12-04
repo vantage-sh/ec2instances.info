@@ -189,7 +189,7 @@ func fetchPricing(apiKey string) (map[string]PriceInfo, error) {
 // "Sole Tenancy Instance RAM running in Jakarta"
 // "Licensing Fee for Windows Server 2012 BYOL (CPU cost)"
 // "Licensing Fee for Windows Server 2012 BYOL (RAM cost)"
-var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2|n2d|e2|e2a|c2|c2d|m1|m2|m3|m4|t2d|t2a|a2|a3|g2|h3|c3|c3d|z3|c4|n4).*(?:instance\s+(core|ram)|\((?:cpu|ram)\s+cost\))`)
+var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2d|n2|e2|e2a|c2|c2d|m1|m2|m3|m4|t2d|t2a|a2|a3|g2|h3|c3|c3d|z3|c4|n4).*(?:instance\s+(core|ram)|\((?:cpu|ram)\s+cost\))`)
 
 func parseMachineTypeFromSKU(sku SKU) (machineFamily string, resourceType string, region string, isSpot bool, isWindows bool) {
 	displayName := sku.DisplayName
@@ -406,6 +406,20 @@ var gcpMachineSpecs = map[string]struct {
 	"c2d-standard-32":  {32, 128, "Compute optimized"},
 	"c2d-standard-56":  {56, 224, "Compute optimized"},
 	"c2d-standard-112": {112, 448, "Compute optimized"},
+
+	// C4 Compute-optimized (AMD)
+	"c4-standard-2":         {2, 7, "General purpose"},
+	"c4-standard-4":         {4, 15, "General purpose"},
+	"c4-standard-8":         {8, 30, "General purpose"},
+	"c4-standard-16":        {16, 60, "General purpose"},
+	"c4-standard-24":        {24, 90, "General purpose"},
+	"c4-standard-32":        {32, 120, "General purpose"},
+	"c4-standard-48":        {48, 180, "General purpose"},
+	"c4-standard-96":        {96, 360, "General purpose"},
+	"c4-standard-144":       {144, 540, "General purpose"},
+	"c4-standard-192":       {192, 720, "General purpose"},
+	"c4-standard-288":       {288, 1080, "General purpose"},
+	"c4-standard-288-metal": {288, 1080, "General purpose"},
 
 	// M1 Memory-optimized
 	"m1-ultramem-40":  {40, 961, "Memory optimized"},
