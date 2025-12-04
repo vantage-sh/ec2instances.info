@@ -63,6 +63,19 @@ type Memory struct {
 	SpeedMhz *int `json:"speed_mhz"`
 }
 
+type NUMA struct {
+	NumaNodeCount        int     `json:"numa_node_count"`
+	IsNuma               bool    `json:"is_numa"`
+	NumaNodeCoreCounts   []int   `json:"numa_node_core_counts"`
+	NumaNodeThreadCounts []int   `json:"numa_node_thread_counts"`
+	MemoryPerNodeMB      []int   `json:"memory_per_numa_node_mb"`
+	NodeDistances        [][]int `json:"node_distances"`
+	MaxNumaDistance      int     `json:"max_numa_distance"`
+	L3PerNodeMB          []int   `json:"l3_cache_per_numa_node_mb"`
+	L3Shared             bool    `json:"l3_shared"`
+	IsBalanced           bool    `json:"is_balanced"`
+}
+
 type InstanceDetails struct {
 	RanAt      time.Time       `json:"ran_at"`
 	Coremark   CoremarkMetrics `json:"coremark"`
@@ -70,6 +83,7 @@ type InstanceDetails struct {
 	NvidiaGPUs []NvidiaGPU     `json:"nvidia_gpus"`
 	Memory     Memory          `json:"memory"`
 	CPU        sysinfo.CPU     `json:"cpu"`
+	NUMA       NUMA            `json:"numa"`
 }
 
 var ExtraInstanceDetails map[string]InstanceDetails

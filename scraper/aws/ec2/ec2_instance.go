@@ -110,6 +110,26 @@ type EC2Instance struct {
 	FFmpegFPS                *float64              `json:"ffmpeg_fps"`
 	GPUPowerDrawWattsAvg     *int                  `json:"gpu_power_draw_watts_avg"`
 	GPUClocks                []extras.GPUClocks    `json:"gpu_clocks"`
+	NumaNodeCount            *int                  `json:"numa_node_count"`
+	UsesNumaArchitecture     *bool                 `json:"uses_numa_architecture"`
+	MaxNumaDistance          *int                  `json:"max_numa_distance"`
+	CoreCountPerNumaNode     *float64              `json:"core_count_per_numa_node"`
+	ThreadCountPerNumaNode   *float64              `json:"thread_count_per_numa_node"`
+	MemoryPerNumaNodeMB      *float64              `json:"memory_per_numa_node_mb"`
+	L3PerNumaNodeMB          *float64              `json:"l3_per_numa_node_mb"`
+	L3Shared                 *bool                 `json:"l3_shared"`
+}
+
+func avg(ints []int) *float64 {
+	if len(ints) == 0 {
+		return nil
+	}
+	sum := 0
+	for _, v := range ints {
+		sum += v
+	}
+	avg := float64(sum) / float64(len(ints))
+	return &avg
 }
 
 func (instance *EC2Instance) addExtraDetails() {
@@ -148,6 +168,16 @@ func (instance *EC2Instance) addExtraDetails() {
 			instance.FFmpegUsedCuda = &details.FfMpeg.CudaUsed
 			instance.FFmpegSpeed = &details.FfMpeg.Speed
 			instance.FFmpegFPS = &details.FfMpeg.FPS
+		}
+		instance.UsesNumaArchitecture = &details.NUMA.IsNuma
+		if details.NUMA.IsNuma {
+			instance.NumaNodeCount = &details.NUMA.NumaNodeCount
+			instance.MaxNumaDistance = &details.NUMA.MaxNumaDistance
+			instance.CoreCountPerNumaNode = avg(details.NUMA.NumaNodeCoreCounts)
+			instance.ThreadCountPerNumaNode = avg(details.NUMA.NumaNodeThreadCounts)
+			instance.MemoryPerNumaNodeMB = avg(details.NUMA.MemoryPerNodeMB)
+			instance.L3PerNumaNodeMB = avg(details.NUMA.L3PerNodeMB)
+			instance.L3Shared = &details.NUMA.L3Shared
 		}
 	}
 }
