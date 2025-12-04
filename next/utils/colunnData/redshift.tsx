@@ -112,7 +112,7 @@ function getPricingSorter(
         ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.row.original.pricing;
             const price = getter(pricing?.[selectedRegion]);
-            if (isNaN(Number(price)) || !price) return "unavailable";
+            if (isNaN(Number(price)) || !price) return undefined;
             return calculateCost(
                 price,
                 info.row.original,

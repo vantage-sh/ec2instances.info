@@ -80,7 +80,7 @@ export function calculateAndFormatCost(
         usdRate: number;
         cnyRate: number;
     },
-): string {
+): string | undefined {
     const perTime = calculateCost(
         price,
         instance,
@@ -89,7 +89,7 @@ export function calculateAndFormatCost(
         selectedRegion,
         currency,
     );
-    if (perTime === -1) return "unavailable";
+    if (perTime === -1) return undefined;
 
     const precision =
         costDuration === "secondly" || costDuration === "minutely" ? 6 : 4;
@@ -160,7 +160,6 @@ export function getPricingSorter(
             );
             return valueA - valueB;
         },
-        sortUndefined: "last",
         accessorFn: (row) => {
             const g = getter(row.pricing?.[selectedRegion]);
             if (!convertToPrice) return g;
@@ -179,7 +178,7 @@ export function getPricingSorter(
             const pricing = info.row.original.pricing;
             if (!convertToPrice) return getter(pricing?.[selectedRegion]);
             const price = getter(pricing?.[selectedRegion]);
-            if (isNaN(Number(price)) || price === "0") return "unavailable";
+            if (isNaN(Number(price)) || price === "0") return undefined;
             return calculateAndFormatCost(
                 price,
                 info.row.original,
@@ -271,7 +270,7 @@ export const columnsGen = (
         filterFn: expr,
         cell: (info) => {
             const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return "N/A";
+            if (value === null || value === undefined) return undefined;
             return value.toLocaleString();
         },
     },
@@ -284,7 +283,7 @@ export const columnsGen = (
         filterFn: expr,
         cell: (info) => {
             const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return "N/A";
+            if (value === null || value === undefined) return undefined;
             return `${value.toFixed(1)} fps`;
         },
     },
@@ -306,8 +305,160 @@ export const columnsGen = (
         filterFn: expr,
         cell: (info) => {
             if (info.getValue() === null || info.getValue() === undefined)
-                return "unknown";
+                return undefined;
             return `${info.getValue() as number} MT/s`;
+        },
+    },
+    {
+        accessorKey: "uses_numa_architecture",
+        header: "Uses NUMA Architecture",
+        size: 180,
+        id: "uses_numa_architecture",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.uses_numa_architecture;
+            const valueB = rowB.original.uses_numa_architecture;
+            if (valueA === null || valueA === undefined) return 1;
+            if (valueB === null || valueB === undefined) return -1;
+            return Number(valueA) - Number(valueB);
+        },
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as boolean | null;
+            if (value === null || value === undefined) return undefined;
+            return value ? "Yes" : "No";
+        },
+    },
+    {
+        accessorKey: "numa_node_count",
+        header: "NUMA Node Count",
+        size: 150,
+        id: "numa_node_count",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.numa_node_count;
+            const valueB = rowB.original.numa_node_count;
+            if (valueA === null || valueA === undefined) return -1;
+            if (valueB === null || valueB === undefined) return 1;
+            return valueA - valueB;
+        },
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | null;
+            if (value === null || value === undefined) return undefined;
+            return value;
+        },
+    },
+    {
+        accessorKey: "max_numa_distance",
+        header: "Max NUMA Distance",
+        size: 150,
+        id: "max_numa_distance",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.max_numa_distance;
+            const valueB = rowB.original.max_numa_distance;
+            if (valueA === null || valueA === undefined) return -1;
+            if (valueB === null || valueB === undefined) return 1;
+            return valueA - valueB;
+        },
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | null;
+            if (value === null || value === undefined) return undefined;
+            return value;
+        },
+    },
+    {
+        accessorKey: "core_count_per_numa_node",
+        header: "Cores per NUMA Node (Avg)",
+        size: 180,
+        id: "core_count_per_numa_node",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.core_count_per_numa_node;
+            const valueB = rowB.original.core_count_per_numa_node;
+            if (valueA === null || valueA === undefined) return -1;
+            if (valueB === null || valueB === undefined) return 1;
+            return valueA - valueB;
+        },
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | null;
+            if (value === null || value === undefined) return undefined;
+            return value;
+        },
+    },
+    {
+        accessorKey: "thread_count_per_numa_node",
+        header: "Threads per NUMA Node (Avg)",
+        size: 180,
+        id: "thread_count_per_numa_node",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.thread_count_per_numa_node;
+            const valueB = rowB.original.thread_count_per_numa_node;
+            if (valueA === null || valueA === undefined) return -1;
+            if (valueB === null || valueB === undefined) return 1;
+            return valueA - valueB;
+        },
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | null;
+            if (value === null || value === undefined) return undefined;
+            return value;
+        },
+    },
+    {
+        accessorKey: "memory_per_numa_node_mb",
+        header: "Memory per NUMA Node (Avg MB)",
+        size: 200,
+        id: "memory_per_numa_node_mb",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.memory_per_numa_node_mb;
+            const valueB = rowB.original.memory_per_numa_node_mb;
+            if (valueA === null || valueA === undefined) return -1;
+            if (valueB === null || valueB === undefined) return 1;
+            return valueA - valueB;
+        },
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | null;
+            if (value === null || value === undefined) return undefined;
+            return `${value.toFixed(0)} MB`;
+        },
+    },
+    {
+        accessorKey: "l3_per_numa_node_mb",
+        header: "L3 Cache per NUMA Node (Avg MB)",
+        size: 220,
+        id: "l3_per_numa_node_mb",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.l3_per_numa_node_mb;
+            const valueB = rowB.original.l3_per_numa_node_mb;
+            if (valueA === null || valueA === undefined) return -1;
+            if (valueB === null || valueB === undefined) return 1;
+            return valueA - valueB;
+        },
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | null;
+            if (value === null || value === undefined) return undefined;
+            return `${value.toFixed(1)} MB`;
+        },
+    },
+    {
+        accessorKey: "l3_shared",
+        header: "L3 Cache Shared",
+        size: 150,
+        id: "l3_shared",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.l3_shared;
+            const valueB = rowB.original.l3_shared;
+            if (!valueA) return -1;
+            if (!valueB) return 1;
+            return 0;
+        },
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as boolean | null;
+            if (value === null || value === undefined) return undefined;
+            return value ? "Yes" : "No";
         },
     },
     {
@@ -397,7 +548,7 @@ export const columnsGen = (
         filterFn: expr,
         cell: (info) => {
             const value = info.getValue();
-            if (value === "unknown") return "unknown";
+            if (value === "unknown") return undefined;
             return `${Number(value).toFixed(2)} GiB/vCPU`;
         },
     },
@@ -457,14 +608,14 @@ export const columnsGen = (
                             href="http://aws.amazon.com/ec2/instance-types/#burst"
                             target="_blank"
                         >
-                            {value === "variable" ? "Burstable" : "unknown"}
+                            {value === "variable" ? "Burstable" : undefined}
                         </a>
                     </span>
                 );
             }
             const numValue = Number(value);
             if (isNaN(numValue)) {
-                return "unknown";
+                return undefined;
             }
             return `${numValue.toFixed(4)} units`;
         },
@@ -476,7 +627,7 @@ export const columnsGen = (
         id: "physical_processor",
         sortingFn: "alphanumeric",
         filterFn: regex({ accessorKey: "physical_processor" }),
-        cell: (info) => info.getValue() || "unknown",
+        cell: (info) => info.getValue() || undefined,
     },
     {
         accessorKey: "clock_speed_ghz",
@@ -508,7 +659,7 @@ export const columnsGen = (
                 return parseFloat(rowValue[0]) >= parseFloat(matchFilter[0]);
             },
         }),
-        cell: (info) => info.getValue() || "unknown",
+        cell: (info) => info.getValue() || undefined,
     },
     {
         accessorKey: "intel_avx",
@@ -516,7 +667,7 @@ export const columnsGen = (
         size: 110,
         id: "intel_avx",
         filterFn: regex({ accessorKey: "intel_avx" }),
-        cell: (info) => (info.getValue() ? "Yes" : "unknown"),
+        cell: (info) => (info.getValue() ? "Yes" : undefined),
     },
     {
         accessorKey: "intel_avx2",
@@ -524,7 +675,7 @@ export const columnsGen = (
         size: 110,
         id: "intel_avx2",
         filterFn: regex({ accessorKey: "intel_avx2" }),
-        cell: (info) => (info.getValue() ? "Yes" : "unknown"),
+        cell: (info) => (info.getValue() ? "Yes" : undefined),
     },
     {
         accessorKey: "intel_avx512",
@@ -532,7 +683,7 @@ export const columnsGen = (
         size: 130,
         id: "intel_avx512",
         filterFn: regex({ accessorKey: "intel_avx512" }),
-        cell: (info) => (info.getValue() ? "Yes" : "unknown"),
+        cell: (info) => (info.getValue() ? "Yes" : undefined),
     },
     {
         accessorKey: "intel_turbo",
@@ -540,7 +691,7 @@ export const columnsGen = (
         size: 120,
         id: "intel_turbo",
         filterFn: regex({ accessorKey: "intel_turbo" }),
-        cell: (info) => (info.getValue() ? "Yes" : "unknown"),
+        cell: (info) => (info.getValue() ? "Yes" : undefined),
     },
     {
         accessorKey: "storage",
@@ -597,7 +748,7 @@ export const columnsGen = (
         },
         ...makeCellWithRegexSorter("storage", (info) => {
             const storage = info.getValue() as Storage;
-            if (!storage) return "N/A";
+            if (!storage) return undefined;
             if (storage.storage_needs_initialization === undefined)
                 throw new Error("storage_needs_initialization is undefined");
             return storage.storage_needs_initialization ? "No" : "Yes";
@@ -622,7 +773,7 @@ export const columnsGen = (
         },
         ...makeCellWithRegexSorter("storage", (info) => {
             const storage = info.getValue() as Storage;
-            if (!storage || !storage.ssd) return "N/A";
+            if (!storage || !storage.ssd) return undefined;
             if (storage.trim_support === undefined)
                 throw new Error("trim_support is undefined");
             return storage.trim_support ? "Yes" : "No";
@@ -674,7 +825,7 @@ export const columnsGen = (
         },
         ...makeCellWithRegexSorter("ebs_baseline_bandwidth", (info) => {
             const value = info.getValue();
-            if (!value) return "N/A";
+            if (!value) return undefined;
             return `${value} Mbps`;
         }),
     },
@@ -711,7 +862,7 @@ export const columnsGen = (
         },
         ...makeCellWithRegexSorter("ebs_max_bandwidth", (info) => {
             const value = info.getValue();
-            if (!value) return "N/A";
+            if (!value) return undefined;
             return `${value} Mbps`;
         }),
     },
@@ -769,7 +920,7 @@ export const columnsGen = (
         },
         cell: (info) => {
             const vpc = info.getValue() as any;
-            if (!vpc) return "N/A";
+            if (!vpc) return undefined;
             const maxIps = vpc.max_enis * vpc.ips_per_eni;
             return maxIps;
         },
@@ -788,7 +939,7 @@ export const columnsGen = (
         },
         ...makeCellWithRegexSorter("vpc", (info) => {
             const vpc = info.getValue() as any;
-            if (!vpc) return "N/A";
+            if (!vpc) return undefined;
             return vpc.max_enis;
         }),
     },
@@ -1320,7 +1471,7 @@ export const columnsGen = (
         },
         ...makeCellWithRegexSorter("gpu_architectures", (info) => {
             const value = info.getValue() as string[] | null;
-            if (!value || value.length === 0) return "N/A";
+            if (!value || value.length === 0) return undefined;
             return value.join(", ");
         }),
     },
@@ -1333,7 +1484,7 @@ export const columnsGen = (
         filterFn: expr,
         cell: (info) => {
             const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return "N/A";
+            if (value === null || value === undefined) return undefined;
             return `${value.toFixed(1)}°C`;
         },
     },
@@ -1344,7 +1495,7 @@ export const columnsGen = (
         id: "ffmpeg_used_cuda",
         ...makeCellWithRegexSorter("ffmpeg_used_cuda", (info) => {
             const value = info.getValue() as boolean | null;
-            if (value === null || value === undefined) return "N/A";
+            if (value === null || value === undefined) return undefined;
             return value ? "Yes" : "No";
         }),
     },
@@ -1357,7 +1508,7 @@ export const columnsGen = (
         filterFn: expr,
         cell: (info) => {
             const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return "N/A";
+            if (value === null || value === undefined) return undefined;
             return `${value.toFixed(2)}x`;
         },
     },
@@ -1370,7 +1521,7 @@ export const columnsGen = (
         filterFn: expr,
         cell: (info) => {
             const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return "N/A";
+            if (value === null || value === undefined) return undefined;
             return `${value.toFixed(1)}W`;
         },
     },
@@ -1383,7 +1534,7 @@ export const columnsGen = (
         filterFn: expr,
         cell: (info) => {
             const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return "N/A";
+            if (value === null || value === undefined) return undefined;
             return `${value.toFixed(1)}W`;
         },
     },
@@ -1425,7 +1576,7 @@ export const columnsGen = (
         },
         cell: (info) => {
             const clocks = info.getValue() as EC2Instance["gpu_clocks"];
-            if (!clocks || clocks.length === 0) return "N/A";
+            if (!clocks || clocks.length === 0) return undefined;
             const avg =
                 clocks.reduce(
                     (sum, clock) => sum + clock.graphics_clock_mhz,
@@ -1466,7 +1617,7 @@ export const columnsGen = (
         },
         cell: (info) => {
             const clocks = info.getValue() as EC2Instance["gpu_clocks"];
-            if (!clocks || clocks.length === 0) return "N/A";
+            if (!clocks || clocks.length === 0) return undefined;
             const avg =
                 clocks.reduce((sum, clock) => sum + clock.sm_clock_mhz, 0) /
                 clocks.length;
@@ -1505,7 +1656,7 @@ export const columnsGen = (
         },
         cell: (info) => {
             const clocks = info.getValue() as EC2Instance["gpu_clocks"];
-            if (!clocks || clocks.length === 0) return "N/A";
+            if (!clocks || clocks.length === 0) return undefined;
             const avg =
                 clocks.reduce((sum, clock) => sum + clock.memory_clock_mhz, 0) /
                 clocks.length;
@@ -1544,7 +1695,7 @@ export const columnsGen = (
         },
         cell: (info) => {
             const clocks = info.getValue() as EC2Instance["gpu_clocks"];
-            if (!clocks || clocks.length === 0) return "N/A";
+            if (!clocks || clocks.length === 0) return undefined;
             const avg =
                 clocks.reduce((sum, clock) => sum + clock.video_clock_mhz, 0) /
                 clocks.length;

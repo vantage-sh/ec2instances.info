@@ -219,6 +219,12 @@ const exprColumns = [
     "ffmpeg_speed",
     "ffmpeg_fps",
     "memory_speed",
+    "numa_node_count",
+    "max_numa_distance",
+    "core_count_per_numa_node",
+    "thread_count_per_numa_node",
+    "memory_per_numa_node_mb",
+    "l3_per_numa_node_mb",
 ];
 
 export default function IndividualColumnFilter<Instance>({

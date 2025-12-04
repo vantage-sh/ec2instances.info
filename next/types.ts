@@ -74,14 +74,14 @@ export interface EC2Instance {
     };
     pricing: Pricing;
     generation: string;
-    coremark_iterations_second: number | null;
-    gpu_architectures: string[] | null;
-    gpu_current_temp_avg_celsius: number | null;
-    ffmpeg_used_cuda: boolean | null;
-    ffmpeg_speed: number | null;
-    ffmpeg_fps: number | null;
-    gpu_power_draw_watts_avg: number | null;
-    gpu_clocks:
+    coremark_iterations_second?: number | null;
+    gpu_architectures?: string[] | null;
+    gpu_current_temp_avg_celsius?: number | null;
+    ffmpeg_used_cuda?: boolean | null;
+    ffmpeg_speed?: number | null;
+    ffmpeg_fps?: number | null;
+    gpu_power_draw_watts_avg?: number | null;
+    gpu_clocks?:
         | {
               graphics_clock_mhz: number;
               sm_clock_mhz: number;
@@ -89,6 +89,14 @@ export interface EC2Instance {
               video_clock_mhz: number;
           }[]
         | null;
+    numa_node_count?: number | null;
+    uses_numa_architecture?: boolean | null;
+    max_numa_distance?: number | null;
+    core_count_per_numa_node?: number | null;
+    thread_count_per_numa_node?: number | null;
+    memory_per_numa_node_mb?: number | null;
+    l3_per_numa_node_mb?: number | null;
+    l3_shared?: boolean | null;
 }
 
 export interface Region {

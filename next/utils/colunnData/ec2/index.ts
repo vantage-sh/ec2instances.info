@@ -88,6 +88,14 @@ const initialColumnsArr = [
     ["gpu_clocks_memory_avg", false],
     ["gpu_clocks_video_avg", false],
     ["memory_speed", false],
+    ["uses_numa_architecture", false],
+    ["numa_node_count", false],
+    ["max_numa_distance", false],
+    ["core_count_per_numa_node", false],
+    ["thread_count_per_numa_node", false],
+    ["memory_per_numa_node_mb", false],
+    ["l3_per_numa_node_mb", false],
+    ["l3_shared", false],
 ] as const;
 
 export const initialColumnsValue: {
@@ -115,6 +123,26 @@ export function makePrettyNames<V>(
         makeColumnOption("ffmpeg_fps", "FFmpeg FPS"),
         makeColumnOption("memory", "Memory"),
         makeColumnOption("memory_speed", "Memory Speed"),
+        makeColumnOption("uses_numa_architecture", "Uses NUMA Architecture"),
+        makeColumnOption("numa_node_count", "NUMA Node Count"),
+        makeColumnOption("max_numa_distance", "Max NUMA Distance"),
+        makeColumnOption(
+            "core_count_per_numa_node",
+            "Cores per NUMA Node (Avg)",
+        ),
+        makeColumnOption(
+            "thread_count_per_numa_node",
+            "Threads per NUMA Node (Avg)",
+        ),
+        makeColumnOption(
+            "memory_per_numa_node_mb",
+            "Memory per NUMA Node (Avg MB)",
+        ),
+        makeColumnOption(
+            "l3_per_numa_node_mb",
+            "L3 Cache per NUMA Node (Avg MB)",
+        ),
+        makeColumnOption("l3_shared", "L3 Cache Shared"),
         makeColumnOption("ECU", "Compute Units (ECU)"),
         makeColumnOption("vCPU", "vCPUs"),
         makeColumnOption("memory_per_vcpu", "GiB of Memory per vCPU"),

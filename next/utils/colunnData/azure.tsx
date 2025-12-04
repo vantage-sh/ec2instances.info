@@ -162,7 +162,7 @@ export function calculateAndFormatCost(
         code: string;
         usdRate: number;
     },
-): string {
+): string | undefined {
     const perTime = calculateCost(
         price,
         instance,
@@ -170,7 +170,7 @@ export function calculateAndFormatCost(
         costDuration,
         currency.usdRate,
     );
-    if (perTime === -1) return "unavailable";
+    if (perTime === -1) return undefined;
 
     const precision =
         costDuration === "secondly" || costDuration === "minutely" ? 6 : 4;
@@ -244,7 +244,7 @@ function getPricingSorter(
         ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.row.original.pricing;
             const price = getter(pricing?.[selectedRegion]);
-            if (isNaN(Number(price))) return "unavailable";
+            if (isNaN(Number(price))) return undefined;
             return calculateAndFormatCost(
                 price,
                 info.row.original,

@@ -87,6 +87,79 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
             ],
         },
         {
+            name: "NUMA Architecture",
+            slug: "numa",
+            rows: [
+                {
+                    name: "Uses NUMA Architecture",
+                    children:
+                        typeof instance.uses_numa_architecture !== "boolean"
+                            ? "N/A"
+                            : instance.uses_numa_architecture
+                              ? "Yes"
+                              : "No",
+                    help: "https://en.wikipedia.org/wiki/Non-uniform_memory_access",
+                    helpText:
+                        "Non-Uniform Memory Access (NUMA) is a computer memory design where memory access time depends on the memory location relative to the processor. In a NUMA system, processors are divided into nodes, each with its own local memory. Accessing local memory is faster than accessing memory from another node.",
+                },
+                {
+                    name: "NUMA Node Count",
+                    children: instance.numa_node_count ?? "N/A",
+                    helpText:
+                        "The number of NUMA nodes (memory domains) in the system. Each node typically contains one or more processors and local memory.",
+                },
+                {
+                    name: "Max NUMA Distance",
+                    children: instance.max_numa_distance ?? "N/A",
+                    helpText:
+                        "The maximum distance between NUMA nodes, indicating the relative cost of accessing memory from the furthest node. Lower values indicate better memory locality.",
+                },
+                {
+                    name: "Cores per NUMA Node (Avg)",
+                    children: instance.core_count_per_numa_node
+                        ? instance.core_count_per_numa_node.toFixed(1)
+                        : "N/A",
+                    helpText:
+                        "Average number of physical CPU cores per NUMA node. This affects how workloads should be distributed for optimal performance.",
+                },
+                {
+                    name: "Threads per NUMA Node (Avg)",
+                    children: instance.thread_count_per_numa_node
+                        ? instance.thread_count_per_numa_node.toFixed(1)
+                        : "N/A",
+                    helpText:
+                        "Average number of hardware threads (vCPUs) per NUMA node. For optimal performance, bind your application to a single NUMA node when possible.",
+                },
+                {
+                    name: "Memory per NUMA Node (Avg MB)",
+                    children: instance.memory_per_numa_node_mb
+                        ? `${instance.memory_per_numa_node_mb.toFixed(0)} MB`
+                        : "N/A",
+                    helpText:
+                        "Average amount of local memory available per NUMA node. Allocating memory on the same node as your compute improves performance.",
+                },
+                {
+                    name: "L3 Cache per NUMA Node (Avg MB)",
+                    children: instance.l3_per_numa_node_mb
+                        ? `${instance.l3_per_numa_node_mb.toFixed(1)} MB`
+                        : "N/A",
+                    helpText:
+                        "Average amount of L3 cache available per NUMA node. L3 cache is the last level of CPU cache before accessing main memory.",
+                },
+                {
+                    name: "L3 Cache Shared",
+                    children:
+                        typeof instance.l3_shared !== "boolean"
+                            ? "N/A"
+                            : instance.l3_shared
+                              ? "Yes"
+                              : "No",
+                    helpText:
+                        "Whether the L3 cache is shared across NUMA nodes. Non-shared L3 cache typically provides better performance isolation.",
+                },
+            ],
+        },
+        {
             name: "Networking",
             slug: "networking",
             rows: [

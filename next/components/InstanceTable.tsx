@@ -64,6 +64,21 @@ function getRegex(value: string) {
     return regex;
 }
 
+function Cell({ cell }: { cell: any }) {
+    let child: any;
+    if (typeof cell.column.columnDef.cell === "function") {
+        child = cell.column.columnDef.cell(cell.getContext());
+    } else {
+        child = cell.column.columnDef.cell;
+    }
+
+    if (child === null || child === undefined || child === "") {
+        return <td>-</td>;
+    }
+
+    return <td>{child}</td>;
+}
+
 export default function InstanceTable<
     Instance extends { instance_type: string },
 >({
@@ -97,6 +112,9 @@ export default function InstanceTable<
             cnyRate: conversionRate.cny,
         },
     );
+    for (const col of columns) {
+        col.sortUndefined = "last";
+    }
 
     const columnVisibility = useMemo(() => {
         // Merge the state with the default values.
@@ -360,12 +378,7 @@ export default function InstanceTable<
                                     }`}
                                 >
                                     {row.getVisibleCells().map((cell) => (
-                                        <td key={cell.id}>
-                                            {flexRender(
-                                                cell.column.columnDef.cell,
-                                                cell.getContext(),
-                                            )}
-                                        </td>
+                                        <Cell key={cell.id} cell={cell} />
                                     ))}
                                     <td>
                                         {/** DO NOT REMOVE! This is essential for blind people to select rows */}
