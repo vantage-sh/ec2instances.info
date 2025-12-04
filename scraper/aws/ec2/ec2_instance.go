@@ -102,22 +102,22 @@ type EC2Instance struct {
 	Storage                  *Storage              `json:"storage"`
 	EMR                      bool                  `json:"emr"`
 	IPV6Support              bool                  `json:"ipv6_support"`
-	CoremarkIterationsSecond *float64              `json:"coremark_iterations_second"`
-	GPUArchitectures         []string              `json:"gpu_architectures"`
-	GPUCurrentTempAvgCelsius *float64              `json:"gpu_current_temp_avg_celsius"`
-	FFmpegUsedCuda           *bool                 `json:"ffmpeg_used_cuda"`
-	FFmpegSpeed              *float64              `json:"ffmpeg_speed"`
-	FFmpegFPS                *float64              `json:"ffmpeg_fps"`
-	GPUPowerDrawWattsAvg     *int                  `json:"gpu_power_draw_watts_avg"`
-	GPUClocks                []extras.GPUClocks    `json:"gpu_clocks"`
-	NumaNodeCount            *int                  `json:"numa_node_count"`
-	UsesNumaArchitecture     *bool                 `json:"uses_numa_architecture"`
-	MaxNumaDistance          *int                  `json:"max_numa_distance"`
-	CoreCountPerNumaNode     *float64              `json:"core_count_per_numa_node"`
-	ThreadCountPerNumaNode   *float64              `json:"thread_count_per_numa_node"`
-	MemoryPerNumaNodeMB      *float64              `json:"memory_per_numa_node_mb"`
-	L3PerNumaNodeMB          *float64              `json:"l3_per_numa_node_mb"`
-	L3Shared                 *bool                 `json:"l3_shared"`
+	CoremarkIterationsSecond *float64              `json:"coremark_iterations_second,omitempty"`
+	GPUArchitectures         []string              `json:"gpu_architectures,omitempty"`
+	GPUCurrentTempAvgCelsius *float64              `json:"gpu_current_temp_avg_celsius,omitempty"`
+	FFmpegUsedCuda           *bool                 `json:"ffmpeg_used_cuda,omitempty"`
+	FFmpegSpeed              *float64              `json:"ffmpeg_speed,omitempty"`
+	FFmpegFPS                *float64              `json:"ffmpeg_fps,omitempty"`
+	GPUPowerDrawWattsAvg     *int                  `json:"gpu_power_draw_watts_avg,omitempty"`
+	GPUClocks                []extras.GPUClocks    `json:"gpu_clocks,omitempty"`
+	NumaNodeCount            *int                  `json:"numa_node_count,omitempty"`
+	UsesNumaArchitecture     *bool                 `json:"uses_numa_architecture,omitempty"`
+	MaxNumaDistance          *int                  `json:"max_numa_distance,omitempty"`
+	CoreCountPerNumaNode     *float64              `json:"core_count_per_numa_node,omitempty"`
+	ThreadCountPerNumaNode   *float64              `json:"thread_count_per_numa_node,omitempty"`
+	MemoryPerNumaNodeMB      *float64              `json:"memory_per_numa_node_mb,omitempty"`
+	L3PerNumaNodeMB          *float64              `json:"l3_per_numa_node_mb,omitempty"`
+	L3Shared                 *bool                 `json:"l3_shared,omitempty"`
 }
 
 func avg(ints []int) *float64 {
