@@ -38,7 +38,6 @@ func (p *Price) UnmarshalJSON(data []byte) error {
 type EC2PricingData struct {
 	OnDemand     string             `json:"ondemand,omitempty"`
 	Reserved     *map[string]string `json:"reserved,omitempty"`
-	SavingsPlans *map[string]string `json:"savings_plans,omitempty"`
 	SpotMin      *Price             `json:"spot_min,omitempty"`
 	SpotMax      *Price             `json:"spot_max,omitempty"`
 	EMR          string             `json:"emr,omitempty"`

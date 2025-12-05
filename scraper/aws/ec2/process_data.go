@@ -312,11 +312,11 @@ func processEC2Data(
 					regionPricing[skuInfo.platform] = osPricing
 				}
 				pricingData := osPricing.(*EC2PricingData)
-				if pricingData.SavingsPlans == nil {
+				if pricingData.Reserved == nil {
 					m := make(map[string]string)
-					pricingData.SavingsPlans = &m
+					pricingData.Reserved = &m
 				}
-				(*pricingData.SavingsPlans)[term] = formatPrice(price)
+				(*pricingData.Reserved)[term] = formatPrice(price)
 			}
 		}
 	}
