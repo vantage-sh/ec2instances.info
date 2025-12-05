@@ -407,6 +407,33 @@ var gcpMachineSpecs = map[string]struct {
 	"c2d-standard-56":  {56, 224, "Compute optimized"},
 	"c2d-standard-112": {112, 448, "Compute optimized"},
 
+	// C2D Memory-optimized
+	"c2d-highmem-2":   {2, 16, "Memory optimized"},
+	"c2d-highmem-4":   {4, 32, "Memory optimized"},
+	"c2d-highmem-8":   {8, 64, "Memory optimized"},
+	"c2d-highmem-16":  {16, 128, "Memory optimized"},
+	"c2d-highmem-32":  {32, 256, "Memory optimized"},
+	"c2d-highmem-56":  {56, 448, "Memory optimized"},
+	"c2d-highmem-112": {112, 896, "Memory optimized"},
+
+	// C2D Compute-optimized
+	"c2d-highcpu-2":   {2, 4, "Compute optimized"},
+	"c2d-highcpu-4":   {4, 8, "Compute optimized"},
+	"c2d-highcpu-8":   {8, 16, "Compute optimized"},
+	"c2d-highcpu-16":  {16, 32, "Compute optimized"},
+	"c2d-highcpu-32":  {32, 64, "Compute optimized"},
+	"c2d-highcpu-56":  {56, 128, "Compute optimized"},
+	"c2d-highcpu-112": {112, 224, "Compute optimized"},
+
+	// C3 Memory-optimized
+	"c3-highmem-4":   {4, 32, "Memory optimized"},
+	"c3-highmem-8":   {8, 64, "Memory optimized"},
+	"c3-highmem-22":  {22, 176, "Memory optimized"},
+	"c3-highmem-44":  {44, 352, "Memory optimized"},
+	"c3-highmem-88":  {88, 704, "Memory optimized"},
+	"c3-highmem-176": {176, 1408, "Memory optimized"},
+	"c3-highmem-192": {192, 1536, "Memory optimized"},
+
 	// C4 Compute-optimized (AMD)
 	"c4-standard-2":         {2, 7, "General purpose"},
 	"c4-standard-4":         {4, 15, "General purpose"},
@@ -420,6 +447,35 @@ var gcpMachineSpecs = map[string]struct {
 	"c4-standard-192":       {192, 720, "General purpose"},
 	"c4-standard-288":       {288, 1080, "General purpose"},
 	"c4-standard-288-metal": {288, 1080, "General purpose"},
+
+	// C4 Memory-optimized
+	"c4-highmem-2":   {2, 15, "Memory optimized"},
+	"c4-highmem-4":   {4, 31, "Memory optimized"},
+	"c4-highmem-8":   {8, 62, "Memory optimized"},
+	"c4-highmem-16":  {16, 124, "Memory optimized"},
+	"c4-highmem-24":  {24, 186, "Memory optimized"},
+	"c4-highmem-32":  {32, 248, "Memory optimized"},
+	"c4-highmem-48":  {48, 372, "Memory optimized"},
+	"c4-highmem-96":  {96, 744, "Memory optimized"},
+	"c4-highmem-144": {144, 1116, "Memory optimized"},
+	"c4-highmem-192": {192, 1488, "Memory optimized"},
+	"c4-highmem-288": {288, 2232, "Memory optimized"},
+
+	// C4A Memory-optimized
+	"c4a-highmem-2":  {2, 16, "Memory optimized"},
+	"c4a-highmem-4":  {4, 32, "Memory optimized"},
+	"c4a-highmem-8":  {8, 64, "Memory optimized"},
+	"c4a-highmem-16": {16, 128, "Memory optimized"},
+	"c4a-highmem-32": {32, 256, "Memory optimized"},
+	"c4a-highmem-48": {48, 384, "Memory optimized"},
+	"c4a-highmem-64": {64, 512, "Memory optimized"},
+	"c4a-highmem-72": {72, 576, "Memory optimized"},
+
+	// E2 Memory-optimized (AMD)
+	"e2-highmem-2":  {2, 16, "Memory optimized"},
+	"e2-highmem-4":  {4, 32, "Memory optimized"},
+	"e2-highmem-8":  {8, 64, "Memory optimized"},
+	"e2-highmem-16": {16, 128, "Memory optimized"},
 
 	// M1 Memory-optimized
 	"m1-ultramem-40":  {40, 961, "Memory optimized"},
