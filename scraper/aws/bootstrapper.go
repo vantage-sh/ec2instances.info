@@ -222,10 +222,22 @@ func DoAwsScraping() {
 	rdsGlobalChannel := make(chan *awsutils.RawRegion)
 	rdsChinaChannel := make(chan *awsutils.RawRegion)
 	fg.Add(func() {
-		processRDSData(rdsChinaChannel, ec2ApiResponses, true)
+		savingsPlan := func() map[string]map[string]map[string]float64 {
+			return nil
+		}
+		if url := getSavingsPlanUrl("AmazonRDS", rootIndex); url != "" {
+			savingsPlan = awsutils.GetSavingsPlans(AWS_NON_CHINA_ROOT_URL, url, false)
+		}
+		processRDSData(rdsChinaChannel, ec2ApiResponses, true, savingsPlan)
 	})
 	fg.Add(func() {
-		processRDSData(rdsGlobalChannel, ec2ApiResponses, false)
+		savingsPlan := func() map[string]map[string]map[string]float64 {
+			return nil
+		}
+		if url := getSavingsPlanUrl("AmazonRDS", chinaIndex); url != "" {
+			savingsPlan = awsutils.GetSavingsPlans(AWS_CHINA_ROOT_URL, url, true)
+		}
+		processRDSData(rdsGlobalChannel, ec2ApiResponses, false, savingsPlan)
 	})
 
 	// Get the ElastiCache cache parameters in the background

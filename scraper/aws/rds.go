@@ -95,8 +95,9 @@ var BAD_DESCRIPTION_CHUNKS = []string{
 }
 
 type genericAwsPricingData struct {
-	OnDemand float64            `json:"ondemand"`
-	Reserved map[string]float64 `json:"reserved"`
+	OnDemand     float64            `json:"ondemand"`
+	Reserved     map[string]float64 `json:"reserved"`
+	SavingsPlans map[string]float64 `json:"savings_plans"`
 }
 
 func processRdsOnDemandDimension(
@@ -223,7 +224,12 @@ func getgenericAwsPricingData(instance map[string]any, regionName, platform stri
 	return osMap.(*genericAwsPricingData)
 }
 
-func processRDSData(inData chan *awsutils.RawRegion, ec2ApiResponses *utils.SlowBuildingMap[string, *types.InstanceTypeInfo], china bool) {
+func processRDSData(
+	inData chan *awsutils.RawRegion,
+	ec2ApiResponses *utils.SlowBuildingMap[string, *types.InstanceTypeInfo],
+	china bool,
+	savingsPlan func() map[string]map[string]map[string]float64,
+) {
 	// Defines the currency
 	currency := "USD"
 	if china {
@@ -343,6 +349,23 @@ func processRDSData(inData chan *awsutils.RawRegion, ec2ApiResponses *utils.Slow
 			log.Fatalln("RDS Region description missing for", rawRegion.RegionName)
 		} else {
 			regionDescriptions[rawRegion.RegionName] = regionDescription
+		}
+	}
+
+	// Add savings plans pricing
+	for region, skuMap := range savingsPlan() {
+		for sku, termMap := range skuMap {
+			skuInfo, ok := sku2SkuData[sku]
+			if !ok {
+				continue
+			}
+			for term, price := range termMap {
+				pricingData := getgenericAwsPricingData(skuInfo.instance, region, skuInfo.attributes["engineCode"])
+				if pricingData.SavingsPlans == nil {
+					pricingData.SavingsPlans = map[string]float64{}
+				}
+				pricingData.SavingsPlans[term] = price
+			}
 		}
 	}
 
