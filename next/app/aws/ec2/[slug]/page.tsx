@@ -107,6 +107,9 @@ export async function generateMetadata({
 }
 
 const reservedTermOptions: [string, string][] = [
+    ["Savings.noUpfront", "No Upfront (Savings Plan)"],
+    ["Savings.partialUpfront", "Partial Upfront (Savings Plan)"],
+    ["Savings.allUpfront", "All Upfront (Savings Plan)"],
     ["Standard.noUpfront", "No Upfront"],
     ["Standard.partialUpfront", "Partial Upfront"],
     ["Standard.allUpfront", "All Upfront"],

@@ -7,7 +7,10 @@ import Filters from "@/components/Filters";
 import { useMemo } from "react";
 import dynamicallyDecompress from "@/utils/dynamicallyDecompress";
 import { AtomKeyWhereInstanceIs } from "@/components/InstanceTable";
-import { reservedTermOptions } from "@/utils/dataMappings";
+import {
+    reservedTermOptions,
+    SupportedSavingsPlanOptions,
+} from "@/utils/dataMappings";
 import { MarketingSchema } from "@/schemas/marketing";
 import Advert from "@/components/Advert";
 import type { CurrencyItem } from "@/utils/loadCurrencies";
@@ -17,6 +20,7 @@ type RootProps<Instance extends { instance_type: string }> = {
     regions: Region;
     marketingData: MarketingSchema;
     currencies: CurrencyItem[];
+    savingsPlanSupported?: SupportedSavingsPlanOptions[];
 };
 
 type AWSClientProps<
@@ -103,8 +107,15 @@ export default function AWSClient<
                 <Filters
                     columnAtomKey={props.columnAtomKey}
                     regions={props.regions}
-                    reservedTermOptions={reservedTermOptions}
+                    reservedTermOptions={reservedTermOptions(
+                        props.savingsPlanSupported,
+                    )}
                     currencies={props.currencies}
+                    reservedLabel={
+                        props.savingsPlanSupported
+                            ? "Reserved/Savings Plan"
+                            : undefined
+                    }
                 />
                 <div className="flex-1 min-h-0">
                     <InstanceTable

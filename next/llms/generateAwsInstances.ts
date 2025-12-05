@@ -9,6 +9,12 @@ const tableColumns = [
     ["spot_min", "Spot Min"],
     ["spot_avg", "Spot Avg"],
     ["spot_max", "Spot Max"],
+    ["yrTerm1Savings.noUpfront", "1yr No Upfront (Savings Plan)"],
+    ["yrTerm1Savings.partialUpfront", "1yr Partial Upfront (Savings Plan)"],
+    ["yrTerm1Savings.allUpfront", "1yr All Upfront (Savings Plan)"],
+    ["yrTerm3Savings.noUpfront", "3yr No Upfront (Savings Plan)"],
+    ["yrTerm3Savings.partialUpfront", "3yr Partial Upfront (Savings Plan)"],
+    ["yrTerm3Savings.allUpfront", "3yr All Upfront (Savings Plan)"],
     ["yrTerm1Standard.noUpfront", "1yr No Upfront"],
     ["yrTerm1Standard.partialUpfront", "1yr Partial Upfront"],
     ["yrTerm1Standard.allUpfront", "1yr All Upfront"],
@@ -118,6 +124,12 @@ function generateInstanceMarkdown(
                     region,
                     instance.pricing[region]?.[platform]?.[column],
                 );
+            case "yrTerm1Savings.noUpfront":
+            case "yrTerm1Savings.partialUpfront":
+            case "yrTerm1Savings.allUpfront":
+            case "yrTerm3Savings.noUpfront":
+            case "yrTerm3Savings.partialUpfront":
+            case "yrTerm3Savings.allUpfront":
             case "yrTerm1Standard.noUpfront":
             case "yrTerm1Standard.partialUpfront":
             case "yrTerm1Standard.allUpfront":

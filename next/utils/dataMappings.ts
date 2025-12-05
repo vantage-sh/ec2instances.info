@@ -17,7 +17,7 @@ export const durationOptions: { value: CostDuration; label: string }[] = [
     { value: "annually", label: "Annually" },
 ] as const;
 
-export const reservedTermOptions = [
+const sharedReservedTermOptions = [
     { value: "yrTerm1Standard.noUpfront", label: "1-year - No Upfront" },
     {
         value: "yrTerm1Standard.partialUpfront",
@@ -55,3 +55,36 @@ export const reservedTermOptions = [
         label: "3-year convertible - Full Upfront",
     },
 ];
+
+const savingsPlanExtras = {
+    "yrTerm1Savings.noUpfront": "1-year Savings Plan - No Upfront",
+    "yrTerm1Savings.partialUpfront": "1-year Savings Plan - Partial Upfront",
+    "yrTerm1Savings.allUpfront": "1-year Savings Plan - Full Upfront",
+    "yrTerm3Savings.noUpfront": "3-year Savings Plan - No Upfront",
+    "yrTerm3Savings.partialUpfront": "3-year Savings Plan - Partial Upfront",
+    "yrTerm3Savings.allUpfront": "3-year Savings Plan - Full Upfront",
+};
+
+const savingsPlanCache = new Map<string, { value: string; label: string }[]>();
+
+export type SupportedSavingsPlanOptions = keyof typeof savingsPlanExtras;
+
+export const reservedTermOptions = (
+    savingsPlanSupported: SupportedSavingsPlanOptions[] | undefined,
+) => {
+    if (!savingsPlanSupported) return sharedReservedTermOptions;
+    const key = savingsPlanSupported.join(",");
+    const cached = savingsPlanCache.get(key);
+    if (cached) return cached;
+
+    const extras: { value: string; label: string }[] = [];
+    for (const sp of savingsPlanSupported) {
+        const label = savingsPlanExtras[sp];
+        if (label) {
+            extras.push({ value: sp, label });
+        }
+    }
+    const options = [...extras, ...sharedReservedTermOptions];
+    savingsPlanCache.set(key, options);
+    return options;
+};

@@ -51,6 +51,14 @@ export default async function Home() {
                 compressedInstances={compressedInstances}
                 compressedDataPathTemplate={`/remaining-instances-p{}.msgpack.xz?cache=${instancesHash}`}
                 columnAtomKey="ec2"
+                savingsPlanSupported={[
+                    "yrTerm1Savings.noUpfront",
+                    "yrTerm1Savings.partialUpfront",
+                    "yrTerm1Savings.allUpfront",
+                    "yrTerm3Savings.noUpfront",
+                    "yrTerm3Savings.partialUpfront",
+                    "yrTerm3Savings.allUpfront",
+                ]}
             />
         </>
     );
