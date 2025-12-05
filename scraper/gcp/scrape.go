@@ -121,6 +121,34 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 		}
 
 		skuData[key] = price
+
+		// If this is a multi-regional SKU, expand it to actual regions immediately
+		if strings.HasPrefix(region, "multi-") {
+			var targetRegions []string
+			switch region {
+			case "multi-americas":
+				targetRegions = []string{"us-central1", "us-east1", "us-east4", "us-east5", "us-south1", "us-west1", "us-west2", "us-west3", "us-west4", "northamerica-northeast1", "northamerica-northeast2", "southamerica-east1", "southamerica-west1"}
+			case "multi-europe":
+				targetRegions = []string{"europe-west1", "europe-west2", "europe-west3", "europe-west4", "europe-west6", "europe-west8", "europe-west9", "europe-north1", "europe-central2", "europe-southwest1"}
+			case "multi-asia":
+				targetRegions = []string{"asia-east1", "asia-east2", "asia-northeast1", "asia-northeast2", "asia-northeast3", "asia-south1", "asia-south2", "asia-southeast1", "asia-southeast2", "australia-southeast1", "australia-southeast2"}
+			}
+
+			// Copy the price to all target regions
+			for _, targetRegion := range targetRegions {
+				regionalKey := skuKey{
+					machineType:  machineFamily,
+					region:       targetRegion,
+					isSpot:       isSpot,
+					isWindows:    isWindows,
+					resourceType: resourceType,
+				}
+				// Only add if not already present (regional pricing takes precedence)
+				if _, exists := skuData[regionalKey]; !exists {
+					skuData[regionalKey] = price
+				}
+			}
+		}
 	}
 
 	// Build instances from machine specs

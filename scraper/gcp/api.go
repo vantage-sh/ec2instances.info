@@ -222,6 +222,17 @@ func parseMachineTypeFromSKU(sku SKU) (machineFamily string, resourceType string
 	// Get region from geo taxonomy - fix the condition
 	if sku.GeoTaxonomy.RegionalMetadata != nil {
 		region = sku.GeoTaxonomy.RegionalMetadata.Region.Region
+	} else if sku.GeoTaxonomy.Type == "TYPE_MULTI_REGIONAL" {
+		// Use multi-regional as a special "region" identifier
+		// Extract the location from display name (e.g., "running in Americas")
+		displayLower := strings.ToLower(displayName)
+		if strings.Contains(displayLower, "americas") {
+			region = "multi-americas"
+		} else if strings.Contains(displayLower, "europe") {
+			region = "multi-europe"
+		} else if strings.Contains(displayLower, "asia") {
+			region = "multi-asia"
+		}
 	}
 
 	return
