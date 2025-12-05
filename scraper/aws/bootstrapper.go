@@ -225,8 +225,8 @@ func DoAwsScraping() {
 		savingsPlan := func() map[string]map[string]map[string]float64 {
 			return nil
 		}
-		if url := getSavingsPlanUrl("AmazonRDS", rootIndex); url != "" {
-			savingsPlan = awsutils.GetSavingsPlans(AWS_NON_CHINA_ROOT_URL, url, false)
+		if url := getSavingsPlanUrl("AmazonRDS", chinaIndex); url != "" {
+			savingsPlan = awsutils.GetSavingsPlans(AWS_CHINA_ROOT_URL, url, true)
 		}
 		processRDSData(rdsChinaChannel, ec2ApiResponses, true, savingsPlan)
 	})
@@ -234,8 +234,8 @@ func DoAwsScraping() {
 		savingsPlan := func() map[string]map[string]map[string]float64 {
 			return nil
 		}
-		if url := getSavingsPlanUrl("AmazonRDS", chinaIndex); url != "" {
-			savingsPlan = awsutils.GetSavingsPlans(AWS_CHINA_ROOT_URL, url, true)
+		if url := getSavingsPlanUrl("AmazonRDS", rootIndex); url != "" {
+			savingsPlan = awsutils.GetSavingsPlans(AWS_NON_CHINA_ROOT_URL, url, false)
 		}
 		processRDSData(rdsGlobalChannel, ec2ApiResponses, false, savingsPlan)
 	})
