@@ -29,7 +29,7 @@ func (f *floatyNumberOrAbandon) UnmarshalJSON(data []byte) error {
 
 type gpuInstance struct {
 	GPU      *floatyNumberOrAbandon `json:"GPU"`
-	GPUModel *string               `json:"GPU_model"`
+	GPUModel *string                `json:"GPU_model"`
 }
 
 func main() {

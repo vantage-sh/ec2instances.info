@@ -95,9 +95,8 @@ var BAD_DESCRIPTION_CHUNKS = []string{
 }
 
 type genericAwsPricingData struct {
-	OnDemand     float64            `json:"ondemand"`
-	Reserved     map[string]float64 `json:"reserved"`
-	SavingsPlans map[string]float64 `json:"savings_plans"`
+	OnDemand float64            `json:"ondemand"`
+	Reserved map[string]float64 `json:"reserved"`
 }
 
 func processRdsOnDemandDimension(
@@ -360,11 +359,16 @@ func processRDSData(
 				continue
 			}
 			for term, price := range termMap {
-				pricingData := getgenericAwsPricingData(skuInfo.instance, region, skuInfo.attributes["engineCode"])
-				if pricingData.SavingsPlans == nil {
-					pricingData.SavingsPlans = map[string]float64{}
+				data := []*genericAwsPricingData{
+					getgenericAwsPricingData(skuInfo.instance, region, skuInfo.attributes["databaseEngine"]),
+					getgenericAwsPricingData(skuInfo.instance, region, skuInfo.attributes["engineCode"]),
 				}
-				pricingData.SavingsPlans[term] = price
+				for _, pricingData := range data {
+					if pricingData.Reserved == nil {
+						pricingData.Reserved = map[string]float64{}
+					}
+					pricingData.Reserved[term] = price
+				}
 			}
 		}
 	}
