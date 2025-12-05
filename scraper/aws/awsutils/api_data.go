@@ -35,3 +35,37 @@ type RawRegion struct {
 	RegionName string
 	RegionData RegionData
 }
+
+type SavingsPlanProduct struct {
+	SKU        string            `json:"sku"`
+	Attributes map[string]string `json:"attributes"`
+}
+
+type SavingsPlanLeaseContractLength struct {
+	Duration int    `json:"duration"`
+	Unit     string `json:"unit"`
+}
+
+type SavingsPlanDiscountedRate struct {
+	Price    string `json:"price"`
+	Currency string `json:"currency"`
+}
+
+type SavingsPlanRate struct {
+	DiscountedSKU  string                    `json:"discountedSku"`
+	DiscountedRate SavingsPlanDiscountedRate `json:"discountedRate"`
+}
+
+type SavingsPlanTerm struct {
+	SKU                 string                         `json:"sku"`
+	Description         string                         `json:"description"`
+	LeaseContractLength SavingsPlanLeaseContractLength `json:"leaseContractLength"`
+	Rates               []SavingsPlanRate              `json:"rates"`
+}
+
+type RawSavingsPlanRegion struct {
+	Products []SavingsPlanProduct `json:"products"`
+	Terms    struct {
+		SavingsPlan []SavingsPlanTerm `json:"savingsPlan"`
+	} `json:"terms"`
+}

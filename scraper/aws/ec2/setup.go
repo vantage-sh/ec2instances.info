@@ -11,6 +11,8 @@ import (
 func Setup(
 	fg *utils.FunctionGroup,
 	ec2ApiResponses *utils.SlowBuildingMap[string, *types.InstanceTypeInfo],
+	chinaSavingsPlanData func() map[string]map[string]map[string]float64,
+	globalSavingsPlanData func() map[string]map[string]map[string]float64,
 ) (chan *awsutils.RawRegion, chan *awsutils.RawRegion) {
 	// Start all the data getters in the background
 	spotDataPartialGetter := utils.BlockUntilDone(getSpotDataPartial)
@@ -24,10 +26,10 @@ func Setup(
 		t2HtmlGetter:          t2HtmlGetter,
 	}
 	fg.Add(func() {
-		processEC2Data(ec2ChinaChannel, ec2ApiResponses, true, getters)
+		processEC2Data(ec2ChinaChannel, ec2ApiResponses, true, getters, chinaSavingsPlanData)
 	})
 	fg.Add(func() {
-		processEC2Data(ec2GlobalChannel, ec2ApiResponses, false, getters)
+		processEC2Data(ec2GlobalChannel, ec2ApiResponses, false, getters, globalSavingsPlanData)
 	})
 
 	return ec2GlobalChannel, ec2ChinaChannel

@@ -28,7 +28,8 @@ func loadAwsUrlJson(baseUrl string, awsUrl string, val any) error {
 
 type AwsRootIndexResponse struct {
 	Offers map[string]struct {
-		CurrentRegionIndexUrl string `json:"currentRegionIndexUrl"`
+		CurrentSavingsPlanIndexUrl string `json:"currentSavingsPlanIndexUrl"`
+		CurrentRegionIndexUrl      string `json:"currentRegionIndexUrl"`
 	} `json:"offers"`
 }
 
@@ -182,22 +183,40 @@ func DoAwsScraping() {
 		}
 		rootIndexChannel <- rootIndex
 	}()
-	chinaRootIndexChannel := make(chan AwsRootIndexResponse)
-	go func() {
-		var rootIndex AwsRootIndexResponse
-		if err := loadAwsUrlJson(AWS_CHINA_ROOT_URL, "/offers/v1.0/cn/index.json", &rootIndex); err != nil {
-			log.Fatal(err)
-		}
-		chinaRootIndexChannel <- rootIndex
-	}()
+	var chinaIndex AwsRootIndexResponse
+	if err := loadAwsUrlJson(AWS_CHINA_ROOT_URL, "/offers/v1.0/cn/index.json", &chinaIndex); err != nil {
+		log.Fatal(err)
+	}
+	rootIndex := <-rootIndexChannel
 
 	var fg utils.FunctionGroup
 
 	// Get the EC2 API responses here because both EC2 and RDS use the data
 	ec2ApiResponses := makeEc2Iterator()
 
+	// Get the EC2 Savings Plans data for both global and China
+	globalSavingsPlanEc2Data := func() map[string]map[string]map[string]float64 {
+		return nil
+	}
+	chinaSavingsPlanEc2Data := func() map[string]map[string]map[string]float64 {
+		return nil
+	}
+	getSavingsPlanUrl := func(svc string, idx AwsRootIndexResponse) string {
+		val, ok := idx.Offers[svc]
+		if ok {
+			return val.CurrentSavingsPlanIndexUrl
+		}
+		return ""
+	}
+	if url := getSavingsPlanUrl("AmazonEC2", rootIndex); url != "" {
+		globalSavingsPlanEc2Data = awsutils.GetSavingsPlans(AWS_NON_CHINA_ROOT_URL, url, false)
+	}
+	if url := getSavingsPlanUrl("AmazonEC2", chinaIndex); url != "" {
+		chinaSavingsPlanEc2Data = awsutils.GetSavingsPlans(AWS_CHINA_ROOT_URL, url, true)
+	}
+
 	// Start the EC2 data processing threads (this is outside of this function because its complex)
-	ec2GlobalChannel, ec2ChinaChannel := ec2Internal.Setup(&fg, ec2ApiResponses)
+	ec2GlobalChannel, ec2ChinaChannel := ec2Internal.Setup(&fg, ec2ApiResponses, chinaSavingsPlanEc2Data, globalSavingsPlanEc2Data)
 
 	// Defines the channel for the RDS data
 	rdsGlobalChannel := make(chan *awsutils.RawRegion)
@@ -275,7 +294,7 @@ func DoAwsScraping() {
 			globalInData: openSearchGlobalChannel,
 			chinaInData:  openSearchChinaChannel,
 		},
-	}, <-rootIndexChannel, <-chinaRootIndexChannel)
+	}, rootIndex, chinaIndex)
 
 	// Wait for all the data to be processed
 	fg.Run()
