@@ -113,10 +113,10 @@ const RDSMarketing = () => (
             description="RDS and Aurora represent a significant potion of AWS spend, consistently ranking second on the AWS Cost Leaderboard."
         />
         <Item
-            link="https://www.vantage.sh/blog/vantage-announces-general-availability-openai-cost-support?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=rds"
-            image="https://assets.vantage.sh/blog/vantage-announces-general-availability-openai-cost-support/vantage-announces-general-availability-openai-cost-support.jpg"
-            title="Vantage Launches General Availability of OpenAI Cost Support"
-            description="Vantage users can now see their overall OpenAI costs alongside their other infrastructure providers."
+            link="https://www.vantage.sh/blog/aws-savings-plans-databases?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=rds"
+            image="https://assets.vantage.sh/blog/aws-savings-plans-databases/aws-savings-plans-databases.jpg"
+            title="Savings Plans for AWS Databases Explained"
+            description="AWS Database Savings Plans offer a flexible new way to save up to 35% on RDS, Aurora, ElastiCache, and more, without the rigidity of Reserved Instances."
         />
         <Item
             link="https://www.vantage.sh/blog/aws-graviton-vs-intel?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=rds"
@@ -130,10 +130,10 @@ const RDSMarketing = () => (
 const CacheMarketing = () => (
     <ItemsWrapper>
         <Item
-            link="https://www.vantage.sh/blog/vantage-launches-autopilot-aws-savings-plans?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=elasticache"
-            image="https://assets.vantage.sh/blog/vantage-launches-autopilot-aws-savings-plans/vantage-launches-autopilot-aws-savings-plans.jpg"
-            title="Vantage Enables Autopilot Support for AWS Savings Plans"
-            description="Autopilot for AWS Savings Plans now supports purchase recommendations and automatic purchases of AWS Compute Savings Plans."
+            link="https://www.vantage.sh/blog/aws-savings-plans-databases?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=elasticache"
+            image="https://assets.vantage.sh/blog/aws-savings-plans-databases/aws-savings-plans-databases.jpg"
+            title="Savings Plans for AWS Databases Explained"
+            description="AWS Database Savings Plans offer a flexible new way to save up to 35% on RDS, Aurora, ElastiCache, and more, without the rigidity of Reserved Instances."
         />
         <Item
             link="https://www.vantage.sh/blog/aws-lambda-avoid-infinite-loops?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=elasticache"
@@ -153,10 +153,10 @@ const CacheMarketing = () => (
 const RedshiftMarketing = () => (
     <ItemsWrapper>
         <Item
-            link="https://www.vantage.sh/blog/vantage-launches-support-custom-providers-finops-focus?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=redshift"
-            image="https://assets.vantage.sh/blog/vantage-launches-support-custom-providers-finops-focus/vantage-launches-support-custom-providers-finops-focus.jpg"
-            title="Vantage Launches Custom Providers with Support for the FinOps FOCUS Standard"
-            description="Vantage now has support for integrating Custom Providers. Upload costs using the FinOps FOCUS specification to see costs for your entire tech stack on Vantage."
+            link="https://www.vantage.sh/blog/aws-savings-plans-databases?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=redshift"
+            image="https://assets.vantage.sh/blog/aws-savings-plans-databases/aws-savings-plans-databases.jpg"
+            title="Savings Plans for AWS Databases Explained"
+            description="AWS Database Savings Plans offer a flexible new way to save up to 35% on RDS, Aurora, ElastiCache, and more, without the rigidity of Reserved Instances."
         />
         <Item
             link="https://www.vantage.sh/blog/how-to-save-on-aws-fargate-costs?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=redshift"
