@@ -4,6 +4,7 @@ import (
 	"log"
 	"scraper/aws/awsutils"
 	"scraper/utils"
+	"slices"
 	"sort"
 	"strings"
 
@@ -43,6 +44,10 @@ var IGNORE_RDS_ATTRIBUTES = map[string]bool{
 	"usagetype":        true,
 }
 
+var pipeIntoAverager = []string{
+	"vcpu",
+}
+
 func enrichRdsInstance(
 	instance map[string]any,
 	attributes map[string]string,
@@ -56,7 +61,16 @@ func enrichRdsInstance(
 	// Copy them into the instance
 	for k, v := range attributes {
 		if _, ok := IGNORE_RDS_ATTRIBUTES[k]; !ok && v != "NA" {
-			instance[k] = v
+			if slices.Contains(pipeIntoAverager, k) {
+				avg, ok := instance[k].(*awsutils.Averager[string])
+				if !ok {
+					avg = &awsutils.Averager[string]{}
+				}
+				*avg = append(*avg, v)
+				instance[k] = avg
+			} else {
+				instance[k] = v
+			}
 		}
 	}
 

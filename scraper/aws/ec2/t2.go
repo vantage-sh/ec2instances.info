@@ -19,7 +19,7 @@ func processT2Row(instance *EC2Instance, childText string) {
 		log.Fatalln("Failed to parse T2 credits per hour", childText)
 	}
 	instance.BasePerformance = float64Ptr(credsPerHourFloat / 60)
-	instance.BurstMinutes = float64Ptr(credsPerHourFloat * 24 / float64(instance.VCPU))
+	instance.BurstMinutes = float64Ptr(credsPerHourFloat * 24 / float64(instance.VCPU.Value()))
 }
 
 func getT2Html() *soup.Root {

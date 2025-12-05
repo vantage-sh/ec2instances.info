@@ -64,20 +64,20 @@ func enrichEc2Instance(instance *EC2Instance, attributes map[string]string, ec2A
 	if err != nil {
 		log.Fatal(err)
 	}
-	instance.VCPU = VCPU
+	instance.VCPU = append(instance.VCPU, VCPU)
 	switch instance.InstanceType {
 	case "u-6tb1.metal":
-		instance.Memory = 6144
+		instance.Memory = append(instance.Memory, 6144)
 	case "u-9tb1.metal":
-		instance.Memory = 9216
+		instance.Memory = append(instance.Memory, 9216)
 	case "u-12tb1.metal":
-		instance.Memory = 12288
+		instance.Memory = append(instance.Memory, 12288)
 	default:
 		Memory, err := strconv.ParseFloat(strings.Split(attributes["memory"], " ")[0], 64)
 		if err != nil {
 			log.Fatal(err)
 		}
-		instance.Memory = Memory
+		instance.Memory = append(instance.Memory, Memory)
 	}
 
 	for _, family := range IPV4_ONLY_FAMILIES {

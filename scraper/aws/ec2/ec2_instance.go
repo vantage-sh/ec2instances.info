@@ -2,6 +2,7 @@ package ec2
 
 import (
 	"encoding/json"
+	"scraper/aws/awsutils"
 	"scraper/aws/ec2/extras"
 	"strconv"
 )
@@ -60,64 +61,64 @@ type Storage struct {
 }
 
 type EC2Instance struct {
-	InstanceType             string                `json:"instance_type"`
-	Family                   string                `json:"family"`
-	VCPU                     int                   `json:"vCPU"`
-	Memory                   float64               `json:"memory"`
-	MemorySpeed              *int                  `json:"memory_speed"`
-	PrettyName               string                `json:"pretty_name"`
-	Arch                     []string              `json:"arch"`
-	NetworkPerformance       string                `json:"network_performance"`
-	PhysicalProcessor        string                `json:"physical_processor"`
-	Generation               string                `json:"generation"`
-	GPU                      float64               `json:"GPU"`
-	FPGA                     int                   `json:"FPGA"`
-	EBSAsNVMe                bool                  `json:"ebs_as_nvme"`
-	VPC                      *VPC                  `json:"vpc"`
-	EBSOptimized             bool                  `json:"ebs_optimized"`
-	EBSBaselineThroughput    float64               `json:"ebs_baseline_throughput"`
-	EBSBaselineIOPS          int                   `json:"ebs_baseline_iops"`
-	EBSBaselineBandwidth     int                   `json:"ebs_baseline_bandwidth"`
-	EBSThroughput            float64               `json:"ebs_throughput"`
-	EBSIOPS                  int                   `json:"ebs_iops"`
-	EBSMaxBandwidth          int                   `json:"ebs_max_bandwidth"`
-	ECU                      float64               `json:"ECU"`
-	IntelAVX512              *bool                 `json:"intel_avx512"`
-	IntelAVX2                *bool                 `json:"intel_avx2"`
-	IntelAVX                 *bool                 `json:"intel_avx"`
-	IntelTurbo               *bool                 `json:"intel_turbo"`
-	ClockSpeedGhz            *string               `json:"clock_speed_ghz"`
-	EnhancedNetworking       bool                  `json:"enhanced_networking"`
-	Pricing                  map[Region]map[OS]any `json:"pricing"` // any is *EC2PricingData or string
-	Regions                  map[string]string     `json:"regions"`
-	LinuxVirtualizationTypes []string              `json:"linux_virtualization_types"`
-	VpcOnly                  bool                  `json:"vpc_only"`
-	BasePerformance          *float64              `json:"base_performance"`
-	BurstMinutes             *float64              `json:"burst_minutes"`
-	GPUModel                 *string               `json:"GPU_model"`
-	ComputeCapability        float64               `json:"compute_capability"`
-	GPUMemory                int                   `json:"GPU_memory"`
-	PlacementGroupSupport    bool                  `json:"placement_group_support"`
-	AvailabilityZones        map[string][]string   `json:"availability_zones"`
-	Storage                  *Storage              `json:"storage"`
-	EMR                      bool                  `json:"emr"`
-	IPV6Support              bool                  `json:"ipv6_support"`
-	CoremarkIterationsSecond *float64              `json:"coremark_iterations_second,omitempty"`
-	GPUArchitectures         []string              `json:"gpu_architectures,omitempty"`
-	GPUCurrentTempAvgCelsius *float64              `json:"gpu_current_temp_avg_celsius,omitempty"`
-	FFmpegUsedCuda           *bool                 `json:"ffmpeg_used_cuda,omitempty"`
-	FFmpegSpeed              *float64              `json:"ffmpeg_speed,omitempty"`
-	FFmpegFPS                *float64              `json:"ffmpeg_fps,omitempty"`
-	GPUPowerDrawWattsAvg     *int                  `json:"gpu_power_draw_watts_avg,omitempty"`
-	GPUClocks                []extras.GPUClocks    `json:"gpu_clocks,omitempty"`
-	NumaNodeCount            *int                  `json:"numa_node_count,omitempty"`
-	UsesNumaArchitecture     *bool                 `json:"uses_numa_architecture,omitempty"`
-	MaxNumaDistance          *int                  `json:"max_numa_distance,omitempty"`
-	CoreCountPerNumaNode     *float64              `json:"core_count_per_numa_node,omitempty"`
-	ThreadCountPerNumaNode   *float64              `json:"thread_count_per_numa_node,omitempty"`
-	MemoryPerNumaNodeMB      *float64              `json:"memory_per_numa_node_mb,omitempty"`
-	L3PerNumaNodeMB          *float64              `json:"l3_per_numa_node_mb,omitempty"`
-	L3Shared                 *bool                 `json:"l3_shared,omitempty"`
+	InstanceType             string                     `json:"instance_type"`
+	Family                   string                     `json:"family"`
+	VCPU                     awsutils.Averager[int]     `json:"vCPU"`
+	Memory                   awsutils.Averager[float64] `json:"memory"`
+	MemorySpeed              *int                       `json:"memory_speed"`
+	PrettyName               string                     `json:"pretty_name"`
+	Arch                     []string                   `json:"arch"`
+	NetworkPerformance       string                     `json:"network_performance"`
+	PhysicalProcessor        string                     `json:"physical_processor"`
+	Generation               string                     `json:"generation"`
+	GPU                      float64                    `json:"GPU"`
+	FPGA                     int                        `json:"FPGA"`
+	EBSAsNVMe                bool                       `json:"ebs_as_nvme"`
+	VPC                      *VPC                       `json:"vpc"`
+	EBSOptimized             bool                       `json:"ebs_optimized"`
+	EBSBaselineThroughput    float64                    `json:"ebs_baseline_throughput"`
+	EBSBaselineIOPS          int                        `json:"ebs_baseline_iops"`
+	EBSBaselineBandwidth     int                        `json:"ebs_baseline_bandwidth"`
+	EBSThroughput            float64                    `json:"ebs_throughput"`
+	EBSIOPS                  int                        `json:"ebs_iops"`
+	EBSMaxBandwidth          int                        `json:"ebs_max_bandwidth"`
+	ECU                      float64                    `json:"ECU"`
+	IntelAVX512              *bool                      `json:"intel_avx512"`
+	IntelAVX2                *bool                      `json:"intel_avx2"`
+	IntelAVX                 *bool                      `json:"intel_avx"`
+	IntelTurbo               *bool                      `json:"intel_turbo"`
+	ClockSpeedGhz            *string                    `json:"clock_speed_ghz"`
+	EnhancedNetworking       bool                       `json:"enhanced_networking"`
+	Pricing                  map[Region]map[OS]any      `json:"pricing"` // any is *EC2PricingData or string
+	Regions                  map[string]string          `json:"regions"`
+	LinuxVirtualizationTypes []string                   `json:"linux_virtualization_types"`
+	VpcOnly                  bool                       `json:"vpc_only"`
+	BasePerformance          *float64                   `json:"base_performance"`
+	BurstMinutes             *float64                   `json:"burst_minutes"`
+	GPUModel                 *string                    `json:"GPU_model"`
+	ComputeCapability        float64                    `json:"compute_capability"`
+	GPUMemory                int                        `json:"GPU_memory"`
+	PlacementGroupSupport    bool                       `json:"placement_group_support"`
+	AvailabilityZones        map[string][]string        `json:"availability_zones"`
+	Storage                  *Storage                   `json:"storage"`
+	EMR                      bool                       `json:"emr"`
+	IPV6Support              bool                       `json:"ipv6_support"`
+	CoremarkIterationsSecond *float64                   `json:"coremark_iterations_second,omitempty"`
+	GPUArchitectures         []string                   `json:"gpu_architectures,omitempty"`
+	GPUCurrentTempAvgCelsius *float64                   `json:"gpu_current_temp_avg_celsius,omitempty"`
+	FFmpegUsedCuda           *bool                      `json:"ffmpeg_used_cuda,omitempty"`
+	FFmpegSpeed              *float64                   `json:"ffmpeg_speed,omitempty"`
+	FFmpegFPS                *float64                   `json:"ffmpeg_fps,omitempty"`
+	GPUPowerDrawWattsAvg     *int                       `json:"gpu_power_draw_watts_avg,omitempty"`
+	GPUClocks                []extras.GPUClocks         `json:"gpu_clocks,omitempty"`
+	NumaNodeCount            *int                       `json:"numa_node_count,omitempty"`
+	UsesNumaArchitecture     *bool                      `json:"uses_numa_architecture,omitempty"`
+	MaxNumaDistance          *int                       `json:"max_numa_distance,omitempty"`
+	CoreCountPerNumaNode     *float64                   `json:"core_count_per_numa_node,omitempty"`
+	ThreadCountPerNumaNode   *float64                   `json:"thread_count_per_numa_node,omitempty"`
+	MemoryPerNumaNodeMB      *float64                   `json:"memory_per_numa_node_mb,omitempty"`
+	L3PerNumaNodeMB          *float64                   `json:"l3_per_numa_node_mb,omitempty"`
+	L3Shared                 *bool                      `json:"l3_shared,omitempty"`
 }
 
 func avg(ints []int) *float64 {
