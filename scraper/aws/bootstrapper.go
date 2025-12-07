@@ -52,6 +52,7 @@ type flatData struct {
 
 func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootIndex AwsRootIndexResponse) {
 	// Global
+	chinaToUrlToSavingsPlan := make(map[bool]map[string]func() map[string]map[string]map[string]float64)
 	for _, service := range services {
 		region, ok := globalRootIndex.Offers[service.serviceName]
 		if !ok {
@@ -61,8 +62,17 @@ func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootInd
 		handler := func() map[string]map[string]map[string]float64 {
 			return nil
 		}
-		if url := region.CurrentSavingsPlanIndexUrl; url != "" {
+		urls, ok := chinaToUrlToSavingsPlan[false]
+		if !ok {
+			urls = make(map[string]func() map[string]map[string]map[string]float64)
+			chinaToUrlToSavingsPlan[false] = urls
+		}
+		url := region.CurrentSavingsPlanIndexUrl
+		if h, ok := urls[url]; ok {
+			handler = h
+		} else if url != "" {
 			handler = awsutils.GetSavingsPlans(AWS_NON_CHINA_ROOT_URL, url, false)
+			urls[url] = handler
 		}
 
 		go func() {
@@ -118,8 +128,17 @@ func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootInd
 		handler := func() map[string]map[string]map[string]float64 {
 			return nil
 		}
-		if url := region.CurrentSavingsPlanIndexUrl; url != "" {
+		urls, ok := chinaToUrlToSavingsPlan[true]
+		if !ok {
+			urls = make(map[string]func() map[string]map[string]map[string]float64)
+			chinaToUrlToSavingsPlan[true] = urls
+		}
+		url := region.CurrentSavingsPlanIndexUrl
+		if h, ok := urls[url]; ok {
+			handler = h
+		} else if url != "" {
 			handler = awsutils.GetSavingsPlans(AWS_CHINA_ROOT_URL, url, true)
+			urls[url] = handler
 		}
 
 		go func() {
