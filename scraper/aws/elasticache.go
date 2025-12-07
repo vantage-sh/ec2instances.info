@@ -142,7 +142,7 @@ func getElastiCacheCacheParameters() map[string]map[string]string {
 }
 
 func processElastiCacheData(
-	inData chan *awsutils.RawRegion,
+	inData chan awsutils.RawRegion,
 	china bool,
 	cacheParamsGetter func() map[string]map[string]string,
 ) {
@@ -160,9 +160,11 @@ func processElastiCacheData(
 	regionDescriptions := make(map[string]string)
 
 	// Process each region as it comes in
+	var savingsPlan func() map[string]map[string]map[string]float64
 	for rawRegion := range inData {
 		// Close the channel when we're done
-		if rawRegion == nil {
+		if rawRegion.SavingsPlanData != nil {
+			savingsPlan = rawRegion.SavingsPlanData
 			close(inData)
 			break
 		}
@@ -258,6 +260,23 @@ func processElastiCacheData(
 			log.Fatalln("ElastiCache Region description missing for", rawRegion.RegionName)
 		} else {
 			regionDescriptions[rawRegion.RegionName] = regionDescription
+		}
+	}
+
+	// Add savings plans pricing
+	for region, skuMap := range savingsPlan() {
+		for sku, termMap := range skuMap {
+			skuInfo, ok := sku2SkuData[sku]
+			if !ok {
+				continue
+			}
+			for term, price := range termMap {
+				pricingData := getgenericAwsPricingData(skuInfo.instance, region, skuInfo.attributes["cacheEngine"])
+				if pricingData.Reserved == nil {
+					pricingData.Reserved = map[string]float64{}
+				}
+				pricingData.Reserved[term] = price
+			}
 		}
 	}
 

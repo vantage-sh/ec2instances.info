@@ -238,10 +238,9 @@ func getgenericAwsPricingData(instance map[string]any, regionName, platform stri
 }
 
 func processRDSData(
-	inData chan *awsutils.RawRegion,
+	inData chan awsutils.RawRegion,
 	ec2ApiResponses *utils.SlowBuildingMap[string, *types.InstanceTypeInfo],
 	china bool,
-	savingsPlan func() map[string]map[string]map[string]float64,
 ) {
 	// Defines the currency
 	currency := "USD"
@@ -256,9 +255,11 @@ func processRDSData(
 	// The descriptions found for each region
 	regionDescriptions := make(map[string]string)
 
+	var savingsPlan func() map[string]map[string]map[string]float64
 	for rawRegion := range inData {
 		// Close the channel when we're done
-		if rawRegion == nil {
+		if rawRegion.SavingsPlanData != nil {
+			savingsPlan = rawRegion.SavingsPlanData
 			close(inData)
 			break
 		}

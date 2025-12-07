@@ -133,7 +133,7 @@ func getRedshiftNodeParameters() map[string]map[string]string {
 }
 
 func processRedshiftData(
-	inData chan *awsutils.RawRegion,
+	inData chan awsutils.RawRegion,
 	china bool,
 	redshiftNodeParametersGetter func() map[string]map[string]string,
 ) {
@@ -150,9 +150,11 @@ func processRedshiftData(
 	// The descriptions found for each region
 	regionDescriptions := make(map[string]string)
 
+	var savingsPlan func() map[string]map[string]map[string]float64
 	for rawRegion := range inData {
 		// Close the channel when we're done
-		if rawRegion == nil {
+		if rawRegion.SavingsPlanData != nil {
+			savingsPlan = rawRegion.SavingsPlanData
 			close(inData)
 			break
 		}
@@ -249,6 +251,26 @@ func processRedshiftData(
 			log.Fatalln("ElastiCache Region description missing for", rawRegion.RegionName)
 		} else {
 			regionDescriptions[rawRegion.RegionName] = regionDescription
+		}
+	}
+
+	// Add savings plans pricing
+	for region, skuMap := range savingsPlan() {
+		for sku, termMap := range skuMap {
+			instance, ok := sku2Instance[sku]
+			if !ok {
+				continue
+			}
+			for term, price := range termMap {
+				regionMap := instance["pricing"].(map[string]*genericAwsPricingData)[region]
+				if regionMap == nil {
+					regionMap = &genericAwsPricingData{
+						Reserved: make(map[string]float64),
+					}
+					instance["pricing"].(map[string]*genericAwsPricingData)[region] = regionMap
+				}
+				regionMap.Reserved[term] = price
+			}
 		}
 	}
 

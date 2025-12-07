@@ -37,11 +37,10 @@ type ec2SkuData struct {
 }
 
 func processEC2Data(
-	inData chan *awsutils.RawRegion,
+	inData chan awsutils.RawRegion,
 	ec2ApiResponses *utils.SlowBuildingMap[string, *types.InstanceTypeInfo],
 	china bool,
 	getters ec2DataGetters,
-	savingsPlanData func() map[string]map[string]map[string]float64,
 ) {
 	// Defines the currency
 	currency := "USD"
@@ -57,9 +56,11 @@ func processEC2Data(
 	regionDescriptions := make(map[string]string)
 
 	// Process each region as it comes in
+	var savingsPlanData func() map[string]map[string]map[string]float64
 	for rawRegion := range inData {
 		// Close the channel when we're done
-		if rawRegion == nil {
+		if rawRegion.SavingsPlanData != nil {
+			savingsPlanData = rawRegion.SavingsPlanData
 			close(inData)
 			break
 		}
