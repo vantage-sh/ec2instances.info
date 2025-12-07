@@ -76,6 +76,7 @@ export default async function Cache() {
             instanceCount={instances.length}
             columnAtomKey="cache"
             marketingData={marketingData}
+            savingsPlanSupported={["yrTerm1Savings.noUpfront"]}
         />
     );
 }
