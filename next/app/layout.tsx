@@ -6,13 +6,15 @@ import AdToasts from "@/components/AdToasts";
 import { Toaster } from "@/components/ui/sonner";
 import { GoogleTagManager } from "@next/third-parties/google";
 import Script from "next/script";
-import { array, object, string, parse } from "valibot";
+import { array, object, string, parse, optional } from "valibot";
 
 // Not ideal, but copied because its like 6 lines long and didn't feel worth a whole file
 const toastsSchema = array(
     object({
         campaign_id: string(),
         message: string(),
+        image_alt_text: optional(string()),
+        image_url: optional(string()),
         url: string(),
     }),
 );
