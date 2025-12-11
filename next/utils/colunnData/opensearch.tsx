@@ -42,6 +42,7 @@ const initialColumnsArr = [
     ["cost-ondemand", true],
     ["cost-reserved", true],
     ["generation", false],
+    ["compute_family", true],
 ] as const;
 
 export const initialColumnsValue: {
@@ -64,6 +65,7 @@ export function makePrettyNames<V>(
     return [
         makeColumnOption("pretty_name", "Name"),
         makeColumnOption("instance_type", "API Name"),
+        makeColumnOption("compute_family", "Compute Family"),
         makeColumnOption("memory", "Memory"),
         makeColumnOption("vcpu", "vCPUs"),
         makeColumnOption("storage", "Storage"),
@@ -156,6 +158,14 @@ export const columnsGen = (
                 </RegionLinkPreloader>
             );
         },
+    },
+    {
+        accessorKey: "family",
+        header: "Compute Family",
+        size: 150,
+        id: "compute_family",
+        sortingFn: "alphanumeric",
+        filterFn: regex({ accessorKey: "family" }),
     },
     {
         accessorKey: "memoryGib",

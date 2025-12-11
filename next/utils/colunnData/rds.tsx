@@ -45,6 +45,7 @@ const initialColumnsArr = [
     ["ebs-max-bandwidth", false],
     ["ebs-max-throughput", false],
     ["ebs-iops", false],
+    ["compute_family", true],
 ] as const;
 
 export const initialColumnsValue: {
@@ -67,6 +68,7 @@ export function makePrettyNames<V>(
     return [
         makeColumnOption("name", "Name"),
         makeColumnOption("apiname", "API Name"),
+        makeColumnOption("compute_family", "Compute Family"),
         makeColumnOption("memory", "Memory"),
         makeColumnOption("storage", "Storage"),
         makeColumnOption("ebs-throughput", "EBS Throughput"),
@@ -186,6 +188,14 @@ export const columnsGen = (
             );
         },
         filterFn: regex({ accessorKey: "instance_type" }),
+    },
+    {
+        accessorKey: "family",
+        header: "Compute Family",
+        size: 150,
+        id: "compute_family",
+        sortingFn: "alphanumeric",
+        filterFn: regex({ accessorKey: "family" }),
     },
     {
         header: "Memory",

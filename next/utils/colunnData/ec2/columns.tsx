@@ -275,6 +275,14 @@ export const columnsGen = (
         },
     },
     {
+        accessorKey: "family",
+        header: "Compute Family",
+        size: 150,
+        id: "compute_family",
+        sortingFn: "alphanumeric",
+        filterFn: regex({ accessorKey: "family" }),
+    },
+    {
         accessorKey: "ffmpeg_fps",
         header: "FFmpeg FPS",
         size: 130,

@@ -96,6 +96,7 @@ const initialColumnsArr = [
     ["memory_per_numa_node_mb", false],
     ["l3_per_numa_node_mb", false],
     ["l3_shared", false],
+    ["compute_family", true],
 ] as const;
 
 export const initialColumnsValue: {
@@ -119,6 +120,7 @@ export function makePrettyNames<V>(
         makeColumnOption("pretty_name", "Name"),
         makeColumnOption("instance_type", "API Name"),
         makeColumnOption("family", "Instance Family"),
+        makeColumnOption("compute_family", "Compute Family"),
         makeColumnOption("coremark_iterations_second", "CoreMark Score"),
         makeColumnOption("ffmpeg_fps", "FFmpeg FPS"),
         makeColumnOption("memory", "Memory"),
