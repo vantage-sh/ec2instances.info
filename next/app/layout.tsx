@@ -16,6 +16,7 @@ const toastsSchema = array(
         image_alt_text: optional(string()),
         image_url: optional(string()),
         url: string(),
+        countries: optional(array(string())),
     }),
 );
 

@@ -5,6 +5,7 @@ import { array, InferOutput, object, string, parse, optional } from "valibot";
 import { toast } from "sonner";
 import { browserBlockingLocalStorage } from "@/utils/abGroup";
 import { Button } from "./ui/button";
+import cfTrace from "@/utils/cfTrace";
 
 const toastsSchema = array(
     object({
@@ -13,6 +14,7 @@ const toastsSchema = array(
         image_alt_text: optional(string()),
         image_url: optional(string()),
         url: string(),
+        countries: optional(array(string())),
     }),
 );
 
@@ -102,7 +104,10 @@ function ToastInner({
     return element;
 }
 
-function processToasts(toasts: Toasts) {
+function processToasts(
+    toasts: Toasts,
+    trace: { [key: string]: string } | null,
+) {
     for (const t of toasts.slice().reverse()) {
         // Check if the user dismissed this
         if (
@@ -110,6 +115,17 @@ function processToasts(toasts: Toasts) {
             localStorage.getItem(`toastDismissed-${t.campaign_id}`)
         ) {
             continue;
+        }
+
+        // Check if the toast is for specific countries
+        if (t.countries) {
+            if (
+                !trace ||
+                !trace["loc"] ||
+                !t.countries.includes(trace["loc"])
+            ) {
+                continue;
+            }
         }
 
         // Show the toast. We have to do some janky circular stuff here to get the ID to the toast
@@ -151,13 +167,18 @@ function getUnlessUserDoesntHaveLocalStorage(key: string) {
 }
 
 function runToasts(initialToasts: Toasts) {
+    // Run the trace
+    const traceResult = cfTrace();
+
     // Check if we have it in our cache
     const toastsCache = getUnlessUserDoesntHaveLocalStorage("toastsShown");
     if (toastsCache) {
         try {
             const [endTime, toasts]: [number, Toasts] = JSON.parse(toastsCache);
             if (Date.now() < endTime) {
-                processToasts(toasts);
+                traceResult.then((trace) => {
+                    processToasts(toasts, trace);
+                });
                 return;
             }
         } catch {
@@ -168,9 +189,13 @@ function runToasts(initialToasts: Toasts) {
     // Try to fetch the toasts
     fetch("https://instances.vantage.sh/toasts.json")
         .then((res) => res.json())
-        .then((data) => {
+        .then(async (data) => {
+            // Await the trace result
+            const trace = await traceResult;
+
+            // Process the toasts
             const toasts = parse(toastsSchema, data);
-            processToasts(toasts);
+            processToasts(toasts, trace);
 
             // Cache for 2 hours
             const endTime = Date.now() + 2 * 60 * 60 * 1000;
@@ -179,9 +204,10 @@ function runToasts(initialToasts: Toasts) {
                 JSON.stringify([endTime, toasts]),
             );
         })
-        .catch(() => {
+        .catch(async () => {
             // If we're unable to fetch, just use the initial toasts
-            processToasts(initialToasts);
+            const trace = await traceResult;
+            processToasts(initialToasts, trace);
         });
 }
 
