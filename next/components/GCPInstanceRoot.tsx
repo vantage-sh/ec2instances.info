@@ -61,7 +61,7 @@ export default function GCPInstanceRoot({
                 <div className="md:flex gap-8">
                     <div className="md:max-w-sm">
                         <h1 className="text-2xl font-bold mb-2">
-                            {compressedInstance.pretty_name}
+                            {compressedInstance.instance_type}
                         </h1>
                         <h2 className="text-sm mb-4">{description}</h2>
                         <PricingCalculator

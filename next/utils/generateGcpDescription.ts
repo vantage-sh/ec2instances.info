@@ -38,5 +38,5 @@ export default function generateGcpDescription<
     if (spot && !isNaN(spot)) {
         spotText = ` or $${spot.toFixed(4)} per hour with spot instances`;
     }
-    return `The ${instance.pretty_name} is in the ${titleCase(instance.family)} family with ${instance.vCPU} vCPUs and ${instance.memory} GiB of memory starting at $${onDemand.toFixed(4)} per hour on-demand${spotText}.`;
+    return `The ${instance.instance_type} instance is in the ${titleCase(instance.family)} family with ${instance.vCPU} vCPUs and ${instance.memory} GiB of memory starting at $${onDemand.toFixed(4)} per hour on-demand${spotText}.`;
 }
