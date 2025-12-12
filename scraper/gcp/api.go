@@ -1,18 +1,19 @@
 package gcp
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
-	"net/http"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
+	"sync"
 )
 
 const (
 	GCP_BILLING_API_BASE = "https://cloudbilling.googleapis.com"
 	COMPUTE_SERVICE_ID   = "6F81-5844-456A" // Compute Engine service ID
+	GCP_COMPUTE_API_BASE = "https://compute.googleapis.com/compute/v1"
 )
 
 // API Response structures
@@ -94,33 +95,51 @@ type PricesResponse struct {
 	NextPageToken string      `json:"nextPageToken"`
 }
 
-// Helper function to make API requests with API key
-func makeGCPRequest(url string, apiKey string, result interface{}) error {
-	req, err := http.NewRequest("GET", url, nil)
-	if err != nil {
-		return err
-	}
+// Machine type structures from Compute Engine API
+type MachineType struct {
+	Name                         string       `json:"name"`
+	Description                  string       `json:"description"`
+	GuestCpus                    int          `json:"guestCpus"`
+	MemoryMb                     int          `json:"memoryMb"`
+	IsSharedCpu                  bool         `json:"isSharedCpu"`
+	Zone                         string       `json:"zone"`
+	MaximumPersistentDisks       int          `json:"maximumPersistentDisks"`
+	MaximumPersistentDisksSizeGb string       `json:"maximumPersistentDisksSizeGb"`
+	Accelerators                 []Accelerator `json:"accelerators,omitempty"`
+}
 
-	q := req.URL.Query()
-	q.Add("key", apiKey)
-	req.URL.RawQuery = q.Encode()
+type Accelerator struct {
+	GuestAcceleratorType  string `json:"guestAcceleratorType"`
+	GuestAcceleratorCount int    `json:"guestAcceleratorCount"`
+}
 
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
+type MachineTypesResponse struct {
+	Items         []MachineType `json:"items"`
+	NextPageToken string        `json:"nextPageToken"`
+}
 
-	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
+type AggregatedMachineTypesResponse struct {
+	Items         map[string]MachineTypesScopedList `json:"items"`
+	NextPageToken string                            `json:"nextPageToken"`
+}
 
-	return json.NewDecoder(resp.Body).Decode(result)
+type MachineTypesScopedList struct {
+	MachineTypes []MachineType `json:"machineTypes,omitempty"`
+}
+
+// MachineSpecs holds the specifications for a machine type
+type MachineSpecs struct {
+	VCPU         int
+	MemoryGB     float64
+	Family       string
+	IsSharedCPU  bool
+	GPU          int
+	GPUModel     string
+	Zones        []string
 }
 
 // Fetch all SKUs for Compute Engine with pagination
-func fetchComputeSKUs(apiKey string) ([]SKU, error) {
+func fetchComputeSKUs() ([]SKU, error) {
 	var allSKUs []SKU
 	pageToken := ""
 
@@ -131,7 +150,7 @@ func fetchComputeSKUs(apiKey string) ([]SKU, error) {
 		}
 
 		var response SKUsResponse
-		if err := makeGCPRequest(url, apiKey, &response); err != nil {
+		if err := makeGCPAuthenticatedRequest(url, &response); err != nil {
 			return nil, fmt.Errorf("failed to fetch SKUs: %w", err)
 		}
 
@@ -147,7 +166,7 @@ func fetchComputeSKUs(apiKey string) ([]SKU, error) {
 }
 
 // Fetch pricing for all SKUs
-func fetchPricing(apiKey string) (map[string]PriceInfo, error) {
+func fetchPricing() (map[string]PriceInfo, error) {
 	priceMap := make(map[string]PriceInfo)
 	pageToken := ""
 
@@ -158,7 +177,7 @@ func fetchPricing(apiKey string) (map[string]PriceInfo, error) {
 		}
 
 		var response PricesResponse
-		if err := makeGCPRequest(url, apiKey, &response); err != nil {
+		if err := makeGCPAuthenticatedRequest(url, &response); err != nil {
 			return nil, fmt.Errorf("failed to fetch prices: %w", err)
 		}
 
@@ -179,6 +198,131 @@ func fetchPricing(apiKey string) (map[string]PriceInfo, error) {
 	}
 
 	return priceMap, nil
+}
+
+// fetchMachineTypes fetches all machine types from the Compute Engine API
+func fetchMachineTypes() (map[string]*MachineSpecs, error) {
+	projectID := os.Getenv("GCP_PROJECT_ID")
+	if projectID == "" {
+		return nil, fmt.Errorf("GCP_PROJECT_ID must be set")
+	}
+
+	machineSpecs := make(map[string]*MachineSpecs)
+	var mu sync.Mutex
+	pageToken := ""
+
+	log.Println("Fetching GCP machine types from Compute Engine API...")
+
+	for {
+		url := fmt.Sprintf("%s/projects/%s/aggregated/machineTypes?maxResults=500", GCP_COMPUTE_API_BASE, projectID)
+		if pageToken != "" {
+			url += "&pageToken=" + pageToken
+		}
+
+		var response AggregatedMachineTypesResponse
+		if err := makeGCPAuthenticatedRequest(url, &response); err != nil {
+			return nil, fmt.Errorf("failed to fetch machine types: %w", err)
+		}
+
+		// Process each zone's machine types
+		for zonePath, scopedList := range response.Items {
+			// Extract zone name from path like "zones/us-central1-a"
+			zoneParts := strings.Split(zonePath, "/")
+			zone := ""
+			if len(zoneParts) >= 2 {
+				zone = zoneParts[1]
+			}
+
+			for _, mt := range scopedList.MachineTypes {
+				// Skip custom machine types
+				if strings.Contains(mt.Name, "custom") {
+					continue
+				}
+
+				mu.Lock()
+				if existing, ok := machineSpecs[mt.Name]; ok {
+					// Add zone to existing entry
+					existing.Zones = append(existing.Zones, zone)
+				} else {
+					// Create new entry
+					family := determineMachineFamily(mt.Name)
+					specs := &MachineSpecs{
+						VCPU:        mt.GuestCpus,
+						MemoryGB:    float64(mt.MemoryMb) / 1024.0,
+						Family:      family,
+						IsSharedCPU: mt.IsSharedCpu,
+						Zones:       []string{zone},
+					}
+
+					// Handle GPUs/accelerators
+					if len(mt.Accelerators) > 0 {
+						specs.GPU = mt.Accelerators[0].GuestAcceleratorCount
+						specs.GPUModel = mt.Accelerators[0].GuestAcceleratorType
+					}
+
+					machineSpecs[mt.Name] = specs
+				}
+				mu.Unlock()
+			}
+		}
+
+		if response.NextPageToken == "" {
+			break
+		}
+		pageToken = response.NextPageToken
+		log.Printf("Fetched %d GCP machine types so far...", len(machineSpecs))
+	}
+
+	log.Printf("Fetched %d unique GCP machine types", len(machineSpecs))
+	return machineSpecs, nil
+}
+
+// determineMachineFamily determines the family category based on machine type name
+func determineMachineFamily(name string) string {
+	nameLower := strings.ToLower(name)
+
+	// Check for specific patterns
+	switch {
+	// Memory optimized
+	case strings.Contains(nameLower, "highmem"),
+		strings.Contains(nameLower, "megamem"),
+		strings.Contains(nameLower, "ultramem"),
+		strings.HasPrefix(nameLower, "m1-"),
+		strings.HasPrefix(nameLower, "m2-"),
+		strings.HasPrefix(nameLower, "m3-"),
+		strings.HasPrefix(nameLower, "m4-"),
+		strings.HasPrefix(nameLower, "x4-"):
+		return "Memory optimized"
+
+	// Compute optimized
+	case strings.Contains(nameLower, "highcpu"),
+		strings.HasPrefix(nameLower, "c2-"),
+		strings.HasPrefix(nameLower, "c2d-"),
+		strings.HasPrefix(nameLower, "c3-"),
+		strings.HasPrefix(nameLower, "c3d-"),
+		strings.HasPrefix(nameLower, "c4-"),
+		strings.HasPrefix(nameLower, "c4a-"),
+		strings.HasPrefix(nameLower, "h3-"):
+		// c4-highmem and similar should be memory optimized
+		if strings.Contains(nameLower, "highmem") {
+			return "Memory optimized"
+		}
+		return "Compute optimized"
+
+	// Accelerator optimized (GPU)
+	case strings.HasPrefix(nameLower, "a2-"),
+		strings.HasPrefix(nameLower, "a3-"),
+		strings.HasPrefix(nameLower, "g2-"):
+		return "Accelerator optimized"
+
+	// Storage optimized
+	case strings.HasPrefix(nameLower, "z3-"):
+		return "Storage optimized"
+
+	// General purpose (default)
+	default:
+		return "General purpose"
+	}
 }
 
 // Parse machine type from display name
@@ -322,194 +466,6 @@ func getRegionDisplayName(region string) string {
 		return name
 	}
 	return region
-}
-
-// Parse instance specifications from GCP machine type definitions
-// This is a simplified mapping - in production you'd want to fetch this from GCP API
-var gcpMachineSpecs = map[string]struct {
-	vcpu   int
-	memory float64
-	family string
-}{
-	// N1 Standard
-	"n1-standard-1":  {1, 3.75, "General purpose"},
-	"n1-standard-2":  {2, 7.5, "General purpose"},
-	"n1-standard-4":  {4, 15, "General purpose"},
-	"n1-standard-8":  {8, 30, "General purpose"},
-	"n1-standard-16": {16, 60, "General purpose"},
-	"n1-standard-32": {32, 120, "General purpose"},
-	"n1-standard-64": {64, 240, "General purpose"},
-	"n1-standard-96": {96, 360, "General purpose"},
-
-	// N1 High Memory
-	"n1-highmem-2":  {2, 13, "Memory optimized"},
-	"n1-highmem-4":  {4, 26, "Memory optimized"},
-	"n1-highmem-8":  {8, 52, "Memory optimized"},
-	"n1-highmem-16": {16, 104, "Memory optimized"},
-	"n1-highmem-32": {32, 208, "Memory optimized"},
-	"n1-highmem-64": {64, 416, "Memory optimized"},
-	"n1-highmem-96": {96, 624, "Memory optimized"},
-
-	// N1 High CPU
-	"n1-highcpu-2":  {2, 1.8, "Compute optimized"},
-	"n1-highcpu-4":  {4, 3.6, "Compute optimized"},
-	"n1-highcpu-8":  {8, 7.2, "Compute optimized"},
-	"n1-highcpu-16": {16, 14.4, "Compute optimized"},
-	"n1-highcpu-32": {32, 28.8, "Compute optimized"},
-	"n1-highcpu-64": {64, 57.6, "Compute optimized"},
-	"n1-highcpu-96": {96, 86.4, "Compute optimized"},
-
-	// N2 Standard
-	"n2-standard-2":   {2, 8, "General purpose"},
-	"n2-standard-4":   {4, 16, "General purpose"},
-	"n2-standard-8":   {8, 32, "General purpose"},
-	"n2-standard-16":  {16, 64, "General purpose"},
-	"n2-standard-32":  {32, 128, "General purpose"},
-	"n2-standard-48":  {48, 192, "General purpose"},
-	"n2-standard-64":  {64, 256, "General purpose"},
-	"n2-standard-80":  {80, 320, "General purpose"},
-	"n2-standard-96":  {96, 384, "General purpose"},
-	"n2-standard-128": {128, 512, "General purpose"},
-
-	// N2D Standard (AMD)
-	"n2d-standard-2":   {2, 8, "General purpose"},
-	"n2d-standard-4":   {4, 16, "General purpose"},
-	"n2d-standard-8":   {8, 32, "General purpose"},
-	"n2d-standard-16":  {16, 64, "General purpose"},
-	"n2d-standard-32":  {32, 128, "General purpose"},
-	"n2d-standard-48":  {48, 192, "General purpose"},
-	"n2d-standard-64":  {64, 256, "General purpose"},
-	"n2d-standard-80":  {80, 320, "General purpose"},
-	"n2d-standard-96":  {96, 384, "General purpose"},
-	"n2d-standard-128": {128, 512, "General purpose"},
-	"n2d-standard-224": {224, 896, "General purpose"},
-
-	// N2D High Memory (AMD)
-	"n2d-highmem-2":  {2, 16, "Memory optimized"},
-	"n2d-highmem-4":  {4, 32, "Memory optimized"},
-	"n2d-highmem-8":  {8, 64, "Memory optimized"},
-	"n2d-highmem-16": {16, 128, "Memory optimized"},
-	"n2d-highmem-32": {32, 256, "Memory optimized"},
-	"n2d-highmem-48": {48, 384, "Memory optimized"},
-	"n2d-highmem-64": {64, 512, "Memory optimized"},
-	"n2d-highmem-80": {80, 640, "Memory optimized"},
-	"n2d-highmem-96": {96, 768, "Memory optimized"},
-
-	// E2 Standard (Cost-optimized)
-	"e2-standard-2":  {2, 8, "General purpose"},
-	"e2-standard-4":  {4, 16, "General purpose"},
-	"e2-standard-8":  {8, 32, "General purpose"},
-	"e2-standard-16": {16, 64, "General purpose"},
-	"e2-standard-32": {32, 128, "General purpose"},
-
-	// C2 Compute-optimized
-	"c2-standard-4":  {4, 16, "Compute optimized"},
-	"c2-standard-8":  {8, 32, "Compute optimized"},
-	"c2-standard-16": {16, 64, "Compute optimized"},
-	"c2-standard-30": {30, 120, "Compute optimized"},
-	"c2-standard-60": {60, 240, "Compute optimized"},
-
-	// C2D Compute-optimized (AMD)
-	"c2d-standard-2":   {2, 8, "Compute optimized"},
-	"c2d-standard-4":   {4, 16, "Compute optimized"},
-	"c2d-standard-8":   {8, 32, "Compute optimized"},
-	"c2d-standard-16":  {16, 64, "Compute optimized"},
-	"c2d-standard-32":  {32, 128, "Compute optimized"},
-	"c2d-standard-56":  {56, 224, "Compute optimized"},
-	"c2d-standard-112": {112, 448, "Compute optimized"},
-
-	// C2D Memory-optimized
-	"c2d-highmem-2":   {2, 16, "Memory optimized"},
-	"c2d-highmem-4":   {4, 32, "Memory optimized"},
-	"c2d-highmem-8":   {8, 64, "Memory optimized"},
-	"c2d-highmem-16":  {16, 128, "Memory optimized"},
-	"c2d-highmem-32":  {32, 256, "Memory optimized"},
-	"c2d-highmem-56":  {56, 448, "Memory optimized"},
-	"c2d-highmem-112": {112, 896, "Memory optimized"},
-
-	// C2D Compute-optimized
-	"c2d-highcpu-2":   {2, 4, "Compute optimized"},
-	"c2d-highcpu-4":   {4, 8, "Compute optimized"},
-	"c2d-highcpu-8":   {8, 16, "Compute optimized"},
-	"c2d-highcpu-16":  {16, 32, "Compute optimized"},
-	"c2d-highcpu-32":  {32, 64, "Compute optimized"},
-	"c2d-highcpu-56":  {56, 128, "Compute optimized"},
-	"c2d-highcpu-112": {112, 224, "Compute optimized"},
-
-	// C3 Memory-optimized
-	"c3-highmem-4":   {4, 32, "Memory optimized"},
-	"c3-highmem-8":   {8, 64, "Memory optimized"},
-	"c3-highmem-22":  {22, 176, "Memory optimized"},
-	"c3-highmem-44":  {44, 352, "Memory optimized"},
-	"c3-highmem-88":  {88, 704, "Memory optimized"},
-	"c3-highmem-176": {176, 1408, "Memory optimized"},
-	"c3-highmem-192": {192, 1536, "Memory optimized"},
-
-	// C4 Compute-optimized (AMD)
-	"c4-standard-2":         {2, 7, "General purpose"},
-	"c4-standard-4":         {4, 15, "General purpose"},
-	"c4-standard-8":         {8, 30, "General purpose"},
-	"c4-standard-16":        {16, 60, "General purpose"},
-	"c4-standard-24":        {24, 90, "General purpose"},
-	"c4-standard-32":        {32, 120, "General purpose"},
-	"c4-standard-48":        {48, 180, "General purpose"},
-	"c4-standard-96":        {96, 360, "General purpose"},
-	"c4-standard-144":       {144, 540, "General purpose"},
-	"c4-standard-192":       {192, 720, "General purpose"},
-	"c4-standard-288":       {288, 1080, "General purpose"},
-	"c4-standard-288-metal": {288, 1080, "General purpose"},
-
-	// C4 Memory-optimized
-	"c4-highmem-2":   {2, 15, "Memory optimized"},
-	"c4-highmem-4":   {4, 31, "Memory optimized"},
-	"c4-highmem-8":   {8, 62, "Memory optimized"},
-	"c4-highmem-16":  {16, 124, "Memory optimized"},
-	"c4-highmem-24":  {24, 186, "Memory optimized"},
-	"c4-highmem-32":  {32, 248, "Memory optimized"},
-	"c4-highmem-48":  {48, 372, "Memory optimized"},
-	"c4-highmem-96":  {96, 744, "Memory optimized"},
-	"c4-highmem-144": {144, 1116, "Memory optimized"},
-	"c4-highmem-192": {192, 1488, "Memory optimized"},
-	"c4-highmem-288": {288, 2232, "Memory optimized"},
-
-	// C4A Memory-optimized
-	"c4a-highmem-2":  {2, 16, "Memory optimized"},
-	"c4a-highmem-4":  {4, 32, "Memory optimized"},
-	"c4a-highmem-8":  {8, 64, "Memory optimized"},
-	"c4a-highmem-16": {16, 128, "Memory optimized"},
-	"c4a-highmem-32": {32, 256, "Memory optimized"},
-	"c4a-highmem-48": {48, 384, "Memory optimized"},
-	"c4a-highmem-64": {64, 512, "Memory optimized"},
-	"c4a-highmem-72": {72, 576, "Memory optimized"},
-
-	// E2 Memory-optimized (AMD)
-	"e2-highmem-2":  {2, 16, "Memory optimized"},
-	"e2-highmem-4":  {4, 32, "Memory optimized"},
-	"e2-highmem-8":  {8, 64, "Memory optimized"},
-	"e2-highmem-16": {16, 128, "Memory optimized"},
-
-	// M1 Memory-optimized
-	"m1-ultramem-40":  {40, 961, "Memory optimized"},
-	"m1-ultramem-80":  {80, 1922, "Memory optimized"},
-	"m1-ultramem-160": {160, 3844, "Memory optimized"},
-	"m1-megamem-96":   {96, 1433.6, "Memory optimized"},
-
-	// M2 Memory-optimized
-	"m2-ultramem-208": {208, 5888, "Memory optimized"},
-	"m2-ultramem-416": {416, 11776, "Memory optimized"},
-	"m2-megamem-416":  {416, 5888, "Memory optimized"},
-
-	// T2D Shared-core (burstable)
-	"t2d-standard-1": {1, 4, "General purpose"},
-	"t2d-standard-2": {2, 8, "General purpose"},
-	"t2d-standard-4": {4, 16, "General purpose"},
-	"t2d-standard-8": {8, 32, "General purpose"},
-
-	// T2A Shared-core (ARM)
-	"t2a-standard-1": {1, 4, "General purpose"},
-	"t2a-standard-2": {2, 8, "General purpose"},
-	"t2a-standard-4": {4, 16, "General purpose"},
-	"t2a-standard-8": {8, 32, "General purpose"},
 }
 
 // Create pretty name from instance type

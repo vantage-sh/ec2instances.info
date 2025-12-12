@@ -2,7 +2,6 @@ package gcp
 
 import (
 	"log"
-	"os"
 	"scraper/utils"
 	"sort"
 	"strconv"
@@ -10,7 +9,7 @@ import (
 )
 
 // Process SKUs and pricing data to generate GCP instances
-func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPInstance {
+func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[string]*MachineSpecs) map[string]*GCPInstance {
 	instances := make(map[string]*GCPInstance)
 
 	// Group SKUs by machine type and region
@@ -153,23 +152,30 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 
 	// Build instances from machine specs
 	matchedInstances := 0
-	for instanceType, specs := range gcpMachineSpecs {
+	for instanceType, specs := range machineSpecs {
+		// Determine GPU model pointer
+		var gpuModel *string
+		if specs.GPUModel != "" {
+			gpuModel = &specs.GPUModel
+		}
+
 		instance := &GCPInstance{
 			InstanceType:       instanceType,
-			Family:             specs.family,
-			VCPU:               specs.vcpu,
-			Memory:             specs.memory,
+			Family:             specs.Family,
+			VCPU:               specs.VCPU,
+			Memory:             specs.MemoryGB,
 			PrettyName:         createPrettyName(instanceType),
 			NetworkPerformance: "Variable",
 			Generation:         "current",
-			GPU:                0,
+			GPU:                float64(specs.GPU),
+			GPUModel:           gpuModel,
 			Pricing:            make(map[Region]map[OS]any),
 			Regions:            make(map[string]string),
 			AvailabilityZones:  make(map[string][]string),
 			LocalSSD:           false,
-			SharedCPU:          strings.HasPrefix(instanceType, "e2-") || strings.HasPrefix(instanceType, "f1-") || strings.HasPrefix(instanceType, "g1-"),
-			ComputeOptimized:   strings.Contains(specs.family, "Compute optimized"),
-			MemoryOptimized:    strings.Contains(specs.family, "Memory optimized"),
+			SharedCPU:          specs.IsSharedCPU,
+			ComputeOptimized:   strings.Contains(specs.Family, "Compute optimized"),
+			MemoryOptimized:    strings.Contains(specs.Family, "Memory optimized"),
 		}
 
 		// Add pricing data for each region
@@ -223,7 +229,7 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 			}
 
 			// Total price = (vCPUs * core price) + (memory GB * RAM price)
-			totalPrice := (float64(specs.vcpu) * pricing.corePrice) + (specs.memory * pricing.ramPrice)
+			totalPrice := (float64(specs.VCPU) * pricing.corePrice) + (specs.MemoryGB * pricing.ramPrice)
 
 			if totalPrice == 0 {
 				continue
@@ -332,24 +338,29 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo) map[string]*GCPIns
 
 // Main scraping function
 func DoGCPScraping() {
-	apiKey := os.Getenv("GCP_API_KEY")
+	log.Println("Fetching GCP machine types from Compute Engine API...")
+	machineSpecs, err := fetchMachineTypes()
+	if err != nil {
+		log.Fatal("Failed to fetch machine types:", err)
+	}
+	log.Printf("Fetched %d GCP machine types", len(machineSpecs))
 
 	log.Println("Fetching GCP Compute Engine SKUs...")
-	skus, err := fetchComputeSKUs(apiKey)
+	skus, err := fetchComputeSKUs()
 	if err != nil {
 		log.Fatal("Failed to fetch SKUs:", err)
 	}
 	log.Printf("Fetched %d GCP SKUs", len(skus))
 
 	log.Println("Fetching GCP pricing data...")
-	pricing, err := fetchPricing(apiKey)
+	pricing, err := fetchPricing()
 	if err != nil {
 		log.Fatal("Failed to fetch pricing:", err)
 	}
 	log.Printf("Fetched pricing for %d GCP SKUs", len(pricing))
 
 	log.Println("Processing GCP instance data...")
-	instancesMap := processGCPData(skus, pricing)
+	instancesMap := processGCPData(skus, pricing, machineSpecs)
 
 	// Convert map to sorted slice
 	instances := make([]*GCPInstance, 0, len(instancesMap))
