@@ -9,6 +9,7 @@ let nextConfig: NextConfig = {
     turbopack: {
         root: __dirname,
     },
+    productionBrowserSourceMaps: true,
 };
 
 if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
