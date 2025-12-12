@@ -9,7 +9,7 @@ import (
 )
 
 // Process SKUs and pricing data to generate GCP instances
-func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[string]*MachineSpecs) map[string]*GCPInstance {
+func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[string]*MachineSpecs, regions map[string]string) map[string]*GCPInstance {
 	instances := make(map[string]*GCPInstance)
 
 	// Group SKUs by machine type and region
@@ -263,7 +263,12 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 			}
 
 			// Add region to the regions map
-			instance.Regions[rk.region] = getRegionDisplayName(rk.region)
+			if displayName, ok := regions[rk.region]; ok {
+				instance.Regions[rk.region] = displayName
+			} else {
+				// Fallback to friendly name lookup for regions not in compute API
+				instance.Regions[rk.region] = getRegionFriendlyName(rk.region)
+			}
 		}
 
 		// Only include instances that have pricing data
@@ -338,6 +343,12 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 
 // Main scraping function
 func DoGCPScraping() {
+	log.Println("Fetching GCP regions from Compute Engine API...")
+	regions, err := fetchRegions()
+	if err != nil {
+		log.Fatal("Failed to fetch regions:", err)
+	}
+
 	log.Println("Fetching GCP machine types from Compute Engine API...")
 	machineSpecs, err := fetchMachineTypes()
 	if err != nil {
@@ -360,7 +371,7 @@ func DoGCPScraping() {
 	log.Printf("Fetched pricing for %d GCP SKUs", len(pricing))
 
 	log.Println("Processing GCP instance data...")
-	instancesMap := processGCPData(skus, pricing, machineSpecs)
+	instancesMap := processGCPData(skus, pricing, machineSpecs, regions)
 
 	// Convert map to sorted slice
 	instances := make([]*GCPInstance, 0, len(instancesMap))
