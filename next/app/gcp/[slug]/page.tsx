@@ -64,7 +64,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
     const { description, instance } = await handleParams(params);
     return {
-        title: `${instance.pretty_name} pricing and specs - Vantage`,
+        title: `${instance.instance_type} pricing and specs - Vantage`,
         description,
         openGraph: {
             images: [urlInject`${"/gcp/" + instance.instance_type + ".png"}`],
