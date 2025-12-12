@@ -412,59 +412,117 @@ func calculateHourlyPrice(price PriceInfo) float64 {
 	return dollars
 }
 
-// Region name mapping
-var gcpRegionNames = map[string]string{
-	"us-central1":             "Iowa",
-	"us-east1":                "South Carolina",
-	"us-east4":                "Northern Virginia",
-	"us-east5":                "Columbus",
-	"us-east7":                "Alabama",
-	"us-south1":               "Dallas",
-	"us-west1":                "Oregon",
-	"us-west2":                "Los Angeles",
-	"us-west3":                "Salt Lake City",
-	"us-west4":                "Las Vegas",
-	"us-west8":                "Phoenix",
-	"northamerica-northeast1": "Montreal",
-	"northamerica-northeast2": "Toronto",
-	"northamerica-south1":     "Mexico",
-	"southamerica-east1":      "São Paulo",
-	"southamerica-west1":      "Santiago",
-	"europe-central2":         "Warsaw",
-	"europe-north1":           "Finland",
-	"europe-north2":           "Sweden",
-	"europe-southwest1":       "Madrid",
-	"europe-west1":            "Belgium",
-	"europe-west2":            "London",
-	"europe-west3":            "Frankfurt",
-	"europe-west4":            "Netherlands",
-	"europe-west5":            "Zurich",
-	"europe-west6":            "Zurich",
-	"europe-west8":            "Milan",
-	"europe-west9":            "Paris",
-	"europe-west10":           "Berlin",
-	"europe-west12":           "Turin",
-	"asia-east1":              "Taiwan",
-	"asia-east2":              "Hong Kong",
-	"asia-northeast1":         "Tokyo",
-	"asia-northeast2":         "Osaka",
-	"asia-northeast3":         "Seoul",
-	"asia-south1":             "Mumbai",
-	"asia-south2":             "Delhi",
-	"asia-southeast1":         "Singapore",
-	"asia-southeast2":         "Jakarta",
-	"australia-southeast1":    "Sydney",
-	"australia-southeast2":    "Melbourne",
-	"me-central1":             "Doha",
-	"me-central2":             "Dammam",
-	"me-west1":                "Tel Aviv",
-	"africa-south1":           "Johannesburg",
+// GCP Region from API
+type GCPRegion struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }
 
-func getRegionDisplayName(region string) string {
-	if name, ok := gcpRegionNames[region]; ok {
+type RegionsResponse struct {
+	Items         []GCPRegion `json:"items"`
+	NextPageToken string      `json:"nextPageToken"`
+}
+
+// fetchRegions fetches all regions from the Compute Engine API
+func fetchRegions() (map[string]string, error) {
+	projectID := os.Getenv("GCP_PROJECT_ID")
+	if projectID == "" {
+		return nil, fmt.Errorf("GCP_PROJECT_ID must be set")
+	}
+
+	regions := make(map[string]string)
+	pageToken := ""
+
+	log.Println("Fetching GCP regions from Compute Engine API...")
+
+	for {
+		url := fmt.Sprintf("%s/projects/%s/regions?maxResults=500", GCP_COMPUTE_API_BASE, projectID)
+		if pageToken != "" {
+			url += "&pageToken=" + pageToken
+		}
+
+		var response RegionsResponse
+		if err := makeGCPAuthenticatedRequest(url, &response); err != nil {
+			return nil, fmt.Errorf("failed to fetch regions: %w", err)
+		}
+
+		for _, region := range response.Items {
+			// Use friendly name if available, otherwise use the region code
+			displayName := getRegionFriendlyName(region.Name)
+			regions[region.Name] = displayName
+		}
+
+		if response.NextPageToken == "" {
+			break
+		}
+		pageToken = response.NextPageToken
+	}
+
+	log.Printf("Fetched %d GCP regions", len(regions))
+	return regions, nil
+}
+
+// getRegionFriendlyName returns a human-friendly name for a region
+// GCP API doesn't provide these, so we map known ones
+func getRegionFriendlyName(region string) string {
+	// Known friendly names (GCP doesn't provide these via API)
+	friendlyNames := map[string]string{
+		"us-central1":             "Iowa",
+		"us-east1":                "South Carolina",
+		"us-east4":                "Northern Virginia",
+		"us-east5":                "Columbus",
+		"us-east7":                "Alabama",
+		"us-south1":               "Dallas",
+		"us-west1":                "Oregon",
+		"us-west2":                "Los Angeles",
+		"us-west3":                "Salt Lake City",
+		"us-west4":                "Las Vegas",
+		"us-west8":                "Phoenix",
+		"northamerica-northeast1": "Montreal",
+		"northamerica-northeast2": "Toronto",
+		"northamerica-south1":     "Mexico",
+		"southamerica-east1":      "São Paulo",
+		"southamerica-west1":      "Santiago",
+		"europe-central2":         "Warsaw",
+		"europe-north1":           "Finland",
+		"europe-north2":           "Sweden",
+		"europe-southwest1":       "Madrid",
+		"europe-west1":            "Belgium",
+		"europe-west2":            "London",
+		"europe-west3":            "Frankfurt",
+		"europe-west4":            "Netherlands",
+		"europe-west5":            "Zurich",
+		"europe-west6":            "Zurich",
+		"europe-west8":            "Milan",
+		"europe-west9":            "Paris",
+		"europe-west10":           "Berlin",
+		"europe-west12":           "Turin",
+		"asia-east1":              "Taiwan",
+		"asia-east2":              "Hong Kong",
+		"asia-northeast1":         "Tokyo",
+		"asia-northeast2":         "Osaka",
+		"asia-northeast3":         "Seoul",
+		"asia-south1":             "Mumbai",
+		"asia-south2":             "Delhi",
+		"asia-southeast1":         "Singapore",
+		"asia-southeast2":         "Jakarta",
+		"asia-southeast3":         "Bangkok",
+		"australia-southeast1":    "Sydney",
+		"australia-southeast2":    "Melbourne",
+		"me-central1":             "Doha",
+		"me-central2":             "Dammam",
+		"me-west1":                "Tel Aviv",
+		"africa-south1":           "Johannesburg",
+		// Multi-regional billing identifiers
+		"multi-americas": "Americas",
+		"multi-europe":   "Europe",
+		"multi-asia":     "Asia Pacific",
+	}
+
+	if name, ok := friendlyNames[region]; ok {
 		return name
 	}
+	// Return region code if no friendly name known
 	return region
 }
 
