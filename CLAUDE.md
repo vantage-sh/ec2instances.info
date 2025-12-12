@@ -71,7 +71,8 @@ make all                   # fetch-data + compress-www + next build
 
 - **aws/**, **azure/**, **gcp/**: Provider-specific scrapers
 - **utils/**: Shared scraper utilities
-- Requires environment variables: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AZURE_TENANT_ID`, `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `AZURE_SUBSCRIPTION_ID`, `GCP_API_KEY`
+- Requires environment variables: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AZURE_TENANT_ID`, `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `AZURE_SUBSCRIPTION_ID`, `GCP_PROJECT_ID`, `GCP_CLIENT_EMAIL`, `GCP_PRIVATE_KEY`
+- When running the scraper, the cwd is important. Run within the root.
 
 ## Testing Guidelines
 
