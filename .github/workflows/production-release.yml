@@ -38,7 +38,9 @@ jobs:
                   NEXT_PUBLIC_ENABLE_VANTAGE_SCRIPT_TAG: "1"
                   NEXT_PUBLIC_UNIFY_TAG_ID: ${{ secrets.UNIFY_TAG_ID }}
                   NEXT_PUBLIC_UNIFY_API_KEY: ${{ secrets.UNIFY_API_KEY }}
-                  GCP_API_KEY: ${{ secrets.GCP_API_KEY }}
+                  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+                  GCP_CLIENT_EMAIL: ${{ secrets.GCP_CLIENT_EMAIL }}
+                  GCP_PRIVATE_KEY: ${{ secrets.GCP_PRIVATE_KEY }}
                   SLACK_WEBHOOK_URL: ${{ secrets.SCRAPER_SLACK_WEBHOOK_URL }}
 
             - name: Run the diff writer
