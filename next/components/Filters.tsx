@@ -287,7 +287,6 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                             className="form-control not-xl:hidden not-2xl:w-25 p-1 border-gray-300 border rounded-md"
                             placeholder="Search..."
                             value={searchTerm}
-                            disabled={compareOn}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>

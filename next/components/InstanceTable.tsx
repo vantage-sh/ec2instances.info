@@ -6,7 +6,6 @@ import {
     getFilteredRowModel,
     flexRender,
     Row,
-    ColumnFiltersState,
     getSortedRowModel,
     RowSelectionState,
     ColumnDef,
@@ -49,9 +48,6 @@ interface InstanceTableProps<Instance> {
     columnAtomKey: AtomKeyWhereInstanceIs<Instance>;
     ecuRename?: string;
 }
-
-// Hack to stop Tanstack Table from thinking the array changed.
-const emptyColumnFilters: ColumnFiltersState = [];
 
 const regexCache = new Map<string, RegExp>();
 function getRegex(value: string) {
@@ -155,8 +151,8 @@ export default function InstanceTable<
         },
         state: {
             columnVisibility,
-            globalFilter: compareOn ? undefined : searchTerm,
-            columnFilters: compareOn ? emptyColumnFilters : columnFilters,
+            globalFilter: searchTerm,
+            columnFilters: columnFilters,
             sorting,
             rowSelection: rowSelectionRemapped,
         },
@@ -321,16 +317,13 @@ export default function InstanceTable<
                                                     })
                                                 }
                                             />
-                                            {header.column.getCanFilter() &&
-                                                !compareOn && (
-                                                    <div className="absolute bottom-2 left-2 right-2">
-                                                        <IndividualColumnFilter
-                                                            column={
-                                                                header.column
-                                                            }
-                                                        />
-                                                    </div>
-                                                )}
+                                            {header.column.getCanFilter() && (
+                                                <div className="absolute bottom-2 left-2 right-2">
+                                                    <IndividualColumnFilter
+                                                        column={header.column}
+                                                    />
+                                                </div>
+                                            )}
                                         </div>
                                     </th>
                                 ))}
