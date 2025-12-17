@@ -1,9 +1,9 @@
-async function getAsset(path, env, ctx, cacheKey) {
+async function getAsset(path, env, ctx, cacheKey, isHead) {
     // Attempt to decode the path.
     try {
         path = decodeURIComponent(path);
     } catch {
-        return new Response("Invalid path", {
+        return new Response(isHead ? null : "Invalid path", {
             status: 400,
         });
     }
@@ -20,11 +20,11 @@ async function getAsset(path, env, ctx, cacheKey) {
                 type: "arrayBuffer",
             });
             if (!notFoundAsset) {
-                return new Response("Internal server error", {
+                return new Response(isHead ? null : "Internal server error", {
                     status: 500,
                 });
             }
-            return new Response(notFoundAsset, {
+            return new Response(isHead ? null : notFoundAsset, {
                 status: 404,
                 headers: {
                     "Content-Type": "text/html; charset=utf-8",
@@ -40,7 +40,7 @@ async function getAsset(path, env, ctx, cacheKey) {
             // Ignore .xml files because they are for search engines
             headers.append("Cache-Control", "s-maxage=86400");
         }
-        const resp = new Response(bucket.body, {
+        const resp = new Response(isHead ? null : bucket.body, {
             headers,
         });
         ctx.waitUntil(caches.default.put(cacheKey, resp.clone()));
@@ -99,7 +99,7 @@ export default {
         }
 
         // Handle non-GET requests.
-        if (request.method !== "GET") {
+        if (request.method !== "GET" && request.method !== "HEAD") {
             return new Response("Method not allowed", {
                 status: 405,
                 headers: {
@@ -109,6 +109,12 @@ export default {
         }
 
         // Try to get the asset.
-        return await getAsset(path, env, ctx, cacheKey);
+        return await getAsset(
+            path,
+            env,
+            ctx,
+            cacheKey,
+            request.method === "HEAD",
+        );
     },
 };
