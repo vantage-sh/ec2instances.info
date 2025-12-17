@@ -1,4 +1,679 @@
 {
+    "m8gb.12xlarge": {
+        "ran_at": "2025-12-17T22:34:50.014789Z",
+        "coremark": {
+            "total_ticks": 13755,
+            "iterations_second": 1395856.052345,
+            "total_time_seconds": 13.755
+        },
+        "ffmpeg": {
+            "fps": 293,
+            "elapsed_time_seconds": 6.13,
+            "speed": 9.77,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 189793,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 48
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [48],
+            "numa_node_thread_counts": [48],
+            "memory_per_numa_node_mb": [189793],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gb.16xlarge": {
+        "ran_at": "2025-12-17T22:34:42.311618Z",
+        "coremark": {
+            "total_ticks": 13737,
+            "iterations_second": 1863580.112106,
+            "total_time_seconds": 13.737
+        },
+        "ffmpeg": {
+            "fps": 296,
+            "elapsed_time_seconds": 6.08,
+            "speed": 9.85,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 253168,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 64
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [64],
+            "numa_node_thread_counts": [64],
+            "memory_per_numa_node_mb": [253168],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gb.24xlarge": {
+        "ran_at": "2025-12-17T22:36:39.728196Z",
+        "coremark": {
+            "total_ticks": 13281,
+            "iterations_second": 2891348.543031,
+            "total_time_seconds": 13.281
+        },
+        "ffmpeg": {
+            "fps": 296,
+            "elapsed_time_seconds": 6.08,
+            "speed": 9.84,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 379920,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 96
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [96],
+            "numa_node_thread_counts": [96],
+            "memory_per_numa_node_mb": [379920],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gb.2xlarge": {
+        "ran_at": "2025-12-17T22:33:16.995257Z",
+        "coremark": {
+            "total_ticks": 13000,
+            "iterations_second": 246153.846154,
+            "total_time_seconds": 13
+        },
+        "ffmpeg": {
+            "fps": 82,
+            "elapsed_time_seconds": 21.85,
+            "speed": 2.74,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 31497,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 8
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [8],
+            "numa_node_thread_counts": [8],
+            "memory_per_numa_node_mb": [31497],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gb.4xlarge": {
+        "ran_at": "2025-12-17T22:35:10.689287Z",
+        "coremark": {
+            "total_ticks": 13161,
+            "iterations_second": 486285.236684,
+            "total_time_seconds": 13.161
+        },
+        "ffmpeg": {
+            "fps": 160,
+            "elapsed_time_seconds": 11.28,
+            "speed": 5.31,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 63137,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 16
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [16],
+            "numa_node_thread_counts": [16],
+            "memory_per_numa_node_mb": [63137],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gb.8xlarge": {
+        "ran_at": "2025-12-17T22:33:37.260407Z",
+        "coremark": {
+            "total_ticks": 12600,
+            "iterations_second": 1015873.015873,
+            "total_time_seconds": 12.6
+        },
+        "ffmpeg": {
+            "fps": 218,
+            "elapsed_time_seconds": 8.24,
+            "speed": 7.27,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 126513,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 32
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [32],
+            "numa_node_thread_counts": [32],
+            "memory_per_numa_node_mb": [126513],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gb.large": {
+        "ran_at": "2025-12-17T22:37:41.164589Z",
+        "coremark": {
+            "total_ticks": 12831,
+            "iterations_second": 62348.998519,
+            "total_time_seconds": 12.831
+        },
+        "ffmpeg": {
+            "fps": 22,
+            "elapsed_time_seconds": 81.72,
+            "speed": 0.733,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 7767,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 2
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [2],
+            "numa_node_thread_counts": [2],
+            "memory_per_numa_node_mb": [7767],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gb.medium": {
+        "ran_at": "2025-12-17T22:36:21.299645Z",
+        "coremark": {
+            "total_ticks": 13223,
+            "iterations_second": 30250.32141,
+            "total_time_seconds": 13.223
+        },
+        "ffmpeg": null,
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 3811,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 1
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [1],
+            "numa_node_thread_counts": [1],
+            "memory_per_numa_node_mb": [3811],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gb.xlarge": {
+        "ran_at": "2025-12-17T22:33:35.522912Z",
+        "coremark": {
+            "total_ticks": 13171,
+            "iterations_second": 121479.006909,
+            "total_time_seconds": 13.171
+        },
+        "ffmpeg": {
+            "fps": 45,
+            "elapsed_time_seconds": 40.38,
+            "speed": 1.48,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 15677,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 4
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [4],
+            "numa_node_thread_counts": [4],
+            "memory_per_numa_node_mb": [15677],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gn.12xlarge": {
+        "ran_at": "2025-12-17T22:35:06.404586Z",
+        "coremark": {
+            "total_ticks": 13962,
+            "iterations_second": 1375161.151697,
+            "total_time_seconds": 13.962
+        },
+        "ffmpeg": {
+            "fps": 289,
+            "elapsed_time_seconds": 6.23,
+            "speed": 9.61,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 189793,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 48
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [48],
+            "numa_node_thread_counts": [48],
+            "memory_per_numa_node_mb": [189793],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gn.16xlarge": {
+        "ran_at": "2025-12-17T22:34:49.057773Z",
+        "coremark": {
+            "total_ticks": 13293,
+            "iterations_second": 1925825.622508,
+            "total_time_seconds": 13.293
+        },
+        "ffmpeg": {
+            "fps": 295,
+            "elapsed_time_seconds": 6.09,
+            "speed": 9.83,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 253168,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 64
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [64],
+            "numa_node_thread_counts": [64],
+            "memory_per_numa_node_mb": [253168],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gn.24xlarge": {
+        "ran_at": "2025-12-17T22:36:22.799793Z",
+        "coremark": {
+            "total_ticks": 13109,
+            "iterations_second": 2929285.223892,
+            "total_time_seconds": 13.109
+        },
+        "ffmpeg": {
+            "fps": 297,
+            "elapsed_time_seconds": 6.06,
+            "speed": 9.89,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 379920,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 96
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [96],
+            "numa_node_thread_counts": [96],
+            "memory_per_numa_node_mb": [379920],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gn.2xlarge": {
+        "ran_at": "2025-12-17T22:38:57.802089Z",
+        "coremark": {
+            "total_ticks": 13142,
+            "iterations_second": 243494.140922,
+            "total_time_seconds": 13.142
+        },
+        "ffmpeg": {
+            "fps": 88,
+            "elapsed_time_seconds": 20.4,
+            "speed": 2.94,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 31497,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 8
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [8],
+            "numa_node_thread_counts": [8],
+            "memory_per_numa_node_mb": [31497],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gn.48xlarge": {
+        "ran_at": "2025-12-17T22:33:11.672678Z",
+        "coremark": {
+            "total_ticks": 14335,
+            "iterations_second": 5357516.567841,
+            "total_time_seconds": 14.335
+        },
+        "ffmpeg": {
+            "fps": 117,
+            "elapsed_time_seconds": 15.33,
+            "speed": 3.91,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 760335,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2700,
+            "threads": 192
+        },
+        "numa": {
+            "numa_node_count": 2,
+            "is_numa": true,
+            "numa_node_core_counts": [96, 96],
+            "numa_node_thread_counts": [96, 96],
+            "memory_per_numa_node_mb": [380870, 379464],
+            "node_distances": [
+                [10, 20],
+                [20, 10]
+            ],
+            "max_numa_distance": 20,
+            "l3_cache_per_numa_node_mb": [36, 36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gn.4xlarge": {
+        "ran_at": "2025-12-17T22:37:29.167259Z",
+        "coremark": {
+            "total_ticks": 13386,
+            "iterations_second": 478111.459734,
+            "total_time_seconds": 13.386
+        },
+        "ffmpeg": {
+            "fps": 161,
+            "elapsed_time_seconds": 11.16,
+            "speed": 5.37,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 63137,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 16
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [16],
+            "numa_node_thread_counts": [16],
+            "memory_per_numa_node_mb": [63137],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gn.8xlarge": {
+        "ran_at": "2025-12-17T22:37:27.664449Z",
+        "coremark": {
+            "total_ticks": 12825,
+            "iterations_second": 998050.682261,
+            "total_time_seconds": 12.825
+        },
+        "ffmpeg": {
+            "fps": 186,
+            "elapsed_time_seconds": 9.69,
+            "speed": 6.18,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 126513,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 32
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [32],
+            "numa_node_thread_counts": [32],
+            "memory_per_numa_node_mb": [126513],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gn.large": {
+        "ran_at": "2025-12-17T22:39:01.473641Z",
+        "coremark": {
+            "total_ticks": 13460,
+            "iterations_second": 59435.364042,
+            "total_time_seconds": 13.46
+        },
+        "ffmpeg": {
+            "fps": 22,
+            "elapsed_time_seconds": 80.83,
+            "speed": 0.741,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 7767,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 2
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [2],
+            "numa_node_thread_counts": [2],
+            "memory_per_numa_node_mb": [7767],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gn.medium": {
+        "ran_at": "2025-12-17T22:37:42.027496Z",
+        "coremark": {
+            "total_ticks": 13171,
+            "iterations_second": 30369.751727,
+            "total_time_seconds": 13.171
+        },
+        "ffmpeg": null,
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 3811,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 1
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [1],
+            "numa_node_thread_counts": [1],
+            "memory_per_numa_node_mb": [3811],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
+    "m8gn.xlarge": {
+        "ran_at": "2025-12-17T22:33:35.518818Z",
+        "coremark": {
+            "total_ticks": 12733,
+            "iterations_second": 125657.739731,
+            "total_time_seconds": 12.733
+        },
+        "ffmpeg": {
+            "fps": 45,
+            "elapsed_time_seconds": 40.28,
+            "speed": 1.49,
+            "aac_qavg": 335.904,
+            "cuda_used": false
+        },
+        "nvidia_gpus": [],
+        "memory": {
+            "total_mb": 15677,
+            "speed_mhz": null
+        },
+        "cpu": {
+            "speed": 2800,
+            "threads": 4
+        },
+        "numa": {
+            "numa_node_count": 1,
+            "is_numa": false,
+            "numa_node_core_counts": [4],
+            "numa_node_thread_counts": [4],
+            "memory_per_numa_node_mb": [15677],
+            "node_distances": [[10]],
+            "max_numa_distance": 10,
+            "l3_cache_per_numa_node_mb": [36],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
     "a1.2xlarge": {
         "ran_at": "2025-12-11T03:36:34.256955992Z",
         "coremark": {
