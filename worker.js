@@ -103,7 +103,7 @@ export default {
             return new Response("Method not allowed", {
                 status: 405,
                 headers: {
-                    Allow: "GET",
+                    Allow: "GET, HEAD",
                 },
             });
         }
