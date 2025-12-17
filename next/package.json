@@ -45,6 +45,9 @@
         "valibot": "^1.2.0",
         "xz-decompress": "^0.2.3"
     },
+    "overrides": {
+        "next": "16.1.0-canary.31"
+    },
     "devDependencies": {
         "@testing-library/react": "^16.3.0",
         "@types/js-yaml": "^4.0.9",
