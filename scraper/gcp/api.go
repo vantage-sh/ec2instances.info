@@ -97,14 +97,14 @@ type PricesResponse struct {
 
 // Machine type structures from Compute Engine API
 type MachineType struct {
-	Name                         string       `json:"name"`
-	Description                  string       `json:"description"`
-	GuestCpus                    int          `json:"guestCpus"`
-	MemoryMb                     int          `json:"memoryMb"`
-	IsSharedCpu                  bool         `json:"isSharedCpu"`
-	Zone                         string       `json:"zone"`
-	MaximumPersistentDisks       int          `json:"maximumPersistentDisks"`
-	MaximumPersistentDisksSizeGb string       `json:"maximumPersistentDisksSizeGb"`
+	Name                         string        `json:"name"`
+	Description                  string        `json:"description"`
+	GuestCpus                    int           `json:"guestCpus"`
+	MemoryMb                     int           `json:"memoryMb"`
+	IsSharedCpu                  bool          `json:"isSharedCpu"`
+	Zone                         string        `json:"zone"`
+	MaximumPersistentDisks       int           `json:"maximumPersistentDisks"`
+	MaximumPersistentDisksSizeGb string        `json:"maximumPersistentDisksSizeGb"`
 	Accelerators                 []Accelerator `json:"accelerators,omitempty"`
 }
 
@@ -129,13 +129,13 @@ type MachineTypesScopedList struct {
 
 // MachineSpecs holds the specifications for a machine type
 type MachineSpecs struct {
-	VCPU         int
-	MemoryGB     float64
-	Family       string
-	IsSharedCPU  bool
-	GPU          int
-	GPUModel     string
-	Zones        []string
+	VCPU        int
+	MemoryGB    float64
+	Family      string
+	IsSharedCPU bool
+	GPU         int
+	GPUModel    string
+	Zones       []string
 }
 
 // Fetch all SKUs for Compute Engine with pagination
