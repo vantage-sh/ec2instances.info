@@ -1,9 +1,59 @@
-async function getAsset(path, env, ctx, cacheKey, isHead) {
+async function headAsset(path, env, ctx, cacheKey) {
     // Attempt to decode the path.
     try {
         path = decodeURIComponent(path);
     } catch {
-        return new Response(isHead ? null : "Invalid path", {
+        return new Response(null, {
+            status: 400,
+        });
+    }
+
+    const exists = await env.ASSETS_KV.get(path);
+    if (!exists) {
+        // Check the bucket
+        const bucket = await env.ASSETS_BUCKET.get(path);
+        if (!bucket) {
+            return new Response(null, {
+                status: 404,
+            });
+        }
+
+        // Write the headers to the response
+        const headers = new Headers();
+        bucket.writeHttpMetadata(headers);
+        headers.set("etag", bucket.httpEtag);
+        if (!path.endsWith(".xml")) {
+            // Ignore .xml files because they are for search engines
+            headers.append("Cache-Control", "s-maxage=86400");
+        }
+        const resp = new Response(null, {
+            headers,
+            status: 200,
+        });
+        ctx.waitUntil(caches.default.put(cacheKey, resp.clone()));
+        return resp;
+    }
+
+    const xmlLine = path.endsWith(".xml")
+        ? {}
+        : { "Cache-Control": "s-maxage=86400" };
+    const resp = new Response(null, {
+        status: path === "404" ? 404 : 200,
+        headers: {
+            ...value.metadata,
+            ...xmlLine,
+        },
+    });
+    ctx.waitUntil(caches.default.put(cacheKey, resp.clone()));
+    return resp;
+}
+
+async function getAsset(path, env, ctx, cacheKey) {
+    // Attempt to decode the path.
+    try {
+        path = decodeURIComponent(path);
+    } catch {
+        return new Response("Invalid path", {
             status: 400,
         });
     }
@@ -20,11 +70,11 @@ async function getAsset(path, env, ctx, cacheKey, isHead) {
                 type: "arrayBuffer",
             });
             if (!notFoundAsset) {
-                return new Response(isHead ? null : "Internal server error", {
+                return new Response("Internal server error", {
                     status: 500,
                 });
             }
-            return new Response(isHead ? null : notFoundAsset, {
+            return new Response(notFoundAsset, {
                 status: 404,
                 headers: {
                     "Content-Type": "text/html; charset=utf-8",
@@ -40,7 +90,7 @@ async function getAsset(path, env, ctx, cacheKey, isHead) {
             // Ignore .xml files because they are for search engines
             headers.append("Cache-Control", "s-maxage=86400");
         }
-        const resp = new Response(isHead ? null : bucket.body, {
+        const resp = new Response(bucket.body, {
             headers,
         });
         ctx.waitUntil(caches.default.put(cacheKey, resp.clone()));
@@ -98,8 +148,11 @@ export default {
             return Response.redirect(url, 301);
         }
 
-        // Handle non-GET requests.
-        if (request.method !== "GET" && request.method !== "HEAD") {
+        // Handle non-GET/HEAD requests.
+        if (request.method !== "GET") {
+            if (request.method === "HEAD") {
+                return await headAsset(path, env, ctx, cacheKey);
+            }
             return new Response("Method not allowed", {
                 status: 405,
                 headers: {
@@ -109,12 +162,6 @@ export default {
         }
 
         // Try to get the asset.
-        return await getAsset(
-            path,
-            env,
-            ctx,
-            cacheKey,
-            request.method === "HEAD",
-        );
+        return await getAsset(path, env, ctx, cacheKey);
     },
 };
