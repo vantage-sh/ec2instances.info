@@ -1,4 +1,237 @@
 {
+    "p5e.48xlarge": {
+        "ran_at": "2026-01-06T14:27:11.485708Z",
+        "coremark": {
+            "total_ticks": 19771,
+            "iterations_second": 3884477.264681,
+            "total_time_seconds": 19.771
+        },
+        "ffmpeg": null,
+        "nvidia_gpus": [
+            {
+                "architecture": "Hopper",
+                "name": "NVIDIA H200",
+                "clocks": {
+                    "graphics_clock_mhz": 345,
+                    "sm_clock_mhz": 345,
+                    "memory_clock_mhz": 3201,
+                    "video_clock_mhz": 765
+                },
+                "link_width": {
+                    "current_link_width": "16x",
+                    "maximum_link_width": "16x"
+                },
+                "temp": {
+                    "current_temp_celsius": 21,
+                    "max_operating_temp_celsius": null
+                },
+                "power": {
+                    "average_power_draw_watts": 74,
+                    "current_power_limit_watts": 700,
+                    "power_limit_watts": 700
+                },
+                "memory": 262144
+            },
+            {
+                "architecture": "Hopper",
+                "name": "NVIDIA H200",
+                "clocks": {
+                    "graphics_clock_mhz": 345,
+                    "sm_clock_mhz": 345,
+                    "memory_clock_mhz": 3201,
+                    "video_clock_mhz": 765
+                },
+                "link_width": {
+                    "current_link_width": "16x",
+                    "maximum_link_width": "16x"
+                },
+                "temp": {
+                    "current_temp_celsius": 25,
+                    "max_operating_temp_celsius": null
+                },
+                "power": {
+                    "average_power_draw_watts": 74,
+                    "current_power_limit_watts": 700,
+                    "power_limit_watts": 700
+                },
+                "memory": 262144
+            },
+            {
+                "architecture": "Hopper",
+                "name": "NVIDIA H200",
+                "clocks": {
+                    "graphics_clock_mhz": 345,
+                    "sm_clock_mhz": 345,
+                    "memory_clock_mhz": 3201,
+                    "video_clock_mhz": 765
+                },
+                "link_width": {
+                    "current_link_width": "16x",
+                    "maximum_link_width": "16x"
+                },
+                "temp": {
+                    "current_temp_celsius": 22,
+                    "max_operating_temp_celsius": null
+                },
+                "power": {
+                    "average_power_draw_watts": 72,
+                    "current_power_limit_watts": 700,
+                    "power_limit_watts": 700
+                },
+                "memory": 262144
+            },
+            {
+                "architecture": "Hopper",
+                "name": "NVIDIA H200",
+                "clocks": {
+                    "graphics_clock_mhz": 345,
+                    "sm_clock_mhz": 345,
+                    "memory_clock_mhz": 3201,
+                    "video_clock_mhz": 765
+                },
+                "link_width": {
+                    "current_link_width": "16x",
+                    "maximum_link_width": "16x"
+                },
+                "temp": {
+                    "current_temp_celsius": 26,
+                    "max_operating_temp_celsius": null
+                },
+                "power": {
+                    "average_power_draw_watts": 73,
+                    "current_power_limit_watts": 700,
+                    "power_limit_watts": 700
+                },
+                "memory": 262144
+            },
+            {
+                "architecture": "Hopper",
+                "name": "NVIDIA H200",
+                "clocks": {
+                    "graphics_clock_mhz": 345,
+                    "sm_clock_mhz": 345,
+                    "memory_clock_mhz": 3201,
+                    "video_clock_mhz": 765
+                },
+                "link_width": {
+                    "current_link_width": "16x",
+                    "maximum_link_width": "16x"
+                },
+                "temp": {
+                    "current_temp_celsius": 24,
+                    "max_operating_temp_celsius": null
+                },
+                "power": {
+                    "average_power_draw_watts": 75,
+                    "current_power_limit_watts": 700,
+                    "power_limit_watts": 700
+                },
+                "memory": 262144
+            },
+            {
+                "architecture": "Hopper",
+                "name": "NVIDIA H200",
+                "clocks": {
+                    "graphics_clock_mhz": 345,
+                    "sm_clock_mhz": 345,
+                    "memory_clock_mhz": 3201,
+                    "video_clock_mhz": 765
+                },
+                "link_width": {
+                    "current_link_width": "16x",
+                    "maximum_link_width": "16x"
+                },
+                "temp": {
+                    "current_temp_celsius": 21,
+                    "max_operating_temp_celsius": null
+                },
+                "power": {
+                    "average_power_draw_watts": 74,
+                    "current_power_limit_watts": 700,
+                    "power_limit_watts": 700
+                },
+                "memory": 262144
+            },
+            {
+                "architecture": "Hopper",
+                "name": "NVIDIA H200",
+                "clocks": {
+                    "graphics_clock_mhz": 345,
+                    "sm_clock_mhz": 345,
+                    "memory_clock_mhz": 3201,
+                    "video_clock_mhz": 765
+                },
+                "link_width": {
+                    "current_link_width": "16x",
+                    "maximum_link_width": "16x"
+                },
+                "temp": {
+                    "current_temp_celsius": 23,
+                    "max_operating_temp_celsius": null
+                },
+                "power": {
+                    "average_power_draw_watts": 73,
+                    "current_power_limit_watts": 700,
+                    "power_limit_watts": 700
+                },
+                "memory": 262144
+            },
+            {
+                "architecture": "Hopper",
+                "name": "NVIDIA H200",
+                "clocks": {
+                    "graphics_clock_mhz": 345,
+                    "sm_clock_mhz": 345,
+                    "memory_clock_mhz": 3201,
+                    "video_clock_mhz": 765
+                },
+                "link_width": {
+                    "current_link_width": "16x",
+                    "maximum_link_width": "16x"
+                },
+                "temp": {
+                    "current_temp_celsius": 21,
+                    "max_operating_temp_celsius": null
+                },
+                "power": {
+                    "average_power_draw_watts": 73,
+                    "current_power_limit_watts": 700,
+                    "power_limit_watts": 700
+                },
+                "memory": 262144
+            }
+        ],
+        "memory": {
+            "total_mb": 2039767,
+            "speed_mhz": 3200
+        },
+        "cpu": {
+            "vendor": "AuthenticAMD",
+            "model": "AMD EPYC 7R13 Processor",
+            "speed": 2650,
+            "cache": 512,
+            "cpus": 2,
+            "cores": 96,
+            "threads": 192
+        },
+        "numa": {
+            "numa_node_count": 4,
+            "is_numa": true,
+            "numa_node_core_counts": [24, 24, 24, 24],
+            "numa_node_thread_counts": [48, 48, 48, 48],
+            "memory_per_numa_node_mb": [509851, 509972, 509972, 509971],
+            "node_distances": [
+                [10, 12, 32, 32],
+                [12, 10, 32, 32],
+                [32, 32, 10, 12],
+                [32, 32, 12, 10]
+            ],
+            "max_numa_distance": 32,
+            "l3_cache_per_numa_node_mb": [96, 96, 96, 96],
+            "l3_shared": true,
+            "is_balanced": true
+        }
+    },
     "m8gb.12xlarge": {
         "ran_at": "2025-12-17T22:34:50.014789Z",
         "coremark": {
