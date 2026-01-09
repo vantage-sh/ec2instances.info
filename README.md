@@ -100,8 +100,8 @@ The logic we use to do this (a mix of a scripted push to R2 and a small Cloudfla
 
 The data backing EC2Instances.info is available via a free API.
 
-- To get started, create a [free API key](https://vantage.readme.io/reference/authentication).
-- Review the `providers`, `services`, and `products` endpoints in the [API documentation](https://vantage.readme.io/reference/getproducts).
+- To get started, create a [free API key](https://docs.vantage.sh/api/authentication).
+- Review the `providers`, `services`, and `products` endpoints in the [API documentation](https://docs.vantage.sh/api/prices/get-all-products).
 
 ## Keep up-to-date
 
