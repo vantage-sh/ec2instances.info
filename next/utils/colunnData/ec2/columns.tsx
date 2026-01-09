@@ -1143,6 +1143,58 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
+        header: "RHEL with HA On Demand cost",
+        id: "cost-ondemand-rhelHA",
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.rhelHA?.ondemand,
+            true,
+            currency,
+        ),
+    },
+    {
+        accessorKey: "pricing",
+        header: "RHEL with HA Reserved cost",
+        id: "cost-reserved-rhelHA",
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.rhelHA?.reserved?.[reservedTerm],
+            true,
+            currency,
+        ),
+    },
+    {
+        accessorKey: "pricing",
+        header: "RHEL with HA Spot Minimum cost",
+        id: "cost-spot-min-rhelHA",
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.rhelHA?.spot_min,
+            true,
+            currency,
+        ),
+    },
+    {
+        accessorKey: "pricing",
+        header: "RHEL with HA Spot Maximum cost",
+        id: "cost-spot-max-rhelHA",
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.rhelHA?.spot_max,
+            true,
+            currency,
+        ),
+    },
+    {
+        accessorKey: "pricing",
         header: "SLES On Demand cost",
         id: "cost-ondemand-sles",
         ...getPricingSorter(

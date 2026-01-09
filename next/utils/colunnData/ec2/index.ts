@@ -97,6 +97,10 @@ const initialColumnsArr = [
     ["l3_per_numa_node_mb", false],
     ["l3_shared", false],
     ["compute_family", true],
+    ["cost-ondemand-rhelHA", false],
+    ["cost-reserved-rhelHA", false],
+    ["cost-spot-min-rhelHA", false],
+    ["cost-spot-max-rhelHA", false],
 ] as const;
 
 export const initialColumnsValue: {
@@ -201,6 +205,16 @@ export function makePrettyNames<V>(
         makeColumnOption("cost-reserved-rhel", "RHEL Reserved cost"),
         makeColumnOption("cost-spot-min-rhel", "RHEL Spot Minimum cost"),
         makeColumnOption("cost-spot-max-rhel", "RHEL Spot Maximum cost"),
+        makeColumnOption("cost-ondemand-rhelHA", "RHEL with HA On Demand cost"),
+        makeColumnOption("cost-reserved-rhelHA", "RHEL with HA Reserved cost"),
+        makeColumnOption(
+            "cost-spot-min-rhelHA",
+            "RHEL with HA Spot Minimum cost",
+        ),
+        makeColumnOption(
+            "cost-spot-max-rhelHA",
+            "RHEL with HA Spot Maximum cost",
+        ),
         makeColumnOption("cost-ondemand-sles", "SLES On Demand cost"),
         makeColumnOption("cost-reserved-sles", "SLES Reserved cost"),
         makeColumnOption("cost-spot-min-sles", "SLES Spot Minimum cost"),
