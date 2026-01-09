@@ -24,16 +24,19 @@ export default function InstanceVariants({
             </h3>
             <table className="mt-2 w-full text-sm">
                 <thead>
-                    <tr className="border-r border-gray-200">
+                    <tr className="border-r border-gray-200 dark:border-gray-3">
                         <th className="text-left pb-1">Variant</th>
                     </tr>
                 </thead>
                 <tbody>
                     {keys.map((key) => (
-                        <tr key={key} className="odd:bg-gray-100">
-                            <td className="border border-gray-200 p-1">
+                        <tr
+                            key={key}
+                            className="odd:bg-gray-100 dark:odd:bg-gray-4"
+                        >
+                            <td className="border border-gray-200 dark:border-gray-3 p-1">
                                 <TranslationFriendlyLink
-                                    className="text-purple-1 hover:text-purple-0"
+                                    className="text-purple-1 hover:text-purple-0 dark:text-purple-2 dark:hover:text-purple-0"
                                     href={`${pathPrefix}/${bestOfVariants[key]}${pathSuffix}`}
                                 >
                                     {key}

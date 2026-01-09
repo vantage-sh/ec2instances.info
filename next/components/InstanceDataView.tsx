@@ -12,19 +12,19 @@ function Table({ slug, name, children }: TableProps) {
     return (
         <table
             id={slug}
-            className="mt-4 w-full text-sm p-2 border-collapse border border-gray-200 rounded-md"
+            className="mt-4 w-full text-sm p-2 border-collapse border border-gray-200 dark:border-gray-3 rounded-md"
         >
             <thead>
-                <tr className="bg-gray-100">
-                    <th className="text-left p-1 border-gray-200">
+                <tr className="bg-gray-100 dark:bg-gray-4">
+                    <th className="text-left p-1 border-gray-200 dark:border-gray-3">
                         <a
                             href={`#${slug}`}
-                            className="text-purple-1 hover:text-purple-0"
+                            className="text-purple-1 hover:text-purple-0 dark:text-purple-2 dark:hover:text-purple-0"
                         >
                             {name}
                         </a>
                     </th>
-                    <th className="text-left p-1 border-l border-gray-200">
+                    <th className="text-left p-1 border-l border-gray-200 dark:border-gray-3">
                         Value
                     </th>
                 </tr>
@@ -44,7 +44,7 @@ type RowProps = {
 function Row({ name, children, help, helpText }: RowProps) {
     return (
         <tr>
-            <td className="py-1.5 px-3 border border-gray-200 w-1/2">
+            <td className="py-1.5 px-3 border border-gray-200 dark:border-gray-3 w-1/2">
                 {name}
                 {help && (
                     <span>
@@ -59,7 +59,7 @@ function Row({ name, children, help, helpText }: RowProps) {
                     </span>
                 )}
             </td>
-            <td className="py-1.5 px-3 border border-gray-200 w-1/2">
+            <td className="py-1.5 px-3 border border-gray-200 dark:border-gray-3 w-1/2">
                 {children}
             </td>
         </tr>

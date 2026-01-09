@@ -389,7 +389,8 @@ function Calculator({
         [regions.wavelength, pricing],
     );
 
-    const selectStyling = "w-full border border-gray-200 rounded-md p-1";
+    const selectStyling =
+        "w-full border border-gray-200 dark:border-gray-3 rounded-md p-1";
 
     return (
         <>

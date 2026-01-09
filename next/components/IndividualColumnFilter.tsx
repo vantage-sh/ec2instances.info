@@ -110,13 +110,13 @@ function ExprHelpModal({ parseError }: { parseError: string | null }) {
                 <div className="fixed inset-0 bg-opacity-50"></div>
                 <div className="fixed inset-0 flex items-center justify-center">
                     <div
-                        className="bg-white dark:text-white p-4 mx-4 rounded-lg max-w-2xl"
+                        className="bg-background text-foreground p-4 mx-4 rounded-lg max-w-2xl"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="flex gap-2">
                             <button
                                 onClick={() => dialogRef.current?.close()}
-                                className="text-black cursor-pointer"
+                                className="text-foreground cursor-pointer"
                                 aria-label="Close expression help"
                             >
                                 <X size={15} />
@@ -183,7 +183,7 @@ function ExprFilter<Instance>({
                     onChange={exprStringChange}
                     placeholder={`Filter ${column.columnDef.header as string}...`}
                     id={id}
-                    className={`w-full px-2 py-1 text-sm border border-gray-3 bg-white font-normal rounded ${
+                    className={`w-full px-2 py-1 text-sm border border-gray-3 bg-background text-foreground font-normal rounded ${
                         exprParseError ? "border-red-500" : ""
                     }`}
                 />
@@ -249,7 +249,7 @@ export default function IndividualColumnFilter<Instance>({
             value={(column.getFilterValue() as string) ?? ""}
             onChange={(e) => column.setFilterValue(e.target.value)}
             placeholder={`Filter ${column.columnDef.header as string}...`}
-            className="w-full px-2 py-1 text-sm border border-gray-3 bg-white font-normal rounded"
+            className="w-full px-2 py-1 text-sm border border-gray-3 bg-background text-foreground font-normal rounded"
         />
     );
 }

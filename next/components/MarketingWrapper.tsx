@@ -16,7 +16,7 @@ type ItemProps = {
 
 const Item = ({ link, image, title, description }: ItemProps) => (
     <a href={link} target="_blank" className="not-sm:mx-auto">
-        <div className="xl:mt-4 flex-col border border-gray-200 rounded-md p-4 w-xs xl:w-3xs 2xl:w-xs">
+        <div className="xl:mt-4 flex-col border border-gray-200 dark:border-gray-3 rounded-md p-4 w-xs xl:w-3xs 2xl:w-xs">
             <img
                 src={image}
                 alt={title}

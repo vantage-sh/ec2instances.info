@@ -255,7 +255,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                 <div className="d-flex gap-2">
                     {compareOn ? (
                         <button
-                            className="btn bg-red-600 text-white btn-compare disabled:opacity-50 self-end"
+                            className="btn bg-red-600 text-white disabled:opacity-50 self-end"
                             onClick={() => setCompareOn(false)}
                         >
                             End Compare
@@ -263,7 +263,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                     ) : (
                         <button
                             disabled={selected.length === 0}
-                            className="btn btn-purple btn-compare disabled:opacity-50 self-end"
+                            className="btn btn-purple disabled:opacity-50 self-end"
                             onClick={() => setCompareOn(true)}
                         >
                             Compare
@@ -284,7 +284,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                         <input
                             id="fullsearch"
                             type="text"
-                            className="form-control not-xl:hidden not-2xl:w-25 p-1 border-gray-300 border rounded-md"
+                            className="form-control not-xl:hidden not-2xl:w-25 p-1 border-gray-3 border rounded-md bg-background text-foreground"
                             placeholder="Search..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}

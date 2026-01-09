@@ -108,7 +108,7 @@ export default function FilterDropdown({
                         aria-label={hideLabel ? label : undefined}
                         id={buttonId}
                         className={cn(
-                            "w-full justify-between text-black py-4.5",
+                            "w-full justify-between py-4.5",
                             small ? "text-xs" : "",
                         )}
                     >
