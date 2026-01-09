@@ -58,6 +58,7 @@ const niceNames: Record<string, string> = {
     mswinSQLEnterprise: "Windows SQL Enterprise",
     mswinSQLWeb: "Windows SQL Web",
     rhel: "RHEL",
+    rhelHA: "RHEL with HA",
     rhelSQL: "RHEL SQL Server",
     rhelSQLEnterprise: "RHEL SQL Enterprise",
     rhelSQLWeb: "RHEL SQL Web",

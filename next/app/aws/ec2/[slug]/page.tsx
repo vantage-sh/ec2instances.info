@@ -122,6 +122,7 @@ const osOptions: [string, string][] = [
     ["linux", "Linux"],
     ["mswin", "Windows"],
     ["rhel", "Red Hat"],
+    ["rhelHA", "Red Hat with HA"],
     ["sles", "SUSE"],
     ["dedicated", "Dedicated Host"],
     ["linuxSQL", "Linux SQL Server"],

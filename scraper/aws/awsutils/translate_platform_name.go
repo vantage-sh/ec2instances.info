@@ -8,7 +8,7 @@ import (
 var OS_MAP = map[string]string{
 	"Linux":                            "linux",
 	"RHEL":                             "rhel",
-	"Red Hat Enterprise Linux with HA": "rhel",
+	"Red Hat Enterprise Linux with HA": "rhelHA",
 	"SUSE":                             "sles",
 	"Windows":                          "mswin",
 	"Ubuntu Pro":                       "ubuntu",
