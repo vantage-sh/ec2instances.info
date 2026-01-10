@@ -9,11 +9,11 @@ type SortToggleProps = {
 
 export default function SortToggle({ value, setValue }: SortToggleProps) {
     return (
-        <div className="ml-1 absolute right-1 top-0 inline-block">
+        <div className="ml-1 absolute right-1 top-0 inline-block dark:invert">
             <button
                 className={`${
-                    value === false ? "text-purple-brand" : "text-gray-4"
-                } p-0 text-xs block cursor-pointer hover:text-gray-3 overflow-hidden w-4 h-3`}
+                    value === false ? "text-gray-800" : "text-gray-400"
+                } p-0 text-xs block cursor-pointer hover:text-gray-700 overflow-hidden w-4 h-3`}
                 title="Sort ascending"
                 aria-pressed={value === false}
                 onClick={() => setValue(false)}
@@ -22,8 +22,8 @@ export default function SortToggle({ value, setValue }: SortToggleProps) {
             </button>
             <button
                 className={`${
-                    value === true ? "text-purple-brand" : "text-gray-4"
-                } p-0 text-xs block cursor-pointer hover:text-gray-3 overflow-hidden w-4 h-3 ml-[5px]`}
+                    value === true ? "text-gray-800" : "text-gray-400"
+                } p-0 text-xs block cursor-pointer hover:text-gray-700 overflow-hidden w-4 h-3 ml-[5px]`}
                 title="Sort descending"
                 aria-pressed={value === true}
                 onClick={() => setValue(true)}
