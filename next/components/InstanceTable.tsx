@@ -343,7 +343,7 @@ export default function InstanceTable<
                                             style={{
                                                 height: `${totalHeight}px`,
                                             }}
-                                            className="absolute z-20 top-[-79px] right-0 w-1 cursor-col-resize select-none touch-none hover:bg-gray-200 active:bg-blue-200"
+                                            className="absolute z-20 top-[-79px] right-0 w-1 cursor-col-resize select-none touch-none hover:bg-gray-200 dark:hover:bg-gray-700 active:bg-blue-200 dark:active:bg-blue-800"
                                         />
                                     </td>
                                 ))}
