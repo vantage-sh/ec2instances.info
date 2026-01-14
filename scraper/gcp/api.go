@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"regexp"
+	"scraper/utils"
 	"strconv"
 	"strings"
 	"sync"
@@ -81,7 +82,7 @@ type Tier struct {
 }
 
 type Money struct {
-	Value string `json:"value,omitempty"`
+	Units string `json:"units,omitempty"`
 	Nanos int64  `json:"nanos,omitempty"`
 }
 
@@ -390,23 +391,27 @@ func calculateHourlyPrice(price PriceInfo) float64 {
 
 	tier := price.Rate.Tiers[0]
 
-	// Convert to dollars - check both Value (string) and Nanos fields
+	// Convert to dollars - combine Units (whole dollars) and Nanos (fractional part)
+	// GCP Money type: total = units + (nanos / 1e9)
 	var dollars float64
-	if tier.ListPrice.Value != "" {
-		// Parse the value string
-		if parsed, err := strconv.ParseFloat(tier.ListPrice.Value, 64); err == nil {
-			dollars = parsed
+
+	// Parse the units field (whole dollars)
+	if tier.ListPrice.Units != "" {
+		if parsed, err := strconv.ParseInt(tier.ListPrice.Units, 10, 64); err == nil {
+			dollars = float64(parsed)
 		}
-	} else {
-		// Convert nanos to dollars
-		dollars = float64(tier.ListPrice.Nanos) / 1e9
 	}
+
+	// Add the fractional part from nanos
+	dollars += float64(tier.ListPrice.Nanos) / 1e9
 
 	// GCP pricing is often per hour, but check the unit
 	unit := strings.ToLower(price.Rate.Unit.Unit)
 	if strings.Contains(unit, "month") || strings.Contains(unit, "mo") {
 		// Convert monthly to hourly (assuming 730 hours per month)
 		dollars = dollars / 730
+	} else if unit != "h" && unit != "giby.h" && unit != "gby.h" {
+		utils.SendWarning("Unknown GCP pricing unit:", unit)
 	}
 
 	return dollars
