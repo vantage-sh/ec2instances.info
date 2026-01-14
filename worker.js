@@ -66,6 +66,15 @@ export default {
     async fetch(request, env, ctx) {
         const url = new URL(request.url);
 
+        // Handle old hostname redirects.
+        if (
+            url.hostname === "ec2instances.info" ||
+            url.hostname === "www.ec2instances.info"
+        ) {
+            url.hostname = "instances.vantage.sh";
+            return Response.redirect(url, 301);
+        }
+
         // Handle HTTP redirects.
         if (url.protocol === "http:") {
             url.protocol = "https:";
