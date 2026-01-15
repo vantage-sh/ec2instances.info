@@ -215,7 +215,6 @@ func crossRegionDescribeInstanceTypesIterator(pushChunk func(map[string]*types.I
 			awsConfig.Region = region
 			ec2Client := ec2.NewFromConfig(awsConfig)
 
-
 			// Setup the iterator
 			paginator := ec2.NewDescribeInstanceTypesPaginator(ec2Client, &ec2.DescribeInstanceTypesInput{
 				MaxResults: int32Ptr(100),
