@@ -8,7 +8,9 @@ import (
 	ec2Internal "scraper/aws/ec2"
 	"scraper/utils"
 	"strings"
+	"sync"
 
+	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
@@ -188,25 +190,86 @@ func int32Ptr(i int32) *int32 {
 	return &i
 }
 
-func makeEc2Iterator() *utils.SlowBuildingMap[string, *types.InstanceTypeInfo] {
-	return utils.NewSlowBuildingMap(func(pushChunk func(map[string]*types.InstanceTypeInfo)) {
-		paginator := ec2.NewDescribeInstanceTypesPaginator(ec2Client, &ec2.DescribeInstanceTypesInput{
-			MaxResults: int32Ptr(100),
-		})
-		for paginator.HasMorePages() {
-			output, err := paginator.NextPage(context.Background())
+var REGIONS_ITERATOR = []string{
+	"us-east-1",
+	"us-east-2",
+	"us-west-1",
+	"us-west-2",
+	"eu-west-1",
+	"eu-west-2",
+	"eu-central-1",
+}
+
+func crossRegionDescribeInstanceTypesIterator(pushChunk func(map[string]*types.InstanceTypeInfo)) {
+	set := map[string]struct{}{}
+	setMu := sync.Mutex{}
+
+	fg := utils.FunctionGroup{}
+	for _, region := range REGIONS_ITERATOR {
+		fg.Add(func() {
+			// Create a new configuration
+			awsConfig, err := config.LoadDefaultConfig(context.Background())
 			if err != nil {
 				log.Fatal(err)
 			}
-			log.Default().Println("Processed", len(output.InstanceTypes), "instance types via EC2 describe API")
+			awsConfig.Region = region
+			ec2Client := ec2.NewFromConfig(awsConfig)
 
-			mapped := make(map[string]*types.InstanceTypeInfo)
-			for i := range output.InstanceTypes {
-				mapped[string(output.InstanceTypes[i].InstanceType)] = &output.InstanceTypes[i]
+
+			// Setup the iterator
+			paginator := ec2.NewDescribeInstanceTypesPaginator(ec2Client, &ec2.DescribeInstanceTypesInput{
+				MaxResults: int32Ptr(100),
+			})
+
+			// Process the spot price history
+			firstPage := true
+			for paginator.HasMorePages() {
+				output, err := paginator.NextPage(context.TODO())
+				if err != nil {
+					if firstPage {
+						// NEVER allow a ratelimit error.
+						if strings.Contains(err.Error(), "RateLimitExceeded") {
+							log.Fatal("EC2 region has a rate limit error", region)
+						}
+
+						// Use us-east-1 as the canary to make sure this works
+						// Otherwise, this is probably fine
+						if region == "us-east-1" {
+							log.Fatal("failed to get instance types for us-east-1 ", err)
+						}
+						break
+					} else {
+						log.Fatal(err)
+					}
+				}
+				firstPage = false
+
+				// Get all the instance types
+				instanceTypesRemapped := make(map[string]*types.InstanceTypeInfo)
+				setMu.Lock()
+				new_ := 0
+				for i := range output.InstanceTypes {
+					// Make sure the instance type is new
+					iType := string(output.InstanceTypes[i].InstanceType)
+					if _, ok := set[iType]; ok {
+						continue
+					}
+					set[iType] = struct{}{}
+					new_++
+
+					// Add the instance type to the map
+					instanceTypesRemapped[iType] = &output.InstanceTypes[i]
+				}
+				setMu.Unlock()
+				if new_ > 0 {
+					pushChunk(instanceTypesRemapped)
+					log.Default().Println("Processed", new_, "unique instance type description responses for", region)
+				}
+				runtime.GC()
 			}
-			pushChunk(mapped)
-		}
-	})
+		})
+	}
+	fg.Run()
 }
 
 // DoAwsScraping is the main function that scrapes the AWS pricing data and saves it to a file.
@@ -232,7 +295,7 @@ func DoAwsScraping() {
 	var fg utils.FunctionGroup
 
 	// Get the EC2 API responses here because both EC2 and RDS use the data
-	ec2ApiResponses := makeEc2Iterator()
+	ec2ApiResponses := utils.NewSlowBuildingMap(crossRegionDescribeInstanceTypesIterator)
 
 	// Start the EC2 data processing threads (this is outside of this function because its complex)
 	ec2GlobalChannel, ec2ChinaChannel := ec2Internal.Setup(&fg, ec2ApiResponses)
