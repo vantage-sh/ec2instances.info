@@ -1,4 +1,499 @@
 {
+    "x8i.12xlarge": {
+      "ran_at": "2026-01-16T16:35:29.757436Z",
+      "coremark": {
+        "total_ticks": 12024,
+        "iterations_second": 1197604.790419,
+        "total_time_seconds": 12.024
+      },
+      "ffmpeg": {
+        "fps": 261,
+        "elapsed_time_seconds": 6.89,
+        "speed": 8.7,
+        "aac_qavg": 335.41,
+        "cuda_used": false
+      },
+      "nvidia_gpus": [],
+      "memory": {
+        "total_mb": 761498,
+        "speed_mhz": 7200
+      },
+      "cpu": {
+        "vendor": "GenuineIntel",
+        "model": "Intel(R) Xeon(R) 6975P-C",
+        "speed": 2700,
+        "cache": 491520,
+        "cpus": 1,
+        "cores": 24,
+        "threads": 48
+      },
+      "numa": {
+        "numa_node_count": 1,
+        "is_numa": false,
+        "numa_node_core_counts": [
+          24
+        ],
+        "numa_node_thread_counts": [
+          48
+        ],
+        "memory_per_numa_node_mb": [
+          761498
+        ],
+        "node_distances": [
+          [
+            10
+          ]
+        ],
+        "max_numa_distance": 10,
+        "l3_cache_per_numa_node_mb": [
+          480
+        ],
+        "l3_shared": true,
+        "is_balanced": true
+      }
+    },
+    "x8i.16xlarge": {
+      "ran_at": "2026-01-16T16:35:21.790621Z",
+      "coremark": {
+        "total_ticks": 23952,
+        "iterations_second": 1603206.412826,
+        "total_time_seconds": 23.952
+      },
+      "ffmpeg": {
+        "fps": 260,
+        "elapsed_time_seconds": 6.93,
+        "speed": 8.64,
+        "aac_qavg": 335.41,
+        "cuda_used": false
+      },
+      "nvidia_gpus": [],
+      "memory": {
+        "total_mb": 1015478,
+        "speed_mhz": 7200
+      },
+      "cpu": {
+        "vendor": "GenuineIntel",
+        "model": "Intel(R) Xeon(R) 6975P-C",
+        "speed": 2700,
+        "cache": 491520,
+        "cpus": 1,
+        "cores": 32,
+        "threads": 64
+      },
+      "numa": {
+        "numa_node_count": 1,
+        "is_numa": false,
+        "numa_node_core_counts": [
+          32
+        ],
+        "numa_node_thread_counts": [
+          64
+        ],
+        "memory_per_numa_node_mb": [
+          1015478
+        ],
+        "node_distances": [
+          [
+            10
+          ]
+        ],
+        "max_numa_distance": 10,
+        "l3_cache_per_numa_node_mb": [
+          480
+        ],
+        "l3_shared": true,
+        "is_balanced": true
+      }
+    },
+    "x8i.24xlarge": {
+      "ran_at": "2026-01-16T16:39:42.716274Z",
+      "coremark": {
+        "total_ticks": 17435,
+        "iterations_second": 2202466.303413,
+        "total_time_seconds": 17.435
+      },
+      "ffmpeg": {
+        "fps": 294,
+        "elapsed_time_seconds": 6.11,
+        "speed": 9.8,
+        "aac_qavg": 335.41,
+        "cuda_used": false
+      },
+      "nvidia_gpus": [],
+      "memory": {
+        "total_mb": 1523822,
+        "speed_mhz": 7200
+      },
+      "cpu": {
+        "vendor": "GenuineIntel",
+        "model": "Intel(R) Xeon(R) 6975P-C",
+        "speed": 2700,
+        "cache": 491520,
+        "cpus": 1,
+        "cores": 48,
+        "threads": 96
+      },
+      "numa": {
+        "numa_node_count": 2,
+        "is_numa": true,
+        "numa_node_core_counts": [
+          24,
+          24
+        ],
+        "numa_node_thread_counts": [
+          48,
+          48
+        ],
+        "memory_per_numa_node_mb": [
+          761903,
+          761918
+        ],
+        "node_distances": [
+          [
+            10,
+            15
+          ],
+          [
+            15,
+            10
+          ]
+        ],
+        "max_numa_distance": 15,
+        "l3_cache_per_numa_node_mb": [
+          480,
+          480
+        ],
+        "l3_shared": true,
+        "is_balanced": true
+      }
+    },
+    "x8i.2xlarge": {
+      "ran_at": "2026-01-16T16:42:07.486923Z",
+      "coremark": {
+        "total_ticks": 25048,
+        "iterations_second": 191632.066432,
+        "total_time_seconds": 25.048
+      },
+      "ffmpeg": {
+        "fps": 77,
+        "elapsed_time_seconds": 23.4,
+        "speed": 2.56,
+        "aac_qavg": 335.41,
+        "cuda_used": false
+      },
+      "nvidia_gpus": [],
+      "memory": {
+        "total_mb": 126756,
+        "speed_mhz": 7200
+      },
+      "cpu": {
+        "vendor": "GenuineIntel",
+        "model": "Intel(R) Xeon(R) 6975P-C",
+        "speed": 2700,
+        "cache": 491520,
+        "cpus": 1,
+        "cores": 4,
+        "threads": 8
+      },
+      "numa": {
+        "numa_node_count": 1,
+        "is_numa": false,
+        "numa_node_core_counts": [
+          4
+        ],
+        "numa_node_thread_counts": [
+          8
+        ],
+        "memory_per_numa_node_mb": [
+          126756
+        ],
+        "node_distances": [
+          [
+            10
+          ]
+        ],
+        "max_numa_distance": 10,
+        "l3_cache_per_numa_node_mb": [
+          480
+        ],
+        "l3_shared": true,
+        "is_balanced": true
+      }
+    },
+    "x8i.32xlarge": {
+      "ran_at": "2026-01-16T16:39:49.813458Z",
+      "coremark": {
+        "total_ticks": 16813,
+        "iterations_second": 3045262.594421,
+        "total_time_seconds": 16.813
+      },
+      "ffmpeg": {
+        "fps": 183,
+        "elapsed_time_seconds": 9.84,
+        "speed": 6.09,
+        "aac_qavg": 335.41,
+        "cuda_used": false
+      },
+      "nvidia_gpus": [],
+      "memory": {
+        "total_mb": 2031846,
+        "speed_mhz": 7200
+      },
+      "cpu": {
+        "vendor": "GenuineIntel",
+        "model": "Intel(R) Xeon(R) 6975P-C",
+        "speed": 2700,
+        "cache": 491520,
+        "cpus": 1,
+        "cores": 64,
+        "threads": 128
+      },
+      "numa": {
+        "numa_node_count": 2,
+        "is_numa": true,
+        "numa_node_core_counts": [
+          32,
+          32
+        ],
+        "numa_node_thread_counts": [
+          64,
+          64
+        ],
+        "memory_per_numa_node_mb": [
+          1015863,
+          1015983
+        ],
+        "node_distances": [
+          [
+            10,
+            15
+          ],
+          [
+            15,
+            10
+          ]
+        ],
+        "max_numa_distance": 15,
+        "l3_cache_per_numa_node_mb": [
+          480,
+          480
+        ],
+        "l3_shared": true,
+        "is_balanced": true
+      }
+    },
+    "x8i.4xlarge": {
+      "ran_at": "2026-01-16T16:43:16.873374Z",
+      "coremark": {
+        "total_ticks": 24959,
+        "iterations_second": 384630.794503,
+        "total_time_seconds": 24.959
+      },
+      "ffmpeg": {
+        "fps": 144,
+        "elapsed_time_seconds": 12.48,
+        "speed": 4.8,
+        "aac_qavg": 335.41,
+        "cuda_used": false
+      },
+      "nvidia_gpus": [],
+      "memory": {
+        "total_mb": 253666,
+        "speed_mhz": 7200
+      },
+      "cpu": {
+        "vendor": "GenuineIntel",
+        "model": "Intel(R) Xeon(R) 6975P-C",
+        "speed": 2700,
+        "cache": 491520,
+        "cpus": 1,
+        "cores": 8,
+        "threads": 16
+      },
+      "numa": {
+        "numa_node_count": 1,
+        "is_numa": false,
+        "numa_node_core_counts": [
+          8
+        ],
+        "numa_node_thread_counts": [
+          16
+        ],
+        "memory_per_numa_node_mb": [
+          253666
+        ],
+        "node_distances": [
+          [
+            10
+          ]
+        ],
+        "max_numa_distance": 10,
+        "l3_cache_per_numa_node_mb": [
+          480
+        ],
+        "l3_shared": true,
+        "is_balanced": true
+      }
+    },
+    "x8i.8xlarge": {
+      "ran_at": "2026-01-16T16:37:37.328778Z",
+      "coremark": {
+        "total_ticks": 25215,
+        "iterations_second": 761451.516954,
+        "total_time_seconds": 25.215
+      },
+      "ffmpeg": {
+        "fps": 244,
+        "elapsed_time_seconds": 7.37,
+        "speed": 8.13,
+        "aac_qavg": 335.41,
+        "cuda_used": false
+      },
+      "nvidia_gpus": [],
+      "memory": {
+        "total_mb": 507678,
+        "speed_mhz": 7200
+      },
+      "cpu": {
+        "vendor": "GenuineIntel",
+        "model": "Intel(R) Xeon(R) 6975P-C",
+        "speed": 2700,
+        "cache": 491520,
+        "cpus": 1,
+        "cores": 16,
+        "threads": 32
+      },
+      "numa": {
+        "numa_node_count": 1,
+        "is_numa": false,
+        "numa_node_core_counts": [
+          16
+        ],
+        "numa_node_thread_counts": [
+          32
+        ],
+        "memory_per_numa_node_mb": [
+          507678
+        ],
+        "node_distances": [
+          [
+            10
+          ]
+        ],
+        "max_numa_distance": 10,
+        "l3_cache_per_numa_node_mb": [
+          480
+        ],
+        "l3_shared": true,
+        "is_balanced": true
+      }
+    },
+    "x8i.large": {
+      "ran_at": "2026-01-16T16:44:27.041531Z",
+      "coremark": {
+        "total_ticks": 12499,
+        "iterations_second": 48003.840307,
+        "total_time_seconds": 12.499
+      },
+      "ffmpeg": {
+        "fps": 19,
+        "elapsed_time_seconds": 93.58,
+        "speed": 0.64,
+        "aac_qavg": 335.41,
+        "cuda_used": false
+      },
+      "nvidia_gpus": [],
+      "memory": {
+        "total_mb": 31549,
+        "speed_mhz": 7200
+      },
+      "cpu": {
+        "vendor": "GenuineIntel",
+        "model": "Intel(R) Xeon(R) 6975P-C",
+        "speed": 2700,
+        "cache": 491520,
+        "cpus": 1,
+        "cores": 1,
+        "threads": 2
+      },
+      "numa": {
+        "numa_node_count": 1,
+        "is_numa": false,
+        "numa_node_core_counts": [
+          1
+        ],
+        "numa_node_thread_counts": [
+          2
+        ],
+        "memory_per_numa_node_mb": [
+          31549
+        ],
+        "node_distances": [
+          [
+            10
+          ]
+        ],
+        "max_numa_distance": 10,
+        "l3_cache_per_numa_node_mb": [
+          480
+        ],
+        "l3_shared": true,
+        "is_balanced": true
+      }
+    },
+    "x8i.xlarge": {
+      "ran_at": "2026-01-16T16:35:50.178601Z",
+      "coremark": {
+        "total_ticks": 16318,
+        "iterations_second": 98051.231769,
+        "total_time_seconds": 16.318
+      },
+      "ffmpeg": {
+        "fps": 40,
+        "elapsed_time_seconds": 45.38,
+        "speed": 1.32,
+        "aac_qavg": 335.41,
+        "cuda_used": false
+      },
+      "nvidia_gpus": [],
+      "memory": {
+        "total_mb": 63253,
+        "speed_mhz": 7200
+      },
+      "cpu": {
+        "vendor": "GenuineIntel",
+        "model": "Intel(R) Xeon(R) 6975P-C",
+        "speed": 2700,
+        "cache": 491520,
+        "cpus": 1,
+        "cores": 2,
+        "threads": 4
+      },
+      "numa": {
+        "numa_node_count": 1,
+        "is_numa": false,
+        "numa_node_core_counts": [
+          2
+        ],
+        "numa_node_thread_counts": [
+          4
+        ],
+        "memory_per_numa_node_mb": [
+          63253
+        ],
+        "node_distances": [
+          [
+            10
+          ]
+        ],
+        "max_numa_distance": 10,
+        "l3_cache_per_numa_node_mb": [
+          480
+        ],
+        "l3_shared": true,
+        "is_balanced": true
+      }
+    },  
     "p5e.48xlarge": {
         "ran_at": "2026-01-06T14:27:11.485708Z",
         "coremark": {
