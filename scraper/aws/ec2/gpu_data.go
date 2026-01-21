@@ -315,6 +315,42 @@ var GPU_DATA = map[string]gpuData{
 		gpuCount:          8,
 		gpuMemory:         384,
 	},
+	"g7e.2xlarge": {
+		gpuModel:          "NVIDIA GB202",
+		computeCapability: 10.0,
+		gpuCount:          1,
+		gpuMemory:         96,
+	},
+	"g7e.4xlarge": {
+		gpuModel:          "NVIDIA GB202",
+		computeCapability: 10.0,
+		gpuCount:          1,
+		gpuMemory:         96,
+	},
+	"g7e.8xlarge": {
+		gpuModel:          "NVIDIA GB202",
+		computeCapability: 10.0,
+		gpuCount:          1,
+		gpuMemory:         96,
+	},
+	"g7e.12xlarge": {
+		gpuModel:          "NVIDIA GB202",
+		computeCapability: 10.0,
+		gpuCount:          2,
+		gpuMemory:         192,
+	},
+	"g7e.24xlarge": {
+		gpuModel:          "NVIDIA GB202",
+		computeCapability: 10.0,
+		gpuCount:          4,
+		gpuMemory:         384,
+	},
+	"g7e.48xlarge": {
+		gpuModel:          "NVIDIA GB202",
+		computeCapability: 10.0,
+		gpuCount:          8,
+		gpuMemory:         768,
+	},
 	"p4d.24xlarge": {
 		gpuModel:          "NVIDIA A100",
 		computeCapability: 8.0,
