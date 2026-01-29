@@ -149,7 +149,7 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
             rows: [
                 {
                     name: "Network Performance (Gibps)",
-                    children: instance.network_performance
+                    children: (instance.network_performance || "N/A")
                         .toLowerCase()
                         .replace("gigabit", "")
                         .trim(),

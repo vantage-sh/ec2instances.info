@@ -194,7 +194,7 @@ export function generateElasticacheImages() {
                 },
                 {
                     name: "Networking",
-                    value: instance.network_performance,
+                    value: instance.network_performance || "N/A",
                     squareIconPath: "icons/storage.png",
                 },
             ],
