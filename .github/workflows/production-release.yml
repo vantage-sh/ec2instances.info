@@ -10,7 +10,7 @@ on:
 jobs:
     build:
         name: Build and Deploy to Production
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-22.04-arm
         steps:
             - uses: actions/checkout@v4
 
