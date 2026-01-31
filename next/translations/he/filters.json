@@ -1,0 +1,49 @@
+{
+  "search": "חיפוש...",
+  "clearFilters": "נקה מסננים",
+  "filters": "מסננים",
+  "columns": "עמודות",
+  "region": "אזור",
+  "pricingUnit": "יחידת תמחור",
+  "cost": "עלות",
+  "reserved": "שמור",
+  "currency": "מטבע",
+  "os": "מערכת הפעלה",
+  "duration": "משך",
+  "reservedTerm": "תקופת הזמנה",
+  "durations": {
+    "ondemand": "לפי דרישה",
+    "reserved1yr": "שנה אחת שמורה",
+    "reserved3yr": "3 שנים שמורות",
+    "spot": "ספוט"
+  },
+  "compare": "השווה",
+  "endCompare": "סיים השוואה",
+  "selected": "נבחרו",
+  "showAll": "הצג הכל",
+  "hideAll": "הסתר הכל",
+  "select": "בחר...",
+  "searchLabel": "חפש {label}...",
+  "noOptionsFound": "לא נמצאו אפשרויות.",
+  "searchColumns": "חפש עמודות...",
+  "noColumnsFound": "לא נמצאו עמודות.",
+  "selectAll": "בחר הכל",
+  "selectDefaults": "בחר ברירות מחדל",
+  "regionGroups": {
+    "frequentlyUsed": "בשימוש תדיר",
+    "chinaCloudRegions": "אזורי ענן סין",
+    "mainRegions": "אזורים ראשיים",
+    "localZones": "אזורים מקומיים",
+    "wavelengthZones": "אזורי Wavelength"
+  },
+  "export": {
+    "export": "ייצוא",
+    "downloadCsv": "הורד CSV",
+    "copyCsv": "העתק CSV",
+    "copyTsv": "העתק TSV",
+    "copyMarkdown": "העתק טבלת Markdown",
+    "csvCopied": "CSV הועתק ללוח",
+    "tsvCopied": "TSV הועתק ללוח",
+    "markdownCopied": "טבלת Markdown הועתקה ללוח"
+  }
+}

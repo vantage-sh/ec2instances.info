@@ -2,6 +2,7 @@ import { EC2Instance } from "@/types";
 import { markdownTable } from "markdown-table";
 import { raw, urlInject } from "@/utils/urlInject";
 import { Table } from "@/utils/ec2TablesGenerator";
+import { getTableName } from "@/utils/tableTranslations";
 
 const tableColumns = [
     ["", "OS"],
@@ -190,9 +191,9 @@ function generateInstanceMarkdown(
 
     const tableData = tables
         .map(
-            (table) => `## ${table.name}
+            (table) => `## ${getTableName(table.nameKey)}
 
-${table.rows.map((row) => `- ${row.name}: ${row.children}`).join("\n")}
+${table.rows.map((row) => `- ${getTableName(row.nameKey)}: ${row.children}`).join("\n")}
 `,
         )
         .join("\n");

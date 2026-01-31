@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { Server } from "lucide-react";
 import TranslationFriendlyLink from "./TranslationFriendlyLink";
+import { useTranslations } from "gt-next";
 
 export type AllOfInstanceType = {
     name: string;
@@ -23,6 +24,7 @@ export function FamilySize({
     tablePath: string;
     pathSuffix: string;
 }) {
+    const t = useTranslations();
     // This is a hack, but its a memo so that it runs immediately. We don't need a variable since its a mutation.
     useMemo(() => {
         return allOfInstanceType.sort((a, b) => {
@@ -37,14 +39,14 @@ export function FamilySize({
     return (
         <section className="mb-4">
             <h3 className="flex items-center gap-2">
-                <Server className="w-4 h-4 inline-block my-auto" /> Family Sizes
+                <Server className="w-4 h-4 inline-block my-auto" /> {t("instancePage.familySizes")}
             </h3>
             <table className="mt-2 w-full text-sm">
                 <thead>
                     <tr className="border-r border-gray-200 dark:border-gray-3">
-                        <th className="text-left pb-1 pl-2">Size</th>
-                        <th className="text-left pb-1 pl-2">vCPUs</th>
-                        <th className="text-left pb-1 pl-2">Memory (GiB)</th>
+                        <th className="text-left pb-1 pl-2">{t("instancePage.size")}</th>
+                        <th className="text-left pb-1 pl-2">{t("instancePage.vCPUs")}</th>
+                        <th className="text-left pb-1 pl-2">{t("instancePage.memoryGiB")}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -87,7 +89,7 @@ export function FamilySize({
                         href={`${tablePath}?selected=${instanceName}`}
                         className="p-2 border border-gray-200 hover:border-gray-300 dark:border-gray-3 dark:hover:border-gray-2 rounded-md"
                     >
-                        Compare {instanceName} to other instances
+                        {t("instancePage.compareToOther", { instanceName })}
                     </TranslationFriendlyLink>
                 </p>
             </div>

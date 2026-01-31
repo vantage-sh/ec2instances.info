@@ -1,0 +1,18 @@
+{
+  "hourly": "Per timme",
+  "monthly": "Per månad",
+  "yearly": "Per år",
+  "perHour": "/tim",
+  "perMonth": "/mån",
+  "perYear": "/år",
+  "onDemand": "På begäran",
+  "reserved": "Reserverad",
+  "spot": "Spot",
+  "savingsPlan": "Sparplan",
+  "noUpfront": "Ingen förskottsbetalning",
+  "partialUpfront": "Delvis förskottsbetalning",
+  "allUpfront": "Full förskottsbetalning",
+  "convertible": "Konvertibel",
+  "standard": "Standard",
+  "priceUnavailable": "Ej tillgängligt"
+}

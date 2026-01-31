@@ -34,6 +34,7 @@ interface FilterDropdownProps {
     icon?: string;
     small?: boolean;
     ariaControls?: string;
+    t?: (key: string, params?: Record<string, string>) => string;
 }
 
 export default function FilterDropdown({
@@ -46,6 +47,7 @@ export default function FilterDropdown({
     icon,
     small,
     ariaControls,
+    t,
 }: FilterDropdownProps) {
     const buttonId = React.useId();
     const [open, setOpen] = React.useState(false);
@@ -118,7 +120,8 @@ export default function FilterDropdown({
                                 className={`icon-${icon} text-white me-1`}
                             ></i>
                         )}
-                        {selectedOption?.label || "Select..."}
+                        {selectedOption?.label ||
+                            (t ? t("filters.select") : "Select...")}
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                 </PopoverTrigger>
@@ -128,11 +131,19 @@ export default function FilterDropdown({
                             <CommandTraditionalInput
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                placeholder={`Search ${label}...`}
+                                placeholder={
+                                    t
+                                        ? t("filters.searchLabel", { label })
+                                        : `Search ${label}...`
+                                }
                             />
                         )}
                         <CommandList>
-                            <CommandEmpty>No options found.</CommandEmpty>
+                            <CommandEmpty>
+                                {t
+                                    ? t("filters.noOptionsFound")
+                                    : "No options found."}
+                            </CommandEmpty>
                             {Object.entries(filteredGroups).map(
                                 ([group, groupOptions]) => (
                                     <CommandGroup key={group}>

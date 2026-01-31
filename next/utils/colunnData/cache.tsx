@@ -8,7 +8,8 @@ import {
 import { EC2Instance, PricingUnit, CostDuration } from "@/types";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import sortByInstanceType from "../sortByInstanceType";
-import { getPricingSorter } from "./ec2/columns";
+import { getPricingSorter, Locals } from "./ec2/columns";
+import { prefixWithLocale } from "@/utils/locale";
 
 const initialColumnsArr = [
     ["pretty_name", true],
@@ -42,21 +43,23 @@ export function makePrettyNames<V>(
         key: keyof typeof initialColumnsValue,
         label: string,
     ) => V,
+    locals?: Locals,
 ) {
+    const t = locals?.t;
     return [
-        makeColumnOption("pretty_name", "Name"),
-        makeColumnOption("instance_type", "API Name"),
-        makeColumnOption("compute_family", "Compute Family"),
-        makeColumnOption("memory", "Memory"),
-        makeColumnOption("vcpus", "vCPUs"),
-        makeColumnOption("networkperf", "Network Performance"),
-        makeColumnOption("cost-ondemand-redis", "Redis Cost"),
-        makeColumnOption("cost-reserved-redis", "Redis Reserved Cost"),
-        makeColumnOption("cost-ondemand-memcached", "Memcached On Demand Cost"),
-        makeColumnOption("cost-reserved-memcached", "Memcached Reserved Cost"),
-        makeColumnOption("cost-ondemand-valkey", "Valkey On Demand Cost"),
-        makeColumnOption("cost-reserved-valkey", "Valkey Reserved Cost"),
-        makeColumnOption("generation", "Generation"),
+        makeColumnOption("pretty_name", t?.("columns.common.name") ?? "Name"),
+        makeColumnOption("instance_type", t?.("columns.common.apiName") ?? "API Name"),
+        makeColumnOption("compute_family", t?.("columns.common.computeFamily") ?? "Compute Family"),
+        makeColumnOption("memory", t?.("columns.common.memory") ?? "Memory"),
+        makeColumnOption("vcpus", t?.("columns.common.vCPUs") ?? "vCPUs"),
+        makeColumnOption("networkperf", t?.("columns.common.networkPerformance") ?? "Network Performance"),
+        makeColumnOption("cost-ondemand-redis", t?.("columns.cache.redisCost") ?? "Redis Cost"),
+        makeColumnOption("cost-reserved-redis", t?.("columns.cache.redisReserved") ?? "Redis Reserved Cost"),
+        makeColumnOption("cost-ondemand-memcached", t?.("columns.cache.memcachedOnDemand") ?? "Memcached On Demand Cost"),
+        makeColumnOption("cost-reserved-memcached", t?.("columns.cache.memcachedReserved") ?? "Memcached Reserved Cost"),
+        makeColumnOption("cost-ondemand-valkey", t?.("columns.cache.valkeyOnDemand") ?? "Valkey On Demand Cost"),
+        makeColumnOption("cost-reserved-valkey", t?.("columns.cache.valkeyReserved") ?? "Valkey Reserved Cost"),
+        makeColumnOption("generation", t?.("columns.common.generation") ?? "Generation"),
     ];
 }
 
@@ -70,18 +73,22 @@ export const columnsGen = (
         usdRate: number;
         cnyRate: number;
     },
-): ColumnDef<EC2Instance>[] => [
+    locals?: Locals,
+): ColumnDef<EC2Instance>[] => {
+    const t = locals?.t;
+    const locale = locals?.locale;
+    return [
     {
         accessorKey: "pretty_name",
         id: "pretty_name",
-        header: "Name",
+        header: t?.("columns.common.name") ?? "Name",
         sortingFn: "alphanumeric",
         filterFn: regex({ accessorKey: "pretty_name" }),
     },
     {
         accessorKey: "instance_type",
         id: "instance_type",
-        header: "API Name",
+        header: t?.("columns.common.apiName") ?? "API Name",
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.instance_type;
             const valueB = rowB.original.instance_type;
@@ -93,7 +100,7 @@ export const columnsGen = (
             return (
                 <RegionLinkPreloader
                     onClick={(e) => e.stopPropagation()}
-                    href={`/aws/elasticache/${value}`}
+                    href={prefixWithLocale(`/aws/elasticache/${value}`, locale ?? "en")}
                 >
                     {value}
                 </RegionLinkPreloader>
@@ -102,7 +109,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "family",
-        header: "Compute Family",
+        header: t?.("columns.common.computeFamily") ?? "Compute Family",
         size: 150,
         id: "compute_family",
         sortingFn: "alphanumeric",
@@ -113,7 +120,7 @@ export const columnsGen = (
         id: "memory",
         filterFn: expr,
         sortingFn: "alphanumeric",
-        header: "Memory",
+        header: t?.("columns.common.memory") ?? "Memory",
         cell: (info) => {
             const value = info.getValue();
             return `${value} GiB`;
@@ -124,7 +131,7 @@ export const columnsGen = (
         id: "vcpus",
         filterFn: (row, _, filterValue) => expr(row, "vcpu", filterValue),
         sortingFn: "alphanumeric",
-        header: "vCPUs",
+        header: t?.("columns.common.vCPUs") ?? "vCPUs",
         cell: (info) => {
             const value = info.getValue();
             return `${value} vCPUs`;
@@ -134,13 +141,13 @@ export const columnsGen = (
         accessorKey: "network_performance",
         id: "networkperf",
         sortingFn: "alphanumeric",
-        header: "Network Performance",
+        header: t?.("columns.common.networkPerformance") ?? "Network Performance",
         filterFn: regex({ accessorKey: "network_performance" }),
     },
     {
         accessorKey: "pricing",
         id: "cost-ondemand-redis",
-        header: "Redis Cost",
+        header: t?.("columns.cache.redisCost") ?? "Redis Cost",
         ...getPricingSorter(
             selectedRegion,
             pricingUnit,
@@ -153,7 +160,7 @@ export const columnsGen = (
     {
         accessorKey: "pricing",
         id: "cost-reserved-redis",
-        header: "Redis Reserved Cost",
+        header: t?.("columns.cache.redisReserved") ?? "Redis Reserved Cost",
         ...getPricingSorter(
             selectedRegion,
             pricingUnit,
@@ -166,7 +173,7 @@ export const columnsGen = (
     {
         accessorKey: "pricing",
         id: "cost-ondemand-memcached",
-        header: "Memcached On Demand Cost",
+        header: t?.("columns.cache.memcachedOnDemand") ?? "Memcached On Demand Cost",
         ...getPricingSorter(
             selectedRegion,
             pricingUnit,
@@ -179,7 +186,7 @@ export const columnsGen = (
     {
         accessorKey: "pricing",
         id: "cost-reserved-memcached",
-        header: "Memcached Reserved Cost",
+        header: t?.("columns.cache.memcachedReserved") ?? "Memcached Reserved Cost",
         ...getPricingSorter(
             selectedRegion,
             pricingUnit,
@@ -192,7 +199,7 @@ export const columnsGen = (
     {
         accessorKey: "pricing",
         id: "cost-ondemand-valkey",
-        header: "Valkey On Demand Cost",
+        header: t?.("columns.cache.valkeyOnDemand") ?? "Valkey On Demand Cost",
         ...getPricingSorter(
             selectedRegion,
             pricingUnit,
@@ -205,7 +212,7 @@ export const columnsGen = (
     {
         accessorKey: "pricing",
         id: "cost-reserved-valkey",
-        header: "Valkey Reserved Cost",
+        header: t?.("columns.cache.valkeyReserved") ?? "Valkey Reserved Cost",
         ...getPricingSorter(
             selectedRegion,
             pricingUnit,
@@ -218,7 +225,7 @@ export const columnsGen = (
     {
         accessorKey: "currentGeneration",
         id: "generation",
-        header: "Generation",
+        header: t?.("columns.common.generation") ?? "Generation",
         sortingFn: "alphanumeric",
         // @ts-expect-error: This accessor is not typed right now.
         ...makeCellWithRegexSorter("currentGeneration", (info) => {
@@ -227,3 +234,4 @@ export const columnsGen = (
         }),
     },
 ];
+};

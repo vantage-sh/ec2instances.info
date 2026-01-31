@@ -10,6 +10,8 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import sortByInstanceType from "../sortByInstanceType";
+import { Locals } from "./ec2/columns";
+import { prefixWithLocale } from "@/utils/locale";
 
 type RedshiftPricing = {
     [region: string]: {
@@ -68,19 +70,21 @@ export function makePrettyNames<V>(
         key: keyof typeof initialColumnsValue,
         label: string,
     ) => V,
+    locals?: Locals,
 ) {
+    const t = locals?.t;
     return [
-        makeColumnOption("pretty_name", "Name"),
-        makeColumnOption("instance_type", "API Name"),
-        makeColumnOption("compute_family", "Compute Family"),
-        makeColumnOption("memory", "Memory"),
-        makeColumnOption("vCPU", "vCPUs"),
-        makeColumnOption("storage", "Storage"),
+        makeColumnOption("pretty_name", t?.("columns.common.name") ?? "Name"),
+        makeColumnOption("instance_type", t?.("columns.common.apiName") ?? "API Name"),
+        makeColumnOption("compute_family", t?.("columns.common.computeFamily") ?? "Compute Family"),
+        makeColumnOption("memory", t?.("columns.common.memory") ?? "Memory"),
+        makeColumnOption("vCPU", t?.("columns.common.vCPUs") ?? "vCPUs"),
+        makeColumnOption("storage", t?.("columns.common.storage") ?? "Storage"),
         makeColumnOption("io", "IO"),
-        makeColumnOption("ECU", "Compute Units (ECU)"),
-        makeColumnOption("generation", "Generation"),
-        makeColumnOption("cost-ondemand", "On Demand Cost"),
-        makeColumnOption("cost-reserved", "Reserved Cost"),
+        makeColumnOption("ECU", t?.("columns.ec2.computeUnitsEcu") ?? "Compute Units (ECU)"),
+        makeColumnOption("generation", t?.("columns.common.generation") ?? "Generation"),
+        makeColumnOption("cost-ondemand", t?.("columns.pricing.onDemand") ?? "On Demand Cost"),
+        makeColumnOption("cost-reserved", t?.("columns.pricing.reserved") ?? "Reserved Cost"),
     ];
 }
 
@@ -137,10 +141,14 @@ export const columnsGen = (
         usdRate: number;
         cnyRate: number;
     },
-): ColumnDef<Instance>[] => [
+    locals?: Locals,
+): ColumnDef<Instance>[] => {
+    const t = locals?.t;
+    const locale = locals?.locale;
+    return [
     {
         accessorKey: "pretty_name",
-        header: "Name",
+        header: t?.("columns.common.name") ?? "Name",
         id: "pretty_name",
         size: 350,
         sortingFn: "alphanumeric",
@@ -149,7 +157,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "instance_type",
-        header: "API Name",
+        header: t?.("columns.common.apiName") ?? "API Name",
         id: "instance_type",
         filterFn: regex({ accessorKey: "instance_type" }),
         sortingFn: (rowA, rowB) => {
@@ -162,7 +170,7 @@ export const columnsGen = (
             return (
                 <RegionLinkPreloader
                     onClick={(e) => e.stopPropagation()}
-                    href={`/aws/redshift/${value}`}
+                    href={prefixWithLocale(`/aws/redshift/${value}`, locale ?? "en")}
                 >
                     {value}
                 </RegionLinkPreloader>
@@ -171,7 +179,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "family",
-        header: "Compute Family",
+        header: t?.("columns.common.computeFamily") ?? "Compute Family",
         size: 150,
         id: "compute_family",
         sortingFn: "alphanumeric",
@@ -179,7 +187,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "memory",
-        header: "Instance Memory",
+        header: t?.("columns.common.instanceMemory") ?? "Instance Memory",
         id: "memory",
         sortingFn: "alphanumeric",
         filterFn: expr,
@@ -187,7 +195,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "vcpu",
-        header: "vCPUs",
+        header: t?.("columns.common.vCPUs") ?? "vCPUs",
         id: "vCPU",
         filterFn: expr,
         cell: (info) => {
@@ -197,7 +205,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "storage",
-        header: "Storage",
+        header: t?.("columns.common.storage") ?? "Storage",
         id: "storage",
         sortingFn: "alphanumeric",
         filterFn: expr,
@@ -211,14 +219,14 @@ export const columnsGen = (
     },
     {
         accessorKey: "ecu",
-        header: "ECU",
+        header: t?.("columns.ec2.computeUnitsEcu") ?? "ECU",
         id: "ECU",
         sortingFn: "alphanumeric",
         filterFn: expr,
     },
     {
         accessorKey: "currentGeneration",
-        header: "Generation",
+        header: t?.("columns.common.generation") ?? "Generation",
         id: "generation",
         sortingFn: "alphanumeric",
         ...makeCellWithRegexSorter("currentGeneration", (info) => {
@@ -228,7 +236,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "On Demand Cost",
+        header: t?.("columns.pricing.onDemand") ?? "On Demand Cost",
         id: "cost-ondemand",
         sortingFn: "alphanumeric",
         ...getPricingSorter(
@@ -243,7 +251,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Reserved Cost",
+        header: t?.("columns.pricing.reserved") ?? "Reserved Cost",
         id: "cost-reserved",
         sortingFn: "alphanumeric",
         ...getPricingSorter(
@@ -255,3 +263,4 @@ export const columnsGen = (
         ),
     },
 ];
+};

@@ -1,4 +1,5 @@
 import { withSentryConfig } from "@sentry/nextjs";
+import { withGTConfig } from "gt-next/config";
 import type { NextConfig } from "next";
 
 let nextConfig: NextConfig = {
@@ -11,6 +12,14 @@ let nextConfig: NextConfig = {
     },
     productionBrowserSourceMaps: true,
 };
+
+nextConfig = withGTConfig(nextConfig, {
+    dictionary: "./dictionary.ts",
+    loadDictionaryPath: "./loadDictionary.ts",
+    loadTranslationsPath: "./loadTranslations.ts",
+    experimentalLocaleResolution: true,
+    experimentalLocaleResolutionParam: "locale",
+});
 
 if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
     nextConfig = withSentryConfig(nextConfig, {

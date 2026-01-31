@@ -1,0 +1,49 @@
+{
+  "search": "搜索...",
+  "clearFilters": "清除筛选",
+  "filters": "筛选",
+  "columns": "列",
+  "region": "区域",
+  "pricingUnit": "定价单位",
+  "cost": "费用",
+  "reserved": "预留",
+  "currency": "货币",
+  "os": "操作系统",
+  "duration": "时长",
+  "reservedTerm": "预留期限",
+  "durations": {
+    "ondemand": "按需",
+    "reserved1yr": "1年预留",
+    "reserved3yr": "3年预留",
+    "spot": "竞价"
+  },
+  "compare": "比较",
+  "endCompare": "结束比较",
+  "selected": "已选",
+  "showAll": "显示全部",
+  "hideAll": "隐藏全部",
+  "select": "选择...",
+  "searchLabel": "搜索{label}...",
+  "noOptionsFound": "未找到选项。",
+  "searchColumns": "搜索列...",
+  "noColumnsFound": "未找到列。",
+  "selectAll": "全选",
+  "selectDefaults": "选择默认",
+  "regionGroups": {
+    "frequentlyUsed": "常用",
+    "chinaCloudRegions": "中国云区域",
+    "mainRegions": "主要区域",
+    "localZones": "本地区域",
+    "wavelengthZones": "Wavelength 区域"
+  },
+  "export": {
+    "export": "导出",
+    "downloadCsv": "下载 CSV",
+    "copyCsv": "复制 CSV",
+    "copyTsv": "复制 TSV",
+    "copyMarkdown": "复制 Markdown 表格",
+    "csvCopied": "CSV 已复制到剪贴板",
+    "tsvCopied": "TSV 已复制到剪贴板",
+    "markdownCopied": "Markdown 表格已复制到剪贴板"
+  }
+}

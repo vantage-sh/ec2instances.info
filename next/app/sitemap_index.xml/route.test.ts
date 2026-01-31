@@ -4,6 +4,7 @@ import { expect } from "vitest";
 import { readdirSync, statSync } from "fs";
 import { join, sep } from "path";
 import { XMLParser } from "fast-xml-parser";
+import { SUPPORTED_LOCALES } from "@/utils/localeConstants";
 
 const sitemapInstanceRoutes = new Set<string>();
 const otherSitemaps = ["/sitemap-other.xml"];
@@ -39,9 +40,21 @@ function scanFolder(path: string[]) {
         const stat = statSync(`${fullPath}${sep}${file}`);
         if (stat.isDirectory()) {
             if (file === "sitemap-instances.xml") {
-                sitemapInstanceRoutes.add(
-                    `/${path.join("/")}/sitemap-instances.xml`,
-                );
+                // Path contains [locale] segment, expand to all supported locales
+                const pathStr = path.join("/");
+                if (pathStr.startsWith("[locale]")) {
+                    // Replace [locale] with each supported locale
+                    for (const locale of SUPPORTED_LOCALES) {
+                        const localizedPath = pathStr.replace("[locale]", locale);
+                        sitemapInstanceRoutes.add(
+                            `/${localizedPath}/sitemap-instances.xml`,
+                        );
+                    }
+                } else {
+                    sitemapInstanceRoutes.add(
+                        `/${pathStr}/sitemap-instances.xml`,
+                    );
+                }
             } else {
                 path.push(file);
                 scanFolder(path);

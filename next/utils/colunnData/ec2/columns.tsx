@@ -5,6 +5,7 @@ import { ClockFadingIcon } from "lucide-react";
 import sortByInstanceType from "@/utils/sortByInstanceType";
 import { regex, makeCellWithRegexSorter, expr } from "../shared";
 import exprCompiler from "@/utils/expr";
+import { prefixWithLocale } from "@/utils/locale";
 
 interface Storage {
     devices: number;
@@ -207,6 +208,13 @@ function formatStorage(
     return [`${totalSize} ${storage.size_unit} ${storageType}`, undefined];
 }
 
+export type TranslationFn = (key: string) => string;
+
+export interface Locals {
+    t: TranslationFn;
+    locale: string;
+}
+
 export const columnsGen = (
     selectedRegion: string,
     pricingUnit: PricingUnit,
@@ -217,10 +225,14 @@ export const columnsGen = (
         usdRate: number;
         cnyRate: number;
     },
-): ColumnDef<EC2Instance>[] => [
+    locals?: Locals,
+): ColumnDef<EC2Instance>[] => {
+    const t = locals?.t;
+    const locale = locals?.locale;
+    return [
     {
         accessorKey: "pretty_name",
-        header: "Name",
+        header: t?.("columns.common.name") ?? "Name",
         id: "pretty_name",
         size: 350,
         sortingFn: "alphanumeric",
@@ -229,7 +241,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "instance_type",
-        header: "API Name",
+        header: t?.("columns.common.apiName") ?? "API Name",
         size: 175,
         id: "instance_type",
         sortingFn: (rowA, rowB) => {
@@ -243,7 +255,7 @@ export const columnsGen = (
             return (
                 <RegionLinkPreloader
                     onClick={(e) => e.stopPropagation()}
-                    href={`/aws/ec2/${value}`}
+                    href={prefixWithLocale(`/aws/ec2/${value}`, locale ?? "en")}
                 >
                     {value}
                 </RegionLinkPreloader>
@@ -252,7 +264,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "instance_type",
-        header: "Instance Family",
+        header: t?.("columns.common.instanceFamily") ?? "Instance Family",
         size: 150,
         id: "family",
         sortingFn: "alphanumeric",
@@ -263,7 +275,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "coremark_iterations_second",
-        header: "CoreMark Score",
+        header: t?.("columns.ec2.coremarkScore") ?? "CoreMark Score",
         size: 150,
         id: "coremark_iterations_second",
         sortingFn: "alphanumeric",
@@ -276,7 +288,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "family",
-        header: "Compute Family",
+        header: t?.("columns.common.computeFamily") ?? "Compute Family",
         size: 150,
         id: "compute_family",
         sortingFn: "alphanumeric",
@@ -284,7 +296,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "ffmpeg_fps",
-        header: "FFmpeg FPS",
+        header: t?.("columns.ec2.ffmpegFps") ?? "FFmpeg FPS",
         size: 130,
         id: "ffmpeg_fps",
         sortingFn: "alphanumeric",
@@ -297,7 +309,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "memory",
-        header: "Instance Memory",
+        header: t?.("columns.common.instanceMemory") ?? "Instance Memory",
         size: 170,
         id: "memory",
         sortingFn: "alphanumeric",
@@ -306,7 +318,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "memory_speed",
-        header: "Memory Speed",
+        header: t?.("columns.ec2.memorySpeed") ?? "Memory Speed",
         size: 150,
         id: "memory_speed",
         sortingFn: "alphanumeric",
@@ -319,7 +331,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "uses_numa_architecture",
-        header: "Uses NUMA Architecture",
+        header: t?.("columns.ec2.usesNumaArch") ?? "Uses NUMA Architecture",
         size: 180,
         id: "uses_numa_architecture",
         sortingFn: (rowA, rowB) => {
@@ -338,7 +350,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "numa_node_count",
-        header: "NUMA Node Count",
+        header: t?.("columns.ec2.numaNodeCount") ?? "NUMA Node Count",
         size: 150,
         id: "numa_node_count",
         sortingFn: (rowA, rowB) => {
@@ -357,7 +369,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "max_numa_distance",
-        header: "Max NUMA Distance",
+        header: t?.("columns.ec2.maxNumaDistance") ?? "Max NUMA Distance",
         size: 150,
         id: "max_numa_distance",
         sortingFn: (rowA, rowB) => {
@@ -376,7 +388,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "core_count_per_numa_node",
-        header: "Cores per NUMA Node (Avg)",
+        header: t?.("columns.ec2.coresPerNumaNode") ?? "Cores per NUMA Node (Avg)",
         size: 180,
         id: "core_count_per_numa_node",
         sortingFn: (rowA, rowB) => {
@@ -395,7 +407,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "thread_count_per_numa_node",
-        header: "Threads per NUMA Node (Avg)",
+        header: t?.("columns.ec2.threadsPerNumaNode") ?? "Threads per NUMA Node (Avg)",
         size: 180,
         id: "thread_count_per_numa_node",
         sortingFn: (rowA, rowB) => {
@@ -414,7 +426,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "memory_per_numa_node_mb",
-        header: "Memory per NUMA Node (Avg MB)",
+        header: t?.("columns.ec2.memoryPerNumaNode") ?? "Memory per NUMA Node (Avg MB)",
         size: 200,
         id: "memory_per_numa_node_mb",
         sortingFn: (rowA, rowB) => {
@@ -433,7 +445,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "l3_per_numa_node_mb",
-        header: "L3 Cache per NUMA Node (Avg MB)",
+        header: t?.("columns.ec2.l3PerNumaNode") ?? "L3 Cache per NUMA Node (Avg MB)",
         size: 220,
         id: "l3_per_numa_node_mb",
         sortingFn: (rowA, rowB) => {
@@ -452,7 +464,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "l3_shared",
-        header: "L3 Cache Shared",
+        header: t?.("columns.ec2.l3CacheShared") ?? "L3 Cache Shared",
         size: 150,
         id: "l3_shared",
         sortingFn: (rowA, rowB) => {
@@ -471,7 +483,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "ECU",
-        header: "Compute Units (ECU)",
+        header: t?.("columns.ec2.computeUnitsEcu") ?? "Compute Units (ECU)",
         size: 180,
         id: "ECU",
         sortingFn: "alphanumeric",
@@ -511,7 +523,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "vCPU",
-        header: "vCPUs",
+        header: t?.("columns.common.vCPUs") ?? "vCPUs",
         size: 110,
         id: "vCPU",
         filterFn: expr,
@@ -551,7 +563,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "memory_per_vcpu",
-        header: "GiB of Memory per vCPU",
+        header: t?.("columns.common.memoryPerVcpu") ?? "GiB of Memory per vCPU",
         id: "memory_per_vcpu",
         filterFn: expr,
         cell: (info) => {
@@ -562,7 +574,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "GPU",
-        header: "GPUs",
+        header: t?.("columns.common.gpus") ?? "GPUs",
         size: 80,
         id: "GPU",
         filterFn: expr,
@@ -571,7 +583,7 @@ export const columnsGen = (
     {
         accessorKey: "GPU_model",
         size: 120,
-        header: "GPU model",
+        header: t?.("columns.common.gpuModel") ?? "GPU model",
         id: "GPU_model",
         sortingFn: "alphanumeric",
         filterFn: regex({ accessorKey: "GPU_model" }),
@@ -579,7 +591,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "GPU_memory",
-        header: "GPU memory",
+        header: t?.("columns.common.gpuMemory") ?? "GPU memory",
         size: 130,
         id: "GPU_memory",
         sortingFn: "alphanumeric",
@@ -588,7 +600,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "compute_capability",
-        header: "CUDA Compute Capability",
+        header: t?.("columns.ec2.cudaComputeCapability") ?? "CUDA Compute Capability",
         id: "compute_capability",
         filterFn: regex({ accessorKey: "compute_capability" }),
         cell: (info) => info.getValue() as string,
@@ -596,14 +608,14 @@ export const columnsGen = (
     {
         accessorKey: "FPGA",
         size: 90,
-        header: "FPGAs",
+        header: t?.("columns.ec2.fpgas") ?? "FPGAs",
         id: "FPGA",
         filterFn: regex({ accessorKey: "FPGA" }),
         cell: (info) => info.getValue() as number,
     },
     {
         accessorKey: "ECU_per_vcpu",
-        header: "ECU per vCPU",
+        header: t?.("columns.ec2.ecuPerVcpu") ?? "ECU per vCPU",
         size: 140,
         id: "ECU_per_vcpu",
         filterFn: regex({ accessorKey: "ECU_per_vcpu" }),
@@ -631,7 +643,7 @@ export const columnsGen = (
     {
         accessorKey: "physical_processor",
         size: 200,
-        header: "Physical Processor",
+        header: t?.("columns.common.physicalProcessor") ?? "Physical Processor",
         id: "physical_processor",
         sortingFn: "alphanumeric",
         filterFn: regex({ accessorKey: "physical_processor" }),
@@ -639,7 +651,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "clock_speed_ghz",
-        header: "Clock Speed(GHz)",
+        header: t?.("columns.ec2.clockSpeed") ?? "Clock Speed(GHz)",
         size: 160,
         id: "clock_speed_ghz",
         sortingFn: (rowA, rowB) => {
@@ -671,7 +683,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "intel_avx",
-        header: "Intel AVX",
+        header: t?.("columns.ec2.intelAvx") ?? "Intel AVX",
         size: 110,
         id: "intel_avx",
         filterFn: regex({ accessorKey: "intel_avx" }),
@@ -679,7 +691,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "intel_avx2",
-        header: "Intel AVX2",
+        header: t?.("columns.ec2.intelAvx2") ?? "Intel AVX2",
         size: 110,
         id: "intel_avx2",
         filterFn: regex({ accessorKey: "intel_avx2" }),
@@ -687,7 +699,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "intel_avx512",
-        header: "Intel AVX-512",
+        header: t?.("columns.ec2.intelAvx512") ?? "Intel AVX-512",
         size: 130,
         id: "intel_avx512",
         filterFn: regex({ accessorKey: "intel_avx512" }),
@@ -695,7 +707,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "intel_turbo",
-        header: "Intel Turbo",
+        header: t?.("columns.ec2.intelTurbo") ?? "Intel Turbo",
         size: 120,
         id: "intel_turbo",
         filterFn: regex({ accessorKey: "intel_turbo" }),
@@ -703,7 +715,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "storage",
-        header: "Instance Storage",
+        header: t?.("columns.common.instanceStorage") ?? "Instance Storage",
         size: 160,
         id: "storage",
         sortingFn: (rowA, rowB) => {
@@ -745,7 +757,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "storage",
-        header: "Instance Storage: already warmed-up",
+        header: t?.("columns.ec2.storageWarmedUp") ?? "Instance Storage: already warmed-up",
         id: "warmed-up",
         sortingFn: (rowA, rowB) => {
             const storageA = rowA.original.storage;
@@ -764,7 +776,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "storage",
-        header: "Instance Storage: SSD TRIM Support",
+        header: t?.("columns.ec2.storageTrimSupport") ?? "Instance Storage: SSD TRIM Support",
         id: "trim-support",
         sortingFn: (rowA, rowB) => {
             const storageA = rowA.original.storage;
@@ -789,7 +801,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "arch",
-        header: "Arch",
+        header: t?.("columns.common.arch") ?? "Arch",
         size: 100,
         id: "arch",
         sortingFn: (rowA, rowB) => {
@@ -813,7 +825,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "network_performance",
-        header: "Network Performance",
+        header: t?.("columns.common.networkPerformance") ?? "Network Performance",
         size: 200,
         id: "network_performance",
         sortingFn: "alphanumeric",
@@ -822,7 +834,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "ebs_baseline_bandwidth",
-        header: "EBS Optimized: Baseline Bandwidth",
+        header: t?.("columns.ec2.ebsBaselineBandwidth") ?? "EBS Optimized: Baseline Bandwidth",
         id: "ebs_baseline_bandwidth",
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.ebs_baseline_bandwidth;
@@ -839,7 +851,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "ebs_baseline_throughput",
-        header: "EBS Optimized: Baseline Throughput (128K)",
+        header: t?.("columns.ec2.ebsBaselineThroughput") ?? "EBS Optimized: Baseline Throughput (128K)",
         id: "ebs_baseline_throughput",
         sortingFn: "alphanumeric",
         ...makeCellWithRegexSorter(
@@ -849,7 +861,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "ebs_baseline_iops",
-        header: "EBS Optimized: Baseline IOPS (16K)",
+        header: t?.("columns.ec2.ebsBaselineIops") ?? "EBS Optimized: Baseline IOPS (16K)",
         id: "ebs_baseline_iops",
         sortingFn: "alphanumeric",
         ...makeCellWithRegexSorter(
@@ -859,7 +871,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "ebs_max_bandwidth",
-        header: "EBS Optimized: Max Bandwidth",
+        header: t?.("columns.ec2.ebsMaxBandwidth") ?? "EBS Optimized: Max Bandwidth",
         id: "ebs_max_bandwidth",
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.ebs_max_bandwidth;
@@ -876,7 +888,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "ebs_throughput",
-        header: "EBS Optimized: Max Throughput (128K)",
+        header: t?.("columns.ec2.ebsMaxThroughput") ?? "EBS Optimized: Max Throughput (128K)",
         id: "ebs_throughput",
         sortingFn: "alphanumeric",
         ...makeCellWithRegexSorter(
@@ -886,7 +898,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "ebs_iops",
-        header: "EBS Optimized: Max IOPS (16K)",
+        header: t?.("columns.ec2.ebsMaxIops") ?? "EBS Optimized: Max IOPS (16K)",
         id: "ebs_iops",
         sortingFn: "alphanumeric",
         ...makeCellWithRegexSorter(
@@ -896,7 +908,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "ebs_as_nvme",
-        header: "EBS Exposed as NVMe",
+        header: t?.("columns.ec2.ebsAsNvme") ?? "EBS Exposed as NVMe",
         id: "ebs_as_nvme",
         ...makeCellWithRegexSorter("ebs_as_nvme", (info) =>
             info.getValue() ? "Yes" : "No",
@@ -904,7 +916,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "vpc",
-        header: "Max IPs",
+        header: t?.("columns.ec2.maxIps") ?? "Max IPs",
         size: 100,
         id: "maxips",
         sortingFn: (rowA, rowB) => {
@@ -935,7 +947,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "vpc",
-        header: "Max ENIs",
+        header: t?.("columns.ec2.maxEnis") ?? "Max ENIs",
         size: 100,
         id: "maxenis",
         sortingFn: (rowA, rowB) => {
@@ -953,7 +965,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "enhanced_networking",
-        header: "Enhanced Networking",
+        header: t?.("columns.ec2.enhancedNetworking") ?? "Enhanced Networking",
         id: "enhanced_networking",
         ...makeCellWithRegexSorter("enhanced_networking", (info) => {
             return info.getValue() ? "Yes" : "No";
@@ -961,7 +973,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "vpc_only",
-        header: "VPC Only",
+        header: t?.("columns.ec2.vpcOnly") ?? "VPC Only",
         size: 110,
         id: "vpc_only",
         ...makeCellWithRegexSorter("vpc_only", (info) => {
@@ -970,7 +982,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "ipv6_support",
-        header: "IPv6 Support",
+        header: t?.("columns.ec2.ipv6Support") ?? "IPv6 Support",
         size: 130,
         id: "ipv6_support",
         ...makeCellWithRegexSorter("ipv6_support", (info) =>
@@ -979,7 +991,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "placement_group_support",
-        header: "Placement Group Support",
+        header: t?.("columns.ec2.placementGroupSupport") ?? "Placement Group Support",
         id: "placement_group_support",
         ...makeCellWithRegexSorter("placement_group_support", (info) =>
             info.getValue() ? "Yes" : "No",
@@ -987,7 +999,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "linux_virtualization_types",
-        header: "Linux Virtualization",
+        header: t?.("columns.ec2.linuxVirtualization") ?? "Linux Virtualization",
         id: "linux_virtualization_types",
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.linux_virtualization_types;
@@ -1005,7 +1017,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "emr",
-        header: "On EMR",
+        header: t?.("columns.ec2.onEmr") ?? "On EMR",
         size: 100,
         id: "emr",
         ...makeCellWithRegexSorter("emr", (info) =>
@@ -1014,7 +1026,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "availability_zones",
-        header: "Availability Zones",
+        header: t?.("columns.ec2.availabilityZones") ?? "Availability Zones",
         id: "availability_zones",
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.availability_zones?.[selectedRegion];
@@ -1030,7 +1042,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "On Demand",
+        header: t?.("columns.pricing.linuxOnDemand") ?? "On Demand",
         size: 150,
         id: "cost-ondemand",
         ...getPricingSorter(
@@ -1046,7 +1058,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Linux Reserved cost",
+        header: t?.("columns.pricing.linuxReserved") ?? "Linux Reserved cost",
         size: 180,
         id: "cost-reserved",
         ...getPricingSorter(
@@ -1062,7 +1074,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Linux Spot Minimum cost",
+        header: t?.("columns.pricing.linuxSpotMin") ?? "Linux Spot Minimum cost",
         size: 180,
         id: "cost-spot-min",
         ...getPricingSorter(
@@ -1076,7 +1088,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Linux Spot Average cost",
+        header: t?.("columns.pricing.linuxSpotAvg") ?? "Linux Spot Average cost",
         size: 180,
         id: "cost-spot-max",
         ...getPricingSorter(
@@ -1090,7 +1102,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "RHEL On Demand cost",
+        header: t?.("columns.pricing.rhelOnDemand") ?? "RHEL On Demand cost",
         size: 180,
         id: "cost-ondemand-rhel",
         ...getPricingSorter(
@@ -1104,7 +1116,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "RHEL Reserved cost",
+        header: t?.("columns.pricing.rhelReserved") ?? "RHEL Reserved cost",
         id: "cost-reserved-rhel",
         ...getPricingSorter(
             selectedRegion,
@@ -1117,7 +1129,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "RHEL Spot Minimum cost",
+        header: t?.("columns.pricing.rhelSpotMin") ?? "RHEL Spot Minimum cost",
         id: "cost-spot-min-rhel",
         ...getPricingSorter(
             selectedRegion,
@@ -1130,7 +1142,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "RHEL Spot Maximum cost",
+        header: t?.("columns.pricing.rhelSpotMax") ?? "RHEL Spot Maximum cost",
         id: "cost-spot-max-rhel",
         ...getPricingSorter(
             selectedRegion,
@@ -1143,7 +1155,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "RHEL with HA On Demand cost",
+        header: t?.("columns.pricing.rhelHaOnDemand") ?? "RHEL with HA On Demand cost",
         id: "cost-ondemand-rhelHA",
         ...getPricingSorter(
             selectedRegion,
@@ -1156,7 +1168,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "RHEL with HA Reserved cost",
+        header: t?.("columns.pricing.rhelHaReserved") ?? "RHEL with HA Reserved cost",
         id: "cost-reserved-rhelHA",
         ...getPricingSorter(
             selectedRegion,
@@ -1169,7 +1181,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "RHEL with HA Spot Minimum cost",
+        header: t?.("columns.pricing.rhelHaSpotMin") ?? "RHEL with HA Spot Minimum cost",
         id: "cost-spot-min-rhelHA",
         ...getPricingSorter(
             selectedRegion,
@@ -1182,7 +1194,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "RHEL with HA Spot Maximum cost",
+        header: t?.("columns.pricing.rhelHaSpotMax") ?? "RHEL with HA Spot Maximum cost",
         id: "cost-spot-max-rhelHA",
         ...getPricingSorter(
             selectedRegion,
@@ -1195,7 +1207,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "SLES On Demand cost",
+        header: t?.("columns.pricing.slesOnDemand") ?? "SLES On Demand cost",
         id: "cost-ondemand-sles",
         ...getPricingSorter(
             selectedRegion,
@@ -1208,7 +1220,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "SLES Reserved cost",
+        header: t?.("columns.pricing.slesReserved") ?? "SLES Reserved cost",
         id: "cost-reserved-sles",
         ...getPricingSorter(
             selectedRegion,
@@ -1221,7 +1233,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "SLES Spot Minimum cost",
+        header: t?.("columns.pricing.slesSpotMin") ?? "SLES Spot Minimum cost",
         id: "cost-spot-min-sles",
         ...getPricingSorter(
             selectedRegion,
@@ -1234,7 +1246,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "SLES Spot Maximum cost",
+        header: t?.("columns.pricing.slesSpotMax") ?? "SLES Spot Maximum cost",
         id: "cost-spot-max-sles",
         ...getPricingSorter(
             selectedRegion,
@@ -1247,7 +1259,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Windows On Demand cost",
+        header: t?.("columns.pricing.windowsOnDemand") ?? "Windows On Demand cost",
         id: "cost-ondemand-mswin",
         ...getPricingSorter(
             selectedRegion,
@@ -1260,7 +1272,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Windows Reserved cost",
+        header: t?.("columns.pricing.windowsReserved") ?? "Windows Reserved cost",
         id: "cost-reserved-mswin",
         ...getPricingSorter(
             selectedRegion,
@@ -1273,7 +1285,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Windows Spot Minimum cost",
+        header: t?.("columns.pricing.windowsSpotMin") ?? "Windows Spot Minimum cost",
         id: "cost-spot-min-mswin",
         ...getPricingSorter(
             selectedRegion,
@@ -1286,7 +1298,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Windows Spot Average cost",
+        header: t?.("columns.pricing.windowsSpotAvg") ?? "Windows Spot Average cost",
         id: "cost-spot-max-mswin",
         ...getPricingSorter(
             selectedRegion,
@@ -1299,7 +1311,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Dedicated Host On Demand",
+        header: t?.("columns.pricing.dedicatedHostOnDemand") ?? "Dedicated Host On Demand",
         id: "cost-ondemand-dedicated",
         ...getPricingSorter(
             selectedRegion,
@@ -1312,7 +1324,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Dedicated Host Reserved",
+        header: t?.("columns.pricing.dedicatedHostReserved") ?? "Dedicated Host Reserved",
         id: "cost-reserved-dedicated",
         ...getPricingSorter(
             selectedRegion,
@@ -1325,7 +1337,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Windows SQL Web On Demand cost",
+        header: t?.("columns.pricing.windowsSqlWebOnDemand") ?? "Windows SQL Web On Demand cost",
         id: "cost-ondemand-mswinSQLWeb",
         ...getPricingSorter(
             selectedRegion,
@@ -1338,7 +1350,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Windows SQL Web Reserved cost",
+        header: t?.("columns.pricing.windowsSqlWebReserved") ?? "Windows SQL Web Reserved cost",
         id: "cost-reserved-mswinSQLWeb",
         ...getPricingSorter(
             selectedRegion,
@@ -1351,7 +1363,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Windows SQL Std On Demand cost",
+        header: t?.("columns.pricing.windowsSqlStdOnDemand") ?? "Windows SQL Std On Demand cost",
         id: "cost-ondemand-mswinSQL",
         ...getPricingSorter(
             selectedRegion,
@@ -1364,7 +1376,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Windows SQL Std Reserved cost",
+        header: t?.("columns.pricing.windowsSqlStdReserved") ?? "Windows SQL Std Reserved cost",
         id: "cost-reserved-mswinSQL",
         ...getPricingSorter(
             selectedRegion,
@@ -1377,7 +1389,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Windows SQL Ent On Demand cost",
+        header: t?.("columns.pricing.windowsSqlEntOnDemand") ?? "Windows SQL Ent On Demand cost",
         id: "cost-ondemand-mswinSQLEnterprise",
         ...getPricingSorter(
             selectedRegion,
@@ -1390,7 +1402,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Windows SQL Ent Reserved cost",
+        header: t?.("columns.pricing.windowsSqlEntReserved") ?? "Windows SQL Ent Reserved cost",
         id: "cost-reserved-mswinSQLEnterprise",
         ...getPricingSorter(
             selectedRegion,
@@ -1403,7 +1415,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Linux SQL Web On Demand cost",
+        header: t?.("columns.pricing.linuxSqlWebOnDemand") ?? "Linux SQL Web On Demand cost",
         id: "cost-ondemand-linuxSQLWeb",
         ...getPricingSorter(
             selectedRegion,
@@ -1416,7 +1428,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Linux SQL Web Reserved cost",
+        header: t?.("columns.pricing.linuxSqlWebReserved") ?? "Linux SQL Web Reserved cost",
         id: "cost-reserved-linuxSQLWeb",
         ...getPricingSorter(
             selectedRegion,
@@ -1429,7 +1441,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Linux SQL Std On Demand cost",
+        header: t?.("columns.pricing.linuxSqlStdOnDemand") ?? "Linux SQL Std On Demand cost",
         id: "cost-ondemand-linuxSQL",
         ...getPricingSorter(
             selectedRegion,
@@ -1442,7 +1454,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Linux SQL Std Reserved cost",
+        header: t?.("columns.pricing.linuxSqlStdReserved") ?? "Linux SQL Std Reserved cost",
         id: "cost-reserved-linuxSQL",
         ...getPricingSorter(
             selectedRegion,
@@ -1455,7 +1467,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Linux SQL Ent On Demand cost",
+        header: t?.("columns.pricing.linuxSqlEntOnDemand") ?? "Linux SQL Ent On Demand cost",
         id: "cost-ondemand-linuxSQLEnterprise",
         ...getPricingSorter(
             selectedRegion,
@@ -1468,7 +1480,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Linux SQL Ent Reserved cost",
+        header: t?.("columns.pricing.linuxSqlEntReserved") ?? "Linux SQL Ent Reserved cost",
         id: "cost-reserved-linuxSQLEnterprise",
         ...getPricingSorter(
             selectedRegion,
@@ -1481,7 +1493,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Linux Spot Interrupt Frequency",
+        header: t?.("columns.pricing.linuxSpotInterrupt") ?? "Linux Spot Interrupt Frequency",
         id: "spot-interrupt-rate",
         ...getPricingSorter(
             selectedRegion,
@@ -1494,7 +1506,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "EMR cost",
+        header: t?.("columns.pricing.emrCost") ?? "EMR cost",
         size: 100,
         id: "cost-emr",
         ...getPricingSorter(
@@ -1508,7 +1520,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "generation",
-        header: "Generation",
+        header: t?.("columns.common.generation") ?? "Generation",
         size: 120,
         id: "generation",
         sortingFn: "alphanumeric",
@@ -1519,7 +1531,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "gpu_architectures",
-        header: "GPU Architectures",
+        header: t?.("columns.ec2.gpuArchitectures") ?? "GPU Architectures",
         size: 150,
         id: "gpu_architectures",
         sortingFn: (rowA, rowB) => {
@@ -1537,7 +1549,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "gpu_current_temp_avg_celsius",
-        header: "GPU Temp (Avg °C)",
+        header: t?.("columns.ec2.gpuTempAvg") ?? "GPU Temp (Avg °C)",
         size: 150,
         id: "gpu_current_temp_avg_celsius",
         sortingFn: "alphanumeric",
@@ -1550,7 +1562,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "ffmpeg_used_cuda",
-        header: "FFmpeg Used CUDA",
+        header: t?.("columns.ec2.ffmpegUsedCuda") ?? "FFmpeg Used CUDA",
         size: 150,
         id: "ffmpeg_used_cuda",
         ...makeCellWithRegexSorter("ffmpeg_used_cuda", (info) => {
@@ -1561,7 +1573,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "ffmpeg_speed",
-        header: "FFmpeg Speed",
+        header: t?.("columns.ec2.ffmpegSpeed") ?? "FFmpeg Speed",
         size: 130,
         id: "ffmpeg_speed",
         sortingFn: "alphanumeric",
@@ -1574,7 +1586,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "gpu_power_draw_watts_avg",
-        header: "GPU Power Draw (Avg Watts)",
+        header: t?.("columns.ec2.gpuPowerDrawAvg") ?? "GPU Power Draw (Avg Watts)",
         size: 200,
         id: "gpu_power_draw_watts_avg",
         sortingFn: "alphanumeric",
@@ -1587,7 +1599,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "gpu_power_draw_watts_avg",
-        header: "GPU Power Limit (Watts)",
+        header: t?.("columns.ec2.gpuPowerLimit") ?? "GPU Power Limit (Watts)",
         size: 180,
         id: "gpu_power_max_watts_avg",
         sortingFn: "alphanumeric",
@@ -1600,7 +1612,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "gpu_clocks",
-        header: "GPU Graphics Clock (Avg MHz)",
+        header: t?.("columns.ec2.gpuGraphicsClockAvg") ?? "GPU Graphics Clock (Avg MHz)",
         size: 220,
         id: "gpu_clocks_graphics_avg",
         sortingFn: (rowA, rowB) => {
@@ -1647,7 +1659,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "gpu_clocks",
-        header: "GPU SM Clock (Avg MHz)",
+        header: t?.("columns.ec2.gpuSmClockAvg") ?? "GPU SM Clock (Avg MHz)",
         size: 200,
         id: "gpu_clocks_sm_avg",
         sortingFn: (rowA, rowB) => {
@@ -1686,7 +1698,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "gpu_clocks",
-        header: "GPU Memory Clock (Avg MHz)",
+        header: t?.("columns.ec2.gpuMemoryClockAvg") ?? "GPU Memory Clock (Avg MHz)",
         size: 220,
         id: "gpu_clocks_memory_avg",
         sortingFn: (rowA, rowB) => {
@@ -1725,7 +1737,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "gpu_clocks",
-        header: "GPU Video Clock (Avg MHz)",
+        header: t?.("columns.ec2.gpuVideoClockAvg") ?? "GPU Video Clock (Avg MHz)",
         size: 200,
         id: "gpu_clocks_video_avg",
         sortingFn: (rowA, rowB) => {
@@ -1763,3 +1775,4 @@ export const columnsGen = (
         },
     },
 ];
+};

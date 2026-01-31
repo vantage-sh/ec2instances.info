@@ -12,6 +12,8 @@ import MarketingWrapper from "./MarketingWrapper";
 import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
 import { MarketingSchema } from "@/schemas/marketing";
 import type { CurrencyItem } from "@/utils/loadCurrencies";
+import { usePathname } from "next/navigation";
+import { getLocaleFromPath } from "@/utils/locale";
 
 type GCPInstanceRootProps = {
     rainbowTable: string[];
@@ -44,17 +46,20 @@ export default function GCPInstanceRoot({
     currencies,
 }: GCPInstanceRootProps) {
     const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
+    const pathname = usePathname();
+    const locale = getLocaleFromPath(pathname);
+    const localePrefix = `/${locale}`;
 
     return (
         <MarketingWrapper instanceType="gcp" marketingData={marketingData}>
             <main className="my-4 px-4 not-md:w-screen">
                 <InstanceBreadcrumbs
                     crumbs={[
-                        { name: "GCP", href: "/gcp" },
-                        { name: "Compute Engine", href: "/gcp" },
+                        { name: "GCP", href: `${localePrefix}/gcp` },
+                        { name: "Compute Engine", href: `${localePrefix}/gcp` },
                         {
                             name: compressedInstance.pretty_name,
-                            href: `/gcp/${compressedInstance.instance_type}`,
+                            href: `${localePrefix}/gcp/${compressedInstance.instance_type}`,
                         },
                     ]}
                 />
@@ -87,13 +92,13 @@ export default function GCPInstanceRoot({
                         <FamilySize
                             allOfInstanceType={allOfInstanceType}
                             instanceName={compressedInstance.instance_type}
-                            pathPrefix="/gcp"
-                            tablePath="/gcp"
+                            pathPrefix={`${localePrefix}/gcp`}
+                            tablePath={`${localePrefix}/gcp`}
                             pathSuffix={pathSuffix}
                         />
                         <InstanceVariants
                             bestOfVariants={bestOfVariants}
-                            pathPrefix="/gcp"
+                            pathPrefix={`${localePrefix}/gcp`}
                             pathSuffix={pathSuffix}
                         />
                     </div>

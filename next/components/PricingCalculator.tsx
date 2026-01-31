@@ -9,6 +9,7 @@ import type { CurrencyItem } from "@/utils/loadCurrencies";
 import { currencyRateAtom } from "@/state";
 import CurrencySelector from "./CurrencySelector";
 import { browserBlockingLocalStorage } from "@/utils/abGroup";
+import { useTranslations } from "gt-next";
 
 interface Platform {
     ondemand: string | number;
@@ -89,6 +90,7 @@ function Calculator({
     setPathSuffix: (value: string) => void;
     currencies: CurrencyItem[];
 }) {
+    const t = useTranslations();
     const priceHoldersId = useId();
 
     const defaultRegion = useMemo(() => {
@@ -257,7 +259,7 @@ function Calculator({
         const root = pricing[region]?.[platform];
         const a = [
             {
-                label: "On Demand",
+                label: t("instancePage.onDemand"),
                 value: currencyString(
                     root?.ondemand,
                     duration,
@@ -269,7 +271,7 @@ function Calculator({
         ];
         if (!removeSpot) {
             a.push({
-                label: "Spot",
+                label: t("instancePage.spot"),
                 value: currencyString(
                     useSpotMin ? root?.spot_min : root?.spot_avg,
                     duration,
@@ -282,7 +284,7 @@ function Calculator({
         if (reservedTermOptions.length > 0) {
             a.push(
                 {
-                    label: "1-Year Reserved",
+                    label: t("instancePage.reserved1Year"),
                     value: currencyString(
                         root?.reserved?.[`yrTerm1${pricingType}`],
                         duration,
@@ -292,7 +294,7 @@ function Calculator({
                     ),
                 },
                 {
-                    label: "3-Year Reserved",
+                    label: t("instancePage.reserved3Year"),
                     value: currencyString(
                         root?.reserved?.[`yrTerm3${pricingType}`],
                         duration,
@@ -314,6 +316,7 @@ function Calculator({
         currency,
         conversionRate,
         reservedTermOptions,
+        t,
     ]);
 
     const handleRegions = (
@@ -353,40 +356,40 @@ function Calculator({
         () =>
             handleRegions(
                 Object.entries(regions.main),
-                "Main Regions",
+                t("instancePage.mainRegions"),
                 onlySingleKey,
             ),
-        [regions.main, pricing],
+        [regions.main, pricing, t],
     );
 
     const chinaRegions = useMemo(
         () =>
             handleRegions(
                 Object.entries(regions.china),
-                "China Regions",
+                t("instancePage.chinaRegions"),
                 onlySingleKey,
             ),
-        [regions.china, pricing],
+        [regions.china, pricing, t],
     );
 
     const localZones = useMemo(
         () =>
             handleRegions(
                 Object.entries(regions.local_zone),
-                "Local Zones",
+                t("instancePage.localZones"),
                 onlySingleKey,
             ),
-        [regions.local_zone, pricing],
+        [regions.local_zone, pricing, t],
     );
 
     const wavelengthRegions = useMemo(
         () =>
             handleRegions(
                 Object.entries(regions.wavelength),
-                "Wavelength",
+                t("instancePage.wavelength"),
                 onlySingleKey,
             ),
-        [regions.wavelength, pricing],
+        [regions.wavelength, pricing, t],
     );
 
     const selectStyling =
@@ -436,7 +439,7 @@ function Calculator({
                     >
                         {osOptions.map(([value, label]) => (
                             <option key={value} value={value}>
-                                {label}
+                                {t(`os.${value}`) !== `os.${value}` ? t(`os.${value}`) : label}
                             </option>
                         ))}
                     </select>
@@ -456,7 +459,7 @@ function Calculator({
                 >
                     {durationOptions.map(({ value, label }) => (
                         <option key={value} value={value}>
-                            {label}
+                            {t(`durations.${value}`) !== `durations.${value}` ? t(`durations.${value}`) : label}
                         </option>
                     ))}
                 </select>
@@ -532,6 +535,7 @@ export default function PricingCalculator({
     setPathSuffix,
     currencies,
 }: PricingCalculatorProps) {
+    const t = useTranslations();
     const instance = useMemo(() => {
         if (!Array.isArray(compressedInstance.pricing))
             return compressedInstance;
@@ -542,7 +546,7 @@ export default function PricingCalculator({
         <section className="mb-4">
             <h3 className="flex items-center gap-2">
                 <DollarSignIcon className="w-4 h-4 inline-block my-auto" />{" "}
-                Pricing
+                {t("instancePage.pricing")}
             </h3>
             <Calculator
                 pricing={instance.pricing}

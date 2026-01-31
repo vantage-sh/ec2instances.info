@@ -410,3 +410,38 @@ body {
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+
+/* RTL (Right-to-Left) language support */
+[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+[dir="rtl"] .index-table th,
+[dir="rtl"] .index-table td {
+    text-align: right;
+}
+
+[dir="rtl"] .index-table tbody td {
+    @apply pl-3 pr-2;
+}
+
+/* Reverse flex direction for RTL layouts where needed */
+[dir="rtl"] .rtl\:flex-row-reverse {
+    flex-direction: row-reverse;
+}
+
+/* Navigation adjustments for RTL */
+[dir="rtl"] nav .gap-4 {
+    direction: rtl;
+}
+
+/* Ensure icons don't flip in RTL */
+[dir="rtl"] svg {
+    direction: ltr;
+}
+
+/* Dropdown menu alignment for RTL */
+[dir="rtl"] [data-radix-popper-content-wrapper] {
+    direction: rtl;
+}

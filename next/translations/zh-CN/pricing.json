@@ -1,0 +1,18 @@
+{
+  "hourly": "每小时",
+  "monthly": "每月",
+  "yearly": "每年",
+  "perHour": "/小时",
+  "perMonth": "/月",
+  "perYear": "/年",
+  "onDemand": "按需",
+  "reserved": "预留",
+  "spot": "竞价",
+  "savingsPlan": "节省计划",
+  "noUpfront": "无预付",
+  "partialUpfront": "部分预付",
+  "allUpfront": "全额预付",
+  "convertible": "可转换",
+  "standard": "标准",
+  "priceUnavailable": "不可用"
+}

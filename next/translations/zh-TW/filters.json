@@ -1,0 +1,49 @@
+{
+  "search": "搜尋...",
+  "clearFilters": "清除篩選",
+  "filters": "篩選",
+  "columns": "欄位",
+  "region": "區域",
+  "pricingUnit": "定價單位",
+  "cost": "費用",
+  "reserved": "預留",
+  "currency": "貨幣",
+  "os": "作業系統",
+  "duration": "期間",
+  "reservedTerm": "預留期限",
+  "durations": {
+    "ondemand": "隨需",
+    "reserved1yr": "1年預留",
+    "reserved3yr": "3年預留",
+    "spot": "競價"
+  },
+  "compare": "比較",
+  "endCompare": "結束比較",
+  "selected": "已選",
+  "showAll": "顯示全部",
+  "hideAll": "隱藏全部",
+  "select": "選擇...",
+  "searchLabel": "搜尋{label}...",
+  "noOptionsFound": "找不到選項。",
+  "searchColumns": "搜尋欄位...",
+  "noColumnsFound": "找不到欄位。",
+  "selectAll": "全選",
+  "selectDefaults": "選擇預設",
+  "regionGroups": {
+    "frequentlyUsed": "常用",
+    "chinaCloudRegions": "中國雲端區域",
+    "mainRegions": "主要區域",
+    "localZones": "本地區域",
+    "wavelengthZones": "Wavelength 區域"
+  },
+  "export": {
+    "export": "匯出",
+    "downloadCsv": "下載 CSV",
+    "copyCsv": "複製 CSV",
+    "copyTsv": "複製 TSV",
+    "copyMarkdown": "複製 Markdown 表格",
+    "csvCopied": "CSV 已複製到剪貼簿",
+    "tsvCopied": "TSV 已複製到剪貼簿",
+    "markdownCopied": "Markdown 表格已複製到剪貼簿"
+  }
+}

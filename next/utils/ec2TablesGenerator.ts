@@ -1,7 +1,7 @@
 import { EC2Instance } from "@/types";
 
 type Row = {
-    name: string;
+    nameKey: string;
     children: any;
     bgStyled?: boolean;
     help?: string | undefined;
@@ -9,7 +9,7 @@ type Row = {
 };
 
 export type Table = {
-    name: string;
+    nameKey: string;
     slug: string;
     rows: Row[];
 };
@@ -21,77 +21,77 @@ function round(value: number) {
 export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
     return [
         {
-            name: "Compute",
+            nameKey: "compute",
             slug: "compute",
             rows: [
                 {
-                    name: "vCPUs",
+                    nameKey: "vCPUs",
                     children: instance.vCPU,
                 },
                 {
-                    name: "Memory (GiB)",
+                    nameKey: "memoryGiB",
                     children: instance.memory,
                 },
                 {
-                    name: "Memory per vCPU (GiB)",
+                    nameKey: "memoryPerVCPU",
                     children: round(instance.memory / instance.vCPU),
                 },
                 {
-                    name: "Physical Processor",
+                    nameKey: "physicalProcessor",
                     children: instance.physical_processor || "N/A",
                 },
                 {
-                    name: "Clock Speed (GHz)",
+                    nameKey: "clockSpeed",
                     children: instance.clock_speed_ghz || "N/A",
                 },
                 {
-                    name: "CPU Architecture",
+                    nameKey: "cpuArchitecture",
                     children: instance.arch[0] || "N/A",
                 },
                 {
-                    name: "GPU",
+                    nameKey: "gpu",
                     children: instance.GPU ?? "N/A",
                     bgStyled: true,
                 },
                 {
-                    name: "GPU Average Wattage",
+                    nameKey: "gpuWattage",
                     children: `${instance.gpu_power_draw_watts_avg || "0"} W`,
                 },
                 {
-                    name: "GPU Architecture",
+                    nameKey: "gpuArchitecture",
                     children: instance.GPU_model ?? "none",
                     bgStyled: true,
                 },
                 {
-                    name: "Video Memory (GiB)",
+                    nameKey: "videoMemory",
                     children: instance.GPU_memory || "0",
                 },
                 {
-                    name: "GPU Compute Capability",
+                    nameKey: "gpuComputeCapability",
                     help: "https://handbook.vantage.sh/aws/reference/aws-gpu-instances/",
                     children: instance.compute_capability || "0",
                 },
                 {
-                    name: "FPGA",
+                    nameKey: "fpga",
                     children: instance.FPGA ?? "0",
                     bgStyled: true,
                 },
                 {
-                    name: "ffmpeg FPS",
+                    nameKey: "ffmpegFps",
                     children: instance.ffmpeg_fps || "N/A",
                 },
                 {
-                    name: "CoreMark iterations/Second",
+                    nameKey: "coremarkIterations",
                     children: instance.coremark_iterations_second || "N/A",
                 },
             ],
         },
         {
-            name: "NUMA Architecture",
+            nameKey: "numa",
             slug: "numa",
             rows: [
                 {
-                    name: "Uses NUMA Architecture",
+                    nameKey: "usesNuma",
                     children:
                         typeof instance.uses_numa_architecture !== "boolean"
                             ? "N/A"
@@ -101,39 +101,39 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
                     help: "https://en.wikipedia.org/wiki/Non-uniform_memory_access",
                 },
                 {
-                    name: "NUMA Node Count",
+                    nameKey: "numaNodeCount",
                     children: instance.numa_node_count ?? "N/A",
                 },
                 {
-                    name: "Max NUMA Distance",
+                    nameKey: "maxNumaDistance",
                     children: instance.max_numa_distance ?? "N/A",
                 },
                 {
-                    name: "Cores per NUMA Node (Avg)",
+                    nameKey: "coresPerNuma",
                     children: instance.core_count_per_numa_node
                         ? instance.core_count_per_numa_node.toFixed(1)
                         : "N/A",
                 },
                 {
-                    name: "Threads per NUMA Node (Avg)",
+                    nameKey: "threadsPerNuma",
                     children: instance.thread_count_per_numa_node
                         ? instance.thread_count_per_numa_node.toFixed(1)
                         : "N/A",
                 },
                 {
-                    name: "Memory per NUMA Node (Avg MB)",
+                    nameKey: "memoryPerNuma",
                     children: instance.memory_per_numa_node_mb
                         ? `${instance.memory_per_numa_node_mb.toFixed(0)} MB`
                         : "N/A",
                 },
                 {
-                    name: "L3 Cache per NUMA Node (Avg MB)",
+                    nameKey: "l3CachePerNuma",
                     children: instance.l3_per_numa_node_mb
                         ? `${instance.l3_per_numa_node_mb.toFixed(1)} MB`
                         : "N/A",
                 },
                 {
-                    name: "L3 Cache Shared",
+                    nameKey: "l3CacheShared",
                     children:
                         typeof instance.l3_shared !== "boolean"
                             ? "N/A"
@@ -144,105 +144,105 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
             ],
         },
         {
-            name: "Networking",
+            nameKey: "networking",
             slug: "networking",
             rows: [
                 {
-                    name: "Network Performance (Gibps)",
+                    nameKey: "networkPerformance",
                     children: (instance.network_performance || "N/A")
                         .toLowerCase()
                         .replace("gigabit", "")
                         .trim(),
                 },
                 {
-                    name: "Enhanced Networking",
+                    nameKey: "enhancedNetworking",
                     children: instance.enhanced_networking,
                     bgStyled: true,
                 },
                 {
-                    name: "IPv6",
+                    nameKey: "ipv6",
                     children: instance.ipv6_support,
                     bgStyled: true,
                 },
                 {
-                    name: "Placement Group",
+                    nameKey: "placementGroup",
                     help: "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html",
                     children: instance.placement_group_support,
                 },
             ],
         },
         {
-            name: "Storage",
+            nameKey: "storage",
             slug: "storage",
             rows: [
                 {
-                    name: "EBS Optimized",
+                    nameKey: "ebsOptimized",
                     children: instance.ebs_optimized,
                     bgStyled: true,
                 },
                 {
-                    name: "Max Bandwidth (Mbps) on",
+                    nameKey: "maxBandwidthEbs",
                     helpText: "EBS",
                     help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
                     children: instance.ebs_max_bandwidth,
                 },
                 {
-                    name: "Max Throughput (MB/s) on",
+                    nameKey: "maxThroughputEbs",
                     helpText: "EBS",
                     help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
                     children: instance.ebs_throughput,
                 },
                 {
-                    name: "Max I/O operations/second",
+                    nameKey: "maxIops",
                     helpText: "IOPS",
                     help: "https://handbook.vantage.sh/aws/concepts/io-operations/",
                     children: instance.ebs_iops,
                 },
                 {
-                    name: "Baseline Bandwidth (Mbps) on",
+                    nameKey: "baselineBandwidthEbs",
                     helpText: "EBS",
                     help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
                     children: instance.ebs_baseline_bandwidth,
                 },
                 {
-                    name: "Baseline Throughput (MB/s) on",
+                    nameKey: "baselineThroughputEbs",
                     helpText: "EBS",
                     help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
                     children: instance.ebs_baseline_throughput,
                 },
                 {
-                    name: "Baseline I/O operations/second",
+                    nameKey: "baselineIops",
                     helpText: "IOPS",
                     help: "https://handbook.vantage.sh/aws/concepts/io-operations/",
                     children: instance.ebs_baseline_iops,
                 },
                 {
-                    name: "Devices",
+                    nameKey: "devices",
                     children: instance.storage?.devices || "0",
                 },
                 {
-                    name: "Swap Partition",
+                    nameKey: "swapPartition",
                     children:
                         instance.storage?.includes_swap_partition ?? false,
                     bgStyled: true,
                 },
                 {
-                    name: "NVME Drive",
+                    nameKey: "nvmeDrive",
                     help: "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances",
                     children: instance.storage?.nvme_ssd ?? false,
                     bgStyled: true,
                 },
                 {
-                    name: "Disk Space (GiB)",
+                    nameKey: "diskSpace",
                     children: instance.storage?.size || "0",
                 },
                 {
-                    name: "SSD",
+                    nameKey: "ssd",
                     children: instance.storage?.ssd ?? false,
                     bgStyled: true,
                 },
                 {
-                    name: "Initialize Storage",
+                    nameKey: "initializeStorage",
                     children:
                         instance.storage?.storage_needs_initialization ?? false,
                     bgStyled: true,
@@ -250,28 +250,28 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
             ],
         },
         {
-            name: "Amazon",
+            nameKey: "amazon",
             slug: "amazon",
             rows: [
                 {
-                    name: "Generation",
+                    nameKey: "generation",
                     children: instance.generation,
                     bgStyled: true,
                 },
                 {
-                    name: "Instance Type",
+                    nameKey: "instanceType",
                     children: instance.instance_type,
                 },
                 {
-                    name: "Family",
+                    nameKey: "family",
                     children: instance.family || "N/A",
                 },
                 {
-                    name: "Name",
+                    nameKey: "name",
                     children: instance.pretty_name,
                 },
                 {
-                    name: "Elastic Map Reduce",
+                    nameKey: "elasticMapReduce",
                     helpText: "EMR",
                     help: "https://handbook.vantage.sh/aws/services/emr-pricing/",
                     children: instance.emr,
@@ -285,68 +285,68 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
 export function rds(instance: Omit<EC2Instance, "pricing">): Table[] {
     return [
         {
-            name: "Compute",
+            nameKey: "compute",
             slug: "Compute",
             rows: [
                 {
-                    name: "vCPUs",
+                    nameKey: "vCPUs",
                     children: instance.vCPU,
                 },
                 {
-                    name: "Memory (GiB)",
+                    nameKey: "memoryGiB",
                     children: instance.memory,
                 },
                 {
-                    name: "Physical Processor",
+                    nameKey: "physicalProcessor",
                     children: instance.physical_processor || "N/A",
                 },
                 {
-                    name: "CPU Architecture",
+                    nameKey: "cpuArchitecture",
                     children: instance.arch || "N/A",
                 },
             ],
         },
         {
-            name: "Storage",
+            nameKey: "storage",
             slug: "storage",
             rows: [
                 {
-                    name: "EBS Optimized",
+                    nameKey: "ebsOptimized",
                     children: instance.ebs_optimized || false,
                     bgStyled: true,
                 },
                 {
-                    name: "Max Bandwidth (Mbps) on",
+                    nameKey: "maxBandwidthEbs",
                     helpText: "EBS",
                     help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
                     children: instance.ebs_max_bandwidth,
                 },
                 {
-                    name: "Max Throughput (MB/s) on",
+                    nameKey: "maxThroughputEbs",
                     helpText: "EBS",
                     help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
                     children: instance.ebs_throughput,
                 },
                 {
-                    name: "Max I/O operations/second",
+                    nameKey: "maxIops",
                     helpText: "IOPS",
                     help: "https://handbook.vantage.sh/aws/concepts/io-operations/",
                     children: instance.ebs_iops,
                 },
                 {
-                    name: "Baseline Bandwidth (Mbps) on",
+                    nameKey: "baselineBandwidthEbs",
                     helpText: "EBS",
                     help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
                     children: instance.ebs_baseline_bandwidth,
                 },
                 {
-                    name: "Baseline Throughput (MB/s) on",
+                    nameKey: "baselineThroughputEbs",
                     helpText: "EBS",
                     help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
                     children: instance.ebs_baseline_throughput,
                 },
                 {
-                    name: "Baseline I/O operations/second",
+                    nameKey: "baselineIops",
                     helpText: "IOPS",
                     help: "https://handbook.vantage.sh/aws/concepts/io-operations/",
                     children: instance.ebs_baseline_iops,
@@ -354,11 +354,11 @@ export function rds(instance: Omit<EC2Instance, "pricing">): Table[] {
             ],
         },
         {
-            name: "Networking",
+            nameKey: "networking",
             slug: "Networking",
             rows: [
                 {
-                    name: "Network Performance (Gibps)",
+                    nameKey: "networkPerformance",
                     children: (instance.network_performance || "N/A")
                         .replace("Gigabit", "")
                         .trim(),
@@ -366,11 +366,11 @@ export function rds(instance: Omit<EC2Instance, "pricing">): Table[] {
             ],
         },
         {
-            name: "Amazon",
+            nameKey: "amazon",
             slug: "amazon",
             rows: [
                 {
-                    name: "Generation",
+                    nameKey: "generation",
                     children:
                         // @ts-expect-error: RDS specific
                         instance.currentGeneration === "Yes"
@@ -379,19 +379,19 @@ export function rds(instance: Omit<EC2Instance, "pricing">): Table[] {
                     bgStyled: true,
                 },
                 {
-                    name: "Instance Type",
+                    nameKey: "instanceType",
                     children: instance.instance_type,
                 },
                 {
-                    name: "Family",
+                    nameKey: "family",
                     children: instance.family || "N/A",
                 },
                 {
-                    name: "Name",
+                    nameKey: "name",
                     children: instance.pretty_name,
                 },
                 {
-                    name: "Normalization Factor",
+                    nameKey: "normalizationFactor",
                     // @ts-expect-error: RDS specific
                     children: instance.normalizationSizeFactor,
                 },
@@ -417,11 +417,11 @@ function handleSize(size: string | undefined) {
 function elasticacheSpecificRows(instance: ElasticacheExt): Row[] {
     return [
         {
-            name: "Redis Max Memory (MiB)",
+            nameKey: "redisMaxMemory",
             children: handleSize(instance["redis6.x-maxmemory"]),
         },
         {
-            name: "Cache Max Buffer Size (MiB)",
+            nameKey: "cacheMaxBuffer",
             children: handleSize(
                 instance[
                     "redis6.x-client-output-buffer-limit-replica-hard-limit"
@@ -429,11 +429,11 @@ function elasticacheSpecificRows(instance: ElasticacheExt): Row[] {
             ),
         },
         {
-            name: "Redis Max Clients",
+            nameKey: "redisMaxClients",
             children: instance.max_clients,
         },
         {
-            name: "Memcached Max Thread Count",
+            nameKey: "memcachedMaxThreads",
             children: instance["memcached1.6-num_threads"],
         },
     ];
@@ -442,30 +442,30 @@ function elasticacheSpecificRows(instance: ElasticacheExt): Row[] {
 export function elasticache(instance: Omit<EC2Instance, "pricing">): Table[] {
     return [
         {
-            name: "Compute",
+            nameKey: "compute",
             slug: "compute",
             rows: [
                 {
-                    name: "CPUs",
+                    nameKey: "cpus",
                     children: instance.vCPU,
                 },
                 {
-                    name: "Memory (GiB)",
+                    nameKey: "memoryGiB",
                     children: instance.memory,
                 },
                 {
-                    name: "Memory per vCPU (GiB)",
+                    nameKey: "memoryPerVCPU",
                     children: round(instance.memory / instance.vCPU),
                 },
                 ...elasticacheSpecificRows(instance as ElasticacheExt),
             ],
         },
         {
-            name: "Networking",
+            nameKey: "networking",
             slug: "Networking",
             rows: [
                 {
-                    name: "Network Performance (Gibps)",
+                    nameKey: "networkPerformance",
                     children: (instance.network_performance || "N/A")
                         .replace("Gigabit", "")
                         .trim(),
@@ -473,11 +473,11 @@ export function elasticache(instance: Omit<EC2Instance, "pricing">): Table[] {
             ],
         },
         {
-            name: "Amazon",
+            nameKey: "amazon",
             slug: "amazon",
             rows: [
                 {
-                    name: "Generation",
+                    nameKey: "generation",
                     children:
                         // @ts-expect-error: RDS specific
                         instance.currentGeneration === "Yes"
@@ -486,15 +486,15 @@ export function elasticache(instance: Omit<EC2Instance, "pricing">): Table[] {
                     bgStyled: true,
                 },
                 {
-                    name: "Instance Type",
+                    nameKey: "instanceType",
                     children: instance.instance_type,
                 },
                 {
-                    name: "Family",
+                    nameKey: "family",
                     children: instance.family || "N/A",
                 },
                 {
-                    name: "Name",
+                    nameKey: "name",
                     children: instance.pretty_name,
                 },
             ],

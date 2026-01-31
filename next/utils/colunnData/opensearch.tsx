@@ -9,6 +9,8 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import sortByInstanceType from "../sortByInstanceType";
+import { Locals } from "./ec2/columns";
+import { prefixWithLocale } from "@/utils/locale";
 
 type OpenSearchPricing = {
     [region: string]: {
@@ -61,18 +63,20 @@ export function makePrettyNames<V>(
         key: keyof typeof initialColumnsValue,
         label: string,
     ) => V,
+    locals?: Locals,
 ) {
+    const t = locals?.t;
     return [
-        makeColumnOption("pretty_name", "Name"),
-        makeColumnOption("instance_type", "API Name"),
-        makeColumnOption("compute_family", "Compute Family"),
-        makeColumnOption("memory", "Memory"),
-        makeColumnOption("vcpu", "vCPUs"),
-        makeColumnOption("storage", "Storage"),
-        makeColumnOption("ecu", "Elastic Compute Units"),
-        makeColumnOption("cost-ondemand", "On Demand Cost"),
-        makeColumnOption("cost-reserved", "Reserved Cost"),
-        makeColumnOption("generation", "Generation"),
+        makeColumnOption("pretty_name", t?.("columns.common.name") ?? "Name"),
+        makeColumnOption("instance_type", t?.("columns.common.apiName") ?? "API Name"),
+        makeColumnOption("compute_family", t?.("columns.common.computeFamily") ?? "Compute Family"),
+        makeColumnOption("memory", t?.("columns.common.memory") ?? "Memory"),
+        makeColumnOption("vcpu", t?.("columns.common.vCPUs") ?? "vCPUs"),
+        makeColumnOption("storage", t?.("columns.common.storage") ?? "Storage"),
+        makeColumnOption("ecu", t?.("columns.ec2.computeUnitsEcu") ?? "Elastic Compute Units"),
+        makeColumnOption("cost-ondemand", t?.("columns.pricing.onDemand") ?? "On Demand Cost"),
+        makeColumnOption("cost-reserved", t?.("columns.pricing.reserved") ?? "Reserved Cost"),
+        makeColumnOption("generation", t?.("columns.common.generation") ?? "Generation"),
     ] as const;
 }
 
@@ -129,18 +133,22 @@ export const columnsGen = (
         usdRate: number;
         cnyRate: number;
     },
-): ColumnDef<Instance>[] => [
+    locals?: Locals,
+): ColumnDef<Instance>[] => {
+    const t = locals?.t;
+    const locale = locals?.locale;
+    return [
     {
         accessorKey: "pretty_name",
         id: "pretty_name",
-        header: "Name",
+        header: t?.("columns.common.name") ?? "Name",
         sortingFn: "alphanumeric",
         filterFn: regex({ accessorKey: "pretty_name" }),
     },
     {
         accessorKey: "instance_type",
         id: "instance_type",
-        header: "API Name",
+        header: t?.("columns.common.apiName") ?? "API Name",
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.instance_type;
             const valueB = rowB.original.instance_type;
@@ -152,7 +160,7 @@ export const columnsGen = (
             return (
                 <RegionLinkPreloader
                     onClick={(e) => e.stopPropagation()}
-                    href={`/aws/opensearch/${value}`}
+                    href={prefixWithLocale(`/aws/opensearch/${value}`, locale ?? "en")}
                 >
                     {value}
                 </RegionLinkPreloader>
@@ -161,7 +169,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "family",
-        header: "Compute Family",
+        header: t?.("columns.common.computeFamily") ?? "Compute Family",
         size: 150,
         id: "compute_family",
         sortingFn: "alphanumeric",
@@ -170,7 +178,7 @@ export const columnsGen = (
     {
         accessorKey: "memoryGib",
         id: "memory",
-        header: "Memory",
+        header: t?.("columns.common.memory") ?? "Memory",
         filterFn: expr,
         sortingFn: "alphanumeric",
         cell: (info) => {
@@ -183,26 +191,26 @@ export const columnsGen = (
         id: "vcpu",
         filterFn: expr,
         sortingFn: "alphanumeric",
-        header: "vCPUs",
+        header: t?.("columns.common.vCPUs") ?? "vCPUs",
     },
     {
         accessorKey: "storage",
         id: "storage",
-        header: "Storage",
+        header: t?.("columns.common.storage") ?? "Storage",
         filterFn: expr,
         sortingFn: "alphanumeric",
     },
     {
         accessorKey: "ecu",
         id: "ecu",
-        header: "Elastic Compute Units",
+        header: t?.("columns.ec2.computeUnitsEcu") ?? "Elastic Compute Units",
         sortingFn: "alphanumeric",
         filterFn: expr,
     },
     {
         accessorKey: "pricing",
         id: "cost-ondemand",
-        header: "On Demand Cost",
+        header: t?.("columns.pricing.onDemand") ?? "On Demand Cost",
         sortingFn: "alphanumeric",
         ...getPricingSorter(
             selectedRegion,
@@ -215,7 +223,7 @@ export const columnsGen = (
     {
         accessorKey: "pricing",
         id: "cost-reserved",
-        header: "Reserved Cost",
+        header: t?.("columns.pricing.reserved") ?? "Reserved Cost",
         sortingFn: "alphanumeric",
         ...getPricingSorter(
             selectedRegion,
@@ -228,7 +236,7 @@ export const columnsGen = (
     {
         accessorKey: "currentGeneration",
         id: "generation",
-        header: "Generation",
+        header: t?.("columns.common.generation") ?? "Generation",
         sortingFn: "alphanumeric",
         ...makeCellWithRegexSorter("currentGeneration", (info) => {
             if (info.getValue() === "Yes") return "current";
@@ -236,3 +244,4 @@ export const columnsGen = (
         }),
     },
 ];
+};

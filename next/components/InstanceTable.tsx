@@ -33,6 +33,8 @@ import SortToggle from "./SortToggle";
 import * as columnData from "@/utils/colunnData";
 import { usePathname } from "next/navigation";
 import DragDetector from "./DragDetector";
+import { useColumnTranslations } from "@/utils/useColumnTranslations";
+import { stripLocaleFromPath, getLocaleFromPath } from "@/utils/locale";
 
 export type AtomKeyWhereInstanceIs<Instance> = {
     [AtomKey in keyof typeof columnData]: (typeof columnData)[AtomKey]["columnsGen"] extends (
@@ -83,7 +85,10 @@ export default function InstanceTable<
     columnAtomKey,
     ecuRename,
 }: InstanceTableProps<Instance>) {
-    const pathname = usePathname();
+    const rawPathname = usePathname();
+    // Strip locale from pathname for state keys so state is shared across locales
+    const pathname = stripLocaleFromPath(rawPathname);
+    const locale = getLocaleFromPath(rawPathname);
     const [columnVisibilityState] = useColumnVisibility(pathname);
     const [searchTerm] = useSearchTerm(pathname);
     const [selectedRegion] = useSelectedRegion(pathname);
@@ -96,6 +101,7 @@ export default function InstanceTable<
     const [sorting, setSorting] = useSorting(pathname);
     const [currency] = useCurrency(pathname);
     const conversionRate = currencyRateAtom.use();
+    const t = useColumnTranslations();
 
     const columns = columnData[columnAtomKey].columnsGen(
         selectedRegion,
@@ -107,6 +113,7 @@ export default function InstanceTable<
             usdRate: conversionRate.usd,
             cnyRate: conversionRate.cny,
         },
+        { t, locale },
     );
     for (const col of columns) {
         col.sortUndefined = "last";

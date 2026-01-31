@@ -1,0 +1,49 @@
+{
+  "search": "検索...",
+  "clearFilters": "フィルターをクリア",
+  "filters": "フィルター",
+  "columns": "列",
+  "region": "リージョン",
+  "pricingUnit": "料金単位",
+  "cost": "コスト",
+  "reserved": "リザーブド",
+  "currency": "通貨",
+  "os": "オペレーティングシステム",
+  "duration": "期間",
+  "reservedTerm": "予約期間",
+  "durations": {
+    "ondemand": "オンデマンド",
+    "reserved1yr": "1年予約",
+    "reserved3yr": "3年予約",
+    "spot": "スポット"
+  },
+  "compare": "比較",
+  "endCompare": "比較を終了",
+  "selected": "選択済み",
+  "showAll": "すべて表示",
+  "hideAll": "すべて非表示",
+  "select": "選択...",
+  "searchLabel": "{label}を検索...",
+  "noOptionsFound": "オプションが見つかりません。",
+  "searchColumns": "列を検索...",
+  "noColumnsFound": "列が見つかりません。",
+  "selectAll": "すべて選択",
+  "selectDefaults": "デフォルトを選択",
+  "regionGroups": {
+    "frequentlyUsed": "よく使用",
+    "chinaCloudRegions": "中国クラウドリージョン",
+    "mainRegions": "メインリージョン",
+    "localZones": "ローカルゾーン",
+    "wavelengthZones": "Wavelength ゾーン"
+  },
+  "export": {
+    "export": "エクスポート",
+    "downloadCsv": "CSV をダウンロード",
+    "copyCsv": "CSV をコピー",
+    "copyTsv": "TSV をコピー",
+    "copyMarkdown": "Markdown テーブルをコピー",
+    "csvCopied": "CSV をクリップボードにコピーしました",
+    "tsvCopied": "TSV をクリップボードにコピーしました",
+    "markdownCopied": "Markdown テーブルをクリップボードにコピーしました"
+  }
+}
