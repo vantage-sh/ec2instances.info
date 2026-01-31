@@ -1,6 +1,7 @@
 import { Instance } from "@/utils/colunnData/opensearch";
 import generateOpensearchTables from "@/utils/generateOpensearchTables";
 import generateHalfPricing from "./generateHalfPricing";
+import { getTableName } from "@/utils/tableTranslations";
 
 function generateDescription(instance: Instance, ondemandCost: string) {
     return `The ${instance.instance_type} instance is in the ${instance.family} family and it has ${instance.vcpu} vCPUs, ${instance.memory} GiB of memory starting at $${ondemandCost} per hour.`;
@@ -9,9 +10,9 @@ function generateDescription(instance: Instance, ondemandCost: string) {
 export default function generateOpensearchMarkdown(instance: Instance) {
     const tableData = generateOpensearchTables(instance)
         .map(
-            (t) => `## ${t.name}
+            (t) => `## ${getTableName(t.nameKey)}
 
-${t.rows.map((r) => `- ${r.name}: ${r.children}`).join("\n")}
+${t.rows.map((r) => `- ${getTableName(r.nameKey)}: ${r.children}`).join("\n")}
 `,
         )
         .join("\n");

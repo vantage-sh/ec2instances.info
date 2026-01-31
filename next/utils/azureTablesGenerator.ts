@@ -10,142 +10,142 @@ export default function azureTablesGenerator(
 ): Table[] {
     return [
         {
-            name: "Compute",
+            nameKey: "compute",
             slug: "Compute",
             rows: [
                 {
-                    name: "vCPUs",
+                    nameKey: "vCPUs",
                     children: instance.vcpu,
                 },
                 {
-                    name: "Memory (GiB)",
+                    nameKey: "memoryGiB",
                     children: instance.memory,
                 },
                 {
-                    name: "Memory per vCPU (GiB)",
+                    nameKey: "memoryPerVCPU",
                     children: round(instance.memory / instance.vcpu),
                 },
                 {
-                    name: "CPU Architecture",
+                    nameKey: "cpuArchitecture",
                     children: instance.arch?.[0] || "Unknown",
                 },
                 {
-                    name: "GPU",
+                    nameKey: "gpu",
                     children: instance.GPU ?? 0,
                     bgStyled: true,
                 },
                 {
-                    name: "Capacity Support",
+                    nameKey: "capacitySupport",
                     children: instance.capacity_support ?? false,
                     bgStyled: true,
                 },
                 {
-                    name: "VM Generations Supported",
+                    nameKey: "vmGenerations",
                     children: instance.hyperv_generations,
                 },
                 {
-                    name: "Low Priority",
+                    nameKey: "lowPriority",
                     children: instance.low_priority ?? false,
                     bgStyled: true,
                 },
                 {
-                    name: "vCPUs per Physical Core",
+                    nameKey: "vcpusPerCore",
                     children: instance.vcpus_percore,
                 },
                 {
-                    name: "VM Deployment Method",
+                    nameKey: "vmDeployment",
                     children: instance.vm_deployment,
                 },
             ],
         },
         {
-            name: "Networking",
+            nameKey: "networking",
             slug: "Networking",
             rows: [
                 {
-                    name: "Accelerated Networking",
+                    nameKey: "acceleratedNetworking",
                     children: instance.accelerated_networking ?? false,
                     bgStyled: true,
                 },
             ],
         },
         {
-            name: "Storage",
+            nameKey: "storage",
             slug: "Storage",
             rows: [
                 {
-                    name: "Local Temp Storage (GiB)",
+                    nameKey: "localTempStorage",
                     children: instance.size ?? 0,
                 },
                 {
-                    name: "Cached Disk Size with Host Caching (GiB)",
+                    nameKey: "cachedDiskSize",
                     children: instance.cached_disk ?? 0,
                 },
                 {
-                    name: "Cached/Temp Storage Throughput (IOPS)",
+                    nameKey: "cachedTempStorageIops",
                     children: instance.iops ?? 0,
                 },
                 {
-                    name: "Cached/Temp Storage Read/Write Throughput (MBps)",
+                    nameKey: "cachedTempStorageThroughput",
                     children: instance.read_io ?? 0,
                 },
                 {
-                    name: "Uncached Disk Throughput (IOPS)",
+                    nameKey: "uncachedDiskIops",
                     children: instance.uncached_disk ?? 0,
                 },
                 {
-                    name: "Uncached Disk Read/Write Throughput (MBps)",
+                    nameKey: "uncachedDiskThroughput",
                     children: instance.uncached_disk_io ?? 0,
                 },
                 {
-                    name: "Premium I/O",
+                    nameKey: "premiumIo",
                     children: instance.premium_io ?? false,
                     bgStyled: true,
                 },
                 {
-                    name: "Ultra Disks Supported",
+                    nameKey: "ultraDisks",
                     children: instance.ultra_ssd ?? false,
                     bgStyled: true,
                 },
                 {
-                    name: "Encryption",
+                    nameKey: "encryption",
                     children: instance.encryption ?? false,
                     bgStyled: true,
                 },
                 {
-                    name: "Memory Maintenance",
+                    nameKey: "memoryMaintenance",
                     children: instance.memory_maintenance ?? false,
                     bgStyled: true,
                 },
             ],
         },
         {
-            name: "Azure",
+            nameKey: "azure",
             slug: "Azure",
             rows: [
                 {
-                    name: "Instance Type",
+                    nameKey: "instanceType",
                     children: instance.instance_type,
                 },
                 {
-                    name: "Instance Name",
+                    nameKey: "instanceName",
                     children: instance.pretty_name_azure,
                 },
                 {
-                    name: "Name",
+                    nameKey: "name",
                     children: instance.pretty_name,
                 },
                 {
-                    name: "Family",
+                    nameKey: "family",
                     children: instance.instance_type.split("-")[0],
                 },
                 {
-                    name: "Confidential",
+                    nameKey: "confidential",
                     children: instance.confidential ?? false,
                     bgStyled: true,
                 },
                 {
-                    name: "RDMA",
+                    nameKey: "rdma",
                     children: instance.rdma ?? false,
                     bgStyled: true,
                 },

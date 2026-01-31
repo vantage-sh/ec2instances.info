@@ -22,6 +22,9 @@ import { usePathname } from "next/navigation";
 import { resetGlobalState } from "@/utils/useGlobalStateValue";
 import type { CurrencyItem } from "@/utils/loadCurrencies";
 import { browserBlockingLocalStorage } from "@/utils/abGroup";
+import { useTranslations } from "gt-next";
+import { useColumnTranslations } from "@/utils/useColumnTranslations";
+import { stripLocaleFromPath } from "@/utils/locale";
 
 interface FiltersProps<DataKey extends keyof typeof columnData> {
     regions: Region;
@@ -45,7 +48,11 @@ export default function Filters<DataKey extends keyof typeof columnData>({
     reservedLabel,
     hideEcu,
 }: FiltersProps<DataKey>) {
-    const pathname = usePathname();
+    const rawPathname = usePathname();
+    // Strip locale from pathname for state keys so state is shared across locales
+    const pathname = stripLocaleFromPath(rawPathname);
+    const t = useTranslations();
+    const columnT = useColumnTranslations();
     const [columnVisibility, setColumnVisibility] =
         useColumnVisibility(pathname);
     const [searchTerm, setSearchTerm] = useSearchTerm(pathname);
@@ -102,7 +109,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                 return {
                     value: code,
                     label: name,
-                    group: "Frequently Used",
+                    group: t("filters.regionGroups.frequentlyUsed"),
                 };
             })
             .filter((o) => o !== undefined);
@@ -111,7 +118,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
             ([code, name]) => ({
                 value: code,
                 label: name,
-                group: "China Cloud Regions",
+                group: t("filters.regionGroups.chinaCloudRegions"),
             }),
         );
 
@@ -119,7 +126,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
             ([code, name]) => ({
                 value: code,
                 label: name,
-                group: "Main Regions",
+                group: t("filters.regionGroups.mainRegions"),
             }),
         );
 
@@ -127,7 +134,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
             ([code, name]) => ({
                 value: code,
                 label: name,
-                group: "Local Zones",
+                group: t("filters.regionGroups.localZones"),
             }),
         );
 
@@ -135,7 +142,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
             ([code, name]) => ({
                 value: code,
                 label: name,
-                group: "Wavelength Zones",
+                group: t("filters.regionGroups.wavelengthZones"),
             }),
         );
 
@@ -146,7 +153,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
             localZoneOptions,
             wavelengthOptions,
         ] as const;
-    }, [regions, frequentlyUsedRegions]);
+    }, [regions, frequentlyUsedRegions, t]);
 
     const columnOptions = useMemo(() => {
         function makeColumnOption<Key extends keyof typeof columnVisibility>(
@@ -162,8 +169,8 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                     columnData[columnAtomKey].initialColumnsValue[key],
             };
         }
-        return columnData[columnAtomKey].makePrettyNames(makeColumnOption);
-    }, [JSON.stringify(columnVisibility)]);
+        return columnData[columnAtomKey].makePrettyNames(makeColumnOption, { t: columnT, locale: "" });
+    }, [JSON.stringify(columnVisibility), columnT]);
 
     let pricingUnitOptionsCpy = pricingUnitOptions;
     if (ecuRename) {
@@ -189,7 +196,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
             <div className="d-flex align-items-md-end gap-md-4 gap-4 flex-md-row flex-column">
                 <div className="d-flex gap-4">
                     <FilterDropdown
-                        label="Region"
+                        label={t("filters.region")}
                         value={selectedRegion}
                         onChange={(v) => {
                             setSelectedRegion(v);
@@ -204,35 +211,39 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                         ]}
                         hideSearch={false}
                         small={true}
+                        t={t}
                     />
                     <FilterDropdown
-                        label="Pricing Unit"
+                        label={t("filters.pricingUnit")}
                         value={pricingUnit}
                         onChange={(v) => setPricingUnit(v as PricingUnit)}
                         options={pricingUnitOptionsCpy}
                         hideSearch={true}
                         small={true}
+                        t={t}
                     />
                     <FilterDropdown
-                        label="Cost"
+                        label={t("filters.cost")}
                         value={duration}
                         onChange={(v) => setDuration(v as CostDuration)}
                         options={durationOptions}
                         hideSearch={true}
                         small={true}
+                        t={t}
                     />
                     {reservedTermOptions.length > 0 && (
                         <FilterDropdown
-                            label={reservedLabel ?? "Reserved"}
+                            label={reservedLabel ?? t("filters.reserved")}
                             value={reservedTerm}
                             onChange={(v) => setReservedTerm(v)}
                             options={reservedTermOptions}
                             hideSearch={true}
                             small={true}
+                            t={t}
                         />
                     )}
                     <FilterDropdown
-                        label="Currency"
+                        label={t("filters.currency")}
                         value={currency}
                         onChange={(v) => setCurrency(v)}
                         options={currencies.map((c) => ({
@@ -241,6 +252,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                         }))}
                         hideSearch={false}
                         small={true}
+                        t={t}
                     />
                     <ColumnFilter<DataKey>
                         // @ts-expect-error: TS doesn't like this for some reason.
@@ -250,6 +262,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                                 return { ...o, [k]: v };
                             });
                         }}
+                        t={t}
                     />
                 </div>
                 <div className="d-flex gap-2">
@@ -258,7 +271,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                             className="btn bg-red-600 text-white disabled:opacity-50 self-end"
                             onClick={() => setCompareOn(false)}
                         >
-                            End Compare
+                            {t("filters.endCompare")}
                         </button>
                     ) : (
                         <button
@@ -266,14 +279,14 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                             className="btn btn-purple disabled:opacity-50 self-end"
                             onClick={() => setCompareOn(true)}
                         >
-                            Compare
+                            {t("filters.compare")}
                         </button>
                     )}
                     <button
                         className="btn text-sm btn-outline-secondary btn-clear self-end"
                         onClick={() => resetGlobalState(pathname)}
                     >
-                        Clear Filters
+                        {t("filters.clearFilters")}
                     </button>
                 </div>
             </div>
@@ -285,7 +298,7 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                             id="fullsearch"
                             type="text"
                             className="form-control not-xl:hidden not-2xl:w-25 p-1 border-gray-3 border rounded-md bg-background text-foreground"
-                            placeholder="Search..."
+                            placeholder={t("filters.search")}
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />

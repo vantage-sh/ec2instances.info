@@ -1,0 +1,18 @@
+{
+  "hourly": "לשעה",
+  "monthly": "לחודש",
+  "yearly": "לשנה",
+  "perHour": "/שעה",
+  "perMonth": "/חודש",
+  "perYear": "/שנה",
+  "onDemand": "לפי דרישה",
+  "reserved": "שמור",
+  "spot": "ספוט",
+  "savingsPlan": "תוכנית חיסכון",
+  "noUpfront": "ללא תשלום מראש",
+  "partialUpfront": "תשלום מראש חלקי",
+  "allUpfront": "תשלום מראש מלא",
+  "convertible": "ניתן להמרה",
+  "standard": "סטנדרטי",
+  "priceUnavailable": "לא זמין"
+}

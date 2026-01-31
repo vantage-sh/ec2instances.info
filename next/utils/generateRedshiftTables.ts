@@ -8,19 +8,19 @@ function round(value: number) {
 export default function generateRedshiftTables(instance: Instance): Table[] {
     return [
         {
-            name: "Compute",
+            nameKey: "compute",
             slug: "Compute",
             rows: [
                 {
-                    name: "CPUs",
+                    nameKey: "cpus",
                     children: instance.vcpu,
                 },
                 {
-                    name: "Memory",
+                    nameKey: "memory",
                     children: instance.memory,
                 },
                 {
-                    name: "Memory per vCPU (GiB)",
+                    nameKey: "memoryPerVCPU",
                     children: (() => {
                         const n1 = Number(instance.memory);
                         const n2 = Number(instance.vcpu);
@@ -31,47 +31,47 @@ export default function generateRedshiftTables(instance: Instance): Table[] {
                     })(),
                 },
                 {
-                    name: "Default Slices per Node",
+                    nameKey: "slicesPerNode",
                     children: instance.slices_per_node,
                 },
                 {
-                    name: "Node Range",
+                    nameKey: "nodeRange",
                     children: instance.node_range,
                 },
             ],
         },
         {
-            name: "Storage",
+            nameKey: "storage",
             slug: "Storage",
             rows: [
                 {
-                    name: "Storage",
+                    nameKey: "storageField",
                     children: instance.storage,
                 },
                 {
-                    name: "I/O GiBps",
+                    nameKey: "ioGibps",
                     children: instance.io,
                 },
                 {
-                    name: "ECU",
+                    nameKey: "ecu",
                     children: instance.ecu,
                 },
                 {
-                    name: "Max Storage per Node",
+                    nameKey: "maxStoragePerNode",
                     children: instance.storage_per_node,
                 },
                 {
-                    name: "Max Storage Capacity",
+                    nameKey: "maxStorageCapacity",
                     children: instance.storage_capacity,
                 },
             ],
         },
         {
-            name: "Amazon",
+            nameKey: "amazon",
             slug: "Amazon",
             rows: [
                 {
-                    name: "Generation",
+                    nameKey: "generation",
                     children:
                         instance.currentGeneration === "Yes"
                             ? "current"
@@ -79,15 +79,15 @@ export default function generateRedshiftTables(instance: Instance): Table[] {
                     bgStyled: true,
                 },
                 {
-                    name: "Instance Type",
+                    nameKey: "instanceType",
                     children: instance.instance_type,
                 },
                 {
-                    name: "Family",
+                    nameKey: "family",
                     children: instance.family,
                 },
                 {
-                    name: "Name",
+                    nameKey: "name",
                     children: instance.pretty_name,
                 },
             ],

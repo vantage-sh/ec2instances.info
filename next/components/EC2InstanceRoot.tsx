@@ -13,11 +13,16 @@ import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeed
 import { MarketingSchema } from "@/schemas/marketing";
 import type { CurrencyItem } from "@/utils/loadCurrencies";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { getLocaleFromPath } from "@/utils/locale";
+import { useTranslations } from "gt-next";
+
+const LOW_MEDIUM_HIGH = /(low|moderate|high)/gi;
 
 interface InstanceRootProps {
     rainbowTable: string[];
     compressedInstance: EC2Instance;
-    description: string;
+    ondemandCost: string;
     bestOfVariants: {
         [key: string]: string;
     };
@@ -40,7 +45,7 @@ interface InstanceRootProps {
 export default function EC2InstanceRoot({
     rainbowTable,
     compressedInstance,
-    description,
+    ondemandCost,
     bestOfVariants,
     allOfInstanceType,
     regions,
@@ -63,6 +68,32 @@ export default function EC2InstanceRoot({
         instance: EC2Instance,
         platform?: string,
     ) => tablesGenerator.Table[];
+    const pathname = usePathname();
+    const locale = getLocaleFromPath(pathname);
+    const localePrefix = `/${locale}`;
+    const t = useTranslations();
+
+    // Generate translated description
+    let bandwidth = "";
+    if (compressedInstance.network_performance) {
+        if (compressedInstance.network_performance.match(LOW_MEDIUM_HIGH)) {
+            bandwidth = t("instancePage.bandwidthPerformance", {
+                performance: compressedInstance.network_performance.toLowerCase(),
+            });
+        } else {
+            bandwidth = t("instancePage.bandwidthGibps", {
+                bandwidth: compressedInstance.network_performance.toLowerCase().replace("gigabit", "").trim(),
+            });
+        }
+    }
+    const description = t("instancePage.description", {
+        instanceType: compressedInstance.instance_type,
+        family: compressedInstance.family,
+        vCPUs: compressedInstance.vCPU,
+        memory: compressedInstance.memory,
+        bandwidth,
+        cost: `$${ondemandCost}`,
+    });
 
     return (
         <MarketingWrapper
@@ -72,11 +103,11 @@ export default function EC2InstanceRoot({
             <main className="my-4 px-4 not-md:w-screen">
                 <InstanceBreadcrumbs
                     crumbs={[
-                        { name: "AWS", href: "/" },
-                        { name: typeName, href: tablePath },
+                        { name: "AWS", href: localePrefix },
+                        { name: typeName, href: `${localePrefix}${tablePath === "/" ? "" : tablePath}` },
                         {
                             name: compressedInstance.instance_type,
-                            href: `/${compressedInstance.instance_type}`,
+                            href: `${localePrefix}/${compressedInstance.instance_type}`,
                         },
                     ]}
                 />
@@ -105,18 +136,17 @@ export default function EC2InstanceRoot({
                         <FamilySize
                             allOfInstanceType={allOfInstanceType}
                             instanceName={compressedInstance.instance_type}
-                            pathPrefix={pathPrefix}
-                            tablePath={tablePath}
+                            pathPrefix={`${localePrefix}${pathPrefix}`}
+                            tablePath={`${localePrefix}${tablePath === "/" ? "" : tablePath}`}
                             pathSuffix={pathSuffix}
                         />
                         <InstanceVariants
                             bestOfVariants={bestOfVariants}
-                            pathPrefix={pathPrefix}
+                            pathPrefix={`${localePrefix}${pathPrefix}`}
                             pathSuffix={pathSuffix}
                         />
                         <p className="mt-6">
-                            Having trouble making sense of your EC2 costs? Check
-                            out{" "}
+                            {t("instancePage.ec2CostHelp")}{" "}
                             <a
                                 target="_blank"
                                 className="text-purple-1 hover:text-purple-0 underline"
@@ -124,7 +154,7 @@ export default function EC2InstanceRoot({
                             >
                                 cur.vantage.sh
                             </a>{" "}
-                            for an AWS billing code lookup tool.
+                            {t("instancePage.ec2CostHelpSuffix")}
                         </p>
                     </div>
                     <div className="not-xl:flex-grow xl:w-xl 2xl:w-2xl md:mt-0 mt-4">

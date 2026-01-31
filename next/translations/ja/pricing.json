@@ -1,0 +1,18 @@
+{
+  "hourly": "時間単位",
+  "monthly": "月単位",
+  "yearly": "年単位",
+  "perHour": "/時間",
+  "perMonth": "/月",
+  "perYear": "/年",
+  "onDemand": "オンデマンド",
+  "reserved": "予約",
+  "spot": "スポット",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "前払いなし",
+  "partialUpfront": "一部前払い",
+  "allUpfront": "全額前払い",
+  "convertible": "コンバーティブル",
+  "standard": "スタンダード",
+  "priceUnavailable": "N/A"
+}

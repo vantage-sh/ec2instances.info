@@ -5,40 +5,52 @@ import { buttonVariants } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { translationToolDetected } from "@/state";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
+import { useTranslations } from "gt-next";
+import { stripLocaleFromPath } from "@/utils/locale";
 
-const navItems = [
+type NavItem = {
+    labelKey: string;
+    href: string;
+    children?: {
+        labelKey: string;
+        href: string;
+    }[];
+};
+
+const navItems: NavItem[] = [
     {
-        label: "AWS",
+        labelKey: "nav.aws",
         href: "/",
         children: [
             {
-                label: "EC2",
+                labelKey: "nav.ec2",
                 href: "/",
             },
             {
-                label: "RDS",
+                labelKey: "nav.rds",
                 href: "/rds",
             },
             {
-                label: "ElastiCache",
+                labelKey: "nav.elasticache",
                 href: "/cache",
             },
             {
-                label: "Redshift",
+                labelKey: "nav.redshift",
                 href: "/redshift",
             },
             {
-                label: "OpenSearch",
+                labelKey: "nav.opensearch",
                 href: "/opensearch",
             },
         ],
     },
     {
-        label: "Azure",
+        labelKey: "nav.azure",
         href: "/azure",
     },
     {
-        label: "GCP",
+        labelKey: "nav.gcp",
         href: "/gcp",
     },
 ];
@@ -77,26 +89,28 @@ function TranslationToolDetector({
 }
 
 type NavItemProps = {
-    item: {
-        label: string;
-        href: string;
-        children?: {
-            label: string;
-            href: string;
-        }[];
-    };
+    item: NavItem;
     currentPath: string;
+    locale: string;
+    t: (key: string) => string;
 };
 
-function NavItem({ item, currentPath }: NavItemProps) {
+function NavItem({ item, currentPath, locale, t }: NavItemProps) {
     let anySelected = false;
+    const label = t(item.labelKey);
+    // Strip locale from currentPath for comparison
+    const pathWithoutLocale = stripLocaleFromPath(currentPath);
+
     const children =
         item.children &&
         item.children.map((child) => {
+            const childLabel = t(child.labelKey);
             const selected =
-                currentPath === child.href ||
-                currentPath.includes(child.label.toLowerCase());
+                pathWithoutLocale === child.href ||
+                pathWithoutLocale.includes(childLabel.toLowerCase());
             if (selected) anySelected = true;
+            // Prefix href with locale
+            const localizedHref = `/${locale}${child.href === "/" ? "" : child.href}`;
             return (
                 <TranslationFriendlyLink
                     aria-current={selected}
@@ -105,29 +119,32 @@ function NavItem({ item, currentPath }: NavItemProps) {
                             ? "bg-white text-black font-semibold"
                             : "text-white"
                     }`}
-                    key={child.label}
-                    href={child.href}
+                    key={child.labelKey}
+                    href={localizedHref}
                 >
-                    {child.label}
+                    {childLabel}
                 </TranslationFriendlyLink>
             );
         });
     if (
         !anySelected &&
-        currentPath.startsWith(item.href) &&
+        pathWithoutLocale.startsWith(item.href) &&
         item.href !== "/"
     ) {
         anySelected = true;
     }
 
+    // Prefix href with locale
+    const localizedHref = `/${locale}${item.href === "/" ? "" : item.href}`;
+
     return (
         <div
             className="flex items-center justify-start gap-4 relative top-1.5 ml-2"
-            key={item.label}
+            key={item.labelKey}
         >
             <TranslationFriendlyLink
                 className="font-medium text-gray-4 text-sm"
-                href={item.href}
+                href={localizedHref}
                 aria-current={anySelected}
             >
                 <span
@@ -135,7 +152,7 @@ function NavItem({ item, currentPath }: NavItemProps) {
                         anySelected ? "font-bold text-white" : "text-white"
                     }
                 >
-                    {item.label}
+                    {label}
                 </span>
             </TranslationFriendlyLink>
             {children && (
@@ -147,14 +164,19 @@ function NavItem({ item, currentPath }: NavItemProps) {
     );
 }
 
-export default function TopNav() {
+type TopNavProps = {
+    locale?: string;
+};
+
+export default function TopNav({ locale = "en-GB" }: TopNavProps) {
     const currentPath = usePathname();
+    const t = useTranslations();
 
     return (
         <nav className="flex items-center justify-between bg-purple-brand h-[3rem] py-2 px-4 dark:bg-purple-dark">
             <div className="flex items-center justify-start gap-4">
                 <TranslationFriendlyLink
-                    href="/"
+                    href={`/${locale}`}
                     className="font-medium text-gray-4"
                 >
                     <div className="flex items-center justify-start gap-2">
@@ -186,20 +208,22 @@ export default function TopNav() {
                         </svg>
                         <div className="flex flex-col">
                             <span className="font-semibold text-white leading-5">
-                                Instances
+                                {t("nav.instances")}
                             </span>
                             <TranslationToolDetector
                                 className="text-xs italic text-white"
-                                text="Presented by Vantage"
+                                text={t("nav.presentedBy")}
                             />
                         </div>
                     </div>
                 </TranslationFriendlyLink>
                 {navItems.map((item) => (
                     <NavItem
-                        key={item.label}
+                        key={item.labelKey}
                         item={item}
                         currentPath={currentPath}
+                        locale={locale}
+                        t={t}
                     />
                 ))}
             </div>
@@ -226,7 +250,7 @@ export default function TopNav() {
                         <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
                         <rect x="2" y="4" width="20" height="16" rx="2" />
                     </svg>
-                    Get Notified
+                    {t("nav.getNotified")}
                 </TranslationFriendlyLink>
                 <TranslationFriendlyLink
                     href="https://instances-mcp.vantage.sh/?utm_campaign=Instances%20Blog%20Clicks&utm_source=nav"
@@ -255,7 +279,7 @@ export default function TopNav() {
                         <path d="M4 16h.01" />
                         <path d="M4 8h.01" />
                     </svg>
-                    MCP
+                    {t("nav.mcp")}
                 </TranslationFriendlyLink>
                 <TranslationFriendlyLink
                     href="https://github.com/vantage-sh/ec2instances.info"
@@ -283,8 +307,9 @@ export default function TopNav() {
                             </clipPath>
                         </defs>
                     </svg>
-                    Star
+                    {t("nav.star")}
                 </TranslationFriendlyLink>
+                <LocaleSwitcher locale={locale} />
             </div>
         </nav>
     );

@@ -1,0 +1,49 @@
+{
+  "search": "Sök...",
+  "clearFilters": "Rensa filter",
+  "filters": "Filter",
+  "columns": "Kolumner",
+  "region": "Region",
+  "pricingUnit": "Prisenhet",
+  "cost": "Kostnad",
+  "reserved": "Reserverad",
+  "currency": "Valuta",
+  "os": "Operativsystem",
+  "duration": "Varaktighet",
+  "reservedTerm": "Reserverad period",
+  "durations": {
+    "ondemand": "På begäran",
+    "reserved1yr": "1 år reserverad",
+    "reserved3yr": "3 år reserverad",
+    "spot": "Spot"
+  },
+  "compare": "Jämför",
+  "endCompare": "Avsluta jämförelse",
+  "selected": "valda",
+  "showAll": "Visa alla",
+  "hideAll": "Dölj alla",
+  "select": "Välj...",
+  "searchLabel": "Sök {label}...",
+  "noOptionsFound": "Inga alternativ hittades.",
+  "searchColumns": "Sök kolumner...",
+  "noColumnsFound": "Inga kolumner hittades.",
+  "selectAll": "Välj alla",
+  "selectDefaults": "Välj standard",
+  "regionGroups": {
+    "frequentlyUsed": "Ofta använda",
+    "chinaCloudRegions": "Kina molnregioner",
+    "mainRegions": "Huvudregioner",
+    "localZones": "Lokala zoner",
+    "wavelengthZones": "Wavelength zoner"
+  },
+  "export": {
+    "export": "Exportera",
+    "downloadCsv": "Ladda ner CSV",
+    "copyCsv": "Kopiera CSV",
+    "copyTsv": "Kopiera TSV",
+    "copyMarkdown": "Kopiera Markdown-tabell",
+    "csvCopied": "CSV kopierad till urklipp",
+    "tsvCopied": "TSV kopierad till urklipp",
+    "markdownCopied": "Markdown-tabell kopierad till urklipp"
+  }
+}

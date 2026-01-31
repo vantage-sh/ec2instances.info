@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "データの読み込みに失敗しました",
+  "tryAgain": "再試行",
+  "networkError": "ネットワークエラー。接続を確認してください。",
+  "unknownError": "不明なエラーが発生しました"
+}

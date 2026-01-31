@@ -1,0 +1,18 @@
+{
+  "hourly": "每小時",
+  "monthly": "每月",
+  "yearly": "每年",
+  "perHour": "/小時",
+  "perMonth": "/月",
+  "perYear": "/年",
+  "onDemand": "隨需",
+  "reserved": "預留",
+  "spot": "競價",
+  "savingsPlan": "節省方案",
+  "noUpfront": "無預付",
+  "partialUpfront": "部分預付",
+  "allUpfront": "全額預付",
+  "convertible": "可轉換",
+  "standard": "標準",
+  "priceUnavailable": "不可用"
+}

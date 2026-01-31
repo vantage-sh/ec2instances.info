@@ -29,11 +29,13 @@ interface ColumnOption<Key extends keyof typeof columnData> {
 interface ColumnFilterProps<Key extends keyof typeof columnData> {
     columns: ColumnOption<Key>[];
     onColumnVisibilityChange: (key: Key, visible: boolean) => void;
+    t?: (key: string) => string;
 }
 
 export default function ColumnFilter<Key extends keyof typeof columnData>({
     columns,
     onColumnVisibilityChange,
+    t,
 }: ColumnFilterProps<Key>) {
     const buttonId = React.useId();
     const [open, setOpen] = React.useState(false);
@@ -60,10 +62,12 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
         }
     }, [columns, onColumnVisibilityChange]);
 
+    const columnsLabel = t ? t("filters.columns") : "Columns";
+
     return (
         <div className="relative flex flex-col gap-0.5 justify-center">
             <label htmlFor={buttonId} className="text-xs text-gray-1">
-                Columns
+                {columnsLabel}
             </label>
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
@@ -74,19 +78,23 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                         id={buttonId}
                         className="w-[200px] justify-between"
                     >
-                        Columns
+                        {columnsLabel}
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent sideOffset={-36} align="start" className="p-0">
                     <Command>
                         <CommandTraditionalInput
-                            placeholder="Search columns..."
+                            placeholder={
+                                t ? t("filters.searchColumns") : "Search columns..."
+                            }
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                         <CommandList>
-                            <CommandEmpty>No columns found.</CommandEmpty>
+                            <CommandEmpty>
+                                {t ? t("filters.noColumnsFound") : "No columns found."}
+                            </CommandEmpty>
                             <CommandGroup>
                                 {filteredColumns.map((column) => {
                                     const visible =
@@ -127,7 +135,7 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                                 size="sm"
                                 variant={"outline"}
                             >
-                                Select All
+                                {t ? t("filters.selectAll") : "Select All"}
                             </Button>
                             <Button
                                 className="cursor-pointer"
@@ -135,7 +143,7 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                                 size="sm"
                                 variant={"outline"}
                             >
-                                Select Defaults
+                                {t ? t("filters.selectDefaults") : "Select Defaults"}
                             </Button>
                         </div>
                     </div>

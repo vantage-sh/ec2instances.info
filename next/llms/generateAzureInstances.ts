@@ -4,6 +4,7 @@ import { azureInstances } from "./loadedData";
 import { AzureInstance } from "@/utils/colunnData/azure";
 import azureTablesGenerator from "@/utils/azureTablesGenerator";
 import generateAzureDescription from "@/utils/generateAzureDescription";
+import { getTableName } from "@/utils/tableTranslations";
 
 const tableColumns = [
     ["", "OS"],
@@ -90,9 +91,9 @@ function generateInstanceMarkdown(
 
     const tableData = tables
         .map(
-            (table) => `## ${table.name}
+            (table) => `## ${getTableName(table.nameKey)}
 
-${table.rows.map((row) => `- ${row.name}: ${row.children}`).join("\n")}
+${table.rows.map((row) => `- ${getTableName(row.nameKey)}: ${row.children}`).join("\n")}
 `,
         )
         .join("\n");

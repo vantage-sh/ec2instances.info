@@ -4,6 +4,7 @@ import { gcpInstances } from "./loadedData";
 import { GCPInstance } from "@/utils/colunnData/gcp";
 import gcpTablesGenerator from "@/utils/gcpTablesGenerator";
 import generateGcpDescription from "@/utils/generateGcpDescription";
+import { getTableName } from "@/utils/tableTranslations";
 
 const tableColumns = [
     ["", "OS"],
@@ -73,9 +74,9 @@ function generateInstanceMarkdown(description: string, instance: GCPInstance) {
 
     const tableData = tables
         .map(
-            (table) => `## ${table.name}
+            (table) => `## ${getTableName(table.nameKey)}
 
-${table.rows.map((row) => `- ${row.name}: ${row.children}`).join("\n")}
+${table.rows.map((row) => `- ${getTableName(row.nameKey)}: ${row.children}`).join("\n")}
 `,
         )
         .join("\n");

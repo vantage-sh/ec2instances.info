@@ -11,6 +11,9 @@ import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeed
 import { useMemo } from "react";
 import { MarketingSchema } from "@/schemas/marketing";
 import type { CurrencyItem } from "@/utils/loadCurrencies";
+import { usePathname } from "next/navigation";
+import { getLocaleFromPath } from "@/utils/locale";
+import { useTranslations } from "gt-next";
 
 type HalfPricing = {
     [region: string]: {
@@ -71,6 +74,10 @@ export default function HalfEC2Root<
         return remappedPricing;
     }, [instance.pricing]);
     const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
+    const pathname = usePathname();
+    const locale = getLocaleFromPath(pathname);
+    const localePrefix = `/${locale}`;
+    const t = useTranslations();
 
     return (
         <MarketingWrapper
@@ -80,11 +87,11 @@ export default function HalfEC2Root<
             <main className="my-4 px-4 not-md:w-screen">
                 <InstanceBreadcrumbs
                     crumbs={[
-                        { name: "AWS", href: "/" },
-                        { name: typeName, href: tablePath },
+                        { name: "AWS", href: localePrefix },
+                        { name: typeName, href: `${localePrefix}${tablePath === "/" ? "" : tablePath}` },
                         {
                             name: instance.instance_type,
-                            href: `/${instance.instance_type}`,
+                            href: `${localePrefix}/${instance.instance_type}`,
                         },
                     ]}
                 />
@@ -114,13 +121,12 @@ export default function HalfEC2Root<
                         <FamilySize
                             allOfInstanceType={allOfInstanceType}
                             instanceName={instance.instance_type}
-                            pathPrefix={pathPrefix}
-                            tablePath={tablePath}
+                            pathPrefix={`${localePrefix}${pathPrefix}`}
+                            tablePath={`${localePrefix}${tablePath === "/" ? "" : tablePath}`}
                             pathSuffix={pathSuffix}
                         />
                         <p className="mt-6">
-                            Having trouble making sense of your EC2 costs? Check
-                            out{" "}
+                            {t("instancePage.ec2CostHelp")}{" "}
                             <a
                                 target="_blank"
                                 className="text-purple-1 hover:text-purple-0 underline"
@@ -128,7 +134,7 @@ export default function HalfEC2Root<
                             >
                                 cur.vantage.sh
                             </a>{" "}
-                            for an AWS billing code lookup tool.
+                            {t("instancePage.ec2CostHelpSuffix")}
                         </p>
                     </div>
                     <div className="not-xl:flex-grow xl:w-xl 2xl:w-2xl md:mt-0 mt-4">

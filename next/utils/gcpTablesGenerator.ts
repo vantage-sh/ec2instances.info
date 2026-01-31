@@ -10,97 +10,97 @@ export default function gcpTablesGenerator(
 ): Table[] {
     return [
         {
-            name: "Compute",
+            nameKey: "compute",
             slug: "Compute",
             rows: [
                 {
-                    name: "vCPUs",
+                    nameKey: "vCPUs",
                     children: instance.vCPU,
                 },
                 {
-                    name: "Memory (GiB)",
+                    nameKey: "memoryGiB",
                     children: instance.memory,
                 },
                 {
-                    name: "Memory per vCPU (GiB)",
+                    nameKey: "memoryPerVCPU",
                     children: round(instance.memory / instance.vCPU),
                 },
                 {
-                    name: "Shared CPU",
+                    nameKey: "sharedCpu",
                     children: instance.shared_cpu,
                     bgStyled: true,
                 },
                 {
-                    name: "GPU",
+                    nameKey: "gpu",
                     children: instance.GPU ?? 0,
                     bgStyled: true,
                 },
                 {
-                    name: "GPU Model",
+                    nameKey: "gpuModel",
                     children: instance.GPU_model || "N/A",
                 },
                 {
-                    name: "GPU Memory (GiB)",
+                    nameKey: "gpuMemory",
                     children: instance.GPU_memory || 0,
                 },
                 {
-                    name: "Accelerator Type",
+                    nameKey: "acceleratorType",
                     children: instance.accelerator_type || "N/A",
                 },
             ],
         },
         {
-            name: "Storage",
+            nameKey: "storage",
             slug: "Storage",
             rows: [
                 {
-                    name: "Local SSD",
+                    nameKey: "localSsd",
                     children: instance.local_ssd,
                     bgStyled: true,
                 },
                 {
-                    name: "Local SSD Size (GB)",
+                    nameKey: "localSsdSize",
                     children: instance.local_ssd_size || 0,
                 },
             ],
         },
         {
-            name: "Networking",
+            nameKey: "networking",
             slug: "Networking",
             rows: [
                 {
-                    name: "Network Performance",
+                    nameKey: "networkPerformance",
                     children: instance.network_performance || "Unknown",
                 },
             ],
         },
         {
-            name: "GCP",
+            nameKey: "gcp",
             slug: "GCP",
             rows: [
                 {
-                    name: "Instance Type",
+                    nameKey: "instanceType",
                     children: instance.instance_type,
                 },
                 {
-                    name: "Pretty Name",
+                    nameKey: "prettyName",
                     children: instance.pretty_name,
                 },
                 {
-                    name: "Family",
+                    nameKey: "family",
                     children: instance.family,
                 },
                 {
-                    name: "Generation",
+                    nameKey: "generation",
                     children: instance.generation || "Unknown",
                 },
                 {
-                    name: "Compute Optimized",
+                    nameKey: "computeOptimized",
                     children: instance.compute_optimized ?? false,
                     bgStyled: true,
                 },
                 {
-                    name: "Memory Optimized",
+                    nameKey: "memoryOptimized",
                     children: instance.memory_optimized ?? false,
                     bgStyled: true,
                 },

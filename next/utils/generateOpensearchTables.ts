@@ -8,19 +8,19 @@ function round(value: number) {
 export default function generateOpensearchTables(instance: Instance): Table[] {
     return [
         {
-            name: "Compute",
+            nameKey: "compute",
             slug: "Compute",
             rows: [
                 {
-                    name: "CPUs",
+                    nameKey: "cpus",
                     children: instance.vcpu,
                 },
                 {
-                    name: "Memory (GiB)",
+                    nameKey: "memoryGiB",
                     children: instance.memory,
                 },
                 {
-                    name: "Memory per vCPU (GiB)",
+                    nameKey: "memoryPerVCPU",
                     children: round(
                         Number(instance.memory) / Number(instance.vcpu),
                     ),
@@ -28,21 +28,21 @@ export default function generateOpensearchTables(instance: Instance): Table[] {
             ],
         },
         {
-            name: "Storage",
+            nameKey: "storage",
             slug: "Storage",
             rows: [
                 {
-                    name: "Storage",
+                    nameKey: "storageField",
                     children: instance.storage,
                 },
             ],
         },
         {
-            name: "Amazon",
+            nameKey: "amazon",
             slug: "Amazon",
             rows: [
                 {
-                    name: "Generation",
+                    nameKey: "generation",
                     children:
                         instance.currentGeneration === "Yes"
                             ? "current"
@@ -50,15 +50,15 @@ export default function generateOpensearchTables(instance: Instance): Table[] {
                     bgStyled: true,
                 },
                 {
-                    name: "Instance Type",
+                    nameKey: "instanceType",
                     children: instance.instance_type,
                 },
                 {
-                    name: "Family",
+                    nameKey: "family",
                     children: instance.family,
                 },
                 {
-                    name: "Name",
+                    nameKey: "name",
                     children: instance.pretty_name,
                 },
             ],

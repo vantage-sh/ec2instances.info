@@ -12,6 +12,8 @@ import MarketingWrapper from "./MarketingWrapper";
 import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
 import { MarketingSchema } from "@/schemas/marketing";
 import type { CurrencyItem } from "@/utils/loadCurrencies";
+import { usePathname } from "next/navigation";
+import { getLocaleFromPath } from "@/utils/locale";
 
 type AzureInstanceRootProps = {
     rainbowTable: string[];
@@ -51,17 +53,20 @@ export default function AzureInstanceRoot({
     currencies,
 }: AzureInstanceRootProps) {
     const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
+    const pathname = usePathname();
+    const locale = getLocaleFromPath(pathname);
+    const localePrefix = `/${locale}`;
 
     return (
         <MarketingWrapper instanceType="azure" marketingData={marketingData}>
             <main className="my-4 px-4 not-md:w-screen">
                 <InstanceBreadcrumbs
                     crumbs={[
-                        { name: "Azure", href: "/azure" },
-                        { name: "VM", href: "/azure" },
+                        { name: "Azure", href: `${localePrefix}/azure` },
+                        { name: "VM", href: `${localePrefix}/azure` },
                         {
                             name: compressedInstance.pretty_name,
-                            href: `/azure/vm/${compressedInstance.instance_type}`,
+                            href: `${localePrefix}/azure/vm/${compressedInstance.instance_type}`,
                         },
                     ]}
                 />
@@ -94,13 +99,13 @@ export default function AzureInstanceRoot({
                         <FamilySize
                             allOfInstanceType={allOfInstanceType}
                             instanceName={compressedInstance.instance_type}
-                            pathPrefix="/azure/vm"
-                            tablePath="/azure"
+                            pathPrefix={`${localePrefix}/azure/vm`}
+                            tablePath={`${localePrefix}/azure`}
                             pathSuffix={pathSuffix}
                         />
                         <InstanceVariants
                             bestOfVariants={bestOfVariants}
-                            pathPrefix="/azure/vm"
+                            pathPrefix={`${localePrefix}/azure/vm`}
                             pathSuffix={pathSuffix}
                         />
                     </div>

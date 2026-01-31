@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { callActiveTableDataFormatter } from "@/state";
 import { Button } from "./ui/button";
@@ -9,6 +11,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
+import { useTranslations } from "gt-next";
 
 function csvEscape(input: string) {
     // Check if the input contains special characters or double quotes
@@ -26,42 +29,43 @@ async function makeCsv() {
     return rows.map((row) => row.map(csvEscape).join(",")).join("\n");
 }
 
-async function downloadCsvClick() {
-    const csv = await makeCsv();
-    const blob = new Blob([csv], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${document.title}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
-}
-
-async function copyCsvClick() {
-    const csv = await makeCsv();
-    navigator.clipboard.writeText(csv);
-    toast.success("CSV copied to clipboard");
-}
-
-async function copyTsvClick() {
-    const rows = await callActiveTableDataFormatter();
-    const tsv = rows.map((row) => row.map(csvEscape).join("\t")).join("\n");
-    navigator.clipboard.writeText(tsv);
-    toast.success("TSV copied to clipboard");
-}
-
-async function copyMdClick() {
-    const [rows, markdownTable] = await Promise.all([
-        callActiveTableDataFormatter(),
-        import("markdown-table").then((m) => m.markdownTable),
-    ]);
-    const md = markdownTable(rows);
-    navigator.clipboard.writeText(md);
-    toast.success("Markdown table copied to clipboard");
-}
-
 export default function ExportDropdown() {
     const [open, setOpen] = useState(false);
+    const t = useTranslations();
+
+    async function downloadCsvClick() {
+        const csv = await makeCsv();
+        const blob = new Blob([csv], { type: "text/csv" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${document.title}.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    async function copyCsvClick() {
+        const csv = await makeCsv();
+        navigator.clipboard.writeText(csv);
+        toast.success(t("filters.export.csvCopied"));
+    }
+
+    async function copyTsvClick() {
+        const rows = await callActiveTableDataFormatter();
+        const tsv = rows.map((row) => row.map(csvEscape).join("\t")).join("\n");
+        navigator.clipboard.writeText(tsv);
+        toast.success(t("filters.export.tsvCopied"));
+    }
+
+    async function copyMdClick() {
+        const [rows, markdownTable] = await Promise.all([
+            callActiveTableDataFormatter(),
+            import("markdown-table").then((m) => m.markdownTable),
+        ]);
+        const md = markdownTable(rows);
+        navigator.clipboard.writeText(md);
+        toast.success(t("filters.export.markdownCopied"));
+    }
 
     function closeWrap(fn: () => void) {
         return () => {
@@ -69,6 +73,8 @@ export default function ExportDropdown() {
             fn();
         };
     }
+
+    const exportLabel = t("filters.export.export");
 
     return (
         <DropdownMenu>
@@ -79,24 +85,24 @@ export default function ExportDropdown() {
                     role="combobox"
                     aria-expanded={open}
                     className="my-auto justify-between text-black py-4.5"
-                    aria-label="Export"
+                    aria-label={exportLabel}
                 >
                     <Save className="mr-2 h-4 w-4" />
-                    Export
+                    {exportLabel}
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuItem onSelect={closeWrap(downloadCsvClick)}>
-                    Download CSV
+                    {t("filters.export.downloadCsv")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onSelect={closeWrap(copyCsvClick)}>
-                    Copy CSV
+                    {t("filters.export.copyCsv")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onSelect={closeWrap(copyTsvClick)}>
-                    Copy TSV
+                    {t("filters.export.copyTsv")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onSelect={closeWrap(copyMdClick)}>
-                    Copy Markdown Table
+                    {t("filters.export.copyMarkdown")}
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

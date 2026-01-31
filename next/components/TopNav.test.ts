@@ -3,6 +3,7 @@ import componentTests from "@/utils/testing/componentTests";
 import TopNav from "./TopNav";
 import { RenderResult } from "@testing-library/react";
 
+const LOCALE = "en-GB";
 const AWS_PATHS = ["/", "/rds", "/cache", "/redshift", "/opensearch"];
 
 function runSelectedTest(pathLitUp: string) {
@@ -17,42 +18,42 @@ function runSelectedTest(pathLitUp: string) {
         const expected = [
             {
                 label: "AWS",
-                href: "/",
+                href: `/${LOCALE}`,
                 ariaCurrent: AWS_PATHS.includes(pathLitUp),
             },
             {
                 label: "EC2",
-                href: "/",
+                href: `/${LOCALE}`,
                 ariaCurrent: pathLitUp === "/",
             },
             {
                 label: "RDS",
-                href: "/rds",
+                href: `/${LOCALE}/rds`,
                 ariaCurrent: pathLitUp === "/rds",
             },
             {
                 label: "ElastiCache",
-                href: "/cache",
+                href: `/${LOCALE}/cache`,
                 ariaCurrent: pathLitUp === "/cache",
             },
             {
                 label: "Redshift",
-                href: "/redshift",
+                href: `/${LOCALE}/redshift`,
                 ariaCurrent: pathLitUp === "/redshift",
             },
             {
                 label: "OpenSearch",
-                href: "/opensearch",
+                href: `/${LOCALE}/opensearch`,
                 ariaCurrent: pathLitUp === "/opensearch",
             },
             {
                 label: "Azure",
-                href: "/azure",
+                href: `/${LOCALE}/azure`,
                 ariaCurrent: pathLitUp === "/azure",
             },
             {
                 label: "GCP",
-                href: "/gcp",
+                href: `/${LOCALE}/gcp`,
                 ariaCurrent: pathLitUp === "/gcp",
             },
         ];
@@ -60,11 +61,33 @@ function runSelectedTest(pathLitUp: string) {
     };
 }
 
-let mockPath = "/";
+let mockPath = `/${LOCALE}`;
+
+const mockTranslations: Record<string, string> = {
+    "nav.aws": "AWS",
+    "nav.ec2": "EC2",
+    "nav.rds": "RDS",
+    "nav.elasticache": "ElastiCache",
+    "nav.redshift": "Redshift",
+    "nav.opensearch": "OpenSearch",
+    "nav.azure": "Azure",
+    "nav.gcp": "GCP",
+    "nav.instances": "Cloud Instances",
+    "nav.presentedBy": "by Vantage",
+    "nav.getNotified": "Get Notified",
+    "nav.mcp": "MCP",
+    "nav.star": "Star",
+    "localeSwitcher.label": "Language",
+};
 
 beforeAll(() => {
     vi.mock("next/navigation", () => ({
         usePathname: vi.fn().mockImplementation(() => mockPath),
+    }));
+    vi.mock("gt-next", () => ({
+        useTranslations: vi.fn().mockImplementation(() => (key: string) => {
+            return mockTranslations[key] || key;
+        }),
     }));
 });
 
@@ -78,20 +101,20 @@ componentTests(
 
         {
             name: "root path lights up EC2",
-            props: {},
+            props: { locale: LOCALE },
             patch: {
                 before: () => {
-                    mockPath = "/";
+                    mockPath = `/${LOCALE}`;
                 },
             },
             test: runSelectedTest("/"),
         },
         {
             name: "EC2 instance lights up EC2",
-            props: {},
+            props: { locale: LOCALE },
             patch: {
                 before: () => {
-                    mockPath = "/aws/ec2/123";
+                    mockPath = `/${LOCALE}/aws/ec2/123`;
                 },
             },
             test: runSelectedTest("/"),
@@ -101,20 +124,20 @@ componentTests(
 
         {
             name: "RDS lights up RDS when on table page",
-            props: {},
+            props: { locale: LOCALE },
             patch: {
                 before: () => {
-                    mockPath = "/rds";
+                    mockPath = `/${LOCALE}/rds`;
                 },
             },
             test: runSelectedTest("/rds"),
         },
         {
             name: "RDS lights up RDS when on instance page",
-            props: {},
+            props: { locale: LOCALE },
             patch: {
                 before: () => {
-                    mockPath = "/aws/rds/123";
+                    mockPath = `/${LOCALE}/aws/rds/123`;
                 },
             },
             test: runSelectedTest("/rds"),
@@ -124,20 +147,20 @@ componentTests(
 
         {
             name: "ElastiCache lights up ElastiCache when on table page",
-            props: {},
+            props: { locale: LOCALE },
             patch: {
                 before: () => {
-                    mockPath = "/cache";
+                    mockPath = `/${LOCALE}/cache`;
                 },
             },
             test: runSelectedTest("/cache"),
         },
         {
             name: "ElastiCache lights up ElastiCache when on instance page",
-            props: {},
+            props: { locale: LOCALE },
             patch: {
                 before: () => {
-                    mockPath = "/aws/elasticache/123";
+                    mockPath = `/${LOCALE}/aws/elasticache/123`;
                 },
             },
             test: runSelectedTest("/cache"),
@@ -147,20 +170,20 @@ componentTests(
 
         {
             name: "Redshift lights up Redshift when on table page",
-            props: {},
+            props: { locale: LOCALE },
             patch: {
                 before: () => {
-                    mockPath = "/redshift";
+                    mockPath = `/${LOCALE}/redshift`;
                 },
             },
             test: runSelectedTest("/redshift"),
         },
         {
             name: "Redshift lights up Redshift when on instance page",
-            props: {},
+            props: { locale: LOCALE },
             patch: {
                 before: () => {
-                    mockPath = "/aws/redshift/123";
+                    mockPath = `/${LOCALE}/aws/redshift/123`;
                 },
             },
             test: runSelectedTest("/redshift"),
@@ -170,20 +193,20 @@ componentTests(
 
         {
             name: "OpenSearch lights up OpenSearch when on table page",
-            props: {},
+            props: { locale: LOCALE },
             patch: {
                 before: () => {
-                    mockPath = "/opensearch";
+                    mockPath = `/${LOCALE}/opensearch`;
                 },
             },
             test: runSelectedTest("/opensearch"),
         },
         {
             name: "OpenSearch lights up OpenSearch when on instance page",
-            props: {},
+            props: { locale: LOCALE },
             patch: {
                 before: () => {
-                    mockPath = "/aws/opensearch/123";
+                    mockPath = `/${LOCALE}/aws/opensearch/123`;
                 },
             },
             test: runSelectedTest("/opensearch"),
@@ -193,20 +216,20 @@ componentTests(
 
         {
             name: "Azure lights up Azure when on table page",
-            props: {},
+            props: { locale: LOCALE },
             patch: {
                 before: () => {
-                    mockPath = "/azure";
+                    mockPath = `/${LOCALE}/azure`;
                 },
             },
             test: runSelectedTest("/azure"),
         },
         {
             name: "Azure lights up Azure when on instance page",
-            props: {},
+            props: { locale: LOCALE },
             patch: {
                 before: () => {
-                    mockPath = "/azure/vm/123";
+                    mockPath = `/${LOCALE}/azure/vm/123`;
                 },
             },
             test: runSelectedTest("/azure"),
@@ -216,20 +239,20 @@ componentTests(
 
         {
             name: "GCP lights up GCP when on table page",
-            props: {},
+            props: { locale: LOCALE },
             patch: {
                 before: () => {
-                    mockPath = "/gcp";
+                    mockPath = `/${LOCALE}/gcp`;
                 },
             },
             test: runSelectedTest("/gcp"),
         },
         {
             name: "GCP lights up GCP when on instance page",
-            props: {},
+            props: { locale: LOCALE },
             patch: {
                 before: () => {
-                    mockPath = "/gcp/123";
+                    mockPath = `/${LOCALE}/gcp/123`;
                 },
             },
             test: runSelectedTest("/gcp"),
