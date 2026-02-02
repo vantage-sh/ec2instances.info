@@ -60,7 +60,7 @@ func enrichElastiCacheInstance(instance map[string]any, attributes map[string]st
 	}
 	if _, ok := attributes["networkPerformance"]; ok {
 		instance["network_performance"] = attributes["networkPerformance"]
-	} else {
+	} else if v, ok := instance["network_performance"]; !ok || v == nil {
 		instance["network_performance"] = nil
 	}
 	if f, ok := attributes["instanceFamily"]; ok {
