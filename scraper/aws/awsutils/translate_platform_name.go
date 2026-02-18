@@ -30,6 +30,11 @@ var SOFTWARE_MAP = map[string]string{
 
 // TranslatePlatformName translates the platform name from the AWS API data to the platform name used in the EC2 instance data
 func TranslatePlatformName(operatingSystem string, preinstalledSoftware string) string {
+	if operatingSystem == "" && preinstalledSoftware == "" {
+		// Odd edge case we have hit before - return a empty string so we don't break the scraper
+		return ""
+	}
+
 	osValue, ok := OS_MAP[operatingSystem]
 	if !ok {
 		osValue = "unknown"
