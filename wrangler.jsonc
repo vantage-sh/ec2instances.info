@@ -5,14 +5,14 @@
     "r2_buckets": [
         {
             "bucket_name": "ec2instances-assets-production",
-            "binding": "ASSETS_BUCKET",
-        },
+            "binding": "ASSETS_BUCKET"
+        }
     ],
     "kv_namespaces": [
         {
             "binding": "ASSETS_KV",
-            "id": "33b0605d8d1e48bc9d92b2a3a2170f73",
-        },
+            "id": "33b0605d8d1e48bc9d92b2a3a2170f73"
+        }
     ],
     "env": {
         "staging": {
@@ -20,15 +20,29 @@
             "r2_buckets": [
                 {
                     "bucket_name": "ec2instances-assets-staging",
-                    "binding": "ASSETS_BUCKET",
-                },
+                    "binding": "ASSETS_BUCKET"
+                }
             ],
             "kv_namespaces": [
                 {
                     "binding": "ASSETS_KV",
-                    "id": "21c077fc724842bd95a0df80f84a3484",
-                },
-            ],
-        },
+                    "id": "21c077fc724842bd95a0df80f84a3484"
+                }
+            ]
+        }
     },
+    "routes": [
+        {
+            "pattern": "instances.vantage.sh",
+            "custom_domain": true
+        },
+        {
+            "pattern": "ec2instances.info",
+            "custom_domain": true
+        },
+        {
+            "pattern": "www.ec2instances.info",
+            "custom_domain": true
+        }
+    ]
 }
