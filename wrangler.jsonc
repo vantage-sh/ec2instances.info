@@ -29,20 +29,23 @@
                     "id": "21c077fc724842bd95a0df80f84a3484",
                 },
             ],
+            "routes": [],
+        },
+        "production": {
+            "routes": [
+                {
+                    "pattern": "instances.vantage.sh",
+                    "custom_domain": true,
+                },
+                {
+                    "pattern": "ec2instances.info",
+                    "custom_domain": true,
+                },
+                {
+                    "pattern": "www.ec2instances.info",
+                    "custom_domain": true,
+                },
+            ],
         },
     },
-    "routes": [
-        {
-            "pattern": "instances.vantage.sh",
-            "custom_domain": true,
-        },
-        {
-            "pattern": "ec2instances.info",
-            "custom_domain": true,
-        },
-        {
-            "pattern": "www.ec2instances.info",
-            "custom_domain": true,
-        },
-    ],
 }
