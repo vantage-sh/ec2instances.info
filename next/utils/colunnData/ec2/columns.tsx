@@ -52,9 +52,11 @@ export function calculateCost(
                     : "vcpu"
                 : pricingUnit === "ecu"
                   ? "ECU"
-                  : "memory"
+                  : pricingUnit === "gpu_memory"
+                    ? "GPU_memory"
+                    : "memory"
         ] as number;
-        if (pricingUnitModifier === undefined) return -1;
+        if (!pricingUnitModifier) return -1;
     }
 
     const currencyMultiplier = selectedRegion.startsWith("cn-")
@@ -99,6 +101,7 @@ export function calculateAndFormatCost(
         vcpu: "vCPU",
         ecu: "ECU",
         memory: "GiB",
+        gpu_memory: "GiB GPU",
     };
 
     let durationText: string = costDuration;

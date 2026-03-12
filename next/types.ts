@@ -114,7 +114,7 @@ export interface Region {
     };
 }
 
-export type PricingUnit = "instance" | "vcpu" | "ecu" | "memory";
+export type PricingUnit = "instance" | "vcpu" | "ecu" | "memory" | "gpu_memory";
 
 export type CostDuration =
     | "secondly"

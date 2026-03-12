@@ -5,6 +5,7 @@ export const pricingUnitOptions: { value: PricingUnit; label: string }[] = [
     { value: "vcpu", label: "vCPU" },
     { value: "ecu", label: "ECU" },
     { value: "memory", label: "Memory" },
+    { value: "gpu_memory", label: "GPU Memory" },
 ] as const;
 
 export const durationOptions: { value: CostDuration; label: string }[] = [
