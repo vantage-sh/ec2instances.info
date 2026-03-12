@@ -155,6 +155,7 @@ export function calculateAndFormatCost(
         vcpu: "vCPU",
         ecu: "vCPU",
         memory: "GiB",
+        gpu_memory: "GiB",
     };
 
     let durationText: string = costDuration;
