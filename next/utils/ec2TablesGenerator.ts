@@ -19,6 +19,21 @@ function round(value: number) {
 }
 
 export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
+    const trunkingRows: Row[] = [];
+    if (typeof instance.is_trunking_compatible === "boolean") {
+        trunkingRows.push({
+            name: "Trunking Compatible",
+            children: instance.is_trunking_compatible,
+            bgStyled: true,
+        });
+    }
+    if (typeof instance.branch_interface === "number") {
+        trunkingRows.push({
+            name: "Branch Interface",
+            children: instance.branch_interface,
+        });
+    }
+
     return [
         {
             name: "Compute",
@@ -169,6 +184,7 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
                     help: "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html",
                     children: instance.placement_group_support,
                 },
+                ...trunkingRows,
             ],
         },
         {
@@ -262,6 +278,15 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
                     name: "Instance Type",
                     children: instance.instance_type,
                 },
+                ...(typeof instance.is_bare_metal === "boolean"
+                    ? ([
+                          {
+                              name: "Bare Metal",
+                              children: instance.is_bare_metal,
+                              bgStyled: true,
+                          },
+                      ] satisfies Row[])
+                    : []),
                 {
                     name: "Family",
                     children: instance.family || "N/A",

@@ -1038,6 +1038,58 @@ export const columnsGen = (
         }),
     },
     {
+        accessorKey: "is_bare_metal",
+        header: "Bare metal",
+        id: "is_bare_metal",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.is_bare_metal;
+            const valueB = rowB.original.is_bare_metal;
+            if (valueA === undefined) return 1;
+            if (valueB === undefined) return -1;
+            return Number(valueA) - Number(valueB);
+        },
+        ...makeCellWithRegexSorter("is_bare_metal", (info) => {
+            const value = info.getValue() as boolean | undefined;
+            if (value === undefined) return "";
+            return value ? "Yes" : "No";
+        }),
+    },
+    {
+        accessorKey: "is_trunking_compatible",
+        header: "Trunking compatible",
+        id: "is_trunking_compatible",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.is_trunking_compatible;
+            const valueB = rowB.original.is_trunking_compatible;
+            if (valueA === undefined) return 1;
+            if (valueB === undefined) return -1;
+            return Number(valueA) - Number(valueB);
+        },
+        ...makeCellWithRegexSorter("is_trunking_compatible", (info) => {
+            const value = info.getValue() as boolean | undefined;
+            if (value === undefined) return "";
+            return value ? "Yes" : "No";
+        }),
+    },
+    {
+        accessorKey: "branch_interface",
+        header: "Branch interface",
+        id: "branch_interface",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.branch_interface;
+            const valueB = rowB.original.branch_interface;
+            if (valueA === undefined) return 1;
+            if (valueB === undefined) return -1;
+            return valueA - valueB;
+        },
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | undefined;
+            if (value === undefined) return undefined;
+            return value;
+        },
+    },
+    {
         accessorKey: "vpc_only",
         header: "VPC Only",
         size: 110,

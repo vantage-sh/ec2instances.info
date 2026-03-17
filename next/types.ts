@@ -63,6 +63,9 @@ export interface EC2Instance {
         max_enis: number;
         ips_per_eni: number;
     };
+    is_bare_metal?: boolean;
+    is_trunking_compatible?: boolean;
+    branch_interface?: number;
     enhanced_networking: boolean;
     vpc_only: boolean;
     ipv6_support: boolean;
