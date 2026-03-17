@@ -216,7 +216,8 @@ export const columnsGen = (
         id: "ebs-throughput",
         accessorKey: "ebs_throughput",
         sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "ebs_throughput" }),
+        filterFn: (row, _, filterValue) =>
+            expr(row, "ebs_throughput", filterValue),
     },
     {
         header: "Processor",
@@ -517,41 +518,46 @@ export const columnsGen = (
         id: "ebs-baseline-bandwidth",
         accessorKey: "ebs_baseline_bandwidth",
         sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "ebs_baseline_bandwidth" }),
+        filterFn: (row, _, filterValue) =>
+            expr(row, "ebs_baseline_bandwidth", filterValue),
     },
     {
         header: "EBS Optimized: Baseline Throughput (128K)",
         id: "ebs-baseline-throughput",
         accessorKey: "ebs_baseline_throughput",
         sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "ebs_baseline_throughput" }),
+        filterFn: (row, _, filterValue) =>
+            expr(row, "ebs_baseline_throughput", filterValue),
     },
     {
         header: "EBS Optimized: Baseline IOPS (16K)",
         id: "ebs-baseline-iops",
         accessorKey: "ebs_baseline_iops",
         sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "ebs_baseline_iops" }),
+        filterFn: (row, _, filterValue) =>
+            expr(row, "ebs_baseline_iops", filterValue),
     },
     {
         header: "EBS Optimized: Max Bandwidth",
         id: "ebs-max-bandwidth",
         accessorKey: "ebs_max_bandwidth",
         sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "ebs_max_bandwidth" }),
+        filterFn: (row, _, filterValue) =>
+            expr(row, "ebs_max_bandwidth", filterValue),
     },
     {
         header: "EBS Optimized: Max Throughput (128K)",
         id: "ebs-max-throughput",
         accessorKey: "ebs_throughput",
         sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "ebs_throughput" }),
+        filterFn: (row, _, filterValue) =>
+            expr(row, "ebs_throughput", filterValue),
     },
     {
         header: "EBS Optimized: Max IOPS (16K)",
         id: "ebs-iops",
         accessorKey: "ebs_iops",
         sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "ebs_iops" }),
+        filterFn: (row, _, filterValue) => expr(row, "ebs_iops", filterValue),
     },
 ];

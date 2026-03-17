@@ -834,31 +834,63 @@ export const columnsGen = (
             if (!valueB) return 1;
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter("ebs_baseline_bandwidth", (info) => {
+        filterFn: (row, _, filterValue) => {
+            const value = row.original.ebs_baseline_bandwidth;
+            if (!value) return false;
+            try {
+                return exprCompiler(filterValue)(value, `${value} Mbps`);
+            } catch {
+                // Just allow all if the expr is invalid.
+                return true;
+            }
+        },
+        cell: (info) => {
             const value = info.getValue();
             if (!value) return undefined;
             return `${value} Mbps`;
-        }),
+        },
     },
     {
         accessorKey: "ebs_baseline_throughput",
         header: "EBS Optimized: Baseline Throughput (128K)",
         id: "ebs_baseline_throughput",
         sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter(
-            "ebs_baseline_throughput",
-            (info) => `${info.getValue() as number} MB/s`,
-        ),
+        filterFn: (row, _, filterValue) => {
+            const value = row.original.ebs_baseline_throughput;
+            if (!value) return false;
+            try {
+                return exprCompiler(filterValue)(value, `${value} MB/s`);
+            } catch {
+                // Just allow all if the expr is invalid.
+                return true;
+            }
+        },
+        cell: (info) => {
+            const value = info.getValue() as number | undefined;
+            if (!value) return undefined;
+            return `${value} MB/s`;
+        },
     },
     {
         accessorKey: "ebs_baseline_iops",
         header: "EBS Optimized: Baseline IOPS (16K)",
         id: "ebs_baseline_iops",
         sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter(
-            "ebs_baseline_iops",
-            (info) => `${info.getValue() as number} IOPS`,
-        ),
+        filterFn: (row, _, filterValue) => {
+            const value = row.original.ebs_baseline_iops;
+            if (!value) return false;
+            try {
+                return exprCompiler(filterValue)(value, `${value} IOPS`);
+            } catch {
+                // Just allow all if the expr is invalid.
+                return true;
+            }
+        },
+        cell: (info) => {
+            const value = info.getValue() as number | undefined;
+            if (!value) return undefined;
+            return `${value} IOPS`;
+        },
     },
     {
         accessorKey: "ebs_max_bandwidth",
@@ -871,39 +903,82 @@ export const columnsGen = (
             if (!valueB) return 1;
             return valueA - valueB;
         },
-        ...makeCellWithRegexSorter("ebs_max_bandwidth", (info) => {
+        filterFn: (row, _, filterValue) => {
+            const value = row.original.ebs_max_bandwidth;
+            if (!value) return false;
+            try {
+                return exprCompiler(filterValue)(value, `${value} Mbps`);
+            } catch {
+                // Just allow all if the expr is invalid.
+                return true;
+            }
+        },
+        cell: (info) => {
             const value = info.getValue();
             if (!value) return undefined;
             return `${value} Mbps`;
-        }),
+        },
     },
     {
         accessorKey: "ebs_throughput",
         header: "EBS Optimized: Max Throughput (128K)",
         id: "ebs_throughput",
         sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter(
-            "ebs_throughput",
-            (info) => `${info.getValue() as number} MB/s`,
-        ),
+        filterFn: (row, _, filterValue) => {
+            const value = row.original.ebs_throughput;
+            if (!value) return false;
+            try {
+                return exprCompiler(filterValue)(value, `${value} MB/s`);
+            } catch {
+                // Just allow all if the expr is invalid.
+                return true;
+            }
+        },
+        cell: (info) => {
+            const value = info.getValue() as number | undefined;
+            if (!value) return undefined;
+            return `${value} MB/s`;
+        },
     },
     {
         accessorKey: "ebs_iops",
         header: "EBS Optimized: Max IOPS (16K)",
         id: "ebs_iops",
         sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter(
-            "ebs_iops",
-            (info) => `${info.getValue() as number} IOPS`,
-        ),
+        filterFn: (row, _, filterValue) => {
+            const value = row.original.ebs_iops;
+            if (!value) return false;
+            try {
+                return exprCompiler(filterValue)(value, `${value} IOPS`);
+            } catch {
+                // Just allow all if the expr is invalid.
+                return true;
+            }
+        },
+        cell: (info) => {
+            const value = info.getValue() as number | undefined;
+            if (!value) return undefined;
+            return `${value} IOPS`;
+        },
     },
     {
         accessorKey: "ebs_as_nvme",
         header: "EBS Exposed as NVMe",
         id: "ebs_as_nvme",
-        ...makeCellWithRegexSorter("ebs_as_nvme", (info) =>
-            info.getValue() ? "Yes" : "No",
-        ),
+        filterFn: (row, _, filterValue) => {
+            const raw = row.original.ebs_as_nvme;
+            const num = raw ? 1 : 0;
+            const strValue = raw ? "Yes" : "No";
+            try {
+                return exprCompiler(filterValue)(num, strValue);
+            } catch {
+                // If the expr is invalid, fall back to simple string matching.
+                return strValue
+                    .toLowerCase()
+                    .includes(filterValue.toLowerCase());
+            }
+        },
+        cell: (info) => (info.getValue() ? "Yes" : "No"),
     },
     {
         accessorKey: "vpc",

@@ -225,6 +225,18 @@ const exprColumns = [
     "thread_count_per_numa_node",
     "memory_per_numa_node_mb",
     "l3_per_numa_node_mb",
+    "ebs_baseline_bandwidth",
+    "ebs_baseline_throughput",
+    "ebs_baseline_iops",
+    "ebs_max_bandwidth",
+    "ebs_throughput",
+    "ebs_iops",
+    "ebs-baseline-bandwidth",
+    "ebs-baseline-throughput",
+    "ebs-baseline-iops",
+    "ebs-max-bandwidth",
+    "ebs-max-throughput",
+    "ebs-iops",
 ];
 
 export default function IndividualColumnFilter<Instance>({

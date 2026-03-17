@@ -23,7 +23,15 @@ const exprCache = new Map<string, (num: number, strValue: string) => boolean>();
 
 function runCachedEval(expr: string, num: number, strValue: string) {
     const cached = exprCache.get(expr);
-    if (cached) return cached(num, strValue);
+    if (cached) {
+        try {
+            return cached(num, strValue);
+        } catch {
+            // If a cached expression throws at runtime, treat it as invalid.
+            exprCache.delete(expr);
+            return true;
+        }
+    }
     try {
         const e = exprCompiler(expr);
         const v = e(num, strValue);
@@ -38,8 +46,12 @@ function runCachedEval(expr: string, num: number, strValue: string) {
 export function expr(row: Row<any>, columnId: string, filterValue: string) {
     const value =
         row.original[columnId] ?? row.original[columnId.toLowerCase()];
-    const conv = tryConv(value);
-    return runCachedEval(filterValue, conv, value);
+    const conv =
+        typeof value === "number" || typeof value === "string"
+            ? tryConv(value)
+            : NaN;
+    const strValue = value === undefined || value === null ? "" : String(value);
+    return runCachedEval(filterValue, conv, strValue);
 }
 
 export function calculateCost(
