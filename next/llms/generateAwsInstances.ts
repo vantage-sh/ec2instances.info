@@ -9,6 +9,7 @@ const tableColumns = [
     ["spot_min", "Spot Min"],
     ["spot_avg", "Spot Avg"],
     ["spot_max", "Spot Max"],
+    ["pct_interrupt", "Spot Interrupt Frequency"],
     ["yrTerm1Savings.noUpfront", "1yr No Upfront (Savings Plan)"],
     ["yrTerm1Savings.partialUpfront", "1yr Partial Upfront (Savings Plan)"],
     ["yrTerm1Savings.allUpfront", "1yr All Upfront (Savings Plan)"],
@@ -125,6 +126,8 @@ function generateInstanceMarkdown(
                     region,
                     instance.pricing[region]?.[platform]?.[column],
                 );
+            case "pct_interrupt":
+                return instance.pricing[region]?.[platform]?.pct_interrupt || "N/A";
             case "yrTerm1Savings.noUpfront":
             case "yrTerm1Savings.partialUpfront":
             case "yrTerm1Savings.allUpfront":
