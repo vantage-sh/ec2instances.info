@@ -5,6 +5,8 @@ import (
 	"scraper/aws/awsutils"
 	"scraper/aws/ec2/extras"
 	"strconv"
+
+	"github.com/aws/amazon-vpc-resource-controller-k8s/pkg/aws/vpc"
 )
 
 type VPC struct {
@@ -119,6 +121,9 @@ type EC2Instance struct {
 	MemoryPerNumaNodeMB      *float64                   `json:"memory_per_numa_node_mb,omitempty"`
 	L3PerNumaNodeMB          *float64                   `json:"l3_per_numa_node_mb,omitempty"`
 	L3Shared                 *bool                      `json:"l3_shared,omitempty"`
+	IsBareMetal              *bool                      `json:"is_bare_metal,omitempty"`
+	IsTrunkingCompatible     *bool                      `json:"is_trunking_compatible,omitempty"`
+	BranchInterface          *int                       `json:"branch_interface,omitempty"`
 }
 
 func avg(ints []int) *float64 {
@@ -180,5 +185,12 @@ func (instance *EC2Instance) addExtraDetails() {
 			instance.L3PerNumaNodeMB = avg(details.NUMA.L3PerNodeMB)
 			instance.L3Shared = &details.NUMA.L3Shared
 		}
+	}
+
+	limits, ok := vpc.Limits[instance.InstanceType]
+	if ok {
+		instance.IsBareMetal = &limits.IsBareMetal
+		instance.IsTrunkingCompatible = &limits.IsTrunkingCompatible
+		instance.BranchInterface = &limits.BranchInterface
 	}
 }
