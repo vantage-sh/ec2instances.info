@@ -49,6 +49,7 @@ type CategoryItem struct {
 type GeoTaxonomy struct {
 	Type             string            `json:"type"`
 	RegionalMetadata *RegionalMetadata `json:"regionalMetadata,omitempty"`
+	Regions          []string          `json:"regions,omitempty"`
 }
 
 type RegionalMetadata struct {
@@ -89,11 +90,26 @@ type Money struct {
 type UnitInfo struct {
 	Unit            string `json:"unit"`
 	UnitDescription string `json:"unitDescription"`
+	UnitQuantity    Money  `json:"unitQuantity,omitempty"`
 }
 
 type PricesResponse struct {
 	Prices        []PriceInfo `json:"prices"`
 	NextPageToken string      `json:"nextPageToken"`
+}
+
+type priceSelectionStats struct {
+	totalPriceRecords     int
+	skuParsed             int
+	selected              int
+	rejectedNonUSD        int
+	rejectedNonRate       int
+	rejectedNoTiers       int
+	rejectedUnknownUnit   int
+	rejectedNonZeroStart  int
+	rejectedInvalidAmount int
+	nonDefaultUnitQty     int
+	ambiguousCandidates   int
 }
 
 // Machine type structures from Compute Engine API
@@ -169,6 +185,8 @@ func fetchComputeSKUs() ([]SKU, error) {
 // Fetch pricing for all SKUs
 func fetchPricing() (map[string]PriceInfo, error) {
 	priceMap := make(map[string]PriceInfo)
+	priceCandidates := make(map[string][]PriceInfo)
+	stats := &priceSelectionStats{}
 	pageToken := ""
 
 	for {
@@ -183,11 +201,14 @@ func fetchPricing() (map[string]PriceInfo, error) {
 		}
 
 		for _, price := range response.Prices {
+			stats.totalPriceRecords++
+
 			// Extract SKU ID from the price name (format: "skus/SKUID/price")
 			parts := strings.Split(price.Name, "/")
 			if len(parts) >= 2 {
 				skuID := parts[1]
-				priceMap[skuID] = price
+				priceCandidates[skuID] = append(priceCandidates[skuID], price)
+				stats.skuParsed++
 			}
 		}
 
@@ -195,10 +216,198 @@ func fetchPricing() (map[string]PriceInfo, error) {
 			break
 		}
 		pageToken = response.NextPageToken
-		log.Printf("Fetched %d GCP prices so far...", len(priceMap))
+		log.Printf("Fetched %d GCP prices so far...", stats.skuParsed)
 	}
 
+	for skuID, candidates := range priceCandidates {
+		best, ok := selectBestPriceForSKU(candidates, stats)
+		if !ok {
+			continue
+		}
+		priceMap[skuID] = best
+		stats.selected++
+	}
+
+	log.Printf(
+		"Selected canonical GCP prices: selected=%d skus=%d totalRecords=%d rejected(nonUSD=%d nonRate=%d noTiers=%d unknownUnit=%d nonZeroTierStart=%d invalidAmount=%d nonDefaultUnitQty=%d ambiguous=%d)",
+		stats.selected,
+		len(priceCandidates),
+		stats.totalPriceRecords,
+		stats.rejectedNonUSD,
+		stats.rejectedNonRate,
+		stats.rejectedNoTiers,
+		stats.rejectedUnknownUnit,
+		stats.rejectedNonZeroStart,
+		stats.rejectedInvalidAmount,
+		stats.nonDefaultUnitQty,
+		stats.ambiguousCandidates,
+	)
+
 	return priceMap, nil
+}
+
+func selectBestPriceForSKU(candidates []PriceInfo, stats *priceSelectionStats) (PriceInfo, bool) {
+	type scoredCandidate struct {
+		price        PriceInfo
+		score        int
+		hourlyPrice  float64
+		preferHourly bool
+		preferSingle bool
+	}
+
+	scored := make([]scoredCandidate, 0, len(candidates))
+	for _, candidate := range candidates {
+		score, hourlyPrice, preferHourly, preferSingle, ok := scorePriceCandidate(candidate, stats)
+		if !ok {
+			continue
+		}
+		scored = append(scored, scoredCandidate{
+			price:        candidate,
+			score:        score,
+			hourlyPrice:  hourlyPrice,
+			preferHourly: preferHourly,
+			preferSingle: preferSingle,
+		})
+	}
+
+	if len(scored) == 0 {
+		return PriceInfo{}, false
+	}
+
+	best := scored[0]
+	tiedTop := 1
+	for i := 1; i < len(scored); i++ {
+		next := scored[i]
+		if next.score > best.score {
+			best = next
+			tiedTop = 1
+			continue
+		}
+		if next.score == best.score {
+			tiedTop++
+
+			// Prefer explicit hourly units over converted monthly values.
+			if next.preferHourly != best.preferHourly {
+				if next.preferHourly {
+					best = next
+				}
+				continue
+			}
+
+			// Prefer single-tier list prices when score is equal.
+			if next.preferSingle != best.preferSingle {
+				if next.preferSingle {
+					best = next
+				}
+				continue
+			}
+
+			// Final tie-breaker: choose the largest valid hourly price.
+			if next.hourlyPrice > best.hourlyPrice {
+				best = next
+			}
+		}
+	}
+
+	if tiedTop > 1 {
+		stats.ambiguousCandidates++
+	}
+
+	return best.price, true
+}
+
+func scorePriceCandidate(price PriceInfo, stats *priceSelectionStats) (int, float64, bool, bool, bool) {
+	if !strings.EqualFold(price.CurrencyCode, "USD") {
+		stats.rejectedNonUSD++
+		return 0, 0, false, false, false
+	}
+
+	if strings.ToLower(price.ValueType) != "rate" {
+		stats.rejectedNonRate++
+		return 0, 0, false, false, false
+	}
+
+	if len(price.Rate.Tiers) == 0 {
+		stats.rejectedNoTiers++
+		return 0, 0, false, false, false
+	}
+
+	unit := strings.ToLower(price.Rate.Unit.Unit)
+	unitCategory := classifyGCPPriceUnit(unit)
+	if unitCategory == "" {
+		stats.rejectedUnknownUnit++
+		return 0, 0, false, false, false
+	}
+
+	firstTier := price.Rate.Tiers[0]
+	firstTierStart, ok := moneyToFloat(firstTier.StartAmount)
+	if !ok {
+		stats.rejectedInvalidAmount++
+		return 0, 0, false, false, false
+	}
+	if firstTierStart != 0 {
+		stats.rejectedNonZeroStart++
+		return 0, 0, false, false, false
+	}
+
+	hourlyPrice := calculateHourlyPrice(price)
+	if hourlyPrice <= 0 {
+		stats.rejectedInvalidAmount++
+		return 0, 0, false, false, false
+	}
+
+	if quantity := normalizedUnitQuantity(price.Rate.Unit.UnitQuantity); quantity != 1 {
+		stats.nonDefaultUnitQty++
+	}
+
+	score := 100
+	preferHourly := unitCategory == "hourly"
+	preferSingle := len(price.Rate.Tiers) == 1
+	if preferHourly {
+		score += 20
+	}
+	if preferSingle {
+		score += 10
+	}
+
+	return score, hourlyPrice, preferHourly, preferSingle, true
+}
+
+func classifyGCPPriceUnit(unit string) string {
+	unit = strings.ToLower(strings.TrimSpace(unit))
+	switch unit {
+	case "h", "giby.h", "gby.h":
+		return "hourly"
+	}
+
+	if strings.Contains(unit, "month") || strings.Contains(unit, "mo") {
+		return "monthly"
+	}
+
+	return ""
+}
+
+func moneyToFloat(money Money) (float64, bool) {
+	dollars := 0.0
+	if money.Units != "" {
+		parsed, err := strconv.ParseInt(money.Units, 10, 64)
+		if err != nil {
+			return 0, false
+		}
+		dollars = float64(parsed)
+	}
+
+	dollars += float64(money.Nanos) / 1e9
+	return dollars, true
+}
+
+func normalizedUnitQuantity(quantity Money) float64 {
+	// Default quantity is 1 when the API omits the field.
+	parsedQuantity, ok := moneyToFloat(quantity)
+	if !ok || parsedQuantity <= 0 {
+		return 1
+	}
+	return parsedQuantity
 }
 
 // fetchMachineTypes fetches all machine types from the Compute Engine API
@@ -364,8 +573,11 @@ func parseMachineTypeFromSKU(sku SKU) (machineFamily string, resourceType string
 		}
 	}
 
-	// Get region from geo taxonomy - fix the condition
-	if sku.GeoTaxonomy.RegionalMetadata != nil {
+	// Get region from geo taxonomy.
+	if len(sku.GeoTaxonomy.Regions) > 0 {
+		// Use the first region as a fallback; callers can read full Regions.
+		region = sku.GeoTaxonomy.Regions[0]
+	} else if sku.GeoTaxonomy.RegionalMetadata != nil {
 		region = sku.GeoTaxonomy.RegionalMetadata.Region.Region
 	} else if sku.GeoTaxonomy.Type == "TYPE_MULTI_REGIONAL" {
 		// Use multi-regional as a special "region" identifier
@@ -385,33 +597,36 @@ func parseMachineTypeFromSKU(sku SKU) (machineFamily string, resourceType string
 
 // Calculate hourly price from GCP pricing tier
 func calculateHourlyPrice(price PriceInfo) float64 {
-	if price.ValueType != "rate" || len(price.Rate.Tiers) == 0 {
+	if strings.ToLower(price.ValueType) != "rate" || len(price.Rate.Tiers) == 0 {
 		return 0
 	}
 
+	// Only use tier-0 list price records.
+	// Other tiers require usage context that this scraper does not model.
 	tier := price.Rate.Tiers[0]
-
-	// Convert to dollars - combine Units (whole dollars) and Nanos (fractional part)
-	// GCP Money type: total = units + (nanos / 1e9)
-	var dollars float64
-
-	// Parse the units field (whole dollars)
-	if tier.ListPrice.Units != "" {
-		if parsed, err := strconv.ParseInt(tier.ListPrice.Units, 10, 64); err == nil {
-			dollars = float64(parsed)
-		}
+	firstTierStart, ok := moneyToFloat(tier.StartAmount)
+	if !ok || firstTierStart != 0 {
+		return 0
 	}
 
-	// Add the fractional part from nanos
-	dollars += float64(tier.ListPrice.Nanos) / 1e9
+	dollars, ok := moneyToFloat(tier.ListPrice)
+	if !ok {
+		return 0
+	}
+
+	// Normalize per-unit pricing when a non-default unit quantity is provided.
+	unitQuantity := normalizedUnitQuantity(price.Rate.Unit.UnitQuantity)
+	dollars = dollars / unitQuantity
 
 	// GCP pricing is often per hour, but check the unit
 	unit := strings.ToLower(price.Rate.Unit.Unit)
-	if strings.Contains(unit, "month") || strings.Contains(unit, "mo") {
+	unitCategory := classifyGCPPriceUnit(unit)
+	if unitCategory == "monthly" {
 		// Convert monthly to hourly (assuming 730 hours per month)
 		dollars = dollars / 730
-	} else if unit != "h" && unit != "giby.h" && unit != "gby.h" {
-		utils.SendWarning("Unknown GCP pricing unit:", unit)
+	} else if unitCategory == "" {
+		utils.SendWarning("Skipping unsupported GCP pricing unit:", unit)
+		return 0
 	}
 
 	return dollars
