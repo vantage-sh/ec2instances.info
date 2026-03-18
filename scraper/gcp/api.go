@@ -543,7 +543,7 @@ func determineMachineFamily(name string) string {
 // "Sole Tenancy Instance RAM running in Jakarta"
 // "Licensing Fee for Windows Server 2012 BYOL (CPU cost)"
 // "Licensing Fee for Windows Server 2012 BYOL (RAM cost)"
-var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2d|n2|e2|e2a|c2|c2d|m1|m2|m3|m4|t2d|t2a|a2|a3|g2|h3|c3|c3d|z3|c4|n4).*(?:instance\s+(core|ram)|\((?:cpu|ram)\s+cost\))`)
+var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2d|n2|n4d|n4|e2|e2a|c2|c2d|m1|m2|m3|m4|t2d|t2a|a2|a3|g2|h3|c3|c3d|z3|c4)\b.*(?:instance\s+(core|ram)|\((?:cpu|ram)\s+cost\))`)
 
 func parseMachineTypeFromSKU(sku SKU) (machineFamily string, resourceType string, region string, isSpot bool, isWindows bool) {
 	displayName := sku.DisplayName

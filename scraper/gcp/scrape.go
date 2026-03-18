@@ -31,6 +31,12 @@ func taxonomyContainsAny(values []string, needles ...string) bool {
 }
 
 func shouldUseSKUForPricing(sku SKU, isSpot bool, displayLower string) bool {
+	// Sole tenancy SKUs are dedicated-host style charges and should not be
+	// mixed into baseline VM on-demand/spot instance pricing.
+	if strings.Contains(displayLower, "sole tenancy") {
+		return false
+	}
+
 	if !isSpot {
 		if strings.Contains(displayLower, "commit") ||
 			strings.Contains(displayLower, "cud") ||
