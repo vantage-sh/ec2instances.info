@@ -8,6 +8,118 @@ import (
 	"strings"
 )
 
+func taxonomyValues(sku SKU) []string {
+	values := make([]string, 0, len(sku.ProductTaxonomy.TaxonomyCategories))
+	for _, category := range sku.ProductTaxonomy.TaxonomyCategories {
+		if category.Category == "" {
+			continue
+		}
+		values = append(values, strings.ToLower(category.Category))
+	}
+	return values
+}
+
+func taxonomyContainsAny(values []string, needles ...string) bool {
+	for _, value := range values {
+		for _, needle := range needles {
+			if strings.Contains(value, needle) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func shouldUseSKUForPricing(sku SKU, isSpot bool, displayLower string) bool {
+	if !isSpot {
+		if strings.Contains(displayLower, "commit") ||
+			strings.Contains(displayLower, "cud") ||
+			strings.Contains(displayLower, "sustained") ||
+			strings.Contains(displayLower, "discount") ||
+			strings.Contains(displayLower, "reservation") ||
+			strings.Contains(displayLower, "reserved") ||
+			strings.Contains(displayLower, "saving") {
+			return false
+		}
+	}
+
+	taxonomy := taxonomyValues(sku)
+	if len(taxonomy) == 0 {
+		return true
+	}
+
+	hasSpotCategory := taxonomyContainsAny(taxonomy, "spot", "preemptible")
+	if isSpot {
+		// Spot pricing should come from explicit spot/preemptible categories.
+		return hasSpotCategory
+	}
+
+	if hasSpotCategory {
+		return false
+	}
+
+	// Exclude commitment/discount style SKU categories from baseline on-demand pricing.
+	if taxonomyContainsAny(taxonomy, "commit", "cud", "discount", "sustained", "reservation", "reserved", "saving") {
+		return false
+	}
+
+	return true
+}
+
+func targetRegionsForSKU(sku SKU, fallbackRegion string) []string {
+	if len(sku.GeoTaxonomy.Regions) > 0 {
+		return sku.GeoTaxonomy.Regions
+	}
+	if fallbackRegion == "" {
+		return nil
+	}
+	return []string{fallbackRegion}
+}
+
+func expandedRegionsForMultiRegion(region string) []string {
+	switch region {
+	case "multi-americas":
+		return []string{"us-central1", "us-east1", "us-east4", "us-east5", "us-south1", "us-west1", "us-west2", "us-west3", "us-west4", "northamerica-northeast1", "northamerica-northeast2", "southamerica-east1", "southamerica-west1"}
+	case "multi-europe":
+		return []string{"europe-west1", "europe-west2", "europe-west3", "europe-west4", "europe-west6", "europe-west8", "europe-west9", "europe-north1", "europe-central2", "europe-southwest1"}
+	case "multi-asia":
+		return []string{"asia-east1", "asia-east2", "asia-northeast1", "asia-northeast2", "asia-northeast3", "asia-south1", "asia-south2", "asia-southeast1", "asia-southeast2", "australia-southeast1", "australia-southeast2"}
+	default:
+		return nil
+	}
+}
+
+func selectHourlyPrice(candidates []PriceInfo, preferLower bool) (float64, bool) {
+	var selected float64
+	hasValue := false
+
+	for _, candidate := range candidates {
+		hourlyPrice := calculateHourlyPrice(candidate)
+		if hourlyPrice <= 0 {
+			continue
+		}
+
+		if !hasValue {
+			selected = hourlyPrice
+			hasValue = true
+			continue
+		}
+
+		if preferLower {
+			if hourlyPrice < selected {
+				selected = hourlyPrice
+			}
+			continue
+		}
+
+		if hourlyPrice > selected {
+			selected = hourlyPrice
+		}
+	}
+
+	return selected, hasValue
+}
+
 // Process SKUs and pricing data to generate GCP instances
 func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[string]*MachineSpecs, regions map[string]string) map[string]*GCPInstance {
 	instances := make(map[string]*GCPInstance)
@@ -21,19 +133,21 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 		resourceType string
 	}
 
-	skuData := make(map[skuKey]PriceInfo)
+	skuData := make(map[skuKey][]PriceInfo)
 
 	// Store Windows license fees separately (they're global, not region-specific)
 	type windowsLicenseType struct {
 		resourceType string // "core" or "ram"
 	}
-	windowsLicenses := make(map[windowsLicenseType]PriceInfo)
+	windowsLicenses := make(map[windowsLicenseType][]PriceInfo)
 
 	// Debug counters
 	instanceSKUCount := 0
 	parsedSKUCount := 0
 	pricedSKUCount := 0
 	windowsSKUCount := 0
+	skippedByTaxonomyCount := 0
+	duplicatePriceKeys := 0
 
 	for _, sku := range skus {
 		displayLower := strings.ToLower(sku.DisplayName)
@@ -58,8 +172,11 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 					key := windowsLicenseType{
 						resourceType: resourceType,
 					}
-					// Store the license
-					windowsLicenses[key] = price
+					if len(windowsLicenses[key]) > 0 {
+						duplicatePriceKeys++
+					}
+					// Store all candidate licenses and select later.
+					windowsLicenses[key] = append(windowsLicenses[key], price)
 					windowsSKUCount++
 				}
 			}
@@ -91,6 +208,11 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 		}
 		parsedSKUCount++
 
+		if !shouldUseSKUForPricing(sku, isSpot, displayLower) {
+			skippedByTaxonomyCount++
+			continue
+		}
+
 		// Track Windows SKUs
 		if isWindows {
 			windowsSKUCount++
@@ -111,44 +233,45 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 		}
 		pricedSKUCount++
 
-		key := skuKey{
-			machineType:  machineFamily,
-			region:       region,
-			isSpot:       isSpot,
-			isWindows:    isWindows,
-			resourceType: resourceType,
-		}
-
-		skuData[key] = price
-
-		// If this is a multi-regional SKU, expand it to actual regions immediately
-		if strings.HasPrefix(region, "multi-") {
-			var targetRegions []string
-			switch region {
-			case "multi-americas":
-				targetRegions = []string{"us-central1", "us-east1", "us-east4", "us-east5", "us-south1", "us-west1", "us-west2", "us-west3", "us-west4", "northamerica-northeast1", "northamerica-northeast2", "southamerica-east1", "southamerica-west1"}
-			case "multi-europe":
-				targetRegions = []string{"europe-west1", "europe-west2", "europe-west3", "europe-west4", "europe-west6", "europe-west8", "europe-west9", "europe-north1", "europe-central2", "europe-southwest1"}
-			case "multi-asia":
-				targetRegions = []string{"asia-east1", "asia-east2", "asia-northeast1", "asia-northeast2", "asia-northeast3", "asia-south1", "asia-south2", "asia-southeast1", "asia-southeast2", "australia-southeast1", "australia-southeast2"}
+		targetRegions := targetRegionsForSKU(sku, region)
+		for _, targetRegion := range targetRegions {
+			key := skuKey{
+				machineType:  machineFamily,
+				region:       targetRegion,
+				isSpot:       isSpot,
+				isWindows:    isWindows,
+				resourceType: resourceType,
 			}
 
-			// Copy the price to all target regions
-			for _, targetRegion := range targetRegions {
-				regionalKey := skuKey{
+			if len(skuData[key]) > 0 {
+				duplicatePriceKeys++
+			}
+			skuData[key] = append(skuData[key], price)
+
+			// Keep multi-regional prices as fallback candidates for specific regions.
+			for _, expandedRegion := range expandedRegionsForMultiRegion(targetRegion) {
+				expandedKey := skuKey{
 					machineType:  machineFamily,
-					region:       targetRegion,
+					region:       expandedRegion,
 					isSpot:       isSpot,
 					isWindows:    isWindows,
 					resourceType: resourceType,
 				}
-				// Only add if not already present (regional pricing takes precedence)
-				if _, exists := skuData[regionalKey]; !exists {
-					skuData[regionalKey] = price
+				if len(skuData[expandedKey]) > 0 {
+					duplicatePriceKeys++
 				}
+				skuData[expandedKey] = append(skuData[expandedKey], price)
 			}
 		}
 	}
+
+	log.Printf(
+		"GCP SKU filtering: parsed=%d priced=%d skippedByTaxonomy=%d duplicateCandidateKeys=%d",
+		parsedSKUCount,
+		pricedSKUCount,
+		skippedByTaxonomyCount,
+		duplicatePriceKeys,
+	)
 
 	// Build instances from machine specs
 	matchedInstances := 0
@@ -195,14 +318,15 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 			hasRAM    bool
 		})
 
-		for key, priceInfo := range skuData {
+		for key, candidates := range skuData {
 			if key.machineType != machineFamily {
 				continue
 			}
 
-			// Calculate hourly price for this resource
-			hourlyPrice := calculateHourlyPrice(priceInfo)
-			if hourlyPrice == 0 {
+			// Select hourly price from all candidates for this SKU key.
+			// Spot should prefer lower prices; on-demand should prefer baseline list prices.
+			hourlyPrice, hasPrice := selectHourlyPrice(candidates, key.isSpot)
+			if !hasPrice {
 				continue
 			}
 
@@ -286,21 +410,23 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 		coreKey := windowsLicenseType{resourceType: "core"}
 		ramKey := windowsLicenseType{resourceType: "ram"}
 
-		coreLicense, hasCoreLicense := windowsLicenses[coreKey]
-		ramLicense, hasRamLicense := windowsLicenses[ramKey]
+		coreLicenseCandidates, hasCoreLicense := windowsLicenses[coreKey]
+		ramLicenseCandidates, hasRamLicense := windowsLicenses[ramKey]
 
 		if !hasCoreLicense {
 			continue // At minimum need core pricing
 		}
 
 		// Calculate Windows license cost (same for all regions)
-		coreLicensePrice := calculateHourlyPrice(coreLicense)
+		coreLicensePrice, hasCorePrice := selectHourlyPrice(coreLicenseCandidates, false)
 		ramLicensePrice := 0.0
 		if hasRamLicense {
-			ramLicensePrice = calculateHourlyPrice(ramLicense)
+			if selectedRAM, hasRAMPrice := selectHourlyPrice(ramLicenseCandidates, false); hasRAMPrice {
+				ramLicensePrice = selectedRAM
+			}
 		}
 
-		if coreLicensePrice == 0 {
+		if !hasCorePrice || coreLicensePrice == 0 {
 			continue // Need at least core pricing
 		}
 
