@@ -127,7 +127,9 @@ function generateInstanceMarkdown(
                     instance.pricing[region]?.[platform]?.[column],
                 );
             case "pct_interrupt":
-                return instance.pricing[region]?.[platform]?.pct_interrupt || "N/A";
+                return (
+                    instance.pricing[region]?.[platform]?.pct_interrupt || "N/A"
+                );
             case "yrTerm1Savings.noUpfront":
             case "yrTerm1Savings.partialUpfront":
             case "yrTerm1Savings.allUpfront":
