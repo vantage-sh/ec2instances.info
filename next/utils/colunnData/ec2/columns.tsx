@@ -1643,7 +1643,7 @@ export const columnsGen = (
         id: "generation",
         sortingFn: "alphanumeric",
         ...makeCellWithRegexSorter(
-            "pricing",
+            "generation",
             (info) => info.getValue() as string,
         ),
     },
