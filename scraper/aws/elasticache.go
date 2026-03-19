@@ -89,6 +89,11 @@ func processElastiCacheOnDemandDimension(attributes map[string]string, priceDime
 			return
 		}
 	}
+	// Extended support is an optional surcharge and should not be mixed into
+	// baseline on-demand node pricing.
+	if strings.Contains(strings.ToLower(attributes["usagetype"]), "extendedsupport") {
+		return
+	}
 
 	cacheEngine := attributes["cacheEngine"]
 	usd := priceDimension.PricePerUnit[currency]
@@ -100,6 +105,11 @@ func processElastiCacheOnDemandDimension(attributes map[string]string, priceDime
 }
 
 func processElastiCacheReservedOffer(attributes map[string]string, offer awsutils.RegionTerm, getPricingData func(platform string) *genericAwsPricingData, currency string) {
+	// Skip optional Extended Support pricing from baseline reserved rates.
+	if strings.Contains(strings.ToLower(attributes["usagetype"]), "extendedsupport") {
+		return
+	}
+
 	data := []*genericAwsPricingData{
 		getPricingData(attributes["cacheEngine"]),
 	}
@@ -184,7 +194,9 @@ func processElastiCacheData(
 				regionDescription = location
 			}
 
-			if strings.Contains(product.Attributes["locationType"], "US") {
+			// Only include baseline AWS Region SKUs.
+			// This excludes Outposts and other non-regional location types.
+			if product.Attributes["locationType"] != "AWS Region" {
 				continue
 			}
 
