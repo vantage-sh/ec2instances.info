@@ -14,13 +14,6 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - uses: actions/setup-go@v5
-              with:
-                  go-version: 1.26.0
-
-            - name: Build the diff-writer binary for later
-              run: cd diff-writer && go build -o diff-writer
-
             - run: make all
               env:
                   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -42,16 +35,6 @@ jobs:
                   GCP_CLIENT_EMAIL: ${{ secrets.GCP_CLIENT_EMAIL }}
                   GCP_PRIVATE_KEY: ${{ secrets.GCP_PRIVATE_KEY }}
                   SLACK_WEBHOOK_URL: ${{ secrets.SCRAPER_SLACK_WEBHOOK_URL }}
-
-            - name: Run the diff writer
-              run: |
-                  ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" ec2 ./www/instances.json
-                  ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" rds ./www/rds/instances.json
-                  ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" cache ./www/cache/instances.json
-                  ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" opensearch ./www/opensearch/instances.json
-                  ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" redshift ./www/redshift/instances.json
-                  ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" azure ./www/azure/instances.json
-                  ./diff-writer/diff-writer "${{ secrets.DB_CONNECTION_STRING }}" gcp ./www/gcp/instances.json
 
             - name: Deploy to the production bucket
               run: cd deployment && npm ci && npm run start
