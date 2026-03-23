@@ -9,7 +9,6 @@ EC2Instances.info is a cloud instance comparison website supporting AWS (EC2, RD
 - **next/**: Next.js 16 frontend (React 19, Tailwind CSS 4, TypeScript)
 - **scraper/**: Go-based data scraper for AWS, Azure, and GCP APIs
 - **www/**: Static output data (instances.json, compressed variants)
-- **diff-writer/**: Go tool for tracking instance data changes
 
 ## Common Commands
 
