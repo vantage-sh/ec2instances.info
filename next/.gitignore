@@ -50,6 +50,3 @@ public/*-regions.json
 # llms data
 public/llms.txt
 public/**/*.md
-public/aws/**/*.png
-public/azure/**/*.png
-public/gcp/**/*.png

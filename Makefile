@@ -1,8 +1,13 @@
 .DEFAULT_GOAL := all
-.PHONY: fetch-data compress-www next write-updated-at gofmt prettier format all
+.PHONY: fetch-data generate-images compress-www next write-updated-at gofmt prettier format all
 
 fetch-data:
 	./fetch_data.sh
+
+generate-images:
+	docker build -t ec2instances-imagegen -f imagegen/Dockerfile .
+	mkdir -p www
+	docker run --user $(shell id -u):$(shell id -g) --rm -e NEXT_PUBLIC_URL -e OPENGRAPH_URL -v $(shell pwd)/www:/app/www ec2instances-imagegen
 
 compress-www:
 	tar -cvzf www_pre_build.tar.gz www
@@ -26,4 +31,4 @@ prettier:
 
 format: gofmt prettier
 
-all: fetch-data compress-www next write-updated-at
+all: fetch-data generate-images compress-www next write-updated-at

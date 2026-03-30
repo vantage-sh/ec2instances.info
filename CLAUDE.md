@@ -8,7 +8,8 @@ EC2Instances.info is a cloud instance comparison website supporting AWS (EC2, RD
 
 - **next/**: Next.js 16 frontend (React 19, Tailwind CSS 4, TypeScript)
 - **scraper/**: Go-based data scraper for AWS, Azure, and GCP APIs
-- **www/**: Static output data (instances.json, compressed variants)
+- **imagegen/**: Go-based OG image generator (outputs to `www/`)
+- **www/**: Static output data (instances.json, OG images, compressed variants)
 
 ## Common Commands
 
@@ -21,7 +22,7 @@ npm run init               # Compress data (required before first dev run)
 npm run dev                # Start dev server with Turbopack
 npm run check-types        # TypeScript type checking
 npm run test               # Run Vitest tests
-npm run build              # Full build (init + llms + images + next build)
+npm run build              # Full build (init + llms + next build)
 ```
 
 ### Formatting (run from root)
@@ -33,11 +34,14 @@ make format                # Run gofmt and prettier via Docker
 ### Data Fetching
 
 ```bash
-# Quick way (if not touching scraper):
+# Quick way (if not touching scraper or imagegen):
 curl -L https://instances.vantagestaging.sh/www_pre_build.tar.gz | tar -xzf -
 
 # Full scrape (requires AWS, Azure, GCP credentials):
 ./fetch_data.sh
+
+# Generate OG images (requires NEXT_PUBLIC_URL; run from root):
+make generate-images
 ```
 
 ### Full Release Build
@@ -45,7 +49,7 @@ curl -L https://instances.vantagestaging.sh/www_pre_build.tar.gz | tar -xzf -
 Don't do this generally unless explicitly asked.
 
 ```bash
-make all                   # fetch-data + compress-www + next build
+make all                   # fetch-data + generate-images + compress-www + next build
 ```
 
 ## Architecture
@@ -58,13 +62,14 @@ make all                   # fetch-data + compress-www + next build
 - **components/**: React components (Radix UI, shadcn/ui patterns)
 - **utils/**: Shared utilities and data processing
 - **llms/**: LLM-generated content for SEO
-- **imageGen/**: OG image generation
+- **imageGen/**: Font and icon assets used by the Go imagegen tool
 
 ### Data Flow
 
-1. Go scraper fetches from AWS/Azure/GCP APIs → writes to `www/`
-2. `npm run init` compresses JSON data with LZMA
-3. Frontend loads compressed data client-side via `@/utils/data/`
+1. Go scraper fetches from AWS/Azure/GCP APIs → writes JSON to `www/`
+2. Go imagegen reads JSON from `www/`, generates OG images → writes PNGs to `www/`
+3. `npm run init` compresses JSON data with LZMA
+4. Frontend loads compressed data client-side via `@/utils/data/`
 
 ### Scraper Structure (scraper/)
 

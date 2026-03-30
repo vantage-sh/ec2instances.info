@@ -89,7 +89,7 @@ To build a full release, you will likely want to clone a clean slate version of 
 - `NEXT_PUBLIC_INSTANCESKV_URL`: **(Optional)** The base URL you wish to use for [instanceskv](https://github.com/vantage-sh/instanceskv). If this is unset, it will use the version hosted by Vantage.
 - `SLACK_WEBHOOK_URL`: **(Optional)** A Slack webhook to send scraping warnings to.
 
-**Important:** If you don't want your build to be indexed by search engines, you should also set `DENY_ROBOTS_TXT=1`. To remove adverts, you can also add `NEXT_PUBLIC_REMOVE_ADVERTS=1`. You should also set `OPENGRAPH_URL=<some url>` to a URL which serves a 1911x1156 image if you aren't Vantage and deploying to production. The default is not MIT licensed.
+**Important:** If you don't want your build to be indexed by search engines, you should also set `DENY_ROBOTS_TXT=1`. To remove adverts, you can also add `NEXT_PUBLIC_REMOVE_ADVERTS=1`. You should also set `OPENGRAPH_URL=<some url>` to a URL which serves a 1911x1156 JPEG background image for OG image generation; if you aren't Vantage and deploying to production, this is required as the default background is not MIT licensed.
 
 This will take ~30 minutes, and when it is done you will have a `www` folder with the content you can deploy to your web server. Your web server should do the following:
 
