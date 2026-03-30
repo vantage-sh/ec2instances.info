@@ -1,0 +1,19 @@
+name: Rebase Develop into Main
+on:
+    workflow_dispatch:
+
+jobs:
+    rebase:
+        name: Rebase Develop into Main
+        runs-on: ubuntu-24.04-arm
+        permissions:
+            contents: write
+        steps:
+            - uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+
+            - run: git fetch origin main develop
+            - run: git checkout main
+            - run: git rebase origin/develop
+            - run: git push origin main
