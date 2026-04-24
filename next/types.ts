@@ -50,6 +50,8 @@ export interface EC2Instance {
         includes_swap_partition: boolean;
         storage_needs_initialization: boolean;
         trim_support: boolean;
+        storage_read_iops?: number;
+        storage_write_iops?: number;
     };
     arch: string[];
     network_performance: string;
