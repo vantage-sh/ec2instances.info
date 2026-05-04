@@ -81,6 +81,44 @@ func enrichElastiCacheInstance(instance map[string]any, attributes map[string]st
 	}
 }
 
+// processCacheStorageDimensions accumulates per-GB-month storage rates for
+// an ElastiCache storage SKU. Storage costs apply per-engine (e.g. data
+// tiering for Redis/Valkey on r6gd) and are emitted globally to all
+// instances.
+func processCacheStorageDimensions(
+	attributes map[string]string,
+	offer awsutils.RegionTerm,
+	regionName string,
+	currency string,
+	ratesPerRegion map[string]map[string]float64,
+) {
+	engine := attributes["cacheEngine"]
+	if engine == "" {
+		engine = attributes["databaseEngine"]
+	}
+	if engine == "" {
+		// Use a sentinel so we still emit data when no engine attribute
+		// is provided; consumers will see a single platform key.
+		engine = "default"
+	}
+
+	for _, dim := range offer.PriceDimensions {
+		dimCopy := dim
+		rate, ok := extractStorageRate(&dimCopy, currency)
+		if !ok || rate <= 0 {
+			continue
+		}
+		regionRates, exists := ratesPerRegion[regionName]
+		if !exists {
+			regionRates = make(map[string]float64)
+			ratesPerRegion[regionName] = regionRates
+		}
+		if existing, ok := regionRates[engine]; !ok || rate > existing {
+			regionRates[engine] = rate
+		}
+	}
+}
+
 func processElastiCacheOnDemandDimension(attributes map[string]string, priceDimension awsutils.RegionPriceDimension, getPricingData func(platform string) *genericAwsPricingData, currency string) {
 	descLower := strings.ToLower(priceDimension.Description)
 	for _, chunk := range BAD_DESCRIPTION_CHUNKS {
@@ -174,6 +212,11 @@ func processElastiCacheData(
 	instancesHashmap := make(map[string]map[string]any)
 	sku2SkuData := make(map[string]genericAwsSkuData)
 
+	// Storage SKU bookkeeping (data tiering on r6gd Redis/Valkey).
+	// Storage rates are per-engine and global to the run.
+	cacheStorageSkus := make(map[string]map[string]string)
+	cacheStorageRates := make(map[string]map[string]float64) // region -> engine -> rate
+
 	// The descriptions found for each region
 	regionDescriptions := make(map[string]string)
 
@@ -190,6 +233,19 @@ func processElastiCacheData(
 		// Process the products in the region
 		regionDescription := ""
 		for _, product := range rawRegion.RegionData.Products {
+			// Capture storage SKUs (data tiering, e.g. r6gd Redis/Valkey).
+			// TODO: ElastiCache may use ProductFamily values like
+			// "Cache Storage" or "ElastiCache Storage"; the exact name
+			// has not been verified against live data. Accept any
+			// family containing "Storage" so we still emit the field
+			// when present.
+			if product.ProductFamily != "Cache Instance" &&
+				strings.Contains(strings.ToLower(product.ProductFamily), "storage") &&
+				product.Attributes["locationType"] == "AWS Region" {
+				cacheStorageSkus[product.SKU] = product.Attributes
+				continue
+			}
+
 			if product.ProductFamily != "Cache Instance" {
 				continue
 			}
@@ -231,6 +287,15 @@ func processElastiCacheData(
 		// Process the on demand pricing
 		for _, offerMapping := range rawRegion.RegionData.Terms.OnDemand {
 			for _, offer := range offerMapping {
+				// Storage SKUs flow through their own per-GB-month path.
+				if storageAttrs, ok := cacheStorageSkus[offer.SKU]; ok {
+					processCacheStorageDimensions(
+						storageAttrs, offer, rawRegion.RegionName,
+						currency, cacheStorageRates,
+					)
+					continue
+				}
+
 				// Get the instance in question
 				skuData, ok := sku2SkuData[offer.SKU]
 				if !ok {
@@ -303,6 +368,12 @@ func processElastiCacheData(
 	// Clean up empty regions and set the regions map for non-empty regions
 	for _, instance := range instancesHashmap {
 		instance["regions"] = cleanEmptyRegions(instance["pricing"].(map[string]map[string]any), regionDescriptions)
+	}
+
+	// Build the per-instance costPerGb. Storage rates are global per-engine.
+	cacheCostPerGb := buildCostPerGb(cacheStorageRates, true)
+	for _, instance := range instancesHashmap {
+		instance["costPerGb"] = cacheCostPerGb
 	}
 
 	// Set the cache parameters

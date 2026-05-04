@@ -56,6 +56,7 @@ type GCPInstance struct {
 	AvailabilityZones  map[string][]string   `json:"availability_zones,omitempty"`
 	LocalSSD           bool                  `json:"local_ssd"`
 	LocalSSDSize       int                   `json:"local_ssd_size,omitempty"`
+	CostPerGb          *CostPerGb            `json:"costPerGb"`
 	SharedCPU          bool                  `json:"shared_cpu"`
 	ComputeOptimized   bool                  `json:"compute_optimized,omitempty"`
 	MemoryOptimized    bool                  `json:"memory_optimized,omitempty"`

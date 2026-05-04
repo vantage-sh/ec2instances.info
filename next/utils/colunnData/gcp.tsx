@@ -6,7 +6,7 @@ import {
     expr,
     transformAllDataTables,
 } from "./shared";
-import { CostDuration } from "@/types";
+import { CostDuration, CostPerGb } from "@/types";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import exprCompiler from "@/utils/expr";
 
@@ -42,6 +42,7 @@ export type GCPInstance = {
     compute_optimized?: boolean;
     memory_optimized?: boolean;
     accelerator_type?: string;
+    costPerGb?: CostPerGb;
 };
 
 const initialColumnsArr = [

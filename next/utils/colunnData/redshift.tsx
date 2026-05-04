@@ -1,5 +1,5 @@
 import { PricingUnit } from "@/types";
-import { CostDuration } from "@/types";
+import { CostDuration, CostPerGb } from "@/types";
 import {
     calculateCost,
     calculateCostNumeric,
@@ -37,6 +37,7 @@ export type Instance = {
     storage_per_node: string;
     storage_capacity: string;
     pricing: RedshiftPricing;
+    costPerGb?: CostPerGb;
 };
 
 const initialColumnsArr = [

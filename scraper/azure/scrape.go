@@ -40,6 +40,8 @@ type AzureInstance struct {
 	PrettyNameAzure   string         `json:"pretty_name_azure,omitempty"`
 	AzureSpecsData    `json:",inline"`
 
+	CostPerGb *CostPerGb `json:"costPerGb,omitempty"`
+
 	disownedFromFamily bool
 }
 
@@ -420,6 +422,15 @@ func DoAzureScraping() {
 	for _, instance := range instances {
 		if instance.PrettyNameAzure == "" {
 			instance.PrettyNameAzure = instance.PrettyName
+		}
+
+		var baselineGb float64 = 0
+		if instance.Storage.Size > 0 {
+			baselineGb = float64(instance.Storage.Size) / 1024.0
+		}
+		instance.CostPerGb = &CostPerGb{
+			Baseline: baselineGb,
+			Regions:  map[string]any{},
 		}
 	}
 

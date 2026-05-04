@@ -1,4 +1,4 @@
-import { CostDuration, PricingUnit } from "@/types";
+import { CostDuration, CostPerGb, PricingUnit } from "@/types";
 import {
     calculateCost,
     calculateCostNumeric,
@@ -31,6 +31,7 @@ export type Instance = {
     currentGeneration: string;
     family: string;
     memory: string;
+    costPerGb?: CostPerGb;
 };
 
 const initialColumnsArr = [

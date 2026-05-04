@@ -334,6 +334,18 @@ func processEC2Data(
 	// Clean up empty regions and set the regions map for non-empty regions
 	for _, instance := range instancesHashmap {
 		instance.Regions = cleanEmptyRegions(instance.Pricing, regionDescriptions)
+
+		// Populate costPerGb so storage is expressed separately from compute.
+		// Baseline is the total instance-store capacity in GB; instance store
+		// has no per-GB overage rate, so Regions is always an empty map.
+		var totalGb float64 = 0
+		if instance.Storage != nil {
+			totalGb = float64(instance.Storage.Size * instance.Storage.Devices)
+		}
+		instance.CostPerGb = &CostPerGb{
+			Baseline: totalGb,
+			Regions:  map[string]any{},
+		}
 	}
 
 	// Save the instances

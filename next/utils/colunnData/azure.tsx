@@ -6,7 +6,7 @@ import {
     expr,
     transformAllDataTables,
 } from "./shared";
-import { CostDuration } from "@/types";
+import { CostDuration, CostPerGb } from "@/types";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import exprCompiler from "@/utils/expr";
 
@@ -56,6 +56,7 @@ export type AzureInstance = {
     rdma: boolean;
     storage?: Storage;
     ACU?: number;
+    costPerGb?: CostPerGb;
 };
 
 const initialColumnsArr = [

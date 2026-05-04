@@ -44,6 +44,31 @@ func enrichRedshiftInstance(instance map[string]any, attributes map[string]strin
 	}
 }
 
+// processRedshiftStorageDimensions accumulates RA3 managed-storage rates.
+// Redshift storage has no platform layer, so we use a sentinel "" key.
+func processRedshiftStorageDimensions(
+	offer awsutils.RegionTerm,
+	regionName string,
+	currency string,
+	ratesPerRegion map[string]map[string]float64,
+) {
+	for _, dim := range offer.PriceDimensions {
+		dimCopy := dim
+		rate, ok := extractStorageRate(&dimCopy, currency)
+		if !ok || rate <= 0 {
+			continue
+		}
+		regionRates, exists := ratesPerRegion[regionName]
+		if !exists {
+			regionRates = make(map[string]float64)
+			ratesPerRegion[regionName] = regionRates
+		}
+		if existing, ok := regionRates[""]; !ok || rate > existing {
+			regionRates[""] = rate
+		}
+	}
+}
+
 func processRedshiftOnDemandDimension(priceDimension awsutils.RegionPriceDimension, getPricingData func() *genericAwsPricingData, currency string) {
 	descLower := strings.ToLower(priceDimension.Description)
 	for _, chunk := range BAD_DESCRIPTION_CHUNKS {
@@ -145,6 +170,10 @@ func processRedshiftData(
 	instancesHashmap := make(map[string]map[string]any)
 	sku2Instance := make(map[string]map[string]any)
 
+	// Storage SKU bookkeeping (RA3 managed storage). No platform layer.
+	redshiftStorageSkus := make(map[string]map[string]string)
+	redshiftStorageRates := make(map[string]map[string]float64) // region -> "" -> rate
+
 	// The descriptions found for each region
 	regionDescriptions := make(map[string]string)
 
@@ -160,6 +189,16 @@ func processRedshiftData(
 		// Process the products in the region
 		regionDescription := ""
 		for _, product := range rawRegion.RegionData.Products {
+			// Capture storage SKUs (RA3 managed storage). The exact
+			// ProductFamily for Redshift managed storage is "Storage";
+			// accept either "Storage" or anything containing
+			// "Managed Storage" as a defensive fallback.
+			if product.ProductFamily == "Storage" ||
+				strings.Contains(strings.ToLower(product.ProductFamily), "managed storage") {
+				redshiftStorageSkus[product.SKU] = product.Attributes
+				continue
+			}
+
 			if product.ProductFamily != "Compute Instance" {
 				continue
 			}
@@ -204,6 +243,15 @@ func processRedshiftData(
 		// Process the on demand pricing
 		for _, offerMapping := range rawRegion.RegionData.Terms.OnDemand {
 			for _, offer := range offerMapping {
+				// Storage SKUs flow through their own per-GB-month path.
+				if _, ok := redshiftStorageSkus[offer.SKU]; ok {
+					processRedshiftStorageDimensions(
+						offer, rawRegion.RegionName, currency,
+						redshiftStorageRates,
+					)
+					continue
+				}
+
 				// Get the instance in question
 				instance, ok := sku2Instance[offer.SKU]
 				if !ok {
@@ -275,6 +323,15 @@ func processRedshiftData(
 	// Clean up empty regions and set the regions map for non-empty regions
 	for _, instance := range instancesHashmap {
 		instance["regions"] = clearHalfEmptyRegions(instance["pricing"].(map[string]*genericAwsPricingData), regionDescriptions)
+	}
+
+	// Build per-instance costPerGb. Redshift managed storage rates have
+	// no platform layer; the same value is attached to every instance
+	// (RA3 nodes use it; non-RA3 nodes will see an empty regions map
+	// since they don't have managed-storage SKUs).
+	redshiftCostPerGb := buildCostPerGb(redshiftStorageRates, false)
+	for _, instance := range instancesHashmap {
+		instance["costPerGb"] = redshiftCostPerGb
 	}
 
 	// Set the node parameters

@@ -218,6 +218,46 @@ func unbundledSqlServerLicenseSurcharge(
 
 type engineCode = string
 
+// processRdsStorageDimensions accumulates per-GB-month storage rates for an
+// RDS Database Storage SKU into the global per-region/per-engine rate maps.
+// Storage rates are per-engine (not per-instance), so the same map is later
+// applied to every instance.
+func processRdsStorageDimensions(
+	attributes map[string]string,
+	offer awsutils.RegionTerm,
+	regionName string,
+	currency string,
+	ratesPerRegion map[string]map[string]float64,
+) {
+	engineCode := attributes["engineCode"]
+	if engineCode == "" {
+		// Fall back to databaseEngine when engineCode is absent so we
+		// still emit something useful.
+		engineCode = attributes["databaseEngine"]
+	}
+	if engineCode == "" {
+		return
+	}
+
+	for _, dim := range offer.PriceDimensions {
+		dimCopy := dim
+		rate, ok := extractStorageRate(&dimCopy, currency)
+		if !ok || rate <= 0 {
+			continue
+		}
+		regionRates, exists := ratesPerRegion[regionName]
+		if !exists {
+			regionRates = make(map[string]float64)
+			ratesPerRegion[regionName] = regionRates
+		}
+		// Keep the maximum rate when multiple dimensions match (rare;
+		// RDS storage SKUs typically have a single relevant tier).
+		if existing, ok := regionRates[engineCode]; !ok || rate > existing {
+			regionRates[engineCode] = rate
+		}
+	}
+}
+
 func processRdsOnDemandDimension(
 	attributes map[string]string,
 	instanceType string,
@@ -371,6 +411,13 @@ func processRDSData(
 	instancesHashmap := make(map[string]map[string]any)
 	sku2SkuData := make(map[string]genericAwsSkuData)
 
+	// Storage SKU bookkeeping: SKU -> attributes (region, databaseEngine, engineCode).
+	// Storage pricing is keyed by engine (not by instance type), so we accumulate it
+	// once and attach the same costPerGb to every instance after processing.
+	rdsStorageSkus := make(map[string]map[string]string)
+	// region -> engineCode -> per-GB-month rate
+	rdsStorageRates := make(map[string]map[string]float64)
+
 	// The descriptions found for each region
 	regionDescriptions := make(map[string]string)
 
@@ -386,6 +433,18 @@ func processRDSData(
 		// Process the products in the region
 		regionDescription := ""
 		for _, product := range rawRegion.RegionData.Products {
+			// Capture storage SKUs (Single-AZ only, to match the
+			// instance-pricing convention below). Storage rates are
+			// keyed by engine and applied to every instance later.
+			if product.ProductFamily == "Database Storage" {
+				if product.Attributes["deploymentOption"] != "" &&
+					product.Attributes["deploymentOption"] != "Single-AZ" {
+					continue
+				}
+				rdsStorageSkus[product.SKU] = product.Attributes
+				continue
+			}
+
 			if product.ProductFamily != "Database Instance" {
 				continue
 			}
@@ -441,6 +500,16 @@ func processRDSData(
 		// Process the on demand pricing
 		for _, offerMapping := range rawRegion.RegionData.Terms.OnDemand {
 			for _, offer := range offerMapping {
+				// Storage SKUs flow through their own per-GB-month
+				// path; they don't have a single hourly rate.
+				if storageAttrs, ok := rdsStorageSkus[offer.SKU]; ok {
+					processRdsStorageDimensions(
+						storageAttrs, offer, rawRegion.RegionName,
+						currency, rdsStorageRates,
+					)
+					continue
+				}
+
 				// Get the instance in question
 				skuData, ok := sku2SkuData[offer.SKU]
 				if !ok {
@@ -537,6 +606,15 @@ func processRDSData(
 				instance["engine_support"] = support
 			}
 		}
+	}
+
+	// Build the per-instance costPerGb. RDS storage rates are per-engine
+	// and global to the run, so the same value is attached to every
+	// instance. Downstream consumers can pick the engine relevant to
+	// their workload from the map.
+	rdsCostPerGb := buildCostPerGb(rdsStorageRates, true)
+	for _, instance := range instancesHashmap {
+		instance["costPerGb"] = rdsCostPerGb
 	}
 
 	// Save the data
