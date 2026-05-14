@@ -1,6 +1,6 @@
 import { CostDuration, PricingUnit } from "@/types";
 import {
-    calculateCost,
+    getPricingSorter,
     regex,
     makeCellWithRegexSorter,
     expr,
@@ -76,48 +76,6 @@ export function makePrettyNames<V>(
     ] as const;
 }
 
-function getPricingSorter(
-    selectedRegion: string,
-    pricingUnit: PricingUnit,
-    costDuration: CostDuration,
-    getter: (
-        pricing: OpenSearchPricing[string] | undefined,
-    ) => string | undefined,
-    currency: {
-        code: string;
-        usdRate: number;
-        cnyRate: number;
-    },
-) {
-    return {
-        sortUndefined: "last",
-        accessorFn: (row) => {
-            const g = getter(row.pricing?.[selectedRegion]);
-            if (isNaN(Number(g)) || !g) return undefined;
-            return calculateCost(
-                g,
-                row,
-                pricingUnit,
-                costDuration,
-                selectedRegion,
-                currency,
-            );
-        },
-        ...makeCellWithRegexSorter("pricing", (info) => {
-            const pricing = info.row.original.pricing;
-            const price = getter(pricing?.[selectedRegion]);
-            if (isNaN(Number(price)) || !price) return undefined;
-            return calculateCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-                selectedRegion,
-                currency,
-            );
-        }),
-    } satisfies Partial<ColumnDef<Instance>>;
-}
 
 export const columnsGen = (
     selectedRegion: string,
@@ -203,8 +161,7 @@ export const columnsGen = (
         accessorKey: "pricing",
         id: "cost-ondemand",
         header: "On Demand Cost",
-        sortingFn: "alphanumeric",
-        ...getPricingSorter(
+        ...getPricingSorter<Instance>(
             selectedRegion,
             pricingUnit,
             costDuration,
@@ -216,8 +173,7 @@ export const columnsGen = (
         accessorKey: "pricing",
         id: "cost-reserved",
         header: "Reserved Cost",
-        sortingFn: "alphanumeric",
-        ...getPricingSorter(
+        ...getPricingSorter<Instance>(
             selectedRegion,
             pricingUnit,
             costDuration,
