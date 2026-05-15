@@ -50,9 +50,10 @@ async function getData() {
                 (i: EC2Instance) => i.instance_type === instance.instance_type,
             );
             if (!matchingInstance) {
-                throw new Error(
-                    `Instance ${instance.instance_type} not found in instances.json`,
+                console.warn(
+                    `Skipping stale China ElastiCache instance ${instance.instance_type} missing from instances.json`,
                 );
+                continue;
             }
             matchingInstance.pricing = {
                 ...matchingInstance.pricing,
