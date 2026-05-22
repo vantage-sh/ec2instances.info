@@ -85,7 +85,6 @@ To build a full release, you will likely want to clone a clean slate version of 
     - `SENTRY_AUTH_TOKEN`: The Sentry auth token.
 - `NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID`: **(Optional)** The ID used for Google Tag Manager.
 - `NEXT_PUBLIC_ENABLE_VANTAGE_SCRIPT_TAG`: **(Optional)** If set to 1, enables the Vantage script tag. Intended for use internally.
-- `NEXT_PUBLIC_UNIFY_TAG_ID`: **(Optional)** The ID for the Unify tag. If this is set, `NEXT_PUBLIC_UNIFY_API_KEY` is also required.
 - `NEXT_PUBLIC_INSTANCESKV_URL`: **(Optional)** The base URL you wish to use for [instanceskv](https://github.com/vantage-sh/instanceskv). If this is unset, it will use the version hosted by Vantage.
 - `SLACK_WEBHOOK_URL`: **(Optional)** A Slack webhook to send scraping warnings to.
 

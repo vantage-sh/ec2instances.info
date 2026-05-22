@@ -59,14 +59,6 @@ export default async function RootLayout({
                         strategy="afterInteractive"
                     />
                 )}
-                {process.env.NEXT_PUBLIC_UNIFY_TAG_ID && (
-                    <Script
-                        src={`https://tag.unifyintent.com/v1/${process.env.NEXT_PUBLIC_UNIFY_TAG_ID}/script.js`}
-                        strategy="afterInteractive"
-                        id="unifytag"
-                        data-api-key={process.env.NEXT_PUBLIC_UNIFY_API_KEY}
-                    />
-                )}
             </head>
             <body className={inter.className}>
                 <TopNav />
