@@ -54,6 +54,48 @@ export function expr(row: Row<any>, columnId: string, filterValue: string) {
     return runCachedEval(filterValue, conv, strValue);
 }
 
+const hourMultipliers = {
+    secondly: 1 / (60 * 60),
+    minutely: 1 / 60,
+    hourly: 1,
+    daily: 24,
+    weekly: 7 * 24,
+    monthly: (365 * 24) / 12,
+    annually: 365 * 24,
+};
+
+export function calculateCostNumeric(
+    price: string | undefined,
+    instance: any,
+    pricingUnit: PricingUnit,
+    costDuration: CostDuration,
+    selectedRegion: string,
+    currency: {
+        code: string;
+        usdRate: number;
+        cnyRate: number;
+    },
+): number | undefined {
+    if (!price) return undefined;
+
+    const durationMultiplier = hourMultipliers[costDuration];
+    let pricingUnitModifier = 1;
+
+    if (pricingUnit !== "instance") {
+        pricingUnitModifier = Number(instance[pricingUnit]);
+        if (!pricingUnitModifier) return undefined;
+    }
+
+    const currencyMultiplier = selectedRegion.startsWith("cn-")
+        ? currency.cnyRate
+        : currency.usdRate;
+
+    return (
+        ((Number(price) * durationMultiplier) / pricingUnitModifier) *
+        currencyMultiplier
+    );
+}
+
 export function calculateCost(
     price: string | undefined,
     instance: any,
@@ -68,30 +110,15 @@ export function calculateCost(
 ) {
     if (!price) return "N/A";
 
-    const hourMultipliers = {
-        secondly: 1 / (60 * 60),
-        minutely: 1 / 60,
-        hourly: 1,
-        daily: 24,
-        weekly: 7 * 24,
-        monthly: (365 * 24) / 12,
-        annually: 365 * 24,
-    };
-
-    const durationMultiplier = hourMultipliers[costDuration];
-    let pricingUnitModifier = 1;
-
-    if (pricingUnit !== "instance") {
-        pricingUnitModifier = Number(instance[pricingUnit]);
-    }
-
-    const currencyMultiplier = selectedRegion.startsWith("cn-")
-        ? currency.cnyRate
-        : currency.usdRate;
-
-    const perTime =
-        ((Number(price) * durationMultiplier) / pricingUnitModifier) *
-        currencyMultiplier;
+    const perTime = calculateCostNumeric(
+        price,
+        instance,
+        pricingUnit,
+        costDuration,
+        selectedRegion,
+        currency,
+    );
+    if (perTime === undefined) return "N/A";
 
     const currencyData = Intl.NumberFormat("en-US", {
         style: "currency",
