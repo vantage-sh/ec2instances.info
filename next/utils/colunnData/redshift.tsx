@@ -1,7 +1,8 @@
 import { PricingUnit } from "@/types";
 import { CostDuration } from "@/types";
 import {
-    getPricingSorter,
+    calculateCost,
+    calculateCostNumeric,
     regex,
     makeCellWithRegexSorter,
     expr,
@@ -84,6 +85,49 @@ export function makePrettyNames<V>(
     ];
 }
 
+function getPricingSorter(
+    selectedRegion: string,
+    pricingUnit: PricingUnit,
+    costDuration: CostDuration,
+    getter: (
+        pricing: RedshiftPricing[string] | undefined,
+    ) => string | undefined,
+    currency: {
+        code: string;
+        usdRate: number;
+        cnyRate: number;
+    },
+) {
+    return {
+        sortingFn: "basic" as const,
+        sortUndefined: "last",
+        accessorFn: (row) => {
+            const g = getter(row.pricing?.[selectedRegion]);
+            if (isNaN(Number(g)) || !g) return undefined;
+            return calculateCostNumeric(
+                g,
+                row,
+                pricingUnit,
+                costDuration,
+                selectedRegion,
+                currency,
+            );
+        },
+        ...makeCellWithRegexSorter("pricing", (info) => {
+            const pricing = info.row.original.pricing;
+            const price = getter(pricing?.[selectedRegion]);
+            if (isNaN(Number(price)) || !price) return undefined;
+            return calculateCost(
+                price,
+                info.row.original,
+                pricingUnit,
+                costDuration,
+                selectedRegion,
+                currency,
+            );
+        }),
+    } satisfies Partial<ColumnDef<Instance>>;
+}
 
 export const columnsGen = (
     selectedRegion: string,
@@ -188,7 +232,7 @@ export const columnsGen = (
         accessorKey: "pricing",
         header: "On Demand Cost",
         id: "cost-ondemand",
-        ...getPricingSorter<Instance>(
+        ...getPricingSorter(
             selectedRegion,
             pricingUnit,
             costDuration,
@@ -202,7 +246,7 @@ export const columnsGen = (
         accessorKey: "pricing",
         header: "Reserved Cost",
         id: "cost-reserved",
-        ...getPricingSorter<Instance>(
+        ...getPricingSorter(
             selectedRegion,
             pricingUnit,
             costDuration,
@@ -211,3 +255,4 @@ export const columnsGen = (
         ),
     },
 ];
+

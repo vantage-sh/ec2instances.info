@@ -211,52 +211,6 @@ export function makeCellWithRegexSorter<Instance>(
     };
 }
 
-export function getPricingSorter<
-    Instance extends { pricing: Record<string, any> },
->(
-    selectedRegion: string,
-    pricingUnit: PricingUnit,
-    costDuration: CostDuration,
-    getter: (
-        pricing: Instance["pricing"][string] | undefined,
-    ) => string | undefined,
-    currency: {
-        code: string;
-        usdRate: number;
-        cnyRate: number;
-    },
-) {
-    return {
-        sortingFn: "basic" as const,
-        sortUndefined: 1 as const,
-        accessorFn: (row: Instance) => {
-            const g = getter(row.pricing?.[selectedRegion]);
-            if (isNaN(Number(g)) || !g) return undefined;
-            return calculateCostNumeric(
-                g,
-                row,
-                pricingUnit,
-                costDuration,
-                selectedRegion,
-                currency,
-            );
-        },
-        ...makeCellWithRegexSorter<Instance>("pricing" as keyof Instance, (info) => {
-            const pricing = info.row.original.pricing;
-            const price = getter(pricing?.[selectedRegion]);
-            if (isNaN(Number(price)) || !price) return undefined;
-            return calculateCost(
-                price,
-                info.row.original,
-                pricingUnit,
-                costDuration,
-                selectedRegion,
-                currency,
-            );
-        }),
-    };
-}
-
 export function transformAllDataTables(
     values: readonly (readonly [string, boolean])[],
     dataTablesData: any,
