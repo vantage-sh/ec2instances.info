@@ -1,6 +1,7 @@
 import { CostDuration, PricingUnit } from "@/types";
 import {
     calculateCost,
+    calculateCostNumeric,
     regex,
     makeCellWithRegexSorter,
     expr,
@@ -90,11 +91,12 @@ function getPricingSorter(
     },
 ) {
     return {
+        sortingFn: "basic" as const,
         sortUndefined: "last",
         accessorFn: (row) => {
             const g = getter(row.pricing?.[selectedRegion]);
             if (isNaN(Number(g)) || !g) return undefined;
-            return calculateCost(
+            return calculateCostNumeric(
                 g,
                 row,
                 pricingUnit,
@@ -203,7 +205,6 @@ export const columnsGen = (
         accessorKey: "pricing",
         id: "cost-ondemand",
         header: "On Demand Cost",
-        sortingFn: "alphanumeric",
         ...getPricingSorter(
             selectedRegion,
             pricingUnit,
@@ -216,7 +217,6 @@ export const columnsGen = (
         accessorKey: "pricing",
         id: "cost-reserved",
         header: "Reserved Cost",
-        sortingFn: "alphanumeric",
         ...getPricingSorter(
             selectedRegion,
             pricingUnit,
