@@ -1,7 +1,7 @@
 {
     "private": true,
     "scripts": {
-        "start": "tsx index.ts",
+        "start": "NODE_OPTIONS=--max-old-space-size=8192 tsx index.ts",
         "migrate-kv-r2-overlap": "tsx migrate-kv-r2-overlap.ts"
     },
     "dependencies": {
