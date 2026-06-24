@@ -169,23 +169,13 @@ func processRDSAndElastiCacheReservedOffer(
 	offer awsutils.RegionTerm,
 	currency string,
 ) {
+	effectiveHourly := effectiveReservedHourly(offer, termCode, currency)
+	if effectiveHourly <= 0 {
+		return
+	}
 	for _, data := range data {
-		for _, offer := range offer.PriceDimensions {
-			usd := offer.PricePerUnit[currency]
-			if usd != "" && usd != "0" {
-				f := awsutils.Floaty(usd)
-				switch termCode {
-				case "yrTerm1Standard.partialUpfront", "yrTerm1Standard.allUpfront":
-					f = f / 365 / 24
-				case "yrTerm3Standard.partialUpfront", "yrTerm3Standard.allUpfront":
-					f = f / (365 * 3) / 24
-				}
-				if f != 0 && f > data.Reserved[termCode] {
-					data.Reserved[termCode] = f
-				}
-			} else {
-				log.Fatalln("RDS or ElastiCache Reserved pricing data has no price", offer)
-			}
+		if effectiveHourly > data.Reserved[termCode] {
+			data.Reserved[termCode] = effectiveHourly
 		}
 	}
 }
