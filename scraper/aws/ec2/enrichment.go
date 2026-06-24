@@ -100,6 +100,11 @@ func enrichEc2Instance(instance *EC2Instance, attributes map[string]string, ec2A
 		}
 		instance.Arch = arches
 
+		if apiDescription.VCpuInfo != nil && apiDescription.VCpuInfo.DefaultCores != nil {
+			cores := int(*apiDescription.VCpuInfo.DefaultCores)
+			instance.Cores = &cores
+		}
+
 		if apiDescription.NetworkInfo.NetworkPerformance == nil {
 			instance.NetworkPerformance = "Unknown"
 		} else if *apiDescription.NetworkInfo.NetworkPerformance != "NA" {

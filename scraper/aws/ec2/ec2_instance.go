@@ -66,6 +66,7 @@ type EC2Instance struct {
 	InstanceType             string                     `json:"instance_type"`
 	Family                   string                     `json:"family"`
 	VCPU                     awsutils.Averager[int]     `json:"vCPU"`
+	Cores                    *int                       `json:"cores"`
 	Memory                   awsutils.Averager[float64] `json:"memory"`
 	MemorySpeed              *int                       `json:"memory_speed"`
 	PrettyName               string                     `json:"pretty_name"`
