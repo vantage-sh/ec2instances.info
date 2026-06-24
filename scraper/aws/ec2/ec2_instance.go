@@ -63,9 +63,12 @@ type Storage struct {
 }
 
 type EC2Instance struct {
-	InstanceType             string                     `json:"instance_type"`
-	Family                   string                     `json:"family"`
-	VCPU                     awsutils.Averager[int]     `json:"vCPU"`
+	InstanceType string                 `json:"instance_type"`
+	Family       string                 `json:"family"`
+	VCPU         awsutils.Averager[int] `json:"vCPU"`
+	// Cores is the number of physical cores (vCPUs = cores * threads-per-core).
+	// Sourced from DescribeInstanceTypes -> VCpuInfo.DefaultCores; nil when AWS does not report it.
+	// https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VCpuInfo.html
 	Cores                    *int                       `json:"cores"`
 	Memory                   awsutils.Averager[float64] `json:"memory"`
 	MemorySpeed              *int                       `json:"memory_speed"`
