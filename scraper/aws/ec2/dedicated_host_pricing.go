@@ -13,6 +13,26 @@ import (
 	"sync"
 )
 
+// dedicatedHostInstanceTypeMatches reports whether an EC2 instance type
+// (e.g. "mac2-m1ultra.metal") corresponds to a Dedicated Host pricing SKU
+// (e.g. "mac2-m1ultra"). The match is on the family/base portion of the
+// instance type (the part before the first ".") compared for exact equality
+// with the SKU instance type.
+//
+// A plain strings.HasPrefix is incorrect here: many Dedicated Host SKU names
+// are prefixes of one another (e.g. "mac2" is a prefix of "mac2-m1ultra",
+// "mac-m4" of "mac-m4max", "m5" of "m5d"), so prefix matching lets the wrong
+// SKU's price overwrite an instance's price depending on Go map iteration
+// order, producing intermittently incorrect prices (issue #896, follow-up to
+// #893).
+func dedicatedHostInstanceTypeMatches(instanceType, sku string) bool {
+	base := instanceType
+	if i := strings.IndexByte(instanceType, '.'); i != -1 {
+		base = instanceType[:i]
+	}
+	return base == sku
+}
+
 type dedicatedHostOnDemandPrice struct {
 	InstanceType string `json:"Instance Type"`
 	Price        string `json:"price"`
@@ -203,7 +223,7 @@ func loadDedicatedHostReservedData(
 
 			instancesMu.Lock()
 			for instanceType, instance := range instances {
-				if strings.HasPrefix(instanceType, reservedPrice.InstanceType) {
+				if dedicatedHostInstanceTypeMatches(instanceType, reservedPrice.InstanceType) {
 					pricingData := instance.Pricing[regionSlug]
 					if pricingData == nil {
 						pricingData = make(map[OS]any)
@@ -255,7 +275,7 @@ func addDedicatedHostPricingUs(instances map[string]*EC2Instance, regionsInverte
 
 		for _, price := range instanceData {
 			for instanceType, instance := range instances {
-				if strings.HasPrefix(instanceType, price.InstanceType) {
+				if dedicatedHostInstanceTypeMatches(instanceType, price.InstanceType) {
 					addDedicatedHostOnDemandPrice(instance, region, price.Price)
 				}
 			}
@@ -310,7 +330,7 @@ func addDedicatedHostPricingCn(instances map[string]*EC2Instance, regionsInverte
 			for _, regionData := range dedicatedHostOnDemandData.Regions {
 				for _, price := range regionData {
 					for instanceType, instance := range instances {
-						if strings.HasPrefix(instanceType, price.InstanceType) {
+						if dedicatedHostInstanceTypeMatches(instanceType, price.InstanceType) {
 							addDedicatedHostOnDemandPrice(instance, regionSlug, price.Price)
 						}
 					}
