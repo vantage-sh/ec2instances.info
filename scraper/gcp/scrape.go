@@ -298,6 +298,7 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 			Generation:         "current",
 			GPU:                float64(specs.GPU),
 			GPUModel:           gpuModel,
+			GPUMemory:          specs.GPUMemory,
 			Pricing:            make(map[Region]map[OS]any),
 			Regions:            make(map[string]string),
 			AvailabilityZones:  make(map[string][]string),
