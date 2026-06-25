@@ -32,6 +32,11 @@ func (p *Price) UnmarshalJSON(data []byte) error {
 type GCPPricingData struct {
 	OnDemand string `json:"ondemand,omitempty"`
 	Spot     string `json:"spot,omitempty"`
+	// Resource-based committed use discount (CUD) hourly prices, assembled from
+	// the catalog's committed-use Cpu/Ram SKUs (core_rate*vCPU + ram_rate*RAM).
+	// Empty when the instance's machine family/region has no committed-use SKU.
+	CUD1Yr string `json:"cud_1yr,omitempty"`
+	CUD3Yr string `json:"cud_3yr,omitempty"`
 }
 
 // GCPInstance represents a GCP Compute Engine instance type in AWS instance format
