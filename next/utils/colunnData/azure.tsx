@@ -63,6 +63,7 @@ const initialColumnsArr = [
     ["instance_type", true],
     ["memory", true],
     ["vcpu", true],
+    ["cores", false],
     ["memory_per_vcpu", false],
     ["GPU", false],
     ["size", true],
@@ -98,6 +99,7 @@ export function makePrettyNames<V>(
         makeColumnOption("instance_type", "API Name"),
         makeColumnOption("memory", "Instance Memory"),
         makeColumnOption("vcpu", "vCPUs"),
+        makeColumnOption("cores", "Cores"),
         makeColumnOption("memory_per_vcpu", "Memory per vCPU"),
         makeColumnOption("GPU", "GPUs"),
         makeColumnOption("size", "Storage"),
@@ -312,6 +314,42 @@ export const columnsGen = (
             id: "vcpu",
             sortingFn: "alphanumeric",
             filterFn: expr,
+        },
+        {
+            // Azure does not expose a physical core count directly, so derive
+            // it from vcpu / vcpus_percore. vcpus_percore is only populated for
+            // a subset of SKUs (and is 0/absent for the rest); when it is
+            // missing or zero we render empty rather than a misleading value.
+            id: "cores",
+            header: "Cores",
+            size: 110,
+            accessorFn: (row) => {
+                const vcpu = row.vcpu;
+                const perCore = row.vcpus_percore;
+                if (!perCore || perCore <= 0 || !vcpu) return undefined;
+                return vcpu / perCore;
+            },
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.getValue("cores") as number | undefined;
+                const valueB = rowB.getValue("cores") as number | undefined;
+                if (valueA === null || valueA === undefined) return -1;
+                if (valueB === null || valueB === undefined) return 1;
+                return valueA - valueB;
+            },
+            filterFn: (row, _, filterValue) => {
+                const cores = row.getValue("cores") as number | undefined;
+                if (cores === null || cores === undefined) return false;
+                try {
+                    return exprCompiler(filterValue)(cores, `${cores} cores`);
+                } catch {
+                    return true;
+                }
+            },
+            cell: (info) => {
+                const value = info.getValue() as number | undefined;
+                if (value === null || value === undefined) return undefined;
+                return `${value} cores`;
+            },
         },
         {
             accessorKey: "memory",
