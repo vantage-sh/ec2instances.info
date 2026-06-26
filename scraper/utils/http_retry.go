@@ -7,6 +7,8 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
+	"strings"
 	"time"
 )
 
@@ -72,25 +74,49 @@ func backoffFor(attempt int) time.Duration {
 	return delay
 }
 
-// fetchWithRetry performs a GET against url with a bounded retry/backoff,
+// FetchWithRetry performs a GET against url with a bounded retry/backoff,
 // retrying on transient network errors and on retryable HTTP statuses (5xx,
 // 429). The provided bearerToken, when non-nil, is sent as a Bearer header.
 //
 // On success it returns the fully-read response body. On failure after the cap
 // it returns the last error (never nil body with nil error), so callers fail
 // loud instead of proceeding with empty data.
-func fetchWithRetry(url string, bearerToken *string) ([]byte, error) {
+func FetchWithRetry(urlStr string, bearerToken *string) ([]byte, error) {
+	return retryLoop(urlStr, func() ([]byte, error) {
+		return doOnce(urlStr, bearerToken)
+	})
+}
+
+// PostFormWithRetry performs an application/x-www-form-urlencoded POST against
+// url with the same bounded retry/backoff and shared client as FetchWithRetry.
+// It exists so OAuth token exchanges (a transient timeout on which would
+// otherwise kill the whole scrape) survive transient failures. Token endpoints
+// are idempotent for these credential grants, so retrying the POST is safe.
+//
+// On success it returns the response body; on failure after the cap it returns
+// the last error so callers fail loud rather than proceeding without a token.
+func PostFormWithRetry(urlStr string, data url.Values) ([]byte, error) {
+	return retryLoop(urlStr, func() ([]byte, error) {
+		return doPostFormOnce(urlStr, data)
+	})
+}
+
+// retryLoop runs do with the bounded retry/backoff policy shared by every
+// fetcher, so there is a single backoff implementation. urlStr is used only for
+// log context. Permanent errors short-circuit the retry budget; otherwise the
+// last error is returned after maxHTTPAttempts.
+func retryLoop(urlStr string, do func() ([]byte, error)) ([]byte, error) {
 	var lastErr error
 
 	for attempt := 1; attempt <= maxHTTPAttempts; attempt++ {
 		if attempt > 1 {
 			delay := backoffFor(attempt - 1)
 			log.Printf("Failed to load %s, retrying in %s... (attempt %d/%d): %v",
-				url, delay, attempt, maxHTTPAttempts, lastErr)
+				urlStr, delay, attempt, maxHTTPAttempts, lastErr)
 			time.Sleep(delay)
 		}
 
-		body, err := doOnce(url, bearerToken)
+		body, err := do()
 		if err == nil {
 			return body, nil
 		}
@@ -117,7 +143,7 @@ func (p permanentError) Unwrap() error { return p.err }
 
 // doOnce performs a single GET attempt and returns the body on a 200 response.
 // Retryable failures are returned as plain errors; non-retryable HTTP statuses
-// are wrapped in permanentError so fetchWithRetry stops early.
+// are wrapped in permanentError so the retry loop stops early.
 func doOnce(url string, bearerToken *string) ([]byte, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), perAttemptTimeout)
 	defer cancel()
@@ -142,6 +168,37 @@ func doOnce(url string, bearerToken *string) ([]byte, error) {
 	if resp.StatusCode != http.StatusOK {
 		body, _ := io.ReadAll(resp.Body)
 		statusErr := &httpStatusError{url: url, code: resp.StatusCode, body: string(body)}
+		if retryableStatus(resp.StatusCode) {
+			return nil, statusErr
+		}
+		return nil, permanentError{err: statusErr}
+	}
+
+	return io.ReadAll(resp.Body)
+}
+
+// doPostFormOnce performs a single form POST attempt, mirroring doOnce's
+// transient-vs-permanent error classification so retryLoop treats both fetch
+// shapes identically.
+func doPostFormOnce(urlStr string, data url.Values) ([]byte, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), perAttemptTimeout)
+	defer cancel()
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, urlStr, strings.NewReader(data.Encode()))
+	if err != nil {
+		return nil, permanentError{err: err}
+	}
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+	resp, err := sharedHTTPClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(resp.Body)
+		statusErr := &httpStatusError{url: urlStr, code: resp.StatusCode, body: string(body)}
 		if retryableStatus(resp.StatusCode) {
 			return nil, statusErr
 		}

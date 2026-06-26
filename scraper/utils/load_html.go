@@ -10,7 +10,7 @@ import (
 // as the JSON loader (see http_retry.go), so transient network failures are
 // absorbed rather than aborting the scrape.
 func LoadHTML(url string) (*soup.Root, error) {
-	body, err := fetchWithRetry(url, nil)
+	body, err := FetchWithRetry(url, nil)
 	if err != nil {
 		return nil, err
 	}

@@ -9,10 +9,10 @@ import (
 // If the bearer token is nil, it will not be added to the request.
 //
 // The fetch is retried with backoff on transient network/HTTP failures via
-// fetchWithRetry (see http_retry.go), so a single TLS handshake timeout under
+// FetchWithRetry (see http_retry.go), so a single TLS handshake timeout under
 // the scraper's parallel load no longer aborts the whole run.
 func LoadJsonWithBearerToken(url string, val any, bearerToken *string) error {
-	body, err := fetchWithRetry(url, bearerToken)
+	body, err := FetchWithRetry(url, bearerToken)
 	if err != nil {
 		return err
 	}
