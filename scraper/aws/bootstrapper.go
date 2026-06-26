@@ -10,6 +10,7 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -208,7 +209,10 @@ func crossRegionDescribeInstanceTypesIterator(pushChunk func(map[string]*types.I
 	for _, region := range REGIONS_ITERATOR {
 		fg.Add(func() {
 			// Create a new configuration
-			awsConfig, err := config.LoadDefaultConfig(context.Background())
+			awsConfig, err := config.LoadDefaultConfig(context.Background(),
+				config.WithRetryMaxAttempts(10),
+				config.WithRetryMode(aws.RetryModeAdaptive),
+			)
 			if err != nil {
 				log.Fatal(err)
 			}
