@@ -137,7 +137,6 @@ type genericAwsPricingData struct {
 
 // unbundledSqlServerLicenseSurcharge returns the per-hour Windows + SQL Server
 // license cost to add to the base On-Demand price of an unbundled SQL Server
-// instance, or 0 if the offer is not a license-bearing unbundled SQL Server
 // instance. The license is priced per vCPU-hour (fixed per edition per region),
 // so the surcharge is the per-vCPU rate times the instance's vCPU count.
 //
@@ -146,32 +145,43 @@ type genericAwsPricingData struct {
 // media" SKUs (which only flag the family as unbundled) carry no AWS-billed
 // license and are left untouched.
 //
-// It fails loud if a surcharged SKU is missing the license rate or a parseable
-// vCPU count, rather than silently showing base-only.
+// The second return value is false only when this is a surcharged unbundled
+// License-included SKU for which AWS publishes no license rate in this region
+// (the AmazonRDSOCPULicenseFees offer covers fewer regions than AmazonRDS, and
+// new regions gain unbundled SQL Server before the fee offer catches up). In
+// that case the all-in price cannot be computed, so the caller must skip the
+// price entirely rather than store a misleadingly cheap base-only number. For
+// all non-surcharged SKUs it returns (0, true): no surcharge, proceed normally.
+//
+// It still fails loud on a surcharged SKU with an unparseable vCPU count, which
+// is a genuine data-integrity error rather than an expected coverage gap.
 func unbundledSqlServerLicenseSurcharge(
 	attributes map[string]string,
 	instanceType string,
 	unbundledInstanceTypes map[string]bool,
 	licenseRates map[engineCode]float64,
-) float64 {
+) (float64, bool) {
 	if attributes["databaseEngine"] != "SQL Server" {
-		return 0
+		return 0, true
 	}
 	if !unbundledInstanceTypes[instanceType] {
-		return 0
+		return 0, true
 	}
 	// Only the displayed "License included" SKU gets the separately-billed license
 	// added. BYOM SKUs (and any free Express SKU) are not surcharged.
 	if attributes["licenseModel"] != "License included" {
-		return 0
+		return 0, true
 	}
 
 	code := attributes["engineCode"]
 	rate, ok := licenseRates[code]
 	if !ok {
-		// The unbundled License-included editions are exactly Web/Standard/Enterprise,
-		// which all have a license rate; a missing rate here is a data error.
-		log.Fatalln("Unbundled RDS SQL Server instance missing license rate", instanceType, "engineCode", code)
+		// AWS does not publish a license rate for this edition in this region (the
+		// fee offer lags new regions/editions). The all-in price is unknowable, so
+		// signal the caller to omit this price rather than abort the scrape or show
+		// a base-only price that would reintroduce the under-counting of #890.
+		log.Println("Skipping unbundled RDS SQL Server price: no license rate published", instanceType, "engineCode", code)
+		return 0, false
 	}
 
 	vcpuStr := attributes["vcpu"]
@@ -180,7 +190,7 @@ func unbundledSqlServerLicenseSurcharge(
 		log.Fatalln("Unbundled RDS SQL Server instance has invalid vCPU count", instanceType, "vcpu", vcpuStr)
 	}
 
-	return rate * vcpu
+	return rate * vcpu, true
 }
 
 type engineCode = string
@@ -213,8 +223,14 @@ func processRdsOnDemandDimension(
 
 	// For unbundled SQL Server instances, the Windows + SQL Server license is a
 	// separate AWS line item not present in the base AmazonRDS price. Add it so the
-	// displayed cost matches the all-in cost shown for bundled families.
-	usdF += unbundledSqlServerLicenseSurcharge(attributes, instanceType, unbundledInstanceTypes, licenseRates)
+	// displayed cost matches the all-in cost shown for bundled families. If AWS
+	// publishes no license rate for this edition/region, the all-in price is
+	// unknowable, so omit it rather than store a misleading base-only price.
+	surcharge, ok := unbundledSqlServerLicenseSurcharge(attributes, instanceType, unbundledInstanceTypes, licenseRates)
+	if !ok {
+		return
+	}
+	usdF += surcharge
 
 	engineCode := attributes["engineCode"]
 	if attributes["storage"] == "Aurora IO Optimization Mode" {

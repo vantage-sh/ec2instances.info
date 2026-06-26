@@ -96,6 +96,27 @@ func TestUnbundledSqlServerLicense(t *testing.T) {
 	if !approxEqual(gotBundled, 2.548) {
 		t.Errorf("bundled db.m5.2xlarge SQL Server Standard On Demand = %v, want 2.548 (unchanged)", gotBundled)
 	}
+
+	// Reported scrape-abort scenario: an unbundled SQL Server SKU (db.r8i.2xlarge
+	// Web, engineCode 11) in a region whose AmazonRDSOCPULicenseFees offer publishes
+	// no rate for that edition. This must NOT abort the scrape (previously a
+	// log.Fatalln) and must NOT store a base-only price (which would reintroduce
+	// #890). The edition is omitted, so the stored On Demand price stays 0.
+	noRateForWeb := map[engineCode]float64{
+		"12": 0.120 + 0.046, // Standard only; no "11" (Web) entry
+	}
+	r8iWebAttrs := map[string]string{
+		"instanceType":    "db.r8i.2xlarge",
+		"databaseEngine":  "SQL Server",
+		"databaseEdition": "Web",
+		"licenseModel":    "License included",
+		"engineCode":      "11",
+		"vcpu":            "8",
+	}
+	gotR8iWeb := assembleOnDemand(r8iWebAttrs, "0.500", map[string]bool{"db.r8i.2xlarge": true}, noRateForWeb)
+	if gotR8iWeb != 0 {
+		t.Errorf("unbundled db.r8i.2xlarge SQL Server Web with no license rate On Demand = %v, want 0 (omitted)", gotR8iWeb)
+	}
 }
 
 // TestUnbundledSqlServerLicenseSurcharge checks the surcharge helper in isolation,
@@ -105,49 +126,64 @@ func TestUnbundledSqlServerLicenseSurcharge(t *testing.T) {
 	unbundled := map[string]bool{"db.m7i.2xlarge": true}
 
 	cases := []struct {
-		name  string
-		attrs map[string]string
-		want  float64
+		name   string
+		attrs  map[string]string
+		want   float64
+		wantOk bool
 	}{
 		{
 			name: "unbundled sql server standard license included",
 			attrs: map[string]string{
 				"databaseEngine": "SQL Server", "licenseModel": "License included", "engineCode": "12", "vcpu": "4",
 			},
-			want: 4 * 0.166,
+			want:   4 * 0.166,
+			wantOk: true,
 		},
 		{
 			name: "unbundled sql server byom sku is not surcharged",
 			attrs: map[string]string{
 				"databaseEngine": "SQL Server", "licenseModel": "Bring your own media", "engineCode": "52", "vcpu": "4",
 			},
-			want: 0,
+			want:   0,
+			wantOk: true,
 		},
 		{
 			name: "non-sql-server engine on unbundled type",
 			attrs: map[string]string{
 				"databaseEngine": "PostgreSQL", "licenseModel": "No license required", "engineCode": "14", "vcpu": "4",
 			},
-			want: 0,
+			want:   0,
+			wantOk: true,
+		},
+		{
+			// Unbundled, License-included edition AWS publishes no license rate for
+			// in this region: surcharge is unknowable, so ok must be false (caller
+			// omits the price) and this must NOT abort the scrape.
+			name: "unbundled sql server license included with no rate is skipped",
+			attrs: map[string]string{
+				"databaseEngine": "SQL Server", "licenseModel": "License included", "engineCode": "11", "vcpu": "8",
+			},
+			want:   0,
+			wantOk: false,
 		},
 	}
 
 	for _, c := range cases {
-		got := unbundledSqlServerLicenseSurcharge(c.attrs, "db.m7i.2xlarge", unbundled, licenseRates)
-		if !approxEqual(got, c.want) {
-			t.Errorf("%s: surcharge = %v, want %v", c.name, got, c.want)
+		got, ok := unbundledSqlServerLicenseSurcharge(c.attrs, "db.m7i.2xlarge", unbundled, licenseRates)
+		if !approxEqual(got, c.want) || ok != c.wantOk {
+			t.Errorf("%s: surcharge = (%v, %v), want (%v, %v)", c.name, got, ok, c.want, c.wantOk)
 		}
 	}
 
-	// A SQL Server instance that is NOT unbundled gets no surcharge.
-	got := unbundledSqlServerLicenseSurcharge(
+	// A SQL Server instance that is NOT unbundled gets no surcharge and proceeds.
+	got, ok := unbundledSqlServerLicenseSurcharge(
 		map[string]string{"databaseEngine": "SQL Server", "licenseModel": "License included", "engineCode": "12", "vcpu": "8"},
 		"db.m5.2xlarge",
 		unbundled,
 		licenseRates,
 	)
-	if got != 0 {
-		t.Errorf("bundled SQL Server surcharge = %v, want 0", got)
+	if got != 0 || !ok {
+		t.Errorf("bundled SQL Server surcharge = (%v, %v), want (0, true)", got, ok)
 	}
 }
 

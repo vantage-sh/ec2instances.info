@@ -26,11 +26,27 @@ const (
 	rdsLicenseOperationPrefix = "CreateDBInstance:"
 )
 
-// rdsLicenseUsageTypes are the usage types whose rates sum into the total license
-// surcharge for an unbundled SQL Server instance.
-var rdsLicenseUsageTypes = map[string]bool{
-	"SQLServerLicenseUsage": true,
-	"WindowsOSLicenseUsage": true,
+// rdsLicenseUsageSuffixes are the usage-type suffixes whose rates sum into the
+// total license surcharge for an unbundled SQL Server instance. AWS prefixes the
+// usagetype with a region billing code in every region except us-east-1 (e.g.
+// "EU-SQLServerLicenseUsage", "APN1-WindowsOSLicenseUsage", "USW2-WindowsOSLicenseUsage"),
+// so the usagetype is matched by suffix rather than exact string. Matching the
+// bare strings only would silently capture rates for us-east-1 alone, leaving
+// every other region with no license rate.
+var rdsLicenseUsageSuffixes = []string{
+	"SQLServerLicenseUsage",
+	"WindowsOSLicenseUsage",
+}
+
+// isRdsLicenseUsageType reports whether a usagetype is one of the SQL Server /
+// Windows OS license usage types, allowing for an optional "<REGIONCODE>-" prefix.
+func isRdsLicenseUsageType(usageType string) bool {
+	for _, suffix := range rdsLicenseUsageSuffixes {
+		if usageType == suffix || strings.HasSuffix(usageType, "-"+suffix) {
+			return true
+		}
+	}
+	return false
 }
 
 // engineCode is the AmazonRDS engine code (e.g. "12" for SQL Server Standard).
@@ -58,7 +74,7 @@ func processRdsLicenseRegion(
 		}
 
 		usageType := product.Attributes["usagetype"]
-		if !rdsLicenseUsageTypes[usageType] {
+		if !isRdsLicenseUsageType(usageType) {
 			continue
 		}
 
