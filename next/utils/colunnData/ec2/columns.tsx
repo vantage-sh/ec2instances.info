@@ -57,6 +57,10 @@ export function calculateCost(
                     : "memory"
         ] as number;
         if (!pricingUnitModifier) return -1;
+
+        if (pricingUnit === "gpu_memory") {
+            pricingUnitModifier *= (instance.GPU_memory as number) || 1;
+        }
     }
 
     const currencyMultiplier = selectedRegion.startsWith("cn-")
@@ -582,7 +586,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "GPU_memory",
-        header: "GPU memory",
+        header: "GPU memory (per GPU)",
         size: 130,
         id: "GPU_memory",
         sortingFn: "alphanumeric",

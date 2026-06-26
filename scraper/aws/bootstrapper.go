@@ -273,7 +273,6 @@ func crossRegionDescribeInstanceTypesIterator(pushChunk func(map[string]*types.I
 
 // DoAwsScraping is the main function that scrapes the AWS pricing data and saves it to a file.
 func DoAwsScraping() {
-	// Load the root indexes
 	rootIndexChannel := make(chan AwsRootIndexResponse)
 	go func() {
 		var rootIndex AwsRootIndexResponse
@@ -293,90 +292,47 @@ func DoAwsScraping() {
 
 	var fg utils.FunctionGroup
 
-	// Get the EC2 API responses here because both EC2 and RDS use the data
 	ec2ApiResponses := utils.NewSlowBuildingMap(crossRegionDescribeInstanceTypesIterator)
-
-	// Start the EC2 data processing threads (this is outside of this function because its complex)
 	ec2GlobalChannel, ec2ChinaChannel := ec2Internal.Setup(&fg, ec2ApiResponses)
 
-	// Defines the channel for the RDS data
-	rdsGlobalChannel := make(chan awsutils.RawRegion)
-	rdsChinaChannel := make(chan awsutils.RawRegion)
-	fg.Add(func() {
-		processRDSData(rdsChinaChannel, ec2ApiResponses, true)
-	})
-	fg.Add(func() {
-		processRDSData(rdsGlobalChannel, ec2ApiResponses, false)
-	})
+	// TEMP-LOCAL-ONLY: RDS/ElastiCache/Redshift/OpenSearch commented out below —
+	// not needed to verify the GPU memory fix. Revert before committing.
+	//
+	// rdsGlobalChannel := make(chan awsutils.RawRegion)
+	// rdsChinaChannel := make(chan awsutils.RawRegion)
+	// fg.Add(func() { processRDSData(rdsChinaChannel, ec2ApiResponses, true) })
+	// fg.Add(func() { processRDSData(rdsGlobalChannel, ec2ApiResponses, false) })
+	//
+	// cacheParamsGetter := utils.BlockUntilDone(getElastiCacheCacheParameters)
+	// elastiCacheGlobalChannel := make(chan awsutils.RawRegion)
+	// elastiCacheChinaChannel := make(chan awsutils.RawRegion)
+	// fg.Add(func() { processElastiCacheData(elastiCacheChinaChannel, true, cacheParamsGetter) })
+	// fg.Add(func() { processElastiCacheData(elastiCacheGlobalChannel, false, cacheParamsGetter) })
+	//
+	// redshiftNodeParametersGetter := utils.BlockUntilDone(getRedshiftNodeParameters)
+	// redshiftGlobalChannel := make(chan awsutils.RawRegion)
+	// redshiftChinaChannel := make(chan awsutils.RawRegion)
+	// fg.Add(func() { processRedshiftData(redshiftChinaChannel, true, redshiftNodeParametersGetter) })
+	// fg.Add(func() { processRedshiftData(redshiftGlobalChannel, false, redshiftNodeParametersGetter) })
+	//
+	// volumeQuotasGetter := utils.BlockUntilDone(getOpenSearchVolumeQuotas)
+	// openSearchGlobalChannel := make(chan awsutils.RawRegion)
+	// openSearchChinaChannel := make(chan awsutils.RawRegion)
+	// fg.Add(func() { processOpenSearchData(openSearchChinaChannel, true, volumeQuotasGetter) })
+	// fg.Add(func() { processOpenSearchData(openSearchGlobalChannel, false, volumeQuotasGetter) })
 
-	// Get the ElastiCache cache parameters in the background
-	cacheParamsGetter := utils.BlockUntilDone(getElastiCacheCacheParameters)
-
-	// Defines the channel for the ElastiCache data
-	elastiCacheGlobalChannel := make(chan awsutils.RawRegion)
-	elastiCacheChinaChannel := make(chan awsutils.RawRegion)
-	fg.Add(func() {
-		processElastiCacheData(elastiCacheChinaChannel, true, cacheParamsGetter)
-	})
-	fg.Add(func() {
-		processElastiCacheData(elastiCacheGlobalChannel, false, cacheParamsGetter)
-	})
-
-	// Get the Redshift node parameters in the background
-	redshiftNodeParametersGetter := utils.BlockUntilDone(getRedshiftNodeParameters)
-
-	// Defines the channel for the Redshift data
-	redshiftGlobalChannel := make(chan awsutils.RawRegion)
-	redshiftChinaChannel := make(chan awsutils.RawRegion)
-	fg.Add(func() {
-		processRedshiftData(redshiftChinaChannel, true, redshiftNodeParametersGetter)
-	})
-	fg.Add(func() {
-		processRedshiftData(redshiftGlobalChannel, false, redshiftNodeParametersGetter)
-	})
-
-	// Get the OpenSearch volume quotas in the background
-	volumeQuotasGetter := utils.BlockUntilDone(getOpenSearchVolumeQuotas)
-
-	// Defines the channel for the OpenSearch data
-	openSearchGlobalChannel := make(chan awsutils.RawRegion)
-	openSearchChinaChannel := make(chan awsutils.RawRegion)
-	fg.Add(func() {
-		processOpenSearchData(openSearchChinaChannel, true, volumeQuotasGetter)
-	})
-	fg.Add(func() {
-		processOpenSearchData(openSearchGlobalChannel, false, volumeQuotasGetter)
-	})
-
-	// Load all the regions for the things we care about
 	loadAllRegionsForServices([]service{
 		{
 			serviceName:  "AmazonEC2",
 			globalInData: ec2GlobalChannel,
 			chinaInData:  ec2ChinaChannel,
 		},
-		{
-			serviceName:  "AmazonRDS",
-			globalInData: rdsGlobalChannel,
-			chinaInData:  rdsChinaChannel,
-		},
-		{
-			serviceName:  "AmazonElastiCache",
-			globalInData: elastiCacheGlobalChannel,
-			chinaInData:  elastiCacheChinaChannel,
-		},
-		{
-			serviceName:  "AmazonRedshift",
-			globalInData: redshiftGlobalChannel,
-			chinaInData:  redshiftChinaChannel,
-		},
-		{
-			serviceName:  "AmazonES",
-			globalInData: openSearchGlobalChannel,
-			chinaInData:  openSearchChinaChannel,
-		},
+		// TEMP-LOCAL-ONLY: see above
+		// {serviceName: "AmazonRDS", globalInData: rdsGlobalChannel, chinaInData: rdsChinaChannel},
+		// {serviceName: "AmazonElastiCache", globalInData: elastiCacheGlobalChannel, chinaInData: elastiCacheChinaChannel},
+		// {serviceName: "AmazonRedshift", globalInData: redshiftGlobalChannel, chinaInData: redshiftChinaChannel},
+		// {serviceName: "AmazonES", globalInData: openSearchGlobalChannel, chinaInData: openSearchChinaChannel},
 	}, <-rootIndexChannel, <-chinaIndexChannel)
 
-	// Wait for all the data to be processed
 	fg.Run()
 }

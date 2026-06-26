@@ -2,6 +2,7 @@ package ec2
 
 import (
 	"log"
+	"math"
 	"scraper/utils"
 )
 
@@ -9,7 +10,9 @@ type gpuData struct {
 	gpuModel          string
 	computeCapability float64
 	gpuCount          float64
-	gpuMemory         int
+	// gpuMemory is the total VRAM across all GPUs in the instance, matching what AWS publishes.
+	// It is converted to per-GPU VRA when copied onto the instance in addGpuInfo. (issue #695)
+	gpuMemory int
 }
 
 /*
@@ -603,6 +606,14 @@ func addGpuInfo(instances map[string]*EC2Instance) {
 		instance.GPU = gpuData.gpuCount
 		instance.GPUModel = &gpuData.gpuModel
 		instance.ComputeCapability = gpuData.computeCapability
-		instance.GPUMemory = gpuData.gpuMemory
+
+		// Display per-GPU VRAM instead of the total VRAM across all GPUs,
+		//(issue #695). For instances with one or more GPU's, divide the total VRAM by the GPU count.
+		// For fractional GPUs, the VRAM stored is already corrected for the GPU count, so use it as-is.
+		if gpuData.gpuCount >= 1 {
+			instance.GPUMemory = int(math.Round(float64(gpuData.gpuMemory) / gpuData.gpuCount))
+		} else {
+			instance.GPUMemory = gpuData.gpuMemory
+		}
 	}
 }

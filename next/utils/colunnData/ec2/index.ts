@@ -157,7 +157,7 @@ export function makePrettyNames<V>(
         makeColumnOption("memory_per_vcpu", "GiB of Memory per vCPU"),
         makeColumnOption("GPU", "GPUs"),
         makeColumnOption("GPU_model", "GPU model"),
-        makeColumnOption("GPU_memory", "GPU memory"),
+        makeColumnOption("GPU_memory", "GPU memory (per GPU)"),
         makeColumnOption("compute_capability", "CUDA Compute Capability"),
         makeColumnOption("FPGA", "FPGAs"),
         makeColumnOption("ECU_per_vcpu", "ECU per vCPU"),
