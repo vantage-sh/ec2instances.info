@@ -116,6 +116,43 @@ func TestNoUpfrontReservedKeepsHourly(t *testing.T) {
 	}
 }
 
+// TestSyncDurabilityExcludedFromOnDemand reproduces the remaining half of issue
+// #909: Valkey on-demand for cache.r7g.large in ap-southeast-1 has two on-demand
+// SKUs - the real "NodeUsage" node rate ($0.2104/hr) and a Multi-AZ
+// "SyncDurability-NodeUsage" add-on ($0.0379/hr). The add-on must not overwrite
+// the base node price (last-wins), otherwise on-demand collapses to $0.0379 and
+// reserved looks more expensive than on-demand.
+func TestSyncDurabilityExcludedFromOnDemand(t *testing.T) {
+	const cacheEngine = "Valkey"
+	pd := &genericAwsPricingData{}
+	getPricingData := func(platform string) *genericAwsPricingData { return pd }
+
+	nodeUsage := awsutils.RegionPriceDimension{
+		Description:  "$0.2104 per Memory optimized r7g.large node hour running Valkey",
+		Unit:         "Hrs",
+		PricePerUnit: map[string]string{"USD": "0.2104"},
+	}
+	syncDurability := awsutils.RegionPriceDimension{
+		Description:  "$0.0379 per Hr for SyncDurability-NodeUsage:cache.r7g.large in Asia Pacific (Singapore)",
+		Unit:         "Hrs",
+		PricePerUnit: map[string]string{"USD": "0.0379"},
+	}
+
+	// Feed both dimensions, add-on last so the bug (last-wins) would surface.
+	processElastiCacheOnDemandDimension(
+		map[string]string{"cacheEngine": cacheEngine, "usagetype": "APS1-NodeUsage:cache.r7g.large"},
+		nodeUsage, getPricingData, "USD",
+	)
+	processElastiCacheOnDemandDimension(
+		map[string]string{"cacheEngine": cacheEngine, "usagetype": "APS1-SyncDurability-NodeUsage:cache.r7g.large"},
+		syncDurability, getPricingData, "USD",
+	)
+
+	if !approxEqual(pd.OnDemand, 0.2104) {
+		t.Fatalf("Valkey on-demand = %v, want 0.2104 (SyncDurability add-on must be excluded)", pd.OnDemand)
+	}
+}
+
 // TestGenericHalfReservedAmortizesPartialUpfront covers the OpenSearch/Redshift
 // path (processGenericHalfReservedOffer), which shares the same amortization
 // helper. It uses real AWS OpenSearch pricing for a Partial Upfront offer and
