@@ -361,37 +361,37 @@ var GPU_DATA = map[string]gpuData{
 	// https://aws.amazon.com/blogs/aws/announcing-amazon-ec2-g7-instances-accelerated-by-nvidia-rtx-pro-4500-blackwell-server-edition-gpus/
 	"g7.2xlarge": {
 		gpuModel:          "NVIDIA RTX PRO 4500 Blackwell",
-		computeCapability: 10.0,
+		computeCapability: 12.0,
 		gpuCount:          1,
 		gpuMemory:         32,
 	},
 	"g7.4xlarge": {
 		gpuModel:          "NVIDIA RTX PRO 4500 Blackwell",
-		computeCapability: 10.0,
+		computeCapability: 12.0,
 		gpuCount:          1,
 		gpuMemory:         32,
 	},
 	"g7.8xlarge": {
 		gpuModel:          "NVIDIA RTX PRO 4500 Blackwell",
-		computeCapability: 10.0,
+		computeCapability: 12.0,
 		gpuCount:          1,
 		gpuMemory:         32,
 	},
 	"g7.12xlarge": {
 		gpuModel:          "NVIDIA RTX PRO 4500 Blackwell",
-		computeCapability: 10.0,
+		computeCapability: 12.0,
 		gpuCount:          2,
 		gpuMemory:         64,
 	},
 	"g7.24xlarge": {
 		gpuModel:          "NVIDIA RTX PRO 4500 Blackwell",
-		computeCapability: 10.0,
+		computeCapability: 12.0,
 		gpuCount:          4,
 		gpuMemory:         128,
 	},
 	"g7.48xlarge": {
 		gpuModel:          "NVIDIA RTX PRO 4500 Blackwell",
-		computeCapability: 10.0,
+		computeCapability: 12.0,
 		gpuCount:          8,
 		gpuMemory:         256,
 	},
