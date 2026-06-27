@@ -1,45 +1,18 @@
 package utils
 
 import (
-	"context"
 	"encoding/json"
-	"fmt"
-	"io"
 	"log"
-	"net/http"
-	"time"
 )
 
 // LoadJsonWithBearerToken loads a JSON file from the given URL and unmarshals it into the given value.
 // If the bearer token is nil, it will not be added to the request.
+//
+// The fetch is retried with backoff on transient network/HTTP failures via
+// FetchWithRetry (see http_retry.go), so a single TLS handshake timeout under
+// the scraper's parallel load no longer aborts the whole run.
 func LoadJsonWithBearerToken(url string, val any, bearerToken *string) error {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*15)
-	defer cancel()
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return err
-	}
-
-	if bearerToken != nil {
-		req.Header.Set("Authorization", "Bearer "+*bearerToken)
-	}
-
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != 200 {
-		body, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return fmt.Errorf("status code %d for url %s: %w", resp.StatusCode, url, err)
-		}
-		return fmt.Errorf("status code %d for url %s: %s", resp.StatusCode, url, string(body))
-	}
-
-	body, err := io.ReadAll(resp.Body)
+	body, err := FetchWithRetry(url, bearerToken)
 	if err != nil {
 		return err
 	}

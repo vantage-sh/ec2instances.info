@@ -2,11 +2,10 @@ package azure
 
 import (
 	"encoding/json"
-	"io"
 	"log"
-	"net/http"
 	"net/url"
 	"os"
+	"scraper/utils"
 )
 
 func getAzureAccessToken() string {
@@ -22,25 +21,16 @@ func getAzureAccessToken() string {
 	}
 	url := "https://login.microsoftonline.com/" + tenantId + "/oauth2/v2.0/token"
 
-	resp, err := http.PostForm(url, body)
+	respBody, err := utils.PostFormWithRetry(url, body)
 	if err != nil {
-		log.Fatal(err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != 200 {
-		b, err := io.ReadAll(resp.Body)
-		if err != nil {
-			log.Fatal("Failed to read Azure access token response: ", err)
-		}
-		log.Fatal("Failed to get Azure access token: ", string(b))
+		log.Fatal("Failed to get Azure access token: ", err)
 	}
 
 	type justToken struct {
 		AccessToken string `json:"access_token"`
 	}
 	var token justToken
-	if err := json.NewDecoder(resp.Body).Decode(&token); err != nil {
+	if err := json.Unmarshal(respBody, &token); err != nil {
 		log.Fatal("Failed to decode Azure access token: ", err)
 	}
 

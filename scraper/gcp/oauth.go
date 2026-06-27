@@ -8,12 +8,10 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"encoding/pem"
-	"fmt"
-	"io"
 	"log"
-	"net/http"
 	"net/url"
 	"os"
+	"scraper/utils"
 	"strings"
 	"time"
 )
@@ -128,19 +126,13 @@ func getGCPAccessToken() string {
 		"assertion":  {jwt},
 	}
 
-	resp, err := http.PostForm(gcpTokenURL, form)
+	respBody, err := utils.PostFormWithRetry(gcpTokenURL, form)
 	if err != nil {
 		log.Fatal("Failed to request access token:", err)
 	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		body, _ := io.ReadAll(resp.Body)
-		log.Fatalf("Failed to get access token (status %d): %s", resp.StatusCode, string(body))
-	}
 
 	var token tokenResponse
-	if err := json.NewDecoder(resp.Body).Decode(&token); err != nil {
+	if err := json.Unmarshal(respBody, &token); err != nil {
 		log.Fatal("Failed to decode token response:", err)
 	}
 
@@ -151,27 +143,18 @@ func getGCPAccessToken() string {
 	return cachedToken
 }
 
-// makeGCPAuthenticatedRequest makes an authenticated request to a GCP API
+// makeGCPAuthenticatedRequest makes an authenticated request to a GCP API.
+//
+// The fetch routes through utils.FetchWithRetry (with the bearer token) so
+// transient failures (e.g. the read timeout seen on the machineTypes endpoint)
+// are retried with backoff instead of aborting the whole scrape.
 func makeGCPAuthenticatedRequest(url string, result interface{}) error {
-	req, err := http.NewRequest("GET", url, nil)
-	if err != nil {
-		return err
-	}
-
 	token := getGCPAccessToken()
-	req.Header.Set("Authorization", "Bearer "+token)
 
-	client := &http.Client{}
-	resp, err := client.Do(req)
+	body, err := utils.FetchWithRetry(url, &token)
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		body, _ := io.ReadAll(resp.Body)
-		return fmt.Errorf("API request failed with status %d: %s", resp.StatusCode, string(body))
-	}
-
-	return json.NewDecoder(resp.Body).Decode(result)
+	return json.Unmarshal(body, result)
 }

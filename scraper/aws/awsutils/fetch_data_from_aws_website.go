@@ -2,28 +2,20 @@ package awsutils
 
 import (
 	"encoding/json"
-	"fmt"
-	"io"
-	"net/http"
 	"regexp"
+	"scraper/utils"
 	"strings"
 )
 
 var ROUGHLY_JS_KEY = regexp.MustCompile(`(\w+):`)
 
-// FetchDataFromAWSWebsite fetches data from an AWS website and unmarshals it into a struct
+// FetchDataFromAWSWebsite fetches data from an AWS website and unmarshals it into a struct.
+//
+// The fetch routes through utils.FetchWithRetry so transient failures (e.g. the
+// TLS handshake timeout seen on the spot-advisor endpoint) are retried with
+// backoff instead of aborting the whole scrape.
 func FetchDataFromAWSWebsite(url string, v any) error {
-	resp, err := http.Get(url)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != 200 {
-		return fmt.Errorf("failed to fetch data from AWS website: %s", resp.Status)
-	}
-
-	body, err := io.ReadAll(resp.Body)
+	body, err := utils.FetchWithRetry(url, nil)
 	if err != nil {
 		return err
 	}
