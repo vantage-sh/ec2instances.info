@@ -91,7 +91,15 @@ func processElastiCacheOnDemandDimension(attributes map[string]string, priceDime
 	}
 	// Extended support is an optional surcharge and should not be mixed into
 	// baseline on-demand node pricing.
-	if strings.Contains(strings.ToLower(attributes["usagetype"]), "extendedsupport") {
+	usagetypeLower := strings.ToLower(attributes["usagetype"])
+	if strings.Contains(usagetypeLower, "extendedsupport") {
+		return
+	}
+	// SyncDurability is a Multi-AZ sync-durability add-on (a separate
+	// "SyncDurability-NodeUsage" SKU), not the base node price. Letting it
+	// through would overwrite the real NodeUsage on-demand rate (last-wins),
+	// which made Valkey on-demand look cheaper than reserved (issue #909).
+	if strings.Contains(usagetypeLower, "syncdurability") {
 		return
 	}
 
