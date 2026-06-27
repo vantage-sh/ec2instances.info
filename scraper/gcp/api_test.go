@@ -27,3 +27,46 @@ func TestGPUMemoryByModel(t *testing.T) {
 		t.Errorf("unknown model memory = %d, want 0", got)
 	}
 }
+
+func TestTotalGPUMemory(t *testing.T) {
+	cases := []struct {
+		name     string
+		count    int
+		model    string
+		expected int
+	}{
+		{
+			name:     "single A100 40GB",
+			count:    1,
+			model:    "nvidia-tesla-a100",
+			expected: 40,
+		},
+		{
+			name:     "eight A100 40GB GPUs",
+			count:    8,
+			model:    "nvidia-tesla-a100",
+			expected: 320,
+		},
+		{
+			name:     "eight H200 141GB GPUs",
+			count:    8,
+			model:    "nvidia-h200-141gb",
+			expected: 1128,
+		},
+		{
+			name:     "unknown future model",
+			count:    8,
+			model:    "nvidia-unknown-future",
+			expected: 0,
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			got := totalGPUMemory(c.count, c.model)
+			if got != c.expected {
+				t.Errorf("totalGPUMemory(%d, %q) = %d, want %d", c.count, c.model, got, c.expected)
+			}
+		})
+	}
+}

@@ -171,6 +171,10 @@ var gpuMemoryByModel = map[string]int{
 	"nvidia-l4":             24,  // G2
 }
 
+func totalGPUMemory(gpuCount int, gpuModel string) int {
+	return gpuCount * gpuMemoryByModel[gpuModel]
+}
+
 // Fetch all SKUs for Compute Engine with pagination
 func fetchComputeSKUs() ([]SKU, error) {
 	var allSKUs []SKU
@@ -486,8 +490,12 @@ func fetchMachineTypes() (map[string]*MachineSpecs, error) {
 						specs.GPUModel = mt.Accelerators[0].GuestAcceleratorType
 						// Per-GPU memory is not exposed by the Compute Engine
 						// machineTypes API, so derive it from the model string
-						// using the documented per-GPU memory map.
-						specs.GPUMemory = gpuMemoryByModel[specs.GPUModel]
+						// using the documented per-GPU memory map. GPU_memory
+						// is total memory across all attached GPUs.
+						specs.GPUMemory = totalGPUMemory(
+							specs.GPU,
+							specs.GPUModel,
+						)
 					}
 
 					machineSpecs[mt.Name] = specs
