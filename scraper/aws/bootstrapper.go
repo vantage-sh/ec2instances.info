@@ -291,6 +291,26 @@ func DoAwsScraping() {
 		chinaIndexChannel <- chinaIndex
 	}()
 
+	// Read the root indexes now so they can be reused both for the per-service
+	// region loads below and to resolve auxiliary offers (e.g. the RDS SQL Server
+	// unbundled license fees).
+	rootIndex := <-rootIndexChannel
+	chinaIndex := <-chinaIndexChannel
+
+	// Build the RDS SQL Server unbundled license fee getters in the background.
+	// AWS China does not offer unbundled instances, so its offer is absent and the
+	// getter resolves to an empty map.
+	rdsLicenseFeesGlobal := awsutils.GetRdsLicenseFees(
+		AWS_NON_CHINA_ROOT_URL,
+		rootIndex.Offers["AmazonRDSOCPULicenseFees"].CurrentRegionIndexUrl,
+		false,
+	)
+	rdsLicenseFeesChina := awsutils.GetRdsLicenseFees(
+		AWS_CHINA_ROOT_URL,
+		chinaIndex.Offers["AmazonRDSOCPULicenseFees"].CurrentRegionIndexUrl,
+		true,
+	)
+
 	var fg utils.FunctionGroup
 
 	// Get the EC2 API responses here because both EC2 and RDS use the data
@@ -303,10 +323,10 @@ func DoAwsScraping() {
 	rdsGlobalChannel := make(chan awsutils.RawRegion)
 	rdsChinaChannel := make(chan awsutils.RawRegion)
 	fg.Add(func() {
-		processRDSData(rdsChinaChannel, ec2ApiResponses, true)
+		processRDSData(rdsChinaChannel, ec2ApiResponses, true, rdsLicenseFeesChina)
 	})
 	fg.Add(func() {
-		processRDSData(rdsGlobalChannel, ec2ApiResponses, false)
+		processRDSData(rdsGlobalChannel, ec2ApiResponses, false, rdsLicenseFeesGlobal)
 	})
 
 	// Get the ElastiCache cache parameters in the background
@@ -375,7 +395,7 @@ func DoAwsScraping() {
 			globalInData: openSearchGlobalChannel,
 			chinaInData:  openSearchChinaChannel,
 		},
-	}, <-rootIndexChannel, <-chinaIndexChannel)
+	}, rootIndex, chinaIndex)
 
 	// Wait for all the data to be processed
 	fg.Run()
