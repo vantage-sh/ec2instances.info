@@ -67,6 +67,7 @@ export interface EC2Instance {
     is_bare_metal?: boolean;
     is_trunking_compatible?: boolean;
     branch_interface?: number;
+    max_ecs_tasks?: number;
     enhanced_networking: boolean;
     vpc_only: boolean;
     ipv6_support: boolean;

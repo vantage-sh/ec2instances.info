@@ -185,6 +185,11 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
                     children: instance.placement_group_support,
                 },
                 ...trunkingRows,
+                {
+                    name: "Max ECS Tasks",
+                    help: "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html",
+                    children: instance.max_ecs_tasks,
+                },
             ],
         },
         {

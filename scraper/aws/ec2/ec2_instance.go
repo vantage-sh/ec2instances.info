@@ -128,6 +128,7 @@ type EC2Instance struct {
 	IsBareMetal              *bool                      `json:"is_bare_metal,omitempty"`
 	IsTrunkingCompatible     *bool                      `json:"is_trunking_compatible,omitempty"`
 	BranchInterface          *int                       `json:"branch_interface,omitempty"`
+	MaxECSTasks              *int                       `json:"max_ecs_tasks,omitempty"`
 }
 
 func avg(ints []int) *float64 {
@@ -196,5 +197,13 @@ func (instance *EC2Instance) addExtraDetails() {
 		instance.IsBareMetal = &limits.IsBareMetal
 		instance.IsTrunkingCompatible = &limits.IsTrunkingCompatible
 		instance.BranchInterface = &limits.BranchInterface
+		// https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html
+		var maxEcsTasks int
+		if limits.IsTrunkingCompatible {
+			maxEcsTasks = limits.Interface + limits.BranchInterface - 2
+		} else {
+			maxEcsTasks = limits.Interface - 1
+		}
+		instance.MaxECSTasks = &maxEcsTasks
 	}
 }
