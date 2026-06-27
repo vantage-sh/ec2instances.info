@@ -79,12 +79,7 @@ func getRedshiftNodeParameters() map[string]map[string]string {
 	if len(tableContainers) < 2 {
 		log.Fatalln("Not enough table containers found for Redshift node parameters", len(tableContainers))
 	}
-	for i, tableContainer := range tableContainers {
-		if i == 2 {
-			// We only want the first 2
-			break
-		}
-
+	for _, tableContainer := range tableContainers {
 		table := tableContainer.Find("table")
 		if table.Error != nil {
 			log.Fatalln("Error finding Redshift node parameters table", table.Error)
@@ -98,6 +93,9 @@ func getRedshiftNodeParameters() map[string]map[string]string {
 		trs := tbody.FindAll("tr")
 		for _, tr := range trs {
 			tds := tr.FindAll("td")
+			if len(tds) < 7 {
+				continue
+			}
 
 			instanceType := strings.TrimSpace(tds[0].FullText())
 			isMultiNode := strings.Contains(instanceType, "multi-node")
