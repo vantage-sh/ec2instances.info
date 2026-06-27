@@ -152,7 +152,27 @@ type MachineSpecs struct {
 	IsSharedCPU bool
 	GPU         int
 	GPUModel    string
+	GPUMemory   int
 	Zones       []string
+}
+
+// gpuMemoryByModel maps a GCP guestAcceleratorType (the model string the
+// Compute Engine API returns, e.g. "nvidia-h100-80gb") to the per-GPU memory
+// in GiB. Values are sourced from the official Google Cloud GPU documentation
+// (https://cloud.google.com/compute/docs/gpus and
+// https://cloud.google.com/compute/docs/accelerator-optimized-machines).
+// Unknown models return 0 so the field is omitted rather than fabricated.
+var gpuMemoryByModel = map[string]int{
+	"nvidia-h200-141gb":     141, // A3 Ultra
+	"nvidia-h100-80gb":      80,  // A3 High/Edge
+	"nvidia-h100-mega-80gb": 80,  // A3 Mega
+	"nvidia-a100-80gb":      80,  // A2 Ultra
+	"nvidia-tesla-a100":     40,  // A2 Standard (A100 40GB)
+	"nvidia-l4":             24,  // G2
+}
+
+func totalGPUMemory(gpuCount int, gpuModel string) int {
+	return gpuCount * gpuMemoryByModel[gpuModel]
 }
 
 // Fetch all SKUs for Compute Engine with pagination
@@ -468,6 +488,14 @@ func fetchMachineTypes() (map[string]*MachineSpecs, error) {
 					if len(mt.Accelerators) > 0 {
 						specs.GPU = mt.Accelerators[0].GuestAcceleratorCount
 						specs.GPUModel = mt.Accelerators[0].GuestAcceleratorType
+						// Per-GPU memory is not exposed by the Compute Engine
+						// machineTypes API, so derive it from the model string
+						// using the documented per-GPU memory map. GPU_memory
+						// is total memory across all attached GPUs.
+						specs.GPUMemory = totalGPUMemory(
+							specs.GPU,
+							specs.GPUModel,
+						)
 					}
 
 					machineSpecs[mt.Name] = specs
