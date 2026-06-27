@@ -23,6 +23,7 @@ export interface EC2Instance {
     memory: number;
     memory_speed: number | null;
     vCPU: number;
+    cores?: number | null;
     ECU: number | "variable";
     base_performance?: number;
     burst_minutes?: number;
