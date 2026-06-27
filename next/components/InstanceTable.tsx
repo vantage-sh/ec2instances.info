@@ -33,6 +33,7 @@ import SortToggle from "./SortToggle";
 import * as columnData from "@/utils/colunnData";
 import { usePathname } from "next/navigation";
 import DragDetector from "./DragDetector";
+import isAvailableInRegion from "@/utils/isAvailableInRegion";
 
 export type AtomKeyWhereInstanceIs<Instance> = {
     [AtomKey in keyof typeof columnData]: (typeof columnData)[AtomKey]["columnsGen"] extends (
@@ -125,8 +126,16 @@ export default function InstanceTable<
         if (compareOn) {
             return instances.filter((i) => selected.includes(i.instance_type));
         }
-        return instances;
-    }, [compareOn, instances, selected]);
+        // Hide instances that the selected region does not offer. Availability
+        // is derived from the per-region pricing map, the same signal the
+        // instance detail page uses to disable a region (see
+        // components/PricingCalculator.tsx). Without this, an instance such as
+        // m8i.2xlarge still rendered (with empty pricing cells) when a region
+        // it is not offered in, e.g. eu-north-1, was selected.
+        return instances.filter((i) =>
+            isAvailableInRegion(i as Record<string, unknown>, selectedRegion),
+        );
+    }, [compareOn, instances, selected, selectedRegion]);
 
     const rowSelectionRemapped = useMemo(() => {
         const res: RowSelectionState = {};
