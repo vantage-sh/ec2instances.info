@@ -151,10 +151,6 @@ func enrichEc2Instance(instance *EC2Instance, attributes map[string]string, ec2A
 		}
 		instance.GPU = GPU
 	}
-	if strings.Contains(instance.InstanceType, "inf") || strings.Contains(instance.InstanceType, "trn") {
-		instance.GPU = 1
-	}
-
 	if hasApiDescription {
 		if instance.FPGA == 0 {
 			// Check if there's any FPGA's
