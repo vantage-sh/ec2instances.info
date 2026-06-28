@@ -82,6 +82,33 @@ func targetRegionsForSKU(sku SKU, fallbackRegion string) []string {
 	return []string{fallbackRegion}
 }
 
+// cudTargetRegions resolves the region codes a committed use discount SKU
+// applies to. Resource-based CUD SKUs carry explicit region codes in their geo
+// taxonomy in most cases; for multi-regional commitment SKUs the geo taxonomy
+// has no region list, so the broad grouping is taken from the display name
+// ("Americas" / "EMEA" / "APAC"), mapped to the same multi-region identifiers
+// on-demand pricing uses. EMEA/APAC differ from the on-demand wording
+// (europe/asia), so this is resolved here rather than via parseMachineTypeFromSKU.
+func cudTargetRegions(sku SKU) []string {
+	if len(sku.GeoTaxonomy.Regions) > 0 {
+		return sku.GeoTaxonomy.Regions
+	}
+	if sku.GeoTaxonomy.RegionalMetadata != nil && sku.GeoTaxonomy.RegionalMetadata.Region.Region != "" {
+		return []string{sku.GeoTaxonomy.RegionalMetadata.Region.Region}
+	}
+
+	displayLower := strings.ToLower(sku.DisplayName)
+	switch {
+	case strings.Contains(displayLower, "americas"):
+		return []string{"multi-americas"}
+	case strings.Contains(displayLower, "emea"), strings.Contains(displayLower, "europe"):
+		return []string{"multi-europe"}
+	case strings.Contains(displayLower, "apac"), strings.Contains(displayLower, "asia"):
+		return []string{"multi-asia"}
+	}
+	return nil
+}
+
 func expandedRegionsForMultiRegion(region string) []string {
 	switch region {
 	case "multi-americas":
@@ -141,6 +168,17 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 
 	skuData := make(map[skuKey][]PriceInfo)
 
+	// Resource-based committed use discount (CUD) pricing, kept entirely separate
+	// from on-demand/spot so commitment rates never bleed into baseline pricing.
+	type cudKey struct {
+		machineType  string
+		region       string
+		term         string // cudTerm1Yr or cudTerm3Yr
+		resourceType string // "core" or "ram"
+	}
+	cudData := make(map[cudKey][]PriceInfo)
+	cudSKUCount := 0
+
 	// Store Windows license fees separately (they're global, not region-specific)
 	type windowsLicenseType struct {
 		resourceType string // "core" or "ram"
@@ -187,6 +225,46 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 				}
 			}
 			continue // Don't process as instance SKU
+		}
+
+		// Capture resource-based committed use discount (CUD) SKUs into a
+		// dedicated bucket. These use the "Commitment v1: <family> Cpu/Ram in
+		// <region> for <1|3> Year" naming and are intentionally never mixed into
+		// on-demand/spot pricing. Done before the on-demand "instance" gate
+		// (their display name has no "instance" token) and before the
+		// commitment/discount taxonomy filter that drops them.
+		if strings.Contains(displayLower, "commitment v") {
+			cudFamily, cudResource, cudCommitTerm, isCUD := parseCUDSKU(sku)
+			if !isCUD {
+				continue
+			}
+
+			price, hasPricing := pricing[sku.SkuId]
+			if !hasPricing {
+				continue
+			}
+			cudSKUCount++
+
+			for _, targetRegion := range cudTargetRegions(sku) {
+				key := cudKey{
+					machineType:  cudFamily,
+					region:       targetRegion,
+					term:         cudCommitTerm,
+					resourceType: cudResource,
+				}
+				cudData[key] = append(cudData[key], price)
+
+				for _, expandedRegion := range expandedRegionsForMultiRegion(targetRegion) {
+					expandedKey := cudKey{
+						machineType:  cudFamily,
+						region:       expandedRegion,
+						term:         cudCommitTerm,
+						resourceType: cudResource,
+					}
+					cudData[expandedKey] = append(cudData[expandedKey], price)
+				}
+			}
+			continue
 		}
 
 		// Process both instance SKUs and Windows licensing SKUs
@@ -272,11 +350,12 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 	}
 
 	log.Printf(
-		"GCP SKU filtering: parsed=%d priced=%d skippedByTaxonomy=%d duplicateCandidateKeys=%d",
+		"GCP SKU filtering: parsed=%d priced=%d skippedByTaxonomy=%d duplicateCandidateKeys=%d cudSKUs=%d",
 		parsedSKUCount,
 		pricedSKUCount,
 		skippedByTaxonomyCount,
 		duplicatePriceKeys,
+		cudSKUCount,
 	)
 
 	// Build instances from machine specs
@@ -399,6 +478,78 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 			} else {
 				// Fallback to friendly name lookup for regions not in compute API
 				instance.Regions[rk.region] = getRegionFriendlyName(rk.region)
+			}
+		}
+
+		// Assemble resource-based committed use discount (CUD) pricing the same
+		// way on-demand is built: per-region, per-term, total =
+		// core_rate*vCPU + ram_rate*RAM. CUDs apply to the Linux compute price
+		// (no OS license), so they attach to the Linux pricing data.
+		type cudRegionKey struct {
+			region string
+			term   string
+		}
+		cudRegionPricing := make(map[cudRegionKey]struct {
+			corePrice float64
+			ramPrice  float64
+			hasCores  bool
+			hasRAM    bool
+		})
+
+		for key, candidates := range cudData {
+			if key.machineType != machineFamily {
+				continue
+			}
+
+			// CUD list prices are baseline rates; use the standard list-price
+			// selection (same as on-demand, not the spot-style minimum).
+			hourlyPrice, hasPrice := selectHourlyPrice(candidates, false)
+			if !hasPrice {
+				continue
+			}
+
+			crk := cudRegionKey{region: key.region, term: key.term}
+			p := cudRegionPricing[crk]
+			switch key.resourceType {
+			case "core":
+				p.corePrice = hourlyPrice
+				p.hasCores = true
+			case "ram":
+				p.ramPrice = hourlyPrice
+				p.hasRAM = true
+			}
+			cudRegionPricing[crk] = p
+		}
+
+		for crk, p := range cudRegionPricing {
+			// Both core and RAM rates are required to assemble a price.
+			if !p.hasCores || !p.hasRAM {
+				continue
+			}
+
+			totalCUD := (float64(specs.VCPU) * p.corePrice) + (specs.MemoryGB * p.ramPrice)
+			if totalCUD == 0 {
+				continue
+			}
+
+			// Only attach CUD to regions that already have Linux on-demand
+			// pricing; an instance with no baseline price in a region should not
+			// surface a lone commitment rate.
+			regionPricingMap, hasRegion := instance.Pricing[crk.region]
+			if !hasRegion {
+				continue
+			}
+			linuxPricing, ok := regionPricingMap["linux"].(*GCPPricingData)
+			if !ok {
+				continue
+			}
+
+			cudStr := formatPrice(totalCUD)
+			switch crk.term {
+			case cudTerm1Yr:
+				linuxPricing.CUD1Yr = cudStr
+			case cudTerm3Yr:
+				linuxPricing.CUD3Yr = cudStr
 			}
 		}
 
