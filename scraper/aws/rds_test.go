@@ -1,7 +1,6 @@
 package aws
 
 import (
-	"math"
 	"testing"
 
 	"scraper/aws/awsutils"
@@ -38,9 +37,7 @@ func assembleOnDemand(
 	return getPricing(attributes["engineCode"]).OnDemand
 }
 
-func approxEqual(a, b float64) bool {
-	return math.Abs(a-b) < 1e-9
-}
+// approxEqual is defined once for package aws in reserved_pricing_test.go.
 
 // TestUnbundledSqlServerLicense replicates the #890 scenario: a db.m7i.2xlarge SQL
 // Server Standard "unbundled" instance must display base + separately-billed
