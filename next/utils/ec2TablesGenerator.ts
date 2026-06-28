@@ -18,6 +18,35 @@ function round(value: number) {
     return Math.round(value * 100) / 100;
 }
 
+const rdsSqlServerPlatforms = new Set([
+    "SQL Server",
+    "10",
+    "11",
+    "12",
+    "15",
+    "52",
+    "53",
+    "230",
+    "231",
+    "232",
+    "403",
+    "405",
+    "406",
+]);
+
+function rdsVCPUForPlatform(
+    instance: Omit<EC2Instance, "pricing">,
+    platform?: string,
+) {
+    if (!platform) return instance.vCPU;
+    const engineVCPU = instance.vcpu_by_engine?.[platform];
+    if (engineVCPU) return engineVCPU;
+    if (rdsSqlServerPlatforms.has(platform)) {
+        return instance.vcpu_by_engine?.["SQL Server"] ?? instance.vCPU;
+    }
+    return instance.vCPU;
+}
+
 export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
     const trunkingRows: Row[] = [];
     if (typeof instance.is_trunking_compatible === "boolean") {
@@ -314,7 +343,12 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
     ];
 }
 
-export function rds(instance: Omit<EC2Instance, "pricing">): Table[] {
+export function rds(
+    instance: Omit<EC2Instance, "pricing">,
+    platform?: string,
+): Table[] {
+    const vCPU = rdsVCPUForPlatform(instance, platform);
+
     return [
         {
             name: "Compute",
@@ -322,7 +356,7 @@ export function rds(instance: Omit<EC2Instance, "pricing">): Table[] {
             rows: [
                 {
                     name: "vCPUs",
-                    children: instance.vCPU,
+                    children: vCPU,
                 },
                 {
                     name: "Memory (GiB)",

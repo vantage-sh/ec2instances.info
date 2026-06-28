@@ -49,71 +49,26 @@ var pipeIntoAverager = []string{
 	"vcpu",
 }
 
-// SQLSERVER_HYPERTHREADING_DISABLED_FAMILIES lists the 7th-generation-and-above
-// Intel DB instance families for which AWS disables hyper-threading on RDS for
-// SQL Server at sizes 2xlarge and above. For these the actual vCPU count is half
-// of the corresponding EC2 instance.
-// See: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.Concepts.General.InstanceClasses.html
-var SQLSERVER_HYPERTHREADING_DISABLED_FAMILIES = map[string]bool{
-	"m7i": true,
-	"m8i": true,
-	"r7i": true,
-	"r8i": true,
-}
-
-// sqlServerVcpuShouldBeHalved reports whether the given RDS instance type (e.g.
-// "db.m7i.2xlarge") is one for which RDS SQL Server disables hyper-threading,
-// halving the vCPU count relative to the corresponding EC2 instance. This is true
-// only for the documented 7th-gen-and-above Intel families at sizes 2xlarge and
-// above.
-func sqlServerVcpuShouldBeHalved(instanceType string) bool {
-	parts := strings.Split(strings.TrimPrefix(instanceType, "db."), ".")
-	if len(parts) != 2 {
-		return false
-	}
-	family, size := parts[0], parts[1]
-	if !SQLSERVER_HYPERTHREADING_DISABLED_FAMILIES[family] {
-		return false
-	}
-	// Sizes are "2xlarge and above". Anything of the form "Nxlarge" with N >= 2
-	// qualifies; "large" and "xlarge" (N implied 1) do not.
-	multiplier, ok := strings.CutSuffix(size, "xlarge")
-	if !ok || multiplier == "" {
-		return false
-	}
-	n, err := strconv.Atoi(multiplier)
-	if err != nil {
-		return false
-	}
-	return n >= 2
-}
-
-// halveSqlServerVcpu halves the vCPU count of an RDS instance when it is one of
-// the documented SQL Server families/sizes with hyper-threading disabled. The
-// vCPU is stored as an Averager of strings, so we read the averaged value, halve
-// it and write back a single corrected value.
-func halveSqlServerVcpu(instance map[string]any) {
-	instanceType, ok := instance["instance_type"].(string)
-	if !ok || !sqlServerVcpuShouldBeHalved(instanceType) {
+func addRdsVcpuByEngine(instance map[string]any, attributes map[string]string) {
+	vcpu := attributes["vcpu"]
+	if vcpu == "" || vcpu == "NA" {
 		return
 	}
 
-	avg, ok := instance["vcpu"].(*awsutils.Averager[string])
+	vcpuByEngine, ok := instance["vcpu_by_engine"].(map[string]string)
 	if !ok {
-		// No vCPU data scraped for this instance; nothing to correct.
-		return
-	}
-	vcpuStr := avg.Value()
-	vcpu, err := strconv.Atoi(vcpuStr)
-	if err != nil {
-		log.Fatalln("RDS instance has non-integer vCPU value", instanceType, vcpuStr)
-	}
-	if vcpu%2 != 0 {
-		log.Fatalln("RDS SQL Server hyper-threading instance has odd vCPU count", instanceType, vcpu)
+		vcpuByEngine = make(map[string]string)
+		instance["vcpu_by_engine"] = vcpuByEngine
 	}
 
-	halved := awsutils.Averager[string]{strconv.Itoa(vcpu / 2)}
-	instance["vcpu"] = &halved
+	for _, engine := range []string{
+		attributes["databaseEngine"],
+		attributes["engineCode"],
+	} {
+		if engine != "" {
+			vcpuByEngine[engine] = vcpu
+		}
+	}
 }
 
 func enrichRdsInstance(
@@ -141,6 +96,7 @@ func enrichRdsInstance(
 			}
 		}
 	}
+	addRdsVcpuByEngine(instance, attributes)
 
 	// Add the pretty name
 	instanceTypeWithoutDb := strings.TrimPrefix(instance["instance_type"].(string), "db.")
@@ -569,10 +525,6 @@ func processRDSData(
 	// Clean up empty regions and set the regions map for non-empty regions
 	for _, instance := range instancesHashmap {
 		instance["regions"] = cleanEmptyRegions(instance["pricing"].(map[string]map[string]any), regionDescriptions)
-
-		// RDS SQL Server disables hyper-threading on 7th-gen-and-above Intel
-		// families at sizes 2xlarge and above, halving the vCPU count.
-		halveSqlServerVcpu(instance)
 	}
 
 	// Save the data
