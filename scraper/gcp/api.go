@@ -152,7 +152,27 @@ type MachineSpecs struct {
 	IsSharedCPU bool
 	GPU         int
 	GPUModel    string
+	GPUMemory   int
 	Zones       []string
+}
+
+// gpuMemoryByModel maps a GCP guestAcceleratorType (the model string the
+// Compute Engine API returns, e.g. "nvidia-h100-80gb") to the per-GPU memory
+// in GiB. Values are sourced from the official Google Cloud GPU documentation
+// (https://cloud.google.com/compute/docs/gpus and
+// https://cloud.google.com/compute/docs/accelerator-optimized-machines).
+// Unknown models return 0 so the field is omitted rather than fabricated.
+var gpuMemoryByModel = map[string]int{
+	"nvidia-h200-141gb":     141, // A3 Ultra
+	"nvidia-h100-80gb":      80,  // A3 High/Edge
+	"nvidia-h100-mega-80gb": 80,  // A3 Mega
+	"nvidia-a100-80gb":      80,  // A2 Ultra
+	"nvidia-tesla-a100":     40,  // A2 Standard (A100 40GB)
+	"nvidia-l4":             24,  // G2
+}
+
+func totalGPUMemory(gpuCount int, gpuModel string) int {
+	return gpuCount * gpuMemoryByModel[gpuModel]
 }
 
 // Fetch all SKUs for Compute Engine with pagination
@@ -468,6 +488,14 @@ func fetchMachineTypes() (map[string]*MachineSpecs, error) {
 					if len(mt.Accelerators) > 0 {
 						specs.GPU = mt.Accelerators[0].GuestAcceleratorCount
 						specs.GPUModel = mt.Accelerators[0].GuestAcceleratorType
+						// Per-GPU memory is not exposed by the Compute Engine
+						// machineTypes API, so derive it from the model string
+						// using the documented per-GPU memory map. GPU_memory
+						// is total memory across all attached GPUs.
+						specs.GPUMemory = totalGPUMemory(
+							specs.GPU,
+							specs.GPUModel,
+						)
 					}
 
 					machineSpecs[mt.Name] = specs
@@ -544,6 +572,57 @@ func determineMachineFamily(name string) string {
 // "Licensing Fee for Windows Server 2012 BYOL (CPU cost)"
 // "Licensing Fee for Windows Server 2012 BYOL (RAM cost)"
 var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2d|n2|n4d|n4|e2|e2a|c2|c2d|m1|m2|m3|m4|t2d|t2a|a2|a3|g2|h3|c3|c3d|z3|c4)\b.*(?:instance\s+(core|ram)|\((?:cpu|ram)\s+cost\))`)
+
+// Resource-based committed use discount (CUD) SKUs use a distinct display-name
+// format from on-demand instance SKUs, e.g.:
+//
+//	"Commitment v1: N2 Cpu in Americas for 1 Year"
+//	"Commitment v1: C2D AMD Ram in EMEA for 3 Year"
+//
+// The family token may carry a vendor qualifier ("AMD") before the resource
+// keyword; the term is "1 Year" or "3 Year". An optional skip group consumes
+// such qualifiers so the resource keyword (Cpu/Ram) is captured directly.
+var cudSKURegex = regexp.MustCompile(`(?i)^commitment\s+v\d+:\s+(n1|n2d|n2|n4d|n4|e2|e2a|c2|c2d|m1|m2|m3|m4|t2d|t2a|a2|a3|g2|h3|c3|c3d|z3|c4)\s+(?:[a-z0-9]+\s+)*?(cpu|ram)\s+in\s+.+\s+for\s+(1|3)\s+year`)
+
+// CUD commitment terms used as keys in the CUD pricing buckets.
+const (
+	cudTerm1Yr = "1yr"
+	cudTerm3Yr = "3yr"
+)
+
+// parseCUDSKU parses a resource-based committed use discount SKU. It returns the
+// machine family (uppercased, e.g. "N2"), resource type ("core" or "ram"), the
+// commitment term ("1yr" or "3yr"), and whether the SKU is a CUD SKU at all.
+// Region resolution is left to the shared geo-taxonomy machinery (the same path
+// on-demand SKUs use), so the region groupings in the display name are ignored.
+func parseCUDSKU(sku SKU) (machineFamily string, resourceType string, term string, ok bool) {
+	matches := cudSKURegex.FindStringSubmatch(sku.DisplayName)
+	if len(matches) < 4 {
+		return "", "", "", false
+	}
+
+	machineFamily = strings.ToUpper(matches[1])
+
+	switch strings.ToLower(matches[2]) {
+	case "cpu":
+		resourceType = "core"
+	case "ram":
+		resourceType = "ram"
+	default:
+		return "", "", "", false
+	}
+
+	switch matches[3] {
+	case "1":
+		term = cudTerm1Yr
+	case "3":
+		term = cudTerm3Yr
+	default:
+		return "", "", "", false
+	}
+
+	return machineFamily, resourceType, term, true
+}
 
 func parseMachineTypeFromSKU(sku SKU) (machineFamily string, resourceType string, region string, isSpot bool, isWindows bool) {
 	displayName := sku.DisplayName

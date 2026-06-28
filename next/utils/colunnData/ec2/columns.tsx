@@ -553,6 +553,25 @@ export const columnsGen = (
         },
     },
     {
+        accessorKey: "cores",
+        header: "Cores",
+        size: 110,
+        id: "cores",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.cores;
+            const valueB = rowB.original.cores;
+            if (valueA === null || valueA === undefined) return -1;
+            if (valueB === null || valueB === undefined) return 1;
+            return valueA - valueB;
+        },
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | null;
+            if (value === null || value === undefined) return undefined;
+            return `${value} cores`;
+        },
+    },
+    {
         accessorKey: "memory_per_vcpu",
         header: "GiB of Memory per vCPU",
         id: "memory_per_vcpu",
@@ -1078,6 +1097,24 @@ export const columnsGen = (
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.branch_interface;
             const valueB = rowB.original.branch_interface;
+            if (valueA === undefined) return 1;
+            if (valueB === undefined) return -1;
+            return valueA - valueB;
+        },
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | undefined;
+            if (value === undefined) return undefined;
+            return value;
+        },
+    },
+    {
+        accessorKey: "max_ecs_tasks",
+        header: "Max ECS Tasks",
+        id: "max_ecs_tasks",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.max_ecs_tasks;
+            const valueB = rowB.original.max_ecs_tasks;
             if (valueA === undefined) return 1;
             if (valueB === undefined) return -1;
             return valueA - valueB;

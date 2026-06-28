@@ -3,6 +3,7 @@ package aws
 import (
 	"context"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache"
 )
@@ -10,7 +11,10 @@ import (
 var elasticacheClient *elasticache.Client
 
 func init() {
-	cfg, err := config.LoadDefaultConfig(context.TODO())
+	cfg, err := config.LoadDefaultConfig(context.TODO(),
+		config.WithRetryMaxAttempts(10),
+		config.WithRetryMode(aws.RetryModeAdaptive),
+	)
 	cfg.Region = "us-east-1"
 	if err != nil {
 		panic(err)

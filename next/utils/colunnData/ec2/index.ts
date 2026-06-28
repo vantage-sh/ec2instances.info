@@ -8,6 +8,7 @@ const initialColumnsArr = [
     ["memory", true],
     ["ECU", false],
     ["vCPU", true],
+    ["cores", false],
     ["memory_per_vcpu", false],
     ["GPU", false],
     ["GPU_model", false],
@@ -104,6 +105,7 @@ const initialColumnsArr = [
     ["is_bare_metal", false],
     ["is_trunking_compatible", false],
     ["branch_interface", false],
+    ["max_ecs_tasks", false],
 ] as const;
 
 export const initialColumnsValue: {
@@ -154,6 +156,7 @@ export function makePrettyNames<V>(
         makeColumnOption("l3_shared", "L3 Cache Shared"),
         makeColumnOption("ECU", "Compute Units (ECU)"),
         makeColumnOption("vCPU", "vCPUs"),
+        makeColumnOption("cores", "Cores"),
         makeColumnOption("memory_per_vcpu", "GiB of Memory per vCPU"),
         makeColumnOption("GPU", "GPUs"),
         makeColumnOption("GPU_model", "GPU model"),
@@ -197,6 +200,7 @@ export function makePrettyNames<V>(
         makeColumnOption("is_bare_metal", "Bare metal"),
         makeColumnOption("is_trunking_compatible", "Trunking compatible"),
         makeColumnOption("branch_interface", "Branch interface"),
+        makeColumnOption("max_ecs_tasks", "Max ECS Tasks"),
         makeColumnOption("vpc_only", "VPC Only"),
         makeColumnOption("ipv6_support", "IPv6 Support"),
         makeColumnOption("placement_group_support", "Placement Group Support"),

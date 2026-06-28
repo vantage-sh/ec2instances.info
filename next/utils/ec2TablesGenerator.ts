@@ -33,6 +33,13 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
             children: instance.branch_interface,
         });
     }
+    if (typeof instance.max_ecs_tasks === "number") {
+        trunkingRows.push({
+            name: "Max ECS Tasks",
+            help: "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html",
+            children: instance.max_ecs_tasks,
+        });
+    }
 
     return [
         {

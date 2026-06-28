@@ -23,6 +23,7 @@ export interface EC2Instance {
     memory: number;
     memory_speed: number | null;
     vCPU: number;
+    cores?: number | null;
     ECU: number | "variable";
     base_performance?: number;
     burst_minutes?: number;
@@ -66,6 +67,7 @@ export interface EC2Instance {
     is_bare_metal?: boolean;
     is_trunking_compatible?: boolean;
     branch_interface?: number;
+    max_ecs_tasks?: number;
     enhanced_networking: boolean;
     vpc_only: boolean;
     ipv6_support: boolean;

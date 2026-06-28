@@ -15,6 +15,11 @@ export interface GCPPricing {
         [platform: string]: {
             ondemand: number;
             spot?: number;
+            // Resource-based committed use discount (CUD) hourly prices, sourced
+            // from the catalog's committed-use SKUs. Present only on the linux
+            // platform and only when the machine family/region has a CUD SKU.
+            cud_1yr?: number;
+            cud_3yr?: number;
         };
     };
 }
@@ -51,6 +56,8 @@ const initialColumnsArr = [
     ["local_ssd", false],
     ["shared_cpu", false],
     ["linux-ondemand", true],
+    ["linux-1yr-cud", true],
+    ["linux-3yr-cud", true],
     ["linux-spot", true],
     ["windows-ondemand", true],
     ["windows-spot", true],
@@ -85,6 +92,8 @@ export function makePrettyNames<V>(
         makeColumnOption("local_ssd", "Local SSD"),
         makeColumnOption("shared_cpu", "Shared CPU"),
         makeColumnOption("linux-ondemand", "Linux On-Demand"),
+        makeColumnOption("linux-1yr-cud", "Linux 1-Year CUD"),
+        makeColumnOption("linux-3yr-cud", "Linux 3-Year CUD"),
         makeColumnOption("linux-spot", "Linux Spot"),
         makeColumnOption("windows-ondemand", "Windows On-Demand"),
         makeColumnOption("windows-spot", "Windows Spot"),
@@ -379,6 +388,30 @@ export const columnsGen = (
                 pricingUnit,
                 costDuration,
                 (pricing) => pricing?.linux?.ondemand,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header: "Linux 1-Year CUD cost",
+            id: "linux-1yr-cud",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.linux?.cud_1yr,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header: "Linux 3-Year CUD cost",
+            id: "linux-3yr-cud",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.linux?.cud_3yr,
                 currency,
             ),
         },

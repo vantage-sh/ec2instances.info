@@ -100,6 +100,13 @@ func enrichEc2Instance(instance *EC2Instance, attributes map[string]string, ec2A
 		}
 		instance.Arch = arches
 
+		// Physical core count, per DescribeInstanceTypes VCpuInfo.DefaultCores.
+		// https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VCpuInfo.html
+		if apiDescription.VCpuInfo != nil && apiDescription.VCpuInfo.DefaultCores != nil {
+			cores := int(*apiDescription.VCpuInfo.DefaultCores)
+			instance.Cores = &cores
+		}
+
 		if apiDescription.NetworkInfo.NetworkPerformance == nil {
 			instance.NetworkPerformance = "Unknown"
 		} else if *apiDescription.NetworkInfo.NetworkPerformance != "NA" {

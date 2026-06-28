@@ -272,6 +272,9 @@ func processEC2Data(
 	// Add GPU information
 	addGpuInfo(instancesHashmap)
 
+	// Add FPGA information for instances AWS does not report via the API
+	addFpgaInfo(instancesHashmap)
+
 	// Add placement group information
 	addPlacementGroupInfo(instancesHashmap)
 

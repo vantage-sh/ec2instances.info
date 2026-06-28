@@ -63,9 +63,13 @@ type Storage struct {
 }
 
 type EC2Instance struct {
-	InstanceType             string                     `json:"instance_type"`
-	Family                   string                     `json:"family"`
-	VCPU                     awsutils.Averager[int]     `json:"vCPU"`
+	InstanceType string                 `json:"instance_type"`
+	Family       string                 `json:"family"`
+	VCPU         awsutils.Averager[int] `json:"vCPU"`
+	// Cores is the number of physical cores (vCPUs = cores * threads-per-core).
+	// Sourced from DescribeInstanceTypes -> VCpuInfo.DefaultCores; nil when AWS does not report it.
+	// https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VCpuInfo.html
+	Cores                    *int                       `json:"cores"`
 	Memory                   awsutils.Averager[float64] `json:"memory"`
 	MemorySpeed              *int                       `json:"memory_speed"`
 	PrettyName               string                     `json:"pretty_name"`
@@ -124,6 +128,7 @@ type EC2Instance struct {
 	IsBareMetal              *bool                      `json:"is_bare_metal,omitempty"`
 	IsTrunkingCompatible     *bool                      `json:"is_trunking_compatible,omitempty"`
 	BranchInterface          *int                       `json:"branch_interface,omitempty"`
+	MaxECSTasks              *int                       `json:"max_ecs_tasks,omitempty"`
 }
 
 func avg(ints []int) *float64 {
@@ -192,5 +197,13 @@ func (instance *EC2Instance) addExtraDetails() {
 		instance.IsBareMetal = &limits.IsBareMetal
 		instance.IsTrunkingCompatible = &limits.IsTrunkingCompatible
 		instance.BranchInterface = &limits.BranchInterface
+		// https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html
+		var maxEcsTasks int
+		if limits.IsTrunkingCompatible {
+			maxEcsTasks = limits.Interface + limits.BranchInterface - 2
+		} else {
+			maxEcsTasks = limits.Interface - 1
+		}
+		instance.MaxECSTasks = &maxEcsTasks
 	}
 }
