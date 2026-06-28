@@ -1,5 +1,5 @@
 name: Tests
-on: push
+on: [push, pull_request]
 
 jobs:
     gofmt:
@@ -12,6 +12,17 @@ jobs:
                   go-version: 1.26.0
             - name: Check gofmt
               run: cd scraper && gofmt -l . && test -z "$(gofmt -l .)"
+
+    go-tests:
+        name: Go build, vet and tests (scraper)
+        runs-on: ubuntu-22.04
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-go@v5
+              with:
+                  go-version: 1.26.0
+            - name: Build, vet and test the scraper
+              run: cd scraper && go build ./... && go vet ./... && go test ./...
 
     prettier:
         name: Prettier
