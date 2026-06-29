@@ -104,7 +104,11 @@ const blankStateDump: StateDump = {
     region: "",
     pricingUnit: "instance",
     costDuration: "hourly",
-    reservedTerm: "yrTerm1Standard.noUpfront",
+    // Left empty so the per-page default from useReservedTerm() applies (AWS ->
+    // yrTerm1Standard.noUpfront, Azure -> yrTerm1Standard.allUpfront). Hardcoding
+    // noUpfront here overrode the Azure default, leaving Azure's reserved/savings
+    // columns blank because noUpfront isn't a valid Azure term. Mirrors region/filter.
+    reservedTerm: "",
 };
 
 function deepCopy<T>(v: T): T {
