@@ -76,6 +76,7 @@ function Calculator({
     useSpotMin,
     setPathSuffix,
     currencies,
+    onPlatformChange,
 }: {
     pricing: Record<string, Record<string, Platform>>;
     regions: Region;
@@ -88,6 +89,7 @@ function Calculator({
     useSpotMin: boolean;
     setPathSuffix: (value: string) => void;
     currencies: CurrencyItem[];
+    onPlatformChange?: (platform: string) => void;
 }) {
     const priceHoldersId = useId();
 
@@ -111,6 +113,10 @@ function Calculator({
         useState<string>("Standard.noUpfront");
     const [currency, setCurrencyState] = useState<string>("USD");
     const conversionRate = currencyRateAtom.use();
+
+    useEffect(() => {
+        onPlatformChange?.(platform);
+    }, [onPlatformChange, platform]);
 
     // Check the URL to make sure this is the state it was originally in.
     useEffect(() => {
@@ -516,6 +522,7 @@ type PricingCalculatorProps = {
     useSpotMin: boolean;
     setPathSuffix: (value: string) => void;
     currencies: CurrencyItem[];
+    onPlatformChange?: (platform: string) => void;
 };
 
 export default function PricingCalculator({
@@ -531,6 +538,7 @@ export default function PricingCalculator({
     useSpotMin,
     setPathSuffix,
     currencies,
+    onPlatformChange,
 }: PricingCalculatorProps) {
     const instance = useMemo(() => {
         if (!Array.isArray(compressedInstance.pricing))
@@ -556,6 +564,7 @@ export default function PricingCalculator({
                 useSpotMin={useSpotMin}
                 setPathSuffix={setPathSuffix}
                 currencies={currencies}
+                onPlatformChange={onPlatformChange}
             />
         </section>
     );

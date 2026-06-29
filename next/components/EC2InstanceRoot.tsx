@@ -12,6 +12,7 @@ import MarketingWrapper from "./MarketingWrapper";
 import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
 import { MarketingSchema } from "@/schemas/marketing";
 import type { CurrencyItem } from "@/utils/loadCurrencies";
+import { useState } from "react";
 
 interface InstanceRootProps {
     rainbowTable: string[];
@@ -57,6 +58,11 @@ export default function EC2InstanceRoot({
     currencies,
 }: InstanceRootProps) {
     const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
+    const [selectedPlatform, setSelectedPlatform] = useState(defaultOs);
+    const generateTables = tablesGenerator[generatorKey] as (
+        instance: EC2Instance,
+        platform?: string,
+    ) => tablesGenerator.Table[];
 
     return (
         <MarketingWrapper
@@ -93,6 +99,7 @@ export default function EC2InstanceRoot({
                             defaultRegion="us-east-1"
                             useSpotMin={false}
                             setPathSuffix={setPathSuffix}
+                            onPlatformChange={setSelectedPlatform}
                         />
                         <VantageDemo link="https://www.vantage.sh/lp/aws-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar" />
                         <FamilySize
@@ -122,8 +129,9 @@ export default function EC2InstanceRoot({
                     </div>
                     <div className="not-xl:flex-grow xl:w-xl 2xl:w-2xl md:mt-0 mt-4">
                         <InstanceDataView
-                            tables={tablesGenerator[generatorKey](
+                            tables={generateTables(
                                 compressedInstance,
+                                selectedPlatform,
                             )}
                         />
                     </div>
