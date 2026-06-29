@@ -49,6 +49,28 @@ var pipeIntoAverager = []string{
 	"vcpu",
 }
 
+func addRdsVcpuByEngine(instance map[string]any, attributes map[string]string) {
+	vcpu := attributes["vcpu"]
+	if vcpu == "" || vcpu == "NA" {
+		return
+	}
+
+	vcpuByEngine, ok := instance["vcpu_by_engine"].(map[string]string)
+	if !ok {
+		vcpuByEngine = make(map[string]string)
+		instance["vcpu_by_engine"] = vcpuByEngine
+	}
+
+	for _, engine := range []string{
+		attributes["databaseEngine"],
+		attributes["engineCode"],
+	} {
+		if engine != "" {
+			vcpuByEngine[engine] = vcpu
+		}
+	}
+}
+
 func enrichRdsInstance(
 	instance map[string]any,
 	attributes map[string]string,
@@ -74,6 +96,7 @@ func enrichRdsInstance(
 			}
 		}
 	}
+	addRdsVcpuByEngine(instance, attributes)
 
 	// Add the pretty name
 	instanceTypeWithoutDb := strings.TrimPrefix(instance["instance_type"].(string), "db.")

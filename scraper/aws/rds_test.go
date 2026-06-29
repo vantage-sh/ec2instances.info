@@ -206,3 +206,61 @@ func TestIsUnbundledSqlServerProduct(t *testing.T) {
 		}
 	}
 }
+
+// newVcpuInstance builds a minimal instance map shaped like the scraper produces,
+// with vcpu stored as an Averager of strings.
+func newVcpuInstance(instanceType string, vcpus ...string) map[string]any {
+	avg := &awsutils.Averager[string]{}
+	*avg = append(*avg, vcpus...)
+	return map[string]any{
+		"instance_type": instanceType,
+		"vcpu":          avg,
+	}
+}
+
+func vcpuValue(t *testing.T, instance map[string]any) string {
+	t.Helper()
+	avg, ok := instance["vcpu"].(*awsutils.Averager[string])
+	if !ok {
+		t.Fatalf("vcpu is not an *Averager: %T", instance["vcpu"])
+	}
+	return avg.Value()
+}
+
+func TestAddRdsVcpuByEngine(t *testing.T) {
+	instance := newVcpuInstance("db.m7i.2xlarge", "8")
+
+	// Live AWS pricing data reports different vCPU counts for the same RDS
+	// instance type depending on database engine. SQL Server has
+	// hyper-threading disabled, while other engines keep the EC2-style value.
+	addRdsVcpuByEngine(instance, map[string]string{
+		"databaseEngine": "MySQL",
+		"engineCode":     "2",
+		"vcpu":           "8",
+	})
+	addRdsVcpuByEngine(instance, map[string]string{
+		"databaseEngine": "SQL Server",
+		"engineCode":     "12",
+		"vcpu":           "4",
+	})
+
+	if got := vcpuValue(t, instance); got != "8" {
+		t.Errorf("top-level vcpu = %q, want 8", got)
+	}
+
+	vcpuByEngine, ok := instance["vcpu_by_engine"].(map[string]string)
+	if !ok {
+		t.Fatalf("vcpu_by_engine is not a map: %T", instance["vcpu_by_engine"])
+	}
+
+	for engine, want := range map[string]string{
+		"MySQL":      "8",
+		"2":          "8",
+		"SQL Server": "4",
+		"12":         "4",
+	} {
+		if got := vcpuByEngine[engine]; got != want {
+			t.Errorf("vcpu_by_engine[%q] = %q, want %q", engine, got, want)
+		}
+	}
+}

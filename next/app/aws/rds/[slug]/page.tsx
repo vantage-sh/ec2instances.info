@@ -109,15 +109,17 @@ const osOptions: [string, string][] = [
     ["4", "Oracle Standard BYOL"],
     ["410", "Oracle Enterprise BYOL"],
     ["3", "Oracle Standard One"],
+    ["11", "SQL Server Web"],
     ["12", "SQL Server Standard"],
+    ["15", "SQL Server Enterprise"],
     ["10", "SQL Server Express"],
     ["210", "MySQL (Outpost On-Prem)"],
     ["220", "PostgreSQL (Outpost On-Prem)"],
     ["230", "SQL Server Enterprise (Outpost On-Prem)"],
     ["231", "SQL Server (Outpost On-Prem)"],
     ["232", "SQL Server Web (Outpost On-Prem)"],
-    ["405", "SQL Server Standard BYOM"],
-    ["406", "SQL Server Enterprise BYOM"],
+    ["52", "SQL Server Standard BYOM"],
+    ["53", "SQL Server Enterprise BYOM"],
 ];
 
 export default async function Page({
