@@ -60,6 +60,12 @@ type Storage struct {
 	Devices                   int    `json:"devices"`
 	Size                      int    `json:"size"`
 	SizeUnit                  string `json:"size_unit"`
+	// StorageReadIops / StorageWriteIops are the instance-store random read/write
+	// IOPS sourced from the AWS instance-type docs (see iops.go). Pointers so that
+	// instances without a documented value omit the field entirely (frontend treats
+	// absent as "N/A") rather than reporting a fabricated 0.
+	StorageReadIops  *int `json:"storage_read_iops,omitempty"`
+	StorageWriteIops *int `json:"storage_write_iops,omitempty"`
 }
 
 type EC2Instance struct {
