@@ -25,6 +25,10 @@ export interface EC2Instance {
     vCPU: number;
     cores?: number | null;
     vcpu_by_engine?: Record<string, string | number>;
+    // RDS only: supported database engine version range per engine, sourced from
+    // the RDS DescribeOrderableDBInstanceOptions API (issue #710). Optional so
+    // older data and non-RDS instances render fine without it.
+    engine_support?: Record<string, { min: string; max: string }>;
     ECU: number | "variable";
     base_performance?: number;
     burst_minutes?: number;

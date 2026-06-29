@@ -323,14 +323,19 @@ func DoAwsScraping() {
 	// Start the EC2 data processing threads (this is outside of this function because its complex)
 	ec2GlobalChannel, ec2ChinaChannel := ec2Internal.Setup(&fg, ec2ApiResponses)
 
+	// Supported database engine version ranges per instance class (issue #710),
+	// queried from the RDS API in a single region in the background. China shares
+	// no orderable-options source here, so it receives no engine support data.
+	rdsEngineSupport := utils.BlockUntilDone(getRdsEngineSupport)
+
 	// Defines the channel for the RDS data
 	rdsGlobalChannel := make(chan awsutils.RawRegion)
 	rdsChinaChannel := make(chan awsutils.RawRegion)
 	fg.Add(func() {
-		processRDSData(rdsChinaChannel, ec2ApiResponses, true, rdsLicenseFeesChina)
+		processRDSData(rdsChinaChannel, ec2ApiResponses, true, rdsLicenseFeesChina, nil)
 	})
 	fg.Add(func() {
-		processRDSData(rdsGlobalChannel, ec2ApiResponses, false, rdsLicenseFeesGlobal)
+		processRDSData(rdsGlobalChannel, ec2ApiResponses, false, rdsLicenseFeesGlobal, rdsEngineSupport)
 	})
 
 	// Get the ElastiCache cache parameters in the background
