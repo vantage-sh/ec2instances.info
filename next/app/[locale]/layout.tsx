@@ -71,14 +71,6 @@ export default async function LocaleLayout({
                         strategy="afterInteractive"
                     />
                 )}
-                {process.env.NEXT_PUBLIC_UNIFY_TAG_ID && (
-                    <Script
-                        src={`https://tag.unifyintent.com/v1/${process.env.NEXT_PUBLIC_UNIFY_TAG_ID}/script.js`}
-                        strategy="afterInteractive"
-                        id="unifytag"
-                        data-api-key={process.env.NEXT_PUBLIC_UNIFY_API_KEY}
-                    />
-                )}
             </head>
             <body className={fontClassName}>
                 <GTProvider locale={locale as SupportedLocale}>
