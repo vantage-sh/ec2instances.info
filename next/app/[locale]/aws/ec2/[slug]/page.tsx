@@ -1,6 +1,6 @@
 import { decode } from "@msgpack/msgpack";
-import { readFile } from "fs/promises";
 import { XzReadableStream } from "xz-decompress";
+import { loadDataAsset } from "@/utils/loadDataAsset";
 import { EC2Instance, Region } from "@/types";
 import processRainbowTable from "@/utils/processRainbowTable";
 import EC2InstanceRoot from "@/components/EC2InstanceRoot";
@@ -24,16 +24,16 @@ async function getData() {
     if (p) return p;
     p = (async () => {
         const regions = decode(
-            await readFile("./public/instances-regions.msgpack"),
+            await loadDataAsset("instances-regions.msgpack"),
         ) as Region;
         const compressed30 = decode(
-            await readFile("./public/first-30-instances.msgpack"),
+            await loadDataAsset("first-30-instances.msgpack"),
         ) as EC2Instance[];
 
         const remainingInstances: EC2Instance[] = [];
         for (let i = 0; i < PIPELINE_SIZE; i++) {
-            const compressed = await readFile(
-                `./public/remaining-instances-p${i}.msgpack.xz`,
+            const compressed = await loadDataAsset(
+                `remaining-instances-p${i}.msgpack.xz`,
             );
             const stream = new XzReadableStream(
                 new ReadableStream({

@@ -1,4 +1,4 @@
-import { readFile } from "fs/promises";
+import { loadDataJsonXz } from "@/utils/loadDataAsset";
 import { Region } from "@/types";
 import type { Instance } from "@/utils/colunnData/opensearch";
 import HalfEC2Root from "@/components/HalfEC2Root";
@@ -17,8 +17,8 @@ let p: Promise<{ regions: Region; instances: Instance[] }>;
 async function getData() {
     if (p) return p;
     p = (async () => {
-        const instances = JSON.parse(
-            await readFile("../www/opensearch/instances.json", "utf8"),
+        const instances = await loadDataJsonXz<any[]>(
+            "data/opensearch/instances.json.xz",
         );
         const regions: Region = {
             main: {},
@@ -38,8 +38,8 @@ async function getData() {
             }
         }
 
-        const instancesCn = JSON.parse(
-            await readFile("../www/opensearch/instances-cn.json", "utf8"),
+        const instancesCn = await loadDataJsonXz<any[]>(
+            "data/opensearch/instances-cn.json.xz",
         );
         for (const instance of instancesCn) {
             for (const r in instance.regions) {

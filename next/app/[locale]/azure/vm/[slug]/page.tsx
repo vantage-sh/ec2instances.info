@@ -1,5 +1,5 @@
 import { AzureInstance } from "@/utils/colunnData/azure";
-import { readFile } from "fs/promises";
+import { loadDataJson, loadDataJsonXz } from "@/utils/loadDataAsset";
 import formatAzureInstanceType from "@/utils/formatAzureInstanceType";
 import makeRainbowTable from "@/utils/makeRainbowTable";
 import AzureInstanceRoot from "@/components/AzureInstanceRoot";
@@ -18,12 +18,10 @@ let p: Promise<{ regions: Record<string, string>; instances: AzureInstance[] }>;
 async function getData() {
     if (p) return p;
     p = (async () => {
-        const regions = JSON.parse(
-            await readFile("./public/azure-regions.json", "utf-8"),
-        ) as Region;
-        const instances = JSON.parse(
-            await readFile("../www/azure/instances.json", "utf8"),
-        ) as AzureInstance[];
+        const regions = await loadDataJson<Region>("azure-regions.json");
+        const instances = await loadDataJsonXz<AzureInstance[]>(
+            "data/azure/instances.json.xz",
+        );
         for (const instance of instances) {
             formatAzureInstanceType(instance);
         }

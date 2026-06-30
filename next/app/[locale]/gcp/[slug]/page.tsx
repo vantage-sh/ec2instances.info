@@ -1,5 +1,5 @@
 import { GCPInstance } from "@/utils/colunnData/gcp";
-import { readFile } from "fs/promises";
+import { loadDataJson, loadDataJsonXz } from "@/utils/loadDataAsset";
 import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
 import { Region } from "@/types";
@@ -18,12 +18,10 @@ let p: Promise<{ regions: Record<string, string>; instances: GCPInstance[] }>;
 async function getData() {
     if (p) return p;
     p = (async () => {
-        const regions = JSON.parse(
-            await readFile("./public/gcp-regions.json", "utf-8"),
-        ) as Region;
-        const instances = JSON.parse(
-            await readFile("../www/gcp/instances.json", "utf8"),
-        ) as GCPInstance[];
+        const regions = await loadDataJson<Region>("gcp-regions.json");
+        const instances = await loadDataJsonXz<GCPInstance[]>(
+            "data/gcp/instances.json.xz",
+        );
         return {
             regions: regions.main,
             instances,

@@ -1,4 +1,4 @@
-import { readFile } from "fs/promises";
+import { loadDataJsonXz } from "@/utils/loadDataAsset";
 import { Region } from "@/types";
 import type { Instance } from "@/utils/colunnData/redshift";
 import HalfEC2Root from "@/components/HalfEC2Root";
@@ -17,8 +17,8 @@ let p: Promise<{ regions: Region; instances: Instance[] }>;
 async function getData() {
     if (p) return p;
     p = (async () => {
-        const instances = JSON.parse(
-            await readFile("../www/redshift/instances.json", "utf8"),
+        const instances = await loadDataJsonXz<any[]>(
+            "data/redshift/instances.json.xz",
         );
         const regions: Region = {
             main: {},
@@ -38,8 +38,8 @@ async function getData() {
             }
         }
 
-        const instancesCn = JSON.parse(
-            await readFile("../www/redshift/instances-cn.json", "utf8"),
+        const instancesCn = await loadDataJsonXz<any[]>(
+            "data/redshift/instances-cn.json.xz",
         );
         for (const instance of instancesCn) {
             for (const r in instance.regions) {

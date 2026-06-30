@@ -45,6 +45,7 @@ yarn-error.log*
 next-env.d.ts
 
 # compressed data
+public/data/
 public/*.msgpack
 public/*.msgpack.xz
 public/*-count.txt

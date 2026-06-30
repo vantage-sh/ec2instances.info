@@ -1,5 +1,6 @@
 import { EC2Instance, Region } from "@/types";
-import { readFile, writeFile } from "fs/promises";
+import { mkdir, readFile, writeFile } from "fs/promises";
+import { dirname } from "path";
 import { encode } from "@msgpack/msgpack";
 import { compress } from "lzma-native";
 import addRenderInfo from "@/utils/addRenderInfo";
@@ -354,11 +355,44 @@ async function compressRDSInstances() {
     console.log("RDS instances data compressed and saved");
 }
 
+// Whole-dataset JSON files that the instance detail pages read at render time.
+// They are xz-compressed into public/data/ so they (a) ship as deployed assets
+// the Worker can fetch at runtime (ISR / on-demand locales) and (b) stay under
+// Cloudflare's 25 MiB per-asset limit (the raw Azure dataset is ~39 MiB).
+// Build-time prerender and runtime render both read these exact bytes via
+// utils/loadDataAsset, so rendered output is identical to the old fs reads.
+const RUNTIME_DATA_FILES = [
+    "rds/instances.json",
+    "cache/instances.json",
+    "cache/instances-cn.json",
+    "opensearch/instances.json",
+    "opensearch/instances-cn.json",
+    "redshift/instances.json",
+    "redshift/instances-cn.json",
+    "azure/instances.json",
+    "gcp/instances.json",
+];
+
+async function compressRuntimeDataAssets() {
+    console.log("Compressing detail-page data assets...");
+    for (const rel of RUNTIME_DATA_FILES) {
+        const raw = await readFile(`../www/${rel}`);
+        const compressed = await new Promise<Buffer>((resolve) => {
+            compress(raw, {}, (result) => resolve(result));
+        });
+        const out = `./public/data/${rel}.xz`;
+        await mkdir(dirname(out), { recursive: true });
+        await writeFile(out, compressed);
+    }
+    console.log("Detail-page data assets compressed and saved");
+}
+
 async function main() {
     await compressEC2Instances();
     await compressAzureInstances();
     await compressGCPInstances();
     await compressRDSInstances();
+    await compressRuntimeDataAssets();
 }
 
 main();

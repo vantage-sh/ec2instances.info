@@ -3,7 +3,7 @@ import { EC2Instance, Region } from "@/types";
 import bestEc2InstanceForEachVariant from "@/utils/bestEc2InstanceForEachVariant";
 import makeRainbowTable from "@/utils/makeRainbowTable";
 import { decode } from "@msgpack/msgpack";
-import { readFile } from "fs/promises";
+import { loadDataAsset, loadDataJsonXz } from "@/utils/loadDataAsset";
 import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
 import loadAdvertData from "@/utils/loadAdvertData";
@@ -18,11 +18,10 @@ async function getData() {
     if (p) return p;
     p = (async () => {
         const regions = decode(
-            await readFile("./public/instance-rds-regions.msgpack"),
+            await loadDataAsset("instance-rds-regions.msgpack"),
         ) as Region;
-        const instances = JSON.parse(
-            await readFile("../www/rds/instances.json", "utf-8"),
-        ) as EC2Instance[];
+        const instances =
+            await loadDataJsonXz<EC2Instance[]>("data/rds/instances.json.xz");
         for (const x of instances) {
             if ("vcpu" in x) {
                 // @ts-expect-error: This is a different typed field.
