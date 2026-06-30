@@ -55,7 +55,7 @@
     "vpcOnly": "VPC Only",
     "ipv6Support": "IPv6 Support",
     "placementGroupSupport": "Placement Group Support",
-    "linuxVirtualization": "Linux Virtualization",
+    "linuxVirtualization": "Linux Virtualisation",
     "onEmr": "On EMR",
     "availabilityZones": "Availability Zones",
     "cudaComputeCapability": "CUDA Compute Capability",

@@ -102,7 +102,7 @@
       "nvmeDrive": "NVME Drive",
       "diskSpace": "Disk Space (GiB)",
       "ssd": "SSD",
-      "initializeStorage": "Initialize Storage",
+      "initializeStorage": "Initialise Storage",
       "generation": "Generation",
       "instanceType": "Instance Type",
       "family": "Family",
