@@ -9,9 +9,14 @@ import { urlInject } from "@/utils/urlInject";
 import { Region } from "@/types";
 import loadAdvertData from "@/utils/loadAdvertData";
 import loadCurrencies from "@/utils/loadCurrencies";
-import { SUPPORTED_LOCALES } from "@/utils/fonts";
+import { PRERENDER_LOCALES } from "@/utils/fonts";
+import { notFound } from "next/navigation";
 
 export const dynamic = "force-static";
+// Prerender only the subset of locales (see PRERENDER_LOCALES); the rest render
+// on demand at runtime and are then cached/revalidated (ISR).
+export const dynamicParams = true;
+export const revalidate = 28800; // 8h, matching the scrape cadence
 
 let p: Promise<{ regions: Record<string, string>; instances: AzureInstance[] }>;
 
@@ -35,7 +40,7 @@ async function getData() {
 
 export async function generateStaticParams() {
     const { instances } = await getData();
-    return SUPPORTED_LOCALES.flatMap((locale) =>
+    return PRERENDER_LOCALES.flatMap((locale) =>
         instances.map((instance) => ({
             locale,
             slug: instance.instance_type,
@@ -48,7 +53,10 @@ async function handleParams(params: Promise<{ slug: string }>) {
     const { instances, regions } = await getData();
     const instance = instances.find(
         (instance) => instance.instance_type === slug,
-    )!;
+    );
+    if (!instance) {
+        notFound();
+    }
 
     return {
         instance,

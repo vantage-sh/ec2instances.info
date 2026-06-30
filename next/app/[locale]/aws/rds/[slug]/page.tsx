@@ -8,9 +8,14 @@ import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
 import loadAdvertData from "@/utils/loadAdvertData";
 import loadCurrencies from "@/utils/loadCurrencies";
-import { SUPPORTED_LOCALES } from "@/utils/fonts";
+import { PRERENDER_LOCALES } from "@/utils/fonts";
+import { notFound } from "next/navigation";
 
 export const dynamic = "force-static";
+// Prerender only the subset of locales (see PRERENDER_LOCALES); the rest render
+// on demand at runtime and are then cached/revalidated (ISR).
+export const dynamicParams = true;
+export const revalidate = 28800; // 8h, matching the scrape cadence
 
 let p: Promise<{ regions: Region; instances: EC2Instance[] }>;
 
@@ -44,7 +49,7 @@ async function getData() {
 
 export async function generateStaticParams() {
     const { instances } = await getData();
-    return SUPPORTED_LOCALES.flatMap((locale) =>
+    return PRERENDER_LOCALES.flatMap((locale) =>
         instances.map((instance) => ({
             locale,
             slug: instance.instance_type,
@@ -55,7 +60,10 @@ export async function generateStaticParams() {
 async function handleParams(params: Promise<{ slug: string }>) {
     const { slug } = await params;
     const { instances, regions } = await getData();
-    const instance = instances.find((i) => i.instance_type === slug)!;
+    const instance = instances.find((i) => i.instance_type === slug);
+    if (!instance) {
+        notFound();
+    }
     let ondemandCost: string | undefined;
     const regionRoot =
         instance.pricing["us-east-1"] ||

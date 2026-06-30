@@ -608,6 +608,23 @@ export const LOCALE_NAMES: Record<SupportedLocale, string> = {
 
 export const DEFAULT_LOCALE: SupportedLocale = "en-GB";
 
+// Locales whose instance detail pages are prerendered at build time. The
+// default locale plus the original (pre-i18n) locales; the remaining ~191
+// locales are rendered on demand at runtime (ISR via `dynamicParams`).
+// Building every locale x every instance detail page (~200 x ~3000) would be
+// infeasible, so only this subset is prebuilt.
+export const PRERENDER_LOCALES: SupportedLocale[] = [
+    "en-GB",
+    "en-US",
+    "zh-CN",
+    "zh-TW",
+    "ja",
+    "de",
+    "sv",
+    "he",
+    "ar",
+];
+
 export const RTL_LOCALES: SupportedLocale[] = ["ar", "ur", "fa", "arz", "pnb", "ps", "sd", "skr", "ckb", "he", "ug", "bal", "ks", "ary", "arq", "apc", "acm", "ars", "afb", "apd", "dv", "prs"];
 
 export function isRTL(locale: string): boolean {

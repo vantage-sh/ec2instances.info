@@ -37,6 +37,7 @@ import {
 export {
     type SupportedLocale,
     SUPPORTED_LOCALES,
+    PRERENDER_LOCALES,
     LOCALE_NAMES,
     DEFAULT_LOCALE,
     RTL_LOCALES,
