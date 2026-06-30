@@ -65,3 +65,31 @@ These are NOT done by CI and must be run once by someone with CF access.
 - `www/updated_at` is still written by `make write-updated-at` but `www/` is no
   longer the served root; if the app surfaces this value, move it into a
   build-time route.
+
+## Known limitations & follow-ups
+
+- **Runtime memory (follow-up):** on-demand (non-prerendered) locale renders
+  load the entire provider dataset into the module cache for the isolate's
+  lifetime. An isolate that serves several providers can accumulate >128 MB
+  (Azure alone decompresses to ~39 MiB). True per-instance data splitting is a
+  follow-up (detail pages need the family/variant set, not a single record).
+  Mitigation: the prerendered locales (high-traffic) serve static HTML; on-demand
+  is the long tail and is cached in R2 after the first render.
+
+- **On-demand miss cost:** a bogus slug or an un-prerendered locale triggers a
+  full dataset load before `notFound()`. 404 responses are not reliably cached,
+  so this is a minor cost/abuse surface worth noting.
+
+- **Listing pages & sitemap routes** still use `fs.readFile` and are prebuilt
+  for all `SUPPORTED_LOCALES`. A request for a locale NOT in `SUPPORTED_LOCALES`
+  would 500 rather than 404, depending on whether gt-next middleware rejects the
+  unknown locale before the route handler runs.
+
+- **`toasts.json`** is fetched on every on-demand render and throws on a non-200
+  response. This was a pre-existing hardcode whose blast radius grew under SSR.
+
+- **Ops (CF dashboard):** add a Cache Rule to normalize/ignore the `?id=` query
+  parameter in the edge cache key. The retired worker stripped it; without the
+  rule, each `?id=` deep-link is a separate cache entry. Also note the old `.xml`
+  cache-control exception that the retired worker handled. Apex/www redirects are
+  now 308 (previously 301 from the old worker).
