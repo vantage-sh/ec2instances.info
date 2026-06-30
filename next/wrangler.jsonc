@@ -30,6 +30,12 @@
         { "binding": "WORKER_SELF_REFERENCE", "service": "ec2instances-worker" },
     ],
 
+    "routes": [
+        { "pattern": "instances.vantage.sh", "custom_domain": true },
+        { "pattern": "ec2instances.info", "custom_domain": true },
+        { "pattern": "www.ec2instances.info", "custom_domain": true },
+    ],
+
     "env": {
         "staging": {
             "name": "ec2instances-worker-staging",
@@ -57,36 +63,6 @@
                 },
             ],
             "routes": [],
-        },
-        "production": {
-            "r2_buckets": [
-                {
-                    "binding": "NEXT_INC_CACHE_R2_BUCKET",
-                    "bucket_name": "ec2instances-next-cache-production",
-                },
-            ],
-            "durable_objects": {
-                "bindings": [
-                    {
-                        "name": "NEXT_CACHE_DO_QUEUE",
-                        "class_name": "DOQueueHandler",
-                    },
-                ],
-            },
-            "migrations": [
-                { "tag": "v1", "new_sqlite_classes": ["DOQueueHandler"] },
-            ],
-            "services": [
-                {
-                    "binding": "WORKER_SELF_REFERENCE",
-                    "service": "ec2instances-worker",
-                },
-            ],
-            "routes": [
-                { "pattern": "instances.vantage.sh", "custom_domain": true },
-                { "pattern": "ec2instances.info", "custom_domain": true },
-                { "pattern": "www.ec2instances.info", "custom_domain": true },
-            ],
         },
     },
 }
