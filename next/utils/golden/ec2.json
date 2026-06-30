@@ -202,6 +202,14 @@
                 "name": "Initialize Storage",
                 "children": false,
                 "bgStyled": true
+            },
+            {
+                "name": "Instance Store Read IOPS",
+                "children": "N/A"
+            },
+            {
+                "name": "Instance Store Write IOPS",
+                "children": "N/A"
             }
         ]
     },
