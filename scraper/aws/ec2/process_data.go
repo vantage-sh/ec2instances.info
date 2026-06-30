@@ -275,6 +275,9 @@ func processEC2Data(
 	// Add FPGA information for instances AWS does not report via the API
 	addFpgaInfo(instancesHashmap)
 
+	// Add instance store random read/write IOPS from the AWS instance-type docs
+	addStorageIopsInfo(instancesHashmap)
+
 	// Add placement group information
 	addPlacementGroupInfo(instancesHashmap)
 
