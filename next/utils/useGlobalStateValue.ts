@@ -3,6 +3,7 @@ import { get, write, StateDump } from "./instancesKvClient";
 import { migrateLocalStorage, migrateUrl } from "./migrations";
 import { Mutex } from "async-mutex";
 import { browserBlockingLocalStorage } from "./abGroup";
+import { stripLocaleFromPath } from "./locale";
 
 const writerMutex = new Mutex();
 
@@ -32,7 +33,7 @@ async function doWrite(
     await writerMutex.runExclusive(async () => {
         const id = await idPromise;
         const url = new URL(window.location.href);
-        if (url.pathname !== pathname) return;
+        if (stripLocaleFromPath(url.pathname) !== pathname) return;
         url.searchParams.set("id", id);
         window.history.replaceState({}, "", url.toString());
     });
