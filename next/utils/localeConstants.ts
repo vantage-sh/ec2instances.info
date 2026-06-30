@@ -200,7 +200,7 @@ export type SupportedLocale =
     | "lb"
     | "mt";
 
-export const SUPPORTED_LOCALES: SupportedLocale[] = [
+const SUPPORTED_LOCALES_ALL: SupportedLocale[] = [
     "en-US",
     "en-GB",
     "zh-CN",
@@ -402,6 +402,8 @@ export const SUPPORTED_LOCALES: SupportedLocale[] = [
     "lb",
     "mt",
 ];
+
+export const SUPPORTED_LOCALES = SUPPORTED_LOCALES_ALL;
 
 export const LOCALE_NAMES: Record<SupportedLocale, string> = {
     ["en-US"]: "English",
