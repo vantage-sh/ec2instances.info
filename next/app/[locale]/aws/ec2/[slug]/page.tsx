@@ -7,7 +7,7 @@ import EC2InstanceRoot from "@/components/EC2InstanceRoot";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 import makeRainbowTable from "@/utils/makeRainbowTable";
 import buildInstanceDescription from "@/utils/buildInstanceDescription";
-import { getTranslations } from "gt-next/server";
+import makeDictionaryTranslator from "@/utils/makeDictionaryTranslator";
 import bestEc2InstanceForEachVariant from "@/utils/bestEc2InstanceForEachVariant";
 import tryPricingMappingWithDefaultsAndYoloIfNot from "@/utils/tryPricingGetAndYoloIfNot";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
@@ -97,10 +97,17 @@ async function handleParams(params: Promise<{ slug: string }>) {
 export async function generateMetadata({
     params,
 }: {
-    params: Promise<{ slug: string }>;
+    params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
     const { instance, ondemandCost } = await handleParams(params);
-    const t = await getTranslations();
+    const { locale } = await params;
+    let common: Record<string, unknown>;
+    try {
+        common = (await import(`@/translations/${locale}/common.json`)).default;
+    } catch {
+        common = (await import("@/translations/en-GB/common.json")).default;
+    }
+    const t = makeDictionaryTranslator(common);
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
         description: buildInstanceDescription(t, instance, ondemandCost as string),

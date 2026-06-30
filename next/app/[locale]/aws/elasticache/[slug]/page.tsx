@@ -5,7 +5,7 @@ import makeRainbowTable from "@/utils/makeRainbowTable";
 import bestEc2InstanceForEachVariant from "@/utils/bestEc2InstanceForEachVariant";
 import addRenderInfo from "@/utils/addRenderInfo";
 import buildInstanceDescription from "@/utils/buildInstanceDescription";
-import { getTranslations } from "gt-next/server";
+import makeDictionaryTranslator from "@/utils/makeDictionaryTranslator";
 import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
 import loadAdvertData from "@/utils/loadAdvertData";
@@ -101,10 +101,17 @@ async function handleParams(params: Promise<{ slug: string }>) {
 export async function generateMetadata({
     params,
 }: {
-    params: Promise<{ slug: string }>;
+    params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
     const { instance, ondemandCost } = await handleParams(params);
-    const t = await getTranslations();
+    const { locale } = await params;
+    let common: Record<string, unknown>;
+    try {
+        common = (await import(`@/translations/${locale}/common.json`)).default;
+    } catch {
+        common = (await import("@/translations/en-GB/common.json")).default;
+    }
+    const t = makeDictionaryTranslator(common);
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
         description: buildInstanceDescription(t, instance, ondemandCost as string),
