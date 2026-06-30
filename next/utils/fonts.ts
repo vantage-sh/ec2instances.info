@@ -8,6 +8,7 @@ import {
     Noto_Sans_Georgian,
     Noto_Sans_Gujarati,
     Noto_Sans_Gurmukhi,
+    Noto_Sans_Hanifi_Rohingya,
     Noto_Sans_Hebrew,
     Noto_Sans_JP,
     Noto_Sans_KR,
@@ -46,16 +47,25 @@ export {
 //
 // Each locale is mapped to a "Noto Sans <Script>" family that can render its
 // writing system. Latin / Cyrillic / Greek / Vietnamese locales use the base
-// "Noto Sans" family (its subsets cover all four). Tibetan (bo, dz) has no
-// Noto Sans family, so it uses Noto Serif Tibetan; base Noto Sans is the
-// final fallback for any locale not explicitly mapped.
+// "Noto Sans" family. Its subsets cover latin, latin-ext, cyrillic,
+// cyrillic-ext, greek, and vietnamese (all confirmed present in the
+// @next/font font-data.json manifest). Tibetan (bo, dz) has no Noto Sans
+// family, so it uses Noto Serif Tibetan; base Noto Sans is the final fallback
+// for any locale not explicitly mapped.
 //
 // next/font/google requires literal call arguments, so every font is
 // initialised explicitly at module scope below. Only (family, subset, weight)
 // combinations present in @next/font's font-data.json manifest are used.
 
 export const notoSans = Noto_Sans({
-    subsets: ["latin"],
+    subsets: [
+        "latin",
+        "latin-ext",
+        "cyrillic",
+        "cyrillic-ext",
+        "greek",
+        "vietnamese",
+    ],
     display: "swap",
     variable: "--font-noto-sans",
 });
@@ -250,6 +260,14 @@ export const notoTifinagh = Noto_Sans_Tifinagh({
     variable: "--font-noto-tifinagh",
 });
 
+// Rohingya script (rhg): Noto Sans Hanifi Rohingya is present in the
+// @next/font font-data.json manifest with subset "hanifi-rohingya".
+export const notoHanifiRohingya = Noto_Sans_Hanifi_Rohingya({
+    subsets: ["hanifi-rohingya"],
+    display: "swap",
+    variable: "--font-noto-hanifi-rohingya",
+});
+
 export function getFontForLocale(locale: string) {
     switch (locale) {
         case "ar":
@@ -352,6 +370,8 @@ export function getFontForLocale(locale: string) {
             return notoYi;
         case "zgh":
             return notoTifinagh;
+        case "rhg":
+            return notoHanifiRohingya;
         case "bo":
         case "dz":
             return notoSerifTibetan;
