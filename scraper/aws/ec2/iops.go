@@ -7,12 +7,15 @@ import (
 	"scraper/utils"
 	"strconv"
 	"strings"
+
+	"github.com/anaskhan96/soup"
 )
 
-// AWS publishes per-family instance-type docs as markdown. Each doc contains an
-// "Instance store specifications" table with a "Random read IOPS / Random write
-// IOPS" column keyed by instance type. We scrape those tables to expose the
-// instance-store random read/write IOPS on each instance.
+// AWS publishes per-family instance-type docs as markdown with embedded HTML
+// tables. Each doc contains an "Instance store specifications" table with a
+// "100% random read IOPS / Write IOPS" column keyed by instance type. We scrape
+// those tables to expose the instance-store random read/write IOPS on each
+// instance.
 const awsInstanceTypeDocBase = "https://docs.aws.amazon.com/ec2/latest/instancetypes"
 
 // iopsDocSlugs are the instance-type doc families that carry instance-store
@@ -31,6 +34,84 @@ var (
 type storageIops struct {
 	readIops  int
 	writeIops int
+}
+
+func parseIopsCells(instanceType, iopsCell string) (string, storageIops, bool) {
+	instanceType = strings.TrimSpace(instanceType)
+	if instanceType == "" || !instanceTypeRe.MatchString(instanceType) {
+		return "", storageIops{}, false
+	}
+
+	iopsCell = strings.TrimSpace(iopsCell)
+	if iopsCell == "" {
+		return "", storageIops{}, false
+	}
+	parts := strings.Split(iopsCell, "/")
+	if len(parts) != 2 {
+		return "", storageIops{}, false
+	}
+	readIops, okRead := parseIopsValue(parts[0])
+	writeIops, okWrite := parseIopsValue(parts[1])
+	if !okRead || !okWrite {
+		return "", storageIops{}, false
+	}
+
+	return strings.ToLower(instanceType), storageIops{
+		readIops:  readIops,
+		writeIops: writeIops,
+	}, true
+}
+
+func parseIopsHTMLTables(markdown string) map[string]storageIops {
+	doc := soup.HTMLParse(markdown)
+	results := map[string]storageIops{}
+
+	for _, table := range doc.FindAll("table") {
+		thead := table.Find("thead")
+		if thead.Error != nil {
+			continue
+		}
+		ths := thead.FindAll("th")
+		if len(ths) == 0 {
+			continue
+		}
+
+		iopsColIdx := -1
+		instanceColIdx := 0
+		for i, th := range ths {
+			text := strings.TrimSpace(th.FullText())
+			if iopsHeaderRe.MatchString(text) {
+				iopsColIdx = i
+			}
+			if instanceHeaderRe.MatchString(text) {
+				instanceColIdx = i
+			}
+		}
+		if iopsColIdx == -1 {
+			continue
+		}
+
+		tbody := table.Find("tbody")
+		if tbody.Error != nil {
+			continue
+		}
+		for _, tr := range tbody.FindAll("tr") {
+			tds := tr.FindAll("td")
+			if instanceColIdx >= len(tds) || iopsColIdx >= len(tds) {
+				continue
+			}
+			instanceType, iops, ok := parseIopsCells(
+				tds[instanceColIdx].FullText(),
+				tds[iopsColIdx].FullText(),
+			)
+			if !ok {
+				continue
+			}
+			results[instanceType] = iops
+		}
+	}
+
+	return results
 }
 
 // splitMarkdownRow splits a markdown table row into trimmed cells, dropping the
@@ -72,9 +153,14 @@ func parseIopsValue(s string) (int, bool) {
 
 // parseIopsTable parses the instance-store IOPS table out of one AWS
 // instance-type markdown doc, returning a lowercase-instance-type -> IOPS map.
-// It locates the table by its "Random read IOPS" header, then reads each data
-// row, skipping the separator row and family-header rows.
+// It first handles the current embedded-HTML AWS doc shape, then falls back to
+// the older pipe-table shape used by the original parser.
 func parseIopsTable(markdown string) map[string]storageIops {
+	htmlResults := parseIopsHTMLTables(markdown)
+	if len(htmlResults) > 0 {
+		return htmlResults
+	}
+
 	lines := strings.Split(markdown, "\n")
 	inTable := false
 	iopsColIdx := -1
@@ -140,29 +226,14 @@ func parseIopsTable(markdown string) map[string]storageIops {
 		if instanceColIdx >= len(cells) || iopsColIdx >= len(cells) {
 			continue
 		}
-		instanceType := cells[instanceColIdx]
-		if instanceType == "" || !instanceTypeRe.MatchString(instanceType) {
+		instanceType, iops, ok := parseIopsCells(
+			cells[instanceColIdx],
+			cells[iopsColIdx],
+		)
+		if !ok {
 			continue
 		}
-
-		iopsCell := strings.TrimSpace(cells[iopsColIdx])
-		if iopsCell == "" {
-			continue
-		}
-		parts := strings.Split(iopsCell, "/")
-		if len(parts) != 2 {
-			continue
-		}
-		readIops, okRead := parseIopsValue(parts[0])
-		writeIops, okWrite := parseIopsValue(parts[1])
-		if !okRead || !okWrite {
-			continue
-		}
-
-		results[strings.ToLower(instanceType)] = storageIops{
-			readIops:  readIops,
-			writeIops: writeIops,
-		}
+		results[instanceType] = iops
 	}
 
 	return results
