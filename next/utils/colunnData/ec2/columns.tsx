@@ -14,8 +14,6 @@ interface Storage {
     ssd: boolean;
     trim_support: boolean;
     storage_needs_initialization: boolean;
-    storage_read_iops?: number;
-    storage_write_iops?: number;
 }
 
 export function calculateCost(
@@ -810,66 +808,6 @@ export const columnsGen = (
                 throw new Error("trim_support is undefined");
             return storage.trim_support ? "Yes" : "No";
         }),
-    },
-    {
-        accessorKey: "storage",
-        header: "Instance Store: Read IOPS",
-        size: 200,
-        id: "storage_read_iops",
-        sortingFn: (rowA, rowB) => {
-            const a = rowA.original.storage?.storage_read_iops;
-            const b = rowB.original.storage?.storage_read_iops;
-            if (!a) return -1;
-            if (!b) return 1;
-            return a - b;
-        },
-        filterFn: (row, _, filterValue) => {
-            const value = row.original.storage?.storage_read_iops;
-            if (!value) return false;
-            try {
-                return exprCompiler(filterValue)(
-                    value,
-                    `${value.toLocaleString()} IOPS`,
-                );
-            } catch {
-                return true;
-            }
-        },
-        cell: (info) => {
-            const storage = info.getValue() as Storage;
-            if (!storage?.storage_read_iops) return undefined;
-            return `${storage.storage_read_iops.toLocaleString()} IOPS`;
-        },
-    },
-    {
-        accessorKey: "storage",
-        header: "Instance Store: Write IOPS",
-        size: 200,
-        id: "storage_write_iops",
-        sortingFn: (rowA, rowB) => {
-            const a = rowA.original.storage?.storage_write_iops;
-            const b = rowB.original.storage?.storage_write_iops;
-            if (!a) return -1;
-            if (!b) return 1;
-            return a - b;
-        },
-        filterFn: (row, _, filterValue) => {
-            const value = row.original.storage?.storage_write_iops;
-            if (!value) return false;
-            try {
-                return exprCompiler(filterValue)(
-                    value,
-                    `${value.toLocaleString()} IOPS`,
-                );
-            } catch {
-                return true;
-            }
-        },
-        cell: (info) => {
-            const storage = info.getValue() as Storage;
-            if (!storage?.storage_write_iops) return undefined;
-            return `${storage.storage_write_iops.toLocaleString()} IOPS`;
-        },
     },
     {
         accessorKey: "arch",
