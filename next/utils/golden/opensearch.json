@@ -1,51 +1,51 @@
 [
     {
-        "name": "Compute",
+        "nameKey": "compute",
         "slug": "Compute",
         "rows": [
             {
-                "name": "CPUs",
+                "nameKey": "cpus",
                 "children": "2"
             },
             {
-                "name": "Memory (GiB)",
+                "nameKey": "memoryGiB",
                 "children": "8"
             },
             {
-                "name": "Memory per vCPU (GiB)",
+                "nameKey": "memoryPerVCPU",
                 "children": 4
             }
         ]
     },
     {
-        "name": "Storage",
+        "nameKey": "storage",
         "slug": "Storage",
         "rows": [
             {
-                "name": "Storage",
+                "nameKey": "storageField",
                 "children": "EBS Only"
             }
         ]
     },
     {
-        "name": "Amazon",
+        "nameKey": "amazon",
         "slug": "Amazon",
         "rows": [
             {
-                "name": "Generation",
+                "nameKey": "generation",
                 "children": "current",
                 "bgStyled": true
             },
             {
-                "name": "Instance Type",
+                "nameKey": "instanceType",
                 "children": "m5.large.search"
             },
             {
-                "name": "Family",
+                "nameKey": "family",
                 "children": "General purpose"
             },
             {
-                "name": "Name",
+                "nameKey": "name",
                 "children": "M5 General Purpose Large"
             }
         ]
