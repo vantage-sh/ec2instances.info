@@ -2,6 +2,7 @@ package ec2
 
 import (
 	"encoding/json"
+	"fmt"
 	"scraper/aws/awsutils"
 	"scraper/aws/ec2/extras"
 	"strconv"
@@ -143,8 +144,16 @@ func avg(ints []int) *float64 {
 	return &avg
 }
 
+func formatClockSpeedFromMhz(speedMhz uint) string {
+	return fmt.Sprintf("%.1f GHz", float64(speedMhz)/1000)
+}
+
 func (instance *EC2Instance) addExtraDetails() {
 	if details, ok := extras.ExtraInstanceDetails[instance.InstanceType]; ok {
+		if details.CPU.Speed > 0 {
+			clockSpeed := formatClockSpeedFromMhz(details.CPU.Speed)
+			instance.ClockSpeedGhz = &clockSpeed
+		}
 		instance.MemorySpeed = details.Memory.SpeedMhz
 		instance.CoremarkIterationsSecond = &details.Coremark.IterationsSecond
 		gpuArchitectures := []string{}
