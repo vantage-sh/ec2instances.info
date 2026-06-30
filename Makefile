@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := all
-.PHONY: fetch-data generate-images compress-www next write-updated-at gofmt prettier format all
+.PHONY: fetch-data generate-images compress-www opennext-build write-updated-at gofmt prettier format all
 
 fetch-data:
 	./fetch_data.sh
@@ -13,10 +13,11 @@ compress-www:
 	tar -cvzf www_pre_build.tar.gz www
 	mv www_pre_build.tar.gz www/www_pre_build.tar.gz
 
-next:
-	docker build -t ec2instances-node -f next/Dockerfile.base .
-	docker run -e NEXT_PUBLIC_URL -e DENY_ROBOTS_TXT -e NEXT_PUBLIC_REMOVE_ADVERTS -e NEXT_PUBLIC_SENTRY_DSN -e SENTRY_ORG -e SENTRY_PROJECT -e SENTRY_AUTH_TOKEN -e OPENGRAPH_URL -e NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID -e NEXT_PUBLIC_ENABLE_VANTAGE_SCRIPT_TAG -e NEXT_PUBLIC_INSTANCESKV_URL -v $(shell pwd):/app -w /app --rm -t ec2instances-node sh -c 'cd next && npm ci && npm run build'
-	cp -a next/out/. www/
+# Build the OpenNext bundle (.open-next/) used to deploy the Worker + assets.
+# No more static export, so nothing is copied into www/. CI deploys this via
+# `opennextjs-cloudflare deploy` (see .github/workflows/*-release.yml).
+opennext-build:
+	cd next && npm ci && npm run init && npm run build:llms && npx opennextjs-cloudflare build
 
 write-updated-at:
 	echo $(shell date +%s) > www/updated_at
@@ -31,4 +32,7 @@ prettier:
 
 format: gofmt prettier
 
-all: fetch-data compress-www generate-images next write-updated-at
+# Data + OG images only. The Next app is built and deployed separately via the
+# OpenNext flow (`make opennext-build` locally, `opennextjs-cloudflare deploy`
+# in CI), which consumes the data this target produces.
+all: fetch-data compress-www generate-images write-updated-at
