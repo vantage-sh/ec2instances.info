@@ -1,233 +1,233 @@
 [
     {
-        "name": "Compute",
+        "nameKey": "compute",
         "slug": "compute",
         "rows": [
             {
-                "name": "vCPUs",
+                "nameKey": "vCPUs",
                 "children": 128
             },
             {
-                "name": "Memory (GiB)",
+                "nameKey": "memoryGiB",
                 "children": 4096
             },
             {
-                "name": "Memory per vCPU (GiB)",
+                "nameKey": "memoryPerVCPU",
                 "children": 32
             },
             {
-                "name": "Physical Processor",
+                "nameKey": "physicalProcessor",
                 "children": "Intel Xeon Scalable (Icelake)"
             },
             {
-                "name": "Clock Speed (GHz)",
+                "nameKey": "clockSpeed",
                 "children": "3.5 GHz"
             },
             {
-                "name": "CPU Architecture",
+                "nameKey": "cpuArchitecture",
                 "children": "x86_64"
             },
             {
-                "name": "GPU",
+                "nameKey": "gpu",
                 "children": 0,
                 "bgStyled": true
             },
             {
-                "name": "GPU Average Wattage",
+                "nameKey": "gpuWattage",
                 "children": "0 W"
             },
             {
-                "name": "GPU Architecture",
+                "nameKey": "gpuArchitecture",
                 "children": "none",
                 "bgStyled": true
             },
             {
-                "name": "Video Memory (GiB)",
+                "nameKey": "videoMemory",
                 "children": "0"
             },
             {
-                "name": "GPU Compute Capability",
+                "nameKey": "gpuComputeCapability",
                 "help": "https://handbook.vantage.sh/aws/reference/aws-gpu-instances/",
                 "children": "0"
             },
             {
-                "name": "FPGA",
+                "nameKey": "fpga",
                 "children": 0,
                 "bgStyled": true
             },
             {
-                "name": "ffmpeg FPS",
+                "nameKey": "ffmpegFps",
                 "children": "N/A"
             },
             {
-                "name": "CoreMark iterations/Second",
+                "nameKey": "coremarkIterations",
                 "children": "N/A"
             }
         ]
     },
     {
-        "name": "NUMA Architecture",
+        "nameKey": "numa",
         "slug": "numa",
         "rows": [
             {
-                "name": "Uses NUMA Architecture",
+                "nameKey": "usesNuma",
                 "children": "N/A",
                 "help": "https://en.wikipedia.org/wiki/Non-uniform_memory_access"
             },
             {
-                "name": "NUMA Node Count",
+                "nameKey": "numaNodeCount",
                 "children": "N/A"
             },
             {
-                "name": "Max NUMA Distance",
+                "nameKey": "maxNumaDistance",
                 "children": "N/A"
             },
             {
-                "name": "Cores per NUMA Node (Avg)",
+                "nameKey": "coresPerNuma",
                 "children": "N/A"
             },
             {
-                "name": "Threads per NUMA Node (Avg)",
+                "nameKey": "threadsPerNuma",
                 "children": "N/A"
             },
             {
-                "name": "Memory per NUMA Node (Avg MB)",
+                "nameKey": "memoryPerNuma",
                 "children": "N/A"
             },
             {
-                "name": "L3 Cache per NUMA Node (Avg MB)",
+                "nameKey": "l3CachePerNuma",
                 "children": "N/A"
             },
             {
-                "name": "L3 Cache Shared",
+                "nameKey": "l3CacheShared",
                 "children": "N/A"
             }
         ]
     },
     {
-        "name": "Networking",
+        "nameKey": "networking",
         "slug": "networking",
         "rows": [
             {
-                "name": "Network Performance (Gibps)",
+                "nameKey": "networkPerformance",
                 "children": "100"
             },
             {
-                "name": "Enhanced Networking",
+                "nameKey": "enhancedNetworking",
                 "children": true,
                 "bgStyled": true
             },
             {
-                "name": "IPv6",
+                "nameKey": "ipv6",
                 "children": true,
                 "bgStyled": true
             },
             {
-                "name": "Placement Group",
+                "nameKey": "placementGroup",
                 "help": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html",
                 "children": true
             }
         ]
     },
     {
-        "name": "Storage",
+        "nameKey": "storage",
         "slug": "storage",
         "rows": [
             {
-                "name": "EBS Optimized",
+                "nameKey": "ebsOptimized",
                 "children": true,
                 "bgStyled": true
             },
             {
-                "name": "Max Bandwidth (Mbps) on",
+                "nameKey": "maxBandwidthEbs",
                 "helpText": "EBS",
                 "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
                 "children": 80000
             },
             {
-                "name": "Max Throughput (MB/s) on",
+                "nameKey": "maxThroughputEbs",
                 "helpText": "EBS",
                 "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
                 "children": 10000
             },
             {
-                "name": "Max I/O operations/second",
+                "nameKey": "maxIops",
                 "helpText": "IOPS",
                 "help": "https://handbook.vantage.sh/aws/concepts/io-operations/",
                 "children": 260000
             },
             {
-                "name": "Baseline Bandwidth (Mbps) on",
+                "nameKey": "baselineBandwidthEbs",
                 "helpText": "EBS",
                 "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
                 "children": 80000
             },
             {
-                "name": "Baseline Throughput (MB/s) on",
+                "nameKey": "baselineThroughputEbs",
                 "helpText": "EBS",
                 "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
                 "children": 10000
             },
             {
-                "name": "Baseline I/O operations/second",
+                "nameKey": "baselineIops",
                 "helpText": "IOPS",
                 "help": "https://handbook.vantage.sh/aws/concepts/io-operations/",
                 "children": 260000
             },
             {
-                "name": "Devices",
+                "nameKey": "devices",
                 "children": 2
             },
             {
-                "name": "Swap Partition",
+                "nameKey": "swapPartition",
                 "children": false,
                 "bgStyled": true
             },
             {
-                "name": "NVME Drive",
+                "nameKey": "nvmeDrive",
                 "help": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances",
                 "children": true,
                 "bgStyled": true
             },
             {
-                "name": "Disk Space (GiB)",
+                "nameKey": "diskSpace",
                 "children": 1900
             },
             {
-                "name": "SSD",
+                "nameKey": "ssd",
                 "children": true,
                 "bgStyled": true
             },
             {
-                "name": "Initialize Storage",
+                "nameKey": "initializeStorage",
                 "children": false,
                 "bgStyled": true
             }
         ]
     },
     {
-        "name": "Amazon",
+        "nameKey": "amazon",
         "slug": "amazon",
         "rows": [
             {
-                "name": "Generation",
+                "nameKey": "generation",
                 "children": "current",
                 "bgStyled": true
             },
             {
-                "name": "Instance Type",
+                "nameKey": "instanceType",
                 "children": "x2iedn.32xlarge"
             },
             {
-                "name": "Family",
+                "nameKey": "family",
                 "children": "Memory optimized"
             },
             {
-                "name": "Name",
+                "nameKey": "name",
                 "children": "X2IEDN 32xlarge"
             },
             {
-                "name": "Elastic Map Reduce",
+                "nameKey": "elasticMapReduce",
                 "helpText": "EMR",
                 "help": "https://handbook.vantage.sh/aws/services/emr-pricing/",
                 "children": true,

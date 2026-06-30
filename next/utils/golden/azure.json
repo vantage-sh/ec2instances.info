@@ -1,141 +1,141 @@
 [
     {
-        "name": "Compute",
+        "nameKey": "compute",
         "slug": "Compute",
         "rows": [
             {
-                "name": "vCPUs",
+                "nameKey": "vCPUs",
                 "children": 2
             },
             {
-                "name": "Memory (GiB)",
+                "nameKey": "memoryGiB",
                 "children": 7
             },
             {
-                "name": "Memory per vCPU (GiB)",
+                "nameKey": "memoryPerVCPU",
                 "children": 3.5
             },
             {
-                "name": "CPU Architecture",
+                "nameKey": "cpuArchitecture",
                 "children": "x64"
             },
             {
-                "name": "GPU",
+                "nameKey": "gpu",
                 "children": "0",
                 "bgStyled": true
             },
             {
-                "name": "Capacity Support",
+                "nameKey": "capacitySupport",
                 "children": false,
                 "bgStyled": true
             },
             {
-                "name": "VM Generations Supported",
+                "nameKey": "vmGenerations",
                 "children": "V1"
             },
             {
-                "name": "Low Priority",
+                "nameKey": "lowPriority",
                 "children": true,
                 "bgStyled": true
             },
             {
-                "name": "vCPUs per Physical Core",
+                "nameKey": "vcpusPerCore",
                 "children": 1
             },
             {
-                "name": "VM Deployment Method",
+                "nameKey": "vmDeployment",
                 "children": "IaaS,PaaS"
             }
         ]
     },
     {
-        "name": "Networking",
+        "nameKey": "networking",
         "slug": "Networking",
         "rows": [
             {
-                "name": "Accelerated Networking",
+                "nameKey": "acceleratedNetworking",
                 "children": false,
                 "bgStyled": true
             }
         ]
     },
     {
-        "name": "Storage",
+        "nameKey": "storage",
         "slug": "Storage",
         "rows": [
             {
-                "name": "Local Temp Storage (GiB)",
+                "nameKey": "localTempStorage",
                 "children": 100
             },
             {
-                "name": "Cached Disk Size with Host Caching (GiB)",
+                "nameKey": "cachedDiskSize",
                 "children": 0
             },
             {
-                "name": "Cached/Temp Storage Throughput (IOPS)",
+                "nameKey": "cachedTempStorageIops",
                 "children": 6000
             },
             {
-                "name": "Cached/Temp Storage Read/Write Throughput (MBps)",
+                "nameKey": "cachedTempStorageThroughput",
                 "children": 97
             },
             {
-                "name": "Uncached Disk Throughput (IOPS)",
+                "nameKey": "uncachedDiskIops",
                 "children": 0
             },
             {
-                "name": "Uncached Disk Read/Write Throughput (MBps)",
+                "nameKey": "uncachedDiskThroughput",
                 "children": 0
             },
             {
-                "name": "Premium I/O",
+                "nameKey": "premiumIo",
                 "children": false,
                 "bgStyled": true
             },
             {
-                "name": "Ultra Disks Supported",
+                "nameKey": "ultraDisks",
                 "children": false,
                 "bgStyled": true
             },
             {
-                "name": "Encryption",
+                "nameKey": "encryption",
                 "children": false,
                 "bgStyled": true
             },
             {
-                "name": "Memory Maintenance",
+                "nameKey": "memoryMaintenance",
                 "children": true,
                 "bgStyled": true
             }
         ]
     },
     {
-        "name": "Azure",
+        "nameKey": "azure",
         "slug": "Azure",
         "rows": [
             {
-                "name": "Instance Type",
+                "nameKey": "instanceType",
                 "children": "d2"
             },
             {
-                "name": "Instance Name",
+                "nameKey": "instanceName",
                 "children": "Standard D2"
             },
             {
-                "name": "Name",
+                "nameKey": "name",
                 "children": "D2"
             },
             {
-                "name": "Family",
+                "nameKey": "family",
                 "children": "d2"
             },
             {
-                "name": "Confidential",
+                "nameKey": "confidential",
                 "children": false,
                 "bgStyled": true
             },
             {
-                "name": "RDMA",
+                "nameKey": "rdma",
                 "children": false,
                 "bgStyled": true
             }
