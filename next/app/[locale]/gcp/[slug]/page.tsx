@@ -30,7 +30,7 @@ async function getData() {
             regions: regions.main,
             instances,
         };
-    })();
+    })().catch((e) => { p = undefined; throw e; });
     return p;
 }
 

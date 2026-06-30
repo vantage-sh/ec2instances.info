@@ -73,7 +73,7 @@ async function getData() {
                 ...remainingInstances,
             ],
         };
-    })();
+    })().catch((e) => { p = undefined; throw e; });
     return p;
 }
 

@@ -43,7 +43,7 @@ async function getData() {
             regions,
             instances,
         };
-    })();
+    })().catch((e) => { p = undefined; throw e; });
     return p;
 }
 

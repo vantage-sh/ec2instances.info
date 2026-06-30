@@ -78,7 +78,7 @@ async function getData() {
             regions,
             instances: instances as EC2Instance[],
         };
-    })();
+    })().catch((e) => { p = undefined; throw e; });
     return p;
 }
 
