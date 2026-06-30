@@ -25,8 +25,6 @@ const initialColumnsArr = [
     ["storage", true],
     ["warmed-up", false],
     ["trim-support", false],
-    ["storage_read_iops", false],
-    ["storage_write_iops", false],
     ["arch", false],
     ["network_performance", true],
     ["ebs_baseline_bandwidth", false],
@@ -175,8 +173,6 @@ export function makePrettyNames<V>(
         makeColumnOption("storage", "Instance Storage"),
         makeColumnOption("warmed-up", "Instance Storage: already warmed-up"),
         makeColumnOption("trim-support", "Instance Storage: SSD TRIM Support"),
-        makeColumnOption("storage_read_iops", "Instance Store: Read IOPS"),
-        makeColumnOption("storage_write_iops", "Instance Store: Write IOPS"),
         makeColumnOption("arch", "Arch"),
         makeColumnOption("network_performance", "Network Performance"),
         makeColumnOption(

@@ -299,18 +299,6 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
                         instance.storage?.storage_needs_initialization ?? false,
                     bgStyled: true,
                 },
-                {
-                    name: "Instance Store Read IOPS",
-                    children: instance.storage?.storage_read_iops
-                        ? instance.storage.storage_read_iops.toLocaleString()
-                        : "N/A",
-                },
-                {
-                    name: "Instance Store Write IOPS",
-                    children: instance.storage?.storage_write_iops
-                        ? instance.storage.storage_write_iops.toLocaleString()
-                        : "N/A",
-                },
             ],
         },
         {
