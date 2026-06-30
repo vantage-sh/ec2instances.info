@@ -1,0 +1,49 @@
+{
+  "search": "Batlha...",
+  "clearFilters": "Phimola Dithetso",
+  "filters": "Dithetso",
+  "columns": "Mela",
+  "region": "Lefelo",
+  "pricingUnit": "Yuniti ya Tlhwatlhwa",
+  "cost": "Tshelelete",
+  "reserved": "Go Tlhomamiswa",
+  "currency": "Madi a Lefatshe",
+  "os": "Tshedimosetso ya Tsamaiso",
+  "duration": "Nako",
+  "reservedTerm": "Nako ya Go Tlhomamiswa",
+  "durations": {
+    "ondemand": "Go Tlhokega",
+    "reserved1yr": "Ngwaga 1 Go Tlhomamiswa",
+    "reserved3yr": "Mengwaga 3 Go Tlhomamiswa",
+    "spot": "Spot"
+  },
+  "compare": "Bapisa",
+  "endCompare": "Emisa Papiso",
+  "selected": "go tlhophilwe",
+  "showAll": "Bontsha Tsotlhe",
+  "hideAll": "Pata Tsotlhe",
+  "select": "Tlhopha...",
+  "searchLabel": "Batlha {label}...",
+  "noOptionsFound": "Ga go na dikgetho tse di bonweng.",
+  "searchColumns": "Batlha mela...",
+  "noColumnsFound": "Ga go na mela e e bonweng.",
+  "selectAll": "Tlhopha Tsotlhe",
+  "selectDefaults": "Tlhopha Ditlhomamiso",
+  "regionGroups": {
+    "frequentlyUsed": "Di Dirisiwang Gantsi",
+    "chinaCloudRegions": "Mafelo a Leru la China",
+    "mainRegions": "Mafelo a Magolo",
+    "localZones": "Dikgaolo tsa Mo Gae",
+    "wavelengthZones": "Dikgaolo tsa Wavelength"
+  },
+  "export": {
+    "export": "Romela Kwa Ntle",
+    "downloadCsv": "Tsaya CSV",
+    "copyCsv": "Kopa CSV",
+    "copyTsv": "Kopa TSV",
+    "copyMarkdown": "Kopa Tafole ya Markdown",
+    "csvCopied": "CSV e kopilwe mo clipboard",
+    "tsvCopied": "TSV e kopilwe mo clipboard",
+    "markdownCopied": "Tafole ya Markdown e kopilwe mo clipboard"
+  }
+}

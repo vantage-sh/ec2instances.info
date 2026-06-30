@@ -1,0 +1,18 @@
+{
+  "hourly": "மணிநேரத்திற்கு",
+  "monthly": "மாதாந்திரம்",
+  "yearly": "வருடாந்திரம்",
+  "perHour": "/மணி",
+  "perMonth": "/மாதம்",
+  "perYear": "/ஆண்டு",
+  "onDemand": "தேவைக்கேற்ப",
+  "reserved": "முன்பதிவு",
+  "spot": "Spot",
+  "savingsPlan": "சேமிப்புத் திட்டம்",
+  "noUpfront": "முன்பணம் இல்லாமல்",
+  "partialUpfront": "பகுதி முன்பணம்",
+  "allUpfront": "முழு முன்பணம்",
+  "convertible": "மாற்றக்கூடிய",
+  "standard": "நிலையான",
+  "priceUnavailable": "பொருந்தாது"
+}

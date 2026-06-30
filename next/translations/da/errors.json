@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Kunne ikke indlæse data",
+  "tryAgain": "Prøv igen",
+  "networkError": "Netværksfejl. Kontroller venligst din forbindelse.",
+  "unknownError": "Der opstod en ukendt fejl"
+}

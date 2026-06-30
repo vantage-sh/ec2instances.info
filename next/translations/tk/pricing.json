@@ -1,0 +1,18 @@
+{
+  "hourly": "Sagatly",
+  "monthly": "Aýlyk",
+  "yearly": "Ýyllyk",
+  "perHour": "/sag",
+  "perMonth": "/aý",
+  "perYear": "/ýyl",
+  "onDemand": "Talap boýunça",
+  "reserved": "Bronlanan",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Öňünden Tölegsiz",
+  "partialUpfront": "Bölekleýin Öňünden Töleg",
+  "allUpfront": "Doly Öňünden Töleg",
+  "convertible": "Öwrülýän",
+  "standard": "Standart",
+  "priceUnavailable": "N/A"
+}

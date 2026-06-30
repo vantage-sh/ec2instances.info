@@ -1,0 +1,18 @@
+{
+  "hourly": "घन्टाइ मादाव",
+  "monthly": "मासिक",
+  "yearly": "बार्षिक",
+  "perHour": "/घन्.",
+  "perMonth": "/मास",
+  "perYear": "/बोसोर",
+  "onDemand": "On-Demand",
+  "reserved": "Reserved",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "अग्रिम नङा",
+  "partialUpfront": "आंशिक अग्रिम",
+  "allUpfront": "पूर्ण अग्रिम",
+  "convertible": "परिवर्तनशील",
+  "standard": "मानक",
+  "priceUnavailable": "लागू नङा"
+}

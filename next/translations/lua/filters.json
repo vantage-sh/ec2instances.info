@@ -1,0 +1,49 @@
+{
+  "search": "Tafuta...",
+  "clearFilters": "Futa Vichujio",
+  "filters": "Vichujio",
+  "columns": "Misini",
+  "region": "Dibue",
+  "pricingUnit": "Kitengo cha Mutengo",
+  "cost": "Mutengo",
+  "reserved": "Biimba",
+  "currency": "Fedha",
+  "os": "Mfumo wa Uendeshaji",
+  "duration": "Muda",
+  "reservedTerm": "Muda wa Biimba",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Biimba bia Tshidimu 1",
+    "reserved3yr": "Biimba bia Tshidimu 3",
+    "spot": "Spot"
+  },
+  "compare": "Tangisha",
+  "endCompare": "Malizia Tangisha",
+  "selected": "iliyochaguliwa",
+  "showAll": "Onyesha Yote",
+  "hideAll": "Ficha Yote",
+  "select": "Chagua...",
+  "searchLabel": "Tafuta {label}...",
+  "noOptionsFound": "Hakuna chaguo zilizopatikana.",
+  "searchColumns": "Tafuta misini...",
+  "noColumnsFound": "Hakuna misini iliyopatikana.",
+  "selectAll": "Chagua Yote",
+  "selectDefaults": "Chagua ya Mwanzo",
+  "regionGroups": {
+    "frequentlyUsed": "Inayotumika Mara kwa Mara",
+    "chinaCloudRegions": "Maeneo ya Wingu ya Kina",
+    "mainRegions": "Maeneo Makuu",
+    "localZones": "Maeneo ya Tshisumbu",
+    "wavelengthZones": "Maeneo ya Wavelength"
+  },
+  "export": {
+    "export": "Hamisha",
+    "downloadCsv": "Pakua CSV",
+    "copyCsv": "Nakili CSV",
+    "copyTsv": "Nakili TSV",
+    "copyMarkdown": "Nakili Jedwali la Markdown",
+    "csvCopied": "CSV imenakiliwa kwenye ubao wa kunakili",
+    "tsvCopied": "TSV imenakiliwa kwenye ubao wa kunakili",
+    "markdownCopied": "Jedwali la Markdown lemenakiliwa kwenye ubao wa kunakili"
+  }
+}

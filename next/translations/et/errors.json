@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Andmete laadimine ebaõnnestus",
+  "tryAgain": "Proovi uuesti",
+  "networkError": "Võrgu viga. Palun kontrollige ühendust.",
+  "unknownError": "Tekkis tundmatu viga"
+}

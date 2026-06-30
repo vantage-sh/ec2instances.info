@@ -1,0 +1,49 @@
+{
+  "search": "Leita...",
+  "clearFilters": "Hreinsa síur",
+  "filters": "Síur",
+  "columns": "Dálkar",
+  "region": "Svæði",
+  "pricingUnit": "Verðlagseining",
+  "cost": "Kostnaður",
+  "reserved": "Frátekið",
+  "currency": "Gjaldmiðill",
+  "os": "Stýrikerfi",
+  "duration": "Tímalengd",
+  "reservedTerm": "Frátekið tímabil",
+  "durations": {
+    "ondemand": "Eftir þörf",
+    "reserved1yr": "1 ár frátekið",
+    "reserved3yr": "3 ár frátekið",
+    "spot": "Spot"
+  },
+  "compare": "Bera saman",
+  "endCompare": "Ljúka samanburði",
+  "selected": "valið",
+  "showAll": "Sýna allt",
+  "hideAll": "Fela allt",
+  "select": "Velja...",
+  "searchLabel": "Leita að {label}...",
+  "noOptionsFound": "Engar valkostir fundust.",
+  "searchColumns": "Leita að dálkum...",
+  "noColumnsFound": "Engir dálkar fundust.",
+  "selectAll": "Velja allt",
+  "selectDefaults": "Velja sjálfgefið",
+  "regionGroups": {
+    "frequentlyUsed": "Oft notuð",
+    "chinaCloudRegions": "China Cloud-svæði",
+    "mainRegions": "Aðalsvæði",
+    "localZones": "Staðbundnar svæðar",
+    "wavelengthZones": "Wavelength-svæði"
+  },
+  "export": {
+    "export": "Flytja út",
+    "downloadCsv": "Hlaða niður CSV",
+    "copyCsv": "Afrita CSV",
+    "copyTsv": "Afrita TSV",
+    "copyMarkdown": "Afrita Markdown-töflu",
+    "csvCopied": "CSV afritað á klippiborð",
+    "tsvCopied": "TSV afritað á klippiborð",
+    "markdownCopied": "Markdown-tafla afrituð á klippiborð"
+  }
+}

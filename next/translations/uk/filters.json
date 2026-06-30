@@ -1,0 +1,49 @@
+{
+  "search": "Пошук...",
+  "clearFilters": "Очистити фільтри",
+  "filters": "Фільтри",
+  "columns": "Стовпці",
+  "region": "Регіон",
+  "pricingUnit": "Одиниця ціноутворення",
+  "cost": "Вартість",
+  "reserved": "Зарезервовано",
+  "currency": "Валюта",
+  "os": "Операційна система",
+  "duration": "Тривалість",
+  "reservedTerm": "Термін резервування",
+  "durations": {
+    "ondemand": "На вимогу",
+    "reserved1yr": "Зарезервовано на 1 рік",
+    "reserved3yr": "Зарезервовано на 3 роки",
+    "spot": "Spot"
+  },
+  "compare": "Порівняти",
+  "endCompare": "Завершити порівняння",
+  "selected": "вибрано",
+  "showAll": "Показати всі",
+  "hideAll": "Приховати всі",
+  "select": "Вибрати...",
+  "searchLabel": "Пошук {label}...",
+  "noOptionsFound": "Варіантів не знайдено.",
+  "searchColumns": "Пошук стовпців...",
+  "noColumnsFound": "Стовпців не знайдено.",
+  "selectAll": "Вибрати всі",
+  "selectDefaults": "Вибрати стандартні",
+  "regionGroups": {
+    "frequentlyUsed": "Часто використовувані",
+    "chinaCloudRegions": "Хмарні регіони Китаю",
+    "mainRegions": "Основні регіони",
+    "localZones": "Локальні зони",
+    "wavelengthZones": "Зони Wavelength"
+  },
+  "export": {
+    "export": "Експортувати",
+    "downloadCsv": "Завантажити CSV",
+    "copyCsv": "Копіювати CSV",
+    "copyTsv": "Копіювати TSV",
+    "copyMarkdown": "Копіювати таблицю Markdown",
+    "csvCopied": "CSV скопійовано до буфера обміну",
+    "tsvCopied": "TSV скопійовано до буфера обміну",
+    "markdownCopied": "Таблицю Markdown скопійовано до буфера обміну"
+  }
+}

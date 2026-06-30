@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Az adatok betöltése sikertelen",
+  "tryAgain": "Próbálja újra",
+  "networkError": "Hálózati hiba. Kérjük, ellenőrizze a kapcsolatát.",
+  "unknownError": "Ismeretlen hiba történt"
+}

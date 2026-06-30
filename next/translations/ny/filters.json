@@ -1,0 +1,49 @@
+{
+  "search": "Fufuzani...",
+  "clearFilters": "Chotsani Zosala",
+  "filters": "Zosala",
+  "columns": "Mizere",
+  "region": "Dera",
+  "pricingUnit": "Gulu la Mitengo",
+  "cost": "Ndalama",
+  "reserved": "Yosunga",
+  "currency": "Ndalama Zachidziko",
+  "os": "Dongosolo la Kompyuta",
+  "duration": "Nthawi",
+  "reservedTerm": "Nthawi Yosunga",
+  "durations": {
+    "ondemand": "Pamene Pafunikira",
+    "reserved1yr": "Wosunga Chaka 1",
+    "reserved3yr": "Wosunga Zaka 3",
+    "spot": "Spot"
+  },
+  "compare": "Yerekezani",
+  "endCompare": "Mumalitseni Kuyerekeza",
+  "selected": "zasankhidwa",
+  "showAll": "Onetsa Zonse",
+  "hideAll": "Bisa Zonse",
+  "select": "Sankhani...",
+  "searchLabel": "Fufuzani {label}...",
+  "noOptionsFound": "Palibe zosankha zapezeka.",
+  "searchColumns": "Fufuzani mizere...",
+  "noColumnsFound": "Palibe mizere yapezeka.",
+  "selectAll": "Sankhani Zonse",
+  "selectDefaults": "Sankhani Zosadziwika",
+  "regionGroups": {
+    "frequentlyUsed": "Yogwiritsidwa Ntchito Kawirikawiri",
+    "chinaCloudRegions": "Madera a Cloud a China",
+    "mainRegions": "Madera Azikulu",
+    "localZones": "Madera a Pafupi",
+    "wavelengthZones": "Madera a Wavelength"
+  },
+  "export": {
+    "export": "Tulutsani",
+    "downloadCsv": "Tsitsani CSV",
+    "copyCsv": "Kopiyani CSV",
+    "copyTsv": "Kopiyani TSV",
+    "copyMarkdown": "Kopiyani Tebulo la Markdown",
+    "csvCopied": "CSV yakopiyedwa ku clipboard",
+    "tsvCopied": "TSV yakopiyedwa ku clipboard",
+    "markdownCopied": "Tebulo la Markdown lakopiyedwa ku clipboard"
+  }
+}

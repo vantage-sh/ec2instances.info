@@ -1,0 +1,49 @@
+{
+  "search": "Ṣàwárí...",
+  "clearFilters": "Mọ́ Àwọn Àyẹ̀wò",
+  "filters": "Àwọn Àyẹ̀wò",
+  "columns": "Àwọn Ìlà",
+  "region": "Ẹkùn",
+  "pricingUnit": "Ìdáwọ̀ Ìdíyelé",
+  "cost": "Owó",
+  "reserved": "Àpamọ́",
+  "currency": "Owó Orílẹ̀-èdè",
+  "os": "Ètò Ìṣiṣẹ́",
+  "duration": "Ìgbà",
+  "reservedTerm": "Àkókò Àpamọ́",
+  "durations": {
+    "ondemand": "Lórí Ìbéèrè",
+    "reserved1yr": "Àpamọ́ 1 Ọdún",
+    "reserved3yr": "Àpamọ́ 3 Ọdún",
+    "spot": "Spot"
+  },
+  "compare": "Fiwéra",
+  "endCompare": "Parí Ìfiwéra",
+  "selected": "tí a yàn",
+  "showAll": "Ṣàfihàn Gbogbo",
+  "hideAll": "Pamọ́ Gbogbo",
+  "select": "Yan...",
+  "searchLabel": "Ṣàwárí {label}...",
+  "noOptionsFound": "Kò sí àwọn àṣàyàn.",
+  "searchColumns": "Ṣàwárí àwọn ìlà...",
+  "noColumnsFound": "Kò sí àwọn ìlà.",
+  "selectAll": "Yan Gbogbo",
+  "selectDefaults": "Yan Àwọn Ìpilẹ̀ṣẹ̀",
+  "regionGroups": {
+    "frequentlyUsed": "Tí a Máa Ń Lò",
+    "chinaCloudRegions": "Àwọn Ẹkùn Cloud China",
+    "mainRegions": "Àwọn Ẹkùn Àkọ́kọ́",
+    "localZones": "Àwọn Agbègbè Àdúgbò",
+    "wavelengthZones": "Àwọn Agbègbè Wavelength"
+  },
+  "export": {
+    "export": "Gbé jáde",
+    "downloadCsv": "Gbé CSV Lọ",
+    "copyCsv": "Daakọ CSV",
+    "copyTsv": "Daakọ TSV",
+    "copyMarkdown": "Daakọ Tábìlì Markdown",
+    "csvCopied": "CSV ti daakọ sí clipboard",
+    "tsvCopied": "TSV ti daakọ sí clipboard",
+    "markdownCopied": "Tábìlì Markdown ti daakọ sí clipboard"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Nüngε...",
+  "clearFilters": "Filtrenε Temizle",
+  "filters": "Filtrenε",
+  "columns": "Sütunyi",
+  "region": "Mankal",
+  "pricingUnit": "Tari Birimi",
+  "cost": "Tari",
+  "reserved": "Yəjikam",
+  "currency": "Para Birimi",
+  "os": "İşletim Sistemi",
+  "duration": "Süre",
+  "reservedTerm": "Yəjikam Vadesi",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 Alnə Yəjikam",
+    "reserved3yr": "3 Alnə Yəjikam",
+    "spot": "Spot"
+  },
+  "compare": "Cərkəntε",
+  "endCompare": "Cərkəntε Bitir",
+  "selected": "seçilmiş",
+  "showAll": "Tüm Göster",
+  "hideAll": "Tüm Gizle",
+  "select": "Seç...",
+  "searchLabel": "{label} Nüngε...",
+  "noOptionsFound": "Seçenek bulunamadı.",
+  "searchColumns": "Sütun nüngε...",
+  "noColumnsFound": "Sütun bulunamadı.",
+  "selectAll": "Tümünü Seç",
+  "selectDefaults": "Varsayılanları Seç",
+  "regionGroups": {
+    "frequentlyUsed": "Sık Kullanılan",
+    "chinaCloudRegions": "Cin Bulut Mankalnə",
+    "mainRegions": "Kana Mankalnə",
+    "localZones": "Gəl Zonnə",
+    "wavelengthZones": "Wavelength Zonnə"
+  },
+  "export": {
+    "export": "İhracat",
+    "downloadCsv": "CSV İndir",
+    "copyCsv": "CSV Kopyala",
+    "copyTsv": "TSV Kopyala",
+    "copyMarkdown": "Markdown Tablosu Kopyala",
+    "csvCopied": "CSV panoya kopyalandı",
+    "tsvCopied": "TSV panoya kopyalandı",
+    "markdownCopied": "Markdown tablosu panoya kopyalandı"
+  }
+}

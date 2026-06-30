@@ -1,0 +1,49 @@
+{
+  "search": "शोधा...",
+  "clearFilters": "फिल्टर साफ करा",
+  "filters": "फिल्टर",
+  "columns": "स्तंभ",
+  "region": "प्रदेश",
+  "pricingUnit": "किंमत एकक",
+  "cost": "खर्च",
+  "reserved": "आरक्षित",
+  "currency": "चलन",
+  "os": "ऑपरेटिंग सिस्टम",
+  "duration": "कालावधी",
+  "reservedTerm": "आरक्षण कालावधी",
+  "durations": {
+    "ondemand": "मागणीनुसार",
+    "reserved1yr": "1 वर्ष आरक्षित",
+    "reserved3yr": "3 वर्षे आरक्षित",
+    "spot": "Spot"
+  },
+  "compare": "तुलना करा",
+  "endCompare": "तुलना थांबवा",
+  "selected": "निवडले",
+  "showAll": "सर्व दाखवा",
+  "hideAll": "सर्व लपवा",
+  "select": "निवडा...",
+  "searchLabel": "{label} शोधा...",
+  "noOptionsFound": "कोणते पर्याय सापडले नाहीत.",
+  "searchColumns": "स्तंभ शोधा...",
+  "noColumnsFound": "कोणते स्तंभ सापडले नाहीत.",
+  "selectAll": "सर्व निवडा",
+  "selectDefaults": "डिफॉल्ट निवडा",
+  "regionGroups": {
+    "frequentlyUsed": "वारंवार वापरले जाणारे",
+    "chinaCloudRegions": "चीन क्लाउड प्रदेश",
+    "mainRegions": "मुख्य प्रदेश",
+    "localZones": "स्थानिक क्षेत्र",
+    "wavelengthZones": "Wavelength क्षेत्र"
+  },
+  "export": {
+    "export": "निर्यात",
+    "downloadCsv": "CSV डाउनलोड करा",
+    "copyCsv": "CSV कॉपी करा",
+    "copyTsv": "TSV कॉपी करा",
+    "copyMarkdown": "Markdown तक्ता कॉपी करा",
+    "csvCopied": "CSV क्लिपबोर्डवर कॉपी झाले",
+    "tsvCopied": "TSV क्लिपबोर्डवर कॉपी झाले",
+    "markdownCopied": "Markdown तक्ता क्लिपबोर्डवर कॉपी झाला"
+  }
+}

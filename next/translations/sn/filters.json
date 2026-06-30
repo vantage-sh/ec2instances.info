@@ -1,0 +1,49 @@
+{
+  "search": "Tsvaga...",
+  "clearFilters": "Bvisa Zvitemo",
+  "filters": "Zvitemo",
+  "columns": "Makoramu",
+  "region": "Nzvimbo",
+  "pricingUnit": "Chikamu cheMutengo",
+  "cost": "Mutengo",
+  "reserved": "Rakachengeterwa",
+  "currency": "Mari",
+  "os": "Sisitimu yeKuita",
+  "duration": "Nguva",
+  "reservedTerm": "Nguva yeKuchengeterwa",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Rakachengeterwa 1 Gore",
+    "reserved3yr": "Rakachengeterwa 3 Gore",
+    "spot": "Spot"
+  },
+  "compare": "Enzanisa",
+  "endCompare": "Pedzisa Kuenzanisa",
+  "selected": "yakasarudzwa",
+  "showAll": "Ratidza Zvose",
+  "hideAll": "Vanza Zvose",
+  "select": "Sarudza...",
+  "searchLabel": "Tsvaga {label}...",
+  "noOptionsFound": "Hapana sarudzo dzakawanikanwa.",
+  "searchColumns": "Tsvaga makoramu...",
+  "noColumnsFound": "Hapana makoramu akawanikanwa.",
+  "selectAll": "Sarudza Zvose",
+  "selectDefaults": "Sarudza Zvakajairwa",
+  "regionGroups": {
+    "frequentlyUsed": "Inoshandiswa Nguva Zhinji",
+    "chinaCloudRegions": "Nzvimbo dzeChina Cloud",
+    "mainRegions": "Nzvimbo Dzakanyanya",
+    "localZones": "Nzvimbo Dzepedyo",
+    "wavelengthZones": "Nzvimbo dzeWavelength"
+  },
+  "export": {
+    "export": "Tumira Kunze",
+    "downloadCsv": "Dhawunidha CSV",
+    "copyCsv": "Kopiya CSV",
+    "copyTsv": "Kopiya TSV",
+    "copyMarkdown": "Kopiya Tafura yeMarkdown",
+    "csvCopied": "CSV yakakopiyiwa kuclipboard",
+    "tsvCopied": "TSV yakakopiyiwa kuclipboard",
+    "markdownCopied": "Tafura yeMarkdown yakakopiyiwa kuclipboard"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "search": "འཚོལ་ཞིབ་...",
+  "clearFilters": "ལྡོགས་གྲལ་སེལ་",
+  "filters": "ལྡོགས་གྲལ་",
+  "columns": "ཀར་མ་",
+  "region": "ས་ཁུལ་",
+  "pricingUnit": "ལས་རིན་ཡ་གྲངས་",
+  "cost": "ལས་རིན་",
+  "reserved": "ཐར་བཤོལ་",
+  "currency": "སྒོར་མོ་",
+  "os": "འཁོར་ལོའི་རྩ་མང་",
+  "duration": "དུས་ཚོད་",
+  "reservedTerm": "ཐར་བཤོལ་གི་དུས་ཡུན་",
+  "durations": {
+    "ondemand": "གདོང་ལེན་",
+    "reserved1yr": "ལོ་གཅིག་ཐར་བཤོལ་",
+    "reserved3yr": "ལོ་གསུམ་ཐར་བཤོལ་",
+    "spot": "ས་གནས་"
+  },
+  "compare": "ཆ་མཉམ་",
+  "endCompare": "ཆ་མཉམ་མཇུག་",
+  "selected": "སེལ་བྱས་",
+  "showAll": "ཡོངས་སུ་བསྟན་",
+  "hideAll": "ཡོངས་སུ་སྦས་",
+  "select": "སེལ་...",
+  "searchLabel": "{label} འཚོལ་ཞིབ་...",
+  "noOptionsFound": "གདམ་ཀ་མ་རྙེད།",
+  "searchColumns": "ཀར་མ་འཚོལ་ཞིབ་...",
+  "noColumnsFound": "ཀར་མ་མ་རྙེད།",
+  "selectAll": "ཡོངས་སེལ་",
+  "selectDefaults": "གཞི་གྲངས་སེལ་",
+  "regionGroups": {
+    "frequentlyUsed": "རྒྱུན་ལྡན་བེད་སྤྱོད་",
+    "chinaCloudRegions": "རྒྱ་ནག་ Cloud ས་ཁུལ་",
+    "mainRegions": "གཙོ་བོ་ས་ཁུལ་",
+    "localZones": "རང་ས་ས་ཁུལ་",
+    "wavelengthZones": "Wavelength ཁུལ་"
+  },
+  "export": {
+    "export": "ཕྱིར་འདོན་",
+    "downloadCsv": "CSV ཕབ་ལེན་",
+    "copyCsv": "CSV ལྡོག་གཏན་",
+    "copyTsv": "TSV ལྡོག་གཏན་",
+    "copyMarkdown": "Markdown ལྡེམ་བྱང་ ལྡོག་གཏན་",
+    "csvCopied": "CSV འདེམས་ངོས་ལ་ལྡོག་གཏན་བྱས་",
+    "tsvCopied": "TSV འདེམས་ངོས་ལ་ལྡོག་གཏན་བྱས་",
+    "markdownCopied": "Markdown ལྡེམ་བྱང་ འདེམས་ངོས་ལ་ལྡོག་གཏན་བྱས་"
+  }
+}

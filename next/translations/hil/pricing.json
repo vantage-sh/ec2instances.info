@@ -1,0 +1,18 @@
+{
+  "hourly": "Kada Oras",
+  "monthly": "Kada Bulan",
+  "yearly": "Kada Tuig",
+  "perHour": "/oras",
+  "perMonth": "/bulan",
+  "perYear": "/tuig",
+  "onDemand": "On-Demand",
+  "reserved": "Naireserba",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Wala Paunang Bayad",
+  "partialUpfront": "Bahin nga Paunang Bayad",
+  "allUpfront": "Bug-os nga Paunang Bayad",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

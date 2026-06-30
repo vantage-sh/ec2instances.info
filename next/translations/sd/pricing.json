@@ -1,0 +1,18 @@
+{
+  "hourly": "في ڪلاڪ",
+  "monthly": "مهيناوار",
+  "yearly": "سالياني",
+  "perHour": "/ڪلاڪ",
+  "perMonth": "/مهينو",
+  "perYear": "/سال",
+  "onDemand": "طلب تي",
+  "reserved": "محفوظ",
+  "spot": "اسپاٽ",
+  "savingsPlan": "بچت منصوبو",
+  "noUpfront": "ڪا پيشگي ادائيگي ناهي",
+  "partialUpfront": "جزوي پيشگي ادائيگي",
+  "allUpfront": "سموري پيشگي ادائيگي",
+  "convertible": "تبديل ٿيڻ جوڳو",
+  "standard": "معياري",
+  "priceUnavailable": "N/A"
+}

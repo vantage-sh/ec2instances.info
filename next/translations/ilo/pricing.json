@@ -1,0 +1,18 @@
+{
+  "hourly": "Iti tunggal Oras",
+  "monthly": "Iti tunggal Bulan",
+  "yearly": "Iti tunggal Tawen",
+  "perHour": "/oras",
+  "perMonth": "/bulan",
+  "perYear": "/tawen",
+  "onDemand": "On-Demand",
+  "reserved": "Naireserba",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Awan Paunang Bayad",
+  "partialUpfront": "Bahin nga Paunang Bayad",
+  "allUpfront": "Amin nga Paunang Bayad",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

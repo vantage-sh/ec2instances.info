@@ -1,0 +1,18 @@
+{
+  "hourly": "Tunneittain",
+  "monthly": "Kuukausittain",
+  "yearly": "Vuosittain",
+  "perHour": "/t",
+  "perMonth": "/kk",
+  "perYear": "/v",
+  "onDemand": "On-Demand",
+  "reserved": "Varattu",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Ei ennakkomaksua",
+  "partialUpfront": "Osittainen ennakkomaksu",
+  "allUpfront": "Koko ennakkomaksu",
+  "convertible": "Vaihdettava",
+  "standard": "Vakio",
+  "priceUnavailable": "E/S"
+}

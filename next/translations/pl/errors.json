@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Nie udało się załadować danych",
+  "tryAgain": "Spróbuj ponownie",
+  "networkError": "Błąd sieci. Sprawdź połączenie.",
+  "unknownError": "Wystąpił nieznany błąd"
+}

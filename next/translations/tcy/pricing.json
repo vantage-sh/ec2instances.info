@@ -1,0 +1,18 @@
+{
+  "hourly": "ಗಂಟೆಗೆ",
+  "monthly": "ತಿಂಗಳಿಗೆ",
+  "yearly": "ವರ್ಷಕ್ಕೆ",
+  "perHour": "/ಗಂ.",
+  "perMonth": "/ತಿಂ.",
+  "perYear": "/ವ.",
+  "onDemand": "On-Demand",
+  "reserved": "Reserved",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "ಮುಂಗಡ ಇಜ್ಜಿ",
+  "partialUpfront": "ಅರ್ಧ ಮುಂಗಡ",
+  "allUpfront": "ಪೂರ್ಣ ಮುಂಗಡ",
+  "convertible": "ಕನ್ವರ್ಟಿಬಲ್",
+  "standard": "ಸ್ಟ್ಯಾಂಡರ್ಡ್",
+  "priceUnavailable": "ಅ/ಉ"
+}

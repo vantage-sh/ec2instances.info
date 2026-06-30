@@ -1,0 +1,18 @@
+{
+  "hourly": "Ghánta prati",
+  "monthly": "Más prati",
+  "yearly": "Bóchhor prati",
+  "perHour": "/ghánta",
+  "perMonth": "/más",
+  "perYear": "/bóchhor",
+  "onDemand": "Dórkár Botte",
+  "reserved": "Rákkhan",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Agom Ná",
+  "partialUpfront": "Áshik Agom",
+  "allUpfront": "Shob Agom",
+  "convertible": "Bodláe Néa Jáe",
+  "standard": "Shódháron",
+  "priceUnavailable": "N/A"
+}

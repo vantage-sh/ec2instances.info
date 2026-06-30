@@ -1,0 +1,49 @@
+{
+  "search": "Шедьтыны...",
+  "clearFilters": "Фильтръёс Нюлыны",
+  "filters": "Фильтръёс",
+  "columns": "Колонкаос",
+  "region": "Регион",
+  "pricingUnit": "Дун Единица",
+  "cost": "Дун",
+  "reserved": "Резервируем",
+  "currency": "Валюта",
+  "os": "Операционной Система",
+  "duration": "Вакыт",
+  "reservedTerm": "Резервируем Срок",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 Ар Резервируем",
+    "reserved3yr": "3 Ар Резервируем",
+    "spot": "Spot"
+  },
+  "compare": "Аналитика",
+  "endCompare": "Аналитика Быдтыны",
+  "selected": "бырьыем",
+  "showAll": "Пӧртэм Возьматыны",
+  "hideAll": "Пӧртэм Ватыны",
+  "select": "Бырйыны...",
+  "searchLabel": "{label} Шедьтыны...",
+  "noOptionsFound": "Вариантъёс шедьтэмын ӧвӧл.",
+  "searchColumns": "Колонкаос Шедьтыны...",
+  "noColumnsFound": "Колонкаос шедьтэмын ӧвӧл.",
+  "selectAll": "Пӧртэм Бырйыны",
+  "selectDefaults": "Стандарт Бырйыны",
+  "regionGroups": {
+    "frequentlyUsed": "Ачим Кутиськисьёс",
+    "chinaCloudRegions": "Китай Облако Регионъёс",
+    "mainRegions": "Синпелет Регионъёс",
+    "localZones": "Шаерысь Зонаос",
+    "wavelengthZones": "Wavelength Зонаос"
+  },
+  "export": {
+    "export": "Экспорт",
+    "downloadCsv": "CSV Берыктыны",
+    "copyCsv": "CSV Копировать",
+    "copyTsv": "TSV Копировать",
+    "copyMarkdown": "Markdown Таблица Копировать",
+    "csvCopied": "CSV буфере копироватэм",
+    "tsvCopied": "TSV буфере копироватэм",
+    "markdownCopied": "Markdown таблица буфере копироватэм"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Axtar...",
+  "clearFilters": "Filtrləri Sil",
+  "filters": "Filtrlər",
+  "columns": "Sütunlar",
+  "region": "Region",
+  "pricingUnit": "Qiymət Vahidi",
+  "cost": "Xərc",
+  "reserved": "Ehtiyat",
+  "currency": "Valyuta",
+  "os": "Əməliyyat Sistemi",
+  "duration": "Müddət",
+  "reservedTerm": "Ehtiyat Müddəti",
+  "durations": {
+    "ondemand": "Tələb üzrə",
+    "reserved1yr": "1 İllik Ehtiyat",
+    "reserved3yr": "3 İllik Ehtiyat",
+    "spot": "Spot"
+  },
+  "compare": "Müqayisə et",
+  "endCompare": "Müqayisəni bitir",
+  "selected": "seçildi",
+  "showAll": "Hamısını göstər",
+  "hideAll": "Hamısını gizlə",
+  "select": "Seçin...",
+  "searchLabel": "{label} axtar...",
+  "noOptionsFound": "Seçim tapılmadı.",
+  "searchColumns": "Sütunlarda axtar...",
+  "noColumnsFound": "Sütun tapılmadı.",
+  "selectAll": "Hamısını seç",
+  "selectDefaults": "Standartları seç",
+  "regionGroups": {
+    "frequentlyUsed": "Tez-tez istifadə edilənlər",
+    "chinaCloudRegions": "Çin Bulud Regionları",
+    "mainRegions": "Əsas Regionlar",
+    "localZones": "Lokal Zonalar",
+    "wavelengthZones": "Wavelength Zonaları"
+  },
+  "export": {
+    "export": "İxrac et",
+    "downloadCsv": "CSV Yüklə",
+    "copyCsv": "CSV Kopyala",
+    "copyTsv": "TSV Kopyala",
+    "copyMarkdown": "Markdown Cədvəlini Kopyala",
+    "csvCopied": "CSV mübadilə buferinə kopyalandı",
+    "tsvCopied": "TSV mübadilə buferinə kopyalandı",
+    "markdownCopied": "Markdown cədvəli mübadilə buferinə kopyalandı"
+  }
+}

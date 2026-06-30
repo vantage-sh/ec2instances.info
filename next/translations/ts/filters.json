@@ -1,0 +1,49 @@
+{
+  "search": "Lava...",
+  "clearFilters": "Susa Swihlelelo",
+  "filters": "Swihlelelo",
+  "columns": "Switima",
+  "region": "Xifundzankulu",
+  "pricingUnit": "Yuniti ya Mariha",
+  "cost": "Mariha",
+  "reserved": "Xikisiwile",
+  "currency": "Xifambiselo xa Timali",
+  "os": "Xitshama xa Matirhelo",
+  "duration": "Nkarhi",
+  "reservedTerm": "Nkarhi wa Ku Xikisiwa",
+  "durations": {
+    "ondemand": "Hi Swi Lava",
+    "reserved1yr": "Lembe 1 Xikisiwile",
+    "reserved3yr": "Malembe 3 Xikisiwile",
+    "spot": "Spot"
+  },
+  "compare": "Farisana",
+  "endCompare": "Hetisa Ku Farisana",
+  "selected": "xi xikisiwile",
+  "showAll": "Kombisa Hinkwaswo",
+  "hideAll": "Fihla Hinkwaswo",
+  "select": "Hlawula...",
+  "searchLabel": "Lava {label}...",
+  "noOptionsFound": "Ku hava swiphetho leswi kumekangiki.",
+  "searchColumns": "Lava switima...",
+  "noColumnsFound": "Ku hava switima leswi kumekangiki.",
+  "selectAll": "Hlawula Hinkwaswo",
+  "selectDefaults": "Hlawula Swinene",
+  "regionGroups": {
+    "frequentlyUsed": "Swi Tirhisiwa Minghana",
+    "chinaCloudRegions": "Swifundzankulu swa China Cloud",
+    "mainRegions": "Swifundzankulu Swinene",
+    "localZones": "Swifundzana swa Xikaya",
+    "wavelengthZones": "Swifundzana swa Wavelength"
+  },
+  "export": {
+    "export": "Humesa",
+    "downloadCsv": "Tlhela CSV",
+    "copyCsv": "Tshinya CSV",
+    "copyTsv": "Tshinya TSV",
+    "copyMarkdown": "Tshinya Tafula ra Markdown",
+    "csvCopied": "CSV yi tshiniwile eka clipboard",
+    "tsvCopied": "TSV yi tshiniwile eka clipboard",
+    "markdownCopied": "Tafula ra Markdown ri tshiniwile eka clipboard"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "search": "थखो...",
+  "clearFilters": "फ़िल्टर साफ खाफा",
+  "filters": "फ़िल्टरफोर",
+  "columns": "कलमफोर",
+  "region": "क्षेत्र",
+  "pricingUnit": "रां यूनिट",
+  "cost": "रां",
+  "reserved": "Reserved",
+  "currency": "मुद्रा",
+  "os": "अपरेटिं सिस्टम",
+  "duration": "अवधि",
+  "reservedTerm": "Reserved अवधि",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 बोसोर Reserved",
+    "reserved3yr": "3 बोसोर Reserved",
+    "spot": "Spot"
+  },
+  "compare": "तुलना",
+  "endCompare": "तुलना नासाय",
+  "selected": "थाखाय",
+  "showAll": "सोमावनि दिखाव",
+  "hideAll": "सोमावनि लुकाव",
+  "select": "थाखो...",
+  "searchLabel": "{label} थखो...",
+  "noOptionsFound": "बिकल्प नामोनाय।",
+  "searchColumns": "कलम थखो...",
+  "noColumnsFound": "कलम नामोनाय।",
+  "selectAll": "सोमावनि थाखो",
+  "selectDefaults": "डिफल्ट थाखो",
+  "regionGroups": {
+    "frequentlyUsed": "जाय जाय आफादाय",
+    "chinaCloudRegions": "चीन क्लाउड क्षेत्रफोर",
+    "mainRegions": "मुलि' क्षेत्रफोर",
+    "localZones": "थाखो ज़ोनफोर",
+    "wavelengthZones": "Wavelength ज़ोनफोर"
+  },
+  "export": {
+    "export": "निर्यात",
+    "downloadCsv": "CSV डाउनलोड खाफा",
+    "copyCsv": "CSV कपि खाफा",
+    "copyTsv": "TSV कपि खाफा",
+    "copyMarkdown": "Markdown टेबल कपि खाफा",
+    "csvCopied": "CSV क्लिपबर्डमा कपि जादों",
+    "tsvCopied": "TSV क्लिपबर्डमा कपि जादों",
+    "markdownCopied": "Markdown टेबल क्लिपबर्डमा कपि जादों"
+  }
+}

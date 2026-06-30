@@ -1,0 +1,18 @@
+{
+  "hourly": "Saatlıq",
+  "monthly": "Aylıq",
+  "yearly": "İllik",
+  "perHour": "/saat",
+  "perMonth": "/ay",
+  "perYear": "/il",
+  "onDemand": "Tələb üzrə",
+  "reserved": "Ehtiyat",
+  "spot": "Spot",
+  "savingsPlan": "Əmanət Planı",
+  "noUpfront": "Ön Ödəmə Yox",
+  "partialUpfront": "Qismən Ön Ödəmə",
+  "allUpfront": "Tam Ön Ödəmə",
+  "convertible": "Konvertasiya edilə bilən",
+  "standard": "Standart",
+  "priceUnavailable": "Yoxdur"
+}

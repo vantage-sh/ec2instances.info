@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Tải dữ liệu thất bại",
+  "tryAgain": "Thử lại",
+  "networkError": "Lỗi mạng. Vui lòng kiểm tra kết nối của bạn.",
+  "unknownError": "Đã xảy ra lỗi không xác định"
+}

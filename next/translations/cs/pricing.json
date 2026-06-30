@@ -1,0 +1,18 @@
+{
+  "hourly": "Hodinově",
+  "monthly": "Měsíčně",
+  "yearly": "Ročně",
+  "perHour": "/hod.",
+  "perMonth": "/měs.",
+  "perYear": "/rok",
+  "onDemand": "Na vyžádání",
+  "reserved": "Rezervované",
+  "spot": "Spot",
+  "savingsPlan": "Plán úspor",
+  "noUpfront": "Bez zálohy",
+  "partialUpfront": "Částečná záloha",
+  "allUpfront": "Plná záloha",
+  "convertible": "Konvertibilní",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

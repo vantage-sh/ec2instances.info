@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Data no fit load",
+  "tryAgain": "Try Again",
+  "networkError": "Network wahala. Abeg check your connection.",
+  "unknownError": "Unknown wahala happen"
+}

@@ -1,0 +1,18 @@
+{
+  "hourly": "Mu Saawa",
+  "monthly": "Mu Mwezi",
+  "yearly": "Mu Mwaka",
+  "perHour": "/saawa",
+  "perMonth": "/mwezi",
+  "perYear": "/mwaka",
+  "onDemand": "On-Demand",
+  "reserved": "Okuterezebwa",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Nga Tolipya Ku Maaso",
+  "partialUpfront": "Okugabanya Ku Maaso",
+  "allUpfront": "Byona Ku Maaso",
+  "convertible": "Eyinzaamu Okukyusa",
+  "standard": "Ey'Ennamba",
+  "priceUnavailable": "N/A"
+}

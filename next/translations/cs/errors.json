@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Načtení dat selhalo",
+  "tryAgain": "Zkusit znovu",
+  "networkError": "Chyba sítě. Zkontrolujte připojení.",
+  "unknownError": "Došlo k neznámé chybě"
+}

@@ -1,0 +1,49 @@
+{
+  "search": "ڳولا...",
+  "clearFilters": "فلٽر صاف ڪريو",
+  "filters": "فلٽر",
+  "columns": "ڪالم",
+  "region": "علائقو",
+  "pricingUnit": "قيمت يونٽ",
+  "cost": "خرچ",
+  "reserved": "محفوظ",
+  "currency": "ڪرنسي",
+  "os": "آپريٽنگ سسٽم",
+  "duration": "مدت",
+  "reservedTerm": "محفوظ مدت",
+  "durations": {
+    "ondemand": "طلب تي",
+    "reserved1yr": "1 سال محفوظ",
+    "reserved3yr": "3 سال محفوظ",
+    "spot": "اسپاٽ"
+  },
+  "compare": "مقابلو",
+  "endCompare": "مقابلو ختم ڪريو",
+  "selected": "چونڊيل",
+  "showAll": "سڀ ڏيکاريو",
+  "hideAll": "سڀ لڪايو",
+  "select": "چونڊيو...",
+  "searchLabel": "{label} ڳوليو...",
+  "noOptionsFound": "ڪو آپشن نه مليو.",
+  "searchColumns": "ڪالم ڳوليو...",
+  "noColumnsFound": "ڪو ڪالم نه مليو.",
+  "selectAll": "سڀ چونڊيو",
+  "selectDefaults": "ڊفالٽ چونڊيو",
+  "regionGroups": {
+    "frequentlyUsed": "گهڻو استعمال ٿيل",
+    "chinaCloudRegions": "چين ڪلائوڊ علائقا",
+    "mainRegions": "مکيا علائقا",
+    "localZones": "مقامي زون",
+    "wavelengthZones": "Wavelength زون"
+  },
+  "export": {
+    "export": "برآمد ڪريو",
+    "downloadCsv": "CSV ڊائونلوڊ ڪريو",
+    "copyCsv": "CSV نقل ڪريو",
+    "copyTsv": "TSV نقل ڪريو",
+    "copyMarkdown": "Markdown ٽيبل نقل ڪريو",
+    "csvCopied": "CSV ڪلپ بورڊ تي نقل ٿي ويو",
+    "tsvCopied": "TSV ڪلپ بورڊ تي نقل ٿي ويو",
+    "markdownCopied": "Markdown ٽيبل ڪلپ بورڊ تي نقل ٿي ويو"
+  }
+}

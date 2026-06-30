@@ -1,0 +1,18 @@
+{
+  "hourly": "Ωριαία",
+  "monthly": "Μηνιαία",
+  "yearly": "Ετήσια",
+  "perHour": "/ώρα",
+  "perMonth": "/μήνα",
+  "perYear": "/έτος",
+  "onDemand": "Κατά Παραγγελία",
+  "reserved": "Δεσμευμένο",
+  "spot": "Spot",
+  "savingsPlan": "Πρόγραμμα Εξοικονόμησης",
+  "noUpfront": "Χωρίς Προκαταβολή",
+  "partialUpfront": "Μερική Προκαταβολή",
+  "allUpfront": "Πλήρης Προκαταβολή",
+  "convertible": "Μετατρέψιμο",
+  "standard": "Τυπικό",
+  "priceUnavailable": "N/A"
+}

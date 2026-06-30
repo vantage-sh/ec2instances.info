@@ -1,0 +1,49 @@
+{
+  "search": "Buscar...",
+  "clearFilters": "Borrar filtros",
+  "filters": "Filtros",
+  "columns": "Columnas",
+  "region": "Región",
+  "pricingUnit": "Unidad de precios",
+  "cost": "Costo",
+  "reserved": "Reservado",
+  "currency": "Moneda",
+  "os": "Sistema operativo",
+  "duration": "Duración",
+  "reservedTerm": "Plazo de reserva",
+  "durations": {
+    "ondemand": "Bajo demanda",
+    "reserved1yr": "1 año reservado",
+    "reserved3yr": "3 años reservado",
+    "spot": "Spot"
+  },
+  "compare": "Comparar",
+  "endCompare": "Finalizar comparación",
+  "selected": "seleccionado",
+  "showAll": "Mostrar todo",
+  "hideAll": "Ocultar todo",
+  "select": "Seleccionar...",
+  "searchLabel": "Buscar {label}...",
+  "noOptionsFound": "No se encontraron opciones.",
+  "searchColumns": "Buscar columnas...",
+  "noColumnsFound": "No se encontraron columnas.",
+  "selectAll": "Seleccionar todo",
+  "selectDefaults": "Seleccionar valores predeterminados",
+  "regionGroups": {
+    "frequentlyUsed": "Más usadas",
+    "chinaCloudRegions": "Regiones en la nube de China",
+    "mainRegions": "Regiones principales",
+    "localZones": "Zonas locales",
+    "wavelengthZones": "Zonas Wavelength"
+  },
+  "export": {
+    "export": "Exportar",
+    "downloadCsv": "Descargar CSV",
+    "copyCsv": "Copiar CSV",
+    "copyTsv": "Copiar TSV",
+    "copyMarkdown": "Copiar tabla Markdown",
+    "csvCopied": "CSV copiado al portapapeles",
+    "tsvCopied": "TSV copiado al portapapeles",
+    "markdownCopied": "Tabla Markdown copiada al portapapeles"
+  }
+}

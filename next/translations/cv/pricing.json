@@ -1,0 +1,18 @@
+{
+  "hourly": "Сехетне",
+  "monthly": "Уйăхне",
+  "yearly": "Çулне",
+  "perHour": "/сехет",
+  "perMonth": "/уйăх",
+  "perYear": "/çул",
+  "onDemand": "Кирлĕ Чухне",
+  "reserved": "Резервланă",
+  "spot": "Spot",
+  "savingsPlan": "Экономи Планĕ",
+  "noUpfront": "Авансăсăр",
+  "partialUpfront": "Пайлă Аванс",
+  "allUpfront": "Тулли Аванс",
+  "convertible": "Конвертируемă",
+  "standard": "Стандарт",
+  "priceUnavailable": "Çук"
+}

@@ -1,0 +1,18 @@
+{
+  "hourly": "Çdo orë",
+  "monthly": "Çdo muaj",
+  "yearly": "Çdo vit",
+  "perHour": "/orë",
+  "perMonth": "/muj",
+  "perYear": "/vit",
+  "onDemand": "Me kërkesë",
+  "reserved": "I rezervuar",
+  "spot": "Spot",
+  "savingsPlan": "Plan kursimi",
+  "noUpfront": "Pa parapagim",
+  "partialUpfront": "Parapagim i pjesshëm",
+  "allUpfront": "Parapagim i plotë",
+  "convertible": "I konvertueshëm",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

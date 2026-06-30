@@ -1,0 +1,18 @@
+{
+  "hourly": "รายชั่วโมง",
+  "monthly": "รายเดือน",
+  "yearly": "รายปี",
+  "perHour": "/ชม.",
+  "perMonth": "/เดือน",
+  "perYear": "/ปี",
+  "onDemand": "On-Demand",
+  "reserved": "สำรอง",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "ไม่มีการชำระล่วงหน้า",
+  "partialUpfront": "ชำระล่วงหน้าบางส่วน",
+  "allUpfront": "ชำระล่วงหน้าทั้งหมด",
+  "convertible": "แปลงได้",
+  "standard": "มาตรฐาน",
+  "priceUnavailable": "N/A"
+}

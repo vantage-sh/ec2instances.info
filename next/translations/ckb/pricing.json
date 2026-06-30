@@ -1,0 +1,18 @@
+{
+  "hourly": "کاتژمێرانە",
+  "monthly": "مانگانە",
+  "yearly": "ساڵانە",
+  "perHour": "/کاتژمێر",
+  "perMonth": "/مانگ",
+  "perYear": "/ساڵ",
+  "onDemand": "بەپێی داواکاری",
+  "reserved": "پارچەکراو",
+  "spot": "Spot",
+  "savingsPlan": "پلانی توانداکاری",
+  "noUpfront": "بێ پێشوەختەی",
+  "partialUpfront": "بەشێکی پێشوەختەی",
+  "allUpfront": "هەموو پێشوەختەی",
+  "convertible": "گۆرانکارپذیر",
+  "standard": "ستاندارد",
+  "priceUnavailable": "N/A"
+}

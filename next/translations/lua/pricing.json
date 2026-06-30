@@ -1,0 +1,18 @@
+{
+  "hourly": "Pa Saa",
+  "monthly": "Pa Ngondo",
+  "yearly": "Pa Tshidimu",
+  "perHour": "/saa",
+  "perMonth": "/ngd.",
+  "perYear": "/tshid.",
+  "onDemand": "On-Demand",
+  "reserved": "Biimba",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Teke Malipo ya Awali",
+  "partialUpfront": "Malipo ya Awali ya Sehemu",
+  "allUpfront": "Malipo Yote ya Awali",
+  "convertible": "Buluishwa",
+  "standard": "Kawaida",
+  "priceUnavailable": "N/A"
+}

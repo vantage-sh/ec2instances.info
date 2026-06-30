@@ -1,0 +1,18 @@
+{
+  "hourly": "Ka Ura",
+  "monthly": "Ka Kgwedi",
+  "yearly": "Ka Ngwaga",
+  "perHour": "/ura",
+  "perMonth": "/kgwedi",
+  "perYear": "/ngwaga",
+  "onDemand": "Go Tlhokega",
+  "reserved": "Go Tlhomamiswa",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Ga Go na Tshelelete ya Pele",
+  "partialUpfront": "Karolo ya Tshelelete ya Pele",
+  "allUpfront": "Tshelelete Yotlhe ya Pele",
+  "convertible": "E Kgonang go Fetolwa",
+  "standard": "Tlwaelo",
+  "priceUnavailable": "N/A"
+}

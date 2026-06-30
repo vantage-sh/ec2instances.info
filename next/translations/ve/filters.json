@@ -1,0 +1,49 @@
+{
+  "search": "Toda...",
+  "clearFilters": "Bvisa Zwiṱalukanyi",
+  "filters": "Zwiṱalukanyi",
+  "columns": "Zwikoloamu",
+  "region": "Ṱalatshele",
+  "pricingUnit": "Iyunithi ya Mitengo",
+  "cost": "Mutengo",
+  "reserved": "Yo Hangwaho",
+  "currency": "Tshelede",
+  "os": "Mudzingano wa Mutepe",
+  "duration": "Tshifhinga",
+  "reservedTerm": "Tshifhinga tsha u Hangwa",
+  "durations": {
+    "ondemand": "Nga u Lavhelesa",
+    "reserved1yr": "Yo Hangwaho 1 Nwaha",
+    "reserved3yr": "Yo Hangwaho Minwaha 3",
+    "spot": "Spot"
+  },
+  "compare": "Linganisa",
+  "endCompare": "Fhedza Tshelinganiso",
+  "selected": "yo nangwa",
+  "showAll": "Sumbedza Zwoṱhe",
+  "hideAll": "Fihla Zwoṱhe",
+  "select": "Nanga...",
+  "searchLabel": "Toda {label}...",
+  "noOptionsFound": "A tshine zwiito.",
+  "searchColumns": "Toda zwikoloamu...",
+  "noColumnsFound": "A tshine zwikoloamu.",
+  "selectAll": "Nanga Zwoṱhe",
+  "selectDefaults": "Nanga Zwi zwi Kumiwaho",
+  "regionGroups": {
+    "frequentlyUsed": "Zwi Shumisiwaho Ganzhi",
+    "chinaCloudRegions": "Maṱalatshele a China Cloud",
+    "mainRegions": "Maṱalatshele a Ndeme",
+    "localZones": "Nḓowelo Dza Hayani",
+    "wavelengthZones": "Nḓowelo dza Wavelength"
+  },
+  "export": {
+    "export": "Bvisa nnḓa",
+    "downloadCsv": "Phakhisela CSV",
+    "copyCsv": "Khophiela CSV",
+    "copyTsv": "Khophiela TSV",
+    "copyMarkdown": "Khophiela Tafula ya Markdown",
+    "csvCopied": "CSV yo khophiwa",
+    "tsvCopied": "TSV yo khophiwa",
+    "markdownCopied": "Tafula ya Markdown yo khophiwa"
+  }
+}

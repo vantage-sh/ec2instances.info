@@ -1,0 +1,18 @@
+{
+  "hourly": "Сахатмæ",
+  "monthly": "Мæймæ",
+  "yearly": "Азмæ",
+  "perHour": "/сах.",
+  "perMonth": "/мæй.",
+  "perYear": "/аз.",
+  "onDemand": "On-Demand",
+  "reserved": "Резервонд",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Нæй Авансон",
+  "partialUpfront": "Хайджынтæн Авансон",
+  "allUpfront": "Æппæт Авансон",
+  "convertible": "Конвертируемон",
+  "standard": "Бæрæгбон",
+  "priceUnavailable": "Н/Д"
+}

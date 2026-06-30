@@ -1,0 +1,49 @@
+{
+  "search": "Агурын...",
+  "clearFilters": "Фильтртæ Тасын",
+  "filters": "Фильтртæ",
+  "columns": "Колонкæтæ",
+  "region": "Регион",
+  "pricingUnit": "Аргъы Единицæ",
+  "cost": "Аргъ",
+  "reserved": "Резервонд",
+  "currency": "Æхцаиад",
+  "os": "Операционон Системæ",
+  "duration": "Рæстæг",
+  "reservedTerm": "Резервонд Мæ",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 Азæй Резервонд",
+    "reserved3yr": "3 Азæй Резервонд",
+    "spot": "Spot"
+  },
+  "compare": "Абарын",
+  "endCompare": "Абарыны Фæстæ",
+  "selected": "Равзæрст",
+  "showAll": "Æппæт Равдисын",
+  "hideAll": "Æппæт Æмбæхсын",
+  "select": "Равзарын...",
+  "searchLabel": "{label} Агурын...",
+  "noOptionsFound": "Нæй Æнæцæуынгæ.",
+  "searchColumns": "Колонкæтæ Агурын...",
+  "noColumnsFound": "Нæй Колонкæтæ.",
+  "selectAll": "Æппæт Равзарын",
+  "selectDefaults": "Бæрæгбон Равзарын",
+  "regionGroups": {
+    "frequentlyUsed": "Хатдзæгæй Пайда Кæнынц",
+    "chinaCloudRegions": "Китайы Cloud Регионтæ",
+    "mainRegions": "Сæйраг Регионтæ",
+    "localZones": "Хæдзарон Зонтæ",
+    "wavelengthZones": "Wavelength Зонтæ"
+  },
+  "export": {
+    "export": "Экспорт",
+    "downloadCsv": "CSV Æрбахæссын",
+    "copyCsv": "CSV Копирон Кæнын",
+    "copyTsv": "TSV Копирон Кæнын",
+    "copyMarkdown": "Markdown Таблицæ Копирон Кæнын",
+    "csvCopied": "CSV Буферы Æрæвæрд",
+    "tsvCopied": "TSV Буферы Æрæвæрд",
+    "markdownCopied": "Markdown Таблицæ Буферы Æрæвæрд"
+  }
+}

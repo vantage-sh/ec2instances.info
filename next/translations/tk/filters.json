@@ -1,0 +1,49 @@
+{
+  "search": "Gözleg...",
+  "clearFilters": "Süzgüçleri Arassala",
+  "filters": "Süzgüçler",
+  "columns": "Sütünler",
+  "region": "Sebit",
+  "pricingUnit": "Nyrh Birligi",
+  "cost": "Bahasy",
+  "reserved": "Bronlanan",
+  "currency": "Walýuta",
+  "os": "Operasion Ulgam",
+  "duration": "Möhleti",
+  "reservedTerm": "Bronlama Möhleti",
+  "durations": {
+    "ondemand": "Talap boýunça",
+    "reserved1yr": "1 Ýyllyk Bronlanan",
+    "reserved3yr": "3 Ýyllyk Bronlanan",
+    "spot": "Spot"
+  },
+  "compare": "Deňeşdirmek",
+  "endCompare": "Deňeşdirmegi Tamamla",
+  "selected": "saýlanan",
+  "showAll": "Hemmesini Görkez",
+  "hideAll": "Hemmesini Gizle",
+  "select": "Saýlaň...",
+  "searchLabel": "{label} gözleg...",
+  "noOptionsFound": "Mümkinçilik tapylmady.",
+  "searchColumns": "Sütünleri gözle...",
+  "noColumnsFound": "Sütün tapylmady.",
+  "selectAll": "Hemmesini Saýla",
+  "selectDefaults": "Deslapky Saýlamalar",
+  "regionGroups": {
+    "frequentlyUsed": "Köp Ulanylýan",
+    "chinaCloudRegions": "Hytaý Bulut Sebitler",
+    "mainRegions": "Esasy Sebitler",
+    "localZones": "Ýerli Zonalar",
+    "wavelengthZones": "Wavelength Zonalary"
+  },
+  "export": {
+    "export": "Eksport",
+    "downloadCsv": "CSV Ýükle",
+    "copyCsv": "CSV Göçür",
+    "copyTsv": "TSV Göçür",
+    "copyMarkdown": "Markdown Tablisasyny Göçür",
+    "csvCopied": "CSV çekme tagtasyna göçürildi",
+    "tsvCopied": "TSV çekme tagtasyna göçürildi",
+    "markdownCopied": "Markdown tablisasy çekme tagtasyna göçürildi"
+  }
+}

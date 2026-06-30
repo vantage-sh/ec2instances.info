@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Datu ielāde neizdevās",
+  "tryAgain": "Mēģināt vēlreiz",
+  "networkError": "Tīkla kļūda. Lūdzu, pārbaudiet savienojumu.",
+  "unknownError": "Radās nezināma kļūda"
+}

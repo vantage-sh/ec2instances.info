@@ -1,0 +1,18 @@
+{
+  "hourly": "Час вылэ",
+  "monthly": "Толэзь вылэ",
+  "yearly": "Ар вылэ",
+  "perHour": "/час",
+  "perMonth": "/тол.",
+  "perYear": "/ар",
+  "onDemand": "On-Demand",
+  "reserved": "Резервируем",
+  "spot": "Spot",
+  "savingsPlan": "Экономия План",
+  "noUpfront": "Азьло Тӧлэтэк",
+  "partialUpfront": "Öжыт Азьло Тӧло",
+  "allUpfront": "Пӧртэм Азьло Тӧло",
+  "convertible": "Вошъяськон",
+  "standard": "Стандарт",
+  "priceUnavailable": "Ӧвӧл"
+}

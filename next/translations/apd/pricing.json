@@ -1,0 +1,18 @@
+{
+  "hourly": "في الساعة",
+  "monthly": "شهرياً",
+  "yearly": "سنوياً",
+  "perHour": "/ساعة",
+  "perMonth": "/شهر",
+  "perYear": "/سنة",
+  "onDemand": "عند الطلب",
+  "reserved": "محجوز",
+  "spot": "Spot",
+  "savingsPlan": "خطة التوفير",
+  "noUpfront": "بدون دفعة مقدمة",
+  "partialUpfront": "دفعة مقدمة جزئية",
+  "allUpfront": "دفعة مقدمة كاملة",
+  "convertible": "قابل للتحويل",
+  "standard": "قياسي",
+  "priceUnavailable": "N/A"
+}

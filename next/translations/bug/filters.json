@@ -1,0 +1,49 @@
+{
+  "search": "Ellong...",
+  "clearFilters": "Bersihkan Filter",
+  "filters": "Filter",
+  "columns": "Kolom",
+  "region": "Wilayah",
+  "pricingUnit": "Satuan Arga",
+  "cost": "Arga",
+  "reserved": "Cadangan",
+  "currency": "Mata Duwwi",
+  "os": "Sistem Operasi",
+  "duration": "Durasi",
+  "reservedTerm": "Jangka Cadangan",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Cadangan 1 Taung",
+    "reserved3yr": "Cadangan 3 Taung",
+    "spot": "Spot"
+  },
+  "compare": "Pattampé",
+  "endCompare": "Paurangi Pattampé",
+  "selected": "ripilé",
+  "showAll": "Paita Maéga",
+  "hideAll": "Pabuni Maéga",
+  "select": "Pilé...",
+  "searchLabel": "Ellong {label}...",
+  "noOptionsFound": "Dé' napole pilihan.",
+  "searchColumns": "Ellong kolom...",
+  "noColumnsFound": "Dé' napole kolom.",
+  "selectAll": "Pilé Maéga",
+  "selectDefaults": "Pilé Default",
+  "regionGroups": {
+    "frequentlyUsed": "Sering Ripakai",
+    "chinaCloudRegions": "Wilayah Cloud Cina",
+    "mainRegions": "Wilayah Utama",
+    "localZones": "Zona Lokal",
+    "wavelengthZones": "Zona Wavelength"
+  },
+  "export": {
+    "export": "Ekspor",
+    "downloadCsv": "Unduh CSV",
+    "copyCsv": "Salin CSV",
+    "copyTsv": "Salin TSV",
+    "copyMarkdown": "Salin Tabel Markdown",
+    "csvCopied": "CSV risalin lao ri clipboard",
+    "tsvCopied": "TSV risalin lao ri clipboard",
+    "markdownCopied": "Tabel Markdown risalin lao ri clipboard"
+  }
+}

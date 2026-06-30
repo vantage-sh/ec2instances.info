@@ -1,0 +1,18 @@
+{
+  "hourly": "Lɛrɛ Kelen Kelen",
+  "monthly": "Kalo Kelen Kelen",
+  "yearly": "San Kelen Kelen",
+  "perHour": "/lɛrɛ",
+  "perMonth": "/kalo",
+  "perYear": "/san",
+  "onDemand": "On-Demand",
+  "reserved": "Reserved",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Sɔngɔ Daminɛ Tɛ",
+  "partialUpfront": "Sɔngɔ Daminɛ Dɔ",
+  "allUpfront": "Sɔngɔ Daminɛ Bɛɛ",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "A/T"
+}

@@ -1,0 +1,18 @@
+{
+  "hourly": "प्रति घंटा",
+  "monthly": "महीनेवार",
+  "yearly": "सालाना",
+  "perHour": "/घंटा",
+  "perMonth": "/महीना",
+  "perYear": "/साल",
+  "onDemand": "ऑन-डिमांड",
+  "reserved": "आरक्षित",
+  "spot": "स्पॉट",
+  "savingsPlan": "बचत योजना",
+  "noUpfront": "बिना अग्रिम",
+  "partialUpfront": "आंशिक अग्रिम",
+  "allUpfront": "पूरा अग्रिम",
+  "convertible": "परिवर्तनीय",
+  "standard": "मानक",
+  "priceUnavailable": "N/A"
+}

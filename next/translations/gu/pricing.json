@@ -1,0 +1,18 @@
+{
+  "hourly": "પ્રતિ કલાક",
+  "monthly": "માસિક",
+  "yearly": "વાર્ષિક",
+  "perHour": "/ક.",
+  "perMonth": "/મ.",
+  "perYear": "/વ.",
+  "onDemand": "ઑન-ડિમાન્ડ",
+  "reserved": "આરક્ષિત",
+  "spot": "સ્પૉટ",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "કોઈ અગ્રિમ ચૂકવણી નહીં",
+  "partialUpfront": "આંશિક અગ્રિમ ચૂકવણી",
+  "allUpfront": "સંપૂર્ણ અગ્રિમ ચૂકવણી",
+  "convertible": "પરિવર્તનીય",
+  "standard": "પ્રમાણભૂત",
+  "priceUnavailable": "N/A"
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Okutafuta...",
+  "clearFilters": "Okufuta Mafilutelo",
+  "filters": "Mafilutelo",
+  "columns": "Ovilima",
+  "region": "Elapo",
+  "pricingUnit": "Cipimo ca Intengo",
+  "cost": "Intengo",
+  "reserved": "Okhusikira",
+  "currency": "Intengo ya Nchi",
+  "os": "Mfumo wa Uendeshaji",
+  "duration": "Ovihela",
+  "reservedTerm": "Ovihela Okhusikira",
+  "durations": {
+    "ondemand": "Okhufuna",
+    "reserved1yr": "Okhusikira Mwaka 1",
+    "reserved3yr": "Okhusikira Miaka 3",
+    "spot": "Spot"
+  },
+  "compare": "Okulinganisha",
+  "endCompare": "Okuhaula Okulinganisha",
+  "selected": "okusinda",
+  "showAll": "Onyesha Yote",
+  "hideAll": "Ficha Yote",
+  "select": "Okusinda...",
+  "searchLabel": "Okutafuta {label}...",
+  "noOptionsFound": "Ovisengo okhupangwa.",
+  "searchColumns": "Okutafuta ovilima...",
+  "noColumnsFound": "Ovilima okhupangwa.",
+  "selectAll": "Okusinda Yote",
+  "selectDefaults": "Okusinda Ovisengo vya Nguyi",
+  "regionGroups": {
+    "frequentlyUsed": "Okutumia Mara Nyingi",
+    "chinaCloudRegions": "Elapo ya Cloud ya China",
+    "mainRegions": "Elapo Elikulu",
+    "localZones": "Elapo Elipi",
+    "wavelengthZones": "Elapo ya Wavelength"
+  },
+  "export": {
+    "export": "Okutunga",
+    "downloadCsv": "Kupakua CSV",
+    "copyCsv": "Kukopi CSV",
+    "copyTsv": "Kukopi TSV",
+    "copyMarkdown": "Kukopi Jedwali ya Markdown",
+    "csvCopied": "CSV ilikopishwa ku clipboard",
+    "tsvCopied": "TSV ilikopishwa ku clipboard",
+    "markdownCopied": "Jedwali ya Markdown ilikopishwa ku clipboard"
+  }
+}

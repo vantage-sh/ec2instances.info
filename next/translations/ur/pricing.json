@@ -1,0 +1,18 @@
+{
+  "hourly": "فی گھنٹہ",
+  "monthly": "ماہانہ",
+  "yearly": "سالانہ",
+  "perHour": "/گھنٹہ",
+  "perMonth": "/ماہ",
+  "perYear": "/سال",
+  "onDemand": "آن ڈیمانڈ",
+  "reserved": "ریزرو",
+  "spot": "Spot",
+  "savingsPlan": "بچت پلان",
+  "noUpfront": "بغیر پیشگی ادائیگی",
+  "partialUpfront": "جزوی پیشگی ادائیگی",
+  "allUpfront": "مکمل پیشگی ادائیگی",
+  "convertible": "تبدیل پذیر",
+  "standard": "معیاری",
+  "priceUnavailable": "دستیاب نہیں"
+}

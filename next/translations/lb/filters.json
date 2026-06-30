@@ -1,0 +1,49 @@
+{
+  "search": "Sichen...",
+  "clearFilters": "Filter läschen",
+  "filters": "Filteren",
+  "columns": "Kolonnen",
+  "region": "Regioun",
+  "pricingUnit": "Präisseenheet",
+  "cost": "Käschten",
+  "reserved": "Reservéiert",
+  "currency": "Währung",
+  "os": "Betribssystem",
+  "duration": "Dauer",
+  "reservedTerm": "Reservéierungslafzäit",
+  "durations": {
+    "ondemand": "On Demand",
+    "reserved1yr": "1 Joer Reservéiert",
+    "reserved3yr": "3 Joer Reservéiert",
+    "spot": "Spot"
+  },
+  "compare": "Vergläichen",
+  "endCompare": "Vergläich ofschléissen",
+  "selected": "ausgewielt",
+  "showAll": "Alles weisen",
+  "hideAll": "Alles verstoppen",
+  "select": "Auswielen...",
+  "searchLabel": "{label} sichen...",
+  "noOptionsFound": "Keng Optiounen fonnt.",
+  "searchColumns": "Kolonnen sichen...",
+  "noColumnsFound": "Keng Kolonnen fonnt.",
+  "selectAll": "Alles auswielen",
+  "selectDefaults": "Standardwäerter auswielen",
+  "regionGroups": {
+    "frequentlyUsed": "Heefeg benotzt",
+    "chinaCloudRegions": "China Cloud Regiounen",
+    "mainRegions": "Haaptregiounen",
+    "localZones": "Lokal Zonen",
+    "wavelengthZones": "Wavelength Zonen"
+  },
+  "export": {
+    "export": "Exportéieren",
+    "downloadCsv": "CSV eroflueden",
+    "copyCsv": "CSV kopéieren",
+    "copyTsv": "TSV kopéieren",
+    "copyMarkdown": "Markdown-Tabell kopéieren",
+    "csvCopied": "CSV an d'Tëschespäicher kopéiert",
+    "tsvCopied": "TSV an d'Tëschespäicher kopéiert",
+    "markdownCopied": "Markdown-Tabell an d'Tëschespäicher kopéiert"
+  }
+}

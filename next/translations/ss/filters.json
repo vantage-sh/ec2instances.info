@@ -1,0 +1,49 @@
+{
+  "search": "Lolota...",
+  "clearFilters": "Susa Tifilitha",
+  "filters": "Tifilitha",
+  "columns": "Tikholomu",
+  "region": "Indzawo",
+  "pricingUnit": "Iyunithi Yenanelo",
+  "cost": "Inani",
+  "reserved": "Reserved",
+  "currency": "Imali",
+  "os": "Simo Sesisebenti",
+  "duration": "Sikhathi",
+  "reservedTerm": "Isikhathi se-Reserved",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Reserved Umnyaka 1",
+    "reserved3yr": "Reserved Iminyaka 3",
+    "spot": "Spot"
+  },
+  "compare": "Linganisa",
+  "endCompare": "Phela Kulinganisa",
+  "selected": "Lelikhethiwe",
+  "showAll": "Khombisa Konkhe",
+  "hideAll": "Fihla Konkhe",
+  "select": "Khetha...",
+  "searchLabel": "Lolota {label}...",
+  "noOptionsFound": "Akukho tikhelo letitfolakele.",
+  "searchColumns": "Lolota Tikholomu...",
+  "noColumnsFound": "Akukho tikholomu letitfolakele.",
+  "selectAll": "Khetha Konkhe",
+  "selectDefaults": "Khetha Tiphawulo",
+  "regionGroups": {
+    "frequentlyUsed": "Letisetsenziswa Kanengi",
+    "chinaCloudRegions": "Tifundza te-Cloud tase-China",
+    "mainRegions": "Tifundza Letikhulu",
+    "localZones": "Tifundza Letiseduze",
+    "wavelengthZones": "Wavelength Zones"
+  },
+  "export": {
+    "export": "Khipha",
+    "downloadCsv": "Layisha CSV",
+    "copyCsv": "Kopisha CSV",
+    "copyTsv": "Kopisha TSV",
+    "copyMarkdown": "Kopisha Tafula ye-Markdown",
+    "csvCopied": "CSV ikhopishelwe ku-clipboard",
+    "tsvCopied": "TSV ikhopishelwe ku-clipboard",
+    "markdownCopied": "Tafula ye-Markdown ikhopishelwe ku-clipboard"
+  }
+}

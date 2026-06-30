@@ -1,0 +1,49 @@
+{
+  "search": "Эҙләү...",
+  "clearFilters": "Фильтрҙарҙы Юйыу",
+  "filters": "Фильтрҙар",
+  "columns": "Бағаналар",
+  "region": "Регион",
+  "pricingUnit": "Баһа Берәмеге",
+  "cost": "Баһа",
+  "reserved": "Резервацияланған",
+  "currency": "Валюта",
+  "os": "Операцион Система",
+  "duration": "Мөҙҙәт",
+  "reservedTerm": "Резервация Ваҡыты",
+  "durations": {
+    "ondemand": "Талап Буйынса",
+    "reserved1yr": "1 Йыллыҡ Резервациялы",
+    "reserved3yr": "3 Йыллыҡ Резервациялы",
+    "spot": "Spot"
+  },
+  "compare": "Сағыштырыу",
+  "endCompare": "Сағыштырыуҙы Тамамлау",
+  "selected": "һайланған",
+  "showAll": "Барыһын Күрһәтеү",
+  "hideAll": "Барыһын Йәшереү",
+  "select": "Һайлағыҙ...",
+  "searchLabel": "{label} эҙләү...",
+  "noOptionsFound": "Вариант табылманы.",
+  "searchColumns": "Баған эҙләү...",
+  "noColumnsFound": "Баған табылманы.",
+  "selectAll": "Барыһын Һайлау",
+  "selectDefaults": "Стандартты Һайлау",
+  "regionGroups": {
+    "frequentlyUsed": "Йыш Ҡулланылған",
+    "chinaCloudRegions": "Ҡытай Болот Регионтары",
+    "mainRegions": "Төп Регионтар",
+    "localZones": "Урыны Зоналар",
+    "wavelengthZones": "Wavelength Зоналары"
+  },
+  "export": {
+    "export": "Экспорт",
+    "downloadCsv": "CSV Йөкләү",
+    "copyCsv": "CSV Күсереү",
+    "copyTsv": "TSV Күсереү",
+    "copyMarkdown": "Markdown Таблицаһын Күсереү",
+    "csvCopied": "CSV алмаш-тотошҡа күсерелде",
+    "tsvCopied": "TSV алмаш-тотошҡа күсерелде",
+    "markdownCopied": "Markdown таблицаһы алмаш-тотошҡа күсерелде"
+  }
+}

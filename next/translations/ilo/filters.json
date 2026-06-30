@@ -1,0 +1,49 @@
+{
+  "search": "Biruken...",
+  "clearFilters": "Liniaan dagiti Filter",
+  "filters": "Dagiti Filter",
+  "columns": "Dagiti Kolum",
+  "region": "Rehion",
+  "pricingUnit": "Yunit ti Presyo",
+  "cost": "Gastos",
+  "reserved": "Naireserba",
+  "currency": "Kuarta",
+  "os": "Operating System",
+  "duration": "Kanayonan",
+  "reservedTerm": "Naireserba nga Termino",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 Tawen nga Naireserba",
+    "reserved3yr": "3 Tawen nga Naireserba",
+    "spot": "Spot"
+  },
+  "compare": "Iparitok",
+  "endCompare": "Irugi ti Panagparitok",
+  "selected": "napili",
+  "showAll": "Ipakita Amin",
+  "hideAll": "Ilikliklik Amin",
+  "select": "Pilien...",
+  "searchLabel": "Biruken ti {label}...",
+  "noOptionsFound": "Awan nakita nga opsion.",
+  "searchColumns": "Biruken dagiti kolum...",
+  "noColumnsFound": "Awan nakita nga kolum.",
+  "selectAll": "Pilien Amin",
+  "selectDefaults": "Pilien dagiti Default",
+  "regionGroups": {
+    "frequentlyUsed": "Masansan nga Nagusar",
+    "chinaCloudRegions": "Dagiti Cloud Region ti China",
+    "mainRegions": "Dagiti Kangrunaan nga Rehion",
+    "localZones": "Dagiti Lokal nga Zone",
+    "wavelengthZones": "Dagiti Wavelength Zone"
+  },
+  "export": {
+    "export": "I-export",
+    "downloadCsv": "I-download ti CSV",
+    "copyCsv": "Kopiaen ti CSV",
+    "copyTsv": "Kopiaen ti TSV",
+    "copyMarkdown": "Kopiaen ti Markdown Table",
+    "csvCopied": "Nakopia ti CSV iti clipboard",
+    "tsvCopied": "Nakopia ti TSV iti clipboard",
+    "markdownCopied": "Nakopia ti Markdown table iti clipboard"
+  }
+}

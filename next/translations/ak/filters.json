@@ -1,0 +1,49 @@
+{
+  "search": "Hwehwɛ...",
+  "clearFilters": "Popa Filters",
+  "filters": "Filters",
+  "columns": "Ahoma",
+  "region": "Mpoano",
+  "pricingUnit": "Bo Akyi",
+  "cost": "Akatua",
+  "reserved": "Ahyɛ Asie",
+  "currency": "Sika",
+  "os": "Operating System",
+  "duration": "Bere",
+  "reservedTerm": "Ahyɛ Asie Bere",
+  "durations": {
+    "ondemand": "Wɔ Mpɛn",
+    "reserved1yr": "Afe Baako Ahyɛ Asie",
+    "reserved3yr": "Mfe Mmiɛnsa Ahyɛ Asie",
+    "spot": "Spot"
+  },
+  "compare": "Twa Ho Akyiri",
+  "endCompare": "Sae Nhwɛso",
+  "selected": "ayi",
+  "showAll": "Kyerɛ Nyinaa",
+  "hideAll": "Kan Nyinaa",
+  "select": "Yi...",
+  "searchLabel": "Hwehwɛ {label}...",
+  "noOptionsFound": "Ɛnni suban biara.",
+  "searchColumns": "Hwehwɛ ahoma...",
+  "noColumnsFound": "Ɛnni ahoma biara.",
+  "selectAll": "Yi Nyinaa",
+  "selectDefaults": "Yi Ahoɔden",
+  "regionGroups": {
+    "frequentlyUsed": "Wɔ De Di Dwuma Pii",
+    "chinaCloudRegions": "China Cloud Mpoano",
+    "mainRegions": "Mpoano Titiriw",
+    "localZones": "Fie Zones",
+    "wavelengthZones": "Wavelength Zones"
+  },
+  "export": {
+    "export": "Yi Fi",
+    "downloadCsv": "Sisi CSV",
+    "copyCsv": "Kopi CSV",
+    "copyTsv": "Kopi TSV",
+    "copyMarkdown": "Kopi Markdown Efa",
+    "csvCopied": "Wɔakopi CSV wɔ clipboard mu",
+    "tsvCopied": "Wɔakopi TSV wɔ clipboard mu",
+    "markdownCopied": "Wɔakopi Markdown efa wɔ clipboard mu"
+  }
+}

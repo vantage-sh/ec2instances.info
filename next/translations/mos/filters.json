@@ -1,0 +1,49 @@
+{
+  "search": "Bʋʋda...",
+  "clearFilters": "Filters Yiig",
+  "filters": "Filters",
+  "columns": "Kolõm",
+  "region": "Tẽng",
+  "pricingUnit": "Prix Ẽeneg",
+  "cost": "Prix",
+  "reserved": "Reserved",
+  "currency": "Liɩg Toor",
+  "os": "Tũuda Sɩd-naaneg",
+  "duration": "Wakati",
+  "reservedTerm": "Reserved Wakati",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Yʋʋr 1 Reserved",
+    "reserved3yr": "Yʋʋr 3 Reserved",
+    "spot": "Spot"
+  },
+  "compare": "Tũud",
+  "endCompare": "Tũudgã Dɩt",
+  "selected": "Suubame",
+  "showAll": "Wilg Fãa",
+  "hideAll": "Fãde Fãa",
+  "select": "Suub...",
+  "searchLabel": "Bʋʋda {label}...",
+  "noOptionsFound": "Bʋʋdg Ka Yõ.",
+  "searchColumns": "Kolõm Bʋʋda...",
+  "noColumnsFound": "Kolõm Ka Yõ.",
+  "selectAll": "Suub Fãa",
+  "selectDefaults": "Suub Sẽn Yi Pʋgẽ",
+  "regionGroups": {
+    "frequentlyUsed": "Sẽn Tũud Wʋsgo",
+    "chinaCloudRegions": "Siin Cloud Tẽns",
+    "mainRegions": "Tẽns Gãense",
+    "localZones": "Zõns Lokaale",
+    "wavelengthZones": "Wavelength Zõns"
+  },
+  "export": {
+    "export": "Yiig",
+    "downloadCsv": "CSV Dõms",
+    "copyCsv": "CSV Kopiig",
+    "copyTsv": "TSV Kopiig",
+    "copyMarkdown": "Markdown Tiib Kopiig",
+    "csvCopied": "CSV kopieé clipboard pʋgẽ",
+    "tsvCopied": "TSV kopieé clipboard pʋgẽ",
+    "markdownCopied": "Markdown tiib kopieé clipboard pʋgẽ"
+  }
+}

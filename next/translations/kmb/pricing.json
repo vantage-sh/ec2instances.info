@@ -1,0 +1,18 @@
+{
+  "hourly": "Po Hora",
+  "monthly": "Po Mês",
+  "yearly": "Po Ano",
+  "perHour": "/hora",
+  "perMonth": "/mês",
+  "perYear": "/ano",
+  "onDemand": "Mu Kubakisa",
+  "reserved": "Xa Kubanga",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Xa Kubanga Nawa Malipo",
+  "partialUpfront": "Xa Kubanga Lupande Malipo",
+  "allUpfront": "Xa Kubanga Malipo Yose",
+  "convertible": "Kubadilishwa",
+  "standard": "Kawaida",
+  "priceUnavailable": "K.A."
+}

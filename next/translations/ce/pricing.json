@@ -1,0 +1,18 @@
+{
+  "hourly": "Сахьтехь",
+  "monthly": "Буттехь",
+  "yearly": "Шерахь",
+  "perHour": "/сахьт",
+  "perMonth": "/бутт",
+  "perYear": "/шо",
+  "onDemand": "Лаамехь",
+  "reserved": "Дихкина",
+  "spot": "Spot",
+  "savingsPlan": "Экономийн Пхьидхаьдхар",
+  "noUpfront": "Аванс Доцуш",
+  "partialUpfront": "Юккъехь Аванс",
+  "allUpfront": "Ерриг Аванс",
+  "convertible": "Конвертируеми",
+  "standard": "Стандартан",
+  "priceUnavailable": "Дац"
+}

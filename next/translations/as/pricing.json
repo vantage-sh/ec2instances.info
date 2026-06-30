@@ -1,0 +1,18 @@
+{
+  "hourly": "প্ৰতি ঘণ্টা",
+  "monthly": "প্ৰতি মাহ",
+  "yearly": "প্ৰতি বছৰ",
+  "perHour": "/ঘণ্টা",
+  "perMonth": "/মাহ",
+  "perYear": "/বছৰ",
+  "onDemand": "অন-ডিমান্ড",
+  "reserved": "সংৰক্ষিত",
+  "spot": "স্পট",
+  "savingsPlan": "ছেভিংছ প্লেন",
+  "noUpfront": "অগ্ৰিম পেমেন্ট নাই",
+  "partialUpfront": "আংশিক অগ্ৰিম পেমেন্ট",
+  "allUpfront": "সম্পূৰ্ণ অগ্ৰিম পেমেন্ট",
+  "convertible": "কনভাৰ্টিবল",
+  "standard": "মানক",
+  "priceUnavailable": "প্ৰযোজ্য নহয়"
+}

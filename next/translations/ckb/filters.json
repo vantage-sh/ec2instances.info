@@ -1,0 +1,49 @@
+{
+  "search": "گەڕان...",
+  "clearFilters": "پاکردنەوەی فلتەرەکان",
+  "filters": "فلتەرەکان",
+  "columns": "ستوونەکان",
+  "region": "ناوچە",
+  "pricingUnit": "یەکەی نرخگوزاری",
+  "cost": "تێچوو",
+  "reserved": "پارچەکراو",
+  "currency": "دراو",
+  "os": "سیستەمی کارپێکردن",
+  "duration": "ماوە",
+  "reservedTerm": "ماوەی پارچەکردن",
+  "durations": {
+    "ondemand": "بەپێی داواکاری",
+    "reserved1yr": "١ ساڵ پارچەکراو",
+    "reserved3yr": "٣ ساڵ پارچەکراو",
+    "spot": "Spot"
+  },
+  "compare": "بەراورد",
+  "endCompare": "کۆتایی بەراورد",
+  "selected": "هەڵبژێردراو",
+  "showAll": "پیشاندانی هەموو",
+  "hideAll": "شاردنەوەی هەموو",
+  "select": "هەڵبژێرە...",
+  "searchLabel": "گەڕان {label}...",
+  "noOptionsFound": "هیچ هەڵبژاردنێک نەدۆزرایەوە.",
+  "searchColumns": "گەڕان لە ستوونەکان...",
+  "noColumnsFound": "هیچ ستوونێک نەدۆزرایەوە.",
+  "selectAll": "هەڵبژاردنی هەموو",
+  "selectDefaults": "هەڵبژاردنی بنەڕەتەکان",
+  "regionGroups": {
+    "frequentlyUsed": "باربار بەکارهاتووەکان",
+    "chinaCloudRegions": "ناوچەی ئەوری چین",
+    "mainRegions": "ناوچە سەرەکیەکان",
+    "localZones": "زۆنە ناوخۆییەکان",
+    "wavelengthZones": "زۆنەکانی Wavelength"
+  },
+  "export": {
+    "export": "هەناردەکردن",
+    "downloadCsv": "داونلۆدی CSV",
+    "copyCsv": "کۆپیکردنی CSV",
+    "copyTsv": "کۆپیکردنی TSV",
+    "copyMarkdown": "کۆپیکردنی خشتەی Markdown",
+    "csvCopied": "CSV کۆپیکرا بۆ کلیپبۆرد",
+    "tsvCopied": "TSV کۆپیکرا بۆ کلیپبۆرد",
+    "markdownCopied": "خشتەی Markdown کۆپیکرا بۆ کلیپبۆرد"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Veri yüklenemedi",
+  "tryAgain": "Tekrar Dene",
+  "networkError": "Ağ hatası. Lütfen bağlantınızı kontrol edin.",
+  "unknownError": "Bilinmeyen bir hata oluştu"
+}

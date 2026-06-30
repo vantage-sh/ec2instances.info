@@ -1,0 +1,49 @@
+{
+  "search": "Kërko...",
+  "clearFilters": "Pastro filtrat",
+  "filters": "Filtrat",
+  "columns": "Kolonat",
+  "region": "Rajoni",
+  "pricingUnit": "Njësia e çmimit",
+  "cost": "Kostoja",
+  "reserved": "I rezervuar",
+  "currency": "Monedha",
+  "os": "Sistemi operativ",
+  "duration": "Kohëzgjatja",
+  "reservedTerm": "Afati i rezervimit",
+  "durations": {
+    "ondemand": "Me kërkesë",
+    "reserved1yr": "1 vit i rezervuar",
+    "reserved3yr": "3 vjet i rezervuar",
+    "spot": "Spot"
+  },
+  "compare": "Krahaso",
+  "endCompare": "Përfundo krahasimin",
+  "selected": "zgjedhur",
+  "showAll": "Shfaq të gjitha",
+  "hideAll": "Fshih të gjitha",
+  "select": "Zgjidh...",
+  "searchLabel": "Kërko {label}...",
+  "noOptionsFound": "Nuk u gjetën opsione.",
+  "searchColumns": "Kërko kolona...",
+  "noColumnsFound": "Nuk u gjetën kolona.",
+  "selectAll": "Zgjidh të gjitha",
+  "selectDefaults": "Zgjidh parazgjedhjet",
+  "regionGroups": {
+    "frequentlyUsed": "Përdorur shpesh",
+    "chinaCloudRegions": "Rajonet cloud të Kinës",
+    "mainRegions": "Rajonet kryesore",
+    "localZones": "Zonat lokale",
+    "wavelengthZones": "Zonat Wavelength"
+  },
+  "export": {
+    "export": "Eksporto",
+    "downloadCsv": "Shkarko CSV",
+    "copyCsv": "Kopjo CSV",
+    "copyTsv": "Kopjo TSV",
+    "copyMarkdown": "Kopjo tabelën Markdown",
+    "csvCopied": "CSV u kopjua në clipboard",
+    "tsvCopied": "TSV u kopjua në clipboard",
+    "markdownCopied": "Tabela Markdown u kopjua në clipboard"
+  }
+}

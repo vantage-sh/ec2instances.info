@@ -1,0 +1,49 @@
+{
+  "search": "Seet...",
+  "clearFilters": "Yokk Filtres yi",
+  "filters": "Filtres",
+  "columns": "Colonnes",
+  "region": "Reewum",
+  "pricingUnit": "Unité Njëg",
+  "cost": "Njëg",
+  "reserved": "Def bi",
+  "currency": "Xaalis",
+  "os": "Système d'exploitation",
+  "duration": "Yëgël",
+  "reservedTerm": "Termu Def bi",
+  "durations": {
+    "ondemand": "Ci Dëmm",
+    "reserved1yr": "1 At Def bi",
+    "reserved3yr": "3 At Def bi",
+    "spot": "Spot"
+  },
+  "compare": "Jàng",
+  "endCompare": "Jeex Jàng",
+  "selected": "Tann",
+  "showAll": "Yëgël yépp",
+  "hideAll": "Planqué yépp",
+  "select": "Tann...",
+  "searchLabel": "Seet {label}...",
+  "noOptionsFound": "Amul choix yi.",
+  "searchColumns": "Seet colonnes...",
+  "noColumnsFound": "Amul colonne.",
+  "selectAll": "Tann yépp",
+  "selectDefaults": "Tann Valeurs par Défaut",
+  "regionGroups": {
+    "frequentlyUsed": "Bu Bëgg Ci Kanam",
+    "chinaCloudRegions": "Reewum Cloud Sinuwaasl",
+    "mainRegions": "Reewum yu Mag",
+    "localZones": "Zones yu Ànd",
+    "wavelengthZones": "Zones Wavelength"
+  },
+  "export": {
+    "export": "Dafa Dem",
+    "downloadCsv": "Daw CSV",
+    "copyCsv": "Kopi CSV",
+    "copyTsv": "Kopi TSV",
+    "copyMarkdown": "Kopi Taablo Markdown",
+    "csvCopied": "CSV kopié ci presse-papiers",
+    "tsvCopied": "TSV kopié ci presse-papiers",
+    "markdownCopied": "Taablo Markdown kopié ci presse-papiers"
+  }
+}

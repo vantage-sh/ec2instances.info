@@ -1,0 +1,18 @@
+{
+  "hourly": "Na Ëre kelen kelen",
+  "monthly": "Na Mois kelen kelen",
+  "yearly": "Na An kelen kelen",
+  "perHour": "/ëre",
+  "perMonth": "/mois",
+  "perYear": "/an",
+  "onDemand": "On-Demand",
+  "reserved": "Reserved",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Mbongo Daminɛ Wâ",
+  "partialUpfront": "Mbongo Daminɛ Dɔ",
+  "allUpfront": "Mbongo Daminɛ Bɛɛ",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "A/N"
+}

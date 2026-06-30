@@ -1,0 +1,18 @@
+{
+  "hourly": "Щогодини",
+  "monthly": "Щомісяця",
+  "yearly": "Щороку",
+  "perHour": "/год",
+  "perMonth": "/міс",
+  "perYear": "/рік",
+  "onDemand": "На вимогу",
+  "reserved": "Зарезервовано",
+  "spot": "Spot",
+  "savingsPlan": "Ощадний план",
+  "noUpfront": "Без передоплати",
+  "partialUpfront": "Часткова передоплата",
+  "allUpfront": "Повна передоплата",
+  "convertible": "Конвертований",
+  "standard": "Стандартний",
+  "priceUnavailable": "Н/Д"
+}

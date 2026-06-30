@@ -1,0 +1,18 @@
+{
+  "hourly": "Ժամային",
+  "monthly": "Ամսական",
+  "yearly": "Տարեկան",
+  "perHour": "/ժ",
+  "perMonth": "/ամ",
+  "perYear": "/տ",
+  "onDemand": "Ըստ պ.",
+  "reserved": "Ամ.",
+  "spot": "Spot",
+  "savingsPlan": "Խ. Պ.",
+  "noUpfront": "Կ. Կ.",
+  "partialUpfront": "Մ. Կ.",
+  "allUpfront": "Ա. Կ.",
+  "convertible": "Փ.",
+  "standard": "Ստ.",
+  "priceUnavailable": "N/A"
+}

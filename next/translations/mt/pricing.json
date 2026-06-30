@@ -1,0 +1,18 @@
+{
+  "hourly": "Kull Siegħa",
+  "monthly": "Kull Xahar",
+  "yearly": "Kull Sena",
+  "perHour": "/siegħa",
+  "perMonth": "/xahar",
+  "perYear": "/sena",
+  "onDemand": "On-Demand",
+  "reserved": "Riżervat",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Mingħajr Ħlas Bil-Quddiem",
+  "partialUpfront": "Ħlas Parzjali Bil-Quddiem",
+  "allUpfront": "Ħlas Sħiħ Bil-Quddiem",
+  "convertible": "Konvertibbli",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

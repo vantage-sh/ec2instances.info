@@ -1,0 +1,18 @@
+{
+  "hourly": "In aghaidh na hUaire",
+  "monthly": "Míosúil",
+  "yearly": "Bliantúil",
+  "perHour": "/uair",
+  "perMonth": "/mí",
+  "perYear": "/bl.",
+  "onDemand": "Ar Éileamh",
+  "reserved": "In Áirithe",
+  "spot": "Spot",
+  "savingsPlan": "Plean Coigilte",
+  "noUpfront": "Gan Réamhíoc",
+  "partialUpfront": "Réamhíoc Páirteach",
+  "allUpfront": "Iomlán Réamhíoc",
+  "convertible": "Intiontaithe",
+  "standard": "Caighdeánach",
+  "priceUnavailable": "N/A"
+}

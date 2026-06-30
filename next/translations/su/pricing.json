@@ -1,0 +1,18 @@
+{
+  "hourly": "Per Jam",
+  "monthly": "Per Bulan",
+  "yearly": "Per Taun",
+  "perHour": "/jam",
+  "perMonth": "/bulan",
+  "perYear": "/taun",
+  "onDemand": "Dina Paménta",
+  "reserved": "Dicadangkeun",
+  "spot": "Spot",
+  "savingsPlan": "Rencana Tabungan",
+  "noUpfront": "Teu Mayar Tiheula",
+  "partialUpfront": "Sabagian Mayar Tiheula",
+  "allUpfront": "Kabéh Mayar Tiheula",
+  "convertible": "Tiasa Dikonvérsi",
+  "standard": "Standar",
+  "priceUnavailable": "T/A"
+}

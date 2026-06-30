@@ -1,0 +1,18 @@
+{
+  "hourly": "Saetane",
+  "monthly": "Mehane",
+  "yearly": "Salane",
+  "perHour": "/st",
+  "perMonth": "/meh",
+  "perYear": "/sal",
+  "onDemand": "Li Daxwazê",
+  "reserved": "Veqetandî",
+  "spot": "Spot",
+  "savingsPlan": "Plana Teserûfê",
+  "noUpfront": "Bê Pêşdrav",
+  "partialUpfront": "Beşek Pêşdrav",
+  "allUpfront": "Hemû Pêşdrav",
+  "convertible": "Veguherbar",
+  "standard": "Standard",
+  "priceUnavailable": "Nîne"
+}

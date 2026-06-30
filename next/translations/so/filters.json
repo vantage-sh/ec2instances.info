@@ -1,0 +1,49 @@
+{
+  "search": "Raadi...",
+  "clearFilters": "Tirtir Shaandhaynta",
+  "filters": "Shaandhaynta",
+  "columns": "Tiirarka",
+  "region": "Gobolka",
+  "pricingUnit": "Unityada Qiimaha",
+  "cost": "Kharashka",
+  "reserved": "Xidhan",
+  "currency": "Lacagta",
+  "os": "Nidaamka Hawlgalka",
+  "duration": "Mudadda",
+  "reservedTerm": "Xilliga Xidhnaanshaha",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 Sanad Xidhan",
+    "reserved3yr": "3 Sanad Xidhan",
+    "spot": "Spot"
+  },
+  "compare": "Barbardhig",
+  "endCompare": "Jooji Barbardhigga",
+  "selected": "la doortay",
+  "showAll": "Tus Dhammaan",
+  "hideAll": "Qari Dhammaan",
+  "select": "Dooro...",
+  "searchLabel": "Raadi {label}...",
+  "noOptionsFound": "Lama helin wax xulasho ah.",
+  "searchColumns": "Raadi tiirarka...",
+  "noColumnsFound": "Lama helin tiirar.",
+  "selectAll": "Dooro Dhammaan",
+  "selectDefaults": "Dooro Caadiga",
+  "regionGroups": {
+    "frequentlyUsed": "Badanaa La Isticmaalo",
+    "chinaCloudRegions": "Gobolada Cloud Shiinaha",
+    "mainRegions": "Gobolada Ugu Muhiimsan",
+    "localZones": "Goobaha Maxalliga ah",
+    "wavelengthZones": "Goobaha Wavelength"
+  },
+  "export": {
+    "export": "Dhoofinta",
+    "downloadCsv": "Soo Dejiso CSV",
+    "copyCsv": "Koobiyee CSV",
+    "copyTsv": "Koobiyee TSV",
+    "copyMarkdown": "Koobiyee Jadwalka Markdown",
+    "csvCopied": "CSV waxaa loo koobiyeeyay clipboard-ka",
+    "tsvCopied": "TSV waxaa loo koobiyeeyay clipboard-ka",
+    "markdownCopied": "Jadwalka Markdown waxaa loo koobiyeeyay clipboard-ka"
+  }
+}

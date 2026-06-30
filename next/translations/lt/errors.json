@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Nepavyko įkelti duomenų",
+  "tryAgain": "Bandyti vėl",
+  "networkError": "Tinklo klaida. Patikrinkite ryšį.",
+  "unknownError": "Įvyko nežinoma klaida"
+}

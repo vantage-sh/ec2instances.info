@@ -1,0 +1,49 @@
+{
+  "search": "Поиск...",
+  "clearFilters": "Сбросить фильтры",
+  "filters": "Фильтры",
+  "columns": "Столбцы",
+  "region": "Регион",
+  "pricingUnit": "Единица цены",
+  "cost": "Стоимость",
+  "reserved": "Зарезервированный",
+  "currency": "Валюта",
+  "os": "Операционная система",
+  "duration": "Период",
+  "reservedTerm": "Срок резервирования",
+  "durations": {
+    "ondemand": "По требованию",
+    "reserved1yr": "Зарезервировано на 1 год",
+    "reserved3yr": "Зарезервировано на 3 года",
+    "spot": "Spot"
+  },
+  "compare": "Сравнить",
+  "endCompare": "Завершить сравнение",
+  "selected": "выбрано",
+  "showAll": "Показать все",
+  "hideAll": "Скрыть все",
+  "select": "Выбрать...",
+  "searchLabel": "Поиск {label}...",
+  "noOptionsFound": "Варианты не найдены.",
+  "searchColumns": "Поиск столбцов...",
+  "noColumnsFound": "Столбцы не найдены.",
+  "selectAll": "Выбрать все",
+  "selectDefaults": "Выбор по умолчанию",
+  "regionGroups": {
+    "frequentlyUsed": "Часто используемые",
+    "chinaCloudRegions": "Регионы облака Китая",
+    "mainRegions": "Основные регионы",
+    "localZones": "Локальные зоны",
+    "wavelengthZones": "Зоны Wavelength"
+  },
+  "export": {
+    "export": "Экспорт",
+    "downloadCsv": "Скачать CSV",
+    "copyCsv": "Копировать CSV",
+    "copyTsv": "Копировать TSV",
+    "copyMarkdown": "Копировать таблицу Markdown",
+    "csvCopied": "CSV скопирован в буфер обмена",
+    "tsvCopied": "TSV скопирован в буфер обмена",
+    "markdownCopied": "Таблица Markdown скопирована в буфер обмена"
+  }
+}

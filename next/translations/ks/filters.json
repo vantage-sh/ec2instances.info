@@ -1,0 +1,49 @@
+{
+  "search": "تَلاش...",
+  "clearFilters": "فِلٹَر صاف کَرو",
+  "filters": "فِلٹَر",
+  "columns": "کالَم",
+  "region": "خِطہ",
+  "pricingUnit": "قیمَت یونٹ",
+  "cost": "لاگَت",
+  "reserved": "Reserved",
+  "currency": "کَرَنسی",
+  "os": "آپریٹنگ سِسٹَم",
+  "duration": "مُدَت",
+  "reservedTerm": "Reserved مُدَت",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 سالہ Reserved",
+    "reserved3yr": "3 سالہ Reserved",
+    "spot": "Spot"
+  },
+  "compare": "موازنہ",
+  "endCompare": "موازنہ ختَم کَرو",
+  "selected": "مُنتَخَب",
+  "showAll": "سَبھ دِکھاو",
+  "hideAll": "سَبھ چُھپاو",
+  "select": "چُنو...",
+  "searchLabel": "تَلاش {label}...",
+  "noOptionsFound": "کوئی آپشن نَہ مِلیو۔",
+  "searchColumns": "کالَم تَلاش کَرو...",
+  "noColumnsFound": "کوئی کالَم نَہ مِلیو۔",
+  "selectAll": "سَبھ چُنو",
+  "selectDefaults": "ڈیفالٹ چُنو",
+  "regionGroups": {
+    "frequentlyUsed": "اکثَر استِعمال شُدہ",
+    "chinaCloudRegions": "چین کلاوَڈ خِطے",
+    "mainRegions": "اہَم خِطے",
+    "localZones": "مَقامی زون",
+    "wavelengthZones": "Wavelength زون"
+  },
+  "export": {
+    "export": "برآمَد",
+    "downloadCsv": "CSV ڈاؤنلوڈ کَرو",
+    "copyCsv": "CSV نَقل کَرو",
+    "copyTsv": "TSV نَقل کَرو",
+    "copyMarkdown": "Markdown ٹیبَل نَقل کَرو",
+    "csvCopied": "CSV کلِپ بورڈ پیٹھ نَقل کَرنہ گیو",
+    "tsvCopied": "TSV کلِپ بورڈ پیٹھ نَقل کَرنہ گیو",
+    "markdownCopied": "Markdown ٹیبَل کلِپ بورڈ پیٹھ نَقل کَرنہ گیو"
+  }
+}

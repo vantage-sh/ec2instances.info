@@ -1,0 +1,18 @@
+{
+  "hourly": "Tiap Jam",
+  "monthly": "Tiap Bulan",
+  "yearly": "Tiap Tahun",
+  "perHour": "/jam",
+  "perMonth": "/bulan",
+  "perYear": "/tahun",
+  "onDemand": "On-Demand",
+  "reserved": "Reserved",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Tanpa Bayar Dimuka",
+  "partialUpfront": "Bayar Dimuka Sebagian",
+  "allUpfront": "Bayar Dimuka Penuh",
+  "convertible": "Convertible",
+  "standard": "Standar",
+  "priceUnavailable": "T/A"
+}

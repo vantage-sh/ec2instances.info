@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Nalaganje podatkov je spodletelo",
+  "tryAgain": "Poskusi znova",
+  "networkError": "Napaka omrežja. Preverite svojo povezavo.",
+  "unknownError": "Prišlo je do neznane napake"
+}

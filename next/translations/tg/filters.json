@@ -1,0 +1,49 @@
+{
+  "search": "Ҷустуҷӯ...",
+  "clearFilters": "Тоза кардани Филтрҳо",
+  "filters": "Филтрҳо",
+  "columns": "Сутунҳо",
+  "region": "Минтақа",
+  "pricingUnit": "Воҳиди Нарх",
+  "cost": "Арзиш",
+  "reserved": "Захиравӣ",
+  "currency": "Асъор",
+  "os": "Системаи Оператсионӣ",
+  "duration": "Давомнокӣ",
+  "reservedTerm": "Мӯҳлати Захиравӣ",
+  "durations": {
+    "ondemand": "Дар Талаб",
+    "reserved1yr": "Захираи 1 Сола",
+    "reserved3yr": "Захираи 3 Сола",
+    "spot": "Spot"
+  },
+  "compare": "Муқоиса",
+  "endCompare": "Хотима Додани Муқоиса",
+  "selected": "интихобшуда",
+  "showAll": "Нишон додани Ҳама",
+  "hideAll": "Пинҳон кардани Ҳама",
+  "select": "Интихоб кунед...",
+  "searchLabel": "Ҷустуҷӯи {label}...",
+  "noOptionsFound": "Вариантҳо ёфт нашуданд.",
+  "searchColumns": "Ҷустуҷӯи сутунҳо...",
+  "noColumnsFound": "Сутунҳо ёфт нашуданд.",
+  "selectAll": "Интихоби Ҳама",
+  "selectDefaults": "Интихоби Пешфарзҳо",
+  "regionGroups": {
+    "frequentlyUsed": "Зиёд Истифодашаванда",
+    "chinaCloudRegions": "Минтақаҳои Абри Чин",
+    "mainRegions": "Минтақаҳои Асосӣ",
+    "localZones": "Минтақаҳои Маҳаллӣ",
+    "wavelengthZones": "Минтақаҳои Wavelength"
+  },
+  "export": {
+    "export": "Содир кардан",
+    "downloadCsv": "Зеркашии CSV",
+    "copyCsv": "Нусхагирии CSV",
+    "copyTsv": "Нусхагирии TSV",
+    "copyMarkdown": "Нусхагирии Ҷадвали Markdown",
+    "csvCopied": "CSV ба буфер нусхабардорӣ шуд",
+    "tsvCopied": "TSV ба буфер нусхабардорӣ шуд",
+    "markdownCopied": "Ҷадвали Markdown ба буфер нусхабардорӣ шуд"
+  }
+}

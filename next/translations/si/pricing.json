@@ -1,0 +1,18 @@
+{
+  "hourly": "පැය",
+  "monthly": "මාසිකව",
+  "yearly": "වාර්ෂිකව",
+  "perHour": "/පැය",
+  "perMonth": "/මාස",
+  "perYear": "/වර්ෂ",
+  "onDemand": "ඉල්ලා සිටීම අනුව",
+  "reserved": "රක්ෂිත",
+  "spot": "Spot",
+  "savingsPlan": "ඉතිරි කිරීමේ සැලැස්ම",
+  "noUpfront": "කිසිදු පෙර ගෙවීමක් නැත",
+  "partialUpfront": "අර්ධ පෙර ගෙවීම",
+  "allUpfront": "සියලු පෙර ගෙවීම",
+  "convertible": "පරිවර්තනීය",
+  "standard": "සාමාන්‍ය",
+  "priceUnavailable": "N/A"
+}

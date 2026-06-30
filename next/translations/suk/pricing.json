@@ -1,0 +1,18 @@
+{
+  "hourly": "Kwa Saa",
+  "monthly": "Kwa Mwezi",
+  "yearly": "Kwa Mwaka",
+  "perHour": "/saa",
+  "perMonth": "/mwezi",
+  "perYear": "/mwaka",
+  "onDemand": "Kwa Uhitaji",
+  "reserved": "Iliyohifadhiwa",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Bila Malipo ya Awali",
+  "partialUpfront": "Malipo ya Awali ya Sehemu",
+  "allUpfront": "Malipo Yote ya Awali",
+  "convertible": "Convertible",
+  "standard": "Kawaida",
+  "priceUnavailable": "H/T"
+}

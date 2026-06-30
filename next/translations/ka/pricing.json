@@ -1,0 +1,18 @@
+{
+  "hourly": "საათობრივი",
+  "monthly": "ყოველთვიური",
+  "yearly": "ყოველწლიური",
+  "perHour": "/სთ",
+  "perMonth": "/თვ",
+  "perYear": "/წ",
+  "onDemand": "მოთხოვნით",
+  "reserved": "სარეზერვო",
+  "spot": "Spot",
+  "savingsPlan": "დანაზოგის გეგმა",
+  "noUpfront": "წ. გ. არ.",
+  "partialUpfront": "ნ. წ. გ.",
+  "allUpfront": "სრ. წ. გ.",
+  "convertible": "კ.",
+  "standard": "სტ.",
+  "priceUnavailable": "N/A"
+}

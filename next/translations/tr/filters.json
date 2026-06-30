@@ -1,0 +1,49 @@
+{
+  "search": "Ara...",
+  "clearFilters": "Filtreleri Temizle",
+  "filters": "Filtreler",
+  "columns": "Sütunlar",
+  "region": "Bölge",
+  "pricingUnit": "Fiyatlandırma Birimi",
+  "cost": "Maliyet",
+  "reserved": "Rezerve",
+  "currency": "Para Birimi",
+  "os": "İşletim Sistemi",
+  "duration": "Süre",
+  "reservedTerm": "Rezervasyon Süresi",
+  "durations": {
+    "ondemand": "İsteğe Bağlı",
+    "reserved1yr": "1 Yıl Rezerve",
+    "reserved3yr": "3 Yıl Rezerve",
+    "spot": "Spot"
+  },
+  "compare": "Karşılaştır",
+  "endCompare": "Karşılaştırmayı Bitir",
+  "selected": "seçildi",
+  "showAll": "Tümünü Göster",
+  "hideAll": "Tümünü Gizle",
+  "select": "Seçin...",
+  "searchLabel": "{label} ara...",
+  "noOptionsFound": "Seçenek bulunamadı.",
+  "searchColumns": "Sütun ara...",
+  "noColumnsFound": "Sütun bulunamadı.",
+  "selectAll": "Tümünü Seç",
+  "selectDefaults": "Varsayılanları Seç",
+  "regionGroups": {
+    "frequentlyUsed": "Sık Kullanılan",
+    "chinaCloudRegions": "Çin Bulut Bölgeleri",
+    "mainRegions": "Ana Bölgeler",
+    "localZones": "Yerel Bölgeler",
+    "wavelengthZones": "Wavelength Bölgeleri"
+  },
+  "export": {
+    "export": "Dışa Aktar",
+    "downloadCsv": "CSV İndir",
+    "copyCsv": "CSV Kopyala",
+    "copyTsv": "TSV Kopyala",
+    "copyMarkdown": "Markdown Tablosu Kopyala",
+    "csvCopied": "CSV panoya kopyalandı",
+    "tsvCopied": "TSV panoya kopyalandı",
+    "markdownCopied": "Markdown tablosu panoya kopyalandı"
+  }
+}

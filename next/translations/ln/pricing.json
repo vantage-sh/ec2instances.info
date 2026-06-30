@@ -1,0 +1,18 @@
+{
+  "hourly": "Na Ngonga",
+  "monthly": "Na Sanza",
+  "yearly": "Na Mobu",
+  "perHour": "/ngonga",
+  "perMonth": "/sanza",
+  "perYear": "/mobu",
+  "onDemand": "Na Libondeli",
+  "reserved": "Ebomami",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Mbongo ya Liboso Ezali Te",
+  "partialUpfront": "Ndambo ya Mbongo ya Liboso",
+  "allUpfront": "Mbongo Yonso ya Liboso",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "E/Z"
+}

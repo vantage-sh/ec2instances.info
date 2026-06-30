@@ -1,0 +1,49 @@
+{
+  "search": "Претрага...",
+  "clearFilters": "Очисти филтере",
+  "filters": "Филтери",
+  "columns": "Колоне",
+  "region": "Регион",
+  "pricingUnit": "Јединица цене",
+  "cost": "Цена",
+  "reserved": "Резервисано",
+  "currency": "Валута",
+  "os": "Оперативни систем",
+  "duration": "Трајање",
+  "reservedTerm": "Резервисани период",
+  "durations": {
+    "ondemand": "По захтеву",
+    "reserved1yr": "Резервисано 1 годину",
+    "reserved3yr": "Резервисано 3 године",
+    "spot": "Spot"
+  },
+  "compare": "Упоредити",
+  "endCompare": "Завршити поређење",
+  "selected": "изабрано",
+  "showAll": "Прикажи све",
+  "hideAll": "Сакриј све",
+  "select": "Изабери...",
+  "searchLabel": "Претражите {label}...",
+  "noOptionsFound": "Нема пронађених опција.",
+  "searchColumns": "Претражите колоне...",
+  "noColumnsFound": "Нема пронађених колона.",
+  "selectAll": "Изабери све",
+  "selectDefaults": "Изабери подразумеване",
+  "regionGroups": {
+    "frequentlyUsed": "Често коришћени",
+    "chinaCloudRegions": "Кинески Cloud региони",
+    "mainRegions": "Главни региони",
+    "localZones": "Локалне зоне",
+    "wavelengthZones": "Wavelength зоне"
+  },
+  "export": {
+    "export": "Извоз",
+    "downloadCsv": "Преузмите CSV",
+    "copyCsv": "Копирајте CSV",
+    "copyTsv": "Копирајте TSV",
+    "copyMarkdown": "Копирајте Markdown табелу",
+    "csvCopied": "CSV копиран у привремену меморију",
+    "tsvCopied": "TSV копиран у привремену меморију",
+    "markdownCopied": "Markdown табела копирана у привремену меморију"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "hourly": "Po satu",
+  "monthly": "Mjesečno",
+  "yearly": "Godišnje",
+  "perHour": "/sat",
+  "perMonth": "/mjes.",
+  "perYear": "/god.",
+  "onDemand": "On-Demand",
+  "reserved": "Rezervirano",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Bez predujma",
+  "partialUpfront": "Djelomični predujam",
+  "allUpfront": "Puni predujam",
+  "convertible": "Konvertibilno",
+  "standard": "Standardno",
+  "priceUnavailable": "N/A"
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Bilatu...",
+  "clearFilters": "Iragazkiak garbitu",
+  "filters": "Iragazkiak",
+  "columns": "Zutabeak",
+  "region": "Eskualdea",
+  "pricingUnit": "Prezioen unitatea",
+  "cost": "Kostua",
+  "reserved": "Erreserbatua",
+  "currency": "Moneta",
+  "os": "Eragile-sistema",
+  "duration": "Iraupena",
+  "reservedTerm": "Erreserba epea",
+  "durations": {
+    "ondemand": "Eskaeraren arabera",
+    "reserved1yr": "1 Urteko erreserba",
+    "reserved3yr": "3 Urteko erreserba",
+    "spot": "Spot"
+  },
+  "compare": "Alderatu",
+  "endCompare": "Alderaketa amaitu",
+  "selected": "hautatuta",
+  "showAll": "Guztiak erakutsi",
+  "hideAll": "Guztiak ezkutatu",
+  "select": "Hautatu...",
+  "searchLabel": "Bilatu {label}...",
+  "noOptionsFound": "Ez da aukerarik aurkitu.",
+  "searchColumns": "Bilatu zutabeak...",
+  "noColumnsFound": "Ez da zutaberik aurkitu.",
+  "selectAll": "Guztiak hautatu",
+  "selectDefaults": "Lehenespenak hautatu",
+  "regionGroups": {
+    "frequentlyUsed": "Maiz erabilitakoak",
+    "chinaCloudRegions": "Txinako hodei eskualdeak",
+    "mainRegions": "Eskualde nagusiak",
+    "localZones": "Tokiko guneak",
+    "wavelengthZones": "Wavelength guneak"
+  },
+  "export": {
+    "export": "Esportatu",
+    "downloadCsv": "CSV deskargatu",
+    "copyCsv": "CSV kopiatu",
+    "copyTsv": "TSV kopiatu",
+    "copyMarkdown": "Markdown taula kopiatu",
+    "csvCopied": "CSV arbelera kopiatu da",
+    "tsvCopied": "TSV arbelera kopiatu da",
+    "markdownCopied": "Markdown taula arbelera kopiatu da"
+  }
+}

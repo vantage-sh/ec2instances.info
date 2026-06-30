@@ -1,0 +1,49 @@
+{
+  "search": "جستجو...",
+  "clearFilters": "پاک کردن فیلترها",
+  "filters": "فیلترها",
+  "columns": "ستون‌ها",
+  "region": "منطقه",
+  "pricingUnit": "واحد قیمت‌گذاری",
+  "cost": "هزینه",
+  "reserved": "رزرو",
+  "currency": "واحد پول",
+  "os": "سیستم‌عامل",
+  "duration": "مدت",
+  "reservedTerm": "دوره رزرو",
+  "durations": {
+    "ondemand": "درخواستی",
+    "reserved1yr": "رزرو ۱ ساله",
+    "reserved3yr": "رزرو ۳ ساله",
+    "spot": "Spot"
+  },
+  "compare": "مقایسه",
+  "endCompare": "پایان مقایسه",
+  "selected": "انتخاب‌شده",
+  "showAll": "نمایش همه",
+  "hideAll": "پنهان کردن همه",
+  "select": "انتخاب...",
+  "searchLabel": "جستجوی {label}...",
+  "noOptionsFound": "گزینه‌ای یافت نشد.",
+  "searchColumns": "جستجوی ستون‌ها...",
+  "noColumnsFound": "ستونی یافت نشد.",
+  "selectAll": "انتخاب همه",
+  "selectDefaults": "انتخاب پیش‌فرض‌ها",
+  "regionGroups": {
+    "frequentlyUsed": "پرکاربرد",
+    "chinaCloudRegions": "مناطق ابری چین",
+    "mainRegions": "مناطق اصلی",
+    "localZones": "مناطق محلی",
+    "wavelengthZones": "مناطق Wavelength"
+  },
+  "export": {
+    "export": "خروجی",
+    "downloadCsv": "دانلود CSV",
+    "copyCsv": "کپی CSV",
+    "copyTsv": "کپی TSV",
+    "copyMarkdown": "کپی جدول Markdown",
+    "csvCopied": "CSV کپی شد",
+    "tsvCopied": "TSV کپی شد",
+    "markdownCopied": "جدول Markdown کپی شد"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "search": "వెతకండి...",
+  "clearFilters": "ఫిల్టర్లు తీసివేయండి",
+  "filters": "ఫిల్టర్లు",
+  "columns": "నిలువు వరుసలు",
+  "region": "ప్రాంతం",
+  "pricingUnit": "ధర యూనిట్",
+  "cost": "వ్యయం",
+  "reserved": "రిజర్వ్ చేయబడింది",
+  "currency": "కరెన్సీ",
+  "os": "ఆపరేటింగ్ సిస్టం",
+  "duration": "వ్యవధి",
+  "reservedTerm": "రిజర్వేషన్ కాలం",
+  "durations": {
+    "ondemand": "ఆన్ డిమాండ్",
+    "reserved1yr": "1 సంవత్సరం రిజర్వ్",
+    "reserved3yr": "3 సంవత్సరాల రిజర్వ్",
+    "spot": "స్పాట్"
+  },
+  "compare": "పోల్చండి",
+  "endCompare": "పోల్చడం ముగించండి",
+  "selected": "ఎంచుకున్నవి",
+  "showAll": "అన్నీ చూపించు",
+  "hideAll": "అన్నీ దాచు",
+  "select": "ఎంచుకోండి...",
+  "searchLabel": "{label} వెతకండి...",
+  "noOptionsFound": "ఎంపికలు కనుగొనబడలేదు.",
+  "searchColumns": "నిలువు వరుసలు వెతకండి...",
+  "noColumnsFound": "నిలువు వరుసలు కనుగొనబడలేదు.",
+  "selectAll": "అన్నీ ఎంచుకోండి",
+  "selectDefaults": "డిఫాల్ట్‌లు ఎంచుకోండి",
+  "regionGroups": {
+    "frequentlyUsed": "తరచుగా వాడేవి",
+    "chinaCloudRegions": "చైనా క్లౌడ్ ప్రాంతాలు",
+    "mainRegions": "ప్రధాన ప్రాంతాలు",
+    "localZones": "స్థానిక జోన్లు",
+    "wavelengthZones": "Wavelength జోన్లు"
+  },
+  "export": {
+    "export": "ఎగుమతి",
+    "downloadCsv": "CSV డౌన్‌లోడ్ చేయండి",
+    "copyCsv": "CSV కాపీ చేయండి",
+    "copyTsv": "TSV కాపీ చేయండి",
+    "copyMarkdown": "Markdown పట్టిక కాపీ చేయండి",
+    "csvCopied": "CSV క్లిప్‌బోర్డ్‌కు కాపీ అయింది",
+    "tsvCopied": "TSV క్లిప్‌బోర్డ్‌కు కాపీ అయింది",
+    "markdownCopied": "Markdown పట్టిక క్లిప్‌బోర్డ్‌కు కాపీ అయింది"
+  }
+}

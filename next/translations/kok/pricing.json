@@ -1,0 +1,18 @@
+{
+  "hourly": "प्रति वर",
+  "monthly": "म्हयन्याळी",
+  "yearly": "वर्साळी",
+  "perHour": "/वर",
+  "perMonth": "/म्हयनो",
+  "perYear": "/वर्स",
+  "onDemand": "ऑन-डिमांड",
+  "reserved": "राखीव",
+  "spot": "स्पॉट",
+  "savingsPlan": "बचत योजना",
+  "noUpfront": "अगोदर नाय",
+  "partialUpfront": "आंशिक अगोदर",
+  "allUpfront": "सगळें अगोदर",
+  "convertible": "परिवर्तनीय",
+  "standard": "मानक",
+  "priceUnavailable": "N/A"
+}

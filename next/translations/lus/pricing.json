@@ -1,0 +1,18 @@
+{
+  "hourly": "Dar tin",
+  "monthly": "Thla tin",
+  "yearly": "Kum tin",
+  "perHour": "/dar",
+  "perMonth": "/thla",
+  "perYear": "/kum",
+  "onDemand": "On-Demand",
+  "reserved": "Reserved",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Hmaa Hlan Lo",
+  "partialUpfront": "Hmaa Hlan Dangte",
+  "allUpfront": "Hmaa Hlan Thleng",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

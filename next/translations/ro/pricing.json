@@ -1,0 +1,18 @@
+{
+  "hourly": "Orar",
+  "monthly": "Lunar",
+  "yearly": "Anual",
+  "perHour": "/oră",
+  "perMonth": "/lună",
+  "perYear": "/an",
+  "onDemand": "La Cerere",
+  "reserved": "Rezervat",
+  "spot": "Spot",
+  "savingsPlan": "Plan de Economii",
+  "noUpfront": "Fără Plată Inițială",
+  "partialUpfront": "Plată Inițială Parțială",
+  "allUpfront": "Plată Inițială Totală",
+  "convertible": "Convertibil",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

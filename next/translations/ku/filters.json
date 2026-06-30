@@ -1,0 +1,49 @@
+{
+  "search": "Lêbigere...",
+  "clearFilters": "Parzûnan Paqij Bike",
+  "filters": "Parzûn",
+  "columns": "Stûn",
+  "region": "Herêm",
+  "pricingUnit": "Yekeya Bihayê",
+  "cost": "Lêçûn",
+  "reserved": "Veqetandî",
+  "currency": "Dirav",
+  "os": "Pergala Xebatê",
+  "duration": "Dem",
+  "reservedTerm": "Serdema Veqetandinê",
+  "durations": {
+    "ondemand": "Li Daxwazê",
+    "reserved1yr": "1 Sal Veqetandî",
+    "reserved3yr": "3 Sal Veqetandî",
+    "spot": "Spot"
+  },
+  "compare": "Bide ber hev",
+  "endCompare": "Berawirdkirinê biqede",
+  "selected": "hilbijartî",
+  "showAll": "Hemûyan Nîşan Bide",
+  "hideAll": "Hemûyan Veşêre",
+  "select": "Hilbijêre...",
+  "searchLabel": "{label} lêbigere...",
+  "noOptionsFound": "Vebijêrk nehat dîtin.",
+  "searchColumns": "Stûnan lêbigere...",
+  "noColumnsFound": "Stûn nehat dîtin.",
+  "selectAll": "Hemûyan Hilbijêre",
+  "selectDefaults": "Xwerûyan Hilbijêre",
+  "regionGroups": {
+    "frequentlyUsed": "Zêde Tê Bikaranîn",
+    "chinaCloudRegions": "Herêmên Cloud ya Chinaê",
+    "mainRegions": "Herêmên Sereke",
+    "localZones": "Herêmên Herêmî",
+    "wavelengthZones": "Herêmên Wavelength"
+  },
+  "export": {
+    "export": "Derxistin",
+    "downloadCsv": "CSV Dakêşîne",
+    "copyCsv": "CSV Kopî Bike",
+    "copyTsv": "TSV Kopî Bike",
+    "copyMarkdown": "Tabloya Markdown Kopî Bike",
+    "csvCopied": "CSV li clipboard kopî bû",
+    "tsvCopied": "TSV li clipboard kopî bû",
+    "markdownCopied": "Tabloya Markdown li clipboard kopî bû"
+  }
+}

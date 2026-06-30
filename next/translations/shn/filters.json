@@ -1,0 +1,49 @@
+{
+  "search": "ႁႃ...",
+  "clearFilters": "ၸွမ်းၵိတ်ႇ",
+  "filters": "ၵိတ်ႇ",
+  "columns": "ၶေႃႈမုၼ်း",
+  "region": "ပိုၼ်ႉတီႈ",
+  "pricingUnit": "ၶၼ်ၶၢဝ်ႇ",
+  "cost": "ၶၼ်",
+  "reserved": "မၵ်းၵွင်ႉ",
+  "currency": "ငိုၼ်း",
+  "os": "ပ်ႉၸၢၼ်ႈ",
+  "duration": "ၶၢဝ်းတၢင်း",
+  "reservedTerm": "မၵ်းၵွင်ႉ ၶၢဝ်းတၢင်း",
+  "durations": {
+    "ondemand": "ၸွမ်းလွင်ႈၸႂ်ႈ",
+    "reserved1yr": "မၵ်းၵွင်ႉ ၼိုင်ႈပီ",
+    "reserved3yr": "မၵ်းၵွင်ႉ သၢမ်ပီ",
+    "spot": "ၼႃႈတီႈ"
+  },
+  "compare": "မိူၼ်ပဵၼ်",
+  "endCompare": "ယဝ်ႉမိူၼ်ပဵၼ်",
+  "selected": "လိူၵ်ႈ",
+  "showAll": "ႁူဝ်တင်းမူတ်း",
+  "hideAll": "ပိုပ်ႇတင်းမူတ်း",
+  "select": "လိူၵ်ႈ...",
+  "searchLabel": "ႁႃ {label}...",
+  "noOptionsFound": "ဢမ်ႇထူပ်းႁၼ်",
+  "searchColumns": "ႁႃ ၶေႃႈမုၼ်း...",
+  "noColumnsFound": "ဢမ်ႇထူပ်းႁၼ် ၶေႃႈမုၼ်း",
+  "selectAll": "လိူၵ်ႈတင်းမူတ်း",
+  "selectDefaults": "လိူၵ်ႈပိုၼ်ႉ",
+  "regionGroups": {
+    "frequentlyUsed": "ၸႂ်ႉမၼ်ႈ",
+    "chinaCloudRegions": "Cloud ပိုၼ်ႉတီႈၶႄႇ",
+    "mainRegions": "ပိုၼ်ႉတီႈလူင်",
+    "localZones": "ပိုၼ်ႉတီႈမိူင်း",
+    "wavelengthZones": "Wavelength Zones"
+  },
+  "export": {
+    "export": "ဢွၵ်ႇ",
+    "downloadCsv": "CSV ဢဝ်ၵႂႃႇ",
+    "copyCsv": "CSV ၶွပ်ႊပီႊ",
+    "copyTsv": "TSV ၶွပ်ႊပီႊ",
+    "copyMarkdown": "Markdown ၶွပ်ႊပီႊ",
+    "csvCopied": "CSV ၶွပ်ႊပီႊယဝ်ႉ",
+    "tsvCopied": "TSV ၶွပ်ႊပီႊယဝ်ႉ",
+    "markdownCopied": "Markdown ၶွပ်ႊပီႊယဝ်ႉ"
+  }
+}

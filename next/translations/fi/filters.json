@@ -1,0 +1,49 @@
+{
+  "search": "Haku...",
+  "clearFilters": "Tyhjennä suodattimet",
+  "filters": "Suodattimet",
+  "columns": "Sarakkeet",
+  "region": "Alue",
+  "pricingUnit": "Hinnoitteluyksikkö",
+  "cost": "Hinta",
+  "reserved": "Varattu",
+  "currency": "Valuutta",
+  "os": "Käyttöjärjestelmä",
+  "duration": "Kesto",
+  "reservedTerm": "Varauskausi",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 vuoden varaus",
+    "reserved3yr": "3 vuoden varaus",
+    "spot": "Spot"
+  },
+  "compare": "Vertaa",
+  "endCompare": "Lopeta vertailu",
+  "selected": "valittu",
+  "showAll": "Näytä kaikki",
+  "hideAll": "Piilota kaikki",
+  "select": "Valitse...",
+  "searchLabel": "Hae {label}...",
+  "noOptionsFound": "Vaihtoehtoja ei löydy.",
+  "searchColumns": "Hae sarakkeita...",
+  "noColumnsFound": "Sarakkeita ei löydy.",
+  "selectAll": "Valitse kaikki",
+  "selectDefaults": "Valitse oletukset",
+  "regionGroups": {
+    "frequentlyUsed": "Usein käytetyt",
+    "chinaCloudRegions": "Kiinan pilvialueet",
+    "mainRegions": "Pääalueet",
+    "localZones": "Paikalliset vyöhykkeet",
+    "wavelengthZones": "Wavelength-vyöhykkeet"
+  },
+  "export": {
+    "export": "Vie",
+    "downloadCsv": "Lataa CSV",
+    "copyCsv": "Kopioi CSV",
+    "copyTsv": "Kopioi TSV",
+    "copyMarkdown": "Kopioi Markdown-taulukko",
+    "csvCopied": "CSV kopioitu leikepöydälle",
+    "tsvCopied": "TSV kopioitu leikepöydälle",
+    "markdownCopied": "Markdown-taulukko kopioitu leikepöydälle"
+  }
+}

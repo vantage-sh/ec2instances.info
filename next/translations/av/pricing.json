@@ -1,0 +1,18 @@
+{
+  "hourly": "СагIатдалъ",
+  "monthly": "БатIиядалъ",
+  "yearly": "Сондалъ",
+  "perHour": "/сагI.",
+  "perMonth": "/бат.",
+  "perYear": "/сон.",
+  "onDemand": "On-Demand",
+  "reserved": "РезервалъулаI",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "ТIапIаб Аванс ГьечIо",
+  "partialUpfront": "ХайилаI Аванс",
+  "allUpfront": "Цоял Аванс",
+  "convertible": "Конвертируемый",
+  "standard": "ЧIухъаб",
+  "priceUnavailable": "Н/Г"
+}

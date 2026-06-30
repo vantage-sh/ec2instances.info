@@ -1,0 +1,18 @@
+{
+  "hourly": "ລາຍຊົ່ວໂມງ",
+  "monthly": "ລາຍເດືອນ",
+  "yearly": "ລາຍປີ",
+  "perHour": "/ຊມ",
+  "perMonth": "/ດ",
+  "perYear": "/ປ",
+  "onDemand": "ຕາມຄວາມຕ້ອງການ",
+  "reserved": "ສຳຮອງ",
+  "spot": "Spot",
+  "savingsPlan": "ແຜນປະຢັດ",
+  "noUpfront": "ບໍ່ຈ່າຍລ່ວງໜ້າ",
+  "partialUpfront": "ຈ່າຍລ່ວງໜ້າບາງສ່ວນ",
+  "allUpfront": "ຈ່າຍລ່ວງໜ້າທັງໝົດ",
+  "convertible": "ປ່ຽນໄດ້",
+  "standard": "ມາດຕະຖານ",
+  "priceUnavailable": "N/A"
+}

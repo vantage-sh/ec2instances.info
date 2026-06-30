@@ -1,0 +1,18 @@
+{
+  "hourly": "മണിക്കൂർ",
+  "monthly": "മാസം",
+  "yearly": "വർഷം",
+  "perHour": "/മണിക്കൂർ",
+  "perMonth": "/മാസം",
+  "perYear": "/വർഷം",
+  "onDemand": "ഓൺ-ഡിമാൻഡ്",
+  "reserved": "റിസർവ്ഡ്",
+  "spot": "സ്പോട്ട്",
+  "savingsPlan": "സേവിംഗ്സ് പ്ലാൻ",
+  "noUpfront": "മുൻകൂർ ഇല്ല",
+  "partialUpfront": "ഭാഗിക മുൻകൂർ",
+  "allUpfront": "മുഴുവൻ മുൻകൂർ",
+  "convertible": "കൺവേർടിബിൾ",
+  "standard": "സ്റ്റാൻഡേർഡ്",
+  "priceUnavailable": "N/A"
+}

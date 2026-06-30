@@ -1,0 +1,18 @@
+{
+  "hourly": "Ci Waxtu",
+  "monthly": "Ci Weer",
+  "yearly": "Ci At",
+  "perHour": "/waxtu",
+  "perMonth": "/weer",
+  "perYear": "/at",
+  "onDemand": "Ci Dëmm",
+  "reserved": "Def bi",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Amul Jaamu",
+  "partialUpfront": "Jaamu bu Tenn",
+  "allUpfront": "Jaamu yépp",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "D/Y"
+}

@@ -1,0 +1,18 @@
+{
+  "hourly": "Ku isaha",
+  "monthly": "Buri kwezi",
+  "yearly": "Buri mwaka",
+  "perHour": "/isaha",
+  "perMonth": "/ukwezi",
+  "perYear": "/umwaka",
+  "onDemand": "Ibisabwa",
+  "reserved": "Bihariwe",
+  "spot": "Spot",
+  "savingsPlan": "Gahunda yo kugabanya",
+  "noUpfront": "Nta mbere",
+  "partialUpfront": "Igice c'imbere",
+  "allUpfront": "Byose mbere",
+  "convertible": "Ihindurwa",
+  "standard": "Isanzwe",
+  "priceUnavailable": "N/A"
+}

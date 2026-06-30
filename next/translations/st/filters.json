@@ -1,0 +1,49 @@
+{
+  "search": "Batla...",
+  "clearFilters": "Tlosa Lihlophiso",
+  "filters": "Lihlophiso",
+  "columns": "Likolomo",
+  "region": "Sebaka",
+  "pricingUnit": "Yuniti ya Theko",
+  "cost": "Theko",
+  "reserved": "Reserved",
+  "currency": "Chelete",
+  "os": "Tsamaiso ya Sethembu",
+  "duration": "Nako",
+  "reservedTerm": "Nako ea Reserved",
+  "durations": {
+    "ondemand": "Ka Tlhoko",
+    "reserved1yr": "Reserved ya Selemo se 1",
+    "reserved3yr": "Reserved ya Lilemo tse 3",
+    "spot": "Spot"
+  },
+  "compare": "Bapisa",
+  "endCompare": "Qetella ho Bapisa",
+  "selected": "e khethilwe",
+  "showAll": "Bonts'a Tsohle",
+  "hideAll": "Pata Tsohle",
+  "select": "Khetha...",
+  "searchLabel": "Batla {label}...",
+  "noOptionsFound": "Ha ho khetho e fumaneheng.",
+  "searchColumns": "Batla likolomo...",
+  "noColumnsFound": "Ha ho likolomo tse fumaneheng.",
+  "selectAll": "Khetha Tsohle",
+  "selectDefaults": "Khetha Tse Tlwaelehileng",
+  "regionGroups": {
+    "frequentlyUsed": "Tse Sebelisang Hangata",
+    "chinaCloudRegions": "Libaka tsa Leru la China",
+    "mainRegions": "Libaka tsa Motheo",
+    "localZones": "Dibaka tsa Lehae",
+    "wavelengthZones": "Dibaka tsa Wavelength"
+  },
+  "export": {
+    "export": "Romela Kantle",
+    "downloadCsv": "Laola CSV",
+    "copyCsv": "Kopitsa CSV",
+    "copyTsv": "Kopitsa TSV",
+    "copyMarkdown": "Kopitsa Tafole ya Markdown",
+    "csvCopied": "CSV e kopitsitswe ho clipboard",
+    "tsvCopied": "TSV e kopitsitswe ho clipboard",
+    "markdownCopied": "Tafole ya Markdown e kopitsitswe ho clipboard"
+  }
+}

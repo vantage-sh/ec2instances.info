@@ -1,0 +1,18 @@
+{
+  "hourly": "Stonnlech",
+  "monthly": "Méindlech",
+  "yearly": "Jährlech",
+  "perHour": "/St.",
+  "perMonth": "/Mt.",
+  "perYear": "/J.",
+  "onDemand": "On Demand",
+  "reserved": "Reservéiert",
+  "spot": "Spot",
+  "savingsPlan": "Spuerplang",
+  "noUpfront": "Keng Viraus-Bezuelung",
+  "partialUpfront": "Deelweis Viraus-Bezuelung",
+  "allUpfront": "Komplett Viraus-Bezuelung",
+  "convertible": "Wandelbar",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

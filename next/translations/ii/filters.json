@@ -1,0 +1,49 @@
+{
+  "search": "ꌌꀧ...",
+  "clearFilters": "ꌌꁌꑌ ꅌꌋꑌ",
+  "filters": "ꌌꁌꑌ",
+  "columns": "ꀕꄩꑌ",
+  "region": "ꁨꉆ",
+  "pricingUnit": "ꀊꋏ Unit",
+  "cost": "ꀊꋏ",
+  "reserved": "Reserved",
+  "currency": "ꋊꆈ",
+  "os": "Operating System",
+  "duration": "ꊰꁧꑌ",
+  "reservedTerm": "Reserved Term",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Reserved ꊈ ꈓ",
+    "reserved3yr": "Reserved ꊪ ꈓ",
+    "spot": "Spot"
+  },
+  "compare": "ꀧꊂꑌ",
+  "endCompare": "ꀧꊂꑌ ꄮꑌ",
+  "selected": "ꀂꄮꑌ ꃀ",
+  "showAll": "ꊌꉌꑌ ꀕꌩꑌ",
+  "hideAll": "ꊌꉌꑌ ꀋꌋꑌ",
+  "select": "ꀂꄮꑌ...",
+  "searchLabel": "{label} ꌌꀧ...",
+  "noOptionsFound": "ꀂꄮꑌ ꀋꆹ.",
+  "searchColumns": "ꀕꄩꑌ ꌌꀧ...",
+  "noColumnsFound": "ꀕꄩꑌ ꀋꆹ.",
+  "selectAll": "ꊌꉌꑌ ꀂꄮꑌ",
+  "selectDefaults": "ꃀꄓ ꀂꄮꑌ",
+  "regionGroups": {
+    "frequentlyUsed": "ꃃꀧꑌ ꈋꉌꑌ",
+    "chinaCloudRegions": "ꑍꋌ Cloud ꁨꉆ",
+    "mainRegions": "ꀎꄓ ꁨꉆ",
+    "localZones": "ꃀꄓ Zone",
+    "wavelengthZones": "Wavelength Zone"
+  },
+  "export": {
+    "export": "ꄷꄮꑌ",
+    "downloadCsv": "CSV ꄷꄮꑌ",
+    "copyCsv": "CSV ꀕꋊꑌ",
+    "copyTsv": "TSV ꀕꋊꑌ",
+    "copyMarkdown": "Markdown Table ꀕꋊꑌ",
+    "csvCopied": "CSV clipboard ꀕ ꀕꋊꑌ ꃀ",
+    "tsvCopied": "TSV clipboard ꀕ ꀕꋊꑌ ꃀ",
+    "markdownCopied": "Markdown table clipboard ꀕ ꀕꋊꑌ ꃀ"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "hourly": "Ka Hora",
+  "monthly": "Ka Kgwedi",
+  "yearly": "Ka Ngwaga",
+  "perHour": "/hora",
+  "perMonth": "/kgwedi",
+  "perYear": "/ngwaga",
+  "onDemand": "Ka Nyako",
+  "reserved": "Reserved",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Ga go Tefo ya Pele",
+  "partialUpfront": "Karolo ya Tefo ya Pele",
+  "allUpfront": "Tefo Yohle ya Pele",
+  "convertible": "Convertible",
+  "standard": "Motheo",
+  "priceUnavailable": "A.A."
+}

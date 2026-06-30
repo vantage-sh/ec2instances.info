@@ -1,0 +1,49 @@
+{
+  "search": "Nadi...",
+  "clearFilters": "Sefsex Imagraden",
+  "filters": "Imagraden",
+  "columns": "Tizrawatin",
+  "region": "Tamnaḍt",
+  "pricingUnit": "Tangalt n Yiswiren",
+  "cost": "Amḥal",
+  "reserved": "Yettwaḥebs",
+  "currency": "Tadrimt",
+  "os": "Anagraw n Tmsisit",
+  "duration": "Tallit",
+  "reservedTerm": "Tallit n Uḥbus",
+  "durations": {
+    "ondemand": "Seg Uzref",
+    "reserved1yr": "Yettwaḥebs 1 Aseggwas",
+    "reserved3yr": "Yettwaḥebs 3 Iseggwanen",
+    "spot": "Spot"
+  },
+  "compare": "Smeskemṭ",
+  "endCompare": "Kkes Tasmeskemṭ",
+  "selected": "yettwafran",
+  "showAll": "Sken Meṛṛa",
+  "hideAll": "Ffer Meṛṛa",
+  "select": "Fren...",
+  "searchLabel": "Nadi {label}...",
+  "noOptionsFound": "Ulac ibḍulen.",
+  "searchColumns": "Nadi tizrawatin...",
+  "noColumnsFound": "Ulac tizrawatin.",
+  "selectAll": "Fren Meṛṛa",
+  "selectDefaults": "Fren Imkanen Imenzayen",
+  "regionGroups": {
+    "frequentlyUsed": "Imsebqanen",
+    "chinaCloudRegions": "Timnaḍin n Cloud n Ccin",
+    "mainRegions": "Timnaḍin Timensayin",
+    "localZones": "Tiwennaḍin Tidigliyin",
+    "wavelengthZones": "Tiwennaḍin n Wavelength"
+  },
+  "export": {
+    "export": "Sifeḍ",
+    "downloadCsv": "Sider CSV",
+    "copyCsv": "Nɣel CSV",
+    "copyTsv": "Nɣel TSV",
+    "copyMarkdown": "Nɣel Tibḍawt n Markdown",
+    "csvCopied": "CSV yettwaɣra",
+    "tsvCopied": "TSV yettwaɣra",
+    "markdownCopied": "Tibḍawt n Markdown tettwaɣra"
+  }
+}

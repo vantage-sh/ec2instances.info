@@ -1,0 +1,18 @@
+{
+  "hourly": "Bawat Oras",
+  "monthly": "Buwanan",
+  "yearly": "Taunan",
+  "perHour": "/oras",
+  "perMonth": "/buwan",
+  "perYear": "/taon",
+  "onDemand": "On-Demand",
+  "reserved": "Reserved",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Walang Paunang Bayad",
+  "partialUpfront": "Bahagyang Paunang Bayad",
+  "allUpfront": "Buong Paunang Bayad",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

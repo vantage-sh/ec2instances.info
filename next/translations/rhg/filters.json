@@ -1,0 +1,49 @@
+{
+  "search": "Hándo...",
+  "clearFilters": "Filter Soráo",
+  "filters": "Filter",
+  "columns": "Kolám",
+  "region": "Élaka",
+  "pricingUnit": "Dám Ekok",
+  "cost": "Dám",
+  "reserved": "Rákkhan",
+  "currency": "Taka",
+  "os": "Operoting Sistém",
+  "duration": "Shomoykál",
+  "reservedTerm": "Rákkhan Shomoykál",
+  "durations": {
+    "ondemand": "Dórkár Botte",
+    "reserved1yr": "1 Bóchhor Rákkhan",
+    "reserved3yr": "3 Bóchhor Rákkhan",
+    "spot": "Spot"
+  },
+  "compare": "Tulúna",
+  "endCompare": "Tulúna Shesh",
+  "selected": "Bácháno",
+  "showAll": "Shob Dekháo",
+  "hideAll": "Shob Luko",
+  "select": "Bácháo...",
+  "searchLabel": "{label} Hándo...",
+  "noOptionsFound": "Kichu Paoa Jáe Na",
+  "searchColumns": "Kolám Hándo...",
+  "noColumnsFound": "Kolám Paoa Jáe Na",
+  "selectAll": "Shob Bácháo",
+  "selectDefaults": "Default Bácháo",
+  "regionGroups": {
+    "frequentlyUsed": "Beshi Bebohar",
+    "chinaCloudRegions": "China Cloud Élaka",
+    "mainRegions": "Múl Élaka",
+    "localZones": "Niyámi Zones",
+    "wavelengthZones": "Wavelength Zones"
+  },
+  "export": {
+    "export": "Báhir Koron",
+    "downloadCsv": "CSV Download",
+    "copyCsv": "CSV Copy",
+    "copyTsv": "TSV Copy",
+    "copyMarkdown": "Markdown Table Copy",
+    "csvCopied": "CSV clipboard-e copy hóeche",
+    "tsvCopied": "TSV clipboard-e copy hóeche",
+    "markdownCopied": "Markdown table clipboard-e copy hóeche"
+  }
+}

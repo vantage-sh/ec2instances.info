@@ -1,0 +1,18 @@
+{
+  "hourly": "Сағаттық",
+  "monthly": "Айлық",
+  "yearly": "Жылдық",
+  "perHour": "/сағ",
+  "perMonth": "/ай",
+  "perYear": "/жыл",
+  "onDemand": "On-Demand",
+  "reserved": "Резервацияланған",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Алдын ала төлемсіз",
+  "partialUpfront": "Ішінара алдын ала төлем",
+  "allUpfront": "Толық алдын ала төлем",
+  "convertible": "Конвертируемый",
+  "standard": "Стандартты",
+  "priceUnavailable": "N/A"
+}

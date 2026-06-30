@@ -1,0 +1,49 @@
+{
+  "search": "Pilarian...",
+  "clearFilters": "Beresihan Saringan",
+  "filters": "Saringan",
+  "columns": "Kolom",
+  "region": "Wilayah",
+  "pricingUnit": "Unit Harga",
+  "cost": "Biaya",
+  "reserved": "Dicadangkeun",
+  "currency": "Mata Uang",
+  "os": "Sistem Operasi",
+  "duration": "Durasi",
+  "reservedTerm": "Jangka Waktu Cadangan",
+  "durations": {
+    "ondemand": "Dina Paménta",
+    "reserved1yr": "Cadangan 1 Taun",
+    "reserved3yr": "Cadangan 3 Taun",
+    "spot": "Spot"
+  },
+  "compare": "Bandingkeun",
+  "endCompare": "Tungtungkeun Perbandingan",
+  "selected": "dipilih",
+  "showAll": "Tampilkeun Kabéh",
+  "hideAll": "Piceun Kabéh",
+  "select": "Pilih...",
+  "searchLabel": "Pilarian {label}...",
+  "noOptionsFound": "Teu aya pilihan kapendak.",
+  "searchColumns": "Pilarian kolom...",
+  "noColumnsFound": "Teu aya kolom kapendak.",
+  "selectAll": "Pilih Kabéh",
+  "selectDefaults": "Pilih Standar",
+  "regionGroups": {
+    "frequentlyUsed": "Sering Dipaké",
+    "chinaCloudRegions": "Wilayah Cloud Cina",
+    "mainRegions": "Wilayah Utama",
+    "localZones": "Zona Lokal",
+    "wavelengthZones": "Zona Wavelength"
+  },
+  "export": {
+    "export": "Ékspor",
+    "downloadCsv": "Unduh CSV",
+    "copyCsv": "Salin CSV",
+    "copyTsv": "Salin TSV",
+    "copyMarkdown": "Salin Tabél Markdown",
+    "csvCopied": "CSV disalin ka clipboard",
+    "tsvCopied": "TSV disalin ka clipboard",
+    "markdownCopied": "Tabél Markdown disalin ka clipboard"
+  }
+}

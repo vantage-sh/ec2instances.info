@@ -1,0 +1,18 @@
+{
+  "hourly": "Сятдиз",
+  "monthly": "ВацIдиз",
+  "yearly": "Йисдиз",
+  "perHour": "/сят.",
+  "perMonth": "/вацI.",
+  "perYear": "/йис.",
+  "onDemand": "On-Demand",
+  "reserved": "Резервламиш",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Аванс Авачир",
+  "partialUpfront": "Пай Аванс",
+  "allUpfront": "Вири Аванс",
+  "convertible": "Конвертируемый",
+  "standard": "Асаслу",
+  "priceUnavailable": "Н/Т"
+}

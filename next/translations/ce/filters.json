@@ -1,0 +1,49 @@
+{
+  "search": "Лоьхуш...",
+  "clearFilters": "Фильтрийш Д1аяккха",
+  "filters": "Фильтрийш",
+  "columns": "Устунаш",
+  "region": "Регион",
+  "pricingUnit": "Мах Бийрина Единица",
+  "cost": "Мах",
+  "reserved": "Дихкина",
+  "currency": "Валюта",
+  "os": "Оперативни Система",
+  "duration": "Период",
+  "reservedTerm": "Дихкинан Срок",
+  "durations": {
+    "ondemand": "Лаамехь",
+    "reserved1yr": "1 Шарахь Дихкина",
+    "reserved3yr": "3 Шарахь Дихкина",
+    "spot": "Spot"
+  },
+  "compare": "Дуст Яккха",
+  "endCompare": "Дуст Яккхар Чекхдаккха",
+  "selected": "харжина",
+  "showAll": "Ерриг Гойта",
+  "hideAll": "Ерриг Ца Гойта",
+  "select": "Хара...",
+  "searchLabel": "{label} лоьхуш...",
+  "noOptionsFound": "Варианташ карийна яц.",
+  "searchColumns": "Устунаш лоьхуш...",
+  "noColumnsFound": "Устунаш карийна яц.",
+  "selectAll": "Ерриг Харжа",
+  "selectDefaults": "Дефолт Харжа",
+  "regionGroups": {
+    "frequentlyUsed": "Масех Лелош",
+    "chinaCloudRegions": "Китайн Регионаш",
+    "mainRegions": "Коьрта Регионаш",
+    "localZones": "Лоьмза Зонаш",
+    "wavelengthZones": "Wavelength Зонаш"
+  },
+  "export": {
+    "export": "Арахьаро",
+    "downloadCsv": "CSV Дахьа",
+    "copyCsv": "CSV Кхийдам Баккха",
+    "copyTsv": "TSV Кхийдам Баккха",
+    "copyMarkdown": "Markdown Таблица Кхийдам Баккха",
+    "csvCopied": "CSV буфере кхийдам бина",
+    "tsvCopied": "TSV буфере кхийдам бина",
+    "markdownCopied": "Markdown таблица буфере кхийдам бина"
+  }
+}

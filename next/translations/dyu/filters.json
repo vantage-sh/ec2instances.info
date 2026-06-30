@@ -1,0 +1,49 @@
+{
+  "search": "Ɲini...",
+  "clearFilters": "Filters Jɛni",
+  "filters": "Filters",
+  "columns": "Kolɔnw",
+  "region": "Sigida",
+  "pricingUnit": "Sɔngɔ Ẽenɛ",
+  "cost": "Sɔngɔ",
+  "reserved": "Reserved",
+  "currency": "Wari Cogo",
+  "os": "Baara Kɛcogo",
+  "duration": "Waati",
+  "reservedTerm": "Reserved Waati",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "San 1 Reserved",
+    "reserved3yr": "San 3 Reserved",
+    "spot": "Spot"
+  },
+  "compare": "Kɛrɛnkɛrɛn",
+  "endCompare": "Kɛrɛnkɛrɛnnenya Lɔ",
+  "selected": "Sugandilen",
+  "showAll": "Bɛɛ Yira",
+  "hideAll": "Bɛɛ Dogo",
+  "select": "Sugandi...",
+  "searchLabel": "Ɲini {label}...",
+  "noOptionsFound": "Sugandili Tɛ Sɔrɔ.",
+  "searchColumns": "Kolɔnw Ɲini...",
+  "noColumnsFound": "Kolɔn Tɛ Sɔrɔ.",
+  "selectAll": "Bɛɛ Sugandi",
+  "selectDefaults": "Tɔgɔtigi Sugandi",
+  "regionGroups": {
+    "frequentlyUsed": "Tɛmɛnen Caman",
+    "chinaCloudRegions": "Siin Cloud Sigidaw",
+    "mainRegions": "Sigidaw Gɛlɛnw",
+    "localZones": "Zones Kɔnɔnaw",
+    "wavelengthZones": "Wavelength Zones"
+  },
+  "export": {
+    "export": "Bɔ",
+    "downloadCsv": "CSV Jigi",
+    "copyCsv": "CSV Dajɛ",
+    "copyTsv": "TSV Dajɛ",
+    "copyMarkdown": "Markdown Tabali Dajɛ",
+    "csvCopied": "CSV dajɛlen don clipboard kɔnɔ",
+    "tsvCopied": "TSV dajɛlen don clipboard kɔnɔ",
+    "markdownCopied": "Markdown tabali dajɛlen don clipboard kɔnɔ"
+  }
+}

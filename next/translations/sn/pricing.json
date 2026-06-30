@@ -1,0 +1,18 @@
+{
+  "hourly": "Pa Awa",
+  "monthly": "Pa Mwedzi",
+  "yearly": "Pa Gore",
+  "perHour": "/awa",
+  "perMonth": "/mwedzi",
+  "perYear": "/gore",
+  "onDemand": "On-Demand",
+  "reserved": "Rakachengeterwa",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Hapana Kubhadhara Pamberi",
+  "partialUpfront": "Kubhadhara Pamberi Kwechikamu",
+  "allUpfront": "Kubhadhara Pamberi Kwose",
+  "convertible": "Inogona Kushanduka",
+  "standard": "Yakajairwa",
+  "priceUnavailable": "N/A"
+}

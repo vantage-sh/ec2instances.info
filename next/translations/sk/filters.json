@@ -1,0 +1,49 @@
+{
+  "search": "Hľadať...",
+  "clearFilters": "Vymazať filtre",
+  "filters": "Filtre",
+  "columns": "Stĺpce",
+  "region": "Región",
+  "pricingUnit": "Jednotka ceny",
+  "cost": "Cena",
+  "reserved": "Rezervované",
+  "currency": "Mena",
+  "os": "Operačný systém",
+  "duration": "Trvanie",
+  "reservedTerm": "Rezervačné obdobie",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1-ročná rezervácia",
+    "reserved3yr": "3-ročná rezervácia",
+    "spot": "Spot"
+  },
+  "compare": "Porovnať",
+  "endCompare": "Ukončiť porovnanie",
+  "selected": "vybrané",
+  "showAll": "Zobraziť všetky",
+  "hideAll": "Skryť všetky",
+  "select": "Vybrať...",
+  "searchLabel": "Hľadať {label}...",
+  "noOptionsFound": "Nenašli sa žiadne možnosti.",
+  "searchColumns": "Hľadať stĺpce...",
+  "noColumnsFound": "Nenašli sa žiadne stĺpce.",
+  "selectAll": "Vybrať všetky",
+  "selectDefaults": "Vybrať predvolené",
+  "regionGroups": {
+    "frequentlyUsed": "Často používané",
+    "chinaCloudRegions": "Čínske cloudové regióny",
+    "mainRegions": "Hlavné regióny",
+    "localZones": "Lokálne zóny",
+    "wavelengthZones": "Zóny Wavelength"
+  },
+  "export": {
+    "export": "Exportovať",
+    "downloadCsv": "Stiahnuť CSV",
+    "copyCsv": "Kopírovať CSV",
+    "copyTsv": "Kopírovať TSV",
+    "copyMarkdown": "Kopírovať tabuľku Markdown",
+    "csvCopied": "CSV skopírované do schránky",
+    "tsvCopied": "TSV skopírované do schránky",
+    "markdownCopied": "Tabuľka Markdown skopírovaná do schránky"
+  }
+}

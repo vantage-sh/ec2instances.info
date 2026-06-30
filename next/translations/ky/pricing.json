@@ -1,0 +1,18 @@
+{
+  "hourly": "Сааттык",
+  "monthly": "Айлык",
+  "yearly": "Жылдык",
+  "perHour": "/саат",
+  "perMonth": "/ай",
+  "perYear": "/жыл",
+  "onDemand": "Суроо-талапка жараша",
+  "reserved": "Брондолгон",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Алдын ала төлөмсүз",
+  "partialUpfront": "Жарым алдын ала төлөм",
+  "allUpfront": "Толук алдын ала төлөм",
+  "convertible": "Конвертируемый",
+  "standard": "Стандарттык",
+  "priceUnavailable": "Ж/Б"
+}

@@ -1,0 +1,18 @@
+{
+  "hourly": "Sa'aatiidhaan",
+  "monthly": "Ji'aatiin",
+  "yearly": "Waggaadhaan",
+  "perHour": "/sa'a",
+  "perMonth": "/ji'a",
+  "perYear": "/waggaa",
+  "onDemand": "Gaafataman",
+  "reserved": "Kuufame",
+  "spot": "Spot",
+  "savingsPlan": "Karoora Qusannaa",
+  "noUpfront": "Kanfaltii Duraa Malee",
+  "partialUpfront": "Kanfaltii Duraa Walakkaa",
+  "allUpfront": "Kanfaltii Duraa Guutuu",
+  "convertible": "Jijjiiramaa",
+  "standard": "Idilee",
+  "priceUnavailable": "H/B"
+}

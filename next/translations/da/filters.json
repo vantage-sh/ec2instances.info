@@ -1,0 +1,49 @@
+{
+  "search": "Søg...",
+  "clearFilters": "Ryd filtre",
+  "filters": "Filtre",
+  "columns": "Kolonner",
+  "region": "Region",
+  "pricingUnit": "Prisenhed",
+  "cost": "Omkostning",
+  "reserved": "Reserveret",
+  "currency": "Valuta",
+  "os": "Operativsystem",
+  "duration": "Varighed",
+  "reservedTerm": "Reserveret periode",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 år reserveret",
+    "reserved3yr": "3 år reserveret",
+    "spot": "Spot"
+  },
+  "compare": "Sammenlign",
+  "endCompare": "Afslut sammenligning",
+  "selected": "valgt",
+  "showAll": "Vis alle",
+  "hideAll": "Skjul alle",
+  "select": "Vælg...",
+  "searchLabel": "Søg {label}...",
+  "noOptionsFound": "Ingen muligheder fundet.",
+  "searchColumns": "Søg kolonner...",
+  "noColumnsFound": "Ingen kolonner fundet.",
+  "selectAll": "Vælg alle",
+  "selectDefaults": "Vælg standarder",
+  "regionGroups": {
+    "frequentlyUsed": "Hyppigt brugte",
+    "chinaCloudRegions": "Kina-cloudregioner",
+    "mainRegions": "Hovedregioner",
+    "localZones": "Lokale zoner",
+    "wavelengthZones": "Wavelength-zoner"
+  },
+  "export": {
+    "export": "Eksporter",
+    "downloadCsv": "Download CSV",
+    "copyCsv": "Kopiér CSV",
+    "copyTsv": "Kopiér TSV",
+    "copyMarkdown": "Kopiér Markdown-tabel",
+    "csvCopied": "CSV kopieret til udklipsholder",
+    "tsvCopied": "TSV kopieret til udklipsholder",
+    "markdownCopied": "Markdown-tabel kopieret til udklipsholder"
+  }
+}

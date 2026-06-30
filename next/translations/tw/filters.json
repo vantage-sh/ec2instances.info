@@ -1,0 +1,49 @@
+{
+  "search": "Hwehwɛ...",
+  "clearFilters": "Yi Nkyekyemdeɛ No",
+  "filters": "Nkyekyemdeɛ",
+  "columns": "Ntim",
+  "region": "Amantam",
+  "pricingUnit": "Boɔ Nhwɛsoɔ",
+  "cost": "Boɔ",
+  "reserved": "Ahyɛ Ho Kɔkɔ",
+  "currency": "Sika Nhwɛsoɔ",
+  "os": "Ɔpɛretiŋ Sistɛm",
+  "duration": "Bere",
+  "reservedTerm": "Ahyɛ Ho Kɔkɔ Bere",
+  "durations": {
+    "ondemand": "Wo Hia A",
+    "reserved1yr": "Afe 1 Ahyɛ Ho Kɔkɔ",
+    "reserved3yr": "Mfe 3 Ahyɛ Ho Kɔkɔ",
+    "spot": "Spot"
+  },
+  "compare": "Twa To",
+  "endCompare": "Sae Twato",
+  "selected": "woayi",
+  "showAll": "Yi Nyinaa Adi",
+  "hideAll": "Fa Nyinaa Sie",
+  "select": "Yi...",
+  "searchLabel": "Hwehwɛ {label}...",
+  "noOptionsFound": "Nhwɛsoɔ biara ennhu.",
+  "searchColumns": "Hwehwɛ ntim...",
+  "noColumnsFound": "Ntim biara ennhu.",
+  "selectAll": "Yi Nyinaa",
+  "selectDefaults": "Yi Mfitiase",
+  "regionGroups": {
+    "frequentlyUsed": "Wɔde Di Dwuma Pii",
+    "chinaCloudRegions": "China Cloud Amantam",
+    "mainRegions": "Amantam Titiriw",
+    "localZones": "Egya Zone",
+    "wavelengthZones": "Wavelength Zone"
+  },
+  "export": {
+    "export": "Yi Firi",
+    "downloadCsv": "Sian CSV",
+    "copyCsv": "Di CSV Sɛn",
+    "copyTsv": "Di TSV Sɛn",
+    "copyMarkdown": "Di Markdown Table Sɛn",
+    "csvCopied": "CSV adi sɛn wɔ clipboard mu",
+    "tsvCopied": "TSV adi sɛn wɔ clipboard mu",
+    "markdownCopied": "Markdown table adi sɛn wɔ clipboard mu"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Shakisha...",
+  "clearFilters": "Siba ibipimo",
+  "filters": "Ibipimo",
+  "columns": "Inkingi",
+  "region": "Akarere",
+  "pricingUnit": "Ingano y'igiciro",
+  "cost": "Igiciro",
+  "reserved": "Bihariwe",
+  "currency": "Ingero y'amafaranga",
+  "os": "Sisitemu nyakuri",
+  "duration": "Igihe",
+  "reservedTerm": "Igihe cyo kubungabunga",
+  "durations": {
+    "ondemand": "Ibisabwa",
+    "reserved1yr": "Bihariwe Umwaka 1",
+    "reserved3yr": "Bihariwe Imyaka 3",
+    "spot": "Spot"
+  },
+  "compare": "Gereranya",
+  "endCompare": "Soza igereranya",
+  "selected": "byarahishuriwe",
+  "showAll": "Erekana byose",
+  "hideAll": "Hisha byose",
+  "select": "Hitamo...",
+  "searchLabel": "Shakisha {label}...",
+  "noOptionsFound": "Nta mahitamo aboneka.",
+  "searchColumns": "Shakisha inkingi...",
+  "noColumnsFound": "Nta nkingi zaboneka.",
+  "selectAll": "Hitamo byose",
+  "selectDefaults": "Hitamo ibisanzwe",
+  "regionGroups": {
+    "frequentlyUsed": "Bikoreshwa kenshi",
+    "chinaCloudRegions": "Akarere ka Cloud ya China",
+    "mainRegions": "Akarere Nyamukuru",
+    "localZones": "Akarere k'aho hantu",
+    "wavelengthZones": "Akarere ka Wavelength"
+  },
+  "export": {
+    "export": "Kohereza hanze",
+    "downloadCsv": "Pakurura CSV",
+    "copyCsv": "Kopa CSV",
+    "copyTsv": "Kopa TSV",
+    "copyMarkdown": "Kopa imbonerahamwe ya Markdown",
+    "csvCopied": "CSV yakopejwe mu kibaho",
+    "tsvCopied": "TSV yakopejwe mu kibaho",
+    "markdownCopied": "Imbonerahamwe ya Markdown yakopejwe mu kibaho"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "search": "ရှာဖွေရန်...",
+  "clearFilters": "စစ်ထုတ်မှုများ ရှင်းရန်",
+  "filters": "စစ်ထုတ်မှုများ",
+  "columns": "ကော်လံများ",
+  "region": "ဒေသ",
+  "pricingUnit": "စျေးနှုန်း ယူနစ်",
+  "cost": "ကုန်ကျစရိတ်",
+  "reserved": "ကြိုတင်သတ်မှတ်",
+  "currency": "ငွေကြေး",
+  "os": "လုပ်ငန်းစနစ်",
+  "duration": "ကာလ",
+  "reservedTerm": "ကြိုတင်သတ်မှတ် သက်တမ်း",
+  "durations": {
+    "ondemand": "တောင်းဆိုချိန်",
+    "reserved1yr": "၁ နှစ် ကြိုတင်သတ်မှတ်",
+    "reserved3yr": "၃ နှစ် ကြိုတင်သတ်မှတ်",
+    "spot": "Spot"
+  },
+  "compare": "နှိုင်းယှဉ်ရန်",
+  "endCompare": "နှိုင်းယှဉ်မှု ပြီးဆုံးရန်",
+  "selected": "ရွေးချယ်ပြီး",
+  "showAll": "အားလုံး ပြရန်",
+  "hideAll": "အားလုံး ဝှက်ရန်",
+  "select": "ရွေးချယ်ရန်...",
+  "searchLabel": "{label} ကို ရှာဖွေရန်...",
+  "noOptionsFound": "ရွေးချယ်မှု မတွေ့ပါ။",
+  "searchColumns": "ကော်လံများ ရှာဖွေရန်...",
+  "noColumnsFound": "ကော်လံ မတွေ့ပါ။",
+  "selectAll": "အားလုံး ရွေးချယ်ရန်",
+  "selectDefaults": "မူရင်းများ ရွေးချယ်ရန်",
+  "regionGroups": {
+    "frequentlyUsed": "မကြာခဏ သုံးသော",
+    "chinaCloudRegions": "တရုတ် Cloud ဒေသများ",
+    "mainRegions": "ပင်မ ဒေသများ",
+    "localZones": "ဒေသဆိုင်ရာ Zone များ",
+    "wavelengthZones": "Wavelength Zone များ"
+  },
+  "export": {
+    "export": "တင်ပို့ရန်",
+    "downloadCsv": "CSV ဒေါင်းလုဒ်",
+    "copyCsv": "CSV ကူးယူရန်",
+    "copyTsv": "TSV ကူးယူရန်",
+    "copyMarkdown": "Markdown ဇယား ကူးယူရန်",
+    "csvCopied": "CSV ကလစ်ဘုတ်သို့ ကူးယူပြီး",
+    "tsvCopied": "TSV ကလစ်ဘုတ်သို့ ကူးယူပြီး",
+    "markdownCopied": "Markdown ဇယား ကလစ်ဘုတ်သို့ ကူးယူပြီး"
+  }
+}

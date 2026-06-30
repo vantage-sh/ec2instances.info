@@ -1,0 +1,49 @@
+{
+  "search": "Nyaka...",
+  "clearFilters": "Phumola Dihlaodi",
+  "filters": "Dihlaodi",
+  "columns": "Dikolomo",
+  "region": "Tikologo",
+  "pricingUnit": "Yuniti ya Theko",
+  "cost": "Theko",
+  "reserved": "Reserved",
+  "currency": "Tšhelete",
+  "os": "Tsamaišo ya Sethembu",
+  "duration": "Nako",
+  "reservedTerm": "Nako ya Reserved",
+  "durations": {
+    "ondemand": "Ka Nyako",
+    "reserved1yr": "Reserved ya Ngwaga o 1",
+    "reserved3yr": "Reserved ya Mengwaga ye 3",
+    "spot": "Spot"
+  },
+  "compare": "Bapetša",
+  "endCompare": "Fedišo go Bapetša",
+  "selected": "e kgethilwe",
+  "showAll": "Bontšha Yohle",
+  "hideAll": "Pata Yohle",
+  "select": "Kgetha...",
+  "searchLabel": "Nyaka {label}...",
+  "noOptionsFound": "Ga go dikgetho tše di hwetšagalago.",
+  "searchColumns": "Nyaka dikolomo...",
+  "noColumnsFound": "Ga go dikolomo tše di hwetšagalago.",
+  "selectAll": "Kgetha Yohle",
+  "selectDefaults": "Kgetha Tše di Tlwaelegilego",
+  "regionGroups": {
+    "frequentlyUsed": "Tše di Šomišwago Gantši",
+    "chinaCloudRegions": "Mapheko a Leru la China",
+    "mainRegions": "Mapheko a Motheo",
+    "localZones": "Dibaka tša Lehae",
+    "wavelengthZones": "Dibaka tša Wavelength"
+  },
+  "export": {
+    "export": "Romela Ntle",
+    "downloadCsv": "Laetša CSV",
+    "copyCsv": "Kopitša CSV",
+    "copyTsv": "Kopitša TSV",
+    "copyMarkdown": "Kopitša Tafola ya Markdown",
+    "csvCopied": "CSV e kopitšitšwe go clipboard",
+    "tsvCopied": "TSV e kopitšitšwe go clipboard",
+    "markdownCopied": "Tafola ya Markdown e kopitšitšwe go clipboard"
+  }
+}

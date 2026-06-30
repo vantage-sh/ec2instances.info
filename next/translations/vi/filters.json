@@ -1,0 +1,49 @@
+{
+  "search": "Tìm kiếm...",
+  "clearFilters": "Xóa bộ lọc",
+  "filters": "Bộ lọc",
+  "columns": "Cột",
+  "region": "Khu vực",
+  "pricingUnit": "Đơn vị định giá",
+  "cost": "Chi phí",
+  "reserved": "Đặt trước",
+  "currency": "Tiền tệ",
+  "os": "Hệ điều hành",
+  "duration": "Thời hạn",
+  "reservedTerm": "Kỳ hạn đặt trước",
+  "durations": {
+    "ondemand": "Theo yêu cầu",
+    "reserved1yr": "Đặt trước 1 năm",
+    "reserved3yr": "Đặt trước 3 năm",
+    "spot": "Spot"
+  },
+  "compare": "So sánh",
+  "endCompare": "Kết thúc so sánh",
+  "selected": "đã chọn",
+  "showAll": "Hiển thị tất cả",
+  "hideAll": "Ẩn tất cả",
+  "select": "Chọn...",
+  "searchLabel": "Tìm kiếm {label}...",
+  "noOptionsFound": "Không tìm thấy tùy chọn.",
+  "searchColumns": "Tìm kiếm cột...",
+  "noColumnsFound": "Không tìm thấy cột.",
+  "selectAll": "Chọn tất cả",
+  "selectDefaults": "Chọn mặc định",
+  "regionGroups": {
+    "frequentlyUsed": "Thường dùng",
+    "chinaCloudRegions": "Khu vực đám mây Trung Quốc",
+    "mainRegions": "Khu vực chính",
+    "localZones": "Vùng cục bộ",
+    "wavelengthZones": "Vùng Wavelength"
+  },
+  "export": {
+    "export": "Xuất",
+    "downloadCsv": "Tải xuống CSV",
+    "copyCsv": "Sao chép CSV",
+    "copyTsv": "Sao chép TSV",
+    "copyMarkdown": "Sao chép bảng Markdown",
+    "csvCopied": "Đã sao chép CSV vào clipboard",
+    "tsvCopied": "Đã sao chép TSV vào clipboard",
+    "markdownCopied": "Đã sao chép bảng Markdown vào clipboard"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "search": "لټون...",
+  "clearFilters": "فلترونه پاک کړئ",
+  "filters": "فلترونه",
+  "columns": "کالمونه",
+  "region": "سیمه",
+  "pricingUnit": "د قیمت واحد",
+  "cost": "لګښت",
+  "reserved": "محفوظ شوی",
+  "currency": "اسعار",
+  "os": "عملیاتي سیسټم",
+  "duration": "موده",
+  "reservedTerm": "د رزرو موده",
+  "durations": {
+    "ondemand": "د غوښتنې سره سم",
+    "reserved1yr": "د ۱ کال لپاره محفوظ",
+    "reserved3yr": "د ۳ کالو لپاره محفوظ",
+    "spot": "Spot"
+  },
+  "compare": "پرتله کول",
+  "endCompare": "پرتله پای ته ورساوئ",
+  "selected": "غوره شوی",
+  "showAll": "ټول وښایئ",
+  "hideAll": "ټول پټ کړئ",
+  "select": "غوره کړئ...",
+  "searchLabel": "د {label} لټون...",
+  "noOptionsFound": "هیڅ اختیار ونه موندل شو.",
+  "searchColumns": "د کالمونو لټون...",
+  "noColumnsFound": "هیڅ کالم ونه موندل شو.",
+  "selectAll": "ټول غوره کړئ",
+  "selectDefaults": "ډیفالټونه غوره کړئ",
+  "regionGroups": {
+    "frequentlyUsed": "ډیر کارول شوي",
+    "chinaCloudRegions": "د چین کلاوډ سیمې",
+    "mainRegions": "اصلي سیمې",
+    "localZones": "سیمه ایزې زونونه",
+    "wavelengthZones": "Wavelength زونونه"
+  },
+  "export": {
+    "export": "صادرول",
+    "downloadCsv": "CSV ډاونلوډ کړئ",
+    "copyCsv": "CSV کاپي کړئ",
+    "copyTsv": "TSV کاپي کړئ",
+    "copyMarkdown": "Markdown جدول کاپي کړئ",
+    "csvCopied": "CSV کلپبورډ ته کاپي شو",
+    "tsvCopied": "TSV کلپبورډ ته کاپي شو",
+    "markdownCopied": "Markdown جدول کلپبورډ ته کاپي شو"
+  }
+}

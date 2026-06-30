@@ -1,0 +1,18 @@
+{
+  "hourly": "ଘଣ୍ଟା ଭିତ୍ତିରେ",
+  "monthly": "ମାସିକ",
+  "yearly": "ବାର୍ଷିକ",
+  "perHour": "/ଘଣ୍ଟା",
+  "perMonth": "/ମାସ",
+  "perYear": "/ବର୍ଷ",
+  "onDemand": "ଅନ-ଡ଼ିମାଣ୍ଡ",
+  "reserved": "ସଂରକ୍ଷିତ",
+  "spot": "ସ୍ପଟ",
+  "savingsPlan": "ସଞ୍ଚୟ ଯୋଜନା",
+  "noUpfront": "ଆଗୁଆ ଦେୟ ନାହିଁ",
+  "partialUpfront": "ଆଂଶିକ ଆଗୁଆ ଦେୟ",
+  "allUpfront": "ସମ୍ପୂର୍ଣ ଆଗୁଆ ଦେୟ",
+  "convertible": "ରୂପାନ୍ତରଯୋଗ୍ୟ",
+  "standard": "ମାନକ",
+  "priceUnavailable": "N/A"
+}

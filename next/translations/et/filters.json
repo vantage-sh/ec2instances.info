@@ -1,0 +1,49 @@
+{
+  "search": "Otsi...",
+  "clearFilters": "Tühjenda filtrid",
+  "filters": "Filtrid",
+  "columns": "Veerud",
+  "region": "Piirkond",
+  "pricingUnit": "Hinnayksus",
+  "cost": "Kulu",
+  "reserved": "Reserveeritud",
+  "currency": "Valuuta",
+  "os": "Operatsioonisüsteem",
+  "duration": "Kestus",
+  "reservedTerm": "Reserveerimise tähtaeg",
+  "durations": {
+    "ondemand": "Nõudmisel",
+    "reserved1yr": "1 aasta reserveeritud",
+    "reserved3yr": "3 aastat reserveeritud",
+    "spot": "Spot"
+  },
+  "compare": "Võrdle",
+  "endCompare": "Lõpeta võrdlus",
+  "selected": "valitud",
+  "showAll": "Näita kõiki",
+  "hideAll": "Peida kõik",
+  "select": "Vali...",
+  "searchLabel": "Otsi {label}...",
+  "noOptionsFound": "Valikuid ei leitud.",
+  "searchColumns": "Otsi veerge...",
+  "noColumnsFound": "Veerge ei leitud.",
+  "selectAll": "Vali kõik",
+  "selectDefaults": "Vali vaikimisi",
+  "regionGroups": {
+    "frequentlyUsed": "Sageli kasutatavad",
+    "chinaCloudRegions": "Hiina pilvepiirkonnad",
+    "mainRegions": "Põhipiirkonnad",
+    "localZones": "Kohalikud tsoonid",
+    "wavelengthZones": "Wavelength tsoonid"
+  },
+  "export": {
+    "export": "Ekspordi",
+    "downloadCsv": "Laadi alla CSV",
+    "copyCsv": "Kopeeri CSV",
+    "copyTsv": "Kopeeri TSV",
+    "copyMarkdown": "Kopeeri Markdown tabel",
+    "csvCopied": "CSV kopeeritud lõikelauale",
+    "tsvCopied": "TSV kopeeritud lõikelauale",
+    "markdownCopied": "Markdown tabel kopeeritud lõikelauale"
+  }
+}

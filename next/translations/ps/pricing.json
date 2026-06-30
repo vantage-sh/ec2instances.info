@@ -1,0 +1,18 @@
+{
+  "hourly": "ساعتني",
+  "monthly": "میاشتني",
+  "yearly": "کلني",
+  "perHour": "/ساعت",
+  "perMonth": "/میاشت",
+  "perYear": "/کال",
+  "onDemand": "د غوښتنې سره سم",
+  "reserved": "محفوظ شوی",
+  "spot": "Spot",
+  "savingsPlan": "د سپما پلان",
+  "noUpfront": "پرته له مخکیني تادیه",
+  "partialUpfront": "جزوي مخکیني تادیه",
+  "allUpfront": "بشپړه مخکیني تادیه",
+  "convertible": "د بدلون وړ",
+  "standard": "معیاري",
+  "priceUnavailable": "N/A"
+}

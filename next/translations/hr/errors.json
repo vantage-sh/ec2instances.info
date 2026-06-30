@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Učitavanje podataka nije uspjelo",
+  "tryAgain": "Pokušaj ponovo",
+  "networkError": "Mrežna greška. Provjerite svoju vezu.",
+  "unknownError": "Došlo je do nepoznate greške"
+}

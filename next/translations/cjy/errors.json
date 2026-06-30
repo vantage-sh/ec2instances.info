@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "数据加载失败",
+  "tryAgain": "重试",
+  "networkError": "网络错误，请检查您的连接。",
+  "unknownError": "发生未知错误"
+}

@@ -1,0 +1,18 @@
+{
+  "hourly": "Setiap Jam",
+  "monthly": "Bulanan",
+  "yearly": "Tahunan",
+  "perHour": "/jam",
+  "perMonth": "/bln",
+  "perYear": "/thn",
+  "onDemand": "Atas Permintaan",
+  "reserved": "Tempahan",
+  "spot": "Spot",
+  "savingsPlan": "Pelan Penjimatan",
+  "noUpfront": "Tiada Bayaran Pendahuluan",
+  "partialUpfront": "Bayaran Pendahuluan Separa",
+  "allUpfront": "Semua Bayaran Pendahuluan",
+  "convertible": "Boleh Tukar",
+  "standard": "Standard",
+  "priceUnavailable": "T/B"
+}

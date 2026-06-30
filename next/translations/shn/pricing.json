@@ -1,0 +1,18 @@
+{
+  "hourly": "တေႃႇၶိုင်ႈ",
+  "monthly": "တေႃႇလိူၼ်",
+  "yearly": "တေႃႇပီ",
+  "perHour": "/ၶိုင်ႈ",
+  "perMonth": "/လိူၼ်",
+  "perYear": "/ပီ",
+  "onDemand": "ၸွမ်းလွင်ႈၸႂ်ႈ",
+  "reserved": "မၵ်းၵွင်ႉ",
+  "spot": "ၼႃႈတီႈ",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "ဢမ်ႇပၼ်ၸဵမ်",
+  "partialUpfront": "ပၼ်ဝႆႉၵမ်ႈၼိုင်ႈ",
+  "allUpfront": "ပၼ်ၸဵမ်တင်းမူတ်း",
+  "convertible": "လႅၵ်ႈလၢႆႈ",
+  "standard": "ပိုၼ်ႉ",
+  "priceUnavailable": "N/A"
+}

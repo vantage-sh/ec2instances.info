@@ -1,0 +1,18 @@
+{
+  "hourly": "ⵙ ⵓⴽⵍⵓ",
+  "monthly": "ⵙ ⵡⴰⵢⵢⵓⵔ",
+  "yearly": "ⵙ ⵓⵙⴳⴳⵯⴰⵙ",
+  "perHour": "/ⴰⴽⵍⵓ",
+  "perMonth": "/ⵡⴰⵢⵢⵓⵔ",
+  "perYear": "/ⴰⵙⴳⴳⵯⴰⵙ",
+  "onDemand": "ⵙ ⵓⵅⵚⵚⴰⵙ",
+  "reserved": "ⵉⵣⴷⴷⵉⵔⵏ",
+  "spot": "Spot",
+  "savingsPlan": "ⴰⵢⵎⵎⵓⵖ ⵏ ⵓⵙⴱⴹⴰⴹ",
+  "noUpfront": "ⴱⵍⴰ ⵜⵉⵔⵎⵉⵜ ⵜⴰⵎⵣⵡⴰⵔⵓⵜ",
+  "partialUpfront": "ⵙ ⵜⵉⵔⵎⵉⵜ ⵜⴰⵎⵣⵡⴰⵔⵓⵜ ⵉⵎⵉⵍ",
+  "allUpfront": "ⵙ ⵜⵉⵔⵎⵉⵜ ⵜⴰⵎⵣⵡⴰⵔⵓⵜ ⵜⴰⵎⴰⵜⵓⵜ",
+  "convertible": "ⵉⵜⵜⵓⴱⴷⴷⴰⵍ",
+  "standard": "ⴰⵏⴰⵡ ⴰⵎⴰⵜⵓ",
+  "priceUnavailable": "ⵓⵔ ⵉⵍⵍⵉ"
+}

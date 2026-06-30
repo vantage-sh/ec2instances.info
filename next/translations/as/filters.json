@@ -1,0 +1,49 @@
+{
+  "search": "সন্ধান কৰক...",
+  "clearFilters": "ফিল্টাৰ মচক",
+  "filters": "ফিল্টাৰ",
+  "columns": "স্তম্ভ",
+  "region": "অঞ্চল",
+  "pricingUnit": "মূল্য নিৰ্ধাৰণ একক",
+  "cost": "খৰচ",
+  "reserved": "সংৰক্ষিত",
+  "currency": "মুদ্ৰা",
+  "os": "অপাৰেটিং চিষ্টেম",
+  "duration": "সময়কাল",
+  "reservedTerm": "সংৰক্ষিত ম্যাদ",
+  "durations": {
+    "ondemand": "অন-ডিমান্ড",
+    "reserved1yr": "১ বছৰ সংৰক্ষিত",
+    "reserved3yr": "৩ বছৰ সংৰক্ষিত",
+    "spot": "স্পট"
+  },
+  "compare": "তুলনা কৰক",
+  "endCompare": "তুলনা শেষ কৰক",
+  "selected": "বাছনি কৰা হৈছে",
+  "showAll": "সকলো দেখুৱাওক",
+  "hideAll": "সকলো লুকুৱাওক",
+  "select": "বাছনি কৰক...",
+  "searchLabel": "{label} সন্ধান কৰক...",
+  "noOptionsFound": "কোনো বিকল্প পোৱা নগ'ল।",
+  "searchColumns": "স্তম্ভ সন্ধান কৰক...",
+  "noColumnsFound": "কোনো স্তম্ভ পোৱা নগ'ল।",
+  "selectAll": "সকলো বাছনি কৰক",
+  "selectDefaults": "ডিফল্ট বাছনি কৰক",
+  "regionGroups": {
+    "frequentlyUsed": "সঘনাই ব্যৱহৃত",
+    "chinaCloudRegions": "চীন ক্লাউড অঞ্চল",
+    "mainRegions": "মুখ্য অঞ্চল",
+    "localZones": "স্থানীয় জ'ন",
+    "wavelengthZones": "Wavelength জ'ন"
+  },
+  "export": {
+    "export": "ৰপ্তানি কৰক",
+    "downloadCsv": "CSV ডাউনলোড কৰক",
+    "copyCsv": "CSV কপি কৰক",
+    "copyTsv": "TSV কপি কৰক",
+    "copyMarkdown": "Markdown তালিকা কপি কৰক",
+    "csvCopied": "CSV ক্লিপবোৰ্ডত কপি হৈছে",
+    "tsvCopied": "TSV ক্লিপবোৰ্ডত কপি হৈছে",
+    "markdownCopied": "Markdown তালিকা ক্লিপবোৰ্ডত কপি হৈছে"
+  }
+}

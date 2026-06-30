@@ -1,0 +1,18 @@
+{
+  "hourly": "గంటకు",
+  "monthly": "నెలవారీ",
+  "yearly": "వార్షిక",
+  "perHour": "/గం",
+  "perMonth": "/నె",
+  "perYear": "/సం",
+  "onDemand": "ఆన్ డిమాండ్",
+  "reserved": "రిజర్వ్ చేయబడింది",
+  "spot": "స్పాట్",
+  "savingsPlan": "పొదుపు ప్రణాళిక",
+  "noUpfront": "అడ్వాన్స్ లేదు",
+  "partialUpfront": "పాక్షిక అడ్వాన్స్",
+  "allUpfront": "పూర్తి అడ్వాన్స్",
+  "convertible": "మార్చగలిగే",
+  "standard": "ప్రమాణం",
+  "priceUnavailable": "వర్తించదు"
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Meklēt...",
+  "clearFilters": "Notīrīt filtrus",
+  "filters": "Filtri",
+  "columns": "Kolonnas",
+  "region": "Reģions",
+  "pricingUnit": "Cenu vienība",
+  "cost": "Izmaksas",
+  "reserved": "Rezervēts",
+  "currency": "Valūta",
+  "os": "Operētājsistēma",
+  "duration": "Ilgums",
+  "reservedTerm": "Rezervācijas termiņš",
+  "durations": {
+    "ondemand": "Pēc pieprasījuma",
+    "reserved1yr": "1 gads rezervēts",
+    "reserved3yr": "3 gadi rezervēts",
+    "spot": "Spot"
+  },
+  "compare": "Salīdzināt",
+  "endCompare": "Beigt salīdzinājumu",
+  "selected": "izvēlēts",
+  "showAll": "Rādīt visus",
+  "hideAll": "Slēpt visus",
+  "select": "Izvēlēties...",
+  "searchLabel": "Meklēt {label}...",
+  "noOptionsFound": "Nav atrasto opciju.",
+  "searchColumns": "Meklēt kolonnas...",
+  "noColumnsFound": "Nav atrastas kolonnas.",
+  "selectAll": "Izvēlēties visus",
+  "selectDefaults": "Izvēlēties noklusējumus",
+  "regionGroups": {
+    "frequentlyUsed": "Bieži izmantotie",
+    "chinaCloudRegions": "Ķīnas mākoņa reģioni",
+    "mainRegions": "Galvenie reģioni",
+    "localZones": "Lokālās zonas",
+    "wavelengthZones": "Wavelength zonas"
+  },
+  "export": {
+    "export": "Eksportēt",
+    "downloadCsv": "Lejupielādēt CSV",
+    "copyCsv": "Kopēt CSV",
+    "copyTsv": "Kopēt TSV",
+    "copyMarkdown": "Kopēt Markdown tabulu",
+    "csvCopied": "CSV nokopēts starpliktuvē",
+    "tsvCopied": "TSV nokopēts starpliktuvē",
+    "markdownCopied": "Markdown tabula nokopēta starpliktuvē"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Nrhiav...",
+  "clearFilters": "Tshem Cov Lim",
+  "filters": "Cov Lim",
+  "columns": "Cov Kem",
+  "region": "Cheeb Tsam",
+  "pricingUnit": "Nqi Unit",
+  "cost": "Nqi",
+  "reserved": "Reserved",
+  "currency": "Nyiaj",
+  "os": "Txheej Txheem Kev Ua Hauj Lwm",
+  "duration": "Sij Hawm",
+  "reservedTerm": "Reserved Term",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Reserved 1 Xyoo",
+    "reserved3yr": "Reserved 3 Xyoo",
+    "spot": "Spot"
+  },
+  "compare": "Piv",
+  "endCompare": "Xaus Kev Piv",
+  "selected": "Xaiv lawm",
+  "showAll": "Qhia Tag Nrho",
+  "hideAll": "Zais Tag Nrho",
+  "select": "Xaiv...",
+  "searchLabel": "Nrhiav {label}...",
+  "noOptionsFound": "Tsis pom cov kev xaiv.",
+  "searchColumns": "Nrhiav cov kem...",
+  "noColumnsFound": "Tsis pom cov kem.",
+  "selectAll": "Xaiv Tag Nrho",
+  "selectDefaults": "Xaiv Cov Uas Muaj Ntej",
+  "regionGroups": {
+    "frequentlyUsed": "Siv Ntau",
+    "chinaCloudRegions": "Cov Cheeb Tsam Cloud Suav Teb",
+    "mainRegions": "Cov Cheeb Tsam Tseem Ceeb",
+    "localZones": "Cov Thaj Chaw Hauv Zos",
+    "wavelengthZones": "Cov Wavelength Zone"
+  },
+  "export": {
+    "export": "Xa Tawm",
+    "downloadCsv": "Rub CSV",
+    "copyCsv": "Luam CSV",
+    "copyTsv": "Luam TSV",
+    "copyMarkdown": "Luam Markdown Table",
+    "csvCopied": "CSV tau luam rau clipboard",
+    "tsvCopied": "TSV tau luam rau clipboard",
+    "markdownCopied": "Markdown table tau luam rau clipboard"
+  }
+}

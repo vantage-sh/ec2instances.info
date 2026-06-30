@@ -1,0 +1,49 @@
+{
+  "search": "Chwilio...",
+  "clearFilters": "Clirio Hidlwyr",
+  "filters": "Hidlwyr",
+  "columns": "Colofnau",
+  "region": "Rhanbarth",
+  "pricingUnit": "Uned Prisio",
+  "cost": "Cost",
+  "reserved": "Wedi'i Archebu",
+  "currency": "Arian Cyfred",
+  "os": "System Weithredu",
+  "duration": "Cyfnod",
+  "reservedTerm": "Tymor Archeb",
+  "durations": {
+    "ondemand": "Ar Alw",
+    "reserved1yr": "1 Flwyddyn wedi'i Archebu",
+    "reserved3yr": "3 Blynedd wedi'i Archebu",
+    "spot": "Spot"
+  },
+  "compare": "Cymharu",
+  "endCompare": "Diweddu Cymhariaeth",
+  "selected": "wedi'i ddewis",
+  "showAll": "Dangos Pob Un",
+  "hideAll": "Cuddio Pob Un",
+  "select": "Dewis...",
+  "searchLabel": "Chwilio {label}...",
+  "noOptionsFound": "Heb ganfod opsiynau.",
+  "searchColumns": "Chwilio colofnau...",
+  "noColumnsFound": "Heb ganfod colofnau.",
+  "selectAll": "Dewis Pob Un",
+  "selectDefaults": "Dewis Rhagosodiadau",
+  "regionGroups": {
+    "frequentlyUsed": "A Ddefnyddir yn Aml",
+    "chinaCloudRegions": "Ranbarthau Cloud Tsieina",
+    "mainRegions": "Prif Ranbarthau",
+    "localZones": "Parthau Lleol",
+    "wavelengthZones": "Parthau Wavelength"
+  },
+  "export": {
+    "export": "Allforio",
+    "downloadCsv": "Llwytho CSV i lawr",
+    "copyCsv": "Copïo CSV",
+    "copyTsv": "Copïo TSV",
+    "copyMarkdown": "Copïo Tabl Markdown",
+    "csvCopied": "CSV wedi'i gopïo i'r clipfwrdd",
+    "tsvCopied": "TSV wedi'i gopïo i'r clipfwrdd",
+    "markdownCopied": "Tabl Markdown wedi'i gopïo i'r clipfwrdd"
+  }
+}

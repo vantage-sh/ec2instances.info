@@ -1,0 +1,49 @@
+{
+  "search": "ძიება...",
+  "clearFilters": "ფილტრების გასუფთავება",
+  "filters": "ფილტრები",
+  "columns": "სვეტები",
+  "region": "რეგიონი",
+  "pricingUnit": "ფ. ერთ.",
+  "cost": "ღირებულება",
+  "reserved": "სარეზერვო",
+  "currency": "ვალუტა",
+  "os": "ოპ. სის.",
+  "duration": "ხანგრძლივობა",
+  "reservedTerm": "სარ. ვ.",
+  "durations": {
+    "ondemand": "მოთხ.",
+    "reserved1yr": "1 წ. სარ.",
+    "reserved3yr": "3 წ. სარ.",
+    "spot": "Spot"
+  },
+  "compare": "შედარება",
+  "endCompare": "შ. დ.",
+  "selected": "არჩეული",
+  "showAll": "ყვ. ჩვ.",
+  "hideAll": "ყვ. დ.",
+  "select": "არჩ....",
+  "searchLabel": "ძ. {label}...",
+  "noOptionsFound": "ვარ. ვ. მ.",
+  "searchColumns": "სვ. ძ....",
+  "noColumnsFound": "სვ. ვ. მ.",
+  "selectAll": "ყვ. არჩ.",
+  "selectDefaults": "ნ. პ.",
+  "regionGroups": {
+    "frequentlyUsed": "ხ. გ.",
+    "chinaCloudRegions": "ჩ. ა.",
+    "mainRegions": "მ. რ.",
+    "localZones": "ლ. ზ.",
+    "wavelengthZones": "Wavelength ზ."
+  },
+  "export": {
+    "export": "ექსპ.",
+    "downloadCsv": "CSV ჩ.",
+    "copyCsv": "CSV კ.",
+    "copyTsv": "TSV კ.",
+    "copyMarkdown": "Markdown კ.",
+    "csvCopied": "CSV კ.",
+    "tsvCopied": "TSV კ.",
+    "markdownCopied": "Markdown კ."
+  }
+}

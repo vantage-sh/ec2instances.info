@@ -1,0 +1,18 @@
+{
+  "hourly": "Óránként",
+  "monthly": "Havonta",
+  "yearly": "Évente",
+  "perHour": "/ó",
+  "perMonth": "/hó",
+  "perYear": "/év",
+  "onDemand": "Igény szerint",
+  "reserved": "Foglalt",
+  "spot": "Spot",
+  "savingsPlan": "Megtakarítási csomag",
+  "noUpfront": "Nincs előre fizetés",
+  "partialUpfront": "Részleges előre fizetés",
+  "allUpfront": "Teljes előre fizetés",
+  "convertible": "Átváltható",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

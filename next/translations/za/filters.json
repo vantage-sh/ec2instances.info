@@ -1,0 +1,49 @@
+{
+  "search": "Swnj...",
+  "clearFilters": "Sou Lim",
+  "filters": "Lim",
+  "columns": "Lem",
+  "region": "Dihgih",
+  "pricingUnit": "Gyaqcin Unit",
+  "cost": "Gyaqcin",
+  "reserved": "Reserved",
+  "currency": "Ngaenz",
+  "os": "Operating System",
+  "duration": "Seizgan",
+  "reservedTerm": "Reserved Term",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Reserved 1 Bi",
+    "reserved3yr": "Reserved 3 Bi",
+    "spot": "Spot"
+  },
+  "compare": "Beij",
+  "endCompare": "Giet Beij",
+  "selected": "Senjdingz lawz",
+  "showAll": "Yienh Sojmiz",
+  "hideAll": "Yinx Sojmiz",
+  "select": "Senjdingz...",
+  "searchLabel": "Swnj {label}...",
+  "noOptionsFound": "Mbouj raen senjdingz.",
+  "searchColumns": "Swnj lem...",
+  "noColumnsFound": "Mbouj raen lem.",
+  "selectAll": "Senjdingz Sojmiz",
+  "selectDefaults": "Senjdingz Mojrengz",
+  "regionGroups": {
+    "frequentlyUsed": "Ciengz Yungh",
+    "chinaCloudRegions": "Cunghgoz Cloud Dihgih",
+    "mainRegions": "Youqgaenj Dihgih",
+    "localZones": "Dihfueng Zone",
+    "wavelengthZones": "Wavelength Zone"
+  },
+  "export": {
+    "export": "Dajok",
+    "downloadCsv": "Roengz CSV",
+    "copyCsv": "Fuzse CSV",
+    "copyTsv": "Fuzse TSV",
+    "copyMarkdown": "Fuzse Markdown Table",
+    "csvCopied": "CSV fuzse daengz clipboard",
+    "tsvCopied": "TSV fuzse daengz clipboard",
+    "markdownCopied": "Markdown table fuzse daengz clipboard"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Лъыхъуэн...",
+  "clearFilters": "Фильтрхэр Хъумэн",
+  "filters": "Фильтрхэр",
+  "columns": "Столбцхэр",
+  "region": "Регион",
+  "pricingUnit": "Уасэм и Единицэ",
+  "cost": "Уасэ",
+  "reserved": "Резервыу",
+  "currency": "Ахъшэ",
+  "os": "Операционнэ Системэ",
+  "duration": "Зэман",
+  "reservedTerm": "Резервыу Зэман",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Илъэс 1 Резервыу",
+    "reserved3yr": "Илъэс 3 Резервыу",
+    "spot": "Spot"
+  },
+  "compare": "ДэщIэгъуэн",
+  "endCompare": "ДэщIэгъуэн Иухыжын",
+  "selected": "Хэхащ",
+  "showAll": "Псори Гъэлъагъуэ",
+  "hideAll": "Псори Жьэхэубыд",
+  "select": "Хэх...",
+  "searchLabel": "{label} Лъыхъуэн...",
+  "noOptionsFound": "Вариантхэр щыIэкъым.",
+  "searchColumns": "Столбцхэр Лъыхъуэн...",
+  "noColumnsFound": "Столбцхэр щыIэкъым.",
+  "selectAll": "Псори Хэх",
+  "selectDefaults": "Лъабжьэхэр Хэх",
+  "regionGroups": {
+    "frequentlyUsed": "Нэхъ Зэгъэсэбэп",
+    "chinaCloudRegions": "Хытай Cloud Регионхэр",
+    "mainRegions": "Нэхъыщхьэ Регионхэр",
+    "localZones": "Хэкум Зонхэр",
+    "wavelengthZones": "Wavelength Зонхэр"
+  },
+  "export": {
+    "export": "Экспорт",
+    "downloadCsv": "CSV Хьэщ",
+    "copyCsv": "CSV Кэп",
+    "copyTsv": "TSV Кэп",
+    "copyMarkdown": "Markdown Таблицэ Кэп",
+    "csvCopied": "CSV Буфером иIэщ",
+    "tsvCopied": "TSV Буфером иIэщ",
+    "markdownCopied": "Markdown Таблицэ Буфером иIэщ"
+  }
+}

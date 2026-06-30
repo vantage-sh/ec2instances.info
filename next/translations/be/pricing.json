@@ -1,0 +1,18 @@
+{
+  "hourly": "Пагадзінна",
+  "monthly": "Штомесяц",
+  "yearly": "Штогод",
+  "perHour": "/г.",
+  "perMonth": "/мес.",
+  "perYear": "/год",
+  "onDemand": "Па запыце",
+  "reserved": "Зарэзерваваны",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Без папярэдняй аплаты",
+  "partialUpfront": "Частковая папярэдняя аплата",
+  "allUpfront": "Поўная папярэдняя аплата",
+  "convertible": "Канвертуемы",
+  "standard": "Стандарт",
+  "priceUnavailable": "Н/Д"
+}

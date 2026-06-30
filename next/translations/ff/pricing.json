@@ -1,0 +1,18 @@
+{
+  "hourly": "E Waktu",
+  "monthly": "E Lewru",
+  "yearly": "E Hitaande",
+  "perHour": "/waktu",
+  "perMonth": "/lewru",
+  "perYear": "/hitaande",
+  "onDemand": "On-Demand",
+  "reserved": "Ƴettaaɗo",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Gite Fuɗɗo Alaa",
+  "partialUpfront": "Gite Fuɗɗo Koolol",
+  "allUpfront": "Gite Fuɗɗo Fuu",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

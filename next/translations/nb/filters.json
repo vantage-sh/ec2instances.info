@@ -1,0 +1,49 @@
+{
+  "search": "Søk...",
+  "clearFilters": "Fjern filtre",
+  "filters": "Filtre",
+  "columns": "Kolonner",
+  "region": "Region",
+  "pricingUnit": "Prisenhet",
+  "cost": "Kostnad",
+  "reserved": "Reservert",
+  "currency": "Valuta",
+  "os": "Operativsystem",
+  "duration": "Varighet",
+  "reservedTerm": "Reservert periode",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 år reservert",
+    "reserved3yr": "3 år reservert",
+    "spot": "Spot"
+  },
+  "compare": "Sammenlign",
+  "endCompare": "Avslutt sammenligning",
+  "selected": "valgt",
+  "showAll": "Vis alle",
+  "hideAll": "Skjul alle",
+  "select": "Velg...",
+  "searchLabel": "Søk {label}...",
+  "noOptionsFound": "Ingen alternativer funnet.",
+  "searchColumns": "Søk kolonner...",
+  "noColumnsFound": "Ingen kolonner funnet.",
+  "selectAll": "Velg alle",
+  "selectDefaults": "Velg standarder",
+  "regionGroups": {
+    "frequentlyUsed": "Ofte brukte",
+    "chinaCloudRegions": "Kina-skyregioner",
+    "mainRegions": "Hovedregioner",
+    "localZones": "Lokale soner",
+    "wavelengthZones": "Wavelength-soner"
+  },
+  "export": {
+    "export": "Eksporter",
+    "downloadCsv": "Last ned CSV",
+    "copyCsv": "Kopier CSV",
+    "copyTsv": "Kopier TSV",
+    "copyMarkdown": "Kopier Markdown-tabell",
+    "csvCopied": "CSV kopiert til utklippstavle",
+    "tsvCopied": "TSV kopiert til utklippstavle",
+    "markdownCopied": "Markdown-tabell kopiert til utklippstavle"
+  }
+}

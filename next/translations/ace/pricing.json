@@ -1,0 +1,18 @@
+{
+  "hourly": "Bak Jeum",
+  "monthly": "Bulanan",
+  "yearly": "Tahunan",
+  "perHour": "/jeum",
+  "perMonth": "/buleuën",
+  "perYear": "/thôn",
+  "onDemand": "On-Demand",
+  "reserved": "Reserved",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Hana Uang Muka",
+  "partialUpfront": "Uang Muka Sebahagian",
+  "allUpfront": "Uang Muka Penuh",
+  "convertible": "Convertible",
+  "standard": "Standar",
+  "priceUnavailable": "N/A"
+}

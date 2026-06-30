@@ -1,0 +1,49 @@
+{
+  "search": "Nadi...",
+  "clearFilters": "Sfri Ismaden",
+  "filters": "Ismaden",
+  "columns": "Izran",
+  "region": "Tamnaḍt",
+  "pricingUnit": "Amsɣan n Tizwi",
+  "cost": "Taydirt",
+  "reserved": "Imzwaren",
+  "currency": "Tarimt",
+  "os": "Anagraw n Ugni",
+  "duration": "Tallit",
+  "reservedTerm": "Tallit n Imzwaren",
+  "durations": {
+    "ondemand": "Ɣer Uɣbalu",
+    "reserved1yr": "Imzwaren i Useggas",
+    "reserved3yr": "Imzwaren i 3 Iseggusen",
+    "spot": "Spot"
+  },
+  "compare": "Smalan",
+  "endCompare": "Sken Asmalan",
+  "selected": "Ittwarnin",
+  "showAll": "Ssken Akk",
+  "hideAll": "Ffer Akk",
+  "select": "Rnu...",
+  "searchLabel": "Nadi {label}...",
+  "noOptionsFound": "Ur ttwafen ara tiktiwin.",
+  "searchColumns": "Nadi deg Izran...",
+  "noColumnsFound": "Ur ttwafen ara izran.",
+  "selectAll": "Rnu Akk",
+  "selectDefaults": "Rnu Iminigen",
+  "regionGroups": {
+    "frequentlyUsed": "Ittusaramen Aṭṭas",
+    "chinaCloudRegions": "Timnaḍin n Uglu n Ccinat",
+    "mainRegions": "Timnaḍin Timezwura",
+    "localZones": "Tizuniwin Timaneɣ",
+    "wavelengthZones": "Tizuniwin n Wavelength"
+  },
+  "export": {
+    "export": "Suffɣ",
+    "downloadCsv": "Awi ɣ Wadda CSV",
+    "copyCsv": "Nqel CSV",
+    "copyTsv": "Nqel TSV",
+    "copyMarkdown": "Nqel Iftasen n Markdown",
+    "csvCopied": "CSV ittwanqal i Upherd",
+    "tsvCopied": "TSV ittwanqal i Upherd",
+    "markdownCopied": "Iftasen n Markdown ittwanqalen i Upherd"
+  }
+}

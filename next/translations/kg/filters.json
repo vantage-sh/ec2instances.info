@@ -1,0 +1,49 @@
+{
+  "search": "Zaya...",
+  "clearFilters": "Suka Filtre",
+  "filters": "Filtre",
+  "columns": "Misini",
+  "region": "Ntoto",
+  "pricingUnit": "Ndangu ya Ntalu",
+  "cost": "Ntalu",
+  "reserved": "Mbandu",
+  "currency": "Mbongo ya Mbandu",
+  "os": "Sistem ya Mosali",
+  "duration": "Ntangu",
+  "reservedTerm": "Mbandu ya Ntangu",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Mbandu ya Mvula 1",
+    "reserved3yr": "Mbandu ya Mvula 3",
+    "spot": "Spot"
+  },
+  "compare": "Tangisa",
+  "endCompare": "Suka Tangisa",
+  "selected": "yambulwa",
+  "showAll": "Bimisa Yonso",
+  "hideAll": "Kanga Yonso",
+  "select": "Bira...",
+  "searchLabel": "Zaya {label}...",
+  "noOptionsFound": "Mpasi ya bira ko.",
+  "searchColumns": "Zaya misini...",
+  "noColumnsFound": "Misini yayikwa ko.",
+  "selectAll": "Bira Yonso",
+  "selectDefaults": "Bira ya Ntete",
+  "regionGroups": {
+    "frequentlyUsed": "Zola Ntangu Zonso",
+    "chinaCloudRegions": "Ntoto ya Mbindi ya Kina",
+    "mainRegions": "Ntoto ya Nene",
+    "localZones": "Nsinga ya Mbazi",
+    "wavelengthZones": "Wavelength Nsinga"
+  },
+  "export": {
+    "export": "Bimisa",
+    "downloadCsv": "Zula CSV",
+    "copyCsv": "Toma CSV",
+    "copyTsv": "Toma TSV",
+    "copyMarkdown": "Toma Tafula ya Markdown",
+    "csvCopied": "CSV tomama na clipboard",
+    "tsvCopied": "TSV tomama na clipboard",
+    "markdownCopied": "Tafula ya Markdown tomama na clipboard"
+  }
+}

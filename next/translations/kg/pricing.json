@@ -1,0 +1,18 @@
+{
+  "hourly": "Na Saa",
+  "monthly": "Na Ngonda",
+  "yearly": "Na Mvula",
+  "perHour": "/saa",
+  "perMonth": "/ngd.",
+  "perYear": "/mvula",
+  "onDemand": "On-Demand",
+  "reserved": "Mbandu",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Teke Ntombo ya Ntete",
+  "partialUpfront": "Ntombo ya Ntete ya Ndambu",
+  "allUpfront": "Ntombo Yonso ya Ntete",
+  "convertible": "Vuluswa",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

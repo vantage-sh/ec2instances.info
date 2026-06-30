@@ -1,0 +1,18 @@
+{
+  "hourly": "প্রতি ঘণ্টা",
+  "monthly": "প্রতি মাস",
+  "yearly": "প্রতি বছর",
+  "perHour": "/ঘণ্টা",
+  "perMonth": "/মাস",
+  "perYear": "/বছর",
+  "onDemand": "চাহিদামতো",
+  "reserved": "সংরক্ষিত",
+  "spot": "স্পট",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "আগাম না",
+  "partialUpfront": "আংশিক আগাম",
+  "allUpfront": "সব আগাম",
+  "convertible": "পরিবর্তনযোগ্য",
+  "standard": "সাধারণ",
+  "priceUnavailable": "N/A"
+}

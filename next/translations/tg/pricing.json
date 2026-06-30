@@ -1,0 +1,18 @@
+{
+  "hourly": "Соатона",
+  "monthly": "Моҳона",
+  "yearly": "Солона",
+  "perHour": "/соат",
+  "perMonth": "/моҳ",
+  "perYear": "/сол",
+  "onDemand": "Дар Талаб",
+  "reserved": "Захиравӣ",
+  "spot": "Spot",
+  "savingsPlan": "Нақшаи Сарфаҷӯӣ",
+  "noUpfront": "Бе Пешпардохт",
+  "partialUpfront": "Пешпардохти Қисман",
+  "allUpfront": "Пешпардохти Пурра",
+  "convertible": "Дигаршаванда",
+  "standard": "Стандарт",
+  "priceUnavailable": "Н/Д"
+}

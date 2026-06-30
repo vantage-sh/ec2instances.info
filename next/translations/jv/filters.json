@@ -1,0 +1,49 @@
+{
+  "search": "Goleki...",
+  "clearFilters": "Resiki Filter",
+  "filters": "Filter",
+  "columns": "Kolom",
+  "region": "Wilayah",
+  "pricingUnit": "Unit Rega",
+  "cost": "Biaya",
+  "reserved": "Reservasi",
+  "currency": "Mata Uang",
+  "os": "Sistem Operasi",
+  "duration": "Durasi",
+  "reservedTerm": "Istilah Reservasi",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Reservasi 1 Taun",
+    "reserved3yr": "Reservasi 3 Taun",
+    "spot": "Spot"
+  },
+  "compare": "Bandhingake",
+  "endCompare": "Rampungake Perbandingan",
+  "selected": "dipilih",
+  "showAll": "Tampilake Kabeh",
+  "hideAll": "Ndhelikake Kabeh",
+  "select": "Pilih...",
+  "searchLabel": "Goleki {label}...",
+  "noOptionsFound": "Ora ana pilihan sing ditemokake.",
+  "searchColumns": "Goleki kolom...",
+  "noColumnsFound": "Ora ana kolom sing ditemokake.",
+  "selectAll": "Pilih Kabeh",
+  "selectDefaults": "Pilih Standar",
+  "regionGroups": {
+    "frequentlyUsed": "Sering Digunakake",
+    "chinaCloudRegions": "Wilayah Cloud China",
+    "mainRegions": "Wilayah Utama",
+    "localZones": "Zona Lokal",
+    "wavelengthZones": "Zona Wavelength"
+  },
+  "export": {
+    "export": "Ekspor",
+    "downloadCsv": "Unduh CSV",
+    "copyCsv": "Salin CSV",
+    "copyTsv": "Salin TSV",
+    "copyMarkdown": "Salin Tabel Markdown",
+    "csvCopied": "CSV disalin menyang clipboard",
+    "tsvCopied": "TSV disalin menyang clipboard",
+    "markdownCopied": "Tabel Markdown disalin menyang clipboard"
+  }
+}

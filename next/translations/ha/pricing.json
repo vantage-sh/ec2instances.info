@@ -1,0 +1,18 @@
+{
+  "hourly": "Kowace Awa",
+  "monthly": "Kowace Wata",
+  "yearly": "Kowace Shekara",
+  "perHour": "/awa",
+  "perMonth": "/wata",
+  "perYear": "/shekara",
+  "onDemand": "A Buƙata",
+  "reserved": "Ajiye",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Babu Biyan Gaba",
+  "partialUpfront": "Biyan Gaba Wani Ɓangare",
+  "allUpfront": "Biyan Gaba Duka",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

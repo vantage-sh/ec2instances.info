@@ -1,0 +1,18 @@
+{
+  "hourly": "Lɛrɛ kelen na",
+  "monthly": "Kalo kelen na",
+  "yearly": "San kelen na",
+  "perHour": "/lɛrɛ",
+  "perMonth": "/kalo",
+  "perYear": "/san",
+  "onDemand": "On-Demand",
+  "reserved": "Reserved",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Sisan Maribali Foyi",
+  "partialUpfront": "Sisan Maribali Dɔ",
+  "allUpfront": "Sisan Maribali Bɛɛ",
+  "convertible": "Yɛlɛmali",
+  "standard": "Ɲɔgɔn",
+  "priceUnavailable": "N/A"
+}

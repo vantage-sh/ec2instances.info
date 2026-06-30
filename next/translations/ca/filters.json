@@ -1,0 +1,49 @@
+{
+  "search": "Cerca...",
+  "clearFilters": "Esborrar filtres",
+  "filters": "Filtres",
+  "columns": "Columnes",
+  "region": "Regió",
+  "pricingUnit": "Unitat de preu",
+  "cost": "Cost",
+  "reserved": "Reservat",
+  "currency": "Moneda",
+  "os": "Sistema operatiu",
+  "duration": "Durada",
+  "reservedTerm": "Període reservat",
+  "durations": {
+    "ondemand": "Sota demanda",
+    "reserved1yr": "Reservat 1 any",
+    "reserved3yr": "Reservat 3 anys",
+    "spot": "Spot"
+  },
+  "compare": "Comparar",
+  "endCompare": "Finalitzar comparació",
+  "selected": "seleccionat",
+  "showAll": "Mostrar tot",
+  "hideAll": "Amagar tot",
+  "select": "Selecciona...",
+  "searchLabel": "Cercar {label}...",
+  "noOptionsFound": "No s'han trobat opcions.",
+  "searchColumns": "Cercar columnes...",
+  "noColumnsFound": "No s'han trobat columnes.",
+  "selectAll": "Seleccionar tot",
+  "selectDefaults": "Seleccionar predeterminats",
+  "regionGroups": {
+    "frequentlyUsed": "Usats freqüentment",
+    "chinaCloudRegions": "Regions Cloud de la Xina",
+    "mainRegions": "Regions principals",
+    "localZones": "Zones locals",
+    "wavelengthZones": "Zones Wavelength"
+  },
+  "export": {
+    "export": "Exportar",
+    "downloadCsv": "Descarregar CSV",
+    "copyCsv": "Copiar CSV",
+    "copyTsv": "Copiar TSV",
+    "copyMarkdown": "Copiar taula Markdown",
+    "csvCopied": "CSV copiat al porta-retalls",
+    "tsvCopied": "TSV copiat al porta-retalls",
+    "markdownCopied": "Taula Markdown copiada al porta-retalls"
+  }
+}

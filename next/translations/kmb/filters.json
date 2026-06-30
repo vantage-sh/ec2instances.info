@@ -1,0 +1,49 @@
+{
+  "search": "Kutafuta...",
+  "clearFilters": "Kusamununa Mafilutelo",
+  "filters": "Mafilutelo",
+  "columns": "Vilima",
+  "region": "Etungo",
+  "pricingUnit": "Cipimo ca Nima",
+  "cost": "Nima",
+  "reserved": "Xa Kubanga",
+  "currency": "Nima ya Nzo",
+  "os": "Mupango Wakulonga",
+  "duration": "Vihela",
+  "reservedTerm": "Vihela Xa Kubanga",
+  "durations": {
+    "ondemand": "Mu Kubakisa",
+    "reserved1yr": "Xa Kubanga Mwaka 1",
+    "reserved3yr": "Xa Kubanga Miaka 3",
+    "spot": "Spot"
+  },
+  "compare": "Kulinganisa",
+  "endCompare": "Kuhaula Kulinganisa",
+  "selected": "kusindwa",
+  "showAll": "Kulonga Yose",
+  "hideAll": "Kufinika Yose",
+  "select": "Kusinda...",
+  "searchLabel": "Kutafuta {label}...",
+  "noOptionsFound": "Visengo vikapangwa.",
+  "searchColumns": "Kutafuta vilima...",
+  "noColumnsFound": "Vilima vikapangwa.",
+  "selectAll": "Kusinda Yose",
+  "selectDefaults": "Kusinda Visengo vya Nguyi",
+  "regionGroups": {
+    "frequentlyUsed": "Kutumia Mara Nyingi",
+    "chinaCloudRegions": "Matungo ya Cloud ya China",
+    "mainRegions": "Matungo Makulu",
+    "localZones": "Matungo Kupita",
+    "wavelengthZones": "Matungo ya Wavelength"
+  },
+  "export": {
+    "export": "Kutunga",
+    "downloadCsv": "Kukamba CSV",
+    "copyCsv": "Kukopika CSV",
+    "copyTsv": "Kukopika TSV",
+    "copyMarkdown": "Kukopika Ilitebulo lya Markdown",
+    "csvCopied": "CSV kukopikwa ku clipboard",
+    "tsvCopied": "TSV kukopikwa ku clipboard",
+    "markdownCopied": "Ilitebulo lya Markdown kukopikwa ku clipboard"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "hourly": "Moix Cungz",
+  "monthly": "Moix Ndwen",
+  "yearly": "Moix Bi",
+  "perHour": "/cungz",
+  "perMonth": "/ndwen",
+  "perYear": "/bi",
+  "onDemand": "On-Demand",
+  "reserved": "Reserved",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Mbouj Miz Upfront",
+  "partialUpfront": "Gij Upfront",
+  "allUpfront": "Sojmiz Upfront",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Bincika...",
+  "clearFilters": "Share Tace",
+  "filters": "Tace",
+  "columns": "Shafi",
+  "region": "Yanki",
+  "pricingUnit": "Naɗin Farashi",
+  "cost": "Farashi",
+  "reserved": "Ajiye",
+  "currency": "Kuɗi",
+  "os": "Tsarin Aiki",
+  "duration": "Tsawon Lokaci",
+  "reservedTerm": "Lokacin Ajiye",
+  "durations": {
+    "ondemand": "A Buƙata",
+    "reserved1yr": "Ajiye na Shekara 1",
+    "reserved3yr": "Ajiye na Shekara 3",
+    "spot": "Spot"
+  },
+  "compare": "Kwatanta",
+  "endCompare": "Ƙare Kwatancen",
+  "selected": "an zaɓa",
+  "showAll": "Nuna Duka",
+  "hideAll": "Ɓoye Duka",
+  "select": "Zaɓa...",
+  "searchLabel": "Bincika {label}...",
+  "noOptionsFound": "Ba a sami zaɓuɓɓuka ba.",
+  "searchColumns": "Bincika shafi...",
+  "noColumnsFound": "Ba a sami shafi ba.",
+  "selectAll": "Zaɓi Duka",
+  "selectDefaults": "Zaɓi Tsoho",
+  "regionGroups": {
+    "frequentlyUsed": "Abubuwan da Ake Amfani da su Kullum",
+    "chinaCloudRegions": "Yankuna Cloud na China",
+    "mainRegions": "Yankuna Masu Muhimmanci",
+    "localZones": "Yankuna na Gida",
+    "wavelengthZones": "Yankuna Wavelength"
+  },
+  "export": {
+    "export": "Fitar da",
+    "downloadCsv": "Sauke CSV",
+    "copyCsv": "Kwafi CSV",
+    "copyTsv": "Kwafi TSV",
+    "copyMarkdown": "Kwafi Teburin Markdown",
+    "csvCopied": "An kwafi CSV zuwa clipboard",
+    "tsvCopied": "An kwafi TSV zuwa clipboard",
+    "markdownCopied": "An kwafi teburin Markdown zuwa clipboard"
+  }
+}

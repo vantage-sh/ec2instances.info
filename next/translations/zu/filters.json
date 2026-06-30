@@ -1,0 +1,49 @@
+{
+  "search": "Sesha...",
+  "clearFilters": "Susa Izihluzi",
+  "filters": "Izihluzi",
+  "columns": "Izinkolamu",
+  "region": "Isifunda",
+  "pricingUnit": "Iyunithi Yokuntengo",
+  "cost": "Intengo",
+  "reserved": "Kugciniwe",
+  "currency": "Uhlobo Lwemali",
+  "os": "Uhlelo Lokusebenza",
+  "duration": "Isikhathi",
+  "reservedTerm": "Isikhathi Sokugcina",
+  "durations": {
+    "ondemand": "Ngesicelo",
+    "reserved1yr": "Unyaka Owodwa Ogciniwe",
+    "reserved3yr": "Iminyaka Emithathu Egciniwe",
+    "spot": "Spot"
+  },
+  "compare": "Qhathanisa",
+  "endCompare": "Qeda Ukuqhathanisa",
+  "selected": "okukhethiwe",
+  "showAll": "Bonisa Konke",
+  "hideAll": "Fihla Konke",
+  "select": "Khetha...",
+  "searchLabel": "Sesha {label}...",
+  "noOptionsFound": "Azikho izinketho ezitholakele.",
+  "searchColumns": "Sesha izinkolamu...",
+  "noColumnsFound": "Azikho izinkolamu ezitholakele.",
+  "selectAll": "Khetha Konke",
+  "selectDefaults": "Khetha Okujwayelekile",
+  "regionGroups": {
+    "frequentlyUsed": "Okusetshenziswa Kakhulu",
+    "chinaCloudRegions": "Izifunda Zefu Ze-China",
+    "mainRegions": "Izifunda Eziyinhloko",
+    "localZones": "Izindawo Zasekhaya",
+    "wavelengthZones": "Izindawo ze-Wavelength"
+  },
+  "export": {
+    "export": "Khipha",
+    "downloadCsv": "Landa CSV",
+    "copyCsv": "Kopisha CSV",
+    "copyTsv": "Kopisha TSV",
+    "copyMarkdown": "Kopisha Ithebula le-Markdown",
+    "csvCopied": "CSV ikopishwe ku-clipboard",
+    "tsvCopied": "TSV ikopishwe ku-clipboard",
+    "markdownCopied": "Ithebula le-Markdown likopishwe ku-clipboard"
+  }
+}

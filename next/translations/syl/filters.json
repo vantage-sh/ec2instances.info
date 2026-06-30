@@ -1,0 +1,49 @@
+{
+  "search": "খোঁজো...",
+  "clearFilters": "ফিল্টার মুছো",
+  "filters": "ফিল্টার",
+  "columns": "কলাম",
+  "region": "অঞ্চল",
+  "pricingUnit": "দামের একক",
+  "cost": "দাম",
+  "reserved": "সংরক্ষিত",
+  "currency": "মুদ্রা",
+  "os": "অপারেটিং সিস্টেম",
+  "duration": "সময়কাল",
+  "reservedTerm": "সংরক্ষণ মেয়াদ",
+  "durations": {
+    "ondemand": "চাহিদামতো",
+    "reserved1yr": "১ বছর সংরক্ষিত",
+    "reserved3yr": "৩ বছর সংরক্ষিত",
+    "spot": "স্পট"
+  },
+  "compare": "তুলনা",
+  "endCompare": "তুলনা শেষ",
+  "selected": "বাছাই করা",
+  "showAll": "সব দেখাও",
+  "hideAll": "সব লুকাও",
+  "select": "বাছাও...",
+  "searchLabel": "{label} খোঁজো...",
+  "noOptionsFound": "কিছু পাওয়া যায়নি।",
+  "searchColumns": "কলাম খোঁজো...",
+  "noColumnsFound": "কোনো কলাম পাওয়া যায়নি।",
+  "selectAll": "সব বাছাও",
+  "selectDefaults": "ডিফল্ট বাছাও",
+  "regionGroups": {
+    "frequentlyUsed": "বেশি ব্যবহৃত",
+    "chinaCloudRegions": "China Cloud অঞ্চল",
+    "mainRegions": "মূল অঞ্চল",
+    "localZones": "স্থানীয় জোন",
+    "wavelengthZones": "Wavelength জোন"
+  },
+  "export": {
+    "export": "রপ্তানি",
+    "downloadCsv": "CSV ডাউনলোড",
+    "copyCsv": "CSV কপি",
+    "copyTsv": "TSV কপি",
+    "copyMarkdown": "Markdown টেবিল কপি",
+    "csvCopied": "CSV ক্লিপবোর্ডে কপি হইছে",
+    "tsvCopied": "TSV ক্লিপবোর্ডে কপি হইছে",
+    "markdownCopied": "Markdown টেবিল ক্লিপবোর্ডে কপি হইছে"
+  }
+}

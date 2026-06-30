@@ -1,0 +1,18 @@
+{
+  "hourly": "Sεt Kama",
+  "monthly": "Wəlεm Kama",
+  "yearly": "Alnə Kama",
+  "perHour": "/sεt",
+  "perMonth": "/wəl.",
+  "perYear": "/alnə",
+  "onDemand": "On-Demand",
+  "reserved": "Yəjikam",
+  "spot": "Spot",
+  "savingsPlan": "Tasarruf Planı",
+  "noUpfront": "Azəl Tölεm Kərεm",
+  "partialUpfront": "Bəlü Azəl Tölεm",
+  "allUpfront": "Tüm Azəl Tölεm",
+  "convertible": "Dönüştürülebilir",
+  "standard": "Standart",
+  "priceUnavailable": "N/A"
+}

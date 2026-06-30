@@ -1,0 +1,49 @@
+{
+  "search": "ತಡಕ್ಲೆ...",
+  "clearFilters": "ಫಿಲ್ಟರ್‌ಗೊ ತೆಗ್ಗ್",
+  "filters": "ಫಿಲ್ಟರ್‌ಗೊ",
+  "columns": "ಕಾಲಮ್‌ಗೊ",
+  "region": "ಪ್ರದೇಶ",
+  "pricingUnit": "ಬೆಲೆ ಯೂನಿಟ್",
+  "cost": "ಖರ್ಚ್",
+  "reserved": "Reserved",
+  "currency": "ಕರೆನ್ಸಿ",
+  "os": "ಆಪರೇಟಿಂಗ್ ಸಿಸ್ಟಂ",
+  "duration": "ಅವಧಿ",
+  "reservedTerm": "Reserved ಅವಧಿ",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 ಅಂಕ್ Reserved",
+    "reserved3yr": "3 ಅಂಕ್ Reserved",
+    "spot": "Spot"
+  },
+  "compare": "ಹೋಲಿಕೆ",
+  "endCompare": "ಹೋಲಿಕೆ ನಿಲ್ಲಿಸ್ಲೆ",
+  "selected": "ಆಯ್ಕೆ ಆಯಿ",
+  "showAll": "ಎಲ್ಲ ತೋರ್ಲೆ",
+  "hideAll": "ಎಲ್ಲ ಮರ್ಯ",
+  "select": "ಆಯ್ಕೆ ಮಲ್ಪ್ಲೆ...",
+  "searchLabel": "{label} ತಡಕ್ಲೆ...",
+  "noOptionsFound": "ಆಯ್ಕೆಗೊ ದೊರ್ಕಿಜ್ಜಿ.",
+  "searchColumns": "ಕಾಲಮ್ ತಡಕ್ಲೆ...",
+  "noColumnsFound": "ಕಾಲಮ್ ದೊರ್ಕಿಜ್ಜಿ.",
+  "selectAll": "ಎಲ್ಲ ಆಯ್ಕೆ ಮಲ್ಪ್ಲೆ",
+  "selectDefaults": "ಡೀಫಾಲ್ಟ್ ಆಯ್ಕೆ ಮಲ್ಪ್ಲೆ",
+  "regionGroups": {
+    "frequentlyUsed": "ಮಿಗ್ ಬಳಸ್ಪಿನ",
+    "chinaCloudRegions": "ಚೀನಾ ಕ್ಲೌಡ್ ಪ್ರದೇಶಗೊ",
+    "mainRegions": "ಮುಖ್ಯ ಪ್ರದೇಶಗೊ",
+    "localZones": "ಲೋಕಲ್ ವಲಯಗೊ",
+    "wavelengthZones": "Wavelength ವಲಯಗೊ"
+  },
+  "export": {
+    "export": "ಎಕ್ಸ್‌ಪೋರ್ಟ್",
+    "downloadCsv": "CSV ಡೌನ್‌ಲೋಡ್ ಮಲ್ಪ್ಲೆ",
+    "copyCsv": "CSV ಕಾಪಿ ಮಲ್ಪ್ಲೆ",
+    "copyTsv": "TSV ಕಾಪಿ ಮಲ್ಪ್ಲೆ",
+    "copyMarkdown": "Markdown ಟೇಬಲ್ ಕಾಪಿ ಮಲ್ಪ್ಲೆ",
+    "csvCopied": "CSV ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗ್ ಕಾಪಿ ಆತ್",
+    "tsvCopied": "TSV ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗ್ ಕಾಪಿ ಆತ್",
+    "markdownCopied": "Markdown ಟೇಬಲ್ ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗ್ ಕಾಪಿ ಆತ್"
+  }
+}

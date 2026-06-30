@@ -1,0 +1,18 @@
+{
+  "hourly": "ក្នុងមួយម៉ោង",
+  "monthly": "ក្នុងមួយខែ",
+  "yearly": "ក្នុងមួយឆ្នាំ",
+  "perHour": "/ម៉ោង",
+  "perMonth": "/ខែ",
+  "perYear": "/ឆ្នាំ",
+  "onDemand": "On-Demand",
+  "reserved": "Reserved",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "គ្មានការបង់ប្រាក់ជាមុន",
+  "partialUpfront": "បង់ប្រាក់ជាមុនដោយផ្នែក",
+  "allUpfront": "បង់ប្រាក់ជាមុនទាំងអស់",
+  "convertible": "អាចបំប្លែងបាន",
+  "standard": "ស្តង់ដារ",
+  "priceUnavailable": "N/A"
+}

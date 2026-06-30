@@ -1,0 +1,18 @@
+{
+  "hourly": "Чааска",
+  "monthly": "Ыйга",
+  "yearly": "Сылга",
+  "perHour": "/чаас",
+  "perMonth": "/ый",
+  "perYear": "/сыл",
+  "onDemand": "Эрэйиигэ",
+  "reserved": "Резервируованнай",
+  "spot": "Spot",
+  "savingsPlan": "Экономия Плана",
+  "noUpfront": "Авансыгас Суох",
+  "partialUpfront": "Чааhын Аванс",
+  "allUpfront": "Толору Аванс",
+  "convertible": "Конвертируованнай",
+  "standard": "Стандарт",
+  "priceUnavailable": "Суох"
+}

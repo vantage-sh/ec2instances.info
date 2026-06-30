@@ -1,0 +1,49 @@
+{
+  "search": "Издөө...",
+  "clearFilters": "Чыпкаларды тазалоо",
+  "filters": "Чыпкалар",
+  "columns": "Мамычалар",
+  "region": "Аймак",
+  "pricingUnit": "Баа Бирдиги",
+  "cost": "Баасы",
+  "reserved": "Брондолгон",
+  "currency": "Валюта",
+  "os": "Операциялык Система",
+  "duration": "Убактысы",
+  "reservedTerm": "Брондоо Мезгили",
+  "durations": {
+    "ondemand": "Суроо-талапка жараша",
+    "reserved1yr": "1 Жылдык Брондоо",
+    "reserved3yr": "3 Жылдык Брондоо",
+    "spot": "Spot"
+  },
+  "compare": "Салыштыруу",
+  "endCompare": "Салыштырууну аяктоо",
+  "selected": "тандалган",
+  "showAll": "Баарын Көрсөтүү",
+  "hideAll": "Баарын Жашыруу",
+  "select": "Тандаңыз...",
+  "searchLabel": "{label} издөө...",
+  "noOptionsFound": "Параметрлер табылган жок.",
+  "searchColumns": "Мамычаларды издөө...",
+  "noColumnsFound": "Мамычалар табылган жок.",
+  "selectAll": "Баарын Тандоо",
+  "selectDefaults": "Демейки Параметрлерди Тандоо",
+  "regionGroups": {
+    "frequentlyUsed": "Көп Колдонулган",
+    "chinaCloudRegions": "Кытай Булут Аймактары",
+    "mainRegions": "Негизги Аймактар",
+    "localZones": "Жергиликтүү Зоналар",
+    "wavelengthZones": "Wavelength Зоналары"
+  },
+  "export": {
+    "export": "Экспорттоо",
+    "downloadCsv": "CSV Жүктөп Алуу",
+    "copyCsv": "CSV Көчүрүү",
+    "copyTsv": "TSV Көчүрүү",
+    "copyMarkdown": "Markdown Таблицасын Көчүрүү",
+    "csvCopied": "CSV буферге көчүрүлдү",
+    "tsvCopied": "TSV буферге көчүрүлдү",
+    "markdownCopied": "Markdown таблицасы буферге көчүрүлдү"
+  }
+}

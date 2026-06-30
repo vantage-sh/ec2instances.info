@@ -1,0 +1,49 @@
+{
+  "search": "Fittex...",
+  "clearFilters": "Ħassar il-Filtri",
+  "filters": "Filtri",
+  "columns": "Kolonni",
+  "region": "Reġjun",
+  "pricingUnit": "Unità tal-Prezz",
+  "cost": "Spiża",
+  "reserved": "Riżervat",
+  "currency": "Munita",
+  "os": "Sistema Operattiva",
+  "duration": "Durata",
+  "reservedTerm": "Terminu Riżervat",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Riżervat 1 Sena",
+    "reserved3yr": "Riżervat 3 Snin",
+    "spot": "Spot"
+  },
+  "compare": "Qabbel",
+  "endCompare": "Temm il-Paragun",
+  "selected": "magħżul",
+  "showAll": "Uri Kollox",
+  "hideAll": "Aħbi Kollox",
+  "select": "Agħżel...",
+  "searchLabel": "Fittex {label}...",
+  "noOptionsFound": "Ma nstabux għażliet.",
+  "searchColumns": "Fittex kolonni...",
+  "noColumnsFound": "Ma nstabux kolonni.",
+  "selectAll": "Agħżel Kollox",
+  "selectDefaults": "Agħżel id-Defaults",
+  "regionGroups": {
+    "frequentlyUsed": "Użati Frekwentement",
+    "chinaCloudRegions": "Reġjuni Cloud taċ-Ċina",
+    "mainRegions": "Reġjuni Ewlenin",
+    "localZones": "Żoni Lokali",
+    "wavelengthZones": "Żoni Wavelength"
+  },
+  "export": {
+    "export": "Esporta",
+    "downloadCsv": "Niżżel CSV",
+    "copyCsv": "Ikkopja CSV",
+    "copyTsv": "Ikkopja TSV",
+    "copyMarkdown": "Ikkopja Tabella Markdown",
+    "csvCopied": "CSV ikkopjat fil-clipboard",
+    "tsvCopied": "TSV ikkopjat fil-clipboard",
+    "markdownCopied": "Tabella Markdown ikkopjata fil-clipboard"
+  }
+}

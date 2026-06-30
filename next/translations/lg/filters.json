@@ -1,0 +1,49 @@
+{
+  "search": "Noonya...",
+  "clearFilters": "Sazaamu Ebissimulula",
+  "filters": "Ebissimulula",
+  "columns": "Amawuzu",
+  "region": "Ensi",
+  "pricingUnit": "Ddiiro ly'Omuwendo",
+  "cost": "Omuwendo",
+  "reserved": "Okuterezebwa",
+  "currency": "Ensimbi",
+  "os": "Enkola y'Omulimu",
+  "duration": "Obudde",
+  "reservedTerm": "Ebbanga ly'Okuterezebwa",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Okuterezebwa kw'Omwaka 1",
+    "reserved3yr": "Okuterezebwa kw'Emyaka 3",
+    "spot": "Spot"
+  },
+  "compare": "Kgeraanya",
+  "endCompare": "Ggyawo Okuggeraanya",
+  "selected": "Ekyalawaanyizibwa",
+  "showAll": "Laga Byona",
+  "hideAll": "Kisa Byona",
+  "select": "Londa...",
+  "searchLabel": "Noonya {label}...",
+  "noOptionsFound": "Tewali Biddukanya Binaabangibwa.",
+  "searchColumns": "Noonya mu Mawuzu...",
+  "noColumnsFound": "Tewali Mawuzu Ganaabangibwa.",
+  "selectAll": "Londa Byona",
+  "selectDefaults": "Londa Ebya Ddaala",
+  "regionGroups": {
+    "frequentlyUsed": "Ezikozesebwa Ennyo",
+    "chinaCloudRegions": "Ensi za China Cloud",
+    "mainRegions": "Ensi ez'Ennene",
+    "localZones": "Akaalo ka Kitundu",
+    "wavelengthZones": "Akaalo ka Wavelength"
+  },
+  "export": {
+    "export": "Ggya Ebintu",
+    "downloadCsv": "Sambula CSV",
+    "copyCsv": "Koppa CSV",
+    "copyTsv": "Koppa TSV",
+    "copyMarkdown": "Koppa Entebe ya Markdown",
+    "csvCopied": "CSV enakoppolwa mu clipboard",
+    "tsvCopied": "TSV enakoppolwa mu clipboard",
+    "markdownCopied": "Entebe ya Markdown enakoppolwa mu clipboard"
+  }
+}

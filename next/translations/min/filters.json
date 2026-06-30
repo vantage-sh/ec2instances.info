@@ -1,0 +1,49 @@
+{
+  "search": "Cari...",
+  "clearFilters": "Basihkan Filter",
+  "filters": "Filter",
+  "columns": "Kolom",
+  "region": "Wilayah",
+  "pricingUnit": "Satuan Harago",
+  "cost": "Biayo",
+  "reserved": "Cadangan",
+  "currency": "Mato Uang",
+  "os": "Sistem Operasi",
+  "duration": "Durasi",
+  "reservedTerm": "Jangka Cadangan",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Cadangan 1 Taun",
+    "reserved3yr": "Cadangan 3 Taun",
+    "spot": "Spot"
+  },
+  "compare": "Bandiangkan",
+  "endCompare": "Akhiri Parbandingan",
+  "selected": "dipiliah",
+  "showAll": "Tampikan Sadonyo",
+  "hideAll": "Sabunyikan Sadonyo",
+  "select": "Piliah...",
+  "searchLabel": "Cari {label}...",
+  "noOptionsFound": "Indak ado pilihan nan ditemuan.",
+  "searchColumns": "Cari kolom...",
+  "noColumnsFound": "Indak ado kolom nan ditemuan.",
+  "selectAll": "Piliah Sadonyo",
+  "selectDefaults": "Piliah Default",
+  "regionGroups": {
+    "frequentlyUsed": "Sering Dipakai",
+    "chinaCloudRegions": "Wilayah Cloud Cino",
+    "mainRegions": "Wilayah Utamo",
+    "localZones": "Zona Lokal",
+    "wavelengthZones": "Zona Wavelength"
+  },
+  "export": {
+    "export": "Ekspor",
+    "downloadCsv": "Unduah CSV",
+    "copyCsv": "Salin CSV",
+    "copyTsv": "Salin TSV",
+    "copyMarkdown": "Salin Tabek Markdown",
+    "csvCopied": "CSV disalin ka clipboard",
+    "tsvCopied": "TSV disalin ka clipboard",
+    "markdownCopied": "Tabek Markdown disalin ka clipboard"
+  }
+}

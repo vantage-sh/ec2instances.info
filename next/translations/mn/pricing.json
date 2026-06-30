@@ -1,0 +1,18 @@
+{
+  "hourly": "Цагт",
+  "monthly": "Сард",
+  "yearly": "Жилд",
+  "perHour": "/цаг",
+  "perMonth": "/сар",
+  "perYear": "/жил",
+  "onDemand": "Хүсэлтээр",
+  "reserved": "Захиалгат",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Урьдчилгаагүй",
+  "partialUpfront": "Хэсэгчилсэн урьдчилга",
+  "allUpfront": "Бүрэн урьдчилга",
+  "convertible": "Хөрвөх боломжтой",
+  "standard": "Стандарт",
+  "priceUnavailable": "Байхгүй"
+}

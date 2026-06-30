@@ -1,0 +1,18 @@
+{
+  "hourly": "Per time",
+  "monthly": "Per måned",
+  "yearly": "Per år",
+  "perHour": "/t",
+  "perMonth": "/mnd",
+  "perYear": "/år",
+  "onDemand": "On-Demand",
+  "reserved": "Reservert",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Ingen forskuddsbetaling",
+  "partialUpfront": "Delvis forskuddsbetaling",
+  "allUpfront": "Full forskuddsbetaling",
+  "convertible": "Konverterbar",
+  "standard": "Standard",
+  "priceUnavailable": "I/T"
+}

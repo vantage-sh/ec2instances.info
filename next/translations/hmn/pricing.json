@@ -1,0 +1,18 @@
+{
+  "hourly": "Ib Teev",
+  "monthly": "Ib Hli",
+  "yearly": "Ib Xyoo",
+  "perHour": "/teev",
+  "perMonth": "/hli",
+  "perYear": "/xyoo",
+  "onDemand": "On-Demand",
+  "reserved": "Reserved",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Tsis Them Ua Ntej",
+  "partialUpfront": "Them Ib Nrab Ua Ntej",
+  "allUpfront": "Them Tag Nrho Ua Ntej",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Barbaadi...",
+  "clearFilters": "Filtirawwan Haqi",
+  "filters": "Filtirawwan",
+  "columns": "Tarreewwan",
+  "region": "Naannoo",
+  "pricingUnit": "Waajjira Gatii",
+  "cost": "Gatii",
+  "reserved": "Kuufame",
+  "currency": "Maallaqaa",
+  "os": "Sirna Hojii",
+  "duration": "Yeroo",
+  "reservedTerm": "Yeroo Kuufamaa",
+  "durations": {
+    "ondemand": "Gaafataman",
+    "reserved1yr": "Kuufama Waggaa 1",
+    "reserved3yr": "Kuufama Waggaa 3",
+    "spot": "Spot"
+  },
+  "compare": "Walbira Qabi",
+  "endCompare": "Walbira Qabuu Dhaabi",
+  "selected": "filatame",
+  "showAll": "Hunda Agarsiisi",
+  "hideAll": "Hunda Dhoksi",
+  "select": "Filadhu...",
+  "searchLabel": "{label} barbaadi...",
+  "noOptionsFound": "Filannoon hin argamne.",
+  "searchColumns": "Tarreewwan barbaadi...",
+  "noColumnsFound": "Tarreewwan hin argamne.",
+  "selectAll": "Hunda Filadhu",
+  "selectDefaults": "Durtii Filadhu",
+  "regionGroups": {
+    "frequentlyUsed": "Yeroo Hedduu Itti Fayyadamamu",
+    "chinaCloudRegions": "Naannolee Awwaalaa Chaayinaa",
+    "mainRegions": "Naannolee Gurguddoo",
+    "localZones": "Zonoota Naannoo",
+    "wavelengthZones": "Zonoota Wavelength"
+  },
+  "export": {
+    "export": "Ergi",
+    "downloadCsv": "CSV Buufadhu",
+    "copyCsv": "CSV Koppi Godhi",
+    "copyTsv": "TSV Koppi Godhi",
+    "copyMarkdown": "Gabatee Markdown Koppi Godhi",
+    "csvCopied": "CSV clipboard keessatti koppi ta'e",
+    "tsvCopied": "TSV clipboard keessatti koppi ta'e",
+    "markdownCopied": "Gabatee Markdown clipboard keessatti koppi ta'e"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "search": "ፈልግ...",
+  "clearFilters": "ማጣሪያዎች አጽዳ",
+  "filters": "ማጣሪያዎች",
+  "columns": "አምዶች",
+  "region": "ክልል",
+  "pricingUnit": "የዋጋ ክፍሎች",
+  "cost": "ዋጋ",
+  "reserved": "የተጠበቀ",
+  "currency": "ምንዛሬ",
+  "os": "ስርዓተ ክወና",
+  "duration": "ጊዜ",
+  "reservedTerm": "የተጠበቀ ቃል",
+  "durations": {
+    "ondemand": "በፍላጎት",
+    "reserved1yr": "1 ዓመት የተጠበቀ",
+    "reserved3yr": "3 ዓመት የተጠበቀ",
+    "spot": "Spot"
+  },
+  "compare": "ያወዳድሩ",
+  "endCompare": "ንጽጽር አቁም",
+  "selected": "ተመርጧል",
+  "showAll": "ሁሉንም አሳይ",
+  "hideAll": "ሁሉንም ደብቅ",
+  "select": "ምረጥ...",
+  "searchLabel": "{label} ፈልግ...",
+  "noOptionsFound": "ምርጫ አልተገኘም።",
+  "searchColumns": "አምዶች ፈልግ...",
+  "noColumnsFound": "አምዶች አልተገኙም።",
+  "selectAll": "ሁሉንም ምረጥ",
+  "selectDefaults": "ነባሪዎችን ምረጥ",
+  "regionGroups": {
+    "frequentlyUsed": "ብዙ ጊዜ ጥቅም ላይ",
+    "chinaCloudRegions": "የቻይና Cloud ክልሎች",
+    "mainRegions": "ዋና ክልሎች",
+    "localZones": "የአካባቢ ዞኖች",
+    "wavelengthZones": "Wavelength ዞኖች"
+  },
+  "export": {
+    "export": "ላክ",
+    "downloadCsv": "CSV አውርድ",
+    "copyCsv": "CSV ቅዳ",
+    "copyTsv": "TSV ቅዳ",
+    "copyMarkdown": "Markdown ሠንጠረዥ ቅዳ",
+    "csvCopied": "CSV ወደ clipboard ተቀድቷል",
+    "tsvCopied": "TSV ወደ clipboard ተቀድቷል",
+    "markdownCopied": "Markdown ሠንጠረዥ ወደ clipboard ተቀድቷል"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Khangela...",
+  "clearFilters": "Susa Izihlungi",
+  "filters": "Izihlungi",
+  "columns": "Iikholamu",
+  "region": "Isithili",
+  "pricingUnit": "Iyunithi yeXabiso",
+  "cost": "Ixabiso",
+  "reserved": "Igciniwe",
+  "currency": "Imali",
+  "os": "Inkqubo yoSebenziso",
+  "duration": "Ubude bexesha",
+  "reservedTerm": "Ixesha leGcino",
+  "durations": {
+    "ondemand": "Ngesicelo",
+    "reserved1yr": "Igciniwe Unyaka 1",
+    "reserved3yr": "Igciniwe Iminyaka 3",
+    "spot": "Spot"
+  },
+  "compare": "Thelekisa",
+  "endCompare": "Gqiba uKuthelekisa",
+  "selected": "ikhethiwe",
+  "showAll": "Bonisa Yonke",
+  "hideAll": "Fihla Yonke",
+  "select": "Khetha...",
+  "searchLabel": "Khangela {label}...",
+  "noOptionsFound": "Akukho zinketho zifumanekileyo.",
+  "searchColumns": "Khangela iikholamu...",
+  "noColumnsFound": "Akukho kholamu zifumanekileyo.",
+  "selectAll": "Khetha Yonke",
+  "selectDefaults": "Khetha iiNgagqibeleleyo",
+  "regionGroups": {
+    "frequentlyUsed": "Iisetyenziswa Rhoqo",
+    "chinaCloudRegions": "Iindawo ze-Cloud zeTshayina",
+    "mainRegions": "Iindawo Eziphambili",
+    "localZones": "Iindawo Zendawo",
+    "wavelengthZones": "Iindawo ze-Wavelength"
+  },
+  "export": {
+    "export": "Thumela Ngaphandle",
+    "downloadCsv": "Khuphela CSV",
+    "copyCsv": "Kopa CSV",
+    "copyTsv": "Kopa TSV",
+    "copyMarkdown": "Kopa Ithebile yeMarkdown",
+    "csvCopied": "CSV ikhutshelwe ekupeyinteni",
+    "tsvCopied": "TSV ikhutshelwe ekupeyinteni",
+    "markdownCopied": "Ithebile yeMarkdown ikhutshelwe ekupeyinteni"
+  }
+}

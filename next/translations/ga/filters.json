@@ -1,0 +1,49 @@
+{
+  "search": "Cuardach...",
+  "clearFilters": "Glan Scagairí",
+  "filters": "Scagairí",
+  "columns": "Colúin",
+  "region": "Réigiún",
+  "pricingUnit": "Aonad Praghsála",
+  "cost": "Costas",
+  "reserved": "In Áirithe",
+  "currency": "Airgeadra",
+  "os": "Córas Oibriúcháin",
+  "duration": "Fad",
+  "reservedTerm": "Téarma In Áirithe",
+  "durations": {
+    "ondemand": "Ar Éileamh",
+    "reserved1yr": "1 Bhliain In Áirithe",
+    "reserved3yr": "3 Bliana In Áirithe",
+    "spot": "Spot"
+  },
+  "compare": "Comparáid",
+  "endCompare": "Deireadh Comparáide",
+  "selected": "roghnaithe",
+  "showAll": "Taispeáin Uile",
+  "hideAll": "Folaigh Uile",
+  "select": "Roghnaigh...",
+  "searchLabel": "Cuardach {label}...",
+  "noOptionsFound": "Níor aimsíodh roghanna.",
+  "searchColumns": "Cuardach colún...",
+  "noColumnsFound": "Níor aimsíodh colúin.",
+  "selectAll": "Roghnaigh Uile",
+  "selectDefaults": "Roghnaigh Réamhshocruithe",
+  "regionGroups": {
+    "frequentlyUsed": "Úsáidte go Minic",
+    "chinaCloudRegions": "Réigiúin Cloud na Síne",
+    "mainRegions": "Príomhréigiúin",
+    "localZones": "Criosanna Áitiúla",
+    "wavelengthZones": "Criosanna Wavelength"
+  },
+  "export": {
+    "export": "Easpórtáil",
+    "downloadCsv": "Íoslódáil CSV",
+    "copyCsv": "Cóipeáil CSV",
+    "copyTsv": "Cóipeáil TSV",
+    "copyMarkdown": "Cóipeáil Tábla Markdown",
+    "csvCopied": "CSV cóipeáilte go dtí an gearrthaisce",
+    "tsvCopied": "TSV cóipeáilte go dtí an gearrthaisce",
+    "markdownCopied": "Tábla Markdown cóipeáilte go dtí an gearrthaisce"
+  }
+}

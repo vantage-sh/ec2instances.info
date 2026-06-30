@@ -1,0 +1,49 @@
+{
+  "search": "ಹುಡುಕಿ...",
+  "clearFilters": "ಫಿಲ್ಟರ್‌ಗಳನ್ನು ತೆರವುಗೊಳಿಸಿ",
+  "filters": "ಫಿಲ್ಟರ್‌ಗಳು",
+  "columns": "ಕಾಲಮ್‌ಗಳು",
+  "region": "ಪ್ರದೇಶ",
+  "pricingUnit": "ಬೆಲೆ ನಿಗದಿ ಘಟಕ",
+  "cost": "ವೆಚ್ಚ",
+  "reserved": "ಕಾಯ್ದಿರಿಸಿದ",
+  "currency": "ಕರೆನ್ಸಿ",
+  "os": "ಆಪರೇಟಿಂಗ್ ಸಿಸ್ಟಂ",
+  "duration": "ಅವಧಿ",
+  "reservedTerm": "ಕಾಯ್ದಿರಿಸಿದ ಅವಧಿ",
+  "durations": {
+    "ondemand": "ಆನ್-ಡಿಮಾಂಡ್",
+    "reserved1yr": "1 ವರ್ಷ ಕಾಯ್ದಿರಿಸಿದ",
+    "reserved3yr": "3 ವರ್ಷ ಕಾಯ್ದಿರಿಸಿದ",
+    "spot": "ಸ್ಪಾಟ್"
+  },
+  "compare": "ಹೋಲಿಸಿ",
+  "endCompare": "ಹೋಲಿಕೆ ಮುಗಿಸಿ",
+  "selected": "ಆಯ್ಕೆ ಮಾಡಲಾಗಿದೆ",
+  "showAll": "ಎಲ್ಲಾ ತೋರಿಸಿ",
+  "hideAll": "ಎಲ್ಲಾ ಮರೆಮಾಡಿ",
+  "select": "ಆಯ್ಕೆ ಮಾಡಿ...",
+  "searchLabel": "{label} ಹುಡುಕಿ...",
+  "noOptionsFound": "ಯಾವುದೇ ಆಯ್ಕೆಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
+  "searchColumns": "ಕಾಲಮ್‌ಗಳನ್ನು ಹುಡುಕಿ...",
+  "noColumnsFound": "ಯಾವುದೇ ಕಾಲಮ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
+  "selectAll": "ಎಲ್ಲಾ ಆಯ್ಕೆ ಮಾಡಿ",
+  "selectDefaults": "ಡೀಫಾಲ್ಟ್‌ಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಿ",
+  "regionGroups": {
+    "frequentlyUsed": "ಹೆಚ್ಚಾಗಿ ಬಳಸಲಾಗುವ",
+    "chinaCloudRegions": "ಚೀನಾ ಕ್ಲೌಡ್ ಪ್ರದೇಶಗಳು",
+    "mainRegions": "ಮುಖ್ಯ ಪ್ರದೇಶಗಳು",
+    "localZones": "ಸ್ಥಳೀಯ ವಲಯಗಳು",
+    "wavelengthZones": "Wavelength ವಲಯಗಳು"
+  },
+  "export": {
+    "export": "ರಫ್ತು ಮಾಡಿ",
+    "downloadCsv": "CSV ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ",
+    "copyCsv": "CSV ನಕಲು ಮಾಡಿ",
+    "copyTsv": "TSV ನಕಲು ಮಾಡಿ",
+    "copyMarkdown": "Markdown ಕೋಷ್ಟಕ ನಕಲು ಮಾಡಿ",
+    "csvCopied": "CSV ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲು ಮಾಡಲಾಗಿದೆ",
+    "tsvCopied": "TSV ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲು ಮಾಡಲಾಗಿದೆ",
+    "markdownCopied": "Markdown ಕೋಷ್ಟಕ ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲು ಮಾಡಲಾಗಿದೆ"
+  }
+}

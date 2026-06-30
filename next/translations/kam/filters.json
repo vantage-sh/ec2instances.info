@@ -1,0 +1,49 @@
+{
+  "search": "Ĩteta...",
+  "clearFilters": "Futa Michujio",
+  "filters": "Michujio",
+  "columns": "Safu",
+  "region": "Mbĩya",
+  "pricingUnit": "Kitengo cha Nthelo",
+  "cost": "Nthelo",
+  "reserved": "Ĩhĩtĩtwe",
+  "currency": "Sarafu",
+  "os": "Mfumo wa Ũendeshaji",
+  "duration": "Mũthangĩ",
+  "reservedTerm": "Mũthangĩ wa Ũhĩtĩtwo",
+  "durations": {
+    "ondemand": "Kwa Ũhĩtĩka",
+    "reserved1yr": "Ĩhĩtĩtwe Mwaka 1",
+    "reserved3yr": "Ĩhĩtĩtwe Miaka 3",
+    "spot": "Spot"
+  },
+  "compare": "Linganisha",
+  "endCompare": "Maliza Ũlinganisho",
+  "selected": "zĩlĩochaguliwa",
+  "showAll": "Onyesha Yothe",
+  "hideAll": "Fĩcha Yothe",
+  "select": "Chagua...",
+  "searchLabel": "Ĩteta {label}...",
+  "noOptionsFound": "Hakuna chaguo zĩlĩzopatikana.",
+  "searchColumns": "Ĩteta safu...",
+  "noColumnsFound": "Hakuna safu zĩlĩzopatikana.",
+  "selectAll": "Chagua Yothe",
+  "selectDefaults": "Chagua Msingi",
+  "regionGroups": {
+    "frequentlyUsed": "Zinazotumika Mara kwa Mara",
+    "chinaCloudRegions": "Mbĩya ya Wingu ya China",
+    "mainRegions": "Mbĩya Nĩnene",
+    "localZones": "Maeneo ya Karibu",
+    "wavelengthZones": "Maeneo ya Wavelength"
+  },
+  "export": {
+    "export": "Hamisha",
+    "downloadCsv": "Pakua CSV",
+    "copyCsv": "Nakili CSV",
+    "copyTsv": "Nakili TSV",
+    "copyMarkdown": "Nakili Jedwali rĩa Markdown",
+    "csvCopied": "CSV ĩmenakiliwa kwa clipboard",
+    "tsvCopied": "TSV ĩmenakiliwa kwa clipboard",
+    "markdownCopied": "Jedwali rĩa Markdown rĩmenakiliwa kwa clipboard"
+  }
+}

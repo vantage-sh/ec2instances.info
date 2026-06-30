@@ -1,0 +1,18 @@
+{
+  "hourly": "Theo giờ",
+  "monthly": "Theo tháng",
+  "yearly": "Theo năm",
+  "perHour": "/giờ",
+  "perMonth": "/tháng",
+  "perYear": "/năm",
+  "onDemand": "Theo yêu cầu",
+  "reserved": "Đặt trước",
+  "spot": "Spot",
+  "savingsPlan": "Kế hoạch tiết kiệm",
+  "noUpfront": "Không trả trước",
+  "partialUpfront": "Trả trước một phần",
+  "allUpfront": "Trả trước toàn bộ",
+  "convertible": "Có thể chuyển đổi",
+  "standard": "Tiêu chuẩn",
+  "priceUnavailable": "N/A"
+}

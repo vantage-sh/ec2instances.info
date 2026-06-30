@@ -1,0 +1,18 @@
+{
+  "hourly": "ਪ੍ਰਤੀ ਘੰਟਾ",
+  "monthly": "ਮਾਸਿਕ",
+  "yearly": "ਸਾਲਾਨਾ",
+  "perHour": "/ਘੰ.",
+  "perMonth": "/ਮਹੀ.",
+  "perYear": "/ਸਾਲ",
+  "onDemand": "ਮੰਗ ਅਨੁਸਾਰ",
+  "reserved": "ਰਾਖਵਾਂ",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "ਕੋਈ ਪੇਸ਼ਗੀ ਨਹੀਂ",
+  "partialUpfront": "ਅੰਸ਼ਕ ਪੇਸ਼ਗੀ",
+  "allUpfront": "ਪੂਰੀ ਪੇਸ਼ਗੀ",
+  "convertible": "ਪਰਿਵਰਤਨਯੋਗ",
+  "standard": "ਮਿਆਰੀ",
+  "priceUnavailable": "ਲਾਗੂ ਨਹੀਂ"
+}

@@ -1,0 +1,18 @@
+{
+  "hourly": "Pa Insa",
+  "monthly": "Pa Umweshi",
+  "yearly": "Pa Umwaka",
+  "perHour": "/insa",
+  "perMonth": "/umweshi",
+  "perYear": "/umwaka",
+  "onDemand": "Ku Cipimo",
+  "reserved": "Ukusunga",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Ukusunga Ukwa Taci Nsente",
+  "partialUpfront": "Ukusunga Icipande ca Nsente",
+  "allUpfront": "Ukusunga Yonse Nsente",
+  "convertible": "Ukubadilisha",
+  "standard": "Mutuntulu",
+  "priceUnavailable": "T.A."
+}

@@ -1,0 +1,18 @@
+{
+  "hourly": "Po Hora",
+  "monthly": "Po Mweri",
+  "yearly": "Po Mwaka",
+  "perHour": "/hora",
+  "perMonth": "/mweri",
+  "perYear": "/mwaka",
+  "onDemand": "Okhufuna",
+  "reserved": "Okhusikira",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Okhusikira Nawa Malipo",
+  "partialUpfront": "Okhusikira Olupande Malipo",
+  "allUpfront": "Okhusikira Malipo Yote",
+  "convertible": "Okubadilishwa",
+  "standard": "Kawaida",
+  "priceUnavailable": "K.A."
+}

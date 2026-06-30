@@ -1,0 +1,49 @@
+{
+  "search": "ค้นหา...",
+  "clearFilters": "ล้างตัวกรอง",
+  "filters": "ตัวกรอง",
+  "columns": "คอลัมน์",
+  "region": "ภูมิภาค",
+  "pricingUnit": "หน่วยราคา",
+  "cost": "ค่าใช้จ่าย",
+  "reserved": "สำรอง",
+  "currency": "สกุลเงิน",
+  "os": "ระบบปฏิบัติการ",
+  "duration": "ระยะเวลา",
+  "reservedTerm": "เงื่อนไขการสำรอง",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "สำรอง 1 ปี",
+    "reserved3yr": "สำรอง 3 ปี",
+    "spot": "Spot"
+  },
+  "compare": "เปรียบเทียบ",
+  "endCompare": "สิ้นสุดการเปรียบเทียบ",
+  "selected": "เลือกแล้ว",
+  "showAll": "แสดงทั้งหมด",
+  "hideAll": "ซ่อนทั้งหมด",
+  "select": "เลือก...",
+  "searchLabel": "ค้นหา {label}...",
+  "noOptionsFound": "ไม่พบตัวเลือก",
+  "searchColumns": "ค้นหาคอลัมน์...",
+  "noColumnsFound": "ไม่พบคอลัมน์",
+  "selectAll": "เลือกทั้งหมด",
+  "selectDefaults": "เลือกค่าเริ่มต้น",
+  "regionGroups": {
+    "frequentlyUsed": "ใช้บ่อย",
+    "chinaCloudRegions": "ภูมิภาคคลาวด์จีน",
+    "mainRegions": "ภูมิภาคหลัก",
+    "localZones": "Local Zones",
+    "wavelengthZones": "Wavelength Zones"
+  },
+  "export": {
+    "export": "ส่งออก",
+    "downloadCsv": "ดาวน์โหลด CSV",
+    "copyCsv": "คัดลอก CSV",
+    "copyTsv": "คัดลอก TSV",
+    "copyMarkdown": "คัดลอกตาราง Markdown",
+    "csvCopied": "คัดลอก CSV ไปยังคลิปบอร์ดแล้ว",
+    "tsvCopied": "คัดลอก TSV ไปยังคลิปบอร์ดแล้ว",
+    "markdownCopied": "คัดลอกตาราง Markdown ไปยังคลิปบอร์ดแล้ว"
+  }
+}

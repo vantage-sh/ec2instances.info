@@ -1,0 +1,49 @@
+{
+  "search": "Шыра...",
+  "clearFilters": "Фильтрсене Çухат",
+  "filters": "Фильтрсем",
+  "columns": "Колонкăсем",
+  "region": "Регион",
+  "pricingUnit": "Хак Единици",
+  "cost": "Хак",
+  "reserved": "Резервланă",
+  "currency": "Укçа Пĕлĕчĕ",
+  "os": "Операцисен Системи",
+  "duration": "Вăхăт",
+  "reservedTerm": "Резерваци Вăхăчĕ",
+  "durations": {
+    "ondemand": "Кирлĕ Чухне",
+    "reserved1yr": "1 Çулпа Резервланă",
+    "reserved3yr": "3 Çулпа Резервланă",
+    "spot": "Spot"
+  },
+  "compare": "Танлаштар",
+  "endCompare": "Танлаштарăва Пĕтер",
+  "selected": "суйланă",
+  "showAll": "Пурне те Кăтарт",
+  "hideAll": "Пурне те Пытар",
+  "select": "Суйла...",
+  "searchLabel": "{label} шыра...",
+  "noOptionsFound": "Вариант тупăнмарĕ.",
+  "searchColumns": "Колонка шыра...",
+  "noColumnsFound": "Колонка тупăнмарĕ.",
+  "selectAll": "Пурне те Суйла",
+  "selectDefaults": "Стандарта Суйла",
+  "regionGroups": {
+    "frequentlyUsed": "Нумай Усă Куракан",
+    "chinaCloudRegions": "Китай Облак Регионĕсем",
+    "mainRegions": "Тĕп Регионсем",
+    "localZones": "Вырăнти Зонăсем",
+    "wavelengthZones": "Wavelength Зонисем"
+  },
+  "export": {
+    "export": "Экспорт",
+    "downloadCsv": "CSV Çĕкле",
+    "copyCsv": "CSV Кÿçĕр",
+    "copyTsv": "TSV Кÿçĕр",
+    "copyMarkdown": "Markdown Таблицине Кÿçĕр",
+    "csvCopied": "CSV алмашла буфера кÿчрĕ",
+    "tsvCopied": "TSV алмашла буфера кÿчрĕ",
+    "markdownCopied": "Markdown таблици алмашла буфера кÿчрĕ"
+  }
+}

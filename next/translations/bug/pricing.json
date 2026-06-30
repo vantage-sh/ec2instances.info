@@ -1,0 +1,18 @@
+{
+  "hourly": "Ri Jam",
+  "monthly": "Bulanan",
+  "yearly": "Tahunan",
+  "perHour": "/jam",
+  "perMonth": "/ulen",
+  "perYear": "/taung",
+  "onDemand": "On-Demand",
+  "reserved": "Cadangan",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Dé' Uang Muka",
+  "partialUpfront": "Uang Muka Sikontu",
+  "allUpfront": "Uang Muka Rilaleng",
+  "convertible": "Convertible",
+  "standard": "Standar",
+  "priceUnavailable": "N/A"
+}

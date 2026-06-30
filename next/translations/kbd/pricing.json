@@ -1,0 +1,18 @@
+{
+  "hourly": "СыхьэтымкIэ",
+  "monthly": "МазэмкIэ",
+  "yearly": "ГъэмкIэ",
+  "perHour": "/сых.",
+  "perMonth": "/маз.",
+  "perYear": "/гъэ.",
+  "onDemand": "On-Demand",
+  "reserved": "Резервыу",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Аванс Щымыхъуа",
+  "partialUpfront": "Хэкум Аванс",
+  "allUpfront": "Псори Аванс",
+  "convertible": "Конвертируемый",
+  "standard": "Лъабжьэ",
+  "priceUnavailable": "Щ/Щ"
+}

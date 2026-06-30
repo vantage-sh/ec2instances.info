@@ -1,0 +1,18 @@
+{
+  "hourly": "Fesul Awr",
+  "monthly": "Misol",
+  "yearly": "Blynyddol",
+  "perHour": "/awr",
+  "perMonth": "/mis",
+  "perYear": "/bl.",
+  "onDemand": "Ar Alw",
+  "reserved": "Wedi'i Archebu",
+  "spot": "Spot",
+  "savingsPlan": "Cynllun Arbedion",
+  "noUpfront": "Dim Rhagdaliad",
+  "partialUpfront": "Rhagdaliad Rhannol",
+  "allUpfront": "Rhagdaliad Llawn",
+  "convertible": "Trosadwy",
+  "standard": "Safonol",
+  "priceUnavailable": "Amh."
+}

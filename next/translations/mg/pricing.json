@@ -1,0 +1,18 @@
+{
+  "hourly": "Isan'ora",
+  "monthly": "Isan'volana",
+  "yearly": "Isan'taona",
+  "perHour": "/ora",
+  "perMonth": "/volana",
+  "perYear": "/taona",
+  "onDemand": "Ara-pilaharana",
+  "reserved": "Voatokana",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Tsy misy Fandoavana Mialoha",
+  "partialUpfront": "Fandoavana Mialoha Ampahany",
+  "allUpfront": "Fandoavana Mialoha Tanteraka",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "Tsy misy"
+}

@@ -1,0 +1,49 @@
+{
+  "search": "ຄົ້ນຫາ...",
+  "clearFilters": "ລ້າງຕົວກອງ",
+  "filters": "ຕົວກອງ",
+  "columns": "ຖັນ",
+  "region": "ພາກ",
+  "pricingUnit": "ໜ່ວຍລາຄາ",
+  "cost": "ຄ່າໃຊ້ຈ່າຍ",
+  "reserved": "ສຳຮອງ",
+  "currency": "ສະກຸນເງິນ",
+  "os": "ລ. ປ.",
+  "duration": "ໄລຍະເວລາ",
+  "reservedTerm": "ເ. ສ.",
+  "durations": {
+    "ondemand": "ຕ. ຄ.",
+    "reserved1yr": "ສ. 1 ປີ",
+    "reserved3yr": "ສ. 3 ປີ",
+    "spot": "Spot"
+  },
+  "compare": "ປຽບທຽບ",
+  "endCompare": "ສ. ປ.",
+  "selected": "ເລືອກແລ້ວ",
+  "showAll": "ສ. ທ.",
+  "hideAll": "ເ. ທ.",
+  "select": "ເ....",
+  "searchLabel": "ຄ. {label}...",
+  "noOptionsFound": "ບໍ່ພົບຕົວເລືອກ.",
+  "searchColumns": "ຄ. ຖ....",
+  "noColumnsFound": "ບໍ່ພົບຖັນ.",
+  "selectAll": "ເລືອກທັງໝົດ",
+  "selectDefaults": "ເ. ຄ.",
+  "regionGroups": {
+    "frequentlyUsed": "ໃ. ບ.",
+    "chinaCloudRegions": "ພາກ Cloud ຈີນ",
+    "mainRegions": "ພ. ຫ.",
+    "localZones": "ໂ. ທ.",
+    "wavelengthZones": "Wavelength ໂ."
+  },
+  "export": {
+    "export": "ສ່ງອອກ",
+    "downloadCsv": "ດ. CSV",
+    "copyCsv": "ຄ. CSV",
+    "copyTsv": "ຄ. TSV",
+    "copyMarkdown": "ຄ. Markdown",
+    "csvCopied": "CSV ຄ. ແລ້ວ",
+    "tsvCopied": "TSV ຄ. ແລ້ວ",
+    "markdownCopied": "Markdown ຄ. ແລ້ວ"
+  }
+}

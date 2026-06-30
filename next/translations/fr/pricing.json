@@ -1,0 +1,18 @@
+{
+  "hourly": "Horaire",
+  "monthly": "Mensuel",
+  "yearly": "Annuel",
+  "perHour": "/h",
+  "perMonth": "/mois",
+  "perYear": "/an",
+  "onDemand": "À la demande",
+  "reserved": "Réservé",
+  "spot": "Spot",
+  "savingsPlan": "Plan d'économies",
+  "noUpfront": "Sans paiement initial",
+  "partialUpfront": "Paiement initial partiel",
+  "allUpfront": "Paiement initial total",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "N/D"
+}

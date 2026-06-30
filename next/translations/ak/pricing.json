@@ -1,0 +1,18 @@
+{
+  "hourly": "Dɔnhwere Biara",
+  "monthly": "Bosome Biara",
+  "yearly": "Afe Biara",
+  "perHour": "/dɔnhwere",
+  "perMonth": "/bosome",
+  "perYear": "/afe",
+  "onDemand": "Wɔ Mpɛn",
+  "reserved": "Ahyɛ Asie",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Nni Kan Ho Tua",
+  "partialUpfront": "Kan Ho Tua Bi",
+  "allUpfront": "Kan Ho Tua Nyinaa",
+  "convertible": "Convertible",
+  "standard": "Deɛ Ɛfata",
+  "priceUnavailable": "N/A"
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Yenyo...",
+  "clearFilters": "Futa Yiero",
+  "filters": "Yiero",
+  "columns": "Toko",
+  "region": "Piny",
+  "pricingUnit": "Yunit mar Nengo",
+  "cost": "Nengo",
+  "reserved": "Moriwo",
+  "currency": "Pesa",
+  "os": "Sistema mar Timo",
+  "duration": "Saa ma Olos",
+  "reservedTerm": "Moro mar Moriwo",
+  "durations": {
+    "ondemand": "Ka Ipenjo",
+    "reserved1yr": "Moriwo Pi Higa 1",
+    "reserved3yr": "Moriwo Pi Higni 3",
+    "spot": "Spot"
+  },
+  "compare": "Loso",
+  "endCompare": "Gik Loso",
+  "selected": "oseyiero",
+  "showAll": "Nyis Duto",
+  "hideAll": "Hid Duto",
+  "select": "Yier...",
+  "searchLabel": "Yenyo {label}...",
+  "noOptionsFound": "Yiero onge.",
+  "searchColumns": "Yenyo toko...",
+  "noColumnsFound": "Toko onge.",
+  "selectAll": "Yier Duto",
+  "selectDefaults": "Yier Machakore",
+  "regionGroups": {
+    "frequentlyUsed": "Ma Tiyone Mabor",
+    "chinaCloudRegions": "Pinje mag Cloud mag China",
+    "mainRegions": "Pinje Madongo",
+    "localZones": "Kaonde Manie Kama",
+    "wavelengthZones": "Kaonde mag Wavelength"
+  },
+  "export": {
+    "export": "Wedo",
+    "downloadCsv": "Gonyo CSV",
+    "copyCsv": "Lok CSV",
+    "copyTsv": "Lok TSV",
+    "copyMarkdown": "Lok Mesa mar Markdown",
+    "csvCopied": "CSV oselor e clipboard",
+    "tsvCopied": "TSV oselor e clipboard",
+    "markdownCopied": "Mesa mar Markdown oselor e clipboard"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Ukusaka...",
+  "clearFilters": "Ukufuta Ifilutelo",
+  "filters": "Ifilutelo",
+  "columns": "Amashina",
+  "region": "Icalo",
+  "pricingUnit": "Icipimo ca Insente",
+  "cost": "Insente",
+  "reserved": "Ukusunga",
+  "currency": "Insente ya Calo",
+  "os": "Umulandu wa Kushita",
+  "duration": "Inshita",
+  "reservedTerm": "Inshita Ukusunga",
+  "durations": {
+    "ondemand": "Ku Cipimo",
+    "reserved1yr": "Ukusunga Umwaka 1",
+    "reserved3yr": "Ukusunga Imyaka 3",
+    "spot": "Spot"
+  },
+  "compare": "Ukususha",
+  "endCompare": "Ukumalisha Ukususha",
+  "selected": "ukusunga",
+  "showAll": "Moneka Yonse",
+  "hideAll": "Bika Yonse",
+  "select": "Ukusunga...",
+  "searchLabel": "Ukusaka {label}...",
+  "noOptionsFound": "Ifintu fitapangwa.",
+  "searchColumns": "Ukusaka amashina...",
+  "noColumnsFound": "Amashina atapangwa.",
+  "selectAll": "Ukusunga Yonse",
+  "selectDefaults": "Ukusunga Ifintu fya Mutuntulu",
+  "regionGroups": {
+    "frequentlyUsed": "Ukusuminisha Nkali",
+    "chinaCloudRegions": "Ificalo fya Cloud fya China",
+    "mainRegions": "Ificalo Ifikulu",
+    "localZones": "Ificalo fya Pafupi",
+    "wavelengthZones": "Ificalo fya Wavelength"
+  },
+  "export": {
+    "export": "Ukuleka",
+    "downloadCsv": "Kupokela CSV",
+    "copyCsv": "Kukopi CSV",
+    "copyTsv": "Kukopi TSV",
+    "copyMarkdown": "Kukopi Icitabo ca Markdown",
+    "csvCopied": "CSV yakopishiwa ku clipboard",
+    "tsvCopied": "TSV yakopishiwa ku clipboard",
+    "markdownCopied": "Icitabo ca Markdown chakopishiwa ku clipboard"
+  }
+}

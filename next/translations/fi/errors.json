@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Tietojen lataaminen epäonnistui",
+  "tryAgain": "Yritä uudelleen",
+  "networkError": "Verkkovirhe. Tarkista yhteytesi.",
+  "unknownError": "Tapahtui tuntematon virhe"
+}

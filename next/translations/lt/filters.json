@@ -1,0 +1,49 @@
+{
+  "search": "Ieškoti...",
+  "clearFilters": "Valyti filtrus",
+  "filters": "Filtrai",
+  "columns": "Stulpeliai",
+  "region": "Regionas",
+  "pricingUnit": "Kainų vienetas",
+  "cost": "Kaina",
+  "reserved": "Rezervuota",
+  "currency": "Valiuta",
+  "os": "Operacinė sistema",
+  "duration": "Trukmė",
+  "reservedTerm": "Rezervavimo laikotarpis",
+  "durations": {
+    "ondemand": "Pagal poreikį",
+    "reserved1yr": "1 metų rezervuota",
+    "reserved3yr": "3 metų rezervuota",
+    "spot": "Spot"
+  },
+  "compare": "Palyginti",
+  "endCompare": "Baigti palyginimą",
+  "selected": "pasirinkta",
+  "showAll": "Rodyti visus",
+  "hideAll": "Slėpti visus",
+  "select": "Pasirinkti...",
+  "searchLabel": "Ieškoti {label}...",
+  "noOptionsFound": "Parinkčių nerasta.",
+  "searchColumns": "Ieškoti stulpelių...",
+  "noColumnsFound": "Stulpelių nerasta.",
+  "selectAll": "Pasirinkti visus",
+  "selectDefaults": "Pasirinkti numatytuosius",
+  "regionGroups": {
+    "frequentlyUsed": "Dažniausiai naudojami",
+    "chinaCloudRegions": "Kinijos debesies regionai",
+    "mainRegions": "Pagrindiniai regionai",
+    "localZones": "Vietinės zonos",
+    "wavelengthZones": "Wavelength zonos"
+  },
+  "export": {
+    "export": "Eksportuoti",
+    "downloadCsv": "Atsisiųsti CSV",
+    "copyCsv": "Kopijuoti CSV",
+    "copyTsv": "Kopijuoti TSV",
+    "copyMarkdown": "Kopijuoti Markdown lentelę",
+    "csvCopied": "CSV nukopijuota į iškarpinę",
+    "tsvCopied": "TSV nukopijuota į iškarpinę",
+    "markdownCopied": "Markdown lentelė nukopijuota į iškarpinę"
+  }
+}

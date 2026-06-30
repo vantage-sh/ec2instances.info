@@ -1,0 +1,49 @@
+{
+  "search": "Maghanap...",
+  "clearFilters": "Linawin Mga Filter",
+  "filters": "Mga Filter",
+  "columns": "Mga Kolum",
+  "region": "Rehiyon",
+  "pricingUnit": "Yunit ning Presyo",
+  "cost": "Gastos",
+  "reserved": "Reserved",
+  "currency": "Salapi",
+  "os": "Operating System",
+  "duration": "Tagal",
+  "reservedTerm": "Termino ning Reserved",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 Banua Reserved",
+    "reserved3yr": "3 Banua Reserved",
+    "spot": "Spot"
+  },
+  "compare": "Ibanding",
+  "endCompare": "Tapusan ing Pamanibad",
+  "selected": "napili",
+  "showAll": "Pakitang Amin",
+  "hideAll": "Itago Amin",
+  "select": "Pumili...",
+  "searchLabel": "Maghanap {label}...",
+  "noOptionsFound": "Ali nasablayan opsiyon.",
+  "searchColumns": "Maghanap kolum...",
+  "noColumnsFound": "Ali nasablayan kolum.",
+  "selectAll": "Piliin Amin",
+  "selectDefaults": "Piliin Defaults",
+  "regionGroups": {
+    "frequentlyUsed": "Madalas Gamitin",
+    "chinaCloudRegions": "Mga Rehiyon ning Cloud China",
+    "mainRegions": "Pangunahing Mga Rehiyon",
+    "localZones": "Mga Lokal na Zone",
+    "wavelengthZones": "Mga Wavelength Zone"
+  },
+  "export": {
+    "export": "I-export",
+    "downloadCsv": "I-download CSV",
+    "copyCsv": "Kopyahin CSV",
+    "copyTsv": "Kopyahin TSV",
+    "copyMarkdown": "Kopyahin Talahanayan ning Markdown",
+    "csvCopied": "CSV kinopya king clipboard",
+    "tsvCopied": "TSV kinopya king clipboard",
+    "markdownCopied": "Talahanayan ning Markdown kinopya king clipboard"
+  }
+}

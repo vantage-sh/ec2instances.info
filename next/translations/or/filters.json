@@ -1,0 +1,49 @@
+{
+  "search": "ଖୋଜନ୍ତୁ...",
+  "clearFilters": "ଫିଲ୍ଟର ସଫା କରନ୍ତୁ",
+  "filters": "ଫିଲ୍ଟର",
+  "columns": "କଲମ",
+  "region": "ଅଞ୍ଚଳ",
+  "pricingUnit": "ମୂଲ୍ୟ ୟୁନିଟ",
+  "cost": "ଖର୍ଚ",
+  "reserved": "ସଂରକ୍ଷିତ",
+  "currency": "ମୁଦ୍ରା",
+  "os": "ଅପରେଟିଂ ସିଷ୍ଟମ",
+  "duration": "ଅବଧି",
+  "reservedTerm": "ସଂରକ୍ଷିତ ଅବଧି",
+  "durations": {
+    "ondemand": "ଅନ-ଡ଼ିମାଣ୍ଡ",
+    "reserved1yr": "1 ବର୍ଷ ସଂରକ୍ଷିତ",
+    "reserved3yr": "3 ବର୍ଷ ସଂରକ୍ଷିତ",
+    "spot": "ସ୍ପଟ"
+  },
+  "compare": "ତୁଳନା",
+  "endCompare": "ତୁଳନା ଶେଷ କରନ୍ତୁ",
+  "selected": "ଚୟନ ହୋଇଛି",
+  "showAll": "ସବୁ ଦେଖାନ୍ତୁ",
+  "hideAll": "ସବୁ ଲୁଚାନ୍ତୁ",
+  "select": "ଚୟନ କରନ୍ତୁ...",
+  "searchLabel": "{label} ଖୋଜନ୍ତୁ...",
+  "noOptionsFound": "କୌଣସି ବିକଳ୍ପ ମିଳିଲାନି।",
+  "searchColumns": "କଲମ ଖୋଜନ୍ତୁ...",
+  "noColumnsFound": "କୌଣସି କଲମ ମିଳିଲାନି।",
+  "selectAll": "ସବୁ ଚୟନ କରନ୍ତୁ",
+  "selectDefaults": "ଡ଼ିଫଲ୍ଟ ଚୟନ କରନ୍ତୁ",
+  "regionGroups": {
+    "frequentlyUsed": "ପ୍ରାୟ ବ୍ୟବହୃତ",
+    "chinaCloudRegions": "ଚୀନ କ୍ଲାଉଡ ଅଞ୍ଚଳ",
+    "mainRegions": "ମୁଖ୍ୟ ଅଞ୍ଚଳ",
+    "localZones": "ଲୋକାଲ ଜୋନ",
+    "wavelengthZones": "Wavelength ଜୋନ"
+  },
+  "export": {
+    "export": "ରପ୍ତାନି",
+    "downloadCsv": "CSV ଡ଼ାଉନଲୋଡ",
+    "copyCsv": "CSV କପି",
+    "copyTsv": "TSV କପି",
+    "copyMarkdown": "Markdown ଟେବୁଲ କପି",
+    "csvCopied": "CSV କ୍ଲିପ୍‌ବୋର୍ଡ଼କୁ କପି ହୋଇଛି",
+    "tsvCopied": "TSV କ୍ଲିପ୍‌ବୋର୍ଡ଼କୁ କପି ହୋଇଛି",
+    "markdownCopied": "Markdown ଟେବୁଲ କ୍ଲିପ୍‌ବୋର୍ଡ଼କୁ କପି ହୋଇଛି"
+  }
+}

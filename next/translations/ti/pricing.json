@@ -1,0 +1,18 @@
+{
+  "hourly": "ብሰዓት",
+  "monthly": "ብወርሒ",
+  "yearly": "ብዓመት",
+  "perHour": "/ሰዓ",
+  "perMonth": "/ወር",
+  "perYear": "/ዓ",
+  "onDemand": "ብምድላይ",
+  "reserved": "ዝተሓዘ",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "ዘይቅድሜ ክፍሊት",
+  "partialUpfront": "ምፍርፋር ቅድሜ ክፍሊት",
+  "allUpfront": "ኩሉ ቅድሜ ክፍሊት",
+  "convertible": "ዝቕየር",
+  "standard": "ደረጃዊ",
+  "priceUnavailable": "ዘ/ም"
+}

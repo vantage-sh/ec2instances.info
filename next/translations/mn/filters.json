@@ -1,0 +1,49 @@
+{
+  "search": "Хайх...",
+  "clearFilters": "Шүүлтүүрийг арилгах",
+  "filters": "Шүүлтүүрүүд",
+  "columns": "Баганууд",
+  "region": "Бүс нутаг",
+  "pricingUnit": "Үнийн нэгж",
+  "cost": "Зардал",
+  "reserved": "Захиалгат",
+  "currency": "Валют",
+  "os": "Үйлдлийн систем",
+  "duration": "Хугацаа",
+  "reservedTerm": "Захиалгын нөхцөл",
+  "durations": {
+    "ondemand": "Хүсэлтээр",
+    "reserved1yr": "1 жил захиалгат",
+    "reserved3yr": "3 жил захиалгат",
+    "spot": "Spot"
+  },
+  "compare": "Харьцуулах",
+  "endCompare": "Харьцуулалтыг дуусгах",
+  "selected": "сонгогдсон",
+  "showAll": "Бүгдийг харуулах",
+  "hideAll": "Бүгдийг нуух",
+  "select": "Сонгох...",
+  "searchLabel": "{label} хайх...",
+  "noOptionsFound": "Сонголт олдсонгүй.",
+  "searchColumns": "Баганууд хайх...",
+  "noColumnsFound": "Багана олдсонгүй.",
+  "selectAll": "Бүгдийг сонгох",
+  "selectDefaults": "Анхдагчийг сонгох",
+  "regionGroups": {
+    "frequentlyUsed": "Байнга ашиглагддаг",
+    "chinaCloudRegions": "Хятадын үүлэн бүс нутгууд",
+    "mainRegions": "Үндсэн бүс нутгууд",
+    "localZones": "Локал бүсүүд",
+    "wavelengthZones": "Wavelength бүсүүд"
+  },
+  "export": {
+    "export": "Экспорт",
+    "downloadCsv": "CSV татаж авах",
+    "copyCsv": "CSV хуулах",
+    "copyTsv": "TSV хуулах",
+    "copyMarkdown": "Markdown хүснэгтийг хуулах",
+    "csvCopied": "CSV буферт хуулагдлаа",
+    "tsvCopied": "TSV буферт хуулагдлаа",
+    "markdownCopied": "Markdown хүснэгт буферт хуулагдлаа"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "hourly": "Kas valandą",
+  "monthly": "Kas mėnesį",
+  "yearly": "Kas metus",
+  "perHour": "/val.",
+  "perMonth": "/mėn.",
+  "perYear": "/m.",
+  "onDemand": "Pagal poreikį",
+  "reserved": "Rezervuota",
+  "spot": "Spot",
+  "savingsPlan": "Taupymo planas",
+  "noUpfront": "Be išankstinio mokėjimo",
+  "partialUpfront": "Dalinis išankstinis mokėjimas",
+  "allUpfront": "Visas išankstinis mokėjimas",
+  "convertible": "Konvertuojama",
+  "standard": "Standartinė",
+  "priceUnavailable": "N/A"
+}

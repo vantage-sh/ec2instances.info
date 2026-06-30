@@ -1,0 +1,49 @@
+{
+  "search": "Qidirish...",
+  "clearFilters": "Filtrlarni tozalash",
+  "filters": "Filtrlar",
+  "columns": "Ustunlar",
+  "region": "Mintaqa",
+  "pricingUnit": "Narxlash Birligi",
+  "cost": "Narx",
+  "reserved": "Zahira",
+  "currency": "Valyuta",
+  "os": "Operatsion Tizim",
+  "duration": "Davomiylik",
+  "reservedTerm": "Zahira Muddati",
+  "durations": {
+    "ondemand": "Talabga binoan",
+    "reserved1yr": "1 Yillik Zahira",
+    "reserved3yr": "3 Yillik Zahira",
+    "spot": "Spot"
+  },
+  "compare": "Solishtirish",
+  "endCompare": "Solishtirishni tugatish",
+  "selected": "tanlangan",
+  "showAll": "Hammasini ko'rsatish",
+  "hideAll": "Hammasini yashirish",
+  "select": "Tanlash...",
+  "searchLabel": "{label} ni qidirish...",
+  "noOptionsFound": "Variantlar topilmadi.",
+  "searchColumns": "Ustunlarni qidirish...",
+  "noColumnsFound": "Ustunlar topilmadi.",
+  "selectAll": "Hammasini tanlash",
+  "selectDefaults": "Standartlarni tanlash",
+  "regionGroups": {
+    "frequentlyUsed": "Tez-tez Ishlatiladigan",
+    "chinaCloudRegions": "Xitoy Bulut Mintaqalari",
+    "mainRegions": "Asosiy Mintaqalar",
+    "localZones": "Mahalliy Zonalar",
+    "wavelengthZones": "Wavelength Zonalari"
+  },
+  "export": {
+    "export": "Eksport",
+    "downloadCsv": "CSV yuklab olish",
+    "copyCsv": "CSV nusxalash",
+    "copyTsv": "TSV nusxalash",
+    "copyMarkdown": "Markdown jadvalni nusxalash",
+    "csvCopied": "CSV buferga nusxalandi",
+    "tsvCopied": "TSV buferga nusxalandi",
+    "markdownCopied": "Markdown jadval buferga nusxalandi"
+  }
+}

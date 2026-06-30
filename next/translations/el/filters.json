@@ -1,0 +1,49 @@
+{
+  "search": "Αναζήτηση...",
+  "clearFilters": "Εκκαθάριση Φίλτρων",
+  "filters": "Φίλτρα",
+  "columns": "Στήλες",
+  "region": "Περιοχή",
+  "pricingUnit": "Μονάδα Τιμολόγησης",
+  "cost": "Κόστος",
+  "reserved": "Δεσμευμένο",
+  "currency": "Νόμισμα",
+  "os": "Λειτουργικό Σύστημα",
+  "duration": "Διάρκεια",
+  "reservedTerm": "Δεσμευμένη Περίοδος",
+  "durations": {
+    "ondemand": "Κατά Παραγγελία",
+    "reserved1yr": "Δεσμευμένο 1 Έτους",
+    "reserved3yr": "Δεσμευμένο 3 Ετών",
+    "spot": "Spot"
+  },
+  "compare": "Σύγκριση",
+  "endCompare": "Λήξη Σύγκρισης",
+  "selected": "επιλεγμένα",
+  "showAll": "Εμφάνιση Όλων",
+  "hideAll": "Απόκρυψη Όλων",
+  "select": "Επιλέξτε...",
+  "searchLabel": "Αναζήτηση {label}...",
+  "noOptionsFound": "Δεν βρέθηκαν επιλογές.",
+  "searchColumns": "Αναζήτηση στηλών...",
+  "noColumnsFound": "Δεν βρέθηκαν στήλες.",
+  "selectAll": "Επιλογή Όλων",
+  "selectDefaults": "Επιλογή Προεπιλογών",
+  "regionGroups": {
+    "frequentlyUsed": "Συχνά Χρησιμοποιούμενα",
+    "chinaCloudRegions": "Περιοχές Κινεζικού Cloud",
+    "mainRegions": "Κύριες Περιοχές",
+    "localZones": "Τοπικές Ζώνες",
+    "wavelengthZones": "Ζώνες Wavelength"
+  },
+  "export": {
+    "export": "Εξαγωγή",
+    "downloadCsv": "Λήψη CSV",
+    "copyCsv": "Αντιγραφή CSV",
+    "copyTsv": "Αντιγραφή TSV",
+    "copyMarkdown": "Αντιγραφή Πίνακα Markdown",
+    "csvCopied": "Το CSV αντιγράφηκε στο πρόχειρο",
+    "tsvCopied": "Το TSV αντιγράφηκε στο πρόχειρο",
+    "markdownCopied": "Ο πίνακας Markdown αντιγράφηκε στο πρόχειρο"
+  }
+}

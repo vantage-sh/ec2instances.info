@@ -1,0 +1,49 @@
+{
+  "search": "Koluka...",
+  "clearFilters": "Elimusa Filtres",
+  "filters": "Filtres",
+  "columns": "Misolo",
+  "region": "Esika",
+  "pricingUnit": "Nite ya Mutu",
+  "cost": "Mutu",
+  "reserved": "Ebomami",
+  "currency": "Mbongo",
+  "os": "Systeme ya Komputa",
+  "duration": "Ntango",
+  "reservedTerm": "Termu ya Ebomami",
+  "durations": {
+    "ondemand": "Na Libondeli",
+    "reserved1yr": "Ebomami ya Mobu 1",
+    "reserved3yr": "Ebomami ya Mibu 3",
+    "spot": "Spot"
+  },
+  "compare": "Kotala",
+  "endCompare": "Suka Kotala",
+  "selected": "Eponi",
+  "showAll": "Yebisa Nyonso",
+  "hideAll": "Kembela Nyonso",
+  "select": "Pona...",
+  "searchLabel": "Koluka {label}...",
+  "noOptionsFound": "Eponi ezwami te.",
+  "searchColumns": "Koluka misolo...",
+  "noColumnsFound": "Mosolo ezwami te.",
+  "selectAll": "Pona Nyonso",
+  "selectDefaults": "Pona Ebandeli",
+  "regionGroups": {
+    "frequentlyUsed": "Esalelami Mingi",
+    "chinaCloudRegions": "Bisika ya Cloud Chine",
+    "mainRegions": "Misala ya Liboso",
+    "localZones": "Bisika ya Pene",
+    "wavelengthZones": "Bisika Wavelength"
+  },
+  "export": {
+    "export": "Kobimisa",
+    "downloadCsv": "Kokitisa CSV",
+    "copyCsv": "Kopya CSV",
+    "copyTsv": "Kopya TSV",
+    "copyMarkdown": "Kopya Taolo Markdown",
+    "csvCopied": "CSV ekopiyami na presse-papiers",
+    "tsvCopied": "TSV ekopiyami na presse-papiers",
+    "markdownCopied": "Taolo Markdown ekopiyami na presse-papiers"
+  }
+}

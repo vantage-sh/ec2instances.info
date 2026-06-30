@@ -1,0 +1,18 @@
+{
+  "hourly": "Сәгатьлек",
+  "monthly": "Айлык",
+  "yearly": "Еллык",
+  "perHour": "/сәг.",
+  "perMonth": "/ай",
+  "perYear": "/ел",
+  "onDemand": "Таләп буенча",
+  "reserved": "Резервлашкан",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Алдан түләүсез",
+  "partialUpfront": "Өлешчә алдан түләүле",
+  "allUpfront": "Тулысынча алдан түләүле",
+  "convertible": "Конвертируемый",
+  "standard": "Стандарт",
+  "priceUnavailable": "Н/Б"
+}

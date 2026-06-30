@@ -1,0 +1,18 @@
+{
+  "hourly": "В час",
+  "monthly": "В месяц",
+  "yearly": "В год",
+  "perHour": "/ч",
+  "perMonth": "/мес",
+  "perYear": "/год",
+  "onDemand": "По требованию",
+  "reserved": "Зарезервированный",
+  "spot": "Spot",
+  "savingsPlan": "План экономии",
+  "noUpfront": "Без предоплаты",
+  "partialUpfront": "Частичная предоплата",
+  "allUpfront": "Полная предоплата",
+  "convertible": "Конвертируемый",
+  "standard": "Стандартный",
+  "priceUnavailable": "Н/Д"
+}

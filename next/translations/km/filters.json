@@ -1,0 +1,49 @@
+{
+  "search": "ស្វែងរក...",
+  "clearFilters": "លុបតម្រង",
+  "filters": "តម្រង",
+  "columns": "ជួរឈរ",
+  "region": "តំបន់",
+  "pricingUnit": "ឯកតាតម្លៃ",
+  "cost": "ការចំណាយ",
+  "reserved": "Reserved",
+  "currency": "រូបិយប័ណ្ណ",
+  "os": "ប្រព័ន្ធប្រតិបត្តិការ",
+  "duration": "រយៈពេល",
+  "reservedTerm": "រយៈពេល Reserved",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Reserved 1 ឆ្នាំ",
+    "reserved3yr": "Reserved 3 ឆ្នាំ",
+    "spot": "Spot"
+  },
+  "compare": "ប្រៀបធៀប",
+  "endCompare": "បញ្ចប់ការប្រៀបធៀប",
+  "selected": "បានជ្រើសរើស",
+  "showAll": "បង្ហាញទាំងអស់",
+  "hideAll": "លាក់ទាំងអស់",
+  "select": "ជ្រើសរើស...",
+  "searchLabel": "ស្វែងរក {label}...",
+  "noOptionsFound": "រកមិនឃើញជម្រើស។",
+  "searchColumns": "ស្វែងរកជួរឈរ...",
+  "noColumnsFound": "រកមិនឃើញជួរឈរ។",
+  "selectAll": "ជ្រើសរើសទាំងអស់",
+  "selectDefaults": "ជ្រើសរើសលំនាំ",
+  "regionGroups": {
+    "frequentlyUsed": "ប្រើញឹកញាប់",
+    "chinaCloudRegions": "តំបន់ China Cloud",
+    "mainRegions": "តំបន់ចម្បង",
+    "localZones": "តំបន់មូលដ្ឋាន",
+    "wavelengthZones": "តំបន់ Wavelength"
+  },
+  "export": {
+    "export": "នាំចេញ",
+    "downloadCsv": "ទាញយក CSV",
+    "copyCsv": "ចម្លង CSV",
+    "copyTsv": "ចម្លង TSV",
+    "copyMarkdown": "ចម្លងតារាង Markdown",
+    "csvCopied": "CSV បានចម្លងទៅ clipboard",
+    "tsvCopied": "TSV បានចម្លងទៅ clipboard",
+    "markdownCopied": "តារាង Markdown បានចម្លងទៅ clipboard"
+  }
+}

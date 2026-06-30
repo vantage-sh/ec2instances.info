@@ -1,0 +1,49 @@
+{
+  "search": "Cari...",
+  "clearFilters": "Kosongkan Penapis",
+  "filters": "Penapis",
+  "columns": "Lajur",
+  "region": "Rantau",
+  "pricingUnit": "Unit Harga",
+  "cost": "Kos",
+  "reserved": "Tempahan",
+  "currency": "Mata Wang",
+  "os": "Sistem Pengendalian",
+  "duration": "Tempoh",
+  "reservedTerm": "Tempoh Tempahan",
+  "durations": {
+    "ondemand": "Atas Permintaan",
+    "reserved1yr": "Tempahan 1 Tahun",
+    "reserved3yr": "Tempahan 3 Tahun",
+    "spot": "Spot"
+  },
+  "compare": "Bandingkan",
+  "endCompare": "Tamatkan Perbandingan",
+  "selected": "dipilih",
+  "showAll": "Tunjuk Semua",
+  "hideAll": "Sembunyi Semua",
+  "select": "Pilih...",
+  "searchLabel": "Cari {label}...",
+  "noOptionsFound": "Tiada pilihan ditemui.",
+  "searchColumns": "Cari lajur...",
+  "noColumnsFound": "Tiada lajur ditemui.",
+  "selectAll": "Pilih Semua",
+  "selectDefaults": "Pilih Lalai",
+  "regionGroups": {
+    "frequentlyUsed": "Kerap Digunakan",
+    "chinaCloudRegions": "Rantau Awan China",
+    "mainRegions": "Rantau Utama",
+    "localZones": "Zon Setempat",
+    "wavelengthZones": "Zon Wavelength"
+  },
+  "export": {
+    "export": "Eksport",
+    "downloadCsv": "Muat Turun CSV",
+    "copyCsv": "Salin CSV",
+    "copyTsv": "Salin TSV",
+    "copyMarkdown": "Salin Jadual Markdown",
+    "csvCopied": "CSV disalin ke papan keratan",
+    "tsvCopied": "TSV disalin ke papan keratan",
+    "markdownCopied": "Jadual Markdown disalin ke papan keratan"
+  }
+}

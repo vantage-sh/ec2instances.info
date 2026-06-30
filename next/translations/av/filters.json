@@ -1,0 +1,49 @@
+{
+  "search": "КIвар...",
+  "clearFilters": "Фильтрал РекIи",
+  "filters": "Фильтрал",
+  "columns": "Столбцал",
+  "region": "Регион",
+  "pricingUnit": "Кьиматалъул Единица",
+  "cost": "Кьимат",
+  "reserved": "РезервалъулаI",
+  "currency": "Валюта",
+  "os": "Операционияб Система",
+  "duration": "Хан",
+  "reservedTerm": "РезервалъулаI Хан",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 Сон РезервалъулаI",
+    "reserved3yr": "3 Сон РезервалъулаI",
+    "spot": "Spot"
+  },
+  "compare": "Рекьи",
+  "endCompare": "Рекьи ТIупI",
+  "selected": "РакIарав",
+  "showAll": "Цояр РагIи",
+  "hideAll": "Цояр Гьабачи",
+  "select": "РакIизе...",
+  "searchLabel": "{label} КIвар...",
+  "noOptionsFound": "Вариантал ГьечIо.",
+  "searchColumns": "Столбцал КIвар...",
+  "noColumnsFound": "Столбцал ГьечIо.",
+  "selectAll": "Цояр РакIизе",
+  "selectDefaults": "ЧIухъабал РакIизе",
+  "regionGroups": {
+    "frequentlyUsed": "ГIадамасе ГIоркIулаI",
+    "chinaCloudRegions": "Китайялъул Cloud Регионал",
+    "mainRegions": "БукIинаб Регионал",
+    "localZones": "МахIалалъул Зонал",
+    "wavelengthZones": "Wavelength Зонал"
+  },
+  "export": {
+    "export": "Экспорт",
+    "downloadCsv": "CSV БачIун",
+    "copyCsv": "CSV Копирун",
+    "copyTsv": "TSV Копирун",
+    "copyMarkdown": "Markdown Таблица Копирун",
+    "csvCopied": "CSV Буфердалъ КопирулаI",
+    "tsvCopied": "TSV Буфердалъ КопирулаI",
+    "markdownCopied": "Markdown Таблица Буфердалъ КопирулаI"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "hourly": "Dɔnhwer Biara",
+  "monthly": "Bosome Biara",
+  "yearly": "Afe Biara",
+  "perHour": "/dɔnhwer",
+  "perMonth": "/bosome",
+  "perYear": "/afe",
+  "onDemand": "Wo Hia A",
+  "reserved": "Ahyɛ Ho Kɔkɔ",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Nnhyɛ Ka Ɛtwam O",
+  "partialUpfront": "Fã Ka Ɛtwam",
+  "allUpfront": "Ka Nyinaa Ɛtwam",
+  "convertible": "Nnoa Wɔ So",
+  "standard": "Tete",
+  "priceUnavailable": "N/A"
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Okukenha...",
+  "clearFilters": "Okusamununa Ovifilutelo",
+  "filters": "Ovifilutelo",
+  "columns": "Ovilima",
+  "region": "Ombolo",
+  "pricingUnit": "Ocipimo ca Omali",
+  "cost": "Omali",
+  "reserved": "Okasinda",
+  "currency": "Omali wa Nzo",
+  "os": "Omupango Wokulonga",
+  "duration": "Ovihela",
+  "reservedTerm": "Ovihela Okasinda",
+  "durations": {
+    "ondemand": "Pokuhanya",
+    "reserved1yr": "Okasinda Omuhindo 1",
+    "reserved3yr": "Okasinda Omihindo 3",
+    "spot": "Spot"
+  },
+  "compare": "Okulinganisa",
+  "endCompare": "Okuhaula Okulinganisa",
+  "selected": "okasinda",
+  "showAll": "Kulonga Yose",
+  "hideAll": "Okufinika Yose",
+  "select": "Okasinda...",
+  "searchLabel": "Okukenha {label}...",
+  "noOptionsFound": "Ovisengo vikapangwa.",
+  "searchColumns": "Okukenha ovilima...",
+  "noColumnsFound": "Ovilima vikapangwa.",
+  "selectAll": "Okasinda Yose",
+  "selectDefaults": "Okasinda Ovisengo vya Nguyi",
+  "regionGroups": {
+    "frequentlyUsed": "Okutumiwa Okupihi",
+    "chinaCloudRegions": "Omabolo ya Cloud ya China",
+    "mainRegions": "Omabolo Omakulu",
+    "localZones": "Omabolo Okupihi",
+    "wavelengthZones": "Omabolo ya Wavelength"
+  },
+  "export": {
+    "export": "Okutunga",
+    "downloadCsv": "Okukamba CSV",
+    "copyCsv": "Okopika CSV",
+    "copyTsv": "Okopika TSV",
+    "copyMarkdown": "Okopika Ilitebulo lya Markdown",
+    "csvCopied": "CSV okopikwa ku clipboard",
+    "tsvCopied": "TSV okopikwa ku clipboard",
+    "markdownCopied": "Ilitebulo lya Markdown okopikwa ku clipboard"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Gagal memuat data",
+  "tryAgain": "Coba Lagi",
+  "networkError": "Kesalahan jaringan. Periksa koneksi Anda.",
+  "unknownError": "Terjadi kesalahan yang tidak diketahui"
+}

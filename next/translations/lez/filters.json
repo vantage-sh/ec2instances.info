@@ -1,0 +1,49 @@
+{
+  "search": "Жагъурун...",
+  "clearFilters": "Фильтрар СтIал Авун",
+  "filters": "Фильтрар",
+  "columns": "Столбцар",
+  "region": "Регион",
+  "pricingUnit": "Кьадардин Единица",
+  "cost": "Кьадар",
+  "reserved": "Резервламиш",
+  "currency": "Пул",
+  "os": "Операционный Система",
+  "duration": "Вахт",
+  "reservedTerm": "Резервламиш Вахт",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 Йис Резервламиш",
+    "reserved3yr": "3 Йис Резервламиш",
+    "spot": "Spot"
+  },
+  "compare": "Гъавурда Ягъун",
+  "endCompare": "Гъавурда Ягъун КъакIурун",
+  "selected": "Хкянавай",
+  "showAll": "Вири Гъалеттун",
+  "hideAll": "Вири Пуснавун",
+  "select": "Хкин...",
+  "searchLabel": "{label} Жагъурун...",
+  "noOptionsFound": "Вариантар авач.",
+  "searchColumns": "Столбцар Жагъурун...",
+  "noColumnsFound": "Столбцар авач.",
+  "selectAll": "Вири Хкин",
+  "selectDefaults": "Асаслубур Хкин",
+  "regionGroups": {
+    "frequentlyUsed": "Чпелай Ишлемишзавайбур",
+    "chinaCloudRegions": "Китайдин Cloud Регионар",
+    "mainRegions": "Эсас Регионар",
+    "localZones": "Маса Зонар",
+    "wavelengthZones": "Wavelength Зонар"
+  },
+  "export": {
+    "export": "Экспорт",
+    "downloadCsv": "CSV ТухуртIун",
+    "copyCsv": "CSV Копия Авун",
+    "copyTsv": "TSV Копия Авун",
+    "copyMarkdown": "Markdown Таблица Копия Авун",
+    "csvCopied": "CSV Буфердик Хкенва",
+    "tsvCopied": "TSV Буфердик Хкенва",
+    "markdownCopied": "Markdown Таблица Буфердик Хкенва"
+  }
+}

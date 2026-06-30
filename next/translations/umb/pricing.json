@@ -1,0 +1,18 @@
+{
+  "hourly": "Po Hora",
+  "monthly": "Po Mês",
+  "yearly": "Po Ano",
+  "perHour": "/hora",
+  "perMonth": "/mês",
+  "perYear": "/ano",
+  "onDemand": "Pokuhanya",
+  "reserved": "Okasinda",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Okasinda Nawa Malipo",
+  "partialUpfront": "Okasinda Olupande Malipo",
+  "allUpfront": "Okasinda Omalipo Yose",
+  "convertible": "Okukulumiwa",
+  "standard": "Oluhi",
+  "priceUnavailable": "K.A."
+}

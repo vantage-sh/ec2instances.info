@@ -1,0 +1,18 @@
+{
+  "hourly": "На час",
+  "monthly": "Месечно",
+  "yearly": "Годишно",
+  "perHour": "/ч.",
+  "perMonth": "/м.",
+  "perYear": "/г.",
+  "onDemand": "При поискване",
+  "reserved": "Резервиран",
+  "spot": "Spot",
+  "savingsPlan": "План за спестявания",
+  "noUpfront": "Без предварително плащане",
+  "partialUpfront": "Частично предварително плащане",
+  "allUpfront": "Пълно предварително плащане",
+  "convertible": "Конвертируем",
+  "standard": "Стандартен",
+  "priceUnavailable": "N/A"
+}

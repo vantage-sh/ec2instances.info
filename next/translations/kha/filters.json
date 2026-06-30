@@ -1,0 +1,49 @@
+{
+  "search": "Phah...",
+  "clearFilters": "Pyndem Filters",
+  "filters": "Filters",
+  "columns": "Columns",
+  "region": "Region",
+  "pricingUnit": "Unit Bai",
+  "cost": "Bai",
+  "reserved": "Reserved",
+  "currency": "Mbai",
+  "os": "Operating System",
+  "duration": "Sda Dang",
+  "reservedTerm": "Reserved Term",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Reserved 1 Snem",
+    "reserved3yr": "Reserved 3 Snem",
+    "spot": "Spot"
+  },
+  "compare": "Thoh Shibun",
+  "endCompare": "Pyndem Shibun",
+  "selected": "La leh",
+  "showAll": "Pynlait Bakhuid",
+  "hideAll": "Laim Bakhuid",
+  "select": "Leh...",
+  "searchLabel": "Phah {label}...",
+  "noOptionsFound": "Ban don ki option.",
+  "searchColumns": "Phah columns...",
+  "noColumnsFound": "Ban don ki column.",
+  "selectAll": "Leh Bakhuid",
+  "selectDefaults": "Leh Defaults",
+  "regionGroups": {
+    "frequentlyUsed": "La Shim Nangshibun",
+    "chinaCloudRegions": "Ki Region Cloud China",
+    "mainRegions": "Ki Region Rangbah",
+    "localZones": "Ki Local Zone",
+    "wavelengthZones": "Ki Wavelength Zone"
+  },
+  "export": {
+    "export": "Export",
+    "downloadCsv": "Download CSV",
+    "copyCsv": "Copy CSV",
+    "copyTsv": "Copy TSV",
+    "copyMarkdown": "Copy Markdown Table",
+    "csvCopied": "CSV la copy sha clipboard",
+    "tsvCopied": "TSV la copy sha clipboard",
+    "markdownCopied": "Markdown table la copy sha clipboard"
+  }
+}

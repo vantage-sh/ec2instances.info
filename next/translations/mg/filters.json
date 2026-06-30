@@ -1,0 +1,49 @@
+{
+  "search": "Karohy...",
+  "clearFilters": "Esory ny Filatra",
+  "filters": "Filatra",
+  "columns": "Tsangantsanana",
+  "region": "Faritra",
+  "pricingUnit": "Vonin'ny Vidiny",
+  "cost": "Vidiny",
+  "reserved": "Voatokana",
+  "currency": "Vola",
+  "os": "Rafitra Fampiasa",
+  "duration": "Faharetan'ny",
+  "reservedTerm": "Fepetra Voatokana",
+  "durations": {
+    "ondemand": "Ara-pilaharana",
+    "reserved1yr": "Voatokana 1 Taona",
+    "reserved3yr": "Voatokana 3 Taona",
+    "spot": "Spot"
+  },
+  "compare": "Ampitahao",
+  "endCompare": "Farany ny Fampitahana",
+  "selected": "voafidy",
+  "showAll": "Asehoy Rehetra",
+  "hideAll": "Afeno Rehetra",
+  "select": "Fidio...",
+  "searchLabel": "Karohy {label}...",
+  "noOptionsFound": "Tsy hita ny safidy.",
+  "searchColumns": "Karohy tsangantsanana...",
+  "noColumnsFound": "Tsy hita tsangantsanana.",
+  "selectAll": "Fidio Rehetra",
+  "selectDefaults": "Fidio ny Voafaritra",
+  "regionGroups": {
+    "frequentlyUsed": "Ampiasaina Matetika",
+    "chinaCloudRegions": "Faritra Cloud Sina",
+    "mainRegions": "Faritra Lehibe",
+    "localZones": "Faritra Eto Amintsika",
+    "wavelengthZones": "Faritra Wavelength"
+  },
+  "export": {
+    "export": "Avoahy",
+    "downloadCsv": "Alao CSV",
+    "copyCsv": "Adikao CSV",
+    "copyTsv": "Adikao TSV",
+    "copyMarkdown": "Adikao Latabatra Markdown",
+    "csvCopied": "CSV nodikaina tao amin'ny clipboard",
+    "tsvCopied": "TSV nodikaina tao amin'ny clipboard",
+    "markdownCopied": "Latabatra Markdown nodikaina tao amin'ny clipboard"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "hourly": "Orduko",
+  "monthly": "Hileko",
+  "yearly": "Urteko",
+  "perHour": "/h",
+  "perMonth": "/hil.",
+  "perYear": "/urte",
+  "onDemand": "Eskaeraren arabera",
+  "reserved": "Erreserbatua",
+  "spot": "Spot",
+  "savingsPlan": "Aurrezpen Plana",
+  "noUpfront": "Aurrepagorik gabe",
+  "partialUpfront": "Aurrepago partzialarekin",
+  "allUpfront": "Aurrepago osoarekin",
+  "convertible": "Bihurgarria",
+  "standard": "Estandarra",
+  "priceUnavailable": "N/E"
+}

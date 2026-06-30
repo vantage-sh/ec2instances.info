@@ -1,0 +1,49 @@
+{
+  "search": "Zoeken...",
+  "clearFilters": "Filters wissen",
+  "filters": "Filters",
+  "columns": "Kolommen",
+  "region": "Regio",
+  "pricingUnit": "Prijseenheid",
+  "cost": "Kosten",
+  "reserved": "Gereserveerd",
+  "currency": "Valuta",
+  "os": "Besturingssysteem",
+  "duration": "Duur",
+  "reservedTerm": "Reserveringsperiode",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 jaar gereserveerd",
+    "reserved3yr": "3 jaar gereserveerd",
+    "spot": "Spot"
+  },
+  "compare": "Vergelijken",
+  "endCompare": "Vergelijking beëindigen",
+  "selected": "geselecteerd",
+  "showAll": "Alles weergeven",
+  "hideAll": "Alles verbergen",
+  "select": "Selecteren...",
+  "searchLabel": "{label} zoeken...",
+  "noOptionsFound": "Geen opties gevonden.",
+  "searchColumns": "Kolommen zoeken...",
+  "noColumnsFound": "Geen kolommen gevonden.",
+  "selectAll": "Alles selecteren",
+  "selectDefaults": "Standaarden selecteren",
+  "regionGroups": {
+    "frequentlyUsed": "Vaak gebruikt",
+    "chinaCloudRegions": "China-cloudregio's",
+    "mainRegions": "Hoofdregio's",
+    "localZones": "Lokale zones",
+    "wavelengthZones": "Wavelength Zones"
+  },
+  "export": {
+    "export": "Exporteren",
+    "downloadCsv": "CSV downloaden",
+    "copyCsv": "CSV kopiëren",
+    "copyTsv": "TSV kopiëren",
+    "copyMarkdown": "Markdowntabel kopiëren",
+    "csvCopied": "CSV gekopieerd naar klembord",
+    "tsvCopied": "TSV gekopieerd naar klembord",
+    "markdownCopied": "Markdowntabel gekopieerd naar klembord"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Error en carregar les dades",
+  "tryAgain": "Torna-ho a provar",
+  "networkError": "Error de xarxa. Comproveu la vostra connexió.",
+  "unknownError": "S'ha produït un error desconegut"
+}

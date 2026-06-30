@@ -1,0 +1,18 @@
+{
+  "hourly": "시간당",
+  "monthly": "월간",
+  "yearly": "연간",
+  "perHour": "/시간",
+  "perMonth": "/월",
+  "perYear": "/년",
+  "onDemand": "온디맨드",
+  "reserved": "예약",
+  "spot": "스팟",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "선결제 없음",
+  "partialUpfront": "부분 선결제",
+  "allUpfront": "전체 선결제",
+  "convertible": "전환 가능",
+  "standard": "표준",
+  "priceUnavailable": "N/A"
+}

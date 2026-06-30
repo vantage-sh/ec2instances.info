@@ -1,0 +1,49 @@
+{
+  "search": "Zawn rawh...",
+  "clearFilters": "Filter Hlai",
+  "filters": "Filter-te",
+  "columns": "Kolam-te",
+  "region": "Hmun",
+  "pricingUnit": "Hman Lak Unit",
+  "cost": "Hman lak",
+  "reserved": "Reserved",
+  "currency": "Pawisa",
+  "os": "Operating System",
+  "duration": "Tihnung",
+  "reservedTerm": "Reserved Tihnung",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Kum 1 Reserved",
+    "reserved3yr": "Kum 3 Reserved",
+    "spot": "Spot"
+  },
+  "compare": "Zawn",
+  "endCompare": "Zawn Tawp",
+  "selected": "thlan tawh",
+  "showAll": "Vawn lo teh",
+  "hideAll": "Vawn teh",
+  "select": "Thlan rawh...",
+  "searchLabel": "{label} zawn rawh...",
+  "noOptionsFound": "Option a hmu theih lo.",
+  "searchColumns": "Kolam zawn rawh...",
+  "noColumnsFound": "Kolam a hmu theih lo.",
+  "selectAll": "Vawn thlang rawh",
+  "selectDefaults": "Default thlang rawh",
+  "regionGroups": {
+    "frequentlyUsed": "Hmang Pui Ber",
+    "chinaCloudRegions": "China Cloud Hmun-te",
+    "mainRegions": "Hmun Lian-te",
+    "localZones": "Local Zone-te",
+    "wavelengthZones": "Wavelength Zone-te"
+  },
+  "export": {
+    "export": "Chhuah",
+    "downloadCsv": "CSV download rawh",
+    "copyCsv": "CSV copy rawh",
+    "copyTsv": "TSV copy rawh",
+    "copyMarkdown": "Markdown table copy rawh",
+    "csvCopied": "CSV clipboard-ah copy tawh",
+    "tsvCopied": "TSV clipboard-ah copy tawh",
+    "markdownCopied": "Markdown table clipboard-ah copy tawh"
+  }
+}

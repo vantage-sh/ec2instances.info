@@ -1,0 +1,49 @@
+{
+  "search": "ابحث...",
+  "clearFilters": "مسح الفلاتر",
+  "filters": "الفلاتر",
+  "columns": "الأعمدة",
+  "region": "المنطقة",
+  "pricingUnit": "وحدة التسعير",
+  "cost": "التكلفة",
+  "reserved": "محجوز",
+  "currency": "العملة",
+  "os": "نظام التشغيل",
+  "duration": "المدة",
+  "reservedTerm": "فترة الحجز",
+  "durations": {
+    "ondemand": "عند الطلب",
+    "reserved1yr": "حجز سنة وحدة",
+    "reserved3yr": "حجز 3 سنوات",
+    "spot": "Spot"
+  },
+  "compare": "قارن",
+  "endCompare": "انهِ المقارنة",
+  "selected": "محدد",
+  "showAll": "اعرض الكل",
+  "hideAll": "خبّي الكل",
+  "select": "اختار...",
+  "searchLabel": "ابحث {label}...",
+  "noOptionsFound": "ما في خيارات.",
+  "searchColumns": "ابحث بالأعمدة...",
+  "noColumnsFound": "ما في أعمدة.",
+  "selectAll": "حدد الكل",
+  "selectDefaults": "حدد الافتراضي",
+  "regionGroups": {
+    "frequentlyUsed": "الأكثر استخداماً",
+    "chinaCloudRegions": "مناطق سحابة الصين",
+    "mainRegions": "المناطق الرئيسية",
+    "localZones": "المناطق المحلية",
+    "wavelengthZones": "مناطق Wavelength"
+  },
+  "export": {
+    "export": "تصدير",
+    "downloadCsv": "حمّل CSV",
+    "copyCsv": "انسخ CSV",
+    "copyTsv": "انسخ TSV",
+    "copyMarkdown": "انسخ جدول Markdown",
+    "csvCopied": "تم نسخ CSV عالحافظة",
+    "tsvCopied": "تم نسخ TSV عالحافظة",
+    "markdownCopied": "تم نسخ جدول Markdown عالحافظة"
+  }
+}

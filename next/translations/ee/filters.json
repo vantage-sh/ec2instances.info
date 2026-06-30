@@ -1,0 +1,49 @@
+{
+  "search": "Hã...",
+  "clearFilters": "Ɖe Filterwo Si",
+  "filters": "Filterwo",
+  "columns": "Atsyamewo",
+  "region": "Anyigba Kpuia",
+  "pricingUnit": "Aga Nugblɔvɔvɔ",
+  "cost": "Aga",
+  "reserved": "Ŋkɔŋlɔ",
+  "currency": "Gadzrawo",
+  "os": "System Titina",
+  "duration": "Gamedzi",
+  "reservedTerm": "Ŋkɔŋlɔ Gamedzi",
+  "durations": {
+    "ondemand": "Ɖo Dzidzro",
+    "reserved1yr": "Ƒe 1 Ŋkɔŋlɔ",
+    "reserved3yr": "Ƒewo 3 Ŋkɔŋlɔ",
+    "spot": "Spot"
+  },
+  "compare": "Do Ɖeɖe",
+  "endCompare": "Ɖe Ɖeɖe Si",
+  "selected": "wotso",
+  "showAll": "Lã Katã",
+  "hideAll": "Ɖe Katã Ɖi",
+  "select": "Tsɔ...",
+  "searchLabel": "Hã {label}...",
+  "noOptionsFound": "Dzi aɖe mele o.",
+  "searchColumns": "Hã atsyamewo...",
+  "noColumnsFound": "Atsyame aɖe mele o.",
+  "selectAll": "Tsɔ Katã",
+  "selectDefaults": "Tsɔ Mɔdidi",
+  "regionGroups": {
+    "frequentlyUsed": "Wodzia Nane",
+    "chinaCloudRegions": "China Cloud Anyigba Kpuia",
+    "mainRegions": "Anyigba Kpuia Gã",
+    "localZones": "Egbe Zone",
+    "wavelengthZones": "Wavelength Zone"
+  },
+  "export": {
+    "export": "Yɔ",
+    "downloadCsv": "Trɔ CSV",
+    "copyCsv": "Nakɔ CSV",
+    "copyTsv": "Nakɔ TSV",
+    "copyMarkdown": "Nakɔ Markdown Table",
+    "csvCopied": "CSV akɔ clipboard dzi",
+    "tsvCopied": "TSV akɔ clipboard dzi",
+    "markdownCopied": "Markdown table akɔ clipboard dzi"
+  }
+}

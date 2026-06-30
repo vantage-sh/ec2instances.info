@@ -1,0 +1,18 @@
+{
+  "hourly": "Hi Hora",
+  "monthly": "Hi N'hweti",
+  "yearly": "Hi Lembe",
+  "perHour": "/hora",
+  "perMonth": "/n'hweti",
+  "perYear": "/lembe",
+  "onDemand": "Hi Swi Lava",
+  "reserved": "Xikisiwile",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Ku Hava Timali ta Emahlweni",
+  "partialUpfront": "Fasi ya Timali ta Emahlweni",
+  "allUpfront": "Timali Hinkwato ta Emahlweni",
+  "convertible": "Swi Nga Antswisiwa",
+  "standard": "Kahle-kahle",
+  "priceUnavailable": "N/A"
+}

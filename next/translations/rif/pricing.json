@@ -1,0 +1,18 @@
+{
+  "hourly": "Deg Tsaɛt",
+  "monthly": "Deg Wayur",
+  "yearly": "Deg Useggas",
+  "perHour": "/tsaɛt",
+  "perMonth": "/ayr",
+  "perYear": "/asgg",
+  "onDemand": "Ɣer Uɣbalu",
+  "reserved": "Imzwaren",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "S Wanuḍ Tafekka",
+  "partialUpfront": "Tafekka Timezwura",
+  "allUpfront": "Tafekka Tameqqrant",
+  "convertible": "Imttil",
+  "standard": "Amagdaz",
+  "priceUnavailable": "N/A"
+}

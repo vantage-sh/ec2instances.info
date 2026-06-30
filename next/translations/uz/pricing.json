@@ -1,0 +1,18 @@
+{
+  "hourly": "Soatlik",
+  "monthly": "Oylik",
+  "yearly": "Yillik",
+  "perHour": "/soat",
+  "perMonth": "/oy",
+  "perYear": "/yil",
+  "onDemand": "Talabga binoan",
+  "reserved": "Zahira",
+  "spot": "Spot",
+  "savingsPlan": "Tejash Rejasi",
+  "noUpfront": "Oldindan To'lovsiz",
+  "partialUpfront": "Qisman Oldindan To'lov",
+  "allUpfront": "To'liq Oldindan To'lov",
+  "convertible": "Konvertatsiyalanadigan",
+  "standard": "Standart",
+  "priceUnavailable": "M/Y"
+}

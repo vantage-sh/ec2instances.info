@@ -1,0 +1,18 @@
+{
+  "hourly": "ساعەتلىك",
+  "monthly": "ئايلىق",
+  "yearly": "يىللىق",
+  "perHour": "/سائ.",
+  "perMonth": "/ئاي",
+  "perYear": "/يىل",
+  "onDemand": "تەلەپ بويىچە",
+  "reserved": "ئالدىن ئايرىلغان",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "ئالدىن تۆلەمسىز",
+  "partialUpfront": "قىسمەن ئالدىن تۆلەملىك",
+  "allUpfront": "ئالدىن تولۇق تۆلەملىك",
+  "convertible": "Convertible",
+  "standard": "ئۆلچەملىك",
+  "priceUnavailable": "يوق"
+}

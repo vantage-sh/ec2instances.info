@@ -1,0 +1,49 @@
+{
+  "search": "تلاش کریں...",
+  "clearFilters": "فلٹر صاف کریں",
+  "filters": "فلٹرز",
+  "columns": "کالمز",
+  "region": "علاقہ",
+  "pricingUnit": "قیمت کی اکائی",
+  "cost": "لاگت",
+  "reserved": "ریزرو",
+  "currency": "کرنسی",
+  "os": "آپریٹنگ سسٹم",
+  "duration": "مدت",
+  "reservedTerm": "ریزرویشن کی مدت",
+  "durations": {
+    "ondemand": "آن ڈیمانڈ",
+    "reserved1yr": "1 سال ریزرو",
+    "reserved3yr": "3 سال ریزرو",
+    "spot": "Spot"
+  },
+  "compare": "موازنہ کریں",
+  "endCompare": "موازنہ ختم کریں",
+  "selected": "منتخب",
+  "showAll": "سب دکھائیں",
+  "hideAll": "سب چھپائیں",
+  "select": "منتخب کریں...",
+  "searchLabel": "{label} تلاش کریں...",
+  "noOptionsFound": "کوئی آپشن نہیں ملا۔",
+  "searchColumns": "کالم تلاش کریں...",
+  "noColumnsFound": "کوئی کالم نہیں ملا۔",
+  "selectAll": "سب منتخب کریں",
+  "selectDefaults": "ڈیفالٹ منتخب کریں",
+  "regionGroups": {
+    "frequentlyUsed": "اکثر استعمال",
+    "chinaCloudRegions": "چین کلاؤڈ ریجنز",
+    "mainRegions": "اہم خطے",
+    "localZones": "مقامی زونز",
+    "wavelengthZones": "Wavelength زونز"
+  },
+  "export": {
+    "export": "ایکسپورٹ",
+    "downloadCsv": "CSV ڈاؤن لوڈ کریں",
+    "copyCsv": "CSV کاپی کریں",
+    "copyTsv": "TSV کاپی کریں",
+    "copyMarkdown": "Markdown ٹیبل کاپی کریں",
+    "csvCopied": "CSV کلپ بورڈ پر کاپی ہو گئی",
+    "tsvCopied": "TSV کلپ بورڈ پر کاپی ہو گئی",
+    "markdownCopied": "Markdown ٹیبل کلپ بورڈ پر کاپی ہو گئی"
+  }
+}

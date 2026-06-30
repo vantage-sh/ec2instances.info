@@ -1,0 +1,49 @@
+{
+  "search": "Căutare...",
+  "clearFilters": "Șterge Filtre",
+  "filters": "Filtre",
+  "columns": "Coloane",
+  "region": "Regiune",
+  "pricingUnit": "Unitate de Preț",
+  "cost": "Cost",
+  "reserved": "Rezervat",
+  "currency": "Monedă",
+  "os": "Sistem de Operare",
+  "duration": "Durată",
+  "reservedTerm": "Termen Rezervat",
+  "durations": {
+    "ondemand": "La Cerere",
+    "reserved1yr": "1 An Rezervat",
+    "reserved3yr": "3 Ani Rezervat",
+    "spot": "Spot"
+  },
+  "compare": "Comparați",
+  "endCompare": "Terminați Compararea",
+  "selected": "selectat",
+  "showAll": "Arată Tot",
+  "hideAll": "Ascunde Tot",
+  "select": "Selectați...",
+  "searchLabel": "Căutați {label}...",
+  "noOptionsFound": "Nu s-au găsit opțiuni.",
+  "searchColumns": "Căutați coloane...",
+  "noColumnsFound": "Nu s-au găsit coloane.",
+  "selectAll": "Selectați Tot",
+  "selectDefaults": "Selectați Implicit",
+  "regionGroups": {
+    "frequentlyUsed": "Frecvent Utilizate",
+    "chinaCloudRegions": "Regiuni Cloud China",
+    "mainRegions": "Regiuni Principale",
+    "localZones": "Zone Locale",
+    "wavelengthZones": "Zone Wavelength"
+  },
+  "export": {
+    "export": "Export",
+    "downloadCsv": "Descărcați CSV",
+    "copyCsv": "Copiați CSV",
+    "copyTsv": "Copiați TSV",
+    "copyMarkdown": "Copiați Tabelul Markdown",
+    "csvCopied": "CSV copiat în clipboard",
+    "tsvCopied": "TSV copiat în clipboard",
+    "markdownCopied": "Tabelul Markdown copiat în clipboard"
+  }
+}

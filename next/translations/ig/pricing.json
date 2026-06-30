@@ -1,0 +1,18 @@
+{
+  "hourly": "Kwa Awa",
+  "monthly": "Kwa Ọnwa",
+  "yearly": "Kwa Afọ",
+  "perHour": "/awa",
+  "perMonth": "/ọnwa",
+  "perYear": "/afọ",
+  "onDemand": "On-Demand",
+  "reserved": "Echekwara",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Ọ Dịghị Ọnụ Tupu",
+  "partialUpfront": "Nkebi Ọnụ Tupu",
+  "allUpfront": "Ọnụ Tupu Nile",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Keresés...",
+  "clearFilters": "Szűrők törlése",
+  "filters": "Szűrők",
+  "columns": "Oszlopok",
+  "region": "Régió",
+  "pricingUnit": "Árazási egység",
+  "cost": "Költség",
+  "reserved": "Foglalt",
+  "currency": "Pénznem",
+  "os": "Operációs rendszer",
+  "duration": "Időtartam",
+  "reservedTerm": "Foglalási időszak",
+  "durations": {
+    "ondemand": "Igény szerint",
+    "reserved1yr": "1 éves foglalt",
+    "reserved3yr": "3 éves foglalt",
+    "spot": "Spot"
+  },
+  "compare": "Összehasonlítás",
+  "endCompare": "Összehasonlítás befejezése",
+  "selected": "kiválasztva",
+  "showAll": "Összes mutatása",
+  "hideAll": "Összes elrejtése",
+  "select": "Válasszon...",
+  "searchLabel": "{label} keresése...",
+  "noOptionsFound": "Nem található lehetőség.",
+  "searchColumns": "Oszlopok keresése...",
+  "noColumnsFound": "Nem találhatók oszlopok.",
+  "selectAll": "Összes kijelölése",
+  "selectDefaults": "Alapértelmezések kijelölése",
+  "regionGroups": {
+    "frequentlyUsed": "Gyakran használt",
+    "chinaCloudRegions": "Kínai felhő régiók",
+    "mainRegions": "Fő régiók",
+    "localZones": "Helyi zónák",
+    "wavelengthZones": "Wavelength zónák"
+  },
+  "export": {
+    "export": "Exportálás",
+    "downloadCsv": "CSV letöltése",
+    "copyCsv": "CSV másolása",
+    "copyTsv": "TSV másolása",
+    "copyMarkdown": "Markdown táblázat másolása",
+    "csvCopied": "CSV másolva a vágólapra",
+    "tsvCopied": "TSV másolva a vágólapra",
+    "markdownCopied": "Markdown táblázat másolva a vágólapra"
+  }
+}

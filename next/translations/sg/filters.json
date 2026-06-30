@@ -1,0 +1,49 @@
+{
+  "search": "Yongo...",
+  "clearFilters": "Suprimer Filtres",
+  "filters": "Filtres",
+  "columns": "Kolɔnw",
+  "region": "Ndo",
+  "pricingUnit": "Unité Mbongo",
+  "cost": "Mbongo",
+  "reserved": "Reserved",
+  "currency": "Monnaie",
+  "os": "Système tî baara",
+  "duration": "Ëre",
+  "reservedTerm": "Durée Reserved",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "An 1 Reserved",
+    "reserved3yr": "An 3 Reserved",
+    "spot": "Spot"
+  },
+  "compare": "Kɛrɛnkɛrɛn",
+  "endCompare": "Lɔ Kɛrɛnkɛrɛn",
+  "selected": "Sugandilenw",
+  "showAll": "Yira Bɛɛ",
+  "hideAll": "Planque Bɛɛ",
+  "select": "Sugandi...",
+  "searchLabel": "Yongo {label}...",
+  "noOptionsFound": "Option aïe mo.",
+  "searchColumns": "Yongo Kolɔnw...",
+  "noColumnsFound": "Kolɔn aïe mo.",
+  "selectAll": "Sugandi Bɛɛ",
+  "selectDefaults": "Sugandi Tɔgɔtigi",
+  "regionGroups": {
+    "frequentlyUsed": "Tɛmɛnen Caman",
+    "chinaCloudRegions": "Ndo Cloud tî Siin",
+    "mainRegions": "Ndo Gbia",
+    "localZones": "Zones tî Ndo",
+    "wavelengthZones": "Wavelength Zones"
+  },
+  "export": {
+    "export": "Bɔ",
+    "downloadCsv": "Télécharger CSV",
+    "copyCsv": "Copier CSV",
+    "copyTsv": "Copier TSV",
+    "copyMarkdown": "Copier Tableau Markdown",
+    "csvCopied": "CSV copié na presse-papiers",
+    "tsvCopied": "TSV copié na presse-papiers",
+    "markdownCopied": "Tableau Markdown copié na presse-papiers"
+  }
+}

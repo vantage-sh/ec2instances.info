@@ -1,0 +1,18 @@
+{
+  "hourly": "በሰዓት",
+  "monthly": "በወር",
+  "yearly": "በዓመት",
+  "perHour": "/ሰዓ",
+  "perMonth": "/ወር",
+  "perYear": "/ዓ",
+  "onDemand": "በፍላጎት",
+  "reserved": "የተጠበቀ",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "ቀድሞ ክፍያ የለም",
+  "partialUpfront": "ከፊል ቀድሞ ክፍያ",
+  "allUpfront": "ሁሉም ቀድሞ ክፍያ",
+  "convertible": "ሊለወጥ የሚችል",
+  "standard": "መደበኛ",
+  "priceUnavailable": "አ/አ"
+}

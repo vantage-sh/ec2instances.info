@@ -1,0 +1,18 @@
+{
+  "hourly": "Á klukkustund",
+  "monthly": "Mánaðarlegt",
+  "yearly": "Árlegt",
+  "perHour": "/klst.",
+  "perMonth": "/mán.",
+  "perYear": "/ár",
+  "onDemand": "Eftir þörf",
+  "reserved": "Frátekið",
+  "spot": "Spot",
+  "savingsPlan": "Sparnaðaráætlun",
+  "noUpfront": "Ekkert fyrirframgreiðsla",
+  "partialUpfront": "Hluta fyrirframgreiðsla",
+  "allUpfront": "Öll fyrirframgreiðsla",
+  "convertible": "Umbreytanlegt",
+  "standard": "Staðlað",
+  "priceUnavailable": "N/Á"
+}

@@ -1,0 +1,49 @@
+{
+  "search": "Yillitu...",
+  "clearFilters": "Muus Sewotooɗe",
+  "filters": "Sewotooɗe",
+  "columns": "Tiindol",
+  "region": "Leydi",
+  "pricingUnit": "Fayde Njaru",
+  "cost": "Njaru",
+  "reserved": "Ƴettaaɗo",
+  "currency": "Kaalisi",
+  "os": "Sifaa Ɓoggol",
+  "duration": "Sahaa",
+  "reservedTerm": "Sahaa Ƴettaaɗo",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Ƴettaaɗo Hitaande 1",
+    "reserved3yr": "Ƴettaaɗo Hitaande 3",
+    "spot": "Spot"
+  },
+  "compare": "Sariya",
+  "endCompare": "Tammbu Sariya",
+  "selected": "Suɓaaɗo",
+  "showAll": "Soo Fuu",
+  "hideAll": "Suuɗ Fuu",
+  "select": "Suɓ...",
+  "searchLabel": "Yillitu {label}...",
+  "noOptionsFound": "Nattii yiytaama.",
+  "searchColumns": "Yillitu tiindol...",
+  "noColumnsFound": "Tiindol alaa.",
+  "selectAll": "Suɓ Fuu",
+  "selectDefaults": "Suɓ Fuɗɗaari",
+  "regionGroups": {
+    "frequentlyUsed": "Ɗe Kuutoraaɗe Heen",
+    "chinaCloudRegions": "Leyɗe Muuɗo China",
+    "mainRegions": "Leyɗe Mawɗe",
+    "localZones": "Cokcal Ɗe",
+    "wavelengthZones": "Cokcal Wavelength"
+  },
+  "export": {
+    "export": "Yah Dow",
+    "downloadCsv": "Sos CSV",
+    "copyCsv": "Cukkul CSV",
+    "copyTsv": "Cukkul TSV",
+    "copyMarkdown": "Cukkul Tebol Markdown",
+    "csvCopied": "CSV cukkiraama e nder clipboard",
+    "tsvCopied": "TSV cukkiraama e nder clipboard",
+    "markdownCopied": "Tebol Markdown cukkiraama e nder clipboard"
+  }
+}

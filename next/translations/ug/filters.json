@@ -1,0 +1,49 @@
+{
+  "search": "ئىزدەش...",
+  "clearFilters": "سۈزگۈچلەرنى تازىلاش",
+  "filters": "سۈزگۈچلەر",
+  "columns": "ئىستونلار",
+  "region": "رايون",
+  "pricingUnit": "باھا بىرلىكى",
+  "cost": "چىقىم",
+  "reserved": "ئالدىن ئايرىلغان",
+  "currency": "پۇل بىرلىكى",
+  "os": "مەشغۇلات سىستېمىسى",
+  "duration": "ۋاقىت",
+  "reservedTerm": "ئالدىن ئايرىش مۇددىتى",
+  "durations": {
+    "ondemand": "تەلەپ بويىچە",
+    "reserved1yr": "1 يىل ئالدىن ئايرىلغان",
+    "reserved3yr": "3 يىل ئالدىن ئايرىلغان",
+    "spot": "Spot"
+  },
+  "compare": "سېلىشتۇرۇش",
+  "endCompare": "سېلىشتۇرۇشنى ئاخىرلاشتۇرۇش",
+  "selected": "تاللانغان",
+  "showAll": "ھەممىنى كۆرسىتىش",
+  "hideAll": "ھەممىنى يوشۇرۇش",
+  "select": "تاللاڭ...",
+  "searchLabel": "{label} ئىزدەش...",
+  "noOptionsFound": "تاللانما تېپىلمىدى.",
+  "searchColumns": "ئىستون ئىزدەش...",
+  "noColumnsFound": "ئىستون تېپىلمىدى.",
+  "selectAll": "ھەممىنى تاللاش",
+  "selectDefaults": "كۆڭۈلدىكىنى تاللاش",
+  "regionGroups": {
+    "frequentlyUsed": "كۆپ ئىشلىتىلىدىغان",
+    "chinaCloudRegions": "جۇڭگو بۇلۇت رايونلىرى",
+    "mainRegions": "ئاساسى رايونلار",
+    "localZones": "يەرلىك زونىلار",
+    "wavelengthZones": "Wavelength زونىلىرى"
+  },
+  "export": {
+    "export": "چىقىرىش",
+    "downloadCsv": "CSV چۈشۈرۈش",
+    "copyCsv": "CSV كۆچۈرۈش",
+    "copyTsv": "TSV كۆچۈرۈش",
+    "copyMarkdown": "Markdown جەدۋىلىنى كۆچۈرۈش",
+    "csvCopied": "CSV تاختىغا كۆچۈرۈلدى",
+    "tsvCopied": "TSV تاختىغا كۆچۈرۈلدى",
+    "markdownCopied": "Markdown جەدۋىلى تاختىغا كۆچۈرۈلدى"
+  }
+}

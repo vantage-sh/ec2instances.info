@@ -1,0 +1,49 @@
+{
+  "search": "گشتنت...",
+  "clearFilters": "فیلترئان پاک کن",
+  "filters": "فیلترئان",
+  "columns": "ستونئان",
+  "region": "منطقه",
+  "pricingUnit": "قیمت واحد",
+  "cost": "قیمت",
+  "reserved": "رزروشده",
+  "currency": "پول",
+  "os": "سیستم‌عامل",
+  "duration": "مدت",
+  "reservedTerm": "رزرو مدت",
+  "durations": {
+    "ondemand": "تقاضا سر",
+    "reserved1yr": "۱ سالگی رزرو",
+    "reserved3yr": "۳ سالگی رزرو",
+    "spot": "Spot"
+  },
+  "compare": "مقایسه",
+  "endCompare": "مقایسه ختم کن",
+  "selected": "انتخاب‌شده",
+  "showAll": "همه نشان بده",
+  "hideAll": "همه پنهان کن",
+  "select": "انتخاب کن...",
+  "searchLabel": "{label} گشتنت...",
+  "noOptionsFound": "گزینه‌ئی یافت نبوت.",
+  "searchColumns": "ستونئان گشتنت...",
+  "noColumnsFound": "ستون یافت نبوت.",
+  "selectAll": "همه انتخاب کن",
+  "selectDefaults": "پیش‌فرض انتخاب کن",
+  "regionGroups": {
+    "frequentlyUsed": "زیاد استفاده‌شده",
+    "chinaCloudRegions": "چین ابر منطقئان",
+    "mainRegions": "اصلی منطقئان",
+    "localZones": "مقامی زونئان",
+    "wavelengthZones": "Wavelength زونئان"
+  },
+  "export": {
+    "export": "صادر کن",
+    "downloadCsv": "CSV دانلود",
+    "copyCsv": "CSV کپی",
+    "copyTsv": "TSV کپی",
+    "copyMarkdown": "Markdown جدول کپی",
+    "csvCopied": "CSV کلیپ‌بورد ئا کپی‌شده",
+    "tsvCopied": "TSV کلیپ‌بورد ئا کپی‌شده",
+    "markdownCopied": "Markdown جدول کلیپ‌بورد ئا کپی‌شده"
+  }
+}

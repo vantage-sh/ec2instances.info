@@ -1,0 +1,49 @@
+{
+  "search": "Бул...",
+  "clearFilters": "Фильтрдары Устар",
+  "filters": "Фильтрдар",
+  "columns": "Колонкалар",
+  "region": "Регион",
+  "pricingUnit": "Сыана Единицата",
+  "cost": "Сыана",
+  "reserved": "Резервируованнай",
+  "currency": "Валюта",
+  "os": "Операциялык Система",
+  "duration": "Болдьох",
+  "reservedTerm": "Резерваци Болдьоҕо",
+  "durations": {
+    "ondemand": "Эрэйиигэ",
+    "reserved1yr": "1 Сыллаах Резервируованнай",
+    "reserved3yr": "3 Сыллаах Резервируованнай",
+    "spot": "Spot"
+  },
+  "compare": "Тэҥниир",
+  "endCompare": "Тэҥниири Тохтот",
+  "selected": "талыллыбыт",
+  "showAll": "Барытын Кэрийии",
+  "hideAll": "Барытын Хаhыы",
+  "select": "Тал...",
+  "searchLabel": "{label} бул...",
+  "noOptionsFound": "Вариан буллубата.",
+  "searchColumns": "Колонка бул...",
+  "noColumnsFound": "Колонка буллубата.",
+  "selectAll": "Барытын Тал",
+  "selectDefaults": "Стандарты Тал",
+  "regionGroups": {
+    "frequentlyUsed": "Элбэхтик Туттуллар",
+    "chinaCloudRegions": "Кытай Облааска Регионнара",
+    "mainRegions": "Тэрут Регионнар",
+    "localZones": "Сир Зоналара",
+    "wavelengthZones": "Wavelength Зоналара"
+  },
+  "export": {
+    "export": "Экспорт",
+    "downloadCsv": "CSV Хачааладар",
+    "copyCsv": "CSV Хопсот",
+    "copyTsv": "TSV Хопсот",
+    "copyMarkdown": "Markdown Таблицатын Хопсот",
+    "csvCopied": "CSV алмастарар буфергэ хопсотулунна",
+    "tsvCopied": "TSV алмастарар буфергэ хопсотулунна",
+    "markdownCopied": "Markdown таблицата алмастарар буфергэ хопсотулунна"
+  }
+}

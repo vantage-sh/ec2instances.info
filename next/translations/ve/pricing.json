@@ -1,0 +1,18 @@
+{
+  "hourly": "Nga Awara",
+  "monthly": "Nga Ṅwedzi",
+  "yearly": "Nga Nwaha",
+  "perHour": "/awara",
+  "perMonth": "/ṅwedzi",
+  "perYear": "/nwaha",
+  "onDemand": "Nga u Lavhelesa",
+  "reserved": "Yo Hangwaho",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Hu si na Pfunzo dza u Ḓivhisa",
+  "partialUpfront": "Tshikala tsha Pfunzo dza u Ḓivhisa",
+  "allUpfront": "Pfunzo Dzoṱhe dza u Ḓivhisa",
+  "convertible": "Ndi ya Ṱanganedza",
+  "standard": "Standard",
+  "priceUnavailable": "A/T"
+}

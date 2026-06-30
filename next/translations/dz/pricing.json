@@ -1,0 +1,18 @@
+{
+  "hourly": "ཆུ་ཚོད་རེར་",
+  "monthly": "ཟླ་རེར་",
+  "yearly": "ལོ་རེར་",
+  "perHour": "/ཆུ་ཚོད་",
+  "perMonth": "/ཟླ་བ་",
+  "perYear": "/ལོ་",
+  "onDemand": "གདོང་ལེན་",
+  "reserved": "ཐར་བཤོལ་",
+  "spot": "ས་གནས་",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "སྔོན་ཞལ་མི་འབུལ་",
+  "partialUpfront": "ཟུར་གྱི་སྔོན་ཞལ་",
+  "allUpfront": "ཡོངས་རྫོགས་སྔོན་ཞལ་",
+  "convertible": "གཡོ་ལྡན་",
+  "standard": "གཞི་ལྡན་",
+  "priceUnavailable": "N/A"
+}

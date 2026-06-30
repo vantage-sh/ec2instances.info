@@ -1,0 +1,49 @@
+{
+  "search": "Tafuta...",
+  "clearFilters": "Futa Vichujio",
+  "filters": "Vichujio",
+  "columns": "Safu wima",
+  "region": "Mkoa",
+  "pricingUnit": "Kitengo cha Bei",
+  "cost": "Gharama",
+  "reserved": "Iliyohifadhiwa",
+  "currency": "Sarafu",
+  "os": "Mfumo wa Uendeshaji",
+  "duration": "Muda",
+  "reservedTerm": "Muda wa Kuhifadhi",
+  "durations": {
+    "ondemand": "Kwa Mahitaji",
+    "reserved1yr": "Iliyohifadhiwa Mwaka 1",
+    "reserved3yr": "Iliyohifadhiwa Miaka 3",
+    "spot": "Spot"
+  },
+  "compare": "Linganisha",
+  "endCompare": "Maliza Ulinganisho",
+  "selected": "zilizochaguliwa",
+  "showAll": "Onyesha Zote",
+  "hideAll": "Ficha Zote",
+  "select": "Chagua...",
+  "searchLabel": "Tafuta {label}...",
+  "noOptionsFound": "Hakuna chaguo zilizopatikana.",
+  "searchColumns": "Tafuta safu wima...",
+  "noColumnsFound": "Hakuna safu wima zilizopatikana.",
+  "selectAll": "Chagua Zote",
+  "selectDefaults": "Chagua Msingi",
+  "regionGroups": {
+    "frequentlyUsed": "Zinazotumiwa Mara Kwa Mara",
+    "chinaCloudRegions": "Mikoa ya Wingu la China",
+    "mainRegions": "Mikoa Mikuu",
+    "localZones": "Maeneo ya Karibu",
+    "wavelengthZones": "Maeneo ya Wavelength"
+  },
+  "export": {
+    "export": "Hamisha",
+    "downloadCsv": "Pakua CSV",
+    "copyCsv": "Nakili CSV",
+    "copyTsv": "Nakili TSV",
+    "copyMarkdown": "Nakili Jedwali la Markdown",
+    "csvCopied": "CSV imenakiliwa kwenye ubao wa kunakili",
+    "tsvCopied": "TSV imenakiliwa kwenye ubao wa kunakili",
+    "markdownCopied": "Jedwali la Markdown limensakiliwa kwenye ubao wa kunakili"
+  }
+}

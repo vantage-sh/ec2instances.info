@@ -1,0 +1,49 @@
+{
+  "search": "ምድላይ...",
+  "clearFilters": "ማጣሪያታት ምጽጻይ",
+  "filters": "ማጣሪያታት",
+  "columns": "ዓምድታት",
+  "region": "ዞና",
+  "pricingUnit": "ናይ ዋጋ ሓደ",
+  "cost": "ወጻኢ",
+  "reserved": "ዝተሓዘ",
+  "currency": "ባጤራ",
+  "os": "ናይ ስርዓት ትግዳሰ",
+  "duration": "ናይ ዝናኣሽ ርዝሙ",
+  "reservedTerm": "ናይ ምዝጋብ ቅብሊት",
+  "durations": {
+    "ondemand": "ብምድላይ",
+    "reserved1yr": "ናይ 1 ዓመት ዝተሓዘ",
+    "reserved3yr": "ናይ 3 ዓመት ዝተሓዘ",
+    "spot": "Spot"
+  },
+  "compare": "ምምርካስ",
+  "endCompare": "ምምርካስ ምውዳእ",
+  "selected": "ዝተመርጸ",
+  "showAll": "ኩሉ ምርኣይ",
+  "hideAll": "ኩሉ ምሕባእ",
+  "select": "ምምራጽ...",
+  "searchLabel": "{label} ምድላይ...",
+  "noOptionsFound": "ምርጫ ኣይተረኽበን።",
+  "searchColumns": "ዓምድታት ምድላይ...",
+  "noColumnsFound": "ዓምዲ ኣይተረኽበን።",
+  "selectAll": "ኩሉ ምምራጽ",
+  "selectDefaults": "ዝተወሰነ ምምራጽ",
+  "regionGroups": {
+    "frequentlyUsed": "ብዙሕ ዝጥቀሙ",
+    "chinaCloudRegions": "ናይ ቻይና Cloud ዞናታት",
+    "mainRegions": "ቀንዲ ዞናታት",
+    "localZones": "ናይ ከባቢ ዞናታት",
+    "wavelengthZones": "ናይ Wavelength ዞናታት"
+  },
+  "export": {
+    "export": "ምውጻእ",
+    "downloadCsv": "CSV ምጽዓን",
+    "copyCsv": "CSV ምቅዳሕ",
+    "copyTsv": "TSV ምቅዳሕ",
+    "copyMarkdown": "ናይ Markdown ሰንጠረዥ ምቅዳሕ",
+    "csvCopied": "CSV ናብ Clipboard ቀዲሑ",
+    "tsvCopied": "TSV ናብ Clipboard ቀዲሑ",
+    "markdownCopied": "ናይ Markdown ሰንጠረዥ ናብ Clipboard ቀዲሑ"
+  }
+}

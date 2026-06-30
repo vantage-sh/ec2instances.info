@@ -1,0 +1,49 @@
+{
+  "search": "ڈھونڈو...",
+  "clearFilters": "فلٹر صاف کرو",
+  "filters": "فلٹر",
+  "columns": "کالم",
+  "region": "علاقہ",
+  "pricingUnit": "قیمت یونٹ",
+  "cost": "لاگت",
+  "reserved": "محفوظ",
+  "currency": "کرنسی",
+  "os": "آپریٹنگ سسٹم",
+  "duration": "مدت",
+  "reservedTerm": "محفوظ مدت",
+  "durations": {
+    "ondemand": "مطالبے تے",
+    "reserved1yr": "1 سال محفوظ",
+    "reserved3yr": "3 سال محفوظ",
+    "spot": "Spot"
+  },
+  "compare": "موازنہ",
+  "endCompare": "موازنہ ختم کرو",
+  "selected": "منتخب",
+  "showAll": "سب دکھاؤ",
+  "hideAll": "سب لکاؤ",
+  "select": "چنو...",
+  "searchLabel": "{label} ڈھونڈو...",
+  "noOptionsFound": "کوئی آپشن نہیں لبھیا۔",
+  "searchColumns": "کالم ڈھونڈو...",
+  "noColumnsFound": "کوئی کالم نہیں لبھیا۔",
+  "selectAll": "سب چنو",
+  "selectDefaults": "ڈیفالٹ چنو",
+  "regionGroups": {
+    "frequentlyUsed": "عام طور تے استعمال کیتے گئے",
+    "chinaCloudRegions": "چین کلاؤڈ علاقے",
+    "mainRegions": "مرکزی علاقے",
+    "localZones": "مقامی زون",
+    "wavelengthZones": "Wavelength زون"
+  },
+  "export": {
+    "export": "برآمد",
+    "downloadCsv": "CSV ڈاؤنلوڈ کرو",
+    "copyCsv": "CSV کاپی کرو",
+    "copyTsv": "TSV کاپی کرو",
+    "copyMarkdown": "Markdown ٹیبل کاپی کرو",
+    "csvCopied": "CSV کلپ بورڈ تے کاپی ہوئی",
+    "tsvCopied": "TSV کلپ بورڈ تے کاپی ہوئی",
+    "markdownCopied": "Markdown ٹیبل کلپ بورڈ تے کاپی ہوئی"
+  }
+}

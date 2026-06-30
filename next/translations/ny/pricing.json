@@ -1,0 +1,18 @@
+{
+  "hourly": "Pa Ola",
+  "monthly": "Pa Mwezi",
+  "yearly": "Pa Chaka",
+  "perHour": "/ola",
+  "perMonth": "/mwezi",
+  "perYear": "/chaka",
+  "onDemand": "Pamene Pafunikira",
+  "reserved": "Yosunga",
+  "spot": "Spot",
+  "savingsPlan": "Dongosolo Losungira",
+  "noUpfront": "Palibe Ndalama Zoyamba",
+  "partialUpfront": "Ndalama Zoyamba Zakankhono",
+  "allUpfront": "Ndalama Zonse Zoyamba",
+  "convertible": "Yosinthika",
+  "standard": "Wanthawi",
+  "priceUnavailable": "N/A"
+}

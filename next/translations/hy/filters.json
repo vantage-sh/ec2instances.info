@@ -1,0 +1,49 @@
+{
+  "search": "Փնտրել...",
+  "clearFilters": "Մաքրել ֆիլտրերը",
+  "filters": "Ֆիլտրեր",
+  "columns": "Սյուններ",
+  "region": "Տարածաշրջան",
+  "pricingUnit": "Գնի միավոր",
+  "cost": "Արժեք",
+  "reserved": "Ամրագրված",
+  "currency": "Արժույթ",
+  "os": "Օպ. համ.",
+  "duration": "Տևողություն",
+  "reservedTerm": "Ամ. ժ.",
+  "durations": {
+    "ondemand": "Ըստ պ.",
+    "reserved1yr": "1 Տ. Ամ.",
+    "reserved3yr": "3 Տ. Ամ.",
+    "spot": "Spot"
+  },
+  "compare": "Համեմատել",
+  "endCompare": "Ավ. հ.",
+  "selected": "ընտրված",
+  "showAll": "Ցուց. բ.",
+  "hideAll": "Թ. բ.",
+  "select": "Ընտ....",
+  "searchLabel": "Փն. {label}...",
+  "noOptionsFound": "Ընտ. չ. գ.",
+  "searchColumns": "Փն. ս....",
+  "noColumnsFound": "Ս. չ. գ.",
+  "selectAll": "Ընտ. բ.",
+  "selectDefaults": "Կ. ն.",
+  "regionGroups": {
+    "frequentlyUsed": "Հ. օ.",
+    "chinaCloudRegions": "Չ. ա.",
+    "mainRegions": "Հ. տ.",
+    "localZones": "Տ. գ.",
+    "wavelengthZones": "Wavelength գ."
+  },
+  "export": {
+    "export": "Արտ.",
+    "downloadCsv": "Բ. CSV",
+    "copyCsv": "Պ. CSV",
+    "copyTsv": "Պ. TSV",
+    "copyMarkdown": "Պ. Markdown",
+    "csvCopied": "CSV-ն պ.",
+    "tsvCopied": "TSV-ն պ.",
+    "markdownCopied": "Markdown-ն պ."
+  }
+}

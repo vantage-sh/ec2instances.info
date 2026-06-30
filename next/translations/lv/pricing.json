@@ -1,0 +1,18 @@
+{
+  "hourly": "Stundas",
+  "monthly": "Mēneša",
+  "yearly": "Gada",
+  "perHour": "/st.",
+  "perMonth": "/mēn.",
+  "perYear": "/g.",
+  "onDemand": "On-Demand",
+  "reserved": "Rezervēts",
+  "spot": "Spot",
+  "savingsPlan": "Uzkrājumu plāns",
+  "noUpfront": "Bez avansa",
+  "partialUpfront": "Daļējs avansa",
+  "allUpfront": "Pilns avansa",
+  "convertible": "Konvertējams",
+  "standard": "Standarta",
+  "priceUnavailable": "N/A"
+}

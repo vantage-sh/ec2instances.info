@@ -1,0 +1,49 @@
+{
+  "search": "සොයන්න...",
+  "clearFilters": "පෙරීම් ඉවත් කරන්න",
+  "filters": "පෙරීම්",
+  "columns": "තීරු",
+  "region": "කලාපය",
+  "pricingUnit": "මිල ඒකකය",
+  "cost": "පිරිවැය",
+  "reserved": "රක්ෂිත",
+  "currency": "මුදල් ඒකකය",
+  "os": "මෙහෙයුම් පද්ධතිය",
+  "duration": "කාලය",
+  "reservedTerm": "රක්ෂිත කාලය",
+  "durations": {
+    "ondemand": "ඉල්ලා සිටීම අනුව",
+    "reserved1yr": "1 වසර රක්ෂිත",
+    "reserved3yr": "3 වසර රක්ෂිත",
+    "spot": "Spot"
+  },
+  "compare": "සංසන්දනය කරන්න",
+  "endCompare": "සංසන්දනය අවසන් කරන්න",
+  "selected": "තෝරාගෙන ඇත",
+  "showAll": "සියල්ල පෙන්වන්න",
+  "hideAll": "සියල්ල සඟවන්න",
+  "select": "තෝරන්න...",
+  "searchLabel": "{label} සොයන්න...",
+  "noOptionsFound": "විකල්ප හමු නොවීය.",
+  "searchColumns": "තීරු සොයන්න...",
+  "noColumnsFound": "තීරු හමු නොවීය.",
+  "selectAll": "සියල්ල තෝරන්න",
+  "selectDefaults": "සාමාන්‍ය ආකලන",
+  "regionGroups": {
+    "frequentlyUsed": "නිතර භාවිතා කෙරෙන",
+    "chinaCloudRegions": "China Cloud කලාප",
+    "mainRegions": "ප්‍රධාන කලාප",
+    "localZones": "ප්‍රාදේශීය කලාප",
+    "wavelengthZones": "Wavelength කලාප"
+  },
+  "export": {
+    "export": "අපනයනය",
+    "downloadCsv": "CSV බාගන්න",
+    "copyCsv": "CSV පිටපත් කරන්න",
+    "copyTsv": "TSV පිටපත් කරන්න",
+    "copyMarkdown": "Markdown වගුව පිටපත් කරන්න",
+    "csvCopied": "CSV ක්ලිප්බෝඩ් වෙත පිටපත් විය",
+    "tsvCopied": "TSV ක්ලිප්බෝඩ් වෙත පිටපත් විය",
+    "markdownCopied": "Markdown වගුව ක්ලිප්බෝඩ් වෙත පිටපත් විය"
+  }
+}

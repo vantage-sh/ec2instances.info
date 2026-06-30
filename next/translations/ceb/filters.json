@@ -1,0 +1,49 @@
+{
+  "search": "Pangita...",
+  "clearFilters": "Limpyoha ang mga Filter",
+  "filters": "Mga Filter",
+  "columns": "Mga Kolum",
+  "region": "Rehiyon",
+  "pricingUnit": "Yunit sa Presyo",
+  "cost": "Gasto",
+  "reserved": "Naireserba",
+  "currency": "Salapi",
+  "os": "Operating System",
+  "duration": "Tagal",
+  "reservedTerm": "Termino sa Reserbasyon",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Naireserba 1 Tuig",
+    "reserved3yr": "Naireserba 3 Tuig",
+    "spot": "Spot"
+  },
+  "compare": "Itandi",
+  "endCompare": "Tapuson ang Pagtandi",
+  "selected": "gipili",
+  "showAll": "Ipakita Tanan",
+  "hideAll": "Itago Tanan",
+  "select": "Pilia...",
+  "searchLabel": "Pangita ang {label}...",
+  "noOptionsFound": "Walay nakit-an nga mga opsyon.",
+  "searchColumns": "Pangita og mga kolum...",
+  "noColumnsFound": "Walay nakit-an nga mga kolum.",
+  "selectAll": "Pilia Tanan",
+  "selectDefaults": "Pilia ang mga Default",
+  "regionGroups": {
+    "frequentlyUsed": "Kanunay Gigamit",
+    "chinaCloudRegions": "Mga Cloud Region sa China",
+    "mainRegions": "Mga Panguna nga Region",
+    "localZones": "Mga Local Zone",
+    "wavelengthZones": "Mga Wavelength Zone"
+  },
+  "export": {
+    "export": "I-eksport",
+    "downloadCsv": "I-download ang CSV",
+    "copyCsv": "Kopyaha ang CSV",
+    "copyTsv": "Kopyaha ang TSV",
+    "copyMarkdown": "Kopyaha ang Markdown Table",
+    "csvCopied": "Nakopya na ang CSV sa clipboard",
+    "tsvCopied": "Nakopya na ang TSV sa clipboard",
+    "markdownCopied": "Nakopya na ang Markdown table sa clipboard"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "hourly": "နာရီဆိုင်ရာ",
+  "monthly": "လစဉ်",
+  "yearly": "နှစ်စဉ်",
+  "perHour": "/နာရီ",
+  "perMonth": "/လ",
+  "perYear": "/နှစ်",
+  "onDemand": "တောင်းဆိုချိန်",
+  "reserved": "ကြိုတင်သတ်မှတ်",
+  "spot": "Spot",
+  "savingsPlan": "ချွေတာမှု အစီအစဉ်",
+  "noUpfront": "ကြိုတင်ပေးချေမှု မပါ",
+  "partialUpfront": "တစ်စိတ်တစ်ပိုင်း ကြိုတင်ပေးချေ",
+  "allUpfront": "အားလုံး ကြိုတင်ပေးချေ",
+  "convertible": "ပြောင်းလဲနိုင်သော",
+  "standard": "စံနှုန်း",
+  "priceUnavailable": "မသက်ဆိုင်"
+}

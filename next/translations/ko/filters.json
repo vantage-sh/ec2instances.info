@@ -1,0 +1,49 @@
+{
+  "search": "검색...",
+  "clearFilters": "필터 초기화",
+  "filters": "필터",
+  "columns": "열",
+  "region": "리전",
+  "pricingUnit": "요금 단위",
+  "cost": "비용",
+  "reserved": "예약",
+  "currency": "통화",
+  "os": "운영 체제",
+  "duration": "기간",
+  "reservedTerm": "예약 기간",
+  "durations": {
+    "ondemand": "온디맨드",
+    "reserved1yr": "1년 예약",
+    "reserved3yr": "3년 예약",
+    "spot": "스팟"
+  },
+  "compare": "비교",
+  "endCompare": "비교 종료",
+  "selected": "선택됨",
+  "showAll": "모두 표시",
+  "hideAll": "모두 숨기기",
+  "select": "선택...",
+  "searchLabel": "{label} 검색...",
+  "noOptionsFound": "옵션을 찾을 수 없습니다.",
+  "searchColumns": "열 검색...",
+  "noColumnsFound": "열을 찾을 수 없습니다.",
+  "selectAll": "모두 선택",
+  "selectDefaults": "기본값 선택",
+  "regionGroups": {
+    "frequentlyUsed": "자주 사용됨",
+    "chinaCloudRegions": "중국 클라우드 리전",
+    "mainRegions": "주요 리전",
+    "localZones": "로컬 영역",
+    "wavelengthZones": "Wavelength 영역"
+  },
+  "export": {
+    "export": "내보내기",
+    "downloadCsv": "CSV 다운로드",
+    "copyCsv": "CSV 복사",
+    "copyTsv": "TSV 복사",
+    "copyMarkdown": "Markdown 표 복사",
+    "csvCopied": "CSV가 클립보드에 복사되었습니다",
+    "tsvCopied": "TSV가 클립보드에 복사되었습니다",
+    "markdownCopied": "Markdown 표가 클립보드에 복사되었습니다"
+  }
+}

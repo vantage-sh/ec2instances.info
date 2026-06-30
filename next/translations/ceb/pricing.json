@@ -1,0 +1,18 @@
+{
+  "hourly": "Kada Oras",
+  "monthly": "Matag Buwan",
+  "yearly": "Matag Tuig",
+  "perHour": "/oras",
+  "perMonth": "/buwan",
+  "perYear": "/tuig",
+  "onDemand": "On-Demand",
+  "reserved": "Naireserba",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Walay Bayad sa Sinugdan",
+  "partialUpfront": "Bahagi nga Bayad sa Sinugdan",
+  "allUpfront": "Tanan Bayad sa Sinugdan",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "N/A"
+}

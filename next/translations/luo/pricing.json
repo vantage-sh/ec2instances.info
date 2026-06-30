@@ -1,0 +1,18 @@
+{
+  "hourly": "Gaa Saa",
+  "monthly": "Gaa Dwe",
+  "yearly": "Gaa Higa",
+  "perHour": "/saa",
+  "perMonth": "/dwe",
+  "perYear": "/higa",
+  "onDemand": "Ka Ipenjo",
+  "reserved": "Moriwo",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Onge Pesa Machon",
+  "partialUpfront": "Pesa Matin Machon",
+  "allUpfront": "Pesa Duto Machon",
+  "convertible": "Convertible",
+  "standard": "Maler",
+  "priceUnavailable": "K/A"
+}

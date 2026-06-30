@@ -1,0 +1,18 @@
+{
+  "hourly": "Ngehora",
+  "monthly": "Ngenyanga",
+  "yearly": "Ngonyaka",
+  "perHour": "/iy",
+  "perMonth": "/ny",
+  "perYear": "/un",
+  "onDemand": "Ngesicelo",
+  "reserved": "Igciniwe",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Akukho Ntlawulo Yokuqala",
+  "partialUpfront": "Inxenye yeNtlawulo Yokuqala",
+  "allUpfront": "Yonke iNtlawulo Yokuqala",
+  "convertible": "Eguqulelwayo",
+  "standard": "Isigxina",
+  "priceUnavailable": "A/K"
+}

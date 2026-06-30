@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "Încărcare eșuată",
+  "tryAgain": "Încearcă din nou",
+  "networkError": "Eroare de rețea. Vă rugăm verificați conexiunea.",
+  "unknownError": "A apărut o eroare necunoscută"
+}

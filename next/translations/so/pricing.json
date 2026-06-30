@@ -1,0 +1,18 @@
+{
+  "hourly": "Saacad kasta",
+  "monthly": "Bil kasta",
+  "yearly": "Sanad kasta",
+  "perHour": "/saac",
+  "perMonth": "/bil",
+  "perYear": "/sanad",
+  "onDemand": "On-Demand",
+  "reserved": "Xidhan",
+  "spot": "Spot",
+  "savingsPlan": "Qorshaha Badbaadinta",
+  "noUpfront": "Lacag Horumarsan Lahayn",
+  "partialUpfront": "Lacag Horumarsan Qayb",
+  "allUpfront": "Lacag Horumarsan Oo Dhan",
+  "convertible": "Bedeli Kara",
+  "standard": "Caadiga",
+  "priceUnavailable": "Kuma Khuusna"
+}

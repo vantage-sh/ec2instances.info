@@ -1,0 +1,49 @@
+{
+  "search": "Іздеу...",
+  "clearFilters": "Сүзгілерді тазалау",
+  "filters": "Сүзгілер",
+  "columns": "Бағандар",
+  "region": "Аймақ",
+  "pricingUnit": "Баға бірлігі",
+  "cost": "Шығын",
+  "reserved": "Резервацияланған",
+  "currency": "Валюта",
+  "os": "Операциялық жүйе",
+  "duration": "Ұзақтық",
+  "reservedTerm": "Резервация мерзімі",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "1 жылдық резервацияланған",
+    "reserved3yr": "3 жылдық резервацияланған",
+    "spot": "Spot"
+  },
+  "compare": "Салыстыру",
+  "endCompare": "Салыстыруды аяқтау",
+  "selected": "таңдалды",
+  "showAll": "Барлығын көрсету",
+  "hideAll": "Барлығын жасыру",
+  "select": "Таңдаңыз...",
+  "searchLabel": "{label} іздеу...",
+  "noOptionsFound": "Опциялар табылмады.",
+  "searchColumns": "Бағандарды іздеу...",
+  "noColumnsFound": "Бағандар табылмады.",
+  "selectAll": "Барлығын таңдау",
+  "selectDefaults": "Үнсіз таңдау",
+  "regionGroups": {
+    "frequentlyUsed": "Жиі пайдаланылатын",
+    "chinaCloudRegions": "China Cloud аймақтары",
+    "mainRegions": "Негізгі аймақтар",
+    "localZones": "Жергілікті аймақтар",
+    "wavelengthZones": "Wavelength аймақтары"
+  },
+  "export": {
+    "export": "Экспорт",
+    "downloadCsv": "CSV жүктеу",
+    "copyCsv": "CSV көшіру",
+    "copyTsv": "TSV көшіру",
+    "copyMarkdown": "Markdown кестесін көшіру",
+    "csvCopied": "CSV алмасу буферіне көшірілді",
+    "tsvCopied": "TSV алмасу буферіне көшірілді",
+    "markdownCopied": "Markdown кестесі алмасу буферіне көшірілді"
+  }
+}

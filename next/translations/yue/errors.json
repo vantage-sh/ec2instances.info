@@ -1,0 +1,6 @@
+{
+  "loadingFailed": "載入數據失敗",
+  "tryAgain": "再試一次",
+  "networkError": "網絡錯誤，請檢查你的連接。",
+  "unknownError": "發生未知錯誤"
+}

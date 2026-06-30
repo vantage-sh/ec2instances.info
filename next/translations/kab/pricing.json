@@ -1,0 +1,18 @@
+{
+  "hourly": "S Wasrag",
+  "monthly": "S Wayur",
+  "yearly": "S Useggwas",
+  "perHour": "/asrag",
+  "perMonth": "/ayur",
+  "perYear": "/aseg",
+  "onDemand": "Seg Uzref",
+  "reserved": "Yettwaḥebs",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "War Iferdisen",
+  "partialUpfront": "Iferdisen Tukna",
+  "allUpfront": "Iferdisen Meṛṛa",
+  "convertible": "Aɣewwel",
+  "standard": "Standard",
+  "priceUnavailable": "Ulac"
+}

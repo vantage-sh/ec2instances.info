@@ -1,0 +1,18 @@
+{
+  "hourly": "Per uur",
+  "monthly": "Maandelijks",
+  "yearly": "Jaarlijks",
+  "perHour": "/uur",
+  "perMonth": "/mnd.",
+  "perYear": "/jr.",
+  "onDemand": "On-Demand",
+  "reserved": "Gereserveerd",
+  "spot": "Spot",
+  "savingsPlan": "Spaarplan",
+  "noUpfront": "Geen vooruitbetaling",
+  "partialUpfront": "Gedeeltelijke vooruitbetaling",
+  "allUpfront": "Volledige vooruitbetaling",
+  "convertible": "Converteerbaar",
+  "standard": "Standaard",
+  "priceUnavailable": "N.v.t."
+}

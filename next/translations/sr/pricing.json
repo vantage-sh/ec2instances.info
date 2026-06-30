@@ -1,0 +1,18 @@
+{
+  "hourly": "По сату",
+  "monthly": "Месечно",
+  "yearly": "Годишње",
+  "perHour": "/сат",
+  "perMonth": "/мес",
+  "perYear": "/год",
+  "onDemand": "По захтеву",
+  "reserved": "Резервисано",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Без предплате",
+  "partialUpfront": "Делимична предплата",
+  "allUpfront": "Потпуна предплата",
+  "convertible": "Конвертибилно",
+  "standard": "Стандардно",
+  "priceUnavailable": "Н/Д"
+}

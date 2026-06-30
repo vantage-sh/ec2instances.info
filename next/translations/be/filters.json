@@ -1,0 +1,49 @@
+{
+  "search": "Пошук...",
+  "clearFilters": "Ачысціць фільтры",
+  "filters": "Фільтры",
+  "columns": "Слупкі",
+  "region": "Рэгіён",
+  "pricingUnit": "Адзінка цэны",
+  "cost": "Кошт",
+  "reserved": "Зарэзерваваны",
+  "currency": "Валюта",
+  "os": "Аперацыйная сістэма",
+  "duration": "Працягласць",
+  "reservedTerm": "Тэрмін рэзервавання",
+  "durations": {
+    "ondemand": "Па запыце",
+    "reserved1yr": "Зарэзерваваны 1 год",
+    "reserved3yr": "Зарэзерваваны 3 гады",
+    "spot": "Spot"
+  },
+  "compare": "Параўнаць",
+  "endCompare": "Завяршыць параўнанне",
+  "selected": "абрана",
+  "showAll": "Паказаць усё",
+  "hideAll": "Схаваць усё",
+  "select": "Выбраць...",
+  "searchLabel": "Пошук {label}...",
+  "noOptionsFound": "Варыянты не знойдзены.",
+  "searchColumns": "Пошук слупкоў...",
+  "noColumnsFound": "Слупкі не знойдзены.",
+  "selectAll": "Выбраць усё",
+  "selectDefaults": "Выбраць па змаўчанні",
+  "regionGroups": {
+    "frequentlyUsed": "Часта выкарыстоўваецца",
+    "chinaCloudRegions": "Воблачныя рэгіёны Кітая",
+    "mainRegions": "Асноўныя рэгіёны",
+    "localZones": "Мясцовыя зоны",
+    "wavelengthZones": "Зоны Wavelength"
+  },
+  "export": {
+    "export": "Экспарт",
+    "downloadCsv": "Спампаваць CSV",
+    "copyCsv": "Капіраваць CSV",
+    "copyTsv": "Капіраваць TSV",
+    "copyMarkdown": "Капіраваць табліцу Markdown",
+    "csvCopied": "CSV скапіравана ў буфер абмену",
+    "tsvCopied": "TSV скапіравана ў буфер абмену",
+    "markdownCopied": "Табліца Markdown скапіравана ў буфер абмену"
+  }
+}

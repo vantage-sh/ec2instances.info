@@ -1,0 +1,49 @@
+{
+  "search": "Soek...",
+  "clearFilters": "Filters Verwyder",
+  "filters": "Filters",
+  "columns": "Kolomme",
+  "region": "Streek",
+  "pricingUnit": "Prysseenheid",
+  "cost": "Koste",
+  "reserved": "Gereserveer",
+  "currency": "Geldeenheid",
+  "os": "Bedryfstelsel",
+  "duration": "Duur",
+  "reservedTerm": "Gereserveerde Termyn",
+  "durations": {
+    "ondemand": "Op Aanvraag",
+    "reserved1yr": "1 Jaar Gereserveer",
+    "reserved3yr": "3 Jaar Gereserveer",
+    "spot": "Spot"
+  },
+  "compare": "Vergelyk",
+  "endCompare": "Beëindig Vergelyking",
+  "selected": "gekies",
+  "showAll": "Wys Alles",
+  "hideAll": "Versteek Alles",
+  "select": "Kies...",
+  "searchLabel": "Soek {label}...",
+  "noOptionsFound": "Geen opsies gevind nie.",
+  "searchColumns": "Soek kolomme...",
+  "noColumnsFound": "Geen kolomme gevind nie.",
+  "selectAll": "Kies Alles",
+  "selectDefaults": "Kies Verstekke",
+  "regionGroups": {
+    "frequentlyUsed": "Gereeld Gebruik",
+    "chinaCloudRegions": "China Wolk Streke",
+    "mainRegions": "Hoofstreke",
+    "localZones": "Plaaslike Sones",
+    "wavelengthZones": "Wavelength Sones"
+  },
+  "export": {
+    "export": "Uitvoer",
+    "downloadCsv": "Laai CSV af",
+    "copyCsv": "Kopieer CSV",
+    "copyTsv": "Kopieer TSV",
+    "copyMarkdown": "Kopieer Markdown-tabel",
+    "csvCopied": "CSV na knipbord gekopieer",
+    "tsvCopied": "TSV na knipbord gekopieer",
+    "markdownCopied": "Markdown-tabel na knipbord gekopieer"
+  }
+}

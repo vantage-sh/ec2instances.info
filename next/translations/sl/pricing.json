@@ -1,0 +1,18 @@
+{
+  "hourly": "Urno",
+  "monthly": "Mesečno",
+  "yearly": "Letno",
+  "perHour": "/uro",
+  "perMonth": "/mes.",
+  "perYear": "/leto",
+  "onDemand": "On-Demand",
+  "reserved": "Rezervirano",
+  "spot": "Spot",
+  "savingsPlan": "Varčevalni načrt",
+  "noUpfront": "Brez predplačila",
+  "partialUpfront": "Delno predplačilo",
+  "allUpfront": "Celotno predplačilo",
+  "convertible": "Konvertibilno",
+  "standard": "Standardno",
+  "priceUnavailable": "N/A"
+}

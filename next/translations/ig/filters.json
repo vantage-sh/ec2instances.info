@@ -1,0 +1,49 @@
+{
+  "search": "Chọọ...",
+  "clearFilters": "Hichapụ Uchịchọ",
+  "filters": "Uchịchọ",
+  "columns": "Ọnọdụ",
+  "region": "Mpaghara",
+  "pricingUnit": "Otu Ọnụ Ahịa",
+  "cost": "Ọnụ Ahịa",
+  "reserved": "Echekwara",
+  "currency": "Ego",
+  "os": "Sistemu Arụmọrụ",
+  "duration": "Oge",
+  "reservedTerm": "Oge Echekwara",
+  "durations": {
+    "ondemand": "On-Demand",
+    "reserved1yr": "Echekwara Afọ 1",
+    "reserved3yr": "Echekwara Afọ 3",
+    "spot": "Spot"
+  },
+  "compare": "Tụnyere",
+  "endCompare": "Kwụsị Ntụnyere",
+  "selected": "Ahọpụtara",
+  "showAll": "Gosi Niile",
+  "hideAll": "Zọpụta Niile",
+  "select": "Họọta...",
+  "searchLabel": "Chọọ {label}...",
+  "noOptionsFound": "Achọtaghị nhọrọ ọ bụla.",
+  "searchColumns": "Chọọ ọnọdụ...",
+  "noColumnsFound": "Achọtaghị ọnọdụ ọ bụla.",
+  "selectAll": "Họọta Niile",
+  "selectDefaults": "Họọta Ndabara",
+  "regionGroups": {
+    "frequentlyUsed": "Eji Ugboro Ugboro",
+    "chinaCloudRegions": "Mpaghara Igwe ojii China",
+    "mainRegions": "Isi Mpaghara",
+    "localZones": "Mpaghara Mpaghara",
+    "wavelengthZones": "Mpaghara Wavelength"
+  },
+  "export": {
+    "export": "Nbupu",
+    "downloadCsv": "Budata CSV",
+    "copyCsv": "Detuo CSV",
+    "copyTsv": "Detuo TSV",
+    "copyMarkdown": "Detuo Tebụl Markdown",
+    "csvCopied": "Akopịara CSV n'clipboard",
+    "tsvCopied": "Akopịara TSV n'clipboard",
+    "markdownCopied": "Akopịara tebụl Markdown n'clipboard"
+  }
+}

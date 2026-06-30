@@ -1,0 +1,49 @@
+{
+  "search": "തിരയുക...",
+  "clearFilters": "ഫിൽട്ടറുകൾ മായ്ക്കുക",
+  "filters": "ഫിൽട്ടറുകൾ",
+  "columns": "കോളങ്ങൾ",
+  "region": "മേഖല",
+  "pricingUnit": "വില നിർണ്ണയ യൂണിറ്റ്",
+  "cost": "ചെലവ്",
+  "reserved": "റിസർവ്ഡ്",
+  "currency": "കറൻസി",
+  "os": "ഓപ്പറേറ്റിംഗ് സിസ്റ്റം",
+  "duration": "ദൈർഘ്യം",
+  "reservedTerm": "റിസർവ്ഡ് ടേം",
+  "durations": {
+    "ondemand": "ഓൺ-ഡിമാൻഡ്",
+    "reserved1yr": "1 വർഷ റിസർവ്ഡ്",
+    "reserved3yr": "3 വർഷ റിസർവ്ഡ്",
+    "spot": "സ്പോട്ട്"
+  },
+  "compare": "താരതമ്യം",
+  "endCompare": "താരതമ്യം അവസാനിപ്പിക്കുക",
+  "selected": "തിരഞ്ഞെടുത്തത്",
+  "showAll": "എല്ലാം കാണിക്കുക",
+  "hideAll": "എല്ലാം മറയ്ക്കുക",
+  "select": "തിരഞ്ഞെടുക്കുക...",
+  "searchLabel": "{label} തിരയുക...",
+  "noOptionsFound": "ഓപ്‌ഷനുകൾ കണ്ടെത്തിയില്ല.",
+  "searchColumns": "കോളങ്ങൾ തിരയുക...",
+  "noColumnsFound": "കോളങ്ങൾ കണ്ടെത്തിയില്ല.",
+  "selectAll": "എല്ലാം തിരഞ്ഞെടുക്കുക",
+  "selectDefaults": "ഡിഫോൾട്ടുകൾ തിരഞ്ഞെടുക്കുക",
+  "regionGroups": {
+    "frequentlyUsed": "പതിവ് ഉപയോഗം",
+    "chinaCloudRegions": "ചൈന ക്ലൗഡ് മേഖലകൾ",
+    "mainRegions": "പ്രധാന മേഖലകൾ",
+    "localZones": "ലോക്കൽ സോണുകൾ",
+    "wavelengthZones": "Wavelength സോണുകൾ"
+  },
+  "export": {
+    "export": "എക്‌സ്‌പോർട്ട്",
+    "downloadCsv": "CSV ഡൗൺലോഡ്",
+    "copyCsv": "CSV പകർത്തുക",
+    "copyTsv": "TSV പകർത്തുക",
+    "copyMarkdown": "Markdown ടേബിൾ പകർത്തുക",
+    "csvCopied": "CSV ക്ലിപ്‌ബോർഡിലേക്ക് പകർത്തി",
+    "tsvCopied": "TSV ക്ലിപ്‌ബോർഡിലേക്ക് പകർത്തി",
+    "markdownCopied": "Markdown ടേബിൾ ക്ലിപ്‌ബോർഡിലേക്ക് പകർത്തി"
+  }
+}

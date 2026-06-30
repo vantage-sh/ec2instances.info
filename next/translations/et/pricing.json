@@ -1,0 +1,18 @@
+{
+  "hourly": "Tunnis",
+  "monthly": "Kuus",
+  "yearly": "Aastas",
+  "perHour": "/t",
+  "perMonth": "/kuu",
+  "perYear": "/a",
+  "onDemand": "On-Demand",
+  "reserved": "Reserveeritud",
+  "spot": "Spot",
+  "savingsPlan": "Sääsuplaan",
+  "noUpfront": "Ilma ettemakseta",
+  "partialUpfront": "Osaline ettemaks",
+  "allUpfront": "Täielik ettemaks",
+  "convertible": "Konverteeritav",
+  "standard": "Tavaline",
+  "priceUnavailable": "N/A"
+}

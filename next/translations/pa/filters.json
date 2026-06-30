@@ -1,0 +1,49 @@
+{
+  "search": "ਖੋਜੋ...",
+  "clearFilters": "ਫਿਲਟਰ ਸਾਫ਼ ਕਰੋ",
+  "filters": "ਫਿਲਟਰ",
+  "columns": "ਕਾਲਮ",
+  "region": "ਖੇਤਰ",
+  "pricingUnit": "ਮੁੱਲ ਇਕਾਈ",
+  "cost": "ਕੀਮਤ",
+  "reserved": "ਰਾਖਵਾਂ",
+  "currency": "ਮੁਦਰਾ",
+  "os": "ਓਪਰੇਟਿੰਗ ਸਿਸਟਮ",
+  "duration": "ਮਿਆਦ",
+  "reservedTerm": "ਰਾਖਵੀਂ ਮਿਆਦ",
+  "durations": {
+    "ondemand": "ਮੰਗ ਅਨੁਸਾਰ",
+    "reserved1yr": "1 ਸਾਲ ਰਾਖਵਾਂ",
+    "reserved3yr": "3 ਸਾਲ ਰਾਖਵਾਂ",
+    "spot": "Spot"
+  },
+  "compare": "ਤੁਲਨਾ ਕਰੋ",
+  "endCompare": "ਤੁਲਨਾ ਖਤਮ ਕਰੋ",
+  "selected": "ਚੁਣਿਆ",
+  "showAll": "ਸਭ ਦਿਖਾਓ",
+  "hideAll": "ਸਭ ਲੁਕਾਓ",
+  "select": "ਚੁਣੋ...",
+  "searchLabel": "{label} ਖੋਜੋ...",
+  "noOptionsFound": "ਕੋਈ ਵਿਕਲਪ ਨਹੀਂ ਮਿਲਿਆ।",
+  "searchColumns": "ਕਾਲਮ ਖੋਜੋ...",
+  "noColumnsFound": "ਕੋਈ ਕਾਲਮ ਨਹੀਂ ਮਿਲਿਆ।",
+  "selectAll": "ਸਭ ਚੁਣੋ",
+  "selectDefaults": "ਡਿਫਾਲਟ ਚੁਣੋ",
+  "regionGroups": {
+    "frequentlyUsed": "ਅਕਸਰ ਵਰਤੇ",
+    "chinaCloudRegions": "ਚੀਨ Cloud ਖੇਤਰ",
+    "mainRegions": "ਮੁੱਖ ਖੇਤਰ",
+    "localZones": "ਸਥਾਨਕ ਜ਼ੋਨ",
+    "wavelengthZones": "Wavelength ਜ਼ੋਨ"
+  },
+  "export": {
+    "export": "ਨਿਰਯਾਤ",
+    "downloadCsv": "CSV ਡਾਊਨਲੋਡ ਕਰੋ",
+    "copyCsv": "CSV ਕਾਪੀ ਕਰੋ",
+    "copyTsv": "TSV ਕਾਪੀ ਕਰੋ",
+    "copyMarkdown": "Markdown ਟੇਬਲ ਕਾਪੀ ਕਰੋ",
+    "csvCopied": "CSV ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਕੀਤਾ",
+    "tsvCopied": "TSV ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਕੀਤਾ",
+    "markdownCopied": "Markdown ਟੇਬਲ ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਕੀਤਾ"
+  }
+}

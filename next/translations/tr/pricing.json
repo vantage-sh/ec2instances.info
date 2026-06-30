@@ -1,0 +1,18 @@
+{
+  "hourly": "Saatlik",
+  "monthly": "Aylık",
+  "yearly": "Yıllık",
+  "perHour": "/sa",
+  "perMonth": "/ay",
+  "perYear": "/yıl",
+  "onDemand": "İsteğe Bağlı",
+  "reserved": "Rezerve",
+  "spot": "Spot",
+  "savingsPlan": "Tasarruf Planı",
+  "noUpfront": "Ön Ödemesiz",
+  "partialUpfront": "Kısmi Ön Ödeme",
+  "allUpfront": "Tam Ön Ödeme",
+  "convertible": "Dönüştürülebilir",
+  "standard": "Standart",
+  "priceUnavailable": "Yok"
+}

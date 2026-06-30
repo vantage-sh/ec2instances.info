@@ -1,0 +1,18 @@
+{
+  "hourly": "Wakati Fãagẽ",
+  "monthly": "Kiuug Fãagẽ",
+  "yearly": "Yʋʋr Fãagẽ",
+  "perHour": "/wak",
+  "perMonth": "/ki",
+  "perYear": "/yʋʋr",
+  "onDemand": "On-Demand",
+  "reserved": "Reserved",
+  "spot": "Spot",
+  "savingsPlan": "Savings Plan",
+  "noUpfront": "Pa Tõk Yõkr",
+  "partialUpfront": "Yõkr Zĩngr",
+  "allUpfront": "Yõkr Bɩ Fãa",
+  "convertible": "Convertible",
+  "standard": "Standard",
+  "priceUnavailable": "S/B"
+}
