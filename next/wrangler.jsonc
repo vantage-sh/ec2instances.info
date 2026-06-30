@@ -1,0 +1,92 @@
+{
+    "name": "ec2instances-worker",
+    "main": ".open-next/worker.js",
+    "compatibility_date": "2025-09-23",
+    "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+
+    "assets": {
+        "directory": ".open-next/assets",
+        "binding": "ASSETS",
+    },
+
+    // ISR incremental cache (R2). Binding name is required by the adapter.
+    "r2_buckets": [
+        {
+            "binding": "NEXT_INC_CACHE_R2_BUCKET",
+            "bucket_name": "ec2instances-next-cache-production",
+        },
+    ],
+
+    // Revalidation queue (SQLite-backed Durable Object).
+    "durable_objects": {
+        "bindings": [
+            { "name": "NEXT_CACHE_DO_QUEUE", "class_name": "DOQueueHandler" },
+        ],
+    },
+    "migrations": [{ "tag": "v1", "new_sqlite_classes": ["DOQueueHandler"] }],
+
+    // Self-reference used by the revalidation queue.
+    "services": [
+        { "binding": "WORKER_SELF_REFERENCE", "service": "ec2instances-worker" },
+    ],
+
+    "env": {
+        "staging": {
+            "name": "ec2instances-worker-staging",
+            "r2_buckets": [
+                {
+                    "binding": "NEXT_INC_CACHE_R2_BUCKET",
+                    "bucket_name": "ec2instances-next-cache-staging",
+                },
+            ],
+            "durable_objects": {
+                "bindings": [
+                    {
+                        "name": "NEXT_CACHE_DO_QUEUE",
+                        "class_name": "DOQueueHandler",
+                    },
+                ],
+            },
+            "migrations": [
+                { "tag": "v1", "new_sqlite_classes": ["DOQueueHandler"] },
+            ],
+            "services": [
+                {
+                    "binding": "WORKER_SELF_REFERENCE",
+                    "service": "ec2instances-worker-staging",
+                },
+            ],
+            "routes": [],
+        },
+        "production": {
+            "r2_buckets": [
+                {
+                    "binding": "NEXT_INC_CACHE_R2_BUCKET",
+                    "bucket_name": "ec2instances-next-cache-production",
+                },
+            ],
+            "durable_objects": {
+                "bindings": [
+                    {
+                        "name": "NEXT_CACHE_DO_QUEUE",
+                        "class_name": "DOQueueHandler",
+                    },
+                ],
+            },
+            "migrations": [
+                { "tag": "v1", "new_sqlite_classes": ["DOQueueHandler"] },
+            ],
+            "services": [
+                {
+                    "binding": "WORKER_SELF_REFERENCE",
+                    "service": "ec2instances-worker",
+                },
+            ],
+            "routes": [
+                { "pattern": "instances.vantage.sh", "custom_domain": true },
+                { "pattern": "ec2instances.info", "custom_domain": true },
+                { "pattern": "www.ec2instances.info", "custom_domain": true },
+            ],
+        },
+    },
+}

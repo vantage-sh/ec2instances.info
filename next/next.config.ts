@@ -1,9 +1,9 @@
 import { withSentryConfig } from "@sentry/nextjs";
 import { withGTConfig } from "gt-next/config";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 import type { NextConfig } from "next";
 
 let nextConfig: NextConfig = {
-    output: "export",
     typescript: {
         ignoreBuildErrors: true,
     },
@@ -11,6 +11,25 @@ let nextConfig: NextConfig = {
         root: __dirname,
     },
     productionBrowserSourceMaps: true,
+    async redirects() {
+        // Re-homed from the retired worker.js: send the legacy apex/www
+        // hostnames to the canonical domain with a permanent redirect.
+        // http -> https is handled by the Cloudflare zone ("Always Use HTTPS").
+        return [
+            {
+                source: "/:path*",
+                has: [{ type: "host", value: "ec2instances.info" }],
+                destination: "https://instances.vantage.sh/:path*",
+                permanent: true,
+            },
+            {
+                source: "/:path*",
+                has: [{ type: "host", value: "www.ec2instances.info" }],
+                destination: "https://instances.vantage.sh/:path*",
+                permanent: true,
+            },
+        ];
+    },
 };
 
 nextConfig = withGTConfig(nextConfig, {
@@ -33,5 +52,7 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
         },
     });
 }
+
+initOpenNextCloudflareForDev();
 
 export default nextConfig;
