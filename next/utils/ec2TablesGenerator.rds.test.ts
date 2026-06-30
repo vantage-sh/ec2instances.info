@@ -29,8 +29,9 @@ const instance = {
 } as unknown as Omit<EC2Instance, "pricing">;
 
 function vcpuFor(platform?: string) {
-    return rds(instance, platform)[0].rows.find((row) => row.name === "vCPUs")
-        ?.children;
+    return rds(instance, platform)[0].rows.find(
+        (row) => row.nameKey === "vCPUs",
+    )?.children;
 }
 
 test("RDS details can show engine-specific vCPU counts", () => {

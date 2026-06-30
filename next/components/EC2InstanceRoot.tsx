@@ -16,8 +16,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { getLocaleFromPath } from "@/utils/locale";
 import { useTranslations } from "gt-next";
-
-const LOW_MEDIUM_HIGH = /(low|moderate|high)/gi;
+import buildInstanceDescription from "@/utils/buildInstanceDescription";
 
 interface InstanceRootProps {
     rainbowTable: string[];
@@ -73,27 +72,12 @@ export default function EC2InstanceRoot({
     const localePrefix = `/${locale}`;
     const t = useTranslations();
 
-    // Generate translated description
-    let bandwidth = "";
-    if (compressedInstance.network_performance) {
-        if (compressedInstance.network_performance.match(LOW_MEDIUM_HIGH)) {
-            bandwidth = t("instancePage.bandwidthPerformance", {
-                performance: compressedInstance.network_performance.toLowerCase(),
-            });
-        } else {
-            bandwidth = t("instancePage.bandwidthGibps", {
-                bandwidth: compressedInstance.network_performance.toLowerCase().replace("gigabit", "").trim(),
-            });
-        }
-    }
-    const description = t("instancePage.description", {
-        instanceType: compressedInstance.instance_type,
-        family: compressedInstance.family,
-        vCPUs: compressedInstance.vCPU,
-        memory: compressedInstance.memory,
-        bandwidth,
-        cost: `$${ondemandCost}`,
-    });
+    // Generate translated description from the shared template.
+    const description = buildInstanceDescription(
+        t,
+        compressedInstance,
+        ondemandCost,
+    );
 
     return (
         <MarketingWrapper

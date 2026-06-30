@@ -4,7 +4,8 @@ import EC2InstanceRoot from "@/components/EC2InstanceRoot";
 import makeRainbowTable from "@/utils/makeRainbowTable";
 import bestEc2InstanceForEachVariant from "@/utils/bestEc2InstanceForEachVariant";
 import addRenderInfo from "@/utils/addRenderInfo";
-import generateEc2Description from "@/utils/generateEc2Description";
+import buildInstanceDescription from "@/utils/buildInstanceDescription";
+import { getTranslations } from "gt-next/server";
 import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
 import loadAdvertData from "@/utils/loadAdvertData";
@@ -103,9 +104,10 @@ export async function generateMetadata({
     params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
     const { instance, ondemandCost } = await handleParams(params);
+    const t = await getTranslations();
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
-        description: generateEc2Description(instance, ondemandCost),
+        description: buildInstanceDescription(t, instance, ondemandCost as string),
         openGraph: {
             images: [
                 urlInject`${"/aws/elasticache/" + instance.instance_type + ".png"}`,

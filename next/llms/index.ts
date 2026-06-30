@@ -11,7 +11,9 @@ import {
     opensearchInstances,
 } from "./loadedData";
 import { ec2, elasticache, rds } from "@/utils/ec2TablesGenerator";
-import generateEc2Description from "@/utils/generateEc2Description";
+import buildInstanceDescription from "@/utils/buildInstanceDescription";
+import makeDictionaryTranslator from "@/utils/makeDictionaryTranslator";
+import enUSCommon from "@/translations/en-US/common.json";
 import generateRedshiftMarkdown from "./generateRedshiftMarkdown";
 import generateOpensearchMarkdown from "./generateOpensearchMarkdown";
 import { generateOpensearchIndexes } from "./generateOpensearchIndexes";
@@ -22,6 +24,12 @@ import generateAzureInstances from "./generateAzureInstances";
 import generateGcpFamilyIndexes from "./generateGcpFamilyIndexes";
 import { generateGcpIndexes } from "./generateGcpIndexes";
 import generateGcpInstances from "./generateGcpInstances";
+// llms output is English only and runs outside a request context, so the
+// description is built from the en-US translation template directly.
+const enDescriptionTranslator = makeDictionaryTranslator(
+    enUSCommon as Record<string, unknown>,
+);
+
 function generateRdsDescription(
     instance: any,
     ondemandCost: string | undefined,
@@ -53,7 +61,11 @@ async function main() {
 
     const awsInstancesMap = await generateAwsInstances(
         (instance) => {
-            return generateEc2Description(instance, calculatePrice(instance));
+            return buildInstanceDescription(
+                enDescriptionTranslator,
+                instance,
+                calculatePrice(instance),
+            );
         },
         false,
         "/aws/ec2",

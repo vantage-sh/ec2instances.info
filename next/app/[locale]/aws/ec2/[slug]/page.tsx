@@ -6,7 +6,8 @@ import processRainbowTable from "@/utils/processRainbowTable";
 import EC2InstanceRoot from "@/components/EC2InstanceRoot";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 import makeRainbowTable from "@/utils/makeRainbowTable";
-import generateEc2Description from "@/utils/generateEc2Description";
+import buildInstanceDescription from "@/utils/buildInstanceDescription";
+import { getTranslations } from "gt-next/server";
 import bestEc2InstanceForEachVariant from "@/utils/bestEc2InstanceForEachVariant";
 import tryPricingMappingWithDefaultsAndYoloIfNot from "@/utils/tryPricingGetAndYoloIfNot";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
@@ -99,9 +100,10 @@ export async function generateMetadata({
     params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
     const { instance, ondemandCost } = await handleParams(params);
+    const t = await getTranslations();
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
-        description: generateEc2Description(instance, ondemandCost as string),
+        description: buildInstanceDescription(t, instance, ondemandCost as string),
         openGraph: {
             images: [
                 urlInject`${"/aws/ec2/" + instance.instance_type + ".png"}`,

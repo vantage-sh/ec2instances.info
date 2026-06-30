@@ -108,6 +108,7 @@ const tableTranslations: Record<string, string> = {
     maxStorageCapacity: "Max Storage Capacity",
 };
 
-export function getTableName(nameKey: string): string {
+export function getTableName(nameKey: string | undefined): string {
+    if (!nameKey) return "";
     return tableTranslations[nameKey] ?? nameKey;
 }

@@ -1,75 +1,75 @@
 [
     {
-        "name": "Compute",
+        "nameKey": "compute",
         "slug": "Compute",
         "rows": [
             {
-                "name": "CPUs",
+                "nameKey": "cpus",
                 "children": "2"
             },
             {
-                "name": "Memory",
+                "nameKey": "memory",
                 "children": "15"
             },
             {
-                "name": "Memory per vCPU (GiB)",
+                "nameKey": "memoryPerVCPU",
                 "children": 7.5
             },
             {
-                "name": "Default Slices per Node",
+                "nameKey": "slicesPerNode",
                 "children": "2"
             },
             {
-                "name": "Node Range",
+                "nameKey": "nodeRange",
                 "children": "1–32"
             }
         ]
     },
     {
-        "name": "Storage",
+        "nameKey": "storage",
         "slug": "Storage",
         "rows": [
             {
-                "name": "Storage",
+                "nameKey": "storageField",
                 "children": "0.16TB SSD"
             },
             {
-                "name": "I/O GiBps",
+                "nameKey": "ioGibps",
                 "children": "0.60 GB/s"
             },
             {
-                "name": "ECU",
+                "nameKey": "ecu",
                 "children": "7"
             },
             {
-                "name": "Max Storage per Node",
+                "nameKey": "maxStoragePerNode",
                 "children": "160 GB NVMe-SSD"
             },
             {
-                "name": "Max Storage Capacity",
+                "nameKey": "maxStorageCapacity",
                 "children": "5.12 TB"
             }
         ]
     },
     {
-        "name": "Amazon",
+        "nameKey": "amazon",
         "slug": "Amazon",
         "rows": [
             {
-                "name": "Generation",
+                "nameKey": "generation",
                 "children": "current",
                 "bgStyled": true
             },
             {
-                "name": "Instance Type",
+                "nameKey": "instanceType",
                 "children": "dc2.large"
             },
             {
-                "name": "Family",
+                "nameKey": "family",
                 "children": "Dense Compute"
             },
             {
-                "name": "Name",
+                "nameKey": "name",
                 "children": "Dense Compute DC2 Large"
             }
         ]

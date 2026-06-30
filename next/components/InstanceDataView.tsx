@@ -87,8 +87,11 @@ export default function InstanceDataView({ tables }: { tables: TableType[] }) {
                 >
                     {table.rows.map((row) => (
                         <Row
-                            key={row.nameKey}
-                            name={t(`instancePage.tables.${row.nameKey}`)}
+                            key={row.nameKey ?? row.name}
+                            name={
+                                row.name ??
+                                t(`instancePage.tables.${row.nameKey}`)
+                            }
                             help={row.help}
                             helpText={row.helpText}
                         >
