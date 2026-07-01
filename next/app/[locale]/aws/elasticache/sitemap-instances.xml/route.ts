@@ -1,12 +1,13 @@
 import { EC2Instance } from "@/types";
 import { urlInject } from "@/utils/urlInject";
-import { readFile } from "fs/promises";
-import { SUPPORTED_LOCALES } from "@/utils/fonts";
+import { loadDataJsonXz } from "@/utils/loadDataAsset";
+import { DEFAULT_LOCALE } from "@/utils/fonts";
 
 export const dynamic = "force-static";
 
+// Prerender only the default locale; other locales render on demand (ISR).
 export function generateStaticParams() {
-    return SUPPORTED_LOCALES.map((locale) => ({ locale }));
+    return [{ locale: DEFAULT_LOCALE }];
 }
 
 export async function GET(
@@ -14,8 +15,8 @@ export async function GET(
     { params }: { params: Promise<{ locale: string }> },
 ) {
     const { locale } = await params;
-    const instances: EC2Instance[] = JSON.parse(
-        await readFile("../www/cache/instances.json", "utf8"),
+    const instances = await loadDataJsonXz<EC2Instance[]>(
+        "data/cache/instances.json.xz",
     );
     const instanceIds = instances.map((instance) => instance.instance_type);
 

@@ -1,11 +1,12 @@
 import { urlInject } from "@/utils/urlInject";
-import { readFile } from "fs/promises";
-import { SUPPORTED_LOCALES } from "@/utils/fonts";
+import { loadDataJson } from "@/utils/loadDataAsset";
+import { DEFAULT_LOCALE } from "@/utils/fonts";
 
 export const dynamic = "force-static";
 
+// Prerender only the default locale; other locales render on demand (ISR).
 export function generateStaticParams() {
-    return SUPPORTED_LOCALES.map((locale) => ({ locale }));
+    return [{ locale: DEFAULT_LOCALE }];
 }
 
 export async function GET(
@@ -13,9 +14,8 @@ export async function GET(
     { params }: { params: Promise<{ locale: string }> },
 ) {
     const { locale } = await params;
-    const instanceIds: string[] = JSON.parse(
-        await readFile("./public/instance-ids.json", "utf8"),
-    );
+    const instanceIds =
+        await loadDataJson<string[]>("instance-ids.json");
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
