@@ -1,7 +1,10 @@
+"use client";
+
 import type { CurrencyItem } from "@/utils/loadCurrencies";
 import FilterDropdown from "./FilterDropdown";
 import { currencyRateAtom } from "@/state";
 import { browserBlockingLocalStorage } from "@/utils/abGroup";
+import { useTranslations } from "gt-next";
 
 type CurrencySelectorProps = {
     currencies: CurrencyItem[];
@@ -18,9 +21,10 @@ export default function CurrencySelector({
     setPathSuffix,
     controls,
 }: CurrencySelectorProps) {
+    const t = useTranslations();
     return (
         <FilterDropdown
-            label="Currency"
+            label={t("filters.currency")}
             value={currency}
             ariaControls={controls}
             onChange={(v) => {

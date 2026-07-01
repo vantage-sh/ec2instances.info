@@ -29,6 +29,8 @@
   "noColumnsFound": "No columns found.",
   "selectAll": "Select All",
   "selectDefaults": "Select Defaults",
+  "sortAscending": "Sort ascending",
+  "sortDescending": "Sort descending",
   "regionGroups": {
     "frequentlyUsed": "Frequently Used",
     "chinaCloudRegions": "China Cloud Regions",

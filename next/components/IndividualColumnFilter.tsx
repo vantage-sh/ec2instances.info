@@ -1,9 +1,13 @@
+"use client";
+
 import { Column } from "@tanstack/react-table";
 import { useEffect, useState, useId, useMemo, useRef } from "react";
 import { SquareFunction, X } from "lucide-react";
 import expr from "@/utils/expr";
+import { useTranslations } from "gt-next";
 
 function ExprHelpData({ parseError }: { parseError: string | null }) {
+    const t = useTranslations();
     return (
         <div className="font-normal text-sm">
             {parseError && (
@@ -11,68 +15,69 @@ function ExprHelpData({ parseError }: { parseError: string | null }) {
                     {parseError}
                 </div>
             )}
-            <p>
-                Expressions are used to filter the table. You can use the
-                following syntax:
-            </p>
+            <p>{t("exprHelp.description")}</p>
             <ul className="list-disc pl-4 mt-2 space-y-1">
                 <li>
-                    Numbers: <code>42</code>, <code>3.14</code>
+                    {t("exprHelp.numbers")} <code>42</code>, <code>3.14</code>
                 </li>
                 <li>
-                    Comparisons: <code>&gt;10</code>, <code>&gt;=20</code>,{" "}
-                    <code>&lt;30</code>, <code>&lt;=40</code>
+                    {t("exprHelp.comparisons")} <code>&gt;10</code>,{" "}
+                    <code>&gt;=20</code>, <code>&lt;30</code>,{" "}
+                    <code>&lt;=40</code>
                 </li>
                 <li>
-                    Ranges: <code>10..20</code> (inclusive range)
+                    {t("exprHelp.ranges")} <code>10..20</code>{" "}
+                    {t("exprHelp.rangesNote")}
                 </li>
                 <li>
-                    Logical operators: <code>&amp;&amp;</code> (AND),{" "}
-                    <code>||</code> (OR), <code>!</code> (NOT)
+                    {t("exprHelp.logicalOperators")}{" "}
+                    <code>&amp;&amp;</code> {t("exprHelp.logicalAnd")},{" "}
+                    <code>||</code> {t("exprHelp.logicalOr")},{" "}
+                    <code>!</code> {t("exprHelp.logicalNot")}
                 </li>
                 <li>
-                    Grouping: <code>(expression)</code>
+                    {t("exprHelp.grouping")} <code>(expression)</code>
                 </li>
                 <li>
-                    String methods:
+                    {t("exprHelp.stringMethods")}
                     <ul className="list-disc pl-4 mt-1 space-y-1">
                         <li>
-                            <code>starts_with("text")</code> - Checks if value
-                            starts with text
+                            <code>starts_with("text")</code> -{" "}
+                            {t("exprHelp.startsWithDesc")}
                         </li>
                         <li>
-                            <code>ends_with("text")</code> - Checks if value
-                            ends with text
+                            <code>ends_with("text")</code> -{" "}
+                            {t("exprHelp.endsWithDesc")}
                         </li>
                         <li>
-                            <code>has("text")</code> - Checks if value contains
-                            text
+                            <code>has("text")</code> -{" "}
+                            {t("exprHelp.hasDesc")}
                         </li>
                     </ul>
                 </li>
                 <li>
-                    Storage type methods:
+                    {t("exprHelp.storageMethods")}
                     <ul className="list-disc pl-4 mt-1 space-y-1">
                         <li>
-                            <code>ebs</code> - Matches EBS storage
+                            <code>ebs</code> - {t("exprHelp.ebsDesc")}
                         </li>
                         <li>
-                            <code>nvme</code> - Matches NVMe storage
+                            <code>nvme</code> - {t("exprHelp.nvmeDesc")}
                         </li>
                         <li>
-                            <code>ssd</code> - Matches SSD storage
+                            <code>ssd</code> - {t("exprHelp.ssdDesc")}
                         </li>
                         <li>
-                            <code>hdd</code> - Matches HDD storage
+                            <code>hdd</code> - {t("exprHelp.hddDesc")}
                         </li>
                     </ul>
                 </li>
                 <li>
-                    Ternary operator:{" "}
+                    {t("exprHelp.ternaryOperator")}{" "}
                     <code>condition ? trueValue : falseValue</code>
                 </li>
             </ul>
-            <p className="mt-2">Examples:</p>
+            <p className="mt-2">{t("exprHelp.examplesLabel")}</p>
             <ul className="list-disc pl-4 mt-1 space-y-1">
                 <li>
                     <code>&gt;=4 &amp;&amp; &lt;=8</code> - Values between 4 and
@@ -99,6 +104,7 @@ function ExprHelpData({ parseError }: { parseError: string | null }) {
 
 function ExprHelpModal({ parseError }: { parseError: string | null }) {
     const dialogRef = useRef<HTMLDialogElement>(null);
+    const t = useTranslations();
 
     return (
         <>
@@ -117,12 +123,12 @@ function ExprHelpModal({ parseError }: { parseError: string | null }) {
                             <button
                                 onClick={() => dialogRef.current?.close()}
                                 className="text-foreground cursor-pointer"
-                                aria-label="Close expression help"
+                                aria-label={t("exprHelp.closeLabel")}
                             >
                                 <X size={15} />
                             </button>
                             <h1 className="text-lg font-bold">
-                                Expression Help
+                                {t("exprHelp.title")}
                             </h1>
                         </div>
                         <hr className="my-4" />
@@ -134,8 +140,8 @@ function ExprHelpModal({ parseError }: { parseError: string | null }) {
                 onClick={() => {
                     dialogRef.current?.showModal();
                 }}
-                aria-label="Show expression help"
-                title="Show expression help"
+                aria-label={t("exprHelp.showLabel")}
+                title={t("exprHelp.showLabel")}
                 className="text-gray-2 cursor-pointer mt-1.5"
             >
                 <SquareFunction size={20} />

@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronUpIcon, ChevronDownIcon } from "lucide-react";
+import { useTranslations } from "gt-next";
 
 type SortToggleProps = {
     value: boolean | undefined;
@@ -8,13 +9,14 @@ type SortToggleProps = {
 };
 
 export default function SortToggle({ value, setValue }: SortToggleProps) {
+    const t = useTranslations();
     return (
         <div className="ml-1 absolute right-1 top-0 inline-block dark:invert">
             <button
                 className={`${
                     value === false ? "text-gray-800" : "text-gray-400"
                 } p-0 text-xs block cursor-pointer hover:text-gray-700 overflow-hidden w-4 h-3`}
-                title="Sort ascending"
+                title={t("filters.sortAscending")}
                 aria-pressed={value === false}
                 onClick={() => setValue(false)}
             >
@@ -24,7 +26,7 @@ export default function SortToggle({ value, setValue }: SortToggleProps) {
                 className={`${
                     value === true ? "text-gray-800" : "text-gray-400"
                 } p-0 text-xs block cursor-pointer hover:text-gray-700 overflow-hidden w-4 h-3 ml-[5px]`}
-                title="Sort descending"
+                title={t("filters.sortDescending")}
                 aria-pressed={value === true}
                 onClick={() => setValue(true)}
             >
