@@ -83,6 +83,7 @@ const mockTranslations: Record<string, string> = {
 beforeAll(() => {
     vi.mock("next/navigation", () => ({
         usePathname: vi.fn().mockImplementation(() => mockPath),
+        useRouter: vi.fn().mockReturnValue({ push: vi.fn() }),
     }));
     vi.mock("gt-next", () => ({
         useTranslations: vi.fn().mockImplementation(() => (key: string) => {

@@ -38,6 +38,9 @@ const translations: Record<string, string> = {
     "os.rhelHA": "Red Hat with HA",
     "os.sles": "SUSE",
     "os.dedicated": "Dedicated Host",
+    // Filter translations
+    "filters.sortAscending": "Sort ascending",
+    "filters.sortDescending": "Sort descending",
 };
 
 // Mock gt-next translation library for tests
@@ -52,6 +55,6 @@ vi.mock("gt-next", () => ({
         }
         return result;
     },
-    useLocale: () => "en-GB",
+    useLocale: () => "en-US",
     GTProvider: ({ children }: { children: React.ReactNode }) => children,
 }));
