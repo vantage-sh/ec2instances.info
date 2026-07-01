@@ -1,0 +1,26 @@
+diff --git a/node_modules/@opennextjs/cloudflare/dist/cli/build/bundle-server.js b/node_modules/@opennextjs/cloudflare/dist/cli/build/bundle-server.js
+index be3f893..ec5f55f 100644
+--- a/node_modules/@opennextjs/cloudflare/dist/cli/build/bundle-server.js
++++ b/node_modules/@opennextjs/cloudflare/dist/cli/build/bundle-server.js
+@@ -101,6 +101,21 @@ export async function bundleServer(buildOpts, projectOpts) {
+             updater.plugin,
+         ],
+         external: ["./middleware/handler.mjs"],
++        // next/font emits `import ".../*.woff2"` statements into the traced
++        // server graph (one per Noto family subset). esbuild has no built-in
++        // loader for font binaries, so the worker bundling step fails with
++        // "No loader is configured for \".woff2\"". Emit them as external files
++        // (copied next to the handler, referenced by path) rather than inlining
++        // them into worker.js. The server never dereferences the binary at
++        // runtime - fonts are served as static client assets - so this only
++        // satisfies esbuild's module graph and keeps the worker bundle small.
++        loader: {
++            ".woff2": "file",
++            ".woff": "file",
++            ".ttf": "file",
++            ".eot": "file",
++            ".otf": "file",
++        },
+         alias: {
+             // When @vercel/og is not used, alias the edge entry to a throwing shim so the
+             // dynamic `import("next/dist/compiled/@vercel/og/index.edge.js")` call site
