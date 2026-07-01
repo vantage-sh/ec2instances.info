@@ -603,7 +603,7 @@ export const columnsGen = (
         accessorKey: "GPU_memory",
         header: "GPU memory (total)",
         size: 130,
-        id: "GPU_memory_total",
+        id: "GPU_memory",
         sortingFn: "alphanumeric",
         filterFn: expr,
         cell: (info) => `${info.getValue() as number} GiB`,
