@@ -42,3 +42,30 @@ test("RDS details can show engine-specific vCPU counts", () => {
     expect(vcpuFor("230")).toBe("4");
     expect(vcpuFor()).toBe(8);
 });
+
+test("RDS details omit the Database Engines section without engine_support", () => {
+    const tables = rds(instance);
+    expect(tables.find((t) => t.slug === "database-engines")).toBeUndefined();
+});
+
+test("RDS details render supported engine version ranges", () => {
+    const withSupport = {
+        ...instance,
+        engine_support: {
+            postgres: { min: "11", max: "18" },
+            mysql: { min: "8.0", max: "8.4" },
+            "oracle-ee": { min: "19", max: "19" },
+        },
+    } as unknown as Omit<EC2Instance, "pricing">;
+
+    const section = rds(withSupport).find((t) => t.slug === "database-engines");
+    expect(section).toBeDefined();
+
+    const byName = Object.fromEntries(
+        section!.rows.map((r) => [r.name, r.children]),
+    );
+    expect(byName["PostgreSQL"]).toBe("11 - 18");
+    expect(byName["MySQL"]).toBe("8.0 - 8.4");
+    // Equal min/max collapses to a single version.
+    expect(byName["Oracle Enterprise Edition"]).toBe("19");
+});
