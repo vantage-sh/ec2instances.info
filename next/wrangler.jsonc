@@ -13,7 +13,7 @@
     "r2_buckets": [
         {
             "binding": "NEXT_INC_CACHE_R2_BUCKET",
-            "bucket_name": "ec2instances-next-cache-production",
+            "bucket_name": "ec2instances-assets-production",
         },
     ],
 
@@ -42,7 +42,7 @@
             "r2_buckets": [
                 {
                     "binding": "NEXT_INC_CACHE_R2_BUCKET",
-                    "bucket_name": "ec2instances-next-cache-staging",
+                    "bucket_name": "ec2instances-assets-staging",
                 },
             ],
             "durable_objects": {
