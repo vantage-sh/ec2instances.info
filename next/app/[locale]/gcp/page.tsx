@@ -1,4 +1,8 @@
-import { readFile } from "fs/promises";
+import {
+    loadDataAsset,
+    loadDataJson,
+    loadDataText,
+} from "@/utils/loadDataAsset";
 import Head from "next/head";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 import { decode } from "@msgpack/msgpack";
@@ -16,20 +20,13 @@ export const metadata: Metadata = {
 };
 
 export default async function GCP() {
-    const regions = JSON.parse(
-        await readFile("./public/gcp-regions.json", "utf-8"),
-    ) as Region;
+    const regions = await loadDataJson<Region>("gcp-regions.json");
 
-    const data = await readFile("./public/first-100-gcp-instances.msgpack");
+    const data = await loadDataAsset("first-100-gcp-instances.msgpack");
     const compressedInstances = decode(data) as [string[], ...GCPInstance[]];
 
-    const instanceCount = Number(
-        await readFile("./public/gcp-instance-count.txt"),
-    );
-    const instancesHash = await readFile(
-        "./public/gcp-instances-hash.txt",
-        "utf-8",
-    );
+    const instanceCount = Number(await loadDataText("gcp-instance-count.txt"));
+    const instancesHash = await loadDataText("gcp-instances-hash.txt");
 
     const marketingData = await loadAdvertData;
     const currencies = await loadCurrencies;

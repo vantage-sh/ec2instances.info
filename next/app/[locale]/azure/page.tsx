@@ -1,4 +1,8 @@
-import { readFile } from "fs/promises";
+import {
+    loadDataAsset,
+    loadDataJson,
+    loadDataText,
+} from "@/utils/loadDataAsset";
 import Head from "next/head";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 import { decode } from "@msgpack/msgpack";
@@ -16,20 +20,13 @@ export const metadata: Metadata = {
 };
 
 export default async function Azure() {
-    const regions = JSON.parse(
-        await readFile("./public/azure-regions.json", "utf-8"),
-    ) as Region;
+    const regions = await loadDataJson<Region>("azure-regions.json");
 
-    const data = await readFile("./public/first-100-azure-instances.msgpack");
+    const data = await loadDataAsset("first-100-azure-instances.msgpack");
     const compressedInstances = decode(data) as [string[], ...AzureInstance[]];
 
-    const instanceCount = Number(
-        await readFile("./public/azure-instance-count.txt"),
-    );
-    const instancesHash = await readFile(
-        "./public/azure-instances-hash.txt",
-        "utf-8",
-    );
+    const instanceCount = Number(await loadDataText("azure-instance-count.txt"));
+    const instancesHash = await loadDataText("azure-instances-hash.txt");
 
     const marketingData = await loadAdvertData;
     const currencies = await loadCurrencies;

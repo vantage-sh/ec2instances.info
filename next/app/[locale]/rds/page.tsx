@@ -1,4 +1,4 @@
-import { readFile } from "fs/promises";
+import { loadDataAsset, loadDataText } from "@/utils/loadDataAsset";
 import { decode } from "@msgpack/msgpack";
 import { EC2Instance, Region } from "@/types";
 import AWSClient from "../AWSClient";
@@ -14,19 +14,14 @@ export const metadata: Metadata = {
 };
 
 export default async function RDS() {
-    let data = await readFile("./public/instance-rds-regions.msgpack");
+    let data = await loadDataAsset("instance-rds-regions.msgpack");
     const regions = decode(data) as Region;
 
-    data = await readFile("./public/first-30-rds-instances.msgpack");
+    data = await loadDataAsset("first-30-rds-instances.msgpack");
     const compressedInstances = decode(data) as [string[], ...EC2Instance[]];
 
-    const instanceCount = Number(
-        await readFile("./public/instance-rds-count.txt"),
-    );
-    const instancesHash = await readFile(
-        "./public/instance-rds-hash.txt",
-        "utf-8",
-    );
+    const instanceCount = Number(await loadDataText("instance-rds-count.txt"));
+    const instancesHash = await loadDataText("instance-rds-hash.txt");
 
     const marketingData = await loadAdvertData;
     const currencies = await loadCurrencies;

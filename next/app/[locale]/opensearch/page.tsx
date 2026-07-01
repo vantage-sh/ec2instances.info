@@ -1,5 +1,5 @@
 import { Region } from "@/types";
-import { readFile } from "fs/promises";
+import { loadDataJsonXz } from "@/utils/loadDataAsset";
 import addRenderInfo from "@/utils/addRenderInfo";
 import type { Instance } from "@/utils/colunnData/opensearch";
 import { makeHalfRainbowTable } from "@/utils/halfRainbowTable";
@@ -21,8 +21,8 @@ export default async function OpenSearch() {
         wavelength: {},
         china: {},
     };
-    const instances = JSON.parse(
-        await readFile("../www/opensearch/instances.json", "utf8"),
+    const instances = await loadDataJsonXz<any[]>(
+        "data/opensearch/instances.json.xz",
     );
     for (const instance of instances) {
         addRenderInfo(instance);
@@ -37,8 +37,8 @@ export default async function OpenSearch() {
         }
     }
 
-    const instancesCn = JSON.parse(
-        await readFile("../www/opensearch/instances-cn.json", "utf8"),
+    const instancesCn = await loadDataJsonXz<any[]>(
+        "data/opensearch/instances-cn.json.xz",
     );
     for (const instance of instancesCn) {
         for (const r in instance.regions) {

@@ -50,6 +50,12 @@ export async function loadDataJson<T>(assetPath: string): Promise<T> {
     return JSON.parse(new TextDecoder().decode(bytes)) as T;
 }
 
+/** Load a data asset and decode it as UTF-8 text. */
+export async function loadDataText(assetPath: string): Promise<string> {
+    const bytes = await loadDataAsset(assetPath);
+    return new TextDecoder().decode(bytes);
+}
+
 /** Decompress an `.xz` payload (lzma-native / xz format) to raw bytes. */
 async function decompressXz(bytes: Uint8Array): Promise<Uint8Array> {
     const stream = new XzReadableStream(

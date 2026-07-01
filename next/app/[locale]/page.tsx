@@ -1,4 +1,4 @@
-import { readFile } from "fs/promises";
+import { loadDataAsset, loadDataText } from "@/utils/loadDataAsset";
 import { decode } from "@msgpack/msgpack";
 import { EC2Instance, Region } from "@/types";
 import AWSClient from "./AWSClient";
@@ -15,17 +15,14 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-    let data = await readFile("./public/instances-regions.msgpack");
+    let data = await loadDataAsset("instances-regions.msgpack");
     const regions = decode(data) as Region;
 
-    data = await readFile("./public/first-30-instances.msgpack");
+    data = await loadDataAsset("first-30-instances.msgpack");
     const compressedInstances = decode(data) as [string[], ...EC2Instance[]];
 
-    const instanceCount = Number(await readFile("./public/instance-count.txt"));
-    const instancesHash = await readFile(
-        "./public/instances-hash.txt",
-        "utf-8",
-    );
+    const instanceCount = Number(await loadDataText("instance-count.txt"));
+    const instancesHash = await loadDataText("instances-hash.txt");
 
     const marketingData = await loadAdvertData;
     const currencies = await loadCurrencies;

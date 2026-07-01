@@ -1,5 +1,5 @@
 import { EC2Instance, Region } from "@/types";
-import { readFile } from "fs/promises";
+import { loadDataJsonXz } from "@/utils/loadDataAsset";
 import addRenderInfo from "@/utils/addRenderInfo";
 import AWSClient from "../AWSClient";
 import makeRainbowTable from "@/utils/makeRainbowTable";
@@ -20,8 +20,8 @@ export default async function Cache() {
         wavelength: {},
         china: {},
     };
-    const instances = JSON.parse(
-        await readFile("../www/cache/instances.json", "utf8"),
+    const instances = await loadDataJsonXz<any[]>(
+        "data/cache/instances.json.xz",
     );
     for (const instance of instances) {
         addRenderInfo(instance);
@@ -36,8 +36,8 @@ export default async function Cache() {
         }
     }
 
-    const instancesCn = JSON.parse(
-        await readFile("../www/cache/instances-cn.json", "utf8"),
+    const instancesCn = await loadDataJsonXz<any[]>(
+        "data/cache/instances-cn.json.xz",
     );
     for (const instance of instancesCn) {
         for (const r in instance.regions) {
