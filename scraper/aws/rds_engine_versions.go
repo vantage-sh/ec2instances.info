@@ -5,6 +5,7 @@ import (
 	"log"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
@@ -20,6 +21,11 @@ import (
 // coverage, so it is the representative region. Widening to a small region set
 // (union) is a possible v2.
 const RDS_ENGINE_SUPPORT_REGION = "us-east-1"
+
+// maxConcurrentRdsEngineSupportFetches keeps the orderable-options fanout fast
+// without hammering the RDS API. Each engine is independent, but large engines
+// like postgres can paginate through tens of thousands of rows.
+const maxConcurrentRdsEngineSupportFetches = 4
 
 // engineVersionRange is the compact per-engine major-version span attached to
 // each RDS instance class as engine_support[engine]. min/max are the collapsed
@@ -197,26 +203,53 @@ func getRdsEngineSupport() map[string]map[string]engineVersionRange {
 	if len(engines) == 0 {
 		log.Fatalln("RDS engine support: DescribeDBEngineVersions returned no engines")
 	}
+	log.Println("RDS engine support: checking", len(engines), "engines")
 
 	// Accumulate the per-class per-engine major version ranges.
 	acc := make(map[string]map[string]*engineVersionRange)
-	for _, engine := range engines {
-		paginator := rds.NewDescribeOrderableDBInstanceOptionsPaginator(client, &rds.DescribeOrderableDBInstanceOptionsInput{
-			Engine: &engine,
-		})
-		for paginator.HasMorePages() {
-			out, err := paginator.NextPage(context.TODO())
-			if err != nil {
-				log.Fatalln("RDS engine support: DescribeOrderableDBInstanceOptions failed for engine", engine, err)
-			}
-			for _, o := range out.OrderableDBInstanceOptions {
-				if o.DBInstanceClass == nil || o.EngineVersion == nil {
-					continue
+	accMu := sync.Mutex{}
+	wg := sync.WaitGroup{}
+	sem := make(chan struct{}, maxConcurrentRdsEngineSupportFetches)
+	for i, engine := range engines {
+		i := i
+		engine := engine
+		wg.Add(1)
+		sem <- struct{}{}
+		go func() {
+			defer wg.Done()
+			defer func() { <-sem }()
+
+			log.Println("RDS engine support:", i+1, "of", len(engines), engine)
+			engineAcc := make(map[string]map[string]*engineVersionRange)
+			paginator := rds.NewDescribeOrderableDBInstanceOptionsPaginator(client, &rds.DescribeOrderableDBInstanceOptionsInput{
+				Engine: &engine,
+			})
+			for paginator.HasMorePages() {
+				out, err := paginator.NextPage(context.TODO())
+				if err != nil {
+					log.Fatalln("RDS engine support: DescribeOrderableDBInstanceOptions failed for engine", engine, err)
 				}
-				addOrderableOption(acc, *o.DBInstanceClass, engine, *o.EngineVersion)
+				for _, o := range out.OrderableDBInstanceOptions {
+					if o.DBInstanceClass == nil || o.EngineVersion == nil {
+						continue
+					}
+					addOrderableOption(engineAcc, *o.DBInstanceClass, engine, *o.EngineVersion)
+				}
 			}
-		}
+
+			accMu.Lock()
+			for class, byEngine := range engineAcc {
+				if acc[class] == nil {
+					acc[class] = make(map[string]*engineVersionRange)
+				}
+				for engine, r := range byEngine {
+					acc[class][engine] = r
+				}
+			}
+			accMu.Unlock()
+		}()
 	}
+	wg.Wait()
 
 	// Flatten the pointer accumulator into plain values for serialisation.
 	result := make(map[string]map[string]engineVersionRange, len(acc))
