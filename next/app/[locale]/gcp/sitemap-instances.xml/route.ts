@@ -18,15 +18,11 @@ export async function GET(
         await loadDataJson<string[]>("gcp-instance-ids.json");
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${instanceIds.map((id) => {
         const loc = urlInject`${`/${locale}/gcp/${id}`}`;
-        const xdefault = urlInject`${`/${DEFAULT_LOCALE}/gcp/${id}`}`;
         return `<url>
         <loc>${loc}</loc>
-        <xhtml:link rel="alternate" hreflang="${locale}" href="${loc}"/>
-        <xhtml:link rel="alternate" hreflang="x-default" href="${xdefault}"/>
     </url>`;
     }).join("\n    ")}
 </urlset>`;
