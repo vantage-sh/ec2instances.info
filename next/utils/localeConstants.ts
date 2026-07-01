@@ -616,7 +616,7 @@ export const DEFAULT_LOCALE: SupportedLocale = "en-GB";
 // Next 16's per-page segment-cache output (locales x ~3000 detail pages) to a
 // scale where the standalone/OpenNext output copy becomes inconsistent, so the
 // build only prebuilds this single locale.
-export const PRERENDER_LOCALES: SupportedLocale[] = [];
+export const PRERENDER_LOCALES: SupportedLocale[] = [DEFAULT_LOCALE];
 
 export const RTL_LOCALES: SupportedLocale[] = ["ar", "ur", "fa", "arz", "pnb", "ps", "sd", "skr", "ckb", "he", "ug", "bal", "ks", "ary", "arq", "apc", "acm", "ars", "afb", "apd", "dv", "prs"];
 
