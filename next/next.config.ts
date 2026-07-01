@@ -32,23 +32,15 @@ let nextConfig: NextConfig = {
     },
 };
 
+// customMapping lives in gt.config.json (the canonical, non-deprecated
+// location). Passing it as a withGTConfig prop triggers
+// deprecatedLocaleMappingWarning in gt-next.
 nextConfig = withGTConfig(nextConfig, {
     dictionary: "./dictionary.ts",
     loadDictionaryPath: "./loadDictionary.ts",
     loadTranslationsPath: "./loadTranslations.ts",
     experimentalLocaleResolution: true,
     experimentalLocaleResolutionParam: "locale",
-    customMapping: {
-        cjy: { code: "cjy", name: "Jin Chinese", nativeName: "晉語", languageCode: "cjy" },
-        skr: { code: "skr", name: "Saraiki", nativeName: "سرائیکی", languageCode: "skr" },
-        hne: { code: "hne", name: "Chhattisgarhi", nativeName: "छत्तीसगढ़ी", languageCode: "hne" },
-        apc: { code: "apc", name: "Levantine Arabic", nativeName: "شامي", languageCode: "apc" },
-        acm: { code: "acm", name: "Mesopotamian Arabic", nativeName: "عراقي", languageCode: "acm" },
-        afb: { code: "afb", name: "Gulf Arabic", nativeName: "خليجي", languageCode: "afb" },
-        apd: { code: "apd", name: "Sudanese Arabic", nativeName: "سوداني", languageCode: "apd" },
-        prs: { code: "prs", name: "Dari", nativeName: "دری", languageCode: "prs" },
-        syl: { code: "syl", name: "Sylheti", nativeName: "ꠍꠤꠟꠐꠤ", languageCode: "syl" },
-    },
 });
 
 if (process.env.NEXT_PUBLIC_SENTRY_DSN) {

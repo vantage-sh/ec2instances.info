@@ -201,5 +201,16 @@
     "gl",
     "lb",
     "mt"
-  ]
+  ],
+  "customMapping": {
+    "cjy": { "code": "qaa", "name": "Jin Chinese", "nativeName": "晉語", "languageCode": "qaa" },
+    "skr": { "code": "qab", "name": "Saraiki", "nativeName": "سرائیکی", "languageCode": "qab" },
+    "hne": { "code": "qac", "name": "Chhattisgarhi", "nativeName": "छत्तीसगढ़ी", "languageCode": "qac" },
+    "apc": { "code": "qad", "name": "Levantine Arabic", "nativeName": "شامي", "languageCode": "qad" },
+    "acm": { "code": "qae", "name": "Mesopotamian Arabic", "nativeName": "عراقي", "languageCode": "qae" },
+    "afb": { "code": "qaf", "name": "Gulf Arabic", "nativeName": "خليجي", "languageCode": "qaf" },
+    "apd": { "code": "qag", "name": "Sudanese Arabic", "nativeName": "سوداني", "languageCode": "qag" },
+    "prs": { "code": "qah", "name": "Dari", "nativeName": "دری", "languageCode": "qah" },
+    "syl": { "code": "qai", "name": "Sylheti", "nativeName": "ꠍꠤꠟꠐꠤ", "languageCode": "qai" }
+  }
 }
