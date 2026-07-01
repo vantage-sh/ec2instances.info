@@ -6,12 +6,23 @@ import makeRainbowTable from "@/utils/makeRainbowTable";
 import type { Metadata } from "next";
 import loadAdvertData from "@/utils/loadAdvertData";
 import loadCurrencies from "@/utils/loadCurrencies";
+import { buildI18nMetadata } from "@/utils/i18nMetadata";
 
-export const metadata: Metadata = {
-    title: "Amazon ElastiCache Instance Comparison",
-    description:
-        "A free and easy-to-use tool for comparing ElastiCache Instance features and prices.",
-};
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+    const { locale } = await params;
+    const { alternates, ogLocale } = buildI18nMetadata("/cache", locale);
+    return {
+        title: "Amazon ElastiCache Instance Comparison",
+        description:
+            "A free and easy-to-use tool for comparing ElastiCache Instance features and prices.",
+        alternates,
+        openGraph: { locale: ogLocale },
+    };
+}
 
 export default async function Cache() {
     const regions: Region = {

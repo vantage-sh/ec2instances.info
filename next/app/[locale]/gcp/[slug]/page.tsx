@@ -2,6 +2,7 @@ import { GCPInstance } from "@/utils/colunnData/gcp";
 import { loadDataJson, loadDataJsonXz } from "@/utils/loadDataAsset";
 import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
+import { buildI18nMetadata } from "@/utils/i18nMetadata";
 import { Region } from "@/types";
 import { notFound } from "next/navigation";
 import makeRainbowTable from "@/utils/makeRainbowTable";
@@ -66,13 +67,20 @@ async function handleParams(params: Promise<{ slug: string }>) {
 export async function generateMetadata({
     params,
 }: {
-    params: Promise<{ slug: string }>;
+    params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
     const { description, instance } = await handleParams(params);
+    const { locale } = await params;
+    const { alternates, ogLocale } = buildI18nMetadata(
+        `/gcp/${instance.instance_type}`,
+        locale,
+    );
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
         description,
+        alternates,
         openGraph: {
+            locale: ogLocale,
             images: [urlInject`${"/gcp/" + instance.instance_type + ".png"}`],
         },
     };

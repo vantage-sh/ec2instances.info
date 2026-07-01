@@ -8,6 +8,7 @@ import buildInstanceDescription from "@/utils/buildInstanceDescription";
 import makeDictionaryTranslator from "@/utils/makeDictionaryTranslator";
 import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
+import { buildI18nMetadata } from "@/utils/i18nMetadata";
 import loadAdvertData from "@/utils/loadAdvertData";
 import loadCurrencies from "@/utils/loadCurrencies";
 import { PRERENDER_LOCALES } from "@/utils/fonts";
@@ -120,10 +121,16 @@ export async function generateMetadata({
         common = (await import("@/translations/en-GB/common.json")).default;
     }
     const t = makeDictionaryTranslator(common);
+    const { alternates, ogLocale } = buildI18nMetadata(
+        `/aws/elasticache/${instance.instance_type}`,
+        locale,
+    );
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
         description: buildInstanceDescription(t, instance, ondemandCost as string),
+        alternates,
         openGraph: {
+            locale: ogLocale,
             images: [
                 urlInject`${"/aws/elasticache/" + instance.instance_type + ".png"}`,
             ],

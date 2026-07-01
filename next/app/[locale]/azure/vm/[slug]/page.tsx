@@ -6,6 +6,7 @@ import AzureInstanceRoot from "@/components/AzureInstanceRoot";
 import generateAzureDescription from "@/utils/generateAzureDescription";
 import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
+import { buildI18nMetadata } from "@/utils/i18nMetadata";
 import { Region } from "@/types";
 import loadAdvertData from "@/utils/loadAdvertData";
 import loadCurrencies from "@/utils/loadCurrencies";
@@ -69,13 +70,20 @@ async function handleParams(params: Promise<{ slug: string }>) {
 export async function generateMetadata({
     params,
 }: {
-    params: Promise<{ slug: string }>;
+    params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
     const { description, instance } = await handleParams(params);
+    const { locale } = await params;
+    const { alternates, ogLocale } = buildI18nMetadata(
+        `/azure/vm/${instance.instance_type}`,
+        locale,
+    );
     return {
         title: `${instance.pretty_name} pricing and specs - Vantage`,
         description,
+        alternates,
         openGraph: {
+            locale: ogLocale,
             images: [
                 urlInject`${"/azure/vm/" + instance.instance_type + ".png"}`,
             ],

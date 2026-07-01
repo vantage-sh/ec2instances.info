@@ -18,8 +18,17 @@ export async function GET(
         await loadDataJson<string[]>("azure-instance-ids.json");
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    ${instanceIds.map((id) => urlInject`<url><loc>${`/${locale}/azure/vm/${id}`}</loc></url>`).join("\n")}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    ${instanceIds.map((id) => {
+        const loc = urlInject`${`/${locale}/azure/vm/${id}`}`;
+        const xdefault = urlInject`${`/${DEFAULT_LOCALE}/azure/vm/${id}`}`;
+        return `<url>
+        <loc>${loc}</loc>
+        <xhtml:link rel="alternate" hreflang="${locale}" href="${loc}"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="${xdefault}"/>
+    </url>`;
+    }).join("\n    ")}
 </urlset>`;
     return new Response(sitemap, {
         headers: { "Content-Type": "application/xml" },

@@ -12,12 +12,23 @@ import type { Metadata } from "next";
 import { Region } from "@/types";
 import loadAdvertData from "@/utils/loadAdvertData";
 import loadCurrencies from "@/utils/loadCurrencies";
+import { buildI18nMetadata } from "@/utils/i18nMetadata";
 
-export const metadata: Metadata = {
-    title: "GCP Compute Engine Comparison",
-    description:
-        "A free and easy-to-use tool for comparing GCP Compute Engine features and prices.",
-};
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+    const { locale } = await params;
+    const { alternates, ogLocale } = buildI18nMetadata("/gcp", locale);
+    return {
+        title: "GCP Compute Engine Comparison",
+        description:
+            "A free and easy-to-use tool for comparing GCP Compute Engine features and prices.",
+        alternates,
+        openGraph: { locale: ogLocale },
+    };
+}
 
 export default async function GCP() {
     const regions = await loadDataJson<Region>("gcp-regions.json");

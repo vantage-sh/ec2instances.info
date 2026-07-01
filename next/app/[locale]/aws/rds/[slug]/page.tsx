@@ -6,6 +6,7 @@ import { decode } from "@msgpack/msgpack";
 import { loadDataAsset, loadDataJsonXz } from "@/utils/loadDataAsset";
 import { Metadata } from "next";
 import { urlInject } from "@/utils/urlInject";
+import { buildI18nMetadata } from "@/utils/i18nMetadata";
 import loadAdvertData from "@/utils/loadAdvertData";
 import loadCurrencies from "@/utils/loadCurrencies";
 import { PRERENDER_LOCALES } from "@/utils/fonts";
@@ -85,13 +86,20 @@ function generateDescription(instance: any, ondemandCost: string | undefined) {
 export async function generateMetadata({
     params,
 }: {
-    params: Promise<{ slug: string }>;
+    params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
     const { instance, ondemandCost } = await handleParams(params);
+    const { locale } = await params;
+    const { alternates, ogLocale } = buildI18nMetadata(
+        `/aws/rds/${instance.instance_type}`,
+        locale,
+    );
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
         description: generateDescription(instance, ondemandCost),
+        alternates,
         openGraph: {
+            locale: ogLocale,
             images: [
                 urlInject`${"/aws/rds/" + instance.instance_type + ".png"}`,
             ],

@@ -6,12 +6,23 @@ import Head from "next/head";
 import type { Metadata } from "next";
 import loadAdvertData from "@/utils/loadAdvertData";
 import loadCurrencies from "@/utils/loadCurrencies";
+import { buildI18nMetadata } from "@/utils/i18nMetadata";
 
-export const metadata: Metadata = {
-    title: "Amazon RDS Instance Comparison",
-    description:
-        "A free and easy-to-use tool for comparing RDS Instance features and prices.",
-};
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+    const { locale } = await params;
+    const { alternates, ogLocale } = buildI18nMetadata("/rds", locale);
+    return {
+        title: "Amazon RDS Instance Comparison",
+        description:
+            "A free and easy-to-use tool for comparing RDS Instance features and prices.",
+        alternates,
+        openGraph: { locale: ogLocale },
+    };
+}
 
 export default async function RDS() {
     let data = await loadDataAsset("instance-rds-regions.msgpack");

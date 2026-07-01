@@ -12,12 +12,23 @@ import type { Metadata } from "next";
 import { Region } from "@/types";
 import loadAdvertData from "@/utils/loadAdvertData";
 import loadCurrencies from "@/utils/loadCurrencies";
+import { buildI18nMetadata } from "@/utils/i18nMetadata";
 
-export const metadata: Metadata = {
-    title: "Azure VM Comparison",
-    description:
-        "A free and easy-to-use tool for comparing Azure VM features and prices.",
-};
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+    const { locale } = await params;
+    const { alternates, ogLocale } = buildI18nMetadata("/azure", locale);
+    return {
+        title: "Azure VM Comparison",
+        description:
+            "A free and easy-to-use tool for comparing Azure VM features and prices.",
+        alternates,
+        openGraph: { locale: ogLocale },
+    };
+}
 
 export default async function Azure() {
     const regions = await loadDataJson<Region>("azure-regions.json");
