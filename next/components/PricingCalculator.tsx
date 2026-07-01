@@ -9,7 +9,8 @@ import type { CurrencyItem } from "@/utils/loadCurrencies";
 import { currencyRateAtom } from "@/state";
 import CurrencySelector from "./CurrencySelector";
 import { browserBlockingLocalStorage } from "@/utils/abGroup";
-import { useTranslations } from "gt-next";
+import { useTranslations, useLocale } from "gt-next";
+import { formatCurrency } from "@/utils/formatCurrency";
 
 interface Platform {
     ondemand: string | number;
@@ -26,6 +27,7 @@ function currencyString(
     currency: string,
     conversionRate: { usd: number; cny: number },
     region: string,
+    locale: string,
 ) {
     if (value === undefined || value === "0") return "N/A";
     const n = Number(value);
@@ -46,12 +48,9 @@ function currencyString(
     const useCny =
         region.startsWith("cn-") || region.toLowerCase().includes("china");
     const rate = useCny ? conversionRate.cny : conversionRate.usd;
-    const formatted = Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency,
+    return formatCurrency(mul * rate, locale, currency, {
         maximumFractionDigits: 3,
-    }).format(mul * rate);
-    return formatted;
+    });
 }
 
 function keysWithOnDemand(regionPricing: Record<string, Platform>) {
@@ -93,6 +92,7 @@ function Calculator({
     onPlatformChange?: (platform: string) => void;
 }) {
     const t = useTranslations();
+    const locale = useLocale();
     const priceHoldersId = useId();
 
     const defaultRegion = useMemo(() => {
@@ -272,6 +272,7 @@ function Calculator({
                     currency,
                     conversionRate,
                     region,
+                    locale,
                 ),
             },
         ];
@@ -284,6 +285,7 @@ function Calculator({
                     currency,
                     conversionRate,
                     region,
+                    locale,
                 ),
             });
         }
@@ -297,6 +299,7 @@ function Calculator({
                         currency,
                         conversionRate,
                         region,
+                        locale,
                     ),
                 },
                 {
@@ -307,6 +310,7 @@ function Calculator({
                         currency,
                         conversionRate,
                         region,
+                        locale,
                     ),
                 },
             );
@@ -322,6 +326,7 @@ function Calculator({
         currency,
         conversionRate,
         reservedTermOptions,
+        locale,
         t,
     ]);
 

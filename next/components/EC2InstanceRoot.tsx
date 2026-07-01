@@ -17,6 +17,7 @@ import { usePathname } from "next/navigation";
 import { getLocaleFromPath } from "@/utils/locale";
 import { useTranslations } from "gt-next";
 import buildInstanceDescription from "@/utils/buildInstanceDescription";
+import { formatNumber } from "@/utils/formatCurrency";
 
 interface InstanceRootProps {
     rainbowTable: string[];
@@ -72,11 +73,19 @@ export default function EC2InstanceRoot({
     const localePrefix = `/${locale}`;
     const t = useTranslations();
 
+    // Format the on-demand cost with locale-aware number separators before
+    // passing it to buildInstanceDescription (which always prefixes "$" for
+    // this USD-denominated default price).
+    const numericCost = Number(ondemandCost);
+    const localizedCost = !isNaN(numericCost)
+        ? formatNumber(numericCost, locale)
+        : ondemandCost;
+
     // Generate translated description from the shared template.
     const description = buildInstanceDescription(
         t,
         compressedInstance,
-        ondemandCost,
+        localizedCost,
     );
 
     return (
