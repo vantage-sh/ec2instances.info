@@ -1,6 +1,7 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import {
     SUPPORTED_LOCALES,
     LOCALE_NAMES,
@@ -8,11 +9,17 @@ import {
     type SupportedLocale,
 } from "@/utils/localeConstants";
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+    Command,
+    CommandEmpty,
+    CommandInput,
+    CommandItem,
+    CommandList,
+} from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
 import { Globe } from "lucide-react";
 import { useTranslations } from "gt-next";
@@ -23,7 +30,9 @@ type LocaleSwitcherProps = {
 
 export default function LocaleSwitcher({ locale }: LocaleSwitcherProps) {
     const pathname = usePathname();
+    const router = useRouter();
     const t = useTranslations();
+    const [open, setOpen] = useState(false);
 
     const getNewPath = (newLocale: SupportedLocale) => {
         // Remove the current locale from the path
@@ -42,8 +51,8 @@ export default function LocaleSwitcher({ locale }: LocaleSwitcherProps) {
         LOCALE_NAMES[locale as SupportedLocale] || locale;
 
     return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+        <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
                 <Button
                     variant="outline"
                     size="sm"
@@ -53,18 +62,30 @@ export default function LocaleSwitcher({ locale }: LocaleSwitcherProps) {
                     <Globe className="h-4 w-4" />
                     <span className="hidden sm:inline">{currentLocaleName}</span>
                 </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-                {SUPPORTED_LOCALES.map((loc) => (
-                    <DropdownMenuItem
-                        key={loc}
-                        asChild
-                        className={loc === locale ? "bg-accent" : ""}
-                    >
-                        <a href={getNewPath(loc)}>{LOCALE_NAMES[loc]}</a>
-                    </DropdownMenuItem>
-                ))}
-            </DropdownMenuContent>
-        </DropdownMenu>
+            </PopoverTrigger>
+            <PopoverContent className="w-56 p-0" align="end">
+                <Command>
+                    <CommandInput placeholder="Search language..." />
+                    <CommandList>
+                        <CommandEmpty>No language found.</CommandEmpty>
+                        {SUPPORTED_LOCALES.map((loc) => (
+                            <CommandItem
+                                key={loc}
+                                value={`${LOCALE_NAMES[loc]} ${loc}`}
+                                onSelect={() => {
+                                    setOpen(false);
+                                    router.push(getNewPath(loc));
+                                }}
+                                className={
+                                    loc === locale ? "bg-accent" : undefined
+                                }
+                            >
+                                {LOCALE_NAMES[loc]}
+                            </CommandItem>
+                        ))}
+                    </CommandList>
+                </Command>
+            </PopoverContent>
+        </Popover>
     );
 }
