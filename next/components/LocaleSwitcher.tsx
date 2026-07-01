@@ -65,9 +65,9 @@ export default function LocaleSwitcher({ locale }: LocaleSwitcherProps) {
             </PopoverTrigger>
             <PopoverContent className="w-56 p-0" align="end">
                 <Command>
-                    <CommandInput placeholder="Search language..." />
+                    <CommandInput placeholder={t("localeSwitcher.searchPlaceholder")} />
                     <CommandList>
-                        <CommandEmpty>No language found.</CommandEmpty>
+                        <CommandEmpty>{t("localeSwitcher.noResults")}</CommandEmpty>
                         {SUPPORTED_LOCALES.map((loc) => (
                             <CommandItem
                                 key={loc}
@@ -79,8 +79,11 @@ export default function LocaleSwitcher({ locale }: LocaleSwitcherProps) {
                                 className={
                                     loc === locale ? "bg-accent" : undefined
                                 }
+                                asChild
                             >
-                                {LOCALE_NAMES[loc]}
+                                <a href={getNewPath(loc)}>
+                                    {LOCALE_NAMES[loc]}
+                                </a>
                             </CommandItem>
                         ))}
                     </CommandList>

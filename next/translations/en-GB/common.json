@@ -29,7 +29,9 @@
     "contactLink": "please let us know."
   },
   "localeSwitcher": {
-    "label": "Language"
+    "label": "Language",
+    "searchPlaceholder": "Search language...",
+    "noResults": "No language found."
   },
   "instancePage": {
     "pricing": "Pricing",

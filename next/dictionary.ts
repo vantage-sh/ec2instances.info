@@ -31,6 +31,8 @@ const dictionary = {
     },
     localeSwitcher: {
         label: "Language",
+        searchPlaceholder: "Search language...",
+        noResults: "No language found.",
     },
     instancePage: {
         pricing: "Pricing",
