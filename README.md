@@ -52,7 +52,9 @@ The scraper is written in Go and fetches data from AWS, Azure, and GCP APIs. You
             "Action": [
                 "ec2:DescribeInstanceTypes",
                 "ec2:DescribeSpotPriceHistory",
-                "elasticache:DescribeEngineDefaultParameters"
+                "elasticache:DescribeEngineDefaultParameters",
+                "rds:DescribeDBEngineVersions",
+                "rds:DescribeOrderableDBInstanceOptions"
             ],
             "Resource": "*"
         }
