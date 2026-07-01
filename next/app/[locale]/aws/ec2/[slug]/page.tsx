@@ -126,7 +126,7 @@ export async function generateMetadata({
         description: buildInstanceDescription(t, instance, ondemandCost as string),
         alternates,
         openGraph: {
-            locale: ogLocale,
+            ...(ogLocale !== undefined ? { locale: ogLocale } : {}),
             images: [
                 urlInject`${"/aws/ec2/" + instance.instance_type + ".png"}`,
             ],

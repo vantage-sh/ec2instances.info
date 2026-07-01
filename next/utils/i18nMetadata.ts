@@ -11,6 +11,24 @@ import { prefixWithLocale } from "./locale";
  *          Spread `alternates` directly into Metadata; merge `ogLocale` into
  *          the `openGraph.locale` field alongside any existing openGraph props.
  */
+/**
+ * Convert a BCP 47 locale tag to the OpenGraph `ll_CC` format.
+ *
+ * - `xx-YY` → `xx_YY` (replace hyphen with underscore)
+ * - bare `xx` (2-letter ISO 639-1) → left as-is
+ * - anything else (3-letter ISO 639-3, non-standard codes) → undefined
+ *   (callers must omit `og:locale` for these to avoid emitting an invalid value)
+ */
+function toOgLocale(locale: string): string | undefined {
+    if (/^[a-z]{2}-[A-Z]{2}$/.test(locale)) {
+        return locale.replace("-", "_");
+    }
+    if (/^[a-z]{2}$/.test(locale)) {
+        return locale;
+    }
+    return undefined;
+}
+
 export function buildI18nMetadata(
     pathname: string,
     locale: string,
@@ -19,9 +37,14 @@ export function buildI18nMetadata(
         canonical: string;
         languages: Record<string, string>;
     };
-    ogLocale: string;
+    ogLocale: string | undefined;
 } {
-    const rawBase = process.env.NEXT_PUBLIC_URL ?? "";
+    const rawBase = process.env.NEXT_PUBLIC_URL;
+    if (!rawBase) {
+        throw new Error(
+            "NEXT_PUBLIC_URL is not set. Set it to the site's base URL (e.g. https://ec2instances.info).",
+        );
+    }
     const base = rawBase.replace(/\/$/, "");
 
     const makeUrl = (l: string): string =>
@@ -38,6 +61,6 @@ export function buildI18nMetadata(
             canonical: makeUrl(locale),
             languages,
         },
-        ogLocale: locale,
+        ogLocale: toOgLocale(locale),
     };
 }

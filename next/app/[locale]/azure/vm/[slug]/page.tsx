@@ -83,7 +83,7 @@ export async function generateMetadata({
         description,
         alternates,
         openGraph: {
-            locale: ogLocale,
+            ...(ogLocale !== undefined ? { locale: ogLocale } : {}),
             images: [
                 urlInject`${"/azure/vm/" + instance.instance_type + ".png"}`,
             ],

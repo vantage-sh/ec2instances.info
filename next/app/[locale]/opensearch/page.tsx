@@ -21,7 +21,7 @@ export async function generateMetadata({
         description:
             "A free and easy-to-use tool for comparing OpenSearch Instance features and prices.",
         alternates,
-        openGraph: { locale: ogLocale },
+        openGraph: ogLocale !== undefined ? { locale: ogLocale } : {},
     };
 }
 

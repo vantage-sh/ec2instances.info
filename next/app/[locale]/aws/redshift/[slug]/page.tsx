@@ -117,7 +117,7 @@ export async function generateMetadata({
         description: generateDescription(instance, ondemandCost),
         alternates,
         openGraph: {
-            locale: ogLocale,
+            ...(ogLocale !== undefined ? { locale: ogLocale } : {}),
             images: [
                 urlInject`${"/aws/redshift/" + instance.instance_type + ".png"}`,
             ],

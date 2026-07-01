@@ -80,7 +80,7 @@ export async function generateMetadata({
         description,
         alternates,
         openGraph: {
-            locale: ogLocale,
+            ...(ogLocale !== undefined ? { locale: ogLocale } : {}),
             images: [urlInject`${"/gcp/" + instance.instance_type + ".png"}`],
         },
     };
