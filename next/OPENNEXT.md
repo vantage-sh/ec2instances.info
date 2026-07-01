@@ -93,3 +93,18 @@ These are NOT done by CI and must be run once by someone with CF access.
   rule, each `?id=` deep-link is a separate cache entry. Also note the old `.xml`
   cache-control exception that the retired worker handled. Apex/www redirects are
   now 308 (previously 301 from the old worker).
+
+- **Asset count > Cloudflare's 100k hard limit (DEPLOY BLOCKER, follow-up):**
+  the build emits ~108k files under `.open-next/assets`, but Cloudflare Workers
+  caps a version at **100,000 assets** (a hard platform limit, Free and Paid).
+  The bulk is the per-instance OG images + the Next 16 prerendered page files.
+  Planned fix (per product decision): do NOT ship all assets via the `assets`
+  binding. Instead tier asset serving like the retired `worker.js` did — serve
+  from **KV as a bounded cache (max ~100k entries) with R2 (S3-compatible)
+  fallback for overflow and large files**. Concretely: keep the hot/most-served
+  assets (HTML/RSC/_next static) in KV up to the cap, and put OG images + the
+  compressed data `.xz` (and any overflow beyond 100k) in R2, with the worker
+  resolving KV-first then R2. This requires a custom asset handler (or an
+  OpenNext static-assets/incremental-cache override) plus the KV+R2 bindings,
+  and must be wired and tested against a real Cloudflare env. Until then the
+  worker builds green but a full `wrangler deploy` will reject on the asset cap.
