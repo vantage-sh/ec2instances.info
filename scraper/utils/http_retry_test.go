@@ -97,23 +97,54 @@ func TestFetchWithRetryGivesUpAfterCap(t *testing.T) {
 }
 
 // TestFetchWithRetryDoesNotRetryPermanentStatus asserts that a non-retryable
-// 4xx fails immediately without burning the retry budget.
+// 4xx (e.g. 403) fails immediately without burning the retry budget.
 func TestFetchWithRetryDoesNotRetryPermanentStatus(t *testing.T) {
 	shrinkBackoff(t)
 
 	var calls int32
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		atomic.AddInt32(&calls, 1)
-		w.WriteHeader(http.StatusNotFound)
+		w.WriteHeader(http.StatusForbidden)
 	}))
 	defer srv.Close()
 
 	_, err := FetchWithRetry(srv.URL, nil)
 	if err == nil {
-		t.Fatalf("expected error for 404, got nil")
+		t.Fatalf("expected error for 403, got nil")
 	}
 	if got := atomic.LoadInt32(&calls); got != 1 {
-		t.Fatalf("expected exactly 1 attempt for a permanent 404, got %d", got)
+		t.Fatalf("expected exactly 1 attempt for a permanent 403, got %d", got)
+	}
+}
+
+// TestFetchWithRetryRetriesTransient404 asserts that a 404 is retried rather
+// than treated as permanent: the AWS pricing index can reference a file S3 has
+// not finished publishing, yielding a transient 404 that resolves on retry.
+func TestFetchWithRetryRetriesTransient404(t *testing.T) {
+	shrinkBackoff(t)
+
+	var calls int32
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		n := atomic.AddInt32(&calls, 1)
+		if n < 3 {
+			// Index references the file before S3 finishes publishing it.
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+		w.WriteHeader(http.StatusOK)
+		_, _ = w.Write([]byte(`{"ok":true}`))
+	}))
+	defer srv.Close()
+
+	body, err := FetchWithRetry(srv.URL, nil)
+	if err != nil {
+		t.Fatalf("expected success after transient 404s, got error: %v", err)
+	}
+	if string(body) != `{"ok":true}` {
+		t.Fatalf("unexpected body: %q", string(body))
+	}
+	if got := atomic.LoadInt32(&calls); got != 3 {
+		t.Fatalf("expected 3 attempts (2 transient 404s then success), got %d", got)
 	}
 }
 

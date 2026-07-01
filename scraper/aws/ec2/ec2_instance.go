@@ -2,6 +2,7 @@ package ec2
 
 import (
 	"encoding/json"
+	"fmt"
 	"scraper/aws/awsutils"
 	"scraper/aws/ec2/extras"
 	"strconv"
@@ -60,6 +61,12 @@ type Storage struct {
 	Devices                   int    `json:"devices"`
 	Size                      int    `json:"size"`
 	SizeUnit                  string `json:"size_unit"`
+	// StorageReadIops / StorageWriteIops are the instance-store random read/write
+	// IOPS sourced from the AWS instance-type docs (see iops.go). Pointers so that
+	// instances without a documented value omit the field entirely (frontend treats
+	// absent as "N/A") rather than reporting a fabricated 0.
+	StorageReadIops  *int `json:"storage_read_iops,omitempty"`
+	StorageWriteIops *int `json:"storage_write_iops,omitempty"`
 }
 
 type EC2Instance struct {
@@ -143,8 +150,16 @@ func avg(ints []int) *float64 {
 	return &avg
 }
 
+func formatClockSpeedFromMhz(speedMhz uint) string {
+	return fmt.Sprintf("%.1f GHz", float64(speedMhz)/1000)
+}
+
 func (instance *EC2Instance) addExtraDetails() {
 	if details, ok := extras.ExtraInstanceDetails[instance.InstanceType]; ok {
+		if details.CPU.Speed > 0 {
+			clockSpeed := formatClockSpeedFromMhz(details.CPU.Speed)
+			instance.ClockSpeedGhz = &clockSpeed
+		}
 		instance.MemorySpeed = details.Memory.SpeedMhz
 		instance.CoremarkIterationsSecond = &details.Coremark.IterationsSecond
 		gpuArchitectures := []string{}

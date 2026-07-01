@@ -59,9 +59,16 @@ var sharedHTTPClient = &http.Client{
 }
 
 // retryableStatus reports whether an HTTP status code is worth retrying.
-// 5xx and 429 are transient; other 4xx are caller/permanent errors.
+// 5xx and 429 are transient. 404 is also retried because the AWS pricing index
+// regularly references a per-region file (e.g. a newly added Local Zone's
+// savings-plan index) moments before S3 has finished publishing it: a fetch the
+// index just told us to make then 404s transiently and succeeds seconds later.
+// Without retrying it, a single such publish race aborts the entire scrape.
+// Other 4xx are caller/permanent errors.
 func retryableStatus(code int) bool {
-	return code == http.StatusTooManyRequests || code >= 500
+	return code == http.StatusTooManyRequests ||
+		code == http.StatusNotFound ||
+		code >= 500
 }
 
 // backoffFor returns the exponential-with-cap delay before the given (1-based)
