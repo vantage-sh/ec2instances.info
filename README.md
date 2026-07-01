@@ -68,6 +68,8 @@ Set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` (`.env` is gitignored).
 
 Once credentials are in place, run `./fetch_data.sh` from the repository root. You only need to run this when the scraper is changed in a way that alters the data or there is new API data available you want to test against.
 
+EC2 instance launch dates (`date_introduced`) are enriched during each scrape from the public [instancetyp.es timeline](https://instancetyp.es/timeline.json).
+
 ## Building a full release
 
 **NOTE:** This is NOT needed for development in most cases and can on some setups mess with the file permsisions in the next folder leading to needing to clean the build output/temp folders in there. In most development cases, building the next part is sufficient for testing. However, this is needed for production/staging.

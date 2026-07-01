@@ -80,6 +80,7 @@ export interface EC2Instance {
     };
     pricing: Pricing;
     generation: string;
+    date_introduced?: string | null;
     coremark_iterations_second?: number | null;
     gpu_architectures?: string[] | null;
     gpu_current_temp_avg_celsius?: number | null;

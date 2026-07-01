@@ -130,6 +130,7 @@ type EC2Instance struct {
 	IsTrunkingCompatible     *bool                      `json:"is_trunking_compatible,omitempty"`
 	BranchInterface          *int                       `json:"branch_interface,omitempty"`
 	MaxECSTasks              *int                       `json:"max_ecs_tasks,omitempty"`
+	DateIntroduced           *string                    `json:"date_introduced,omitempty"`
 }
 
 func avg(ints []int) *float64 {
