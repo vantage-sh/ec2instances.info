@@ -32,7 +32,7 @@ body {
 }
 
 .index-table th {
-    @apply whitespace-nowrap overflow-hidden text-ellipsis text-left relative bg-gray-4 border-gray-3 border-b;
+    @apply whitespace-nowrap overflow-hidden text-ellipsis text-start relative bg-gray-4 border-gray-3 border-b;
     @apply sticky top-0 z-20;
 }
 
@@ -55,7 +55,7 @@ body {
 }
 
 .index-table tbody td {
-    @apply py-2 pl-2 pr-3 whitespace-nowrap text-ellipsis relative align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px];
+    @apply py-2 ps-2 pe-3 whitespace-nowrap text-ellipsis relative align-middle [&:has([role=checkbox])]:pe-0 [&>[role=checkbox]]:translate-y-[2px];
 }
 .index-table tbody td a {
     @apply font-mono;
@@ -240,7 +240,7 @@ body {
 }
 
 .ms-2 {
-    margin-left: 8px;
+    margin-inline-start: 8px;
 }
 
 .p-0 {
@@ -414,17 +414,17 @@ body {
 /* RTL (Right-to-Left) language support */
 [dir="rtl"] {
     direction: rtl;
-    text-align: right;
+    text-align: start;
 }
 
 [dir="rtl"] .index-table th,
 [dir="rtl"] .index-table td {
-    text-align: right;
+    /* text-start (logical) already handles RTL via direction:rtl above */
+    text-align: start;
 }
 
-[dir="rtl"] .index-table tbody td {
-    @apply pl-3 pr-2;
-}
+/* [dir="rtl"] .index-table tbody td padding override removed:
+   base rule now uses ps-2/pe-3 (logical), so it flips automatically in RTL. */
 
 /* Reverse flex direction for RTL layouts where needed */
 [dir="rtl"] .rtl\:flex-row-reverse {

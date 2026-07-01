@@ -19,7 +19,7 @@ function Table({ slug, name, children, valueLabel }: TableProps & { valueLabel: 
         >
             <thead>
                 <tr className="bg-gray-100 dark:bg-gray-4">
-                    <th className="text-left p-1 border-gray-200 dark:border-gray-3">
+                    <th className="text-start p-1 border-gray-200 dark:border-gray-3">
                         <a
                             href={`#${slug}`}
                             className="text-purple-1 hover:text-purple-0 dark:text-purple-2 dark:hover:text-purple-0"
@@ -27,7 +27,7 @@ function Table({ slug, name, children, valueLabel }: TableProps & { valueLabel: 
                             {name}
                         </a>
                     </th>
-                    <th className="text-left p-1 border-l border-gray-200 dark:border-gray-3">
+                    <th className="text-start p-1 border-s border-gray-200 dark:border-gray-3">
                         {valueLabel}
                     </th>
                 </tr>

@@ -27,8 +27,8 @@ export default function InstanceVariants({
             </h3>
             <table className="mt-2 w-full text-sm">
                 <thead>
-                    <tr className="border-r border-gray-200 dark:border-gray-3">
-                        <th className="text-left pb-1">{t("instancePage.variant")}</th>
+                    <tr className="border-e border-gray-200 dark:border-gray-3">
+                        <th className="text-start pb-1">{t("instancePage.variant")}</th>
                     </tr>
                 </thead>
                 <tbody>

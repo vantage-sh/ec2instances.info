@@ -79,7 +79,7 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                         className="w-[200px] justify-between"
                     >
                         {columnsLabel}
-                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                        <ChevronsUpDown className="ms-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent sideOffset={-36} align="start" className="p-0">
@@ -113,7 +113,7 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                                         >
                                             <Check
                                                 className={cn(
-                                                    "mr-2 h-4 w-4",
+                                                    "me-2 h-4 w-4",
                                                     visible
                                                         ? "opacity-100"
                                                         : "opacity-0",

@@ -87,7 +87,7 @@ export default function ExportDropdown() {
                     className="my-auto justify-between text-black py-4.5"
                     aria-label={exportLabel}
                 >
-                    <Save className="mr-2 h-4 w-4" />
+                    <Save className="me-2 h-4 w-4" />
                     {exportLabel}
                 </Button>
             </DropdownMenuTrigger>

@@ -139,7 +139,7 @@ function NavItem({ item, currentPath, locale, t }: NavItemProps) {
 
     return (
         <div
-            className="flex items-center justify-start gap-4 relative top-1.5 ml-2"
+            className="flex items-center justify-start gap-4 relative top-1.5 ms-2"
             key={item.labelKey}
         >
             <TranslationFriendlyLink

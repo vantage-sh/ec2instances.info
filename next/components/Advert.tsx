@@ -158,7 +158,7 @@ export default function Advert({
                     <img
                         src="/vantage-logo-icon-banner.svg"
                         aria-hidden="true"
-                        className="h-4 mr-1.5"
+                        className="h-4 me-1.5"
                     />
                     <p>
                         {cta.title}{" "}

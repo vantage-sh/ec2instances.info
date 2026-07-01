@@ -16,7 +16,7 @@ function ExprHelpData({ parseError }: { parseError: string | null }) {
                 </div>
             )}
             <p>{t("exprHelp.description")}</p>
-            <ul className="list-disc pl-4 mt-2 space-y-1">
+            <ul className="list-disc ps-4 mt-2 space-y-1">
                 <li>
                     {t("exprHelp.numbers")} <code>42</code>, <code>3.14</code>
                 </li>
@@ -40,7 +40,7 @@ function ExprHelpData({ parseError }: { parseError: string | null }) {
                 </li>
                 <li>
                     {t("exprHelp.stringMethods")}
-                    <ul className="list-disc pl-4 mt-1 space-y-1">
+                    <ul className="list-disc ps-4 mt-1 space-y-1">
                         <li>
                             <code>starts_with("text")</code> -{" "}
                             {t("exprHelp.startsWithDesc")}
@@ -57,7 +57,7 @@ function ExprHelpData({ parseError }: { parseError: string | null }) {
                 </li>
                 <li>
                     {t("exprHelp.storageMethods")}
-                    <ul className="list-disc pl-4 mt-1 space-y-1">
+                    <ul className="list-disc ps-4 mt-1 space-y-1">
                         <li>
                             <code>ebs</code> - {t("exprHelp.ebsDesc")}
                         </li>
@@ -78,7 +78,7 @@ function ExprHelpData({ parseError }: { parseError: string | null }) {
                 </li>
             </ul>
             <p className="mt-2">{t("exprHelp.examplesLabel")}</p>
-            <ul className="list-disc pl-4 mt-1 space-y-1">
+            <ul className="list-disc ps-4 mt-1 space-y-1">
                 <li>
                     <code>&gt;=4 &amp;&amp; &lt;=8</code> - Values between 4 and
                     8 (inclusive)

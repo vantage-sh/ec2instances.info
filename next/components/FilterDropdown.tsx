@@ -122,7 +122,7 @@ export default function FilterDropdown({
                         )}
                         {selectedOption?.label ||
                             (t ? t("filters.select") : "Select...")}
-                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                        <ChevronsUpDown className="ms-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-full p-0">
@@ -166,7 +166,7 @@ export default function FilterDropdown({
                                             >
                                                 <Check
                                                     className={cn(
-                                                        "mr-2 h-4 w-4",
+                                                        "me-2 h-4 w-4",
                                                         value === option.value
                                                             ? "opacity-100"
                                                             : "opacity-0",
@@ -174,7 +174,7 @@ export default function FilterDropdown({
                                                 />
                                                 <span>{option.label}</span>
                                                 {option.group && (
-                                                    <span className="text-gray-300 text-xs ml-2">
+                                                    <span className="text-gray-300 text-xs ms-2">
                                                         {option.value}
                                                     </span>
                                                 )}

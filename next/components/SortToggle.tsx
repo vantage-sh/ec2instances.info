@@ -11,7 +11,7 @@ type SortToggleProps = {
 export default function SortToggle({ value, setValue }: SortToggleProps) {
     const t = useTranslations();
     return (
-        <div className="ml-1 absolute right-1 top-0 inline-block dark:invert">
+        <div className="ms-1 absolute end-1 top-0 inline-block dark:invert">
             <button
                 className={`${
                     value === false ? "text-gray-800" : "text-gray-400"
