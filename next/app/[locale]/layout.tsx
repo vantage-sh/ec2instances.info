@@ -9,7 +9,7 @@ import { array, object, string, parse, optional } from "valibot";
 import {
     getFontClassName,
     isRTL,
-    SUPPORTED_LOCALES,
+    DEFAULT_LOCALE,
     type SupportedLocale,
 } from "@/utils/fonts";
 
@@ -24,8 +24,13 @@ const toastsSchema = array(
     }),
 );
 
+// Prerender only the default locale; every other locale is rendered on demand
+// at runtime and cached (ISR via `dynamicParams`, which defaults to true).
+// Returning all ~200 SUPPORTED_LOCALES here forces every non-overriding page
+// (listings, sitemaps) to prerender x200, which is the main driver of Next 16's
+// segment-cache output blowing up the build.
 export function generateStaticParams() {
-    return SUPPORTED_LOCALES.map((locale) => ({ locale }));
+    return [{ locale: DEFAULT_LOCALE }];
 }
 
 export default async function LocaleLayout({
