@@ -41,6 +41,9 @@ const translations: Record<string, string> = {
     // Filter translations
     "filters.sortAscending": "Sort ascending",
     "filters.sortDescending": "Sort descending",
+    // Locale switcher translations
+    "localeSwitcher.searchPlaceholder": "Search language...",
+    "localeSwitcher.noResults": "No language found.",
 };
 
 // Mock gt-next translation library for tests
@@ -55,6 +58,6 @@ vi.mock("gt-next", () => ({
         }
         return result;
     },
-    useLocale: () => "en-US",
+    useLocale: () => "en-GB",
     GTProvider: ({ children }: { children: React.ReactNode }) => children,
 }));
