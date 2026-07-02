@@ -1,0 +1,20 @@
+#!/bin/sh
+# Repo-managed git hook. Enabled automatically via `core.hooksPath .githooks`,
+# set by next/package.json's "prepare" script on `npm install`/`npm ci`.
+#
+# Runs the translation-completeness check ONLY when the commit touches the
+# locale files or the checker itself, so unrelated commits stay fast.
+
+changed=$(git diff --cached --name-only --diff-filter=ACMR)
+
+if printf '%s\n' "$changed" | grep -Eq '^next/translations/|^next/scripts/check-translations\.mjs$'; then
+    echo "pre-commit: verifying translation completeness…"
+    if ! (cd next && node scripts/check-translations.mjs); then
+        echo ""
+        echo "pre-commit: translation check failed. Fix the gaps above"
+        echo "(see next/TRANSLATING.md), or bypass with 'git commit --no-verify'."
+        exit 1
+    fi
+fi
+
+exit 0

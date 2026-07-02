@@ -11,6 +11,9 @@ next/.next/
 next/build/
 golden
 mocks
+# Machine-generated locale data (200 locales). Structural validity is enforced
+# by next/scripts/check-translations.mjs, not prettier formatting.
+next/translations
 next/next-env.d.ts
 .wrangler
 deployment/node_modules

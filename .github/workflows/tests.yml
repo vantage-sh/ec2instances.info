@@ -39,6 +39,17 @@ jobs:
             - run: |-
                   prettier --check .
 
+    translations:
+        name: Translation completeness
+        runs-on: ubuntu-22.04
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v4
+              with:
+                  node-version-file: next/.nvmrc
+            - name: Check for untranslated / missing strings
+              run: cd next && node scripts/check-translations.mjs
+
     tests:
         name: Check Types and Run Tests
         runs-on: ubuntu-22.04
