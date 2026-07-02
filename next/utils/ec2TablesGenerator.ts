@@ -12,7 +12,10 @@ type Row = {
 };
 
 export type Table = {
-    nameKey: string;
+    // Either a translation key (nameKey) or a literal English label (name),
+    // mirroring Row. `name` is used for develop-added tables with no key yet.
+    nameKey?: string;
+    name?: string;
     slug: string;
     rows: Row[];
 };
@@ -302,6 +305,18 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
                         instance.storage?.storage_needs_initialization ?? false,
                     bgStyled: true,
                 },
+                {
+                    name: "Instance Store Read IOPS",
+                    children: instance.storage?.storage_read_iops
+                        ? instance.storage.storage_read_iops.toLocaleString()
+                        : "N/A",
+                },
+                {
+                    name: "Instance Store Write IOPS",
+                    children: instance.storage?.storage_write_iops
+                        ? instance.storage.storage_write_iops.toLocaleString()
+                        : "N/A",
+                },
             ],
         },
         {
@@ -346,13 +361,65 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
     ];
 }
 
+// Friendly labels for the RDS engine identifiers returned by the AWS API. Any
+// engine not listed falls back to its raw identifier so new engines still show.
+const rdsEngineLabels: Record<string, string> = {
+    postgres: "PostgreSQL",
+    "aurora-postgresql": "Aurora PostgreSQL",
+    mysql: "MySQL",
+    "aurora-mysql": "Aurora MySQL",
+    mariadb: "MariaDB",
+    "oracle-ee": "Oracle Enterprise Edition",
+    "oracle-ee-cdb": "Oracle Enterprise Edition (CDB)",
+    "oracle-se2": "Oracle Standard Edition 2",
+    "oracle-se2-cdb": "Oracle Standard Edition 2 (CDB)",
+    "sqlserver-ee": "SQL Server Enterprise",
+    "sqlserver-se": "SQL Server Standard",
+    "sqlserver-ex": "SQL Server Express",
+    "sqlserver-web": "SQL Server Web",
+    "sqlserver-dev-ee": "SQL Server Developer",
+    "custom-sqlserver-ee": "SQL Server Enterprise (Custom)",
+    "custom-sqlserver-se": "SQL Server Standard (Custom)",
+    "custom-sqlserver-web": "SQL Server Web (Custom)",
+    "db2-ae": "Db2 Advanced Edition",
+    "db2-ce": "Db2 Community Edition",
+    "db2-se": "Db2 Standard Edition",
+    docdb: "DocumentDB",
+    neptune: "Neptune",
+};
+
+// rdsEngineSupportTable turns the optional engine_support map into a "Database
+// Engines" section listing each supported engine and its major-version range.
+// Returns null when there is no data so older datasets render unchanged.
+function rdsEngineSupportTable(
+    engineSupport: EC2Instance["engine_support"],
+): Table | null {
+    if (!engineSupport) return null;
+    const engines = Object.keys(engineSupport).sort((a, b) =>
+        (rdsEngineLabels[a] ?? a).localeCompare(rdsEngineLabels[b] ?? b),
+    );
+    if (engines.length === 0) return null;
+
+    return {
+        name: "Database Engines",
+        slug: "database-engines",
+        rows: engines.map((engine) => {
+            const { min, max } = engineSupport[engine];
+            return {
+                name: rdsEngineLabels[engine] ?? engine,
+                children: min === max ? min : `${min} - ${max}`,
+            };
+        }),
+    };
+}
+
 export function rds(
     instance: Omit<EC2Instance, "pricing">,
     platform?: string,
 ): Table[] {
     const vCPU = rdsVCPUForPlatform(instance, platform);
 
-    return [
+    const tables: Table[] = [
         {
             nameKey: "compute",
             slug: "Compute",
@@ -467,6 +534,11 @@ export function rds(
             ],
         },
     ];
+
+    const engineTable = rdsEngineSupportTable(instance.engine_support);
+    if (engineTable) tables.push(engineTable);
+
+    return tables;
 }
 
 interface ElasticacheExt extends Omit<EC2Instance, "pricing"> {

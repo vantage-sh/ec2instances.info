@@ -351,6 +351,7 @@ func processRDSData(
 	ec2ApiResponses *utils.SlowBuildingMap[string, *types.InstanceTypeInfo],
 	china bool,
 	licenseFees func() map[string]map[engineCode]float64,
+	engineSupport func() map[string]map[string]engineVersionRange,
 ) {
 	// Defines the currency
 	currency := "USD"
@@ -525,6 +526,17 @@ func processRDSData(
 	// Clean up empty regions and set the regions map for non-empty regions
 	for _, instance := range instancesHashmap {
 		instance["regions"] = cleanEmptyRegions(instance["pricing"].(map[string]map[string]any), regionDescriptions)
+	}
+
+	// Attach the supported database engine version ranges (issue #710). Sourced
+	// from the RDS API in a single commercial region (see getRdsEngineSupport),
+	// so it is only applied to the global dataset; AWS China is left untouched.
+	if engineSupport != nil {
+		for class, support := range engineSupport() {
+			if instance, ok := instancesHashmap[class]; ok {
+				instance["engine_support"] = support
+			}
+		}
 	}
 
 	// Save the data

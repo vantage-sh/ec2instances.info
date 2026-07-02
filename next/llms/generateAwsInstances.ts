@@ -196,7 +196,7 @@ function generateInstanceMarkdown(
 
     const tableData = tables
         .map(
-            (table) => `## ${getTableName(table.nameKey)}
+            (table) => `## ${table.name ?? getTableName(table.nameKey)}
 
 ${table.rows.map((row) => `- ${row.name ?? getTableName(row.nameKey ?? "")}: ${row.children}`).join("\n")}
 `,

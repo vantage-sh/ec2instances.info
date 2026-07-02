@@ -82,7 +82,9 @@ export default function InstanceDataView({ tables }: { tables: TableType[] }) {
                 <Table
                     key={table.slug}
                     slug={table.slug}
-                    name={t(`instancePage.tables.${table.nameKey}`)}
+                    name={
+                        table.name ?? t(`instancePage.tables.${table.nameKey}`)
+                    }
                     valueLabel={t("instancePage.value")}
                 >
                     {table.rows.map((row) => (

@@ -27,6 +27,8 @@ const initialColumnsArr = [
     ["storage", true],
     ["warmed-up", false],
     ["trim-support", false],
+    ["storage_read_iops", false],
+    ["storage_write_iops", false],
     ["arch", false],
     ["network_performance", true],
     ["ebs_baseline_bandwidth", false],
@@ -166,6 +168,9 @@ export function makePrettyNames<V>(
         makeColumnOption("storage", t?.("columns.common.instanceStorage") ?? "Instance Storage"),
         makeColumnOption("warmed-up", t?.("columns.ec2.storageWarmedUp") ?? "Instance Storage: already warmed-up"),
         makeColumnOption("trim-support", t?.("columns.ec2.storageTrimSupport") ?? "Instance Storage: SSD TRIM Support"),
+        // develop-added storage-IOPS columns; no translation keys exist yet, render English literals.
+        makeColumnOption("storage_read_iops", "Instance Store: Read IOPS"),
+        makeColumnOption("storage_write_iops", "Instance Store: Write IOPS"),
         makeColumnOption("arch", t?.("columns.common.arch") ?? "Arch"),
         makeColumnOption("network_performance", t?.("columns.common.networkPerformance") ?? "Network Performance"),
         makeColumnOption("ebs_baseline_bandwidth", t?.("columns.ec2.ebsBaselineBandwidth") ?? "EBS Optimized: Baseline Bandwidth"),
@@ -178,7 +183,6 @@ export function makePrettyNames<V>(
         makeColumnOption("maxips", t?.("columns.ec2.maxIps") ?? "Max IPs"),
         makeColumnOption("maxenis", t?.("columns.ec2.maxEnis") ?? "Max ENIs"),
         makeColumnOption("enhanced_networking", t?.("columns.ec2.enhancedNetworking") ?? "Enhanced Networking"),
-        // develop-added columns; no translation keys exist yet, render English literals.
         makeColumnOption("is_bare_metal", "Bare metal"),
         makeColumnOption("is_trunking_compatible", "Trunking compatible"),
         makeColumnOption("branch_interface", "Branch interface"),
