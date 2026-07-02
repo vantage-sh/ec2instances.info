@@ -45,5 +45,7 @@
     "csvCopied": "CSV disalin ka clipboard",
     "tsvCopied": "TSV disalin ka clipboard",
     "markdownCopied": "Tabél Markdown disalin ka clipboard"
-  }
+  },
+  "sortAscending": "Urutkeun naék",
+  "sortDescending": "Urutkeun turun"
 }

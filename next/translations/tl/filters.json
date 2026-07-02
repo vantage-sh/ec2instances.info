@@ -45,5 +45,7 @@
     "csvCopied": "Nakopya na ang CSV sa clipboard",
     "tsvCopied": "Nakopya na ang TSV sa clipboard",
     "markdownCopied": "Nakopya na ang Markdown table sa clipboard"
-  }
+  },
+  "sortAscending": "Ayusin pataas",
+  "sortDescending": "Ayusin pababa"
 }

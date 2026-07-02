@@ -45,5 +45,7 @@
     "csvCopied": "CSV kopiran u međuspremnik",
     "tsvCopied": "TSV kopiran u međuspremnik",
     "markdownCopied": "Markdown tablica kopirana u međuspremnik"
-  }
+  },
+  "sortAscending": "Sortiraj uzlazno",
+  "sortDescending": "Sortiraj silazno"
 }

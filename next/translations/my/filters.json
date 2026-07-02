@@ -45,5 +45,7 @@
     "csvCopied": "CSV ကလစ်ဘုတ်သို့ ကူးယူပြီး",
     "tsvCopied": "TSV ကလစ်ဘုတ်သို့ ကူးယူပြီး",
     "markdownCopied": "Markdown ဇယား ကလစ်ဘုတ်သို့ ကူးယူပြီး"
-  }
+  },
+  "sortAscending": "ငယ်မှကြီး စီထားပါ",
+  "sortDescending": "ကြီးမှငယ် စီထားပါ"
 }

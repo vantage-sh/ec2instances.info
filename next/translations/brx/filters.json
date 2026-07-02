@@ -45,5 +45,7 @@
     "csvCopied": "CSV क्लिपबर्डमा कपि जादों",
     "tsvCopied": "TSV क्लिपबर्डमा कपि जादों",
     "markdownCopied": "Markdown टेबल क्लिपबर्डमा कपि जादों"
-  }
+  },
+  "sortAscending": "बादिदों लायाव नायखोन",
+  "sortDescending": "खान्थिबादि लायाव नायखोन"
 }

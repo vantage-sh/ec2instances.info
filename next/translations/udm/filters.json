@@ -45,5 +45,7 @@
     "csvCopied": "CSV буфере копироватэм",
     "tsvCopied": "TSV буфере копироватэм",
     "markdownCopied": "Markdown таблица буфере копироватэм"
-  }
+  },
+  "sortAscending": "Будэм лыдэ дасяны",
+  "sortDescending": "Изьыллям лыдэ дасяны"
 }

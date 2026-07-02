@@ -45,5 +45,7 @@
     "csvCopied": "CSV panoya kopyalandı",
     "tsvCopied": "TSV panoya kopyalandı",
     "markdownCopied": "Markdown tablosu panoya kopyalandı"
-  }
+  },
+  "sortAscending": "Ngorono ngawo",
+  "sortDescending": "Ngorono nawo"
 }

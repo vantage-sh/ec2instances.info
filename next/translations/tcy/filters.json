@@ -45,5 +45,7 @@
     "csvCopied": "CSV ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗ್ ಕಾಪಿ ಆತ್",
     "tsvCopied": "TSV ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗ್ ಕಾಪಿ ಆತ್",
     "markdownCopied": "Markdown ಟೇಬಲ್ ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗ್ ಕಾಪಿ ಆತ್"
-  }
+  },
+  "sortAscending": "ಏರುಕ್ರಮದಡಿ ಜೋಡ್ಣ",
+  "sortDescending": "ಇಳಿಕ್ರಮದಡಿ ಜೋಡ್ಣ"
 }

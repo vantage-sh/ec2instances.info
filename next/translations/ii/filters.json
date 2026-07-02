@@ -45,5 +45,7 @@
     "csvCopied": "CSV clipboard ꀕ ꀕꋊꑌ ꃀ",
     "tsvCopied": "TSV clipboard ꀕ ꀕꋊꑌ ꃀ",
     "markdownCopied": "Markdown table clipboard ꀕ ꀕꋊꑌ ꃀ"
-  }
+  },
+  "sortAscending": "ꀋꐭꄂꄻ",
+  "sortDescending": "ꄧꐭꄂꄻ"
 }

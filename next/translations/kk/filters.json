@@ -45,5 +45,7 @@
     "csvCopied": "CSV алмасу буферіне көшірілді",
     "tsvCopied": "TSV алмасу буферіне көшірілді",
     "markdownCopied": "Markdown кестесі алмасу буферіне көшірілді"
-  }
+  },
+  "sortAscending": "Өсу бойынша сұрыптау",
+  "sortDescending": "Кему бойынша сұрыптау"
 }

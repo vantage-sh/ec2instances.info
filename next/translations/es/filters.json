@@ -45,5 +45,7 @@
     "csvCopied": "CSV copiado al portapapeles",
     "tsvCopied": "TSV copiado al portapapeles",
     "markdownCopied": "Tabla Markdown copiada al portapapeles"
-  }
+  },
+  "sortAscending": "Ordenar ascendente",
+  "sortDescending": "Ordenar descendente"
 }

@@ -45,5 +45,7 @@
     "csvCopied": "CSV kukopikwa ku clipboard",
     "tsvCopied": "TSV kukopikwa ku clipboard",
     "markdownCopied": "Ilitebulo lya Markdown kukopikwa ku clipboard"
-  }
+  },
+  "sortAscending": "Kupanga kupanduka",
+  "sortDescending": "Kupanga kushuka"
 }

@@ -45,5 +45,7 @@
     "csvCopied": "CSV کۆپیکرا بۆ کلیپبۆرد",
     "tsvCopied": "TSV کۆپیکرا بۆ کلیپبۆرد",
     "markdownCopied": "خشتەی Markdown کۆپیکرا بۆ کلیپبۆرد"
-  }
+  },
+  "sortAscending": "ریزبەندی لە بچووک بۆ گەورە",
+  "sortDescending": "ریزبەندی لە گەورە بۆ بچووک"
 }

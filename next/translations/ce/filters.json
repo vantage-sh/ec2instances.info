@@ -45,5 +45,7 @@
     "csvCopied": "CSV буфере кхийдам бина",
     "tsvCopied": "TSV буфере кхийдам бина",
     "markdownCopied": "Markdown таблица буфере кхийдам бина"
-  }
+  },
+  "sortAscending": "ТIаьхьарчуьнга лаха",
+  "sortDescending": "Охьахуттур лаха"
 }

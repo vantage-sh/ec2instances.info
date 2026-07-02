@@ -45,5 +45,7 @@
     "csvCopied": "CSV ક્લિપબોર્ડ પર કૉપિ થઈ",
     "tsvCopied": "TSV ક્લિપબોર્ડ પર કૉપિ થઈ",
     "markdownCopied": "Markdown કોઠો ક્લિપબોર્ડ પર કૉપિ થઈ"
-  }
+  },
+  "sortAscending": "ચઢતા ક્રમમાં ગોઠવો",
+  "sortDescending": "ઉતરતા ક્રમમાં ગોઠવો"
 }

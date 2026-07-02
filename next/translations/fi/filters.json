@@ -45,5 +45,7 @@
     "csvCopied": "CSV kopioitu leikepöydälle",
     "tsvCopied": "TSV kopioitu leikepöydälle",
     "markdownCopied": "Markdown-taulukko kopioitu leikepöydälle"
-  }
+  },
+  "sortAscending": "Lajittele nousevasti",
+  "sortDescending": "Lajittele laskevasti"
 }

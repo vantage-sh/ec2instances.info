@@ -45,5 +45,7 @@
     "csvCopied": "CSV تاختىغا كۆچۈرۈلدى",
     "tsvCopied": "TSV تاختىغا كۆچۈرۈلدى",
     "markdownCopied": "Markdown جەدۋىلى تاختىغا كۆچۈرۈلدى"
-  }
+  },
+  "sortAscending": "ئۆرلەش تەرتىپىدە رەتلە",
+  "sortDescending": "چۈشۈش تەرتىپىدە رەتلە"
 }

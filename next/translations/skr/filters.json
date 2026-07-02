@@ -45,5 +45,7 @@
     "csvCopied": "CSV کلپ بورڈ تے کاپی ہوئی",
     "tsvCopied": "TSV کلپ بورڈ تے کاپی ہوئی",
     "markdownCopied": "Markdown ٹیبل کلپ بورڈ تے کاپی ہوئی"
-  }
+  },
+  "sortAscending": "چاڑھدے ترتیب نال",
+  "sortDescending": "لہندے ترتیب نال"
 }

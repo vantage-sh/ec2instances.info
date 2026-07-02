@@ -45,5 +45,7 @@
     "csvCopied": "CSV skopiowany do schowka",
     "tsvCopied": "TSV skopiowany do schowka",
     "markdownCopied": "Tabela Markdown skopiowana do schowka"
-  }
+  },
+  "sortAscending": "Sortuj rosnąco",
+  "sortDescending": "Sortuj malejąco"
 }

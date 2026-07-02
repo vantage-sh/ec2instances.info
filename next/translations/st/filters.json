@@ -45,5 +45,7 @@
     "csvCopied": "CSV e kopitsitswe ho clipboard",
     "tsvCopied": "TSV e kopitsitswe ho clipboard",
     "markdownCopied": "Tafole ya Markdown e kopitsitswe ho clipboard"
-  }
+  },
+  "sortAscending": "Beha ka ho nyoloha",
+  "sortDescending": "Beha ka ho theohela"
 }

@@ -45,5 +45,7 @@
     "csvCopied": "Đã sao chép CSV vào clipboard",
     "tsvCopied": "Đã sao chép TSV vào clipboard",
     "markdownCopied": "Đã sao chép bảng Markdown vào clipboard"
-  }
+  },
+  "sortAscending": "Sắp xếp tăng dần",
+  "sortDescending": "Sắp xếp giảm dần"
 }

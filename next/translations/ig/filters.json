@@ -45,5 +45,7 @@
     "csvCopied": "Akopịara CSV n'clipboard",
     "tsvCopied": "Akopịara TSV n'clipboard",
     "markdownCopied": "Akopịara tebụl Markdown n'clipboard"
-  }
+  },
+  "sortAscending": "Hazie n'ụzọ elu",
+  "sortDescending": "Hazie n'ụzọ ala"
 }

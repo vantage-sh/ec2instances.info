@@ -45,5 +45,7 @@
     "csvCopied": "CSV copié dans le presse-papiers",
     "tsvCopied": "TSV copié dans le presse-papiers",
     "markdownCopied": "Tableau Markdown copié dans le presse-papiers"
-  }
+  },
+  "sortAscending": "Tri croissant",
+  "sortDescending": "Tri décroissant"
 }

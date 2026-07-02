@@ -45,5 +45,7 @@
     "csvCopied": "CSV çekme tagtasyna göçürildi",
     "tsvCopied": "TSV çekme tagtasyna göçürildi",
     "markdownCopied": "Markdown tablisasy çekme tagtasyna göçürildi"
-  }
+  },
+  "sortAscending": "Ösüş tertibinde tertiple",
+  "sortDescending": "Azalyş tertibinde tertiple"
 }

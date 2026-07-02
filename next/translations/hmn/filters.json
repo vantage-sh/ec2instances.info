@@ -45,5 +45,7 @@
     "csvCopied": "CSV tau luam rau clipboard",
     "tsvCopied": "TSV tau luam rau clipboard",
     "markdownCopied": "Markdown table tau luam rau clipboard"
-  }
+  },
+  "sortAscending": "Kaw ntawv nce",
+  "sortDescending": "Kaw ntawv nqis"
 }

@@ -45,5 +45,7 @@
     "csvCopied": "CSV କ୍ଲିପ୍‌ବୋର୍ଡ଼କୁ କପି ହୋଇଛି",
     "tsvCopied": "TSV କ୍ଲିପ୍‌ବୋର୍ଡ଼କୁ କପି ହୋଇଛି",
     "markdownCopied": "Markdown ଟେବୁଲ କ୍ଲିପ୍‌ବୋର୍ଡ଼କୁ କପି ହୋଇଛି"
-  }
+  },
+  "sortAscending": "ଆରୋହୀ ଛାଞ୍ଚ",
+  "sortDescending": "ଅବରୋହୀ ଛାଞ୍ଚ"
 }

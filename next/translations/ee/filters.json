@@ -45,5 +45,7 @@
     "csvCopied": "CSV akɔ clipboard dzi",
     "tsvCopied": "TSV akɔ clipboard dzi",
     "markdownCopied": "Markdown table akɔ clipboard dzi"
-  }
+  },
+  "sortAscending": "Trɔ dzi",
+  "sortDescending": "Trɔ va ta"
 }

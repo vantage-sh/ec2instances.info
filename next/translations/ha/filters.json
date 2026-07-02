@@ -45,5 +45,7 @@
     "csvCopied": "An kwafi CSV zuwa clipboard",
     "tsvCopied": "An kwafi TSV zuwa clipboard",
     "markdownCopied": "An kwafi teburin Markdown zuwa clipboard"
-  }
+  },
+  "sortAscending": "Tsara ta hanyar hawa",
+  "sortDescending": "Tsara ta hanyar sauka"
 }

@@ -45,5 +45,7 @@
     "csvCopied": "CSV ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਕੀਤਾ",
     "tsvCopied": "TSV ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਕੀਤਾ",
     "markdownCopied": "Markdown ਟੇਬਲ ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਕੀਤਾ"
-  }
+  },
+  "sortAscending": "ਚੜ੍ਹਦੇ ਕ੍ਰਮ ਵਿੱਚ",
+  "sortDescending": "ਉਤਰਦੇ ਕ੍ਰਮ ਵਿੱਚ"
 }

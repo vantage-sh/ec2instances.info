@@ -45,5 +45,7 @@
     "csvCopied": "تم نسخ CSV للحافظة",
     "tsvCopied": "تم نسخ TSV للحافظة",
     "markdownCopied": "تم نسخ جدول Markdown للحافظة"
-  }
+  },
+  "sortAscending": "رتّب تصاعدي",
+  "sortDescending": "رتّب تنازلي"
 }

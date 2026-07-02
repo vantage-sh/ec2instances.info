@@ -45,5 +45,7 @@
     "csvCopied": "CSV afritað á klippiborð",
     "tsvCopied": "TSV afritað á klippiborð",
     "markdownCopied": "Markdown-tafla afrituð á klippiborð"
-  }
+  },
+  "sortAscending": "Raða hækkandi",
+  "sortDescending": "Raða lækkandi"
 }

@@ -45,5 +45,7 @@
     "csvCopied": "Nakopya an CSV sa clipboard",
     "tsvCopied": "Nakopya an TSV sa clipboard",
     "markdownCopied": "Nakopya an Markdown table sa clipboard"
-  }
+  },
+  "sortAscending": "Uruson paakyat",
+  "sortDescending": "Uruson pababa"
 }

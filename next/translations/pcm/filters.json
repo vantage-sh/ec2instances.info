@@ -45,5 +45,7 @@
     "csvCopied": "CSV don enter clipboard",
     "tsvCopied": "TSV don enter clipboard",
     "markdownCopied": "Markdown table don enter clipboard"
-  }
+  },
+  "sortAscending": "Sort from small go big",
+  "sortDescending": "Sort from big go small"
 }

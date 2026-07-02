@@ -45,5 +45,7 @@
     "csvCopied": "CSV e kopitšitšwe go clipboard",
     "tsvCopied": "TSV e kopitšitšwe go clipboard",
     "markdownCopied": "Tafola ya Markdown e kopitšitšwe go clipboard"
-  }
+  },
+  "sortAscending": "Laetša ka go oketšega",
+  "sortDescending": "Laetša ka go fokotšega"
 }

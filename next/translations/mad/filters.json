@@ -45,5 +45,7 @@
     "csvCopied": "CSV esalin ka clipboard",
     "tsvCopied": "TSV esalin ka clipboard",
     "markdownCopied": "Tabel Markdown esalin ka clipboard"
-  }
+  },
+  "sortAscending": "Urutan naèk",
+  "sortDescending": "Urutan turon"
 }

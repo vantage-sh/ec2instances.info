@@ -45,5 +45,7 @@
     "csvCopied": "I-CSV ikopishiwe kwibhodi",
     "tsvCopied": "I-TSV ikopishiwe kwibhodi",
     "markdownCopied": "Ithebula le-Markdown likopishiwe kwibhodi"
-  }
+  },
+  "sortAscending": "Hlela ngokukhula",
+  "sortDescending": "Hlela ngokwehla"
 }

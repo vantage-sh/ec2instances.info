@@ -45,5 +45,7 @@
     "csvCopied": "CSV کلِپ بورڈ پیٹھ نَقل کَرنہ گیو",
     "tsvCopied": "TSV کلِپ بورڈ پیٹھ نَقل کَرنہ گیو",
     "markdownCopied": "Markdown ٹیبَل کلِپ بورڈ پیٹھ نَقل کَرنہ گیو"
-  }
+  },
+  "sortAscending": "اُوپَر طَرَف تَرتیب",
+  "sortDescending": "تَلہٕ طَرَف تَرتیب"
 }

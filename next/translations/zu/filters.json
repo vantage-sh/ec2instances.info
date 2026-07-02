@@ -45,5 +45,7 @@
     "csvCopied": "CSV ikopishwe ku-clipboard",
     "tsvCopied": "TSV ikopishwe ku-clipboard",
     "markdownCopied": "Ithebula le-Markdown likopishwe ku-clipboard"
-  }
+  },
+  "sortAscending": "Hlela ngokwenyuka",
+  "sortDescending": "Hlela ngokwehla"
 }

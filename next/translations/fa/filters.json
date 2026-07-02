@@ -45,5 +45,7 @@
     "csvCopied": "CSV در کلیپ‌بورد کپی شد",
     "tsvCopied": "TSV در کلیپ‌بورد کپی شد",
     "markdownCopied": "جدول Markdown در کلیپ‌بورد کپی شد"
-  }
+  },
+  "sortAscending": "مرتب‌سازی صعودی",
+  "sortDescending": "مرتب‌سازی نزولی"
 }

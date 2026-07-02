@@ -45,5 +45,7 @@
     "csvCopied": "CSV imenakiliwa kwenye ubao wa kunakili",
     "tsvCopied": "TSV imenakiliwa kwenye ubao wa kunakili",
     "markdownCopied": "Jedwali la Markdown lemenakiliwa kwenye ubao wa kunakili"
-  }
+  },
+  "sortAscending": "Kupanga kupanduka",
+  "sortDescending": "Kupanga kushuka"
 }

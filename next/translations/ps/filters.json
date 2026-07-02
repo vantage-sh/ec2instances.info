@@ -45,5 +45,7 @@
     "csvCopied": "CSV کلپبورډ ته کاپي شو",
     "tsvCopied": "TSV کلپبورډ ته کاپي شو",
     "markdownCopied": "Markdown جدول کلپبورډ ته کاپي شو"
-  }
+  },
+  "sortAscending": "لوړیدونکی ترتیب",
+  "sortDescending": "ټیټیدونکی ترتیب"
 }

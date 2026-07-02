@@ -45,5 +45,7 @@
     "csvCopied": "CSV waxaa loo koobiyeeyay clipboard-ka",
     "tsvCopied": "TSV waxaa loo koobiyeeyay clipboard-ka",
     "markdownCopied": "Jadwalka Markdown waxaa loo koobiyeeyay clipboard-ka"
-  }
+  },
+  "sortAscending": "Kala-sooc kor u kacaya",
+  "sortDescending": "Kala-sooc hoos u dhaca"
 }

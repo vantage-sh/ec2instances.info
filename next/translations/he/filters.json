@@ -45,5 +45,7 @@
     "csvCopied": "CSV הועתק ללוח",
     "tsvCopied": "TSV הועתק ללוח",
     "markdownCopied": "טבלת Markdown הועתקה ללוח"
-  }
+  },
+  "sortAscending": "מיין בסדר עולה",
+  "sortDescending": "מיין בסדר יורד"
 }

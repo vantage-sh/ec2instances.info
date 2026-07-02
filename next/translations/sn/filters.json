@@ -45,5 +45,7 @@
     "csvCopied": "CSV yakakopiyiwa kuclipboard",
     "tsvCopied": "TSV yakakopiyiwa kuclipboard",
     "markdownCopied": "Tafura yeMarkdown yakakopiyiwa kuclipboard"
-  }
+  },
+  "sortAscending": "Ronga uchikwira",
+  "sortDescending": "Ronga uchidika"
 }

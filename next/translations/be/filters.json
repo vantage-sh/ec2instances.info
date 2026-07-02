@@ -45,5 +45,7 @@
     "csvCopied": "CSV скапіравана ў буфер абмену",
     "tsvCopied": "TSV скапіравана ў буфер абмену",
     "markdownCopied": "Табліца Markdown скапіравана ў буфер абмену"
-  }
+  },
+  "sortAscending": "Сартаваць па ўзрастанні",
+  "sortDescending": "Сартаваць па змяншэнні"
 }

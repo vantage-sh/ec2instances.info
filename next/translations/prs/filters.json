@@ -45,5 +45,7 @@
     "csvCopied": "CSV کپی شد",
     "tsvCopied": "TSV کپی شد",
     "markdownCopied": "جدول Markdown کپی شد"
-  }
+  },
+  "sortAscending": "مرتب‌سازی صعودی",
+  "sortDescending": "مرتب‌سازی نزولی"
 }

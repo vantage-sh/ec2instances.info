@@ -45,5 +45,7 @@
     "csvCopied": "CSV Буфером иIэщ",
     "tsvCopied": "TSV Буфером иIэщ",
     "markdownCopied": "Markdown Таблицэ Буфером иIэщ"
-  }
+  },
+  "sortAscending": "Зэрыгъэувыкlэ дэкlуейуэ",
+  "sortDescending": "Зэрыгъэувыкlэ хэхуейуэ"
 }

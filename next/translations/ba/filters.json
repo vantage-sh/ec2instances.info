@@ -45,5 +45,7 @@
     "csvCopied": "CSV алмаш-тотошҡа күсерелде",
     "tsvCopied": "TSV алмаш-тотошҡа күсерелде",
     "markdownCopied": "Markdown таблицаһы алмаш-тотошҡа күсерелде"
-  }
+  },
+  "sortAscending": "Үҫеш тәртибендә сортлау",
+  "sortDescending": "Кимеш тәртибендә сортлау"
 }

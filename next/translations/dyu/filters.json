@@ -45,5 +45,7 @@
     "csvCopied": "CSV dajɛlen don clipboard kɔnɔ",
     "tsvCopied": "TSV dajɛlen don clipboard kɔnɔ",
     "markdownCopied": "Markdown tabali dajɛlen don clipboard kɔnɔ"
-  }
+  },
+  "sortAscending": "Ɲɛ ladɛsɛ",
+  "sortDescending": "Kɔ ladɛsɛ"
 }

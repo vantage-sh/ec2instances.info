@@ -45,5 +45,7 @@
     "csvCopied": "CSV копиран у привремену меморију",
     "tsvCopied": "TSV копиран у привремену меморију",
     "markdownCopied": "Markdown табела копирана у привремену меморију"
-  }
+  },
+  "sortAscending": "Сортирај растуће",
+  "sortDescending": "Сортирај опадајуће"
 }

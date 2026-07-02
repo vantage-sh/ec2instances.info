@@ -45,5 +45,7 @@
     "csvCopied": "CSV cóipeáilte go dtí an gearrthaisce",
     "tsvCopied": "TSV cóipeáilte go dtí an gearrthaisce",
     "markdownCopied": "Tábla Markdown cóipeáilte go dtí an gearrthaisce"
-  }
+  },
+  "sortAscending": "Sórtáil in ord ardaitheach",
+  "sortDescending": "Sórtáil in ord íslitheach"
 }

@@ -45,5 +45,7 @@
     "csvCopied": "CSV li clipboard kopî bû",
     "tsvCopied": "TSV li clipboard kopî bû",
     "markdownCopied": "Tabloya Markdown li clipboard kopî bû"
-  }
+  },
+  "sortAscending": "Rêzkirina hilkişanê",
+  "sortDescending": "Rêzkirina daketinê"
 }

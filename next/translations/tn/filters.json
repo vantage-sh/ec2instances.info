@@ -45,5 +45,7 @@
     "csvCopied": "CSV e kopilwe mo clipboard",
     "tsvCopied": "TSV e kopilwe mo clipboard",
     "markdownCopied": "Tafole ya Markdown e kopilwe mo clipboard"
-  }
+  },
+  "sortAscending": "Bedisa go ya godimo",
+  "sortDescending": "Bedisa go ya tlase"
 }

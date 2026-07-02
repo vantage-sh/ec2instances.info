@@ -45,5 +45,7 @@
     "csvCopied": "CSV Буфердалъ КопирулаI",
     "tsvCopied": "TSV Буфердалъ КопирулаI",
     "markdownCopied": "Markdown Таблица Буфердалъ КопирулаI"
-  }
+  },
+  "sortAscending": "ЛъикIабго сортировать гьабизе",
+  "sortDescending": "ТIубаго сортировать гьабизе"
 }

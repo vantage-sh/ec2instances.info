@@ -45,5 +45,7 @@
     "csvCopied": "CSV kopeeritud lõikelauale",
     "tsvCopied": "TSV kopeeritud lõikelauale",
     "markdownCopied": "Markdown tabel kopeeritud lõikelauale"
-  }
+  },
+  "sortAscending": "Sorteeri kasvavalt",
+  "sortDescending": "Sorteeri kahanevalt"
 }

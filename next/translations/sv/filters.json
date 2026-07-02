@@ -45,5 +45,7 @@
     "csvCopied": "CSV kopierad till urklipp",
     "tsvCopied": "TSV kopierad till urklipp",
     "markdownCopied": "Markdown-tabell kopierad till urklipp"
-  }
+  },
+  "sortAscending": "Sortera stigande",
+  "sortDescending": "Sortera fallande"
 }

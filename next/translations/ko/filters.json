@@ -45,5 +45,7 @@
     "csvCopied": "CSV가 클립보드에 복사되었습니다",
     "tsvCopied": "TSV가 클립보드에 복사되었습니다",
     "markdownCopied": "Markdown 표가 클립보드에 복사되었습니다"
-  }
+  },
+  "sortAscending": "오름차순 정렬",
+  "sortDescending": "내림차순 정렬"
 }

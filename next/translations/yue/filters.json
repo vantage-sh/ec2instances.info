@@ -45,5 +45,7 @@
     "csvCopied": "CSV 已複製到剪貼板",
     "tsvCopied": "TSV 已複製到剪貼板",
     "markdownCopied": "Markdown 表格已複製到剪貼板"
-  }
+  },
+  "sortAscending": "升序排列",
+  "sortDescending": "降序排列"
 }

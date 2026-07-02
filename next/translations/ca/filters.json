@@ -45,5 +45,7 @@
     "csvCopied": "CSV copiat al porta-retalls",
     "tsvCopied": "TSV copiat al porta-retalls",
     "markdownCopied": "Taula Markdown copiada al porta-retalls"
-  }
+  },
+  "sortAscending": "Ordenar ascendent",
+  "sortDescending": "Ordenar descendent"
 }

@@ -45,5 +45,7 @@
     "csvCopied": "Nakopya an CSV ha clipboard",
     "tsvCopied": "Nakopya an TSV ha clipboard",
     "markdownCopied": "Nakopya an Markdown table ha clipboard"
-  }
+  },
+  "sortAscending": "Urosa pataas",
+  "sortDescending": "Urosa pababà"
 }

@@ -45,5 +45,7 @@
     "csvCopied": "CSV nodikaina tao amin'ny clipboard",
     "tsvCopied": "TSV nodikaina tao amin'ny clipboard",
     "markdownCopied": "Latabatra Markdown nodikaina tao amin'ny clipboard"
-  }
+  },
+  "sortAscending": "Mandamina miakatra",
+  "sortDescending": "Mandamina midina"
 }

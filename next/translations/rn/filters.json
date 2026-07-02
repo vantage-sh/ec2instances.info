@@ -45,5 +45,7 @@
     "csvCopied": "CSV yakopejwe mu kibaho",
     "tsvCopied": "TSV yakopejwe mu kibaho",
     "markdownCopied": "Imbonerahamwe ya Markdown yakopejwe mu kibaho"
-  }
+  },
+  "sortAscending": "Gutondeka gukomeza",
+  "sortDescending": "Gutondeka gusubira"
 }

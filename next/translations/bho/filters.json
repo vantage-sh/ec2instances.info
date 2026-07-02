@@ -45,5 +45,7 @@
     "csvCopied": "CSV क्लिपबोर्ड पर कॉपी भइल",
     "tsvCopied": "TSV क्लिपबोर्ड पर कॉपी भइल",
     "markdownCopied": "Markdown तालिका क्लिपबोर्ड पर कॉपी भइल"
-  }
+  },
+  "sortAscending": "चढ़त क्रम में लगाईं",
+  "sortDescending": "उतरत क्रम में लगाईं"
 }

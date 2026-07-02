@@ -45,5 +45,7 @@
     "csvCopied": "CSV скопирован в буфер обмена",
     "tsvCopied": "TSV скопирован в буфер обмена",
     "markdownCopied": "Таблица Markdown скопирована в буфер обмена"
-  }
+  },
+  "sortAscending": "Сортировка по возрастанию",
+  "sortDescending": "Сортировка по убыванию"
 }

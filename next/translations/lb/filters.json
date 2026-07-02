@@ -45,5 +45,7 @@
     "csvCopied": "CSV an d'Tëschespäicher kopéiert",
     "tsvCopied": "TSV an d'Tëschespäicher kopéiert",
     "markdownCopied": "Markdown-Tabell an d'Tëschespäicher kopéiert"
-  }
+  },
+  "sortAscending": "Opsteigend sortéieren",
+  "sortDescending": "Ofsteigend sortéieren"
 }

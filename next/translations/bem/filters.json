@@ -45,5 +45,7 @@
     "csvCopied": "CSV yakopishiwa ku clipboard",
     "tsvCopied": "TSV yakopishiwa ku clipboard",
     "markdownCopied": "Icitabo ca Markdown chakopishiwa ku clipboard"
-  }
+  },
+  "sortAscending": "Setula ukwilako",
+  "sortDescending": "Setula ukushilako"
 }

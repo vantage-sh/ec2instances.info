@@ -45,5 +45,7 @@
     "csvCopied": "CSV ti daakọ sí clipboard",
     "tsvCopied": "TSV ti daakọ sí clipboard",
     "markdownCopied": "Tábìlì Markdown ti daakọ sí clipboard"
-  }
+  },
+  "sortAscending": "Ṣètò sókè",
+  "sortDescending": "Ṣètò sísàlẹ̀"
 }

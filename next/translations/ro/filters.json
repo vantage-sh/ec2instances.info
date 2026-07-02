@@ -45,5 +45,7 @@
     "csvCopied": "CSV copiat în clipboard",
     "tsvCopied": "TSV copiat în clipboard",
     "markdownCopied": "Tabelul Markdown copiat în clipboard"
-  }
+  },
+  "sortAscending": "Sortare crescătoare",
+  "sortDescending": "Sortare descrescătoare"
 }

@@ -45,5 +45,7 @@
     "csvCopied": "CSV cukkiraama e nder clipboard",
     "tsvCopied": "TSV cukkiraama e nder clipboard",
     "markdownCopied": "Tebol Markdown cukkiraama e nder clipboard"
-  }
+  },
+  "sortAscending": "Naatnu dow",
+  "sortDescending": "Naatnu les"
 }

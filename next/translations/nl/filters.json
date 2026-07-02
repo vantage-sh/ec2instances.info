@@ -45,5 +45,7 @@
     "csvCopied": "CSV gekopieerd naar klembord",
     "tsvCopied": "TSV gekopieerd naar klembord",
     "markdownCopied": "Markdowntabel gekopieerd naar klembord"
-  }
+  },
+  "sortAscending": "Oplopend sorteren",
+  "sortDescending": "Aflopend sorteren"
 }

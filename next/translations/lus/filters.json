@@ -45,5 +45,7 @@
     "csvCopied": "CSV clipboard-ah copy tawh",
     "tsvCopied": "TSV clipboard-ah copy tawh",
     "markdownCopied": "Markdown table clipboard-ah copy tawh"
-  }
+  },
+  "sortAscending": "Chungte atangin sap",
+  "sortDescending": "Hnuaite atangin sap"
 }

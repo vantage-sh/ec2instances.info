@@ -45,5 +45,7 @@
     "csvCopied": "CSV imenakiliwa kwenye clipboard",
     "tsvCopied": "TSV imenakiliwa kwenye clipboard",
     "markdownCopied": "Jedwali la Markdown limesakiliwa kwenye clipboard"
-  }
+  },
+  "sortAscending": "Panga kwa kupanda",
+  "sortDescending": "Panga kwa kushuka"
 }

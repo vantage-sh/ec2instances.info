@@ -45,5 +45,7 @@
     "csvCopied": "CSV kopiran v odložišče",
     "tsvCopied": "TSV kopiran v odložišče",
     "markdownCopied": "Tabela Markdown kopirana v odložišče"
-  }
+  },
+  "sortAscending": "Razvrsti naraščajoče",
+  "sortDescending": "Razvrsti padajoče"
 }

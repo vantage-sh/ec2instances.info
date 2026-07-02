@@ -45,5 +45,7 @@
     "csvCopied": "CSV yakopiyedwa ku clipboard",
     "tsvCopied": "TSV yakopiyedwa ku clipboard",
     "markdownCopied": "Tebulo la Markdown lakopiyedwa ku clipboard"
-  }
+  },
+  "sortAscending": "Sewa mokwera",
+  "sortDescending": "Sewa motsika"
 }

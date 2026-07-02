@@ -45,5 +45,7 @@
     "csvCopied": "CSV-ն պ.",
     "tsvCopied": "TSV-ն պ.",
     "markdownCopied": "Markdown-ն պ."
-  }
+  },
+  "sortAscending": "Դասավորել աճման կարգով",
+  "sortDescending": "Դասավորել նվազման կարգով"
 }

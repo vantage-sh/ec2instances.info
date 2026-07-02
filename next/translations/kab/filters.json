@@ -45,5 +45,7 @@
     "csvCopied": "CSV yettwaɣra",
     "tsvCopied": "TSV yettwaɣra",
     "markdownCopied": "Tibḍawt n Markdown tettwaɣra"
-  }
+  },
+  "sortAscending": "Fren s ukeffer",
+  "sortDescending": "Fren s wanect"
 }

@@ -45,5 +45,7 @@
     "csvCopied": "CSV nokopēts starpliktuvē",
     "tsvCopied": "TSV nokopēts starpliktuvē",
     "markdownCopied": "Markdown tabula nokopēta starpliktuvē"
-  }
+  },
+  "sortAscending": "Kārtot augošā secībā",
+  "sortDescending": "Kārtot dilstošā secībā"
 }

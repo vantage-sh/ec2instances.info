@@ -45,5 +45,7 @@
     "csvCopied": "CSV u kopjua në clipboard",
     "tsvCopied": "TSV u kopjua në clipboard",
     "markdownCopied": "Tabela Markdown u kopjua në clipboard"
-  }
+  },
+  "sortAscending": "Rendit në rritje",
+  "sortDescending": "Rendit në zbritje"
 }

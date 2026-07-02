@@ -45,5 +45,7 @@
     "csvCopied": "CSV adi sɛn wɔ clipboard mu",
     "tsvCopied": "TSV adi sɛn wɔ clipboard mu",
     "markdownCopied": "Markdown table adi sɛn wɔ clipboard mu"
-  }
+  },
+  "sortAscending": "Sisi abɔtere so",
+  "sortDescending": "Sisi ase"
 }

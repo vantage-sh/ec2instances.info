@@ -45,5 +45,7 @@
     "csvCopied": "CSV буферге көчүрүлдү",
     "tsvCopied": "TSV буферге көчүрүлдү",
     "markdownCopied": "Markdown таблицасы буферге көчүрүлдү"
-  }
+  },
+  "sortAscending": "Өсүү боюнча иреттөө",
+  "sortDescending": "Кемүү боюнча иреттөө"
 }

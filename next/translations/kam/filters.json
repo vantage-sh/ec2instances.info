@@ -45,5 +45,7 @@
     "csvCopied": "CSV ĩmenakiliwa kwa clipboard",
     "tsvCopied": "TSV ĩmenakiliwa kwa clipboard",
     "markdownCopied": "Jedwali rĩa Markdown rĩmenakiliwa kwa clipboard"
-  }
+  },
+  "sortAscending": "Pangûlûa ûkûiûkya",
+  "sortDescending": "Pangûlûa ûkûisûkûya"
 }

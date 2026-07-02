@@ -45,5 +45,7 @@
     "csvCopied": "CSV ekopiyami na presse-papiers",
     "tsvCopied": "TSV ekopiyami na presse-papiers",
     "markdownCopied": "Taolo Markdown ekopiyami na presse-papiers"
-  }
+  },
+  "sortAscending": "Bobongisi ya kouta",
+  "sortDescending": "Bobongisi ya kokita"
 }

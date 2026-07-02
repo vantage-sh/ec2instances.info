@@ -45,5 +45,7 @@
     "csvCopied": "CSV क्लिपबोर्डमा प्रतिलिपि गरियो",
     "tsvCopied": "TSV क्लिपबोर्डमा प्रतिलिपि गरियो",
     "markdownCopied": "Markdown तालिका क्लिपबोर्डमा प्रतिलिपि गरियो"
-  }
+  },
+  "sortAscending": "आरोही क्रमबद्ध",
+  "sortDescending": "अवरोही क्रमबद्ध"
 }

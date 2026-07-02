@@ -45,5 +45,7 @@
     "csvCopied": "CSV ক্লিপবোর্ডে কপি হইছে",
     "tsvCopied": "TSV ক্লিপবোর্ডে কপি হইছে",
     "markdownCopied": "Markdown টেবিল ক্লিপবোর্ডে কপি হইছে"
-  }
+  },
+  "sortAscending": "ঊর্ধ্বক্রমে সাজাও",
+  "sortDescending": "অধঃক্রমে সাজাও"
 }

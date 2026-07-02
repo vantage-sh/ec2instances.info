@@ -45,5 +45,7 @@
     "csvCopied": "CSV буферт хуулагдлаа",
     "tsvCopied": "TSV буферт хуулагдлаа",
     "markdownCopied": "Markdown хүснэгт буферт хуулагдлаа"
-  }
+  },
+  "sortAscending": "Өсөх дарааллаар эрэмбэлэх",
+  "sortDescending": "Буурах дарааллаар эрэмбэлэх"
 }

@@ -45,5 +45,7 @@
     "csvCopied": "CSV wedi'i gopïo i'r clipfwrdd",
     "tsvCopied": "TSV wedi'i gopïo i'r clipfwrdd",
     "markdownCopied": "Tabl Markdown wedi'i gopïo i'r clipfwrdd"
-  }
+  },
+  "sortAscending": "Didoli'n esgynnol",
+  "sortDescending": "Didoli'n ddisgynnol"
 }

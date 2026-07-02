@@ -45,5 +45,7 @@
     "csvCopied": "CSV क्लिपबोर्डमे कॉपी भेल",
     "tsvCopied": "TSV क्लिपबोर्डमे कॉपी भेल",
     "markdownCopied": "Markdown टेबल क्लिपबोर्डमे कॉपी भेल"
-  }
+  },
+  "sortAscending": "आरोही क्रममे सजाउ",
+  "sortDescending": "अवरोही क्रममे सजाउ"
 }

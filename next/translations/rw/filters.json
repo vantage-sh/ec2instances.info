@@ -45,5 +45,7 @@
     "csvCopied": "CSV yakopiwemo mu kibozo cy'amafoto",
     "tsvCopied": "TSV yakopiwemo mu kibozo cy'amafoto",
     "markdownCopied": "Imboneza ya Markdown yakopiwemo mu kibozo cy'amafoto"
-  }
+  },
+  "sortAscending": "Gutondeka gukomeza",
+  "sortDescending": "Gutondeka gusubira"
 }

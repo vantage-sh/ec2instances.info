@@ -45,5 +45,7 @@
     "csvCopied": "CSV fuzse daengz clipboard",
     "tsvCopied": "TSV fuzse daengz clipboard",
     "markdownCopied": "Markdown table fuzse daengz clipboard"
-  }
+  },
+  "sortAscending": "Baijdez cieng gwnz",
+  "sortDescending": "Baijdez cieng laj"
 }

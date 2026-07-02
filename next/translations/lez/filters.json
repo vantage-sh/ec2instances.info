@@ -45,5 +45,7 @@
     "csvCopied": "CSV Буфердик Хкенва",
     "tsvCopied": "TSV Буфердик Хкенва",
     "markdownCopied": "Markdown Таблица Буфердик Хкенва"
-  }
+  },
+  "sortAscending": "Элкъведай Тартиб",
+  "sortDescending": "Агъузвай Тартиб"
 }

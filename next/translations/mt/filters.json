@@ -45,5 +45,7 @@
     "csvCopied": "CSV ikkopjat fil-clipboard",
     "tsvCopied": "TSV ikkopjat fil-clipboard",
     "markdownCopied": "Tabella Markdown ikkopjata fil-clipboard"
-  }
+  },
+  "sortAscending": "Issortja 'l fuq",
+  "sortDescending": "Issortja 'l isfel"
 }

@@ -45,5 +45,7 @@
     "csvCopied": "CSV enakoppolwa mu clipboard",
     "tsvCopied": "TSV enakoppolwa mu clipboard",
     "markdownCopied": "Entebe ya Markdown enakoppolwa mu clipboard"
-  }
+  },
+  "sortAscending": "Teekawo nga kikulirawo",
+  "sortDescending": "Teekawo nga kikenyerawo"
 }

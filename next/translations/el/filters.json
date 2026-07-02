@@ -45,5 +45,7 @@
     "csvCopied": "Το CSV αντιγράφηκε στο πρόχειρο",
     "tsvCopied": "Το TSV αντιγράφηκε στο πρόχειρο",
     "markdownCopied": "Ο πίνακας Markdown αντιγράφηκε στο πρόχειρο"
-  }
+  },
+  "sortAscending": "Ταξινόμηση αύξουσα",
+  "sortDescending": "Ταξινόμηση φθίνουσα"
 }

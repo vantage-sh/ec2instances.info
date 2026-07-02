@@ -45,5 +45,7 @@
     "csvCopied": "CSV ক্লিপবোর্ডে কপি হয়েছে",
     "tsvCopied": "TSV ক্লিপবোর্ডে কপি হয়েছে",
     "markdownCopied": "Markdown টেবিল ক্লিপবোর্ডে কপি হয়েছে"
-  }
+  },
+  "sortAscending": "ঊর্ধ্বক্রমে সাজান",
+  "sortDescending": "অবরোহী ক্রমে সাজান"
 }

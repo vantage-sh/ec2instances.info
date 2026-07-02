@@ -45,5 +45,7 @@
     "csvCopied": "CSV oselor e clipboard",
     "tsvCopied": "TSV oselor e clipboard",
     "markdownCopied": "Mesa mar Markdown oselor e clipboard"
-  }
+  },
+  "sortAscending": "Lero malo",
+  "sortDescending": "Lero piny"
 }

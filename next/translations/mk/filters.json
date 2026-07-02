@@ -45,5 +45,7 @@
     "csvCopied": "CSV копиран во клипборд",
     "tsvCopied": "TSV копиран во клипборд",
     "markdownCopied": "Markdown табела копирана во клипборд"
-  }
+  },
+  "sortAscending": "Сортирај растечки",
+  "sortDescending": "Сортирај опаѓачки"
 }

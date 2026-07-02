@@ -45,5 +45,7 @@
     "csvCopied": "CSV disalin ke papan keratan",
     "tsvCopied": "TSV disalin ke papan keratan",
     "markdownCopied": "Jadual Markdown disalin ke papan keratan"
-  }
+  },
+  "sortAscending": "Isih menaik",
+  "sortDescending": "Isih menurun"
 }

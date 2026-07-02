@@ -45,5 +45,7 @@
     "csvCopied": "CSV clipboard-e copy hóeche",
     "tsvCopied": "TSV clipboard-e copy hóeche",
     "markdownCopied": "Markdown table clipboard-e copy hóeche"
-  }
+  },
+  "sortAscending": "Uçe târtib",
+  "sortDescending": "Niche târtib"
 }

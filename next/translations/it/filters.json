@@ -45,5 +45,7 @@
     "csvCopied": "CSV copiato negli appunti",
     "tsvCopied": "TSV copiato negli appunti",
     "markdownCopied": "Tabella Markdown copiata negli appunti"
-  }
+  },
+  "sortAscending": "Ordina in modo crescente",
+  "sortDescending": "Ordina in modo decrescente"
 }

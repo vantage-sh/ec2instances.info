@@ -45,5 +45,7 @@
     "csvCopied": "CSV tomama na clipboard",
     "tsvCopied": "TSV tomama na clipboard",
     "markdownCopied": "Tafula ya Markdown tomama na clipboard"
-  }
+  },
+  "sortAscending": "Telama kukwela",
+  "sortDescending": "Telama kukidika"
 }

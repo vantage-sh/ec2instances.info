@@ -45,5 +45,7 @@
     "csvCopied": "CSV kinopya king clipboard",
     "tsvCopied": "TSV kinopya king clipboard",
     "markdownCopied": "Talahanayan ning Markdown kinopya king clipboard"
-  }
+  },
+  "sortAscending": "Ayusin paibabaw",
+  "sortDescending": "Ayusin pababa"
 }

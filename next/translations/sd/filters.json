@@ -45,5 +45,7 @@
     "csvCopied": "CSV ڪلپ بورڊ تي نقل ٿي ويو",
     "tsvCopied": "TSV ڪلپ بورڊ تي نقل ٿي ويو",
     "markdownCopied": "Markdown ٽيبل ڪلپ بورڊ تي نقل ٿي ويو"
-  }
+  },
+  "sortAscending": "چاڙهندو ترتيب",
+  "sortDescending": "لهندو ترتيب"
 }

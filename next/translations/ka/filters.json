@@ -45,5 +45,7 @@
     "csvCopied": "CSV კ.",
     "tsvCopied": "TSV კ.",
     "markdownCopied": "Markdown კ."
-  }
+  },
+  "sortAscending": "დალაგება ზრდადობით",
+  "sortDescending": "დალაგება კლებადობით"
 }

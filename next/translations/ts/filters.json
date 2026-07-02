@@ -45,5 +45,7 @@
     "csvCopied": "CSV yi tshiniwile eka clipboard",
     "tsvCopied": "TSV yi tshiniwile eka clipboard",
     "markdownCopied": "Tafula ra Markdown ri tshiniwile eka clipboard"
-  }
+  },
+  "sortAscending": "Xedza ku tlakuka",
+  "sortDescending": "Xedza ku tlela"
 }

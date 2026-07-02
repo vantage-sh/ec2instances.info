@@ -45,5 +45,7 @@
     "csvCopied": "CSV ilikopishwa ku clipboard",
     "tsvCopied": "TSV ilikopishwa ku clipboard",
     "markdownCopied": "Jedwali ya Markdown ilikopishwa ku clipboard"
-  }
+  },
+  "sortAscending": "Panga okuyela",
+  "sortDescending": "Panga okulira"
 }

@@ -45,5 +45,7 @@
     "csvCopied": "CSV yo khophiwa",
     "tsvCopied": "TSV yo khophiwa",
     "markdownCopied": "Tafula ya Markdown yo khophiwa"
-  }
+  },
+  "sortAscending": "Sisidzani phanḓa",
+  "sortDescending": "Sisidzani tshidzulo"
 }

@@ -45,5 +45,7 @@
     "csvCopied": "CSV ወደ clipboard ተቀድቷል",
     "tsvCopied": "TSV ወደ clipboard ተቀድቷል",
     "markdownCopied": "Markdown ሠንጠረዥ ወደ clipboard ተቀድቷል"
-  }
+  },
+  "sortAscending": "በሥርዓት ከታች ወደ ላይ",
+  "sortDescending": "በሥርዓት ከላይ ወደ ታች"
 }

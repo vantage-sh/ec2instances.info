@@ -45,5 +45,7 @@
     "csvCopied": "CSV másolva a vágólapra",
     "tsvCopied": "TSV másolva a vágólapra",
     "markdownCopied": "Markdown táblázat másolva a vágólapra"
-  }
+  },
+  "sortAscending": "Növekvő sorrendbe rendezés",
+  "sortDescending": "Csökkenő sorrendbe rendezés"
 }

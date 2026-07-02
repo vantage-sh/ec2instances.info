@@ -45,5 +45,7 @@
     "csvCopied": "CSV clipboard la jiginnen ye",
     "tsvCopied": "TSV clipboard la jiginnen ye",
     "markdownCopied": "Markdown tablo clipboard la jiginnen ye"
-  }
+  },
+  "sortAscending": "Diɲɛ kan kɔrɔfɛ",
+  "sortDescending": "Diɲɛ kan kɔfɛ"
 }

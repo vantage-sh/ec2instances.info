@@ -45,5 +45,7 @@
     "csvCopied": "CSV la copy sha clipboard",
     "tsvCopied": "TSV la copy sha clipboard",
     "markdownCopied": "Markdown table la copy sha clipboard"
-  }
+  },
+  "sortAscending": "Pynkam ha nongïap",
+  "sortDescending": "Pynkam ha nongbam"
 }

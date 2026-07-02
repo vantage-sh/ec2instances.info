@@ -45,5 +45,7 @@
     "csvCopied": "CSV kasalin ring clipboard",
     "tsvCopied": "TSV kasalin ring clipboard",
     "markdownCopied": "Tabel Markdown kasalin ring clipboard"
-  }
+  },
+  "sortAscending": "Urut munggah",
+  "sortDescending": "Urut tedun"
 }

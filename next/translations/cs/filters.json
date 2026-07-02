@@ -45,5 +45,7 @@
     "csvCopied": "CSV zkopírováno do schránky",
     "tsvCopied": "TSV zkopírováno do schránky",
     "markdownCopied": "Tabulka Markdown zkopírována do schránky"
-  }
+  },
+  "sortAscending": "Seřadit vzestupně",
+  "sortDescending": "Seřadit sestupně"
 }

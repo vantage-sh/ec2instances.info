@@ -45,5 +45,7 @@
     "csvCopied": "CSV ikhopishelwe ku-clipboard",
     "tsvCopied": "TSV ikhopishelwe ku-clipboard",
     "markdownCopied": "Tafula ye-Markdown ikhopishelwe ku-clipboard"
-  }
+  },
+  "sortAscending": "Hlelela ngekuphakama",
+  "sortDescending": "Hlelela ngekwehlela"
 }

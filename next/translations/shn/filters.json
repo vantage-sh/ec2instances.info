@@ -45,5 +45,7 @@
     "csvCopied": "CSV ၶွပ်ႊပီႊယဝ်ႉ",
     "tsvCopied": "TSV ၶွပ်ႊပီႊယဝ်ႉ",
     "markdownCopied": "Markdown ၶွပ်ႊပီႊယဝ်ႉ"
-  }
+  },
+  "sortAscending": "ၵဵဝ်ႇၵၢႆႇ မိူဝ်းလိုၼ်း",
+  "sortDescending": "ၵဵဝ်ႇၵၢႆႇ မိူဝ်ႈဢွၼ်ႇ"
 }

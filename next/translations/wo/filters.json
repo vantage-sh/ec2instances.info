@@ -45,5 +45,7 @@
     "csvCopied": "CSV kopié ci presse-papiers",
     "tsvCopied": "TSV kopié ci presse-papiers",
     "markdownCopied": "Taablo Markdown kopié ci presse-papiers"
-  }
+  },
+  "sortAscending": "Organiser ci kanam",
+  "sortDescending": "Organiser ci suuf"
 }

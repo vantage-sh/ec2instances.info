@@ -45,5 +45,7 @@
     "csvCopied": "CSV arbelera kopiatu da",
     "tsvCopied": "TSV arbelera kopiatu da",
     "markdownCopied": "Markdown taula arbelera kopiatu da"
-  }
+  },
+  "sortAscending": "Ordenatu goranzko",
+  "sortDescending": "Ordenatu beheranzko"
 }

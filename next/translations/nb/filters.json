@@ -45,5 +45,7 @@
     "csvCopied": "CSV kopiert til utklippstavle",
     "tsvCopied": "TSV kopiert til utklippstavle",
     "markdownCopied": "Markdown-tabell kopiert til utklippstavle"
-  }
+  },
+  "sortAscending": "Sorter stigende",
+  "sortDescending": "Sorter synkende"
 }

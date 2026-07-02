@@ -45,5 +45,7 @@
     "csvCopied": "CSV risalin lao ri clipboard",
     "tsvCopied": "TSV risalin lao ri clipboard",
     "markdownCopied": "Tabel Markdown risalin lao ri clipboard"
-  }
+  },
+  "sortAscending": "Urutko' maddettori",
+  "sortDescending": "Urutko' ma'bulo"
 }

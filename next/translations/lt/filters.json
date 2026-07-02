@@ -45,5 +45,7 @@
     "csvCopied": "CSV nukopijuota į iškarpinę",
     "tsvCopied": "TSV nukopijuota į iškarpinę",
     "markdownCopied": "Markdown lentelė nukopijuota į iškarpinę"
-  }
+  },
+  "sortAscending": "Rikiuoti didėjančiai",
+  "sortDescending": "Rikiuoti mažėjančiai"
 }

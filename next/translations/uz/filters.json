@@ -45,5 +45,7 @@
     "csvCopied": "CSV buferga nusxalandi",
     "tsvCopied": "TSV buferga nusxalandi",
     "markdownCopied": "Markdown jadval buferga nusxalandi"
-  }
+  },
+  "sortAscending": "Oʻsish tartibida saralash",
+  "sortDescending": "Kamayish tartibida saralash"
 }

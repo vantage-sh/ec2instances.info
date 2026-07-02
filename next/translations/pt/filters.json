@@ -45,5 +45,7 @@
     "csvCopied": "CSV copiado para a área de transferência",
     "tsvCopied": "TSV copiado para a área de transferência",
     "markdownCopied": "Tabela Markdown copiada para a área de transferência"
-  }
+  },
+  "sortAscending": "Ordenar crescente",
+  "sortDescending": "Ordenar decrescente"
 }

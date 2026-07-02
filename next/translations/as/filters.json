@@ -45,5 +45,7 @@
     "csvCopied": "CSV ক্লিপবোৰ্ডত কপি হৈছে",
     "tsvCopied": "TSV ক্লিপবোৰ্ডত কপি হৈছে",
     "markdownCopied": "Markdown তালিকা ক্লিপবোৰ্ডত কপি হৈছে"
-  }
+  },
+  "sortAscending": "আৰোহী ক্ৰমত সজাওক",
+  "sortDescending": "অৱৰোহী ক্ৰমত সজাওক"
 }

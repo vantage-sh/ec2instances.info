@@ -45,5 +45,7 @@
     "csvCopied": "CSV ຄ. ແລ້ວ",
     "tsvCopied": "TSV ຄ. ແລ້ວ",
     "markdownCopied": "Markdown ຄ. ແລ້ວ"
-  }
+  },
+  "sortAscending": "ຈັດລຽງຂຶ້ນ",
+  "sortDescending": "ຈັດລຽງລົງ"
 }

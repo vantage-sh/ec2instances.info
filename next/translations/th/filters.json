@@ -45,5 +45,7 @@
     "csvCopied": "คัดลอก CSV ไปยังคลิปบอร์ดแล้ว",
     "tsvCopied": "คัดลอก TSV ไปยังคลิปบอร์ดแล้ว",
     "markdownCopied": "คัดลอกตาราง Markdown ไปยังคลิปบอร์ดแล้ว"
-  }
+  },
+  "sortAscending": "เรียงจากน้อยไปมาก",
+  "sortDescending": "เรียงจากมากไปน้อย"
 }

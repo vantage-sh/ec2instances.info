@@ -45,5 +45,7 @@
     "csvCopied": "CSV clipboard keessatti koppi ta'e",
     "tsvCopied": "TSV clipboard keessatti koppi ta'e",
     "markdownCopied": "Gabatee Markdown clipboard keessatti koppi ta'e"
-  }
+  },
+  "sortAscending": "Guddinaan tartiibsisi",
+  "sortDescending": "Xiqqaachuun tartiibsisi"
 }

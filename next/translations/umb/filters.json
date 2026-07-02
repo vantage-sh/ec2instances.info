@@ -45,5 +45,7 @@
     "csvCopied": "CSV okopikwa ku clipboard",
     "tsvCopied": "TSV okopikwa ku clipboard",
     "markdownCopied": "Ilitebulo lya Markdown okopikwa ku clipboard"
-  }
+  },
+  "sortAscending": "Osotelisa okupandula",
+  "sortDescending": "Osotelisa okuluvuka"
 }

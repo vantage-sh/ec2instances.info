@@ -45,5 +45,7 @@
     "csvCopied": "CSV е копирано в клипборда",
     "tsvCopied": "TSV е копирано в клипборда",
     "markdownCopied": "Markdown таблицата е копирана в клипборда"
-  }
+  },
+  "sortAscending": "Сортиране възходящо",
+  "sortDescending": "Сортиране низходящо"
 }

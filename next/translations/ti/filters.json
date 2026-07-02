@@ -45,5 +45,7 @@
     "csvCopied": "CSV ናብ Clipboard ቀዲሑ",
     "tsvCopied": "TSV ናብ Clipboard ቀዲሑ",
     "markdownCopied": "ናይ Markdown ሰንጠረዥ ናብ Clipboard ቀዲሑ"
-  }
+  },
+  "sortAscending": "ብዕሊ ምደርዳር",
+  "sortDescending": "ብወሪዲ ምደርዳር"
 }

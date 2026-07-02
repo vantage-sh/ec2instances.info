@@ -45,5 +45,7 @@
     "csvCopied": "اتنسخ CSV في الكليبورد",
     "tsvCopied": "اتنسخ TSV في الكليبورد",
     "markdownCopied": "اتنسخ جدول Markdown في الكليبورد"
-  }
+  },
+  "sortAscending": "رتّب تصاعدياً",
+  "sortDescending": "رتّب تنازلياً"
 }

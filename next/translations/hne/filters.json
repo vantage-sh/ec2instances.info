@@ -45,5 +45,7 @@
     "csvCopied": "CSV clipboard म कॉपी हो गे",
     "tsvCopied": "TSV clipboard म कॉपी हो गे",
     "markdownCopied": "Markdown table clipboard म कॉपी हो गे"
-  }
+  },
+  "sortAscending": "आरोही क्रम मा लगावव",
+  "sortDescending": "अवरोही क्रम मा लगावव"
 }

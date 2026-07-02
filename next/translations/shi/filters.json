@@ -45,5 +45,7 @@
     "csvCopied": "CSV ittwanqal i Upherd",
     "tsvCopied": "TSV ittwanqal i Upherd",
     "markdownCopied": "Iftasen n Markdown ittwanqalen i Upherd"
-  }
+  },
+  "sortAscending": "Asnifel s umezwaru",
+  "sortDescending": "Asnifel s aɛzizat"
 }

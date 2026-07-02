@@ -45,5 +45,7 @@
     "csvCopied": "Wɔakopi CSV wɔ clipboard mu",
     "tsvCopied": "Wɔakopi TSV wɔ clipboard mu",
     "markdownCopied": "Wɔakopi Markdown efa wɔ clipboard mu"
-  }
+  },
+  "sortAscending": "To so sɛntɛ",
+  "sortDescending": "To ase sɛntɛ"
 }

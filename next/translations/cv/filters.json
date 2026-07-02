@@ -45,5 +45,7 @@
     "csvCopied": "CSV алмашла буфера кÿчрĕ",
     "tsvCopied": "TSV алмашла буфера кÿчрĕ",
     "markdownCopied": "Markdown таблици алмашла буфера кÿчрĕ"
-  }
+  },
+  "sortAscending": "Ÿсен йĕркепе сăрт",
+  "sortDescending": "Анăн йĕркепе сăрт"
 }

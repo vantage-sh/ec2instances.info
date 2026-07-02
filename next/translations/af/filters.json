@@ -45,5 +45,7 @@
     "csvCopied": "CSV na knipbord gekopieer",
     "tsvCopied": "TSV na knipbord gekopieer",
     "markdownCopied": "Markdown-tabel na knipbord gekopieer"
-  }
+  },
+  "sortAscending": "Sorteer stygende",
+  "sortDescending": "Sorteer dalende"
 }

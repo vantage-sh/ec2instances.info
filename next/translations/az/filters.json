@@ -45,5 +45,7 @@
     "csvCopied": "CSV mübadilə buferinə kopyalandı",
     "tsvCopied": "TSV mübadilə buferinə kopyalandı",
     "markdownCopied": "Markdown cədvəli mübadilə buferinə kopyalandı"
-  }
+  },
+  "sortAscending": "Artan sıralama",
+  "sortDescending": "Azalan sıralama"
 }

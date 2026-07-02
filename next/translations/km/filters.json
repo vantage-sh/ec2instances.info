@@ -45,5 +45,7 @@
     "csvCopied": "CSV បានចម្លងទៅ clipboard",
     "tsvCopied": "TSV បានចម្លងទៅ clipboard",
     "markdownCopied": "តារាង Markdown បានចម្លងទៅ clipboard"
-  }
+  },
+  "sortAscending": "តម្រៀបឡើង",
+  "sortDescending": "តម្រៀបចុះ"
 }

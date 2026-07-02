@@ -45,5 +45,7 @@
     "csvCopied": "Nakopia ti CSV iti clipboard",
     "tsvCopied": "Nakopia ti TSV iti clipboard",
     "markdownCopied": "Nakopia ti Markdown table iti clipboard"
-  }
+  },
+  "sortAscending": "Isortir a naparabaw",
+  "sortDescending": "Isortir a napababa"
 }

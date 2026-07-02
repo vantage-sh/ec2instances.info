@@ -45,5 +45,7 @@
     "csvCopied": "CSV in Zwischenablage kopiert",
     "tsvCopied": "TSV in Zwischenablage kopiert",
     "markdownCopied": "Markdown-Tabelle in Zwischenablage kopiert"
-  }
+  },
+  "sortAscending": "Aufsteigend sortieren",
+  "sortDescending": "Absteigend sortieren"
 }
