@@ -86,14 +86,18 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                     <Command>
                         <CommandTraditionalInput
                             placeholder={
-                                t ? t("filters.searchColumns") : "Search columns..."
+                                t
+                                    ? t("filters.searchColumns")
+                                    : "Search columns..."
                             }
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                         <CommandList>
                             <CommandEmpty>
-                                {t ? t("filters.noColumnsFound") : "No columns found."}
+                                {t
+                                    ? t("filters.noColumnsFound")
+                                    : "No columns found."}
                             </CommandEmpty>
                             <CommandGroup>
                                 {filteredColumns.map((column) => {
@@ -143,7 +147,9 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                                 size="sm"
                                 variant={"outline"}
                             >
-                                {t ? t("filters.selectDefaults") : "Select Defaults"}
+                                {t
+                                    ? t("filters.selectDefaults")
+                                    : "Select Defaults"}
                             </Button>
                         </div>
                     </div>

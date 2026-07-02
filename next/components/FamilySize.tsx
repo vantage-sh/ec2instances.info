@@ -39,14 +39,21 @@ export function FamilySize({
     return (
         <section className="mb-4">
             <h3 className="flex items-center gap-2">
-                <Server className="w-4 h-4 inline-block my-auto" /> {t("instancePage.familySizes")}
+                <Server className="w-4 h-4 inline-block my-auto" />{" "}
+                {t("instancePage.familySizes")}
             </h3>
             <table className="mt-2 w-full text-sm">
                 <thead>
                     <tr className="border-e border-gray-200 dark:border-gray-3">
-                        <th className="text-start pb-1 ps-2">{t("instancePage.size")}</th>
-                        <th className="text-start pb-1 ps-2">{t("instancePage.vCPUs")}</th>
-                        <th className="text-start pb-1 ps-2">{t("instancePage.memoryGiB")}</th>
+                        <th className="text-start pb-1 ps-2">
+                            {t("instancePage.size")}
+                        </th>
+                        <th className="text-start pb-1 ps-2">
+                            {t("instancePage.vCPUs")}
+                        </th>
+                        <th className="text-start pb-1 ps-2">
+                            {t("instancePage.memoryGiB")}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

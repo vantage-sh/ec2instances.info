@@ -169,7 +169,10 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                     columnData[columnAtomKey].initialColumnsValue[key],
             };
         }
-        return columnData[columnAtomKey].makePrettyNames(makeColumnOption, { t: columnT, locale: "" });
+        return columnData[columnAtomKey].makePrettyNames(makeColumnOption, {
+            t: columnT,
+            locale: "",
+        });
     }, [JSON.stringify(columnVisibility), columnT]);
 
     let pricingUnitOptionsCpy = pricingUnitOptions;

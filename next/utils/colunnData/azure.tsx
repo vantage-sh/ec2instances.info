@@ -99,23 +99,59 @@ export function makePrettyNames<V>(
 ) {
     const t = locals?.t;
     return [
-        makeColumnOption("pretty_name_azure", t?.("columns.common.name") ?? "Name"),
-        makeColumnOption("instance_type", t?.("columns.common.apiName") ?? "API Name"),
-        makeColumnOption("memory", t?.("columns.common.instanceMemory") ?? "Instance Memory"),
+        makeColumnOption(
+            "pretty_name_azure",
+            t?.("columns.common.name") ?? "Name",
+        ),
+        makeColumnOption(
+            "instance_type",
+            t?.("columns.common.apiName") ?? "API Name",
+        ),
+        makeColumnOption(
+            "memory",
+            t?.("columns.common.instanceMemory") ?? "Instance Memory",
+        ),
         makeColumnOption("vcpu", t?.("columns.common.vCPUs") ?? "vCPUs"),
         // develop-added column; no translation key exists yet, render English literal.
         makeColumnOption("cores", "Cores"),
-        makeColumnOption("memory_per_vcpu", t?.("columns.common.memoryPerVcpu") ?? "Memory per vCPU"),
+        makeColumnOption(
+            "memory_per_vcpu",
+            t?.("columns.common.memoryPerVcpu") ?? "Memory per vCPU",
+        ),
         makeColumnOption("GPU", t?.("columns.common.gpus") ?? "GPUs"),
         makeColumnOption("size", t?.("columns.common.storage") ?? "Storage"),
-        makeColumnOption("linux-ondemand", t?.("columns.azure.linuxOnDemand") ?? "Linux On-Demand"),
-        makeColumnOption("linux-savings", t?.("columns.azure.linuxSavings") ?? "Linux Savings"),
-        makeColumnOption("linux-reserved", t?.("columns.azure.linuxReserved") ?? "Linux Reserved"),
-        makeColumnOption("linux-spot", t?.("columns.azure.linuxSpot") ?? "Linux Spot"),
-        makeColumnOption("windows-ondemand", t?.("columns.azure.windowsOnDemand") ?? "Windows On-Demand"),
-        makeColumnOption("windows-savings", t?.("columns.azure.windowsSavings") ?? "Windows Savings"),
-        makeColumnOption("windows-reserved", t?.("columns.azure.windowsReserved") ?? "Windows Reserved"),
-        makeColumnOption("windows-spot", t?.("columns.azure.windowsSpot") ?? "Windows Spot"),
+        makeColumnOption(
+            "linux-ondemand",
+            t?.("columns.azure.linuxOnDemand") ?? "Linux On-Demand",
+        ),
+        makeColumnOption(
+            "linux-savings",
+            t?.("columns.azure.linuxSavings") ?? "Linux Savings",
+        ),
+        makeColumnOption(
+            "linux-reserved",
+            t?.("columns.azure.linuxReserved") ?? "Linux Reserved",
+        ),
+        makeColumnOption(
+            "linux-spot",
+            t?.("columns.azure.linuxSpot") ?? "Linux Spot",
+        ),
+        makeColumnOption(
+            "windows-ondemand",
+            t?.("columns.azure.windowsOnDemand") ?? "Windows On-Demand",
+        ),
+        makeColumnOption(
+            "windows-savings",
+            t?.("columns.azure.windowsSavings") ?? "Windows Savings",
+        ),
+        makeColumnOption(
+            "windows-reserved",
+            t?.("columns.azure.windowsReserved") ?? "Windows Reserved",
+        ),
+        makeColumnOption(
+            "windows-spot",
+            t?.("columns.azure.windowsSpot") ?? "Windows Spot",
+        ),
     ];
 }
 
@@ -298,7 +334,10 @@ export const columnsGen = (
                 return (
                     <RegionLinkPreloader
                         onClick={(e) => e.stopPropagation()}
-                        href={prefixWithLocale(`/azure/vm/${value}`, locale ?? "en")}
+                        href={prefixWithLocale(
+                            `/azure/vm/${value}`,
+                            locale ?? "en",
+                        )}
                     >
                         {info.row.original.pretty_name}
                     </RegionLinkPreloader>
@@ -400,7 +439,8 @@ export const columnsGen = (
         },
         {
             accessorKey: "pricing",
-            header: t?.("columns.azure.linuxOnDemand") ?? "Linux On Demand cost",
+            header:
+                t?.("columns.azure.linuxOnDemand") ?? "Linux On Demand cost",
             id: "linux-ondemand",
             ...getPricingSorter(
                 selectedRegion,
@@ -448,7 +488,9 @@ export const columnsGen = (
         },
         {
             accessorKey: "pricing",
-            header: t?.("columns.azure.windowsOnDemand") ?? "Windows On Demand cost",
+            header:
+                t?.("columns.azure.windowsOnDemand") ??
+                "Windows On Demand cost",
             id: "windows-ondemand",
             ...getPricingSorter(
                 selectedRegion,
@@ -460,7 +502,8 @@ export const columnsGen = (
         },
         {
             accessorKey: "pricing",
-            header: t?.("columns.azure.windowsSavings") ?? "Windows Savings Plan",
+            header:
+                t?.("columns.azure.windowsSavings") ?? "Windows Savings Plan",
             id: "windows-savings",
             ...getPricingSorter(
                 selectedRegion,
@@ -472,7 +515,8 @@ export const columnsGen = (
         },
         {
             accessorKey: "pricing",
-            header: t?.("columns.azure.windowsReserved") ?? "Windows Reserved cost",
+            header:
+                t?.("columns.azure.windowsReserved") ?? "Windows Reserved cost",
             id: "windows-reserved",
             ...getPricingSorter(
                 selectedRegion,

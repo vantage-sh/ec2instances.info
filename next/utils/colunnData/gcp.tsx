@@ -85,22 +85,58 @@ export function makePrettyNames<V>(
 ) {
     const t = locals?.t;
     return [
-        makeColumnOption("pretty_name", t?.("columns.gcp.instanceName") ?? "Instance Name"),
-        makeColumnOption("instance_type", t?.("columns.common.apiName") ?? "API Name"),
-        makeColumnOption("memory", t?.("columns.common.instanceMemory") ?? "Instance Memory"),
+        makeColumnOption(
+            "pretty_name",
+            t?.("columns.gcp.instanceName") ?? "Instance Name",
+        ),
+        makeColumnOption(
+            "instance_type",
+            t?.("columns.common.apiName") ?? "API Name",
+        ),
+        makeColumnOption(
+            "memory",
+            t?.("columns.common.instanceMemory") ?? "Instance Memory",
+        ),
         makeColumnOption("vCPU", t?.("columns.common.vCPUs") ?? "vCPUs"),
-        makeColumnOption("memory_per_vcpu", t?.("columns.common.memoryPerVcpu") ?? "Memory per vCPU"),
+        makeColumnOption(
+            "memory_per_vcpu",
+            t?.("columns.common.memoryPerVcpu") ?? "Memory per vCPU",
+        ),
         makeColumnOption("GPU", t?.("columns.common.gpus") ?? "GPUs"),
-        makeColumnOption("network_performance", t?.("columns.common.networkPerformance") ?? "Network Performance"),
-        makeColumnOption("generation", t?.("columns.common.generation") ?? "Generation"),
-        makeColumnOption("local_ssd", t?.("columns.gcp.localSsd") ?? "Local SSD"),
-        makeColumnOption("shared_cpu", t?.("columns.gcp.sharedCpu") ?? "Shared CPU"),
-        makeColumnOption("linux-ondemand", t?.("columns.gcp.linuxOnDemand") ?? "Linux On-Demand"),
+        makeColumnOption(
+            "network_performance",
+            t?.("columns.common.networkPerformance") ?? "Network Performance",
+        ),
+        makeColumnOption(
+            "generation",
+            t?.("columns.common.generation") ?? "Generation",
+        ),
+        makeColumnOption(
+            "local_ssd",
+            t?.("columns.gcp.localSsd") ?? "Local SSD",
+        ),
+        makeColumnOption(
+            "shared_cpu",
+            t?.("columns.gcp.sharedCpu") ?? "Shared CPU",
+        ),
+        makeColumnOption(
+            "linux-ondemand",
+            t?.("columns.gcp.linuxOnDemand") ?? "Linux On-Demand",
+        ),
         makeColumnOption("linux-1yr-cud", "Linux 1-Year CUD"),
         makeColumnOption("linux-3yr-cud", "Linux 3-Year CUD"),
-        makeColumnOption("linux-spot", t?.("columns.gcp.linuxSpot") ?? "Linux Spot"),
-        makeColumnOption("windows-ondemand", t?.("columns.gcp.windowsOnDemand") ?? "Windows On-Demand"),
-        makeColumnOption("windows-spot", t?.("columns.gcp.windowsSpot") ?? "Windows Spot"),
+        makeColumnOption(
+            "linux-spot",
+            t?.("columns.gcp.linuxSpot") ?? "Linux Spot",
+        ),
+        makeColumnOption(
+            "windows-ondemand",
+            t?.("columns.gcp.windowsOnDemand") ?? "Windows On-Demand",
+        ),
+        makeColumnOption(
+            "windows-spot",
+            t?.("columns.gcp.windowsSpot") ?? "Windows Spot",
+        ),
     ];
 }
 
@@ -334,7 +370,9 @@ export const columnsGen = (
         },
         {
             accessorKey: "network_performance",
-            header: t?.("columns.common.networkPerformance") ?? "Network Performance",
+            header:
+                t?.("columns.common.networkPerformance") ??
+                "Network Performance",
             size: 160,
             id: "network_performance",
             sortingFn: "alphanumeric",
@@ -436,7 +474,8 @@ export const columnsGen = (
         },
         {
             accessorKey: "pricing",
-            header: t?.("columns.gcp.windowsOnDemand") ?? "Windows On Demand cost",
+            header:
+                t?.("columns.gcp.windowsOnDemand") ?? "Windows On Demand cost",
             id: "windows-ondemand",
             ...getPricingSorter(
                 selectedRegion,

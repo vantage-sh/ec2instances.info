@@ -618,7 +618,30 @@ export const DEFAULT_LOCALE: SupportedLocale = "en-GB";
 // build only prebuilds this single locale.
 export const PRERENDER_LOCALES: SupportedLocale[] = [DEFAULT_LOCALE];
 
-export const RTL_LOCALES: SupportedLocale[] = ["ar", "ur", "fa", "arz", "pnb", "ps", "sd", "skr", "ckb", "he", "ug", "bal", "ks", "ary", "arq", "apc", "acm", "ars", "afb", "apd", "dv", "prs"];
+export const RTL_LOCALES: SupportedLocale[] = [
+    "ar",
+    "ur",
+    "fa",
+    "arz",
+    "pnb",
+    "ps",
+    "sd",
+    "skr",
+    "ckb",
+    "he",
+    "ug",
+    "bal",
+    "ks",
+    "ary",
+    "arq",
+    "apc",
+    "acm",
+    "ars",
+    "afb",
+    "apd",
+    "dv",
+    "prs",
+];
 
 export function isRTL(locale: string): boolean {
     return RTL_LOCALES.includes(locale as SupportedLocale);

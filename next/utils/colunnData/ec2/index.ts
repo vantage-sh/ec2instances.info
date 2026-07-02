@@ -133,112 +133,414 @@ export function makePrettyNames<V>(
     const t = locals?.t;
     return [
         makeColumnOption("pretty_name", t?.("columns.common.name") ?? "Name"),
-        makeColumnOption("instance_type", t?.("columns.common.apiName") ?? "API Name"),
-        makeColumnOption("family", t?.("columns.common.instanceFamily") ?? "Instance Family"),
-        makeColumnOption("compute_family", t?.("columns.common.computeFamily") ?? "Compute Family"),
-        makeColumnOption("coremark_iterations_second", t?.("columns.ec2.coremarkScore") ?? "CoreMark Score"),
-        makeColumnOption("ffmpeg_fps", t?.("columns.ec2.ffmpegFps") ?? "FFmpeg FPS"),
+        makeColumnOption(
+            "instance_type",
+            t?.("columns.common.apiName") ?? "API Name",
+        ),
+        makeColumnOption(
+            "family",
+            t?.("columns.common.instanceFamily") ?? "Instance Family",
+        ),
+        makeColumnOption(
+            "compute_family",
+            t?.("columns.common.computeFamily") ?? "Compute Family",
+        ),
+        makeColumnOption(
+            "coremark_iterations_second",
+            t?.("columns.ec2.coremarkScore") ?? "CoreMark Score",
+        ),
+        makeColumnOption(
+            "ffmpeg_fps",
+            t?.("columns.ec2.ffmpegFps") ?? "FFmpeg FPS",
+        ),
         makeColumnOption("memory", t?.("columns.common.memory") ?? "Memory"),
-        makeColumnOption("memory_speed", t?.("columns.ec2.memorySpeed") ?? "Memory Speed"),
-        makeColumnOption("uses_numa_architecture", t?.("columns.ec2.usesNumaArch") ?? "Uses NUMA Architecture"),
-        makeColumnOption("numa_node_count", t?.("columns.ec2.numaNodeCount") ?? "NUMA Node Count"),
-        makeColumnOption("max_numa_distance", t?.("columns.ec2.maxNumaDistance") ?? "Max NUMA Distance"),
-        makeColumnOption("core_count_per_numa_node", t?.("columns.ec2.coresPerNumaNode") ?? "Cores per NUMA Node (Avg)"),
-        makeColumnOption("thread_count_per_numa_node", t?.("columns.ec2.threadsPerNumaNode") ?? "Threads per NUMA Node (Avg)"),
-        makeColumnOption("memory_per_numa_node_mb", t?.("columns.ec2.memoryPerNumaNode") ?? "Memory per NUMA Node (Avg MB)"),
-        makeColumnOption("l3_per_numa_node_mb", t?.("columns.ec2.l3PerNumaNode") ?? "L3 Cache per NUMA Node (Avg MB)"),
-        makeColumnOption("l3_shared", t?.("columns.ec2.l3CacheShared") ?? "L3 Cache Shared"),
-        makeColumnOption("ECU", t?.("columns.ec2.computeUnitsEcu") ?? "Compute Units (ECU)"),
+        makeColumnOption(
+            "memory_speed",
+            t?.("columns.ec2.memorySpeed") ?? "Memory Speed",
+        ),
+        makeColumnOption(
+            "uses_numa_architecture",
+            t?.("columns.ec2.usesNumaArch") ?? "Uses NUMA Architecture",
+        ),
+        makeColumnOption(
+            "numa_node_count",
+            t?.("columns.ec2.numaNodeCount") ?? "NUMA Node Count",
+        ),
+        makeColumnOption(
+            "max_numa_distance",
+            t?.("columns.ec2.maxNumaDistance") ?? "Max NUMA Distance",
+        ),
+        makeColumnOption(
+            "core_count_per_numa_node",
+            t?.("columns.ec2.coresPerNumaNode") ?? "Cores per NUMA Node (Avg)",
+        ),
+        makeColumnOption(
+            "thread_count_per_numa_node",
+            t?.("columns.ec2.threadsPerNumaNode") ??
+                "Threads per NUMA Node (Avg)",
+        ),
+        makeColumnOption(
+            "memory_per_numa_node_mb",
+            t?.("columns.ec2.memoryPerNumaNode") ??
+                "Memory per NUMA Node (Avg MB)",
+        ),
+        makeColumnOption(
+            "l3_per_numa_node_mb",
+            t?.("columns.ec2.l3PerNumaNode") ??
+                "L3 Cache per NUMA Node (Avg MB)",
+        ),
+        makeColumnOption(
+            "l3_shared",
+            t?.("columns.ec2.l3CacheShared") ?? "L3 Cache Shared",
+        ),
+        makeColumnOption(
+            "ECU",
+            t?.("columns.ec2.computeUnitsEcu") ?? "Compute Units (ECU)",
+        ),
         makeColumnOption("vCPU", t?.("columns.common.vCPUs") ?? "vCPUs"),
         // develop-added column; no translation key exists yet, render English literal.
         makeColumnOption("cores", "Cores"),
-        makeColumnOption("memory_per_vcpu", t?.("columns.common.memoryPerVcpu") ?? "GiB of Memory per vCPU"),
+        makeColumnOption(
+            "memory_per_vcpu",
+            t?.("columns.common.memoryPerVcpu") ?? "GiB of Memory per vCPU",
+        ),
         makeColumnOption("GPU", t?.("columns.common.gpus") ?? "GPUs"),
-        makeColumnOption("GPU_model", t?.("columns.common.gpuModel") ?? "GPU model"),
-        makeColumnOption("GPU_memory", t?.("columns.common.gpuMemory") ?? "GPU memory"),
-        makeColumnOption("compute_capability", t?.("columns.ec2.cudaComputeCapability") ?? "CUDA Compute Capability"),
+        makeColumnOption(
+            "GPU_model",
+            t?.("columns.common.gpuModel") ?? "GPU model",
+        ),
+        makeColumnOption(
+            "GPU_memory",
+            t?.("columns.common.gpuMemory") ?? "GPU memory",
+        ),
+        makeColumnOption(
+            "compute_capability",
+            t?.("columns.ec2.cudaComputeCapability") ??
+                "CUDA Compute Capability",
+        ),
         makeColumnOption("FPGA", t?.("columns.ec2.fpgas") ?? "FPGAs"),
-        makeColumnOption("ECU_per_vcpu", t?.("columns.ec2.ecuPerVcpu") ?? "ECU per vCPU"),
-        makeColumnOption("physical_processor", t?.("columns.common.physicalProcessor") ?? "Physical Processor"),
-        makeColumnOption("clock_speed_ghz", t?.("columns.ec2.clockSpeed") ?? "Clock Speed(GHz)"),
-        makeColumnOption("intel_avx", t?.("columns.ec2.intelAvx") ?? "Intel AVX"),
-        makeColumnOption("intel_avx2", t?.("columns.ec2.intelAvx2") ?? "Intel AVX2"),
-        makeColumnOption("intel_avx512", t?.("columns.ec2.intelAvx512") ?? "Intel AVX-512"),
-        makeColumnOption("intel_turbo", t?.("columns.ec2.intelTurbo") ?? "Intel Turbo"),
-        makeColumnOption("storage", t?.("columns.common.instanceStorage") ?? "Instance Storage"),
-        makeColumnOption("warmed-up", t?.("columns.ec2.storageWarmedUp") ?? "Instance Storage: already warmed-up"),
-        makeColumnOption("trim-support", t?.("columns.ec2.storageTrimSupport") ?? "Instance Storage: SSD TRIM Support"),
+        makeColumnOption(
+            "ECU_per_vcpu",
+            t?.("columns.ec2.ecuPerVcpu") ?? "ECU per vCPU",
+        ),
+        makeColumnOption(
+            "physical_processor",
+            t?.("columns.common.physicalProcessor") ?? "Physical Processor",
+        ),
+        makeColumnOption(
+            "clock_speed_ghz",
+            t?.("columns.ec2.clockSpeed") ?? "Clock Speed(GHz)",
+        ),
+        makeColumnOption(
+            "intel_avx",
+            t?.("columns.ec2.intelAvx") ?? "Intel AVX",
+        ),
+        makeColumnOption(
+            "intel_avx2",
+            t?.("columns.ec2.intelAvx2") ?? "Intel AVX2",
+        ),
+        makeColumnOption(
+            "intel_avx512",
+            t?.("columns.ec2.intelAvx512") ?? "Intel AVX-512",
+        ),
+        makeColumnOption(
+            "intel_turbo",
+            t?.("columns.ec2.intelTurbo") ?? "Intel Turbo",
+        ),
+        makeColumnOption(
+            "storage",
+            t?.("columns.common.instanceStorage") ?? "Instance Storage",
+        ),
+        makeColumnOption(
+            "warmed-up",
+            t?.("columns.ec2.storageWarmedUp") ??
+                "Instance Storage: already warmed-up",
+        ),
+        makeColumnOption(
+            "trim-support",
+            t?.("columns.ec2.storageTrimSupport") ??
+                "Instance Storage: SSD TRIM Support",
+        ),
         // develop-added storage-IOPS columns; no translation keys exist yet, render English literals.
         makeColumnOption("storage_read_iops", "Instance Store: Read IOPS"),
         makeColumnOption("storage_write_iops", "Instance Store: Write IOPS"),
         makeColumnOption("arch", t?.("columns.common.arch") ?? "Arch"),
-        makeColumnOption("network_performance", t?.("columns.common.networkPerformance") ?? "Network Performance"),
-        makeColumnOption("ebs_baseline_bandwidth", t?.("columns.ec2.ebsBaselineBandwidth") ?? "EBS Optimized: Baseline Bandwidth"),
-        makeColumnOption("ebs_baseline_throughput", t?.("columns.ec2.ebsBaselineThroughput") ?? "EBS Optimized: Baseline Throughput (128K)"),
-        makeColumnOption("ebs_baseline_iops", t?.("columns.ec2.ebsBaselineIops") ?? "EBS Optimized: Baseline IOPS (16K)"),
-        makeColumnOption("ebs_max_bandwidth", t?.("columns.ec2.ebsMaxBandwidth") ?? "EBS Optimized: Max Bandwidth"),
-        makeColumnOption("ebs_throughput", t?.("columns.ec2.ebsMaxThroughput") ?? "EBS Optimized: Max Throughput (128K)"),
-        makeColumnOption("ebs_iops", t?.("columns.ec2.ebsMaxIops") ?? "EBS Optimized: Max IOPS (16K)"),
-        makeColumnOption("ebs_as_nvme", t?.("columns.ec2.ebsAsNvme") ?? "EBS Exposed as NVMe"),
+        makeColumnOption(
+            "network_performance",
+            t?.("columns.common.networkPerformance") ?? "Network Performance",
+        ),
+        makeColumnOption(
+            "ebs_baseline_bandwidth",
+            t?.("columns.ec2.ebsBaselineBandwidth") ??
+                "EBS Optimized: Baseline Bandwidth",
+        ),
+        makeColumnOption(
+            "ebs_baseline_throughput",
+            t?.("columns.ec2.ebsBaselineThroughput") ??
+                "EBS Optimized: Baseline Throughput (128K)",
+        ),
+        makeColumnOption(
+            "ebs_baseline_iops",
+            t?.("columns.ec2.ebsBaselineIops") ??
+                "EBS Optimized: Baseline IOPS (16K)",
+        ),
+        makeColumnOption(
+            "ebs_max_bandwidth",
+            t?.("columns.ec2.ebsMaxBandwidth") ??
+                "EBS Optimized: Max Bandwidth",
+        ),
+        makeColumnOption(
+            "ebs_throughput",
+            t?.("columns.ec2.ebsMaxThroughput") ??
+                "EBS Optimized: Max Throughput (128K)",
+        ),
+        makeColumnOption(
+            "ebs_iops",
+            t?.("columns.ec2.ebsMaxIops") ?? "EBS Optimized: Max IOPS (16K)",
+        ),
+        makeColumnOption(
+            "ebs_as_nvme",
+            t?.("columns.ec2.ebsAsNvme") ?? "EBS Exposed as NVMe",
+        ),
         makeColumnOption("maxips", t?.("columns.ec2.maxIps") ?? "Max IPs"),
         makeColumnOption("maxenis", t?.("columns.ec2.maxEnis") ?? "Max ENIs"),
-        makeColumnOption("enhanced_networking", t?.("columns.ec2.enhancedNetworking") ?? "Enhanced Networking"),
+        makeColumnOption(
+            "enhanced_networking",
+            t?.("columns.ec2.enhancedNetworking") ?? "Enhanced Networking",
+        ),
         makeColumnOption("is_bare_metal", "Bare metal"),
         makeColumnOption("is_trunking_compatible", "Trunking compatible"),
         makeColumnOption("branch_interface", "Branch interface"),
         makeColumnOption("max_ecs_tasks", "Max ECS Tasks"),
         makeColumnOption("vpc_only", t?.("columns.ec2.vpcOnly") ?? "VPC Only"),
-        makeColumnOption("ipv6_support", t?.("columns.ec2.ipv6Support") ?? "IPv6 Support"),
-        makeColumnOption("placement_group_support", t?.("columns.ec2.placementGroupSupport") ?? "Placement Group Support"),
-        makeColumnOption("linux_virtualization_types", t?.("columns.ec2.linuxVirtualization") ?? "Linux Virtualization"),
+        makeColumnOption(
+            "ipv6_support",
+            t?.("columns.ec2.ipv6Support") ?? "IPv6 Support",
+        ),
+        makeColumnOption(
+            "placement_group_support",
+            t?.("columns.ec2.placementGroupSupport") ??
+                "Placement Group Support",
+        ),
+        makeColumnOption(
+            "linux_virtualization_types",
+            t?.("columns.ec2.linuxVirtualization") ?? "Linux Virtualization",
+        ),
         makeColumnOption("emr", t?.("columns.ec2.onEmr") ?? "On EMR"),
-        makeColumnOption("availability_zones", t?.("columns.ec2.availabilityZones") ?? "Availability Zones"),
-        makeColumnOption("cost-ondemand", t?.("columns.pricing.linuxOnDemand") ?? "On Demand"),
-        makeColumnOption("cost-reserved", t?.("columns.pricing.linuxReserved") ?? "Linux Reserved cost"),
-        makeColumnOption("cost-spot-min", t?.("columns.pricing.linuxSpotMin") ?? "Linux Spot Minimum cost"),
-        makeColumnOption("cost-spot-max", t?.("columns.pricing.linuxSpotAvg") ?? "Linux Spot Average cost"),
-        makeColumnOption("cost-ondemand-rhel", t?.("columns.pricing.rhelOnDemand") ?? "RHEL On Demand cost"),
-        makeColumnOption("cost-reserved-rhel", t?.("columns.pricing.rhelReserved") ?? "RHEL Reserved cost"),
-        makeColumnOption("cost-spot-min-rhel", t?.("columns.pricing.rhelSpotMin") ?? "RHEL Spot Minimum cost"),
-        makeColumnOption("cost-spot-max-rhel", t?.("columns.pricing.rhelSpotMax") ?? "RHEL Spot Maximum cost"),
-        makeColumnOption("cost-ondemand-rhelHA", t?.("columns.pricing.rhelHaOnDemand") ?? "RHEL with HA On Demand cost"),
-        makeColumnOption("cost-reserved-rhelHA", t?.("columns.pricing.rhelHaReserved") ?? "RHEL with HA Reserved cost"),
-        makeColumnOption("cost-spot-min-rhelHA", t?.("columns.pricing.rhelHaSpotMin") ?? "RHEL with HA Spot Minimum cost"),
-        makeColumnOption("cost-spot-max-rhelHA", t?.("columns.pricing.rhelHaSpotMax") ?? "RHEL with HA Spot Maximum cost"),
-        makeColumnOption("cost-ondemand-sles", t?.("columns.pricing.slesOnDemand") ?? "SLES On Demand cost"),
-        makeColumnOption("cost-reserved-sles", t?.("columns.pricing.slesReserved") ?? "SLES Reserved cost"),
-        makeColumnOption("cost-spot-min-sles", t?.("columns.pricing.slesSpotMin") ?? "SLES Spot Minimum cost"),
-        makeColumnOption("cost-spot-max-sles", t?.("columns.pricing.slesSpotMax") ?? "SLES Spot Maximum cost"),
-        makeColumnOption("cost-ondemand-mswin", t?.("columns.pricing.windowsOnDemand") ?? "Windows On Demand cost"),
-        makeColumnOption("cost-reserved-mswin", t?.("columns.pricing.windowsReserved") ?? "Windows Reserved cost"),
-        makeColumnOption("cost-spot-min-mswin", t?.("columns.pricing.windowsSpotMin") ?? "Windows Spot Minimum cost"),
-        makeColumnOption("cost-spot-max-mswin", t?.("columns.pricing.windowsSpotAvg") ?? "Windows Spot Average cost"),
-        makeColumnOption("cost-ondemand-dedicated", t?.("columns.pricing.dedicatedHostOnDemand") ?? "Dedicated Host On Demand"),
-        makeColumnOption("cost-reserved-dedicated", t?.("columns.pricing.dedicatedHostReserved") ?? "Dedicated Host Reserved"),
-        makeColumnOption("cost-ondemand-mswinSQLWeb", t?.("columns.pricing.windowsSqlWebOnDemand") ?? "Windows SQL Web On Demand cost"),
-        makeColumnOption("cost-reserved-mswinSQLWeb", t?.("columns.pricing.windowsSqlWebReserved") ?? "Windows SQL Web Reserved cost"),
-        makeColumnOption("cost-ondemand-mswinSQL", t?.("columns.pricing.windowsSqlStdOnDemand") ?? "Windows SQL Std On Demand cost"),
-        makeColumnOption("cost-reserved-mswinSQL", t?.("columns.pricing.windowsSqlStdReserved") ?? "Windows SQL Std Reserved cost"),
-        makeColumnOption("cost-ondemand-mswinSQLEnterprise", t?.("columns.pricing.windowsSqlEntOnDemand") ?? "Windows SQL Ent On Demand cost"),
-        makeColumnOption("cost-reserved-mswinSQLEnterprise", t?.("columns.pricing.windowsSqlEntReserved") ?? "Windows SQL Ent Reserved cost"),
-        makeColumnOption("cost-ondemand-linuxSQLWeb", t?.("columns.pricing.linuxSqlWebOnDemand") ?? "Linux SQL Web On Demand cost"),
-        makeColumnOption("cost-reserved-linuxSQLWeb", t?.("columns.pricing.linuxSqlWebReserved") ?? "Linux SQL Web Reserved cost"),
-        makeColumnOption("cost-ondemand-linuxSQL", t?.("columns.pricing.linuxSqlStdOnDemand") ?? "Linux SQL Std On Demand cost"),
-        makeColumnOption("cost-reserved-linuxSQL", t?.("columns.pricing.linuxSqlStdReserved") ?? "Linux SQL Std Reserved cost"),
-        makeColumnOption("cost-ondemand-linuxSQLEnterprise", t?.("columns.pricing.linuxSqlEntOnDemand") ?? "Linux SQL Ent On Demand cost"),
-        makeColumnOption("cost-reserved-linuxSQLEnterprise", t?.("columns.pricing.linuxSqlEntReserved") ?? "Linux SQL Ent Reserved cost"),
-        makeColumnOption("spot-interrupt-rate", t?.("columns.pricing.linuxSpotInterrupt") ?? "Linux Spot Interrupt Frequency"),
-        makeColumnOption("cost-emr", t?.("columns.pricing.emrCost") ?? "EMR cost"),
-        makeColumnOption("generation", t?.("columns.common.generation") ?? "Generation"),
-        makeColumnOption("gpu_architectures", t?.("columns.ec2.gpuArchitectures") ?? "GPU Architectures"),
-        makeColumnOption("gpu_current_temp_avg_celsius", t?.("columns.ec2.gpuTempAvg") ?? "GPU Temp (Avg °C)"),
-        makeColumnOption("ffmpeg_used_cuda", t?.("columns.ec2.ffmpegUsedCuda") ?? "FFmpeg Used CUDA"),
-        makeColumnOption("ffmpeg_speed", t?.("columns.ec2.ffmpegSpeed") ?? "FFmpeg Speed"),
-        makeColumnOption("gpu_power_draw_watts_avg", t?.("columns.ec2.gpuPowerDrawAvg") ?? "GPU Power Draw (Avg Watts)"),
-        makeColumnOption("gpu_power_max_watts_avg", t?.("columns.ec2.gpuPowerLimit") ?? "GPU Power Max (Avg Watts)"),
-        makeColumnOption("gpu_clocks_graphics_avg", t?.("columns.ec2.gpuGraphicsClockAvg") ?? "GPU Graphics Clock (Avg MHz)"),
-        makeColumnOption("gpu_clocks_sm_avg", t?.("columns.ec2.gpuSmClockAvg") ?? "GPU SM Clock (Avg MHz)"),
-        makeColumnOption("gpu_clocks_memory_avg", t?.("columns.ec2.gpuMemoryClockAvg") ?? "GPU Memory Clock (Avg MHz)"),
-        makeColumnOption("gpu_clocks_video_avg", t?.("columns.ec2.gpuVideoClockAvg") ?? "GPU Video Clock (Avg MHz)"),
+        makeColumnOption(
+            "availability_zones",
+            t?.("columns.ec2.availabilityZones") ?? "Availability Zones",
+        ),
+        makeColumnOption(
+            "cost-ondemand",
+            t?.("columns.pricing.linuxOnDemand") ?? "On Demand",
+        ),
+        makeColumnOption(
+            "cost-reserved",
+            t?.("columns.pricing.linuxReserved") ?? "Linux Reserved cost",
+        ),
+        makeColumnOption(
+            "cost-spot-min",
+            t?.("columns.pricing.linuxSpotMin") ?? "Linux Spot Minimum cost",
+        ),
+        makeColumnOption(
+            "cost-spot-max",
+            t?.("columns.pricing.linuxSpotAvg") ?? "Linux Spot Average cost",
+        ),
+        makeColumnOption(
+            "cost-ondemand-rhel",
+            t?.("columns.pricing.rhelOnDemand") ?? "RHEL On Demand cost",
+        ),
+        makeColumnOption(
+            "cost-reserved-rhel",
+            t?.("columns.pricing.rhelReserved") ?? "RHEL Reserved cost",
+        ),
+        makeColumnOption(
+            "cost-spot-min-rhel",
+            t?.("columns.pricing.rhelSpotMin") ?? "RHEL Spot Minimum cost",
+        ),
+        makeColumnOption(
+            "cost-spot-max-rhel",
+            t?.("columns.pricing.rhelSpotMax") ?? "RHEL Spot Maximum cost",
+        ),
+        makeColumnOption(
+            "cost-ondemand-rhelHA",
+            t?.("columns.pricing.rhelHaOnDemand") ??
+                "RHEL with HA On Demand cost",
+        ),
+        makeColumnOption(
+            "cost-reserved-rhelHA",
+            t?.("columns.pricing.rhelHaReserved") ??
+                "RHEL with HA Reserved cost",
+        ),
+        makeColumnOption(
+            "cost-spot-min-rhelHA",
+            t?.("columns.pricing.rhelHaSpotMin") ??
+                "RHEL with HA Spot Minimum cost",
+        ),
+        makeColumnOption(
+            "cost-spot-max-rhelHA",
+            t?.("columns.pricing.rhelHaSpotMax") ??
+                "RHEL with HA Spot Maximum cost",
+        ),
+        makeColumnOption(
+            "cost-ondemand-sles",
+            t?.("columns.pricing.slesOnDemand") ?? "SLES On Demand cost",
+        ),
+        makeColumnOption(
+            "cost-reserved-sles",
+            t?.("columns.pricing.slesReserved") ?? "SLES Reserved cost",
+        ),
+        makeColumnOption(
+            "cost-spot-min-sles",
+            t?.("columns.pricing.slesSpotMin") ?? "SLES Spot Minimum cost",
+        ),
+        makeColumnOption(
+            "cost-spot-max-sles",
+            t?.("columns.pricing.slesSpotMax") ?? "SLES Spot Maximum cost",
+        ),
+        makeColumnOption(
+            "cost-ondemand-mswin",
+            t?.("columns.pricing.windowsOnDemand") ?? "Windows On Demand cost",
+        ),
+        makeColumnOption(
+            "cost-reserved-mswin",
+            t?.("columns.pricing.windowsReserved") ?? "Windows Reserved cost",
+        ),
+        makeColumnOption(
+            "cost-spot-min-mswin",
+            t?.("columns.pricing.windowsSpotMin") ??
+                "Windows Spot Minimum cost",
+        ),
+        makeColumnOption(
+            "cost-spot-max-mswin",
+            t?.("columns.pricing.windowsSpotAvg") ??
+                "Windows Spot Average cost",
+        ),
+        makeColumnOption(
+            "cost-ondemand-dedicated",
+            t?.("columns.pricing.dedicatedHostOnDemand") ??
+                "Dedicated Host On Demand",
+        ),
+        makeColumnOption(
+            "cost-reserved-dedicated",
+            t?.("columns.pricing.dedicatedHostReserved") ??
+                "Dedicated Host Reserved",
+        ),
+        makeColumnOption(
+            "cost-ondemand-mswinSQLWeb",
+            t?.("columns.pricing.windowsSqlWebOnDemand") ??
+                "Windows SQL Web On Demand cost",
+        ),
+        makeColumnOption(
+            "cost-reserved-mswinSQLWeb",
+            t?.("columns.pricing.windowsSqlWebReserved") ??
+                "Windows SQL Web Reserved cost",
+        ),
+        makeColumnOption(
+            "cost-ondemand-mswinSQL",
+            t?.("columns.pricing.windowsSqlStdOnDemand") ??
+                "Windows SQL Std On Demand cost",
+        ),
+        makeColumnOption(
+            "cost-reserved-mswinSQL",
+            t?.("columns.pricing.windowsSqlStdReserved") ??
+                "Windows SQL Std Reserved cost",
+        ),
+        makeColumnOption(
+            "cost-ondemand-mswinSQLEnterprise",
+            t?.("columns.pricing.windowsSqlEntOnDemand") ??
+                "Windows SQL Ent On Demand cost",
+        ),
+        makeColumnOption(
+            "cost-reserved-mswinSQLEnterprise",
+            t?.("columns.pricing.windowsSqlEntReserved") ??
+                "Windows SQL Ent Reserved cost",
+        ),
+        makeColumnOption(
+            "cost-ondemand-linuxSQLWeb",
+            t?.("columns.pricing.linuxSqlWebOnDemand") ??
+                "Linux SQL Web On Demand cost",
+        ),
+        makeColumnOption(
+            "cost-reserved-linuxSQLWeb",
+            t?.("columns.pricing.linuxSqlWebReserved") ??
+                "Linux SQL Web Reserved cost",
+        ),
+        makeColumnOption(
+            "cost-ondemand-linuxSQL",
+            t?.("columns.pricing.linuxSqlStdOnDemand") ??
+                "Linux SQL Std On Demand cost",
+        ),
+        makeColumnOption(
+            "cost-reserved-linuxSQL",
+            t?.("columns.pricing.linuxSqlStdReserved") ??
+                "Linux SQL Std Reserved cost",
+        ),
+        makeColumnOption(
+            "cost-ondemand-linuxSQLEnterprise",
+            t?.("columns.pricing.linuxSqlEntOnDemand") ??
+                "Linux SQL Ent On Demand cost",
+        ),
+        makeColumnOption(
+            "cost-reserved-linuxSQLEnterprise",
+            t?.("columns.pricing.linuxSqlEntReserved") ??
+                "Linux SQL Ent Reserved cost",
+        ),
+        makeColumnOption(
+            "spot-interrupt-rate",
+            t?.("columns.pricing.linuxSpotInterrupt") ??
+                "Linux Spot Interrupt Frequency",
+        ),
+        makeColumnOption(
+            "cost-emr",
+            t?.("columns.pricing.emrCost") ?? "EMR cost",
+        ),
+        makeColumnOption(
+            "generation",
+            t?.("columns.common.generation") ?? "Generation",
+        ),
+        makeColumnOption(
+            "gpu_architectures",
+            t?.("columns.ec2.gpuArchitectures") ?? "GPU Architectures",
+        ),
+        makeColumnOption(
+            "gpu_current_temp_avg_celsius",
+            t?.("columns.ec2.gpuTempAvg") ?? "GPU Temp (Avg °C)",
+        ),
+        makeColumnOption(
+            "ffmpeg_used_cuda",
+            t?.("columns.ec2.ffmpegUsedCuda") ?? "FFmpeg Used CUDA",
+        ),
+        makeColumnOption(
+            "ffmpeg_speed",
+            t?.("columns.ec2.ffmpegSpeed") ?? "FFmpeg Speed",
+        ),
+        makeColumnOption(
+            "gpu_power_draw_watts_avg",
+            t?.("columns.ec2.gpuPowerDrawAvg") ?? "GPU Power Draw (Avg Watts)",
+        ),
+        makeColumnOption(
+            "gpu_power_max_watts_avg",
+            t?.("columns.ec2.gpuPowerLimit") ?? "GPU Power Max (Avg Watts)",
+        ),
+        makeColumnOption(
+            "gpu_clocks_graphics_avg",
+            t?.("columns.ec2.gpuGraphicsClockAvg") ??
+                "GPU Graphics Clock (Avg MHz)",
+        ),
+        makeColumnOption(
+            "gpu_clocks_sm_avg",
+            t?.("columns.ec2.gpuSmClockAvg") ?? "GPU SM Clock (Avg MHz)",
+        ),
+        makeColumnOption(
+            "gpu_clocks_memory_avg",
+            t?.("columns.ec2.gpuMemoryClockAvg") ??
+                "GPU Memory Clock (Avg MHz)",
+        ),
+        makeColumnOption(
+            "gpu_clocks_video_avg",
+            t?.("columns.ec2.gpuVideoClockAvg") ?? "GPU Video Clock (Avg MHz)",
+        ),
     ];
 }

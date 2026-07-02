@@ -76,16 +76,34 @@ export function makePrettyNames<V>(
     const t = locals?.t;
     return [
         makeColumnOption("pretty_name", t?.("columns.common.name") ?? "Name"),
-        makeColumnOption("instance_type", t?.("columns.common.apiName") ?? "API Name"),
-        makeColumnOption("compute_family", t?.("columns.common.computeFamily") ?? "Compute Family"),
+        makeColumnOption(
+            "instance_type",
+            t?.("columns.common.apiName") ?? "API Name",
+        ),
+        makeColumnOption(
+            "compute_family",
+            t?.("columns.common.computeFamily") ?? "Compute Family",
+        ),
         makeColumnOption("memory", t?.("columns.common.memory") ?? "Memory"),
         makeColumnOption("vCPU", t?.("columns.common.vCPUs") ?? "vCPUs"),
         makeColumnOption("storage", t?.("columns.common.storage") ?? "Storage"),
         makeColumnOption("io", "IO"),
-        makeColumnOption("ECU", t?.("columns.ec2.computeUnitsEcu") ?? "Compute Units (ECU)"),
-        makeColumnOption("generation", t?.("columns.common.generation") ?? "Generation"),
-        makeColumnOption("cost-ondemand", t?.("columns.pricing.onDemand") ?? "On Demand Cost"),
-        makeColumnOption("cost-reserved", t?.("columns.pricing.reserved") ?? "Reserved Cost"),
+        makeColumnOption(
+            "ECU",
+            t?.("columns.ec2.computeUnitsEcu") ?? "Compute Units (ECU)",
+        ),
+        makeColumnOption(
+            "generation",
+            t?.("columns.common.generation") ?? "Generation",
+        ),
+        makeColumnOption(
+            "cost-ondemand",
+            t?.("columns.pricing.onDemand") ?? "On Demand Cost",
+        ),
+        makeColumnOption(
+            "cost-reserved",
+            t?.("columns.pricing.reserved") ?? "Reserved Cost",
+        ),
     ];
 }
 
@@ -148,119 +166,122 @@ export const columnsGen = (
     const t = locals?.t;
     const locale = locals?.locale;
     return [
-    {
-        accessorKey: "pretty_name",
-        header: t?.("columns.common.name") ?? "Name",
-        id: "pretty_name",
-        size: 350,
-        sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "pretty_name" }),
-        cell: (info) => info.getValue() as string,
-    },
-    {
-        accessorKey: "instance_type",
-        header: t?.("columns.common.apiName") ?? "API Name",
-        id: "instance_type",
-        filterFn: regex({ accessorKey: "instance_type" }),
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.instance_type;
-            const valueB = rowB.original.instance_type;
-            return sortByInstanceType(valueA, valueB, ".");
+        {
+            accessorKey: "pretty_name",
+            header: t?.("columns.common.name") ?? "Name",
+            id: "pretty_name",
+            size: 350,
+            sortingFn: "alphanumeric",
+            filterFn: regex({ accessorKey: "pretty_name" }),
+            cell: (info) => info.getValue() as string,
         },
-        cell: (info) => {
-            const value = info.getValue() as string;
-            return (
-                <RegionLinkPreloader
-                    onClick={(e) => e.stopPropagation()}
-                    href={prefixWithLocale(`/aws/redshift/${value}`, locale ?? "en")}
-                >
-                    {value}
-                </RegionLinkPreloader>
-            );
-        },
-    },
-    {
-        accessorKey: "family",
-        header: t?.("columns.common.computeFamily") ?? "Compute Family",
-        size: 150,
-        id: "compute_family",
-        sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "family" }),
-    },
-    {
-        accessorKey: "memory",
-        header: t?.("columns.common.instanceMemory") ?? "Instance Memory",
-        id: "memory",
-        sortingFn: "alphanumeric",
-        filterFn: expr,
-        cell: (info) => `${info.getValue()} GiB`,
-    },
-    {
-        accessorKey: "vcpu",
-        header: t?.("columns.common.vCPUs") ?? "vCPUs",
-        id: "vCPU",
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue();
-            return `${value} vCPUs`;
-        },
-    },
-    {
-        accessorKey: "storage",
-        header: t?.("columns.common.storage") ?? "Storage",
-        id: "storage",
-        sortingFn: "alphanumeric",
-        filterFn: expr,
-    },
-    {
-        accessorKey: "io",
-        header: "IO",
-        id: "io",
-        sortingFn: "alphanumeric",
-        filterFn: expr,
-    },
-    {
-        accessorKey: "ecu",
-        header: t?.("columns.ec2.computeUnitsEcu") ?? "ECU",
-        id: "ECU",
-        sortingFn: "alphanumeric",
-        filterFn: expr,
-    },
-    {
-        accessorKey: "currentGeneration",
-        header: t?.("columns.common.generation") ?? "Generation",
-        id: "generation",
-        sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter("currentGeneration", (info) => {
-            if (info.getValue() === "Yes") return "current";
-            return "previous";
-        }),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.onDemand") ?? "On Demand Cost",
-        id: "cost-ondemand",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => {
-                return pricing?.ondemand;
+        {
+            accessorKey: "instance_type",
+            header: t?.("columns.common.apiName") ?? "API Name",
+            id: "instance_type",
+            filterFn: regex({ accessorKey: "instance_type" }),
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.instance_type;
+                const valueB = rowB.original.instance_type;
+                return sortByInstanceType(valueA, valueB, ".");
             },
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.reserved") ?? "Reserved Cost",
-        id: "cost-reserved",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.reserved?.[reservedTerm],
-            currency,
-        ),
-    },
-];
+            cell: (info) => {
+                const value = info.getValue() as string;
+                return (
+                    <RegionLinkPreloader
+                        onClick={(e) => e.stopPropagation()}
+                        href={prefixWithLocale(
+                            `/aws/redshift/${value}`,
+                            locale ?? "en",
+                        )}
+                    >
+                        {value}
+                    </RegionLinkPreloader>
+                );
+            },
+        },
+        {
+            accessorKey: "family",
+            header: t?.("columns.common.computeFamily") ?? "Compute Family",
+            size: 150,
+            id: "compute_family",
+            sortingFn: "alphanumeric",
+            filterFn: regex({ accessorKey: "family" }),
+        },
+        {
+            accessorKey: "memory",
+            header: t?.("columns.common.instanceMemory") ?? "Instance Memory",
+            id: "memory",
+            sortingFn: "alphanumeric",
+            filterFn: expr,
+            cell: (info) => `${info.getValue()} GiB`,
+        },
+        {
+            accessorKey: "vcpu",
+            header: t?.("columns.common.vCPUs") ?? "vCPUs",
+            id: "vCPU",
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue();
+                return `${value} vCPUs`;
+            },
+        },
+        {
+            accessorKey: "storage",
+            header: t?.("columns.common.storage") ?? "Storage",
+            id: "storage",
+            sortingFn: "alphanumeric",
+            filterFn: expr,
+        },
+        {
+            accessorKey: "io",
+            header: "IO",
+            id: "io",
+            sortingFn: "alphanumeric",
+            filterFn: expr,
+        },
+        {
+            accessorKey: "ecu",
+            header: t?.("columns.ec2.computeUnitsEcu") ?? "ECU",
+            id: "ECU",
+            sortingFn: "alphanumeric",
+            filterFn: expr,
+        },
+        {
+            accessorKey: "currentGeneration",
+            header: t?.("columns.common.generation") ?? "Generation",
+            id: "generation",
+            sortingFn: "alphanumeric",
+            ...makeCellWithRegexSorter("currentGeneration", (info) => {
+                if (info.getValue() === "Yes") return "current";
+                return "previous";
+            }),
+        },
+        {
+            accessorKey: "pricing",
+            header: t?.("columns.pricing.onDemand") ?? "On Demand Cost",
+            id: "cost-ondemand",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => {
+                    return pricing?.ondemand;
+                },
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header: t?.("columns.pricing.reserved") ?? "Reserved Cost",
+            id: "cost-reserved",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.reserved?.[reservedTerm],
+                currency,
+            ),
+        },
+    ];
 };

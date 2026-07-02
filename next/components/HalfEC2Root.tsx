@@ -88,7 +88,10 @@ export default function HalfEC2Root<
                 <InstanceBreadcrumbs
                     crumbs={[
                         { name: "AWS", href: localePrefix },
-                        { name: typeName, href: `${localePrefix}${tablePath === "/" ? "" : tablePath}` },
+                        {
+                            name: typeName,
+                            href: `${localePrefix}${tablePath === "/" ? "" : tablePath}`,
+                        },
                         {
                             name: instance.instance_type,
                             href: `${localePrefix}/${instance.instance_type}`,

@@ -11,7 +11,12 @@ type TableProps = {
     children: React.ReactNode;
 };
 
-function Table({ slug, name, children, valueLabel }: TableProps & { valueLabel: string }) {
+function Table({
+    slug,
+    name,
+    children,
+    valueLabel,
+}: TableProps & { valueLabel: string }) {
     return (
         <table
             id={slug}

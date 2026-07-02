@@ -30,10 +30,10 @@ function ExprHelpData({ parseError }: { parseError: string | null }) {
                     {t("exprHelp.rangesNote")}
                 </li>
                 <li>
-                    {t("exprHelp.logicalOperators")}{" "}
-                    <code>&amp;&amp;</code> {t("exprHelp.logicalAnd")},{" "}
-                    <code>||</code> {t("exprHelp.logicalOr")},{" "}
-                    <code>!</code> {t("exprHelp.logicalNot")}
+                    {t("exprHelp.logicalOperators")} <code>&amp;&amp;</code>{" "}
+                    {t("exprHelp.logicalAnd")}, <code>||</code>{" "}
+                    {t("exprHelp.logicalOr")}, <code>!</code>{" "}
+                    {t("exprHelp.logicalNot")}
                 </li>
                 <li>
                     {t("exprHelp.grouping")} <code>(expression)</code>
@@ -50,8 +50,7 @@ function ExprHelpData({ parseError }: { parseError: string | null }) {
                             {t("exprHelp.endsWithDesc")}
                         </li>
                         <li>
-                            <code>has("text")</code> -{" "}
-                            {t("exprHelp.hasDesc")}
+                            <code>has("text")</code> - {t("exprHelp.hasDesc")}
                         </li>
                     </ul>
                 </li>

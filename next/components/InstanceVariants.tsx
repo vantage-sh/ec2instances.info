@@ -23,12 +23,15 @@ export default function InstanceVariants({
     return (
         <section>
             <h3 className="flex items-center gap-2">
-                <Server className="w-4 h-4 inline-block my-auto" /> {t("instancePage.instanceVariants")}
+                <Server className="w-4 h-4 inline-block my-auto" />{" "}
+                {t("instancePage.instanceVariants")}
             </h3>
             <table className="mt-2 w-full text-sm">
                 <thead>
                     <tr className="border-e border-gray-200 dark:border-gray-3">
-                        <th className="text-start pb-1">{t("instancePage.variant")}</th>
+                        <th className="text-start pb-1">
+                            {t("instancePage.variant")}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

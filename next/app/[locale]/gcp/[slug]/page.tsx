@@ -18,7 +18,9 @@ export const dynamic = "force-static";
 export const dynamicParams = true;
 export const revalidate = 28800; // 8h, matching the scrape cadence
 
-let p: Promise<{ regions: Record<string, string>; instances: GCPInstance[] }> | undefined;
+let p:
+    | Promise<{ regions: Record<string, string>; instances: GCPInstance[] }>
+    | undefined;
 
 async function getData() {
     if (p) return p;
@@ -31,7 +33,10 @@ async function getData() {
             regions: regions.main,
             instances,
         };
-    })().catch((e) => { p = undefined; throw e; });
+    })().catch((e) => {
+        p = undefined;
+        throw e;
+    });
     return p;
 }
 

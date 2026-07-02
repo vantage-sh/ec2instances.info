@@ -133,7 +133,8 @@ const dictionary = {
             cachedTempStorageThroughput:
                 "Cached/Temp Storage Read/Write Throughput (MBps)",
             uncachedDiskIops: "Uncached Disk Throughput (IOPS)",
-            uncachedDiskThroughput: "Uncached Disk Read/Write Throughput (MBps)",
+            uncachedDiskThroughput:
+                "Uncached Disk Read/Write Throughput (MBps)",
             premiumIo: "Premium I/O",
             ultraDisks: "Ultra Disks Supported",
             encryption: "Encryption",

@@ -27,7 +27,10 @@
 
     // Self-reference used by the revalidation queue.
     "services": [
-        { "binding": "WORKER_SELF_REFERENCE", "service": "ec2instances-worker" },
+        {
+            "binding": "WORKER_SELF_REFERENCE",
+            "service": "ec2instances-worker",
+        },
     ],
 
     "routes": [

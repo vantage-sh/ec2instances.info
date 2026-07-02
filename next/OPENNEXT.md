@@ -17,33 +17,34 @@ These are NOT done by CI and must be run once by someone with CF access.
 1. **Create the R2 incremental-cache buckets** (one per environment), matching
    the `bucket_name`s in `next/wrangler.jsonc`:
 
-   ```bash
-   wrangler r2 bucket create ec2instances-next-cache-production
-   wrangler r2 bucket create ec2instances-next-cache-staging
-   ```
+    ```bash
+    wrangler r2 bucket create ec2instances-next-cache-production
+    wrangler r2 bucket create ec2instances-next-cache-staging
+    ```
 
 2. **Update the deploy API token scope.** The token in the
    `CLOUDFLARE_API_TOKEN` secret previously needed Workers KV bulk + R2 S3
    access keys. It now needs **edit** permissions for:
-   - Workers Scripts
-   - Workers R2 Storage
-   - Workers Durable Objects (Durable Objects are SQLite-backed; available on
-     the Free plan, but this worker needs **Workers Paid** for the 10 MiB worker
-     size limit)
 
-   The old `DEPLOYMENT_CF_*` secrets (S3 access keys, KV namespace id, bucket
-   names) are no longer used and can be removed. `DEPLOYMENT_CF_ACCOUNT_ID` is
-   still used (passed as `CLOUDFLARE_ACCOUNT_ID`).
+    - Workers Scripts
+    - Workers R2 Storage
+    - Workers Durable Objects (Durable Objects are SQLite-backed; available on
+      the Free plan, but this worker needs **Workers Paid** for the 10 MiB worker
+      size limit)
+
+    The old `DEPLOYMENT_CF_*` secrets (S3 access keys, KV namespace id, bucket
+    names) are no longer used and can be removed. `DEPLOYMENT_CF_ACCOUNT_ID` is
+    still used (passed as `CLOUDFLARE_ACCOUNT_ID`).
 
 3. **First deploy** (from `next/`, with `CLOUDFLARE_API_TOKEN` +
    `CLOUDFLARE_ACCOUNT_ID` set):
 
-   ```bash
-   npm ci && npm run init && npm run build:llms
-   npx opennextjs-cloudflare build
-   npx opennextjs-cloudflare deploy            # production
-   npx opennextjs-cloudflare deploy --env staging
-   ```
+    ```bash
+    npm ci && npm run init && npm run build:llms
+    npx opennextjs-cloudflare build
+    npx opennextjs-cloudflare deploy            # production
+    npx opennextjs-cloudflare deploy --env staging
+    ```
 
 ## Redirects (re-homed from worker.js)
 
@@ -102,7 +103,7 @@ These are NOT done by CI and must be run once by someone with CF access.
   binding. Instead tier asset serving like the retired `worker.js` did — serve
   from **KV as a bounded cache (max ~100k entries) with R2 (S3-compatible)
   fallback for overflow and large files**. Concretely: keep the hot/most-served
-  assets (HTML/RSC/_next static) in KV up to the cap, and put OG images + the
+  assets (HTML/RSC/\_next static) in KV up to the cap, and put OG images + the
   compressed data `.xz` (and any overflow beyond 100k) in R2, with the worker
   resolving KV-first then R2. This requires a custom asset handler (or an
   OpenNext static-assets/incremental-cache override) plus the KV+R2 bindings,

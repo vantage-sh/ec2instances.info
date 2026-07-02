@@ -13,7 +13,8 @@ export default function RootPage() {
             </head>
             <body>
                 <p>
-                    Redirecting to <a href={`/${DEFAULT_LOCALE}/`}>/{DEFAULT_LOCALE}/</a>
+                    Redirecting to{" "}
+                    <a href={`/${DEFAULT_LOCALE}/`}>/{DEFAULT_LOCALE}/</a>
                 </p>
             </body>
         </html>

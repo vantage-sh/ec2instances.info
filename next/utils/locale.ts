@@ -1,4 +1,8 @@
-import { SUPPORTED_LOCALES, DEFAULT_LOCALE, type SupportedLocale } from "./localeConstants";
+import {
+    SUPPORTED_LOCALES,
+    DEFAULT_LOCALE,
+    type SupportedLocale,
+} from "./localeConstants";
 
 /**
  * Extract the locale from a pathname.
@@ -7,7 +11,10 @@ import { SUPPORTED_LOCALES, DEFAULT_LOCALE, type SupportedLocale } from "./local
 export function getLocaleFromPath(pathname: string): SupportedLocale {
     const segments = pathname.split("/").filter(Boolean);
     const firstSegment = segments[0];
-    if (firstSegment && SUPPORTED_LOCALES.includes(firstSegment as SupportedLocale)) {
+    if (
+        firstSegment &&
+        SUPPORTED_LOCALES.includes(firstSegment as SupportedLocale)
+    ) {
         return firstSegment as SupportedLocale;
     }
     return DEFAULT_LOCALE;

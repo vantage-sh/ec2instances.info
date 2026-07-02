@@ -36,7 +36,9 @@ export default async function Azure() {
     const data = await loadDataAsset("first-100-azure-instances.msgpack");
     const compressedInstances = decode(data) as [string[], ...AzureInstance[]];
 
-    const instanceCount = Number(await loadDataText("azure-instance-count.txt"));
+    const instanceCount = Number(
+        await loadDataText("azure-instance-count.txt"),
+    );
     const instancesHash = await loadDataText("azure-instances-hash.txt");
 
     const marketingData = await loadAdvertData;

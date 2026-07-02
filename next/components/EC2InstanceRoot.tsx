@@ -97,7 +97,10 @@ export default function EC2InstanceRoot({
                 <InstanceBreadcrumbs
                     crumbs={[
                         { name: "AWS", href: localePrefix },
-                        { name: typeName, href: `${localePrefix}${tablePath === "/" ? "" : tablePath}` },
+                        {
+                            name: typeName,
+                            href: `${localePrefix}${tablePath === "/" ? "" : tablePath}`,
+                        },
                         {
                             name: compressedInstance.instance_type,
                             href: `${localePrefix}/${compressedInstance.instance_type}`,

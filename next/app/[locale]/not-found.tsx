@@ -15,7 +15,7 @@ export default function Page404() {
         >
             <h1 className="text-2xl font-bold mb-2">{t("notFound.title")}</h1>
             <p>
-                {t("notFound.description")} {" "}
+                {t("notFound.description")}{" "}
                 <a
                     className="text-purple-1 hover:text-purple-0"
                     href="https://vantage.sh/slack"

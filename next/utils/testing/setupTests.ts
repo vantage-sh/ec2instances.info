@@ -20,7 +20,8 @@ const translations: Record<string, string> = {
     "instancePage.variant": "Variant",
     "instancePage.instanceDetails": "Instance Details",
     "instancePage.value": "Value",
-    "instancePage.ec2CostHelp": "Having trouble making sense of your EC2 costs? Check out",
+    "instancePage.ec2CostHelp":
+        "Having trouble making sense of your EC2 costs? Check out",
     "instancePage.ec2CostHelpSuffix": "for an AWS billing code lookup tool.",
     "instancePage.requestDemo": "Request a demo",
     // Duration translations

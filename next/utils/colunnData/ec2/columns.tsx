@@ -235,1773 +235,1918 @@ export const columnsGen = (
     const t = locals?.t;
     const locale = locals?.locale;
     return [
-    {
-        accessorKey: "pretty_name",
-        header: t?.("columns.common.name") ?? "Name",
-        id: "pretty_name",
-        size: 350,
-        sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "pretty_name" }),
-        cell: (info) => info.getValue() as string,
-    },
-    {
-        accessorKey: "instance_type",
-        header: t?.("columns.common.apiName") ?? "API Name",
-        size: 175,
-        id: "instance_type",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.instance_type;
-            const valueB = rowB.original.instance_type;
-            return sortByInstanceType(valueA, valueB, ".");
+        {
+            accessorKey: "pretty_name",
+            header: t?.("columns.common.name") ?? "Name",
+            id: "pretty_name",
+            size: 350,
+            sortingFn: "alphanumeric",
+            filterFn: regex({ accessorKey: "pretty_name" }),
+            cell: (info) => info.getValue() as string,
         },
-        filterFn: regex({ accessorKey: "instance_type" }),
-        cell: (info) => {
-            const value = info.getValue() as string;
-            return (
-                <RegionLinkPreloader
-                    onClick={(e) => e.stopPropagation()}
-                    href={prefixWithLocale(`/aws/ec2/${value}`, locale ?? "en")}
-                >
-                    {value}
-                </RegionLinkPreloader>
-            );
+        {
+            accessorKey: "instance_type",
+            header: t?.("columns.common.apiName") ?? "API Name",
+            size: 175,
+            id: "instance_type",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.instance_type;
+                const valueB = rowB.original.instance_type;
+                return sortByInstanceType(valueA, valueB, ".");
+            },
+            filterFn: regex({ accessorKey: "instance_type" }),
+            cell: (info) => {
+                const value = info.getValue() as string;
+                return (
+                    <RegionLinkPreloader
+                        onClick={(e) => e.stopPropagation()}
+                        href={prefixWithLocale(
+                            `/aws/ec2/${value}`,
+                            locale ?? "en",
+                        )}
+                    >
+                        {value}
+                    </RegionLinkPreloader>
+                );
+            },
         },
-    },
-    {
-        accessorKey: "instance_type",
-        header: t?.("columns.common.instanceFamily") ?? "Instance Family",
-        size: 150,
-        id: "family",
-        sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter(
-            "instance_type",
-            (info) => (info.getValue() as string).split(".")[0],
-        ),
-    },
-    {
-        accessorKey: "coremark_iterations_second",
-        header: t?.("columns.ec2.coremarkScore") ?? "CoreMark Score",
-        size: 150,
-        id: "coremark_iterations_second",
-        sortingFn: "alphanumeric",
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return undefined;
-            return value.toLocaleString();
+        {
+            accessorKey: "instance_type",
+            header: t?.("columns.common.instanceFamily") ?? "Instance Family",
+            size: 150,
+            id: "family",
+            sortingFn: "alphanumeric",
+            ...makeCellWithRegexSorter(
+                "instance_type",
+                (info) => (info.getValue() as string).split(".")[0],
+            ),
         },
-    },
-    {
-        accessorKey: "family",
-        header: t?.("columns.common.computeFamily") ?? "Compute Family",
-        size: 150,
-        id: "compute_family",
-        sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "family" }),
-    },
-    {
-        accessorKey: "ffmpeg_fps",
-        header: t?.("columns.ec2.ffmpegFps") ?? "FFmpeg FPS",
-        size: 130,
-        id: "ffmpeg_fps",
-        sortingFn: "alphanumeric",
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return undefined;
-            return `${value.toFixed(1)} fps`;
+        {
+            accessorKey: "coremark_iterations_second",
+            header: t?.("columns.ec2.coremarkScore") ?? "CoreMark Score",
+            size: 150,
+            id: "coremark_iterations_second",
+            sortingFn: "alphanumeric",
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number | null;
+                if (value === null || value === undefined) return undefined;
+                return value.toLocaleString();
+            },
         },
-    },
-    {
-        accessorKey: "memory",
-        header: t?.("columns.common.instanceMemory") ?? "Instance Memory",
-        size: 170,
-        id: "memory",
-        sortingFn: "alphanumeric",
-        filterFn: expr,
-        cell: (info) => `${info.getValue() as number} GiB`,
-    },
-    {
-        accessorKey: "memory_speed",
-        header: t?.("columns.ec2.memorySpeed") ?? "Memory Speed",
-        size: 150,
-        id: "memory_speed",
-        sortingFn: "alphanumeric",
-        filterFn: expr,
-        cell: (info) => {
-            if (info.getValue() === null || info.getValue() === undefined)
-                return undefined;
-            return `${info.getValue() as number} MT/s`;
+        {
+            accessorKey: "family",
+            header: t?.("columns.common.computeFamily") ?? "Compute Family",
+            size: 150,
+            id: "compute_family",
+            sortingFn: "alphanumeric",
+            filterFn: regex({ accessorKey: "family" }),
         },
-    },
-    {
-        accessorKey: "uses_numa_architecture",
-        header: t?.("columns.ec2.usesNumaArch") ?? "Uses NUMA Architecture",
-        size: 180,
-        id: "uses_numa_architecture",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.uses_numa_architecture;
-            const valueB = rowB.original.uses_numa_architecture;
-            if (valueA === null || valueA === undefined) return 1;
-            if (valueB === null || valueB === undefined) return -1;
-            return Number(valueA) - Number(valueB);
+        {
+            accessorKey: "ffmpeg_fps",
+            header: t?.("columns.ec2.ffmpegFps") ?? "FFmpeg FPS",
+            size: 130,
+            id: "ffmpeg_fps",
+            sortingFn: "alphanumeric",
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number | null;
+                if (value === null || value === undefined) return undefined;
+                return `${value.toFixed(1)} fps`;
+            },
         },
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as boolean | null;
-            if (value === null || value === undefined) return undefined;
-            return value ? "Yes" : "No";
+        {
+            accessorKey: "memory",
+            header: t?.("columns.common.instanceMemory") ?? "Instance Memory",
+            size: 170,
+            id: "memory",
+            sortingFn: "alphanumeric",
+            filterFn: expr,
+            cell: (info) => `${info.getValue() as number} GiB`,
         },
-    },
-    {
-        accessorKey: "numa_node_count",
-        header: t?.("columns.ec2.numaNodeCount") ?? "NUMA Node Count",
-        size: 150,
-        id: "numa_node_count",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.numa_node_count;
-            const valueB = rowB.original.numa_node_count;
-            if (valueA === null || valueA === undefined) return -1;
-            if (valueB === null || valueB === undefined) return 1;
-            return valueA - valueB;
+        {
+            accessorKey: "memory_speed",
+            header: t?.("columns.ec2.memorySpeed") ?? "Memory Speed",
+            size: 150,
+            id: "memory_speed",
+            sortingFn: "alphanumeric",
+            filterFn: expr,
+            cell: (info) => {
+                if (info.getValue() === null || info.getValue() === undefined)
+                    return undefined;
+                return `${info.getValue() as number} MT/s`;
+            },
         },
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return undefined;
-            return value;
+        {
+            accessorKey: "uses_numa_architecture",
+            header: t?.("columns.ec2.usesNumaArch") ?? "Uses NUMA Architecture",
+            size: 180,
+            id: "uses_numa_architecture",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.uses_numa_architecture;
+                const valueB = rowB.original.uses_numa_architecture;
+                if (valueA === null || valueA === undefined) return 1;
+                if (valueB === null || valueB === undefined) return -1;
+                return Number(valueA) - Number(valueB);
+            },
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as boolean | null;
+                if (value === null || value === undefined) return undefined;
+                return value ? "Yes" : "No";
+            },
         },
-    },
-    {
-        accessorKey: "max_numa_distance",
-        header: t?.("columns.ec2.maxNumaDistance") ?? "Max NUMA Distance",
-        size: 150,
-        id: "max_numa_distance",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.max_numa_distance;
-            const valueB = rowB.original.max_numa_distance;
-            if (valueA === null || valueA === undefined) return -1;
-            if (valueB === null || valueB === undefined) return 1;
-            return valueA - valueB;
+        {
+            accessorKey: "numa_node_count",
+            header: t?.("columns.ec2.numaNodeCount") ?? "NUMA Node Count",
+            size: 150,
+            id: "numa_node_count",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.numa_node_count;
+                const valueB = rowB.original.numa_node_count;
+                if (valueA === null || valueA === undefined) return -1;
+                if (valueB === null || valueB === undefined) return 1;
+                return valueA - valueB;
+            },
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number | null;
+                if (value === null || value === undefined) return undefined;
+                return value;
+            },
         },
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return undefined;
-            return value;
+        {
+            accessorKey: "max_numa_distance",
+            header: t?.("columns.ec2.maxNumaDistance") ?? "Max NUMA Distance",
+            size: 150,
+            id: "max_numa_distance",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.max_numa_distance;
+                const valueB = rowB.original.max_numa_distance;
+                if (valueA === null || valueA === undefined) return -1;
+                if (valueB === null || valueB === undefined) return 1;
+                return valueA - valueB;
+            },
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number | null;
+                if (value === null || value === undefined) return undefined;
+                return value;
+            },
         },
-    },
-    {
-        accessorKey: "core_count_per_numa_node",
-        header: t?.("columns.ec2.coresPerNumaNode") ?? "Cores per NUMA Node (Avg)",
-        size: 180,
-        id: "core_count_per_numa_node",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.core_count_per_numa_node;
-            const valueB = rowB.original.core_count_per_numa_node;
-            if (valueA === null || valueA === undefined) return -1;
-            if (valueB === null || valueB === undefined) return 1;
-            return valueA - valueB;
+        {
+            accessorKey: "core_count_per_numa_node",
+            header:
+                t?.("columns.ec2.coresPerNumaNode") ??
+                "Cores per NUMA Node (Avg)",
+            size: 180,
+            id: "core_count_per_numa_node",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.core_count_per_numa_node;
+                const valueB = rowB.original.core_count_per_numa_node;
+                if (valueA === null || valueA === undefined) return -1;
+                if (valueB === null || valueB === undefined) return 1;
+                return valueA - valueB;
+            },
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number | null;
+                if (value === null || value === undefined) return undefined;
+                return value;
+            },
         },
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return undefined;
-            return value;
+        {
+            accessorKey: "thread_count_per_numa_node",
+            header:
+                t?.("columns.ec2.threadsPerNumaNode") ??
+                "Threads per NUMA Node (Avg)",
+            size: 180,
+            id: "thread_count_per_numa_node",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.thread_count_per_numa_node;
+                const valueB = rowB.original.thread_count_per_numa_node;
+                if (valueA === null || valueA === undefined) return -1;
+                if (valueB === null || valueB === undefined) return 1;
+                return valueA - valueB;
+            },
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number | null;
+                if (value === null || value === undefined) return undefined;
+                return value;
+            },
         },
-    },
-    {
-        accessorKey: "thread_count_per_numa_node",
-        header: t?.("columns.ec2.threadsPerNumaNode") ?? "Threads per NUMA Node (Avg)",
-        size: 180,
-        id: "thread_count_per_numa_node",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.thread_count_per_numa_node;
-            const valueB = rowB.original.thread_count_per_numa_node;
-            if (valueA === null || valueA === undefined) return -1;
-            if (valueB === null || valueB === undefined) return 1;
-            return valueA - valueB;
+        {
+            accessorKey: "memory_per_numa_node_mb",
+            header:
+                t?.("columns.ec2.memoryPerNumaNode") ??
+                "Memory per NUMA Node (Avg MB)",
+            size: 200,
+            id: "memory_per_numa_node_mb",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.memory_per_numa_node_mb;
+                const valueB = rowB.original.memory_per_numa_node_mb;
+                if (valueA === null || valueA === undefined) return -1;
+                if (valueB === null || valueB === undefined) return 1;
+                return valueA - valueB;
+            },
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number | null;
+                if (value === null || value === undefined) return undefined;
+                return `${value.toFixed(0)} MB`;
+            },
         },
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return undefined;
-            return value;
+        {
+            accessorKey: "l3_per_numa_node_mb",
+            header:
+                t?.("columns.ec2.l3PerNumaNode") ??
+                "L3 Cache per NUMA Node (Avg MB)",
+            size: 220,
+            id: "l3_per_numa_node_mb",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.l3_per_numa_node_mb;
+                const valueB = rowB.original.l3_per_numa_node_mb;
+                if (valueA === null || valueA === undefined) return -1;
+                if (valueB === null || valueB === undefined) return 1;
+                return valueA - valueB;
+            },
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number | null;
+                if (value === null || value === undefined) return undefined;
+                return `${value.toFixed(1)} MB`;
+            },
         },
-    },
-    {
-        accessorKey: "memory_per_numa_node_mb",
-        header: t?.("columns.ec2.memoryPerNumaNode") ?? "Memory per NUMA Node (Avg MB)",
-        size: 200,
-        id: "memory_per_numa_node_mb",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.memory_per_numa_node_mb;
-            const valueB = rowB.original.memory_per_numa_node_mb;
-            if (valueA === null || valueA === undefined) return -1;
-            if (valueB === null || valueB === undefined) return 1;
-            return valueA - valueB;
+        {
+            accessorKey: "l3_shared",
+            header: t?.("columns.ec2.l3CacheShared") ?? "L3 Cache Shared",
+            size: 150,
+            id: "l3_shared",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.l3_shared;
+                const valueB = rowB.original.l3_shared;
+                if (!valueA) return -1;
+                if (!valueB) return 1;
+                return 0;
+            },
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as boolean | null;
+                if (value === null || value === undefined) return undefined;
+                return value ? "Yes" : "No";
+            },
         },
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return undefined;
-            return `${value.toFixed(0)} MB`;
-        },
-    },
-    {
-        accessorKey: "l3_per_numa_node_mb",
-        header: t?.("columns.ec2.l3PerNumaNode") ?? "L3 Cache per NUMA Node (Avg MB)",
-        size: 220,
-        id: "l3_per_numa_node_mb",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.l3_per_numa_node_mb;
-            const valueB = rowB.original.l3_per_numa_node_mb;
-            if (valueA === null || valueA === undefined) return -1;
-            if (valueB === null || valueB === undefined) return 1;
-            return valueA - valueB;
-        },
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return undefined;
-            return `${value.toFixed(1)} MB`;
-        },
-    },
-    {
-        accessorKey: "l3_shared",
-        header: t?.("columns.ec2.l3CacheShared") ?? "L3 Cache Shared",
-        size: 150,
-        id: "l3_shared",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.l3_shared;
-            const valueB = rowB.original.l3_shared;
-            if (!valueA) return -1;
-            if (!valueB) return 1;
-            return 0;
-        },
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as boolean | null;
-            if (value === null || value === undefined) return undefined;
-            return value ? "Yes" : "No";
-        },
-    },
-    {
-        accessorKey: "ECU",
-        header: t?.("columns.ec2.computeUnitsEcu") ?? "Compute Units (ECU)",
-        size: 180,
-        id: "ECU",
-        sortingFn: "alphanumeric",
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue();
-            if (value === "variable") {
-                const basePerformance = info.row.original.base_performance;
-                if (basePerformance) {
+        {
+            accessorKey: "ECU",
+            header: t?.("columns.ec2.computeUnitsEcu") ?? "Compute Units (ECU)",
+            size: 180,
+            id: "ECU",
+            sortingFn: "alphanumeric",
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue();
+                if (value === "variable") {
+                    const basePerformance = info.row.original.base_performance;
+                    if (basePerformance) {
+                        return (
+                            <span>
+                                <abbr title="For T2 instances, the 100% unit represents a High Frequency Intel Xeon Processors with Turbo up to 3.3GHz.">
+                                    <a
+                                        href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html"
+                                        target="_blank"
+                                    >
+                                        Base performance:{" "}
+                                        {`${(basePerformance * 100).toFixed(1)}%`}
+                                    </a>
+                                </abbr>
+                            </span>
+                        );
+                    }
                     return (
                         <span>
-                            <abbr title="For T2 instances, the 100% unit represents a High Frequency Intel Xeon Processors with Turbo up to 3.3GHz.">
+                            <a
+                                href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts_micro_instances.html"
+                                target="_blank"
+                            >
+                                Burstable
+                            </a>
+                        </span>
+                    );
+                }
+                return `${value} units`;
+            },
+        },
+        {
+            accessorKey: "vCPU",
+            header: t?.("columns.common.vCPUs") ?? "vCPUs",
+            size: 110,
+            id: "vCPU",
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number;
+                const burstMinutes = info.row.original.burst_minutes;
+                if (burstMinutes) {
+                    const hours = Math.floor(burstMinutes / 60);
+                    const minutes = burstMinutes % 60;
+                    return (
+                        <span className="block @container">
+                            {value} vCPUs{" "}
+                            <abbr
+                                className="hidden @[150px]:inline-block"
+                                title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs."
+                            >
+                                (
                                 <a
                                     href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html"
                                     target="_blank"
                                 >
-                                    Base performance:{" "}
-                                    {`${(basePerformance * 100).toFixed(1)}%`}
+                                    {hours}h {minutes}m burst
                                 </a>
+                                )
+                            </abbr>
+                            <abbr
+                                className="visible @[150px]:hidden"
+                                title={`For a ${hours}h ${minutes}m burst`}
+                            >
+                                <ClockFadingIcon className="inline-block w-3 h-3 stroke-purple-1" />
                             </abbr>
                         </span>
                     );
                 }
-                return (
-                    <span>
-                        <a
-                            href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts_micro_instances.html"
-                            target="_blank"
-                        >
-                            Burstable
-                        </a>
-                    </span>
-                );
-            }
-            return `${value} units`;
+                return `${value} vCPUs`;
+            },
         },
-    },
-    {
-        accessorKey: "vCPU",
-        header: t?.("columns.common.vCPUs") ?? "vCPUs",
-        size: 110,
-        id: "vCPU",
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number;
-            const burstMinutes = info.row.original.burst_minutes;
-            if (burstMinutes) {
-                const hours = Math.floor(burstMinutes / 60);
-                const minutes = burstMinutes % 60;
-                return (
-                    <span className="block @container">
-                        {value} vCPUs{" "}
-                        <abbr
-                            className="hidden @[150px]:inline-block"
-                            title="Given that a CPU Credit represents the performance of a full CPU core for one minute, the maximum credit balance is converted to CPU burst minutes per day by dividing it by the number of vCPUs."
-                        >
-                            (
+        {
+            accessorKey: "cores",
+            header: "Cores",
+            size: 110,
+            id: "cores",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.cores;
+                const valueB = rowB.original.cores;
+                if (valueA === null || valueA === undefined) return -1;
+                if (valueB === null || valueB === undefined) return 1;
+                return valueA - valueB;
+            },
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number | null;
+                if (value === null || value === undefined) return undefined;
+                return `${value} cores`;
+            },
+        },
+        {
+            accessorKey: "memory_per_vcpu",
+            header:
+                t?.("columns.common.memoryPerVcpu") ?? "GiB of Memory per vCPU",
+            id: "memory_per_vcpu",
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue();
+                if (value === "unknown") return undefined;
+                return `${Number(value).toFixed(2)} GiB/vCPU`;
+            },
+        },
+        {
+            accessorKey: "GPU",
+            header: t?.("columns.common.gpus") ?? "GPUs",
+            size: 80,
+            id: "GPU",
+            filterFn: expr,
+            cell: (info) => info.getValue() as number,
+        },
+        {
+            accessorKey: "GPU_model",
+            size: 120,
+            header: t?.("columns.common.gpuModel") ?? "GPU model",
+            id: "GPU_model",
+            sortingFn: "alphanumeric",
+            filterFn: regex({ accessorKey: "GPU_model" }),
+            cell: (info) => info.getValue() as string,
+        },
+        {
+            accessorKey: "GPU_memory",
+            header: t?.("columns.common.gpuMemory") ?? "GPU memory",
+            size: 130,
+            id: "GPU_memory",
+            sortingFn: "alphanumeric",
+            filterFn: expr,
+            cell: (info) => `${info.getValue() as number} GiB`,
+        },
+        {
+            accessorKey: "compute_capability",
+            header:
+                t?.("columns.ec2.cudaComputeCapability") ??
+                "CUDA Compute Capability",
+            id: "compute_capability",
+            filterFn: regex({ accessorKey: "compute_capability" }),
+            cell: (info) => info.getValue() as string,
+        },
+        {
+            accessorKey: "FPGA",
+            size: 90,
+            header: t?.("columns.ec2.fpgas") ?? "FPGAs",
+            id: "FPGA",
+            filterFn: regex({ accessorKey: "FPGA" }),
+            cell: (info) => info.getValue() as number,
+        },
+        {
+            accessorKey: "ECU_per_vcpu",
+            header: t?.("columns.ec2.ecuPerVcpu") ?? "ECU per vCPU",
+            size: 140,
+            id: "ECU_per_vcpu",
+            filterFn: regex({ accessorKey: "ECU_per_vcpu" }),
+            cell: (info) => {
+                const value = info.getValue();
+                if (value === "variable" || value === "unknown") {
+                    return (
+                        <span>
                             <a
-                                href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html"
+                                href="http://aws.amazon.com/ec2/instance-types/#burst"
                                 target="_blank"
                             >
-                                {hours}h {minutes}m burst
+                                {value === "variable" ? "Burstable" : undefined}
                             </a>
-                            )
-                        </abbr>
-                        <abbr
-                            className="visible @[150px]:hidden"
-                            title={`For a ${hours}h ${minutes}m burst`}
-                        >
-                            <ClockFadingIcon className="inline-block w-3 h-3 stroke-purple-1" />
-                        </abbr>
-                    </span>
-                );
-            }
-            return `${value} vCPUs`;
+                        </span>
+                    );
+                }
+                const numValue = Number(value);
+                if (isNaN(numValue)) {
+                    return undefined;
+                }
+                return `${numValue.toFixed(4)} units`;
+            },
         },
-    },
-    {
-        accessorKey: "cores",
-        header: "Cores",
-        size: 110,
-        id: "cores",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.cores;
-            const valueB = rowB.original.cores;
-            if (valueA === null || valueA === undefined) return -1;
-            if (valueB === null || valueB === undefined) return 1;
-            return valueA - valueB;
+        {
+            accessorKey: "physical_processor",
+            size: 200,
+            header:
+                t?.("columns.common.physicalProcessor") ?? "Physical Processor",
+            id: "physical_processor",
+            sortingFn: "alphanumeric",
+            filterFn: regex({ accessorKey: "physical_processor" }),
+            cell: (info) => info.getValue() || undefined,
         },
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return undefined;
-            return `${value} cores`;
-        },
-    },
-    {
-        accessorKey: "memory_per_vcpu",
-        header: t?.("columns.common.memoryPerVcpu") ?? "GiB of Memory per vCPU",
-        id: "memory_per_vcpu",
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue();
-            if (value === "unknown") return undefined;
-            return `${Number(value).toFixed(2)} GiB/vCPU`;
-        },
-    },
-    {
-        accessorKey: "GPU",
-        header: t?.("columns.common.gpus") ?? "GPUs",
-        size: 80,
-        id: "GPU",
-        filterFn: expr,
-        cell: (info) => info.getValue() as number,
-    },
-    {
-        accessorKey: "GPU_model",
-        size: 120,
-        header: t?.("columns.common.gpuModel") ?? "GPU model",
-        id: "GPU_model",
-        sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "GPU_model" }),
-        cell: (info) => info.getValue() as string,
-    },
-    {
-        accessorKey: "GPU_memory",
-        header: t?.("columns.common.gpuMemory") ?? "GPU memory",
-        size: 130,
-        id: "GPU_memory",
-        sortingFn: "alphanumeric",
-        filterFn: expr,
-        cell: (info) => `${info.getValue() as number} GiB`,
-    },
-    {
-        accessorKey: "compute_capability",
-        header: t?.("columns.ec2.cudaComputeCapability") ?? "CUDA Compute Capability",
-        id: "compute_capability",
-        filterFn: regex({ accessorKey: "compute_capability" }),
-        cell: (info) => info.getValue() as string,
-    },
-    {
-        accessorKey: "FPGA",
-        size: 90,
-        header: t?.("columns.ec2.fpgas") ?? "FPGAs",
-        id: "FPGA",
-        filterFn: regex({ accessorKey: "FPGA" }),
-        cell: (info) => info.getValue() as number,
-    },
-    {
-        accessorKey: "ECU_per_vcpu",
-        header: t?.("columns.ec2.ecuPerVcpu") ?? "ECU per vCPU",
-        size: 140,
-        id: "ECU_per_vcpu",
-        filterFn: regex({ accessorKey: "ECU_per_vcpu" }),
-        cell: (info) => {
-            const value = info.getValue();
-            if (value === "variable" || value === "unknown") {
-                return (
-                    <span>
-                        <a
-                            href="http://aws.amazon.com/ec2/instance-types/#burst"
-                            target="_blank"
-                        >
-                            {value === "variable" ? "Burstable" : undefined}
-                        </a>
-                    </span>
-                );
-            }
-            const numValue = Number(value);
-            if (isNaN(numValue)) {
-                return undefined;
-            }
-            return `${numValue.toFixed(4)} units`;
-        },
-    },
-    {
-        accessorKey: "physical_processor",
-        size: 200,
-        header: t?.("columns.common.physicalProcessor") ?? "Physical Processor",
-        id: "physical_processor",
-        sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "physical_processor" }),
-        cell: (info) => info.getValue() || undefined,
-    },
-    {
-        accessorKey: "clock_speed_ghz",
-        header: t?.("columns.ec2.clockSpeed") ?? "Clock Speed(GHz)",
-        size: 160,
-        id: "clock_speed_ghz",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.clock_speed_ghz?.match(FLOAT);
-            const valueB = rowB.original.clock_speed_ghz?.match(FLOAT);
-            if (!valueA) return -1;
-            if (!valueB) return 1;
-            return parseFloat(valueA[0]) - parseFloat(valueB[0]);
-        },
-        filterFn: regex({
+        {
             accessorKey: "clock_speed_ghz",
-            fallback: (row, _, filterValue) => {
-                // Check the filter value and row have a float.
-                const matchFilter = filterValue?.match(FLOAT);
-                if (!matchFilter) {
-                    // Filter by case insensitive match.
-                    const rowValue = row.original.clock_speed_ghz;
+            header: t?.("columns.ec2.clockSpeed") ?? "Clock Speed(GHz)",
+            size: 160,
+            id: "clock_speed_ghz",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.clock_speed_ghz?.match(FLOAT);
+                const valueB = rowB.original.clock_speed_ghz?.match(FLOAT);
+                if (!valueA) return -1;
+                if (!valueB) return 1;
+                return parseFloat(valueA[0]) - parseFloat(valueB[0]);
+            },
+            filterFn: regex({
+                accessorKey: "clock_speed_ghz",
+                fallback: (row, _, filterValue) => {
+                    // Check the filter value and row have a float.
+                    const matchFilter = filterValue?.match(FLOAT);
+                    if (!matchFilter) {
+                        // Filter by case insensitive match.
+                        const rowValue = row.original.clock_speed_ghz;
+                        if (!rowValue) return false;
+                        return rowValue
+                            .toLowerCase()
+                            .includes(filterValue.toLowerCase());
+                    }
+                    const rowValue = row.original.clock_speed_ghz?.match(FLOAT);
                     if (!rowValue) return false;
-                    return rowValue
+                    return (
+                        parseFloat(rowValue[0]) >= parseFloat(matchFilter[0])
+                    );
+                },
+            }),
+            cell: (info) => info.getValue() || undefined,
+        },
+        {
+            accessorKey: "intel_avx",
+            header: t?.("columns.ec2.intelAvx") ?? "Intel AVX",
+            size: 110,
+            id: "intel_avx",
+            filterFn: regex({ accessorKey: "intel_avx" }),
+            cell: (info) => (info.getValue() ? "Yes" : undefined),
+        },
+        {
+            accessorKey: "intel_avx2",
+            header: t?.("columns.ec2.intelAvx2") ?? "Intel AVX2",
+            size: 110,
+            id: "intel_avx2",
+            filterFn: regex({ accessorKey: "intel_avx2" }),
+            cell: (info) => (info.getValue() ? "Yes" : undefined),
+        },
+        {
+            accessorKey: "intel_avx512",
+            header: t?.("columns.ec2.intelAvx512") ?? "Intel AVX-512",
+            size: 130,
+            id: "intel_avx512",
+            filterFn: regex({ accessorKey: "intel_avx512" }),
+            cell: (info) => (info.getValue() ? "Yes" : undefined),
+        },
+        {
+            accessorKey: "intel_turbo",
+            header: t?.("columns.ec2.intelTurbo") ?? "Intel Turbo",
+            size: 120,
+            id: "intel_turbo",
+            filterFn: regex({ accessorKey: "intel_turbo" }),
+            cell: (info) => (info.getValue() ? "Yes" : undefined),
+        },
+        {
+            accessorKey: "storage",
+            header: t?.("columns.common.instanceStorage") ?? "Instance Storage",
+            size: 160,
+            id: "storage",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.storage;
+                const valueB = rowB.original.storage;
+                if (!valueA) return -1;
+                if (!valueB) return 1;
+                const totalSizeA = valueA.devices * valueA.size;
+                const totalSizeB = valueB.devices * valueB.size;
+                return totalSizeA - totalSizeB;
+            },
+            filterFn: (row, _, filterValue) => {
+                if (filterValue === 0) return true;
+                const storage = row.original.storage;
+                const totalSize =
+                    (storage?.devices || 0) * (storage?.size || 0);
+                const [text, detail] = formatStorage(storage);
+                try {
+                    return exprCompiler(filterValue)(
+                        totalSize,
+                        detail ? `${text} (${detail})` : text,
+                    );
+                } catch {
+                    return true;
+                }
+            },
+            cell: (info) => {
+                const storage = info.getValue() as Storage;
+                const [text, detail] = formatStorage(storage);
+                if (detail) {
+                    return (
+                        <span title={`${text} (${detail})`}>
+                            {text}{" "}
+                            <span className="text-xs text-gray-2">
+                                ({detail})
+                            </span>
+                        </span>
+                    );
+                }
+                return text;
+            },
+        },
+        {
+            accessorKey: "storage",
+            header:
+                t?.("columns.ec2.storageWarmedUp") ??
+                "Instance Storage: already warmed-up",
+            id: "warmed-up",
+            sortingFn: (rowA, rowB) => {
+                const storageA = rowA.original.storage;
+                const storageB = rowB.original.storage;
+                if (!storageA) return -1;
+                if (!storageB) return 1;
+                return storageA.storage_needs_initialization ? 1 : -1;
+            },
+            ...makeCellWithRegexSorter("storage", (info) => {
+                const storage = info.getValue() as Storage;
+                if (!storage) return undefined;
+                if (storage.storage_needs_initialization === undefined)
+                    throw new Error(
+                        "storage_needs_initialization is undefined",
+                    );
+                return storage.storage_needs_initialization ? "No" : "Yes";
+            }),
+        },
+        {
+            accessorKey: "storage",
+            header:
+                t?.("columns.ec2.storageTrimSupport") ??
+                "Instance Storage: SSD TRIM Support",
+            id: "trim-support",
+            sortingFn: (rowA, rowB) => {
+                const storageA = rowA.original.storage;
+                const storageB = rowB.original.storage;
+                if (!storageA) return -1;
+                if (!storageB) return 1;
+                if (!storageA.ssd) return -1;
+                if (!storageB.ssd) return 1;
+                const valueA = storageA.trim_support;
+                const valueB = storageB.trim_support;
+                if (valueA === undefined) return -1;
+                if (valueB === undefined) return 1;
+                return valueA ? 1 : -1;
+            },
+            ...makeCellWithRegexSorter("storage", (info) => {
+                const storage = info.getValue() as Storage;
+                if (!storage || !storage.ssd) return undefined;
+                if (storage.trim_support === undefined)
+                    throw new Error("trim_support is undefined");
+                return storage.trim_support ? "Yes" : "No";
+            }),
+        },
+        {
+            accessorKey: "storage",
+            header: "Instance Store: Read IOPS",
+            size: 200,
+            id: "storage_read_iops",
+            sortingFn: (rowA, rowB) => {
+                const a = rowA.original.storage?.storage_read_iops;
+                const b = rowB.original.storage?.storage_read_iops;
+                if (!a) return -1;
+                if (!b) return 1;
+                return a - b;
+            },
+            filterFn: (row, _, filterValue) => {
+                const value = row.original.storage?.storage_read_iops;
+                if (!value) return false;
+                try {
+                    return exprCompiler(filterValue)(
+                        value,
+                        `${value.toLocaleString()} IOPS`,
+                    );
+                } catch {
+                    return true;
+                }
+            },
+            cell: (info) => {
+                const storage = info.getValue() as Storage;
+                if (!storage?.storage_read_iops) return undefined;
+                return `${storage.storage_read_iops.toLocaleString()} IOPS`;
+            },
+        },
+        {
+            accessorKey: "storage",
+            header: "Instance Store: Write IOPS",
+            size: 200,
+            id: "storage_write_iops",
+            sortingFn: (rowA, rowB) => {
+                const a = rowA.original.storage?.storage_write_iops;
+                const b = rowB.original.storage?.storage_write_iops;
+                if (!a) return -1;
+                if (!b) return 1;
+                return a - b;
+            },
+            filterFn: (row, _, filterValue) => {
+                const value = row.original.storage?.storage_write_iops;
+                if (!value) return false;
+                try {
+                    return exprCompiler(filterValue)(
+                        value,
+                        `${value.toLocaleString()} IOPS`,
+                    );
+                } catch {
+                    return true;
+                }
+            },
+            cell: (info) => {
+                const storage = info.getValue() as Storage;
+                if (!storage?.storage_write_iops) return undefined;
+                return `${storage.storage_write_iops.toLocaleString()} IOPS`;
+            },
+        },
+        {
+            accessorKey: "arch",
+            header: t?.("columns.common.arch") ?? "Arch",
+            size: 100,
+            id: "arch",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.arch;
+                const valueB = rowB.original.arch;
+                if (!valueA) return -1;
+                if (!valueB) return 1;
+                return JSON.stringify(
+                    typeof valueA === "string" ? [valueA] : valueA.sort(),
+                ).localeCompare(
+                    JSON.stringify(
+                        typeof valueB === "string" ? [valueB] : valueB.sort(),
+                    ),
+                );
+            },
+            ...makeCellWithRegexSorter("arch", (info) => {
+                const arch = info.getValue() as string[] | string;
+                if (typeof arch === "string") return arch;
+                return arch.sort().join(", ");
+            }),
+        },
+        {
+            accessorKey: "network_performance",
+            header:
+                t?.("columns.common.networkPerformance") ??
+                "Network Performance",
+            size: 200,
+            id: "network_performance",
+            sortingFn: "alphanumeric",
+            filterFn: regex({ accessorKey: "network_performance" }),
+            cell: (info) => info.getValue() as string,
+        },
+        {
+            accessorKey: "ebs_baseline_bandwidth",
+            header:
+                t?.("columns.ec2.ebsBaselineBandwidth") ??
+                "EBS Optimized: Baseline Bandwidth",
+            id: "ebs_baseline_bandwidth",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.ebs_baseline_bandwidth;
+                const valueB = rowB.original.ebs_baseline_bandwidth;
+                if (!valueA) return -1;
+                if (!valueB) return 1;
+                return valueA - valueB;
+            },
+            filterFn: (row, _, filterValue) => {
+                const value = row.original.ebs_baseline_bandwidth;
+                if (!value) return false;
+                try {
+                    return exprCompiler(filterValue)(value, `${value} Mbps`);
+                } catch {
+                    // Just allow all if the expr is invalid.
+                    return true;
+                }
+            },
+            cell: (info) => {
+                const value = info.getValue();
+                if (!value) return undefined;
+                return `${value} Mbps`;
+            },
+        },
+        {
+            accessorKey: "ebs_baseline_throughput",
+            header:
+                t?.("columns.ec2.ebsBaselineThroughput") ??
+                "EBS Optimized: Baseline Throughput (128K)",
+            id: "ebs_baseline_throughput",
+            sortingFn: "alphanumeric",
+            filterFn: (row, _, filterValue) => {
+                const value = row.original.ebs_baseline_throughput;
+                if (!value) return false;
+                try {
+                    return exprCompiler(filterValue)(value, `${value} MB/s`);
+                } catch {
+                    // Just allow all if the expr is invalid.
+                    return true;
+                }
+            },
+            cell: (info) => {
+                const value = info.getValue() as number | undefined;
+                if (!value) return undefined;
+                return `${value} MB/s`;
+            },
+        },
+        {
+            accessorKey: "ebs_baseline_iops",
+            header:
+                t?.("columns.ec2.ebsBaselineIops") ??
+                "EBS Optimized: Baseline IOPS (16K)",
+            id: "ebs_baseline_iops",
+            sortingFn: "alphanumeric",
+            filterFn: (row, _, filterValue) => {
+                const value = row.original.ebs_baseline_iops;
+                if (!value) return false;
+                try {
+                    return exprCompiler(filterValue)(value, `${value} IOPS`);
+                } catch {
+                    // Just allow all if the expr is invalid.
+                    return true;
+                }
+            },
+            cell: (info) => {
+                const value = info.getValue() as number | undefined;
+                if (!value) return undefined;
+                return `${value} IOPS`;
+            },
+        },
+        {
+            accessorKey: "ebs_max_bandwidth",
+            header:
+                t?.("columns.ec2.ebsMaxBandwidth") ??
+                "EBS Optimized: Max Bandwidth",
+            id: "ebs_max_bandwidth",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.ebs_max_bandwidth;
+                const valueB = rowB.original.ebs_max_bandwidth;
+                if (!valueA) return -1;
+                if (!valueB) return 1;
+                return valueA - valueB;
+            },
+            filterFn: (row, _, filterValue) => {
+                const value = row.original.ebs_max_bandwidth;
+                if (!value) return false;
+                try {
+                    return exprCompiler(filterValue)(value, `${value} Mbps`);
+                } catch {
+                    // Just allow all if the expr is invalid.
+                    return true;
+                }
+            },
+            cell: (info) => {
+                const value = info.getValue();
+                if (!value) return undefined;
+                return `${value} Mbps`;
+            },
+        },
+        {
+            accessorKey: "ebs_throughput",
+            header:
+                t?.("columns.ec2.ebsMaxThroughput") ??
+                "EBS Optimized: Max Throughput (128K)",
+            id: "ebs_throughput",
+            sortingFn: "alphanumeric",
+            filterFn: (row, _, filterValue) => {
+                const value = row.original.ebs_throughput;
+                if (!value) return false;
+                try {
+                    return exprCompiler(filterValue)(value, `${value} MB/s`);
+                } catch {
+                    // Just allow all if the expr is invalid.
+                    return true;
+                }
+            },
+            cell: (info) => {
+                const value = info.getValue() as number | undefined;
+                if (!value) return undefined;
+                return `${value} MB/s`;
+            },
+        },
+        {
+            accessorKey: "ebs_iops",
+            header:
+                t?.("columns.ec2.ebsMaxIops") ??
+                "EBS Optimized: Max IOPS (16K)",
+            id: "ebs_iops",
+            sortingFn: "alphanumeric",
+            filterFn: (row, _, filterValue) => {
+                const value = row.original.ebs_iops;
+                if (!value) return false;
+                try {
+                    return exprCompiler(filterValue)(value, `${value} IOPS`);
+                } catch {
+                    // Just allow all if the expr is invalid.
+                    return true;
+                }
+            },
+            cell: (info) => {
+                const value = info.getValue() as number | undefined;
+                if (!value) return undefined;
+                return `${value} IOPS`;
+            },
+        },
+        {
+            accessorKey: "ebs_as_nvme",
+            header: t?.("columns.ec2.ebsAsNvme") ?? "EBS Exposed as NVMe",
+            id: "ebs_as_nvme",
+            filterFn: (row, _, filterValue) => {
+                const raw = row.original.ebs_as_nvme;
+                const num = raw ? 1 : 0;
+                const strValue = raw ? "Yes" : "No";
+                try {
+                    return exprCompiler(filterValue)(num, strValue);
+                } catch {
+                    // If the expr is invalid, fall back to simple string matching.
+                    return strValue
                         .toLowerCase()
                         .includes(filterValue.toLowerCase());
                 }
-                const rowValue = row.original.clock_speed_ghz?.match(FLOAT);
-                if (!rowValue) return false;
-                return parseFloat(rowValue[0]) >= parseFloat(matchFilter[0]);
             },
-        }),
-        cell: (info) => info.getValue() || undefined,
-    },
-    {
-        accessorKey: "intel_avx",
-        header: t?.("columns.ec2.intelAvx") ?? "Intel AVX",
-        size: 110,
-        id: "intel_avx",
-        filterFn: regex({ accessorKey: "intel_avx" }),
-        cell: (info) => (info.getValue() ? "Yes" : undefined),
-    },
-    {
-        accessorKey: "intel_avx2",
-        header: t?.("columns.ec2.intelAvx2") ?? "Intel AVX2",
-        size: 110,
-        id: "intel_avx2",
-        filterFn: regex({ accessorKey: "intel_avx2" }),
-        cell: (info) => (info.getValue() ? "Yes" : undefined),
-    },
-    {
-        accessorKey: "intel_avx512",
-        header: t?.("columns.ec2.intelAvx512") ?? "Intel AVX-512",
-        size: 130,
-        id: "intel_avx512",
-        filterFn: regex({ accessorKey: "intel_avx512" }),
-        cell: (info) => (info.getValue() ? "Yes" : undefined),
-    },
-    {
-        accessorKey: "intel_turbo",
-        header: t?.("columns.ec2.intelTurbo") ?? "Intel Turbo",
-        size: 120,
-        id: "intel_turbo",
-        filterFn: regex({ accessorKey: "intel_turbo" }),
-        cell: (info) => (info.getValue() ? "Yes" : undefined),
-    },
-    {
-        accessorKey: "storage",
-        header: t?.("columns.common.instanceStorage") ?? "Instance Storage",
-        size: 160,
-        id: "storage",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.storage;
-            const valueB = rowB.original.storage;
-            if (!valueA) return -1;
-            if (!valueB) return 1;
-            const totalSizeA = valueA.devices * valueA.size;
-            const totalSizeB = valueB.devices * valueB.size;
-            return totalSizeA - totalSizeB;
+            cell: (info) => (info.getValue() ? "Yes" : "No"),
         },
-        filterFn: (row, _, filterValue) => {
-            if (filterValue === 0) return true;
-            const storage = row.original.storage;
-            const totalSize = (storage?.devices || 0) * (storage?.size || 0);
-            const [text, detail] = formatStorage(storage);
-            try {
-                return exprCompiler(filterValue)(
-                    totalSize,
-                    detail ? `${text} (${detail})` : text,
-                );
-            } catch {
-                return true;
-            }
-        },
-        cell: (info) => {
-            const storage = info.getValue() as Storage;
-            const [text, detail] = formatStorage(storage);
-            if (detail) {
+        {
+            accessorKey: "vpc",
+            header: t?.("columns.ec2.maxIps") ?? "Max IPs",
+            size: 100,
+            id: "maxips",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.vpc;
+                const valueB = rowB.original.vpc;
+                if (!valueA) return -1;
+                if (!valueB) return 1;
                 return (
-                    <span title={`${text} (${detail})`}>
-                        {text}{" "}
-                        <span className="text-xs text-gray-2">({detail})</span>
-                    </span>
+                    valueA.max_enis * valueA.ips_per_eni -
+                    valueB.max_enis * valueB.ips_per_eni
                 );
-            }
-            return text;
+            },
+            filterFn: (row, _, filterValue) => {
+                const vpc = row.original.vpc;
+                const maxIps = (vpc?.max_enis || 0) * (vpc?.ips_per_eni || 0);
+                try {
+                    return exprCompiler(filterValue)(maxIps, maxIps.toString());
+                } catch {
+                    return true;
+                }
+            },
+            cell: (info) => {
+                const vpc = info.getValue() as any;
+                if (!vpc) return undefined;
+                const maxIps = vpc.max_enis * vpc.ips_per_eni;
+                return maxIps;
+            },
         },
-    },
-    {
-        accessorKey: "storage",
-        header: t?.("columns.ec2.storageWarmedUp") ?? "Instance Storage: already warmed-up",
-        id: "warmed-up",
-        sortingFn: (rowA, rowB) => {
-            const storageA = rowA.original.storage;
-            const storageB = rowB.original.storage;
-            if (!storageA) return -1;
-            if (!storageB) return 1;
-            return storageA.storage_needs_initialization ? 1 : -1;
+        {
+            accessorKey: "vpc",
+            header: t?.("columns.ec2.maxEnis") ?? "Max ENIs",
+            size: 100,
+            id: "maxenis",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.vpc;
+                const valueB = rowB.original.vpc;
+                if (!valueA) return -1;
+                if (!valueB) return 1;
+                return valueA.max_enis - valueB.max_enis;
+            },
+            ...makeCellWithRegexSorter("vpc", (info) => {
+                const vpc = info.getValue() as any;
+                if (!vpc) return undefined;
+                return vpc.max_enis;
+            }),
         },
-        ...makeCellWithRegexSorter("storage", (info) => {
-            const storage = info.getValue() as Storage;
-            if (!storage) return undefined;
-            if (storage.storage_needs_initialization === undefined)
-                throw new Error("storage_needs_initialization is undefined");
-            return storage.storage_needs_initialization ? "No" : "Yes";
-        }),
-    },
-    {
-        accessorKey: "storage",
-        header: t?.("columns.ec2.storageTrimSupport") ?? "Instance Storage: SSD TRIM Support",
-        id: "trim-support",
-        sortingFn: (rowA, rowB) => {
-            const storageA = rowA.original.storage;
-            const storageB = rowB.original.storage;
-            if (!storageA) return -1;
-            if (!storageB) return 1;
-            if (!storageA.ssd) return -1;
-            if (!storageB.ssd) return 1;
-            const valueA = storageA.trim_support;
-            const valueB = storageB.trim_support;
-            if (valueA === undefined) return -1;
-            if (valueB === undefined) return 1;
-            return valueA ? 1 : -1;
+        {
+            accessorKey: "enhanced_networking",
+            header:
+                t?.("columns.ec2.enhancedNetworking") ?? "Enhanced Networking",
+            id: "enhanced_networking",
+            ...makeCellWithRegexSorter("enhanced_networking", (info) => {
+                return info.getValue() ? "Yes" : "No";
+            }),
         },
-        ...makeCellWithRegexSorter("storage", (info) => {
-            const storage = info.getValue() as Storage;
-            if (!storage || !storage.ssd) return undefined;
-            if (storage.trim_support === undefined)
-                throw new Error("trim_support is undefined");
-            return storage.trim_support ? "Yes" : "No";
-        }),
-    },
-    {
-        accessorKey: "storage",
-        header: "Instance Store: Read IOPS",
-        size: 200,
-        id: "storage_read_iops",
-        sortingFn: (rowA, rowB) => {
-            const a = rowA.original.storage?.storage_read_iops;
-            const b = rowB.original.storage?.storage_read_iops;
-            if (!a) return -1;
-            if (!b) return 1;
-            return a - b;
+        {
+            accessorKey: "is_bare_metal",
+            header: "Bare metal",
+            id: "is_bare_metal",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.is_bare_metal;
+                const valueB = rowB.original.is_bare_metal;
+                if (valueA === undefined) return 1;
+                if (valueB === undefined) return -1;
+                return Number(valueA) - Number(valueB);
+            },
+            ...makeCellWithRegexSorter("is_bare_metal", (info) => {
+                const value = info.getValue() as boolean | undefined;
+                if (value === undefined) return "";
+                return value ? "Yes" : "No";
+            }),
         },
-        filterFn: (row, _, filterValue) => {
-            const value = row.original.storage?.storage_read_iops;
-            if (!value) return false;
-            try {
-                return exprCompiler(filterValue)(
-                    value,
-                    `${value.toLocaleString()} IOPS`,
-                );
-            } catch {
-                return true;
-            }
+        {
+            accessorKey: "is_trunking_compatible",
+            header: "Trunking compatible",
+            id: "is_trunking_compatible",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.is_trunking_compatible;
+                const valueB = rowB.original.is_trunking_compatible;
+                if (valueA === undefined) return 1;
+                if (valueB === undefined) return -1;
+                return Number(valueA) - Number(valueB);
+            },
+            ...makeCellWithRegexSorter("is_trunking_compatible", (info) => {
+                const value = info.getValue() as boolean | undefined;
+                if (value === undefined) return "";
+                return value ? "Yes" : "No";
+            }),
         },
-        cell: (info) => {
-            const storage = info.getValue() as Storage;
-            if (!storage?.storage_read_iops) return undefined;
-            return `${storage.storage_read_iops.toLocaleString()} IOPS`;
+        {
+            accessorKey: "branch_interface",
+            header: "Branch interface",
+            id: "branch_interface",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.branch_interface;
+                const valueB = rowB.original.branch_interface;
+                if (valueA === undefined) return 1;
+                if (valueB === undefined) return -1;
+                return valueA - valueB;
+            },
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number | undefined;
+                if (value === undefined) return undefined;
+                return value;
+            },
         },
-    },
-    {
-        accessorKey: "storage",
-        header: "Instance Store: Write IOPS",
-        size: 200,
-        id: "storage_write_iops",
-        sortingFn: (rowA, rowB) => {
-            const a = rowA.original.storage?.storage_write_iops;
-            const b = rowB.original.storage?.storage_write_iops;
-            if (!a) return -1;
-            if (!b) return 1;
-            return a - b;
+        {
+            accessorKey: "max_ecs_tasks",
+            header: "Max ECS Tasks",
+            id: "max_ecs_tasks",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.max_ecs_tasks;
+                const valueB = rowB.original.max_ecs_tasks;
+                if (valueA === undefined) return 1;
+                if (valueB === undefined) return -1;
+                return valueA - valueB;
+            },
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number | undefined;
+                if (value === undefined) return undefined;
+                return value;
+            },
         },
-        filterFn: (row, _, filterValue) => {
-            const value = row.original.storage?.storage_write_iops;
-            if (!value) return false;
-            try {
-                return exprCompiler(filterValue)(
-                    value,
-                    `${value.toLocaleString()} IOPS`,
-                );
-            } catch {
-                return true;
-            }
+        {
+            accessorKey: "vpc_only",
+            header: t?.("columns.ec2.vpcOnly") ?? "VPC Only",
+            size: 110,
+            id: "vpc_only",
+            ...makeCellWithRegexSorter("vpc_only", (info) => {
+                return info.getValue() ? "Yes" : "No";
+            }),
         },
-        cell: (info) => {
-            const storage = info.getValue() as Storage;
-            if (!storage?.storage_write_iops) return undefined;
-            return `${storage.storage_write_iops.toLocaleString()} IOPS`;
+        {
+            accessorKey: "ipv6_support",
+            header: t?.("columns.ec2.ipv6Support") ?? "IPv6 Support",
+            size: 130,
+            id: "ipv6_support",
+            ...makeCellWithRegexSorter("ipv6_support", (info) =>
+                info.getValue() ? "Yes" : "No",
+            ),
         },
-    },
-    {
-        accessorKey: "arch",
-        header: t?.("columns.common.arch") ?? "Arch",
-        size: 100,
-        id: "arch",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.arch;
-            const valueB = rowB.original.arch;
-            if (!valueA) return -1;
-            if (!valueB) return 1;
-            return JSON.stringify(
-                typeof valueA === "string" ? [valueA] : valueA.sort(),
-            ).localeCompare(
-                JSON.stringify(
-                    typeof valueB === "string" ? [valueB] : valueB.sort(),
-                ),
-            );
+        {
+            accessorKey: "placement_group_support",
+            header:
+                t?.("columns.ec2.placementGroupSupport") ??
+                "Placement Group Support",
+            id: "placement_group_support",
+            ...makeCellWithRegexSorter("placement_group_support", (info) =>
+                info.getValue() ? "Yes" : "No",
+            ),
         },
-        ...makeCellWithRegexSorter("arch", (info) => {
-            const arch = info.getValue() as string[] | string;
-            if (typeof arch === "string") return arch;
-            return arch.sort().join(", ");
-        }),
-    },
-    {
-        accessorKey: "network_performance",
-        header: t?.("columns.common.networkPerformance") ?? "Network Performance",
-        size: 200,
-        id: "network_performance",
-        sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "network_performance" }),
-        cell: (info) => info.getValue() as string,
-    },
-    {
-        accessorKey: "ebs_baseline_bandwidth",
-        header: t?.("columns.ec2.ebsBaselineBandwidth") ?? "EBS Optimized: Baseline Bandwidth",
-        id: "ebs_baseline_bandwidth",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.ebs_baseline_bandwidth;
-            const valueB = rowB.original.ebs_baseline_bandwidth;
-            if (!valueA) return -1;
-            if (!valueB) return 1;
-            return valueA - valueB;
-        },
-        filterFn: (row, _, filterValue) => {
-            const value = row.original.ebs_baseline_bandwidth;
-            if (!value) return false;
-            try {
-                return exprCompiler(filterValue)(value, `${value} Mbps`);
-            } catch {
-                // Just allow all if the expr is invalid.
-                return true;
-            }
-        },
-        cell: (info) => {
-            const value = info.getValue();
-            if (!value) return undefined;
-            return `${value} Mbps`;
-        },
-    },
-    {
-        accessorKey: "ebs_baseline_throughput",
-        header: t?.("columns.ec2.ebsBaselineThroughput") ?? "EBS Optimized: Baseline Throughput (128K)",
-        id: "ebs_baseline_throughput",
-        sortingFn: "alphanumeric",
-        filterFn: (row, _, filterValue) => {
-            const value = row.original.ebs_baseline_throughput;
-            if (!value) return false;
-            try {
-                return exprCompiler(filterValue)(value, `${value} MB/s`);
-            } catch {
-                // Just allow all if the expr is invalid.
-                return true;
-            }
-        },
-        cell: (info) => {
-            const value = info.getValue() as number | undefined;
-            if (!value) return undefined;
-            return `${value} MB/s`;
-        },
-    },
-    {
-        accessorKey: "ebs_baseline_iops",
-        header: t?.("columns.ec2.ebsBaselineIops") ?? "EBS Optimized: Baseline IOPS (16K)",
-        id: "ebs_baseline_iops",
-        sortingFn: "alphanumeric",
-        filterFn: (row, _, filterValue) => {
-            const value = row.original.ebs_baseline_iops;
-            if (!value) return false;
-            try {
-                return exprCompiler(filterValue)(value, `${value} IOPS`);
-            } catch {
-                // Just allow all if the expr is invalid.
-                return true;
-            }
-        },
-        cell: (info) => {
-            const value = info.getValue() as number | undefined;
-            if (!value) return undefined;
-            return `${value} IOPS`;
-        },
-    },
-    {
-        accessorKey: "ebs_max_bandwidth",
-        header: t?.("columns.ec2.ebsMaxBandwidth") ?? "EBS Optimized: Max Bandwidth",
-        id: "ebs_max_bandwidth",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.ebs_max_bandwidth;
-            const valueB = rowB.original.ebs_max_bandwidth;
-            if (!valueA) return -1;
-            if (!valueB) return 1;
-            return valueA - valueB;
-        },
-        filterFn: (row, _, filterValue) => {
-            const value = row.original.ebs_max_bandwidth;
-            if (!value) return false;
-            try {
-                return exprCompiler(filterValue)(value, `${value} Mbps`);
-            } catch {
-                // Just allow all if the expr is invalid.
-                return true;
-            }
-        },
-        cell: (info) => {
-            const value = info.getValue();
-            if (!value) return undefined;
-            return `${value} Mbps`;
-        },
-    },
-    {
-        accessorKey: "ebs_throughput",
-        header: t?.("columns.ec2.ebsMaxThroughput") ?? "EBS Optimized: Max Throughput (128K)",
-        id: "ebs_throughput",
-        sortingFn: "alphanumeric",
-        filterFn: (row, _, filterValue) => {
-            const value = row.original.ebs_throughput;
-            if (!value) return false;
-            try {
-                return exprCompiler(filterValue)(value, `${value} MB/s`);
-            } catch {
-                // Just allow all if the expr is invalid.
-                return true;
-            }
-        },
-        cell: (info) => {
-            const value = info.getValue() as number | undefined;
-            if (!value) return undefined;
-            return `${value} MB/s`;
-        },
-    },
-    {
-        accessorKey: "ebs_iops",
-        header: t?.("columns.ec2.ebsMaxIops") ?? "EBS Optimized: Max IOPS (16K)",
-        id: "ebs_iops",
-        sortingFn: "alphanumeric",
-        filterFn: (row, _, filterValue) => {
-            const value = row.original.ebs_iops;
-            if (!value) return false;
-            try {
-                return exprCompiler(filterValue)(value, `${value} IOPS`);
-            } catch {
-                // Just allow all if the expr is invalid.
-                return true;
-            }
-        },
-        cell: (info) => {
-            const value = info.getValue() as number | undefined;
-            if (!value) return undefined;
-            return `${value} IOPS`;
-        },
-    },
-    {
-        accessorKey: "ebs_as_nvme",
-        header: t?.("columns.ec2.ebsAsNvme") ?? "EBS Exposed as NVMe",
-        id: "ebs_as_nvme",
-        filterFn: (row, _, filterValue) => {
-            const raw = row.original.ebs_as_nvme;
-            const num = raw ? 1 : 0;
-            const strValue = raw ? "Yes" : "No";
-            try {
-                return exprCompiler(filterValue)(num, strValue);
-            } catch {
-                // If the expr is invalid, fall back to simple string matching.
-                return strValue
-                    .toLowerCase()
-                    .includes(filterValue.toLowerCase());
-            }
-        },
-        cell: (info) => (info.getValue() ? "Yes" : "No"),
-    },
-    {
-        accessorKey: "vpc",
-        header: t?.("columns.ec2.maxIps") ?? "Max IPs",
-        size: 100,
-        id: "maxips",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.vpc;
-            const valueB = rowB.original.vpc;
-            if (!valueA) return -1;
-            if (!valueB) return 1;
-            return (
-                valueA.max_enis * valueA.ips_per_eni -
-                valueB.max_enis * valueB.ips_per_eni
-            );
-        },
-        filterFn: (row, _, filterValue) => {
-            const vpc = row.original.vpc;
-            const maxIps = (vpc?.max_enis || 0) * (vpc?.ips_per_eni || 0);
-            try {
-                return exprCompiler(filterValue)(maxIps, maxIps.toString());
-            } catch {
-                return true;
-            }
-        },
-        cell: (info) => {
-            const vpc = info.getValue() as any;
-            if (!vpc) return undefined;
-            const maxIps = vpc.max_enis * vpc.ips_per_eni;
-            return maxIps;
-        },
-    },
-    {
-        accessorKey: "vpc",
-        header: t?.("columns.ec2.maxEnis") ?? "Max ENIs",
-        size: 100,
-        id: "maxenis",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.vpc;
-            const valueB = rowB.original.vpc;
-            if (!valueA) return -1;
-            if (!valueB) return 1;
-            return valueA.max_enis - valueB.max_enis;
-        },
-        ...makeCellWithRegexSorter("vpc", (info) => {
-            const vpc = info.getValue() as any;
-            if (!vpc) return undefined;
-            return vpc.max_enis;
-        }),
-    },
-    {
-        accessorKey: "enhanced_networking",
-        header: t?.("columns.ec2.enhancedNetworking") ?? "Enhanced Networking",
-        id: "enhanced_networking",
-        ...makeCellWithRegexSorter("enhanced_networking", (info) => {
-            return info.getValue() ? "Yes" : "No";
-        }),
-    },
-    {
-        accessorKey: "is_bare_metal",
-        header: "Bare metal",
-        id: "is_bare_metal",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.is_bare_metal;
-            const valueB = rowB.original.is_bare_metal;
-            if (valueA === undefined) return 1;
-            if (valueB === undefined) return -1;
-            return Number(valueA) - Number(valueB);
-        },
-        ...makeCellWithRegexSorter("is_bare_metal", (info) => {
-            const value = info.getValue() as boolean | undefined;
-            if (value === undefined) return "";
-            return value ? "Yes" : "No";
-        }),
-    },
-    {
-        accessorKey: "is_trunking_compatible",
-        header: "Trunking compatible",
-        id: "is_trunking_compatible",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.is_trunking_compatible;
-            const valueB = rowB.original.is_trunking_compatible;
-            if (valueA === undefined) return 1;
-            if (valueB === undefined) return -1;
-            return Number(valueA) - Number(valueB);
-        },
-        ...makeCellWithRegexSorter("is_trunking_compatible", (info) => {
-            const value = info.getValue() as boolean | undefined;
-            if (value === undefined) return "";
-            return value ? "Yes" : "No";
-        }),
-    },
-    {
-        accessorKey: "branch_interface",
-        header: "Branch interface",
-        id: "branch_interface",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.branch_interface;
-            const valueB = rowB.original.branch_interface;
-            if (valueA === undefined) return 1;
-            if (valueB === undefined) return -1;
-            return valueA - valueB;
-        },
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number | undefined;
-            if (value === undefined) return undefined;
-            return value;
-        },
-    },
-    {
-        accessorKey: "max_ecs_tasks",
-        header: "Max ECS Tasks",
-        id: "max_ecs_tasks",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.max_ecs_tasks;
-            const valueB = rowB.original.max_ecs_tasks;
-            if (valueA === undefined) return 1;
-            if (valueB === undefined) return -1;
-            return valueA - valueB;
-        },
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number | undefined;
-            if (value === undefined) return undefined;
-            return value;
-        },
-    },
-    {
-        accessorKey: "vpc_only",
-        header: t?.("columns.ec2.vpcOnly") ?? "VPC Only",
-        size: 110,
-        id: "vpc_only",
-        ...makeCellWithRegexSorter("vpc_only", (info) => {
-            return info.getValue() ? "Yes" : "No";
-        }),
-    },
-    {
-        accessorKey: "ipv6_support",
-        header: t?.("columns.ec2.ipv6Support") ?? "IPv6 Support",
-        size: 130,
-        id: "ipv6_support",
-        ...makeCellWithRegexSorter("ipv6_support", (info) =>
-            info.getValue() ? "Yes" : "No",
-        ),
-    },
-    {
-        accessorKey: "placement_group_support",
-        header: t?.("columns.ec2.placementGroupSupport") ?? "Placement Group Support",
-        id: "placement_group_support",
-        ...makeCellWithRegexSorter("placement_group_support", (info) =>
-            info.getValue() ? "Yes" : "No",
-        ),
-    },
-    {
-        accessorKey: "linux_virtualization_types",
-        header: t?.("columns.ec2.linuxVirtualization") ?? "Linux Virtualization",
-        id: "linux_virtualization_types",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.linux_virtualization_types;
-            const valueB = rowB.original.linux_virtualization_types;
-            if (!valueA) return -1;
-            if (!valueB) return 1;
+        {
+            accessorKey: "linux_virtualization_types",
+            header:
+                t?.("columns.ec2.linuxVirtualization") ??
+                "Linux Virtualization",
+            id: "linux_virtualization_types",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.linux_virtualization_types;
+                const valueB = rowB.original.linux_virtualization_types;
+                if (!valueA) return -1;
+                if (!valueB) return 1;
 
-            // I can't think of a better way to do this
-            return valueA.join(", ").localeCompare(valueB.join(", "));
-        },
-        ...makeCellWithRegexSorter("linux_virtualization_types", (info) => {
-            const types = info.getValue() as string[];
-            return types?.length ? types.join(", ") : "Unknown";
-        }),
-    },
-    {
-        accessorKey: "emr",
-        header: t?.("columns.ec2.onEmr") ?? "On EMR",
-        size: 100,
-        id: "emr",
-        ...makeCellWithRegexSorter("emr", (info) =>
-            info.getValue() ? "Yes" : "No",
-        ),
-    },
-    {
-        accessorKey: "availability_zones",
-        header: t?.("columns.ec2.availabilityZones") ?? "Availability Zones",
-        id: "availability_zones",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.availability_zones?.[selectedRegion];
-            const valueB = rowB.original.availability_zones?.[selectedRegion];
-            if (!valueA) return -1;
-            if (!valueB) return 1;
-            return valueA.join(", ").localeCompare(valueB.join(", "));
-        },
-        ...makeCellWithRegexSorter("availability_zones", (info) => {
-            const zones = info.getValue() as Record<string, string[]>;
-            return zones?.[selectedRegion]?.join(", ") || "";
-        }),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.linuxOnDemand") ?? "On Demand",
-        size: 150,
-        id: "cost-ondemand",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => {
-                return pricing?.linux?.ondemand;
+                // I can't think of a better way to do this
+                return valueA.join(", ").localeCompare(valueB.join(", "));
             },
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.linuxReserved") ?? "Linux Reserved cost",
-        size: 180,
-        id: "cost-reserved",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => {
-                return pricing?.linux?.reserved?.[reservedTerm];
+            ...makeCellWithRegexSorter("linux_virtualization_types", (info) => {
+                const types = info.getValue() as string[];
+                return types?.length ? types.join(", ") : "Unknown";
+            }),
+        },
+        {
+            accessorKey: "emr",
+            header: t?.("columns.ec2.onEmr") ?? "On EMR",
+            size: 100,
+            id: "emr",
+            ...makeCellWithRegexSorter("emr", (info) =>
+                info.getValue() ? "Yes" : "No",
+            ),
+        },
+        {
+            accessorKey: "availability_zones",
+            header:
+                t?.("columns.ec2.availabilityZones") ?? "Availability Zones",
+            id: "availability_zones",
+            sortingFn: (rowA, rowB) => {
+                const valueA =
+                    rowA.original.availability_zones?.[selectedRegion];
+                const valueB =
+                    rowB.original.availability_zones?.[selectedRegion];
+                if (!valueA) return -1;
+                if (!valueB) return 1;
+                return valueA.join(", ").localeCompare(valueB.join(", "));
             },
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.linuxSpotMin") ?? "Linux Spot Minimum cost",
-        size: 180,
-        id: "cost-spot-min",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.linux?.spot_min,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.linuxSpotAvg") ?? "Linux Spot Average cost",
-        size: 180,
-        id: "cost-spot-max",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.linux?.spot_avg,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.rhelOnDemand") ?? "RHEL On Demand cost",
-        size: 180,
-        id: "cost-ondemand-rhel",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.rhel?.ondemand,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.rhelReserved") ?? "RHEL Reserved cost",
-        id: "cost-reserved-rhel",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.rhel?.reserved?.[reservedTerm],
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.rhelSpotMin") ?? "RHEL Spot Minimum cost",
-        id: "cost-spot-min-rhel",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.rhel?.spot_min,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.rhelSpotMax") ?? "RHEL Spot Maximum cost",
-        id: "cost-spot-max-rhel",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.rhel?.spot_max,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.rhelHaOnDemand") ?? "RHEL with HA On Demand cost",
-        id: "cost-ondemand-rhelHA",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.rhelHA?.ondemand,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.rhelHaReserved") ?? "RHEL with HA Reserved cost",
-        id: "cost-reserved-rhelHA",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.rhelHA?.reserved?.[reservedTerm],
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.rhelHaSpotMin") ?? "RHEL with HA Spot Minimum cost",
-        id: "cost-spot-min-rhelHA",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.rhelHA?.spot_min,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.rhelHaSpotMax") ?? "RHEL with HA Spot Maximum cost",
-        id: "cost-spot-max-rhelHA",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.rhelHA?.spot_max,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.slesOnDemand") ?? "SLES On Demand cost",
-        id: "cost-ondemand-sles",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.sles?.ondemand,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.slesReserved") ?? "SLES Reserved cost",
-        id: "cost-reserved-sles",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.sles?.reserved?.[reservedTerm],
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.slesSpotMin") ?? "SLES Spot Minimum cost",
-        id: "cost-spot-min-sles",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.sles?.spot_min,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.slesSpotMax") ?? "SLES Spot Maximum cost",
-        id: "cost-spot-max-sles",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.sles?.spot_max,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.windowsOnDemand") ?? "Windows On Demand cost",
-        id: "cost-ondemand-mswin",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.mswin?.ondemand,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.windowsReserved") ?? "Windows Reserved cost",
-        id: "cost-reserved-mswin",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.mswin?.reserved?.[reservedTerm],
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.windowsSpotMin") ?? "Windows Spot Minimum cost",
-        id: "cost-spot-min-mswin",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.mswin?.spot_min,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.windowsSpotAvg") ?? "Windows Spot Average cost",
-        id: "cost-spot-max-mswin",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.mswin?.spot_avg,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.dedicatedHostOnDemand") ?? "Dedicated Host On Demand",
-        id: "cost-ondemand-dedicated",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.dedicated?.ondemand,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.dedicatedHostReserved") ?? "Dedicated Host Reserved",
-        id: "cost-reserved-dedicated",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.dedicated?.reserved?.[reservedTerm],
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.windowsSqlWebOnDemand") ?? "Windows SQL Web On Demand cost",
-        id: "cost-ondemand-mswinSQLWeb",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.mswinSQLWeb?.ondemand,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.windowsSqlWebReserved") ?? "Windows SQL Web Reserved cost",
-        id: "cost-reserved-mswinSQLWeb",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.mswinSQLWeb?.reserved?.[reservedTerm],
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.windowsSqlStdOnDemand") ?? "Windows SQL Std On Demand cost",
-        id: "cost-ondemand-mswinSQL",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.mswinSQL?.ondemand,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.windowsSqlStdReserved") ?? "Windows SQL Std Reserved cost",
-        id: "cost-reserved-mswinSQL",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.mswinSQL?.reserved?.[reservedTerm],
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.windowsSqlEntOnDemand") ?? "Windows SQL Ent On Demand cost",
-        id: "cost-ondemand-mswinSQLEnterprise",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.mswinSQLEnterprise?.ondemand,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.windowsSqlEntReserved") ?? "Windows SQL Ent Reserved cost",
-        id: "cost-reserved-mswinSQLEnterprise",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.mswinSQLEnterprise?.reserved?.[reservedTerm],
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.linuxSqlWebOnDemand") ?? "Linux SQL Web On Demand cost",
-        id: "cost-ondemand-linuxSQLWeb",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.linuxSQLWeb?.ondemand,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.linuxSqlWebReserved") ?? "Linux SQL Web Reserved cost",
-        id: "cost-reserved-linuxSQLWeb",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.linuxSQLWeb?.reserved?.[reservedTerm],
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.linuxSqlStdOnDemand") ?? "Linux SQL Std On Demand cost",
-        id: "cost-ondemand-linuxSQL",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.linuxSQL?.ondemand,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.linuxSqlStdReserved") ?? "Linux SQL Std Reserved cost",
-        id: "cost-reserved-linuxSQL",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.linuxSQL?.reserved?.[reservedTerm],
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.linuxSqlEntOnDemand") ?? "Linux SQL Ent On Demand cost",
-        id: "cost-ondemand-linuxSQLEnterprise",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.linuxSQLEnterprise?.ondemand,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.linuxSqlEntReserved") ?? "Linux SQL Ent Reserved cost",
-        id: "cost-reserved-linuxSQLEnterprise",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.linuxSQLEnterprise?.reserved?.[reservedTerm],
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.linuxSpotInterrupt") ?? "Linux Spot Interrupt Frequency",
-        id: "spot-interrupt-rate",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.linux?.pct_interrupt,
-            false,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        header: t?.("columns.pricing.emrCost") ?? "EMR cost",
-        size: 100,
-        id: "cost-emr",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.emr?.emr,
-            true,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "generation",
-        header: t?.("columns.common.generation") ?? "Generation",
-        size: 120,
-        id: "generation",
-        sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter(
-            "generation",
-            (info) => info.getValue() as string,
-        ),
-    },
-    {
-        accessorKey: "gpu_architectures",
-        header: t?.("columns.ec2.gpuArchitectures") ?? "GPU Architectures",
-        size: 150,
-        id: "gpu_architectures",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.gpu_architectures;
-            const valueB = rowB.original.gpu_architectures;
-            if (!valueA) return 1;
-            if (!valueB) return -1;
-            return valueA.join(", ").localeCompare(valueB.join(", "));
+            ...makeCellWithRegexSorter("availability_zones", (info) => {
+                const zones = info.getValue() as Record<string, string[]>;
+                return zones?.[selectedRegion]?.join(", ") || "";
+            }),
         },
-        ...makeCellWithRegexSorter("gpu_architectures", (info) => {
-            const value = info.getValue() as string[] | null;
-            if (!value || value.length === 0) return undefined;
-            return value.join(", ");
-        }),
-    },
-    {
-        accessorKey: "gpu_current_temp_avg_celsius",
-        header: t?.("columns.ec2.gpuTempAvg") ?? "GPU Temp (Avg °C)",
-        size: 150,
-        id: "gpu_current_temp_avg_celsius",
-        sortingFn: "alphanumeric",
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return undefined;
-            return `${value.toFixed(1)}°C`;
+        {
+            accessorKey: "pricing",
+            header: t?.("columns.pricing.linuxOnDemand") ?? "On Demand",
+            size: 150,
+            id: "cost-ondemand",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => {
+                    return pricing?.linux?.ondemand;
+                },
+                true,
+                currency,
+            ),
         },
-    },
-    {
-        accessorKey: "ffmpeg_used_cuda",
-        header: t?.("columns.ec2.ffmpegUsedCuda") ?? "FFmpeg Used CUDA",
-        size: 150,
-        id: "ffmpeg_used_cuda",
-        ...makeCellWithRegexSorter("ffmpeg_used_cuda", (info) => {
-            const value = info.getValue() as boolean | null;
-            if (value === null || value === undefined) return undefined;
-            return value ? "Yes" : "No";
-        }),
-    },
-    {
-        accessorKey: "ffmpeg_speed",
-        header: t?.("columns.ec2.ffmpegSpeed") ?? "FFmpeg Speed",
-        size: 130,
-        id: "ffmpeg_speed",
-        sortingFn: "alphanumeric",
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return undefined;
-            return `${value.toFixed(2)}x`;
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.linuxReserved") ?? "Linux Reserved cost",
+            size: 180,
+            id: "cost-reserved",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => {
+                    return pricing?.linux?.reserved?.[reservedTerm];
+                },
+                true,
+                currency,
+            ),
         },
-    },
-    {
-        accessorKey: "gpu_power_draw_watts_avg",
-        header: t?.("columns.ec2.gpuPowerDrawAvg") ?? "GPU Power Draw (Avg Watts)",
-        size: 200,
-        id: "gpu_power_draw_watts_avg",
-        sortingFn: "alphanumeric",
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return undefined;
-            return `${value.toFixed(1)}W`;
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.linuxSpotMin") ??
+                "Linux Spot Minimum cost",
+            size: 180,
+            id: "cost-spot-min",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.linux?.spot_min,
+                true,
+                currency,
+            ),
         },
-    },
-    {
-        accessorKey: "gpu_power_draw_watts_avg",
-        header: t?.("columns.ec2.gpuPowerLimit") ?? "GPU Power Limit (Watts)",
-        size: 180,
-        id: "gpu_power_max_watts_avg",
-        sortingFn: "alphanumeric",
-        filterFn: expr,
-        cell: (info) => {
-            const value = info.getValue() as number | null;
-            if (value === null || value === undefined) return undefined;
-            return `${value.toFixed(1)}W`;
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.linuxSpotAvg") ??
+                "Linux Spot Average cost",
+            size: 180,
+            id: "cost-spot-max",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.linux?.spot_avg,
+                true,
+                currency,
+            ),
         },
-    },
-    {
-        accessorKey: "gpu_clocks",
-        header: t?.("columns.ec2.gpuGraphicsClockAvg") ?? "GPU Graphics Clock (Avg MHz)",
-        size: 220,
-        id: "gpu_clocks_graphics_avg",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.gpu_clocks;
-            const valueB = rowB.original.gpu_clocks;
-            if (!valueA || valueA.length === 0) return 1;
-            if (!valueB || valueB.length === 0) return -1;
-            const avgA =
-                valueA.reduce(
-                    (sum, clock) => sum + clock.graphics_clock_mhz,
-                    0,
-                ) / valueA.length;
-            const avgB =
-                valueB.reduce(
-                    (sum, clock) => sum + clock.graphics_clock_mhz,
-                    0,
-                ) / valueB.length;
-            return avgA - avgB;
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.rhelOnDemand") ?? "RHEL On Demand cost",
+            size: 180,
+            id: "cost-ondemand-rhel",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.rhel?.ondemand,
+                true,
+                currency,
+            ),
         },
-        filterFn: (row, _, filterValue) => {
-            const clocks = row.original.gpu_clocks;
-            if (!clocks || clocks.length === 0) return false;
-            const avg =
-                clocks.reduce(
-                    (sum, clock) => sum + clock.graphics_clock_mhz,
-                    0,
-                ) / clocks.length;
-            try {
-                return exprCompiler(filterValue)(avg, `${avg.toFixed(0)} MHz`);
-            } catch {
-                return false;
-            }
+        {
+            accessorKey: "pricing",
+            header: t?.("columns.pricing.rhelReserved") ?? "RHEL Reserved cost",
+            id: "cost-reserved-rhel",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.rhel?.reserved?.[reservedTerm],
+                true,
+                currency,
+            ),
         },
-        cell: (info) => {
-            const clocks = info.getValue() as EC2Instance["gpu_clocks"];
-            if (!clocks || clocks.length === 0) return undefined;
-            const avg =
-                clocks.reduce(
-                    (sum, clock) => sum + clock.graphics_clock_mhz,
-                    0,
-                ) / clocks.length;
-            return `${avg.toFixed(0)} MHz`;
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.rhelSpotMin") ?? "RHEL Spot Minimum cost",
+            id: "cost-spot-min-rhel",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.rhel?.spot_min,
+                true,
+                currency,
+            ),
         },
-    },
-    {
-        accessorKey: "gpu_clocks",
-        header: t?.("columns.ec2.gpuSmClockAvg") ?? "GPU SM Clock (Avg MHz)",
-        size: 200,
-        id: "gpu_clocks_sm_avg",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.gpu_clocks;
-            const valueB = rowB.original.gpu_clocks;
-            if (!valueA || valueA.length === 0) return 1;
-            if (!valueB || valueB.length === 0) return -1;
-            const avgA =
-                valueA.reduce((sum, clock) => sum + clock.sm_clock_mhz, 0) /
-                valueA.length;
-            const avgB =
-                valueB.reduce((sum, clock) => sum + clock.sm_clock_mhz, 0) /
-                valueB.length;
-            return avgA - avgB;
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.rhelSpotMax") ?? "RHEL Spot Maximum cost",
+            id: "cost-spot-max-rhel",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.rhel?.spot_max,
+                true,
+                currency,
+            ),
         },
-        filterFn: (row, _, filterValue) => {
-            const clocks = row.original.gpu_clocks;
-            if (!clocks || clocks.length === 0) return false;
-            const avg =
-                clocks.reduce((sum, clock) => sum + clock.sm_clock_mhz, 0) /
-                clocks.length;
-            try {
-                return exprCompiler(filterValue)(avg, `${avg.toFixed(0)} MHz`);
-            } catch {
-                return false;
-            }
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.rhelHaOnDemand") ??
+                "RHEL with HA On Demand cost",
+            id: "cost-ondemand-rhelHA",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.rhelHA?.ondemand,
+                true,
+                currency,
+            ),
         },
-        cell: (info) => {
-            const clocks = info.getValue() as EC2Instance["gpu_clocks"];
-            if (!clocks || clocks.length === 0) return undefined;
-            const avg =
-                clocks.reduce((sum, clock) => sum + clock.sm_clock_mhz, 0) /
-                clocks.length;
-            return `${avg.toFixed(0)} MHz`;
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.rhelHaReserved") ??
+                "RHEL with HA Reserved cost",
+            id: "cost-reserved-rhelHA",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.rhelHA?.reserved?.[reservedTerm],
+                true,
+                currency,
+            ),
         },
-    },
-    {
-        accessorKey: "gpu_clocks",
-        header: t?.("columns.ec2.gpuMemoryClockAvg") ?? "GPU Memory Clock (Avg MHz)",
-        size: 220,
-        id: "gpu_clocks_memory_avg",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.gpu_clocks;
-            const valueB = rowB.original.gpu_clocks;
-            if (!valueA || valueA.length === 0) return 1;
-            if (!valueB || valueB.length === 0) return -1;
-            const avgA =
-                valueA.reduce((sum, clock) => sum + clock.memory_clock_mhz, 0) /
-                valueA.length;
-            const avgB =
-                valueB.reduce((sum, clock) => sum + clock.memory_clock_mhz, 0) /
-                valueB.length;
-            return avgA - avgB;
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.rhelHaSpotMin") ??
+                "RHEL with HA Spot Minimum cost",
+            id: "cost-spot-min-rhelHA",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.rhelHA?.spot_min,
+                true,
+                currency,
+            ),
         },
-        filterFn: (row, _, filterValue) => {
-            const clocks = row.original.gpu_clocks;
-            if (!clocks || clocks.length === 0) return false;
-            const avg =
-                clocks.reduce((sum, clock) => sum + clock.memory_clock_mhz, 0) /
-                clocks.length;
-            try {
-                return exprCompiler(filterValue)(avg, `${avg.toFixed(0)} MHz`);
-            } catch {
-                return false;
-            }
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.rhelHaSpotMax") ??
+                "RHEL with HA Spot Maximum cost",
+            id: "cost-spot-max-rhelHA",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.rhelHA?.spot_max,
+                true,
+                currency,
+            ),
         },
-        cell: (info) => {
-            const clocks = info.getValue() as EC2Instance["gpu_clocks"];
-            if (!clocks || clocks.length === 0) return undefined;
-            const avg =
-                clocks.reduce((sum, clock) => sum + clock.memory_clock_mhz, 0) /
-                clocks.length;
-            return `${avg.toFixed(0)} MHz`;
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.slesOnDemand") ?? "SLES On Demand cost",
+            id: "cost-ondemand-sles",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.sles?.ondemand,
+                true,
+                currency,
+            ),
         },
-    },
-    {
-        accessorKey: "gpu_clocks",
-        header: t?.("columns.ec2.gpuVideoClockAvg") ?? "GPU Video Clock (Avg MHz)",
-        size: 200,
-        id: "gpu_clocks_video_avg",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.gpu_clocks;
-            const valueB = rowB.original.gpu_clocks;
-            if (!valueA || valueA.length === 0) return 1;
-            if (!valueB || valueB.length === 0) return -1;
-            const avgA =
-                valueA.reduce((sum, clock) => sum + clock.video_clock_mhz, 0) /
-                valueA.length;
-            const avgB =
-                valueB.reduce((sum, clock) => sum + clock.video_clock_mhz, 0) /
-                valueB.length;
-            return avgA - avgB;
+        {
+            accessorKey: "pricing",
+            header: t?.("columns.pricing.slesReserved") ?? "SLES Reserved cost",
+            id: "cost-reserved-sles",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.sles?.reserved?.[reservedTerm],
+                true,
+                currency,
+            ),
         },
-        filterFn: (row, _, filterValue) => {
-            const clocks = row.original.gpu_clocks;
-            if (!clocks || clocks.length === 0) return false;
-            const avg =
-                clocks.reduce((sum, clock) => sum + clock.video_clock_mhz, 0) /
-                clocks.length;
-            try {
-                return exprCompiler(filterValue)(avg, `${avg.toFixed(0)} MHz`);
-            } catch {
-                return false;
-            }
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.slesSpotMin") ?? "SLES Spot Minimum cost",
+            id: "cost-spot-min-sles",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.sles?.spot_min,
+                true,
+                currency,
+            ),
         },
-        cell: (info) => {
-            const clocks = info.getValue() as EC2Instance["gpu_clocks"];
-            if (!clocks || clocks.length === 0) return undefined;
-            const avg =
-                clocks.reduce((sum, clock) => sum + clock.video_clock_mhz, 0) /
-                clocks.length;
-            return `${avg.toFixed(0)} MHz`;
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.slesSpotMax") ?? "SLES Spot Maximum cost",
+            id: "cost-spot-max-sles",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.sles?.spot_max,
+                true,
+                currency,
+            ),
         },
-    },
-];
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.windowsOnDemand") ??
+                "Windows On Demand cost",
+            id: "cost-ondemand-mswin",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.mswin?.ondemand,
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.windowsReserved") ??
+                "Windows Reserved cost",
+            id: "cost-reserved-mswin",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.mswin?.reserved?.[reservedTerm],
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.windowsSpotMin") ??
+                "Windows Spot Minimum cost",
+            id: "cost-spot-min-mswin",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.mswin?.spot_min,
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.windowsSpotAvg") ??
+                "Windows Spot Average cost",
+            id: "cost-spot-max-mswin",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.mswin?.spot_avg,
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.dedicatedHostOnDemand") ??
+                "Dedicated Host On Demand",
+            id: "cost-ondemand-dedicated",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.dedicated?.ondemand,
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.dedicatedHostReserved") ??
+                "Dedicated Host Reserved",
+            id: "cost-reserved-dedicated",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.dedicated?.reserved?.[reservedTerm],
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.windowsSqlWebOnDemand") ??
+                "Windows SQL Web On Demand cost",
+            id: "cost-ondemand-mswinSQLWeb",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.mswinSQLWeb?.ondemand,
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.windowsSqlWebReserved") ??
+                "Windows SQL Web Reserved cost",
+            id: "cost-reserved-mswinSQLWeb",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.mswinSQLWeb?.reserved?.[reservedTerm],
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.windowsSqlStdOnDemand") ??
+                "Windows SQL Std On Demand cost",
+            id: "cost-ondemand-mswinSQL",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.mswinSQL?.ondemand,
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.windowsSqlStdReserved") ??
+                "Windows SQL Std Reserved cost",
+            id: "cost-reserved-mswinSQL",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.mswinSQL?.reserved?.[reservedTerm],
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.windowsSqlEntOnDemand") ??
+                "Windows SQL Ent On Demand cost",
+            id: "cost-ondemand-mswinSQLEnterprise",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.mswinSQLEnterprise?.ondemand,
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.windowsSqlEntReserved") ??
+                "Windows SQL Ent Reserved cost",
+            id: "cost-reserved-mswinSQLEnterprise",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) =>
+                    pricing?.mswinSQLEnterprise?.reserved?.[reservedTerm],
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.linuxSqlWebOnDemand") ??
+                "Linux SQL Web On Demand cost",
+            id: "cost-ondemand-linuxSQLWeb",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.linuxSQLWeb?.ondemand,
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.linuxSqlWebReserved") ??
+                "Linux SQL Web Reserved cost",
+            id: "cost-reserved-linuxSQLWeb",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.linuxSQLWeb?.reserved?.[reservedTerm],
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.linuxSqlStdOnDemand") ??
+                "Linux SQL Std On Demand cost",
+            id: "cost-ondemand-linuxSQL",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.linuxSQL?.ondemand,
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.linuxSqlStdReserved") ??
+                "Linux SQL Std Reserved cost",
+            id: "cost-reserved-linuxSQL",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.linuxSQL?.reserved?.[reservedTerm],
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.linuxSqlEntOnDemand") ??
+                "Linux SQL Ent On Demand cost",
+            id: "cost-ondemand-linuxSQLEnterprise",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.linuxSQLEnterprise?.ondemand,
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.linuxSqlEntReserved") ??
+                "Linux SQL Ent Reserved cost",
+            id: "cost-reserved-linuxSQLEnterprise",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) =>
+                    pricing?.linuxSQLEnterprise?.reserved?.[reservedTerm],
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header:
+                t?.("columns.pricing.linuxSpotInterrupt") ??
+                "Linux Spot Interrupt Frequency",
+            id: "spot-interrupt-rate",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.linux?.pct_interrupt,
+                false,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            header: t?.("columns.pricing.emrCost") ?? "EMR cost",
+            size: 100,
+            id: "cost-emr",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.emr?.emr,
+                true,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "generation",
+            header: t?.("columns.common.generation") ?? "Generation",
+            size: 120,
+            id: "generation",
+            sortingFn: "alphanumeric",
+            ...makeCellWithRegexSorter(
+                "generation",
+                (info) => info.getValue() as string,
+            ),
+        },
+        {
+            accessorKey: "gpu_architectures",
+            header: t?.("columns.ec2.gpuArchitectures") ?? "GPU Architectures",
+            size: 150,
+            id: "gpu_architectures",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.gpu_architectures;
+                const valueB = rowB.original.gpu_architectures;
+                if (!valueA) return 1;
+                if (!valueB) return -1;
+                return valueA.join(", ").localeCompare(valueB.join(", "));
+            },
+            ...makeCellWithRegexSorter("gpu_architectures", (info) => {
+                const value = info.getValue() as string[] | null;
+                if (!value || value.length === 0) return undefined;
+                return value.join(", ");
+            }),
+        },
+        {
+            accessorKey: "gpu_current_temp_avg_celsius",
+            header: t?.("columns.ec2.gpuTempAvg") ?? "GPU Temp (Avg °C)",
+            size: 150,
+            id: "gpu_current_temp_avg_celsius",
+            sortingFn: "alphanumeric",
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number | null;
+                if (value === null || value === undefined) return undefined;
+                return `${value.toFixed(1)}°C`;
+            },
+        },
+        {
+            accessorKey: "ffmpeg_used_cuda",
+            header: t?.("columns.ec2.ffmpegUsedCuda") ?? "FFmpeg Used CUDA",
+            size: 150,
+            id: "ffmpeg_used_cuda",
+            ...makeCellWithRegexSorter("ffmpeg_used_cuda", (info) => {
+                const value = info.getValue() as boolean | null;
+                if (value === null || value === undefined) return undefined;
+                return value ? "Yes" : "No";
+            }),
+        },
+        {
+            accessorKey: "ffmpeg_speed",
+            header: t?.("columns.ec2.ffmpegSpeed") ?? "FFmpeg Speed",
+            size: 130,
+            id: "ffmpeg_speed",
+            sortingFn: "alphanumeric",
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number | null;
+                if (value === null || value === undefined) return undefined;
+                return `${value.toFixed(2)}x`;
+            },
+        },
+        {
+            accessorKey: "gpu_power_draw_watts_avg",
+            header:
+                t?.("columns.ec2.gpuPowerDrawAvg") ??
+                "GPU Power Draw (Avg Watts)",
+            size: 200,
+            id: "gpu_power_draw_watts_avg",
+            sortingFn: "alphanumeric",
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number | null;
+                if (value === null || value === undefined) return undefined;
+                return `${value.toFixed(1)}W`;
+            },
+        },
+        {
+            accessorKey: "gpu_power_draw_watts_avg",
+            header:
+                t?.("columns.ec2.gpuPowerLimit") ?? "GPU Power Limit (Watts)",
+            size: 180,
+            id: "gpu_power_max_watts_avg",
+            sortingFn: "alphanumeric",
+            filterFn: expr,
+            cell: (info) => {
+                const value = info.getValue() as number | null;
+                if (value === null || value === undefined) return undefined;
+                return `${value.toFixed(1)}W`;
+            },
+        },
+        {
+            accessorKey: "gpu_clocks",
+            header:
+                t?.("columns.ec2.gpuGraphicsClockAvg") ??
+                "GPU Graphics Clock (Avg MHz)",
+            size: 220,
+            id: "gpu_clocks_graphics_avg",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.gpu_clocks;
+                const valueB = rowB.original.gpu_clocks;
+                if (!valueA || valueA.length === 0) return 1;
+                if (!valueB || valueB.length === 0) return -1;
+                const avgA =
+                    valueA.reduce(
+                        (sum, clock) => sum + clock.graphics_clock_mhz,
+                        0,
+                    ) / valueA.length;
+                const avgB =
+                    valueB.reduce(
+                        (sum, clock) => sum + clock.graphics_clock_mhz,
+                        0,
+                    ) / valueB.length;
+                return avgA - avgB;
+            },
+            filterFn: (row, _, filterValue) => {
+                const clocks = row.original.gpu_clocks;
+                if (!clocks || clocks.length === 0) return false;
+                const avg =
+                    clocks.reduce(
+                        (sum, clock) => sum + clock.graphics_clock_mhz,
+                        0,
+                    ) / clocks.length;
+                try {
+                    return exprCompiler(filterValue)(
+                        avg,
+                        `${avg.toFixed(0)} MHz`,
+                    );
+                } catch {
+                    return false;
+                }
+            },
+            cell: (info) => {
+                const clocks = info.getValue() as EC2Instance["gpu_clocks"];
+                if (!clocks || clocks.length === 0) return undefined;
+                const avg =
+                    clocks.reduce(
+                        (sum, clock) => sum + clock.graphics_clock_mhz,
+                        0,
+                    ) / clocks.length;
+                return `${avg.toFixed(0)} MHz`;
+            },
+        },
+        {
+            accessorKey: "gpu_clocks",
+            header:
+                t?.("columns.ec2.gpuSmClockAvg") ?? "GPU SM Clock (Avg MHz)",
+            size: 200,
+            id: "gpu_clocks_sm_avg",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.gpu_clocks;
+                const valueB = rowB.original.gpu_clocks;
+                if (!valueA || valueA.length === 0) return 1;
+                if (!valueB || valueB.length === 0) return -1;
+                const avgA =
+                    valueA.reduce((sum, clock) => sum + clock.sm_clock_mhz, 0) /
+                    valueA.length;
+                const avgB =
+                    valueB.reduce((sum, clock) => sum + clock.sm_clock_mhz, 0) /
+                    valueB.length;
+                return avgA - avgB;
+            },
+            filterFn: (row, _, filterValue) => {
+                const clocks = row.original.gpu_clocks;
+                if (!clocks || clocks.length === 0) return false;
+                const avg =
+                    clocks.reduce((sum, clock) => sum + clock.sm_clock_mhz, 0) /
+                    clocks.length;
+                try {
+                    return exprCompiler(filterValue)(
+                        avg,
+                        `${avg.toFixed(0)} MHz`,
+                    );
+                } catch {
+                    return false;
+                }
+            },
+            cell: (info) => {
+                const clocks = info.getValue() as EC2Instance["gpu_clocks"];
+                if (!clocks || clocks.length === 0) return undefined;
+                const avg =
+                    clocks.reduce((sum, clock) => sum + clock.sm_clock_mhz, 0) /
+                    clocks.length;
+                return `${avg.toFixed(0)} MHz`;
+            },
+        },
+        {
+            accessorKey: "gpu_clocks",
+            header:
+                t?.("columns.ec2.gpuMemoryClockAvg") ??
+                "GPU Memory Clock (Avg MHz)",
+            size: 220,
+            id: "gpu_clocks_memory_avg",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.gpu_clocks;
+                const valueB = rowB.original.gpu_clocks;
+                if (!valueA || valueA.length === 0) return 1;
+                if (!valueB || valueB.length === 0) return -1;
+                const avgA =
+                    valueA.reduce(
+                        (sum, clock) => sum + clock.memory_clock_mhz,
+                        0,
+                    ) / valueA.length;
+                const avgB =
+                    valueB.reduce(
+                        (sum, clock) => sum + clock.memory_clock_mhz,
+                        0,
+                    ) / valueB.length;
+                return avgA - avgB;
+            },
+            filterFn: (row, _, filterValue) => {
+                const clocks = row.original.gpu_clocks;
+                if (!clocks || clocks.length === 0) return false;
+                const avg =
+                    clocks.reduce(
+                        (sum, clock) => sum + clock.memory_clock_mhz,
+                        0,
+                    ) / clocks.length;
+                try {
+                    return exprCompiler(filterValue)(
+                        avg,
+                        `${avg.toFixed(0)} MHz`,
+                    );
+                } catch {
+                    return false;
+                }
+            },
+            cell: (info) => {
+                const clocks = info.getValue() as EC2Instance["gpu_clocks"];
+                if (!clocks || clocks.length === 0) return undefined;
+                const avg =
+                    clocks.reduce(
+                        (sum, clock) => sum + clock.memory_clock_mhz,
+                        0,
+                    ) / clocks.length;
+                return `${avg.toFixed(0)} MHz`;
+            },
+        },
+        {
+            accessorKey: "gpu_clocks",
+            header:
+                t?.("columns.ec2.gpuVideoClockAvg") ??
+                "GPU Video Clock (Avg MHz)",
+            size: 200,
+            id: "gpu_clocks_video_avg",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.gpu_clocks;
+                const valueB = rowB.original.gpu_clocks;
+                if (!valueA || valueA.length === 0) return 1;
+                if (!valueB || valueB.length === 0) return -1;
+                const avgA =
+                    valueA.reduce(
+                        (sum, clock) => sum + clock.video_clock_mhz,
+                        0,
+                    ) / valueA.length;
+                const avgB =
+                    valueB.reduce(
+                        (sum, clock) => sum + clock.video_clock_mhz,
+                        0,
+                    ) / valueB.length;
+                return avgA - avgB;
+            },
+            filterFn: (row, _, filterValue) => {
+                const clocks = row.original.gpu_clocks;
+                if (!clocks || clocks.length === 0) return false;
+                const avg =
+                    clocks.reduce(
+                        (sum, clock) => sum + clock.video_clock_mhz,
+                        0,
+                    ) / clocks.length;
+                try {
+                    return exprCompiler(filterValue)(
+                        avg,
+                        `${avg.toFixed(0)} MHz`,
+                    );
+                } catch {
+                    return false;
+                }
+            },
+            cell: (info) => {
+                const clocks = info.getValue() as EC2Instance["gpu_clocks"];
+                if (!clocks || clocks.length === 0) return undefined;
+                const avg =
+                    clocks.reduce(
+                        (sum, clock) => sum + clock.video_clock_mhz,
+                        0,
+                    ) / clocks.length;
+                return `${avg.toFixed(0)} MHz`;
+            },
+        },
+    ];
 };

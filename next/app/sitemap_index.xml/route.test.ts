@@ -45,7 +45,10 @@ function scanFolder(path: string[]) {
                 if (pathStr.startsWith("[locale]")) {
                     // Replace [locale] with each supported locale
                     for (const locale of SUPPORTED_LOCALES) {
-                        const localizedPath = pathStr.replace("[locale]", locale);
+                        const localizedPath = pathStr.replace(
+                            "[locale]",
+                            locale,
+                        );
                         sitemapInstanceRoutes.add(
                             `/${localizedPath}/sitemap-instances.xml`,
                         );

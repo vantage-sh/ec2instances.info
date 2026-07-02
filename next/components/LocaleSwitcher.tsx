@@ -47,8 +47,7 @@ export default function LocaleSwitcher({ locale }: LocaleSwitcherProps) {
         return `/${newLocale}${pathWithoutLocale || ""}`;
     };
 
-    const currentLocaleName =
-        LOCALE_NAMES[locale as SupportedLocale] || locale;
+    const currentLocaleName = LOCALE_NAMES[locale as SupportedLocale] || locale;
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -60,14 +59,20 @@ export default function LocaleSwitcher({ locale }: LocaleSwitcherProps) {
                     aria-label={t("localeSwitcher.label")}
                 >
                     <Globe className="h-4 w-4" />
-                    <span className="hidden sm:inline">{currentLocaleName}</span>
+                    <span className="hidden sm:inline">
+                        {currentLocaleName}
+                    </span>
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-56 p-0" align="end">
                 <Command>
-                    <CommandInput placeholder={t("localeSwitcher.searchPlaceholder")} />
+                    <CommandInput
+                        placeholder={t("localeSwitcher.searchPlaceholder")}
+                    />
                     <CommandList>
-                        <CommandEmpty>{t("localeSwitcher.noResults")}</CommandEmpty>
+                        <CommandEmpty>
+                            {t("localeSwitcher.noResults")}
+                        </CommandEmpty>
                         {SUPPORTED_LOCALES.map((loc) => (
                             <CommandItem
                                 key={loc}

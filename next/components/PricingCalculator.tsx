@@ -450,7 +450,9 @@ function Calculator({
                     >
                         {osOptions.map(([value, label]) => (
                             <option key={value} value={value}>
-                                {t(`os.${value}`) !== `os.${value}` ? t(`os.${value}`) : label}
+                                {t(`os.${value}`) !== `os.${value}`
+                                    ? t(`os.${value}`)
+                                    : label}
                             </option>
                         ))}
                     </select>
@@ -470,7 +472,9 @@ function Calculator({
                 >
                     {durationOptions.map(({ value, label }) => (
                         <option key={value} value={value}>
-                            {t(`durations.${value}`) !== `durations.${value}` ? t(`durations.${value}`) : label}
+                            {t(`durations.${value}`) !== `durations.${value}`
+                                ? t(`durations.${value}`)
+                                : label}
                         </option>
                     ))}
                 </select>

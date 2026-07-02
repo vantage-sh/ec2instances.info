@@ -79,7 +79,10 @@ async function getData() {
             regions,
             instances: instances as EC2Instance[],
         };
-    })().catch((e) => { p = undefined; throw e; });
+    })().catch((e) => {
+        p = undefined;
+        throw e;
+    });
     return p;
 }
 
@@ -127,7 +130,11 @@ export async function generateMetadata({
     );
     return {
         title: `${instance.instance_type} pricing and specs - Vantage`,
-        description: buildInstanceDescription(t, instance, ondemandCost as string),
+        description: buildInstanceDescription(
+            t,
+            instance,
+            ondemandCost as string,
+        ),
         alternates,
         openGraph: {
             ...(ogLocale !== undefined ? { locale: ogLocale } : {}),

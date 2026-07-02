@@ -8,6 +8,7 @@ next/node_modules/
 next/out/
 next/public/
 next/.next/
+next/.open-next/
 next/build/
 golden
 mocks

@@ -69,7 +69,10 @@ async function getData() {
             regions,
             instances: instances as Instance[],
         };
-    })().catch((e) => { p = undefined; throw e; });
+    })().catch((e) => {
+        p = undefined;
+        throw e;
+    });
     return p;
 }
 

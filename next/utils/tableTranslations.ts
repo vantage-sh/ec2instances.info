@@ -75,7 +75,8 @@ const tableTranslations: Record<string, string> = {
     localTempStorage: "Local Temp Storage (GiB)",
     cachedDiskSize: "Cached Disk Size with Host Caching (GiB)",
     cachedTempStorageIops: "Cached/Temp Storage Throughput (IOPS)",
-    cachedTempStorageThroughput: "Cached/Temp Storage Read/Write Throughput (MBps)",
+    cachedTempStorageThroughput:
+        "Cached/Temp Storage Read/Write Throughput (MBps)",
     uncachedDiskIops: "Uncached Disk Throughput (IOPS)",
     uncachedDiskThroughput: "Uncached Disk Read/Write Throughput (MBps)",
     premiumIo: "Premium I/O",

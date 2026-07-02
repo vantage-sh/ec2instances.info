@@ -26,8 +26,9 @@ async function getData() {
         const regions = decode(
             await loadDataAsset("instance-rds-regions.msgpack"),
         ) as Region;
-        const instances =
-            await loadDataJsonXz<EC2Instance[]>("data/rds/instances.json.xz");
+        const instances = await loadDataJsonXz<EC2Instance[]>(
+            "data/rds/instances.json.xz",
+        );
         for (const x of instances) {
             if ("vcpu" in x) {
                 // @ts-expect-error: This is a different typed field.
@@ -44,7 +45,10 @@ async function getData() {
             regions,
             instances,
         };
-    })().catch((e) => { p = undefined; throw e; });
+    })().catch((e) => {
+        p = undefined;
+        throw e;
+    });
     return p;
 }
 

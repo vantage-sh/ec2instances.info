@@ -69,15 +69,33 @@ export function makePrettyNames<V>(
     const t = locals?.t;
     return [
         makeColumnOption("pretty_name", t?.("columns.common.name") ?? "Name"),
-        makeColumnOption("instance_type", t?.("columns.common.apiName") ?? "API Name"),
-        makeColumnOption("compute_family", t?.("columns.common.computeFamily") ?? "Compute Family"),
+        makeColumnOption(
+            "instance_type",
+            t?.("columns.common.apiName") ?? "API Name",
+        ),
+        makeColumnOption(
+            "compute_family",
+            t?.("columns.common.computeFamily") ?? "Compute Family",
+        ),
         makeColumnOption("memory", t?.("columns.common.memory") ?? "Memory"),
         makeColumnOption("vcpu", t?.("columns.common.vCPUs") ?? "vCPUs"),
         makeColumnOption("storage", t?.("columns.common.storage") ?? "Storage"),
-        makeColumnOption("ecu", t?.("columns.ec2.computeUnitsEcu") ?? "Elastic Compute Units"),
-        makeColumnOption("cost-ondemand", t?.("columns.pricing.onDemand") ?? "On Demand Cost"),
-        makeColumnOption("cost-reserved", t?.("columns.pricing.reserved") ?? "Reserved Cost"),
-        makeColumnOption("generation", t?.("columns.common.generation") ?? "Generation"),
+        makeColumnOption(
+            "ecu",
+            t?.("columns.ec2.computeUnitsEcu") ?? "Elastic Compute Units",
+        ),
+        makeColumnOption(
+            "cost-ondemand",
+            t?.("columns.pricing.onDemand") ?? "On Demand Cost",
+        ),
+        makeColumnOption(
+            "cost-reserved",
+            t?.("columns.pricing.reserved") ?? "Reserved Cost",
+        ),
+        makeColumnOption(
+            "generation",
+            t?.("columns.common.generation") ?? "Generation",
+        ),
     ] as const;
 }
 
@@ -140,108 +158,112 @@ export const columnsGen = (
     const t = locals?.t;
     const locale = locals?.locale;
     return [
-    {
-        accessorKey: "pretty_name",
-        id: "pretty_name",
-        header: t?.("columns.common.name") ?? "Name",
-        sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "pretty_name" }),
-    },
-    {
-        accessorKey: "instance_type",
-        id: "instance_type",
-        header: t?.("columns.common.apiName") ?? "API Name",
-        sortingFn: (rowA, rowB) => {
-            const valueA = rowA.original.instance_type;
-            const valueB = rowB.original.instance_type;
-            return sortByInstanceType(valueA, valueB, ".");
+        {
+            accessorKey: "pretty_name",
+            id: "pretty_name",
+            header: t?.("columns.common.name") ?? "Name",
+            sortingFn: "alphanumeric",
+            filterFn: regex({ accessorKey: "pretty_name" }),
         },
-        filterFn: regex({ accessorKey: "instance_type" }),
-        cell: (info) => {
-            const value = info.getValue() as string;
-            return (
-                <RegionLinkPreloader
-                    onClick={(e) => e.stopPropagation()}
-                    href={prefixWithLocale(`/aws/opensearch/${value}`, locale ?? "en")}
-                >
-                    {value}
-                </RegionLinkPreloader>
-            );
+        {
+            accessorKey: "instance_type",
+            id: "instance_type",
+            header: t?.("columns.common.apiName") ?? "API Name",
+            sortingFn: (rowA, rowB) => {
+                const valueA = rowA.original.instance_type;
+                const valueB = rowB.original.instance_type;
+                return sortByInstanceType(valueA, valueB, ".");
+            },
+            filterFn: regex({ accessorKey: "instance_type" }),
+            cell: (info) => {
+                const value = info.getValue() as string;
+                return (
+                    <RegionLinkPreloader
+                        onClick={(e) => e.stopPropagation()}
+                        href={prefixWithLocale(
+                            `/aws/opensearch/${value}`,
+                            locale ?? "en",
+                        )}
+                    >
+                        {value}
+                    </RegionLinkPreloader>
+                );
+            },
         },
-    },
-    {
-        accessorKey: "family",
-        header: t?.("columns.common.computeFamily") ?? "Compute Family",
-        size: 150,
-        id: "compute_family",
-        sortingFn: "alphanumeric",
-        filterFn: regex({ accessorKey: "family" }),
-    },
-    {
-        accessorKey: "memoryGib",
-        id: "memory",
-        header: t?.("columns.common.memory") ?? "Memory",
-        filterFn: expr,
-        sortingFn: "alphanumeric",
-        cell: (info) => {
-            const value = info.getValue() as string;
-            return `${value} GiB`;
+        {
+            accessorKey: "family",
+            header: t?.("columns.common.computeFamily") ?? "Compute Family",
+            size: 150,
+            id: "compute_family",
+            sortingFn: "alphanumeric",
+            filterFn: regex({ accessorKey: "family" }),
         },
-    },
-    {
-        accessorKey: "vcpu",
-        id: "vcpu",
-        filterFn: expr,
-        sortingFn: "alphanumeric",
-        header: t?.("columns.common.vCPUs") ?? "vCPUs",
-    },
-    {
-        accessorKey: "storage",
-        id: "storage",
-        header: t?.("columns.common.storage") ?? "Storage",
-        filterFn: expr,
-        sortingFn: "alphanumeric",
-    },
-    {
-        accessorKey: "ecu",
-        id: "ecu",
-        header: t?.("columns.ec2.computeUnitsEcu") ?? "Elastic Compute Units",
-        sortingFn: "alphanumeric",
-        filterFn: expr,
-    },
-    {
-        accessorKey: "pricing",
-        id: "cost-ondemand",
-        header: t?.("columns.pricing.onDemand") ?? "On Demand Cost",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.ondemand,
-            currency,
-        ),
-    },
-    {
-        accessorKey: "pricing",
-        id: "cost-reserved",
-        header: t?.("columns.pricing.reserved") ?? "Reserved Cost",
-        ...getPricingSorter(
-            selectedRegion,
-            pricingUnit,
-            costDuration,
-            (pricing) => pricing?.reserved?.[reservedTerm],
-            currency,
-        ),
-    },
-    {
-        accessorKey: "currentGeneration",
-        id: "generation",
-        header: t?.("columns.common.generation") ?? "Generation",
-        sortingFn: "alphanumeric",
-        ...makeCellWithRegexSorter("currentGeneration", (info) => {
-            if (info.getValue() === "Yes") return "current";
-            return "previous";
-        }),
-    },
-];
+        {
+            accessorKey: "memoryGib",
+            id: "memory",
+            header: t?.("columns.common.memory") ?? "Memory",
+            filterFn: expr,
+            sortingFn: "alphanumeric",
+            cell: (info) => {
+                const value = info.getValue() as string;
+                return `${value} GiB`;
+            },
+        },
+        {
+            accessorKey: "vcpu",
+            id: "vcpu",
+            filterFn: expr,
+            sortingFn: "alphanumeric",
+            header: t?.("columns.common.vCPUs") ?? "vCPUs",
+        },
+        {
+            accessorKey: "storage",
+            id: "storage",
+            header: t?.("columns.common.storage") ?? "Storage",
+            filterFn: expr,
+            sortingFn: "alphanumeric",
+        },
+        {
+            accessorKey: "ecu",
+            id: "ecu",
+            header:
+                t?.("columns.ec2.computeUnitsEcu") ?? "Elastic Compute Units",
+            sortingFn: "alphanumeric",
+            filterFn: expr,
+        },
+        {
+            accessorKey: "pricing",
+            id: "cost-ondemand",
+            header: t?.("columns.pricing.onDemand") ?? "On Demand Cost",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.ondemand,
+                currency,
+            ),
+        },
+        {
+            accessorKey: "pricing",
+            id: "cost-reserved",
+            header: t?.("columns.pricing.reserved") ?? "Reserved Cost",
+            ...getPricingSorter(
+                selectedRegion,
+                pricingUnit,
+                costDuration,
+                (pricing) => pricing?.reserved?.[reservedTerm],
+                currency,
+            ),
+        },
+        {
+            accessorKey: "currentGeneration",
+            id: "generation",
+            header: t?.("columns.common.generation") ?? "Generation",
+            sortingFn: "alphanumeric",
+            ...makeCellWithRegexSorter("currentGeneration", (info) => {
+                if (info.getValue() === "Yes") return "current";
+                return "previous";
+            }),
+        },
+    ];
 };
