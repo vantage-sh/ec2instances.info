@@ -10,7 +10,7 @@ import (
 )
 
 const minExpectedEniMaxPodsEntries = 1000 // sanity floor
-const AWS_ENI_MAX_PODS = "https://raw.githubusercontent.com/aws/amazon-vpc-cni-k8s/master/misc/eni-max-pods.txt"
+const eniMaxPodsURL = "https://raw.githubusercontent.com/aws/amazon-vpc-cni-k8s/master/misc/eni-max-pods.txt"
 
 func parseMaxPodsTable(doc []byte) map[string]int {
 	instancesToPods := make(map[string]int)
@@ -42,7 +42,7 @@ func validateMaxPodsCount(n int) error {
 }
 
 func fetchMaxPods() (map[string]int, error) {
-	resp, err := utils.FetchWithRetry(AWS_ENI_MAX_PODS, nil)
+	resp, err := utils.FetchWithRetry(eniMaxPodsURL, nil)
 	if err != nil {
 		return nil, err
 	}
