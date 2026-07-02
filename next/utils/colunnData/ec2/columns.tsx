@@ -1747,6 +1747,17 @@ export const columnsGen = (
         ),
     },
     {
+        accessorKey: "date_introduced",
+        header: "Date Introduced",
+        size: 130,
+        id: "date_introduced",
+        sortingFn: "alphanumeric",
+        ...makeCellWithRegexSorter(
+            "date_introduced",
+            (info) => (info.getValue() as string | null) ?? "",
+        ),
+    },
+    {
         accessorKey: "gpu_architectures",
         header: "GPU Architectures",
         size: 150,

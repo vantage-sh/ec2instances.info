@@ -67,9 +67,10 @@ make all                   # fetch-data + generate-images + compress-www + next 
 ### Data Flow
 
 1. Go scraper fetches from AWS/Azure/GCP APIs → writes JSON to `www/`
-2. Go imagegen reads JSON from `www/`, generates OG images → writes PNGs to `www/`
-3. `npm run init` compresses JSON data with LZMA
-4. Frontend loads compressed data client-side via `@/utils/data/`
+2. EC2 launch dates (`date_introduced`) are enriched from [instancetyp.es/timeline.json](https://instancetyp.es/timeline.json) during each scrape
+3. Go imagegen reads JSON from `www/`, generates OG images → writes PNGs to `www/`
+4. `npm run init` compresses JSON data with LZMA
+5. Frontend loads compressed data client-side via `@/utils/data/`
 
 ### Scraper Structure (scraper/)
 

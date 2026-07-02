@@ -52,7 +52,9 @@ The scraper is written in Go and fetches data from AWS, Azure, and GCP APIs. You
             "Action": [
                 "ec2:DescribeInstanceTypes",
                 "ec2:DescribeSpotPriceHistory",
-                "elasticache:DescribeEngineDefaultParameters"
+                "elasticache:DescribeEngineDefaultParameters",
+                "rds:DescribeDBEngineVersions",
+                "rds:DescribeOrderableDBInstanceOptions"
             ],
             "Resource": "*"
         }
@@ -67,6 +69,8 @@ Set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` (`.env` is gitignored).
 **GCP:** Set `GCP_PROJECT_ID`, `GCP_CLIENT_EMAIL`, and `GCP_PRIVATE_KEY`. [See the GCP setup guide.](./docs/setting-up-gcp.md)
 
 Once credentials are in place, run `./fetch_data.sh` from the repository root. You only need to run this when the scraper is changed in a way that alters the data or there is new API data available you want to test against.
+
+EC2 instance launch dates (`date_introduced`) are enriched during each scrape from the public [instancetyp.es timeline](https://instancetyp.es/timeline.json).
 
 ## Building a full release
 

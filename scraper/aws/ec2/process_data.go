@@ -297,6 +297,9 @@ func processEC2Data(
 	// Add VPC only instances
 	addVpcOnlyInstances(instancesHashmap)
 
+	// Add date introduced from instancetyp.es timeline
+	addDateIntroduced(instancesHashmap)
+
 	// Add savings plans pricing
 	for region, skuMap := range savingsPlanData() {
 		for sku, termMap := range skuMap {

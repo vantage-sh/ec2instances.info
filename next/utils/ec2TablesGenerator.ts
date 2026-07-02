@@ -322,6 +322,14 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
                     children: instance.generation,
                     bgStyled: true,
                 },
+                ...(instance.date_introduced
+                    ? ([
+                          {
+                              name: "Date Introduced",
+                              children: instance.date_introduced,
+                          },
+                      ] satisfies Row[])
+                    : []),
                 {
                     name: "Instance Type",
                     children: instance.instance_type,
