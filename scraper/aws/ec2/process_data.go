@@ -297,8 +297,10 @@ func processEC2Data(
 	// Add VPC only instances
 	addVpcOnlyInstances(instancesHashmap)
 
+	// Add date introduced from instancetyp.es timeline
 	addDateIntroduced(instancesHashmap)
 
+	// Add max pods info
 	addMaxPodsInfo(instancesHashmap)
 
 	// Add savings plans pricing
