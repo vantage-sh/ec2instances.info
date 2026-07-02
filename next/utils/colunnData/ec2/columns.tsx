@@ -1189,6 +1189,24 @@ export const columnsGen = (
         },
     },
     {
+        accessorKey: "max_pods",
+        header: "Max Pods",
+        id: "max_pods",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.max_pods;
+            const valueB = rowB.original.max_pods;
+            if (valueA === undefined) return 1;
+            if (valueB === undefined) return -1;
+            return valueA - valueB;
+        },
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | undefined;
+            if (value === undefined) return undefined;
+            return value;
+        },
+    },
+    {
         accessorKey: "vpc_only",
         header: "VPC Only",
         size: 110,

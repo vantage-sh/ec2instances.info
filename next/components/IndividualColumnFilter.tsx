@@ -237,6 +237,7 @@ const exprColumns = [
     "ebs-max-bandwidth",
     "ebs-max-throughput",
     "ebs-iops",
+    "max_pods",
 ];
 
 export default function IndividualColumnFilter<Instance>({

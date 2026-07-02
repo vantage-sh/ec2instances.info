@@ -300,6 +300,9 @@ func processEC2Data(
 	// Add date introduced from instancetyp.es timeline
 	addDateIntroduced(instancesHashmap)
 
+	// Add max pods info
+	addMaxPodsInfo(instancesHashmap)
+
 	// Add savings plans pricing
 	for region, skuMap := range savingsPlanData() {
 		for sku, termMap := range skuMap {
