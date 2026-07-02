@@ -109,6 +109,7 @@ const initialColumnsArr = [
     ["is_trunking_compatible", false],
     ["branch_interface", false],
     ["max_ecs_tasks", false],
+    ["max_pods", false],
 ] as const;
 
 export const initialColumnsValue: {
@@ -206,6 +207,7 @@ export function makePrettyNames<V>(
         makeColumnOption("is_trunking_compatible", "Trunking compatible"),
         makeColumnOption("branch_interface", "Branch interface"),
         makeColumnOption("max_ecs_tasks", "Max ECS Tasks"),
+        makeColumnOption("max_pods", "Max Pods"),
         makeColumnOption("vpc_only", "VPC Only"),
         makeColumnOption("ipv6_support", "IPv6 Support"),
         makeColumnOption("placement_group_support", "Placement Group Support"),
