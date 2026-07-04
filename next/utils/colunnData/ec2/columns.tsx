@@ -1,4 +1,10 @@
-import { CostDuration, CostPerGb, EC2Instance, Pricing, PricingUnit } from "@/types";
+import {
+    CostDuration,
+    CostPerGb,
+    EC2Instance,
+    Pricing,
+    PricingUnit,
+} from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import { ClockFadingIcon } from "lucide-react";
