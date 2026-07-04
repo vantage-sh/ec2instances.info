@@ -99,6 +99,13 @@ export function useDuration(pathname: string) {
     ];
 }
 
+export function useRequestedStorageGb(pathname: string) {
+    return useGlobalStateValue("requestedStorageGb", pathname, 0) as readonly [
+        number,
+        (value: number) => void,
+    ];
+}
+
 export function useReservedTerm(pathname: string) {
     const defaultReservedTerm = pathname.includes("azure")
         ? "yrTerm1Standard.allUpfront"

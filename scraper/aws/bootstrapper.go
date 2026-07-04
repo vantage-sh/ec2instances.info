@@ -103,6 +103,27 @@ func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootInd
 		perServiceParallelism = int(x)
 	}
 
+	// Optional region filter. When set to a comma-separated list of region
+	// slugs (e.g. "us-east-1,us-west-2") only those regions are fetched.
+	// Empty string disables the filter (all regions).
+	allowedRegionsRaw := os.Getenv("ALLOWED_REGIONS")
+	allowedRegions := map[string]struct{}{}
+	if allowedRegionsRaw != "" {
+		for _, r := range strings.Split(allowedRegionsRaw, ",") {
+			r = strings.TrimSpace(r)
+			if r != "" {
+				allowedRegions[r] = struct{}{}
+			}
+		}
+	}
+	regionAllowed := func(name string) bool {
+		if len(allowedRegions) == 0 {
+			return true
+		}
+		_, ok := allowedRegions[name]
+		return ok
+	}
+
 	// Global
 	chinaToUrlToSavingsPlan := make(map[bool]map[string]savingsPlanHandler)
 	for _, service := range services {
@@ -123,6 +144,9 @@ func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootInd
 				if regionName == "cn-north-1-pkx-1" {
 					// Absolutely zero clue why this is being exposed by non-China, but
 					// it breaks things later on. Continue past it.
+					continue
+				}
+				if !regionAllowed(regionName) {
 					continue
 				}
 				dataFlattened = append(dataFlattened, flatData{
@@ -173,6 +197,9 @@ func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootInd
 			for regionName, regionMeta := range regionIndex.Regions {
 				if regionName == "aws-cn-other" {
 					// Weird thing AWS sends in China
+					continue
+				}
+				if !regionAllowed(regionName) {
 					continue
 				}
 				dataFlattened = append(dataFlattened, flatData{

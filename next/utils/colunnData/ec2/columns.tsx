@@ -1,9 +1,14 @@
-import { CostDuration, EC2Instance, Pricing, PricingUnit } from "@/types";
+import { CostDuration, CostPerGb, EC2Instance, Pricing, PricingUnit } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import { ClockFadingIcon } from "lucide-react";
 import sortByInstanceType from "@/utils/sortByInstanceType";
-import { regex, makeCellWithRegexSorter, expr } from "../shared";
+import {
+    regex,
+    makeCellWithRegexSorter,
+    expr,
+    getStorageHourlyAddon,
+} from "../shared";
 import exprCompiler from "@/utils/expr";
 
 interface Storage {
@@ -29,6 +34,7 @@ export function calculateCost(
         usdRate: number;
         cnyRate: number;
     },
+    storageHourlyAddon: number = 0,
 ): number {
     if (!price) return -1;
 
@@ -65,8 +71,9 @@ export function calculateCost(
         ? currency.cnyRate
         : currency.usdRate;
 
+    const hourlyTotal = Number(price) + storageHourlyAddon;
     return (
-        ((Number(price) * durationMultiplier) / pricingUnitModifier) *
+        ((hourlyTotal * durationMultiplier) / pricingUnitModifier) *
         currencyMultiplier
     );
 }
@@ -84,6 +91,7 @@ export function calculateAndFormatCost(
         usdRate: number;
         cnyRate: number;
     },
+    storageHourlyAddon: number = 0,
 ): string | undefined {
     const perTime = calculateCost(
         price,
@@ -92,6 +100,7 @@ export function calculateAndFormatCost(
         costDuration,
         selectedRegion,
         currency,
+        storageHourlyAddon,
     );
     if (perTime === -1) return undefined;
 
@@ -135,7 +144,15 @@ export function getPricingSorter(
         usdRate: number;
         cnyRate: number;
     },
+    requestedStorageGb: number = 0,
 ) {
+    const storageAddonFor = (instance: { costPerGb?: CostPerGb }) =>
+        getStorageHourlyAddon(
+            instance.costPerGb,
+            requestedStorageGb,
+            selectedRegion,
+        );
+
     return {
         sortingFn: (rowA, rowB) => {
             if (!convertToPrice) {
@@ -154,6 +171,7 @@ export function getPricingSorter(
                 costDuration,
                 selectedRegion,
                 currency,
+                storageAddonFor(rowA.original),
             );
             const valueB = calculateCost(
                 getter(rowB.original.pricing?.[selectedRegion]),
@@ -162,6 +180,7 @@ export function getPricingSorter(
                 costDuration,
                 selectedRegion,
                 currency,
+                storageAddonFor(rowB.original),
             );
             return valueA - valueB;
         },
@@ -176,6 +195,7 @@ export function getPricingSorter(
                 costDuration,
                 selectedRegion,
                 currency,
+                storageAddonFor(row),
             );
             return value === -1 ? undefined : value;
         },
@@ -184,16 +204,63 @@ export function getPricingSorter(
             if (!convertToPrice) return getter(pricing?.[selectedRegion]);
             const price = getter(pricing?.[selectedRegion]);
             if (isNaN(Number(price)) || price === "0") return undefined;
-            return calculateAndFormatCost(
+            const addon = storageAddonFor(info.row.original);
+            const formatted = calculateAndFormatCost(
                 price,
                 info.row.original,
                 pricingUnit,
                 costDuration,
                 selectedRegion,
                 currency,
+                addon,
+            );
+            if (!formatted || addon <= 0) return formatted;
+            return renderWithStorageIndicator(
+                formatted,
+                price!,
+                addon,
+                requestedStorageGb,
+                info.row.original.costPerGb,
+                selectedRegion,
             );
         }),
     } satisfies Partial<ColumnDef<EC2Instance>>;
+}
+
+function renderWithStorageIndicator(
+    formatted: string,
+    computePriceUsdHr: string,
+    storageHourlyAddon: number,
+    requestedStorageGb: number,
+    costPerGb: CostPerGb | undefined,
+    selectedRegion: string,
+) {
+    const computeFmt = Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 6,
+    });
+    const baseline = (() => {
+        if (!costPerGb) return 0;
+        const b = costPerGb.baseline;
+        if (typeof b === "number") return b;
+        let min = Infinity;
+        for (const k in b) if (b[k] < min) min = b[k];
+        return min === Infinity ? 0 : min;
+    })();
+    const extraGb = Math.max(0, requestedStorageGb - baseline);
+    const tooltip =
+        `Compute: ${computeFmt.format(Number(computePriceUsdHr))}/hr\n` +
+        `Storage: ${computeFmt.format(storageHourlyAddon)}/hr` +
+        ` (${extraGb} GB × storage rate, ${selectedRegion})`;
+    return (
+        <span
+            title={tooltip}
+            className="border-b border-dotted border-current cursor-help"
+        >
+            {formatted}
+        </span>
+    );
 }
 
 function formatStorage(
@@ -222,6 +289,7 @@ export const columnsGen = (
         usdRate: number;
         cnyRate: number;
     },
+    requestedStorageGb: number,
 ): ColumnDef<EC2Instance>[] => [
     {
         accessorKey: "pretty_name",
@@ -1271,6 +1339,7 @@ export const columnsGen = (
             },
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1287,6 +1356,7 @@ export const columnsGen = (
             },
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1301,6 +1371,7 @@ export const columnsGen = (
             (pricing) => pricing?.linux?.spot_min,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1315,6 +1386,7 @@ export const columnsGen = (
             (pricing) => pricing?.linux?.spot_avg,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1329,6 +1401,7 @@ export const columnsGen = (
             (pricing) => pricing?.rhel?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1342,6 +1415,7 @@ export const columnsGen = (
             (pricing) => pricing?.rhel?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1355,6 +1429,7 @@ export const columnsGen = (
             (pricing) => pricing?.rhel?.spot_min,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1368,6 +1443,7 @@ export const columnsGen = (
             (pricing) => pricing?.rhel?.spot_max,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1381,6 +1457,7 @@ export const columnsGen = (
             (pricing) => pricing?.rhelHA?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1394,6 +1471,7 @@ export const columnsGen = (
             (pricing) => pricing?.rhelHA?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1407,6 +1485,7 @@ export const columnsGen = (
             (pricing) => pricing?.rhelHA?.spot_min,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1420,6 +1499,7 @@ export const columnsGen = (
             (pricing) => pricing?.rhelHA?.spot_max,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1433,6 +1513,7 @@ export const columnsGen = (
             (pricing) => pricing?.sles?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1446,6 +1527,7 @@ export const columnsGen = (
             (pricing) => pricing?.sles?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1459,6 +1541,7 @@ export const columnsGen = (
             (pricing) => pricing?.sles?.spot_min,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1472,6 +1555,7 @@ export const columnsGen = (
             (pricing) => pricing?.sles?.spot_max,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1485,6 +1569,7 @@ export const columnsGen = (
             (pricing) => pricing?.mswin?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1498,6 +1583,7 @@ export const columnsGen = (
             (pricing) => pricing?.mswin?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1511,6 +1597,7 @@ export const columnsGen = (
             (pricing) => pricing?.mswin?.spot_min,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1524,6 +1611,7 @@ export const columnsGen = (
             (pricing) => pricing?.mswin?.spot_avg,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1537,6 +1625,7 @@ export const columnsGen = (
             (pricing) => pricing?.dedicated?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1550,6 +1639,7 @@ export const columnsGen = (
             (pricing) => pricing?.dedicated?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1563,6 +1653,7 @@ export const columnsGen = (
             (pricing) => pricing?.mswinSQLWeb?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1576,6 +1667,7 @@ export const columnsGen = (
             (pricing) => pricing?.mswinSQLWeb?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1589,6 +1681,7 @@ export const columnsGen = (
             (pricing) => pricing?.mswinSQL?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1602,6 +1695,7 @@ export const columnsGen = (
             (pricing) => pricing?.mswinSQL?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1615,6 +1709,7 @@ export const columnsGen = (
             (pricing) => pricing?.mswinSQLEnterprise?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1628,6 +1723,7 @@ export const columnsGen = (
             (pricing) => pricing?.mswinSQLEnterprise?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1641,6 +1737,7 @@ export const columnsGen = (
             (pricing) => pricing?.linuxSQLWeb?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1654,6 +1751,7 @@ export const columnsGen = (
             (pricing) => pricing?.linuxSQLWeb?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1667,6 +1765,7 @@ export const columnsGen = (
             (pricing) => pricing?.linuxSQL?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1680,6 +1779,7 @@ export const columnsGen = (
             (pricing) => pricing?.linuxSQL?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1693,6 +1793,7 @@ export const columnsGen = (
             (pricing) => pricing?.linuxSQLEnterprise?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1706,6 +1807,7 @@ export const columnsGen = (
             (pricing) => pricing?.linuxSQLEnterprise?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -1733,6 +1835,7 @@ export const columnsGen = (
             (pricing) => pricing?.emr?.emr,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {

@@ -7,6 +7,7 @@ import {
     makeCellWithRegexSorter,
     expr,
     transformAllDataTables,
+    getStorageHourlyAddon,
 } from "./shared";
 import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
@@ -98,7 +99,14 @@ function getPricingSorter(
         usdRate: number;
         cnyRate: number;
     },
+    requestedStorageGb: number,
 ) {
+    const storageAddonFor = (instance: { costPerGb?: CostPerGb }) =>
+        getStorageHourlyAddon(
+            instance.costPerGb,
+            requestedStorageGb,
+            selectedRegion,
+        );
     return {
         sortingFn: "basic" as const,
         sortUndefined: "last",
@@ -112,22 +120,70 @@ function getPricingSorter(
                 costDuration,
                 selectedRegion,
                 currency,
+                storageAddonFor(row),
             );
         },
         ...makeCellWithRegexSorter("pricing", (info) => {
             const pricing = info.row.original.pricing;
             const price = getter(pricing?.[selectedRegion]);
             if (isNaN(Number(price)) || !price) return undefined;
-            return calculateCost(
+            const addon = storageAddonFor(info.row.original);
+            const formatted = calculateCost(
                 price,
                 info.row.original,
                 pricingUnit,
                 costDuration,
                 selectedRegion,
                 currency,
+                addon,
+            );
+            if (addon <= 0) return formatted;
+            return renderWithStorageIndicator(
+                formatted,
+                price,
+                addon,
+                requestedStorageGb,
+                info.row.original.costPerGb,
+                selectedRegion,
             );
         }),
     } satisfies Partial<ColumnDef<Instance>>;
+}
+
+function renderWithStorageIndicator(
+    formatted: string,
+    computePriceUsdHr: string,
+    storageHourlyAddon: number,
+    requestedStorageGb: number,
+    costPerGb: CostPerGb | undefined,
+    selectedRegion: string,
+) {
+    const fmt = Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 6,
+    });
+    const baseline = (() => {
+        if (!costPerGb) return 0;
+        const b = costPerGb.baseline;
+        if (typeof b === "number") return b;
+        let min = Infinity;
+        for (const k in b) if (b[k] < min) min = b[k];
+        return min === Infinity ? 0 : min;
+    })();
+    const extraGb = Math.max(0, requestedStorageGb - baseline);
+    const tooltip =
+        `Compute: ${fmt.format(Number(computePriceUsdHr))}/hr\n` +
+        `Storage: ${fmt.format(storageHourlyAddon)}/hr` +
+        ` (${extraGb} GB × storage rate, ${selectedRegion})`;
+    return (
+        <span
+            title={tooltip}
+            className="border-b border-dotted border-current cursor-help"
+        >
+            {formatted}
+        </span>
+    );
 }
 
 export const columnsGen = (
@@ -140,6 +196,7 @@ export const columnsGen = (
         usdRate: number;
         cnyRate: number;
     },
+    requestedStorageGb: number,
 ): ColumnDef<Instance>[] => [
     {
         accessorKey: "pretty_name",
@@ -241,6 +298,7 @@ export const columnsGen = (
                 return pricing?.ondemand;
             },
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -253,6 +311,7 @@ export const columnsGen = (
             costDuration,
             (pricing) => pricing?.reserved?.[reservedTerm],
             currency,
+            requestedStorageGb,
         ),
     },
 ];

@@ -14,6 +14,7 @@ import {
     useColumnVisibility,
     useSelected,
     useCurrency,
+    useRequestedStorageGb,
 } from "@/state";
 import { pricingUnitOptions, durationOptions } from "@/utils/dataMappings";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -56,6 +57,8 @@ export default function Filters<DataKey extends keyof typeof columnData>({
     const [compareOn, setCompareOn] = useCompareOn(pathname);
     const [selected] = useSelected(pathname);
     const [currency, setCurrency] = useCurrency(pathname, currencies);
+    const [requestedStorageGb, setRequestedStorageGb] =
+        useRequestedStorageGb(pathname);
 
     const [frequentlyUsedRegions, setFrequentlyUsedRegions] = useState<{
         [key: string]: number;
@@ -242,6 +245,30 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                         hideSearch={false}
                         small={true}
                     />
+                    <div className="d-flex flex-column gap-1">
+                        <label
+                            htmlFor="requested-storage-gb"
+                            className="text-xs text-gray-500"
+                        >
+                            Storage (GB)
+                        </label>
+                        <input
+                            id="requested-storage-gb"
+                            type="number"
+                            min={0}
+                            step={1}
+                            inputMode="numeric"
+                            value={requestedStorageGb || ""}
+                            onChange={(e) => {
+                                const v = Number(e.target.value);
+                                setRequestedStorageGb(
+                                    Number.isFinite(v) && v >= 0 ? v : 0,
+                                );
+                            }}
+                            placeholder="0"
+                            className="form-control p-1 border-gray-3 border rounded-md bg-background text-foreground w-24"
+                        />
+                    </div>
                     <ColumnFilter<DataKey>
                         // @ts-expect-error: TS doesn't like this for some reason.
                         columns={columnOptions}

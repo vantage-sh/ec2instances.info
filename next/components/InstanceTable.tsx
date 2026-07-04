@@ -25,6 +25,7 @@ import {
     useSelected,
     useCurrency,
     currencyRateAtom,
+    useRequestedStorageGb,
 } from "@/state";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useCallback, useMemo, useRef } from "react";
@@ -96,6 +97,7 @@ export default function InstanceTable<
     const [selected, setSelected] = useSelected(pathname);
     const [sorting, setSorting] = useSorting(pathname);
     const [currency] = useCurrency(pathname);
+    const [requestedStorageGb] = useRequestedStorageGb(pathname);
     const conversionRate = currencyRateAtom.use();
 
     const columns = columnData[columnAtomKey].columnsGen(
@@ -108,6 +110,7 @@ export default function InstanceTable<
             usdRate: conversionRate.usd,
             cnyRate: conversionRate.cny,
         },
+        requestedStorageGb,
     );
     for (const col of columns) {
         col.sortUndefined = "last";
