@@ -3,6 +3,7 @@ package ec2
 import (
 	"log"
 	"scraper/utils"
+	"strings"
 )
 
 type gpuData struct {
@@ -556,10 +557,22 @@ var GPU_DATA = map[string]gpuData{
 	},
 }
 
+func isNeuronAccelerator(instanceType string) bool {
+	return strings.HasPrefix(instanceType, "inf") || strings.HasPrefix(instanceType, "trn")
+}
+
 func addGpuInfo(instances map[string]*EC2Instance) {
 	log.Default().Println("Adding GPU info to EC2")
 
 	for instanceType, instance := range instances {
+		if isNeuronAccelerator(instanceType) {
+			instance.GPU = 0
+			instance.GPUModel = nil
+			instance.GPUMemory = 0
+			instance.ComputeCapability = 0
+			continue
+		}
+
 		gpuData, ok := GPU_DATA[instanceType]
 		if !ok {
 			if instance.GPU > 0 {
