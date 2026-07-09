@@ -30,10 +30,11 @@ var EC2_ADD_METAL = map[string]bool{
 }
 
 type ec2SkuData struct {
-	instance    *EC2Instance
-	platform    string
-	hasBoxUsage bool
-	region      string
+	instance      *EC2Instance
+	platform      string
+	hasBoxUsage   bool
+	region        string
+	onDemandPrice float64
 }
 
 func processEC2Data(
@@ -118,7 +119,7 @@ func processEC2Data(
 				product.Attributes["operatingSystem"],
 				product.Attributes["preInstalledSw"],
 			)
-			if platform != "" {
+			if platform != "" && shouldIncludeEC2PricingSku(platform, product.Attributes["licenseModel"]) {
 				sku2SkuData[product.SKU] = ec2SkuData{
 					instance:    instance,
 					platform:    platform,
@@ -199,6 +200,8 @@ func processEC2Data(
 						if old < usdFloat {
 							pricingData.OnDemand = formatPrice(usdFloat)
 						}
+						skuData.onDemandPrice = usdFloat
+						sku2SkuData[offer.SKU] = skuData
 					}
 				}
 			}
@@ -218,9 +221,14 @@ func processEC2Data(
 					continue
 				}
 
+				pricingData := getPricingData(skuData.instance, skuData.platform)
+				if !skuOnDemandMatchesPlatform(skuData.onDemandPrice, pricingData.OnDemand) {
+					continue
+				}
+
 				// Process this reserved offer
 				processReservedOffer(
-					getPricingData(skuData.instance, skuData.platform),
+					pricingData,
 					offer.PriceDimensions,
 					offer.TermAttributes,
 					currency,
@@ -322,6 +330,9 @@ func processEC2Data(
 					regionPricing[skuInfo.platform] = osPricing
 				}
 				pricingData := osPricing.(*EC2PricingData)
+				if !skuOnDemandMatchesPlatform(skuInfo.onDemandPrice, pricingData.OnDemand) {
+					continue
+				}
 				if pricingData.Reserved == nil {
 					m := make(map[string]string)
 					pricingData.Reserved = &m
