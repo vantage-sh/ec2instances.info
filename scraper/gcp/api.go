@@ -165,10 +165,13 @@ type MachineSpecs struct {
 	MemoryGB    float64
 	Family      string
 	IsSharedCPU bool
-	GPU         int
-	GPUModel    string
-	GPUMemory   int
-	Zones       []string
+	// GPU is the attached GPU count, float64 because the fractional-slice G4
+	// shapes expose a partial GPU (0.125/0.25/0.5). It maps directly to the
+	// float64 GCPInstance.GPU output field.
+	GPU       float64
+	GPUModel  string
+	GPUMemory int
+	Zones     []string
 	// LocalSSDGB is the bundled Local SSD capacity in GB, 0 when the machine
 	// type has none. Optional (user-attachable) Local SSD is never counted.
 	LocalSSDGB int
@@ -181,16 +184,49 @@ type MachineSpecs struct {
 // https://cloud.google.com/compute/docs/accelerator-optimized-machines).
 // Unknown models return 0 so the field is omitted rather than fabricated.
 var gpuMemoryByModel = map[string]int{
-	"nvidia-h200-141gb":     141, // A3 Ultra
-	"nvidia-h100-80gb":      80,  // A3 High/Edge
-	"nvidia-h100-mega-80gb": 80,  // A3 Mega
-	"nvidia-a100-80gb":      80,  // A2 Ultra
-	"nvidia-tesla-a100":     40,  // A2 Standard (A100 40GB)
-	"nvidia-l4":             24,  // G2
+	"nvidia-h200-141gb":       141, // A3 Ultra
+	"nvidia-h100-80gb":        80,  // A3 High/Edge
+	"nvidia-h100-mega-80gb":   80,  // A3 Mega
+	"nvidia-a100-80gb":        80,  // A2 Ultra
+	"nvidia-tesla-a100":       40,  // A2 Standard (A100 40GB)
+	"nvidia-l4":               24,  // G2
+	"nvidia-b200":             180, // A4 (a4-highgpu-8g: 1,440 GB / 8 GPUs)
+	"nvidia-gb200":            186, // A4X (a4x-highgpu-4g: 744 GB / 4 GPUs)
+	"nvidia-gb300":            279, // A4X Max (a4x-maxgpu-4g-metal: 1,116 GB / 4 GPUs)
+	"nvidia-rtx-pro-6000":     96,  // G4 (g4-standard-48: one full 96 GB GPU)
+	"nvidia-rtx-pro-6000-vws": 96,  // G4 (same physical GPU, vWS variant)
+}
+
+// g4FractionalGPU describes the G4 shapes that expose a fractional slice (vGPU)
+// of a single RTX PRO 6000 rather than a whole GPU: g4-standard-6 = 1/8, -12 =
+// 1/4, -24 = 1/2, giving 12/24/48 GiB. The Compute Engine API reports these with
+// a whole-number GPU count, so both the count and count*96 memory would overstate
+// them; the machine-specs path reads the true fraction and memory here instead.
+// g4-standard-48 and larger are whole-GPU shapes (48 vCPU per GPU) and use the
+// normal count / count*96 derivation.
+var g4FractionalGPU = map[string]struct {
+	count     float64
+	memoryGiB int
+}{
+	"g4-standard-6":  {count: 0.125, memoryGiB: 12},
+	"g4-standard-12": {count: 0.25, memoryGiB: 24},
+	"g4-standard-24": {count: 0.5, memoryGiB: 48},
 }
 
 func totalGPUMemory(gpuCount int, gpuModel string) int {
 	return gpuCount * gpuMemoryByModel[gpuModel]
+}
+
+// gpuSpec resolves the reported GPU count and total GPU memory for a machine
+// type. Whole-GPU shapes multiply the API's accelerator count by the per-GPU
+// memory; the fractional-slice G4 shapes (which the API reports with a
+// whole-number count) instead report their true fraction and documented
+// per-slice memory from g4FractionalGPU.
+func gpuSpec(machineTypeName, gpuModel string, acceleratorCount int) (gpuCount float64, gpuMemoryGiB int) {
+	if fractional, ok := g4FractionalGPU[machineTypeName]; ok {
+		return fractional.count, fractional.memoryGiB
+	}
+	return float64(acceleratorCount), totalGPUMemory(acceleratorCount, gpuModel)
 }
 
 // localSSDPartitionGB returns the size in GB of a single bundled Local SSD
@@ -543,17 +579,17 @@ func fetchMachineTypes() (map[string]*MachineSpecs, error) {
 						LocalSSDGB:  bundledLocalSSDCapacityGB(mt),
 					}
 
-					// Handle GPUs/accelerators
+					// Handle GPUs/accelerators. Per-GPU memory is not exposed by
+					// the Compute Engine machineTypes API, so gpuSpec derives it
+					// from the model string (and handles the fractional-slice G4
+					// shapes whose whole-number count would otherwise overstate
+					// GPU memory).
 					if len(mt.Accelerators) > 0 {
-						specs.GPU = mt.Accelerators[0].GuestAcceleratorCount
 						specs.GPUModel = mt.Accelerators[0].GuestAcceleratorType
-						// Per-GPU memory is not exposed by the Compute Engine
-						// machineTypes API, so derive it from the model string
-						// using the documented per-GPU memory map. GPU_memory
-						// is total memory across all attached GPUs.
-						specs.GPUMemory = totalGPUMemory(
-							specs.GPU,
+						specs.GPU, specs.GPUMemory = gpuSpec(
+							mt.Name,
 							specs.GPUModel,
+							mt.Accelerators[0].GuestAcceleratorCount,
 						)
 					}
 

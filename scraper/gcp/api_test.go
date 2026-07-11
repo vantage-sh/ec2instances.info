@@ -8,12 +8,16 @@ import "testing"
 // map the GPU_memory column was empty for every GCP GPU instance.
 func TestGPUMemoryByModel(t *testing.T) {
 	cases := map[string]int{
-		"nvidia-h200-141gb":     141,
-		"nvidia-h100-80gb":      80,
-		"nvidia-h100-mega-80gb": 80,
-		"nvidia-a100-80gb":      80,
-		"nvidia-tesla-a100":     40,
-		"nvidia-l4":             24,
+		"nvidia-h200-141gb":       141,
+		"nvidia-h100-80gb":        80,
+		"nvidia-h100-mega-80gb":   80,
+		"nvidia-a100-80gb":        80,
+		"nvidia-tesla-a100":       40,
+		"nvidia-l4":               24,
+		"nvidia-b200":             180,
+		"nvidia-gb200":            186,
+		"nvidia-rtx-pro-6000":     96,
+		"nvidia-rtx-pro-6000-vws": 96,
 	}
 	for model, want := range cases {
 		if got := gpuMemoryByModel[model]; got != want {
@@ -187,6 +191,43 @@ func TestTotalGPUMemory(t *testing.T) {
 			got := totalGPUMemory(c.count, c.model)
 			if got != c.expected {
 				t.Errorf("totalGPUMemory(%d, %q) = %d, want %d", c.count, c.model, got, c.expected)
+			}
+		})
+	}
+}
+
+// TestGPUSpec covers the machine-specs GPU derivation: the fractional-slice G4
+// shapes report count 1 with their documented per-slice memory, whole-GPU shapes
+// multiply the API count by per-GPU memory, and A4X Max's GB300 (279 GB/GPU)
+// yields the documented 1,116 GB total.
+func TestGPUSpec(t *testing.T) {
+	if got := gpuMemoryByModel["nvidia-gb300"]; got != 279 {
+		t.Errorf("gpuMemoryByModel[nvidia-gb300] = %d, want 279", got)
+	}
+
+	cases := []struct {
+		name       string
+		machine    string
+		model      string
+		count      int
+		wantGPU    float64
+		wantMemory int
+	}{
+		{"g4-standard-6 is 1/8 GPU", "g4-standard-6", "nvidia-rtx-pro-6000", 1, 0.125, 12},
+		{"g4-standard-12 is 1/4 GPU", "g4-standard-12", "nvidia-rtx-pro-6000", 1, 0.25, 24},
+		{"g4-standard-24 is 1/2 GPU", "g4-standard-24", "nvidia-rtx-pro-6000", 1, 0.5, 48},
+		{"g4-standard-48 is one whole GPU", "g4-standard-48", "nvidia-rtx-pro-6000", 1, 1, 96},
+		{"g4-standard-96 is two whole GPUs", "g4-standard-96", "nvidia-rtx-pro-6000", 2, 2, 192},
+		{"a4x max is four GB300 GPUs", "a4x-maxgpu-4g-metal", "nvidia-gb300", 4, 4, 1116},
+		{"a2 standard eight A100s (int not truncated)", "a2-highgpu-8g", "nvidia-tesla-a100", 8, 8, 320},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			gpu, mem := gpuSpec(c.machine, c.model, c.count)
+			if gpu != c.wantGPU || mem != c.wantMemory {
+				t.Errorf("gpuSpec(%q, %q, %d) = (%v, %d), want (%v, %d)",
+					c.machine, c.model, c.count, gpu, mem, c.wantGPU, c.wantMemory)
 			}
 		})
 	}

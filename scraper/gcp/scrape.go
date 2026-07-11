@@ -569,7 +569,7 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 			PrettyName:         createPrettyName(instanceType),
 			NetworkPerformance: "Variable",
 			Generation:         "current",
-			GPU:                float64(specs.GPU),
+			GPU:                specs.GPU,
 			GPUModel:           gpuModel,
 			GPUMemory:          specs.GPUMemory,
 			Pricing:            make(map[Region]map[OS]any),
