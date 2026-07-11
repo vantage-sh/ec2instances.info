@@ -686,7 +686,7 @@ var legacySKURegex = regexp.MustCompile(`(?i)\b(compute optimized|memory-optimiz
 //	"Commitment v1: C2D AMD Ram in EMEA for 3 Year"
 //
 // The family token may carry a vendor qualifier ("AMD") before the resource
-// keyword; the term is "1 Year" or "3 Year". An optional skip group consumes
+// keyword; the term is "1 Year" or "3 Year[s]". An optional skip group consumes
 // such qualifiers so the resource keyword (Cpu/Ram) is captured directly.
 //
 // The g4/a4/a4x accelerator families are excluded here for the same reason as in
@@ -694,6 +694,30 @@ var legacySKURegex = regexp.MustCompile(`(?i)\b(compute optimized|memory-optimiz
 // commitment SKUs have nothing to attach to. Keep this allowlist in sync with
 // machineTypeRegex.
 var cudSKURegex = regexp.MustCompile(`(?i)^commitment\s+v\d+:\s+(n1|n2d|n2|n4d|n4a|n4|e2|e2a|c2|c2d|m1|m2|m3|m4ultramem224|m4n|m4|x4|t2d|t2a|a2|a3|g2|h3|h4d|c3|c3d|z3|c4a|c4d|c4n|c4)\s+(?:[a-z0-9]+\s+)*?(cpu|ram)\s+in\s+.+\s+for\s+(1|3)\s+year`)
+
+// legacyCUDSKURegex matches the first-generation commitment SKU naming used by
+// C2 and M1, which carries no machine-family token (mirroring how
+// legacySKURegex handles their on-demand twins). The catalog uses two distinct
+// spellings that between them cover different region sets, so both must map:
+//
+//	"Commitment v1: Compute optimized Cpu in Berlin for 1 Year"        (C2, ~13 newer regions)
+//	"Commitment: Compute optimized Core running in Americas for 1 Year" (C2, major regions incl. multi-Americas/EMEA/APAC)
+//	"Commitment v1: Memory-optimized Ram in Frankfurt for 3 Years"     (M1)
+//
+// The version token ("v1") and the resource keyword ("Cpu" vs "Core") and the
+// region connector ("in" vs "running in") all vary between the two spellings;
+// only C2 uses the version-less "Compute optimized Core" form (M1 and Local SSD
+// commitments are version-only). Without this, C2 and M1 shapes get no
+// cud_1yr/cud_3yr at all -- and the version-less C2 form is what covers
+// us-central1 (via the multi-Americas grouping).
+//
+// The "M3 Memory-optimized ..." commitment SKUs are not matched: their family
+// token precedes "Memory-optimized", so the "memory-optimized" alternative here
+// (anchored immediately after the "Commitment[ v1]: " prefix) cannot reach them.
+// The Memory Optimized Upgrade Premium surcharge (how M2 is billed on top of M1)
+// has no commitment variant in the catalog, so it can never leak into M1's CUD
+// bucket through this pattern.
+var legacyCUDSKURegex = regexp.MustCompile(`(?i)^commitment(?:\s+v\d+)?:\s+(compute optimized|memory-optimized)\s+(cpu|core|ram)\s+(?:running\s+)?in\s+.+\s+for\s+(1|3)\s+year`)
 
 // CUD commitment terms used as keys in the CUD pricing buckets.
 const (
@@ -708,14 +732,23 @@ const (
 // on-demand SKUs use), so the region groupings in the display name are ignored.
 func parseCUDSKU(sku SKU) (machineFamily string, resourceType string, term string, ok bool) {
 	matches := cudSKURegex.FindStringSubmatch(sku.DisplayName)
-	if len(matches) < 4 {
+	if len(matches) >= 4 {
+		machineFamily = strings.ToUpper(matches[1])
+	} else if legacyMatches := legacyCUDSKURegex.FindStringSubmatch(sku.DisplayName); len(legacyMatches) >= 4 {
+		// Legacy first-generation commitment naming carries no family token.
+		switch strings.ToLower(legacyMatches[1]) {
+		case "compute optimized":
+			machineFamily = "C2"
+		case "memory-optimized":
+			machineFamily = "M1"
+		}
+		matches = legacyMatches
+	} else {
 		return "", "", "", false
 	}
 
-	machineFamily = strings.ToUpper(matches[1])
-
 	switch strings.ToLower(matches[2]) {
-	case "cpu":
+	case "cpu", "core":
 		resourceType = "core"
 	case "ram":
 		resourceType = "ram"
@@ -753,7 +786,8 @@ func parseCUDSKU(sku SKU) (machineFamily string, resourceType string, term strin
 // suspended-VM state SKUs ("VM state: preserved local SSD in ...") must not
 // feed baseline pricing; both anchored patterns reject them because the
 // display name does not start with a "<family> Instance Local SSD" or
-// "SSD backed Local Storage" prefix.
+// "SSD backed Local Storage" prefix. Local SSD commitment SKUs are instead
+// parsed by parseLocalSSDCommitmentSKU and folded into CUD pricing.
 var familyLocalSSDSKURegex = regexp.MustCompile(`(?i)^(?:spot\s+preemptible\s+)?([a-z][a-z0-9]{1,3})\s+instance\s+local\s+ssd\b`)
 var genericLocalSSDSKURegex = regexp.MustCompile(`(?i)^ssd\s+backed\s+local\s+storage\b`)
 
@@ -781,6 +815,48 @@ func parseLocalSSDSKU(sku SKU) (machineFamily string, isSpot bool, ok bool) {
 		return "", isSpot, true
 	}
 	return "", false, false
+}
+
+// Local SSD committed-use discount SKUs share the "Commitment v1:" prefix with
+// resource CUDs but commit Local SSD capacity rather than core/RAM, e.g.:
+//
+//	"Commitment v1: Local SSD in Iowa for 1 Year"          (generic, any family)
+//	"Commitment v1: Z3 Local SSD in Alabama for 3 Years"   (family-scoped)
+//
+// The generic form has no family token; the family form carries one before
+// "Local SSD". The "Commitment v1: vGPU G4 Local SSD ..." variant is
+// deliberately not matched, mirroring the on-demand path (familyLocalSSDSKURegex)
+// which likewise ignores the vGPU twin of the G4 Local SSD SKU, so a g4 shape's
+// SSD price comes from the same source for on-demand and CUD. "Reserved ..." and
+// "DWS ..." Local SSD SKUs never reach this pattern: they lack the
+// "Commitment v1:" prefix entirely.
+var localSSDCommitmentSKURegex = regexp.MustCompile(`(?i)^commitment\s+v\d+:\s+(?:([a-z][a-z0-9]{1,3})\s+)?local\s+ssd\s+in\s+.+\s+for\s+(1|3)\s+year`)
+
+// parseLocalSSDCommitmentSKU parses a Local SSD committed-use discount SKU. It
+// returns the machine family the commitment is scoped to (uppercased, e.g.
+// "Z3"; empty for the generic "Commitment v1: Local SSD" SKUs that apply to any
+// family), the commitment term ("1yr" or "3yr"), and whether the SKU is a Local
+// SSD commitment at all. Region resolution is left to the shared CUD geo-taxonomy
+// machinery (cudTargetRegions). Rates are per GiB-month in the catalog;
+// calculateHourlyPrice converts them to per GiB-hour.
+func parseLocalSSDCommitmentSKU(sku SKU) (machineFamily string, term string, ok bool) {
+	matches := localSSDCommitmentSKURegex.FindStringSubmatch(sku.DisplayName)
+	if len(matches) < 3 {
+		return "", "", false
+	}
+
+	machineFamily = strings.ToUpper(matches[1]) // "" for the generic form
+
+	switch matches[2] {
+	case "1":
+		term = cudTerm1Yr
+	case "3":
+		term = cudTerm3Yr
+	default:
+		return "", "", false
+	}
+
+	return machineFamily, term, true
 }
 
 // memoryOptimizedPremiumSKURegex matches the "Memory Optimized Upgrade

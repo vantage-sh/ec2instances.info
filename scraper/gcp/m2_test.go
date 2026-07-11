@@ -42,9 +42,10 @@ func TestParseMemoryOptimizedPremiumSKU(t *testing.T) {
 
 // TestProcessGCPDataM2Pricing verifies the end-to-end M2 synthesis: m2-* has no
 // SKUs of its own, so its on-demand price is the M1 base core/RAM rates plus the
-// Memory Optimized Upgrade Premium surcharge. It also asserts the two intended
-// omissions (no Spot, no CUD for M2, since the catalog has no premium Spot or
-// commitment SKU) and that the premium never leaks into M1's own pricing.
+// Memory Optimized Upgrade Premium surcharge. It asserts M2 Spot stays unset
+// (no premium Spot SKU exists) and that the premium never leaks into M1's own
+// pricing. This fixture has no M1 commitment SKUs, so M2 CUD is also unset here;
+// M2 CUD synthesis from M1 commitments is covered by TestProcessGCPDataM2CUDPricing.
 func TestProcessGCPDataM2Pricing(t *testing.T) {
 	const region = "us-central1" // resolved via the multi-americas expansion
 
@@ -93,7 +94,8 @@ func TestProcessGCPDataM2Pricing(t *testing.T) {
 	wantM2OnDemand := m2VCPU*(baseCore+premCore) + m2MemGB*(baseRam+premRam)
 	assertPrice(t, "m2 ondemand", m2Linux.OnDemand, wantM2OnDemand)
 
-	// M2 has no Spot or committed-use SKU, so those fields stay unset.
+	// M2 Spot stays unset (no premium Spot SKU). M2 CUD is unset here because
+	// this fixture supplies no M1 commitment SKUs to synthesize it from.
 	if m2Linux.Spot != "" {
 		t.Errorf("m2 spot = %q, want empty", m2Linux.Spot)
 	}
