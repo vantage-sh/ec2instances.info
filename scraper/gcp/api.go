@@ -779,6 +779,29 @@ func parseLocalSSDSKU(sku SKU) (machineFamily string, isSpot bool, ok bool) {
 	return "", false, false
 }
 
+// memoryOptimizedPremiumSKURegex matches the "Memory Optimized Upgrade
+// Premium" surcharge SKUs that, added on top of the M1 base core/RAM rates,
+// constitute M2 pricing (M2 has no dedicated SKUs of its own):
+//
+//	"Memory Optimized Upgrade Premium for Memory-optimized Instance Core running in Americas"
+//	"Memory Optimized Upgrade Premium for Memory-optimized Instance Ram running in Frankfurt"
+//
+// These exist only as plain on-demand SKUs; the catalog has no Spot or
+// committed-use variant of the premium, so M2 Spot and CUD prices cannot be
+// synthesized (see processGCPData).
+var memoryOptimizedPremiumSKURegex = regexp.MustCompile(`(?i)^memory optimized upgrade premium for memory-optimized instance\s+(core|ram)\b`)
+
+// parseMemoryOptimizedPremiumSKU reports whether a SKU is a Memory Optimized
+// Upgrade Premium surcharge and, if so, which resource ("core" or "ram") it
+// applies to. Region resolution is left to the shared geo-taxonomy machinery.
+func parseMemoryOptimizedPremiumSKU(sku SKU) (resourceType string, ok bool) {
+	matches := memoryOptimizedPremiumSKURegex.FindStringSubmatch(sku.DisplayName)
+	if len(matches) < 2 {
+		return "", false
+	}
+	return strings.ToLower(matches[1]), true
+}
+
 // skuRegion resolves the region code for a SKU from its geo taxonomy, falling
 // back to the multi-regional grouping named in the display name (e.g.
 // "running in Americas" -> "multi-americas").
