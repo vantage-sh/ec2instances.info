@@ -193,6 +193,19 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 	cudData := make(map[cudKey][]PriceInfo)
 	cudSKUCount := 0
 
+	// Local SSD committed-use discount pricing, keyed by machine family ("" for
+	// the generic "Commitment v1: Local SSD" SKUs), region, and term. These per
+	// GiB-month commitment rates are folded into the CUD price of bundled
+	// Local SSD shapes exactly as the on-demand ssdData rates are folded into
+	// on-demand/spot pricing, so a shape's CUD price covers its bundled SSD too.
+	type ssdCudKey struct {
+		family string
+		region string
+		term   string // cudTerm1Yr or cudTerm3Yr
+	}
+	ssdCudData := make(map[ssdCudKey][]PriceInfo)
+	ssdCudSKUCount := 0
+
 	// Local SSD usage pricing, keyed by machine family ("" for the generic
 	// "SSD backed Local Storage" SKUs), region, and spot. These per GiB-month
 	// rates are folded into the total price of machine types that come with
@@ -265,43 +278,67 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 			continue // Don't process as instance SKU
 		}
 
-		// Capture resource-based committed use discount (CUD) SKUs into a
-		// dedicated bucket. These use the "Commitment v1: <family> Cpu/Ram in
-		// <region> for <1|3> Year" naming and are intentionally never mixed into
-		// on-demand/spot pricing. Done before the on-demand "instance" gate
-		// (their display name has no "instance" token) and before the
-		// commitment/discount taxonomy filter that drops them.
-		if strings.Contains(displayLower, "commitment v") {
-			cudFamily, cudResource, cudCommitTerm, isCUD := parseCUDSKU(sku)
-			if !isCUD {
-				continue
-			}
-
-			price, hasPricing := pricing[sku.SkuId]
-			if !hasPricing {
-				continue
-			}
-			cudSKUCount++
-
-			for _, targetRegion := range cudTargetRegions(sku) {
-				key := cudKey{
-					machineType:  cudFamily,
-					region:       targetRegion,
-					term:         cudCommitTerm,
-					resourceType: cudResource,
+		// Capture committed-use discount (CUD) SKUs into dedicated buckets. All
+		// carry a "Commitment[ v1]: ..." prefix and are intentionally never mixed
+		// into on-demand/spot pricing. Done before the on-demand "instance" gate
+		// (their display names have no "instance" token) and before the
+		// commitment/discount taxonomy filter that drops them. Resource CUDs
+		// ("... <family> Cpu/Ram in <region> for <1|3> Year") feed cudData;
+		// Local SSD CUDs ("... [<family> ]Local SSD in <region> for <1|3> Year")
+		// feed ssdCudData and are folded into bundled-SSD shapes' CUD price below.
+		// The gate is "commitment" (not "commitment v") so the version-less C2
+		// legacy form ("Commitment: Compute optimized Core running in ...") is
+		// caught too; non-CUD "commitment" SKUs fall through to the final continue
+		// exactly as they were dropped on the on-demand path before.
+		if strings.Contains(displayLower, "commitment") {
+			if cudFamily, cudResource, cudCommitTerm, isCUD := parseCUDSKU(sku); isCUD {
+				price, hasPricing := pricing[sku.SkuId]
+				if !hasPricing {
+					continue
 				}
-				cudData[key] = append(cudData[key], price)
+				cudSKUCount++
 
-				for _, expandedRegion := range expandedRegionsForMultiRegion(targetRegion) {
-					expandedKey := cudKey{
+				for _, targetRegion := range cudTargetRegions(sku) {
+					key := cudKey{
 						machineType:  cudFamily,
-						region:       expandedRegion,
+						region:       targetRegion,
 						term:         cudCommitTerm,
 						resourceType: cudResource,
 					}
-					cudData[expandedKey] = append(cudData[expandedKey], price)
+					cudData[key] = append(cudData[key], price)
+
+					for _, expandedRegion := range expandedRegionsForMultiRegion(targetRegion) {
+						expandedKey := cudKey{
+							machineType:  cudFamily,
+							region:       expandedRegion,
+							term:         cudCommitTerm,
+							resourceType: cudResource,
+						}
+						cudData[expandedKey] = append(cudData[expandedKey], price)
+					}
 				}
+				continue
 			}
+
+			if ssdFamily, ssdTerm, isSSDCUD := parseLocalSSDCommitmentSKU(sku); isSSDCUD {
+				price, hasPricing := pricing[sku.SkuId]
+				if !hasPricing {
+					continue
+				}
+				ssdCudSKUCount++
+
+				for _, targetRegion := range cudTargetRegions(sku) {
+					key := ssdCudKey{family: ssdFamily, region: targetRegion, term: ssdTerm}
+					ssdCudData[key] = append(ssdCudData[key], price)
+
+					for _, expandedRegion := range expandedRegionsForMultiRegion(targetRegion) {
+						expandedKey := ssdCudKey{family: ssdFamily, region: expandedRegion, term: ssdTerm}
+						ssdCudData[expandedKey] = append(ssdCudData[expandedKey], price)
+					}
+				}
+				continue
+			}
+
 			continue
 		}
 
@@ -310,7 +347,8 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 		// Storage" SKUs carry no "instance" token, and the per-family
 		// "<FAMILY> Instance Local SSD" SKUs would otherwise fail the
 		// core/ram parse. Local SSD commitment SKUs never reach this point:
-		// they contain "commitment v" and are consumed (and dropped) above.
+		// they contain "commitment v" and are consumed by the CUD block above
+		// (routed to ssdCudData), so only usage SKUs remain here.
 		if ssdFamily, ssdSpot, isLocalSSD := parseLocalSSDSKU(sku); isLocalSSD {
 			if !shouldUseLocalSSDSKUForPricing(sku, displayLower) {
 				skippedByTaxonomyCount++
@@ -460,12 +498,13 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 	}
 
 	log.Printf(
-		"GCP SKU filtering: parsed=%d priced=%d skippedByTaxonomy=%d duplicateCandidateKeys=%d cudSKUs=%d localSSDSKUs=%d memoryPremiumSKUs=%d",
+		"GCP SKU filtering: parsed=%d priced=%d skippedByTaxonomy=%d duplicateCandidateKeys=%d cudSKUs=%d ssdCudSKUs=%d localSSDSKUs=%d memoryPremiumSKUs=%d",
 		parsedSKUCount,
 		pricedSKUCount,
 		skippedByTaxonomyCount,
 		duplicatePriceKeys,
 		cudSKUCount,
+		ssdCudSKUCount,
 		localSSDSKUCount,
 		memoryPremiumSKUCount,
 	)
@@ -480,6 +519,23 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 				continue
 			}
 			if rate, hasRate := selectHourlyPrice(candidates, isSpot); hasRate {
+				return rate, true
+			}
+		}
+		return 0, false
+	}
+
+	// ssdCudRate resolves the per GiB-hour Local SSD committed-use rate for a
+	// machine family in a region and term. Per-family commitment SKUs take
+	// precedence over the generic "Commitment v1: Local SSD" SKUs, matching the
+	// on-demand localSSDRate precedence.
+	ssdCudRate := func(family, region, term string) (float64, bool) {
+		for _, candidateFamily := range []string{family, ""} {
+			candidates, ok := ssdCudData[ssdCudKey{family: candidateFamily, region: region, term: term}]
+			if !ok {
+				continue
+			}
+			if rate, hasRate := selectHourlyPrice(candidates, false); hasRate {
 				return rate, true
 			}
 		}
@@ -532,11 +588,17 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 
 		// M2 machine types have no SKUs of their own: Google bills M2 as the M1
 		// base core/RAM rates plus a per-region Memory Optimized Upgrade Premium
-		// surcharge. Read M2's base rates from the M1 bucket and fold the
-		// premium in below. Only on-demand is synthesized -- the catalog has no
-		// premium Spot or committed-use SKU, so M2 Spot and CUD prices are
-		// intentionally left unset (a known limitation, like the Local SSD
-		// commitment exclusion above).
+		// surcharge. Read M2's base rates from the M1 bucket and fold the premium
+		// in below, for both on-demand and CUD.
+		//
+		// Committed-use discounts are family-scoped resource pools: M2's base
+		// core/RAM usage draws down an M1 (memory-optimized) commitment, so M2's
+		// CUD base rates come from the M1 commitment bucket. The Upgrade Premium
+		// has no commitment variant in the catalog, so the premium keeps billing
+		// at its on-demand rate on top of the discounted base -- M2 CUD is thus
+		// the M1 commitment core/RAM rates plus the same on-demand premium used
+		// for M2 on-demand. M2 Spot stays unset: there is no premium Spot SKU to
+		// add to M1's spot rates.
 		isM2 := machineFamily == "M2"
 		baseFamily := machineFamily
 		if isM2 {
@@ -553,6 +615,13 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 		if instanceType == "m4-ultramem-224" {
 			baseFamily = "M4ULTRAMEM224"
 			cudFamily = "M4ULTRAMEM224"
+		}
+
+		// M2 draws its committed-use base rates from the M1 commitment bucket
+		// (see the family-scoped resource-pool note above); the premium is added
+		// on top per region in the CUD assembly loop.
+		if isM2 {
+			cudFamily = "M1"
 		}
 
 		// Group pricing by region, spot status, and OS
@@ -673,15 +742,11 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 			}
 		}
 
-		// Assemble resource-based committed use discount (CUD) pricing the same
-		// way on-demand is built: per-region, per-term, total =
-		// core_rate*vCPU + ram_rate*RAM. CUDs apply to the Linux compute price
-		// (no OS license), so they attach to the Linux pricing data.
-		//
-		// Known simplification: Local SSD commitment SKUs ("Commitment v1:
-		// Local SSD in ..." / "Commitment v1: <FAMILY> Local SSD in ...") are
-		// not folded in, so CUD prices for bundled-Local-SSD shapes cover
-		// core+RAM only while their on-demand/spot prices include the SSD.
+		// Assemble committed use discount (CUD) pricing the same way on-demand is
+		// built: per-region, per-term, total = core_rate*vCPU + ram_rate*RAM,
+		// plus the bundled Local SSD commitment rate for shapes that have one.
+		// CUDs apply to the Linux compute price (no OS license), so they attach
+		// to the Linux pricing data.
 		type cudRegionKey struct {
 			region string
 			term   string
@@ -705,6 +770,18 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 				continue
 			}
 
+			// M2 draws its CUD base rates from the M1 commitment bucket and, like
+			// M2 on-demand, adds the on-demand Upgrade Premium (which has no
+			// commitment variant). A region without a premium rate for this
+			// resource yields no M2 CUD price there.
+			if isM2 {
+				premium, hasPremium := premiumRate(key.region, key.resourceType)
+				if !hasPremium {
+					continue
+				}
+				hourlyPrice += premium
+			}
+
 			crk := cudRegionKey{region: key.region, term: key.term}
 			p := cudRegionPricing[crk]
 			switch key.resourceType {
@@ -725,6 +802,17 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 			}
 
 			totalCUD := (float64(specs.VCPU) * p.corePrice) + (specs.MemoryGB * p.ramPrice)
+
+			// Fold in the bundled Local SSD commitment rate, mirroring the
+			// on-demand SSD fold-in, so a bundled-SSD shape's CUD price covers
+			// its SSD too instead of core+RAM only. Shapes with no bundled SSD
+			// have LocalSSDGB == 0 and are unaffected.
+			if specs.LocalSSDGB > 0 {
+				if ssdRate, hasSSDRate := ssdCudRate(machineFamily, crk.region, crk.term); hasSSDRate {
+					totalCUD += float64(specs.LocalSSDGB) * ssdRate
+				}
+			}
+
 			if totalCUD == 0 {
 				continue
 			}
