@@ -543,6 +543,18 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 			baseFamily = "M1"
 		}
 
+		// m4-ultramem-224 is the only M4 shape billed under its own dedicated
+		// "M4Ultramem224 Instance Core/Ram" SKU pair (with matching Spot and
+		// CUD variants of its own); every other M4 shape (megamem, hypermem,
+		// ultramem-56/112) bills the plain M4 rates that machineFamily/baseFamily
+		// already resolve to. Route both the on-demand/spot and CUD lookups to
+		// its own bucket instead.
+		cudFamily := machineFamily
+		if instanceType == "m4-ultramem-224" {
+			baseFamily = "M4ULTRAMEM224"
+			cudFamily = "M4ULTRAMEM224"
+		}
+
 		// Group pricing by region, spot status, and OS
 		type regionKey struct {
 			region    string
@@ -682,7 +694,7 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 		})
 
 		for key, candidates := range cudData {
-			if key.machineType != machineFamily {
+			if key.machineType != cudFamily {
 				continue
 			}
 

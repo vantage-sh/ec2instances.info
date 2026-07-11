@@ -642,6 +642,10 @@ func determineMachineFamily(name string) string {
 // "Sole Tenancy Instance RAM running in Jakarta"
 // "Licensing Fee for Windows Server 2012 BYOL (CPU cost)"
 // "Licensing Fee for Windows Server 2012 BYOL (RAM cost)"
+// m4ultramem224 is listed ahead of m4n/m4: m4-ultramem-224 is billed under its
+// own dedicated "M4Ultramem224 Instance Core/Ram" SKU pair rather than the
+// plain M4 rates that cover every other M4 shape (see the family-override
+// comment in processGCPData for why this needs its own bucket).
 //
 // Accelerator exclusions: g4, a4 and a4x are deliberately absent. Their billing
 // is dominated by a GPU charge this scraper does not assemble (G4: the
@@ -652,7 +656,7 @@ func determineMachineFamily(name string) string {
 // would regress the current site. They share the same GPU-charge gap; a
 // follow-up will price the GPU component behind a completeness guard, after
 // which the excluded families can return.
-var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2d|n2|n4d|n4a|n4|e2|e2a|c2|c2d|m1|m2|m3|m4n|m4|x4|t2d|t2a|a2|a3|g2|h3|h4d|c3|c3d|z3|c4a|c4d|c4n|c4)\b.*(?:instance\s+(core|ram)|\((?:cpu|ram)\s+cost\))`)
+var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2d|n2|n4d|n4a|n4|e2|e2a|c2|c2d|m1|m2|m3|m4ultramem224|m4n|m4|x4|t2d|t2a|a2|a3|g2|h3|h4d|c3|c3d|z3|c4a|c4d|c4n|c4)\b.*(?:instance\s+(core|ram)|\((?:cpu|ram)\s+cost\))`)
 
 // legacySKURegex matches the first-generation SKU naming formats that predate
 // the "<FAMILY> Instance Core/Ram" convention and carry no machine family token
@@ -689,7 +693,7 @@ var legacySKURegex = regexp.MustCompile(`(?i)\b(compute optimized|memory-optimiz
 // machineTypeRegex: their instances publish no core+RAM price, so their
 // commitment SKUs have nothing to attach to. Keep this allowlist in sync with
 // machineTypeRegex.
-var cudSKURegex = regexp.MustCompile(`(?i)^commitment\s+v\d+:\s+(n1|n2d|n2|n4d|n4a|n4|e2|e2a|c2|c2d|m1|m2|m3|m4n|m4|x4|t2d|t2a|a2|a3|g2|h3|h4d|c3|c3d|z3|c4a|c4d|c4n|c4)\s+(?:[a-z0-9]+\s+)*?(cpu|ram)\s+in\s+.+\s+for\s+(1|3)\s+year`)
+var cudSKURegex = regexp.MustCompile(`(?i)^commitment\s+v\d+:\s+(n1|n2d|n2|n4d|n4a|n4|e2|e2a|c2|c2d|m1|m2|m3|m4ultramem224|m4n|m4|x4|t2d|t2a|a2|a3|g2|h3|h4d|c3|c3d|z3|c4a|c4d|c4n|c4)\s+(?:[a-z0-9]+\s+)*?(cpu|ram)\s+in\s+.+\s+for\s+(1|3)\s+year`)
 
 // CUD commitment terms used as keys in the CUD pricing buckets.
 const (
@@ -934,8 +938,22 @@ func calculateHourlyPrice(price PriceInfo) float64 {
 		return 0
 	}
 
+	// Almost every RAM SKU is rated per binary GiB ("GiBy.h"), matching
+	// MachineSpecs.MemoryGB (== memoryMb/1024, i.e. GiB). A handful of newer
+	// SKU families (seen so far: C4D, M4Ultramem224) are instead rated per
+	// decimal GB ("GBy.h"). Scale those up to a per-GiB rate so the shared
+	// vCPU/RAM total-price math downstream can keep treating every rate as
+	// per-GiB regardless of which unit the catalog happened to use.
+	if unit == "gby.h" {
+		dollars *= gibPerDecimalGB
+	}
+
 	return dollars
 }
+
+// gibPerDecimalGB is how many decimal gigabytes (1000^3 bytes) fit in one
+// binary gibibyte (1024^3 bytes).
+const gibPerDecimalGB = 1024 * 1024 * 1024 / 1e9
 
 // GCP Region from API
 type GCPRegion struct {

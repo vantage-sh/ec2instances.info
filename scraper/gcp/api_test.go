@@ -130,6 +130,13 @@ func TestParseMachineTypeFromSKU(t *testing.T) {
 		{"Memory-optimized Instance Ram running in Tokyo", "M1", "ram", false},
 		// The M2 surcharge SKU must not be attributed to M1 baseline rates.
 		{"Memory Optimized Upgrade Premium for Memory-optimized Instance Core running in Singapore", "", "", false},
+		// m4-ultramem-224 bills from its own dedicated SKU pair; the plain M4
+		// SKU shared by every other M4 shape must not be conflated with it.
+		{"M4Ultramem224 Instance Core running in Americas", "M4ULTRAMEM224", "core", false},
+		{"M4Ultramem224 Instance Ram running in Americas", "M4ULTRAMEM224", "ram", false},
+		{"Spot Preemptible M4Ultramem224 Instance Core running in Frankfurt", "M4ULTRAMEM224", "core", true},
+		{"M4 Instance Core running in Americas", "M4", "core", false},
+		{"M4 Instance Ram running in Americas", "M4", "ram", false},
 	}
 
 	for _, tc := range cases {
