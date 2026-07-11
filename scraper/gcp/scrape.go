@@ -206,6 +206,17 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 	ssdData := make(map[localSSDKey][]PriceInfo)
 	localSSDSKUCount := 0
 
+	// Memory Optimized Upgrade Premium pricing, keyed by region and resource
+	// ("core"/"ram"). M2 has no SKUs of its own; Google bills it as the M1 base
+	// core/RAM rates plus this per-region surcharge, so these rates are folded
+	// into synthesized M2 on-demand pricing below.
+	type premiumKey struct {
+		region       string
+		resourceType string
+	}
+	premiumData := make(map[premiumKey][]PriceInfo)
+	memoryPremiumSKUCount := 0
+
 	// Store Windows license fees separately (they're global, not region-specific)
 	type windowsLicenseType struct {
 		resourceType string // "core" or "ram"
@@ -333,6 +344,35 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 			continue
 		}
 
+		// Capture the Memory Optimized Upgrade Premium surcharge SKUs into their
+		// own bucket. Done before the on-demand instance gate: the premium
+		// display name contains "Memory-optimized Instance Core/Ram", which
+		// parseMachineTypeFromSKU deliberately refuses to map to M1 (so the
+		// surcharge never inflates M1's own rates), leaving it family-less and
+		// otherwise dropped. Only on-demand premiums exist, so isSpot is false.
+		if premiumResource, isPremium := parseMemoryOptimizedPremiumSKU(sku); isPremium {
+			if !shouldUseSKUForPricing(sku, false, displayLower) {
+				skippedByTaxonomyCount++
+				continue
+			}
+			price, hasPricing := pricing[sku.SkuId]
+			if !hasPricing {
+				continue
+			}
+			memoryPremiumSKUCount++
+
+			for _, targetRegion := range targetRegionsForSKU(sku, skuRegion(sku)) {
+				key := premiumKey{region: targetRegion, resourceType: premiumResource}
+				premiumData[key] = append(premiumData[key], price)
+
+				for _, expandedRegion := range expandedRegionsForMultiRegion(targetRegion) {
+					expandedKey := premiumKey{region: expandedRegion, resourceType: premiumResource}
+					premiumData[expandedKey] = append(premiumData[expandedKey], price)
+				}
+			}
+			continue
+		}
+
 		// Process both instance SKUs and Windows licensing SKUs. C2's legacy
 		// SKUs ("Compute optimized Core/Ram running in ...") predate the
 		// "<FAMILY> Instance Core/Ram" naming and carry no "instance" token,
@@ -420,13 +460,14 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 	}
 
 	log.Printf(
-		"GCP SKU filtering: parsed=%d priced=%d skippedByTaxonomy=%d duplicateCandidateKeys=%d cudSKUs=%d localSSDSKUs=%d",
+		"GCP SKU filtering: parsed=%d priced=%d skippedByTaxonomy=%d duplicateCandidateKeys=%d cudSKUs=%d localSSDSKUs=%d memoryPremiumSKUs=%d",
 		parsedSKUCount,
 		pricedSKUCount,
 		skippedByTaxonomyCount,
 		duplicatePriceKeys,
 		cudSKUCount,
 		localSSDSKUCount,
+		memoryPremiumSKUCount,
 	)
 
 	// localSSDRate resolves the per GiB-hour Local SSD rate for a machine
@@ -443,6 +484,16 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 			}
 		}
 		return 0, false
+	}
+
+	// premiumRate resolves the per-hour Memory Optimized Upgrade Premium rate
+	// for a resource in a region, used to synthesize M2 on-demand pricing.
+	premiumRate := func(region, resourceType string) (float64, bool) {
+		candidates, ok := premiumData[premiumKey{region: region, resourceType: resourceType}]
+		if !ok {
+			return 0, false
+		}
+		return selectHourlyPrice(candidates, false)
 	}
 
 	// Build instances from machine specs
@@ -479,6 +530,19 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 		// Extract machine family from instance type (e.g., "n2" from "n2-standard-4")
 		machineFamily := strings.ToUpper(strings.Split(instanceType, "-")[0])
 
+		// M2 machine types have no SKUs of their own: Google bills M2 as the M1
+		// base core/RAM rates plus a per-region Memory Optimized Upgrade Premium
+		// surcharge. Read M2's base rates from the M1 bucket and fold the
+		// premium in below. Only on-demand is synthesized -- the catalog has no
+		// premium Spot or committed-use SKU, so M2 Spot and CUD prices are
+		// intentionally left unset (a known limitation, like the Local SSD
+		// commitment exclusion above).
+		isM2 := machineFamily == "M2"
+		baseFamily := machineFamily
+		if isM2 {
+			baseFamily = "M1"
+		}
+
 		// Group pricing by region, spot status, and OS
 		type regionKey struct {
 			region    string
@@ -493,7 +557,13 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 		})
 
 		for key, candidates := range skuData {
-			if key.machineType != machineFamily {
+			if key.machineType != baseFamily {
+				continue
+			}
+
+			// M2 borrows only M1's on-demand rates; without a premium Spot SKU
+			// its Spot price cannot be synthesized.
+			if isM2 && key.isSpot {
 				continue
 			}
 
@@ -502,6 +572,16 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 			hourlyPrice, hasPrice := selectHourlyPrice(candidates, key.isSpot)
 			if !hasPrice {
 				continue
+			}
+
+			// Fold the M2 premium onto the M1 base rate. A region without a
+			// premium rate for this resource yields no M2 price there.
+			if isM2 {
+				premium, hasPremium := premiumRate(key.region, key.resourceType)
+				if !hasPremium {
+					continue
+				}
+				hourlyPrice += premium
 			}
 
 			rk := regionKey{region: key.region, isSpot: key.isSpot, isWindows: key.isWindows}
