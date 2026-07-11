@@ -52,6 +52,8 @@ func TestParseCUDSKU(t *testing.T) {
 		{"Commitment v1: N2 Ram in Americas for 3 Year", "N2", "ram", cudTerm3Yr, true},
 		{"Commitment v1: C2D AMD Cpu in EMEA for 1 Year", "C2D", "core", cudTerm1Yr, true},
 		{"Commitment v1: C2D AMD Ram in EMEA for 3 Year", "C2D", "ram", cudTerm3Yr, true},
+		{"Commitment v1: M4Ultramem224 Cpu in Americas for 1 Year", "M4ULTRAMEM224", "core", cudTerm1Yr, true},
+		{"Commitment v1: M4Ultramem224 Ram in Americas for 3 Year", "M4ULTRAMEM224", "ram", cudTerm3Yr, true},
 		// On-demand and spot SKUs must NOT be treated as CUD.
 		{"N2 Instance Core running in Americas", "", "", "", false},
 		{"Spot Preemptible N2 Instance Ram running in Paris", "", "", "", false},
