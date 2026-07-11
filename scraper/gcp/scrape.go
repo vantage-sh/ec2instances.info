@@ -72,6 +72,20 @@ func shouldUseSKUForPricing(sku SKU, isSpot bool, displayLower string) bool {
 	return true
 }
 
+// shouldUseLocalSSDSKUForPricing gates Local SSD usage SKUs. Unlike instance
+// SKUs, spot cannot be validated against the taxonomy: Google categorizes the
+// generic "SSD backed Local Storage attached to Spot Preemptible VMs" SKUs as
+// "On Demand", so the display name (already parsed by parseLocalSSDSKU) is
+// authoritative for spot. Commitment/reservation-style categories are still
+// excluded as a backstop to parseLocalSSDSKU's display-name anchoring.
+func shouldUseLocalSSDSKUForPricing(sku SKU, displayLower string) bool {
+	if strings.Contains(displayLower, "sole tenancy") {
+		return false
+	}
+	return !taxonomyContainsAny(taxonomyValues(sku),
+		"commit", "cud", "discount", "sustained", "reservation", "reserved", "saving")
+}
+
 func targetRegionsForSKU(sku SKU, fallbackRegion string) []string {
 	if len(sku.GeoTaxonomy.Regions) > 0 {
 		return sku.GeoTaxonomy.Regions
@@ -179,6 +193,19 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 	cudData := make(map[cudKey][]PriceInfo)
 	cudSKUCount := 0
 
+	// Local SSD usage pricing, keyed by machine family ("" for the generic
+	// "SSD backed Local Storage" SKUs), region, and spot. These per GiB-month
+	// rates are folded into the total price of machine types that come with
+	// bundled Local SSD (Z3, the -lssd shapes, accelerator series), because
+	// Google bills the bundled capacity on top of the core/RAM rates.
+	type localSSDKey struct {
+		family string
+		region string
+		isSpot bool
+	}
+	ssdData := make(map[localSSDKey][]PriceInfo)
+	localSSDSKUCount := 0
+
 	// Store Windows license fees separately (they're global, not region-specific)
 	type windowsLicenseType struct {
 		resourceType string // "core" or "ram"
@@ -262,6 +289,45 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 						resourceType: cudResource,
 					}
 					cudData[expandedKey] = append(cudData[expandedKey], price)
+				}
+			}
+			continue
+		}
+
+		// Capture Local SSD usage SKUs into their own bucket. Handled before
+		// the on-demand "instance" gate because the generic "SSD backed Local
+		// Storage" SKUs carry no "instance" token, and the per-family
+		// "<FAMILY> Instance Local SSD" SKUs would otherwise fail the
+		// core/ram parse. Local SSD commitment SKUs never reach this point:
+		// they contain "commitment v" and are consumed (and dropped) above.
+		if ssdFamily, ssdSpot, isLocalSSD := parseLocalSSDSKU(sku); isLocalSSD {
+			if !shouldUseLocalSSDSKUForPricing(sku, displayLower) {
+				skippedByTaxonomyCount++
+				continue
+			}
+			price, hasPricing := pricing[sku.SkuId]
+			if !hasPricing {
+				continue
+			}
+			localSSDSKUCount++
+
+			targetRegions := targetRegionsForSKU(sku, skuRegion(sku))
+			if len(targetRegions) == 0 {
+				// The legacy generic SKUs ("SSD backed Local Storage" with no
+				// region tail) are multi-regional with the region list only
+				// in multiRegionalMetadata and no grouping keyword in the
+				// display name for skuRegion to resolve.
+				targetRegions = multiRegionalMetadataRegions(sku)
+			}
+			for _, targetRegion := range targetRegions {
+				key := localSSDKey{family: ssdFamily, region: targetRegion, isSpot: ssdSpot}
+				ssdData[key] = append(ssdData[key], price)
+
+				// Keep multi-regional prices as fallback candidates for
+				// specific regions, mirroring the core/ram handling.
+				for _, expandedRegion := range expandedRegionsForMultiRegion(targetRegion) {
+					expandedKey := localSSDKey{family: ssdFamily, region: expandedRegion, isSpot: ssdSpot}
+					ssdData[expandedKey] = append(ssdData[expandedKey], price)
 				}
 			}
 			continue
@@ -354,13 +420,30 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 	}
 
 	log.Printf(
-		"GCP SKU filtering: parsed=%d priced=%d skippedByTaxonomy=%d duplicateCandidateKeys=%d cudSKUs=%d",
+		"GCP SKU filtering: parsed=%d priced=%d skippedByTaxonomy=%d duplicateCandidateKeys=%d cudSKUs=%d localSSDSKUs=%d",
 		parsedSKUCount,
 		pricedSKUCount,
 		skippedByTaxonomyCount,
 		duplicatePriceKeys,
 		cudSKUCount,
+		localSSDSKUCount,
 	)
+
+	// localSSDRate resolves the per GiB-hour Local SSD rate for a machine
+	// family in a region. Per-family SKUs take precedence over the generic
+	// "SSD backed Local Storage" SKUs.
+	localSSDRate := func(family, region string, isSpot bool) (float64, bool) {
+		for _, candidateFamily := range []string{family, ""} {
+			candidates, ok := ssdData[localSSDKey{family: candidateFamily, region: region, isSpot: isSpot}]
+			if !ok {
+				continue
+			}
+			if rate, hasRate := selectHourlyPrice(candidates, isSpot); hasRate {
+				return rate, true
+			}
+		}
+		return 0, false
+	}
 
 	// Build instances from machine specs
 	matchedInstances := 0
@@ -385,7 +468,8 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 			Pricing:            make(map[Region]map[OS]any),
 			Regions:            make(map[string]string),
 			AvailabilityZones:  make(map[string][]string),
-			LocalSSD:           false,
+			LocalSSD:           specs.LocalSSDGB > 0,
+			LocalSSDSize:       specs.LocalSSDGB,
 			SharedCPU:          specs.IsSharedCPU,
 			ComputeOptimized:   strings.Contains(specs.Family, "Compute optimized"),
 			MemoryOptimized:    strings.Contains(specs.Family, "Memory optimized"),
@@ -445,6 +529,18 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 			// Total price = (vCPUs * core price) + (memory GB * RAM price)
 			totalPrice := (float64(specs.VCPU) * pricing.corePrice) + (specs.MemoryGB * pricing.ramPrice)
 
+			// Machine types with bundled Local SSD are billed for that
+			// capacity on top of the core/RAM rates, so fold it into the
+			// shape's price. Without this a c3-standard-8-lssd shows the same
+			// price as a c3-standard-8 even though Google bills the bundled
+			// Titanium SSD. Shapes where Local SSD is an optional attachment
+			// have LocalSSDGB == 0 and are unaffected.
+			if specs.LocalSSDGB > 0 {
+				if ssdRate, hasSSDRate := localSSDRate(machineFamily, rk.region, rk.isSpot); hasSSDRate {
+					totalPrice += float64(specs.LocalSSDGB) * ssdRate
+				}
+			}
+
 			if totalPrice == 0 {
 				continue
 			}
@@ -489,6 +585,11 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 		// way on-demand is built: per-region, per-term, total =
 		// core_rate*vCPU + ram_rate*RAM. CUDs apply to the Linux compute price
 		// (no OS license), so they attach to the Linux pricing data.
+		//
+		// Known simplification: Local SSD commitment SKUs ("Commitment v1:
+		// Local SSD in ..." / "Commitment v1: <FAMILY> Local SSD in ...") are
+		// not folded in, so CUD prices for bundled-Local-SSD shapes cover
+		// core+RAM only while their on-demand/spot prices include the SSD.
 		type cudRegionKey struct {
 			region string
 			term   string
