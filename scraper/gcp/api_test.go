@@ -28,6 +28,120 @@ func TestGPUMemoryByModel(t *testing.T) {
 	}
 }
 
+// TestDetermineMachineFamily covers every currently-shipping GCP machine
+// series, including the ones previously missing from the prefix list (C4D,
+// C4N, H4D, M4N, A4, A4X, G4). Series without an explicit prefix must fall
+// back to General purpose.
+func TestDetermineMachineFamily(t *testing.T) {
+	cases := map[string]string{
+		// General purpose
+		"e2-standard-4":  "General purpose",
+		"n1-standard-8":  "General purpose",
+		"n2-standard-8":  "General purpose",
+		"n2d-standard-8": "General purpose",
+		"n4-standard-8":  "General purpose",
+		"n4a-standard-8": "General purpose",
+		"n4d-standard-8": "General purpose",
+		"t2a-standard-8": "General purpose",
+		"t2d-standard-8": "General purpose",
+		// Compute optimized
+		"c2-standard-8":    "Compute optimized",
+		"c2d-standard-8":   "Compute optimized",
+		"c3-standard-8":    "Compute optimized",
+		"c3d-standard-8":   "Compute optimized",
+		"c4-standard-8":    "Compute optimized",
+		"c4a-standard-8":   "Compute optimized",
+		"c4d-standard-8":   "Compute optimized",
+		"h3-standard-88":   "Compute optimized",
+		"h4d-standard-192": "Compute optimized",
+		// Network optimized
+		"c4n-standard-8": "Network optimized",
+		// Memory optimized (highmem/megamem/ultramem variants match the
+		// contains checks; prefixes cover the rest)
+		"c4d-highmem-8":   "Memory optimized",
+		"m1-megamem-96":   "Memory optimized",
+		"m2-ultramem-208": "Memory optimized",
+		"m3-megamem-64":   "Memory optimized",
+		"m4-hypermem-16":  "Memory optimized",
+		"m4n-hypermem-16": "Memory optimized",
+		"x4-megamem-960":  "Memory optimized",
+		// Accelerator optimized
+		"a2-highgpu-1g":  "Accelerator optimized",
+		"a3-highgpu-8g":  "Accelerator optimized",
+		"a4-highgpu-8g":  "Accelerator optimized",
+		"a4x-highgpu-4g": "Accelerator optimized",
+		"g2-standard-4":  "Accelerator optimized",
+		"g4-standard-48": "Accelerator optimized",
+		// Storage optimized (real Z3 shapes are all z3-highmem-*, so the z3-
+		// prefix must be checked ahead of the highmem rule above)
+		"z3-highmem-88-highlssd":        "Storage optimized",
+		"z3-highmem-192-highlssd-metal": "Storage optimized",
+	}
+
+	for name, want := range cases {
+		if got := determineMachineFamily(name); got != want {
+			t.Errorf("determineMachineFamily(%q) = %q, want %q", name, got, want)
+		}
+	}
+}
+
+// TestParseMachineTypeFromSKU verifies SKU display-name parsing, in
+// particular the family tokens that were previously missing from
+// machineTypeRegex (which caused whole series to be dropped from the dataset
+// for lack of pricing) and the legacy C2/M1 naming fallback.
+func TestParseMachineTypeFromSKU(t *testing.T) {
+	cases := []struct {
+		display      string
+		wantFamily   string
+		wantResource string
+		wantSpot     bool
+	}{
+		{"N1 Predefined Instance Ram running in Zurich", "N1", "ram", false},
+		{"Spot Preemptible E2 Instance Core running in Paris", "E2", "core", true},
+		{"C4A Arm Instance Core running in Northern Virginia", "C4A", "core", false},
+		{"C4D Instance Core running in Americas", "C4D", "core", false},
+		{"C4D Instance Ram running in Tokyo", "C4D", "ram", false},
+		{"C4N Instance Core running in Iowa", "C4N", "core", false},
+		{"N4A Instance Ram running in Iowa", "N4A", "ram", false},
+		{"M4N Instance Core running in Frankfurt", "M4N", "core", false},
+		{"H4D Instance Core running in Iowa", "H4D", "core", false},
+		{"X4 Instance Ram running in Frankfurt", "X4", "ram", false},
+		// a2/a3/g2 remain in the allowlist (pre-existing upstream coverage).
+		{"A2 Instance Core running in Iowa", "A2", "core", false},
+		{"A3 Instance Ram running in Iowa", "A3", "ram", false},
+		{"G2 Instance Ram running in Iowa", "G2", "ram", false},
+		// g4/a4/a4x are deliberately excluded: their GPU charge is not assembled,
+		// so they must parse to no family (dropping the shape) rather than publish
+		// a core+RAM-only price.
+		{"G4 Instance Ram running in Iowa", "", "", false},
+		{"Spot Preemptible G4 Instance Core running in Iowa", "", "", true},
+		{"A4 Instance Core running in Iowa", "", "", false},
+		{"A4X Instance Core running in Iowa", "", "", false},
+		// Legacy first-generation naming with no family token.
+		{"Compute optimized Core running in Americas", "C2", "core", false},
+		{"Compute optimized Ram running in Americas", "C2", "ram", false},
+		{"Spot Preemptible Compute optimized Core running in Paris", "C2", "core", true},
+		// C2's per-region SKUs (the newer me-*/europe-*/africa-south1 regions)
+		// add an "Instance" token the multi-regional form omits; both map to C2.
+		{"Compute optimized Instance Core running in Madrid", "C2", "core", false},
+		{"Compute optimized Instance Ram running in Mexico", "C2", "ram", false},
+		{"Spot Preemptible Compute optimized Instance Core running in Johannesburg", "C2", "core", true},
+		{"Memory-optimized Instance Core running in Northern Virginia", "M1", "core", false},
+		{"Memory-optimized Instance Ram running in Tokyo", "M1", "ram", false},
+		// The M2 surcharge SKU must not be attributed to M1 baseline rates.
+		{"Memory Optimized Upgrade Premium for Memory-optimized Instance Core running in Singapore", "", "", false},
+	}
+
+	for _, tc := range cases {
+		family, resource, _, isSpot, _ := parseMachineTypeFromSKU(SKU{DisplayName: tc.display})
+		if family != tc.wantFamily || resource != tc.wantResource || isSpot != tc.wantSpot {
+			t.Errorf("parseMachineTypeFromSKU(%q) = (%q, %q, spot=%v), want (%q, %q, spot=%v)",
+				tc.display, family, resource, isSpot,
+				tc.wantFamily, tc.wantResource, tc.wantSpot)
+		}
+	}
+}
+
 func TestTotalGPUMemory(t *testing.T) {
 	cases := []struct {
 		name     string
