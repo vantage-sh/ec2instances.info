@@ -521,6 +521,16 @@ func determineMachineFamily(name string) string {
 
 	// Check for specific patterns
 	switch {
+	// Storage optimized (checked ahead of the highmem rule below: every real
+	// Z3 shape is named z3-highmem-*, so the memory-optimized "highmem" check
+	// would otherwise shadow this case entirely)
+	case strings.HasPrefix(nameLower, "z3-"):
+		return "Storage optimized"
+
+	// Network optimized
+	case strings.HasPrefix(nameLower, "c4n-"):
+		return "Network optimized"
+
 	// Memory optimized
 	case strings.Contains(nameLower, "highmem"),
 		strings.Contains(nameLower, "megamem"),
@@ -529,6 +539,7 @@ func determineMachineFamily(name string) string {
 		strings.HasPrefix(nameLower, "m2-"),
 		strings.HasPrefix(nameLower, "m3-"),
 		strings.HasPrefix(nameLower, "m4-"),
+		strings.HasPrefix(nameLower, "m4n-"),
 		strings.HasPrefix(nameLower, "x4-"):
 		return "Memory optimized"
 
@@ -540,7 +551,9 @@ func determineMachineFamily(name string) string {
 		strings.HasPrefix(nameLower, "c3d-"),
 		strings.HasPrefix(nameLower, "c4-"),
 		strings.HasPrefix(nameLower, "c4a-"),
-		strings.HasPrefix(nameLower, "h3-"):
+		strings.HasPrefix(nameLower, "c4d-"),
+		strings.HasPrefix(nameLower, "h3-"),
+		strings.HasPrefix(nameLower, "h4d-"):
 		// c4-highmem and similar should be memory optimized
 		if strings.Contains(nameLower, "highmem") {
 			return "Memory optimized"
@@ -550,12 +563,11 @@ func determineMachineFamily(name string) string {
 	// Accelerator optimized (GPU)
 	case strings.HasPrefix(nameLower, "a2-"),
 		strings.HasPrefix(nameLower, "a3-"),
-		strings.HasPrefix(nameLower, "g2-"):
+		strings.HasPrefix(nameLower, "a4-"),
+		strings.HasPrefix(nameLower, "a4x-"),
+		strings.HasPrefix(nameLower, "g2-"),
+		strings.HasPrefix(nameLower, "g4-"):
 		return "Accelerator optimized"
-
-	// Storage optimized
-	case strings.HasPrefix(nameLower, "z3-"):
-		return "Storage optimized"
 
 	// General purpose (default)
 	default:
@@ -571,7 +583,38 @@ func determineMachineFamily(name string) string {
 // "Sole Tenancy Instance RAM running in Jakarta"
 // "Licensing Fee for Windows Server 2012 BYOL (CPU cost)"
 // "Licensing Fee for Windows Server 2012 BYOL (RAM cost)"
-var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2d|n2|n4d|n4|e2|e2a|c2|c2d|m1|m2|m3|m4|t2d|t2a|a2|a3|g2|h3|c3|c3d|z3|c4)\b.*(?:instance\s+(core|ram)|\((?:cpu|ram)\s+cost\))`)
+//
+// Accelerator exclusions: g4, a4 and a4x are deliberately absent. Their billing
+// is dominated by a GPU charge this scraper does not assemble (G4: the
+// "... RTX 6000 96GB ..." GPU SKUs; A4: it bills *solely* as bundled
+// "A4 Nvidia B200 (1 gpu slice)" SKUs with no core/RAM SKUs to sum; A4X: no
+// public SKUs yet), so emitting a core+RAM-only price would understate them.
+// a2, a3 and g2 stay: they are pre-existing upstream coverage and dropping them
+// would regress the current site. They share the same GPU-charge gap; a
+// follow-up will price the GPU component behind a completeness guard, after
+// which the excluded families can return.
+var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2d|n2|n4d|n4a|n4|e2|e2a|c2|c2d|m1|m2|m3|m4n|m4|x4|t2d|t2a|a2|a3|g2|h3|h4d|c3|c3d|z3|c4a|c4d|c4n|c4)\b.*(?:instance\s+(core|ram)|\((?:cpu|ram)\s+cost\))`)
+
+// legacySKURegex matches the first-generation SKU naming formats that predate
+// the "<FAMILY> Instance Core/Ram" convention and carry no machine family token
+// for machineTypeRegex to capture:
+//
+//	"Compute optimized Core running in Americas"          (C2, multi-regional)
+//	"Compute optimized Instance Core running in Madrid"   (C2, per-region)
+//	"Memory-optimized Instance Ram running in Frankfurt"  (M1)
+//
+// The "Instance" token is optional: C2's multi-regional SKUs omit it while its
+// ~13 per-region SKUs (africa-south1, the me-* / europe-* newer regions, etc.)
+// include it, and M1 always includes it. Without accepting the "Instance"
+// variant the per-region C2 SKUs get no on-demand/spot baseline, which also
+// drops their (correctly parsed) commitment SKUs at the CUD gate.
+//
+// Without this mapping the C2 and M1 series get no pricing at all and are
+// dropped from the dataset entirely. M2 is billed as the M1 rates plus a
+// separate "Memory Optimized Upgrade Premium for Memory-optimized Instance
+// ..." SKU; the premium SKUs are excluded by the caller so they never
+// pollute M1 baseline pricing.
+var legacySKURegex = regexp.MustCompile(`(?i)\b(compute optimized|memory-optimized)(?:\s+instance)?\s+(core|ram)\b`)
 
 // Resource-based committed use discount (CUD) SKUs use a distinct display-name
 // format from on-demand instance SKUs, e.g.:
@@ -582,7 +625,12 @@ var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2d|n2|n4d|n4|e2|e2a|c2|c2d|m
 // The family token may carry a vendor qualifier ("AMD") before the resource
 // keyword; the term is "1 Year" or "3 Year". An optional skip group consumes
 // such qualifiers so the resource keyword (Cpu/Ram) is captured directly.
-var cudSKURegex = regexp.MustCompile(`(?i)^commitment\s+v\d+:\s+(n1|n2d|n2|n4d|n4|e2|e2a|c2|c2d|m1|m2|m3|m4|t2d|t2a|a2|a3|g2|h3|c3|c3d|z3|c4)\s+(?:[a-z0-9]+\s+)*?(cpu|ram)\s+in\s+.+\s+for\s+(1|3)\s+year`)
+//
+// The g4/a4/a4x accelerator families are excluded here for the same reason as in
+// machineTypeRegex: their instances publish no core+RAM price, so their
+// commitment SKUs have nothing to attach to. Keep this allowlist in sync with
+// machineTypeRegex.
+var cudSKURegex = regexp.MustCompile(`(?i)^commitment\s+v\d+:\s+(n1|n2d|n2|n4d|n4a|n4|e2|e2a|c2|c2d|m1|m2|m3|m4n|m4|x4|t2d|t2a|a2|a3|g2|h3|h4d|c3|c3d|z3|c4a|c4d|c4n|c4)\s+(?:[a-z0-9]+\s+)*?(cpu|ram)\s+in\s+.+\s+for\s+(1|3)\s+year`)
 
 // CUD commitment terms used as keys in the CUD pricing buckets.
 const (
@@ -649,6 +697,22 @@ func parseMachineTypeFromSKU(sku SKU) (machineFamily string, resourceType string
 			} else if strings.Contains(displayLower, "ram cost") {
 				resourceType = "ram"
 			}
+		}
+	}
+
+	// Fall back to the legacy first-generation SKU naming used by C2 and M1,
+	// which carries no family token. The "Upgrade Premium" surcharge SKUs
+	// (how M2 is billed on top of the M1 rates) must not map to the M1
+	// baseline rates, so they are excluded here.
+	if machineFamily == "" && !strings.Contains(strings.ToLower(displayName), "premium") {
+		if legacyMatches := legacySKURegex.FindStringSubmatch(displayName); len(legacyMatches) >= 3 {
+			switch strings.ToLower(legacyMatches[1]) {
+			case "compute optimized":
+				machineFamily = "C2"
+			case "memory-optimized":
+				machineFamily = "M1"
+			}
+			resourceType = strings.ToLower(legacyMatches[2])
 		}
 	}
 

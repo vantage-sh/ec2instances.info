@@ -267,8 +267,12 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 			continue
 		}
 
-		// Process both instance SKUs and Windows licensing SKUs
-		isInstanceSKU := strings.Contains(displayLower, "instance")
+		// Process both instance SKUs and Windows licensing SKUs. C2's legacy
+		// SKUs ("Compute optimized Core/Ram running in ...") predate the
+		// "<FAMILY> Instance Core/Ram" naming and carry no "instance" token,
+		// so admit them explicitly.
+		isInstanceSKU := strings.Contains(displayLower, "instance") ||
+			legacySKURegex.MatchString(displayLower)
 		isWindowsLicense := strings.Contains(displayLower, "licensing fee for windows")
 
 		if !isInstanceSKU && !isWindowsLicense {
