@@ -2,10 +2,6 @@ package ec2
 
 import "testing"
 
-func strPtr(s string) *string {
-	return &s
-}
-
 func TestParsePublishedDate(t *testing.T) {
 	tests := []struct {
 		in   string
@@ -70,5 +66,39 @@ func TestResolveIntroducedDateFallsBackToReleaseMonthYear(t *testing.T) {
 	got, ok := resolveIntroducedDate(entry)
 	if !ok || got != "2008-05-01" {
 		t.Errorf("resolveIntroducedDate() = (%q, %v), want (2008-05-01, true)", got, ok)
+	}
+}
+
+func TestDateIntroducedFallbackResolve(t *testing.T) {
+	want := map[string]string{
+		"c6gn.metal":         "2020-12-18",
+		"i3p.16xlarge":       "2017-12-21",
+		"i2.large":           "2013-12-19",
+		"u-3tb1.56xlarge":    "2022-08-17",
+		"u-18tb1.112xlarge":  "2022-10-25",
+		"u-24tb1.112xlarge":  "2022-10-25",
+		"p6e-gb200.36xlarge": "2025-07-09",
+		"r8a.metal-24xl":     "2025-11-05",
+		"r8a.metal-48xl":     "2025-11-05",
+		"r7a.metal-48xl":     "2023-10-04",
+		"p4de.24xlarge":      "2022-05-26",
+		"d3en.large":         "2020-12-01",
+		"mac2-m1ultra.metal": "2024-06-01",
+	}
+	for instanceType := range want {
+		if _, ok := dateIntroducedFallback[instanceType]; !ok {
+			t.Errorf("missing fallback for %s", instanceType)
+		}
+	}
+	for instanceType, entry := range dateIntroducedFallback {
+		expected, ok := want[instanceType]
+		if !ok {
+			t.Errorf("unexpected fallback %s (no expected date)", instanceType)
+			continue
+		}
+		got, ok := resolveIntroducedDate(entry)
+		if !ok || got != expected {
+			t.Errorf("%s: resolveIntroducedDate() = (%q, %v), want (%q, true)", instanceType, got, ok, expected)
+		}
 	}
 }
