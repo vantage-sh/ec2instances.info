@@ -137,6 +137,7 @@ type EC2Instance struct {
 	BranchInterface          *int                       `json:"branch_interface,omitempty"`
 	MaxECSTasks              *int                       `json:"max_ecs_tasks,omitempty"`
 	DateIntroduced           *string                    `json:"date_introduced,omitempty"`
+	CostPerGb                *CostPerGb                 `json:"costPerGb,omitempty"`
 }
 
 func avg(ints []int) *float64 {

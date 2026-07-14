@@ -109,6 +109,7 @@ const blankStateDump: StateDump = {
     // noUpfront here overrode the Azure default, leaving Azure's reserved/savings
     // columns blank because noUpfront isn't a valid Azure term. Mirrors region/filter.
     reservedTerm: "",
+    requestedStorageGb: 0,
 };
 
 function deepCopy<T>(v: T): T {

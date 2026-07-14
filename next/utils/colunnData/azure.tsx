@@ -5,8 +5,9 @@ import {
     makeCellWithRegexSorter,
     expr,
     transformAllDataTables,
+    getStorageHourlyAddon,
 } from "./shared";
-import { CostDuration } from "@/types";
+import { CostDuration, CostPerGb } from "@/types";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import exprCompiler from "@/utils/expr";
 
@@ -56,6 +57,7 @@ export type AzureInstance = {
     rdma: boolean;
     storage?: Storage;
     ACU?: number;
+    costPerGb?: CostPerGb;
 };
 
 const initialColumnsArr = [
@@ -124,6 +126,7 @@ function calculateCost(
     pricingUnit: PricingUnit,
     costDuration: CostDuration,
     usdRate: number,
+    storageHourlyAddon: number = 0,
 ): number {
     if (!price) return -1;
 
@@ -150,9 +153,8 @@ function calculateCost(
         ] as number;
     }
 
-    return (
-        ((Number(price) * durationMultiplier) / pricingUnitModifier) * usdRate
-    );
+    const hourlyTotal = Number(price) + storageHourlyAddon;
+    return ((hourlyTotal * durationMultiplier) / pricingUnitModifier) * usdRate;
 }
 
 export function calculateAndFormatCost(
@@ -164,6 +166,7 @@ export function calculateAndFormatCost(
         code: string;
         usdRate: number;
     },
+    storageHourlyAddon: number = 0,
 ): string | undefined {
     const perTime = calculateCost(
         price,
@@ -171,6 +174,7 @@ export function calculateAndFormatCost(
         pricingUnit,
         costDuration,
         currency.usdRate,
+        storageHourlyAddon,
     );
     if (perTime === -1) return undefined;
 
@@ -212,7 +216,14 @@ function getPricingSorter(
         code: string;
         usdRate: number;
     },
+    requestedStorageGb: number,
 ) {
+    const storageAddonFor = (instance: { costPerGb?: CostPerGb }) =>
+        getStorageHourlyAddon(
+            instance.costPerGb,
+            requestedStorageGb,
+            selectedRegion,
+        );
     return {
         sortingFn: (rowA, rowB) => {
             const valueA = calculateCost(
@@ -221,6 +232,7 @@ function getPricingSorter(
                 pricingUnit,
                 costDuration,
                 currency.usdRate,
+                storageAddonFor(rowA.original),
             );
             const valueB = calculateCost(
                 getter(rowB.original.pricing?.[selectedRegion]),
@@ -228,6 +240,7 @@ function getPricingSorter(
                 pricingUnit,
                 costDuration,
                 currency.usdRate,
+                storageAddonFor(rowB.original),
             );
             return valueA - valueB;
         },
@@ -241,6 +254,7 @@ function getPricingSorter(
                 pricingUnit,
                 costDuration,
                 currency.usdRate,
+                storageAddonFor(row),
             );
             return value === -1 ? undefined : value;
         },
@@ -248,15 +262,62 @@ function getPricingSorter(
             const pricing = info.row.original.pricing;
             const price = getter(pricing?.[selectedRegion]);
             if (isNaN(Number(price))) return undefined;
-            return calculateAndFormatCost(
+            const addon = storageAddonFor(info.row.original);
+            const formatted = calculateAndFormatCost(
                 price,
                 info.row.original,
                 pricingUnit,
                 costDuration,
                 currency,
+                addon,
+            );
+            if (!formatted || addon <= 0) return formatted;
+            return renderWithStorageIndicator(
+                formatted,
+                Number(price),
+                addon,
+                requestedStorageGb,
+                info.row.original.costPerGb,
+                selectedRegion,
             );
         }),
     } satisfies Partial<ColumnDef<AzureInstance>>;
+}
+
+function renderWithStorageIndicator(
+    formatted: string,
+    computePriceUsdHr: number,
+    storageHourlyAddon: number,
+    requestedStorageGb: number,
+    costPerGb: CostPerGb | undefined,
+    selectedRegion: string,
+) {
+    const fmt = Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 6,
+    });
+    const baseline = (() => {
+        if (!costPerGb) return 0;
+        const b = costPerGb.baseline;
+        if (typeof b === "number") return b;
+        let min = Infinity;
+        for (const k in b) if (b[k] < min) min = b[k];
+        return min === Infinity ? 0 : min;
+    })();
+    const extraGb = Math.max(0, requestedStorageGb - baseline);
+    const tooltip =
+        `Compute: ${fmt.format(computePriceUsdHr)}/hr\n` +
+        `Storage: ${fmt.format(storageHourlyAddon)}/hr` +
+        ` (${extraGb} GB × storage rate, ${selectedRegion})`;
+    return (
+        <span
+            title={tooltip}
+            className="border-b border-dotted border-current cursor-help"
+        >
+            {formatted}
+        </span>
+    );
 }
 
 export const columnsGen = (
@@ -269,6 +330,7 @@ export const columnsGen = (
         usdRate: number;
         cnyRate: number;
     },
+    requestedStorageGb: number,
 ): ColumnDef<AzureInstance>[] => {
     const savingsKey = reservedTerm.replace("Standard", "Savings");
 
@@ -400,6 +462,7 @@ export const columnsGen = (
                 costDuration,
                 (pricing) => pricing?.linux?.ondemand,
                 currency,
+                requestedStorageGb,
             ),
         },
         {
@@ -412,6 +475,7 @@ export const columnsGen = (
                 costDuration,
                 (pricing) => pricing?.linux?.reserved?.[savingsKey],
                 currency,
+                requestedStorageGb,
             ),
         },
         {
@@ -424,6 +488,7 @@ export const columnsGen = (
                 costDuration,
                 (pricing) => pricing?.linux?.reserved?.[reservedTerm],
                 currency,
+                requestedStorageGb,
             ),
         },
         {
@@ -436,6 +501,7 @@ export const columnsGen = (
                 costDuration,
                 (pricing) => pricing?.linux?.spot_min,
                 currency,
+                requestedStorageGb,
             ),
         },
         {
@@ -448,6 +514,7 @@ export const columnsGen = (
                 costDuration,
                 (pricing) => pricing?.windows?.ondemand,
                 currency,
+                requestedStorageGb,
             ),
         },
         {
@@ -460,6 +527,7 @@ export const columnsGen = (
                 costDuration,
                 (pricing) => pricing?.windows?.reserved?.[savingsKey],
                 currency,
+                requestedStorageGb,
             ),
         },
         {
@@ -472,6 +540,7 @@ export const columnsGen = (
                 costDuration,
                 (pricing) => pricing?.windows?.reserved?.[reservedTerm],
                 currency,
+                requestedStorageGb,
             ),
         },
         {
@@ -484,6 +553,7 @@ export const columnsGen = (
                 costDuration,
                 (pricing) => pricing?.windows?.spot_min,
                 currency,
+                requestedStorageGb,
             ),
         },
     ];

@@ -53,6 +53,13 @@ func processEC2Data(
 	instancesHashmap := make(map[string]*EC2Instance)
 	sku2SkuData := make(map[string]ec2SkuData)
 
+	// EBS gp3 storage SKUs and the resulting per-region rate.
+	// Used to populate costPerGb.regions so a user-selected storage
+	// amount above the bundled instance-store baseline is priced as
+	// attached gp3 EBS.
+	ebsGp3Skus := make(map[string]bool)
+	gp3RatePerRegion := make(map[string]float64)
+
 	// The descriptions found for each region
 	regionDescriptions := make(map[string]string)
 
@@ -69,6 +76,15 @@ func processEC2Data(
 		// Process the products in the region
 		regionDescription := ""
 		for _, product := range rawRegion.RegionData.Products {
+			// Capture EBS gp3 storage SKUs before the family filter so
+			// they survive into the OnDemand pass below. Only the gp3
+			// volume type is used; other volume types are ignored.
+			if product.ProductFamily == "Storage" &&
+				product.Attributes["volumeApiName"] == "gp3" {
+				ebsGp3Skus[product.SKU] = true
+				continue
+			}
+
 			if _, ok := EC2_OK_PRODUCT_FAMILIES[product.ProductFamily]; !ok {
 				continue
 			}
@@ -153,6 +169,31 @@ func processEC2Data(
 		// Process the on demand pricing
 		for _, offerMapping := range rawRegion.RegionData.Terms.OnDemand {
 			for _, offer := range offerMapping {
+				// EBS gp3 storage SKU: extract the per-GB-month rate
+				// for this region. Take the lowest tier (BeginRange == "0").
+				if ebsGp3Skus[offer.SKU] {
+					for _, dim := range offer.PriceDimensions {
+						if !strings.EqualFold(dim.Unit, "GB-Mo") {
+							continue
+						}
+						if dim.BeginRange != "" && dim.BeginRange != "0" {
+							continue
+						}
+						priceStr := dim.PricePerUnit[currency]
+						if priceStr == "" {
+							continue
+						}
+						rate, err := strconv.ParseFloat(priceStr, 64)
+						if err != nil || rate <= 0 {
+							continue
+						}
+						if existing, ok := gp3RatePerRegion[rawRegion.RegionName]; !ok || rate < existing {
+							gp3RatePerRegion[rawRegion.RegionName] = rate
+						}
+					}
+					continue
+				}
+
 				// Get the instance in question
 				skuData, ok := sku2SkuData[offer.SKU]
 				if !ok {
@@ -342,9 +383,36 @@ func processEC2Data(
 		}
 	}
 
+	// Build the costPerGb.regions map once; the gp3 rate applies to
+	// every EC2 instance equally (it's the rate of an attached EBS
+	// volume, not something that varies per instance type).
+	costPerGbRegions := make(map[string]any, len(gp3RatePerRegion))
+	for region, rate := range gp3RatePerRegion {
+		costPerGbRegions[region] = rate
+	}
+
 	// Clean up empty regions and set the regions map for non-empty regions
 	for _, instance := range instancesHashmap {
 		instance.Regions = cleanEmptyRegions(instance.Pricing, regionDescriptions)
+
+		// Populate costPerGb so storage is expressed separately from
+		// compute. Baseline is the total instance-store capacity in GB
+		// (free with the instance); regions[r] is the per-GB-month gp3
+		// EBS rate for additional storage beyond the baseline.
+		var totalGb float64 = 0
+		if instance.Storage != nil {
+			totalGb = float64(instance.Storage.Size * instance.Storage.Devices)
+		}
+		// Copy so each instance has an independent map (the value in the
+		// json is per-instance-shaped even though the rates are shared).
+		regionsCopy := make(map[string]any, len(costPerGbRegions))
+		for k, v := range costPerGbRegions {
+			regionsCopy[k] = v
+		}
+		instance.CostPerGb = &CostPerGb{
+			Baseline: totalGb,
+			Regions:  regionsCopy,
+		}
 	}
 
 	// Save the instances

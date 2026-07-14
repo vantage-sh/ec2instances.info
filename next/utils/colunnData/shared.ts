@@ -1,4 +1,4 @@
-import { CostDuration, PricingUnit } from "@/types";
+import { CostDuration, CostPerGb, PricingUnit } from "@/types";
 import { Row } from "@tanstack/react-table";
 import exprCompiler from "@/utils/expr";
 
@@ -75,6 +75,7 @@ export function calculateCostNumeric(
         usdRate: number;
         cnyRate: number;
     },
+    storageHourlyAddon: number = 0,
 ): number | undefined {
     if (!price) return undefined;
 
@@ -90,10 +91,49 @@ export function calculateCostNumeric(
         ? currency.cnyRate
         : currency.usdRate;
 
+    const hourlyTotal = Number(price) + storageHourlyAddon;
     return (
-        ((Number(price) * durationMultiplier) / pricingUnitModifier) *
+        ((hourlyTotal * durationMultiplier) / pricingUnitModifier) *
         currencyMultiplier
     );
+}
+
+// Resolves a number-or-platform-map value to a single number. For
+// platform maps with multiple values we take the minimum (cheapest case)
+// since the storage cost is folded into a service-wide pricing column
+// and not tied to a specific engine/platform selector. Returns 0 for
+// absent values.
+function resolveCostPerGbValue(
+    value: number | { [platform: string]: number } | undefined,
+): number {
+    if (value === undefined) return 0;
+    if (typeof value === "number") return value;
+    let min = Infinity;
+    for (const k in value) {
+        if (value[k] < min) min = value[k];
+    }
+    return min === Infinity ? 0 : min;
+}
+
+// getStorageHourlyAddon returns the per-instance storage cost in USD
+// per hour to add on top of the compute price. Returns 0 when storage
+// is at or below baseline (no extra cost) or when no overage rate exists.
+//
+// AWS publishes storage rates as USD per GB-month; we convert to per-hour
+// so the value can be added to the existing per-hour compute price and
+// flow through the existing duration / currency math.
+export function getStorageHourlyAddon(
+    costPerGb: CostPerGb | undefined,
+    requestedGb: number,
+    selectedRegion: string,
+): number {
+    if (!costPerGb || requestedGb <= 0) return 0;
+    const baseline = resolveCostPerGbValue(costPerGb.baseline);
+    const rate = resolveCostPerGbValue(costPerGb.regions?.[selectedRegion]);
+    const extraGb = Math.max(0, requestedGb - baseline);
+    if (extraGb === 0 || rate === 0) return 0;
+    const monthHours = (365 * 24) / 12;
+    return (extraGb * rate) / monthHours;
 }
 
 export function calculateCost(
@@ -107,6 +147,7 @@ export function calculateCost(
         usdRate: number;
         cnyRate: number;
     },
+    storageHourlyAddon: number = 0,
 ) {
     if (!price) return "N/A";
 
@@ -117,6 +158,7 @@ export function calculateCost(
         costDuration,
         selectedRegion,
         currency,
+        storageHourlyAddon,
     );
     if (perTime === undefined) return "N/A";
 

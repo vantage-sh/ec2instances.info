@@ -38,6 +38,50 @@ var IGNORE_OPENSEARCH_ATTRIBUTES = map[string]bool{
 	"usagetype":    true,
 }
 
+// processOpenSearchStorageDimensions accumulates EBS per-GB-month storage
+// rates for OpenSearch volume SKUs. We prefer gp3 when multiple
+// volumeTypes are encountered for the same region. No platform layer.
+func processOpenSearchStorageDimensions(
+	attributes map[string]string,
+	offer awsutils.RegionTerm,
+	regionName string,
+	currency string,
+	ratesPerRegion map[string]map[string]float64,
+) {
+	volumeType := strings.ToLower(attributes["volumeType"])
+	// Only capture gp3 (preferred). If we already saw a non-gp3 entry
+	// for this region, gp3 will replace it. If we already have gp3,
+	// we skip non-gp3.
+	preferGp3 := strings.Contains(volumeType, "gp3")
+	if !preferGp3 {
+		// Allow non-gp3 only if no entry yet for this region.
+		if existing, ok := ratesPerRegion[regionName]; ok {
+			if _, has := existing[""]; has {
+				return
+			}
+		}
+	}
+
+	for _, dim := range offer.PriceDimensions {
+		dimCopy := dim
+		rate, ok := extractStorageRate(&dimCopy, currency)
+		if !ok || rate <= 0 {
+			continue
+		}
+		regionRates, exists := ratesPerRegion[regionName]
+		if !exists {
+			regionRates = make(map[string]float64)
+			ratesPerRegion[regionName] = regionRates
+		}
+		// gp3 always wins; otherwise keep the lowest seen rate.
+		if preferGp3 {
+			regionRates[""] = rate
+		} else if existing, ok := regionRates[""]; !ok || rate < existing {
+			regionRates[""] = rate
+		}
+	}
+}
+
 func enrichOpenSearchInstance(instance map[string]any, attributes map[string]string) {
 	// Clean up the memory attribute
 	if attributes["memoryGib"] != "" {
@@ -201,6 +245,11 @@ func processOpenSearchData(
 	instancesHashmap := make(map[string]map[string]any)
 	sku2Instance := make(map[string]map[string]any)
 
+	// Storage SKU bookkeeping (EBS volumes, gp3 preferred). No platform
+	// layer; sentinel "" key.
+	osStorageSkus := make(map[string]map[string]string)
+	osStorageRates := make(map[string]map[string]float64) // region -> "" -> rate
+
 	// The descriptions found for each region
 	regionDescriptions := make(map[string]string)
 
@@ -217,6 +266,13 @@ func processOpenSearchData(
 		// Process the products in the region
 		regionDescription := ""
 		for _, product := range rawRegion.RegionData.Products {
+			// Capture EBS storage volume SKUs. We prefer gp3 when
+			// multiple volumeTypes exist for the same region.
+			if product.ProductFamily == "Amazon OpenSearch Service Volume" {
+				osStorageSkus[product.SKU] = product.Attributes
+				continue
+			}
+
 			if product.ProductFamily != "Amazon OpenSearch Service Instance" ||
 				product.Attributes["operation"] == "DirectQueryAmazonS3GDCOCU" {
 				continue
@@ -250,6 +306,15 @@ func processOpenSearchData(
 		// Process the on demand pricing
 		for _, offerMapping := range rawRegion.RegionData.Terms.OnDemand {
 			for _, offer := range offerMapping {
+				// Storage SKUs flow through their own per-GB-month path.
+				if storageAttrs, ok := osStorageSkus[offer.SKU]; ok {
+					processOpenSearchStorageDimensions(
+						storageAttrs, offer, rawRegion.RegionName,
+						currency, osStorageRates,
+					)
+					continue
+				}
+
 				// Get the instance in question
 				instance, ok := sku2Instance[offer.SKU]
 				if !ok {
@@ -337,6 +402,13 @@ func processOpenSearchData(
 	// Clean up empty regions and set the regions map for non-empty regions
 	for _, instance := range instancesHashmap {
 		instance["regions"] = clearHalfEmptyRegions(instance["pricing"].(map[string]*genericAwsPricingData), regionDescriptions)
+	}
+
+	// Build per-instance costPerGb. OpenSearch storage rates have no
+	// platform layer; the same value is attached to every instance.
+	osCostPerGb := buildCostPerGb(osStorageRates, false)
+	for _, instance := range instancesHashmap {
+		instance["costPerGb"] = osCostPerGb
 	}
 
 	// Process the volume quotas

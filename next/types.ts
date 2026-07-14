@@ -16,6 +16,13 @@ export interface Pricing {
     };
 }
 
+export type CostPerGb = {
+    baseline: number | { [platform: string]: number };
+    regions: {
+        [regionSlug: string]: number | { [platform: string]: number };
+    };
+};
+
 export interface EC2Instance {
     instance_type: string;
     family: string;
@@ -110,6 +117,7 @@ export interface EC2Instance {
     memory_per_numa_node_mb?: number | null;
     l3_per_numa_node_mb?: number | null;
     l3_shared?: boolean | null;
+    costPerGb?: CostPerGb;
 }
 
 export interface Region {

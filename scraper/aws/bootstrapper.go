@@ -3,10 +3,13 @@ package aws
 import (
 	"context"
 	"log"
+	"os"
 	"runtime"
 	"scraper/aws/awsutils"
 	ec2Internal "scraper/aws/ec2"
 	"scraper/utils"
+	"slices"
+	"strconv"
 	"strings"
 	"sync"
 
@@ -53,30 +56,82 @@ type flatData struct {
 	currentVersionUrl string
 }
 
+type savingsPlanHandler = func() map[string]map[string]map[string]float64
+
+func getSavingsPlansHandler(
+	url string,
+	isChina bool,
+	cache map[bool]map[string]savingsPlanHandler,
+) savingsPlanHandler {
+	disableStr := os.Getenv("DISABLE_SAVINGS_PLANS")
+	disableSavingsPlans := slices.Contains([]string{"true", "1", "yes", "y"}, disableStr)
+	if disableSavingsPlans || url == "" {
+		// If savings plans are off, there needs to be a method here for later,
+		// but we shouldn't do anything further here
+		return func() map[string]map[string]map[string]float64 {
+			return nil
+		}
+	}
+
+	planUrl := AWS_NON_CHINA_ROOT_URL
+	if isChina {
+		planUrl = AWS_CHINA_ROOT_URL
+	}
+
+	urls, ok := cache[isChina]
+	if !ok {
+		urls = make(map[string]savingsPlanHandler)
+		cache[isChina] = urls
+	}
+	if h, ok := urls[url]; ok {
+		return h
+	}
+
+	h := awsutils.GetSavingsPlans(planUrl, url, isChina)
+	urls[url] = h
+	return h
+}
+
 func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootIndex AwsRootIndexResponse) {
+	// Number of goroutines to run for each service for data collection (defaults to 5)
+	perServiceParallelism := 5
+	if e := os.Getenv("PER_SERVICE_PARALLELISM"); e != "" {
+		x, err := strconv.ParseUint(e, 10, 32)
+		if err != nil {
+			log.Fatal("PER_SERVICE_PARALLELISM is not a valid integer", err)
+		}
+		perServiceParallelism = int(x)
+	}
+
+	// Optional region filter. When set to a comma-separated list of region
+	// slugs (e.g. "us-east-1,us-west-2") only those regions are fetched.
+	// Empty string disables the filter (all regions).
+	allowedRegionsRaw := os.Getenv("ALLOWED_REGIONS")
+	allowedRegions := map[string]struct{}{}
+	if allowedRegionsRaw != "" {
+		for _, r := range strings.Split(allowedRegionsRaw, ",") {
+			r = strings.TrimSpace(r)
+			if r != "" {
+				allowedRegions[r] = struct{}{}
+			}
+		}
+	}
+	regionAllowed := func(name string) bool {
+		if len(allowedRegions) == 0 {
+			return true
+		}
+		_, ok := allowedRegions[name]
+		return ok
+	}
+
 	// Global
-	chinaToUrlToSavingsPlan := make(map[bool]map[string]func() map[string]map[string]map[string]float64)
+	chinaToUrlToSavingsPlan := make(map[bool]map[string]savingsPlanHandler)
 	for _, service := range services {
 		region, ok := globalRootIndex.Offers[service.serviceName]
 		if !ok {
 			log.Fatalf("Service %s not found in global root index", service.serviceName)
 		}
-
-		handler := func() map[string]map[string]map[string]float64 {
-			return nil
-		}
-		urls, ok := chinaToUrlToSavingsPlan[false]
-		if !ok {
-			urls = make(map[string]func() map[string]map[string]map[string]float64)
-			chinaToUrlToSavingsPlan[false] = urls
-		}
-		url := region.CurrentSavingsPlanIndexUrl
-		if h, ok := urls[url]; ok {
-			handler = h
-		} else if url != "" {
-			handler = awsutils.GetSavingsPlans(AWS_NON_CHINA_ROOT_URL, url, false)
-			urls[url] = handler
-		}
+		handler := getSavingsPlansHandler(region.CurrentSavingsPlanIndexUrl, false, chinaToUrlToSavingsPlan)
 
 		go func() {
 			var regionIndex AwsRegionIndexResponse
@@ -91,12 +146,15 @@ func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootInd
 					// it breaks things later on. Continue past it.
 					continue
 				}
+				if !regionAllowed(regionName) {
+					continue
+				}
 				dataFlattened = append(dataFlattened, flatData{
 					regionName:        regionName,
 					currentVersionUrl: regionMeta.CurrentVersionUrl,
 				})
 			}
-			chunks := utils.Chunk(dataFlattened, 5)
+			chunks := utils.Chunk(dataFlattened, perServiceParallelism)
 
 			for _, chunk := range chunks {
 				fg := utils.FunctionGroup{}
@@ -127,22 +185,7 @@ func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootInd
 		if !ok {
 			log.Fatalf("Service %s not found in china root index", service.serviceName)
 		}
-
-		handler := func() map[string]map[string]map[string]float64 {
-			return nil
-		}
-		urls, ok := chinaToUrlToSavingsPlan[true]
-		if !ok {
-			urls = make(map[string]func() map[string]map[string]map[string]float64)
-			chinaToUrlToSavingsPlan[true] = urls
-		}
-		url := region.CurrentSavingsPlanIndexUrl
-		if h, ok := urls[url]; ok {
-			handler = h
-		} else if url != "" {
-			handler = awsutils.GetSavingsPlans(AWS_CHINA_ROOT_URL, url, true)
-			urls[url] = handler
-		}
+		handler := getSavingsPlansHandler(region.CurrentSavingsPlanIndexUrl, true, chinaToUrlToSavingsPlan)
 
 		go func() {
 			var regionIndex AwsRegionIndexResponse
@@ -156,12 +199,15 @@ func loadAllRegionsForServices(services []service, globalRootIndex, chinaRootInd
 					// Weird thing AWS sends in China
 					continue
 				}
+				if !regionAllowed(regionName) {
+					continue
+				}
 				dataFlattened = append(dataFlattened, flatData{
 					regionName:        regionName,
 					currentVersionUrl: regionMeta.CurrentVersionUrl,
 				})
 			}
-			chunks := utils.Chunk(dataFlattened, 5)
+			chunks := utils.Chunk(dataFlattened, perServiceParallelism)
 
 			for _, chunk := range chunks {
 				fg := utils.FunctionGroup{}

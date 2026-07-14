@@ -159,6 +159,7 @@ export const columnsGen = (
         usdRate: number;
         cnyRate: number;
     },
+    requestedStorageGb: number,
 ): ColumnDef<EC2Instance>[] => [
     {
         header: "Name",
@@ -277,6 +278,7 @@ export const columnsGen = (
             (pricing) => pricing?.["14"]?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -290,6 +292,7 @@ export const columnsGen = (
             (pricing) => pricing?.["14"]?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -303,6 +306,7 @@ export const columnsGen = (
             (pricing) => pricing?.["2"]?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -316,6 +320,7 @@ export const columnsGen = (
             (pricing) => pricing?.["2"]?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -329,6 +334,7 @@ export const columnsGen = (
             (pricing) => pricing?.["10"]?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -342,6 +348,7 @@ export const columnsGen = (
             (pricing) => pricing?.["10"]?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -355,6 +362,7 @@ export const columnsGen = (
             (pricing) => pricing?.["11"]?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -368,6 +376,7 @@ export const columnsGen = (
             (pricing) => pricing?.["11"]?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -381,6 +390,7 @@ export const columnsGen = (
             (pricing) => pricing?.["12"]?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -394,6 +404,7 @@ export const columnsGen = (
             (pricing) => pricing?.["12"]?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -407,6 +418,7 @@ export const columnsGen = (
             (pricing) => pricing?.["15"]?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -420,6 +432,7 @@ export const columnsGen = (
             (pricing) => pricing?.["15"]?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -433,6 +446,7 @@ export const columnsGen = (
             (pricing) => pricing?.["21"]?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -446,6 +460,7 @@ export const columnsGen = (
             (pricing) => pricing?.["21"]?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -459,6 +474,7 @@ export const columnsGen = (
             (pricing) => pricing?.["211"]?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -472,6 +488,7 @@ export const columnsGen = (
             (pricing) => pricing?.["18"]?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -485,6 +502,7 @@ export const columnsGen = (
             (pricing) => pricing?.["18"]?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -498,6 +516,7 @@ export const columnsGen = (
             (pricing) => pricing?.["5"]?.ondemand,
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
@@ -511,6 +530,7 @@ export const columnsGen = (
             (pricing) => pricing?.["5"]?.reserved?.[reservedTerm],
             true,
             currency,
+            requestedStorageGb,
         ),
     },
     {
