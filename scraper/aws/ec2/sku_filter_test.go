@@ -31,9 +31,9 @@ func TestShouldIncludeEC2PricingSku(t *testing.T) {
 
 func TestSkuOnDemandMatchesPlatform(t *testing.T) {
 	tests := []struct {
-		skuOnDemand        float64
-		platformOnDemand   string
-		want               bool
+		skuOnDemand      float64
+		platformOnDemand string
+		want             bool
 	}{
 		{0.056, "0.056", true},
 		{0.056, "0.056000", true},
