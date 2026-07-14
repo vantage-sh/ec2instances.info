@@ -178,6 +178,7 @@ func addDateIntroduced(instances map[string]*EC2Instance) {
 	var timeline instanceTimeline
 	if err := utils.LoadJson(instanceTimelineURL, &timeline); err != nil {
 		utils.SendWarning("Failed to fetch instance timeline:", err)
+		return
 	} else {
 		// Add the json results to byType
 		log.Default().Printf("Loaded instance timeline release %s", timeline.Release)
