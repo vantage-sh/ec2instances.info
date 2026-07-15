@@ -48,6 +48,10 @@ type EC2PricingData struct {
 	PCTInterrupt string             `json:"pct_interrupt,omitempty"`
 	PCTSavingsOD *int               `json:"pct_savings_od,omitempty"`
 	SpotAvg      Price              `json:"spot_avg,omitempty"`
+	// EKSAutoMode is the EKS Auto Mode management fee for this instance type in
+	// this region (currency units per hour). It is charged in addition to EC2
+	// instance pricing and is independent of the EC2 purchase option.
+	EKSAutoMode string `json:"eks_auto_mode,omitempty"`
 
 	spot []Price
 }
@@ -115,6 +119,7 @@ type EC2Instance struct {
 	AvailabilityZones        map[string][]string        `json:"availability_zones"`
 	Storage                  *Storage                   `json:"storage"`
 	EMR                      bool                       `json:"emr"`
+	EKSAutoMode              bool                       `json:"eks_auto_mode"`
 	IPV6Support              bool                       `json:"ipv6_support"`
 	CoremarkIterationsSecond *float64                   `json:"coremark_iterations_second,omitempty"`
 	GPUArchitectures         []string                   `json:"gpu_architectures,omitempty"`
