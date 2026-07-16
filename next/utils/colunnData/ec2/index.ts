@@ -13,6 +13,7 @@ const initialColumnsArr = [
     ["GPU", false],
     ["GPU_model", false],
     ["GPU_memory", false],
+    ["GPU_memory_per_gpu", false],
     ["compute_capability", false],
     ["FPGA", false],
     ["ECU_per_vcpu", false],
@@ -109,6 +110,7 @@ const initialColumnsArr = [
     ["is_trunking_compatible", false],
     ["branch_interface", false],
     ["max_ecs_tasks", false],
+    ["max_pods", false],
 ] as const;
 
 export const initialColumnsValue: {
@@ -163,7 +165,8 @@ export function makePrettyNames<V>(
         makeColumnOption("memory_per_vcpu", "GiB of Memory per vCPU"),
         makeColumnOption("GPU", "GPUs"),
         makeColumnOption("GPU_model", "GPU model"),
-        makeColumnOption("GPU_memory", "GPU memory"),
+        makeColumnOption("GPU_memory_per_gpu", "GPU memory (per GPU)"),
+        makeColumnOption("GPU_memory", "GPU memory (total)"),
         makeColumnOption("compute_capability", "CUDA Compute Capability"),
         makeColumnOption("FPGA", "FPGAs"),
         makeColumnOption("ECU_per_vcpu", "ECU per vCPU"),
@@ -206,6 +209,7 @@ export function makePrettyNames<V>(
         makeColumnOption("is_trunking_compatible", "Trunking compatible"),
         makeColumnOption("branch_interface", "Branch interface"),
         makeColumnOption("max_ecs_tasks", "Max ECS Tasks"),
+        makeColumnOption("max_pods", "Max Pods"),
         makeColumnOption("vpc_only", "VPC Only"),
         makeColumnOption("ipv6_support", "IPv6 Support"),
         makeColumnOption("placement_group_support", "Placement Group Support"),

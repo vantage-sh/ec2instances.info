@@ -203,6 +203,7 @@ const exprColumns = [
     "memory_per_vcpu",
     "GPU",
     "GPU_memory",
+    "GPU_memory_per_gpu",
     "maxips",
     "storage",
     "size",
@@ -237,6 +238,7 @@ const exprColumns = [
     "ebs-max-bandwidth",
     "ebs-max-throughput",
     "ebs-iops",
+    "max_pods",
 ];
 
 export default function IndividualColumnFilter<Instance>({

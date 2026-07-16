@@ -603,12 +603,53 @@ export const columnsGen = (
     },
     {
         accessorKey: "GPU_memory",
-        header: "GPU memory",
+        header: "GPU memory (total)",
         size: 130,
         id: "GPU_memory",
         sortingFn: "alphanumeric",
         filterFn: expr,
         cell: (info) => `${info.getValue() as number} GiB`,
+    },
+    {
+        id: "GPU_memory_per_gpu",
+        header: "GPU memory (per GPU)",
+        size: 130,
+        accessorFn: (row) => {
+            if (!row.GPU_memory || !row.GPU) return undefined;
+            return row.GPU_memory / Math.max(row.GPU, 1);
+        },
+        sortingFn: (rowA, rowB) => {
+            const a =
+                rowA.original.GPU_memory && rowA.original.GPU
+                    ? rowA.original.GPU_memory / Math.max(rowA.original.GPU, 1)
+                    : undefined;
+            const b =
+                rowB.original.GPU_memory && rowB.original.GPU
+                    ? rowB.original.GPU_memory / Math.max(rowB.original.GPU, 1)
+                    : undefined;
+            if (a === undefined) return -1;
+            if (b === undefined) return 1;
+            return a - b;
+        },
+        filterFn: (row, _, filterValue) => {
+            const total = row.original.GPU_memory;
+            const gpuCount = row.original.GPU;
+            if (!total || !gpuCount) return false;
+            const perGpu = total / Math.max(gpuCount, 1);
+            try {
+                return exprCompiler(filterValue)(
+                    perGpu,
+                    `${perGpu.toFixed(1)} GiB`,
+                );
+            } catch {
+                return true;
+            }
+        },
+        cell: (info) => {
+            const value = info.getValue() as number | undefined;
+            if (value === undefined) return undefined;
+            return `${value.toFixed(1)} GiB`;
+        },
     },
     {
         accessorKey: "compute_capability",
@@ -1177,6 +1218,24 @@ export const columnsGen = (
         sortingFn: (rowA, rowB) => {
             const valueA = rowA.original.max_ecs_tasks;
             const valueB = rowB.original.max_ecs_tasks;
+            if (valueA === undefined) return 1;
+            if (valueB === undefined) return -1;
+            return valueA - valueB;
+        },
+        filterFn: expr,
+        cell: (info) => {
+            const value = info.getValue() as number | undefined;
+            if (value === undefined) return undefined;
+            return value;
+        },
+    },
+    {
+        accessorKey: "max_pods",
+        header: "Max Pods",
+        id: "max_pods",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.max_pods;
+            const valueB = rowB.original.max_pods;
             if (valueA === undefined) return 1;
             if (valueB === undefined) return -1;
             return valueA - valueB;
