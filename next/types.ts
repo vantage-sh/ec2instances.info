@@ -84,7 +84,6 @@ export interface EC2Instance {
     linux_virtualization_types?: string[];
     emr: boolean;
     eks_auto_mode: boolean;
-
     availability_zones?: {
         [region: string]: string[];
     };

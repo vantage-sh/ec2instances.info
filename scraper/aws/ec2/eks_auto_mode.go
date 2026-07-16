@@ -19,12 +19,12 @@ const (
 	eksRegionIndexChina    = "/offers/v1.0/cn/AmazonEKS/current/region_index.json"
 )
 
-// eksRegionIndexEntry is one region in AmazonEKS region_index.json.
-// CurrentVersionUrl points at that region's full products+terms JSON.
 type eksRegionIndex struct {
 	Regions map[string]eksRegionIndexEntry `json:"regions"`
 }
 
+// eksRegionIndexEntry is one region in AmazonEKS region_index.json.
+// CurrentVersionUrl points at that region's full products+terms JSON.
 type eksRegionIndexEntry struct {
 	CurrentVersionUrl string `json:"currentVersionUrl"`
 }
@@ -128,7 +128,6 @@ func addEksAutoModePricing(instances map[string]*EC2Instance, china bool) {
 	loadAwsPricingJson(baseUrl, regionIndexPath, &regionIndex)
 
 	type regionJob struct {
-		// Instead of being a map like eksRegionIndex, both fields are together
 		regionName string
 		url        string
 	}
