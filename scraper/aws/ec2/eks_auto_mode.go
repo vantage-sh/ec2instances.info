@@ -29,11 +29,15 @@ type eksRegionIndexEntry struct {
 	CurrentVersionUrl string `json:"currentVersionUrl"`
 }
 
-func resolveAwsPricingUrl(baseUrl, awsUrl string) string {
+// loadAwsPricingJson loads Price List JSON from a relative path or absolute URL.
+func loadAwsPricingJson(baseUrl, awsUrl string, val any) {
+	url := awsUrl
 	if strings.HasPrefix(awsUrl, "/") {
-		return baseUrl + awsUrl
+		url = baseUrl + awsUrl
 	}
-	return awsUrl
+	if err := utils.LoadJson(url, val); err != nil {
+		log.Fatalln("Failed to fetch AmazonEKS pricing data", awsUrl, err)
+	}
 }
 
 // applyEksAutoModeRegion writes Auto Mode management fees from one AmazonEKS
@@ -62,17 +66,15 @@ func applyEksAutoModeRegion(
 			continue
 		}
 
-		// There is only one price offering for a given offer.priceDimensions
+		// Auto Mode On-Demand offers have both a single price dimension and single offer.
 		unitPriceStr := ""
 		for _, offer := range offers {
 			for _, priceDimension := range offer.PriceDimensions {
 				if priceDimension.PricePerUnit == nil {
 					continue
 				}
-				unitPrice, found := priceDimension.PricePerUnit[currency]
-				if found && unitPrice != "" {
+				if unitPrice, found := priceDimension.PricePerUnit[currency]; found && unitPrice != "" {
 					unitPriceStr = unitPrice
-					break
 				}
 			}
 		}
@@ -85,7 +87,6 @@ func applyEksAutoModeRegion(
 		if unitPrice == 0 {
 			continue
 		}
-
 		formatted := formatPrice(unitPrice)
 
 		mu.Lock()
@@ -96,7 +97,6 @@ func applyEksAutoModeRegion(
 		}
 		regionPricing := instance.Pricing[regionName]
 		if regionPricing == nil {
-			// if the instance doesn't have any pricing data associated with the region, make a new map
 			regionPricing = make(map[OS]any)
 			instance.Pricing[regionName] = regionPricing
 		}
@@ -118,7 +118,6 @@ func addEksAutoModePricing(instances map[string]*EC2Instance, china bool) {
 	baseUrl := eksPricingRootNonChina
 	regionIndexPath := eksRegionIndexNonChina
 	currency := "USD"
-
 	if china {
 		baseUrl = eksPricingRootChina
 		regionIndexPath = eksRegionIndexChina
@@ -126,11 +125,10 @@ func addEksAutoModePricing(instances map[string]*EC2Instance, china bool) {
 	}
 
 	var regionIndex eksRegionIndex
-	if err := utils.LoadJson(resolveAwsPricingUrl(baseUrl, regionIndexPath), &regionIndex); err != nil {
-		log.Fatalln("Failed to fetch AmazonEKS region index", err)
-	}
+	loadAwsPricingJson(baseUrl, regionIndexPath, &regionIndex)
 
 	type regionJob struct {
+		// Instead of being a map like eksRegionIndex, both fields are together
 		regionName string
 		url        string
 	}
@@ -149,9 +147,7 @@ func addEksAutoModePricing(instances map[string]*EC2Instance, china bool) {
 		for _, job := range chunk {
 			fg.Add(func() {
 				var data awsutils.RegionData
-				if err := utils.LoadJson(resolveAwsPricingUrl(baseUrl, job.url), &data); err != nil {
-					log.Fatalln("Failed to fetch AmazonEKS region pricing", job.regionName, err)
-				}
+				loadAwsPricingJson(baseUrl, job.url, &data)
 				applyEksAutoModeRegion(instances, job.regionName, data, currency, &mu)
 			})
 		}
