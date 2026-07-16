@@ -8,6 +8,7 @@ export interface PlatformPricing {
     spot_max?: string;
     pct_interrupt?: string;
     emr?: string;
+    eks_auto_mode?: string;
 }
 
 export interface Pricing {
@@ -82,6 +83,8 @@ export interface EC2Instance {
     placement_group_support: boolean;
     linux_virtualization_types?: string[];
     emr: boolean;
+    eks_auto_mode: boolean;
+
     availability_zones?: {
         [region: string]: string[];
     };
