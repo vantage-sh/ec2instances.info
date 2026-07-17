@@ -41,6 +41,8 @@
   "l3_per_numa_node_mb": null,
   "l3_shared": null,
   "network_performance": "100 Gigabit",
+  "baseline_bandwidth_gbps": 100,
+  "burst_bandwidth_gbps": 100,
   "physical_processor": "Intel Xeon Scalable (Icelake)",
   "placement_group_support": true,
   "pretty_name": "X2IEDN 32xlarge",

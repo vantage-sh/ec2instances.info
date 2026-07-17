@@ -226,6 +226,8 @@ const exprColumns = [
     "thread_count_per_numa_node",
     "memory_per_numa_node_mb",
     "l3_per_numa_node_mb",
+    "baseline_bandwidth_gbps",
+    "burst_bandwidth_gbps",
     "ebs_baseline_bandwidth",
     "ebs_baseline_throughput",
     "ebs_baseline_iops",

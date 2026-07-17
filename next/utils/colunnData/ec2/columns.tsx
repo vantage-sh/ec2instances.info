@@ -946,6 +946,60 @@ export const columnsGen = (
         cell: (info) => info.getValue() as string,
     },
     {
+        accessorKey: "baseline_bandwidth_gbps",
+        header: "Network: Baseline Bandwidth",
+        id: "baseline_bandwidth_gbps",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.baseline_bandwidth_gbps;
+            const valueB = rowB.original.baseline_bandwidth_gbps;
+            if (!valueA) return -1;
+            if (!valueB) return 1;
+            return valueA - valueB;
+        },
+        filterFn: (row, _, filterValue) => {
+            const value = row.original.baseline_bandwidth_gbps;
+            if (!value) return false;
+            try {
+                return exprCompiler(filterValue)(value, `${value} Gbps`);
+            } catch {
+                // Just allow all if the expr is invalid.
+                return true;
+            }
+        },
+        cell: (info) => {
+            const value = info.getValue() as number | undefined;
+            if (!value) return undefined;
+            return `${value} Gbps`;
+        },
+    },
+    {
+        accessorKey: "burst_bandwidth_gbps",
+        header: "Network: Burst Bandwidth",
+        id: "burst_bandwidth_gbps",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.burst_bandwidth_gbps;
+            const valueB = rowB.original.burst_bandwidth_gbps;
+            if (!valueA) return -1;
+            if (!valueB) return 1;
+            return valueA - valueB;
+        },
+        filterFn: (row, _, filterValue) => {
+            const value = row.original.burst_bandwidth_gbps;
+            if (!value) return false;
+            try {
+                return exprCompiler(filterValue)(value, `${value} Gbps`);
+            } catch {
+                // Just allow all if the expr is invalid.
+                return true;
+            }
+        },
+        cell: (info) => {
+            const value = info.getValue() as number | undefined;
+            if (!value) return undefined;
+            return `${value} Gbps`;
+        },
+    },
+    {
         accessorKey: "ebs_baseline_bandwidth",
         header: "EBS Optimized: Baseline Bandwidth",
         id: "ebs_baseline_bandwidth",
