@@ -138,6 +138,8 @@ type EC2Instance struct {
 	MaxECSTasks              *int                       `json:"max_ecs_tasks,omitempty"`
 	DateIntroduced           *string                    `json:"date_introduced,omitempty"`
 	MaxPods                  *int                       `json:"max_pods,omitempty"`
+	BaselineBandwidth        *float64                   `json:"baseline_bandwidth_gbps,omitempty"`
+	BurstBandwidth           *float64                   `json:"burst_bandwidth_gbps,omitempty"`
 }
 
 func avg(ints []int) *float64 {
