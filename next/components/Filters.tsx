@@ -29,6 +29,7 @@ interface FiltersProps<DataKey extends keyof typeof columnData> {
     reservedTermOptions: {
         value: string;
         label: string;
+        group?: string;
     }[];
     currencies: CurrencyItem[];
     ecuRename?: string;

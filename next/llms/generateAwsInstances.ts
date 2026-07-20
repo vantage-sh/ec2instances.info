@@ -16,6 +16,24 @@ const tableColumns = [
     ["yrTerm3Savings.noUpfront", "3yr No Upfront (Savings Plan)"],
     ["yrTerm3Savings.partialUpfront", "3yr Partial Upfront (Savings Plan)"],
     ["yrTerm3Savings.allUpfront", "3yr All Upfront (Savings Plan)"],
+    ["yrTerm1InstanceSavings.noUpfront", "1yr No Upfront (Instance Savings Plan)"],
+    [
+        "yrTerm1InstanceSavings.partialUpfront",
+        "1yr Partial Upfront (Instance Savings Plan)",
+    ],
+    [
+        "yrTerm1InstanceSavings.allUpfront",
+        "1yr All Upfront (Instance Savings Plan)",
+    ],
+    ["yrTerm3InstanceSavings.noUpfront", "3yr No Upfront (Instance Savings Plan)"],
+    [
+        "yrTerm3InstanceSavings.partialUpfront",
+        "3yr Partial Upfront (Instance Savings Plan)",
+    ],
+    [
+        "yrTerm3InstanceSavings.allUpfront",
+        "3yr All Upfront (Instance Savings Plan)",
+    ],
     ["yrTerm1Standard.noUpfront", "1yr No Upfront"],
     ["yrTerm1Standard.partialUpfront", "1yr Partial Upfront"],
     ["yrTerm1Standard.allUpfront", "1yr All Upfront"],
@@ -136,6 +154,12 @@ function generateInstanceMarkdown(
             case "yrTerm3Savings.noUpfront":
             case "yrTerm3Savings.partialUpfront":
             case "yrTerm3Savings.allUpfront":
+            case "yrTerm1InstanceSavings.noUpfront":
+            case "yrTerm1InstanceSavings.partialUpfront":
+            case "yrTerm1InstanceSavings.allUpfront":
+            case "yrTerm3InstanceSavings.noUpfront":
+            case "yrTerm3InstanceSavings.partialUpfront":
+            case "yrTerm3InstanceSavings.allUpfront":
             case "yrTerm1Standard.noUpfront":
             case "yrTerm1Standard.partialUpfront":
             case "yrTerm1Standard.allUpfront":
