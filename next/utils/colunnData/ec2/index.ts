@@ -30,6 +30,8 @@ const initialColumnsArr = [
     ["storage_write_iops", false],
     ["arch", false],
     ["network_performance", true],
+    ["baseline_bandwidth_gbps", false],
+    ["burst_bandwidth_gbps", false],
     ["ebs_baseline_bandwidth", false],
     ["ebs_baseline_throughput", false],
     ["ebs_baseline_iops", false],
@@ -183,6 +185,11 @@ export function makePrettyNames<V>(
         makeColumnOption("storage_write_iops", "Instance Store: Write IOPS"),
         makeColumnOption("arch", "Arch"),
         makeColumnOption("network_performance", "Network Performance"),
+        makeColumnOption(
+            "baseline_bandwidth_gbps",
+            "Network: Baseline Bandwidth",
+        ),
+        makeColumnOption("burst_bandwidth_gbps", "Network: Burst Bandwidth"),
         makeColumnOption(
             "ebs_baseline_bandwidth",
             "EBS Optimized: Baseline Bandwidth",
