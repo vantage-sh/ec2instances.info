@@ -277,6 +277,9 @@ func processEC2Data(
 		addEmrPricingUs(instancesHashmap, regionsInverted)
 	}
 
+	// Add EKS Auto Mode management fees (AmazonEKS Price List)
+	addEksAutoModePricing(instancesHashmap, china)
+
 	// Add GPU information
 	addGpuInfo(instancesHashmap)
 

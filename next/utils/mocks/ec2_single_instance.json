@@ -21,6 +21,7 @@
   "ebs_optimized": true,
   "ebs_throughput": 10000,
   "emr": true,
+  "eks_auto_mode": false,
   "enhanced_networking": true,
   "family": "Memory optimized",
   "generation": "current",

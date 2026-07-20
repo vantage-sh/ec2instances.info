@@ -1849,6 +1849,20 @@ export const columnsGen = (
         ),
     },
     {
+        accessorKey: "pricing",
+        header: "EKS Auto Mode cost",
+        size: 140,
+        id: "cost-eks-auto-mode",
+        ...getPricingSorter(
+            selectedRegion,
+            pricingUnit,
+            costDuration,
+            (pricing) => pricing?.eks_auto_mode?.eks_auto_mode,
+            true,
+            currency,
+        ),
+    },
+    {
         accessorKey: "generation",
         header: "Generation",
         size: 120,
