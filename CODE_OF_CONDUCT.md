@@ -3,6 +3,7 @@
 We want ec2instances.info to be a welcoming and productive project for everyone.
 
 By participating, you agree to:
+
 - Be respectful and constructive in discussions and code reviews.
 - Assume good intent and provide feedback professionally.
 - Focus on what's best for the project and its users.
