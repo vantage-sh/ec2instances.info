@@ -16,7 +16,10 @@ const tableColumns = [
     ["yrTerm3Savings.noUpfront", "3yr No Upfront (Savings Plan)"],
     ["yrTerm3Savings.partialUpfront", "3yr Partial Upfront (Savings Plan)"],
     ["yrTerm3Savings.allUpfront", "3yr All Upfront (Savings Plan)"],
-    ["yrTerm1InstanceSavings.noUpfront", "1yr No Upfront (Instance Savings Plan)"],
+    [
+        "yrTerm1InstanceSavings.noUpfront",
+        "1yr No Upfront (Instance Savings Plan)",
+    ],
     [
         "yrTerm1InstanceSavings.partialUpfront",
         "1yr Partial Upfront (Instance Savings Plan)",
@@ -25,7 +28,10 @@ const tableColumns = [
         "yrTerm1InstanceSavings.allUpfront",
         "1yr All Upfront (Instance Savings Plan)",
     ],
-    ["yrTerm3InstanceSavings.noUpfront", "3yr No Upfront (Instance Savings Plan)"],
+    [
+        "yrTerm3InstanceSavings.noUpfront",
+        "3yr No Upfront (Instance Savings Plan)",
+    ],
     [
         "yrTerm3InstanceSavings.partialUpfront",
         "3yr Partial Upfront (Instance Savings Plan)",
