@@ -8,6 +8,7 @@ export interface PlatformPricing {
     spot_max?: string;
     pct_interrupt?: string;
     emr?: string;
+    eks_auto_mode?: string;
 }
 
 export interface Pricing {
@@ -59,6 +60,8 @@ export interface EC2Instance {
     };
     arch: string[];
     network_performance: string;
+    baseline_bandwidth_gbps?: number;
+    burst_bandwidth_gbps?: number;
     ebs_baseline_bandwidth?: number;
     ebs_baseline_throughput: number;
     ebs_baseline_iops: number;
@@ -82,6 +85,7 @@ export interface EC2Instance {
     placement_group_support: boolean;
     linux_virtualization_types?: string[];
     emr: boolean;
+    eks_auto_mode: boolean;
     availability_zones?: {
         [region: string]: string[];
     };

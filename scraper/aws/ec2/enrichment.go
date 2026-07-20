@@ -112,6 +112,13 @@ func enrichEc2Instance(instance *EC2Instance, attributes map[string]string, ec2A
 		} else if *apiDescription.NetworkInfo.NetworkPerformance != "NA" {
 			instance.NetworkPerformance = *apiDescription.NetworkInfo.NetworkPerformance
 		}
+
+		if len(apiDescription.NetworkInfo.NetworkCards) > 0 {
+			card := apiDescription.NetworkInfo.NetworkCards[0]
+			instance.BaselineBandwidth = card.BaselineBandwidthInGbps
+			instance.BurstBandwidth = card.PeakBandwidthInGbps
+		}
+
 	} else {
 		if instance.Arch == nil {
 			// Try and figure out the value with a best guess
