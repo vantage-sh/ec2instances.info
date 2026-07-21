@@ -3,6 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import { ClockFadingIcon } from "lucide-react";
 import sortByInstanceType from "@/utils/sortByInstanceType";
+import { commitmentTypeLabel } from "@/utils/dataMappings";
 import { regex, makeCellWithRegexSorter, expr } from "../shared";
 import exprCompiler from "@/utils/expr";
 
@@ -1388,7 +1389,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Linux Reserved cost",
+        header: `Linux ${commitmentTypeLabel(reservedTerm)} cost`,
         size: 180,
         id: "cost-reserved",
         ...getPricingSorter(
@@ -1446,7 +1447,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "RHEL Reserved cost",
+        header: `RHEL ${commitmentTypeLabel(reservedTerm)} cost`,
         id: "cost-reserved-rhel",
         ...getPricingSorter(
             selectedRegion,
@@ -1498,7 +1499,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "RHEL with HA Reserved cost",
+        header: `RHEL with HA ${commitmentTypeLabel(reservedTerm)} cost`,
         id: "cost-reserved-rhelHA",
         ...getPricingSorter(
             selectedRegion,
@@ -1550,7 +1551,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "SLES Reserved cost",
+        header: `SLES ${commitmentTypeLabel(reservedTerm)} cost`,
         id: "cost-reserved-sles",
         ...getPricingSorter(
             selectedRegion,
@@ -1602,7 +1603,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Windows Reserved cost",
+        header: `Windows ${commitmentTypeLabel(reservedTerm)} cost`,
         id: "cost-reserved-mswin",
         ...getPricingSorter(
             selectedRegion,
@@ -1654,7 +1655,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Dedicated Host Reserved",
+        header: `Dedicated Host ${commitmentTypeLabel(reservedTerm)}`,
         id: "cost-reserved-dedicated",
         ...getPricingSorter(
             selectedRegion,
@@ -1680,7 +1681,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Windows SQL Web Reserved cost",
+        header: `Windows SQL Web ${commitmentTypeLabel(reservedTerm)} cost`,
         id: "cost-reserved-mswinSQLWeb",
         ...getPricingSorter(
             selectedRegion,
@@ -1706,7 +1707,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Windows SQL Std Reserved cost",
+        header: `Windows SQL Std ${commitmentTypeLabel(reservedTerm)} cost`,
         id: "cost-reserved-mswinSQL",
         ...getPricingSorter(
             selectedRegion,
@@ -1732,7 +1733,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Windows SQL Ent Reserved cost",
+        header: `Windows SQL Ent ${commitmentTypeLabel(reservedTerm)} cost`,
         id: "cost-reserved-mswinSQLEnterprise",
         ...getPricingSorter(
             selectedRegion,
@@ -1758,7 +1759,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Linux SQL Web Reserved cost",
+        header: `Linux SQL Web ${commitmentTypeLabel(reservedTerm)} cost`,
         id: "cost-reserved-linuxSQLWeb",
         ...getPricingSorter(
             selectedRegion,
@@ -1784,7 +1785,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Linux SQL Std Reserved cost",
+        header: `Linux SQL Std ${commitmentTypeLabel(reservedTerm)} cost`,
         id: "cost-reserved-linuxSQL",
         ...getPricingSorter(
             selectedRegion,
@@ -1810,7 +1811,7 @@ export const columnsGen = (
     },
     {
         accessorKey: "pricing",
-        header: "Linux SQL Ent Reserved cost",
+        header: `Linux SQL Ent ${commitmentTypeLabel(reservedTerm)} cost`,
         id: "cost-reserved-linuxSQLEnterprise",
         ...getPricingSorter(
             selectedRegion,

@@ -93,6 +93,7 @@ export function makePrettyNames<V>(
         key: keyof typeof initialColumnsValue,
         label: string,
     ) => V,
+    _reservedTerm: string,
 ) {
     return [
         makeColumnOption("pretty_name_azure", "Name"),

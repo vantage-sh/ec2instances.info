@@ -163,8 +163,11 @@ export default function Filters<DataKey extends keyof typeof columnData>({
                     columnData[columnAtomKey].initialColumnsValue[key],
             };
         }
-        return columnData[columnAtomKey].makePrettyNames(makeColumnOption);
-    }, [JSON.stringify(columnVisibility)]);
+        return columnData[columnAtomKey].makePrettyNames(
+            makeColumnOption,
+            reservedTerm,
+        );
+    }, [JSON.stringify(columnVisibility), reservedTerm, columnAtomKey]);
 
     let pricingUnitOptionsCpy = pricingUnitOptions;
     if (ecuRename) {

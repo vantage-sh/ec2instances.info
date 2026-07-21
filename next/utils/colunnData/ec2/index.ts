@@ -1,5 +1,6 @@
 export { columnsGen } from "./columns";
 import { transformAllDataTables } from "../shared";
+import { commitmentTypeLabel } from "@/utils/dataMappings";
 
 const initialColumnsArr = [
     ["pretty_name", true],
@@ -132,7 +133,9 @@ export function makePrettyNames<V>(
         key: keyof typeof initialColumnsValue,
         label: string,
     ) => V,
+    reservedTerm: string,
 ) {
+    const commitment = commitmentTypeLabel(reservedTerm);
     return [
         makeColumnOption("pretty_name", "Name"),
         makeColumnOption("instance_type", "API Name"),
@@ -225,15 +228,18 @@ export function makePrettyNames<V>(
         makeColumnOption("emr", "On EMR"),
         makeColumnOption("availability_zones", "Availability Zones"),
         makeColumnOption("cost-ondemand", "On Demand"),
-        makeColumnOption("cost-reserved", "Linux Reserved cost"),
+        makeColumnOption("cost-reserved", `Linux ${commitment} cost`),
         makeColumnOption("cost-spot-min", "Linux Spot Minimum cost"),
         makeColumnOption("cost-spot-max", "Linux Spot Average cost"),
         makeColumnOption("cost-ondemand-rhel", "RHEL On Demand cost"),
-        makeColumnOption("cost-reserved-rhel", "RHEL Reserved cost"),
+        makeColumnOption("cost-reserved-rhel", `RHEL ${commitment} cost`),
         makeColumnOption("cost-spot-min-rhel", "RHEL Spot Minimum cost"),
         makeColumnOption("cost-spot-max-rhel", "RHEL Spot Maximum cost"),
         makeColumnOption("cost-ondemand-rhelHA", "RHEL with HA On Demand cost"),
-        makeColumnOption("cost-reserved-rhelHA", "RHEL with HA Reserved cost"),
+        makeColumnOption(
+            "cost-reserved-rhelHA",
+            `RHEL with HA ${commitment} cost`,
+        ),
         makeColumnOption(
             "cost-spot-min-rhelHA",
             "RHEL with HA Spot Minimum cost",
@@ -243,22 +249,25 @@ export function makePrettyNames<V>(
             "RHEL with HA Spot Maximum cost",
         ),
         makeColumnOption("cost-ondemand-sles", "SLES On Demand cost"),
-        makeColumnOption("cost-reserved-sles", "SLES Reserved cost"),
+        makeColumnOption("cost-reserved-sles", `SLES ${commitment} cost`),
         makeColumnOption("cost-spot-min-sles", "SLES Spot Minimum cost"),
         makeColumnOption("cost-spot-max-sles", "SLES Spot Maximum cost"),
         makeColumnOption("cost-ondemand-mswin", "Windows On Demand cost"),
-        makeColumnOption("cost-reserved-mswin", "Windows Reserved cost"),
+        makeColumnOption("cost-reserved-mswin", `Windows ${commitment} cost`),
         makeColumnOption("cost-spot-min-mswin", "Windows Spot Minimum cost"),
         makeColumnOption("cost-spot-max-mswin", "Windows Spot Average cost"),
         makeColumnOption("cost-ondemand-dedicated", "Dedicated Host On Demand"),
-        makeColumnOption("cost-reserved-dedicated", "Dedicated Host Reserved"),
+        makeColumnOption(
+            "cost-reserved-dedicated",
+            `Dedicated Host ${commitment}`,
+        ),
         makeColumnOption(
             "cost-ondemand-mswinSQLWeb",
             "Windows SQL Web On Demand cost",
         ),
         makeColumnOption(
             "cost-reserved-mswinSQLWeb",
-            "Windows SQL Web Reserved cost",
+            `Windows SQL Web ${commitment} cost`,
         ),
         makeColumnOption(
             "cost-ondemand-mswinSQL",
@@ -266,7 +275,7 @@ export function makePrettyNames<V>(
         ),
         makeColumnOption(
             "cost-reserved-mswinSQL",
-            "Windows SQL Std Reserved cost",
+            `Windows SQL Std ${commitment} cost`,
         ),
         makeColumnOption(
             "cost-ondemand-mswinSQLEnterprise",
@@ -274,7 +283,7 @@ export function makePrettyNames<V>(
         ),
         makeColumnOption(
             "cost-reserved-mswinSQLEnterprise",
-            "Windows SQL Ent Reserved cost",
+            `Windows SQL Ent ${commitment} cost`,
         ),
         makeColumnOption(
             "cost-ondemand-linuxSQLWeb",
@@ -282,7 +291,7 @@ export function makePrettyNames<V>(
         ),
         makeColumnOption(
             "cost-reserved-linuxSQLWeb",
-            "Linux SQL Web Reserved cost",
+            `Linux SQL Web ${commitment} cost`,
         ),
         makeColumnOption(
             "cost-ondemand-linuxSQL",
@@ -290,7 +299,7 @@ export function makePrettyNames<V>(
         ),
         makeColumnOption(
             "cost-reserved-linuxSQL",
-            "Linux SQL Std Reserved cost",
+            `Linux SQL Std ${commitment} cost`,
         ),
         makeColumnOption(
             "cost-ondemand-linuxSQLEnterprise",
@@ -298,7 +307,7 @@ export function makePrettyNames<V>(
         ),
         makeColumnOption(
             "cost-reserved-linuxSQLEnterprise",
-            "Linux SQL Ent Reserved cost",
+            `Linux SQL Ent ${commitment} cost`,
         ),
         makeColumnOption(
             "spot-interrupt-rate",
