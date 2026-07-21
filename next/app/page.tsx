@@ -58,6 +58,12 @@ export default async function Home() {
                     "yrTerm3Savings.noUpfront",
                     "yrTerm3Savings.partialUpfront",
                     "yrTerm3Savings.allUpfront",
+                    "yrTerm1InstanceSavings.noUpfront",
+                    "yrTerm1InstanceSavings.partialUpfront",
+                    "yrTerm1InstanceSavings.allUpfront",
+                    "yrTerm3InstanceSavings.noUpfront",
+                    "yrTerm3InstanceSavings.partialUpfront",
+                    "yrTerm3InstanceSavings.allUpfront",
                 ]}
             />
         </>

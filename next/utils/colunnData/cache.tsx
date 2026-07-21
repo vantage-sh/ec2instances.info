@@ -9,6 +9,7 @@ import { EC2Instance, PricingUnit, CostDuration } from "@/types";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import sortByInstanceType from "../sortByInstanceType";
 import { getPricingSorter } from "./ec2/columns";
+import { commitmentTypeLabel } from "@/utils/dataMappings";
 
 const initialColumnsArr = [
     ["pretty_name", true],
@@ -42,7 +43,9 @@ export function makePrettyNames<V>(
         key: keyof typeof initialColumnsValue,
         label: string,
     ) => V,
+    reservedTerm: string,
 ) {
+    const commitment = commitmentTypeLabel(reservedTerm);
     return [
         makeColumnOption("pretty_name", "Name"),
         makeColumnOption("instance_type", "API Name"),
@@ -51,11 +54,14 @@ export function makePrettyNames<V>(
         makeColumnOption("vcpus", "vCPUs"),
         makeColumnOption("networkperf", "Network Performance"),
         makeColumnOption("cost-ondemand-redis", "Redis Cost"),
-        makeColumnOption("cost-reserved-redis", "Redis Reserved Cost"),
+        makeColumnOption("cost-reserved-redis", `Redis ${commitment} Cost`),
         makeColumnOption("cost-ondemand-memcached", "Memcached On Demand Cost"),
-        makeColumnOption("cost-reserved-memcached", "Memcached Reserved Cost"),
+        makeColumnOption(
+            "cost-reserved-memcached",
+            `Memcached ${commitment} Cost`,
+        ),
         makeColumnOption("cost-ondemand-valkey", "Valkey On Demand Cost"),
-        makeColumnOption("cost-reserved-valkey", "Valkey Reserved Cost"),
+        makeColumnOption("cost-reserved-valkey", `Valkey ${commitment} Cost`),
         makeColumnOption("generation", "Generation"),
     ];
 }
@@ -153,7 +159,7 @@ export const columnsGen = (
     {
         accessorKey: "pricing",
         id: "cost-reserved-redis",
-        header: "Redis Reserved Cost",
+        header: `Redis ${commitmentTypeLabel(reservedTerm)} Cost`,
         ...getPricingSorter(
             selectedRegion,
             pricingUnit,
@@ -179,7 +185,7 @@ export const columnsGen = (
     {
         accessorKey: "pricing",
         id: "cost-reserved-memcached",
-        header: "Memcached Reserved Cost",
+        header: `Memcached ${commitmentTypeLabel(reservedTerm)} Cost`,
         ...getPricingSorter(
             selectedRegion,
             pricingUnit,
@@ -205,7 +211,7 @@ export const columnsGen = (
     {
         accessorKey: "pricing",
         id: "cost-reserved-valkey",
-        header: "Valkey Reserved Cost",
+        header: `Valkey ${commitmentTypeLabel(reservedTerm)} Cost`,
         ...getPricingSorter(
             selectedRegion,
             pricingUnit,

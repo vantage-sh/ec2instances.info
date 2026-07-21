@@ -9,6 +9,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 import { getPricingSorter } from "./ec2/columns";
 import sortByInstanceType from "../sortByInstanceType";
+import { commitmentTypeLabel } from "@/utils/dataMappings";
 
 const initialColumnsArr = [
     ["name", true],
@@ -64,7 +65,9 @@ export function makePrettyNames<V>(
         key: keyof typeof initialColumnsValue,
         label: string,
     ) => V,
+    reservedTerm: string,
 ) {
+    const commitment = commitmentTypeLabel(reservedTerm);
     return [
         makeColumnOption("name", "Name"),
         makeColumnOption("apiname", "API Name"),
@@ -77,26 +80,29 @@ export function makePrettyNames<V>(
         makeColumnOption("networkperf", "Network Performance"),
         makeColumnOption("architecture", "Arch"),
         makeColumnOption("cost-ondemand-14", "PostgreSQL"),
-        makeColumnOption("cost-reserved-14t", "PostgreSQL Reserved Cost"),
+        makeColumnOption("cost-reserved-14t", `PostgreSQL ${commitment} Cost`),
         makeColumnOption("cost-ondemand-2", "MySQL On Demand Cost"),
-        makeColumnOption("cost-reserved-2", "MySQL Reserved Cost"),
+        makeColumnOption("cost-reserved-2", `MySQL ${commitment} Cost`),
         makeColumnOption(
             "cost-ondemand-10",
             "SQL Server Expresss On Demand Cost",
         ),
         makeColumnOption(
             "cost-reserved-10",
-            "SQL Server Expresss Reserved Cost",
+            `SQL Server Expresss ${commitment} Cost`,
         ),
         makeColumnOption("cost-ondemand-11", "SQL Server Web On Demand Cost"),
-        makeColumnOption("cost-reserved-11", "SQL Server Web Reserved Cost"),
+        makeColumnOption(
+            "cost-reserved-11",
+            `SQL Server Web ${commitment} Cost`,
+        ),
         makeColumnOption(
             "cost-ondemand-12",
             "SQL Server Standard On Demand Cost",
         ),
         makeColumnOption(
             "cost-reserved-12",
-            "SQL Server Standard Reserved Cost",
+            `SQL Server Standard ${commitment} Cost`,
         ),
         makeColumnOption(
             "cost-ondemand-15",
@@ -104,7 +110,7 @@ export function makePrettyNames<V>(
         ),
         makeColumnOption(
             "cost-reserved-15",
-            "SQL Server Enterprise Reserved Cost",
+            `SQL Server Enterprise ${commitment} Cost`,
         ),
         makeColumnOption(
             "cost-ondemand-21",
@@ -112,21 +118,21 @@ export function makePrettyNames<V>(
         ),
         makeColumnOption(
             "cost-reserved-21",
-            "Aurora Postgres & MySQL Reserved Cost",
+            `Aurora Postgres & MySQL ${commitment} Cost`,
         ),
         makeColumnOption(
             "cost-ondemand-211",
             "Aurora I/O Optimized On Demand Cost",
         ),
         makeColumnOption("cost-ondemand-18", "MariaDB On Demand Cost"),
-        makeColumnOption("cost-reserved-18", "MariaDB Reserved Cost"),
+        makeColumnOption("cost-reserved-18", `MariaDB ${commitment} Cost`),
         makeColumnOption(
             "cost-ondemand-5",
             "Oracle Enterprise BYOL On Demand Cost",
         ),
         makeColumnOption(
             "cost-reserved-5",
-            "Oracle Enterprise BYOL Reserved Cost",
+            `Oracle Enterprise BYOL ${commitment} Cost`,
         ),
         makeColumnOption(
             "ebs-baseline-bandwidth",
@@ -280,7 +286,7 @@ export const columnsGen = (
         ),
     },
     {
-        header: "PostgreSQL Reserved Cost",
+        header: `PostgreSQL ${commitmentTypeLabel(reservedTerm)} Cost`,
         id: "cost-reserved-14t",
         accessorKey: "pricing",
         ...getPricingSorter(
@@ -306,7 +312,7 @@ export const columnsGen = (
         ),
     },
     {
-        header: "MySQL Reserved Cost",
+        header: `MySQL ${commitmentTypeLabel(reservedTerm)} Cost`,
         id: "cost-reserved-2",
         accessorKey: "pricing",
         ...getPricingSorter(
@@ -332,7 +338,7 @@ export const columnsGen = (
         ),
     },
     {
-        header: "SQL Server Expresss Reserved Cost",
+        header: `SQL Server Expresss ${commitmentTypeLabel(reservedTerm)} Cost`,
         id: "cost-reserved-10",
         accessorKey: "pricing",
         ...getPricingSorter(
@@ -358,7 +364,7 @@ export const columnsGen = (
         ),
     },
     {
-        header: "SQL Server Web Reserved Cost",
+        header: `SQL Server Web ${commitmentTypeLabel(reservedTerm)} Cost`,
         id: "cost-reserved-11",
         accessorKey: "pricing",
         ...getPricingSorter(
@@ -384,7 +390,7 @@ export const columnsGen = (
         ),
     },
     {
-        header: "SQL Server Standard Reserved Cost",
+        header: `SQL Server Standard ${commitmentTypeLabel(reservedTerm)} Cost`,
         id: "cost-reserved-12",
         accessorKey: "pricing",
         ...getPricingSorter(
@@ -410,7 +416,7 @@ export const columnsGen = (
         ),
     },
     {
-        header: "SQL Server Enterprise Reserved Cost",
+        header: `SQL Server Enterprise ${commitmentTypeLabel(reservedTerm)} Cost`,
         id: "cost-reserved-15",
         accessorKey: "pricing",
         ...getPricingSorter(
@@ -436,7 +442,7 @@ export const columnsGen = (
         ),
     },
     {
-        header: "Aurora Postgres & MySQL Reserved Cost",
+        header: `Aurora Postgres & MySQL ${commitmentTypeLabel(reservedTerm)} Cost`,
         id: "cost-reserved-21",
         accessorKey: "pricing",
         ...getPricingSorter(
@@ -475,7 +481,7 @@ export const columnsGen = (
         ),
     },
     {
-        header: "MariaDB Reserved Cost",
+        header: `MariaDB ${commitmentTypeLabel(reservedTerm)} Cost`,
         id: "cost-reserved-18",
         accessorKey: "pricing",
         ...getPricingSorter(
@@ -501,7 +507,7 @@ export const columnsGen = (
         ),
     },
     {
-        header: "Oracle Enterprise Reserved Cost",
+        header: `Oracle Enterprise ${commitmentTypeLabel(reservedTerm)} Cost`,
         id: "cost-reserved-5",
         accessorKey: "pricing",
         ...getPricingSorter(

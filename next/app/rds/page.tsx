@@ -49,7 +49,6 @@ export default async function RDS() {
                 compressedDataPathTemplate={`/remaining-rds-instances.msgpack.xz?cache=${instancesHash}`}
                 columnAtomKey="rds"
                 marketingData={marketingData}
-                savingsPlanSupported={["yrTerm1Savings.noUpfront"]}
             />
         </>
     );
