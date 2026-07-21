@@ -47,9 +47,14 @@ type CategoryItem struct {
 }
 
 type GeoTaxonomy struct {
-	Type             string            `json:"type"`
-	RegionalMetadata *RegionalMetadata `json:"regionalMetadata,omitempty"`
-	Regions          []string          `json:"regions,omitempty"`
+	Type                  string                 `json:"type"`
+	RegionalMetadata      *RegionalMetadata      `json:"regionalMetadata,omitempty"`
+	MultiRegionalMetadata *MultiRegionalMetadata `json:"multiRegionalMetadata,omitempty"`
+	Regions               []string               `json:"regions,omitempty"`
+}
+
+type MultiRegionalMetadata struct {
+	Regions []RegionInfo `json:"regions"`
 }
 
 type RegionalMetadata struct {
@@ -123,6 +128,16 @@ type MachineType struct {
 	MaximumPersistentDisks       int           `json:"maximumPersistentDisks"`
 	MaximumPersistentDisksSizeGb string        `json:"maximumPersistentDisksSizeGb"`
 	Accelerators                 []Accelerator `json:"accelerators,omitempty"`
+	// BundledLocalSsds is only present for machine types that come with Local
+	// SSD built in (Z3, the -lssd shapes of C3/C3D/C4/C4A/C4D/H4D, and the
+	// accelerator-optimized series). Families where Local SSD is an optional
+	// per-VM attachment omit the field entirely.
+	BundledLocalSsds *BundledLocalSsds `json:"bundledLocalSsds,omitempty"`
+}
+
+type BundledLocalSsds struct {
+	DefaultInterface string `json:"defaultInterface"`
+	PartitionCount   int    `json:"partitionCount"`
 }
 
 type Accelerator struct {
@@ -150,10 +165,16 @@ type MachineSpecs struct {
 	MemoryGB    float64
 	Family      string
 	IsSharedCPU bool
-	GPU         int
-	GPUModel    string
-	GPUMemory   int
-	Zones       []string
+	// GPU is the attached GPU count, float64 because the fractional-slice G4
+	// shapes expose a partial GPU (0.125/0.25/0.5). It maps directly to the
+	// float64 GCPInstance.GPU output field.
+	GPU       float64
+	GPUModel  string
+	GPUMemory int
+	Zones     []string
+	// LocalSSDGB is the bundled Local SSD capacity in GB, 0 when the machine
+	// type has none. Optional (user-attachable) Local SSD is never counted.
+	LocalSSDGB int
 }
 
 // gpuMemoryByModel maps a GCP guestAcceleratorType (the model string the
@@ -163,16 +184,89 @@ type MachineSpecs struct {
 // https://cloud.google.com/compute/docs/accelerator-optimized-machines).
 // Unknown models return 0 so the field is omitted rather than fabricated.
 var gpuMemoryByModel = map[string]int{
-	"nvidia-h200-141gb":     141, // A3 Ultra
-	"nvidia-h100-80gb":      80,  // A3 High/Edge
-	"nvidia-h100-mega-80gb": 80,  // A3 Mega
-	"nvidia-a100-80gb":      80,  // A2 Ultra
-	"nvidia-tesla-a100":     40,  // A2 Standard (A100 40GB)
-	"nvidia-l4":             24,  // G2
+	"nvidia-h200-141gb":       141, // A3 Ultra
+	"nvidia-h100-80gb":        80,  // A3 High/Edge
+	"nvidia-h100-mega-80gb":   80,  // A3 Mega
+	"nvidia-a100-80gb":        80,  // A2 Ultra
+	"nvidia-tesla-a100":       40,  // A2 Standard (A100 40GB)
+	"nvidia-l4":               24,  // G2
+	"nvidia-b200":             180, // A4 (a4-highgpu-8g: 1,440 GB / 8 GPUs)
+	"nvidia-gb200":            186, // A4X (a4x-highgpu-4g: 744 GB / 4 GPUs)
+	"nvidia-gb300":            279, // A4X Max (a4x-maxgpu-4g-metal: 1,116 GB / 4 GPUs)
+	"nvidia-rtx-pro-6000":     96,  // G4 (g4-standard-48: one full 96 GB GPU)
+	"nvidia-rtx-pro-6000-vws": 96,  // G4 (same physical GPU, vWS variant)
+}
+
+// g4FractionalGPU describes the G4 shapes that expose a fractional slice (vGPU)
+// of a single RTX PRO 6000 rather than a whole GPU: g4-standard-6 = 1/8, -12 =
+// 1/4, -24 = 1/2, giving 12/24/48 GiB. The Compute Engine API reports these with
+// a whole-number GPU count, so both the count and count*96 memory would overstate
+// them; the machine-specs path reads the true fraction and memory here instead.
+// g4-standard-48 and larger are whole-GPU shapes (48 vCPU per GPU) and use the
+// normal count / count*96 derivation.
+var g4FractionalGPU = map[string]struct {
+	count     float64
+	memoryGiB int
+}{
+	"g4-standard-6":  {count: 0.125, memoryGiB: 12},
+	"g4-standard-12": {count: 0.25, memoryGiB: 24},
+	"g4-standard-24": {count: 0.5, memoryGiB: 48},
 }
 
 func totalGPUMemory(gpuCount int, gpuModel string) int {
 	return gpuCount * gpuMemoryByModel[gpuModel]
+}
+
+// gpuSpec resolves the reported GPU count and total GPU memory for a machine
+// type. Whole-GPU shapes multiply the API's accelerator count by the per-GPU
+// memory; the fractional-slice G4 shapes (which the API reports with a
+// whole-number count) instead report their true fraction and documented
+// per-slice memory from g4FractionalGPU.
+func gpuSpec(machineTypeName, gpuModel string, acceleratorCount int) (gpuCount float64, gpuMemoryGiB int) {
+	if fractional, ok := g4FractionalGPU[machineTypeName]; ok {
+		return fractional.count, fractional.memoryGiB
+	}
+	return float64(acceleratorCount), totalGPUMemory(acceleratorCount, gpuModel)
+}
+
+// localSSDPartitionGB returns the size in GB of a single bundled Local SSD
+// partition for a machine type. Most machine series bundle Local SSD in
+// 375 GB partitions; Titanium SSD series use larger disks whose sizes only
+// appear in the per-series docs: Z3 is 3,000 GiB (6,000 GiB bare metal), C4
+// bare metal is 3,000 GiB (c4-standard-288-lssd-metal: 6 x 3,000 GiB), and
+// A4X/A4X Max bundle 12,000 GiB as 4 x 3,000 GiB (a4x-highgpu-4g and
+// a4x-maxgpu-4g-metal).
+func localSSDPartitionGB(machineTypeName string) int {
+	nameLower := strings.ToLower(machineTypeName)
+	isMetal := strings.HasSuffix(nameLower, "-metal")
+	switch {
+	case strings.HasPrefix(nameLower, "z3-") && isMetal:
+		return 6000
+	case strings.HasPrefix(nameLower, "z3-"):
+		return 3000
+	case strings.HasPrefix(nameLower, "c4-") && isMetal:
+		return 3000
+	case strings.HasPrefix(nameLower, "a4x-"):
+		return 3000
+	default:
+		return 375
+	}
+}
+
+// bundledLocalSSDCapacityGB returns the total bundled Local SSD capacity in GB
+// for a machine type, or 0 when the shape has none. Only bundled capacity is
+// reported: families where Local SSD is an optional per-VM attachment
+// (N1/N2/N2D/C2/...) return 0 because attached disks are a user choice, not
+// part of the machine type.
+func bundledLocalSSDCapacityGB(mt MachineType) int {
+	partitions := 0
+	if mt.BundledLocalSsds != nil {
+		partitions = mt.BundledLocalSsds.PartitionCount
+	}
+	if partitions <= 0 {
+		return 0
+	}
+	return partitions * localSSDPartitionGB(mt.Name)
 }
 
 // Fetch all SKUs for Compute Engine with pagination
@@ -482,19 +576,20 @@ func fetchMachineTypes() (map[string]*MachineSpecs, error) {
 						Family:      family,
 						IsSharedCPU: mt.IsSharedCpu,
 						Zones:       []string{zone},
+						LocalSSDGB:  bundledLocalSSDCapacityGB(mt),
 					}
 
-					// Handle GPUs/accelerators
+					// Handle GPUs/accelerators. Per-GPU memory is not exposed by
+					// the Compute Engine machineTypes API, so gpuSpec derives it
+					// from the model string (and handles the fractional-slice G4
+					// shapes whose whole-number count would otherwise overstate
+					// GPU memory).
 					if len(mt.Accelerators) > 0 {
-						specs.GPU = mt.Accelerators[0].GuestAcceleratorCount
 						specs.GPUModel = mt.Accelerators[0].GuestAcceleratorType
-						// Per-GPU memory is not exposed by the Compute Engine
-						// machineTypes API, so derive it from the model string
-						// using the documented per-GPU memory map. GPU_memory
-						// is total memory across all attached GPUs.
-						specs.GPUMemory = totalGPUMemory(
-							specs.GPU,
+						specs.GPU, specs.GPUMemory = gpuSpec(
+							mt.Name,
 							specs.GPUModel,
+							mt.Accelerators[0].GuestAcceleratorCount,
 						)
 					}
 
@@ -521,6 +616,16 @@ func determineMachineFamily(name string) string {
 
 	// Check for specific patterns
 	switch {
+	// Storage optimized (checked ahead of the highmem rule below: every real
+	// Z3 shape is named z3-highmem-*, so the memory-optimized "highmem" check
+	// would otherwise shadow this case entirely)
+	case strings.HasPrefix(nameLower, "z3-"):
+		return "Storage optimized"
+
+	// Network optimized
+	case strings.HasPrefix(nameLower, "c4n-"):
+		return "Network optimized"
+
 	// Memory optimized
 	case strings.Contains(nameLower, "highmem"),
 		strings.Contains(nameLower, "megamem"),
@@ -529,6 +634,7 @@ func determineMachineFamily(name string) string {
 		strings.HasPrefix(nameLower, "m2-"),
 		strings.HasPrefix(nameLower, "m3-"),
 		strings.HasPrefix(nameLower, "m4-"),
+		strings.HasPrefix(nameLower, "m4n-"),
 		strings.HasPrefix(nameLower, "x4-"):
 		return "Memory optimized"
 
@@ -540,7 +646,9 @@ func determineMachineFamily(name string) string {
 		strings.HasPrefix(nameLower, "c3d-"),
 		strings.HasPrefix(nameLower, "c4-"),
 		strings.HasPrefix(nameLower, "c4a-"),
-		strings.HasPrefix(nameLower, "h3-"):
+		strings.HasPrefix(nameLower, "c4d-"),
+		strings.HasPrefix(nameLower, "h3-"),
+		strings.HasPrefix(nameLower, "h4d-"):
 		// c4-highmem and similar should be memory optimized
 		if strings.Contains(nameLower, "highmem") {
 			return "Memory optimized"
@@ -550,12 +658,11 @@ func determineMachineFamily(name string) string {
 	// Accelerator optimized (GPU)
 	case strings.HasPrefix(nameLower, "a2-"),
 		strings.HasPrefix(nameLower, "a3-"),
-		strings.HasPrefix(nameLower, "g2-"):
+		strings.HasPrefix(nameLower, "a4-"),
+		strings.HasPrefix(nameLower, "a4x-"),
+		strings.HasPrefix(nameLower, "g2-"),
+		strings.HasPrefix(nameLower, "g4-"):
 		return "Accelerator optimized"
-
-	// Storage optimized
-	case strings.HasPrefix(nameLower, "z3-"):
-		return "Storage optimized"
 
 	// General purpose (default)
 	default:
@@ -571,7 +678,42 @@ func determineMachineFamily(name string) string {
 // "Sole Tenancy Instance RAM running in Jakarta"
 // "Licensing Fee for Windows Server 2012 BYOL (CPU cost)"
 // "Licensing Fee for Windows Server 2012 BYOL (RAM cost)"
-var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2d|n2|n4d|n4|e2|e2a|c2|c2d|m1|m2|m3|m4|t2d|t2a|a2|a3|g2|h3|c3|c3d|z3|c4)\b.*(?:instance\s+(core|ram)|\((?:cpu|ram)\s+cost\))`)
+// m4ultramem224 is listed ahead of m4n/m4: m4-ultramem-224 is billed under its
+// own dedicated "M4Ultramem224 Instance Core/Ram" SKU pair rather than the
+// plain M4 rates that cover every other M4 shape (see the family-override
+// comment in processGCPData for why this needs its own bucket).
+//
+// Accelerator exclusions: g4, a4 and a4x are deliberately absent. Their billing
+// is dominated by a GPU charge this scraper does not assemble (G4: the
+// "... RTX 6000 96GB ..." GPU SKUs; A4: it bills *solely* as bundled
+// "A4 Nvidia B200 (1 gpu slice)" SKUs with no core/RAM SKUs to sum; A4X: no
+// public SKUs yet), so emitting a core+RAM-only price would understate them.
+// a2, a3 and g2 stay: they are pre-existing upstream coverage and dropping them
+// would regress the current site. They share the same GPU-charge gap; a
+// follow-up will price the GPU component behind a completeness guard, after
+// which the excluded families can return.
+var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2d|n2|n4d|n4a|n4|e2|e2a|c2|c2d|m1|m2|m3|m4ultramem224|m4n|m4|x4|t2d|t2a|a2|a3|g2|h3|h4d|c3|c3d|z3|c4a|c4d|c4n|c4)\b.*(?:instance\s+(core|ram)|\((?:cpu|ram)\s+cost\))`)
+
+// legacySKURegex matches the first-generation SKU naming formats that predate
+// the "<FAMILY> Instance Core/Ram" convention and carry no machine family token
+// for machineTypeRegex to capture:
+//
+//	"Compute optimized Core running in Americas"          (C2, multi-regional)
+//	"Compute optimized Instance Core running in Madrid"   (C2, per-region)
+//	"Memory-optimized Instance Ram running in Frankfurt"  (M1)
+//
+// The "Instance" token is optional: C2's multi-regional SKUs omit it while its
+// ~13 per-region SKUs (africa-south1, the me-* / europe-* newer regions, etc.)
+// include it, and M1 always includes it. Without accepting the "Instance"
+// variant the per-region C2 SKUs get no on-demand/spot baseline, which also
+// drops their (correctly parsed) commitment SKUs at the CUD gate.
+//
+// Without this mapping the C2 and M1 series get no pricing at all and are
+// dropped from the dataset entirely. M2 is billed as the M1 rates plus a
+// separate "Memory Optimized Upgrade Premium for Memory-optimized Instance
+// ..." SKU; the premium SKUs are excluded by the caller so they never
+// pollute M1 baseline pricing.
+var legacySKURegex = regexp.MustCompile(`(?i)\b(compute optimized|memory-optimized)(?:\s+instance)?\s+(core|ram)\b`)
 
 // Resource-based committed use discount (CUD) SKUs use a distinct display-name
 // format from on-demand instance SKUs, e.g.:
@@ -580,9 +722,38 @@ var machineTypeRegex = regexp.MustCompile(`(?i)(n1|n2d|n2|n4d|n4|e2|e2a|c2|c2d|m
 //	"Commitment v1: C2D AMD Ram in EMEA for 3 Year"
 //
 // The family token may carry a vendor qualifier ("AMD") before the resource
-// keyword; the term is "1 Year" or "3 Year". An optional skip group consumes
+// keyword; the term is "1 Year" or "3 Year[s]". An optional skip group consumes
 // such qualifiers so the resource keyword (Cpu/Ram) is captured directly.
-var cudSKURegex = regexp.MustCompile(`(?i)^commitment\s+v\d+:\s+(n1|n2d|n2|n4d|n4|e2|e2a|c2|c2d|m1|m2|m3|m4|t2d|t2a|a2|a3|g2|h3|c3|c3d|z3|c4)\s+(?:[a-z0-9]+\s+)*?(cpu|ram)\s+in\s+.+\s+for\s+(1|3)\s+year`)
+//
+// The g4/a4/a4x accelerator families are excluded here for the same reason as in
+// machineTypeRegex: their instances publish no core+RAM price, so their
+// commitment SKUs have nothing to attach to. Keep this allowlist in sync with
+// machineTypeRegex.
+var cudSKURegex = regexp.MustCompile(`(?i)^commitment\s+v\d+:\s+(n1|n2d|n2|n4d|n4a|n4|e2|e2a|c2|c2d|m1|m2|m3|m4ultramem224|m4n|m4|x4|t2d|t2a|a2|a3|g2|h3|h4d|c3|c3d|z3|c4a|c4d|c4n|c4)\s+(?:[a-z0-9]+\s+)*?(cpu|ram)\s+in\s+.+\s+for\s+(1|3)\s+year`)
+
+// legacyCUDSKURegex matches the first-generation commitment SKU naming used by
+// C2 and M1, which carries no machine-family token (mirroring how
+// legacySKURegex handles their on-demand twins). The catalog uses two distinct
+// spellings that between them cover different region sets, so both must map:
+//
+//	"Commitment v1: Compute optimized Cpu in Berlin for 1 Year"        (C2, ~13 newer regions)
+//	"Commitment: Compute optimized Core running in Americas for 1 Year" (C2, major regions incl. multi-Americas/EMEA/APAC)
+//	"Commitment v1: Memory-optimized Ram in Frankfurt for 3 Years"     (M1)
+//
+// The version token ("v1") and the resource keyword ("Cpu" vs "Core") and the
+// region connector ("in" vs "running in") all vary between the two spellings;
+// only C2 uses the version-less "Compute optimized Core" form (M1 and Local SSD
+// commitments are version-only). Without this, C2 and M1 shapes get no
+// cud_1yr/cud_3yr at all -- and the version-less C2 form is what covers
+// us-central1 (via the multi-Americas grouping).
+//
+// The "M3 Memory-optimized ..." commitment SKUs are not matched: their family
+// token precedes "Memory-optimized", so the "memory-optimized" alternative here
+// (anchored immediately after the "Commitment[ v1]: " prefix) cannot reach them.
+// The Memory Optimized Upgrade Premium surcharge (how M2 is billed on top of M1)
+// has no commitment variant in the catalog, so it can never leak into M1's CUD
+// bucket through this pattern.
+var legacyCUDSKURegex = regexp.MustCompile(`(?i)^commitment(?:\s+v\d+)?:\s+(compute optimized|memory-optimized)\s+(cpu|core|ram)\s+(?:running\s+)?in\s+.+\s+for\s+(1|3)\s+year`)
 
 // CUD commitment terms used as keys in the CUD pricing buckets.
 const (
@@ -597,14 +768,23 @@ const (
 // on-demand SKUs use), so the region groupings in the display name are ignored.
 func parseCUDSKU(sku SKU) (machineFamily string, resourceType string, term string, ok bool) {
 	matches := cudSKURegex.FindStringSubmatch(sku.DisplayName)
-	if len(matches) < 4 {
+	if len(matches) >= 4 {
+		machineFamily = strings.ToUpper(matches[1])
+	} else if legacyMatches := legacyCUDSKURegex.FindStringSubmatch(sku.DisplayName); len(legacyMatches) >= 4 {
+		// Legacy first-generation commitment naming carries no family token.
+		switch strings.ToLower(legacyMatches[1]) {
+		case "compute optimized":
+			machineFamily = "C2"
+		case "memory-optimized":
+			machineFamily = "M1"
+		}
+		matches = legacyMatches
+	} else {
 		return "", "", "", false
 	}
 
-	machineFamily = strings.ToUpper(matches[1])
-
 	switch strings.ToLower(matches[2]) {
-	case "cpu":
+	case "cpu", "core":
 		resourceType = "core"
 	case "ram":
 		resourceType = "ram"
@@ -622,6 +802,167 @@ func parseCUDSKU(sku SKU) (machineFamily string, resourceType string, term strin
 	}
 
 	return machineFamily, resourceType, term, true
+}
+
+// Local SSD usage SKU display names come in two forms: a per-family form used
+// by newer machine series and a generic catch-all form, each with a spot
+// variant:
+//
+//	"C4D Instance Local SSD running in Frankfurt"
+//	"Spot Preemptible C4D Instance Local SSD running in Frankfurt"
+//	"SSD backed Local Storage in Paris"
+//	"SSD backed Local Storage attached to Spot Preemptible VMs in Paris"
+//
+// The generic form's region tail varies ("in <city>", "running in <region>",
+// or none at all for the legacy multi-regional SKUs covering asia-east1,
+// europe-west1, us-central1, us-east1 and us-west1); the prefix-anchored
+// pattern matches all of them.
+//
+// Commitment SKUs ("Commitment v1: C4D Local SSD in ... for 1 Year") and
+// suspended-VM state SKUs ("VM state: preserved local SSD in ...") must not
+// feed baseline pricing; both anchored patterns reject them because the
+// display name does not start with a "<family> Instance Local SSD" or
+// "SSD backed Local Storage" prefix. Local SSD commitment SKUs are instead
+// parsed by parseLocalSSDCommitmentSKU and folded into CUD pricing.
+var familyLocalSSDSKURegex = regexp.MustCompile(`(?i)^(?:spot\s+preemptible\s+)?([a-z][a-z0-9]{1,3})\s+instance\s+local\s+ssd\b`)
+var genericLocalSSDSKURegex = regexp.MustCompile(`(?i)^ssd\s+backed\s+local\s+storage\b`)
+
+// parseLocalSSDSKU parses a Local SSD usage SKU. It returns the machine family
+// the SKU is scoped to (uppercased, e.g. "C4D"; empty for the generic
+// "SSD backed Local Storage" SKUs that apply to any family) and whether the
+// SKU carries spot/preemptible rates. Rates are per GiB-month in the catalog;
+// calculateHourlyPrice converts them to per GiB-hour.
+func parseLocalSSDSKU(sku SKU) (machineFamily string, isSpot bool, ok bool) {
+	displayName := sku.DisplayName
+	displayLower := strings.ToLower(displayName)
+
+	// Reservation-scheduling products (DWS calendar mode / flex-start) bill
+	// Local SSD under their own SKUs and must not feed baseline pricing.
+	if strings.Contains(displayLower, "calendar") || strings.Contains(displayLower, "flex") {
+		return "", false, false
+	}
+
+	isSpot = strings.Contains(displayLower, "preemptible") || strings.Contains(displayLower, "spot")
+
+	if matches := familyLocalSSDSKURegex.FindStringSubmatch(displayName); len(matches) >= 2 {
+		return strings.ToUpper(matches[1]), isSpot, true
+	}
+	if genericLocalSSDSKURegex.MatchString(displayName) {
+		return "", isSpot, true
+	}
+	return "", false, false
+}
+
+// Local SSD committed-use discount SKUs share the "Commitment v1:" prefix with
+// resource CUDs but commit Local SSD capacity rather than core/RAM, e.g.:
+//
+//	"Commitment v1: Local SSD in Iowa for 1 Year"          (generic, any family)
+//	"Commitment v1: Z3 Local SSD in Alabama for 3 Years"   (family-scoped)
+//
+// The generic form has no family token; the family form carries one before
+// "Local SSD". The "Commitment v1: vGPU G4 Local SSD ..." variant is
+// deliberately not matched, mirroring the on-demand path (familyLocalSSDSKURegex)
+// which likewise ignores the vGPU twin of the G4 Local SSD SKU, so a g4 shape's
+// SSD price comes from the same source for on-demand and CUD. "Reserved ..." and
+// "DWS ..." Local SSD SKUs never reach this pattern: they lack the
+// "Commitment v1:" prefix entirely.
+var localSSDCommitmentSKURegex = regexp.MustCompile(`(?i)^commitment\s+v\d+:\s+(?:([a-z][a-z0-9]{1,3})\s+)?local\s+ssd\s+in\s+.+\s+for\s+(1|3)\s+year`)
+
+// parseLocalSSDCommitmentSKU parses a Local SSD committed-use discount SKU. It
+// returns the machine family the commitment is scoped to (uppercased, e.g.
+// "Z3"; empty for the generic "Commitment v1: Local SSD" SKUs that apply to any
+// family), the commitment term ("1yr" or "3yr"), and whether the SKU is a Local
+// SSD commitment at all. Region resolution is left to the shared CUD geo-taxonomy
+// machinery (cudTargetRegions). Rates are per GiB-month in the catalog;
+// calculateHourlyPrice converts them to per GiB-hour.
+func parseLocalSSDCommitmentSKU(sku SKU) (machineFamily string, term string, ok bool) {
+	matches := localSSDCommitmentSKURegex.FindStringSubmatch(sku.DisplayName)
+	if len(matches) < 3 {
+		return "", "", false
+	}
+
+	machineFamily = strings.ToUpper(matches[1]) // "" for the generic form
+
+	switch matches[2] {
+	case "1":
+		term = cudTerm1Yr
+	case "3":
+		term = cudTerm3Yr
+	default:
+		return "", "", false
+	}
+
+	return machineFamily, term, true
+}
+
+// memoryOptimizedPremiumSKURegex matches the "Memory Optimized Upgrade
+// Premium" surcharge SKUs that, added on top of the M1 base core/RAM rates,
+// constitute M2 pricing (M2 has no dedicated SKUs of its own):
+//
+//	"Memory Optimized Upgrade Premium for Memory-optimized Instance Core running in Americas"
+//	"Memory Optimized Upgrade Premium for Memory-optimized Instance Ram running in Frankfurt"
+//
+// These exist only as plain on-demand SKUs; the catalog has no Spot or
+// committed-use variant of the premium, so M2 Spot and CUD prices cannot be
+// synthesized (see processGCPData).
+var memoryOptimizedPremiumSKURegex = regexp.MustCompile(`(?i)^memory optimized upgrade premium for memory-optimized instance\s+(core|ram)\b`)
+
+// parseMemoryOptimizedPremiumSKU reports whether a SKU is a Memory Optimized
+// Upgrade Premium surcharge and, if so, which resource ("core" or "ram") it
+// applies to. Region resolution is left to the shared geo-taxonomy machinery.
+func parseMemoryOptimizedPremiumSKU(sku SKU) (resourceType string, ok bool) {
+	matches := memoryOptimizedPremiumSKURegex.FindStringSubmatch(sku.DisplayName)
+	if len(matches) < 2 {
+		return "", false
+	}
+	return strings.ToLower(matches[1]), true
+}
+
+// skuRegion resolves the region code for a SKU from its geo taxonomy, falling
+// back to the multi-regional grouping named in the display name (e.g.
+// "running in Americas" -> "multi-americas").
+// multiRegionalMetadataRegions returns the explicit region list of a
+// multi-regional SKU. Nearly all Local SSD SKUs are regional, with the region
+// resolvable from the display name ("SSD backed Local Storage in Milan").
+// The exception is Google's five original regions (asia-east1, europe-west1,
+// us-central1, us-east1, us-west1): they predate per-region SKU naming and
+// Google never retro-created regional SKUs for them, so their generic Local
+// SSD price exists only on the bare legacy SKUs ("SSD backed Local Storage"
+// and its Spot Preemptible variant), whose region list lives solely in this
+// metadata.
+func multiRegionalMetadataRegions(sku SKU) []string {
+	if sku.GeoTaxonomy.MultiRegionalMetadata == nil {
+		return nil
+	}
+	regions := make([]string, 0, len(sku.GeoTaxonomy.MultiRegionalMetadata.Regions))
+	for _, r := range sku.GeoTaxonomy.MultiRegionalMetadata.Regions {
+		if r.Region != "" {
+			regions = append(regions, r.Region)
+		}
+	}
+	return regions
+}
+
+func skuRegion(sku SKU) string {
+	if len(sku.GeoTaxonomy.Regions) > 0 {
+		// Use the first region as a fallback; callers can read full Regions.
+		return sku.GeoTaxonomy.Regions[0]
+	}
+	if sku.GeoTaxonomy.RegionalMetadata != nil {
+		return sku.GeoTaxonomy.RegionalMetadata.Region.Region
+	}
+	if sku.GeoTaxonomy.Type == "TYPE_MULTI_REGIONAL" {
+		displayLower := strings.ToLower(sku.DisplayName)
+		switch {
+		case strings.Contains(displayLower, "americas"):
+			return "multi-americas"
+		case strings.Contains(displayLower, "europe"):
+			return "multi-europe"
+		case strings.Contains(displayLower, "asia"):
+			return "multi-asia"
+		}
+	}
+	return ""
 }
 
 func parseMachineTypeFromSKU(sku SKU) (machineFamily string, resourceType string, region string, isSpot bool, isWindows bool) {
@@ -652,24 +993,25 @@ func parseMachineTypeFromSKU(sku SKU) (machineFamily string, resourceType string
 		}
 	}
 
-	// Get region from geo taxonomy.
-	if len(sku.GeoTaxonomy.Regions) > 0 {
-		// Use the first region as a fallback; callers can read full Regions.
-		region = sku.GeoTaxonomy.Regions[0]
-	} else if sku.GeoTaxonomy.RegionalMetadata != nil {
-		region = sku.GeoTaxonomy.RegionalMetadata.Region.Region
-	} else if sku.GeoTaxonomy.Type == "TYPE_MULTI_REGIONAL" {
-		// Use multi-regional as a special "region" identifier
-		// Extract the location from display name (e.g., "running in Americas")
-		displayLower := strings.ToLower(displayName)
-		if strings.Contains(displayLower, "americas") {
-			region = "multi-americas"
-		} else if strings.Contains(displayLower, "europe") {
-			region = "multi-europe"
-		} else if strings.Contains(displayLower, "asia") {
-			region = "multi-asia"
+	// Fall back to the legacy first-generation SKU naming used by C2 and M1,
+	// which carries no family token. The "Upgrade Premium" surcharge SKUs
+	// (how M2 is billed on top of the M1 rates) must not map to the M1
+	// baseline rates, so they are excluded here.
+	if machineFamily == "" && !strings.Contains(strings.ToLower(displayName), "premium") {
+		if legacyMatches := legacySKURegex.FindStringSubmatch(displayName); len(legacyMatches) >= 3 {
+			switch strings.ToLower(legacyMatches[1]) {
+			case "compute optimized":
+				machineFamily = "C2"
+			case "memory-optimized":
+				machineFamily = "M1"
+			}
+			resourceType = strings.ToLower(legacyMatches[2])
 		}
 	}
+
+	// Get region from geo taxonomy (multi-regional SKUs resolve to a special
+	// "multi-*" region identifier).
+	region = skuRegion(sku)
 
 	return
 }
@@ -708,8 +1050,22 @@ func calculateHourlyPrice(price PriceInfo) float64 {
 		return 0
 	}
 
+	// Almost every RAM SKU is rated per binary GiB ("GiBy.h"), matching
+	// MachineSpecs.MemoryGB (== memoryMb/1024, i.e. GiB). A handful of newer
+	// SKU families (seen so far: C4D, M4Ultramem224) are instead rated per
+	// decimal GB ("GBy.h"). Scale those up to a per-GiB rate so the shared
+	// vCPU/RAM total-price math downstream can keep treating every rate as
+	// per-GiB regardless of which unit the catalog happened to use.
+	if unit == "gby.h" {
+		dollars *= gibPerDecimalGB
+	}
+
 	return dollars
 }
+
+// gibPerDecimalGB is how many decimal gigabytes (1000^3 bytes) fit in one
+// binary gibibyte (1024^3 bytes).
+const gibPerDecimalGB = 1024 * 1024 * 1024 / 1e9
 
 // GCP Region from API
 type GCPRegion struct {
