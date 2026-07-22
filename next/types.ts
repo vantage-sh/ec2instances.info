@@ -80,6 +80,8 @@ export interface EC2Instance {
     max_ecs_tasks?: number;
     max_pods?: number;
     enhanced_networking: boolean;
+    nitro_support?: boolean;
+    nitro_enclave_support?: boolean;
     vpc_only: boolean;
     ipv6_support: boolean;
     placement_group_support: boolean;

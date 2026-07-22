@@ -23,6 +23,8 @@
   "emr": true,
   "eks_auto_mode": false,
   "enhanced_networking": true,
+  "nitro_support": true,
+  "nitro_enclave_support": true,
   "family": "Memory optimized",
   "generation": "current",
   "instance_type": "x2iedn.32xlarge",
