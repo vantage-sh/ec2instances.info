@@ -1214,6 +1214,40 @@ export const columnsGen = (
         }),
     },
     {
+        accessorKey: "nitro_support",
+        header: "Nitro Support",
+        id: "nitro_support",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.nitro_support;
+            const valueB = rowB.original.nitro_support;
+            if (valueA === undefined) return 1;
+            if (valueB === undefined) return -1;
+            return Number(valueA) - Number(valueB);
+        },
+        ...makeCellWithRegexSorter("nitro_support", (info) => {
+            const value = info.getValue() as boolean | undefined;
+            if (value === undefined) return "";
+            return value ? "Yes" : "No";
+        }),
+    },
+    {
+        accessorKey: "nitro_enclave_support",
+        header: "Nitro Enclave Support",
+        id: "nitro_enclave_support",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.nitro_enclave_support;
+            const valueB = rowB.original.nitro_enclave_support;
+            if (valueA === undefined) return 1;
+            if (valueB === undefined) return -1;
+            return Number(valueA) - Number(valueB);
+        },
+        ...makeCellWithRegexSorter("nitro_enclave_support", (info) => {
+            const value = info.getValue() as boolean | undefined;
+            if (value === undefined) return "";
+            return value ? "Yes" : "No";
+        }),
+    },
+    {
         accessorKey: "is_bare_metal",
         header: "Bare metal",
         id: "is_bare_metal",
