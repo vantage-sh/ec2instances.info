@@ -119,6 +119,16 @@ func enrichEc2Instance(instance *EC2Instance, attributes map[string]string, ec2A
 			instance.BurstBandwidth = card.PeakBandwidthInGbps
 		}
 
+		// If either field is nill, leave the pointer nill
+		if apiDescription.Hypervisor != "" {
+			nitro := apiDescription.Hypervisor == types.InstanceTypeHypervisorNitro
+			instance.NitroSupport = &nitro
+		}
+		if apiDescription.NitroEnclavesSupport != "" {
+			enclave := apiDescription.NitroEnclavesSupport == types.NitroEnclavesSupportSupported
+			instance.NitroEnclaveSupport = &enclave
+		}
+
 	} else {
 		if instance.Arch == nil {
 			// Try and figure out the value with a best guess

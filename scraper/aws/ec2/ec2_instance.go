@@ -145,6 +145,8 @@ type EC2Instance struct {
 	MaxPods                  *int                       `json:"max_pods,omitempty"`
 	BaselineBandwidth        *float64                   `json:"baseline_bandwidth_gbps,omitempty"`
 	BurstBandwidth           *float64                   `json:"burst_bandwidth_gbps,omitempty"`
+	NitroSupport             *bool                      `json:"nitro_support,omitempty"`
+	NitroEnclaveSupport      *bool                      `json:"nitro_enclave_support,omitempty"`
 }
 
 func avg(ints []int) *float64 {
