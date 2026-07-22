@@ -119,7 +119,7 @@ func enrichEc2Instance(instance *EC2Instance, attributes map[string]string, ec2A
 			instance.BurstBandwidth = card.PeakBandwidthInGbps
 		}
 
-		// If either field is nill, leave the pointer nill
+		// If AWS omits a field, leave the pointer nil
 		if apiDescription.Hypervisor != "" {
 			nitro := apiDescription.Hypervisor == types.InstanceTypeHypervisorNitro
 			instance.NitroSupport = &nitro
