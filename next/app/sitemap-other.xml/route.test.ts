@@ -8,5 +8,6 @@ nextSitemapTest(GET, [
     "/cache",
     "/opensearch",
     "/redshift",
+    "/sagemaker",
     "/gcp",
 ]);

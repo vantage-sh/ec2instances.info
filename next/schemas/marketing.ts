@@ -36,6 +36,8 @@ const ALLOWED_PROMOTIONS = [
     "opensearch-home",
     "redshift-instances",
     "redshift-home",
+    "sagemaker-instances",
+    "sagemaker-home",
     "azure-instances",
     "azure-home",
 ] as const;

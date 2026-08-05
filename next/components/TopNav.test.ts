@@ -3,7 +3,7 @@ import componentTests from "@/utils/testing/componentTests";
 import TopNav from "./TopNav";
 import { RenderResult } from "@testing-library/react";
 
-const AWS_PATHS = ["/", "/rds", "/cache", "/redshift", "/opensearch"];
+const AWS_PATHS = ["/", "/rds", "/cache", "/redshift", "/opensearch", "/sagemaker"];
 
 function runSelectedTest(pathLitUp: string) {
     return (component: RenderResult) => {
@@ -44,6 +44,11 @@ function runSelectedTest(pathLitUp: string) {
                 label: "OpenSearch",
                 href: "/opensearch",
                 ariaCurrent: pathLitUp === "/opensearch",
+            },
+            {
+                label: "SageMaker",
+                href: "/sagemaker",
+                ariaCurrent: pathLitUp === "/sagemaker",
             },
             {
                 label: "Azure",
@@ -187,6 +192,19 @@ componentTests(
                 },
             },
             test: runSelectedTest("/opensearch"),
+        },
+
+        // SageMaker
+
+        {
+            name: "SageMaker lights up SageMaker when on table page",
+            props: {},
+            patch: {
+                before: () => {
+                    mockPath = "/sagemaker";
+                },
+            },
+            test: runSelectedTest("/sagemaker"),
         },
 
         // Azure

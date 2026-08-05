@@ -31,6 +31,10 @@ const navItems = [
                 label: "OpenSearch",
                 href: "/opensearch",
             },
+            {
+                label: "SageMaker",
+                href: "/sagemaker",
+            },
         ],
     },
     {
