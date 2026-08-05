@@ -133,9 +133,13 @@ export default function InstanceTable<
 
     const columnVisibility = useMemo(() => {
         // Merge the state with the default values.
-        const res = { ...columnData[columnAtomKey].initialColumnsValue };
+        const res: Record<string, boolean> = {
+            ...columnData[columnAtomKey].initialColumnsValue,
+        };
         for (const key in columnVisibilityState) {
-            res[key as keyof typeof res] = columnVisibilityState[key];
+            if (key in res) {
+                res[key] = columnVisibilityState[key];
+            }
         }
         return res;
     }, [columnAtomKey, columnVisibilityState]);
