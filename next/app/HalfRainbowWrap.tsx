@@ -7,6 +7,7 @@ import { useMemo } from "react";
 import AWSClient from "./AWSClient";
 import { MarketingSchema } from "@/schemas/marketing";
 import type { CurrencyItem } from "@/utils/loadCurrencies";
+import type { SupportedSavingsPlanOptions } from "@/utils/dataMappings";
 
 type Props<
     Instance extends {
@@ -26,6 +27,7 @@ type Props<
     columnAtomKey: AtomKeyWhereInstanceIs<Instance>;
     marketingData: MarketingSchema;
     currencies: CurrencyItem[];
+    savingsPlanSupported?: SupportedSavingsPlanOptions[];
 };
 
 export default function HalfRainbowWrap<
@@ -47,6 +49,7 @@ export default function HalfRainbowWrap<
     currencies,
     columnAtomKey,
     marketingData,
+    savingsPlanSupported,
 }: Props<Instance>) {
     const decompressed = useMemo(() => {
         return instances.map((instance) =>
@@ -61,6 +64,7 @@ export default function HalfRainbowWrap<
             regions={regions}
             columnAtomKey={columnAtomKey}
             marketingData={marketingData}
+            savingsPlanSupported={savingsPlanSupported}
         />
     );
 }

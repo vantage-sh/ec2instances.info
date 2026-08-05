@@ -114,7 +114,9 @@ export function usePricePrecision(pathname: string) {
 export function useReservedTerm(pathname: string) {
     const defaultReservedTerm = pathname.includes("azure")
         ? "yrTerm1Standard.allUpfront"
-        : "yrTerm1Standard.noUpfront";
+        : pathname.includes("sagemaker")
+        ? "yrTerm1MLSavings.noUpfront"
+          : "yrTerm1Standard.noUpfront";
 
     return useGlobalStateValue("reservedTerm", pathname, defaultReservedTerm);
 }
