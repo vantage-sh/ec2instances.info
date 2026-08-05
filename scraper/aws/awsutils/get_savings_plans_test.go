@@ -12,7 +12,7 @@ func TestSavingsPlanTermSuffix(t *testing.T) {
 		{"EC2InstanceSavingsPlans", "InstanceSavings"},
 		{"ComputeSavingsPlans", "Savings"},
 		{"DatabaseSavingsPlans", "DatabaseSavings"},
-		{"SageMakerSavingsPlans", "Savings"},
+		{"SageMakerSavingsPlans", "MLSavings"},
 	}
 	for _, tc := range tests {
 		if got := savingsPlanTermSuffix(tc.productFamily); got != tc.want {
