@@ -113,10 +113,12 @@ const savingsPlanExtras = {
         "3-year Compute Savings Plan - Partial Upfront",
     "yrTerm3Savings.allUpfront": "3-year Compute Savings Plan - Full Upfront",
     "yrTerm1MLSavings.noUpfront": "1-year ML Savings Plan - No Upfront",
-    "yrTerm1MLSavings.partialUpfront": "1-year ML Savings Plan - Partial Upfront",
+    "yrTerm1MLSavings.partialUpfront":
+        "1-year ML Savings Plan - Partial Upfront",
     "yrTerm1MLSavings.allUpfront": "1-year ML Savings Plan - Full Upfront",
     "yrTerm3MLSavings.noUpfront": "3-year ML Savings Plan - No Upfront",
-    "yrTerm3MLSavings.partialUpfront": "3-year ML Savings Plan - Partial Upfront",
+    "yrTerm3MLSavings.partialUpfront":
+        "3-year ML Savings Plan - Partial Upfront",
     "yrTerm3MLSavings.allUpfront": "3-year ML Savings Plan - Full Upfront",
     "yrTerm1InstanceSavings.noUpfront":
         "1-year Instance Savings Plan - No Upfront",

@@ -10,19 +10,19 @@ import (
 
 func TestIsValidSageMakerSku(t *testing.T) {
 	tests := []struct {
-		name       string
-		product    awsutils.RegionProduct
-		wantName   string
-		wantOK     bool
+		name     string
+		product  awsutils.RegionProduct
+		wantName string
+		wantOK   bool
 	}{
 		{
 			name: "notebook instance",
 			product: awsutils.RegionProduct{
 				ProductFamily: sageMakerProductFamily,
 				Attributes: map[string]string{
-					"instanceName":  "ml.m5.xlarge",
-					"locationType":  "AWS Region",
-					"component":     "Notebook",
+					"instanceName": "ml.m5.xlarge",
+					"locationType": "AWS Region",
+					"component":    "Notebook",
 				},
 			},
 			wantName: "ml.m5.xlarge",

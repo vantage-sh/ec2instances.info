@@ -1,4 +1,9 @@
-import { CostDuration, EC2Instance, PricePrecision, PricingUnit } from "@/types";
+import {
+    CostDuration,
+    EC2Instance,
+    PricePrecision,
+    PricingUnit,
+} from "@/types";
 import {
     calculateCost,
     calculateCostNumeric,
@@ -32,22 +37,6 @@ export type Instance = {
         "instance_type" | "pretty_name" | "pricing" | "regions" | "family"
     >
 >;
-
-function formatStorage(
-    storage: EC2Instance["storage"] | undefined,
-): [string, string | undefined] {
-    if (!storage) return ["EBS only", undefined];
-    const totalSize = storage.devices * storage.size;
-    const storageType = `${storage.nvme_ssd ? "NVMe " : ""}${
-        storage.ssd ? "SSD" : "HDD"
-    }`;
-    if (storage.devices > 1) {
-        const text = `${totalSize} ${storage.size_unit}`;
-        const detail = `${storage.devices}×${storage.size} ${storage.size_unit} ${storageType}`;
-        return [text, detail];
-    }
-    return [`${totalSize} ${storage.size_unit} ${storageType}`, undefined];
-}
 
 const initialColumnsArr = [
     ["pretty_name", true],
@@ -83,7 +72,7 @@ export function makePrettyNames<V>(
     ) => V,
     reservedTerm: string,
 ) {
-    const commitmentLabel: string = commitmentTypeLabel(reservedTerm)
+    const commitmentLabel: string = commitmentTypeLabel(reservedTerm);
     return [
         makeColumnOption("pretty_name", "Name"),
         makeColumnOption("instance_type", "API Name"),

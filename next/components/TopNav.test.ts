@@ -3,7 +3,14 @@ import componentTests from "@/utils/testing/componentTests";
 import TopNav from "./TopNav";
 import { RenderResult } from "@testing-library/react";
 
-const AWS_PATHS = ["/", "/rds", "/cache", "/redshift", "/opensearch", "/sagemaker"];
+const AWS_PATHS = [
+    "/",
+    "/rds",
+    "/cache",
+    "/redshift",
+    "/opensearch",
+    "/sagemaker",
+];
 
 function runSelectedTest(pathLitUp: string) {
     return (component: RenderResult) => {
