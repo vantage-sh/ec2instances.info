@@ -108,6 +108,12 @@ export async function generateMetadata({
     };
 }
 
+const reservedTermOptions: [string, string][] = [
+    ["MLSavings.noUpfront", "No Upfront (ML Savings Plan)"],
+    ["MLSavings.partialUpfront", "Partial Upfront (ML Savings Plan)"],
+    ["MLSavings.allUpfront", "All Upfront (ML Savings Plan)"],
+];
+
 export default async function Page({
     params,
 }: {
@@ -141,6 +147,7 @@ export default async function Page({
             typeName="SageMaker"
             instanceType="sagemaker"
             marketingData={marketingData}
+            reservedTermOptions={reservedTermOptions}
         >
             <InstanceDataView tables={generateSageMakerTables(instance)} />
         </HalfEC2Root>

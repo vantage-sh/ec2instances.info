@@ -127,6 +127,42 @@ componentTests(
             },
         },
         {
+            name: "defaults to first reserved term option for ML Savings Plans",
+            props: {
+                ...defaultProps,
+                removeSpot: true,
+                reservedTermOptions: [
+                    ["MLSavings.noUpfront", "No Upfront (ML Savings Plan)"],
+                    [
+                        "MLSavings.partialUpfront",
+                        "Partial Upfront (ML Savings Plan)",
+                    ],
+                ],
+                compressedInstance: {
+                    pricing: {
+                        "us-east-1": {
+                            linux: {
+                                ondemand: "0.1",
+                                reserved: {
+                                    "yrTerm1MLSavings.noUpfront": "0.08",
+                                    "yrTerm3MLSavings.noUpfront": "0.06",
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            test: (component) => {
+                const prices = component.container.querySelectorAll("p");
+                expect(prices[0].textContent).toBe("$0.100");
+                expect(prices[1].textContent).toBe("On Demand");
+                expect(prices[2].textContent).toBe("$0.080");
+                expect(prices[3].textContent).toBe("1-Year ML Savings Plan");
+                expect(prices[4].textContent).toBe("$0.060");
+                expect(prices[5].textContent).toBe("3-Year ML Savings Plan");
+            },
+        },
+        {
             name: "renders with spot minimum prices",
             props: {
                 ...defaultProps,
