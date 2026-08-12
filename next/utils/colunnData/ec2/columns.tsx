@@ -1222,6 +1222,36 @@ export const columnsGen = (
         }),
     },
     {
+        accessorKey: "vpc",
+        header: "IPv4 per ENI",
+        size: 100,
+        id: "ipspereni",
+        sortingFn: (rowA, rowB) => {
+            const valueA = rowA.original.vpc;
+            const valueB = rowB.original.vpc;
+            if (!valueA) return -1;
+            if (!valueB) return 1;
+            return valueA.ips_per_eni - valueB.ips_per_eni;
+        },
+        filterFn: (row, _, filterValue) => {
+            const vpc = row.original.vpc;
+            const ipsPerEni = vpc?.ips_per_eni ?? 0;
+            try {
+                return exprCompiler(filterValue)(
+                    ipsPerEni,
+                    ipsPerEni.toString(),
+                );
+            } catch {
+                return true;
+            }
+        },
+        cell: (info) => {
+            const vpc = info.getValue() as any;
+            if (!vpc) return undefined;
+            return vpc.ips_per_eni;
+        },
+    },
+    {
         accessorKey: "enhanced_networking",
         header: "Enhanced Networking",
         id: "enhanced_networking",

@@ -88,7 +88,12 @@ export default function FilterDropdown({
     }, [groupedOptions, searchTerm]);
 
     return (
-        <div className="flex flex-col gap-0.5">
+        <div
+            className={cn(
+                "flex flex-col gap-0.5",
+                small && label === "Currency" && "max-w-[200px]",
+            )}
+        >
             {!hideLabel && (
                 <label htmlFor={buttonId} className="text-xs text-gray-1">
                     {label}
@@ -108,17 +113,19 @@ export default function FilterDropdown({
                         aria-label={hideLabel ? label : undefined}
                         id={buttonId}
                         className={cn(
-                            "w-full justify-between py-4.5",
+                            "min-w-0 w-full max-w-full shrink justify-between overflow-hidden py-4.5",
                             small ? "text-xs" : "",
                         )}
                     >
                         {icon && (
                             <i
                                 aria-hidden="true"
-                                className={`icon-${icon} text-white me-1`}
+                                className={`icon-${icon} text-white me-1 shrink-0`}
                             ></i>
                         )}
-                        {selectedOption?.label || "Select..."}
+                        <span className="min-w-0 flex-1 truncate text-left">
+                            {selectedOption?.label || "Select..."}
+                        </span>
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                 </PopoverTrigger>

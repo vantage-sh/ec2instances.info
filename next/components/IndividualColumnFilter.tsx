@@ -205,6 +205,7 @@ const exprColumns = [
     "GPU_memory",
     "GPU_memory_per_gpu",
     "maxips",
+    "ipspereni",
     "storage",
     "size",
     "ecu",

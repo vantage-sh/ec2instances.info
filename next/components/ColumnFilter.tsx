@@ -72,7 +72,7 @@ export default function ColumnFilter<Key extends keyof typeof columnData>({
                         role="combobox"
                         aria-expanded={open}
                         id={buttonId}
-                        className="w-[200px] justify-between"
+                        className="w-fit justify-between"
                     >
                         Columns
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
