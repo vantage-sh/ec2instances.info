@@ -1,9 +1,4 @@
-import {
-    CostDuration,
-    EC2Instance,
-    PricePrecision,
-    PricingUnit,
-} from "@/types";
+import { CostDuration, EC2Instance, PricePrecision, PricingUnit } from "@/types";
 import {
     calculateCost,
     calculateCostNumeric,
@@ -15,6 +10,7 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 import sortByInstanceType from "../sortByInstanceType";
 import { commitmentTypeLabel } from "../dataMappings";
+import RegionLinkPreloader from "@/components/RegionLinkPreloader";
 
 type SageMakerPricing = {
     [region: string]: {
@@ -25,18 +21,15 @@ type SageMakerPricing = {
     };
 };
 
-export type Instance = {
+export type Instance = Partial<Omit<EC2Instance, "pricing" | "storage">> & {
     pretty_name: string;
     instance_type: string;
     family: string;
     pricing: SageMakerPricing;
+    regions: { [region: string]: string };
     compute_family?: string;
-} & Partial<
-    Omit<
-        EC2Instance,
-        "instance_type" | "pretty_name" | "pricing" | "regions" | "family"
-    >
->;
+    storage?: string;
+};
 
 const initialColumnsArr = [
     ["pretty_name", true],
@@ -167,7 +160,17 @@ export const columnsGen = (
             const valueB = rowB.original.instance_type;
             return sortByInstanceType(valueA, valueB, ".", "ml.");
         },
-        cell: (info) => info.getValue() as string,
+        cell: (info) => {
+            const value = info.getValue() as string;
+            return (
+                <RegionLinkPreloader
+                    onClick={(e) => e.stopPropagation()}
+                    href={`/aws/sagemaker/${value}`}
+                >
+                    {value}
+                </RegionLinkPreloader>
+            );
+        },
     },
     {
         accessorKey: "family",

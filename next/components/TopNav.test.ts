@@ -213,6 +213,16 @@ componentTests(
             },
             test: runSelectedTest("/sagemaker"),
         },
+        {
+            name: "SageMaker lights up SageMaker when on instance page",
+            props: {},
+            patch: {
+                before: () => {
+                    mockPath = "/aws/sagemaker/123";
+                },
+            },
+            test: runSelectedTest("/sagemaker"),
+        },
 
         // Azure
 
