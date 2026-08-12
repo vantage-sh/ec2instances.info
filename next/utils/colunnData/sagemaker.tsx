@@ -1,4 +1,9 @@
-import { CostDuration, EC2Instance, PricePrecision, PricingUnit } from "@/types";
+import {
+    CostDuration,
+    EC2Instance,
+    PricePrecision,
+    PricingUnit,
+} from "@/types";
 import {
     calculateCost,
     calculateCostNumeric,

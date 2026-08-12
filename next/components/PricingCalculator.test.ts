@@ -15,6 +15,8 @@ const mockPricing = {
                 "yrTerm3Standard.noUpfront": "0.06",
                 "yrTerm1Standard.partialUpfront": "0.05",
                 "yrTerm3Standard.partialUpfront": "0.04",
+                "yrTerm1MLSavings.noUpfront": "0.08",
+                "yrTerm3MLSavings.noUpfront": "0.06",
             },
         },
         windows: {
@@ -137,20 +139,7 @@ componentTests(
                         "MLSavings.partialUpfront",
                         "Partial Upfront (ML Savings Plan)",
                     ],
-                ],
-                compressedInstance: {
-                    pricing: {
-                        "us-east-1": {
-                            linux: {
-                                ondemand: "0.1",
-                                reserved: {
-                                    "yrTerm1MLSavings.noUpfront": "0.08",
-                                    "yrTerm3MLSavings.noUpfront": "0.06",
-                                },
-                            },
-                        },
-                    },
-                },
+                ] as [string, string][],
             },
             test: (component) => {
                 const prices = component.container.querySelectorAll("p");
