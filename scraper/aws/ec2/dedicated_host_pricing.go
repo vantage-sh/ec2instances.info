@@ -322,7 +322,10 @@ func addDedicatedHostPricingCn(instances map[string]*EC2Instance, regionsInverte
 			var dedicatedHostOnDemandData dedicatedHostOnDemandData
 			err := awsutils.FetchDataFromAWSWebsite(url, &dedicatedHostOnDemandData)
 			if err != nil {
-				log.Fatalln("Failed to fetch dedicated host on demand data", err)
+				// calculator.amazonaws.cn has periodically served an expired TLS
+				// cert; don't abort the whole scrape for China dedicated hosts.
+				utils.SendWarning("Failed to fetch dedicated host on demand data for", region, err)
+				return
 			}
 
 			regionSlug := regionsInverted[region]
