@@ -27,7 +27,6 @@ jobs:
                   SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
                   SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
                   NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID: ${{ secrets.GOOGLE_TAG_MANAGER_ID }}
-                  NEXT_PUBLIC_ENABLE_VANTAGE_SCRIPT_TAG: "1"
                   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
                   GCP_CLIENT_EMAIL: ${{ secrets.GCP_CLIENT_EMAIL }}
                   GCP_PRIVATE_KEY: ${{ secrets.GCP_PRIVATE_KEY }}
