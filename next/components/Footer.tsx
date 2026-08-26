@@ -1,5 +1,4 @@
 import TranslationFriendlyLink from "@/components/TranslationFriendlyLink";
-import PrivacyChoicesLink from "@/components/PrivacyChoicesLink";
 import { buttonVariants } from "@/components/ui/button";
 
 export default function Footer() {
@@ -16,7 +15,6 @@ export default function Footer() {
                     Comparison
                 </div>
                 <div className="flex items-center gap-3">
-                    <PrivacyChoicesLink />
                     <a
                         href="https://handbook.vantage.sh/tools/instances/"
                         target="_blank"
