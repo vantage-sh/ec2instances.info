@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 import AdToasts from "@/components/AdToasts";
 import { Toaster } from "@/components/ui/sonner";
 import { GoogleTagManager } from "@next/third-parties/google";
-import Script from "next/script";
 import { array, object, string, parse, optional } from "valibot";
 
 // Not ideal, but copied because its like 6 lines long and didn't feel worth a whole file
@@ -51,12 +50,6 @@ export default async function RootLayout({
                 {process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID && (
                     <GoogleTagManager
                         gtmId={process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID}
-                    />
-                )}
-                {process.env.NEXT_PUBLIC_ENABLE_VANTAGE_SCRIPT_TAG === "1" && (
-                    <Script
-                        src="https://vantage-api.com/i.js"
-                        strategy="afterInteractive"
                     />
                 )}
             </head>
