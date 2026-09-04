@@ -88,6 +88,14 @@ func addRdsVcpuByEngine(instance map[string]any, attributes map[string]string) {
 	}
 }
 
+// AWS Price List reports incorrect memory for these RDS classes (issue #991).
+// Values match AWS RDS hardware docs and the EC2 price list / DescribeInstanceTypes.
+var rdsMemoryOverrides = map[string]string{
+	"db.m8g.12xlarge": "192",
+	"db.m8g.16xlarge": "256",
+	"db.m8g.24xlarge": "384",
+}
+
 func enrichRdsInstance(
 	instance map[string]any,
 	attributes map[string]string,
@@ -96,6 +104,9 @@ func enrichRdsInstance(
 	// Clean up the memory attribute
 	if attributes["memory"] != "" {
 		attributes["memory"] = strings.Split(attributes["memory"], " ")[0]
+	}
+	if override, ok := rdsMemoryOverrides[instance["instance_type"].(string)]; ok {
+		attributes["memory"] = override
 	}
 
 	// Copy them into the instance

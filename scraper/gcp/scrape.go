@@ -1044,19 +1044,19 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 	}
 
 	if len(missingSSDRates) > 0 {
-		utils.SendWarning("GCP bundled Local SSD priced without its SSD, no Local SSD rate for family/region/spot:",
+		log.Println("WARNING: GCP bundled Local SSD priced without its SSD, no Local SSD rate for family/region/spot:",
 			strings.Join(slices.Sorted(maps.Keys(missingSSDRates)), " "))
 	}
 	if len(missingSSDCudRates) > 0 {
-		utils.SendWarning("GCP bundled Local SSD CUD priced without its SSD, no Local SSD commitment rate for family/region/term:",
+		log.Println("WARNING: GCP bundled Local SSD CUD priced without its SSD, no Local SSD commitment rate for family/region/term:",
 			strings.Join(slices.Sorted(maps.Keys(missingSSDCudRates)), " "))
 	}
 	if len(genericSSDFallbacks) > 0 {
-		utils.SendWarning("GCP bundled Local SSD priced from the generic Local SSD rate, family has its own Local SSD SKUs elsewhere but not here (likely understated by about half the SSD component) for family/region:",
+		log.Println("WARNING: GCP bundled Local SSD priced from the generic Local SSD rate, family has its own Local SSD SKUs elsewhere but not here (likely understated by about half the SSD component) for family/region:",
 			strings.Join(slices.Sorted(maps.Keys(genericSSDFallbacks)), " "))
 	}
 	if len(missingGenericSSDRates) > 0 {
-		utils.SendWarning("GCP bundled Local SSD priced from the per-family Local SSD rate, but this family bills at the generic rate and no generic rate exists in this region, for family/region:",
+		log.Println("WARNING: GCP bundled Local SSD priced from the per-family Local SSD rate, but this family bills at the generic rate and no generic rate exists in this region, for family/region:",
 			strings.Join(slices.Sorted(maps.Keys(missingGenericSSDRates)), " "))
 	}
 	ambiguousRates := ambiguousRateKeys(skuData, func(key skuKey) string {
@@ -1076,7 +1076,7 @@ func processGCPData(skus []SKU, pricing map[string]PriceInfo, machineSpecs map[s
 		return fmt.Sprintf("premium/%s/%s", key.region, key.resourceType)
 	})...)
 	if len(ambiguousRates) > 0 {
-		utils.SendWarning("GCP two region-scoped SKUs disagree on price, the higher rate was selected (Google bills the lower twin for M1 asia-southeast1 on-demand core, so verify rather than assume) for family/region/resource/term:",
+		log.Println("WARNING: GCP two region-scoped SKUs disagree on price, the higher rate was selected (Google bills the lower twin for M1 asia-southeast1 on-demand core, so verify rather than assume) for family/region/resource/term:",
 			strings.Join(slices.Sorted(slices.Values(ambiguousRates)), " "))
 	}
 
