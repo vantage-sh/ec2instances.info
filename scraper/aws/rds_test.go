@@ -5,6 +5,9 @@ import (
 	"testing"
 
 	"scraper/aws/awsutils"
+	"scraper/utils"
+
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
 
 // assembleOnDemand runs the real on-demand price-assembly path for a single SQL
@@ -379,5 +382,34 @@ func TestGetRdsDeploymentPricingData(t *testing.T) {
 	}
 	if engine.MultiAZ == nil || engine.MultiAZ.OnDemand != 0.356 {
 		t.Errorf("Multi-AZ OnDemand = %v, want 0.356", engine.MultiAZ)
+	}
+}
+
+// TestRdsMemoryOverrides covers issue #991: AWS Price List reports wrong memory
+// for some db.m8g sizes. Official RDS docs / EC2 specs are authoritative.
+func TestRdsMemoryOverrides(t *testing.T) {
+	emptyApi := utils.NewSlowBuildingMap(func(pushChunk func(map[string]*types.InstanceTypeInfo)) {})
+
+	cases := []struct {
+		instanceType string
+		pricingMem   string
+		want         string
+	}{
+		{"db.m8g.12xlarge", "256 GiB", "192"},
+		{"db.m8g.16xlarge", "384 GiB", "256"},
+		{"db.m8g.24xlarge", "512 GiB", "384"},
+		{"db.m8g.8xlarge", "128 GiB", "128"},  // unaffected
+		{"db.m8g.48xlarge", "768 GiB", "768"}, // unaffected
+	}
+
+	for _, tc := range cases {
+		t.Run(tc.instanceType, func(t *testing.T) {
+			instance := map[string]any{"instance_type": tc.instanceType}
+			attrs := map[string]string{"memory": tc.pricingMem, "vcpu": "1"}
+			enrichRdsInstance(instance, attrs, emptyApi)
+			if got := instance["memory"]; got != tc.want {
+				t.Errorf("memory = %v, want %v", got, tc.want)
+			}
+		})
 	}
 }
