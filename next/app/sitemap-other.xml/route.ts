@@ -26,6 +26,9 @@ export async function GET() {
     <url>
         <loc>${"/redshift"}</loc>
     </url>
+    <url>
+        <loc>${"/sagemaker"}</loc>
+    </url>
 </urlset>`;
     return new Response(sitemap, {
         headers: { "Content-Type": "application/xml" },

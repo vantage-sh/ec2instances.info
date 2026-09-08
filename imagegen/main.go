@@ -15,8 +15,8 @@ import (
 )
 
 const (
-	imgWidth  = 1911
-	imgHeight = 1156
+	imgWidth   = 1911
+	imgHeight  = 1156
 	numWorkers = 20
 )
 
@@ -78,10 +78,10 @@ func main() {
 	iconCache := &iconCache{dir: assetsDir}
 
 	ctx := &genContext{
-		baseURL:      baseURL,
-		wwwDir:       wwwDir,
-		outDir:       outDir,
-		assetsDir:    assetsDir,
+		baseURL:   baseURL,
+		wwwDir:    wwwDir,
+		outDir:    outDir,
+		assetsDir: assetsDir,
 	}
 
 	var allOverlays []InstanceOverlay
@@ -89,6 +89,7 @@ func main() {
 	allOverlays = append(allOverlays, generateRDSOverlays(ctx)...)
 	allOverlays = append(allOverlays, generateElastiCacheOverlays(ctx)...)
 	allOverlays = append(allOverlays, generateRedshiftOverlays(ctx)...)
+	allOverlays = append(allOverlays, generateSageMakerOverlays(ctx)...)
 	allOverlays = append(allOverlays, generateOpenSearchOverlays(ctx)...)
 	allOverlays = append(allOverlays, generateAzureOverlays(ctx)...)
 	allOverlays = append(allOverlays, generateGCPOverlays(ctx)...)

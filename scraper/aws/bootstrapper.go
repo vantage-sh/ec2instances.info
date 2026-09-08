@@ -377,6 +377,17 @@ func DoAwsScraping() {
 		processOpenSearchData(openSearchGlobalChannel, false, volumeQuotasGetter)
 	})
 
+	sageMakerGlobalChannel := make(chan awsutils.RawRegion)
+	sageMakerChinaChannel := make(chan awsutils.RawRegion)
+
+	fg.Add(func() {
+		processSageMakerData(sageMakerGlobalChannel, false, ec2ApiResponses)
+	})
+
+	fg.Add(func() {
+		processSageMakerData(sageMakerChinaChannel, true, ec2ApiResponses)
+	})
+
 	// Load all the regions for the things we care about
 	loadAllRegionsForServices([]service{
 		{
@@ -403,6 +414,11 @@ func DoAwsScraping() {
 			serviceName:  "AmazonES",
 			globalInData: openSearchGlobalChannel,
 			chinaInData:  openSearchChinaChannel,
+		},
+		{
+			serviceName:  "AmazonSageMaker",
+			globalInData: sageMakerGlobalChannel,
+			chinaInData:  sageMakerChinaChannel,
 		},
 	}, rootIndex, chinaIndex)
 

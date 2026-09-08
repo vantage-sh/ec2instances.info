@@ -1,5 +1,15 @@
 package awsutils
 
+type (
+	RegionSlug = string
+	Sku        = string
+	Term       = string
+)
+
+type SavingsPlanPricing = map[RegionSlug]map[Sku]map[Term]float64
+
+type SavingsPlanGetter = func() SavingsPlanPricing
+
 type RegionProduct struct {
 	SKU           string            `json:"sku"`
 	ProductFamily string            `json:"productFamily"`
@@ -34,7 +44,7 @@ type RegionData struct {
 type RawRegion struct {
 	// SavingsPlanData is set to non-nil when this is done. If nil, this is regular pricing data.
 	// If not, this is the end and the savings plan data is to be processed. The map can be nil.
-	SavingsPlanData func() map[regionSlug]map[sku]map[term]float64
+	SavingsPlanData SavingsPlanGetter
 
 	RegionName string
 	RegionData RegionData
