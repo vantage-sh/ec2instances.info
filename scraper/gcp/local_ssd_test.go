@@ -12,10 +12,12 @@ import (
 // TestBundledLocalSSDCapacityGB verifies capacity discovery from the Compute
 // Engine machineTypes API payload: capacity is partitionCount x per-partition
 // size, which is 375 GB except for the Titanium SSD shapes (Z3 at 3,000 GiB,
-// bare-metal Z3 at 6,000 GiB, bare-metal C4 at 3,000 GiB, and A4X at 3,000
-// GiB). Every expectation below equals the capacity Google documents for that
-// shape. Shapes without bundled Local SSD must report 0 so attachable-SSD
-// families keep local_ssd=false.
+// bare-metal Z3 at 6,000 GiB, bare-metal C4 at 3,000 GiB, A4X at 3,000 GiB,
+// and Z4D at 3,000 GiB). Every expectation below equals the capacity Google
+// documents for that shape (Z4D sizes follow Cluster Autoscaler launch-price
+// reconstruction until Google publishes the series docs). Shapes without
+// bundled Local SSD must report 0 so attachable-SSD families keep
+// local_ssd=false.
 func TestBundledLocalSSDCapacityGB(t *testing.T) {
 	cases := []struct {
 		name string
@@ -61,6 +63,16 @@ func TestBundledLocalSSDCapacityGB(t *testing.T) {
 			name: "a4x max bare-metal titanium ssd disks are 3000 GiB each",
 			raw:  `{"name":"a4x-maxgpu-4g-metal","guestCpus":144,"memoryMb":983040,"bundledLocalSsds":{"defaultInterface":"NVME","partitionCount":4}}`,
 			want: 12000,
+		},
+		{
+			name: "z4d titanium ssd disks are 3000 GiB each (highlssd)",
+			raw:  `{"name":"z4d-highmem-96-highlssd","guestCpus":96,"memoryMb":786432,"bundledLocalSsds":{"defaultInterface":"NVME","partitionCount":12}}`,
+			want: 36000,
+		},
+		{
+			name: "z4d standardlssd also uses 3000 GiB partitions",
+			raw:  `{"name":"z4d-highmem-96-standardlssd","guestCpus":96,"memoryMb":786432,"bundledLocalSsds":{"defaultInterface":"NVME","partitionCount":6}}`,
+			want: 18000,
 		},
 		{
 			name: "attachable-only family has no bundled capacity",

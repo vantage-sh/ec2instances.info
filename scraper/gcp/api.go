@@ -233,9 +233,11 @@ func gpuSpec(machineTypeName, gpuModel string, acceleratorCount int) (gpuCount f
 // partition for a machine type. Most machine series bundle Local SSD in
 // 375 GB partitions; Titanium SSD series use larger disks whose sizes only
 // appear in the per-series docs: Z3 is 3,000 GiB (6,000 GiB bare metal), C4
-// bare metal is 3,000 GiB (c4-standard-288-lssd-metal: 6 x 3,000 GiB), and
+// bare metal is 3,000 GiB (c4-standard-288-lssd-metal: 6 x 3,000 GiB),
 // A4X/A4X Max bundle 12,000 GiB as 4 x 3,000 GiB (a4x-highgpu-4g and
-// a4x-maxgpu-4g-metal).
+// a4x-maxgpu-4g-metal), and Z4D uses 3,000 GiB partitions (same as Z3 VMs;
+// confirmed by reconstructing Cluster Autoscaler launch prices as
+// vCPU+RAM+capacity×SSD). Z4D bare metal is not yet documented.
 func localSSDPartitionGB(machineTypeName string) int {
 	nameLower := strings.ToLower(machineTypeName)
 	isMetal := strings.HasSuffix(nameLower, "-metal")
@@ -247,6 +249,8 @@ func localSSDPartitionGB(machineTypeName string) int {
 	case strings.HasPrefix(nameLower, "c4-") && isMetal:
 		return 3000
 	case strings.HasPrefix(nameLower, "a4x-"):
+		return 3000
+	case strings.HasPrefix(nameLower, "z4d-"):
 		return 3000
 	default:
 		series, _, _ := strings.Cut(nameLower, "-")
