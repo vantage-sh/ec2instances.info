@@ -129,6 +129,33 @@ var dateIntroducedFallback = map[string]timelineEntry{
 		ReleaseMonth: "June",
 		ReleaseYear:  2024,
 	},
+	// Temporary until t8i lands in instancetyp.es/timeline.json.
+	// https://aws.amazon.com/about-aws/whats-new/2026/09/ec2-t8i-instances-ga/
+	// https://aws.amazon.com/blogs/aws/new-low-cost-burstable-amazon-ec2-t8i-instances-are-generally-available/
+	"t8i.nano": {
+		ReleaseMonth: "September",
+		ReleaseYear:  2026,
+		Announcement: timelineSource{Published: strPtr("Sep 17, 2026")},
+		BlogPost:     timelineSource{Published: strPtr("Sep 17, 2026")},
+	},
+	"t8i.micro": {
+		ReleaseMonth: "September",
+		ReleaseYear:  2026,
+		Announcement: timelineSource{Published: strPtr("Sep 17, 2026")},
+		BlogPost:     timelineSource{Published: strPtr("Sep 17, 2026")},
+	},
+	"t8i.small": {
+		ReleaseMonth: "September",
+		ReleaseYear:  2026,
+		Announcement: timelineSource{Published: strPtr("Sep 17, 2026")},
+		BlogPost:     timelineSource{Published: strPtr("Sep 17, 2026")},
+	},
+	"t8i.medium": {
+		ReleaseMonth: "September",
+		ReleaseYear:  2026,
+		Announcement: timelineSource{Published: strPtr("Sep 17, 2026")},
+		BlogPost:     timelineSource{Published: strPtr("Sep 17, 2026")},
+	},
 }
 
 func parsePublishedDate(s string) (string, bool) {
