@@ -84,6 +84,10 @@ func TestDateIntroducedFallbackResolve(t *testing.T) {
 		"p4de.24xlarge":      "2022-05-26",
 		"d3en.large":         "2020-12-01",
 		"mac2-m1ultra.metal": "2024-06-01",
+		"t8i.nano":           "2026-09-17",
+		"t8i.micro":          "2026-09-17",
+		"t8i.small":          "2026-09-17",
+		"t8i.medium":         "2026-09-17",
 	}
 	for instanceType := range want {
 		if _, ok := dateIntroducedFallback[instanceType]; !ok {
