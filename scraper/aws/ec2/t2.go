@@ -31,7 +31,7 @@ func getT2Html() *soup.Root {
 	return doc
 }
 
-func addT2Credits(instances map[string]*EC2Instance, t2HtmlGetter func() *soup.Root) {
+func addT2Credits(instances map[string]*EC2Instance, t2HtmlGetter func() *soup.Root, china bool) {
 	log.Default().Println("Adding T2 credits to EC2")
 
 	doc := t2HtmlGetter()
@@ -57,6 +57,12 @@ func addT2Credits(instances map[string]*EC2Instance, t2HtmlGetter func() *soup.R
 		log.Fatalln("Failed to find T2 credits rows")
 	}
 
+	// Temporary: suppress unknown-type warnings for t8i until China pricing exposes
+	// them. Commercial regions already have t8i; both China and global scrapes share
+	// the same HTML docs, so China still hits unknown-type warnings. Alert only when
+	// China pricing catches up so we can remove this skip.
+	t8iSeenInChinaPricing := false
+
 	for _, row := range rows {
 		children := row.FindAll("td")
 		var firstNodeText string
@@ -70,10 +76,15 @@ func addT2Credits(instances map[string]*EC2Instance, t2HtmlGetter func() *soup.R
 			firstNodeText = toText(children[0])
 			instance := instances[firstNodeText]
 			if instance == nil {
-				if strings.Contains(firstNodeText, ".") {
+				// Docs can list new burstable types before pricing APIs expose them.
+				family := strings.SplitN(firstNodeText, ".", 2)[0]
+				if strings.Contains(firstNodeText, ".") && family != "t8i" {
 					utils.SendWarning("T2 credits data has unknown instance type", firstNodeText)
 				}
 			} else {
+				if china && strings.HasPrefix(firstNodeText, "t8i.") {
+					t8iSeenInChinaPricing = true
+				}
 				childText := toText(children[1])
 				if childText == "" {
 					utils.SendWarning("T2 credits data has empty row", firstNodeText)
@@ -82,5 +93,9 @@ func addT2Credits(instances map[string]*EC2Instance, t2HtmlGetter func() *soup.R
 				}
 			}
 		}
+	}
+
+	if t8iSeenInChinaPricing {
+		utils.SendWarning("T8i instances found in China pricing data; remove temporary t8i unknown-type skip in t2.go")
 	}
 }
