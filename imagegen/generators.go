@@ -333,6 +333,66 @@ func generateOpenSearchOverlays(ctx *genContext) []InstanceOverlay {
 	return overlays
 }
 
+func generateSageMakerOverlays(ctx *genContext) []InstanceOverlay {
+	type instance struct {
+		InstanceType       string    `json:"instance_type"`
+		Family             string    `json:"family"`
+		VCPU               flexFloat `json:"vCPU"`
+		Memory             flexFloat `json:"memory"`
+		GPU                flexFloat `json:"GPU"`
+		GPUModel           string    `json:"GPU_model"`
+		Storage            string    `json:"storage"`
+		NetworkPerformance string    `json:"network_performance"`
+	}
+
+	var instances []instance
+	if err := readJSON(filepath.Join(ctx.wwwDir, "sagemaker", "instances.json"), &instances); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+
+	overlays := make([]InstanceOverlay, 0, len(instances))
+	for _, inst := range instances {
+		storageVal := "EBS only"
+		if inst.Storage != "" {
+			storageVal = inst.Storage
+		}
+		gpuVal := "0"
+		if inst.GPU > 0 {
+			if inst.GPUModel != "" {
+				gpuVal = fmt.Sprintf("%.0f (%s)", inst.GPU, inst.GPUModel)
+			} else {
+				gpuVal = fmt.Sprintf("%.0f", inst.GPU)
+			}
+		}
+		networkVal := "N/A"
+		if inst.NetworkPerformance != "" {
+			networkVal = inst.NetworkPerformance
+		}
+
+		header := "SageMaker Instances"
+		if inst.Family != "" {
+			header = fmt.Sprintf("SageMaker Instances (%s)", inst.Family)
+		}
+
+		overlays = append(overlays, InstanceOverlay{
+			InstanceType:   inst.InstanceType,
+			Name:           inst.InstanceType,
+			CategoryHeader: header,
+			Filename:       filepath.Join(ctx.outDir, "aws", "sagemaker", inst.InstanceType+".png"),
+			URL:            ctx.instanceURL("/aws/sagemaker/" + inst.InstanceType),
+			Values: []Value{
+				{Name: "vCPUs", Value: fmt.Sprintf("%.0f", inst.VCPU), SquareIconPath: "icons/cpu-cores.png"},
+				{Name: "RAM", Value: fmt.Sprintf("%.0f GB", inst.Memory), SquareIconPath: "icons/ram.png"},
+				{Name: "Network", Value: networkVal, SquareIconPath: "icons/cpu-arch.png"},
+				{Name: "GPUs", Value: gpuVal, SquareIconPath: "icons/gpu.png"},
+				{Name: "Storage", Value: storageVal, SquareIconPath: "icons/storage.png"},
+			},
+		})
+	}
+	return overlays
+}
+
 func generateAzureOverlays(ctx *genContext) []InstanceOverlay {
 	type instance struct {
 		InstanceType    string  `json:"instance_type"`

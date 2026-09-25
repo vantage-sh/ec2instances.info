@@ -9,6 +9,7 @@ import {
     rdsInstances,
     redshiftInstances,
     opensearchInstances,
+    sagemakerInstances,
 } from "./loadedData";
 import { ec2, elasticache, rds } from "@/utils/ec2TablesGenerator";
 import generateEc2Description from "@/utils/generateEc2Description";
@@ -16,6 +17,9 @@ import generateRedshiftMarkdown from "./generateRedshiftMarkdown";
 import generateOpensearchMarkdown from "./generateOpensearchMarkdown";
 import { generateOpensearchIndexes } from "./generateOpensearchIndexes";
 import generateOpensearchFamilyIndexes from "./generateOpensearchFamilyIndexes";
+import generateSageMakerMarkdown from "./generateSageMakerMarkdown";
+import { generateSageMakerIndexes } from "./generateSageMakerIndexes";
+import generateSageMakerFamilyIndexes from "./generateSageMakerFamilyIndexes";
 import generateAzureFamilyIndexes from "./generateAzureFamilyIndexes";
 import { generateAzureIndexes } from "./generateAzureIndexes";
 import generateAzureInstances from "./generateAzureInstances";
@@ -207,6 +211,34 @@ async function main() {
     }
     await Promise.all(promises);
     console.log("Generated instances for aws/opensearch/*.md");
+
+    await mkdir("./public/aws/sagemaker/families", { recursive: true });
+    const sagemakerFamilyIndexes =
+        await generateSageMakerFamilyIndexes(sagemakerInstances);
+    for (const [family, index] of sagemakerFamilyIndexes.entries()) {
+        await writeFile(`./public/aws/sagemaker/families/${family}.md`, index);
+    }
+    console.log("Generated aws/sagemaker/families/*.md");
+
+    const sagemakerIndexFiles =
+        await generateSageMakerIndexes(sagemakerInstances);
+    for (const [slug, index] of sagemakerIndexFiles.entries()) {
+        await writeFile(`./public/aws/sagemaker/${slug}.md`, index);
+    }
+    console.log("Generated indexes for aws/sagemaker/*.md");
+
+    promises.length = 0;
+    for (const instance of await sagemakerInstances) {
+        const markdown = generateSageMakerMarkdown(instance);
+        promises.push(
+            writeFile(
+                `./public/aws/sagemaker/${instance.instance_type}.md`,
+                markdown,
+            ),
+        );
+    }
+    await Promise.all(promises);
+    console.log("Generated instances for aws/sagemaker/*.md");
 
     await mkdir("./public/azure/vm/families", { recursive: true });
     familyIndexes = await generateAzureFamilyIndexes("/azure/vm");

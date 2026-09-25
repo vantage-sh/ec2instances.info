@@ -27,8 +27,10 @@ func savingsPlanTermSuffix(productFamily string) string {
 		return "InstanceSavings"
 	case "DatabaseSavingsPlans":
 		return "DatabaseSavings"
+	case "SageMakerSavingsPlans":
+		return "MLSavings"
 	default:
-		return "Savings" // Compute, SageMaker, etc.
+		return "Savings" // Compute savings plan?
 	}
 }
 

@@ -558,8 +558,31 @@ var GPU_DATA = map[string]gpuData{
 	},
 }
 
+type GPUInfo struct {
+	Model             string
+	Count             float64
+	Memory            int
+	ComputeCapability float64
+}
+
 func isNeuronAccelerator(instanceType string) bool {
 	return strings.HasPrefix(instanceType, "inf") || strings.HasPrefix(instanceType, "trn")
+}
+
+func LookupGPUInfo(instanceType string) (GPUInfo, bool) {
+	if isNeuronAccelerator(instanceType) {
+		return GPUInfo{}, false
+	}
+	data, ok := GPU_DATA[instanceType]
+	if !ok {
+		return GPUInfo{}, false
+	}
+	return GPUInfo{
+		Model:             data.gpuModel,
+		Count:             data.gpuCount,
+		Memory:            data.gpuMemory,
+		ComputeCapability: data.computeCapability,
+	}, true
 }
 
 func addGpuInfo(instances map[string]*EC2Instance) {
@@ -574,7 +597,7 @@ func addGpuInfo(instances map[string]*EC2Instance) {
 			continue
 		}
 
-		gpuData, ok := GPU_DATA[instanceType]
+		info, ok := LookupGPUInfo(instanceType)
 		if !ok {
 			if instance.GPU > 0 {
 				utils.SendWarning("GPU data missing for", instanceType)
@@ -582,9 +605,9 @@ func addGpuInfo(instances map[string]*EC2Instance) {
 			continue
 		}
 
-		instance.GPU = gpuData.gpuCount
-		instance.GPUModel = &gpuData.gpuModel
-		instance.ComputeCapability = gpuData.computeCapability
-		instance.GPUMemory = gpuData.gpuMemory
+		instance.GPU = info.Count
+		instance.GPUModel = &info.Model
+		instance.ComputeCapability = info.ComputeCapability
+		instance.GPUMemory = info.Memory
 	}
 }
