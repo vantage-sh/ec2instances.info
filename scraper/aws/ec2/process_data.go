@@ -236,12 +236,14 @@ func processEC2Data(
 			}
 		}
 
-		// Set the region description
+		// Set the region description. Incomplete Local Zones can appear in the
+		// offer index with storage-only products and no compute SKUs, so there
+		// is nothing to derive a location from — warn and skip those regions.
 		if regionDescription == "" {
-			log.Fatalln("EC2 Region description missing for", rawRegion.RegionName)
-		} else {
-			regionDescriptions[rawRegion.RegionName] = regionDescription
+			utils.SendWarning("EC2 Region description missing for", rawRegion.RegionName)
+			continue
 		}
+		regionDescriptions[rawRegion.RegionName] = regionDescription
 	}
 
 	// Add spot pricing if not China
