@@ -219,8 +219,19 @@ func addDateIntroduced(instances map[string]*EC2Instance) {
 		if !ok {
 			fallback, ok := dateIntroducedFallback[instanceType]
 			if !ok {
-				utils.SendWarning("Date introduced data missing for", instanceType)
-				continue
+				// Temporary until r9g/r9gd land in instancetyp.es/timeline.json.
+				// https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-ec2-r9g-and-r9gd-memory-optimized-instances-are-now-available/
+				family := strings.SplitN(instanceType, ".", 2)[0]
+				if family != "r9g" && family != "r9gd" {
+					utils.SendWarning("Date introduced data missing for", instanceType)
+					continue
+				}
+				fallback = timelineEntry{
+					ReleaseMonth: "August",
+					ReleaseYear:  2026,
+					Announcement: timelineSource{Published: strPtr("Aug 31, 2026")},
+					BlogPost:     timelineSource{Published: strPtr("Aug 31, 2026")},
+				}
 			}
 			entry = fallback
 		}

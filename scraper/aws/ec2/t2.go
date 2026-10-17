@@ -31,7 +31,7 @@ func getT2Html() *soup.Root {
 	return doc
 }
 
-func addT2Credits(instances map[string]*EC2Instance, t2HtmlGetter func() *soup.Root) {
+func addT2Credits(instances map[string]*EC2Instance, t2HtmlGetter func() *soup.Root, china bool) {
 	log.Default().Println("Adding T2 credits to EC2")
 
 	doc := t2HtmlGetter()
@@ -70,7 +70,10 @@ func addT2Credits(instances map[string]*EC2Instance, t2HtmlGetter func() *soup.R
 			firstNodeText = toText(children[0])
 			instance := instances[firstNodeText]
 			if instance == nil {
-				if strings.Contains(firstNodeText, ".") {
+				// Global burstable-credits docs list families before they exist in
+				// China pricing (e.g. t8i). Match spot interrupt handling and
+				// only warn for the non-China scrape.
+				if !china && strings.Contains(firstNodeText, ".") {
 					utils.SendWarning("T2 credits data has unknown instance type", firstNodeText)
 				}
 			} else {

@@ -257,7 +257,7 @@ func processEC2Data(
 	}
 
 	// Add T2 credits
-	addT2Credits(instancesHashmap, getters.t2HtmlGetter)
+	addT2Credits(instancesHashmap, getters.t2HtmlGetter, china)
 
 	// Invert the regions map
 	regionsInverted := make(map[string]string)
