@@ -503,6 +503,11 @@ func processRDSData(
 				continue
 			}
 
+			// UnusedBox SKUs (unused reserved capacity) omit vcpu; region-prefixed too.
+			if strings.Contains(product.Attributes["usagetype"], "UnusedBox") {
+				continue
+			}
+
 			// Flag unbundled SQL Server instance types from their BYOM SKUs. This
 			// is checked across all deployment options before the Single-AZ filter
 			// below, since the BYOM SKU and the priced "License included" SKU are
