@@ -240,8 +240,12 @@ func processEC2Data(
 		// offer index with storage-only products and no compute SKUs, so there
 		// is nothing to derive a location from — warn and skip those regions.
 		if regionDescription == "" {
-			utils.SendWarning("EC2 Region description missing for", rawRegion.RegionName)
-			continue
+			// Known incomplete Local Zone; log only to avoid slack notification noise.
+			if rawRegion.RegionName == "us-east-1-bog-1" {
+				log.Println("WARNING: EC2 Region description missing for", rawRegion.RegionName)
+			} else {
+				utils.SendWarning("EC2 Region description missing for", rawRegion.RegionName)
+			}
 		}
 		regionDescriptions[rawRegion.RegionName] = regionDescription
 	}
