@@ -47,7 +47,7 @@
             },
             {
                 "name": "GPU Compute Capability",
-                "help": "https://handbook.vantage.sh/aws/reference/aws-gpu-instances/",
+                "help": "https://handbook.vantage.sh/aws/reference/aws-gpu-instances/?utm_source=instances&utm_medium=inline&utm_campaign=instances_content",
                 "children": "0"
             },
             {
@@ -141,37 +141,37 @@
             {
                 "name": "Max Bandwidth (Mbps) on",
                 "helpText": "EBS",
-                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/?utm_source=instances&utm_medium=inline&utm_campaign=instances_content",
                 "children": 80000
             },
             {
                 "name": "Max Throughput (MB/s) on",
                 "helpText": "EBS",
-                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/?utm_source=instances&utm_medium=inline&utm_campaign=instances_content",
                 "children": 10000
             },
             {
                 "name": "Max I/O operations/second",
                 "helpText": "IOPS",
-                "help": "https://handbook.vantage.sh/aws/concepts/io-operations/",
+                "help": "https://handbook.vantage.sh/aws/concepts/io-operations/?utm_source=instances&utm_medium=inline&utm_campaign=instances_content",
                 "children": 260000
             },
             {
                 "name": "Baseline Bandwidth (Mbps) on",
                 "helpText": "EBS",
-                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/?utm_source=instances&utm_medium=inline&utm_campaign=instances_content",
                 "children": 80000
             },
             {
                 "name": "Baseline Throughput (MB/s) on",
                 "helpText": "EBS",
-                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/?utm_source=instances&utm_medium=inline&utm_campaign=instances_content",
                 "children": 10000
             },
             {
                 "name": "Baseline I/O operations/second",
                 "helpText": "IOPS",
-                "help": "https://handbook.vantage.sh/aws/concepts/io-operations/",
+                "help": "https://handbook.vantage.sh/aws/concepts/io-operations/?utm_source=instances&utm_medium=inline&utm_campaign=instances_content",
                 "children": 260000
             },
             {
@@ -237,7 +237,7 @@
             {
                 "name": "Elastic Map Reduce",
                 "helpText": "EMR",
-                "help": "https://handbook.vantage.sh/aws/services/emr-pricing/",
+                "help": "https://handbook.vantage.sh/aws/services/emr-pricing/?utm_source=instances&utm_medium=inline&utm_campaign=instances_content",
                 "children": true,
                 "bgStyled": true
             }

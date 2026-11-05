@@ -12,6 +12,8 @@ import MarketingWrapper from "./MarketingWrapper";
 import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
 import { MarketingSchema } from "@/schemas/marketing";
 import type { CurrencyItem } from "@/utils/loadCurrencies";
+import { usePathname } from "next/navigation";
+import { getPlacement, utmContentFromPath } from "@/utils/marketing";
 
 type AzureInstanceRootProps = {
     rainbowTable: string[];
@@ -51,6 +53,11 @@ export default function AzureInstanceRoot({
     currencies,
 }: AzureInstanceRootProps) {
     const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
+    const pathname = usePathname();
+    const demo = getPlacement(
+        "sidebar.demo.azure",
+        utmContentFromPath(pathname),
+    );
 
     return (
         <MarketingWrapper instanceType="azure" marketingData={marketingData}>
@@ -90,7 +97,7 @@ export default function AzureInstanceRoot({
                             useSpotMin={true}
                             setPathSuffix={setPathSuffix}
                         />
-                        <VantageDemo link="https://www.vantage.sh/lp/azure-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar" />
+                        {demo && <VantageDemo link={demo.href} />}
                         <FamilySize
                             allOfInstanceType={allOfInstanceType}
                             instanceName={compressedInstance.instance_type}

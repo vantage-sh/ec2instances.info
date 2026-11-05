@@ -1,13 +1,12 @@
+import marketingJson from "@/marketing.json";
 import { validateMarketing } from "@/schemas/marketing";
-import { MARKETING_JSON_URL } from "@/components/advertUrl";
+
+const marketingData = validateMarketing(marketingJson);
 
 async function loadAdvertData() {
-    const res = await fetch(MARKETING_JSON_URL);
-    if (!res.ok) {
-        throw new Error("Failed to fetch marketing data");
-    }
-    const newData = await res.json();
-    return validateMarketing(newData);
+    return marketingData;
 }
 
 export default loadAdvertData();
+
+export { marketingData };

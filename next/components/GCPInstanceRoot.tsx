@@ -12,7 +12,8 @@ import MarketingWrapper from "./MarketingWrapper";
 import useStateWithCurrentQuerySeeded from "@/utils/useStateWithCurrentQuerySeeded";
 import { MarketingSchema } from "@/schemas/marketing";
 import type { CurrencyItem } from "@/utils/loadCurrencies";
-
+import { usePathname } from "next/navigation";
+import { getPlacement, utmContentFromPath } from "@/utils/marketing";
 type GCPInstanceRootProps = {
     rainbowTable: string[];
     compressedInstance: GCPInstance;
@@ -44,6 +45,8 @@ export default function GCPInstanceRoot({
     currencies,
 }: GCPInstanceRootProps) {
     const [pathSuffix, setPathSuffix] = useStateWithCurrentQuerySeeded();
+    const pathname = usePathname();
+    const demo = getPlacement("sidebar.demo.gcp", utmContentFromPath(pathname));
 
     return (
         <MarketingWrapper instanceType="gcp" marketingData={marketingData}>
@@ -83,7 +86,7 @@ export default function GCPInstanceRoot({
                             useSpotMin={true}
                             setPathSuffix={setPathSuffix}
                         />
-                        <VantageDemo link="https://www.vantage.sh/lp/gcp-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=details-sidebar" />
+                        {demo && <VantageDemo link={demo.href} />}
                         <FamilySize
                             allOfInstanceType={allOfInstanceType}
                             instanceName={compressedInstance.instance_type}

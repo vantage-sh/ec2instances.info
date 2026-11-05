@@ -1,7 +1,7 @@
 import React from "react";
 import MarketingWrapper from "./MarketingWrapper";
 import componentTests from "@/utils/testing/componentTests";
-import { expect } from "vitest";
+import { expect, vi } from "vitest";
 import { RenderResult } from "@testing-library/react";
 import { MarketingSchema } from "@/schemas/marketing";
 
@@ -22,49 +22,67 @@ let originalEnv: string | undefined;
 
 const testP = React.createElement("p", {}, "testing 123");
 
-const mockMarketingData: MarketingSchema = {
-    ctas: {
-        hello: {
-            title: "Hello",
-            cta_text: "Hello",
-            cta_url: "https://www.vantage.sh",
-        },
-    },
-    promotions: {
-        generic: [
-            {
-                cta: "hello",
-            },
-        ],
-    },
+vi.mock("next/navigation", () => ({
+    usePathname: () => "/",
+}));
+
+const sampleCard = {
+    title: "Test Card",
+    description: "A test blog card",
+    image: "https://example.com/image.jpg",
+    baseUrl: "https://www.vantage.sh/blog/test",
+    utm_medium: "blog-card" as const,
+    utm_campaign: "instances_content" as const,
+    enabled: true,
 };
 
-const fetchBefore = window.fetch;
-
-const stubFetchWithError = {
-    before: () => {
-        window.fetch = () => Promise.reject(new Error("test"));
+const mockMarketingData: MarketingSchema = {
+    placements: {},
+    banners: {
+        backgroundImage: "https://example.com/banner.png",
+        ctas: {
+            hello: {
+                title: "Hello",
+                cta_text: "Hello",
+                baseUrl: "https://www.vantage.sh/",
+                utm_medium: "banner",
+                utm_campaign: "instances_signup",
+                enabled: true,
+            },
+        },
+        promotions: {
+            generic: [
+                {
+                    cta: "hello",
+                },
+            ],
+        },
     },
-    after: () => {
-        window.fetch = fetchBefore;
+    toasts: [],
+    blogCards: {
+        "ec2-flex": [sampleCard],
+        "ec2-gpu": [sampleCard],
+        "ec2-other": [sampleCard],
+        rds: [sampleCard],
+        opensearch: [sampleCard],
+        redshift: [sampleCard],
+        elasticache: [sampleCard],
+        azure: [sampleCard],
+        gcp: [sampleCard],
     },
 };
 
 componentTests(
     [
-        // Marketing disabled
-
         {
             name: "renders just child if marketing is disabled in ec2-other mode",
             patch: {
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "1";
-                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
-                    stubFetchWithError.after();
                 },
             },
             props: {
@@ -84,11 +102,9 @@ componentTests(
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "1";
-                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
-                    stubFetchWithError.after();
                 },
             },
             props: {
@@ -102,20 +118,15 @@ componentTests(
                 );
             },
         },
-
-        // Marketing enabled - AWS EC2 types
-
         {
             name: "renders child and marketing in ec2-flex mode",
             patch: {
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
-                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
-                    stubFetchWithError.after();
                 },
             },
             props: {
@@ -131,11 +142,9 @@ componentTests(
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
-                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
-                    stubFetchWithError.after();
                 },
             },
             props: {
@@ -151,11 +160,9 @@ componentTests(
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
-                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
-                    stubFetchWithError.after();
                 },
             },
             props: {
@@ -165,20 +172,15 @@ componentTests(
             },
             test: validateMarketing,
         },
-
-        // Marketing enabled - AWS Database types
-
         {
             name: "renders child and marketing in rds mode",
             patch: {
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
-                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
-                    stubFetchWithError.after();
                 },
             },
             props: {
@@ -194,11 +196,9 @@ componentTests(
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
-                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
-                    stubFetchWithError.after();
                 },
             },
             props: {
@@ -214,11 +214,9 @@ componentTests(
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
-                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
-                    stubFetchWithError.after();
                 },
             },
             props: {
@@ -234,11 +232,9 @@ componentTests(
                 before: () => {
                     originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
-                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
-                    stubFetchWithError.after();
                 },
             },
             props: {
@@ -248,9 +244,6 @@ componentTests(
             },
             test: validateMarketing,
         },
-
-        // Marketing enabled - Azure
-
         {
             name: "renders child and marketing in azure mode",
             patch: {

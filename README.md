@@ -103,6 +103,30 @@ This will take ~30 minutes, and when it is done you will have a `www` folder wit
 
 The logic we use to do this (a mix of a scripted push to R2 and a small Cloudflare Worker) can be found in `deployment/index.ts` and `worker.js`.
 
+## Marketing links (`next/marketing.json`)
+
+All Vantage-bound marketing links (nav, footer, toast, promo banner, sidebar demo, blog cards, and inline CTAs) are defined in [`next/marketing.json`](./next/marketing.json). Components read copy, destination, and UTM fields from that file via `buildVantageUrl` / `getPlacement` — do not hardcode `*.vantage.sh` URLs or UTM strings in templates.
+
+Each placement has `label`, `baseUrl`, `utm_medium`, `utm_campaign`, optional `utm_content`, and `enabled`. UTMs always use `utm_source=instances`. Page context for `utm_content` (e.g. `aws-ec2-home`, `aws-ec2-m5.large`) is derived from the URL automatically unless a placement overrides it.
+
+**Example — change the homepage promo banner copy and link:**
+
+1. Open `next/marketing.json`.
+2. Find `banners.ctas.home`.
+3. Edit `title` for the banner text, and `baseUrl` for the destination (keep `utm_medium` / `utm_campaign` unless you intend to change attribution).
+4. Set `"enabled": false` to hide a placement without deleting it.
+
+```json
+"home": {
+    "title": "Your new banner copy goes here.",
+    "cta_text": "",
+    "baseUrl": "https://www.vantage.sh/",
+    "utm_medium": "banner",
+    "utm_campaign": "instances_signup",
+    "enabled": true
+}
+```
+
 ## Keep up-to-date
 
 Feel free to watch/star this repo as we're looking to update the site regularly. Vantage also works on the following relevant projects:

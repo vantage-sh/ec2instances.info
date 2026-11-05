@@ -1,24 +1,17 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { array, InferOutput, object, string, parse, optional } from "valibot";
 import { toast } from "sonner";
 import { browserBlockingLocalStorage } from "@/utils/abGroup";
 import { Button } from "./ui/button";
 import cfTrace from "@/utils/cfTrace";
+import {
+    marketingData,
+    resolveToast,
+    utmContentFromPath,
+} from "@/utils/marketing";
 
-const toastsSchema = array(
-    object({
-        campaign_id: string(),
-        message: string(),
-        image_alt_text: optional(string()),
-        image_url: optional(string()),
-        url: string(),
-        countries: optional(array(string())),
-    }),
-);
-
-type Toasts = InferOutput<typeof toastsSchema>;
+type ResolvedToast = ReturnType<typeof resolveToast>;
 
 function setUnlessBlockingLocalStorage(key: string, value: string) {
     if (!browserBlockingLocalStorage) {
@@ -105,11 +98,10 @@ function ToastInner({
 }
 
 function processToasts(
-    toasts: Toasts,
+    toasts: ResolvedToast[],
     trace: { [key: string]: string } | null,
 ) {
     for (const t of toasts.slice().reverse()) {
-        // Check if the user dismissed this
         if (
             browserBlockingLocalStorage ||
             localStorage.getItem(`toastDismissed-${t.campaign_id}`)
@@ -117,7 +109,6 @@ function processToasts(
             continue;
         }
 
-        // Check if the toast is for specific countries
         if (t.countries) {
             if (
                 !trace ||
@@ -128,7 +119,6 @@ function processToasts(
             }
         }
 
-        // Show the toast. We have to do some janky circular stuff here to get the ID to the toast
         const idContainer: [number | string | null] = [null];
         const id = toast.message(
             () => (
@@ -161,64 +151,25 @@ function processToasts(
     }
 }
 
-function getUnlessUserDoesntHaveLocalStorage(key: string) {
-    if (!browserBlockingLocalStorage) return localStorage.getItem(key);
-    return null;
+function runToasts() {
+    const pageContent = utmContentFromPath(window.location.pathname);
+    const toasts = marketingData.toasts
+        .filter((t) => t.enabled)
+        .map((t) => resolveToast(t, pageContent));
+
+    cfTrace().then((trace) => {
+        processToasts(toasts, trace);
+    });
 }
 
-function runToasts(initialToasts: Toasts) {
-    // Run the trace
-    const traceResult = cfTrace();
-
-    // Check if we have it in our cache
-    const toastsCache = getUnlessUserDoesntHaveLocalStorage("toastsShown");
-    if (toastsCache) {
-        try {
-            const [endTime, toasts]: [number, Toasts] = JSON.parse(toastsCache);
-            if (Date.now() < endTime) {
-                traceResult.then((trace) => {
-                    processToasts(toasts, trace);
-                });
-                return;
-            }
-        } catch {
-            // Bad JSON for some reason :(
-        }
-    }
-
-    // Try to fetch the toasts
-    fetch("https://instances.vantage.sh/toasts.json")
-        .then((res) => res.json())
-        .then(async (data) => {
-            // Await the trace result
-            const trace = await traceResult;
-
-            // Process the toasts
-            const toasts = parse(toastsSchema, data);
-            processToasts(toasts, trace);
-
-            // Cache for 2 hours
-            const endTime = Date.now() + 2 * 60 * 60 * 1000;
-            setUnlessBlockingLocalStorage(
-                "toastsShown",
-                JSON.stringify([endTime, toasts]),
-            );
-        })
-        .catch(async () => {
-            // If we're unable to fetch, just use the initial toasts
-            const trace = await traceResult;
-            processToasts(initialToasts, trace);
-        });
-}
-
-export default function AdToasts({ initialToasts }: { initialToasts: Toasts }) {
+export default function AdToasts() {
     if (process.env.NEXT_PUBLIC_REMOVE_ADVERTS === "1") return null;
 
     const ranRef = useRef(false);
     useEffect(() => {
         if (ranRef.current) return;
         ranRef.current = true;
-        runToasts(initialToasts);
+        runToasts();
     }, []);
     return null;
 }

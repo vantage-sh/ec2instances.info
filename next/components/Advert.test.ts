@@ -12,31 +12,29 @@ vi.mock("next/navigation", () => ({
 }));
 
 const genericMockMarketingData: MarketingSchema = {
-    ctas: {
-        hello: {
-            title: "Hello",
-            cta_text: "Hello",
-            cta_url: "https://www.vantage.sh",
+    placements: {},
+    banners: {
+        backgroundImage: "https://example.com/banner.png",
+        ctas: {
+            hello: {
+                title: "Hello",
+                cta_text: "Hello",
+                baseUrl: "https://www.vantage.sh/",
+                utm_medium: "banner",
+                utm_campaign: "instances_signup",
+                enabled: true,
+            },
+        },
+        promotions: {
+            generic: [
+                {
+                    cta: "hello",
+                },
+            ],
         },
     },
-    promotions: {
-        generic: [
-            {
-                cta: "hello",
-            },
-        ],
-    },
-};
-
-const fetchBefore = window.fetch;
-
-const stubFetchWithError = {
-    before: () => {
-        window.fetch = () => Promise.reject(new Error("test"));
-    },
-    after: () => {
-        window.fetch = fetchBefore;
-    },
+    toasts: [],
+    blogCards: {},
 };
 
 componentTests(
@@ -46,11 +44,9 @@ componentTests(
             patch: {
                 before: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "1";
-                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
-                    stubFetchWithError.after();
                 },
             },
             props: {
@@ -68,12 +64,10 @@ componentTests(
                 before: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "0";
                     pathname = "/";
-                    stubFetchWithError.before();
                 },
                 after: () => {
                     process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
                     pathname = "/";
-                    stubFetchWithError.after();
                 },
             },
             props: {
@@ -83,6 +77,19 @@ componentTests(
             },
             test: (component) => {
                 expect(component.container.innerHTML).toContain("Hello");
+                const link = component.container.querySelector("a");
+                expect(link?.getAttribute("href")).toContain(
+                    "utm_source=instances",
+                );
+                expect(link?.getAttribute("href")).toContain(
+                    "utm_medium=banner",
+                );
+                expect(link?.getAttribute("href")).toContain(
+                    "utm_campaign=instances_signup",
+                );
+                expect(link?.getAttribute("href")).toContain(
+                    "utm_content=aws-ec2-home",
+                );
             },
         },
     ],

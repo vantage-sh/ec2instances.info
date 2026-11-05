@@ -3,57 +3,13 @@
 import {
     MarketingSchema,
     InstanceGroupType,
-    validateMarketing,
+    BannerCta,
     PromotionIf,
 } from "@/schemas/marketing";
 import { useEffect, useState } from "react";
-import { MARKETING_JSON_URL } from "./advertUrl";
+import { usePathname } from "next/navigation";
 import { abGroup, browserBlockingLocalStorage } from "@/utils/abGroup";
-
-const style = {
-    color: "white",
-    backgroundImage:
-        "url(https://assets.vantage.sh/www/instances-banner-blue.png)",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-};
-
-async function fetchOrGetCachedMarketingData(marketingData: MarketingSchema) {
-    // Cache this for 30 minutes.
-    if (!browserBlockingLocalStorage) {
-        const cachedString = localStorage.getItem("vantage-marketing-data");
-        if (cachedString) {
-            let cachedData: {
-                timestamp: number;
-                data: MarketingSchema;
-            } = JSON.parse(cachedString);
-            const d = validateMarketing(cachedData.data);
-            if (cachedData.timestamp >= Date.now() - 30 * 60 * 1000) {
-                return d;
-            }
-        }
-    }
-
-    // Fetch the latest marketing data.
-    try {
-        const res = await fetch(MARKETING_JSON_URL);
-        const newData = validateMarketing(await res.json());
-        if (!browserBlockingLocalStorage) {
-            localStorage.setItem(
-                "vantage-marketing-data",
-                JSON.stringify({
-                    timestamp: Date.now(),
-                    data: newData,
-                }),
-            );
-        }
-        return newData;
-    } catch {}
-
-    // Use the old marketing data if the fetch fails.
-    return marketingData;
-}
+import { resolveBannerCta, utmContentFromPath } from "@/utils/marketing";
 
 function processIfBranches(
     ifs: PromotionIf | undefined,
@@ -80,32 +36,12 @@ export default function Advert({
 }) {
     if (process.env.NEXT_PUBLIC_REMOVE_ADVERTS === "1") return null;
 
-    // Get the cta.
-    const [cta, setCta] = useState<{
-        title: string;
-        cta_text: string;
-        cta_url: string;
-    } | null>(null);
+    const pathname = usePathname();
+    const pageContent = utmContentFromPath(pathname);
 
-    const [loadedMarketingData, setLoadedMarketingData] =
-        useState(marketingData);
-    useEffect(() => {
-        let active = true;
-        fetchOrGetCachedMarketingData(marketingData)
-            .then((data) => {
-                if (active) setLoadedMarketingData(data);
-            })
-            .catch(() => {
-                console.error("Failed to fetch marketing data");
-            });
-        return () => {
-            active = false;
-        };
-    }, [marketingData]);
+    const [cta, setCta] = useState<BannerCta | null>(null);
 
-    // Handle the client-side logic.
     useEffect(() => {
-        // Add 1 to the use counter.
         let useCounter = 0;
         if (!browserBlockingLocalStorage) {
             useCounter = Number(
@@ -117,31 +53,42 @@ export default function Advert({
             );
         }
 
-        // Handle the selected promotion.
-        const selectedPromotion = loadedMarketingData.promotions[instanceGroup];
+        const selectedPromotion =
+            marketingData.banners.promotions[instanceGroup];
         for (const promotion of selectedPromotion || []) {
             if (processIfBranches(promotion.if, gpu, useCounter)) {
-                setCta(loadedMarketingData.ctas[promotion.cta]);
-                return;
+                const selected = marketingData.banners.ctas[promotion.cta];
+                if (selected?.enabled) {
+                    setCta(selected);
+                    return;
+                }
             }
         }
 
-        // Try with the generic promotion.
-        const genericPromotion = loadedMarketingData.promotions.generic;
+        const genericPromotion = marketingData.banners.promotions.generic;
         for (const promotion of genericPromotion || []) {
             if (processIfBranches(promotion.if, gpu, useCounter)) {
-                setCta(loadedMarketingData.ctas[promotion.cta]);
-                return;
+                const selected = marketingData.banners.ctas[promotion.cta];
+                if (selected?.enabled) {
+                    setCta(selected);
+                    return;
+                }
             }
         }
 
-        // Throw if no promotion was found.
         setTimeout(() => {
             throw new Error("No promotion found");
         }, 0);
-    }, [gpu, loadedMarketingData]);
+    }, [gpu, instanceGroup, marketingData]);
 
-    // By default, show the banner with no context.
+    const style = {
+        color: "white",
+        backgroundImage: `url(${marketingData.banners.backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+    };
+
     if (!cta) {
         return (
             <div className="h-[2.5em]" style={style}>
@@ -150,9 +97,10 @@ export default function Advert({
         );
     }
 
-    // Return when the cta is found.
+    const href = resolveBannerCta(cta, pageContent);
+
     return (
-        <a href={cta.cta_url} target="_blank">
+        <a href={href} target="_blank">
             <div className="h-[2.5em]" style={style}>
                 <div className="flex items-center justify-center h-full">
                     <img

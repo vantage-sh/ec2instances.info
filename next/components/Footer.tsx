@@ -1,7 +1,17 @@
+"use client";
+
 import TranslationFriendlyLink from "@/components/TranslationFriendlyLink";
 import { buttonVariants } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
+import { getPlacement, utmContentFromPath } from "@/utils/marketing";
 
 export default function Footer() {
+    const pathname = usePathname();
+    const pageContent = utmContentFromPath(pathname);
+    const docs = getPlacement("footer.docs", pageContent);
+    const byVantage = getPlacement("footer.by_vantage", pageContent);
+    const api = getPlacement("footer.api", pageContent);
+
     return (
         <div className="border-t border-gray-3 h-[3rem] sticky bottom-0 text-xs text-gray-2 bg-background">
             <div className="flex items-center justify-between h-full px-2">
@@ -15,35 +25,41 @@ export default function Footer() {
                     Comparison
                 </div>
                 <div className="flex items-center gap-3">
-                    <a
-                        href="https://handbook.vantage.sh/tools/instances/"
-                        target="_blank"
-                        className="text-purple-brand text-underline hover:text-purple-0"
-                    >
-                        Docs
-                    </a>
-                    <span>
-                        By{" "}
+                    {docs && (
                         <a
+                            href={docs.href}
                             target="_blank"
-                            href="https://www.vantage.sh/lp/aws-instances-demo?utm_campaign=Instances%20Blog%20Clicks&utm_source=by-vantage"
                             className="text-purple-brand text-underline hover:text-purple-0"
                         >
-                            Vantage
+                            {docs.label}
                         </a>
-                    </span>
-                    <div className="hidden md:block">
-                        <TranslationFriendlyLink
-                            href="https://instances-api.vantage.sh/?utm_campaign=Instances%20Blog%20Clicks&utm_source=footer"
-                            target="_blank"
-                            className={buttonVariants({
-                                variant: "outline",
-                                size: "sm",
-                            })}
-                        >
-                            Get API Key
-                        </TranslationFriendlyLink>
-                    </div>
+                    )}
+                    {byVantage && (
+                        <span>
+                            By{" "}
+                            <a
+                                target="_blank"
+                                href={byVantage.href}
+                                className="text-purple-brand text-underline hover:text-purple-0"
+                            >
+                                {byVantage.label}
+                            </a>
+                        </span>
+                    )}
+                    {api && (
+                        <div className="hidden md:block">
+                            <TranslationFriendlyLink
+                                href={api.href}
+                                target="_blank"
+                                className={buttonVariants({
+                                    variant: "outline",
+                                    size: "sm",
+                                })}
+                            >
+                                {api.label}
+                            </TranslationFriendlyLink>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

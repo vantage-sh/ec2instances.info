@@ -1,4 +1,12 @@
 import { EC2Instance } from "@/types";
+import { buildVantageUrl } from "@/utils/marketing/buildVantageUrl";
+
+function handbookHelp(path: string): string {
+    return buildVantageUrl(`https://handbook.vantage.sh${path}`, {
+        medium: "inline",
+        campaign: "instances_content",
+    });
+}
 
 type Row = {
     name: string;
@@ -119,7 +127,7 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
                 },
                 {
                     name: "GPU Compute Capability",
-                    help: "https://handbook.vantage.sh/aws/reference/aws-gpu-instances/",
+                    help: handbookHelp("/aws/reference/aws-gpu-instances/"),
                     children: instance.compute_capability || "0",
                 },
                 {
@@ -235,37 +243,37 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
                 {
                     name: "Max Bandwidth (Mbps) on",
                     helpText: "EBS",
-                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    help: handbookHelp("/aws/services/ebs-pricing/"),
                     children: instance.ebs_max_bandwidth,
                 },
                 {
                     name: "Max Throughput (MB/s) on",
                     helpText: "EBS",
-                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    help: handbookHelp("/aws/services/ebs-pricing/"),
                     children: instance.ebs_throughput,
                 },
                 {
                     name: "Max I/O operations/second",
                     helpText: "IOPS",
-                    help: "https://handbook.vantage.sh/aws/concepts/io-operations/",
+                    help: handbookHelp("/aws/concepts/io-operations/"),
                     children: instance.ebs_iops,
                 },
                 {
                     name: "Baseline Bandwidth (Mbps) on",
                     helpText: "EBS",
-                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    help: handbookHelp("/aws/services/ebs-pricing/"),
                     children: instance.ebs_baseline_bandwidth,
                 },
                 {
                     name: "Baseline Throughput (MB/s) on",
                     helpText: "EBS",
-                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    help: handbookHelp("/aws/services/ebs-pricing/"),
                     children: instance.ebs_baseline_throughput,
                 },
                 {
                     name: "Baseline I/O operations/second",
                     helpText: "IOPS",
-                    help: "https://handbook.vantage.sh/aws/concepts/io-operations/",
+                    help: handbookHelp("/aws/concepts/io-operations/"),
                     children: instance.ebs_baseline_iops,
                 },
                 {
@@ -354,7 +362,7 @@ export function ec2(instance: Omit<EC2Instance, "pricing">): Table[] {
                 {
                     name: "Elastic Map Reduce",
                     helpText: "EMR",
-                    help: "https://handbook.vantage.sh/aws/services/emr-pricing/",
+                    help: handbookHelp("/aws/services/emr-pricing/"),
                     children: instance.emr,
                     bgStyled: true,
                 },
@@ -456,37 +464,37 @@ export function rds(
                 {
                     name: "Max Bandwidth (Mbps) on",
                     helpText: "EBS",
-                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    help: handbookHelp("/aws/services/ebs-pricing/"),
                     children: instance.ebs_max_bandwidth,
                 },
                 {
                     name: "Max Throughput (MB/s) on",
                     helpText: "EBS",
-                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    help: handbookHelp("/aws/services/ebs-pricing/"),
                     children: instance.ebs_throughput,
                 },
                 {
                     name: "Max I/O operations/second",
                     helpText: "IOPS",
-                    help: "https://handbook.vantage.sh/aws/concepts/io-operations/",
+                    help: handbookHelp("/aws/concepts/io-operations/"),
                     children: instance.ebs_iops,
                 },
                 {
                     name: "Baseline Bandwidth (Mbps) on",
                     helpText: "EBS",
-                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    help: handbookHelp("/aws/services/ebs-pricing/"),
                     children: instance.ebs_baseline_bandwidth,
                 },
                 {
                     name: "Baseline Throughput (MB/s) on",
                     helpText: "EBS",
-                    help: "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                    help: handbookHelp("/aws/services/ebs-pricing/"),
                     children: instance.ebs_baseline_throughput,
                 },
                 {
                     name: "Baseline I/O operations/second",
                     helpText: "IOPS",
-                    help: "https://handbook.vantage.sh/aws/concepts/io-operations/",
+                    help: handbookHelp("/aws/concepts/io-operations/"),
                     children: instance.ebs_baseline_iops,
                 },
             ],
