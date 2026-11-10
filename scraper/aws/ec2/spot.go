@@ -47,7 +47,7 @@ func processSpotInterruptData(region string, os string, instance *EC2Instance, s
 		return
 	}
 
-	if r > len(R_VALUES_MAPPING) {
+	if r < 0 || r >= len(R_VALUES_MAPPING) {
 		utils.SendWarning("Spot interrupt data has unknown R value", r, "for", instance.InstanceType)
 		return
 	}
