@@ -41,3 +41,27 @@ func TestGPUDataSameModelSameComputeCapability(t *testing.T) {
 		}
 	}
 }
+
+// GPU count and memory per instance from
+// https://docs.aws.amazon.com/ec2/latest/instancetypes/ac.html
+func TestGPUDataPerInstanceCountAndMemory(t *testing.T) {
+	tests := map[string]struct {
+		gpuCount  float64
+		gpuMemory int
+	}{
+		"p5.48xlarge":        {8, 640},
+		"p5e.48xlarge":       {8, 1128},
+		"p6e-gb200.36xlarge": {4, 740},
+	}
+	for instanceType, want := range tests {
+		data, ok := GPU_DATA[instanceType]
+		if !ok {
+			t.Errorf("%s: missing from GPU_DATA", instanceType)
+			continue
+		}
+		if data.gpuCount != want.gpuCount || data.gpuMemory != want.gpuMemory {
+			t.Errorf("%s: gpuCount = %v, gpuMemory = %v, want %v and %v",
+				instanceType, data.gpuCount, data.gpuMemory, want.gpuCount, want.gpuMemory)
+		}
+	}
+}
