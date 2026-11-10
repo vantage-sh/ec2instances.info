@@ -550,6 +550,15 @@ var GPU_DATA = map[string]gpuData{
 		gpuCount:          0.125,
 		gpuMemory:         3,
 	},
+	// The Price List API has no gpu attribute for dl1, so without this entry
+	// it shows 0 GPUs. https://docs.aws.amazon.com/ec2/latest/instancetypes/ac.html
+	// lists it as 8 x Habana Gaudi HL-205 GPU, 256 GiB (8 x 32 GiB).
+	"dl1.24xlarge": {
+		gpuModel:          "Habana Gaudi HL-205",
+		computeCapability: 0,
+		gpuCount:          8,
+		gpuMemory:         256,
+	},
 	"dl2q.24xlarge": {
 		gpuModel:          "Qualcomm AI 100 Accelerators",
 		computeCapability: 0,
