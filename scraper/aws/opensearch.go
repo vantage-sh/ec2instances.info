@@ -218,7 +218,8 @@ func processOpenSearchData(
 		regionDescription := ""
 		for _, product := range rawRegion.RegionData.Products {
 			if product.ProductFamily != "Amazon OpenSearch Service Instance" ||
-				product.Attributes["operation"] == "DirectQueryAmazonS3GDCOCU" {
+				product.Attributes["operation"] == "DirectQueryAmazonS3GDCOCU" ||
+				!strings.Contains(product.Attributes["usagetype"], "ESInstance:") {
 				continue
 			}
 
