@@ -14,6 +14,7 @@ import {
     regex,
     makeCellWithRegexSorter,
     expr,
+    costExpr,
     resolvePricePrecision,
 } from "../shared";
 import exprCompiler from "@/utils/expr";
@@ -208,6 +209,8 @@ export function getPricingSorter(
                 pricePrecision,
             );
         }),
+        // Raw strings (e.g. spot interrupt rates) keep the regex filter.
+        ...(convertToPrice && { filterFn: costExpr }),
     } satisfies Partial<ColumnDef<EC2Instance>>;
 }
 
