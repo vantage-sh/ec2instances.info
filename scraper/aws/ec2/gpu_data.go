@@ -500,11 +500,13 @@ var GPU_DATA = map[string]gpuData{
 		gpuMemory:         640,
 	},
 	"p6e-gb200.36xlarge": {
+		// Each p6e-gb200.36xlarge instance has 4 GPUs (740 GiB). 36 GPUs and
+		// 6660 GiB are the u-p6e-gb200x36 UltraServer totals (9 instances).
+		// https://docs.aws.amazon.com/ec2/latest/instancetypes/ac.html
 		gpuModel:          "NVIDIA B200",
 		computeCapability: 10.0,
-		// https://aws.amazon.com/ec2/instance-types/p6/
-		gpuCount:  36,
-		gpuMemory: 6660,
+		gpuCount:          4,
+		gpuMemory:         740,
 	},
 	"p6-b200.48xlarge": {
 		gpuModel:          "NVIDIA B200",
