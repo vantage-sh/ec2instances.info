@@ -152,6 +152,10 @@ function calculateCost(
         ] as number;
     }
 
+    if (!Number.isFinite(pricingUnitModifier) || pricingUnitModifier <= 0) {
+        return -1;
+    }
+
     return (
         ((Number(price) * durationMultiplier) / pricingUnitModifier) * usdRate
     );

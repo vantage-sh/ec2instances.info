@@ -156,6 +156,28 @@ var dateIntroducedFallback = map[string]timelineEntry{
 		Announcement: timelineSource{Published: strPtr("Sep 17, 2026")},
 		BlogPost:     timelineSource{Published: strPtr("Sep 17, 2026")},
 	},
+	// Temporary until t9g lands in instancetyp.es/timeline.json.
+	// https://aws.amazon.com/about-aws/whats-new/2026/11/ec2-t9g-instances-ga/
+	"t9g.nano": {
+		ReleaseMonth: "November",
+		ReleaseYear:  2026,
+		Announcement: timelineSource{Published: strPtr("Nov 20, 2026")},
+	},
+	"t9g.micro": {
+		ReleaseMonth: "November",
+		ReleaseYear:  2026,
+		Announcement: timelineSource{Published: strPtr("Nov 20, 2026")},
+	},
+	"t9g.small": {
+		ReleaseMonth: "November",
+		ReleaseYear:  2026,
+		Announcement: timelineSource{Published: strPtr("Nov 20, 2026")},
+	},
+	"t9g.medium": {
+		ReleaseMonth: "November",
+		ReleaseYear:  2026,
+		Announcement: timelineSource{Published: strPtr("Nov 20, 2026")},
+	},
 }
 
 func parsePublishedDate(s string) (string, bool) {
