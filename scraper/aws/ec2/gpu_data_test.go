@@ -52,6 +52,10 @@ func TestGPUDataPerInstanceCountAndMemory(t *testing.T) {
 		"p5.48xlarge":        {8, 640},
 		"p5e.48xlarge":       {8, 1128},
 		"p6e-gb200.36xlarge": {4, 740},
+		// https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-g7-metal-size/
+		// https://aws.amazon.com/ec2/instance-types/g7/
+		"g7.48xlarge": {8, 256},
+		"g7.metal":    {8, 256},
 	}
 	for instanceType, want := range tests {
 		data, ok := GPU_DATA[instanceType]
