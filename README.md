@@ -107,10 +107,9 @@ The logic we use to do this (a mix of a scripted push to R2 and a small Cloudfla
 
 Feel free to watch/star this repo as we're looking to update the site regularly. Vantage also works on the following relevant projects:
 
-- [vantage.sh/models](https://vantage.sh/models) - An open-source site for comparing LLM prices, specifications, benchmarks, and hosting information.
+- [Vantage](https://vantage.sh/) - A cloud cost transparency platform.
 - [cur.vantage.sh](https://cur.vantage.sh/) - Definitions of all AWS Cost and Usage Report (CUR) billing codes by service.
 - [The Cloud Cost Handbook](https://github.com/vantage-sh/handbook) - An
   open-source set of guides for best practices of managing cloud costs.
 - [The AWS Cost Leaderboard](https://leaderboard.vantage.sh/) - A hosted site of
   the top AWS cost centers.
-- [Vantage](https://vantage.sh/) - A cloud cost transparency platform.
