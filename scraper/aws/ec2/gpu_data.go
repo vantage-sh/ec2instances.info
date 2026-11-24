@@ -397,6 +397,15 @@ var GPU_DATA = map[string]gpuData{
 		gpuCount:          8,
 		gpuMemory:         256,
 	},
+	// g7.metal: same GPU config as g7.48xlarge (8x RTX PRO 4500 Blackwell, 256 GB).
+	// https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-g7-metal-size/
+	// https://aws.amazon.com/ec2/instance-types/g7/
+	"g7.metal": {
+		gpuModel:          "NVIDIA RTX PRO 4500 Blackwell",
+		computeCapability: 12.0,
+		gpuCount:          8,
+		gpuMemory:         256,
+	},
 	"p4d.24xlarge": {
 		gpuModel:          "NVIDIA A100",
 		computeCapability: 8.0,
