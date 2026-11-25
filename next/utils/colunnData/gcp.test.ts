@@ -55,4 +55,30 @@ describe("GCP unit pricing", () => {
             ),
         ).toBe("$0.0416 hourly / vCPU");
     });
+
+    it("divides by GPU memory for the GPU memory unit", () => {
+        const instance = { memory: 85, GPU_memory: 24 } as GCPInstance;
+        expect(
+            calculateAndFormatCost(
+                1.2,
+                instance,
+                "gpu_memory",
+                "hourly",
+                currency,
+            ),
+        ).toBe("$0.0500 hourly / GiB");
+    });
+
+    it("omits GPU memory prices for instances without GPUs", () => {
+        const instance = { memory: 85 } as GCPInstance;
+        expect(
+            calculateAndFormatCost(
+                1.2,
+                instance,
+                "gpu_memory",
+                "hourly",
+                currency,
+            ),
+        ).toBeUndefined();
+    });
 });

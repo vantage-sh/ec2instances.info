@@ -130,7 +130,11 @@ function calculateCost(
 
     if (pricingUnit !== "instance") {
         pricingUnitModifier = instance[
-            pricingUnit === "vcpu" ? "vCPU" : "memory"
+            pricingUnit === "vcpu"
+                ? "vCPU"
+                : pricingUnit === "gpu_memory"
+                  ? "GPU_memory"
+                  : "memory"
         ] as number;
     }
 
