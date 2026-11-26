@@ -248,6 +248,26 @@ componentTests(
             },
             test: validateMarketing,
         },
+        {
+            name: "renders child and marketing in sagemaker mode",
+            patch: {
+                before: () => {
+                    originalEnv = process.env.NEXT_PUBLIC_REMOVE_ADVERTS;
+                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = "";
+                    stubFetchWithError.before();
+                },
+                after: () => {
+                    process.env.NEXT_PUBLIC_REMOVE_ADVERTS = originalEnv;
+                    stubFetchWithError.after();
+                },
+            },
+            props: {
+                instanceType: "sagemaker",
+                children: testP,
+                marketingData: mockMarketingData,
+            },
+            test: validateMarketing,
+        },
 
         // Marketing enabled - Azure
 

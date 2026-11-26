@@ -4,4 +4,5 @@ export * as cache from "./cache";
 export * as opensearch from "./opensearch";
 export * as rds from "./rds";
 export * as redshift from "./redshift";
+export * as sagemaker from "./sagemaker";
 export * as gcp from "./gcp";

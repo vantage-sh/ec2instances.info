@@ -4,6 +4,7 @@ import {
     getRdsFamilies,
     getElasticacheFamilies,
     getOpensearchFamilies,
+    getSageMakerFamilies,
     redshiftInstances,
     getAzureFamilies,
     getGcpFamilies,
@@ -12,6 +13,7 @@ import { awsIndexes, ec2Indexes } from "./generateAwsIndexes";
 import { opensearchIndexes } from "./generateOpensearchIndexes";
 import { azureIndexes } from "./generateAzureIndexes";
 import { gcpIndexes } from "./generateGcpIndexes";
+import { sagemakerIndexes } from "./generateSageMakerIndexes";
 
 export default async () => `# ec2instances.info
 
@@ -42,6 +44,11 @@ ${(await redshiftInstances).map((i) => urlInject`- [${raw(i.instance_type)} inst
 
 ${opensearchIndexes.map((i) => urlInject`- [${raw(i.name)} instances](${`/aws/opensearch/${i.slug}.md`})`).join("\n")}
 ${(await getOpensearchFamilies()).map((family) => urlInject`- [Index of all ${raw(family)} instances](${`/aws/opensearch/families/${family}.md`})`).join("\n")}
+
+## Amazon SageMaker
+
+${sagemakerIndexes.map((i) => urlInject`- [${raw(i.name)} instances](${`/aws/sagemaker/${i.slug}.md`})`).join("\n")}
+${(await getSageMakerFamilies()).map((family) => urlInject`- [Index of all ${raw(family)} instances](${`/aws/sagemaker/families/${family}.md`})`).join("\n")}
 
 ## Azure
 

@@ -1,0 +1,112 @@
+[
+    {
+        "name": "Compute",
+        "slug": "Compute",
+        "rows": [
+            {
+                "name": "CPUs",
+                "children": 8
+            },
+            {
+                "name": "Memory (GiB)",
+                "children": 15
+            },
+            {
+                "name": "Memory per vCPU (GiB)",
+                "children": 1.88
+            },
+            {
+                "name": "Network Performance",
+                "children": "High"
+            },
+            {
+                "name": "GPU",
+                "children": 0,
+                "bgStyled": true
+            },
+            {
+                "name": "GPU Model",
+                "children": "none",
+                "bgStyled": true
+            }
+        ]
+    },
+    {
+        "name": "Storage",
+        "slug": "Storage",
+        "rows": [
+            {
+                "name": "Storage",
+                "children": "EBS only"
+            },
+            {
+                "name": "EBS Optimized",
+                "children": true,
+                "bgStyled": true
+            },
+            {
+                "name": "Max Bandwidth (Mbps) on",
+                "helpText": "EBS",
+                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                "children": 1000
+            },
+            {
+                "name": "Max Throughput (MB/s) on",
+                "helpText": "EBS",
+                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                "children": 125
+            },
+            {
+                "name": "Max I/O operations/second",
+                "helpText": "IOPS",
+                "help": "https://handbook.vantage.sh/aws/concepts/io-operations/",
+                "children": 8000
+            },
+            {
+                "name": "Baseline Bandwidth (Mbps) on",
+                "helpText": "EBS",
+                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                "children": 1000
+            },
+            {
+                "name": "Baseline Throughput (MB/s) on",
+                "helpText": "EBS",
+                "help": "https://handbook.vantage.sh/aws/services/ebs-pricing/",
+                "children": 125
+            },
+            {
+                "name": "Baseline I/O operations/second",
+                "helpText": "IOPS",
+                "help": "https://handbook.vantage.sh/aws/concepts/io-operations/",
+                "children": 8000
+            }
+        ]
+    },
+    {
+        "name": "Amazon",
+        "slug": "Amazon",
+        "rows": [
+            {
+                "name": "Generation",
+                "children": "current",
+                "bgStyled": true
+            },
+            {
+                "name": "Instance Type",
+                "children": "ml.c4.2xlarge"
+            },
+            {
+                "name": "Family",
+                "children": "c4"
+            },
+            {
+                "name": "Compute Family",
+                "children": "Compute Optimized Instances"
+            },
+            {
+                "name": "Name",
+                "children": "C4 Compute Optimized Double Extra Large"
+            }
+        ]
+    }
+]

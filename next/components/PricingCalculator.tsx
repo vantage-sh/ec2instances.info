@@ -116,8 +116,9 @@ function Calculator({
     const [region, setRegionState] = useState<string>(defaultRegion);
     const [platform, setPlatformState] = useState<string>(defaultPlatform);
     const [duration, setDurationState] = useState<CostDuration>("hourly");
-    const [pricingType, setPricingTypeState] =
-        useState<string>("Standard.noUpfront");
+    const [pricingType, setPricingTypeState] = useState<string>(
+        reservedTermOptions[0]?.[0] ?? "Standard.noUpfront",
+    );
     const [currency, setCurrencyState] = useState<string>("USD");
     const conversionRate = currencyRateAtom.use();
 

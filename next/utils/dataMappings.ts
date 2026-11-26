@@ -38,6 +38,7 @@ const RESERVED = "Reserved";
 const INSTANCE_SAVINGS_GROUP = "Instance Savings Plan";
 const COMPUTE_SAVINGS_PLAN = "Compute Savings Plan";
 const DATABASE_SAVINGS_PLAN = "Database Savings Plan";
+export const ML_SAVINGS_PLAN = "ML Savings Plan";
 
 const sharedReservedTermOptions: ReservedTermOption[] = [
     {
@@ -111,6 +112,14 @@ const savingsPlanExtras = {
     "yrTerm3Savings.partialUpfront":
         "3-year Compute Savings Plan - Partial Upfront",
     "yrTerm3Savings.allUpfront": "3-year Compute Savings Plan - Full Upfront",
+    "yrTerm1MLSavings.noUpfront": "1-year ML Savings Plan - No Upfront",
+    "yrTerm1MLSavings.partialUpfront":
+        "1-year ML Savings Plan - Partial Upfront",
+    "yrTerm1MLSavings.allUpfront": "1-year ML Savings Plan - Full Upfront",
+    "yrTerm3MLSavings.noUpfront": "3-year ML Savings Plan - No Upfront",
+    "yrTerm3MLSavings.partialUpfront":
+        "3-year ML Savings Plan - Partial Upfront",
+    "yrTerm3MLSavings.allUpfront": "3-year ML Savings Plan - Full Upfront",
     "yrTerm1InstanceSavings.noUpfront":
         "1-year Instance Savings Plan - No Upfront",
     "yrTerm1InstanceSavings.partialUpfront":
@@ -136,6 +145,16 @@ export const databaseSavingsPlanSupported = [
     "yrTerm1DatabaseSavings.noUpfront",
 ] as const satisfies readonly SupportedSavingsPlanOptions[];
 
+/** SageMaker ML Savings Plan terms (scraper: yrTerm1MLSavings.*). */
+export const sageMakerSavingsPlanSupported = [
+    "yrTerm1MLSavings.noUpfront",
+    "yrTerm1MLSavings.partialUpfront",
+    "yrTerm1MLSavings.allUpfront",
+    "yrTerm3MLSavings.noUpfront",
+    "yrTerm3MLSavings.partialUpfront",
+    "yrTerm3MLSavings.allUpfront",
+] as const satisfies readonly SupportedSavingsPlanOptions[];
+
 /** Label for reserved-cost columns: RI vs Savings Plan, based on the selected term key. */
 export function commitmentTypeLabel(
     term: string,
@@ -143,17 +162,22 @@ export function commitmentTypeLabel(
     | "Reserved"
     | "Instance Savings Plan"
     | "Compute Savings Plan"
-    | "Database Savings Plan" {
+    | "Database Savings Plan"
+    | "ML Savings Plan" {
     if (!term.includes("Savings")) {
         return "Reserved";
     }
 
-    if (term.includes("Instance")) {
+    if (term.includes("InstanceSavings")) {
         return "Instance Savings Plan";
     }
 
-    if (term.includes("Database")) {
+    if (term.includes("DatabaseSavings")) {
         return "Database Savings Plan";
+    }
+
+    if (term.includes("MLSavings")) {
+        return "ML Savings Plan";
     }
 
     return "Compute Savings Plan";
@@ -165,6 +189,9 @@ function savingsPlanGroup(term: string): string {
     }
     if (term.includes("DatabaseSavings")) {
         return DATABASE_SAVINGS_PLAN;
+    }
+    if (term.includes("MLSavings")) {
+        return ML_SAVINGS_PLAN;
     }
     return COMPUTE_SAVINGS_PLAN;
 }
@@ -179,6 +206,7 @@ export const reservedTermOptions = (
 
     const instanceSavingsPlanGroup: ReservedTermOption[] = [];
     const databaseSavingsPlanGroup: ReservedTermOption[] = [];
+    const mlSavingsPlanGroup: ReservedTermOption[] = [];
     const computeSavingsPlanGroup: ReservedTermOption[] = [];
     for (const savingsPlan of savingsPlanSupported) {
         const label = savingsPlanExtras[savingsPlan];
@@ -192,6 +220,8 @@ export const reservedTermOptions = (
             instanceSavingsPlanGroup.push(option);
         } else if (option.group === DATABASE_SAVINGS_PLAN) {
             databaseSavingsPlanGroup.push(option);
+        } else if (option.group === ML_SAVINGS_PLAN) {
+            mlSavingsPlanGroup.push(option);
         } else {
             computeSavingsPlanGroup.push(option);
         }
@@ -200,6 +230,7 @@ export const reservedTermOptions = (
         ...sharedReservedTermOptions,
         ...instanceSavingsPlanGroup,
         ...databaseSavingsPlanGroup,
+        ...mlSavingsPlanGroup,
         ...computeSavingsPlanGroup,
     ];
     savingsPlanCache.set(key, options);

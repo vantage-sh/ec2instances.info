@@ -219,6 +219,29 @@ const AzureMarketing = () => (
     </ItemsWrapper>
 );
 
+const SageMakerMarketing = () => (
+    <ItemsWrapper>
+        <Item
+            link="https://www.vantage.sh/blog/remote-mcp?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=sagemaker"
+            image="https://assets.vantage.sh/blog/remote-mcp/remote-mcp.png"
+            title="The Vantage Remote MCP Server: Use AI to Analyze Your Cost and Usage Data"
+            description="Ask questions about your organization's previous and current cloud cost spend, cost tagging, provider integrations, and more."
+        />
+        <Item
+            link="https://www.vantage.sh/blog/aws-ec2-gpu-instances-g-family-vs-p-family-g4dn?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=sagemaker"
+            image="https://assets.vantage.sh/blog/aws-ec2-gpu-instances-g-family-vs-p-family/aws-ec2-gpu-instances-g-family-vs-p-family.jpg"
+            title="EC2 GPU Instances"
+            description="EC2 GPU instances have been hugely popular due to advances in machine learning, gaming, etc. However, it can be difficult to know which to choose."
+        />
+        <Item
+            link="https://www.vantage.sh/blog/vantage-launches-autopilot-aws-savings-plans?utm_campaign=Instances%20Blog%20Clicks&utm_source=instances&utm_content=sagemaker"
+            image="https://assets.vantage.sh/blog/vantage-launches-autopilot-aws-savings-plans/vantage-launches-autopilot-aws-savings-plans.jpg"
+            title="Vantage Enables Autopilot Support for AWS Savings Plans"
+            description="Autopilot for AWS Savings Plans now supports purchase recommendations and automatic purchases of AWS Compute Savings Plans."
+        />
+    </ItemsWrapper>
+);
+
 const GCPMarketing = () => (
     <ItemsWrapper>
         <Item
@@ -256,6 +279,7 @@ const ITEMS = [
     "redshift",
     "cache",
     "gcp",
+    "sagemaker",
 ] as const;
 
 function processGroup(instanceType: string) {
@@ -304,6 +328,9 @@ export default function MarketingWrapper({
             break;
         case "gcp":
             node = <GCPMarketing />;
+            break;
+        case "sagemaker":
+            node = <SageMakerMarketing />;
             break;
         default:
             // This should fail the build

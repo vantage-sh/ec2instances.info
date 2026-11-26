@@ -35,9 +35,10 @@ type InstanceRootProps<
     instanceType: string;
     marketingData: MarketingSchema;
     currencies: CurrencyItem[];
+    reservedTermOptions?: [string, string][];
 };
 
-const reservedTermOptions: [string, string][] = [
+const defaultReservedTermOptions: [string, string][] = [
     ["Standard.noUpfront", "No Upfront"],
     ["Standard.partialUpfront", "Partial Upfront"],
     ["Standard.allUpfront", "All Upfront"],
@@ -57,6 +58,7 @@ export default function HalfEC2Root<
     instanceType,
     marketingData,
     currencies,
+    reservedTermOptions = defaultReservedTermOptions,
 }: InstanceRootProps<Instance>) {
     const remappedPricing = useMemo(() => {
         const remappedPricing: Pricing = {};

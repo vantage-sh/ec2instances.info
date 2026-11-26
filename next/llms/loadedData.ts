@@ -6,6 +6,7 @@ import processRainbowTable from "@/utils/processRainbowTable";
 import { PIPELINE_SIZE } from "@/utils/handleCompressedFile";
 import { Instance as RedshiftInstance } from "@/utils/colunnData/redshift";
 import { Instance as OpensearchInstance } from "@/utils/colunnData/opensearch";
+import { Instance as SageMakerInstance } from "@/utils/colunnData/sagemaker";
 import type { AzureInstance } from "@/utils/colunnData/azure";
 import type { GCPInstance } from "@/utils/colunnData/gcp";
 
@@ -83,6 +84,11 @@ export const opensearchInstances = (async () => {
     return JSON.parse(d) as OpensearchInstance[];
 })();
 
+export const sagemakerInstances = (async () => {
+    const d = await readFile("../www/sagemaker/instances.json", "utf-8");
+    return JSON.parse(d) as SageMakerInstance[];
+})();
+
 export const azureInstances = (async () => {
     const d = await readFile("../www/azure/instances.json", "utf-8");
     return JSON.parse(d) as AzureInstance[];
@@ -127,6 +133,16 @@ export async function getOpensearchFamilies() {
     const families = new Set<string>();
     for (const instance of instances) {
         families.add(instance.instance_type.split(".")[0]);
+    }
+    return Array.from(families).sort();
+}
+
+export async function getSageMakerFamilies() {
+    const instances = await sagemakerInstances;
+    const families = new Set<string>();
+    for (const instance of instances) {
+        const [prefix, family] = instance.instance_type.split(".", 3);
+        families.add(`${prefix}.${family}`);
     }
     return Array.from(families).sort();
 }
