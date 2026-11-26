@@ -54,6 +54,12 @@ export function expr(row: Row<any>, columnId: string, filterValue: string) {
     return runCachedEval(filterValue, conv, strValue);
 }
 
+export function costExpr(row: Row<any>, columnId: string, filterValue: string) {
+    const value = row.getValue<number | undefined>(columnId);
+    if (value === undefined || !Number.isFinite(value)) return false;
+    return runCachedEval(filterValue, value, String(value));
+}
+
 const hourMultipliers = {
     secondly: 1 / (60 * 60),
     minutely: 1 / 60,

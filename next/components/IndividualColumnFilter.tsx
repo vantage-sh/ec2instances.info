@@ -2,6 +2,7 @@ import { Column } from "@tanstack/react-table";
 import { useEffect, useState, useId, useMemo, useRef } from "react";
 import { SquareFunction, X } from "lucide-react";
 import expr from "@/utils/expr";
+import { costExpr } from "@/utils/colunnData/shared";
 
 function ExprHelpData({ parseError }: { parseError: string | null }) {
     return (
@@ -249,7 +250,10 @@ export default function IndividualColumnFilter<Instance>({
 }: {
     column: Column<Instance>;
 }) {
-    if (exprColumns.includes(column.columnDef.id!)) {
+    if (
+        exprColumns.includes(column.columnDef.id!) ||
+        column.columnDef.filterFn === costExpr
+    ) {
         return (
             <ExprFilter
                 column={column}

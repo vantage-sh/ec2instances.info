@@ -2,6 +2,7 @@ import { CostDuration, PricePrecision, PricingUnit } from "@/types";
 import {
     calculateCost,
     calculateCostNumeric,
+    costExpr,
     regex,
     makeCellWithRegexSorter,
     expr,
@@ -128,6 +129,7 @@ function getPricingSorter(
                 pricePrecision,
             );
         }),
+        filterFn: costExpr,
     } satisfies Partial<ColumnDef<Instance>>;
 }
 
